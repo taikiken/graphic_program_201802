@@ -1,15 +1,20 @@
 # 運動通信
 
-=> (TBD) Githubの使い方
+=> [Githubの使い方](https://github.com/undo-tsushin/undo-tsushin/wiki/intro-howto-github)
 
 ## 企画概要
 
 ### 概要
 
-Dropbox > `運動通信 - resource/plan/概要` 参照
+- 企画書 : Dropbox > `/plan/概要` 参照
+- サイトツリー : Dropbox > `/plan/サイトツリー`
+- ワイヤーフレーム : Dropbox > `/plan/ワイヤーフレーム`
+
 
 ### 仕様
+
 [Wiki](https://github.com/undo-tsushin/undo-tsushin/wiki) を参照してください
+
 
 ### スケジュール
 
@@ -20,6 +25,8 @@ Dropbox > `運動通信 - resource/plan/概要` 参照
 ### チームメンバー
 
 - [連絡先・アカウント一覧（制作メンバー） - 運動通信 / 進行管理 - Google スプレッドシート](https://docs.google.com/spreadsheets/d/1m5knqkvZKsB2WEkGCWdRTAMD17JipsK1KejTNgQsO10/edit#gid=591784374)
+- 体制図 : Dropbox > `/plan/概要/制作チーム体制図`
+
 
 ## ツール
 
