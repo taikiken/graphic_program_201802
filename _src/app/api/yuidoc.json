@@ -1,0 +1,11 @@
+{
+  "name": "project",
+  "description": "project library.",
+  "url": "project path",
+  "options": {
+    "linkNatives": "true",
+    "attributesEmit": "true",
+    "outdir": "scripts/docs",
+    "paths": ["scripts/src"]
+  }
+}

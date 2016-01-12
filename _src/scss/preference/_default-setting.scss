@@ -1,0 +1,41 @@
+// ---------------------------------------------
+// Settings, 基本設定
+// ---------------------------------------------
+
+// Support
+$graceful-usage-threshold: 100;
+$critical-usage-threshold: 100;
+
+$support-ie8: false;
+$support-ie7: $support-ie8;
+
+// Path
+$project-path: '/' !default;
+$project-path-img: "#{$project-path}/common/img" !default;
+
+// Font
+$font-color: #333 !default;
+$font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif !default;
+$font-size: 12px !default;
+$line-height: 1.5 !default;
+$default-em: 12px !default;
+
+// Various global styles
+$float: left !default;
+$box-sizing: content-box !default;
+$font-smoothing: off !default; // on or off
+$bg-color: #fff !default;
+//$bg-color: transparent !default;
+
+// Media Queries
+$screen-small: 768px !default;
+$screen-medium: 1280px !default;
+$screen-large: 1440px !default;
+
+// max-width
+$media-screen: "only screen";
+$media-small: "only screen and (max-width: #{$screen-small})"; // less than 768
+$media-medium: "only screen and (max-width: #{$screen-medium})"; // 768 - 1280
+$media-large: "only screen and (max-width: #{$screen-large})"; // 1280-1440
+$media-landscape: "only screen and (orientation: landscape)";
+$media-portrait: "only screen and (orientation: portrait)";

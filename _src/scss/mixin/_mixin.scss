@@ -1,0 +1,106 @@
+// ---------------------------------------------
+// for all browser
+// ---------------------------------------------
+
+//each mixin
+$arg: null;
+$arg_i: null;
+@mixin prc-each($list...) {
+  @for $i from 1 through length($list) {
+    $arg_i: $i!global;
+    $arg: nth($list, $arg_i)!global;
+    @content;
+  }
+}
+
+// inline-block
+@mixin inline-block {
+  display: inline-block;
+}
+
+// table-cell
+@mixin table-cell ($vertical: middle) {
+  display: table-cell;
+  vertical-align: $vertical;
+}
+
+// clearfix
+@mixin clearfix {
+  &:before,
+  &:after {
+    content:"";
+    display:table;
+    clear:both;
+  }
+}
+
+@mixin cf {
+  @include clearfix;
+}
+
+//link color
+@mixin link-decoration($color1, $color2, $decoration_off, $decoration_on) {
+  &:link,
+  &:visited,
+  &:hover,
+  &:active { color: $color1; text-decoration: $decoration_off;}
+  &:hover { color: $color2; text-decoration: $decoration_on;}
+}
+
+// fluid-img
+@mixin fluid-img($w: null) {
+  width: #{$w};
+  max-width: 100%;
+  height: auto;
+}
+@mixin fluid_img($w: null) {
+  @include fluid-img($w);
+}
+
+// font smoothing
+@mixin font-smoothing($value: on) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+// hide-text
+@mixin hide-text {
+  overflow: hidden;
+  font-size: 0;
+  text-indent: 100%;
+  white-space: nowrap;
+  outline: none;
+}
+
+// ---------------------------
+// opacity
+// $opacity number 0 ~ 1
+@mixin opacity ($opacity) {
+  opacity: $opacity;
+}
+
+// hover action
+@mixin over-opacity($opacity:.75) {
+  @include opacity($opacity);
+}
+
+@mixin over-opacity-img($opacity:.75) {
+  background-color: #fff;
+  img {
+    @include opacity($opacity);
+  }
+}
+
+// ---------------------------
+// middle
+@mixin pos-middle($position:absolute) {
+  position: $position;
+  top: 50%;
+  transform: translateY(-50%);
+}

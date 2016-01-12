@@ -1,0 +1,12 @@
+// ---------------------------------------------
+// util
+// ---------------------------------------------
+
+// It strips the unit of measure and returns it
+@function strip-unit($num) {
+  @if type-of($num) != number {
+    @warn '#{$num} is not a number.';
+    @return $num;
+  }
+  @return $num / ($num * 0 + 1);
+}

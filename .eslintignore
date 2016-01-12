@@ -1,0 +1,3 @@
+# ignore eslint
+# raw js ignore
+./_src/app/**/js/*.js

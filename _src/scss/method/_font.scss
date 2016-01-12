@@ -1,0 +1,28 @@
+// ---------------------------------------------
+// font
+// ---------------------------------------------
+
+// font size
+@function fs($size, $context, $unit:em){
+  @if $unit == '%' {
+    @return #{$size/$context*100}#{$unit};
+  } @else {
+    @return #{$size/$context}#{$unit};
+  }
+}
+
+
+// letter-spacing
+@function ls($letter-spacing:0) {
+  @if $letter-spacing == 'inline-block' {
+    @return -.40em;
+  } @else {
+    @return #{$letter-spacing * 0.001 + 'em'};
+  }
+}
+
+
+// line-height
+@function lh($line-spacing:1, $font-size:1) {
+  @return $line-spacing / $font-size;
+}
