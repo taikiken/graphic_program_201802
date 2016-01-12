@@ -71,7 +71,7 @@ gulp.task 'single:compile', ->
   .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime'], sourceRoot: config.entry
   .pipe $.replaceTask patterns: patterns
   .pipe $.rename suffix: '.babel'
-  .pipe gulp.dest app + '/_babel'
+  .pipe gulp.dest app + '/assets/_babel'
   .pipe $.size title: '*** single:compile ***'
 
 # babel minify
@@ -81,7 +81,7 @@ gulp.task 'single:babel', ->
   .pipe $.replaceTask patterns: patterns
   .pipe $.rename suffix: '.bundle'
   .pipe $.uglify preserveComments: 'license'
-  .pipe gulp.dest app + '/js'
+  .pipe gulp.dest app + '/assets/js'
   .pipe $.size title: '*** single:babel ***'
 
 
@@ -98,19 +98,19 @@ gulp.task 'single:webpack:dev', () ->
   root = config.entry
   entry = {}
 
-  fs.readdir root + '/_src/app/_babel', (err, files) ->
+  fs.readdir root + '/_src/app/assets/_babel', (err, files) ->
     if err
       console.error err
     else
       for file in files
         divide = file.split('.')
         if divide[1] is 'babel'
-          entry[ file.split('.').shift() ] = root + '/_src/app/_babel/' +file
+          entry[ file.split('.').shift() ] = root + '/_src/app/assets/_babel/' +file
 
       conf =
         entry: entry
         output: {
-          path: '_src/app/js'
+          path: '_src/app/assets/js'
           publicPath: 'js'
           filename: '[name].bundle.js'
           chunkFilename: '[chunkhash].bundle.js'
@@ -131,14 +131,14 @@ gulp.task 'single:webpack:build', () ->
   root = config.entry
   entry = {}
 
-  fs.readdir root + '/_src/app/_babel', (err, files) ->
+  fs.readdir root + '/_src/app/assets/_babel', (err, files) ->
     if err
       console.error err
     else
       for file in files
         divide = file.split('.')
         if divide[1] is 'babel'
-          entry[ file.split('.').shift() ] = root + '/_src/app/_babel/' +file
+          entry[ file.split('.').shift() ] = root + '/_src/app/assets/_babel/' +file
 
       conf =
         entry: entry
