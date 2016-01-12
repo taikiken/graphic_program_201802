@@ -35,15 +35,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Type = exports.Type = function () {
   /**
    * @param {string} url API request先
-   * @param {string=GET} [method] POST | GET
+   * @param {string} [method=GET] POST | GET | DELETE...
    */
 
   function Type(url) {
     var method = arguments.length <= 1 || arguments[1] === undefined ? 'GET' : arguments[1];
     (0, _classCallCheck3.default)(this, Type);
 
-    this._url = url;
-    this._method = method;
+    this.url = url;
+    this.method = method;
   }
 
   /**
@@ -79,20 +79,33 @@ var Type = exports.Type = function () {
     }
 
     /**
-     * POST | GET を設定します
-     * @param {string} method POST | GETの値
+     * POST | GET... を設定します
+     * @param {string} method POST | GET...の値
      */
     ,
     set: function set(method) {
 
       var methodUpper = method.toUpperCase();
 
-      if (methodUpper !== 'GET' && methodUpper !== 'POST') {
+      if (!Type.validate(methodUpper)) {
 
         methodUpper = 'GET';
       }
 
       this._method = methodUpper;
+    }
+
+    /**
+     * @static
+     * @param {string} method method type
+     * @return {boolean} method type を検証し真偽値を返します
+     */
+
+  }], [{
+    key: 'validate',
+    value: function validate(method) {
+
+      return ['GET', 'POST', 'PUT', 'DELETE'].indexOf(method) !== -1;
     }
   }]);
   return Type;

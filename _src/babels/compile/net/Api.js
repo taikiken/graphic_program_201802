@@ -24,125 +24,207 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _symbol2 = require('babel-runtime/core-js/symbol');
+
+var _symbol3 = _interopRequireDefault(_symbol2);
+
 var _Types = require('./Types');
 
-var _Type = require('./types/Type');
+var _User = require('./User');
 
-var _Permalink = require('./types/Permalink');
-
-var _Quries = require('./types/Quries');
-
-var _Query = require('./types/Query');
+var _ApiDae = require('./dae/ApiDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _instance = null;
-var API_PATH = '/api/v1';
+var _symbol = (0, _symbol3.default)();
 
 /**
- * サーバーリクエストAPIを管理します
+ * <h3>サーバーリクエストAPIを管理します</h3>
+ * 全て static
  */
 
 var Api = exports.Api = function () {
   /**
-   * singleton なので Api.factory() でインスタンスを作成します
-   * @returns {Api} Api instance を返します
+   * static class です、instance を作成できません
+   * @param {Symbol} target Singleton を実現するための private symbol
    */
 
-  function Api() {
+  function Api(target) {
     (0, _classCallCheck3.default)(this, Api);
 
-    if (_instance !== null) {
+    if (_symbol !== target) {
 
-      throw new Error('Api is singleton pattern. instead use Api.factory()');
+      throw new Error('Api is singleton pattern. not use new Api().');
     }
-
-    _instance = this;
-
-    this.signOff();
-
-    this._api = {
-      login: new _Types.Types(new _Type.Type(API_PATH + '/oauth/token', 'POST'), new _Permalink.Permalink(), new _Quries.Queries()),
-      // home / self
-      home: new _Types.Types(new _Type.Type(API_PATH + '/articles/home'), new _Permalink.Permalink(['pickup', 'headline']), new _Quries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
-      self: new _Types.Types(new _Type.Type(API_PATH + '/articles/self'), new _Permalink.Permalink(['pickup', 'headline']), new _Quries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)]))
-    };
-
-    return _instance;
   }
 
   /**
-   * property sign へ true をセットします
-   * sign inした
+   * login API を取得します
+   * @returns {Types} login API をTypes instanceで返します
    */
 
-  (0, _createClass3.default)(Api, [{
-    key: 'signIn',
-    value: function signIn() {
-
-      this._sign = true;
-    }
-    /**
-     * property sign へ false をセットします
-     * sign offした
-     */
-
-  }, {
-    key: 'signOff',
-    value: function signOff() {
-
-      this._sign = false;
-    }
-
-    /**
-     * ユーザーがsign in済みかどうかを調べます
-     * @readOnly
-     * @returns {boolean} true: sign in, false: sign offを返します
-     */
-
-  }, {
+  (0, _createClass3.default)(Api, null, [{
     key: 'login',
-
-    /**
-     * LOGIN API をTypes instanceで返します
-     * @returns {Types} LOGIN API を返します
-     */
     value: function login() {
 
-      return this._api.login;
+      return _ApiDae.ApiDae.api('login');
     }
 
     /**
-     * @returns {*} HOME API(home / self)をTypes instanceで返します
+     * home API を login している / していない に合わせ取得します
+     * @returns {Types} home API(home / self)をTypes instanceで返します
      */
 
   }, {
     key: 'home',
     value: function home() {
 
-      return this.sign ? this._api.self : this._api.home;
+      return _User.User.sign ? _ApiDae.ApiDae.api('self') : _ApiDae.ApiDae.api('home');
     }
 
     /**
-     * @returns {Api} Api instance を返します
+     * category API を取得します
+     * @returns {Types} category API を Types instance で取得します
      */
 
   }, {
-    key: 'sign',
-    get: function get() {
+    key: 'category',
+    value: function category() {
 
-      return this._sign;
+      return _ApiDae.ApiDae.api('category');
     }
-  }], [{
-    key: 'factory',
-    value: function factory() {
 
-      if (_instance === null) {
+    /**
+     * category API を取得します
+     * @returns {Types} category API をTypes instanceで返します
+     */
 
-        _instance = new Api();
+  }, {
+    key: 'search',
+    value: function search() {
+
+      return _ApiDae.ApiDae.api('search');
+    }
+
+    /**
+     * category API を取得します
+     * @returns {Types} category API をTypes instanceで返します
+     */
+
+  }, {
+    key: 'detail',
+    value: function detail() {
+
+      return _ApiDae.ApiDae.api('detail');
+    }
+
+    /**
+     * bookmark API を取得します
+     * @param {string} [action=add] path option を指定します
+     * @returns {Types} bookmark API をTypes instanceで返します
+     */
+
+  }, {
+    key: 'bookmark',
+    value: function bookmark() {
+      var action = arguments.length <= 0 || arguments[0] === undefined ? 'add' : arguments[0];
+
+      switch (action) {
+        case 'delete':
+          return _ApiDae.ApiDae.api('bookmark:delete');
+
+        case 'add':
+          return _ApiDae.ApiDae.api('bookmark:add');
+
+        default:
+          console.warn('bookmark illegal action: ' + action + ', instead use default');
+          return _ApiDae.ApiDae.api('bookmark:add');
       }
+    }
 
-      return _instance;
+    /**
+     * comment API を取得します
+     * @param {string} [action=''] path option を指定します
+     * @returns {Types} comment API をTypes instanceで返します
+     */
+
+  }, {
+    key: 'comment',
+    value: function comment() {
+      var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+      switch (action) {
+        case 'send':
+          return _ApiDae.ApiDae.api('comment:send');
+
+        case 'reply':
+          return _ApiDae.ApiDae.api('comment:reply');
+
+        case 'send:edit':
+          return _ApiDae.ApiDae.api('comment:send:edit');
+
+        case 'reply:edit':
+          return _ApiDae.ApiDae.api('comment:reply:edit');
+
+        case 'send:delete':
+          return _ApiDae.ApiDae.api('comment:send:delete');
+
+        case 'reply:delete':
+          return _ApiDae.ApiDae.api('comment:reply:delete');
+
+        case 'good:add':
+          return _ApiDae.ApiDae.api('comment:good:add');
+
+        case 'good:delete':
+          return _ApiDae.ApiDae.api('comment:good:delete');
+
+        case 'bad:add':
+          return _ApiDae.ApiDae.api('comment:bad:add');
+
+        case 'bad:delete':
+          return _ApiDae.ApiDae.api('comment:bad:delete');
+
+        case '':
+          return _ApiDae.ApiDae.api('comment');
+
+        default:
+          console.warn('comment illegal action: ' + action + ', instead use default');
+          return _ApiDae.ApiDae.api('comment');
+      }
+    }
+
+    /**
+     * users API を取得します
+     * @param {string} [action=''] path option を指定します
+     * @returns {Types} category users をTypes instanceで返します
+     */
+
+  }, {
+    key: 'users',
+    value: function users() {
+      var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+      switch (action) {
+        case 'notice':
+          return _ApiDae.ApiDae.api('users:notice');
+
+        case 'notice:read':
+          return _ApiDae.ApiDae.api('users:notice:read');
+
+        case 'bookmark':
+          return _ApiDae.ApiDae.api('users:bookmark');
+
+        case 'activity':
+          return _ApiDae.ApiDae.api('users:activity');
+
+        case '':
+          return _ApiDae.ApiDae.api('users');
+
+        default:
+          console.warn('users illegal action: ' + action + ', instead use default');
+          return _ApiDae.ApiDae.api('users');
+
+      }
     }
   }]);
   return Api;

@@ -13,7 +13,6 @@
 
 /**
  * API Response Code を管理します
- * @class Codes
  */
 
 Object.defineProperty(exports, "__esModule", {
@@ -33,7 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Codes = exports.Codes = function () {
   /**
-   * @constructor
+   * ステータスコード・メッセージを日本語と英語で保存しています
    */
 
   function Codes() {
@@ -43,7 +42,7 @@ var Codes = exports.Codes = function () {
      * ステータスコード：英語
      * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
      */
-    this.en = {
+    this._en = {
       200: 'OK',
       201: 'Created',
       202: 'Accepted',
@@ -64,7 +63,7 @@ var Codes = exports.Codes = function () {
      * ステータスコード：日本語
      * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
      */
-    this.jp = {
+    this._jp = {
       200: '成功',
       201: '新しいリソースを作成した',
       202: 'リクエストを受け付けた',
@@ -84,7 +83,6 @@ var Codes = exports.Codes = function () {
   }
 
   /**
-   * @method status
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
@@ -98,7 +96,7 @@ var Codes = exports.Codes = function () {
 
     /**
      * status codeの意味を調べます
-     * @param {Number} code {int},サーバーからのresponse status code
+     * @param {Number} code サーバーからのresponse status code
      * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
      */
 
@@ -106,16 +104,39 @@ var Codes = exports.Codes = function () {
     key: 'message',
     value: function message(code) {
 
-      var me = Codes.factory();
+      var codes = Codes.factory();
 
       return {
-        en: me.en[code],
-        jp: me.jp[code]
+        en: codes._en[code],
+        jp: codes._jp[code]
       };
     }
 
     /**
-     * @static
+     * @param {Number} code status code
+     * @return {*} 日本語メッセージを返します
+     */
+
+  }, {
+    key: 'jp',
+    value: function jp(code) {
+
+      return Codes.factory()._jp[code];
+    }
+
+    /**
+     * @param {Number} code status code
+     * @return {*} 英語メッセージを返します
+     */
+
+  }, {
+    key: 'en',
+    value: function en(code) {
+
+      return Codes.factory()._jp[code];
+    }
+
+    /**
      * @returns {Codes} Codes instance を返します
      */
 

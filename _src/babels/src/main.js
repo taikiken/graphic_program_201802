@@ -30,8 +30,8 @@ var UT = {
   version: '@@version',
   Ajax: Ajax,
   Api: Api,
-  Codes: Codes,
   Types: Types,
+  Codes: Codes,
   User: User
 };
 

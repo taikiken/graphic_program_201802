@@ -11,12 +11,12 @@
  */
 'use strict';
 
-import {Types} from './Types';
-import {Type} from './types/Type';
-import {Permalink} from './types/Permalink';
-import {Queries} from './types/Quries';
-import {Query} from './types/Query';
-import {CommentType} from './comment/CommentType';
+import {Types} from '../Types';
+import {Type} from '../types/Type';
+import {Permalink} from '../types/Permalink';
+import {Queries} from '../types/Quries';
+import {Query} from '../types/Query';
+import {CommentType} from '../comment/CommentType';
 
 const API_PATH = '/api/v1';
 

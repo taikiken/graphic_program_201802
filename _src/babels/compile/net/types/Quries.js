@@ -38,7 +38,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Queries = exports.Queries = function () {
   /**
-   * @param {Array<Query>} [queries] Query{key: value} 配列
+   * @param {Array<Query>} [queries=[]] Query{key: value} 配列
    */
 
   function Queries() {

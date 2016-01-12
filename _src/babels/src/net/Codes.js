@@ -13,11 +13,10 @@
 
 /**
  * API Response Code を管理します
- * @class Codes
  */
 export class Codes {
   /**
-   * @constructor
+   * ステータスコード・メッセージを日本語と英語で保存しています
    */
   constructor() {
 
@@ -67,7 +66,6 @@ export class Codes {
   }
 
   /**
-   * @method status
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
@@ -79,7 +77,7 @@ export class Codes {
 
   /**
    * status codeの意味を調べます
-   * @param {Number} code {int},サーバーからのresponse status code
+   * @param {Number} code サーバーからのresponse status code
    * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
    */
   static message( code:Number ):Object {
@@ -94,7 +92,6 @@ export class Codes {
   }
 
   /**
-   *
    * @param {Number} code status code
    * @return {*} 日本語メッセージを返します
    */
@@ -105,7 +102,6 @@ export class Codes {
   }
 
   /**
-   *
    * @param {Number} code status code
    * @return {*} 英語メッセージを返します
    */
@@ -116,7 +112,6 @@ export class Codes {
   }
 
   /**
-   * @static
    * @returns {Codes} Codes instance を返します
    */
   static factory():Codes {

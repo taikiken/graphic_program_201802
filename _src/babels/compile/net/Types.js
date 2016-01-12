@@ -41,15 +41,18 @@ var Types = exports.Types = function () {
    *
    * @param {Type} type Type instance
    * @param {Permalink} permalink Permalink instance
-   * @param {Queries} queries Queries instabce
+   * @param {Queries} queries Queries instance
+   * @param {boolean} [auth=false] 認証が必要か否かの真偽値
    */
 
   function Types(type, permalink, queries) {
+    var auth = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
     (0, _classCallCheck3.default)(this, Types);
 
     this._type = type;
     this._permalink = permalink;
     this._queries = queries;
+    this._auth = auth;
   }
 
   /**
@@ -86,6 +89,18 @@ var Types = exports.Types = function () {
     value: function queries() {
 
       return this._queries;
+    }
+
+    /**
+     *
+     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+     */
+
+  }, {
+    key: 'auth',
+    value: function auth() {
+
+      return this._auth;
     }
   }]);
   return Types;

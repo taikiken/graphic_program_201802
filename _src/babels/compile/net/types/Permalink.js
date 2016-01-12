@@ -41,7 +41,7 @@ var Permalink = exports.Permalink = function () {
    *      new Permalink( [ '*' ] );
    *
    * @param {Array} [paths] 追加 path を配列で設定
-   * @param {boolean} [need] 追加 path が必須かを設定。true: 必須, false: オプション
+   * @param {boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション
    */
 
   function Permalink() {

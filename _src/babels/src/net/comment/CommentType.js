@@ -24,11 +24,9 @@ export class CommentType extends Query {
    * @param {string} key dog|cat|food のように | 区切りでオプションをつなげます
    * @param {boolean} [require=false] 必須真偽値
    */
-  construtor( key:string, require:boolean = false ) {
-    // jetbrains系editor bugでerror表示になります
-    // https://youtrack.jetbrains.com/issue/WEB-14601
-    super( key, 'string', '', require );
+  constructor( key:string, require:boolean = false ) {
 
+    super( key, 'string', '', require );
     // 'dog|cat' を分割する
     this._keys = key.split('|');
 
