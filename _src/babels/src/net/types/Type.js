@@ -19,12 +19,12 @@
 export class Type {
   /**
    * @param {string} url API request先
-   * @param {string=GET} [method] POST | GET
+   * @param {string} [method=GET] POST | GET | DELETE...
    */
   constructor( url:string, method:string = 'GET' ) {
 
-    this._url = url;
-    this._method = method;
+    this.url = url;
+    this.method = method;
 
   }
 
@@ -57,20 +57,31 @@ export class Type {
   }
 
   /**
-   * POST | GET を設定します
-   * @param {string} method POST | GETの値
+   * POST | GET... を設定します
+   * @param {string} method POST | GET...の値
    */
   set method( method:string ):void {
 
     let methodUpper = method.toUpperCase();
 
-    if ( methodUpper !== 'GET' && methodUpper !== 'POST' ) {
+    if ( !Type.validate( methodUpper ) ) {
 
       methodUpper = 'GET';
 
     }
 
     this._method = methodUpper;
+
+  }
+
+  /**
+   * @static
+   * @param {string} method method type
+   * @return {boolean} method type を検証し真偽値を返します
+   */
+  static validate( method:string ):boolean {
+
+    return [ 'GET', 'POST', 'PUT', 'DELETE' ].indexOf( method ) !== -1;
 
   }
 

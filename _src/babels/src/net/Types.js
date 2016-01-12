@@ -23,13 +23,15 @@ export class Types {
    *
    * @param {Type} type Type instance
    * @param {Permalink} permalink Permalink instance
-   * @param {Queries} queries Queries instabce
+   * @param {Queries} queries Queries instance
+   * @param {boolean} [auth=false] 認証が必要か否かの真偽値
    */
-  constructor( type:Type, permalink:Permalink, queries:Queries ) {
+  constructor( type:Type, permalink:Permalink, queries:Queries, auth:boolean = false ) {
 
     this._type = type;
     this._permalink = permalink;
     this._queries = queries;
+    this._auth = auth;
 
   }
 
@@ -60,6 +62,16 @@ export class Types {
   queries():Queries {
 
     return this._queries;
+
+  }
+
+  /**
+   *
+   * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+   */
+  auth() {
+
+    return this._auth;
 
   }
 }

@@ -91,7 +91,7 @@
   //
   //new Ajax('./api/yuidoc.json').start();
 
-  var UT = window.UT;
+  //var UT = window.UT;
   var Api = UT.Api;
   var api = Api.factory();
 

@@ -18,7 +18,7 @@ import {Query} from './Query';
  */
 export class Queries {
   /**
-   * @param {Array<Query>} [queries] Query{key: value} 配列
+   * @param {Array<Query>} [queries=[]] Query{key: value} 配列
    */
   constructor( queries:Array<Query> = [] ) {
 
@@ -50,7 +50,7 @@ export class Queries {
    * @param {string} key query key name, ?start=0 の start
    * @returns {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
    */
-  search( key ) {
+  search( key ):Query {
 
     var queries = this._queries;
     var result;

@@ -25,7 +25,7 @@ export class Codes {
      * ステータスコード：英語
      * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
      */
-    this.en = {
+    this._en = {
       200: 'OK',
       201: 'Created',
       202: 'Accepted',
@@ -46,7 +46,7 @@ export class Codes {
      * ステータスコード：日本語
      * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
      */
-    this.jp = {
+    this._jp = {
       200: '成功',
       201: '新しいリソースを作成した',
       202: 'リクエストを受け付けた',
@@ -84,12 +84,34 @@ export class Codes {
    */
   static message( code:Number ):Object {
 
-    let me = Codes.factory();
+    let codes = Codes.factory();
 
     return {
-      en: me.en[ code ],
-      jp: me.jp[ code ]
+      en: codes._en[ code ],
+      jp: codes._jp[ code ]
     };
+
+  }
+
+  /**
+   *
+   * @param {Number} code status code
+   * @return {*} 日本語メッセージを返します
+   */
+  static jp( code:Number ):string {
+
+    return Codes.factory()._jp[ code ];
+
+  }
+
+  /**
+   *
+   * @param {Number} code status code
+   * @return {*} 英語メッセージを返します
+   */
+  static en( code:Number ):string {
+
+    return Codes.factory()._jp[ code ];
 
   }
 

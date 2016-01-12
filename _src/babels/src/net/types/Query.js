@@ -16,11 +16,16 @@
  */
 export class Query {
   /**
+   * Api query option 情報を保持します
+   *
+   *    ?key=value
+   *
+   * key, value型, default値, 必須情報...
    *
    * @param {string} key query key
    * @param {string} type query value type
-   * @param {*=null} [defaultValue] default value, あれば...
-   * @param {boolean=false} [require] 必須フラグ
+   * @param {string|number|null} [defaultValue=null] default value, あれば...
+   * @param {boolean} [require=false] 必須フラグ
    */
   constructor( key:string, type:string, defaultValue = null, require:boolean = false ) {
 
@@ -45,7 +50,7 @@ export class Query {
    * @param {string} key query key
    * @returns {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
    */
-  search( key:string ) {
+  search( key:string ):Object {
 
     if ( this.has( key ) ) {
 

@@ -12,105 +12,177 @@
 'use strict';
 
 import {Types} from './Types';
-import {Type} from './types/Type';
-import {Permalink} from './types/Permalink';
-import {Queries} from './types/Quries';
-import {Query} from './types/Query';
+import {User} from './User';
+import {ApiDae} from './dae/ApiDae';
 
-let _instance = null;
-const API_PATH = '/api/v1';
+let _symbol = Symbol();
 
 /**
- * サーバーリクエストAPIを管理します
+ * <h3>サーバーリクエストAPIを管理します</h3>
+ * 全て static
  */
 export class Api {
   /**
-   * singleton なので Api.factory() でインスタンスを作成します
-   * @returns {Api} Api instance を返します
+   * static class です、instance を作成できません
+   * @param {Symbol} target Singleton を実現するための private symbol
    */
-  constructor() {
+  constructor( target ) {
 
-    if ( _instance !== null ) {
+    if ( _symbol !== target ) {
 
-      throw new Error( `Api is singleton pattern. instead use Api.factory()` );
+      throw new Error( `Api is singleton pattern. not use new Api().` );
 
     }
 
-    _instance = this;
-
-    this.signOff();
-
-    this._api = {
-      login: new Types( new Type( `${API_PATH}/oauth/token`, 'POST' ), new Permalink(), new Queries() ),
-      // home / self
-      home: new Types( new Type( `${API_PATH}/articles/home` ), new Permalink( [ 'pickup', 'headline' ] ), new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ]) ),
-      self: new Types( new Type( `${API_PATH}/articles/self` ), new Permalink( [ 'pickup', 'headline' ] ), new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ]) )
-    };
-
-    return _instance;
   }
 
   /**
-   * property sign へ true をセットします
-   * sign inした
+   * login API を取得します
+   * @returns {Types} login API をTypes instanceで返します
    */
-  signIn() {
+  static login():Types {
 
-    this._sign = true;
-
-  }
-  /**
-   * property sign へ false をセットします
-   * sign offした
-   */
-  signOff() {
-
-    this._sign = false;
+    return ApiDae.api( 'login' );
 
   }
 
   /**
-   * ユーザーがsign in済みかどうかを調べます
-   * @readOnly
-   * @returns {boolean} true: sign in, false: sign offを返します
+   * home API を login している / していない に合わせ取得します
+   * @returns {Types} home API(home / self)をTypes instanceで返します
    */
-  get sign() {
+  static home():Types {
 
-    return this._sign;
+    return User.sign ? ApiDae.api( 'self' ) : ApiDae.api( 'home' );
 
   }
 
   /**
-   * LOGIN API をTypes instanceで返します
-   * @returns {Types} LOGIN API を返します
+   * category API を取得します
+   * @returns {Types} category API を Types instance で取得します
    */
-  login():Types {
+  static category():Types {
 
-    return this._api.login;
+    return ApiDae.api( 'category' );
 
   }
 
   /**
-   * @returns {*} HOME API(home / self)をTypes instanceで返します
+   * category API を取得します
+   * @returns {Types} category API をTypes instanceで返します
    */
-  home():Types {
+  static search():Types {
 
-    return this.sign ? this._api.self : this._api.home;
+    return ApiDae.api( 'search' );
 
   }
 
   /**
-   * @returns {Api} Api instance を返します
+   * category API を取得します
+   * @returns {Types} category API をTypes instanceで返します
    */
-  static factory() {
+  static detail():Types {
 
-    if ( _instance === null ) {
+    return ApiDae.api( 'detail' );
 
-      _instance = new Api();
+  }
 
+  /**
+   * bookmark API を取得します
+   * @param {string} [action=add] path option を指定します
+   * @returns {Types} bookmark API をTypes instanceで返します
+   */
+  static bookmark( action:string = 'add' ):Types {
+
+    switch ( action ) {
+      case 'delete':
+        return ApiDae.api( 'bookmark:delete' );
+
+      case 'add':
+        return ApiDae.api( 'bookmark:add' );
+
+      default:
+        console.warn( `bookmark illegal action: ${action}, instead use default` );
+        return ApiDae.api( 'bookmark:add' );
     }
 
-    return _instance;
+  }
+
+  /**
+   * comment API を取得します
+   * @param {string} [action=''] path option を指定します
+   * @returns {Types} comment API をTypes instanceで返します
+   */
+  static comment( action:string = '' ):Types {
+
+    switch ( action ) {
+      case 'send':
+        return ApiDae.api( 'comment:send' );
+
+      case 'reply':
+        return ApiDae.api( 'comment:reply' );
+
+      case 'send:edit':
+        return ApiDae.api( 'comment:send:edit' );
+
+      case 'reply:edit':
+        return ApiDae.api( 'comment:reply:edit' );
+
+      case 'send:delete':
+        return ApiDae.api( 'comment:send:delete' );
+
+      case 'reply:delete':
+        return ApiDae.api( 'comment:reply:delete' );
+
+      case 'good:add':
+        return ApiDae.api( 'comment:good:add' );
+
+      case 'good:delete':
+        return ApiDae.api( 'comment:good:delete' );
+
+      case 'bad:add':
+        return ApiDae.api( 'comment:bad:add' );
+
+      case 'bad:delete':
+        return ApiDae.api( 'comment:bad:delete' );
+
+      case '':
+        return ApiDae.api( 'comment' );
+
+      default:
+        console.warn( `comment illegal action: ${action}, instead use default` );
+        return ApiDae.api( 'comment' );
+    }
 
   }
+
+  /**
+   * users API を取得します
+   * @param {string} [action=''] path option を指定します
+   * @returns {Types} category users をTypes instanceで返します
+   */
+  static users( action:string = '' ):Types {
+
+    switch ( action ) {
+      case 'notice':
+        return ApiDae.api( 'users:notice' );
+
+      case 'notice:read':
+        return ApiDae.api( 'users:notice:read' );
+
+      case 'bookmark':
+        return ApiDae.api( 'users:bookmark' );
+
+      case 'activity':
+        return ApiDae.api( 'users:activity' );
+
+      case '':
+        return ApiDae.api( 'users' );
+
+      default:
+        console.warn( `users illegal action: ${action}, instead use default` );
+        return ApiDae.api( 'users' );
+
+    }
+  }
+
 }

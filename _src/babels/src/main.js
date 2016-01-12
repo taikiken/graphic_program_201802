@@ -14,21 +14,25 @@
 //    target for babel compile
 // -------------------------------------
 
+import {Ajax} from './net/Ajax';
 import {Api} from './net/Api';
 import {Types} from './net/Types';
 import {Codes} from './net/Codes';
+import {User} from './net/User';
 
 /**
  * global object
  * こんな感じで使えます
  *
- *    var ut = window.UT
+ *    var ut = self.UT
  */
 var UT = {
   version: '@@version',
+  Ajax: Ajax,
   Api: Api,
+  Codes: Codes,
   Types: Types,
-  Codes: Codes
+  User: User
 };
 
-window.UT = UT;
+self.UT = UT;
