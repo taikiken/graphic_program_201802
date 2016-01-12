@@ -59,6 +59,9 @@ fs = require 'fs'
 # task
 # --------------------------------------------
 
+# ==============================================================
+# ここから 使えない
+
 # output path
 outPath = dir.sprite.css
 
@@ -92,7 +95,7 @@ spriteTask = ( name ) ->
     margin: 0
 #   .pipe $.imagemin compression
   # .pipe $.if( '*.png', gulp.dest( app + '/img/sprite' ), gulp.dest( sprite + '/css' ) )
-  .pipe $.if( '*.png', gulp.dest( app + '/img/sprite' ), gulp.dest( outPath ) )
+  .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( outPath ) )
   .pipe $.size title: '*** sprite:' + name + ' ***'
 
 # sprite:make
@@ -128,7 +131,7 @@ gulp.task 'sprite:one', ->
     orientation: orientation
     margin: 0
 #  .pipe $.imagemin compression
-  .pipe $.if( '*.png', gulp.dest( app + '/img/sprite' ), gulp.dest( sprite + '/css' ) )
+  .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( sprite + '/css' ) )
   .pipe $.size title: '*** sprite:one:( ' + name + ': ' + orientation + ' ) ***'
 
 # css concat
@@ -145,6 +148,9 @@ gulp.task 'sprite:css:concat', ->
   .pipe $.concat '_sprite.scss'
   .pipe gulp.dest outPath
   .pipe $.size title: '*** sprite:css ***'
+
+# ここまで 使えない
+# ==============================================================
 
 # ==============================================================
 # build
@@ -166,7 +172,8 @@ gulp.task 'sprite:build', ->
           cssPath: cssPath
           processor: 'sprity-sass'
           prefix: 'sprite'
-          orientation: 'binary-tree'
+#          orientation: 'binary-tree'
+          orientation: setting.sprite.option
           margin: 0
           split: true
         .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( dir.sprite.css ) )

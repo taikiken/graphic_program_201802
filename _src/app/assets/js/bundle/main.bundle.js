@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "js/bundle";
+/******/ 	__webpack_require__.p = "assets/js/bundle";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -66,7 +66,7 @@
 	}; /*!
 	    * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	    * @author (at)taikiken / http://inazumatv.com
-	    * @date 2016-01-12 14:46:49
+	    * @date 2016-01-12 15:24:10
 	    *
 	    * Distributed under the terms of the MIT license.
 	    * http://www.opensource.org/licenses/mit-license.html

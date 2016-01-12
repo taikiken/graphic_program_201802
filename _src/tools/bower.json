@@ -27,7 +27,7 @@
     "jquery.smooth-scroll": "~1.6.1",
     "sass-mediaqueries": "~1.6.1",
     "modularized-normalize-scss": "~3.0.3",
-    "matchHeight": "git://github.com/liabru/jquery-match-height#~0.6.0",
+    "matchHeight": "git://github.com/liabru/jquery-match-height#~0.7.0",
     "inazumatv.util.js": "git://github.com/taikiken/inazumatv.util.js",
     "bxslider3": "bxslider#*",
     "bxslider4": "bxslider-4#~4.2.5",

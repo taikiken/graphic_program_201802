@@ -75,27 +75,27 @@ babels =
 
 # libs
 # bower_exports から concat せず使用するライブラリの設置階層
-libs = app + '/js/libs'
+libs = app + '/assets/js/libs'
 
 # sprite css, image output path
 # _sprite.scss の出力場所
-spriteCssPath = app + '/css'
+spriteCssPath = app + '/assets/css'
 
 # sprite 画像の出力場所
-spriteImgPath =  app + '/img/sprite'
+spriteImgPath =  app + '/assets/images/sprite'
 
 # ------------------------------------------------------
 # Sass prefix (Browser vendor prefix)
 # ------------------------------------------------------
 AUTO_PREFIX_BROWSERS = [
-  'ie >= 9'
+  'ie >= 11'
   'ie_mob >= 10'
-  'ff >= 30'
-  'chrome >= 34'
-  'safari >= 7'
-  'opera >= 23'
-  'ios >= 7'
-  'android >= 4.4'
+  'ff >= 43'
+  'chrome >= 47'
+  'safari >= 9'
+  'opera >= 34'
+  'ios >= 8.4.1'
+  'android >= 4.2'
   'bb >= 10'
 ]
 
@@ -162,7 +162,7 @@ compress =
   value:  binary-tree | vertical | horizontal
   default: binary-tree
 
-  ToDo: 将来 directory 毎に orientation 設定可能にする
+  ToDo: directory 毎に orientation 設定可能にする
 ###
 option =
   xxx: 'vertical'
