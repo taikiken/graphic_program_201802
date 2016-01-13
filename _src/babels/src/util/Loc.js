@@ -14,20 +14,139 @@
 
 // window.location に関する Utility
 
-let _symbol = Symbol();
-
+/**
+ * location に関する utility
+ */
 export class Loc {
   /**
-   * static class です、instance を作成できません
-   * @param {Symbol} target Singleton を実現するための private symbol
+   * search を繰り返し調べたい時に instance を作成します
    */
-  constructor( target ) {
+  constructor() {
 
-    if ( _symbol !== target ) {
+    this._search = null;
 
-      throw new Error( `Loc is singleton pattern. not use new Api().` );
+  }
+
+  /**
+   *
+   * @param {string} [search=''] key: value にしたい search型 文字列
+   * @returns {Loc} instance を返します
+   */
+  parse( search:string = '' ):Object {
+
+    this._search = Loc.parse( search );
+    return this;
+
+  }
+
+  /**
+   * search value を keyから探します
+   * @param {string} key search name
+   * @returns {*} string|undefined|null で結果を返します
+   */
+  find( key:string ):Object {
+
+    let search = this._search;
+    if ( search === null ) {
+      return null;
+    }
+
+    return search[ key ];
+
+  }
+
+  /**
+   *
+   * @returns {string} location.hrefを返します
+   */
+  static get current():string {
+
+    return self.location.href;
+
+  }
+
+  /**
+   *
+   * @returns {string} location.pathname(urlからprotocol+hostを除く)を返します
+   */
+  static get path():string {
+
+    return self.location.pathname;
+
+  }
+
+  /**
+   *
+   * @returns {string} location.hashを返します
+   */
+  static get hash():string {
+
+    return self.location.hash;
+
+  }
+
+  /**
+   * url の query 文字列
+   * @returns {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
+   */
+  static get search():string {
+
+    return self.location.search.substring( 1 );
+
+  }
+
+  /**
+   * hash(#example)から`#`をとります
+   * @param {string} hash hash文字列
+   * @returns {string} hash文字列から#を削除した文字列を返します
+   */
+  static hashStrip( hash:string = Loc.hash ):string {
+
+    return hash.replace( /^[#\/]|\s+$/g, '' );
+
+  }
+
+  /**
+   * pathnameを/で分解します
+   * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
+   * @returns {Array}
+   */
+  static resolve( pathname:string = Loc.path ):Array {
+
+    return pathname.split( '/' );
+
+  }
+
+  /**
+   * location.search を key: value へ分解します
+   * @param {string} search location.search型文字列
+   * @returns {*}
+   */
+  static parse( search:string = Loc.search ):Object {
+
+    if ( typeof search !== 'string' || search.length === 0 ) {
+
+      return null;
 
     }
 
+    search = search.replace( '&amp;', '&' );
+    let vars = search.split( '&' );
+    let results = {};
+
+    for ( var val of vars ) {
+
+      let pair = val.split( '=' );
+      if ( Array.isArray( pair ) && pair.length === 2 ) {
+
+        results[ pair[ 0 ] ] = pair[ 1 ];
+
+      }
+
+    }
+
+    return results;
+
   }
+
 }

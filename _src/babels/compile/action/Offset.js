@@ -52,6 +52,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Ajax 処理を行います
  * Interface として使用します
  * 各 Class で extends して下さい
+ * <strong>Next 読込</strong>がある時に使用します
  */
 
 var Offset = exports.Offset = function (_Action) {

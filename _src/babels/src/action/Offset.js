@@ -19,7 +19,7 @@ import {Types} from '../net/Types';
  * Ajax 処理を行います
  * Interface として使用します
  * 各 Class で extends して下さい
- * <strong>Next 読込</strong>がある時に使用します
+ * **Next 読込** がある時に使用します
  */
 export class Offset extends Action {
   /**
@@ -52,7 +52,7 @@ export class Offset extends Action {
    * offset 値を加算します
    * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
    */
-  next( count:Number = this._length ) {
+  update( count:Number = this._length ) {
 
     this._offset += count;
 
@@ -67,13 +67,27 @@ export class Offset extends Action {
     return this._offset < this.total;
 
   }
+
   /**
-   * Ajax success callback, next()を実行し offset 値をカウントアップし callback method があれば実行します
+   * 次の読込を開始します
+   */
+  next() {
+
+    // next data があるかないかを調べます
+    if ( this.hasNext() ) {
+
+      this.start();
+
+    }
+
+  }
+  /**
+   * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します
    * @param {Result} result Ajax成功結果
    */
   success( result:Result ):void {
 
-    this.next();
+    this.update();
     // success
     super.success( result );
 

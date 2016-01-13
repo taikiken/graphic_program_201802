@@ -1,5 +1,7 @@
 'use strict';
 
+var _Loc = require('./util/Loc');
+
 var _Ajax = require('./net/Ajax');
 
 var _Api = require('./net/Api');
@@ -30,25 +32,13 @@ var _Pickup = require('./action/home/Pickup');
  *
  *    var ut = self.UT
  */
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-13 20:37:19
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
 
 // net
 var UT = {
   version: '1.0.0',
+  util: {
+    Loc: _Loc.Loc
+  },
   net: {
     Ajax: _Ajax.Ajax,
     Api: _Api.Api,
@@ -77,5 +67,22 @@ var UT = {
 // action
 
 // net/types
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-01-13 23:08:05
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
+
+// util
 
 self.UT = UT;

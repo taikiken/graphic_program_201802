@@ -13,65 +13,22 @@
 
   "use strict";
 
-  var UT = self.UT;
+  var trailingSlash = /\/$/;
 
-  var React = window.React;
-  var ReactDOM = window.ReactDOM;
-  //var TestApp = React.createClass( {
-  //  render: function() {
-  //
-  //    var elapsed = Math.round(this.props.elapsed / 100);
-  //    var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-  //    var message =
-  //      'React has been successfully running for ' + seconds + ' seconds.';
-  //
-  //    return <p>{message}</p>;
-  //
-  //  }
-  //} );
-  //
-  //var _start = new Date().getTime();
-  //
-  //setInterval( function() {
-  //  ReactDOM.render(
-  //    <TestApp elapsed={new Date().getTime() - _start} />,
-  //    document.getElementById('c1')
-  //  );
-  //}, 50);
+  var routeStripper = /^[#\/]|\s+$/g;
+
+  var escapeRegExp = /[\-{}\[\]+?.,\\\^$|#\s]/g;
+
+  var namedParam = /<(\w+|[A-Za-z_-]+:\w+)>/g;
+
+  var genericParam = /([A-Za-z_-]+):(\w+)/;
+
+  var filePattern = /\w+\.[a-zA-Z0-9]{3,64}/;
+
+  var optionalParam = /\((.*?)\)/g;
+
+  var splatParam = /\*\w+/g;
 
 
-  //fetch('./api/yuidoc.json')
-  //  .then( function(response) {
-  //    if (response.status !== 200) {
-  //
-  //      console.log('Looks like there was a problem. Status Code: ' + response.status); return;
-  //
-  //    }
-  //    //console.log( 'this ', this );
-  //
-  //    // Examine the text in the response
-  //    response.json().then(
-  //      function(data) {
-  //        console.log(data);
-  //      }
-  //    );
-  //  } )
-  //  .catch(function(err) {
-  //    console.log('Fetch Error :-S', err);
-  //  } );
-
-  var Api = UT.net.Api;
-  var Ajax = UT.net.Ajax;
-
-  var ajax = new Ajax();
-
-  function done( result ) {
-    console.log( 'success: ', result );
-  }
-  function fail( error ) {
-    console.log( 'fail: ', error );
-  }
-  console.log( '******************* ajax start' );
-  ajax.start( './api/yuidoc.json', 'GET', done );
 
 }( window ) );

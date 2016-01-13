@@ -14,6 +14,9 @@
 //    target for babel compile
 // -------------------------------------
 
+// util
+import {Loc} from './util/Loc';
+
 // net
 import {Ajax} from './net/Ajax';
 import {Api} from './net/Api';
@@ -42,6 +45,9 @@ import {Pickup} from './action/home/Pickup';
  */
 var UT = {
   version: '@@version',
+  util: {
+    Loc: Loc
+  },
   net: {
     Ajax: Ajax,
     Api: Api,
