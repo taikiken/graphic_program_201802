@@ -12,6 +12,7 @@
 'use strict';
 
 import {Codes} from './Codes';
+import {Result} from '../data/Result';
 
 /**
  * 非同期通信でJSONを取得します
@@ -45,6 +46,7 @@ export class Ajax {
 
       let error = new Error( `status:999, message:duplicate or busy.` );
       error.response = {};
+      error.number = 999;
       reject( error );
       return;
 
@@ -53,52 +55,48 @@ export class Ajax {
     // flag off
     this.disable();
 
+    console.log( `ajax.start: ${url}, ${method}` );
+
     // https://github.com/github/fetch
     // request を開始します
     fetch( url, {
-      method: method,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      method: method
     } )
     .then( function( response ) {
-      // check status
+      // check status (Server)
       let status = response.status;
 
       if ( status >= 200 && status < 300 ) {
-        // ok, may be >= 200 && < 300
+        // may be ok
         return response;
+
       } else {
+
         // bad response, サーバーからのエラーメッセージ
         let error = new Error( `status:${status}, message:${response.statusText}` );
         error.response = response;
+        error.number = status;
         throw error;
+
       }
 
     } )
     .then( function( response ) {
+
       // parse JSON
-      try {
-        // json が壊れている可能性があるので安全を期す
-        return {
-          data: response.json(),
-          response: response
-        };
-      } catch ( err ) {
-        let error = new Error( `status:${err.code}, message:${err.message}` );
-        error.response = response;
-        throw error;
-      }
+      return response.json();
 
     } )
-    .then( function( result ) {
+    .then( function( json:Object ) {
+      // parsed JSON
+      let result = new Result( json );
 
-      if ( Codes.status( result.response.status.code ) ) {
+      if ( !Codes.status( result.status.code ) ) {
         // something bad
-        let code = result.response.status.code;
-        let error = new Error( `status:${code}, message:${Codes.jp(code)}` );
+        let code = result.status.code;
+        let error = new Error( `status:${code}, user:${result.status.user_message}, dev:${result.status.developer_message}` );
         error.response = result.response;
+        error.number = result.status.code;
         throw error;
       }
 

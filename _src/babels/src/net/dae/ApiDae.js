@@ -14,7 +14,7 @@
 import {Types} from '../Types';
 import {Type} from '../types/Type';
 import {Permalink} from '../types/Permalink';
-import {Queries} from '../types/Quries';
+import {Queries} from '../types/Queries';
 import {Query} from '../types/Query';
 import {CommentType} from '../comment/CommentType';
 

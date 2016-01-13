@@ -76,7 +76,7 @@ JSHint + uglify し public へデプロイします
 
 **(_babel)**
 
-app/_babel/**/*.js
+app/**/_babel/**/*.js
 
 ES2015(ES6, ES7)開発ディレクトリ
 

@@ -68,12 +68,16 @@ var Types = exports.Types = function () {
     }
 
     /**
-     *
-     * @returns {Permalink} Permalink instance を返します
+     * @return {string} url を返します
      */
 
   }, {
     key: 'permalink',
+
+    /**
+     *
+     * @returns {Permalink} Permalink instance を返します
+     */
     value: function permalink() {
 
       return this._permalink;
@@ -101,6 +105,23 @@ var Types = exports.Types = function () {
     value: function auth() {
 
       return this._auth;
+    }
+  }, {
+    key: 'url',
+    get: function get() {
+
+      return this._type.url;
+    }
+
+    /**
+     * @return {string} method を返します
+     */
+
+  }, {
+    key: 'method',
+    get: function get() {
+
+      return this._type.method;
     }
   }]);
   return Types;

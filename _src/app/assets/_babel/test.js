@@ -13,7 +13,7 @@
 
   "use strict";
 
-  var UT = window.UT;
+  var UT = self.UT;
 
   var React = window.React;
   var ReactDOM = window.ReactDOM;
@@ -39,62 +39,48 @@
     );
   }, 50);
 
+  var Api = UT.net.Api;
+  var Ajax = UT.net.Ajax;
 
-  fetch('./api/yuidoc.json')
-    .then( function(response) {
-      if (response.status !== 200) {
+  var ajax = new Ajax();
 
-        console.log('Looks like there was a problem. Status Code: ' + response.status); return;
+  function done( result ) {
+    console.log( `success: ${result}`, result.data );
+  }
+  function fail( error ) {
+    console.log( `fail: ${error}` );
+  }
+  console.log( '******************* ajax start' );
+  ajax.start( '/api/yuidoc.json', 'GET', done, fail );
 
-      }
-      //console.log( 'this ', this );
 
-      // Examine the text in the response
-      response.json().then(
-        function(data) {
-          console.log(data);
-        }
-      );
-    } )
-    .catch(function(err) {
-      console.log('Fetch Error :-S', err);
-    } );
+  var Action = UT.action.Action;
+  var Offset = UT.action.Offset;
+  var Types = UT.net.Types;
+  var Type = UT.net.types.Type;
+  var Permalink = UT.net.types.Permalink;
+  var Queries = UT.net.types.Queries;
+  var Pickup = UT.action.home.Pickup;
+  var count = 0;
+  var action;
 
-  //class Ajax {
-  //
-  //  constructor(url) {
-  //    this._url = url;
-  //  }
-  //
-  //  start() {
-  //    fetch(this._url)
-  //      .then( function(response) {
-  //        if (response.status !== 200) {
-  //
-  //          console.log('Looks like there was a problem. Status Code: ' + response.status); return;
-  //
-  //        }
-  //
-  //        // Examine the text in the response
-  //        response.json().then(
-  //          function(data) {
-  //            console.log(data);
-  //          }
-  //        );
-  //      } )
-  //      .catch(function(err) {
-  //        console.log('Fetch Error :-S', err);
-  //      } );
-  //  }
-  //
-  //}
-  //
-  //new Ajax('./api/yuidoc.json').start();
+  let req = new Types(
+    new Type( '/api/esdoc.json' ),
+    new Permalink(),
+    new Queries()
+  );
 
-  //var UT = window.UT;
-  var Api = UT.Api;
-  var api = Api.factory();
 
-  console.log( 'api', api.home() );
+  function success( result ) {
+    console.log( `success: ${result}`, result.data );
+
+    //action.total = 33;
+    //if ( action.hasNext() ) {
+    //  action.start();
+    //}
+  }
+
+  action = new Pickup();
+  action.start();
 
 }( window ) );

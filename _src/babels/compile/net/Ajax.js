@@ -26,6 +26,8 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _Codes = require('./Codes');
 
+var _Result = require('../data/Result');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -65,6 +67,7 @@ var Ajax = exports.Ajax = function () {
 
         var error = new Error('status:999, message:duplicate or busy.');
         error.response = {};
+        error.number = 999;
         reject(error);
         return;
       }
@@ -72,47 +75,41 @@ var Ajax = exports.Ajax = function () {
       // flag off
       this.disable();
 
+      console.log('ajax.start: ' + url + ', ' + method);
+
       // https://github.com/github/fetch
       // request を開始します
       fetch(url, {
-        method: method,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
+        method: method
       }).then(function (response) {
-        // check status
+        // check status (Server)
         var status = response.status;
 
         if (status >= 200 && status < 300) {
-          // ok, may be >= 200 && < 300
+          // may be ok
           return response;
         } else {
+
           // bad response, サーバーからのエラーメッセージ
           var error = new Error('status:' + status + ', message:' + response.statusText);
           error.response = response;
+          error.number = status;
           throw error;
         }
       }).then(function (response) {
-        // parse JSON
-        try {
-          // json が壊れている可能性があるので安全を期す
-          return {
-            data: response.json(),
-            response: response
-          };
-        } catch (err) {
-          var error = new Error('status:' + err.code + ', message:' + err.message);
-          error.response = response;
-          throw error;
-        }
-      }).then(function (result) {
 
-        if (_Codes.Codes.status(result.response.status.code)) {
+        // parse JSON
+        return response.json();
+      }).then(function (json) {
+        // parsed JSON
+        var result = new _Result.Result(json);
+
+        if (!_Codes.Codes.status(result.status.code)) {
           // something bad
-          var code = result.response.status.code;
-          var error = new Error('status:' + code + ', message:' + _Codes.Codes.jp(code));
+          var code = result.status.code;
+          var error = new Error('status:' + code + ', user:' + result.status.user_message + ', dev:' + result.status.developer_message);
           error.response = result.response;
+          error.number = result.status.code;
           throw error;
         }
 

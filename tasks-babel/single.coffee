@@ -51,9 +51,9 @@ htdocs = dir.htdocs
 config = setting.webpackConfig
 
 archives =  [
-  app + '/_babel/**/*.js'
-  '!' + app + '/_babel/**/_*.js'
-  '!' + app + '/_babel/**/*.babel.js'
+  app + '/assets/_babel/**/*.js'
+  '!' + app + '/assets/_babel/**/_*.js'
+  '!' + app + '/assets/_babel/**/*.babel.js'
 ]
 
 # eslint

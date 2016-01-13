@@ -46,6 +46,23 @@ export class Types {
   }
 
   /**
+   * @return {string} url を返します
+   */
+  get url():string {
+
+    return this._type.url;
+
+  }
+
+  /**
+   * @return {string} method を返します
+   */
+  get method():string {
+
+    return this._type.method;
+  }
+
+  /**
    *
    * @returns {Permalink} Permalink instance を返します
    */

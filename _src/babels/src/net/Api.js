@@ -57,6 +57,26 @@ export class Api {
   }
 
   /**
+   * ログインなしユーザーのhome API
+   * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
+   */
+  static homeAPi():Types {
+
+    return ApiDae.api( 'home' );
+
+  }
+
+  /**
+   * ログイン済みユーザーのhome API
+   * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
+   */
+  static selfAPi():Types {
+
+    return ApiDae.api( 'self' );
+
+  }
+
+  /**
    * category API を取得します
    * @returns {Types} category API を Types instance で取得します
    */

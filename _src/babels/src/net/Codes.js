@@ -11,57 +11,59 @@
  */
 'use strict';
 
+let _en = {
+  200: 'OK',
+  201: 'Created',
+  202: 'Accepted',
+  204: 'No Content',
+
+  400: 'Bad Request',
+  401: 'Unauthorized',
+  403: 'Forbidden',
+  404: 'Not Found',
+  405: 'Method Not Allowed',
+  409: 'Conflict',
+  415: 'Unsupported Media Type',
+  429: 'Too Many Requests',
+  500: 'Internal Server Error',
+  502: 'Service Unavailable'
+};
+
+let _jp = {
+  200: '成功',
+  201: '新しいリソースを作成した',
+  202: 'リクエストを受け付けた',
+  204: '内容なし',
+
+  400: 'エラー',
+  401: '認証エラー',
+  403: 'アクセス禁止',
+  404: 'リソースが存在しない',
+  405: 'メソッドが間違っている',
+  409: 'リソースが競合している',
+  415: '指定されたメディアタイプがサポートされていない',
+  429: 'リクエストの回数制限に引っかかる',
+  500: 'サーバ側の問題',
+  502: '一時的にサービス出来ない'
+};
+
+let _symbol = Symbol();
+
 /**
  * API Response Code を管理します
  */
 export class Codes {
   /**
    * ステータスコード・メッセージを日本語と英語で保存しています
+   * @param {Symbol} target Singleton を実現するための private symbol
    */
-  constructor() {
+  constructor( target ) {
 
-    /**
-     * ステータスコード：英語
-     * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
-     */
-    this._en = {
-      200: 'OK',
-      201: 'Created',
-      202: 'Accepted',
-      204: 'No Content',
+    if ( _symbol !== target ) {
 
-      400: 'Bad Request',
-      401: 'Unauthorized',
-      403: 'Forbidden',
-      404: 'Not Found',
-      405: 'Method Not Allowed',
-      409: 'Conflict',
-      415: 'Unsupported Media Type',
-      429: 'Too Many Requests',
-      500: 'Internal Server Error',
-      502: 'Service Unavailable'
-    };
-    /**
-     * ステータスコード：日本語
-     * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
-     */
-    this._jp = {
-      200: '成功',
-      201: '新しいリソースを作成した',
-      202: 'リクエストを受け付けた',
-      204: '内容なし',
+      throw new Error( `Api is singleton pattern. not use new Api().` );
 
-      400: 'エラー',
-      401: '認証エラー',
-      403: 'アクセス禁止',
-      404: 'リソースが存在しない',
-      405: 'メソッドが間違っている',
-      409: 'リソースが競合している',
-      415: '指定されたメディアタイプがサポートされていない',
-      429: 'リクエストの回数制限に引っかかる',
-      500: 'サーバ側の問題',
-      502: '一時的にサービス出来ない'
-    };
+    }
 
   }
 
@@ -71,7 +73,7 @@ export class Codes {
    */
   static status( statusCode:Number ) {
 
-    return statusCode >= 200 && statusCode < 400;
+    return statusCode >= 200 && statusCode < 300;
 
   }
 
@@ -82,11 +84,9 @@ export class Codes {
    */
   static message( code:Number ):Object {
 
-    let codes = Codes.factory();
-
     return {
-      en: codes._en[ code ],
-      jp: codes._jp[ code ]
+      en: Codes.en( code ),
+      jp: Codes.jp( code )
     };
 
   }
@@ -97,7 +97,7 @@ export class Codes {
    */
   static jp( code:Number ):string {
 
-    return Codes.factory()._jp[ code ];
+    return _jp[ code ];
 
   }
 
@@ -107,16 +107,8 @@ export class Codes {
    */
   static en( code:Number ):string {
 
-    return Codes.factory()._jp[ code ];
+    return _en[ code ];
 
   }
 
-  /**
-   * @returns {Codes} Codes instance を返します
-   */
-  static factory():Codes {
-
-    return new Codes();
-
-  }
 }
