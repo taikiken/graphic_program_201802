@@ -105,7 +105,7 @@ gulp.task 'sc5:apply', ->
   .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
   .pipe $.replaceTask patterns: patterns
-  .pipe( gulp.dest tmp )
+#  .pipe( gulp.dest tmp )
   .pipe sc5.applyStyles()
   .pipe( gulp.dest dir.guide )
   .pipe $.size title: '*** sc5:apply ***'
