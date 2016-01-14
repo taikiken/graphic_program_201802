@@ -18,6 +18,7 @@
  */
 export class Type {
   /**
+   * @constructor
    * @param {string} url API request先
    * @param {string} [method=GET] POST | GET | DELETE...
    */
@@ -29,6 +30,7 @@ export class Type {
   }
 
   /**
+   * @method url
    * @returns {string} API request先を返します
    */
   get url():string {
@@ -48,6 +50,7 @@ export class Type {
   }
 
   /**
+   * @method method
    * @returns {string} POST | GET を返します
    */
   get method():string {
@@ -75,7 +78,7 @@ export class Type {
   }
 
   /**
-   * @static
+   * @method validate
    * @param {string} method method type
    * @return {boolean} method type を検証し真偽値を返します
    */

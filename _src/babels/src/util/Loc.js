@@ -19,7 +19,7 @@
  */
 export class Loc {
   /**
-   * search を繰り返し調べたい時に instance を作成します
+   * search を調べたい時に instance を作成します
    */
   constructor() {
 
@@ -124,6 +124,7 @@ export class Loc {
    */
   static parse( search:string = Loc.search ):Object {
 
+    // 引数が文字でない時は処理しない
     if ( typeof search !== 'string' || search.length === 0 ) {
 
       return null;

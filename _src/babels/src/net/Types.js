@@ -20,7 +20,7 @@ import {Queries} from './types/Quries';
  */
 export class Types {
   /**
-   *
+   * @constructor
    * @param {Type} type Type instance
    * @param {Permalink} permalink Permalink instance
    * @param {Queries} queries Queries instance
@@ -36,16 +36,17 @@ export class Types {
   }
 
   /**
-   *
+   * @method type
    * @returns {Type} Type instance を返します
    */
-  type():Type {
+  get type():Type {
 
     return this._type;
 
   }
 
   /**
+   * @method url
    * @return {string} url を返します
    */
   get url():string {
@@ -55,6 +56,7 @@ export class Types {
   }
 
   /**
+   * @method method
    * @return {string} method を返します
    */
   get method():string {
@@ -63,30 +65,30 @@ export class Types {
   }
 
   /**
-   *
+   * @method permalink
    * @returns {Permalink} Permalink instance を返します
    */
-  permalink():Permalink {
+  get permalink():Permalink {
 
     return this._permalink;
 
   }
 
   /**
-   *
+   * @method queries
    * @returns {Queries} Queries instance を返します
    */
-  queries():Queries {
+  get queries():Queries {
 
     return this._queries;
 
   }
 
   /**
-   *
+   * @method auth
    * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
    */
-  auth() {
+  get auth() {
 
     return this._auth;
 

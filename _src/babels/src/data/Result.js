@@ -16,7 +16,8 @@
  */
 export class Result {
   /**
-   *  Ajax 成功時にdataを保存します
+   * Ajax 成功時にdataを保存します
+   * @constructor
    * @param {{status: *, responce: *}} json json パース後データ
    */
   constructor( json ) {
@@ -27,6 +28,7 @@ export class Result {
 
   /**
    * parsed JSON プロパティ
+   * @method data
    * @returns {*} パース済みJSON(Object)を返します
    */
   get data():Object {
@@ -36,8 +38,9 @@ export class Result {
   }
 
   /**
-   * 生 responce
-   * @returns {*} 生 responce(JSON) を返します
+   * 取得 JSON responce section
+   * @method responce
+   * @returns {*} 取得 JSON responce section を返します
    */
   get responce():JSON {
 
@@ -46,7 +49,8 @@ export class Result {
   }
 
   /**
-   * responce.status
+   * 取得 JSON status section
+   * @method status
    * @returns {{code: number, user_massage: string,developer_message: string}} responce.status を返します
    */
   get status():Object {

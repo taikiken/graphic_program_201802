@@ -24,13 +24,14 @@ let _symbol = Symbol();
 export class Api {
   /**
    * static class です、instance を作成できません
+   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Api is singleton pattern. not use new Api().` );
+      throw new Error( `Api is not new Api().` );
 
     }
 
@@ -38,6 +39,7 @@ export class Api {
 
   /**
    * login API を取得します
+   * @method login
    * @returns {Types} login API をTypes instanceで返します
    */
   static login():Types {
@@ -48,6 +50,7 @@ export class Api {
 
   /**
    * home API を login している / していない に合わせ取得します
+   * @method home
    * @returns {Types} home API(home / self)をTypes instanceで返します
    */
   static home():Types {
@@ -58,6 +61,7 @@ export class Api {
 
   /**
    * ログインなしユーザーのhome API
+   * @method homeAPi
    * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
    */
   static homeAPi():Types {
@@ -68,6 +72,7 @@ export class Api {
 
   /**
    * ログイン済みユーザーのhome API
+   * @method selfAPi
    * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
    */
   static selfAPi():Types {
@@ -78,6 +83,7 @@ export class Api {
 
   /**
    * category API を取得します
+   * @method category
    * @returns {Types} category API を Types instance で取得します
    */
   static category():Types {
@@ -87,7 +93,8 @@ export class Api {
   }
 
   /**
-   * category API を取得します
+   * search API を取得します
+   * @method search
    * @returns {Types} category API をTypes instanceで返します
    */
   static search():Types {
@@ -98,6 +105,7 @@ export class Api {
 
   /**
    * category API を取得します
+   * @method detail
    * @returns {Types} category API をTypes instanceで返します
    */
   static detail():Types {
@@ -108,6 +116,7 @@ export class Api {
 
   /**
    * bookmark API を取得します
+   * @method bookmark
    * @param {string} [action=add] path option を指定します
    * @returns {Types} bookmark API をTypes instanceで返します
    */
@@ -129,6 +138,7 @@ export class Api {
 
   /**
    * comment API を取得します
+   * @method comment
    * @param {string} [action=''] path option を指定します
    * @returns {Types} comment API をTypes instanceで返します
    */
@@ -177,6 +187,7 @@ export class Api {
 
   /**
    * users API を取得します
+   * @method users
    * @param {string} [action=''] path option を指定します
    * @returns {Types} category users をTypes instanceで返します
    */

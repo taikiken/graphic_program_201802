@@ -55,23 +55,25 @@ let _symbol = Symbol();
 export class Codes {
   /**
    * ステータスコード・メッセージを日本語と英語で保存しています
+   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Api is singleton pattern. not use new Api().` );
+      throw new Error( `Codes is not new Codes().` );
 
     }
 
   }
 
   /**
+   * @method status
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
-  static status( statusCode:Number ) {
+  static status( statusCode:Number ):boolean {
 
     return statusCode >= 200 && statusCode < 300;
 
@@ -79,6 +81,7 @@ export class Codes {
 
   /**
    * status codeの意味を調べます
+   * @method message
    * @param {Number} code サーバーからのresponse status code
    * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
    */
@@ -92,6 +95,7 @@ export class Codes {
   }
 
   /**
+   * @method jp
    * @param {Number} code status code
    * @return {*} 日本語メッセージを返します
    */
@@ -102,6 +106,7 @@ export class Codes {
   }
 
   /**
+   * @method en
    * @param {Number} code status code
    * @return {*} 英語メッセージを返します
    */

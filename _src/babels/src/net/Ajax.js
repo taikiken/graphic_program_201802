@@ -19,8 +19,8 @@ import {Result} from '../data/Result';
  */
 export class Ajax {
   /**
-   * instanceを作成します
-   *
+   * Ajax instanceを作成し、実行可能プロパティを可能に設定します
+   * @constructor
    */
   constructor() {
 
@@ -36,7 +36,7 @@ export class Ajax {
    * @param {Function} resolve success callback
    * @param {Function} reject fail callback
    */
-  start( url, method, resolve, reject ) {
+  start( url, method, resolve, reject ):void {
 
     let fetch = self.fetch;
     let _this = this;
@@ -116,7 +116,7 @@ export class Ajax {
   /**
    * 実行可否 flag を true にします
    */
-  enable() {
+  enable():void {
 
     this._can = true;
 
@@ -124,17 +124,17 @@ export class Ajax {
   /**
    * 実行可否 flag を false にします
    */
-  disable() {
+  disable():void {
 
     this._can = false;
 
   }
 
   /**
-   *
-   * @return {boolean} 実行可否 flag を返します
+   * @method can
+   * @returns {boolean} 実行可否 flag を返します
    */
-  get can() {
+  get can():boolean {
 
     return this._can;
 

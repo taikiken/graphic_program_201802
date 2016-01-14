@@ -81,7 +81,7 @@ gulp.task 'css:dev', ->
 gulp.task 'css:build', ->
   return gulp.src files
   .pipe $.plumber()
-  .pipe $.changed app + '/**', extension: '.css'
+#  .pipe $.changed app + '/**', extension: '.css'
   .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
   .pipe $.replaceTask patterns: patterns

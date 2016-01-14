@@ -185,7 +185,11 @@ gulp.task 'default', (cb) ->
       'image:build'
       'css:build'
     ]
-    'clean:all'
+    [
+      # デプロイ時css document再生成
+      'sc5:make'
+      'clean:all'
+    ]
     'lec:build'
     cb
   )

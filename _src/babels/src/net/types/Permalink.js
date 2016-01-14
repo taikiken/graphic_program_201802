@@ -24,6 +24,7 @@ export class Permalink {
    *      // searchのようにどんなワードでも良い場合は "*" を指定する
    *      new Permalink( [ '*' ] );
    *
+   * @constructor
    * @param {Array} [paths] 追加 path を配列で設定
    * @param {boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション
    */
@@ -35,6 +36,8 @@ export class Permalink {
   }
 
   /**
+   * option path 数
+   * @method length
    * @returns {Number} paths数を返します
    */
   length():Number {
@@ -44,6 +47,7 @@ export class Permalink {
   }
 
   /**
+   * @method has
    * @param {string} path 調べたいオプションパス
    * @returns {boolean} 指定パスが存在するかの真偽値を返します
    */
@@ -63,9 +67,11 @@ export class Permalink {
   }
 
   /**
+   * オプションパスが必須かのプロパティ
+   * @method require
    * @returns {boolean} オプションパスが必須かどうかを返します true: 必須
    */
-  require():boolean {
+  get require():boolean {
 
     return this._need;
 

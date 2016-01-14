@@ -26,6 +26,7 @@ import {Types} from '../net/Types';
 export class Action {
   /**
    * Ajax 処理, query なし
+   * @constructor
    * @param {Types} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -40,6 +41,7 @@ export class Action {
   }
 
   /**
+   * @method start
    * Ajax request を開始します
    */
   start():void {
@@ -50,6 +52,7 @@ export class Action {
 
   /**
    * url を作成します
+   * @method url
    * @returns {string} 作成した url を返します
    */
   url():string {
@@ -75,6 +78,7 @@ export class Action {
 
   /**
    * Ajax error callback
+   * @method fail
    * @param {Error} error Ajax失敗結果
    */
   fail( error:Error ):void {

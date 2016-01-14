@@ -20,7 +20,7 @@ import {Query} from '../types/Query';
  */
 export class CommentType extends Query {
   /**
-   *
+   * @constructor
    * @param {string} key dog|cat|food のように | 区切りでオプションをつなげます
    * @param {boolean} [require=false] 必須真偽値
    */
@@ -34,6 +34,7 @@ export class CommentType extends Query {
 
   /**
    * Query override して使います
+   * @method has
    * @param {string} key query key
    * @returns {boolean} query key が存在するかを返します
    */

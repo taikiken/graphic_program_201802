@@ -24,6 +24,7 @@ import {Types} from '../net/Types';
 export class Offset extends Action {
   /**
    * Ajax 処理, query
+   * @constructor
    * @param {Type} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -42,6 +43,7 @@ export class Offset extends Action {
 
   /**
    * url を作成します
+   * @method url
    * @returns {string} 作成した url を返します
    */
   url():string {
@@ -52,7 +54,7 @@ export class Offset extends Action {
    * offset 値を加算します
    * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
    */
-  update( count:Number = this._length ) {
+  update( count:Number = this._length ):void {
 
     this._offset += count;
 
@@ -60,6 +62,7 @@ export class Offset extends Action {
 
   /**
    * 次があるかを調べます
+   * @method hasNext
    * @return {boolean} 次があるかの真偽値を返します
    */
   hasNext():boolean {
@@ -71,7 +74,7 @@ export class Offset extends Action {
   /**
    * 次の読込を開始します
    */
-  next() {
+  next():void {
 
     // next data があるかないかを調べます
     if ( this.hasNext() ) {
@@ -94,8 +97,8 @@ export class Offset extends Action {
   }
 
   /**
-   *
-   * @return {number|*} total件数を返します
+   * @method total
+   * @returns {number|*} total件数を返します
    */
   get total():Number {
     return this._total;

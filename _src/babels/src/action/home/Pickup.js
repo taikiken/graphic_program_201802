@@ -22,6 +22,7 @@ export class Pickup extends Action {
   /**
    * Home pickup(slider) データを取得します
    * types: Api.home() を使用します
+   * @constructor
    */
   constructor() {
     super( Api.home() );
@@ -30,6 +31,7 @@ export class Pickup extends Action {
   /**
    * Ajax API url を作成します
    * Api.home().url/pickup?offset=0&length=5
+   * @method url
    * @returns {string} pickup API url を返します
    */
   url():string {

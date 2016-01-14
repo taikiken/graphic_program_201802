@@ -97,3 +97,53 @@ ES2015(ES6, ES7)ライブラリ開発ディレクトリ
 dev + build  
 ESLint + babel + webpack + rename 'main.bundle.js' し js/bundle へ出力します
 
+## CSS Document
+
+**SC5 style guide generator**
+
+[SC5](http://demo.styleguide.sc5.io/)
+
+    npm install --save-dev sc5-styleguide
+    
+package.json に記載済み `npm install` で install 可能です 
+
+    npm install
+    
+
+
+**gulp task**
+
+_src/sc5-guide へdocumentを出力します  
+
+task が成功すると sc5-guide をルートにサーバーが起動します  
+port は port.coffee 設定 port + 1 になります  
+
+http://0.0.0.0:port-number で document へアクセスできます
+
+watch なし + server
+
+    gulp sc5:guide
+    
+
+
+watch あり  + server
+
+    gulp sc5:watch
+    
+
+watch なし + server なし
+
+    gulp sc5:make
+    
+
+開発 watch 系 task `gulp serve:app` には組み込んでいません  
+必要な時は別で起動してください  
+    
+    
+負荷が高い時は `sc5:watch` を止め `sc5:make` を手動で走らせてください
+
+### SC5 Syntax
+
+[Overview.md](scss/Overview.md)
+
+こちらもご覧下さい
