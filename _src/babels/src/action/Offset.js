@@ -40,23 +40,73 @@ export class Offset extends Action {
     this._total = -1;
 
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * @method total
+   * @returns {number|*} total件数を返します
+   */
+  get total():Number {
+    return this._total;
+  }
+
+  /**
+   * total件数を設定します
+   * @param {Number} total total件数
+   */
+  set total( total:Number ):void {
+    this._total = total;
+  }
+  /**
+   * @method total
+   * @returns {number|*} lengths 取得件数を返します
+   */
+  get length():Number {
+    return this._length;
+  }
+
+  /**
+   * length件数を設定します
+   * @param {Number} length length 取得件数
+   */
+  set length( length:Number ):void {
+    this._length = length;
+  }
+  /**
+   * @method total
+   * @returns {number|*} offset 取得開始位置を返します
+   */
+  get offset():Number {
+    return this._offset;
+  }
+
+  /**
+   * length件数を設定します
+   * @param {Number} offset offset 取得開始位置
+   */
+  set offset( offset:Number ):void {
+    this._offset = offset;
+  }
 
   /**
    * url を作成します
    * @method url
    * @returns {string} 作成した url を返します
    */
-  url():string {
-    return `${this._types.url}?offset=${this._offset}&length=${this._length}`;
+  get url():string {
+    return `${this._url}?offset=${this.offset}&length=${this.length}`;
   }
-
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * offset 値を加算します
    * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
    */
   update( count:Number = this._length ):void {
 
-    this._offset += count;
+    this.offset += count;
 
   }
 
@@ -67,7 +117,9 @@ export class Offset extends Action {
    */
   hasNext():boolean {
 
-    return this._offset < this.total;
+    // _total === -1 の時は常に true
+    // total が offset（次の読み込み開始位置）より小さい時に true
+    return this._total < 0 ? true : this.offset < this.total;
 
   }
 
@@ -95,22 +147,5 @@ export class Offset extends Action {
     super.success( result );
 
   }
-
-  /**
-   * @method total
-   * @returns {number|*} total件数を返します
-   */
-  get total():Number {
-    return this._total;
-  }
-
-  /**
-   * total件数を設定します
-   * @param {Number} total total件数
-   */
-  set total( total:Number ):void {
-    this._total = total;
-  }
-
 
 }

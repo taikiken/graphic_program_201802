@@ -42,6 +42,7 @@ var _id = -1;
 var User = exports.User = function () {
   /**
    * static class です, instance を作成しません
+   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -56,7 +57,8 @@ var User = exports.User = function () {
 
   /**
    * sign in / out 状態を表します
-   * @return {boolean} sign in / out 状態を返します
+   * @method sign
+   * @returns {boolean} sign in / out 状態を返します
    */
 
   (0, _createClass3.default)(User, null, [{
@@ -78,7 +80,8 @@ var User = exports.User = function () {
 
     /**
      * User id 情報
-     * @return {number} User id を返します
+     * @method id
+     * @returns {number} User id を返します
      */
 
   }, {

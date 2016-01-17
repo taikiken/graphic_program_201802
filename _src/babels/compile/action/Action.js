@@ -58,30 +58,32 @@ var Action = exports.Action = function () {
     this._resolve = resolve;
     this._reject = reject;
     this._ajax = new _Ajax.Ajax();
+    this._url = types.url;
+    this._method = types.method;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
-   * Ajax request を開始します
+   * url を作成します
+   * @returns {string} 作成した url を返します
    */
 
   (0, _createClass3.default)(Action, [{
     key: 'start',
-    value: function start() {
 
-      this._ajax.start(this.url(), this._types.method, this.success.bind(this), this.fail.bind(this));
-    }
-
+    // ---------------------------------------------------
+    //  METHOD
+    // ---------------------------------------------------
     /**
-     * url を作成します
-     * @returns {string} 作成した url を返します
+     * Ajax request を開始します
+     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
      */
+    value: function start() {
+      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
-  }, {
-    key: 'url',
-    value: function url() {
-      return this._types.url;
+      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this));
     }
-
     /**
      * Ajax success callback
      * @param {Result} result Ajax成功結果
@@ -116,6 +118,21 @@ var Action = exports.Action = function () {
 
         reject(error);
       }
+    }
+  }, {
+    key: 'url',
+    get: function get() {
+      return this._url;
+    }
+
+    /**
+     * @returns {string|*} method, GET|POST|DELETE|PUT... を返します
+     */
+
+  }, {
+    key: 'method',
+    get: function get() {
+      return this._method;
     }
   }]);
   return Action;

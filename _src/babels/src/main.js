@@ -30,12 +30,30 @@ import {Query} from './net/types/Query';
 import {Queries} from './net/types/Queries';
 import {Type} from './net/types/Type';
 
+// net/comment
+import {CommentType} from './net/comment/CommentType';
+
+
 // action
 import {Action} from './action/Action';
 import {Offset} from './action/Offset';
 
 // action/home
 import {Pickup} from './action/home/Pickup';
+import {Headline} from './action/home/Headline';
+import {News} from './action/home/News';
+
+// action/archive
+import {Category} from './action/archive/Category';
+import {Detail} from './action/archive/Detail';
+import {Ranking} from './action/archive/Ranking';
+import {Videos} from './action/archive/Videos';
+
+// action/sidebar
+import {Widget} from './action/sidebar/Widget';
+
+// action/search
+import {Search} from './action/search/Search';
 
 /**
  * global object
@@ -59,13 +77,30 @@ var UT = {
       Query: Query,
       Queries: Queries,
       Type: Type
+    },
+    comment: {
+      CommentType: CommentType
     }
   },
   action: {
     Action: Action,
     Offset: Offset,
     home: {
-      Pickup: Pickup
+      Pickup: Pickup,
+      Headline: Headline,
+      News: News
+    },
+    archive: {
+      Category: Category,
+      Detail: Detail,
+      Ranking: Ranking,
+      Videos: Videos
+    },
+    sidebar: {
+      Widget: Widget
+    },
+    search: {
+      Search: Search
     }
   }
 

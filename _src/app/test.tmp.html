@@ -13,7 +13,41 @@
 
 <h1 id="c1"></h1>
 
+<p id="f1"></p>
+<p id="f2"></p>
+<p id="f3"></p>
+
 <script src="assets/js/bundle/main.bundle.js"></script>
 <script src="assets/js/test.bundle.js"></script>
+<script>
+  ( function ( window ) {
+
+    'use strict';
+
+    var
+      document = window.document;
+
+    var UT = self.UT;
+    var React = window.React;
+    var ReactDOM = window.ReactDOM;
+
+    UT.Test.f1( document.getElementById( 'f1' ) );
+
+    var form2 = document.createElement( 'form' );
+    var result = UT.Test.f2( form2, '<input type="text" value="AAA">' );
+
+    console.log( 'result ', result );
+
+    var div3 = React.createElement( 'div', {
+      id: 'test',
+      class: 'bound',
+      'data-query': 'not-bound'
+    }, '三日った' );
+
+//    document.getElementById( 'f3' ).appendChild( div3 );
+    ReactDOM.render( div3, document.getElementById( 'f3' ) );
+
+  }( window ) );
+</script>
 </body>
 </html>

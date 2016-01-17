@@ -120,7 +120,7 @@ export class Api {
    * @param {string} [action=add] path option を指定します
    * @returns {Types} bookmark API をTypes instanceで返します
    */
-  static bookmark( action:string = 'add' ):Types {
+  static bookmark( action:string = '' ):Types {
 
     switch ( action ) {
       case 'delete':
@@ -129,9 +129,12 @@ export class Api {
       case 'add':
         return ApiDae.api( 'bookmark:add' );
 
+      case '':
+        return ApiDae.api( 'bookmark' );
+
       default:
         console.warn( `bookmark illegal action: ${action}, instead use default` );
-        return ApiDae.api( 'bookmark:add' );
+        return ApiDae.api( 'bookmark' );
     }
 
   }

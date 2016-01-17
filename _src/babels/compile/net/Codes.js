@@ -75,6 +75,7 @@ var _symbol = (0, _symbol3.default)();
 var Codes = exports.Codes = function () {
   /**
    * ステータスコード・メッセージを日本語と英語で保存しています
+   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -83,11 +84,12 @@ var Codes = exports.Codes = function () {
 
     if (_symbol !== target) {
 
-      throw new Error('Api is singleton pattern. not use new Api().');
+      throw new Error('Codes is not new Codes().');
     }
   }
 
   /**
+   * @method status
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
@@ -101,6 +103,7 @@ var Codes = exports.Codes = function () {
 
     /**
      * status codeの意味を調べます
+     * @method message
      * @param {Number} code サーバーからのresponse status code
      * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
      */
@@ -116,6 +119,7 @@ var Codes = exports.Codes = function () {
     }
 
     /**
+     * @method jp
      * @param {Number} code status code
      * @return {*} 日本語メッセージを返します
      */
@@ -128,6 +132,7 @@ var Codes = exports.Codes = function () {
     }
 
     /**
+     * @method en
      * @param {Number} code status code
      * @return {*} 英語メッセージを返します
      */

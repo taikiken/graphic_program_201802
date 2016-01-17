@@ -35,8 +35,9 @@ export class Ajax {
    * @param {string} method POST|GET...
    * @param {Function} resolve success callback
    * @param {Function} reject fail callback
+   * @param {FormData} [formData=null] FormData Object
    */
-  start( url, method, resolve, reject ):void {
+  start( url, method, resolve, reject, formData:FormData = null ):void {
 
     let fetch = self.fetch;
     let _this = this;
@@ -57,11 +58,20 @@ export class Ajax {
 
     console.log( `ajax.start: ${url}, ${method}` );
 
+    let option = {
+      method: method,
+      cache: 'no-cache'
+    };
+
+    if ( formData !== null && typeof formData !== 'undefined' ) {
+
+      option.body = formData;
+
+    }
+
     // https://github.com/github/fetch
     // request を開始します
-    fetch( url, {
-      method: method
-    } )
+    fetch( url, option )
     .then( function( response ) {
       // check status (Server)
       let status = response.status;

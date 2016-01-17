@@ -1,0 +1,70 @@
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/01/17 - 17:16
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+'use strict';
+
+import {Ranking} from '../archive/Ranking';
+import {Videos} from '../archive/Videos';
+
+let _symbol = Symbol();
+
+/**
+ * <h3>Sidebar, ranking / video 一覧表示</h3>
+ * インスタンスを作成します
+ * 全て static
+ */
+export class Widget {
+  /**
+   * static class です、instance を作成できません
+   * @constructor
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
+  constructor( target ) {
+
+    if ( _symbol !== target ) {
+
+      throw new Error( `Widget is not new Widget().` );
+
+    }
+
+  }
+
+  /**
+   * Ranking instance を作成し length を 5にセットします
+   * @param {string} [slug=all] category slug です
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @returns {Ranking} Ranking instance を返します
+   */
+  static ranking( slug:string = 'all', resolve:Function = null, reject:Function = null ):Ranking {
+
+    let rankings = new Ranking( slug, resolve, reject );
+    rankings.length = 5;
+    return rankings;
+
+  }
+
+  /**
+   * Videos instance を作成し length を 5にセットします
+   * @param {string} [slug=all] category slug です
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @returns {Videos} Videos instance を返します
+   */
+  static video( slug:string = 'all', resolve:Function = null, reject:Function = null ):Videos {
+
+    let videos = new Videos( slug, resolve, reject );
+    videos.length = 5;
+    return videos;
+
+  }
+}

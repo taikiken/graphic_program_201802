@@ -52,7 +52,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Ajax 処理を行います
  * Interface として使用します
  * 各 Class で extends して下さい
- * <strong>Next 読込</strong>がある時に使用します
+ * **Next 読込** がある時に使用します
  */
 
 var Offset = exports.Offset = function (_Action) {
@@ -60,6 +60,7 @@ var Offset = exports.Offset = function (_Action) {
 
   /**
    * Ajax 処理, query
+   * @constructor
    * @param {Type} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -82,33 +83,33 @@ var Offset = exports.Offset = function (_Action) {
 
     return _this;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
-   * url を作成します
-   * @returns {string} 作成した url を返します
+   * @method total
+   * @returns {number|*} total件数を返します
    */
 
   (0, _createClass3.default)(Offset, [{
-    key: 'url',
-    value: function url() {
-      return this._types.url + '?offset=' + this._offset + '&length=' + this._length;
-    }
+    key: 'update',
 
+    // ---------------------------------------------------
+    //  METHOD
+    // ---------------------------------------------------
     /**
      * offset 値を加算します
      * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
      */
-
-  }, {
-    key: 'next',
-    value: function next() {
+    value: function update() {
       var count = arguments.length <= 0 || arguments[0] === undefined ? this._length : arguments[0];
 
-      this._offset += count;
+      this.offset += count;
     }
 
     /**
      * 次があるかを調べます
+     * @method hasNext
      * @return {boolean} 次があるかの真偽値を返します
      */
 
@@ -116,10 +117,27 @@ var Offset = exports.Offset = function (_Action) {
     key: 'hasNext',
     value: function hasNext() {
 
-      return this._offset < this.total;
+      // _total === -1 の時は常に true
+      // total が offset（次の読み込み開始位置）より小さい時に true
+      return this._total < 0 ? true : this.offset < this.total;
+    }
+
+    /**
+     * 次の読込を開始します
+     */
+
+  }, {
+    key: 'next',
+    value: function next() {
+
+      // next data があるかないかを調べます
+      if (this.hasNext()) {
+
+        this.start();
+      }
     }
     /**
-     * Ajax success callback, next()を実行し offset 値をカウントアップし callback method があれば実行します
+     * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します
      * @param {Result} result Ajax成功結果
      */
 
@@ -127,16 +145,10 @@ var Offset = exports.Offset = function (_Action) {
     key: 'success',
     value: function success(result) {
 
-      this.next();
+      this.update();
       // success
       (0, _get3.default)((0, _getPrototypeOf2.default)(Offset.prototype), 'success', this).call(this, result);
     }
-
-    /**
-     *
-     * @return {number|*} total件数を返します
-     */
-
   }, {
     key: 'total',
     get: function get() {
@@ -150,6 +162,56 @@ var Offset = exports.Offset = function (_Action) {
     ,
     set: function set(total) {
       this._total = total;
+    }
+    /**
+     * @method total
+     * @returns {number|*} lengths 取得件数を返します
+     */
+
+  }, {
+    key: 'length',
+    get: function get() {
+      return this._length;
+    }
+
+    /**
+     * length件数を設定します
+     * @param {Number} length length 取得件数
+     */
+    ,
+    set: function set(length) {
+      this._length = length;
+    }
+    /**
+     * @method total
+     * @returns {number|*} offset 取得開始位置を返します
+     */
+
+  }, {
+    key: 'offset',
+    get: function get() {
+      return this._offset;
+    }
+
+    /**
+     * length件数を設定します
+     * @param {Number} offset offset 取得開始位置
+     */
+    ,
+    set: function set(offset) {
+      this._offset = offset;
+    }
+
+    /**
+     * url を作成します
+     * @method url
+     * @returns {string} 作成した url を返します
+     */
+
+  }, {
+    key: 'url',
+    get: function get() {
+      return this._url + '?offset=' + this.offset + '&length=' + this.length;
     }
   }]);
   return Offset;

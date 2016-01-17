@@ -83,4 +83,40 @@
   action = new Pickup();
   action.start();
 
+  // -------------------------------------------------------------
+
+
+  UT.Test = {
+    f1: function( element ) {
+
+      var input = '<input type="text" value="XXX">';
+
+      var Form1 = React.createClass( {
+        render: function() {
+
+          return <form>{input}</form>;
+
+        }
+      } );
+
+      ReactDOM.render( <Form1/>, element );
+
+    },
+    f2: function( form, input ) {
+
+      var Form2 = React.createClass( {
+        render: function() {
+
+          return <div>{input}</div>;
+
+        }
+      } );
+
+      ReactDOM.render( <Form2/>, form );
+
+      return form;
+
+    }
+  };
+
 }( window ) );

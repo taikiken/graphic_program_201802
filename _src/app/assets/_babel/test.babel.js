@@ -3,7 +3,7 @@
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-13 21:34:39
+ * @date 2016-01-17 19:26:24
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -79,4 +79,47 @@
 
   action = new Pickup();
   action.start();
+
+  // -------------------------------------------------------------
+
+  UT.Test = {
+    f1: function f1(element) {
+
+      var input = '<input type="text" value="XXX">';
+
+      var Form1 = React.createClass({
+        displayName: 'Form1',
+
+        render: function render() {
+
+          return React.createElement(
+            'form',
+            null,
+            input
+          );
+        }
+      });
+
+      ReactDOM.render(React.createElement(Form1, null), element);
+    },
+    f2: function f2(form, input) {
+
+      var Form2 = React.createClass({
+        displayName: 'Form2',
+
+        render: function render() {
+
+          return React.createElement(
+            'div',
+            null,
+            input
+          );
+        }
+      });
+
+      ReactDOM.render(React.createElement(Form2, null), form);
+
+      return form;
+    }
+  };
 })(window);

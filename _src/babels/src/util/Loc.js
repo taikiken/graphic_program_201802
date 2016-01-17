@@ -109,7 +109,7 @@ export class Loc {
   /**
    * pathnameを/で分解します
    * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
-   * @returns {Array}
+   * @returns {Array} pathnameを/で分解し配列にし返します
    */
   static resolve( pathname:string = Loc.path ):Array {
 
@@ -120,7 +120,7 @@ export class Loc {
   /**
    * location.search を key: value へ分解します
    * @param {string} search location.search型文字列
-   * @returns {*}
+   * @returns {*} search を key: value へ分解し Object で返します
    */
   static parse( search:string = Loc.search ):Object {
 

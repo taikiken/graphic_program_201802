@@ -56,6 +56,7 @@ var _api = {
   'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
   // 詳細
   'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
+  'bookmark': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'POST|DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
   // ブックマーク 登録
   'bookmark:add': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
   // ブックマーク 削除
@@ -102,6 +103,7 @@ var _api = {
 var ApiDae = exports.ApiDae = function () {
   /**
    * static class です, instance を作成しません
+   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -116,6 +118,7 @@ var ApiDae = exports.ApiDae = function () {
 
   /**
    * api list を取得します
+   * @method all
    * @returns {{login: Types, home: Types, self: Types, category: Types, search: Types, detail: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:send: Types, comment:reply: Types, comment:send:edit: Types, comment:reply:edit: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:notice: Types, users:notice:read: Types, users: Types, users:bookmark: Types, users:activity: Types}}
    * 全ての API list を返します
    */
@@ -129,6 +132,7 @@ var ApiDae = exports.ApiDae = function () {
 
     /**
      * 指定キー情報を取得します
+     * @method api
      * @param {string} key api key を指定します
      * @returns {Types} key に基づいた Types instance を返します
      */

@@ -40,30 +40,7 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ((function(modules) {
-	// Check all modules for deduplicated modules
-	for(var i in modules) {
-		if(Object.prototype.hasOwnProperty.call(modules, i)) {
-			switch(typeof modules[i]) {
-			case "function": break;
-			case "object":
-				// Module can be created from a template
-				modules[i] = (function(_m) {
-					var args = _m.slice(1), fn = modules[_m[0]];
-					return function (a,b,c) {
-						fn.apply(this, [a,b,c].concat(args));
-					};
-				}(modules[i]));
-				break;
-			default:
-				// Module is a copy of another module
-				modules[i] = modules[modules[i]];
-				break;
-			}
-		}
-	}
-	return modules;
-}([
+/******/ ([
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -89,11 +66,29 @@
 
 	var _Type = __webpack_require__(57);
 
+	var _CommentType = __webpack_require__(64);
+
 	var _Action = __webpack_require__(79);
 
 	var _Offset = __webpack_require__(80);
 
 	var _Pickup = __webpack_require__(85);
+
+	var _Headline = __webpack_require__(86);
+
+	var _News = __webpack_require__(87);
+
+	var _Category = __webpack_require__(88);
+
+	var _Detail = __webpack_require__(89);
+
+	var _Ranking = __webpack_require__(90);
+
+	var _Videos = __webpack_require__(91);
+
+	var _Widget = __webpack_require__(92);
+
+	var _Search = __webpack_require__(93);
 
 	/**
 	 * global object
@@ -102,7 +97,30 @@
 	 *    var ut = self.UT
 	 */
 
-	// net
+	// action/sidebar
+
+	// action/archive
+
+	// net/comment
+
+	// net/types
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-01-17 18:50:31
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// util
 	var UT = {
 	  version: '1.0.0',
 	  util: {
@@ -119,40 +137,42 @@
 	      Query: _Query.Query,
 	      Queries: _Queries.Queries,
 	      Type: _Type.Type
+	    },
+	    comment: {
+	      CommentType: _CommentType.CommentType
 	    }
 	  },
 	  action: {
 	    Action: _Action.Action,
 	    Offset: _Offset.Offset,
 	    home: {
-	      Pickup: _Pickup.Pickup
+	      Pickup: _Pickup.Pickup,
+	      Headline: _Headline.Headline,
+	      News: _News.News
+	    },
+	    archive: {
+	      Category: _Category.Category,
+	      Detail: _Detail.Detail,
+	      Ranking: _Ranking.Ranking,
+	      Videos: _Videos.Videos
+	    },
+	    sidebar: {
+	      Widget: _Widget.Widget
+	    },
+	    search: {
+	      Search: _Search.Search
 	    }
 	  }
 
 	};
 
+	// action/search
+
 	// action/home
 
 	// action
 
-	// net/types
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-13 23:08:05
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
-
-	// util
+	// net
 
 	self.UT = UT;
 
@@ -201,7 +221,7 @@
 
 	var Loc = exports.Loc = function () {
 	  /**
-	   * search を繰り返し調べたい時に instance を作成します
+	   * search を調べたい時に instance を作成します
 	   */
 
 	  function Loc() {
@@ -265,7 +285,7 @@
 	    /**
 	     * pathnameを/で分解します
 	     * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
-	     * @returns {Array}
+	     * @returns {Array} pathnameを/で分解し配列にし返します
 	     */
 
 	  }, {
@@ -279,7 +299,7 @@
 	    /**
 	     * location.search を key: value へ分解します
 	     * @param {string} search location.search型文字列
-	     * @returns {*}
+	     * @returns {*} search を key: value へ分解し Object で返します
 	     */
 
 	  }, {
@@ -287,6 +307,7 @@
 	    value: function parse() {
 	      var search = arguments.length <= 0 || arguments[0] === undefined ? Loc.search : arguments[0];
 
+	      // 引数が文字でない時は処理しない
 	      if (typeof search !== 'string' || search.length === 0) {
 
 	        return null;
@@ -1038,8 +1059,8 @@
 
 	var Ajax = exports.Ajax = function () {
 	  /**
-	   * instanceを作成します
-	   *
+	   * Ajax instanceを作成し、実行可能プロパティを可能に設定します
+	   * @constructor
 	   */
 
 	  function Ajax() {
@@ -1055,11 +1076,13 @@
 	   * @param {string} method POST|GET...
 	   * @param {Function} resolve success callback
 	   * @param {Function} reject fail callback
+	   * @param {FormData} [formData=null] FormData Object
 	   */
 
 	  (0, _createClass3.default)(Ajax, [{
 	    key: 'start',
 	    value: function start(url, method, resolve, reject) {
+	      var formData = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
 
 	      var fetch = self.fetch;
 	      var _this = this;
@@ -1079,11 +1102,19 @@
 
 	      console.log('ajax.start: ' + url + ', ' + method);
 
+	      var option = {
+	        method: method,
+	        cache: 'no-cache'
+	      };
+
+	      if (formData !== null && typeof formData !== 'undefined') {
+
+	        option.body = formData;
+	      }
+
 	      // https://github.com/github/fetch
 	      // request を開始します
-	      fetch(url, {
-	        method: method
-	      }).then(function (response) {
+	      fetch(url, option).then(function (response) {
 	        // check status (Server)
 	        var status = response.status;
 
@@ -1146,8 +1177,8 @@
 	    }
 
 	    /**
-	     *
-	     * @return {boolean} 実行可否 flag を返します
+	     * @method can
+	     * @returns {boolean} 実行可否 flag を返します
 	     */
 
 	  }, {
@@ -1241,6 +1272,7 @@
 	var Codes = exports.Codes = function () {
 	  /**
 	   * ステータスコード・メッセージを日本語と英語で保存しています
+	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -1249,11 +1281,12 @@
 
 	    if (_symbol !== target) {
 
-	      throw new Error('Api is singleton pattern. not use new Api().');
+	      throw new Error('Codes is not new Codes().');
 	    }
 	  }
 
 	  /**
+	   * @method status
 	   * @param {int} statusCode サーバーからのレスポンスコード int型
 	   * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
 	   */
@@ -1267,6 +1300,7 @@
 
 	    /**
 	     * status codeの意味を調べます
+	     * @method message
 	     * @param {Number} code サーバーからのresponse status code
 	     * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
 	     */
@@ -1282,6 +1316,7 @@
 	    }
 
 	    /**
+	     * @method jp
 	     * @param {Number} code status code
 	     * @return {*} 日本語メッセージを返します
 	     */
@@ -1294,6 +1329,7 @@
 	    }
 
 	    /**
+	     * @method en
 	     * @param {Number} code status code
 	     * @return {*} 英語メッセージを返します
 	     */
@@ -1667,7 +1703,8 @@
 
 	var Result = exports.Result = function () {
 	  /**
-	   *  Ajax 成功時にdataを保存します
+	   * Ajax 成功時にdataを保存します
+	   * @constructor
 	   * @param {{status: *, responce: *}} json json パース後データ
 	   */
 
@@ -1679,6 +1716,7 @@
 
 	  /**
 	   * parsed JSON プロパティ
+	   * @method data
 	   * @returns {*} パース済みJSON(Object)を返します
 	   */
 
@@ -1690,8 +1728,9 @@
 	    }
 
 	    /**
-	     * 生 responce
-	     * @returns {*} 生 responce(JSON) を返します
+	     * 取得 JSON responce section
+	     * @method responce
+	     * @returns {*} 取得 JSON responce section を返します
 	     */
 
 	  }, {
@@ -1702,7 +1741,8 @@
 	    }
 
 	    /**
-	     * responce.status
+	     * 取得 JSON status section
+	     * @method status
 	     * @returns {{code: number, user_massage: string,developer_message: string}} responce.status を返します
 	     */
 
@@ -1768,6 +1808,7 @@
 	var Api = exports.Api = function () {
 	  /**
 	   * static class です、instance を作成できません
+	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -1776,12 +1817,13 @@
 
 	    if (_symbol !== target) {
 
-	      throw new Error('Api is singleton pattern. not use new Api().');
+	      throw new Error('Api is not new Api().');
 	    }
 	  }
 
 	  /**
 	   * login API を取得します
+	   * @method login
 	   * @returns {Types} login API をTypes instanceで返します
 	   */
 
@@ -1794,6 +1836,7 @@
 
 	    /**
 	     * home API を login している / していない に合わせ取得します
+	     * @method home
 	     * @returns {Types} home API(home / self)をTypes instanceで返します
 	     */
 
@@ -1806,6 +1849,7 @@
 
 	    /**
 	     * ログインなしユーザーのhome API
+	     * @method homeAPi
 	     * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
 	     */
 
@@ -1818,6 +1862,7 @@
 
 	    /**
 	     * ログイン済みユーザーのhome API
+	     * @method selfAPi
 	     * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
 	     */
 
@@ -1830,6 +1875,7 @@
 
 	    /**
 	     * category API を取得します
+	     * @method category
 	     * @returns {Types} category API を Types instance で取得します
 	     */
 
@@ -1841,7 +1887,8 @@
 	    }
 
 	    /**
-	     * category API を取得します
+	     * search API を取得します
+	     * @method search
 	     * @returns {Types} category API をTypes instanceで返します
 	     */
 
@@ -1854,6 +1901,7 @@
 
 	    /**
 	     * category API を取得します
+	     * @method detail
 	     * @returns {Types} category API をTypes instanceで返します
 	     */
 
@@ -1866,6 +1914,7 @@
 
 	    /**
 	     * bookmark API を取得します
+	     * @method bookmark
 	     * @param {string} [action=add] path option を指定します
 	     * @returns {Types} bookmark API をTypes instanceで返します
 	     */
@@ -1873,7 +1922,7 @@
 	  }, {
 	    key: 'bookmark',
 	    value: function bookmark() {
-	      var action = arguments.length <= 0 || arguments[0] === undefined ? 'add' : arguments[0];
+	      var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
 	      switch (action) {
 	        case 'delete':
@@ -1882,14 +1931,18 @@
 	        case 'add':
 	          return _ApiDae.ApiDae.api('bookmark:add');
 
+	        case '':
+	          return _ApiDae.ApiDae.api('bookmark');
+
 	        default:
 	          console.warn('bookmark illegal action: ' + action + ', instead use default');
-	          return _ApiDae.ApiDae.api('bookmark:add');
+	          return _ApiDae.ApiDae.api('bookmark');
 	      }
 	    }
 
 	    /**
 	     * comment API を取得します
+	     * @method comment
 	     * @param {string} [action=''] path option を指定します
 	     * @returns {Types} comment API をTypes instanceで返します
 	     */
@@ -1941,6 +1994,7 @@
 
 	    /**
 	     * users API を取得します
+	     * @method users
 	     * @param {string} [action=''] path option を指定します
 	     * @returns {Types} category users をTypes instanceで返します
 	     */
@@ -2020,7 +2074,7 @@
 
 	var Types = exports.Types = function () {
 	  /**
-	   *
+	   * @constructor
 	   * @param {Type} type Type instance
 	   * @param {Permalink} permalink Permalink instance
 	   * @param {Queries} queries Queries instance
@@ -2038,56 +2092,22 @@
 	  }
 
 	  /**
-	   *
+	   * @method type
 	   * @returns {Type} Type instance を返します
 	   */
 
 	  (0, _createClass3.default)(Types, [{
 	    key: 'type',
-	    value: function type() {
+	    get: function get() {
 
 	      return this._type;
 	    }
 
 	    /**
+	     * @method url
 	     * @return {string} url を返します
 	     */
 
-	  }, {
-	    key: 'permalink',
-
-	    /**
-	     *
-	     * @returns {Permalink} Permalink instance を返します
-	     */
-	    value: function permalink() {
-
-	      return this._permalink;
-	    }
-
-	    /**
-	     *
-	     * @returns {Queries} Queries instance を返します
-	     */
-
-	  }, {
-	    key: 'queries',
-	    value: function queries() {
-
-	      return this._queries;
-	    }
-
-	    /**
-	     *
-	     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
-	     */
-
-	  }, {
-	    key: 'auth',
-	    value: function auth() {
-
-	      return this._auth;
-	    }
 	  }, {
 	    key: 'url',
 	    get: function get() {
@@ -2096,6 +2116,7 @@
 	    }
 
 	    /**
+	     * @method method
 	     * @return {string} method を返します
 	     */
 
@@ -2104,6 +2125,42 @@
 	    get: function get() {
 
 	      return this._type.method;
+	    }
+
+	    /**
+	     * @method permalink
+	     * @returns {Permalink} Permalink instance を返します
+	     */
+
+	  }, {
+	    key: 'permalink',
+	    get: function get() {
+
+	      return this._permalink;
+	    }
+
+	    /**
+	     * @method queries
+	     * @returns {Queries} Queries instance を返します
+	     */
+
+	  }, {
+	    key: 'queries',
+	    get: function get() {
+
+	      return this._queries;
+	    }
+
+	    /**
+	     * @method auth
+	     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+	     */
+
+	  }, {
+	    key: 'auth',
+	    get: function get() {
+
+	      return this._auth;
 	    }
 	  }]);
 	  return Types;
@@ -2149,6 +2206,7 @@
 
 	var Type = exports.Type = function () {
 	  /**
+	   * @constructor
 	   * @param {string} url API request先
 	   * @param {string} [method=GET] POST | GET | DELETE...
 	   */
@@ -2162,6 +2220,7 @@
 	  }
 
 	  /**
+	   * @method url
 	   * @returns {string} API request先を返します
 	   */
 
@@ -2183,6 +2242,7 @@
 	    }
 
 	    /**
+	     * @method method
 	     * @returns {string} POST | GET を返します
 	     */
 
@@ -2211,7 +2271,7 @@
 	    }
 
 	    /**
-	     * @static
+	     * @method validate
 	     * @param {string} method method type
 	     * @return {boolean} method type を検証し真偽値を返します
 	     */
@@ -2272,6 +2332,7 @@
 	   *      // searchのようにどんなワードでも良い場合は "*" を指定する
 	   *      new Permalink( [ '*' ] );
 	   *
+	   * @constructor
 	   * @param {Array} [paths] 追加 path を配列で設定
 	   * @param {boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション
 	   */
@@ -2286,6 +2347,8 @@
 	  }
 
 	  /**
+	   * option path 数
+	   * @method length
 	   * @returns {Number} paths数を返します
 	   */
 
@@ -2297,6 +2360,7 @@
 	    }
 
 	    /**
+	     * @method has
 	     * @param {string} path 調べたいオプションパス
 	     * @returns {boolean} 指定パスが存在するかの真偽値を返します
 	     */
@@ -2317,12 +2381,14 @@
 	    }
 
 	    /**
+	     * オプションパスが必須かのプロパティ
+	     * @method require
 	     * @returns {boolean} オプションパスが必須かどうかを返します true: 必須
 	     */
 
 	  }, {
 	    key: 'require',
-	    value: function require() {
+	    get: function get() {
 
 	      return this._need;
 	    }
@@ -2498,6 +2564,7 @@
 	   *
 	   * key, value型, default値, 必須情報...
 	   *
+	   * @constructor
 	   * @param {string} key query key
 	   * @param {string} type query value type
 	   * @param {string|number|null} [defaultValue=null] default value, あれば...
@@ -2518,6 +2585,7 @@
 	  }
 
 	  /**
+	   * @method has
 	   * @param {string} key query key
 	   * @returns {boolean} query key が存在するかを返します
 	   */
@@ -2530,6 +2598,7 @@
 	    }
 
 	    /**
+	     * @method search
 	     * @param {string} key query key
 	     * @returns {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
 	     */
@@ -2602,6 +2671,7 @@
 	var User = exports.User = function () {
 	  /**
 	   * static class です, instance を作成しません
+	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -2616,7 +2686,8 @@
 
 	  /**
 	   * sign in / out 状態を表します
-	   * @return {boolean} sign in / out 状態を返します
+	   * @method sign
+	   * @returns {boolean} sign in / out 状態を返します
 	   */
 
 	  (0, _createClass3.default)(User, null, [{
@@ -2638,7 +2709,8 @@
 
 	    /**
 	     * User id 情報
-	     * @return {number} User id を返します
+	     * @method id
+	     * @returns {number} User id を返します
 	     */
 
 	  }, {
@@ -2723,6 +2795,7 @@
 	  'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
 	  // 詳細
 	  'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
+	  'bookmark': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'POST|DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	  // ブックマーク 登録
 	  'bookmark:add': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	  // ブックマーク 削除
@@ -2769,6 +2842,7 @@
 	var ApiDae = exports.ApiDae = function () {
 	  /**
 	   * static class です, instance を作成しません
+	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -2783,6 +2857,7 @@
 
 	  /**
 	   * api list を取得します
+	   * @method all
 	   * @returns {{login: Types, home: Types, self: Types, category: Types, search: Types, detail: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:send: Types, comment:reply: Types, comment:send:edit: Types, comment:reply:edit: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:notice: Types, users:notice:read: Types, users: Types, users:bookmark: Types, users:activity: Types}}
 	   * 全ての API list を返します
 	   */
@@ -2796,6 +2871,7 @@
 
 	    /**
 	     * 指定キー情報を取得します
+	     * @method api
 	     * @param {string} key api key を指定します
 	     * @returns {Types} key に基づいた Types instance を返します
 	     */
@@ -2812,7 +2888,134 @@
 
 /***/ },
 /* 63 */
-59,
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/10 - 16:46
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Queries = undefined;
+
+	var _getIterator2 = __webpack_require__(2);
+
+	var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Query = __webpack_require__(60);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Query{key: value} を配列で管理します
+	 */
+
+	var Queries = exports.Queries = function () {
+	  /**
+	   * Query 情報を保持します
+	   * @constructor
+	   * @param {Array<Query>} [queries=[]] Query{key: value} 配列
+	   */
+
+	  function Queries() {
+	    var queries = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    (0, _classCallCheck3.default)(this, Queries);
+
+	    this._queries = queries;
+	  }
+
+	  /**
+	   * queries個数であるかないかの判断は可能
+	   * @method length
+	   * @returns {Number} queries個数を返します
+	   */
+
+	  (0, _createClass3.default)(Queries, [{
+	    key: 'length',
+	    value: function length() {
+
+	      return this._queries.length;
+	    }
+
+	    /**
+	     * @method all
+	     * @returns {Array.<Query>} 全てのqueriesを返します
+	     */
+
+	  }, {
+	    key: 'all',
+	    value: function all() {
+
+	      return this._queries;
+	    }
+
+	    /**
+	     * key から query を探します
+	     * @method search
+	     * @param {string} key query key name, ?start=0 の start
+	     * @returns {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
+	     */
+
+	  }, {
+	    key: 'search',
+	    value: function search(key) {
+
+	      var queries = this._queries;
+	      var result;
+
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = (0, _getIterator3.default)(queries), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var query = _step.value;
+
+	          result = query.search(key);
+	          if (result !== null) {
+	            break;
+	          }
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+
+	      return result;
+	    }
+	  }]);
+	  return Queries;
+	}();
+
+/***/ },
 /* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2868,7 +3071,7 @@
 	  (0, _inherits3.default)(CommentType, _Query);
 
 	  /**
-	   *
+	   * @constructor
 	   * @param {string} key dog|cat|food のように | 区切りでオプションをつなげます
 	   * @param {boolean} [require=false] 必須真偽値
 	   */
@@ -2889,6 +3092,7 @@
 
 	  /**
 	   * Query override して使います
+	   * @method has
 	   * @param {string} key query key
 	   * @returns {boolean} query key が存在するかを返します
 	   */
@@ -3149,30 +3353,32 @@
 	    this._resolve = resolve;
 	    this._reject = reject;
 	    this._ajax = new _Ajax.Ajax();
+	    this._url = types.url;
+	    this._method = types.method;
 	  }
-
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
 	  /**
-	   * Ajax request を開始します
+	   * url を作成します
+	   * @returns {string} 作成した url を返します
 	   */
 
 	  (0, _createClass3.default)(Action, [{
 	    key: 'start',
-	    value: function start() {
 
-	      this._ajax.start(this.url(), this._types.method, this.success.bind(this), this.fail.bind(this));
-	    }
-
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
 	    /**
-	     * url を作成します
-	     * @returns {string} 作成した url を返します
+	     * Ajax request を開始します
+	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
 	     */
+	    value: function start() {
+	      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
-	  }, {
-	    key: 'url',
-	    value: function url() {
-	      return this._types.url;
+	      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this));
 	    }
-
 	    /**
 	     * Ajax success callback
 	     * @param {Result} result Ajax成功結果
@@ -3207,6 +3413,21 @@
 
 	        reject(error);
 	      }
+	    }
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this._url;
+	    }
+
+	    /**
+	     * @returns {string|*} method, GET|POST|DELETE|PUT... を返します
+	     */
+
+	  }, {
+	    key: 'method',
+	    get: function get() {
+	      return this._method;
 	    }
 	  }]);
 	  return Action;
@@ -3270,7 +3491,7 @@
 	 * Ajax 処理を行います
 	 * Interface として使用します
 	 * 各 Class で extends して下さい
-	 * <strong>Next 読込</strong>がある時に使用します
+	 * **Next 読込** がある時に使用します
 	 */
 
 	var Offset = exports.Offset = function (_Action) {
@@ -3278,6 +3499,7 @@
 
 	  /**
 	   * Ajax 処理, query
+	   * @constructor
 	   * @param {Type} types Types instance, Ajax request に使用します
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -3300,33 +3522,33 @@
 
 	    return _this;
 	  }
-
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
 	  /**
-	   * url を作成します
-	   * @returns {string} 作成した url を返します
+	   * @method total
+	   * @returns {number|*} total件数を返します
 	   */
 
 	  (0, _createClass3.default)(Offset, [{
-	    key: 'url',
-	    value: function url() {
-	      return this._types.url + '?offset=' + this._offset + '&length=' + this._length;
-	    }
+	    key: 'update',
 
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
 	    /**
 	     * offset 値を加算します
 	     * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
 	     */
-
-	  }, {
-	    key: 'next',
-	    value: function next() {
+	    value: function update() {
 	      var count = arguments.length <= 0 || arguments[0] === undefined ? this._length : arguments[0];
 
-	      this._offset += count;
+	      this.offset += count;
 	    }
 
 	    /**
 	     * 次があるかを調べます
+	     * @method hasNext
 	     * @return {boolean} 次があるかの真偽値を返します
 	     */
 
@@ -3334,10 +3556,27 @@
 	    key: 'hasNext',
 	    value: function hasNext() {
 
-	      return this._offset < this.total;
+	      // _total === -1 の時は常に true
+	      // total が offset（次の読み込み開始位置）より小さい時に true
+	      return this._total < 0 ? true : this.offset < this.total;
+	    }
+
+	    /**
+	     * 次の読込を開始します
+	     */
+
+	  }, {
+	    key: 'next',
+	    value: function next() {
+
+	      // next data があるかないかを調べます
+	      if (this.hasNext()) {
+
+	        this.start();
+	      }
 	    }
 	    /**
-	     * Ajax success callback, next()を実行し offset 値をカウントアップし callback method があれば実行します
+	     * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します
 	     * @param {Result} result Ajax成功結果
 	     */
 
@@ -3345,16 +3584,10 @@
 	    key: 'success',
 	    value: function success(result) {
 
-	      this.next();
+	      this.update();
 	      // success
 	      (0, _get3.default)((0, _getPrototypeOf2.default)(Offset.prototype), 'success', this).call(this, result);
 	    }
-
-	    /**
-	     *
-	     * @return {number|*} total件数を返します
-	     */
-
 	  }, {
 	    key: 'total',
 	    get: function get() {
@@ -3368,6 +3601,56 @@
 	    ,
 	    set: function set(total) {
 	      this._total = total;
+	    }
+	    /**
+	     * @method total
+	     * @returns {number|*} lengths 取得件数を返します
+	     */
+
+	  }, {
+	    key: 'length',
+	    get: function get() {
+	      return this._length;
+	    }
+
+	    /**
+	     * length件数を設定します
+	     * @param {Number} length length 取得件数
+	     */
+	    ,
+	    set: function set(length) {
+	      this._length = length;
+	    }
+	    /**
+	     * @method total
+	     * @returns {number|*} offset 取得開始位置を返します
+	     */
+
+	  }, {
+	    key: 'offset',
+	    get: function get() {
+	      return this._offset;
+	    }
+
+	    /**
+	     * length件数を設定します
+	     * @param {Number} offset offset 取得開始位置
+	     */
+	    ,
+	    set: function set(offset) {
+	      this._offset = offset;
+	    }
+
+	    /**
+	     * url を作成します
+	     * @method url
+	     * @returns {string} 作成した url を返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this._url + '?offset=' + this.offset + '&length=' + this.length;
 	    }
 	  }]);
 	  return Offset;
@@ -3497,8 +3780,6 @@
 
 	var _Api = __webpack_require__(55);
 
-	var _Result = __webpack_require__(54);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
@@ -3511,54 +3792,798 @@
 	  /**
 	   * Home pickup(slider) データを取得します
 	   * types: Api.home() を使用します
+	   * @constructor
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
 	   */
 
 	  function Pickup() {
+	    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 	    (0, _classCallCheck3.default)(this, Pickup);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Pickup).call(this, _Api.Api.home()));
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Pickup).call(this, _Api.Api.home(), resolve, reject));
 	  }
-
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
 	  /**
 	   * Ajax API url を作成します
 	   * Api.home().url/pickup?offset=0&length=5
+	   * @method url
 	   * @returns {string} pickup API url を返します
 	   */
 
 	  (0, _createClass3.default)(Pickup, [{
 	    key: 'url',
-	    value: function url() {
+	    get: function get() {
 
-	      return this._types.url + '/pickup?offset=0&length=5';
-	    }
-
-	    /**
-	     * Ajax success callback
-	     * @param {Result} result Ajax成功結果
-	     */
-
-	  }, {
-	    key: 'success',
-	    value: function success(result) {
-
-	      // success
-	      console.log('result: ' + result);
-	    }
-
-	    /**
-	     * Ajax error callback
-	     * @param {Error} error Ajax失敗結果
-	     */
-
-	  }, {
-	    key: 'fail',
-	    value: function fail(error) {
-
-	      // error
-	      console.log('error: ' + error);
+	      return this._url + '/pickup?offset=0&length=5';
 	    }
 	  }]);
 	  return Pickup;
 	}(_Action2.Action);
 
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/13 - 14:49
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Headline = undefined;
+
+	var _getPrototypeOf = __webpack_require__(65);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(70);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Action2 = __webpack_require__(79);
+
+	var _Api = __webpack_require__(55);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Home headline（注目ニュース）
+	 */
+
+	var Headline = exports.Headline = function (_Action) {
+	  (0, _inherits3.default)(Headline, _Action);
+
+	  /**
+	   * Home headline（注目ニュース） データを取得します
+	   * types: Api.home() を使用します
+	   * @constructor
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function Headline() {
+	    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    (0, _classCallCheck3.default)(this, Headline);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Headline).call(this, _Api.Api.home(), resolve, reject));
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * Ajax API url を作成します
+	   * Api.home().url/headline?offset=0&length=6
+	   * @method url
+	   * @returns {string} headline API url を返します
+	   */
+
+	  (0, _createClass3.default)(Headline, [{
+	    key: 'url',
+	    get: function get() {
+
+	      return this._url + '/headline?offset=0&length=6';
+	    }
+	  }]);
+	  return Headline;
+	}(_Action2.Action);
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/13 - 14:49
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.News = undefined;
+
+	var _getPrototypeOf = __webpack_require__(65);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(70);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Offset2 = __webpack_require__(80);
+
+	var _Api = __webpack_require__(55);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * home 通常記事一覧
+	 */
+
+	var News = exports.News = function (_Offset) {
+	  (0, _inherits3.default)(News, _Offset);
+
+	  /**
+	   * home 通常記事一覧を取得します
+	   * length を必要なら変えて使用します
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   * @param {Number} [offset=0] query offset 値
+	   * @param {Number} [length=10] query length 値
+	   */
+
+	  function News() {
+	    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var offset = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+	    var length = arguments.length <= 3 || arguments[3] === undefined ? 10 : arguments[3];
+	    (0, _classCallCheck3.default)(this, News);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(News).call(this, _Api.Api.home(), resolve, reject, offset, length));
+	  }
+
+	  return News;
+	}(_Offset2.Offset);
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/17 - 15:38
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Category = undefined;
+
+	var _getPrototypeOf = __webpack_require__(65);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(70);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Offset2 = __webpack_require__(80);
+
+	var _Api = __webpack_require__(55);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 記事一覧, カテゴリー別, 全て...
+	 */
+
+	var Category = exports.Category = function (_Offset) {
+	  (0, _inherits3.default)(Category, _Offset);
+
+	  /**
+	   * 記事一覧を取得します
+	   * @param {string} [slug=all] category slug です
+	   * @param {string} [type=] ’’request type, ''|ranking|video です
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function Category() {
+	    var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
+	    var type = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+	    var resolve = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    var reject = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+	    (0, _classCallCheck3.default)(this, Category);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Category).call(this, _Api.Api.category(), resolve, reject));
+
+	    _this._slug = slug;
+	    _this._type = Category.normalization(type);
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {string|*} category slug を返します
+	   */
+
+	  (0, _createClass3.default)(Category, [{
+	    key: 'slug',
+	    get: function get() {
+
+	      return this._slug;
+	    }
+	    /**
+	     * @returns {string|*} request type('', ranking, video) を返します
+	     */
+
+	  }, {
+	    key: 'type',
+	    get: function get() {
+
+	      return this._type;
+	    }
+	    /**
+	     * Ajax API url を作成します
+	     * Api.category().url/all|slug[/ranking]?offset=0&length=5
+	     * @method url
+	     * @returns {string} API url を返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+
+	      if (this.type === '') {
+
+	        // type が empty, 新着順
+	        return this._url + '/' + this.slug + '??offset=' + this.offset + '&length=' + this.length;
+	      } else {
+
+	        // type が ranking | video
+	        return this._url + '/' + this.slug + '/' + this.type + '??offset=' + this.offset + '&length=' + this.length;
+	      }
+	    }
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * @param {string} type 調べる request type
+	     * @returns {*} type を正規化(''|ranking|video)し返します
+	     */
+
+	  }], [{
+	    key: 'normalization',
+	    value: function normalization(type) {
+
+	      if (type !== '' && type !== 'ranking' && type !== 'video') {
+
+	        type = '';
+	      }
+
+	      return type;
+	    }
+	  }]);
+	  return Category;
+	}(_Offset2.Offset);
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/13 - 14:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Detail = undefined;
+
+	var _getPrototypeOf = __webpack_require__(65);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(70);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Action2 = __webpack_require__(79);
+
+	var _Api = __webpack_require__(55);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 記事詳細を取得します
+	 */
+
+	var Detail = exports.Detail = function (_Action) {
+	  (0, _inherits3.default)(Detail, _Action);
+
+	  /**
+	   * 記事詳細を記事IDから取得します
+	   * @param {Number|String} id 記事ID
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function Detail(id) {
+	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    (0, _classCallCheck3.default)(this, Detail);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Detail).call(this, _Api.Api.detail(), resolve, reject));
+
+	    _this._id = parseInt(id, 10);
+
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * url を作成します
+	   * @method url
+	   * @returns {string} 作成した url を返します
+	   */
+
+	  (0, _createClass3.default)(Detail, [{
+	    key: 'url',
+	    get: function get() {
+	      return this._url + '/' + this.id;
+	    }
+
+	    /**
+	     * 記事ID
+	     * @return {Number|*} 記事IDを返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this._id;
+	    }
+	  }]);
+	  return Detail;
+	}(_Action2.Action);
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/13 - 14:50
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Ranking = undefined;
+
+	var _getPrototypeOf = __webpack_require__(65);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(70);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Category2 = __webpack_require__(88);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 記事ランキング
+	 */
+
+	var Ranking = exports.Ranking = function (_Category) {
+	  (0, _inherits3.default)(Ranking, _Category);
+
+	  /**
+	   * サイドバー記事ランキングを取得します
+	   * @param {string} [slug=all] category slug です
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function Ranking() {
+	    var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
+	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    (0, _classCallCheck3.default)(this, Ranking);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Ranking).call(this, slug, 'ranking', resolve, reject));
+	  }
+
+	  return Ranking;
+	}(_Category2.Category);
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/13 - 14:50
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Videos = undefined;
+
+	var _getPrototypeOf = __webpack_require__(65);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(70);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Category2 = __webpack_require__(88);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 動画一覧
+	 */
+
+	var Videos = exports.Videos = function (_Category) {
+	  (0, _inherits3.default)(Videos, _Category);
+
+	  /**
+	   * サイドバー動画一覧を取得します
+	   * @param {string} [slug=all] category slug です
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function Videos() {
+	    var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
+	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    (0, _classCallCheck3.default)(this, Videos);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Videos).call(this, slug, 'video', resolve, reject));
+	  }
+
+	  return Videos;
+	}(_Category2.Category);
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/17 - 17:16
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Widget = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(46);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _Ranking = __webpack_require__(90);
+
+	var _Videos = __webpack_require__(91);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	/**
+	 * <h3>Sidebar, ranking / video 一覧表示</h3>
+	 * インスタンスを作成します
+	 * 全て static
+	 */
+
+	var Widget = exports.Widget = function () {
+	  /**
+	   * static class です、instance を作成できません
+	   * @constructor
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Widget(target) {
+	    (0, _classCallCheck3.default)(this, Widget);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Widget is not new Widget().');
+	    }
+	  }
+
+	  /**
+	   * Ranking instance を作成し length を 5にセットします
+	   * @param {string} [slug=all] category slug です
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   * @returns {Ranking} Ranking instance を返します
+	   */
+
+	  (0, _createClass3.default)(Widget, null, [{
+	    key: 'ranking',
+	    value: function ranking() {
+	      var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
+	      var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	      var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+	      var rankings = new _Ranking.Ranking(slug, resolve, reject);
+	      rankings.length = 5;
+	      return rankings;
+	    }
+
+	    /**
+	     * Videos instance を作成し length を 5にセットします
+	     * @param {string} [slug=all] category slug です
+	     * @param {Function} [resolve=null] Ajax 成功時の callback
+	     * @param {Function} [reject=null] Ajax 失敗時の callback
+	     * @returns {Videos} Videos instance を返します
+	     */
+
+	  }, {
+	    key: 'video',
+	    value: function video() {
+	      var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
+	      var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	      var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+	      var videos = new _Videos.Videos(slug, resolve, reject);
+	      videos.length = 5;
+	      return videos;
+	    }
+	  }]);
+	  return Widget;
+	}();
+
+/***/ },
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/13 - 14:56
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Search = undefined;
+
+	var _getPrototypeOf = __webpack_require__(65);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(70);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Offset2 = __webpack_require__(80);
+
+	var _Api = __webpack_require__(55);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 記事検索を行います
+	 */
+
+	var Search = exports.Search = function (_Offset) {
+	  (0, _inherits3.default)(Search, _Offset);
+
+	  /**
+	   * 検索キーワードを元に記事を検索します
+	   * @param {string} word 検索キーワード
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   * @param {Number} [offset=0] query offset 値
+	   * @param {Number} [length=10] query length 値
+	   */
+
+	  function Search(word) {
+	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    var offset = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
+	    var length = arguments.length <= 4 || arguments[4] === undefined ? 10 : arguments[4];
+	    (0, _classCallCheck3.default)(this, Search);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Search).call(this, _Api.Api.search(), resolve, reject, offset, length));
+
+	    _this._word = word;
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * 検索キーワード
+	   * @returns {string|*} 検索キーワードを返します
+	   */
+
+	  (0, _createClass3.default)(Search, [{
+	    key: 'word',
+	    get: function get() {
+	      return this._word;
+	    }
+
+	    /**
+	     * 検索キーワードを設定します
+	     * @param {string} word 検索キーワード
+	     */
+	    ,
+	    set: function set(word) {
+	      this._word = word;
+	    }
+	    /**
+	     * url を作成します
+	     * @method url
+	     * @returns {string} 作成した url を返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this._url + '/' + this.word + '?offset=' + this.offset + '&length=' + this.length;
+	    }
+	  }]);
+	  return Search;
+	}(_Offset2.Offset);
+
 /***/ }
-/******/ ])));
+/******/ ]);

@@ -36,8 +36,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Ajax = exports.Ajax = function () {
   /**
-   * instanceを作成します
-   *
+   * Ajax instanceを作成し、実行可能プロパティを可能に設定します
+   * @constructor
    */
 
   function Ajax() {
@@ -53,11 +53,13 @@ var Ajax = exports.Ajax = function () {
    * @param {string} method POST|GET...
    * @param {Function} resolve success callback
    * @param {Function} reject fail callback
+   * @param {FormData} [formData=null] FormData Object
    */
 
   (0, _createClass3.default)(Ajax, [{
     key: 'start',
     value: function start(url, method, resolve, reject) {
+      var formData = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
 
       var fetch = self.fetch;
       var _this = this;
@@ -77,11 +79,19 @@ var Ajax = exports.Ajax = function () {
 
       console.log('ajax.start: ' + url + ', ' + method);
 
+      var option = {
+        method: method,
+        cache: 'no-cache'
+      };
+
+      if (formData !== null && typeof formData !== 'undefined') {
+
+        option.body = formData;
+      }
+
       // https://github.com/github/fetch
       // request を開始します
-      fetch(url, {
-        method: method
-      }).then(function (response) {
+      fetch(url, option).then(function (response) {
         // check status (Server)
         var status = response.status;
 
@@ -144,8 +154,8 @@ var Ajax = exports.Ajax = function () {
     }
 
     /**
-     *
-     * @return {boolean} 実行可否 flag を返します
+     * @method can
+     * @returns {boolean} 実行可否 flag を返します
      */
 
   }, {

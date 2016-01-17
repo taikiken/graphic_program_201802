@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/13 - 14:49
+ * @date 2016/01/13 - 14:54
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Headline = undefined;
+exports.Detail = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -43,42 +43,55 @@ var _Api = require('../../net/Api');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Home headline（注目ニュース）
+ * 記事詳細を取得します
  */
 
-var Headline = exports.Headline = function (_Action) {
-  (0, _inherits3.default)(Headline, _Action);
+var Detail = exports.Detail = function (_Action) {
+  (0, _inherits3.default)(Detail, _Action);
 
   /**
-   * Home headline（注目ニュース） データを取得します
-   * types: Api.home() を使用します
-   * @constructor
+   * 記事詳細を記事IDから取得します
+   * @param {Number|String} id 記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
 
-  function Headline() {
-    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
-    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-    (0, _classCallCheck3.default)(this, Headline);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Headline).call(this, _Api.Api.home(), resolve, reject));
+  function Detail(id) {
+    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+    (0, _classCallCheck3.default)(this, Detail);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Detail).call(this, _Api.Api.detail(), resolve, reject));
+
+    _this._id = parseInt(id, 10);
+
+    return _this;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * Ajax API url を作成します
-   * Api.home().url/headline?offset=0&length=6
+   * url を作成します
    * @method url
-   * @returns {string} headline API url を返します
+   * @returns {string} 作成した url を返します
    */
 
-  (0, _createClass3.default)(Headline, [{
+  (0, _createClass3.default)(Detail, [{
     key: 'url',
     get: function get() {
+      return this._url + '/' + this.id;
+    }
 
-      return this._url + '/headline?offset=0&length=6';
+    /**
+     * 記事ID
+     * @return {Number|*} 記事IDを返します
+     */
+
+  }, {
+    key: 'id',
+    get: function get() {
+      return this._id;
     }
   }]);
-  return Headline;
+  return Detail;
 }(_Action2.Action);

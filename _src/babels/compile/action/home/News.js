@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Headline = undefined;
+exports.News = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -24,10 +24,6 @@ var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
 var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
@@ -36,49 +32,36 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Action2 = require('../Action');
+var _Offset2 = require('../Offset');
 
 var _Api = require('../../net/Api');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Home headline（注目ニュース）
+ * home 通常記事一覧
  */
 
-var Headline = exports.Headline = function (_Action) {
-  (0, _inherits3.default)(Headline, _Action);
+var News = exports.News = function (_Offset) {
+  (0, _inherits3.default)(News, _Offset);
 
   /**
-   * Home headline（注目ニュース） データを取得します
-   * types: Api.home() を使用します
-   * @constructor
+   * home 通常記事一覧を取得します
+   * length を必要なら変えて使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {Number} [offset=0] query offset 値
+   * @param {Number} [length=10] query length 値
    */
 
-  function Headline() {
+  function News() {
     var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
     var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-    (0, _classCallCheck3.default)(this, Headline);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Headline).call(this, _Api.Api.home(), resolve, reject));
+    var offset = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+    var length = arguments.length <= 3 || arguments[3] === undefined ? 10 : arguments[3];
+    (0, _classCallCheck3.default)(this, News);
+    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(News).call(this, _Api.Api.home(), resolve, reject, offset, length));
   }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * Ajax API url を作成します
-   * Api.home().url/headline?offset=0&length=6
-   * @method url
-   * @returns {string} headline API url を返します
-   */
 
-  (0, _createClass3.default)(Headline, [{
-    key: 'url',
-    get: function get() {
-
-      return this._url + '/headline?offset=0&length=6';
-    }
-  }]);
-  return Headline;
-}(_Action2.Action);
+  return News;
+}(_Offset2.Offset);

@@ -13,7 +13,6 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
-import {Result} from '../../data/Result';
 
 /**
  * Home pickup(slider)
@@ -23,43 +22,25 @@ export class Pickup extends Action {
    * Home pickup(slider) データを取得します
    * types: Api.home() を使用します
    * @constructor
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor() {
-    super( Api.home() );
+  constructor( resolve:Function = null, reject:Function = null ) {
+    super( Api.home(), resolve, reject );
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * Ajax API url を作成します
    * Api.home().url/pickup?offset=0&length=5
    * @method url
    * @returns {string} pickup API url を返します
    */
-  url():string {
+  get url():string {
 
-    return `${this._types.url}/pickup?offset=0&length=5`;
-
-  }
-
-
-  /**
-   * Ajax success callback
-   * @param {Result} result Ajax成功結果
-   */
-  success( result:Result ):void {
-
-    // success
-    console.log( `result: ${result}` );
+    return `${this._url}/pickup?offset=0&length=5`;
 
   }
 
-  /**
-   * Ajax error callback
-   * @param {Error} error Ajax失敗結果
-   */
-  fail( error:Error ):void {
-
-    // error
-    console.log( `error: ${error}` );
-
-  }
 }

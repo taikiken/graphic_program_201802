@@ -38,7 +38,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Types = exports.Types = function () {
   /**
-   *
+   * @constructor
    * @param {Type} type Type instance
    * @param {Permalink} permalink Permalink instance
    * @param {Queries} queries Queries instance
@@ -56,56 +56,22 @@ var Types = exports.Types = function () {
   }
 
   /**
-   *
+   * @method type
    * @returns {Type} Type instance を返します
    */
 
   (0, _createClass3.default)(Types, [{
     key: 'type',
-    value: function type() {
+    get: function get() {
 
       return this._type;
     }
 
     /**
+     * @method url
      * @return {string} url を返します
      */
 
-  }, {
-    key: 'permalink',
-
-    /**
-     *
-     * @returns {Permalink} Permalink instance を返します
-     */
-    value: function permalink() {
-
-      return this._permalink;
-    }
-
-    /**
-     *
-     * @returns {Queries} Queries instance を返します
-     */
-
-  }, {
-    key: 'queries',
-    value: function queries() {
-
-      return this._queries;
-    }
-
-    /**
-     *
-     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
-     */
-
-  }, {
-    key: 'auth',
-    value: function auth() {
-
-      return this._auth;
-    }
   }, {
     key: 'url',
     get: function get() {
@@ -114,6 +80,7 @@ var Types = exports.Types = function () {
     }
 
     /**
+     * @method method
      * @return {string} method を返します
      */
 
@@ -122,6 +89,42 @@ var Types = exports.Types = function () {
     get: function get() {
 
       return this._type.method;
+    }
+
+    /**
+     * @method permalink
+     * @returns {Permalink} Permalink instance を返します
+     */
+
+  }, {
+    key: 'permalink',
+    get: function get() {
+
+      return this._permalink;
+    }
+
+    /**
+     * @method queries
+     * @returns {Queries} Queries instance を返します
+     */
+
+  }, {
+    key: 'queries',
+    get: function get() {
+
+      return this._queries;
+    }
+
+    /**
+     * @method auth
+     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+     */
+
+  }, {
+    key: 'auth',
+    get: function get() {
+
+      return this._auth;
     }
   }]);
   return Types;

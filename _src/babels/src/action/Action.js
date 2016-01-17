@@ -26,7 +26,6 @@ import {Types} from '../net/Types';
 export class Action {
   /**
    * Ajax 処理, query なし
-   * @constructor
    * @param {Types} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -37,28 +36,39 @@ export class Action {
     this._resolve = resolve;
     this._reject = reject;
     this._ajax = new Ajax();
+    this._url = types.url;
+    this._method = types.method;
 
   }
-
-  /**
-   * @method start
-   * Ajax request を開始します
-   */
-  start():void {
-
-    this._ajax.start( this.url(), this._types.method, this.success.bind( this ), this.fail.bind( this ) );
-
-  }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * url を作成します
-   * @method url
    * @returns {string} 作成した url を返します
    */
-  url():string {
-    return this._types.url;
+  get url():string {
+    return this._url;
   }
 
+  /**
+   * @returns {string|*} method, GET|POST|DELETE|PUT... を返します
+   */
+  get method():string {
+    return this._method;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * Ajax request を開始します
+   * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
+   */
+  start( method:string = this.method ):void {
+
+    this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+
+  }
   /**
    * Ajax success callback
    * @param {Result} result Ajax成功結果
@@ -78,7 +88,6 @@ export class Action {
 
   /**
    * Ajax error callback
-   * @method fail
    * @param {Error} error Ajax失敗結果
    */
   fail( error:Error ):void {
@@ -93,4 +102,5 @@ export class Action {
     }
 
   }
+
 }

@@ -46,6 +46,7 @@ var _symbol = (0, _symbol3.default)();
 var Api = exports.Api = function () {
   /**
    * static class です、instance を作成できません
+   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -54,12 +55,13 @@ var Api = exports.Api = function () {
 
     if (_symbol !== target) {
 
-      throw new Error('Api is singleton pattern. not use new Api().');
+      throw new Error('Api is not new Api().');
     }
   }
 
   /**
    * login API を取得します
+   * @method login
    * @returns {Types} login API をTypes instanceで返します
    */
 
@@ -72,6 +74,7 @@ var Api = exports.Api = function () {
 
     /**
      * home API を login している / していない に合わせ取得します
+     * @method home
      * @returns {Types} home API(home / self)をTypes instanceで返します
      */
 
@@ -84,6 +87,7 @@ var Api = exports.Api = function () {
 
     /**
      * ログインなしユーザーのhome API
+     * @method homeAPi
      * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
      */
 
@@ -96,6 +100,7 @@ var Api = exports.Api = function () {
 
     /**
      * ログイン済みユーザーのhome API
+     * @method selfAPi
      * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
      */
 
@@ -108,6 +113,7 @@ var Api = exports.Api = function () {
 
     /**
      * category API を取得します
+     * @method category
      * @returns {Types} category API を Types instance で取得します
      */
 
@@ -119,7 +125,8 @@ var Api = exports.Api = function () {
     }
 
     /**
-     * category API を取得します
+     * search API を取得します
+     * @method search
      * @returns {Types} category API をTypes instanceで返します
      */
 
@@ -132,6 +139,7 @@ var Api = exports.Api = function () {
 
     /**
      * category API を取得します
+     * @method detail
      * @returns {Types} category API をTypes instanceで返します
      */
 
@@ -144,6 +152,7 @@ var Api = exports.Api = function () {
 
     /**
      * bookmark API を取得します
+     * @method bookmark
      * @param {string} [action=add] path option を指定します
      * @returns {Types} bookmark API をTypes instanceで返します
      */
@@ -151,7 +160,7 @@ var Api = exports.Api = function () {
   }, {
     key: 'bookmark',
     value: function bookmark() {
-      var action = arguments.length <= 0 || arguments[0] === undefined ? 'add' : arguments[0];
+      var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
       switch (action) {
         case 'delete':
@@ -160,14 +169,18 @@ var Api = exports.Api = function () {
         case 'add':
           return _ApiDae.ApiDae.api('bookmark:add');
 
+        case '':
+          return _ApiDae.ApiDae.api('bookmark');
+
         default:
           console.warn('bookmark illegal action: ' + action + ', instead use default');
-          return _ApiDae.ApiDae.api('bookmark:add');
+          return _ApiDae.ApiDae.api('bookmark');
       }
     }
 
     /**
      * comment API を取得します
+     * @method comment
      * @param {string} [action=''] path option を指定します
      * @returns {Types} comment API をTypes instanceで返します
      */
@@ -219,6 +232,7 @@ var Api = exports.Api = function () {
 
     /**
      * users API を取得します
+     * @method users
      * @param {string} [action=''] path option を指定します
      * @returns {Types} category users をTypes instanceで返します
      */

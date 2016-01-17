@@ -39,7 +39,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Loc = exports.Loc = function () {
   /**
-   * search を繰り返し調べたい時に instance を作成します
+   * search を調べたい時に instance を作成します
    */
 
   function Loc() {
@@ -103,7 +103,7 @@ var Loc = exports.Loc = function () {
     /**
      * pathnameを/で分解します
      * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
-     * @returns {Array}
+     * @returns {Array} pathnameを/で分解し配列にし返します
      */
 
   }, {
@@ -117,7 +117,7 @@ var Loc = exports.Loc = function () {
     /**
      * location.search を key: value へ分解します
      * @param {string} search location.search型文字列
-     * @returns {*}
+     * @returns {*} search を key: value へ分解し Object で返します
      */
 
   }, {
@@ -125,6 +125,7 @@ var Loc = exports.Loc = function () {
     value: function parse() {
       var search = arguments.length <= 0 || arguments[0] === undefined ? Loc.search : arguments[0];
 
+      // 引数が文字でない時は処理しない
       if (typeof search !== 'string' || search.length === 0) {
 
         return null;

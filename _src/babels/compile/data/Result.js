@@ -32,7 +32,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Result = exports.Result = function () {
   /**
-   *  Ajax 成功時にdataを保存します
+   * Ajax 成功時にdataを保存します
+   * @constructor
    * @param {{status: *, responce: *}} json json パース後データ
    */
 
@@ -44,6 +45,7 @@ var Result = exports.Result = function () {
 
   /**
    * parsed JSON プロパティ
+   * @method data
    * @returns {*} パース済みJSON(Object)を返します
    */
 
@@ -55,8 +57,9 @@ var Result = exports.Result = function () {
     }
 
     /**
-     * 生 responce
-     * @returns {*} 生 responce(JSON) を返します
+     * 取得 JSON responce section
+     * @method responce
+     * @returns {*} 取得 JSON responce section を返します
      */
 
   }, {
@@ -67,7 +70,8 @@ var Result = exports.Result = function () {
     }
 
     /**
-     * responce.status
+     * 取得 JSON status section
+     * @method status
      * @returns {{code: number, user_massage: string,developer_message: string}} responce.status を返します
      */
 

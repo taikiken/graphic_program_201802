@@ -40,8 +40,6 @@ var _Action2 = require('../Action');
 
 var _Api = require('../../net/Api');
 
-var _Result = require('../../data/Result');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -54,50 +52,32 @@ var Pickup = exports.Pickup = function (_Action) {
   /**
    * Home pickup(slider) データを取得します
    * types: Api.home() を使用します
+   * @constructor
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
    */
 
   function Pickup() {
+    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     (0, _classCallCheck3.default)(this, Pickup);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Pickup).call(this, _Api.Api.home()));
+    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Pickup).call(this, _Api.Api.home(), resolve, reject));
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * Ajax API url を作成します
    * Api.home().url/pickup?offset=0&length=5
+   * @method url
    * @returns {string} pickup API url を返します
    */
 
   (0, _createClass3.default)(Pickup, [{
     key: 'url',
-    value: function url() {
+    get: function get() {
 
-      return this._types.url + '/pickup?offset=0&length=5';
-    }
-
-    /**
-     * Ajax success callback
-     * @param {Result} result Ajax成功結果
-     */
-
-  }, {
-    key: 'success',
-    value: function success(result) {
-
-      // success
-      console.log('result: ' + result);
-    }
-
-    /**
-     * Ajax error callback
-     * @param {Error} error Ajax失敗結果
-     */
-
-  }, {
-    key: 'fail',
-    value: function fail(error) {
-
-      // error
-      console.log('error: ' + error);
+      return this._url + '/pickup?offset=0&length=5';
     }
   }]);
   return Pickup;

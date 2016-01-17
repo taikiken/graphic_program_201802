@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/13 - 14:56
+ * @date 2016/01/17 - 17:28
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Search = undefined;
+exports.Bookmark = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -36,61 +36,55 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Offset2 = require('../Offset');
+var _Action2 = require('../Action');
 
 var _Api = require('../../net/Api');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * 記事検索を行います
- */
+var Bookmark = exports.Bookmark = function (_Action) {
+  (0, _inherits3.default)(Bookmark, _Action);
 
-var Search = exports.Search = function (_Offset) {
-  (0, _inherits3.default)(Search, _Offset);
-
-  /**
-   * 検索キーワードを元に記事を検索します
-   * @param {string} word 検索キーワード
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @param {Number} [offset=0] query offset 値
-   * @param {Number} [length=10] query length 値
-   */
-
-  function Search(word) {
+  function Bookmark(id) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-    var offset = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
-    var length = arguments.length <= 4 || arguments[4] === undefined ? 10 : arguments[4];
-    (0, _classCallCheck3.default)(this, Search);
+    (0, _classCallCheck3.default)(this, Bookmark);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Search).call(this, _Api.Api.search(), resolve, reject, offset, length));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _Api.Api.bookmark(), resolve, reject));
 
-    _this._word = word;
+    _this._id = parseInt(id, 10);
+
     return _this;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
-  /**
-   * 検索キーワード
-   * @returns {string|*} 検索キーワードを返します
-   */
 
-  (0, _createClass3.default)(Search, [{
-    key: 'word',
-    get: function get() {
-      return this._word;
-    }
+  (0, _createClass3.default)(Bookmark, [{
+    key: 'start',
 
+    // ---------------------------------------------------
+    //  METHOD
+    // ---------------------------------------------------
     /**
-     * 検索キーワードを設定します
-     * @param {string} word 検索キーワード
+     * start は使えません, add / remove を使用します
+     * @param {string} method request method
      */
-    ,
-    set: function set(word) {
-      this._word = word;
+    value: function start() {
+      var method = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+      console.error('illegal operation, use start with method: ' + method);
+    }
+  }, {
+    key: 'add',
+    value: function add() {
+
+      this._ajax.start(this.url, 'POST', this.success.bind(this), this.fail.bind(this));
+    }
+  }, {
+    key: 'id',
+    get: function get() {
+      return this._id;
     }
     /**
      * url を作成します
@@ -101,8 +95,8 @@ var Search = exports.Search = function (_Offset) {
   }, {
     key: 'url',
     get: function get() {
-      return this._url + '/' + this.word + '?offset=' + this.offset + '&length=' + this.length;
+      return this._url + '/' + this.id;
     }
   }]);
-  return Search;
-}(_Offset2.Offset);
+  return Bookmark;
+}(_Action2.Action);
