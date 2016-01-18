@@ -28,7 +28,9 @@ export class Type {
     this.method = method;
 
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * @method url
    * @returns {string} API request先を返します
@@ -67,7 +69,7 @@ export class Type {
 
     let methodUpper = method.toUpperCase();
 
-    if ( !Type.validate( methodUpper ) ) {
+    if ( !Type.normalization( methodUpper ) ) {
 
       methodUpper = 'GET';
 
@@ -76,13 +78,15 @@ export class Type {
     this._method = methodUpper;
 
   }
-
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * @method validate
    * @param {string} method method type
    * @return {boolean} method type を検証し真偽値を返します
    */
-  static validate( method:string ):boolean {
+  static normalization( method:string ):boolean {
 
     return [ 'GET', 'POST', 'PUT', 'DELETE' ].indexOf( method ) !== -1;
 

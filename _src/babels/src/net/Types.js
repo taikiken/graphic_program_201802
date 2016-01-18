@@ -34,7 +34,9 @@ export class Types {
     this._auth = auth;
 
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * @method type
    * @returns {Type} Type instance を返します

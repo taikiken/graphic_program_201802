@@ -6,3 +6,6 @@ _docs
 npm-debug.log
 # css document イキ
 #sc5-guide
+
+php.coffee
+php_ini.coffee

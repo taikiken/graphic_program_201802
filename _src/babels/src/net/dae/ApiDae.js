@@ -17,8 +17,33 @@ import {Permalink} from '../types/Permalink';
 import {Queries} from '../types/Queries';
 import {Query} from '../types/Query';
 import {CommentType} from '../comment/CommentType';
+import {Loc} from '../../util/Loc';
 
-const API_PATH = '/api/v1';
+// develop mode 時に api アクセス先を 0.0.0.0: + (port +2) へ
+let apiRoot = ( hostname:string, port:string ) => {
+
+  if ( hostname.indexOf( '192.168.1.199' ) !== -1 && port.indexOf( '41000' ) !== -1 ) {
+
+    // dev mode for local server
+    return `http://0.0.0.0:${port + 2}`;
+
+  } else if (
+    hostname.indexOf( '0.0.0.0' ) !== -1 ||
+    hostname.indexOf( '127.0.0.1' ) !== -1 ||
+    hostname.indexOf( 'localhost' ) !== -1 ||
+    hostname.indexOf( '192.168' ) !== -1
+  ) {
+
+    // dev mode for api server
+    return `http://52.69.203.137`;
+
+  }
+
+  return '';
+
+};
+
+const API_PATH = apiRoot( Loc.hostname, Loc.port ) + '/api/v1';
 
 let _symbol = Symbol();
 let _api = {

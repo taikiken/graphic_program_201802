@@ -34,7 +34,22 @@ export class Permalink {
     this._need = need;
 
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * オプションパスが必須かのプロパティ
+   * @method require
+   * @returns {boolean} オプションパスが必須かどうかを返します true: 必須
+   */
+  get require():boolean {
 
+    return this._need;
+
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * option path 数
    * @method length
@@ -63,17 +78,6 @@ export class Permalink {
     }
 
     return result;
-
-  }
-
-  /**
-   * オプションパスが必須かのプロパティ
-   * @method require
-   * @returns {boolean} オプションパスが必須かどうかを返します true: 必須
-   */
-  get require():boolean {
-
-    return this._need;
 
   }
 

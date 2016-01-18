@@ -26,7 +26,75 @@ export class Loc {
     this._search = null;
 
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   *
+   * @returns {string} location.hrefを返します
+   */
+  static get current():string {
 
+    return self.location.href;
+
+  }
+  /**
+   *
+   * @returns {string} location.pathname(urlからprotocol+hostを除く)を返します
+   */
+  static get path():string {
+
+    return self.location.pathname;
+
+  }
+  /**
+   *
+   * @returns {string} location.hashを返します
+   */
+  static get hash():string {
+
+    return self.location.hash;
+
+  }
+  /**
+   * url の query 文字列
+   * @returns {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
+   */
+  static get search():string {
+
+    return self.location.search.substring( 1 );
+
+  }
+
+  /**
+   *
+   * @returns {string} host name + port number を返します
+   */
+  static get host():string {
+    // host + port number
+    return self.location.host;
+  }
+
+  /**
+   *
+   * @returns {string} host name だけを返します
+   */
+  static get hostname():string {
+    // host only
+    return self.location.hostname;
+  }
+
+  /**
+   *
+   * @returns {string} port number を返します
+   */
+  static get port():string {
+    // port number
+    return self.location.port;
+  }
+  // ---------------------------------------------------
+  //  METHOD instance
+  // ---------------------------------------------------
   /**
    *
    * @param {string} [search=''] key: value にしたい search型 文字列
@@ -54,47 +122,9 @@ export class Loc {
     return search[ key ];
 
   }
-
-  /**
-   *
-   * @returns {string} location.hrefを返します
-   */
-  static get current():string {
-
-    return self.location.href;
-
-  }
-
-  /**
-   *
-   * @returns {string} location.pathname(urlからprotocol+hostを除く)を返します
-   */
-  static get path():string {
-
-    return self.location.pathname;
-
-  }
-
-  /**
-   *
-   * @returns {string} location.hashを返します
-   */
-  static get hash():string {
-
-    return self.location.hash;
-
-  }
-
-  /**
-   * url の query 文字列
-   * @returns {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
-   */
-  static get search():string {
-
-    return self.location.search.substring( 1 );
-
-  }
-
+  // ---------------------------------------------------
+  //  METHOD static
+  // ---------------------------------------------------
   /**
    * hash(#example)から`#`をとります
    * @param {string} hash hash文字列
@@ -105,7 +135,6 @@ export class Loc {
     return hash.replace( /^[#\/]|\s+$/g, '' );
 
   }
-
   /**
    * pathnameを/で分解します
    * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
@@ -116,7 +145,6 @@ export class Loc {
     return pathname.split( '/' );
 
   }
-
   /**
    * location.search を key: value へ分解します
    * @param {string} search location.search型文字列
