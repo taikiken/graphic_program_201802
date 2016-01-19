@@ -9,3 +9,18 @@ npm-debug.log
 
 php.coffee
 php_ini.coffee
+
+# ignore system files
+thumbs.db
+.DS_Store
+__MACOSX
+._*
+.sass-cache
+node_modules
+_bin
+*.css.map
+
+
+# intellij
+.idea
+*.iml
