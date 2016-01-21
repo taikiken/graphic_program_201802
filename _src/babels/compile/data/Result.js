@@ -32,9 +32,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Result = exports.Result = function () {
   /**
-   * Ajax 成功時にdataを保存します
+   * Ajax 成功時にdataを保存します<br>
+   * success event handler で結果(Result instance)を受け取れます<br>
+   *
+   * @example
+   * let success = (result) => {
+   *   // response section 取得
+   *   response.response
+   *   // status section 取得
+   *   response.status
+   * }
+   *
    * @constructor
-   * @param {{status: *, responce: *}} json json パース後データ
+   * @param {{status: *, response: *}} json json パース後データ
    */
 
   function Result(json) {
@@ -45,7 +55,6 @@ var Result = exports.Result = function () {
 
   /**
    * parsed JSON プロパティ
-   * @method data
    * @returns {*} パース済みJSON(Object)を返します
    */
 
@@ -58,7 +67,6 @@ var Result = exports.Result = function () {
 
     /**
      * 取得 JSON response section
-     * @method response
      * @returns {*} 取得 JSON response section を返します
      */
 
@@ -71,7 +79,6 @@ var Result = exports.Result = function () {
 
     /**
      * 取得 JSON status section
-     * @method status
      * @returns {{code: number, user_massage: string,developer_message: string}} responce.status を返します
      */
 
@@ -80,6 +87,18 @@ var Result = exports.Result = function () {
     get: function get() {
 
       return this.data.status;
+    }
+
+    /**
+     * request offset, length を返します
+     * @return {*} {request: number, length: number }
+     */
+
+  }, {
+    key: 'request',
+    get: function get() {
+
+      return this.data.request;
     }
   }]);
   return Result;

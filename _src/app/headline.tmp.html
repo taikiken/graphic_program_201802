@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>React Test Headline</title>
+  <link rel="stylesheet" href="assets/css/ui.css">
+  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="assets/js/libs/vendor.min.js"></script>
+  <script src="assets/js/libs/vendor.react.js"></script>
+</head>
+<body>
+
+<h1 id="c1"></h1>
+
+<section id="f1"></section>
+<section id="f2"></section>
+<section id="f3"></section>
+<section id="f4"></section>
+
+<section id="list">
+
+</section>
+
+<p><button id="listAdd">増やす</button></p>
+<script src="assets/js/bundle/main.bundle.js"></script>
+
+<script>
+  ( function ( window ) {
+
+    'use strict';
+
+    var
+      document = window.document;
+
+    var UT = self.UT;
+    var React = window.React;
+    var ReactDOM = window.ReactDOM;
+
+    // test mode
+    UT.app.Env.develop();
+    UT.net.Api.rebuild();
+
+    var Headline = UT.action.home.Headline;
+
+    function done( result ) {
+      console.log( 'success', result.response );
+      console.log( 'success', result.status );
+      console.log( 'success', result.request );
+    }
+
+    function fail( error ) {
+      console.log( 'error', error );
+    }
+
+    var headline = new Headline( done, fail );
+    headline.start();
+
+  }( window ) );
+</script>
+</body>
+</html>

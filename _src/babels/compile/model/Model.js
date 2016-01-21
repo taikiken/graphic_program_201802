@@ -43,19 +43,49 @@ var Model = exports.Model = function () {
 
     this._react = null;
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   *
+   * @returns {ReactClass|null} React.createClass instance を
+   */
 
   (0, _createClass3.default)(Model, [{
     key: 'willMount',
+
+    // ---------------------------------------------------
+    //  METHOD
+    // ---------------------------------------------------
+    /**
+     * React.componentWillMount handler
+     */
     value: function willMount() {}
+    /**
+     * React.componentDidMount handler
+     */
+
   }, {
     key: 'didMount',
     value: function didMount() {}
+    /**
+     * React.componentWillUpdate handler
+     */
+
   }, {
     key: 'willUpdate',
     value: function willUpdate() {}
+    /**
+     * React.componentDidUpdate handler
+     */
+
   }, {
     key: 'didUpdate',
     value: function didUpdate() {}
+    /**
+     * React.componentWillUnmount handler
+     */
+
   }, {
     key: 'willUnmount',
     value: function willUnmount() {}

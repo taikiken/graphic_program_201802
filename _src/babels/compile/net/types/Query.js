@@ -34,7 +34,8 @@ var Query = exports.Query = function () {
   /**
    * Api query option 情報を保持します
    *
-   *    ?key=value
+   * @example
+   * ?key=value
    *
    * key, value型, default値, 必須情報...
    *

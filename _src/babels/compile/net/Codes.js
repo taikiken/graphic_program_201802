@@ -75,7 +75,6 @@ var _symbol = (0, _symbol3.default)();
 var Codes = exports.Codes = function () {
   /**
    * ステータスコード・メッセージを日本語と英語で保存しています
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -89,7 +88,6 @@ var Codes = exports.Codes = function () {
   }
 
   /**
-   * @method status
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
@@ -103,7 +101,6 @@ var Codes = exports.Codes = function () {
 
     /**
      * status codeの意味を調べます
-     * @method message
      * @param {Number} code サーバーからのresponse status code
      * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
      */
@@ -119,7 +116,6 @@ var Codes = exports.Codes = function () {
     }
 
     /**
-     * @method jp
      * @param {Number} code status code
      * @returns {*} 日本語メッセージを返します
      */
@@ -132,7 +128,6 @@ var Codes = exports.Codes = function () {
     }
 
     /**
-     * @method en
      * @param {Number} code status code
      * @returns {*} 英語メッセージを返します
      */

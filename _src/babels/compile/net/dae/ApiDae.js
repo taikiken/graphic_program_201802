@@ -59,7 +59,7 @@ var apiRoot = function apiRoot(port) {
       return 'http://0.0.0.0:' + (n + 2);
 
     case _Env.Env.DEVELOP:
-      return 'undotsushin.com';
+      return 'http://undotsushin.com';
 
     case _Env.Env.PRODUCTION:
       return '';

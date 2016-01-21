@@ -35,10 +35,11 @@ var _mode = 'production';
 
 /**
  * 動作モードを設定します
- *
+ * <pre>
  *    production: 実行モード
  *    develop: 開発モード（ローカルからのテスト）
  *    test: ローカルテストモード
+ * </pre>
  */
 
 var Env = exports.Env = function () {

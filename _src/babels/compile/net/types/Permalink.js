@@ -34,11 +34,12 @@ var Permalink = exports.Permalink = function () {
   /**
    * パスオプションを指定、ない時は空配列
    *
-   *      // example
-   *      new Permalink( [ 'category', '' ] );
+   * @example
+   * new Permalink( [ 'category', '' ] );
    *
-   *      // searchのようにどんなワードでも良い場合は "*" を指定する
-   *      new Permalink( [ '*' ] );
+   * @example
+   * searchのようにどんなワードでも良い場合は "*" を指定する
+   * new Permalink( [ '*' ] );
    *
    * @constructor
    * @param {Array} [paths] 追加 path を配列で設定

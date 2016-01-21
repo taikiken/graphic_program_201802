@@ -66,4 +66,14 @@ export class Result {
 
   }
 
+  /**
+   * request offset, length を返します
+   * @return {*} {request: number, length: number }
+   */
+  get request():Object {
+
+    return this.data.request;
+
+  }
+
 }

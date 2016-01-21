@@ -36,7 +36,7 @@ var ReactDOM = self.ReactDOM;
 
 var View = exports.View = function () {
   /**
-   *
+   * 表示に使用します
    * @param {Element} rootElement renter root element
    * @param {ReactClass} reactClass React.createClass instance
    */

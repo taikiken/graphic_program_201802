@@ -34,7 +34,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Type = exports.Type = function () {
   /**
-   * @constructor
+   * url, method を保存します
    * @param {string} url API request先
    * @param {string} [method=GET] 'GET', 'POST', 'PUT', 'DELETE'...
    */
@@ -50,7 +50,6 @@ var Type = exports.Type = function () {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @method url
    * @returns {string} API request先を返します
    */
 
@@ -72,7 +71,6 @@ var Type = exports.Type = function () {
     }
 
     /**
-     * @method method
      * @returns {string} POST | GET を返します
      */
 

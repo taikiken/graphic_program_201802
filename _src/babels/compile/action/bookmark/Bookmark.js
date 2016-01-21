@@ -43,8 +43,8 @@ var _Api = require('../../net/Api');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * 記事のブックマーク登録 / 解除
- * /api/v1/articles/bookmark/{:article_id}
+ * 記事のブックマーク登録 / 解除<br>
+ * <code>/api/v1/articles/bookmark/{:article_id}</code>
  */
 
 var Bookmark = exports.Bookmark = function (_Action) {
@@ -71,6 +71,10 @@ var Bookmark = exports.Bookmark = function (_Action) {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   *
+   * @return {Number|*} 記事 ID を返します
+   */
 
   (0, _createClass3.default)(Bookmark, [{
     key: 'start',

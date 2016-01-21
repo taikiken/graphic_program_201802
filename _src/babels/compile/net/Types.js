@@ -38,7 +38,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Types = exports.Types = function () {
   /**
-   * @constructor
    * @param {Type} type Type instance
    * @param {Permalink} permalink Permalink instance
    * @param {Queries} queries Queries instance
@@ -58,7 +57,6 @@ var Types = exports.Types = function () {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @method type
    * @returns {Type} Type instance を返します
    */
 
@@ -70,7 +68,6 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @method url
      * @returns {string} url を返します
      */
 
@@ -82,7 +79,6 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @method method
      * @returns {string} method を返します
      */
 
@@ -94,7 +90,6 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @method permalink
      * @returns {Permalink} Permalink instance を返します
      */
 
@@ -106,7 +101,6 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @method queries
      * @returns {Queries} Queries instance を返します
      */
 
@@ -118,7 +112,6 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @method auth
      * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
      */
 

@@ -119,7 +119,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-21 21:05:07
+	 * @date 2016-01-21 22:15:37
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -249,10 +249,11 @@
 
 	/**
 	 * 動作モードを設定します
-	 *
+	 * <pre>
 	 *    production: 実行モード
 	 *    develop: 開発モード（ローカルからのテスト）
 	 *    test: ローカルテストモード
+	 * </pre>
 	 */
 
 	var Env = exports.Env = function () {
@@ -1594,7 +1595,9 @@
 	var _symbol = (0, _symbol3.default)();
 
 	/**
-	 * 文字を定型に変換します
+	 * <h3>サーバーリクエストAPIを管理します</h3>
+	 * 全て static<br>
+	 * <strong>文字を定型に変換します</strong>
 	 */
 
 	var Format = exports.Format = function () {
@@ -1816,7 +1819,8 @@
 	    /**
 	     * form element から FormData を作成します
 	     *
-	     *    let data = Form.element( document.querySelector("form") )
+	     * @example
+	     * let data = Form.element( document.querySelector("form") )
 	     *
 	     * @param {Element} formElement form element
 	     * @returns {FormData} elemet から FormData を作成し返します
@@ -1870,9 +1874,19 @@
 
 	var Result = exports.Result = function () {
 	  /**
-	   * Ajax 成功時にdataを保存します
+	   * Ajax 成功時にdataを保存します<br>
+	   * success event handler で結果(Result instance)を受け取れます<br>
+	   *
+	   * @example
+	   * let success = (result) => {
+	   *   // response section 取得
+	   *   response.response
+	   *   // status section 取得
+	   *   response.status
+	   * }
+	   *
 	   * @constructor
-	   * @param {{status: *, responce: *}} json json パース後データ
+	   * @param {{status: *, response: *}} json json パース後データ
 	   */
 
 	  function Result(json) {
@@ -1883,7 +1897,6 @@
 
 	  /**
 	   * parsed JSON プロパティ
-	   * @method data
 	   * @returns {*} パース済みJSON(Object)を返します
 	   */
 
@@ -1896,7 +1909,6 @@
 
 	    /**
 	     * 取得 JSON response section
-	     * @method response
 	     * @returns {*} 取得 JSON response section を返します
 	     */
 
@@ -1909,7 +1921,6 @@
 
 	    /**
 	     * 取得 JSON status section
-	     * @method status
 	     * @returns {{code: number, user_massage: string,developer_message: string}} responce.status を返します
 	     */
 
@@ -1918,6 +1929,18 @@
 	    get: function get() {
 
 	      return this.data.status;
+	    }
+
+	    /**
+	     * request offset, length を返します
+	     * @return {*} {request: number, length: number }
+	     */
+
+	  }, {
+	    key: 'request',
+	    get: function get() {
+
+	      return this.data.request;
 	    }
 	  }]);
 	  return Result;
@@ -2193,7 +2216,6 @@
 	var Codes = exports.Codes = function () {
 	  /**
 	   * ステータスコード・メッセージを日本語と英語で保存しています
-	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -2207,7 +2229,6 @@
 	  }
 
 	  /**
-	   * @method status
 	   * @param {int} statusCode サーバーからのレスポンスコード int型
 	   * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
 	   */
@@ -2221,7 +2242,6 @@
 
 	    /**
 	     * status codeの意味を調べます
-	     * @method message
 	     * @param {Number} code サーバーからのresponse status code
 	     * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
 	     */
@@ -2237,7 +2257,6 @@
 	    }
 
 	    /**
-	     * @method jp
 	     * @param {Number} code status code
 	     * @returns {*} 日本語メッセージを返します
 	     */
@@ -2250,7 +2269,6 @@
 	    }
 
 	    /**
-	     * @method en
 	     * @param {Number} code status code
 	     * @returns {*} 英語メッセージを返します
 	     */
@@ -2585,7 +2603,6 @@
 
 	var Types = exports.Types = function () {
 	  /**
-	   * @constructor
 	   * @param {Type} type Type instance
 	   * @param {Permalink} permalink Permalink instance
 	   * @param {Queries} queries Queries instance
@@ -2605,7 +2622,6 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @method type
 	   * @returns {Type} Type instance を返します
 	   */
 
@@ -2617,7 +2633,6 @@
 	    }
 
 	    /**
-	     * @method url
 	     * @returns {string} url を返します
 	     */
 
@@ -2629,7 +2644,6 @@
 	    }
 
 	    /**
-	     * @method method
 	     * @returns {string} method を返します
 	     */
 
@@ -2641,7 +2655,6 @@
 	    }
 
 	    /**
-	     * @method permalink
 	     * @returns {Permalink} Permalink instance を返します
 	     */
 
@@ -2653,7 +2666,6 @@
 	    }
 
 	    /**
-	     * @method queries
 	     * @returns {Queries} Queries instance を返します
 	     */
 
@@ -2665,7 +2677,6 @@
 	    }
 
 	    /**
-	     * @method auth
 	     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
 	     */
 
@@ -2719,7 +2730,7 @@
 
 	var Type = exports.Type = function () {
 	  /**
-	   * @constructor
+	   * url, method を保存します
 	   * @param {string} url API request先
 	   * @param {string} [method=GET] 'GET', 'POST', 'PUT', 'DELETE'...
 	   */
@@ -2735,7 +2746,6 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @method url
 	   * @returns {string} API request先を返します
 	   */
 
@@ -2757,7 +2767,6 @@
 	    }
 
 	    /**
-	     * @method method
 	     * @returns {string} POST | GET を返します
 	     */
 
@@ -2842,11 +2851,12 @@
 	  /**
 	   * パスオプションを指定、ない時は空配列
 	   *
-	   *      // example
-	   *      new Permalink( [ 'category', '' ] );
+	   * @example
+	   * new Permalink( [ 'category', '' ] );
 	   *
-	   *      // searchのようにどんなワードでも良い場合は "*" を指定する
-	   *      new Permalink( [ '*' ] );
+	   * @example
+	   * searchのようにどんなワードでも良い場合は "*" を指定する
+	   * new Permalink( [ '*' ] );
 	   *
 	   * @constructor
 	   * @param {Array} [paths] 追加 path を配列で設定
@@ -3080,7 +3090,8 @@
 	  /**
 	   * Api query option 情報を保持します
 	   *
-	   *    ?key=value
+	   * @example
+	   * ?key=value
 	   *
 	   * key, value型, default値, 必須情報...
 	   *
@@ -3191,7 +3202,6 @@
 	var User = exports.User = function () {
 	  /**
 	   * static class です, instance を作成しません
-	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -3208,7 +3218,6 @@
 	  // ---------------------------------------------------
 	  /**
 	   * sign in / out 状態を表します
-	   * @method sign
 	   * @returns {boolean} sign in / out 状態を返します
 	   */
 
@@ -3231,7 +3240,6 @@
 
 	    /**
 	     * User id 情報
-	     * @method id
 	     * @returns {number} User id を返します
 	     */
 
@@ -3320,7 +3328,7 @@
 	      return 'http://0.0.0.0:' + (n + 2);
 
 	    case _Env.Env.DEVELOP:
-	      return 'undotsushin.com';
+	      return 'http://undotsushin.com';
 
 	    case _Env.Env.PRODUCTION:
 	      return '';
@@ -3636,7 +3644,15 @@
 	  (0, _inherits3.default)(CommentType, _Query);
 
 	  /**
-	   * @constructor
+	   * <code>/api/1/comments/artice/{:article_id}[/type]</code>
+	   * <pre>
+	   * 取得するコメントタイプ
+	   * - なし    : すべてのユーザーのコメント
+	   * - normal : 通常ユーザーのコメント
+	   * - official : 公式ユーザーのコメント
+	   * - self : 自分のコメント
+	   * - [commend_id] : 特定のコメントのみ
+	   * </pre>
 	   * @param {string} key dog|cat|food のように | 区切りでオプションをつなげます
 	   * @param {boolean} [require=false] 必須真偽値
 	   */
@@ -3896,14 +3912,15 @@
 	// 基本機能を設定し Interface として使用します
 
 	/**
-	 * Ajax 処理を行います
-	 * Interface として使用します
-	 * 各 Class で extends して下さい
+	 * Ajax 処理を行います<br>
+	 * Template Pattern として使用します<br>
+	 * 各 Class で extends します
 	 */
 
 	var Action = exports.Action = function () {
 	  /**
-	   * Ajax 処理, query なし
+	   * Ajax 処理, query なし<br>
+	   * 1回だけのリクエストに使用します
 	   * @param {Types} types Types instance, Ajax request に使用します
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -4053,18 +4070,17 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
-	 * Ajax 処理を行います
-	 * Interface として使用します
+	 * Ajax 処理を行います<br>
+	 * Template Pattern として使用します<br>
 	 * 各 Class で extends して下さい
-	 * **Next 読込** がある時に使用します
 	 */
 
 	var Offset = exports.Offset = function (_Action) {
 	  (0, _inherits3.default)(Offset, _Action);
 
 	  /**
-	   * Ajax 処理, query
-	   * @constructor
+	   * Ajax 処理, queryあり<br>
+	   * **Next 読込** がある時に使用します
 	   * @param {Type} types Types instance, Ajax request に使用します
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -4091,20 +4107,33 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @method total
 	   * @returns {number|*} total件数を返します
 	   */
 
 	  (0, _createClass3.default)(Offset, [{
-	    key: 'update',
+	    key: 'start',
 
 	    // ---------------------------------------------------
 	    //  METHOD
 	    // ---------------------------------------------------
 	    /**
+	     * start を使わずに next を使用します
+	     * @override
+	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
+	     */
+	    value: function start() {
+	      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
+	    }
+
+	    //this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+
+	    /**
 	     * offset 値を加算します
 	     * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
 	     */
+
+	  }, {
+	    key: 'update',
 	    value: function update() {
 	      var count = arguments.length <= 0 || arguments[0] === undefined ? this._length : arguments[0];
 
@@ -4127,17 +4156,21 @@
 	    }
 
 	    /**
-	     * 次の読込を開始します
+	     * 次の読込を開始します<br>
+	     * start の代わりに使用します
+	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
 	     */
 
 	  }, {
 	    key: 'next',
 	    value: function next() {
+	      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
 	      // next data があるかないかを調べます
+	      // next がある時は Ajax を実行します
 	      if (this.hasNext()) {
 
-	        this.start();
+	        this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this));
 	      }
 	    }
 	    /**
@@ -4168,7 +4201,6 @@
 	      this._total = total;
 	    }
 	    /**
-	     * @method total
 	     * @returns {number|*} lengths 取得件数を返します
 	     */
 
@@ -4187,7 +4219,6 @@
 	      this._length = length;
 	    }
 	    /**
-	     * @method total
 	     * @returns {number|*} offset 取得開始位置を返します
 	     */
 
@@ -4208,7 +4239,6 @@
 
 	    /**
 	     * url を作成します
-	     * @method url
 	     * @returns {string} 作成した url を返します
 	     */
 
@@ -4355,8 +4385,8 @@
 	  (0, _inherits3.default)(Pickup, _Action);
 
 	  /**
-	   * Home pickup(slider) データを取得します
-	   * types: Api.home() を使用します
+	   * Home pickup(slider) データを取得します<br>
+	   * <b>types: Api.home()</b> を使用します
 	   * @constructor
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -4372,8 +4402,8 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * Ajax API url を作成します
-	   * Api.home().url/pickup?offset=0&length=5
+	   * Ajax API url を作成します<br>
+	   * <code>Api.home().url/pickup?offset=0&length=5</code>
 	   * @method url
 	   * @returns {string} pickup API url を返します
 	   */
@@ -4444,8 +4474,9 @@
 	  (0, _inherits3.default)(Headline, _Action);
 
 	  /**
-	   * Home headline（注目ニュース） データを取得します
-	   * types: Api.home() を使用します
+	   * Home headline（注目ニュース） データを取得します<br>
+	   * <strong>types: Api.home()<strong> を使用します
+	   *
 	   * @constructor
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -4461,8 +4492,8 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * Ajax API url を作成します
-	   * Api.home().url/headline?offset=0&length=6
+	   * Ajax API url を作成します<br>
+	   * <code>Api.home().url/headline?offset=0&length=6</code>
 	   * @method url
 	   * @returns {string} headline API url を返します
 	   */
@@ -4529,8 +4560,8 @@
 	  (0, _inherits3.default)(News, _Offset);
 
 	  /**
-	   * home 通常記事一覧を取得します
-	   * length を必要なら変えて使用します
+	   * home 通常記事一覧を取得します<br>
+	   * length は取得件数です。<b>default: 10</b>を必要なら変更します
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
 	   * @param {Number} [offset=0] query offset 値
@@ -5086,8 +5117,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
-	 * 記事のブックマーク登録 / 解除
-	 * /api/v1/articles/bookmark/{:article_id}
+	 * 記事のブックマーク登録 / 解除<br>
+	 * <code>/api/v1/articles/bookmark/{:article_id}</code>
 	 */
 
 	var Bookmark = exports.Bookmark = function (_Action) {
@@ -5114,6 +5145,10 @@
 	  // ---------------------------------------------------
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Number|*} 記事 ID を返します
+	   */
 
 	  (0, _createClass3.default)(Bookmark, [{
 	    key: 'start',
@@ -5228,7 +5263,8 @@
 	  (0, _inherits3.default)(Search, _Offset);
 
 	  /**
-	   * 検索キーワードを元に記事を検索します
+	   * 検索キーワードを元に記事を検索します<br>
+	   * <b>types: Api.search()</b> を使用します
 	   * @param {string} word 検索キーワード
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback

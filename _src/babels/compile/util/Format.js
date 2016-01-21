@@ -36,7 +36,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _symbol = (0, _symbol3.default)();
 
 /**
- * 文字を定型に変換します
+ * <h3>サーバーリクエストAPIを管理します</h3>
+ * 全て static<br>
+ * <strong>文字を定型に変換します</strong>
  */
 
 var Format = exports.Format = function () {

@@ -33,7 +33,7 @@ let apiRoot = ( port:string ) => {
       return `http://0.0.0.0:${n + 2}`;
 
     case Env.DEVELOP :
-      return 'undotsushin.com';
+      return 'http://undotsushin.com';
 
     case Env.PRODUCTION :
       return '';

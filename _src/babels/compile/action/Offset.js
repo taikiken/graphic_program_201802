@@ -49,18 +49,17 @@ var _Types = require('../net/Types');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Ajax 処理を行います
- * Interface として使用します
+ * Ajax 処理を行います<br>
+ * Template Pattern として使用します<br>
  * 各 Class で extends して下さい
- * **Next 読込** がある時に使用します
  */
 
 var Offset = exports.Offset = function (_Action) {
   (0, _inherits3.default)(Offset, _Action);
 
   /**
-   * Ajax 処理, query
-   * @constructor
+   * Ajax 処理, queryあり<br>
+   * **Next 読込** がある時に使用します
    * @param {Type} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -87,20 +86,33 @@ var Offset = exports.Offset = function (_Action) {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @method total
    * @returns {number|*} total件数を返します
    */
 
   (0, _createClass3.default)(Offset, [{
-    key: 'update',
+    key: 'start',
 
     // ---------------------------------------------------
     //  METHOD
     // ---------------------------------------------------
     /**
+     * start を使わずに next を使用します
+     * @override
+     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
+     */
+    value: function start() {
+      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
+    }
+
+    //this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+
+    /**
      * offset 値を加算します
      * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
      */
+
+  }, {
+    key: 'update',
     value: function update() {
       var count = arguments.length <= 0 || arguments[0] === undefined ? this._length : arguments[0];
 
@@ -123,17 +135,21 @@ var Offset = exports.Offset = function (_Action) {
     }
 
     /**
-     * 次の読込を開始します
+     * 次の読込を開始します<br>
+     * start の代わりに使用します
+     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
      */
 
   }, {
     key: 'next',
     value: function next() {
+      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
       // next data があるかないかを調べます
+      // next がある時は Ajax を実行します
       if (this.hasNext()) {
 
-        this.start();
+        this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this));
       }
     }
     /**
@@ -164,7 +180,6 @@ var Offset = exports.Offset = function (_Action) {
       this._total = total;
     }
     /**
-     * @method total
      * @returns {number|*} lengths 取得件数を返します
      */
 
@@ -183,7 +198,6 @@ var Offset = exports.Offset = function (_Action) {
       this._length = length;
     }
     /**
-     * @method total
      * @returns {number|*} offset 取得開始位置を返します
      */
 
@@ -204,7 +218,6 @@ var Offset = exports.Offset = function (_Action) {
 
     /**
      * url を作成します
-     * @method url
      * @returns {string} 作成した url を返します
      */
 

@@ -73,7 +73,7 @@ var _Search = require('./action/search/Search');
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-21 21:05:07
+ * @date 2016-01-21 22:15:37
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
