@@ -27,6 +27,7 @@ browserSync = require 'browser-sync'
 reload = browserSync.reload
 
 ###
+  gulp-load-plugins を使用した
   $.util.log が syntax error になるので...
 ###
 $.util = require 'gulp-util'
@@ -55,8 +56,8 @@ tmp = '_src/.tmp'
 
 # scripts, project js library
 scripts = '_src/scripts'
-src = scripts + 'src'
-dependencies = scripts + 'dependencies'
+src = scripts + '/src'
+dependencies = scripts + '/dependencies'
 
 # bower
 components = '_src/tools/bower_components'

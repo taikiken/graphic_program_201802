@@ -67,7 +67,7 @@ scssFiles = [
   '!' + app + '/api/**/*.scss'
 ]
 
-sc5Port = port + 1;
+sc5Port = parseInt( port, 10 ) + 1;
 
 # generate + server
 gulp.task 'sc5:generate', ->

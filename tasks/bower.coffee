@@ -261,8 +261,9 @@ gulp.task 'bower:matchHeight', ->
 gulp.task 'bower:react', ->
   return gulp
   .src [
-    components + '/react/react.min.js'
-    components + '/react/react-dom.min.js'
+#    components + '/react/react.min.js'
+#    components + '/react/react-dom.min.js'
+    components + '/react/*.js'
   ]
   .pipe gulp.dest exports + '/react'
   .pipe $.size title: '*** bower:react ***'
@@ -271,7 +272,8 @@ gulp.task 'bower:react', ->
 gulp.task 'bower:fetch', ->
   return gulp
   .src [
-    components + '/fetch/fetch.js'
+#    components + '/fetch/fetch.js'
+    components + '/fetch/*.js'
   ]
   .pipe gulp.dest exports + '/fetch'
   .pipe $.size title: '*** bower:fetch ***'

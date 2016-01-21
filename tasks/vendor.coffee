@@ -73,7 +73,7 @@ gulp.task 'vendor:build', ->
 
 ###
   polyfill for IE
-  promise + fetch
+  promise + fetch + react => uglify
 ###
 gulp.task 'vendor:react:build', ->
   return gulp.src [
@@ -86,6 +86,21 @@ gulp.task 'vendor:react:build', ->
   .pipe $.uglify preserveComments: 'license'
   .pipe gulp.dest dir.libs
   .pipe $.size title: '*** vendor:react:build ***'
+
+###
+  polyfill for IE
+  promise + fetch + react => raw(concat only)
+###
+gulp.task 'vendor:react:dev', ->
+  return gulp.src [
+    exports + '/es6-promise/promise.js'
+    exports + '/fetch/fetch.js'
+    exportsPath + '/react/react.js'
+    exportsPath + '/react/react-dom.js'
+  ]
+  .pipe $.concat 'vendor.react.js'
+  .pipe gulp.dest dir.libs
+  .pipe $.size title: '*** vendor:react:dev ***'
 
 ###
   copy します
