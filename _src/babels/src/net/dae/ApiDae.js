@@ -11,6 +11,7 @@
  */
 'use strict';
 
+import {Env} from '../../app/Env';
 import {Types} from '../Types';
 import {Type} from '../types/Type';
 import {Permalink} from '../types/Permalink';
@@ -20,198 +21,204 @@ import {CommentType} from '../comment/CommentType';
 import {Loc} from '../../util/Loc';
 
 // develop mode 時に api アクセス先を 0.0.0.0: + (port +2) へ
-let apiRoot = ( hostname:string, port:string ) => {
+// IP: 52.69.203.137
+// HOST: undotsushin.com
+let apiRoot = ( port:string ) => {
 
-  if ( hostname.indexOf( '192.168.1.199' ) !== -1 && port.indexOf( '41000' ) !== -1 ) {
+  let n = parseInt( port, 10 );
 
-    // dev mode for local server
-    return `http://0.0.0.0:${port + 2}`;
+  switch ( Env.mode ) {
 
-  } else if (
-    hostname.indexOf( '0.0.0.0' ) !== -1 ||
-    hostname.indexOf( '127.0.0.1' ) !== -1 ||
-    hostname.indexOf( 'localhost' ) !== -1 ||
-    hostname.indexOf( '192.168' ) !== -1
-  ) {
+    case Env.TEST :
+      return `http://0.0.0.0:${n + 2}`;
 
-    // dev mode for api server
-    return `http://52.69.203.137`;
+    case Env.DEVELOP :
+      return 'undotsushin.com';
+
+    case Env.PRODUCTION :
+      return '';
+
+    default :
+      console.warn( `illegal option: ${Env.mode}. instead use production.` );
+      return '';
 
   }
 
-  return '';
-
 };
 
-const API_PATH = apiRoot( Loc.hostname, Loc.port ) + '/api/v1';
+let buildPath = () => {
+  let API_PATH = apiRoot( Loc.port ) + '/api/v1';
+
+  return {
+    'login': new Types(
+      new Type( `${API_PATH}/oauth/token`, 'POST' ),
+      new Permalink(),
+      new Queries()
+    ),
+    // home / self
+    'home': new Types(
+      new Type( `${API_PATH}/articles/home` ),
+      new Permalink( [ 'pickup', 'headline' ] ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    'self': new Types(
+      new Type( `${API_PATH}/articles/self` ),
+      new Permalink( [ 'pickup', 'headline' ] ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
+      true
+    ),
+    // 記事一覧
+    'category': new Types(
+      new Type( `${API_PATH}/articles/category/` ),
+      new Permalink( [ 'all', '*' ], true ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // 検索
+    'search': new Types(
+      new Type( `${API_PATH}/articles/search/` ),
+      new Permalink( [ '*' ], true ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // 詳細
+    'detail': new Types(
+      new Type( `${API_PATH}/articles/` ),
+      new Permalink( [ '*' ], true ),
+      new Queries()
+    ),
+    'bookmark': new Types(
+      new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
+      new Permalink( [ '*' ], true ),
+      new Queries(),
+      true
+    ),
+    // ブックマーク 登録
+    'bookmark:add': new Types(
+      new Type( `${API_PATH}/articles/bookmark`, 'POST' ),
+      new Permalink( [ '*' ], true ),
+      new Queries(),
+      true
+    ),
+    // ブックマーク 削除
+    'bookmark:delete': new Types(
+      new Type( `${API_PATH}/articles/bookmark`, 'DELETE' ),
+      new Permalink( [ '*' ], true ),
+      new Queries(),
+      true
+    ),
+    // 記事詳細でのコメント一覧表示
+    'comment': new Types(
+      new Type( `${API_PATH}/comments/article/` ),
+      new Permalink( [ '*' ], true ),
+      new Queries( [ new CommentType( 'normal|official|self' ), new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // 記事へのコメント
+    'comment:send': new Types(
+      new Type( `${API_PATH}/comments/article/`, 'POST' ),
+      new Permalink( [ '*' ], true ),
+      new Queries( [ new Query( 'body', 'number', '', true ) ] ),
+      true
+    ),
+    // コメント返信
+    'comment:reply': new Types(
+      new Type( `${API_PATH}/comments/article/`, 'POST' ),
+      new Permalink( [ '*/*' ], true ),
+      new Queries( [ new Query( 'body', 'number', '', true ) ] ),
+      true
+    ),
+    // 記事へのコメント編集
+    'comment:send:edit': new Types(
+      new Type( `${API_PATH}/comments/article/`, 'PUT' ),
+      new Permalink( [ '*/*' ], true ),
+      new Queries(),
+      true
+    ),
+    // コメント返信コメント編集
+    'comment:reply:edit': new Types(
+      new Type( `${API_PATH}/comments/article/`, 'PUT' ),
+      new Permalink( [ '*/*/*' ], true ),
+      new Queries(),
+      true
+    ),
+    // 記事へのコメント 削除
+    'comment:send:delete': new Types(
+      new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
+      new Permalink( [ '*/*' ], true ),
+      new Queries(),
+      true
+    ),
+    // コメント返信コメント 削除
+    'comment:reply:delete': new Types(
+      new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
+      new Permalink( [ '*/*/*' ], true ),
+      new Queries(),
+      true
+    ),
+    // コメントGood 追加
+    'comment:good:add': new Types(
+      new Type( `${API_PATH}/comments/like/`, 'POST' ),
+      new Permalink( [ '*' ], true ),
+      new Queries(),
+      true
+    ),
+    // コメントGood 削除
+    'comment:good:delete': new Types(
+      new Type( `${API_PATH}/comments/like/`, 'DELETE' ),
+      new Permalink( [ '*' ], true ),
+      new Queries(),
+      true
+    ),
+    // コメントBad 追加
+    'comment:bad:add': new Types(
+      new Type( `${API_PATH}/comments/bad/`, 'POST' ),
+      new Permalink( [ '*' ], true ),
+      new Queries(),
+      true
+    ),
+    // コメントBad 削除
+    'comment:bad:delete': new Types(
+      new Type( `${API_PATH}/comments/bad/`, 'DELETE' ),
+      new Permalink( [ '*' ], true ),
+      new Queries(),
+      true
+    ),
+    // お知らせ
+    'users:notice': new Types(
+      new Type( `${API_PATH}/users/USER_ID/notifications/` ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // お知らせ 既読
+    'users:notice:read': new Types(
+      new Type( `${API_PATH}/users/USER_ID/notifications/read`, 'POST' ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // ユーザー詳細
+    'users': new Types(
+      new Type( `${API_PATH}/users/USER_ID` ),
+      new Permalink(),
+      new Queries()
+    ),
+    // ユーザーページのブックマーク一覧
+    'users:bookmark': new Types(
+      new Type( `${API_PATH}/users/USER_ID/bookmark` ),
+      new Permalink(),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // マイページの自分のアクティビティ一覧
+    'users:activity': new Types(
+      new Type( `${API_PATH}/users/USER_ID/activity`),
+      new Permalink(),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
+      true
+    )
+  };
+};
 
 let _symbol = Symbol();
-let _api = {
-  'login': new Types(
-    new Type( `${API_PATH}/oauth/token`, 'POST' ),
-    new Permalink(),
-    new Queries()
-  ),
-  // home / self
-  'home': new Types(
-    new Type( `${API_PATH}/articles/home` ),
-    new Permalink( [ 'pickup', 'headline' ] ),
-    new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
-  ),
-  'self': new Types(
-    new Type( `${API_PATH}/articles/self` ),
-    new Permalink( [ 'pickup', 'headline' ] ),
-    new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
-    true
-  ),
-  // 記事一覧
-  'category': new Types(
-    new Type( `${API_PATH}/articles/category/` ),
-    new Permalink( [ 'all', '*' ], true ),
-    new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
-  ),
-  // 検索
-  'search': new Types(
-    new Type( `${API_PATH}/articles/search/` ),
-    new Permalink( [ '*' ], true ),
-    new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
-  ),
-  // 詳細
-  'detail': new Types(
-    new Type( `${API_PATH}/articles/` ),
-    new Permalink( [ '*' ], true ),
-    new Queries()
-  ),
-  'bookmark': new Types(
-    new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
-    new Permalink( [ '*' ], true ),
-    new Queries(),
-    true
-  ),
-  // ブックマーク 登録
-  'bookmark:add': new Types(
-    new Type( `${API_PATH}/articles/bookmark`, 'POST' ),
-    new Permalink( [ '*' ], true ),
-    new Queries(),
-    true
-  ),
-  // ブックマーク 削除
-  'bookmark:delete': new Types(
-    new Type( `${API_PATH}/articles/bookmark`, 'DELETE' ),
-    new Permalink( [ '*' ], true ),
-    new Queries(),
-    true
-  ),
-  // 記事詳細でのコメント一覧表示
-  'comment': new Types(
-    new Type( `${API_PATH}/comments/article/` ),
-    new Permalink( [ '*' ], true ),
-    new Queries( [ new CommentType( 'normal|official|self' ), new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
-  ),
-  // 記事へのコメント
-  'comment:send': new Types(
-    new Type( `${API_PATH}/comments/article/`, 'POST' ),
-    new Permalink( [ '*' ], true ),
-    new Queries( [ new Query( 'body', 'number', '', true ) ] ),
-    true
-  ),
-  // コメント返信
-  'comment:reply': new Types(
-    new Type( `${API_PATH}/comments/article/`, 'POST' ),
-    new Permalink( [ '*/*' ], true ),
-    new Queries( [ new Query( 'body', 'number', '', true ) ] ),
-    true
-  ),
-  // 記事へのコメント編集
-  'comment:send:edit': new Types(
-    new Type( `${API_PATH}/comments/article/`, 'PUT' ),
-    new Permalink( [ '*/*' ], true ),
-    new Queries(),
-    true
-  ),
-  // コメント返信コメント編集
-  'comment:reply:edit': new Types(
-    new Type( `${API_PATH}/comments/article/`, 'PUT' ),
-    new Permalink( [ '*/*/*' ], true ),
-    new Queries(),
-    true
-  ),
-  // 記事へのコメント 削除
-  'comment:send:delete': new Types(
-    new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
-    new Permalink( [ '*/*' ], true ),
-    new Queries(),
-    true
-  ),
-  // コメント返信コメント 削除
-  'comment:reply:delete': new Types(
-    new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
-    new Permalink( [ '*/*/*' ], true ),
-    new Queries(),
-    true
-  ),
-  // コメントGood 追加
-  'comment:good:add': new Types(
-    new Type( `${API_PATH}/comments/like/`, 'POST' ),
-    new Permalink( [ '*' ], true ),
-    new Queries(),
-    true
-  ),
-  // コメントGood 削除
-  'comment:good:delete': new Types(
-    new Type( `${API_PATH}/comments/like/`, 'DELETE' ),
-    new Permalink( [ '*' ], true ),
-    new Queries(),
-    true
-  ),
-  // コメントBad 追加
-  'comment:bad:add': new Types(
-    new Type( `${API_PATH}/comments/bad/`, 'POST' ),
-    new Permalink( [ '*' ], true ),
-    new Queries(),
-    true
-  ),
-  // コメントBad 削除
-  'comment:bad:delete': new Types(
-    new Type( `${API_PATH}/comments/bad/`, 'DELETE' ),
-    new Permalink( [ '*' ], true ),
-    new Queries(),
-    true
-  ),
-  // お知らせ
-  'users:notice': new Types(
-    new Type( `${API_PATH}/users/USER_ID/notifications/` ),
-    new Permalink(),
-    new Queries(),
-    true
-  ),
-  // お知らせ 既読
-  'users:notice:read': new Types(
-    new Type( `${API_PATH}/users/USER_ID/notifications/read`, 'POST' ),
-    new Permalink(),
-    new Queries(),
-    true
-  ),
-  // ユーザー詳細
-  'users': new Types(
-    new Type( `${API_PATH}/users/USER_ID` ),
-    new Permalink(),
-    new Queries()
-  ),
-  // ユーザーページのブックマーク一覧
-  'users:bookmark': new Types(
-    new Type( `${API_PATH}/users/USER_ID/bookmark` ),
-    new Permalink(),
-    new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
-  ),
-  // マイページの自分のアクティビティ一覧
-  'users:activity': new Types(
-    new Type( `${API_PATH}/users/USER_ID/activity`),
-    new Permalink(),
-    new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
-    true
-  )
-};
+let _api = buildPath();
 
 /**
  * <h3>Api 詳細情報</h3>
@@ -231,6 +238,13 @@ export class ApiDae {
 
     }
 
+  }
+  /**
+   * /api/ 前 domain を再生成します
+   * test, develop 切り替えに使用します
+   */
+  static rebuild():void {
+    _api = buildPath();
   }
 
   /**

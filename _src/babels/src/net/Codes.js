@@ -55,7 +55,6 @@ let _symbol = Symbol();
 export class Codes {
   /**
    * ステータスコード・メッセージを日本語と英語で保存しています
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
@@ -69,7 +68,6 @@ export class Codes {
   }
 
   /**
-   * @method status
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
@@ -81,7 +79,6 @@ export class Codes {
 
   /**
    * status codeの意味を調べます
-   * @method message
    * @param {Number} code サーバーからのresponse status code
    * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
    */
@@ -95,9 +92,8 @@ export class Codes {
   }
 
   /**
-   * @method jp
    * @param {Number} code status code
-   * @return {*} 日本語メッセージを返します
+   * @returns {*} 日本語メッセージを返します
    */
   static jp( code:Number ):string {
 
@@ -106,9 +102,8 @@ export class Codes {
   }
 
   /**
-   * @method en
    * @param {Number} code status code
-   * @return {*} 英語メッセージを返します
+   * @returns {*} 英語メッセージを返します
    */
   static en( code:Number ):string {
 

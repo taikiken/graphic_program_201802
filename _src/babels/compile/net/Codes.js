@@ -121,7 +121,7 @@ var Codes = exports.Codes = function () {
     /**
      * @method jp
      * @param {Number} code status code
-     * @return {*} 日本語メッセージを返します
+     * @returns {*} 日本語メッセージを返します
      */
 
   }, {
@@ -134,7 +134,7 @@ var Codes = exports.Codes = function () {
     /**
      * @method en
      * @param {Number} code status code
-     * @return {*} 英語メッセージを返します
+     * @returns {*} 英語メッセージを返します
      */
 
   }, {

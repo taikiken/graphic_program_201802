@@ -19,8 +19,8 @@ import {Api} from '../../net/Api';
  */
 export class Pickup extends Action {
   /**
-   * Home pickup(slider) データを取得します
-   * types: Api.home() を使用します
+   * Home pickup(slider) データを取得します<br>
+   * <b>types: Api.home()</b> を使用します
    * @constructor
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -32,8 +32,8 @@ export class Pickup extends Action {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * Ajax API url を作成します
-   * Api.home().url/pickup?offset=0&length=5
+   * Ajax API url を作成します<br>
+   * <code>Api.home().url/pickup?offset=0&length=5</code>
    * @method url
    * @returns {string} pickup API url を返します
    */

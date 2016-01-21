@@ -6,4 +6,8 @@
  * Time: 15:30
  */
 
-echo 'test php';
+header("Access-Control-Allow-Origin: *");
+
+echo 'hello';
+
+exit(0);

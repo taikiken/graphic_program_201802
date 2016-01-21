@@ -19,7 +19,8 @@ import {Api} from '../../net/Api';
  */
 export class Search extends Offset {
   /**
-   * 検索キーワードを元に記事を検索します
+   * 検索キーワードを元に記事を検索します<br>
+   * <b>types: Api.search()</b> を使用します
    * @param {string} word 検索キーワード
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

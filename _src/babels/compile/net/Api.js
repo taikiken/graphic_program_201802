@@ -46,7 +46,6 @@ var _symbol = (0, _symbol3.default)();
 var Api = exports.Api = function () {
   /**
    * static class です、instance を作成できません
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -60,12 +59,23 @@ var Api = exports.Api = function () {
   }
 
   /**
-   * login API を取得します
-   * @method login
-   * @returns {Types} login API をTypes instanceで返します
+   * /api/ 前 domain を再生成します
+   * test, develop 切り替えに使用します
    */
 
   (0, _createClass3.default)(Api, null, [{
+    key: 'rebuild',
+    value: function rebuild() {
+
+      _ApiDae.ApiDae.rebuild();
+    }
+
+    /**
+     * login API を取得します
+     * @returns {Types} login API をTypes instanceで返します
+     */
+
+  }, {
     key: 'login',
     value: function login() {
 
@@ -74,7 +84,6 @@ var Api = exports.Api = function () {
 
     /**
      * home API を login している / していない に合わせ取得します
-     * @method home
      * @returns {Types} home API(home / self)をTypes instanceで返します
      */
 
@@ -87,8 +96,7 @@ var Api = exports.Api = function () {
 
     /**
      * ログインなしユーザーのhome API
-     * @method homeAPi
-     * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
+     * @returns {Types} ログインなしユーザーのhome APIをTypes instanceで返します
      */
 
   }, {
@@ -101,7 +109,7 @@ var Api = exports.Api = function () {
     /**
      * ログイン済みユーザーのhome API
      * @method selfAPi
-     * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
+     * @returns {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
      */
 
   }, {
@@ -113,7 +121,6 @@ var Api = exports.Api = function () {
 
     /**
      * category API を取得します
-     * @method category
      * @returns {Types} category API を Types instance で取得します
      */
 
@@ -126,7 +133,6 @@ var Api = exports.Api = function () {
 
     /**
      * search API を取得します
-     * @method search
      * @returns {Types} category API をTypes instanceで返します
      */
 
@@ -139,7 +145,6 @@ var Api = exports.Api = function () {
 
     /**
      * category API を取得します
-     * @method detail
      * @returns {Types} category API をTypes instanceで返します
      */
 
@@ -152,7 +157,6 @@ var Api = exports.Api = function () {
 
     /**
      * bookmark API を取得します
-     * @method bookmark
      * @param {string} [action=add] path option を指定します
      * @returns {Types} bookmark API をTypes instanceで返します
      */
@@ -180,7 +184,6 @@ var Api = exports.Api = function () {
 
     /**
      * comment API を取得します
-     * @method comment
      * @param {string} [action=''] path option を指定します
      * @returns {Types} comment API をTypes instanceで返します
      */
@@ -232,7 +235,6 @@ var Api = exports.Api = function () {
 
     /**
      * users API を取得します
-     * @method users
      * @param {string} [action=''] path option を指定します
      * @returns {Types} category users をTypes instanceで返します
      */

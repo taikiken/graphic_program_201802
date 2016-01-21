@@ -3,7 +3,7 @@
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-17 19:26:24
+ * @date 2016-01-21 21:05:13
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -16,6 +16,9 @@
   "use strict";
 
   var UT = self.UT;
+
+  UT.app.Env.test();
+  UT.net.Api.rebuild();
 
   var React = window.React;
   var ReactDOM = window.ReactDOM;
@@ -78,9 +81,58 @@
   }
 
   action = new Pickup();
+
+  action.success = function (result) {
+
+    console.log('Pickup.success ', result);
+    console.log('Pickup.success.response ', result.response);
+    console.log('Pickup.success.status ', result.status);
+  };
+
   action.start();
 
   // -------------------------------------------------------------
+  var StateTest = React.createClass({
+    displayName: 'StateTest',
+
+    propTypes: {
+      list: React.PropTypes.array.isRequired
+    },
+    getDefaultProps: function getDefaultProps() {
+      return {
+        list: []
+      };
+    },
+    //getInitialState: function() {
+    //  return {
+    //    list: []
+    //  };
+    //},
+    render: function render() {
+
+      //var list = this.state.list;
+      var list = this.props.list;
+
+      return React.createElement(
+        'div',
+        null,
+        list.map(function (num, i) {
+
+          // iteration する時は 属性(key)に unique な値をセットする
+          return React.createElement(
+            'p',
+            { key: i, 'data-key': num },
+            num
+          );
+        })
+      );
+
+      //return tag;
+
+      // 属性 quotation 使わない
+      //return <p data-key={list[ 0 ]}>{list[ 0 ]}</p>;
+    }
+  });
 
   UT.Test = {
     f1: function f1(element) {
@@ -120,6 +172,10 @@
       ReactDOM.render(React.createElement(Form2, null), form);
 
       return form;
+    },
+    list: function list(listOption, element) {
+
+      ReactDOM.render(React.createElement(StateTest, { list: listOption }), element);
     }
   };
 })(window);

@@ -47,15 +47,25 @@ var Loc = exports.Loc = function () {
 
     this._search = null;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    *
-   * @param {string} [search=''] key: value にしたい search型 文字列
-   * @returns {Loc} instance を返します
+   * @returns {string} location.hrefを返します
    */
 
   (0, _createClass3.default)(Loc, [{
     key: 'parse',
+
+    // ---------------------------------------------------
+    //  METHOD instance
+    // ---------------------------------------------------
+    /**
+     *
+     * @param {string} [search=''] key: value にしたい search型 文字列
+     * @returns {Loc} instance を返します
+     */
     value: function parse() {
       var search = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
@@ -80,26 +90,22 @@ var Loc = exports.Loc = function () {
 
       return search[key];
     }
-
-    /**
-     *
-     * @returns {string} location.hrefを返します
-     */
-
-  }], [{
-    key: 'hashStrip',
-
+    // ---------------------------------------------------
+    //  METHOD static
+    // ---------------------------------------------------
     /**
      * hash(#example)から`#`をとります
      * @param {string} hash hash文字列
      * @returns {string} hash文字列から#を削除した文字列を返します
      */
+
+  }], [{
+    key: 'hashStrip',
     value: function hashStrip() {
       var hash = arguments.length <= 0 || arguments[0] === undefined ? Loc.hash : arguments[0];
 
       return hash.replace(/^[#\/]|\s+$/g, '');
     }
-
     /**
      * pathnameを/で分解します
      * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
@@ -113,7 +119,6 @@ var Loc = exports.Loc = function () {
 
       return pathname.split('/');
     }
-
     /**
      * location.search を key: value へ分解します
      * @param {string} search location.search型文字列
@@ -172,7 +177,6 @@ var Loc = exports.Loc = function () {
 
       return self.location.href;
     }
-
     /**
      *
      * @returns {string} location.pathname(urlからprotocol+hostを除く)を返します
@@ -184,7 +188,6 @@ var Loc = exports.Loc = function () {
 
       return self.location.pathname;
     }
-
     /**
      *
      * @returns {string} location.hashを返します
@@ -196,7 +199,6 @@ var Loc = exports.Loc = function () {
 
       return self.location.hash;
     }
-
     /**
      * url の query 文字列
      * @returns {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
@@ -207,6 +209,42 @@ var Loc = exports.Loc = function () {
     get: function get() {
 
       return self.location.search.substring(1);
+    }
+
+    /**
+     *
+     * @returns {string} host name + port number を返します
+     */
+
+  }, {
+    key: 'host',
+    get: function get() {
+      // host + port number
+      return self.location.host;
+    }
+
+    /**
+     *
+     * @returns {string} host name だけを返します
+     */
+
+  }, {
+    key: 'hostname',
+    get: function get() {
+      // host only
+      return self.location.hostname;
+    }
+
+    /**
+     *
+     * @returns {string} port number を返します
+     */
+
+  }, {
+    key: 'port',
+    get: function get() {
+      // port number
+      return self.location.port;
     }
   }]);
   return Loc;

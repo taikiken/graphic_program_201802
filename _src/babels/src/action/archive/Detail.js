@@ -44,7 +44,7 @@ export class Detail extends Action {
 
   /**
    * 記事ID
-   * @return {Number|*} 記事IDを返します
+   * @returns {Number|*} 記事IDを返します
    */
   get id():Number {
     return this._id;

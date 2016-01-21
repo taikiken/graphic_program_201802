@@ -22,7 +22,6 @@ let _id = -1;
 export class User {
   /**
    * static class です, instance を作成しません
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
@@ -39,7 +38,6 @@ export class User {
   // ---------------------------------------------------
   /**
    * sign in / out 状態を表します
-   * @method sign
    * @returns {boolean} sign in / out 状態を返します
    */
   static get sign():boolean {
@@ -60,7 +58,6 @@ export class User {
 
   /**
    * User id 情報
-   * @method id
    * @returns {number} User id を返します
    */
   static get id():Number {

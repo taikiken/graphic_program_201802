@@ -57,16 +57,16 @@ var Result = exports.Result = function () {
     }
 
     /**
-     * 取得 JSON responce section
-     * @method responce
-     * @returns {*} 取得 JSON responce section を返します
+     * 取得 JSON response section
+     * @method response
+     * @returns {*} 取得 JSON response section を返します
      */
 
   }, {
-    key: 'responce',
+    key: 'response',
     get: function get() {
 
-      return this.data.responce;
+      return this.data.response;
     }
 
     /**

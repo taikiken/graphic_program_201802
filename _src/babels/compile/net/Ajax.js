@@ -24,6 +24,8 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _Env = require('../app/Env');
+
 var _Codes = require('./Codes');
 
 var _Result = require('../data/Result');
@@ -46,18 +48,28 @@ var Ajax = exports.Ajax = function () {
     // 実行可否判断 flag は trueです
     this._can = true;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
-   *
-   * @param {string} url request URL
-   * @param {string} method POST|GET...
-   * @param {Function} resolve success callback
-   * @param {Function} reject fail callback
-   * @param {FormData} [formData=null] FormData Object
+   * @method can
+   * @returns {boolean} 実行可否 flag を返します
    */
 
   (0, _createClass3.default)(Ajax, [{
     key: 'start',
+
+    // ---------------------------------------------------
+    //  METHOD
+    // ---------------------------------------------------
+    /**
+     *
+     * @param {string} url request URL
+     * @param {string} method POST|GET...
+     * @param {Function} resolve success callback
+     * @param {Function} reject fail callback
+     * @param {FormData} [formData=null] FormData Object
+     */
     value: function start(url, method, resolve, reject) {
       var formData = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
 
@@ -84,6 +96,14 @@ var Ajax = exports.Ajax = function () {
         cache: 'no-cache'
       };
 
+      // local, develop mode
+      // cross domain set
+      if (_Env.Env.mode !== _Env.Env.PRODUCTION) {
+
+        option.mode = 'cors';
+      }
+
+      // body へ FormData をセット
       if (formData !== null && typeof formData !== 'undefined') {
 
         option.body = formData;
@@ -127,6 +147,7 @@ var Ajax = exports.Ajax = function () {
         resolve(result);
       }).catch(function (error) {
 
+        // 何か問題発生
         _this.enable();
         reject(error);
       });
@@ -152,12 +173,6 @@ var Ajax = exports.Ajax = function () {
 
       this._can = false;
     }
-
-    /**
-     * @method can
-     * @returns {boolean} 実行可否 flag を返します
-     */
-
   }, {
     key: 'can',
     get: function get() {

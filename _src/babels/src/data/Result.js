@@ -16,9 +16,19 @@
  */
 export class Result {
   /**
-   * Ajax 成功時にdataを保存します
+   * Ajax 成功時にdataを保存します<br>
+   * success event handler で結果(Result instance)を受け取れます<br>
+   *
+   * @example
+   * let success = (result) => {
+   *   // response section 取得
+   *   response.response
+   *   // status section 取得
+   *   response.status
+   * }
+   *
    * @constructor
-   * @param {{status: *, responce: *}} json json パース後データ
+   * @param {{status: *, response: *}} json json パース後データ
    */
   constructor( json ) {
 
@@ -28,7 +38,6 @@ export class Result {
 
   /**
    * parsed JSON プロパティ
-   * @method data
    * @returns {*} パース済みJSON(Object)を返します
    */
   get data():Object {
@@ -38,19 +47,17 @@ export class Result {
   }
 
   /**
-   * 取得 JSON responce section
-   * @method responce
-   * @returns {*} 取得 JSON responce section を返します
+   * 取得 JSON response section
+   * @returns {*} 取得 JSON response section を返します
    */
-  get responce():JSON {
+  get response():JSON {
 
-    return this.data.responce;
+    return this.data.response;
 
   }
 
   /**
    * 取得 JSON status section
-   * @method status
    * @returns {{code: number, user_massage: string,developer_message: string}} responce.status を返します
    */
   get status():Object {

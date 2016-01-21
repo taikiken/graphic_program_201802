@@ -19,13 +19,14 @@ import {Types} from '../net/Types';
 // 基本機能を設定し Interface として使用します
 
 /**
- * Ajax 処理を行います
- * Interface として使用します
- * 各 Class で extends して下さい
+ * Ajax 処理を行います<br>
+ * Template Pattern として使用します<br>
+ * 各 Class で extends します
  */
 export class Action {
   /**
-   * Ajax 処理, query なし
+   * Ajax 処理, query なし<br>
+   * 1回だけのリクエストに使用します
    * @param {Types} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

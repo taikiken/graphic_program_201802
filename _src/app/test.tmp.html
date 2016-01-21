@@ -13,10 +13,16 @@
 
 <h1 id="c1"></h1>
 
-<p id="f1"></p>
-<p id="f2"></p>
-<p id="f3"></p>
+<section id="f1"></section>
+<section id="f2"></section>
+<section id="f3"></section>
+<section id="f4"></section>
 
+<section id="list">
+
+</section>
+
+<p><button id="listAdd">増やす</button></p>
 <script src="assets/js/bundle/main.bundle.js"></script>
 <script src="assets/js/test.bundle.js"></script>
 <script>
@@ -31,21 +37,54 @@
     var React = window.React;
     var ReactDOM = window.ReactDOM;
 
+//    UT.app.Env.test();
+
+    // ---------------------------------------------
     UT.Test.f1( document.getElementById( 'f1' ) );
 
+    // ---------------------------------------------
     var form2 = document.createElement( 'form' );
     var result = UT.Test.f2( form2, '<input type="text" value="AAA">' );
 
     console.log( 'result ', result );
 
+    // ---------------------------------------------
     var div3 = React.createElement( 'div', {
       id: 'test',
-      class: 'bound',
+      className: 'bound',
       'data-query': 'not-bound'
     }, '三日った' );
 
 //    document.getElementById( 'f3' ).appendChild( div3 );
     ReactDOM.render( div3, document.getElementById( 'f3' ) );
+
+    // ---------------------------------------------
+    // f4
+    var div4 = React.createElement( 'div', {
+      id: 'test4',
+      className: 'bound',
+      'data-query': 'not-bound'
+    }, UT.util.Format.date( '2016-01-14T18:25:45+09:00' ) + ', 2016-01-14T18:25:45+09:00' );
+
+    ReactDOM.render( div4, document.getElementById( 'f4' ) );
+
+    // ---------------------------------------------
+    // state test
+    var
+      stateList = [1, 2, 3 ],
+      count = 4;
+
+    UT.Test.list( stateList, document.getElementById( 'list' ) );
+
+    document.getElementById( 'listAdd' ).addEventListener( 'click', function() {
+
+      stateList.push( count++ );
+      stateList.push( count++ );
+      stateList.push( count++ );
+
+      UT.Test.list( stateList, document.getElementById( 'list' ) )
+
+    }, false );
 
   }( window ) );
 </script>

@@ -15,6 +15,9 @@
 
   var UT = self.UT;
 
+  UT.app.Env.test();
+  UT.net.Api.rebuild();
+
   var React = window.React;
   var ReactDOM = window.ReactDOM;
   var TestApp = React.createClass( {
@@ -81,10 +84,54 @@
   }
 
   action = new Pickup();
+
+  action.success = function( result ) {
+
+    console.log( 'Pickup.success ', result );
+    console.log( 'Pickup.success.response ', result.response );
+    console.log( 'Pickup.success.status ', result.status );
+
+  };
+
   action.start();
 
   // -------------------------------------------------------------
+  var StateTest = React.createClass( {
+    propTypes: {
+      list: React.PropTypes.array.isRequired
+    },
+    getDefaultProps: function() {
+      return {
+        list: []
+      };
+    },
+    //getInitialState: function() {
+    //  return {
+    //    list: []
+    //  };
+    //},
+    render: function() {
 
+      //var list = this.state.list;
+      var list = this.props.list;
+
+      return (
+
+        <div>{ list.map( function( num, i ) {
+
+          // iteration する時は 属性(key)に unique な値をセットする
+          return <p key={i} data-key={num}>{num}</p>;
+
+        } ) }</div>
+      );
+
+      //return tag;
+
+      // 属性 quotation 使わない
+      //return <p data-key={list[ 0 ]}>{list[ 0 ]}</p>;
+
+    }
+  } );
 
   UT.Test = {
     f1: function( element ) {
@@ -115,6 +162,14 @@
       ReactDOM.render( <Form2/>, form );
 
       return form;
+
+    },
+    list: function( listOption, element ) {
+
+      ReactDOM.render(
+        React.createElement( StateTest, { list: listOption } ),
+        element
+      );
 
     }
   };

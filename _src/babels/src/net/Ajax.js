@@ -11,6 +11,7 @@
  */
 'use strict';
 
+import {Env} from '../app/Env';
 import {Codes} from './Codes';
 import {Result} from '../data/Result';
 
@@ -28,7 +29,21 @@ export class Ajax {
     this._can = true;
 
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * @method can
+   * @returns {boolean} 実行可否 flag を返します
+   */
+  get can():boolean {
 
+    return this._can;
+
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    *
    * @param {string} url request URL
@@ -63,6 +78,15 @@ export class Ajax {
       cache: 'no-cache'
     };
 
+    // local, develop mode
+    // cross domain set
+    if ( Env.mode !== Env.PRODUCTION ) {
+
+      option.mode = 'cors';
+
+    }
+
+    // body へ FormData をセット
     if ( formData !== null && typeof formData !== 'undefined' ) {
 
       option.body = formData;
@@ -116,6 +140,7 @@ export class Ajax {
     } )
     .catch( function( error ) {
 
+      // 何か問題発生
       _this.enable();
       reject( error );
 
@@ -140,13 +165,4 @@ export class Ajax {
 
   }
 
-  /**
-   * @method can
-   * @returns {boolean} 実行可否 flag を返します
-   */
-  get can():boolean {
-
-    return this._can;
-
-  }
 }

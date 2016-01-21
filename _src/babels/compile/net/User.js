@@ -54,7 +54,9 @@ var User = exports.User = function () {
       throw new Error('User is static Class. not use new User().');
     }
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * sign in / out 状態を表します
    * @method sign

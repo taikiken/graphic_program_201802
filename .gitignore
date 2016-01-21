@@ -24,3 +24,6 @@ _bin
 # intellij
 .idea
 *.iml
+
+# crossdomain.xml
+crossdomain.xml

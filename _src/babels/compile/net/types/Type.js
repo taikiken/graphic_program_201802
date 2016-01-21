@@ -36,7 +36,7 @@ var Type = exports.Type = function () {
   /**
    * @constructor
    * @param {string} url API request先
-   * @param {string} [method=GET] POST | GET | DELETE...
+   * @param {string} [method=GET] 'GET', 'POST', 'PUT', 'DELETE'...
    */
 
   function Type(url) {
@@ -46,7 +46,9 @@ var Type = exports.Type = function () {
     this.url = url;
     this.method = method;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * @method url
    * @returns {string} API request先を返します
@@ -82,8 +84,8 @@ var Type = exports.Type = function () {
     }
 
     /**
-     * POST | GET... を設定します
-     * @param {string} method POST | GET...の値
+     * 'GET', 'POST', 'PUT', 'DELETE'... を設定します
+     * @param {string} method 'GET', 'POST', 'PUT', 'DELETE'...
      */
     ,
     set: function set(method) {
@@ -97,11 +99,12 @@ var Type = exports.Type = function () {
 
       this._method = methodUpper;
     }
-
+    // ---------------------------------------------------
+    //  METHOD
+    // ---------------------------------------------------
     /**
-     * @method validate
      * @param {string} method method type
-     * @return {boolean} method type を検証し真偽値を返します
+     * @returns {boolean} method type を検証し真偽値を返します
      */
 
   }], [{

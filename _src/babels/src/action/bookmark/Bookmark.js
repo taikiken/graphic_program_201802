@@ -14,7 +14,17 @@
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
 
+/**
+ * 記事のブックマーク登録 / 解除<br>
+ * <code>/api/v1/articles/bookmark/{:article_id}</code>
+ */
 export class Bookmark extends Action {
+  /**
+   * 記事のブックマーク登録 / 解除 を行います
+   * @param {number} id article id 記事ID
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   */
   constructor( id:Number, resolve:Function = null, reject:Function = null ) {
 
     super( Api.bookmark(), resolve, reject );
@@ -24,6 +34,10 @@ export class Bookmark extends Action {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   *
+   * @return {Number|*} 記事 ID を返します
+   */
   get id():Number {
     return this._id;
   }
@@ -46,9 +60,21 @@ export class Bookmark extends Action {
     console.error( 'illegal operation, use start with method: ' + method );
   }
 
+  /**
+   * 記事のブックマーク登録
+   */
   add():void {
 
     this._ajax.start( this.url, 'POST', this.success.bind( this ), this.fail.bind( this ) );
+
+  }
+
+  /**
+   * 記事のブックマーク解除
+   */
+  remove():void {
+
+    this._ajax.start( this.url, 'DELETE', this.success.bind( this ), this.fail.bind( this ) );
 
   }
 

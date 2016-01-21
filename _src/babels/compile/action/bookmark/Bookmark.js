@@ -42,8 +42,20 @@ var _Api = require('../../net/Api');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * 記事のブックマーク登録 / 解除
+ * /api/v1/articles/bookmark/{:article_id}
+ */
+
 var Bookmark = exports.Bookmark = function (_Action) {
   (0, _inherits3.default)(Bookmark, _Action);
+
+  /**
+   * 記事のブックマーク登録 / 解除 を行います
+   * @param {number} id article id 記事ID
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   */
 
   function Bookmark(id) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
@@ -75,11 +87,27 @@ var Bookmark = exports.Bookmark = function (_Action) {
 
       console.error('illegal operation, use start with method: ' + method);
     }
+
+    /**
+     * 記事のブックマーク登録
+     */
+
   }, {
     key: 'add',
     value: function add() {
 
       this._ajax.start(this.url, 'POST', this.success.bind(this), this.fail.bind(this));
+    }
+
+    /**
+     * 記事のブックマーク解除
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove() {
+
+      this._ajax.start(this.url, 'DELETE', this.success.bind(this), this.fail.bind(this));
     }
   }, {
     key: 'id',

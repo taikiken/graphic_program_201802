@@ -16,15 +16,14 @@ import {Action} from './Action';
 import {Types} from '../net/Types';
 
 /**
- * Ajax 処理を行います
- * Interface として使用します
+ * Ajax 処理を行います<br>
+ * Template Pattern として使用します<br>
  * 各 Class で extends して下さい
- * **Next 読込** がある時に使用します
  */
 export class Offset extends Action {
   /**
-   * Ajax 処理, query
-   * @constructor
+   * Ajax 処理, queryあり<br>
+   * **Next 読込** がある時に使用します
    * @param {Type} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -44,7 +43,6 @@ export class Offset extends Action {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @method total
    * @returns {number|*} total件数を返します
    */
   get total():Number {
@@ -59,7 +57,6 @@ export class Offset extends Action {
     this._total = total;
   }
   /**
-   * @method total
    * @returns {number|*} lengths 取得件数を返します
    */
   get length():Number {
@@ -74,7 +71,6 @@ export class Offset extends Action {
     this._length = length;
   }
   /**
-   * @method total
    * @returns {number|*} offset 取得開始位置を返します
    */
   get offset():Number {
@@ -91,7 +87,6 @@ export class Offset extends Action {
 
   /**
    * url を作成します
-   * @method url
    * @returns {string} 作成した url を返します
    */
   get url():string {
@@ -100,6 +95,16 @@ export class Offset extends Action {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * start を使わずに next を使用します
+   * @override
+   * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
+   */
+  start( method:string = this.method ):void {
+
+    //this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+
+  }
   /**
    * offset 値を加算します
    * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
@@ -113,7 +118,7 @@ export class Offset extends Action {
   /**
    * 次があるかを調べます
    * @method hasNext
-   * @return {boolean} 次があるかの真偽値を返します
+   * @returns {boolean} 次があるかの真偽値を返します
    */
   hasNext():boolean {
 
@@ -124,14 +129,17 @@ export class Offset extends Action {
   }
 
   /**
-   * 次の読込を開始します
+   * 次の読込を開始します<br>
+   * start の代わりに使用します
+   * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
-  next():void {
+  next( method:string = this.method ):void {
 
     // next data があるかないかを調べます
+    // next がある時は Ajax を実行します
     if ( this.hasNext() ) {
 
-      this.start();
+      this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
 
     }
 

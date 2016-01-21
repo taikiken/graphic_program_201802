@@ -74,7 +74,7 @@ var Category = exports.Category = function (_Offset) {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {string|*} category slug を返します
+   * @returns {string|*} category slug を返します
    */
 
   (0, _createClass3.default)(Category, [{

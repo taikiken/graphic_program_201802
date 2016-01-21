@@ -34,7 +34,7 @@ export class Category extends Offset {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {string|*} category slug を返します
+   * @returns {string|*} category slug を返します
    */
   get slug():string {
 

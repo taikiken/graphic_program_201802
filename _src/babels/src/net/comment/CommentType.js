@@ -20,7 +20,15 @@ import {Query} from '../types/Query';
  */
 export class CommentType extends Query {
   /**
-   * @constructor
+   * <code>/api/1/comments/artice/{:article_id}[/type]</code>
+   * <pre>
+   * 取得するコメントタイプ
+   * - なし    : すべてのユーザーのコメント
+   * - normal : 通常ユーザーのコメント
+   * - official : 公式ユーザーのコメント
+   * - self : 自分のコメント
+   * - [commend_id] : 特定のコメントのみ
+   * </pre>
    * @param {string} key dog|cat|food のように | 区切りでオプションをつなげます
    * @param {boolean} [require=false] 必須真偽値
    */

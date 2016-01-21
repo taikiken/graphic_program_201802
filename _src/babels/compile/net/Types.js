@@ -54,7 +54,9 @@ var Types = exports.Types = function () {
     this._queries = queries;
     this._auth = auth;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * @method type
    * @returns {Type} Type instance を返します
@@ -69,7 +71,7 @@ var Types = exports.Types = function () {
 
     /**
      * @method url
-     * @return {string} url を返します
+     * @returns {string} url を返します
      */
 
   }, {
@@ -81,7 +83,7 @@ var Types = exports.Types = function () {
 
     /**
      * @method method
-     * @return {string} method を返します
+     * @returns {string} method を返します
      */
 
   }, {

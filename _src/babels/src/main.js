@@ -8,14 +8,26 @@
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
  */
 // -------------------------------------
 //  main
 //    target for babel compile
 // -------------------------------------
 
+// -------------------------------------
+// app
+import {Env} from './app/Env';
+
 // util
 import {Loc} from './util/Loc';
+import {Format} from './util/Format';
+
+// data
+import {Data} from './data/Data';
+import {Form} from './data/Form';
+import {Result} from './data/Result';
 
 // net
 import {Ajax} from './net/Ajax';
@@ -52,6 +64,9 @@ import {Videos} from './action/archive/Videos';
 // action/sidebar
 import {Widget} from './action/sidebar/Widget';
 
+// action/bookmark
+import {Bookmark} from './action/bookmark/Bookmark';
+
 // action/search
 import {Search} from './action/search/Search';
 
@@ -63,8 +78,17 @@ import {Search} from './action/search/Search';
  */
 var UT = {
   version: '@@version',
+  app: {
+    Env: Env
+  },
+  data: {
+    Data: Data,
+    Form: Form,
+    Result: Result
+  },
   util: {
-    Loc: Loc
+    Loc: Loc,
+    Format: Format
   },
   net: {
     Ajax: Ajax,
@@ -99,11 +123,13 @@ var UT = {
     sidebar: {
       Widget: Widget
     },
+    bookmark: {
+      Bookmark: Bookmark
+    },
     search: {
       Search: Search
     }
   }
-
 };
 
 self.UT = UT;

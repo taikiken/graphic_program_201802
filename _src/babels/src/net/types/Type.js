@@ -18,9 +18,9 @@
  */
 export class Type {
   /**
-   * @constructor
+   * url, method を保存します
    * @param {string} url API request先
-   * @param {string} [method=GET] POST | GET | DELETE...
+   * @param {string} [method=GET] 'GET', 'POST', 'PUT', 'DELETE'...
    */
   constructor( url:string, method:string = 'GET' ) {
 
@@ -32,7 +32,6 @@ export class Type {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @method url
    * @returns {string} API request先を返します
    */
   get url():string {
@@ -52,7 +51,6 @@ export class Type {
   }
 
   /**
-   * @method method
    * @returns {string} POST | GET を返します
    */
   get method():string {
@@ -62,14 +60,14 @@ export class Type {
   }
 
   /**
-   * POST | GET... を設定します
-   * @param {string} method POST | GET...の値
+   * 'GET', 'POST', 'PUT', 'DELETE'... を設定します
+   * @param {string} method 'GET', 'POST', 'PUT', 'DELETE'...
    */
   set method( method:string ):void {
 
     let methodUpper = method.toUpperCase();
 
-    if ( !Type.normalization( methodUpper ) ) {
+    if ( !Type.validate( methodUpper ) ) {
 
       methodUpper = 'GET';
 
@@ -82,11 +80,10 @@ export class Type {
   //  METHOD
   // ---------------------------------------------------
   /**
-   * @method validate
    * @param {string} method method type
-   * @return {boolean} method type を検証し真偽値を返します
+   * @returns {boolean} method type を検証し真偽値を返します
    */
-  static normalization( method:string ):boolean {
+  static validate( method:string ):boolean {
 
     return [ 'GET', 'POST', 'PUT', 'DELETE' ].indexOf( method ) !== -1;
 

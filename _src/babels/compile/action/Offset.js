@@ -110,7 +110,7 @@ var Offset = exports.Offset = function (_Action) {
     /**
      * 次があるかを調べます
      * @method hasNext
-     * @return {boolean} 次があるかの真偽値を返します
+     * @returns {boolean} 次があるかの真偽値を返します
      */
 
   }, {

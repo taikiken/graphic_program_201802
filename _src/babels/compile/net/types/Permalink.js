@@ -53,15 +53,26 @@ var Permalink = exports.Permalink = function () {
     this._paths = paths;
     this._need = need;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
-   * option path 数
-   * @method length
-   * @returns {Number} paths数を返します
+   * オプションパスが必須かのプロパティ
+   * @method require
+   * @returns {boolean} オプションパスが必須かどうかを返します true: 必須
    */
 
   (0, _createClass3.default)(Permalink, [{
     key: 'length',
+
+    // ---------------------------------------------------
+    //  METHOD
+    // ---------------------------------------------------
+    /**
+     * option path 数
+     * @method length
+     * @returns {Number} paths数を返します
+     */
     value: function length() {
 
       return this._paths.length;
@@ -87,13 +98,6 @@ var Permalink = exports.Permalink = function () {
 
       return result;
     }
-
-    /**
-     * オプションパスが必須かのプロパティ
-     * @method require
-     * @returns {boolean} オプションパスが必須かどうかを返します true: 必須
-     */
-
   }, {
     key: 'require',
     get: function get() {

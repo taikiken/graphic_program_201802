@@ -84,7 +84,7 @@ var Detail = exports.Detail = function (_Action) {
 
     /**
      * 記事ID
-     * @return {Number|*} 記事IDを返します
+     * @returns {Number|*} 記事IDを返します
      */
 
   }, {

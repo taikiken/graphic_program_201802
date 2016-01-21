@@ -1,6 +1,16 @@
 'use strict';
 
+var _Env = require('./app/Env');
+
 var _Loc = require('./util/Loc');
+
+var _Format = require('./util/Format');
+
+var _Data = require('./data/Data');
+
+var _Form = require('./data/Form');
+
+var _Result = require('./data/Result');
 
 var _Ajax = require('./net/Ajax');
 
@@ -42,6 +52,8 @@ var _Videos = require('./action/archive/Videos');
 
 var _Widget = require('./action/sidebar/Widget');
 
+var _Bookmark = require('./action/bookmark/Bookmark');
+
 var _Search = require('./action/search/Search');
 
 /**
@@ -51,22 +63,24 @@ var _Search = require('./action/search/Search');
  *    var ut = self.UT
  */
 
-// action/sidebar
+// action/bookmark
 
-// action/archive
+// action/home
 
-// net/comment
+// action
 
-// net/types
+// net
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-17 18:50:31
+ * @date 2016-01-21 21:05:07
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
  *
  */
 // -------------------------------------
@@ -74,11 +88,21 @@ var _Search = require('./action/search/Search');
 //    target for babel compile
 // -------------------------------------
 
-// util
+// -------------------------------------
+// app
 var UT = {
   version: '1.0.0',
+  app: {
+    Env: _Env.Env
+  },
+  data: {
+    Data: _Data.Data,
+    Form: _Form.Form,
+    Result: _Result.Result
+  },
   util: {
-    Loc: _Loc.Loc
+    Loc: _Loc.Loc,
+    Format: _Format.Format
   },
   net: {
     Ajax: _Ajax.Ajax,
@@ -113,19 +137,27 @@ var UT = {
     sidebar: {
       Widget: _Widget.Widget
     },
+    bookmark: {
+      Bookmark: _Bookmark.Bookmark
+    },
     search: {
       Search: _Search.Search
     }
   }
-
 };
 
 // action/search
 
-// action/home
+// action/sidebar
 
-// action
+// action/archive
 
-// net
+// net/comment
+
+// net/types
+
+// data
+
+// util
 
 self.UT = UT;
