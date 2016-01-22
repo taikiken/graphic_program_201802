@@ -1,6 +1,6 @@
 # 運動通信
 
-=> [Githubの使い方](https://github.com/undo-tsushin/undo-tsushin/wiki/intro-howto-github)
+=> [Githubの使い方](https://github.com/undotsushin/undotsushin/wiki/intro-howto-github)
 
 ## 企画概要
 
@@ -13,7 +13,7 @@
 
 ### 仕様
 
-[Wiki](https://github.com/undo-tsushin/undo-tsushin/wiki) を参照してください
+[Wiki](https://github.com/undotsushin/undotsushin/wiki) を参照してください
 
 
 ### デザイン確認
@@ -25,7 +25,7 @@
 
 ### スケジュール
 
-- 要点スケジュール : [Github Milestone](https://github.com/undo-tsushin/undo-tsushin/milestones)
+- 要点スケジュール : [Github Milestone](https://github.com/undotsushin/undotsushin/milestones)
 - 詳細スケジュール : [運動通信 / 進行管理 - Google スプレッドシート](https://docs.google.com/spreadsheets/d/1m5knqkvZKsB2WEkGCWdRTAMD17JipsK1KejTNgQsO10/edit#gid=407766018)
 
 
@@ -43,7 +43,7 @@
 
 タスクとコード(成果物)の管理
 
-- [undo-tsushin/undo-tsushin](https://github.com/undo-tsushin/undo-tsushin)
+- [undotsushin/undotsushin](https://github.com/undotsushin/undotsushin)
 
 #### Slack
 
