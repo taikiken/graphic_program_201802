@@ -16,6 +16,13 @@
 [Wiki](https://github.com/undo-tsushin/undo-tsushin/wiki) を参照してください
 
 
+### デザイン確認
+
+- http://logr.am/undo-tsushin/
+- user: ut
+- pass: utut
+
+
 ### スケジュール
 
 - 要点スケジュール : [Github Milestone](https://github.com/undo-tsushin/undo-tsushin/milestones)
