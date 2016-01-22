@@ -74,7 +74,7 @@ var Category = exports.Category = function (_Offset) {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @returns {string|*} category slug を返します
+   * @return {string|*} category slug を返します
    */
 
   (0, _createClass3.default)(Category, [{
@@ -84,7 +84,7 @@ var Category = exports.Category = function (_Offset) {
       return this._slug;
     }
     /**
-     * @returns {string|*} request type('', ranking, video) を返します
+     * @return {string|*} request type('', ranking, video) を返します
      */
 
   }, {
@@ -97,7 +97,7 @@ var Category = exports.Category = function (_Offset) {
      * Ajax API url を作成します
      * Api.category().url/all|slug[/ranking]?offset=0&length=5
      * @method url
-     * @returns {string} API url を返します
+     * @return {string} API url を返します
      */
 
   }, {
@@ -120,7 +120,7 @@ var Category = exports.Category = function (_Offset) {
     // ---------------------------------------------------
     /**
      * @param {string} type 調べる request type
-     * @returns {*} type を正規化(''|ranking|video)し返します
+     * @return {*} type を正規化(''|ranking|video)し返します
      */
 
   }], [{

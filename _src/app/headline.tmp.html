@@ -37,24 +37,48 @@
     var React = window.React;
     var ReactDOM = window.ReactDOM;
 
-    // test mode
-    UT.app.Env.develop();
-    UT.net.Api.rebuild();
-
-    var Headline = UT.action.home.Headline;
+    var headline;
+    // develop mode
+    UT.app.App.develop();
 
     function done( result ) {
-      console.log( 'success', result.response );
-      console.log( 'success', result.status );
-      console.log( 'success', result.request );
+      console.log( 'success response ', result.response );
+      console.log( 'success status ', result.status );
+      console.log( 'success request', result.request );
     }
 
     function fail( error ) {
       console.log( 'error', error );
     }
 
-    var headline = new Headline( done, fail );
+    headline = new UT.action.home.Headline( done, fail );
     headline.start();
+
+    function didMount() {
+      console.log( 'dom mount' );
+    }
+    function errorMount() {
+      console.log( 'dom errorMount' );
+    }
+    function undefinedError() {
+      console.log( 'undefinedError' );
+    }
+    function emptyError() {
+      console.log( 'emptyError' );
+    }
+    function responseError() {
+      console.log( 'responseError' );
+    }
+    let option = {
+      didMount: didMount,
+      errorMount: errorMount,
+      undefinedError: undefinedError,
+      emptyError: emptyError,
+      responseError: responseError
+    };
+
+    let headline2 = new UT.view.home.ViewHeadline( document.getElementById('f1'), option );
+    headline2.start();
 
   }( window ) );
 </script>

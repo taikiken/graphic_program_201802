@@ -38,7 +38,7 @@ export class User {
   // ---------------------------------------------------
   /**
    * sign in / out 状態を表します
-   * @returns {boolean} sign in / out 状態を返します
+   * @return {boolean} sign in / out 状態を返します
    */
   static get sign():boolean {
 
@@ -58,7 +58,7 @@ export class User {
 
   /**
    * User id 情報
-   * @returns {number} User id を返します
+   * @return {number} User id を返します
    */
   static get id():Number {
 

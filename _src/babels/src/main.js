@@ -20,15 +20,18 @@
 // app
 import {Env} from './app/Env';
 
+// -------------------------------------
 // util
 import {Loc} from './util/Loc';
 import {Format} from './util/Format';
 
+// -------------------------------------
 // data
 import {Data} from './data/Data';
 import {Form} from './data/Form';
 import {Result} from './data/Result';
 
+// -------------------------------------
 // net
 import {Ajax} from './net/Ajax';
 import {Api} from './net/Api';
@@ -46,6 +49,11 @@ import {Type} from './net/types/Type';
 import {CommentType} from './net/comment/CommentType';
 
 
+// -------------------------------------
+// app/App
+import {App} from './app/App';
+
+// -------------------------------------
 // action
 import {Action} from './action/Action';
 import {Offset} from './action/Offset';
@@ -57,7 +65,6 @@ import {News} from './action/home/News';
 
 // action/archive
 import {Category} from './action/archive/Category';
-import {Detail} from './action/archive/Detail';
 import {Ranking} from './action/archive/Ranking';
 import {Videos} from './action/archive/Videos';
 
@@ -70,6 +77,14 @@ import {Bookmark} from './action/bookmark/Bookmark';
 // action/search
 import {Search} from './action/search/Search';
 
+// action/single
+import {Detail} from './action/single/Detail';
+
+// -------------------------------------
+// view
+import {ViewHeadline} from './view/home/ViewHeadline';
+
+
 /**
  * global object
  * こんな感じで使えます
@@ -79,7 +94,8 @@ import {Search} from './action/search/Search';
 var UT = {
   version: '@@version',
   app: {
-    Env: Env
+    Env: Env,
+    App: App
   },
   data: {
     Data: Data,
@@ -116,7 +132,6 @@ var UT = {
     },
     archive: {
       Category: Category,
-      Detail: Detail,
       Ranking: Ranking,
       Videos: Videos
     },
@@ -128,6 +143,14 @@ var UT = {
     },
     search: {
       Search: Search
+    },
+    single: {
+      Detail: Detail
+    }
+  },
+  view: {
+    home: {
+      ViewHeadline: ViewHeadline
     }
   }
 };

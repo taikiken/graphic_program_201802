@@ -69,7 +69,7 @@ export class Codes {
 
   /**
    * @param {int} statusCode サーバーからのレスポンスコード int型
-   * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
+   * @return {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
   static status( statusCode:Number ):boolean {
 
@@ -80,7 +80,7 @@ export class Codes {
   /**
    * status codeの意味を調べます
    * @param {Number} code サーバーからのresponse status code
-   * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
+   * @return {{en: string|*, jp: string|*}} status codeの意味を返します
    */
   static message( code:Number ):Object {
 
@@ -93,7 +93,7 @@ export class Codes {
 
   /**
    * @param {Number} code status code
-   * @returns {*} 日本語メッセージを返します
+   * @return {*} 日本語メッセージを返します
    */
   static jp( code:Number ):string {
 
@@ -103,7 +103,7 @@ export class Codes {
 
   /**
    * @param {Number} code status code
-   * @returns {*} 英語メッセージを返します
+   * @return {*} 英語メッセージを返します
    */
   static en( code:Number ):string {
 

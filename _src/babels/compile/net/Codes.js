@@ -89,7 +89,7 @@ var Codes = exports.Codes = function () {
 
   /**
    * @param {int} statusCode サーバーからのレスポンスコード int型
-   * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
+   * @return {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
 
   (0, _createClass3.default)(Codes, null, [{
@@ -102,7 +102,7 @@ var Codes = exports.Codes = function () {
     /**
      * status codeの意味を調べます
      * @param {Number} code サーバーからのresponse status code
-     * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
+     * @return {{en: string|*, jp: string|*}} status codeの意味を返します
      */
 
   }, {
@@ -117,7 +117,7 @@ var Codes = exports.Codes = function () {
 
     /**
      * @param {Number} code status code
-     * @returns {*} 日本語メッセージを返します
+     * @return {*} 日本語メッセージを返します
      */
 
   }, {
@@ -129,7 +129,7 @@ var Codes = exports.Codes = function () {
 
     /**
      * @param {Number} code status code
-     * @returns {*} 英語メッセージを返します
+     * @return {*} 英語メッセージを返します
      */
 
   }, {

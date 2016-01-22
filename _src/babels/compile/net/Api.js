@@ -72,7 +72,7 @@ var Api = exports.Api = function () {
 
     /**
      * login API を取得します
-     * @returns {Types} login API をTypes instanceで返します
+     * @return {Types} login API をTypes instanceで返します
      */
 
   }, {
@@ -84,7 +84,7 @@ var Api = exports.Api = function () {
 
     /**
      * home API を login している / していない に合わせ取得します
-     * @returns {Types} home API(home / self)をTypes instanceで返します
+     * @return {Types} home API(home / self)をTypes instanceで返します
      */
 
   }, {
@@ -96,7 +96,7 @@ var Api = exports.Api = function () {
 
     /**
      * ログインなしユーザーのhome API
-     * @returns {Types} ログインなしユーザーのhome APIをTypes instanceで返します
+     * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
      */
 
   }, {
@@ -109,7 +109,7 @@ var Api = exports.Api = function () {
     /**
      * ログイン済みユーザーのhome API
      * @method selfAPi
-     * @returns {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
+     * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
      */
 
   }, {
@@ -121,7 +121,7 @@ var Api = exports.Api = function () {
 
     /**
      * category API を取得します
-     * @returns {Types} category API を Types instance で取得します
+     * @return {Types} category API を Types instance で取得します
      */
 
   }, {
@@ -133,7 +133,7 @@ var Api = exports.Api = function () {
 
     /**
      * search API を取得します
-     * @returns {Types} category API をTypes instanceで返します
+     * @return {Types} category API をTypes instanceで返します
      */
 
   }, {
@@ -145,7 +145,7 @@ var Api = exports.Api = function () {
 
     /**
      * category API を取得します
-     * @returns {Types} category API をTypes instanceで返します
+     * @return {Types} category API をTypes instanceで返します
      */
 
   }, {
@@ -158,7 +158,7 @@ var Api = exports.Api = function () {
     /**
      * bookmark API を取得します
      * @param {string} [action=add] path option を指定します
-     * @returns {Types} bookmark API をTypes instanceで返します
+     * @return {Types} bookmark API をTypes instanceで返します
      */
 
   }, {
@@ -185,7 +185,7 @@ var Api = exports.Api = function () {
     /**
      * comment API を取得します
      * @param {string} [action=''] path option を指定します
-     * @returns {Types} comment API をTypes instanceで返します
+     * @return {Types} comment API をTypes instanceで返します
      */
 
   }, {
@@ -236,7 +236,7 @@ var Api = exports.Api = function () {
     /**
      * users API を取得します
      * @param {string} [action=''] path option を指定します
-     * @returns {Types} category users をTypes instanceで返します
+     * @return {Types} category users をTypes instanceで返します
      */
 
   }, {

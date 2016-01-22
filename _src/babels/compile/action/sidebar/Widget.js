@@ -46,7 +46,6 @@ var _symbol = (0, _symbol3.default)();
 var Widget = exports.Widget = function () {
   /**
    * static class です、instance を作成できません
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -64,7 +63,7 @@ var Widget = exports.Widget = function () {
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @returns {Ranking} Ranking instance を返します
+   * @return {Ranking} Ranking instance を返します
    */
 
   (0, _createClass3.default)(Widget, null, [{
@@ -84,7 +83,7 @@ var Widget = exports.Widget = function () {
      * @param {string} [slug=all] category slug です
      * @param {Function} [resolve=null] Ajax 成功時の callback
      * @param {Function} [reject=null] Ajax 失敗時の callback
-     * @returns {Videos} Videos instance を返します
+     * @return {Videos} Videos instance を返します
      */
 
   }, {

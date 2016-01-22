@@ -44,7 +44,7 @@ export class CommentType extends Query {
    * Query override して使います
    * @method has
    * @param {string} key query key
-   * @returns {boolean} query key が存在するかを返します
+   * @return {boolean} query key が存在するかを返します
    */
   has( key:string ):boolean {
 

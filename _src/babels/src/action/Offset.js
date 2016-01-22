@@ -43,7 +43,7 @@ export class Offset extends Action {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @returns {number|*} total件数を返します
+   * @return {number|*} total件数を返します
    */
   get total():Number {
     return this._total;
@@ -57,7 +57,7 @@ export class Offset extends Action {
     this._total = total;
   }
   /**
-   * @returns {number|*} lengths 取得件数を返します
+   * @return {number|*} lengths 取得件数を返します
    */
   get length():Number {
     return this._length;
@@ -71,7 +71,7 @@ export class Offset extends Action {
     this._length = length;
   }
   /**
-   * @returns {number|*} offset 取得開始位置を返します
+   * @return {number|*} offset 取得開始位置を返します
    */
   get offset():Number {
     return this._offset;
@@ -87,7 +87,7 @@ export class Offset extends Action {
 
   /**
    * url を作成します
-   * @returns {string} 作成した url を返します
+   * @return {string} 作成した url を返します
    */
   get url():string {
     return `${this._url}?offset=${this.offset}&length=${this.length}`;
@@ -102,7 +102,8 @@ export class Offset extends Action {
    */
   start( method:string = this.method ):void {
 
-    //this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+    // this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+    console.warn( `instead use next, ${this.url}, ${method}` );
 
   }
   /**
@@ -118,7 +119,7 @@ export class Offset extends Action {
   /**
    * 次があるかを調べます
    * @method hasNext
-   * @returns {boolean} 次があるかの真偽値を返します
+   * @return {boolean} 次があるかの真偽値を返します
    */
   hasNext():boolean {
 

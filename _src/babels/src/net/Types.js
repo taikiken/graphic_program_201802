@@ -37,7 +37,7 @@ export class Types {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @returns {Type} Type instance を返します
+   * @return {Type} Type instance を返します
    */
   get type():Type {
 
@@ -46,7 +46,7 @@ export class Types {
   }
 
   /**
-   * @returns {string} url を返します
+   * @return {string} url を返します
    */
   get url():string {
 
@@ -55,7 +55,7 @@ export class Types {
   }
 
   /**
-   * @returns {string} method を返します
+   * @return {string} method を返します
    */
   get method():string {
 
@@ -63,7 +63,7 @@ export class Types {
   }
 
   /**
-   * @returns {Permalink} Permalink instance を返します
+   * @return {Permalink} Permalink instance を返します
    */
   get permalink():Permalink {
 
@@ -72,7 +72,7 @@ export class Types {
   }
 
   /**
-   * @returns {Queries} Queries instance を返します
+   * @return {Queries} Queries instance を返します
    */
   get queries():Queries {
 
@@ -81,7 +81,7 @@ export class Types {
   }
 
   /**
-   * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+   * @return {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
    */
   get auth() {
 

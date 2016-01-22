@@ -39,7 +39,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Queries = exports.Queries = function () {
   /**
    * Query 情報を保持します
-   * @constructor
    * @param {Array<Query>} [queries=[]] Query{key: value} 配列
    */
 
@@ -53,7 +52,7 @@ var Queries = exports.Queries = function () {
   /**
    * queries個数であるかないかの判断は可能
    * @method length
-   * @returns {Number} queries個数を返します
+   * @return {Number} queries個数を返します
    */
 
   (0, _createClass3.default)(Queries, [{
@@ -65,7 +64,7 @@ var Queries = exports.Queries = function () {
 
     /**
      * @method all
-     * @returns {Array.<Query>} 全てのqueriesを返します
+     * @return {Array.<Query>} 全てのqueriesを返します
      */
 
   }, {
@@ -79,7 +78,7 @@ var Queries = exports.Queries = function () {
      * key から query を探します
      * @method search
      * @param {string} key query key name, ?start=0 の start
-     * @returns {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
+     * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
      */
 
   }, {

@@ -20,7 +20,7 @@ import {Api} from '../../net/Api';
 export class Search extends Offset {
   /**
    * 検索キーワードを元に記事を検索します<br>
-   * <b>types: Api.search()</b> を使用します
+   * ** types: Api.search() ** を使用します
    * @param {string} word 検索キーワード
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -36,7 +36,7 @@ export class Search extends Offset {
   // ---------------------------------------------------
   /**
    * 検索キーワード
-   * @returns {string|*} 検索キーワードを返します
+   * @return {string|*} 検索キーワードを返します
    */
   get word():string {
     return this._word;
@@ -52,7 +52,7 @@ export class Search extends Offset {
   /**
    * url を作成します
    * @method url
-   * @returns {string} 作成した url を返します
+   * @return {string} 作成した url を返します
    */
   get url():string {
     return `${this._url}/${this.word}?offset=${this.offset}&length=${this.length}`;

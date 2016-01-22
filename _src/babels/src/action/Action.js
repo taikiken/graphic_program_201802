@@ -46,14 +46,14 @@ export class Action {
   // ---------------------------------------------------
   /**
    * url を作成します
-   * @returns {string} 作成した url を返します
+   * @return {string} 作成した url を返します
    */
   get url():string {
     return this._url;
   }
 
   /**
-   * @returns {string|*} method, GET|POST|DELETE|PUT... を返します
+   * @return {string|*} method, GET|POST|DELETE|PUT... を返します
    */
   get method():string {
     return this._method;

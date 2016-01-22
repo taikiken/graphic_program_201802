@@ -52,7 +52,7 @@ var Loc = exports.Loc = function () {
   // ---------------------------------------------------
   /**
    *
-   * @returns {string} location.hrefを返します
+   * @return {string} location.hrefを返します
    */
 
   (0, _createClass3.default)(Loc, [{
@@ -64,7 +64,7 @@ var Loc = exports.Loc = function () {
     /**
      *
      * @param {string} [search=''] key: value にしたい search型 文字列
-     * @returns {Loc} instance を返します
+     * @return {Loc} instance を返します
      */
     value: function parse() {
       var search = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
@@ -76,7 +76,7 @@ var Loc = exports.Loc = function () {
     /**
      * search value を keyから探します
      * @param {string} key search name
-     * @returns {*} string|undefined|null で結果を返します
+     * @return {*} string|undefined|null で結果を返します
      */
 
   }, {
@@ -96,7 +96,7 @@ var Loc = exports.Loc = function () {
     /**
      * hash(#example)から`#`をとります
      * @param {string} hash hash文字列
-     * @returns {string} hash文字列から#を削除した文字列を返します
+     * @return {string} hash文字列から#を削除した文字列を返します
      */
 
   }], [{
@@ -109,7 +109,7 @@ var Loc = exports.Loc = function () {
     /**
      * pathnameを/で分解します
      * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
-     * @returns {Array} pathnameを/で分解し配列にし返します
+     * @return {Array} pathnameを/で分解し配列にし返します
      */
 
   }, {
@@ -122,7 +122,7 @@ var Loc = exports.Loc = function () {
     /**
      * location.search を key: value へ分解します
      * @param {string} search location.search型文字列
-     * @returns {*} search を key: value へ分解し Object で返します
+     * @return {*} search を key: value へ分解し Object で返します
      */
 
   }, {
@@ -179,7 +179,7 @@ var Loc = exports.Loc = function () {
     }
     /**
      *
-     * @returns {string} location.pathname(urlからprotocol+hostを除く)を返します
+     * @return {string} location.pathname(urlからprotocol+hostを除く)を返します
      */
 
   }, {
@@ -190,7 +190,7 @@ var Loc = exports.Loc = function () {
     }
     /**
      *
-     * @returns {string} location.hashを返します
+     * @return {string} location.hashを返します
      */
 
   }, {
@@ -201,7 +201,7 @@ var Loc = exports.Loc = function () {
     }
     /**
      * url の query 文字列
-     * @returns {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
+     * @return {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
      */
 
   }, {
@@ -213,7 +213,7 @@ var Loc = exports.Loc = function () {
 
     /**
      *
-     * @returns {string} host name + port number を返します
+     * @return {string} host name + port number を返します
      */
 
   }, {
@@ -225,7 +225,7 @@ var Loc = exports.Loc = function () {
 
     /**
      *
-     * @returns {string} host name だけを返します
+     * @return {string} host name だけを返します
      */
 
   }, {
@@ -237,7 +237,7 @@ var Loc = exports.Loc = function () {
 
     /**
      *
-     * @returns {string} port number を返します
+     * @return {string} port number を返します
      */
 
   }, {

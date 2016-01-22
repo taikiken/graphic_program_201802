@@ -36,7 +36,7 @@ export class Detail extends Action {
   /**
    * url を作成します
    * @method url
-   * @returns {string} 作成した url を返します
+   * @return {string} 作成した url を返します
    */
   get url():string {
     return `${this._url}/${this.id}`;
@@ -44,7 +44,7 @@ export class Detail extends Action {
 
   /**
    * 記事ID
-   * @returns {Number|*} 記事IDを返します
+   * @return {Number|*} 記事IDを返します
    */
   get id():Number {
     return this._id;

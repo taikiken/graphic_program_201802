@@ -36,7 +36,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _symbol = (0, _symbol3.default)();
 
 /**
- * <h3>サーバーリクエストAPIを管理します</h3>
+ * <h3>文字フォーマットに関するUtilityです</h3>
  * 全て static<br>
  * <strong>文字を定型に変換します</strong>
  */
@@ -67,12 +67,13 @@ var Format = exports.Format = function () {
 
       // ["2016-01-14T18:25:45", "2016", "01", "14", "18", "25", "45"] 分解
       var nums = iso.match(/(\d+)\-(\d+)\-(\d+)T(\d+):(\d+):(\d+)?/);
+      // 先頭"2016-01-14T18:25:45"除去
       nums.shift();
-      // 数値へ 頭 0 除去
-      nums.map(function (num) {
-        return num * 1;
+      // 数値へ変換し 頭 0 除去, 01 -> 1
+      var numbers = nums.map(function (num) {
+        return parseInt(num, 10);
       });
-      return nums[0] + "年" + nums[1] + "月" + nums[2] + "日" + nums[3] + "時" + nums[4] + "分" + nums[5] + "秒";
+      return numbers[0] + "年" + numbers[1] + "月" + numbers[2] + "日" + numbers[3] + "時" + numbers[4] + "分" + numbers[5] + "秒";
     }
   }]);
   return Format;

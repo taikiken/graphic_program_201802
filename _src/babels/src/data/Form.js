@@ -36,7 +36,7 @@ export class Form {
   /**
    *
    * @param {Array<Data>} option [data...] key: value 値 配列
-   * @returns {FormData} 引数 option（配列）から作成したFormData instance を返します
+   * @return {FormData} 引数 option（配列）から作成したFormData instance を返します
    */
   static data( option:Array<Data> ):FormData {
 
@@ -60,7 +60,7 @@ export class Form {
    * let data = Form.element( document.querySelector("form") )
    *
    * @param {Element} formElement form element
-   * @returns {FormData} elemet から FormData を作成し返します
+   * @return {FormData} elemet から FormData を作成し返します
    */
   static element( formElement:Element ):FormData {
 

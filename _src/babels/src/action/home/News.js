@@ -20,7 +20,8 @@ import {Api} from '../../net/Api';
 export class News extends Offset {
   /**
    * home 通常記事一覧を取得します<br>
-   * length は取得件数です。<b>default: 10</b>を必要なら変更します
+   * length は取得件数です。
+   * ** default: 10 ** を必要なら変更します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値

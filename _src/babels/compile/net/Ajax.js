@@ -39,7 +39,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Ajax = exports.Ajax = function () {
   /**
    * Ajax instanceを作成し、実行可能プロパティを可能に設定します
-   * @constructor
    */
 
   function Ajax() {
@@ -53,7 +52,7 @@ var Ajax = exports.Ajax = function () {
   // ---------------------------------------------------
   /**
    * @method can
-   * @returns {boolean} 実行可否 flag を返します
+   * @return {boolean} 実行可否 flag を返します
    */
 
   (0, _createClass3.default)(Ajax, [{
@@ -148,11 +147,11 @@ var Ajax = exports.Ajax = function () {
       }).catch(function (error) {
 
         // 何か問題発生
+        // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
         _this.enable();
         reject(error);
       });
     }
-
     /**
      * 実行可否 flag を true にします
      */

@@ -57,7 +57,7 @@ var Types = exports.Types = function () {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @returns {Type} Type instance を返します
+   * @return {Type} Type instance を返します
    */
 
   (0, _createClass3.default)(Types, [{
@@ -68,7 +68,7 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @returns {string} url を返します
+     * @return {string} url を返します
      */
 
   }, {
@@ -79,7 +79,7 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @returns {string} method を返します
+     * @return {string} method を返します
      */
 
   }, {
@@ -90,7 +90,7 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @returns {Permalink} Permalink instance を返します
+     * @return {Permalink} Permalink instance を返します
      */
 
   }, {
@@ -101,7 +101,7 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @returns {Queries} Queries instance を返します
+     * @return {Queries} Queries instance を返します
      */
 
   }, {
@@ -112,7 +112,7 @@ var Types = exports.Types = function () {
     }
 
     /**
-     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+     * @return {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
      */
 
   }, {

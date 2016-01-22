@@ -1,0 +1,170 @@
+{
+    "status": {
+        "code": 200,
+        "user_message": "",
+        "developer_message": ""
+    },
+    "response": {
+        "count": 3,
+        "comments": [
+            {
+                "id": 1,
+                "date": "2016-01-13T22:46:35+09:00",
+                "display_date": "8日前",
+                "body": "
+超難しいシュートを決めて、簡単なシュートを外す
+",
+                "is_like": true,
+                "is_bad": false,
+                "like": 1,
+                "bad": 1,
+                "url": "http://www.undotsushin.com/soccer/29/1",
+                "user": {
+                    "id": 3,
+                    "name": "三枝真",
+                    "profile_picture": "",
+                    "url": "http://www.undotsushin.com/member/3",
+                    "type": {
+                        "id": 6,
+                        "label": "一般ユーザ"
+                    }
+                },
+                "reply": {
+                    "count": "2",
+                    "comments": [
+                        {
+                            "id": 5,
+                            "date": "2016-01-16T20:38:05+09:00",
+                            "display_date": "5日前",
+                            "body": "
+昨年のＦＷローテトリオ、ボスロイドと森島と中村祐樹。今年はそこに小川と斎藤も加わり、空前絶後の激烈ＦＷ先発争い！
+",
+                            "is_like": false,
+                            "is_bad": false,
+                            "like": 0,
+                            "bad": 0,
+                            "url": "http://www.undotsushin.com/soccer/29/5",
+                            "user": {
+                                "id": 3,
+                                "name": "三枝真",
+                                "profile_picture": "",
+                                "url": "http://www.undotsushin.com/member/3",
+                                "type": {
+                                    "id": 6,
+                                    "label": "一般ユーザ"
+                                }
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "date": "2016-01-13T22:47:35+09:00",
+                            "display_date": "8日前",
+                            "body": "
+監督に二回、声をかけらたことをフィールドで証明してください！！
+ひょっとしたらおお化けしてレスターのFWみたいになれるかもよ！？
+",
+                            "is_like": false,
+                            "is_bad": false,
+                            "like": 0,
+                            "bad": 0,
+                            "url": "http://www.undotsushin.com/soccer/29/2",
+                            "user": {
+                                "id": 14,
+                                "name": "山際武",
+                                "profile_picture": "",
+                                "url": "http://www.undotsushin.com/member/14",
+                                "type": {
+                                    "id": 5,
+                                    "label": "公式ユーザ"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 7,
+                "date": "2016-01-20T00:05:47+09:00",
+                "display_date": "2日前",
+                "body": "
+大宮・磐田が昇格ということで来期は降格チームが読みづらい
+半分くらいのチームに降格してしまう可能性があると思う
+",
+                "is_like": false,
+                "is_bad": false,
+                "like": 0,
+                "bad": 0,
+                "url": "http://www.undotsushin.com/soccer/29/7",
+                "user": {
+                    "id": 14,
+                    "name": "山際武",
+                    "profile_picture": "",
+                    "url": "http://www.undotsushin.com/member/14",
+                    "type": {
+                        "id": 5,
+                        "label": "公式ユーザ"
+                    }
+                },
+                "reply": {
+                    "count": "1",
+                    "comments": [
+                        {
+                            "id": 8,
+                            "date": "2016-01-20T00:05:47+09:00",
+                            "display_date": "2日前",
+                            "body": "
+監督も再三強調しているが、とにかく残留の為の40ポイントを何としても稼げ！
+その為には、格上相手に負けないサッカー、危険を冒してでも勝つサッカーより安全第一で負けないサッカーに徹する必要もある。
+2節でいきなりの敵地浦和戦、過去何度もロスタイムショックで負けた、難敵中の難敵。普通に戦えば新10番柏木の好パス、新9番武藤の的確な走りこみと位置取りで守備決壊間違いなし。焦って強引に攻め込んでも、立ちはだかる代表GK西川の壁。ここは専守防衛、篭城死守の一択あるのみ。死に物狂いで、1ポイントを持ち帰れ。それでも地元埼玉新聞始め全国各紙は、浦和痛恨の大誤算～(←ぐるナイのゴチ風に)、ホーム開幕戦で昇格組み相手に不覚極まるドロー発進…てな報道間違いなし。磐田としてはしてやったりと、悦に浸って差し支えなかろう。
+",
+                            "is_like": false,
+                            "is_bad": false,
+                            "like": 0,
+                            "bad": 0,
+                            "url": "http://www.undotsushin.com/soccer/29/8",
+                            "user": {
+                                "id": 3,
+                                "name": "三枝真",
+                                "profile_picture": "",
+                                "url": "http://www.undotsushin.com/member/3",
+                                "type": {
+                                    "id": 6,
+                                    "label": "一般ユーザ"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 6,
+                "date": "2016-01-19T23:59:59+09:00",
+                "display_date": "2日前",
+                "body": "
+いいね！斉藤がどこまでJ1で通じるかわからないけど、ハードワークできるFWは絶対必要。
+ジェイがケガしたときはデカもりしだけでは通用しなくなるかもしれない。アダと斉藤の2人でハードワークすれば相手からも脅威だろう。
+",
+                "is_like": false,
+                "is_bad": false,
+                "like": 0,
+                "bad": 0,
+                "url": "http://www.undotsushin.com/soccer/29/6",
+                "user": {
+                    "id": 6,
+                    "name": "蒔平ゆき",
+                    "profile_picture": "",
+                    "url": "http://www.undotsushin.com/member/6",
+                    "type": {
+                        "id": 4,
+                        "label": "編集部"
+                    }
+                },
+                "reply": []
+            }
+        ]
+    },
+    "request": {
+        "length": 10,
+        "offset": 0
+    }
+}

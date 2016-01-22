@@ -58,7 +58,7 @@ var User = exports.User = function () {
   // ---------------------------------------------------
   /**
    * sign in / out 状態を表します
-   * @returns {boolean} sign in / out 状態を返します
+   * @return {boolean} sign in / out 状態を返します
    */
 
   (0, _createClass3.default)(User, null, [{
@@ -80,7 +80,7 @@ var User = exports.User = function () {
 
     /**
      * User id 情報
-     * @returns {number} User id を返します
+     * @return {number} User id を返します
      */
 
   }, {

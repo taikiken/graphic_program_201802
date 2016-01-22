@@ -31,7 +31,7 @@ export class Loc {
   // ---------------------------------------------------
   /**
    *
-   * @returns {string} location.hrefを返します
+   * @return {string} location.hrefを返します
    */
   static get current():string {
 
@@ -40,7 +40,7 @@ export class Loc {
   }
   /**
    *
-   * @returns {string} location.pathname(urlからprotocol+hostを除く)を返します
+   * @return {string} location.pathname(urlからprotocol+hostを除く)を返します
    */
   static get path():string {
 
@@ -49,7 +49,7 @@ export class Loc {
   }
   /**
    *
-   * @returns {string} location.hashを返します
+   * @return {string} location.hashを返します
    */
   static get hash():string {
 
@@ -58,7 +58,7 @@ export class Loc {
   }
   /**
    * url の query 文字列
-   * @returns {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
+   * @return {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
    */
   static get search():string {
 
@@ -68,7 +68,7 @@ export class Loc {
 
   /**
    *
-   * @returns {string} host name + port number を返します
+   * @return {string} host name + port number を返します
    */
   static get host():string {
     // host + port number
@@ -77,7 +77,7 @@ export class Loc {
 
   /**
    *
-   * @returns {string} host name だけを返します
+   * @return {string} host name だけを返します
    */
   static get hostname():string {
     // host only
@@ -86,7 +86,7 @@ export class Loc {
 
   /**
    *
-   * @returns {string} port number を返します
+   * @return {string} port number を返します
    */
   static get port():string {
     // port number
@@ -98,7 +98,7 @@ export class Loc {
   /**
    *
    * @param {string} [search=''] key: value にしたい search型 文字列
-   * @returns {Loc} instance を返します
+   * @return {Loc} instance を返します
    */
   parse( search:string = '' ):Object {
 
@@ -110,7 +110,7 @@ export class Loc {
   /**
    * search value を keyから探します
    * @param {string} key search name
-   * @returns {*} string|undefined|null で結果を返します
+   * @return {*} string|undefined|null で結果を返します
    */
   find( key:string ):Object {
 
@@ -128,7 +128,7 @@ export class Loc {
   /**
    * hash(#example)から`#`をとります
    * @param {string} hash hash文字列
-   * @returns {string} hash文字列から#を削除した文字列を返します
+   * @return {string} hash文字列から#を削除した文字列を返します
    */
   static hashStrip( hash:string = Loc.hash ):string {
 
@@ -138,7 +138,7 @@ export class Loc {
   /**
    * pathnameを/で分解します
    * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
-   * @returns {Array} pathnameを/で分解し配列にし返します
+   * @return {Array} pathnameを/で分解し配列にし返します
    */
   static resolve( pathname:string = Loc.path ):Array {
 
@@ -148,7 +148,7 @@ export class Loc {
   /**
    * location.search を key: value へ分解します
    * @param {string} search location.search型文字列
-   * @returns {*} search を key: value へ分解し Object で返します
+   * @return {*} search を key: value へ分解し Object で返します
    */
   static parse( search:string = Loc.search ):Object {
 

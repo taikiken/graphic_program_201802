@@ -20,8 +20,22 @@ import {Api} from '../../net/Api';
 export class Pickup extends Action {
   /**
    * Home pickup(slider) データを取得します<br>
-   * <b>types: Api.home()</b> を使用します
-   * @constructor
+   * ** types: Api.home() ** を使用します
+   *
+   * @example
+   * function done( result ) {
+   *    console.log( 'success', result.response );
+   *    console.log( 'success', result.status );
+   *    console.log( 'success', result.request );
+   *  }
+   *
+   * function fail( error ) {
+   *    console.log( 'error', error );
+   *  }
+   *
+   * var headline = new Headline( done, fail );
+   * headline.start();
+   *
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
@@ -35,7 +49,7 @@ export class Pickup extends Action {
    * Ajax API url を作成します<br>
    * <code>Api.home().url/pickup?offset=0&length=5</code>
    * @method url
-   * @returns {string} pickup API url を返します
+   * @return {string} pickup API url を返します
    */
   get url():string {
 

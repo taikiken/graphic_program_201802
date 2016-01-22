@@ -78,19 +78,19 @@
 
 	var _CommentType = __webpack_require__(68);
 
-	var _Action = __webpack_require__(83);
+	var _App = __webpack_require__(83);
 
-	var _Offset = __webpack_require__(84);
+	var _Action = __webpack_require__(84);
 
-	var _Pickup = __webpack_require__(89);
+	var _Offset = __webpack_require__(85);
 
-	var _Headline = __webpack_require__(90);
+	var _Pickup = __webpack_require__(90);
 
-	var _News = __webpack_require__(91);
+	var _Headline = __webpack_require__(91);
 
-	var _Category = __webpack_require__(92);
+	var _News = __webpack_require__(92);
 
-	var _Detail = __webpack_require__(93);
+	var _Category = __webpack_require__(93);
 
 	var _Ranking = __webpack_require__(94);
 
@@ -102,6 +102,10 @@
 
 	var _Search = __webpack_require__(98);
 
+	var _Detail = __webpack_require__(99);
+
+	var _ViewHeadline = __webpack_require__(100);
+
 	/**
 	 * global object
 	 * こんな感じで使えます
@@ -109,17 +113,21 @@
 	 *    var ut = self.UT
 	 */
 
+	// action/single
+
 	// action/bookmark
 
-	// action/home
+	// action/archive
 
-	// action
+	// -------------------------------------
+	// app/App
 
+	// -------------------------------------
 	// net
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-21 22:15:37
+	 * @date 2016-01-22 22:39:54
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -139,7 +147,8 @@
 	var UT = {
 	  version: '1.0.0',
 	  app: {
-	    Env: _Env.Env
+	    Env: _Env.Env,
+	    App: _App.App
 	  },
 	  data: {
 	    Data: _Data.Data,
@@ -176,7 +185,6 @@
 	    },
 	    archive: {
 	      Category: _Category.Category,
-	      Detail: _Detail.Detail,
 	      Ranking: _Ranking.Ranking,
 	      Videos: _Videos.Videos
 	    },
@@ -188,22 +196,38 @@
 	    },
 	    search: {
 	      Search: _Search.Search
+	    },
+	    single: {
+	      Detail: _Detail.Detail
+	    }
+	  },
+	  view: {
+	    home: {
+	      ViewHeadline: _ViewHeadline.ViewHeadline
 	    }
 	  }
 	};
+
+	// -------------------------------------
+	// view
 
 	// action/search
 
 	// action/sidebar
 
-	// action/archive
+	// action/home
+
+	// -------------------------------------
+	// action
 
 	// net/comment
 
 	// net/types
 
+	// -------------------------------------
 	// data
 
+	// -------------------------------------
 	// util
 
 	self.UT = UT;
@@ -248,7 +272,9 @@
 	var _mode = 'production';
 
 	/**
-	 * 動作モードを設定します
+	 * <h3>local test / develop / production を管理します</h3>
+	 * 全て static<br>
+	 * 動作モードを設定します<br>
 	 * <pre>
 	 *    production: 実行モード
 	 *    develop: 開発モード（ローカルからのテスト）
@@ -259,7 +285,6 @@
 	var Env = exports.Env = function () {
 	  /**
 	   * static class です, instance を作成しません
-	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -276,7 +301,7 @@
 	  // ---------------------------------------------------
 	  /**
 	   *
-	   * @returns {string} 現在のモードを返します
+	   * @return {string} 現在のモードを返します
 	   */
 
 	  (0, _createClass3.default)(Env, null, [{
@@ -1084,7 +1109,7 @@
 	  // ---------------------------------------------------
 	  /**
 	   *
-	   * @returns {string} location.hrefを返します
+	   * @return {string} location.hrefを返します
 	   */
 
 	  (0, _createClass3.default)(Loc, [{
@@ -1096,7 +1121,7 @@
 	    /**
 	     *
 	     * @param {string} [search=''] key: value にしたい search型 文字列
-	     * @returns {Loc} instance を返します
+	     * @return {Loc} instance を返します
 	     */
 	    value: function parse() {
 	      var search = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
@@ -1108,7 +1133,7 @@
 	    /**
 	     * search value を keyから探します
 	     * @param {string} key search name
-	     * @returns {*} string|undefined|null で結果を返します
+	     * @return {*} string|undefined|null で結果を返します
 	     */
 
 	  }, {
@@ -1128,7 +1153,7 @@
 	    /**
 	     * hash(#example)から`#`をとります
 	     * @param {string} hash hash文字列
-	     * @returns {string} hash文字列から#を削除した文字列を返します
+	     * @return {string} hash文字列から#を削除した文字列を返します
 	     */
 
 	  }], [{
@@ -1141,7 +1166,7 @@
 	    /**
 	     * pathnameを/で分解します
 	     * @param {string} [pathname=Loc.pathname] location.pathname, hostなしのpath
-	     * @returns {Array} pathnameを/で分解し配列にし返します
+	     * @return {Array} pathnameを/で分解し配列にし返します
 	     */
 
 	  }, {
@@ -1154,7 +1179,7 @@
 	    /**
 	     * location.search を key: value へ分解します
 	     * @param {string} search location.search型文字列
-	     * @returns {*} search を key: value へ分解し Object で返します
+	     * @return {*} search を key: value へ分解し Object で返します
 	     */
 
 	  }, {
@@ -1211,7 +1236,7 @@
 	    }
 	    /**
 	     *
-	     * @returns {string} location.pathname(urlからprotocol+hostを除く)を返します
+	     * @return {string} location.pathname(urlからprotocol+hostを除く)を返します
 	     */
 
 	  }, {
@@ -1222,7 +1247,7 @@
 	    }
 	    /**
 	     *
-	     * @returns {string} location.hashを返します
+	     * @return {string} location.hashを返します
 	     */
 
 	  }, {
@@ -1233,7 +1258,7 @@
 	    }
 	    /**
 	     * url の query 文字列
-	     * @returns {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
+	     * @return {string} url ? 以降の query 文字列を返します, a=xxx&b=yyy
 	     */
 
 	  }, {
@@ -1245,7 +1270,7 @@
 
 	    /**
 	     *
-	     * @returns {string} host name + port number を返します
+	     * @return {string} host name + port number を返します
 	     */
 
 	  }, {
@@ -1257,7 +1282,7 @@
 
 	    /**
 	     *
-	     * @returns {string} host name だけを返します
+	     * @return {string} host name だけを返します
 	     */
 
 	  }, {
@@ -1269,7 +1294,7 @@
 
 	    /**
 	     *
-	     * @returns {string} port number を返します
+	     * @return {string} port number を返します
 	     */
 
 	  }, {
@@ -1595,7 +1620,7 @@
 	var _symbol = (0, _symbol3.default)();
 
 	/**
-	 * <h3>サーバーリクエストAPIを管理します</h3>
+	 * <h3>文字フォーマットに関するUtilityです</h3>
 	 * 全て static<br>
 	 * <strong>文字を定型に変換します</strong>
 	 */
@@ -1626,12 +1651,13 @@
 
 	      // ["2016-01-14T18:25:45", "2016", "01", "14", "18", "25", "45"] 分解
 	      var nums = iso.match(/(\d+)\-(\d+)\-(\d+)T(\d+):(\d+):(\d+)?/);
+	      // 先頭"2016-01-14T18:25:45"除去
 	      nums.shift();
-	      // 数値へ 頭 0 除去
-	      nums.map(function (num) {
-	        return num * 1;
+	      // 数値へ変換し 頭 0 除去, 01 -> 1
+	      var numbers = nums.map(function (num) {
+	        return parseInt(num, 10);
 	      });
-	      return nums[0] + "年" + nums[1] + "月" + nums[2] + "日" + nums[3] + "時" + nums[4] + "分" + nums[5] + "秒";
+	      return numbers[0] + "年" + numbers[1] + "月" + numbers[2] + "日" + numbers[3] + "時" + numbers[4] + "分" + numbers[5] + "秒";
 	    }
 	  }]);
 	  return Format;
@@ -1686,10 +1712,12 @@
 	    this._key = key;
 	    this._value = value;
 	  }
-
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
 	  /**
 	   *
-	   * @returns {string|*} form key(name) を返します
+	   * @return {string|*} form key(name) を返します
 	   */
 
 	  (0, _createClass3.default)(Data, [{
@@ -1697,10 +1725,9 @@
 	    get: function get() {
 	      return this._key;
 	    }
-
 	    /**
 	     *
-	     * @returns {string|*} form value 値 を返します
+	     * @return {string|*} form value 値 を返します
 	     */
 
 	  }, {
@@ -1778,7 +1805,7 @@
 	  /**
 	   *
 	   * @param {Array<Data>} option [data...] key: value 値 配列
-	   * @returns {FormData} 引数 option（配列）から作成したFormData instance を返します
+	   * @return {FormData} 引数 option（配列）から作成したFormData instance を返します
 	   */
 
 	  (0, _createClass3.default)(Form, null, [{
@@ -1823,7 +1850,7 @@
 	     * let data = Form.element( document.querySelector("form") )
 	     *
 	     * @param {Element} formElement form element
-	     * @returns {FormData} elemet から FormData を作成し返します
+	     * @return {FormData} elemet から FormData を作成し返します
 	     */
 
 	  }, {
@@ -1885,7 +1912,6 @@
 	   *   response.status
 	   * }
 	   *
-	   * @constructor
 	   * @param {{status: *, response: *}} json json パース後データ
 	   */
 
@@ -1894,10 +1920,12 @@
 
 	    this._json = json;
 	  }
-
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
 	  /**
 	   * parsed JSON プロパティ
-	   * @returns {*} パース済みJSON(Object)を返します
+	   * @return {*} パース済みJSON(Object)を返します
 	   */
 
 	  (0, _createClass3.default)(Result, [{
@@ -1906,10 +1934,9 @@
 
 	      return this._json;
 	    }
-
 	    /**
 	     * 取得 JSON response section
-	     * @returns {*} 取得 JSON response section を返します
+	     * @return {Object|undefined} 取得 JSON response section を返します、見つからない時は undefined を返します
 	     */
 
 	  }, {
@@ -1918,10 +1945,60 @@
 
 	      return this.data.response;
 	    }
+	    /**
+	     * 取得 JSON response.articles
+	     * @return {Array|undefined} 取得 JSON response.articles を返します、見つからない時は undefined を返します
+	     */
 
+	  }, {
+	    key: 'articles',
+	    get: function get() {
+
+	      var response = this.response;
+	      var articles = undefined;
+	      // response.articles を調べる
+	      // 1. response 存在チェック
+	      // 2. response に articles key が存在する
+	      // 3. response.articles が配列
+	      if (!!response && response.hasOwnProperty('articles') && Array.isArray(response.articles)) {
+
+	        articles = response.articles;
+	      }
+
+	      return articles;
+	    }
+	    /**
+	     * 取得 JSON response.count
+	     * @return {Number|undefined} 取得 JSON response.articles を返します、見つからない時は undefined を返します
+	     */
+
+	  }, {
+	    key: 'total',
+	    get: function get() {
+
+	      var response = this.response;
+	      var total = undefined;
+
+	      if (!!response && response.hasOwnProperty('count')) {
+
+	        total = parseInt(response.count, 10);
+	      }
+
+	      return total;
+	    }
+	    /**
+	     * alias total, 取得 JSON response.count
+	     * @return {Number|undefined} 取得 JSON response.articles を返します、見つからない時は undefined を返します
+	     */
+
+	  }, {
+	    key: 'count',
+	    get: function get() {
+	      return this.total;
+	    }
 	    /**
 	     * 取得 JSON status section
-	     * @returns {{code: number, user_massage: string,developer_message: string}} responce.status を返します
+	     * @return {{code: number, user_massage: string,developer_message: string}|undefined} response.status を返します、見つからない時は undefined を返します
 	     */
 
 	  }, {
@@ -1930,10 +2007,9 @@
 
 	      return this.data.status;
 	    }
-
 	    /**
 	     * request offset, length を返します
-	     * @return {*} {request: number, length: number }
+	     * @return {{offset: number, length: number}|undefined} 取得 JSON request section を返します、見つからない時は undefined を返します
 	     */
 
 	  }, {
@@ -1991,7 +2067,6 @@
 	var Ajax = exports.Ajax = function () {
 	  /**
 	   * Ajax instanceを作成し、実行可能プロパティを可能に設定します
-	   * @constructor
 	   */
 
 	  function Ajax() {
@@ -2005,7 +2080,7 @@
 	  // ---------------------------------------------------
 	  /**
 	   * @method can
-	   * @returns {boolean} 実行可否 flag を返します
+	   * @return {boolean} 実行可否 flag を返します
 	   */
 
 	  (0, _createClass3.default)(Ajax, [{
@@ -2100,11 +2175,11 @@
 	      }).catch(function (error) {
 
 	        // 何か問題発生
+	        // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
 	        _this.enable();
 	        reject(error);
 	      });
 	    }
-
 	    /**
 	     * 実行可否 flag を true にします
 	     */
@@ -2230,7 +2305,7 @@
 
 	  /**
 	   * @param {int} statusCode サーバーからのレスポンスコード int型
-	   * @returns {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
+	   * @return {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
 	   */
 
 	  (0, _createClass3.default)(Codes, null, [{
@@ -2243,7 +2318,7 @@
 	    /**
 	     * status codeの意味を調べます
 	     * @param {Number} code サーバーからのresponse status code
-	     * @returns {{en: string|*, jp: string|*}} status codeの意味を返します
+	     * @return {{en: string|*, jp: string|*}} status codeの意味を返します
 	     */
 
 	  }, {
@@ -2258,7 +2333,7 @@
 
 	    /**
 	     * @param {Number} code status code
-	     * @returns {*} 日本語メッセージを返します
+	     * @return {*} 日本語メッセージを返します
 	     */
 
 	  }, {
@@ -2270,7 +2345,7 @@
 
 	    /**
 	     * @param {Number} code status code
-	     * @returns {*} 英語メッセージを返します
+	     * @return {*} 英語メッセージを返します
 	     */
 
 	  }, {
@@ -2361,7 +2436,7 @@
 
 	    /**
 	     * login API を取得します
-	     * @returns {Types} login API をTypes instanceで返します
+	     * @return {Types} login API をTypes instanceで返します
 	     */
 
 	  }, {
@@ -2373,7 +2448,7 @@
 
 	    /**
 	     * home API を login している / していない に合わせ取得します
-	     * @returns {Types} home API(home / self)をTypes instanceで返します
+	     * @return {Types} home API(home / self)をTypes instanceで返します
 	     */
 
 	  }, {
@@ -2385,7 +2460,7 @@
 
 	    /**
 	     * ログインなしユーザーのhome API
-	     * @returns {Types} ログインなしユーザーのhome APIをTypes instanceで返します
+	     * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
 	     */
 
 	  }, {
@@ -2398,7 +2473,7 @@
 	    /**
 	     * ログイン済みユーザーのhome API
 	     * @method selfAPi
-	     * @returns {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
+	     * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
 	     */
 
 	  }, {
@@ -2410,7 +2485,7 @@
 
 	    /**
 	     * category API を取得します
-	     * @returns {Types} category API を Types instance で取得します
+	     * @return {Types} category API を Types instance で取得します
 	     */
 
 	  }, {
@@ -2422,7 +2497,7 @@
 
 	    /**
 	     * search API を取得します
-	     * @returns {Types} category API をTypes instanceで返します
+	     * @return {Types} category API をTypes instanceで返します
 	     */
 
 	  }, {
@@ -2434,7 +2509,7 @@
 
 	    /**
 	     * category API を取得します
-	     * @returns {Types} category API をTypes instanceで返します
+	     * @return {Types} category API をTypes instanceで返します
 	     */
 
 	  }, {
@@ -2447,7 +2522,7 @@
 	    /**
 	     * bookmark API を取得します
 	     * @param {string} [action=add] path option を指定します
-	     * @returns {Types} bookmark API をTypes instanceで返します
+	     * @return {Types} bookmark API をTypes instanceで返します
 	     */
 
 	  }, {
@@ -2474,7 +2549,7 @@
 	    /**
 	     * comment API を取得します
 	     * @param {string} [action=''] path option を指定します
-	     * @returns {Types} comment API をTypes instanceで返します
+	     * @return {Types} comment API をTypes instanceで返します
 	     */
 
 	  }, {
@@ -2525,7 +2600,7 @@
 	    /**
 	     * users API を取得します
 	     * @param {string} [action=''] path option を指定します
-	     * @returns {Types} category users をTypes instanceで返します
+	     * @return {Types} category users をTypes instanceで返します
 	     */
 
 	  }, {
@@ -2622,7 +2697,7 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @returns {Type} Type instance を返します
+	   * @return {Type} Type instance を返します
 	   */
 
 	  (0, _createClass3.default)(Types, [{
@@ -2633,7 +2708,7 @@
 	    }
 
 	    /**
-	     * @returns {string} url を返します
+	     * @return {string} url を返します
 	     */
 
 	  }, {
@@ -2644,7 +2719,7 @@
 	    }
 
 	    /**
-	     * @returns {string} method を返します
+	     * @return {string} method を返します
 	     */
 
 	  }, {
@@ -2655,7 +2730,7 @@
 	    }
 
 	    /**
-	     * @returns {Permalink} Permalink instance を返します
+	     * @return {Permalink} Permalink instance を返します
 	     */
 
 	  }, {
@@ -2666,7 +2741,7 @@
 	    }
 
 	    /**
-	     * @returns {Queries} Queries instance を返します
+	     * @return {Queries} Queries instance を返します
 	     */
 
 	  }, {
@@ -2677,7 +2752,7 @@
 	    }
 
 	    /**
-	     * @returns {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
+	     * @return {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
 	     */
 
 	  }, {
@@ -2746,7 +2821,7 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @returns {string} API request先を返します
+	   * @return {string} API request先を返します
 	   */
 
 	  (0, _createClass3.default)(Type, [{
@@ -2767,7 +2842,7 @@
 	    }
 
 	    /**
-	     * @returns {string} POST | GET を返します
+	     * @return {string} POST | GET を返します
 	     */
 
 	  }, {
@@ -2798,7 +2873,7 @@
 	    // ---------------------------------------------------
 	    /**
 	     * @param {string} method method type
-	     * @returns {boolean} method type を検証し真偽値を返します
+	     * @return {boolean} method type を検証し真偽値を返します
 	     */
 
 	  }], [{
@@ -2858,7 +2933,6 @@
 	   * searchのようにどんなワードでも良い場合は "*" を指定する
 	   * new Permalink( [ '*' ] );
 	   *
-	   * @constructor
 	   * @param {Array} [paths] 追加 path を配列で設定
 	   * @param {boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション
 	   */
@@ -2877,7 +2951,7 @@
 	  /**
 	   * オプションパスが必須かのプロパティ
 	   * @method require
-	   * @returns {boolean} オプションパスが必須かどうかを返します true: 必須
+	   * @return {boolean} オプションパスが必須かどうかを返します true: 必須
 	   */
 
 	  (0, _createClass3.default)(Permalink, [{
@@ -2889,7 +2963,7 @@
 	    /**
 	     * option path 数
 	     * @method length
-	     * @returns {Number} paths数を返します
+	     * @return {Number} paths数を返します
 	     */
 	    value: function length() {
 
@@ -2899,7 +2973,7 @@
 	    /**
 	     * @method has
 	     * @param {string} path 調べたいオプションパス
-	     * @returns {boolean} 指定パスが存在するかの真偽値を返します
+	     * @return {boolean} 指定パスが存在するかの真偽値を返します
 	     */
 
 	  }, {
@@ -3090,12 +3164,10 @@
 	  /**
 	   * Api query option 情報を保持します
 	   *
-	   * @example
-	   * ?key=value
+	   * <code>?key=value</code>
 	   *
 	   * key, value型, default値, 必須情報...
 	   *
-	   * @constructor
 	   * @param {string} key query key
 	   * @param {string} type query value type
 	   * @param {string|number|null} [defaultValue=null] default value, あれば...
@@ -3118,7 +3190,7 @@
 	  /**
 	   * @method has
 	   * @param {string} key query key
-	   * @returns {boolean} query key が存在するかを返します
+	   * @return {boolean} query key が存在するかを返します
 	   */
 
 	  (0, _createClass3.default)(Query, [{
@@ -3131,7 +3203,7 @@
 	    /**
 	     * @method search
 	     * @param {string} key query key
-	     * @returns {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
+	     * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
 	     */
 
 	  }, {
@@ -3218,7 +3290,7 @@
 	  // ---------------------------------------------------
 	  /**
 	   * sign in / out 状態を表します
-	   * @returns {boolean} sign in / out 状態を返します
+	   * @return {boolean} sign in / out 状態を返します
 	   */
 
 	  (0, _createClass3.default)(User, null, [{
@@ -3240,7 +3312,7 @@
 
 	    /**
 	     * User id 情報
-	     * @returns {number} User id を返します
+	     * @return {number} User id を返します
 	     */
 
 	  }, {
@@ -3405,7 +3477,6 @@
 	var ApiDae = exports.ApiDae = function () {
 	  /**
 	   * static class です, instance を作成しません
-	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -3431,7 +3502,7 @@
 	    /**
 	     * api list を取得します
 	     * @method all
-	     * @returns {{login: Types, home: Types, self: Types, category: Types, search: Types, detail: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:send: Types, comment:reply: Types, comment:send:edit: Types, comment:reply:edit: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:notice: Types, users:notice:read: Types, users: Types, users:bookmark: Types, users:activity: Types}}
+	     * @return {{login: Types, home: Types, self: Types, category: Types, search: Types, detail: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:send: Types, comment:reply: Types, comment:send:edit: Types, comment:reply:edit: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:notice: Types, users:notice:read: Types, users: Types, users:bookmark: Types, users:activity: Types}}
 	     * 全ての API list を返します
 	     */
 
@@ -3446,7 +3517,7 @@
 	     * 指定キー情報を取得します
 	     * @method api
 	     * @param {string} key api key を指定します
-	     * @returns {Types} key に基づいた Types instance を返します
+	     * @return {Types} key に基づいた Types instance を返します
 	     */
 
 	  }, {
@@ -3504,7 +3575,6 @@
 	var Queries = exports.Queries = function () {
 	  /**
 	   * Query 情報を保持します
-	   * @constructor
 	   * @param {Array<Query>} [queries=[]] Query{key: value} 配列
 	   */
 
@@ -3518,7 +3588,7 @@
 	  /**
 	   * queries個数であるかないかの判断は可能
 	   * @method length
-	   * @returns {Number} queries個数を返します
+	   * @return {Number} queries個数を返します
 	   */
 
 	  (0, _createClass3.default)(Queries, [{
@@ -3530,7 +3600,7 @@
 
 	    /**
 	     * @method all
-	     * @returns {Array.<Query>} 全てのqueriesを返します
+	     * @return {Array.<Query>} 全てのqueriesを返します
 	     */
 
 	  }, {
@@ -3544,7 +3614,7 @@
 	     * key から query を探します
 	     * @method search
 	     * @param {string} key query key name, ?start=0 の start
-	     * @returns {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
+	     * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
 	     */
 
 	  }, {
@@ -3675,7 +3745,7 @@
 	   * Query override して使います
 	   * @method has
 	   * @param {string} key query key
-	   * @returns {boolean} query key が存在するかを返します
+	   * @return {boolean} query key が存在するかを返します
 	   */
 
 	  (0, _createClass3.default)(CommentType, [{
@@ -3877,6 +3947,116 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 13:39
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.App = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(7);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _Env = __webpack_require__(1);
+
+	var _Api = __webpack_require__(59);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	var App = exports.App = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function App(target) {
+	    (0, _classCallCheck3.default)(this, App);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Env is static Class. not use Env User().');
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  CONST 代わり
+	  // ---------------------------------------------------
+	  /**
+	   * @readonly
+	   * @return {string} 代替画像パス
+	   */
+
+	  (0, _createClass3.default)(App, null, [{
+	    key: 'test',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * ローカルテストモードにします
+	     */
+	    value: function test() {
+
+	      _Env.Env.test();
+	      _Api.Api.rebuild();
+	    }
+	    /**
+	     * 開発モードにします
+	     */
+
+	  }, {
+	    key: 'develop',
+	    value: function develop() {
+
+	      _Env.Env.develop();
+	      _Api.Api.rebuild();
+	    }
+	    /**
+	     * 実行モードにします
+	     */
+
+	  }, {
+	    key: 'production',
+	    value: function production() {
+
+	      _Env.Env.production();
+	      _Api.Api.rebuild();
+	    }
+	  }, {
+	    key: 'EMPTY_THUMBNAIL',
+	    get: function get() {
+
+	      return 'img/common/empty.jpg';
+	    }
+	  }]);
+	  return App;
+	}();
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/13 - 15:00
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -3943,7 +4123,7 @@
 	  // ---------------------------------------------------
 	  /**
 	   * url を作成します
-	   * @returns {string} 作成した url を返します
+	   * @return {string} 作成した url を返します
 	   */
 
 	  (0, _createClass3.default)(Action, [{
@@ -4003,7 +4183,7 @@
 	    }
 
 	    /**
-	     * @returns {string|*} method, GET|POST|DELETE|PUT... を返します
+	     * @return {string|*} method, GET|POST|DELETE|PUT... を返します
 	     */
 
 	  }, {
@@ -4016,7 +4196,7 @@
 	}();
 
 /***/ },
-/* 84 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4053,7 +4233,7 @@
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _get2 = __webpack_require__(85);
+	var _get2 = __webpack_require__(86);
 
 	var _get3 = _interopRequireDefault(_get2);
 
@@ -4063,7 +4243,7 @@
 
 	var _Result = __webpack_require__(56);
 
-	var _Action2 = __webpack_require__(83);
+	var _Action2 = __webpack_require__(84);
 
 	var _Types = __webpack_require__(60);
 
@@ -4107,7 +4287,7 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @returns {number|*} total件数を返します
+	   * @return {number|*} total件数を返します
 	   */
 
 	  (0, _createClass3.default)(Offset, [{
@@ -4123,10 +4303,10 @@
 	     */
 	    value: function start() {
 	      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
+
+	      // this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+	      console.warn('instead use next, ' + this.url + ', ' + method);
 	    }
-
-	    //this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
-
 	    /**
 	     * offset 値を加算します
 	     * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
@@ -4143,7 +4323,7 @@
 	    /**
 	     * 次があるかを調べます
 	     * @method hasNext
-	     * @returns {boolean} 次があるかの真偽値を返します
+	     * @return {boolean} 次があるかの真偽値を返します
 	     */
 
 	  }, {
@@ -4201,7 +4381,7 @@
 	      this._total = total;
 	    }
 	    /**
-	     * @returns {number|*} lengths 取得件数を返します
+	     * @return {number|*} lengths 取得件数を返します
 	     */
 
 	  }, {
@@ -4219,7 +4399,7 @@
 	      this._length = length;
 	    }
 	    /**
-	     * @returns {number|*} offset 取得開始位置を返します
+	     * @return {number|*} offset 取得開始位置を返します
 	     */
 
 	  }, {
@@ -4239,7 +4419,7 @@
 
 	    /**
 	     * url を作成します
-	     * @returns {string} 作成した url を返します
+	     * @return {string} 作成した url を返します
 	     */
 
 	  }, {
@@ -4252,12 +4432,12 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 85 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _Object$getOwnPropertyDescriptor = __webpack_require__(86)["default"];
+	var _Object$getOwnPropertyDescriptor = __webpack_require__(87)["default"];
 
 	exports["default"] = function get(_x, _x2, _x3) {
 	  var _again = true;
@@ -4301,23 +4481,23 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(87), __esModule: true };
-
-/***/ },
 /* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(88), __esModule: true };
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var $ = __webpack_require__(6);
-	__webpack_require__(88);
+	__webpack_require__(89);
 	module.exports = function getOwnPropertyDescriptor(it, key){
 	  return $.getDesc(it, key);
 	};
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
@@ -4330,7 +4510,7 @@
 	});
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4371,7 +4551,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(83);
+	var _Action2 = __webpack_require__(84);
 
 	var _Api = __webpack_require__(59);
 
@@ -4387,7 +4567,21 @@
 	  /**
 	   * Home pickup(slider) データを取得します<br>
 	   * <b>types: Api.home()</b> を使用します
-	   * @constructor
+	   *
+	   * @example
+	   * function done( result ) {
+	   *    console.log( 'success', result.response );
+	   *    console.log( 'success', result.status );
+	   *    console.log( 'success', result.request );
+	   *  }
+	   *
+	   * function fail( error ) {
+	   *    console.log( 'error', error );
+	   *  }
+	   *
+	   * var headline = new Headline( done, fail );
+	   * headline.start();
+	   *
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
 	   */
@@ -4405,7 +4599,7 @@
 	   * Ajax API url を作成します<br>
 	   * <code>Api.home().url/pickup?offset=0&length=5</code>
 	   * @method url
-	   * @returns {string} pickup API url を返します
+	   * @return {string} pickup API url を返します
 	   */
 
 	  (0, _createClass3.default)(Pickup, [{
@@ -4419,7 +4613,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4460,7 +4654,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(83);
+	var _Action2 = __webpack_require__(84);
 
 	var _Api = __webpack_require__(59);
 
@@ -4477,7 +4671,6 @@
 	   * Home headline（注目ニュース） データを取得します<br>
 	   * <strong>types: Api.home()<strong> を使用します
 	   *
-	   * @constructor
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
 	   */
@@ -4495,7 +4688,7 @@
 	   * Ajax API url を作成します<br>
 	   * <code>Api.home().url/headline?offset=0&length=6</code>
 	   * @method url
-	   * @returns {string} headline API url を返します
+	   * @return {string} headline API url を返します
 	   */
 
 	  (0, _createClass3.default)(Headline, [{
@@ -4509,7 +4702,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4546,7 +4739,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(84);
+	var _Offset2 = __webpack_require__(85);
 
 	var _Api = __webpack_require__(59);
 
@@ -4581,7 +4774,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4622,7 +4815,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(84);
+	var _Offset2 = __webpack_require__(85);
 
 	var _Api = __webpack_require__(59);
 
@@ -4660,7 +4853,7 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @returns {string|*} category slug を返します
+	   * @return {string|*} category slug を返します
 	   */
 
 	  (0, _createClass3.default)(Category, [{
@@ -4670,7 +4863,7 @@
 	      return this._slug;
 	    }
 	    /**
-	     * @returns {string|*} request type('', ranking, video) を返します
+	     * @return {string|*} request type('', ranking, video) を返します
 	     */
 
 	  }, {
@@ -4683,7 +4876,7 @@
 	     * Ajax API url を作成します
 	     * Api.category().url/all|slug[/ranking]?offset=0&length=5
 	     * @method url
-	     * @returns {string} API url を返します
+	     * @return {string} API url を返します
 	     */
 
 	  }, {
@@ -4706,7 +4899,7 @@
 	    // ---------------------------------------------------
 	    /**
 	     * @param {string} type 調べる request type
-	     * @returns {*} type を正規化(''|ranking|video)し返します
+	     * @return {*} type を正規化(''|ranking|video)し返します
 	     */
 
 	  }], [{
@@ -4723,108 +4916,6 @@
 	  }]);
 	  return Category;
 	}(_Offset2.Offset);
-
-/***/ },
-/* 93 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/13 - 14:54
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Detail = undefined;
-
-	var _getPrototypeOf = __webpack_require__(69);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(2);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(3);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(74);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(76);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _Action2 = __webpack_require__(83);
-
-	var _Api = __webpack_require__(59);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * 記事詳細を取得します
-	 */
-
-	var Detail = exports.Detail = function (_Action) {
-	  (0, _inherits3.default)(Detail, _Action);
-
-	  /**
-	   * 記事詳細を記事IDから取得します
-	   * @param {Number|String} id 記事ID
-	   * @param {Function} [resolve=null] Ajax 成功時の callback
-	   * @param {Function} [reject=null] Ajax 失敗時の callback
-	   */
-
-	  function Detail(id) {
-	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-	    (0, _classCallCheck3.default)(this, Detail);
-
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Detail).call(this, _Api.Api.detail(), resolve, reject));
-
-	    _this._id = parseInt(id, 10);
-
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * url を作成します
-	   * @method url
-	   * @returns {string} 作成した url を返します
-	   */
-
-	  (0, _createClass3.default)(Detail, [{
-	    key: 'url',
-	    get: function get() {
-	      return this._url + '/' + this.id;
-	    }
-
-	    /**
-	     * 記事ID
-	     * @returns {Number|*} 記事IDを返します
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this._id;
-	    }
-	  }]);
-	  return Detail;
-	}(_Action2.Action);
 
 /***/ },
 /* 94 */
@@ -4864,7 +4955,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Category2 = __webpack_require__(92);
+	var _Category2 = __webpack_require__(93);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4931,7 +5022,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Category2 = __webpack_require__(92);
+	var _Category2 = __webpack_require__(93);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5012,7 +5103,6 @@
 	var Widget = exports.Widget = function () {
 	  /**
 	   * static class です、instance を作成できません
-	   * @constructor
 	   * @param {Symbol} target Singleton を実現するための private symbol
 	   */
 
@@ -5030,7 +5120,7 @@
 	   * @param {string} [slug=all] category slug です
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
-	   * @returns {Ranking} Ranking instance を返します
+	   * @return {Ranking} Ranking instance を返します
 	   */
 
 	  (0, _createClass3.default)(Widget, null, [{
@@ -5050,7 +5140,7 @@
 	     * @param {string} [slug=all] category slug です
 	     * @param {Function} [resolve=null] Ajax 成功時の callback
 	     * @param {Function} [reject=null] Ajax 失敗時の callback
-	     * @returns {Videos} Videos instance を返します
+	     * @return {Videos} Videos instance を返します
 	     */
 
 	  }, {
@@ -5110,7 +5200,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(83);
+	var _Action2 = __webpack_require__(84);
 
 	var _Api = __webpack_require__(59);
 
@@ -5195,7 +5285,7 @@
 	    /**
 	     * url を作成します
 	     * @method url
-	     * @returns {string} 作成した url を返します
+	     * @return {string} 作成した url を返します
 	     */
 
 	  }, {
@@ -5249,7 +5339,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(84);
+	var _Offset2 = __webpack_require__(85);
 
 	var _Api = __webpack_require__(59);
 
@@ -5289,7 +5379,7 @@
 	  // ---------------------------------------------------
 	  /**
 	   * 検索キーワード
-	   * @returns {string|*} 検索キーワードを返します
+	   * @return {string|*} 検索キーワードを返します
 	   */
 
 	  (0, _createClass3.default)(Search, [{
@@ -5309,7 +5399,7 @@
 	    /**
 	     * url を作成します
 	     * @method url
-	     * @returns {string} 作成した url を返します
+	     * @return {string} 作成した url を返します
 	     */
 
 	  }, {
@@ -5320,6 +5410,1560 @@
 	  }]);
 	  return Search;
 	}(_Offset2.Offset);
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/13 - 14:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Detail = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Action2 = __webpack_require__(84);
+
+	var _Api = __webpack_require__(59);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 記事詳細を取得します
+	 */
+
+	var Detail = exports.Detail = function (_Action) {
+	  (0, _inherits3.default)(Detail, _Action);
+
+	  /**
+	   * 記事詳細を記事IDから取得します
+	   * @param {Number|String} id 記事ID
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function Detail(id) {
+	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    (0, _classCallCheck3.default)(this, Detail);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Detail).call(this, _Api.Api.detail(), resolve, reject));
+
+	    _this._id = parseInt(id, 10);
+
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * url を作成します
+	   * @method url
+	   * @return {string} 作成した url を返します
+	   */
+
+	  (0, _createClass3.default)(Detail, [{
+	    key: 'url',
+	    get: function get() {
+	      return this._url + '/' + this.id;
+	    }
+
+	    /**
+	     * 記事ID
+	     * @return {Number|*} 記事IDを返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this._id;
+	    }
+	  }]);
+	  return Detail;
+	}(_Action2.Action);
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 13:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeadline = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _App = __webpack_require__(83);
+
+	var _View2 = __webpack_require__(101);
+
+	var _ViewError = __webpack_require__(102);
+
+	var _Headline = __webpack_require__(91);
+
+	var _Result = __webpack_require__(56);
+
+	var _ArticleDae = __webpack_require__(103);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	var React = window.React;
+	// dae
+
+	// action
+
+	// view
+
+	var ReactDOM = window.ReactDOM;
+
+	/**
+	 * home > headline（注目ニュース）を表示します。
+	 * <ol>
+	 *   <li>JSON取得(Ajax)</li>
+	 *   <li>Dom作成 by React</li>
+	 * </ol>
+	 */
+
+	var ViewHeadline = exports.ViewHeadline = function (_View) {
+	  (0, _inherits3.default)(ViewHeadline, _View);
+
+	  /**
+	   * action/Headline を使い Ajax request 後 element へ dom を作成します
+	   * @param {Element} element root element
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ViewHeadline(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    (0, _classCallCheck3.default)(this, ViewHeadline);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
+	  }
+
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewHeadline, [{
+	    key: 'start',
+	    value: function start() {
+
+	      var action = new _Headline.Headline(this.done.bind(this), this.fail.bind(this));
+	      action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var articles = result.articles;
+
+	      if (typeof articles === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        this.executeSafely('undefinedError');
+	        this.showError('[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	      } else if (articles.length === 0) {
+
+	        // articles empty
+	        // request, JSON 取得に問題は無かったが data が取得できなかった
+	        this.executeSafely('emptyError');
+	        this.showError('[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。');
+	      } else {
+
+	        this.render(articles);
+	      }
+	    }
+
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely('responseError');
+	      this.showError(error.message);
+	    }
+
+	    /**
+	     * ViewError でエラーコンテナを作成します
+	     * @param {string} message エラーメッセージ
+	     */
+
+	  }, {
+	    key: 'showError',
+	    value: function showError() {
+	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      var error = new _ViewError.ViewError(this.element, this.option, message);
+	      error.render();
+	    }
+
+	    /**
+	     * dom を render します
+	     * @param {Array} articles JSON responce.articles
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(articles) {
+
+	      var element = this.element;
+	      var _this = this;
+	      var dummy = _App.App.EMPTY_THUMBNAIL;
+
+	      // React Class
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        getDefaultProps: function getDefaultProps() {
+	          return {
+	            list: []
+	          };
+	        },
+	        render: function render() {
+
+	          var list = this.props.list;
+
+	          return React.createElement(
+	            'div',
+	            null,
+	            list.map(function (article, i) {
+
+	              var dae = new _ArticleDae.ArticleDae(article);
+	              var divClass = 'headline headline-' + i;
+	              var catClass = 'category category-' + dae.category.slug;
+	              var titleClass = 'headline-title headline-title-' + i;
+	              var dateClass = 'date date-' + i;
+	              // thumbnail が 空のことがある様子
+	              var thumbnail = dae.media.images.thumbnail;
+
+	              return React.createElement(
+	                'div',
+	                { key: i, className: divClass },
+	                React.createElement(
+	                  'figure',
+	                  null,
+	                  React.createElement('img', { src: thumbnail !== '' ? thumbnail : dummy, alt: dae.title })
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'content' },
+	                  React.createElement(
+	                    'span',
+	                    { className: catClass },
+	                    dae.category.label
+	                  ),
+	                  React.createElement(
+	                    'h3',
+	                    { className: titleClass },
+	                    dae.title
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    { className: dateClass },
+	                    dae.formatDate
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    { className: dateClass },
+	                    dae.displayDate
+	                  )
+	                )
+	              );
+	            })
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely('didMount');
+	        }
+	      });
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+	    } // render
+
+	  }]);
+	  return ViewHeadline;
+	}(_View2.View);
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.View = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 14:37
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	/**
+	 * 表示を行います
+	 */
+
+	var View = exports.View = function () {
+	  /**
+	   * action/Headline を使い Ajax request 後 element へ dom を作成します
+	   * @param {Element} element root element
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function View(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    (0, _classCallCheck3.default)(this, View);
+
+	    this._element = element;
+	    this._option = option;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Element|*} render root element を返します
+	   */
+
+	  (0, _createClass3.default)(View, [{
+	    key: 'executeSafely',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * option Object に kyeName が存在し型が function かを調べ関数を実行する
+	     * @param {string} keyName 存在チェックを行う関数キー名
+	     */
+	    value: function executeSafely(keyName) {
+
+	      var option = this.option;
+	      if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
+
+	        option[keyName]();
+	      }
+	    }
+	  }, {
+	    key: 'element',
+	    get: function get() {
+	      return this._element;
+	    }
+
+	    /**
+	     *
+	     * @return {Object|*} callback handler がセットされたObjectを返します
+	     */
+
+	  }, {
+	    key: 'option',
+	    get: function get() {
+	      return this._option;
+	    }
+	  }]);
+	  return View;
+	}();
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 14:33
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewError = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(101);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var React = window.React;
+	var ReactDOM = window.ReactDOM;
+
+	/**
+	 * エラーメッセージを表示します
+	 */
+
+	var ViewError = exports.ViewError = function (_View) {
+	  (0, _inherits3.default)(ViewError, _View);
+
+	  /**
+	   * エラーメッセージを表示し, componentDidMount callback handler を実行します
+	   *
+	   * @example
+	   * let element = document.getElementById( 'error-dom-parent' );
+	   * let afterMount = () => {
+	   *  // componentDidMount
+	   * }
+	   * let option = {
+	   *  didMount: afterMount
+	   * };
+	   * let message = 'error happen.';
+	   * let viewError = new ViewError( element, option, message );
+	   *
+	   * @example
+	   * let option = {
+	   *  didMount: function() { // didMount },
+	   *  undefinedError: function() { // JSONにあるべきキーがない },
+	   *  emptyError: function() { // 結果セット配列が空 },
+	   *  responseError: function() { // Ajax Error }
+	   * };
+	   * @param {Element} element render root element
+	   * @param {Object} [option={}] callback handler
+	   * @param {string} [message=''] 表示エラーメッセージ
+	   */
+
+	  function ViewError(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var message = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+	    (0, _classCallCheck3.default)(this, ViewError);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewError).call(this, element, option));
+
+	    _this2._message = message;
+
+	    return _this2;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {string|*} error message を返します
+	   */
+
+	  (0, _createClass3.default)(ViewError, [{
+	    key: 'render',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * error dom を生成します<br>
+	     * <pre>
+	     *   <div class="error error-message"></div>
+	     * </pre>
+	     */
+	    value: function render() {
+
+	      var element = this.element;
+	      var message = this.message;
+	      var _this = this;
+
+	      var ErrorDom = React.createClass({
+	        displayName: 'ErrorDom',
+
+	        render: function render() {
+	          return React.createElement(
+	            'div',
+	            { className: 'error error-container' },
+	            React.createElement(
+	              'div',
+	              { className: 'error error-message' },
+	              message
+	            )
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely('errorMount');
+	        }
+	      });
+
+	      ReactDOM.render(React.createElement(ErrorDom, null), element);
+	    }
+	  }, {
+	    key: 'message',
+	    get: function get() {
+	      return this._message;
+	    }
+	  }]);
+	  return ViewError;
+	}(_View2.View);
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 17:03
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ArticleDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(104);
+
+	var _Format = __webpack_require__(53);
+
+	var _CategoryDae = __webpack_require__(105);
+
+	var _MediaDae = __webpack_require__(106);
+
+	var _UserDae = __webpack_require__(109);
+
+	var _CommentsPopularDae = __webpack_require__(111);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * articles 記事単1データを管理します
+	 */
+
+	var ArticleDae = exports.ArticleDae = function () {
+	  /**
+	   * articles データを管理
+	   * @param {Object} [article={}] articles配列にセットされている article 記事1件データ
+	   */
+
+	  function ArticleDae() {
+	    var article = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, ArticleDae);
+
+	    this._article = article;
+	    // article.category
+	    this._category = new _CategoryDae.CategoryDae(article.category);
+	    // article.media
+	    this._media = new _MediaDae.MediaDae(article.media);
+	    // article.user
+	    this._user = new _UserDae.UserDae(article.user);
+
+	    this._popular = new _CommentsPopularDae.CommentsPopularDae(article.comments_popular);
+
+	    if (!_Safety.Safety.check(article, 'comments_count')) {
+
+	      article.comments_count = '0';
+	    }
+	    if (_Safety.Safety.check(article, 'date')) {
+
+	      article.formatDate = _Format.Format.date(article.date);
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} article 記事単1データ
+	   */
+
+	  (0, _createClass3.default)(ArticleDae, [{
+	    key: 'article',
+	    get: function get() {
+	      return this._article;
+	    }
+	    /**
+	     *
+	     * @return {CategoryDae|*} article.category
+	     */
+
+	  }, {
+	    key: 'category',
+	    get: function get() {
+	      return this._category;
+	    }
+	    /**
+	     *
+	     * @return {Number} article.comments_count
+	     */
+
+	  }, {
+	    key: 'commentsCount',
+	    get: function get() {
+	      return parseInt(this.article.comments_count, 10);
+	    }
+	    /**
+	     * @return {CommentsPopularDae|*} article.comments_popular
+	     */
+
+	  }, {
+	    key: 'commentsPopular',
+	    get: function get() {
+	      return this._popular;
+	    }
+	    /**
+	     * @return {string} article.date
+	     */
+
+	  }, {
+	    key: 'date',
+	    get: function get() {
+	      return this.article.date;
+	    }
+	    /**
+	     * @return {string} article.date を日本語日付に変換し返します
+	     */
+
+	  }, {
+	    key: 'formatDate',
+	    get: function get() {
+	      return this.article.formatDate;
+	    }
+	    /**
+	     *
+	     * @return {string} article.display_date
+	     */
+
+	  }, {
+	    key: 'displayDate',
+	    get: function get() {
+	      return this.article.display_date;
+	    }
+	    /**
+	     *
+	     * @return {string} article.description
+	     */
+
+	  }, {
+	    key: 'description',
+	    get: function get() {
+	      return this.article.description;
+	    }
+	    /**
+	     *
+	     * @return {string} article.id
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.article.id;
+	    }
+	    /**
+	     *
+	     * @return {boolean} article.is_bookmarked
+	     */
+
+	  }, {
+	    key: 'isBookmarked',
+	    get: function get() {
+	      return this.article.is_bookmarked;
+	    }
+	    /**
+	     *
+	     * @return {MediaDae} article.media
+	     */
+
+	  }, {
+	    key: 'media',
+	    get: function get() {
+	      return this._media;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media_type
+	     */
+
+	  }, {
+	    key: 'mediaType',
+	    get: function get() {
+	      return this.article.media_type;
+	    }
+	    /**
+	     *
+	     * @return {string} article.title
+	     */
+
+	  }, {
+	    key: 'title',
+	    get: function get() {
+	      return this.article.title;
+	    }
+	    /**
+	     *
+	     * @return {string} article.url
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.article.url;
+	    }
+	    /**
+	     *
+	     * @return {UserDae} article.user
+	     */
+
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	  }]);
+	  return ArticleDae;
+	}();
+
+/***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 16:49
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Safety = undefined;
+
+	var _typeof2 = __webpack_require__(75);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(7);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	/**
+	 * <h3>データが安全かを調べます</h3>
+	 * 全て static
+	 */
+
+	var Safety = exports.Safety = function () {
+	  /**
+	   * static class です、instance を作成できません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Safety(target) {
+	    (0, _classCallCheck3.default)(this, Safety);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Safety is not Safety Api().');
+	    }
+	  }
+
+	  /**
+	   * object に keyName が存在することと type があっているかを調べます
+	   * @param {Object} object 調査対象 Object
+	   * @param {string} keyName 調査対象キー名称
+	   * @param {string} [type=string] 調査対象型
+	   * @return {boolean} 調べた結果を真偽値で返します
+	   */
+
+	  (0, _createClass3.default)(Safety, null, [{
+	    key: 'check',
+	    value: function check(object, keyName) {
+	      var type = arguments.length <= 2 || arguments[2] === undefined ? 'string' : arguments[2];
+
+	      return object.hasOwnProperty(keyName) && (0, _typeof3.default)(object[keyName]) === type;
+	    }
+	  }]);
+	  return Safety;
+	}();
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 17:08
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	/**
+	 * article.category を管理します
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CategoryDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var CategoryDae = exports.CategoryDae = function () {
+	  /**
+	   * article.category を管理します
+	   * @param {Object} [category={}]
+	   */
+
+	  function CategoryDae() {
+	    var category = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, CategoryDae);
+
+	    this._category = category;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Object|*} article.category を返します
+	   */
+
+	  (0, _createClass3.default)(CategoryDae, [{
+	    key: 'category',
+	    get: function get() {
+	      return this._category;
+	    }
+	    /**
+	     *
+	     * @return {string|undefined} article.category.label を返します
+	     */
+
+	  }, {
+	    key: 'label',
+	    get: function get() {
+	      return this.category.label;
+	    }
+	    /**
+	     *
+	     * @return {string|undefined} article.category.slug を返します
+	     */
+
+	  }, {
+	    key: 'slug',
+	    get: function get() {
+	      return this.category.slug;
+	    }
+	  }]);
+	  return CategoryDae;
+	}();
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 17:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.MediaDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _ImagesDae = __webpack_require__(107);
+
+	var _VideoDae = __webpack_require__(108);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * article.media
+	 */
+
+	var MediaDae = exports.MediaDae = function () {
+	  /**
+	   *
+	   * @param {Object} [media={}] article.media
+	   */
+
+	  function MediaDae() {
+	    var media = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, MediaDae);
+
+	    this._media = media;
+	    this._images = new _ImagesDae.ImagesDae(media.images);
+	    this._video = new _VideoDae.VideoDae(media.video);
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Object|*} article.media
+	   */
+
+	  (0, _createClass3.default)(MediaDae, [{
+	    key: 'media',
+	    get: function get() {
+	      return this._media;
+	    }
+	    /**
+	     *
+	     * @return {ImagesDae|*} article.media.images
+	     */
+
+	  }, {
+	    key: 'images',
+	    get: function get() {
+	      return this._images;
+	    }
+	    /**
+	     *
+	     * @return {VideoDae|*} article.media.video
+	     */
+
+	  }, {
+	    key: 'video',
+	    get: function get() {
+	      return this._video;
+	    }
+	  }]);
+	  return MediaDae;
+	}();
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 17:57
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	/**
+	 * article.media.images
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ImagesDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ImagesDae = exports.ImagesDae = function () {
+	  /**
+	   *
+	   * @param {Object} [images={}] article.media.images
+	   */
+
+	  function ImagesDae() {
+	    var images = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, ImagesDae);
+
+	    this._images = images;
+	  }
+	  /**
+	   *
+	   * @return {Object|*} article.media.images
+	   */
+
+	  (0, _createClass3.default)(ImagesDae, [{
+	    key: 'images',
+	    get: function get() {
+	      return this._images;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media.images.caption
+	     */
+
+	  }, {
+	    key: 'caption',
+	    get: function get() {
+	      return this.images.caption;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media.images.large
+	     */
+
+	  }, {
+	    key: 'large',
+	    get: function get() {
+	      return this.images.string;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media.images.medium
+	     */
+
+	  }, {
+	    key: 'medium',
+	    get: function get() {
+	      return this.images.medium;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media.images.thumbnail
+	     */
+
+	  }, {
+	    key: 'thumbnail',
+	    get: function get() {
+	      return this.images.thumbnail;
+	    }
+	  }]);
+	  return ImagesDae;
+	}();
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 18:00
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	/**
+	 * article.media.video
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.VideoDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var VideoDae = exports.VideoDae = function () {
+	  function VideoDae() {
+	    (0, _classCallCheck3.default)(this, VideoDae);
+	  }
+
+	  (0, _createClass3.default)(VideoDae, [{
+	    key: 'constaructor',
+
+	    /**
+	     *
+	     * @param {Object} [video={}] article.media.video
+	     */
+	    value: function constaructor() {
+	      var video = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	      this._video = video;
+	    }
+	    /**
+	     *
+	     * @return {Object|*} article.media.video
+	     */
+
+	  }, {
+	    key: 'video',
+	    get: function get() {
+	      return this._video;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media.video.caption
+	     */
+
+	  }, {
+	    key: 'caption',
+	    get: function get() {
+	      return this.video.caption;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media.video.thumbnail
+	     */
+
+	  }, {
+	    key: 'thumbnail',
+	    get: function get() {
+	      return this.video.thumbnail;
+	    }
+	    /**
+	     *
+	     * @return {string} article.media.video.url
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.video.return;
+	    }
+	  }]);
+	  return VideoDae;
+	}();
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 18:17
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _TypeDae = __webpack_require__(110);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * article.user
+	 */
+
+	var UserDae = exports.UserDae = function () {
+	  /**
+	   * article.user
+	   * @param {Object} [user={}] article.user
+	   */
+
+	  function UserDae() {
+	    var user = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, UserDae);
+
+	    this._user = user;
+	    this._type = new _TypeDae.TypeDae(user.type);
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} article.user
+	   */
+
+	  (0, _createClass3.default)(UserDae, [{
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	    /**
+	     * @return {TypeDae|*} article.user.type
+	     */
+
+	  }, {
+	    key: 'type',
+	    get: function get() {
+	      return this._type;
+	    }
+	    /**
+	     * @return {string} article.user.id
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.user.id;
+	    }
+	    /**
+	     * @return {string} article.user.name
+	     */
+
+	  }, {
+	    key: 'userName',
+	    get: function get() {
+	      return this.user.name;
+	    }
+	    /**
+	     * @return {string} article.user.profile_picture
+	     */
+
+	  }, {
+	    key: 'profilePicture',
+	    get: function get() {
+	      return this.user.profile_picture;
+	    }
+	    /**
+	     * @return {string} article.user.url
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.user.url;
+	    }
+	  }]);
+	  return UserDae;
+	}();
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 18:19
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	/**
+	 * article.user.type
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.TypeDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TypeDae = exports.TypeDae = function () {
+	  /**
+	   * article.user.type
+	   * @param {Object} [type={}] article.user.type
+	   */
+
+	  function TypeDae() {
+	    var type = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, TypeDae);
+
+	    this._type = type;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} article.user.type
+	   */
+
+	  (0, _createClass3.default)(TypeDae, [{
+	    key: 'type',
+	    get: function get() {
+	      return this._type;
+	    }
+	    /**
+	     * @return {string|*} article.user.type.id
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.type.id;
+	    }
+	    /**
+	     * @return {string|*} article.user.type.label
+	     */
+
+	  }, {
+	    key: 'label',
+	    get: function get() {
+	      return this.type.label;
+	    }
+	  }]);
+	  return TypeDae;
+	}();
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 18:31
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	/**
+	 * article.comments_popular
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsPopularDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var CommentsPopularDae = exports.CommentsPopularDae = function () {
+	  /**
+	   * article.comments_popular
+	   * @param {Array} [comments=[]] article.comments_popular
+	   */
+
+	  function CommentsPopularDae() {
+	    var comments = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    (0, _classCallCheck3.default)(this, CommentsPopularDae);
+
+	    this._comments = comments;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Array|*} article.comments_popular
+	   */
+
+	  (0, _createClass3.default)(CommentsPopularDae, [{
+	    key: 'comments',
+	    get: function get() {
+	      return this._comments;
+	    }
+	    /**
+	     * @return {Number} article.comments_popular.length
+	     */
+
+	  }, {
+	    key: 'length',
+	    get: function get() {
+	      return this.comments.length;
+	    }
+	  }]);
+	  return CommentsPopularDae;
+	}();
 
 /***/ }
 /******/ ]);

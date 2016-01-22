@@ -44,7 +44,7 @@ export class Bookmark extends Action {
   /**
    * url を作成します
    * @method url
-   * @returns {string} 作成した url を返します
+   * @return {string} 作成した url を返します
    */
   get url():string {
     return `${this._url}/${this.id}`;

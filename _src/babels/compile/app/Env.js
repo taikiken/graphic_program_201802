@@ -34,7 +34,9 @@ var _symbol = (0, _symbol3.default)();
 var _mode = 'production';
 
 /**
- * 動作モードを設定します
+ * <h3>local test / develop / production を管理します</h3>
+ * 全て static<br>
+ * 動作モードを設定します<br>
  * <pre>
  *    production: 実行モード
  *    develop: 開発モード（ローカルからのテスト）
@@ -45,7 +47,6 @@ var _mode = 'production';
 var Env = exports.Env = function () {
   /**
    * static class です, instance を作成しません
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -62,7 +63,7 @@ var Env = exports.Env = function () {
   // ---------------------------------------------------
   /**
    *
-   * @returns {string} 現在のモードを返します
+   * @return {string} 現在のモードを返します
    */
 
   (0, _createClass3.default)(Env, null, [{

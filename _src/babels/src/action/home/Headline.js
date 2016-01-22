@@ -20,9 +20,8 @@ import {Api} from '../../net/Api';
 export class Headline extends Action {
   /**
    * Home headline（注目ニュース） データを取得します<br>
-   * <strong>types: Api.home()<strong> を使用します
+   * ** types: Api.home() ** を使用します
    *
-   * @constructor
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
@@ -36,7 +35,7 @@ export class Headline extends Action {
    * Ajax API url を作成します<br>
    * <code>Api.home().url/headline?offset=0&length=6</code>
    * @method url
-   * @returns {string} headline API url を返します
+   * @return {string} headline API url を返します
    */
   get url():string {
 

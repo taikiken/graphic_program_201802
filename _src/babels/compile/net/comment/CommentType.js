@@ -81,7 +81,7 @@ var CommentType = exports.CommentType = function (_Query) {
    * Query override して使います
    * @method has
    * @param {string} key query key
-   * @returns {boolean} query key が存在するかを返します
+   * @return {boolean} query key が存在するかを返します
    */
 
   (0, _createClass3.default)(CommentType, [{

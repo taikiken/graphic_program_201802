@@ -15,7 +15,9 @@ let _symbol = Symbol();
 let _mode = 'production';
 
 /**
- * 動作モードを設定します
+ * <h3>local test / develop / production を管理します</h3>
+ * 全て static<br>
+ * 動作モードを設定します<br>
  * <pre>
  *    production: 実行モード
  *    develop: 開発モード（ローカルからのテスト）
@@ -25,7 +27,6 @@ let _mode = 'production';
 export class Env {
   /**
    * static class です, instance を作成しません
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
@@ -42,7 +43,7 @@ export class Env {
   // ---------------------------------------------------
   /**
    *
-   * @returns {string} 現在のモードを返します
+   * @return {string} 現在のモードを返します
    */
   static get mode():string {
 

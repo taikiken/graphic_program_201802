@@ -32,7 +32,7 @@ export class Type {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @returns {string} API request先を返します
+   * @return {string} API request先を返します
    */
   get url():string {
 
@@ -51,7 +51,7 @@ export class Type {
   }
 
   /**
-   * @returns {string} POST | GET を返します
+   * @return {string} POST | GET を返します
    */
   get method():string {
 
@@ -81,7 +81,7 @@ export class Type {
   // ---------------------------------------------------
   /**
    * @param {string} method method type
-   * @returns {boolean} method type を検証し真偽値を返します
+   * @return {boolean} method type を検証し真偽値を返します
    */
   static validate( method:string ):boolean {
 

@@ -136,7 +136,6 @@ var _api = buildPath();
 var ApiDae = exports.ApiDae = function () {
   /**
    * static class です, instance を作成しません
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
@@ -162,7 +161,7 @@ var ApiDae = exports.ApiDae = function () {
     /**
      * api list を取得します
      * @method all
-     * @returns {{login: Types, home: Types, self: Types, category: Types, search: Types, detail: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:send: Types, comment:reply: Types, comment:send:edit: Types, comment:reply:edit: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:notice: Types, users:notice:read: Types, users: Types, users:bookmark: Types, users:activity: Types}}
+     * @return {{login: Types, home: Types, self: Types, category: Types, search: Types, detail: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:send: Types, comment:reply: Types, comment:send:edit: Types, comment:reply:edit: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:notice: Types, users:notice:read: Types, users: Types, users:bookmark: Types, users:activity: Types}}
      * 全ての API list を返します
      */
 
@@ -177,7 +176,7 @@ var ApiDae = exports.ApiDae = function () {
      * 指定キー情報を取得します
      * @method api
      * @param {string} key api key を指定します
-     * @returns {Types} key に基づいた Types instance を返します
+     * @return {Types} key に基づいた Types instance を返します
      */
 
   }, {

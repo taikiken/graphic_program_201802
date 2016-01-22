@@ -24,18 +24,19 @@ export class Data {
     this._key = key;
     this._value = value;
   }
-
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    *
-   * @returns {string|*} form key(name) を返します
+   * @return {string|*} form key(name) を返します
    */
   get key():string {
     return this._key;
   }
-
   /**
    *
-   * @returns {string|*} form value 値 を返します
+   * @return {string|*} form value 値 を返します
    */
   get value():string {
     return this._value;

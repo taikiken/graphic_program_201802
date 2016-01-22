@@ -34,7 +34,7 @@ export class Category extends Offset {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @returns {string|*} category slug を返します
+   * @return {string|*} category slug を返します
    */
   get slug():string {
 
@@ -42,7 +42,7 @@ export class Category extends Offset {
 
   }
   /**
-   * @returns {string|*} request type('', ranking, video) を返します
+   * @return {string|*} request type('', ranking, video) を返します
    */
   get type():string {
 
@@ -53,7 +53,7 @@ export class Category extends Offset {
    * Ajax API url を作成します
    * Api.category().url/all|slug[/ranking]?offset=0&length=5
    * @method url
-   * @returns {string} API url を返します
+   * @return {string} API url を返します
    */
   get url():string {
 
@@ -76,7 +76,7 @@ export class Category extends Offset {
   // ---------------------------------------------------
   /**
    * @param {string} type 調べる request type
-   * @returns {*} type を正規化(''|ranking|video)し返します
+   * @return {*} type を正規化(''|ranking|video)し返します
    */
   static normalization( type:string ):string {
 

@@ -21,7 +21,6 @@ import {Result} from '../data/Result';
 export class Ajax {
   /**
    * Ajax instanceを作成し、実行可能プロパティを可能に設定します
-   * @constructor
    */
   constructor() {
 
@@ -34,7 +33,7 @@ export class Ajax {
   // ---------------------------------------------------
   /**
    * @method can
-   * @returns {boolean} 実行可否 flag を返します
+   * @return {boolean} 実行可否 flag を返します
    */
   get can():boolean {
 
@@ -141,13 +140,13 @@ export class Ajax {
     .catch( function( error ) {
 
       // 何か問題発生
+      // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
       _this.enable();
       reject( error );
 
     } );
 
   }
-
   /**
    * 実行可否 flag を true にします
    */

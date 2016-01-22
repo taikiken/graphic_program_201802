@@ -67,7 +67,7 @@ var Action = exports.Action = function () {
   // ---------------------------------------------------
   /**
    * url を作成します
-   * @returns {string} 作成した url を返します
+   * @return {string} 作成した url を返します
    */
 
   (0, _createClass3.default)(Action, [{
@@ -127,7 +127,7 @@ var Action = exports.Action = function () {
     }
 
     /**
-     * @returns {string|*} method, GET|POST|DELETE|PUT... を返します
+     * @return {string|*} method, GET|POST|DELETE|PUT... を返します
      */
 
   }, {

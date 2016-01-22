@@ -25,7 +25,6 @@ let _symbol = Symbol();
 export class Widget {
   /**
    * static class です、instance を作成できません
-   * @constructor
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
@@ -43,7 +42,7 @@ export class Widget {
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @returns {Ranking} Ranking instance を返します
+   * @return {Ranking} Ranking instance を返します
    */
   static ranking( slug:string = 'all', resolve:Function = null, reject:Function = null ):Ranking {
 
@@ -58,7 +57,7 @@ export class Widget {
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
-   * @returns {Videos} Videos instance を返します
+   * @return {Videos} Videos instance を返します
    */
   static video( slug:string = 'all', resolve:Function = null, reject:Function = null ):Videos {
 

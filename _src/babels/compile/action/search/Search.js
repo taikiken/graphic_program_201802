@@ -76,7 +76,7 @@ var Search = exports.Search = function (_Offset) {
   // ---------------------------------------------------
   /**
    * 検索キーワード
-   * @returns {string|*} 検索キーワードを返します
+   * @return {string|*} 検索キーワードを返します
    */
 
   (0, _createClass3.default)(Search, [{
@@ -96,7 +96,7 @@ var Search = exports.Search = function (_Offset) {
     /**
      * url を作成します
      * @method url
-     * @returns {string} 作成した url を返します
+     * @return {string} 作成した url を返します
      */
 
   }, {

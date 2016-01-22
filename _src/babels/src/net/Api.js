@@ -48,7 +48,7 @@ export class Api {
 
   /**
    * login API を取得します
-   * @returns {Types} login API をTypes instanceで返します
+   * @return {Types} login API をTypes instanceで返します
    */
   static login():Types {
 
@@ -58,7 +58,7 @@ export class Api {
 
   /**
    * home API を login している / していない に合わせ取得します
-   * @returns {Types} home API(home / self)をTypes instanceで返します
+   * @return {Types} home API(home / self)をTypes instanceで返します
    */
   static home():Types {
 
@@ -68,7 +68,7 @@ export class Api {
 
   /**
    * ログインなしユーザーのhome API
-   * @returns {Types} ログインなしユーザーのhome APIをTypes instanceで返します
+   * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
    */
   static homeAPi():Types {
 
@@ -79,7 +79,7 @@ export class Api {
   /**
    * ログイン済みユーザーのhome API
    * @method selfAPi
-   * @returns {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
+   * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
    */
   static selfAPi():Types {
 
@@ -89,7 +89,7 @@ export class Api {
 
   /**
    * category API を取得します
-   * @returns {Types} category API を Types instance で取得します
+   * @return {Types} category API を Types instance で取得します
    */
   static category():Types {
 
@@ -99,7 +99,7 @@ export class Api {
 
   /**
    * search API を取得します
-   * @returns {Types} category API をTypes instanceで返します
+   * @return {Types} category API をTypes instanceで返します
    */
   static search():Types {
 
@@ -109,7 +109,7 @@ export class Api {
 
   /**
    * category API を取得します
-   * @returns {Types} category API をTypes instanceで返します
+   * @return {Types} category API をTypes instanceで返します
    */
   static detail():Types {
 
@@ -120,7 +120,7 @@ export class Api {
   /**
    * bookmark API を取得します
    * @param {string} [action=add] path option を指定します
-   * @returns {Types} bookmark API をTypes instanceで返します
+   * @return {Types} bookmark API をTypes instanceで返します
    */
   static bookmark( action:string = '' ):Types {
 
@@ -144,7 +144,7 @@ export class Api {
   /**
    * comment API を取得します
    * @param {string} [action=''] path option を指定します
-   * @returns {Types} comment API をTypes instanceで返します
+   * @return {Types} comment API をTypes instanceで返します
    */
   static comment( action:string = '' ):Types {
 
@@ -192,7 +192,7 @@ export class Api {
   /**
    * users API を取得します
    * @param {string} [action=''] path option を指定します
-   * @returns {Types} category users をTypes instanceで返します
+   * @return {Types} category users をTypes instanceで返します
    */
   static users( action:string = '' ):Types {
 

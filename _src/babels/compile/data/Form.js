@@ -60,7 +60,7 @@ var Form = exports.Form = function () {
   /**
    *
    * @param {Array<Data>} option [data...] key: value 値 配列
-   * @returns {FormData} 引数 option（配列）から作成したFormData instance を返します
+   * @return {FormData} 引数 option（配列）から作成したFormData instance を返します
    */
 
   (0, _createClass3.default)(Form, null, [{
@@ -105,7 +105,7 @@ var Form = exports.Form = function () {
      * let data = Form.element( document.querySelector("form") )
      *
      * @param {Element} formElement form element
-     * @returns {FormData} elemet から FormData を作成し返します
+     * @return {FormData} elemet から FormData を作成し返します
      */
 
   }, {

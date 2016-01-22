@@ -86,7 +86,7 @@ var Offset = exports.Offset = function (_Action) {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @returns {number|*} total件数を返します
+   * @return {number|*} total件数を返します
    */
 
   (0, _createClass3.default)(Offset, [{
@@ -102,10 +102,10 @@ var Offset = exports.Offset = function (_Action) {
      */
     value: function start() {
       var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
+
+      // this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+      console.warn('instead use next, ' + this.url + ', ' + method);
     }
-
-    //this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
-
     /**
      * offset 値を加算します
      * @param {Number} [count] default 値は this._length になります。 Ajax 成功後 次のリクエスト前に Offset.next() し加算します。
@@ -122,7 +122,7 @@ var Offset = exports.Offset = function (_Action) {
     /**
      * 次があるかを調べます
      * @method hasNext
-     * @returns {boolean} 次があるかの真偽値を返します
+     * @return {boolean} 次があるかの真偽値を返します
      */
 
   }, {
@@ -180,7 +180,7 @@ var Offset = exports.Offset = function (_Action) {
       this._total = total;
     }
     /**
-     * @returns {number|*} lengths 取得件数を返します
+     * @return {number|*} lengths 取得件数を返します
      */
 
   }, {
@@ -198,7 +198,7 @@ var Offset = exports.Offset = function (_Action) {
       this._length = length;
     }
     /**
-     * @returns {number|*} offset 取得開始位置を返します
+     * @return {number|*} offset 取得開始位置を返します
      */
 
   }, {
@@ -218,7 +218,7 @@ var Offset = exports.Offset = function (_Action) {
 
     /**
      * url を作成します
-     * @returns {string} 作成した url を返します
+     * @return {string} 作成した url を返します
      */
 
   }, {
