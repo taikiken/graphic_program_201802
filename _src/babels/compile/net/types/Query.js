@@ -40,7 +40,7 @@ var Query = exports.Query = function () {
    *
    * @param {string} key query key
    * @param {string} type query value type
-   * @param {string|number|null} [defaultValue=null] default value, あれば...
+   * @param {string|Number|null} [defaultValue=null] default value, あれば...
    * @param {boolean} [require=false] 必須フラグ
    */
 
@@ -58,7 +58,6 @@ var Query = exports.Query = function () {
   }
 
   /**
-   * @method has
    * @param {string} key query key
    * @return {boolean} query key が存在するかを返します
    */
@@ -71,7 +70,6 @@ var Query = exports.Query = function () {
     }
 
     /**
-     * @method search
      * @param {string} key query key
      * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
      */

@@ -39,8 +39,14 @@ var _symbol = (0, _symbol3.default)();
 
 /**
  * <h3>Sidebar, ranking / video 一覧表示</h3>
- * インスタンスを作成します
  * 全て static
+ * <p><code>Ranking</code>, <code>Videos</code>インスタンスを作成します</p>
+ *
+ * @example
+ * // ranking instance
+ * let ranking = Widget.ranking();
+ * // video instance
+ * let video = Widget.video();
  */
 
 var Widget = exports.Widget = function () {

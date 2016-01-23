@@ -11,18 +11,19 @@
  */
 'use strict';
 
-import {Env} from '../../app/Env';
-import {Types} from '../Types';
-import {Type} from '../types/Type';
-import {Permalink} from '../types/Permalink';
-import {Queries} from '../types/Queries';
-import {Query} from '../types/Query';
-import {CommentType} from '../comment/CommentType';
-import {Loc} from '../../util/Loc';
+import {Env} from './Env';
+import {Types} from '../net/Types';
+import {Type} from '../net/types/Type';
+import {Permalink} from '../net/types/Permalink';
+import {Queries} from '../net/types/Queries';
+import {Query} from '../net/types/Query';
+import {CommentType} from '../net/types/CommentType';
+import {Loc} from '../util/Loc';
 
-// develop mode 時に api アクセス先を 0.0.0.0: + (port +2) へ
-// IP: 52.69.203.137
-// HOST: undotsushin.com
+// test mode 時に api アクセス先を 0.0.0.0: + (port +2) へ
+// develop mode
+// - IP: 52.69.203.137
+// - HOST: undotsushin.com
 let apiRoot = ( port:string ) => {
 
   let n = parseInt( port, 10 );
@@ -85,12 +86,12 @@ let buildPath = () => {
       new Permalink( [ '*' ], true ),
       new Queries()
     ),
-    'bookmark': new Types(
-      new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
-      new Permalink( [ '*' ], true ),
-      new Queries(),
-      true
-    ),
+    //'bookmark': new Types(
+    //  new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
+    //  new Permalink( [ '*' ], true ),
+    //  new Queries(),
+    //  true
+    //),
     // ブックマーク 登録
     'bookmark:add': new Types(
       new Type( `${API_PATH}/articles/bookmark`, 'POST' ),
@@ -223,6 +224,10 @@ let _api = buildPath();
 /**
  * <h3>Api 詳細情報</h3>
  * 全てstaticです
+ * <hr>
+ *  <code>/net/Api</code> が呼び出します。<br>
+ *  直接呼び出し使うことは想定されていません。
+ *  <p><code>ApiDae.someMethod</code> を実行しなくてはいけない時は関数設計を見直した方が良いでしょう</p>
  */
 export class ApiDae {
   /**
@@ -233,34 +238,32 @@ export class ApiDae {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `User is static Class. not use new User().` );
+      throw new Error( `ApiDae is static Class. not use new ApiDae().` );
 
     }
 
   }
   /**
-   * /api/ 前 domain を再生成します
-   * test, develop 切り替えに使用します
+   * <p>/api/ 前 domain を再生成します<br>
+   * develop, production 切り替えに使用します</p>
+   * <p>**注意** 変更の必要がある時は
+   * <code>App.develop(), App.production()</code>
+   * を使用してください</p>
    */
   static rebuild():void {
     _api = buildPath();
   }
-
   /**
    * api list を取得します
-   * @method all
-   * @return {{login: Types, home: Types, self: Types, category: Types, search: Types, detail: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:send: Types, comment:reply: Types, comment:send:edit: Types, comment:reply:edit: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:notice: Types, users:notice:read: Types, users: Types, users:bookmark: Types, users:activity: Types}}
-   * 全ての API list を返します
+   * @return {Object} 全ての API list を返します
    */
   static all():Object {
 
     return _api;
 
   }
-
   /**
    * 指定キー情報を取得します
-   * @method api
    * @param {string} key api key を指定します
    * @return {Types} key に基づいた Types instance を返します
    */

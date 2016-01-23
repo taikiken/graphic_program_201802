@@ -34,12 +34,11 @@
       document = window.document;
 
     var UT = self.UT;
-    var React = window.React;
-    var ReactDOM = window.ReactDOM;
 
     var headline;
     // develop mode
     UT.app.App.develop();
+//    UT.app.App.test();
 
     function done( result ) {
       console.log( 'success response ', result.response );
@@ -54,20 +53,25 @@
     headline = new UT.action.home.Headline( done, fail );
     headline.start();
 
+    // -------------------------------------------------
+    let headline2;
+
     function didMount() {
       console.log( 'dom mount' );
     }
-    function errorMount() {
-      console.log( 'dom errorMount' );
+    function errorMount( error ) {
+      console.log( 'dom errorMount', error );
     }
-    function undefinedError() {
-      console.log( 'undefinedError' );
+    function undefinedError( error ) {
+      console.log( 'undefinedError', error );
     }
-    function emptyError() {
-      console.log( 'emptyError' );
+    function emptyError( error ) {
+      console.log( 'emptyError', error );
     }
-    function responseError() {
-      console.log( 'responseError' );
+    function responseError( error ) {
+      console.log( 'responseError', error );
+
+      headline2.showError( 'まずい！ ' + error.name + ', ' + error.message );
     }
     let option = {
       didMount: didMount,
@@ -77,7 +81,7 @@
       responseError: responseError
     };
 
-    let headline2 = new UT.view.home.ViewHeadline( document.getElementById('f1'), option );
+    headline2 = new UT.view.home.ViewHeadline( document.getElementById('f1'), option );
     headline2.start();
 
   }( window ) );

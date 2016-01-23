@@ -29,21 +29,9 @@ export class App {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Env is static Class. not use Env User().` );
+      throw new Error( `App is static Class. not use new App().` );
 
     }
-
-  }
-  // ---------------------------------------------------
-  //  CONST 代わり
-  // ---------------------------------------------------
-  /**
-   * @readonly
-   * @return {string} 代替画像パス
-   */
-  static get EMPTY_THUMBNAIL():string {
-
-    return 'img/common/empty.jpg';
 
   }
 
@@ -51,6 +39,7 @@ export class App {
   //  METHOD
   // ---------------------------------------------------
   /**
+   * <p>**Api 接続先** を変更します</p>
    * ローカルテストモードにします<br>
    * localhost/api へ接続します<br>
    * 使用しないでください
@@ -62,6 +51,7 @@ export class App {
 
   }
   /**
+   * <p>**Api 接続先** を変更します</p>
    * 開発モードにします<br>
    * local から <code>http://undotsushin.com</code> へ API リクエストを行います<br>
    * 開発中はこちらをお使いください
@@ -73,6 +63,7 @@ export class App {
 
   }
   /**
+   * <p>**Api 接続先** を変更します</p>
    * 実行モードにします<br>
    * デフォルトです
    */

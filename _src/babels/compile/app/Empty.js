@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/12 - 15:54
+ * @date 2016/01/23 - 15:53
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.User = undefined;
+exports.Empty = undefined;
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
@@ -31,74 +31,69 @@ var _symbol3 = _interopRequireDefault(_symbol2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
-var _sign = false;
-var _id = -1;
 
 /**
- * <h3>ユーザー情報を管理します</h3>
- * 全てstaticです
+ * <h3> 代替画像パス</h3>
+ * 全て static です
  */
 
-var User = exports.User = function () {
+var Empty = exports.Empty = function () {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
 
-  function User(target) {
-    (0, _classCallCheck3.default)(this, User);
+  function Empty(target) {
+    (0, _classCallCheck3.default)(this, Empty);
 
     if (_symbol !== target) {
 
-      throw new Error('User is static Class. not use new User().');
+      throw new Error('Empty is static Class. not use new Empty().');
     }
   }
   // ---------------------------------------------------
-  //  GETTER / SETTER
+  //  CONST 代わり
   // ---------------------------------------------------
   /**
-   * sign in / out 状態を表します
-   * @return {boolean} sign in / out 状態を返します
+   * img thumbnail 代替画像パス<br>
+   * [Ex.] headline, sidebar image...
+   * @readonly
+   * @return {string} 代替画像パス【小】
    */
 
-  (0, _createClass3.default)(User, null, [{
-    key: 'sign',
+  (0, _createClass3.default)(Empty, null, [{
+    key: 'IMG_SMALL',
     get: function get() {
 
-      return _sign;
+      return 'img/common/empty.jpg';
     }
-
     /**
-     * sign in / out 状態を表します
-     * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
-     */
-    ,
-    set: function set(bool) {
-
-      _sign = bool;
-    }
-
-    /**
-     * User id 情報
-     * @return {Number} User id を返します
+     * img thumbnail 代替画像パス<br>
+     * [Ex.] 記事一覧<br>
+     * ToDo: 不要な気がする, 確認する！
+     * @readonly
+     * @return {string} 代替画像パス【中】
      */
 
   }, {
-    key: 'id',
+    key: 'IMG_MIDDLE',
     get: function get() {
 
-      return _id;
+      return 'img/common/empty.jpg';
     }
-
     /**
-     * User id を設定します
-     * @param {Number} id User id
+     * video thumbnail 代替画像パス<br>
+     * [Ex.] sidebar video...
+     * @readonly
+     * @return {string} 代替画像パス【小】
      */
-    ,
-    set: function set(id) {
 
-      _id = id;
+  }, {
+    key: 'VIDEO_SMALL',
+    get: function get() {
+
+      return 'img/common/empty.jpg';
     }
   }]);
-  return User;
+  return Empty;
 }();

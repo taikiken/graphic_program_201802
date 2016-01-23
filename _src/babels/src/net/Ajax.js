@@ -12,7 +12,7 @@
 'use strict';
 
 import {Env} from '../app/Env';
-import {Codes} from './Codes';
+import {Codes} from './../app/Codes';
 import {Result} from '../data/Result';
 
 /**
@@ -32,7 +32,6 @@ export class Ajax {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @method can
    * @return {boolean} 実行可否 flag を返します
    */
   get can():boolean {
@@ -96,6 +95,7 @@ export class Ajax {
     // request を開始します
     fetch( url, option )
     .then( function( response ) {
+
       // check status (Server)
       let status = response.status;
 
@@ -121,16 +121,19 @@ export class Ajax {
 
     } )
     .then( function( json:Object ) {
+
       // parsed JSON
       let result = new Result( json );
 
       if ( !Codes.status( result.status.code ) ) {
+
         // something bad
         let code = result.status.code;
         let error = new Error( `status:${code}, user:${result.status.user_message}, dev:${result.status.developer_message}` );
         error.response = result.response;
         error.number = result.status.code;
         throw error;
+
       }
 
       _this.enable();

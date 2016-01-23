@@ -61,9 +61,12 @@ var Detail = exports.Detail = function (_Action) {
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     (0, _classCallCheck3.default)(this, Detail);
 
+    // parseInt すると先頭0が消えるのでまずい気がする
+    // this._id = parseInt( id, 10 );
+
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Detail).call(this, _Api.Api.detail(), resolve, reject));
 
-    _this._id = parseInt(id, 10);
+    _this._id = id;
 
     return _this;
   }
@@ -72,7 +75,6 @@ var Detail = exports.Detail = function (_Action) {
   // ---------------------------------------------------
   /**
    * url を作成します
-   * @method url
    * @return {string} 作成した url を返します
    */
 

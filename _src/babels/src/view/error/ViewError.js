@@ -85,7 +85,7 @@ export class ViewError extends View {
       componentDidMount: function() {
 
         // after mount
-        _this.executeSafely( 'errorMount' );
+        _this.executeSafely( 'errorMount', message );
 
       }
     } );

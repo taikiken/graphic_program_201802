@@ -49,13 +49,15 @@ export class View {
   /**
    * option Object に kyeName が存在し型が function かを調べ関数を実行する
    * @param {string} keyName 存在チェックを行う関数キー名
+   * @param {*} [args=] 実行関数への引数
    */
-  executeSafely( keyName ):void {
+  executeSafely( keyName, ...args ):void {
 
     let option = this.option;
     if ( option.hasOwnProperty( keyName ) && typeof option[ keyName] === 'function' ) {
 
-      option[ keyName ]();
+      // callback 側で通常の引数として取り出せるように apply します
+      option[ keyName ].apply( this, args );
 
     }
 

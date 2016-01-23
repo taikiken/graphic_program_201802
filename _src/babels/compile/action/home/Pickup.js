@@ -51,7 +51,7 @@ var Pickup = exports.Pickup = function (_Action) {
 
   /**
    * Home pickup(slider) データを取得します<br>
-   * <b>types: Api.home()</b> を使用します
+   * ** types: Api.home() ** を使用します
    *
    * @example
    * function done( result ) {
@@ -83,7 +83,6 @@ var Pickup = exports.Pickup = function (_Action) {
   /**
    * Ajax API url を作成します<br>
    * <code>Api.home().url/pickup?offset=0&length=5</code>
-   * @method url
    * @return {string} pickup API url を返します
    */
 

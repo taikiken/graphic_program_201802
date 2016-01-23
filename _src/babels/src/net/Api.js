@@ -13,7 +13,7 @@
 
 import {Types} from './Types';
 import {User} from './User';
-import {ApiDae} from './dae/ApiDae';
+import {ApiDae} from './../app/ApiDae';
 
 let _symbol = Symbol();
 
@@ -30,22 +30,29 @@ export class Api {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Api is not new Api().` );
+      throw new Error( `Api is static Class. not use new Api().` );
 
     }
 
   }
-
   /**
-   * /api/ 前 domain を再生成します
-   * test, develop 切り替えに使用します
+   * <p>/api/ 前 domain を再生成します<br>
+   * test, develop 切り替えに使用します</p>
+   * <p><code>Api.rebuild()</code>を直接実行することは推奨しません</p>
+   * <code>App.test(), App.develop(), App.production()</code>を使用してください。
+   *
+   * @example
+   * // develop
+   * App.develop();
+   *
+   * // production
+   * App.production();
    */
   static rebuild():void {
 
     ApiDae.rebuild();
 
   }
-
   /**
    * login API を取得します
    * @return {Types} login API をTypes instanceで返します
@@ -55,17 +62,15 @@ export class Api {
     return ApiDae.api( 'login' );
 
   }
-
   /**
-   * home API を login している / していない に合わせ取得します
+   * home API を user が login している / していない により取得します
    * @return {Types} home API(home / self)をTypes instanceで返します
    */
   static home():Types {
 
-    return User.sign ? ApiDae.api( 'self' ) : ApiDae.api( 'home' );
+    return User.sign ? Api.selfAPi() : Api.homeAPi();
 
   }
-
   /**
    * ログインなしユーザーのhome API
    * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
@@ -75,10 +80,8 @@ export class Api {
     return ApiDae.api( 'home' );
 
   }
-
   /**
    * ログイン済みユーザーのhome API
-   * @method selfAPi
    * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
    */
   static selfAPi():Types {
@@ -86,7 +89,6 @@ export class Api {
     return ApiDae.api( 'self' );
 
   }
-
   /**
    * category API を取得します
    * @return {Types} category API を Types instance で取得します
@@ -96,34 +98,33 @@ export class Api {
     return ApiDae.api( 'category' );
 
   }
-
   /**
    * search API を取得します
-   * @return {Types} category API をTypes instanceで返します
+   * @return {Types} search API をTypes instanceで返します
    */
   static search():Types {
 
     return ApiDae.api( 'search' );
 
   }
-
   /**
-   * category API を取得します
-   * @return {Types} category API をTypes instanceで返します
+   * detail API （単一記事）を取得します
+   * @return {Types} detail API をTypes instanceで返します
    */
   static detail():Types {
 
     return ApiDae.api( 'detail' );
 
   }
-
   /**
    * bookmark API を取得します
-   * @param {string} [action=add] path option を指定します
+   * @param {string} [action=add] path option を指定します delete | add
    * @return {Types} bookmark API をTypes instanceで返します
    */
-  static bookmark( action:string = '' ):Types {
+  static bookmark( action:string = 'add' ):Types {
 
+    // bookmark は 登録 or 削除 機能のみ
+    // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=1840096099
     switch ( action ) {
       case 'delete':
         return ApiDae.api( 'bookmark:delete' );
@@ -131,16 +132,16 @@ export class Api {
       case 'add':
         return ApiDae.api( 'bookmark:add' );
 
-      case '':
-        return ApiDae.api( 'bookmark' );
+      // add | delete 以外の機能をコメントへ
+      // case '':
+      //  return ApiDae.api( 'bookmark' );
 
       default:
         console.warn( `bookmark illegal action: ${action}, instead use default` );
-        return ApiDae.api( 'bookmark' );
+        return ApiDae.api( 'bookmark:add' );
     }
 
   }
-
   /**
    * comment API を取得します
    * @param {string} [action=''] path option を指定します
@@ -180,6 +181,7 @@ export class Api {
         return ApiDae.api( 'comment:bad:delete' );
 
       case '':
+        // 記事詳細でのコメント一覧表示
         return ApiDae.api( 'comment' );
 
       default:
@@ -188,7 +190,6 @@ export class Api {
     }
 
   }
-
   /**
    * users API を取得します
    * @param {string} [action=''] path option を指定します
@@ -210,6 +211,7 @@ export class Api {
         return ApiDae.api( 'users:activity' );
 
       case '':
+        // ユーザー詳細
         return ApiDae.api( 'users' );
 
       default:

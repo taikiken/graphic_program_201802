@@ -32,7 +32,7 @@ var _Types = require('./Types');
 
 var _User = require('./User');
 
-var _ApiDae = require('./dae/ApiDae');
+var _ApiDae = require('./../app/ApiDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,13 +54,21 @@ var Api = exports.Api = function () {
 
     if (_symbol !== target) {
 
-      throw new Error('Api is not new Api().');
+      throw new Error('Api is static Class. not use new Api().');
     }
   }
-
   /**
-   * /api/ 前 domain を再生成します
-   * test, develop 切り替えに使用します
+   * <p>/api/ 前 domain を再生成します<br>
+   * test, develop 切り替えに使用します</p>
+   * <p><code>Api.rebuild()</code>を直接実行することは推奨しません</p>
+   * <code>App.test(), App.develop(), App.production()</code>を使用してください。
+   *
+   * @example
+   * // develop
+   * App.develop();
+   *
+   * // production
+   * App.production();
    */
 
   (0, _createClass3.default)(Api, null, [{
@@ -69,7 +77,6 @@ var Api = exports.Api = function () {
 
       _ApiDae.ApiDae.rebuild();
     }
-
     /**
      * login API を取得します
      * @return {Types} login API をTypes instanceで返します
@@ -81,9 +88,8 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('login');
     }
-
     /**
-     * home API を login している / していない に合わせ取得します
+     * home API を user が login している / していない により取得します
      * @return {Types} home API(home / self)をTypes instanceで返します
      */
 
@@ -91,9 +97,8 @@ var Api = exports.Api = function () {
     key: 'home',
     value: function home() {
 
-      return _User.User.sign ? _ApiDae.ApiDae.api('self') : _ApiDae.ApiDae.api('home');
+      return _User.User.sign ? Api.selfAPi() : Api.homeAPi();
     }
-
     /**
      * ログインなしユーザーのhome API
      * @return {Types} ログインなしユーザーのhome APIをTypes instanceで返します
@@ -105,10 +110,8 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('home');
     }
-
     /**
      * ログイン済みユーザーのhome API
-     * @method selfAPi
      * @return {Types} ログイン済みユーザーのhome APIをTypes instanceで返します
      */
 
@@ -118,7 +121,6 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('self');
     }
-
     /**
      * category API を取得します
      * @return {Types} category API を Types instance で取得します
@@ -130,10 +132,9 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('category');
     }
-
     /**
      * search API を取得します
-     * @return {Types} category API をTypes instanceで返します
+     * @return {Types} search API をTypes instanceで返します
      */
 
   }, {
@@ -142,10 +143,9 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('search');
     }
-
     /**
-     * category API を取得します
-     * @return {Types} category API をTypes instanceで返します
+     * detail API （単一記事）を取得します
+     * @return {Types} detail API をTypes instanceで返します
      */
 
   }, {
@@ -154,18 +154,19 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('detail');
     }
-
     /**
      * bookmark API を取得します
-     * @param {string} [action=add] path option を指定します
+     * @param {string} [action=add] path option を指定します delete | add
      * @return {Types} bookmark API をTypes instanceで返します
      */
 
   }, {
     key: 'bookmark',
     value: function bookmark() {
-      var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+      var action = arguments.length <= 0 || arguments[0] === undefined ? 'add' : arguments[0];
 
+      // bookmark は 登録 or 削除 機能のみ
+      // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=1840096099
       switch (action) {
         case 'delete':
           return _ApiDae.ApiDae.api('bookmark:delete');
@@ -173,15 +174,15 @@ var Api = exports.Api = function () {
         case 'add':
           return _ApiDae.ApiDae.api('bookmark:add');
 
-        case '':
-          return _ApiDae.ApiDae.api('bookmark');
+        // add | delete 以外の機能をコメントへ
+        // case '':
+        //  return ApiDae.api( 'bookmark' );
 
         default:
           console.warn('bookmark illegal action: ' + action + ', instead use default');
-          return _ApiDae.ApiDae.api('bookmark');
+          return _ApiDae.ApiDae.api('bookmark:add');
       }
     }
-
     /**
      * comment API を取得します
      * @param {string} [action=''] path option を指定します
@@ -225,6 +226,7 @@ var Api = exports.Api = function () {
           return _ApiDae.ApiDae.api('comment:bad:delete');
 
         case '':
+          // 記事詳細でのコメント一覧表示
           return _ApiDae.ApiDae.api('comment');
 
         default:
@@ -232,7 +234,6 @@ var Api = exports.Api = function () {
           return _ApiDae.ApiDae.api('comment');
       }
     }
-
     /**
      * users API を取得します
      * @param {string} [action=''] path option を指定します
@@ -258,6 +259,7 @@ var Api = exports.Api = function () {
           return _ApiDae.ApiDae.api('users:activity');
 
         case '':
+          // ユーザー詳細
           return _ApiDae.ApiDae.api('users');
 
         default:

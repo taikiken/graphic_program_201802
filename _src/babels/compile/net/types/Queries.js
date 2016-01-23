@@ -51,7 +51,6 @@ var Queries = exports.Queries = function () {
 
   /**
    * queries個数であるかないかの判断は可能
-   * @method length
    * @return {Number} queries個数を返します
    */
 
@@ -63,7 +62,6 @@ var Queries = exports.Queries = function () {
     }
 
     /**
-     * @method all
      * @return {Array.<Query>} 全てのqueriesを返します
      */
 
@@ -76,7 +74,6 @@ var Queries = exports.Queries = function () {
 
     /**
      * key から query を探します
-     * @method search
      * @param {string} key query key name, ?start=0 の start
      * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
      */

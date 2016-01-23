@@ -62,13 +62,18 @@ var View = exports.View = function () {
     /**
      * option Object に kyeName が存在し型が function かを調べ関数を実行する
      * @param {string} keyName 存在チェックを行う関数キー名
+     * @param {*} [args=] 実行関数への引数
      */
     value: function executeSafely(keyName) {
 
       var option = this.option;
       if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
+        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
 
-        option[keyName]();
+        // callback 側で通常の引数として取り出せるように apply します
+        option[keyName].apply(this, args);
       }
     }
   }, {

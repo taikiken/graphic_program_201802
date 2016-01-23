@@ -43,7 +43,7 @@ export class Offset extends Action {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {number|*} total件数を返します
+   * @return {Number|*} total件数を返します
    */
   get total():Number {
     return this._total;
@@ -57,7 +57,7 @@ export class Offset extends Action {
     this._total = total;
   }
   /**
-   * @return {number|*} lengths 取得件数を返します
+   * @return {Number|*} lengths 取得件数を返します
    */
   get length():Number {
     return this._length;
@@ -71,7 +71,7 @@ export class Offset extends Action {
     this._length = length;
   }
   /**
-   * @return {number|*} offset 取得開始位置を返します
+   * @return {Number|*} offset 取得開始位置を返します
    */
   get offset():Number {
     return this._offset;
@@ -118,7 +118,6 @@ export class Offset extends Action {
 
   /**
    * 次があるかを調べます
-   * @method hasNext
    * @return {boolean} 次があるかの真偽値を返します
    */
   hasNext():boolean {

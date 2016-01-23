@@ -38,7 +38,7 @@ var _symbol = (0, _symbol3.default)();
 /**
  * <h3>文字フォーマットに関するUtilityです</h3>
  * 全て static<br>
- * <strong>文字を定型に変換します</strong>
+ * ** 文字を定型に変換します **
  */
 
 var Format = exports.Format = function () {
@@ -52,7 +52,7 @@ var Format = exports.Format = function () {
 
     if (_symbol !== target) {
 
-      throw new Error("Format is not new Format().");
+      throw new Error("Format is static Class. not use new Format().");
     }
   }
   /**

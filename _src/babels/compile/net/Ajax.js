@@ -26,7 +26,7 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _Env = require('../app/Env');
 
-var _Codes = require('./Codes');
+var _Codes = require('./../app/Codes');
 
 var _Result = require('../data/Result');
 
@@ -51,7 +51,6 @@ var Ajax = exports.Ajax = function () {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @method can
    * @return {boolean} 実行可否 flag を返します
    */
 
@@ -111,6 +110,7 @@ var Ajax = exports.Ajax = function () {
       // https://github.com/github/fetch
       // request を開始します
       fetch(url, option).then(function (response) {
+
         // check status (Server)
         var status = response.status;
 
@@ -130,10 +130,12 @@ var Ajax = exports.Ajax = function () {
         // parse JSON
         return response.json();
       }).then(function (json) {
+
         // parsed JSON
         var result = new _Result.Result(json);
 
         if (!_Codes.Codes.status(result.status.code)) {
+
           // something bad
           var code = result.status.code;
           var error = new Error('status:' + code + ', user:' + result.status.user_message + ', dev:' + result.status.developer_message);

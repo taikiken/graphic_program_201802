@@ -18,7 +18,7 @@ import {Category} from './Category';
  */
 export class Videos extends Category {
   /**
-   * サイドバー動画一覧を取得します
+   * 動画一覧を取得します
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

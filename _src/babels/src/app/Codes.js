@@ -61,12 +61,11 @@ export class Codes {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Codes is not new Codes().` );
+      throw new Error( `Codes is static Class. not use new Codes().` );
 
     }
 
   }
-
   /**
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @return {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
@@ -76,7 +75,6 @@ export class Codes {
     return statusCode >= 200 && statusCode < 300;
 
   }
-
   /**
    * status codeの意味を調べます
    * @param {Number} code サーバーからのresponse status code
@@ -90,7 +88,6 @@ export class Codes {
     };
 
   }
-
   /**
    * @param {Number} code status code
    * @return {*} 日本語メッセージを返します

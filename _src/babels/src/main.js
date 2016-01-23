@@ -17,13 +17,14 @@
 // -------------------------------------
 
 // -------------------------------------
-// app
-import {Env} from './app/Env';
-
-// -------------------------------------
 // util
 import {Loc} from './util/Loc';
 import {Format} from './util/Format';
+
+// -------------------------------------
+// app
+import {Env} from './app/Env';
+import {Codes} from './app/Codes';
 
 // -------------------------------------
 // data
@@ -36,7 +37,6 @@ import {Result} from './data/Result';
 import {Ajax} from './net/Ajax';
 import {Api} from './net/Api';
 import {Types} from './net/Types';
-import {Codes} from './net/Codes';
 import {User} from './net/User';
 
 // net/types
@@ -44,9 +44,7 @@ import {Permalink} from './net/types/Permalink';
 import {Query} from './net/types/Query';
 import {Queries} from './net/types/Queries';
 import {Type} from './net/types/Type';
-
-// net/comment
-import {CommentType} from './net/comment/CommentType';
+import {CommentType} from './net/types/CommentType';
 
 
 // -------------------------------------
@@ -95,7 +93,8 @@ var UT = {
   version: '@@version',
   app: {
     Env: Env,
-    App: App
+    App: App,
+    Codes: Codes
   },
   data: {
     Data: Data,
@@ -110,15 +109,12 @@ var UT = {
     Ajax: Ajax,
     Api: Api,
     Types: Types,
-    Codes: Codes,
     User: User,
     types: {
       Permalink: Permalink,
       Query: Query,
       Queries: Queries,
-      Type: Type
-    },
-    comment: {
+      Type: Type,
       CommentType: CommentType
     }
   },

@@ -58,7 +58,7 @@ export class User {
 
   /**
    * User id 情報
-   * @return {number} User id を返します
+   * @return {Number} User id を返します
    */
   static get id():Number {
 
@@ -68,7 +68,7 @@ export class User {
 
   /**
    * User id を設定します
-   * @param {number} id User id
+   * @param {Number} id User id
    */
   static set id( id:Number ):void {
 

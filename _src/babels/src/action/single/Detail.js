@@ -27,7 +27,9 @@ export class Detail extends Action {
   constructor( id:Number, resolve:Function = null, reject:Function = null ) {
 
     super( Api.detail(), resolve, reject );
-    this._id = parseInt( id, 10 );
+    // parseInt すると先頭0が消えるのでまずい気がする
+    // this._id = parseInt( id, 10 );
+    this._id = id;
 
   }
   // ---------------------------------------------------
@@ -35,7 +37,6 @@ export class Detail extends Action {
   // ---------------------------------------------------
   /**
    * url を作成します
-   * @method url
    * @return {string} 作成した url を返します
    */
   get url():string {

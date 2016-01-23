@@ -36,6 +36,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _symbol = (0, _symbol3.default)();
 
+/**
+ * <h3> application 共通項目を管理します</h3>
+ * 全て static です
+ */
+
 var App = exports.App = function () {
   /**
    * static class です, instance を作成しません
@@ -47,33 +52,32 @@ var App = exports.App = function () {
 
     if (_symbol !== target) {
 
-      throw new Error('Env is static Class. not use Env User().');
+      throw new Error('App is static Class. not use new App().');
     }
   }
+
   // ---------------------------------------------------
-  //  CONST 代わり
+  //  METHOD
   // ---------------------------------------------------
   /**
-   * @readonly
-   * @return {string} 代替画像パス
+   * <p>**Api 接続先** を変更します</p>
+   * ローカルテストモードにします<br>
+   * localhost/api へ接続します<br>
+   * 使用しないでください
    */
 
   (0, _createClass3.default)(App, null, [{
     key: 'test',
-
-    // ---------------------------------------------------
-    //  METHOD
-    // ---------------------------------------------------
-    /**
-     * ローカルテストモードにします
-     */
     value: function test() {
 
       _Env.Env.test();
       _Api.Api.rebuild();
     }
     /**
-     * 開発モードにします
+     * <p>**Api 接続先** を変更します</p>
+     * 開発モードにします<br>
+     * local から <code>http://undotsushin.com</code> へ API リクエストを行います<br>
+     * 開発中はこちらをお使いください
      */
 
   }, {
@@ -84,7 +88,9 @@ var App = exports.App = function () {
       _Api.Api.rebuild();
     }
     /**
-     * 実行モードにします
+     * <p>**Api 接続先** を変更します</p>
+     * 実行モードにします<br>
+     * デフォルトです
      */
 
   }, {
@@ -93,12 +99,6 @@ var App = exports.App = function () {
 
       _Env.Env.production();
       _Api.Api.rebuild();
-    }
-  }, {
-    key: 'EMPTY_THUMBNAIL',
-    get: function get() {
-
-      return 'img/common/empty.jpg';
     }
   }]);
   return App;

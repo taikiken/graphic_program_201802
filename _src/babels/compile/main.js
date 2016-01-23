@@ -1,10 +1,12 @@
 'use strict';
 
-var _Env = require('./app/Env');
-
 var _Loc = require('./util/Loc');
 
 var _Format = require('./util/Format');
+
+var _Env = require('./app/Env');
+
+var _Codes = require('./app/Codes');
 
 var _Data = require('./data/Data');
 
@@ -18,8 +20,6 @@ var _Api = require('./net/Api');
 
 var _Types = require('./net/Types');
 
-var _Codes = require('./net/Codes');
-
 var _User = require('./net/User');
 
 var _Permalink = require('./net/types/Permalink');
@@ -30,7 +30,7 @@ var _Queries = require('./net/types/Queries');
 
 var _Type = require('./net/types/Type');
 
-var _CommentType = require('./net/comment/CommentType');
+var _CommentType = require('./net/types/CommentType');
 
 var _App = require('./app/App');
 
@@ -77,11 +77,14 @@ var _ViewHeadline = require('./view/home/ViewHeadline');
 // app/App
 
 // -------------------------------------
-// net
+// data
+
+// -------------------------------------
+// app
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-22 22:39:54
+ * @date 2016-01-23 16:32:16
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -97,12 +100,13 @@ var _ViewHeadline = require('./view/home/ViewHeadline');
 // -------------------------------------
 
 // -------------------------------------
-// app
+// util
 var UT = {
   version: '1.0.0',
   app: {
     Env: _Env.Env,
-    App: _App.App
+    App: _App.App,
+    Codes: _Codes.Codes
   },
   data: {
     Data: _Data.Data,
@@ -117,15 +121,12 @@ var UT = {
     Ajax: _Ajax.Ajax,
     Api: _Api.Api,
     Types: _Types.Types,
-    Codes: _Codes.Codes,
     User: _User.User,
     types: {
       Permalink: _Permalink.Permalink,
       Query: _Query.Query,
       Queries: _Queries.Queries,
-      Type: _Type.Type
-    },
-    comment: {
+      Type: _Type.Type,
       CommentType: _CommentType.CommentType
     }
   },
@@ -174,14 +175,9 @@ var UT = {
 // -------------------------------------
 // action
 
-// net/comment
-
 // net/types
 
 // -------------------------------------
-// data
-
-// -------------------------------------
-// util
+// net
 
 self.UT = UT;

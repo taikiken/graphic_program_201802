@@ -29,7 +29,6 @@ export class Queries {
 
   /**
    * queries個数であるかないかの判断は可能
-   * @method length
    * @return {Number} queries個数を返します
    */
   length():Number {
@@ -39,7 +38,6 @@ export class Queries {
   }
 
   /**
-   * @method all
    * @return {Array.<Query>} 全てのqueriesを返します
    */
   all():Array<Query> {
@@ -50,7 +48,6 @@ export class Queries {
 
   /**
    * key から query を探します
-   * @method search
    * @param {string} key query key name, ?start=0 の start
    * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
    */

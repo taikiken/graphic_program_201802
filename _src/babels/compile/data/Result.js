@@ -129,7 +129,7 @@ var Result = exports.Result = function () {
     }
     /**
      * 取得 JSON status section
-     * @return {{code: number, user_massage: string,developer_message: string}|undefined} response.status を返します、見つからない時は undefined を返します
+     * @return {{code: Number, user_massage: string,developer_message: string}|undefined} response.status を返します、見つからない時は undefined を返します
      */
 
   }, {
@@ -140,7 +140,7 @@ var Result = exports.Result = function () {
     }
     /**
      * request offset, length を返します
-     * @return {{offset: number, length: number}|undefined} 取得 JSON request section を返します、見つからない時は undefined を返します
+     * @return {{offset: Number, length: Number}|undefined} 取得 JSON request section を返します、見つからない時は undefined を返します
      */
 
   }, {

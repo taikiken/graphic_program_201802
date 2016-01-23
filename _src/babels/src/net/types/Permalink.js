@@ -39,7 +39,6 @@ export class Permalink {
   // ---------------------------------------------------
   /**
    * オプションパスが必須かのプロパティ
-   * @method require
    * @return {boolean} オプションパスが必須かどうかを返します true: 必須
    */
   get require():boolean {
@@ -52,7 +51,6 @@ export class Permalink {
   // ---------------------------------------------------
   /**
    * option path 数
-   * @method length
    * @return {Number} paths数を返します
    */
   length():Number {
@@ -62,7 +60,6 @@ export class Permalink {
   }
 
   /**
-   * @method has
    * @param {string} path 調べたいオプションパス
    * @return {boolean} 指定パスが存在するかの真偽値を返します
    */

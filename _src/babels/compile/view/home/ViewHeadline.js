@@ -40,6 +40,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _App = require('../../app/App');
 
+var _Empty = require('../../app/Empty');
+
 var _View2 = require('../View');
 
 var _ViewError = require('../error/ViewError');
@@ -124,7 +126,6 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
         this.render(articles);
       }
     }
-
     /**
      * Ajax response error
      * @param {Error} error Error instance
@@ -134,10 +135,10 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
     key: 'fail',
     value: function fail(error) {
 
-      this.executeSafely('responseError');
-      this.showError(error.message);
+      this.executeSafely('responseError', error);
+      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+      // this.showError( error.message );
     }
-
     /**
      * ViewError でエラーコンテナを作成します
      * @param {string} message エラーメッセージ
@@ -163,7 +164,7 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
 
       var element = this.element;
       var _this = this;
-      var dummy = _App.App.EMPTY_THUMBNAIL;
+      var dummy = _Empty.Empty.IMG_SMALL;
 
       // React Class
       var ArticleDom = React.createClass({

@@ -44,7 +44,7 @@ var Ranking = exports.Ranking = function (_Category) {
   (0, _inherits3.default)(Ranking, _Category);
 
   /**
-   * サイドバー記事ランキングを取得します
+   * 記事ランキングを取得します
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

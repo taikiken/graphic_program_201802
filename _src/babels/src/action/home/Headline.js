@@ -34,7 +34,6 @@ export class Headline extends Action {
   /**
    * Ajax API url を作成します<br>
    * <code>Api.home().url/headline?offset=0&length=6</code>
-   * @method url
    * @return {string} headline API url を返します
    */
   get url():string {

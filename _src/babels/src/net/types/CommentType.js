@@ -13,7 +13,7 @@
 
 'use strict';
 
-import {Query} from '../types/Query';
+import {Query} from './Query';
 
 /**
  * 記事詳細でのコメント一覧表示のリクエスト・オプションです
@@ -42,7 +42,6 @@ export class CommentType extends Query {
 
   /**
    * Query override して使います
-   * @method has
    * @param {string} key query key
    * @return {boolean} query key が存在するかを返します
    */

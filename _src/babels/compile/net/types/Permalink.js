@@ -58,7 +58,6 @@ var Permalink = exports.Permalink = function () {
   // ---------------------------------------------------
   /**
    * オプションパスが必須かのプロパティ
-   * @method require
    * @return {boolean} オプションパスが必須かどうかを返します true: 必須
    */
 
@@ -70,7 +69,6 @@ var Permalink = exports.Permalink = function () {
     // ---------------------------------------------------
     /**
      * option path 数
-     * @method length
      * @return {Number} paths数を返します
      */
     value: function length() {
@@ -79,7 +77,6 @@ var Permalink = exports.Permalink = function () {
     }
 
     /**
-     * @method has
      * @param {string} path 調べたいオプションパス
      * @return {boolean} 指定パスが存在するかの真偽値を返します
      */

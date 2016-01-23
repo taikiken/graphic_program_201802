@@ -51,7 +51,7 @@ var Headline = exports.Headline = function (_Action) {
 
   /**
    * Home headline（注目ニュース） データを取得します<br>
-   * <strong>types: Api.home()<strong> を使用します
+   * ** types: Api.home() ** を使用します
    *
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -69,7 +69,6 @@ var Headline = exports.Headline = function (_Action) {
   /**
    * Ajax API url を作成します<br>
    * <code>Api.home().url/headline?offset=0&length=6</code>
-   * @method url
    * @return {string} headline API url を返します
    */
 

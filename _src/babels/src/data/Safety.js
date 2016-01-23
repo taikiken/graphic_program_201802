@@ -26,7 +26,7 @@ export class Safety {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Safety is not Safety Api().` );
+      throw new Error( `Safety is static Class. not use new Safety().` );
 
     }
 

@@ -51,7 +51,6 @@ export class Search extends Offset {
   }
   /**
    * url を作成します
-   * @method url
    * @return {string} 作成した url を返します
    */
   get url():string {

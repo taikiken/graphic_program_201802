@@ -86,7 +86,7 @@ var Offset = exports.Offset = function (_Action) {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {number|*} total件数を返します
+   * @return {Number|*} total件数を返します
    */
 
   (0, _createClass3.default)(Offset, [{
@@ -121,7 +121,6 @@ var Offset = exports.Offset = function (_Action) {
 
     /**
      * 次があるかを調べます
-     * @method hasNext
      * @return {boolean} 次があるかの真偽値を返します
      */
 
@@ -180,7 +179,7 @@ var Offset = exports.Offset = function (_Action) {
       this._total = total;
     }
     /**
-     * @return {number|*} lengths 取得件数を返します
+     * @return {Number|*} lengths 取得件数を返します
      */
 
   }, {
@@ -198,7 +197,7 @@ var Offset = exports.Offset = function (_Action) {
       this._length = length;
     }
     /**
-     * @return {number|*} offset 取得開始位置を返します
+     * @return {Number|*} offset 取得開始位置を返します
      */
 
   }, {

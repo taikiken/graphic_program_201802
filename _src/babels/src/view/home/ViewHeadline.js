@@ -13,6 +13,7 @@
 
 // app
 import {App} from '../../app/App';
+import {Empty} from '../../app/Empty';
 
 // view
 import {View} from '../View';
@@ -84,18 +85,17 @@ export class ViewHeadline extends View {
     }
 
   }
-
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
   fail( error:Error ):void {
 
-    this.executeSafely( 'responseError' );
-    this.showError( error.message );
+    this.executeSafely( 'responseError', error );
+    // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+    // this.showError( error.message );
 
   }
-
   /**
    * ViewError でエラーコンテナを作成します
    * @param {string} message エラーメッセージ
@@ -115,7 +115,7 @@ export class ViewHeadline extends View {
 
     let element = this.element;
     let _this = this;
-    let dummy = App.EMPTY_THUMBNAIL;
+    let dummy = Empty.IMG_SMALL;
 
     // React Class
     let ArticleDom = React.createClass( {

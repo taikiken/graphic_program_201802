@@ -53,7 +53,7 @@ var Form = exports.Form = function () {
 
     if (_symbol !== target) {
 
-      throw new Error('Form is not new Form().');
+      throw new Error('Form is static Class. not use new Form().');
     }
   }
 

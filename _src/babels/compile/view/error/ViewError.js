@@ -130,7 +130,7 @@ var ViewError = exports.ViewError = function (_View) {
         componentDidMount: function componentDidMount() {
 
           // after mount
-          _this.executeSafely('errorMount');
+          _this.executeSafely('errorMount', message);
         }
       });
 

@@ -48,7 +48,6 @@ export class Pickup extends Action {
   /**
    * Ajax API url を作成します<br>
    * <code>Api.home().url/pickup?offset=0&length=5</code>
-   * @method url
    * @return {string} pickup API url を返します
    */
   get url():string {

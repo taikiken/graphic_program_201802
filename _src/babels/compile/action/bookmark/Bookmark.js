@@ -52,7 +52,7 @@ var Bookmark = exports.Bookmark = function (_Action) {
 
   /**
    * 記事のブックマーク登録 / 解除 を行います
-   * @param {number} id article id 記事ID
+   * @param {Number|string} id article id 記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
@@ -62,9 +62,12 @@ var Bookmark = exports.Bookmark = function (_Action) {
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     (0, _classCallCheck3.default)(this, Bookmark);
 
+    // 記事IDをparseIntはまずいと思う, 頭 0 が消えるから
+    // this._id = parseInt( id, 10 );
+
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _Api.Api.bookmark(), resolve, reject));
 
-    _this._id = parseInt(id, 10);
+    _this._id = id;
 
     return _this;
   }
@@ -91,7 +94,6 @@ var Bookmark = exports.Bookmark = function (_Action) {
 
       console.error('illegal operation, use start with method: ' + method);
     }
-
     /**
      * 記事のブックマーク登録
      */
@@ -102,7 +104,6 @@ var Bookmark = exports.Bookmark = function (_Action) {
 
       this._ajax.start(this.url, 'POST', this.success.bind(this), this.fail.bind(this));
     }
-
     /**
      * 記事のブックマーク解除
      */
@@ -120,7 +121,6 @@ var Bookmark = exports.Bookmark = function (_Action) {
     }
     /**
      * url を作成します
-     * @method url
      * @return {string} 作成した url を返します
      */
 

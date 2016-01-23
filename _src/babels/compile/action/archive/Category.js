@@ -52,7 +52,7 @@ var Category = exports.Category = function (_Offset) {
   /**
    * 記事一覧を取得します
    * @param {string} [slug=all] category slug です
-   * @param {string} [type=] ’’request type, ''|ranking|video です
+   * @param {string} [type=''] request type, '' | 'ranking' | 'video' です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
@@ -96,7 +96,6 @@ var Category = exports.Category = function (_Offset) {
     /**
      * Ajax API url を作成します
      * Api.category().url/all|slug[/ranking]?offset=0&length=5
-     * @method url
      * @return {string} API url を返します
      */
 

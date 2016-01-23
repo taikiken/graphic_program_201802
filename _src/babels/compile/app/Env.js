@@ -55,7 +55,7 @@ var Env = exports.Env = function () {
 
     if (_symbol !== target) {
 
-      throw new Error('Env is static Class. not use Env User().');
+      throw new Error('Env is static Class. not use new Env().');
     }
   }
   // ---------------------------------------------------
