@@ -12,7 +12,7 @@
 'use strict';
 
 // app
-import {App} from '../../app/App';
+// import {App} from '../../app/App';
 import {Empty} from '../../app/Empty';
 
 // view
@@ -20,13 +20,13 @@ import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 // action
 import {Headline} from '../../action/home/Headline';
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
 // React
-let React = window.React;
-let ReactDOM = window.ReactDOM;
+let React = self.React;
+let ReactDOM = self.ReactDOM;
 
 /**
  * home > headline（注目ニュース）を表示します。
@@ -38,29 +38,60 @@ let ReactDOM = window.ReactDOM;
 export class ViewHeadline extends View {
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
+   *
+   * @example
+   * let headline;
+   *
+   * function didMount() {
+   *    console.log( 'dom mount' );
+   *  }
+   * function errorMount( error ) {
+   *    console.log( 'dom errorMount', error );
+   *  }
+   * function undefinedError( error ) {
+   *    console.log( 'undefinedError', error );
+   *  }
+   * function emptyError( error ) {
+   *    console.log( 'emptyError', error );
+   *  }
+   * function responseError( error ) {
+   *    console.log( 'responseError', error );
+   *
+   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
+   * }
+   * let option = {
+   *    didMount: didMount,
+   *    errorMount: errorMount,
+   *    undefinedError: undefinedError,
+   *    emptyError: emptyError,
+   *    responseError: responseError
+   *  };
+   *
+   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), option );
+   * headline.start();
+   *
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
   constructor( element, option:Object = {} ) {
 
     super( element, option );
+    this._action = new Headline( this.done.bind( this ), this.fail.bind( this ) );
 
   }
-
   /**
    * Ajax request を開始します
    */
   start():void {
 
-    let action = new Headline( this.done.bind( this ), this.fail.bind( this ) );
-    action.start();
+    this.action.start();
 
   }
   /**
    * Ajax response success
-   * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+   * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result:Result ):void {
+  done( result ):void {
 
     let articles = result.articles;
 
@@ -102,11 +133,11 @@ export class ViewHeadline extends View {
    */
   showError( message:string = '' ):void {
 
+    // ToDo: Error 時の表示が決まったら変更する
     let error = new ViewError( this.element, this.option, message );
     error.render();
 
   }
-
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
@@ -115,18 +146,44 @@ export class ViewHeadline extends View {
 
     let element = this.element;
     let _this = this;
-    let dummy = Empty.IMG_SMALL;
+
+    // tag block
+    let HeadlineDom = React.createClass( {
+      propTypes: {
+        index: React.PropTypes.number.isRequired,
+        id: React.PropTypes.string.isRequired,
+        slug: React.PropTypes.string.isRequired,
+        category: React.PropTypes.string.isRequired,
+        url: React.PropTypes.string.isRequired,
+        date: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired,
+        thumbnail: React.PropTypes.string.isRequired
+      },
+      render: function() {
+        let p = this.props;
+
+        return (
+          <a href={p.url} id={'headline-' + p.id} className={'headline headline-' + p.index}>
+            <img src={p.thumbnail} alt={p.title}/>
+            <p className={'cat cat-' + p.slug}>{p.category}</p>
+            <h3 className='headline-title'>{p.title}</h3>
+            <p className="date">{p.date}</p>
+          </a>
+        );
+      }
+    } );
 
     // React Class
     let ArticleDom = React.createClass( {
       propTypes: {
         list: React.PropTypes.array.isRequired
       },
-      getDefaultProps: function() {
-        return {
-          list: []
-        };
-      },
+      // isRequired なので getDefaultProps がいらない
+      // getDefaultProps: function() {
+      //  return {
+      //    list: []
+      //  };
+      // },
       render: function() {
 
         var list = this.props.list;
@@ -138,22 +195,21 @@ export class ViewHeadline extends View {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-                let divClass = `headline headline-${i}`;
-                let catClass = `category category-${dae.category.slug}`;
-                let titleClass = `headline-title headline-title-${i}`;
-                let dateClass = `date date-${i}`;
-                // thumbnail が 空のことがある様子
                 let thumbnail = dae.media.images.thumbnail;
+                thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
 
-                return <div key={i} className={divClass}>
-                  <figure><img src={thumbnail !== '' ? thumbnail : dummy} alt={dae.title}/></figure>
-                  <div className="content">
-                    <span className={catClass}>{dae.category.label}</span>
-                    <h3 className={titleClass}>{dae.title}</h3>
-                    <p className={dateClass}>{dae.formatDate}</p>
-                    <p className={dateClass}>{dae.displayDate}</p>
-                  </div>
-                </div>;
+                // HeadlineDom instance を使い render
+                return <HeadlineDom
+                  key={'headline-' + dae.id}
+                  index={i}
+                  id={String( dae.id )}
+                  slug={dae.category.slug}
+                  category={dae.category.label}
+                  url={dae.url}
+                  date={dae.formatDate}
+                  title={dae.title}
+                  thumbnail={thumbnail}
+                />;
 
               } )
             }

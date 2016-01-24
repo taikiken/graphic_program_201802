@@ -81,6 +81,14 @@ import {Detail} from './action/single/Detail';
 // -------------------------------------
 // view
 import {ViewHeadline} from './view/home/ViewHeadline';
+import {ViewPickup} from './view/home/ViewPickup';
+
+/**
+ * ToDo: 確認事項
+ * ToDo: 対象外OS alert
+ * ToDo: index ニュース一覧 画像なしの代替画像
+ * ToDo: title, meta, ogp
+ */
 
 
 /**
@@ -146,7 +154,8 @@ var UT = {
   },
   view: {
     home: {
-      ViewHeadline: ViewHeadline
+      ViewHeadline: ViewHeadline,
+      ViewPickup: ViewPickup
     }
   }
 };

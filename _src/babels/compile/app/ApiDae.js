@@ -86,12 +86,12 @@ var buildPath = function buildPath() {
     'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
     // 詳細
     'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
-    //'bookmark': new Types(
+    // 'bookmark': new Types(
     //  new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
     //  new Permalink( [ '*' ], true ),
     //  new Queries(),
     //  true
-    //),
+    // ),
     // ブックマーク 登録
     'bookmark:add': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
     // ブックマーク 削除

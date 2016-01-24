@@ -60,6 +60,15 @@ var _Detail = require('./action/single/Detail');
 
 var _ViewHeadline = require('./view/home/ViewHeadline');
 
+var _ViewPickup = require('./view/home/ViewPickup');
+
+/**
+ * ToDo: 確認事項
+ * ToDo: 対象外OS alert
+ * ToDo: index ニュース一覧 画像なしの代替画像
+ * ToDo: title, meta, ogp
+ */
+
 /**
  * global object
  * こんな感じで使えます
@@ -67,40 +76,22 @@ var _ViewHeadline = require('./view/home/ViewHeadline');
  *    var ut = self.UT
  */
 
-// action/single
-
-// action/bookmark
-
-// action/archive
-
 // -------------------------------------
-// app/App
+// view
 
-// -------------------------------------
-// data
+// action/search
+
+// action/sidebar
+
+// action/home
 
 // -------------------------------------
-// app
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-23 16:32:16
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- * @requires React, Sagen. IE: fetch, es5-promise
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
+// action
+
+// net/types
 
 // -------------------------------------
-// util
+// net
 var UT = {
   version: '1.0.0',
   app: {
@@ -158,26 +149,45 @@ var UT = {
   },
   view: {
     home: {
-      ViewHeadline: _ViewHeadline.ViewHeadline
+      ViewHeadline: _ViewHeadline.ViewHeadline,
+      ViewPickup: _ViewPickup.ViewPickup
     }
   }
 };
 
-// -------------------------------------
-// view
+// action/single
 
-// action/search
+// action/bookmark
 
-// action/sidebar
-
-// action/home
+// action/archive
 
 // -------------------------------------
-// action
-
-// net/types
+// app/App
 
 // -------------------------------------
-// net
+// data
+
+// -------------------------------------
+// app
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-01-25 00:06:50
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
+
+// -------------------------------------
+// util
 
 self.UT = UT;

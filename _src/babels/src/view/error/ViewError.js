@@ -13,8 +13,8 @@
 
 import {View} from '../View';
 
-let React = window.React;
-let ReactDOM = window.ReactDOM;
+let React = self.React;
+let ReactDOM = self.ReactDOM;
 
 /**
  * エラーメッセージを表示します

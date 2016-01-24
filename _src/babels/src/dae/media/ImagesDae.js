@@ -41,7 +41,7 @@ export class ImagesDae {
    * @return {string} article.media.images.large
    */
   get large():string {
-    return this.images.string;
+    return this.images.large;
   }
   /**
    *

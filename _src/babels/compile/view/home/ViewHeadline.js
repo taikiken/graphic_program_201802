@@ -12,6 +12,7 @@
 'use strict';
 
 // app
+// import {App} from '../../app/App';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -38,8 +39,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _App = require('../../app/App');
-
 var _Empty = require('../../app/Empty');
 
 var _View2 = require('../View');
@@ -48,21 +47,20 @@ var _ViewError = require('../error/ViewError');
 
 var _Headline = require('../../action/home/Headline');
 
-var _Result = require('../../data/Result');
-
 var _ArticleDae = require('../../dae/ArticleDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
-var React = window.React;
-// dae
 
 // action
 
 // view
+var React = self.React;
+// import {Result} from '../../data/Result';
+// dae
 
-var ReactDOM = window.ReactDOM;
+var ReactDOM = self.ReactDOM;
 
 /**
  * home > headline（注目ニュース）を表示します。
@@ -77,6 +75,38 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
 
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
+   *
+   * @example
+   * let headline;
+   *
+   * function didMount() {
+   *    console.log( 'dom mount' );
+   *  }
+   * function errorMount( error ) {
+   *    console.log( 'dom errorMount', error );
+   *  }
+   * function undefinedError( error ) {
+   *    console.log( 'undefinedError', error );
+   *  }
+   * function emptyError( error ) {
+   *    console.log( 'emptyError', error );
+   *  }
+   * function responseError( error ) {
+   *    console.log( 'responseError', error );
+   *
+   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
+   * }
+   * let option = {
+   *    didMount: didMount,
+   *    errorMount: errorMount,
+   *    undefinedError: undefinedError,
+   *    emptyError: emptyError,
+   *    responseError: responseError
+   *  };
+   *
+   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), option );
+   * headline.start();
+   *
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
@@ -84,9 +114,13 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
   function ViewHeadline(element) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     (0, _classCallCheck3.default)(this, ViewHeadline);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
-  }
 
+    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
+
+    _this2._action = new _Headline.Headline(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+
+    return _this2;
+  }
   /**
    * Ajax request を開始します
    */
@@ -95,12 +129,11 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
     key: 'start',
     value: function start() {
 
-      var action = new _Headline.Headline(this.done.bind(this), this.fail.bind(this));
-      action.start();
+      this.action.start();
     }
     /**
      * Ajax response success
-     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+     * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
      */
 
   }, {
@@ -152,7 +185,6 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
       var error = new _ViewError.ViewError(this.element, this.option, message);
       error.render();
     }
-
     /**
      * dom を render します
      * @param {Array} articles JSON responce.articles
@@ -164,7 +196,46 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
 
       var element = this.element;
       var _this = this;
-      var dummy = _Empty.Empty.IMG_SMALL;
+
+      // tag block
+      var HeadlineDom = React.createClass({
+        displayName: 'HeadlineDom',
+
+        propTypes: {
+          index: React.PropTypes.number.isRequired,
+          id: React.PropTypes.string.isRequired,
+          slug: React.PropTypes.string.isRequired,
+          category: React.PropTypes.string.isRequired,
+          url: React.PropTypes.string.isRequired,
+          date: React.PropTypes.string.isRequired,
+          title: React.PropTypes.string.isRequired,
+          thumbnail: React.PropTypes.string.isRequired
+        },
+        render: function render() {
+          var p = this.props;
+
+          return React.createElement(
+            'a',
+            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
+            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+            React.createElement(
+              'p',
+              { className: 'cat cat-' + p.slug },
+              p.category
+            ),
+            React.createElement(
+              'h3',
+              { className: 'headline-title' },
+              p.title
+            ),
+            React.createElement(
+              'p',
+              { className: 'date' },
+              p.date
+            )
+          );
+        }
+      });
 
       // React Class
       var ArticleDom = React.createClass({
@@ -173,11 +244,12 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
         propTypes: {
           list: React.PropTypes.array.isRequired
         },
-        getDefaultProps: function getDefaultProps() {
-          return {
-            list: []
-          };
-        },
+        // isRequired なので getDefaultProps がいらない
+        // getDefaultProps: function() {
+        //  return {
+        //    list: []
+        //  };
+        // },
         render: function render() {
 
           var list = this.props.list;
@@ -188,46 +260,21 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
             list.map(function (article, i) {
 
               var dae = new _ArticleDae.ArticleDae(article);
-              var divClass = 'headline headline-' + i;
-              var catClass = 'category category-' + dae.category.slug;
-              var titleClass = 'headline-title headline-title-' + i;
-              var dateClass = 'date date-' + i;
-              // thumbnail が 空のことがある様子
               var thumbnail = dae.media.images.thumbnail;
+              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
 
-              return React.createElement(
-                'div',
-                { key: i, className: divClass },
-                React.createElement(
-                  'figure',
-                  null,
-                  React.createElement('img', { src: thumbnail !== '' ? thumbnail : dummy, alt: dae.title })
-                ),
-                React.createElement(
-                  'div',
-                  { className: 'content' },
-                  React.createElement(
-                    'span',
-                    { className: catClass },
-                    dae.category.label
-                  ),
-                  React.createElement(
-                    'h3',
-                    { className: titleClass },
-                    dae.title
-                  ),
-                  React.createElement(
-                    'p',
-                    { className: dateClass },
-                    dae.formatDate
-                  ),
-                  React.createElement(
-                    'p',
-                    { className: dateClass },
-                    dae.displayDate
-                  )
-                )
-              );
+              // HeadlineDom instance を使い render
+              return React.createElement(HeadlineDom, {
+                key: 'headline-' + dae.id,
+                index: i,
+                id: String(dae.id),
+                slug: dae.category.slug,
+                category: dae.category.label,
+                url: dae.url,
+                date: dae.formatDate,
+                title: dae.title,
+                thumbnail: thumbnail
+              });
             })
           );
         },

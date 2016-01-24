@@ -86,12 +86,12 @@ let buildPath = () => {
       new Permalink( [ '*' ], true ),
       new Queries()
     ),
-    //'bookmark': new Types(
+    // 'bookmark': new Types(
     //  new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
     //  new Permalink( [ '*' ], true ),
     //  new Queries(),
     //  true
-    //),
+    // ),
     // ブックマーク 登録
     'bookmark:add': new Types(
       new Type( `${API_PATH}/articles/bookmark`, 'POST' ),

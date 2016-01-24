@@ -106,6 +106,15 @@
 
 	var _ViewHeadline = __webpack_require__(100);
 
+	var _ViewPickup = __webpack_require__(113);
+
+	/**
+	 * ToDo: 確認事項
+	 * ToDo: 対象外OS alert
+	 * ToDo: index ニュース一覧 画像なしの代替画像
+	 * ToDo: title, meta, ogp
+	 */
+
 	/**
 	 * global object
 	 * こんな感じで使えます
@@ -113,40 +122,22 @@
 	 *    var ut = self.UT
 	 */
 
-	// action/single
-
-	// action/bookmark
-
-	// action/archive
-
 	// -------------------------------------
-	// app/App
+	// view
 
-	// -------------------------------------
-	// data
+	// action/search
+
+	// action/sidebar
+
+	// action/home
 
 	// -------------------------------------
-	// app
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-23 16:32:16
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// util
+	// net
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -204,27 +195,46 @@
 	  },
 	  view: {
 	    home: {
-	      ViewHeadline: _ViewHeadline.ViewHeadline
+	      ViewHeadline: _ViewHeadline.ViewHeadline,
+	      ViewPickup: _ViewPickup.ViewPickup
 	    }
 	  }
 	};
 
-	// -------------------------------------
-	// view
+	// action/single
 
-	// action/search
+	// action/bookmark
 
-	// action/sidebar
-
-	// action/home
+	// action/archive
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// app/App
 
 	// -------------------------------------
-	// net
+	// data
+
+	// -------------------------------------
+	// app
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-01-25 00:06:50
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// -------------------------------------
+	// util
 
 	self.UT = UT;
 
@@ -3419,12 +3429,12 @@
 	    'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
 	    // 詳細
 	    'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
-	    //'bookmark': new Types(
+	    // 'bookmark': new Types(
 	    //  new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
 	    //  new Permalink( [ '*' ], true ),
 	    //  new Queries(),
 	    //  true
-	    //),
+	    // ),
 	    // ブックマーク 登録
 	    'bookmark:add': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	    // ブックマーク 削除
@@ -5531,6 +5541,7 @@
 	'use strict';
 
 	// app
+	// import {App} from '../../app/App';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -5557,8 +5568,6 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _App = __webpack_require__(83);
-
 	var _Empty = __webpack_require__(101);
 
 	var _View2 = __webpack_require__(102);
@@ -5567,21 +5576,20 @@
 
 	var _Headline = __webpack_require__(91);
 
-	var _Result = __webpack_require__(57);
-
 	var _ArticleDae = __webpack_require__(104);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// React
-	var React = window.React;
-	// dae
 
 	// action
 
 	// view
+	var React = self.React;
+	// import {Result} from '../../data/Result';
+	// dae
 
-	var ReactDOM = window.ReactDOM;
+	var ReactDOM = self.ReactDOM;
 
 	/**
 	 * home > headline（注目ニュース）を表示します。
@@ -5596,6 +5604,38 @@
 
 	  /**
 	   * action/Headline を使い Ajax request 後 element へ dom を作成します
+	   *
+	   * @example
+	   * let headline;
+	   *
+	   * function didMount() {
+	   *    console.log( 'dom mount' );
+	   *  }
+	   * function errorMount( error ) {
+	   *    console.log( 'dom errorMount', error );
+	   *  }
+	   * function undefinedError( error ) {
+	   *    console.log( 'undefinedError', error );
+	   *  }
+	   * function emptyError( error ) {
+	   *    console.log( 'emptyError', error );
+	   *  }
+	   * function responseError( error ) {
+	   *    console.log( 'responseError', error );
+	   *
+	   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
+	   * }
+	   * let option = {
+	   *    didMount: didMount,
+	   *    errorMount: errorMount,
+	   *    undefinedError: undefinedError,
+	   *    emptyError: emptyError,
+	   *    responseError: responseError
+	   *  };
+	   *
+	   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), option );
+	   * headline.start();
+	   *
 	   * @param {Element} element root element
 	   * @param {Object} [option={}] optional event handler
 	   */
@@ -5603,9 +5643,13 @@
 	  function ViewHeadline(element) {
 	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	    (0, _classCallCheck3.default)(this, ViewHeadline);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
-	  }
 
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
+
+	    _this2._action = new _Headline.Headline(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+
+	    return _this2;
+	  }
 	  /**
 	   * Ajax request を開始します
 	   */
@@ -5614,12 +5658,11 @@
 	    key: 'start',
 	    value: function start() {
 
-	      var action = new _Headline.Headline(this.done.bind(this), this.fail.bind(this));
-	      action.start();
+	      this.action.start();
 	    }
 	    /**
 	     * Ajax response success
-	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
 	     */
 
 	  }, {
@@ -5671,7 +5714,6 @@
 	      var error = new _ViewError.ViewError(this.element, this.option, message);
 	      error.render();
 	    }
-
 	    /**
 	     * dom を render します
 	     * @param {Array} articles JSON responce.articles
@@ -5683,7 +5725,46 @@
 
 	      var element = this.element;
 	      var _this = this;
-	      var dummy = _Empty.Empty.IMG_SMALL;
+
+	      // tag block
+	      var HeadlineDom = React.createClass({
+	        displayName: 'HeadlineDom',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired,
+	          category: React.PropTypes.string.isRequired,
+	          url: React.PropTypes.string.isRequired,
+	          date: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired,
+	          thumbnail: React.PropTypes.string.isRequired
+	        },
+	        render: function render() {
+	          var p = this.props;
+
+	          return React.createElement(
+	            'a',
+	            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
+	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            React.createElement(
+	              'p',
+	              { className: 'cat cat-' + p.slug },
+	              p.category
+	            ),
+	            React.createElement(
+	              'h3',
+	              { className: 'headline-title' },
+	              p.title
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'date' },
+	              p.date
+	            )
+	          );
+	        }
+	      });
 
 	      // React Class
 	      var ArticleDom = React.createClass({
@@ -5692,11 +5773,12 @@
 	        propTypes: {
 	          list: React.PropTypes.array.isRequired
 	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            list: []
-	          };
-	        },
+	        // isRequired なので getDefaultProps がいらない
+	        // getDefaultProps: function() {
+	        //  return {
+	        //    list: []
+	        //  };
+	        // },
 	        render: function render() {
 
 	          var list = this.props.list;
@@ -5707,46 +5789,21 @@
 	            list.map(function (article, i) {
 
 	              var dae = new _ArticleDae.ArticleDae(article);
-	              var divClass = 'headline headline-' + i;
-	              var catClass = 'category category-' + dae.category.slug;
-	              var titleClass = 'headline-title headline-title-' + i;
-	              var dateClass = 'date date-' + i;
-	              // thumbnail が 空のことがある様子
 	              var thumbnail = dae.media.images.thumbnail;
+	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
 
-	              return React.createElement(
-	                'div',
-	                { key: i, className: divClass },
-	                React.createElement(
-	                  'figure',
-	                  null,
-	                  React.createElement('img', { src: thumbnail !== '' ? thumbnail : dummy, alt: dae.title })
-	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'content' },
-	                  React.createElement(
-	                    'span',
-	                    { className: catClass },
-	                    dae.category.label
-	                  ),
-	                  React.createElement(
-	                    'h3',
-	                    { className: titleClass },
-	                    dae.title
-	                  ),
-	                  React.createElement(
-	                    'p',
-	                    { className: dateClass },
-	                    dae.formatDate
-	                  ),
-	                  React.createElement(
-	                    'p',
-	                    { className: dateClass },
-	                    dae.displayDate
-	                  )
-	                )
-	              );
+	              // HeadlineDom instance を使い render
+	              return React.createElement(HeadlineDom, {
+	                key: 'headline-' + dae.id,
+	                index: i,
+	                id: String(dae.id),
+	                slug: dae.category.slug,
+	                category: dae.category.label,
+	                url: dae.url,
+	                date: dae.formatDate,
+	                title: dae.title,
+	                thumbnail: thumbnail
+	              });
 	            })
 	          );
 	        },
@@ -5902,6 +5959,9 @@
 	 *
 	 */
 
+	// import {Action} from '../action/Action';
+	// import {ViewError} from './error/ViewError';
+
 	/**
 	 * 表示を行います
 	 */
@@ -5919,6 +5979,7 @@
 
 	    this._element = element;
 	    this._option = option;
+	    this._action = null;
 	  }
 	  // ---------------------------------------------------
 	  //  GETTER / SETTER
@@ -5956,7 +6017,6 @@
 	    get: function get() {
 	      return this._element;
 	    }
-
 	    /**
 	     *
 	     * @return {Object|*} callback handler がセットされたObjectを返します
@@ -5966,6 +6026,16 @@
 	    key: 'option',
 	    get: function get() {
 	      return this._option;
+	    }
+	    /**
+	     *
+	     * @return {*} Action instance を返します
+	     */
+
+	  }, {
+	    key: 'action',
+	    get: function get() {
+	      return this._action;
 	    }
 	  }]);
 	  return View;
@@ -6017,8 +6087,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var React = window.React;
-	var ReactDOM = window.ReactDOM;
+	var React = self.React;
+	var ReactDOM = self.ReactDOM;
 
 	/**
 	 * エラーメッセージを表示します
@@ -6685,7 +6755,7 @@
 	  }, {
 	    key: 'large',
 	    get: function get() {
-	      return this.images.string;
+	      return this.images.large;
 	    }
 	    /**
 	     *
@@ -7074,6 +7144,505 @@
 	  }]);
 	  return CommentsPopularDae;
 	}();
+
+/***/ },
+/* 113 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/24 - 18:05
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// app
+	// import {App} from '../../app/App';
+	// import {Empty} from '../../app/Empty';
+
+	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewPickup = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(102);
+
+	var _ViewError = __webpack_require__(103);
+
+	var _Pickup = __webpack_require__(90);
+
+	var _ArticleDae = __webpack_require__(104);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// global object
+	// React
+
+	// action
+	var React = self.React;
+	// dae
+
+	var ReactDOM = self.ReactDOM;
+
+	// Gasane
+	var Polling = self.Gasane.Polling;
+
+	/**
+	 * home > pickup（スライダー）を表示します。
+	 * <ol>
+	 *   <li>JSON取得(Ajax)</li>
+	 *   <li>Dom作成 by React</li>
+	 * </ol>
+	 */
+
+	var ViewPickup = exports.ViewPickup = function (_View) {
+	  (0, _inherits3.default)(ViewPickup, _View);
+
+	  /**
+	   * action/Pickup を使い Ajax request 後 element へ dom を作成します
+	   * @see ViewHeadline
+	   * @param {Element} element root element
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ViewPickup(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    (0, _classCallCheck3.default)(this, ViewPickup);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewPickup).call(this, element, option));
+
+	    _this2._action = new _Pickup.Pickup(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    _this2._index = 0;
+	    _this2._last = 0;
+	    _this2._waiting = 1000 * 5;
+
+	    return _this2;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {number|*|Number} slideshow interval milliseconds を返します
+	   */
+
+	  (0, _createClass3.default)(ViewPickup, [{
+	    key: 'start',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * Ajax request を開始します
+	     */
+	    value: function start() {
+
+	      this.action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var articles = result.articles;
+
+	      if (typeof articles === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        this.executeSafely('undefinedError');
+	        this.showError('[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	      } else if (articles.length === 0) {
+
+	        // articles empty
+	        // request, JSON 取得に問題は無かったが data が取得できなかった
+	        this.executeSafely('emptyError');
+	        this.showError('[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。');
+	      } else {
+
+	        this._last = articles.length - 1;
+	        this.render(articles);
+	      }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely('responseError', error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+	    /**
+	     * ViewError でエラーコンテナを作成します
+	     * @param {string} message エラーメッセージ
+	     */
+
+	  }, {
+	    key: 'showError',
+	    value: function showError() {
+	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      var error = new _ViewError.ViewError(this.element, this.option, message);
+	      error.render();
+	    }
+	    /**
+	     * dom を render します
+	     * @param {Array} articles JSON responce.articles
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(articles) {
+
+	      var element = this.element;
+	      var last = articles.length - 1;
+	      var position = 0;
+	      var polling = new Polling(this.waiting);
+	      var _this = this;
+
+	      // --------------------------------------------
+	      // pager
+	      // --------------------------------------------
+	      var PickupPager = React.createClass({
+	        displayName: 'PickupPager',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          length: React.PropTypes.number.isRequired,
+	          onPager: React.PropTypes.func.isRequired
+	        },
+	        handleClick: function handleClick(event) {
+	          event.preventDefault();
+	          console.log('click ' + event.target.innerHTML);
+	          this.props.onPager(event.target.innerHTML);
+	        },
+	        render: function render() {
+	          var p = this.props;
+
+	          return React.createElement(
+	            'li',
+	            { id: 'pager-' + p.index },
+	            React.createElement(
+	              'a',
+	              { href: '#pickup-' + p.index,
+	                onClick: this.handleClick
+	              },
+	              React.createElement(
+	                'span',
+	                null,
+	                p.index - p.length
+	              )
+	            )
+	          );
+	        }
+	      });
+
+	      var Pagers = React.createClass({
+	        displayName: 'Pagers',
+
+	        propTypes: {
+	          offset: React.PropTypes.number.isRequired,
+	          list: React.PropTypes.array.isRequired,
+	          onPager: React.PropTypes.func.isRequired
+	        },
+	        render: function render() {
+	          var list = this.props.list;
+	          var length = list.length;
+	          var offset = this.props.offset;
+	          var onPager = this.props.onPager;
+
+	          return React.createElement(
+	            'ul',
+	            { className: 'pager-list' },
+	            list.map(function (article) {
+
+	              var dae = new _ArticleDae.ArticleDae(article);
+
+	              return React.createElement(PickupPager, {
+	                key: 'pager-' + dae.id,
+	                id: String(dae.id),
+	                index: offset++,
+	                length: length,
+	                onPager: onPager
+	              });
+	            })
+	          );
+	        }
+	      });
+
+	      // --------------------------------------------
+	      // Main Dom
+	      // --------------------------------------------
+
+	      // pickup slider images
+	      var PickupDom = React.createClass({
+	        displayName: 'PickupDom',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired,
+	          category: React.PropTypes.string.isRequired,
+	          url: React.PropTypes.string.isRequired,
+	          date: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired,
+	          large: React.PropTypes.string.isRequired
+	        },
+	        render: function render() {
+	          var p = this.props;
+
+	          return React.createElement(
+	            'li',
+	            { id: 'pickup-' + p.index, className: 'pickup pickup-' + p.index },
+	            React.createElement(
+	              'a',
+	              { href: p.url },
+	              React.createElement('img', { src: p.large, alt: p.title }),
+	              React.createElement(
+	                'p',
+	                { className: 'cat cat-' + p.slug },
+	                p.category
+	              ),
+	              React.createElement(
+	                'h3',
+	                { className: 'pickup-title' },
+	                p.title
+	              ),
+	              React.createElement(
+	                'p',
+	                { className: 'date' },
+	                p.date
+	              )
+	            )
+	          );
+	        }
+	      });
+
+	      // React Class, pickup dom container
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        // articles 配列を元にDomを作成する
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        // initial state を設定します
+	        getInitialState: function getInitialState() {
+	          return {
+	            // default 0
+	            index: position
+	          };
+	        },
+	        // next slide
+	        updateNext: function updateNext() {
+	          // last を超えたら 0 に戻す
+	          var n = position + 1;
+	          if (n > last) {
+	            n = 0;
+	          }
+	          // change slide
+	          this.onJump(n);
+	        },
+	        // next button click
+	        onNext: function onNext(event) {
+	          event.preventDefault();
+	          console.log('next click');
+	          // next action は polling からも使うので関数化し共通化する
+	          this.updateNext();
+	        },
+	        // prev button click
+	        onPrev: function onPrev(event) {
+	          event.preventDefault();
+	          console.log('prev click');
+	          // 0 未満になったら last へ戻す
+	          var n = position - 1;
+	          if (n < 0) {
+	            n = last;
+	          }
+	          // change slide
+	          this.onJump(n);
+	        },
+	        // slide を変更
+	        onJump: function onJump(index) {
+	          console.log('onJump ', index);
+	          // polling reset
+	          polling.stop().start();
+	          // state update
+	          position = index;
+	          this.setState({ index: index });
+	        },
+	        // pager click から呼び出されます
+	        onPagerClick: function onPagerClick(index) {
+	          console.log('onPagerClick ', index);
+	          // 子コンポーネント Pagers -> PickupPager から呼び出される
+	          // innerHTML 数値を使うので
+	          // Number 型へ変換する
+	          this.onJump(index * 1);
+	        },
+
+	        // --------------------------------------------
+	        // RENDER
+	        // --------------------------------------------
+	        render: function render() {
+
+	          var list = this.props.list;
+	          var count = 0;
+
+	          // slide一つのコンテナ
+	          var make = function make(article, i) {
+
+	            var dae = new _ArticleDae.ArticleDae(article);
+
+	            // HeadlineDom instance を使い render
+	            // iteration key は index を使う
+	            // コンテナを 前後に clone するため article.id が使えない
+	            return React.createElement(PickupDom, {
+	              key: 'pickup-' + i,
+	              index: i,
+	              id: String(dae.id),
+	              slug: dae.category.slug,
+	              category: dae.category.label,
+	              url: dae.url,
+	              date: dae.formatDate,
+	              title: dae.title,
+	              large: dae.media.images.large
+	            });
+	          };
+
+	          // JSX
+	          return React.createElement(
+	            'div',
+	            { className: 'pickup-container slide-' + this.state.index },
+	            React.createElement(
+	              'div',
+	              { className: 'slider-wrapper' },
+	              React.createElement(
+	                'ul',
+	                { className: 'pickup-slider' },
+
+	                // 1.first
+	                list.map(function (article) {
+
+	                  return make(article, count++);
+	                }),
+
+	                // 2.second
+	                list.map(function (article) {
+
+	                  return make(article, count++);
+	                }),
+
+	                // 3.third
+	                list.map(function (article) {
+
+	                  return make(article, count++);
+	                })
+	              )
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'pagers-container' },
+	              React.createElement(Pagers, {
+	                list: articles,
+	                offset: articles.length,
+	                onPager: this.onPagerClick
+	              })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'slider-nav-container' },
+	              React.createElement(
+	                'div',
+	                { id: 'prev' },
+	                React.createElement(
+	                  'a',
+	                  { href: '#prev', onClick: this.onPrev },
+	                  'Prev'
+	                )
+	              ),
+	              React.createElement(
+	                'div',
+	                { id: 'next' },
+	                React.createElement(
+	                  'a',
+	                  { href: '#next', onClick: this.onNext },
+	                  'Next'
+	                )
+	              )
+	            )
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          // callback
+	          _this.executeSafely('didMount');
+	          // interval animation
+	          // mount 後 animation を開始します
+	          // bind はreactが内部的にする（様子） `this.updateNext.bind(this)` は不要
+	          polling.on(Polling.PAST, this.updateNext);
+	          polling.start();
+	        }
+	      });
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+	    } // render
+
+	  }, {
+	    key: 'waiting',
+	    get: function get() {
+	      return this._waiting;
+	    }
+	    /**
+	     * slideshow interval milliseconds を設定します
+	     * @param {Number} milliseconds slideshow interval milliseconds
+	     */
+	    ,
+	    set: function set(milliseconds) {
+	      this._waiting = milliseconds;
+	    }
+	  }]);
+	  return ViewPickup;
+	}(_View2.View); // class
 
 /***/ }
 /******/ ]);

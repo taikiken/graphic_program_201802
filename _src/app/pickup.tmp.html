@@ -40,19 +40,6 @@
     UT.app.App.develop();
 //    UT.app.App.test();
 
-    function done( result ) {
-      console.log( 'success response ', result.response );
-      console.log( 'success status ', result.status );
-      console.log( 'success request', result.request );
-    }
-
-    function fail( error ) {
-      console.log( 'error', error );
-    }
-
-    headline = new UT.action.home.Headline( done, fail );
-    headline.start();
-
     // -------------------------------------------------
     var headline2;
 
@@ -98,7 +85,7 @@
       responseError: responseError
     };
 
-    headline2 = new UT.view.home.ViewHeadline ( document.getElementById('f1'), option );
+    headline2 = new UT.view.home.ViewPickup( document.getElementById('f1'), option );
     headline2.start();
 
   }( window ) );
