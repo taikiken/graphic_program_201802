@@ -47,6 +47,7 @@ export class ViewArchive extends View {
     super( element, option );
     this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     this._moreElement = moreElement;
+    this._articles = [];
 
   }
   // ---------------------------------------------------
@@ -90,6 +91,8 @@ export class ViewArchive extends View {
 
     } else {
 
+      console.log( 'result.total ', result.total );
+      this.action.total = parseInt( result.total, 10 );
       this.render( articles );
 
     }
@@ -123,11 +126,120 @@ export class ViewArchive extends View {
    */
   render( articles:Array ):void {
 
+    // ToDo: Optimize rendering, Dom rendering の効率化
+
+    let concatArticles = this._articles.concat( articles );
     let element = this.element;
     let moreElement = this.moreElement;
+    let action = this.action;
     let _this = this;
+    console.log( '********* concatArticles ', concatArticles.length );
+    // --------------------------------------------
+    // More button
+    // --------------------------------------------
+    let MoreView = React.createClass( {
+      propTypes: {
+        show: React.PropTypes.bool
+      },
+      getDefaultProps: function() {
+        return {
+          show: false
+        };
+      },
+      getInitialState: function() {
+        return {
+          disable: false
+        };
+      },
+      handleClick: function( event ) {
+        event.preventDefault();
+        // disable
+        this.setState( { disable: true } );
+        action.next();
+      },
+      render: function() {
 
-    // React Class
+        return (
+          <div>
+            {
+              this.props.show ? <div className={this.state.disable ? 'disable' : ''}>
+                <a href={'#more'} onClick={this.handleClick} >More View</a>
+              </div> : ''
+            }
+          </div>
+        );
+
+      }
+    } );
+
+    let moreButton = ( show ) => {
+
+      ReactDOM.render(
+        React.createElement( MoreView, { show: show } ),
+        moreElement
+      );
+
+    };
+
+    // --------------------------------------------
+    // Main Dom
+    // --------------------------------------------
+    // 個別の Dom
+    // ToDo: comment など追加
+    let ArchiveDom = React.createClass( {
+      propTypes: {
+        index: React.PropTypes.number.isRequired,
+        id: React.PropTypes.string.isRequired,
+        slug: React.PropTypes.string.isRequired,
+        category: React.PropTypes.string.isRequired,
+        url: React.PropTypes.string.isRequired,
+        date: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired,
+        description: React.PropTypes.string.isRequired,
+        thumbnail: React.PropTypes.string.isRequired,
+        mediaType: React.PropTypes.string.isRequired
+      },
+      render: function() {
+        let p = this.props;
+        // console.log( 'ArchiveDom ', p );
+        return (
+          <div>
+            <a href={p.url} id={'archive-' + p.id} className={'archive archive-' + p.index}>
+              <img src={p.thumbnail} alt={p.title}/>
+              <p className={'cat cat-' + p.slug}>{p.category}</p>
+              <h3 className='archive-title'>{p.title}</h3>
+              <p className="date">{p.date}</p>
+              <p>{p.mediaType}</p>
+              <p>{p.description}</p>
+            </a>
+          </div>
+        );
+      }
+    } );
+
+    // ArchiveDom 呼び出し用関数
+    // list.forEach での ReactDOM.render 実行記述を簡略化するため
+    let makeDom = ( dae ) => {
+
+      let thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
+      thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
+
+      return <ArchiveDom
+        key={'archive-' + dae.id}
+        index={dae.index}
+        id={String( dae.id )}
+        slug={dae.category.slug}
+        category={dae.category.label}
+        url={dae.url}
+        date={dae.formatDate}
+        title={dae.title}
+        thumbnail={thumbnail}
+        mediaType={dae.mediaType}
+        description={dae.description}
+      />;
+
+    };
+    // React Class, Archive Dom
     let ArticleDom = React.createClass( {
       propTypes: {
         list: React.PropTypes.array.isRequired
@@ -138,59 +250,8 @@ export class ViewArchive extends View {
         let even = [];
         let odd = [];
 
-        let ArchiveDom = React.createClass( {
-          propTypes: {
-            index: React.PropTypes.number.isRequired,
-            id: React.PropTypes.string.isRequired,
-            slug: React.PropTypes.string.isRequired,
-            category: React.PropTypes.string.isRequired,
-            url: React.PropTypes.string.isRequired,
-            date: React.PropTypes.string.isRequired,
-            title: React.PropTypes.string.isRequired,
-            description: React.PropTypes.string.isRequired,
-            thumbnail: React.PropTypes.string.isRequired,
-            mediaType: React.PropTypes.string.isRequired
-          },
-          render: function() {
-            let p = this.props;
-            console.log( 'ArchiveDom ', p );
-            return (
-              <div>
-                <a href={p.url} id={'archive-' + p.id} className={'archive archive-' + p.index}>
-                  <img src={p.thumbnail} alt={p.title}/>
-                  <p className={'cat cat-' + p.slug}>{p.category}</p>
-                  <h3 className='archive-title'>{p.title}</h3>
-                  <p className="date">{p.date}</p>
-                  <p>{p.mediaType}</p>
-                  <p>{p.description}</p>
-                </a>
-              </div>
-            );
-          }
-        } );
-
-        let makeDom = ( dae ) => {
-
-          let thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
-          thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
-
-          return <ArchiveDom
-            key={'archive-' + dae.id}
-            index={dae.index}
-            id={String( dae.id )}
-            slug={dae.category.slug}
-            category={dae.category.label}
-            url={dae.url}
-            date={dae.formatDate}
-            title={dae.title}
-            thumbnail={thumbnail}
-            mediaType={dae.mediaType}
-            description={dae.description}
-          />;
-
-        };
-
         // even / odd setup
+        // even(left) / odd(right) へ振り分けるための配列作成
         list.forEach( function( article, i ) {
 
           let dae = new ArticleDae( article );
@@ -228,18 +289,32 @@ export class ViewArchive extends View {
 
       },
       componentDidMount: function() {
-
         // after mount
         _this.executeSafely( 'didMount' );
+        // hasNext を元に More View button の表示非表示を決める
+        moreButton( action.hasNext() );
+      }
+      /*
+      componentDidUpdate: function() {
+
+        // after update
+        _this.executeSafely( 'didUpdate' );
+        // hasNext を元に More View button の表示非表示を決める
+        console.log( 'componentDidUpdate ', action.hasNext() );
+        moreButton( action.hasNext() );
 
       }
+      */
     } );
 
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: articles } ),
+      React.createElement( ArticleDom, { list: concatArticles } ),
       element
     );
 
-  }// render
+    // save
+    this._articles = concatArticles.splice( 0 );
+
+  }
 }// class

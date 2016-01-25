@@ -90,6 +90,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
 
     _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
     _this2._moreElement = moreElement;
+    _this2._articles = [];
 
     return _this2;
   }
@@ -135,6 +136,8 @@ var ViewArchive = exports.ViewArchive = function (_View) {
         this.showError('[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。');
       } else {
 
+        console.log('result.total ', result.total);
+        this.action.total = parseInt(result.total, 10);
         this.render(articles);
       }
     }
@@ -174,11 +177,144 @@ var ViewArchive = exports.ViewArchive = function (_View) {
     key: 'render',
     value: function render(articles) {
 
+      // ToDo: Optimize rendering, Dom rendering の効率化
+
+      var concatArticles = this._articles.concat(articles);
       var element = this.element;
       var moreElement = this.moreElement;
+      var action = this.action;
       var _this = this;
+      console.log('********* concatArticles ', concatArticles.length);
+      // --------------------------------------------
+      // More button
+      // --------------------------------------------
+      var MoreView = React.createClass({
+        displayName: 'MoreView',
 
-      // React Class
+        propTypes: {
+          show: React.PropTypes.bool
+        },
+        getDefaultProps: function getDefaultProps() {
+          return {
+            show: false
+          };
+        },
+        getInitialState: function getInitialState() {
+          return {
+            disable: false
+          };
+        },
+        handleClick: function handleClick(event) {
+          event.preventDefault();
+          // disable
+          this.setState({ disable: true });
+          action.next();
+        },
+        render: function render() {
+
+          return React.createElement(
+            'div',
+            null,
+            this.props.show ? React.createElement(
+              'div',
+              { className: this.state.disable ? 'disable' : '' },
+              React.createElement(
+                'a',
+                { href: '#more', onClick: this.handleClick },
+                'More View'
+              )
+            ) : ''
+          );
+        }
+      });
+
+      var moreButton = function moreButton(show) {
+
+        ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+      };
+
+      // --------------------------------------------
+      // Main Dom
+      // --------------------------------------------
+      // 個別の Dom
+      // ToDo: comment など追加
+      var ArchiveDom = React.createClass({
+        displayName: 'ArchiveDom',
+
+        propTypes: {
+          index: React.PropTypes.number.isRequired,
+          id: React.PropTypes.string.isRequired,
+          slug: React.PropTypes.string.isRequired,
+          category: React.PropTypes.string.isRequired,
+          url: React.PropTypes.string.isRequired,
+          date: React.PropTypes.string.isRequired,
+          title: React.PropTypes.string.isRequired,
+          description: React.PropTypes.string.isRequired,
+          thumbnail: React.PropTypes.string.isRequired,
+          mediaType: React.PropTypes.string.isRequired
+        },
+        render: function render() {
+          var p = this.props;
+          // console.log( 'ArchiveDom ', p );
+          return React.createElement(
+            'div',
+            null,
+            React.createElement(
+              'a',
+              { href: p.url, id: 'archive-' + p.id, className: 'archive archive-' + p.index },
+              React.createElement('img', { src: p.thumbnail, alt: p.title }),
+              React.createElement(
+                'p',
+                { className: 'cat cat-' + p.slug },
+                p.category
+              ),
+              React.createElement(
+                'h3',
+                { className: 'archive-title' },
+                p.title
+              ),
+              React.createElement(
+                'p',
+                { className: 'date' },
+                p.date
+              ),
+              React.createElement(
+                'p',
+                null,
+                p.mediaType
+              ),
+              React.createElement(
+                'p',
+                null,
+                p.description
+              )
+            )
+          );
+        }
+      });
+
+      // ArchiveDom 呼び出し用関数
+      // list.forEach での ReactDOM.render 実行記述を簡略化するため
+      var makeDom = function makeDom(dae) {
+
+        var thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
+        thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
+
+        return React.createElement(ArchiveDom, {
+          key: 'archive-' + dae.id,
+          index: dae.index,
+          id: String(dae.id),
+          slug: dae.category.slug,
+          category: dae.category.label,
+          url: dae.url,
+          date: dae.formatDate,
+          title: dae.title,
+          thumbnail: thumbnail,
+          mediaType: dae.mediaType,
+          description: dae.description
+        });
+      };
+      // React Class, Archive Dom
       var ArticleDom = React.createClass({
         displayName: 'ArticleDom',
 
@@ -191,82 +327,8 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           var even = [];
           var odd = [];
 
-          var ArchiveDom = React.createClass({
-            displayName: 'ArchiveDom',
-
-            propTypes: {
-              index: React.PropTypes.number.isRequired,
-              id: React.PropTypes.string.isRequired,
-              slug: React.PropTypes.string.isRequired,
-              category: React.PropTypes.string.isRequired,
-              url: React.PropTypes.string.isRequired,
-              date: React.PropTypes.string.isRequired,
-              title: React.PropTypes.string.isRequired,
-              description: React.PropTypes.string.isRequired,
-              thumbnail: React.PropTypes.string.isRequired,
-              mediaType: React.PropTypes.string.isRequired
-            },
-            render: function render() {
-              var p = this.props;
-              console.log('ArchiveDom ', p);
-              return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                  'a',
-                  { href: p.url, id: 'archive-' + p.id, className: 'archive archive-' + p.index },
-                  React.createElement('img', { src: p.thumbnail, alt: p.title }),
-                  React.createElement(
-                    'p',
-                    { className: 'cat cat-' + p.slug },
-                    p.category
-                  ),
-                  React.createElement(
-                    'h3',
-                    { className: 'archive-title' },
-                    p.title
-                  ),
-                  React.createElement(
-                    'p',
-                    { className: 'date' },
-                    p.date
-                  ),
-                  React.createElement(
-                    'p',
-                    null,
-                    p.mediaType
-                  ),
-                  React.createElement(
-                    'p',
-                    null,
-                    p.description
-                  )
-                )
-              );
-            }
-          });
-
-          var makeDom = function makeDom(dae) {
-
-            var thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
-            thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
-
-            return React.createElement(ArchiveDom, {
-              key: 'archive-' + dae.id,
-              index: dae.index,
-              id: String(dae.id),
-              slug: dae.category.slug,
-              category: dae.category.label,
-              url: dae.url,
-              date: dae.formatDate,
-              title: dae.title,
-              thumbnail: thumbnail,
-              mediaType: dae.mediaType,
-              description: dae.description
-            });
-          };
-
           // even / odd setup
+          // even(left) / odd(right) へ振り分けるための配列作成
           list.forEach(function (article, i) {
 
             var dae = new _ArticleDae.ArticleDae(article);
@@ -302,16 +364,28 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           );
         },
         componentDidMount: function componentDidMount() {
-
           // after mount
           _this.executeSafely('didMount');
+          // hasNext を元に More View button の表示非表示を決める
+          moreButton(action.hasNext());
         }
+        /*
+        componentDidUpdate: function() {
+           // after update
+          _this.executeSafely( 'didUpdate' );
+          // hasNext を元に More View button の表示非表示を決める
+          console.log( 'componentDidUpdate ', action.hasNext() );
+          moreButton( action.hasNext() );
+         }
+        */
       });
 
       // dom 生成
-      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
-    } // render
+      ReactDOM.render(React.createElement(ArticleDom, { list: concatArticles }), element);
 
+      // save
+      this._articles = concatArticles.splice(0);
+    }
   }, {
     key: 'moreElement',
     get: function get() {

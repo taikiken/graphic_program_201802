@@ -95,7 +95,7 @@ var _ViewPickup = require('./view/home/ViewPickup');
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-25 11:31:38
+ * @date 2016-01-25 21:25:56
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
