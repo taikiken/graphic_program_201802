@@ -47,18 +47,21 @@ var _ViewError = require('../error/ViewError');
 
 var _Headline = require('../../action/home/Headline');
 
+var _Result = require('../../data/Result');
+
 var _ArticleDae = require('../../dae/ArticleDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
 
+// data
+var React = self.React;
+// dae
+
 // action
 
 // view
-var React = self.React;
-// import {Result} from '../../data/Result';
-// dae
 
 var ReactDOM = self.ReactDOM;
 
@@ -133,7 +136,7 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
     }
     /**
      * Ajax response success
-     * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
      */
 
   }, {
@@ -182,6 +185,7 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
     value: function showError() {
       var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
+      // ToDo: Error 時の表示が決まったら変更する
       var error = new _ViewError.ViewError(this.element, this.option, message);
       error.render();
     }

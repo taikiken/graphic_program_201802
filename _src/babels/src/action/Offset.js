@@ -48,7 +48,6 @@ export class Offset extends Action {
   get total():Number {
     return this._total;
   }
-
   /**
    * total件数を設定します
    * @param {Number} total total件数
@@ -62,7 +61,6 @@ export class Offset extends Action {
   get length():Number {
     return this._length;
   }
-
   /**
    * length件数を設定します
    * @param {Number} length length 取得件数
@@ -76,7 +74,6 @@ export class Offset extends Action {
   get offset():Number {
     return this._offset;
   }
-
   /**
    * length件数を設定します
    * @param {Number} offset offset 取得開始位置
@@ -84,7 +81,6 @@ export class Offset extends Action {
   set offset( offset:Number ):void {
     this._offset = offset;
   }
-
   /**
    * url を作成します
    * @return {string} 作成した url を返します
@@ -115,7 +111,6 @@ export class Offset extends Action {
     this.offset += count;
 
   }
-
   /**
    * 次があるかを調べます
    * @return {boolean} 次があるかの真偽値を返します
@@ -127,7 +122,6 @@ export class Offset extends Action {
     return this._total < 0 ? true : this.offset < this.total;
 
   }
-
   /**
    * 次の読込を開始します<br>
    * start の代わりに使用します

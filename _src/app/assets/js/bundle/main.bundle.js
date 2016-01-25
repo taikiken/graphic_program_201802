@@ -104,9 +104,11 @@
 
 	var _Detail = __webpack_require__(99);
 
-	var _ViewHeadline = __webpack_require__(100);
+	var _ViewArchive = __webpack_require__(100);
 
-	var _ViewPickup = __webpack_require__(113);
+	var _ViewHeadline = __webpack_require__(113);
+
+	var _ViewPickup = __webpack_require__(114);
 
 	/**
 	 * ToDo: 確認事項
@@ -122,22 +124,40 @@
 	 *    var ut = self.UT
 	 */
 
-	// -------------------------------------
-	// view
+	// action/single
 
-	// action/search
+	// action/bookmark
 
-	// action/sidebar
-
-	// action/home
+	// action/archive
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// app/App
 
 	// -------------------------------------
-	// net
+	// data
+
+	// -------------------------------------
+	// app
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-01-25 11:31:38
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// -------------------------------------
+	// util
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -194,6 +214,7 @@
 	    }
 	  },
 	  view: {
+	    ViewArchive: _ViewArchive.ViewArchive,
 	    home: {
 	      ViewHeadline: _ViewHeadline.ViewHeadline,
 	      ViewPickup: _ViewPickup.ViewPickup
@@ -201,40 +222,22 @@
 	  }
 	};
 
-	// action/single
-
-	// action/bookmark
-
-	// action/archive
-
 	// -------------------------------------
-	// app/App
+	// view
 
-	// -------------------------------------
-	// data
+	// action/search
+
+	// action/sidebar
+
+	// action/home
 
 	// -------------------------------------
-	// app
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-25 00:06:50
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// util
+	// net
 
 	self.UT = UT;
 
@@ -4325,7 +4328,6 @@
 
 	      this.offset += count;
 	    }
-
 	    /**
 	     * 次があるかを調べます
 	     * @return {boolean} 次があるかの真偽値を返します
@@ -4339,7 +4341,6 @@
 	      // total が offset（次の読み込み開始位置）より小さい時に true
 	      return this._total < 0 ? true : this.offset < this.total;
 	    }
-
 	    /**
 	     * 次の読込を開始します<br>
 	     * start の代わりに使用します
@@ -4376,7 +4377,6 @@
 	    get: function get() {
 	      return this._total;
 	    }
-
 	    /**
 	     * total件数を設定します
 	     * @param {Number} total total件数
@@ -4394,7 +4394,6 @@
 	    get: function get() {
 	      return this._length;
 	    }
-
 	    /**
 	     * length件数を設定します
 	     * @param {Number} length length 取得件数
@@ -4412,7 +4411,6 @@
 	    get: function get() {
 	      return this._offset;
 	    }
-
 	    /**
 	     * length件数を設定します
 	     * @param {Number} offset offset 取得開始位置
@@ -4421,7 +4419,6 @@
 	    set: function set(offset) {
 	      this._offset = offset;
 	    }
-
 	    /**
 	     * url を作成します
 	     * @return {string} 作成した url を返します
@@ -5530,7 +5527,7 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/22 - 13:54
+	 * @date 2016/01/25 - 10:04
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -5539,14 +5536,17 @@
 	 *
 	 */
 	'use strict';
+	/*
+	View More がある Page
+	Home, Category, Search...
+	 */
 
 	// app
-	// import {App} from '../../app/App';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ViewHeadline = undefined;
+	exports.ViewArchive = undefined;
 
 	var _getPrototypeOf = __webpack_require__(69);
 
@@ -5576,93 +5576,69 @@
 
 	var _Headline = __webpack_require__(91);
 
+	var _Result = __webpack_require__(57);
+
 	var _ArticleDae = __webpack_require__(104);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// React
 
+	// data
+	var React = self.React;
+	// dae
+
 	// action
 
 	// view
-	var React = self.React;
-	// import {Result} from '../../data/Result';
-	// dae
 
 	var ReactDOM = self.ReactDOM;
-
 	/**
-	 * home > headline（注目ニュース）を表示します。
-	 * <ol>
-	 *   <li>JSON取得(Ajax)</li>
-	 *   <li>Dom作成 by React</li>
-	 * </ol>
+	 * <h2>View More がある 表示親クラス</h2>
 	 */
 
-	var ViewHeadline = exports.ViewHeadline = function (_View) {
-	  (0, _inherits3.default)(ViewHeadline, _View);
+	var ViewArchive = exports.ViewArchive = function (_View) {
+	  (0, _inherits3.default)(ViewArchive, _View);
 
 	  /**
-	   * action/Headline を使い Ajax request 後 element へ dom を作成します
 	   *
-	   * @example
-	   * let headline;
-	   *
-	   * function didMount() {
-	   *    console.log( 'dom mount' );
-	   *  }
-	   * function errorMount( error ) {
-	   *    console.log( 'dom errorMount', error );
-	   *  }
-	   * function undefinedError( error ) {
-	   *    console.log( 'undefinedError', error );
-	   *  }
-	   * function emptyError( error ) {
-	   *    console.log( 'emptyError', error );
-	   *  }
-	   * function responseError( error ) {
-	   *    console.log( 'responseError', error );
-	   *
-	   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
-	   * }
-	   * let option = {
-	   *    didMount: didMount,
-	   *    errorMount: errorMount,
-	   *    undefinedError: undefinedError,
-	   *    emptyError: emptyError,
-	   *    responseError: responseError
-	   *  };
-	   *
-	   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), option );
-	   * headline.start();
-	   *
-	   * @param {Element} element root element
+	   * @param {Element} element root element, Ajax result を配置する
+	   * @param {Element} moreElement more button root element, 'View More' を配置する
+	   * @param {*} ActionClass Request 対象の Action Class
 	   * @param {Object} [option={}] optional event handler
 	   */
 
-	  function ViewHeadline(element) {
-	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	    (0, _classCallCheck3.default)(this, ViewHeadline);
+	  function ViewArchive(element, moreElement, ActionClass) {
+	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	    (0, _classCallCheck3.default)(this, ViewArchive);
 
-	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchive).call(this, element, option));
 
-	    _this2._action = new _Headline.Headline(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    _this2._moreElement = moreElement;
 
 	    return _this2;
 	  }
-	  /**
-	   * Ajax request を開始します
-	   */
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
 
-	  (0, _createClass3.default)(ViewHeadline, [{
+	  (0, _createClass3.default)(ViewArchive, [{
 	    key: 'start',
+
+	    // ---------------------------------------------------
+	    //  Method
+	    // ---------------------------------------------------
+	    /**
+	     * Ajax request を開始します
+	     */
 	    value: function start() {
 
-	      this.action.start();
+	      this.action.next();
 	    }
 	    /**
 	     * Ajax response success
-	     * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
 	     */
 
 	  }, {
@@ -5711,6 +5687,7 @@
 	    value: function showError() {
 	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
+	      // ToDo: Error 時の表示が決まったら変更する
 	      var error = new _ViewError.ViewError(this.element, this.option, message);
 	      error.render();
 	    }
@@ -5724,47 +5701,8 @@
 	    value: function render(articles) {
 
 	      var element = this.element;
+	      var moreElement = this.moreElement;
 	      var _this = this;
-
-	      // tag block
-	      var HeadlineDom = React.createClass({
-	        displayName: 'HeadlineDom',
-
-	        propTypes: {
-	          index: React.PropTypes.number.isRequired,
-	          id: React.PropTypes.string.isRequired,
-	          slug: React.PropTypes.string.isRequired,
-	          category: React.PropTypes.string.isRequired,
-	          url: React.PropTypes.string.isRequired,
-	          date: React.PropTypes.string.isRequired,
-	          title: React.PropTypes.string.isRequired,
-	          thumbnail: React.PropTypes.string.isRequired
-	        },
-	        render: function render() {
-	          var p = this.props;
-
-	          return React.createElement(
-	            'a',
-	            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
-	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
-	            React.createElement(
-	              'p',
-	              { className: 'cat cat-' + p.slug },
-	              p.category
-	            ),
-	            React.createElement(
-	              'h3',
-	              { className: 'headline-title' },
-	              p.title
-	            ),
-	            React.createElement(
-	              'p',
-	              { className: 'date' },
-	              p.date
-	            )
-	          );
-	        }
-	      });
 
 	      // React Class
 	      var ArticleDom = React.createClass({
@@ -5773,38 +5711,120 @@
 	        propTypes: {
 	          list: React.PropTypes.array.isRequired
 	        },
-	        // isRequired なので getDefaultProps がいらない
-	        // getDefaultProps: function() {
-	        //  return {
-	        //    list: []
-	        //  };
-	        // },
 	        render: function render() {
 
 	          var list = this.props.list;
+	          var even = [];
+	          var odd = [];
 
+	          var ArchiveDom = React.createClass({
+	            displayName: 'ArchiveDom',
+
+	            propTypes: {
+	              index: React.PropTypes.number.isRequired,
+	              id: React.PropTypes.string.isRequired,
+	              slug: React.PropTypes.string.isRequired,
+	              category: React.PropTypes.string.isRequired,
+	              url: React.PropTypes.string.isRequired,
+	              date: React.PropTypes.string.isRequired,
+	              title: React.PropTypes.string.isRequired,
+	              description: React.PropTypes.string.isRequired,
+	              thumbnail: React.PropTypes.string.isRequired,
+	              mediaType: React.PropTypes.string.isRequired
+	            },
+	            render: function render() {
+	              var p = this.props;
+	              console.log('ArchiveDom ', p);
+	              return React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                  'a',
+	                  { href: p.url, id: 'archive-' + p.id, className: 'archive archive-' + p.index },
+	                  React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	                  React.createElement(
+	                    'p',
+	                    { className: 'cat cat-' + p.slug },
+	                    p.category
+	                  ),
+	                  React.createElement(
+	                    'h3',
+	                    { className: 'archive-title' },
+	                    p.title
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    { className: 'date' },
+	                    p.date
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    null,
+	                    p.mediaType
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    null,
+	                    p.description
+	                  )
+	                )
+	              );
+	            }
+	          });
+
+	          var makeDom = function makeDom(dae) {
+
+	            var thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
+	            thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
+
+	            return React.createElement(ArchiveDom, {
+	              key: 'archive-' + dae.id,
+	              index: dae.index,
+	              id: String(dae.id),
+	              slug: dae.category.slug,
+	              category: dae.category.label,
+	              url: dae.url,
+	              date: dae.formatDate,
+	              title: dae.title,
+	              thumbnail: thumbnail,
+	              mediaType: dae.mediaType,
+	              description: dae.description
+	            });
+	          };
+
+	          // even / odd setup
+	          list.forEach(function (article, i) {
+
+	            var dae = new _ArticleDae.ArticleDae(article);
+	            dae.index = i;
+
+	            if (i % 2 === 0) {
+	              // even
+	              even.push(dae);
+	            } else {
+	              // odd
+	              odd.push(dae);
+	            }
+	          });
+
+	          // dom
 	          return React.createElement(
 	            'div',
 	            null,
-	            list.map(function (article, i) {
-
-	              var dae = new _ArticleDae.ArticleDae(article);
-	              var thumbnail = dae.media.images.thumbnail;
-	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
-
-	              // HeadlineDom instance を使い render
-	              return React.createElement(HeadlineDom, {
-	                key: 'headline-' + dae.id,
-	                index: i,
-	                id: String(dae.id),
-	                slug: dae.category.slug,
-	                category: dae.category.label,
-	                url: dae.url,
-	                date: dae.formatDate,
-	                title: dae.title,
-	                thumbnail: thumbnail
-	              });
-	            })
+	            React.createElement(
+	              'div',
+	              { className: 'left' },
+	              even.map(function (dae) {
+	                return makeDom(dae);
+	              })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'right' },
+	              odd.map(function (dae) {
+	                return makeDom(dae);
+	              })
+	            )
 	          );
 	        },
 	        componentDidMount: function componentDidMount() {
@@ -5818,9 +5838,14 @@
 	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
 	    } // render
 
+	  }, {
+	    key: 'moreElement',
+	    get: function get() {
+	      return this._moreElement;
+	    }
 	  }]);
-	  return ViewHeadline;
-	}(_View2.View);
+	  return ViewArchive;
+	}(_View2.View); // class
 
 /***/ },
 /* 101 */
@@ -6257,26 +6282,49 @@
 	    this._media = new _MediaDae.MediaDae(article.media);
 	    // article.user
 	    this._user = new _UserDae.UserDae(article.user);
-
+	    // article.comments_popular
 	    this._popular = new _CommentsPopularDae.CommentsPopularDae(article.comments_popular);
 
-	    if (!_Safety.Safety.check(article, 'comments_count')) {
+	    // Safety.check, object に key が存在しタイプがあっているかを調べます
+	    // comments_count check
+	    if (!_Safety.Safety.check(article, 'comments_count', 'number')) {
 
-	      article.comments_count = '0';
+	      article.comments_count = 0;
 	    }
+	    // date check
 	    if (_Safety.Safety.check(article, 'date')) {
 
 	      article.formatDate = _Format.Format.date(article.date);
 	    }
+
+	    this._index = -1;
 	  }
 	  // ---------------------------------------------------
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * @return {Object|*} article 記事単1データ
+	   * @return {number|*|Number} index number を返します, default -1, -1 の時は未設定なので使用してはいけない
 	   */
 
 	  (0, _createClass3.default)(ArticleDae, [{
+	    key: 'index',
+	    get: function get() {
+	      return this._index;
+	    }
+
+	    /**
+	     * index number を設定します
+	     * @param {Number} index index number
+	     */
+	    ,
+	    set: function set(index) {
+	      this._index = index;
+	    }
+	    /**
+	     * @return {Object|*} article 記事単1データ
+	     */
+
+	  }, {
 	    key: 'article',
 	    get: function get() {
 	      return this._article;
@@ -7152,6 +7200,309 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 13:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// app
+	// import {App} from '../../app/App';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeadline = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Empty = __webpack_require__(101);
+
+	var _View2 = __webpack_require__(102);
+
+	var _ViewError = __webpack_require__(103);
+
+	var _Headline = __webpack_require__(91);
+
+	var _Result = __webpack_require__(57);
+
+	var _ArticleDae = __webpack_require__(104);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+
+	// data
+	var React = self.React;
+	// dae
+
+	// action
+
+	// view
+
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * home > headline（注目ニュース）を表示します。
+	 * <ol>
+	 *   <li>JSON取得(Ajax)</li>
+	 *   <li>Dom作成 by React</li>
+	 * </ol>
+	 */
+
+	var ViewHeadline = exports.ViewHeadline = function (_View) {
+	  (0, _inherits3.default)(ViewHeadline, _View);
+
+	  /**
+	   * action/Headline を使い Ajax request 後 element へ dom を作成します
+	   *
+	   * @example
+	   * let headline;
+	   *
+	   * function didMount() {
+	   *    console.log( 'dom mount' );
+	   *  }
+	   * function errorMount( error ) {
+	   *    console.log( 'dom errorMount', error );
+	   *  }
+	   * function undefinedError( error ) {
+	   *    console.log( 'undefinedError', error );
+	   *  }
+	   * function emptyError( error ) {
+	   *    console.log( 'emptyError', error );
+	   *  }
+	   * function responseError( error ) {
+	   *    console.log( 'responseError', error );
+	   *
+	   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
+	   * }
+	   * let option = {
+	   *    didMount: didMount,
+	   *    errorMount: errorMount,
+	   *    undefinedError: undefinedError,
+	   *    emptyError: emptyError,
+	   *    responseError: responseError
+	   *  };
+	   *
+	   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), option );
+	   * headline.start();
+	   *
+	   * @param {Element} element root element
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ViewHeadline(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    (0, _classCallCheck3.default)(this, ViewHeadline);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
+
+	    _this2._action = new _Headline.Headline(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+
+	    return _this2;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewHeadline, [{
+	    key: 'start',
+	    value: function start() {
+
+	      this.action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var articles = result.articles;
+
+	      if (typeof articles === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        this.executeSafely('undefinedError');
+	        this.showError('[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	      } else if (articles.length === 0) {
+
+	        // articles empty
+	        // request, JSON 取得に問題は無かったが data が取得できなかった
+	        this.executeSafely('emptyError');
+	        this.showError('[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。');
+	      } else {
+
+	        this.render(articles);
+	      }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely('responseError', error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+	    /**
+	     * ViewError でエラーコンテナを作成します
+	     * @param {string} message エラーメッセージ
+	     */
+
+	  }, {
+	    key: 'showError',
+	    value: function showError() {
+	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      // ToDo: Error 時の表示が決まったら変更する
+	      var error = new _ViewError.ViewError(this.element, this.option, message);
+	      error.render();
+	    }
+	    /**
+	     * dom を render します
+	     * @param {Array} articles JSON responce.articles
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(articles) {
+
+	      var element = this.element;
+	      var _this = this;
+
+	      // tag block
+	      var HeadlineDom = React.createClass({
+	        displayName: 'HeadlineDom',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired,
+	          category: React.PropTypes.string.isRequired,
+	          url: React.PropTypes.string.isRequired,
+	          date: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired,
+	          thumbnail: React.PropTypes.string.isRequired
+	        },
+	        render: function render() {
+	          var p = this.props;
+
+	          return React.createElement(
+	            'a',
+	            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
+	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            React.createElement(
+	              'p',
+	              { className: 'cat cat-' + p.slug },
+	              p.category
+	            ),
+	            React.createElement(
+	              'h3',
+	              { className: 'headline-title' },
+	              p.title
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'date' },
+	              p.date
+	            )
+	          );
+	        }
+	      });
+
+	      // React Class
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        // isRequired なので getDefaultProps がいらない
+	        // getDefaultProps: function() {
+	        //  return {
+	        //    list: []
+	        //  };
+	        // },
+	        render: function render() {
+
+	          var list = this.props.list;
+
+	          return React.createElement(
+	            'div',
+	            null,
+	            list.map(function (article, i) {
+
+	              var dae = new _ArticleDae.ArticleDae(article);
+	              var thumbnail = dae.media.images.thumbnail;
+	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+
+	              // HeadlineDom instance を使い render
+	              return React.createElement(HeadlineDom, {
+	                key: 'headline-' + dae.id,
+	                index: i,
+	                id: String(dae.id),
+	                slug: dae.category.slug,
+	                category: dae.category.label,
+	                url: dae.url,
+	                date: dae.formatDate,
+	                title: dae.title,
+	                thumbnail: thumbnail
+	              });
+	            })
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely('didMount');
+	        }
+	      });
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+	    } // render
+
+	  }]);
+	  return ViewHeadline;
+	}(_View2.View);
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/24 - 18:05
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -7199,6 +7550,8 @@
 
 	var _Pickup = __webpack_require__(90);
 
+	var _Result = __webpack_require__(57);
+
 	var _ArticleDae = __webpack_require__(104);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -7206,9 +7559,11 @@
 	// global object
 	// React
 
-	// action
+	// data
 	var React = self.React;
 	// dae
+
+	// action
 
 	var ReactDOM = self.ReactDOM;
 
@@ -7269,7 +7624,7 @@
 	    }
 	    /**
 	     * Ajax response success
-	     * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
 	     */
 
 	  }, {
@@ -7319,6 +7674,7 @@
 	    value: function showError() {
 	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
+	      // ToDo: Error 時の表示が決まったら変更する
 	      var error = new _ViewError.ViewError(this.element, this.option, message);
 	      error.render();
 	    }
@@ -7564,13 +7920,13 @@
 	                  return make(article, count++);
 	                }),
 
-	                // 2.second
+	                // 2.second clone
 	                list.map(function (article) {
 
 	                  return make(article, count++);
 	                }),
 
-	                // 3.third
+	                // 3.third clone
 	                list.map(function (article) {
 
 	                  return make(article, count++);

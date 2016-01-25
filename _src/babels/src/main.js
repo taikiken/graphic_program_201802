@@ -80,6 +80,8 @@ import {Detail} from './action/single/Detail';
 
 // -------------------------------------
 // view
+import {ViewArchive} from './view/ViewArchive';
+
 import {ViewHeadline} from './view/home/ViewHeadline';
 import {ViewPickup} from './view/home/ViewPickup';
 
@@ -153,6 +155,7 @@ var UT = {
     }
   },
   view: {
+    ViewArchive: ViewArchive,
     home: {
       ViewHeadline: ViewHeadline,
       ViewPickup: ViewPickup

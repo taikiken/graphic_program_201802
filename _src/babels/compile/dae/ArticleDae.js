@@ -59,26 +59,49 @@ var ArticleDae = exports.ArticleDae = function () {
     this._media = new _MediaDae.MediaDae(article.media);
     // article.user
     this._user = new _UserDae.UserDae(article.user);
-
+    // article.comments_popular
     this._popular = new _CommentsPopularDae.CommentsPopularDae(article.comments_popular);
 
-    if (!_Safety.Safety.check(article, 'comments_count')) {
+    // Safety.check, object に key が存在しタイプがあっているかを調べます
+    // comments_count check
+    if (!_Safety.Safety.check(article, 'comments_count', 'number')) {
 
-      article.comments_count = '0';
+      article.comments_count = 0;
     }
+    // date check
     if (_Safety.Safety.check(article, 'date')) {
 
       article.formatDate = _Format.Format.date(article.date);
     }
+
+    this._index = -1;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {Object|*} article 記事単1データ
+   * @return {number|*|Number} index number を返します, default -1, -1 の時は未設定なので使用してはいけない
    */
 
   (0, _createClass3.default)(ArticleDae, [{
+    key: 'index',
+    get: function get() {
+      return this._index;
+    }
+
+    /**
+     * index number を設定します
+     * @param {Number} index index number
+     */
+    ,
+    set: function set(index) {
+      this._index = index;
+    }
+    /**
+     * @return {Object|*} article 記事単1データ
+     */
+
+  }, {
     key: 'article',
     get: function get() {
       return this._article;

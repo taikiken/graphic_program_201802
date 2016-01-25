@@ -48,6 +48,8 @@ var _ViewError = require('../error/ViewError');
 
 var _Pickup = require('../../action/home/Pickup');
 
+var _Result = require('../../data/Result');
+
 var _ArticleDae = require('../../dae/ArticleDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -55,9 +57,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // global object
 // React
 
-// action
+// data
 var React = self.React;
 // dae
+
+// action
 
 var ReactDOM = self.ReactDOM;
 
@@ -118,7 +122,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
     }
     /**
      * Ajax response success
-     * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
      */
 
   }, {
@@ -168,6 +172,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
     value: function showError() {
       var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
+      // ToDo: Error 時の表示が決まったら変更する
       var error = new _ViewError.ViewError(this.element, this.option, message);
       error.render();
     }
@@ -413,13 +418,13 @@ var ViewPickup = exports.ViewPickup = function (_View) {
                   return make(article, count++);
                 }),
 
-                // 2.second
+                // 2.second clone
                 list.map(function (article) {
 
                   return make(article, count++);
                 }),
 
-                // 3.third
+                // 3.third clone
                 list.map(function (article) {
 
                   return make(article, count++);

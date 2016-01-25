@@ -22,7 +22,7 @@ export class View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element, option:Object = {} ) {
+  constructor( element:Element, option:Object = {} ) {
 
     this._element = element;
     this._option = option;

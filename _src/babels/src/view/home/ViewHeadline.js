@@ -20,7 +20,8 @@ import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 // action
 import {Headline} from '../../action/home/Headline';
-// import {Result} from '../../data/Result';
+// data
+import {Result} from '../../data/Result';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
@@ -73,7 +74,7 @@ export class ViewHeadline extends View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element, option:Object = {} ) {
+  constructor( element:Element, option:Object = {} ) {
 
     super( element, option );
     this._action = new Headline( this.done.bind( this ), this.fail.bind( this ) );
@@ -89,9 +90,9 @@ export class ViewHeadline extends View {
   }
   /**
    * Ajax response success
-   * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+   * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result ):void {
+  done( result:Result ):void {
 
     let articles = result.articles;
 
@@ -186,7 +187,7 @@ export class ViewHeadline extends View {
       // },
       render: function() {
 
-        var list = this.props.list;
+        let list = this.props.list;
 
         return (
 

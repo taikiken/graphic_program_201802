@@ -118,7 +118,6 @@ var Offset = exports.Offset = function (_Action) {
 
       this.offset += count;
     }
-
     /**
      * 次があるかを調べます
      * @return {boolean} 次があるかの真偽値を返します
@@ -132,7 +131,6 @@ var Offset = exports.Offset = function (_Action) {
       // total が offset（次の読み込み開始位置）より小さい時に true
       return this._total < 0 ? true : this.offset < this.total;
     }
-
     /**
      * 次の読込を開始します<br>
      * start の代わりに使用します
@@ -169,7 +167,6 @@ var Offset = exports.Offset = function (_Action) {
     get: function get() {
       return this._total;
     }
-
     /**
      * total件数を設定します
      * @param {Number} total total件数
@@ -187,7 +184,6 @@ var Offset = exports.Offset = function (_Action) {
     get: function get() {
       return this._length;
     }
-
     /**
      * length件数を設定します
      * @param {Number} length length 取得件数
@@ -205,7 +201,6 @@ var Offset = exports.Offset = function (_Action) {
     get: function get() {
       return this._offset;
     }
-
     /**
      * length件数を設定します
      * @param {Number} offset offset 取得開始位置
@@ -214,7 +209,6 @@ var Offset = exports.Offset = function (_Action) {
     set: function set(offset) {
       this._offset = offset;
     }
-
     /**
      * url を作成します
      * @return {string} 作成した url を返します

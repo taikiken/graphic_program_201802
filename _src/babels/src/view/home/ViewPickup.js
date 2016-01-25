@@ -20,6 +20,8 @@ import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 // action
 import {Pickup} from '../../action/home/Pickup';
+// data
+import {Result} from '../../data/Result';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
@@ -45,7 +47,7 @@ export class ViewPickup extends View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element, option:Object = {} ) {
+  constructor( element:Element, option:Object = {} ) {
 
     super( element, option );
     this._action = new Pickup( this.done.bind( this ), this.fail.bind( this ) );
@@ -84,9 +86,9 @@ export class ViewPickup extends View {
   }
   /**
    * Ajax response success
-   * @param {*|Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+   * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result ):void {
+  done( result:Result ):void {
 
     let articles = result.articles;
 
@@ -344,7 +346,7 @@ export class ViewPickup extends View {
                   } )
                 }
                 {
-                  // 2.second
+                  // 2.second clone
                   list.map( function( article ) {
 
                     return make( article, count++ );
@@ -352,7 +354,7 @@ export class ViewPickup extends View {
                   } )
                 }
                 {
-                  // 3.third
+                  // 3.third clone
                   list.map( function( article ) {
 
                     return make( article, count++ );
