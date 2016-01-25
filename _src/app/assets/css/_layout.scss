@@ -14,9 +14,10 @@
 
 //  1. layout Base
 //  2. head section
-//  3. foot section
-//  4. main contents
-//  5. side contents
+//  3. gnav section
+//  4. foot section
+//  5. main contents
+//  6. side contents
 
 
 // base
@@ -28,6 +29,8 @@
 
 
 
+
+
 // head
 //
 // Styleguide 3.2.0
@@ -35,32 +38,191 @@
 // 2. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
+.head-sec {
+  @at-root {
+    &-inner {
+      @include clearfix;
+      width: 1070px;
+      margin: 0 auto;
+
+      h1 {
+        float: left;
+        margin: 10px 0;
+
+        a {
+          @extend .sprite-header;
+          @include sprite( $header-logo );
+          @include hide-text;
+        }
+      }
+    }
+  }
+
+  .search-block {
+    @include clearfix;
+    float: left;
+    width: 300px;
+    margin-top: 14px;
+    padding: 0 14px;
+    background-color: #eee;
+    border-radius: 17px;
+
+    input {
+      border: none;
+      background: transparent;
+    }
+
+    input[type="text"] {
+      float: left;
+      width: 250px;
+      padding: 8px 0;
+      vertical-align: middle;
+    }
+
+    input[type="submit"] {
+      float: right;
+      @extend .sprite-header;
+      @include sprite( $header-icon-search, inline-block );
+      @include hide-text;
+      margin-top: 8px;
+    }
+  }
+
+  .user-block {
+    float: left;
+    margin-left: 15px;
+
+    .preference {
+      display: none;
+    }
+
+    .signup {
+      @include link-decoration(#e1438b, #e1438b, none, none);
+      display: table-cell;
+      height: 60px;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    &.signin {
+      margin-top: 14px;
+
+      .signup {
+        display: none;
+      }
+
+      .preference {
+        position: relative;
+        display: block;
+        width: 35px;
+        height: 35px;
+        background: url(../images/header-icon-user.png) 0 0 no-repeat;
+      }
+
+      .notice {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        display: block;
+        width: 20px;
+        height: 20px;
+        padding-top: 4px;
+        line-height: 1;
+        background-color: #e14343;
+        border-radius: 100%;
+        color: #fff;
+        font-weight: bold;
+        font-size: fz(10);
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+
+
+
+// gnav
+//
+// Styleguide 3.3.0
+
+// 3. gnav section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+.gnav-sec {
+  .row1 {
+    background-color: #111;
+  }
+
+  .row2 {
+    background-color: #222;
+  }
+
+  ul {
+    display: table;
+    width: 1070px;
+    margin: 0 auto;
+  }
+
+  li {
+    display: table-cell;
+    padding: 0 11px 0 0;
+    background: url(../images/common/gnav-separator.png) right center no-repeat;
+    text-align: center;
+    vertical-align: middle;
+
+    &:last-child {
+      padding-right: 0;
+      background: none;
+    }
+  }
+
+  a {
+    display: block;
+    padding: 10px 0 12px 0;
+    @include link-decoration(#ccc, #e1438b, none, none);
+    font-weight: bold;
+
+    &.current,
+    &:hover {
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e1438b;
+      color: #e1438b;
+    }
+  }
+}
+
+
+
 
 
 // foot
 //
-// Styleguide 3.3.0
+// Styleguide 3.4.0
 
-// 3. foot section
+// 4. foot section
 // ----------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
 
 // main
 //
-// Styleguide 3.4.0
+// Styleguide 3.5.0
 
-// 4. main contents
+// 5. main contents
 // ----------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
 
 // side
 //
-// Styleguide 3.5.0
+// Styleguide 3.6.0
 
-// 5. side contents
+// 6. side contents
 // ----------------------------------------------------------------------------------------------------------------------------------------
 

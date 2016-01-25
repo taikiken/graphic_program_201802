@@ -18,14 +18,14 @@
 //// Font
 //$font-color: #333 !default;
 //$font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', Arial, verdana, sans-serif !default;
-//$font-size: 12px !default;
-//$line-height: 1.5 !default;
-//$default-em: 12px !default;
+$font-size: 14px;
+// $line-height: 1.5 !default;
+$default-em: 14px;
 //
 //// Various global styles
 //$float: left !default;
-//$box-sizing: content-box !default;
-//$font-smoothing: off !default; // on or off
+$box-sizing: border-box;
+$font-smoothing: on; // on or off
 //$bg-color: #fff !default;
 ////$bg-color: transparent !default;
 //
