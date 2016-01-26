@@ -204,7 +204,165 @@
 // 4. foot section
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
+.foot {
+  @at-root {
+    &-sec {
+      padding-top: 20px;
+      background-color: #f5f5f5;
 
+      &-inner {
+        background-color: #000;
+      }
+    }
+
+    &-pr {
+      background-color: #333;
+
+      &-inner {
+        @include clearfix;
+        width: 1070px;
+        margin: 0 auto;
+      }
+
+      figure {
+        float: left;
+        margin: 20px 0 0 95px;
+
+        figcaption {
+          float: left;
+          margin: 40px 37px 0 0;
+        }
+      }
+
+      .text-block {
+        float: right;
+        width: 585px;
+        margin-top: 40px;
+
+        h3, p {
+          color: #fff;
+        }
+
+        h3 {
+          font-weight: bold;
+          font-size: fz(16);
+        }
+
+        p {
+          margin-top: .25em;
+          font-size: fz(12);
+        }
+
+        ul {
+          @include clearfix;
+          margin-top: 20px;
+
+          li {
+            float: left;
+
+            + li {
+              margin-left: 10px;
+            }
+          }
+
+          a {
+            @include hover-opacity;
+          }
+        }
+      }
+    } // foot-pr
+
+    &-sec {
+      .pagetop {
+        border-bottom: 1px solid #333;
+
+        a {
+          display: block;
+          padding: 18px 0;
+          @include hover-opacity;
+        }
+
+        span {
+          @extend .sprite-footer;
+          @include sprite( $footer-pagetop );
+          @include hide-text;
+          margin: 0 auto;
+        }
+      } // pagetop
+
+      .fnav {
+        width: 1170px;
+        margin: 30px auto 0;
+
+        ul {
+          text-align: center;
+          letter-spacing: ls(inline-block);
+
+          li {
+            display: inline-block;
+            letter-spacing: normal;
+
+            + li {
+              margin-left: 20px;
+            }
+          }
+
+          a {
+            @include link-decoration(#666, #666, none, underline);
+            font-size: fz(12);
+          }
+        }
+      } // fnav
+
+      .sns-block {
+        margin-top: 20px;
+
+        ul {
+          text-align: center;
+          letter-spacing: ls(inline-block);
+
+          li {
+            display: inline-block;
+            vertical-align: middle;
+            letter-spacing: normal;
+
+            + li {
+              margin-left: 10px;
+            }
+          }
+
+          a {
+            @extend .sprite-footer;
+            @include hide-text;
+            @include hover-opacity;
+          }
+
+          .sns-tw a {
+            @include sprite( $footer-icon-sns-tw );
+          }
+
+          .sns-fb a {
+            @include sprite( $footer-icon-sns-fb );
+          }
+
+          .sns-yt a {
+            @include sprite( $footer-icon-sns-yt );
+          }
+
+        }
+      } //.sns-block
+
+      .copyright {
+        padding: 24px 0 28px;
+        color: #666;
+        font-size: fz(10);
+        text-align: center;
+      } //.copyright
+    }
+
+
+  }
+}
 
 
 
