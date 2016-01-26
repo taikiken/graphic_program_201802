@@ -53,6 +53,10 @@ export class ViewArchive extends View {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   *
+   * @return {Element|*} more button root element を返します
+   */
   get moreElement():Element {
     return this._moreElement;
   }
@@ -79,19 +83,22 @@ export class ViewArchive extends View {
 
       // articles undefined
       // JSON に問題がある
-      this.executeSafely( 'undefinedError' );
-      this.showError( '[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[ARCHIVE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      this.executeSafely( 'undefinedError', error );
+      // this.showError( error.message );
 
     } else if ( articles.length === 0 ) {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      this.executeSafely( 'emptyError' );
-      this.showError( '[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[ARCHIVE:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      this.executeSafely( 'emptyError', error );
+      // this.showError( error.message );
 
     } else {
 
       console.log( 'result.total ', result.total );
+      // set total
       this.action.total = parseInt( result.total, 10 );
       this.render( articles );
 
@@ -172,6 +179,8 @@ export class ViewArchive extends View {
       }
     } );
 
+    // more button 作成関数
+    // ArchiveDom から呼び出す
     let moreButton = ( show ) => {
 
       ReactDOM.render(
@@ -180,6 +189,99 @@ export class ViewArchive extends View {
       );
 
     };
+    // --------------------------------------------
+    // COMMENTS Popular second
+    // --------------------------------------------
+    let CommentsSecond = React.createClass( {
+      propType: {
+        seconds: React.PropTypes.array.isRequired,
+        articleId: React.PropTypes.string.isRequired
+      },
+      render: function() {
+
+        let seconds = this.props.seconds;
+        let articleId = this.props.articleId;
+
+        return (
+          <div className="comments-second">
+            {
+              seconds.map( function( commentDae, i ) {
+
+                let userDae = commentDae.user;
+                let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_PICTURE;
+
+                // CommentsSecond unique key は  記事Id + index + user Id を使用する
+                // 同一ユーザーが複数投稿することがあるため
+                // render 内で unique なことを保証する必要がある
+                return (
+                  <div key={'user-' + articleId + '-' + i + '-' + userDae.id}>
+                    <img src={picture} alt={userDae.userName}/>
+                  </div>
+                );
+              } )
+            }
+          </div>
+        );
+
+      }
+    } );
+
+    // --------------------------------------------
+    // COMMENTS Popular
+    // --------------------------------------------
+    let PopularDom = React.createClass( {
+      propType: {
+        commentsPopular: React.PropTypes.object.isRequired,
+        total: React.PropTypes.number.isRequired,
+        articleId: React.PropTypes.string.isRequired
+      },
+      render: function() {
+
+        let commentsPopular = this.props.commentsPopular;
+        let total = this.props.total;
+        let articleId = this.props.articleId;
+
+        let emptyFirst = <div className="comments-popular comments-empty"></div>;
+        let second = <div className="comments-second comments-empty"></div>;
+
+        if ( commentsPopular.hasSecond ) {
+          // 2件目以降も存在する
+          // 2件目以降のDomを生成する
+          second = <CommentsSecond seconds={commentsPopular.seconds} articleId={articleId} />;
+        }
+
+        if ( commentsPopular.hasFirst ) {
+
+          // 少なくとも1件は存在する
+
+          // 1件目データを取り出し
+          let first = commentsPopular.first;
+          let firstUser = first.user;
+          let picture = firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE;
+
+          return (
+            <div className="comments-popular">
+              <div className="comment-first">
+                <img src={picture} alt={firstUser.userName}/>
+                <div>{firstUser.userName}</div>
+                <div>{firstUser.bio}</div>
+                <div>{first.body}</div>
+                <div>GOOD: {first.good}</div>
+                <div>BAD: {first.bad}</div>
+              </div>
+              <div className="comment-second-container">
+                {second}
+                <div className="comment-total">{total > 0 ? 'Total: ' + total : ''}</div>
+              </div>
+            </div>
+          );
+
+        }
+
+        return emptyFirst;
+
+      }// render
+    } );
 
     // --------------------------------------------
     // Main Dom
@@ -197,33 +299,40 @@ export class ViewArchive extends View {
         title: React.PropTypes.string.isRequired,
         description: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
-        mediaType: React.PropTypes.string.isRequired
+        mediaType: React.PropTypes.string.isRequired,
+        commentsPopular: React.PropTypes.object.isRequired,
+        commentsCount: React.PropTypes.number.isRequired
       },
       render: function() {
         let p = this.props;
-        // console.log( 'ArchiveDom ', p );
+        let commentsPopular = p.commentsPopular;
+
         return (
-          <div>
+          <div className="one-article">
+            <img src={p.thumbnail} alt={p.title}/>
+            <p className={'cat cat-' + p.slug}>{p.category}</p>
             <a href={p.url} id={'archive-' + p.id} className={'archive archive-' + p.index}>
-              <img src={p.thumbnail} alt={p.title}/>
-              <p className={'cat cat-' + p.slug}>{p.category}</p>
               <h3 className='archive-title'>{p.title}</h3>
-              <p className="date">{p.date}</p>
-              <p>{p.mediaType}</p>
-              <p>{p.description}</p>
             </a>
+            <p className="date">{p.date}</p>
+            <p>{p.mediaType}</p>
+            <p>{p.description}</p>
+            <div className="comments-popular-container">
+              <PopularDom commentsPopular={commentsPopular} total={p.commentsCount} articleId={p.id} />
+            </div>
           </div>
         );
       }
     } );
 
-    // ArchiveDom 呼び出し用関数
+    // ArticleDom 呼び出し用関数
     // list.forEach での ReactDOM.render 実行記述を簡略化するため
     let makeDom = ( dae ) => {
 
       let thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
       thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
 
+      // unique key(React)にarticle id(number)記事Idを使用します
       return <ArchiveDom
         key={'archive-' + dae.id}
         index={dae.index}
@@ -236,9 +345,16 @@ export class ViewArchive extends View {
         thumbnail={thumbnail}
         mediaType={dae.mediaType}
         description={dae.description}
+        commentsPopular={dae.commentsPopular}
+        commentsCount={dae.commentsCount}
       />;
 
     };
+
+    // ------------------------------------------------
+    // 基点 React class
+    // ------------------------------------------------
+
     // React Class, Archive Dom
     let ArticleDom = React.createClass( {
       propTypes: {

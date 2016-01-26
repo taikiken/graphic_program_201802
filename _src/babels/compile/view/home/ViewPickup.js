@@ -135,19 +135,21 @@ var ViewPickup = exports.ViewPickup = function (_View) {
 
         // articles undefined
         // JSON に問題がある
-        this.executeSafely('undefinedError');
-        this.showError('[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+        var error = new Error('[PICKUP:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+        this.executeSafely('undefinedError', error);
+        // this.showError( error.message );
       } else if (articles.length === 0) {
 
-        // articles empty
-        // request, JSON 取得に問題は無かったが data が取得できなかった
-        this.executeSafely('emptyError');
-        this.showError('[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。');
-      } else {
+          // articles empty
+          // request, JSON 取得に問題は無かったが data が取得できなかった
+          var error = new Error('[PICKUP:EMPTY]サーバーレスポンスに問題が発生しました。');
+          this.executeSafely('emptyError', error);
+          // this.showError( error.message );
+        } else {
 
-        this._last = articles.length - 1;
-        this.render(articles);
-      }
+            this._last = articles.length - 1;
+            this.render(articles);
+          }
     }
     /**
      * Ajax response error
@@ -229,6 +231,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
         }
       });
 
+      // pagers 親コンポーネント
       var Pagers = React.createClass({
         displayName: 'Pagers',
 

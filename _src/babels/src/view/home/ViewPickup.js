@@ -96,15 +96,17 @@ export class ViewPickup extends View {
 
       // articles undefined
       // JSON に問題がある
-      this.executeSafely( 'undefinedError' );
-      this.showError( '[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[PICKUP:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      this.executeSafely( 'undefinedError', error );
+      // this.showError( error.message );
 
     } else if ( articles.length === 0 ) {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      this.executeSafely( 'emptyError' );
-      this.showError( '[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[PICKUP:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      this.executeSafely( 'emptyError', error );
+      // this.showError( error.message );
 
     } else {
 
@@ -176,6 +178,7 @@ export class ViewPickup extends View {
       }
     } );
 
+    // pagers 親コンポーネント
     let Pagers = React.createClass( {
       propTypes: {
         offset: React.PropTypes.number.isRequired,

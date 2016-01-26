@@ -68,4 +68,15 @@ export class Empty {
     return 'img/common/empty.jpg';
 
   }
+  /**
+   *  ユーザー・プロファイル・アイコン 代替画像パス<br>
+   * [Ex.] コメントとか
+   * @readonly
+   * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+   */
+  static get USER_PICTURE():string {
+
+    return 'img/common/user_empty.jpg';
+
+  }
 }

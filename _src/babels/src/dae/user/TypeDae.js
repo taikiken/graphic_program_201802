@@ -34,12 +34,25 @@ export class TypeDae {
     return this._type;
   }
   /**
-   * @return {string|*} article.user.type.id
+   * ユーザータイプID
+   *
+   * @example
+   * 6 : 一般ユーザー
+   * 5 : 公式ユーザー
+   * 4 : 編集部ユーザ
+   * 3 : メディアユーザー(ex. ニッカンスポーツ)
+   *
+   * @return {Number} article.user.type.id ユーザータイプID
    */
-  get id():string {
+  get id():Number {
     return this.type.id;
   }
   /**
+   * ユーザーラベル
+   *
+   * @example
+   * 公式
+   *
    * @return {string|*} article.user.type.label
    */
   get label():string {

@@ -5,5 +5,11 @@
     "node": true,
     "browser": true
   },
+  "ecmaFeatures": {
+    "ecmascript": 6,
+    "blockBindings": true,
+    "forOf": true,
+    "jsx": true
+  },
   "extends": "./eslint.extends.yml"
 }
