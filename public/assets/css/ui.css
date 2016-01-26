@@ -2986,7 +2986,7 @@ table tr.w200 > td {
     margin: 0 auto; }
 
 .foot-sec .fnav {
-  width: 1170px;
+  width: 1070px;
   margin: 30px auto 0; }
   .foot-sec .fnav ul {
     text-align: center;
@@ -3053,5 +3053,36 @@ table tr.w200 > td {
   color: #666;
   font-size: 72%;
   text-align: center; }
+
+.body-sec {
+  position: relative;
+  background-color: #fff; }
+  .body-sec:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background-color: #f5f5f5; }
+  .body-sec-inner {
+    position: relative;
+    width: 1070px;
+    margin: 0 auto;
+    background-color: #fff; }
+    .body-sec-inner:before, .body-sec-inner:after {
+      content: "";
+      display: table;
+      clear: both; }
+  .body-sec .main-sec {
+    float: left;
+    width: 710px;
+    padding-top: 30px; }
+  .body-sec .side-sec {
+    float: right;
+    width: 330px;
+    padding-top: 30px;
+    padding-left: 30px;
+    background-color: #f5f5f5; }
 
 /*# sourceMappingURL=ui.css.map */

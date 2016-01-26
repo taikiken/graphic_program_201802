@@ -291,7 +291,7 @@
       } // pagetop
 
       .fnav {
-        width: 1170px;
+        width: 1070px;
         margin: 30px auto 0;
 
         ul {
@@ -373,6 +373,44 @@
 // 5. main contents
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
+.body-sec {
+  position: relative;
+  background-color: #fff;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background-color: #f5f5f5;
+  }
+
+  @at-root {
+    &-inner {
+      @include clearfix;
+      position: relative;
+      width: 1070px;
+      margin: 0 auto;
+      background-color: #fff;
+    }
+  }
+
+  .main-sec {
+    float: left;
+    width: 710px;
+    padding-top: 30px;
+  }
+
+  .side-sec {
+    float: right;
+    width: 330px;
+    padding-top: 30px;
+    padding-left: 30px;
+    background-color: #f5f5f5;
+  }
+}
 
 
 
