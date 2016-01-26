@@ -46,7 +46,6 @@ import {Queries} from './net/types/Queries';
 import {Type} from './net/types/Type';
 import {CommentType} from './net/types/CommentType';
 
-
 // -------------------------------------
 // app/App
 import {App} from './app/App';
@@ -76,19 +75,23 @@ import {Bookmark} from './action/bookmark/Bookmark';
 import {Search} from './action/search/Search';
 
 // action/single
-import {Detail} from './action/single/Detail';
+import {Single} from './action/single/Single';
 
 // -------------------------------------
 // view
 import {ViewArchive} from './view/ViewArchive';
+import {ViewSingle} from './view/ViewSingle';
 
 import {ViewHeadline} from './view/home/ViewHeadline';
 import {ViewPickup} from './view/home/ViewPickup';
 
+// sidebar
+import {ViewRanking} from './view/sidebar/ViewRanking';
+import {ViewVideos} from './view/sidebar/ViewVideos';
+
 /**
  * ToDo: 確認事項
  * ToDo: 対象外OS alert
- * ToDo: index ニュース一覧 画像なしの代替画像
  * ToDo: title, meta, ogp
  */
 
@@ -151,11 +154,16 @@ var UT = {
       Search: Search
     },
     single: {
-      Detail: Detail
+      Single: Single
     }
   },
   view: {
     ViewArchive: ViewArchive,
+    ViewSingle: ViewSingle,
+    sidebar: {
+      ViewRanking: ViewRanking,
+      ViewVideos: ViewVideos
+    },
     home: {
       ViewHeadline: ViewHeadline,
       ViewPickup: ViewPickup

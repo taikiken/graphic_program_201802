@@ -110,7 +110,6 @@ export class ViewPickup extends View {
 
     } else {
 
-      this._last = articles.length - 1;
       this.render( articles );
 
     }

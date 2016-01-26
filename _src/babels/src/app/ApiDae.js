@@ -70,19 +70,19 @@ let buildPath = () => {
     ),
     // 記事一覧
     'category': new Types(
-      new Type( `${API_PATH}/articles/category/` ),
+      new Type( `${API_PATH}/articles/category` ),
       new Permalink( [ 'all', '*' ], true ),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
     // 検索
     'search': new Types(
-      new Type( `${API_PATH}/articles/search/` ),
+      new Type( `${API_PATH}/articles/search` ),
       new Permalink( [ '*' ], true ),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
     // 詳細
     'detail': new Types(
-      new Type( `${API_PATH}/articles/` ),
+      new Type( `${API_PATH}/articles` ),
       new Permalink( [ '*' ], true ),
       new Queries()
     ),
@@ -108,83 +108,83 @@ let buildPath = () => {
     ),
     // 記事詳細でのコメント一覧表示
     'comment': new Types(
-      new Type( `${API_PATH}/comments/article/` ),
+      new Type( `${API_PATH}/comments/article` ),
       new Permalink( [ '*' ], true ),
       new Queries( [ new CommentType( 'normal|official|self' ), new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
     // 記事へのコメント
     'comment:send': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'POST' ),
+      new Type( `${API_PATH}/comments/article`, 'POST' ),
       new Permalink( [ '*' ], true ),
       new Queries( [ new Query( 'body', 'number', '', true ) ] ),
       true
     ),
     // コメント返信
     'comment:reply': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'POST' ),
+      new Type( `${API_PATH}/comments/article`, 'POST' ),
       new Permalink( [ '*/*' ], true ),
       new Queries( [ new Query( 'body', 'number', '', true ) ] ),
       true
     ),
     // 記事へのコメント編集
     'comment:send:edit': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'PUT' ),
+      new Type( `${API_PATH}/comments/article`, 'PUT' ),
       new Permalink( [ '*/*' ], true ),
       new Queries(),
       true
     ),
     // コメント返信コメント編集
     'comment:reply:edit': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'PUT' ),
+      new Type( `${API_PATH}/comments/article`, 'PUT' ),
       new Permalink( [ '*/*/*' ], true ),
       new Queries(),
       true
     ),
     // 記事へのコメント 削除
     'comment:send:delete': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
+      new Type( `${API_PATH}/comments/article`, 'DELETE' ),
       new Permalink( [ '*/*' ], true ),
       new Queries(),
       true
     ),
     // コメント返信コメント 削除
     'comment:reply:delete': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
+      new Type( `${API_PATH}/comments/article`, 'DELETE' ),
       new Permalink( [ '*/*/*' ], true ),
       new Queries(),
       true
     ),
     // コメントGood 追加
     'comment:good:add': new Types(
-      new Type( `${API_PATH}/comments/like/`, 'POST' ),
+      new Type( `${API_PATH}/comments/like`, 'POST' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // コメントGood 削除
     'comment:good:delete': new Types(
-      new Type( `${API_PATH}/comments/like/`, 'DELETE' ),
+      new Type( `${API_PATH}/comments/like`, 'DELETE' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // コメントBad 追加
     'comment:bad:add': new Types(
-      new Type( `${API_PATH}/comments/bad/`, 'POST' ),
+      new Type( `${API_PATH}/comments/bad`, 'POST' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // コメントBad 削除
     'comment:bad:delete': new Types(
-      new Type( `${API_PATH}/comments/bad/`, 'DELETE' ),
+      new Type( `${API_PATH}/comments/bad`, 'DELETE' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // お知らせ
     'users:notice': new Types(
-      new Type( `${API_PATH}/users/USER_ID/notifications/` ),
+      new Type( `${API_PATH}/users/USER_ID/notifications` ),
       new Permalink(),
       new Queries(),
       true

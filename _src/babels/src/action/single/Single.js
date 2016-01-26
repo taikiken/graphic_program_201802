@@ -17,7 +17,7 @@ import {Api} from '../../net/Api';
 /**
  * 記事詳細を取得します
  */
-export class Detail extends Action {
+export class Single extends Action {
   /**
    * 記事詳細を記事IDから取得します
    * @param {Number|String} id 記事ID

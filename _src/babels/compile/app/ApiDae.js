@@ -81,11 +81,11 @@ var buildPath = function buildPath() {
     'home': new _Types.Types(new _Type.Type(API_PATH + '/articles/home'), new _Permalink.Permalink(['pickup', 'headline']), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
     'self': new _Types.Types(new _Type.Type(API_PATH + '/articles/self'), new _Permalink.Permalink(['pickup', 'headline']), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)]), true),
     // 記事一覧
-    'category': new _Types.Types(new _Type.Type(API_PATH + '/articles/category/'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    'category': new _Types.Types(new _Type.Type(API_PATH + '/articles/category'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
     // 検索
-    'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
     // 詳細
-    'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
+    'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
     // 'bookmark': new Types(
     //  new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
     //  new Permalink( [ '*' ], true ),
@@ -97,29 +97,29 @@ var buildPath = function buildPath() {
     // ブックマーク 削除
     'bookmark:delete': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
     // 記事詳細でのコメント一覧表示
-    'comment': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _CommentType.CommentType('normal|official|self'), new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    'comment': new _Types.Types(new _Type.Type(API_PATH + '/comments/article'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _CommentType.CommentType('normal|official|self'), new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
     // 記事へのコメント
-    'comment:send': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
+    'comment:send': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
     // コメント返信
-    'comment:reply': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'POST'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
+    'comment:reply': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'POST'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
     // 記事へのコメント編集
-    'comment:send:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'PUT'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
+    'comment:send:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'PUT'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
     // コメント返信コメント編集
-    'comment:reply:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'PUT'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
+    'comment:reply:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'PUT'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
     // 記事へのコメント 削除
-    'comment:send:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'DELETE'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
+    'comment:send:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'DELETE'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
     // コメント返信コメント 削除
-    'comment:reply:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'DELETE'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
+    'comment:reply:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'DELETE'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
     // コメントGood 追加
-    'comment:good:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/like/', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+    'comment:good:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/like', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
     // コメントGood 削除
-    'comment:good:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/like/', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+    'comment:good:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/like', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
     // コメントBad 追加
-    'comment:bad:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad/', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+    'comment:bad:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
     // コメントBad 削除
-    'comment:bad:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad/', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+    'comment:bad:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
     // お知らせ
-    'users:notice': new _Types.Types(new _Type.Type(API_PATH + '/users/USER_ID/notifications/'), new _Permalink.Permalink(), new _Queries.Queries(), true),
+    'users:notice': new _Types.Types(new _Type.Type(API_PATH + '/users/USER_ID/notifications'), new _Permalink.Permalink(), new _Queries.Queries(), true),
     // お知らせ 既読
     'users:notice:read': new _Types.Types(new _Type.Type(API_PATH + '/users/USER_ID/notifications/read', 'POST'), new _Permalink.Permalink(), new _Queries.Queries(), true),
     // ユーザー詳細

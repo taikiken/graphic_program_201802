@@ -102,18 +102,23 @@
 
 	var _Search = __webpack_require__(98);
 
-	var _Detail = __webpack_require__(99);
+	var _Single = __webpack_require__(99);
 
 	var _ViewArchive = __webpack_require__(100);
 
-	var _ViewHeadline = __webpack_require__(114);
+	var _ViewSingle = __webpack_require__(114);
 
-	var _ViewPickup = __webpack_require__(115);
+	var _ViewHeadline = __webpack_require__(118);
+
+	var _ViewPickup = __webpack_require__(119);
+
+	var _ViewRanking = __webpack_require__(120);
+
+	var _ViewVideos = __webpack_require__(121);
 
 	/**
 	 * ToDo: 確認事項
 	 * ToDo: 対象外OS alert
-	 * ToDo: index ニュース一覧 画像なしの代替画像
 	 * ToDo: title, meta, ogp
 	 */
 
@@ -124,40 +129,24 @@
 	 *    var ut = self.UT
 	 */
 
-	// action/single
-
-	// action/bookmark
-
-	// action/archive
+	// sidebar
 
 	// -------------------------------------
-	// app/App
+	// view
+
+	// action/search
+
+	// action/sidebar
+
+	// action/home
 
 	// -------------------------------------
-	// data
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// app
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-26 16:42:36
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
-
-	// -------------------------------------
-	// util
+	// net
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -210,11 +199,16 @@
 	      Search: _Search.Search
 	    },
 	    single: {
-	      Detail: _Detail.Detail
+	      Single: _Single.Single
 	    }
 	  },
 	  view: {
 	    ViewArchive: _ViewArchive.ViewArchive,
+	    ViewSingle: _ViewSingle.ViewSingle,
+	    sidebar: {
+	      ViewRanking: _ViewRanking.ViewRanking,
+	      ViewVideos: _ViewVideos.ViewVideos
+	    },
 	    home: {
 	      ViewHeadline: _ViewHeadline.ViewHeadline,
 	      ViewPickup: _ViewPickup.ViewPickup
@@ -222,22 +216,40 @@
 	  }
 	};
 
-	// -------------------------------------
-	// view
+	// action/single
 
-	// action/search
+	// action/bookmark
 
-	// action/sidebar
-
-	// action/home
+	// action/archive
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// app/App
 
 	// -------------------------------------
-	// net
+	// data
+
+	// -------------------------------------
+	// app
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-01-26 23:39:23
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// -------------------------------------
+	// util
 
 	self.UT = UT;
 
@@ -2249,9 +2261,11 @@
 	     * @param {Function} resolve success callback
 	     * @param {Function} reject fail callback
 	     * @param {FormData} [formData=null] FormData Object
+	     * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
 	     */
 	    value: function start(url, method, resolve, reject) {
 	      var formData = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
+	      var ResultClass = arguments.length <= 5 || arguments[5] === undefined ? _Result.Result : arguments[5];
 
 	      var fetch = self.fetch;
 	      var _this = this;
@@ -2314,7 +2328,7 @@
 	      }).then(function (json) {
 
 	        // parsed JSON
-	        var result = new _Result.Result(json);
+	        var result = new ResultClass(json);
 
 	        if (!_Codes.Codes.status(result.status.code)) {
 
@@ -3427,11 +3441,11 @@
 	    'home': new _Types.Types(new _Type.Type(API_PATH + '/articles/home'), new _Permalink.Permalink(['pickup', 'headline']), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
 	    'self': new _Types.Types(new _Type.Type(API_PATH + '/articles/self'), new _Permalink.Permalink(['pickup', 'headline']), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)]), true),
 	    // 記事一覧
-	    'category': new _Types.Types(new _Type.Type(API_PATH + '/articles/category/'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+	    'category': new _Types.Types(new _Type.Type(API_PATH + '/articles/category'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
 	    // 検索
-	    'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+	    'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
 	    // 詳細
-	    'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
+	    'detail': new _Types.Types(new _Type.Type(API_PATH + '/articles'), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
 	    // 'bookmark': new Types(
 	    //  new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
 	    //  new Permalink( [ '*' ], true ),
@@ -3443,29 +3457,29 @@
 	    // ブックマーク 削除
 	    'bookmark:delete': new _Types.Types(new _Type.Type(API_PATH + '/articles/bookmark', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	    // 記事詳細でのコメント一覧表示
-	    'comment': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _CommentType.CommentType('normal|official|self'), new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+	    'comment': new _Types.Types(new _Type.Type(API_PATH + '/comments/article'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _CommentType.CommentType('normal|official|self'), new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
 	    // 記事へのコメント
-	    'comment:send': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
+	    'comment:send': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
 	    // コメント返信
-	    'comment:reply': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'POST'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
+	    'comment:reply': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'POST'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries([new _Query.Query('body', 'number', '', true)]), true),
 	    // 記事へのコメント編集
-	    'comment:send:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'PUT'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
+	    'comment:send:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'PUT'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
 	    // コメント返信コメント編集
-	    'comment:reply:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'PUT'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
+	    'comment:reply:edit': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'PUT'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
 	    // 記事へのコメント 削除
-	    'comment:send:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'DELETE'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
+	    'comment:send:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'DELETE'), new _Permalink.Permalink(['*/*'], true), new _Queries.Queries(), true),
 	    // コメント返信コメント 削除
-	    'comment:reply:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/', 'DELETE'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
+	    'comment:reply:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/article', 'DELETE'), new _Permalink.Permalink(['*/*/*'], true), new _Queries.Queries(), true),
 	    // コメントGood 追加
-	    'comment:good:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/like/', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+	    'comment:good:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/like', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	    // コメントGood 削除
-	    'comment:good:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/like/', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+	    'comment:good:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/like', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	    // コメントBad 追加
-	    'comment:bad:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad/', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+	    'comment:bad:add': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad', 'POST'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	    // コメントBad 削除
-	    'comment:bad:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad/', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
+	    'comment:bad:delete': new _Types.Types(new _Type.Type(API_PATH + '/comments/bad', 'DELETE'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
 	    // お知らせ
-	    'users:notice': new _Types.Types(new _Type.Type(API_PATH + '/users/USER_ID/notifications/'), new _Permalink.Permalink(), new _Queries.Queries(), true),
+	    'users:notice': new _Types.Types(new _Type.Type(API_PATH + '/users/USER_ID/notifications'), new _Permalink.Permalink(), new _Queries.Queries(), true),
 	    // お知らせ 既読
 	    'users:notice:read': new _Types.Types(new _Type.Type(API_PATH + '/users/USER_ID/notifications/read', 'POST'), new _Permalink.Permalink(), new _Queries.Queries(), true),
 	    // ユーザー詳細
@@ -4113,11 +4127,13 @@
 	   * @param {Types} types Types instance, Ajax request に使用します
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
 	   */
 
 	  function Action(types) {
 	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    var ResultClass = arguments.length <= 3 || arguments[3] === undefined ? _Result.Result : arguments[3];
 	    (0, _classCallCheck3.default)(this, Action);
 
 	    this._types = types;
@@ -4126,6 +4142,7 @@
 	    this._ajax = new _Ajax.Ajax();
 	    this._url = types.url;
 	    this._method = types.method;
+	    this._resultClass = ResultClass;
 	  }
 	  // ---------------------------------------------------
 	  //  GETTER / SETTER
@@ -4148,7 +4165,7 @@
 	    value: function start() {
 	      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
-	      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this));
+	      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass);
 	    }
 	    /**
 	     * Ajax success callback
@@ -4886,11 +4903,11 @@
 	      if (this.type === '') {
 
 	        // type が empty, 新着順
-	        return this._url + '/' + this.slug + '??offset=' + this.offset + '&length=' + this.length;
+	        return this._url + '/' + this.slug + '?offset=' + this.offset + '&length=' + this.length;
 	      } else {
 
 	        // type が ranking | video
-	        return this._url + '/' + this.slug + '/' + this.type + '??offset=' + this.offset + '&length=' + this.length;
+	        return this._url + '/' + this.slug + '/' + this.type + '?offset=' + this.offset + '&length=' + this.length;
 	      }
 	    }
 
@@ -5436,7 +5453,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Detail = undefined;
+	exports.Single = undefined;
 
 	var _getPrototypeOf = __webpack_require__(69);
 
@@ -5468,8 +5485,8 @@
 	 * 記事詳細を取得します
 	 */
 
-	var Detail = exports.Detail = function (_Action) {
-	  (0, _inherits3.default)(Detail, _Action);
+	var Single = exports.Single = function (_Action) {
+	  (0, _inherits3.default)(Single, _Action);
 
 	  /**
 	   * 記事詳細を記事IDから取得します
@@ -5478,15 +5495,15 @@
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
 	   */
 
-	  function Detail(id) {
+	  function Single(id) {
 	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-	    (0, _classCallCheck3.default)(this, Detail);
+	    (0, _classCallCheck3.default)(this, Single);
 
 	    // parseInt すると先頭0が消えるのでまずい気がする
 	    // this._id = parseInt( id, 10 );
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Detail).call(this, _Api.Api.detail(), resolve, reject));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Single).call(this, _Api.Api.detail(), resolve, reject));
 
 	    _this._id = id;
 
@@ -5500,7 +5517,7 @@
 	   * @return {string} 作成した url を返します
 	   */
 
-	  (0, _createClass3.default)(Detail, [{
+	  (0, _createClass3.default)(Single, [{
 	    key: 'url',
 	    get: function get() {
 	      return this._url + '/' + this.id;
@@ -5517,7 +5534,7 @@
 	      return this._id;
 	    }
 	  }]);
-	  return Detail;
+	  return Single;
 	}(_Action2.Action);
 
 /***/ },
@@ -5601,6 +5618,37 @@
 	  (0, _inherits3.default)(ViewArchive, _View);
 
 	  /**
+	   * ページングを伴う基本クラス
+	   * @example
+	   * let headline;
+	   *
+	   * function didMount() {
+	   *    console.log( 'dom mount' );
+	   *  }
+	   * function errorMount( error ) {
+	   *    console.log( 'dom errorMount', error );
+	   *  }
+	   * function undefinedError( error ) {
+	   *    console.log( 'undefinedError', error );
+	   *  }
+	   * function emptyError( error ) {
+	   *    console.log( 'emptyError', error );
+	   *  }
+	   * function responseError( error ) {
+	   *    console.log( 'responseError', error );
+	   *
+	   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
+	   * }
+	   * let option = {
+	   *    didMount: didMount,
+	   *    errorMount: errorMount,
+	   *    undefinedError: undefinedError,
+	   *    emptyError: emptyError,
+	   *    responseError: responseError
+	   *  };
+	   *
+	   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), document.getElementById('moreId'), UT.action.home.News, option );
+	   * headline.start();
 	   *
 	   * @param {Element} element root element, Ajax result を配置する
 	   * @param {Element} moreElement more button root element, 'View More' を配置する
@@ -5616,7 +5664,24 @@
 
 	    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
 	    _this2._moreElement = moreElement;
+	    /**
+	     * 取得記事(articles)をArticleDae instance 配列として保存する
+	     * @type {Array<ArticleDae>}
+	     * @private
+	     */
 	    _this2._articles = [];
+	    /**
+	     * 出力左側
+	     * @type {Array<ArticleDae>}
+	     * @private
+	     */
+	    _this2._evens = [];
+	    /**
+	     * 出力右側
+	     * @type {Array<ArticleDae>}
+	     * @private
+	     */
+	    _this2._odds = [];
 
 	    return _this2;
 	  }
@@ -5668,9 +5733,6 @@
 	          // this.showError( error.message );
 	        } else {
 
-	            console.log('result.total ', result.total);
-	            // set total
-	            this.action.total = parseInt(result.total, 10);
 	            this.render(articles);
 	          }
 	    }
@@ -5710,14 +5772,24 @@
 	    key: 'render',
 	    value: function render(articles) {
 
-	      // ToDo: Optimize rendering, Dom rendering の効率化
+	      // ---
+	      // 左右に分割表示のためのglobal配列
+	      var evens = this._evens;
+	      var odds = this._odds;
+	      var articlesList = this._articles;
+	      // 前回までの配列length
+	      // sequence な index のために必要
+	      var prevLast = this._articles.length;
+	      // ---
 
-	      var concatArticles = this._articles.concat(articles);
+	      // 記事挿入 root element
 	      var element = this.element;
+	      // 'View More' button root element
 	      var moreElement = this.moreElement;
+	      // offset, length を使用する Action
 	      var action = this.action;
 	      var _this = this;
-	      console.log('********* concatArticles ', concatArticles.length);
+
 	      // --------------------------------------------
 	      // More button
 	      // --------------------------------------------
@@ -5893,8 +5965,7 @@
 	      // --------------------------------------------
 	      // Main Dom
 	      // --------------------------------------------
-	      // 個別の Dom
-	      // ToDo: comment など追加
+	      // 個別の 記事Dom
 	      var ArchiveDom = React.createClass({
 	        displayName: 'ArchiveDom',
 
@@ -5997,40 +6068,40 @@
 	        render: function render() {
 
 	          var list = this.props.list;
-	          var even = [];
-	          var odd = [];
 
 	          // even / odd setup
 	          // even(left) / odd(right) へ振り分けるための配列作成
 	          list.forEach(function (article, i) {
 
 	            var dae = new _ArticleDae.ArticleDae(article);
-	            dae.index = i;
+
+	            dae.index = prevLast + i;
+	            articlesList.push(dae);
 
 	            if (i % 2 === 0) {
 	              // even
-	              even.push(dae);
+	              evens.push(dae);
 	            } else {
 	              // odd
-	              odd.push(dae);
+	              odds.push(dae);
 	            }
 	          });
 
-	          // dom
+	          // dom, 左右に振り分けて出力する
 	          return React.createElement(
 	            'div',
 	            null,
 	            React.createElement(
 	              'div',
 	              { className: 'left' },
-	              even.map(function (dae) {
+	              evens.map(function (dae) {
 	                return makeDom(dae);
 	              })
 	            ),
 	            React.createElement(
 	              'div',
 	              { className: 'right' },
-	              odd.map(function (dae) {
+	              odds.map(function (dae) {
 	                return makeDom(dae);
 	              })
 	            )
@@ -6042,22 +6113,13 @@
 	          // hasNext を元に More View button の表示非表示を決める
 	          moreButton(action.hasNext());
 	        }
-	        /*
-	        componentDidUpdate: function() {
-	           // after update
-	          _this.executeSafely( 'didUpdate' );
-	          // hasNext を元に More View button の表示非表示を決める
-	          console.log( 'componentDidUpdate ', action.hasNext() );
-	          moreButton( action.hasNext() );
-	         }
-	        */
-	      });
+	      }); // ArticleDom
 
 	      // dom 生成
-	      ReactDOM.render(React.createElement(ArticleDom, { list: concatArticles }), element);
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
 
 	      // save
-	      this._articles = concatArticles.splice(0);
+	      // this._articles = concatArticles.splice( 0 );
 	    }
 	  }, {
 	    key: 'moreElement',
@@ -6144,7 +6206,6 @@
 	    /**
 	     * img thumbnail 代替画像パス<br>
 	     * [Ex.] 記事一覧<br>
-	     * ToDo: 不要な気がする, 確認する！
 	     * @readonly
 	     * @return {string} 代替画像パス【中】
 	     */
@@ -6779,7 +6840,15 @@
 	    value: function check(object, keyName) {
 	      var type = arguments.length <= 2 || arguments[2] === undefined ? 'string' : arguments[2];
 
-	      return object.hasOwnProperty(keyName) && (0, _typeof3.default)(object[keyName]) === type;
+	      type = type.toLowerCase();
+
+	      if (type === 'array') {
+
+	        return object.hasOwnProperty(keyName) && Array.isArray(object[keyName]);
+	      } else {
+
+	        return object.hasOwnProperty(keyName) && (0, _typeof3.default)(object[keyName]) === type;
+	      }
 	    }
 	  }]);
 	  return Safety;
@@ -7753,6 +7822,795 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 21:05
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingle = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Empty = __webpack_require__(101);
+
+	var _View2 = __webpack_require__(102);
+
+	var _ViewError = __webpack_require__(103);
+
+	var _Single = __webpack_require__(99);
+
+	var _Result = __webpack_require__(57);
+
+	var _SingleDae = __webpack_require__(115);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+
+	// data
+	var React = self.React;
+
+	// dae
+
+	// action
+
+	// view
+
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * 記事詳細
+	 */
+
+	var ViewSingle = function (_View) {
+	  (0, _inherits3.default)(ViewSingle, _View);
+
+	  /**
+	   * 記事詳細
+	   *
+	   * @example
+	   * let elements = {}
+	   *  related: document.getElementById('related'),
+	   *  comment: {
+	   *    'self': document.getElementById('self'),
+	   *    'official': document.getElementById('official'),
+	   *    'user': document.getElementById('user')
+	   *  }
+	   * }
+	   *
+	   * @param {Number} id article id, 記事Id
+	   * @param {Element} element root element
+	   * @param {Object} elements root element 関連記事, 各コメント
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ViewSingle(id, element, elements) {
+	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	    (0, _classCallCheck3.default)(this, ViewSingle);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
+
+	    _this2._action = new _Single.Single(id, _this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    _this2._elements = elements;
+	    return _this2;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewSingle, [{
+	    key: 'start',
+	    value: function start() {
+
+	      this.action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var responce = result.response;
+
+	      if (typeof responce === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[SINGLE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely('undefinedError', error);
+	        // this.showError( error.message );
+	      } else {
+
+	          this.render(result.response);
+	        }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely('responseError', error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+	    /**
+	     * ViewError でエラーコンテナを作成します
+	     * @param {string} message エラーメッセージ
+	     */
+
+	  }, {
+	    key: 'showError',
+	    value: function showError() {
+	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      // ToDo: Error 時の表示が決まったら変更する
+	      var error = new _ViewError.ViewError(this.element, this.option, message);
+	      error.render();
+	    }
+	    /**
+	     * dom を render します
+	     * @param {Object} responce JSON responce
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(responce) {
+
+	      var single = new _SingleDae.SingleDae(responce);
+	      console.log('single ', single);
+	      var element = this.element;
+	      var _this = this;
+
+	      // React Class
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          article: React.PropTypes.object.isRequired
+	        },
+	        // isRequired なので getDefaultProps がいらない
+	        // getDefaultProps: function() {
+	        //  return {
+	        //    list: []
+	        //  };
+	        // },
+	        render: function render() {
+
+	          var article = this.props.article;
+
+	          var bodyTag = function bodyTag() {
+	            return {
+	              __html: article.body
+	            };
+	          };
+
+	          return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	              'div',
+	              null,
+	              article.title
+	            ),
+	            React.createElement(
+	              'div',
+	              null,
+	              article.user.userName
+	            ),
+	            React.createElement(
+	              'div',
+	              null,
+	              article.formatDate
+	            ),
+	            React.createElement(
+	              'div',
+	              null,
+	              'ToDo: image / video'
+	            ),
+	            React.createElement('div', { className: 'XXX-OUCH', dangerouslySetInnerHTML: bodyTag() }),
+	            React.createElement(
+	              'div',
+	              null,
+	              article.keywords.concat(' ')
+	            )
+	          );
+	        },
+	        componentWillMount: function componentWillMount() {
+
+	          // after mount
+	          _this.executeSafely('willMount');
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely('didMount');
+	        }
+	      });
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { article: new _SingleDae.SingleDae(responce) }), element);
+
+	      // 関連記事 もしもあるなら
+	      if (single.hasRelated) {
+	        this.related(single.related);
+	      }
+
+	      // コメント取得
+	    } // render
+
+	    /**
+	     * 関連記事
+	     * @param {Array} related 配列内データ型はRelatedDom
+	     */
+
+	  }, {
+	    key: 'related',
+	    value: function related() {
+	      var _related = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+	      var element = this._elements.related;
+
+	      // tag block
+	      var RelatedDom = React.createClass({
+	        displayName: 'RelatedDom',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired,
+	          category: React.PropTypes.string.isRequired,
+	          url: React.PropTypes.string.isRequired,
+	          date: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired,
+	          thumbnail: React.PropTypes.string.isRequired
+	        },
+	        render: function render() {
+	          var p = this.props;
+
+	          return React.createElement(
+	            'a',
+	            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
+	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            React.createElement(
+	              'p',
+	              { className: 'cat cat-' + p.slug },
+	              p.category
+	            ),
+	            React.createElement(
+	              'h3',
+	              { className: 'headline-title' },
+	              p.title
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'date' },
+	              p.date
+	            )
+	          );
+	        }
+	      });
+
+	      // React Class
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        render: function render() {
+
+	          var list = this.props.list;
+
+	          return React.createElement(
+	            'div',
+	            null,
+	            list.map(function (dae, i) {
+
+	              var thumbnail = dae.media.images.thumbnail;
+	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+
+	              // HeadlineDom instance を使い render
+	              return React.createElement(RelatedDom, {
+	                key: 'headline-' + dae.id,
+	                index: i,
+	                id: String(dae.id),
+	                slug: dae.category.slug,
+	                category: dae.category.label,
+	                url: dae.url,
+	                date: dae.formatDate,
+	                title: dae.title,
+	                thumbnail: thumbnail
+	              });
+	            })
+	          );
+	        }
+	      });
+
+	      // 関連記事 dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: _related }), element);
+	    }
+	  }]);
+	  return ViewSingle;
+	}(_View2.View);
+
+	exports.ViewSingle = ViewSingle;
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 21:10
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SingleDae = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Safety = __webpack_require__(105);
+
+	var _Format = __webpack_require__(44);
+
+	var _CategoryDae = __webpack_require__(106);
+
+	var _MediaDae = __webpack_require__(107);
+
+	var _UserDae = __webpack_require__(110);
+
+	var _KeywordsDae = __webpack_require__(116);
+
+	var _RelatedDae2 = __webpack_require__(117);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * JSON.response
+	 */
+
+	var SingleDae = exports.SingleDae = function (_RelatedDae) {
+	  (0, _inherits3.default)(SingleDae, _RelatedDae);
+
+	  function SingleDae() {
+	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, SingleDae);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(SingleDae).call(this, response));
+
+	    _this._keywords = new _KeywordsDae.KeywordsDae(response.keywords);
+
+	    // related
+	    var related = [];
+	    if (_Safety.Safety.check(response, 'related_articles', 'array')) {
+
+	      response.related_articles.forEach(function (article) {
+
+	        related.push(new _RelatedDae2.RelatedDae(article));
+	      });
+
+	      console.log('related_articles ', related);
+	    }
+
+	    _this._related = related;
+
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {string} 記事本文
+	   */
+
+	  (0, _createClass3.default)(SingleDae, [{
+	    key: 'body',
+	    get: function get() {
+	      return this.response.body;
+	    }
+	    /**
+	     *
+	     * @return {boolean} 関連記事が存在するかの真偽値
+	     */
+
+	  }, {
+	    key: 'hasRelated',
+	    get: function get() {
+	      return this._related.length > 0;
+	    }
+	    /**
+	     *
+	     * @return {Array|*} 関連記事配列を返します
+	     */
+
+	  }, {
+	    key: 'related',
+	    get: function get() {
+	      return this._related;
+	    }
+	    /**
+	     *
+	     * @return {KeywordsDae|*} キーワードを返します
+	     */
+
+	  }, {
+	    key: 'keywords',
+	    get: function get() {
+	      return this._keywords;
+	    }
+	  }]);
+	  return SingleDae;
+	}(_RelatedDae2.RelatedDae);
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 21:43
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	/**
+	 * response.keywords
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.KeywordsDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var KeywordsDae = function () {
+	  /**
+	   * 記事キーワード
+	   * @param {Array} [keywords=[]]
+	   */
+
+	  function KeywordsDae() {
+	    var keywords = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    (0, _classCallCheck3.default)(this, KeywordsDae);
+
+	    this._keywords = keywords;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Array.<string>|*} response.keywords を返します
+	   */
+
+	  (0, _createClass3.default)(KeywordsDae, [{
+	    key: 'concat',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * 連結子でキーワードをつなぎます
+	     * @param {string} concat 連結子
+	     * @return {string} 連結子でつないだキーワードを返します
+	     */
+	    value: function concat() {
+	      var _concat = arguments.length <= 0 || arguments[0] === undefined ? ', ' : arguments[0];
+
+	      return this.keywords.join(_concat);
+	    }
+	  }, {
+	    key: 'keywords',
+	    get: function get() {
+	      return this._keywords;
+	    }
+	    /**
+	     *
+	     * @return {boolean} keyword が存在するかの真偽値を返します
+	     */
+
+	  }, {
+	    key: 'hasKeyword',
+	    get: function get() {
+	      return this.keywords.length > 0;
+	    }
+	  }]);
+	  return KeywordsDae;
+	}();
+
+	exports.KeywordsDae = KeywordsDae;
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 21:35
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// 記事詳細 関連記事結果
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.RelatedDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(105);
+
+	var _Format = __webpack_require__(44);
+
+	var _CategoryDae = __webpack_require__(106);
+
+	var _MediaDae = __webpack_require__(107);
+
+	var _UserDae = __webpack_require__(110);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var RelatedDae = exports.RelatedDae = function () {
+	  function RelatedDae() {
+	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, RelatedDae);
+
+	    this._response = response;
+	    // response.category
+	    this._category = new _CategoryDae.CategoryDae(response.category);
+	    // response.media
+	    this._media = new _MediaDae.MediaDae(response.media);
+	    // response.user
+	    this._user = new _UserDae.UserDae(response.user);
+
+	    // date check
+	    if (_Safety.Safety.check(response, 'date')) {
+
+	      response.formatDate = _Format.Format.date(response.date);
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Object|*} JSON.response を返します
+	   */
+
+	  (0, _createClass3.default)(RelatedDae, [{
+	    key: 'response',
+	    get: function get() {
+	      return this._response;
+	    }
+
+	    /**
+	     *
+	     * @return {Number} 記事 ID を返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.response.id;
+	    }
+
+	    /**
+	     *
+	     * @return {string} ISO8601 日付
+	     */
+
+	  }, {
+	    key: 'date',
+	    get: function get() {
+	      return this.response.date;
+	    }
+	    /**
+	     * @return {string} response.date を日本語日付に変換し返します
+	     */
+
+	  }, {
+	    key: 'formatDate',
+	    get: function get() {
+	      return this.response.formatDate;
+	    }
+	    /**
+	     *
+	     * @return {string} article.display_date
+	     */
+
+	  }, {
+	    key: 'displayDate',
+	    get: function get() {
+	      return this.response.display_date;
+	    }
+
+	    /**
+	     *
+	     * @return {string} 記事タイトル
+	     */
+
+	  }, {
+	    key: 'title',
+	    get: function get() {
+	      return this.response.title;
+	    }
+
+	    /**
+	     *
+	     * @return {string} 記事概要
+	     */
+
+	  }, {
+	    key: 'description',
+	    get: function get() {
+	      return this.response.description;
+	    }
+
+	    /**
+	     *
+	     * @return {CategoryDae|*} カテゴリー
+	     */
+
+	  }, {
+	    key: 'category',
+	    get: function get() {
+	      return this._category;
+	    }
+
+	    /**
+	     *
+	     * @return {string} 記事URL
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.response.url;
+	    }
+	    /**
+	     *
+	     * @return {boolean} response.is_bookmarked
+	     */
+
+	  }, {
+	    key: 'isBookmarked',
+	    get: function get() {
+	      return this.response.is_bookmarked;
+	    }
+	    /**
+	     *
+	     * @return {string} response.media_type
+	     */
+
+	  }, {
+	    key: 'mediaType',
+	    get: function get() {
+	      return this.response.media_type;
+	    }
+	    /**
+	     *
+	     * @return {MediaDae} article.media
+	     */
+
+	  }, {
+	    key: 'media',
+	    get: function get() {
+	      return this._media;
+	    }
+	    /**
+	     *
+	     * @return {UserDae} article.user
+	     */
+
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	  }]);
+	  return RelatedDae;
+	}();
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/22 - 13:54
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -8052,7 +8910,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 115 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8204,7 +9062,6 @@
 	          // this.showError( error.message );
 	        } else {
 
-	            this._last = articles.length - 1;
 	            this.render(articles);
 	          }
 	    }
@@ -8557,6 +9414,589 @@
 	  }]);
 	  return ViewPickup;
 	}(_View2.View); // class
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 19:12
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewRanking = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Empty = __webpack_require__(101);
+
+	var _View2 = __webpack_require__(102);
+
+	var _ViewError = __webpack_require__(103);
+
+	var _Widget = __webpack_require__(96);
+
+	var _Result = __webpack_require__(57);
+
+	var _ArticleDae = __webpack_require__(104);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+
+	// data
+	var React = self.React;
+	// dae
+
+	// action
+
+	// view
+
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * sidebar ranking
+	 */
+
+	var ViewRanking = exports.ViewRanking = function (_View) {
+	  (0, _inherits3.default)(ViewRanking, _View);
+
+	  /**
+	   * sidebar ranking 5件 を表示します
+	   * @param {Element} element root element
+	   * @param {Object} [option={}] optional event handler
+	   * @param {string} [slug=all] category slug です
+	   */
+
+	  function ViewRanking(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var slug = arguments.length <= 2 || arguments[2] === undefined ? 'all' : arguments[2];
+	    (0, _classCallCheck3.default)(this, ViewRanking);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewRanking).call(this, element, option));
+
+	    _this2._action = _Widget.Widget.ranking(slug, _this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    _this2._slug = slug;
+
+	    return _this2;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {string|*} 捜査 slug を返します
+	   */
+
+	  (0, _createClass3.default)(ViewRanking, [{
+	    key: 'start',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * Ajax request を開始します
+	     */
+	    value: function start() {
+
+	      this.action.next();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var articles = result.articles;
+
+	      if (typeof articles === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[RANKING:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely('undefinedError', error);
+	        // this.showError( error.message );
+	      } else if (articles.length === 0) {
+
+	          // articles empty
+	          // request, JSON 取得に問題は無かったが data が取得できなかった
+	          var error = new Error('[RANKING:EMPTY]サーバーレスポンスに問題が発生しました。');
+	          this.executeSafely('emptyError', error);
+	          // this.showError( error.message );
+	        } else {
+
+	            this.render(articles);
+	          }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely('responseError', error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+	    /**
+	     * ViewError でエラーコンテナを作成します
+	     * @param {string} message エラーメッセージ
+	     */
+
+	  }, {
+	    key: 'showError',
+	    value: function showError() {
+	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      // ToDo: Error 時の表示が決まったら変更する
+	      var error = new _ViewError.ViewError(this.element, this.option, message);
+	      error.render();
+	    }
+	    /**
+	     * dom を render します
+	     * @param {Array} articles JSON responce.articles
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(articles) {
+
+	      var element = this.element;
+	      var slug = this.slug;
+	      var _this = this;
+
+	      // tag block
+	      var RankingDom = React.createClass({
+	        displayName: 'RankingDom',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired,
+	          category: React.PropTypes.string.isRequired,
+	          url: React.PropTypes.string.isRequired,
+	          date: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired,
+	          thumbnail: React.PropTypes.string.isRequired,
+	          total: React.PropTypes.number.isRequired
+	        },
+	        render: function render() {
+	          var p = this.props;
+
+	          return React.createElement(
+	            'a',
+	            { href: p.url, id: 'headline-' + p.id, className: 'ranking ranking-' + p.index + ' ranking-' + slug },
+	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            React.createElement(
+	              'p',
+	              { className: 'cat cat-' + p.slug },
+	              p.category
+	            ),
+	            React.createElement(
+	              'h3',
+	              { className: 'headline-title' },
+	              p.title
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'date' },
+	              p.date
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'total' },
+	              p.total
+	            )
+	          );
+	        }
+	      });
+
+	      // React Class
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        // isRequired なので getDefaultProps がいらない
+	        // getDefaultProps: function() {
+	        //  return {
+	        //    list: []
+	        //  };
+	        // },
+	        render: function render() {
+
+	          var list = this.props.list;
+
+	          return React.createElement(
+	            'div',
+	            null,
+	            list.map(function (article, i) {
+
+	              var dae = new _ArticleDae.ArticleDae(article);
+	              var thumbnail = dae.media.images.thumbnail;
+	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+
+	              // HeadlineDom instance を使い render
+	              return React.createElement(RankingDom, {
+	                key: 'ranking-' + dae.id,
+	                index: i,
+	                id: String(dae.id),
+	                slug: dae.category.slug,
+	                category: dae.category.label,
+	                url: dae.url,
+	                date: dae.formatDate,
+	                title: dae.title,
+	                thumbnail: thumbnail,
+	                total: dae.commentsCount
+	              });
+	            })
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely('didMount');
+	        }
+	      });
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+	    } // render
+
+	  }, {
+	    key: 'slug',
+	    get: function get() {
+	      return this._slug;
+	    }
+	  }]);
+	  return ViewRanking;
+	}(_View2.View);
+
+/***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 20:37
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewVideos = undefined;
+
+	var _getPrototypeOf = __webpack_require__(69);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(74);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(76);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Empty = __webpack_require__(101);
+
+	var _View2 = __webpack_require__(102);
+
+	var _ViewError = __webpack_require__(103);
+
+	var _Widget = __webpack_require__(96);
+
+	var _Result = __webpack_require__(57);
+
+	var _ArticleDae = __webpack_require__(104);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+
+	// data
+	var React = self.React;
+	// dae
+
+	// action
+
+	// view
+
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * sidebar video
+	 */
+
+	var ViewVideos = exports.ViewVideos = function (_View) {
+	  (0, _inherits3.default)(ViewVideos, _View);
+
+	  /**
+	   * sidebar video 5件 を表示します
+	   * @param {Element} element root element
+	   * @param {Object} [option={}] optional event handler
+	   * @param {string} [slug=all] category slug です
+	   */
+
+	  function ViewVideos(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var slug = arguments.length <= 2 || arguments[2] === undefined ? 'all' : arguments[2];
+	    (0, _classCallCheck3.default)(this, ViewVideos);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewVideos).call(this, element, option));
+
+	    _this2._action = _Widget.Widget.video(slug, _this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    _this2._slug = slug;
+
+	    return _this2;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {string|*} 捜査 slug を返します
+	   */
+
+	  (0, _createClass3.default)(ViewVideos, [{
+	    key: 'start',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * Ajax request を開始します
+	     */
+	    value: function start() {
+
+	      this.action.next();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var articles = result.articles;
+
+	      if (typeof articles === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[VIDEOS:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely('undefinedError', error);
+	        // this.showError( error.message );
+	      } else if (articles.length === 0) {
+
+	          // articles empty
+	          // request, JSON 取得に問題は無かったが data が取得できなかった
+	          var error = new Error('[VIDEOS:EMPTY]サーバーレスポンスに問題が発生しました。');
+	          this.executeSafely('emptyError', error);
+	          // this.showError( error.message );
+	        } else {
+
+	            this.render(articles);
+	          }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely('responseError', error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+	    /**
+	     * ViewError でエラーコンテナを作成します
+	     * @param {string} message エラーメッセージ
+	     */
+
+	  }, {
+	    key: 'showError',
+	    value: function showError() {
+	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      // ToDo: Error 時の表示が決まったら変更する
+	      var error = new _ViewError.ViewError(this.element, this.option, message);
+	      error.render();
+	    }
+	    /**
+	     * dom を render します
+	     * @param {Array} articles JSON responce.articles
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(articles) {
+
+	      var element = this.element;
+	      var slug = this.slug;
+	      var _this = this;
+
+	      // tag block
+	      var VideosDom = React.createClass({
+	        displayName: 'VideosDom',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired,
+	          category: React.PropTypes.string.isRequired,
+	          url: React.PropTypes.string.isRequired,
+	          date: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired,
+	          thumbnail: React.PropTypes.string.isRequired
+	        },
+	        render: function render() {
+	          var p = this.props;
+
+	          return React.createElement(
+	            'a',
+	            { href: p.url, id: 'headline-' + p.id, className: 'videos videos-' + p.index + ' videos-' + slug },
+	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            React.createElement(
+	              'p',
+	              { className: 'cat cat-' + p.slug },
+	              p.category
+	            ),
+	            React.createElement(
+	              'h3',
+	              { className: 'headline-title' },
+	              p.title
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'date' },
+	              p.date
+	            )
+	          );
+	        }
+	      });
+
+	      // React Class
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        // isRequired なので getDefaultProps がいらない
+	        // getDefaultProps: function() {
+	        //  return {
+	        //    list: []
+	        //  };
+	        // },
+	        render: function render() {
+
+	          var list = this.props.list;
+
+	          return React.createElement(
+	            'div',
+	            null,
+	            list.map(function (article, i) {
+
+	              var dae = new _ArticleDae.ArticleDae(article);
+	              var thumbnail = dae.media.images.thumbnail;
+	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+
+	              // HeadlineDom instance を使い render
+	              return React.createElement(VideosDom, {
+	                key: 'ranking-' + dae.id,
+	                index: i,
+	                id: String(dae.id),
+	                slug: dae.category.slug,
+	                category: dae.category.label,
+	                url: dae.url,
+	                date: dae.formatDate,
+	                title: dae.title,
+	                thumbnail: thumbnail
+	              });
+	            })
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely('didMount');
+	        }
+	      });
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+	    } // render
+
+	  }, {
+	    key: 'slug',
+	    get: function get() {
+	      return this._slug;
+	    }
+	  }]);
+	  return ViewVideos;
+	}(_View2.View);
 
 /***/ }
 /******/ ]);

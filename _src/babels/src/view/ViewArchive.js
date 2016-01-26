@@ -36,6 +36,37 @@ let ReactDOM = self.ReactDOM;
  */
 export class ViewArchive extends View {
   /**
+   * ページングを伴う基本クラス
+   * @example
+   * let headline;
+   *
+   * function didMount() {
+   *    console.log( 'dom mount' );
+   *  }
+   * function errorMount( error ) {
+   *    console.log( 'dom errorMount', error );
+   *  }
+   * function undefinedError( error ) {
+   *    console.log( 'undefinedError', error );
+   *  }
+   * function emptyError( error ) {
+   *    console.log( 'emptyError', error );
+   *  }
+   * function responseError( error ) {
+   *    console.log( 'responseError', error );
+   *
+   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
+   * }
+   * let option = {
+   *    didMount: didMount,
+   *    errorMount: errorMount,
+   *    undefinedError: undefinedError,
+   *    emptyError: emptyError,
+   *    responseError: responseError
+   *  };
+   *
+   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), document.getElementById('moreId'), UT.action.home.News, option );
+   * headline.start();
    *
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
@@ -47,7 +78,24 @@ export class ViewArchive extends View {
     super( element, option );
     this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     this._moreElement = moreElement;
+    /**
+     * 取得記事(articles)をArticleDae instance 配列として保存する
+     * @type {Array<ArticleDae>}
+     * @private
+     */
     this._articles = [];
+    /**
+     * 出力左側
+     * @type {Array<ArticleDae>}
+     * @private
+     */
+    this._evens = [];
+    /**
+     * 出力右側
+     * @type {Array<ArticleDae>}
+     * @private
+     */
+    this._odds = [];
 
   }
   // ---------------------------------------------------
@@ -97,9 +145,6 @@ export class ViewArchive extends View {
 
     } else {
 
-      console.log( 'result.total ', result.total );
-      // set total
-      this.action.total = parseInt( result.total, 10 );
       this.render( articles );
 
     }
@@ -133,14 +178,24 @@ export class ViewArchive extends View {
    */
   render( articles:Array ):void {
 
-    // ToDo: Optimize rendering, Dom rendering の効率化
+    // ---
+    // 左右に分割表示のためのglobal配列
+    let evens = this._evens;
+    let odds = this._odds;
+    let articlesList = this._articles;
+    // 前回までの配列length
+    // sequence な index のために必要
+    let prevLast = this._articles.length;
+    // ---
 
-    let concatArticles = this._articles.concat( articles );
+    // 記事挿入 root element
     let element = this.element;
+    // 'View More' button root element
     let moreElement = this.moreElement;
+    // offset, length を使用する Action
     let action = this.action;
     let _this = this;
-    console.log( '********* concatArticles ', concatArticles.length );
+
     // --------------------------------------------
     // More button
     // --------------------------------------------
@@ -286,8 +341,7 @@ export class ViewArchive extends View {
     // --------------------------------------------
     // Main Dom
     // --------------------------------------------
-    // 個別の Dom
-    // ToDo: comment など追加
+    // 個別の 記事Dom
     let ArchiveDom = React.createClass( {
       propTypes: {
         index: React.PropTypes.number.isRequired,
@@ -363,39 +417,39 @@ export class ViewArchive extends View {
       render: function() {
 
         let list = this.props.list;
-        let even = [];
-        let odd = [];
 
         // even / odd setup
         // even(left) / odd(right) へ振り分けるための配列作成
         list.forEach( function( article, i ) {
 
           let dae = new ArticleDae( article );
-          dae.index = i;
+
+          dae.index = prevLast + i;
+          articlesList.push( dae );
 
           if ( i % 2 === 0 ) {
             // even
-            even.push( dae );
+            evens.push( dae );
           } else {
             // odd
-            odd.push( dae );
+            odds.push( dae );
           }
 
         } );
 
-        // dom
+        // dom, 左右に振り分けて出力する
         return (
           <div>
             <div className="left">
               {
-                even.map( function( dae ) {
+                evens.map( function( dae ) {
                   return makeDom( dae );
                 } )
               }
             </div>
             <div className="right">
               {
-                odd.map( function( dae ) {
+                odds.map( function( dae ) {
                   return makeDom( dae );
                 } )
               }
@@ -410,27 +464,16 @@ export class ViewArchive extends View {
         // hasNext を元に More View button の表示非表示を決める
         moreButton( action.hasNext() );
       }
-      /*
-      componentDidUpdate: function() {
-
-        // after update
-        _this.executeSafely( 'didUpdate' );
-        // hasNext を元に More View button の表示非表示を決める
-        console.log( 'componentDidUpdate ', action.hasNext() );
-        moreButton( action.hasNext() );
-
-      }
-      */
-    } );
+    } );// ArticleDom
 
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: concatArticles } ),
+      React.createElement( ArticleDom, { list: articles } ),
       element
     );
 
     // save
-    this._articles = concatArticles.splice( 0 );
+    // this._articles = concatArticles.splice( 0 );
 
   }
 }// class

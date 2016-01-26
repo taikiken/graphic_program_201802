@@ -69,7 +69,15 @@ var Safety = exports.Safety = function () {
     value: function check(object, keyName) {
       var type = arguments.length <= 2 || arguments[2] === undefined ? 'string' : arguments[2];
 
-      return object.hasOwnProperty(keyName) && (0, _typeof3.default)(object[keyName]) === type;
+      type = type.toLowerCase();
+
+      if (type === 'array') {
+
+        return object.hasOwnProperty(keyName) && Array.isArray(object[keyName]);
+      } else {
+
+        return object.hasOwnProperty(keyName) && (0, _typeof3.default)(object[keyName]) === type;
+      }
     }
   }]);
   return Safety;

@@ -49,8 +49,9 @@ export class Ajax {
    * @param {Function} resolve success callback
    * @param {Function} reject fail callback
    * @param {FormData} [formData=null] FormData Object
+   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  start( url, method, resolve, reject, formData:FormData = null ):void {
+  start( url, method, resolve, reject, formData:FormData = null, ResultClass = Result ):void {
 
     let fetch = self.fetch;
     let _this = this;
@@ -123,7 +124,7 @@ export class Ajax {
     .then( function( json:Object ) {
 
       // parsed JSON
-      let result = new Result( json );
+      let result = new ResultClass( json );
 
       if ( !Codes.status( result.status.code ) ) {
 

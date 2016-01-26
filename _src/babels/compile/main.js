@@ -56,18 +56,23 @@ var _Bookmark = require('./action/bookmark/Bookmark');
 
 var _Search = require('./action/search/Search');
 
-var _Detail = require('./action/single/Detail');
+var _Single = require('./action/single/Single');
 
 var _ViewArchive = require('./view/ViewArchive');
+
+var _ViewSingle = require('./view/ViewSingle');
 
 var _ViewHeadline = require('./view/home/ViewHeadline');
 
 var _ViewPickup = require('./view/home/ViewPickup');
 
+var _ViewRanking = require('./view/sidebar/ViewRanking');
+
+var _ViewVideos = require('./view/sidebar/ViewVideos');
+
 /**
  * ToDo: 確認事項
  * ToDo: 対象外OS alert
- * ToDo: index ニュース一覧 画像なしの代替画像
  * ToDo: title, meta, ogp
  */
 
@@ -78,40 +83,24 @@ var _ViewPickup = require('./view/home/ViewPickup');
  *    var ut = self.UT
  */
 
-// action/single
-
-// action/bookmark
-
-// action/archive
+// sidebar
 
 // -------------------------------------
-// app/App
+// view
+
+// action/search
+
+// action/sidebar
+
+// action/home
 
 // -------------------------------------
-// data
+// action
+
+// net/types
 
 // -------------------------------------
-// app
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-26 16:42:36
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- * @requires React, Sagen. IE: fetch, es5-promise
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
-
-// -------------------------------------
-// util
+// net
 var UT = {
   version: '1.0.0',
   app: {
@@ -164,11 +153,16 @@ var UT = {
       Search: _Search.Search
     },
     single: {
-      Detail: _Detail.Detail
+      Single: _Single.Single
     }
   },
   view: {
     ViewArchive: _ViewArchive.ViewArchive,
+    ViewSingle: _ViewSingle.ViewSingle,
+    sidebar: {
+      ViewRanking: _ViewRanking.ViewRanking,
+      ViewVideos: _ViewVideos.ViewVideos
+    },
     home: {
       ViewHeadline: _ViewHeadline.ViewHeadline,
       ViewPickup: _ViewPickup.ViewPickup
@@ -176,21 +170,39 @@ var UT = {
   }
 };
 
-// -------------------------------------
-// view
+// action/single
 
-// action/search
+// action/bookmark
 
-// action/sidebar
-
-// action/home
+// action/archive
 
 // -------------------------------------
-// action
-
-// net/types
+// app/App
 
 // -------------------------------------
-// net
+// data
+
+// -------------------------------------
+// app
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-01-26 23:39:23
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
+
+// -------------------------------------
+// util
 
 self.UT = UT;

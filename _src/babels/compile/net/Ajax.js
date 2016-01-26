@@ -67,9 +67,11 @@ var Ajax = exports.Ajax = function () {
      * @param {Function} resolve success callback
      * @param {Function} reject fail callback
      * @param {FormData} [formData=null] FormData Object
+     * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
      */
     value: function start(url, method, resolve, reject) {
       var formData = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
+      var ResultClass = arguments.length <= 5 || arguments[5] === undefined ? _Result.Result : arguments[5];
 
       var fetch = self.fetch;
       var _this = this;
@@ -132,7 +134,7 @@ var Ajax = exports.Ajax = function () {
       }).then(function (json) {
 
         // parsed JSON
-        var result = new _Result.Result(json);
+        var result = new ResultClass(json);
 
         if (!_Codes.Codes.status(result.status.code)) {
 

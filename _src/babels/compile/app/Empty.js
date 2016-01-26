@@ -70,7 +70,6 @@ var Empty = exports.Empty = function () {
     /**
      * img thumbnail 代替画像パス<br>
      * [Ex.] 記事一覧<br>
-     * ToDo: 不要な気がする, 確認する！
      * @readonly
      * @return {string} 代替画像パス【中】
      */

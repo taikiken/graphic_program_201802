@@ -48,11 +48,13 @@ var Action = exports.Action = function () {
    * @param {Types} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
 
   function Action(types) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+    var ResultClass = arguments.length <= 3 || arguments[3] === undefined ? _Result.Result : arguments[3];
     (0, _classCallCheck3.default)(this, Action);
 
     this._types = types;
@@ -61,6 +63,7 @@ var Action = exports.Action = function () {
     this._ajax = new _Ajax.Ajax();
     this._url = types.url;
     this._method = types.method;
+    this._resultClass = ResultClass;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -83,7 +86,7 @@ var Action = exports.Action = function () {
     value: function start() {
       var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
-      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this));
+      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass);
     }
     /**
      * Ajax success callback

@@ -147,7 +147,6 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           // this.showError( error.message );
         } else {
 
-            this._last = articles.length - 1;
             this.render(articles);
           }
     }
