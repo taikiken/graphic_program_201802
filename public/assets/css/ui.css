@@ -2770,10 +2770,205 @@ table tr.w200 > td {
         .hero-slider-control .pager a.active, .hero-slider-control .pager a:hover {
           background-color: #e1438b; }
 
+.headline-heading {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd; }
+  .headline-heading-title, .headline-heading-ruby {
+    display: inline-block;
+    line-height: 1; }
+  .headline-heading-title img {
+    vertical-align: middle; }
+  .headline-heading-ruby {
+    margin-left: 8px;
+    color: #e1438b;
+    font-weight: bold;
+    font-size: 86%; }
+
+.headline-list {
+  border-bottom: 1px solid #ddd; }
+  .headline-list:before, .headline-list:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.headline-item {
+  float: left;
+  width: 340px;
+  border-top: 1px solid #ddd; }
+  .headline-item:nth-child(2n) {
+    float: right; }
+  .headline-item:nth-child(1), .headline-item:nth-child(2) {
+    border-top: none; }
+  .headline-item .post {
+    display: block;
+    padding: 15px 0; }
+    .headline-item .post:link, .headline-item .post:visited, .headline-item .post:hover, .headline-item .post:active {
+      color: #333;
+      text-decoration: none; }
+    .headline-item .post:hover {
+      color: #333;
+      text-decoration: none; }
+    .headline-item .post:before, .headline-item .post:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .headline-item .post-thumb {
+      float: left;
+      width: 70px;
+      height: 70px;
+      background: url(../images/common/thumb-noimage-70x70.png) 0 0 no-repeat; }
+    .headline-item .post-data {
+      float: right;
+      width: 260px; }
+    .headline-item .post-category {
+      color: #e1438b;
+      font-weight: bold;
+      font-size: 86%; }
+    .headline-item .post-heading {
+      min-height: 2.6em;
+      line-height: 1.2857142857;
+      font-weight: bold; }
+    .headline-item .post-date {
+      margin-top: .25em;
+      color: #666;
+      font-size: 72%; }
+
+.sprite-common, .feature-user .user-response i {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .search-block input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.newsboad:before, .newsboad:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.newsboad-column {
+  width: 340px; }
+  .newsboad-column.column1 {
+    float: left; }
+  .newsboad-column.column2 {
+    float: right; }
+
+.newsboad-item {
+  margin-top: 30px; }
+  .newsboad-item .post {
+    display: block; }
+    .newsboad-item .post:link, .newsboad-item .post:visited, .newsboad-item .post:hover, .newsboad-item .post:active {
+      color: #333;
+      text-decoration: none; }
+    .newsboad-item .post:hover {
+      color: #333;
+      text-decoration: none; }
+    .newsboad-item .post-thumb {
+      position: relative; }
+      .newsboad-item .post-thumb-overlay-movie {
+        display: none;
+        position: absolute; }
+        .newsboad-item .post-thumb-overlay-movie.type-movie {
+          display: block; }
+    .newsboad-item .post-data {
+      margin-top: .75em; }
+    .newsboad-item .post-category {
+      color: #e1438b;
+      font-weight: bold;
+      font-size: 86%; }
+    .newsboad-item .post-heading {
+      font-weight: bold;
+      font-size: 143%; }
+    .newsboad-item .post-date {
+      margin-top: .25em;
+      color: #666;
+      font-size: 72%; }
+    .newsboad-item .post-excerpt-text {
+      margin-top: 0.25em; }
+
+.feature-user {
+  margin-top: 10px;
+  background-color: #f5f5f5; }
+  .feature-user .user-prof-thumb, .feature-user .user-prof-data {
+    display: table-cell;
+    vertical-align: middle; }
+  .feature-user .user-prof-link {
+    display: block; }
+    .feature-user .user-prof-link:link, .feature-user .user-prof-link:visited, .feature-user .user-prof-link:hover, .feature-user .user-prof-link:active {
+      color: #333;
+      text-decoration: none; }
+    .feature-user .user-prof-link:hover {
+      color: #333;
+      text-decoration: none; }
+  .feature-user .user-prof-thumb {
+    width: 50px;
+    height: 50px;
+    background: url(../images/common/thumb-user-feature.png) 0 0 no-repeat; }
+  .feature-user .user-prof-name, .feature-user .user-prof-job {
+    margin-left: 10px; }
+  .feature-user .user-prof-name {
+    font-weight: bold; }
+  .feature-user .user-prof-job {
+    color: #666;
+    font-size: 86%; }
+  .feature-user .user-comment {
+    padding: 10px 10px 0 10px;
+    font-size: 86%; }
+  .feature-user .user-response {
+    padding: 8px; }
+    .feature-user .user-response i {
+      overflow: hidden;
+      font-size: 0;
+      text-indent: 100%;
+      white-space: nowrap;
+      outline: none;
+      margin-right: 5px; }
+    .feature-user .user-response-like i {
+      background-position: 0px -13px;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      display: block;
+      width: 13px;
+      height: 13px;
+      display: inline-block; }
+    .feature-user .user-response-dislike i {
+      background-position: 0px 0px;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      display: block;
+      width: 13px;
+      height: 13px;
+      display: inline-block; }
+
+.commented-user {
+  margin-top: 10px; }
+  .commented-user:before, .commented-user:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .commented-user-item {
+    float: left; }
+    .commented-user-item + .commented-user-item {
+      margin-left: 2px; }
+  .commented-user-thumb {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url(../images/common/thumb-user.png) 0 0 no-repeat; }
+    .commented-user-thumb:link, .commented-user-thumb:visited, .commented-user-thumb:hover, .commented-user-thumb:active {
+      text-decoration: none; }
+    .commented-user-thumb:hover {
+      text-decoration: none; }
+  .commented-user-andmore {
+    line-height: 25px;
+    margin-left: 5px;
+    font-size: 86%; }
+
 /*
   sprite
 * *********************************** */
-.sprite-common {
+.sprite-common, .feature-user .user-response i {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-header, .head-sec-inner h1 a, .head-sec .search-block input[type="submit"] {
@@ -3072,7 +3267,7 @@ table tr.w200 > td {
     position: relative;
     width: 1070px;
     margin: 0 auto;
-    background-color: #fff; }
+    background: #fff url(../images/common/bg-bodysec.png) repeat-y center 0; }
     .body-sec-inner:before, .body-sec-inner:after {
       content: "";
       display: table;
