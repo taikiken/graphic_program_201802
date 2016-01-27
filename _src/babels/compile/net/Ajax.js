@@ -66,12 +66,14 @@ var Ajax = exports.Ajax = function () {
      * @param {string} method POST|GET...
      * @param {Function} resolve success callback
      * @param {Function} reject fail callback
-     * @param {FormData} [formData=null] FormData Object
      * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
+     * @param {Object} [headers=null] headers option, Authorization token など...
+     * @param {FormData} [formData=null] FormData Object
      */
     value: function start(url, method, resolve, reject) {
-      var formData = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
-      var ResultClass = arguments.length <= 5 || arguments[5] === undefined ? _Result.Result : arguments[5];
+      var ResultClass = arguments.length <= 4 || arguments[4] === undefined ? _Result.Result : arguments[4];
+      var headers = arguments.length <= 5 || arguments[5] === undefined ? null : arguments[5];
+      var formData = arguments.length <= 6 || arguments[6] === undefined ? null : arguments[6];
 
       var fetch = self.fetch;
       var _this = this;
@@ -88,8 +90,6 @@ var Ajax = exports.Ajax = function () {
 
       // flag off
       this.disable();
-
-      console.log('ajax.start: ' + url + ', ' + method);
 
       var option = {
         method: method,
@@ -108,6 +108,15 @@ var Ajax = exports.Ajax = function () {
 
         option.body = formData;
       }
+
+      // headers option
+      if (headers !== null && typeof headers !== 'undefined') {
+
+        option.headers = headers;
+        // option.body = JSON.stringify( headers );
+      }
+
+      console.log('ajax.start: ' + url + ', ' + method, option);
 
       // https://github.com/github/fetch
       // request を開始します

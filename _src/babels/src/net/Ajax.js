@@ -48,10 +48,11 @@ export class Ajax {
    * @param {string} method POST|GET...
    * @param {Function} resolve success callback
    * @param {Function} reject fail callback
-   * @param {FormData} [formData=null] FormData Object
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
+   * @param {Object} [headers=null] headers option, Authorization token など...
+   * @param {FormData} [formData=null] FormData Object
    */
-  start( url, method, resolve, reject, formData:FormData = null, ResultClass = Result ):void {
+  start( url, method, resolve, reject, ResultClass = Result, headers:Object = null, formData:FormData = null ):void {
 
     let fetch = self.fetch;
     let _this = this;
@@ -69,8 +70,6 @@ export class Ajax {
 
     // flag off
     this.disable();
-
-    console.log( `ajax.start: ${url}, ${method}` );
 
     let option = {
       method: method,
@@ -91,6 +90,16 @@ export class Ajax {
       option.body = formData;
 
     }
+
+    // headers option
+    if ( headers !== null && typeof headers !== 'undefined' ) {
+
+      option.headers = headers;
+      // option.body = JSON.stringify( headers );
+
+    }
+
+    console.log( `ajax.start: ${url}, ${method}`, option );
 
     // https://github.com/github/fetch
     // request を開始します

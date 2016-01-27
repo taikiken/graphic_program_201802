@@ -30,7 +30,7 @@ var _symbol3 = _interopRequireDefault(_symbol2);
 
 var _Types = require('./Types');
 
-var _User = require('./User');
+var _User = require('./../app/User');
 
 var _ApiDae = require('./../app/ApiDae');
 
@@ -77,6 +77,8 @@ var Api = exports.Api = function () {
 
       _ApiDae.ApiDae.rebuild();
     }
+    // ----------------------------------
+    // login / logout
     /**
      * login API を取得します
      * @return {Types} login API をTypes instanceで返します
@@ -86,8 +88,56 @@ var Api = exports.Api = function () {
     key: 'login',
     value: function login() {
 
-      return _ApiDae.ApiDae.api('login');
+      return _ApiDae.ApiDae.api('users:login');
     }
+    /**
+     * logout API を取得します
+     * @return {Types} logout API をTypes instanceで返します
+     */
+
+  }, {
+    key: 'logout',
+    value: function logout() {
+
+      return _ApiDae.ApiDae.api('users:logout');
+    }
+    // ----------------------------------
+    // user add / delete
+    /**
+     * ユーザー登録
+     * @return {Types} ユーザー登録 API をTypes instanceで返します
+     */
+
+  }, {
+    key: 'join',
+    value: function join() {
+      return _ApiDae.ApiDae.api('users:add');
+    }
+    /**
+     * 退会
+     * @return {Types} 退会 API をTypes instanceで返します
+     */
+
+  }, {
+    key: 'leave',
+    value: function leave() {
+      return _ApiDae.ApiDae.api('users:delete');
+    }
+    // ----------------------------------
+    // カテゴリー一覧
+    /**
+     *
+     * @return {Types} カテゴリー一覧 API をTypes instanceで返します
+     */
+
+  }, {
+    key: 'categories',
+    value: function categories() {
+      return _ApiDae.ApiDae.api('categories');
+    }
+    // ----------------------------------
+    // home / self
+    /**
     /**
      * home API を user が login している / していない により取得します
      * @return {Types} home API(home / self)をTypes instanceで返します
@@ -121,6 +171,8 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('self');
     }
+    // ----------------------------------
+    // 記事一覧
     /**
      * category API を取得します
      * @return {Types} category API を Types instance で取得します
@@ -132,6 +184,8 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('category');
     }
+    // ----------------------------------
+    // 検索
     /**
      * search API を取得します
      * @return {Types} search API をTypes instanceで返します
@@ -143,17 +197,33 @@ var Api = exports.Api = function () {
 
       return _ApiDae.ApiDae.api('search');
     }
+    // ----------------------------------
+    // 記事詳細
+    /**
     /**
      * detail API （単一記事）を取得します
      * @return {Types} detail API をTypes instanceで返します
      */
 
   }, {
+    key: 'single',
+    value: function single() {
+
+      return _ApiDae.ApiDae.api('single');
+    }
+    /**
+     * @deprecated instead use Api.single
+     * @return {Types} detail API をTypes instanceで返します
+     */
+
+  }, {
     key: 'detail',
     value: function detail() {
-
-      return _ApiDae.ApiDae.api('detail');
+      console.warn('Api.detail deprecated. instead use Api.single.');
+      return Api.single();
     }
+    // ----------------------------------
+    // bookmark
     /**
      * bookmark API を取得します
      * @param {string} [action=add] path option を指定します delete | add
@@ -174,15 +244,13 @@ var Api = exports.Api = function () {
         case 'add':
           return _ApiDae.ApiDae.api('bookmark:add');
 
-        // add | delete 以外の機能をコメントへ
-        // case '':
-        //  return ApiDae.api( 'bookmark' );
-
         default:
           console.warn('bookmark illegal action: ' + action + ', instead use default');
           return _ApiDae.ApiDae.api('bookmark:add');
       }
     }
+    // ----------------------------------
+    // comment
     /**
      * comment API を取得します
      * @param {string} [action=''] path option を指定します
@@ -195,17 +263,24 @@ var Api = exports.Api = function () {
       var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
       switch (action) {
+
+        case 'official':
+          return _ApiDae.ApiDae.api('comment:official');
+
+        case 'normal':
+          return _ApiDae.ApiDae.api('comment:normal');
+
+        case 'self':
+          return _ApiDae.ApiDae.api('comment:self');
+
+        case 'single':
+          return _ApiDae.ApiDae.api('comment:single');
+
         case 'send':
           return _ApiDae.ApiDae.api('comment:send');
 
         case 'reply':
           return _ApiDae.ApiDae.api('comment:reply');
-
-        case 'send:edit':
-          return _ApiDae.ApiDae.api('comment:send:edit');
-
-        case 'reply:edit':
-          return _ApiDae.ApiDae.api('comment:reply:edit');
 
         case 'send:delete':
           return _ApiDae.ApiDae.api('comment:send:delete');
@@ -234,37 +309,78 @@ var Api = exports.Api = function () {
           return _ApiDae.ApiDae.api('comment');
       }
     }
+
+    // ----------------------------------
+    // my page
+
     /**
      * users API を取得します
-     * @param {string} [action=''] path option を指定します
-     * @return {Types} category users をTypes instanceで返します
+     * @param {string} action path option を指定します
+     * @return {Types} マイページ系 users API を Types instance で返します
      */
 
   }, {
     key: 'users',
-    value: function users() {
-      var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+    value: function users(action) {
 
       switch (action) {
-        case 'notice':
-          return _ApiDae.ApiDae.api('users:notice');
 
-        case 'notice:read':
-          return _ApiDae.ApiDae.api('users:notice:read');
+        case 'self':
+          return _ApiDae.ApiDae.api('users:self');
 
-        case 'bookmark':
-          return _ApiDae.ApiDae.api('users:bookmark');
+        case 'id':
+          return _ApiDae.ApiDae.api('users:id');
 
+        case 'self:bookmark':
+          return _ApiDae.ApiDae.api('users:self:bookmark');
+
+        case 'id:bookmark':
+          return _ApiDae.ApiDae.api('users:id:bookmark');
+
+        case 'activities':
         case 'activity':
-          return _ApiDae.ApiDae.api('users:activity');
+          return _ApiDae.ApiDae.api('users:self:activities');
 
-        case '':
-          // ユーザー詳細
-          return _ApiDae.ApiDae.api('users');
+        case 'notifications':
+        case 'notice':
+          return _ApiDae.ApiDae.api('users:self:notifications');
+
+        case 'notifications:read':
+        case 'notice:read':
+          return _ApiDae.ApiDae.api('users:self:notifications:read');
 
         default:
-          console.warn('users illegal action: ' + action + ', instead use default');
-          return _ApiDae.ApiDae.api('users');
+          throw new Error('users illegal action: ' + action + '.');
+
+      }
+    }
+
+    /**
+     * users:settings API を取得します
+     * @param {string} action path option を指定します
+     * @return {Types} マイページ系 users:settings API を Types instance で返します
+     */
+
+  }, {
+    key: 'settings',
+    value: function settings(action) {
+
+      switch (action) {
+
+        case 'account':
+          return _ApiDae.ApiDae.api('users:settings:account');
+
+        case 'account:edit':
+          return _ApiDae.ApiDae.api('users:settings:account:edit');
+
+        case 'interest':
+          return _ApiDae.ApiDae.api('users:settings:interest');
+
+        case 'interest:edit':
+          return _ApiDae.ApiDae.api('users:settings:interest:edit');
+
+        default:
+          throw new Error('settings illegal action: ' + action + '.');
 
       }
     }

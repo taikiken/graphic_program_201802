@@ -105,7 +105,6 @@ var Action = exports.Action = function () {
         resolve(result);
       }
     }
-
     /**
      * Ajax error callback
      * @param {Error} error Ajax失敗結果

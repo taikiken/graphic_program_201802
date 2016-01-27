@@ -25,6 +25,7 @@ import {Format} from './util/Format';
 // app
 import {Env} from './app/Env';
 import {Codes} from './app/Codes';
+import {User} from './app/User';
 
 // -------------------------------------
 // data
@@ -37,7 +38,6 @@ import {Result} from './data/Result';
 import {Ajax} from './net/Ajax';
 import {Api} from './net/Api';
 import {Types} from './net/Types';
-import {User} from './net/User';
 
 // net/types
 import {Permalink} from './net/types/Permalink';
@@ -59,6 +59,10 @@ import {Offset} from './action/Offset';
 import {Pickup} from './action/home/Pickup';
 import {Headline} from './action/home/Headline';
 import {News} from './action/home/News';
+
+import {PickupAuth} from './action/home/PickupAuth';
+import {HeadlineAuth} from './action/home/HeadlineAuth';
+import {NewsAuth} from './action/home/NewsAuth';
 
 // action/archive
 import {Category} from './action/archive/Category';
@@ -107,7 +111,8 @@ var UT = {
   app: {
     Env: Env,
     App: App,
-    Codes: Codes
+    Codes: Codes,
+    User: User
   },
   data: {
     Data: Data,
@@ -122,7 +127,6 @@ var UT = {
     Ajax: Ajax,
     Api: Api,
     Types: Types,
-    User: User,
     types: {
       Permalink: Permalink,
       Query: Query,
@@ -137,7 +141,10 @@ var UT = {
     home: {
       Pickup: Pickup,
       Headline: Headline,
-      News: News
+      News: News,
+      PickupAuth: PickupAuth,
+      HeadlineAuth: HeadlineAuth,
+      NewsAuth: NewsAuth
     },
     archive: {
       Category: Category,

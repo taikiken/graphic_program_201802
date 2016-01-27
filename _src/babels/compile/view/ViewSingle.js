@@ -73,7 +73,7 @@ var ViewSingle = function (_View) {
   (0, _inherits3.default)(ViewSingle, _View);
 
   /**
-   * 記事詳細
+   * 記事ID で 記事詳細JSONを取得し表示します
    *
    * @example
    * let elements = {}
@@ -251,9 +251,8 @@ var ViewSingle = function (_View) {
 
       // コメント取得
     } // render
-
     /**
-     * 関連記事
+     * 関連記事（記事詳細の）
      * @param {Array} related 配列内データ型はRelatedDom
      */
 
@@ -342,7 +341,8 @@ var ViewSingle = function (_View) {
 
       // 関連記事 dom 生成
       ReactDOM.render(React.createElement(ArticleDom, { list: _related }), element);
-    }
+    } // related
+
   }]);
   return ViewSingle;
 }(_View2.View);

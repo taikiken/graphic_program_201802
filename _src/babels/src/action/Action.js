@@ -88,7 +88,6 @@ export class Action {
     }
 
   }
-
   /**
    * Ajax error callback
    * @param {Error} error Ajax失敗結果

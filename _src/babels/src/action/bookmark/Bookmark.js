@@ -13,6 +13,9 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
+import {Path} from '../../app/Path';
+
+let _symbol = Symbol();
 
 /**
  * 記事のブックマーク登録 / 解除<br>
@@ -25,9 +28,24 @@ export class Bookmark extends Action {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( id:Number, resolve:Function = null, reject:Function = null ) {
 
-    super( Api.bookmark(), resolve, reject );
+  /**
+   * 記事のブックマーク登録 / 解除 を行います
+   * @param {Symbol} target Factory pattern のために使用
+   * @param {string} actionType add / delete 登録
+   * @param {Number|string} id article id 記事ID
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   */
+  constructor( target:Symbol, actionType:string, id:Number, resolve:Function = null, reject:Function = null ) {
+
+    if ( _symbol !== target ) {
+
+      throw new Error( `not use new Bookmark(). instead Bookmark.register() or Bookmark.cancel()` );
+
+    }
+
+    super( Api.bookmark( actionType ), resolve, reject );
     // 記事IDをparseIntはまずいと思う, 頭 0 が消えるから
     // this._id = parseInt( id, 10 );
     this._id = id;
@@ -48,7 +66,8 @@ export class Bookmark extends Action {
    * @return {string} 作成した url を返します
    */
   get url():string {
-    return `${this._url}/${this.id}`;
+    // return `${this._url}/${this.id}`;
+    return Path.article( this._url, this.id );
   }
   // ---------------------------------------------------
   //  METHOD
@@ -76,5 +95,13 @@ export class Bookmark extends Action {
     this._ajax.start( this.url, 'DELETE', this.success.bind( this ), this.fail.bind( this ) );
 
   }
-
+  // ---------------------------------------------------
+  //  static METHOD
+  // ---------------------------------------------------
+  static register( id:Number, resolve:Function = null, reject:Function = null ):Bookmark {
+    return new Bookmark( _symbol, 'add', id, resolve, reject );
+  }
+  static cancel( id:Number, resolve:Function = null, reject:Function = null ):Bookmark {
+    return new Bookmark( _symbol, 'delete', id, resolve, reject );
+  }
 }

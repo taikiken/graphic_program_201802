@@ -29,14 +29,16 @@ export class Offset extends Action {
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
+   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10 ) {
+  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10, ResultClass = Result ) {
 
     super( types, resolve, reject );
 
     this._offset = offset;
     this._length = length;
     this._total = -1;
+    this._resultClass = ResultClass;
 
   }
   // ---------------------------------------------------
@@ -133,7 +135,7 @@ export class Offset extends Action {
     // next がある時は Ajax を実行します
     if ( this.hasNext() ) {
 
-      this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+      this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass );
 
     }
 

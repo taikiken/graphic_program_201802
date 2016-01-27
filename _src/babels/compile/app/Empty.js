@@ -33,7 +33,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _symbol = (0, _symbol3.default)();
 
 /**
- * <h3> 代替画像パス</h3>
+ * <h3>代替画像パス</h3>
  * 全て static です
  */
 

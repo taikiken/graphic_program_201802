@@ -8,6 +8,8 @@ var _Env = require('./app/Env');
 
 var _Codes = require('./app/Codes');
 
+var _User = require('./app/User');
+
 var _Data = require('./data/Data');
 
 var _Form = require('./data/Form');
@@ -19,8 +21,6 @@ var _Ajax = require('./net/Ajax');
 var _Api = require('./net/Api');
 
 var _Types = require('./net/Types');
-
-var _User = require('./net/User');
 
 var _Permalink = require('./net/types/Permalink');
 
@@ -43,6 +43,12 @@ var _Pickup = require('./action/home/Pickup');
 var _Headline = require('./action/home/Headline');
 
 var _News = require('./action/home/News');
+
+var _PickupAuth = require('./action/home/PickupAuth');
+
+var _HeadlineAuth = require('./action/home/HeadlineAuth');
+
+var _NewsAuth = require('./action/home/NewsAuth');
 
 var _Category = require('./action/archive/Category');
 
@@ -92,21 +98,41 @@ var _ViewVideos = require('./view/sidebar/ViewVideos');
 
 // action/sidebar
 
-// action/home
-
 // -------------------------------------
-// action
-
-// net/types
+// app/App
 
 // -------------------------------------
 // net
+
+// -------------------------------------
+// app
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-01-27 22:07:53
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
+
+// -------------------------------------
+// util
 var UT = {
   version: '1.0.0',
   app: {
     Env: _Env.Env,
     App: _App.App,
-    Codes: _Codes.Codes
+    Codes: _Codes.Codes,
+    User: _User.User
   },
   data: {
     Data: _Data.Data,
@@ -121,7 +147,6 @@ var UT = {
     Ajax: _Ajax.Ajax,
     Api: _Api.Api,
     Types: _Types.Types,
-    User: _User.User,
     types: {
       Permalink: _Permalink.Permalink,
       Query: _Query.Query,
@@ -136,7 +161,10 @@ var UT = {
     home: {
       Pickup: _Pickup.Pickup,
       Headline: _Headline.Headline,
-      News: _News.News
+      News: _News.News,
+      PickupAuth: _PickupAuth.PickupAuth,
+      HeadlineAuth: _HeadlineAuth.HeadlineAuth,
+      NewsAuth: _NewsAuth.NewsAuth
     },
     archive: {
       Category: _Category.Category,
@@ -176,33 +204,14 @@ var UT = {
 
 // action/archive
 
+// action/home
+
 // -------------------------------------
-// app/App
+// action
+
+// net/types
 
 // -------------------------------------
 // data
-
-// -------------------------------------
-// app
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-26 23:39:23
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- * @requires React, Sagen. IE: fetch, es5-promise
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
-
-// -------------------------------------
-// util
 
 self.UT = UT;

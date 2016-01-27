@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>React</title>
+  <link rel="stylesheet" href="assets/css/ui.css">
+  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="assets/js/libs/vendor.min.js"></script>
+  <script src="assets/js/libs/vendor.react.js"></script>
+</head>
+<body>
+
+<h1 id="c1"></h1>
+
+<section id="f1"></section>
+<section id="f2"></section>
+<section id="f3"></section>
+<section id="f4"></section>
+
+<section id="list">
+
+</section>
+
+<p><button id="listAdd">増やす</button></p>
+<script src="assets/js/bundle/main.bundle.js"></script>
+<script>
+  ( function ( window ) {
+
+    'use strict';
+    var data;
+
+    $.ajax({
+      type:'GET',
+      crossDomain: true,
+      url: 'http://undotsushin.com/api/v1/articles/self?offset=0&length=10',
+      beforeSend:function(m){
+        m.setRequestHeader("Authorization","OAuth realm=undotsushin.com, oautn_token=fee1a989f120b99cec0f8206d68f6365");
+      },
+      success:function(m){
+        console.log(m);
+      }
+    });
+
+  }( window ) );
+</script>
+</body>
+</html>

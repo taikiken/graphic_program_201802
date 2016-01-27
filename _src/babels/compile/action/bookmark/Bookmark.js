@@ -36,11 +36,19 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _symbol2 = require('babel-runtime/core-js/symbol');
+
+var _symbol3 = _interopRequireDefault(_symbol2);
+
 var _Action2 = require('../Action');
 
 var _Api = require('../../net/Api');
 
+var _Path = require('../../app/Path');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _symbol = (0, _symbol3.default)();
 
 /**
  * 記事のブックマーク登録 / 解除<br>
@@ -57,15 +65,29 @@ var Bookmark = exports.Bookmark = function (_Action) {
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
 
-  function Bookmark(id) {
-    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+  /**
+   * 記事のブックマーク登録 / 解除 を行います
+   * @param {Symbol} target Factory pattern のために使用
+   * @param {string} actionType add / delete 登録
+   * @param {Number|string} id article id 記事ID
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   */
+
+  function Bookmark(target, actionType, id) {
+    var resolve = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+    var reject = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
     (0, _classCallCheck3.default)(this, Bookmark);
+
+    if (_symbol !== target) {
+
+      throw new Error('not use new Bookmark(). instead Bookmark.register() or Bookmark.cancel()');
+    }
 
     // 記事IDをparseIntはまずいと思う, 頭 0 が消えるから
     // this._id = parseInt( id, 10 );
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _Api.Api.bookmark(), resolve, reject));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _Api.Api.bookmark(actionType), resolve, reject));
 
     _this._id = id;
 
@@ -114,6 +136,10 @@ var Bookmark = exports.Bookmark = function (_Action) {
 
       this._ajax.start(this.url, 'DELETE', this.success.bind(this), this.fail.bind(this));
     }
+    // ---------------------------------------------------
+    //  static METHOD
+    // ---------------------------------------------------
+
   }, {
     key: 'id',
     get: function get() {
@@ -127,7 +153,24 @@ var Bookmark = exports.Bookmark = function (_Action) {
   }, {
     key: 'url',
     get: function get() {
-      return this._url + '/' + this.id;
+      // return `${this._url}/${this.id}`;
+      return _Path.Path.article(this._url, this.id);
+    }
+  }], [{
+    key: 'register',
+    value: function register(id) {
+      var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+      var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+      return new Bookmark(_symbol, 'add', id, resolve, reject);
+    }
+  }, {
+    key: 'cancel',
+    value: function cancel(id) {
+      var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+      var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+      return new Bookmark(_symbol, 'delete', id, resolve, reject);
     }
   }]);
   return Bookmark;

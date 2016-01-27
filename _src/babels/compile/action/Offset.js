@@ -65,6 +65,7 @@ var Offset = exports.Offset = function (_Action) {
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
+   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
 
   function Offset(types) {
@@ -72,6 +73,7 @@ var Offset = exports.Offset = function (_Action) {
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var offset = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
     var length = arguments.length <= 4 || arguments[4] === undefined ? 10 : arguments[4];
+    var ResultClass = arguments.length <= 5 || arguments[5] === undefined ? _Result.Result : arguments[5];
     (0, _classCallCheck3.default)(this, Offset);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Offset).call(this, types, resolve, reject));
@@ -79,6 +81,7 @@ var Offset = exports.Offset = function (_Action) {
     _this._offset = offset;
     _this._length = length;
     _this._total = -1;
+    _this._resultClass = ResultClass;
 
     return _this;
   }
@@ -146,7 +149,7 @@ var Offset = exports.Offset = function (_Action) {
       // next がある時は Ajax を実行します
       if (this.hasNext()) {
 
-        this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this));
+        this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass);
       }
     }
     /**

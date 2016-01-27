@@ -11,9 +11,11 @@
  */
 'use strict';
 
+import {Cookie} from '../net/Cookie';
+import {Env} from './Env';
+
 let _symbol = Symbol();
 let _sign = false;
-let _id = -1;
 
 /**
  * <h3>ユーザー情報を管理します</h3>
@@ -45,7 +47,6 @@ export class User {
     return _sign;
 
   }
-
   /**
    * sign in / out 状態を表します
    * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
@@ -55,25 +56,41 @@ export class User {
     _sign = bool;
 
   }
-
   /**
-   * User id 情報
-   * @return {Number} User id を返します
+   *
+   * @return {string} token を返します, 見つからない時はnullを返します
    */
-  static get id():Number {
+  static get token():string {
 
-    return _id;
+    if ( _sign ) {
+      switch ( Env.mode ) {
+
+        case Env.PRODUCTION:
+          return Cookie.item( Cookie.TARGET );
+
+        case Env.TEST:
+        case Env.DEVELOP:
+        default:
+          return [ 'fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f' ][ Math.floor(Math.random() * 3) ];
+
+      }
+    }
 
   }
-
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
-   * User id を設定します
-   * @param {Number} id User id
+   * ログイン設定をします
+   * @param {Number|string} id user id
    */
-  static set id( id:Number ):void {
-
-    _id = id;
-
+  static login():void {
+    User.sign = true;
   }
-
+  /**
+   * ログアウト設定をします
+   */
+  static logout():void {
+    User.sign = false;
+  }
 }

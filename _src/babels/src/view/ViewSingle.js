@@ -34,7 +34,7 @@ let ReactDOM = self.ReactDOM;
  */
 export class ViewSingle extends View {
   /**
-   * 記事詳細
+   * 記事ID で 記事詳細JSONを取得し表示します
    *
    * @example
    * let elements = {}
@@ -183,9 +183,8 @@ export class ViewSingle extends View {
     // コメント取得
 
   }// render
-
   /**
-   * 関連記事
+   * 関連記事（記事詳細の）
    * @param {Array} related 配列内データ型はRelatedDom
    */
   related( related:Array = [] ):void {
@@ -264,6 +263,6 @@ export class ViewSingle extends View {
       element
     );
 
-  }
+  }// related
 
 }

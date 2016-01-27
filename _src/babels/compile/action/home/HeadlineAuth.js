@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/13 - 14:54
+ * @date 2016/01/27 - 19:51
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Single = undefined;
+exports.HeadlineAuth = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -36,66 +36,53 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Action2 = require('../Action');
+var _ActionAuth2 = require('../ActionAuth');
 
 var _Api = require('../../net/Api');
 
-var _Path = require('../../app/Path');
+var _User = require('../../app/User');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * 記事詳細を取得します
+ * **認証**（ログイン）<br>
+ * Home headline（注目ニュース）
  */
 
-var Single = exports.Single = function (_Action) {
-  (0, _inherits3.default)(Single, _Action);
+var HeadlineAuth = exports.HeadlineAuth = function (_ActionAuth) {
+  (0, _inherits3.default)(HeadlineAuth, _ActionAuth);
 
   /**
-   * 記事詳細を記事IDから取得します
-   * @param {Number|String} id 記事ID
+   * <p>Home headline（注目ニュース） データを取得します<br>
+   * ** types: Api.home() ** を使用します</p>
+   *
+   * **認証**（ログイン）
+   *
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
 
-  function Single(id) {
-    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-    (0, _classCallCheck3.default)(this, Single);
-
-    // parseInt すると先頭0が消えるのでまずい気がする
-    // this._id = parseInt( id, 10 );
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Single).call(this, _Api.Api.single(), resolve, reject));
-
-    _this._id = id;
-
-    return _this;
+  function HeadlineAuth() {
+    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+    (0, _classCallCheck3.default)(this, HeadlineAuth);
+    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(HeadlineAuth).call(this, _User.User.token, _Api.Api.home(), resolve, reject));
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * 記事ID
-   * @return {Number|*} 記事IDを返します
+   * Ajax API url を作成します<br>
+   * <code>Api.home().url/headline?offset=0&length=6</code>
+   * @return {string} headline API url を返します
    */
 
-  (0, _createClass3.default)(Single, [{
-    key: 'id',
-    get: function get() {
-      return this._id;
-    }
-    /**
-     * url を作成します
-     * @return {string} 作成した url を返します
-     */
-
-  }, {
+  (0, _createClass3.default)(HeadlineAuth, [{
     key: 'url',
     get: function get() {
-      // return `${this._url}/${this.id}`;
-      return _Path.Path.article(this._url, this.id);
+
+      return this._url + '/headline?offset=0&length=6';
     }
   }]);
-  return Single;
-}(_Action2.Action);
+  return HeadlineAuth;
+}(_ActionAuth2.ActionAuth);

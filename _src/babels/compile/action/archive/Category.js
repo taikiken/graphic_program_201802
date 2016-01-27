@@ -113,7 +113,6 @@ var Category = exports.Category = function (_Offset) {
         return this._url + '/' + this.slug + '/' + this.type + '?offset=' + this.offset + '&length=' + this.length;
       }
     }
-
     // ---------------------------------------------------
     //  METHOD
     // ---------------------------------------------------

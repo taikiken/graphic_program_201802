@@ -13,6 +13,7 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
+import {Path} from '../../app/Path';
 
 /**
  * 記事詳細を取得します
@@ -26,7 +27,7 @@ export class Single extends Action {
    */
   constructor( id:Number, resolve:Function = null, reject:Function = null ) {
 
-    super( Api.detail(), resolve, reject );
+    super( Api.single(), resolve, reject );
     // parseInt すると先頭0が消えるのでまずい気がする
     // this._id = parseInt( id, 10 );
     this._id = id;
@@ -36,18 +37,19 @@ export class Single extends Action {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * url を作成します
-   * @return {string} 作成した url を返します
-   */
-  get url():string {
-    return `${this._url}/${this.id}`;
-  }
-
-  /**
    * 記事ID
    * @return {Number|*} 記事IDを返します
    */
   get id():Number {
     return this._id;
   }
+  /**
+   * url を作成します
+   * @return {string} 作成した url を返します
+   */
+  get url():string {
+    // return `${this._url}/${this.id}`;
+    return Path.article( this._url, this.id );
+  }
+
 }

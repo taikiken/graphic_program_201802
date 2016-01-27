@@ -14,7 +14,7 @@
 let _symbol = Symbol();
 
 /**
- * <h3> 代替画像パス</h3>
+ * <h3>代替画像パス</h3>
  * 全て static です
  */
 export class Empty {
