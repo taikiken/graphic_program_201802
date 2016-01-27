@@ -12,6 +12,7 @@
 'use strict';
 
 import {Env} from './Env';
+import {Path} from './Path';
 import {Types} from '../net/Types';
 import {Type} from '../net/types/Type';
 import {Permalink} from '../net/types/Permalink';
@@ -46,17 +47,39 @@ let apiRoot = ( port:string ) => {
   }
 
 };
-
+// https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
+// API 一覧より
 let buildPath = () => {
+  // 共通パス
+  // 先頭 protocol + host 部分を develop / production で変える
   let API_PATH = apiRoot( Loc.port ) + '/api/v1';
 
   return {
-    'login': new Types(
-      new Type( `${API_PATH}/oauth/token`, 'POST' ),
+    // 登録
+    'users:add': new Types(
+      new Type( `${API_PATH}/users`, 'POST' ),
       new Permalink(),
       new Queries()
     ),
+    // login / logout
+    'users:login': new Types(
+      new Type( `${API_PATH}/sessions`, 'POST' ),
+      new Permalink(),
+      new Queries()
+    ),
+    'users:logout': new Types(
+      new Type( `${API_PATH}/sessions`, 'DELETE' ),
+      new Permalink(),
+      new Queries()
+    ),
+    // カテゴリー一覧
+    'categories': new Types(
+      new Type( `${API_PATH}/category` ),
+      new Permalink( [ 'all', '*' ], true ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
     // home / self
+    // /api/v1/articles/home[/|/pickup|/headline]
     'home': new Types(
       new Type( `${API_PATH}/articles/home` ),
       new Permalink( [ 'pickup', 'headline' ] ),
@@ -69,150 +92,277 @@ let buildPath = () => {
       true
     ),
     // 記事一覧
+    // /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video]
     'category': new Types(
-      new Type( `${API_PATH}/articles/category/` ),
+      new Type( `${API_PATH}/articles/category` ),
       new Permalink( [ 'all', '*' ], true ),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
     // 検索
+    // /api/vi/articles/search/{:keywords}
     'search': new Types(
-      new Type( `${API_PATH}/articles/search/` ),
+      new Type( `${API_PATH}/articles/search` ),
       new Permalink( [ '*' ], true ),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
-    // 詳細
-    'detail': new Types(
-      new Type( `${API_PATH}/articles/` ),
+    // 記事詳細
+    // /api/v1/articles/{:article_id}
+    'single': new Types(
+      new Type( `${API_PATH}/articles/${Path.ARTICLE_ID}` ),
       new Permalink( [ '*' ], true ),
       new Queries()
     ),
-    //'bookmark': new Types(
-    //  new Type( `${API_PATH}/articles/bookmark`, 'POST|DELETE' ),
-    //  new Permalink( [ '*' ], true ),
-    //  new Queries(),
-    //  true
-    //),
     // ブックマーク 登録
+    // /api/v1/articles/{:article_id}/bookmark
     'bookmark:add': new Types(
-      new Type( `${API_PATH}/articles/bookmark`, 'POST' ),
+      new Type( `${API_PATH}/articles/ARTICLE_ID/bookmark`, 'PUT' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // ブックマーク 削除
     'bookmark:delete': new Types(
-      new Type( `${API_PATH}/articles/bookmark`, 'DELETE' ),
+      new Type( `${API_PATH}/articles/ARTICLE_ID/bookmark`, 'DELETE' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
-    // 記事詳細でのコメント一覧表示
+    // --------------------------------------------
+    // コメント取得
+    // --------------------------------------------
+    // 記事へのすべてのコメントを人気順で取得する
+    // /api/v1/comments/article/{:article_id}
     'comment': new Types(
-      new Type( `${API_PATH}/comments/article/` ),
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}` ),
       new Permalink( [ '*' ], true ),
-      new Queries( [ new CommentType( 'normal|official|self' ), new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
-    // 記事へのコメント
-    'comment:send': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'POST' ),
+    // 記事への公式コメントを人気順で取得する
+    // /api/v1/comments/article/{:article_id}/official
+    'comment:official': new Types(
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/official` ),
       new Permalink( [ '*' ], true ),
-      new Queries( [ new Query( 'body', 'number', '', true ) ] ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // 記事へのみんなのコメントを人気順で取得する
+    // /api/v1/comments/article/{:article_id}/normal
+    'comment:normal': new Types(
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/normal` ),
+      new Permalink( [ '*' ], true ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // 自分のコメントを取得する
+    // /api/v1/comments/article/{:article_id}/self
+    'comment:self': new Types(
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/self` ),
+      new Permalink( [ '*' ], true ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // 特定のコメントを取得する
+    // /api/v1/comments/article/{:article_id}/{:comment_id}
+    'comment:single': new Types(
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}` ),
+      new Permalink( [ '*' ], true ),
+      new Queries()
+    ),
+    // --------------------------------------------
+    // コメント操作
+    // --------------------------------------------
+    // 記事へのコメント
+    // /api/v1/comments/article/{:article_id}
+    'comment:send': new Types(
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}`, 'POST' ),
+      new Permalink( [ '*' ], true ),
+      new Queries( [] ),
       true
     ),
     // コメント返信
+    // /api/v1/comments/article/{:article_id}/{:comment_id}
     'comment:reply': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'POST' ),
-      new Permalink( [ '*/*' ], true ),
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/${Path.COMMENT_ID}`, 'POST' ),
+      new Permalink( [ '*' ], true ),
       new Queries( [ new Query( 'body', 'number', '', true ) ] ),
       true
     ),
+/*
+初期要件からはずれました。
     // 記事へのコメント編集
     'comment:send:edit': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'PUT' ),
-      new Permalink( [ '*/*' ], true ),
+      new Type( `${API_PATH}/comments/article`, 'PUT' ),
+      new Permalink( [ '' ], true ),
       new Queries(),
       true
     ),
     // コメント返信コメント編集
     'comment:reply:edit': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'PUT' ),
-      new Permalink( [ '*/*/*' ], true ),
+      new Type( `${API_PATH}/comments/article`, 'PUT' ),
+      new Permalink( [ '' ], true ),
       new Queries(),
       true
     ),
+*/
     // 記事へのコメント 削除
+    // /api/v1/comments/article/{:article_id}/{:commend_id}
     'comment:send:delete': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
-      new Permalink( [ '*/*' ], true ),
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/${Path.COMMENT_ID}`, 'DELETE' ),
+      new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // コメント返信コメント 削除
+    // /api/v1/comments/article/{:article_id}/{:commend_id}/{:reply_id}
     'comment:reply:delete': new Types(
-      new Type( `${API_PATH}/comments/article/`, 'DELETE' ),
-      new Permalink( [ '*/*/*' ], true ),
+      new Type( `${API_PATH}/comments/${Path.ARTICLE_ID}/${Path.COMMENT_ID}/${Path.REPLY_ID}`, 'DELETE' ),
+      new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
+    // --------------------------------------------
+    // コメント good / bad
+    // --------------------------------------------
     // コメントGood 追加
+    // /api/v1/comments/like/{:comment_id}
     'comment:good:add': new Types(
-      new Type( `${API_PATH}/comments/like/`, 'POST' ),
+      new Type( `${API_PATH}/comments/like/${Path.COMMENT_ID}`, 'PUT' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // コメントGood 削除
+    // /api/v1/comments/like/{:comment_id}
     'comment:good:delete': new Types(
-      new Type( `${API_PATH}/comments/like/`, 'DELETE' ),
+      new Type( `${API_PATH}/comments/like/${Path.COMMENT_ID}`, 'DELETE' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // コメントBad 追加
     'comment:bad:add': new Types(
-      new Type( `${API_PATH}/comments/bad/`, 'POST' ),
+      new Type( `${API_PATH}/comments/bad/${Path.COMMENT_ID}`, 'PUT' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
     // コメントBad 削除
     'comment:bad:delete': new Types(
-      new Type( `${API_PATH}/comments/bad/`, 'DELETE' ),
+      new Type( `${API_PATH}/comments/bad/${Path.COMMENT_ID}`, 'DELETE' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true
     ),
-    // お知らせ
-    'users:notice': new Types(
-      new Type( `${API_PATH}/users/USER_ID/notifications/` ),
+    // --------------------------------------------
+    // マイページ系
+    // --------------------------------------------
+    // 自分のユーザー情報を取得する
+    // /api/v1/users/self
+    'users:self': new Types(
+      new Type( `${API_PATH}/users/self` ),
       new Permalink(),
       new Queries(),
       true
     ),
-    // お知らせ 既読
-    'users:notice:read': new Types(
-      new Type( `${API_PATH}/users/USER_ID/notifications/read`, 'POST' ),
+    // user_idに該当するユーザー情報を取得する
+    // /api/v1/users/{:user_id}
+    'users:id': new Types(
+      new Type( `${API_PATH}/users/${Path.USER_ID}` ),
       new Permalink(),
       new Queries(),
       true
     ),
-    // ユーザー詳細
-    'users': new Types(
-      new Type( `${API_PATH}/users/USER_ID` ),
-      new Permalink(),
-      new Queries()
-    ),
-    // ユーザーページのブックマーク一覧
-    'users:bookmark': new Types(
-      new Type( `${API_PATH}/users/USER_ID/bookmark` ),
+    // -----------------
+    // bookmark
+    // -----------------
+    // 自分のブックマークを取得する
+    // /api/v1/users/self/bookmark
+    'users:self:bookmark': new Types(
+      new Type( `${API_PATH}/users/self/bookmark` ),
       new Permalink(),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
-    // マイページの自分のアクティビティ一覧
-    'users:activity': new Types(
-      new Type( `${API_PATH}/users/USER_ID/activity`),
+    // user_idに該当するユーザーのブックマークを取得する
+    // /api/v1/users/{:user_id}/bookmark
+    'users:id:bookmark': new Types(
+      new Type( `${API_PATH}/users/${Path.USER_ID}/bookmark` ),
       new Permalink(),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // -----------------
+    // activities
+    // -----------------
+    // アクティビティを取得する
+    // /api/v1/users/self/activities
+    'users:self:activities': new Types(
+      new Type( `${API_PATH}/users/self/activities` ),
+      new Permalink(),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    // -----------------
+    // notifications
+    // -----------------
+    // お知らせを取得する, 自分のアクション(成果物)への他人からのアクション通知
+    // /api/v1/users/self/notifications
+    'users:self:notifications': new Types(
+      new Type( `${API_PATH}/users/self/notifications` ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // お知らせ 既読, お知らせウインドウを表示すると呼び出す
+    // /api/v1/users/self/notifications/read
+    'users:self:notifications:read': new Types(
+      new Type( `${API_PATH}/users/self/notifications/read`, 'PUT' ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // -----------------
+    // settings/account
+    // -----------------
+    // アカウント情報の取得と更新
+    // アカウント情報を取得
+    // /api/v1/users/self/settings/account
+    'users:settings:account': new Types(
+      new Type( `${API_PATH}/users/self/settings/account` ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // アカウント情報を更新
+    // /api/v1/users/self/settings/account
+    'users:settings:account:edit': new Types(
+      new Type( `${API_PATH}/users/self/settings/account`, 'PUT' ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // -----------------
+    // settings/interest
+    // -----------------
+    // 興味のある競技を取得
+    // /api/v1/users/self/settings/interest
+    'users:settings:interest': new Types(
+      new Type( `${API_PATH}/users/self/settings/interest` ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // 興味のある競技を取得
+    // /api/v1/users/self/settings/interest
+    'users:settings:interest:edit': new Types(
+      new Type( `${API_PATH}/users/self/settings/interest`, 'PUT' ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
+    // -----------------
+    // 退会
+    // -----------------
+    // アカウントを削除する
+    // /api/v1/users/self
+    'users:delete': new Types(
+      new Type( `${API_PATH}/users/self` ),
+      new Permalink(),
+      new Queries(),
       true
     )
   };

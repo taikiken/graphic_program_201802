@@ -41,7 +41,17 @@ export class Safety {
    */
   static check( object:Object, keyName:string, type:string = 'string' ):boolean {
 
-    return object.hasOwnProperty( keyName ) && typeof object[ keyName ] === type;
+    type = type.toLowerCase();
+
+    if ( type === 'array' ) {
+
+      return object.hasOwnProperty( keyName ) && Array.isArray( object[ keyName ] );
+
+    } else {
+
+      return object.hasOwnProperty( keyName ) && typeof object[ keyName ] === type;
+
+    }
 
   }
 }

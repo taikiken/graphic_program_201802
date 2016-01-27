@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>React Test Single</title>
+  <link rel="stylesheet" href="assets/css/ui.css">
+  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="assets/js/libs/vendor.min.js"></script>
+  <script src="assets/js/libs/vendor.react.js"></script>
+</head>
+<body>
+
+<h1 id="c1"></h1>
+
+<section id="single"></section>
+<section id="comment-self"></section>
+<section id="comment-official"></section>
+<section id="comment-user"></section>
+
+<section id="related"></section>
+
+<script src="assets/js/bundle/main.bundle.js"></script>
+
+<script>
+  ( function ( window ) {
+
+    'use strict';
+
+    var
+      document = window.document;
+
+    var UT = self.UT;
+
+    // develop mode
+    UT.app.App.develop();
+
+    // -------------------------------------------------
+    var headline2;
+
+    var cb = {
+      xyz: 'abc',
+      didMount: function() {
+        console.log( 'cb dom mount', this, this.xyz );
+      }
+    };
+
+    function Main() {}
+    Main.prototype.abc = 'abc';
+    Main.prototype.didMount = function() {
+      console.log( 'main mount', this, this.abc );
+    };
+
+    var main = new Main();
+
+    function didMount() {
+      console.log( 'dom mount', this );
+    }
+    function errorMount( error ) {
+      console.log( 'dom errorMount', error );
+    }
+    function undefinedError( error ) {
+      console.log( 'undefinedError', error );
+    }
+    function emptyError( error ) {
+      console.log( 'emptyError', error );
+    }
+    function responseError( error ) {
+      console.log( 'responseError', error );
+
+      headline2.showError( 'まずい！ ' + error.name + ', ' + error.message );
+    }
+    var option = {
+//      didMount: didMount.bind( this ),
+      didMount: main.didMount.bind( main ),
+//      didMount: cb.didMount.bind( cb ),
+      errorMount: errorMount,
+      undefinedError: undefinedError,
+      emptyError: emptyError,
+      responseError: responseError
+    };
+
+    let elements = {
+      related: document.getElementById('related'),
+      comment: {
+        'self': document.getElementById('comment-self'),
+        'official': document.getElementById('comment-official'),
+        'user': document.getElementById('comment-user')
+      }
+    };
+    headline2 = new UT.view.ViewSingle( 30, document.getElementById('single'), elements, option );
+    headline2.start();
+
+  }( window ) );
+</script>
+</body>
+</html>

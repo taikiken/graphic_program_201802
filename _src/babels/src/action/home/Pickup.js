@@ -55,5 +55,4 @@ export class Pickup extends Action {
     return `${this._url}/pickup?offset=0&length=5`;
 
   }
-
 }

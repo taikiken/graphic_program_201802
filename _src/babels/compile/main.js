@@ -8,6 +8,8 @@ var _Env = require('./app/Env');
 
 var _Codes = require('./app/Codes');
 
+var _User = require('./app/User');
+
 var _Data = require('./data/Data');
 
 var _Form = require('./data/Form');
@@ -19,8 +21,6 @@ var _Ajax = require('./net/Ajax');
 var _Api = require('./net/Api');
 
 var _Types = require('./net/Types');
-
-var _User = require('./net/User');
 
 var _Permalink = require('./net/types/Permalink');
 
@@ -44,6 +44,12 @@ var _Headline = require('./action/home/Headline');
 
 var _News = require('./action/home/News');
 
+var _PickupAuth = require('./action/home/PickupAuth');
+
+var _HeadlineAuth = require('./action/home/HeadlineAuth');
+
+var _NewsAuth = require('./action/home/NewsAuth');
+
 var _Category = require('./action/archive/Category');
 
 var _Ranking = require('./action/archive/Ranking');
@@ -56,9 +62,25 @@ var _Bookmark = require('./action/bookmark/Bookmark');
 
 var _Search = require('./action/search/Search');
 
-var _Detail = require('./action/single/Detail');
+var _Single = require('./action/single/Single');
+
+var _ViewArchive = require('./view/ViewArchive');
+
+var _ViewSingle = require('./view/ViewSingle');
 
 var _ViewHeadline = require('./view/home/ViewHeadline');
+
+var _ViewPickup = require('./view/home/ViewPickup');
+
+var _ViewRanking = require('./view/sidebar/ViewRanking');
+
+var _ViewVideos = require('./view/sidebar/ViewVideos');
+
+/**
+ * ToDo: 確認事項
+ * ToDo: 対象外OS alert
+ * ToDo: title, meta, ogp
+ */
 
 /**
  * global object
@@ -67,24 +89,27 @@ var _ViewHeadline = require('./view/home/ViewHeadline');
  *    var ut = self.UT
  */
 
-// action/single
+// sidebar
 
-// action/bookmark
+// -------------------------------------
+// view
 
-// action/archive
+// action/search
+
+// action/sidebar
 
 // -------------------------------------
 // app/App
 
 // -------------------------------------
-// data
+// net
 
 // -------------------------------------
 // app
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-23 16:32:16
+ * @date 2016-01-27 22:07:53
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -106,7 +131,8 @@ var UT = {
   app: {
     Env: _Env.Env,
     App: _App.App,
-    Codes: _Codes.Codes
+    Codes: _Codes.Codes,
+    User: _User.User
   },
   data: {
     Data: _Data.Data,
@@ -121,7 +147,6 @@ var UT = {
     Ajax: _Ajax.Ajax,
     Api: _Api.Api,
     Types: _Types.Types,
-    User: _User.User,
     types: {
       Permalink: _Permalink.Permalink,
       Query: _Query.Query,
@@ -136,7 +161,10 @@ var UT = {
     home: {
       Pickup: _Pickup.Pickup,
       Headline: _Headline.Headline,
-      News: _News.News
+      News: _News.News,
+      PickupAuth: _PickupAuth.PickupAuth,
+      HeadlineAuth: _HeadlineAuth.HeadlineAuth,
+      NewsAuth: _NewsAuth.NewsAuth
     },
     archive: {
       Category: _Category.Category,
@@ -153,22 +181,28 @@ var UT = {
       Search: _Search.Search
     },
     single: {
-      Detail: _Detail.Detail
+      Single: _Single.Single
     }
   },
   view: {
+    ViewArchive: _ViewArchive.ViewArchive,
+    ViewSingle: _ViewSingle.ViewSingle,
+    sidebar: {
+      ViewRanking: _ViewRanking.ViewRanking,
+      ViewVideos: _ViewVideos.ViewVideos
+    },
     home: {
-      ViewHeadline: _ViewHeadline.ViewHeadline
+      ViewHeadline: _ViewHeadline.ViewHeadline,
+      ViewPickup: _ViewPickup.ViewPickup
     }
   }
 };
 
-// -------------------------------------
-// view
+// action/single
 
-// action/search
+// action/bookmark
 
-// action/sidebar
+// action/archive
 
 // action/home
 
@@ -178,6 +212,6 @@ var UT = {
 // net/types
 
 // -------------------------------------
-// net
+// data
 
 self.UT = UT;

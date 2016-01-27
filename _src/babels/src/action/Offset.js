@@ -29,14 +29,16 @@ export class Offset extends Action {
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
+   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10 ) {
+  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10, ResultClass = Result ) {
 
     super( types, resolve, reject );
 
     this._offset = offset;
     this._length = length;
     this._total = -1;
+    this._resultClass = ResultClass;
 
   }
   // ---------------------------------------------------
@@ -48,7 +50,6 @@ export class Offset extends Action {
   get total():Number {
     return this._total;
   }
-
   /**
    * total件数を設定します
    * @param {Number} total total件数
@@ -62,7 +63,6 @@ export class Offset extends Action {
   get length():Number {
     return this._length;
   }
-
   /**
    * length件数を設定します
    * @param {Number} length length 取得件数
@@ -76,7 +76,6 @@ export class Offset extends Action {
   get offset():Number {
     return this._offset;
   }
-
   /**
    * length件数を設定します
    * @param {Number} offset offset 取得開始位置
@@ -84,7 +83,6 @@ export class Offset extends Action {
   set offset( offset:Number ):void {
     this._offset = offset;
   }
-
   /**
    * url を作成します
    * @return {string} 作成した url を返します
@@ -115,7 +113,6 @@ export class Offset extends Action {
     this.offset += count;
 
   }
-
   /**
    * 次があるかを調べます
    * @return {boolean} 次があるかの真偽値を返します
@@ -127,7 +124,6 @@ export class Offset extends Action {
     return this._total < 0 ? true : this.offset < this.total;
 
   }
-
   /**
    * 次の読込を開始します<br>
    * start の代わりに使用します
@@ -139,7 +135,7 @@ export class Offset extends Action {
     // next がある時は Ajax を実行します
     if ( this.hasNext() ) {
 
-      this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+      this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass );
 
     }
 

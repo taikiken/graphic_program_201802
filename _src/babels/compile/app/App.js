@@ -37,7 +37,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _symbol = (0, _symbol3.default)();
 
 /**
- * <h3> application 共通項目を管理します</h3>
+ * <h3>application 共通項目を管理します</h3>
  * 全て static です
  */
 

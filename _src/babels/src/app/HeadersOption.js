@@ -1,0 +1,53 @@
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/01/27 - 18:29
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+'use strict';
+
+let _symbol = Symbol();
+
+/**
+ * <h3>Fetch Request Headers を作成します</h3>
+ * 全て static
+ */
+export class HeadersOption {
+  /**
+   * static class です、instance を作成できません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
+  constructor( target ) {
+
+    if ( _symbol !== target ) {
+
+      throw new Error( `Api is static Class. not use new Api().` );
+
+    }
+
+  }
+  /**
+   *
+   * @param {string} token auth token
+   * @param {Object} option headers object, ない時は新規に作ります
+   * @return {*} headers へセットする Object を返します
+   */
+  static token( token:string, option:Object = {} ):Object {
+
+    option.Authorization = `OAuth realm=undotsushin.com, oautn_token=${token}`;
+    // option.Accept = 'application/json';
+    // option[ 'Access-Control-Allow-Origin"' ] = '*';
+/*
+    option = new Headers();
+    option.append( 'Authorization', `OAuth realm=undotsushin.com, oautn_token=${token}` );
+    option.append( 'Access-Control-Allow-Origin', '*' );
+*/
+    return option;
+
+  }
+}

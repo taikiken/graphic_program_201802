@@ -14,7 +14,7 @@
 let _symbol = Symbol();
 
 /**
- * <h3> 代替画像パス</h3>
+ * <h3>代替画像パス</h3>
  * 全て static です
  */
 export class Empty {
@@ -48,7 +48,6 @@ export class Empty {
   /**
    * img thumbnail 代替画像パス<br>
    * [Ex.] 記事一覧<br>
-   * ToDo: 不要な気がする, 確認する！
    * @readonly
    * @return {string} 代替画像パス【中】
    */
@@ -67,5 +66,24 @@ export class Empty {
 
     return 'img/common/empty.jpg';
 
+  }
+  /**
+   *  ユーザー・プロファイル・アイコン 代替画像パス<br>
+   * [Ex.] コメントとか
+   * @readonly
+   * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+   */
+  static get USER_PICTURE():string {
+
+    return 'img/common/user_empty.jpg';
+
+  }
+
+  /**
+   * hero-slider カバーグラデーション画像
+   * @return {string} hero-slider カバーグラデーション画像パスを返します
+   */
+  static get KV_OVERLAY():string {
+    return 'assets/images/index/kv-overlay.png';
   }
 }

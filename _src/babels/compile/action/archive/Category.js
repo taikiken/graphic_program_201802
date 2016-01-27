@@ -106,14 +106,13 @@ var Category = exports.Category = function (_Offset) {
       if (this.type === '') {
 
         // type が empty, 新着順
-        return this._url + '/' + this.slug + '??offset=' + this.offset + '&length=' + this.length;
+        return this._url + '/' + this.slug + '?offset=' + this.offset + '&length=' + this.length;
       } else {
 
         // type が ranking | video
-        return this._url + '/' + this.slug + '/' + this.type + '??offset=' + this.offset + '&length=' + this.length;
+        return this._url + '/' + this.slug + '/' + this.type + '?offset=' + this.offset + '&length=' + this.length;
       }
     }
-
     // ---------------------------------------------------
     //  METHOD
     // ---------------------------------------------------

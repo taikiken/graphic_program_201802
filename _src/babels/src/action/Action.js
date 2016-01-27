@@ -30,8 +30,9 @@ export class Action {
    * @param {Types} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  constructor( types:Types, resolve:Function = null, reject:Function = null ) {
+  constructor( types:Types, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
 
     this._types = types;
     this._resolve = resolve;
@@ -39,6 +40,7 @@ export class Action {
     this._ajax = new Ajax();
     this._url = types.url;
     this._method = types.method;
+    this._resultClass = ResultClass;
 
   }
   // ---------------------------------------------------
@@ -67,7 +69,7 @@ export class Action {
    */
   start( method:string = this.method ):void {
 
-    this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ) );
+    this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass );
 
   }
   /**
@@ -86,7 +88,6 @@ export class Action {
     }
 
   }
-
   /**
    * Ajax error callback
    * @param {Error} error Ajax失敗結果

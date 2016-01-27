@@ -46,8 +46,8 @@ var News = exports.News = function (_Offset) {
   (0, _inherits3.default)(News, _Offset);
 
   /**
-   * home 通常記事一覧を取得します<br>
-   * length は取得件数です。
+   * <p>home 通常記事一覧を取得します<br>
+   * length は取得件数です。</p>
    * ** default: 10 ** を必要なら変更します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

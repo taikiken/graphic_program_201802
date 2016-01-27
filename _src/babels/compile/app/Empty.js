@@ -33,7 +33,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _symbol = (0, _symbol3.default)();
 
 /**
- * <h3> 代替画像パス</h3>
+ * <h3>代替画像パス</h3>
  * 全て static です
  */
 
@@ -70,7 +70,6 @@ var Empty = exports.Empty = function () {
     /**
      * img thumbnail 代替画像パス<br>
      * [Ex.] 記事一覧<br>
-     * ToDo: 不要な気がする, 確認する！
      * @readonly
      * @return {string} 代替画像パス【中】
      */
@@ -93,6 +92,19 @@ var Empty = exports.Empty = function () {
     get: function get() {
 
       return 'img/common/empty.jpg';
+    }
+    /**
+     *  ユーザー・プロファイル・アイコン 代替画像パス<br>
+     * [Ex.] コメントとか
+     * @readonly
+     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+     */
+
+  }, {
+    key: 'USER_PICTURE',
+    get: function get() {
+
+      return 'img/common/user_empty.jpg';
     }
   }]);
   return Empty;

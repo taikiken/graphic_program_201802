@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>React Test News</title>
+  <link rel="stylesheet" href="assets/css/ui.css">
+  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="assets/js/libs/vendor.min.js"></script>
+  <script src="assets/js/libs/vendor.react.js"></script>
+  <style>
+    body {
+      padding: 0 16px;
+    }
+    .left {
+      float: left;
+      width: 40%;
+    }
+    .right {
+      float: right;
+      width: 40%;
+    }
+    #f1 {
+      overflow: hidden;
+    }
+    #f4 {
+      clear: both;
+      padding: 16px;
+    }
+    #f4 a {
+      display: inline-block;
+      padding: 16px;
+      border: #333 solid 1px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="c1"></h1>
+
+<section id="f1"></section>
+<section id="f2"></section>
+<section id="f3"></section>
+<section id="f4"></section>
+
+<script src="assets/js/bundle/main.bundle.js"></script>
+
+<script>
+  ( function ( window ) {
+
+    'use strict';
+
+    var
+      document = window.document;
+
+    var UT = self.UT;
+
+    var headline;
+    // develop mode
+    UT.app.App.develop();
+//    UT.app.App.test();
+
+    // -------------------------------------------------
+    var headline2;
+
+    var cb = {
+      xyz: 'abc',
+      didMount: function() {
+        console.log( 'cb dom mount', this, this.xyz );
+      }
+    };
+
+    function Main() {}
+    Main.prototype.abc = 'abc';
+    Main.prototype.didMount = function() {
+      console.log( 'main mount', this, this.abc );
+    };
+
+    var main = new Main();
+
+    function didMount() {
+      console.log( 'dom mount', this );
+    }
+    function errorMount( error ) {
+      console.log( 'dom errorMount', error );
+    }
+    function undefinedError( error ) {
+      console.log( 'undefinedError', error );
+    }
+    function emptyError( error ) {
+      console.log( 'emptyError', error );
+    }
+    function responseError( error ) {
+      console.log( 'responseError', error );
+
+      headline2.showError( 'まずい！ ' + error.name + ', ' + error.message );
+    }
+    var option = {
+//      didMount: didMount.bind( this ),
+      didMount: main.didMount.bind( main ),
+//      didMount: cb.didMount.bind( cb ),
+      errorMount: errorMount,
+      undefinedError: undefinedError,
+      emptyError: emptyError,
+      responseError: responseError
+    };
+
+    headline2 = new UT.view.ViewArchive( document.getElementById('f1'), document.getElementById('f4'), UT.action.home.News,option );
+    headline2.start();
+
+  }( window ) );
+</script>
+</body>
+</html>

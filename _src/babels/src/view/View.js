@@ -10,6 +10,9 @@
  *
  */
 
+// import {Action} from '../action/Action';
+// import {ViewError} from './error/ViewError';
+
 /**
  * 表示を行います
  */
@@ -19,10 +22,11 @@ export class View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element, option:Object = {} ) {
+  constructor( element:Element, option:Object = {} ) {
 
     this._element = element;
     this._option = option;
+    this._action = null;
 
   }
   // ---------------------------------------------------
@@ -35,13 +39,19 @@ export class View {
   get element():Element {
     return this._element;
   }
-
   /**
    *
    * @return {Object|*} callback handler がセットされたObjectを返します
    */
   get option():Object {
     return this._option;
+  }
+  /**
+   *
+   * @return {*} Action instance を返します
+   */
+  get action() {
+    return this._action;
   }
   // ---------------------------------------------------
   //  METHOD

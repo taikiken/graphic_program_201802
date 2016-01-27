@@ -25,6 +25,7 @@ import {Format} from './util/Format';
 // app
 import {Env} from './app/Env';
 import {Codes} from './app/Codes';
+import {User} from './app/User';
 
 // -------------------------------------
 // data
@@ -37,7 +38,6 @@ import {Result} from './data/Result';
 import {Ajax} from './net/Ajax';
 import {Api} from './net/Api';
 import {Types} from './net/Types';
-import {User} from './net/User';
 
 // net/types
 import {Permalink} from './net/types/Permalink';
@@ -45,7 +45,6 @@ import {Query} from './net/types/Query';
 import {Queries} from './net/types/Queries';
 import {Type} from './net/types/Type';
 import {CommentType} from './net/types/CommentType';
-
 
 // -------------------------------------
 // app/App
@@ -60,6 +59,10 @@ import {Offset} from './action/Offset';
 import {Pickup} from './action/home/Pickup';
 import {Headline} from './action/home/Headline';
 import {News} from './action/home/News';
+
+import {PickupAuth} from './action/home/PickupAuth';
+import {HeadlineAuth} from './action/home/HeadlineAuth';
+import {NewsAuth} from './action/home/NewsAuth';
 
 // action/archive
 import {Category} from './action/archive/Category';
@@ -76,11 +79,25 @@ import {Bookmark} from './action/bookmark/Bookmark';
 import {Search} from './action/search/Search';
 
 // action/single
-import {Detail} from './action/single/Detail';
+import {Single} from './action/single/Single';
 
 // -------------------------------------
 // view
+import {ViewArchive} from './view/ViewArchive';
+import {ViewSingle} from './view/ViewSingle';
+
 import {ViewHeadline} from './view/home/ViewHeadline';
+import {ViewPickup} from './view/home/ViewPickup';
+
+// sidebar
+import {ViewRanking} from './view/sidebar/ViewRanking';
+import {ViewVideos} from './view/sidebar/ViewVideos';
+
+/**
+ * ToDo: 確認事項
+ * ToDo: 対象外OS alert
+ * ToDo: title, meta, ogp
+ */
 
 
 /**
@@ -94,7 +111,8 @@ var UT = {
   app: {
     Env: Env,
     App: App,
-    Codes: Codes
+    Codes: Codes,
+    User: User
   },
   data: {
     Data: Data,
@@ -109,7 +127,6 @@ var UT = {
     Ajax: Ajax,
     Api: Api,
     Types: Types,
-    User: User,
     types: {
       Permalink: Permalink,
       Query: Query,
@@ -124,7 +141,10 @@ var UT = {
     home: {
       Pickup: Pickup,
       Headline: Headline,
-      News: News
+      News: News,
+      PickupAuth: PickupAuth,
+      HeadlineAuth: HeadlineAuth,
+      NewsAuth: NewsAuth
     },
     archive: {
       Category: Category,
@@ -141,12 +161,19 @@ var UT = {
       Search: Search
     },
     single: {
-      Detail: Detail
+      Single: Single
     }
   },
   view: {
+    ViewArchive: ViewArchive,
+    ViewSingle: ViewSingle,
+    sidebar: {
+      ViewRanking: ViewRanking,
+      ViewVideos: ViewVideos
+    },
     home: {
-      ViewHeadline: ViewHeadline
+      ViewHeadline: ViewHeadline,
+      ViewPickup: ViewPickup
     }
   }
 };

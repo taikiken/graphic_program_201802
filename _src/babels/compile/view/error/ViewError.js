@@ -40,8 +40,8 @@ var _View2 = require('../View');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var React = window.React;
-var ReactDOM = window.ReactDOM;
+var React = self.React;
+var ReactDOM = self.ReactDOM;
 
 /**
  * エラーメッセージを表示します

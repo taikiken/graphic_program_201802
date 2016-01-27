@@ -67,7 +67,7 @@ var UserDae = exports.UserDae = function () {
       return this._type;
     }
     /**
-     * @return {string} article.user.id
+     * @return {string} article.user.id ユーザーIDを返します
      */
 
   }, {
@@ -76,7 +76,7 @@ var UserDae = exports.UserDae = function () {
       return this.user.id;
     }
     /**
-     * @return {string} article.user.name
+     * @return {string} article.user.name ユーザー名を返します
      */
 
   }, {
@@ -85,7 +85,7 @@ var UserDae = exports.UserDae = function () {
       return this.user.name;
     }
     /**
-     * @return {string} article.user.profile_picture
+     * @return {string} article.user.profile_picture ユーザーのURLを返します
      */
 
   }, {
@@ -94,13 +94,22 @@ var UserDae = exports.UserDae = function () {
       return this.user.profile_picture;
     }
     /**
-     * @return {string} article.user.url
+     * @return {string} article.user.url ユーザーのURLを返します
      */
 
   }, {
     key: 'url',
     get: function get() {
       return this.user.url;
+    }
+    /**
+     * @return {string} article.user.bio ユーザーの肩書を返します
+     */
+
+  }, {
+    key: 'bio',
+    get: function get() {
+      return this.user.bio;
     }
   }]);
   return UserDae;

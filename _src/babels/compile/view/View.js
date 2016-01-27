@@ -27,6 +27,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  */
 
+// import {Action} from '../action/Action';
+// import {ViewError} from './error/ViewError';
+
 /**
  * 表示を行います
  */
@@ -44,6 +47,7 @@ var View = exports.View = function () {
 
     this._element = element;
     this._option = option;
+    this._action = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -81,7 +85,6 @@ var View = exports.View = function () {
     get: function get() {
       return this._element;
     }
-
     /**
      *
      * @return {Object|*} callback handler がセットされたObjectを返します
@@ -91,6 +94,16 @@ var View = exports.View = function () {
     key: 'option',
     get: function get() {
       return this._option;
+    }
+    /**
+     *
+     * @return {*} Action instance を返します
+     */
+
+  }, {
+    key: 'action',
+    get: function get() {
+      return this._action;
     }
   }]);
   return View;

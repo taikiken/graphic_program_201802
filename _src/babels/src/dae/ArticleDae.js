@@ -35,24 +35,43 @@ export class ArticleDae {
     this._media = new MediaDae( article.media );
     // article.user
     this._user = new UserDae( article.user );
-
+    // article.comments_popular
     this._popular = new CommentsPopularDae( article.comments_popular );
 
-    if ( !Safety.check( article, 'comments_count' ) ) {
+    // Safety.check, object に key が存在しタイプがあっているかを調べます
+    // comments_count check
+    if ( !Safety.check( article, 'comments_count', 'number' ) ) {
 
-      article.comments_count = '0';
+      article.comments_count = 0;
 
     }
+    // date check
     if ( Safety.check( article, 'date' ) ) {
 
       article.formatDate = Format.date( article.date );
 
     }
 
+    this._index = -1;
+
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * @return {number|*|Number} index number を返します, default -1, -1 の時は未設定なので使用してはいけない
+   */
+  get index():Number {
+    return this._index;
+  }
+
+  /**
+   * index number を設定します
+   * @param {Number} index index number
+   */
+  set index( index:Number ):void {
+    this._index = index;
+  }
   /**
    * @return {Object|*} article 記事単1データ
    */

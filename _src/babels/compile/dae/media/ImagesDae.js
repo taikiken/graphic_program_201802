@@ -70,7 +70,7 @@ var ImagesDae = exports.ImagesDae = function () {
   }, {
     key: 'large',
     get: function get() {
-      return this.images.string;
+      return this.images.large;
     }
     /**
      *

@@ -43,27 +43,34 @@ export class UserDae {
     return this._type;
   }
   /**
-   * @return {string} article.user.id
+   * @return {string} article.user.id ユーザーIDを返します
    */
   get id():string {
     return this.user.id;
   }
   /**
-   * @return {string} article.user.name
+   * @return {string} article.user.name ユーザー名を返します
    */
   get userName():string {
     return this.user.name;
   }
   /**
-   * @return {string} article.user.profile_picture
+   * @return {string} article.user.profile_picture ユーザーのURLを返します
    */
   get profilePicture():string {
     return this.user.profile_picture;
   }
   /**
-   * @return {string} article.user.url
+   * @return {string} article.user.url ユーザーのURLを返します
    */
   get url():string {
     return this.user.url;
   }
+  /**
+   * @return {string} article.user.bio ユーザーの肩書を返します
+   */
+  get bio():string {
+    return this.user.bio;
+  }
+
 }
