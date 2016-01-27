@@ -2773,11 +2773,14 @@ table tr.w200 > td {
 /*
   sprite
 * *********************************** */
-.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
-  background-image: url(/assets/images/sprite/sprite-footer.png); }
+.sprite-common {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-header, .head-sec-inner h1 a, .head-sec .search-block input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
 
 .head-sec-inner {
   width: 1070px;
