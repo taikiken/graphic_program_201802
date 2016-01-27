@@ -1,4 +1,4 @@
-@import "../../../scss/asset";
+@import "../../../../scss/asset";
 
 // Project module を記述します
 
@@ -7,3 +7,6 @@
 // design module
 //
 // Styleguide 2.0.0
+
+@import "utility";
+@import "slider";

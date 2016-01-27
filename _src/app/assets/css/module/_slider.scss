@@ -1,0 +1,158 @@
+@import "../../../../scss/asset";
+
+// Module slider を記述します
+
+// Slider
+//
+// design module slider
+//
+// Styleguide 2.x.0
+
+// hero-slider
+// トップページ用 メインビジュアルスライダー
+.hero {
+  @at-root {
+    &-sec {
+    }
+
+    &-slider {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background-color: #000;
+      overflow: hidden;
+
+      &-inner {
+        width: 640px;
+        margin: 0 auto;
+        overflow: visible;
+
+        ul {
+          @include clearfix;
+          width: 200000px;
+        }
+
+        li {
+          float: left;
+          width: 640px;
+
+          a {
+            @include link-decoration(#fff, #fff, none, none);
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 400px;
+            @include hover-opacity;
+
+            .overlay {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+            }
+
+            .post {
+              &-overview {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+
+                padding: 0 30px 24px 30px;
+              }
+
+              &-category {
+                color: #e1438b;
+                font-weight: bold;
+              }
+
+              &-heading {
+                font-weight: bold;
+                font-size: fz(24);
+              }
+
+              &-date,
+              &-comment-num {
+                display: inline-block;
+                font-size: fz(12);
+              }
+
+              &-comment-num {
+                margin-left: 10px;
+                padding-left: 20px;
+                background: url(../images/index/icon-slider-comment.png) 0 center no-repeat;
+              }
+            }
+          }
+        }
+      } //.hero-slider-inner
+
+      &-control {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        // transform: translateX(-50%);
+        margin-left: -320px;
+
+        .direction {
+          a {
+            position: absolute;
+            display: block;
+            width: 38px;
+            height: 400px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            @include hide-text;
+            @include hover-opacity;
+          }
+
+          &-prev {
+            left: -38px;
+            background-image: url(../images/index/btn-slider-prev.png);
+          }
+
+          &-next {
+            left: 640px;
+            background-image: url(../images/index/btn-slider-next.png);
+          }
+        }
+
+        .pager {
+          position: absolute;
+          top: 370px;
+          width: 100%;
+
+          ul {
+            width: 640px;
+            text-align: center;
+            letter-spacing: ls(inline-block);
+          }
+
+          li {
+            display: inline-block;
+            letter-spacing: normal;
+
+            + li {
+              margin-left: 15px;
+            }
+          }
+
+          a {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: #999;
+            border-radius: 100%;
+            @include hide-text;
+
+            &.active,
+            &:hover {
+              background-color: #e1438b;
+            }
+          }
+        }
+      } //.hero-slider-control
+    }
+  }
+}
+
+// ---------------------------
+
