@@ -335,9 +335,9 @@ export class ViewPickup extends View {
 
         // JSX
         return (
-          <div className={'pickup-container slide-' + this.state.index}>
+          <div className={'hero-slider pickup-container slide-' + this.state.index}>
             {/* slider */}
-            <div className="slider-wrapper">
+            <div className="hero-slider-inner">
               <ul className="pickup-slider">
                 {
                   // 1.first
@@ -365,18 +365,20 @@ export class ViewPickup extends View {
                 }
               </ul>
             </div>
-            {/* pagers */}
-            <div className="pagers-container">
-              <Pagers
-                list={articles}
-                offset={articles.length}
-                onPager={this.onPagerClick}
-              />
-            </div>
-            {/* prev / next */}
-            <div className="slider-nav-container">
-              <div id="prev"><a href="#prev" onClick={this.onPrev}>Prev</a></div>
-              <div id="next"><a href="#next" onClick={this.onNext}>Next</a></div>
+            <div class="hero-slider-control">
+              {/* prev / next */}
+              <div className="slider-nav-container">
+                <div id="prev"><a href="#prev" onClick={this.onPrev}>Prev</a></div>
+                <div id="next"><a href="#next" onClick={this.onNext}>Next</a></div>
+              </div>
+              {/* pagers */}
+              <div className="pagers-container">
+                <Pagers
+                  list={articles}
+                  offset={articles.length}
+                  onPager={this.onPagerClick}
+                />
+              </div>
             </div>
           </div>
 

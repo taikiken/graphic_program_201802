@@ -78,4 +78,12 @@ export class Empty {
     return 'img/common/user_empty.jpg';
 
   }
+
+  /**
+   * hero-slider カバーグラデーション画像
+   * @return {string} hero-slider カバーグラデーション画像パスを返します
+   */
+  static get KV_OVERLAY():string {
+    return 'assets/images/index/kv-overlay.png';
+  }
 }
