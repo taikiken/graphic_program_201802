@@ -12,18 +12,19 @@
 'use strict';
 
 import {Safety} from '../data/Safety';
-import {Format} from '../util/Format';
-import {CategoryDae} from './CategoryDae';
-import {MediaDae} from './MediaDae';
-import {UserDae} from './UserDae';
 import {KeywordsDae} from './single/KeywordsDae';
 
 import {RelatedDae} from './RelatedDae';
 
 /**
- * JSON.response
+ * 記事詳細の JSON.response
  */
 export class SingleDae extends RelatedDae {
+  /**
+   * 記事詳細のresponceデータを後処理しやすいように加工します
+   *
+   * @param {Object} response
+   */
   constructor( response:Object = {} ) {
 
     super( response );

@@ -301,7 +301,7 @@ var Api = exports.Api = function () {
           return _ApiDae.ApiDae.api('comment:bad:delete');
 
         case '':
-          // 記事詳細でのコメント一覧表示
+          // コメント一覧全部
           return _ApiDae.ApiDae.api('comment');
 
         default:

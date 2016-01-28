@@ -13,6 +13,7 @@
 
 // app
 import {Empty} from '../app/Empty';
+import {SingleInfo} from '../app/SingleInfo';
 
 // view
 import {View} from './View';
@@ -82,7 +83,7 @@ export class ViewSingle extends View {
 
     } else {
 
-      this.render( result.response );
+      this.render( response );
 
     }
 
@@ -116,7 +117,12 @@ export class ViewSingle extends View {
   render( responce:Object ):void {
 
     let single = new SingleDae( responce );
-    console.log( 'single ', single );
+    // global SingleInfoへ保存
+    SingleInfo.dae = single;
+
+    // beforeRender call
+    this.beforeRender();
+
     let element = this.element;
     let _this = this;
 
@@ -155,6 +161,12 @@ export class ViewSingle extends View {
         );
 
       },
+      beforeRender: function() {
+
+        // before rendering
+        _this.executeSafely( 'beforeRender' );
+
+      },
       componentWillMount: function() {
 
         // after mount
@@ -180,7 +192,9 @@ export class ViewSingle extends View {
       this.related( single.related );
     }
 
-    // コメント取得
+    // comment 取得
+    // 自動化の場合はここに記述
+    // ToDo: 決めかねてる...
 
   }// render
   /**

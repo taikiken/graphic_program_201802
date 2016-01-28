@@ -39,12 +39,14 @@ var _CommentsPopularDae = require('./CommentsPopularDae');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * articles 記事単1データを管理します
+ * articles 記事一つのデータを管理します
  */
 
 var ArticleDae = exports.ArticleDae = function () {
   /**
-   * articles データを管理
+   * archive系で取得した記事配列から 1件取り出し<br>
+   * データを管理します
+   *
    * @param {Object} [article={}] articles配列にセットされている article 記事1件データ
    */
 

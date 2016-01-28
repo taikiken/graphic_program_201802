@@ -19,11 +19,13 @@ import {UserDae} from './UserDae';
 import {CommentsPopularDae} from './CommentsPopularDae';
 
 /**
- * articles 記事単1データを管理します
+ * articles 記事一つのデータを管理します
  */
 export class ArticleDae {
   /**
-   * articles データを管理
+   * archive系で取得した記事配列から 1件取り出し<br>
+   * データを管理します
+   *
    * @param {Object} [article={}] articles配列にセットされている article 記事1件データ
    */
   constructor( article:Object = {} ) {

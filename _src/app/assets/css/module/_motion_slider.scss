@@ -19,7 +19,7 @@
         opacity: 0;
 
         transition-property: opacity;
-        transition-duration: 0.5s;
+        transition-duration: 0.25s;
         transition-timing-function: linear;
       }
     }
@@ -36,14 +36,28 @@
       transition-duration: 0.5s;
     }
 
+    .hero-slider-control {
+      .pager {
+        a {
+          transition-property: background-color;
+          transition-duration: 0.25s;
+          transition-timing-function: linear;
+        }
+      }
+    }
+
+    // --------------------------------------------------
+    // 親コンテナ class に対する 位置
     &.slide-0 {
       .pickup-slider {
         transform: translateX(0);
+        transition-duration: 0.5s;
 
         .pickup-5 {
           .overlay,
           .post-overview {
             opacity: 1;
+            transition-duration: 0.25s;
           }
         }
       }
@@ -52,6 +66,7 @@
           .pager-0 {
             a {
               background-color: #e1438b;
+              transition-duration: 0.25s;
             }
           }
         }
@@ -123,11 +138,13 @@
     &.slide-4 {
       .pickup-slider {
         transform: translateX(-$slider-width * 4);
+        transition-duration: 0.5s;
 
         .pickup-9 {
           .overlay,
           .post-overview {
             opacity: 1;
+            transition-duration: 0.25s;
           }
         }
       }
@@ -136,6 +153,7 @@
           .pager-4 {
             a {
               background-color: #e1438b;
+              transition-duration: 0.25s;
             }
           }
         }
@@ -150,23 +168,26 @@
       .pickup-slider {
         transform: translateX($slider-width);
         transition-duration: 0s;
+        //transition-property: none;
 
-        .pickup-9 {
-          .overlay,
-          .post-overview {
-            opacity: 1;
-          }
-        }
+        //.pickup-9 {
+        //  .overlay,
+        //  .post-overview {
+        //    opacity: 1;
+        //    transition-duration: 0.5s;
+        //  }
+        //}
       }
-      .hero-slider-control {
-        .pager {
-          .pager-4 {
-            a {
-              background-color: #e1438b;
-            }
-          }
-        }
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-4 {
+      //      a {
+      //        background-color: #e1438b;
+      //        transition-duration: 0.5s;
+      //      }
+      //    }
+      //  }
+      //}
     }
 
     // index 0 -> 4
@@ -175,22 +196,24 @@
         transform: translateX(-$slider-width * 5);
         transition-duration: 0s;
 
-        .pickup-5 {
-          .overlay,
-          .post-overview {
-            opacity: 1;
-          }
-        }
+        //.pickup-5 {
+        //  .overlay,
+        //  .post-overview {
+        //    opacity: 1;
+        //    transition-duration: 0.5s;
+        //  }
+        //}
       }
-      .hero-slider-control {
-        .pager {
-          .pager-0 {
-            a {
-              background-color: #e1438b;
-            }
-          }
-        }
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-0 {
+      //      a {
+      //        background-color: #e1438b;
+      //        transition-duration: 0.5s;
+      //      }
+      //    }
+      //  }
+      //}
     }
   }// .hero-slider
 }

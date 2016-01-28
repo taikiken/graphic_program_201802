@@ -38,14 +38,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Safety = require('../data/Safety');
 
-var _Format = require('../util/Format');
-
-var _CategoryDae = require('./CategoryDae');
-
-var _MediaDae = require('./MediaDae');
-
-var _UserDae = require('./UserDae');
-
 var _KeywordsDae = require('./single/KeywordsDae');
 
 var _RelatedDae2 = require('./RelatedDae');
@@ -53,11 +45,17 @@ var _RelatedDae2 = require('./RelatedDae');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * JSON.response
+ * 記事詳細の JSON.response
  */
 
 var SingleDae = exports.SingleDae = function (_RelatedDae) {
   (0, _inherits3.default)(SingleDae, _RelatedDae);
+
+  /**
+   * 記事詳細のresponceデータを後処理しやすいように加工します
+   *
+   * @param {Object} response
+   */
 
   function SingleDae() {
     var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
