@@ -1,0 +1,196 @@
+@import "../../../../scss/asset";
+
+// ---------------------------------------------------------------------
+// slider home motion
+// API: pickup
+// ---------------------------------------------------------------------
+// hero-slider
+// トップページ用 メインビジュアルスライダー
+#hero-sec {
+  $slider-width: 640px;
+
+  .hero-slider {
+
+    .hero-slider-inner {
+      position: relative;
+
+      .overlay,
+      .post-overview {
+        opacity: 0;
+
+        transition-property: opacity;
+        transition-duration: 0.5s;
+        transition-timing-function: linear;
+      }
+    }
+
+    .pickup-slider {
+      position: absolute;
+      left: -$slider-width * 5;
+      top: 0;
+
+      // default position
+      transform: translateX( 0 );
+
+      transition-property: transform;
+      transition-duration: 0.5s;
+    }
+
+    &.slide-0 {
+      .pickup-slider {
+        transform: translateX(0);
+
+        .pickup-5 {
+          .overlay,
+          .post-overview {
+            opacity: 1;
+          }
+        }
+      }
+      .hero-slider-control {
+        .pager {
+          .pager-0 {
+            a {
+              background-color: #e1438b;
+            }
+          }
+        }
+      }
+    }
+    &.slide-1 {
+      .pickup-slider {
+        transform: translateX(-$slider-width * 1);
+
+        .pickup-6 {
+          .overlay,
+          .post-overview {
+            opacity: 1;
+          }
+        }
+      }
+      .hero-slider-control {
+        .pager {
+          .pager-1 {
+            a {
+              background-color: #e1438b;
+            }
+          }
+        }
+      }
+    }
+    &.slide-2 {
+      .pickup-slider {
+        transform: translateX(-$slider-width * 2);
+
+        .pickup-7 {
+          .overlay,
+          .post-overview {
+            opacity: 1;
+          }
+        }
+      }
+      .hero-slider-control {
+        .pager {
+          .pager-2 {
+            a {
+              background-color: #e1438b;
+            }
+          }
+        }
+      }
+    }
+    &.slide-3 {
+      .pickup-slider {
+        transform: translateX(-$slider-width * 3);
+
+        .pickup-8 {
+          .overlay,
+          .post-overview {
+            opacity: 1;
+          }
+        }
+      }
+      .hero-slider-control {
+        .pager {
+          .pager-3 {
+            a {
+              background-color: #e1438b;
+            }
+          }
+        }
+      }
+    }
+    &.slide-4 {
+      .pickup-slider {
+        transform: translateX(-$slider-width * 4);
+
+        .pickup-9 {
+          .overlay,
+          .post-overview {
+            opacity: 1;
+          }
+        }
+      }
+      .hero-slider-control {
+        .pager {
+          .pager-4 {
+            a {
+              background-color: #e1438b;
+            }
+          }
+        }
+      }
+    }
+    // --------------------------------------------------
+    // 循環アニメーションのために
+    // アニメーションなしで移動させるための設定
+    // --------------------------------------------------
+    // index 4 -> 0
+    &.slide-999 {
+      .pickup-slider {
+        transform: translateX($slider-width);
+        transition-duration: 0s;
+
+        .pickup-9 {
+          .overlay,
+          .post-overview {
+            opacity: 1;
+          }
+        }
+      }
+      .hero-slider-control {
+        .pager {
+          .pager-4 {
+            a {
+              background-color: #e1438b;
+            }
+          }
+        }
+      }
+    }
+
+    // index 0 -> 4
+    &.slide-1999 {
+      .pickup-slider {
+        transform: translateX(-$slider-width * 5);
+        transition-duration: 0s;
+
+        .pickup-5 {
+          .overlay,
+          .post-overview {
+            opacity: 1;
+          }
+        }
+      }
+      .hero-slider-control {
+        .pager {
+          .pager-0 {
+            a {
+              background-color: #e1438b;
+            }
+          }
+        }
+      }
+    }
+  }// .hero-slider
+}

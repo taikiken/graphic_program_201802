@@ -53,10 +53,13 @@ htdocs = dir.htdocs
 # --------------------------------------------
 
 # build
+# test ファイルのみ public へ移動させない
+# example.html : static file
+# example.tmp.html : build by JSON
 gulp.task 'html:build', ->
   return gulp.src [
     app + '/**/*.html'
-    '!' + app + '/**/*tmp*.html'
+    '!' + app + '/**/*test*.html'
   ]
   .pipe $.replaceTask patterns: patterns
   .pipe $.if compress.html, $.htmlmin collapseWhitespace: true

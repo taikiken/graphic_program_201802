@@ -312,7 +312,7 @@ export class ViewArchive extends View {
           // 1件目データを取り出し
           let first = commentsPopular.first;
           let firstUser = first.user;
-          let picture = firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE;
+          let picture = firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE_FEATURE;
 
           return (
             <div className="comments-popular">

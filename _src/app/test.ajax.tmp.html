@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<h1 id="c1"></h1>
+<pre id="c1"></pre>
 
 <section id="f1"></section>
 <section id="f2"></section>
@@ -39,6 +39,7 @@
       },
       success:function(m){
         console.log(m);
+        $('#c1').html(m);
       }
     });
 

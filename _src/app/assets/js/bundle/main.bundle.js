@@ -155,7 +155,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-27 22:07:53
+	 * @date 2016-01-28 15:57:32
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -7065,7 +7065,7 @@
 	            // 1件目データを取り出し
 	            var first = commentsPopular.first;
 	            var firstUser = first.user;
-	            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE;
+	            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
 
 	            return React.createElement(
 	              'div',
@@ -7358,7 +7358,7 @@
 	    key: 'IMG_SMALL',
 	    get: function get() {
 
-	      return 'img/common/empty.jpg';
+	      return 'images/common/thumb-noimage-70x70.png';
 	    }
 	    /**
 	     * img thumbnail 代替画像パス<br>
@@ -7371,7 +7371,7 @@
 	    key: 'IMG_MIDDLE',
 	    get: function get() {
 
-	      return 'img/common/empty.jpg';
+	      return 'images/common/thumb-noimage-340x150.png';
 	    }
 	    /**
 	     * video thumbnail 代替画像パス<br>
@@ -7384,10 +7384,10 @@
 	    key: 'VIDEO_SMALL',
 	    get: function get() {
 
-	      return 'img/common/empty.jpg';
+	      return 'images/common/thumb-overlay-movie-340x150.png';
 	    }
 	    /**
-	     *  ユーザー・プロファイル・アイコン 代替画像パス<br>
+	     * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
 	     * [Ex.] コメントとか
 	     * @readonly
 	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
@@ -7397,7 +7397,30 @@
 	    key: 'USER_PICTURE',
 	    get: function get() {
 
-	      return 'img/common/user_empty.jpg';
+	      return 'img/common/thumb-user.png';
+	    }
+	    /**
+	     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)<br>
+	     * [Ex.] コメントとか
+	     * @readonly
+	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+	     */
+
+	  }, {
+	    key: 'USER_PICTURE_FEATURE',
+	    get: function get() {
+
+	      return 'img/common/thumb-user-feature.png';
+	    }
+	    /**
+	     * hero-slider カバーグラデーション画像
+	     * @return {string} hero-slider カバーグラデーション画像パスを返します
+	     */
+
+	  }, {
+	    key: 'KV_OVERLAY',
+	    get: function get() {
+	      return 'assets/images/index/kv-overlay.png';
 	    }
 	  }]);
 	  return Empty;
@@ -9257,11 +9280,12 @@
 	        },
 	        render: function render() {
 	          var p = this.props;
+	          var thumbnail = p.thumbnail ? p.thumbnail : _Empty.Empty.IMG_SMALL;
 
 	          return React.createElement(
 	            'a',
 	            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
-	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            React.createElement('img', { src: thumbnail, alt: p.title }),
 	            React.createElement(
 	              'p',
 	              { className: 'cat cat-' + p.slug },
@@ -10085,9 +10109,6 @@
 
 	// app
 	// import {App} from '../../app/App';
-	// import {Empty} from '../../app/Empty';
-
-	// view
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -10114,6 +10135,8 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	var _Empty = __webpack_require__(109);
+
 	var _View2 = __webpack_require__(110);
 
 	var _ViewError = __webpack_require__(111);
@@ -10134,6 +10157,8 @@
 	// dae
 
 	// action
+
+	// view
 
 	var ReactDOM = self.ReactDOM;
 
@@ -10175,7 +10200,9 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   *
+	   * interval 間隔, milliseconds, default 5000ms
+	   * @property waiting
+	   * @default 5000
 	   * @return {number|*|Number} slideshow interval milliseconds を返します
 	   */
 
@@ -10260,7 +10287,10 @@
 
 	      var element = this.element;
 	      var last = articles.length - 1;
+
 	      var position = 0;
+
+	      // interval を管理する Gasane.Polling instance
 	      var polling = new Polling(this.waiting);
 	      var _this = this;
 
@@ -10286,17 +10316,12 @@
 
 	          return React.createElement(
 	            'li',
-	            { id: 'pager-' + p.index },
+	            { className: 'pager-item pager-' + (p.index - p.length) },
 	            React.createElement(
 	              'a',
-	              { href: '#pickup-' + p.index,
-	                onClick: this.handleClick
-	              },
-	              React.createElement(
-	                'span',
-	                null,
-	                p.index - p.length
-	              )
+	              { href: '#pickup-' + p.index, className: 'pager-link',
+	                onClick: this.handleClick },
+	              p.index - p.length
 	            )
 	          );
 	        }
@@ -10352,7 +10377,8 @@
 	          url: React.PropTypes.string.isRequired,
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
-	          large: React.PropTypes.string.isRequired
+	          large: React.PropTypes.string.isRequired,
+	          commentsCount: React.PropTypes.number.isRequired
 	        },
 	        render: function render() {
 	          var p = this.props;
@@ -10363,21 +10389,31 @@
 	            React.createElement(
 	              'a',
 	              { href: p.url },
+	              React.createElement('img', { src: _Empty.Empty.KV_OVERLAY, alt: '', className: 'overlay' }),
 	              React.createElement('img', { src: p.large, alt: p.title }),
 	              React.createElement(
-	                'p',
-	                { className: 'cat cat-' + p.slug },
-	                p.category
-	              ),
-	              React.createElement(
-	                'h3',
-	                { className: 'pickup-title' },
-	                p.title
-	              ),
-	              React.createElement(
-	                'p',
-	                { className: 'date' },
-	                p.date
+	                'div',
+	                { className: 'post-overview' },
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-category cat-' + p.slug },
+	                  p.category
+	                ),
+	                React.createElement(
+	                  'h2',
+	                  { className: 'post-heading' },
+	                  p.title
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-date' },
+	                  p.date
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-comment-num' },
+	                  p.commentsCount
+	                )
 	              )
 	            )
 	          );
@@ -10407,7 +10443,7 @@
 	            n = 0;
 	          }
 	          // change slide
-	          this.onJump(n);
+	          this.jump(n);
 	        },
 	        // next button click
 	        onNext: function onNext(event) {
@@ -10426,16 +10462,61 @@
 	            n = last;
 	          }
 	          // change slide
-	          this.onJump(n);
+	          this.jump(n);
 	        },
 	        // slide を変更
-	        onJump: function onJump(index) {
-	          console.log('onJump ', index);
-	          // polling reset
-	          polling.stop().start();
+	        jump: function jump(index) {
+	          console.log('jump ', index);
+	          // polling stop
+	          polling.stop();
+	          // --------------
+	          // 循環アニメーションのために
+	          if (index === 0) {
+	            // 先頭に戻る
+	            if (position === last) {
+	              // 現在がラストだったらアニメーションなしで移動させる
+	              this.setState({ index: 999 });
+	              this.delay(index);
+	            } else {
+	              // 通常移動
+	              this.setup(index);
+	            }
+	          } else if (index === last) {
+	            // 最終に戻る
+	            if (position === 0) {
+	              // 現在が先頭だったらアニメーションなしで移動させる
+	              this.setState({ index: 1999 });
+	              this.delay(index);
+	            } else {
+	              // 通常移動
+	              this.setup(index);
+	            }
+	          } else {
+
+	            // 通常移動
+	            this.setup(index);
+	          }
+	        },
+	        // 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
+	        // アニメーション無しで移動させた後
+	        // リフレッシュのために待機させる 1fps
+	        delay: function delay(index) {
+	          var me = this;
+	          if (!!this.timer) {
+	            clearTimeout(this.timer);
+	          }
+	          this.timer = setTimeout(function () {
+	            me.setup(index);
+	          }, 25);
+	        },
+	        // re position, polling restart
+	        setup: function setup(index) {
+	          // --------------
 	          // state update
 	          position = index;
 	          this.setState({ index: index });
+	          // polling start
+	          polling.start();
 	        },
 	        // pager click から呼び出されます
 	        onPagerClick: function onPagerClick(index) {
@@ -10443,7 +10524,7 @@
 	          // 子コンポーネント Pagers -> PickupPager から呼び出される
 	          // innerHTML 数値を使うので
 	          // Number 型へ変換する
-	          this.onJump(index * 1);
+	          this.jump(parseInt(index, 10));
 	        },
 
 	        // --------------------------------------------
@@ -10471,17 +10552,18 @@
 	              url: dae.url,
 	              date: dae.formatDate,
 	              title: dae.title,
-	              large: dae.media.images.large
+	              large: dae.media.images.large,
+	              commentsCount: dae.commentsCount
 	            });
 	          };
 
 	          // JSX
 	          return React.createElement(
 	            'div',
-	            { className: 'pickup-container slide-' + this.state.index },
+	            { className: 'hero-slider pickup-container slide-' + this.state.index },
 	            React.createElement(
 	              'div',
-	              { className: 'slider-wrapper' },
+	              { className: 'hero-slider-inner' },
 	              React.createElement(
 	                'ul',
 	                { className: 'pickup-slider' },
@@ -10507,33 +10589,29 @@
 	            ),
 	            React.createElement(
 	              'div',
-	              { className: 'pagers-container' },
-	              React.createElement(Pagers, {
-	                list: articles,
-	                offset: articles.length,
-	                onPager: this.onPagerClick
-	              })
-	            ),
-	            React.createElement(
-	              'div',
-	              { className: 'slider-nav-container' },
+	              { className: 'hero-slider-control' },
 	              React.createElement(
 	                'div',
-	                { id: 'prev' },
+	                { className: 'direction' },
 	                React.createElement(
 	                  'a',
-	                  { href: '#prev', onClick: this.onPrev },
+	                  { id: 'prev', className: 'direction-prev', href: '#prev', onClick: this.onPrev },
 	                  'Prev'
+	                ),
+	                React.createElement(
+	                  'a',
+	                  { id: 'next', className: 'direction-next', href: '#next', onClick: this.onNext },
+	                  'Next'
 	                )
 	              ),
 	              React.createElement(
 	                'div',
-	                { id: 'next' },
-	                React.createElement(
-	                  'a',
-	                  { href: '#next', onClick: this.onNext },
-	                  'Next'
-	                )
+	                { className: 'pager' },
+	                React.createElement(Pagers, {
+	                  list: articles,
+	                  offset: articles.length,
+	                  onPager: this.onPagerClick
+	                })
 	              )
 	            )
 	          );
