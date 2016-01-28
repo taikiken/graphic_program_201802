@@ -173,7 +173,6 @@ gulp.task 'copy', (cb) ->
 gulp.task 'default', (cb) ->
   runSequence(
     [
-      'sprite:build'
       'babels:build'
       'single:build'
     ]
