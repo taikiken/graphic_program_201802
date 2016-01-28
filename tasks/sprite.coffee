@@ -170,7 +170,7 @@ gulp.task 'sprite:build', ->
           style: '_sprite.scss'
           name:'sprite'
           cssPath: cssPath
-          processor: 'sprity-sass'
+          processor: 'sass'
           prefix: 'sprite'
 #          orientation: 'binary-tree'
           orientation: setting.sprite.option
