@@ -76,7 +76,7 @@ gulp.task 'babels:dev', (cb) ->
 # babels build
 gulp.task 'babels:build', (cb) ->
   runSequence(
-    'babels:make'
+    'babels:babel'
     'webpack:babels:main:build'
     cb
   )
