@@ -1,0 +1,166 @@
+@import "../../../../scss/asset";
+@import "sprite";
+
+// general
+//
+// design module general
+//
+// Styleguide 2.5.0
+
+// newsboad
+// 汎用 ニュース一覧
+.newsboad {
+  @include clearfix;
+
+  @at-root {
+    &-column {
+      width: 340px;
+
+      &.column1 {
+        float: left;
+      }
+
+      &.column2 {
+        float: right;
+      }
+    } //.newsboad-column
+
+    &-item {
+      margin-top: 30px;
+
+      .post {
+        @include link-decoration(#333, #333, none, none);
+        display: block;
+
+        &-thumb {
+          position: relative;
+
+          &-overlay-movie {
+            display: none;
+            position: absolute;
+
+            &.type-movie {
+              display: block;
+            }
+          }
+        } //post-thumb
+
+        &-data {
+          margin-top: .75em;
+        }
+
+        &-category {
+          color: #e1438b;
+          font-weight: bold;
+          font-size: fz(12);
+        }
+
+        &-heading {
+          font-weight: bold;
+          font-size: fz(20);
+        }
+
+        &-date {
+          margin-top: .25em;
+          color: #666;
+          font-size: fz(10);
+        }
+
+        &-excerpt-text {
+          margin-top: 0.25em;
+        }
+      }
+    } //.post
+
+    .feature-user {
+      margin-top: 10px;
+      background-color: #f5f5f5;
+
+      .user-prof {
+        &-thumb, &-data {
+          @include table-cell;
+        }
+
+        &-link {
+          @include link-decoration(#333, #333, none, none);
+          display: block;
+        }
+
+        &-thumb {
+          width: 50px;
+          height: 50px;
+          background: url(../images/common/thumb-user-feature.png) 0 0 no-repeat;
+        }
+
+        &-name, &-job {
+          margin-left: 10px;
+        }
+
+        &-name {
+          font-weight: bold;
+        }
+
+        &-job {
+          color: #666;
+          font-size: fz(12);
+        }
+      }
+
+      .user-comment {
+        padding: 10px 10px 0 10px;
+        font-size: fz(12);
+      }
+
+      .user-response {
+        padding: 8px;
+
+        i {
+          @extend .sprite-common;
+          @include hide-text;
+          margin-right: 5px;
+        }
+
+        &-like {
+          i {
+            @include sprite( $common-icon-thumbs-up );
+            display: inline-block;
+          }
+        }
+
+        &-dislike {
+          i {
+            @include sprite( $common-icon-thumbs-down );
+            display: inline-block;
+          }
+        }
+      }
+    } //.feature-user
+
+    .commented-user {
+      @include clearfix;
+      margin-top: 10px;
+
+      &-item {
+        float: left;
+
+        & + & {
+          margin-left: 2px;
+        }
+      }
+
+      &-thumb {
+        @include link-decoration(null, null, none, none);
+        display: block;
+        width: 25px;
+        height: 25px;
+        background: url(../images/common/thumb-user.png) 0 0 no-repeat;
+      }
+
+      &-andmore {
+        line-height: 25px;
+        margin-left: 5px;
+        font-size: fz(12);
+      }
+    } //.commented-user
+  }
+}
