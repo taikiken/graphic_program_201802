@@ -3207,6 +3207,7 @@ table tr.w200 > td {
     margin-top: 8px; }
 
 .head-sec .user-block {
+  position: relative;
   float: left;
   margin-left: 15px; }
   .head-sec .user-block .preference {
@@ -3231,7 +3232,7 @@ table tr.w200 > td {
       display: block;
       width: 35px;
       height: 35px;
-      background: url(../images/header-icon-user.png) 0 0 no-repeat; }
+      background: url(../images/common/header-icon-user.png) 0 0 no-repeat; }
     .head-sec .user-block.signin .notice {
       position: absolute;
       top: -5px;
@@ -3247,6 +3248,37 @@ table tr.w200 > td {
       font-weight: bold;
       font-size: 72%;
       text-align: center; }
+
+.head-sec .user-menu {
+  z-index: 9999;
+  position: absolute;
+  top: 57px;
+  left: -125px;
+  width: 160px;
+  background-color: #fff;
+  border-radius: 3px; }
+  .head-sec .user-menu:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 138px;
+    width: 9px;
+    height: 5px;
+    background: url(../images/common/icon-user-menu.png) 0 0 no-repeat; }
+  .head-sec .user-menu li {
+    border-bottom: 1px solid #ddd; }
+    .head-sec .user-menu li:last-child {
+      border-bottom: none; }
+  .head-sec .user-menu a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 93%; }
+    .head-sec .user-menu a:link, .head-sec .user-menu a:visited, .head-sec .user-menu a:hover, .head-sec .user-menu a:active {
+      color: #333;
+      text-decoration: none; }
+    .head-sec .user-menu a:hover {
+      color: #333;
+      text-decoration: underline; }
 
 .gnav-sec .row1 {
   background-color: #111; }
