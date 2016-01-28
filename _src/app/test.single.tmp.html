@@ -36,23 +36,11 @@
     UT.app.App.develop();
 
     // -------------------------------------------------
-    var headline2;
+    var single;
 
-    var cb = {
-      xyz: 'abc',
-      didMount: function() {
-        console.log( 'cb dom mount', this, this.xyz );
-      }
-    };
-
-    function Main() {}
-    Main.prototype.abc = 'abc';
-    Main.prototype.didMount = function() {
-      console.log( 'main mount', this, this.abc );
-    };
-
-    var main = new Main();
-
+    function beforeRender() {
+      console.log( 'beforeRender ', this );
+    }
     function didMount() {
       console.log( 'dom mount', this );
     }
@@ -68,12 +56,11 @@
     function responseError( error ) {
       console.log( 'responseError', error );
 
-      headline2.showError( 'まずい！ ' + error.name + ', ' + error.message );
+      single.showError( 'まずい！ ' + error.name + ', ' + error.message );
     }
     var option = {
-//      didMount: didMount.bind( this ),
-      didMount: main.didMount.bind( main ),
-//      didMount: cb.didMount.bind( cb ),
+      beforeRender: beforeRender,
+      didMount: didMount,
       errorMount: errorMount,
       undefinedError: undefinedError,
       emptyError: emptyError,
@@ -88,8 +75,10 @@
         'user': document.getElementById('comment-user')
       }
     };
-    headline2 = new UT.view.ViewSingle( 30, document.getElementById('single'), elements, option );
-    headline2.start();
+
+    // article id 30
+    single = new UT.view.ViewSingle( 30, document.getElementById('single'), elements, option );
+    single.start();
 
   }( window ) );
 </script>

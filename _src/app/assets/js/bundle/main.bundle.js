@@ -114,13 +114,13 @@
 
 	var _ViewSingle = __webpack_require__(122);
 
-	var _ViewHeadline = __webpack_require__(126);
+	var _ViewHeadline = __webpack_require__(127);
 
-	var _ViewPickup = __webpack_require__(127);
+	var _ViewPickup = __webpack_require__(128);
 
-	var _ViewRanking = __webpack_require__(128);
+	var _ViewRanking = __webpack_require__(129);
 
-	var _ViewVideos = __webpack_require__(129);
+	var _ViewVideos = __webpack_require__(130);
 
 	/**
 	 * ToDo: 確認事項
@@ -155,7 +155,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-28 15:57:32
+	 * @date 2016-01-28 23:22:07
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -1966,6 +1966,11 @@
 	            return ['fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f'][Math.floor(Math.random() * 3)];
 
 	        }
+	      } else {
+	        // 非ログインは空文字を返す
+	        // debugger
+	        // Authorization:OAuth realm=undotsushin.com, oautn_token=
+	        return '';
 	      }
 	    }
 	  }]);
@@ -2927,7 +2932,7 @@
 	          return _ApiDae.ApiDae.api('comment:bad:delete');
 
 	        case '':
-	          // 記事詳細でのコメント一覧表示
+	          // コメント一覧全部
 	          return _ApiDae.ApiDae.api('comment');
 
 	        default:
@@ -3730,7 +3735,7 @@
 	    'comment:self': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/' + _Path.Path.ARTICLE_ID + '/self'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
 	    // 特定のコメントを取得する
 	    // /api/v1/comments/article/{:article_id}/{:comment_id}
-	    'comment:single': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/' + _Path.Path.ARTICLE_ID), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
+	    'comment:single': new _Types.Types(new _Type.Type(API_PATH + '/comments/article/' + _Path.Path.ARTICLE_ID + '/' + _Path.Path.COMMENT_ID), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
 	    // --------------------------------------------
 	    // コメント操作
 	    // --------------------------------------------
@@ -5872,12 +5877,14 @@
 	    var ResultClass = arguments.length <= 6 || arguments[6] === undefined ? _Result.Result : arguments[6];
 	    (0, _classCallCheck3.default)(this, OffsetAuth);
 
-	    if (!_User.User.sign) {
-	      // not login
-	      throw new Error('Authorization required.');
-	    }
-
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(OffsetAuth).call(this, types, resolve, reject, offset, length, ResultClass));
+	    /*
+	    // ログインか必須かよくわからない
+	    if ( !User.sign ) {
+	      // not login
+	      throw new Error( `Authorization required.` );
+	    }
+	    */
 
 	    _this._headers = _HeadersOption.HeadersOption.token(token);
 	    return _this;
@@ -7737,12 +7744,14 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
-	 * articles 記事単1データを管理します
+	 * articles 記事一つのデータを管理します
 	 */
 
 	var ArticleDae = exports.ArticleDae = function () {
 	  /**
-	   * articles データを管理
+	   * archive系で取得した記事配列から 1件取り出し<br>
+	   * データを管理します
+	   *
 	   * @param {Object} [article={}] articles配列にセットされている article 記事1件データ
 	   */
 
@@ -8659,7 +8668,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(121);
+	var _PopularDae = __webpack_require__(121);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8686,7 +8695,7 @@
 	      for (var _iterator = (0, _getIterator3.default)(comments), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 	        var comment = _step.value;
 
-	        this._comments.push(new _CommentsDae.CommentsDae(comment));
+	        this._comments.push(new _PopularDae.PopularDae(comment));
 	      }
 	    } catch (err) {
 	      _didIteratorError = true;
@@ -8816,7 +8825,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CommentsDae = undefined;
+	exports.PopularDae = undefined;
 
 	var _classCallCheck2 = __webpack_require__(40);
 
@@ -8838,15 +8847,15 @@
 	 * article.comments_popular 配列内 1 data
 	 */
 
-	var CommentsDae = exports.CommentsDae = function () {
+	var PopularDae = exports.PopularDae = function () {
 	  /**
 	   * article.comments_popular:[]
 	   * @param {Object} [comment={}]
 	   */
 
-	  function CommentsDae() {
+	  function PopularDae() {
 	    var comment = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, CommentsDae);
+	    (0, _classCallCheck3.default)(this, PopularDae);
 
 	    if (!_Safety.Safety.check(comment, 'date')) {
 
@@ -8866,7 +8875,7 @@
 	   * @return {Object|*} comment Object を返します
 	   */
 
-	  (0, _createClass3.default)(CommentsDae, [{
+	  (0, _createClass3.default)(PopularDae, [{
 	    key: 'comment',
 	    get: function get() {
 	      return this._comment;
@@ -8992,7 +9001,7 @@
 	      return this._user;
 	    }
 	  }]);
-	  return CommentsDae;
+	  return PopularDae;
 	}(); // class
 
 /***/ },
@@ -9041,6 +9050,8 @@
 
 	var _Empty = __webpack_require__(109);
 
+	var _SingleInfo = __webpack_require__(123);
+
 	var _View2 = __webpack_require__(110);
 
 	var _ViewError = __webpack_require__(111);
@@ -9049,7 +9060,7 @@
 
 	var _Result = __webpack_require__(59);
 
-	var _SingleDae = __webpack_require__(123);
+	var _SingleDae = __webpack_require__(124);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9132,7 +9143,7 @@
 	        // this.showError( error.message );
 	      } else {
 
-	          this.render(result.response);
+	          this.render(response);
 	        }
 	    }
 	    /**
@@ -9172,7 +9183,12 @@
 	    value: function render(responce) {
 
 	      var single = new _SingleDae.SingleDae(responce);
-	      console.log('single ', single);
+	      // global SingleInfoへ保存
+	      _SingleInfo.SingleInfo.dae = single;
+
+	      // beforeRender call
+	      this.beforeRender();
+
 	      var element = this.element;
 	      var _this = this;
 
@@ -9230,6 +9246,11 @@
 	            )
 	          );
 	        },
+	        beforeRender: function beforeRender() {
+
+	          // before rendering
+	          _this.executeSafely('beforeRender');
+	        },
 	        componentWillMount: function componentWillMount() {
 
 	          // after mount
@@ -9250,7 +9271,9 @@
 	        this.related(single.related);
 	      }
 
-	      // コメント取得
+	      // comment 取得
+	      // 自動化の場合はここに記述
+	      // ToDo: 決めかねてる...
 	    } // render
 	    /**
 	     * 関連記事（記事詳細の）
@@ -9358,6 +9381,95 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/28 - 19:01
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SingleInfo = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(45);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _SingleDae = __webpack_require__(124);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+	var _single = undefined;
+
+	/**
+	 * <h3>記事詳細情報</h3>
+	 * 全てstaticです<br>
+	 * **Singleton**
+	 * <p>
+	 * SingleDae を保持します。
+	 * </p>
+	 */
+
+	var SingleInfo = exports.SingleInfo = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function SingleInfo(target) {
+	    (0, _classCallCheck3.default)(this, SingleInfo);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Article is static Class. not use new Article().');
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * 現在表示の記事詳細情報
+	   * @return {SingleDae} 現在表示の記事詳細情報 SingleDae instance を返します
+	   */
+
+	  (0, _createClass3.default)(SingleInfo, null, [{
+	    key: 'dae',
+	    get: function get() {
+	      return _single;
+	    }
+
+	    /**
+	     * @param {SingleDae} article 現在表示の記事詳細情報 SingleDae instance
+	     */
+	    ,
+	    set: function set(article) {
+	      _single = article;
+	    }
+	  }]);
+	  return SingleInfo;
+	}();
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/26 - 21:10
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -9395,26 +9507,24 @@
 
 	var _Safety = __webpack_require__(113);
 
-	var _Format = __webpack_require__(44);
+	var _KeywordsDae = __webpack_require__(125);
 
-	var _CategoryDae = __webpack_require__(114);
-
-	var _MediaDae = __webpack_require__(115);
-
-	var _UserDae = __webpack_require__(118);
-
-	var _KeywordsDae = __webpack_require__(124);
-
-	var _RelatedDae2 = __webpack_require__(125);
+	var _RelatedDae2 = __webpack_require__(126);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
-	 * JSON.response
+	 * 記事詳細の JSON.response
 	 */
 
 	var SingleDae = exports.SingleDae = function (_RelatedDae) {
 	  (0, _inherits3.default)(SingleDae, _RelatedDae);
+
+	  /**
+	   * 記事詳細のresponceデータを後処理しやすいように加工します
+	   *
+	   * @param {Object} response
+	   */
 
 	  function SingleDae() {
 	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -9488,7 +9598,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9581,7 +9691,7 @@
 	exports.KeywordsDae = KeywordsDae;
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9786,7 +9896,7 @@
 	}();
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10091,7 +10201,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10651,7 +10761,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10946,7 +11056,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 129 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

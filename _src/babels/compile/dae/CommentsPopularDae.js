@@ -28,7 +28,7 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _CommentsDae = require('./comments/CommentsDae');
+var _PopularDae = require('./comments/PopularDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,7 +55,7 @@ var CommentsPopularDae = exports.CommentsPopularDae = function () {
       for (var _iterator = (0, _getIterator3.default)(comments), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var comment = _step.value;
 
-        this._comments.push(new _CommentsDae.CommentsDae(comment));
+        this._comments.push(new _PopularDae.PopularDae(comment));
       }
     } catch (err) {
       _didIteratorError = true;

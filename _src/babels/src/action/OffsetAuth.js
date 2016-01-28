@@ -36,10 +36,13 @@ export class OffsetAuth extends Offset {
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
   constructor( token:string, types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10, ResultClass = Result ) {
+    /*
+    // ログインか必須かよくわからない
     if ( !User.sign ) {
       // not login
       throw new Error( `Authorization required.` );
     }
+    */
     super( types, resolve, reject, offset, length, ResultClass );
     this._headers = HeadersOption.token( token );
   }

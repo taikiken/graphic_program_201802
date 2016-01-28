@@ -122,6 +122,11 @@ var User = exports.User = function () {
             return ['fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f'][Math.floor(Math.random() * 3)];
 
         }
+      } else {
+        // 非ログインは空文字を返す
+        // debugger
+        // Authorization:OAuth realm=undotsushin.com, oautn_token=
+        return '';
       }
     }
   }]);
