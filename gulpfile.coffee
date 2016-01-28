@@ -172,24 +172,17 @@ gulp.task 'copy', (cb) ->
 # 【デプロイ】 build
 gulp.task 'default', (cb) ->
   runSequence(
-    [
-      'sprite:build'
-      'babels:build'
-      'single:build'
-    ]
-    [
-      'bundle:copy'
-      'libs:copy'
-      'html:build'
-      'js:build'
-      'image:build'
-      'css:build'
-    ]
-    [
-      # デプロイ時css document再生成
-      'sc5:make'
-      'clean:all'
-    ]
+    'sprite:build'
+    'babels:build'
+    'single:build'
+    'bundle:copy'
+    'libs:copy'
+    'html:build'
+    'js:build'
+    'image:build'
+    'css:build'
+    'sc5:make'
+    'clean:all'
     'lec:build'
     cb
   )
