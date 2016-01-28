@@ -177,7 +177,6 @@ gulp.task 'single:dev', ( cb ) ->
 # build
 gulp.task 'single:build', ( cb ) ->
   runSequence(
-    'single:eslint'
     'single:compile'
     'single:webpack:build'
     cb
