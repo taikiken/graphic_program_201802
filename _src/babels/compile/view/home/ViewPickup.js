@@ -13,9 +13,6 @@
 
 // app
 // import {App} from '../../app/App';
-// import {Empty} from '../../app/Empty';
-
-// view
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -42,6 +39,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _Empty = require('../../app/Empty');
+
 var _View2 = require('../View');
 
 var _ViewError = require('../error/ViewError');
@@ -62,6 +61,8 @@ var React = self.React;
 // dae
 
 // action
+
+// view
 
 var ReactDOM = self.ReactDOM;
 
@@ -103,7 +104,9 @@ var ViewPickup = exports.ViewPickup = function (_View) {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * interval 間隔, milliseconds, default 5000ms
+   * @property waiting
+   * @default 5000
    * @return {number|*|Number} slideshow interval milliseconds を返します
    */
 
@@ -188,7 +191,10 @@ var ViewPickup = exports.ViewPickup = function (_View) {
 
       var element = this.element;
       var last = articles.length - 1;
+
       var position = 0;
+
+      // interval を管理する Gasane.Polling instance
       var polling = new Polling(this.waiting);
       var _this = this;
 
@@ -214,17 +220,12 @@ var ViewPickup = exports.ViewPickup = function (_View) {
 
           return React.createElement(
             'li',
-            { id: 'pager-' + p.index },
+            { className: 'pager-item pager-' + (p.index - p.length) },
             React.createElement(
               'a',
-              { href: '#pickup-' + p.index,
-                onClick: this.handleClick
-              },
-              React.createElement(
-                'span',
-                null,
-                p.index - p.length
-              )
+              { href: '#pickup-' + p.index, className: 'pager-link',
+                onClick: this.handleClick },
+              p.index - p.length
             )
           );
         }
@@ -280,7 +281,8 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
-          large: React.PropTypes.string.isRequired
+          large: React.PropTypes.string.isRequired,
+          commentsCount: React.PropTypes.number.isRequired
         },
         render: function render() {
           var p = this.props;
@@ -291,21 +293,31 @@ var ViewPickup = exports.ViewPickup = function (_View) {
             React.createElement(
               'a',
               { href: p.url },
+              React.createElement('img', { src: _Empty.Empty.KV_OVERLAY, alt: '', className: 'overlay' }),
               React.createElement('img', { src: p.large, alt: p.title }),
               React.createElement(
-                'p',
-                { className: 'cat cat-' + p.slug },
-                p.category
-              ),
-              React.createElement(
-                'h3',
-                { className: 'pickup-title' },
-                p.title
-              ),
-              React.createElement(
-                'p',
-                { className: 'date' },
-                p.date
+                'div',
+                { className: 'post-overview' },
+                React.createElement(
+                  'p',
+                  { className: 'post-category cat-' + p.slug },
+                  p.category
+                ),
+                React.createElement(
+                  'h2',
+                  { className: 'post-heading' },
+                  p.title
+                ),
+                React.createElement(
+                  'p',
+                  { className: 'post-date' },
+                  p.date
+                ),
+                React.createElement(
+                  'p',
+                  { className: 'post-comment-num' },
+                  p.commentsCount
+                )
               )
             )
           );
@@ -335,7 +347,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
             n = 0;
           }
           // change slide
-          this.onJump(n);
+          this.jump(n);
         },
         // next button click
         onNext: function onNext(event) {
@@ -354,16 +366,61 @@ var ViewPickup = exports.ViewPickup = function (_View) {
             n = last;
           }
           // change slide
-          this.onJump(n);
+          this.jump(n);
         },
         // slide を変更
-        onJump: function onJump(index) {
-          console.log('onJump ', index);
-          // polling reset
-          polling.stop().start();
+        jump: function jump(index) {
+          console.log('jump ', index);
+          // polling stop
+          polling.stop();
+          // --------------
+          // 循環アニメーションのために
+          if (index === 0) {
+            // 先頭に戻る
+            if (position === last) {
+              // 現在がラストだったらアニメーションなしで移動させる
+              this.setState({ index: 999 });
+              this.delay(index);
+            } else {
+              // 通常移動
+              this.setup(index);
+            }
+          } else if (index === last) {
+            // 最終に戻る
+            if (position === 0) {
+              // 現在が先頭だったらアニメーションなしで移動させる
+              this.setState({ index: 1999 });
+              this.delay(index);
+            } else {
+              // 通常移動
+              this.setup(index);
+            }
+          } else {
+
+            // 通常移動
+            this.setup(index);
+          }
+        },
+        // 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
+        // アニメーション無しで移動させた後
+        // リフレッシュのために待機させる 1fps
+        delay: function delay(index) {
+          var me = this;
+          if (!!this.timer) {
+            clearTimeout(this.timer);
+          }
+          this.timer = setTimeout(function () {
+            me.setup(index);
+          }, 25);
+        },
+        // re position, polling restart
+        setup: function setup(index) {
+          // --------------
           // state update
           position = index;
           this.setState({ index: index });
+          // polling start
+          polling.start();
         },
         // pager click から呼び出されます
         onPagerClick: function onPagerClick(index) {
@@ -371,7 +428,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           // 子コンポーネント Pagers -> PickupPager から呼び出される
           // innerHTML 数値を使うので
           // Number 型へ変換する
-          this.onJump(index * 1);
+          this.jump(parseInt(index, 10));
         },
 
         // --------------------------------------------
@@ -399,17 +456,18 @@ var ViewPickup = exports.ViewPickup = function (_View) {
               url: dae.url,
               date: dae.formatDate,
               title: dae.title,
-              large: dae.media.images.large
+              large: dae.media.images.large,
+              commentsCount: dae.commentsCount
             });
           };
 
           // JSX
           return React.createElement(
             'div',
-            { className: 'pickup-container slide-' + this.state.index },
+            { className: 'hero-slider pickup-container slide-' + this.state.index },
             React.createElement(
               'div',
-              { className: 'slider-wrapper' },
+              { className: 'hero-slider-inner' },
               React.createElement(
                 'ul',
                 { className: 'pickup-slider' },
@@ -435,33 +493,29 @@ var ViewPickup = exports.ViewPickup = function (_View) {
             ),
             React.createElement(
               'div',
-              { className: 'pagers-container' },
-              React.createElement(Pagers, {
-                list: articles,
-                offset: articles.length,
-                onPager: this.onPagerClick
-              })
-            ),
-            React.createElement(
-              'div',
-              { className: 'slider-nav-container' },
+              { className: 'hero-slider-control' },
               React.createElement(
                 'div',
-                { id: 'prev' },
+                { className: 'direction' },
                 React.createElement(
                   'a',
-                  { href: '#prev', onClick: this.onPrev },
+                  { id: 'prev', className: 'direction-prev', href: '#prev', onClick: this.onPrev },
                   'Prev'
+                ),
+                React.createElement(
+                  'a',
+                  { id: 'next', className: 'direction-next', href: '#next', onClick: this.onNext },
+                  'Next'
                 )
               ),
               React.createElement(
                 'div',
-                { id: 'next' },
-                React.createElement(
-                  'a',
-                  { href: '#next', onClick: this.onNext },
-                  'Next'
-                )
+                { className: 'pager' },
+                React.createElement(Pagers, {
+                  list: articles,
+                  offset: articles.length,
+                  onPager: this.onPagerClick
+                })
               )
             )
           );

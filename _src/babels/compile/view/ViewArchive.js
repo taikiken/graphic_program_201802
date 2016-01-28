@@ -365,7 +365,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
             // 1件目データを取り出し
             var first = commentsPopular.first;
             var firstUser = first.user;
-            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE;
+            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
 
             return React.createElement(
               'div',

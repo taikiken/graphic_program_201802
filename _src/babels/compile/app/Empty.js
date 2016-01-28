@@ -65,7 +65,7 @@ var Empty = exports.Empty = function () {
     key: 'IMG_SMALL',
     get: function get() {
 
-      return 'img/common/empty.jpg';
+      return 'images/common/thumb-noimage-70x70.png';
     }
     /**
      * img thumbnail 代替画像パス<br>
@@ -78,7 +78,7 @@ var Empty = exports.Empty = function () {
     key: 'IMG_MIDDLE',
     get: function get() {
 
-      return 'img/common/empty.jpg';
+      return 'images/common/thumb-noimage-340x150.png';
     }
     /**
      * video thumbnail 代替画像パス<br>
@@ -91,10 +91,10 @@ var Empty = exports.Empty = function () {
     key: 'VIDEO_SMALL',
     get: function get() {
 
-      return 'img/common/empty.jpg';
+      return 'images/common/thumb-overlay-movie-340x150.png';
     }
     /**
-     *  ユーザー・プロファイル・アイコン 代替画像パス<br>
+     * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
      * [Ex.] コメントとか
      * @readonly
      * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
@@ -104,7 +104,30 @@ var Empty = exports.Empty = function () {
     key: 'USER_PICTURE',
     get: function get() {
 
-      return 'img/common/user_empty.jpg';
+      return 'img/common/thumb-user.png';
+    }
+    /**
+     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)<br>
+     * [Ex.] コメントとか
+     * @readonly
+     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+     */
+
+  }, {
+    key: 'USER_PICTURE_FEATURE',
+    get: function get() {
+
+      return 'img/common/thumb-user-feature.png';
+    }
+    /**
+     * hero-slider カバーグラデーション画像
+     * @return {string} hero-slider カバーグラデーション画像パスを返します
+     */
+
+  }, {
+    key: 'KV_OVERLAY',
+    get: function get() {
+      return 'assets/images/index/kv-overlay.png';
     }
   }]);
   return Empty;

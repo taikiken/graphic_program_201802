@@ -13,7 +13,7 @@
 
 // app
 // import {App} from '../../app/App';
-// import {Empty} from '../../app/Empty';
+import {Empty} from '../../app/Empty';
 
 // view
 import {View} from '../View';
@@ -60,7 +60,9 @@ export class ViewPickup extends View {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * interval 間隔, milliseconds, default 5000ms
+   * @property waiting
+   * @default 5000
    * @return {number|*|Number} slideshow interval milliseconds を返します
    */
   get waiting():Number {
@@ -145,7 +147,10 @@ export class ViewPickup extends View {
 
     let element = this.element;
     let last = articles.length - 1;
+
     let position = 0;
+
+    // interval を管理する Gasane.Polling instance
     let polling = new Polling( this.waiting );
     let _this = this;
 
@@ -168,10 +173,9 @@ export class ViewPickup extends View {
         let p = this.props;
 
         return (
-          <li id={'pager-' + p.index}>
-            <a href={'#pickup-' + p.index}
-              onClick={this.handleClick}
-            ><span>{p.index - p.length}</span></a>
+          <li className={'pager-item pager-' + (p.index - p.length)}>
+            <a href={'#pickup-' + p.index} className="pager-link"
+              onClick={this.handleClick} >{p.index - p.length}</a>
           </li>
         );
       }
@@ -226,7 +230,8 @@ export class ViewPickup extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
-        large: React.PropTypes.string.isRequired
+        large: React.PropTypes.string.isRequired,
+        commentsCount: React.PropTypes.number.isRequired
       },
       render: function() {
         let p = this.props;
@@ -234,10 +239,14 @@ export class ViewPickup extends View {
         return (
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
             <a href={p.url}>
+              <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
               <img src={p.large} alt={p.title}/>
-              <p className={'cat cat-' + p.slug}>{p.category}</p>
-              <h3 className='pickup-title'>{p.title}</h3>
-              <p className="date">{p.date}</p>
+              <div className="post-overview">
+                <p className={'post-category cat-' + p.slug}>{p.category}</p>
+                <h2 className='post-heading'>{p.title}</h2>
+                <p className="post-date">{p.date}</p>
+                <p className="post-comment-num">{p.commentsCount}</p>
+              </div>
             </a>
           </li>
         );
@@ -265,7 +274,7 @@ export class ViewPickup extends View {
           n = 0;
         }
         // change slide
-        this.onJump( n );
+        this.jump( n );
       },
       // next button click
       onNext: function( event ) {
@@ -284,16 +293,62 @@ export class ViewPickup extends View {
           n = last;
         }
         // change slide
-        this.onJump( n );
+        this.jump( n );
       },
       // slide を変更
-      onJump: function( index ) {
-        console.log( 'onJump ', index );
-        // polling reset
-        polling.stop().start();
+      jump: function( index ) {
+        console.log( 'jump ', index );
+        // polling stop
+        polling.stop();
+        // --------------
+        // 循環アニメーションのために
+        if ( index === 0 ) {
+          // 先頭に戻る
+          if ( position === last ) {
+            // 現在がラストだったらアニメーションなしで移動させる
+            this.setState( {index: 999} );
+            this.delay( index );
+          } else {
+            // 通常移動
+            this.setup( index );
+          }
+        } else if ( index === last ) {
+          // 最終に戻る
+          if ( position === 0 ) {
+            // 現在が先頭だったらアニメーションなしで移動させる
+            this.setState( {index: 1999} );
+            this.delay( index );
+          } else {
+            // 通常移動
+            this.setup( index );
+          }
+        } else {
+
+          // 通常移動
+          this.setup( index );
+
+        }
+      },
+      // 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
+      // アニメーション無しで移動させた後
+      // リフレッシュのために待機させる 1fps
+      delay: function( index ) {
+        let me = this;
+        if ( !!this.timer ) {
+          clearTimeout( this.timer );
+        }
+        this.timer = setTimeout( function() {
+          me.setup(index);
+        }, 25 );
+      },
+      // re position, polling restart
+      setup: function( index ) {
+        // --------------
         // state update
         position = index;
         this.setState( {index: index} );
+        // polling start
+        polling.start();
       },
       // pager click から呼び出されます
       onPagerClick: function( index ) {
@@ -301,7 +356,7 @@ export class ViewPickup extends View {
         // 子コンポーネント Pagers -> PickupPager から呼び出される
         // innerHTML 数値を使うので
         // Number 型へ変換する
-        this.onJump( index * 1 );
+        this.jump( parseInt( index, 10 ) );
       },
       // --------------------------------------------
       // RENDER
@@ -329,6 +384,7 @@ export class ViewPickup extends View {
             date={dae.formatDate}
             title={dae.title}
             large={dae.media.images.large}
+            commentsCount={dae.commentsCount}
           />;
 
         };
@@ -365,14 +421,14 @@ export class ViewPickup extends View {
                 }
               </ul>
             </div>
-            <div class="hero-slider-control">
+            <div className="hero-slider-control">
               {/* prev / next */}
-              <div className="slider-nav-container">
-                <div id="prev"><a href="#prev" onClick={this.onPrev}>Prev</a></div>
-                <div id="next"><a href="#next" onClick={this.onNext}>Next</a></div>
+              <div className="direction">
+                <a id="prev" className="direction-prev" href="#prev" onClick={this.onPrev}>Prev</a>
+                <a id="next" className="direction-next" href="#next" onClick={this.onNext}>Next</a>
               </div>
               {/* pagers */}
-              <div className="pagers-container">
+              <div className="pager">
                 <Pagers
                   list={articles}
                   offset={articles.length}
