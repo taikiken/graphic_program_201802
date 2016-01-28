@@ -11,7 +11,7 @@
  */
 'use strict';
 
-import {CommentsDae} from './comments/CommentsDae';
+import {PopularDae} from './comments/PopularDae';
 
 /**
  * article.comments_popular
@@ -24,7 +24,7 @@ export class CommentsPopularDae {
   constructor( comments:Array = [] ) {
     this._comments = [];
     for ( var comment of comments ) {
-      this._comments.push( new CommentsDae( comment ) );
+      this._comments.push( new PopularDae( comment ) );
     }
   }
   // ---------------------------------------------------
@@ -33,7 +33,7 @@ export class CommentsPopularDae {
   /**
    * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
    */
-  get comments():Array<CommentsDae> {
+  get comments():Array<PopularDae> {
     return this._comments;
   }
   /**
@@ -68,14 +68,14 @@ export class CommentsPopularDae {
    * 先頭のCommentsDae
    * @return {CommentsDae} 1件目のCommentsDaeを返します
    */
-  get first():CommentsDae {
+  get first():PopularDae {
     return this.comments[ 0 ];
   }
   /**
    * 先頭以外の配列
    * @return {Array.<CommentsDae>} 2件目以降の配列を返します
    */
-  get exceptFirst():Array<CommentsDae> {
+  get exceptFirst():Array<PopularDae> {
 
     let clone;
 
@@ -90,7 +90,7 @@ export class CommentsPopularDae {
    * 先頭以外の配列, alias this.exceptFirst
    * @return {Array.<CommentsDae>} 2件目以降の配列を返します
    */
-  get seconds():Array<CommentsDae> {
+  get seconds():Array<PopularDae> {
     return this.exceptFirst;
   }
 }

@@ -161,7 +161,7 @@ let buildPath = () => {
     // 特定のコメントを取得する
     // /api/v1/comments/article/{:article_id}/{:comment_id}
     'comment:single': new Types(
-      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}` ),
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/${Path.COMMENT_ID}` ),
       new Permalink( [ '*' ], true ),
       new Queries()
     ),

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/25 - 22:15
+ * @date 2016/01/28 - 21:21
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,124 +11,55 @@
  */
 'use strict';
 
-import {Safety} from '../../data/Safety';
-import {Format} from '../../util/Format';
-import {UserDae} from '../UserDae';
+import {PopularDae} from './PopularDae';
+import {CommentsPopularDae} from '../CommentsPopularDae';
+import {ReplyDae} from './ReplyDae';
 
 /**
- * article.comments_popular 配列内 1 data
+ * コメント一覧表示配列の各コメント
  */
 export class CommentsDae {
   /**
-   * article.comments_popular:[]
-   * @param {Object} [comment={}]
+   * コメント一覧表示の個別コメント, reply 含む
+   * @param {Array} [comments=[]] responce.comments
    */
-  constructor( comment:Object = {} ) {
+  constructor( comments:Array = [] ) {
+    // comment.id を key にデータを保存します
+    let bank = {};
+    // comment.id を 順に保存します
+    let list = [];
 
-    if ( !Safety.check( comment, 'date' ) ) {
+    for ( var comment of comments ) {
+      // reply の前まではこれで処理できているはず...
+      let dae = new PopularDae( comment );
 
-      comment.formatDate = Format.date( comment.date );
+      // key / value にデータを保存します
+      bank[ dae.id ] = {
+        comment: dae,
+        reply: new ReplyDae( comment.reply )
+      };
 
+      list.push(dae.id);
     }
 
-    // comments_popular.user
-    this._user = new UserDae( comment.user );
-    // property
-    this._comment = comment;
-
+    this._bank = bank;
+    this._list = list;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
-   * @return {Object|*} comment Object を返します
+   * comment を comment.id: {comment: PopularDae, reply: ReplyDae  }
+   * @return {{}|*}
    */
-  get comment():Object {
-    return this._comment;
+  get bank():Object {
+    return this._bank;
   }
   /**
-   *
-   * @return {Number} comment.id を返します
+   * comment id を順に保存しています
+   * @return {Array|*} comment id を保持した配列を返します
    */
-  get id():Number {
-    return this.comment.id;
+  get list():Array {
+    return this._list;
   }
-  /**
-   *
-   * @return {string} ISO8601 日付を返します
-   */
-  get date():string {
-    return this.comment.date;
-  }
-  /**
-   *
-   * @return {string} ISO8601 を日本語形式日付にし返します
-   */
-  get formatDate():string {
-    return this.comment.formatDate;
-  }
-  /**
-   *
-   * @return {string} 相対日付返します
-   */
-  get displayDate():string {
-    return this.comment.display_date;
-  }
-  /**
-   *
-   * @return {string} コメント本文を返します
-   */
-  get body():string {
-    return this.comment.body;
-  }
-  /**
-   *
-   * @return {boolean} 自分がGood済みかどうか を返します
-   */
-  get isLike():boolean {
-    return this.comment.is_like;
-  }
-  /**
-   *
-   * @return {boolean} 自分がBad済みかどうか を返します
-   */
-  get isBad():boolean {
-    return this.comment.is_bad;
-  }
-  /**
-   *
-   * @return {Number} Good数 を返します
-   */
-  get good():Number {
-    return this.comment.like;
-  }
-  /**
-   * this.good alias
-   * @return {Number} Good数 を返します
-   */
-  get like():Number {
-    return this.good;
-  }
-  /**
-   *
-   * @return {Number|number} Bad数 を返します
-   */
-  get bad():Number {
-    return this.comment.bad;
-  }
-  /**
-   *
-   * @return {string} コメント詳細のURLを返します
-   */
-  get url():string {
-    return this.comment.url;
-  }
-  /**
-   *
-   * @return {UserDae|*} comment した user 情報を返します
-   */
-  get user():UserDae {
-    return this._user;
-  }
-}// class
+}

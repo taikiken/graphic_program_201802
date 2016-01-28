@@ -40,6 +40,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Empty = require('../app/Empty');
 
+var _SingleInfo = require('../app/SingleInfo');
+
 var _View2 = require('./View');
 
 var _ViewError = require('./error/ViewError');
@@ -131,7 +133,7 @@ var ViewSingle = function (_View) {
         // this.showError( error.message );
       } else {
 
-          this.render(result.response);
+          this.render(response);
         }
     }
     /**
@@ -171,7 +173,12 @@ var ViewSingle = function (_View) {
     value: function render(responce) {
 
       var single = new _SingleDae.SingleDae(responce);
-      console.log('single ', single);
+      // global SingleInfoへ保存
+      _SingleInfo.SingleInfo.dae = single;
+
+      // beforeRender call
+      this.beforeRender();
+
       var element = this.element;
       var _this = this;
 
@@ -229,6 +236,11 @@ var ViewSingle = function (_View) {
             )
           );
         },
+        beforeRender: function beforeRender() {
+
+          // before rendering
+          _this.executeSafely('beforeRender');
+        },
         componentWillMount: function componentWillMount() {
 
           // after mount
@@ -249,7 +261,9 @@ var ViewSingle = function (_View) {
         this.related(single.related);
       }
 
-      // コメント取得
+      // comment 取得
+      // 自動化の場合はここに記述
+      // ToDo: 決めかねてる...
     } // render
     /**
      * 関連記事（記事詳細の）

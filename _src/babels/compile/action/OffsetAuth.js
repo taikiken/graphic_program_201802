@@ -77,12 +77,14 @@ var OffsetAuth = exports.OffsetAuth = function (_Offset) {
     var ResultClass = arguments.length <= 6 || arguments[6] === undefined ? _Result.Result : arguments[6];
     (0, _classCallCheck3.default)(this, OffsetAuth);
 
-    if (!_User.User.sign) {
-      // not login
-      throw new Error('Authorization required.');
-    }
-
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(OffsetAuth).call(this, types, resolve, reject, offset, length, ResultClass));
+    /*
+    // ログインか必須かよくわからない
+    if ( !User.sign ) {
+      // not login
+      throw new Error( `Authorization required.` );
+    }
+    */
 
     _this._headers = _HeadersOption.HeadersOption.token(token);
     return _this;

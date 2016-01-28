@@ -242,7 +242,7 @@ export class Api {
         return ApiDae.api( 'comment:bad:delete' );
 
       case '':
-        // 記事詳細でのコメント一覧表示
+        // コメント一覧全部
         return ApiDae.api( 'comment' );
 
       default:
