@@ -2770,6 +2770,105 @@ table tr.w200 > td {
         .hero-slider-control .pager a.active, .hero-slider-control .pager a:hover {
           background-color: #e1438b; }
 
+#hero-sec .hero-slider .hero-slider-inner {
+  position: relative; }
+  #hero-sec .hero-slider .hero-slider-inner .overlay,
+  #hero-sec .hero-slider .hero-slider-inner .post-overview {
+    opacity: 0;
+    -webkit-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s;
+    -webkit-transition-timing-function: linear;
+            transition-timing-function: linear; }
+
+#hero-sec .hero-slider .pickup-slider {
+  position: absolute;
+  left: -3200px;
+  top: 0;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s; }
+
+#hero-sec .hero-slider.slide-0 .pickup-slider {
+  -webkit-transform: translateX(0);
+          transform: translateX(0); }
+  #hero-sec .hero-slider.slide-0 .pickup-slider .pickup-5 .overlay,
+  #hero-sec .hero-slider.slide-0 .pickup-slider .pickup-5 .post-overview {
+    opacity: 1; }
+
+#hero-sec .hero-slider.slide-0 .hero-slider-control .pager .pager-0 a {
+  background-color: #e1438b; }
+
+#hero-sec .hero-slider.slide-1 .pickup-slider {
+  -webkit-transform: translateX(-640px);
+          transform: translateX(-640px); }
+  #hero-sec .hero-slider.slide-1 .pickup-slider .pickup-6 .overlay,
+  #hero-sec .hero-slider.slide-1 .pickup-slider .pickup-6 .post-overview {
+    opacity: 1; }
+
+#hero-sec .hero-slider.slide-1 .hero-slider-control .pager .pager-1 a {
+  background-color: #e1438b; }
+
+#hero-sec .hero-slider.slide-2 .pickup-slider {
+  -webkit-transform: translateX(-1280px);
+          transform: translateX(-1280px); }
+  #hero-sec .hero-slider.slide-2 .pickup-slider .pickup-7 .overlay,
+  #hero-sec .hero-slider.slide-2 .pickup-slider .pickup-7 .post-overview {
+    opacity: 1; }
+
+#hero-sec .hero-slider.slide-2 .hero-slider-control .pager .pager-2 a {
+  background-color: #e1438b; }
+
+#hero-sec .hero-slider.slide-3 .pickup-slider {
+  -webkit-transform: translateX(-1920px);
+          transform: translateX(-1920px); }
+  #hero-sec .hero-slider.slide-3 .pickup-slider .pickup-8 .overlay,
+  #hero-sec .hero-slider.slide-3 .pickup-slider .pickup-8 .post-overview {
+    opacity: 1; }
+
+#hero-sec .hero-slider.slide-3 .hero-slider-control .pager .pager-3 a {
+  background-color: #e1438b; }
+
+#hero-sec .hero-slider.slide-4 .pickup-slider {
+  -webkit-transform: translateX(-2560px);
+          transform: translateX(-2560px); }
+  #hero-sec .hero-slider.slide-4 .pickup-slider .pickup-9 .overlay,
+  #hero-sec .hero-slider.slide-4 .pickup-slider .pickup-9 .post-overview {
+    opacity: 1; }
+
+#hero-sec .hero-slider.slide-4 .hero-slider-control .pager .pager-4 a {
+  background-color: #e1438b; }
+
+#hero-sec .hero-slider.slide-999 .pickup-slider {
+  -webkit-transform: translateX(640px);
+          transform: translateX(640px);
+  -webkit-transition-duration: 0s;
+          transition-duration: 0s; }
+  #hero-sec .hero-slider.slide-999 .pickup-slider .pickup-9 .overlay,
+  #hero-sec .hero-slider.slide-999 .pickup-slider .pickup-9 .post-overview {
+    opacity: 1; }
+
+#hero-sec .hero-slider.slide-999 .hero-slider-control .pager .pager-4 a {
+  background-color: #e1438b; }
+
+#hero-sec .hero-slider.slide-1999 .pickup-slider {
+  -webkit-transform: translateX(-3200px);
+          transform: translateX(-3200px);
+  -webkit-transition-duration: 0s;
+          transition-duration: 0s; }
+  #hero-sec .hero-slider.slide-1999 .pickup-slider .pickup-5 .overlay,
+  #hero-sec .hero-slider.slide-1999 .pickup-slider .pickup-5 .post-overview {
+    opacity: 1; }
+
+#hero-sec .hero-slider.slide-1999 .hero-slider-control .pager .pager-0 a {
+  background-color: #e1438b; }
+
 .headline-heading {
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd; }
