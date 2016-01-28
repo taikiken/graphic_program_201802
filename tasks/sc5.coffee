@@ -92,7 +92,6 @@ gulp.task 'sc5:generate:only', ->
     server: false
     rootPath: dir.guide
     overviewPath: './_src/scss/Overview.md'
-    port: sc5Port
   } )
   .pipe( gulp.dest dir.guide )
   .pipe $.size title: '*** sc5:generate:only ***'
