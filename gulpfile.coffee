@@ -172,7 +172,6 @@ gulp.task 'copy', (cb) ->
 # 【デプロイ】 build
 gulp.task 'default', (cb) ->
   runSequence(
-    'sprite:build'
     'babels:build'
     'single:build'
     'bundle:copy'
