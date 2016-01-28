@@ -205,10 +205,11 @@ export class ViewSingle extends View {
       },
       render: function() {
         let p = this.props;
+        let thumbnail = p.thumbnail ? p.thumbnail : Empty.IMG_SMALL;
 
         return (
           <a href={p.url} id={'headline-' + p.id} className={'headline headline-' + p.index}>
-            <img src={p.thumbnail} alt={p.title}/>
+            <img src={thumbnail} alt={p.title}/>
             <p className={'cat cat-' + p.slug}>{p.category}</p>
             <h3 className='headline-title'>{p.title}</h3>
             <p className="date">{p.date}</p>

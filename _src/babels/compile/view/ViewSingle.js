@@ -279,11 +279,12 @@ var ViewSingle = function (_View) {
         },
         render: function render() {
           var p = this.props;
+          var thumbnail = p.thumbnail ? p.thumbnail : _Empty.Empty.IMG_SMALL;
 
           return React.createElement(
             'a',
             { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
-            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+            React.createElement('img', { src: thumbnail, alt: p.title }),
             React.createElement(
               'p',
               { className: 'cat cat-' + p.slug },

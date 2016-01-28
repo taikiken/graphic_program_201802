@@ -47,7 +47,20 @@ public: 最終納品フィアルをデプロイします
 
 ## HTML 名称
 
-tmp をどっちにつける？
+### 静的HTML
+example.html
+
+### 動的HTML
+example.tmp.html
+
+*.tmp.html 
+
+**tmp** 付きHTMLは JS で JSON を取得します
+
+### テスト用HTML
+test.*.html
+
+test が先頭につくHTMLは開発用になります
 
 ## JavaScript
 
