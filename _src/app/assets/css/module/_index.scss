@@ -40,7 +40,14 @@
             display: block;
             width: 100%;
             height: 400px;
-            @include hover-opacity;
+
+            &:hover {
+              @include hover-opacity;
+
+              .post-heading {
+                color: $highlight-color;
+              }
+            }
 
             .overlay {
               position: absolute;
@@ -58,7 +65,7 @@
               }
 
               &-category {
-                color: #e1438b;
+                color: $highlight-color;
                 font-weight: bold;
               }
 
@@ -99,7 +106,10 @@
             background-position: center center;
             background-repeat: no-repeat;
             @include hide-text;
-            @include hover-opacity;
+
+            &:hover {
+              @include hover-opacity;
+            }
           }
 
           &-prev {
@@ -143,7 +153,7 @@
 
             &.active,
             &:hover {
-              background-color: #e1438b;
+              background-color: $highlight-color;
             }
           }
         }
@@ -161,7 +171,7 @@
   @at-root {
     &-heading {
       padding-bottom: 20px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid $border-primary-color;
 
       &-title, &-ruby {
         display: inline-block;
@@ -174,7 +184,7 @@
 
       &-ruby {
         margin-left: 8px;
-        color: #e1438b;
+        color: $highlight-color;
         font-weight: bold;
         font-size: fz(12);
       }
@@ -182,7 +192,7 @@
 
     &-list {
       @include clearfix;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid $border-primary-color;
     }
 
     &-item {
@@ -193,7 +203,7 @@
         float: right;
       }
 
-      border-top: 1px solid #ddd;
+      border-top: 1px solid $border-primary-color;
 
       &:nth-child(1), &:nth-child(2) {
         border-top: none;
@@ -218,7 +228,7 @@
         }
 
         &-category {
-          color: #e1438b;
+          color: $highlight-color;
           font-weight: bold;
           font-size: fz(12);
         }
@@ -233,6 +243,16 @@
           margin-top: .25em;
           color: #666;
           font-size: fz(10);
+        }
+
+        &:hover {
+          .post-thumb {
+            @include hover-opacity;
+          }
+
+          .post-heading {
+            color: $highlight-color;
+          }
         }
       }
     } //.headline-item

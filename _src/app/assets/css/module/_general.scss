@@ -50,7 +50,7 @@
         }
 
         &-category {
-          color: #e1438b;
+          color: $highlight-color;
           font-weight: bold;
           font-size: fz(12);
         }
@@ -69,8 +69,18 @@
         &-excerpt-text {
           margin-top: 0.25em;
         }
-      }
-    } //.post
+
+        &:hover {
+          .post-thumb {
+            @include hover-opacity;
+          }
+
+          .post-heading {
+            color: $highlight-color;
+          }
+        }
+      } //.post
+    }
 
     .feature-user {
       margin-top: 10px;
@@ -84,6 +94,12 @@
         &-link {
           @include link-decoration(#333, #333, none, none);
           display: block;
+
+          &:hover {
+            .user-prof-thumb {
+              @include hover-opacity;
+            }
+          }
         }
 
         &-thumb {
@@ -114,10 +130,25 @@
       .user-response {
         padding: 8px;
 
+        .user-response-btn {
+          @include link-decoration(#333, #333, none, underline);
+          display: inline-block;
+          font-size: fz(12);
+
+          & + .user-response-btn {
+            margin-left: 10px;
+          }
+
+          &.active {
+            color: $highlight-color;
+          }
+        }
+
         i {
           @extend .sprite-common;
           @include hide-text;
           margin-right: 5px;
+          vertical-align: middle;
         }
 
         &-like {
@@ -125,12 +156,26 @@
             @include sprite( $common-icon-thumbs-up );
             display: inline-block;
           }
+
+          &.active {
+            i {
+              @include sprite( $common-icon-thumbs-up_o );
+              display: inline-block;
+            }
+          }
         }
 
         &-dislike {
           i {
             @include sprite( $common-icon-thumbs-down );
             display: inline-block;
+          }
+
+          &.active {
+            i {
+              @include sprite( $common-icon-thumbs-down_o );
+              display: inline-block;
+            }
           }
         }
       }
@@ -154,6 +199,10 @@
         width: 25px;
         height: 25px;
         background: url(../images/common/thumb-user.png) 0 0 no-repeat;
+
+        &:hover {
+          @include hover-opacity;
+        }
       }
 
       &-andmore {
@@ -162,5 +211,23 @@
         font-size: fz(12);
       }
     } //.commented-user
+
+    &-btn-viewmore {
+      clear: both;
+      padding-top: 30px;
+
+      &-link {
+        display: block;
+        padding: 18px 0;
+        border: 2px solid $highlight-color;
+
+        span {
+          @extend .sprite-common;
+          @include sprite( $common-btn-viewmore );
+          @include hide-text;
+          margin: 0 auto;
+        }
+      }
+    }
   }
 }

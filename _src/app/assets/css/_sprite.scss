@@ -1,13 +1,14 @@
-$common-icon-thumbs-down: -0px -0px 13px 13px;
-$common-icon-thumbs-down_o: -13px -0px 13px 13px;
-$common-icon-thumbs-up: -0px -13px 13px 13px;
-$common-icon-thumbs-up_o: -13px -13px 13px 13px;
-$header-icon-search: -0px -40px 18px 18px;
-$header-logo: -0px -0px 105px 40px;
+$common-btn-viewmore: -0px -0px 82px 11px;
+$common-icon-thumbs-down: -0px -11px 17px 17px;
+$common-icon-thumbs-down_o: -17px -11px 17px 17px;
+$common-icon-thumbs-up: -34px -11px 17px 17px;
+$common-icon-thumbs-up_o: -51px -11px 17px 17px;
 $footer-icon-sns-fb: -0px -25px 30px 30px;
 $footer-icon-sns-tw: -30px -25px 30px 30px;
 $footer-icon-sns-yt: -0px -0px 60px 25px;
 $footer-pagetop: -60px -0px 79px 14px;
+$header-icon-search: -0px -40px 18px 18px;
+$header-logo: -0px -0px 105px 40px;
 @mixin sprite-width($sprite) {
   width: nth($sprite, 3);
 }
@@ -36,9 +37,9 @@ $footer-pagetop: -60px -0px 79px 14px;
 .sprite-common {
   background-image: url(/assets/images/sprite/sprite-common.png);
 }
-.sprite-header {
-  background-image: url(/assets/images/sprite/sprite-header.png);
-}
 .sprite-footer {
   background-image: url(/assets/images/sprite/sprite-footer.png);
+}
+.sprite-header {
+  background-image: url(/assets/images/sprite/sprite-header.png);
 }
