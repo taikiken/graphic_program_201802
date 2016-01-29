@@ -105,7 +105,7 @@
         &-thumb {
           width: 50px;
           height: 50px;
-          background: url(../images/common/thumb-user-feature.png) 0 0 no-repeat;
+          background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat;
         }
 
         &-name, &-job {
@@ -198,7 +198,7 @@
         display: block;
         width: 25px;
         height: 25px;
-        background: url(../images/common/thumb-user.png) 0 0 no-repeat;
+        background: url(/assets/images/common/thumb-user.png) 0 0 no-repeat;
 
         &:hover {
           @include hover-opacity;
@@ -227,6 +227,50 @@
           @include hide-text;
           margin: 0 auto;
         }
+      }
+    }
+  }
+}
+
+
+
+
+
+// dialogue-notice
+// 汎用ダイアログボックス
+.dialogue-notice {
+  &.error { background-color: #e14343;}
+  &.success { background-color: #43e18a;}
+  &, &.info { background-color: $highlight-color;}
+
+  @at-root {
+    &-inner {
+      position: relative;
+      width: 1070px;
+      height: 80px;
+      margin: 0 auto;
+    }
+
+    &-info {
+      @include table-cell;
+      width: 1170px - 30;
+      height: 80px;
+      color: #fff;
+      text-align: center;
+
+      cursor: default;
+    }
+
+    &-btn-close {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -15px;
+
+      a {
+        @extend .sprite-common;
+        @include sprite( $common-btn-notice-close );
+        @include hide-text;
       }
     }
   }

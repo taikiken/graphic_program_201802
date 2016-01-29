@@ -83,7 +83,7 @@
               &-comment-num {
                 margin-left: 10px;
                 padding-left: 20px;
-                background: url(../images/index/icon-slider-comment.png) 0 center no-repeat;
+                background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat;
               }
             }
           }
@@ -114,12 +114,12 @@
 
           &-prev {
             left: -38px;
-            background-image: url(../images/index/btn-slider-prev.png);
+            background-image: url(/assets/images/index/btn-slider-prev.png);
           }
 
           &-next {
             left: 640px;
-            background-image: url(../images/index/btn-slider-next.png);
+            background-image: url(/assets/images/index/btn-slider-next.png);
           }
         }
 
@@ -225,7 +225,7 @@
           float: left;
           width: 70px;
           height: 70px;
-          background: url(../images/common/thumb-noimage-70x70.png) 0 0 no-repeat;
+          background: url(/assets/images/common/thumb-noimage-70x70.png) 0 0 no-repeat;
         }
 
         &-data {

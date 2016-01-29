@@ -117,7 +117,7 @@
         display: block;
         width: 35px;
         height: 35px;
-        background: url(../images/common/header-icon-user.png) 0 0 no-repeat;
+        background: url(/assets/images/common/header-icon-user.png) 0 0 no-repeat;
       }
 
       .notice {
@@ -160,7 +160,7 @@
       left: 138px;
       width: 9px;
       height: 5px;
-      background: url(../images/common/icon-user-menu.png) 0 0 no-repeat;
+      background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat;
     }
 
     li {
@@ -209,7 +209,7 @@
   li {
     display: table-cell;
     padding: 0 11px 0 0;
-    background: url(../images/common/gnav-separator.png) right center no-repeat;
+    background: url(/assets/images/common/gnav-separator.png) right center no-repeat;
     text-align: center;
     vertical-align: middle;
 
@@ -440,7 +440,7 @@
       position: relative;
       width: 1070px;
       margin: 0 auto;
-      background: #fff url(../images/common/bg-bodysec.png) repeat-y center 0;
+      background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0;
     }
   }
 
@@ -555,7 +555,7 @@
         &-thumb {
           width: 70px;
           height: 70px;
-          background-image: url(../images/common/thumb-noimage-70x70.png);
+          background-image: url(/assets/images/common/thumb-noimage-70x70.png);
         }
 
         &-data {
@@ -587,7 +587,7 @@
       @for $i from 1 through 5 {
         .rank#{$i} {
           .post-category:before {
-            background-image: url(../images/common/side-ranking-icon-num#{$i}.png);
+            background-image: url(/assets/images/common/side-ranking-icon-num#{$i}.png);
           }
         }
       }
@@ -599,7 +599,7 @@
           position: relative;
           width: 125px;
           height: 70px;
-          background-image: url(../images/common/thumb-noimage-340x150.png);
+          background-image: url(/assets/images/common/thumb-noimage-340x150.png);
           background-size: 125px;
 
           img {
