@@ -179,7 +179,7 @@ option =
 try
   port = require './port'
 catch error
-  console.error error
+  port = { port : 61000 }
 
 ###
   indexes
