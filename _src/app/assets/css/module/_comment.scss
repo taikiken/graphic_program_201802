@@ -1,0 +1,112 @@
+@import "../../../../scss/asset";
+
+// Comment
+//
+// design module comment
+//
+// Styleguide 2.6.0
+
+// comment-user
+.comment-user {
+  &-thumb, &-data {
+    @include table-cell;
+  }
+
+  &-link {
+    @include link-decoration(#333, #333, none, none);
+    display: block;
+
+    &:hover {
+      .user-prof-thumb {
+        @include hover-opacity;
+      }
+    }
+  }
+
+  &-thumb {
+    width: 50px;
+    height: 50px;
+    background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat;
+  }
+
+  &-name, &-job {
+    margin-left: 10px;
+  }
+
+  &-name {
+    font-weight: bold;
+  }
+
+  &-job {
+    color: #666;
+    font-size: fz(12);
+  }
+} //.comment-user
+
+
+
+
+// comment-content
+.comment-content {
+  padding-top: 10px;
+} //.comment-content
+
+
+
+
+
+// comment-response
+.comment-response {
+  padding-top: 8px;
+
+  .comment-response-btn {
+    @include link-decoration(#333, #333, none, underline);
+    display: inline-block;
+    font-size: fz(12);
+
+    & + .comment-response-btn {
+      margin-left: 10px;
+    }
+
+    &.active {
+      color: $highlight-color;
+    }
+  }
+
+  i {
+    @extend .sprite-common;
+    @include hide-text;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  &-like {
+    i {
+      @include sprite( $common-icon-thumbs-up );
+      display: inline-block;
+    }
+
+    &.active {
+      i {
+        @include sprite( $common-icon-thumbs-up_o );
+        display: inline-block;
+      }
+    }
+  }
+
+  &-dislike {
+    i {
+      @include sprite( $common-icon-thumbs-down );
+      display: inline-block;
+    }
+
+    &.active {
+      i {
+        @include sprite( $common-icon-thumbs-down_o );
+        display: inline-block;
+      }
+    }
+  }
+} //.comment-response
+
+
