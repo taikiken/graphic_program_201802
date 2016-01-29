@@ -13,6 +13,7 @@
 
 import {Offset} from '../Offset';
 import {Api} from '../../net/Api';
+import {Length} from '../../app/Length';
 
 /**
  * 記事検索を行います
@@ -27,7 +28,7 @@ export class Search extends Offset {
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
    */
-  constructor( word:string, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10 ) {
+  constructor( word:string, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
     super( Api.search(), resolve, reject, offset, length );
     this._word = word;
   }

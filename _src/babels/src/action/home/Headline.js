@@ -13,6 +13,7 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
+import {Length} from '../../app/Length';
 
 /**
  * Home headline（注目ニュース）
@@ -38,7 +39,7 @@ export class Headline extends Action {
    */
   get url():string {
 
-    return `${this._url}/headline?offset=0&length=6`;
+    return `${this._url}/headline?offset=0&length=${Length.headline}`;
 
   }
 

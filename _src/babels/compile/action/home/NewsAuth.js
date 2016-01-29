@@ -38,6 +38,8 @@ var _Api = require('../../net/Api');
 
 var _User = require('../../app/User');
 
+var _Length = require('../../app/Length');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -65,7 +67,7 @@ var NewsAuth = exports.NewsAuth = function (_OffsetAuth) {
     var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
     var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var offset = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
-    var length = arguments.length <= 3 || arguments[3] === undefined ? 10 : arguments[3];
+    var length = arguments.length <= 3 || arguments[3] === undefined ? _Length.Length.archive : arguments[3];
     (0, _classCallCheck3.default)(this, NewsAuth);
     return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(NewsAuth).call(this, _User.User.token, _Api.Api.home(), resolve, reject, offset, length));
   }

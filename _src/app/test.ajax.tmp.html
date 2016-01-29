@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>React</title>
+  <title>Ajax Auth</title>
   <link rel="stylesheet" href="assets/css/ui.css">
   <script src="assets/js/libs/jquery2/jquery.min.js"></script>
   <script src="assets/js/libs/vendor.min.js"></script>
@@ -11,18 +11,19 @@
 </head>
 <body>
 
-<pre id="c1"></pre>
+<pre id="c1">Ajax Auth</pre>
 
-<section id="f1"></section>
-<section id="f2"></section>
-<section id="f3"></section>
-<section id="f4"></section>
+<dl>
+  <dt>url</dt>
+  <dd id="url"></dd>
+  <dt>token</dt>
+  <dd id="token"></dd>
+</dl>
 
-<section id="list">
-
+<section id="f1">
+  <pre></pre>
 </section>
 
-<p><button id="listAdd">増やす</button></p>
 <script src="assets/js/bundle/main.bundle.js"></script>
 <script>
   ( function ( window ) {
@@ -30,16 +31,21 @@
     'use strict';
     var data;
 
+    var url = 'http://undotsushin.com/api/v1/articles/self?offset=0&length=10';
+    var token = 'fee1a989f120b99cec0f8206d68f6365';
+
     $.ajax({
       type:'GET',
       crossDomain: true,
-      url: 'http://undotsushin.com/api/v1/articles/self?offset=0&length=10',
+      url: url,
       beforeSend:function(m){
-        m.setRequestHeader("Authorization","OAuth realm=undotsushin.com, oautn_token=fee1a989f120b99cec0f8206d68f6365");
+        m.setRequestHeader("Authorization","OAuth realm=undotsushin.com, oautn_token=" + token);
       },
       success:function(m){
         console.log(m);
-        $('#c1').html(m);
+        $('#f1').find('pre').html( JSON.stringify(m, null, 2) );
+        $('#url' ).html(url);
+        $('#token' ).html(token);
       }
     });
 

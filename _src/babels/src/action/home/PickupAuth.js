@@ -14,6 +14,7 @@
 import {ActionAuth} from '../ActionAuth';
 import {Api} from '../../net/Api';
 import {User} from '../../app/User';
+import {Length} from '../../app/Length';
 
 /**
  * **認証**（ログイン）<br>
@@ -42,7 +43,7 @@ export class PickupAuth extends ActionAuth {
    */
   get url():string {
 
-    return `${this._url}/pickup?offset=0&length=5`;
+    return `${this._url}/pickup?offset=0&length=${Length.pickup}`;
 
   }
 }

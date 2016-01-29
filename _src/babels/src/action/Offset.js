@@ -14,6 +14,7 @@
 import {Result} from '../data/Result';
 import {Action} from './Action';
 import {Types} from '../net/Types';
+import {Length} from '../app/Length';
 
 /**
  * Ajax 処理を行います<br>
@@ -31,7 +32,7 @@ export class Offset extends Action {
    * @param {Number} [length=10] query length 値
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10, ResultClass = Result ) {
+  constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
 
     super( types, resolve, reject );
 

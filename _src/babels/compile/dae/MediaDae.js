@@ -16,6 +16,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MediaDae = undefined;
 
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -45,14 +49,45 @@ var MediaDae = exports.MediaDae = function () {
     (0, _classCallCheck3.default)(this, MediaDae);
 
     this._media = media;
-    this._images = new _ImagesDae.ImagesDae(media.images);
+    // 記事詳細は media.images が最大5件になる
+    if (!Array.isArray(media.images)) {
+      // 1件, 配列では無い
+      this._images = new _ImagesDae.ImagesDae(media.images);
+    } else {
+
+      this._list = [];
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = (0, _getIterator3.default)(media.images), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var image = _step.value;
+
+          this._list.push(new _ImagesDae.ImagesDae(image));
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    }
+
     this._video = new _VideoDae.VideoDae(media.video);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
    * @return {Object|*} article.media
    */
 
@@ -62,8 +97,7 @@ var MediaDae = exports.MediaDae = function () {
       return this._media;
     }
     /**
-     *
-     * @return {ImagesDae|*} article.media.images
+     * @return {ImagesDae|*} article.media.images 存在しない時はundefined を返します
      */
 
   }, {
@@ -72,7 +106,6 @@ var MediaDae = exports.MediaDae = function () {
       return this._images;
     }
     /**
-     *
      * @return {VideoDae|*} article.media.video
      */
 
@@ -80,6 +113,15 @@ var MediaDae = exports.MediaDae = function () {
     key: 'video',
     get: function get() {
       return this._video;
+    }
+    /**
+     * @return {Array<ImagesDae>} 記事詳細 images 配列を返します, 存在しない時はundefined を返します
+     */
+
+  }, {
+    key: 'list',
+    get: function get() {
+      return this._list;
     }
   }]);
   return MediaDae;

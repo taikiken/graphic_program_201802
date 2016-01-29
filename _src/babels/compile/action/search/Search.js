@@ -40,6 +40,8 @@ var _Offset2 = require('../Offset');
 
 var _Api = require('../../net/Api');
 
+var _Length = require('../../app/Length');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -63,7 +65,7 @@ var Search = exports.Search = function (_Offset) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var offset = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
-    var length = arguments.length <= 4 || arguments[4] === undefined ? 10 : arguments[4];
+    var length = arguments.length <= 4 || arguments[4] === undefined ? _Length.Length.archive : arguments[4];
     (0, _classCallCheck3.default)(this, Search);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Search).call(this, _Api.Api.search(), resolve, reject, offset, length));

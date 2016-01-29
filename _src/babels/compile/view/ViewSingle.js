@@ -122,9 +122,9 @@ var ViewSingle = function (_View) {
     key: 'done',
     value: function done(result) {
 
-      var responce = result.response;
+      var response = result.response;
 
-      if (typeof responce === 'undefined') {
+      if (typeof response === 'undefined') {
 
         // articles undefined
         // JSON に問題がある
@@ -165,23 +165,53 @@ var ViewSingle = function (_View) {
     }
     /**
      * dom を render します
-     * @param {Object} responce JSON responce
+     * @param {Object} response JSON response
      */
 
   }, {
     key: 'render',
-    value: function render(responce) {
+    value: function render(response) {
 
-      var single = new _SingleDae.SingleDae(responce);
+      var single = new _SingleDae.SingleDae(response);
       // global SingleInfoへ保存
       _SingleInfo.SingleInfo.dae = single;
 
       // beforeRender call
-      this.beforeRender();
+      this.beforeRender(single);
 
       var element = this.element;
       var _this = this;
 
+      // --------------------------------------------
+      // image dom
+      var ImageDom = React.createClass({
+        displayName: 'ImageDom',
+
+        propTypes: {
+          images: React.PropTypes.array.isRequired
+        },
+        render: function render() {
+
+          var images = this.props.images;
+
+          return React.createElement(
+            'div',
+            { className: 'media-type-image' },
+            images.map(function (image, i) {
+
+              if (typeof image.large !== 'undefined' && image.large !== '') {
+                return React.createElement(
+                  'div',
+                  { key: 'media-type-image-' + i, className: 'media-type-image-' + i },
+                  React.createElement('img', { src: image.large, alt: image.caption })
+                );
+              }
+            })
+          );
+        }
+      });
+
+      // --------------------------------------------
       // React Class
       var ArticleDom = React.createClass({
         displayName: 'ArticleDom',
@@ -205,11 +235,29 @@ var ViewSingle = function (_View) {
             };
           };
 
+          var thumbnail = '';
+          if (article.mediaType === 'image') {
+
+            // media type image
+            thumbnail = React.createElement(ImageDom, { images: article.media.list });
+          } else if (article.mediaType === 'video') {
+
+            if (article.media.video.thumbnail !== '') {
+
+              thumbnail = React.createElement(
+                'div',
+                { className: 'media-type-video' },
+                React.createElement('img', { src: article.media.video.thumbnail, alt: article.media.video.caption }),
+                React.createElement('img', { src: _Empty.Empty.VIDEO_PLAY, alt: '' })
+              );
+            }
+          }
+
           return React.createElement(
             'div',
             null,
             React.createElement(
-              'div',
+              'h1',
               null,
               article.title
             ),
@@ -226,7 +274,7 @@ var ViewSingle = function (_View) {
             React.createElement(
               'div',
               null,
-              'ToDo: image / video'
+              thumbnail
             ),
             React.createElement('div', { className: 'XXX-OUCH', dangerouslySetInnerHTML: bodyTag() }),
             React.createElement(
@@ -235,11 +283,6 @@ var ViewSingle = function (_View) {
               article.keywords.concat(' ')
             )
           );
-        },
-        beforeRender: function beforeRender() {
-
-          // before rendering
-          _this.executeSafely('beforeRender');
         },
         componentWillMount: function componentWillMount() {
 
@@ -254,7 +297,7 @@ var ViewSingle = function (_View) {
       });
 
       // dom 生成
-      ReactDOM.render(React.createElement(ArticleDom, { article: new _SingleDae.SingleDae(responce) }), element);
+      ReactDOM.render(React.createElement(ArticleDom, { article: single }), element);
 
       // 関連記事 もしもあるなら
       if (single.hasRelated) {
@@ -265,6 +308,18 @@ var ViewSingle = function (_View) {
       // 自動化の場合はここに記述
       // ToDo: 決めかねてる...
     } // render
+    /**
+     * beforeRender callback を実行します
+     * @param {SingleDae} single response を SingleDae instance へ変換済みデータ
+     */
+
+  }, {
+    key: 'beforeRender',
+    value: function beforeRender(single) {
+
+      // before rendering
+      this.executeSafely('beforeRender', single);
+    }
     /**
      * 関連記事（記事詳細の）
      * @param {Array} related 配列内データ型はRelatedDom

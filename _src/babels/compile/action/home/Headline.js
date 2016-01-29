@@ -40,6 +40,8 @@ var _Action2 = require('../Action');
 
 var _Api = require('../../net/Api');
 
+var _Length = require('../../app/Length');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -76,7 +78,7 @@ var Headline = exports.Headline = function (_Action) {
     key: 'url',
     get: function get() {
 
-      return this._url + '/headline?offset=0&length=6';
+      return this._url + '/headline?offset=0&length=' + _Length.Length.headline;
     }
   }]);
   return Headline;

@@ -46,6 +46,8 @@ var _Action2 = require('./Action');
 
 var _Types = require('../net/Types');
 
+var _Length = require('../app/Length');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -72,7 +74,7 @@ var Offset = exports.Offset = function (_Action) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var offset = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
-    var length = arguments.length <= 4 || arguments[4] === undefined ? 10 : arguments[4];
+    var length = arguments.length <= 4 || arguments[4] === undefined ? _Length.Length.archive : arguments[4];
     var ResultClass = arguments.length <= 5 || arguments[5] === undefined ? _Result.Result : arguments[5];
     (0, _classCallCheck3.default)(this, Offset);
 

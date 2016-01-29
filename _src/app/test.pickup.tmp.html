@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>React Test Headline</title>
+  <title>Test Index Pickup</title>
   <link rel="stylesheet" href="assets/css/ui.css">
   <script src="assets/js/libs/jquery2/jquery.min.js"></script>
   <script src="assets/js/libs/vendor.min.js"></script>
@@ -11,18 +11,11 @@
 </head>
 <body>
 
-<h1 id="c1"></h1>
+<h1 id="c1">Test Index Pickup</h1>
 
-<section id="f1"></section>
-<section id="f2"></section>
-<section id="f3"></section>
-<section id="f4"></section>
+<div id="hero-sec" class="hero-sec">
 
-<section id="list">
 
-</section>
-
-<p><button id="listAdd">増やす</button></p>
 <script src="assets/js/bundle/main.bundle.js"></script>
 
 <script>
@@ -85,7 +78,7 @@
       responseError: responseError
     };
 
-    headline2 = new UT.view.home.ViewPickup( document.getElementById('f1'), option );
+    headline2 = new UT.view.home.ViewPickup( document.getElementById('hero-sec'), option );
     headline2.start();
 
   }( window ) );

@@ -42,6 +42,8 @@ var _Api = require('../../net/Api');
 
 var _User = require('../../app/User');
 
+var _Length = require('../../app/Length');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -81,7 +83,7 @@ var HeadlineAuth = exports.HeadlineAuth = function (_ActionAuth) {
     key: 'url',
     get: function get() {
 
-      return this._url + '/headline?offset=0&length=6';
+      return this._url + '/headline?offset=0&length=' + _Length.Length.headline;
     }
   }]);
   return HeadlineAuth;

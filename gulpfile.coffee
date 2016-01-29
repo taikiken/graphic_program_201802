@@ -112,13 +112,13 @@ gulp.task 'serve:app', ->
 
   # watch
   gulp.watch [ sprite + '/**/*.{png,jpg,gif,svg}' ], [ 'sprite:build' ]
-  gulp.watch [ app + '/**/*.html', '!' + app + '/**/*tmp*.html' ], reload
+  gulp.watch [ app + '/**/*.html', '!' + app + '/**/*tmp*.html', '!' + app + '/**/*test*.html' ], reload
   gulp.watch [ app + '/**/*.{scss,css}', scss + '/**/*.scss' ], [ 'css:dev', reload ]
   gulp.watch [ app + '/**/*.js', '!' + app + '/**/_babel/*.js', '!' + app + '/**/*.bundle.js', '!' + app + '/**/*.babel.js' ], [ 'js:hint', reload ]
   gulp.watch [ app + '/**/*.{png,jpg,gif,svg}' ], reload
   gulp.watch [ dir.libs + '/**/*' ], reload
 
-  # babel: eslint -> babel -> webpack が負荷が強い様子
+  # babel: eslint -> babel -> webpack が負荷が高い様子
   # 一時的に watch task から外します
   # ToDo: 解決策が見つかれば watch task へ組み込む
 #  gulp.watch [ app + '/**/_babel/*.js' ], [ 'single:dev' ]

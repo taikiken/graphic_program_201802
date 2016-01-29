@@ -13,6 +13,7 @@
 
 import {Offset} from './Offset';
 import {User} from '../app/User';
+import {Length} from '../app/Length';
 import {HeadersOption} from '../app/HeadersOption';
 
 import {Result} from '../data/Result';
@@ -35,7 +36,7 @@ export class OffsetAuth extends Offset {
    * @param {Number} [length=10] query length 値
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
-  constructor( token:string, types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10, ResultClass = Result ) {
+  constructor( token:string, types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
     /*
     // ログインか必須かよくわからない
     if ( !User.sign ) {

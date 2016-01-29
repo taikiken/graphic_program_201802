@@ -40,6 +40,8 @@ var _Offset2 = require('./Offset');
 
 var _User = require('../app/User');
 
+var _Length = require('../app/Length');
+
 var _HeadersOption = require('../app/HeadersOption');
 
 var _Result = require('../data/Result');
@@ -73,7 +75,7 @@ var OffsetAuth = exports.OffsetAuth = function (_Offset) {
     var resolve = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var reject = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
     var offset = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
-    var length = arguments.length <= 5 || arguments[5] === undefined ? 10 : arguments[5];
+    var length = arguments.length <= 5 || arguments[5] === undefined ? _Length.Length.archive : arguments[5];
     var ResultClass = arguments.length <= 6 || arguments[6] === undefined ? _Result.Result : arguments[6];
     (0, _classCallCheck3.default)(this, OffsetAuth);
 

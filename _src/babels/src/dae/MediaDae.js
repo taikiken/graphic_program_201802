@@ -25,7 +25,20 @@ export class MediaDae {
   constructor( media:Object = {} ) {
 
     this._media = media;
-    this._images = new ImagesDae( media.images );
+    // 記事詳細は media.images が最大5件になる
+    if ( !Array.isArray(  media.images ) ) {
+      // 1件, 配列では無い
+      this._images = new ImagesDae( media.images );
+
+    } else {
+
+      this._list = [];
+      for ( var image of media.images ) {
+        this._list.push( new ImagesDae( image ) );
+      }
+
+    }
+
     this._video = new VideoDae( media.video );
 
   }
@@ -33,24 +46,27 @@ export class MediaDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
    * @return {Object|*} article.media
    */
   get media():Object {
     return this._media;
   }
   /**
-   *
-   * @return {ImagesDae|*} article.media.images
+   * @return {ImagesDae|*} article.media.images 存在しない時はundefined を返します
    */
   get images():ImagesDae {
     return this._images;
   }
   /**
-   *
    * @return {VideoDae|*} article.media.video
    */
   get video():VideoDae {
     return this._video;
+  }
+  /**
+   * @return {Array<ImagesDae>} 記事詳細 images 配列を返します, 存在しない時はundefined を返します
+   */
+  get list():Array<ImagesDae> {
+    return this._list;
   }
 }

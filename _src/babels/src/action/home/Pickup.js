@@ -13,6 +13,7 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
+import {Length} from '../../app/Length';
 
 /**
  * Home pickup(slider)
@@ -52,7 +53,7 @@ export class Pickup extends Action {
    */
   get url():string {
 
-    return `${this._url}/pickup?offset=0&length=5`;
+    return `${this._url}/pickup?offset=0&length=${Length.pickup}`;
 
   }
 }

@@ -71,9 +71,9 @@ export class ViewSingle extends View {
    */
   done( result:Result ):void {
 
-    let responce = result.response;
+    let response = result.response;
 
-    if ( typeof responce === 'undefined' ) {
+    if ( typeof response === 'undefined' ) {
 
       // articles undefined
       // JSON に問題がある
@@ -112,20 +112,51 @@ export class ViewSingle extends View {
   }
   /**
    * dom を render します
-   * @param {Object} responce JSON responce
+   * @param {Object} response JSON response
    */
-  render( responce:Object ):void {
+  render( response:Object ):void {
 
-    let single = new SingleDae( responce );
+    let single = new SingleDae( response );
     // global SingleInfoへ保存
     SingleInfo.dae = single;
 
     // beforeRender call
-    this.beforeRender();
+    this.beforeRender( single );
 
     let element = this.element;
     let _this = this;
 
+    // --------------------------------------------
+    // image dom
+    let ImageDom = React.createClass( {
+      propTypes: {
+        images: React.PropTypes.array.isRequired
+      },
+      render: function() {
+
+        let images = this.props.images;
+
+        return (
+          <div className="media-type-image">
+            {
+              images.map( function( image, i ) {
+
+                if ( typeof image.large !== 'undefined' && image.large !== '' ) {
+                  return (
+                    <div key={'media-type-image-' + i} className={'media-type-image-' + i}>
+                      <img src={image.large} alt={image.caption}/>
+                    </div>
+                  );
+                }
+
+              } )
+            }
+          </div>
+        );
+      }
+    } );
+
+    // --------------------------------------------
     // React Class
     let ArticleDom = React.createClass( {
       propTypes: {
@@ -147,24 +178,37 @@ export class ViewSingle extends View {
           };
         };
 
+        let thumbnail = '';
+        if ( article.mediaType === 'image' ) {
+
+          // media type image
+          thumbnail = <ImageDom images={article.media.list} />;
+
+        } else if ( article.mediaType === 'video' ) {
+
+          if ( article.media.video.thumbnail !== '' ) {
+
+            thumbnail = <div className="media-type-video">
+              <img src={article.media.video.thumbnail} alt={article.media.video.caption}/>
+              <img src={Empty.VIDEO_PLAY} alt=''/>
+            </div>;
+
+          }
+
+        }
+
         return (
 
           <div>
-            <div>{article.title}</div>
+            <h1>{article.title}</h1>
             <div>{article.user.userName}</div>
             <div>{article.formatDate}</div>
-            <div>ToDo: image / video</div>
+            <div>{thumbnail}</div>
             <div className="XXX-OUCH" dangerouslySetInnerHTML={bodyTag()} />
             <div>{article.keywords.concat( ' ' )}</div>
           </div>
 
         );
-
-      },
-      beforeRender: function() {
-
-        // before rendering
-        _this.executeSafely( 'beforeRender' );
 
       },
       componentWillMount: function() {
@@ -183,7 +227,7 @@ export class ViewSingle extends View {
 
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { article: new SingleDae( responce ) } ),
+      React.createElement( ArticleDom, { article: single } ),
       element
     );
 
@@ -197,6 +241,16 @@ export class ViewSingle extends View {
     // ToDo: 決めかねてる...
 
   }// render
+  /**
+   * beforeRender callback を実行します
+   * @param {SingleDae} single response を SingleDae instance へ変換済みデータ
+   */
+  beforeRender( single:SingleDae ):void {
+
+    // before rendering
+    this.executeSafely( 'beforeRender', single );
+
+  }
   /**
    * 関連記事（記事詳細の）
    * @param {Array} related 配列内データ型はRelatedDom

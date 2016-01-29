@@ -26,6 +26,7 @@ import {Format} from './util/Format';
 import {Env} from './app/Env';
 import {Codes} from './app/Codes';
 import {User} from './app/User';
+import {Length} from './app/Length';
 
 // -------------------------------------
 // data
@@ -112,7 +113,8 @@ var UT = {
     Env: Env,
     App: App,
     Codes: Codes,
-    User: User
+    User: User,
+    Length: Length
   },
   data: {
     Data: Data,

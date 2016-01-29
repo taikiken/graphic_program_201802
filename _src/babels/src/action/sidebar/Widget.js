@@ -14,6 +14,7 @@
 
 import {Ranking} from '../archive/Ranking';
 import {Videos} from '../archive/Videos';
+import {Length} from '../../app/Length';
 
 let _symbol = Symbol();
 
@@ -53,7 +54,7 @@ export class Widget {
   static ranking( slug:string = 'all', resolve:Function = null, reject:Function = null ):Ranking {
 
     let rankings = new Ranking( slug, resolve, reject );
-    rankings.length = 5;
+    rankings.length = Length.ranking;
     return rankings;
 
   }
@@ -68,7 +69,7 @@ export class Widget {
   static video( slug:string = 'all', resolve:Function = null, reject:Function = null ):Videos {
 
     let videos = new Videos( slug, resolve, reject );
-    videos.length = 5;
+    videos.length = Length.video;
     return videos;
 
   }

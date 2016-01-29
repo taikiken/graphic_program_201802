@@ -65,7 +65,7 @@ var Empty = exports.Empty = function () {
     key: 'IMG_SMALL',
     get: function get() {
 
-      return 'images/common/thumb-noimage-70x70.png';
+      return 'assets/images/common/thumb-noimage-70x70.png';
     }
     /**
      * img thumbnail 代替画像パス<br>
@@ -78,7 +78,7 @@ var Empty = exports.Empty = function () {
     key: 'IMG_MIDDLE',
     get: function get() {
 
-      return 'images/common/thumb-noimage-340x150.png';
+      return 'assets/images/common/thumb-noimage-340x150.png';
     }
     /**
      * video thumbnail 代替画像パス<br>
@@ -88,10 +88,23 @@ var Empty = exports.Empty = function () {
      */
 
   }, {
-    key: 'VIDEO_SMALL',
+    key: 'VIDEO_THUMBNAIL',
     get: function get() {
 
-      return 'images/common/thumb-overlay-movie-340x150.png';
+      return 'assets/images/common/xxx.png';
+    }
+    /**
+     * video play button overlay<br>
+     * [Ex.] sidebar video...
+     * @readonly
+     * @return {string} 代替画像パス【小】
+     */
+
+  }, {
+    key: 'VIDEO_PLAY',
+    get: function get() {
+
+      return 'assets/images/common/thumb-overlay-movie-340x150.png';
     }
     /**
      * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
@@ -104,7 +117,7 @@ var Empty = exports.Empty = function () {
     key: 'USER_PICTURE',
     get: function get() {
 
-      return 'img/common/thumb-user.png';
+      return 'assets/images/common/thumb-user.png';
     }
     /**
      * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)<br>
@@ -117,7 +130,7 @@ var Empty = exports.Empty = function () {
     key: 'USER_PICTURE_FEATURE',
     get: function get() {
 
-      return 'img/common/thumb-user-feature.png';
+      return 'assets/images/common/thumb-user-feature.png';
     }
     /**
      * hero-slider カバーグラデーション画像

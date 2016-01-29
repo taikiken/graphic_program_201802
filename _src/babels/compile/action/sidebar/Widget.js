@@ -33,6 +33,8 @@ var _Ranking = require('../archive/Ranking');
 
 var _Videos = require('../archive/Videos');
 
+var _Length = require('../../app/Length');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -80,7 +82,7 @@ var Widget = exports.Widget = function () {
       var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
       var rankings = new _Ranking.Ranking(slug, resolve, reject);
-      rankings.length = 5;
+      rankings.length = _Length.Length.ranking;
       return rankings;
     }
 
@@ -100,7 +102,7 @@ var Widget = exports.Widget = function () {
       var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
       var videos = new _Videos.Videos(slug, resolve, reject);
-      videos.length = 5;
+      videos.length = _Length.Length.video;
       return videos;
     }
   }]);

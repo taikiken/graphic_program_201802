@@ -14,6 +14,7 @@
 import {OffsetAuth} from '../OffsetAuth';
 import {Api} from '../../net/Api';
 import {User} from '../../app/User';
+import {Length} from '../../app/Length';
 
 /**
  * **認証**（ログイン）<br>
@@ -32,7 +33,7 @@ export class NewsAuth extends OffsetAuth {
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
    */
-  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10 ) {
+  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
     super( User.token, Api.home(), resolve, reject, offset, length );
   }
 }

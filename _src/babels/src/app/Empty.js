@@ -42,7 +42,7 @@ export class Empty {
    */
   static get IMG_SMALL():string {
 
-    return 'images/common/thumb-noimage-70x70.png';
+    return 'assets/images/common/thumb-noimage-70x70.png';
 
   }
   /**
@@ -53,7 +53,7 @@ export class Empty {
    */
   static get IMG_MIDDLE():string {
 
-    return 'images/common/thumb-noimage-340x150.png';
+    return 'assets/images/common/thumb-noimage-340x150.png';
 
   }
   /**
@@ -62,9 +62,20 @@ export class Empty {
    * @readonly
    * @return {string} 代替画像パス【小】
    */
-  static get VIDEO_SMALL():string {
+  static get VIDEO_THUMBNAIL():string {
 
-    return 'images/common/thumb-overlay-movie-340x150.png';
+    return 'assets/images/common/xxx.png';
+
+  }
+  /**
+   * video play button overlay<br>
+   * [Ex.] sidebar video...
+   * @readonly
+   * @return {string} 代替画像パス【小】
+   */
+  static get VIDEO_PLAY():string {
+
+    return 'assets/images/common/thumb-overlay-movie-340x150.png';
 
   }
   /**
@@ -75,7 +86,7 @@ export class Empty {
    */
   static get USER_PICTURE():string {
 
-    return 'img/common/thumb-user.png';
+    return 'assets/images/common/thumb-user.png';
 
   }
   /**
@@ -86,7 +97,7 @@ export class Empty {
    */
   static get USER_PICTURE_FEATURE():string {
 
-    return 'img/common/thumb-user-feature.png';
+    return 'assets/images/common/thumb-user-feature.png';
 
   }
   /**

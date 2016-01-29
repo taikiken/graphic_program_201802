@@ -13,6 +13,7 @@
 
 import {Offset} from '../Offset';
 import {Api} from '../../net/Api';
+import {Length} from '../../app/Length';
 
 /**
  * home 通常記事一覧
@@ -27,7 +28,7 @@ export class News extends Offset {
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
    */
-  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = 10 ) {
+  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
     super( Api.home(), resolve, reject, offset, length );
   }
 }

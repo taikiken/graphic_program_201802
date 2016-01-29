@@ -40,6 +40,8 @@ var _Action2 = require('../Action');
 
 var _Api = require('../../net/Api');
 
+var _Length = require('../../app/Length');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -90,7 +92,7 @@ var Pickup = exports.Pickup = function (_Action) {
     key: 'url',
     get: function get() {
 
-      return this._url + '/pickup?offset=0&length=5';
+      return this._url + '/pickup?offset=0&length=' + _Length.Length.pickup;
     }
   }]);
   return Pickup;
