@@ -121,7 +121,7 @@ var Length = exports.Length = function () {
     }
 
     /**
-     * @return {number} headline default 取得数を返します
+     * @return {Number} headline default 取得数を返します
      */
 
   }, {
@@ -141,7 +141,7 @@ var Length = exports.Length = function () {
       }
     }
     /**
-     * @return {number} ranking default 取得数を返します
+     * @return {Number} ranking default 取得数を返します
      */
 
   }, {
@@ -151,7 +151,7 @@ var Length = exports.Length = function () {
     }
     /**
      *
-     * @param {Number} ranking pickup default 取得数
+     * @param {Number} value ranking default 取得数
      */
     ,
     set: function set(value) {
@@ -162,7 +162,7 @@ var Length = exports.Length = function () {
       }
     }
     /**
-     * @return {number} video default 取得数を返します
+     * @return {Number} video default 取得数を返します
      */
 
   }, {
@@ -182,7 +182,7 @@ var Length = exports.Length = function () {
       }
     }
     /**
-     * @return {number} archive default 取得数を返します
+     * @return {Number} archive default 取得数を返します
      */
 
   }, {

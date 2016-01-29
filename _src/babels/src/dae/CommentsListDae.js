@@ -33,6 +33,7 @@ export class CommentsListDae {
    */
   constructor( response:Object = {} ) {
     this._response = response;
+    console.log( 'CommentsListDae ', response, response.comments );
     this._comments = new CommentsDae( response.comments );
   }
   // ---------------------------------------------------

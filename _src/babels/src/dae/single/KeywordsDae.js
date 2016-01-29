@@ -17,7 +17,7 @@
 export class KeywordsDae {
   /**
    * 記事キーワード
-   * @param {Array} [keywords=[]]
+   * @param {Array} [keywords=[]] keywords 配列
    */
   constructor( keywords:Array<string> = [] ) {
     this._keywords = keywords;

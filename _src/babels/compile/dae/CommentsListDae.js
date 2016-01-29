@@ -53,6 +53,7 @@ var CommentsListDae = exports.CommentsListDae = function () {
     (0, _classCallCheck3.default)(this, CommentsListDae);
 
     this._response = response;
+    console.log('CommentsListDae ', response, response.comments);
     this._comments = new _CommentsDae.CommentsDae(response.comments);
   }
   // ---------------------------------------------------

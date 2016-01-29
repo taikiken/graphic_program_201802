@@ -12,6 +12,7 @@
 'use strict';
 
 import {PopularDae} from './comments/PopularDae';
+import {Safety} from '../data/Safety';
 
 /**
  * article.comments_popular
@@ -22,6 +23,7 @@ export class CommentsPopularDae {
    * @param {Array} [comments=[]] article.comments_popular
    */
   constructor( comments:Array = [] ) {
+    comments = Safety.array( comments );
     this._comments = [];
     for ( var comment of comments ) {
       this._comments.push( new PopularDae( comment ) );

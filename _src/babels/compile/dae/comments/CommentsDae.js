@@ -9,6 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30,15 +31,17 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _PopularDae = require('./PopularDae');
 
-var _CommentsPopularDae = require('../CommentsPopularDae');
-
 var _ReplyDae = require('./ReplyDae');
+
+var _Safety = require('../../data/Safety');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * コメント一覧表示配列の各コメント
  */
+
+// import {CommentsPopularDae} from '../CommentsPopularDae';
 
 var CommentsDae = exports.CommentsDae = function () {
   /**
@@ -54,6 +57,9 @@ var CommentsDae = exports.CommentsDae = function () {
     var bank = {};
     // comment.id を 順に保存します
     var list = [];
+
+    comments = _Safety.Safety.array(comments);
+    console.log('CommentsDae comments ', comments);
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -91,6 +97,8 @@ var CommentsDae = exports.CommentsDae = function () {
 
     this._bank = bank;
     this._list = list;
+
+    console.log('CommentsDae', this._bank, this._list);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

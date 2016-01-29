@@ -40,7 +40,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MediaDae = exports.MediaDae = function () {
   /**
-   *
+   * responce.media を images / video にわけます
    * @param {Object} [media={}] article.media
    */
 

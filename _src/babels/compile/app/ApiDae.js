@@ -42,8 +42,6 @@ var _Queries = require('../net/types/Queries');
 
 var _Query = require('../net/types/Query');
 
-var _CommentType = require('../net/types/CommentType');
-
 var _Loc = require('../util/Loc');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

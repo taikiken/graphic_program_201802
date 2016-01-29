@@ -31,7 +31,6 @@ export class Safety {
     }
 
   }
-
   /**
    * object に keyName が存在することと type があっているかを調べます
    * @param {Object} object 調査対象 Object
@@ -53,5 +52,16 @@ export class Safety {
 
     }
 
+  }
+  /**
+   * @param {*} value 配列かを調べる対象
+   * @return {Array} 必ず配列を返します。引数が配列で無い時は空配列を返します
+   */
+  static array( value ):Array {
+    if ( !Array.isArray( value ) ) {
+      return [];
+    }
+
+    return value;
   }
 }

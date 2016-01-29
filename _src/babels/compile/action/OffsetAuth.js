@@ -38,8 +38,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Offset2 = require('./Offset');
 
-var _User = require('../app/User');
-
 var _Length = require('../app/Length');
 
 var _HeadersOption = require('../app/HeadersOption');
@@ -55,6 +53,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Template Pattern として使用します<br>
  * 各 Class で extends して下さい
  */
+
+// import {User} from '../app/User';
 
 var OffsetAuth = exports.OffsetAuth = function (_Offset) {
   (0, _inherits3.default)(OffsetAuth, _Offset);

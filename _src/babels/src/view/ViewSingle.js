@@ -26,6 +26,8 @@ import {Result} from '../data/Result';
 // dae
 import {SingleDae} from '../dae/SingleDae';
 
+import {Safety} from '../data/Safety';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -78,7 +80,7 @@ export class ViewSingle extends View {
       // articles undefined
       // JSON に問題がある
       let error = new Error( '[SINGLE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( 'undefinedError', error );
+      this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
     } else {
@@ -94,7 +96,7 @@ export class ViewSingle extends View {
    */
   fail( error:Error ):void {
 
-    this.executeSafely( 'responseError', error );
+    this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
 
@@ -121,7 +123,7 @@ export class ViewSingle extends View {
     SingleInfo.dae = single;
 
     // beforeRender call
-    this.beforeRender( single );
+    this.executeSafely( View.BEFORE_RENDER, single );
 
     let element = this.element;
     let _this = this;
@@ -214,13 +216,13 @@ export class ViewSingle extends View {
       componentWillMount: function() {
 
         // after mount
-        _this.executeSafely( 'willMount' );
+        _this.executeSafely( View.WILL_MOUNT );
 
       },
       componentDidMount: function() {
 
         // after mount
-        _this.executeSafely( 'didMount' );
+        _this.executeSafely( View.DID_MOUNT );
 
       }
     } );
@@ -242,20 +244,12 @@ export class ViewSingle extends View {
 
   }// render
   /**
-   * beforeRender callback を実行します
-   * @param {SingleDae} single response を SingleDae instance へ変換済みデータ
-   */
-  beforeRender( single:SingleDae ):void {
-
-    // before rendering
-    this.executeSafely( 'beforeRender', single );
-
-  }
-  /**
    * 関連記事（記事詳細の）
    * @param {Array} related 配列内データ型はRelatedDom
    */
   related( related:Array = [] ):void {
+
+    related = Safety.array( related );
 
     let element = this._elements.related;
 

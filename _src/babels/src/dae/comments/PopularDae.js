@@ -21,7 +21,7 @@ import {UserDae} from '../UserDae';
 export class PopularDae {
   /**
    * article.comments_popular:[]
-   * @param {Object} [comment={}]
+   * @param {Object} [comment={}] response.comment Object
    */
   constructor( comment:Object = {} ) {
 

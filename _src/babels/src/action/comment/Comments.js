@@ -15,6 +15,7 @@ import {OffsetAuth} from '../OffsetAuth';
 import {Api} from '../../net/Api';
 import {User} from '../../app/User';
 import {Path} from '../../app/Path';
+import {CommentsType} from '../../app/CommentsType';
 
 let _symbol = Symbol();
 
@@ -59,35 +60,8 @@ export class Comments extends OffsetAuth {
   get url():string {
     return `${Path.article( this._url, this.id )}?offset=${this.offset}&length=${this.length}`;
   }
-  // ---------------------------------------------------
-  //  static METHOD
-  // ---------------------------------------------------
   /**
-   * @return {string} comment type 'self' を返します
-   */
-  static get SELF():string {
-    return 'self';
-  }
-  /**
-   * @return {string} comment type 'normal' を返します
-   */
-  static get NORMAL():string {
-    return 'normal';
-  }
-  /**
-   * @return {string} comment type 'official' を返します
-   */
-  static get OFFICIAL():string {
-    return 'official';
-  }
-  /**
-   * @return {string} comment type '' を返します
-   */
-  static get ALL():string {
-    return '';
-  }
-  /**
-   * @param {string} type 取得コメント種類, ''|normal|official|self
+   * @param {string} type 取得コメント種類
    * @param {number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -97,16 +71,16 @@ export class Comments extends OffsetAuth {
 
     switch ( type ) {
 
-      case Comments.SELF :
+      case CommentsType.SELF :
         return Comments.min( id, resolve, reject );
 
-      case Comments.NORMAL :
+      case CommentsType.NORMAL :
         return Comments.normal( id, resolve, reject );
 
-      case Comments.OFFICIAL :
+      case CommentsType.OFFICIAL :
         return Comments.official( id, resolve, reject );
 
-      case Comments.ALL :
+      case CommentsType.ALL :
         return Comments.all( id, resolve, reject );
 
       default :
@@ -124,7 +98,7 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static mine( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, Comments.SELF, resolve, reject );
+    return new Comments( _symbol, id, CommentsType.SELF, resolve, reject );
   }
   /**
    * コメント一覧, 通常ユーザーのコメント
@@ -134,7 +108,7 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static normal( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, Comments.NORMAL, resolve, reject );
+    return new Comments( _symbol, id, CommentsType.NORMAL, resolve, reject );
   }
   /**
    * コメント一覧,公式ユーザーのコメント
@@ -144,7 +118,7 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static official( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, Comments.OFFICIAL, resolve, reject );
+    return new Comments( _symbol, id, CommentsType.OFFICIAL, resolve, reject );
   }
   /**
    * コメント一覧, 全てのコメント
@@ -154,6 +128,6 @@ export class Comments extends OffsetAuth {
    * @return {Comments} Comments instanceを返します
    */
   static all( id:Number, resolve:Function = null, reject:Function = null ):Comments {
-    return new Comments( _symbol, id, Comments.ALL, resolve, reject );
+    return new Comments( _symbol, id, CommentsType.ALL, resolve, reject );
   }
 }

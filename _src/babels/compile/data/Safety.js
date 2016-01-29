@@ -55,7 +55,6 @@ var Safety = exports.Safety = function () {
       throw new Error('Safety is static Class. not use new Safety().');
     }
   }
-
   /**
    * object に keyName が存在することと type があっているかを調べます
    * @param {Object} object 調査対象 Object
@@ -78,6 +77,20 @@ var Safety = exports.Safety = function () {
 
         return object.hasOwnProperty(keyName) && (0, _typeof3.default)(object[keyName]) === type;
       }
+    }
+    /**
+     * @param {*} value 配列かを調べる対象
+     * @return {Array} 必ず配列を返します。引数が配列で無い時は空配列を返します
+     */
+
+  }, {
+    key: 'array',
+    value: function array(value) {
+      if (!Array.isArray(value)) {
+        return [];
+      }
+
+      return value;
     }
   }]);
   return Safety;

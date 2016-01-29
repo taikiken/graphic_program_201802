@@ -18,7 +18,6 @@ import {Type} from '../net/types/Type';
 import {Permalink} from '../net/types/Permalink';
 import {Queries} from '../net/types/Queries';
 import {Query} from '../net/types/Query';
-import {CommentType} from '../net/types/CommentType';
 import {Loc} from '../util/Loc';
 
 // test mode 時に api アクセス先を 0.0.0.0: + (port +2) へ

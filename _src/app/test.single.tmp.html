@@ -15,8 +15,11 @@
 
 <section id="single"></section>
 <section id="comment-self"></section>
+<section id="comment-self-more"></section>
 <section id="comment-official"></section>
-<section id="comment-user"></section>
+<section id="comment-official-more"></section>
+<section id="comment-normal"></section>
+<section id="comment-normal-more"></section>
 
 <section id="related"></section>
 
@@ -38,8 +41,13 @@
     // -------------------------------------------------
     var single;
 
-    function beforeRender() {
-      console.log( 'beforeRender ', this );
+    function beforeRender( responce ) {
+      console.log( 'beforeRender ****', responce );
+
+      // comments official
+//      var official = new UT.view.ViewComments( responce.id, document.getElementById('comment-official'), document.getElementById('comment-official-more'), UT.app.CommentsType.OFFICIAL );
+//      official.start();
+
     }
     function didMount() {
       console.log( 'dom mount', this );
@@ -82,7 +90,21 @@
 //    single = new UT.view.ViewSingle( 38, document.getElementById('single'), elements, option );
 //    single = new UT.view.ViewSingle( 32, document.getElementById('single'), elements, option );
 //    single = new UT.view.ViewSingle( 29, document.getElementById('single'), elements, option );
-    single = new UT.view.ViewSingle( 7, document.getElementById('single'), elements, option );
+    var singleReceiver = new UT.ui.Receiver();
+    singleReceiver.beforeRender = function ( event ) {
+
+      var single = event.args[ 0 ];
+      console.log( 'singleReceiver.beforeRender ', single.id );
+
+    };
+
+//    console.log( 'singleReceiver.beforeRender', singleReceiver.hasOwnProperty( 'beforeRender' ) );
+
+//    single = new UT.view.ViewSingle( 7, document.getElementById('single'), elements, option );
+    single = new UT.view.ViewSingle( 7, document.getElementById('single'), elements );
+
+    single.on( UT.view.View.BEFORE_RENDER, singleReceiver.beforeRender );
+
     single.start();
 
   }( window ) );

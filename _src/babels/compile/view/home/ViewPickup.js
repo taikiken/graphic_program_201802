@@ -139,14 +139,14 @@ var ViewPickup = exports.ViewPickup = function (_View) {
         // articles undefined
         // JSON に問題がある
         var error = new Error('[PICKUP:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-        this.executeSafely('undefinedError', error);
+        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
         // this.showError( error.message );
       } else if (articles.length === 0) {
 
           // articles empty
           // request, JSON 取得に問題は無かったが data が取得できなかった
           var error = new Error('[PICKUP:EMPTY]サーバーレスポンスに問題が発生しました。');
-          this.executeSafely('emptyError', error);
+          this.executeSafely(_View2.View.EMPTY_ERROR, error);
           // this.showError( error.message );
         } else {
 
@@ -162,7 +162,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
     key: 'fail',
     value: function fail(error) {
 
-      this.executeSafely('responseError', error);
+      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
       // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
       // this.showError( error.message );
     }
@@ -524,7 +524,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
 
           // after mount
           // callback
-          _this.executeSafely('didMount');
+          _this.executeSafely(_View2.View.DID_MOUNT);
           // interval animation
           // mount 後 animation を開始します
           // bind はreactが内部的にする（様子） `this.updateNext.bind(this)` は不要

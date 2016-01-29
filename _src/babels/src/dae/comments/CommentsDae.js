@@ -9,11 +9,13 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
 'use strict';
 
 import {PopularDae} from './PopularDae';
-import {CommentsPopularDae} from '../CommentsPopularDae';
+// import {CommentsPopularDae} from '../CommentsPopularDae';
 import {ReplyDae} from './ReplyDae';
+import {Safety} from '../../data/Safety';
 
 /**
  * コメント一覧表示配列の各コメント
@@ -28,6 +30,9 @@ export class CommentsDae {
     let bank = {};
     // comment.id を 順に保存します
     let list = [];
+
+    comments = Safety.array( comments );
+    console.log( 'CommentsDae comments ', comments );
 
     for ( var comment of comments ) {
       // reply の前まではこれで処理できているはず...
@@ -44,6 +49,8 @@ export class CommentsDae {
 
     this._bank = bank;
     this._list = list;
+
+    console.log( 'CommentsDae', this._bank, this._list );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

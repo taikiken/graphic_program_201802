@@ -42,7 +42,7 @@ export class Empty {
    */
   static get IMG_SMALL():string {
 
-    return 'assets/images/common/thumb-noimage-70x70.png';
+    return '/assets/images/common/thumb-noimage-70x70.png';
 
   }
   /**
@@ -53,7 +53,7 @@ export class Empty {
    */
   static get IMG_MIDDLE():string {
 
-    return 'assets/images/common/thumb-noimage-340x150.png';
+    return '/assets/images/common/thumb-noimage-340x150.png';
 
   }
   /**
@@ -64,7 +64,8 @@ export class Empty {
    */
   static get VIDEO_THUMBNAIL():string {
 
-    return 'assets/images/common/xxx.png';
+    // ToDo: デザインができたらパスを正しいものに変更する
+    return '/assets/images/common/xxx.png';
 
   }
   /**
@@ -75,7 +76,7 @@ export class Empty {
    */
   static get VIDEO_PLAY():string {
 
-    return 'assets/images/common/thumb-overlay-movie-340x150.png';
+    return '/assets/images/common/thumb-overlay-movie-340x150.png';
 
   }
   /**
@@ -86,7 +87,7 @@ export class Empty {
    */
   static get USER_PICTURE():string {
 
-    return 'assets/images/common/thumb-user.png';
+    return '/assets/images/common/thumb-user.png';
 
   }
   /**
@@ -97,7 +98,7 @@ export class Empty {
    */
   static get USER_PICTURE_FEATURE():string {
 
-    return 'assets/images/common/thumb-user-feature.png';
+    return '/assets/images/common/thumb-user-feature.png';
 
   }
   /**
@@ -105,6 +106,6 @@ export class Empty {
    * @return {string} hero-slider カバーグラデーション画像パスを返します
    */
   static get KV_OVERLAY():string {
-    return 'assets/images/index/kv-overlay.png';
+    return '/assets/images/index/kv-overlay.png';
   }
 }

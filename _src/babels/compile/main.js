@@ -12,6 +12,8 @@ var _User = require('./app/User');
 
 var _Length = require('./app/Length');
 
+var _CommentsType = require('./app/CommentsType');
+
 var _Data = require('./data/Data');
 
 var _Form = require('./data/Form');
@@ -66,9 +68,13 @@ var _Search = require('./action/search/Search');
 
 var _Single = require('./action/single/Single');
 
+var _View = require('./view/View');
+
 var _ViewArchive = require('./view/ViewArchive');
 
 var _ViewSingle = require('./view/ViewSingle');
+
+var _ViewComments = require('./view/ViewComments');
 
 var _ViewHeadline = require('./view/home/ViewHeadline');
 
@@ -77,6 +83,8 @@ var _ViewPickup = require('./view/home/ViewPickup');
 var _ViewRanking = require('./view/sidebar/ViewRanking');
 
 var _ViewVideos = require('./view/sidebar/ViewVideos');
+
+var _Receiver = require('./ui/Receiver');
 
 /**
  * ToDo: 確認事項
@@ -91,20 +99,21 @@ var _ViewVideos = require('./view/sidebar/ViewVideos');
  *    var ut = self.UT
  */
 
-// sidebar
+// action/single
+
+// action/bookmark
+
+// action/archive
+
+// action/home
 
 // -------------------------------------
-// view
+// action
 
-// action/search
-
-// action/sidebar
+// net/types
 
 // -------------------------------------
-// app/App
-
-// -------------------------------------
-// net
+// data
 var UT = {
   version: '1.0.0',
   app: {
@@ -112,7 +121,11 @@ var UT = {
     App: _App.App,
     Codes: _Codes.Codes,
     User: _User.User,
-    Length: _Length.Length
+    Length: _Length.Length,
+    CommentsType: _CommentsType.CommentsType
+  },
+  ui: {
+    Receiver: _Receiver.Receiver
   },
   data: {
     Data: _Data.Data,
@@ -165,8 +178,10 @@ var UT = {
     }
   },
   view: {
+    View: _View.View,
     ViewArchive: _ViewArchive.ViewArchive,
     ViewSingle: _ViewSingle.ViewSingle,
+    ViewComments: _ViewComments.ViewComments,
     sidebar: {
       ViewRanking: _ViewRanking.ViewRanking,
       ViewVideos: _ViewVideos.ViewVideos
@@ -178,28 +193,30 @@ var UT = {
   }
 };
 
-// action/single
+// -------------------------------------
+// ui
 
-// action/bookmark
-
-// action/archive
-
-// action/home
+// sidebar
 
 // -------------------------------------
-// action
+// view
 
-// net/types
+// action/search
+
+// action/sidebar
 
 // -------------------------------------
-// data
+// app/App
+
+// -------------------------------------
+// net
 
 // -------------------------------------
 // app
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-29 16:42:04
+ * @date 2016-01-29 23:36:58
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html

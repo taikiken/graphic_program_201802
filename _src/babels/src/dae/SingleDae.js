@@ -23,7 +23,7 @@ export class SingleDae extends RelatedDae {
   /**
    * 記事詳細のresponceデータを後処理しやすいように加工します
    *
-   * @param {Object} response
+   * @param {Object} response JSON.response
    */
   constructor( response:Object = {} ) {
 

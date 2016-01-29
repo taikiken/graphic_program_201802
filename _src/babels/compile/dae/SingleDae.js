@@ -54,7 +54,7 @@ var SingleDae = exports.SingleDae = function (_RelatedDae) {
   /**
    * 記事詳細のresponceデータを後処理しやすいように加工します
    *
-   * @param {Object} response
+   * @param {Object} response JSON.response
    */
 
   function SingleDae() {

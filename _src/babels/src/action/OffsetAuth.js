@@ -12,7 +12,7 @@
 'use strict';
 
 import {Offset} from './Offset';
-import {User} from '../app/User';
+// import {User} from '../app/User';
 import {Length} from '../app/Length';
 import {HeadersOption} from '../app/HeadersOption';
 

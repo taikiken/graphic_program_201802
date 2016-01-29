@@ -79,7 +79,7 @@ export class ViewVideos extends View {
       // articles undefined
       // JSON に問題がある
       let error = new Error( '[VIDEOS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( 'undefinedError', error );
+      this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
     } else if ( articles.length === 0 ) {
@@ -87,7 +87,7 @@ export class ViewVideos extends View {
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
       let error = new Error( '[VIDEOS:EMPTY]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( 'emptyError', error );
+      this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
     } else {
@@ -103,7 +103,7 @@ export class ViewVideos extends View {
    */
   fail( error:Error ):void {
 
-    this.executeSafely( 'responseError', error );
+    this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
 
@@ -203,7 +203,7 @@ export class ViewVideos extends View {
       componentDidMount: function() {
 
         // after mount
-        _this.executeSafely( 'didMount' );
+        _this.executeSafely( View.DID_MOUNT );
 
       }
     } );

@@ -19,14 +19,14 @@ import {VideoDae} from './media/VideoDae';
  */
 export class MediaDae {
   /**
-   *
+   * responce.media を images / video にわけます
    * @param {Object} [media={}] article.media
    */
   constructor( media:Object = {} ) {
 
     this._media = media;
     // 記事詳細は media.images が最大5件になる
-    if ( !Array.isArray(  media.images ) ) {
+    if ( !Array.isArray( media.images ) ) {
       // 1件, 配列では無い
       this._images = new ImagesDae( media.images );
 

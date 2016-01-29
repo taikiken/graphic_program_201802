@@ -35,7 +35,7 @@ var _Comments = require('../action/comment/Comments');
 
 var _Result = require('../data/Result');
 
-var _ArticleDae = require('../dae/ArticleDae');
+var _CommentsListDae = require('../dae/CommentsListDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,8 +64,21 @@ var React = self.React;
 
 var ReactDOM = self.ReactDOM;
 
+/**
+ * comments sled を表示する
+ */
+
 var ViewComments = exports.ViewComments = function (_View) {
   (0, _inherits3.default)(ViewComments, _View);
+
+  /**
+   * コメントスレッド表示（記事詳細）
+   * @param {Number} id 記事ID :article_id
+   * @param {Element} element target HTMLElement
+   * @param {Element} moreElement more button root parent
+   * @param {string} commentsType all|official|self|normal コメントリスト種類
+   * @param {Object} option optional event handler
+   */
 
   function ViewComments(id, element, moreElement, commentsType) {
     var option = arguments.length <= 4 || arguments[4] === undefined ? {} : arguments[4];
@@ -114,16 +127,17 @@ var ViewComments = exports.ViewComments = function (_View) {
     value: function done(result) {
 
       var response = result.response;
-
+      console.log('response ', typeof response === 'undefined', response);
       if (typeof response === 'undefined') {
 
         // articles undefined
         // JSON に問題がある
         var error = new Error('[COMMENTS:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-        this.executeSafely('undefinedError', error);
+        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
         // this.showError( error.message );
       } else {
 
+          console.log('call render ', response);
           this.render(response);
         }
     }
@@ -136,7 +150,7 @@ var ViewComments = exports.ViewComments = function (_View) {
     key: 'fail',
     value: function fail(error) {
 
-      this.executeSafely('responseError', error);
+      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
       // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
       // this.showError( error.message );
     }
@@ -161,7 +175,19 @@ var ViewComments = exports.ViewComments = function (_View) {
 
   }, {
     key: 'render',
-    value: function render(responce) {} // render
+    value: function render(responce) {
+
+      var comments = new _CommentsListDae.CommentsListDae(responce);
+
+      // total check
+      if (comments.total === 0) {
+        // デーが無いので処理を止める
+        this.executeSafely(_View2.View.EMPTY_ERROR);
+        return;
+      }
+
+      // 処理開始
+    } // render
 
   }, {
     key: 'moreElement',

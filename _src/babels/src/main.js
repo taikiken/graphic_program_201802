@@ -27,6 +27,7 @@ import {Env} from './app/Env';
 import {Codes} from './app/Codes';
 import {User} from './app/User';
 import {Length} from './app/Length';
+import {CommentsType} from './app/CommentsType';
 
 // -------------------------------------
 // data
@@ -84,8 +85,12 @@ import {Single} from './action/single/Single';
 
 // -------------------------------------
 // view
+import {View} from './view/View';
+
 import {ViewArchive} from './view/ViewArchive';
 import {ViewSingle} from './view/ViewSingle';
+
+import {ViewComments} from './view/ViewComments';
 
 import {ViewHeadline} from './view/home/ViewHeadline';
 import {ViewPickup} from './view/home/ViewPickup';
@@ -93,6 +98,10 @@ import {ViewPickup} from './view/home/ViewPickup';
 // sidebar
 import {ViewRanking} from './view/sidebar/ViewRanking';
 import {ViewVideos} from './view/sidebar/ViewVideos';
+
+// -------------------------------------
+// ui
+import {Receiver} from './ui/Receiver';
 
 /**
  * ToDo: 確認事項
@@ -114,7 +123,11 @@ var UT = {
     App: App,
     Codes: Codes,
     User: User,
-    Length: Length
+    Length: Length,
+    CommentsType: CommentsType
+  },
+  ui: {
+    Receiver: Receiver
   },
   data: {
     Data: Data,
@@ -167,8 +180,10 @@ var UT = {
     }
   },
   view: {
+    View: View,
     ViewArchive: ViewArchive,
     ViewSingle: ViewSingle,
+    ViewComments: ViewComments,
     sidebar: {
       ViewRanking: ViewRanking,
       ViewVideos: ViewVideos

@@ -13,10 +13,12 @@
 // import {Action} from '../action/Action';
 // import {ViewError} from './error/ViewError';
 
+import {EventDispatcher} from '../event/EventDispatcher';
+
 /**
  * 表示を行います
  */
-export class View {
+export class View extends EventDispatcher {
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
    * @param {Element} element root element
@@ -24,6 +26,7 @@ export class View {
    */
   constructor( element:Element, option:Object = {} ) {
 
+    super();
     this._element = element;
     this._option = option;
     this._action = null;
@@ -71,5 +74,59 @@ export class View {
 
     }
 
+    this.dispatch( { type: keyName, args: args } );
+
+  }
+  // ---------------------------------------------------
+  //  CONST
+  // ---------------------------------------------------
+  /**
+   * event BEFORE_RENDER
+   * @return {string} beforeRender を返します
+   */
+  static get BEFORE_RENDER():string {
+    return 'beforeRender';
+  }
+  /**
+   * event WILL_MOUNT
+   * @return {string} beforeRender を返します
+   */
+  static get WILL_MOUNT():string {
+    return 'willMount';
+  }
+  /**
+   * event DID_MOUNT
+   * @return {string} beforeRender を返します
+   */
+  static get DID_MOUNT():string {
+    return 'didMount';
+  }
+  /**
+   * event ERROR_MOUNT
+   * @return {string} beforeRender を返します
+   */
+  static get ERROR_MOUNT():string {
+    return 'errorMount';
+  }
+  /**
+   * event UNDEFINED_ERROR
+   * @return {string} beforeRender を返します
+   */
+  static get UNDEFINED_ERROR():string {
+    return 'undefinedError';
+  }
+  /**
+   * event EMPTY_ERROR
+   * @return {string} beforeRender を返します
+   */
+  static get EMPTY_ERROR():string {
+    return 'emptyError';
+  }
+  /**
+   * event RESPONSE_ERROR
+   * @return {string} beforeRender を返します
+   */
+  static get RESPONSE_ERROR():string {
+    return 'responseError';
   }
 }

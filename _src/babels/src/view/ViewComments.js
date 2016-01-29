@@ -21,13 +21,24 @@ import {Comments} from '../action/comment/Comments';
 // data
 import {Result} from '../data/Result';
 // dae
-import {ArticleDae} from '../dae/ArticleDae';
+import {CommentsListDae} from '../dae/CommentsListDae';
 
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * comments sled を表示する
+ */
 export class ViewComments extends View {
+  /**
+   * コメントスレッド表示（記事詳細）
+   * @param {Number} id 記事ID :article_id
+   * @param {Element} element target HTMLElement
+   * @param {Element} moreElement more button root parent
+   * @param {string} commentsType all|official|self|normal コメントリスト種類
+   * @param {Object} option optional event handler
+   */
   constructor( id:Number, element:Element, moreElement:Element, commentsType:string, option:Object = {} ) {
     super( element, option );
     this._action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
@@ -67,17 +78,18 @@ export class ViewComments extends View {
   done( result:Result ):void {
 
     let response = result.response;
-
+    console.log( 'response ', typeof response === 'undefined', response );
     if ( typeof response === 'undefined' ) {
 
       // articles undefined
       // JSON に問題がある
       let error = new Error( '[COMMENTS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( 'undefinedError', error );
+      this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
     } else {
 
+      console.log( 'call render ', response );
       this.render( response );
 
     }
@@ -89,7 +101,7 @@ export class ViewComments extends View {
    */
   fail( error:Error ):void {
 
-    this.executeSafely( 'responseError', error );
+    this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
 
@@ -110,6 +122,17 @@ export class ViewComments extends View {
    * @param {Object} responce JSON responce
    */
   render( responce:Object ):void {
+
+    let comments = new CommentsListDae( responce );
+
+    // total check
+    if ( comments.total === 0 ) {
+      // デーが無いので処理を止める
+      this.executeSafely( View.EMPTY_ERROR );
+      return;
+    }
+
+    // 処理開始
 
   }// render
 }

@@ -48,6 +48,8 @@ var _User = require('../../app/User');
 
 var _Path = require('../../app/Path');
 
+var _CommentsType = require('../../app/CommentsType');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -110,16 +112,6 @@ var Comments = function (_OffsetAuth) {
     get: function get() {
       return _Path.Path.article(this._url, this.id) + '?offset=' + this.offset + '&length=' + this.length;
     }
-    // ---------------------------------------------------
-    //  static METHOD
-    // ---------------------------------------------------
-    /**
-     * @return {string} comment type 'self' を返します
-     */
-
-  }], [{
-    key: 'type',
-
     /**
      * @param {string} type 取得コメント種類, ''|normal|official|self
      * @param {number} id コメントを取得する記事ID
@@ -127,22 +119,25 @@ var Comments = function (_OffsetAuth) {
      * @param {Function} [reject=null] Ajax 失敗時の callback
      * @return {Comments} Comments instanceを返します
      */
+
+  }], [{
+    key: 'type',
     value: function type(_type, id) {
       var resolve = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
       var reject = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
       switch (_type) {
 
-        case Comments.SELF:
+        case _CommentsType.CommentsType.SELF:
           return Comments.min(id, resolve, reject);
 
-        case Comments.NORMAL:
+        case _CommentsType.CommentsType.NORMAL:
           return Comments.normal(id, resolve, reject);
 
-        case Comments.OFFICIAL:
+        case _CommentsType.CommentsType.OFFICIAL:
           return Comments.official(id, resolve, reject);
 
-        case Comments.ALL:
+        case _CommentsType.CommentsType.ALL:
           return Comments.all(id, resolve, reject);
 
         default:
@@ -165,7 +160,7 @@ var Comments = function (_OffsetAuth) {
       var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
       var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-      return new Comments(_symbol, id, Comments.SELF, resolve, reject);
+      return new Comments(_symbol, id, _CommentsType.CommentsType.SELF, resolve, reject);
     }
     /**
      * コメント一覧, 通常ユーザーのコメント
@@ -181,7 +176,7 @@ var Comments = function (_OffsetAuth) {
       var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
       var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-      return new Comments(_symbol, id, Comments.NORMAL, resolve, reject);
+      return new Comments(_symbol, id, _CommentsType.CommentsType.NORMAL, resolve, reject);
     }
     /**
      * コメント一覧,公式ユーザーのコメント
@@ -197,7 +192,7 @@ var Comments = function (_OffsetAuth) {
       var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
       var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-      return new Comments(_symbol, id, Comments.OFFICIAL, resolve, reject);
+      return new Comments(_symbol, id, _CommentsType.CommentsType.OFFICIAL, resolve, reject);
     }
     /**
      * コメント一覧, 全てのコメント
@@ -213,39 +208,7 @@ var Comments = function (_OffsetAuth) {
       var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
       var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-      return new Comments(_symbol, id, Comments.ALL, resolve, reject);
-    }
-  }, {
-    key: 'SELF',
-    get: function get() {
-      return 'self';
-    }
-    /**
-     * @return {string} comment type 'normal' を返します
-     */
-
-  }, {
-    key: 'NORMAL',
-    get: function get() {
-      return 'normal';
-    }
-    /**
-     * @return {string} comment type 'official' を返します
-     */
-
-  }, {
-    key: 'OFFICIAL',
-    get: function get() {
-      return 'official';
-    }
-    /**
-     * @return {string} comment type '' を返します
-     */
-
-  }, {
-    key: 'ALL',
-    get: function get() {
-      return '';
+      return new Comments(_symbol, id, _CommentsType.CommentsType.ALL, resolve, reject);
     }
   }]);
   return Comments;

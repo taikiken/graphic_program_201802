@@ -30,6 +30,8 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _PopularDae = require('./comments/PopularDae');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -46,6 +48,7 @@ var CommentsPopularDae = exports.CommentsPopularDae = function () {
     var comments = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
     (0, _classCallCheck3.default)(this, CommentsPopularDae);
 
+    comments = _Safety.Safety.array(comments);
     this._comments = [];
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;

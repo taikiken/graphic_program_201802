@@ -52,18 +52,19 @@ var _Result = require('../data/Result');
 
 var _SingleDae = require('../dae/SingleDae');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
-
-// data
-var React = self.React;
 
 // dae
 
 // action
 
 // view
+var React = self.React;
+// data
 
 var ReactDOM = self.ReactDOM;
 
@@ -129,7 +130,7 @@ var ViewSingle = function (_View) {
         // articles undefined
         // JSON に問題がある
         var error = new Error('[SINGLE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-        this.executeSafely('undefinedError', error);
+        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
         // this.showError( error.message );
       } else {
 
@@ -145,7 +146,7 @@ var ViewSingle = function (_View) {
     key: 'fail',
     value: function fail(error) {
 
-      this.executeSafely('responseError', error);
+      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
       // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
       // this.showError( error.message );
     }
@@ -177,7 +178,7 @@ var ViewSingle = function (_View) {
       _SingleInfo.SingleInfo.dae = single;
 
       // beforeRender call
-      this.beforeRender(single);
+      this.executeSafely(_View2.View.BEFORE_RENDER, single);
 
       var element = this.element;
       var _this = this;
@@ -287,12 +288,12 @@ var ViewSingle = function (_View) {
         componentWillMount: function componentWillMount() {
 
           // after mount
-          _this.executeSafely('willMount');
+          _this.executeSafely(_View2.View.WILL_MOUNT);
         },
         componentDidMount: function componentDidMount() {
 
           // after mount
-          _this.executeSafely('didMount');
+          _this.executeSafely(_View2.View.DID_MOUNT);
         }
       });
 
@@ -309,18 +310,6 @@ var ViewSingle = function (_View) {
       // ToDo: 決めかねてる...
     } // render
     /**
-     * beforeRender callback を実行します
-     * @param {SingleDae} single response を SingleDae instance へ変換済みデータ
-     */
-
-  }, {
-    key: 'beforeRender',
-    value: function beforeRender(single) {
-
-      // before rendering
-      this.executeSafely('beforeRender', single);
-    }
-    /**
      * 関連記事（記事詳細の）
      * @param {Array} related 配列内データ型はRelatedDom
      */
@@ -329,6 +318,8 @@ var ViewSingle = function (_View) {
     key: 'related',
     value: function related() {
       var _related = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+      _related = _Safety.Safety.array(_related);
 
       var element = this._elements.related;
 

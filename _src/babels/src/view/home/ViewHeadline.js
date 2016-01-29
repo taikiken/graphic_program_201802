@@ -101,7 +101,7 @@ export class ViewHeadline extends View {
       // articles undefined
       // JSON に問題がある
       let error = new Error( '[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( 'undefinedError', error );
+      this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
     } else if ( articles.length === 0 ) {
@@ -109,7 +109,7 @@ export class ViewHeadline extends View {
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
       let error = new Error( '[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( 'emptyError', error );
+      this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
     } else {
@@ -125,7 +125,7 @@ export class ViewHeadline extends View {
    */
   fail( error:Error ):void {
 
-    this.executeSafely( 'responseError', error );
+    this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
 
@@ -224,7 +224,7 @@ export class ViewHeadline extends View {
       componentDidMount: function() {
 
         // after mount
-        _this.executeSafely( 'didMount' );
+        _this.executeSafely( View.DID_MOUNT );
 
       }
     } );

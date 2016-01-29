@@ -127,14 +127,14 @@ var ViewVideos = exports.ViewVideos = function (_View) {
         // articles undefined
         // JSON に問題がある
         var error = new Error('[VIDEOS:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-        this.executeSafely('undefinedError', error);
+        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
         // this.showError( error.message );
       } else if (articles.length === 0) {
 
           // articles empty
           // request, JSON 取得に問題は無かったが data が取得できなかった
           var error = new Error('[VIDEOS:EMPTY]サーバーレスポンスに問題が発生しました。');
-          this.executeSafely('emptyError', error);
+          this.executeSafely(_View2.View.EMPTY_ERROR, error);
           // this.showError( error.message );
         } else {
 
@@ -150,7 +150,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
     key: 'fail',
     value: function fail(error) {
 
-      this.executeSafely('responseError', error);
+      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
       // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
       // this.showError( error.message );
     }
@@ -265,7 +265,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
         componentDidMount: function componentDidMount() {
 
           // after mount
-          _this.executeSafely('didMount');
+          _this.executeSafely(_View2.View.DID_MOUNT);
         }
       });
 
