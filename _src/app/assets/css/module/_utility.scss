@@ -1,7 +1,5 @@
 @import "../../../../scss/asset";
 
-// Module utility を記述します
-
 // Utility
 //
 // design module utility
@@ -12,10 +10,9 @@
 // hover で 透過率 0.75 にします (CSSアニメーション付)
 // $opacity=.75 - hover時の透過率
 @mixin hover-opacity($opacity:.75) {
-  &:hover {
-    opacity: $opacity;
-    transition: opacity ease-out .4s;
-  }
+  opacity: $opacity;
+  transition: opacity ease-out .4s;
+  @content
 }
 
 // ---------------------------
