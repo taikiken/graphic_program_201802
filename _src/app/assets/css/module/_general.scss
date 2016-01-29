@@ -231,3 +231,47 @@
     }
   }
 }
+
+
+
+
+
+// dialogue-notice
+// 汎用ダイアログボックス
+.dialogue-notice {
+  &.error { background-color: #e14343;}
+  &.success { background-color: #43e18a;}
+  &, &.info { background-color: $highlight-color;}
+
+  @at-root {
+    &-inner {
+      position: relative;
+      width: 1070px;
+      height: 80px;
+      margin: 0 auto;
+    }
+
+    &-info {
+      @include table-cell;
+      width: 1170px - 30;
+      height: 80px;
+      color: #fff;
+      text-align: center;
+
+      cursor: default;
+    }
+
+    &-btn-close {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -15px;
+
+      a {
+        @extend .sprite-common;
+        @include sprite( $common-btn-notice-close );
+        @include hide-text;
+      }
+    }
+  }
+}

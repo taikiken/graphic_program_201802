@@ -32,7 +32,7 @@
           </form>
         </div><!-- /.search-block -->
 
-        <div class="user-block signin">
+        <div class="user-block signout">
           <a class="signup" href="hoge">無料登録 / ログイン</a>
 
           <a class="preference" href="#">
@@ -86,9 +86,21 @@
     </div>
   </nav><!-- /.gnav-sec -->
 
-  <div class="notice">
-    .notice-inner
-  </div><!-- /.notice -->
+  <div class="dialogue-notice error">
+    <div class="dialogue-notice-inner">
+      <div class="dialogue-notice-info">
+        <p>パスワードが違います</p>
+      </div>
+      <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
+    </div>
+  </div><!-- /.dialogue-notice -->
+
+  <!--
+  .dialogue-noticeへクラス付与して背景色を変更
+  クラス名なし or .info -> #e1438b ピンク(ハイライトカラー)
+  .error -> #e14343 レッド
+  .succsess -> #43e18a グリーン
+  -->
 
   <div id="hero-sec" class="hero-sec">
     <div class="hero-slider">

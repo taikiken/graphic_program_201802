@@ -2958,7 +2958,7 @@ table tr.w200 > td {
     font-weight: bold;
     font-size: 172%; }
 
-.sprite-common, .feature-user .user-response i, .newsboad-btn-viewmore-link span {
+.sprite-common, .feature-user .user-response i, .newsboad-btn-viewmore-link span, .dialogue-notice-btn-close a {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
@@ -3155,10 +3155,52 @@ table tr.w200 > td {
       outline: none;
       margin: 0 auto; }
 
+.dialogue-notice.error {
+  background-color: #e14343; }
+
+.dialogue-notice.success {
+  background-color: #43e18a; }
+
+.dialogue-notice, .dialogue-notice.info {
+  background-color: #e1438b; }
+
+.dialogue-notice-inner {
+  position: relative;
+  width: 1070px;
+  height: 80px;
+  margin: 0 auto; }
+
+.dialogue-notice-info {
+  display: table-cell;
+  vertical-align: middle;
+  width: 1140px;
+  height: 80px;
+  color: #fff;
+  text-align: center;
+  cursor: default; }
+
+.dialogue-notice-btn-close {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -15px; }
+  .dialogue-notice-btn-close a {
+    background-position: 0px -11px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    font-size: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    outline: none; }
+
 /*
   sprite
 * *********************************** */
-.sprite-common, .feature-user .user-response i, .newsboad-btn-viewmore-link span {
+.sprite-common, .feature-user .user-response i, .newsboad-btn-viewmore-link span, .dialogue-notice-btn-close a {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
