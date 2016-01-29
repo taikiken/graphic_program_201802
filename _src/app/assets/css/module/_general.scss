@@ -105,7 +105,7 @@
         &-thumb {
           width: 50px;
           height: 50px;
-          background: url(../images/common/thumb-user-feature.png) 0 0 no-repeat;
+          background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat;
         }
 
         &-name, &-job {
@@ -198,7 +198,7 @@
         display: block;
         width: 25px;
         height: 25px;
-        background: url(../images/common/thumb-user.png) 0 0 no-repeat;
+        background: url(/assets/images/common/thumb-user.png) 0 0 no-repeat;
 
         &:hover {
           @include hover-opacity;

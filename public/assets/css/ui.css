@@ -2717,7 +2717,7 @@ table tr.w200 > td {
         .hero-slider-inner li a .post-comment-num {
           margin-left: 10px;
           padding-left: 20px;
-          background: url(../images/index/icon-slider-comment.png) 0 center no-repeat; }
+          background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat; }
   .hero-slider-control {
     position: absolute;
     top: 0;
@@ -2741,10 +2741,10 @@ table tr.w200 > td {
         transition: opacity ease-out .4s; }
     .hero-slider-control .direction-prev {
       left: -38px;
-      background-image: url(../images/index/btn-slider-prev.png); }
+      background-image: url(/assets/images/index/btn-slider-prev.png); }
     .hero-slider-control .direction-next {
       left: 640px;
-      background-image: url(../images/index/btn-slider-next.png); }
+      background-image: url(/assets/images/index/btn-slider-next.png); }
     .hero-slider-control .pager {
       position: absolute;
       top: 370px;
@@ -2925,7 +2925,7 @@ table tr.w200 > td {
       float: left;
       width: 70px;
       height: 70px;
-      background: url(../images/common/thumb-noimage-70x70.png) 0 0 no-repeat; }
+      background: url(/assets/images/common/thumb-noimage-70x70.png) 0 0 no-repeat; }
     .headline-item .post-data {
       float: right;
       width: 260px; }
@@ -3039,7 +3039,7 @@ table tr.w200 > td {
   .feature-user .user-prof-thumb {
     width: 50px;
     height: 50px;
-    background: url(../images/common/thumb-user-feature.png) 0 0 no-repeat; }
+    background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat; }
   .feature-user .user-prof-name, .feature-user .user-prof-job {
     margin-left: 10px; }
   .feature-user .user-prof-name {
@@ -3074,7 +3074,7 @@ table tr.w200 > td {
       margin-right: 5px;
       vertical-align: middle; }
     .feature-user .user-response-like i {
-      background-position: -34px -11px;
+      background-position: -64px -11px;
       background-repeat: no-repeat;
       overflow: hidden;
       display: block;
@@ -3082,7 +3082,7 @@ table tr.w200 > td {
       height: 17px;
       display: inline-block; }
     .feature-user .user-response-like.active i {
-      background-position: -51px -11px;
+      background-position: 0px -41px;
       background-repeat: no-repeat;
       overflow: hidden;
       display: block;
@@ -3090,7 +3090,7 @@ table tr.w200 > td {
       height: 17px;
       display: inline-block; }
     .feature-user .user-response-dislike i {
-      background-position: 0px -11px;
+      background-position: -30px -11px;
       background-repeat: no-repeat;
       overflow: hidden;
       display: block;
@@ -3098,7 +3098,7 @@ table tr.w200 > td {
       height: 17px;
       display: inline-block; }
     .feature-user .user-response-dislike.active i {
-      background-position: -17px -11px;
+      background-position: -47px -11px;
       background-repeat: no-repeat;
       overflow: hidden;
       display: block;
@@ -3120,7 +3120,7 @@ table tr.w200 > td {
     display: block;
     width: 25px;
     height: 25px;
-    background: url(../images/common/thumb-user.png) 0 0 no-repeat; }
+    background: url(/assets/images/common/thumb-user.png) 0 0 no-repeat; }
     .commented-user-thumb:link, .commented-user-thumb:visited, .commented-user-thumb:hover, .commented-user-thumb:active {
       text-decoration: none; }
     .commented-user-thumb:hover {
@@ -3250,7 +3250,7 @@ table tr.w200 > td {
       display: block;
       width: 35px;
       height: 35px;
-      background: url(../images/common/header-icon-user.png) 0 0 no-repeat; }
+      background: url(/assets/images/common/header-icon-user.png) 0 0 no-repeat; }
     .head-sec .user-block.signin .notice {
       position: absolute;
       top: -5px;
@@ -3285,7 +3285,7 @@ table tr.w200 > td {
     left: 138px;
     width: 9px;
     height: 5px;
-    background: url(../images/common/icon-user-menu.png) 0 0 no-repeat; }
+    background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat; }
   .head-sec .user-menu li {
     border-bottom: 1px solid #ddd; }
     .head-sec .user-menu li:last-child {
@@ -3315,7 +3315,7 @@ table tr.w200 > td {
 .gnav-sec li {
   display: table-cell;
   padding: 0 11px 0 0;
-  background: url(../images/common/gnav-separator.png) right center no-repeat;
+  background: url(/assets/images/common/gnav-separator.png) right center no-repeat;
   text-align: center;
   vertical-align: middle; }
   .gnav-sec li:last-child {
@@ -3492,7 +3492,7 @@ table tr.w200 > td {
     position: relative;
     width: 1070px;
     margin: 0 auto;
-    background: #fff url(../images/common/bg-bodysec.png) repeat-y center 0; }
+    background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0; }
     .body-sec-inner:before, .body-sec-inner:after {
       content: "";
       display: table;
@@ -3588,7 +3588,7 @@ table tr.w200 > td {
 .widget-ranking .post-thumb {
   width: 70px;
   height: 70px;
-  background-image: url(../images/common/thumb-noimage-70x70.png); }
+  background-image: url(/assets/images/common/thumb-noimage-70x70.png); }
 
 .widget-ranking .post-data {
   float: right;
@@ -3612,25 +3612,25 @@ table tr.w200 > td {
     background-position: 0 0; }
 
 .widget-ranking .rank1 .post-category:before {
-  background-image: url(../images/common/side-ranking-icon-num1.png); }
+  background-image: url(/assets/images/common/side-ranking-icon-num1.png); }
 
 .widget-ranking .rank2 .post-category:before {
-  background-image: url(../images/common/side-ranking-icon-num2.png); }
+  background-image: url(/assets/images/common/side-ranking-icon-num2.png); }
 
 .widget-ranking .rank3 .post-category:before {
-  background-image: url(../images/common/side-ranking-icon-num3.png); }
+  background-image: url(/assets/images/common/side-ranking-icon-num3.png); }
 
 .widget-ranking .rank4 .post-category:before {
-  background-image: url(../images/common/side-ranking-icon-num4.png); }
+  background-image: url(/assets/images/common/side-ranking-icon-num4.png); }
 
 .widget-ranking .rank5 .post-category:before {
-  background-image: url(../images/common/side-ranking-icon-num5.png); }
+  background-image: url(/assets/images/common/side-ranking-icon-num5.png); }
 
 .widget-recommend .post-thumb {
   position: relative;
   width: 125px;
   height: 70px;
-  background-image: url(../images/common/thumb-noimage-340x150.png);
+  background-image: url(/assets/images/common/thumb-noimage-340x150.png);
   background-size: 125px; }
   .widget-recommend .post-thumb img {
     width: 100%; }
