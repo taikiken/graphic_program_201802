@@ -25,29 +25,29 @@
       <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
       <aside class="f-right clearfix">
-        <div class="search-block">
+        <div class="head-search">
           <form action="">
             <input id="head-search" nama="head-search" type="text" placeholder="記事を探す">
             <input type="submit" value="">
           </form>
-        </div><!-- /.search-block -->
+        </div><!-- /.head-search -->
 
-        <div class="user-block signout">
-          <a class="signup" href="hoge">無料登録 / ログイン</a>
+        <div class="user signin">
+          <a class="user-signup" href="hoge">無料登録 / ログイン</a>
 
-          <a class="preference" href="#">
-            <span class="notice">88</span>
-            <span class="avatar"><!-- <img src="avatar.jpg" alt=""> --></span>
+          <a class="user-preference" href="#">
+            <span class="user-notice">88</span>
+            <span class="user-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
           </a>
 
           <nav class="user-menu">
-            <ul>
-              <li><a href="hoge">ブックマーク<br>アクティビティ</a></li>
-              <li><a href="hoge">設定</a></li>
-              <li><a href="hoge">ログアウト</a></li>
+            <ul class="dropmenu">
+              <li class="dropmenu-item"><a class="dropmenu-link" href="hoge">ブックマーク<br>アクティビティ</a></li>
+              <li class="dropmenu-item"><a class="dropmenu-link" href="hoge">設定</a></li>
+              <li class="dropmenu-item"><a class="dropmenu-link" href="hoge">ログアウト</a></li>
             </ul>
           </nav><!-- /.user-menu -->
-        </div><!-- /.user-block -->
+        </div><!-- /.user -->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
@@ -119,16 +119,66 @@
         </div><!-- /.post-content -->
 
         <div class="post-tags">
+          <h2>TAGS</h2>
+          <ul class="post-tags-list">
+            <li class="post-tags-item"><a href="hoge">ダミーリンク</a></li>
+            <li class="post-tags-item"><a href="hoge">ダミーリンク</a></li>
+            <li class="post-tags-item"><a href="hoge">ダミーリンク</a></li>
+            <li class="post-tags-item"><a href="hoge">ダミーリンク</a></li>
+            <li class="post-tags-item"><a href="hoge">ダミーリンク</a></li>
+          </ul>
         </div><!-- /.post-tags -->
 
         <div class="post-sns">
+          <ul class="post-sns-list">
+            <li class="post-sns-tw">twitter</li>
+            <li class="post-sns-fbshare">facebook</li>
+            <li class="post-sns-fbgood">facebook</li>
+            <li class="post-sns-gt">googleplus</li>
+          </ul>
         </div><!-- /.post-sns -->
 
         <div class="comment">
           <div class="comment-form">
+            <form action="">
+              <i class="comment-form-user">画像</i>
+              <textarea name="comment-form-comment" id="comment-form-comment" cols="30" rows="10"></textarea>
+              <input type="submit" value="コメントを投稿">
+            </form>
           </div><!-- /.comment-form -->
 
           <div class="comment-yours">
+            <div class="comment-heading">
+              <h2>ダミータイトル</h2>
+            </div><!-- /.comment-heading -->
+
+            <ul class="comment-list">
+              <li class="comment-item">
+                <nav class="comment-menu">
+                  <a href="hoge">MENU</a>
+
+                </nav><!-- /.comment-menu -->
+
+                <figure class="comment-user">
+                  <a class="comment-user-link" href="hoge">
+                    <span class="comment-user-thumb">&nbsp;</span>
+                    <figcaption class="comment-user-data">
+                      <p class="comment-user-name">山田 太郎</p>
+                      <p class="comment-user-job">スポーツライター</p>
+                      <p class="comment-date">12月18日(金) 22:04</p>
+                    </figcaption>
+                  </a>
+                </figure>
+
+                <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                <div class="comment-response">
+                  <a class="comment-response-btn comment-response-like active" href="#"><i></i>99999</a>
+                  <a class="comment-response-btn comment-response-dislike" href="#"><i></i>99999</a>
+                </div>
+
+              </li>
+            </ul>
           </div><!-- /.comment-yours -->
 
           <div class="comment-official">

@@ -58,7 +58,7 @@
     }
   }
 
-  .search-block {
+  .head-search {
     @include clearfix;
     float: left;
     width: 300px;
@@ -88,96 +88,113 @@
     }
   }
 
-  .user-block {
+  .user {
     position: relative;
     float: left;
     margin-left: 15px;
 
-    .preference {
-      display: none;
-    }
-
-    .signup {
-      @include link-decoration($highlight-color, $highlight-color, none, none);
-      display: table-cell;
-      height: 60px;
-      font-weight: bold;
-      vertical-align: middle;
-    }
-
-    &.signin {
-      margin-top: 14px;
-
-      .signup {
+    @at-root {
+      &-preference {
         display: none;
       }
 
-      .preference {
-        position: relative;
-        display: block;
-        width: 35px;
-        height: 35px;
-        background: url(/assets/images/common/header-icon-user.png) 0 0 no-repeat;
-      }
-
-      .notice {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        display: block;
-        width: 20px;
-        height: 20px;
-        padding-top: 4px;
-        line-height: 1;
-        background-color: #e14343;
-        border-radius: 100%;
-        color: #fff;
+      &-signup {
+        @include link-decoration($highlight-color, $highlight-color, none, none);
+        display: table-cell;
+        height: 60px;
         font-weight: bold;
-        font-size: fz(10);
-        text-align: center;
+        vertical-align: middle;
       }
 
-      .user-menu {
-        display: block;
+      &.signin {
+        margin-top: 14px;
+
+        .user-signup {
+          display: none;
+        }
+
+        .user-preference {
+          position: relative;
+          display: block;
+          width: 35px;
+          height: 35px;
+          background: url(/assets/images/common/header-icon-user.png) 0 0 no-repeat;
+        }
+
+        .user-notice {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          display: block;
+          width: 20px;
+          height: 20px;
+          padding-top: 4px;
+          line-height: 1;
+          background-color: #e14343;
+          border-radius: 100%;
+          color: #fff;
+          font-weight: bold;
+          font-size: fz(10);
+          text-align: center;
+        }
+
+        .user-avatar {
+          display: block;
+
+          img {
+            width: 35px;
+            height: 35px;
+            border-radius: 100%;
+          }
+        }
+
+        .user-menu {
+          display: block;
+        }
+      }
+
+      &-menu {
+        z-index: 9999;
+        display: none;
+        position: absolute;
+        top: 57px;
+        left: -125px;
+        width: 160px;
+        background-color: #fff;
+        border-radius: 3px;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: -5px;
+          left: 138px;
+          width: 9px;
+          height: 5px;
+          background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat;
+        }
+
+        .dropmenu {
+          @at-root {
+            &-item {
+              border-bottom: 1px solid $border-primary-color;
+
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+
+            &-link {
+              @include link-decoration(#333, #333, none, underline);
+              display: block;
+              padding: 14px 20px;
+              font-size: fz(13);
+            }
+          }
+        }
       }
     }
   }
 
-  .user-menu {
-    z-index: 9999;
-    display: none;
-    position: absolute;
-    top: 57px;
-    left: -125px;
-    width: 160px;
-    background-color: #fff;
-    border-radius: 3px;
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: 138px;
-      width: 9px;
-      height: 5px;
-      background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat;
-    }
-
-    li {
-      border-bottom: 1px solid $border-primary-color;
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    a {
-      @include link-decoration(#333, #333, none, underline);
-      display: block;
-      padding: 14px 20px;
-      font-size: fz(13);
-    }
-  }
 }
 
 

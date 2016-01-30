@@ -2958,13 +2958,13 @@ table tr.w200 > td {
     font-weight: bold;
     font-size: 172%; }
 
-.sprite-common, .feature-user .user-response i, .newsboad-btn-viewmore-link span, .dialogue-notice-btn-close a {
+.sprite-common, .newsboad-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-response i {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
   background-image: url(/assets/images/sprite/sprite-footer.png); }
 
-.sprite-header, .head-sec-inner h1 a, .head-sec .search-block input[type="submit"] {
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
 .newsboad:before, .newsboad:after {
@@ -3021,90 +3021,14 @@ table tr.w200 > td {
 .feature-user {
   margin-top: 10px;
   background-color: #f5f5f5; }
-  .feature-user .user-prof-thumb, .feature-user .user-prof-data {
-    display: table-cell;
-    vertical-align: middle; }
-  .feature-user .user-prof-link {
-    display: block; }
-    .feature-user .user-prof-link:link, .feature-user .user-prof-link:visited, .feature-user .user-prof-link:hover, .feature-user .user-prof-link:active {
-      color: #333;
-      text-decoration: none; }
-    .feature-user .user-prof-link:hover {
-      color: #333;
-      text-decoration: none; }
-    .feature-user .user-prof-link:hover .user-prof-thumb {
-      opacity: 0.75;
-      -webkit-transition: opacity ease-out .4s;
-      transition: opacity ease-out .4s; }
-  .feature-user .user-prof-thumb {
-    width: 50px;
-    height: 50px;
-    background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat; }
-  .feature-user .user-prof-name, .feature-user .user-prof-job {
-    margin-left: 10px; }
-  .feature-user .user-prof-name {
-    font-weight: bold; }
-  .feature-user .user-prof-job {
-    color: #666;
+  .feature-user .comment-content {
+    padding-right: 10px;
+    padding-left: 10px;
     font-size: 86%; }
-  .feature-user .user-comment {
-    padding: 10px 10px 0 10px;
-    font-size: 86%; }
-  .feature-user .user-response {
-    padding: 8px; }
-    .feature-user .user-response .user-response-btn {
-      display: inline-block;
-      font-size: 86%; }
-      .feature-user .user-response .user-response-btn:link, .feature-user .user-response .user-response-btn:visited, .feature-user .user-response .user-response-btn:hover, .feature-user .user-response .user-response-btn:active {
-        color: #333;
-        text-decoration: none; }
-      .feature-user .user-response .user-response-btn:hover {
-        color: #333;
-        text-decoration: underline; }
-      .feature-user .user-response .user-response-btn + .user-response-btn {
-        margin-left: 10px; }
-      .feature-user .user-response .user-response-btn.active {
-        color: #e1438b; }
-    .feature-user .user-response i {
-      overflow: hidden;
-      font-size: 0;
-      text-indent: 100%;
-      white-space: nowrap;
-      outline: none;
-      margin-right: 5px;
-      vertical-align: middle; }
-    .feature-user .user-response-like i {
-      background-position: -64px -11px;
-      background-repeat: no-repeat;
-      overflow: hidden;
-      display: block;
-      width: 17px;
-      height: 17px;
-      display: inline-block; }
-    .feature-user .user-response-like.active i {
-      background-position: 0px -41px;
-      background-repeat: no-repeat;
-      overflow: hidden;
-      display: block;
-      width: 17px;
-      height: 17px;
-      display: inline-block; }
-    .feature-user .user-response-dislike i {
-      background-position: -30px -11px;
-      background-repeat: no-repeat;
-      overflow: hidden;
-      display: block;
-      width: 17px;
-      height: 17px;
-      display: inline-block; }
-    .feature-user .user-response-dislike.active i {
-      background-position: -47px -11px;
-      background-repeat: no-repeat;
-      overflow: hidden;
-      display: block;
-      width: 17px;
-      height: 17px;
-      display: inline-block; }
+  .feature-user .comment-response {
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px; }
 
 .commented-user {
   margin-top: 10px; }
@@ -3197,16 +3121,107 @@ table tr.w200 > td {
     white-space: nowrap;
     outline: none; }
 
+.comment-user-thumb, .comment-user-data {
+  display: table-cell;
+  vertical-align: middle; }
+
+.comment-user-link {
+  display: block; }
+  .comment-user-link:link, .comment-user-link:visited, .comment-user-link:hover, .comment-user-link:active {
+    color: #333;
+    text-decoration: none; }
+  .comment-user-link:hover {
+    color: #333;
+    text-decoration: none; }
+  .comment-user-link:hover .user-prof-thumb {
+    opacity: 0.75;
+    -webkit-transition: opacity ease-out .4s;
+    transition: opacity ease-out .4s; }
+
+.comment-user-thumb {
+  width: 50px;
+  height: 50px;
+  background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat; }
+
+.comment-user-name, .comment-user-job {
+  margin-left: 10px; }
+
+.comment-user-name {
+  font-weight: bold; }
+
+.comment-user-job {
+  color: #666;
+  font-size: 86%; }
+
+.comment-content {
+  padding-top: 10px; }
+
+.comment-response {
+  padding-top: 8px; }
+  .comment-response .comment-response-btn {
+    display: inline-block;
+    font-size: 86%; }
+    .comment-response .comment-response-btn:link, .comment-response .comment-response-btn:visited, .comment-response .comment-response-btn:hover, .comment-response .comment-response-btn:active {
+      color: #333;
+      text-decoration: none; }
+    .comment-response .comment-response-btn:hover {
+      color: #333;
+      text-decoration: underline; }
+    .comment-response .comment-response-btn + .comment-response-btn {
+      margin-left: 10px; }
+    .comment-response .comment-response-btn.active {
+      color: #e1438b; }
+  .comment-response i {
+    overflow: hidden;
+    font-size: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    outline: none;
+    margin-right: 5px;
+    vertical-align: middle; }
+  .comment-response-like i {
+    background-position: -64px -11px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    width: 17px;
+    height: 17px;
+    display: inline-block; }
+  .comment-response-like.active i {
+    background-position: 0px -41px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    width: 17px;
+    height: 17px;
+    display: inline-block; }
+  .comment-response-dislike i {
+    background-position: -30px -11px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    width: 17px;
+    height: 17px;
+    display: inline-block; }
+  .comment-response-dislike.active i {
+    background-position: -47px -11px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    width: 17px;
+    height: 17px;
+    display: inline-block; }
+
 /*
   sprite
 * *********************************** */
-.sprite-common, .feature-user .user-response i, .newsboad-btn-viewmore-link span, .dialogue-notice-btn-close a {
+.sprite-common, .newsboad-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-response i {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
   background-image: url(/assets/images/sprite/sprite-footer.png); }
 
-.sprite-header, .head-sec-inner h1 a, .head-sec .search-block input[type="submit"] {
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
 .head-sec-inner {
@@ -3232,26 +3247,26 @@ table tr.w200 > td {
       white-space: nowrap;
       outline: none; }
 
-.head-sec .search-block {
+.head-sec .head-search {
   float: left;
   width: 300px;
   margin-top: 14px;
   padding: 0 14px;
   background-color: #eee;
   border-radius: 17px; }
-  .head-sec .search-block:before, .head-sec .search-block:after {
+  .head-sec .head-search:before, .head-sec .head-search:after {
     content: "";
     display: table;
     clear: both; }
-  .head-sec .search-block input {
+  .head-sec .head-search input {
     border: none;
     background: transparent; }
-  .head-sec .search-block input[type="text"] {
+  .head-sec .head-search input[type="text"] {
     float: left;
     width: 250px;
     padding: 8px 0;
     vertical-align: middle; }
-  .head-sec .search-block input[type="submit"] {
+  .head-sec .head-search input[type="submit"] {
     float: right;
     background-position: 0px -40px;
     background-repeat: no-repeat;
@@ -3266,34 +3281,34 @@ table tr.w200 > td {
     outline: none;
     margin-top: 8px; }
 
-.head-sec .user-block {
+.head-sec .user {
   position: relative;
   float: left;
   margin-left: 15px; }
-  .head-sec .user-block .preference {
+  .head-sec .user-preference {
     display: none; }
-  .head-sec .user-block .signup {
+  .head-sec .user-signup {
     display: table-cell;
     height: 60px;
     font-weight: bold;
     vertical-align: middle; }
-    .head-sec .user-block .signup:link, .head-sec .user-block .signup:visited, .head-sec .user-block .signup:hover, .head-sec .user-block .signup:active {
+    .head-sec .user-signup:link, .head-sec .user-signup:visited, .head-sec .user-signup:hover, .head-sec .user-signup:active {
       color: #e1438b;
       text-decoration: none; }
-    .head-sec .user-block .signup:hover {
+    .head-sec .user-signup:hover {
       color: #e1438b;
       text-decoration: none; }
-  .head-sec .user-block.signin {
+  .head-sec .user.signin {
     margin-top: 14px; }
-    .head-sec .user-block.signin .signup {
+    .head-sec .user.signin .user-signup {
       display: none; }
-    .head-sec .user-block.signin .preference {
+    .head-sec .user.signin .user-preference {
       position: relative;
       display: block;
       width: 35px;
       height: 35px;
       background: url(/assets/images/common/header-icon-user.png) 0 0 no-repeat; }
-    .head-sec .user-block.signin .notice {
+    .head-sec .user.signin .user-notice {
       position: absolute;
       top: -5px;
       right: -5px;
@@ -3308,40 +3323,45 @@ table tr.w200 > td {
       font-weight: bold;
       font-size: 72%;
       text-align: center; }
-    .head-sec .user-block.signin .user-menu {
+    .head-sec .user.signin .user-avatar {
       display: block; }
-
-.head-sec .user-menu {
-  z-index: 9999;
-  display: none;
-  position: absolute;
-  top: 57px;
-  left: -125px;
-  width: 160px;
-  background-color: #fff;
-  border-radius: 3px; }
-  .head-sec .user-menu:before {
-    content: '';
+      .head-sec .user.signin .user-avatar img {
+        width: 35px;
+        height: 35px;
+        border-radius: 100%; }
+    .head-sec .user.signin .user-menu {
+      display: block; }
+  .head-sec .user-menu {
+    z-index: 9999;
+    display: none;
     position: absolute;
-    top: -5px;
-    left: 138px;
-    width: 9px;
-    height: 5px;
-    background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat; }
-  .head-sec .user-menu li {
-    border-bottom: 1px solid #ddd; }
-    .head-sec .user-menu li:last-child {
-      border-bottom: none; }
-  .head-sec .user-menu a {
-    display: block;
-    padding: 14px 20px;
-    font-size: 93%; }
-    .head-sec .user-menu a:link, .head-sec .user-menu a:visited, .head-sec .user-menu a:hover, .head-sec .user-menu a:active {
-      color: #333;
-      text-decoration: none; }
-    .head-sec .user-menu a:hover {
-      color: #333;
-      text-decoration: underline; }
+    top: 57px;
+    left: -125px;
+    width: 160px;
+    background-color: #fff;
+    border-radius: 3px; }
+    .head-sec .user-menu:before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: 138px;
+      width: 9px;
+      height: 5px;
+      background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat; }
+    .head-sec .user-menu .dropmenu-item {
+      border-bottom: 1px solid #ddd; }
+      .head-sec .user-menu .dropmenu-item:last-child {
+        border-bottom: none; }
+    .head-sec .user-menu .dropmenu-link {
+      display: block;
+      padding: 14px 20px;
+      font-size: 93%; }
+      .head-sec .user-menu .dropmenu-link:link, .head-sec .user-menu .dropmenu-link:visited, .head-sec .user-menu .dropmenu-link:hover, .head-sec .user-menu .dropmenu-link:active {
+        color: #333;
+        text-decoration: none; }
+      .head-sec .user-menu .dropmenu-link:hover {
+        color: #333;
+        text-decoration: underline; }
 
 .gnav-sec .row1 {
   background-color: #111; }
