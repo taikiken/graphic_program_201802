@@ -40,6 +40,7 @@ export class Safety {
    */
   static check( object:Object, keyName:string, type:string = 'string' ):boolean {
 
+    type = Safety.string( type, 'string' );
     type = type.toLowerCase();
 
     if ( type === 'array' ) {
@@ -54,14 +55,56 @@ export class Safety {
 
   }
   /**
-   * @param {*} value 配列かを調べる対象
+   * 配列かを調べ必ず Array 型を返します
+   * @param {*} [value=[]] 配列かを調べる対象
    * @return {Array} 必ず配列を返します。引数が配列で無い時は空配列を返します
    */
-  static array( value ):Array {
+  static array( value:Array = [] ):Array {
     if ( !Array.isArray( value ) ) {
       return [];
     }
 
     return value;
   }
+  /**
+   * Objectかを調べ null は {} に変え返します
+   * @param {*} [value={}] Objectかを調べる対象
+   * @return {Object} 必ずObjectを返します。引数が null の時は空Objectを返します
+   */
+  static object( value:Object = {} ):Object {
+    if ( value === null ) {
+      value = {};
+    }
+
+    return value;
+  }
+  /**
+   * string 型かを調べ null の時は default value をセットします
+   * @param {string} value 調査対象
+   * @param {string} defaultValue null の時にセットする値
+   * @return {string} 文字型を返します
+   */
+  static string( value:string, defaultValue:string ):string {
+
+    if ( value === null ) {
+      value = defaultValue;
+    }
+
+    return value;
+  }
+  /**
+   * integer かを調べ null の時は default value をセットします
+   * @param {Number} value 調査対象
+   * @param {NUmber} defaultValue null の時にセットする値
+   * @return {Number} Number 型を返します
+   */
+  static integer( value:Number, defaultValue:Number ):Number {
+
+    if ( !Number.isInteger( value ) ) {
+      value = defaultValue;
+    }
+
+    return value;
+  }
+
 }

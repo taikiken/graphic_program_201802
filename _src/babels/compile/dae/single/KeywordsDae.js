@@ -11,10 +11,6 @@
  */
 'use strict';
 
-/**
- * response.keywords
- */
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -28,12 +24,18 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var KeywordsDae = function () {
+/**
+ * response.keywords
+ */
+
+var KeywordsDae = exports.KeywordsDae = function () {
   /**
    * 記事キーワード
-   * @param {Array} [keywords=[]]
+   * @param {Array} [keywords=[]] keywords 配列
    */
 
   function KeywordsDae() {
@@ -58,13 +60,14 @@ var KeywordsDae = function () {
     // ---------------------------------------------------
     /**
      * 連結子でキーワードをつなぎます
-     * @param {string} concat 連結子
+     * @param {string} [concatenation=', '] 連結子
      * @return {string} 連結子でつないだキーワードを返します
      */
     value: function concat() {
-      var _concat = arguments.length <= 0 || arguments[0] === undefined ? ', ' : arguments[0];
+      var concatenation = arguments.length <= 0 || arguments[0] === undefined ? ', ' : arguments[0];
 
-      return this.keywords.join(_concat);
+      concatenation = _Safety.Safety.string(concatenation, ', ');
+      return this.keywords.join(concatenation);
     }
   }, {
     key: 'keywords',
@@ -84,5 +87,3 @@ var KeywordsDae = function () {
   }]);
   return KeywordsDae;
 }();
-
-exports.KeywordsDae = KeywordsDae;

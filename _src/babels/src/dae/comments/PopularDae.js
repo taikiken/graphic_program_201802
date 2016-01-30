@@ -25,9 +25,11 @@ export class PopularDae {
    */
   constructor( comment:Object = {} ) {
 
-    if ( !Safety.check( comment, 'date' ) ) {
+    comment = Safety.object( comment );
 
-      comment.formatDate = Format.date( comment.date );
+    if ( Safety.check( comment, 'date' ) ) {
+
+      this._formatDate = Format.date( comment.date );
 
     }
 
@@ -66,7 +68,7 @@ export class PopularDae {
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {
-    return this.comment.formatDate;
+    return this._formatDate;
   }
   /**
    *

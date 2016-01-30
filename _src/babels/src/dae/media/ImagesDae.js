@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../../data/Safety';
+
 /**
  * article.media.images
  */
@@ -20,6 +22,7 @@ export class ImagesDae {
    * @param {Object} [images={}] article.media.images
    */
   constructor( images:Object = {} ) {
+    images = Safety.object( images );
     this._images = images;
   }
   /**

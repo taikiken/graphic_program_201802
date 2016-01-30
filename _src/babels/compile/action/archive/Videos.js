@@ -34,6 +34,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Category2 = require('./Category');
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -55,6 +57,8 @@ var Videos = exports.Videos = function (_Category) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     (0, _classCallCheck3.default)(this, Videos);
+
+    slug = _Safety.Safety.string(slug, 'all');
     return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Videos).call(this, slug, 'video', resolve, reject));
   }
 

@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../../data/Safety';
+
 /**
  * method / url 2つのpropertyを持ちます
  * method: POST | GET
@@ -24,8 +26,9 @@ export class Type {
    */
   constructor( url:string, method:string = 'GET' ) {
 
+    method = Safety.string( method, 'GET' );
     this.url = url;
-    this.method = method;
+    this.method = method.toUpperCase();
 
   }
   // ---------------------------------------------------

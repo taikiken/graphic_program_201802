@@ -11,10 +11,6 @@
  */
 'use strict';
 
-/**
- * article.media.video
- */
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -28,31 +24,33 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * article.media.video
+ */
+
 var VideoDae = exports.VideoDae = function () {
+  /**
+   *
+   * @param {Object} [video={}] article.media.video
+   */
+
   function VideoDae() {
+    var video = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, VideoDae);
+
+    video = _Safety.Safety.object(video);
+    this._video = video;
   }
+  /**
+   *
+   * @return {Object|*} article.media.video
+   */
 
   (0, _createClass3.default)(VideoDae, [{
-    key: 'constaructor',
-
-    /**
-     *
-     * @param {Object} [video={}] article.media.video
-     */
-    value: function constaructor() {
-      var video = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-      this._video = video;
-    }
-    /**
-     *
-     * @return {Object|*} article.media.video
-     */
-
-  }, {
     key: 'video',
     get: function get() {
       return this._video;

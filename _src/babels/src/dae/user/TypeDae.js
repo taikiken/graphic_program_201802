@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../../data/Safety';
+
 /**
  * article.user.type
  */
@@ -21,6 +23,7 @@ export class TypeDae {
    */
   constructor( type:Object = {} ) {
 
+    type = Safety.object( type );
     this._type = type;
 
   }

@@ -30,6 +30,8 @@ var _Ajax = require('../net/Ajax');
 
 var _Types = require('../net/Types');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // interface
@@ -86,6 +88,7 @@ var Action = exports.Action = function () {
     value: function start() {
       var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
+      method = _Safety.Safety.string(method, this.method);
       this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass);
     }
     /**

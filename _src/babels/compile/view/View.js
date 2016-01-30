@@ -27,11 +27,27 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _EventDispatcher2 = require('../event/EventDispatcher');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * 表示を行います
  */
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/01/22 - 14:37
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+// import {Action} from '../action/Action';
+// import {ViewError} from './error/ViewError';
 
 var View = exports.View = function (_EventDispatcher) {
   (0, _inherits3.default)(View, _EventDispatcher);
@@ -45,6 +61,8 @@ var View = exports.View = function (_EventDispatcher) {
   function View(element) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     (0, _classCallCheck3.default)(this, View);
+
+    option = _Safety.Safety.object(option);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(View).call(this));
 
@@ -187,17 +205,4 @@ var View = exports.View = function (_EventDispatcher) {
     }
   }]);
   return View;
-}(_EventDispatcher2.EventDispatcher); /**
-                                       * Copyright (c) 2011-2016 inazumatv.com, inc.
-                                       * @author (at)taikiken / http://inazumatv.com
-                                       * @date 2016/01/22 - 14:37
-                                       *
-                                       * Distributed under the terms of the MIT license.
-                                       * http://www.opensource.org/licenses/mit-license.html
-                                       *
-                                       * This notice shall be included in all copies or substantial portions of the Software.
-                                       *
-                                       */
-
-// import {Action} from '../action/Action';
-// import {ViewError} from './error/ViewError';
+}(_EventDispatcher2.EventDispatcher);

@@ -26,6 +26,8 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _CommentsDae = require('./comments/CommentsDae');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -52,6 +54,7 @@ var CommentsListDae = exports.CommentsListDae = function () {
     var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, CommentsListDae);
 
+    response = _Safety.Safety.object(response);
     this._response = response;
     console.log('CommentsListDae ', response, response.comments);
     this._comments = new _CommentsDae.CommentsDae(response.comments);

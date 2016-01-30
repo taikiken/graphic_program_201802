@@ -16,6 +16,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Safety = undefined;
 
+var _isInteger = require('babel-runtime/core-js/number/is-integer');
+
+var _isInteger2 = _interopRequireDefault(_isInteger);
+
 var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
@@ -68,6 +72,7 @@ var Safety = exports.Safety = function () {
     value: function check(object, keyName) {
       var type = arguments.length <= 2 || arguments[2] === undefined ? 'string' : arguments[2];
 
+      type = Safety.string(type, 'string');
       type = type.toLowerCase();
 
       if (type === 'array') {
@@ -79,15 +84,69 @@ var Safety = exports.Safety = function () {
       }
     }
     /**
-     * @param {*} value 配列かを調べる対象
+     * 配列かを調べ必ず Array 型を返します
+     * @param {*} [value=[]] 配列かを調べる対象
      * @return {Array} 必ず配列を返します。引数が配列で無い時は空配列を返します
      */
 
   }, {
     key: 'array',
-    value: function array(value) {
+    value: function array() {
+      var value = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
       if (!Array.isArray(value)) {
         return [];
+      }
+
+      return value;
+    }
+    /**
+     * Objectかを調べ null は {} に変え返します
+     * @param {*} [value={}] Objectかを調べる対象
+     * @return {Object} 必ずObjectを返します。引数が null の時は空Objectを返します
+     */
+
+  }, {
+    key: 'object',
+    value: function object() {
+      var value = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+      if (value === null) {
+        value = {};
+      }
+
+      return value;
+    }
+    /**
+     * string 型かを調べ null の時は default value をセットします
+     * @param {string} value 調査対象
+     * @param {string} defaultValue null の時にセットする値
+     * @return {string} 文字型を返します
+     */
+
+  }, {
+    key: 'string',
+    value: function string(value, defaultValue) {
+
+      if (value === null) {
+        value = defaultValue;
+      }
+
+      return value;
+    }
+    /**
+     * integer かを調べ null の時は default value をセットします
+     * @param {Number} value 調査対象
+     * @param {NUmber} defaultValue null の時にセットする値
+     * @return {Number} Number 型を返します
+     */
+
+  }, {
+    key: 'integer',
+    value: function integer(value, defaultValue) {
+
+      if (!(0, _isInteger2.default)(value)) {
+        value = defaultValue;
       }
 
       return value;

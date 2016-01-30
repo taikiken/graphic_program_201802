@@ -25,6 +25,8 @@ import {Result} from '../../data/Result';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
+import {Safety} from '../../data/Safety';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -75,6 +77,8 @@ export class ViewHeadline extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, option:Object = {} ) {
+
+    option = Safety.object( option );
 
     super( element, option );
     this._action = new Headline( this.done.bind( this ), this.fail.bind( this ) );
@@ -135,6 +139,8 @@ export class ViewHeadline extends View {
    * @param {string} message エラーメッセージ
    */
   showError( message:string = '' ):void {
+
+    message = Safety.string( message, '' );
 
     // ToDo: Error 時の表示が決まったら変更する
     let error = new ViewError( this.element, this.option, message );

@@ -23,7 +23,9 @@ export class CommentsPopularDae {
    * @param {Array} [comments=[]] article.comments_popular
    */
   constructor( comments:Array = [] ) {
+
     comments = Safety.array( comments );
+    console.log( 'CommentsPopularDae comments ', comments );
     this._comments = [];
     for ( var comment of comments ) {
       this._comments.push( new PopularDae( comment ) );

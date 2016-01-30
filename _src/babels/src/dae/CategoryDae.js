@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../data/Safety';
+
 /**
  * article.category を管理します
  */
@@ -20,6 +22,7 @@ export class CategoryDae {
    * @param {Object} [category={}]
    */
   constructor( category:Object = {} ) {
+    category = Safety.object( category );
     this._category = category;
   }
   // ---------------------------------------------------

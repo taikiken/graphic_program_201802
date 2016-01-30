@@ -28,6 +28,8 @@ var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -54,7 +56,7 @@ var HeadersOption = function () {
   /**
    *
    * @param {string} token auth token
-   * @param {Object} option headers object, ない時は新規に作ります
+   * @param {Object} [option={}] headers object, ない時は新規に作ります
    * @return {*} headers へセットする Object を返します
    */
 
@@ -63,6 +65,7 @@ var HeadersOption = function () {
     value: function token(_token) {
       var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
+      option = _Safety.Safety.object(option);
       option.Authorization = 'OAuth realm=undotsushin.com, oautn_token=' + _token;
       // option.Accept = 'application/json';
       // option[ 'Access-Control-Allow-Origin"' ] = '*';

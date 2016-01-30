@@ -226,14 +226,13 @@ var Api = exports.Api = function () {
     // bookmark
     /**
      * bookmark API を取得します
-     * @param {string} [action=add] path option を指定します delete | add
+     * @param {string} action path option を指定します delete | add
      * @return {Types} bookmark API をTypes instanceで返します
      */
 
   }, {
     key: 'bookmark',
-    value: function bookmark() {
-      var action = arguments.length <= 0 || arguments[0] === undefined ? 'add' : arguments[0];
+    value: function bookmark(action) {
 
       // bookmark は 登録 or 削除 機能のみ
       // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=1840096099
@@ -245,22 +244,20 @@ var Api = exports.Api = function () {
           return _ApiDae.ApiDae.api('bookmark:add');
 
         default:
-          console.warn('bookmark illegal action: ' + action + ', instead use default');
-          return _ApiDae.ApiDae.api('bookmark:add');
+          throw new Error('bookmark illegal action: ' + action + ',');
       }
     }
     // ----------------------------------
     // comment
     /**
      * comment API を取得します
-     * @param {string} [action=''] path option を指定します
+     * @param {string} action path option を指定します
      * @return {Types} comment API をTypes instanceで返します
      */
 
   }, {
     key: 'comment',
-    value: function comment() {
-      var action = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+    value: function comment(action) {
 
       switch (action) {
 

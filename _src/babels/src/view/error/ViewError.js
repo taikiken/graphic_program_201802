@@ -12,6 +12,7 @@
 'use strict';
 
 import {View} from '../View';
+import {Safety} from '../../data/Safety';
 
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -46,6 +47,9 @@ export class ViewError extends View {
    * @param {string} [message=''] 表示エラーメッセージ
    */
   constructor( element, option:Object = {}, message:string = '' ) {
+
+    option = Safety.object( option );
+    message = Safety.string( message, '' );
 
     super( element, option );
     this._message = message;

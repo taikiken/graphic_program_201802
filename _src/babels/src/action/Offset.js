@@ -15,6 +15,7 @@ import {Result} from '../data/Result';
 import {Action} from './Action';
 import {Types} from '../net/Types';
 import {Length} from '../app/Length';
+import {Safety} from '../data/Safety';
 
 /**
  * Ajax 処理を行います<br>
@@ -136,6 +137,7 @@ export class Offset extends Action {
     // next がある時は Ajax を実行します
     if ( this.hasNext() ) {
 
+      method = Safety.string( method, this.method );
       this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass );
 
     }
@@ -148,6 +150,8 @@ export class Offset extends Action {
   success( result:Result ):void {
 
     this.update();
+    // 合計数をupdate
+    this.total = result.total;
     // success
     super.success( result );
 

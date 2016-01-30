@@ -30,6 +30,8 @@ export class ArticleDae {
    */
   constructor( article:Object = {} ) {
 
+    article = Safety.object( article );
+
     this._article = article;
     // article.category
     this._category = new CategoryDae( article.category );
@@ -50,7 +52,7 @@ export class ArticleDae {
     // date check
     if ( Safety.check( article, 'date' ) ) {
 
-      article.formatDate = Format.date( article.date );
+      this._formatDate = Format.date( article.date );
 
     }
 
@@ -110,7 +112,7 @@ export class ArticleDae {
    * @return {string} article.date を日本語日付に変換し返します
    */
   get formatDate():string {
-    return this.article.formatDate;
+    return this._formatDate;
   }
   /**
    *

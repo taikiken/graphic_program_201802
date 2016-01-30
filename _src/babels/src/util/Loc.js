@@ -12,6 +12,7 @@
 
 'use strict';
 
+import {Safety} from '../data/Safety';
 // window.location に関する Utility
 
 /**
@@ -102,6 +103,7 @@ export class Loc {
    */
   parse( search:string = '' ):Object {
 
+    search = Safety.string( search, '' );
     this._search = Loc.parse( search );
     return this;
 
@@ -132,6 +134,7 @@ export class Loc {
    */
   static hashStrip( hash:string = Loc.hash ):string {
 
+    hash = Safety.string( hash, Loc.hash );
     return hash.replace( /^[#\/]|\s+$/g, '' );
 
   }
@@ -142,6 +145,7 @@ export class Loc {
    */
   static resolve( pathname:string = Loc.path ):Array {
 
+    pathname = Safety.string( pathname, Loc.path );
     return pathname.split( '/' );
 
   }
@@ -152,6 +156,7 @@ export class Loc {
    */
   static parse( search:string = Loc.search ):Object {
 
+    search = Safety.string( search, Loc.search );
     // 引数が文字でない時は処理しない
     if ( typeof search !== 'string' || search.length === 0 ) {
 

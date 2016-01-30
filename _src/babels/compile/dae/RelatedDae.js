@@ -38,10 +38,21 @@ var _UserDae = require('./UserDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * 記事詳細 関連記事 JSON
+ */
+
 var RelatedDae = exports.RelatedDae = function () {
+  /**
+   * 記事詳細 関連記事結果 JSON をセットアップします
+   * @param {Object} [response={}] JSON.response
+   */
+
   function RelatedDae() {
     var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, RelatedDae);
+
+    response = _Safety.Safety.object(response);
 
     this._response = response;
     // response.category
@@ -54,7 +65,7 @@ var RelatedDae = exports.RelatedDae = function () {
     // date check
     if (_Safety.Safety.check(response, 'date')) {
 
-      response.formatDate = _Format.Format.date(response.date);
+      this._formatDate = _Format.Format.date(response.date);
     }
   }
   // ---------------------------------------------------
@@ -99,7 +110,7 @@ var RelatedDae = exports.RelatedDae = function () {
   }, {
     key: 'formatDate',
     get: function get() {
-      return this.response.formatDate;
+      return this._formatDate;
     }
     /**
      *

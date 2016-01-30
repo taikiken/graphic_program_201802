@@ -174,10 +174,10 @@ export class Api {
   // bookmark
   /**
    * bookmark API を取得します
-   * @param {string} [action=add] path option を指定します delete | add
+   * @param {string} action path option を指定します delete | add
    * @return {Types} bookmark API をTypes instanceで返します
    */
-  static bookmark( action:string = 'add' ):Types {
+  static bookmark( action ):Types {
 
     // bookmark は 登録 or 削除 機能のみ
     // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=1840096099
@@ -189,8 +189,7 @@ export class Api {
         return ApiDae.api( 'bookmark:add' );
 
       default:
-        console.warn( `bookmark illegal action: ${action}, instead use default` );
-        return ApiDae.api( 'bookmark:add' );
+        throw new Error( `bookmark illegal action: ${action},` );
     }
 
   }
@@ -198,10 +197,10 @@ export class Api {
   // comment
   /**
    * comment API を取得します
-   * @param {string} [action=''] path option を指定します
+   * @param {string} action path option を指定します
    * @return {Types} comment API をTypes instanceで返します
    */
-  static comment( action:string = '' ):Types {
+  static comment( action ):Types {
 
     switch ( action ) {
 

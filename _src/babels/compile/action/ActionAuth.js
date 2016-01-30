@@ -42,6 +42,8 @@ var _User = require('../app/User');
 
 var _HeadersOption = require('../app/HeadersOption');
 
+var _Safety = require('../data/Safety');
+
 var _Result = require('../data/Result');
 
 var _Types = require('../net/Types');
@@ -95,6 +97,7 @@ var ActionAuth = exports.ActionAuth = function (_Action) {
     value: function start() {
       var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
 
+      method = _Safety.Safety.string(method, this.method);
       this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers);
     }
   }]);

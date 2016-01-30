@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../../data/Safety';
+
 /**
  * response.keywords
  */
@@ -44,10 +46,13 @@ export class KeywordsDae {
   // ---------------------------------------------------
   /**
    * 連結子でキーワードをつなぎます
-   * @param {string} concat 連結子
+   * @param {string} [concatenation=', '] 連結子
    * @return {string} 連結子でつないだキーワードを返します
    */
-  concat( concat:string = ', ' ):string {
-    return this.keywords.join( concat );
+  concat( concatenation:string = ', ' ):string {
+
+    concatenation = Safety.string( concatenation, ', ' );
+    return this.keywords.join( concatenation );
+
   }
 }

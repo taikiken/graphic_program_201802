@@ -12,6 +12,7 @@
 'use strict';
 
 import {CommentsDae} from './comments/CommentsDae';
+import {Safety} from '../data/Safety';
 
 /**
  * コメント一覧表示
@@ -32,6 +33,7 @@ export class CommentsListDae {
    * @param {Object} response JSON.response
    */
   constructor( response:Object = {} ) {
+    response = Safety.object( response );
     this._response = response;
     console.log( 'CommentsListDae ', response, response.comments );
     this._comments = new CommentsDae( response.comments );

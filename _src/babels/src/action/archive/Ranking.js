@@ -12,6 +12,7 @@
 'use strict';
 
 import {Category} from './Category';
+import {Safety} from '../../data/Safety';
 
 /**
  * 記事ランキング
@@ -25,6 +26,7 @@ export class Ranking extends Category {
    */
   constructor( slug:string = 'all', resolve:Function = null, reject:Function = null ) {
 
+    slug = Safety.string( slug, 'all' );
     super( slug, 'ranking', resolve, reject );
 
   }

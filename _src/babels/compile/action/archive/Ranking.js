@@ -34,6 +34,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Category2 = require('./Category');
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -55,6 +57,8 @@ var Ranking = exports.Ranking = function (_Category) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     (0, _classCallCheck3.default)(this, Ranking);
+
+    slug = _Safety.Safety.string(slug, 'all');
     return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Ranking).call(this, slug, 'ranking', resolve, reject));
   }
 

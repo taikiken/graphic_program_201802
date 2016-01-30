@@ -12,6 +12,7 @@
 'use strict';
 
 import {TypeDae} from './user/TypeDae';
+import {Safety} from '../data/Safety';
 
 /**
  * article.user
@@ -22,6 +23,8 @@ export class UserDae {
    * @param {Object} [user={}] article.user
    */
   constructor( user:Object = {} ) {
+
+    user = Safety.object( user );
 
     this._user = user;
     this._type = new TypeDae( user.type );

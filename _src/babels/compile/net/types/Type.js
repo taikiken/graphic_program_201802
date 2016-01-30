@@ -11,12 +11,6 @@
  */
 'use strict';
 
-/**
- * method / url 2つのpropertyを持ちます
- * method: POST | GET
- * utl: API request先
- */
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -30,7 +24,15 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * method / url 2つのpropertyを持ちます
+ * method: POST | GET
+ * utl: API request先
+ */
 
 var Type = exports.Type = function () {
   /**
@@ -43,8 +45,9 @@ var Type = exports.Type = function () {
     var method = arguments.length <= 1 || arguments[1] === undefined ? 'GET' : arguments[1];
     (0, _classCallCheck3.default)(this, Type);
 
+    method = _Safety.Safety.string(method, 'GET');
     this.url = url;
-    this.method = method;
+    this.method = method.toUpperCase();
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

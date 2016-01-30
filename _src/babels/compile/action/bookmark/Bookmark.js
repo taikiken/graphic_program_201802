@@ -59,20 +59,14 @@ var Bookmark = exports.Bookmark = function (_Action) {
   (0, _inherits3.default)(Bookmark, _Action);
 
   /**
-   * 記事のブックマーク登録 / 解除 を行います
-   * @param {Number|string} id article id 記事ID
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
-   */
-
-  /**
-   * 記事のブックマーク登録 / 解除 を行います
-   * @param {Symbol} target Factory pattern のために使用
-   * @param {string} actionType add / delete 登録
-   * @param {Number|string} id article id 記事ID
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
-   */
+  * 記事のブックマーク登録 / 解除 を行います
+  * @ToDo 完成させる, add / remove
+  * @param {Symbol} target Factory pattern のために使用
+  * @param {string} actionType add / delete 登録
+  * @param {Number|string} id article id 記事ID
+  * @param {Function} [resolve=null] Ajax 成功時の callback
+  * @param {Function} [reject=null] Ajax 失敗時の callback
+  */
 
   function Bookmark(target, actionType, id) {
     var resolve = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];

@@ -65,13 +65,14 @@ export class User {
     if ( _sign ) {
       switch ( Env.mode ) {
 
-        case Env.PRODUCTION:
-          return Cookie.item( Cookie.TARGET );
-
         case Env.TEST:
         case Env.DEVELOP:
+          // return [ 'fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f' ][ Math.floor( Math.random() * 3 ) ];
+          return 'fee1a989f120b99cec0f8206d68f6365';
+
+        case Env.PRODUCTION:
         default:
-          return [ 'fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f' ][ Math.floor( Math.random() * 3 ) ];
+          return Cookie.item( Cookie.TARGET );
 
       }
     } else {
@@ -87,7 +88,6 @@ export class User {
   // ---------------------------------------------------
   /**
    * ログイン設定をします
-   * @param {Number|string} id user id
    */
   static login():void {
     User.sign = true;

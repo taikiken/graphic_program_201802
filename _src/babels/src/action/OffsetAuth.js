@@ -15,6 +15,7 @@ import {Offset} from './Offset';
 // import {User} from '../app/User';
 import {Length} from '../app/Length';
 import {HeadersOption} from '../app/HeadersOption';
+import {Safety} from '../data/Safety';
 
 import {Result} from '../data/Result';
 import {Types} from '../net/Types';
@@ -58,6 +59,7 @@ export class OffsetAuth extends Offset {
     // next がある時は Ajax を実行します
     if ( this.hasNext() ) {
 
+      method = Safety.string( method, this.method );
       this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 
     }

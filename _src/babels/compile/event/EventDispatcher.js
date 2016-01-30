@@ -86,8 +86,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
 
     /**
      * event type からリスナー関数を remove します
-     * @param type
-     * @param listener
+     * @param {string} type event type
+     * @param {Function} listener リスナー関数
      */
 
   }, {
@@ -176,8 +176,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
 
     /**
      * event type にリスナー関数が登録されているかを調べます
-     * @param {string} type
-     * @param {Function} listener
+     * @param {string} type event type
+     * @param {Function} listener リスナー関数
      * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
      */
 
@@ -270,8 +270,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
     /**
      * alias off,
      * event type からリスナー関数を remove します
-     * @param type
-     * @param listener
+     * @param {string} type event type
+     * @param {Function} listener リスナー関数
      */
 
   }, {
@@ -282,8 +282,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
     /**
      * alias has,
      * event type にリスナー関数が登録されているかを調べます
-     * @param {string} type
-     * @param {Function} listener
+     * @param {string} type event type
+     * @param {Function} listener リスナー関数
      * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
      */
 

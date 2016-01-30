@@ -11,10 +11,6 @@
  */
 'use strict';
 
-/**
- * article.user.type
- */
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -28,7 +24,13 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * article.user.type
+ */
 
 var TypeDae = exports.TypeDae = function () {
   /**
@@ -40,6 +42,7 @@ var TypeDae = exports.TypeDae = function () {
     var type = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, TypeDae);
 
+    type = _Safety.Safety.object(type);
     this._type = type;
   }
   // ---------------------------------------------------

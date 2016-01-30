@@ -13,6 +13,7 @@
 
 import {ImagesDae} from './media/ImagesDae';
 import {VideoDae} from './media/VideoDae';
+import {Safety} from '../data/Safety';
 
 /**
  * article.media
@@ -23,6 +24,8 @@ export class MediaDae {
    * @param {Object} [media={}] article.media
    */
   constructor( media:Object = {} ) {
+
+    media = Safety.object( media );
 
     this._media = media;
     // 記事詳細は media.images が最大5件になる

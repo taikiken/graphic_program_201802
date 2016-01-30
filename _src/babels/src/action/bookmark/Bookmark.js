@@ -22,15 +22,9 @@ let _symbol = Symbol();
  * <code>/api/v1/articles/bookmark/{:article_id}</code>
  */
 export class Bookmark extends Action {
-  /**
+    /**
    * 記事のブックマーク登録 / 解除 を行います
-   * @param {Number|string} id article id 記事ID
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
-   */
-
-  /**
-   * 記事のブックマーク登録 / 解除 を行います
+   * @ToDo 完成させる, add / remove
    * @param {Symbol} target Factory pattern のために使用
    * @param {string} actionType add / delete 登録
    * @param {Number|string} id article id 記事ID

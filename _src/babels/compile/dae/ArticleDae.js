@@ -54,6 +54,8 @@ var ArticleDae = exports.ArticleDae = function () {
     var article = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, ArticleDae);
 
+    article = _Safety.Safety.object(article);
+
     this._article = article;
     // article.category
     this._category = new _CategoryDae.CategoryDae(article.category);
@@ -73,7 +75,7 @@ var ArticleDae = exports.ArticleDae = function () {
     // date check
     if (_Safety.Safety.check(article, 'date')) {
 
-      article.formatDate = _Format.Format.date(article.date);
+      this._formatDate = _Format.Format.date(article.date);
     }
 
     this._index = -1;
@@ -153,7 +155,7 @@ var ArticleDae = exports.ArticleDae = function () {
   }, {
     key: 'formatDate',
     get: function get() {
-      return this.article.formatDate;
+      return this._formatDate;
     }
     /**
      *

@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../data/Safety';
+
 let _symbol = Symbol();
 
 /**
@@ -34,11 +36,12 @@ export class HeadersOption {
   /**
    *
    * @param {string} token auth token
-   * @param {Object} option headers object, ない時は新規に作ります
+   * @param {Object} [option={}] headers object, ない時は新規に作ります
    * @return {*} headers へセットする Object を返します
    */
   static token( token:string, option:Object = {} ):Object {
 
+    option = Safety.object( option );
     option.Authorization = `OAuth realm=undotsushin.com, oautn_token=${token}`;
     // option.Accept = 'application/json';
     // option[ 'Access-Control-Allow-Origin"' ] = '*';

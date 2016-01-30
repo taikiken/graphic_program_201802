@@ -38,6 +38,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _View2 = require('../View');
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var React = self.React;
@@ -80,6 +82,9 @@ var ViewError = exports.ViewError = function (_View) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     var message = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
     (0, _classCallCheck3.default)(this, ViewError);
+
+    option = _Safety.Safety.object(option);
+    message = _Safety.Safety.string(message, '');
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewError).call(this, element, option));
 

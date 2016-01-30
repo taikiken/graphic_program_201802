@@ -98,6 +98,8 @@ var ViewSingle = function (_View) {
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
     (0, _classCallCheck3.default)(this, ViewSingle);
 
+    option = _Safety.Safety.object(option);
+
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
 
     _this2._action = new _Single.Single(id, _this2.done.bind(_this2), _this2.fail.bind(_this2));
@@ -159,6 +161,8 @@ var ViewSingle = function (_View) {
     key: 'showError',
     value: function showError() {
       var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+      message = _Safety.Safety.string(message, '');
 
       // ToDo: Error 時の表示が決まったら変更する
       var error = new _ViewError.ViewError(this.element, this.option, message);

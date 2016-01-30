@@ -39,16 +39,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PopularDae = exports.PopularDae = function () {
   /**
    * article.comments_popular:[]
-   * @param {Object} [comment={}]
+   * @param {Object} [comment={}] response.comment Object
    */
 
   function PopularDae() {
     var comment = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, PopularDae);
 
-    if (!_Safety.Safety.check(comment, 'date')) {
+    comment = _Safety.Safety.object(comment);
 
-      comment.formatDate = _Format.Format.date(comment.date);
+    if (_Safety.Safety.check(comment, 'date')) {
+
+      this._formatDate = _Format.Format.date(comment.date);
     }
 
     // comments_popular.user
@@ -97,7 +99,7 @@ var PopularDae = exports.PopularDae = function () {
   }, {
     key: 'formatDate',
     get: function get() {
-      return this.comment.formatDate;
+      return this._formatDate;
     }
     /**
      *

@@ -50,6 +50,8 @@ var _Path = require('../../app/Path');
 
 var _CommentsType = require('../../app/CommentsType');
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -84,6 +86,8 @@ var Comments = function (_OffsetAuth) {
       throw new Error('not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()');
     }
 
+    type = _Safety.Safety.string(type, '');
+
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Comments).call(this, _User.User.token, _Api.Api.comment(type), resolve, reject));
 
     _this._id = id;
@@ -113,7 +117,7 @@ var Comments = function (_OffsetAuth) {
       return _Path.Path.article(this._url, this.id) + '?offset=' + this.offset + '&length=' + this.length;
     }
     /**
-     * @param {string} type 取得コメント種類, ''|normal|official|self
+     * @param {string} type 取得コメント種類
      * @param {number} id コメントを取得する記事ID
      * @param {Function} [resolve=null] Ajax 成功時の callback
      * @param {Function} [reject=null] Ajax 失敗時の callback

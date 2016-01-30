@@ -55,6 +55,9 @@ export class ViewSingle extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( id:number, element:Element, elements:Object, option:Object = {} ) {
+
+    option = Safety.object( option );
+
     super( element, option );
     this._action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
     this._elements = elements;
@@ -106,6 +109,8 @@ export class ViewSingle extends View {
    * @param {string} message エラーメッセージ
    */
   showError( message:string = '' ):void {
+
+    message = Safety.string( message, '' );
 
     // ToDo: Error 時の表示が決まったら変更する
     let error = new ViewError( this.element, this.option, message );

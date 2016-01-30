@@ -32,6 +32,8 @@ var _ImagesDae = require('./media/ImagesDae');
 
 var _VideoDae = require('./media/VideoDae');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -47,6 +49,8 @@ var MediaDae = exports.MediaDae = function () {
   function MediaDae() {
     var media = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, MediaDae);
+
+    media = _Safety.Safety.object(media);
 
     this._media = media;
     // 記事詳細は media.images が最大5件になる

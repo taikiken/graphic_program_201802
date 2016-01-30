@@ -24,6 +24,8 @@ import {Result} from '../../data/Result';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
+import {Safety} from '../../data/Safety';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -39,6 +41,9 @@ export class ViewVideos extends View {
    * @param {string} [slug=all] category slug です
    */
   constructor( element:Element, option:Object = {}, slug:string = 'all' ) {
+
+    option = Safety.object( option );
+    slug = Safety.string( slug, 'all' );
 
     super( element, option );
     this._action = Widget.video( slug, this.done.bind( this ), this.fail.bind( this ) );
@@ -113,6 +118,8 @@ export class ViewVideos extends View {
    * @param {string} message エラーメッセージ
    */
   showError( message:string = '' ):void {
+
+    message = Safety.string( message, '' );
 
     // ToDo: Error 時の表示が決まったら変更する
     let error = new ViewError( this.element, this.option, message );

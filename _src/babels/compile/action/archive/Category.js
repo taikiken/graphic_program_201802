@@ -40,6 +40,8 @@ var _Offset2 = require('../Offset');
 
 var _Api = require('../../net/Api');
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -63,6 +65,9 @@ var Category = exports.Category = function (_Offset) {
     var resolve = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var reject = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
     (0, _classCallCheck3.default)(this, Category);
+
+    slug = _Safety.Safety.string(slug, 'all');
+    type = _Safety.Safety.string(type, '');
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Category).call(this, _Api.Api.category(), resolve, reject));
 

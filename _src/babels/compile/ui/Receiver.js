@@ -41,6 +41,7 @@ var Receiver = exports.Receiver = function () {
   }
   /**
    * ReactDOM.render 前に呼び出されます
+   * @param {Object} event Event object
    */
 
   (0, _createClass3.default)(Receiver, [{

@@ -51,17 +51,19 @@ var _Result = require('../../data/Result');
 
 var _ArticleDae = require('../../dae/ArticleDae');
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
 
-// data
-var React = self.React;
 // dae
 
 // action
 
 // view
+var React = self.React;
+// data
 
 var ReactDOM = self.ReactDOM;
 
@@ -117,6 +119,8 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
   function ViewHeadline(element) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     (0, _classCallCheck3.default)(this, ViewHeadline);
+
+    option = _Safety.Safety.object(option);
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
 
@@ -186,6 +190,8 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
     key: 'showError',
     value: function showError() {
       var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+      message = _Safety.Safety.string(message, '');
 
       // ToDo: Error 時の表示が決まったら変更する
       var error = new _ViewError.ViewError(this.element, this.option, message);

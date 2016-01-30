@@ -26,6 +26,8 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _TypeDae = require('./user/TypeDae');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -41,6 +43,8 @@ var UserDae = exports.UserDae = function () {
   function UserDae() {
     var user = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, UserDae);
+
+    user = _Safety.Safety.object(user);
 
     this._user = user;
     this._type = new _TypeDae.TypeDae(user.type);

@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../../data/Safety';
+
 /**
  * article.media.video
  */
@@ -19,7 +21,8 @@ export class VideoDae {
    *
    * @param {Object} [video={}] article.media.video
    */
-  constaructor( video:Object = {} ) {
+  constructor( video:Object = {} ) {
+    video = Safety.object( video );
     this._video = video;
   }
   /**

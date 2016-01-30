@@ -48,6 +48,8 @@ var _Types = require('../net/Types');
 
 var _Length = require('../app/Length');
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -151,6 +153,7 @@ var Offset = exports.Offset = function (_Action) {
       // next がある時は Ajax を実行します
       if (this.hasNext()) {
 
+        method = _Safety.Safety.string(method, this.method);
         this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass);
       }
     }
@@ -164,6 +167,8 @@ var Offset = exports.Offset = function (_Action) {
     value: function success(result) {
 
       this.update();
+      // 合計数をupdate
+      this.total = result.total;
       // success
       (0, _get3.default)((0, _getPrototypeOf2.default)(Offset.prototype), 'success', this).call(this, result);
     }

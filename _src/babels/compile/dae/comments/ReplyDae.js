@@ -26,14 +26,31 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _CommentsPopularDae = require('../CommentsPopularDae');
 
+var _Safety = require('../../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * コメントへの返信
+ */
+
 var ReplyDae = exports.ReplyDae = function () {
+  /**
+   * コメントへの返信を表示するために使用します
+   * @param {Object} [reply={}] comments.reply をセットします
+   */
+
   function ReplyDae() {
     var reply = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, ReplyDae);
 
-    this._total = parseInt(reply.count, 10);
+    reply = _Safety.Safety.object(reply);
+
+    var total = parseInt(reply.count, 10);
+    if (isNaN(total)) {
+      total = 0;
+    }
+    this._total = total;
     this._comments = new _CommentsPopularDae.CommentsPopularDae(reply.comments);
   }
   // ---------------------------------------------------

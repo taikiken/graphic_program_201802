@@ -56,8 +56,15 @@ export class CommentsDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * comment を comment.id: {comment: PopularDae, reply: ReplyDae  }
-   * @return {{}|*}
+   * comment を comment id をキー としたObjectに保存します
+   * <dl>
+   *   <dt>comment</dt>
+   *   <dd>PopularDae</dd>
+   *   <dt>reply</dt>
+   *   <dd>ReplyDae</dd>
+   * </dl>
+   *
+   * @return {Object|*}  comment id をキー としたObjectを返します
    */
   get bank():Object {
     return this._bank;

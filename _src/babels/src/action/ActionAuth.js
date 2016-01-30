@@ -14,6 +14,7 @@
 import {Action} from './Action';
 import {User} from '../app/User';
 import {HeadersOption} from '../app/HeadersOption';
+import {Safety} from '../data/Safety';
 
 import {Result} from '../data/Result';
 import {Types} from '../net/Types';
@@ -48,7 +49,7 @@ export class ActionAuth extends Action {
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
   start( method:string = this.method ):void {
-
+    method = Safety.string( method, this.method );
     this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 
   }

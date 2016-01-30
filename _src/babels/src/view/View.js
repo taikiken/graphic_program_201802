@@ -14,6 +14,7 @@
 // import {ViewError} from './error/ViewError';
 
 import {EventDispatcher} from '../event/EventDispatcher';
+import {Safety} from '../data/Safety';
 
 /**
  * 表示を行います
@@ -25,6 +26,8 @@ export class View extends EventDispatcher {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, option:Object = {} ) {
+
+    option = Safety.object( option );
 
     super();
     this._element = element;

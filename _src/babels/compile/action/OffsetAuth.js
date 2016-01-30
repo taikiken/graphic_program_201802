@@ -42,6 +42,8 @@ var _Length = require('../app/Length');
 
 var _HeadersOption = require('../app/HeadersOption');
 
+var _Safety = require('../data/Safety');
+
 var _Result = require('../data/Result');
 
 var _Types = require('../net/Types');
@@ -53,8 +55,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Template Pattern として使用します<br>
  * 各 Class で extends して下さい
  */
-
-// import {User} from '../app/User';
 
 var OffsetAuth = exports.OffsetAuth = function (_Offset) {
   (0, _inherits3.default)(OffsetAuth, _Offset);
@@ -106,9 +106,11 @@ var OffsetAuth = exports.OffsetAuth = function (_Offset) {
       // next がある時は Ajax を実行します
       if (this.hasNext()) {
 
+        method = _Safety.Safety.string(method, this.method);
         this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers);
       }
     }
   }]);
   return OffsetAuth;
 }(_Offset2.Offset);
+// import {User} from '../app/User';

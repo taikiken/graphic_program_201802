@@ -16,6 +16,7 @@ import {Api} from '../../net/Api';
 import {User} from '../../app/User';
 import {Path} from '../../app/Path';
 import {CommentsType} from '../../app/CommentsType';
+import {Safety} from '../../data/Safety';
 
 let _symbol = Symbol();
 
@@ -40,6 +41,9 @@ export class Comments extends OffsetAuth {
       throw new Error( `not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()` );
 
     }
+
+    type = Safety.string( type, '' );
+
     super( User.token, Api.comment( type ), resolve, reject );
     this._id = id;
   }

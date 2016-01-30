@@ -12,12 +12,6 @@
 
 'use strict';
 
-// window.location に関する Utility
-
-/**
- * location に関する utility
- */
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -35,7 +29,15 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _Safety = require('../data/Safety');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// window.location に関する Utility
+
+/**
+ * location に関する utility
+ */
 
 var Loc = exports.Loc = function () {
   /**
@@ -69,6 +71,7 @@ var Loc = exports.Loc = function () {
     value: function parse() {
       var search = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
+      search = _Safety.Safety.string(search, '');
       this._search = Loc.parse(search);
       return this;
     }
@@ -104,6 +107,7 @@ var Loc = exports.Loc = function () {
     value: function hashStrip() {
       var hash = arguments.length <= 0 || arguments[0] === undefined ? Loc.hash : arguments[0];
 
+      hash = _Safety.Safety.string(hash, Loc.hash);
       return hash.replace(/^[#\/]|\s+$/g, '');
     }
     /**
@@ -117,6 +121,7 @@ var Loc = exports.Loc = function () {
     value: function resolve() {
       var pathname = arguments.length <= 0 || arguments[0] === undefined ? Loc.path : arguments[0];
 
+      pathname = _Safety.Safety.string(pathname, Loc.path);
       return pathname.split('/');
     }
     /**
@@ -130,6 +135,7 @@ var Loc = exports.Loc = function () {
     value: function parse() {
       var search = arguments.length <= 0 || arguments[0] === undefined ? Loc.search : arguments[0];
 
+      search = _Safety.Safety.string(search, Loc.search);
       // 引数が文字でない時は処理しない
       if (typeof search !== 'string' || search.length === 0) {
 

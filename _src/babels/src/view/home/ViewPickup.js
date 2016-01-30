@@ -25,6 +25,8 @@ import {Result} from '../../data/Result';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
+import {Safety} from '../../data/Safety';
+
 // global object
 // React
 let React = self.React;
@@ -49,6 +51,8 @@ export class ViewPickup extends View {
    */
   constructor( element:Element, option:Object = {} ) {
 
+    option = Safety.object( option );
+
     super( element, option );
     this._action = new Pickup( this.done.bind( this ), this.fail.bind( this ) );
     this._index = 0;
@@ -61,7 +65,7 @@ export class ViewPickup extends View {
   // ---------------------------------------------------
   /**
    * interval 間隔, milliseconds, default 5000ms
-   * @property waiting
+   * @property {Number} waiting interval milliseconds
    * @default 5000
    * @return {number|*|Number} slideshow interval milliseconds を返します
    */
@@ -133,6 +137,8 @@ export class ViewPickup extends View {
    * @param {string} message エラーメッセージ
    */
   showError( message:string = '' ):void {
+
+    message = Safety.string( message, '' );
 
     // ToDo: Error 時の表示が決まったら変更する
     let error = new ViewError( this.element, this.option, message );

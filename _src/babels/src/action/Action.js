@@ -15,6 +15,8 @@ import {Result} from '../data/Result';
 import {Ajax} from '../net/Ajax';
 import {Types} from '../net/Types';
 
+import {Safety} from '../data/Safety';
+
 // interface
 // 基本機能を設定し Interface として使用します
 
@@ -69,6 +71,7 @@ export class Action {
    */
   start( method:string = this.method ):void {
 
+    method = Safety.string( method, this.method );
     this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass );
 
   }

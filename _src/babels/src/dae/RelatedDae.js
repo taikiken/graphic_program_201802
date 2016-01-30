@@ -19,8 +19,17 @@ import {CategoryDae} from './CategoryDae';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
 
+/**
+ * 記事詳細 関連記事 JSON
+ */
 export class RelatedDae {
+  /**
+   * 記事詳細 関連記事結果 JSON をセットアップします
+   * @param {Object} [response={}] JSON.response
+   */
   constructor( response:Object = {} ) {
+
+    response = Safety.object( response );
 
     this._response = response;
     // response.category
@@ -33,7 +42,7 @@ export class RelatedDae {
     // date check
     if ( Safety.check( response, 'date' ) ) {
 
-      response.formatDate = Format.date( response.date );
+      this._formatDate = Format.date( response.date );
 
     }
   }
@@ -67,7 +76,7 @@ export class RelatedDae {
    * @return {string} response.date を日本語日付に変換し返します
    */
   get formatDate():string {
-    return this.response.formatDate;
+    return this._formatDate;
   }
   /**
    *

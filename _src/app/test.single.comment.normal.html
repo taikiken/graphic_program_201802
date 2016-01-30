@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>React Test Single</title>
+  <link rel="stylesheet" href="assets/css/ui.css">
+  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="assets/js/libs/vendor.min.js"></script>
+  <script src="assets/js/libs/vendor.react.js"></script>
+</head>
+<body>
+
+<h1 id="c1">React Test Single</h1>
+
+<section id="single"></section>
+<section id="comment-self"></section>
+<section id="comment-self-more"></section>
+<section id="comment-official"></section>
+<section id="comment-official-more"></section>
+<section id="comment-normal"></section>
+<section id="comment-normal-more"></section>
+
+<section id="related"></section>
+
+<script src="assets/js/bundle/main.bundle.js"></script>
+
+<script>
+  ( function ( window ) {
+
+    'use strict';
+
+    var
+      document = window.document;
+
+    var UT = self.UT;
+
+    // develop mode
+    UT.app.App.develop();
+
+    // -------------------------------------------------
+    var single;
+
+    function beforeRender( responce ) {
+      console.log( 'beforeRender ****', responce );
+
+      // comments official
+//      var official = new UT.view.ViewComments( responce.id, document.getElementById('comment-official'), document.getElementById('comment-official-more'), UT.app.CommentsType.OFFICIAL );
+//      official.start();
+
+    }
+    function didMount() {
+      console.log( 'dom mount', this );
+    }
+    function errorMount( error ) {
+      console.log( 'dom errorMount', error );
+    }
+    function undefinedError( error ) {
+      console.log( 'undefinedError', error );
+    }
+    function emptyError( error ) {
+      console.log( 'emptyError', error );
+    }
+    function responseError( error ) {
+      console.log( 'responseError', error );
+
+      single.showError( 'まずい！ ' + error.name + ', ' + error.message );
+    }
+    var option = {
+      beforeRender: beforeRender,
+      didMount: didMount,
+      errorMount: errorMount,
+      undefinedError: undefinedError,
+      emptyError: emptyError,
+      responseError: responseError
+    };
+
+    let elements = {
+      related: document.getElementById('related'),
+      comment: {
+        'self': document.getElementById('comment-self'),
+        'official': document.getElementById('comment-official'),
+        'user': document.getElementById('comment-user')
+      }
+    };
+
+    // article id 30
+//    single = new UT.view.ViewSingle( 30, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 16, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 38, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 32, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 29, document.getElementById('single'), elements, option );
+    var singleReceiver = new UT.ui.Receiver();
+    singleReceiver.beforeRender = function ( event ) {
+
+      var single = event.args[ 0 ];
+      console.log( 'singleReceiver.beforeRender ', single.id );
+
+      var normal = new UT.view.ViewComments( single.id, document.getElementById('comment-normal'), document.getElementById('comment-normal-more'), UT.app.CommentsType.NORMAL );
+      normal.start();
+
+    };
+
+    single = new UT.view.ViewSingle( 29, document.getElementById('single'), elements );
+    single.on( UT.view.View.BEFORE_RENDER, singleReceiver.beforeRender );
+    single.start();
+
+  }( window ) );
+</script>
+</body>
+</html>

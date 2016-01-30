@@ -13,6 +13,7 @@
 
 import {Offset} from '../Offset';
 import {Api} from '../../net/Api';
+import {Safety} from '../../data/Safety';
 
 /**
  * 記事一覧, カテゴリー別, 全て...
@@ -26,6 +27,10 @@ export class Category extends Offset {
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
   constructor( slug:string = 'all', type:string = '', resolve:Function = null, reject:Function = null ) {
+
+    slug = Safety.string( slug, 'all' );
+    type = Safety.string( type, '' );
+
     super( Api.category(), resolve, reject );
     this._slug = slug;
     this._type = Category.normalization( type );

@@ -61,6 +61,8 @@ var SingleDae = exports.SingleDae = function (_RelatedDae) {
     var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     (0, _classCallCheck3.default)(this, SingleDae);
 
+    response = _Safety.Safety.object(response);
+
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(SingleDae).call(this, response));
 
     _this._keywords = new _KeywordsDae.KeywordsDae(response.keywords);

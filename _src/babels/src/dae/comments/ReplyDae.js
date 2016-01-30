@@ -12,10 +12,25 @@
 'use strict';
 
 import {CommentsPopularDae} from '../CommentsPopularDae';
+import {Safety} from '../../data/Safety';
 
+/**
+ * コメントへの返信
+ */
 export class ReplyDae {
+  /**
+   * コメントへの返信を表示するために使用します
+   * @param {Object} [reply={}] comments.reply をセットします
+   */
   constructor( reply:Object = {} ) {
-    this._total = parseInt( reply.count, 10 );
+
+    reply = Safety.object( reply );
+
+    let total = parseInt( reply.count, 10 );
+    if ( isNaN( total ) ) {
+      total = 0;
+    }
+    this._total = total;
     this._comments = new CommentsPopularDae( reply.comments );
   }
   // ---------------------------------------------------

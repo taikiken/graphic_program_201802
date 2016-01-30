@@ -15,6 +15,7 @@
 import {Ranking} from '../archive/Ranking';
 import {Videos} from '../archive/Videos';
 import {Length} from '../../app/Length';
+import {Safety} from '../../data/Safety';
 
 let _symbol = Symbol();
 
@@ -53,6 +54,8 @@ export class Widget {
    */
   static ranking( slug:string = 'all', resolve:Function = null, reject:Function = null ):Ranking {
 
+    slug = Safety.string( slug, 'all' );
+
     let rankings = new Ranking( slug, resolve, reject );
     rankings.length = Length.ranking;
     return rankings;
@@ -67,6 +70,8 @@ export class Widget {
    * @return {Videos} Videos instance を返します
    */
   static video( slug:string = 'all', resolve:Function = null, reject:Function = null ):Videos {
+
+    slug = Safety.string( slug, 'all' );
 
     let videos = new Videos( slug, resolve, reject );
     videos.length = Length.video;

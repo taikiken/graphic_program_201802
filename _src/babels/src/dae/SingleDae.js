@@ -27,6 +27,7 @@ export class SingleDae extends RelatedDae {
    */
   constructor( response:Object = {} ) {
 
+    response = Safety.object( response );
     super( response );
 
     this._keywords = new KeywordsDae( response.keywords );
