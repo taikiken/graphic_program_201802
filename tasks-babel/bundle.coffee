@@ -56,10 +56,14 @@ htdocs = dir.htdocs
 # task
 # --------------------------------------------
 
+###
+  bundle.js を deploy へコピー
+  test が含まれているファイルをコピーしない
+###
 gulp.task 'bundle:copy', ->
   return gulp.src [
     app + '/**/js/**/*.bundle.js'
     '!' + app + '/**/js/**/*test*.bundle.js'
   ]
   .pipe gulp.dest htdocs
-  .pipe $.size title: '*** libs:copy ***'
+  .pipe $.size title: '*** bundle:copy ***'
