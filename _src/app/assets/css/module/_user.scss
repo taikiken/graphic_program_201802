@@ -1,0 +1,217 @@
+@import "../../../../scss/asset";
+@import "sprite";
+
+// User
+//
+// design module user
+//
+// Styleguide 2.5.0
+
+// user-config
+.user-config {
+  background-color: #000;
+
+  .user-profile {
+    @include clearfix;
+    width: 1070px;
+    margin: 0 auto;
+    padding-top: 35px;
+
+    @at-root {
+      &-avatar {
+        float: left;
+        margin-right: 15px;
+
+        img {
+          display: block;
+          width: 80px;
+          height: 80px;
+          border-radius: 100%;
+        }
+      }
+
+      &-data {
+        overflow: hidden;
+      }
+
+      &-name {
+        color: #fff;
+        font-weight: bold;
+        font-size: fz(24);
+      }
+
+      &-job {
+        color: #999;
+        font-weight: bold;
+      }
+
+      &-favorite {
+        letter-spacing: ls( inline-block );
+        font-size: fz(12);
+
+        @at-root {
+          &-heading, &-list {
+            display: inline-block;
+            letter-spacing: normal;
+          }
+
+          &-heading {
+            margin-right: 20px;
+            color: #999;
+          }
+
+          &-list {
+          }
+
+          &-item {
+            &:after {
+              content: '/';
+              margin: 0 5px;
+              // color: $highlight-color;
+              color: #999;
+            }
+
+            &:last-child:after {
+              display: none;
+            }
+
+            a {
+              @include link-decoration($highlight-color, $highlight-color, none, underline);
+            }
+          }
+        }
+      }//.user-profile-favorite
+    }
+  } //.user-profile
+
+  @at-root {
+    &-control {
+      @include clearfix;
+      width: 1070px;
+      margin: 30px auto 0;
+    }
+
+    &-nav {
+      float: left;
+
+      a {
+        @include link-decoration(#fff, $highlight-color, none, none);
+        float: left;
+        display: block;
+        width: 200px;
+        line-height: 1;
+        padding: 12px 0;
+        background-color: #555;
+        text-align: center;
+
+        &.current,
+        &:hover {
+          color: $highlight-color;
+          background-color: #fff;
+          transition: background-color ease-out .4s;
+        }
+
+        span {
+          position: relative;
+          display: inline-block;
+          font-weight: bold;
+          font-size: fz(12);
+
+          &:before {
+            content: '';
+            @extend .sprite-common;
+            margin-right: 5px;
+            position: relative;
+            top: 2px;
+          }
+        }
+      }
+
+      &-bookmark {
+        span {
+          &:before {
+            @include sprite( $common-icon-bookmark, inline-block );
+          }
+        }
+
+        &.current,
+        &:hover {
+          span:before {
+            @include sprite( $common-icon-bookmark_o, inline-block );
+          }
+        }
+      }
+
+      &-activity {
+        span {
+          &:before {
+            @include sprite( $common-icon-activity, inline-block );
+          }
+        }
+
+        &:hover {
+          span:before {
+            @include sprite( $common-icon-activity_o, inline-block );
+          }
+        }
+      }
+    } //.user-config-nav
+
+    &-btn-setting {
+      @include link-decoration(#999, $highlight-color, none, underline);
+      float: right;
+      margin-top: .5em;
+      display: inline-block;
+      font-size: fz(12);
+
+      &:before {
+        content: '';
+        @extend .sprite-common;
+        @include sprite( $common-icon-config, inline-block );
+        margin-right: 5px;
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+}
+
+// activity
+.activity {
+  margin-top: 10px;
+
+  @at-root {
+    &-list {}
+
+    &-item {}
+
+    &-link {
+      @include link-decoration(#333, #333, none, none);
+      position: relative;
+      display: block;
+      padding: 20px 8px;
+      border-bottom: 1px solid $border-primary-color;
+
+      &:after {
+        content: '';
+        @extend .sprite-common;
+        @include sprite( $common-icon-activity-arrow );
+        @include pos-middle;
+        right: 8px;
+      }
+    }
+
+    &-content {
+      strong {
+        color: $highlight-color;
+      }
+    }
+
+    &-date {
+      margin-top: .25em;
+      color: #666;
+      font-size: fz(12);
+    }
+  }
+}
+
