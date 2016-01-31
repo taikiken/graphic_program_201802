@@ -46,7 +46,7 @@ var _Action2 = require('./Action');
 
 var _Types = require('../net/Types');
 
-var _Length = require('../app/Length');
+var _Length = require('../app/const/Length');
 
 var _Safety = require('../data/Safety');
 

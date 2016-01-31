@@ -2,47 +2,21 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>Test Index News</title>
-  <link rel="stylesheet" href="assets/css/ui.css">
-  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="assets/js/libs/vendor.min.js"></script>
-  <script src="assets/js/libs/vendor.react.js"></script>
-  <style>
-    body {
-      padding: 0 16px;
-    }
-    .left {
-      float: left;
-      width: 40%;
-    }
-    .right {
-      float: right;
-      width: 40%;
-    }
-    #f1 {
-      overflow: hidden;
-    }
-    #f4 {
-      clear: both;
-      padding: 16px;
-    }
-    #f4 a {
-      display: inline-block;
-      padding: 16px;
-      border: #333 solid 1px;
-    }
-  </style>
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>Test Index Pickup</title>
+  <link rel="stylesheet" href="/assets/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
 </head>
 <body>
 
-<h1 id="c1">Test Index News</h1>
+<h1 id="c1">Test Index Pickup</h1>
 
-<section id="f1"></section>
+<div id="hero-sec" class="hero-sec">
 
-<section id="f4"></section>
 
-<script src="assets/js/bundle/main.bundle.js"></script>
+<script src="/assets/js/bundle/main.bundle.js"></script>
 
 <script>
   ( function ( window ) {
@@ -104,7 +78,7 @@
       responseError: responseError
     };
 
-    headline2 = new UT.view.ViewArchive( document.getElementById('f1'), document.getElementById('f4'), UT.action.home.News,option );
+    headline2 = new UT.view.home.ViewPickup( document.getElementById('hero-sec'), option );
     headline2.start();
 
   }( window ) );

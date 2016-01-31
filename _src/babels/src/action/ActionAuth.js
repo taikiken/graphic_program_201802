@@ -13,7 +13,7 @@
 
 import {Action} from './Action';
 import {User} from '../app/User';
-import {HeadersOption} from '../app/HeadersOption';
+import {Token} from '../data/Token';
 import {Safety} from '../data/Safety';
 
 import {Result} from '../data/Result';
@@ -39,7 +39,7 @@ export class ActionAuth extends Action {
       throw new Error( `Authorization required.` );
     }
     super( types, resolve, reject, ResultClass );
-    this._headers = HeadersOption.token( token );
+    this._headers = Token.token( token );
   }
   // ---------------------------------------------------
   //  METHOD

@@ -14,7 +14,7 @@
 import {Result} from '../data/Result';
 import {Action} from './Action';
 import {Types} from '../net/Types';
-import {Length} from '../app/Length';
+import {Length} from '../app/const/Length';
 import {Safety} from '../data/Safety';
 
 /**

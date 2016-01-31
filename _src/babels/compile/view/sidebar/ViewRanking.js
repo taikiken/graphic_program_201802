@@ -38,7 +38,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Empty = require('../../app/Empty');
+var _Empty = require('../../app/const/Empty');
 
 var _View2 = require('../View');
 

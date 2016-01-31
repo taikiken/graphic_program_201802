@@ -12,7 +12,7 @@
 'use strict';
 
 import {Env} from './Env';
-import {Path} from './Path';
+import {Path} from './const/Path';
 import {Types} from '../net/Types';
 import {Type} from '../net/types/Type';
 import {Permalink} from '../net/types/Permalink';

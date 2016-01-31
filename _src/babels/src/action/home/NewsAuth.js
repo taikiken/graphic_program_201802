@@ -14,7 +14,7 @@
 import {OffsetAuth} from '../OffsetAuth';
 import {Api} from '../../net/Api';
 import {User} from '../../app/User';
-import {Length} from '../../app/Length';
+import {Length} from '../../app/const/Length';
 
 /**
  * **認証**（ログイン）<br>

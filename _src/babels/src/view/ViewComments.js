@@ -11,8 +11,8 @@
  */
 
 // app
-import {Empty} from '../app/Empty';
-import {CommentsType} from '../app/CommentsType';
+import {Empty} from '../app/const/Empty';
+import {CommentsType} from '../app/const/CommentsType';
 
 // view
 import {View} from './View';

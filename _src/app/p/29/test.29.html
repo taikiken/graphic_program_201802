@@ -2,16 +2,62 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <title>React Test Single</title>
-  <link rel="stylesheet" href="assets/css/ui.css">
-  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="assets/js/libs/vendor.min.js"></script>
-  <script src="assets/js/libs/vendor.react.js"></script>
+  <link rel="stylesheet" href="/assets/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <style>
+    body {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    ul {
+      list-style: disc;
+      margin: 0 0 1em 1em;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight:700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 24px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    h2 {
+      font-size: 18px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+    }
+    a {
+      color: #333;
+    }
+    #single {
+      margin-bottom: 16px;
+    }
+
+    #related {
+      margin-bottom: 16px;
+      border: 1px solid #333;
+      padding: 16px;
+    }
+
+    #sidebar-video,
+    #sidebar-ranking {
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
 
-<h1 id="c1">React Test Single: Comment Official</h1>
+<h1 id="c1">React Test Single(<span id="article"></span>)</h1>
 
 <section id="single"></section>
 <section id="comment-self"></section>
@@ -23,7 +69,7 @@
 
 <section id="related"></section>
 
-<script src="assets/js/bundle/main.bundle.js"></script>
+<script src="/assets/js/bundle/main.bundle.js"></script>
 
 <script>
   ( function ( window ) {
@@ -96,13 +142,18 @@
       var single = event.args[ 0 ];
       console.log( 'singleReceiver.beforeRender ', single.id );
 
-      var official = new UT.view.ViewComments( single.id, document.getElementById('comment-official'), document.getElementById('comment-official-more'), UT.app.CommentsType.OFFICIAL );
-      official.start();
+      var normal = new UT.view.ViewComments( single.id, document.getElementById('comment-normal'), document.getElementById('comment-normal-more'), UT.app.const.CommentsType.NORMAL );
+      normal.start();
 
     };
 
-//    single = new UT.view.ViewSingle( 34, document.getElementById('single'), elements );
-    single = new UT.view.ViewSingle( 29, document.getElementById('single'), elements );
+
+    console.log( 'single', UT.app.Router.isSingle() );
+    console.log( 'article id', UT.app.Router.articleId() );
+    var articleId = UT.app.Router.articleId();
+    document.getElementById('article' ).innerHTML = articleId;
+
+    single = new UT.view.ViewSingle( articleId, document.getElementById('single'), elements );
     single.on( UT.view.View.BEFORE_RENDER, singleReceiver.beforeRender );
     single.start();
 

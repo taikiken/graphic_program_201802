@@ -13,7 +13,7 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
-import {Path} from '../../app/Path';
+import {Path} from '../../app/const/Path';
 
 let _symbol = Symbol();
 

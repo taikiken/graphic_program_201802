@@ -16,7 +16,7 @@ Home, Category, Search...
  */
 
 // app
-import {Empty} from '../app/Empty';
+import {Empty} from '../app/const/Empty';
 
 // view
 import {View} from './View';

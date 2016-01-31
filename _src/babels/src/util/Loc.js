@@ -182,5 +182,19 @@ export class Loc {
     return results;
 
   }
+  /**
+   * host が local かを調べます
+   * @return {boolean} host が local の時に true を返します
+   */
+  static isLocal():boolean {
+
+    let host = Loc.host;
+
+    return host.indexOf( '192.168' ) === 0 ||
+        host.indexOf( '0.0.0.0' ) === 0 ||
+        host.indexOf( 'localhost' ) === 0 ||
+        host.indexOf( '127.0.0.1' ) === 0;
+
+  }
 
 }

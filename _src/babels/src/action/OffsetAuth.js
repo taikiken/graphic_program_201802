@@ -13,8 +13,8 @@
 
 import {Offset} from './Offset';
 // import {User} from '../app/User';
-import {Length} from '../app/Length';
-import {HeadersOption} from '../app/HeadersOption';
+import {Length} from '../app/const/Length';
+import {Token} from '../data/Token';
 import {Safety} from '../data/Safety';
 
 import {Result} from '../data/Result';
@@ -46,7 +46,7 @@ export class OffsetAuth extends Offset {
     }
     */
     super( types, resolve, reject, offset, length, ResultClass );
-    this._headers = HeadersOption.token( token );
+    this._headers = Token.token( token );
   }
   /**
    * 次の読込を開始します<br>

@@ -11,16 +11,17 @@
  */
 'use strict';
 
-import {Safety} from '../data/Safety';
+import {Safety} from './Safety';
 
 let _symbol = Symbol();
 
 /**
- * <h3>Fetch Request Headers を作成します</h3>
+ * <h3>Fetch Request Headers [token] を作成します</h3>
  * 全て static
  */
-export class HeadersOption {
+export class Token {
   /**
+   * <p>Authorization token を作成します</p>
    * static class です、instance を作成できません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

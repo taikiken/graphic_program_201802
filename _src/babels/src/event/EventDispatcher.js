@@ -63,7 +63,8 @@ export class EventDispatcher {
   }
 
   /**
-   * event type からリスナー関数を remove します
+   * event type からリスナー関数を remove します<br>
+   * 内部処理は一時的に null 設定にします
    * @param {string} type event type
    * @param {Function} listener リスナー関数
    */
@@ -104,7 +105,8 @@ export class EventDispatcher {
 
   /**
    * 内部関数<br>
-   * リスナーの中をクリンーンにします
+   * リスナーの中をクリンーンにします<br>
+   * リスナーリストが全て null の時に 空配列にします
    * @param {string} type event type
    * @param {Array<Function>} types event type に登録されている関数配列
    */
@@ -157,7 +159,7 @@ export class EventDispatcher {
 
   }
   /**
-   * イベントを発生させリスな関数を call します
+   * イベントを発生させリスナー関数を call します
    * @param {Object} event type が必須です
    */
   dispatch( event:Object ):void {
@@ -217,7 +219,7 @@ export class EventDispatcher {
     return this.has( type, listener );
   }
   /**
-   * alias dispatch
+   * alias dispatch,
    * イベントを発生させリスな関数を call します
    *
    * @param {Object} event type が必須です

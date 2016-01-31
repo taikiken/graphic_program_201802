@@ -27,7 +27,7 @@ export class ReplyDae {
     reply = Safety.object( reply );
 
     let total = parseInt( reply.count, 10 );
-    if ( isNaN( total ) ) {
+    if ( Number.isNaN( total ) ) {
       total = 0;
     }
     this._total = total;

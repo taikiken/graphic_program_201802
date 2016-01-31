@@ -11,41 +11,6 @@
  */
 'use strict';
 
-/*
-// Proxy は使えない
-// https://babeljs.io/docs/learn-es2015/#proxies
-// babel not support
-
-export let Length = new Proxy(
-  {
-    headline: 6
-  },
-  {
-    has: function( target, property ) {
-      return property in target;
-    },
-    set: function( target, property, value, receiver ) {
-      if ( Number.isInteger( value ) ) {
-        target[ property ] = value;
-        return true;
-      } else {
-        throw new Error( `${property} integer required. ${value}` );
-      }
-    },
-    get: function( target, property, receiver ) {
-      console.log(receiver);
-
-      if ( property in target ) {
-        console.log(receiver);
-        return target[property];
-      } else {
-        return 'Not Found';
-      }
-    }
-  }
-);
-*/
-
 let _symbol = Symbol();
 let _pickup = 5;
 let _headline = 6;

@@ -49,7 +49,7 @@ var CommentsPopularDae = exports.CommentsPopularDae = function () {
     (0, _classCallCheck3.default)(this, CommentsPopularDae);
 
     comments = _Safety.Safety.array(comments);
-    console.log('CommentsPopularDae comments ', comments);
+
     this._comments = [];
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;

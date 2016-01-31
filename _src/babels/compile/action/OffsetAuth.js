@@ -38,9 +38,9 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Offset2 = require('./Offset');
 
-var _Length = require('../app/Length');
+var _Length = require('../app/const/Length');
 
-var _HeadersOption = require('../app/HeadersOption');
+var _Token = require('../data/Token');
 
 var _Safety = require('../data/Safety');
 
@@ -88,7 +88,7 @@ var OffsetAuth = exports.OffsetAuth = function (_Offset) {
     }
     */
 
-    _this._headers = _HeadersOption.HeadersOption.token(token);
+    _this._headers = _Token.Token.token(token);
     return _this;
   }
   /**

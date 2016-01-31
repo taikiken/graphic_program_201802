@@ -40,7 +40,7 @@ var _Action2 = require('../Action');
 
 var _Api = require('../../net/Api');
 
-var _Path = require('../../app/Path');
+var _Path = require('../../app/const/Path');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -12,8 +12,8 @@
 'use strict';
 
 // app
-import {Empty} from '../app/Empty';
-import {SingleInfo} from '../app/SingleInfo';
+import {Empty} from '../app/const/Empty';
+import {SingleInfo} from '../app/info/SingleInfo';
 
 // view
 import {View} from './View';

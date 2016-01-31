@@ -2,20 +2,66 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <script src="assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>React Test Headline</title>
-  <link rel="stylesheet" href="assets/css/ui.css">
-  <script src="assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="assets/js/libs/vendor.min.js"></script>
-  <script src="assets/js/libs/vendor.react.js"></script>
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>Test Sidebar Ranking All</title>
+  <link rel="stylesheet" href="/assets/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <style>
+    body {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    ul {
+      list-style: disc;
+      margin: 0 0 1em 1em;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight:700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 24px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    h2 {
+      font-size: 18px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+    }
+    a {
+      color: #333;
+    }
+    #single {
+      margin-bottom: 16px;
+    }
+
+    #related {
+      margin-bottom: 16px;
+      border: 1px solid #333;
+      padding: 16px;
+    }
+
+    #sidebar-video,
+    #sidebar-ranking {
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+    }
+  </style>
+  <script src="/assets/js/libs/vendor.react.js"></script>
 </head>
 <body>
 
-<h1 id="c1">Test Headline</h1>
+<h1 id="c1">Test Sidebar Ranking All</h1>
 
 <section id="f1"></section>
 
-<script src="assets/js/bundle/main.bundle.js"></script>
+<script src="/assets/js/bundle/main.bundle.js"></script>
 
 <script>
   ( function ( window ) {
@@ -27,23 +73,8 @@
 
     var UT = self.UT;
 
-    var headline;
     // develop mode
     UT.app.App.develop();
-//    UT.app.App.test();
-
-    function done( result ) {
-      console.log( 'success response ', result.response );
-      console.log( 'success status ', result.status );
-      console.log( 'success request', result.request );
-    }
-
-    function fail( error ) {
-      console.log( 'error', error );
-    }
-
-    headline = new UT.action.home.Headline( done, fail );
-    headline.start();
 
     // -------------------------------------------------
     var headline2;
@@ -90,7 +121,7 @@
       responseError: responseError
     };
 
-    headline2 = new UT.view.home.ViewHeadline ( document.getElementById('f1'), option );
+    headline2 = new UT.view.sidebar.ViewRanking( document.getElementById('f1'), option );
     headline2.start();
 
   }( window ) );

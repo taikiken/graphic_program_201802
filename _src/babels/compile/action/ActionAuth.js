@@ -40,7 +40,7 @@ var _Action2 = require('./Action');
 
 var _User = require('../app/User');
 
-var _HeadersOption = require('../app/HeadersOption');
+var _Token = require('../data/Token');
 
 var _Safety = require('../data/Safety');
 
@@ -81,7 +81,7 @@ var ActionAuth = exports.ActionAuth = function (_Action) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ActionAuth).call(this, types, resolve, reject, ResultClass));
 
-    _this._headers = _HeadersOption.HeadersOption.token(token);
+    _this._headers = _Token.Token.token(token);
     return _this;
   }
   // ---------------------------------------------------

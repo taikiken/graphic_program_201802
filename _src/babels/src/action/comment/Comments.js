@@ -14,8 +14,8 @@
 import {OffsetAuth} from '../OffsetAuth';
 import {Api} from '../../net/Api';
 import {User} from '../../app/User';
-import {Path} from '../../app/Path';
-import {CommentsType} from '../../app/CommentsType';
+import {Path} from '../../app/const/Path';
+import {CommentsType} from '../../app/const/CommentsType';
 import {Safety} from '../../data/Safety';
 
 let _symbol = Symbol();

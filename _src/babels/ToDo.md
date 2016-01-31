@@ -17,7 +17,7 @@
 1. 一覧
     - [X] model
     - [] view
-    - [X] more
+    - [X] paging
     
 1. ranking
     - [X] model
@@ -28,6 +28,9 @@
     - [] view
     
 ## 記事詳細
+1. URLからID抽出
+    - [X]
+
 1. 記事
     - [X] model
     - [] view
@@ -56,6 +59,8 @@
 1. コメント official
     - [X] model
     - [] view
+    - [-] paging  
+        データが足りないので未テスト
     - [] send
     - [] edit
     - [] delete
@@ -67,6 +72,8 @@
 1. コメント normal
     - [X] model
     - [] view
+    - [-] paging  
+        データが足りないので未テスト
     - [] send
     - [] edit
     - [] delete
@@ -76,11 +83,11 @@
     - [] bad delete
     
 1. ranking
-    - [] model
+    - [X] model
     - [] view
     
 1. video
-    - [] model
+    - [X] model
     - [] view
 
    
@@ -89,7 +96,7 @@
 1. 一覧
     - [] model
     - [] view
-    - [] more
+    - [] paging
         
 1. ranking
     - [] model

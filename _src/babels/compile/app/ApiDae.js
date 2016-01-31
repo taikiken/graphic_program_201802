@@ -30,7 +30,7 @@ var _symbol3 = _interopRequireDefault(_symbol2);
 
 var _Env = require('./Env');
 
-var _Path = require('./Path');
+var _Path = require('./const/Path');
 
 var _Types = require('../net/Types');
 

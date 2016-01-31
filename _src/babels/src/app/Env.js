@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Loc} from '../util/Loc';
+
 let _symbol = Symbol();
 let _mode = 'production';
 

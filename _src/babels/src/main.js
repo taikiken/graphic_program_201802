@@ -20,14 +20,15 @@
 // util
 import {Loc} from './util/Loc';
 import {Format} from './util/Format';
+import {Router} from './app/Router';
 
 // -------------------------------------
 // app
 import {Env} from './app/Env';
 import {Codes} from './app/Codes';
 import {User} from './app/User';
-import {Length} from './app/Length';
-import {CommentsType} from './app/CommentsType';
+import {Length} from './app/const/Length';
+import {CommentsType} from './app/const/CommentsType';
 
 // -------------------------------------
 // data
@@ -123,8 +124,10 @@ var UT = {
     App: App,
     Codes: Codes,
     User: User,
-    Length: Length,
-    CommentsType: CommentsType
+    Router: Router,
+    const: {
+      CommentsType: CommentsType
+    }
   },
   ui: {
     Receiver: Receiver

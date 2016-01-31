@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/28 - 19:01
+ * @date 2016/01/28 - 18:44
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,20 +10,21 @@
  *
  */
 'use strict';
-import {SingleDae} from '../dae/SingleDae';
+
+import {ArticleDae} from '../../dae/ArticleDae';
 
 let _symbol = Symbol();
-let _single;
+let _article;
 
 /**
- * <h3>記事詳細情報</h3>
+ * <h3>articles の個別記事詳細情報</h3>
  * 全てstaticです<br>
  * **Singleton**
  * <p>
- * SingleDae を保持します。
+ * ArticleDae を保持します。
  * </p>
  */
-export class SingleInfo {
+export class ArticleInfo {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -42,16 +43,16 @@ export class SingleInfo {
   // ---------------------------------------------------
   /**
    * 現在表示の記事詳細情報
-   * @return {SingleDae} 現在表示の記事詳細情報 SingleDae instance を返します
+   * @return {ArticleDae} 現在表示の記事詳細情報 ArticleDae instance を返します
    */
-  static get dae():SingleDae {
-    return _single;
+  static get dae():ArticleDae {
+    return _article;
   }
 
   /**
-   * @param {SingleDae} article 現在表示の記事詳細情報 SingleDae instance
+   * @param {ArticleDae} article 現在表示の記事詳細情報 ArticleDae instance
    */
-  static set dae( article:SingleDae ):void {
-    _single = article;
+  static set dae( article:ArticleDae ):void {
+    _article = article;
   }
 }

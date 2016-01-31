@@ -46,9 +46,9 @@ var _Api = require('../../net/Api');
 
 var _User = require('../../app/User');
 
-var _Path = require('../../app/Path');
+var _Path = require('../../app/const/Path');
 
-var _CommentsType = require('../../app/CommentsType');
+var _CommentsType = require('../../app/const/CommentsType');
 
 var _Safety = require('../../data/Safety');
 

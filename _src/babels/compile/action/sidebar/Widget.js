@@ -33,7 +33,7 @@ var _Ranking = require('../archive/Ranking');
 
 var _Videos = require('../archive/Videos');
 
-var _Length = require('../../app/Length');
+var _Length = require('../../app/const/Length');
 
 var _Safety = require('../../data/Safety');
 

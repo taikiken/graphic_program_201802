@@ -13,7 +13,7 @@
 
 import {Offset} from '../Offset';
 import {Api} from '../../net/Api';
-import {Length} from '../../app/Length';
+import {Length} from '../../app/const/Length';
 
 /**
  * 記事検索を行います

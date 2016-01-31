@@ -36,7 +36,7 @@ var _Offset2 = require('../Offset');
 
 var _Api = require('../../net/Api');
 
-var _Length = require('../../app/Length');
+var _Length = require('../../app/const/Length');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

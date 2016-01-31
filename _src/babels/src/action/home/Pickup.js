@@ -13,7 +13,7 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
-import {Length} from '../../app/Length';
+import {Length} from '../../app/const/Length';
 
 /**
  * Home pickup(slider)

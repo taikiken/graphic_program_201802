@@ -13,7 +13,7 @@
 
 // app
 // import {App} from '../../app/App';
-import {Empty} from '../../app/Empty';
+import {Empty} from '../../app/const/Empty';
 
 // view
 import {View} from '../View';

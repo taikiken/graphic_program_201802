@@ -4,15 +4,17 @@ var _Loc = require('./util/Loc');
 
 var _Format = require('./util/Format');
 
+var _Router = require('./app/Router');
+
 var _Env = require('./app/Env');
 
 var _Codes = require('./app/Codes');
 
 var _User = require('./app/User');
 
-var _Length = require('./app/Length');
+var _Length = require('./app/const/Length');
 
-var _CommentsType = require('./app/CommentsType');
+var _CommentsType = require('./app/const/CommentsType');
 
 var _Data = require('./data/Data');
 
@@ -114,6 +116,26 @@ var _Receiver = require('./ui/Receiver');
 
 // -------------------------------------
 // data
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-01-31 19:47:23
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
+
+// -------------------------------------
+// util
 var UT = {
   version: '1.0.0',
   app: {
@@ -121,8 +143,10 @@ var UT = {
     App: _App.App,
     Codes: _Codes.Codes,
     User: _User.User,
-    Length: _Length.Length,
-    CommentsType: _CommentsType.CommentsType
+    Router: _Router.Router,
+    const: {
+      CommentsType: _CommentsType.CommentsType
+    }
   },
   ui: {
     Receiver: _Receiver.Receiver
@@ -213,25 +237,5 @@ var UT = {
 
 // -------------------------------------
 // app
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-01-30 20:01:53
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- * @requires React, Sagen. IE: fetch, es5-promise
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
-
-// -------------------------------------
-// util
 
 self.UT = UT;

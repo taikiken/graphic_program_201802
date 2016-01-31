@@ -14,7 +14,7 @@
 
 import {Ranking} from '../archive/Ranking';
 import {Videos} from '../archive/Videos';
-import {Length} from '../../app/Length';
+import {Length} from '../../app/const/Length';
 import {Safety} from '../../data/Safety';
 
 let _symbol = Symbol();

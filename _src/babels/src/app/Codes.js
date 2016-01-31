@@ -67,6 +67,8 @@ export class Codes {
 
   }
   /**
+   * <p>status codeからリクエストの成功・失敗を判断します</p>
+   * status code が >= 200 < 300 の間が成功です。
    * @param {int} statusCode サーバーからのレスポンスコード int型
    * @return {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
@@ -76,7 +78,7 @@ export class Codes {
 
   }
   /**
-   * status codeの意味を調べます
+   * status codeの意味（メッセージ）を調べます
    * @param {Number} code サーバーからのresponse status code
    * @return {{en: string|*, jp: string|*}} status codeの意味を返します
    */
@@ -89,6 +91,7 @@ export class Codes {
 
   }
   /**
+   * code から 日本語メッセージを調べます
    * @param {Number} code status code
    * @return {*} 日本語メッセージを返します
    */
@@ -99,6 +102,7 @@ export class Codes {
   }
 
   /**
+   * code から 英語メッセージを調べます
    * @param {Number} code status code
    * @return {*} 英語メッセージを返します
    */
