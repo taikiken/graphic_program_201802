@@ -400,49 +400,51 @@ export class ViewPickup extends View {
 
         // JSX
         return (
-          <div className={'hero-slider pickup-container slide-' + this.state.index}>
-            {/* slider */}
-            <div className="hero-slider-inner">
-              <ul className="pickup-slider">
-                {
-                  // 1.first
-                  list.map( function( article ) {
+          <div className="hero-sec">
+            <div className={'hero-slider pickup-container slide-' + this.state.index}>
+              {/* slider */}
+              <div className="hero-slider-inner">
+                <ul className="pickup-slider">
+                  {
+                    // 1.first
+                    list.map( function( article ) {
 
-                    return make( article, count++ );
+                      return make( article, count++ );
 
-                  } )
-                }
-                {
-                  // 2.second clone
-                  list.map( function( article ) {
+                    } )
+                  }
+                  {
+                    // 2.second clone
+                    list.map( function( article ) {
 
-                    return make( article, count++ );
+                      return make( article, count++ );
 
-                  } )
-                }
-                {
-                  // 3.third clone
-                  list.map( function( article ) {
+                    } )
+                  }
+                  {
+                    // 3.third clone
+                    list.map( function( article ) {
 
-                    return make( article, count++ );
+                      return make( article, count++ );
 
-                  } )
-                }
-              </ul>
-            </div>
-            <div className="hero-slider-control">
-              {/* prev / next */}
-              <div className="direction">
-                <a id="prev" className="direction-prev" href="#prev" onClick={this.onPrev}>Prev</a>
-                <a id="next" className="direction-next" href="#next" onClick={this.onNext}>Next</a>
+                    } )
+                  }
+                </ul>
               </div>
-              {/* pagers */}
-              <div className="pager">
-                <Pagers
-                  list={articles}
-                  offset={articles.length}
-                  onPager={this.onPagerClick}
-                />
+              <div className="hero-slider-control">
+                {/* prev / next */}
+                <div className="direction">
+                  <a id="prev" className="direction-prev" href="#prev" onClick={this.onPrev}>Prev</a>
+                  <a id="next" className="direction-next" href="#next" onClick={this.onNext}>Next</a>
+                </div>
+                {/* pagers */}
+                <div className="pager">
+                  <Pagers
+                    list={articles}
+                    offset={articles.length}
+                    onPager={this.onPagerClick}
+                  />
+                </div>
               </div>
             </div>
           </div>

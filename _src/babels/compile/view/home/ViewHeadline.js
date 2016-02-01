@@ -286,7 +286,7 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
 
           return React.createElement(
             'div',
-            null,
+            { className: 'headline' },
             React.createElement(
               'div',
               { className: 'headline-heading' },

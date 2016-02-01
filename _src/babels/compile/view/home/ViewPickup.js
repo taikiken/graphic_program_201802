@@ -475,58 +475,62 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           // JSX
           return React.createElement(
             'div',
-            { className: 'hero-slider pickup-container slide-' + this.state.index },
+            { className: 'hero-sec' },
             React.createElement(
               'div',
-              { className: 'hero-slider-inner' },
-              React.createElement(
-                'ul',
-                { className: 'pickup-slider' },
-
-                // 1.first
-                list.map(function (article) {
-
-                  return make(article, count++);
-                }),
-
-                // 2.second clone
-                list.map(function (article) {
-
-                  return make(article, count++);
-                }),
-
-                // 3.third clone
-                list.map(function (article) {
-
-                  return make(article, count++);
-                })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'hero-slider-control' },
+              { className: 'hero-slider pickup-container slide-' + this.state.index },
               React.createElement(
                 'div',
-                { className: 'direction' },
+                { className: 'hero-slider-inner' },
                 React.createElement(
-                  'a',
-                  { id: 'prev', className: 'direction-prev', href: '#prev', onClick: this.onPrev },
-                  'Prev'
-                ),
-                React.createElement(
-                  'a',
-                  { id: 'next', className: 'direction-next', href: '#next', onClick: this.onNext },
-                  'Next'
+                  'ul',
+                  { className: 'pickup-slider' },
+
+                  // 1.first
+                  list.map(function (article) {
+
+                    return make(article, count++);
+                  }),
+
+                  // 2.second clone
+                  list.map(function (article) {
+
+                    return make(article, count++);
+                  }),
+
+                  // 3.third clone
+                  list.map(function (article) {
+
+                    return make(article, count++);
+                  })
                 )
               ),
               React.createElement(
                 'div',
-                { className: 'pager' },
-                React.createElement(Pagers, {
-                  list: articles,
-                  offset: articles.length,
-                  onPager: this.onPagerClick
-                })
+                { className: 'hero-slider-control' },
+                React.createElement(
+                  'div',
+                  { className: 'direction' },
+                  React.createElement(
+                    'a',
+                    { id: 'prev', className: 'direction-prev', href: '#prev', onClick: this.onPrev },
+                    'Prev'
+                  ),
+                  React.createElement(
+                    'a',
+                    { id: 'next', className: 'direction-next', href: '#next', onClick: this.onNext },
+                    'Next'
+                  )
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'pager' },
+                  React.createElement(Pagers, {
+                    list: articles,
+                    offset: articles.length,
+                    onPager: this.onPagerClick
+                  })
+                )
               )
             )
           );

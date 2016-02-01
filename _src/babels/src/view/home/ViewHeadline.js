@@ -207,7 +207,7 @@ export class ViewHeadline extends View {
 
         return (
 
-          <div>
+          <div className="headline">
             <div className="headline-heading">
               <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
               <span className="headline-heading-ruby">注目のニュース</span>

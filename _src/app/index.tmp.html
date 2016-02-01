@@ -102,13 +102,12 @@
   .success -> #43e18a グリーン
   -->
 
-  <div id="hero-sec" class="hero-sec">
-  </div><!-- /.hero-sec -->
+  <div id="pickup-container"></div><!-- /pickup -->
 
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-        <div id="headline-container" class="headline"></div><!-- /.headline -->
+        <div id="headline-container"></div><!-- /headline -->
 
         <div class="newsboad">
           <div class="column1 newsboad-column">
@@ -247,7 +246,7 @@
 
     // ---------------------------------------------------------
     // pickup
-    pickup = new UT.view.home.ViewPickup( document.getElementById('hero-sec') );
+    pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
     pickup.start();
 
     // ---------------------------------------------------------
