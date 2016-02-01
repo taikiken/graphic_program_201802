@@ -67,11 +67,14 @@ var ArticleDae = exports.ArticleDae = function () {
     this._popular = new _CommentsPopularDae.CommentsPopularDae(article.comments_popular);
 
     // Safety.check, object に key が存在しタイプがあっているかを調べます
+    // 0 になるのでコメントにします
+    // ToDo: 問題がないことを確認したらコメントブロックを削除する
     // comments_count check
-    if (!_Safety.Safety.check(article, 'comments_count', 'number')) {
-
-      article.comments_count = 0;
-    }
+    /*
+    if ( !Safety.check( article, 'comments_count', 'number' ) ) {
+       article.comments_count = 0;
+     }
+    */
     // date check
     if (_Safety.Safety.check(article, 'date')) {
 
@@ -121,13 +124,13 @@ var ArticleDae = exports.ArticleDae = function () {
       return this._category;
     }
     /**
-     *
      * @return {Number} article.comments_count
      */
 
   }, {
     key: 'commentsCount',
     get: function get() {
+      console.log('article.comments_count', this._article.comments_count);
       return parseInt(this.article.comments_count, 10);
     }
     /**

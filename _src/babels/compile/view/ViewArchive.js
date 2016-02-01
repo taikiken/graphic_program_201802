@@ -329,7 +329,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
 
           var seconds = this.props.seconds;
           var articleId = this.props.articleId;
-
+          console.log('seconds ', seconds);
           return React.createElement(
             'ul',
             { className: 'comments-second' },
@@ -534,23 +534,31 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           var emptyFirst = React.createElement('div', { className: 'comments-popular comments-empty' });
           var second = React.createElement('div', { className: 'comments-second comments-empty' });
 
-          if (commentsPopular.hasSecond) {
+          var hasFirst = commentsPopular.hasFirst;
+          var hasSecond = commentsPopular.hasSecond;
+          var firstDae = commentsPopular.first;
+          var secondsDae = commentsPopular.seconds;
+          console.log('commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae);
+          if (hasSecond) {
             // 2件目以降も存在する
             // 2件目以降のDomを生成する
-            second = React.createElement(CommentsSecond, { seconds: commentsPopular.seconds, articleId: articleId });
+            second = React.createElement(CommentsSecond, { seconds: secondsDae, articleId: articleId });
+            total -= secondsDae.length;
           }
 
-          if (commentsPopular.hasFirst) {
+          if (hasFirst) {
 
             // 少なくとも1件は存在する
+            total -= 1;
 
+            console.log('少なくとも1件は存在する ', articleId);
             // 1件目コメントデータを取り出し
-            var first = commentsPopular.first;
+            var first = firstDae;
+            console.log('first ', articleId, first);
             // 1件目コメント・ユーザー
             var firstUser = first.user;
             // ユーザーサムネイル
             var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
-
             // login 済かを調べる
             var sign = _User.User.sign;
 
@@ -614,7 +622,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
                 React.createElement(
                   'span',
                   { className: 'commented-user-andmore' },
-                  total > 0 ? total : ''
+                  total > 0 ? '+' + total : ''
                 )
               )
             );
@@ -653,6 +661,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           var p = this.props;
           var commentsPopular = p.commentsPopular;
           var figureTag = undefined;
+          var commentsTotal = p.commentsCount;
 
           if (p.mediaType === 'image') {
             // type: image
@@ -703,7 +712,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
                 )
               )
             ),
-            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: p.commentsCount, articleId: p.id })
+            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: p.id })
           );
         }
       });
@@ -723,7 +732,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
         }
 
         thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
-
+        console.log('dae ', dae.id, dae);
         // unique key(React)にarticle id(number)記事Idを使用します
         return React.createElement(ArchiveDom, {
           key: 'archive-' + dae.id,

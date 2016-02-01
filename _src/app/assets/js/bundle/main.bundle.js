@@ -165,7 +165,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-01 18:44:24
+	 * @date 2016-02-01 21:27:23
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -8350,7 +8350,7 @@
 
 	          var seconds = this.props.seconds;
 	          var articleId = this.props.articleId;
-
+	          console.log('seconds ', seconds);
 	          return React.createElement(
 	            'ul',
 	            { className: 'comments-second' },
@@ -8555,23 +8555,31 @@
 	          var emptyFirst = React.createElement('div', { className: 'comments-popular comments-empty' });
 	          var second = React.createElement('div', { className: 'comments-second comments-empty' });
 
-	          if (commentsPopular.hasSecond) {
+	          var hasFirst = commentsPopular.hasFirst;
+	          var hasSecond = commentsPopular.hasSecond;
+	          var firstDae = commentsPopular.first;
+	          var secondsDae = commentsPopular.seconds;
+	          console.log('commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae);
+	          if (hasSecond) {
 	            // 2件目以降も存在する
 	            // 2件目以降のDomを生成する
-	            second = React.createElement(CommentsSecond, { seconds: commentsPopular.seconds, articleId: articleId });
+	            second = React.createElement(CommentsSecond, { seconds: secondsDae, articleId: articleId });
+	            total -= secondsDae.length;
 	          }
 
-	          if (commentsPopular.hasFirst) {
+	          if (hasFirst) {
 
 	            // 少なくとも1件は存在する
+	            total -= 1;
 
+	            console.log('少なくとも1件は存在する ', articleId);
 	            // 1件目コメントデータを取り出し
-	            var first = commentsPopular.first;
+	            var first = firstDae;
+	            console.log('first ', articleId, first);
 	            // 1件目コメント・ユーザー
 	            var firstUser = first.user;
 	            // ユーザーサムネイル
 	            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
-
 	            // login 済かを調べる
 	            var sign = _User.User.sign;
 
@@ -8635,7 +8643,7 @@
 	                React.createElement(
 	                  'span',
 	                  { className: 'commented-user-andmore' },
-	                  total > 0 ? total : ''
+	                  total > 0 ? '+' + total : ''
 	                )
 	              )
 	            );
@@ -8674,6 +8682,7 @@
 	          var p = this.props;
 	          var commentsPopular = p.commentsPopular;
 	          var figureTag = undefined;
+	          var commentsTotal = p.commentsCount;
 
 	          if (p.mediaType === 'image') {
 	            // type: image
@@ -8724,7 +8733,7 @@
 	                )
 	              )
 	            ),
-	            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: p.commentsCount, articleId: p.id })
+	            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: p.id })
 	          );
 	        }
 	      });
@@ -8744,7 +8753,7 @@
 	        }
 
 	        thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
-
+	        console.log('dae ', dae.id, dae);
 	        // unique key(React)にarticle id(number)記事Idを使用します
 	        return React.createElement(ArchiveDom, {
 	          key: 'archive-' + dae.id,
@@ -9222,11 +9231,14 @@
 	    this._popular = new _CommentsPopularDae.CommentsPopularDae(article.comments_popular);
 
 	    // Safety.check, object に key が存在しタイプがあっているかを調べます
+	    // 0 になるのでコメントにします
+	    // ToDo: 問題がないことを確認したらコメントブロックを削除する
 	    // comments_count check
-	    if (!_Safety.Safety.check(article, 'comments_count', 'number')) {
-
-	      article.comments_count = 0;
-	    }
+	    /*
+	    if ( !Safety.check( article, 'comments_count', 'number' ) ) {
+	       article.comments_count = 0;
+	     }
+	    */
 	    // date check
 	    if (_Safety.Safety.check(article, 'date')) {
 
@@ -9276,13 +9288,13 @@
 	      return this._category;
 	    }
 	    /**
-	     *
 	     * @return {Number} article.comments_count
 	     */
 
 	  }, {
 	    key: 'commentsCount',
 	    get: function get() {
+	      console.log('article.comments_count', this._article.comments_count);
 	      return parseInt(this.article.comments_count, 10);
 	    }
 	    /**

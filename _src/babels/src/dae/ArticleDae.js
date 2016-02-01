@@ -43,12 +43,16 @@ export class ArticleDae {
     this._popular = new CommentsPopularDae( article.comments_popular );
 
     // Safety.check, object に key が存在しタイプがあっているかを調べます
+    // 0 になるのでコメントにします
+    // ToDo: 問題がないことを確認したらコメントブロックを削除する
     // comments_count check
+    /*
     if ( !Safety.check( article, 'comments_count', 'number' ) ) {
 
       article.comments_count = 0;
 
     }
+    */
     // date check
     if ( Safety.check( article, 'date' ) ) {
 
@@ -90,11 +94,11 @@ export class ArticleDae {
     return this._category;
   }
   /**
-   *
    * @return {Number} article.comments_count
    */
   get commentsCount():Number {
-    return parseInt( this.article.comments_count, 10 );
+    console.log( 'article.comments_count', this._article.comments_count );
+    return parseInt( this.article.comments_count, 10);
   }
   /**
    * @return {CommentsPopularDae|*} article.comments_popular

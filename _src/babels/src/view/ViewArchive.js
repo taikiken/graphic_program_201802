@@ -272,7 +272,7 @@ export class ViewArchive extends View {
 
         let seconds = this.props.seconds;
         let articleId = this.props.articleId;
-
+        console.log( 'seconds ', seconds );
         return (
           <ul className="comments-second">
             {
@@ -444,23 +444,31 @@ export class ViewArchive extends View {
         let emptyFirst = <div className="comments-popular comments-empty"></div>;
         let second = <div className="comments-second comments-empty"></div>;
 
-        if ( commentsPopular.hasSecond ) {
+        let hasFirst = commentsPopular.hasFirst;
+        let hasSecond = commentsPopular.hasSecond;
+        let firstDae = commentsPopular.first;
+        let secondsDae = commentsPopular.seconds;
+        console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
+        if ( hasSecond ) {
           // 2件目以降も存在する
           // 2件目以降のDomを生成する
-          second = <CommentsSecond seconds={commentsPopular.seconds} articleId={articleId} />;
+          second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
+          total -= secondsDae.length;
         }
 
-        if ( commentsPopular.hasFirst ) {
+        if ( hasFirst ) {
 
           // 少なくとも1件は存在する
+          total -= 1;
 
+          console.log( '少なくとも1件は存在する ', articleId );
           // 1件目コメントデータを取り出し
-          let first = commentsPopular.first;
+          let first = firstDae;
+          console.log( 'first ', articleId, first );
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
           let picture = firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE_FEATURE;
-
           // login 済かを調べる
           let sign = User.sign;
 
@@ -492,7 +500,7 @@ export class ViewArchive extends View {
               </div>
               <div className="commented-user">
                 {second}
-                <span className="commented-user-andmore">{total > 0 ? total : ''}</span>
+                <span className="commented-user-andmore">{total > 0 ? '+' + total : ''}</span>
               </div>
             </div>
           );
@@ -531,6 +539,7 @@ export class ViewArchive extends View {
         let p = this.props;
         let commentsPopular = p.commentsPopular;
         let figureTag;
+        let commentsTotal = p.commentsCount;
 
         if ( p.mediaType === 'image' ) {
           // type: image
@@ -558,7 +567,7 @@ export class ViewArchive extends View {
               </div>
             </a>
 
-            <PopularDom commentsPopular={commentsPopular} total={p.commentsCount} articleId={p.id} />
+            <PopularDom commentsPopular={commentsPopular} total={commentsTotal} articleId={p.id} />
           </div>
         );
       }
@@ -579,7 +588,7 @@ export class ViewArchive extends View {
       }
 
       thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
-
+      console.log( 'dae ', dae.id, dae );
       // unique key(React)にarticle id(number)記事Idを使用します
       return <ArchiveDom
         key={'archive-' + dae.id}
