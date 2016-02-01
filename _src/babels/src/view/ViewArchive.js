@@ -534,34 +534,31 @@ export class ViewArchive extends View {
 
         if ( p.mediaType === 'image' ) {
           // type: image
-          figureTag = <figure className="post-thumb">
+          figureTag = <figure className={'post-thumb post-thumb-' + p.mediaType}>
             <img src={p.thumbnail} alt={p.caption || p.title}/>
           </figure>;
 
         } else {
           // type: video
-          figureTag = <figure className="post-thumb">
+          figureTag = <figure className={'post-thumb post-thumb-' + p.mediaType}>
             <img className="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" />
             <img src={p.thumbnail} alt={p.caption || p.title}/>
           </figure>;
         }
 
         return (
-          <div className={'board-column column' + p.index + ' column-' + p.mediaType}>
-            <div className="board-item">
-              <a className="post" href={p.url}>
-                {figureTag}
-                <div className="post-data">
-                  <p className={'post-category post-category-' + p.slug}>{p.category}</p>
-                  <h3 className='post-heading'>{p.title}</h3>
-                  <p className="post-date">{p.date}</p>
-                  <div className="post-excerpt-text">{p.description}</div>
-                </div>
-              </a>
-            </div>
-            <div className="comments-popular-container">
-              <PopularDom commentsPopular={commentsPopular} total={p.commentsCount} articleId={p.id} />
-            </div>
+          <div className={'board-item board-item-' + p.index}>
+            <a className="post" href={p.url}>
+              {figureTag}
+              <div className="post-data">
+                <p className={'post-category post-category-' + p.slug}>{p.category}</p>
+                <h3 className='post-heading'>{p.title}</h3>
+                <p className="post-date">{p.date}</p>
+                <div className="post-excerpt-text">{p.description}</div>
+              </div>
+            </a>
+
+            <PopularDom commentsPopular={commentsPopular} total={p.commentsCount} articleId={p.id} />
           </div>
         );
       }
@@ -638,14 +635,14 @@ export class ViewArchive extends View {
         // dom, 左右に振り分けて出力する
         return (
           <div>
-            <div className="left">
+            <div className="column1 board-column">
               {
                 evens.map( function( dae ) {
                   return makeDom( dae );
                 } )
               }
             </div>
-            <div className="right">
+            <div className="column2 board-column">
               {
                 odds.map( function( dae ) {
                   return makeDom( dae );

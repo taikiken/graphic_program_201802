@@ -165,7 +165,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-01 18:31:12
+	 * @date 2016-02-01 18:44:24
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -8679,14 +8679,14 @@
 	            // type: image
 	            figureTag = React.createElement(
 	              'figure',
-	              { className: 'post-thumb' },
+	              { className: 'post-thumb post-thumb-' + p.mediaType },
 	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
 	            );
 	          } else {
 	            // type: video
 	            figureTag = React.createElement(
 	              'figure',
-	              { className: 'post-thumb' },
+	              { className: 'post-thumb post-thumb-' + p.mediaType },
 	              React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
 	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
 	            );
@@ -8694,45 +8694,37 @@
 
 	          return React.createElement(
 	            'div',
-	            { className: 'board-column column' + p.index + ' column-' + p.mediaType },
+	            { className: 'board-item board-item-' + p.index },
 	            React.createElement(
-	              'div',
-	              { className: 'board-item' },
+	              'a',
+	              { className: 'post', href: p.url },
+	              figureTag,
 	              React.createElement(
-	                'a',
-	                { className: 'post', href: p.url },
-	                figureTag,
+	                'div',
+	                { className: 'post-data' },
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-category post-category-' + p.slug },
+	                  p.category
+	                ),
+	                React.createElement(
+	                  'h3',
+	                  { className: 'post-heading' },
+	                  p.title
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-date' },
+	                  p.date
+	                ),
 	                React.createElement(
 	                  'div',
-	                  { className: 'post-data' },
-	                  React.createElement(
-	                    'p',
-	                    { className: 'post-category post-category-' + p.slug },
-	                    p.category
-	                  ),
-	                  React.createElement(
-	                    'h3',
-	                    { className: 'post-heading' },
-	                    p.title
-	                  ),
-	                  React.createElement(
-	                    'p',
-	                    { className: 'post-date' },
-	                    p.date
-	                  ),
-	                  React.createElement(
-	                    'div',
-	                    { className: 'post-excerpt-text' },
-	                    p.description
-	                  )
+	                  { className: 'post-excerpt-text' },
+	                  p.description
 	                )
 	              )
 	            ),
-	            React.createElement(
-	              'div',
-	              { className: 'comments-popular-container' },
-	              React.createElement(PopularDom, { commentsPopular: commentsPopular, total: p.commentsCount, articleId: p.id })
-	            )
+	            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: p.commentsCount, articleId: p.id })
 	          );
 	        }
 	      });
@@ -8811,14 +8803,14 @@
 	            null,
 	            React.createElement(
 	              'div',
-	              { className: 'left' },
+	              { className: 'column1 board-column' },
 	              evens.map(function (dae) {
 	                return makeDom(dae);
 	              })
 	            ),
 	            React.createElement(
 	              'div',
-	              { className: 'right' },
+	              { className: 'column2 board-column' },
 	              odds.map(function (dae) {
 	                return makeDom(dae);
 	              })
