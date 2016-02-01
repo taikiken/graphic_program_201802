@@ -110,58 +110,11 @@
         <div id="headline-container"></div><!-- /headline -->
 
         <div class="newsboad">
-          <div class="column1 newsboad-column">
-            <div class="newsboad-item">
-              <a class="post" href="hoge">
-                <figure class="post-thumb">
-                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
-                </figure>
-                <div class="post-data">
-                  <p class="post-category">海外サッカー</p>
-                  <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
-                  <p class="post-date">12月18日(金) 22:04</p>
-                  <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
-                </div>
-              </a>
 
-              <div class="feature-user comment-item">
-                <figure class="comment-user">
-                  <a class="comment-user-link" href="hoge">
-                    <span class="comment-user-thumb">&nbsp;</span>
-                    <figcaption class="comment-user-data">
-                      <p class="comment-user-name">山田 太郎</p>
-                      <p class="comment-user-job">スポーツライター</p>
-                    </figcaption>
-                  </a>
-                </figure>
+          <div id="board-container"></div><!--/board-container-->
 
-                <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+          <div id="board-container-more"></div><!--/more-button-->
 
-                <div class="comment-response">
-                  <a class="comment-response-btn comment-response-like active" href="#"><i></i>99999</a>
-                  <a class="comment-response-btn comment-response-dislike" href="#"><i></i>99999</a>
-                </div>
-              </div><!-- /.feature-user -->
-
-              <div class="commented-user">
-                <ul>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                </ul>
-                <span class="commented-user-andmore">+9999</span>
-              </div>
-            </div><!-- /.newsboad-item -->
-
-          </div>
-
-          <div class="column2 newsboad-column">
-          </div>
-
-          <div class="newsboad-btn-viewmore"><a class="newsboad-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></div>
         </div><!-- /.newsboad -->
       </section><!-- /.main-sec -->
 
@@ -256,6 +209,9 @@
 
     // ---------------------------------------------------------
     // news
+    var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
+    var archive = new UT.view.ViewArchive( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
+    archive.start();
 
     // ---------------------------------------------------------
     // ranking

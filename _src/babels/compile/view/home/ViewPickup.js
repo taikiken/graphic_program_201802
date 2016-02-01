@@ -223,7 +223,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
         },
         handleClick: function handleClick(event) {
           event.preventDefault();
-          console.log('click ' + event.target.innerHTML);
+          console.log('PickupPager click ' + event.target.innerHTML);
           this.props.onPager(event.target.innerHTML);
         },
         render: function render() {

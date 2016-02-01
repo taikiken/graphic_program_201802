@@ -44,6 +44,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Empty = require('../app/const/Empty');
 
+var _User = require('../app/User');
+
 var _View2 = require('./View');
 
 var _ViewError = require('./error/ViewError');
@@ -278,20 +280,33 @@ var ViewArchive = exports.ViewArchive = function (_View) {
         },
         render: function render() {
 
-          return React.createElement(
-            'div',
-            null,
-            this.props.show ? React.createElement(
+          // hasNext: true, button を表示する？
+          if (this.props.show) {
+
+            return React.createElement(
               'div',
-              { className: this.state.disable ? 'disable' : '' },
+              { id: 'more', className: 'board-btn-viewmore' + this.state.disable ? 'disable' : '' },
               React.createElement(
                 'a',
-                { href: '#more', onClick: this.handleClick },
-                'More View'
+                { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
+                React.createElement(
+                  'span',
+                  null,
+                  'VIEW MORE'
+                )
+              ),
+              React.createElement(
+                'span',
+                { className: 'board-btn-more-cover' },
+                ' '
               )
-            ) : ''
-          );
+            );
+          } else {
+
+            return React.createElement('div', { className: 'no-more' });
+          }
         }
+
       });
 
       // more button 作成関数
@@ -316,7 +331,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           var articleId = this.props.articleId;
 
           return React.createElement(
-            'div',
+            'ul',
             { className: 'comments-second' },
             seconds.map(function (commentDae, i) {
 
@@ -327,9 +342,13 @@ var ViewArchive = exports.ViewArchive = function (_View) {
               // 同一ユーザーが複数投稿することがあるため
               // render 内で unique なことを保証する必要がある
               return React.createElement(
-                'div',
-                { key: 'user-' + articleId + '-' + i + '-' + userDae.id },
-                React.createElement('img', { src: picture, alt: userDae.userName })
+                'li',
+                { key: 'user-' + articleId + '-' + i + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
+                React.createElement(
+                  'a',
+                  { className: 'commented-user-thumb', href: userDae.url },
+                  React.createElement('img', { src: picture, alt: userDae.userName })
+                )
               );
             })
           );
@@ -339,6 +358,153 @@ var ViewArchive = exports.ViewArchive = function (_View) {
       // --------------------------------------------
       // COMMENTS Popular
       // --------------------------------------------
+
+      // good link
+      var GoodLink = React.createClass({
+        displayName: 'GoodLink',
+
+        propType: {
+          sign: React.PropTypes.bool.isRequired,
+          comment: React.PropTypes.object.isRequired,
+          active: React.PropTypes.bool,
+          callback: React.PropTypes.func
+        },
+        getDefaultProps: function getDefaultProps() {
+          return {
+            active: false,
+            callback: function callback() {}
+          };
+        },
+        getInitialState: function getInitialState() {
+          return {
+            active: false,
+            callback: function callback() {}
+          };
+        },
+        handleClick: function handleClick(event) {
+          event.preventDefault();
+          this.props.callback(this.props.comment);
+          this.setState({ active: false });
+        },
+        render: function render() {
+
+          var sign = this.props.sign;
+          var comment = this.props.comment;
+          var active = this.props.active;
+          var activeClass = active ? ' active' : '';
+
+          if (sign) {
+
+            // login user
+            return React.createElement(
+              'a',
+              { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
+              React.createElement(
+                'i',
+                null,
+                ' '
+              ),
+              React.createElement(
+                'span',
+                null,
+                comment.good
+              )
+            );
+          } else {
+
+            // not login user
+            return React.createElement(
+              'span',
+              { className: 'comment-response-btn comment-response-like' },
+              React.createElement(
+                'i',
+                null,
+                ' '
+              ),
+              React.createElement(
+                'span',
+                null,
+                comment.good
+              )
+            );
+          }
+        }
+      });
+
+      // bad link
+      var BadLink = React.createClass({
+        displayName: 'BadLink',
+
+        propType: {
+          sign: React.PropTypes.bool.isRequired,
+          comment: React.PropTypes.object.isRequired,
+          active: React.PropTypes.bool,
+          callback: React.PropTypes.func
+        },
+        getDefaultProps: function getDefaultProps() {
+          return {
+            active: false,
+            callback: function callback() {}
+          };
+        },
+        getInitialState: function getInitialState() {
+          return {
+            active: false,
+            callback: function callback() {}
+          };
+        },
+        handleClick: function handleClick(event) {
+          event.preventDefault();
+          this.props.callback(this.props.comment);
+          this.setState({ active: false });
+        },
+        render: function render() {
+
+          var sign = this.props.sign;
+          var comment = this.props.comment;
+          var active = this.props.active;
+          var activeClass = active ? ' active' : '';
+
+          if (sign) {
+
+            // login user
+            return React.createElement(
+              'a',
+              { className: 'comment-response-btn comment-response-dislike' + activeClass, href: '#', onClick: this.handleClick },
+              React.createElement(
+                'i',
+                null,
+                ' '
+              ),
+              React.createElement(
+                'span',
+                null,
+                comment.bad
+              )
+            );
+          } else {
+
+            // not login user
+            return React.createElement(
+              'span',
+              { className: 'comment-response-btn comment-response-dislike' },
+              React.createElement(
+                'i',
+                null,
+                ' '
+              ),
+              React.createElement(
+                'span',
+                null,
+                comment.bad
+              )
+            );
+          }
+        }
+      });
+
+      // --------------------------------------------
+      // first + second comment container
       var PopularDom = React.createClass({
         displayName: 'PopularDom',
 
@@ -346,6 +512,18 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           commentsPopular: React.PropTypes.object.isRequired,
           total: React.PropTypes.number.isRequired,
           articleId: React.PropTypes.string.isRequired
+        },
+        goodClick: function goodClick(comment) {
+          var commentId = comment.id;
+          var userId = comment.user.id;
+
+          console.log('goodClick', commentId, userId);
+        },
+        badClick: function badClick(comment) {
+          var commentId = comment.id;
+          var userId = comment.user.id;
+
+          console.log('badClick', commentId, userId);
         },
         render: function render() {
 
@@ -366,61 +544,87 @@ var ViewArchive = exports.ViewArchive = function (_View) {
 
             // 少なくとも1件は存在する
 
-            // 1件目データを取り出し
+            // 1件目コメントデータを取り出し
             var first = commentsPopular.first;
+            // 1件目コメント・ユーザー
             var firstUser = first.user;
+            // ユーザーサムネイル
             var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
+
+            // login 済かを調べる
+            var sign = _User.User.sign;
 
             return React.createElement(
               'div',
               { className: 'comments-popular' },
               React.createElement(
                 'div',
-                { className: 'comment-first' },
-                React.createElement('img', { src: picture, alt: firstUser.userName }),
+                { className: 'feature-user comment-item' },
                 React.createElement(
-                  'div',
-                  null,
-                  firstUser.userName
+                  'figure',
+                  { className: 'comment-user' },
+                  React.createElement(
+                    'a',
+                    { className: 'comment-user-link', href: firstUser.url },
+                    React.createElement(
+                      'span',
+                      { className: 'comment-user-thumb' },
+                      React.createElement('img', { src: picture, alt: firstUser.userName })
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: 'comment-user-data' },
+                      React.createElement(
+                        'p',
+                        { className: 'comment-user-name' },
+                        firstUser.userName
+                      ),
+                      React.createElement(
+                        'p',
+                        { className: 'comment-user-job' },
+                        firstUser.bio
+                      )
+                    )
+                  )
                 ),
                 React.createElement(
                   'div',
-                  null,
-                  firstUser.bio
-                ),
-                React.createElement(
-                  'div',
-                  null,
+                  { className: 'comment-content' },
                   first.body
                 ),
                 React.createElement(
                   'div',
-                  null,
-                  'GOOD: ',
-                  first.good
-                ),
-                React.createElement(
-                  'div',
-                  null,
-                  'BAD: ',
-                  first.bad
+                  { className: 'comment-response' },
+                  React.createElement(GoodLink, {
+                    sign: sign,
+                    comment: first,
+                    callback: this.goodClick
+                  }),
+                  React.createElement(BadLink, {
+                    sign: sign,
+                    comment: first,
+                    callback: this.badClick
+                  })
                 )
               ),
               React.createElement(
                 'div',
-                { className: 'comment-second-container' },
+                { className: 'commented-user' },
                 second,
                 React.createElement(
-                  'div',
-                  { className: 'comment-total' },
-                  total > 0 ? 'Total: ' + total : ''
+                  'span',
+                  { className: 'commented-user-andmore' },
+                  total > 0 ? total : ''
                 )
               )
             );
           }
 
           return emptyFirst;
-        } // render
+        }, // render
+        componentDidMount: function componentDidMount() {
+          // mount
+        }
       });
 
       // --------------------------------------------
@@ -438,6 +642,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
+          caption: React.PropTypes.string.isRequired,
           description: React.PropTypes.string.isRequired,
           thumbnail: React.PropTypes.string.isRequired,
           mediaType: React.PropTypes.string.isRequired,
@@ -447,39 +652,60 @@ var ViewArchive = exports.ViewArchive = function (_View) {
         render: function render() {
           var p = this.props;
           var commentsPopular = p.commentsPopular;
+          var figureTag = undefined;
+
+          if (p.mediaType === 'image') {
+            // type: image
+            figureTag = React.createElement(
+              'figure',
+              { className: 'post-thumb' },
+              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+            );
+          } else {
+            // type: video
+            figureTag = React.createElement(
+              'figure',
+              { className: 'post-thumb' },
+              React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
+              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+            );
+          }
 
           return React.createElement(
             'div',
-            { className: 'one-article' },
-            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+            { className: 'board-column column' + p.index + ' column-' + p.mediaType },
             React.createElement(
-              'p',
-              { className: 'cat cat-' + p.slug },
-              p.category
-            ),
-            React.createElement(
-              'a',
-              { href: p.url, id: 'archive-' + p.id, className: 'archive archive-' + p.index },
+              'div',
+              { className: 'board-item' },
               React.createElement(
-                'h3',
-                { className: 'archive-title' },
-                p.title
+                'a',
+                { className: 'post', href: p.url },
+                figureTag,
+                React.createElement(
+                  'div',
+                  { className: 'post-data' },
+                  React.createElement(
+                    'p',
+                    { className: 'post-category post-category-' + p.slug },
+                    p.category
+                  ),
+                  React.createElement(
+                    'h3',
+                    { className: 'post-heading' },
+                    p.title
+                  ),
+                  React.createElement(
+                    'p',
+                    { className: 'post-date' },
+                    p.date
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'post-excerpt-text' },
+                    p.description
+                  )
+                )
               )
-            ),
-            React.createElement(
-              'p',
-              { className: 'date' },
-              p.date
-            ),
-            React.createElement(
-              'p',
-              null,
-              p.mediaType
-            ),
-            React.createElement(
-              'p',
-              null,
-              p.description
             ),
             React.createElement(
               'div',
@@ -494,7 +720,16 @@ var ViewArchive = exports.ViewArchive = function (_View) {
       // list.forEach での ReactDOM.render 実行記述を簡略化するため
       var makeDom = function makeDom(dae) {
 
-        var thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
+        var thumbnail = undefined;
+        var caption = undefined;
+        if (dae.mediaType === 'image') {
+          thumbnail = dae.media.images.medium;
+          caption = dae.media.images.caption;
+        } else {
+          thumbnail = dae.media.video.thumbnail;
+          caption = dae.media.video.caption;
+        }
+
         thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
 
         // unique key(React)にarticle id(number)記事Idを使用します
@@ -507,6 +742,7 @@ var ViewArchive = exports.ViewArchive = function (_View) {
           url: dae.url,
           date: dae.formatDate,
           title: dae.title,
+          caption: caption,
           thumbnail: thumbnail,
           mediaType: dae.mediaType,
           description: dae.description,

@@ -17,6 +17,7 @@ Home, Category, Search...
 
 // app
 import {Empty} from '../app/const/Empty';
+import {User} from '../app/User';
 
 // view
 import {View} from './View';
@@ -227,17 +228,26 @@ export class ViewArchive extends View {
       },
       render: function() {
 
-        return (
-          <div>
-            {
-              this.props.show ? <div className={this.state.disable ? 'disable' : ''}>
-                <a href={'#more'} onClick={this.handleClick} >More View</a>
-              </div> : ''
-            }
-          </div>
-        );
+        // hasNext: true, button を表示する？
+        if ( this.props.show ) {
+
+          return (
+            <div id="more" className={'board-btn-viewmore' + this.state.disable ? 'disable' : ''}>
+              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>VIEW MORE</span></a>
+              <span className="board-btn-more-cover">&nbsp;</span>
+            </div>
+          );
+
+        } else {
+
+          return (
+            <div className="no-more"></div>
+          );
+
+        }
 
       }
+
     } );
 
     // more button 作成関数
@@ -264,7 +274,7 @@ export class ViewArchive extends View {
         let articleId = this.props.articleId;
 
         return (
-          <div className="comments-second">
+          <ul className="comments-second">
             {
               seconds.map( function( commentDae, i ) {
 
@@ -275,13 +285,15 @@ export class ViewArchive extends View {
                 // 同一ユーザーが複数投稿することがあるため
                 // render 内で unique なことを保証する必要がある
                 return (
-                  <div key={'user-' + articleId + '-' + i + '-' + userDae.id}>
-                    <img src={picture} alt={userDae.userName}/>
-                  </div>
+                  <li key={'user-' + articleId + '-' + i + '-' + userDae.id} className={'commented-user-item commented-user-item-' + i}>
+                    <a className="commented-user-thumb" href={userDae.url}>
+                      <img src={picture} alt={userDae.userName}/>
+                    </a>
+                  </li>
                 );
               } )
             }
-          </div>
+          </ul>
         );
 
       }
@@ -290,11 +302,138 @@ export class ViewArchive extends View {
     // --------------------------------------------
     // COMMENTS Popular
     // --------------------------------------------
+
+    // good link
+    let GoodLink = React.createClass( {
+      propType: {
+        sign: React.PropTypes.bool.isRequired,
+        comment: React.PropTypes.object.isRequired,
+        active: React.PropTypes.bool,
+        callback: React.PropTypes.func
+      },
+      getDefaultProps: function() {
+        return {
+          active: false,
+          callback: function() {}
+        };
+      },
+      getInitialState: function() {
+        return {
+          active: false,
+          callback: function() {}
+        };
+      },
+      handleClick: function( event ) {
+        event.preventDefault();
+        this.props.callback(this.props.comment);
+        this.setState( { active: false } );
+      },
+      render: function() {
+
+        let sign = this.props.sign;
+        let comment = this.props.comment;
+        let active = this.props.active;
+        let activeClass = active ? ' active' : '';
+
+        if ( sign ) {
+
+          // login user
+          return (
+            <a className={'comment-response-btn comment-response-like' + activeClass} href="#" onClick={this.handleClick}>
+              <i>&nbsp;</i>
+              <span>{comment.good}</span>
+            </a>
+          );
+
+        } else {
+
+          // not login user
+          return (
+            <span className="comment-response-btn comment-response-like">
+              <i>&nbsp;</i>
+              <span>{comment.good}</span>
+            </span>
+          );
+        }
+
+      }
+    } );
+
+    // bad link
+    let BadLink = React.createClass( {
+      propType: {
+        sign: React.PropTypes.bool.isRequired,
+        comment: React.PropTypes.object.isRequired,
+        active: React.PropTypes.bool,
+        callback: React.PropTypes.func
+      },
+      getDefaultProps: function() {
+        return {
+          active: false,
+          callback: function() {}
+        };
+      },
+      getInitialState: function() {
+        return {
+          active: false,
+          callback: function() {}
+        };
+      },
+      handleClick: function( event ) {
+        event.preventDefault();
+        this.props.callback(this.props.comment);
+        this.setState( { active: false } );
+      },
+      render: function() {
+
+        let sign = this.props.sign;
+        let comment = this.props.comment;
+        let active = this.props.active;
+        let activeClass = active ? ' active' : '';
+
+        if ( sign ) {
+
+          // login user
+          return (
+            <a className={'comment-response-btn comment-response-dislike' + activeClass} href="#" onClick={this.handleClick}>
+              <i>&nbsp;</i>
+              <span>{comment.bad}</span>
+            </a>
+          );
+
+        } else {
+
+          // not login user
+          return (
+            <span className="comment-response-btn comment-response-dislike">
+              <i>&nbsp;</i>
+              <span>{comment.bad}</span>
+            </span>
+          );
+        }
+
+      }
+    } );
+
+    // --------------------------------------------
+    // first + second comment container
     let PopularDom = React.createClass( {
       propType: {
         commentsPopular: React.PropTypes.object.isRequired,
         total: React.PropTypes.number.isRequired,
         articleId: React.PropTypes.string.isRequired
+      },
+      goodClick: function( comment ) {
+        let commentId = comment.id;
+        let userId = comment.user.id;
+
+        console.log( 'goodClick', commentId, userId );
+      },
+      badClick: function( comment ) {
+        let commentId = comment.id;
+        let userId = comment.user.id;
+
+        console.log( 'badClick', commentId, userId );
       },
       render: function() {
 
@@ -315,24 +454,45 @@ export class ViewArchive extends View {
 
           // 少なくとも1件は存在する
 
-          // 1件目データを取り出し
+          // 1件目コメントデータを取り出し
           let first = commentsPopular.first;
+          // 1件目コメント・ユーザー
           let firstUser = first.user;
+          // ユーザーサムネイル
           let picture = firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE_FEATURE;
+
+          // login 済かを調べる
+          let sign = User.sign;
 
           return (
             <div className="comments-popular">
-              <div className="comment-first">
-                <img src={picture} alt={firstUser.userName}/>
-                <div>{firstUser.userName}</div>
-                <div>{firstUser.bio}</div>
-                <div>{first.body}</div>
-                <div>GOOD: {first.good}</div>
-                <div>BAD: {first.bad}</div>
+              <div className="feature-user comment-item">
+                <figure className="comment-user">
+                  <a className="comment-user-link" href={firstUser.url}>
+                    <span className="comment-user-thumb"><img src={picture} alt={firstUser.userName}/></span>
+                    <div className="comment-user-data">
+                      <p className="comment-user-name">{firstUser.userName}</p>
+                      <p className="comment-user-job">{firstUser.bio}</p>
+                    </div>
+                  </a>
+                </figure>
+                <div className="comment-content">{first.body}</div>
+                <div className="comment-response">
+                  <GoodLink
+                    sign={sign}
+                    comment={first}
+                    callback={this.goodClick}
+                  />
+                  <BadLink
+                    sign={sign}
+                    comment={first}
+                    callback={this.badClick}
+                  />
+                </div>
               </div>
-              <div className="comment-second-container">
+              <div className="commented-user">
                 {second}
-                <div className="comment-total">{total > 0 ? 'Total: ' + total : ''}</div>
+                <span className="commented-user-andmore">{total > 0 ? total : ''}</span>
               </div>
             </div>
           );
@@ -341,7 +501,10 @@ export class ViewArchive extends View {
 
         return emptyFirst;
 
-      }// render
+      }, // render
+      componentDidMount: function() {
+        // mount
+      }
     } );
 
     // --------------------------------------------
@@ -357,6 +520,7 @@ export class ViewArchive extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
+        caption: React.PropTypes.string.isRequired,
         description: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
         mediaType: React.PropTypes.string.isRequired,
@@ -366,17 +530,35 @@ export class ViewArchive extends View {
       render: function() {
         let p = this.props;
         let commentsPopular = p.commentsPopular;
+        let figureTag;
+
+        if ( p.mediaType === 'image' ) {
+          // type: image
+          figureTag = <figure className="post-thumb">
+            <img src={p.thumbnail} alt={p.caption || p.title}/>
+          </figure>;
+
+        } else {
+          // type: video
+          figureTag = <figure className="post-thumb">
+            <img className="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" />
+            <img src={p.thumbnail} alt={p.caption || p.title}/>
+          </figure>;
+        }
 
         return (
-          <div className="one-article">
-            <img src={p.thumbnail} alt={p.title}/>
-            <p className={'cat cat-' + p.slug}>{p.category}</p>
-            <a href={p.url} id={'archive-' + p.id} className={'archive archive-' + p.index}>
-              <h3 className='archive-title'>{p.title}</h3>
-            </a>
-            <p className="date">{p.date}</p>
-            <p>{p.mediaType}</p>
-            <p>{p.description}</p>
+          <div className={'board-column column' + p.index + ' column-' + p.mediaType}>
+            <div className="board-item">
+              <a className="post" href={p.url}>
+                {figureTag}
+                <div className="post-data">
+                  <p className={'post-category post-category-' + p.slug}>{p.category}</p>
+                  <h3 className='post-heading'>{p.title}</h3>
+                  <p className="post-date">{p.date}</p>
+                  <div className="post-excerpt-text">{p.description}</div>
+                </div>
+              </a>
+            </div>
             <div className="comments-popular-container">
               <PopularDom commentsPopular={commentsPopular} total={p.commentsCount} articleId={p.id} />
             </div>
@@ -389,7 +571,16 @@ export class ViewArchive extends View {
     // list.forEach での ReactDOM.render 実行記述を簡略化するため
     let makeDom = ( dae ) => {
 
-      let thumbnail = dae.mediaType === 'image' ? dae.media.images.medium : dae.media.video.thumbnail;
+      let thumbnail;
+      let caption;
+      if ( dae.mediaType === 'image' ) {
+        thumbnail = dae.media.images.medium;
+        caption = dae.media.images.caption;
+      } else {
+        thumbnail = dae.media.video.thumbnail;
+        caption = dae.media.video.caption;
+      }
+
       thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
 
       // unique key(React)にarticle id(number)記事Idを使用します
@@ -402,6 +593,7 @@ export class ViewArchive extends View {
         url={dae.url}
         date={dae.formatDate}
         title={dae.title}
+        caption={caption}
         thumbnail={thumbnail}
         mediaType={dae.mediaType}
         description={dae.description}

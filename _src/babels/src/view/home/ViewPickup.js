@@ -175,7 +175,7 @@ export class ViewPickup extends View {
       },
       handleClick: function( event ) {
         event.preventDefault();
-        console.log( 'click ' + event.target.innerHTML );
+        console.log( 'PickupPager click ' + event.target.innerHTML );
         this.props.onPager( event.target.innerHTML );
       },
       render: function() {
