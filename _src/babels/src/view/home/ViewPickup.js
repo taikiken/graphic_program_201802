@@ -14,12 +14,14 @@
 // app
 // import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
+import {User} from '../../app/User';
 
 // view
 import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 // action
 import {Pickup} from '../../action/home/Pickup';
+import {PickupAuth} from '../../action/home/PickupAuth';
 // data
 import {Result} from '../../data/Result';
 // dae
@@ -54,7 +56,8 @@ export class ViewPickup extends View {
     option = Safety.object( option );
 
     super( element, option );
-    this._action = new Pickup( this.done.bind( this ), this.fail.bind( this ) );
+    let ActionClass = User.sign ? PickupAuth : Pickup;
+    this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     this._index = 0;
     this._last = 0;
     this._waiting = 1000 * 5;

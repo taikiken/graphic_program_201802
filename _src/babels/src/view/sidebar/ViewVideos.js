@@ -133,7 +133,7 @@ export class ViewVideos extends View {
   render( articles:Array ):void {
 
     let element = this.element;
-    let slug = this.slug;
+    let categorySlug = this.slug;
     let _this = this;
 
     // tag block
@@ -146,18 +146,26 @@ export class ViewVideos extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
+        caption: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired
       },
       render: function() {
         let p = this.props;
 
         return (
-          <a href={p.url} id={'headline-' + p.id} className={'videos videos-' + p.index + ' videos-' + slug}>
-            <img src={p.thumbnail} alt={p.title}/>
-            <p className={'cat cat-' + p.slug}>{p.category}</p>
-            <h3 className='headline-title'>{p.title}</h3>
-            <p className="date">{p.date}</p>
-          </a>
+          <div className={'widget-recommend-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
+            <a href={p.url} className='post'>
+              <figure className="post-thumb">
+                <img className="post-thumb-overlay-movie" src={Empty.VIDEO_PLAY} />
+                <img src={p.thumbnail} alt={p.caption || p.title}/>
+              </figure>
+              <div className="post-data">
+                <p className={'post-category post-category-' + p.slug}>{p.category}</p>
+                <h4 className='post-heading'>{p.title}</h4>
+                <p className="post-date">{p.date}</p>
+              </div>
+            </a>
+          </div>
         );
       }
     } );
@@ -176,16 +184,34 @@ export class ViewVideos extends View {
       render: function() {
 
         let list = this.props.list;
+        let categoryTitle = '';
+
+        let categoryLabel;
+        // category api slug が `all` 以外の時に category.label をタイトルに含める
+        if ( categorySlug !== 'all' ) {
+          categoryLabel = list[ 0 ].category.label;
+
+          if ( categoryLabel !== '' ) {
+            // category.label が空でなかったら '/' と一緒に加える
+            categoryTitle = ' / ' + categoryLabel;
+          }
+        }
 
         return (
 
-          <div>
+          <div className="widget-recommend">
+            {/* title */}
+            <div className="widget-recommend-heading">
+              <h3 className="widget-recommend-heading-title"><img src="/assets/images/common/side-recommend-heading.png" alt="RECOMMEND" /></h3>
+              <span className="widget-recommend-heading-ruby">オススメ動画{categoryTitle}</span>
+            </div>
+
             {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-                let thumbnail = dae.media.images.thumbnail;
-                thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
+                let thumbnail = dae.media.video.thumbnail;
+                thumbnail = thumbnail !== '' ? thumbnail : Empty.VIDEO_THUMBNAIL;
 
                 // HeadlineDom instance を使い render
                 return <VideosDom
@@ -197,6 +223,7 @@ export class ViewVideos extends View {
                   url={dae.url}
                   date={dae.formatDate}
                   title={dae.title}
+                  caption={dae.media.video.caption}
                   thumbnail={thumbnail}
                 />;
 

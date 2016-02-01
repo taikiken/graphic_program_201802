@@ -41,11 +41,15 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Empty = require('../../app/const/Empty');
 
+var _User = require('../../app/User');
+
 var _View2 = require('../View');
 
 var _ViewError = require('../error/ViewError');
 
 var _Pickup = require('../../action/home/Pickup');
+
+var _PickupAuth = require('../../action/home/PickupAuth');
 
 var _Result = require('../../data/Result');
 
@@ -59,12 +63,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // React
 
 // dae
+var React = self.React;
+// data
 
 // action
 
 // view
-var React = self.React;
-// data
 
 var ReactDOM = self.ReactDOM;
 
@@ -97,7 +101,8 @@ var ViewPickup = exports.ViewPickup = function (_View) {
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewPickup).call(this, element, option));
 
-    _this2._action = new _Pickup.Pickup(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+    var ActionClass = _User.User.sign ? _PickupAuth.PickupAuth : _Pickup.Pickup;
+    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
     _this2._index = 0;
     _this2._last = 0;
     _this2._waiting = 1000 * 5;

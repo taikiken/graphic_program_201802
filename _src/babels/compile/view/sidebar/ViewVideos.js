@@ -185,7 +185,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
     value: function render(articles) {
 
       var element = this.element;
-      var slug = this.slug;
+      var categorySlug = this.slug;
       var _this = this;
 
       // tag block
@@ -200,29 +200,43 @@ var ViewVideos = exports.ViewVideos = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
+          caption: React.PropTypes.string.isRequired,
           thumbnail: React.PropTypes.string.isRequired
         },
         render: function render() {
           var p = this.props;
 
           return React.createElement(
-            'a',
-            { href: p.url, id: 'headline-' + p.id, className: 'videos videos-' + p.index + ' videos-' + slug },
-            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+            'div',
+            { className: 'widget-recommend-item videos-' + p.index + ' videos-' + (p.slug || categorySlug) },
             React.createElement(
-              'p',
-              { className: 'cat cat-' + p.slug },
-              p.category
-            ),
-            React.createElement(
-              'h3',
-              { className: 'headline-title' },
-              p.title
-            ),
-            React.createElement(
-              'p',
-              { className: 'date' },
-              p.date
+              'a',
+              { href: p.url, className: 'post' },
+              React.createElement(
+                'figure',
+                { className: 'post-thumb' },
+                React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
+                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+              ),
+              React.createElement(
+                'div',
+                { className: 'post-data' },
+                React.createElement(
+                  'p',
+                  { className: 'post-category post-category-' + p.slug },
+                  p.category
+                ),
+                React.createElement(
+                  'h4',
+                  { className: 'post-heading' },
+                  p.title
+                ),
+                React.createElement(
+                  'p',
+                  { className: 'post-date' },
+                  p.date
+                )
+              )
             )
           );
         }
@@ -235,6 +249,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
         propTypes: {
           list: React.PropTypes.array.isRequired
         },
+
         // isRequired なので getDefaultProps がいらない
         // getDefaultProps: function() {
         //  return {
@@ -244,15 +259,42 @@ var ViewVideos = exports.ViewVideos = function (_View) {
         render: function render() {
 
           var list = this.props.list;
+          var categoryTitle = '';
+
+          var categoryLabel = undefined;
+          // category api slug が `all` 以外の時に category.label をタイトルに含める
+          if (categorySlug !== 'all') {
+            categoryLabel = list[0].category.label;
+
+            if (categoryLabel !== '') {
+              // category.label が空でなかったら '/' と一緒に加える
+              categoryTitle = ' / ' + categoryLabel;
+            }
+          }
 
           return React.createElement(
             'div',
-            null,
+            { className: 'widget-recommend' },
+            React.createElement(
+              'div',
+              { className: 'widget-recommend-heading' },
+              React.createElement(
+                'h3',
+                { className: 'widget-recommend-heading-title' },
+                React.createElement('img', { src: '/assets/images/common/side-recommend-heading.png', alt: 'RECOMMEND' })
+              ),
+              React.createElement(
+                'span',
+                { className: 'widget-recommend-heading-ruby' },
+                'オススメ動画',
+                categoryTitle
+              )
+            ),
             list.map(function (article, i) {
 
               var dae = new _ArticleDae.ArticleDae(article);
-              var thumbnail = dae.media.images.thumbnail;
-              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+              var thumbnail = dae.media.video.thumbnail;
+              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.VIDEO_THUMBNAIL;
 
               // HeadlineDom instance を使い render
               return React.createElement(VideosDom, {
@@ -264,6 +306,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
                 url: dae.url,
                 date: dae.formatDate,
                 title: dae.title,
+                caption: dae.media.video.caption,
                 thumbnail: thumbnail
               });
             })

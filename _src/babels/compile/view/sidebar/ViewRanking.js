@@ -185,7 +185,7 @@ var ViewRanking = exports.ViewRanking = function (_View) {
     value: function render(articles) {
 
       var element = this.element;
-      var slug = this.slug;
+      var categorySlug = this.slug;
       var _this = this;
 
       // tag block
@@ -200,35 +200,44 @@ var ViewRanking = exports.ViewRanking = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
+          caption: React.PropTypes.string.isRequired,
           thumbnail: React.PropTypes.string.isRequired,
           total: React.PropTypes.number.isRequired
         },
         render: function render() {
           var p = this.props;
+          var n = p.index + 1;
 
           return React.createElement(
-            'a',
-            { href: p.url, id: 'headline-' + p.id, className: 'ranking ranking-' + p.index + ' ranking-' + slug },
-            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+            'div',
+            { className: 'widget-ranking-item rank' + n + ' ranking-' + (p.slug || categorySlug) },
             React.createElement(
-              'p',
-              { className: 'cat cat-' + p.slug },
-              p.category
-            ),
-            React.createElement(
-              'h3',
-              { className: 'headline-title' },
-              p.title
-            ),
-            React.createElement(
-              'p',
-              { className: 'date' },
-              p.date
-            ),
-            React.createElement(
-              'p',
-              { className: 'total' },
-              p.total
+              'a',
+              { href: p.url, className: 'post' },
+              React.createElement(
+                'figure',
+                { className: 'post-thumb' },
+                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+              ),
+              React.createElement(
+                'div',
+                { className: 'post-data' },
+                React.createElement(
+                  'p',
+                  { className: 'post-category post-category-' + p.slug },
+                  p.category
+                ),
+                React.createElement(
+                  'h4',
+                  { className: 'post-heading' },
+                  p.title
+                ),
+                React.createElement(
+                  'p',
+                  { className: 'post-date' },
+                  p.date
+                )
+              )
             )
           );
         }
@@ -241,6 +250,7 @@ var ViewRanking = exports.ViewRanking = function (_View) {
         propTypes: {
           list: React.PropTypes.array.isRequired
         },
+
         // isRequired なので getDefaultProps がいらない
         // getDefaultProps: function() {
         //  return {
@@ -250,14 +260,41 @@ var ViewRanking = exports.ViewRanking = function (_View) {
         render: function render() {
 
           var list = this.props.list;
+          var categoryTitle = '';
+
+          var categoryLabel = undefined;
+          // category api slug が `all` 以外の時に category.label をタイトルに含める
+          if (categorySlug !== 'all') {
+            categoryLabel = list[0].category.label;
+
+            if (categoryLabel !== '') {
+              // category.label が空でなかったら '/' と一緒に加える
+              categoryTitle = ' / ' + categoryLabel;
+            }
+          }
 
           return React.createElement(
             'div',
-            null,
+            { className: 'widget-ranking' },
+            React.createElement(
+              'div',
+              { className: 'widget-ranking-heading' },
+              React.createElement(
+                'h3',
+                { className: 'widget-ranking-heading-title' },
+                React.createElement('img', { src: '/assets/images/common/side-ranking-heading.png', alt: 'RANKING' })
+              ),
+              React.createElement(
+                'span',
+                { className: 'widget-ranking-heading-ruby' },
+                '人気の記事',
+                categoryTitle
+              )
+            ),
             list.map(function (article, i) {
 
               var dae = new _ArticleDae.ArticleDae(article);
-              var thumbnail = dae.media.images.thumbnail;
+              var thumbnail = dae.mediaType === 'image' ? dae.media.images.thumbnail : dae.media.video.thumbnail;
               thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
 
               // HeadlineDom instance を使い render
@@ -271,6 +308,7 @@ var ViewRanking = exports.ViewRanking = function (_View) {
                 date: dae.formatDate,
                 title: dae.title,
                 thumbnail: thumbnail,
+                caption: dae.media.images.caption,
                 total: dae.commentsCount
               });
             })

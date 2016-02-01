@@ -49,6 +49,7 @@ export class ActionAuth extends Action {
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
   start( method:string = this.method ):void {
+
     method = Safety.string( method, this.method );
     this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 

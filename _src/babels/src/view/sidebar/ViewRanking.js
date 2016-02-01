@@ -133,7 +133,7 @@ export class ViewRanking extends View {
   render( articles:Array ):void {
 
     let element = this.element;
-    let slug = this.slug;
+    let categorySlug = this.slug;
     let _this = this;
 
     // tag block
@@ -146,20 +146,25 @@ export class ViewRanking extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
+        caption: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
         total: React.PropTypes.number.isRequired
       },
       render: function() {
         let p = this.props;
+        let n = p.index + 1;
 
         return (
-          <a href={p.url} id={'headline-' + p.id} className={'ranking ranking-' + p.index + ' ranking-' + slug}>
-            <img src={p.thumbnail} alt={p.title}/>
-            <p className={'cat cat-' + p.slug}>{p.category}</p>
-            <h3 className='headline-title'>{p.title}</h3>
-            <p className="date">{p.date}</p>
-            <p className="total">{p.total}</p>
-          </a>
+          <div className={'widget-ranking-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
+            <a href={p.url} className={'post'}>
+              <figure className="post-thumb"><img src={p.thumbnail} alt={p.caption || p.title}/></figure>
+              <div className="post-data">
+                <p className={'post-category post-category-' + p.slug}>{p.category}</p>
+                <h4 className='post-heading'>{p.title}</h4>
+                <p className="post-date">{p.date}</p>
+              </div>
+            </a>
+          </div>
         );
       }
     } );
@@ -178,15 +183,33 @@ export class ViewRanking extends View {
       render: function() {
 
         let list = this.props.list;
+        let categoryTitle = '';
+
+        let categoryLabel;
+        // category api slug が `all` 以外の時に category.label をタイトルに含める
+        if ( categorySlug !== 'all' ) {
+          categoryLabel = list[ 0 ].category.label;
+
+          if ( categoryLabel !== '' ) {
+            // category.label が空でなかったら '/' と一緒に加える
+            categoryTitle = ' / ' + categoryLabel;
+          }
+        }
 
         return (
 
-          <div>
+          <div className="widget-ranking">
+            {/* title */}
+            <div className="widget-ranking-heading">
+              <h3 className="widget-ranking-heading-title"><img src="/assets/images/common/side-ranking-heading.png" alt="RANKING" /></h3>
+              <span className="widget-ranking-heading-ruby">人気の記事{categoryTitle}</span>
+            </div>
+
             {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-                let thumbnail = dae.media.images.thumbnail;
+                let thumbnail = dae.mediaType === 'image' ? dae.media.images.thumbnail : dae.media.video.thumbnail;
                 thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
 
                 // HeadlineDom instance を使い render
@@ -200,6 +223,7 @@ export class ViewRanking extends View {
                   date={dae.formatDate}
                   title={dae.title}
                   thumbnail={thumbnail}
+                  caption={dae.media.images.caption}
                   total={dae.commentsCount}
                 />;
 

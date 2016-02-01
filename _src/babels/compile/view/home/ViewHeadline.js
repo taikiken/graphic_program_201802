@@ -41,11 +41,15 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _Empty = require('../../app/const/Empty');
 
+var _User = require('../../app/User');
+
 var _View2 = require('../View');
 
 var _ViewError = require('../error/ViewError');
 
 var _Headline = require('../../action/home/Headline');
+
+var _HeadlineAuth = require('../../action/home/HeadlineAuth');
 
 var _Result = require('../../data/Result');
 
@@ -58,12 +62,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // React
 
 // dae
+var React = self.React;
+// data
 
 // action
 
 // view
-var React = self.React;
-// data
 
 var ReactDOM = self.ReactDOM;
 
@@ -124,7 +128,8 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
 
-    _this2._action = new _Headline.Headline(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+    var ActionClass = _User.User.sign ? _HeadlineAuth.HeadlineAuth : _Headline.Headline;
+    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
 
     return _this2;
   }
@@ -209,7 +214,7 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
       var element = this.element;
       var _this = this;
 
-      // tag block
+      // headline 1 記事
       var HeadlineDom = React.createClass({
         displayName: 'HeadlineDom',
 
@@ -221,29 +226,42 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
+          caption: React.PropTypes.string.isRequired,
           thumbnail: React.PropTypes.string.isRequired
         },
         render: function render() {
           var p = this.props;
 
           return React.createElement(
-            'a',
-            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
-            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+            'li',
+            { className: 'headline-item headline-item-' + p.index },
             React.createElement(
-              'p',
-              { className: 'cat cat-' + p.slug },
-              p.category
-            ),
-            React.createElement(
-              'h3',
-              { className: 'headline-title' },
-              p.title
-            ),
-            React.createElement(
-              'p',
-              { className: 'date' },
-              p.date
+              'a',
+              { className: 'post', href: p.url },
+              React.createElement(
+                'figure',
+                { className: 'post-thumb' },
+                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+              ),
+              React.createElement(
+                'div',
+                { className: 'post-data' },
+                React.createElement(
+                  'p',
+                  { className: 'post-category post-category-' + p.slug },
+                  p.category
+                ),
+                React.createElement(
+                  'h3',
+                  { className: 'post-heading' },
+                  p.title
+                ),
+                React.createElement(
+                  'p',
+                  { className: 'post-date' },
+                  p.date
+                )
+              )
             )
           );
         }
@@ -269,25 +287,45 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
           return React.createElement(
             'div',
             null,
-            list.map(function (article, i) {
+            React.createElement(
+              'div',
+              { className: 'headline-heading' },
+              React.createElement(
+                'h2',
+                { className: 'headline-heading-title' },
+                React.createElement('img', { src: '/assets/images/index/headline-heading.png', alt: 'HEADLINE NEWS' })
+              ),
+              React.createElement(
+                'span',
+                { className: 'headline-heading-ruby' },
+                '注目のニュース'
+              )
+            ),
+            React.createElement(
+              'ul',
+              { className: 'headline-list' },
+              list.map(function (article, i) {
 
-              var dae = new _ArticleDae.ArticleDae(article);
-              var thumbnail = dae.media.images.thumbnail;
-              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+                var dae = new _ArticleDae.ArticleDae(article);
+                var thumbnail = dae.media.images.thumbnail;
+                // thumbnail を check しなければ代替画像にする
+                thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
 
-              // HeadlineDom instance を使い render
-              return React.createElement(HeadlineDom, {
-                key: 'headline-' + dae.id,
-                index: i,
-                id: String(dae.id),
-                slug: dae.category.slug,
-                category: dae.category.label,
-                url: dae.url,
-                date: dae.formatDate,
-                title: dae.title,
-                thumbnail: thumbnail
-              });
-            })
+                // HeadlineDom instance を使い render
+                return React.createElement(HeadlineDom, {
+                  key: 'headline-' + dae.id,
+                  index: i,
+                  id: String(dae.id),
+                  slug: dae.category.slug,
+                  category: dae.category.label,
+                  url: dae.url,
+                  date: dae.formatDate,
+                  title: dae.title,
+                  caption: dae.media.images.caption,
+                  thumbnail: thumbnail
+                });
+              })
+            )
           );
         },
         componentDidMount: function componentDidMount() {

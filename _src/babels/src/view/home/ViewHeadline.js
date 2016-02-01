@@ -14,12 +14,14 @@
 // app
 // import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
+import {User} from '../../app/User';
 
 // view
 import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 // action
 import {Headline} from '../../action/home/Headline';
+import {HeadlineAuth} from '../../action/home/HeadlineAuth';
 // data
 import {Result} from '../../data/Result';
 // dae
@@ -81,7 +83,8 @@ export class ViewHeadline extends View {
     option = Safety.object( option );
 
     super( element, option );
-    this._action = new Headline( this.done.bind( this ), this.fail.bind( this ) );
+    let ActionClass = User.sign ? HeadlineAuth : Headline;
+    this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
 
   }
   /**
@@ -156,7 +159,7 @@ export class ViewHeadline extends View {
     let element = this.element;
     let _this = this;
 
-    // tag block
+    // headline 1 記事
     let HeadlineDom = React.createClass( {
       propTypes: {
         index: React.PropTypes.number.isRequired,
@@ -166,18 +169,23 @@ export class ViewHeadline extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
+        caption: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired
       },
       render: function() {
         let p = this.props;
 
         return (
-          <a href={p.url} id={'headline-' + p.id} className={'headline headline-' + p.index}>
-            <img src={p.thumbnail} alt={p.title}/>
-            <p className={'cat cat-' + p.slug}>{p.category}</p>
-            <h3 className='headline-title'>{p.title}</h3>
-            <p className="date">{p.date}</p>
-          </a>
+          <li className={'headline-item headline-item-' + p.index}>
+            <a className="post" href={p.url}>
+              <figure className="post-thumb"><img src={p.thumbnail} alt={p.caption || p.title}/></figure>
+              <div className="post-data">
+                <p className={'post-category post-category-' + p.slug}>{p.category}</p>
+                <h3 className='post-heading'>{p.title}</h3>
+                <p className="post-date">{p.date}</p>
+              </div>
+            </a>
+          </li>
         );
       }
     } );
@@ -200,28 +208,37 @@ export class ViewHeadline extends View {
         return (
 
           <div>
-            {
-              list.map( function( article, i ) {
+            <div className="headline-heading">
+              <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
+              <span className="headline-heading-ruby">注目のニュース</span>
+            </div>
 
-                let dae = new ArticleDae( article );
-                let thumbnail = dae.media.images.thumbnail;
-                thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
+            <ul className="headline-list">
+              {
+                list.map( function( article, i ) {
 
-                // HeadlineDom instance を使い render
-                return <HeadlineDom
-                  key={'headline-' + dae.id}
-                  index={i}
-                  id={String( dae.id )}
-                  slug={dae.category.slug}
-                  category={dae.category.label}
-                  url={dae.url}
-                  date={dae.formatDate}
-                  title={dae.title}
-                  thumbnail={thumbnail}
-                />;
+                  let dae = new ArticleDae( article );
+                  let thumbnail = dae.media.images.thumbnail;
+                  // thumbnail を check しなければ代替画像にする
+                  thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
 
-              } )
-            }
+                  // HeadlineDom instance を使い render
+                  return <HeadlineDom
+                    key={'headline-' + dae.id}
+                    index={i}
+                    id={String( dae.id )}
+                    slug={dae.category.slug}
+                    category={dae.category.label}
+                    url={dae.url}
+                    date={dae.formatDate}
+                    title={dae.title}
+                    caption={dae.media.images.caption}
+                    thumbnail={thumbnail}
+                  />;
+
+                } )
+              }
+            </ul>
           </div>
 
         );

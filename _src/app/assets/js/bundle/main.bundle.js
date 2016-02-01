@@ -165,7 +165,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-01-31 19:47:23
+	 * @date 2016-02-01 16:28:51
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -12316,11 +12316,15 @@
 
 	var _Empty = __webpack_require__(119);
 
+	var _User = __webpack_require__(62);
+
 	var _View2 = __webpack_require__(116);
 
 	var _ViewError = __webpack_require__(120);
 
 	var _Headline = __webpack_require__(101);
+
+	var _HeadlineAuth = __webpack_require__(106);
 
 	var _Result = __webpack_require__(68);
 
@@ -12333,12 +12337,12 @@
 	// React
 
 	// dae
+	var React = self.React;
+	// data
 
 	// action
 
 	// view
-	var React = self.React;
-	// data
 
 	var ReactDOM = self.ReactDOM;
 
@@ -12399,7 +12403,8 @@
 
 	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeadline).call(this, element, option));
 
-	    _this2._action = new _Headline.Headline(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    var ActionClass = _User.User.sign ? _HeadlineAuth.HeadlineAuth : _Headline.Headline;
+	    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
 
 	    return _this2;
 	  }
@@ -12484,7 +12489,7 @@
 	      var element = this.element;
 	      var _this = this;
 
-	      // tag block
+	      // headline 1 記事
 	      var HeadlineDom = React.createClass({
 	        displayName: 'HeadlineDom',
 
@@ -12496,29 +12501,42 @@
 	          url: React.PropTypes.string.isRequired,
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
+	          caption: React.PropTypes.string.isRequired,
 	          thumbnail: React.PropTypes.string.isRequired
 	        },
 	        render: function render() {
 	          var p = this.props;
 
 	          return React.createElement(
-	            'a',
-	            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
-	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            'li',
+	            { className: 'headline-item headline-item-' + p.index },
 	            React.createElement(
-	              'p',
-	              { className: 'cat cat-' + p.slug },
-	              p.category
-	            ),
-	            React.createElement(
-	              'h3',
-	              { className: 'headline-title' },
-	              p.title
-	            ),
-	            React.createElement(
-	              'p',
-	              { className: 'date' },
-	              p.date
+	              'a',
+	              { className: 'post', href: p.url },
+	              React.createElement(
+	                'figure',
+	                { className: 'post-thumb' },
+	                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	              ),
+	              React.createElement(
+	                'div',
+	                { className: 'post-data' },
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-category post-category-' + p.slug },
+	                  p.category
+	                ),
+	                React.createElement(
+	                  'h3',
+	                  { className: 'post-heading' },
+	                  p.title
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-date' },
+	                  p.date
+	                )
+	              )
 	            )
 	          );
 	        }
@@ -12544,25 +12562,45 @@
 	          return React.createElement(
 	            'div',
 	            null,
-	            list.map(function (article, i) {
+	            React.createElement(
+	              'div',
+	              { className: 'headline-heading' },
+	              React.createElement(
+	                'h2',
+	                { className: 'headline-heading-title' },
+	                React.createElement('img', { src: '/assets/images/index/headline-heading.png', alt: 'HEADLINE NEWS' })
+	              ),
+	              React.createElement(
+	                'span',
+	                { className: 'headline-heading-ruby' },
+	                '注目のニュース'
+	              )
+	            ),
+	            React.createElement(
+	              'ul',
+	              { className: 'headline-list' },
+	              list.map(function (article, i) {
 
-	              var dae = new _ArticleDae.ArticleDae(article);
-	              var thumbnail = dae.media.images.thumbnail;
-	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+	                var dae = new _ArticleDae.ArticleDae(article);
+	                var thumbnail = dae.media.images.thumbnail;
+	                // thumbnail を check しなければ代替画像にする
+	                thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
 
-	              // HeadlineDom instance を使い render
-	              return React.createElement(HeadlineDom, {
-	                key: 'headline-' + dae.id,
-	                index: i,
-	                id: String(dae.id),
-	                slug: dae.category.slug,
-	                category: dae.category.label,
-	                url: dae.url,
-	                date: dae.formatDate,
-	                title: dae.title,
-	                thumbnail: thumbnail
-	              });
-	            })
+	                // HeadlineDom instance を使い render
+	                return React.createElement(HeadlineDom, {
+	                  key: 'headline-' + dae.id,
+	                  index: i,
+	                  id: String(dae.id),
+	                  slug: dae.category.slug,
+	                  category: dae.category.label,
+	                  url: dae.url,
+	                  date: dae.formatDate,
+	                  title: dae.title,
+	                  caption: dae.media.images.caption,
+	                  thumbnail: thumbnail
+	                });
+	              })
+	            )
 	          );
 	        },
 	        componentDidMount: function componentDidMount() {
@@ -12627,11 +12665,15 @@
 
 	var _Empty = __webpack_require__(119);
 
+	var _User = __webpack_require__(62);
+
 	var _View2 = __webpack_require__(116);
 
 	var _ViewError = __webpack_require__(120);
 
 	var _Pickup = __webpack_require__(100);
+
+	var _PickupAuth = __webpack_require__(103);
 
 	var _Result = __webpack_require__(68);
 
@@ -12645,12 +12687,12 @@
 	// React
 
 	// dae
+	var React = self.React;
+	// data
 
 	// action
 
 	// view
-	var React = self.React;
-	// data
 
 	var ReactDOM = self.ReactDOM;
 
@@ -12683,7 +12725,8 @@
 
 	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewPickup).call(this, element, option));
 
-	    _this2._action = new _Pickup.Pickup(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    var ActionClass = _User.User.sign ? _PickupAuth.PickupAuth : _Pickup.Pickup;
+	    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
 	    _this2._index = 0;
 	    _this2._last = 0;
 	    _this2._waiting = 1000 * 5;
@@ -13337,7 +13380,7 @@
 	    value: function render(articles) {
 
 	      var element = this.element;
-	      var slug = this.slug;
+	      var categorySlug = this.slug;
 	      var _this = this;
 
 	      // tag block
@@ -13352,35 +13395,44 @@
 	          url: React.PropTypes.string.isRequired,
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
+	          caption: React.PropTypes.string.isRequired,
 	          thumbnail: React.PropTypes.string.isRequired,
 	          total: React.PropTypes.number.isRequired
 	        },
 	        render: function render() {
 	          var p = this.props;
+	          var n = p.index + 1;
 
 	          return React.createElement(
-	            'a',
-	            { href: p.url, id: 'headline-' + p.id, className: 'ranking ranking-' + p.index + ' ranking-' + slug },
-	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            'div',
+	            { className: 'widget-ranking-item rank' + n + ' ranking-' + (p.slug || categorySlug) },
 	            React.createElement(
-	              'p',
-	              { className: 'cat cat-' + p.slug },
-	              p.category
-	            ),
-	            React.createElement(
-	              'h3',
-	              { className: 'headline-title' },
-	              p.title
-	            ),
-	            React.createElement(
-	              'p',
-	              { className: 'date' },
-	              p.date
-	            ),
-	            React.createElement(
-	              'p',
-	              { className: 'total' },
-	              p.total
+	              'a',
+	              { href: p.url, className: 'post' },
+	              React.createElement(
+	                'figure',
+	                { className: 'post-thumb' },
+	                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	              ),
+	              React.createElement(
+	                'div',
+	                { className: 'post-data' },
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-category post-category-' + p.slug },
+	                  p.category
+	                ),
+	                React.createElement(
+	                  'h4',
+	                  { className: 'post-heading' },
+	                  p.title
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-date' },
+	                  p.date
+	                )
+	              )
 	            )
 	          );
 	        }
@@ -13393,6 +13445,7 @@
 	        propTypes: {
 	          list: React.PropTypes.array.isRequired
 	        },
+
 	        // isRequired なので getDefaultProps がいらない
 	        // getDefaultProps: function() {
 	        //  return {
@@ -13402,14 +13455,41 @@
 	        render: function render() {
 
 	          var list = this.props.list;
+	          var categoryTitle = '';
+
+	          var categoryLabel = undefined;
+	          // category api slug が `all` 以外の時に category.label をタイトルに含める
+	          if (categorySlug !== 'all') {
+	            categoryLabel = list[0].category.label;
+
+	            if (categoryLabel !== '') {
+	              // category.label が空でなかったら '/' と一緒に加える
+	              categoryTitle = ' / ' + categoryLabel;
+	            }
+	          }
 
 	          return React.createElement(
 	            'div',
-	            null,
+	            { className: 'widget-ranking' },
+	            React.createElement(
+	              'div',
+	              { className: 'widget-ranking-heading' },
+	              React.createElement(
+	                'h3',
+	                { className: 'widget-ranking-heading-title' },
+	                React.createElement('img', { src: '/assets/images/common/side-ranking-heading.png', alt: 'RANKING' })
+	              ),
+	              React.createElement(
+	                'span',
+	                { className: 'widget-ranking-heading-ruby' },
+	                '人気の記事',
+	                categoryTitle
+	              )
+	            ),
 	            list.map(function (article, i) {
 
 	              var dae = new _ArticleDae.ArticleDae(article);
-	              var thumbnail = dae.media.images.thumbnail;
+	              var thumbnail = dae.mediaType === 'image' ? dae.media.images.thumbnail : dae.media.video.thumbnail;
 	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
 
 	              // HeadlineDom instance を使い render
@@ -13423,6 +13503,7 @@
 	                date: dae.formatDate,
 	                title: dae.title,
 	                thumbnail: thumbnail,
+	                caption: dae.media.images.caption,
 	                total: dae.commentsCount
 	              });
 	            })
@@ -13639,7 +13720,7 @@
 	    value: function render(articles) {
 
 	      var element = this.element;
-	      var slug = this.slug;
+	      var categorySlug = this.slug;
 	      var _this = this;
 
 	      // tag block
@@ -13654,29 +13735,43 @@
 	          url: React.PropTypes.string.isRequired,
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
+	          caption: React.PropTypes.string.isRequired,
 	          thumbnail: React.PropTypes.string.isRequired
 	        },
 	        render: function render() {
 	          var p = this.props;
 
 	          return React.createElement(
-	            'a',
-	            { href: p.url, id: 'headline-' + p.id, className: 'videos videos-' + p.index + ' videos-' + slug },
-	            React.createElement('img', { src: p.thumbnail, alt: p.title }),
+	            'div',
+	            { className: 'widget-recommend-item videos-' + p.index + ' videos-' + (p.slug || categorySlug) },
 	            React.createElement(
-	              'p',
-	              { className: 'cat cat-' + p.slug },
-	              p.category
-	            ),
-	            React.createElement(
-	              'h3',
-	              { className: 'headline-title' },
-	              p.title
-	            ),
-	            React.createElement(
-	              'p',
-	              { className: 'date' },
-	              p.date
+	              'a',
+	              { href: p.url, className: 'post' },
+	              React.createElement(
+	                'figure',
+	                { className: 'post-thumb' },
+	                React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
+	                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	              ),
+	              React.createElement(
+	                'div',
+	                { className: 'post-data' },
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-category post-category-' + p.slug },
+	                  p.category
+	                ),
+	                React.createElement(
+	                  'h4',
+	                  { className: 'post-heading' },
+	                  p.title
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-date' },
+	                  p.date
+	                )
+	              )
 	            )
 	          );
 	        }
@@ -13689,6 +13784,7 @@
 	        propTypes: {
 	          list: React.PropTypes.array.isRequired
 	        },
+
 	        // isRequired なので getDefaultProps がいらない
 	        // getDefaultProps: function() {
 	        //  return {
@@ -13698,15 +13794,42 @@
 	        render: function render() {
 
 	          var list = this.props.list;
+	          var categoryTitle = '';
+
+	          var categoryLabel = undefined;
+	          // category api slug が `all` 以外の時に category.label をタイトルに含める
+	          if (categorySlug !== 'all') {
+	            categoryLabel = list[0].category.label;
+
+	            if (categoryLabel !== '') {
+	              // category.label が空でなかったら '/' と一緒に加える
+	              categoryTitle = ' / ' + categoryLabel;
+	            }
+	          }
 
 	          return React.createElement(
 	            'div',
-	            null,
+	            { className: 'widget-recommend' },
+	            React.createElement(
+	              'div',
+	              { className: 'widget-recommend-heading' },
+	              React.createElement(
+	                'h3',
+	                { className: 'widget-recommend-heading-title' },
+	                React.createElement('img', { src: '/assets/images/common/side-recommend-heading.png', alt: 'RECOMMEND' })
+	              ),
+	              React.createElement(
+	                'span',
+	                { className: 'widget-recommend-heading-ruby' },
+	                'オススメ動画',
+	                categoryTitle
+	              )
+	            ),
 	            list.map(function (article, i) {
 
 	              var dae = new _ArticleDae.ArticleDae(article);
-	              var thumbnail = dae.media.images.thumbnail;
-	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+	              var thumbnail = dae.media.video.thumbnail;
+	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.VIDEO_THUMBNAIL;
 
 	              // HeadlineDom instance を使い render
 	              return React.createElement(VideosDom, {
@@ -13718,6 +13841,7 @@
 	                url: dae.url,
 	                date: dae.formatDate,
 	                title: dae.title,
+	                caption: dae.media.video.caption,
 	                thumbnail: thumbnail
 	              });
 	            })
