@@ -1,3 +1,7 @@
 # ignore eslint
-# raw js ignore
-./_src/app/**/js/*.js
+# libs files ignore
+./_src/app/assets/js/libs/**/*.js
+# *.babel.js ignore
+./_src/app/assets/_babel/**/*.babel.js
+# *.bundle.js ignore
+./_src/app/assets/js/**/*.bundle.js

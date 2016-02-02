@@ -20,6 +20,10 @@ var _isInteger = require('babel-runtime/core-js/number/is-integer');
 
 var _isInteger2 = _interopRequireDefault(_isInteger);
 
+var _create = require('babel-runtime/core-js/object/create');
+
+var _create2 = _interopRequireDefault(_create);
+
 var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
@@ -95,7 +99,7 @@ var Safety = exports.Safety = function () {
       var value = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
       if (!Array.isArray(value)) {
-        return [];
+        return [].slice(0);
       }
 
       return value;
@@ -112,7 +116,7 @@ var Safety = exports.Safety = function () {
       var value = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
       if (value === null) {
-        value = {};
+        value = (0, _create2.default)({});
       }
 
       return value;

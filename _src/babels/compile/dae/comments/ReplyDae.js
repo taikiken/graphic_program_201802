@@ -16,10 +16,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ReplyDae = undefined;
 
-var _isNan = require('babel-runtime/core-js/number/is-nan');
-
-var _isNan2 = _interopRequireDefault(_isNan);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -51,9 +47,10 @@ var ReplyDae = exports.ReplyDae = function () {
     reply = _Safety.Safety.object(reply);
 
     var total = parseInt(reply.count, 10);
-    if ((0, _isNan2.default)(total)) {
-      total = 0;
-    }
+    //if ( !Number.isInteger( total ) ) {
+    //  total = 0;
+    //}
+    total = _Safety.Safety.integer(total, 0);
     this._total = total;
     this._comments = new _CommentsPopularDae.CommentsPopularDae(reply.comments);
   }

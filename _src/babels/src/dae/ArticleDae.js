@@ -53,6 +53,11 @@ export class ArticleDae {
 
     }
     */
+    let commentsCount = parseInt( article.comments_count, 10 );
+    commentsCount = Safety.integer( commentsCount, 10 );
+
+    this._commentsCount = commentsCount;
+
     // date check
     if ( Safety.check( article, 'date' ) ) {
 
@@ -94,11 +99,23 @@ export class ArticleDae {
     return this._category;
   }
   /**
+   * alias commentsTotal
    * @return {Number} article.comments_count
    */
   get commentsCount():Number {
+    /*
     console.log( 'article.comments_count', this._article.comments_count );
     return parseInt( this.article.comments_count, 10);
+    */
+    return this.commentsTotal;
+  }
+
+  /**
+   * コメント総数を調べます
+   * @return {Number|*} コメント総数を返します, article.comments_count
+   */
+  get commentsTotal():Number {
+    return this._commentsCount;
   }
   /**
    * @return {CommentsPopularDae|*} article.comments_popular

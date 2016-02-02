@@ -44,7 +44,7 @@ export class CommentsDae {
         reply: new ReplyDae( comment.reply )
       };
 
-      list.push(dae.id);
+      list.push( dae.id );
     }
 
     this._bank = bank;
@@ -74,6 +74,6 @@ export class CommentsDae {
    * @return {Array|*} comment id を保持した配列を返します
    */
   get list():Array {
-    return this._list;
+    return this._list.slice( 0 );
   }
 }

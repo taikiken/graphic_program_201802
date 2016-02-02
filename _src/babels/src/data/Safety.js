@@ -61,7 +61,7 @@ export class Safety {
    */
   static array( value:Array = [] ):Array {
     if ( !Array.isArray( value ) ) {
-      return [];
+      return [].slice(0);
     }
 
     return value;
@@ -73,7 +73,7 @@ export class Safety {
    */
   static object( value:Object = {} ):Object {
     if ( value === null ) {
-      value = {};
+      value = Object.create( {} );
     }
 
     return value;

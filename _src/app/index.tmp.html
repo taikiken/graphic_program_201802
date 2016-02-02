@@ -210,7 +210,7 @@
     // ---------------------------------------------------------
     // news
     var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-    var archive = new UT.view.ViewArchive( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
+    var archive = new UT.view.ViewArchiveMasonry( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
     archive.start();
 
     // ---------------------------------------------------------

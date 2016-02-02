@@ -25,20 +25,45 @@ export class CommentsPopularDae {
   constructor( comments:Array = [] ) {
 
     comments = Safety.array( comments );
+    this._comments = comments;
 
-    this._comments = [];
-    for ( var comment of comments ) {
-      this._comments.push( new PopularDae( comment ) );
+    //let popularComments = [];
+    //for ( var comment of comments ) {
+    //  popularComments.push( new PopularDae( comment ) );
+    //}
+    //
+    //this._popularComments = popularComments;
+
+    this._popularComments = null;
+    this.init();
+  }
+  // ---------------------------------------------------
+  //  Method
+  // ---------------------------------------------------
+  init() {
+    if ( this._popularComments === null ) {
+      let popularComments = [];
+      for ( var comment of this._comments ) {
+        popularComments.push( new PopularDae( comment ) );
+      }
+
+      this._popularComments = popularComments;
     }
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * @return {Array|*} article.comments_popular オリジナルを返します
+   */
+  get original():Array {
+    return this._comments;
+  }
+  /**
    * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
    */
   get comments():Array<PopularDae> {
-    return this._comments;
+    return this._popularComments.slice( 0 );
   }
   /**
    * this.total alias
@@ -73,6 +98,7 @@ export class CommentsPopularDae {
    * @return {CommentsDae} 1件目のCommentsDaeを返します
    */
   get first():PopularDae {
+    this.init();
     return this.comments[ 0 ];
   }
   /**

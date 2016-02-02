@@ -81,6 +81,8 @@ gulp.task 'vendor:react:build', ->
     exports + '/fetch/fetch.js'
     exportsPath + '/react/react.min.js'
     exportsPath + '/react/react-dom.min.js'
+    exportsPath + '/isotope/isotope.pkgd.min.js'
+    exportsPath + '/imagesloaded/imagesloaded.pkgd.min.js'
   ]
   .pipe $.concat 'vendor.react.js'
   .pipe $.uglify preserveComments: 'license'
@@ -97,6 +99,8 @@ gulp.task 'vendor:react:dev', ->
     exports + '/fetch/fetch.js'
     exportsPath + '/react/react.js'
     exportsPath + '/react/react-dom.js'
+    exportsPath + '/isotope/isotope.pkgd.js'
+    exportsPath + '/imagesloaded/imagesloaded.pkgd.js'
   ]
   .pipe $.concat 'vendor.react.js'
   .pipe gulp.dest dir.libs
@@ -114,7 +118,7 @@ libraries.push exportsPath + '/sagen/**/sagen.min.js'
 libraries.push exportsPath + '/html5shiv/**/*'
 libraries.push exportsPath + '/fancybox/**/*'
 libraries.push exportsPath + '/bxslider4/**/*'
-libraries.push exportsPath + '/isotope/**/*'
+#libraries.push exportsPath + '/isotope/**/*'
 #libraries.push exportsPath + '/react/**/*'
 
 gulp.task 'vendor:copy', ->

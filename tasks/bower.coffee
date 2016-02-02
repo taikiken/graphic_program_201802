@@ -296,6 +296,15 @@ gulp.task 'bower:isotope', ->
   .pipe gulp.dest exports + '/isotope'
   .pipe $.size title: '*** bower:isotope ***'
 
+# imagesloaded
+gulp.task 'bower:imagesloaded', ->
+  return gulp
+  .src [
+    components + '/imagesloaded/*.pkgd*.js'
+  ]
+  .pipe gulp.dest exports + '/imagesloaded'
+  .pipe $.size title: '*** bower:imagesloaded ***'
+
 # bower
 gulp.task 'bower:exports', (cb) ->
   runSequence(
@@ -320,6 +329,7 @@ gulp.task 'bower:exports', (cb) ->
       'bower:fetch'
       'bower:promise'
       'bower:isotope'
+      'bower:imagesloaded'
     ]
     cb
   )

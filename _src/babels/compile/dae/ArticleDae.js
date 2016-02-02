@@ -75,6 +75,11 @@ var ArticleDae = exports.ArticleDae = function () {
        article.comments_count = 0;
      }
     */
+    var commentsCount = parseInt(article.comments_count, 10);
+    commentsCount = _Safety.Safety.integer(commentsCount, 10);
+
+    this._commentsCount = commentsCount;
+
     // date check
     if (_Safety.Safety.check(article, 'date')) {
 
@@ -124,14 +129,29 @@ var ArticleDae = exports.ArticleDae = function () {
       return this._category;
     }
     /**
+     * alias commentsTotal
      * @return {Number} article.comments_count
      */
 
   }, {
     key: 'commentsCount',
     get: function get() {
-      console.log('article.comments_count', this._article.comments_count);
-      return parseInt(this.article.comments_count, 10);
+      /*
+      console.log( 'article.comments_count', this._article.comments_count );
+      return parseInt( this.article.comments_count, 10);
+      */
+      return this.commentsTotal;
+    }
+
+    /**
+     * コメント総数を調べます
+     * @return {Number|*} コメント総数を返します, article.comments_count
+     */
+
+  }, {
+    key: 'commentsTotal',
+    get: function get() {
+      return this._commentsCount;
     }
     /**
      * @return {CommentsPopularDae|*} article.comments_popular

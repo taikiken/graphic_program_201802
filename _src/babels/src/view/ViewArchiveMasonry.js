@@ -31,10 +31,15 @@ import {Safety} from '../data/Safety';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
-let $ = window.jQuery;
+// imagesLoaded, isotope
+let imagesLoaded = self.imagesLoaded;
+let Isotope = self.Isotope;
 
-export class ViewMasonry extends View {
-  constructor( element:Element, moreElement:Element, ActionClass, option:Object = {} ) {
+/**
+ *
+ */
+export class ViewArchiveMasonry extends View {
+  constructor( element:Element, moreElement:Element, ActionClass, option:Object = {}, useMasonry:boolean = true ) {
 
     option = Safety.object( option );
 
@@ -47,6 +52,10 @@ export class ViewMasonry extends View {
      * @private
      */
     this._articles = [];
+
+    this._useMasonry = !!useMasonry;
+
+    this._top = 0;
 
   }
   // ---------------------------------------------------
@@ -133,10 +142,12 @@ export class ViewMasonry extends View {
   render( articles:Array ):void {
 
     // ---
-    // 左右に分割表示のためのglobal配列
-    let evens = this._evens;
-    let odds = this._odds;
+    // Masonry flag
+    let useMasonry = this._useMasonry;
+
+    // 既存データ用のglobal配列
     let articlesList = this._articles;
+
     // 前回までの配列length
     // sequence な index のために必要
     let prevLast = this._articles.length;
@@ -148,7 +159,9 @@ export class ViewMasonry extends View {
     let moreElement = this.moreElement;
     // offset, length を使用する Action
     let action = this.action;
+    // 参照を保持
     let _this = this;
+
 
     // --------------------------------------------
     // More button
@@ -172,6 +185,7 @@ export class ViewMasonry extends View {
         // disable
         this.setState( { disable: true } );
         action.next();
+        _this._top = (typeof window.pageYOffset !== 'undefined') ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
       },
       render: function() {
 
@@ -187,6 +201,7 @@ export class ViewMasonry extends View {
 
         } else {
 
+          // button 表示なし
           return (
             <div className="no-more"></div>
           );
@@ -431,7 +446,8 @@ export class ViewMasonry extends View {
                     </div>
                   </a>
                 </figure>
-                <div className="comment-content">{first.body}</div>
+                {/* insert html tag into .comment-content innerHTML */}
+                <div className="comment-content" dangerouslySetInnerHTML={{__html: first.body}} />
                 <div className="comment-response">
                   <GoodLink
                     sign={sign}
@@ -462,104 +478,11 @@ export class ViewMasonry extends View {
       }
     } );
 
-    // --------------------------------------------
-    // Main Dom
-    // --------------------------------------------
-    // 個別の 記事Dom
-    let ArchiveDom = React.createClass( {
-      propTypes: {
-        index: React.PropTypes.number.isRequired,
-        id: React.PropTypes.string.isRequired,
-        slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        url: React.PropTypes.string.isRequired,
-        date: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string.isRequired,
-        caption: React.PropTypes.string.isRequired,
-        description: React.PropTypes.string.isRequired,
-        thumbnail: React.PropTypes.string.isRequired,
-        mediaType: React.PropTypes.string.isRequired,
-        commentsPopular: React.PropTypes.object.isRequired,
-        commentsCount: React.PropTypes.number.isRequired
-      },
-      render: function() {
-        let p = this.props;
-        let commentsPopular = p.commentsPopular;
-        let figureTag;
-        let commentsTotal = p.commentsCount;
-
-        if ( p.mediaType === 'image' ) {
-          // type: image
-          figureTag = <figure className={'post-thumb post-thumb-' + p.mediaType}>
-            <img src={p.thumbnail} alt={p.caption || p.title}/>
-          </figure>;
-
-        } else {
-          // type: video
-          figureTag = <figure className={'post-thumb post-thumb-' + p.mediaType}>
-            <img className="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" />
-            <img src={p.thumbnail} alt={p.caption || p.title}/>
-          </figure>;
-        }
-
-        return (
-          <div className={'board-item board-item-' + p.index}>
-            <a className="post" href={p.url}>
-              {figureTag}
-              <div className="post-data">
-                <p className={'post-category post-category-' + p.slug}>{p.category}</p>
-                <h3 className='post-heading'>{p.title}</h3>
-                <p className="post-date">{p.date}</p>
-                <div className="post-excerpt-text">{p.description}</div>
-              </div>
-            </a>
-
-            <PopularDom commentsPopular={commentsPopular} total={commentsTotal} articleId={p.id} />
-          </div>
-        );
-      }
-    } );
-
-    // ArticleDom 呼び出し用関数
-    // list.forEach での ReactDOM.render 実行記述を簡略化するため
-    let makeDom = ( dae ) => {
-
-      let thumbnail;
-      let caption;
-      if ( dae.mediaType === 'image' ) {
-        thumbnail = dae.media.images.medium;
-        caption = dae.media.images.caption;
-      } else {
-        thumbnail = dae.media.video.thumbnail;
-        caption = dae.media.video.caption;
-      }
-
-      thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
-      console.log( 'dae ', dae.id, dae );
-      // unique key(React)にarticle id(number)記事Idを使用します
-      return <ArchiveDom
-        key={'archive-' + dae.id}
-        index={dae.index}
-        id={String( dae.id )}
-        slug={dae.category.slug}
-        category={dae.category.label}
-        url={dae.url}
-        date={dae.formatDate}
-        title={dae.title}
-        caption={caption}
-        thumbnail={thumbnail}
-        mediaType={dae.mediaType}
-        description={dae.description}
-        commentsPopular={dae.commentsPopular}
-        commentsCount={dae.commentsCount}
-      />;
-
-    };
-
     // ------------------------------------------------
     // 基点 React class
     // ------------------------------------------------
 
+    // 個別の 記事Dom
     // React Class, Archive Dom
     let ArticleDom = React.createClass( {
       propTypes: {
@@ -567,29 +490,22 @@ export class ViewMasonry extends View {
       },
       getInitialState: function() {
         return {
-          $isotope: null
+          isotope: null,
+          img: null,
+          route: null,
+          nodes: null,
+          arranged: 'prepare'
         };
       },
       render: function() {
 
         let list = this.props.list;
 
-        //// even / odd setup
-        //// even(left) / odd(right) へ振り分けるための配列作成
-        list.forEach( function( article, i ) {
-
-          let dae = new ArticleDae( article );
-
-          dae.index = prevLast + i;
-          articlesList.push( dae );
-
-        } );
-
-        // dom, 左右に振り分けて出力する
+        // dom出力する
         return (
-          <div id="board-container-rout">
+          <div className={this.state.arranged} ref="boardRout">
             {
-              articlesList.map( function( dae, i ) {
+              list.map( function( dae, i ) {
 
                 //let dae = new ArticleDae( article );
                 //articlesList.push( dae );
@@ -606,25 +522,42 @@ export class ViewMasonry extends View {
 
                 thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
 
-                // unique key(React)にarticle id(number)記事Idを使用します
-                return <ArchiveDom
-                  key={'archive-' + dae.id}
-                  index={i}
-                  id={String( dae.id )}
-                  slug={dae.category.slug}
-                  category={dae.category.label}
-                  url={dae.url}
-                  date={dae.formatDate}
-                  title={dae.title}
-                  caption={caption}
-                  thumbnail={thumbnail}
-                  mediaType={dae.mediaType}
-                  description={dae.description}
-                  commentsPopular={dae.commentsPopular}
-                  commentsCount={dae.commentsCount}
-                  ref={'boardItem-' + i}
-                />;
+                let commentsPopular = dae.commentsPopular;
+                let figureTag;
+                let commentsTotal = dae.commentsCount;
 
+                console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
+
+                if ( dae.mediaType === 'image' ) {
+                  // type: image
+                  figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+                    <img src={thumbnail} alt={caption || dae.title}/>
+                  </figure>;
+
+                } else {
+                  // type: video
+                  figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+                    <img className="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" />
+                    <img src={thumbnail} alt={caption || dae.title}/>
+                  </figure>;
+                }
+
+                // unique key(React)にarticle id(number)記事Idを使用します
+                return (
+                  <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
+                    <a className="post" href={dae.url}>
+                      {figureTag}
+                      <div className="post-data">
+                        <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
+                        <h3 className='post-heading'>{dae.title}</h3>
+                        <p className="post-date">{dae.formatDate}</p>
+                        <div className="post-excerpt-text">{dae.description}</div>
+                      </div>
+                    </a>
+
+                    <PopularDom commentsPopular={commentsPopular} total={commentsTotal} articleId={dae.id} />
+                  </div>
+                );
               } )
             }
           </div>
@@ -637,35 +570,86 @@ export class ViewMasonry extends View {
         // hasNext を元に More View button の表示非表示を決める
         moreButton( action.hasNext() );
 
-        // isotope
-        let $isotope = $( '#board-container-rout' )
-          .isotope( {
-            itemSlector: '.board-item',
-            masonry: {
-              gutter: 10
-            }
-          } );
-        //.imagesLoaded( function() {
-        //  $isotope.isotope( {
-        //    masonry: {
-        //      gutter: 10
-        //    }
-        //  } );
-        //} );
-        this.state.$isotope = $isotope;
-        console.log( '$isotope', $isotope );
-        //console.log( 'componentDidMount ReactDOM.findDOMNode(this.refs.boardItem) ', this.props.children );
+        // masonry flag が true の時に shouldMasonry を実行します
+        if ( useMasonry ) {
+
+          this.shouldMasonry();
+
+        }
+
+      },
+      shouldComponentUpdate: function() {
+        console.log( '------------+++++++++++++ shouldComponentUpdate ------------' );
+        // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
+        // isotope がセットアップすると呼び出されるので
+        // 常にfalseを返し無視させます
+        return false;
+      },
+      componentWillUnmount: function() {
+        console.log( '************ componentWillUnmount ************' );
+        // unmount 時に isotope を破棄します
+        this.state.isotope.destroy();
+      },
+      shouldMasonry: function() {
+        // isotope を実行します
+        let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+        let childNodes = boardRout.childNodes;
+        console.log( 'shouldMasonry', boardRout, childNodes );
+
+        // imagesLoaded を使用し画像ロード完了後に isotope を実行します
+        let img = imagesLoaded( childNodes );
+
+        // img {imagesLoaded} always event handler unbind するためにインスタンスを state に保存します
+        // route {Element} isotope 基準 element
+        // nodes {ElementList} isotope 対象 childNodes, 現在は使用していません, ひょっとすると将来使うかも...
+        this.setState( { img: img, nodes: childNodes, route: boardRout } );
+
+        // 画像読み込む完了 event へ bind します
+        img.on( 'always', this.onImages );
+
+      },
+      // 画像読み込む完了 event handler
+      onImages: function() {
+
+        let img = this.state.img;
+        let route = this.state.route;
+
+        // event から event handler を unbind します
+        img.off( 'always', this.onImages );
+
+        // isotope を行います
+        let isotope = new Isotope( route, {
+          itemSelector: '.board-item',
+          masonry: {
+            gutter: 30
+          }
+        } );
+
+        // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
+        this.setState( { isotope: isotope, arranged: 'arranged' } );
+        console.log( '%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top );
+        // render 時に 0 位置に戻るので
+        // click 時の pageOffsetY へ移動させる
+        window.scrollTo( 0, _this._top );
+
       }
     } );// ArticleDom
 
+    // ------------------------------------------------
+    articles.forEach( function( article, i ) {
+
+      let dae = new ArticleDae( article );
+
+      dae.index = prevLast + i;
+      articlesList.push( dae );
+
+    } );
+
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: articles } ),
+      React.createElement( ArticleDom, { list: articlesList } ),
       element
     );
-
-    // save
-    // this._articles = concatArticles.splice( 0 );
 
   }
 }

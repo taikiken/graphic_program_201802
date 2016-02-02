@@ -48,41 +48,41 @@
 
 	var _Loc = __webpack_require__(1);
 
-	var _Format = __webpack_require__(58);
+	var _Format = __webpack_require__(60);
 
-	var _Router = __webpack_require__(59);
+	var _Router = __webpack_require__(61);
 
-	var _Env = __webpack_require__(60);
+	var _Env = __webpack_require__(62);
 
-	var _Codes = __webpack_require__(61);
+	var _Codes = __webpack_require__(63);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
-	var _CommentsType = __webpack_require__(65);
+	var _CommentsType = __webpack_require__(67);
 
-	var _Data = __webpack_require__(66);
+	var _Data = __webpack_require__(68);
 
-	var _Form = __webpack_require__(67);
+	var _Form = __webpack_require__(69);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
-	var _Ajax = __webpack_require__(69);
+	var _Ajax = __webpack_require__(71);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _Types = __webpack_require__(71);
+	var _Types = __webpack_require__(73);
 
-	var _Permalink = __webpack_require__(73);
+	var _Permalink = __webpack_require__(75);
 
-	var _Query = __webpack_require__(75);
+	var _Query = __webpack_require__(77);
 
-	var _Queries = __webpack_require__(78);
+	var _Queries = __webpack_require__(80);
 
-	var _Type = __webpack_require__(72);
+	var _Type = __webpack_require__(74);
 
-	var _CommentType = __webpack_require__(79);
+	var _CommentType = __webpack_require__(81);
 
 	var _App = __webpack_require__(93);
 
@@ -120,21 +120,21 @@
 
 	var _ViewArchive = __webpack_require__(118);
 
-	var _ViewMasonry = __webpack_require__(130);
+	var _ViewArchiveMasonry = __webpack_require__(130);
 
 	var _ViewSingle = __webpack_require__(131);
 
 	var _ViewComments = __webpack_require__(136);
 
-	var _ViewHeadline = __webpack_require__(144);
+	var _ViewHeadline = __webpack_require__(141);
 
-	var _ViewPickup = __webpack_require__(145);
+	var _ViewPickup = __webpack_require__(142);
 
-	var _ViewRanking = __webpack_require__(146);
+	var _ViewRanking = __webpack_require__(143);
 
-	var _ViewVideos = __webpack_require__(147);
+	var _ViewVideos = __webpack_require__(144);
 
-	var _Receiver = __webpack_require__(148);
+	var _Receiver = __webpack_require__(145);
 
 	/**
 	 * ToDo: 確認事項
@@ -232,7 +232,7 @@
 	  view: {
 	    View: _View.View,
 	    ViewArchive: _ViewArchive.ViewArchive,
-	    ViewMasonry: _ViewMasonry.ViewMasonry,
+	    ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
 	    ViewSingle: _ViewSingle.ViewSingle,
 	    ViewComments: _ViewComments.ViewComments,
 	    sidebar: {
@@ -269,7 +269,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-01 23:39:59
+	 * @date 2016-02-02 19:04:10
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -1213,7 +1213,11 @@
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
 
-	var _typeof2 = __webpack_require__(49);
+	var _create = __webpack_require__(49);
+
+	var _create2 = _interopRequireDefault(_create);
+
+	var _typeof2 = __webpack_require__(51);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -1225,7 +1229,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -1288,7 +1292,7 @@
 	      var value = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
 	      if (!Array.isArray(value)) {
-	        return [];
+	        return [].slice(0);
 	      }
 
 	      return value;
@@ -1305,7 +1309,7 @@
 	      var value = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
 	      if (value === null) {
-	        value = {};
+	        value = (0, _create2.default)({});
 	      }
 
 	      return value;
@@ -1385,9 +1389,24 @@
 /* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(50), __esModule: true };
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(22);
+	module.exports = function create(P, D){
+	  return $.create(P, D);
+	};
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
-	var _Symbol = __webpack_require__(50)["default"];
+	var _Symbol = __webpack_require__(52)["default"];
 
 	exports["default"] = function (obj) {
 	  return obj && obj.constructor === _Symbol ? "symbol" : typeof obj;
@@ -1396,21 +1415,21 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 50 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(51), __esModule: true };
+	module.exports = { "default": __webpack_require__(53), __esModule: true };
 
 /***/ },
-/* 51 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(52);
-	__webpack_require__(57);
+	__webpack_require__(54);
+	__webpack_require__(59);
 	module.exports = __webpack_require__(17).Symbol;
 
 /***/ },
-/* 52 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1426,10 +1445,10 @@
 	  , setToStringTag = __webpack_require__(28)
 	  , uid            = __webpack_require__(31)
 	  , wks            = __webpack_require__(29)
-	  , keyOf          = __webpack_require__(53)
-	  , $names         = __webpack_require__(54)
-	  , enumKeys       = __webpack_require__(55)
-	  , isArray        = __webpack_require__(56)
+	  , keyOf          = __webpack_require__(55)
+	  , $names         = __webpack_require__(56)
+	  , enumKeys       = __webpack_require__(57)
+	  , isArray        = __webpack_require__(58)
 	  , anObject       = __webpack_require__(36)
 	  , toIObject      = __webpack_require__(9)
 	  , createDesc     = __webpack_require__(23)
@@ -1642,7 +1661,7 @@
 	setToStringTag(global.JSON, 'JSON', true);
 
 /***/ },
-/* 53 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $         = __webpack_require__(22)
@@ -1657,7 +1676,7 @@
 	};
 
 /***/ },
-/* 54 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
@@ -1682,7 +1701,7 @@
 	};
 
 /***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// all enumerable object keys, includes symbols
@@ -1701,7 +1720,7 @@
 	};
 
 /***/ },
-/* 56 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.2.2 IsArray(argument)
@@ -1711,13 +1730,13 @@
 	};
 
 /***/ },
-/* 57 */
+/* 59 */
 /***/ function(module, exports) {
 
 	
 
 /***/ },
-/* 58 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1735,7 +1754,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -1802,7 +1821,7 @@
 	}();
 
 /***/ },
-/* 59 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1831,11 +1850,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Env = __webpack_require__(60);
+	var _Env = __webpack_require__(62);
 
 	var _Loc = __webpack_require__(1);
 
@@ -2019,7 +2038,7 @@
 	}();
 
 /***/ },
-/* 60 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2048,7 +2067,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -2167,7 +2186,7 @@
 	}();
 
 /***/ },
-/* 61 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2196,7 +2215,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -2316,7 +2335,7 @@
 	}();
 
 /***/ },
-/* 62 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2345,13 +2364,13 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Cookie = __webpack_require__(63);
+	var _Cookie = __webpack_require__(65);
 
-	var _Env = __webpack_require__(60);
+	var _Env = __webpack_require__(62);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2455,7 +2474,7 @@
 	}();
 
 /***/ },
-/* 63 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2484,7 +2503,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -2543,7 +2562,7 @@
 	}();
 
 /***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2576,7 +2595,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -2719,7 +2738,7 @@
 	}();
 
 /***/ },
-/* 65 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2748,7 +2767,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -2819,7 +2838,7 @@
 	}();
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2895,7 +2914,7 @@
 	}();
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2928,11 +2947,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Data = __webpack_require__(66);
+	var _Data = __webpack_require__(68);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3019,7 +3038,7 @@
 	}();
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3178,7 +3197,7 @@
 	}();
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3207,11 +3226,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Env = __webpack_require__(60);
+	var _Env = __webpack_require__(62);
 
-	var _Codes = __webpack_require__(61);
+	var _Codes = __webpack_require__(63);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3379,7 +3398,7 @@
 	}();
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3408,15 +3427,15 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Types = __webpack_require__(71);
+	var _Types = __webpack_require__(73);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
-	var _ApiDae = __webpack_require__(76);
+	var _ApiDae = __webpack_require__(78);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3770,7 +3789,7 @@
 	}();
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3799,11 +3818,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Type = __webpack_require__(72);
+	var _Type = __webpack_require__(74);
 
-	var _Permalink = __webpack_require__(73);
+	var _Permalink = __webpack_require__(75);
 
-	var _Quries = __webpack_require__(74);
+	var _Quries = __webpack_require__(76);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3901,7 +3920,7 @@
 	}();
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4025,7 +4044,7 @@
 	}();
 
 /***/ },
-/* 73 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4136,7 +4155,7 @@
 	}();
 
 /***/ },
-/* 74 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4169,7 +4188,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(75);
+	var _Query = __webpack_require__(77);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4260,7 +4279,7 @@
 	}();
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4360,7 +4379,7 @@
 	}();
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4389,23 +4408,23 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Env = __webpack_require__(60);
+	var _Env = __webpack_require__(62);
 
-	var _Path = __webpack_require__(77);
+	var _Path = __webpack_require__(79);
 
-	var _Types = __webpack_require__(71);
+	var _Types = __webpack_require__(73);
 
-	var _Type = __webpack_require__(72);
+	var _Type = __webpack_require__(74);
 
-	var _Permalink = __webpack_require__(73);
+	var _Permalink = __webpack_require__(75);
 
-	var _Queries = __webpack_require__(78);
+	var _Queries = __webpack_require__(80);
 
-	var _Query = __webpack_require__(75);
+	var _Query = __webpack_require__(77);
 
 	var _Loc = __webpack_require__(1);
 
@@ -4660,7 +4679,7 @@
 	}();
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4689,7 +4708,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -4854,7 +4873,7 @@
 	}();
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4887,7 +4906,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(75);
+	var _Query = __webpack_require__(77);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4979,7 +4998,7 @@
 	}();
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5002,7 +5021,7 @@
 	});
 	exports.CommentType = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5014,15 +5033,15 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Query2 = __webpack_require__(75);
+	var _Query2 = __webpack_require__(77);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5078,33 +5097,33 @@
 	}(_Query2.Query);
 
 /***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(81), __esModule: true };
-
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(82);
-	module.exports = __webpack_require__(17).Object.getPrototypeOf;
-
-/***/ },
 /* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// 19.1.2.9 Object.getPrototypeOf(O)
-	var toObject = __webpack_require__(83);
+	module.exports = { "default": __webpack_require__(83), __esModule: true };
 
-	__webpack_require__(84)('getPrototypeOf', function($getPrototypeOf){
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(84);
+	module.exports = __webpack_require__(17).Object.getPrototypeOf;
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 Object.getPrototypeOf(O)
+	var toObject = __webpack_require__(85);
+
+	__webpack_require__(86)('getPrototypeOf', function($getPrototypeOf){
 	  return function getPrototypeOf(it){
 	    return $getPrototypeOf(toObject(it));
 	  };
 	});
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
@@ -5114,7 +5133,7 @@
 	};
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// most Object methods by ES6 should accept primitives
@@ -5129,12 +5148,12 @@
 	};
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _typeof2 = __webpack_require__(49);
+	var _typeof2 = __webpack_require__(51);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -5151,12 +5170,12 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 86 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _Object$create = __webpack_require__(87)["default"];
+	var _Object$create = __webpack_require__(49)["default"];
 
 	var _Object$setPrototypeOf = __webpack_require__(89)["default"];
 
@@ -5177,21 +5196,6 @@
 	};
 
 	exports.__esModule = true;
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(88), __esModule: true };
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $ = __webpack_require__(22);
-	module.exports = function create(P, D){
-	  return $.create(P, D);
-	};
 
 /***/ },
 /* 89 */
@@ -5275,13 +5279,13 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Env = __webpack_require__(60);
+	var _Env = __webpack_require__(62);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5385,11 +5389,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
-	var _Ajax = __webpack_require__(69);
+	var _Ajax = __webpack_require__(71);
 
-	var _Types = __webpack_require__(71);
+	var _Types = __webpack_require__(73);
 
 	var _Safety = __webpack_require__(44);
 
@@ -5527,7 +5531,7 @@
 	});
 	exports.Offset = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5539,7 +5543,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
@@ -5547,17 +5551,17 @@
 
 	var _get3 = _interopRequireDefault(_get2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _Action2 = __webpack_require__(94);
 
-	var _Types = __webpack_require__(71);
+	var _Types = __webpack_require__(73);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	var _Safety = __webpack_require__(44);
 
@@ -5816,7 +5820,7 @@
 	// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
 	var toIObject = __webpack_require__(9);
 
-	__webpack_require__(84)('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor){
+	__webpack_require__(86)('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor){
 	  return function getOwnPropertyDescriptor(it, key){
 	    return $getOwnPropertyDescriptor(toIObject(it), key);
 	  };
@@ -5844,7 +5848,7 @@
 	});
 	exports.Pickup = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5856,19 +5860,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Action2 = __webpack_require__(94);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5948,7 +5952,7 @@
 	});
 	exports.Headline = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5960,19 +5964,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Action2 = __webpack_require__(94);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6038,7 +6042,7 @@
 	});
 	exports.News = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6046,19 +6050,19 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Offset2 = __webpack_require__(95);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6113,7 +6117,7 @@
 	});
 	exports.PickupAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6125,21 +6129,21 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _ActionAuth2 = __webpack_require__(104);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6208,7 +6212,7 @@
 	});
 	exports.ActionAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6220,25 +6224,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Action2 = __webpack_require__(94);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
 	var _Token = __webpack_require__(105);
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
-	var _Types = __webpack_require__(71);
+	var _Types = __webpack_require__(73);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6326,7 +6330,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -6407,7 +6411,7 @@
 	});
 	exports.HeadlineAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6419,21 +6423,21 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _ActionAuth2 = __webpack_require__(104);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6502,7 +6506,7 @@
 	});
 	exports.NewsAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6510,21 +6514,21 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _OffsetAuth2 = __webpack_require__(108);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6583,7 +6587,7 @@
 	});
 	exports.OffsetAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6595,25 +6599,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Offset2 = __webpack_require__(95);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	var _Token = __webpack_require__(105);
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
-	var _Types = __webpack_require__(71);
+	var _Types = __webpack_require__(73);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6704,7 +6708,7 @@
 	});
 	exports.Category = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6716,17 +6720,17 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Offset2 = __webpack_require__(95);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
 	var _Safety = __webpack_require__(44);
 
@@ -6851,7 +6855,7 @@
 	});
 	exports.Ranking = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6859,11 +6863,11 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -6922,7 +6926,7 @@
 	});
 	exports.Videos = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6930,11 +6934,11 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -7002,7 +7006,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -7010,7 +7014,7 @@
 
 	var _Videos = __webpack_require__(111);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	var _Safety = __webpack_require__(44);
 
@@ -7114,7 +7118,7 @@
 	});
 	exports.Bookmark = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7126,23 +7130,23 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
 	var _Action2 = __webpack_require__(94);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _Path = __webpack_require__(77);
+	var _Path = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7290,7 +7294,7 @@
 	});
 	exports.Search = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7302,19 +7306,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Offset2 = __webpack_require__(95);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _Length = __webpack_require__(64);
+	var _Length = __webpack_require__(66);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7405,7 +7409,7 @@
 	});
 	exports.Single = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7417,19 +7421,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Action2 = __webpack_require__(94);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _Path = __webpack_require__(77);
+	var _Path = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7500,7 +7504,7 @@
 	});
 	exports.View = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7512,11 +7516,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -8046,7 +8050,7 @@
 	});
 	exports.ViewArchive = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -8058,23 +8062,23 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Empty = __webpack_require__(119);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
 	var _View2 = __webpack_require__(116);
 
 	var _ViewError = __webpack_require__(120);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _ArticleDae = __webpack_require__(121);
 
@@ -8882,7 +8886,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -9027,7 +9031,7 @@
 	});
 	exports.ViewError = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -9039,11 +9043,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -9193,7 +9197,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _Format = __webpack_require__(58);
+	var _Format = __webpack_require__(60);
 
 	var _CategoryDae = __webpack_require__(122);
 
@@ -9242,6 +9246,11 @@
 	       article.comments_count = 0;
 	     }
 	    */
+	    var commentsCount = parseInt(article.comments_count, 10);
+	    commentsCount = _Safety.Safety.integer(commentsCount, 10);
+
+	    this._commentsCount = commentsCount;
+
 	    // date check
 	    if (_Safety.Safety.check(article, 'date')) {
 
@@ -9291,14 +9300,29 @@
 	      return this._category;
 	    }
 	    /**
+	     * alias commentsTotal
 	     * @return {Number} article.comments_count
 	     */
 
 	  }, {
 	    key: 'commentsCount',
 	    get: function get() {
-	      console.log('article.comments_count', this._article.comments_count);
-	      return parseInt(this.article.comments_count, 10);
+	      /*
+	      console.log( 'article.comments_count', this._article.comments_count );
+	      return parseInt( this.article.comments_count, 10);
+	      */
+	      return this.commentsTotal;
+	    }
+
+	    /**
+	     * コメント総数を調べます
+	     * @return {Number|*} コメント総数を返します, article.comments_count
+	     */
+
+	  }, {
+	    key: 'commentsTotal',
+	    get: function get() {
+	      return this._commentsCount;
 	    }
 	    /**
 	     * @return {CommentsPopularDae|*} article.comments_popular
@@ -10124,44 +10148,75 @@
 	    (0, _classCallCheck3.default)(this, CommentsPopularDae);
 
 	    comments = _Safety.Safety.array(comments);
+	    this._comments = comments;
 
-	    this._comments = [];
-	    var _iteratorNormalCompletion = true;
-	    var _didIteratorError = false;
-	    var _iteratorError = undefined;
+	    //let popularComments = [];
+	    //for ( var comment of comments ) {
+	    //  popularComments.push( new PopularDae( comment ) );
+	    //}
+	    //
+	    //this._popularComments = popularComments;
 
-	    try {
-	      for (var _iterator = (0, _getIterator3.default)(comments), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	        var comment = _step.value;
-
-	        this._comments.push(new _PopularDae.PopularDae(comment));
-	      }
-	    } catch (err) {
-	      _didIteratorError = true;
-	      _iteratorError = err;
-	    } finally {
-	      try {
-	        if (!_iteratorNormalCompletion && _iterator.return) {
-	          _iterator.return();
-	        }
-	      } finally {
-	        if (_didIteratorError) {
-	          throw _iteratorError;
-	        }
-	      }
-	    }
+	    this._popularComments = null;
+	    this.init();
 	  }
 	  // ---------------------------------------------------
-	  //  GETTER / SETTER
+	  //  Method
 	  // ---------------------------------------------------
-	  /**
-	   * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
-	   */
 
 	  (0, _createClass3.default)(CommentsPopularDae, [{
-	    key: 'comments',
+	    key: 'init',
+	    value: function init() {
+	      if (this._popularComments === null) {
+	        var popularComments = [];
+	        var _iteratorNormalCompletion = true;
+	        var _didIteratorError = false;
+	        var _iteratorError = undefined;
+
+	        try {
+	          for (var _iterator = (0, _getIterator3.default)(this._comments), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	            var comment = _step.value;
+
+	            popularComments.push(new _PopularDae.PopularDae(comment));
+	          }
+	        } catch (err) {
+	          _didIteratorError = true;
+	          _iteratorError = err;
+	        } finally {
+	          try {
+	            if (!_iteratorNormalCompletion && _iterator.return) {
+	              _iterator.return();
+	            }
+	          } finally {
+	            if (_didIteratorError) {
+	              throw _iteratorError;
+	            }
+	          }
+	        }
+
+	        this._popularComments = popularComments;
+	      }
+	    }
+	    // ---------------------------------------------------
+	    //  GETTER / SETTER
+	    // ---------------------------------------------------
+	    /**
+	     * @return {Array|*} article.comments_popular オリジナルを返します
+	     */
+
+	  }, {
+	    key: 'original',
 	    get: function get() {
 	      return this._comments;
+	    }
+	    /**
+	     * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
+	     */
+
+	  }, {
+	    key: 'comments',
+	    get: function get() {
+	      return this._popularComments.slice(0);
 	    }
 	    /**
 	     * this.total alias
@@ -10211,6 +10266,7 @@
 	  }, {
 	    key: 'first',
 	    get: function get() {
+	      this.init();
 	      return this.comments[0];
 	    }
 	    /**
@@ -10276,7 +10332,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _Format = __webpack_require__(58);
+	var _Format = __webpack_require__(60);
 
 	var _UserDae = __webpack_require__(126);
 
@@ -10467,9 +10523,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ViewMasonry = undefined;
+	exports.ViewArchiveMasonry = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -10481,23 +10537,23 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Empty = __webpack_require__(119);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
 	var _View2 = __webpack_require__(116);
 
 	var _ViewError = __webpack_require__(120);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _ArticleDae = __webpack_require__(121);
 
@@ -10517,18 +10573,25 @@
 
 	var ReactDOM = self.ReactDOM;
 
-	var $ = window.jQuery;
+	// imagesLoaded, isotope
+	var imagesLoaded = self.imagesLoaded;
+	var Isotope = self.Isotope;
 
-	var ViewMasonry = exports.ViewMasonry = function (_View) {
-	  (0, _inherits3.default)(ViewMasonry, _View);
+	/**
+	 *
+	 */
 
-	  function ViewMasonry(element, moreElement, ActionClass) {
+	var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
+	  (0, _inherits3.default)(ViewArchiveMasonry, _View);
+
+	  function ViewArchiveMasonry(element, moreElement, ActionClass) {
 	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-	    (0, _classCallCheck3.default)(this, ViewMasonry);
+	    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
+	    (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
 
 	    option = _Safety.Safety.object(option);
 
-	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewMasonry).call(this, element, option));
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
 
 	    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
 	    _this2._moreElement = moreElement;
@@ -10538,6 +10601,10 @@
 	     * @private
 	     */
 	    _this2._articles = [];
+
+	    _this2._useMasonry = !!useMasonry;
+
+	    _this2._top = 0;
 
 	    return _this2;
 	  }
@@ -10549,7 +10616,7 @@
 	   * @return {Element|*} more button root element を返します
 	   */
 
-	  (0, _createClass3.default)(ViewMasonry, [{
+	  (0, _createClass3.default)(ViewArchiveMasonry, [{
 	    key: 'start',
 
 	    // ---------------------------------------------------
@@ -10632,10 +10699,12 @@
 	    value: function render(articles) {
 
 	      // ---
-	      // 左右に分割表示のためのglobal配列
-	      var evens = this._evens;
-	      var odds = this._odds;
+	      // Masonry flag
+	      var useMasonry = this._useMasonry;
+
+	      // 既存データ用のglobal配列
 	      var articlesList = this._articles;
+
 	      // 前回までの配列length
 	      // sequence な index のために必要
 	      var prevLast = this._articles.length;
@@ -10647,6 +10716,7 @@
 	      var moreElement = this.moreElement;
 	      // offset, length を使用する Action
 	      var action = this.action;
+	      // 参照を保持
 	      var _this = this;
 
 	      // --------------------------------------------
@@ -10673,6 +10743,7 @@
 	          // disable
 	          this.setState({ disable: true });
 	          action.next();
+	          _this._top = typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 	        },
 	        render: function render() {
 
@@ -10699,6 +10770,7 @@
 	            );
 	          } else {
 
+	            // button 表示なし
 	            return React.createElement('div', { className: 'no-more' });
 	          }
 	        }
@@ -10991,11 +11063,7 @@
 	                    )
 	                  )
 	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'comment-content' },
-	                  first.body
-	                ),
+	                React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
 	                React.createElement(
 	                  'div',
 	                  { className: 'comment-response' },
@@ -11031,127 +11099,11 @@
 	        }
 	      });
 
-	      // --------------------------------------------
-	      // Main Dom
-	      // --------------------------------------------
-	      // 個別の 記事Dom
-	      var ArchiveDom = React.createClass({
-	        displayName: 'ArchiveDom',
-
-	        propTypes: {
-	          index: React.PropTypes.number.isRequired,
-	          id: React.PropTypes.string.isRequired,
-	          slug: React.PropTypes.string.isRequired,
-	          category: React.PropTypes.string.isRequired,
-	          url: React.PropTypes.string.isRequired,
-	          date: React.PropTypes.string.isRequired,
-	          title: React.PropTypes.string.isRequired,
-	          caption: React.PropTypes.string.isRequired,
-	          description: React.PropTypes.string.isRequired,
-	          thumbnail: React.PropTypes.string.isRequired,
-	          mediaType: React.PropTypes.string.isRequired,
-	          commentsPopular: React.PropTypes.object.isRequired,
-	          commentsCount: React.PropTypes.number.isRequired
-	        },
-	        render: function render() {
-	          var p = this.props;
-	          var commentsPopular = p.commentsPopular;
-	          var figureTag = undefined;
-	          var commentsTotal = p.commentsCount;
-
-	          if (p.mediaType === 'image') {
-	            // type: image
-	            figureTag = React.createElement(
-	              'figure',
-	              { className: 'post-thumb post-thumb-' + p.mediaType },
-	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
-	            );
-	          } else {
-	            // type: video
-	            figureTag = React.createElement(
-	              'figure',
-	              { className: 'post-thumb post-thumb-' + p.mediaType },
-	              React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
-	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
-	            );
-	          }
-
-	          return React.createElement(
-	            'div',
-	            { className: 'board-item board-item-' + p.index },
-	            React.createElement(
-	              'a',
-	              { className: 'post', href: p.url },
-	              figureTag,
-	              React.createElement(
-	                'div',
-	                { className: 'post-data' },
-	                React.createElement(
-	                  'p',
-	                  { className: 'post-category post-category-' + p.slug },
-	                  p.category
-	                ),
-	                React.createElement(
-	                  'h3',
-	                  { className: 'post-heading' },
-	                  p.title
-	                ),
-	                React.createElement(
-	                  'p',
-	                  { className: 'post-date' },
-	                  p.date
-	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'post-excerpt-text' },
-	                  p.description
-	                )
-	              )
-	            ),
-	            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: p.id })
-	          );
-	        }
-	      });
-
-	      // ArticleDom 呼び出し用関数
-	      // list.forEach での ReactDOM.render 実行記述を簡略化するため
-	      var makeDom = function makeDom(dae) {
-
-	        var thumbnail = undefined;
-	        var caption = undefined;
-	        if (dae.mediaType === 'image') {
-	          thumbnail = dae.media.images.medium;
-	          caption = dae.media.images.caption;
-	        } else {
-	          thumbnail = dae.media.video.thumbnail;
-	          caption = dae.media.video.caption;
-	        }
-
-	        thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
-	        console.log('dae ', dae.id, dae);
-	        // unique key(React)にarticle id(number)記事Idを使用します
-	        return React.createElement(ArchiveDom, {
-	          key: 'archive-' + dae.id,
-	          index: dae.index,
-	          id: String(dae.id),
-	          slug: dae.category.slug,
-	          category: dae.category.label,
-	          url: dae.url,
-	          date: dae.formatDate,
-	          title: dae.title,
-	          caption: caption,
-	          thumbnail: thumbnail,
-	          mediaType: dae.mediaType,
-	          description: dae.description,
-	          commentsPopular: dae.commentsPopular,
-	          commentsCount: dae.commentsCount
-	        });
-	      };
-
 	      // ------------------------------------------------
 	      // 基点 React class
 	      // ------------------------------------------------
 
+	      // 個別の 記事Dom
 	      // React Class, Archive Dom
 	      var ArticleDom = React.createClass({
 	        displayName: 'ArticleDom',
@@ -11161,28 +11113,22 @@
 	        },
 	        getInitialState: function getInitialState() {
 	          return {
-	            $isotope: null
+	            isotope: null,
+	            img: null,
+	            route: null,
+	            nodes: null,
+	            arranged: 'prepare'
 	          };
 	        },
 	        render: function render() {
 
 	          var list = this.props.list;
 
-	          //// even / odd setup
-	          //// even(left) / odd(right) へ振り分けるための配列作成
-	          list.forEach(function (article, i) {
-
-	            var dae = new _ArticleDae.ArticleDae(article);
-
-	            dae.index = prevLast + i;
-	            articlesList.push(dae);
-	          });
-
-	          // dom, 左右に振り分けて出力する
+	          // dom出力する
 	          return React.createElement(
 	            'div',
-	            { id: 'board-container-rout' },
-	            articlesList.map(function (dae, i) {
+	            { className: this.state.arranged, ref: 'boardRout' },
+	            list.map(function (dae, i) {
 
 	              //let dae = new ArticleDae( article );
 	              //articlesList.push( dae );
@@ -11199,24 +11145,64 @@
 
 	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
 
+	              var commentsPopular = dae.commentsPopular;
+	              var figureTag = undefined;
+	              var commentsTotal = dae.commentsCount;
+
+	              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
+
+	              if (dae.mediaType === 'image') {
+	                // type: image
+	                figureTag = React.createElement(
+	                  'figure',
+	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+	                  React.createElement('img', { src: thumbnail, alt: caption || dae.title })
+	                );
+	              } else {
+	                // type: video
+	                figureTag = React.createElement(
+	                  'figure',
+	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+	                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
+	                  React.createElement('img', { src: thumbnail, alt: caption || dae.title })
+	                );
+	              }
+
 	              // unique key(React)にarticle id(number)記事Idを使用します
-	              return React.createElement(ArchiveDom, {
-	                key: 'archive-' + dae.id,
-	                index: i,
-	                id: String(dae.id),
-	                slug: dae.category.slug,
-	                category: dae.category.label,
-	                url: dae.url,
-	                date: dae.formatDate,
-	                title: dae.title,
-	                caption: caption,
-	                thumbnail: thumbnail,
-	                mediaType: dae.mediaType,
-	                description: dae.description,
-	                commentsPopular: dae.commentsPopular,
-	                commentsCount: dae.commentsCount,
-	                ref: 'boardItem-' + i
-	              });
+	              return React.createElement(
+	                'div',
+	                { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
+	                React.createElement(
+	                  'a',
+	                  { className: 'post', href: dae.url },
+	                  figureTag,
+	                  React.createElement(
+	                    'div',
+	                    { className: 'post-data' },
+	                    React.createElement(
+	                      'p',
+	                      { className: 'post-category post-category-' + dae.category.slug },
+	                      dae.category.label
+	                    ),
+	                    React.createElement(
+	                      'h3',
+	                      { className: 'post-heading' },
+	                      dae.title
+	                    ),
+	                    React.createElement(
+	                      'p',
+	                      { className: 'post-date' },
+	                      dae.formatDate
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'post-excerpt-text' },
+	                      dae.description
+	                    )
+	                  )
+	                ),
+	                React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
+	              );
 	            })
 	          );
 	        },
@@ -11226,31 +11212,78 @@
 	          // hasNext を元に More View button の表示非表示を決める
 	          moreButton(action.hasNext());
 
-	          // isotope
-	          var $isotope = $('#board-container-rout').isotope({
-	            itemSlector: '.board-item',
+	          // masonry flag が true の時に shouldMasonry を実行します
+	          if (useMasonry) {
+
+	            this.shouldMasonry();
+	          }
+	        },
+	        shouldComponentUpdate: function shouldComponentUpdate() {
+	          console.log('------------+++++++++++++ shouldComponentUpdate ------------');
+	          // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
+	          // isotope がセットアップすると呼び出されるので
+	          // 常にfalseを返し無視させます
+	          return false;
+	        },
+	        componentWillUnmount: function componentWillUnmount() {
+	          console.log('************ componentWillUnmount ************');
+	          // unmount 時に isotope を破棄します
+	          this.state.isotope.destroy();
+	        },
+	        shouldMasonry: function shouldMasonry() {
+	          // isotope を実行します
+	          var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+	          var childNodes = boardRout.childNodes;
+	          console.log('shouldMasonry', boardRout, childNodes);
+
+	          // imagesLoaded を使用し画像ロード完了後に isotope を実行します
+	          var img = imagesLoaded(childNodes);
+
+	          // img {imagesLoaded} always event handler unbind するためにインスタンスを state に保存します
+	          // route {Element} isotope 基準 element
+	          // nodes {ElementList} isotope 対象 childNodes, 現在は使用していません, ひょっとすると将来使うかも...
+	          this.setState({ img: img, nodes: childNodes, route: boardRout });
+
+	          // 画像読み込む完了 event へ bind します
+	          img.on('always', this.onImages);
+	        },
+	        // 画像読み込む完了 event handler
+	        onImages: function onImages() {
+
+	          var img = this.state.img;
+	          var route = this.state.route;
+
+	          // event から event handler を unbind します
+	          img.off('always', this.onImages);
+
+	          // isotope を行います
+	          var isotope = new Isotope(route, {
+	            itemSelector: '.board-item',
 	            masonry: {
-	              gutter: 10
+	              gutter: 30
 	            }
 	          });
-	          //.imagesLoaded( function() {
-	          //  $isotope.isotope( {
-	          //    masonry: {
-	          //      gutter: 10
-	          //    }
-	          //  } );
-	          //} );
-	          this.state.$isotope = $isotope;
-	          console.log('$isotope', $isotope);
-	          //console.log( 'componentDidMount ReactDOM.findDOMNode(this.refs.boardItem) ', this.props.children );
+
+	          // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
+	          this.setState({ isotope: isotope, arranged: 'arranged' });
+	          console.log('%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top);
+	          // render 時に 0 位置に戻るので
+	          // click 時の pageOffsetY へ移動させる
+	          window.scrollTo(0, _this._top);
 	        }
 	      }); // ArticleDom
 
-	      // dom 生成
-	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+	      // ------------------------------------------------
+	      articles.forEach(function (article, i) {
 
-	      // save
-	      // this._articles = concatArticles.splice( 0 );
+	        var dae = new _ArticleDae.ArticleDae(article);
+
+	        dae.index = prevLast + i;
+	        articlesList.push(dae);
+	      });
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
 	    }
 	  }, {
 	    key: 'moreElement',
@@ -11258,7 +11291,7 @@
 	      return this._moreElement;
 	    }
 	  }]);
-	  return ViewMasonry;
+	  return ViewArchiveMasonry;
 	}(_View2.View);
 
 /***/ },
@@ -11285,7 +11318,7 @@
 	});
 	exports.ViewSingle = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -11297,11 +11330,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -11315,7 +11348,7 @@
 
 	var _Single = __webpack_require__(115);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _SingleDae = __webpack_require__(133);
 
@@ -11711,7 +11744,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
@@ -11792,7 +11825,7 @@
 	});
 	exports.SingleDae = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -11804,11 +11837,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -12034,7 +12067,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _Format = __webpack_require__(58);
+	var _Format = __webpack_require__(60);
 
 	var _CategoryDae = __webpack_require__(122);
 
@@ -12227,7 +12260,7 @@
 	});
 	exports.ViewComments = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -12239,17 +12272,17 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Empty = __webpack_require__(119);
 
-	var _CommentsType = __webpack_require__(65);
+	var _CommentsType = __webpack_require__(67);
 
 	var _View2 = __webpack_require__(116);
 
@@ -12257,7 +12290,7 @@
 
 	var _Comments = __webpack_require__(137);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _CommentsListDae = __webpack_require__(138);
 
@@ -12757,7 +12790,7 @@
 	});
 	exports.Comments = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -12769,27 +12802,27 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _symbol2 = __webpack_require__(50);
+	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
 	var _OffsetAuth2 = __webpack_require__(108);
 
-	var _Api = __webpack_require__(70);
+	var _Api = __webpack_require__(72);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
-	var _Path = __webpack_require__(77);
+	var _Path = __webpack_require__(79);
 
-	var _CommentsType = __webpack_require__(65);
+	var _CommentsType = __webpack_require__(67);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13206,7 +13239,7 @@
 	  }, {
 	    key: 'list',
 	    get: function get() {
-	      return this._list;
+	      return this._list.slice(0);
 	    }
 	  }]);
 	  return CommentsDae;
@@ -13233,10 +13266,6 @@
 	  value: true
 	});
 	exports.ReplyDae = undefined;
-
-	var _isNan = __webpack_require__(141);
-
-	var _isNan2 = _interopRequireDefault(_isNan);
 
 	var _classCallCheck2 = __webpack_require__(40);
 
@@ -13269,9 +13298,10 @@
 	    reply = _Safety.Safety.object(reply);
 
 	    var total = parseInt(reply.count, 10);
-	    if ((0, _isNan2.default)(total)) {
-	      total = 0;
-	    }
+	    //if ( !Number.isInteger( total ) ) {
+	    //  total = 0;
+	    //}
+	    total = _Safety.Safety.integer(total, 0);
 	    this._total = total;
 	    this._comments = new _CommentsPopularDae.CommentsPopularDae(reply.comments);
 	  }
@@ -13306,32 +13336,6 @@
 /* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(142), __esModule: true };
-
-/***/ },
-/* 142 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(143);
-	module.exports = __webpack_require__(17).Number.isNaN;
-
-/***/ },
-/* 143 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 20.1.2.4 Number.isNaN(number)
-	var $export = __webpack_require__(15);
-
-	$export($export.S, 'Number', {
-	  isNaN: function isNaN(number){
-	    return number != number;
-	  }
-	});
-
-/***/ },
-/* 144 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
@@ -13353,7 +13357,7 @@
 	});
 	exports.ViewHeadline = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -13365,17 +13369,17 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Empty = __webpack_require__(119);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
 	var _View2 = __webpack_require__(116);
 
@@ -13385,7 +13389,7 @@
 
 	var _HeadlineAuth = __webpack_require__(106);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _ArticleDae = __webpack_require__(121);
 
@@ -13678,7 +13682,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 145 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13702,7 +13706,7 @@
 	});
 	exports.ViewPickup = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -13714,17 +13718,17 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Empty = __webpack_require__(119);
 
-	var _User = __webpack_require__(62);
+	var _User = __webpack_require__(64);
 
 	var _View2 = __webpack_require__(116);
 
@@ -13734,7 +13738,7 @@
 
 	var _PickupAuth = __webpack_require__(103);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _ArticleDae = __webpack_require__(121);
 
@@ -14253,7 +14257,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 146 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14276,7 +14280,7 @@
 	});
 	exports.ViewRanking = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -14288,11 +14292,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -14304,7 +14308,7 @@
 
 	var _Widget = __webpack_require__(112);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _ArticleDae = __webpack_require__(121);
 
@@ -14593,7 +14597,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 147 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14616,7 +14620,7 @@
 	});
 	exports.ViewVideos = undefined;
 
-	var _getPrototypeOf = __webpack_require__(80);
+	var _getPrototypeOf = __webpack_require__(82);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -14628,11 +14632,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(85);
+	var _possibleConstructorReturn2 = __webpack_require__(87);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(86);
+	var _inherits2 = __webpack_require__(88);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -14644,7 +14648,7 @@
 
 	var _Widget = __webpack_require__(112);
 
-	var _Result = __webpack_require__(68);
+	var _Result = __webpack_require__(70);
 
 	var _ArticleDae = __webpack_require__(121);
 
@@ -14931,7 +14935,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 148 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

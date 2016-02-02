@@ -35,7 +35,8 @@
     "react": "~0.14.6",
     "fetch": "~0.10.1",
     "es6-promise": "~3.0.2",
-    "isotope": "^2.2.2"
+    "isotope": "^2.2.2",
+    "imagesloaded": "^4.1.0"
   },
   "overrides": {
     "bxslider4": {
@@ -150,6 +151,11 @@
     "isotope": {
       "main": [
         "dist/*.js"
+      ]
+    },
+    "imagesloaded": {
+      "main": [
+        "*.pkgd.js"
       ]
     }
   }

@@ -89,7 +89,7 @@ import {Single} from './action/single/Single';
 import {View} from './view/View';
 
 import {ViewArchive} from './view/ViewArchive';
-import {ViewMasonry} from './view/ViewMasonry';
+import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
 import {ViewSingle} from './view/ViewSingle';
 
 import {ViewComments} from './view/ViewComments';
@@ -186,7 +186,7 @@ var UT = {
   view: {
     View: View,
     ViewArchive: ViewArchive,
-    ViewMasonry: ViewMasonry,
+    ViewArchiveMasonry: ViewArchiveMasonry,
     ViewSingle: ViewSingle,
     ViewComments: ViewComments,
     sidebar: {

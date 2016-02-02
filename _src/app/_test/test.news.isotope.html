@@ -8,7 +8,6 @@
   <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
   <script src="/assets/js/libs/vendor.min.js"></script>
   <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/libs/isotope/isotope.pkgd.js"></script>
   <style>
     body {
       padding: 0 16px;
@@ -53,10 +52,17 @@
       border-radius: 8px;
     }
     #board-container {
-      width: 100%;
+      width: 710px;
+      margin-left: -30px;
     }
     .board-item {
+      float: left;
       width: 340px;
+      /*margin-left: 30px;*/
+    }
+    .arranged .board-item {
+      float: none;
+      margin-left: 0;
     }
   </style>
 </head>
@@ -90,7 +96,7 @@
 
     // -------------------------------------------------
     var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-    var archive = new UT.view.ViewMasonry( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
+    var archive = new UT.view.ViewArchiveMasonry( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
     archive.start();
 
   }( window ) );

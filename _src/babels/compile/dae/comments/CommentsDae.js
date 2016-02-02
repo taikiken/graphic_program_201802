@@ -128,7 +128,7 @@ var CommentsDae = exports.CommentsDae = function () {
   }, {
     key: 'list',
     get: function get() {
-      return this._list;
+      return this._list.slice(0);
     }
   }]);
   return CommentsDae;

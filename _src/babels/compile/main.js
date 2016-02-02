@@ -74,7 +74,7 @@ var _View = require('./view/View');
 
 var _ViewArchive = require('./view/ViewArchive');
 
-var _ViewMasonry = require('./view/ViewMasonry');
+var _ViewArchiveMasonry = require('./view/ViewArchiveMasonry');
 
 var _ViewSingle = require('./view/ViewSingle');
 
@@ -186,7 +186,7 @@ var UT = {
   view: {
     View: _View.View,
     ViewArchive: _ViewArchive.ViewArchive,
-    ViewMasonry: _ViewMasonry.ViewMasonry,
+    ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
     ViewSingle: _ViewSingle.ViewSingle,
     ViewComments: _ViewComments.ViewComments,
     sidebar: {
@@ -223,7 +223,7 @@ var UT = {
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-01 23:39:59
+ * @date 2016-02-02 19:04:10
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html

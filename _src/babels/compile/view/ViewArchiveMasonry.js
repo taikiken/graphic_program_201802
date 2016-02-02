@@ -16,7 +16,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ViewMasonry = undefined;
+exports.ViewArchiveMasonry = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -70,17 +70,21 @@ var ReactDOM = self.ReactDOM;
 var imagesLoaded = self.imagesLoaded;
 var Isotope = self.Isotope;
 
-var ViewMasonry = exports.ViewMasonry = function (_View) {
-  (0, _inherits3.default)(ViewMasonry, _View);
+/**
+ *
+ */
 
-  function ViewMasonry(element, moreElement, ActionClass) {
+var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
+  (0, _inherits3.default)(ViewArchiveMasonry, _View);
+
+  function ViewArchiveMasonry(element, moreElement, ActionClass) {
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
     var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
-    (0, _classCallCheck3.default)(this, ViewMasonry);
+    (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
 
     option = _Safety.Safety.object(option);
 
-    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewMasonry).call(this, element, option));
+    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
 
     _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
     _this2._moreElement = moreElement;
@@ -105,7 +109,7 @@ var ViewMasonry = exports.ViewMasonry = function (_View) {
    * @return {Element|*} more button root element を返します
    */
 
-  (0, _createClass3.default)(ViewMasonry, [{
+  (0, _createClass3.default)(ViewArchiveMasonry, [{
     key: 'start',
 
     // ---------------------------------------------------
@@ -709,6 +713,7 @@ var ViewMasonry = exports.ViewMasonry = function (_View) {
         },
         shouldComponentUpdate: function shouldComponentUpdate() {
           console.log('------------+++++++++++++ shouldComponentUpdate ------------');
+          // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
           // isotope がセットアップすると呼び出されるので
           // 常にfalseを返し無視させます
           return false;
@@ -752,14 +757,12 @@ var ViewMasonry = exports.ViewMasonry = function (_View) {
             }
           });
 
+          // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
           this.setState({ isotope: isotope, arranged: 'arranged' });
           console.log('%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top);
+          // render 時に 0 位置に戻るので
+          // click 時の pageOffsetY へ移動させる
           window.scrollTo(0, _this._top);
-
-          //isotope.once( 'arrangeComplete', function() {
-          //  console.log( '%%%%%%%%% arrangeComplete %%%%%%%%%%%' );
-          //  window.scrollTo( 0, scrollTop );
-          //} );
         }
       }); // ArticleDom
 
@@ -781,5 +784,5 @@ var ViewMasonry = exports.ViewMasonry = function (_View) {
       return this._moreElement;
     }
   }]);
-  return ViewMasonry;
+  return ViewArchiveMasonry;
 }(_View2.View);

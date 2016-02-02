@@ -49,44 +49,75 @@ var CommentsPopularDae = exports.CommentsPopularDae = function () {
     (0, _classCallCheck3.default)(this, CommentsPopularDae);
 
     comments = _Safety.Safety.array(comments);
+    this._comments = comments;
 
-    this._comments = [];
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    //let popularComments = [];
+    //for ( var comment of comments ) {
+    //  popularComments.push( new PopularDae( comment ) );
+    //}
+    //
+    //this._popularComments = popularComments;
 
-    try {
-      for (var _iterator = (0, _getIterator3.default)(comments), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var comment = _step.value;
-
-        this._comments.push(new _PopularDae.PopularDae(comment));
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
+    this._popularComments = null;
+    this.init();
   }
   // ---------------------------------------------------
-  //  GETTER / SETTER
+  //  Method
   // ---------------------------------------------------
-  /**
-   * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
-   */
 
   (0, _createClass3.default)(CommentsPopularDae, [{
-    key: 'comments',
+    key: 'init',
+    value: function init() {
+      if (this._popularComments === null) {
+        var popularComments = [];
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = (0, _getIterator3.default)(this._comments), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var comment = _step.value;
+
+            popularComments.push(new _PopularDae.PopularDae(comment));
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        this._popularComments = popularComments;
+      }
+    }
+    // ---------------------------------------------------
+    //  GETTER / SETTER
+    // ---------------------------------------------------
+    /**
+     * @return {Array|*} article.comments_popular オリジナルを返します
+     */
+
+  }, {
+    key: 'original',
     get: function get() {
       return this._comments;
+    }
+    /**
+     * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
+     */
+
+  }, {
+    key: 'comments',
+    get: function get() {
+      return this._popularComments.slice(0);
     }
     /**
      * this.total alias
@@ -136,6 +167,7 @@ var CommentsPopularDae = exports.CommentsPopularDae = function () {
   }, {
     key: 'first',
     get: function get() {
+      this.init();
       return this.comments[0];
     }
     /**
