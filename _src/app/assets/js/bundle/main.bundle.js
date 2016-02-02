@@ -120,19 +120,21 @@
 
 	var _ViewArchive = __webpack_require__(118);
 
-	var _ViewSingle = __webpack_require__(130);
+	var _ViewMasonry = __webpack_require__(130);
 
-	var _ViewComments = __webpack_require__(135);
+	var _ViewSingle = __webpack_require__(131);
 
-	var _ViewHeadline = __webpack_require__(143);
+	var _ViewComments = __webpack_require__(136);
 
-	var _ViewPickup = __webpack_require__(144);
+	var _ViewHeadline = __webpack_require__(144);
 
-	var _ViewRanking = __webpack_require__(145);
+	var _ViewPickup = __webpack_require__(145);
 
-	var _ViewVideos = __webpack_require__(146);
+	var _ViewRanking = __webpack_require__(146);
 
-	var _Receiver = __webpack_require__(147);
+	var _ViewVideos = __webpack_require__(147);
+
+	var _Receiver = __webpack_require__(148);
 
 	/**
 	 * ToDo: 確認事項
@@ -147,41 +149,21 @@
 	 *    var ut = self.UT
 	 */
 
-	// action/single
+	// -------------------------------------
+	// view
 
-	// action/bookmark
+	// action/search
 
-	// action/archive
-
-	// action/home
+	// action/sidebar
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// app/App
 
 	// -------------------------------------
-	// data
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-01 21:27:23
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
+	// net
 
 	// -------------------------------------
-	// util
+	// app
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -250,6 +232,7 @@
 	  view: {
 	    View: _View.View,
 	    ViewArchive: _ViewArchive.ViewArchive,
+	    ViewMasonry: _ViewMasonry.ViewMasonry,
 	    ViewSingle: _ViewSingle.ViewSingle,
 	    ViewComments: _ViewComments.ViewComments,
 	    sidebar: {
@@ -268,21 +251,41 @@
 
 	// sidebar
 
-	// -------------------------------------
-	// view
+	// action/single
 
-	// action/search
+	// action/bookmark
 
-	// action/sidebar
+	// action/archive
 
-	// -------------------------------------
-	// app/App
+	// action/home
 
 	// -------------------------------------
-	// net
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// app
+	// data
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-02-01 23:39:59
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// -------------------------------------
+	// util
 
 	self.UT = UT;
 
@@ -10449,6 +10452,822 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/01 - 22:33
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewMasonry = undefined;
+
+	var _getPrototypeOf = __webpack_require__(80);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(85);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(86);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Empty = __webpack_require__(119);
+
+	var _User = __webpack_require__(62);
+
+	var _View2 = __webpack_require__(116);
+
+	var _ViewError = __webpack_require__(120);
+
+	var _Result = __webpack_require__(68);
+
+	var _ArticleDae = __webpack_require__(121);
+
+	var _Safety = __webpack_require__(44);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+
+	// dae
+	var React = self.React;
+	// action
+	// import {Headline} from '../action/home/Headline';
+	// data
+
+	// view
+
+	var ReactDOM = self.ReactDOM;
+
+	var $ = window.jQuery;
+
+	var ViewMasonry = exports.ViewMasonry = function (_View) {
+	  (0, _inherits3.default)(ViewMasonry, _View);
+
+	  function ViewMasonry(element, moreElement, ActionClass) {
+	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	    (0, _classCallCheck3.default)(this, ViewMasonry);
+
+	    option = _Safety.Safety.object(option);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewMasonry).call(this, element, option));
+
+	    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    _this2._moreElement = moreElement;
+	    /**
+	     * 取得記事(articles)をArticleDae instance 配列として保存する
+	     * @type {Array<ArticleDae>}
+	     * @private
+	     */
+	    _this2._articles = [];
+
+	    return _this2;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Element|*} more button root element を返します
+	   */
+
+	  (0, _createClass3.default)(ViewMasonry, [{
+	    key: 'start',
+
+	    // ---------------------------------------------------
+	    //  Method
+	    // ---------------------------------------------------
+	    /**
+	     * Ajax request を開始します
+	     */
+	    value: function start() {
+
+	      this.action.next();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var articles = result.articles;
+
+	      if (typeof articles === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[ARCHIVE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
+	        // this.showError( error.message );
+	      } else if (articles.length === 0) {
+
+	          // articles empty
+	          // request, JSON 取得に問題は無かったが data が取得できなかった
+	          var error = new Error('[ARCHIVE:EMPTY]サーバーレスポンスに問題が発生しました。');
+	          this.executeSafely(_View2.View.EMPTY_ERROR, error);
+	          // this.showError( error.message );
+	        } else {
+
+	            this.render(articles);
+	          }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+	    /**
+	     * ViewError でエラーコンテナを作成します
+	     * @param {string} message エラーメッセージ
+	     */
+
+	  }, {
+	    key: 'showError',
+	    value: function showError() {
+	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      message = _Safety.Safety.string(message, '');
+
+	      // ToDo: Error 時の表示が決まったら変更する
+	      var error = new _ViewError.ViewError(this.element, this.option, message);
+	      error.render();
+	    }
+
+	    /**
+	     * dom を render します
+	     * @param {Array} articles JSON responce.articles
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(articles) {
+
+	      // ---
+	      // 左右に分割表示のためのglobal配列
+	      var evens = this._evens;
+	      var odds = this._odds;
+	      var articlesList = this._articles;
+	      // 前回までの配列length
+	      // sequence な index のために必要
+	      var prevLast = this._articles.length;
+	      // ---
+
+	      // 記事挿入 root element
+	      var element = this.element;
+	      // 'View More' button root element
+	      var moreElement = this.moreElement;
+	      // offset, length を使用する Action
+	      var action = this.action;
+	      var _this = this;
+
+	      // --------------------------------------------
+	      // More button
+	      // --------------------------------------------
+	      var MoreView = React.createClass({
+	        displayName: 'MoreView',
+
+	        propTypes: {
+	          show: React.PropTypes.bool
+	        },
+	        getDefaultProps: function getDefaultProps() {
+	          return {
+	            show: false
+	          };
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            disable: false
+	          };
+	        },
+	        handleClick: function handleClick(event) {
+	          event.preventDefault();
+	          // disable
+	          this.setState({ disable: true });
+	          action.next();
+	        },
+	        render: function render() {
+
+	          // hasNext: true, button を表示する？
+	          if (this.props.show) {
+
+	            return React.createElement(
+	              'div',
+	              { id: 'more', className:  true ? 'disable' : '' },
+	              React.createElement(
+	                'a',
+	                { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
+	                React.createElement(
+	                  'span',
+	                  null,
+	                  'VIEW MORE'
+	                )
+	              ),
+	              React.createElement(
+	                'span',
+	                { className: 'board-btn-more-cover' },
+	                ' '
+	              )
+	            );
+	          } else {
+
+	            return React.createElement('div', { className: 'no-more' });
+	          }
+	        }
+
+	      });
+
+	      // more button 作成関数
+	      // ArchiveDom から呼び出す
+	      var moreButton = function moreButton(show) {
+
+	        ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+	      };
+	      // --------------------------------------------
+	      // COMMENTS Popular second
+	      // --------------------------------------------
+	      var CommentsSecond = React.createClass({
+	        displayName: 'CommentsSecond',
+
+	        propType: {
+	          seconds: React.PropTypes.array.isRequired,
+	          articleId: React.PropTypes.string.isRequired
+	        },
+	        render: function render() {
+
+	          var seconds = this.props.seconds;
+	          var articleId = this.props.articleId;
+	          console.log('seconds ', seconds);
+	          return React.createElement(
+	            'ul',
+	            { className: 'comments-second' },
+	            seconds.map(function (commentDae, i) {
+
+	              var userDae = commentDae.user;
+	              var picture = userDae.profilePicture ? userDae.profilePicture : _Empty.Empty.USER_PICTURE;
+
+	              // CommentsSecond unique key は  記事Id + index + user Id を使用する
+	              // 同一ユーザーが複数投稿することがあるため
+	              // render 内で unique なことを保証する必要がある
+	              return React.createElement(
+	                'li',
+	                { key: 'user-' + articleId + '-' + i + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
+	                React.createElement(
+	                  'a',
+	                  { className: 'commented-user-thumb', href: userDae.url },
+	                  React.createElement('img', { src: picture, alt: userDae.userName })
+	                )
+	              );
+	            })
+	          );
+	        }
+	      });
+
+	      // --------------------------------------------
+	      // COMMENTS Popular
+	      // --------------------------------------------
+
+	      // good link
+	      var GoodLink = React.createClass({
+	        displayName: 'GoodLink',
+
+	        propType: {
+	          sign: React.PropTypes.bool.isRequired,
+	          comment: React.PropTypes.object.isRequired,
+	          active: React.PropTypes.bool,
+	          callback: React.PropTypes.func
+	        },
+	        getDefaultProps: function getDefaultProps() {
+	          return {
+	            active: false,
+	            callback: function callback() {}
+	          };
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            active: false,
+	            callback: function callback() {}
+	          };
+	        },
+	        handleClick: function handleClick(event) {
+	          event.preventDefault();
+	          this.props.callback(this.props.comment);
+	          this.setState({ active: false });
+	        },
+	        render: function render() {
+
+	          var sign = this.props.sign;
+	          var comment = this.props.comment;
+	          var active = this.props.active;
+	          var activeClass = active ? ' active' : '';
+
+	          if (sign) {
+
+	            // login user
+	            return React.createElement(
+	              'a',
+	              { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
+	              React.createElement(
+	                'i',
+	                null,
+	                ' '
+	              ),
+	              React.createElement(
+	                'span',
+	                null,
+	                comment.good
+	              )
+	            );
+	          } else {
+
+	            // not login user
+	            return React.createElement(
+	              'span',
+	              { className: 'comment-response-btn comment-response-like' },
+	              React.createElement(
+	                'i',
+	                null,
+	                ' '
+	              ),
+	              React.createElement(
+	                'span',
+	                null,
+	                comment.good
+	              )
+	            );
+	          }
+	        }
+	      });
+
+	      // bad link
+	      var BadLink = React.createClass({
+	        displayName: 'BadLink',
+
+	        propType: {
+	          sign: React.PropTypes.bool.isRequired,
+	          comment: React.PropTypes.object.isRequired,
+	          active: React.PropTypes.bool,
+	          callback: React.PropTypes.func
+	        },
+	        getDefaultProps: function getDefaultProps() {
+	          return {
+	            active: false,
+	            callback: function callback() {}
+	          };
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            active: false,
+	            callback: function callback() {}
+	          };
+	        },
+	        handleClick: function handleClick(event) {
+	          event.preventDefault();
+	          this.props.callback(this.props.comment);
+	          this.setState({ active: false });
+	        },
+	        render: function render() {
+
+	          var sign = this.props.sign;
+	          var comment = this.props.comment;
+	          var active = this.props.active;
+	          var activeClass = active ? ' active' : '';
+
+	          if (sign) {
+
+	            // login user
+	            return React.createElement(
+	              'a',
+	              { className: 'comment-response-btn comment-response-dislike' + activeClass, href: '#', onClick: this.handleClick },
+	              React.createElement(
+	                'i',
+	                null,
+	                ' '
+	              ),
+	              React.createElement(
+	                'span',
+	                null,
+	                comment.bad
+	              )
+	            );
+	          } else {
+
+	            // not login user
+	            return React.createElement(
+	              'span',
+	              { className: 'comment-response-btn comment-response-dislike' },
+	              React.createElement(
+	                'i',
+	                null,
+	                ' '
+	              ),
+	              React.createElement(
+	                'span',
+	                null,
+	                comment.bad
+	              )
+	            );
+	          }
+	        }
+	      });
+
+	      // --------------------------------------------
+	      // first + second comment container
+	      var PopularDom = React.createClass({
+	        displayName: 'PopularDom',
+
+	        propType: {
+	          commentsPopular: React.PropTypes.object.isRequired,
+	          total: React.PropTypes.number.isRequired,
+	          articleId: React.PropTypes.string.isRequired
+	        },
+	        goodClick: function goodClick(comment) {
+	          var commentId = comment.id;
+	          var userId = comment.user.id;
+
+	          console.log('goodClick', commentId, userId);
+	        },
+	        badClick: function badClick(comment) {
+	          var commentId = comment.id;
+	          var userId = comment.user.id;
+
+	          console.log('badClick', commentId, userId);
+	        },
+	        render: function render() {
+
+	          var commentsPopular = this.props.commentsPopular;
+	          var total = this.props.total;
+	          var articleId = this.props.articleId;
+
+	          var emptyFirst = React.createElement('div', { className: 'comments-popular comments-empty' });
+	          var second = React.createElement('div', { className: 'comments-second comments-empty' });
+
+	          var hasFirst = commentsPopular.hasFirst;
+	          var hasSecond = commentsPopular.hasSecond;
+	          var firstDae = commentsPopular.first;
+	          var secondsDae = commentsPopular.seconds;
+	          console.log('commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae);
+	          if (hasSecond) {
+	            // 2件目以降も存在する
+	            // 2件目以降のDomを生成する
+	            second = React.createElement(CommentsSecond, { seconds: secondsDae, articleId: articleId });
+	            total -= secondsDae.length;
+	          }
+
+	          if (hasFirst) {
+
+	            // 少なくとも1件は存在する
+	            total -= 1;
+
+	            console.log('少なくとも1件は存在する ', articleId);
+	            // 1件目コメントデータを取り出し
+	            var first = firstDae;
+	            console.log('first ', articleId, first);
+	            // 1件目コメント・ユーザー
+	            var firstUser = first.user;
+	            // ユーザーサムネイル
+	            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
+	            // login 済かを調べる
+	            var sign = _User.User.sign;
+
+	            return React.createElement(
+	              'div',
+	              { className: 'comments-popular' },
+	              React.createElement(
+	                'div',
+	                { className: 'feature-user comment-item' },
+	                React.createElement(
+	                  'figure',
+	                  { className: 'comment-user' },
+	                  React.createElement(
+	                    'a',
+	                    { className: 'comment-user-link', href: firstUser.url },
+	                    React.createElement(
+	                      'span',
+	                      { className: 'comment-user-thumb' },
+	                      React.createElement('img', { src: picture, alt: firstUser.userName })
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'comment-user-data' },
+	                      React.createElement(
+	                        'p',
+	                        { className: 'comment-user-name' },
+	                        firstUser.userName
+	                      ),
+	                      React.createElement(
+	                        'p',
+	                        { className: 'comment-user-job' },
+	                        firstUser.bio
+	                      )
+	                    )
+	                  )
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'comment-content' },
+	                  first.body
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'comment-response' },
+	                  React.createElement(GoodLink, {
+	                    sign: sign,
+	                    comment: first,
+	                    callback: this.goodClick
+	                  }),
+	                  React.createElement(BadLink, {
+	                    sign: sign,
+	                    comment: first,
+	                    callback: this.badClick
+	                  })
+	                )
+	              ),
+	              React.createElement(
+	                'div',
+	                { className: 'commented-user' },
+	                second,
+	                React.createElement(
+	                  'span',
+	                  { className: 'commented-user-andmore' },
+	                  total > 0 ? '+' + total : ''
+	                )
+	              )
+	            );
+	          }
+
+	          return emptyFirst;
+	        }, // render
+	        componentDidMount: function componentDidMount() {
+	          // mount
+	        }
+	      });
+
+	      // --------------------------------------------
+	      // Main Dom
+	      // --------------------------------------------
+	      // 個別の 記事Dom
+	      var ArchiveDom = React.createClass({
+	        displayName: 'ArchiveDom',
+
+	        propTypes: {
+	          index: React.PropTypes.number.isRequired,
+	          id: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired,
+	          category: React.PropTypes.string.isRequired,
+	          url: React.PropTypes.string.isRequired,
+	          date: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired,
+	          caption: React.PropTypes.string.isRequired,
+	          description: React.PropTypes.string.isRequired,
+	          thumbnail: React.PropTypes.string.isRequired,
+	          mediaType: React.PropTypes.string.isRequired,
+	          commentsPopular: React.PropTypes.object.isRequired,
+	          commentsCount: React.PropTypes.number.isRequired
+	        },
+	        render: function render() {
+	          var p = this.props;
+	          var commentsPopular = p.commentsPopular;
+	          var figureTag = undefined;
+	          var commentsTotal = p.commentsCount;
+
+	          if (p.mediaType === 'image') {
+	            // type: image
+	            figureTag = React.createElement(
+	              'figure',
+	              { className: 'post-thumb post-thumb-' + p.mediaType },
+	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	            );
+	          } else {
+	            // type: video
+	            figureTag = React.createElement(
+	              'figure',
+	              { className: 'post-thumb post-thumb-' + p.mediaType },
+	              React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
+	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	            );
+	          }
+
+	          return React.createElement(
+	            'div',
+	            { className: 'board-item board-item-' + p.index },
+	            React.createElement(
+	              'a',
+	              { className: 'post', href: p.url },
+	              figureTag,
+	              React.createElement(
+	                'div',
+	                { className: 'post-data' },
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-category post-category-' + p.slug },
+	                  p.category
+	                ),
+	                React.createElement(
+	                  'h3',
+	                  { className: 'post-heading' },
+	                  p.title
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-date' },
+	                  p.date
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'post-excerpt-text' },
+	                  p.description
+	                )
+	              )
+	            ),
+	            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: p.id })
+	          );
+	        }
+	      });
+
+	      // ArticleDom 呼び出し用関数
+	      // list.forEach での ReactDOM.render 実行記述を簡略化するため
+	      var makeDom = function makeDom(dae) {
+
+	        var thumbnail = undefined;
+	        var caption = undefined;
+	        if (dae.mediaType === 'image') {
+	          thumbnail = dae.media.images.medium;
+	          caption = dae.media.images.caption;
+	        } else {
+	          thumbnail = dae.media.video.thumbnail;
+	          caption = dae.media.video.caption;
+	        }
+
+	        thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
+	        console.log('dae ', dae.id, dae);
+	        // unique key(React)にarticle id(number)記事Idを使用します
+	        return React.createElement(ArchiveDom, {
+	          key: 'archive-' + dae.id,
+	          index: dae.index,
+	          id: String(dae.id),
+	          slug: dae.category.slug,
+	          category: dae.category.label,
+	          url: dae.url,
+	          date: dae.formatDate,
+	          title: dae.title,
+	          caption: caption,
+	          thumbnail: thumbnail,
+	          mediaType: dae.mediaType,
+	          description: dae.description,
+	          commentsPopular: dae.commentsPopular,
+	          commentsCount: dae.commentsCount
+	        });
+	      };
+
+	      // ------------------------------------------------
+	      // 基点 React class
+	      // ------------------------------------------------
+
+	      // React Class, Archive Dom
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            $isotope: null
+	          };
+	        },
+	        render: function render() {
+
+	          var list = this.props.list;
+
+	          //// even / odd setup
+	          //// even(left) / odd(right) へ振り分けるための配列作成
+	          list.forEach(function (article, i) {
+
+	            var dae = new _ArticleDae.ArticleDae(article);
+
+	            dae.index = prevLast + i;
+	            articlesList.push(dae);
+	          });
+
+	          // dom, 左右に振り分けて出力する
+	          return React.createElement(
+	            'div',
+	            { id: 'board-container-rout' },
+	            articlesList.map(function (dae, i) {
+
+	              //let dae = new ArticleDae( article );
+	              //articlesList.push( dae );
+
+	              var thumbnail = undefined;
+	              var caption = undefined;
+	              if (dae.mediaType === 'image') {
+	                thumbnail = dae.media.images.medium;
+	                caption = dae.media.images.caption;
+	              } else {
+	                thumbnail = dae.media.video.thumbnail;
+	                caption = dae.media.video.caption;
+	              }
+
+	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
+
+	              // unique key(React)にarticle id(number)記事Idを使用します
+	              return React.createElement(ArchiveDom, {
+	                key: 'archive-' + dae.id,
+	                index: i,
+	                id: String(dae.id),
+	                slug: dae.category.slug,
+	                category: dae.category.label,
+	                url: dae.url,
+	                date: dae.formatDate,
+	                title: dae.title,
+	                caption: caption,
+	                thumbnail: thumbnail,
+	                mediaType: dae.mediaType,
+	                description: dae.description,
+	                commentsPopular: dae.commentsPopular,
+	                commentsCount: dae.commentsCount,
+	                ref: 'boardItem-' + i
+	              });
+	            })
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+	          // after mount
+	          _this.executeSafely(_View2.View.DID_MOUNT);
+	          // hasNext を元に More View button の表示非表示を決める
+	          moreButton(action.hasNext());
+
+	          // isotope
+	          var $isotope = $('#board-container-rout').isotope({
+	            itemSlector: '.board-item',
+	            masonry: {
+	              gutter: 10
+	            }
+	          });
+	          //.imagesLoaded( function() {
+	          //  $isotope.isotope( {
+	          //    masonry: {
+	          //      gutter: 10
+	          //    }
+	          //  } );
+	          //} );
+	          this.state.$isotope = $isotope;
+	          console.log('$isotope', $isotope);
+	          //console.log( 'componentDidMount ReactDOM.findDOMNode(this.refs.boardItem) ', this.props.children );
+	        }
+	      }); // ArticleDom
+
+	      // dom 生成
+	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+
+	      // save
+	      // this._articles = concatArticles.splice( 0 );
+	    }
+	  }, {
+	    key: 'moreElement',
+	    get: function get() {
+	      return this._moreElement;
+	    }
+	  }]);
+	  return ViewMasonry;
+	}(_View2.View);
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/26 - 21:05
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -10488,7 +11307,7 @@
 
 	var _Empty = __webpack_require__(119);
 
-	var _SingleInfo = __webpack_require__(131);
+	var _SingleInfo = __webpack_require__(132);
 
 	var _View2 = __webpack_require__(116);
 
@@ -10498,7 +11317,7 @@
 
 	var _Result = __webpack_require__(68);
 
-	var _SingleDae = __webpack_require__(132);
+	var _SingleDae = __webpack_require__(133);
 
 	var _Safety = __webpack_require__(44);
 
@@ -10863,7 +11682,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 131 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10896,7 +11715,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SingleDae = __webpack_require__(132);
+	var _SingleDae = __webpack_require__(133);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10952,7 +11771,7 @@
 	}();
 
 /***/ },
-/* 132 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10995,9 +11814,9 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(133);
+	var _KeywordsDae = __webpack_require__(134);
 
-	var _RelatedDae2 = __webpack_require__(134);
+	var _RelatedDae2 = __webpack_require__(135);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11088,7 +11907,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11182,7 +12001,7 @@
 	}();
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11398,7 +12217,7 @@
 	}();
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11436,11 +12255,11 @@
 
 	var _ViewError = __webpack_require__(120);
 
-	var _Comments = __webpack_require__(136);
+	var _Comments = __webpack_require__(137);
 
 	var _Result = __webpack_require__(68);
 
-	var _CommentsListDae = __webpack_require__(137);
+	var _CommentsListDae = __webpack_require__(138);
 
 	var _Safety = __webpack_require__(44);
 
@@ -11917,7 +12736,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12143,7 +12962,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12172,7 +12991,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(138);
+	var _CommentsDae = __webpack_require__(139);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12254,7 +13073,7 @@
 	}();
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12290,7 +13109,7 @@
 
 	var _PopularDae = __webpack_require__(129);
 
-	var _ReplyDae = __webpack_require__(139);
+	var _ReplyDae = __webpack_require__(140);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12394,7 +13213,7 @@
 	}();
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12415,7 +13234,7 @@
 	});
 	exports.ReplyDae = undefined;
 
-	var _isNan = __webpack_require__(140);
+	var _isNan = __webpack_require__(141);
 
 	var _isNan2 = _interopRequireDefault(_isNan);
 
@@ -12484,20 +13303,20 @@
 	}();
 
 /***/ },
-/* 140 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(141), __esModule: true };
-
-/***/ },
 /* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(142);
-	module.exports = __webpack_require__(17).Number.isNaN;
+	module.exports = { "default": __webpack_require__(142), __esModule: true };
 
 /***/ },
 /* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(143);
+	module.exports = __webpack_require__(17).Number.isNaN;
+
+/***/ },
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 20.1.2.4 Number.isNaN(number)
@@ -12510,7 +13329,7 @@
 	});
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12859,7 +13678,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13434,7 +14253,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13774,7 +14593,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14112,7 +14931,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

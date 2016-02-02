@@ -114,6 +114,7 @@ libraries.push exportsPath + '/sagen/**/sagen.min.js'
 libraries.push exportsPath + '/html5shiv/**/*'
 libraries.push exportsPath + '/fancybox/**/*'
 libraries.push exportsPath + '/bxslider4/**/*'
+libraries.push exportsPath + '/isotope/**/*'
 #libraries.push exportsPath + '/react/**/*'
 
 gulp.task 'vendor:copy', ->

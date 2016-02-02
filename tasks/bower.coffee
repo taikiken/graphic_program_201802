@@ -278,7 +278,7 @@ gulp.task 'bower:fetch', ->
   .pipe gulp.dest exports + '/fetch'
   .pipe $.size title: '*** bower:fetch ***'
 
-# fetch
+# promise
 gulp.task 'bower:promise', ->
   return gulp
   .src [
@@ -286,6 +286,15 @@ gulp.task 'bower:promise', ->
   ]
   .pipe gulp.dest exports + '/es6-promise'
   .pipe $.size title: '*** bower:promise ***'
+
+# isotope
+gulp.task 'bower:isotope', ->
+  return gulp
+  .src [
+    components + '/isotope/dist/*.js'
+  ]
+  .pipe gulp.dest exports + '/isotope'
+  .pipe $.size title: '*** bower:isotope ***'
 
 # bower
 gulp.task 'bower:exports', (cb) ->
@@ -310,6 +319,7 @@ gulp.task 'bower:exports', (cb) ->
       'bower:react'
       'bower:fetch'
       'bower:promise'
+      'bower:isotope'
     ]
     cb
   )

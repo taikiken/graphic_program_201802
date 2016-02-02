@@ -34,7 +34,8 @@
     "fancybox": "~2.1.5",
     "react": "~0.14.6",
     "fetch": "~0.10.1",
-    "es6-promise": "~3.0.2"
+    "es6-promise": "~3.0.2",
+    "isotope": "^2.2.2"
   },
   "overrides": {
     "bxslider4": {
@@ -144,6 +145,11 @@
     "promise": {
       "main": [
         "promise.js"
+      ]
+    },
+    "isotope": {
+      "main": [
+        "dist/*.js"
       ]
     }
   }
