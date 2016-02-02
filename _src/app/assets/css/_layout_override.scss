@@ -1,0 +1,34 @@
+@import "../../../scss/asset";
+
+// ---------------------------------------------------------
+// FORM style
+// ---------------------------------------------------------
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+
+// -------------------------------------------------
+// head section
+// -------------------------------------------------
+#user-profile-nav {
+  float: left;
+}
+
+#user-profile-nav {
+  .user.signin {
+
+    &.close {
+      .user-menu {
+        display: none;
+      }
+    }
+    &.open {
+      .user-menu {
+        display: block;
+      }
+    }
+  }
+}

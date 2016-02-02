@@ -175,7 +175,6 @@ export class ViewComments extends View {
   mine( commentsListDae:CommentsListDae ) {
 
   }
-
   /**
    * normal, official, all をレンダリング
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
@@ -415,7 +414,7 @@ export class ViewComments extends View {
 
 
     // --------------------------------------------
-    // COMMENT Dom buid
+    // COMMENT Dom build
     // --------------------------------------------
     ReactDOM.render(
       <CommentsDom commentsList={commentsList} />,

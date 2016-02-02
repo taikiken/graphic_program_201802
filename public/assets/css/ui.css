@@ -3950,4 +3950,19 @@ table tr.w200 > td {
   .widget-recommend .post-thumb-overlay-movie {
     position: absolute; }
 
+input,
+textarea,
+select,
+button {
+  outline: none; }
+
+#user-profile-nav {
+  float: left; }
+
+#user-profile-nav .user.signin.close .user-menu {
+  display: none; }
+
+#user-profile-nav .user.signin.open .user-menu {
+  display: block; }
+
 /*# sourceMappingURL=ui.css.map */

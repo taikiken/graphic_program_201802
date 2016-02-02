@@ -32,6 +32,8 @@ var _Cookie = require('../net/Cookie');
 
 var _Env = require('./Env');
 
+var _UserStatus = require('../event/UserStatus');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -99,6 +101,14 @@ var User = exports.User = function () {
     set: function set(bool) {
 
       _sign = bool;
+
+      if (bool) {
+
+        _UserStatus.UserStatus.factory().login();
+      } else {
+
+        _UserStatus.UserStatus.factory().logout();
+      }
     }
     /**
      *

@@ -47,7 +47,7 @@ let Polling = self.Gasane.Polling;
 export class ViewPickup extends View {
   /**
    * action/Pickup を使い Ajax request 後 element へ dom を作成します
-   * @see ViewHeadline
+   * @link ViewHeadline
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */

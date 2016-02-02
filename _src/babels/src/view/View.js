@@ -45,6 +45,14 @@ export class View extends EventDispatcher {
   get element():Element {
     return this._element;
   }
+
+  /**
+   * render root element を設定します
+   * @param {Element} element render root element
+   */
+  set element( element:Element ):void {
+    this._element = element;
+  }
   /**
    *
    * @return {Object|*} callback handler がセットされたObjectを返します
@@ -52,12 +60,28 @@ export class View extends EventDispatcher {
   get option():Object {
     return this._option;
   }
+
+  /**
+   * callback handler をセットします
+   * @param {Object} option callback handler がセットされた Object
+   */
+  set option( option:Object ):void {
+    this._option = option;
+  }
   /**
    *
    * @return {*} Action instance を返します
    */
   get action() {
     return this._action;
+  }
+
+  /**
+   * Action instance を設定します
+   * @param {*} action Action instance
+   */
+  set action( action ):void {
+    this._action = action;
   }
   // ---------------------------------------------------
   //  METHOD

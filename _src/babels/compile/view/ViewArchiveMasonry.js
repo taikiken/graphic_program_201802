@@ -71,11 +71,20 @@ var imagesLoaded = self.imagesLoaded;
 var Isotope = self.Isotope;
 
 /**
- *
+ * archive 一覧を isotope で
  */
 
 var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
   (0, _inherits3.default)(ViewArchiveMasonry, _View);
+
+  /**
+   * archive 一覧標示後 isotope で位置調整します
+   * @param {Element} element root element, Ajax result を配置する
+   * @param {Element} moreElement more button root element, 'View More' を配置する
+   * @param {*} ActionClass Request 対象の Action Class
+   * @param {Object} [option={}] optional event handler
+   * @param {boolean} [useMasonry=true] isotope を行うかの
+   */
 
   function ViewArchiveMasonry(element, moreElement, ActionClass) {
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
@@ -181,7 +190,6 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
       var error = new _ViewError.ViewError(this.element, this.option, message);
       error.render();
     }
-
     /**
      * dom を render します
      * @param {Array} articles JSON responce.articles

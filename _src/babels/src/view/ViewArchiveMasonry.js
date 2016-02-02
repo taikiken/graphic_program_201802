@@ -36,9 +36,17 @@ let imagesLoaded = self.imagesLoaded;
 let Isotope = self.Isotope;
 
 /**
- *
+ * archive 一覧を isotope で
  */
 export class ViewArchiveMasonry extends View {
+  /**
+   * archive 一覧標示後 isotope で位置調整します
+   * @param {Element} element root element, Ajax result を配置する
+   * @param {Element} moreElement more button root element, 'View More' を配置する
+   * @param {*} ActionClass Request 対象の Action Class
+   * @param {Object} [option={}] optional event handler
+   * @param {boolean} [useMasonry=true] isotope を行うかの
+   */
   constructor( element:Element, moreElement:Element, ActionClass, option:Object = {}, useMasonry:boolean = true ) {
 
     option = Safety.object( option );
@@ -134,7 +142,6 @@ export class ViewArchiveMasonry extends View {
     error.render();
 
   }
-
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles

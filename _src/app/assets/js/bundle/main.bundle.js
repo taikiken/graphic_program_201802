@@ -58,83 +58,85 @@
 
 	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
-	var _CommentsType = __webpack_require__(67);
+	var _CommentsType = __webpack_require__(80);
 
-	var _Data = __webpack_require__(68);
+	var _Data = __webpack_require__(81);
 
-	var _Form = __webpack_require__(69);
+	var _Form = __webpack_require__(82);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _Ajax = __webpack_require__(71);
+	var _Ajax = __webpack_require__(84);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
-	var _Types = __webpack_require__(73);
+	var _Types = __webpack_require__(86);
 
-	var _Permalink = __webpack_require__(75);
+	var _Permalink = __webpack_require__(88);
 
-	var _Query = __webpack_require__(77);
+	var _Query = __webpack_require__(90);
 
-	var _Queries = __webpack_require__(80);
+	var _Queries = __webpack_require__(93);
 
-	var _Type = __webpack_require__(74);
+	var _Type = __webpack_require__(87);
 
-	var _CommentType = __webpack_require__(81);
+	var _CommentType = __webpack_require__(94);
 
-	var _App = __webpack_require__(93);
+	var _App = __webpack_require__(95);
 
-	var _Action = __webpack_require__(94);
+	var _Action = __webpack_require__(96);
 
-	var _Offset = __webpack_require__(95);
+	var _Offset = __webpack_require__(97);
 
-	var _Pickup = __webpack_require__(100);
+	var _Pickup = __webpack_require__(102);
 
-	var _Headline = __webpack_require__(101);
+	var _Headline = __webpack_require__(103);
 
-	var _News = __webpack_require__(102);
+	var _News = __webpack_require__(104);
 
-	var _PickupAuth = __webpack_require__(103);
+	var _PickupAuth = __webpack_require__(105);
 
-	var _HeadlineAuth = __webpack_require__(106);
+	var _HeadlineAuth = __webpack_require__(108);
 
-	var _NewsAuth = __webpack_require__(107);
+	var _NewsAuth = __webpack_require__(109);
 
-	var _Category = __webpack_require__(109);
+	var _Category = __webpack_require__(111);
 
-	var _Ranking = __webpack_require__(110);
+	var _Ranking = __webpack_require__(112);
 
-	var _Videos = __webpack_require__(111);
+	var _Videos = __webpack_require__(113);
 
-	var _Widget = __webpack_require__(112);
+	var _Widget = __webpack_require__(114);
 
-	var _Bookmark = __webpack_require__(113);
+	var _Bookmark = __webpack_require__(115);
 
-	var _Search = __webpack_require__(114);
+	var _Search = __webpack_require__(116);
 
-	var _Single = __webpack_require__(115);
+	var _Single = __webpack_require__(117);
 
-	var _View = __webpack_require__(116);
+	var _View = __webpack_require__(118);
 
-	var _ViewArchive = __webpack_require__(118);
+	var _ViewHeaderUser = __webpack_require__(119);
 
-	var _ViewArchiveMasonry = __webpack_require__(130);
+	var _ViewArchive = __webpack_require__(120);
 
-	var _ViewSingle = __webpack_require__(131);
+	var _ViewArchiveMasonry = __webpack_require__(132);
 
-	var _ViewComments = __webpack_require__(136);
+	var _ViewSingle = __webpack_require__(133);
 
-	var _ViewHeadline = __webpack_require__(141);
+	var _ViewComments = __webpack_require__(138);
 
-	var _ViewPickup = __webpack_require__(142);
+	var _ViewHeadline = __webpack_require__(143);
 
-	var _ViewRanking = __webpack_require__(143);
+	var _ViewPickup = __webpack_require__(144);
 
-	var _ViewVideos = __webpack_require__(144);
+	var _ViewRanking = __webpack_require__(145);
 
-	var _Receiver = __webpack_require__(145);
+	var _ViewVideos = __webpack_require__(146);
+
+	var _Receiver = __webpack_require__(147);
 
 	/**
 	 * ToDo: 確認事項
@@ -149,21 +151,41 @@
 	 *    var ut = self.UT
 	 */
 
-	// -------------------------------------
-	// view
+	// action/single
 
-	// action/search
+	// action/bookmark
 
-	// action/sidebar
+	// action/archive
 
-	// -------------------------------------
-	// app/App
+	// action/home
 
 	// -------------------------------------
-	// net
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// app
+	// data
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-02-02 23:33:11
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// -------------------------------------
+	// util
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -235,6 +257,9 @@
 	    ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
 	    ViewSingle: _ViewSingle.ViewSingle,
 	    ViewComments: _ViewComments.ViewComments,
+	    header: {
+	      ViewHeaderUser: _ViewHeaderUser.ViewHeaderUser
+	    },
 	    sidebar: {
 	      ViewRanking: _ViewRanking.ViewRanking,
 	      ViewVideos: _ViewVideos.ViewVideos
@@ -251,41 +276,21 @@
 
 	// sidebar
 
-	// action/single
+	// -------------------------------------
+	// view
 
-	// action/bookmark
+	// action/search
 
-	// action/archive
-
-	// action/home
+	// action/sidebar
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// app/App
 
 	// -------------------------------------
-	// data
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-02 19:04:10
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
+	// net
 
 	// -------------------------------------
-	// util
+	// app
 
 	self.UT = UT;
 
@@ -2372,6 +2377,8 @@
 
 	var _Env = __webpack_require__(62);
 
+	var _UserStatus = __webpack_require__(66);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var _symbol = (0, _symbol3.default)();
@@ -2439,6 +2446,14 @@
 	    set: function set(bool) {
 
 	      _sign = bool;
+
+	      if (bool) {
+
+	        _UserStatus.UserStatus.factory().login();
+	      } else {
+
+	        _UserStatus.UserStatus.factory().logout();
+	      }
 	    }
 	    /**
 	     *
@@ -2563,6 +2578,616 @@
 
 /***/ },
 /* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/02 - 20:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserStatus = undefined;
+
+	var _getPrototypeOf = __webpack_require__(67);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(72);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(73);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol2 = __webpack_require__(52);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _EventDispatcher2 = __webpack_require__(78);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+	var _instance = null;
+
+	/**
+	 * ログイン / ログアウト を通知
+	 */
+
+	var UserStatus = exports.UserStatus = function (_EventDispatcher) {
+	  (0, _inherits3.default)(UserStatus, _EventDispatcher);
+
+	  /**
+	   * ログイン / ログアウト を通知する SingleTon
+	   * @example
+	   * var userStatus = UserStatus.factory();
+	   *
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   * @return {UserStatus} UserStatus インスタンスを返します
+	   */
+
+	  function UserStatus(target) {
+	    var _ret;
+
+	    (0, _classCallCheck3.default)(this, UserStatus);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('UserStatus is static Class. not use new UserStatus().');
+	    }
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(UserStatus).call(this));
+
+	    return _ret = _this, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+	  /**
+	   * UserStatus.LOGE_IN event を fire します
+	   */
+
+	  (0, _createClass3.default)(UserStatus, [{
+	    key: 'login',
+	    value: function login() {
+	      this.dispatch({ type: UserStatus.LOGE_IN });
+	    }
+	    /**
+	     * UserStatus.LOGE_OUT event を fire します
+	     */
+
+	  }, {
+	    key: 'logout',
+	    value: function logout() {
+	      this.dispatch({ type: UserStatus.LOGE_OUT });
+	    }
+	    /**
+	     * LOGE_IN event
+	     * @return {string} LOGE_IN event type を返します
+	     */
+
+	  }], [{
+	    key: 'factory',
+
+	    /**
+	     * instance を生成します
+	     * @return {UserStatus} UserStatus instance を返します
+	     */
+	    value: function factory() {
+
+	      if (_instance === null) {
+
+	        _instance = new UserStatus(_symbol);
+	      }
+
+	      return _instance;
+	    }
+	  }, {
+	    key: 'LOGE_IN',
+	    get: function get() {
+	      return 'logIn';
+	    }
+	    /**
+	     * LOGE_OUT event
+	     * @return {string} LOGE_OUT event type を返します
+	     */
+
+	  }, {
+	    key: 'LOGE_OUT',
+	    get: function get() {
+	      return 'logOut';
+	    }
+	  }]);
+	  return UserStatus;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(68), __esModule: true };
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(69);
+	module.exports = __webpack_require__(17).Object.getPrototypeOf;
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 Object.getPrototypeOf(O)
+	var toObject = __webpack_require__(70);
+
+	__webpack_require__(71)('getPrototypeOf', function($getPrototypeOf){
+	  return function getPrototypeOf(it){
+	    return $getPrototypeOf(toObject(it));
+	  };
+	});
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(12);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most Object methods by ES6 should accept primitives
+	var $export = __webpack_require__(15)
+	  , core    = __webpack_require__(17)
+	  , fails   = __webpack_require__(25);
+	module.exports = function(KEY, exec){
+	  var fn  = (core.Object || {})[KEY] || Object[KEY]
+	    , exp = {};
+	  exp[KEY] = exec(fn);
+	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+	};
+
+/***/ },
+/* 72 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _typeof2 = __webpack_require__(51);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }
+
+	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
+	};
+
+	exports.__esModule = true;
+
+/***/ },
+/* 73 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _Object$create = __webpack_require__(49)["default"];
+
+	var _Object$setPrototypeOf = __webpack_require__(74)["default"];
+
+	exports["default"] = function (subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+	  }
+
+	  subClass.prototype = _Object$create(superClass && superClass.prototype, {
+	    constructor: {
+	      value: subClass,
+	      enumerable: false,
+	      writable: true,
+	      configurable: true
+	    }
+	  });
+	  if (superClass) _Object$setPrototypeOf ? _Object$setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	};
+
+	exports.__esModule = true;
+
+/***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(75), __esModule: true };
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(76);
+	module.exports = __webpack_require__(17).Object.setPrototypeOf;
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.19 Object.setPrototypeOf(O, proto)
+	var $export = __webpack_require__(15);
+	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(77).set});
+
+/***/ },
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Works with __proto__ only. Old v8 can't work with null proto objects.
+	/* eslint-disable no-proto */
+	var getDesc  = __webpack_require__(22).getDesc
+	  , isObject = __webpack_require__(37)
+	  , anObject = __webpack_require__(36);
+	var check = function(O, proto){
+	  anObject(O);
+	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
+	};
+	module.exports = {
+	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
+	    function(test, buggy, set){
+	      try {
+	        set = __webpack_require__(18)(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
+	        set(test, []);
+	        buggy = !(test instanceof Array);
+	      } catch(e){ buggy = true; }
+	      return function setPrototypeOf(O, proto){
+	        check(O, proto);
+	        if(buggy)O.__proto__ = proto;
+	        else set(O, proto);
+	        return O;
+	      };
+	    }({}, false) : undefined),
+	  check: check
+	};
+
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/29 - 21:12
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	/**
+	 * <h2>EventDispatcher</h2>
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.EventDispatcher = undefined;
+
+	var _getIterator2 = __webpack_require__(2);
+
+	var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EventDispatcher = exports.EventDispatcher = function () {
+	  /**
+	   * custom event を作成し管理します<br>
+	   * **extends** して使います。
+	   */
+
+	  function EventDispatcher() {
+	    (0, _classCallCheck3.default)(this, EventDispatcher);
+
+	    this._listeners = {};
+	  }
+
+	  /**
+	   * event type に リスナー関数を bind します
+	   * @param {string} type event type
+	   * @param {Function} listener callback関数
+	   */
+
+	  (0, _createClass3.default)(EventDispatcher, [{
+	    key: 'on',
+	    value: function on(type, listener) {
+
+	      if (listener === null) {
+	        // listener が null
+	        // 処理しない
+	        return;
+	      }
+
+	      var listeners = this._listeners;
+
+	      // listeners.type が存在するかを調べます
+	      // if ( !listeners[ type ].hasOwnProperty( type ) ) {
+	      if (typeof listeners[type] === 'undefined') {
+
+	        // listeners.type が存在しない
+	        // listeners.type 新規配列を作成し
+	        // listener を配列へ登録します
+	        listeners[type] = [];
+	        listeners[type].push(listener);
+	      } else {
+
+	        // すでに listeners.type が存在する
+	        // listeners.type 配列に listener が存在しないならば登録します
+	        if (listeners[type].indexOf(listener) === -1) {
+
+	          listeners[type].push(listener);
+	        }
+	      }
+	    }
+
+	    /**
+	     * event type からリスナー関数を remove します<br>
+	     * 内部処理は一時的に null 設定にします
+	     * @param {string} type event type
+	     * @param {Function} listener リスナー関数
+	     */
+
+	  }, {
+	    key: 'off',
+	    value: function off(type, listener) {
+
+	      if (listener === null) {
+	        // listener が null
+	        // 処理しない
+	        return;
+	      }
+
+	      var listeners = this._listeners;
+
+	      if (typeof listeners[type] === 'undefined') {
+	        // listener.type が存在しない
+	        // 処理しない
+	        return;
+	      }
+
+	      var types = listeners[type];
+
+	      // listener の配列位置を調べる
+	      var index = types.indexOf(listener);
+
+	      if (index === -1) {
+	        // 配列位置が -1, 見つからなかった
+	        // 処理しない
+	        return;
+	      }
+
+	      // すぐに削除するのでは無く null 代入
+	      // loop の中で連続で off されると index 位置が変わるとまずい
+	      types[index] = null;
+
+	      this.clean(type, types);
+	    }
+
+	    /**
+	     * 内部関数<br>
+	     * リスナーの中をクリンーンにします<br>
+	     * リスナーリストが全て null の時に 空配列にします
+	     * @param {string} type event type
+	     * @param {Array<Function>} types event type に登録されている関数配列
+	     */
+
+	  }, {
+	    key: 'clean',
+	    value: function clean(type, types) {
+
+	      var hasFunction = false;
+
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = (0, _getIterator3.default)(types), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var listener = _step.value;
+
+	          if (listener !== null) {
+	            hasFunction = true;
+	            break;
+	          }
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+
+	      if (!hasFunction) {
+
+	        // null 以外が無い
+	        this._listeners[type] = [];
+	      }
+	    }
+
+	    /**
+	     * event type にリスナー関数が登録されているかを調べます
+	     * @param {string} type event type
+	     * @param {Function} listener リスナー関数
+	     * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+	     */
+
+	  }, {
+	    key: 'has',
+	    value: function has(type, listener) {
+
+	      if (listener === null) {
+	        // listener が null
+	        // 処理しない
+	        return false;
+	      }
+
+	      var listeners = this._listeners;
+
+	      if (typeof listeners[type] === 'undefined') {
+	        // listener.type が存在しない
+	        // 処理しない
+	        return false;
+	      }
+
+	      // 存在チェック
+	      return listeners[type].indexOf(listener) !== -1;
+	    }
+	    /**
+	     * イベントを発生させリスナー関数を call します
+	     * @param {Object} event type が必須です
+	     */
+
+	  }, {
+	    key: 'dispatch',
+	    value: function dispatch(event) {
+
+	      var listeners = this._listeners;
+
+	      console.log('dispatch ', event);
+	      // console.log( 'listeners[ event.type ] ', listeners[ event.type ] );
+
+	      if (typeof listeners[event.type] === 'undefined') {
+	        // listener.type が存在しない
+	        // 処理しない
+	        return;
+	      }
+
+	      var types = listeners[event.type];
+	      event.target = this;
+
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
+
+	      try {
+	        for (var _iterator2 = (0, _getIterator3.default)(types), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var listener = _step2.value;
+
+	          if (listener !== null && typeof listener === 'function') {
+	            // callback apply
+	            // 第二引数がObjectの時は call する
+	            listener.call(this, event);
+	          }
+	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	            _iterator2.return();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
+	        }
+	      }
+	    }
+
+	    /**
+	     * alias on,
+	     * event type に リスナー関数を bind します
+	     * @param {string} type event type
+	     * @param {Function} listener callback関数
+	     */
+
+	  }, {
+	    key: 'addEventListener',
+	    value: function addEventListener(type, listener) {
+	      this.on(type, listener);
+	    }
+	    /**
+	     * alias off,
+	     * event type からリスナー関数を remove します
+	     * @param {string} type event type
+	     * @param {Function} listener リスナー関数
+	     */
+
+	  }, {
+	    key: 'removeEventListener',
+	    value: function removeEventListener(type, listener) {
+	      this.off(type, listener);
+	    }
+	    /**
+	     * alias has,
+	     * event type にリスナー関数が登録されているかを調べます
+	     * @param {string} type event type
+	     * @param {Function} listener リスナー関数
+	     * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+	     */
+
+	  }, {
+	    key: 'hasEventListener',
+	    value: function hasEventListener(type, listener) {
+	      return this.has(type, listener);
+	    }
+	    /**
+	     * alias dispatch,
+	     * イベントを発生させリスな関数を call します
+	     *
+	     * @param {Object} event type が必須です
+	     */
+
+	  }, {
+	    key: 'dispatchEvent',
+	    value: function dispatchEvent(event) {
+	      this.dispatch(event);
+	    }
+	  }]);
+	  return EventDispatcher;
+	}();
+
+/***/ },
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2738,7 +3363,7 @@
 	}();
 
 /***/ },
-/* 67 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2838,7 +3463,7 @@
 	}();
 
 /***/ },
-/* 68 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2914,7 +3539,7 @@
 	}();
 
 /***/ },
-/* 69 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2951,7 +3576,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Data = __webpack_require__(68);
+	var _Data = __webpack_require__(81);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3038,7 +3663,7 @@
 	}();
 
 /***/ },
-/* 70 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3197,7 +3822,7 @@
 	}();
 
 /***/ },
-/* 71 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3230,7 +3855,7 @@
 
 	var _Codes = __webpack_require__(63);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3398,7 +4023,7 @@
 	}();
 
 /***/ },
-/* 72 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3431,11 +4056,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Types = __webpack_require__(73);
+	var _Types = __webpack_require__(86);
 
 	var _User = __webpack_require__(64);
 
-	var _ApiDae = __webpack_require__(78);
+	var _ApiDae = __webpack_require__(91);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3789,7 +4414,7 @@
 	}();
 
 /***/ },
-/* 73 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3818,11 +4443,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Type = __webpack_require__(74);
+	var _Type = __webpack_require__(87);
 
-	var _Permalink = __webpack_require__(75);
+	var _Permalink = __webpack_require__(88);
 
-	var _Quries = __webpack_require__(76);
+	var _Quries = __webpack_require__(89);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3920,7 +4545,7 @@
 	}();
 
 /***/ },
-/* 74 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4044,7 +4669,7 @@
 	}();
 
 /***/ },
-/* 75 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4155,7 +4780,7 @@
 	}();
 
 /***/ },
-/* 76 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4188,7 +4813,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(77);
+	var _Query = __webpack_require__(90);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4279,7 +4904,7 @@
 	}();
 
 /***/ },
-/* 77 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4379,7 +5004,7 @@
 	}();
 
 /***/ },
-/* 78 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4414,17 +5039,17 @@
 
 	var _Env = __webpack_require__(62);
 
-	var _Path = __webpack_require__(79);
+	var _Path = __webpack_require__(92);
 
-	var _Types = __webpack_require__(73);
+	var _Types = __webpack_require__(86);
 
-	var _Type = __webpack_require__(74);
+	var _Type = __webpack_require__(87);
 
-	var _Permalink = __webpack_require__(75);
+	var _Permalink = __webpack_require__(88);
 
-	var _Queries = __webpack_require__(80);
+	var _Queries = __webpack_require__(93);
 
-	var _Query = __webpack_require__(77);
+	var _Query = __webpack_require__(90);
 
 	var _Loc = __webpack_require__(1);
 
@@ -4679,7 +5304,7 @@
 	}();
 
 /***/ },
-/* 79 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4873,7 +5498,7 @@
 	}();
 
 /***/ },
-/* 80 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4906,7 +5531,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(77);
+	var _Query = __webpack_require__(90);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4998,7 +5623,7 @@
 	}();
 
 /***/ },
-/* 81 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5021,7 +5646,7 @@
 	});
 	exports.CommentType = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5033,15 +5658,15 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Query2 = __webpack_require__(77);
+	var _Query2 = __webpack_require__(90);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5097,160 +5722,7 @@
 	}(_Query2.Query);
 
 /***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(83), __esModule: true };
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(84);
-	module.exports = __webpack_require__(17).Object.getPrototypeOf;
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.2.9 Object.getPrototypeOf(O)
-	var toObject = __webpack_require__(85);
-
-	__webpack_require__(86)('getPrototypeOf', function($getPrototypeOf){
-	  return function getPrototypeOf(it){
-	    return $getPrototypeOf(toObject(it));
-	  };
-	});
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(12);
-	module.exports = function(it){
-	  return Object(defined(it));
-	};
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(15)
-	  , core    = __webpack_require__(17)
-	  , fails   = __webpack_require__(25);
-	module.exports = function(KEY, exec){
-	  var fn  = (core.Object || {})[KEY] || Object[KEY]
-	    , exp = {};
-	  exp[KEY] = exec(fn);
-	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
-	};
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _typeof2 = __webpack_require__(51);
-
-	var _typeof3 = _interopRequireDefault(_typeof2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (self, call) {
-	  if (!self) {
-	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	  }
-
-	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
-	};
-
-	exports.__esModule = true;
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _Object$create = __webpack_require__(49)["default"];
-
-	var _Object$setPrototypeOf = __webpack_require__(89)["default"];
-
-	exports["default"] = function (subClass, superClass) {
-	  if (typeof superClass !== "function" && superClass !== null) {
-	    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	  }
-
-	  subClass.prototype = _Object$create(superClass && superClass.prototype, {
-	    constructor: {
-	      value: subClass,
-	      enumerable: false,
-	      writable: true,
-	      configurable: true
-	    }
-	  });
-	  if (superClass) _Object$setPrototypeOf ? _Object$setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	};
-
-	exports.__esModule = true;
-
-/***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(90), __esModule: true };
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(91);
-	module.exports = __webpack_require__(17).Object.setPrototypeOf;
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.3.19 Object.setPrototypeOf(O, proto)
-	var $export = __webpack_require__(15);
-	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(92).set});
-
-/***/ },
-/* 92 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Works with __proto__ only. Old v8 can't work with null proto objects.
-	/* eslint-disable no-proto */
-	var getDesc  = __webpack_require__(22).getDesc
-	  , isObject = __webpack_require__(37)
-	  , anObject = __webpack_require__(36);
-	var check = function(O, proto){
-	  anObject(O);
-	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
-	};
-	module.exports = {
-	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
-	    function(test, buggy, set){
-	      try {
-	        set = __webpack_require__(18)(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
-	        set(test, []);
-	        buggy = !(test instanceof Array);
-	      } catch(e){ buggy = true; }
-	      return function setPrototypeOf(O, proto){
-	        check(O, proto);
-	        if(buggy)O.__proto__ = proto;
-	        else set(O, proto);
-	        return O;
-	      };
-	    }({}, false) : undefined),
-	  check: check
-	};
-
-/***/ },
-/* 93 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5285,7 +5757,7 @@
 
 	var _Env = __webpack_require__(62);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5360,7 +5832,7 @@
 	}();
 
 /***/ },
-/* 94 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5389,11 +5861,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _Ajax = __webpack_require__(71);
+	var _Ajax = __webpack_require__(84);
 
-	var _Types = __webpack_require__(73);
+	var _Types = __webpack_require__(86);
 
 	var _Safety = __webpack_require__(44);
 
@@ -5510,7 +5982,7 @@
 	}();
 
 /***/ },
-/* 95 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5531,7 +6003,7 @@
 	});
 	exports.Offset = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5543,25 +6015,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _get2 = __webpack_require__(96);
+	var _get2 = __webpack_require__(98);
 
 	var _get3 = _interopRequireDefault(_get2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _Action2 = __webpack_require__(94);
+	var _Action2 = __webpack_require__(96);
 
-	var _Types = __webpack_require__(73);
+	var _Types = __webpack_require__(86);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	var _Safety = __webpack_require__(44);
 
@@ -5749,12 +6221,12 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _Object$getOwnPropertyDescriptor = __webpack_require__(97)["default"];
+	var _Object$getOwnPropertyDescriptor = __webpack_require__(99)["default"];
 
 	exports["default"] = function get(_x, _x2, _x3) {
 	  var _again = true;
@@ -5798,36 +6270,36 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(98), __esModule: true };
+	module.exports = { "default": __webpack_require__(100), __esModule: true };
 
 /***/ },
-/* 98 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(22);
-	__webpack_require__(99);
+	__webpack_require__(101);
 	module.exports = function getOwnPropertyDescriptor(it, key){
 	  return $.getDesc(it, key);
 	};
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
 	var toIObject = __webpack_require__(9);
 
-	__webpack_require__(86)('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor){
+	__webpack_require__(71)('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor){
 	  return function getOwnPropertyDescriptor(it, key){
 	    return $getOwnPropertyDescriptor(toIObject(it), key);
 	  };
 	});
 
 /***/ },
-/* 100 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5848,7 +6320,7 @@
 	});
 	exports.Pickup = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5860,19 +6332,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(94);
+	var _Action2 = __webpack_require__(96);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5931,7 +6403,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 101 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5952,7 +6424,7 @@
 	});
 	exports.Headline = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -5964,19 +6436,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(94);
+	var _Action2 = __webpack_require__(96);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6021,7 +6493,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 102 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6042,7 +6514,7 @@
 	});
 	exports.News = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6050,19 +6522,19 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(95);
+	var _Offset2 = __webpack_require__(97);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6096,7 +6568,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 103 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6117,7 +6589,7 @@
 	});
 	exports.PickupAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6129,21 +6601,21 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuth2 = __webpack_require__(104);
+	var _ActionAuth2 = __webpack_require__(106);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
 	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6191,7 +6663,7 @@
 	}(_ActionAuth2.ActionAuth);
 
 /***/ },
-/* 104 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6212,7 +6684,7 @@
 	});
 	exports.ActionAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6224,25 +6696,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(94);
+	var _Action2 = __webpack_require__(96);
 
 	var _User = __webpack_require__(64);
 
-	var _Token = __webpack_require__(105);
+	var _Token = __webpack_require__(107);
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _Types = __webpack_require__(73);
+	var _Types = __webpack_require__(86);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6301,7 +6773,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 105 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6390,7 +6862,7 @@
 	exports.Token = Token;
 
 /***/ },
-/* 106 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6411,7 +6883,7 @@
 	});
 	exports.HeadlineAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6423,21 +6895,21 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuth2 = __webpack_require__(104);
+	var _ActionAuth2 = __webpack_require__(106);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
 	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6485,7 +6957,7 @@
 	}(_ActionAuth2.ActionAuth);
 
 /***/ },
-/* 107 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6506,7 +6978,7 @@
 	});
 	exports.NewsAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6514,21 +6986,21 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _OffsetAuth2 = __webpack_require__(108);
+	var _OffsetAuth2 = __webpack_require__(110);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
 	var _User = __webpack_require__(64);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6566,7 +7038,7 @@
 	}(_OffsetAuth2.OffsetAuth);
 
 /***/ },
-/* 108 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6587,7 +7059,7 @@
 	});
 	exports.OffsetAuth = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6599,25 +7071,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(95);
+	var _Offset2 = __webpack_require__(97);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
-	var _Token = __webpack_require__(105);
+	var _Token = __webpack_require__(107);
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _Types = __webpack_require__(73);
+	var _Types = __webpack_require__(86);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6687,7 +7159,7 @@
 	// import {User} from '../app/User';
 
 /***/ },
-/* 109 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6708,7 +7180,7 @@
 	});
 	exports.Category = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6720,17 +7192,17 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(95);
+	var _Offset2 = __webpack_require__(97);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
 	var _Safety = __webpack_require__(44);
 
@@ -6834,7 +7306,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 110 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6855,7 +7327,7 @@
 	});
 	exports.Ranking = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6863,15 +7335,15 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Category2 = __webpack_require__(109);
+	var _Category2 = __webpack_require__(111);
 
 	var _Safety = __webpack_require__(44);
 
@@ -6905,7 +7377,7 @@
 	}(_Category2.Category);
 
 /***/ },
-/* 111 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6926,7 +7398,7 @@
 	});
 	exports.Videos = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -6934,15 +7406,15 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Category2 = __webpack_require__(109);
+	var _Category2 = __webpack_require__(111);
 
 	var _Safety = __webpack_require__(44);
 
@@ -6976,7 +7448,7 @@
 	}(_Category2.Category);
 
 /***/ },
-/* 112 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7010,11 +7482,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Ranking = __webpack_require__(110);
+	var _Ranking = __webpack_require__(112);
 
-	var _Videos = __webpack_require__(111);
+	var _Videos = __webpack_require__(113);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	var _Safety = __webpack_require__(44);
 
@@ -7097,7 +7569,7 @@
 	}();
 
 /***/ },
-/* 113 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7118,7 +7590,7 @@
 	});
 	exports.Bookmark = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7130,11 +7602,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -7142,11 +7614,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Action2 = __webpack_require__(94);
+	var _Action2 = __webpack_require__(96);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
-	var _Path = __webpack_require__(79);
+	var _Path = __webpack_require__(92);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7273,7 +7745,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7294,7 +7766,7 @@
 	});
 	exports.Search = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7306,19 +7778,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(95);
+	var _Offset2 = __webpack_require__(97);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
-	var _Length = __webpack_require__(66);
+	var _Length = __webpack_require__(79);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7388,7 +7860,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 115 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7409,7 +7881,7 @@
 	});
 	exports.Single = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7421,19 +7893,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(94);
+	var _Action2 = __webpack_require__(96);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
-	var _Path = __webpack_require__(79);
+	var _Path = __webpack_require__(92);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7494,7 +7966,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 116 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7504,7 +7976,7 @@
 	});
 	exports.View = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -7516,15 +7988,15 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _EventDispatcher2 = __webpack_require__(117);
+	var _EventDispatcher2 = __webpack_require__(78);
 
 	var _Safety = __webpack_require__(44);
 
@@ -7617,6 +8089,15 @@
 	    get: function get() {
 	      return this._element;
 	    }
+
+	    /**
+	     * render root element を設定します
+	     * @param {Element} element render root element
+	     */
+	    ,
+	    set: function set(element) {
+	      this._element = element;
+	    }
 	    /**
 	     *
 	     * @return {Object|*} callback handler がセットされたObjectを返します
@@ -7627,6 +8108,15 @@
 	    get: function get() {
 	      return this._option;
 	    }
+
+	    /**
+	     * callback handler をセットします
+	     * @param {Object} option callback handler がセットされた Object
+	     */
+	    ,
+	    set: function set(option) {
+	      this._option = option;
+	    }
 	    /**
 	     *
 	     * @return {*} Action instance を返します
@@ -7636,6 +8126,15 @@
 	    key: 'action',
 	    get: function get() {
 	      return this._action;
+	    }
+
+	    /**
+	     * Action instance を設定します
+	     * @param {*} action Action instance
+	     */
+	    ,
+	    set: function set(action) {
+	      this._action = action;
 	    }
 	  }], [{
 	    key: 'BEFORE_RENDER',
@@ -7707,13 +8206,13 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 117 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/29 - 21:12
+	 * @date 2016/02/02 - 20:47
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -7721,20 +8220,17 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
-	'use strict';
 
-	/**
-	 * <h2>EventDispatcher</h2>
-	 */
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.EventDispatcher = undefined;
+	exports.ViewHeaderUser = undefined;
 
-	var _getIterator2 = __webpack_require__(2);
+	var _getPrototypeOf = __webpack_require__(67);
 
-	var _getIterator3 = _interopRequireDefault(_getIterator2);
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
 	var _classCallCheck2 = __webpack_require__(40);
 
@@ -7744,286 +8240,286 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
+	var _possibleConstructorReturn2 = __webpack_require__(72);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(73);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _symbol2 = __webpack_require__(52);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _View2 = __webpack_require__(118);
+
+	var _User = __webpack_require__(64);
+
+	var _UserStatus = __webpack_require__(66);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var EventDispatcher = exports.EventDispatcher = function () {
+	var _symbol = (0, _symbol3.default)();
+	var _instance = null;
+
+	// React
+	var React = self.React;
+
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * <h3>header user 用メニュー</h3>
+	 * <p>Factory pattern です<br>
+	 * <code>new ViewHeaderUser()</code> はできません。<br>
+	 * <code>ViewHeaderUser.factory()</code> してください。<br>
+	 * </P>
+	 */
+
+	var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
+	  (0, _inherits3.default)(ViewHeaderUser, _View);
+
 	  /**
-	   * custom event を作成し管理します<br>
-	   * **extends** して使います。
+	   * header user 用メニューを作成します
+	   *
+	   * @example
+	   * var headerUser = ViewHeaderUser.factory();
+	   * headerUser.element = document.getElementById('user-profile-nav');
+	   * headerUser.render();
+	   *
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   * @param {Element} element root element
+	   * @param {Object} [option={}] optional event handler
 	   */
 
-	  function EventDispatcher() {
-	    (0, _classCallCheck3.default)(this, EventDispatcher);
+	  function ViewHeaderUser(target, element) {
+	    var _ret;
 
-	    this._listeners = {};
+	    var option = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	    (0, _classCallCheck3.default)(this, ViewHeaderUser);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('UserStatus is static Class. not use new UserStatus().');
+	    }
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
+
+	    return _ret = _this, (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
-
 	  /**
-	   * event type に リスナー関数を bind します
-	   * @param {string} type event type
-	   * @param {Function} listener callback関数
+	   * ユーザーメニューを作成します<br>
+	   * Userのstatusでメニューをだし分けします
 	   */
 
-	  (0, _createClass3.default)(EventDispatcher, [{
-	    key: 'on',
-	    value: function on(type, listener) {
+	  (0, _createClass3.default)(ViewHeaderUser, [{
+	    key: 'render',
+	    value: function render() {
 
-	      if (listener === null) {
-	        // listener が null
-	        // 処理しない
-	        return;
+	      if (!this._element) {
+	        throw new Error('ViewHeaderUser: set root element first');
 	      }
 
-	      var listeners = this._listeners;
+	      if (_User.User.sign) {
 
-	      // listeners.type が存在するかを調べます
-	      // if ( !listeners[ type ].hasOwnProperty( type ) ) {
-	      if (typeof listeners[type] === 'undefined') {
-
-	        // listeners.type が存在しない
-	        // listeners.type 新規配列を作成し
-	        // listener を配列へ登録します
-	        listeners[type] = [];
-	        listeners[type].push(listener);
+	        // ログイン済み
+	        this.renderLogin();
 	      } else {
 
-	        // すでに listeners.type が存在する
-	        // listeners.type 配列に listener が存在しないならば登録します
-	        if (listeners[type].indexOf(listener) === -1) {
+	        // 非ログイン
+	        this.renderLogout();
+	      }
+	    }
+	    /**
+	     * ログインユーザー用メニューを作成します
+	     */
 
-	          listeners[type].push(listener);
+	  }, {
+	    key: 'renderLogin',
+	    value: function renderLogin() {
+
+	      var element = this.element;
+
+	      var UserDom = React.createClass({
+	        displayName: 'UserDom',
+
+	        getInitialState: function getInitialState() {
+	          return {
+	            clicked: false,
+	            open: 'close',
+	            bodyTimer: 0
+	          };
+	        },
+	        clickHandler: function clickHandler(event) {
+
+	          event.preventDefault();
+	          this.toggleState();
+	        },
+	        bodyClick: function bodyClick() {
+
+	          if (this.state.open === 'open') {
+
+	            // document.body が a より先に反応する
+	            // native event bind と React 経由の違いかも
+	            // body click 後の処理を遅延させる, 多分気づかない程度
+	            var timer = setTimeout(this.toggleState, 100);
+	            this.setState({ bodyTimer: timer });
+	          }
+	        },
+	        toggleState: function toggleState() {
+	          // body click からの遅延処理を clear する
+	          // timer を 0 にし error にならないようにする
+	          clearTimeout(this.state.bodyTimer);
+	          this.setState({ bodyTimer: 0 });
+
+	          if (this.state.open === 'close') {
+	            // close -> open
+	            // document.body へ click event handler bind
+	            this.setState({ open: 'open' });
+	            document.body.addEventListener('click', this.bodyClick, false);
+	          } else {
+	            // open -> close
+	            // document.body からclick event handler unbind
+	            this.setState({ open: 'close' });
+	            document.body.removeEventListener('click', this.bodyClick);
+	          }
+	        },
+	        render: function render() {
+
+	          return React.createElement(
+	            'div',
+	            { className: 'user signin ' + this.state.open },
+	            React.createElement(
+	              'a',
+	              { className: 'user-preference', href: '#', onClick: this.clickHandler },
+	              React.createElement(
+	                'span',
+	                { className: 'user-notice' },
+	                '88'
+	              ),
+	              React.createElement(
+	                'span',
+	                { className: 'user-avatar' },
+	                React.createElement('img', { src: '/assets/images/dummy/avatar-40x40.jpg', alt: '' })
+	              )
+	            ),
+	            React.createElement(
+	              'nav',
+	              { className: 'user-menu' },
+	              React.createElement(
+	                'ul',
+	                { className: 'dropmenu' },
+	                React.createElement(
+	                  'li',
+	                  { className: 'dropmenu-item' },
+	                  React.createElement(
+	                    'a',
+	                    { className: 'dropmenu-link', href: '/mypage/' },
+	                    'ブックマーク',
+	                    React.createElement('br', null),
+	                    'アクティビティ'
+	                  )
+	                ),
+	                React.createElement(
+	                  'li',
+	                  { className: 'dropmenu-item' },
+	                  React.createElement(
+	                    'a',
+	                    { className: 'dropmenu-link', href: '/settings/' },
+	                    '設定'
+	                  )
+	                ),
+	                React.createElement(
+	                  'li',
+	                  { className: 'dropmenu-item' },
+	                  React.createElement(
+	                    'a',
+	                    { className: 'dropmenu-link', href: '/logout/' },
+	                    'ログアウト'
+	                  )
+	                )
+	              )
+	            )
+	          );
 	        }
-	      }
-	    }
+	      });
 
+	      ReactDOM.render(React.createElement(UserDom, null), element);
+	    }
 	    /**
-	     * event type からリスナー関数を remove します<br>
-	     * 内部処理は一時的に null 設定にします
-	     * @param {string} type event type
-	     * @param {Function} listener リスナー関数
+	     * 非ログインユーザー用メニューを作成します
 	     */
 
 	  }, {
-	    key: 'off',
-	    value: function off(type, listener) {
+	    key: 'renderLogout',
+	    value: function renderLogout() {
 
-	      if (listener === null) {
-	        // listener が null
-	        // 処理しない
-	        return;
-	      }
+	      var element = this.element;
+	      console.log('renderLogout element ', element);
+	      var UserDom = React.createClass({
+	        displayName: 'UserDom',
 
-	      var listeners = this._listeners;
+	        render: function render() {
 
-	      if (typeof listeners[type] === 'undefined') {
-	        // listener.type が存在しない
-	        // 処理しない
-	        return;
-	      }
-
-	      var types = listeners[type];
-
-	      // listener の配列位置を調べる
-	      var index = types.indexOf(listener);
-
-	      if (index === -1) {
-	        // 配列位置が -1, 見つからなかった
-	        // 処理しない
-	        return;
-	      }
-
-	      // すぐに削除するのでは無く null 代入
-	      // loop の中で連続で off されると index 位置が変わるとまずい
-	      types[index] = null;
-
-	      this.clean(type, types);
-	    }
-
-	    /**
-	     * 内部関数<br>
-	     * リスナーの中をクリンーンにします<br>
-	     * リスナーリストが全て null の時に 空配列にします
-	     * @param {string} type event type
-	     * @param {Array<Function>} types event type に登録されている関数配列
-	     */
-
-	  }, {
-	    key: 'clean',
-	    value: function clean(type, types) {
-
-	      var hasFunction = false;
-
-	      var _iteratorNormalCompletion = true;
-	      var _didIteratorError = false;
-	      var _iteratorError = undefined;
-
-	      try {
-	        for (var _iterator = (0, _getIterator3.default)(types), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	          var listener = _step.value;
-
-	          if (listener !== null) {
-	            hasFunction = true;
-	            break;
-	          }
+	          return React.createElement(
+	            'div',
+	            { className: 'user' },
+	            React.createElement(
+	              'a',
+	              { className: 'user-signup', href: '/signup/' },
+	              '無料登録 / ログイン'
+	            )
+	          );
 	        }
-	      } catch (err) {
-	        _didIteratorError = true;
-	        _iteratorError = err;
-	      } finally {
-	        try {
-	          if (!_iteratorNormalCompletion && _iterator.return) {
-	            _iterator.return();
-	          }
-	        } finally {
-	          if (_didIteratorError) {
-	            throw _iteratorError;
-	          }
-	        }
-	      }
+	      });
 
-	      if (!hasFunction) {
-
-	        // null 以外が無い
-	        this._listeners[type] = [];
-	      }
+	      ReactDOM.render(React.createElement(UserDom, null), element);
 	    }
 
 	    /**
-	     * event type にリスナー関数が登録されているかを調べます
-	     * @param {string} type event type
-	     * @param {Function} listener リスナー関数
-	     * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+	     * UserStatus.LOGE_IN event handler
 	     */
 
 	  }, {
-	    key: 'has',
-	    value: function has(type, listener) {
+	    key: 'didLogin',
+	    value: function didLogin() {
+	      this.renderLogin();
+	    }
+	    /**
+	     * UserStatus.LOGE_OUT event handler
+	     */
 
-	      if (listener === null) {
-	        // listener が null
-	        // 処理しない
-	        return false;
+	  }, {
+	    key: 'didLogout',
+	    value: function didLogout() {
+	      this.renderLogout();
+	    }
+
+	    /**
+	     * instance を生成します
+	     * @return {UserStatus} UserStatus instance を返します
+	     */
+
+	  }], [{
+	    key: 'factory',
+	    value: function factory() {
+
+	      if (_instance === null) {
+
+	        _instance = new ViewHeaderUser(_symbol);
+	        var status = _UserStatus.UserStatus.factory();
+	        status.on(_UserStatus.UserStatus.LOGE_IN, _instance.didLogin.bind(_instance));
+	        status.on(_UserStatus.UserStatus.LOGE_OUT, _instance.didLogout.bind(_instance));
 	      }
 
-	      var listeners = this._listeners;
-
-	      if (typeof listeners[type] === 'undefined') {
-	        // listener.type が存在しない
-	        // 処理しない
-	        return false;
-	      }
-
-	      // 存在チェック
-	      return listeners[type].indexOf(listener) !== -1;
-	    }
-	    /**
-	     * イベントを発生させリスナー関数を call します
-	     * @param {Object} event type が必須です
-	     */
-
-	  }, {
-	    key: 'dispatch',
-	    value: function dispatch(event) {
-
-	      var listeners = this._listeners;
-
-	      console.log('dispatch ', event);
-	      // console.log( 'listeners[ event.type ] ', listeners[ event.type ] );
-
-	      if (typeof listeners[event.type] === 'undefined') {
-	        // listener.type が存在しない
-	        // 処理しない
-	        return;
-	      }
-
-	      var types = listeners[event.type];
-	      event.target = this;
-
-	      var _iteratorNormalCompletion2 = true;
-	      var _didIteratorError2 = false;
-	      var _iteratorError2 = undefined;
-
-	      try {
-	        for (var _iterator2 = (0, _getIterator3.default)(types), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-	          var listener = _step2.value;
-
-	          if (listener !== null && typeof listener === 'function') {
-	            // callback apply
-	            // 第二引数がObjectの時は call する
-	            listener.call(this, event);
-	          }
-	        }
-	      } catch (err) {
-	        _didIteratorError2 = true;
-	        _iteratorError2 = err;
-	      } finally {
-	        try {
-	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
-	            _iterator2.return();
-	          }
-	        } finally {
-	          if (_didIteratorError2) {
-	            throw _iteratorError2;
-	          }
-	        }
-	      }
-	    }
-
-	    /**
-	     * alias on,
-	     * event type に リスナー関数を bind します
-	     * @param {string} type event type
-	     * @param {Function} listener callback関数
-	     */
-
-	  }, {
-	    key: 'addEventListener',
-	    value: function addEventListener(type, listener) {
-	      this.on(type, listener);
-	    }
-	    /**
-	     * alias off,
-	     * event type からリスナー関数を remove します
-	     * @param {string} type event type
-	     * @param {Function} listener リスナー関数
-	     */
-
-	  }, {
-	    key: 'removeEventListener',
-	    value: function removeEventListener(type, listener) {
-	      this.off(type, listener);
-	    }
-	    /**
-	     * alias has,
-	     * event type にリスナー関数が登録されているかを調べます
-	     * @param {string} type event type
-	     * @param {Function} listener リスナー関数
-	     * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
-	     */
-
-	  }, {
-	    key: 'hasEventListener',
-	    value: function hasEventListener(type, listener) {
-	      return this.has(type, listener);
-	    }
-	    /**
-	     * alias dispatch,
-	     * イベントを発生させリスな関数を call します
-	     *
-	     * @param {Object} event type が必須です
-	     */
-
-	  }, {
-	    key: 'dispatchEvent',
-	    value: function dispatchEvent(event) {
-	      this.dispatch(event);
+	      return _instance;
 	    }
 	  }]);
-	  return EventDispatcher;
-	}();
+	  return ViewHeaderUser;
+	}(_View2.View);
 
 /***/ },
-/* 118 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8050,7 +8546,7 @@
 	});
 	exports.ViewArchive = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -8062,25 +8558,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(121);
+	var _ArticleDae = __webpack_require__(123);
 
 	var _Safety = __webpack_require__(44);
 
@@ -8857,7 +9353,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 119 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9010,7 +9506,7 @@
 	}();
 
 /***/ },
-/* 120 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9031,7 +9527,7 @@
 	});
 	exports.ViewError = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -9043,15 +9539,15 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
 	var _Safety = __webpack_require__(44);
 
@@ -9166,7 +9662,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 121 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9199,13 +9695,13 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(122);
+	var _CategoryDae = __webpack_require__(124);
 
-	var _MediaDae = __webpack_require__(123);
+	var _MediaDae = __webpack_require__(125);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(128);
 
-	var _CommentsPopularDae = __webpack_require__(128);
+	var _CommentsPopularDae = __webpack_require__(130);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9446,7 +9942,7 @@
 	}();
 
 /***/ },
-/* 122 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9534,7 +10030,7 @@
 	}();
 
 /***/ },
-/* 123 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9567,9 +10063,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _ImagesDae = __webpack_require__(124);
+	var _ImagesDae = __webpack_require__(126);
 
-	var _VideoDae = __webpack_require__(125);
+	var _VideoDae = __webpack_require__(127);
 
 	var _Safety = __webpack_require__(44);
 
@@ -9671,7 +10167,7 @@
 	}();
 
 /***/ },
-/* 124 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9776,7 +10272,7 @@
 	}();
 
 /***/ },
-/* 125 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9871,7 +10367,7 @@
 	}();
 
 /***/ },
-/* 126 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9900,7 +10396,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _TypeDae = __webpack_require__(127);
+	var _TypeDae = __webpack_require__(129);
 
 	var _Safety = __webpack_require__(44);
 
@@ -9996,7 +10492,7 @@
 	}();
 
 /***/ },
-/* 127 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10094,7 +10590,7 @@
 	}();
 
 /***/ },
-/* 128 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10127,7 +10623,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(129);
+	var _PopularDae = __webpack_require__(131);
 
 	var _Safety = __webpack_require__(44);
 
@@ -10163,6 +10659,9 @@
 	  // ---------------------------------------------------
 	  //  Method
 	  // ---------------------------------------------------
+	  /**
+	   * PopularDae instance を作成します
+	   */
 
 	  (0, _createClass3.default)(CommentsPopularDae, [{
 	    key: 'init',
@@ -10301,7 +10800,7 @@
 	}();
 
 /***/ },
-/* 129 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10334,7 +10833,7 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(128);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10502,7 +11001,7 @@
 	}(); // class
 
 /***/ },
-/* 130 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10525,7 +11024,7 @@
 	});
 	exports.ViewArchiveMasonry = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -10537,25 +11036,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(121);
+	var _ArticleDae = __webpack_require__(123);
 
 	var _Safety = __webpack_require__(44);
 
@@ -10578,11 +11077,20 @@
 	var Isotope = self.Isotope;
 
 	/**
-	 *
+	 * archive 一覧を isotope で
 	 */
 
 	var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
 	  (0, _inherits3.default)(ViewArchiveMasonry, _View);
+
+	  /**
+	   * archive 一覧標示後 isotope で位置調整します
+	   * @param {Element} element root element, Ajax result を配置する
+	   * @param {Element} moreElement more button root element, 'View More' を配置する
+	   * @param {*} ActionClass Request 対象の Action Class
+	   * @param {Object} [option={}] optional event handler
+	   * @param {boolean} [useMasonry=true] isotope を行うかの
+	   */
 
 	  function ViewArchiveMasonry(element, moreElement, ActionClass) {
 	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
@@ -10688,7 +11196,6 @@
 	      var error = new _ViewError.ViewError(this.element, this.option, message);
 	      error.render();
 	    }
-
 	    /**
 	     * dom を render します
 	     * @param {Array} articles JSON responce.articles
@@ -11295,7 +11802,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 131 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11318,7 +11825,7 @@
 	});
 	exports.ViewSingle = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -11330,27 +11837,27 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
-	var _SingleInfo = __webpack_require__(132);
+	var _SingleInfo = __webpack_require__(134);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Single = __webpack_require__(115);
+	var _Single = __webpack_require__(117);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _SingleDae = __webpack_require__(133);
+	var _SingleDae = __webpack_require__(135);
 
 	var _Safety = __webpack_require__(44);
 
@@ -11715,7 +12222,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 132 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11748,7 +12255,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SingleDae = __webpack_require__(133);
+	var _SingleDae = __webpack_require__(135);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11804,7 +12311,7 @@
 	}();
 
 /***/ },
-/* 133 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11825,7 +12332,7 @@
 	});
 	exports.SingleDae = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -11837,19 +12344,19 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(134);
+	var _KeywordsDae = __webpack_require__(136);
 
-	var _RelatedDae2 = __webpack_require__(135);
+	var _RelatedDae2 = __webpack_require__(137);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11940,7 +12447,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 134 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12034,7 +12541,7 @@
 	}();
 
 /***/ },
-/* 135 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12069,11 +12576,11 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(122);
+	var _CategoryDae = __webpack_require__(124);
 
-	var _MediaDae = __webpack_require__(123);
+	var _MediaDae = __webpack_require__(125);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(128);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12250,7 +12757,7 @@
 	}();
 
 /***/ },
-/* 136 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12260,7 +12767,7 @@
 	});
 	exports.ViewComments = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -12272,27 +12779,27 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
-	var _CommentsType = __webpack_require__(67);
+	var _CommentsType = __webpack_require__(80);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Comments = __webpack_require__(137);
+	var _Comments = __webpack_require__(139);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _CommentsListDae = __webpack_require__(138);
+	var _CommentsListDae = __webpack_require__(140);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12482,7 +12989,6 @@
 	  }, {
 	    key: 'mine',
 	    value: function mine(commentsListDae) {}
-
 	    /**
 	     * normal, official, all をレンダリング
 	     * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
@@ -12754,7 +13260,7 @@
 	      });
 
 	      // --------------------------------------------
-	      // COMMENT Dom buid
+	      // COMMENT Dom build
 	      // --------------------------------------------
 	      ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList }), element);
 	    } // all
@@ -12769,7 +13275,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 137 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12790,7 +13296,7 @@
 	});
 	exports.Comments = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -12802,11 +13308,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -12814,15 +13320,15 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _OffsetAuth2 = __webpack_require__(108);
+	var _OffsetAuth2 = __webpack_require__(110);
 
-	var _Api = __webpack_require__(72);
+	var _Api = __webpack_require__(85);
 
 	var _User = __webpack_require__(64);
 
-	var _Path = __webpack_require__(79);
+	var _Path = __webpack_require__(92);
 
-	var _CommentsType = __webpack_require__(67);
+	var _CommentsType = __webpack_require__(80);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12995,7 +13501,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 138 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13024,7 +13530,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(139);
+	var _CommentsDae = __webpack_require__(141);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13106,7 +13612,7 @@
 	}();
 
 /***/ },
-/* 139 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13140,9 +13646,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(129);
+	var _PopularDae = __webpack_require__(131);
 
-	var _ReplyDae = __webpack_require__(140);
+	var _ReplyDae = __webpack_require__(142);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13246,7 +13752,7 @@
 	}();
 
 /***/ },
-/* 140 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13275,7 +13781,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsPopularDae = __webpack_require__(128);
+	var _CommentsPopularDae = __webpack_require__(130);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13333,7 +13839,7 @@
 	}();
 
 /***/ },
-/* 141 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13357,7 +13863,7 @@
 	});
 	exports.ViewHeadline = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -13369,29 +13875,29 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Headline = __webpack_require__(101);
+	var _Headline = __webpack_require__(103);
 
-	var _HeadlineAuth = __webpack_require__(106);
+	var _HeadlineAuth = __webpack_require__(108);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(121);
+	var _ArticleDae = __webpack_require__(123);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13682,7 +14188,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 142 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13706,7 +14212,7 @@
 	});
 	exports.ViewPickup = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -13718,29 +14224,29 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Pickup = __webpack_require__(100);
+	var _Pickup = __webpack_require__(102);
 
-	var _PickupAuth = __webpack_require__(103);
+	var _PickupAuth = __webpack_require__(105);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(121);
+	var _ArticleDae = __webpack_require__(123);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13775,7 +14281,7 @@
 
 	  /**
 	   * action/Pickup を使い Ajax request 後 element へ dom を作成します
-	   * @see ViewHeadline
+	   * @link ViewHeadline
 	   * @param {Element} element root element
 	   * @param {Object} [option={}] optional event handler
 	   */
@@ -14257,7 +14763,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 143 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14280,7 +14786,7 @@
 	});
 	exports.ViewRanking = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -14292,25 +14798,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Widget = __webpack_require__(112);
+	var _Widget = __webpack_require__(114);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(121);
+	var _ArticleDae = __webpack_require__(123);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14597,7 +15103,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 144 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14620,7 +15126,7 @@
 	});
 	exports.ViewVideos = undefined;
 
-	var _getPrototypeOf = __webpack_require__(82);
+	var _getPrototypeOf = __webpack_require__(67);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -14632,25 +15138,25 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(87);
+	var _possibleConstructorReturn2 = __webpack_require__(72);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(88);
+	var _inherits2 = __webpack_require__(73);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(119);
+	var _Empty = __webpack_require__(121);
 
-	var _View2 = __webpack_require__(116);
+	var _View2 = __webpack_require__(118);
 
-	var _ViewError = __webpack_require__(120);
+	var _ViewError = __webpack_require__(122);
 
-	var _Widget = __webpack_require__(112);
+	var _Widget = __webpack_require__(114);
 
-	var _Result = __webpack_require__(70);
+	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(121);
+	var _ArticleDae = __webpack_require__(123);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14935,7 +15441,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 145 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

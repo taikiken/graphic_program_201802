@@ -13,6 +13,7 @@
 
 import {Cookie} from '../net/Cookie';
 import {Env} from './Env';
+import {UserStatus} from '../event/UserStatus';
 
 let _symbol = Symbol();
 let _sign = false;
@@ -54,6 +55,16 @@ export class User {
   static set sign( bool:boolean ) {
 
     _sign = bool;
+
+    if ( bool ) {
+
+      UserStatus.factory().login();
+
+    } else {
+
+      UserStatus.factory().logout();
+
+    }
 
   }
   /**

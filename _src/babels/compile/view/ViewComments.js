@@ -227,7 +227,6 @@ var ViewComments = exports.ViewComments = function (_View) {
   }, {
     key: 'mine',
     value: function mine(commentsListDae) {}
-
     /**
      * normal, official, all をレンダリング
      * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
@@ -499,7 +498,7 @@ var ViewComments = exports.ViewComments = function (_View) {
       });
 
       // --------------------------------------------
-      // COMMENT Dom buid
+      // COMMENT Dom build
       // --------------------------------------------
       ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList }), element);
     } // all

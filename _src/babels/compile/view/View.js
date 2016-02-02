@@ -118,6 +118,15 @@ var View = exports.View = function (_EventDispatcher) {
     get: function get() {
       return this._element;
     }
+
+    /**
+     * render root element を設定します
+     * @param {Element} element render root element
+     */
+    ,
+    set: function set(element) {
+      this._element = element;
+    }
     /**
      *
      * @return {Object|*} callback handler がセットされたObjectを返します
@@ -128,6 +137,15 @@ var View = exports.View = function (_EventDispatcher) {
     get: function get() {
       return this._option;
     }
+
+    /**
+     * callback handler をセットします
+     * @param {Object} option callback handler がセットされた Object
+     */
+    ,
+    set: function set(option) {
+      this._option = option;
+    }
     /**
      *
      * @return {*} Action instance を返します
@@ -137,6 +155,15 @@ var View = exports.View = function (_EventDispatcher) {
     key: 'action',
     get: function get() {
       return this._action;
+    }
+
+    /**
+     * Action instance を設定します
+     * @param {*} action Action instance
+     */
+    ,
+    set: function set(action) {
+      this._action = action;
     }
   }], [{
     key: 'BEFORE_RENDER',

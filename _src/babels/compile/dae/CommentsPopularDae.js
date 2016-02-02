@@ -64,6 +64,9 @@ var CommentsPopularDae = exports.CommentsPopularDae = function () {
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
+  /**
+   * PopularDae instance を作成します
+   */
 
   (0, _createClass3.default)(CommentsPopularDae, [{
     key: 'init',

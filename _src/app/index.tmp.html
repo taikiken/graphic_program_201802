@@ -32,22 +32,8 @@
             </form>
           </div><!-- /.head-search -->
 
-          <div class="user signin">
-            <a class="user-signup" href="hoge">無料登録 / ログイン</a>
+          <div id="user-profile-nav"></div><!--/header-user-->
 
-            <a class="user-preference" href="#">
-              <span class="user-notice">88</span>
-              <span class="user-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
-            </a>
-
-            <nav class="user-menu">
-              <ul class="dropmenu">
-                <li class="dropmenu-item"><a class="dropmenu-link" href="hoge">ブックマーク<br>アクティビティ</a></li>
-                <li class="dropmenu-item"><a class="dropmenu-link" href="hoge">設定</a></li>
-                <li class="dropmenu-item"><a class="dropmenu-link" href="hoge">ログアウト</a></li>
-              </ul>
-            </nav><!-- /.user-menu -->
-          </div><!-- /.user -->
         </aside>
       </div><!-- /.head-sec-inner -->
     </header><!-- /.head-sec -->
@@ -111,9 +97,9 @@
 
         <div class="newsboad">
 
-          <div id="board-container"></div><!--/board-container-->
+          <div id="board-container"></div><!--/archive-->
 
-          <div id="board-container-more"></div><!--/more-button-->
+          <div id="board-container-more"></div><!--/archive-more-->
 
         </div><!-- /.newsboad -->
       </section><!-- /.main-sec -->
@@ -189,17 +175,26 @@
       document = window.document;
 
     var UT = self.UT;
-    var pickup;
 
+    // ---------------------------------------------------------
+    // test code
     // develop mode
     UT.app.App.develop();
 
     // sign in
     UT.app.User.login();
+    // test code ここまで
+    // ---------------------------------------------------------
+
+    // ---------------------------------------------------------
+    // header.user
+    var headerUser = UT.view.header.ViewHeaderUser.factory();
+    headerUser.element = document.getElementById('user-profile-nav');
+    headerUser.render();
 
     // ---------------------------------------------------------
     // pickup
-    pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
+    var pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
     pickup.start();
 
     // ---------------------------------------------------------

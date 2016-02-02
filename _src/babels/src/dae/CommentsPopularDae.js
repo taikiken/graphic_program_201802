@@ -40,6 +40,9 @@ export class CommentsPopularDae {
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
+  /**
+   * PopularDae instance を作成します
+   */
   init() {
     if ( this._popularComments === null ) {
       let popularComments = [];
