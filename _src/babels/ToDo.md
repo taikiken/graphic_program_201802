@@ -8,11 +8,13 @@
 ## header
 **user** popup
 
-### ログイン
-1
+1. ログイン
+    - [] model
+    - [] view
 
-### 非ログイン
-
+1. 非ログイン
+    - [] model
+    - [] view
 
 ## index
 1. pickup
@@ -21,20 +23,20 @@
     
 1. headline
     - [X] model
-    - [] view
+    - [X] view
     
 1. 一覧
     - [X] model
-    - [] view
+    - [X] view
     - [X] paging
     
 1. ranking
     - [X] model
-    - [] view
+    - [X] view
     
 1. video
     - [X] model
-    - [] view
+    - [X] view
     
 ## 記事詳細
 1. URLからID抽出

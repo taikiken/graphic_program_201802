@@ -3356,6 +3356,22 @@ table tr.w200 > td {
     white-space: nowrap;
     outline: none; }
 
+.sprite-common, .user-config-nav a span:before, .user-config-btn-setting:before, .activity-link:after, .btn-bookmark span:before,
+.btn-bookmark-disable span:before, .newsboad-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-response i {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.board-item {
+  width: 340px; }
+
+.prepare .board-item {
+  float: left; }
+
 .comment-user-thumb, .comment-user-data {
   display: table-cell;
   vertical-align: middle; }
