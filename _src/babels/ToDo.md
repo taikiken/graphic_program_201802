@@ -68,6 +68,7 @@
     - [] bad delete
     
 1. コメント official
+    記事IDから取得する
     - [X] model
     - [] view
     - [-] paging  
@@ -81,6 +82,7 @@
     - [] bad delete
         
 1. コメント normal
+    記事IDから取得する
     - [X] model
     - [] view
     - [-] paging  
@@ -94,15 +96,19 @@
     - [] bad delete
     
 1. ranking
+    記事カテゴリーから取得する
     - [X] model
     - [] view
     
 1. video
+    記事カテゴリーから取得する
     - [X] model
     - [] view
 
    
 ## カテゴリー
+1. URLからslug抽出
+    - [X]
     
 1. 一覧
     - [] model
