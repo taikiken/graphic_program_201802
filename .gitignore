@@ -27,3 +27,7 @@ _bin
 
 # crossdomain.xml
 crossdomain.xml
+
+
+# vagrant
+.vagrant
