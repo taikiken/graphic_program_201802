@@ -1,0 +1,42 @@
+# encoding: utf-8
+# vim: ft=ruby expandtab shiftwidth=2 tabstop=2
+
+#
+# General Settings
+#
+box: bento/centos-6.7
+chef_cookbook_path: ./provision
+
+#
+# Virtual Machine Settings
+#
+memory: 1024
+cpus: 1
+
+#
+# Network Settings
+#
+hostname: undotsushin.local
+ip: 192.168.33.50
+sync_folder: 'public' # sync :
+
+#
+# Apache
+#
+document_root: '/var/public'
+
+#
+# User and Group
+#
+user: vagrant
+group: vagrant
+
+#
+# phpenv
+#
+php_version: default
+
+#
+# Linked Clone for Vagrant v1.8
+#
+linked_clone: false
