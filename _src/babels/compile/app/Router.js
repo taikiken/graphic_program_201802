@@ -16,6 +16,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Router = undefined;
 
+var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -133,8 +137,8 @@ var Router = exports.Router = function () {
      */
 
   }, {
-    key: 'isSigneup',
-    value: function isSigneup() {
+    key: 'isSignup',
+    value: function isSignup() {
       return _Loc.Loc.path.substr(1, 7) === 'signup/';
     }
     /**
@@ -148,15 +152,33 @@ var Router = exports.Router = function () {
       return _Loc.Loc.path.substr(1, 7) === 'mypage/';
     }
     /**
-     * category slug を調べます
-     * @return {string} category slug を返します
+     * category slug, type を調べます
+     * @return {{slug: string, type: string}} category slug, type を返します
      */
 
   }, {
-    key: 'slug',
-    value: function slug() {
+    key: 'category',
+    value: function category() {
       if (Router.isCategory()) {
-        return _Loc.Loc.path.replace('/category/', '').split('/').shift();
+        var _Loc$path$replace$spl = _Loc.Loc.path.replace('/category/', '').split('/');
+
+        var _Loc$path$replace$spl2 = (0, _slicedToArray3.default)(_Loc$path$replace$spl, 2);
+
+        var slug = _Loc$path$replace$spl2[0];
+        var type = _Loc$path$replace$spl2[1];
+
+        if (slug.indexOf('.html') !== -1) {
+          slug = '';
+        }
+
+        if (slug === '') {
+          slug = 'all';
+        }
+
+        return {
+          slug: slug,
+          type: type
+        };
       }
     }
     /**

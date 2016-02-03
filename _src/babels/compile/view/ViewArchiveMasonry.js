@@ -78,28 +78,39 @@ var Isotope = self.Isotope;
  * archive 一覧を isotope で
  */
 
-var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
+var ViewArchiveMasonry = function (_View) {
   (0, _inherits3.default)(ViewArchiveMasonry, _View);
 
   /**
    * archive 一覧標示後 isotope で位置調整します
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
-   * @param {*} ActionClass Request 対象の Action Class
+   * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
+   * @param {string} [slug=''] Category archive 取得時のslug
    * @param {boolean} [useMasonry=true] isotope を行うかの
    */
 
-  function ViewArchiveMasonry(element, moreElement, ActionClass) {
+  function ViewArchiveMasonry(element, moreElement) {
+    var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
+    var slug = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
+    var useMasonry = arguments.length <= 5 || arguments[5] === undefined ? true : arguments[5];
     (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
 
     option = _Safety.Safety.object(option);
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
 
-    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+    if (ActionClass !== null) {
+
+      if (slug !== null && typeof slug !== 'undefined' && slug !== '') {
+        // Category
+        _this2._action = new ActionClass(slug, '', _this2.done.bind(_this2), _this2.fail.bind(_this2));
+      } else {
+        _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+      }
+    }
     _this2._moreElement = moreElement;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
@@ -123,14 +134,18 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
    */
 
   (0, _createClass3.default)(ViewArchiveMasonry, [{
-    key: 'start',
+    key: 'category',
 
     // ---------------------------------------------------
     //  Method
     // ---------------------------------------------------
+    value: function category(_category) {}
     /**
      * Ajax request を開始します
      */
+
+  }, {
+    key: 'start',
     value: function start() {
 
       this.action.next();
@@ -145,7 +160,7 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
     value: function done(result) {
 
       var articles = result.articles;
-
+      console.log('ViewArchiveMasonry done ', result);
       if (typeof articles === 'undefined') {
 
         // articles undefined
@@ -800,3 +815,5 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
   }]);
   return ViewArchiveMasonry;
 }(_View2.View);
+
+exports.ViewArchiveMasonry = ViewArchiveMasonry;

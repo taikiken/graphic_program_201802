@@ -19,6 +19,8 @@ import {Safety} from '../../data/Safety';
  * 記事一覧, カテゴリー別, 全て...
  */
 export class Category extends Offset {
+  // 引数の順番を失敗した
+  // resolve, reject が先だった...
   /**
    * 記事一覧を取得します
    * @param {string} [slug=all] category slug です

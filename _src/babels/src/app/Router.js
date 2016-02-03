@@ -95,7 +95,7 @@ export class Router {
    * signup page かを調べます
    * @return {boolean} signup page なら true を返します
    */
-  static isSigneup():boolean {
+  static isSignup():boolean {
     return Loc.path.substr(1, 7) === 'signup/';
   }
   /**
@@ -106,12 +106,25 @@ export class Router {
     return Loc.path.substr(1, 7) === 'mypage/';
   }
   /**
-   * category slug を調べます
-   * @return {string} category slug を返します
+   * category slug, type を調べます
+   * @return {{slug: string, type: string}} category slug, type を返します
    */
-  static slug():string {
+  static category():Object {
     if ( Router.isCategory() ) {
-      return Loc.path.replace( '/category/', '' ).split('/').shift();
+      let [ slug, type ] = Loc.path.replace( '/category/', '' ).split('/');
+
+      if ( slug.indexOf( '.html' ) !== -1 ) {
+        slug = '';
+      }
+
+      if ( slug === '' ) {
+        slug = 'all';
+      }
+
+      return {
+        slug: slug,
+        type: type
+      };
     }
   }
   /**

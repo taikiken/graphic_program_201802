@@ -51,6 +51,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Category = exports.Category = function (_Offset) {
   (0, _inherits3.default)(Category, _Offset);
 
+  // 引数の順番を失敗した
+  // resolve, reject が先だった...
   /**
    * 記事一覧を取得します
    * @param {string} [slug=all] category slug です

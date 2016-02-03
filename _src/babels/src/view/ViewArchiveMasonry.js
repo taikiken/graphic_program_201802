@@ -46,16 +46,30 @@ export class ViewArchiveMasonry extends View {
    * archive 一覧標示後 isotope で位置調整します
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
-   * @param {*} ActionClass Request 対象の Action Class
+   * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
+   * @param {string} [slug=''] Category archive 取得時のslug
    * @param {boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor( element:Element, moreElement:Element, ActionClass, option:Object = {}, useMasonry:boolean = true ) {
+  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, slug:string = '', useMasonry:boolean = true ) {
 
     option = Safety.object( option );
 
     super( element, option );
-    this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+    if ( ActionClass !== null ) {
+
+      if ( slug !== null && typeof slug !== 'undefined' && slug !== '' ) {
+
+        // Category
+        this._action = new ActionClass( slug, '', this.done.bind( this ), this.fail.bind( this ) );
+
+      } else {
+
+        this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+
+      }
+
+    }
     this._moreElement = moreElement;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
@@ -82,6 +96,9 @@ export class ViewArchiveMasonry extends View {
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
+  category( category ):void {
+
+  }
   /**
    * Ajax request を開始します
    */
@@ -97,7 +114,7 @@ export class ViewArchiveMasonry extends View {
   done( result:Result ):void {
 
     let articles = result.articles;
-
+    console.log( 'ViewArchiveMasonry done ', result );
     if ( typeof articles === 'undefined' ) {
 
       // articles undefined
