@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/22 - 14:37
+ * @date 2016/02/03 - 17:02
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,49 +10,31 @@
  *
  */
 
-// import {Action} from '../action/Action';
-// import {ViewError} from './error/ViewError';
+'use strict';
 
 import {EventDispatcher} from '../event/EventDispatcher';
 import {Safety} from '../data/Safety';
 
 /**
- * 表示を行います
+ * View がない Api request
  */
-export class View extends EventDispatcher {
+export class Model extends EventDispatcher {
   /**
-   * action/Headline を使い Ajax request 後 element へ dom を作成します
-   * @param {Element} element root element
+   * View がない Api request, 親クラス
+   *
    * @param {Object} [option={}] optional event handler
    */
-  constructor( element:Element, option:Object = {} ) {
-
+  constructor( option:Object = {} ) {
     option = Safety.object( option );
 
     super();
-    this._element = element;
+
     this._option = option;
     this._action = null;
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
-  /**
-   *
-   * @return {Element|*} render root element を返します
-   */
-  get element():Element {
-    return this._element;
-  }
-
-  /**
-   * render root element を設定します
-   * @param {Element} element render root element
-   */
-  set element( element:Element ):void {
-    this._element = element;
-  }
   /**
    *
    * @return {Object|*} callback handler がセットされたObjectを返します
@@ -107,34 +89,6 @@ export class View extends EventDispatcher {
   //  CONST
   // ---------------------------------------------------
   /**
-   * event BEFORE_RENDER
-   * @return {string} beforeRender を返します
-   */
-  static get BEFORE_RENDER():string {
-    return 'beforeRender';
-  }
-  /**
-   * event WILL_MOUNT
-   * @return {string} beforeRender を返します
-   */
-  static get WILL_MOUNT():string {
-    return 'willMount';
-  }
-  /**
-   * event DID_MOUNT
-   * @return {string} beforeRender を返します
-   */
-  static get DID_MOUNT():string {
-    return 'didMount';
-  }
-  /**
-   * event ERROR_MOUNT
-   * @return {string} beforeRender を返します
-   */
-  static get ERROR_MOUNT():string {
-    return 'errorMount';
-  }
-  /**
    * event UNDEFINED_ERROR
    * @return {string} beforeRender を返します
    */
@@ -154,5 +108,12 @@ export class View extends EventDispatcher {
    */
   static get RESPONSE_ERROR():string {
     return 'responseError';
+  }
+  /**
+   * event COMPLETE, action 終了後 success 時に使用します
+   * @return {string} actionComplete を返します
+   */
+  static get COMPLETE():string {
+    return 'actionComplete';
   }
 }

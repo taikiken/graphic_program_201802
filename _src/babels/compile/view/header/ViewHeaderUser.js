@@ -156,10 +156,8 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
           }
         },
         toggleState: function toggleState() {
-          // body click からの遅延処理を clear する
-          // timer を 0 にし error にならないようにする
-          clearTimeout(this.state.bodyTimer);
-          this.setState({ bodyTimer: 0 });
+
+          this.destroy();
 
           if (this.state.open === 'close') {
             // close -> open
@@ -168,10 +166,20 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
             document.body.addEventListener('click', this.bodyClick, false);
           } else {
             // open -> close
-            // document.body からclick event handler unbind
             this.setState({ open: 'close' });
-            document.body.removeEventListener('click', this.bodyClick);
           }
+        },
+        // timer cancel
+        // body.click unbind
+        // 後処理
+        destroy: function destroy() {
+
+          // body click からの遅延処理を clear する
+          // timer を 0 にし error にならないようにする
+          clearTimeout(this.state.bodyTimer);
+          this.setState({ bodyTimer: 0 });
+          // document.body からclick event handler unbind
+          document.body.removeEventListener('click', this.bodyClick);
         },
         render: function render() {
 
@@ -230,6 +238,9 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
               )
             )
           );
+        },
+        componentWillUnmount: function componentWillUnmount() {
+          this.destroy();
         }
       });
 
@@ -237,6 +248,7 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
     }
     /**
      * 非ログインユーザー用メニューを作成します
+     * @ToDo href url が正しいか確認
      */
 
   }, {

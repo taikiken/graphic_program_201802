@@ -11,7 +11,7 @@
  */
 'use strict';
 
-// app
+// util
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -38,6 +38,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _Scroll = require('../util/Scroll');
+
 var _Empty = require('../app/const/Empty');
 
 var _User = require('../app/User');
@@ -63,6 +65,8 @@ var React = self.React;
 // data
 
 // view
+
+// app
 
 var ReactDOM = self.ReactDOM;
 
@@ -244,7 +248,7 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
           // disable
           this.setState({ disable: true });
           action.next();
-          _this._top = typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+          _this._top = _Scroll.Scroll.y;
         },
         render: function render() {
 
@@ -766,11 +770,13 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
           });
 
           // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
+          // state は変更されている
+          // element の class が変わらない
           this.setState({ isotope: isotope, arranged: 'arranged' });
           console.log('%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top);
           // render 時に 0 位置に戻るので
           // click 時の pageOffsetY へ移動させる
-          window.scrollTo(0, _this._top);
+          _Scroll.Scroll.y = _this._top;
         }
       }); // ArticleDom
 

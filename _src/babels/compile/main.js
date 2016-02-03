@@ -70,6 +70,12 @@ var _Search = require('./action/search/Search');
 
 var _Single = require('./action/single/Single');
 
+var _UsersSelf = require('./action/users/UsersSelf');
+
+var _Model = require('./model/Model');
+
+var _ModelUsersSelf = require('./model/users/ModelUsersSelf');
+
 var _View = require('./view/View');
 
 var _ViewHeaderUser = require('./view/header/ViewHeaderUser');
@@ -100,46 +106,29 @@ var _Receiver = require('./ui/Receiver');
 
 /**
  * global object
- * こんな感じで使えます
+ * **usage**
  *
- *    var ut = self.UT
+ * @example
+ * var ut = self.UT
+ *
+ * @module UT
+ * @type {Object}
  */
 
-// action/single
+// action/user
 
-// action/bookmark
+// action/search
 
-// action/archive
-
-// action/home
+// action/sidebar
 
 // -------------------------------------
-// action
-
-// net/types
+// app/App
 
 // -------------------------------------
-// data
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-02 23:33:11
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- * @requires React, Sagen. IE: fetch, es5-promise
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
+// net
 
 // -------------------------------------
-// util
+// app
 var UT = {
   version: '1.0.0',
   app: {
@@ -203,6 +192,9 @@ var UT = {
     },
     single: {
       Single: _Single.Single
+    },
+    users: {
+      UsersSelf: _UsersSelf.UsersSelf
     }
   },
   view: {
@@ -222,6 +214,12 @@ var UT = {
       ViewHeadline: _ViewHeadline.ViewHeadline,
       ViewPickup: _ViewPickup.ViewPickup
     }
+  },
+  model: {
+    Model: _Model.Model,
+    users: {
+      ModelUsersSelf: _ModelUsersSelf.ModelUsersSelf
+    }
   }
 };
 
@@ -233,17 +231,43 @@ var UT = {
 // -------------------------------------
 // view
 
-// action/search
+// -------------------------------------
+// model
 
-// action/sidebar
+// action/single
+
+// action/bookmark
+
+// action/archive
+
+// action/home
 
 // -------------------------------------
-// app/App
+// action
+
+// net/types
 
 // -------------------------------------
-// net
+// data
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-02-03 19:16:27
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
 
 // -------------------------------------
-// app
+// util
 
 self.UT = UT;

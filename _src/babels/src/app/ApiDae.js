@@ -359,7 +359,7 @@ let buildPath = () => {
     // アカウントを削除する
     // /api/v1/users/self
     'users:delete': new Types(
-      new Type( `${API_PATH}/users/self` ),
+      new Type( `${API_PATH}/users/self`, 'DELETE' ),
       new Permalink(),
       new Queries(),
       true

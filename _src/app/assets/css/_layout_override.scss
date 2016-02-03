@@ -19,15 +19,40 @@ button {
 
 #user-profile-nav {
   .user.signin {
+    .user-menu {
+      display: block;
+    }
+    .dropmenu {
+      opacity: 0;
 
+      transition-property: opacity;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
+    }
     &.close {
       .user-menu {
-        display: none;
+        overflow: hidden;
+        //top: 0;
+        height: 0;
+        width: 0;
+
+        transition-property: width, height;
+        transition-duration: 0.001s;
+        transition-delay: 0.05s;
+      }
+      .dropmenu {
+        opacity: 0;
+        transition-duration: 0.05s;
       }
     }
     &.open {
       .user-menu {
-        display: block;
+        overflow: visible;
+        width: 160px;
+        height: 162px;
+      }
+      .dropmenu {
+        opacity: 1;
       }
     }
   }

@@ -99,6 +99,12 @@
     - [] bad
     - [] bad delete
     
+1. コメント Form
+    クリックで Form 表示  
+    同じ form を状態に合わせ 表示・非表示  
+    ユーザー視線では Form が移動したように見える
+    - [] UI
+    
 1. ranking
     記事カテゴリーから取得する
     - [X] model

@@ -112,10 +112,8 @@ export class ViewHeaderUser extends View {
 
       },
       toggleState: function() {
-        // body click からの遅延処理を clear する
-        // timer を 0 にし error にならないようにする
-        clearTimeout( this.state.bodyTimer );
-        this.setState( {bodyTimer: 0} );
+
+        this.destroy();
 
         if ( this.state.open === 'close' ) {
           // close -> open
@@ -124,10 +122,21 @@ export class ViewHeaderUser extends View {
           document.body.addEventListener( 'click', this.bodyClick, false );
         } else {
           // open -> close
-          // document.body からclick event handler unbind
           this.setState( { open: 'close' } );
-          document.body.removeEventListener( 'click', this.bodyClick );
         }
+      },
+      // timer cancel
+      // body.click unbind
+      // 後処理
+      destroy: function() {
+
+        // body click からの遅延処理を clear する
+        // timer を 0 にし error にならないようにする
+        clearTimeout( this.state.bodyTimer );
+        this.setState( {bodyTimer: 0} );
+        // document.body からclick event handler unbind
+        document.body.removeEventListener( 'click', this.bodyClick );
+
       },
       render: function() {
 
@@ -152,6 +161,9 @@ export class ViewHeaderUser extends View {
             </nav>
           </div>
         );
+      },
+      componentWillUnmount: function() {
+        this.destroy();
       }
     } );
 
@@ -163,6 +175,7 @@ export class ViewHeaderUser extends View {
   }
   /**
    * 非ログインユーザー用メニューを作成します
+   * @ToDo href url が正しいか確認
    */
   renderLogout():void {
 
@@ -173,11 +186,7 @@ export class ViewHeaderUser extends View {
 
         return (
           <div className="user">
-            {
-            /**
-             * ToDo: href url が正しいか確認
-             */
-            }
+            {/* `/signup/` で良い？ */}
             <a className="user-signup" href="/signup/">無料登録 / ログイン</a>
           </div>
         );

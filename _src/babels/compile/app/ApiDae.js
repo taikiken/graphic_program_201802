@@ -224,7 +224,7 @@ var buildPath = function buildPath() {
     // -----------------
     // アカウントを削除する
     // /api/v1/users/self
-    'users:delete': new _Types.Types(new _Type.Type(API_PATH + '/users/self'), new _Permalink.Permalink(), new _Queries.Queries(), true)
+    'users:delete': new _Types.Types(new _Type.Type(API_PATH + '/users/self', 'DELETE'), new _Permalink.Permalink(), new _Queries.Queries(), true)
   };
 };
 

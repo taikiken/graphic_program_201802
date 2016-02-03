@@ -32,8 +32,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Receiver = exports.Receiver = function () {
   /**
-   * View callback の定型<br>
-   * instance を作成し callback をカスタマイズします
+   * <p>View callback の定型<br>
+   * instance を作成し callback をカスタマイズします<p>
+   *
+   * @example
+   * var receiver = new Receiver();
+   * receiver.didMount = function() {}
+   * receiver.emptyError = function() {}
+   *
+   * var action = new View( element );
+   * action.on( View.DID_MOUNT, receiver.didMount );
+   * action.on( View.EMPTY_ERROR, receiver.emptyError );
+   *
    */
 
   function Receiver() {

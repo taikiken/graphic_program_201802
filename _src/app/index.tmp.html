@@ -183,6 +183,20 @@
 
     // sign in
     UT.app.User.login();
+
+    function switchLogin() {
+      console.log( '************ switchLogin ', UT.app.User.sign );
+      if (UT.app.User.sign) {
+        UT.app.User.logout();
+      } else {
+        UT.app.User.login()
+      }
+    }
+
+    // login / logout 通知テスト
+    // 外部要因で変わるかもしれないので...
+//    setInterval( switchLogin, 1000 * 5 );
+
     // test code ここまで
     // ---------------------------------------------------------
 

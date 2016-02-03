@@ -46,9 +46,9 @@ export class UserDae {
     return this._type;
   }
   /**
-   * @return {string} article.user.id ユーザーIDを返します
+   * @return {Number} article.user.id ユーザーIDを返します
    */
-  get id():string {
+  get id():Number {
     return this.user.id;
   }
   /**

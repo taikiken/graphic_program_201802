@@ -11,6 +11,9 @@
  */
 'use strict';
 
+// util
+import {Scroll} from '../util/Scroll';
+
 // app
 import {Empty} from '../app/const/Empty';
 import {User} from '../app/User';
@@ -192,7 +195,7 @@ export class ViewArchiveMasonry extends View {
         // disable
         this.setState( { disable: true } );
         action.next();
-        _this._top = (typeof window.pageYOffset !== 'undefined') ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        _this._top = Scroll.y;
       },
       render: function() {
 
@@ -633,11 +636,13 @@ export class ViewArchiveMasonry extends View {
         } );
 
         // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
+        // state は変更されている
+        // element の class が変わらない
         this.setState( { isotope: isotope, arranged: 'arranged' } );
         console.log( '%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top );
         // render 時に 0 位置に戻るので
         // click 時の pageOffsetY へ移動させる
-        window.scrollTo( 0, _this._top );
+        Scroll.y = _this._top;
 
       }
     } );// ArticleDom

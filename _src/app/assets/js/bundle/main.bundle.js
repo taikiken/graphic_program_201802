@@ -116,27 +116,33 @@
 
 	var _Single = __webpack_require__(117);
 
-	var _View = __webpack_require__(118);
+	var _UsersSelf = __webpack_require__(118);
 
-	var _ViewHeaderUser = __webpack_require__(119);
+	var _Model = __webpack_require__(119);
 
-	var _ViewArchive = __webpack_require__(120);
+	var _ModelUsersSelf = __webpack_require__(120);
 
-	var _ViewArchiveMasonry = __webpack_require__(132);
+	var _View = __webpack_require__(123);
 
-	var _ViewSingle = __webpack_require__(133);
+	var _ViewHeaderUser = __webpack_require__(124);
 
-	var _ViewComments = __webpack_require__(138);
+	var _ViewArchive = __webpack_require__(125);
 
-	var _ViewHeadline = __webpack_require__(143);
+	var _ViewArchiveMasonry = __webpack_require__(135);
 
-	var _ViewPickup = __webpack_require__(144);
+	var _ViewSingle = __webpack_require__(137);
 
-	var _ViewRanking = __webpack_require__(145);
+	var _ViewComments = __webpack_require__(142);
 
-	var _ViewVideos = __webpack_require__(146);
+	var _ViewHeadline = __webpack_require__(147);
 
-	var _Receiver = __webpack_require__(147);
+	var _ViewPickup = __webpack_require__(148);
+
+	var _ViewRanking = __webpack_require__(149);
+
+	var _ViewVideos = __webpack_require__(150);
+
+	var _Receiver = __webpack_require__(151);
 
 	/**
 	 * ToDo: 確認事項
@@ -146,46 +152,29 @@
 
 	/**
 	 * global object
-	 * こんな感じで使えます
+	 * **usage**
 	 *
-	 *    var ut = self.UT
+	 * @example
+	 * var ut = self.UT
+	 *
+	 * @module UT
+	 * @type {Object}
 	 */
 
-	// action/single
+	// action/user
 
-	// action/bookmark
+	// action/search
 
-	// action/archive
-
-	// action/home
+	// action/sidebar
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// app/App
 
 	// -------------------------------------
-	// data
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-02 23:33:11
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
+	// net
 
 	// -------------------------------------
-	// util
+	// app
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -249,6 +238,9 @@
 	    },
 	    single: {
 	      Single: _Single.Single
+	    },
+	    users: {
+	      UsersSelf: _UsersSelf.UsersSelf
 	    }
 	  },
 	  view: {
@@ -268,6 +260,12 @@
 	      ViewHeadline: _ViewHeadline.ViewHeadline,
 	      ViewPickup: _ViewPickup.ViewPickup
 	    }
+	  },
+	  model: {
+	    Model: _Model.Model,
+	    users: {
+	      ModelUsersSelf: _ModelUsersSelf.ModelUsersSelf
+	    }
 	  }
 	};
 
@@ -279,18 +277,44 @@
 	// -------------------------------------
 	// view
 
-	// action/search
+	// -------------------------------------
+	// model
 
-	// action/sidebar
+	// action/single
+
+	// action/bookmark
+
+	// action/archive
+
+	// action/home
 
 	// -------------------------------------
-	// app/App
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// net
+	// data
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-02-03 19:16:27
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
 
 	// -------------------------------------
-	// app
+	// util
 
 	self.UT = UT;
 
@@ -4151,6 +4175,37 @@
 	    value: function leave() {
 	      return _ApiDae.ApiDae.api('users:delete');
 	    }
+
+	    //  /**
+	    //   * ユーザー関連の API
+	    //   * @param {string} [action=''] action path option を指定します
+	    //   * @return {Types}  ユーザー関連の API をTypes instanceで返します
+	    //   */
+	    /*
+	      static user( action:string = '' ):Types {
+	    
+	        switch ( action ) {
+	    
+	          case 'edit':
+	            return ApiDae.api( 'user:edit' );
+	    
+	          case 'add':
+	            return Api.join();
+	    
+	          case 'delete':
+	            return Api.leave();
+	    
+	          case '':
+	            return ApiDae.api( 'user' );
+	    
+	          default:
+	            console.warn( `user illegal action: ${action}, instead use default` );
+	            return ApiDae.api( 'user' );
+	    
+	        }
+	    
+	      }
+	    */
 	    // ----------------------------------
 	    // カテゴリー一覧
 	    /**
@@ -5233,7 +5288,7 @@
 	    // -----------------
 	    // アカウントを削除する
 	    // /api/v1/users/self
-	    'users:delete': new _Types.Types(new _Type.Type(API_PATH + '/users/self'), new _Permalink.Permalink(), new _Queries.Queries(), true)
+	    'users:delete': new _Types.Types(new _Type.Type(API_PATH + '/users/self', 'DELETE'), new _Permalink.Permalink(), new _Queries.Queries(), true)
 	  };
 	};
 
@@ -7969,6 +8024,606 @@
 /* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/03 - 16:03
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UsersSelf = undefined;
+
+	var _getPrototypeOf = __webpack_require__(67);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(72);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(73);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _ActionAuth2 = __webpack_require__(106);
+
+	var _Api = __webpack_require__(85);
+
+	var _User = __webpack_require__(64);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * <h4>マイページの表示に利用</h4>
+	 * 自分の情報
+	 */
+
+	var UsersSelf = exports.UsersSelf = function (_ActionAuth) {
+	  (0, _inherits3.default)(UsersSelf, _ActionAuth);
+
+	  /**
+	   * <p>自分の情報 を取得する</p>
+	   * **認証**（ログイン）要
+	   *
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function UsersSelf() {
+	    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    (0, _classCallCheck3.default)(this, UsersSelf);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(UsersSelf).call(this, _User.User.token, _Api.Api.users('self'), resolve, reject));
+	  }
+
+	  return UsersSelf;
+	}(_ActionAuth2.ActionAuth);
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/03 - 17:02
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Model = undefined;
+
+	var _getPrototypeOf = __webpack_require__(67);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(72);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(73);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _EventDispatcher2 = __webpack_require__(78);
+
+	var _Safety = __webpack_require__(44);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * View がない Api request
+	 */
+
+	var Model = exports.Model = function (_EventDispatcher) {
+	  (0, _inherits3.default)(Model, _EventDispatcher);
+
+	  /**
+	   * View がない Api request, 親クラス
+	   *
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function Model() {
+	    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, Model);
+
+	    option = _Safety.Safety.object(option);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Model).call(this));
+
+	    _this._option = option;
+	    _this._action = null;
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Object|*} callback handler がセットされたObjectを返します
+	   */
+
+	  (0, _createClass3.default)(Model, [{
+	    key: 'executeSafely',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * option Object に kyeName が存在し型が function かを調べ関数を実行する
+	     * @param {string} keyName 存在チェックを行う関数キー名
+	     * @param {*} [args=] 実行関数への引数
+	     */
+	    value: function executeSafely(keyName) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+
+	      var option = this.option;
+	      if (option.hasOwnProperty(keyName) && typeof option[keyName] === 'function') {
+
+	        // callback 側で通常の引数として取り出せるように apply します
+	        option[keyName].apply(this, args);
+	      }
+
+	      this.dispatch({ type: keyName, args: args });
+	    }
+	    // ---------------------------------------------------
+	    //  CONST
+	    // ---------------------------------------------------
+	    /**
+	     * event UNDEFINED_ERROR
+	     * @return {string} beforeRender を返します
+	     */
+
+	  }, {
+	    key: 'option',
+	    get: function get() {
+	      return this._option;
+	    }
+
+	    /**
+	     * callback handler をセットします
+	     * @param {Object} option callback handler がセットされた Object
+	     */
+	    ,
+	    set: function set(option) {
+	      this._option = option;
+	    }
+	    /**
+	     *
+	     * @return {*} Action instance を返します
+	     */
+
+	  }, {
+	    key: 'action',
+	    get: function get() {
+	      return this._action;
+	    }
+	    /**
+	     * Action instance を設定します
+	     * @param {*} action Action instance
+	     */
+	    ,
+	    set: function set(action) {
+	      this._action = action;
+	    }
+	  }], [{
+	    key: 'UNDEFINED_ERROR',
+	    get: function get() {
+	      return 'undefinedError';
+	    }
+	    /**
+	     * event EMPTY_ERROR
+	     * @return {string} beforeRender を返します
+	     */
+
+	  }, {
+	    key: 'EMPTY_ERROR',
+	    get: function get() {
+	      return 'emptyError';
+	    }
+	    /**
+	     * event RESPONSE_ERROR
+	     * @return {string} beforeRender を返します
+	     */
+
+	  }, {
+	    key: 'RESPONSE_ERROR',
+	    get: function get() {
+	      return 'responseError';
+	    }
+	    /**
+	     * event COMPLETE, action 終了後 success 時に使用します
+	     * @return {string} actionComplete を返します
+	     */
+
+	  }, {
+	    key: 'COMPLETE',
+	    get: function get() {
+	      return 'actionComplete';
+	    }
+	  }]);
+	  return Model;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/03 - 16:59
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelUsersSelf = undefined;
+
+	var _getPrototypeOf = __webpack_require__(67);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(72);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(73);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Model2 = __webpack_require__(119);
+
+	var _UsersSelf = __webpack_require__(118);
+
+	var _UserDae = __webpack_require__(121);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 自分の情報
+	 */
+
+	var ModelUsersSelf = exports.ModelUsersSelf = function (_Model) {
+	  (0, _inherits3.default)(ModelUsersSelf, _Model);
+
+	  /**
+	   * マイページの表示に利用, 自分の情報
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ModelUsersSelf() {
+	    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, ModelUsersSelf);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ModelUsersSelf).call(this, option));
+
+	    _this._action = new _UsersSelf.UsersSelf(_this.done.bind(_this), _this.fail.bind(_this));
+	    return _this;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ModelUsersSelf, [{
+	    key: 'start',
+	    value: function start() {
+
+	      this.action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var response = result.response;
+
+	      if (typeof response === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[USER_SELF:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error);
+	      } else {
+
+	        // 成功 callback
+	        this.executeSafely(_Model2.Model.COMPLETE, new _UserDae.UserDae(response));
+	      }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error);
+	    }
+	  }]);
+	  return ModelUsersSelf;
+	}(_Model2.Model);
+
+/***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 18:17
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _TypeDae = __webpack_require__(122);
+
+	var _Safety = __webpack_require__(44);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * article.user
+	 */
+
+	var UserDae = exports.UserDae = function () {
+	  /**
+	   * article.user
+	   * @param {Object} [user={}] article.user
+	   */
+
+	  function UserDae() {
+	    var user = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, UserDae);
+
+	    user = _Safety.Safety.object(user);
+
+	    this._user = user;
+	    this._type = new _TypeDae.TypeDae(user.type);
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} article.user
+	   */
+
+	  (0, _createClass3.default)(UserDae, [{
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	    /**
+	     * @return {TypeDae|*} article.user.type
+	     */
+
+	  }, {
+	    key: 'type',
+	    get: function get() {
+	      return this._type;
+	    }
+	    /**
+	     * @return {Number} article.user.id ユーザーIDを返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.user.id;
+	    }
+	    /**
+	     * @return {string} article.user.name ユーザー名を返します
+	     */
+
+	  }, {
+	    key: 'userName',
+	    get: function get() {
+	      return this.user.name;
+	    }
+	    /**
+	     * @return {string} article.user.profile_picture ユーザーのURLを返します
+	     */
+
+	  }, {
+	    key: 'profilePicture',
+	    get: function get() {
+	      return this.user.profile_picture;
+	    }
+	    /**
+	     * @return {string} article.user.url ユーザーのURLを返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.user.url;
+	    }
+	    /**
+	     * @return {string} article.user.bio ユーザーの肩書を返します
+	     */
+
+	  }, {
+	    key: 'bio',
+	    get: function get() {
+	      return this.user.bio;
+	    }
+	  }]);
+	  return UserDae;
+	}();
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/22 - 18:19
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.TypeDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * article.user.type
+	 */
+
+	var TypeDae = exports.TypeDae = function () {
+	  /**
+	   * article.user.type
+	   * @param {Object} [type={}] article.user.type
+	   */
+
+	  function TypeDae() {
+	    var type = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, TypeDae);
+
+	    type = _Safety.Safety.object(type);
+	    this._type = type;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} article.user.type
+	   */
+
+	  (0, _createClass3.default)(TypeDae, [{
+	    key: 'type',
+	    get: function get() {
+	      return this._type;
+	    }
+	    /**
+	     * ユーザータイプID
+	     *
+	     * @example
+	     * 6 : 一般ユーザー
+	     * 5 : 公式ユーザー
+	     * 4 : 編集部ユーザ
+	     * 3 : メディアユーザー(ex. ニッカンスポーツ)
+	     *
+	     * @return {Number} article.user.type.id ユーザータイプID
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.type.id;
+	    }
+	    /**
+	     * ユーザーラベル
+	     *
+	     * @example
+	     * 公式
+	     *
+	     * @return {string|*} article.user.type.label
+	     */
+
+	  }, {
+	    key: 'label',
+	    get: function get() {
+	      return this.type.label;
+	    }
+	  }]);
+	  return TypeDae;
+	}();
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -8127,7 +8782,6 @@
 	    get: function get() {
 	      return this._action;
 	    }
-
 	    /**
 	     * Action instance を設定します
 	     * @param {*} action Action instance
@@ -8206,7 +8860,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 119 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8252,7 +8906,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
 	var _User = __webpack_require__(64);
 
@@ -8367,10 +9021,8 @@
 	          }
 	        },
 	        toggleState: function toggleState() {
-	          // body click からの遅延処理を clear する
-	          // timer を 0 にし error にならないようにする
-	          clearTimeout(this.state.bodyTimer);
-	          this.setState({ bodyTimer: 0 });
+
+	          this.destroy();
 
 	          if (this.state.open === 'close') {
 	            // close -> open
@@ -8379,10 +9031,20 @@
 	            document.body.addEventListener('click', this.bodyClick, false);
 	          } else {
 	            // open -> close
-	            // document.body からclick event handler unbind
 	            this.setState({ open: 'close' });
-	            document.body.removeEventListener('click', this.bodyClick);
 	          }
+	        },
+	        // timer cancel
+	        // body.click unbind
+	        // 後処理
+	        destroy: function destroy() {
+
+	          // body click からの遅延処理を clear する
+	          // timer を 0 にし error にならないようにする
+	          clearTimeout(this.state.bodyTimer);
+	          this.setState({ bodyTimer: 0 });
+	          // document.body からclick event handler unbind
+	          document.body.removeEventListener('click', this.bodyClick);
 	        },
 	        render: function render() {
 
@@ -8441,6 +9103,9 @@
 	              )
 	            )
 	          );
+	        },
+	        componentWillUnmount: function componentWillUnmount() {
+	          this.destroy();
 	        }
 	      });
 
@@ -8448,6 +9113,7 @@
 	    }
 	    /**
 	     * 非ログインユーザー用メニューを作成します
+	     * @ToDo href url が正しいか確認
 	     */
 
 	  }, {
@@ -8519,7 +9185,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 120 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8566,17 +9232,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Empty = __webpack_require__(126);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
 	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(123);
+	var _ArticleDae = __webpack_require__(128);
 
 	var _Safety = __webpack_require__(44);
 
@@ -9353,7 +10019,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 121 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9506,7 +10172,7 @@
 	}();
 
 /***/ },
-/* 122 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9547,7 +10213,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
 	var _Safety = __webpack_require__(44);
 
@@ -9662,7 +10328,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 123 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9695,13 +10361,13 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(124);
+	var _CategoryDae = __webpack_require__(129);
 
-	var _MediaDae = __webpack_require__(125);
+	var _MediaDae = __webpack_require__(130);
 
-	var _UserDae = __webpack_require__(128);
+	var _UserDae = __webpack_require__(121);
 
-	var _CommentsPopularDae = __webpack_require__(130);
+	var _CommentsPopularDae = __webpack_require__(133);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9942,7 +10608,7 @@
 	}();
 
 /***/ },
-/* 124 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10030,7 +10696,7 @@
 	}();
 
 /***/ },
-/* 125 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10063,9 +10729,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _ImagesDae = __webpack_require__(126);
+	var _ImagesDae = __webpack_require__(131);
 
-	var _VideoDae = __webpack_require__(127);
+	var _VideoDae = __webpack_require__(132);
 
 	var _Safety = __webpack_require__(44);
 
@@ -10167,7 +10833,7 @@
 	}();
 
 /***/ },
-/* 126 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10272,7 +10938,7 @@
 	}();
 
 /***/ },
-/* 127 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10367,230 +11033,7 @@
 	}();
 
 /***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/22 - 18:17
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UserDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _TypeDae = __webpack_require__(129);
-
-	var _Safety = __webpack_require__(44);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * article.user
-	 */
-
-	var UserDae = exports.UserDae = function () {
-	  /**
-	   * article.user
-	   * @param {Object} [user={}] article.user
-	   */
-
-	  function UserDae() {
-	    var user = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, UserDae);
-
-	    user = _Safety.Safety.object(user);
-
-	    this._user = user;
-	    this._type = new _TypeDae.TypeDae(user.type);
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * @return {Object|*} article.user
-	   */
-
-	  (0, _createClass3.default)(UserDae, [{
-	    key: 'user',
-	    get: function get() {
-	      return this._user;
-	    }
-	    /**
-	     * @return {TypeDae|*} article.user.type
-	     */
-
-	  }, {
-	    key: 'type',
-	    get: function get() {
-	      return this._type;
-	    }
-	    /**
-	     * @return {string} article.user.id ユーザーIDを返します
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this.user.id;
-	    }
-	    /**
-	     * @return {string} article.user.name ユーザー名を返します
-	     */
-
-	  }, {
-	    key: 'userName',
-	    get: function get() {
-	      return this.user.name;
-	    }
-	    /**
-	     * @return {string} article.user.profile_picture ユーザーのURLを返します
-	     */
-
-	  }, {
-	    key: 'profilePicture',
-	    get: function get() {
-	      return this.user.profile_picture;
-	    }
-	    /**
-	     * @return {string} article.user.url ユーザーのURLを返します
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.user.url;
-	    }
-	    /**
-	     * @return {string} article.user.bio ユーザーの肩書を返します
-	     */
-
-	  }, {
-	    key: 'bio',
-	    get: function get() {
-	      return this.user.bio;
-	    }
-	  }]);
-	  return UserDae;
-	}();
-
-/***/ },
-/* 129 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/22 - 18:19
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.TypeDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(44);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * article.user.type
-	 */
-
-	var TypeDae = exports.TypeDae = function () {
-	  /**
-	   * article.user.type
-	   * @param {Object} [type={}] article.user.type
-	   */
-
-	  function TypeDae() {
-	    var type = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, TypeDae);
-
-	    type = _Safety.Safety.object(type);
-	    this._type = type;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * @return {Object|*} article.user.type
-	   */
-
-	  (0, _createClass3.default)(TypeDae, [{
-	    key: 'type',
-	    get: function get() {
-	      return this._type;
-	    }
-	    /**
-	     * ユーザータイプID
-	     *
-	     * @example
-	     * 6 : 一般ユーザー
-	     * 5 : 公式ユーザー
-	     * 4 : 編集部ユーザ
-	     * 3 : メディアユーザー(ex. ニッカンスポーツ)
-	     *
-	     * @return {Number} article.user.type.id ユーザータイプID
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this.type.id;
-	    }
-	    /**
-	     * ユーザーラベル
-	     *
-	     * @example
-	     * 公式
-	     *
-	     * @return {string|*} article.user.type.label
-	     */
-
-	  }, {
-	    key: 'label',
-	    get: function get() {
-	      return this.type.label;
-	    }
-	  }]);
-	  return TypeDae;
-	}();
-
-/***/ },
-/* 130 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10623,7 +11066,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(131);
+	var _PopularDae = __webpack_require__(134);
 
 	var _Safety = __webpack_require__(44);
 
@@ -10800,7 +11243,7 @@
 	}();
 
 /***/ },
-/* 131 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10833,7 +11276,7 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _UserDae = __webpack_require__(128);
+	var _UserDae = __webpack_require__(121);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11001,7 +11444,7 @@
 	}(); // class
 
 /***/ },
-/* 132 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11017,7 +11460,7 @@
 	 */
 	'use strict';
 
-	// app
+	// util
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -11044,17 +11487,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Scroll = __webpack_require__(136);
+
+	var _Empty = __webpack_require__(126);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
 	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(123);
+	var _ArticleDae = __webpack_require__(128);
 
 	var _Safety = __webpack_require__(44);
 
@@ -11069,6 +11514,8 @@
 	// data
 
 	// view
+
+	// app
 
 	var ReactDOM = self.ReactDOM;
 
@@ -11250,7 +11697,7 @@
 	          // disable
 	          this.setState({ disable: true });
 	          action.next();
-	          _this._top = typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+	          _this._top = _Scroll.Scroll.y;
 	        },
 	        render: function render() {
 
@@ -11772,11 +12219,13 @@
 	          });
 
 	          // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
+	          // state は変更されている
+	          // element の class が変わらない
 	          this.setState({ isotope: isotope, arranged: 'arranged' });
 	          console.log('%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top);
 	          // render 時に 0 位置に戻るので
 	          // click 時の pageOffsetY へ移動させる
-	          window.scrollTo(0, _this._top);
+	          _Scroll.Scroll.y = _this._top;
 	        }
 	      }); // ArticleDom
 
@@ -11802,7 +12251,90 @@
 	}(_View2.View);
 
 /***/ },
-/* 133 */
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/03 - 14:01
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Scroll = undefined;
+
+	var _getPrototypeOf = __webpack_require__(67);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(72);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(73);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _EventDispatcher2 = __webpack_require__(78);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Scroll = exports.Scroll = function (_EventDispatcher) {
+	  (0, _inherits3.default)(Scroll, _EventDispatcher);
+
+	  function Scroll() {
+	    (0, _classCallCheck3.default)(this, Scroll);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Scroll).call(this));
+	  }
+	  /**
+	   * scroll top 位置
+	   * @return {Number} scroll top 位置を返します
+	   */
+
+	  (0, _createClass3.default)(Scroll, null, [{
+	    key: 'y',
+	    get: function get() {
+	      // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
+	      // https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+	      return typeof window.pageYOffset !== 'undefined' ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+	    }
+	    /**
+	     * scroll top 位置 を設定します
+	     * @param {Number} top
+	     */
+	    ,
+	    set: function set(top) {
+	      window.scrollTo(0, top);
+	    }
+	    /*
+	      motion( top:Number, duration:Number = 0.5, easing:Function = null ):void {
+	    
+	      }
+	      */
+
+	  }]);
+	  return Scroll;
+	}(_EventDispatcher2.EventDispatcher);
+
+/***/ },
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11845,19 +12377,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Empty = __webpack_require__(126);
 
-	var _SingleInfo = __webpack_require__(134);
+	var _SingleInfo = __webpack_require__(138);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
 	var _Single = __webpack_require__(117);
 
 	var _Result = __webpack_require__(83);
 
-	var _SingleDae = __webpack_require__(135);
+	var _SingleDae = __webpack_require__(139);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12222,7 +12754,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 134 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12255,7 +12787,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SingleDae = __webpack_require__(135);
+	var _SingleDae = __webpack_require__(139);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12311,7 +12843,7 @@
 	}();
 
 /***/ },
-/* 135 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12354,9 +12886,9 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(136);
+	var _KeywordsDae = __webpack_require__(140);
 
-	var _RelatedDae2 = __webpack_require__(137);
+	var _RelatedDae2 = __webpack_require__(141);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12447,7 +12979,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 136 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12541,7 +13073,7 @@
 	}();
 
 /***/ },
-/* 137 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12576,11 +13108,11 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(124);
+	var _CategoryDae = __webpack_require__(129);
 
-	var _MediaDae = __webpack_require__(125);
+	var _MediaDae = __webpack_require__(130);
 
-	var _UserDae = __webpack_require__(128);
+	var _UserDae = __webpack_require__(121);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12757,7 +13289,7 @@
 	}();
 
 /***/ },
-/* 138 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12787,19 +13319,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Empty = __webpack_require__(126);
 
 	var _CommentsType = __webpack_require__(80);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
-	var _Comments = __webpack_require__(139);
+	var _Comments = __webpack_require__(143);
 
 	var _Result = __webpack_require__(83);
 
-	var _CommentsListDae = __webpack_require__(140);
+	var _CommentsListDae = __webpack_require__(144);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13275,7 +13807,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 139 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13501,7 +14033,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 140 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13530,7 +14062,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(141);
+	var _CommentsDae = __webpack_require__(145);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13612,7 +14144,7 @@
 	}();
 
 /***/ },
-/* 141 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13646,9 +14178,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(131);
+	var _PopularDae = __webpack_require__(134);
 
-	var _ReplyDae = __webpack_require__(142);
+	var _ReplyDae = __webpack_require__(146);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13752,7 +14284,7 @@
 	}();
 
 /***/ },
-/* 142 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13781,7 +14313,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsPopularDae = __webpack_require__(130);
+	var _CommentsPopularDae = __webpack_require__(133);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13839,7 +14371,7 @@
 	}();
 
 /***/ },
-/* 143 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13883,13 +14415,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Empty = __webpack_require__(126);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
 	var _Headline = __webpack_require__(103);
 
@@ -13897,7 +14429,7 @@
 
 	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(123);
+	var _ArticleDae = __webpack_require__(128);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14188,7 +14720,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 144 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14232,13 +14764,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Empty = __webpack_require__(126);
 
 	var _User = __webpack_require__(64);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
 	var _Pickup = __webpack_require__(102);
 
@@ -14246,7 +14778,7 @@
 
 	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(123);
+	var _ArticleDae = __webpack_require__(128);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14763,7 +15295,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 145 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14806,17 +15338,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Empty = __webpack_require__(126);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
 	var _Widget = __webpack_require__(114);
 
 	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(123);
+	var _ArticleDae = __webpack_require__(128);
 
 	var _Safety = __webpack_require__(44);
 
@@ -15103,7 +15635,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 146 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15146,17 +15678,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(121);
+	var _Empty = __webpack_require__(126);
 
-	var _View2 = __webpack_require__(118);
+	var _View2 = __webpack_require__(123);
 
-	var _ViewError = __webpack_require__(122);
+	var _ViewError = __webpack_require__(127);
 
 	var _Widget = __webpack_require__(114);
 
 	var _Result = __webpack_require__(83);
 
-	var _ArticleDae = __webpack_require__(123);
+	var _ArticleDae = __webpack_require__(128);
 
 	var _Safety = __webpack_require__(44);
 
@@ -15441,7 +15973,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 147 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15478,8 +16010,18 @@
 
 	var Receiver = exports.Receiver = function () {
 	  /**
-	   * View callback の定型<br>
-	   * instance を作成し callback をカスタマイズします
+	   * <p>View callback の定型<br>
+	   * instance を作成し callback をカスタマイズします<p>
+	   *
+	   * @example
+	   * var receiver = new Receiver();
+	   * receiver.didMount = function() {}
+	   * receiver.emptyError = function() {}
+	   *
+	   * var action = new View( element );
+	   * action.on( View.DID_MOUNT, receiver.didMount );
+	   * action.on( View.EMPTY_ERROR, receiver.emptyError );
+	   *
 	   */
 
 	  function Receiver() {

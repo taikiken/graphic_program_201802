@@ -3959,10 +3959,40 @@ button {
 #user-profile-nav {
   float: left; }
 
+#user-profile-nav .user.signin .user-menu {
+  display: block; }
+
+#user-profile-nav .user.signin .dropmenu {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear; }
+
 #user-profile-nav .user.signin.close .user-menu {
-  display: none; }
+  overflow: hidden;
+  height: 0;
+  width: 0;
+  -webkit-transition-property: width, height;
+  transition-property: width, height;
+  -webkit-transition-duration: 0.001s;
+          transition-duration: 0.001s;
+  -webkit-transition-delay: 0.05s;
+          transition-delay: 0.05s; }
+
+#user-profile-nav .user.signin.close .dropmenu {
+  opacity: 0;
+  -webkit-transition-duration: 0.05s;
+          transition-duration: 0.05s; }
 
 #user-profile-nav .user.signin.open .user-menu {
-  display: block; }
+  overflow: visible;
+  width: 160px;
+  height: 162px; }
+
+#user-profile-nav .user.signin.open .dropmenu {
+  opacity: 1; }
 
 /*# sourceMappingURL=ui.css.map */

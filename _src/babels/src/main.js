@@ -84,6 +84,14 @@ import {Search} from './action/search/Search';
 // action/single
 import {Single} from './action/single/Single';
 
+// action/user
+import {UsersSelf} from './action/users/UsersSelf';
+
+// -------------------------------------
+// model
+import {Model} from './model/Model';
+import {ModelUsersSelf} from './model/users/ModelUsersSelf';
+
 // -------------------------------------
 // view
 import {View} from './view/View';
@@ -116,9 +124,13 @@ import {Receiver} from './ui/Receiver';
 
 /**
  * global object
- * こんな感じで使えます
+ * **usage**
  *
- *    var ut = self.UT
+ * @example
+ * var ut = self.UT
+ *
+ * @module UT
+ * @type {Object}
  */
 var UT = {
   version: '@@version',
@@ -183,6 +195,9 @@ var UT = {
     },
     single: {
       Single: Single
+    },
+    users: {
+      UsersSelf: UsersSelf
     }
   },
   view: {
@@ -201,6 +216,12 @@ var UT = {
     home: {
       ViewHeadline: ViewHeadline,
       ViewPickup: ViewPickup
+    }
+  },
+  model: {
+    Model: Model,
+    users: {
+      ModelUsersSelf: ModelUsersSelf
     }
   }
 };

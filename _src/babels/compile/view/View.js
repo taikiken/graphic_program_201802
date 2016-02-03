@@ -156,7 +156,6 @@ var View = exports.View = function (_EventDispatcher) {
     get: function get() {
       return this._action;
     }
-
     /**
      * Action instance を設定します
      * @param {*} action Action instance

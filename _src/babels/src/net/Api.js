@@ -89,6 +89,37 @@ export class Api {
   static leave():Types {
     return ApiDae.api( 'users:delete' );
   }
+
+//  /**
+//   * ユーザー関連の API
+//   * @param {string} [action=''] action path option を指定します
+//   * @return {Types}  ユーザー関連の API をTypes instanceで返します
+//   */
+/*
+  static user( action:string = '' ):Types {
+
+    switch ( action ) {
+
+      case 'edit':
+        return ApiDae.api( 'user:edit' );
+
+      case 'add':
+        return Api.join();
+
+      case 'delete':
+        return Api.leave();
+
+      case '':
+        return ApiDae.api( 'user' );
+
+      default:
+        console.warn( `user illegal action: ${action}, instead use default` );
+        return ApiDae.api( 'user' );
+
+    }
+
+  }
+*/
   // ----------------------------------
   // カテゴリー一覧
   /**
