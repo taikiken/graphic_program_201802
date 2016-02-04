@@ -87,29 +87,22 @@ var ViewArchiveMasonry = function (_View) {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {string} [slug=''] Category archive 取得時のslug
    * @param {boolean} [useMasonry=true] isotope を行うかの
    */
 
   function ViewArchiveMasonry(element, moreElement) {
     var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-    var slug = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
-    var useMasonry = arguments.length <= 5 || arguments[5] === undefined ? true : arguments[5];
+    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
     (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
 
     option = _Safety.Safety.object(option);
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
 
-    if (ActionClass !== null) {
+    if (typeof ActionClass === 'function') {
 
-      if (slug !== null && typeof slug !== 'undefined' && slug !== '') {
-        // Category
-        _this2._action = new ActionClass(slug, '', _this2.done.bind(_this2), _this2.fail.bind(_this2));
-      } else {
-        _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
-      }
+      _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
     }
     _this2._moreElement = moreElement;
     /**
@@ -118,9 +111,7 @@ var ViewArchiveMasonry = function (_View) {
      * @private
      */
     _this2._articles = [];
-
     _this2._useMasonry = !!useMasonry;
-
     _this2._top = 0;
 
     return _this2;

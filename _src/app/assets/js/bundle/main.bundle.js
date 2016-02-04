@@ -130,19 +130,21 @@
 
 	var _ViewArchiveMasonry = __webpack_require__(139);
 
-	var _ViewSingle = __webpack_require__(141);
+	var _ViewCategory = __webpack_require__(141);
 
-	var _ViewComments = __webpack_require__(146);
+	var _ViewSingle = __webpack_require__(142);
 
-	var _ViewHeadline = __webpack_require__(151);
+	var _ViewComments = __webpack_require__(147);
 
-	var _ViewPickup = __webpack_require__(152);
+	var _ViewHeadline = __webpack_require__(152);
 
-	var _ViewRanking = __webpack_require__(153);
+	var _ViewPickup = __webpack_require__(153);
 
-	var _ViewVideos = __webpack_require__(154);
+	var _ViewRanking = __webpack_require__(154);
 
-	var _Receiver = __webpack_require__(155);
+	var _ViewVideos = __webpack_require__(155);
+
+	var _Receiver = __webpack_require__(156);
 
 	/**
 	 * ToDo: 確認事項
@@ -161,20 +163,47 @@
 	 * @type {Object}
 	 */
 
-	// action/user
-
-	// action/search
-
-	// action/sidebar
+	// -------------------------------------
+	// view
 
 	// -------------------------------------
-	// app/App
+	// model
+
+	// action/single
+
+	// action/bookmark
+
+	// action/archive
+
+	// action/home
 
 	// -------------------------------------
-	// net
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// app
+	// data
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-02-04 14:26:35
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// -------------------------------------
+	// util
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -247,6 +276,7 @@
 	    View: _View.View,
 	    ViewArchive: _ViewArchive.ViewArchive,
 	    ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
+	    ViewCategory: _ViewCategory.ViewCategory,
 	    ViewSingle: _ViewSingle.ViewSingle,
 	    ViewComments: _ViewComments.ViewComments,
 	    header: {
@@ -274,47 +304,20 @@
 
 	// sidebar
 
-	// -------------------------------------
-	// view
+	// action/user
+
+	// action/search
+
+	// action/sidebar
 
 	// -------------------------------------
-	// model
-
-	// action/single
-
-	// action/bookmark
-
-	// action/archive
-
-	// action/home
+	// app/App
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// net
 
 	// -------------------------------------
-	// data
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-03 23:20:42
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
-
-	// -------------------------------------
-	// util
+	// app
 
 	self.UT = UT;
 
@@ -11644,29 +11647,22 @@
 	   * @param {Element} moreElement more button root element, 'View More' を配置する
 	   * @param {Function} [ActionClass=null] Request 対象の Action Class
 	   * @param {Object} [option={}] optional event handler
-	   * @param {string} [slug=''] Category archive 取得時のslug
 	   * @param {boolean} [useMasonry=true] isotope を行うかの
 	   */
 
 	  function ViewArchiveMasonry(element, moreElement) {
 	    var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-	    var slug = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
-	    var useMasonry = arguments.length <= 5 || arguments[5] === undefined ? true : arguments[5];
+	    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
 	    (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
 
 	    option = _Safety.Safety.object(option);
 
 	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
 
-	    if (ActionClass !== null) {
+	    if (typeof ActionClass === 'function') {
 
-	      if (slug !== null && typeof slug !== 'undefined' && slug !== '') {
-	        // Category
-	        _this2._action = new ActionClass(slug, '', _this2.done.bind(_this2), _this2.fail.bind(_this2));
-	      } else {
-	        _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
-	      }
+	      _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
 	    }
 	    _this2._moreElement = moreElement;
 	    /**
@@ -11675,9 +11671,7 @@
 	     * @private
 	     */
 	    _this2._articles = [];
-
 	    _this2._useMasonry = !!useMasonry;
-
 	    _this2._top = 0;
 
 	    return _this2;
@@ -12465,6 +12459,68 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/04 - 12:39
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewCategory = undefined;
+
+	var _getPrototypeOf = __webpack_require__(71);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(76);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(77);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Category = __webpack_require__(115);
+
+	var _ViewArchiveMasonry2 = __webpack_require__(139);
+
+	var _View = __webpack_require__(127);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ViewCategory = exports.ViewCategory = function (_ViewArchiveMasonry) {
+	  (0, _inherits3.default)(ViewCategory, _ViewArchiveMasonry);
+
+	  function ViewCategory(slug, element, moreElement) {
+	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	    (0, _classCallCheck3.default)(this, ViewCategory);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCategory).call(this, element, moreElement, null, option, true));
+
+	    _this._action = new _Category.Category(slug, '', _this.done.bind(_this), _this.fail.bind(_this));
+	    return _this;
+	  }
+
+	  return ViewCategory;
+	}(_ViewArchiveMasonry2.ViewArchiveMasonry);
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/26 - 21:05
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -12504,7 +12560,7 @@
 
 	var _Empty = __webpack_require__(130);
 
-	var _SingleInfo = __webpack_require__(142);
+	var _SingleInfo = __webpack_require__(143);
 
 	var _View2 = __webpack_require__(127);
 
@@ -12514,7 +12570,7 @@
 
 	var _Result = __webpack_require__(87);
 
-	var _SingleDae = __webpack_require__(143);
+	var _SingleDae = __webpack_require__(144);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12879,7 +12935,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12912,7 +12968,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SingleDae = __webpack_require__(143);
+	var _SingleDae = __webpack_require__(144);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12968,7 +13024,7 @@
 	}();
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13011,9 +13067,9 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(144);
+	var _KeywordsDae = __webpack_require__(145);
 
-	var _RelatedDae2 = __webpack_require__(145);
+	var _RelatedDae2 = __webpack_require__(146);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13104,7 +13160,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13198,7 +13254,7 @@
 	}();
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13414,7 +13470,7 @@
 	}();
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13452,11 +13508,11 @@
 
 	var _ViewError = __webpack_require__(131);
 
-	var _Comments = __webpack_require__(147);
+	var _Comments = __webpack_require__(148);
 
 	var _Result = __webpack_require__(87);
 
-	var _CommentsListDae = __webpack_require__(148);
+	var _CommentsListDae = __webpack_require__(149);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13932,7 +13988,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14158,7 +14214,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14187,7 +14243,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(149);
+	var _CommentsDae = __webpack_require__(150);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14269,7 +14325,7 @@
 	}();
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14305,7 +14361,7 @@
 
 	var _PopularDae = __webpack_require__(138);
 
-	var _ReplyDae = __webpack_require__(150);
+	var _ReplyDae = __webpack_require__(151);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14409,7 +14465,7 @@
 	}();
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14496,7 +14552,7 @@
 	}();
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14845,7 +14901,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15420,7 +15476,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15760,7 +15816,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15891,7 +15947,7 @@
 	    value: function done(result) {
 
 	      var articles = result.articles;
-
+	      console.log('Videos ', articles);
 	      if (typeof articles === 'undefined') {
 
 	        // articles undefined
@@ -16098,7 +16154,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

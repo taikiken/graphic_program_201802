@@ -7,9 +7,6 @@ npm-debug.log
 # css document イキ
 #sc5-guide
 
-php.coffee
-php_ini.coffee
-
 # ignore system files
 thumbs.db
 .DS_Store
@@ -27,3 +24,9 @@ _bin
 
 # crossdomain.xml
 crossdomain.xml
+
+# test php
+php.coffee
+php_ini.coffee
+_src/app/router.php
+_src/app/index.php

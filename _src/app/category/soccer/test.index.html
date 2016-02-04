@@ -208,7 +208,7 @@
     // ---------------------------------------------------------
     // news
     // category 記事一覧は token 不要
-    var archive = new UT.view.ViewArchiveMasonry( document.getElementById('board-container'), document.getElementById('board-container-more'), UT.action.archive.Category, null, categories.slug );
+    var archive = new UT.view.ViewCategory( categories.slug, document.getElementById('board-container'), document.getElementById('board-container-more') );
     archive.start();
 
     // ---------------------------------------------------------

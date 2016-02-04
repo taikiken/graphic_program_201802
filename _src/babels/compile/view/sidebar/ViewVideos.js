@@ -126,7 +126,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
     value: function done(result) {
 
       var articles = result.articles;
-
+      console.log('Videos ', articles);
       if (typeof articles === 'undefined') {
 
         // articles undefined

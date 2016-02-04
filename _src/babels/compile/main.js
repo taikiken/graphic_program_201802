@@ -84,6 +84,8 @@ var _ViewArchive = require('./view/ViewArchive');
 
 var _ViewArchiveMasonry = require('./view/ViewArchiveMasonry');
 
+var _ViewCategory = require('./view/ViewCategory');
+
 var _ViewSingle = require('./view/ViewSingle');
 
 var _ViewComments = require('./view/ViewComments');
@@ -115,20 +117,47 @@ var _Receiver = require('./ui/Receiver');
  * @type {Object}
  */
 
-// action/user
-
-// action/search
-
-// action/sidebar
+// -------------------------------------
+// view
 
 // -------------------------------------
-// app/App
+// model
+
+// action/single
+
+// action/bookmark
+
+// action/archive
+
+// action/home
 
 // -------------------------------------
-// net
+// action
+
+// net/types
 
 // -------------------------------------
-// app
+// data
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-02-04 14:26:35
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
+
+// -------------------------------------
+// util
 var UT = {
   version: '1.0.0',
   app: {
@@ -201,6 +230,7 @@ var UT = {
     View: _View.View,
     ViewArchive: _ViewArchive.ViewArchive,
     ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
+    ViewCategory: _ViewCategory.ViewCategory,
     ViewSingle: _ViewSingle.ViewSingle,
     ViewComments: _ViewComments.ViewComments,
     header: {
@@ -228,46 +258,19 @@ var UT = {
 
 // sidebar
 
-// -------------------------------------
-// view
+// action/user
+
+// action/search
+
+// action/sidebar
 
 // -------------------------------------
-// model
-
-// action/single
-
-// action/bookmark
-
-// action/archive
-
-// action/home
+// app/App
 
 // -------------------------------------
-// action
-
-// net/types
+// net
 
 // -------------------------------------
-// data
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-03 23:20:42
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- * @requires React, Sagen. IE: fetch, es5-promise
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
-
-// -------------------------------------
-// util
+// app
 
 self.UT = UT;

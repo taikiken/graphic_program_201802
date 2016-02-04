@@ -133,7 +133,8 @@ export class Router {
    */
   static keyword():string {
     if ( Router.isSearch() ) {
-      return Loc.path.replace( '/search/', '' ).split('/').shift();
+      let [ keyword ] = Loc.path.replace( '/search/', '' ).split('/');
+      return keyword;
     }
   }
   /**
