@@ -40,17 +40,41 @@ end
 # ------------------------------
 include_recipe "database::postgresql"
 
+
+postgresql_connection_info = {
+  :host => "127.0.0.1",
+  :port => node['postgresql']['config']['port'],
+  :username => 'postgres',
+  :password => node['postgresql']['password']['postgres']
+}
+
+
+# ユーザー作成
+postgresql_database_user "ut" do
+  connection postgresql_connection_info
+  password 'ut'
+  superuser true
+  login true
+  action :create
+end
+
+
+# DB作成
 postgresql_database 'ut' do
-  connection(
-    :host     => '127.0.0.1',
-    :port     => 5432,
-    :username => 'postgres',
-    :password => node['postgresql']['password']['postgres']
-  )
+  connection postgresql_connection_info
   template 'DEFAULT'
   encoding 'DEFAULT'
   tablespace 'DEFAULT'
   connection_limit '-1'
-  owner 'postgres'
+  owner 'ut'
   action :create
+end
+
+# ユーザー権限設定
+# grant all privileges on all tables in foo db
+postgresql_database_user 'ut' do
+  connection postgresql_connection_info
+  database_name 'ut'
+  privileges [:all]
+  action :grant
 end
