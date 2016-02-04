@@ -119,6 +119,9 @@ Vagrant.configure(2) do |config|
       :postgresql => {
         ## $ echo -n 'postgres' | openssl md5 | sed -e 's/.* /md5/'
         :password      => 'postgres' #'e8a48653851e28c69d0506508fb27fc5'
+      },
+      :build_essential => {
+        :compiletime => true
       }
     }
 
