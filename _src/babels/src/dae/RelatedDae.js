@@ -56,7 +56,6 @@ export class RelatedDae {
   get response():Object {
     return this._response;
   }
-
   /**
    *
    * @return {Number} 記事 ID を返します
@@ -64,7 +63,6 @@ export class RelatedDae {
   get id():Number {
     return this.response.id;
   }
-
   /**
    *
    * @return {string} ISO8601 日付
@@ -85,7 +83,6 @@ export class RelatedDae {
   get displayDate():string {
     return this.response.display_date;
   }
-
   /**
    *
    * @return {string} 記事タイトル
@@ -93,7 +90,6 @@ export class RelatedDae {
   get title():string {
     return this.response.title;
   }
-
   /**
    *
    * @return {string} 記事概要
@@ -101,7 +97,6 @@ export class RelatedDae {
   get description():string {
     return this.response.description;
   }
-
   /**
    *
    * @return {CategoryDae|*} カテゴリー
@@ -109,7 +104,6 @@ export class RelatedDae {
   get category():CategoryDae {
     return this._category;
   }
-
   /**
    *
    * @return {string} 記事URL

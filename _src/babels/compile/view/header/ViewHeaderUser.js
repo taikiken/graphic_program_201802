@@ -54,7 +54,6 @@ var _instance = null;
 
 // React
 var React = self.React;
-
 var ReactDOM = self.ReactDOM;
 
 /**
@@ -63,6 +62,8 @@ var ReactDOM = self.ReactDOM;
  * <code>new ViewHeaderUser()</code> はできません。<br>
  * <code>ViewHeaderUser.factory()</code> してください。<br>
  * </P>
+ *
+ * @ToDo user profile icon, notifications count 取得
  */
 
 var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
@@ -251,7 +252,6 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
     }
     /**
      * 非ログインユーザー用メニューを作成します
-     * @ToDo href url が正しいか確認
      */
 
   }, {

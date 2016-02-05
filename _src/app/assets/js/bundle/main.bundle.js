@@ -134,17 +134,19 @@
 
 	var _ViewSingle = __webpack_require__(142);
 
-	var _ViewComments = __webpack_require__(147);
+	var _ViewTitle = __webpack_require__(147);
 
-	var _ViewHeadline = __webpack_require__(152);
+	var _ViewComments = __webpack_require__(148);
 
-	var _ViewPickup = __webpack_require__(153);
+	var _ViewHeadline = __webpack_require__(153);
 
-	var _ViewRanking = __webpack_require__(154);
+	var _ViewPickup = __webpack_require__(154);
 
-	var _ViewVideos = __webpack_require__(155);
+	var _ViewRanking = __webpack_require__(155);
 
-	var _Receiver = __webpack_require__(156);
+	var _ViewVideos = __webpack_require__(156);
+
+	var _Receiver = __webpack_require__(157);
 
 	/**
 	 * ToDo: 確認事項
@@ -163,47 +165,20 @@
 	 * @type {Object}
 	 */
 
-	// -------------------------------------
-	// view
+	// action/user
+
+	// action/search
+
+	// action/sidebar
 
 	// -------------------------------------
-	// model
-
-	// action/single
-
-	// action/bookmark
-
-	// action/archive
-
-	// action/home
+	// app/App
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// net
 
 	// -------------------------------------
-	// data
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-05 20:07:47
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
-
-	// -------------------------------------
-	// util
+	// app
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -278,6 +253,7 @@
 	    ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
 	    ViewCategory: _ViewCategory.ViewCategory,
 	    ViewSingle: _ViewSingle.ViewSingle,
+	    ViewTitle: _ViewTitle.ViewTitle,
 	    ViewComments: _ViewComments.ViewComments,
 	    header: {
 	      ViewHeaderUser: _ViewHeaderUser.ViewHeaderUser
@@ -304,20 +280,47 @@
 
 	// sidebar
 
-	// action/user
-
-	// action/search
-
-	// action/sidebar
+	// -------------------------------------
+	// view
 
 	// -------------------------------------
-	// app/App
+	// model
+
+	// action/single
+
+	// action/bookmark
+
+	// action/archive
+
+	// action/home
 
 	// -------------------------------------
-	// net
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// app
+	// data
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-02-05 22:58:02
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
+
+	// -------------------------------------
+	// util
 
 	self.UT = UT;
 
@@ -9786,7 +9789,6 @@
 
 	// React
 	var React = self.React;
-
 	var ReactDOM = self.ReactDOM;
 
 	/**
@@ -9795,6 +9797,8 @@
 	 * <code>new ViewHeaderUser()</code> はできません。<br>
 	 * <code>ViewHeaderUser.factory()</code> してください。<br>
 	 * </P>
+	 *
+	 * @ToDo user profile icon, notifications count 取得
 	 */
 
 	var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
@@ -9983,7 +9987,6 @@
 	    }
 	    /**
 	     * 非ログインユーザー用メニューを作成します
-	     * @ToDo href url が正しいか確認
 	     */
 
 	  }, {
@@ -11627,18 +11630,22 @@
 	    media = _Safety.Safety.object(media);
 
 	    this._media = media;
+	    this._list = [];
+
 	    // 記事詳細は media.images が最大5件になる
+	    // 最大5件は取り消されていた
+	    // JSON に配列が残っているので処理は残す
 	    if (!Array.isArray(media.images)) {
 	      // 1件, 配列では無い
 	      this._images = new _ImagesDae.ImagesDae(media.images);
+	      this._list.push(this._images);
 	    } else {
-
-	      this._list = [];
 	      var _iteratorNormalCompletion = true;
 	      var _didIteratorError = false;
 	      var _iteratorError = undefined;
 
 	      try {
+
 	        for (var _iterator = (0, _getIterator3.default)(media.images), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 	          var image = _step.value;
 
@@ -13475,9 +13482,10 @@
 	    key: 'render',
 	    value: function render(response) {
 
+	      //console.log( 'single resoonse ', response );
 	      var single = new _SingleDae.SingleDae(response);
 	      // global SingleInfoへ保存
-	      _SingleInfo.SingleInfo.dae = single;
+	      // SingleInfo.dae = single;
 
 	      // beforeRender call
 	      this.executeSafely(_View2.View.BEFORE_RENDER, single);
@@ -13609,7 +13617,7 @@
 
 	      // comment 取得
 	      // 自動化の場合はここに記述
-	      // ToDo: 決めかねてる...
+	      // ここでコメントは取得しない
 	    } // render
 	    /**
 	     * 関連記事（記事詳細の）
@@ -14118,7 +14126,6 @@
 	    get: function get() {
 	      return this._response;
 	    }
-
 	    /**
 	     *
 	     * @return {Number} 記事 ID を返します
@@ -14129,7 +14136,6 @@
 	    get: function get() {
 	      return this.response.id;
 	    }
-
 	    /**
 	     *
 	     * @return {string} ISO8601 日付
@@ -14159,7 +14165,6 @@
 	    get: function get() {
 	      return this.response.display_date;
 	    }
-
 	    /**
 	     *
 	     * @return {string} 記事タイトル
@@ -14170,7 +14175,6 @@
 	    get: function get() {
 	      return this.response.title;
 	    }
-
 	    /**
 	     *
 	     * @return {string} 記事概要
@@ -14181,7 +14185,6 @@
 	    get: function get() {
 	      return this.response.description;
 	    }
-
 	    /**
 	     *
 	     * @return {CategoryDae|*} カテゴリー
@@ -14192,7 +14195,6 @@
 	    get: function get() {
 	      return this._category;
 	    }
-
 	    /**
 	     *
 	     * @return {string} 記事URL
@@ -14251,6 +14253,116 @@
 /* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/05 - 22:40
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewTitle = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(127);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	var React = self.React;
+	var ReactDOM = self.ReactDOM;
+
+	var ViewTitle = exports.ViewTitle = function (_View) {
+	  (0, _inherits3.default)(ViewTitle, _View);
+
+	  function ViewTitle(slug, label, element) {
+	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	    (0, _classCallCheck3.default)(this, ViewTitle);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewTitle).call(this, element, option));
+
+	    _this._label = label;
+	    _this._slug = slug;
+	    return _this;
+	  }
+
+	  (0, _createClass3.default)(ViewTitle, [{
+	    key: 'render',
+	    value: function render() {
+
+	      var TitleDom = React.createClass({
+	        displayName: 'TitleDom',
+
+	        propType: {
+	          label: React.PropTypes.string.isRequired,
+	          slug: React.PropTypes.string.isRequired
+	        },
+	        render: function render() {
+
+	          var label = this.props.label;
+	          var slug = this.props.slug;
+
+	          return React.createElement(
+	            'h1',
+	            { className: 'page-title' },
+	            React.createElement(
+	              'a',
+	              { href: '/category/' + slug + '/' },
+	              label
+	            )
+	          );
+	        }
+	      });
+
+	      ReactDOM.render(React.createElement(TitleDom, {
+	        label: this.label,
+	        slug: this.slug }), this.element);
+	    }
+	  }, {
+	    key: 'label',
+	    get: function get() {
+	      return this._label;
+	    }
+	  }, {
+	    key: 'slug',
+	    get: function get() {
+	      return this._slug;
+	    }
+	  }]);
+	  return ViewTitle;
+	}(_View2.View);
+
+/***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -14286,11 +14398,11 @@
 
 	var _ViewError = __webpack_require__(131);
 
-	var _Comments = __webpack_require__(148);
+	var _Comments = __webpack_require__(149);
 
 	var _Result = __webpack_require__(87);
 
-	var _CommentsListDae = __webpack_require__(149);
+	var _CommentsListDae = __webpack_require__(150);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14766,7 +14878,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14992,7 +15104,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15021,7 +15133,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(150);
+	var _CommentsDae = __webpack_require__(151);
 
 	var _Safety = __webpack_require__(44);
 
@@ -15103,7 +15215,7 @@
 	}();
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15139,7 +15251,7 @@
 
 	var _PopularDae = __webpack_require__(138);
 
-	var _ReplyDae = __webpack_require__(151);
+	var _ReplyDae = __webpack_require__(152);
 
 	var _Safety = __webpack_require__(44);
 
@@ -15243,7 +15355,7 @@
 	}();
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15330,7 +15442,7 @@
 	}();
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15679,7 +15791,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16254,7 +16366,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16594,7 +16706,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16932,7 +17044,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

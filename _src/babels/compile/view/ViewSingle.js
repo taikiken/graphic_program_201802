@@ -177,9 +177,10 @@ var ViewSingle = function (_View) {
     key: 'render',
     value: function render(response) {
 
+      //console.log( 'single resoonse ', response );
       var single = new _SingleDae.SingleDae(response);
       // global SingleInfoへ保存
-      _SingleInfo.SingleInfo.dae = single;
+      // SingleInfo.dae = single;
 
       // beforeRender call
       this.executeSafely(_View2.View.BEFORE_RENDER, single);
@@ -311,7 +312,7 @@ var ViewSingle = function (_View) {
 
       // comment 取得
       // 自動化の場合はここに記述
-      // ToDo: 決めかねてる...
+      // ここでコメントは取得しない
     } // render
     /**
      * 関連記事（記事詳細の）

@@ -28,14 +28,18 @@ export class MediaDae {
     media = Safety.object( media );
 
     this._media = media;
+    this._list = [];
+
     // 記事詳細は media.images が最大5件になる
+    // 最大5件は取り消されていた
+    // JSON に配列が残っているので処理は残す
     if ( !Array.isArray( media.images ) ) {
       // 1件, 配列では無い
       this._images = new ImagesDae( media.images );
+      this._list.push( this._images );
 
     } else {
 
-      this._list = [];
       for ( var image of media.images ) {
         this._list.push( new ImagesDae( image ) );
       }

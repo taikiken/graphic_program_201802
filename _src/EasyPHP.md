@@ -20,7 +20,10 @@ PHP built-in server を使いルーティング・テスト用に簡易的なPHP
     
 1. php.ini までパスを通す
     1. _php_ini.coffee を php_ini.coffee へ別名保存
-    1. php.ini までの **フルパス** を設定
+    1. php.ini までの **フルパス** を設定  
+    ちなみに MAMP だと  
+    ```/Applications/MAMP/bin/php/php5.6.10/conf/php.ini```
+    
 
 1. ui.css のシンボリックリンクを設定する  
     

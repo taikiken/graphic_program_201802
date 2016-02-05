@@ -21,7 +21,6 @@ let _instance = null;
 
 // React
 let React = self.React;
-
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -180,7 +179,6 @@ export class ViewHeaderUser extends View {
   }
   /**
    * 非ログインユーザー用メニューを作成します
-   * @ToDo href url が正しいか確認
    */
   renderLogout():void {
 

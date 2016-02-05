@@ -27,7 +27,11 @@ switch ( $route ) {
         break;
 
     case 'category':
-        include_once '_test/test.category.new.html';
+        include_once 'tmp/category.tmp.html';
+        break;
+
+    case 'p':
+        include_once '_test/test.single.html';
         break;
 }
 
