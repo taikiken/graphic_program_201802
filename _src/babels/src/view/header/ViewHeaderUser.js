@@ -51,8 +51,11 @@ export class ViewHeaderUser extends View {
 
     }
 
-    super( element, option );
-    return this;
+    if ( _instance === null ) {
+      super( element, option );
+      _instance = this;
+    }
+    return _instance;
   }
   /**
    * ユーザーメニューを作成します<br>

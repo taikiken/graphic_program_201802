@@ -36,16 +36,29 @@ var _Category = require('../action/archive/Category');
 
 var _ViewArchiveMasonry2 = require('./ViewArchiveMasonry');
 
-var _View = require('./View');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * category 一覧表示
+ */
 
 var ViewCategory = exports.ViewCategory = function (_ViewArchiveMasonry) {
   (0, _inherits3.default)(ViewCategory, _ViewArchiveMasonry);
 
+  /**
+   * category 一覧表示 要 **slug**
+   * @param {string} slug category slug, default 'all'
+   * @param {Element} element root element, Ajax result を配置する
+   * @param {Element} moreElement more button root element, 'View More' を配置する
+   * @param {Object} [option={}] optional event handler
+   */
+
   function ViewCategory(slug, element, moreElement) {
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
     (0, _classCallCheck3.default)(this, ViewCategory);
+
+    // Canvas Action を使う
+    // slug を送り 表示(render)は ViewArchiveMasonry を使う
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCategory).call(this, element, moreElement, null, option, true));
 

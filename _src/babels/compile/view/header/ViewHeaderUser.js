@@ -92,9 +92,12 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
       throw new Error('UserStatus is static Class. not use new UserStatus().');
     }
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
+    if (_instance === null) {
+      var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
 
-    return _ret = _this, (0, _possibleConstructorReturn3.default)(_this, _ret);
+      _instance = _this;
+    }
+    return _ret = _instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
   /**
    * ユーザーメニューを作成します<br>

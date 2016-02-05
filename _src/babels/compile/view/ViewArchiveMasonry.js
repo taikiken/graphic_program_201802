@@ -78,7 +78,7 @@ var Isotope = self.Isotope;
  * archive 一覧を isotope で
  */
 
-var ViewArchiveMasonry = function (_View) {
+var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
   (0, _inherits3.default)(ViewArchiveMasonry, _View);
 
   /**
@@ -125,18 +125,14 @@ var ViewArchiveMasonry = function (_View) {
    */
 
   (0, _createClass3.default)(ViewArchiveMasonry, [{
-    key: 'category',
+    key: 'start',
 
     // ---------------------------------------------------
     //  Method
     // ---------------------------------------------------
-    value: function category(_category) {}
     /**
      * Ajax request を開始します
      */
-
-  }, {
-    key: 'start',
     value: function start() {
 
       this.action.next();
@@ -292,7 +288,13 @@ var ViewArchiveMasonry = function (_View) {
       // ArchiveDom から呼び出す
       var moreButton = function moreButton(show) {
 
-        ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+        // moreElement 存在チェックを行う
+        // Element 型を保証する
+        if (moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement) {
+
+          // チェックをパスし実行する
+          ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+        }
       };
       // --------------------------------------------
       // COMMENTS Popular second
@@ -370,11 +372,13 @@ var ViewArchiveMasonry = function (_View) {
           var sign = this.props.sign;
           var comment = this.props.comment;
           var active = this.props.active;
+          // active（click可能）にするかを表す
           var activeClass = active ? ' active' : '';
 
           if (sign) {
 
             // login user
+            // click ずみの時は不可
             return React.createElement(
               'a',
               { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
@@ -392,6 +396,7 @@ var ViewArchiveMasonry = function (_View) {
           } else {
 
             // not login user
+            // click 不可
             return React.createElement(
               'span',
               { className: 'comment-response-btn comment-response-like' },
@@ -806,5 +811,3 @@ var ViewArchiveMasonry = function (_View) {
   }]);
   return ViewArchiveMasonry;
 }(_View2.View);
-
-exports.ViewArchiveMasonry = ViewArchiveMasonry;

@@ -165,7 +165,7 @@
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 </div><!-- /.whole -->
-<script src="assets/js/bundle/main.bundle.js"></script>
+<script src="../assets/js/bundle/main.bundle.js"></script>
 <script>
   ( function ( window ) {
 
@@ -207,39 +207,56 @@
     headerUser.render();
 
     // ---------------------------------------------------------
-    // pickup
-    var pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
-    pickup.start();
+    // show page
+    function page ( event ) {
+
+      console.log( 'page ', event );
+
+      // ---------------------------------------------------------
+      // pickup
+      var pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
+      pickup.start();
+
+      // ---------------------------------------------------------
+      // headline
+      var headline = new UT.view.home.ViewHeadline( document.getElementById('headline-container') );
+      headline.start();
+
+      // ---------------------------------------------------------
+      // news
+      var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
+      var archive = new UT.view.ViewArchiveMasonry( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
+      archive.start();
+
+      // ---------------------------------------------------------
+      // ranking
+      // slug all
+      var ranking = new UT.view.sidebar.ViewRanking( document.getElementById( 'widget-ranking-container' ) );
+      ranking.start();
+
+      // ---------------------------------------------------------
+      // video
+      // slug all
+      var videosCallback = {};
+      videosCallback[ UT.view.View.EMPTY_ERROR ] = function( error ) {
+        console.log( 'video empty error ', error );
+      };
+      videosCallback[ UT.view.View.RESPONSE_ERROR ] = function( error ) {
+        console.log( 'video RESPONSE_ERROR error ', error );
+      };
+      var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), videosCallback );
+      videos.start();
+    }
 
     // ---------------------------------------------------------
-    // headline
-    var headline = new UT.view.home.ViewHeadline( document.getElementById('headline-container') );
-    headline.start();
+    // router check
+    var Router = UT.app.Router;
+    var router = Router.factory();
 
-    // ---------------------------------------------------------
-    // news
-    var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-    var archive = new UT.view.ViewArchiveMasonry( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
-    archive.start();
-
-    // ---------------------------------------------------------
-    // ranking
-    // slug all
-    var ranking = new UT.view.sidebar.ViewRanking( document.getElementById( 'widget-ranking-container' ) );
-    ranking.start();
-
-    // ---------------------------------------------------------
-    // video
-    // slug all
-    var videosCallback = {};
-    videosCallback[ UT.view.View.EMPTY_ERROR ] = function( error ) {
-      console.log( 'video empty error ', error );
-    };
-    videosCallback[ UT.view.View.RESPONSE_ERROR ] = function( error ) {
-      console.log( 'video RESPONSE_ERROR error ', error );
-    };
-    var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), videosCallback );
-    videos.start();
+    // event bind
+    router.on( Router.INDEX, page );
+    // location check
+    router.route();
 
   }( window ) );
 </script>
