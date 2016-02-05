@@ -30,6 +30,8 @@ let ReactDOM = self.ReactDOM;
  * <code>new ViewHeaderUser()</code> はできません。<br>
  * <code>ViewHeaderUser.factory()</code> してください。<br>
  * </P>
+ *
+ * @ToDo user profile icon, notifications count 取得
  */
 export class ViewHeaderUser extends View {
   /**
@@ -156,10 +158,10 @@ export class ViewHeaderUser extends View {
             </a>
 
             <nav className="user-menu">
-              <ul className="dropmenu">
-                <li className="dropmenu-item"><a className="dropmenu-link" href="/mypage/">ブックマーク<br />アクティビティ</a></li>
-                <li className="dropmenu-item"><a className="dropmenu-link" href="/settings/">設定</a></li>
-                <li className="dropmenu-item"><a className="dropmenu-link" href="/logout/">ログアウト</a></li>
+              <ul className="dropMenu">
+                <li className="dropMenu-item"><a className="dropMenu-link" href="/mypage/">ブックマーク<br />アクティビティ</a></li>
+                <li className="dropMenu-item"><a className="dropMenu-link" href="/settings/">設定</a></li>
+                <li className="dropMenu-item"><a className="dropMenu-link" href="/logout/">ログアウト</a></li>
               </ul>
             </nav>
           </div>
@@ -183,7 +185,7 @@ export class ViewHeaderUser extends View {
   renderLogout():void {
 
     let element = this.element;
-    console.log( 'renderLogout element ', element );
+
     let UserDom = React.createClass( {
       render: function() {
 
@@ -218,13 +220,15 @@ export class ViewHeaderUser extends View {
 
   /**
    * instance を生成します
+   * @param {Element} element root element
+   * @param {Object} [option={}] optional event handler
    * @return {UserStatus} UserStatus instance を返します
    */
-  static factory():UserStatus {
+  static factory( element:Element, option:Object = {} ):UserStatus {
 
     if ( _instance === null ) {
 
-      _instance = new ViewHeaderUser( _symbol );
+      _instance = new ViewHeaderUser( _symbol, element, option );
       let status = UserStatus.factory();
       status.on( UserStatus.LOGE_IN, _instance.didLogin.bind( _instance ) );
       status.on( UserStatus.LOGE_OUT, _instance.didLogout.bind( _instance ) );

@@ -26,7 +26,7 @@ _bin
 crossdomain.xml
 
 # test php
-php.coffee
 php_ini.coffee
-_src/app/router.php
-_src/app/index.php
+#php.coffee
+#_src/app/router.php
+#_src/app/index.php

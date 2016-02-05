@@ -186,8 +186,7 @@
 
     // ---------------------------------------------------------
     // header.user
-    var headerUser = UT.view.header.ViewHeaderUser.factory();
-    headerUser.element = document.getElementById('user-profile-nav');
+    var headerUser = UT.view.header.ViewHeaderUser.factory( document.getElementById('user-profile-nav') );
     headerUser.render();
 
     // ---------------------------------------------------------
