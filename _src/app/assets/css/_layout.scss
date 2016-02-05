@@ -519,56 +519,22 @@ a {
       } // .widget-ranking-heading
 
       .post {
-        @include link-decoration(#333, #333, none, none);
-        @include clearfix;
-        display: block;
-        padding: 10px 0;
         border-bottom: 1px solid $border-primary-color;
 
-        &-thumb {
-          float: left;
-          margin-right: 10px;
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-color: #ccc;
-        }
-
-        &-data {
-          overflow: hidden;
-        }
-
-        &-category {
-          color: $highlight-color;
-          font-weight: bold;
-          font-size: fz(12);
-        }
-
-        &-heading {
-          line-height: lh(18, 14);
-          font-weight: bold;
-        }
-
-        &-date {
-          margin-top: .25em;
-          color: #666;
-          font-size: fz(10);
-        }
-
+        &-thumb {}
+        &-data {}
+        &-category {}
+        &-heading {}
+        &-date {}
         &:hover {
-          .post-heading {
-            color: $highlight-color;
-          }
+          .post-heading {}
         }
       } //.post
     } //.widget-ranking, .widget-recommend
 
     .widget-ranking {
       .post {
-        &-thumb {
-          width: 70px;
-          height: 70px;
-          background-image: url(/assets/images/common/thumb-noimage-70x70.png);
-        }
+        &-thumb {}
 
         &-data {
           float: right;
@@ -626,6 +592,10 @@ a {
     } //.widget-recommend
   }
 }
+
+
+
+
 
 // ---------------------------------------------------------
 // override

@@ -7,9 +7,9 @@
 //
 // Styleguide 2.6.0
 
-// board
+// board-large
 // 汎用 ニュース一覧
-.board {
+.board-large {
   @include clearfix;
 
   @at-root {
@@ -24,66 +24,6 @@
         float: right;
       }
     } //.board-column
-
-    &-item {
-      position: relative;
-      margin-top: 30px;
-
-      .post {
-        @include link-decoration(#333, #333, none, none);
-        display: block;
-
-        &-thumb {
-          position: relative;
-
-          &-overlay-movie {
-            display: none;
-            position: absolute;
-
-            &.type-movie {
-              display: block;
-            }
-          }
-        } //post-thumb
-
-        &-data {
-          margin-top: .75em;
-        }
-
-        &-category {
-          color: $highlight-color;
-          font-weight: bold;
-          font-size: fz(12);
-        }
-
-        &-heading {
-          font-weight: bold;
-          font-size: fz(20);
-        }
-
-        &-date {
-          margin-top: .25em;
-          color: #666;
-          font-size: fz(10);
-        }
-
-        &-excerpt-text {
-          margin-top: 0.25em;
-        }
-
-        &:hover {
-          .post-thumb {
-            @include hover-opacity;
-          }
-
-          .post-heading {
-            color: $highlight-color;
-          }
-        }
-      } //.post
-    }
-
-
 
 
 
@@ -137,8 +77,6 @@
 
 
 
-
-
     .feature-user {
       &.comment-item {
         margin-top: 10px;
@@ -163,8 +101,6 @@
         padding-left: 8px;
       }
     } //.feature-user
-
-
 
 
 
@@ -201,8 +137,6 @@
 
 
 
-
-
     &-btn-viewmore {
       clear: both;
       padding-top: 30px;
@@ -221,8 +155,140 @@
       }
     } //.board-btn-viewmore
   }
+
+  .board-item {
+    position: relative;
+    margin-top: 30px;
+
+    .post {
+      @include link-decoration(#333, #333, none, none);
+      display: block;
+
+      &-thumb {
+        position: relative;
+
+        &-overlay-movie {
+          display: none;
+          position: absolute;
+
+          &.type-movie {
+            display: block;
+          }
+        }
+      } //post-thumb
+
+      &-data {
+        margin-top: .75em;
+      }
+
+      &-category {
+        color: $highlight-color;
+        font-weight: bold;
+        font-size: fz(12);
+      }
+
+      &-heading {
+        font-weight: bold;
+        font-size: fz(20);
+      }
+
+      &-date {
+        margin-top: .25em;
+        color: #666;
+        font-size: fz(10);
+      }
+
+      &-excerpt-text {
+        margin-top: 0.25em;
+      }
+
+      &:hover {
+        .post-thumb {
+          @include hover-opacity;
+        }
+
+        .post-heading {
+          color: $highlight-color;
+        }
+      }
+    } //.post
+  }
+
 }
 
+
+
+
+
+// board-small
+// 汎用 ニュース一覧
+.board-small {
+  @include clearfix;
+
+  &.column2 {
+    .board-item {
+      float: left;
+      width: 340px;
+      border-top: 1px solid $border-primary-color;
+
+      &:nth-child(2n) {
+        float: right;
+      }
+
+      .post {
+        &-heading {
+          min-height: 2.6em;
+        }
+      }
+    }
+  }
+
+  .post {
+    @include link-decoration(#333, #333, none, none);
+    @include clearfix;
+    display: block;
+    padding: 15px 0;
+
+    &-thumb {
+      float: left;
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      background: #ccc url(/assets/images/common/thumb-noimage-70x70.png) center center no-repeat;
+    }
+
+    &-data {
+      overflow: hidden;
+    }
+
+    &-category {
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: fz(12);
+    }
+
+    &-heading {
+      line-height: lh(18, 14);
+      font-weight: bold;
+    }
+
+    &-date {
+      margin-top: .25em;
+      color: #666;
+      font-size: fz(10);
+    }
+
+    &:hover {
+      .post-thumb {
+        @include hover-opacity;
+      }
+
+      .post-heading {
+        color: $highlight-color;
+      }
+    }
+  }
+}
 
 
 
@@ -266,6 +332,10 @@
     }
   }
 }
+
+
+
+
 
 // -------------------------------------------------
 // override

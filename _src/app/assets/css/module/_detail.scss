@@ -87,6 +87,15 @@
     }
   } //.post-content
 
+  // sponsor-link
+  .sponsor-link {
+    margin-top: 20px;
+
+    & + .post-tags {
+      margin-top: 20px;
+    }
+  }
+
   // post-tags
   .post-tags {
     margin-top: 40px;
