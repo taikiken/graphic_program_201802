@@ -1,0 +1,58 @@
+#Header set Access-Control-Allow-Origin *
+#Header set Access-Control-Allow-Credentials true
+#Header set Access-Control-Allow-Methods *
+#Header always set Access-Control-Allow-Headers "Authorization"
+
+Satisfy any
+order allow,deny
+allow from all
+
+Options FollowSymLinks Includes
+RewriteEngine on
+RewriteBase /
+
+#Comment
+RewriteCond %{REQUEST_METHOD} DELETE
+RewriteRule ^v1/comments/article/([0-9]+)/([0-9]+)/([0-9]+) /api/json_commentdelete.php?pageid=$1&commentid=$2&replyid=$3 [L,QSA]
+
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^v1/comments/article/([0-9]+)/([0-9]+) /api/json_commentlist.php?id=$1&cid=$2 [L,QSA]
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^v1/comments/article/([0-9]+)/([0-9]+) /api/json_commentpost.php?article_id=$1&comment_id=$2 [L,QSA]
+RewriteCond %{REQUEST_METHOD} DELETE
+RewriteRule ^v1/comments/article/([0-9]+)/([0-9]+) /api/json_commentdelete.php?pageid=$1&commentid=$2 [L,QSA]
+
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^v1/comments/article/([0-9]+)/([a-z]+) /api/json_commentlist.php?id=$1&type=$2 [L,QSA]
+
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^v1/comments/article/([0-9]+) /api/json_commentlist.php?id=$1 [L,QSA]
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^v1/comments/article/([0-9]+) /api/json_commentpost.php?article_id=$1 [L,QSA]
+
+#Good Bad
+RewriteRule ^v1/comments/(bad|good)/([0-9]+) /api/json_commentreaction.php?comment_id=$2&reaction=$1 [L]
+
+#Bookmark
+RewriteRule ^v1/articles/([0-9]+)/bookmark /api/json_bookmark.php?article_id=$1 [L,QSA]
+
+#Article
+RewriteRule ^v1/users/bookmark /api/json_articlelist.php?api=bookmark [L,QSA]
+RewriteRule ^v1/articles/([0-9]+) /api/json_articledetails.php?id=$1 [L]
+RewriteRule ^v1/articles/search/(.+) /api/json_articlelist.php?api=search&q=$1 [L,QSA]
+RewriteRule ^v1/articles/category/([a-z]+)/([a-z]+) /api/json_articlelist.php?api=category&category=$1&type=$2 [L,QSA]
+RewriteRule ^v1/articles/category/([a-z]+) /api/json_articlelist.php?api=category&category=$1 [L,QSA]
+RewriteRule ^v1/articles/self/([a-z]+) /api/json_articlelist.php?api=self&c=$1 [L,QSA]
+RewriteRule ^v1/articles/self /api/json_articlelist.php?api=self [L,QSA]
+RewriteRule ^v1/articles/home/([a-z]+) /api/json_articlelist.php?api=home&c=$1 [L,QSA]
+RewriteRule ^v1/articles/home /api/json_articlelist.php?api=home [L,QSA]
+
+#USER
+RewriteRule ^v1/users/self/settings/account /api/json_useraccount.php [L]
+RewriteRule ^v1/users/self/settings/interest /api/json_usercategory.php [L]
+RewriteRule ^v1/users/self/notification /api/json_usernotification.php [L]
+RewriteRule ^v1/users/self/activities /api/json_useractivity.php [L]
+RewriteRule ^v1/users/self /api/json_userdetails.php [L]
+RewriteRule ^v1/users/([0-9]+) /api/json_userdetails.php?userid=$1 [L]
+
+RewriteRule ^v1/category /api/json_categorylist.php [L]
