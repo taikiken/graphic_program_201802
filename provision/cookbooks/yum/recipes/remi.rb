@@ -33,3 +33,10 @@ yum_repository "remi" do
   exclude node['yum']['remi']['exclude']
   action :create
 end
+
+yum_repository "remi-php56" do
+  description "Les RPM de remi de PHP 5.6 pour Enterprise Linux $releasever - $basearch"
+  mirrorlist "http://rpms.famillecollet.com/enterprise/$releasever/php56/mirror"
+  failovermethod "priority"
+  action :create
+end
