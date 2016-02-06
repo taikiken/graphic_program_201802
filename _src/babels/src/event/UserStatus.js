@@ -35,9 +35,15 @@ export class UserStatus extends EventDispatcher {
 
     }
 
-    super();
-    return this;
+    if ( _instance === null ) {
+      super();
+      _instance = this;
+    }
+    return _instance;
   }
+  // ---------------------------------------------------
+  //  method
+  // ---------------------------------------------------
   /**
    * UserStatus.LOGE_IN event を fire します
    */
@@ -50,6 +56,9 @@ export class UserStatus extends EventDispatcher {
   logout():void {
     this.dispatch( { type: UserStatus.LOGE_OUT } );
   }
+  // ---------------------------------------------------
+  //  static const
+  // ---------------------------------------------------
   /**
    * LOGE_IN event
    * @return {string} LOGE_IN event type を返します
@@ -64,6 +73,9 @@ export class UserStatus extends EventDispatcher {
   static get LOGE_OUT():string {
     return 'logOut';
   }
+  // ---------------------------------------------------
+  //  static method
+  // ---------------------------------------------------
   /**
    * instance を生成します
    * @return {UserStatus} UserStatus instance を返します

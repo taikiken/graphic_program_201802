@@ -78,7 +78,7 @@ var Isotope = self.Isotope;
  * archive 一覧を isotope で
  */
 
-var ViewArchiveMasonry = function (_View) {
+var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
   (0, _inherits3.default)(ViewArchiveMasonry, _View);
 
   /**
@@ -87,29 +87,22 @@ var ViewArchiveMasonry = function (_View) {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {string} [slug=''] Category archive 取得時のslug
    * @param {boolean} [useMasonry=true] isotope を行うかの
    */
 
   function ViewArchiveMasonry(element, moreElement) {
     var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-    var slug = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
-    var useMasonry = arguments.length <= 5 || arguments[5] === undefined ? true : arguments[5];
+    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
     (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
 
     option = _Safety.Safety.object(option);
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
 
-    if (ActionClass !== null) {
+    if (typeof ActionClass === 'function') {
 
-      if (slug !== null && typeof slug !== 'undefined' && slug !== '') {
-        // Category
-        _this2._action = new ActionClass(slug, '', _this2.done.bind(_this2), _this2.fail.bind(_this2));
-      } else {
-        _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
-      }
+      _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
     }
     _this2._moreElement = moreElement;
     /**
@@ -118,9 +111,7 @@ var ViewArchiveMasonry = function (_View) {
      * @private
      */
     _this2._articles = [];
-
     _this2._useMasonry = !!useMasonry;
-
     _this2._top = 0;
 
     return _this2;
@@ -134,18 +125,14 @@ var ViewArchiveMasonry = function (_View) {
    */
 
   (0, _createClass3.default)(ViewArchiveMasonry, [{
-    key: 'category',
+    key: 'start',
 
     // ---------------------------------------------------
     //  Method
     // ---------------------------------------------------
-    value: function category(_category) {}
     /**
      * Ajax request を開始します
      */
-
-  }, {
-    key: 'start',
     value: function start() {
 
       this.action.next();
@@ -301,7 +288,13 @@ var ViewArchiveMasonry = function (_View) {
       // ArchiveDom から呼び出す
       var moreButton = function moreButton(show) {
 
-        ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+        // moreElement 存在チェックを行う
+        // Element 型を保証する
+        if (moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement) {
+
+          // チェックをパスし実行する
+          ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+        }
       };
       // --------------------------------------------
       // COMMENTS Popular second
@@ -379,11 +372,13 @@ var ViewArchiveMasonry = function (_View) {
           var sign = this.props.sign;
           var comment = this.props.comment;
           var active = this.props.active;
+          // active（click可能）にするかを表す
           var activeClass = active ? ' active' : '';
 
           if (sign) {
 
             // login user
+            // click ずみの時は不可
             return React.createElement(
               'a',
               { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
@@ -401,6 +396,7 @@ var ViewArchiveMasonry = function (_View) {
           } else {
 
             // not login user
+            // click 不可
             return React.createElement(
               'span',
               { className: 'comment-response-btn comment-response-like' },
@@ -815,5 +811,3 @@ var ViewArchiveMasonry = function (_View) {
   }]);
   return ViewArchiveMasonry;
 }(_View2.View);
-
-exports.ViewArchiveMasonry = ViewArchiveMasonry;

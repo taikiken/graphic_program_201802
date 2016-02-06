@@ -88,12 +88,9 @@
   .success -> #43e18a グリーン
   -->
 
-  <div id="pickup-container"></div><!-- /pickup -->
-
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-        <div id="headline-container"></div><!-- /headline -->
 
         <div class="newsboad">
 
@@ -165,7 +162,7 @@
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 </div><!-- /.whole -->
-<script src="assets/js/bundle/main.bundle.js"></script>
+<script src="/assets/js/bundle/main.bundle.js"></script>
 <script>
   ( function ( window ) {
 
@@ -184,62 +181,65 @@
     // sign in
     UT.app.User.login();
 
-    function switchLogin() {
-      console.log( '************ switchLogin ', UT.app.User.sign );
-      if (UT.app.User.sign) {
-        UT.app.User.logout();
-      } else {
-        UT.app.User.login()
-      }
-    }
-
-    // login / logout 通知テスト
-    // 外部要因で変わるかもしれないので...
-//    setInterval( switchLogin, 1000 * 5 );
-
     // test code ここまで
     // ---------------------------------------------------------
 
     // ---------------------------------------------------------
     // header.user
-    var headerUser = UT.view.header.ViewHeaderUser.factory();
-    headerUser.element = document.getElementById('user-profile-nav');
+    var headerUser = UT.view.header.ViewHeaderUser.factory( document.getElementById('user-profile-nav') );
     headerUser.render();
 
     // ---------------------------------------------------------
-    // pickup
-    var pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
-    pickup.start();
+    // show page
+    function page ( event ) {
+
+      console.log( 'page ', event );
+
+      var slug = event.slug;
+      var type = event.slugType;
+
+      // ---------------------------------------------------------
+      // news
+      // category 記事一覧は token 不要
+      var archive = new UT.view.ViewCategory( slug, document.getElementById('board-container'), document.getElementById('board-container-more') );
+      console.log( 'category slug ', archive.action.slug );
+      console.log( 'category type ', archive.action.type );
+      console.log( 'category url ', archive.action.url );
+
+      archive.start();
+
+      // ---------------------------------------------------------
+      // ranking
+      // slug
+      var ranking = new UT.view.sidebar.ViewRanking( document.getElementById( 'widget-ranking-container' ), null, slug );
+      ranking.start();
+
+      // ---------------------------------------------------------
+      // video
+      // slug
+      var videosCallback = {};
+      videosCallback[ UT.view.View.EMPTY_ERROR ] = function( error ) {
+        console.log( 'video empty error ', error );
+      };
+      videosCallback[ UT.view.View.RESPONSE_ERROR ] = function( error ) {
+        console.log( 'video RESPONSE_ERROR error ', error );
+      };
+      var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), videosCallback, slug );
+      videos.start();
+
+    }
 
     // ---------------------------------------------------------
-    // headline
-    var headline = new UT.view.home.ViewHeadline( document.getElementById('headline-container') );
-    headline.start();
+    // update Router 2016-02-05
+    // router check
+    var Router = UT.app.Router;
+    var router = Router.factory();
 
-    // ---------------------------------------------------------
-    // news
-    var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-    var archive = new UT.view.ViewArchiveMasonry( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
-    archive.start();
+    // event bind
+    router.on( Router.CATEGORY, page );
+    // location check
+    router.route();
 
-    // ---------------------------------------------------------
-    // ranking
-    // slug all
-    var ranking = new UT.view.sidebar.ViewRanking( document.getElementById( 'widget-ranking-container' ) );
-    ranking.start();
-
-    // ---------------------------------------------------------
-    // video
-    // slug all
-    var videosCallback = {};
-    videosCallback[ UT.view.View.EMPTY_ERROR ] = function( error ) {
-      console.log( 'video empty error ', error );
-    };
-    videosCallback[ UT.view.View.RESPONSE_ERROR ] = function( error ) {
-      console.log( 'video RESPONSE_ERROR error ', error );
-    };
-    var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), videosCallback );
-    videos.start();
 
   }( window ) );
 </script>

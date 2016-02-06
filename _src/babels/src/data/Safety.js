@@ -95,7 +95,7 @@ export class Safety {
   /**
    * integer かを調べ null の時は default value をセットします
    * @param {Number} value 調査対象
-   * @param {NUmber} defaultValue null の時にセットする値
+   * @param {Number} defaultValue null の時にセットする値
    * @return {Number} Number 型を返します
    */
   static integer( value:Number, defaultValue:Number ):Number {

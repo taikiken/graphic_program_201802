@@ -81,7 +81,6 @@ var RelatedDae = exports.RelatedDae = function () {
     get: function get() {
       return this._response;
     }
-
     /**
      *
      * @return {Number} 記事 ID を返します
@@ -92,7 +91,6 @@ var RelatedDae = exports.RelatedDae = function () {
     get: function get() {
       return this.response.id;
     }
-
     /**
      *
      * @return {string} ISO8601 日付
@@ -122,7 +120,6 @@ var RelatedDae = exports.RelatedDae = function () {
     get: function get() {
       return this.response.display_date;
     }
-
     /**
      *
      * @return {string} 記事タイトル
@@ -133,7 +130,6 @@ var RelatedDae = exports.RelatedDae = function () {
     get: function get() {
       return this.response.title;
     }
-
     /**
      *
      * @return {string} 記事概要
@@ -144,7 +140,6 @@ var RelatedDae = exports.RelatedDae = function () {
     get: function get() {
       return this.response.description;
     }
-
     /**
      *
      * @return {CategoryDae|*} カテゴリー
@@ -155,7 +150,6 @@ var RelatedDae = exports.RelatedDae = function () {
     get: function get() {
       return this._category;
     }
-
     /**
      *
      * @return {string} 記事URL

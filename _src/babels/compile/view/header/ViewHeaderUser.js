@@ -54,7 +54,6 @@ var _instance = null;
 
 // React
 var React = self.React;
-
 var ReactDOM = self.ReactDOM;
 
 /**
@@ -63,6 +62,8 @@ var ReactDOM = self.ReactDOM;
  * <code>new ViewHeaderUser()</code> はできません。<br>
  * <code>ViewHeaderUser.factory()</code> してください。<br>
  * </P>
+ *
+ * @ToDo user profile icon, notifications count 取得
  */
 
 var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
@@ -92,9 +93,12 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
       throw new Error('UserStatus is static Class. not use new UserStatus().');
     }
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
+    if (_instance === null) {
+      var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
 
-    return _ret = _this, (0, _possibleConstructorReturn3.default)(_this, _ret);
+      _instance = _this;
+    }
+    return _ret = _instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
   /**
    * ユーザーメニューを作成します<br>
@@ -205,13 +209,13 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
               { className: 'user-menu' },
               React.createElement(
                 'ul',
-                { className: 'dropmenu' },
+                { className: 'dropMenu' },
                 React.createElement(
                   'li',
-                  { className: 'dropmenu-item' },
+                  { className: 'dropMenu-item' },
                   React.createElement(
                     'a',
-                    { className: 'dropmenu-link', href: '/mypage/' },
+                    { className: 'dropMenu-link', href: '/mypage/' },
                     'ブックマーク',
                     React.createElement('br', null),
                     'アクティビティ'
@@ -219,19 +223,19 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
                 ),
                 React.createElement(
                   'li',
-                  { className: 'dropmenu-item' },
+                  { className: 'dropMenu-item' },
                   React.createElement(
                     'a',
-                    { className: 'dropmenu-link', href: '/settings/' },
+                    { className: 'dropMenu-link', href: '/settings/' },
                     '設定'
                   )
                 ),
                 React.createElement(
                   'li',
-                  { className: 'dropmenu-item' },
+                  { className: 'dropMenu-item' },
                   React.createElement(
                     'a',
-                    { className: 'dropmenu-link', href: '/logout/' },
+                    { className: 'dropMenu-link', href: '/logout/' },
                     'ログアウト'
                   )
                 )
@@ -248,7 +252,6 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
     }
     /**
      * 非ログインユーザー用メニューを作成します
-     * @ToDo href url が正しいか確認
      */
 
   }, {
@@ -256,7 +259,7 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
     value: function renderLogout() {
 
       var element = this.element;
-      console.log('renderLogout element ', element);
+
       var UserDom = React.createClass({
         displayName: 'UserDom',
 
@@ -298,16 +301,19 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
 
     /**
      * instance を生成します
+     * @param {Element} element root element
+     * @param {Object} [option={}] optional event handler
      * @return {UserStatus} UserStatus instance を返します
      */
 
   }], [{
     key: 'factory',
-    value: function factory() {
+    value: function factory(element) {
+      var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
       if (_instance === null) {
 
-        _instance = new ViewHeaderUser(_symbol);
+        _instance = new ViewHeaderUser(_symbol, element, option);
         var status = _UserStatus.UserStatus.factory();
         status.on(_UserStatus.UserStatus.LOGE_IN, _instance.didLogin.bind(_instance));
         status.on(_UserStatus.UserStatus.LOGE_OUT, _instance.didLogout.bind(_instance));

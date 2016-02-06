@@ -13,8 +13,8 @@
     - []
 
 1. category
-    - []
-    - [] slug あり
+    - [X]
+    - [X] slug あり
 
 1. search
     - []
@@ -167,16 +167,71 @@
 ## カテゴリー
 1. URLからslug抽出
     - [X]
+
+## カテゴリー all
+1. 一覧
+    - [X] model
+    - [X] view
+    - [X] paging
+        
+1. ranking
+    - [X] model
+    - [X] view
     
+1. video
+    - [X] model
+    - [X] view
+
+## カテゴリー slug あり
+1. 一覧
+    - [X] model
+    - [X] view
+    - [-] paging  
+    データが足りないので未テスト
+        
+1. ranking
+    - [X] model
+    - [X] view
+    
+1. video
+    - [X] model
+    - [X] view
+    
+## 検索
+1. 一覧
+    - [] keyword
+    - [] model
+    - [] view
+    - [] paging   
+
+
+## お知らせ
 1. 一覧
     - [] model
     - [] view
-    - [] paging
-        
-1. ranking
-    - [] model
-    - [] view
+    - [] paging  
     
-1. video
+1. 既読化
+    - [] model
+    
+    
+## bookmark
+1. 一覧
     - [] model
     - [] view
+    - [] paging  
+    
+1. 登録
+    - [] model
+    
+1. 削除
+    - [] model
+    
+## Pagination
+[デザイン / ウェブ PC版 デザイン調整 #79](https://github.com/undotsushin/undotsushin/issues/79)
+
+- お知らせ
+- ブックマーク一覧
+- アクティビティ一覧
+- 記事検索結果一覧
+

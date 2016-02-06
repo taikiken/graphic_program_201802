@@ -123,9 +123,10 @@ export class ViewSingle extends View {
    */
   render( response:Object ):void {
 
+    //console.log( 'single resoonse ', response );
     let single = new SingleDae( response );
     // global SingleInfoへ保存
-    SingleInfo.dae = single;
+    // SingleInfo.dae = single;
 
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
@@ -245,7 +246,7 @@ export class ViewSingle extends View {
 
     // comment 取得
     // 自動化の場合はここに記述
-    // ToDo: 決めかねてる...
+    // ここでコメントは取得しない
 
   }// render
   /**

@@ -73,10 +73,16 @@ var UserStatus = exports.UserStatus = function (_EventDispatcher) {
       throw new Error('UserStatus is static Class. not use new UserStatus().');
     }
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(UserStatus).call(this));
+    if (_instance === null) {
+      var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(UserStatus).call(this));
 
-    return _ret = _this, (0, _possibleConstructorReturn3.default)(_this, _ret);
+      _instance = _this;
+    }
+    return _ret = _instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  // ---------------------------------------------------
+  //  method
+  // ---------------------------------------------------
   /**
    * UserStatus.LOGE_IN event を fire します
    */
@@ -95,6 +101,9 @@ var UserStatus = exports.UserStatus = function (_EventDispatcher) {
     value: function logout() {
       this.dispatch({ type: UserStatus.LOGE_OUT });
     }
+    // ---------------------------------------------------
+    //  static const
+    // ---------------------------------------------------
     /**
      * LOGE_IN event
      * @return {string} LOGE_IN event type を返します
@@ -103,6 +112,9 @@ var UserStatus = exports.UserStatus = function (_EventDispatcher) {
   }], [{
     key: 'factory',
 
+    // ---------------------------------------------------
+    //  static method
+    // ---------------------------------------------------
     /**
      * instance を生成します
      * @return {UserStatus} UserStatus instance を返します

@@ -79,26 +79,33 @@ var buildPath = function buildPath() {
   var API_PATH = apiRoot(_Loc.Loc.port) + '/api/v1';
 
   return {
+    // --------------------------------------------
     // 登録
     'users:add': new _Types.Types(new _Type.Type(API_PATH + '/users', 'POST'), new _Permalink.Permalink(), new _Queries.Queries()),
     // login / logout
     'users:login': new _Types.Types(new _Type.Type(API_PATH + '/sessions', 'POST'), new _Permalink.Permalink(), new _Queries.Queries()),
     'users:logout': new _Types.Types(new _Type.Type(API_PATH + '/sessions', 'DELETE'), new _Permalink.Permalink(), new _Queries.Queries()),
+    // --------------------------------------------
     // カテゴリー一覧
     'categories': new _Types.Types(new _Type.Type(API_PATH + '/category'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    // --------------------------------------------
     // home / self
     // /api/v1/articles/home[/|/pickup|/headline]
     'home': new _Types.Types(new _Type.Type(API_PATH + '/articles/home'), new _Permalink.Permalink(['pickup', 'headline']), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
     'self': new _Types.Types(new _Type.Type(API_PATH + '/articles/self'), new _Permalink.Permalink(['pickup', 'headline']), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)]), true),
+    // --------------------------------------------
     // 記事一覧
     // /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video]
     'category': new _Types.Types(new _Type.Type(API_PATH + '/articles/category'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    // --------------------------------------------
     // 検索
     // /api/vi/articles/search/{:keywords}
     'search': new _Types.Types(new _Type.Type(API_PATH + '/articles/search'), new _Permalink.Permalink(['*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    // --------------------------------------------
     // 記事詳細
     // /api/v1/articles/{:article_id}
     'single': new _Types.Types(new _Type.Type(API_PATH + '/articles/' + _Path.Path.ARTICLE_ID), new _Permalink.Permalink(['*'], true), new _Queries.Queries()),
+    // --------------------------------------------
     // ブックマーク 登録
     // /api/v1/articles/{:article_id}/bookmark
     'bookmark:add': new _Types.Types(new _Type.Type(API_PATH + '/articles/ARTICLE_ID/bookmark', 'PUT'), new _Permalink.Permalink(['*'], true), new _Queries.Queries(), true),
@@ -184,7 +191,14 @@ var buildPath = function buildPath() {
     'users:self:bookmark': new _Types.Types(new _Type.Type(API_PATH + '/users/self/bookmark'), new _Permalink.Permalink(), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
     // user_idに該当するユーザーのブックマークを取得する
     // /api/v1/users/{:user_id}/bookmark
-    'users:id:bookmark': new _Types.Types(new _Type.Type(API_PATH + '/users/' + _Path.Path.USER_ID + '/bookmark'), new _Permalink.Permalink(), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    /*
+    2016-02-04 drop した模様
+    'users:id:bookmark': new Types(
+      new Type( `${API_PATH}/users/${Path.USER_ID}/bookmark` ),
+      new Permalink(),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+    ),
+    */
     // -----------------
     // activities
     // -----------------
@@ -196,7 +210,7 @@ var buildPath = function buildPath() {
     // -----------------
     // お知らせを取得する, 自分のアクション(成果物)への他人からのアクション通知
     // /api/v1/users/self/notifications
-    'users:self:notifications': new _Types.Types(new _Type.Type(API_PATH + '/users/self/notifications'), new _Permalink.Permalink(), new _Queries.Queries(), true),
+    'users:self:notifications': new _Types.Types(new _Type.Type(API_PATH + '/users/self/notifications'), new _Permalink.Permalink(), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)]), true),
     // お知らせ 既読, お知らせウインドウを表示すると呼び出す
     // /api/v1/users/self/notifications/read
     'users:self:notifications:read': new _Types.Types(new _Type.Type(API_PATH + '/users/self/notifications/read', 'PUT'), new _Permalink.Permalink(), new _Queries.Queries(), true),

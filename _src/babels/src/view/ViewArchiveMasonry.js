@@ -48,26 +48,16 @@ export class ViewArchiveMasonry extends View {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {string} [slug=''] Category archive 取得時のslug
    * @param {boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, slug:string = '', useMasonry:boolean = true ) {
+  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:boolean = true ) {
 
     option = Safety.object( option );
 
     super( element, option );
-    if ( ActionClass !== null ) {
+    if ( typeof ActionClass === 'function' ) {
 
-      if ( slug !== null && typeof slug !== 'undefined' && slug !== '' ) {
-
-        // Category
-        this._action = new ActionClass( slug, '', this.done.bind( this ), this.fail.bind( this ) );
-
-      } else {
-
-        this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
-
-      }
+      this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
 
     }
     this._moreElement = moreElement;
@@ -77,9 +67,7 @@ export class ViewArchiveMasonry extends View {
      * @private
      */
     this._articles = [];
-
     this._useMasonry = !!useMasonry;
-
     this._top = 0;
 
   }
@@ -96,9 +84,6 @@ export class ViewArchiveMasonry extends View {
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
-  category( category ):void {
-
-  }
   /**
    * Ajax request を開始します
    */
@@ -243,10 +228,17 @@ export class ViewArchiveMasonry extends View {
     // ArchiveDom から呼び出す
     let moreButton = ( show ) => {
 
-      ReactDOM.render(
-        React.createElement( MoreView, { show: show } ),
-        moreElement
-      );
+      // moreElement 存在チェックを行う
+      // Element 型を保証する
+      if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
+
+        // チェックをパスし実行する
+        ReactDOM.render(
+          React.createElement( MoreView, { show: show } ),
+          moreElement
+        );
+
+      }
 
     };
     // --------------------------------------------
@@ -322,11 +314,13 @@ export class ViewArchiveMasonry extends View {
         let sign = this.props.sign;
         let comment = this.props.comment;
         let active = this.props.active;
+        // active（click可能）にするかを表す
         let activeClass = active ? ' active' : '';
 
         if ( sign ) {
 
           // login user
+          // click ずみの時は不可
           return (
             <a className={'comment-response-btn comment-response-like' + activeClass} href="#" onClick={this.handleClick}>
               <i>&nbsp;</i>
@@ -337,12 +331,14 @@ export class ViewArchiveMasonry extends View {
         } else {
 
           // not login user
+          // click 不可
           return (
             <span className="comment-response-btn comment-response-like">
               <i>&nbsp;</i>
               <span>{comment.good}</span>
             </span>
           );
+
         }
 
       }

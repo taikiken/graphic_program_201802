@@ -54,6 +54,7 @@ let buildPath = () => {
   let API_PATH = apiRoot( Loc.port ) + '/api/v1';
 
   return {
+    // --------------------------------------------
     // 登録
     'users:add': new Types(
       new Type( `${API_PATH}/users`, 'POST' ),
@@ -71,12 +72,14 @@ let buildPath = () => {
       new Permalink(),
       new Queries()
     ),
+    // --------------------------------------------
     // カテゴリー一覧
     'categories': new Types(
       new Type( `${API_PATH}/category` ),
       new Permalink( [ 'all', '*' ], true ),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
+    // --------------------------------------------
     // home / self
     // /api/v1/articles/home[/|/pickup|/headline]
     'home': new Types(
@@ -90,6 +93,7 @@ let buildPath = () => {
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
       true
     ),
+    // --------------------------------------------
     // 記事一覧
     // /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video]
     'category': new Types(
@@ -97,6 +101,7 @@ let buildPath = () => {
       new Permalink( [ 'all', '*' ], true ),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
+    // --------------------------------------------
     // 検索
     // /api/vi/articles/search/{:keywords}
     'search': new Types(
@@ -104,6 +109,7 @@ let buildPath = () => {
       new Permalink( [ '*' ], true ),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
+    // --------------------------------------------
     // 記事詳細
     // /api/v1/articles/{:article_id}
     'single': new Types(
@@ -111,6 +117,7 @@ let buildPath = () => {
       new Permalink( [ '*' ], true ),
       new Queries()
     ),
+    // --------------------------------------------
     // ブックマーク 登録
     // /api/v1/articles/{:article_id}/bookmark
     'bookmark:add': new Types(
@@ -280,11 +287,14 @@ let buildPath = () => {
     ),
     // user_idに該当するユーザーのブックマークを取得する
     // /api/v1/users/{:user_id}/bookmark
+    /*
+    2016-02-04 drop した模様
     'users:id:bookmark': new Types(
       new Type( `${API_PATH}/users/${Path.USER_ID}/bookmark` ),
       new Permalink(),
       new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
     ),
+    */
     // -----------------
     // activities
     // -----------------
@@ -303,7 +313,7 @@ let buildPath = () => {
     'users:self:notifications': new Types(
       new Type( `${API_PATH}/users/self/notifications` ),
       new Permalink(),
-      new Queries(),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
       true
     ),
     // お知らせ 既読, お知らせウインドウを表示すると呼び出す

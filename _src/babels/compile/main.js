@@ -84,7 +84,11 @@ var _ViewArchive = require('./view/ViewArchive');
 
 var _ViewArchiveMasonry = require('./view/ViewArchiveMasonry');
 
+var _ViewCategory = require('./view/ViewCategory');
+
 var _ViewSingle = require('./view/ViewSingle');
+
+var _ViewTitle = require('./view/ViewTitle');
 
 var _ViewComments = require('./view/ViewComments');
 
@@ -201,7 +205,9 @@ var UT = {
     View: _View.View,
     ViewArchive: _ViewArchive.ViewArchive,
     ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
+    ViewCategory: _ViewCategory.ViewCategory,
     ViewSingle: _ViewSingle.ViewSingle,
+    ViewTitle: _ViewTitle.ViewTitle,
     ViewComments: _ViewComments.ViewComments,
     header: {
       ViewHeaderUser: _ViewHeaderUser.ViewHeaderUser
@@ -252,7 +258,7 @@ var UT = {
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-03 23:20:42
+ * @date 2016-02-05 22:58:02
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
