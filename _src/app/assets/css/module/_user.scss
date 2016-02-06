@@ -99,7 +99,9 @@
         float: left;
         display: block;
         width: 200px;
+        min-height: 44px;
         line-height: 1;
+        margin-right: 1px;
         padding: 12px 0;
         background-color: #555;
         text-align: center;
@@ -155,6 +157,20 @@
           }
         }
       }
+
+      &-info {
+        span {
+          &:before {
+            @include sprite( $common-icon-info, inline-block );
+          }
+        }
+
+        &:hover {
+          span:before {
+            @include sprite( $common-icon-info_o, inline-block );
+          }
+        }
+      }
     } //.user-config-nav
 
     &-btn-setting {
@@ -176,12 +192,33 @@
   }
 }
 
-// activity
+
+
+
+
+// board
+.board-small {
+  margin-top: 30px;
+  border-top: 1px solid $border-primary-color;
+
+  .board-item {
+    border-bottom: 1px solid $border-primary-color;
+  }
+} //.board-small
+
+
+
+
+
+// activity, info
+.info,
 .activity {
-  margin-top: 10px;
+  margin-top: 30px;
 
   @at-root {
-    &-list {}
+    &-list {
+      border-top: 1px solid $border-primary-color;
+    }
 
     &-item {}
 
@@ -192,20 +229,20 @@
       padding: 20px 8px;
       border-bottom: 1px solid $border-primary-color;
 
-      &:after {
-        content: '';
-        @extend .sprite-common;
-        @include sprite( $common-icon-activity-arrow );
-        @include pos-middle;
-        right: 8px;
+      // &:after {
+      //   content: '';
+      //   @extend .sprite-common;
+      //   @include sprite( $common-icon-activity-arrow );
+      //   @include pos-middle;
+      //   right: 8px;
+      // }
+
+      &:hover {
+        background-color: #ffe9f3;
       }
     }
 
-    &-content {
-      strong {
-        color: $highlight-color;
-      }
-    }
+    &-content {}
 
     &-date {
       margin-top: .25em;
@@ -215,3 +252,68 @@
   }
 }
 
+// activity
+.activity {
+  @at-root {
+    &-content {
+      strong {
+        color: $highlight-color;
+      }
+    }
+  }
+}
+
+// .info
+.info {
+  @at-root {
+    &-btn-readAll {
+      margin-bottom: 20px;
+      text-align: right;
+
+      a {
+        font-weight: bold;
+      }
+    }
+
+    &-link {
+      padding-left: 75px;
+
+      &,
+      &.unread {
+        background-color: $bg-primary-color;
+      }
+
+      &.read {
+        background-color: #fff;
+      }
+
+      &:hover,
+      &.unread:hover,
+      &.read:hover {
+        background-color: #ffe9f3;
+      }
+    }
+
+    &-user-thumb {
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+
+      img {
+        width: 50px;
+        border-radius: 100%;
+      }
+    }
+
+    &-content {
+      overflow: hidden;
+    }
+
+    &-date {
+      overflow: hidden;
+    }
+  }
+}
