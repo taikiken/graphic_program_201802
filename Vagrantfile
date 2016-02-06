@@ -94,7 +94,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision :chef_solo do |chef|
 
     # CentOS7を採用する場合は以下読み込む
-    #chef.custom_config_path = "provision/Vagrantfile.chef"
+    # chef.custom_config_path = "provision/Vagrantfile.chef"
 
     chef.cookbooks_path = [
       File.join(chef_cookbooks_path, 'cookbooks'),
