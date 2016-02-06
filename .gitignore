@@ -30,3 +30,11 @@ php_ini.coffee
 #php.coffee
 #_src/app/router.php
 #_src/app/index.php
+
+
+
+# environment
+# ==============================
+
+# vagrant
+.vagrant
