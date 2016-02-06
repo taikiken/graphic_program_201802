@@ -48,6 +48,9 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", :mount_options => ['dmode=755', 'fmode=644']
   config.vm.synced_folder _conf['sync_folder'], _conf['document_root'], :create => "true", :mount_options => ['dmode=755', 'fmode=644']
 
+
+  # plugins
+  # ------------------------------
   if Vagrant.has_plugin?('vagrant-hostsupdater')
     config.hostsupdater.remove_on_suspend = true
   end
@@ -56,6 +59,10 @@ Vagrant.configure(2) do |config|
     config.vbguest.auto_update = true
   end
 
+
+
+  # vb
+  # ------------------------------
   config.vm.provider :virtualbox do |vb|
     vb.linked_clone = _conf['linked_clone']
     vb.name = _conf['hostname']
@@ -82,9 +89,12 @@ Vagrant.configure(2) do |config|
 
 
 
-  # chef
+  # chef - cooking
   # ------------------------------
   config.vm.provision :chef_solo do |chef|
+
+    # CentOS7を採用する場合は以下読み込む
+    #chef.custom_config_path = "provision/Vagrantfile.chef"
 
     chef.cookbooks_path = [
       File.join(chef_cookbooks_path, 'cookbooks'),
@@ -92,6 +102,13 @@ Vagrant.configure(2) do |config|
     ]
 
     chef.json = {
+      :app => {
+        :user     => _conf['user'],
+        :group    => _conf['group'],
+        :host     => _conf['hostname'],
+        :docroot  => _conf['document_root'],
+        :packages => %w{git subversion zip unzip kernel-devel gcc perl make jq httpd-devel libxml2-devel libcurl-devel libjpeg-turbo-devel libpng-devel giflib-devel gd-devel libmcrypt-devel libtidy-devel libxslt-devel gettext npm lftp sshpass sqlite-devel curl}
+      },
       :apache => {
         :docroot_dir  => _conf['document_root'],
         :user         => _conf['user'],
@@ -99,42 +116,34 @@ Vagrant.configure(2) do |config|
         :listen_ports => ['80', '443']
       },
       :php => {
-        :packages => %w(php php-cli php-devel php-mbstring php-gd php-xml php-mysql php-pgsql php-pecl-xdebug),
+        :packages => %w(php php-cli php-devel php-pear php-mbstring php-gd php-xml php-mysql php-pgsql php-pecl-xdebug),
         :directives => {
-            'default_charset'            => 'UTF-8',
-            'mbstring.language'          => 'neutral',
-            'mbstring.internal_encoding' => 'UTF-8',
-            'date.timezone'              => 'UTC',
-            'short_open_tag'             => 'Off',
-            'session.save_path'          => '/tmp',
-            'upload_max_filesize'        => '32M'
+          'default_charset'            => 'UTF-8',
+          'mbstring.language'          => 'neutral',
+          'mbstring.internal_encoding' => 'UTF-8',
+          'date.timezone'              => 'UTC',
+          'short_open_tag'             => 'Off',
+          'session.save_path'          => '/tmp',
+          'upload_max_filesize'        => '32M'
         }
       },
-      :app => {
-        :user              => _conf['user'],
-        :group             => _conf['group'],
-        :host              => _conf['hostname'],
-        :docroot           => _conf['document_root']
-      },
       :postgresql => {
-        ## $ echo -n 'postgres' | openssl md5 | sed -e 's/.* /md5/'
-        :password      => 'postgres' #'e8a48653851e28c69d0506508fb27fc5'
+        :password => 'postgres'
       },
       :build_essential => {
         :compiletime => true
       }
     }
 
-
     chef.add_recipe 'undotsushin'
-    chef.add_recipe 'undotsushin::setup'
 
 
   end
 
-
-  # if File.exists?(File.join(File.dirname(__FILE__), 'provision/provision-post.sh')) then
-  #   config.vm.provision :shell, :path => File.join( File.dirname(__FILE__), 'provision/provision-post.sh' )
-  # end
+  # post
+  # ------------------------------
+  if File.exists?(File.join(File.dirname(__FILE__), 'provision/provision-post.sh')) then
+    config.vm.provision :shell, :path => File.join( File.dirname(__FILE__), 'provision/provision-post.sh' )
+  end
 
 end
