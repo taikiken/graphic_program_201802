@@ -1,0 +1,1902 @@
+--
+-- PostgreSQL database dump
+--
+
+\connect - ut
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2 (OID 48817632)
+-- Name: authentic; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE authentic (
+    id integer NOT NULL,
+    usr character varying(100),
+    pwd text,
+    m integer,
+    flag integer,
+    n integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    repo character varying(255),
+    form character varying(255),
+    permission character varying(255),
+    systems character varying(255),
+    email character varying(255)
+);
+
+
+--
+-- TOC entry 3 (OID 48817637)
+-- Name: editor; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE editor (
+    id integer NOT NULL,
+    cid integer,
+    d_name character varying(255),
+    f_name character varying(255),
+    f_size character varying(255),
+    f_type character varying(255),
+    f_option character varying(255),
+    flag integer,
+    n integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    f_comment text,
+    directory character varying(20),
+    bill integer,
+    dead2 character varying(255),
+    dead3 character varying(255),
+    dead4 character varying(255),
+    dead5 character varying(255),
+    f_option2 text,
+    f_option3 text,
+    f_option4 text,
+    f_option5 text,
+    f_option6 text
+);
+
+
+--
+-- TOC entry 4 (OID 48817642)
+-- Name: form; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE form (
+    id integer NOT NULL,
+    fid integer,
+    v1 character varying(255),
+    v2 character varying(255),
+    v3 character varying(255),
+    v4 character varying(255),
+    v5 character varying(255),
+    v6 character varying(255),
+    v7 character varying(255),
+    v8 character varying(255),
+    t1 text,
+    t2 text,
+    t3 text,
+    t4 text,
+    t5 text,
+    t6 text,
+    t7 text,
+    t8 text,
+    radio1 character varying(255),
+    radio2 character varying(255),
+    radio3 character varying(255),
+    radio4 character varying(255),
+    pulldown1 character varying(255),
+    pulldown2 character varying(255),
+    pulldown3 character varying(255),
+    pulldown4 character varying(255),
+    checkbox1 character varying(255),
+    checkbox2 character varying(255),
+    checkbox3 character varying(255),
+    checkbox4 character varying(255),
+    docfile1 character varying(255),
+    docfile2 character varying(255),
+    imgfile1 character varying(255),
+    imgfile2 character varying(255),
+    name0 character varying(50),
+    name1 character varying(50),
+    kana0 character varying(50),
+    kana1 character varying(50),
+    gender character varying(50),
+    profession character varying(255),
+    company character varying(255),
+    section character varying(255),
+    age character varying(255),
+    "by" character varying(10),
+    bm character varying(10),
+    bd character varying(10),
+    email character varying(255),
+    tel0 character varying(10),
+    tel1 character varying(10),
+    tel2 character varying(10),
+    url character varying(255),
+    fax0 character varying(10),
+    fax1 character varying(10),
+    fax2 character varying(10),
+    mtel0 character varying(10),
+    mtel1 character varying(10),
+    mtel2 character varying(10),
+    pref character varying(255),
+    zip0 character varying(10),
+    zip1 character varying(10),
+    address0 character varying(255),
+    address1 character varying(255),
+    handle character varying(255),
+    maildeliver character varying(255),
+    subject character varying(255),
+    bodys text,
+    pwd character varying(255),
+    question text,
+    contact character varying(255),
+    n integer,
+    flag integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    ref character varying(255),
+    refurl character varying(255),
+    reftitle character varying(255),
+    sessionid character varying(255)
+);
+
+
+--
+-- TOC entry 5 (OID 48817654)
+-- Name: login; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE login (
+    id integer NOT NULL,
+    usr character varying(255),
+    m integer,
+    ip character varying(255),
+    ltime timestamp without time zone
+);
+
+
+--
+-- TOC entry 6 (OID 48817656)
+-- Name: mail; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE mail (
+    id integer NOT NULL,
+    subject character varying(255),
+    body text,
+    mailto character varying(255),
+    mailfrom character varying(255),
+    "path" character varying(255),
+    exp text,
+    exp2 character varying(255),
+    sy character varying(10),
+    sm character varying(10),
+    sd character varying(10),
+    ed character varying(10),
+    em character varying(10),
+    ey character varying(10),
+    oc integer,
+    tag integer,
+    flag integer,
+    n integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    exptag integer,
+    exp2tag integer,
+    inum integer,
+    lang integer,
+    expire integer
+);
+
+
+--
+-- TOC entry 7 (OID 48817661)
+-- Name: mail_; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE mail_ (
+    id integer NOT NULL,
+    cid integer,
+    lib integer,
+    fname character varying(255),
+    "at" integer,
+    fvalue text,
+    fsize text,
+    msize character varying(255),
+    pre character varying(255),
+    sep character varying(255),
+    cap text,
+    flag integer,
+    n integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone
+);
+
+
+--
+-- TOC entry 8 (OID 48817666)
+-- Name: mail_template; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE mail_template (
+    id integer NOT NULL,
+    cid integer,
+    lib integer,
+    fname character varying(255),
+    "at" integer,
+    fvalue text,
+    fsize text,
+    msize character varying(255),
+    pre character varying(255),
+    sep character varying(255),
+    cap text,
+    flag integer,
+    n integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone
+);
+
+
+--
+-- TOC entry 9 (OID 48817671)
+-- Name: mailtemplate; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE mailtemplate (
+    id integer NOT NULL,
+    subject character varying(255),
+    body text,
+    mailto character varying(255),
+    mailfrom character varying(255),
+    "path" character varying(255),
+    exp text,
+    exp2 character varying(255),
+    exptag integer,
+    exp2tag integer,
+    flag integer,
+    n integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    inum integer
+);
+
+
+--
+-- TOC entry 10 (OID 48817678)
+-- Name: pm; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE pm (
+    id integer NOT NULL,
+    name character varying(255),
+    value character varying(255),
+    n integer,
+    flag integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone
+);
+
+
+--
+-- TOC entry 11 (OID 48817680)
+-- Name: pm_; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE pm_ (
+    id integer NOT NULL,
+    cid integer,
+    name character varying(255),
+    p1 integer,
+    n integer,
+    flag integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    name_e character varying(255)
+);
+
+
+--
+-- TOC entry 12 (OID 48817687)
+-- Name: repo; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE repo (
+    id integer NOT NULL,
+    rid integer,
+    pid integer,
+    name character varying(255),
+    t1 character varying(255),
+    t2 character varying(255),
+    t3 character varying(255),
+    t4 character varying(255),
+    t5 character varying(255),
+    t6 character varying(255),
+    b1 text,
+    b2 text,
+    b3 text,
+    b4 text,
+    b5 text,
+    b6 text,
+    img1 character varying(255),
+    img2 character varying(255),
+    img3 character varying(255),
+    img4 character varying(255),
+    img5 character varying(255),
+    img6 character varying(255),
+    n1 integer,
+    n2 integer,
+    n3 integer,
+    n4 integer,
+    n5 integer,
+    n6 integer,
+    c_flag integer,
+    c_edit integer,
+    c_det integer,
+    directory text,
+    css text,
+    exp text,
+    exp2 text,
+    serchfield character varying(255),
+    searchfield character varying(255),
+    searchtarget character varying(255),
+    searchlayout character varying(255),
+    pos integer,
+    tag integer,
+    n integer,
+    flag integer,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    querystring character varying(255),
+    rss integer,
+    cc_flag integer,
+    search integer,
+    body text,
+    b1tag integer,
+    b2tag integer,
+    b3tag integer,
+    b4tag integer,
+    b5tag integer,
+    b6tag integer,
+    bodytag integer,
+    exptag integer,
+    exp2tag integer,
+    pageoption character varying(255),
+    "index" character varying(255),
+    querystring1 character varying(255),
+    querystring2 character varying(255),
+    directory2 character varying(255),
+    directory1 character varying(255),
+    directory4 character varying(255),
+    querystring4 character varying(255),
+    meta integer,
+    keyword character varying(255),
+    description text,
+    rewriterule character varying(255),
+    meta2 integer,
+    img1copy character varying(255),
+    img2copy character varying(255),
+    img3copy character varying(255),
+    img4copy character varying(255),
+    img5copy character varying(255),
+    img6copy character varying(255),
+    img1opos character varying(255),
+    img2opos character varying(255),
+    img3opos character varying(255),
+    img4opos character varying(255),
+    img5opos character varying(255),
+    img6opos character varying(255),
+    oc integer,
+    sy integer,
+    sm integer,
+    sd integer,
+    ed integer,
+    em integer,
+    ey integer,
+    list0 text,
+    list1 text,
+    list2 text,
+    list3 text,
+    page0 text,
+    page1 text,
+    page2 text,
+    page3 text,
+    expire integer,
+    cnt integer,
+    img7 character varying(255),
+    img8 character varying(255),
+    img9 character varying(255),
+    img10 character varying(255),
+    tf integer
+);
+
+
+--
+-- TOC entry 13 (OID 48817692)
+-- Name: repo_e; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE repo_e (
+    id integer NOT NULL,
+    nid integer,
+    types integer,
+    img1 character varying(255),
+    img2 character varying(255),
+    img3 character varying(255),
+    youtube character varying(255),
+    pos1 integer,
+    n1 integer,
+    fn1 double precision,
+    fn2 double precision,
+    n integer,
+    flag integer,
+    m_time timestamp without time zone,
+    u_time timestamp without time zone,
+    fn0 double precision,
+    n2 integer,
+    title text,
+    body text,
+    img1txt text,
+    img2txt text
+);
+
+
+--
+-- TOC entry 14 (OID 48817697)
+-- Name: repo_n; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE repo_n (
+    id integer NOT NULL,
+    cid integer,
+    qid integer,
+    rid integer,
+    title character varying(255),
+    body text,
+    t1 character varying(255),
+    t2 character varying(255),
+    t3 character varying(255),
+    t4 character varying(255),
+    t5 character varying(255),
+    t6 character varying(255),
+    t7 character varying(255),
+    t8 character varying(255),
+    t9 character varying(255),
+    t10 character varying(255),
+    t11 character varying(255),
+    t12 character varying(255),
+    t13 character varying(255),
+    t14 character varying(255),
+    t15 character varying(255),
+    t16 character varying(255),
+    t17 character varying(255),
+    t18 character varying(255),
+    t19 character varying(255),
+    t20 character varying(255),
+    b1 text,
+    b2 text,
+    b3 text,
+    b4 text,
+    b5 text,
+    b6 text,
+    b7 text,
+    b8 text,
+    b9 text,
+    b10 text,
+    b11 text,
+    b12 text,
+    b13 text,
+    b14 text,
+    b15 text,
+    b16 text,
+    b17 text,
+    b18 text,
+    b19 text,
+    b20 text,
+    m1 integer,
+    m2 integer,
+    m3 integer,
+    m4 integer,
+    m5 integer,
+    m6 integer,
+    d1 integer,
+    d2 integer,
+    d3 integer,
+    d4 integer,
+    d5 integer,
+    d6 integer,
+    fn0 double precision,
+    fn1 double precision,
+    img1 character varying(255),
+    img2 character varying(255),
+    img3 character varying(255),
+    img4 character varying(255),
+    img5 character varying(255),
+    img6 character varying(255),
+    img7 character varying(255),
+    img8 character varying(255),
+    img9 character varying(255),
+    img10 character varying(255),
+    img11 character varying(255),
+    img12 character varying(255),
+    img13 character varying(255),
+    img14 character varying(255),
+    img15 character varying(255),
+    img16 character varying(255),
+    img17 character varying(255),
+    img18 character varying(255),
+    img19 character varying(255),
+    img20 character varying(255),
+    swf character varying(255),
+    flv character varying(255),
+    pdf character varying(255),
+    url character varying(255),
+    target integer,
+    pos integer,
+    oldtag integer,
+    ping character varying(255),
+    bodytag integer,
+    b1tag integer,
+    b2tag integer,
+    b3tag integer,
+    b4tag integer,
+    b5tag integer,
+    b6tag integer,
+    fulltext text,
+    oc integer,
+    sy integer,
+    sm integer,
+    sd integer,
+    ey integer,
+    em integer,
+    ed integer,
+    trackback integer,
+    flag integer,
+    n integer,
+    clickenquete integer,
+    review integer,
+    form integer,
+    tag character varying(255),
+    keyword character varying(255),
+    keyword_e character varying(255),
+    description text,
+    description_e text,
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    img1copy character varying(255),
+    img2copy character varying(255),
+    img3copy character varying(255),
+    img4copy character varying(255),
+    img5copy character varying(255),
+    img6copy character varying(255),
+    img7copy character varying(255),
+    img8copy character varying(255),
+    img9copy character varying(255),
+    img10copy character varying(255),
+    img11copy character varying(255),
+    img12copy character varying(255),
+    img13copy character varying(255),
+    img14copy character varying(255),
+    img15copy character varying(255),
+    img16copy character varying(255),
+    img17copy character varying(255),
+    img18copy character varying(255),
+    img19copy character varying(255),
+    img20copy character varying(255),
+    url_e character varying(255),
+    img1opos character varying(255),
+    img2opos character varying(255),
+    img3opos character varying(255),
+    img4opos character varying(255),
+    img5opos character varying(255),
+    img6opos character varying(255),
+    img7opos character varying(255),
+    img8opos character varying(255),
+    img9opos character varying(255),
+    img10opos character varying(255),
+    img11opos character varying(255),
+    img12opos character varying(255),
+    img13opos character varying(255),
+    img14opos character varying(255),
+    img15opos character varying(255),
+    img16opos character varying(255),
+    img17opos character varying(255),
+    img18opos character varying(255),
+    img19opos character varying(255),
+    img20opos character varying(255),
+    d7 integer,
+    d8 integer,
+    expire integer,
+    cnt integer,
+    pd integer,
+    st date,
+    en date,
+    exd integer,
+    tf integer,
+    fn2 double precision,
+    fn3 double precision,
+    fn4 double precision,
+    fn5 double precision,
+    fn6 double precision,
+    fn7 double precision,
+    fn8 double precision,
+    fn9 double precision,
+    fn10 double precision,
+    fn11 double precision,
+    fn12 double precision,
+    fn13 double precision,
+    fn14 double precision,
+    fn15 double precision,
+    d9 integer,
+    d10 integer,
+    d11 integer,
+    d12 integer,
+    d13 integer,
+    d14 integer,
+    d15 integer,
+    d16 integer,
+    d17 integer,
+    d18 integer,
+    d19 integer,
+    d20 integer,
+    t21 character varying(255),
+    t22 character varying(255),
+    t23 character varying(255),
+    t24 character varying(255),
+    t25 character varying(255),
+    t26 character varying(255),
+    t27 character varying(255),
+    t28 character varying(255),
+    t29 character varying(255),
+    t30 character varying(255),
+    a1 character varying(255),
+    a2 character varying(255),
+    a3 character varying(255),
+    a4 character varying(255),
+    a5 character varying(255),
+    a6 character varying(255),
+    a7 character varying(255),
+    a8 character varying(255),
+    a9 character varying(255),
+    a10 character varying(255),
+    a11 character varying(255),
+    a12 character varying(255),
+    a13 character varying(255),
+    a14 character varying(255),
+    a15 character varying(255),
+    passwd character varying(255),
+    youtube character varying(255)
+);
+
+
+--
+-- TOC entry 15 (OID 48817702)
+-- Name: rireki; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE rireki (
+    id integer NOT NULL,
+    usr character varying(255),
+    message text,
+    sql text,
+    error text,
+    flag integer,
+    n integer,
+    m_time timestamp(6) without time zone
+);
+
+
+--
+-- TOC entry 16 (OID 48817717)
+-- Name: tool; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE tool (
+    id integer NOT NULL,
+    cid integer,
+    _key character varying(255),
+    _value character varying(255),
+    u_time timestamp without time zone,
+    m_time timestamp without time zone,
+    _exp character varying(255),
+    flag integer,
+    n integer
+);
+
+
+--
+-- TOC entry 17 (OID 48841405)
+-- Name: u_category; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_category (
+    id serial NOT NULL,
+    userid integer,
+    categoryid integer,
+    flag integer,
+    regitime timestamp without time zone
+);
+
+
+--
+-- TOC entry 18 (OID 49063817)
+-- Name: u_view; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_view (
+    id serial NOT NULL,
+    userid integer,
+    categoryid integer,
+    pageid integer,
+    reuserid integer,
+    url text,
+    flag integer,
+    regitime timestamp without time zone
+);
+
+
+--
+-- TOC entry 19 (OID 49065291)
+-- Name: u_index; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_index (
+    id serial NOT NULL,
+    txt text
+);
+
+
+--
+-- TOC entry 20 (OID 49524985)
+-- Name: u_ranking; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_ranking (
+    id serial NOT NULL,
+    n integer
+);
+
+
+--
+-- TOC entry 21 (OID 49525203)
+-- Name: u_activity; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_activity (
+    id serial NOT NULL,
+    userid integer,
+    reuserid integer,
+    pageid integer,
+    activity integer,
+    activityid integer,
+    notice integer,
+    flag integer,
+    regitime timestamp without time zone
+);
+
+
+--
+-- TOC entry 22 (OID 49525218)
+-- Name: u_comment; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_comment (
+    id serial NOT NULL,
+    pageid integer,
+    commentid integer,
+    userid integer,
+    "comment" text,
+    flag integer,
+    regitime timestamp without time zone
+);
+
+
+--
+-- TOC entry 23 (OID 49525235)
+-- Name: u_bookmark; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_bookmark (
+    id serial NOT NULL,
+    pageid integer,
+    userid integer,
+    flag integer,
+    regitime timestamp without time zone
+);
+
+
+--
+-- TOC entry 24 (OID 49525300)
+-- Name: u_reaction; Type: TABLE; Schema: public; Owner: ut
+--
+
+CREATE TABLE u_reaction (
+    id serial NOT NULL,
+    commentid integer,
+    userid integer,
+    reaction integer,
+    flag integer,
+    regitime timestamp without time zone
+);
+
+
+--
+-- Data for TOC entry 43 (OID 48817632)
+-- Name: authentic; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY authentic (id, usr, pwd, m, flag, n, u_time, m_time, repo, form, permission, systems, email) FROM stdin;
+1	psychsa	4eb64a65747652e307ba4015c4ffe1bf	51	1	0	2006-11-29 11:41:58.351	\N	\N	72,73,74	\N	\N	\N
+\.
+
+
+--
+-- Data for TOC entry 44 (OID 48817637)
+-- Name: editor; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY editor (id, cid, d_name, f_name, f_size, f_type, f_option, flag, n, u_time, m_time, f_comment, directory, bill, dead2, dead3, dead4, dead5, f_option2, f_option3, f_option4, f_option5, f_option6) FROM stdin;
+18	2	種別	name	30	textfield	\N	1	1	2016-01-04 16:33:44.55	2016-01-04 16:33:44.55	\N	rid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+4	1	投稿者	d1,d2	15,30	textfield	,	1	5	2016-01-18 15:57:33.93	2016-01-02 23:21:15.688	\N	nid	0	\N	\N	\N	\N	＠select id,name as title from repo where rid=2 and id!=6 order by n	＠select id,title from repo_n where cid={p_d1} order by n	\N	\N	\N
+29	1	画像5キャプション	t5	100	textfield	\N	0	19	2016-01-13 16:20:55.18	2016-01-13 16:20:55.18	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+28	1	画像4キャプション	t4	100	textfield	\N	0	17	2016-01-13 16:20:39.24	2016-01-13 16:20:39.24	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+8	1	タグ	t10,t11,t12,t13,t14	15,15,15,15,15	textfield	,,,,,	1	8	2016-01-13 16:15:11.314	2016-01-03 13:18:25.399	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+21	1	画像	\N	\N	head	\N	1	9	2016-01-13 16:15:56.818	2016-01-13 16:15:56.818	\N	nid	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+9	1	画像1キャプション	t1	100	textfield	\N	1	11	2016-01-13 16:15:41.223	2016-01-03 13:20:33.537	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+26	1	画像2キャプション	t2	100	textfield	\N	1	13	2016-01-13 16:20:13.161	2016-01-13 16:20:13.161	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+27	1	画像3キャプション	t3	100	textfield	\N	1	15	2016-01-13 16:21:01.674	2016-01-13 16:20:24.554	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+30	1	動画	\N	\N	head	\N	1	20	2016-01-13 16:22:09.61	2016-01-13 16:22:09.61	\N	nid	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+7	1	動画ファイル名	t8	20	textfield	\N	1	21	2016-01-03 13:22:13.794	2016-01-03 01:53:34.206	メディアサーバにアップされた動画ファイル名を入力してください。	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+1	1	タイトル	title	100	textfield	\N	1	1	2016-01-02 19:47:26.779	2016-01-02 19:47:26.779	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+19	1	21	rb	2	menu	\N	1	2	2016-01-09 19:44:22.069	2016-01-09 19:44:22.069	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	m2
+2	1	20	rb	6	menu	\N	1	3	2016-01-05 22:44:55.40	2016-01-02 21:46:13.345	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	m1
+3	1	公開日時	a1,a2,a3,a4,a5,a6	10,6,6,6,6,6	textfield	,年,月,日,時,分,秒	1	4	2016-01-13 15:04:58.86	2016-01-02 21:54:16.537	公開日時を指定してください。※YYYY-MM-DD hh:mm:ss形式。	nid	0	\N	\N	\N	\N	2016\n2017\n2018\n2019	01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12	01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31	06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n00\n01\n02\n03\n04\n05	\N
+31	1	サマリー	b1	4	textarea	83	1	7	2016-01-13 16:33:39.844	2016-01-13 16:33:39.844	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+6	1	本文	body	5	textarea	82	1	6	2016-01-05 22:11:38.93	2016-01-03 01:51:55.188	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+32	7	タイトル	name	50	textfield	\N	1	1	2016-01-13 19:45:22.711	2016-01-13 19:45:22.711	\N	rid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+25	1	画像5	img5	660-420-0-0-0-0	img	640-400-0-0-0-0,320-120-0-0-0-0,150-150-0-0-0-0	0	18	2016-01-13 16:19:18.099	2016-01-13 16:19:18.099	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+24	1	画像4	img4	660-420-0-0-0-0	img	640-400-0-0-0-0,320-120-0-0-0-0,150-150-0-0-0-0	0	16	2016-01-13 16:18:58.415	2016-01-13 16:18:38.141	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+33	7	タイトル	d1,d2	15,80	textfield	,,	1	1	2016-01-13 20:20:35.448	2016-01-13 19:52:32.64	\N	nid	0	\N	\N	\N	\N	＠select id,name as title from pm_ where cid=20 and flag=1 order by n	＠select id,'['||a1||'-'||a2||'-'||a3||' '||a4||':'||a5||'] ' ||title||'('||(select t1 from repo_n as e where e.id=repo_n.d2)||')' as title from repo_n where cid=1 and flag=1 and m1={p_d1} order by a1 desc,a2 desc,a3 desc,a4 desc,a5 desc,a6 desc	\N	\N	\N
+20	1	動画サムネイル画像	img6	640-360-0-0-0-0	img	320-180-0-0-0-0	1	22	2016-01-13 16:14:13.645	2016-01-13 16:13:06.684	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+10	1	動画キャプション	t6	50	textfield	\N	1	23	2016-01-13 16:19:51.412	2016-01-03 13:21:12.129	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+35	1	Youtube	\N	\N	head	\N	1	24	2016-01-16 20:29:42.839	2016-01-16 20:29:42.839	\N	nid	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+34	1	Youtube ID	youtube	20	textfield	\N	1	25	2016-01-16 20:29:56.016	2016-01-16 12:36:22.20	YoutubeのURLもしくはIDを貼り付けてください	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+5	1	画像1	img1	660-420-0-0-0-0	img	640-400-0-0-0-0,320-120-0-0-0-0,150-150-0-0-0-0	1	10	2016-01-13 16:15:31.66	2016-01-03 00:06:31.101	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+22	1	画像2	img2	660-420-0-0-0-0	img	640-400-0-0-0-0,320-120-0-0-0-0,150-150-0-0-0-0	1	12	2016-01-13 16:17:42.098	2016-01-13 16:17:22.928	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+23	1	画像3	img3	660-420-0-0-0-0	img	640-400-0-0-0-0,320-120-0-0-0-0,150-150-0-0-0-0	1	14	2016-01-13 16:18:04.428	2016-01-13 16:18:04.428	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+38	2	Twitter	a2	30	textfield	\N	1	10	2016-01-17 02:09:58.384	2016-01-17 02:09:58.384	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+37	2	Facebook	a1	30	textfield	\N	1	9	2016-01-17 02:09:44.447	2016-01-17 02:09:44.447	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+36	2	SNS連携	\N	\N	head	\N	1	8	2016-01-18 19:11:45.287	2016-01-17 02:04:27.451	\N	nid	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+12	2	20	cb	6	menu	\N	1	7	2016-01-03 17:36:58.363	2016-01-03 17:36:22.562	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	t20
+16	2	肩書	t2	75	textfield	\N	1	6	2016-01-17 02:08:54.418	2016-01-03 20:47:26.222	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+39	2	プロフィール画像	img1	320-320-0-0-0-0	img	\N	1	5	2016-01-17 02:11:04.027	2016-01-17 02:11:04.027	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+40	2	トークン	a15	50	textfield	\N	1	4	2016-01-30 19:56:47.082	2016-01-30 19:55:49.051	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+14	2	パスワード	passwd	20	passwd	\N	1	3	2016-01-05 15:38:06.831	2016-01-03 20:34:02.446	※パスワードは暗号化されており表示されませんので、再設定する際のみ入力してください。	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+15	2	ユーザ名	title	50	textfield	\N	1	1	2016-01-17 02:07:35.604	2016-01-03 20:37:11.044	\N	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+11	2	メールアドレス	t1	75	textfield	\N	1	2	2016-01-17 02:07:43.58	2016-01-03 17:35:37.878	メールアドレスはアカウント名として使用されます。	nid	0	\N	\N	\N	\N	\N	\N	\N	\N	\N
+\.
+
+
+--
+-- Data for TOC entry 45 (OID 48817642)
+-- Name: form; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY form (id, fid, v1, v2, v3, v4, v5, v6, v7, v8, t1, t2, t3, t4, t5, t6, t7, t8, radio1, radio2, radio3, radio4, pulldown1, pulldown2, pulldown3, pulldown4, checkbox1, checkbox2, checkbox3, checkbox4, docfile1, docfile2, imgfile1, imgfile2, name0, name1, kana0, kana1, gender, profession, company, section, age, "by", bm, bd, email, tel0, tel1, tel2, url, fax0, fax1, fax2, mtel0, mtel1, mtel2, pref, zip0, zip1, address0, address1, handle, maildeliver, subject, bodys, pwd, question, contact, n, flag, u_time, m_time, ref, refurl, reftitle, sessionid) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 46 (OID 48817654)
+-- Name: login; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY login (id, usr, m, ip, ltime) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 47 (OID 48817656)
+-- Name: mail; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY mail (id, subject, body, mailto, mailfrom, "path", exp, exp2, sy, sm, sd, ed, em, ey, oc, tag, flag, n, u_time, m_time, exptag, exp2tag, inum, lang, expire) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 48 (OID 48817661)
+-- Name: mail_; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY mail_ (id, cid, lib, fname, "at", fvalue, fsize, msize, pre, sep, cap, flag, n, u_time, m_time) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 49 (OID 48817666)
+-- Name: mail_template; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY mail_template (id, cid, lib, fname, "at", fvalue, fsize, msize, pre, sep, cap, flag, n, u_time, m_time) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 50 (OID 48817671)
+-- Name: mailtemplate; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY mailtemplate (id, subject, body, mailto, mailfrom, "path", exp, exp2, exptag, exp2tag, flag, n, u_time, m_time, inum) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 51 (OID 48817678)
+-- Name: pm; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY pm (id, name, value, n, flag, u_time, m_time) FROM stdin;
+4	ターゲット	target	4	1	2006-11-16 20:33:49.24	2006-11-16 20:33:49.24
+5	公開設定	oc	5	1	2006-11-16 20:33:49.24	2006-11-16 20:33:49.24
+14	ニュースのタイプ	m1	14	1	2006-12-13 17:07:07.546	2006-12-13 17:07:07.546
+15	トラックバック	trackback	15	1	2006-12-15 00:03:42.812	2006-12-15 00:03:42.812
+16	アンケートタイプ	cet	16	1	2006-12-17 18:51:28.625	2006-12-17 14:31:33.046
+17	アンケート結果	eet	17	1	2006-12-17 18:51:38.796	2006-12-17 14:32:17.671
+3	管理者タイプ	m	3	1	2006-11-27 23:57:52.687	2006-11-16 20:33:49.24
+10	操作権限	permission	10	1	2006-11-29 12:52:26.734	2006-11-29 12:52:26.734
+9	検索対象	search	9	1	2006-11-26 20:48:04.421	2006-11-26 20:48:04.421
+8	RSS対象	rss	8	1	2006-11-26 20:47:52.296	2006-11-19 20:08:18.187
+7	必須・任意	at	7	1	2006-11-16 20:33:49.24	2006-11-16 20:33:49.24
+6	ブロックタイプ	lib	6	1	2006-11-16 20:33:49.24	2006-11-16 20:33:49.24
+11	HTMLタグ	f_option	11	1	2006-11-30 16:53:44.453	2006-11-30 16:53:44.453
+12	日付初期値	f_size	12	1	2006-11-30 19:45:17.768	2006-11-30 19:45:17.768
+13	システム権限	systems	13	1	2006-12-03 22:48:47.921	2006-12-03 22:48:47.921
+19	メタ情報	meta	19	1	2007-06-20 17:46:29.156	2007-06-20 17:46:29.156
+18	インデックスページ	index	18	1	2007-01-25 16:24:04.375	2007-01-25 16:24:04.375
+20	カテゴリー	t20	20	1	2016-01-03 21:23:39.769	2016-01-02 21:39:14.247
+2	性別	gender	2	1	2006-11-28 00:03:57.796	2006-11-16 20:33:49.24
+1	都道府県	pref	1	1	2007-10-09 00:25:24.363	2006-11-16 20:33:49.24
+21	記事種別	m2	21	1	2016-01-09 19:43:30.89	2016-01-09 19:43:30.89
+\.
+
+
+--
+-- Data for TOC entry 52 (OID 48817680)
+-- Name: pm_; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY pm_ (id, cid, name, p1, n, flag, u_time, m_time, name_e) FROM stdin;
+2	1	青森県	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+3	1	岩手県	\N	3	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+4	1	宮城県	\N	4	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+5	1	秋田県	\N	5	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+6	1	山形県	\N	6	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+7	1	福島県	\N	7	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+8	1	茨城県	\N	8	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+9	1	栃木県	\N	9	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+10	1	群馬県	\N	10	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+11	1	埼玉県	\N	11	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+12	1	千葉県	\N	12	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+13	1	東京都	\N	13	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+14	1	神奈川県	\N	14	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+15	1	新潟県	\N	15	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+16	1	富山県	\N	16	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+17	1	石川県	\N	17	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+18	1	福井県	\N	18	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+19	1	山梨県	\N	19	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+20	1	長野県	\N	20	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+21	1	岐阜県	\N	21	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+22	1	静岡県	\N	22	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+23	1	愛知県	\N	23	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+24	1	三重県	\N	24	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+25	1	滋賀県	\N	25	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+26	1	京都府	\N	26	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+27	1	大阪府	\N	27	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+28	1	兵庫県	\N	28	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+29	1	奈良県	\N	29	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+30	1	和歌山県	\N	30	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+31	1	鳥取県	\N	31	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+32	1	島根県	\N	32	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+33	1	岡山県	\N	33	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+34	1	広島県	\N	34	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+35	1	山口県	\N	35	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+36	1	徳島県	\N	36	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+37	1	香川県	\N	37	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+38	1	愛媛県	\N	38	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+39	1	高知県	\N	39	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+40	1	福岡県	\N	40	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+41	1	佐賀県	\N	41	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+42	1	長崎県	\N	42	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+43	1	熊本県	\N	43	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+44	1	大分県	\N	44	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+45	1	宮崎県	\N	45	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+46	1	鹿児島県	\N	46	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+47	1	沖縄県	\N	47	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+66	7	必須	1	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+67	7	任意	0	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+56	6	見出し	6	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+55	5	設定する	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+54	5	設定しない	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+69	8	対象にしない	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+70	9	対象にする	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+71	9	対象にしない	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+68	8	対象にする	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+75	10	登録	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+76	10	編集	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+77	10	削除	\N	3	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+78	10	公開	\N	4	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+79	10	並び替え	\N	5	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+49	2	女性	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+82	11	有効	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+83	11	無効	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+84	12	無し	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+85	12	現在	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+50	3	一般管理者	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+48	2	男性	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+87	13	ユーザ管理	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+88	13	フォーム作成	\N	3	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+89	13	フォームデータダウンロード	\N	4	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+90	13	フォームテンプレート管理	\N	5	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+91	13	マスタ管理	\N	6	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+92	13	システム環境変数設定	\N	7	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+93	13	スタイルシート設定	\N	8	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+63	6	画像系ファイル	7	8	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+64	6	書類系ファイル	8	9	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+97	14	タイトルのみ	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+98	14	外部URLへリンク	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+99	14	PDFファイルアップロード	\N	3	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+100	14	新規ニュースページ作成	\N	4	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+101	15	トラックバックを受け付けない	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+102	15	トラックバックを受け付ける	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+103	16	回答無し	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+104	16	回答有り	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+105	17	結果非表示	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+106	17	結果表示	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+95	13	クリックアンケート	\N	11	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+96	13	トラックバック管理	\N	9	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+94	13	更新ピング	\N	10	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+51	3	総合管理者	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+107	18	セクショントップ	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+108	18	第一階層トップ	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+109	18	第二階層トップ	\N	3	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+86	13	セクション管理	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+110	19	表示	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+111	19	非表示	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+61	6	チェックボックス	5	7	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+60	6	プルダウンメニュー	3	6	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+59	6	ラジオボタン	2	5	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+58	6	テキストエリア	1	4	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+62	6	小見出し	4	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+57	6	テキストフィールド	0	3	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+53	4	サイト内にリンク	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+52	4	サイト外にリンク	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+65	6	日時	9	10	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+1	1	北海道	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	\N
+131	21	一般記事	\N	1	1	2016-01-09 19:43:41.031	2016-01-09 19:43:41.031	\N
+132	21	広告記事	\N	2	1	2016-01-09 19:43:48.285	2016-01-09 19:43:48.285	\N
+113	20	野球	\N	1	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	baseball
+114	20	MLB	\N	2	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	mlb
+115	20	サッカー	\N	3	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	soccer
+116	20	海外サッカー	\N	4	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	worldsoccer
+117	20	ゴルフ	\N	5	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	golf
+118	20	相撲	\N	6	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	sumo
+119	20	格闘技	\N	7	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	battle
+120	20	陸上	\N	8	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	athletics
+121	20	水泳	\N	9	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	swimming
+122	20	柔道	\N	10	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	judo
+123	20	テニス	\N	11	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	tennis
+124	20	バレーボール	\N	12	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	volleyball
+125	20	ラグビー	\N	13	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	rugby
+126	20	フィギュア	\N	14	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	figureskate
+127	20	バスケットボール	\N	15	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	basketball
+128	20	エクストリームスポーツ	\N	16	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	extremesports
+129	20	モータースポーツ	\N	17	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	motorsports
+130	20	その他競技	\N	18	1	2016-01-02 21:43:00.186	2016-01-02 21:43:00.186	etc
+\.
+
+
+--
+-- Data for TOC entry 53 (OID 48817687)
+-- Name: repo; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY repo (id, rid, pid, name, t1, t2, t3, t4, t5, t6, b1, b2, b3, b4, b5, b6, img1, img2, img3, img4, img5, img6, n1, n2, n3, n4, n5, n6, c_flag, c_edit, c_det, directory, css, exp, exp2, serchfield, searchfield, searchtarget, searchlayout, pos, tag, n, flag, u_time, m_time, querystring, rss, cc_flag, search, body, b1tag, b2tag, b3tag, b4tag, b5tag, b6tag, bodytag, exptag, exp2tag, pageoption, "index", querystring1, querystring2, directory2, directory1, directory4, querystring4, meta, keyword, description, rewriterule, meta2, img1copy, img2copy, img3copy, img4copy, img5copy, img6copy, img1opos, img2opos, img3opos, img4opos, img5opos, img6opos, oc, sy, sm, sd, ed, em, ey, list0, list1, list2, list3, page0, page1, page2, page3, expire, cnt, img7, img8, img9, img10, tf) FROM stdin;
+6	2	0	一般ユーザ	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	4	1	2016-01-04 16:34:25.801	2016-01-04 16:34:25.801	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+5	2	0	公式ユーザ	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	3	1	2016-01-04 16:34:18.434	2016-01-04 16:34:18.434	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+1	0	\N	記事	記事	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	/p/{id}	\N	\N	\N	\N	"title","body"	1,6	$title\n$body	\N	\N	2	1	2016-01-27 02:34:37.625	2016-01-02 18:03:48.67	\N	69	0	71	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	111	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+4	2	0	編集部	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2	1	2016-01-04 16:34:08.835	2016-01-04 16:34:08.835	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3	2	0	メディア	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	2016-01-04 16:33:59.228	2016-01-04 16:33:59.228	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+2	0	\N	会員	会員	種別	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	\N	\N	\N	\N	\N	\N	\N	13,11,15,16,17	\N	\N	\N	3	1	2016-01-04 16:33:26.25	2016-01-03 17:34:30.503	\N	\N	0	70	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	111	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+7	0	\N	ピックアップ	ピックアップ	場所	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	2016-01-13 20:07:05.248	2016-01-13 19:44:44.122	\N	69	0	71	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	111	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+8	7	0	トップページヘッドライン	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	2016-01-13 20:15:53.766	2016-01-13 19:52:44.416	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+9	7	0	トップページ注目ニュース	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2	1	2016-01-13 20:16:03.577	2016-01-13 20:15:44.41	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+\.
+
+
+--
+-- Data for TOC entry 54 (OID 48817692)
+-- Name: repo_e; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY repo_e (id, nid, types, img1, img2, img3, youtube, pos1, n1, fn1, fn2, n, flag, m_time, u_time, fn0, n2, title, body, img1txt, img2txt) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 55 (OID 48817697)
+-- Name: repo_n; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY repo_n (id, cid, qid, rid, title, body, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, m1, m2, m3, m4, m5, m6, d1, d2, d3, d4, d5, d6, fn0, fn1, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, swf, flv, pdf, url, target, pos, oldtag, ping, bodytag, b1tag, b2tag, b3tag, b4tag, b5tag, b6tag, fulltext, oc, sy, sm, sd, ey, em, ed, trackback, flag, n, clickenquete, review, form, tag, keyword, keyword_e, description, description_e, u_time, m_time, img1copy, img2copy, img3copy, img4copy, img5copy, img6copy, img7copy, img8copy, img9copy, img10copy, img11copy, img12copy, img13copy, img14copy, img15copy, img16copy, img17copy, img18copy, img19copy, img20copy, url_e, img1opos, img2opos, img3opos, img4opos, img5opos, img6opos, img7opos, img8opos, img9opos, img10opos, img11opos, img12opos, img13opos, img14opos, img15opos, img16opos, img17opos, img18opos, img19opos, img20opos, d7, d8, expire, cnt, pd, st, en, exd, tf, fn2, fn3, fn4, fn5, fn6, fn7, fn8, fn9, fn10, fn11, fn12, fn13, fn14, fn15, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, passwd, youtube) FROM stdin;
+29	1	\N	\N	名波監督「まずは勝ち点40」Ｕ18小川航に18番	　３年ぶりにＪ１に復帰する磐田は１４日、磐田市のヤマハスタジアムで新体制記者会見を行った。<br />\n　新加入のＤＦ大井健太郎（３１）、ＧＫ奥田達朗（２７）ＭＦ荒木大吾（２１）ＤＦ大南拓磨（１８）ＦＷ小川航基（１８）ＦＷ斉藤和樹（２７）ＤＦ中村太亮（２６）、ＤＦ高木和道（３５）が登壇。Ｕ－１８日本代表の小川は、元日本代表ＦＷ前田遼一（３４＝東京）が２０１４年まで着けていた背番号１８を継承することになり、「伝統のある番号をいただいた。この番号に恥じないようにプレーしたい」と意気込んでいた。<br />\n　６年ぶりの復帰となるＤＦ大井健太郎（３１）は、離れている間も磐田の試合結果を気にしていたという。「今まで鍛えてもらった力を磐田のために使うチャンスをもらった。チームのために全力でプレーしたい」と話した。<br />\n　３シーズン目を迎える名波浩監督（４３）は「今季は昨季以上に厳しいシーズンになる。スタッフと選手、フロントが一致団結して戦いたい。まずは目標を（Ｊ１残留へ）勝ち点４０として、それから再設定していきたい」と話した。	新体制記者会見に出席し、名波監督を中心に手を合わせる（左から）加藤ＧＭ、ＤＦ大井、ＧＫ奥田、ＭＦ荒木、ＤＦ大南、ＦＷ小川航、ＦＷ斉藤、ＤＦ中村太、ＤＦ高木、木村社長（撮影・保坂恭子）	\N	\N	\N	\N	\N	\N	\N	\N	Ｊ１	磐田	名波監督	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	115	131	\N	\N	\N	\N	3	2	\N	\N	\N	6	\N	\N	img2016011421185318097600.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	8	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-16 12:43:09.29	2016-01-14 21:18:56.298	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	14	18	25	45	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	idvlyD2O6MQ
+34	1	\N	\N	サンウルブズ下部組織　五郎丸に続くＷ杯の星発掘へ	　ラグビーの世界最高峰リーグ「スーパーラグビー（ＳＲ）」に今季から参戦する日本チーム「サンウルブズ」に、大学生ら若手中心の下部組織を創設する計画があることが１３日、分かった。日本協会関係者が日刊スポーツの取材に明かしたもので、来年の本格スタートを目指して準備を進めている。サンウルブズは１９年Ｗ杯日本大会に向けた選手強化を目的としたものだが、同時に新たな才能の発掘と育成も行っていく。<br />\n　３年後へ新プロジェクトが進行していた。来月から始まるサンウルブズは、１９年に向けた日本代表の強化が最大の目的。そこにつながる新戦力を発掘するため、日本協会関係者は「下部組織を作るという構想は明確に持っている」と打ち明けた。来年の始動を目指し、大学生を中心に、場合によっては高校生にまで門戸を広げる。将来性のある選手はトップチームで公式戦に出場する可能性もある。<br />\n　ＳＲに所属するニュージーランド（ＮＺ）、南アフリカ、オーストラリアのチームにはすでに下部組織がある。日本代表ＦＢ藤田慶和（早大）も昨季、練習生としてクルセーダーズ（ＮＺ）の下部組織ナイツに留学し、修業を積んだ。サンウルブズにも下部組織を作ることで、授業などで長期海外遠征が難しい学生を国内の合宿に呼び、強化することも容易になる。<br />\n　現在サンウルブズの選手は３４人だが、４５人程度を抱える他チームに比べて少ない。南アフリカへの遠征などもあり選手への負担は大きい。同関係者は「４０～４５人の選手が必要になる」と話しており、まずは１０人程度の規模から始める予定。Ｕ－２０（２０歳以下）日本代表を終えた若手選手などに、新たな成長の場を与えることになりそうだ。<br />\n　ＳＲの統括団体「ＳＡＮＺＡＲ」からは、トップチームは強化に終わらず高いチーム力を持つよう要求されている。そのためサンウルブズは日本代表に直結しない海外出身選手も少なくない。ＳＲ参戦を無駄にしないため、下部組織計画が動きだした。<br />\n　◆サンウルブズ　今季から参戦する日本を拠点としたチーム。Ｗ杯イングランド大会に参加した日本選手は１０人が参戦。参加資格はなく、海外代表チーム経験者も含まれている。チーム名は日本を象徴する太陽と、小兵でも統率された群れで大きな敵に立ち向かおうとするオオカミを組み合わせたもの。１次リーグ１５試合のうち８試合がホームゲームで、うち３試合はシンガポールで行われる。２月２７日に東京・秩父宮で開幕戦。ヘッドコーチは元ニュージーランド代表のマーク・ハメット氏。<br />\n　◆スーパーラグビー　南半球のニュージーランド、オーストラリア、南アフリカに拠点を置くチームが争う世界最高峰リーグ。９６年に１２チームで始まり、今季は１８チームで行われる。各チームが１次リーグ１５試合を戦い、プレーオフ進出を目指す。	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ｗ杯日本大会	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	125	131	\N	\N	\N	\N	3	2	\N	\N	\N	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	3	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-14 21:27:33.429	2016-01-14 21:27:33.429	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	14	09	51	26	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+1	1	\N	\N	ロッテ小林敦　ケガに泣いた５年間生かすスカウトに	＜さよならプロ野球＞<br />\n　久しぶりに会った彼は、スーツ姿だった。「このスーツ、社会人の時のなんですよ」。かつての銀行マンは、そう言ってスケジュール帳を開いた。「今 週はあいさつ回りです。千葉で東海大系列中心に。仙台にも行きます。まだ慣れませんねえ」。新任のロッテ小林敦スカウト（２９）だ。<br />\n　ケガに泣かされた現役生活だった。１０年ドラフト３位で入団。仙台にある七十七銀行初のプロ野球選手となった。阪神に移籍した同姓の小林宏之の背 番号「４１」を引き継いだ。〝コバアツ〟は即戦力右腕と期待された。１年目の７月に初勝利。だが、終わってみれば、それが唯一の白星。「ほとんどケガ。何 もやってない５年間でした」と、サバサバと振り返った。<br />\n　２年目の８月に右肩腱板の修復手術に踏み切った。今、思えば、社会人時代から兆候はあったという。登板翌日は満足にキャッチボールができなかっ た。「当時は『こんなもんだろう』て」。予想を超える重症だった。手術後は右肩を完全固定。食事や歯磨きも左手でこなすしかなかった。結局２年近いリハビ リを経て、１４年春に２軍で実戦復帰。「あれが一番の思い出。楽しかったな。少年野球みたいで」。喜びは、唯一の白星を上回った。<br />\n　覚悟を決めた今季。「１軍に復帰できれば、お世話になった方たちに恩返しになる」と臨んだが、１軍は遠かった。２軍でも、連投で疲れがたまるとダ メだった。引退報告をしたら、リハビリを担当してくれた理学療法士の先生たちの「お疲れさん」が心に染みた。「良い成績を残せる選手だけじゃない。スカウ トとして、選手の気持ちが分かるように。ケガして知識は増えた。それが役に立てれば」。故郷の東海と、北陸地区を担当する。【古川真弥】<br />\n　◆小林敦（こばやし・あつし）１９８６年（昭６１）２月２４日生まれ、静岡・島田市出身。東海大相模、東海大を経て、七十七銀行から１０年ドラフ ト３位で入団。１年目に９試合、１勝５敗、防御率５・８０。２年目に右肩手術。１軍復帰はかなわず、今季限りで引退。スカウトに就任した。１７８センチ、 ８５キロ。右投げ右打ち。	ロッテのスカウトに就任した小林敦氏	\N	\N	\N	\N	\N	\N	\N	\N	プロ野球	小林敦	ロッテ	さよならプロ野球	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016010313285797715900.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	21	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-05 23:38:06.123	2016-01-03 13:29:01.241	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	03	09	50	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+35	1	\N	\N	スノボのＷ杯中止　代替会場での開催を検討	　国際スキー連盟（ＦＩＳ）は１３日、３月１０～１３日に米国のスコーバレーで行われる予定だったフリースタイルスキーのワールドカップ（Ｗ杯）スキークロスとスノーボードクロスのＷ杯が中止になったと発表した。<br />\n　ＦＩＳは代替会場での開催を検討している。	\N	\N	\N	\N	\N	\N	\N	\N	\N	スノーボードクロス	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	128	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	2	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-14 21:29:37.785	2016-01-14 21:29:37.785	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	13	23	01	54	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+6	4	2	\N	蒔平ゆき	\N	yuki.makihira@limret.com	運動通信編集長	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	125,126,127	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-20 17:36:52.986	2016-01-05 02:38:37.897	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	608c8868d866a46fa3ae6566ce62e0be	5061c092929c1b964c137ad83251f8f0	\N
+2	3	2	\N	日刊スポーツ新聞社	野球、ＭＬＢ、サッカー、相撲、格闘技をはじめ各種スポーツや五輪、世界大会などビッグイベントを特集。芸能、エンタメ情報など気になる話題や旬ネタも満載です。	info@nikkansports.com	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113,114,115,116	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	136	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-20 17:35:56.384	2016-01-03 21:24:34.405	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	518b9148d7fcb6f07c4ac27c33bf2bcb	4314748bb206616214160ab6fd472e38	\N
+19	3	2	\N	Jスポーツ	国内最大4チャンネルのスポーツテレビ局。	jsports@jsports.co.jp	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	3	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-20 17:36:16.64	2016-01-13 15:13:55.641	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f728f1ccd3af909106ef74b623bbb1f9	81a63d126f6109abb52819dc75a5728d	\N
+4	3	2	\N	朝日新聞社	朝日新聞デジタル	info@asahi.com	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	2	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-20 17:36:04.699	2016-01-05 00:41:15.959	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	c22410b28fc475b6198100015e756c65	8acf8437bcf79d3626ebd8894c8fbc34	\N
+31	1	\N	\N	大山志保リオへ海外足固め　２月ホンダＬＰＧＡ	　女子ゴルフの大山志保（３８）が１２日に都内で、契約するピンの新製品「Ｇシリーズ」の発表会見に、鈴木愛（２１）、一ノ瀬優希（２７）らとともに出席した。<br />\n　大山は現在世界ランクで日本女子最高位の３５位。リオデジャネイロ五輪に最も近いが、その位置をさらに確実にするため「積極的に海外に出たい」と、２月の米ツアー・ホンダＬＰＧＡ（タイ）への出場を決めた。女子の日本代表争いは混戦で、国内ツアー開幕前の上積みを目指す。「今は出場が目標ですが、（ツアー）開幕までには『メダルが取れるように』と言えるよう、気持ち的にも技術的にも自信をつけたい」と、仕上げる構えだ。	ピンの新製品を手にする、左から鈴木、大山、一ノ瀬	\N	\N	\N	\N	\N	\N	\N	\N	海外女子	大山志保	ホンダＬＰＧＡ	リオ五輪	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	117	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016011421230927288400.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	6	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-14 21:23:12.30	2016-01-14 21:23:12.30	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	13	9	32	25	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+32	1	\N	\N	45歳クルム伊達、22歳に１回戦で敗れる	＜テニス：全豪オープン＞◇予選◇１４日◇メルボルン<br />\n　女子シングルス１回戦は４５歳のクルム伊達公子（エステティックＴＢＣ）が２２歳のフランス選手に２－６、７－６、４－６で敗れた。<br />\n　大坂なおみは加藤未唯（佐川印刷）に６－０、６－３で快勝し、桑田寛子（島津製作所）尾崎里紗（江崎グリコ）とともに２回戦に進んだ。<br />\n　江口実沙（北日本物産）日比万葉（安藤証券）穂積絵莉（エモテント）は敗退した。	\N	\N	\N	\N	\N	\N	\N	\N	\N	テニス	全豪オープン	伊達公子	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	123	\N	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	5	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-14 21:24:50.497	2016-01-14 21:24:50.497	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	14	17	58	42	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+13	1	\N	\N	完全Ｖ青学大　トイレ、風呂掃除から練習まで厳しく	＜第９２回箱根駅伝＞◇３日◇復路◇箱根－東京（５区間１０９・６キロ）<br />\n　俺たちが学生最強集団だ！！　青学大が往路に続き、復路も１位を走り続ける完全優勝で総合２連覇を飾った。２位東洋大に７分１１秒差をつける１０時間５３分２５秒で、１９７７年（昭５２）の日体大以来３９年ぶりに全１０区間で１位を並べる快挙を遂げた。昨年大会で一躍時の人となった原晋監督（４８）が今年目指したのは、選手がヒーローになること。神野大地主将（４年）を中心にした４年生の絆で、見事に去年を上回る大輪の花を咲かせた。<br />\n　湘南の風が吹く大磯駅が迫る時だった。７区で先頭を快走する小椋の目に、仲間の姿が飛び込んできた。山村、神野、久保田、伊藤。残り３キロ、「本当にうれしくて、一番きついところだったけど、差を広げてやろうと」。１年の入学直後に、みんなで手帳に「４年で３冠」と書き合った仲間。４年連続７区で過去３年は応援はなかった。小椋の安定感への信頼に、別の区に回るのが慣例も「今年は電車の時間もきついなかを練って&hellip;」。絆が背中を押していた。<br />\n　「学生がヒーローになってくれ」。原監督の言葉が号砲だった。初優勝した昨年大会後、「学生中心に勝ち取ってほしい。今度はお前たちの番」とハッパをかけられた。サラリーマン経験の手腕が脚光を浴びたが、２連覇への主人公は選手だった。<br />\n　新主将の神野を中心に４年生は考え抜いた。「準備」と「こだわり」をテーマに、準備には気付くことが必要と、生活面から徹底した。風呂掃除はサボりがちだったタイル磨きも。トイレは週の前半が拭き、後半が掃き。トイレットペーパーの補充方法も細かく。「掃除マニュアル」という紙が寮の至る所に貼られた。<br />\n　下級生の提案も積極採用した。あいさつ、敬語の使い方&hellip;。１０区でゴールに飛び込んだ渡辺利が「細かいミスをなくせば、走りのミスもなくなる。心も格好良く」と言えば、神野も「チャラいと言われるが、練習、生活は厳しい」と誇る。「３代目・山の神」を中心に細部に「神」を宿した。<br />\n　出雲を圧勝して迎えた全日本選手権が、さらに「格好良く」させてくれた。神野が故障から復帰も２位。３冠がかなわず、生活から見返した。試合でマットや場所取りを忘れたり、心の緩みが目立った。「うみを出す」（小椋）会議で、神野が言った。「俺たちの代は俺たちのやり方で勝とう」。ねじを締め直した。<br />\n　箱根路。下級生もたくましかった。１年の小野田が山下りの６区で快走すると、８区下田、９区中村も続く。生活だけでなく、競技の質も上げる目的で、１３・５キロを走る早朝練習の設定は５５分から４８分に。先頭で引っ張った小椋は「以前は速すぎると先輩から『おい』と声がかかった。ケガのリスクがあるけど、やらないと」と使命感で底上げを図り、成果を出した。<br />\n　連続１位を続けたのは５０年（昭２５）～５１年（昭２６）の中大の２０区間が最高。来年の往路５区間まで続ければ、その歴史までも動かす。神野は言う。「組織は強い選手が抜けると弱体化するが、しっかりしている。何十年も常勝チームでいられる」。それは選手が築いたからこそ。過去最強軍団へ、ひたすらに強くある。【阿部健吾】<br />\n　◆完全優勝　往路復路では７７年の日体大以来６校目、計１２回目。過去は中大が６回、日大２回、日体大、明大、早大が１回。	優勝を果たしガッツポーズでゴールテープを切る青学大１０区渡辺利（撮影・江口和貴）	\N	\N	\N	\N	\N	\N	\N	\N	箱根駅伝	青学大	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	120	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016010503021680774200.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	13	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:45:07.507	2016-01-05 03:02:19.628	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	04	10	04	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+5	1	\N	\N	白鵬の最多優勝、ギネス記録に認定　申請者は謎のまま	　大相撲の横綱白鵬が持つ歴代最多の優勝回数（現在は３５）がギネス世界記録に認定され、年内最後の稽古となった２８日に喜びを語った。<br />\n　認定証を大事そうに抱えた横綱は「テレビで見ていた物が自分の手にある。信じられない」とご満悦。「今年は休場もあったけど、年末にご褒美をいただいたね」と語った。<br />\n　ただ、誰がギネス記録の登録に申請したのかは分からないという。「勝手にくれるもんじゃないし、ギネスの団体に電話したらわかるかな」と不思議がった。	ギネス世界記録の認定証を手にする白鵬	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	118	131	\N	\N	\N	\N	3	4	\N	\N	\N	0	\N	\N	img2016010500485508918000.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	20	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:45:58.698	2016-01-05 00:50:03.048	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2015	12	29	13	33	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+11	1	\N	\N	レスター２位後退、アーセナルが首位　プレミア	　サッカーの欧州各リーグ（１２月２８日～１月３日）でイングランドは岡崎慎司のレスターが２戦連続で引き分け、２位に後退した。アーセナルはボーンマスとニューカッスルを下し、２位に勝ち点２差をつけて首位に浮上した。<br />\n　スペインはＡマドリードがレバンテに勝ち、勝ち点４１でトップ。１試合少ないバルセロナはエスパニョールと引き分け、同３９で続く。Ｒマドリードもバレンシアと引き分け、同３７となった。	\N	\N	\N	\N	\N	\N	\N	\N	\N	海外サッカー	アーセナル	レスター	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	116	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	15	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:45:28.481	2016-01-05 02:56:00.937	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	04	16	49	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+26	9	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	117	12	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	5	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:49:10.656	2016-01-13 20:49:10.656	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+27	9	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	120	13	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	4	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:49:19.599	2016-01-13 20:49:19.599	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+28	9	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	129	18	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	3	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:49:33.881	2016-01-13 20:49:33.881	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+36	9	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	121	33	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	2	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-14 21:38:28.705	2016-01-14 21:38:28.705	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+37	9	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	115	29	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-14 23:39:55.523	2016-01-14 21:38:53.092	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+14	5	2	\N	山際武	\N	info@yamagiwa.com	スポーツライター	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113,114,115	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-20 17:36:42.649	2016-01-05 15:57:19.106	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	fee1a989f120b99cec0f8206d68f6365	6daad3ce5e2c1fe6797365764d60fd4e	\N
+23	8	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	120	13	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	2	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:48:28.608	2016-01-13 20:48:28.608	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+24	8	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	116	15	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:48:37.92	2016-01-13 20:48:37.92	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+20	8	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113	8	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	4	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:45:33.374	2016-01-13 20:44:38.358	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+21	8	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	114	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	5	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:48:10.318	2016-01-13 20:48:10.318	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+22	8	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	118	5	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	3	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:48:20.311	2016-01-13 20:48:20.311	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+25	9	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	6	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-13 20:49:01.419	2016-01-13 20:49:01.419	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+33	1	\N	\N	入江陵介「泳ぎがはまりつつある」高地合宿手応え	　競泳背泳ぎの入江陵介（２５＝イトマン東進）が早期の「昨年超え」で五輪に弾みをつける。<br />\n　１０日、米アルバカーキの高地合宿から成田空港に帰国。標高１８００メートルの高地では１日最大１万４０００メートルの泳ぎ込みを敢行。「泳ぎがはまりつつある」と手応えをつかんだ。<br />\n　今年の最初のレースは来月１２日開幕のきらら杯（山口）になる。「そこで一発良いタイムを出したいな。良くなかった去年のタイムはクリアしたい」と目標を掲げた。昨年は金メダルが期待された世界選手権でメダルなし。ベストタイムも２００メートルが１分５４秒６２、１００メートルが５２秒９９とアジア大会２冠の２年前のタイムをともに下回った。<br />\n　まずは早期に昨年の自分を超え、リオデジャネイロ五輪代表選考を兼ねた４月の日本選手権（東京辰巳国際水泳場）、五輪本番に勢いをつけたい。「去年はケガがあったけど、今年は良い練習が積めて充実している。ワクワクさはある」と明るい表情だった。	米高地合宿から帰国した競泳の入江陵介	\N	\N	\N	\N	\N	\N	\N	\N	入江陵介	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	121	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016011421263268885800.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	4	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-14 21:26:34.321	2016-01-14 21:26:34.321	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	10	18	37	41	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+9	1	\N	\N	マエケンのフォームを解説　ヒジの負担少ない	　広島からポスティングシステムでメジャー球団と交渉中の前田健太投手（２７）が１日（日本時間２日）、本命視されたドジャースと８年契約で合意したことが分かった。米時間１２月３１日に複数の米メディアが報じたもので、この日までにメジャー関係者も認めた。<br />\n<!--split--><br />\n　米主要スポーツメディアも、前田の今季を予想した。ＥＳＰＮ電子版は「プレミア１２ではチェンジアップが素晴らしく、これが平均以上の球種として使える可能性が高い」とし「投球フォームから投手の故障を予測できるとしたら、前田のフォームは明らかにコンパクトで、肘への負担も少なそうだ」と解説。ＦＯＸスポーツ電子版では解説者のニコースキー氏（元ソフトバンク）が「他の日本投手と違うのは、肘に負担のかかるスプリッターを投げないこと」と、故障のリスクについては少ないだろうと分析した。	\N	\N	\N	\N	\N	\N	\N	\N	\N	前田健太	ドジャース	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	114	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	17	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:45:45.367	2016-01-05 02:52:01.825	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	03	08	12	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+10	1	\N	\N	アデミウソンＧ大阪移籍か　昨季は横浜でプレー	　ブラジルの強豪サッカークラブ、サンパウロからＪ１横浜に期限付き移籍していたＦＷアデミウソン（２１）が今季はＪ１のＧ大阪でプレーすると３日、ブラジルのメディアが報じた。報道によると１年間の期限付き移籍で、レンタル料は２８万ドル（約３３６０万円）という。<br />\n　アデミウソンは昨年、サンパウロから横浜に加わり、Ｊ１で３３試合に出場して８得点。母国の年代別代表で背番号１０を背負った経験があり、攻撃陣の核として活躍した。	アデミウソンＧ大阪移籍か　昨季は横浜でプレー	\N	\N	\N	\N	\N	\N	\N	\N	Ｊ１	Ｇ大阪	アデミウソン	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	115	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016010502542424240600.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	16	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:45:36.052	2016-01-05 02:54:54.552	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	04	20	40	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+7	1	\N	\N	新日本、Ｇ１クライマックス決勝は８月両国国技館	＜新日本：東京ドーム大会＞◇４日◇東京ドーム◇観衆２万５２０４人<br />\n　新日本は４日、東京ドーム大会で今年上半期のビッグマッチ日程を発表した。<br />\n<!--split--><br />\n　ニュージャパンカップ開幕戦は、今年も大田区体育館で開催される。また、同大会の決勝戦は、３月１２日に青森・マエダアリーナでの開催となる。Ｇ１クライマックスは７月１８日、札幌の北海きたえーるで開幕し、８月１２日、１３日、１４日の両国国技館３連戦で幕を閉じる。	新日本、Ｇ１クライマックス決勝は８月両国国技館	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	119	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016010502445302625100.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	19	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:46:06.735	2016-01-05 02:45:33.505	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	11	21	45	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+30	1	\N	\N	メッシが全得点絡む　バルセロナ大勝で８強進出	＜スペイン国王杯：エスパニョール０－２バルセロナ＞◇５回戦◇１３日◇バルセロナ<br />\n　第２戦が行われ、バルセロナがアウェーでエスパニョールを２－０で下し、２戦合計６－１で準々決勝進出を決めた。<br />\n　第１戦を４－１で大勝したバルセロナはＦＷネイマール、ＦＷスアレス、ＭＦイニエスタ、ＤＦピケをスタメンから外して臨んだが、ＦＷムニールが前半３２分、ＦＷメッシの絶妙のスルーパスで抜け出し、１トラップで相手ＧＫをかわして左足で流し込んで先制。後半４３分にもメッシを起点にＭＦアルダ、ＭＦビダルとボールを回して崩し、最後は再びムニールが押し込んで突き放した。	後半４３分、２点目を決め笑顔のバルセロナＦＷムニール（左）。右はアシストのＭＦビダル（ＡＰ）	\N	\N	\N	\N	\N	\N	\N	\N	スペイン	バルセロナ	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	116	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016011421211997402200.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	7	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-16 21:03:20.386	2016-01-14 21:21:24.015	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	14	10	33	42	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+18	1	\N	\N	車いす作り、情熱継ぐ　千葉の企業、選手に寄り添い信頼	　パラリンピック車いすテニスで３大会連続金メダルの国枝慎吾選手をはじめ、国内外の競技者が信頼を寄せる車いすメーカーが千葉市若葉区にある。自ら障害を負い、使いやすい車いすの開発に情熱を傾けた父の遺志を社長の石井勝之さん（３５）が継ぐ。８日、天皇、皇后両陛下が製造現場を視察した。<br />\n　メーカーは「オーエックスエンジニアリング」。元はオートバイの販売会社で、創業者の石井重行さんはレースに出たり、雑誌に新マシンの試乗記事を書いたりしていた。だが、１９８４年４月の試乗中の事故で脊髄（せきずい）を損傷。車いす生活になった。<br />\n　入院中、無機質な車いすに気がめいった。「格好良い車いすがないなら自分で」。オートバイメンテナンスの技術を生かし、車いす開発を手がけ始めた。オートバイ販売時代にモータースポーツの大会に出て製品を宣伝したように、車いすの開発でも、すぐに競技用への進出を考えた。外観にこだわりつつ、フレームを薄く車両を軽くして機能性を高める工夫を続けた。	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	129	131	\N	\N	\N	\N	3	4	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	9	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:44:38.235	2016-01-06 03:19:24.037	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2015	12	09	05	00	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+8	1	\N	\N	左肘手術＆右手骨折の日本ハム宮西が地元で再始動	　昨年末に右手を骨折した日本ハム宮西尚生投手（３０）が地元の兵庫・尼崎で再始動した。<br />\n　４日、母校の市尼崎で自主トレを公開。１０月に左肘を手術し、１２月に北海道にある自宅付近で足をすべらせて転倒した際に右手第５中手骨骨折を負った。右手には患部を固定する装具を付けながら、ランニングメニューやキャッチボールなどを行った。<br />\n　「（右手は）痛いですよ。振動を与えたらいけないので、７割くらいでしか走れないですけど、本数は走れる」と前向き。元旦からトレーニングを開始している。「日本一しかないですね」と、リハビリ中の左肘、右手の状態を見ながらシーズンへ向けてじっくりと仕上げていく。	日本ハム宮西は骨折した右手に装具をはめてキャッチボール（撮影・木下大輔）	\N	\N	\N	\N	\N	\N	\N	\N	日本ハム	宮西尚生	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016010502495199304000.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	18	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:45:51.379	2016-01-05 02:50:38.145	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	04	15	32	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+12	1	\N	\N	原江里菜、女王イ・ボミ見習い完全復活の16年に	　女子ゴルフの原江里菜（２８＝ＮＥＣ）が、長いトンネルを抜けた。１５年夏、大東建託レディースで７年ぶり２回目の優勝。それまで勝てそうで勝てない日々が続き、重圧もあっただけに「やっと解放された」とその心境を明かした。<br />\n　同時に１５年を「喜びもあったけれど、戒められた１年でもあった」と振り返る。最終戦のツアー選手権リコー杯は最終日に１６番からボギー、ボギー、トリプルボギーで９位に終わる不甲斐ない締めくくり。「そんなに甘くない、鍛え直してこい、と言われた気がした」。特にシーズン後半は連戦続きで、最後に息切れした形だった。その反省から１６年はペース配分を考え、年間通じて試合で１００％の力を出せるスケジュールづくりをし、「（獲得賞金）１億円プレーヤーを目指したい」と意気込む。<br />\n　また、従来は「私は毎日の生活も楽しくないと」と私生活の充実も大事にしてきた。だが、１５年賞金女王になったイ・ボミ（韓国）の姿を見て「ボミはゴルフだけにかけてやっていた」と感じたという。「若いうちに全力を注ぐのもいい。来年（１６年）はゴルフ最優先の生活をしたいと思っています」と意識改革にも目覚めたようだ。	原江里菜	\N	\N	\N	\N	\N	\N	\N	\N	原江里菜	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	117	131	\N	\N	\N	\N	3	2	\N	\N	\N	0	\N	\N	img2016010502581237456600.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	14	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:45:14.221	2016-01-05 02:58:46.863	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	01	16	49	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+15	1	\N	\N	レアルにジダン新監督、異例の抜擢　再建に手腕は未知数	　欧州チャンピオンズリーグ（ＣＬ）で最多の優勝１０度を誇るスペイン１部レアル・マドリードの新監督に、１９９８年ワールドカップ（Ｗ杯）フランス大会で、主力としてフランスを初優勝に導いたジダン氏（４３）の就任が決まった。ベニテス前監督が４日に解任され、後任に指名された。レアルは、トップチームでの監督経験がないジダン氏にチームの再建を託すことになった。<br />\n　ジダン氏は、２００６年のＷ杯ドイツ大会で準優勝して現役を引退。その後は最後に所属したレアルで、トップチームのアシスタントコーチなどをした後、今季は若手チームの監督を務めていた。<br />\n　レアルのようなビッグクラブが、トップチームでの監督経験がない人物に指揮を任せるのは異例だ。かつてバルセロナで一時代を築いたグアルディオラ監督（現バイエルン・ミュンヘン監督）のような例はあるが、成功例は多くない。選手としての実績やカリスマ性では他を圧倒する存在だが、監督として難所をどう乗り切るかは未知数だ。	レアル・マドリードのペレス会長（右）と並ぶジダン新監督＝ＡＦＰ時事	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	116	131	\N	\N	\N	\N	3	4	\N	\N	\N	0	\N	\N	img2016010603043718238600.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	11	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:44:51.327	2016-01-06 03:05:47.869	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	05	21	02	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+16	1	\N	\N	２０３センチアタッカー、初戦で姿消す　高校バレー	（５日、バレーボール・全日本高校選手権男子　市尼崎２-０雄物川）<br />\n　「不完全燃焼。もっと（得点を）決めたかったし、もっと勝ちたかった」。２０３センチの長身をかがめ、雄物川の鈴木が話した。昨春、全日本の登録メンバーに選ばれた注目のアタッカー。市尼崎にストレート負けして姿を消した。<br />\n　高さを生かしたスパイクを決めて気を吐いたが、相手のマークを崩しきれず。終盤はバックアタックを３枚のブロックで止められ、反撃の芽を摘まれた。	スパイクを決める雄物川の鈴木	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	124	131	\N	\N	\N	\N	3	4	\N	\N	\N	0	\N	\N	img2016010603085425809000.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	12	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-16 21:06:52.802	2016-01-06 03:08:57.645	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	05	22	40	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+17	1	\N	\N	永瀬貴規　磨く、しなやか心技体　卒論でライバル分析	　■《ＲＩＯ　２０１６》永瀬貴規（２２）＝柔道<br />\n　クリスマス。柔道男子８１キロ級世界王者の永瀬貴規（たかのり）（２２）＝筑波大４年＝は、やっと２０１５年最後の大仕事から解放された。<br />\n　「大変でした。間に合ってよかった」。パソコンから大学の教授宛てに提出したのは卒業論文だ。	先月のグランドスラム東京大会。男子８１キロ級３位決定戦で一本勝ちしても厳しい表情を崩さずに道着を整えた＝西畑志朗撮影	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	122	131	\N	\N	\N	\N	3	4	\N	\N	\N	1	\N	\N	img2016010603130231827800.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	10	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-09 19:44:45.887	2016-01-09 03:13:22.218	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	05	05	00	00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+38	1	\N	\N	琴奨菊Ｖ「言葉にできないぐらいうれしい」一問一答	　大関琴奨菊（３１＝佐渡ケ嶽）が、大関豪栄道（２９＝境川）を突き落として１４勝１敗とし、うれしい初優勝を飾った。<br />\n　日本出身力士の優勝は、２００６年初場所の大関栃東以来１０年ぶり。佐渡ケ嶽部屋からは０８年夏場所の大関琴欧洲以来の賜杯となった。<br />\n　優勝インタビューは以下の通り。<br />\n　－ついに幕内最高優勝<br />\n　琴奨菊　言葉に表せないくらいうれしいのと、つらいときも、なかなか成績が残せなかったときも、たくさん方に応援いただいて、今の自分がこうして立っていられることがすごくうれしいです<br />\n　－ケガで苦しい時期もあった<br />\n　琴奨菊　半年くらい前から、続けたトレーニングもあったし、本当にたくさんの応援と声援と師匠の教えのもと、頑張った結果だと思います。うれしいです。<br />\n　－勝てば優勝<br />\n　琴奨菊　自分の事を一生懸命やって、あんまり考えずに土俵に上がろうと思っていた。毎日のルーティンを続けてくれた若い衆のおかげです。（今日は）１日中ルーティンでした。<br />\n　－今場所３横綱を破り、優勝への重圧は<br />\n　琴奨菊　やるべきことをしっかりやって、土俵上の勝ち負けよりも、自分の決めたことをやりきるという気持ち。土俵に上がって、自ずと結果が出て、本当にうれしかったです。<br />\n　－１３日目に豊ノ島に敗れたが立て直した<br />\n　琴奨菊　（全勝で）呼吸を止めて我慢していた状態だったので、いちばん豊ノ島とは縁があるなと思います。負けたけど目いっぱいいって自分の相撲を取ったので、次の日につながったと思います<br />\n　－花道で豊ノ島が出迎えてくれた<br />\n　琴奨菊　「良かったね」と言われて、最高にうれしいです。<br />\n　－両親が駆けつけ、いい親孝行できた<br />\n　両親には、１番つらいときに壁になってもらって、自分を支えてもらったので、感謝の気持ちしかありません。<br />\n　－栃東以来の日本人力士で１０年ぶり優勝<br />\n　琴奨菊　私の初優勝がたまたま１０年ぶりだったということだったけど、今日優勝できてうれしく思います。	\N	\N	\N	\N	\N	\N	\N	\N	\N	大相撲	琴奨菊	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	118	131	\N	\N	\N	\N	3	4	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-27 02:32:48.521	2016-01-27 02:32:48.521	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016	01	24	18	59	55	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3	6	2	\N	三枝真	フリーライター	psychsa@gmail.com	フリーライター	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	113,114,118	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	7c36cbc887ca4d0035440a3b05005f6f.jpg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	\N	\N	\N	\N	\N	\N	\N	\N	2016-01-27 01:54:30.05	2016-01-05 00:27:16.179	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	7c36cbc887ca4d0035440a3b05005f6f	4eb64a65747652e307ba4015c4ffe1bf	\N
+\.
+
+
+--
+-- Data for TOC entry 56 (OID 48817702)
+-- Name: rireki; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY rireki (id, usr, message, sql, error, flag, n, m_time) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 57 (OID 48817717)
+-- Name: tool; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY tool (id, cid, _key, _value, u_time, m_time, _exp, flag, n) FROM stdin;
+1	1	テキストフィールド	textfield	2015-05-22 11:57:15.963	2015-05-22 11:57:15.963	\N	1	1
+2	1	テキストエリア	textarea	2015-05-22 11:57:16.033	2015-05-22 11:57:16.033	\N	1	2
+3	1	メニュ	menu	2015-05-22 11:57:16.075	2015-05-22 11:57:16.075	\N	1	3
+4	1	プルダウンメニュ	p_menu	2015-05-22 11:57:16.106	2015-05-22 11:57:16.106	\N	1	4
+5	1	画像汎用	img	2015-05-22 11:57:16.138	2015-05-22 11:57:16.138	\N	1	5
+6	1	WEB用画像	imgall	2015-05-22 11:57:16.169	2015-05-22 11:57:16.169	\N	1	6
+7	1	PDFファイル	file	2015-05-22 11:57:16.201	2015-05-22 11:57:16.201	\N	1	7
+8	1	年月日	date	2015-05-22 11:57:16.233	2015-05-22 11:57:16.233	\N	1	8
+9	1	FLVファイル	flv	2015-05-22 11:57:16.275	2015-05-22 11:57:16.275	\N	1	9
+10	1	パスワード	passwd	2015-05-22 11:57:16.306	2015-05-22 11:57:16.306	\N	1	10
+11	1	タイトル	head	2015-05-22 11:57:16.338	2015-05-22 11:57:16.338	\N	1	11
+12	1	モジュール1	module1	2015-05-22 11:57:16.369	2015-05-22 11:57:16.369	\N	1	12
+13	1	年月日x2	startendDate	2015-05-22 11:57:16.401	2015-05-22 11:57:16.401	\N	1	13
+14	1	項目	inputmenu	2015-05-22 11:57:16.433	2015-05-22 11:57:16.433	\N	1	14
+15	2	タイトル	title	2015-05-22 11:57:16.475	2015-05-22 11:57:16.475	\N	1	1
+16	2	ボディ	body	2015-05-22 11:57:16.506	2015-05-22 11:57:16.506	\N	1	2
+17	2	prefix1	a1	2015-05-22 11:57:16.538	2015-05-22 11:57:16.538	\N	1	3
+18	2	prefix2	a2	2015-05-22 11:57:16.569	2015-05-22 11:57:16.569	\N	1	4
+19	2	prefix3	a3	2015-05-22 11:57:16.601	2015-05-22 11:57:16.601	\N	1	5
+20	2	prefix4	a4	2015-05-22 11:57:16.633	2015-05-22 11:57:16.633	\N	1	6
+21	2	prefix5	a5	2015-05-22 11:57:16.675	2015-05-22 11:57:16.675	\N	1	7
+22	2	prefix6	a6	2015-05-22 11:57:16.706	2015-05-22 11:57:16.706	\N	1	8
+23	2	prefix7	a7	2015-05-22 11:57:16.738	2015-05-22 11:57:16.738	\N	1	9
+24	2	prefix8	a8	2015-05-22 11:57:16.769	2015-05-22 11:57:16.769	\N	1	10
+25	2	prefix9	a9	2015-05-22 11:57:16.801	2015-05-22 11:57:16.801	\N	1	11
+26	2	prefix10	a10	2015-05-22 11:57:16.843	2015-05-22 11:57:16.843	\N	1	12
+27	2	prefix11	a11	2015-05-22 11:57:16.875	2015-05-22 11:57:16.875	\N	1	13
+28	2	prefix12	a12	2015-05-22 11:57:16.906	2015-05-22 11:57:16.906	\N	1	14
+29	2	prefix13	a13	2015-05-22 11:57:16.938	2015-05-22 11:57:16.938	\N	1	15
+30	2	prefix14	a14	2015-05-22 11:57:16.969	2015-05-22 11:57:16.969	\N	1	16
+31	2	prefix15	a15	2015-05-22 11:57:17.001	2015-05-22 11:57:17.001	\N	1	17
+102	2	数値1	d1	2015-05-22 11:57:19.369	2015-05-22 11:57:19.369	\N	1	88
+103	2	数値2	d2	2015-05-22 11:57:19.401	2015-05-22 11:57:19.401	\N	1	89
+104	2	数値3	d3	2015-05-22 11:57:19.432	2015-05-22 11:57:19.432	\N	1	90
+105	2	数値4	d4	2015-05-22 11:57:19.464	2015-05-22 11:57:19.464	\N	1	91
+106	2	数値5	d5	2015-05-22 11:57:19.496	2015-05-22 11:57:19.496	\N	1	92
+107	2	数値6	d6	2015-05-22 11:57:19.527	2015-05-22 11:57:19.527	\N	1	93
+108	2	数値7	d7	2015-05-22 11:57:19.559	2015-05-22 11:57:19.559	\N	1	94
+109	2	数値8	d8	2015-05-22 11:57:19.59	2015-05-22 11:57:19.59	\N	1	95
+110	2	数値9	d9	2015-05-22 11:57:19.633	2015-05-22 11:57:19.633	\N	1	96
+111	2	数値10	d10	2015-05-22 11:57:19.665	2015-05-22 11:57:19.665	\N	1	97
+112	2	数値11	d11	2015-05-22 11:57:19.696	2015-05-22 11:57:19.696	\N	1	98
+113	2	数値12	d12	2015-05-22 11:57:19.728	2015-05-22 11:57:19.728	\N	1	99
+114	2	数値13	d13	2015-05-22 11:57:19.76	2015-05-22 11:57:19.76	\N	1	100
+115	2	数値14	d14	2015-05-22 11:57:19.791	2015-05-22 11:57:19.791	\N	1	101
+116	2	数値15	d15	2015-05-22 11:57:19.834	2015-05-22 11:57:19.834	\N	1	102
+117	2	数値16	d16	2015-05-22 11:57:19.865	2015-05-22 11:57:19.865	\N	1	103
+118	2	数値17	d17	2015-05-22 11:57:19.897	2015-05-22 11:57:19.897	\N	1	104
+119	2	数値18	d18	2015-05-22 11:57:19.928	2015-05-22 11:57:19.928	\N	1	105
+120	2	数値19	d19	2015-05-22 11:57:19.96	2015-05-22 11:57:19.96	\N	1	106
+121	2	数値20	d20	2015-05-22 11:57:19.991	2015-05-22 11:57:19.991	\N	1	107
+122	2	数値21	d21	2015-05-22 11:57:20.033	2015-05-22 11:57:20.033	\N	1	108
+123	2	数値22	d22	2015-05-22 11:57:20.065	2015-05-22 11:57:20.065	\N	1	109
+124	2	数値23	d23	2015-05-22 11:57:20.096	2015-05-22 11:57:20.096	\N	1	110
+125	2	数値24	d24	2015-05-22 11:57:20.128	2015-05-22 11:57:20.128	\N	1	111
+126	2	数値25	d25	2015-05-22 11:57:20.16	2015-05-22 11:57:20.16	\N	1	112
+127	2	数値26	d26	2015-05-22 11:57:20.202	2015-05-22 11:57:20.202	\N	1	113
+128	2	数値27	d27	2015-05-22 11:57:20.233	2015-05-22 11:57:20.233	\N	1	114
+129	2	数値28	d28	2015-05-22 11:57:20.265	2015-05-22 11:57:20.265	\N	1	115
+130	2	数値29	d29	2015-05-22 11:57:20.296	2015-05-22 11:57:20.296	\N	1	116
+131	2	数値30	d30	2015-05-22 11:57:20.37	2015-05-22 11:57:20.37	\N	1	117
+132	2	数値31	d31	2015-05-22 11:57:20.402	2015-05-22 11:57:20.402	\N	1	118
+133	2	数値32	d32	2015-05-22 11:57:20.433	2015-05-22 11:57:20.433	\N	1	119
+134	2	整数1	m1	2015-05-22 11:57:20.465	2015-05-22 11:57:20.465	\N	1	120
+135	2	整数2	m2	2015-05-22 11:57:20.496	2015-05-22 11:57:20.496	\N	1	121
+136	2	整数3	m3	2015-05-22 11:57:20.528	2015-05-22 11:57:20.528	\N	1	122
+137	2	整数4	m4	2015-05-22 11:57:20.57	2015-05-22 11:57:20.57	\N	1	123
+138	2	整数5	m5	2015-05-22 11:57:20.602	2015-05-22 11:57:20.602	\N	1	124
+139	2	整数6	m6	2015-05-22 11:57:20.633	2015-05-22 11:57:20.633	\N	1	125
+140	2	小数点0	fn0	2015-05-22 11:57:20.665	2015-05-22 11:57:20.665	\N	1	126
+141	2	小数点1	fn1	2015-05-22 11:57:20.696	2015-05-22 11:57:20.696	\N	1	127
+142	2	小数点2	fn2	2015-05-22 11:57:20.739	2015-05-22 11:57:20.739	\N	1	128
+143	2	小数点3	fn3	2015-05-22 11:57:20.77	2015-05-22 11:57:20.77	\N	1	129
+144	2	小数点4	fn4	2015-05-22 11:57:20.802	2015-05-22 11:57:20.802	\N	1	130
+145	2	小数点5	fn5	2015-05-22 11:57:20.833	2015-05-22 11:57:20.833	\N	1	131
+146	2	小数点6	fn6	2015-05-22 11:57:20.865	2015-05-22 11:57:20.865	\N	1	132
+147	2	小数点7	fn7	2015-05-22 11:57:20.896	2015-05-22 11:57:20.896	\N	1	133
+148	2	小数点8	fn8	2015-05-22 11:57:20.939	2015-05-22 11:57:20.939	\N	1	134
+149	2	小数点9	fn9	2015-05-22 11:57:20.971	2015-05-22 11:57:20.971	\N	1	135
+150	2	小数点10	fn10	2015-05-22 11:57:21.002	2015-05-22 11:57:21.002	\N	1	136
+151	2	小数点11	fn11	2015-05-22 11:57:21.033	2015-05-22 11:57:21.033	\N	1	137
+152	2	小数点12	fn12	2015-05-22 11:57:21.086	2015-05-22 11:57:21.086	\N	1	138
+153	2	小数点13	fn13	2015-05-22 11:57:21.128	2015-05-22 11:57:21.128	\N	1	139
+154	2	小数点14	fn14	2015-05-22 11:57:21.16	2015-05-22 11:57:21.16	\N	1	140
+155	2	小数点15	fn15	2015-05-22 11:57:21.191	2015-05-22 11:57:21.191	\N	1	141
+156	2	画像1	img1	2015-05-22 11:57:21.223	2015-05-22 11:57:21.223	\N	1	142
+157	2	画像2	img2	2015-05-22 11:57:21.254	2015-05-22 11:57:21.254	\N	1	143
+158	2	画像3	img3	2015-05-22 11:57:21.296	2015-05-22 11:57:21.296	\N	1	144
+159	2	画像4	img4	2015-05-22 11:57:21.328	2015-05-22 11:57:21.328	\N	1	145
+160	2	画像5	img5	2015-05-22 11:57:21.36	2015-05-22 11:57:21.36	\N	1	146
+161	2	画像6	img6	2015-05-22 11:57:21.391	2015-05-22 11:57:21.391	\N	1	147
+162	2	画像7	img7	2015-05-22 11:57:21.423	2015-05-22 11:57:21.423	\N	1	148
+163	2	画像8	img8	2015-05-22 11:57:21.454	2015-05-22 11:57:21.454	\N	1	149
+164	2	画像9	img9	2015-05-22 11:57:21.496	2015-05-22 11:57:21.496	\N	1	150
+165	2	画像10	img10	2015-05-22 11:57:21.528	2015-05-22 11:57:21.528	\N	1	151
+166	2	画像11	img11	2015-05-22 11:57:21.56	2015-05-22 11:57:21.56	\N	1	152
+167	2	画像12	img12	2015-05-22 11:57:21.591	2015-05-22 11:57:21.591	\N	1	153
+168	2	画像13	img13	2015-05-22 11:57:21.623	2015-05-22 11:57:21.623	\N	1	154
+169	2	画像14	img14	2015-05-22 11:57:21.654	2015-05-22 11:57:21.654	\N	1	155
+170	2	画像15	img15	2015-05-22 11:57:21.696	2015-05-22 11:57:21.696	\N	1	156
+171	2	画像16	img16	2015-05-22 11:57:21.728	2015-05-22 11:57:21.728	\N	1	157
+172	2	画像17	img17	2015-05-22 11:57:21.76	2015-05-22 11:57:21.76	\N	1	158
+173	2	画像18	img18	2015-05-22 11:57:21.791	2015-05-22 11:57:21.791	\N	1	159
+174	2	画像19	img19	2015-05-22 11:57:21.823	2015-05-22 11:57:21.823	\N	1	160
+175	2	画像20	img20	2015-05-22 11:57:21.854	2015-05-22 11:57:21.854	\N	1	161
+176	2	PASSWD	passwd	2015-05-22 11:57:21.886	2015-05-22 11:57:21.886	\N	1	162
+177	2	SWF	swf	2015-05-22 11:57:21.917	2015-05-22 11:57:21.917	\N	1	163
+178	2	PDF	pdf	2015-05-22 11:57:21.949	2015-05-22 11:57:21.949	\N	1	164
+179	2	URL	url	2015-05-22 11:57:21.981	2015-05-22 11:57:21.981	\N	1	165
+180	2	ターゲット	target	2015-05-22 11:57:22.012	2015-05-22 11:57:22.012	\N	1	166
+181	3	プルダウンメニュ	pd	2015-05-22 11:57:22.054	2015-05-22 11:57:22.054	\N	1	1
+182	3	ラジオボタン	rb	2015-05-22 11:57:22.086	2015-05-22 11:57:22.086	\N	1	2
+183	3	チェックボックス	cb	2015-05-22 11:57:22.117	2015-05-22 11:57:22.117	\N	1	3
+184	4	テキストフィールド1	v1	2015-05-22 11:57:22.149	2015-05-22 11:57:22.149	\N	1	1
+185	4	テキストフィールド2	v2	2015-05-22 11:57:22.181	2015-05-22 11:57:22.181	\N	1	2
+186	4	テキストフィールド3	v3	2015-05-22 11:57:22.212	2015-05-22 11:57:22.212	\N	1	3
+187	4	テキストフィールド4	v4	2015-05-22 11:57:22.254	2015-05-22 11:57:22.254	\N	1	4
+188	4	テキストフィールド5	v5	2015-05-22 11:57:22.286	2015-05-22 11:57:22.286	\N	1	5
+189	4	テキストフィールド6	v6	2015-05-22 11:57:22.317	2015-05-22 11:57:22.317	\N	1	6
+190	4	テキストフィールド7	v7	2015-05-22 11:57:22.349	2015-05-22 11:57:22.349	\N	1	7
+191	4	テキストフィールド8	v8	2015-05-22 11:57:22.381	2015-05-22 11:57:22.381	\N	1	8
+192	4	テキストエリア1	t1	2015-05-22 11:57:22.412	2015-05-22 11:57:22.412	\N	1	9
+193	4	テキストエリア2	t2	2015-05-22 11:57:22.454	2015-05-22 11:57:22.454	\N	1	10
+194	4	テキストエリア3	t3	2015-05-22 11:57:22.486	2015-05-22 11:57:22.486	\N	1	11
+195	4	テキストエリア4	t4	2015-05-22 11:57:22.517	2015-05-22 11:57:22.517	\N	1	12
+196	4	テキストエリア5	t5	2015-05-22 11:57:22.549	2015-05-22 11:57:22.549	\N	1	13
+197	4	テキストエリア6	t6	2015-05-22 11:57:22.581	2015-05-22 11:57:22.581	\N	1	14
+198	4	テキストエリア7	t7	2015-05-22 11:57:22.623	2015-05-22 11:57:22.623	\N	1	15
+199	4	テキストエリア8	t8	2015-05-22 11:57:22.654	2015-05-22 11:57:22.654	\N	1	16
+200	4	ラジオボタン1	radio1	2015-05-22 11:57:22.686	2015-05-22 11:57:22.686	\N	1	17
+201	4	ラジオボタン2	radio2	2015-05-22 11:57:22.717	2015-05-22 11:57:22.717	\N	1	18
+202	4	ラジオボタン3	radio3	2015-05-22 11:57:22.749	2015-05-22 11:57:22.749	\N	1	19
+203	4	ラジオボタン4	radio4	2015-05-22 11:57:22.781	2015-05-22 11:57:22.781	\N	1	20
+204	4	プルダウンメニュー1	pulldown1	2015-05-22 11:57:22.823	2015-05-22 11:57:22.823	\N	1	21
+205	4	プルダウンメニュー2	pulldown2	2015-05-22 11:57:22.854	2015-05-22 11:57:22.854	\N	1	22
+206	4	プルダウンメニュー3	pulldown3	2015-05-22 11:57:22.886	2015-05-22 11:57:22.886	\N	1	23
+207	4	プルダウンメニュー4	pulldown4	2015-05-22 11:57:22.917	2015-05-22 11:57:22.917	\N	1	24
+208	4	チェックボックス1	checkbox1	2015-05-22 11:57:22.949	2015-05-22 11:57:22.949	\N	1	25
+209	4	チェックボックス2	checkbox2	2015-05-22 11:57:22.981	2015-05-22 11:57:22.981	\N	1	26
+210	4	チェックボックス3	checkbox3	2015-05-22 11:57:23.023	2015-05-22 11:57:23.023	\N	1	27
+211	4	チェックボックス4	checkbox4	2015-05-22 11:57:23.054	2015-05-22 11:57:23.054	\N	1	28
+212	4	書類ファイル1	docfile1	2015-05-22 11:57:23.086	2015-05-22 11:57:23.086	\N	1	29
+213	4	書類ファイル2	docfile2	2015-05-22 11:57:23.117	2015-05-22 11:57:23.117	\N	1	30
+214	4	画像ファイル1	imgfile1	2015-05-22 11:57:23.149	2015-05-22 11:57:23.149	\N	1	31
+215	4	画像ファイル2	imgfile2	2015-05-22 11:57:23.181	2015-05-22 11:57:23.181	\N	1	32
+216	4	氏名（氏）	name0	2015-05-22 11:57:23.212	2015-05-22 11:57:23.212	\N	1	33
+217	4	氏名（名）	name1	2015-05-22 11:57:23.244	2015-05-22 11:57:23.244	\N	1	34
+218	4	氏名（し）	kana0	2015-05-22 11:57:23.275	2015-05-22 11:57:23.275	\N	1	35
+219	4	氏名（めい）	kana1	2015-05-22 11:57:23.307	2015-05-22 11:57:23.307	\N	1	36
+220	4	性別	gender	2015-05-22 11:57:23.338	2015-05-22 11:57:23.338	\N	1	37
+221	4	職業	profession	2015-05-22 11:57:23.381	2015-05-22 11:57:23.381	\N	1	38
+222	4	会社名	company	2015-05-22 11:57:23.412	2015-05-22 11:57:23.412	\N	1	39
+223	4	部署名	section	2015-05-22 11:57:23.444	2015-05-22 11:57:23.444	\N	1	40
+224	4	年代	age	2015-05-22 11:57:23.475	2015-05-22 11:57:23.475	\N	1	41
+225	4	生年月日（年）	by	2015-05-22 11:57:23.507	2015-05-22 11:57:23.507	\N	1	42
+226	4	生年月日（月）	bm	2015-05-22 11:57:23.538	2015-05-22 11:57:23.538	\N	1	43
+227	4	生年月日（日）	bd	2015-05-22 11:57:23.58	2015-05-22 11:57:23.58	\N	1	44
+228	4	メールアドレス	email	2015-05-22 11:57:23.612	2015-05-22 11:57:23.612	\N	1	45
+229	4	電話（市外局番）	tel0	2015-05-22 11:57:23.644	2015-05-22 11:57:23.644	\N	1	46
+230	4	電話（市内番号）	tel1	2015-05-22 11:57:23.675	2015-05-22 11:57:23.675	\N	1	47
+231	4	電話（加入番号）	tel2	2015-05-22 11:57:23.707	2015-05-22 11:57:23.707	\N	1	48
+232	4	URL	url	2015-05-22 11:57:23.738	2015-05-22 11:57:23.738	\N	1	49
+233	4	FAX（市外局番）	fax0	2015-05-22 11:57:23.78	2015-05-22 11:57:23.78	\N	1	50
+234	4	FAX（市内番号）	fax1	2015-05-22 11:57:23.812	2015-05-22 11:57:23.812	\N	1	51
+235	4	FAX（加入番号）	fax2	2015-05-22 11:57:23.844	2015-05-22 11:57:23.844	\N	1	52
+236	4	携帯電話1	mtel0	2015-05-22 11:57:23.875	2015-05-22 11:57:23.875	\N	1	53
+237	4	携帯電話2	mtel1	2015-05-22 11:57:23.907	2015-05-22 11:57:23.907	\N	1	54
+238	4	携帯電話3	mtel2	2015-05-22 11:57:23.949	2015-05-22 11:57:23.949	\N	1	55
+239	4	都道府県	pref	2015-05-22 11:57:23.981	2015-05-22 11:57:23.981	\N	1	56
+240	4	郵便番号（3桁）	zip0	2015-05-22 11:57:24.012	2015-05-22 11:57:24.012	\N	1	57
+241	4	郵便番号（4桁）	zip1	2015-05-22 11:57:24.044	2015-05-22 11:57:24.044	\N	1	58
+242	4	住所( 市区町村番地 )	address0	2015-05-22 11:57:24.075	2015-05-22 11:57:24.075	\N	1	59
+243	4	住所( ビル建物など )	address1	2015-05-22 11:57:24.107	2015-05-22 11:57:24.107	\N	1	60
+244	4	ニックネーム	handle	2015-05-22 11:57:24.149	2015-05-22 11:57:24.149	\N	1	61
+245	4	メールの種類	maildeliver	2015-05-22 11:57:24.18	2015-05-22 11:57:24.18	\N	1	62
+246	4	サブジェクト	subject	2015-05-22 11:57:24.212	2015-05-22 11:57:24.212	\N	1	63
+247	4	本文	bodys	2015-05-22 11:57:24.244	2015-05-22 11:57:24.244	\N	1	64
+248	4	パスワード	pwd	2015-05-22 11:57:24.275	2015-05-22 11:57:24.275	\N	1	65
+249	4	ご質問など	question	2015-05-22 11:57:24.307	2015-05-22 11:57:24.307	\N	1	66
+250	4	連絡方法	contact	2015-05-22 11:57:24.346	2015-05-22 11:57:24.346	\N	1	67
+251	5	タイトル	name	2015-05-22 11:57:24.37	2015-05-22 11:57:24.37	\N	1	1
+252	5	テキスト1	t1	2015-05-22 11:57:24.402	2015-05-22 11:57:24.402	\N	1	2
+253	5	テキスト2	t2	2015-05-22 11:57:24.433	2015-05-22 11:57:24.433	\N	1	3
+254	5	テキスト3	t3	2015-05-22 11:57:24.465	2015-05-22 11:57:24.465	\N	1	4
+255	5	テキスト4	t4	2015-05-22 11:57:24.496	2015-05-22 11:57:24.496	\N	1	5
+256	5	テキスト5	t5	2015-05-22 11:57:24.528	2015-05-22 11:57:24.528	\N	1	6
+257	5	テキスト6	t6	2015-05-22 11:57:24.559	2015-05-22 11:57:24.559	\N	1	7
+258	5	テキスト7	t7	2015-05-22 11:57:24.591	2015-05-22 11:57:24.591	\N	1	8
+259	5	テキスト8	t8	2015-05-22 11:57:24.622	2015-05-22 11:57:24.622	\N	1	9
+260	5	説明1	b1	2015-05-22 11:57:24.654	2015-05-22 11:57:24.654	\N	1	10
+261	5	説明2	b2	2015-05-22 11:57:24.696	2015-05-22 11:57:24.696	\N	1	11
+262	5	説明3	b3	2015-05-22 11:57:24.728	2015-05-22 11:57:24.728	\N	1	12
+263	5	説明4	b4	2015-05-22 11:57:24.759	2015-05-22 11:57:24.759	\N	1	13
+264	5	説明5	b5	2015-05-22 11:57:24.791	2015-05-22 11:57:24.791	\N	1	14
+265	5	説明6	b6	2015-05-22 11:57:24.823	2015-05-22 11:57:24.823	\N	1	15
+266	5	画像1	img1	2015-05-22 11:57:24.854	2015-05-22 11:57:24.854	\N	1	16
+267	5	画像2	img2	2015-05-22 11:57:24.896	2015-05-22 11:57:24.896	\N	1	17
+268	5	画像3	img3	2015-05-22 11:57:24.928	2015-05-22 11:57:24.928	\N	1	18
+269	5	画像4	img4	2015-05-22 11:57:24.959	2015-05-22 11:57:24.959	\N	1	19
+270	5	画像5	img5	2015-05-22 11:57:24.991	2015-05-22 11:57:24.991	\N	1	20
+271	5	画像6	img6	2015-05-22 11:57:25.022	2015-05-22 11:57:25.022	\N	1	21
+272	5	画像7	img7	2015-05-22 11:57:25.065	2015-05-22 11:57:25.065	\N	1	22
+273	5	画像8	img8	2015-05-22 11:57:25.107	2015-05-22 11:57:25.107	\N	1	23
+274	5	画像9	img9	2015-05-22 11:57:25.138	2015-05-22 11:57:25.138	\N	1	24
+275	5	画像10	img10	2015-05-22 11:57:25.17	2015-05-22 11:57:25.17	\N	1	25
+276	5	数値1	n1	2015-05-22 11:57:25.201	2015-05-22 11:57:25.201	\N	1	26
+277	5	数値2	n2	2015-05-22 11:57:25.233	2015-05-22 11:57:25.233	\N	1	27
+278	5	数値3	n3	2015-05-22 11:57:25.275	2015-05-22 11:57:25.275	\N	1	28
+279	5	数値4	n4	2015-05-22 11:57:25.307	2015-05-22 11:57:25.307	\N	1	29
+280	5	数値5	n5	2015-05-22 11:57:25.338	2015-05-22 11:57:25.338	\N	1	30
+281	5	数値6	n6	2015-05-22 11:57:25.38	2015-05-22 11:57:25.38	\N	1	31
+282	6	PDF	pdf	2015-05-22 11:57:25.412	2015-05-22 11:57:25.412	\N	1	1
+283	6	パワーポイント	powerpoint	2015-05-22 11:57:25.443	2015-05-22 11:57:25.443	\N	1	2
+284	6	エクセル	excel	2015-05-22 11:57:25.475	2015-05-22 11:57:25.475	\N	1	3
+285	6	ワード	word	2015-05-22 11:57:25.507	2015-05-22 11:57:25.507	\N	1	4
+286	6	ZIP	zip	2015-05-22 11:57:25.538	2015-05-22 11:57:25.538	\N	1	5
+287	7	JPEG	jpg	2015-05-22 11:57:25.57	2015-05-22 11:57:25.57	\N	1	1
+288	7	GIF	gif	2015-05-22 11:57:25.601	2015-05-22 11:57:25.601	\N	1	2
+289	7	PNG	png	2015-05-22 11:57:25.643	2015-05-22 11:57:25.643	\N	1	3
+290	7	SWF	flash	2015-05-22 11:57:25.675	2015-05-22 11:57:25.675	\N	1	4
+291	7	FLV	octet	2015-05-22 11:57:25.707	2015-05-22 11:57:25.707	\N	1	5
+292	8	トラックバック	trackback	2015-05-22 11:57:25.738	2015-05-22 11:57:25.738	\N	1	1
+293	8	クリックアンケート	clickenquete	2015-05-22 11:57:25.77	2015-05-22 11:57:25.77	\N	1	2
+294	8	フォーム	form	2015-05-22 11:57:25.801	2015-05-22 11:57:25.801	\N	1	3
+295	2	YOUTUBE ID	youtube	2015-07-28 19:55:53.494308	2015-07-28 19:55:53.494308	\N	1	167
+32	2	varchar1	t1	2015-05-22 11:57:17.043	2015-05-22 11:57:17.043	\N	1	18
+33	2	varchar2	t2	2015-05-22 11:57:17.075	2015-05-22 11:57:17.075	\N	1	19
+34	2	varchar3	t3	2015-05-22 11:57:17.106	2015-05-22 11:57:17.106	\N	1	20
+35	2	varchar4	t4	2015-05-22 11:57:17.138	2015-05-22 11:57:17.138	\N	1	21
+36	2	varchar5	t5	2015-05-22 11:57:17.169	2015-05-22 11:57:17.169	\N	1	22
+37	2	varchar6	t6	2015-05-22 11:57:17.201	2015-05-22 11:57:17.201	\N	1	23
+38	2	varchar7	t7	2015-05-22 11:57:17.243	2015-05-22 11:57:17.243	\N	1	24
+39	2	varchar8	t8	2015-05-22 11:57:17.275	2015-05-22 11:57:17.275	\N	1	25
+40	2	varchar9	t9	2015-05-22 11:57:17.306	2015-05-22 11:57:17.306	\N	1	26
+41	2	varchar10	t10	2015-05-22 11:57:17.338	2015-05-22 11:57:17.338	\N	1	27
+42	2	varchar11	t11	2015-05-22 11:57:17.369	2015-05-22 11:57:17.369	\N	1	28
+43	2	varchar12	t12	2015-05-22 11:57:17.401	2015-05-22 11:57:17.401	\N	1	29
+44	2	varchar13	t13	2015-05-22 11:57:17.432	2015-05-22 11:57:17.432	\N	1	30
+45	2	varchar14	t14	2015-05-22 11:57:17.464	2015-05-22 11:57:17.464	\N	1	31
+46	2	varchar15	t15	2015-05-22 11:57:17.496	2015-05-22 11:57:17.496	\N	1	32
+47	2	varchar16	t16	2015-05-22 11:57:17.527	2015-05-22 11:57:17.527	\N	1	33
+48	2	varchar17	t17	2015-05-22 11:57:17.559	2015-05-22 11:57:17.559	\N	1	34
+49	2	varchar18	t18	2015-05-22 11:57:17.601	2015-05-22 11:57:17.601	\N	1	35
+50	2	varchar19	t19	2015-05-22 11:57:17.632	2015-05-22 11:57:17.632	\N	1	36
+51	2	varchar20	t20	2015-05-22 11:57:17.664	2015-05-22 11:57:17.664	\N	1	37
+52	2	varchar21	t21	2015-05-22 11:57:17.696	2015-05-22 11:57:17.696	\N	1	38
+53	2	varchar22	t22	2015-05-22 11:57:17.727	2015-05-22 11:57:17.727	\N	1	39
+54	2	varchar23	t23	2015-05-22 11:57:17.759	2015-05-22 11:57:17.759	\N	1	40
+55	2	varchar24	t24	2015-05-22 11:57:17.801	2015-05-22 11:57:17.801	\N	1	41
+56	2	varchar25	t25	2015-05-22 11:57:17.832	2015-05-22 11:57:17.832	\N	1	42
+57	2	varchar26	t26	2015-05-22 11:57:17.864	2015-05-22 11:57:17.864	\N	1	43
+58	2	varchar27	t27	2015-05-22 11:57:17.896	2015-05-22 11:57:17.896	\N	1	44
+59	2	varchar28	t28	2015-05-22 11:57:17.938	2015-05-22 11:57:17.938	\N	1	45
+60	2	varchar29	t29	2015-05-22 11:57:17.969	2015-05-22 11:57:17.969	\N	1	46
+61	2	varchar30	t30	2015-05-22 11:57:18.001	2015-05-22 11:57:18.001	\N	1	47
+62	2	varchar31	t31	2015-05-22 11:57:18.033	2015-05-22 11:57:18.033	\N	1	48
+63	2	varchar32	t32	2015-05-22 11:57:18.064	2015-05-22 11:57:18.064	\N	1	49
+64	2	varchar33	t33	2015-05-22 11:57:18.096	2015-05-22 11:57:18.096	\N	1	50
+65	2	varchar34	t34	2015-05-22 11:57:18.138	2015-05-22 11:57:18.138	\N	1	51
+66	2	varchar35	t35	2015-05-22 11:57:18.169	2015-05-22 11:57:18.169	\N	1	52
+67	2	varchar36	t36	2015-05-22 11:57:18.201	2015-05-22 11:57:18.201	\N	1	53
+68	2	varchar37	t37	2015-05-22 11:57:18.232	2015-05-22 11:57:18.232	\N	1	54
+69	2	varchar38	t38	2015-05-22 11:57:18.264	2015-05-22 11:57:18.264	\N	1	55
+70	2	varchar39	t39	2015-05-22 11:57:18.296	2015-05-22 11:57:18.296	\N	1	56
+71	2	varchar40	t40	2015-05-22 11:57:18.338	2015-05-22 11:57:18.338	\N	1	57
+72	2	text1	b1	2015-05-22 11:57:18.369	2015-05-22 11:57:18.369	\N	1	58
+73	2	text2	b2	2015-05-22 11:57:18.401	2015-05-22 11:57:18.401	\N	1	59
+74	2	text3	b3	2015-05-22 11:57:18.432	2015-05-22 11:57:18.432	\N	1	60
+75	2	text4	b4	2015-05-22 11:57:18.464	2015-05-22 11:57:18.464	\N	1	61
+76	2	text5	b5	2015-05-22 11:57:18.496	2015-05-22 11:57:18.496	\N	1	62
+77	2	text6	b6	2015-05-22 11:57:18.527	2015-05-22 11:57:18.527	\N	1	63
+78	2	text7	b7	2015-05-22 11:57:18.559	2015-05-22 11:57:18.559	\N	1	64
+79	2	text8	b8	2015-05-22 11:57:18.59	2015-05-22 11:57:18.59	\N	1	65
+80	2	text9	b9	2015-05-22 11:57:18.622	2015-05-22 11:57:18.622	\N	1	66
+81	2	text10	b10	2015-05-22 11:57:18.653	2015-05-22 11:57:18.653	\N	1	67
+82	2	text11	b11	2015-05-22 11:57:18.696	2015-05-22 11:57:18.696	\N	1	68
+83	2	text12	b12	2015-05-22 11:57:18.727	2015-05-22 11:57:18.727	\N	1	69
+84	2	text13	b13	2015-05-22 11:57:18.759	2015-05-22 11:57:18.759	\N	1	70
+85	2	text14	b14	2015-05-22 11:57:18.79	2015-05-22 11:57:18.79	\N	1	71
+86	2	text15	b15	2015-05-22 11:57:18.822	2015-05-22 11:57:18.822	\N	1	72
+87	2	text16	b16	2015-05-22 11:57:18.853	2015-05-22 11:57:18.853	\N	1	73
+88	2	text17	b17	2015-05-22 11:57:18.896	2015-05-22 11:57:18.896	\N	1	74
+89	2	text18	b18	2015-05-22 11:57:18.927	2015-05-22 11:57:18.927	\N	1	75
+90	2	text19	b19	2015-05-22 11:57:18.959	2015-05-22 11:57:18.959	\N	1	76
+91	2	text20	b20	2015-05-22 11:57:18.99	2015-05-22 11:57:18.99	\N	1	77
+92	2	text21	b21	2015-05-22 11:57:19.022	2015-05-22 11:57:19.022	\N	1	78
+93	2	text22	b22	2015-05-22 11:57:19.065	2015-05-22 11:57:19.065	\N	1	79
+94	2	text23	b23	2015-05-22 11:57:19.106	2015-05-22 11:57:19.106	\N	1	80
+95	2	text24	b24	2015-05-22 11:57:19.138	2015-05-22 11:57:19.138	\N	1	81
+96	2	text25	b25	2015-05-22 11:57:19.169	2015-05-22 11:57:19.169	\N	1	82
+97	2	text26	b26	2015-05-22 11:57:19.201	2015-05-22 11:57:19.201	\N	1	83
+98	2	text27	b27	2015-05-22 11:57:19.232	2015-05-22 11:57:19.232	\N	1	84
+99	2	text28	b28	2015-05-22 11:57:19.274	2015-05-22 11:57:19.274	\N	1	85
+100	2	text29	b29	2015-05-22 11:57:19.306	2015-05-22 11:57:19.306	\N	1	86
+101	2	text30	b30	2015-05-22 11:57:19.338	2015-05-22 11:57:19.338	\N	1	87
+\.
+
+
+--
+-- Data for TOC entry 58 (OID 48841405)
+-- Name: u_category; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_category (id, userid, categoryid, flag, regitime) FROM stdin;
+90	2	113	1	2016-01-20 17:35:56.566
+91	2	114	1	2016-01-20 17:35:56.566
+92	2	115	1	2016-01-20 17:35:56.566
+93	2	116	1	2016-01-20 17:35:56.566
+95	19	113	1	2016-01-20 17:36:16.836
+96	19	114	1	2016-01-20 17:36:16.836
+97	19	115	1	2016-01-20 17:36:16.836
+98	19	116	1	2016-01-20 17:36:16.836
+99	19	117	1	2016-01-20 17:36:16.836
+100	19	118	1	2016-01-20 17:36:16.836
+101	19	119	1	2016-01-20 17:36:16.836
+102	19	120	1	2016-01-20 17:36:16.836
+103	19	121	1	2016-01-20 17:36:16.836
+104	19	122	1	2016-01-20 17:36:16.836
+105	19	123	1	2016-01-20 17:36:16.836
+106	19	124	1	2016-01-20 17:36:16.836
+107	19	125	1	2016-01-20 17:36:16.836
+108	19	126	1	2016-01-20 17:36:16.836
+109	19	127	1	2016-01-20 17:36:16.836
+110	19	128	1	2016-01-20 17:36:16.836
+111	19	129	1	2016-01-20 17:36:16.836
+112	19	130	1	2016-01-20 17:36:16.836
+116	14	113	1	2016-01-20 17:36:42.806
+117	14	114	1	2016-01-20 17:36:42.806
+118	14	115	1	2016-01-20 17:36:42.806
+119	6	125	1	2016-01-20 17:36:53.153
+120	6	126	1	2016-01-20 17:36:53.153
+121	6	127	1	2016-01-20 17:36:53.153
+87	3	115	0	2016-01-27 01:54:30.146
+89	3	119	0	2016-01-27 01:54:30.146
+148	3	116	0	2016-01-27 01:54:30.146
+149	3	117	0	2016-01-27 01:54:30.146
+150	3	120	0	2016-01-27 01:54:30.146
+151	3	121	0	2016-01-27 01:54:30.146
+152	3	122	0	2016-01-27 01:54:30.146
+153	3	123	0	2016-01-27 01:54:30.146
+154	3	124	0	2016-01-27 01:54:30.146
+155	3	128	0	2016-01-27 01:54:30.146
+156	3	129	0	2016-01-27 01:54:30.146
+157	3	130	0	2016-01-27 01:54:30.146
+85	3	113	1	2016-01-27 01:54:30.198
+86	3	114	1	2016-01-27 01:54:30.198
+88	3	118	1	2016-01-27 01:54:30.198
+\.
+
+
+--
+-- Data for TOC entry 59 (OID 49063817)
+-- Name: u_view; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_view (id, userid, categoryid, pageid, reuserid, url, flag, regitime) FROM stdin;
+\.
+
+
+--
+-- Data for TOC entry 60 (OID 49065291)
+-- Name: u_index; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_index (id, txt) FROM stdin;
+31	大山志保リオへ海外足固め　２月ホンダＬＰＧＡ　女子ゴルフの大山志保（３８）が１２日に都内で、契約するピンの新製品「Ｇシリーズ」の発表会見に、鈴木愛（２１）、一ノ瀬優希（２７）らとともに出席した。<br />\n　大山は現在世界ランクで日本女子最高位の３５位。リオデジャネイロ五輪に最も近いが、その位置をさらに確実にするため「積極的に海外に出たい」と、２月の米ツアー・ホンダＬＰＧＡ（タイ）への出場を決めた。女子の日本代表争いは混戦で、国内ツアー開幕前の上積みを目指す。「今は出場が目標ですが、（ツアー）開幕までには『メダルが取れるように』と言えるよう、気持ち的にも技術的にも自信をつけたい」と、仕上げる構えだ。
+32	45歳クルム伊達、22歳に１回戦で敗れる＜テニス：全豪オープン＞◇予選◇１４日◇メルボルン<br />\n　女子シングルス１回戦は４５歳のクルム伊達公子（エステティックＴＢＣ）が２２歳のフランス選手に２－６、７－６、４－６で敗れた。<br />\n　大坂なおみは加藤未唯（佐川印刷）に６－０、６－３で快勝し、桑田寛子（島津製作所）尾崎里紗（江崎グリコ）とともに２回戦に進んだ。<br />\n　江口実沙（北日本物産）日比万葉（安藤証券）穂積絵莉（エモテント）は敗退した。
+13	完全Ｖ青学大　トイレ、風呂掃除から練習まで厳しく＜第９２回箱根駅伝＞◇３日◇復路◇箱根－東京（５区間１０９・６キロ）<br />\n　俺たちが学生最強集団だ！！　青学大が往路に続き、復路も１位を走り続ける完全優勝で総合２連覇を飾った。２位東洋大に７分１１秒差をつける１０時間５３分２５秒で、１９７７年（昭５２）の日体大以来３９年ぶりに全１０区間で１位を並べる快挙を遂げた。昨年大会で一躍時の人となった原晋監督（４８）が今年目指したのは、選手がヒーローになること。神野大地主将（４年）を中心にした４年生の絆で、見事に去年を上回る大輪の花を咲かせた。<br />\n　湘南の風が吹く大磯駅が迫る時だった。７区で先頭を快走する小椋の目に、仲間の姿が飛び込んできた。山村、神野、久保田、伊藤。残り３キロ、「本当にうれしくて、一番きついところだったけど、差を広げてやろうと」。１年の入学直後に、みんなで手帳に「４年で３冠」と書き合った仲間。４年連続７区で過去３年は応援はなかった。小椋の安定感への信頼に、別の区に回るのが慣例も「今年は電車の時間もきついなかを練って&hellip;」。絆が背中を押していた。<br />\n　「学生がヒーローになってくれ」。原監督の言葉が号砲だった。初優勝した昨年大会後、「学生中心に勝ち取ってほしい。今度はお前たちの番」とハッパをかけられた。サラリーマン経験の手腕が脚光を浴びたが、２連覇への主人公は選手だった。<br />\n　新主将の神野を中心に４年生は考え抜いた。「準備」と「こだわり」をテーマに、準備には気付くことが必要と、生活面から徹底した。風呂掃除はサボりがちだったタイル磨きも。トイレは週の前半が拭き、後半が掃き。トイレットペーパーの補充方法も細かく。「掃除マニュアル」という紙が寮の至る所に貼られた。<br />\n　下級生の提案も積極採用した。あいさつ、敬語の使い方&hellip;。１０区でゴールに飛び込んだ渡辺利が「細かいミスをなくせば、走りのミスもなくなる。心も格好良く」と言えば、神野も「チャラいと言われるが、練習、生活は厳しい」と誇る。「３代目・山の神」を中心に細部に「神」を宿した。<br />\n　出雲を圧勝して迎えた全日本選手権が、さらに「格好良く」させてくれた。神野が故障から復帰も２位。３冠がかなわず、生活から見返した。試合でマットや場所取りを忘れたり、心の緩みが目立った。「うみを出す」（小椋）会議で、神野が言った。「俺たちの代は俺たちのやり方で勝とう」。ねじを締め直した。<br />\n　箱根路。下級生もたくましかった。１年の小野田が山下りの６区で快走すると、８区下田、９区中村も続く。生活だけでなく、競技の質も上げる目的で、１３・５キロを走る早朝練習の設定は５５分から４８分に。先頭で引っ張った小椋は「以前は速すぎると先輩から『おい』と声がかかった。ケガのリスクがあるけど、やらないと」と使命感で底上げを図り、成果を出した。<br />\n　連続１位を続けたのは５０年（昭２５）～５１年（昭２６）の中大の２０区間が最高。来年の往路５区間まで続ければ、その歴史までも動かす。神野は言う。「組織は強い選手が抜けると弱体化するが、しっかりしている。何十年も常勝チームでいられる」。それは選手が築いたからこそ。過去最強軍団へ、ひたすらに強くある。【阿部健吾】<br />\n　◆完全優勝　往路復路では７７年の日体大以来６校目、計１２回目。過去は中大が６回、日大２回、日体大、明大、早大が１回。
+5	白鵬の最多優勝、ギネス記録に認定　申請者は謎のまま　大相撲の横綱白鵬が持つ歴代最多の優勝回数（現在は３５）がギネス世界記録に認定され、年内最後の稽古となった２８日に喜びを語った。<br />\n　認定証を大事そうに抱えた横綱は「テレビで見ていた物が自分の手にある。信じられない」とご満悦。「今年は休場もあったけど、年末にご褒美をいただいたね」と語った。<br />\n　ただ、誰がギネス記録の登録に申請したのかは分からないという。「勝手にくれるもんじゃないし、ギネスの団体に電話したらわかるかな」と不思議がった。
+11	レスター２位後退、アーセナルが首位　プレミア　サッカーの欧州各リーグ（１２月２８日～１月３日）でイングランドは岡崎慎司のレスターが２戦連続で引き分け、２位に後退した。アーセナルはボーンマスとニューカッスルを下し、２位に勝ち点２差をつけて首位に浮上した。<br />\n　スペインはＡマドリードがレバンテに勝ち、勝ち点４１でトップ。１試合少ないバルセロナはエスパニョールと引き分け、同３９で続く。Ｒマドリードもバレンシアと引き分け、同３７となった。
+30	メッシが全得点絡む　バルセロナ大勝で８強進出＜スペイン国王杯：エスパニョール０－２バルセロナ＞◇５回戦◇１３日◇バルセロナ<br />\n　第２戦が行われ、バルセロナがアウェーでエスパニョールを２－０で下し、２戦合計６－１で準々決勝進出を決めた。<br />\n　第１戦を４－１で大勝したバルセロナはＦＷネイマール、ＦＷスアレス、ＭＦイニエスタ、ＤＦピケをスタメンから外して臨んだが、ＦＷムニールが前半３２分、ＦＷメッシの絶妙のスルーパスで抜け出し、１トラップで相手ＧＫをかわして左足で流し込んで先制。後半４３分にもメッシを起点にＭＦアルダ、ＭＦビダルとボールを回して崩し、最後は再びムニールが押し込んで突き放した。
+1	ロッテ小林敦　ケガに泣いた５年間生かすスカウトに＜さよならプロ野球＞<br />\n　久しぶりに会った彼は、スーツ姿だった。「このスーツ、社会人の時のなんですよ」。かつての銀行マンは、そう言ってスケジュール帳を開いた。「今 週はあいさつ回りです。千葉で東海大系列中心に。仙台にも行きます。まだ慣れませんねえ」。新任のロッテ小林敦スカウト（２９）だ。<br />\n　ケガに泣かされた現役生活だった。１０年ドラフト３位で入団。仙台にある七十七銀行初のプロ野球選手となった。阪神に移籍した同姓の小林宏之の背 番号「４１」を引き継いだ。〝コバアツ〟は即戦力右腕と期待された。１年目の７月に初勝利。だが、終わってみれば、それが唯一の白星。「ほとんどケガ。何 もやってない５年間でした」と、サバサバと振り返った。<br />\n　２年目の８月に右肩腱板の修復手術に踏み切った。今、思えば、社会人時代から兆候はあったという。登板翌日は満足にキャッチボールができなかっ た。「当時は『こんなもんだろう』て」。予想を超える重症だった。手術後は右肩を完全固定。食事や歯磨きも左手でこなすしかなかった。結局２年近いリハビ リを経て、１４年春に２軍で実戦復帰。「あれが一番の思い出。楽しかったな。少年野球みたいで」。喜びは、唯一の白星を上回った。<br />\n　覚悟を決めた今季。「１軍に復帰できれば、お世話になった方たちに恩返しになる」と臨んだが、１軍は遠かった。２軍でも、連投で疲れがたまるとダ メだった。引退報告をしたら、リハビリを担当してくれた理学療法士の先生たちの「お疲れさん」が心に染みた。「良い成績を残せる選手だけじゃない。スカウ トとして、選手の気持ちが分かるように。ケガして知識は増えた。それが役に立てれば」。故郷の東海と、北陸地区を担当する。【古川真弥】<br />\n　◆小林敦（こばやし・あつし）１９８６年（昭６１）２月２４日生まれ、静岡・島田市出身。東海大相模、東海大を経て、七十七銀行から１０年ドラフ ト３位で入団。１年目に９試合、１勝５敗、防御率５・８０。２年目に右肩手術。１軍復帰はかなわず、今季限りで引退。スカウトに就任した。１７８センチ、 ８５キロ。右投げ右打ち。
+17	永瀬貴規　磨く、しなやか心技体　卒論でライバル分析　■《ＲＩＯ　２０１６》永瀬貴規（２２）＝柔道<br />\n　クリスマス。柔道男子８１キロ級世界王者の永瀬貴規（たかのり）（２２）＝筑波大４年＝は、やっと２０１５年最後の大仕事から解放された。<br />\n　「大変でした。間に合ってよかった」。パソコンから大学の教授宛てに提出したのは卒業論文だ。
+15	レアルにジダン新監督、異例の抜擢　再建に手腕は未知数　欧州チャンピオンズリーグ（ＣＬ）で最多の優勝１０度を誇るスペイン１部レアル・マドリードの新監督に、１９９８年ワールドカップ（Ｗ杯）フランス大会で、主力としてフランスを初優勝に導いたジダン氏（４３）の就任が決まった。ベニテス前監督が４日に解任され、後任に指名された。レアルは、トップチームでの監督経験がないジダン氏にチームの再建を託すことになった。<br />\n　ジダン氏は、２００６年のＷ杯ドイツ大会で準優勝して現役を引退。その後は最後に所属したレアルで、トップチームのアシスタントコーチなどをした後、今季は若手チームの監督を務めていた。<br />\n　レアルのようなビッグクラブが、トップチームでの監督経験がない人物に指揮を任せるのは異例だ。かつてバルセロナで一時代を築いたグアルディオラ監督（現バイエルン・ミュンヘン監督）のような例はあるが、成功例は多くない。選手としての実績やカリスマ性では他を圧倒する存在だが、監督として難所をどう乗り切るかは未知数だ。
+16	２０３センチアタッカー、初戦で姿消す　高校バレー（５日、バレーボール・全日本高校選手権男子　市尼崎２-０雄物川）<br />\n　「不完全燃焼。もっと（得点を）決めたかったし、もっと勝ちたかった」。２０３センチの長身をかがめ、雄物川の鈴木が話した。昨春、全日本の登録メンバーに選ばれた注目のアタッカー。市尼崎にストレート負けして姿を消した。<br />\n　高さを生かしたスパイクを決めて気を吐いたが、相手のマークを崩しきれず。終盤はバックアタックを３枚のブロックで止められ、反撃の芽を摘まれた。
+7	新日本、Ｇ１クライマックス決勝は８月両国国技館＜新日本：東京ドーム大会＞◇４日◇東京ドーム◇観衆２万５２０４人<br />\n　新日本は４日、東京ドーム大会で今年上半期のビッグマッチ日程を発表した。<br />\n<!--split--><br />\n　ニュージャパンカップ開幕戦は、今年も大田区体育館で開催される。また、同大会の決勝戦は、３月１２日に青森・マエダアリーナでの開催となる。Ｇ１クライマックスは７月１８日、札幌の北海きたえーるで開幕し、８月１２日、１３日、１４日の両国国技館３連戦で幕を閉じる。
+12	原江里菜、女王イ・ボミ見習い完全復活の16年に　女子ゴルフの原江里菜（２８＝ＮＥＣ）が、長いトンネルを抜けた。１５年夏、大東建託レディースで７年ぶり２回目の優勝。それまで勝てそうで勝てない日々が続き、重圧もあっただけに「やっと解放された」とその心境を明かした。<br />\n　同時に１５年を「喜びもあったけれど、戒められた１年でもあった」と振り返る。最終戦のツアー選手権リコー杯は最終日に１６番からボギー、ボギー、トリプルボギーで９位に終わる不甲斐ない締めくくり。「そんなに甘くない、鍛え直してこい、と言われた気がした」。特にシーズン後半は連戦続きで、最後に息切れした形だった。その反省から１６年はペース配分を考え、年間通じて試合で１００％の力を出せるスケジュールづくりをし、「（獲得賞金）１億円プレーヤーを目指したい」と意気込む。<br />\n　また、従来は「私は毎日の生活も楽しくないと」と私生活の充実も大事にしてきた。だが、１５年賞金女王になったイ・ボミ（韓国）の姿を見て「ボミはゴルフだけにかけてやっていた」と感じたという。「若いうちに全力を注ぐのもいい。来年（１６年）はゴルフ最優先の生活をしたいと思っています」と意識改革にも目覚めたようだ。
+10	アデミウソンＧ大阪移籍か　昨季は横浜でプレー　ブラジルの強豪サッカークラブ、サンパウロからＪ１横浜に期限付き移籍していたＦＷアデミウソン（２１）が今季はＪ１のＧ大阪でプレーすると３日、ブラジルのメディアが報じた。報道によると１年間の期限付き移籍で、レンタル料は２８万ドル（約３３６０万円）という。<br />\n　アデミウソンは昨年、サンパウロから横浜に加わり、Ｊ１で３３試合に出場して８得点。母国の年代別代表で背番号１０を背負った経験があり、攻撃陣の核として活躍した。
+9	マエケンのフォームを解説　ヒジの負担少ない　広島からポスティングシステムでメジャー球団と交渉中の前田健太投手（２７）が１日（日本時間２日）、本命視されたドジャースと８年契約で合意したことが分かった。米時間１２月３１日に複数の米メディアが報じたもので、この日までにメジャー関係者も認めた。<br />\n<!--split--><br />\n　米主要スポーツメディアも、前田の今季を予想した。ＥＳＰＮ電子版は「プレミア１２ではチェンジアップが素晴らしく、これが平均以上の球種として使える可能性が高い」とし「投球フォームから投手の故障を予測できるとしたら、前田のフォームは明らかにコンパクトで、肘への負担も少なそうだ」と解説。ＦＯＸスポーツ電子版では解説者のニコースキー氏（元ソフトバンク）が「他の日本投手と違うのは、肘に負担のかかるスプリッターを投げないこと」と、故障のリスクについては少ないだろうと分析した。
+8	左肘手術＆右手骨折の日本ハム宮西が地元で再始動　昨年末に右手を骨折した日本ハム宮西尚生投手（３０）が地元の兵庫・尼崎で再始動した。<br />\n　４日、母校の市尼崎で自主トレを公開。１０月に左肘を手術し、１２月に北海道にある自宅付近で足をすべらせて転倒した際に右手第５中手骨骨折を負った。右手には患部を固定する装具を付けながら、ランニングメニューやキャッチボールなどを行った。<br />\n　「（右手は）痛いですよ。振動を与えたらいけないので、７割くらいでしか走れないですけど、本数は走れる」と前向き。元旦からトレーニングを開始している。「日本一しかないですね」と、リハビリ中の左肘、右手の状態を見ながらシーズンへ向けてじっくりと仕上げていく。
+18	車いす作り、情熱継ぐ　千葉の企業、選手に寄り添い信頼　パラリンピック車いすテニスで３大会連続金メダルの国枝慎吾選手をはじめ、国内外の競技者が信頼を寄せる車いすメーカーが千葉市若葉区にある。自ら障害を負い、使いやすい車いすの開発に情熱を傾けた父の遺志を社長の石井勝之さん（３５）が継ぐ。８日、天皇、皇后両陛下が製造現場を視察した。<br />\n　メーカーは「オーエックスエンジニアリング」。元はオートバイの販売会社で、創業者の石井重行さんはレースに出たり、雑誌に新マシンの試乗記事を書いたりしていた。だが、１９８４年４月の試乗中の事故で脊髄（せきずい）を損傷。車いす生活になった。<br />\n　入院中、無機質な車いすに気がめいった。「格好良い車いすがないなら自分で」。オートバイメンテナンスの技術を生かし、車いす開発を手がけ始めた。オートバイ販売時代にモータースポーツの大会に出て製品を宣伝したように、車いすの開発でも、すぐに競技用への進出を考えた。外観にこだわりつつ、フレームを薄く車両を軽くして機能性を高める工夫を続けた。
+33	入江陵介「泳ぎがはまりつつある」高地合宿手応え　競泳背泳ぎの入江陵介（２５＝イトマン東進）が早期の「昨年超え」で五輪に弾みをつける。<br />\n　１０日、米アルバカーキの高地合宿から成田空港に帰国。標高１８００メートルの高地では１日最大１万４０００メートルの泳ぎ込みを敢行。「泳ぎがはまりつつある」と手応えをつかんだ。<br />\n　今年の最初のレースは来月１２日開幕のきらら杯（山口）になる。「そこで一発良いタイムを出したいな。良くなかった去年のタイムはクリアしたい」と目標を掲げた。昨年は金メダルが期待された世界選手権でメダルなし。ベストタイムも２００メートルが１分５４秒６２、１００メートルが５２秒９９とアジア大会２冠の２年前のタイムをともに下回った。<br />\n　まずは早期に昨年の自分を超え、リオデジャネイロ五輪代表選考を兼ねた４月の日本選手権（東京辰巳国際水泳場）、五輪本番に勢いをつけたい。「去年はケガがあったけど、今年は良い練習が積めて充実している。ワクワクさはある」と明るい表情だった。
+34	サンウルブズ下部組織　五郎丸に続くＷ杯の星発掘へ　ラグビーの世界最高峰リーグ「スーパーラグビー（ＳＲ）」に今季から参戦する日本チーム「サンウルブズ」に、大学生ら若手中心の下部組織を創設する計画があることが１３日、分かった。日本協会関係者が日刊スポーツの取材に明かしたもので、来年の本格スタートを目指して準備を進めている。サンウルブズは１９年Ｗ杯日本大会に向けた選手強化を目的としたものだが、同時に新たな才能の発掘と育成も行っていく。<br />\n　３年後へ新プロジェクトが進行していた。来月から始まるサンウルブズは、１９年に向けた日本代表の強化が最大の目的。そこにつながる新戦力を発掘するため、日本協会関係者は「下部組織を作るという構想は明確に持っている」と打ち明けた。来年の始動を目指し、大学生を中心に、場合によっては高校生にまで門戸を広げる。将来性のある選手はトップチームで公式戦に出場する可能性もある。<br />\n　ＳＲに所属するニュージーランド（ＮＺ）、南アフリカ、オーストラリアのチームにはすでに下部組織がある。日本代表ＦＢ藤田慶和（早大）も昨季、練習生としてクルセーダーズ（ＮＺ）の下部組織ナイツに留学し、修業を積んだ。サンウルブズにも下部組織を作ることで、授業などで長期海外遠征が難しい学生を国内の合宿に呼び、強化することも容易になる。<br />\n　現在サンウルブズの選手は３４人だが、４５人程度を抱える他チームに比べて少ない。南アフリカへの遠征などもあり選手への負担は大きい。同関係者は「４０～４５人の選手が必要になる」と話しており、まずは１０人程度の規模から始める予定。Ｕ－２０（２０歳以下）日本代表を終えた若手選手などに、新たな成長の場を与えることになりそうだ。<br />\n　ＳＲの統括団体「ＳＡＮＺＡＲ」からは、トップチームは強化に終わらず高いチーム力を持つよう要求されている。そのためサンウルブズは日本代表に直結しない海外出身選手も少なくない。ＳＲ参戦を無駄にしないため、下部組織計画が動きだした。<br />\n　◆サンウルブズ　今季から参戦する日本を拠点としたチーム。Ｗ杯イングランド大会に参加した日本選手は１０人が参戦。参加資格はなく、海外代表チーム経験者も含まれている。チーム名は日本を象徴する太陽と、小兵でも統率された群れで大きな敵に立ち向かおうとするオオカミを組み合わせたもの。１次リーグ１５試合のうち８試合がホームゲームで、うち３試合はシンガポールで行われる。２月２７日に東京・秩父宮で開幕戦。ヘッドコーチは元ニュージーランド代表のマーク・ハメット氏。<br />\n　◆スーパーラグビー　南半球のニュージーランド、オーストラリア、南アフリカに拠点を置くチームが争う世界最高峰リーグ。９６年に１２チームで始まり、今季は１８チームで行われる。各チームが１次リーグ１５試合を戦い、プレーオフ進出を目指す。
+35	スノボのＷ杯中止　代替会場での開催を検討　国際スキー連盟（ＦＩＳ）は１３日、３月１０～１３日に米国のスコーバレーで行われる予定だったフリースタイルスキーのワールドカップ（Ｗ杯）スキークロスとスノーボードクロスのＷ杯が中止になったと発表した。<br />\n　ＦＩＳは代替会場での開催を検討している。
+29	名波監督「まずは勝ち点40」Ｕ18小川航に18番　３年ぶりにＪ１に復帰する磐田は１４日、磐田市のヤマハスタジアムで新体制記者会見を行った。<br />\n　新加入のＤＦ大井健太郎（３１）、ＧＫ奥田達朗（２７）ＭＦ荒木大吾（２１）ＤＦ大南拓磨（１８）ＦＷ小川航基（１８）ＦＷ斉藤和樹（２７）ＤＦ中村太亮（２６）、ＤＦ高木和道（３５）が登壇。Ｕ－１８日本代表の小川は、元日本代表ＦＷ前田遼一（３４＝東京）が２０１４年まで着けていた背番号１８を継承することになり、「伝統のある番号をいただいた。この番号に恥じないようにプレーしたい」と意気込んでいた。<br />\n　６年ぶりの復帰となるＤＦ大井健太郎（３１）は、離れている間も磐田の試合結果を気にしていたという。「今まで鍛えてもらった力を磐田のために使うチャンスをもらった。チームのために全力でプレーしたい」と話した。<br />\n　３シーズン目を迎える名波浩監督（４３）は「今季は昨季以上に厳しいシーズンになる。スタッフと選手、フロントが一致団結して戦いたい。まずは目標を（Ｊ１残留へ）勝ち点４０として、それから再設定していきたい」と話した。
+\.
+
+
+--
+-- Data for TOC entry 61 (OID 49524985)
+-- Name: u_ranking; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_ranking (id, n) FROM stdin;
+11	0
+5	0
+13	1
+32	2
+31	2
+34	3
+33	0
+9	0
+10	1
+7	1
+1	1
+30	6
+18	1
+8	0
+12	1
+15	0
+16	0
+35	1
+17	2
+29	16
+\.
+
+
+--
+-- Data for TOC entry 62 (OID 49525203)
+-- Name: u_activity; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_activity (id, userid, reuserid, pageid, activity, activityid, notice, flag, regitime) FROM stdin;
+2	3	14	38	1	2	1	1	2016-01-27 20:00:47.528
+7	14	2	29	1	5	1	1	2016-01-27 20:05:09.101
+8	6	3	29	1	6	1	1	2016-01-27 20:05:52.251
+9	3	14	29	1	7	1	1	2016-01-27 20:06:13.225
+10	3	2	32	1	8	1	1	2016-01-27 20:07:04.057
+11	14	2	32	1	9	1	1	2016-01-27 20:07:16.783
+12	6	3	32	1	10	1	1	2016-01-27 20:07:41.204
+13	6	14	32	1	11	1	1	2016-01-27 20:07:50.964
+20	3	4	38	4	1	1	1	2016-01-27 20:13:58.515
+21	3	2	29	4	2	1	1	2016-01-27 20:14:00.26
+22	3	2	32	4	3	1	1	2016-01-27 20:14:02.039
+23	3	2	30	4	4	1	1	2016-01-27 20:14:04.944
+24	6	4	15	4	5	1	1	2016-01-27 20:14:09.37
+25	6	2	7	4	6	1	1	2016-01-27 20:14:11.22
+26	6	2	30	4	7	1	1	2016-01-27 20:14:12.923
+27	6	4	38	4	8	1	1	2016-01-27 20:14:14.611
+28	14	2	12	4	9	1	1	2016-01-27 20:14:18.138
+29	14	2	8	4	10	1	1	2016-01-27 20:14:20.254
+31	6	14	29	3	2	1	1	2016-01-27 21:43:26.149
+32	6	14	32	3	3	1	1	2016-01-27 21:43:30.104
+34	6	3	29	2	5	1	1	2016-01-27 21:44:01.062
+35	3	14	38	1	12	1	1	2016-01-27 23:33:19.162
+36	6	3	38	2	6	1	1	2016-01-27 23:47:47.95
+37	14	2	32	1	13	1	1	2016-01-27 23:57:31.539
+38	14	2	34	1	14	1	1	2016-01-27 23:58:41.594
+39	3	14	34	1	15	1	1	2016-01-27 23:59:04.212
+40	6	3	38	2	7	1	1	2016-01-28 02:06:47.904
+41	6	6	38	2	8	1	1	2016-01-28 02:06:51.47
+42	6	3	29	2	9	1	1	2016-01-28 02:07:01.613
+43	6	6	29	2	10	1	1	2016-01-28 02:08:39.557
+44	6	6	32	2	11	1	1	2016-01-28 02:09:08.551
+33	6	3	32	3	4	1	1	2016-01-28 02:33:21.027
+6	3	2	29	3	4	1	1	2016-01-28 02:33:31.146
+30	6	14	38	2	1	1	1	2016-01-28 02:39:41.262
+1	14	4	38	2	1	1	1	2016-01-28 02:39:41.262
+45	3	4	38	4	11	1	1	2016-01-28 02:54:21.936
+46	3	2	29	4	12	1	1	2016-01-28 02:54:24.317
+47	3	2	32	4	13	1	1	2016-01-28 02:54:25.902
+48	3	2	30	4	14	1	1	2016-01-28 02:54:27.722
+49	3	2	34	4	15	1	1	2016-01-28 02:54:29.409
+50	3	2	31	4	16	1	1	2016-01-28 02:54:31.253
+51	3	2	35	4	17	1	1	2016-01-28 02:54:34.055
+52	3	2	7	4	18	1	1	2016-01-28 02:54:36.713
+53	3	2	33	4	19	1	1	2016-01-28 02:54:39.031
+54	3	4	16	4	20	1	1	2016-01-28 02:54:41.761
+55	3	4	17	4	21	1	1	2016-01-28 02:54:44.348
+56	3	2	10	4	22	1	1	2016-01-28 02:54:46.827
+57	3	2	11	4	23	1	1	2016-01-28 02:54:48.945
+58	3	2	8	4	24	1	1	2016-01-28 02:54:52.318
+59	3	2	13	4	25	1	1	2016-01-28 02:54:58.599
+60	3	2	1	4	26	1	1	2016-01-28 02:55:01.62
+61	3	2	9	4	27	1	1	2016-01-28 02:55:04.137
+62	3	2	12	4	28	1	1	2016-01-28 02:55:07.19
+63	3	4	5	4	29	1	1	2016-01-28 02:55:09.967
+64	3	4	18	4	30	1	1	2016-01-28 02:55:12.581
+65	3	6	29	2	12	1	1	2016-01-29 02:45:06.678
+3	6	14	38	1	3	1	0	2016-01-29 02:57:24.613
+66	6	4	38	4	31	1	1	2016-01-30 19:30:34.941
+\.
+
+
+--
+-- Data for TOC entry 63 (OID 49525218)
+-- Name: u_comment; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_comment (id, pageid, commentid, userid, "comment", flag, regitime) FROM stdin;
+1	38	0	14	入門して、幕内最高優勝を１回もできない力士なんてたくさんいる。それこそ大関になったことがある力士もだ。\nそう考えれば記録上は最スローだし、それに近いかも知れないが、優勝できれば、皆が祝福してくれるはずだ。頑張れ。 	1	2016-01-27 20:00:27.214
+2	38	1	3	優勝すると思う！ 	1	2016-01-27 20:00:47.528
+4	29	0	3	40ポイント到達の為には、格上相手に負けない事が何より大切。遮二無二勝ちに行くばかりではなく、時には現実的に割り切って戦う事も求められる。\n２節でいきなりの敵地浦和戦、過去何度もロスタイムショックで負け続けた難敵中の難敵。攻めては新10番柏木の好パスや新９番武藤の的確な走り込みと位置取り、守っては立ちはだかる代表ＧＫ西川の分厚い壁。リスクを背負える相手ではない、極力セーフティーに戦い引き分けを死に物狂いで掴む気持ちでいかないと。 	1	2016-01-27 20:04:46.03
+5	29	0	14	謙遜を。補強をみている限りでは最低10位以上、出来れば上位狙いでしょう。 	1	2016-01-27 20:05:09.101
+6	29	4	6	名波は応援したくなる！ 	1	2016-01-27 20:05:52.251
+7	29	5	3	小川がどこまで通用するか楽しみだな 	1	2016-01-27 20:06:13.225
+8	32	0	3	雨での中断アピールは当たり前の抗議でした。観客は私を含めて傘をさしている人も増えてきていたのでハードコートだと大怪我につながる可能性があります（芝や土ならもちろん続行OK。でもハードなので試合を止めてほしかったです。実際に次のダブルスは有明コロシアムで行われました。あれで試合続行を宣告する審判は「あと2ゲームであなたが負ければ、試合進行上スムーズです」と言っているようなもの。観ていた方ならわかりますよね。観客席の椅子が雨粒で濡れてきていました。 	1	2016-01-27 20:07:04.057
+9	32	0	14	小雨とはいえポイントごとに数人のボールパーソンが何人出てきて雑巾で雨粒を拭きながら試合続行とか始めて観ました(大笑）。選手の2人はお互いの怪我を恐れてドロップショットやきわどいボールが打てなくなってました。それでも昨日の試合は伊達のプレーが素晴らしかったです。伊達が負けてしまったら、毎年この大会のお客さんは半分に減るんですよ。いろんなものを背負って戦っています。笑って負けられるわけがないじゃないですか？ 	1	2016-01-27 20:07:16.783
+10	32	8	6	もう趣味ですから気がすむまでどーぞ 	1	2016-01-27 20:07:41.204
+11	32	9	6	勝負の世界なので気持ちはわかりますが、もう少しジュニアの見本となるような振る舞いをお願い致します。 	1	2016-01-27 20:07:50.964
+12	38	1	3	まあまあ。	1	2016-01-27 23:33:19.162
+13	32	0	14	「不利なジャッジに声を上げ雨が振り出したところで試合の中断を主審にアピール」という点で実際を見てませんが、\nなんとなく、過去に観客のため息を声をあげて「ため息ばっかり」とした過去を思い出しました。\nクルムさんのような意識の高い方はレベルの低い観客は追いつけません。	1	2016-01-27 23:57:31.539
+14	34	0	14	同じことをしても勝てないのはそうなんだけど、真正面から向き合う姿勢をなくしたら、また弱くなる。\nジャパンウェイには、チームのフィジカル、、フィットネスを上げて、世界と向き合うという面があって、それはやはり必要。\n当たり負けせず、走り勝つ試合が見たい！ 	1	2016-01-27 23:58:41.594
+15	34	14	3	サンウルブズをいいチームにしてください。 	1	2016-01-27 23:59:04.212
+3	38	1	6	頑張ってね。	0	2016-01-29 02:57:24.613
+\.
+
+
+--
+-- Data for TOC entry 64 (OID 49525235)
+-- Name: u_bookmark; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_bookmark (id, pageid, userid, flag, regitime) FROM stdin;
+11	38	3	1	2016-01-28 02:54:21.936
+12	29	3	1	2016-01-28 02:54:24.317
+13	32	3	1	2016-01-28 02:54:25.902
+14	30	3	1	2016-01-28 02:54:27.722
+15	34	3	1	2016-01-28 02:54:29.409
+16	31	3	1	2016-01-28 02:54:31.253
+17	35	3	1	2016-01-28 02:54:34.055
+18	7	3	1	2016-01-28 02:54:36.713
+19	33	3	1	2016-01-28 02:54:39.031
+20	16	3	1	2016-01-28 02:54:41.761
+21	17	3	1	2016-01-28 02:54:44.348
+22	10	3	1	2016-01-28 02:54:46.827
+23	11	3	1	2016-01-28 02:54:48.945
+24	8	3	1	2016-01-28 02:54:52.318
+25	13	3	1	2016-01-28 02:54:58.599
+26	1	3	1	2016-01-28 02:55:01.62
+27	9	3	1	2016-01-28 02:55:04.137
+28	12	3	1	2016-01-28 02:55:07.19
+29	5	3	1	2016-01-28 02:55:09.967
+30	18	3	1	2016-01-28 02:55:12.581
+31	38	6	1	2016-01-30 19:30:34.941
+\.
+
+
+--
+-- Data for TOC entry 65 (OID 49525300)
+-- Name: u_reaction; Type: TABLE DATA; Schema: public; Owner: ut
+--
+
+COPY u_reaction (id, commentid, userid, reaction, flag, regitime) FROM stdin;
+3	9	6	2	1	2016-01-27 21:43:30.104
+5	4	6	1	1	2016-01-27 21:44:01.062
+6	12	6	1	1	2016-01-27 23:47:47.95
+7	2	6	1	1	2016-01-28 02:06:47.904
+8	3	6	1	1	2016-01-28 02:06:51.47
+9	7	6	1	1	2016-01-28 02:07:01.613
+2	5	6	1	1	2016-01-28 02:08:09.269
+10	6	6	1	1	2016-01-28 02:08:39.557
+11	10	6	1	1	2016-01-28 02:09:08.551
+4	8	6	2	1	2016-01-28 02:33:31.146
+1	1	6	1	1	2016-01-28 02:39:41.262
+12	6	3	1	1	2016-01-29 02:45:06.678
+\.
+
+
+--
+-- TOC entry 33 (OID 49065339)
+-- Name: repo_n1; Type: INDEX; Schema: public; Owner: ut
+--
+
+CREATE INDEX repo_n1 ON repo_n USING btree (cid, flag);
+
+
+--
+-- TOC entry 34 (OID 49065345)
+-- Name: repo_n2; Type: INDEX; Schema: public; Owner: ut
+--
+
+CREATE INDEX repo_n2 ON repo_n USING btree (qid, flag);
+
+
+--
+-- TOC entry 35 (OID 48841408)
+-- Name: u_category_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_category
+    ADD CONSTRAINT u_category_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 36 (OID 49063823)
+-- Name: u_view_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_view
+    ADD CONSTRAINT u_view_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 37 (OID 49065297)
+-- Name: u_index_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_index
+    ADD CONSTRAINT u_index_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 38 (OID 49524988)
+-- Name: u_ranking_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_ranking
+    ADD CONSTRAINT u_ranking_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 39 (OID 49525206)
+-- Name: u_activity_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_activity
+    ADD CONSTRAINT u_activity_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 40 (OID 49525224)
+-- Name: u_comment_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_comment
+    ADD CONSTRAINT u_comment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 41 (OID 49525238)
+-- Name: u_bookmark_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_bookmark
+    ADD CONSTRAINT u_bookmark_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 42 (OID 49525303)
+-- Name: u_reaction_pkey; Type: CONSTRAINT; Schema: public; Owner: ut
+--
+
+ALTER TABLE ONLY u_reaction
+    ADD CONSTRAINT u_reaction_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 25 (OID 48841403)
+-- Name: u_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_category_id_seq', 157, true);
+
+
+--
+-- TOC entry 26 (OID 49063815)
+-- Name: u_view_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_view_id_seq', 1, false);
+
+
+--
+-- TOC entry 27 (OID 49065289)
+-- Name: u_index_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_index_id_seq', 1, false);
+
+
+--
+-- TOC entry 28 (OID 49524983)
+-- Name: u_ranking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_ranking_id_seq', 1, false);
+
+
+--
+-- TOC entry 29 (OID 49525201)
+-- Name: u_activity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_activity_id_seq', 66, true);
+
+
+--
+-- TOC entry 30 (OID 49525216)
+-- Name: u_comment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_comment_id_seq', 15, true);
+
+
+--
+-- TOC entry 31 (OID 49525233)
+-- Name: u_bookmark_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_bookmark_id_seq', 31, true);
+
+
+--
+-- TOC entry 32 (OID 49525298)
+-- Name: u_reaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ut
+--
+
+SELECT pg_catalog.setval ('u_reaction_id_seq', 12, true);
+
+
