@@ -92,6 +92,111 @@ a {
     }
   }
 
+
+
+  .notice {
+    position: relative;
+    float: left;
+    margin-top: 14px;
+    margin-left: 15px;
+
+    @at-root {
+      &-icon {
+        @extend .sprite-common;
+        @include sprite( $common-icon-notice );
+      }
+
+      &-num {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        display: block;
+        width: 20px;
+        height: 20px;
+        padding-top: 4px;
+        line-height: 1;
+        background-color: #e14343;
+        border-radius: 100%;
+        color: #fff;
+        font-weight: bold;
+        font-size: fz(10);
+        text-align: center;
+      }
+
+      &-menu {
+        z-index: 9999;
+        // display: none;
+        position: absolute;
+        top: 57px;
+        left: -325px;
+
+        .dropMenu {
+          width: 360px;
+          @extend %dropMenu;
+        }
+      }
+    }
+
+    .info {
+      margin-top: 0;
+
+      @at-root {
+        &-heading {
+          float: left;
+          padding: 10px 15px;
+          font-weight: bold;
+          font-size: fz(12);
+        }
+
+        &-btn-readAll {
+          margin-bottom: 0;
+          padding: 10px 15px;
+          font-size: fz(12);
+        }
+
+        &-link {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          padding-left: 60px;
+        }
+
+        &-user-thumb {
+          left: 15px;
+          width: 35px;
+          height: 35px;
+
+          img {
+            width: 35px;
+          }
+        }
+
+        &-content {
+          font-size: fz(12);
+        }
+
+        &-date {
+          font-size: fz(10);
+        }
+      }
+
+      .btn-viewmore {
+        @at-root {
+          &-link {
+            display: block;
+            padding: 12px 0;
+            background-color: $bg-primary-color;
+            border-radius: 0 0 3px 3px;
+            font-weight: bold;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+  } //.notice
+
+
+
   .user {
     position: relative;
     float: left;
@@ -122,24 +227,8 @@ a {
           display: block;
           width: 35px;
           height: 35px;
-          background: url(/assets/images/common/header-icon-user.png) 0 0 no-repeat;
-        }
-
-        .user-notice {
-          position: absolute;
-          top: -5px;
-          right: -5px;
-          display: block;
-          width: 20px;
-          height: 20px;
-          padding-top: 4px;
-          line-height: 1;
-          background-color: #e14343;
-          border-radius: 100%;
-          color: #fff;
-          font-weight: bold;
-          font-size: fz(10);
-          text-align: center;
+          background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+          background-size: 35px;
         }
 
         .user-avatar {
@@ -153,7 +242,7 @@ a {
         }
 
         .user-menu {
-          display: block;
+          // display: block;
         }
       }
 
@@ -188,7 +277,7 @@ a {
         }
       }
     }
-  }
+  } //.user
 
 }
 
