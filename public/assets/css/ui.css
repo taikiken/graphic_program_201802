@@ -2660,20 +2660,20 @@ table tr.w200 > td {
   overflow: hidden;
   opacity: 0; }
 
-.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
-  background-image: url(/assets/images/sprite/sprite-footer.png); }
-
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
 
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup {
+.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
-
-.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
-  background-image: url(/assets/images/sprite/sprite-detail.png); }
 
 .comment-menu .dropMenu, .head-sec .notice-menu .dropMenu, .head-sec .user-menu .dropMenu {
   position: relative;
@@ -2940,20 +2940,20 @@ table tr.w200 > td {
     font-weight: bold;
     font-size: 172%; }
 
-.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
-  background-image: url(/assets/images/sprite/sprite-footer.png); }
-
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
 
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup {
+.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
-
-.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
-  background-image: url(/assets/images/sprite/sprite-detail.png); }
 
 .post-detail {
   margin-top: 30px; }
@@ -3042,20 +3042,20 @@ table tr.w200 > td {
       white-space: nowrap;
       outline: none; }
 
-.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
-  background-image: url(/assets/images/sprite/sprite-footer.png); }
-
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
 
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup {
+.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
-
-.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
-  background-image: url(/assets/images/sprite/sprite-detail.png); }
 
 .user-config {
   background-color: #000; }
@@ -3283,20 +3283,381 @@ table tr.w200 > td {
 .info-date {
   overflow: hidden; }
 
-.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
-  background-image: url(/assets/images/sprite/sprite-footer.png); }
+.signup {
+  width: 100%;
+  height: 100%;
+  background: #000 url(/assets/images/signup/bg.jpg) center center no-repeat;
+  background-size: cover; }
+
+.signup .body-sec {
+  margin-top: 40px;
+  margin-bottom: 56px;
+  background: none; }
+  .signup .body-sec:before {
+    background: none; }
+  .signup .body-sec-inner {
+    width: 600px;
+    padding-bottom: 40px;
+    border-radius: 3px;
+    background: none;
+    background-color: #fff; }
+
+.signup-header {
+  padding-top: 80px;
+  width: 600px;
+  margin: 0 auto; }
+  .signup-header .heading {
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    width: 170px;
+    height: 65px;
+    overflow: hidden;
+    font-size: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    outline: none;
+    margin: 0 auto; }
+  .signup-header .lead {
+    margin-top: 30px;
+    color: #fff;
+    font-size: 115%;
+    text-align: center; }
+
+.signup-heading {
+  position: relative;
+  padding: 60px 0;
+  border-bottom: 1px solid #ddd; }
+  .signup-heading h1, .signup-heading h2, .signup-heading h3, .signup-heading h4, .signup-heading h5, .signup-heading h6 {
+    font-size: 172%;
+    text-align: center; }
+  .signup-heading .btn {
+    position: absolute;
+    bottom: 22px;
+    width: 100%;
+    text-align: center; }
+
+.signup-step {
+  width: 520px;
+  margin: 0 auto;
+  padding-top: 40px; }
+  .signup-step-list {
+    letter-spacing: -0.4em;
+    background-color: #ccc;
+    border-radius: 3px; }
+  .signup-step-item {
+    position: relative;
+    display: inline-block;
+    width: 33.3%;
+    letter-spacing: normal; }
+    .signup-step-item:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -10px;
+      display: inline-block;
+      width: 10px;
+      height: 30px;
+      background: url(/assets/images/signup/step-bg.png) 0 0 no-repeat;
+      overflow: hidden;
+      font-size: 0;
+      text-indent: 100%;
+      white-space: nowrap;
+      outline: none; }
+    .signup-step-item span {
+      display: block;
+      line-height: 30px;
+      text-align: center; }
+    .signup-step-item.current {
+      background-color: #e1438b; }
+      .signup-step-item.current:after {
+        background-image: url(/assets/images/signup/step-bg_o.png); }
+      .signup-step-item.current span {
+        color: #fff;
+        font-weight: bold; }
+  .signup-step-step1, .signup-step-step2 {
+    background-color: #bbb; }
+  .signup-step-step1 {
+    z-index: 3;
+    border-radius: 3px 0 0 3px; }
+  .signup-step-step2 {
+    z-index: 2; }
+  .signup-step-step3 {
+    z-index: 1; }
+    .signup-step-step3:after {
+      display: none; }
+
+.signup-form input, .signup-form button, .signup-form textarea {
+  border: none;
+  border-radius: 0;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+
+.signup-form-mail, .signup-form-pw, .signup-form-name, .signup-form-job, .signup-form-submit {
+  display: block;
+  margin-top: 20px; }
+
+.signup-form-mail, .signup-form-pw, .signup-form-name, .signup-form-job {
+  border: 1px solid #ddd;
+  border-radius: 3px; }
+  .signup-form-mail:before, .signup-form-mail:after, .signup-form-pw:before, .signup-form-pw:after, .signup-form-name:before, .signup-form-name:after, .signup-form-job:before, .signup-form-job:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .signup-form-mail input, .signup-form-pw input, .signup-form-name input, .signup-form-job input {
+    width: 92%;
+    line-height: 50px;
+    vertical-align: middle; }
+  .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before {
+    position: relative;
+    top: 7px;
+    left: 5px;
+    float: left;
+    line-height: 0;
+    margin-right: 5px; }
+
+.signup-form-mail:before {
+  background-position: -36px -65px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.signup-form-pw:before {
+  background-position: -108px -65px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.signup-form-name:before {
+  background-position: -72px -65px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.signup-form-job:before {
+  background-position: 0px -65px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.signup-form-avatar {
+  margin-top: 40px; }
+  .signup-form-avatar-heading {
+    font-size: 115%;
+    text-align: center; }
+  .signup-form-avatar-dropArea {
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto 0;
+    background: url(/assets/images/signup/thumb-avatar.png) center center no-repeat; }
+
+.signup-form-submit {
+  text-align: center; }
+  .signup-form-submit input {
+    display: inline-block;
+    width: 250px;
+    line-height: 50px;
+    padding-right: 24px;
+    padding-left: 24px;
+    border-radius: 3px;
+    background-color: #e1438b;
+    color: #fff;
+    font-weight: bold;
+    text-align: center; }
+    .signup-form-submit input:hover {
+      opacity: 0.75;
+      -webkit-transition: opacity ease-out .4s;
+      transition: opacity ease-out .4s; }
+
+.signup-form .note {
+  margin-top: 30px;
+  font-size: 86%;
+  letter-spacing: normal;
+  text-align: center; }
+
+.register {
+  width: 520px;
+  margin: 0 auto; }
+  .register-sns {
+    margin-top: 40px; }
+    .register-sns-list:before, .register-sns-list:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .register-sns-item {
+      float: left; }
+      .register-sns-item:nth-child(2) {
+        float: right; }
+    .register-sns-link {
+      display: block;
+      width: 250px;
+      line-height: 50px;
+      padding: 0 18px;
+      border-radius: 3px; }
+      .register-sns-link:link, .register-sns-link:visited, .register-sns-link:hover, .register-sns-link:active {
+        color: #fff;
+        text-decoration: none; }
+      .register-sns-link:hover {
+        color: #fff;
+        text-decoration: none; }
+      .register-sns-link span {
+        font-weight: bold;
+        line-height: 24px; }
+        .register-sns-link span:before {
+          content: '';
+          position: relative;
+          top: 5px;
+          margin-right: 20px;
+          overflow: hidden;
+          font-size: 0;
+          text-indent: 100%;
+          white-space: nowrap;
+          outline: none; }
+      .register-sns-link:hover {
+        opacity: 0.75;
+        -webkit-transition: opacity ease-out .4s;
+        transition: opacity ease-out .4s; }
+    .register-sns-tw {
+      background-color: #55acee; }
+      .register-sns-tw span:before {
+        background-position: 0px -101px;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        display: inline-block;
+        width: 24px;
+        height: 24px; }
+    .register-sns-fb {
+      background-color: #3b579d; }
+      .register-sns-fb span:before {
+        background-position: -144px -65px;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        display: inline-block;
+        width: 24px;
+        height: 24px; }
+  .register-or {
+    margin-top: 30px;
+    background: url(/assets/images/signup/bg-or.png) center center no-repeat;
+    font-weight: bold;
+    text-align: center; }
+  .register-mail {
+    width: 100%;
+    margin-top: 30px; }
+    .register-mail:before, .register-mail:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .register-mail .signup-form-mail,
+    .register-mail .signup-form-submit {
+      margin-top: 0; }
+    .register-mail .signup-form-mail {
+      float: left;
+      width: 61.5384615385%; }
+      .register-mail .signup-form-mail input {
+        width: 86%; }
+    .register-mail .signup-form-submit {
+      float: right;
+      width: 36.5384615385%; }
+      .register-mail .signup-form-submit input {
+        width: 100%; }
+    .register-mail p {
+      clear: both;
+      padding-top: 30px; }
+  .login-email {
+    margin-top: 30px; }
+    .login-email .signup-form-mail input,
+    .login-email .signup-form-pw input {
+      width: 92%; }
+
+.basic-setting {
+  width: 520px;
+  margin: 40px auto 0; }
+  .basic-setting .signup-form-submit {
+    margin-top: 40px; }
+
+.interest-setting {
+  width: 520px;
+  margin: 40px auto 0; }
+  .interest-setting .signup-form-interest-list:before, .interest-setting .signup-form-interest-list:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .interest-setting .signup-form-interest-item {
+    float: left;
+    width: 160px;
+    height: 90px;
+    margin: 0 0 20px 20px;
+    vertical-align: top; }
+    .interest-setting .signup-form-interest-item:nth-child(3n+1) {
+      margin-left: 0; }
+    .interest-setting .signup-form-interest-item input {
+      display: none; }
+  .interest-setting .signup-form-interest-title {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    background-color: #eee; }
+    .interest-setting .signup-form-interest-title span {
+      display: block;
+      padding: 20px 5px 32px;
+      background: url(/assets/images/signup/icon-check.png) center bottom no-repeat;
+      font-weight: bold;
+      text-align: center; }
+  .interest-setting .signup-form-interest-item input:checked + .signup-form-interest-title {
+    background-color: #e1438b; }
+    .interest-setting .signup-form-interest-item input:checked + .signup-form-interest-title span {
+      color: #fff;
+      background-image: url(/assets/images/signup/icon-check_o.png); }
+  .interest-setting .signup-form-submit {
+    margin-top: 20px; }
+
+.pw-reset {
+  width: 520px;
+  margin: 0 auto; }
+  .pw-reset .btn-home {
+    width: 250px;
+    margin: 40px auto 0; }
+    .pw-reset .btn-home a {
+      display: block;
+      line-height: 50px;
+      padding-right: 24px;
+      padding-left: 24px;
+      border-radius: 3px;
+      background-color: #e1438b;
+      color: #fff;
+      font-weight: bold;
+      text-align: center; }
 
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup {
+.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
-
-.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
-  background-image: url(/assets/images/sprite/sprite-detail.png); }
 
 .board-large:before, .board-large:after {
   content: "";
@@ -3550,20 +3911,20 @@ table tr.w200 > td {
     white-space: nowrap;
     outline: none; }
 
-.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
-  background-image: url(/assets/images/sprite/sprite-footer.png); }
-
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
 
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup {
+.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
-
-.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
-  background-image: url(/assets/images/sprite/sprite-detail.png); }
 
 .comment-heading {
   margin-top: 30px;
@@ -3859,20 +4220,24 @@ table tr.w200 > td {
 /*
   sprite
 * *********************************** */
-.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
-  background-image: url(/assets/images/sprite/sprite-footer.png); }
-
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
 
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup {
+.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
 
-.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
-  background-image: url(/assets/images/sprite/sprite-detail.png); }
+html, body {
+  width: 100%;
+  min-height: 100%; }
 
 a:link, a:visited, a:hover, a:active {
   color: #e1438b;
@@ -3918,7 +4283,8 @@ a:hover {
     clear: both; }
   .head-sec .head-search input {
     border: none;
-    background: transparent; }
+    background: transparent;
+    outline: none; }
   .head-sec .head-search input[type="text"] {
     float: left;
     width: 250px;
@@ -3968,6 +4334,7 @@ a:hover {
     text-align: center; }
   .head-sec .notice-menu {
     z-index: 9999;
+    display: none;
     position: absolute;
     top: 57px;
     left: -325px; }
@@ -4233,7 +4600,7 @@ a:hover {
       width: 60px;
       height: 25px; }
 
-.foot-sec .copyright {
+.copyright {
   padding: 24px 0 28px;
   color: #666;
   font-size: 72%;

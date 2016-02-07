@@ -1,0 +1,516 @@
+@import "../../../../scss/asset";
+
+// Signup
+//
+// design module signup
+//
+// Styleguide 2.7.0
+
+// signup
+// bodyの背景に画像
+.signup {
+  width: 100%;
+  height: 100%;
+  background: #000 url(/assets/images/signup/bg.jpg) center center no-repeat;
+  background-size: cover;
+}
+
+
+
+
+
+// body-sec
+// .body-secをオーバーライド
+.signup {
+  .body-sec {
+    margin-top: 40px;
+    margin-bottom: 56px;
+    background: none;
+
+    &:before {
+      background: none;
+    }
+
+    @at-root {
+      &-inner {
+        width: 600px;
+        padding-bottom: 40px;
+        border-radius: 3px;
+        background: none;
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+
+
+
+
+// signup-header
+.signup-header {
+  padding-top: 80px;
+  width: 600px;
+  margin: 0 auto;
+
+  .heading {
+    @extend .sprite-signup;
+    @include sprite( $signup-logo );
+    @include hide-text;
+    margin: 0 auto;
+  }
+
+  .lead {
+    margin-top: 30px;
+    color: #fff;
+    font-size: fz(16);
+    text-align: center;
+  }
+}
+
+
+
+
+
+// signup-heading
+.signup-heading {
+  position: relative;
+  padding: 60px 0;
+  border-bottom: 1px solid $border-primary-color;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: fz(24);
+    text-align: center;
+  }
+
+  .btn {
+    position: absolute;
+    bottom: 22px;
+    width: 100%;
+    text-align: center;
+  }
+} //.signup-heading
+
+
+
+
+// signup-step
+.signup-step {
+  width: 520px;
+  margin: 0 auto;
+  padding-top: 40px;
+
+  @at-root {
+    &-list {
+      letter-spacing: ls( inline-block );
+      background-color: #ccc;
+      border-radius: 3px;
+    }
+
+    &-item {
+      position: relative;
+      display: inline-block;
+      width: 33.3%;
+      letter-spacing: normal;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -10px;
+        display: inline-block;
+        width: 10px;
+        height: 30px;
+        background: url(/assets/images/signup/step-bg.png) 0 0 no-repeat;
+        @include hide-text;
+      }
+
+      span {
+        display: block;
+        line-height: 30px;
+        text-align: center;
+      }
+
+      &.current {
+        background-color: $highlight-color;
+
+        &:after {
+          background-image: url(/assets/images/signup/step-bg_o.png);
+        }
+
+        span {
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+    }
+
+    &-step1,
+    &-step2 {
+      background-color: #bbb;
+    }
+
+    &-step1 {
+      z-index: 3;
+      border-radius: 3px 0 0 3px;
+    }
+
+    &-step2 {
+      z-index: 2;
+    }
+
+    &-step3 {
+      z-index: 1;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+} //.signup-step
+
+
+
+
+
+// signup-form
+.signup-form {
+  input, button, textarea {
+    border: none;
+    border-radius: 0;
+    background: none;
+    outline: none;
+    appearance: none;
+  }
+
+  @at-root {
+    &-mail, &-pw, &-name, &-job, &-submit {
+      display: block;
+      margin-top: 20px;
+    }
+
+    &-mail, &-pw, &-name, &-job {
+      @include clearfix;
+      border: 1px solid $border-primary-color;
+      border-radius: 3px;
+
+      input {
+        width: 92%;
+        line-height: 50px;
+        vertical-align: middle;
+      }
+
+      &:before {
+        position: relative;
+        top: 7px;
+        left: 5px;
+        float: left;
+        line-height: 0;
+        margin-right: 5px;
+        @extend .sprite-signup;
+      }
+
+    }
+
+    &-mail {
+      &:before {
+        @include sprite( $signup-icon-mail, inline-block );
+      }
+    }
+
+    &-pw {
+      &:before {
+        @include sprite( $signup-icon-pw, inline-block );
+      }
+    }
+
+    &-name {
+      &:before {
+        @include sprite( $signup-icon-name, inline-block );
+      }
+    }
+
+    &-job {
+      &:before {
+        @include sprite( $signup-icon-job, inline-block );
+      }
+    }
+
+    &-avatar {
+      margin-top: 40px;
+
+      &-heading {
+        font-size: fz(16);
+        text-align: center;
+      }
+
+      &-dropArea {
+        cursor: pointer;
+        width: 120px;
+        height: 120px;
+        margin: 20px auto 0;
+        background: url(/assets/images/signup/thumb-avatar.png) center center no-repeat;
+      }
+    }
+
+    &-submit {
+      text-align: center;
+
+      input {
+        display: inline-block;
+        width: 250px;
+        line-height: 50px;
+        padding-right: 24px;
+        padding-left: 24px;
+        border-radius: 3px;
+        background-color: $highlight-color;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+
+        &:hover {
+          @include hover-opacity;
+        }
+      }
+    }
+  }
+
+  .note {
+    margin-top: 30px;
+    font-size: fz(12);
+    letter-spacing: normal;
+    text-align: center;
+  }
+} //.signup-form
+
+
+
+
+
+// register
+.register {
+  width: 520px;
+  margin: 0 auto;
+
+  @at-root {
+    &-sns {
+      margin-top: 40px;
+
+      &-list {
+        @include clearfix;
+      }
+
+      &-item {
+        float: left;
+
+        &:nth-child(2) {
+          float: right;
+        }
+      }
+
+      &-link {
+        @include link-decoration(#fff, #fff, none, none);
+        display: block;
+        width: 250px;
+        line-height: 50px;
+        padding: 0 18px;
+        border-radius: 3px;
+
+        span {
+          font-weight: bold;
+          line-height: 24px;
+
+          &:before {
+            content: '';
+            position: relative;
+            top: 5px;
+            margin-right: 20px;
+            @extend .sprite-signup;
+            @include hide-text;
+          }
+        }
+
+        &:hover {
+          @include hover-opacity;
+        }
+      }
+
+      &-tw {
+        background-color: #55acee;
+
+        span:before {
+          // top: 2px;
+          @include sprite( $signup-icon-tw, inline-block );
+        }
+      }
+
+      &-fb {
+        background-color: #3b579d;
+
+        span:before {
+          // top: 5px;
+          @include sprite( $signup-icon-fb, inline-block );
+        }
+      }
+    } //.register-sns
+
+    &-or {
+      margin-top: 30px;
+      background: url(/assets/images/signup/bg-or.png) center center no-repeat;
+      font-weight: bold;
+      text-align: center;
+    } //.register-or
+
+    &-mail {
+      @include clearfix;
+      width: 100%;
+      margin-top: 30px;
+
+      .signup-form-mail,
+      .signup-form-submit {
+        margin-top: 0;
+      }
+
+      .signup-form-mail {
+        float: left;
+        width: perCalc(320, 520);
+
+        input {
+          width: 86%;
+        }
+      }
+
+      .signup-form-submit {
+        float: right;
+        width: perCalc(190, 520);
+
+        input {
+          width: 100%;
+        }
+      }
+
+      p {
+        clear: both;
+        padding-top: 30px;
+      }
+    }
+
+    .login-email {
+      margin-top: 30px;
+
+      .signup-form-mail,
+      .signup-form-pw {
+        input {
+          width: 92%;
+        }
+      }
+
+    }
+  }
+} //.register
+
+
+
+
+// basic-setting
+.basic-setting {
+  width: 520px;
+  margin: 40px auto 0;
+
+  .signup-form-submit {
+    margin-top: 40px;
+  }
+} //.basic-setting
+
+
+
+
+// interest-setting
+.interest-setting {
+  width: 520px;
+  margin: 40px auto 0;
+
+  .signup-form-interest {
+    @at-root {
+      &-list {
+        @include clearfix;
+      }
+
+      &-item {
+        float: left;
+        width: 160px;
+        height: 90px;
+        margin: 0 0 20px 20px;
+        vertical-align: top;
+
+        &:nth-child(3n+1) {
+          margin-left: 0;
+        }
+
+        input {
+          display: none;
+        }
+      }
+
+      &-title {
+        cursor: pointer;
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        background-color: #eee;
+
+        span {
+          display: block;
+          padding: 20px 5px 32px;
+          background: url(/assets/images/signup/icon-check.png) center bottom no-repeat;
+          font-weight: bold;
+          text-align: center;
+        }
+      }
+
+      &-item {
+        input:checked + .signup-form-interest-title {
+          background-color: $highlight-color;
+
+          span {
+            color: #fff;
+            background-image: url(/assets/images/signup/icon-check_o.png);
+          }
+        }
+      }
+    } //at-root
+  }
+
+  .signup-form-submit {
+    margin-top: 20px;
+  }
+} //.interest-setting
+
+
+
+
+
+// pw-reset
+.pw-reset {
+  width: 520px;
+  margin: 0 auto;
+
+  .btn-home {
+    width: 250px;
+    margin: 40px auto 0;
+
+    a {
+      display: block;
+      line-height: 50px;
+      padding-right: 24px;
+      padding-left: 24px;
+      border-radius: 3px;
+      background-color: $highlight-color;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+} //.pw-reset
