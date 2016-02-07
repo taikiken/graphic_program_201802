@@ -100,6 +100,7 @@ import {ViewHeaderUser} from './view/header/ViewHeaderUser';
 
 import {ViewArchive} from './view/ViewArchive';
 import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
+import {ViewArchiveMasonryInfinite} from './view/ViewArchiveMasonryInfinite';
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
 import {ViewTitle} from './view/ViewTitle';
@@ -206,6 +207,7 @@ var UT = {
     View: View,
     ViewArchive: ViewArchive,
     ViewArchiveMasonry: ViewArchiveMasonry,
+    ViewArchiveMasonryInfinite: ViewArchiveMasonryInfinite,
     ViewCategory: ViewCategory,
     ViewSingle: ViewSingle,
     ViewTitle: ViewTitle,

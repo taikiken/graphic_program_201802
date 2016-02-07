@@ -15,11 +15,6 @@
  * Api query option を key ごとに管理します
  */
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Query = undefined;
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -27,6 +22,11 @@ var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Query = undefined;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

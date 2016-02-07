@@ -11,7 +11,7 @@
  */
 'use strict';
 
-// util
+// event
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -36,7 +36,9 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ViewArchiveMasonry = undefined;
+exports.ViewArchiveMasonryInfinite = undefined;
+
+var _EventDispatcher = require('../event/EventDispatcher');
 
 var _Scroll = require('../util/Scroll');
 
@@ -59,6 +61,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // React
 
 // dae
+
+// util
 var React = self.React;
 // action
 // import {Headline} from '../action/home/Headline';
@@ -74,15 +78,19 @@ var ReactDOM = self.ReactDOM;
 var imagesLoaded = self.imagesLoaded;
 var Isotope = self.Isotope;
 
+var UPDATE_LIST = 'updateList';
+
 /**
  * archive 一覧を isotope で
  */
 
-var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
-  (0, _inherits3.default)(ViewArchiveMasonry, _View);
+var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (_View) {
+  (0, _inherits3.default)(ViewArchiveMasonryInfinite, _View);
 
   /**
-   * archive 一覧標示後 isotope で位置調整します
+   * <p>archive 一覧標示後 isotope で位置調整します<br>
+   * + infinite scroll を実装します
+   * </p>
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
@@ -90,15 +98,15 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
    * @param {boolean} [useMasonry=true] isotope を行うかの
    */
 
-  function ViewArchiveMasonry(element, moreElement) {
+  function ViewArchiveMasonryInfinite(element, moreElement) {
     var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
     var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
-    (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
+    (0, _classCallCheck3.default)(this, ViewArchiveMasonryInfinite);
 
     option = _Safety.Safety.object(option);
 
-    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
+    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonryInfinite).call(this, element, option));
 
     if (typeof ActionClass === 'function') {
 
@@ -113,6 +121,10 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
     _this2._articles = [];
     _this2._useMasonry = !!useMasonry;
     _this2._top = 0;
+    _this2._rendered = null;
+    _this2._eventDispatcher = new _EventDispatcher.EventDispatcher();
+    _this2._count = 0;
+    _this2._request = null;
 
     return _this2;
   }
@@ -124,7 +136,7 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
    * @return {Element|*} more button root element を返します
    */
 
-  (0, _createClass3.default)(ViewArchiveMasonry, [{
+  (0, _createClass3.default)(ViewArchiveMasonryInfinite, [{
     key: 'start',
 
     // ---------------------------------------------------
@@ -164,6 +176,7 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
           // this.showError( error.message );
         } else {
 
+            this._request = result.request;
             this.render(articles);
           }
     }
@@ -208,6 +221,16 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
       // ---
       // Masonry flag
       var useMasonry = this._useMasonry;
+
+      // event
+      var eventDispatcher = this._eventDispatcher;
+
+      // count
+      ++this._count;
+      var countNum = this._count;
+
+      // request
+      var request = this._request;
 
       // 既存データ用のglobal配列
       var articlesList = this._articles;
@@ -633,94 +656,142 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
             img: null,
             route: null,
             nodes: null,
-            arranged: 'prepare'
+            arranged: 'prepare',
+            list: this.props.list
           };
         },
         render: function render() {
 
-          var list = this.props.list;
+          console.log('****************************************** render');
+
+          //let list = this.props.list;
 
           // dom出力する
           return React.createElement(
             'div',
-            { className: this.state.arranged, ref: 'boardRout' },
-            list.map(function (dae, i) {
+            { className: this.state.arranged },
+            React.createElement(
+              'div',
+              { ref: 'boardRout' },
 
-              //let dae = new ArticleDae( article );
-              //articlesList.push( dae );
+              // loop start
+              this.state.list.map(function (dae, i) {
 
-              var thumbnail = undefined;
-              var caption = undefined;
-              if (dae.mediaType === 'image') {
-                thumbnail = dae.media.images.medium;
-                caption = dae.media.images.caption;
-              } else {
-                thumbnail = dae.media.video.thumbnail;
-                caption = dae.media.video.caption;
-              }
+                //let dae = new ArticleDae( article );
+                //articlesList.push( dae );
 
-              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
+                var thumbnail = undefined;
+                var caption = undefined;
+                if (dae.mediaType === 'image') {
+                  thumbnail = dae.media.images.medium;
+                  caption = dae.media.images.caption;
+                } else {
+                  thumbnail = dae.media.video.thumbnail;
+                  caption = dae.media.video.caption;
+                }
 
-              var commentsPopular = dae.commentsPopular;
-              var figureTag = undefined;
-              var commentsTotal = dae.commentsCount;
+                thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
 
-              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
+                var commentsPopular = dae.commentsPopular;
+                var figureTag = undefined;
+                var commentsTotal = dae.commentsCount;
 
-              if (dae.mediaType === 'image') {
-                // type: image
-                figureTag = React.createElement(
-                  'figure',
-                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-                  React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-                );
-              } else {
-                // type: video
-                figureTag = React.createElement(
-                  'figure',
-                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
-                  React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-                );
-              }
+                console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
 
-              // unique key(React)にarticle id(number)記事Idを使用します
-              return React.createElement(
-                'div',
-                { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
-                React.createElement(
-                  'a',
-                  { className: 'post', href: dae.url },
-                  figureTag,
+                if (dae.mediaType === 'image') {
+                  // type: image
+                  figureTag = React.createElement(
+                    'figure',
+                    { className: 'post-thumb post-thumb-' + dae.mediaType },
+                    React.createElement('img', { src: thumbnail, alt: caption || dae.title })
+                  );
+                } else {
+                  // type: video
+                  figureTag = React.createElement(
+                    'figure',
+                    { className: 'post-thumb post-thumb-' + dae.mediaType },
+                    React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
+                    React.createElement('img', { src: thumbnail, alt: caption || dae.title })
+                  );
+                }
+
+                // unique key(React)にarticle id(number)記事Idを使用します
+                return React.createElement(
+                  'div',
+                  { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
                   React.createElement(
-                    'div',
-                    { className: 'post-data' },
-                    React.createElement(
-                      'p',
-                      { className: 'post-category post-category-' + dae.category.slug },
-                      dae.category.label
-                    ),
-                    React.createElement(
-                      'h3',
-                      { className: 'post-heading' },
-                      dae.title
-                    ),
-                    React.createElement(
-                      'p',
-                      { className: 'post-date' },
-                      dae.formatDate
-                    ),
+                    'a',
+                    { className: 'post', href: dae.url },
+                    figureTag,
                     React.createElement(
                       'div',
-                      { className: 'post-excerpt-text' },
-                      dae.description
+                      { className: 'post-data' },
+                      React.createElement(
+                        'p',
+                        { className: 'post-category post-category-' + dae.category.slug },
+                        dae.category.label
+                      ),
+                      React.createElement(
+                        'h3',
+                        { className: 'post-heading' },
+                        dae.title
+                      ),
+                      React.createElement(
+                        'p',
+                        { className: 'post-date' },
+                        dae.formatDate
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: 'post-excerpt-text' },
+                        dae.description
+                      )
                     )
-                  )
-                ),
-                React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
-              );
-            })
+                  ),
+                  React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
+                );
+                // loop end
+              })
+            )
           );
+        },
+        componentDidUpdate: function componentDidUpdate() {
+          console.log('+++++++++ componentDidUpdate');
+
+          // hasNext を元に More View button の表示非表示を決める
+          moreButton(action.hasNext());
+
+          // isotope 対象 children
+          var childNodes = this.refs.boardRout.childNodes;
+          var elements = [];
+          // 追加された Element を取得するための start / end point
+          // start は request offset
+          var i = _this._request.offset;
+          // end は request offset へ request length を加算したものと
+          // children length の小さい方
+          var limit = Math.min(i + _this._request.length, childNodes.length);
+          console.log('start ', i);
+          console.log('end ', limit);
+
+          // start / end から 対象 children を選別
+          for (; i < limit; i++) {
+            elements.push(childNodes[i]);
+          }
+          // 追加とレイアウト
+          this.isotope.appended(elements);
+          // reload
+          // http://isotope.metafizzy.co/methods.html#reloaditems
+          this.isotope.reloadItems();
+          // isotope 再度レイアウト
+          this.isotope.layout();
+        },
+        shouldComponentUpdate: function shouldComponentUpdate() {
+          console.log('------------+++++++++++++ shouldComponentUpdate ------------');
+          // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
+          // isotope がセットアップすると呼び出されるので
+          // 常にfalseを返し無視させます
+          //return false;
+          return true;
         },
         componentDidMount: function componentDidMount() {
           // after mount
@@ -733,13 +804,8 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
 
             this.shouldMasonry();
           }
-        },
-        shouldComponentUpdate: function shouldComponentUpdate() {
-          console.log('------------+++++++++++++ shouldComponentUpdate ------------');
-          // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
-          // isotope がセットアップすると呼び出されるので
-          // 常にfalseを返し無視させます
-          return false;
+
+          eventDispatcher.on(UPDATE_LIST, this.updateList);
         },
         componentWillUnmount: function componentWillUnmount() {
           console.log('************ componentWillUnmount ************');
@@ -758,7 +824,8 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
           // img {imagesLoaded} always event handler unbind するためにインスタンスを state に保存します
           // route {Element} isotope 基準 element
           // nodes {ElementList} isotope 対象 childNodes, 現在は使用していません, ひょっとすると将来使うかも...
-          this.setState({ img: img, nodes: childNodes, route: boardRout });
+          //this.setState( { img: img, nodes: childNodes, route: boardRout } );
+          this.img = img;
 
           // 画像読み込む完了 event へ bind します
           img.on('always', this.onImages);
@@ -766,14 +833,14 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
         // 画像読み込む完了 event handler
         onImages: function onImages() {
 
-          var img = this.state.img;
-          var route = this.state.route;
+          //let img = this.state.img;
+          var img = this.img;
 
           // event から event handler を unbind します
           img.off('always', this.onImages);
 
           // isotope を行います
-          var isotope = new Isotope(route, {
+          var isotope = new Isotope(this.refs.boardRout, {
             itemSelector: '.board-item',
             masonry: {
               gutter: 30
@@ -783,11 +850,18 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
           // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
           // state は変更されている
           // element の class が変わらない
-          this.setState({ isotope: isotope, arranged: 'arranged' });
+          //this.setState( { isotope: isotope, arranged: 'arranged' } );
+          this.isotope = isotope;
           console.log('%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top);
           // render 時に 0 位置に戻るので
           // click 時の pageOffsetY へ移動させる
           _Scroll.Scroll.y = _this._top;
+        },
+        //updateList: function( event ) {
+        updateList: function updateList(list) {
+          //let list = event.list;
+          console.log('%%%%%%%%%%%%%%%%%%%%% updateList', event);
+          this.setState({ list: list });
         }
       }); // ArticleDom
 
@@ -800,8 +874,15 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
         articlesList.push(dae);
       });
 
-      // dom 生成
-      ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
+      if (this._rendered === null) {
+
+        // dom 生成
+        this._rendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
+      } else {
+
+        //eventDispatcher.dispatch( { type: UPDATE_LIST, list: articlesList } );
+        this._rendered.updateList(articlesList);
+      }
     }
   }, {
     key: 'moreElement',
@@ -809,5 +890,5 @@ var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
       return this._moreElement;
     }
   }]);
-  return ViewArchiveMasonry;
+  return ViewArchiveMasonryInfinite;
 }(_View2.View);
