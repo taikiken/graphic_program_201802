@@ -40,19 +40,99 @@ var _EventDispatcher2 = require('../event/EventDispatcher');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _symbol = null;
+var _instance = null;
+
+/**
+ * scroll に関する処理
+ */
+
 var Scroll = exports.Scroll = function (_EventDispatcher) {
   (0, _inherits3.default)(Scroll, _EventDispatcher);
 
-  function Scroll() {
-    (0, _classCallCheck3.default)(this, Scroll);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Scroll).call(this));
-  }
   /**
-   * scroll top 位置
-   * @return {Number} scroll top 位置を返します
+   * scroll に関する singleton class
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @returns {Scroll}
    */
 
-  (0, _createClass3.default)(Scroll, null, [{
+  function Scroll(target) {
+    var _ret;
+
+    (0, _classCallCheck3.default)(this, Scroll);
+
+    if (_symbol !== target) {
+
+      throw new Error('Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()');
+    }
+
+    if (_instance === null) {
+      var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Scroll).call(this));
+
+      _instance = _this;
+      _this.boundScroll = _this.onScroll.bind(_this);
+    }
+
+    return _ret = _instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+  // ---------------------------------------------------
+  //  method
+  // ---------------------------------------------------
+
+  (0, _createClass3.default)(Scroll, [{
+    key: 'start',
+    value: function start() {
+      window.addEventListener('scroll', this.boundScroll, false);
+    }
+  }, {
+    key: 'stop',
+    value: function stop() {
+      window.removeEventListener('scroll', this.boundScroll);
+    }
+  }, {
+    key: 'onScroll',
+    value: function onScroll(event) {
+      this.dispatch({ type: Scroll.SCROLL, originalEvent: event, y: Scroll.y });
+    }
+    // ---------------------------------------------------
+    //  static GETTER / SETTER
+    // ---------------------------------------------------
+
+  }], [{
+    key: 'factory',
+
+    /*
+      motion( top:Number, duration:Number = 0.5, easing:Function = null ):void {
+    
+      }
+      */
+    // ---------------------------------------------------
+    //  static method
+    // ---------------------------------------------------
+    /**
+     * instance を生成します
+     * @return {Scroll} Scroll instance を返します
+     */
+    value: function factory() {
+
+      if (_instance === null) {
+
+        _instance = new Router(_symbol);
+      }
+
+      return _instance;
+    }
+  }, {
+    key: 'SCROLL',
+    get: function get() {
+      return 'scroll';
+    }
+    /**
+     * scroll top 位置
+     * @return {Number} scroll top 位置を返します
+     */
+
+  }, {
     key: 'y',
     get: function get() {
       // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
@@ -67,12 +147,6 @@ var Scroll = exports.Scroll = function (_EventDispatcher) {
     set: function set(top) {
       window.scrollTo(0, top);
     }
-    /*
-      motion( top:Number, duration:Number = 0.5, easing:Function = null ):void {
-    
-      }
-      */
-
   }]);
   return Scroll;
 }(_EventDispatcher2.EventDispatcher);

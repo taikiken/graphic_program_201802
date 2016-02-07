@@ -191,7 +191,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-08 01:05:57
+	 * @date 2016-02-08 02:47:26
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -4530,7 +4530,7 @@
 	     * let data = Form.element( document.querySelector("form") )
 	     *
 	     * @param {Element} formElement form element
-	     * @return {FormData} elemet から FormData を作成し返します
+	     * @return {FormData} element から FormData を作成し返します
 	     */
 
 	  }, {
@@ -13190,19 +13190,99 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var _symbol = null;
+	var _instance = null;
+
+	/**
+	 * scroll に関する処理
+	 */
+
 	var Scroll = exports.Scroll = function (_EventDispatcher) {
 	  (0, _inherits3.default)(Scroll, _EventDispatcher);
 
-	  function Scroll() {
-	    (0, _classCallCheck3.default)(this, Scroll);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Scroll).call(this));
-	  }
 	  /**
-	   * scroll top 位置
-	   * @return {Number} scroll top 位置を返します
+	   * scroll に関する singleton class
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   * @returns {Scroll}
 	   */
 
-	  (0, _createClass3.default)(Scroll, null, [{
+	  function Scroll(target) {
+	    var _ret;
+
+	    (0, _classCallCheck3.default)(this, Scroll);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()');
+	    }
+
+	    if (_instance === null) {
+	      var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Scroll).call(this));
+
+	      _instance = _this;
+	      _this.boundScroll = _this.onScroll.bind(_this);
+	    }
+
+	    return _ret = _instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+	  // ---------------------------------------------------
+	  //  method
+	  // ---------------------------------------------------
+
+	  (0, _createClass3.default)(Scroll, [{
+	    key: 'start',
+	    value: function start() {
+	      window.addEventListener('scroll', this.boundScroll, false);
+	    }
+	  }, {
+	    key: 'stop',
+	    value: function stop() {
+	      window.removeEventListener('scroll', this.boundScroll);
+	    }
+	  }, {
+	    key: 'onScroll',
+	    value: function onScroll(event) {
+	      this.dispatch({ type: Scroll.SCROLL, originalEvent: event, y: Scroll.y });
+	    }
+	    // ---------------------------------------------------
+	    //  static GETTER / SETTER
+	    // ---------------------------------------------------
+
+	  }], [{
+	    key: 'factory',
+
+	    /*
+	      motion( top:Number, duration:Number = 0.5, easing:Function = null ):void {
+	    
+	      }
+	      */
+	    // ---------------------------------------------------
+	    //  static method
+	    // ---------------------------------------------------
+	    /**
+	     * instance を生成します
+	     * @return {Scroll} Scroll instance を返します
+	     */
+	    value: function factory() {
+
+	      if (_instance === null) {
+
+	        _instance = new Router(_symbol);
+	      }
+
+	      return _instance;
+	    }
+	  }, {
+	    key: 'SCROLL',
+	    get: function get() {
+	      return 'scroll';
+	    }
+	    /**
+	     * scroll top 位置
+	     * @return {Number} scroll top 位置を返します
+	     */
+
+	  }, {
 	    key: 'y',
 	    get: function get() {
 	      // https://developer.mozilla.org/ja/docs/Web/API/Window/scrollY
@@ -13217,12 +13297,6 @@
 	    set: function set(top) {
 	      window.scrollTo(0, top);
 	    }
-	    /*
-	      motion( top:Number, duration:Number = 0.5, easing:Function = null ):void {
-	    
-	      }
-	      */
-
 	  }]);
 	  return Scroll;
 	}(_EventDispatcher2.EventDispatcher);
@@ -13976,6 +14050,7 @@
 	            )
 	          );
 	        },
+	        // state 変更し dom が更新された後に呼び出される delegate
 	        componentDidUpdate: function componentDidUpdate() {
 	          console.log('+++++++++ componentDidUpdate');
 
@@ -13998,14 +14073,15 @@
 	          for (; i < limit; i++) {
 	            elements.push(childNodes[i]);
 	          }
-	          // 追加とレイアウト
-	          this.isotope.appended(elements);
-	          // reload
-	          // http://isotope.metafizzy.co/methods.html#reloaditems
-	          this.isotope.reloadItems();
-	          // isotope 再度レイアウト
-	          this.isotope.layout();
+
+	          this.elements = elements;
+
+	          var img = imagesLoaded(elements);
+	          // 画像読み込む完了 event へ bind します
+	          img.on('always', this.appendImages);
+	          this.img = img;
 	        },
+	        // state 変更時に呼び出される delegate
 	        shouldComponentUpdate: function shouldComponentUpdate() {
 	          console.log('------------+++++++++++++ shouldComponentUpdate ------------');
 	          // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
@@ -14013,9 +14089,10 @@
 	          // 常にfalseを返し無視させます
 	          //return false;
 
-	          // list を state update で更新するので true にする
+	          // state update で更新するので true にする, React 内部更新メソッドが実行される
 	          return true;
 	        },
+	        // dom が表示された後に1度だけ呼び出される delegate
 	        componentDidMount: function componentDidMount() {
 	          // after mount
 	          _this.executeSafely(_View2.View.DID_MOUNT);
@@ -14028,13 +14105,17 @@
 	            this.shouldMasonry();
 	          }
 	        },
+	        // dom が削除される前に呼び出される delegate
 	        componentWillUnmount: function componentWillUnmount() {
 	          console.log('************ componentWillUnmount ************');
 	          // unmount 時に isotope を破棄します
-	          this.state.isotope.destroy();
+	          this.isotope.destroy();
 	        },
+	        // -----------------------------------------------------
+	        // 以降 custom
+	        // isotope 前準備
 	        shouldMasonry: function shouldMasonry() {
-	          // isotope を実行します
+	          // isotope 前準備を実行します
 	          var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
 	          var childNodes = boardRout.childNodes;
 	          console.log('shouldMasonry', boardRout, childNodes);
@@ -14051,7 +14132,7 @@
 	          // 画像読み込む完了 event へ bind します
 	          img.on('always', this.onImages);
 	        },
-	        // 画像読み込む完了 event handler
+	        // 画像読み込む完了 event handler, isotope を実行
 	        onImages: function onImages() {
 
 	          //let img = this.state.img;
@@ -14086,11 +14167,28 @@
 	        updateList: function updateList(list) {
 	          //let list = event.list;
 	          console.log('%%%%%%%%%%%%%%%%%%%%% updateList', event);
+	          // state を変更し appendChild + isotope を行う
 	          this.setState({ list: list });
+	        },
+	        appendImages: function appendImages() {
+
+	          console.log('++++++++++++++++++++ appendImages');
+
+	          // event から event handler を unbind します
+	          this.img.off('always', this.appendImages);
+
+	          // 追加とレイアウト
+	          this.isotope.appended(this.elements);
+	          // reload
+	          // http://isotope.metafizzy.co/methods.html#reloaditems
+	          this.isotope.reloadItems();
+	          // isotope 再度レイアウト
+	          this.isotope.layout();
 	        }
 	      }); // ArticleDom
 
 	      // ------------------------------------------------
+	      // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
 	      articles.forEach(function (article, i) {
 
 	        var dae = new _ArticleDae.ArticleDae(article);
@@ -14099,13 +14197,15 @@
 	        articlesList.push(dae);
 	      });
 
+	      // this._rendered が null の時だけ ReactDOM.render する
 	      if (this._rendered === null) {
 
-	        // dom 生成
+	        // dom 生成後 instance property へ ArticleDom instance を保存する
 	        this._rendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
 	      } else {
 
-	        // state update
+	        // instance が存在するので
+	        // state update でコンテナを追加する
 	        this._rendered.updateList(articlesList);
 	      }
 	    }

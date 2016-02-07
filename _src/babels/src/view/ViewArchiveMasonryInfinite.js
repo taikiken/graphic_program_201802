@@ -604,6 +604,7 @@ export class ViewArchiveMasonryInfinite extends View {
         );
 
       },
+      // state 変更し dom が更新された後に呼び出される delegate
       componentDidUpdate: function() {
         console.log( '+++++++++ componentDidUpdate' );
 
@@ -626,15 +627,17 @@ export class ViewArchiveMasonryInfinite extends View {
         for ( ; i < limit; i++ ) {
           elements.push( childNodes[ i ] );
         }
-        // 追加とレイアウト
-        this.isotope.appended( elements );
-        // reload
-        // http://isotope.metafizzy.co/methods.html#reloaditems
-        this.isotope.reloadItems();
-        // isotope 再度レイアウト
-        this.isotope.layout();
+
+        this.elements = elements;
+
+        let img = imagesLoaded( elements );
+        // 画像読み込む完了 event へ bind します
+        img.on( 'always', this.appendImages );
+        this.img = img;
+
 
       },
+      // state 変更時に呼び出される delegate
       shouldComponentUpdate: function() {
         console.log( '------------+++++++++++++ shouldComponentUpdate ------------' );
         // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
@@ -642,9 +645,10 @@ export class ViewArchiveMasonryInfinite extends View {
         // 常にfalseを返し無視させます
         //return false;
 
-        // list を state update で更新するので true にする
+        // state update で更新するので true にする, React 内部更新メソッドが実行される
         return true;
       },
+      // dom が表示された後に1度だけ呼び出される delegate
       componentDidMount: function() {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
@@ -659,13 +663,17 @@ export class ViewArchiveMasonryInfinite extends View {
         }
 
       },
+      // dom が削除される前に呼び出される delegate
       componentWillUnmount: function() {
         console.log( '************ componentWillUnmount ************' );
         // unmount 時に isotope を破棄します
-        this.state.isotope.destroy();
+        this.isotope.destroy();
       },
+      // -----------------------------------------------------
+      // 以降 custom
+      // isotope 前準備
       shouldMasonry: function() {
-        // isotope を実行します
+        // isotope 前準備を実行します
         let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
         let childNodes = boardRout.childNodes;
         console.log( 'shouldMasonry', boardRout, childNodes );
@@ -683,7 +691,7 @@ export class ViewArchiveMasonryInfinite extends View {
         img.on( 'always', this.onImages );
 
       },
-      // 画像読み込む完了 event handler
+      // 画像読み込む完了 event handler, isotope を実行
       onImages: function() {
 
         //let img = this.state.img;
@@ -719,11 +727,29 @@ export class ViewArchiveMasonryInfinite extends View {
       updateList: function( list ) {
         //let list = event.list;
         console.log( '%%%%%%%%%%%%%%%%%%%%% updateList', event );
+        // state を変更し appendChild + isotope を行う
         this.setState( { list: list } );
+      },
+      appendImages: function() {
+        
+        console.log( '++++++++++++++++++++ appendImages' );
+        
+        // event から event handler を unbind します
+        this.img.off( 'always', this.appendImages );
+
+        // 追加とレイアウト
+        this.isotope.appended( this.elements );
+        // reload
+        // http://isotope.metafizzy.co/methods.html#reloaditems
+        this.isotope.reloadItems();
+        // isotope 再度レイアウト
+        this.isotope.layout();
+
       }
     } );// ArticleDom
 
     // ------------------------------------------------
+    // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
     articles.forEach( function( article, i ) {
 
       let dae = new ArticleDae( article );
@@ -733,9 +759,10 @@ export class ViewArchiveMasonryInfinite extends View {
 
     } );
 
+    // this._rendered が null の時だけ ReactDOM.render する
     if ( this._rendered === null ) {
 
-      // dom 生成
+      // dom 生成後 instance property へ ArticleDom instance を保存する
       this._rendered = ReactDOM.render(
         React.createElement( ArticleDom, { list: articlesList } ),
         element
@@ -743,7 +770,8 @@ export class ViewArchiveMasonryInfinite extends View {
 
     } else {
 
-      // state update
+      // instance が存在するので
+      // state update でコンテナを追加する
       this._rendered.updateList( articlesList );
 
     }

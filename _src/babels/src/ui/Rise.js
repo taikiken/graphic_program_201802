@@ -24,16 +24,17 @@ export class Rise extends EventDispatcher {
     this._offset = offset;
     this._dom = new Dom( element );
     this._boundScroll = this.onScroll.bind( this );
+    this._scroll = Scroll.factory();
   }
   static get RISE():string {
     return 'rise';
   }
 
   start():void {
-    Scroll.on( Scroll.SCROLL, this._boundScroll );
+    this._scroll.on( Scroll.SCROLL, this._boundScroll );
   }
   stop():void {
-    Scroll.off( Scroll.SCROLL, this._boundScroll );
+    this._scroll.off( Scroll.SCROLL, this._boundScroll );
   }
   onScroll( event:Object ):void {
 

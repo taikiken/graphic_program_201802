@@ -105,7 +105,7 @@ var Form = exports.Form = function () {
      * let data = Form.element( document.querySelector("form") )
      *
      * @param {Element} formElement form element
-     * @return {FormData} elemet から FormData を作成し返します
+     * @return {FormData} element から FormData を作成し返します
      */
 
   }, {

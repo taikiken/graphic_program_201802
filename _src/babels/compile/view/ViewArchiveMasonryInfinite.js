@@ -743,6 +743,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             )
           );
         },
+        // state 変更し dom が更新された後に呼び出される delegate
         componentDidUpdate: function componentDidUpdate() {
           console.log('+++++++++ componentDidUpdate');
 
@@ -765,14 +766,15 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           for (; i < limit; i++) {
             elements.push(childNodes[i]);
           }
-          // 追加とレイアウト
-          this.isotope.appended(elements);
-          // reload
-          // http://isotope.metafizzy.co/methods.html#reloaditems
-          this.isotope.reloadItems();
-          // isotope 再度レイアウト
-          this.isotope.layout();
+
+          this.elements = elements;
+
+          var img = imagesLoaded(elements);
+          // 画像読み込む完了 event へ bind します
+          img.on('always', this.appendImages);
+          this.img = img;
         },
+        // state 変更時に呼び出される delegate
         shouldComponentUpdate: function shouldComponentUpdate() {
           console.log('------------+++++++++++++ shouldComponentUpdate ------------');
           // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
@@ -780,9 +782,10 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           // 常にfalseを返し無視させます
           //return false;
 
-          // list を state update で更新するので true にする
+          // state update で更新するので true にする, React 内部更新メソッドが実行される
           return true;
         },
+        // dom が表示された後に1度だけ呼び出される delegate
         componentDidMount: function componentDidMount() {
           // after mount
           _this.executeSafely(_View2.View.DID_MOUNT);
@@ -795,13 +798,17 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             this.shouldMasonry();
           }
         },
+        // dom が削除される前に呼び出される delegate
         componentWillUnmount: function componentWillUnmount() {
           console.log('************ componentWillUnmount ************');
           // unmount 時に isotope を破棄します
-          this.state.isotope.destroy();
+          this.isotope.destroy();
         },
+        // -----------------------------------------------------
+        // 以降 custom
+        // isotope 前準備
         shouldMasonry: function shouldMasonry() {
-          // isotope を実行します
+          // isotope 前準備を実行します
           var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
           var childNodes = boardRout.childNodes;
           console.log('shouldMasonry', boardRout, childNodes);
@@ -818,7 +825,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           // 画像読み込む完了 event へ bind します
           img.on('always', this.onImages);
         },
-        // 画像読み込む完了 event handler
+        // 画像読み込む完了 event handler, isotope を実行
         onImages: function onImages() {
 
           //let img = this.state.img;
@@ -853,11 +860,28 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         updateList: function updateList(list) {
           //let list = event.list;
           console.log('%%%%%%%%%%%%%%%%%%%%% updateList', event);
+          // state を変更し appendChild + isotope を行う
           this.setState({ list: list });
+        },
+        appendImages: function appendImages() {
+
+          console.log('++++++++++++++++++++ appendImages');
+
+          // event から event handler を unbind します
+          this.img.off('always', this.appendImages);
+
+          // 追加とレイアウト
+          this.isotope.appended(this.elements);
+          // reload
+          // http://isotope.metafizzy.co/methods.html#reloaditems
+          this.isotope.reloadItems();
+          // isotope 再度レイアウト
+          this.isotope.layout();
         }
       }); // ArticleDom
 
       // ------------------------------------------------
+      // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
       articles.forEach(function (article, i) {
 
         var dae = new _ArticleDae.ArticleDae(article);
@@ -866,13 +890,15 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         articlesList.push(dae);
       });
 
+      // this._rendered が null の時だけ ReactDOM.render する
       if (this._rendered === null) {
 
-        // dom 生成
+        // dom 生成後 instance property へ ArticleDom instance を保存する
         this._rendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
       } else {
 
-        // state update
+        // instance が存在するので
+        // state update でコンテナを追加する
         this._rendered.updateList(articlesList);
       }
     }
