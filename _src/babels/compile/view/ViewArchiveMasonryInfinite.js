@@ -78,8 +78,6 @@ var ReactDOM = self.ReactDOM;
 var imagesLoaded = self.imagesLoaded;
 var Isotope = self.Isotope;
 
-var UPDATE_LIST = 'updateList';
-
 /**
  * archive 一覧を isotope で
  */
@@ -120,10 +118,10 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
      */
     _this2._articles = [];
     _this2._useMasonry = !!useMasonry;
-    _this2._top = 0;
+    //this._top = 0;
+    // first render を区別する flag
     _this2._rendered = null;
-    _this2._eventDispatcher = new _EventDispatcher.EventDispatcher();
-    _this2._count = 0;
+    // response.request object を保持する
     _this2._request = null;
 
     return _this2;
@@ -222,16 +220,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
       // Masonry flag
       var useMasonry = this._useMasonry;
 
-      // event
-      var eventDispatcher = this._eventDispatcher;
-
-      // count
-      ++this._count;
-      var countNum = this._count;
-
-      // request
-      var request = this._request;
-
       // 既存データ用のglobal配列
       var articlesList = this._articles;
 
@@ -273,7 +261,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           // disable
           this.setState({ disable: true });
           action.next();
-          _this._top = _Scroll.Scroll.y;
+          //_this._top = Scroll.y;
         },
         render: function render() {
 
@@ -791,6 +779,8 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           // isotope がセットアップすると呼び出されるので
           // 常にfalseを返し無視させます
           //return false;
+
+          // list を state update で更新するので true にする
           return true;
         },
         componentDidMount: function componentDidMount() {
@@ -804,8 +794,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
             this.shouldMasonry();
           }
-
-          eventDispatcher.on(UPDATE_LIST, this.updateList);
         },
         componentWillUnmount: function componentWillUnmount() {
           console.log('************ componentWillUnmount ************');
@@ -848,14 +836,18 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           });
 
           // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
+          // 変えなくてもいいかなぁ〜
+
           // state は変更されている
           // element の class が変わらない
           //this.setState( { isotope: isotope, arranged: 'arranged' } );
+
+          // state に保存しなくても良い気がする...
           this.isotope = isotope;
-          console.log('%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top);
+          //console.log( '%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top );
           // render 時に 0 位置に戻るので
           // click 時の pageOffsetY へ移動させる
-          _Scroll.Scroll.y = _this._top;
+          //Scroll.y = _this._top;
         },
         //updateList: function( event ) {
         updateList: function updateList(list) {
@@ -880,7 +872,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         this._rendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
       } else {
 
-        //eventDispatcher.dispatch( { type: UPDATE_LIST, list: articlesList } );
+        // state update
         this._rendered.updateList(articlesList);
       }
     }

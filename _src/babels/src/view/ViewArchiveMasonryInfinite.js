@@ -41,8 +41,6 @@ let ReactDOM = self.ReactDOM;
 let imagesLoaded = self.imagesLoaded;
 let Isotope = self.Isotope;
 
-const UPDATE_LIST = 'updateList';
-
 /**
  * archive 一覧を isotope で
  */
@@ -75,10 +73,10 @@ export class ViewArchiveMasonryInfinite extends View {
      */
     this._articles = [];
     this._useMasonry = !!useMasonry;
-    this._top = 0;
+    //this._top = 0;
+    // first render を区別する flag
     this._rendered = null;
-    this._eventDispatcher = new EventDispatcher();
-    this._count = 0;
+    // response.request object を保持する
     this._request = null;
 
   }
@@ -169,16 +167,6 @@ export class ViewArchiveMasonryInfinite extends View {
     // Masonry flag
     let useMasonry = this._useMasonry;
 
-    // event
-    let eventDispatcher = this._eventDispatcher;
-
-    // count
-    ++this._count;
-    let countNum = this._count;
-
-    // request
-    let request = this._request;
-
     // 既存データ用のglobal配列
     let articlesList = this._articles;
 
@@ -219,7 +207,7 @@ export class ViewArchiveMasonryInfinite extends View {
         // disable
         this.setState( { disable: true } );
         action.next();
-        _this._top = Scroll.y;
+        //_this._top = Scroll.y;
       },
       render: function() {
 
@@ -653,6 +641,8 @@ export class ViewArchiveMasonryInfinite extends View {
         // isotope がセットアップすると呼び出されるので
         // 常にfalseを返し無視させます
         //return false;
+
+        // list を state update で更新するので true にする
         return true;
       },
       componentDidMount: function() {
@@ -667,8 +657,6 @@ export class ViewArchiveMasonryInfinite extends View {
           this.shouldMasonry();
 
         }
-
-        eventDispatcher.on( UPDATE_LIST, this.updateList );
 
       },
       componentWillUnmount: function() {
@@ -713,14 +701,18 @@ export class ViewArchiveMasonryInfinite extends View {
         } );
 
         // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
+        // 変えなくてもいいかなぁ〜
+
         // state は変更されている
         // element の class が変わらない
         //this.setState( { isotope: isotope, arranged: 'arranged' } );
+
+        // state に保存しなくても良い気がする...
         this.isotope = isotope;
-        console.log( '%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top );
+        //console.log( '%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top );
         // render 時に 0 位置に戻るので
         // click 時の pageOffsetY へ移動させる
-        Scroll.y = _this._top;
+        //Scroll.y = _this._top;
 
       },
       //updateList: function( event ) {
@@ -751,7 +743,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
     } else {
 
-      //eventDispatcher.dispatch( { type: UPDATE_LIST, list: articlesList } );
+      // state update
       this._rendered.updateList( articlesList );
 
     }
