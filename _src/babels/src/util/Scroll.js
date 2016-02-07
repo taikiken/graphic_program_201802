@@ -13,9 +13,50 @@
 
 import {EventDispatcher} from '../event/EventDispatcher';
 
+let _symbol = null;
+let _instance = null;
+
+/**
+ * scroll に関する処理
+ */
 export class Scroll extends EventDispatcher {
-  constructor() {
-    super();
+  /**
+   * scroll に関する singleton class
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @returns {Scroll}
+   */
+  constructor( target:Symbol ) {
+    if ( _symbol !== target ) {
+
+      throw new Error( `Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()` );
+
+    }
+
+    if ( _instance === null ) {
+      super();
+      _instance = this;
+      this.boundScroll = this.onScroll.bind( this );
+    }
+
+    return _instance;
+  }
+  // ---------------------------------------------------
+  //  method
+  // ---------------------------------------------------
+  start():void {
+    window.addEventListener( 'scroll', this.boundScroll, false );
+  }
+  stop():void {
+    window.removeEventListener( 'scroll', this.boundScroll );
+  }
+  onScroll( event:Event ):void {
+    this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
+  }
+  // ---------------------------------------------------
+  //  static GETTER / SETTER
+  // ---------------------------------------------------
+  static get SCROLL():string {
+    return 'scroll';
   }
   /**
    * scroll top 位置
@@ -38,4 +79,21 @@ export class Scroll extends EventDispatcher {
 
   }
   */
+  // ---------------------------------------------------
+  //  static method
+  // ---------------------------------------------------
+  /**
+   * instance を生成します
+   * @return {Scroll} Scroll instance を返します
+   */
+  static factory():Scroll {
+
+    if ( _instance === null ) {
+
+      _instance = new Router( _symbol );
+
+    }
+
+    return _instance;
+  }
 }
