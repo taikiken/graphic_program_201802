@@ -6,6 +6,93 @@
 //
 // Styleguide 2.6.0
 
+// setting-sec
+.setting {
+  @at-root {
+    &-sec {
+      @include clearfix;
+      min-height: 430px;
+      background: url(/assets/images/setting/bgline.png) 0 0 repeat-y;
+    }
+
+    &-side {
+      float: left;
+      width: 160px;
+      margin-top: 30px;
+    }
+
+    &-main {
+      float: right;
+      width: 520px;
+      margin-top: 30px;
+    }
+  } //at-root
+}
+
+
+
+
+
+// setting-side-nav
+.setting-side-nav {
+  @at-root {
+    &-list {}
+
+    &-item {
+      & + & {
+        margin-top: 15px;
+      }
+    }
+
+    &-link {
+      @include link-decoration(#333, $highlight-color, none, none);
+
+      span {
+        display: inline-block;
+        font-size: fz(12);
+
+        &:before {
+          content: '';
+          position: relative;
+          top: 2px;
+          margin-right: 4px;
+          @extend .sprite-setting;
+
+        }
+      }
+
+      &.current {
+        span {
+          color: $highlight-color;
+          font-weight: bold;
+        }
+      }
+    }
+
+    &-basic {
+      span:before {
+        @include sprite( $setting-icon-nav-basic, inline-block );
+      }
+    }
+
+    &-interest {
+      span:before {
+        @include sprite( $setting-icon-nav-interest, inline-block );
+      }
+    }
+
+    &-sns {
+      span:before {
+        @include sprite( $setting-icon-nav-sns, inline-block );
+      }
+    }
+  } //at-root
+}
+
+
+
+
+
 // setting-form
 .setting-form {
   input, button, textarea {
