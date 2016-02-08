@@ -12,6 +12,11 @@
  */
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Rise = undefined;
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -32,11 +37,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Rise = undefined;
-
 var _EventDispatcher2 = require('../event/EventDispatcher');
 
 var _Dom = require('../util/Dom');
@@ -53,7 +53,7 @@ var Rise = exports.Rise = function (_EventDispatcher) {
   (0, _inherits3.default)(Rise, _EventDispatcher);
 
   /**
-   * 対象 element bottom が window.bottom を超えることを監視します
+   * 対象 element bottom が window.bottom window.top に contain しているかを監視します
    * @param {Element} element 対象 element
    * @param {Number} [offset=0] 減産数値
    */
@@ -110,16 +110,15 @@ var Rise = exports.Rise = function (_EventDispatcher) {
     key: 'onScroll',
     value: function onScroll(event) {
       // window property
+      // scrollTop
       var y = event.y;
       var windowHeight = window.innerHeight;
-      var windowBottom = y + windowHeight + this._offset;
+      var windowBottom = y + windowHeight - this._offset;
       // element property
       var offsetRect = this._dom.offset();
       var elementBottom = y + offsetRect.top + offsetRect.height;
 
-      // console.log( 'onScroll', windowBottom, elementBottom  );
-
-      // element.bottom が insect しているかを調べます
+      // element.bottom が contain しているかを調べます
       if (windowBottom > elementBottom) {
         this.dispatch({ type: Rise.RISE, window: windowBottom, element: elementBottom });
       }

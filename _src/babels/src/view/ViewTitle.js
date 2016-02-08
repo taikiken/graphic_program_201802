@@ -17,19 +17,42 @@ import {View} from './View';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * title 表示
+ */
 export class ViewTitle extends View {
-  constructor( slug:string, label:string, element:Element, option:Object = {} ) {
+  /**
+   * 記事タイトルを表示します
+   * @param {string} label 表示タイトル文字
+   * @param {Element} element insert parent element
+   * @param {Object} [option={}] optional event handler
+   */
+  constructor( label:string, element:Element, option:Object = {} ) {
     super( element, option );
-
     this._label = label;
-    this._slug = slug;
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * @return {string|*} title 文字を返します
+   */
   get label():string {
     return this._label;
   }
-  get slug():string {
-    return this._slug;
+  /**
+   * title 文字を設定します
+   * @param {string} label title 文字
+   */
+  set label( label:string ):void {
+    this._label = label;
   }
+  // ---------------------------------------------------
+  //  Method
+  // ---------------------------------------------------
+  /**
+   * HTMLElement を生成します
+   */
   render():void {
 
     let TitleDom = React.createClass( {
@@ -40,19 +63,16 @@ export class ViewTitle extends View {
       render: function() {
 
         let label = this.props.label;
-        let slug = this.props.slug;
 
         return (
-          <h1 className="page-title"><a href={'/category/' + slug + '/'}>{label}</a></h1>
+          <h1 className="page-title">{label}</h1>
         );
 
       }
     } );
 
     ReactDOM.render(
-      <TitleDom
-        label={this.label}
-        slug={this.slug} />,
+      <TitleDom label={this.label} />,
       this.element
     );
 

@@ -22,7 +22,7 @@ import {Scroll} from '../util/Scroll';
  */
 export class Rise extends EventDispatcher {
   /**
-   * 対象 element bottom が window.bottom を超えることを監視します
+   * 対象 element bottom が window.bottom window.top に contain しているかを監視します
    * @param {Element} element 対象 element
    * @param {Number} [offset=0] 減産数値
    */
@@ -67,16 +67,15 @@ export class Rise extends EventDispatcher {
    */
   onScroll( event:Object ):void {
     // window property
+    // scrollTop
     let y = event.y;
     let windowHeight = window.innerHeight;
-    let windowBottom = y + windowHeight + this._offset;
+    let windowBottom = y + windowHeight - this._offset;
     // element property
     let offsetRect = this._dom.offset();
     let elementBottom = y + offsetRect.top + offsetRect.height;
 
-    // console.log( 'onScroll', windowBottom, elementBottom  );
-
-    // element.bottom が insect しているかを調べます
+    // element.bottom が contain しているかを調べます
     if ( windowBottom > elementBottom ) {
       this.dispatch( { type: Rise.RISE, window: windowBottom, element: elementBottom } );
     }

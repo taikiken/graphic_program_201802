@@ -9,6 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+'use strict';
 
 // app
 import {Empty} from '../app/const/Empty';
@@ -17,14 +18,16 @@ import {CommentsType} from '../app/const/CommentsType';
 // view
 import {View} from './View';
 import {ViewError} from './error/ViewError';
+
 // action
 import {Comments} from '../action/comment/Comments';
+
 // data
 import {Result} from '../data/Result';
+import {Safety} from '../data/Safety';
+
 // dae
 import {CommentsListDae} from '../dae/CommentsListDae';
-
-import {Safety} from '../data/Safety';
 
 // React
 let React = self.React;
@@ -40,7 +43,7 @@ export class ViewComments extends View {
    * @param {Element} element target HTMLElement
    * @param {Element} moreElement more button root parent
    * @param {string} commentsType all|official|self|normal コメントリスト種類
-   * @param {Object} option optional event handler
+   * @param {Object} [option={}] optional event handler
    */
   constructor( id:Number, element:Element, moreElement:Element, commentsType:string, option:Object = {} ) {
 
@@ -58,6 +61,11 @@ export class ViewComments extends View {
      */
     this._commentsList = [];
     this._commentsBank = {};
+
+    // more button instance 用
+    this._moreRendered = null;
+    // CommentsDom instance を保持します
+    this._commentsRendered = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -203,7 +211,7 @@ export class ViewComments extends View {
     // --------------------------------------------
     let MoreView = React.createClass( {
       propTypes: {
-        show: React.PropTypes.bool
+        show: React.PropTypes.bool.isRequired
       },
       getDefaultProps: function() {
         return {
@@ -212,41 +220,74 @@ export class ViewComments extends View {
       },
       getInitialState: function() {
         return {
-          disable: false
+          loading: false,
+          show: this.props.show
         };
-      },
-      handleClick: function( event ) {
-        event.preventDefault();
-        // disable
-        this.setState( { disable: true } );
-        action.next();
       },
       render: function() {
 
-        return (
-          <div>
-            {
-              this.props.show ? <div className={this.state.disable ? 'disable' : ''}>
-                <a href={'#more'} onClick={this.handleClick} >More View</a>
-              </div> : ''
-            }
-          </div>
-        );
+        // hasNext: true, button を表示する？
+        if ( this.state.show ) {
+
+          return (
+            <div className={this.state.loading ? 'loading' : ''}>
+              <a href={'#more'} onClick={this.handleClick} >More View</a>
+            </div>
+          );
+
+        } else {
+
+          // button 表示なし
+          return (
+            <div className="no-more"></div>
+          );
+
+        }
+
+      },
+      // -----------------------------------------
+      // button 関連 custom method
+      handleClick: function( event ) {
+        event.preventDefault();
+        // loading 表示
+        this.setState( { loading: true } );
+        action.next();
+      },
+      // button 表示・非表示
+      updateShow: function( show:boolean ) {
+
+        this.setState( { show: show } );
 
       }
     } );
 
 
     // more button 作成関数
-    // ArchiveDom から呼び出す
+    // CommentsDom から呼び出す
     let moreButton = ( show ) => {
 
-      ReactDOM.render(
-        React.createElement( MoreView, { show: show } ),
-        moreElement
-      );
+      show = !!show;
+
+      // moreElement 存在チェックを行う
+      // Element 型を保証する
+      // _moreRendered が null の時のみ, instance があれば state を update する
+      if ( Safety.element( moreElement ) && _this._moreRendered === null ) {
+
+        _this._moreRendered = ReactDOM.render(
+          React.createElement( MoreView, { show: show } ),
+          moreElement
+        );
+
+      } else {
+
+        // instance がある, render 済み
+        // state を変更し button の表示・非表示を行う
+        _this._moreRendered.updateShow( show );
+
+      }
 
     };
+
     // --------------------------------------------
     // COMMENT ONE
     // --------------------------------------------
@@ -309,6 +350,7 @@ export class ViewComments extends View {
 
       }
     } );
+
     // --------------------------------------------
     // COMMENT reply loop
     // 親コメントへ返信
@@ -382,9 +424,14 @@ export class ViewComments extends View {
       propType: {
         commentsList: React.PropTypes.array.isRequired
       },
+      getInitialState: function() {
+        return {
+          commentsList: this.props.commentsList
+        };
+      },
       render: function() {
 
-        let list = this.props.commentsList;
+        let list = this.state.commentsList;
 
         return (
           <div className={'comment-' + commentsListType}>
@@ -409,16 +456,29 @@ export class ViewComments extends View {
         // hasNext を元に More View button の表示非表示を決める
         console.log( 'more has ', action.hasNext() );
         moreButton( action.hasNext() );
+      },
+      updateList: function( list ) {
+        // state を変更し appendChild を行う
+        this.setState( { commentsList: list } );
       }
     } );
-
 
     // --------------------------------------------
     // COMMENT Dom build
     // --------------------------------------------
-    ReactDOM.render(
-      <CommentsDom commentsList={commentsList} />,
-      element
-    );
+    // this._commentsRendered が null の時だけ CommentsDom.render する
+    if ( this._commentsRendered === null ) {
+
+      this._commentsRendered = ReactDOM.render(
+        <CommentsDom commentsList={commentsList} />,
+        element
+      );
+
+    } else {
+
+      this._commentsRendered.updateList( commentsList );
+
+    }
+
   }// all
 }

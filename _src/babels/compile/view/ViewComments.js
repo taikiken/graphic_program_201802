@@ -1,4 +1,22 @@
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/01/28 - 20:51
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
 'use strict';
+
+// app
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewComments = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -20,11 +38,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewComments = undefined;
-
 var _Empty = require('../app/const/Empty');
 
 var _CommentsType = require('../app/const/CommentsType');
@@ -37,33 +50,21 @@ var _Comments = require('../action/comment/Comments');
 
 var _Result = require('../data/Result');
 
-var _CommentsListDae = require('../dae/CommentsListDae');
-
 var _Safety = require('../data/Safety');
+
+var _CommentsListDae = require('../dae/CommentsListDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
 
-// dae
-
 // action
 
 // view
-/**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/28 - 20:51
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- */
-
-// app
 var React = self.React;
+
+// dae
+
 // data
 
 var ReactDOM = self.ReactDOM;
@@ -81,7 +82,7 @@ var ViewComments = exports.ViewComments = function (_View) {
    * @param {Element} element target HTMLElement
    * @param {Element} moreElement more button root parent
    * @param {string} commentsType all|official|self|normal コメントリスト種類
-   * @param {Object} option optional event handler
+   * @param {Object} [option={}] optional event handler
    */
 
   function ViewComments(id, element, moreElement, commentsType) {
@@ -103,6 +104,11 @@ var ViewComments = exports.ViewComments = function (_View) {
      */
     _this2._commentsList = [];
     _this2._commentsBank = {};
+
+    // more button instance 用
+    _this2._moreRendered = null;
+    // CommentsDom instance を保持します
+    _this2._commentsRendered = null;
     return _this2;
   }
   // ---------------------------------------------------
@@ -260,7 +266,7 @@ var ViewComments = exports.ViewComments = function (_View) {
         displayName: 'MoreView',
 
         propTypes: {
-          show: React.PropTypes.bool
+          show: React.PropTypes.bool.isRequired
         },
         getDefaultProps: function getDefaultProps() {
           return {
@@ -269,39 +275,65 @@ var ViewComments = exports.ViewComments = function (_View) {
         },
         getInitialState: function getInitialState() {
           return {
-            disable: false
+            loading: false,
+            show: this.props.show
           };
-        },
-        handleClick: function handleClick(event) {
-          event.preventDefault();
-          // disable
-          this.setState({ disable: true });
-          action.next();
         },
         render: function render() {
 
-          return React.createElement(
-            'div',
-            null,
-            this.props.show ? React.createElement(
+          // hasNext: true, button を表示する？
+          if (this.state.show) {
+
+            return React.createElement(
               'div',
-              { className: this.state.disable ? 'disable' : '' },
+              { className: this.state.loading ? 'loading' : '' },
               React.createElement(
                 'a',
                 { href: '#more', onClick: this.handleClick },
                 'More View'
               )
-            ) : ''
-          );
+            );
+          } else {
+
+            // button 表示なし
+            return React.createElement('div', { className: 'no-more' });
+          }
+        },
+        // -----------------------------------------
+        // button 関連 custom method
+        handleClick: function handleClick(event) {
+          event.preventDefault();
+          // loading 表示
+          this.setState({ loading: true });
+          action.next();
+        },
+        // button 表示・非表示
+        updateShow: function updateShow(show) {
+
+          this.setState({ show: show });
         }
       });
 
       // more button 作成関数
-      // ArchiveDom から呼び出す
+      // CommentsDom から呼び出す
       var moreButton = function moreButton(show) {
 
-        ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+        show = !!show;
+
+        // moreElement 存在チェックを行う
+        // Element 型を保証する
+        // _moreRendered が null の時のみ, instance があれば state を update する
+        if (_Safety.Safety.element(moreElement) && _this._moreRendered === null) {
+
+          _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+        } else {
+
+          // instance がある, render 済み
+          // state を変更し button の表示・非表示を行う
+          _this._moreRendered.updateShow(show);
+        }
       };
+
       // --------------------------------------------
       // COMMENT ONE
       // --------------------------------------------
@@ -399,6 +431,7 @@ var ViewComments = exports.ViewComments = function (_View) {
           );
         }
       });
+
       // --------------------------------------------
       // COMMENT reply loop
       // 親コメントへ返信
@@ -470,9 +503,14 @@ var ViewComments = exports.ViewComments = function (_View) {
         propType: {
           commentsList: React.PropTypes.array.isRequired
         },
+        getInitialState: function getInitialState() {
+          return {
+            commentsList: this.props.commentsList
+          };
+        },
         render: function render() {
 
-          var list = this.props.commentsList;
+          var list = this.state.commentsList;
 
           return React.createElement(
             'div',
@@ -494,13 +532,24 @@ var ViewComments = exports.ViewComments = function (_View) {
           // hasNext を元に More View button の表示非表示を決める
           console.log('more has ', action.hasNext());
           moreButton(action.hasNext());
+        },
+        updateList: function updateList(list) {
+          // state を変更し appendChild を行う
+          this.setState({ commentsList: list });
         }
       });
 
       // --------------------------------------------
       // COMMENT Dom build
       // --------------------------------------------
-      ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList }), element);
+      // this._commentsRendered が null の時だけ CommentsDom.render する
+      if (this._commentsRendered === null) {
+
+        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList }), element);
+      } else {
+
+        this._commentsRendered.updateList(commentsList);
+      }
     } // all
 
   }, {

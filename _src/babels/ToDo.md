@@ -69,26 +69,28 @@
     - [X] view
 
 ## index
+ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
+
 1. pickup
     - [X] model
-    - [X] view
+    - [-] view
     
 1. headline
     - [X] model
-    - [X] view
+    - [-] view
     
 1. 一覧
     - [X] model
-    - [X] view
-    - [X] paging
+    - [-] view
+    - [X] infinite scroll
     
 1. ranking
     - [X] model
-    - [X] view
+    - [-] view
     
 1. video
     - [X] model
-    - [X] view
+    - [-] view
     
 ## 記事詳細
 1. URLからID抽出
@@ -108,7 +110,8 @@
     - [X] model
     - [] view
     
-1. コメント self
+1. コメント self  
+    ToDo: Token ありリクエストができるようになったら作成する
     - [] model
     - [] view
     - [] send
@@ -169,47 +172,52 @@
     - [X]
 
 ## カテゴリー all
+ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
+
 1. 一覧
     - [X] model
-    - [X] view
-    - [X] paging
+    - [-] view
+    - [X] infinite scroll
         
 1. ranking
     - [X] model
-    - [X] view
+    - [-] view
     
 1. video
     - [X] model
-    - [X] view
+    - [-] view
 
 ## カテゴリー slug あり
+ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
+
 1. 一覧
     - [X] model
     - [X] view
-    - [-] paging  
+    - [-] infinite scroll  
     データが足りないので未テスト
         
 1. ranking
     - [X] model
-    - [X] view
+    - [-] view
     
 1. video
     - [X] model
-    - [X] view
+    - [-] view
+    JSON データ戻り値がnullのため未テスト
     
 ## 検索
 1. 一覧
     - [] keyword
     - [] model
     - [] view
-    - [] paging   
+    - [] infinite scroll   
 
 
 ## お知らせ
 1. 一覧
     - [] model
     - [] view
-    - [] paging  
+    - [] infinite scroll  
     
 1. 既読化
     - [] model
@@ -219,7 +227,7 @@
 1. 一覧
     - [] model
     - [] view
-    - [] paging  
+    - [] infinite scroll  
     
 1. 登録
     - [] model
@@ -227,11 +235,4 @@
 1. 削除
     - [] model
     
-## Pagination
-[デザイン / ウェブ PC版 デザイン調整 #79](https://github.com/undotsushin/undotsushin/issues/79)
-
-- お知らせ
-- ブックマーク一覧
-- アクティビティ一覧
-- 記事検索結果一覧
 

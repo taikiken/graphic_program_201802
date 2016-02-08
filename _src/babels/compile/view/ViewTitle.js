@@ -11,6 +11,11 @@
  */
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewTitle = undefined;
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -31,11 +36,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewTitle = undefined;
-
 var _View2 = require('./View');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -44,22 +44,45 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var React = self.React;
 var ReactDOM = self.ReactDOM;
 
+/**
+ * title 表示
+ */
+
 var ViewTitle = exports.ViewTitle = function (_View) {
   (0, _inherits3.default)(ViewTitle, _View);
 
-  function ViewTitle(slug, label, element) {
-    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+  /**
+   * 記事タイトルを表示します
+   * @param {string} label 表示タイトル文字
+   * @param {Element} element insert parent element
+   * @param {Object} [option={}] optional event handler
+   */
+
+  function ViewTitle(label, element) {
+    var option = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
     (0, _classCallCheck3.default)(this, ViewTitle);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewTitle).call(this, element, option));
 
     _this._label = label;
-    _this._slug = slug;
     return _this;
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * @return {string|*} title 文字を返します
+   */
 
   (0, _createClass3.default)(ViewTitle, [{
     key: 'render',
+
+    // ---------------------------------------------------
+    //  Method
+    // ---------------------------------------------------
+    /**
+     * HTMLElement を生成します
+     */
     value: function render() {
 
       var TitleDom = React.createClass({
@@ -72,33 +95,29 @@ var ViewTitle = exports.ViewTitle = function (_View) {
         render: function render() {
 
           var label = this.props.label;
-          var slug = this.props.slug;
 
           return React.createElement(
             'h1',
             { className: 'page-title' },
-            React.createElement(
-              'a',
-              { href: '/category/' + slug + '/' },
-              label
-            )
+            label
           );
         }
       });
 
-      ReactDOM.render(React.createElement(TitleDom, {
-        label: this.label,
-        slug: this.slug }), this.element);
+      ReactDOM.render(React.createElement(TitleDom, { label: this.label }), this.element);
     }
   }, {
     key: 'label',
     get: function get() {
       return this._label;
     }
-  }, {
-    key: 'slug',
-    get: function get() {
-      return this._slug;
+    /**
+     * title 文字を設定します
+     * @param {string} label title 文字
+     */
+    ,
+    set: function set(label) {
+      this._label = label;
     }
   }]);
   return ViewTitle;

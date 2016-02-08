@@ -200,6 +200,7 @@ export class ViewArchiveMasonryInfinite extends View {
         };
       },
       getInitialState: function() {
+        // Rise instance を保持する
         this.rise = null;
 
         return {
@@ -245,6 +246,9 @@ export class ViewArchiveMasonryInfinite extends View {
         // unmount 時に rise 破棄を行う
         this.destroy();
       },
+      // -----------------------------------------
+      // button 関連 custom method
+      // rise 関連 event を破棄する
       destroy: function() {
         // rise 監視を破棄する
         if ( this.rise !== null ) {
@@ -253,6 +257,7 @@ export class ViewArchiveMasonryInfinite extends View {
           this.rise = null;
         }
       },
+      // 緊急用, button click を残す
       handleClick: function( event:Event ) {
         event.preventDefault();
         // disable
@@ -260,7 +265,9 @@ export class ViewArchiveMasonryInfinite extends View {
         // action.next();
         this.onRise();
       },
+      // button 表示・非表示
       updateShow: function( show:boolean ) {
+
         if ( !show ) {
           // button を非表示にするので rise 監視を止める
           this.destroy();
@@ -268,21 +275,35 @@ export class ViewArchiveMasonryInfinite extends View {
           // button 表示, loading 表示を止める
           this.updateLoading( false );
         }
+
         this.setState( { show: show } );
+
       },
+      // loading 表示 on / off
+      // on: true, off: false
       updateLoading: function( loading:boolean = false ) {
+
         let loadingClass = '';
         if ( loading && this.rise !== null ) {
+
           // loading 中は監視を止める
           loadingClass = ' loading';
           this.rise.stop();
           action.next();
+
         } else {
+
           // loading が終わると監視開始
           this.rise.start();
+
         }
+
+        // loading 表示のための css class を追加・削除
         this.setState( {loading: loadingClass} );
+
       },
+      // Rise.RISE event handler
+      // 次 offset JSON を取得する
       onRise: function( event ) {
         console.log( '========================== onRise ', event );
 
@@ -388,11 +409,6 @@ export class ViewArchiveMasonryInfinite extends View {
           callback: function() {}
         };
       },
-      handleClick: function( event ) {
-        event.preventDefault();
-        this.props.callback(this.props.comment);
-        this.setState( { active: false } );
-      },
       render: function() {
 
         let sign = this.props.sign;
@@ -425,6 +441,11 @@ export class ViewArchiveMasonryInfinite extends View {
 
         }
 
+      },
+      handleClick: function( event ) {
+        event.preventDefault();
+        this.props.callback(this.props.comment);
+        this.setState( { active: false } );
       }
     } );
 
@@ -447,11 +468,6 @@ export class ViewArchiveMasonryInfinite extends View {
           active: false,
           callback: function() {}
         };
-      },
-      handleClick: function( event ) {
-        event.preventDefault();
-        this.props.callback(this.props.comment);
-        this.setState( { active: false } );
       },
       render: function() {
 
@@ -481,6 +497,11 @@ export class ViewArchiveMasonryInfinite extends View {
           );
         }
 
+      },
+      handleClick: function( event ) {
+        event.preventDefault();
+        this.props.callback(this.props.comment);
+        this.setState( { active: false } );
       }
     } );
 
@@ -491,18 +512,6 @@ export class ViewArchiveMasonryInfinite extends View {
         commentsPopular: React.PropTypes.object.isRequired,
         total: React.PropTypes.number.isRequired,
         articleId: React.PropTypes.string.isRequired
-      },
-      goodClick: function( comment ) {
-        let commentId = comment.id;
-        let userId = comment.user.id;
-
-        console.log( 'goodClick', commentId, userId );
-      },
-      badClick: function( comment ) {
-        let commentId = comment.id;
-        let userId = comment.user.id;
-
-        console.log( 'badClick', commentId, userId );
       },
       render: function() {
 
@@ -525,15 +534,15 @@ export class ViewArchiveMasonryInfinite extends View {
           total -= secondsDae.length;
         }
 
+        // 1 件 comment があるかをチェクする
         if ( hasFirst ) {
 
           // 少なくとも1件は存在する
           total -= 1;
-
           console.log( '少なくとも1件は存在する ', articleId );
+
           // 1件目コメントデータを取り出し
           let first = firstDae;
-          // console.log( 'first ', articleId, first );
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
@@ -582,6 +591,20 @@ export class ViewArchiveMasonryInfinite extends View {
       }, // render
       componentDidMount: function() {
         // mount
+      },
+      // -----------------------------------------
+      // good / bad 関連 custom method
+      goodClick: function( comment ) {
+        let commentId = comment.id;
+        let userId = comment.user.id;
+
+        console.log( 'goodClick', commentId, userId );
+      },
+      badClick: function( comment ) {
+        let commentId = comment.id;
+        let userId = comment.user.id;
+
+        console.log( 'badClick', commentId, userId );
       }
     } );
 
@@ -667,7 +690,7 @@ export class ViewArchiveMasonryInfinite extends View {
                         </div>
                       </a>
 
-                      <PopularDom commentsPopular={commentsPopular} total={commentsTotal} articleId={dae.id} />
+                      <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={dae.id} />
                     </div>
                   );
                   // loop end
@@ -681,9 +704,6 @@ export class ViewArchiveMasonryInfinite extends View {
       // state 変更し dom が更新された後に呼び出される delegate
       componentDidUpdate: function() {
         console.log( '+++++++++ componentDidUpdate' );
-
-        // hasNext を元に More View button の表示非表示を決める
-        moreButton( action.hasNext() );
 
         // isotope 対象 children
         let childNodes = this.refs.boardRout.childNodes;
@@ -711,17 +731,6 @@ export class ViewArchiveMasonryInfinite extends View {
 
 
       },
-      //// state 変更時に呼び出される delegate
-      //shouldComponentUpdate: function() {
-      //  console.log( '------------+++++++++++++ shouldComponentUpdate ------------' );
-      //  // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
-      //  // isotope がセットアップすると呼び出されるので
-      //  // 常にfalseを返し無視させます
-      //  //return false;
-      //
-      //  // state update で更新するので true にする, React 内部更新メソッドが実行される
-      //  return true;
-      //},
       // dom が表示された後に1度だけ呼び出される delegate
       componentDidMount: function() {
         // after mount
@@ -747,20 +756,15 @@ export class ViewArchiveMasonryInfinite extends View {
       // 以降 custom
       // isotope 前準備
       shouldMasonry: function() {
+
         // isotope 前準備を実行します
         let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
         let childNodes = boardRout.childNodes;
-        console.log( 'shouldMasonry', boardRout, childNodes );
 
         // imagesLoaded を使用し画像ロード完了後に isotope を実行します
         let img = imagesLoaded( childNodes );
-
-        // img {imagesLoaded} always event handler unbind するためにインスタンスを state に保存します
-        // route {Element} isotope 基準 element
-        // nodes {ElementList} isotope 対象 childNodes, 現在は使用していません, ひょっとすると将来使うかも...
-        //this.setState( { img: img, nodes: childNodes, route: boardRout } );
+        // img {imagesLoaded} always event handler unbind するためにインスタンスを保存します
         this.img = img;
-
         // 画像読み込む完了 event へ bind します
         img.on( 'always', this.onImages );
 
@@ -768,42 +772,23 @@ export class ViewArchiveMasonryInfinite extends View {
       // 画像読み込む完了 event handler, isotope を実行
       onImages: function() {
 
-        //let img = this.state.img;
-        let img = this.img;
-
         // event から event handler を unbind します
-        img.off( 'always', this.onImages );
+        this.img.off( 'always', this.onImages );
 
         // isotope を行います
-        let isotope = new Isotope( this.refs.boardRout, {
+        this.isotope = new Isotope( this.refs.boardRout, {
           itemSelector: '.board-item',
           masonry: {
             gutter: 30
           }
         } );
 
-        // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
-        // 変えなくてもいいかなぁ〜
-
-        // state は変更されている
-        // element の class が変わらない
-        //this.setState( { isotope: isotope, arranged: 'arranged' } );
-
-        // state に保存しなくても良い気がする...
-        this.isotope = isotope;
-        //console.log( '%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top );
-        // render 時に 0 位置に戻るので
-        // click 時の pageOffsetY へ移動させる
-        //Scroll.y = _this._top;
-
       },
-      //updateList: function( event ) {
       updateList: function( list ) {
-        //let list = event.list;
-        console.log( '%%%%%%%%%%%%%%%%%%%%% updateList', event );
         // state を変更し appendChild + isotope を行う
         this.setState( { list: list } );
       },
+      // didUpdate から呼び出される
       appendImages: function() {
 
         console.log( '++++++++++++++++++++ appendImages' );
@@ -818,6 +803,9 @@ export class ViewArchiveMasonryInfinite extends View {
         this.isotope.reloadItems();
         // isotope 再度レイアウト
         this.isotope.layout();
+
+        // hasNext を元に More View button の表示非表示を決める
+        moreButton( action.hasNext() );
 
       }
     } );// ArticleDom
