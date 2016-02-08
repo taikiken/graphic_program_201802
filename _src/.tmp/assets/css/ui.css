@@ -2660,7 +2660,7 @@ table tr.w200 > td {
   overflow: hidden;
   opacity: 0; }
 
-.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
@@ -2675,12 +2675,12 @@ table tr.w200 > td {
 .sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
 
-.comment-menu .dropMenu, .head-sec .notice-menu .dropMenu, .head-sec .user-menu .dropMenu {
+.comment-menu .dropMenu, .head-sec .notice-menu .dropMenu, .head-sec .preference-menu .dropMenu {
   position: relative;
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); }
-  .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before {
+  .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before {
     content: '';
     position: absolute;
     top: -5px;
@@ -2940,7 +2940,7 @@ table tr.w200 > td {
     font-weight: bold;
     font-size: 172%; }
 
-.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
@@ -3042,7 +3042,7 @@ table tr.w200 > td {
       white-space: nowrap;
       outline: none; }
 
-.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
@@ -3644,7 +3644,7 @@ table tr.w200 > td {
       font-weight: bold;
       text-align: center; }
 
-.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
@@ -3911,7 +3911,7 @@ table tr.w200 > td {
     white-space: nowrap;
     outline: none; }
 
-.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
@@ -4220,7 +4220,7 @@ table tr.w200 > td {
 /*
   sprite
 * *********************************** */
-.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .user-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
@@ -4305,11 +4305,29 @@ a:hover {
     outline: none;
     margin-top: 8px; }
 
-.head-sec .notice {
-  position: relative;
+.head-sec .user {
   float: left;
   margin-top: 14px;
   margin-left: 15px; }
+  .head-sec .user:before, .head-sec .user:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .head-sec .user .btn-signup {
+    display: table-cell;
+    height: 35px;
+    font-weight: bold;
+    vertical-align: middle; }
+    .head-sec .user .btn-signup:link, .head-sec .user .btn-signup:visited, .head-sec .user .btn-signup:hover, .head-sec .user .btn-signup:active {
+      color: #e1438b;
+      text-decoration: none; }
+    .head-sec .user .btn-signup:hover {
+      color: #e1438b;
+      text-decoration: none; }
+
+.head-sec .notice {
+  position: relative;
+  float: left; }
   .head-sec .notice-icon {
     background-position: 0px 0px;
     background-repeat: no-repeat;
@@ -4373,60 +4391,43 @@ a:hover {
       font-weight: bold;
       text-align: center; }
 
-.head-sec .user {
+.head-sec .preference {
   position: relative;
   float: left;
   margin-left: 15px; }
-  .head-sec .user-preference {
-    display: none; }
-  .head-sec .user-signup {
-    display: table-cell;
-    height: 60px;
-    font-weight: bold;
-    vertical-align: middle; }
-    .head-sec .user-signup:link, .head-sec .user-signup:visited, .head-sec .user-signup:hover, .head-sec .user-signup:active {
-      color: #e1438b;
-      text-decoration: none; }
-    .head-sec .user-signup:hover {
-      color: #e1438b;
-      text-decoration: none; }
-  .head-sec .user.signin {
-    margin-top: 14px; }
-    .head-sec .user.signin .user-signup {
-      display: none; }
-    .head-sec .user.signin .user-preference {
-      position: relative;
-      display: block;
+  .head-sec .preference-opner {
+    position: relative;
+    display: block;
+    width: 35px;
+    height: 35px;
+    background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+    background-size: 35px; }
+  .head-sec .preference-avatar {
+    display: block; }
+    .head-sec .preference-avatar img {
       width: 35px;
       height: 35px;
-      background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
-      background-size: 35px; }
-    .head-sec .user.signin .user-avatar {
-      display: block; }
-      .head-sec .user.signin .user-avatar img {
-        width: 35px;
-        height: 35px;
-        border-radius: 100%; }
-  .head-sec .user-menu {
+      border-radius: 100%; }
+  .head-sec .preference-menu {
     z-index: 9999;
     display: none;
     position: absolute;
     top: 57px;
     left: -125px; }
-    .head-sec .user-menu .dropMenu {
+    .head-sec .preference-menu .dropMenu {
       width: 160px; }
-      .head-sec .user-menu .dropMenu-item {
+      .head-sec .preference-menu .dropMenu-item {
         border-bottom: 1px solid #ddd; }
-        .head-sec .user-menu .dropMenu-item:last-child {
+        .head-sec .preference-menu .dropMenu-item:last-child {
           border-bottom: none; }
-      .head-sec .user-menu .dropMenu-link {
+      .head-sec .preference-menu .dropMenu-link {
         display: block;
         padding: 14px 20px;
         font-size: 93%; }
-        .head-sec .user-menu .dropMenu-link:link, .head-sec .user-menu .dropMenu-link:visited, .head-sec .user-menu .dropMenu-link:hover, .head-sec .user-menu .dropMenu-link:active {
+        .head-sec .preference-menu .dropMenu-link:link, .head-sec .preference-menu .dropMenu-link:visited, .head-sec .preference-menu .dropMenu-link:hover, .head-sec .preference-menu .dropMenu-link:active {
           color: #333;
           text-decoration: none; }
-        .head-sec .user-menu .dropMenu-link:hover {
+        .head-sec .preference-menu .dropMenu-link:hover {
           color: #333;
           text-decoration: underline; }
 
