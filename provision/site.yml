@@ -23,7 +23,7 @@ sync_folder: 'public' # sync :
 #
 # Apache
 #
-document_root: '/var/public'
+document_root: '/vagrant/public'
 
 #
 # User and Group
