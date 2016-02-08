@@ -391,6 +391,29 @@
 
 
 
+// mod-btnA01
+.mod-btnA01 {
+  a {
+    @include link-decoration($highlight-color, #fff, none, none);
+    display: inline-block;
+    min-width: 160px;
+    padding: 12px 4px;
+    border: 2px solid $highlight-color;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover {
+      border: none;
+      background-color: $highlight-color;
+      transition: background-color ease-out .4s;
+    }
+  }
+}
+
+
+
+
+
 // -------------------------------------------------
 // override
 @import "./general_override";

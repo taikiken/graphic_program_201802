@@ -3911,6 +3911,25 @@ table tr.w200 > td {
     white-space: nowrap;
     outline: none; }
 
+.mod-btnA01 a {
+  display: inline-block;
+  min-width: 160px;
+  padding: 12px 4px;
+  border: 2px solid #e1438b;
+  font-weight: bold;
+  text-align: center; }
+  .mod-btnA01 a:link, .mod-btnA01 a:visited, .mod-btnA01 a:hover, .mod-btnA01 a:active {
+    color: #e1438b;
+    text-decoration: none; }
+  .mod-btnA01 a:hover {
+    color: #fff;
+    text-decoration: none; }
+  .mod-btnA01 a:hover {
+    border: none;
+    background-color: #e1438b;
+    -webkit-transition: background-color ease-out .4s;
+    transition: background-color ease-out .4s; }
+
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
