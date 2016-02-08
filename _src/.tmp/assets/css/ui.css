@@ -2672,8 +2672,8 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
-  background-image: url(/assets/images/sprite/sprite-signup.png); }
+.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .comment-menu .dropMenu, .head-sec .notice-menu .dropMenu, .head-sec .preference-menu .dropMenu {
   position: relative;
@@ -2952,8 +2952,8 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
-  background-image: url(/assets/images/sprite/sprite-signup.png); }
+.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .post-detail {
   margin-top: 30px; }
@@ -3054,8 +3054,8 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
-  background-image: url(/assets/images/sprite/sprite-signup.png); }
+.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .user-config {
   background-color: #000; }
@@ -3283,9 +3283,206 @@ table tr.w200 > td {
 .info-date {
   overflow: hidden; }
 
-.signup {
+.setting-form input, .setting-form button, .setting-form textarea {
+  border: none;
+  border-radius: 0;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+
+.setting-form-mail, .setting-form-pw, .setting-form-name, .setting-form-job, .setting-form-submit {
+  display: block;
+  margin-top: 20px; }
+
+.setting-form-mail, .setting-form-pw, .setting-form-name, .setting-form-job {
+  border: 1px solid #ddd;
+  border-radius: 3px; }
+  .setting-form-mail:before, .setting-form-mail:after, .setting-form-pw:before, .setting-form-pw:after, .setting-form-name:before, .setting-form-name:after, .setting-form-job:before, .setting-form-job:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .setting-form-mail input, .setting-form-pw input, .setting-form-name input, .setting-form-job input {
+    width: 92%;
+    line-height: 50px;
+    vertical-align: middle; }
+  .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before {
+    position: relative;
+    top: 7px;
+    left: 5px;
+    float: left;
+    line-height: 0;
+    margin-right: 5px; }
+
+.setting-form-mail:before {
+  background-position: -36px 0px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.setting-form-pw:before {
+  background-position: -36px -36px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.setting-form-name:before {
+  background-position: 0px -36px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.setting-form-job:before {
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 36px;
+  height: 36px; }
+
+.setting-form-avatar {
+  margin-top: 40px; }
+  .setting-form-avatar-heading {
+    font-size: 115%;
+    text-align: center; }
+  .setting-form-avatar-dropArea {
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto 0;
+    background: url(/assets/images/setting/thumb-avatar.png) center center no-repeat; }
+
+.setting-form-submit {
+  text-align: center; }
+  .setting-form-submit input {
+    display: inline-block;
+    width: 250px;
+    line-height: 50px;
+    padding-right: 24px;
+    padding-left: 24px;
+    border-radius: 3px;
+    background-color: #e1438b;
+    color: #fff;
+    font-weight: bold;
+    text-align: center; }
+    .setting-form-submit input:hover {
+      opacity: 0.75;
+      -webkit-transition: opacity ease-out .4s;
+      transition: opacity ease-out .4s; }
+
+.setting-form .note {
+  margin-top: 30px;
+  font-size: 86%;
+  letter-spacing: normal;
+  text-align: center; }
+
+.setting-form-interest-list:before, .setting-form-interest-list:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.setting-form-interest-item {
+  float: left;
+  width: 160px;
+  height: 90px;
+  margin: 0 0 20px 20px;
+  vertical-align: top; }
+  .setting-form-interest-item:nth-child(3n+1) {
+    margin-left: 0; }
+  .setting-form-interest-item input {
+    display: none; }
+
+.setting-form-interest-title {
+  cursor: pointer;
+  position: relative;
+  display: block;
   width: 100%;
   height: 100%;
+  border-radius: 3px;
+  background-color: #eee; }
+  .setting-form-interest-title span {
+    display: block;
+    padding: 20px 5px 32px;
+    background: url(/assets/images/setting/icon-check.png) center bottom no-repeat;
+    font-weight: bold;
+    text-align: center; }
+  .setting-form-interest-title:hover {
+    background-color: #ffe9f3; }
+
+.setting-form-interest-item input:checked + .setting-form-interest-title {
+  background-color: #e1438b; }
+  .setting-form-interest-item input:checked + .setting-form-interest-title span {
+    color: #fff;
+    background-image: url(/assets/images/setting/icon-check_o.png); }
+
+.related-sns {
+  margin-top: 40px; }
+  .related-sns-list:before, .related-sns-list:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .related-sns-item {
+    float: left; }
+    .related-sns-item:nth-child(2) {
+      float: right; }
+  .related-sns-link {
+    display: block;
+    width: 250px;
+    line-height: 50px;
+    padding: 0 18px;
+    border-radius: 3px; }
+    .related-sns-link:link, .related-sns-link:visited, .related-sns-link:hover, .related-sns-link:active {
+      color: #fff;
+      text-decoration: none; }
+    .related-sns-link:hover {
+      color: #fff;
+      text-decoration: none; }
+    .related-sns-link span {
+      font-weight: bold;
+      line-height: 24px; }
+      .related-sns-link span:before {
+        content: '';
+        position: relative;
+        top: 5px;
+        margin-right: 20px;
+        overflow: hidden;
+        font-size: 0;
+        text-indent: 100%;
+        white-space: nowrap;
+        outline: none; }
+    .related-sns-link:hover {
+      opacity: 0.75;
+      -webkit-transition: opacity ease-out .4s;
+      transition: opacity ease-out .4s; }
+  .related-sns-tw {
+    background-color: #55acee; }
+    .related-sns-tw span:before {
+      background-position: -72px -24px;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      display: inline-block;
+      width: 24px;
+      height: 24px; }
+  .related-sns-fb {
+    background-color: #3b579d; }
+    .related-sns-fb span:before {
+      background-position: -72px 0px;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      display: inline-block;
+      width: 24px;
+      height: 24px; }
+
+.signup {
+  width: 100%;
+  min-height: 100%;
   background: #000 url(/assets/images/signup/bg.jpg) center center no-repeat;
   background-size: cover; }
 
@@ -3307,12 +3504,10 @@ table tr.w200 > td {
   width: 600px;
   margin: 0 auto; }
   .signup-header .heading {
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
-    overflow: hidden;
     display: block;
     width: 170px;
     height: 65px;
+    background: url(/assets/images/signup/logo.png) 0 0 no-repeat;
     overflow: hidden;
     font-size: 0;
     text-indent: 100%;
@@ -3388,166 +3583,9 @@ table tr.w200 > td {
     .signup-step-step3:after {
       display: none; }
 
-.signup-form input, .signup-form button, .signup-form textarea {
-  border: none;
-  border-radius: 0;
-  background: none;
-  outline: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none; }
-
-.signup-form-mail, .signup-form-pw, .signup-form-name, .signup-form-job, .signup-form-submit {
-  display: block;
-  margin-top: 20px; }
-
-.signup-form-mail, .signup-form-pw, .signup-form-name, .signup-form-job {
-  border: 1px solid #ddd;
-  border-radius: 3px; }
-  .signup-form-mail:before, .signup-form-mail:after, .signup-form-pw:before, .signup-form-pw:after, .signup-form-name:before, .signup-form-name:after, .signup-form-job:before, .signup-form-job:after {
-    content: "";
-    display: table;
-    clear: both; }
-  .signup-form-mail input, .signup-form-pw input, .signup-form-name input, .signup-form-job input {
-    width: 92%;
-    line-height: 50px;
-    vertical-align: middle; }
-  .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before {
-    position: relative;
-    top: 7px;
-    left: 5px;
-    float: left;
-    line-height: 0;
-    margin-right: 5px; }
-
-.signup-form-mail:before {
-  background-position: -36px -65px;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  display: inline-block;
-  width: 36px;
-  height: 36px; }
-
-.signup-form-pw:before {
-  background-position: -108px -65px;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  display: inline-block;
-  width: 36px;
-  height: 36px; }
-
-.signup-form-name:before {
-  background-position: -72px -65px;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  display: inline-block;
-  width: 36px;
-  height: 36px; }
-
-.signup-form-job:before {
-  background-position: 0px -65px;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  display: inline-block;
-  width: 36px;
-  height: 36px; }
-
-.signup-form-avatar {
-  margin-top: 40px; }
-  .signup-form-avatar-heading {
-    font-size: 115%;
-    text-align: center; }
-  .signup-form-avatar-dropArea {
-    cursor: pointer;
-    width: 120px;
-    height: 120px;
-    margin: 20px auto 0;
-    background: url(/assets/images/signup/thumb-avatar.png) center center no-repeat; }
-
-.signup-form-submit {
-  text-align: center; }
-  .signup-form-submit input {
-    display: inline-block;
-    width: 250px;
-    line-height: 50px;
-    padding-right: 24px;
-    padding-left: 24px;
-    border-radius: 3px;
-    background-color: #e1438b;
-    color: #fff;
-    font-weight: bold;
-    text-align: center; }
-    .signup-form-submit input:hover {
-      opacity: 0.75;
-      -webkit-transition: opacity ease-out .4s;
-      transition: opacity ease-out .4s; }
-
-.signup-form .note {
-  margin-top: 30px;
-  font-size: 86%;
-  letter-spacing: normal;
-  text-align: center; }
-
 .register {
   width: 520px;
   margin: 0 auto; }
-  .register-sns {
-    margin-top: 40px; }
-    .register-sns-list:before, .register-sns-list:after {
-      content: "";
-      display: table;
-      clear: both; }
-    .register-sns-item {
-      float: left; }
-      .register-sns-item:nth-child(2) {
-        float: right; }
-    .register-sns-link {
-      display: block;
-      width: 250px;
-      line-height: 50px;
-      padding: 0 18px;
-      border-radius: 3px; }
-      .register-sns-link:link, .register-sns-link:visited, .register-sns-link:hover, .register-sns-link:active {
-        color: #fff;
-        text-decoration: none; }
-      .register-sns-link:hover {
-        color: #fff;
-        text-decoration: none; }
-      .register-sns-link span {
-        font-weight: bold;
-        line-height: 24px; }
-        .register-sns-link span:before {
-          content: '';
-          position: relative;
-          top: 5px;
-          margin-right: 20px;
-          overflow: hidden;
-          font-size: 0;
-          text-indent: 100%;
-          white-space: nowrap;
-          outline: none; }
-      .register-sns-link:hover {
-        opacity: 0.75;
-        -webkit-transition: opacity ease-out .4s;
-        transition: opacity ease-out .4s; }
-    .register-sns-tw {
-      background-color: #55acee; }
-      .register-sns-tw span:before {
-        background-position: 0px -101px;
-        background-repeat: no-repeat;
-        overflow: hidden;
-        display: inline-block;
-        width: 24px;
-        height: 24px; }
-    .register-sns-fb {
-      background-color: #3b579d; }
-      .register-sns-fb span:before {
-        background-position: -144px -65px;
-        background-repeat: no-repeat;
-        overflow: hidden;
-        display: inline-block;
-        width: 24px;
-        height: 24px; }
   .register-or {
     margin-top: 30px;
     background: url(/assets/images/signup/bg-or.png) center center no-repeat;
@@ -3560,71 +3598,38 @@ table tr.w200 > td {
       content: "";
       display: table;
       clear: both; }
-    .register-mail .signup-form-mail,
-    .register-mail .signup-form-submit {
+    .register-mail .setting-form-mail,
+    .register-mail .setting-form-submit {
       margin-top: 0; }
-    .register-mail .signup-form-mail {
+    .register-mail .setting-form-mail {
       float: left;
       width: 61.5384615385%; }
-      .register-mail .signup-form-mail input {
+      .register-mail .setting-form-mail input {
         width: 86%; }
-    .register-mail .signup-form-submit {
+    .register-mail .setting-form-submit {
       float: right;
       width: 36.5384615385%; }
-      .register-mail .signup-form-submit input {
+      .register-mail .setting-form-submit input {
         width: 100%; }
     .register-mail p {
       clear: both;
       padding-top: 30px; }
   .login-email {
     margin-top: 30px; }
-    .login-email .signup-form-mail input,
-    .login-email .signup-form-pw input {
+    .login-email .setting-form-mail input,
+    .login-email .setting-form-pw input {
       width: 92%; }
 
 .basic-setting {
   width: 520px;
   margin: 40px auto 0; }
-  .basic-setting .signup-form-submit {
+  .basic-setting .setting-form-submit {
     margin-top: 40px; }
 
 .interest-setting {
   width: 520px;
   margin: 40px auto 0; }
-  .interest-setting .signup-form-interest-list:before, .interest-setting .signup-form-interest-list:after {
-    content: "";
-    display: table;
-    clear: both; }
-  .interest-setting .signup-form-interest-item {
-    float: left;
-    width: 160px;
-    height: 90px;
-    margin: 0 0 20px 20px;
-    vertical-align: top; }
-    .interest-setting .signup-form-interest-item:nth-child(3n+1) {
-      margin-left: 0; }
-    .interest-setting .signup-form-interest-item input {
-      display: none; }
-  .interest-setting .signup-form-interest-title {
-    cursor: pointer;
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 3px;
-    background-color: #eee; }
-    .interest-setting .signup-form-interest-title span {
-      display: block;
-      padding: 20px 5px 32px;
-      background: url(/assets/images/signup/icon-check.png) center bottom no-repeat;
-      font-weight: bold;
-      text-align: center; }
-  .interest-setting .signup-form-interest-item input:checked + .signup-form-interest-title {
-    background-color: #e1438b; }
-    .interest-setting .signup-form-interest-item input:checked + .signup-form-interest-title span {
-      color: #fff;
-      background-image: url(/assets/images/signup/icon-check_o.png); }
-  .interest-setting .signup-form-submit {
+  .interest-setting .setting-form-submit {
     margin-top: 20px; }
 
 .pw-reset {
@@ -3656,8 +3661,8 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
-  background-image: url(/assets/images/sprite/sprite-signup.png); }
+.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .board-large:before, .board-large:after {
   content: "";
@@ -3942,8 +3947,8 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
-  background-image: url(/assets/images/sprite/sprite-signup.png); }
+.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .comment-heading {
   margin-top: 30px;
@@ -4251,12 +4256,12 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
-  background-image: url(/assets/images/sprite/sprite-signup.png); }
+.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 html, body {
   width: 100%;
-  min-height: 100%; }
+  height: 100%; }
 
 a:link, a:visited, a:hover, a:active {
   color: #e1438b;

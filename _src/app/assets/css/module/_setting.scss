@@ -1,0 +1,249 @@
+@import "../../../../scss/asset";
+
+// Setting
+//
+// design module setting
+//
+// Styleguide 2.6.0
+
+// setting-form
+.setting-form {
+  input, button, textarea {
+    border: none;
+    border-radius: 0;
+    background: none;
+    outline: none;
+    appearance: none;
+  }
+
+  @at-root {
+    &-mail, &-pw, &-name, &-job, &-submit {
+      display: block;
+      margin-top: 20px;
+    }
+
+    &-mail, &-pw, &-name, &-job {
+      @include clearfix;
+      border: 1px solid $border-primary-color;
+      border-radius: 3px;
+
+      input {
+        width: 92%;
+        line-height: 50px;
+        vertical-align: middle;
+      }
+
+      &:before {
+        position: relative;
+        top: 7px;
+        left: 5px;
+        float: left;
+        line-height: 0;
+        margin-right: 5px;
+        @extend .sprite-setting;
+      }
+
+    }
+
+    &-mail {
+      &:before {
+        @include sprite( $setting-icon-mail, inline-block );
+      }
+    }
+
+    &-pw {
+      &:before {
+        @include sprite( $setting-icon-pw, inline-block );
+      }
+    }
+
+    &-name {
+      &:before {
+        @include sprite( $setting-icon-name, inline-block );
+      }
+    }
+
+    &-job {
+      &:before {
+        @include sprite( $setting-icon-job, inline-block );
+      }
+    }
+
+    &-avatar {
+      margin-top: 40px;
+
+      &-heading {
+        font-size: fz(16);
+        text-align: center;
+      }
+
+      &-dropArea {
+        cursor: pointer;
+        width: 120px;
+        height: 120px;
+        margin: 20px auto 0;
+        background: url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
+      }
+    }
+
+    &-submit {
+      text-align: center;
+
+      input {
+        display: inline-block;
+        width: 250px;
+        line-height: 50px;
+        padding-right: 24px;
+        padding-left: 24px;
+        border-radius: 3px;
+        background-color: $highlight-color;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+
+        &:hover {
+          @include hover-opacity;
+        }
+      }
+    }
+  } //at-root
+
+
+
+  .note {
+    margin-top: 30px;
+    font-size: fz(12);
+    letter-spacing: normal;
+    text-align: center;
+  }
+
+
+
+  // interest-setting
+  @at-root {
+    &-interest {
+      &-list {
+        @include clearfix;
+      }
+
+      &-item {
+        float: left;
+        width: 160px;
+        height: 90px;
+        margin: 0 0 20px 20px;
+        vertical-align: top;
+
+        &:nth-child(3n+1) {
+          margin-left: 0;
+        }
+
+        input {
+          display: none;
+        }
+      }
+
+      &-title {
+        cursor: pointer;
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        background-color: #eee;
+
+        span {
+          display: block;
+          padding: 20px 5px 32px;
+          background: url(/assets/images/setting/icon-check.png) center bottom no-repeat;
+          font-weight: bold;
+          text-align: center;
+        }
+
+        &:hover {
+          background-color: #ffe9f3;
+        }
+      }
+
+      &-item {
+        input:checked + .setting-form-interest-title {
+          background-color: $highlight-color;
+
+          span {
+            color: #fff;
+            background-image: url(/assets/images/setting/icon-check_o.png);
+          }
+        }
+      }
+    }
+  } //at-root
+  // interest-setting
+
+} //.setting-form
+
+
+
+
+// related-sns
+.related-sns {
+  margin-top: 40px;
+
+  @at-root {
+    &-list {
+      @include clearfix;
+    }
+
+    &-item {
+      float: left;
+
+      &:nth-child(2) {
+        float: right;
+      }
+    }
+
+    &-link {
+      @include link-decoration(#fff, #fff, none, none);
+      display: block;
+      width: 250px;
+      line-height: 50px;
+      padding: 0 18px;
+      border-radius: 3px;
+
+      span {
+        font-weight: bold;
+        line-height: 24px;
+
+        &:before {
+          content: '';
+          position: relative;
+          top: 5px;
+          margin-right: 20px;
+          @extend .sprite-setting;
+          @include hide-text;
+        }
+      }
+
+      &:hover {
+        @include hover-opacity;
+      }
+    }
+
+    &-tw {
+      background-color: #55acee;
+
+      span:before {
+        // top: 2px;
+        @include sprite( $setting-icon-tw, inline-block );
+      }
+    }
+
+    &-fb {
+      background-color: #3b579d;
+
+      span:before {
+        // top: 5px;
+        @include sprite( $setting-icon-fb, inline-block );
+      }
+    }
+
+  } //at-root
+} //.related-sns

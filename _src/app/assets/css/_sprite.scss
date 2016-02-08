@@ -27,13 +27,12 @@ $footer-icon-sns-yt: -0px -0px 60px 25px;
 $footer-pagetop: -60px -0px 79px 14px;
 $header-icon-search: -0px -40px 18px 18px;
 $header-logo: -0px -0px 105px 40px;
-$signup-icon-fb: -144px -65px 24px 24px;
-$signup-icon-job: -0px -65px 36px 36px;
-$signup-icon-mail: -36px -65px 36px 36px;
-$signup-icon-name: -72px -65px 36px 36px;
-$signup-icon-pw: -108px -65px 36px 36px;
-$signup-icon-tw: -0px -101px 24px 24px;
-$signup-logo: -0px -0px 170px 65px;
+$setting-icon-fb: -72px -0px 24px 24px;
+$setting-icon-job: -0px -0px 36px 36px;
+$setting-icon-mail: -36px -0px 36px 36px;
+$setting-icon-name: -0px -36px 36px 36px;
+$setting-icon-pw: -36px -36px 36px 36px;
+$setting-icon-tw: -72px -24px 24px 24px;
 @mixin sprite-width($sprite) {
   width: nth($sprite, 3);
 }
@@ -71,6 +70,6 @@ $signup-logo: -0px -0px 170px 65px;
 .sprite-header {
   background-image: url(/assets/images/sprite/sprite-header.png);
 }
-.sprite-signup {
-  background-image: url(/assets/images/sprite/sprite-signup.png);
+.sprite-setting {
+  background-image: url(/assets/images/sprite/sprite-setting.png);
 }
