@@ -101,11 +101,26 @@ a {
 
 
 
-  .notice {
-    position: relative;
+  .user {
+    @include clearfix;
     float: left;
     margin-top: 14px;
     margin-left: 15px;
+
+    .btn-signup {
+      @include link-decoration($highlight-color, $highlight-color, none, none);
+      display: table-cell;
+      height: 35px;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+  }
+
+
+
+  .notice {
+    position: relative;
+    float: left;
 
     @at-root {
       &-icon {
@@ -204,52 +219,28 @@ a {
 
 
 
-  .user {
+  .preference {
     position: relative;
     float: left;
     margin-left: 15px;
 
     @at-root {
-      &-preference {
-        display: none;
+      &-opner {
+        position: relative;
+        display: block;
+        width: 35px;
+        height: 35px;
+        background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+        background-size: 35px;
       }
 
-      &-signup {
-        @include link-decoration($highlight-color, $highlight-color, none, none);
-        display: table-cell;
-        height: 60px;
-        font-weight: bold;
-        vertical-align: middle;
-      }
+      &-avatar {
+        display: block;
 
-      &.signin {
-        margin-top: 14px;
-
-        .user-signup {
-          display: none;
-        }
-
-        .user-preference {
-          position: relative;
-          display: block;
+        img {
           width: 35px;
           height: 35px;
-          background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
-          background-size: 35px;
-        }
-
-        .user-avatar {
-          display: block;
-
-          img {
-            width: 35px;
-            height: 35px;
-            border-radius: 100%;
-          }
-        }
-
-        .user-menu {
-          // display: block;
+          border-radius: 100%;
         }
       }
 
