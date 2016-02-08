@@ -21,36 +21,82 @@
 <body>
 <div class="whole">
   <header class="head-sec">
-      <div class="head-sec-inner">
-        <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
+    <div class="head-sec-inner">
+      <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
-        <aside class="f-right clearfix">
-          <div class="head-search">
-            <form action="">
-              <input id="head-search" nama="head-search" type="text" placeholder="記事を探す">
-              <input type="submit" value="">
-            </form>
-          </div><!-- /.head-search -->
+      <aside class="f-right clearfix">
+        <div class="head-search">
+          <form action="">
+            <input id="head-search" nama="head-search" type="text" placeholder="記事を探す">
+            <input type="submit" value="">
+          </form>
+        </div><!-- /.head-search -->
 
-          <div class="user signout">
-            <a class="user-signup" href="hoge">無料登録 / ログイン</a>
+        <div class="notice">
+          <a class="notice-opner" href="#">
+            <i class="notice-icon"></i>
+            <span class="notice-num">88</span>
+          </a>
 
-            <a class="user-preference" href="#">
-              <span class="user-notice">88</span>
-              <span class="user-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
-            </a>
+          <nav class="notice-menu">
+            <div class="dropMenu">
+              <div class="info">
+                <h2 class="info-heading">お知らせ</h2>
+                <div class="info-btn-readAll"><a href="hoge">すべて既読にする</a></div>
+                <ul class="info-list">
+                  <li class="info-item">
+                    <a class="info-link read" href="hoge1">
+                      <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                      <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Good</strong>しました。</p>
+                      <p class="info-date">29分前</p>
+                    </a>
+                  </li>
+                  <li class="info-item">
+                    <a class="info-link unread" href="hoge">
+                      <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                      <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Bad</strong>しました。</p>
+                      <p class="info-date">29分前</p>
+                    </a>
+                  </li>
+                  <li class="info-item">
+                    <a class="info-link read" href="hoge">
+                      <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                      <p class="info-content">〇〇さんがあなたの「長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合」へのコメントに<strong>コメント</strong>しました。</p>
+                      <p class="info-date">29分前</p>
+                    </a>
+                  </li>
+                  <li class="info-item">
+                    <a class="info-link read" href="hoge">
+                      <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                      <p class="info-content">〇〇さんがあなたの「長文が入って2行になった場合長文が入って2行になった場合長文が入って2行になった場合」へのコメントに<strong>Good</strong>しました。</p>
+                      <p class="info-date">29分前</p>
+                    </a>
+                  </li>
+                  <li class="btn-viewmore"><a class="btn-viewmore-link" href="hoge"><span>すべて見る</span></a></li>
+                </ul>
+              </div><!-- /.info -->
+            </div>
+          </nav><!-- /.notice-menu -->
+        </div><!-- /.notice -->
 
-            <nav class="user-menu">
-              <ul class="dropMenu">
-                <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ブックマーク<br>アクティビティ</a></li>
-                <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">設定</a></li>
-                <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ログアウト</a></li>
-              </ul>
-            </nav><!-- /.user-menu -->
-          </div><!-- /.user -->
-        </aside>
-      </div><!-- /.head-sec-inner -->
-    </header><!-- /.head-sec -->
+        <div class="user signin">
+          <a class="user-signup" href="hoge">無料登録 / ログイン</a>
+
+          <a class="user-preference" href="#">
+            <span class="user-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
+          </a>
+
+          <nav class="user-menu">
+            <ul class="dropMenu">
+              <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ブックマーク<br>アクティビティ</a></li>
+              <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">設定</a></li>
+              <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ログアウト</a></li>
+            </ul>
+          </nav><!-- /.user-menu -->
+        </div><!-- /.user -->
+      </aside>
+    </div><!-- /.head-sec-inner -->
+  </header><!-- /.head-sec -->
 
   <nav class="gnav-sec">
     <div class="row row1">
@@ -109,6 +155,7 @@
       <nav class="user-config-nav">
         <a class="user-config-nav-bookmark current" href="hoge"><span>ブックマーク</span></a>
         <a class="user-config-nav-activity" href="hoge"><span>アクティビティ</span></a>
+        <a class="user-config-nav-info" href="hoge"><span>お知らせ</span></a>
       </nav>
 
       <a class="user-config-btn-setting" href="#">アカウント設定</a>
@@ -118,108 +165,31 @@
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-        <div class="board">
-          <div class="column1 board-column">
-            <div class="board-item">
-              <a class="post" href="hoge">
-                <figure class="post-thumb">
-                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
-                </figure>
-                <div class="post-data">
-                  <p class="post-category">海外サッカー</p>
-                  <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
-                  <p class="post-date">12月18日(金) 22:04</p>
-                  <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
-                </div>
-              </a>
-
-              <a class="btn-bookmark" href="hoge"><span>ブックマーク解除</span></a>
-
-              <div class="feature-user comment-item">
-                <figure class="comment-user">
-                  <a class="comment-user-link" href="hoge">
-                    <span class="comment-user-thumb">&nbsp;</span>
-                    <figcaption class="comment-user-data">
-                      <p class="comment-user-name">山田 太郎</p>
-                      <p class="comment-user-job">スポーツライター</p>
-                    </figcaption>
-                  </a>
-                </figure>
-
-                <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
-
-                <div class="comment-response">
-                  <a class="comment-response-btn comment-response-like active" href="#"><i></i>99999</a>
-                  <a class="comment-response-btn comment-response-dislike" href="#"><i></i>99999</a>
-                </div>
-              </div><!-- /.feature-user -->
-
-              <div class="commented-user">
-                <ul>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                </ul>
-                <span class="commented-user-andmore">+9999</span>
+        <ul class="board-small">
+          <li class="board-item">
+            <div class="btn-bookmark"><a class="enable" href="#"><span>ブックマーク済</span></a></div>
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">海外サッカー</p>
+                <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
+                <p class="post-date">12月18日(金) 22:04</p>
               </div>
-            </div><!-- /.board-item -->
-
-          </div>
-
-          <div class="column2 board-column">
-            <div class="board-item">
-              <a class="post" href="hoge">
-                <figure class="post-thumb">
-                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
-                </figure>
-                <div class="post-data">
-                  <p class="post-category">海外サッカー</p>
-                  <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
-                  <p class="post-date">12月18日(金) 22:04</p>
-                  <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
-                </div>
-              </a>
-
-              <a class="btn-bookmark-disable" href="hoge"><span>ブックマークする</span></a>
-
-              <div class="feature-user comment-item">
-                <figure class="comment-user">
-                  <a class="comment-user-link" href="hoge">
-                    <span class="comment-user-thumb">&nbsp;</span>
-                    <figcaption class="comment-user-data">
-                      <p class="comment-user-name">山田 太郎</p>
-                      <p class="comment-user-job">スポーツライター</p>
-                    </figcaption>
-                  </a>
-                </figure>
-
-                <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
-
-                <div class="comment-response">
-                  <a class="comment-response-btn comment-response-like active" href="#"><i></i>99999</a>
-                  <a class="comment-response-btn comment-response-dislike" href="#"><i></i>99999</a>
-                </div>
-              </div><!-- /.feature-user -->
-
-              <div class="commented-user">
-                <ul>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                  <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                </ul>
-                <span class="commented-user-andmore">+9999</span>
+            </a>
+          </li><!-- /.board-item -->
+          <li class="board-item">
+            <div class="btn-bookmark"><a class="" href="#"><span>ブックマークする</span></a></div>
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">海外サッカー</p>
+                <h2 class="post-heading">全角６４文字タイトルが入りますタイトルが入りますタイトルが入りますタイトルが入りますタイトルが入りますタイトルが入りますタイト…</h2>
+                <p class="post-date">12月18日(金) 22:04</p>
               </div>
-            </div><!-- /.board-item -->
-          </div>
-
-          <div class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></div>
-        </div><!-- /.board -->
+            </a>
+          </li><!-- /.board-item -->
+          <li class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></li>
+        </ul><!-- /.board-small -->
 
         <div class="activity">
           <ul class="activity-list">
@@ -247,8 +217,44 @@
                 <p class="activity-date">29分前</p>
               </a>
             </li>
+            <li class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></li>
           </ul>
         </div><!-- /.activity -->
+
+        <div class="info">
+          <div class="info-btn-readAll"><a href="hoge">すべて既読にする</a></div>
+          <ul class="info-list">
+            <li class="info-item">
+              <a class="info-link read" href="hoge1">
+                <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Good</strong>しました。</p>
+                <p class="info-date">29分前</p>
+              </a>
+            </li>
+            <li class="info-item">
+              <a class="info-link unread" href="hoge">
+                <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Bad</strong>しました。</p>
+                <p class="info-date">29分前</p>
+              </a>
+            </li>
+            <li class="info-item">
+              <a class="info-link read" href="hoge">
+                <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                <p class="info-content">〇〇さんがあなたの「長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合」へのコメントに<strong>コメント</strong>しました。</p>
+                <p class="info-date">29分前</p>
+              </a>
+            </li>
+            <li class="info-item">
+              <a class="info-link read" href="hoge">
+                <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                <p class="info-content">〇〇さんがあなたの「長文が入って2行になった場合長文が入って2行になった場合長文が入って2行になった場合」へのコメントに<strong>Good</strong>しました。</p>
+                <p class="info-date">29分前</p>
+              </a>
+            </li>
+            <li class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></li>
+          </ul>
+        </div><!-- /.info -->
       </section><!-- /.main-sec -->
 
       <section class="side-sec">
@@ -256,150 +262,146 @@
 
         <div class="app-bnr"><a href="hoge"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 データ先読みで、電車でもサクサク記事が読める！"></a></div>
 
-        <div class="widget-ranking">
+        <div class="board-small widget-ranking">
           <div class="widget-ranking-heading">
             <h3 class="widget-ranking-heading-title"><img src="/assets/images/common/side-ranking-heading.png" alt="RANKING"></h3>
             <span class="widget-ranking-heading-ruby">人気の記事</span>
           </div>
 
-          <div class="widget-ranking-item rank1">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
+          <ul class="post-list">
+            <li class="board-item rank1">
+              <a class="post" href="hoge">
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
 
-              <div class="post-data">
-                <p class="post-category">海外サッカー</p>
-                <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-ranking-item -->
+                <div class="post-data">
+                  <p class="post-category">海外サッカー</p>
+                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item rank2">
+              <a class="post" href="hoge">
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_2.jpg" alt=""></figure>
 
-          <div class="widget-ranking-item rank2">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_2.jpg" alt=""></figure>
+                <div class="post-data">
+                  <p class="post-category">海外サッカー</p>
+                  <h4 class="post-heading">タイトル１行の場合</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item rank3">
+              <a class="post" href="hoge">
+                <figure class="post-thumb">&nbsp;</figure>
 
-              <div class="post-data">
-                <p class="post-category">海外サッカー</p>
-                <h4 class="post-heading">タイトル１行の場合</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-ranking-item -->
+                <div class="post-data">
+                  <p class="post-category">大相撲</p>
+                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item rank4">
+              <a class="post" href="hoge">
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_4.jpg" alt=""></figure>
 
-          <div class="widget-ranking-item rank3">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">&nbsp;</figure>
+                <div class="post-data">
+                  <p class="post-category">ゴルフ</p>
+                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item rank5">
+              <a class="post" href="hoge">
+                <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_5.jpg" alt=""></figure>
 
-              <div class="post-data">
-                <p class="post-category">大相撲</p>
-                <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-ranking-item -->
-
-          <div class="widget-ranking-item rank4">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_4.jpg" alt=""></figure>
-
-              <div class="post-data">
-                <p class="post-category">ゴルフ</p>
-                <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-ranking-item -->
-
-          <div class="widget-ranking-item rank5">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_5.jpg" alt=""></figure>
-
-              <div class="post-data">
-                <p class="post-category">海外サッカー</p>
-                <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-ranking-item -->
+                <div class="post-data">
+                  <p class="post-category">海外サッカー</p>
+                  <h4 class="post-heading">全角３０文字タイトルが入りますタイトルが入りますタイトルが…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+          </ul><!-- /.board-list -->
         </div>
 
-        <div class="widget-recommend">
+        <div class="board-small widget-recommend">
           <div class="widget-recommend-heading">
             <h3 class="widget-recommend-heading-title"><img src="/assets/images/common/side-recommend-heading.png" alt="RECOMMEND"></h3>
             <span class="widget-recommend-heading-ruby">オススメ動画</span>
           </div>
 
-          <div class="widget-recommend-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">
-                <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
-              </figure>
+          <ul class="board-list">
+            <li class="board-item">
+              <a class="post" href="hoge">
+                <figure class="post-thumb">
+                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
+                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                </figure>
 
-              <div class="post-data">
-                <p class="post-category">海外サッカー</p>
-                <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-recommend-item -->
+                <div class="post-data">
+                  <p class="post-category">海外サッカー</p>
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item">
+              <a class="post" href="hoge">
+                <figure class="post-thumb">
+                  <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
+                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                </figure>
 
-          <div class="widget-recommend-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">
-                <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
-              </figure>
+                <div class="post-data">
+                  <p class="post-category">テニス</p>
+                  <h4 class="post-heading">タイトル１行の場合</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item">
+              <a class="post" href="hoge">
+                <figure class="post-thumb">
+                  <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
+                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                </figure>
 
-              <div class="post-data">
-                <p class="post-category">テニス</p>
-                <h4 class="post-heading">タイトル１行の場合</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-recommend-item -->
+                <div class="post-data">
+                  <p class="post-category">バスケットボール</p>
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item">
+              <a class="post" href="hoge">
+                <figure class="post-thumb">&nbsp;</figure>
 
-          <div class="widget-recommend-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">
-                <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
-              </figure>
+                <div class="post-data">
+                  <p class="post-category">バレー</p>
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+            <li class="board-item">
+              <a class="post" href="hoge">
+                <figure class="post-thumb">
+                  <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
+                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                </figure>
 
-              <div class="post-data">
-                <p class="post-category">バスケットボール</p>
-                <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-recommend-item -->
-
-          <div class="widget-recommend-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">&nbsp;</figure>
-
-              <div class="post-data">
-                <p class="post-category">バレー</p>
-                <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-recommend-item -->
-
-          <div class="widget-recommend-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">
-                <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
-              </figure>
-
-              <div class="post-data">
-                <p class="post-category">柔道</p>
-                <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
-                <p class="post-date">12月18日(金) 19:00</p>
-              </div>
-            </a>
-          </div><!-- /.widget-recommend-item -->
+                <div class="post-data">
+                  <p class="post-category">柔道</p>
+                  <h4 class="post-heading">全角２２文字タイトルが入りますタイトルが入…</h4>
+                  <p class="post-date">12月18日(金) 19:00</p>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div><!-- /.widget-recommend -->
 
         <div class="sponsor-link nadir"><a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-sponsor_2.jpg" alt=""></a></div>
