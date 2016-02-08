@@ -234,14 +234,14 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
 
           return React.createElement(
             'li',
-            { className: 'headline-item headline-item-' + p.index },
+            { className: 'board-item board-item-' + p.index },
             React.createElement(
               'a',
               { className: 'post', href: p.url },
               React.createElement(
                 'figure',
                 { className: 'post-thumb' },
-                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+                React.createElement('img', { src: p.thumbnail, alt: p.caption })
               ),
               React.createElement(
                 'div',
@@ -303,13 +303,28 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
             ),
             React.createElement(
               'ul',
-              { className: 'headline-list' },
+              { className: 'board-small column2' },
               list.map(function (article, i) {
 
                 var dae = new _ArticleDae.ArticleDae(article);
-                var thumbnail = dae.media.images.thumbnail;
+                var thumbnail = undefined,
+                    caption = undefined;
+
+                // mediaType データ取り出し変更
+                if (dae.mediaType === 'image') {
+                  // type image
+                  thumbnail = dae.media.images.thumbnail;
+                  caption = dae.media.images.caption;
+                } else {
+                  // type video
+                  thumbnail = dae.media.video.thumbnail;
+                  caption = dae.media.video.caption;
+                }
+
                 // thumbnail を check しなければ代替画像にする
-                thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+                if (!thumbnail) {
+                  thumbnail = _Empty.Empty.IMG_SMALL;
+                }
 
                 // HeadlineDom instance を使い render
                 return React.createElement(HeadlineDom, {
@@ -321,7 +336,7 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
                   url: dae.url,
                   date: dae.formatDate,
                   title: dae.title,
-                  caption: dae.media.images.caption,
+                  caption: caption,
                   thumbnail: thumbnail
                 });
               })

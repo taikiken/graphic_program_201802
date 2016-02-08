@@ -191,7 +191,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-08 16:20:39
+	 * @date 2016-02-08 18:52:54
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -10984,10 +10984,10 @@
 	      return '/assets/images/common/thumb-noimage-70x70.png';
 	    }
 	    /**
-	     * img thumbnail 代替画像パス<br>
+	     * img middle 代替画像パス<br>
 	     * [Ex.] 記事一覧<br>
 	     * @readonly
-	     * @return {string} 代替画像パス【中】
+	     * @return {string} 代替画像パス【記事一覧】
 	     */
 
 	  }, {
@@ -10997,10 +10997,24 @@
 	      return '/assets/images/common/thumb-noimage-340x150.png';
 	    }
 	    /**
+	     * img large 代替画像パス<br>
+	     * [Ex.] スライドショー<br>
+	     * @readonly
+	     * @return {string} 代替画像パス【スライドショー】
+	     */
+
+	  }, {
+	    key: 'IMG_LARGE',
+	    get: function get() {
+
+	      // ToDo: デザインができたらパスを正しいものに変更する
+	      return '/assets/images/common/xxx_slide.png';
+	    }
+	    /**
 	     * video thumbnail 代替画像パス<br>
 	     * [Ex.] sidebar video...
 	     * @readonly
-	     * @return {string} 代替画像パス【小】
+	     * @return {string} 代替画像パス【16 x 9】
 	     */
 
 	  }, {
@@ -11800,7 +11814,7 @@
 	      return this.images.caption;
 	    }
 	    /**
-	     *
+	     * for slide
 	     * @return {string} article.media.images.large
 	     */
 
@@ -11810,7 +11824,7 @@
 	      return this.images.large;
 	    }
 	    /**
-	     *
+	     * 記事一覧
 	     * @return {string} article.media.images.medium
 	     */
 
@@ -11820,7 +11834,7 @@
 	      return this.images.medium;
 	    }
 	    /**
-	     *
+	     * 1 x 1 small
 	     * @return {string} article.media.images.thumbnail
 	     */
 
@@ -11905,7 +11919,7 @@
 	      return this.video.caption;
 	    }
 	    /**
-	     *
+	     * 1 x 1 small size
 	     * @return {string} article.media.video.thumbnail
 	     */
 
@@ -11913,6 +11927,26 @@
 	    key: 'thumbnail',
 	    get: function get() {
 	      return this.video.thumbnail;
+	    }
+	    /**
+	     * for slide
+	     * @return {string} article.media.images.large
+	     */
+
+	  }, {
+	    key: 'large',
+	    get: function get() {
+	      return this.video.large;
+	    }
+	    /**
+	     * 16 x 9 記事一覧
+	     * @return {string} article.media.images.medium
+	     */
+
+	  }, {
+	    key: 'medium',
+	    get: function get() {
+	      return this.video.medium;
 	    }
 	    /**
 	     *
@@ -13619,7 +13653,7 @@
 	          if (this.state.show && this.rise === null) {
 	            // mount 後
 	            // button が表示されているなら rise 監視を始める
-	            this.rise = new _Rise.Rise(element, 100);
+	            this.rise = new _Rise.Rise(element);
 	            this.rise.on(_Rise.Rise.RISE, this.onRise);
 	            this.rise.start();
 	          }
@@ -13797,7 +13831,7 @@
 	            // click ずみの時は不可
 	            return React.createElement(
 	              'a',
-	              { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
+	              { className: 'comment-reaction-btn comment-reaction-like' + activeClass, href: '#', onClick: this.handleClick },
 	              React.createElement(
 	                'i',
 	                null,
@@ -13815,7 +13849,7 @@
 	            // click 不可
 	            return React.createElement(
 	              'span',
-	              { className: 'comment-response-btn comment-response-like' },
+	              { className: 'comment-reaction-btn comment-reaction-like' },
 	              React.createElement(
 	                'i',
 	                null,
@@ -13866,11 +13900,10 @@
 	          var activeClass = active ? ' active' : '';
 
 	          if (sign) {
-
 	            // login user
 	            return React.createElement(
 	              'a',
-	              { className: 'comment-response-btn comment-response-dislike' + activeClass, href: '#', onClick: this.handleClick },
+	              { className: 'comment-reaction-btn comment-reaction-dislike' + activeClass, href: '#', onClick: this.handleClick },
 	              React.createElement(
 	                'i',
 	                null,
@@ -13883,11 +13916,10 @@
 	              )
 	            );
 	          } else {
-
 	            // not login user
 	            return React.createElement(
 	              'span',
-	              { className: 'comment-response-btn comment-response-dislike' },
+	              { className: 'comment-reaction-btn comment-reaction-dislike' },
 	              React.createElement(
 	                'i',
 	                null,
@@ -13943,6 +13975,7 @@
 	          if (hasFirst) {
 
 	            // 少なくとも1件は存在する
+	            // 総件数から 1 マイナス
 	            total -= 1;
 	            console.log('少なくとも1件は存在する ', articleId);
 
@@ -13951,7 +13984,7 @@
 	            // 1件目コメント・ユーザー
 	            var firstUser = first.user;
 	            // ユーザーサムネイル
-	            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
+	            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
 	            // login 済かを調べる
 	            var sign = _User.User.sign;
 
@@ -13991,7 +14024,7 @@
 	                React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
 	                React.createElement(
 	                  'div',
-	                  { className: 'comment-response' },
+	                  { className: 'comment-reaction' },
 	                  React.createElement(GoodLink, {
 	                    sign: sign,
 	                    comment: first,
@@ -14069,56 +14102,58 @@
 	          // dom出力する
 	          return React.createElement(
 	            'div',
-	            { className: this.state.arranged },
-	            React.createElement(
-	              'div',
-	              { ref: 'boardRout' },
+	            { ref: 'boardRout' },
 
-	              // loop start
-	              this.state.list.map(function (dae, i) {
+	            // loop start
+	            this.state.list.map(function (dae, i) {
 
-	                //let dae = new ArticleDae( article );
-	                //articlesList.push( dae );
+	              var commentsPopular = dae.commentsPopular;
+	              var commentsTotal = dae.commentsCount;
+	              var thumbnail = undefined;
+	              var caption = undefined;
+	              var figureTag = undefined;
 
-	                var thumbnail = undefined;
-	                var caption = undefined;
-	                if (dae.mediaType === 'image') {
-	                  thumbnail = dae.media.images.medium;
-	                  caption = dae.media.images.caption;
-	                } else {
-	                  thumbnail = dae.media.video.thumbnail;
-	                  caption = dae.media.video.caption;
+	              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
+
+	              // media type で thumbnail 切替
+	              if (dae.mediaType === 'image') {
+	                // type: image
+	                thumbnail = dae.media.images.medium;
+	                caption = dae.media.images.caption;
+
+	                if (!thumbnail) {
+	                  thumbnail = _Empty.Empty.IMG_MIDDLE;
 	                }
 
-	                thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
+	                figureTag = React.createElement(
+	                  'figure',
+	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+	                  React.createElement('img', { src: thumbnail, alt: caption })
+	                );
+	              } else {
+	                // type: video
+	                thumbnail = dae.media.video.medium;
+	                caption = dae.media.video.caption;
 
-	                var commentsPopular = dae.commentsPopular;
-	                var figureTag = undefined;
-	                var commentsTotal = dae.commentsCount;
-
-	                console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
-
-	                if (dae.mediaType === 'image') {
-	                  // type: image
-	                  figureTag = React.createElement(
-	                    'figure',
-	                    { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                    React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-	                  );
-	                } else {
-	                  // type: video
-	                  figureTag = React.createElement(
-	                    'figure',
-	                    { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                    React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
-	                    React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-	                  );
+	                if (!thumbnail) {
+	                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
 	                }
 
-	                // unique key(React)にarticle id(number)記事Idを使用します
-	                return React.createElement(
+	                figureTag = React.createElement(
+	                  'figure',
+	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+	                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY }),
+	                  React.createElement('img', { src: thumbnail, alt: caption })
+	                );
+	              }
+
+	              // unique key(React)にarticle id(number)記事Idを使用します
+	              return React.createElement(
+	                'div',
+	                { key: 'archive-' + dae.id, className: 'board-large-column' },
+	                React.createElement(
 	                  'div',
-	                  { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
+	                  { className: 'board-item board-item-' + i },
 	                  React.createElement(
 	                    'a',
 	                    { className: 'post', href: dae.url },
@@ -14149,10 +14184,10 @@
 	                    )
 	                  ),
 	                  React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
-	                );
-	                // loop end
-	              })
-	            )
+	                )
+	              );
+	              // loop end
+	            })
 	          );
 	        },
 	        // state 変更し dom が更新された後に呼び出される delegate
@@ -14226,7 +14261,7 @@
 
 	          // isotope を行います
 	          this.isotope = new Isotope(this.refs.boardRout, {
-	            itemSelector: '.board-item',
+	            itemSelector: '.board-large-column',
 	            masonry: {
 	              gutter: 30
 	            }
@@ -17033,14 +17068,14 @@
 
 	          return React.createElement(
 	            'li',
-	            { className: 'headline-item headline-item-' + p.index },
+	            { className: 'board-item board-item-' + p.index },
 	            React.createElement(
 	              'a',
 	              { className: 'post', href: p.url },
 	              React.createElement(
 	                'figure',
 	                { className: 'post-thumb' },
-	                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	                React.createElement('img', { src: p.thumbnail, alt: p.caption })
 	              ),
 	              React.createElement(
 	                'div',
@@ -17102,13 +17137,28 @@
 	            ),
 	            React.createElement(
 	              'ul',
-	              { className: 'headline-list' },
+	              { className: 'board-small column2' },
 	              list.map(function (article, i) {
 
 	                var dae = new _ArticleDae.ArticleDae(article);
-	                var thumbnail = dae.media.images.thumbnail;
+	                var thumbnail = undefined,
+	                    caption = undefined;
+
+	                // mediaType データ取り出し変更
+	                if (dae.mediaType === 'image') {
+	                  // type image
+	                  thumbnail = dae.media.images.thumbnail;
+	                  caption = dae.media.images.caption;
+	                } else {
+	                  // type video
+	                  thumbnail = dae.media.video.thumbnail;
+	                  caption = dae.media.video.caption;
+	                }
+
 	                // thumbnail を check しなければ代替画像にする
-	                thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+	                if (!thumbnail) {
+	                  thumbnail = _Empty.Empty.IMG_SMALL;
+	                }
 
 	                // HeadlineDom instance を使い render
 	                return React.createElement(HeadlineDom, {
@@ -17120,7 +17170,7 @@
 	                  url: dae.url,
 	                  date: dae.formatDate,
 	                  title: dae.title,
-	                  caption: dae.media.images.caption,
+	                  caption: caption,
 	                  thumbnail: thumbnail
 	                });
 	              })
@@ -17441,6 +17491,7 @@
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
 	          large: React.PropTypes.string.isRequired,
+	          caption: React.PropTypes.string.isRequired,
 	          commentsCount: React.PropTypes.number.isRequired
 	        },
 	        render: function render() {
@@ -17453,13 +17504,13 @@
 	              'a',
 	              { href: p.url },
 	              React.createElement('img', { src: _Empty.Empty.KV_OVERLAY, alt: '', className: 'overlay' }),
-	              React.createElement('img', { src: p.large, alt: p.title }),
+	              React.createElement('img', { src: p.large, alt: p.caption }),
 	              React.createElement(
 	                'div',
 	                { className: 'post-overview' },
 	                React.createElement(
 	                  'p',
-	                  { className: 'post-category cat-' + p.slug },
+	                  { className: 'post-category post-category-' + p.slug },
 	                  p.category
 	                ),
 	                React.createElement(
@@ -17602,6 +17653,23 @@
 	          var make = function make(article, i) {
 
 	            var dae = new _ArticleDae.ArticleDae(article);
+	            var large = undefined,
+	                caption = undefined;
+
+	            // mediaType データ取り出し変更
+	            if (dae.mediaType === 'image') {
+	              // type image
+	              large = dae.media.images.large;
+	              caption = dae.media.images.caption;
+	            } else {
+	              // type video
+	              large = dae.media.video.large;
+	              caption = dae.media.video.caption;
+	            }
+
+	            if (!large) {
+	              large = _Empty.Empty.IMG_LARGE;
+	            }
 
 	            // HeadlineDom instance を使い render
 	            // iteration key は index を使う
@@ -17615,7 +17683,8 @@
 	              url: dae.url,
 	              date: dae.formatDate,
 	              title: dae.title,
-	              large: dae.media.images.large,
+	              large: large,
+	              caption: caption,
 	              commentsCount: dae.commentsCount
 	            });
 	          };
@@ -17932,15 +18001,15 @@
 	          var n = p.index + 1;
 
 	          return React.createElement(
-	            'div',
-	            { className: 'widget-ranking-item rank' + n + ' ranking-' + (p.slug || categorySlug) },
+	            'li',
+	            { className: 'board-item rank' + n + ' ranking-' + (p.slug || categorySlug) },
 	            React.createElement(
 	              'a',
 	              { href: p.url, className: 'post' },
 	              React.createElement(
 	                'figure',
 	                { className: 'post-thumb' },
-	                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	                React.createElement('img', { src: p.thumbnail, alt: p.caption })
 	              ),
 	              React.createElement(
 	                'div',
@@ -17998,7 +18067,7 @@
 
 	          return React.createElement(
 	            'div',
-	            { className: 'widget-ranking' },
+	            { className: 'board-small widget-ranking' },
 	            React.createElement(
 	              'div',
 	              { className: 'widget-ranking-heading' },
@@ -18014,27 +18083,47 @@
 	                categoryTitle
 	              )
 	            ),
-	            list.map(function (article, i) {
+	            React.createElement(
+	              'ul',
+	              { className: 'post-list' },
+	              list.map(function (article, i) {
 
-	              var dae = new _ArticleDae.ArticleDae(article);
-	              var thumbnail = dae.mediaType === 'image' ? dae.media.images.thumbnail : dae.media.video.thumbnail;
-	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+	                var dae = new _ArticleDae.ArticleDae(article);
+	                var thumbnail = undefined,
+	                    caption = undefined;
 
-	              // HeadlineDom instance を使い render
-	              return React.createElement(RankingDom, {
-	                key: 'ranking-' + dae.id,
-	                index: i,
-	                id: String(dae.id),
-	                slug: dae.category.slug,
-	                category: dae.category.label,
-	                url: dae.url,
-	                date: dae.formatDate,
-	                title: dae.title,
-	                thumbnail: thumbnail,
-	                caption: dae.media.images.caption,
-	                total: dae.commentsCount
-	              });
-	            })
+	                // mediaType データ取り出し変更
+	                if (dae.mediaType === 'image') {
+	                  // type image
+	                  thumbnail = dae.media.images.thumbnail;
+	                  caption = dae.media.images.caption;
+	                } else {
+	                  // type video
+	                  thumbnail = dae.media.video.thumbnail;
+	                  caption = dae.media.video.caption;
+	                }
+
+	                // thumbnail を check なければ代替画像にする
+	                if (!thumbnail) {
+	                  thumbnail = _Empty.Empty.IMG_SMALL;
+	                }
+
+	                // RankingDom instance を使い render
+	                return React.createElement(RankingDom, {
+	                  key: 'ranking-' + dae.id,
+	                  index: i,
+	                  id: String(dae.id),
+	                  slug: dae.category.slug,
+	                  category: dae.category.label,
+	                  url: dae.url,
+	                  date: dae.formatDate,
+	                  title: dae.title,
+	                  thumbnail: thumbnail,
+	                  caption: caption,
+	                  total: dae.commentsCount
+	                });
+	              })
+	            )
 	          );
 	        },
 	        componentDidMount: function componentDidMount() {
@@ -18270,8 +18359,8 @@
 	          var p = this.props;
 
 	          return React.createElement(
-	            'div',
-	            { className: 'widget-recommend-item videos-' + p.index + ' videos-' + (p.slug || categorySlug) },
+	            'li',
+	            { className: 'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug) },
 	            React.createElement(
 	              'a',
 	              { href: p.url, className: 'post' },
@@ -18279,7 +18368,7 @@
 	                'figure',
 	                { className: 'post-thumb' },
 	                React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
-	                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+	                React.createElement('img', { src: p.thumbnail, alt: p.caption })
 	              ),
 	              React.createElement(
 	                'div',
@@ -18337,7 +18426,7 @@
 
 	          return React.createElement(
 	            'div',
-	            { className: 'widget-recommend' },
+	            { className: 'board-small widget-recommend' },
 	            React.createElement(
 	              'div',
 	              { className: 'widget-recommend-heading' },
@@ -18353,26 +18442,35 @@
 	                categoryTitle
 	              )
 	            ),
-	            list.map(function (article, i) {
+	            React.createElement(
+	              'ul',
+	              { className: 'board-list' },
+	              list.map(function (article, i) {
 
-	              var dae = new _ArticleDae.ArticleDae(article);
-	              var thumbnail = dae.media.video.thumbnail;
-	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.VIDEO_THUMBNAIL;
+	                var dae = new _ArticleDae.ArticleDae(article);
+	                var thumbnail = dae.media.video.medium;
 
-	              // HeadlineDom instance を使い render
-	              return React.createElement(VideosDom, {
-	                key: 'ranking-' + dae.id,
-	                index: i,
-	                id: String(dae.id),
-	                slug: dae.category.slug,
-	                category: dae.category.label,
-	                url: dae.url,
-	                date: dae.formatDate,
-	                title: dae.title,
-	                caption: dae.media.video.caption,
-	                thumbnail: thumbnail
-	              });
-	            })
+	                // thumbnail(16x9) を check なければ代替画像にする
+	                if (!thumbnail) {
+	                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
+	                }
+
+	                // VideosDom instance を使い render
+	                return React.createElement(VideosDom, {
+	                  key: 'ranking-' + dae.id,
+	                  index: i,
+	                  id: String(dae.id),
+	                  slug: dae.category.slug,
+	                  category: dae.category.label,
+	                  url: dae.url,
+	                  date: dae.formatDate,
+	                  title: dae.title,
+	                  caption: dae.media.video.caption,
+	                  thumbnail: thumbnail
+	                });
+	              }) // map
+
+	            )
 	          );
 	        },
 	        componentDidMount: function componentDidMount() {

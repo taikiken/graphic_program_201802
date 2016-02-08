@@ -207,8 +207,8 @@ var ViewVideos = exports.ViewVideos = function (_View) {
           var p = this.props;
 
           return React.createElement(
-            'div',
-            { className: 'widget-recommend-item videos-' + p.index + ' videos-' + (p.slug || categorySlug) },
+            'li',
+            { className: 'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug) },
             React.createElement(
               'a',
               { href: p.url, className: 'post' },
@@ -216,7 +216,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
                 'figure',
                 { className: 'post-thumb' },
                 React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
-                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+                React.createElement('img', { src: p.thumbnail, alt: p.caption })
               ),
               React.createElement(
                 'div',
@@ -274,7 +274,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
 
           return React.createElement(
             'div',
-            { className: 'widget-recommend' },
+            { className: 'board-small widget-recommend' },
             React.createElement(
               'div',
               { className: 'widget-recommend-heading' },
@@ -290,26 +290,35 @@ var ViewVideos = exports.ViewVideos = function (_View) {
                 categoryTitle
               )
             ),
-            list.map(function (article, i) {
+            React.createElement(
+              'ul',
+              { className: 'board-list' },
+              list.map(function (article, i) {
 
-              var dae = new _ArticleDae.ArticleDae(article);
-              var thumbnail = dae.media.video.thumbnail;
-              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.VIDEO_THUMBNAIL;
+                var dae = new _ArticleDae.ArticleDae(article);
+                var thumbnail = dae.media.video.medium;
 
-              // HeadlineDom instance を使い render
-              return React.createElement(VideosDom, {
-                key: 'ranking-' + dae.id,
-                index: i,
-                id: String(dae.id),
-                slug: dae.category.slug,
-                category: dae.category.label,
-                url: dae.url,
-                date: dae.formatDate,
-                title: dae.title,
-                caption: dae.media.video.caption,
-                thumbnail: thumbnail
-              });
-            })
+                // thumbnail(16x9) を check なければ代替画像にする
+                if (!thumbnail) {
+                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
+                }
+
+                // VideosDom instance を使い render
+                return React.createElement(VideosDom, {
+                  key: 'ranking-' + dae.id,
+                  index: i,
+                  id: String(dae.id),
+                  slug: dae.category.slug,
+                  category: dae.category.label,
+                  url: dae.url,
+                  date: dae.formatDate,
+                  title: dae.title,
+                  caption: dae.media.video.caption,
+                  thumbnail: thumbnail
+                });
+              }) // map
+
+            )
           );
         },
         componentDidMount: function componentDidMount() {

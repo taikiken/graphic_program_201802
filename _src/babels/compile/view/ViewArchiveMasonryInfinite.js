@@ -299,7 +299,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           if (this.state.show && this.rise === null) {
             // mount 後
             // button が表示されているなら rise 監視を始める
-            this.rise = new _Rise.Rise(element, 100);
+            this.rise = new _Rise.Rise(element);
             this.rise.on(_Rise.Rise.RISE, this.onRise);
             this.rise.start();
           }
@@ -477,7 +477,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             // click ずみの時は不可
             return React.createElement(
               'a',
-              { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
+              { className: 'comment-reaction-btn comment-reaction-like' + activeClass, href: '#', onClick: this.handleClick },
               React.createElement(
                 'i',
                 null,
@@ -495,7 +495,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             // click 不可
             return React.createElement(
               'span',
-              { className: 'comment-response-btn comment-response-like' },
+              { className: 'comment-reaction-btn comment-reaction-like' },
               React.createElement(
                 'i',
                 null,
@@ -546,11 +546,10 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           var activeClass = active ? ' active' : '';
 
           if (sign) {
-
             // login user
             return React.createElement(
               'a',
-              { className: 'comment-response-btn comment-response-dislike' + activeClass, href: '#', onClick: this.handleClick },
+              { className: 'comment-reaction-btn comment-reaction-dislike' + activeClass, href: '#', onClick: this.handleClick },
               React.createElement(
                 'i',
                 null,
@@ -563,11 +562,10 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
               )
             );
           } else {
-
             // not login user
             return React.createElement(
               'span',
-              { className: 'comment-response-btn comment-response-dislike' },
+              { className: 'comment-reaction-btn comment-reaction-dislike' },
               React.createElement(
                 'i',
                 null,
@@ -623,6 +621,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           if (hasFirst) {
 
             // 少なくとも1件は存在する
+            // 総件数から 1 マイナス
             total -= 1;
             console.log('少なくとも1件は存在する ', articleId);
 
@@ -631,7 +630,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             // 1件目コメント・ユーザー
             var firstUser = first.user;
             // ユーザーサムネイル
-            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
+            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
             // login 済かを調べる
             var sign = _User.User.sign;
 
@@ -671,7 +670,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                 React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
                 React.createElement(
                   'div',
-                  { className: 'comment-response' },
+                  { className: 'comment-reaction' },
                   React.createElement(GoodLink, {
                     sign: sign,
                     comment: first,
@@ -749,56 +748,58 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           // dom出力する
           return React.createElement(
             'div',
-            { className: this.state.arranged },
-            React.createElement(
-              'div',
-              { ref: 'boardRout' },
+            { ref: 'boardRout' },
 
-              // loop start
-              this.state.list.map(function (dae, i) {
+            // loop start
+            this.state.list.map(function (dae, i) {
 
-                //let dae = new ArticleDae( article );
-                //articlesList.push( dae );
+              var commentsPopular = dae.commentsPopular;
+              var commentsTotal = dae.commentsCount;
+              var thumbnail = undefined;
+              var caption = undefined;
+              var figureTag = undefined;
 
-                var thumbnail = undefined;
-                var caption = undefined;
-                if (dae.mediaType === 'image') {
-                  thumbnail = dae.media.images.medium;
-                  caption = dae.media.images.caption;
-                } else {
-                  thumbnail = dae.media.video.thumbnail;
-                  caption = dae.media.video.caption;
+              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
+
+              // media type で thumbnail 切替
+              if (dae.mediaType === 'image') {
+                // type: image
+                thumbnail = dae.media.images.medium;
+                caption = dae.media.images.caption;
+
+                if (!thumbnail) {
+                  thumbnail = _Empty.Empty.IMG_MIDDLE;
                 }
 
-                thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
+                figureTag = React.createElement(
+                  'figure',
+                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+                  React.createElement('img', { src: thumbnail, alt: caption })
+                );
+              } else {
+                // type: video
+                thumbnail = dae.media.video.medium;
+                caption = dae.media.video.caption;
 
-                var commentsPopular = dae.commentsPopular;
-                var figureTag = undefined;
-                var commentsTotal = dae.commentsCount;
-
-                console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
-
-                if (dae.mediaType === 'image') {
-                  // type: image
-                  figureTag = React.createElement(
-                    'figure',
-                    { className: 'post-thumb post-thumb-' + dae.mediaType },
-                    React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-                  );
-                } else {
-                  // type: video
-                  figureTag = React.createElement(
-                    'figure',
-                    { className: 'post-thumb post-thumb-' + dae.mediaType },
-                    React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
-                    React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-                  );
+                if (!thumbnail) {
+                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
                 }
 
-                // unique key(React)にarticle id(number)記事Idを使用します
-                return React.createElement(
+                figureTag = React.createElement(
+                  'figure',
+                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY }),
+                  React.createElement('img', { src: thumbnail, alt: caption })
+                );
+              }
+
+              // unique key(React)にarticle id(number)記事Idを使用します
+              return React.createElement(
+                'div',
+                { key: 'archive-' + dae.id, className: 'board-large-column' },
+                React.createElement(
                   'div',
-                  { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
+                  { className: 'board-item board-item-' + i },
                   React.createElement(
                     'a',
                     { className: 'post', href: dae.url },
@@ -829,10 +830,10 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                     )
                   ),
                   React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
-                );
-                // loop end
-              })
-            )
+                )
+              );
+              // loop end
+            })
           );
         },
         // state 変更し dom が更新された後に呼び出される delegate
@@ -906,7 +907,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
           // isotope を行います
           this.isotope = new Isotope(this.refs.boardRout, {
-            itemSelector: '.board-item',
+            itemSelector: '.board-large-column',
             masonry: {
               gutter: 30
             }

@@ -40,21 +40,21 @@ export class ImagesDae {
     return this.images.caption;
   }
   /**
-   *
+   * for slide
    * @return {string} article.media.images.large
    */
   get large():string {
     return this.images.large;
   }
   /**
-   *
+   * 記事一覧
    * @return {string} article.media.images.medium
    */
   get medium():string {
     return this.images.medium;
   }
   /**
-   *
+   * 1 x 1 small
    * @return {string} article.media.images.thumbnail
    */
   get thumbnail():string {

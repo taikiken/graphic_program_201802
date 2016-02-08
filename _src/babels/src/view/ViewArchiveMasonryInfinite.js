@@ -236,7 +236,7 @@ export class ViewArchiveMasonryInfinite extends View {
         if ( this.state.show && this.rise === null ) {
           // mount 後
           // button が表示されているなら rise 監視を始める
-          this.rise = new Rise( element, 100 );
+          this.rise = new Rise( element );
           this.rise.on( Rise.RISE, this.onRise );
           this.rise.start();
         }
@@ -422,7 +422,7 @@ export class ViewArchiveMasonryInfinite extends View {
           // login user
           // click ずみの時は不可
           return (
-            <a className={'comment-response-btn comment-response-like' + activeClass} href="#" onClick={this.handleClick}>
+            <a className={'comment-reaction-btn comment-reaction-like' + activeClass} href="#" onClick={this.handleClick}>
               <i>&nbsp;</i>
               <span>{comment.good}</span>
             </a>
@@ -433,7 +433,7 @@ export class ViewArchiveMasonryInfinite extends View {
           // not login user
           // click 不可
           return (
-            <span className="comment-response-btn comment-response-like">
+            <span className="comment-reaction-btn comment-reaction-like">
               <i>&nbsp;</i>
               <span>{comment.good}</span>
             </span>
@@ -477,20 +477,17 @@ export class ViewArchiveMasonryInfinite extends View {
         let activeClass = active ? ' active' : '';
 
         if ( sign ) {
-
           // login user
           return (
-            <a className={'comment-response-btn comment-response-dislike' + activeClass} href="#" onClick={this.handleClick}>
+            <a className={'comment-reaction-btn comment-reaction-dislike' + activeClass} href="#" onClick={this.handleClick}>
               <i>&nbsp;</i>
               <span>{comment.bad}</span>
             </a>
           );
-
         } else {
-
           // not login user
           return (
-            <span className="comment-response-btn comment-response-dislike">
+            <span className="comment-reaction-btn comment-reaction-dislike">
               <i>&nbsp;</i>
               <span>{comment.bad}</span>
             </span>
@@ -538,6 +535,7 @@ export class ViewArchiveMasonryInfinite extends View {
         if ( hasFirst ) {
 
           // 少なくとも1件は存在する
+          // 総件数から 1 マイナス
           total -= 1;
           console.log( '少なくとも1件は存在する ', articleId );
 
@@ -546,7 +544,7 @@ export class ViewArchiveMasonryInfinite extends View {
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
-          let picture = firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE_FEATURE;
+          let picture = !!firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE_FEATURE;
           // login 済かを調べる
           let sign = User.sign;
 
@@ -564,7 +562,7 @@ export class ViewArchiveMasonryInfinite extends View {
                 </figure>
                 {/* insert html tag into .comment-content innerHTML */}
                 <div className="comment-content" dangerouslySetInnerHTML={{__html: first.body}} />
-                <div className="comment-response">
+                <div className="comment-reaction">
                   <GoodLink
                     sign={sign}
                     comment={first}
@@ -636,50 +634,52 @@ export class ViewArchiveMasonryInfinite extends View {
 
         // dom出力する
         return (
-          <div className={this.state.arranged}>
-            <div ref="boardRout">
-              {
-                // loop start
-                this.state.list.map( function( dae, i ) {
+          <div ref="boardRout">
+            {
+              // loop start
+              this.state.list.map( function( dae, i ) {
 
-                  //let dae = new ArticleDae( article );
-                  //articlesList.push( dae );
+                let commentsPopular = dae.commentsPopular;
+                let commentsTotal = dae.commentsCount;
+                let thumbnail;
+                let caption;
+                let figureTag;
 
-                  let thumbnail;
-                  let caption;
-                  if ( dae.mediaType === 'image' ) {
-                    thumbnail = dae.media.images.medium;
-                    caption = dae.media.images.caption;
-                  } else {
-                    thumbnail = dae.media.video.thumbnail;
-                    caption = dae.media.video.caption;
+                console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
+
+                // media type で thumbnail 切替
+                if ( dae.mediaType === 'image' ) {
+                  // type: image
+                  thumbnail = dae.media.images.medium;
+                  caption = dae.media.images.caption;
+
+                  if ( !thumbnail ) {
+                    thumbnail = Empty.IMG_MIDDLE;
                   }
 
-                  thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_MIDDLE;
+                  figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+                    <img src={thumbnail} alt={caption}/>
+                  </figure>;
 
-                  let commentsPopular = dae.commentsPopular;
-                  let figureTag;
-                  let commentsTotal = dae.commentsCount;
+                } else {
+                  // type: video
+                  thumbnail = dae.media.video.medium;
+                  caption = dae.media.video.caption;
 
-                  console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
-
-                  if ( dae.mediaType === 'image' ) {
-                    // type: image
-                    figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
-                      <img src={thumbnail} alt={caption || dae.title}/>
-                    </figure>;
-
-                  } else {
-                    // type: video
-                    figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
-                      <img className="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" />
-                      <img src={thumbnail} alt={caption || dae.title}/>
-                    </figure>;
+                  if ( !thumbnail ) {
+                    thumbnail = Empty.VIDEO_THUMBNAIL;
                   }
 
-                  // unique key(React)にarticle id(number)記事Idを使用します
-                  return (
-                    <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
+                  figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+                    <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+                    <img src={thumbnail} alt={caption}/>
+                  </figure>;
+                }
+
+                // unique key(React)にarticle id(number)記事Idを使用します
+                return (
+                  <div key={'archive-' + dae.id} className="board-large-column">
+                    <div className={'board-item board-item-' + i}>
                       <a className="post" href={dae.url}>
                         {figureTag}
                         <div className="post-data">
@@ -692,11 +692,11 @@ export class ViewArchiveMasonryInfinite extends View {
 
                       <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={dae.id} />
                     </div>
-                  );
-                  // loop end
-                } )
-              }
-            </div>
+                  </div>
+                );
+                // loop end
+              } )
+            }
           </div>
         );
 
@@ -777,7 +777,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         // isotope を行います
         this.isotope = new Isotope( this.refs.boardRout, {
-          itemSelector: '.board-item',
+          itemSelector: '.board-large-column',
           masonry: {
             gutter: 30
           }

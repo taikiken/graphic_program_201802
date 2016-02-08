@@ -240,6 +240,7 @@ export class ViewPickup extends View {
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         large: React.PropTypes.string.isRequired,
+        caption: React.PropTypes.string.isRequired,
         commentsCount: React.PropTypes.number.isRequired
       },
       render: function() {
@@ -249,9 +250,9 @@ export class ViewPickup extends View {
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
             <a href={p.url}>
               <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
-              <img src={p.large} alt={p.title}/>
+              <img src={p.large} alt={p.caption}/>
               <div className="post-overview">
-                <p className={'post-category cat-' + p.slug}>{p.category}</p>
+                <p className={'post-category post-category-' + p.slug}>{p.category}</p>
                 <h2 className='post-heading'>{p.title}</h2>
                 <p className="post-date">{p.date}</p>
                 <p className="post-comment-num">{p.commentsCount}</p>
@@ -379,6 +380,22 @@ export class ViewPickup extends View {
         let make = ( article, i ) => {
 
           let dae = new ArticleDae( article );
+          let large, caption;
+
+          // mediaType データ取り出し変更
+          if ( dae.mediaType === 'image' ) {
+            // type image
+            large = dae.media.images.large;
+            caption = dae.media.images.caption;
+          } else {
+            // type video
+            large = dae.media.video.large;
+            caption = dae.media.video.caption;
+          }
+
+          if ( !large ) {
+            large = Empty.IMG_LARGE;
+          }
 
           // HeadlineDom instance を使い render
           // iteration key は index を使う
@@ -392,7 +409,8 @@ export class ViewPickup extends View {
             url={dae.url}
             date={dae.formatDate}
             title={dae.title}
-            large={dae.media.images.large}
+            large={large}
+            caption={caption}
             commentsCount={dae.commentsCount}
           />;
 

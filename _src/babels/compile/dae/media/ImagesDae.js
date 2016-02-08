@@ -66,7 +66,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this.images.caption;
     }
     /**
-     *
+     * for slide
      * @return {string} article.media.images.large
      */
 
@@ -76,7 +76,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this.images.large;
     }
     /**
-     *
+     * 記事一覧
      * @return {string} article.media.images.medium
      */
 
@@ -86,7 +86,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this.images.medium;
     }
     /**
-     *
+     * 1 x 1 small
      * @return {string} article.media.images.thumbnail
      */
 

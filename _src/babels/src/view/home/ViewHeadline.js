@@ -176,9 +176,9 @@ export class ViewHeadline extends View {
         let p = this.props;
 
         return (
-          <li className={'headline-item headline-item-' + p.index}>
+          <li className={'board-item board-item-' + p.index}>
             <a className="post" href={p.url}>
-              <figure className="post-thumb"><img src={p.thumbnail} alt={p.caption || p.title}/></figure>
+              <figure className="post-thumb"><img src={p.thumbnail} alt={p.caption}/></figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{p.category}</p>
                 <h3 className='post-heading'>{p.title}</h3>
@@ -213,14 +213,28 @@ export class ViewHeadline extends View {
               <span className="headline-heading-ruby">注目のニュース</span>
             </div>
 
-            <ul className="headline-list">
+            <ul className="board-small column2">
               {
                 list.map( function( article, i ) {
 
                   let dae = new ArticleDae( article );
-                  let thumbnail = dae.media.images.thumbnail;
+                  let thumbnail, caption;
+
+                  // mediaType データ取り出し変更
+                  if ( dae.mediaType === 'image' ) {
+                    // type image
+                    thumbnail = dae.media.images.thumbnail;
+                    caption = dae.media.images.caption;
+                  } else {
+                    // type video
+                    thumbnail = dae.media.video.thumbnail;
+                    caption = dae.media.video.caption;
+                  }
+
                   // thumbnail を check しなければ代替画像にする
-                  thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
+                  if ( !thumbnail ) {
+                    thumbnail = Empty.IMG_SMALL;
+                  }
 
                   // HeadlineDom instance を使い render
                   return <HeadlineDom
@@ -232,7 +246,7 @@ export class ViewHeadline extends View {
                     url={dae.url}
                     date={dae.formatDate}
                     title={dae.title}
-                    caption={dae.media.images.caption}
+                    caption={caption}
                     thumbnail={thumbnail}
                   />;
 

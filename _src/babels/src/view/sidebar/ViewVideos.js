@@ -153,11 +153,11 @@ export class ViewVideos extends View {
         let p = this.props;
 
         return (
-          <div className={'widget-recommend-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
+          <li className={'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
             <a href={p.url} className='post'>
               <figure className="post-thumb">
                 <img className="post-thumb-overlay-movie" src={Empty.VIDEO_PLAY} />
-                <img src={p.thumbnail} alt={p.caption || p.title}/>
+                <img src={p.thumbnail} alt={p.caption}/>
               </figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{p.category}</p>
@@ -165,7 +165,7 @@ export class ViewVideos extends View {
                 <p className="post-date">{p.date}</p>
               </div>
             </a>
-          </div>
+          </li>
         );
       }
     } );
@@ -199,36 +199,43 @@ export class ViewVideos extends View {
 
         return (
 
-          <div className="widget-recommend">
+          <div className="board-small widget-recommend">
             {/* title */}
             <div className="widget-recommend-heading">
               <h3 className="widget-recommend-heading-title"><img src="/assets/images/common/side-recommend-heading.png" alt="RECOMMEND" /></h3>
               <span className="widget-recommend-heading-ruby">オススメ動画{categoryTitle}</span>
             </div>
-
+            <ul className="board-list">
             {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-                let thumbnail = dae.media.video.thumbnail;
-                thumbnail = thumbnail !== '' ? thumbnail : Empty.VIDEO_THUMBNAIL;
+                let thumbnail = dae.media.video.medium;
 
-                // HeadlineDom instance を使い render
-                return <VideosDom
-                  key={'ranking-' + dae.id}
-                  index={i}
-                  id={String( dae.id )}
-                  slug={dae.category.slug}
-                  category={dae.category.label}
-                  url={dae.url}
-                  date={dae.formatDate}
-                  title={dae.title}
-                  caption={dae.media.video.caption}
-                  thumbnail={thumbnail}
-                />;
+                // thumbnail(16x9) を check なければ代替画像にする
+                if ( !thumbnail ) {
+                  thumbnail = Empty.VIDEO_THUMBNAIL;
+                }
 
-              } )
+                // VideosDom instance を使い render
+                return (
+                    <VideosDom
+                      key={'ranking-' + dae.id}
+                      index={i}
+                      id={String( dae.id )}
+                      slug={dae.category.slug}
+                      category={dae.category.label}
+                      url={dae.url}
+                      date={dae.formatDate}
+                      title={dae.title}
+                      caption={dae.media.video.caption}
+                      thumbnail={thumbnail}
+                    />
+                );
+
+              } )// map
             }
+            </ul>
           </div>
 
         );

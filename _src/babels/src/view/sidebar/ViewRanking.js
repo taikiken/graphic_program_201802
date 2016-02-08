@@ -155,16 +155,16 @@ export class ViewRanking extends View {
         let n = p.index + 1;
 
         return (
-          <div className={'widget-ranking-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
+          <li className={'board-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
             <a href={p.url} className={'post'}>
-              <figure className="post-thumb"><img src={p.thumbnail} alt={p.caption || p.title}/></figure>
+              <figure className="post-thumb"><img src={p.thumbnail} alt={p.caption}/></figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{p.category}</p>
                 <h4 className='post-heading'>{p.title}</h4>
                 <p className="post-date">{p.date}</p>
               </div>
             </a>
-          </div>
+          </li>
         );
       }
     } );
@@ -198,37 +198,56 @@ export class ViewRanking extends View {
 
         return (
 
-          <div className="widget-ranking">
+          <div className="board-small widget-ranking">
             {/* title */}
             <div className="widget-ranking-heading">
               <h3 className="widget-ranking-heading-title"><img src="/assets/images/common/side-ranking-heading.png" alt="RANKING" /></h3>
               <span className="widget-ranking-heading-ruby">人気の記事{categoryTitle}</span>
             </div>
-
+            <ul className="post-list">
             {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-                let thumbnail = dae.mediaType === 'image' ? dae.media.images.thumbnail : dae.media.video.thumbnail;
-                thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
+                let thumbnail, caption;
 
-                // HeadlineDom instance を使い render
-                return <RankingDom
-                  key={'ranking-' + dae.id}
-                  index={i}
-                  id={String( dae.id )}
-                  slug={dae.category.slug}
-                  category={dae.category.label}
-                  url={dae.url}
-                  date={dae.formatDate}
-                  title={dae.title}
-                  thumbnail={thumbnail}
-                  caption={dae.media.images.caption}
-                  total={dae.commentsCount}
-                />;
+                // mediaType データ取り出し変更
+                if ( dae.mediaType === 'image' ) {
+                  // type image
+                  thumbnail = dae.media.images.thumbnail;
+                  caption = dae.media.images.caption;
+                } else {
+                  // type video
+                  thumbnail = dae.media.video.thumbnail;
+                  caption = dae.media.video.caption;
+                }
+
+                // thumbnail を check なければ代替画像にする
+                if ( !thumbnail ) {
+                  thumbnail = Empty.IMG_SMALL;
+                }
+
+                // RankingDom instance を使い render
+                return (
+
+                    <RankingDom
+                      key={'ranking-' + dae.id}
+                      index={i}
+                      id={String( dae.id )}
+                      slug={dae.category.slug}
+                      category={dae.category.label}
+                      url={dae.url}
+                      date={dae.formatDate}
+                      title={dae.title}
+                      thumbnail={thumbnail}
+                      caption={caption}
+                      total={dae.commentsCount}
+                    />
+                );
 
               } )
             }
+            </ul>
           </div>
 
         );

@@ -209,15 +209,15 @@ var ViewRanking = exports.ViewRanking = function (_View) {
           var n = p.index + 1;
 
           return React.createElement(
-            'div',
-            { className: 'widget-ranking-item rank' + n + ' ranking-' + (p.slug || categorySlug) },
+            'li',
+            { className: 'board-item rank' + n + ' ranking-' + (p.slug || categorySlug) },
             React.createElement(
               'a',
               { href: p.url, className: 'post' },
               React.createElement(
                 'figure',
                 { className: 'post-thumb' },
-                React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
+                React.createElement('img', { src: p.thumbnail, alt: p.caption })
               ),
               React.createElement(
                 'div',
@@ -275,7 +275,7 @@ var ViewRanking = exports.ViewRanking = function (_View) {
 
           return React.createElement(
             'div',
-            { className: 'widget-ranking' },
+            { className: 'board-small widget-ranking' },
             React.createElement(
               'div',
               { className: 'widget-ranking-heading' },
@@ -291,27 +291,47 @@ var ViewRanking = exports.ViewRanking = function (_View) {
                 categoryTitle
               )
             ),
-            list.map(function (article, i) {
+            React.createElement(
+              'ul',
+              { className: 'post-list' },
+              list.map(function (article, i) {
 
-              var dae = new _ArticleDae.ArticleDae(article);
-              var thumbnail = dae.mediaType === 'image' ? dae.media.images.thumbnail : dae.media.video.thumbnail;
-              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
+                var dae = new _ArticleDae.ArticleDae(article);
+                var thumbnail = undefined,
+                    caption = undefined;
 
-              // HeadlineDom instance を使い render
-              return React.createElement(RankingDom, {
-                key: 'ranking-' + dae.id,
-                index: i,
-                id: String(dae.id),
-                slug: dae.category.slug,
-                category: dae.category.label,
-                url: dae.url,
-                date: dae.formatDate,
-                title: dae.title,
-                thumbnail: thumbnail,
-                caption: dae.media.images.caption,
-                total: dae.commentsCount
-              });
-            })
+                // mediaType データ取り出し変更
+                if (dae.mediaType === 'image') {
+                  // type image
+                  thumbnail = dae.media.images.thumbnail;
+                  caption = dae.media.images.caption;
+                } else {
+                  // type video
+                  thumbnail = dae.media.video.thumbnail;
+                  caption = dae.media.video.caption;
+                }
+
+                // thumbnail を check なければ代替画像にする
+                if (!thumbnail) {
+                  thumbnail = _Empty.Empty.IMG_SMALL;
+                }
+
+                // RankingDom instance を使い render
+                return React.createElement(RankingDom, {
+                  key: 'ranking-' + dae.id,
+                  index: i,
+                  id: String(dae.id),
+                  slug: dae.category.slug,
+                  category: dae.category.label,
+                  url: dae.url,
+                  date: dae.formatDate,
+                  title: dae.title,
+                  thumbnail: thumbnail,
+                  caption: caption,
+                  total: dae.commentsCount
+                });
+              })
+            )
           );
         },
         componentDidMount: function componentDidMount() {

@@ -68,10 +68,10 @@ var Empty = exports.Empty = function () {
       return '/assets/images/common/thumb-noimage-70x70.png';
     }
     /**
-     * img thumbnail 代替画像パス<br>
+     * img middle 代替画像パス<br>
      * [Ex.] 記事一覧<br>
      * @readonly
-     * @return {string} 代替画像パス【中】
+     * @return {string} 代替画像パス【記事一覧】
      */
 
   }, {
@@ -81,10 +81,24 @@ var Empty = exports.Empty = function () {
       return '/assets/images/common/thumb-noimage-340x150.png';
     }
     /**
+     * img large 代替画像パス<br>
+     * [Ex.] スライドショー<br>
+     * @readonly
+     * @return {string} 代替画像パス【スライドショー】
+     */
+
+  }, {
+    key: 'IMG_LARGE',
+    get: function get() {
+
+      // ToDo: デザインができたらパスを正しいものに変更する
+      return '/assets/images/common/xxx_slide.png';
+    }
+    /**
      * video thumbnail 代替画像パス<br>
      * [Ex.] sidebar video...
      * @readonly
-     * @return {string} 代替画像パス【小】
+     * @return {string} 代替画像パス【16 x 9】
      */
 
   }, {

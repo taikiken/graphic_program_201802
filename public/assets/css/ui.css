@@ -2804,10 +2804,10 @@ table tr.w200 > td {
         .hero-slider-control .pager a.active, .hero-slider-control .pager a:hover {
           background-color: #e1438b; }
 
-#hero-sec .hero-slider .hero-slider-inner {
+#pickup-container .hero-slider .hero-slider-inner {
   position: relative; }
-  #hero-sec .hero-slider .hero-slider-inner .overlay,
-  #hero-sec .hero-slider .hero-slider-inner .post-overview {
+  #pickup-container .hero-slider .hero-slider-inner .overlay,
+  #pickup-container .hero-slider .hero-slider-inner .post-overview {
     opacity: 0;
     -webkit-transition-property: opacity;
     transition-property: opacity;
@@ -2816,7 +2816,7 @@ table tr.w200 > td {
     -webkit-transition-timing-function: linear;
             transition-timing-function: linear; }
 
-#hero-sec .hero-slider .pickup-slider {
+#pickup-container .hero-slider .pickup-slider {
   position: absolute;
   left: -3200px;
   top: 0;
@@ -2829,7 +2829,7 @@ table tr.w200 > td {
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s; }
 
-#hero-sec .hero-slider .hero-slider-control .pager a {
+#pickup-container .hero-slider .hero-slider-control .pager a {
   -webkit-transition-property: background-color;
   transition-property: background-color;
   -webkit-transition-duration: 0.25s;
@@ -2837,75 +2837,75 @@ table tr.w200 > td {
   -webkit-transition-timing-function: linear;
           transition-timing-function: linear; }
 
-#hero-sec .hero-slider.slide-0 .pickup-slider {
+#pickup-container .hero-slider.slide-0 .pickup-slider {
   -webkit-transform: translateX(0);
           transform: translateX(0);
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s; }
-  #hero-sec .hero-slider.slide-0 .pickup-slider .pickup-5 .overlay,
-  #hero-sec .hero-slider.slide-0 .pickup-slider .pickup-5 .post-overview {
+  #pickup-container .hero-slider.slide-0 .pickup-slider .pickup-5 .overlay,
+  #pickup-container .hero-slider.slide-0 .pickup-slider .pickup-5 .post-overview {
     opacity: 1;
     -webkit-transition-duration: 0.25s;
             transition-duration: 0.25s; }
 
-#hero-sec .hero-slider.slide-0 .hero-slider-control .pager .pager-0 a {
+#pickup-container .hero-slider.slide-0 .hero-slider-control .pager .pager-0 a {
   background-color: #e1438b;
   -webkit-transition-duration: 0.25s;
           transition-duration: 0.25s; }
 
-#hero-sec .hero-slider.slide-1 .pickup-slider {
+#pickup-container .hero-slider.slide-1 .pickup-slider {
   -webkit-transform: translateX(-640px);
           transform: translateX(-640px); }
-  #hero-sec .hero-slider.slide-1 .pickup-slider .pickup-6 .overlay,
-  #hero-sec .hero-slider.slide-1 .pickup-slider .pickup-6 .post-overview {
+  #pickup-container .hero-slider.slide-1 .pickup-slider .pickup-6 .overlay,
+  #pickup-container .hero-slider.slide-1 .pickup-slider .pickup-6 .post-overview {
     opacity: 1; }
 
-#hero-sec .hero-slider.slide-1 .hero-slider-control .pager .pager-1 a {
+#pickup-container .hero-slider.slide-1 .hero-slider-control .pager .pager-1 a {
   background-color: #e1438b; }
 
-#hero-sec .hero-slider.slide-2 .pickup-slider {
+#pickup-container .hero-slider.slide-2 .pickup-slider {
   -webkit-transform: translateX(-1280px);
           transform: translateX(-1280px); }
-  #hero-sec .hero-slider.slide-2 .pickup-slider .pickup-7 .overlay,
-  #hero-sec .hero-slider.slide-2 .pickup-slider .pickup-7 .post-overview {
+  #pickup-container .hero-slider.slide-2 .pickup-slider .pickup-7 .overlay,
+  #pickup-container .hero-slider.slide-2 .pickup-slider .pickup-7 .post-overview {
     opacity: 1; }
 
-#hero-sec .hero-slider.slide-2 .hero-slider-control .pager .pager-2 a {
+#pickup-container .hero-slider.slide-2 .hero-slider-control .pager .pager-2 a {
   background-color: #e1438b; }
 
-#hero-sec .hero-slider.slide-3 .pickup-slider {
+#pickup-container .hero-slider.slide-3 .pickup-slider {
   -webkit-transform: translateX(-1920px);
           transform: translateX(-1920px); }
-  #hero-sec .hero-slider.slide-3 .pickup-slider .pickup-8 .overlay,
-  #hero-sec .hero-slider.slide-3 .pickup-slider .pickup-8 .post-overview {
+  #pickup-container .hero-slider.slide-3 .pickup-slider .pickup-8 .overlay,
+  #pickup-container .hero-slider.slide-3 .pickup-slider .pickup-8 .post-overview {
     opacity: 1; }
 
-#hero-sec .hero-slider.slide-3 .hero-slider-control .pager .pager-3 a {
+#pickup-container .hero-slider.slide-3 .hero-slider-control .pager .pager-3 a {
   background-color: #e1438b; }
 
-#hero-sec .hero-slider.slide-4 .pickup-slider {
+#pickup-container .hero-slider.slide-4 .pickup-slider {
   -webkit-transform: translateX(-2560px);
           transform: translateX(-2560px);
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s; }
-  #hero-sec .hero-slider.slide-4 .pickup-slider .pickup-9 .overlay,
-  #hero-sec .hero-slider.slide-4 .pickup-slider .pickup-9 .post-overview {
+  #pickup-container .hero-slider.slide-4 .pickup-slider .pickup-9 .overlay,
+  #pickup-container .hero-slider.slide-4 .pickup-slider .pickup-9 .post-overview {
     opacity: 1;
     -webkit-transition-duration: 0.25s;
             transition-duration: 0.25s; }
 
-#hero-sec .hero-slider.slide-4 .hero-slider-control .pager .pager-4 a {
+#pickup-container .hero-slider.slide-4 .hero-slider-control .pager .pager-4 a {
   background-color: #e1438b;
   -webkit-transition-duration: 0.25s;
           transition-duration: 0.25s; }
 
-#hero-sec .hero-slider.slide-999 .pickup-slider {
+#pickup-container .hero-slider.slide-999 .pickup-slider {
   -webkit-transform: translateX(640px);
           transform: translateX(640px);
   -webkit-transition-duration: 0s;
           transition-duration: 0s; }
 
-#hero-sec .hero-slider.slide-1999 .pickup-slider {
+#pickup-container .hero-slider.slide-1999 .pickup-slider {
   -webkit-transform: translateX(-3200px);
           transform: translateX(-3200px);
   -webkit-transition-duration: 0s;
@@ -3926,6 +3926,31 @@ table tr.w200 > td {
 .sprite-signup, .signup-header .heading, .signup-form-mail:before, .signup-form-pw:before, .signup-form-name:before, .signup-form-job:before, .register-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-signup.png); }
 
+#board-container .board-large-column {
+  position: relative;
+  top: 99999px; }
+  #board-container .board-large-column.column1, #board-container .board-large-column.column2 {
+    float: none; }
+
+#board-container-more {
+  padding-top: 30px; }
+  #board-container-more .board-btn-viewmore {
+    position: relative;
+    padding-top: 0; }
+    #board-container-more .board-btn-viewmore .board-btn-more-cover {
+      display: block;
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(255, 255, 255, 0.7); }
+    #board-container-more .board-btn-viewmore.loading .board-btn-more-cover {
+      height: 100%; }
+  #board-container-more .board-btn-viewmore-link {
+    background-color: #fff; }
+
 .comment-heading {
   margin-top: 30px;
   padding: 6px 10px;
@@ -4711,5 +4736,50 @@ a:hover {
   background-size: 125px; }
   .widget-recommend .post-thumb img {
     width: 100%; }
+
+input,
+textarea,
+select,
+button {
+  outline: none; }
+
+#user-profile-nav {
+  float: left; }
+
+#user-profile-nav .user.signin .user-menu {
+  display: block; }
+
+#user-profile-nav .user.signin .dropmenu {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear; }
+
+#user-profile-nav .user.signin.close .user-menu {
+  overflow: hidden;
+  height: 0;
+  width: 0;
+  -webkit-transition-property: width, height;
+  transition-property: width, height;
+  -webkit-transition-duration: 0.001s;
+          transition-duration: 0.001s;
+  -webkit-transition-delay: 0.05s;
+          transition-delay: 0.05s; }
+
+#user-profile-nav .user.signin.close .dropmenu {
+  opacity: 0;
+  -webkit-transition-duration: 0.05s;
+          transition-duration: 0.05s; }
+
+#user-profile-nav .user.signin.open .user-menu {
+  overflow: visible;
+  width: 160px;
+  height: 162px; }
+
+#user-profile-nav .user.signin.open .dropmenu {
+  opacity: 1; }
 
 /*# sourceMappingURL=ui.css.map */
