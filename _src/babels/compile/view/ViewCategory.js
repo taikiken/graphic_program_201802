@@ -34,7 +34,7 @@ exports.ViewCategory = undefined;
 
 var _Category = require('../action/archive/Category');
 
-var _ViewArchiveMasonry2 = require('./ViewArchiveMasonry');
+var _ViewArchiveMasonryInfinite = require('./ViewArchiveMasonryInfinite');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42,8 +42,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * category 一覧表示
  */
 
-var ViewCategory = exports.ViewCategory = function (_ViewArchiveMasonry) {
-  (0, _inherits3.default)(ViewCategory, _ViewArchiveMasonry);
+var ViewCategory = exports.ViewCategory = function (_ViewArchiveMasonryIn) {
+  (0, _inherits3.default)(ViewCategory, _ViewArchiveMasonryIn);
 
   /**
    * category 一覧表示 要 **slug**
@@ -67,4 +67,4 @@ var ViewCategory = exports.ViewCategory = function (_ViewArchiveMasonry) {
   }
 
   return ViewCategory;
-}(_ViewArchiveMasonry2.ViewArchiveMasonry);
+}(_ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite);

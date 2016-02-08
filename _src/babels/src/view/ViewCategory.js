@@ -12,12 +12,12 @@
 'use strict';
 
 import {Category} from '../action/archive/Category';
-import {ViewArchiveMasonry} from './ViewArchiveMasonry';
+import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
 
 /**
  * category 一覧表示
  */
-export class ViewCategory extends ViewArchiveMasonry {
+export class ViewCategory extends ViewArchiveMasonryInfinite {
   /**
    * category 一覧表示 要 **slug**
    * @param {string} slug category slug, default 'all'

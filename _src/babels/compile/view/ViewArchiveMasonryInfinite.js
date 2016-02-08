@@ -52,9 +52,11 @@ var _ViewError = require('./error/ViewError');
 
 var _Result = require('../data/Result');
 
+var _Safety = require('../data/Safety');
+
 var _ArticleDae = require('../dae/ArticleDae');
 
-var _Safety = require('../data/Safety');
+var _Rise = require('../ui/Rise');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62,15 +64,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // dae
 
-// util
-var React = self.React;
-// action
-// import {Headline} from '../action/home/Headline';
 // data
 
 // view
 
 // app
+var React = self.React;
+
+// ui
+
+// util
 
 var ReactDOM = self.ReactDOM;
 
@@ -118,9 +121,11 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
      */
     _this2._articles = [];
     _this2._useMasonry = !!useMasonry;
-    //this._top = 0;
-    // first render を区別する flag
-    _this2._rendered = null;
+    // ArticleDom instance を保持します
+    // first render を区別するためにも使用します
+    _this2._articleRendered = null;
+    // more button instance を保持します
+    _this2._moreRendered = null;
     // response.request object を保持する
     _this2._request = null;
 
@@ -216,7 +221,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
     key: 'render',
     value: function render(articles) {
 
-      // ---
       // Masonry flag
       var useMasonry = this._useMasonry;
 
@@ -226,7 +230,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
       // 前回までの配列length
       // sequence な index のために必要
       var prevLast = this._articles.length;
-      // ---
 
       // 記事挿入 root element
       var element = this.element;
@@ -244,33 +247,31 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         displayName: 'MoreView',
 
         propTypes: {
-          show: React.PropTypes.bool
+          show: React.PropTypes.bool.isRequired,
+          loading: React.PropTypes.string
         },
         getDefaultProps: function getDefaultProps() {
           return {
-            show: false
+            loading: ''
           };
         },
         getInitialState: function getInitialState() {
+          this.rise = null;
+
           return {
-            disable: false
+            disable: false,
+            show: this.props.show,
+            loading: this.props.loading
           };
-        },
-        handleClick: function handleClick(event) {
-          event.preventDefault();
-          // disable
-          this.setState({ disable: true });
-          action.next();
-          //_this._top = Scroll.y;
         },
         render: function render() {
 
           // hasNext: true, button を表示する？
-          if (this.props.show) {
+          if (this.state.show) {
 
             return React.createElement(
               'div',
-              { id: 'more', className: 'board-btn-viewmore' + this.state.disable ? 'disable' : '' },
+              { id: 'more', className: 'board-btn-viewmore' + this.state.loading },
               React.createElement(
                 'a',
                 { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
@@ -291,22 +292,95 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             // button 表示なし
             return React.createElement('div', { className: 'no-more' });
           }
-        }
+        },
+        componentDidMount: function componentDidMount() {
 
+          if (this.state.show && this.rise === null) {
+            // mount 後
+            // button が表示されているなら rise 監視を始める
+            this.rise = new _Rise.Rise(element, 100);
+            this.rise.on(_Rise.Rise.RISE, this.onRise);
+            this.rise.start();
+          }
+        },
+        componentWillUnmount: function componentWillUnmount() {
+          // unmount 時に rise 破棄を行う
+          this.destroy();
+        },
+        destroy: function destroy() {
+          // rise 監視を破棄する
+          if (this.rise !== null) {
+            this.rise.stop();
+            this.rise.off(_Rise.Rise.RISE, this.onRise);
+            this.rise = null;
+          }
+        },
+        handleClick: function handleClick(event) {
+          event.preventDefault();
+          // disable
+          // this.setState( { loading: ' loading' } );
+          // action.next();
+          this.onRise();
+        },
+        updateShow: function updateShow(show) {
+          if (!show) {
+            // button を非表示にするので rise 監視を止める
+            this.destroy();
+          } else {
+            // button 表示, loading 表示を止める
+            this.updateLoading(false);
+          }
+          this.setState({ show: show });
+        },
+        updateLoading: function updateLoading() {
+          var loading = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+          var loadingClass = '';
+          if (loading && this.rise !== null) {
+            // loading 中は監視を止める
+            loadingClass = ' loading';
+            this.rise.stop();
+            action.next();
+          } else {
+            // loading が終わると監視開始
+            this.rise.start();
+          }
+          this.setState({ loading: loadingClass });
+        },
+        onRise: function onRise(event) {
+          console.log('========================== onRise ', event);
+
+          this.updateLoading(true);
+        }
       });
 
       // more button 作成関数
       // ArchiveDom から呼び出す
       var moreButton = function moreButton(show) {
 
+        show = !!show;
         // moreElement 存在チェックを行う
         // Element 型を保証する
-        if (moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement) {
+        // _moreRendered が null の時のみ, instance があれば state を update する
+        if (_Safety.Safety.element(moreElement) && _this._moreRendered === null) {
+          // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
 
           // チェックをパスし実行する
-          ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+          _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+        } else {
+
+          _this._moreRendered.updateShow(show);
         }
       };
+
+      // more button 表示状態を loading on / off 切替えます
+      /*
+      let loadingButton = ( loading:boolean ) => {
+         if ( _this._moreRendered !== null ) {
+          _this._moreRendered.updateLoading( !!loading );
+        }
+       };
+      */
       // --------------------------------------------
       // COMMENTS Popular second
       // --------------------------------------------
@@ -321,7 +395,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
           var seconds = this.props.seconds;
           var articleId = this.props.articleId;
-          console.log('seconds ', seconds);
+          // console.log( 'seconds ', seconds );
           return React.createElement(
             'ul',
             { className: 'comments-second' },
@@ -533,7 +607,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           var hasSecond = commentsPopular.hasSecond;
           var firstDae = commentsPopular.first;
           var secondsDae = commentsPopular.seconds;
-          console.log('commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae);
+          // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
           if (hasSecond) {
             // 2件目以降も存在する
             // 2件目以降のDomを生成する
@@ -549,7 +623,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             console.log('少なくとも1件は存在する ', articleId);
             // 1件目コメントデータを取り出し
             var first = firstDae;
-            console.log('first ', articleId, first);
+            // console.log( 'first ', articleId, first );
             // 1件目コメント・ユーザー
             var firstUser = first.user;
             // ユーザーサムネイル
@@ -639,11 +713,11 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           list: React.PropTypes.array.isRequired
         },
         getInitialState: function getInitialState() {
+          this.isotope = null;
+          this.img = null;
+          this.elements = [];
+
           return {
-            isotope: null,
-            img: null,
-            route: null,
-            nodes: null,
             arranged: 'prepare',
             list: this.props.list
           };
@@ -774,17 +848,17 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           img.on('always', this.appendImages);
           this.img = img;
         },
-        // state 変更時に呼び出される delegate
-        shouldComponentUpdate: function shouldComponentUpdate() {
-          console.log('------------+++++++++++++ shouldComponentUpdate ------------');
-          // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
-          // isotope がセットアップすると呼び出されるので
-          // 常にfalseを返し無視させます
-          //return false;
-
-          // state update で更新するので true にする, React 内部更新メソッドが実行される
-          return true;
-        },
+        //// state 変更時に呼び出される delegate
+        //shouldComponentUpdate: function() {
+        //  console.log( '------------+++++++++++++ shouldComponentUpdate ------------' );
+        //  // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
+        //  // isotope がセットアップすると呼び出されるので
+        //  // 常にfalseを返し無視させます
+        //  //return false;
+        //
+        //  // state update で更新するので true にする, React 内部更新メソッドが実行される
+        //  return true;
+        //},
         // dom が表示された後に1度だけ呼び出される delegate
         componentDidMount: function componentDidMount() {
           // after mount
@@ -890,18 +964,19 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         articlesList.push(dae);
       });
 
-      // this._rendered が null の時だけ ReactDOM.render する
-      if (this._rendered === null) {
+      // this._articleRendered が null の時だけ ReactDOM.render する
+      if (this._articleRendered === null) {
 
-        // dom 生成後 instance property へ ArticleDom instance を保存する
-        this._rendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
+        // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+        this._articleRendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
       } else {
 
         // instance が存在するので
         // state update でコンテナを追加する
-        this._rendered.updateList(articlesList);
+        this._articleRendered.updateList(articlesList);
       }
-    }
+    } // render
+
   }, {
     key: 'moreElement',
     get: function get() {
@@ -909,4 +984,4 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
     }
   }]);
   return ViewArchiveMasonryInfinite;
-}(_View2.View);
+}(_View2.View); // class

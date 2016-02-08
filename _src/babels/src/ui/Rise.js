@@ -17,35 +17,67 @@ import {EventDispatcher} from '../event/EventDispatcher';
 import {Dom} from '../util/Dom';
 import {Scroll} from '../util/Scroll';
 
+/**
+ * 対象 element bottom が window.bottom を超えたら Event を発生させます
+ */
 export class Rise extends EventDispatcher {
+  /**
+   * 対象 element bottom が window.bottom を超えることを監視します
+   * @param {Element} element 対象 element
+   * @param {Number} [offset=0] 減産数値
+   */
   constructor( element:Element, offset:Number = 0 ) {
     super();
+
     this._element = element;
     this._offset = offset;
     this._dom = new Dom( element );
     this._boundScroll = this.onScroll.bind( this );
     this._scroll = Scroll.factory();
   }
+
+  /**
+   * RISE event type
+   * @returns {string} RISE event type を返します
+   */
   static get RISE():string {
     return 'rise';
   }
-
+  /**
+   * 監視を始めます
+   */
   start():void {
-    this._scroll.on( Scroll.SCROLL, this._boundScroll );
-  }
-  stop():void {
-    this._scroll.off( Scroll.SCROLL, this._boundScroll );
-  }
-  onScroll( event:Object ):void {
+    console.log( '************************ Rise.start' );
 
+    this._scroll.on( Scroll.SCROLL, this._boundScroll );
+    this._scroll.start();
+  }
+  /**
+   * 監視を止めます
+   */
+  stop():void {
+    console.log( '------------------------ Rise.stop' );
+
+    this._scroll.off( Scroll.SCROLL, this._boundScroll );
+    this._scroll.stop();
+  }
+  /**
+   * Scroll.SCROLL event handler
+   * @param {Object} event Scroll.SCROLL event object
+   */
+  onScroll( event:Object ):void {
+    // window property
     let y = event.y;
     let windowHeight = window.innerHeight;
-    let windowBottom = y + windowHeight - this._offset;
-
+    let windowBottom = y + windowHeight + this._offset;
+    // element property
     let offsetRect = this._dom.offset();
-    let elementBottom = offsetRect.top + offsetRect.height;
+    let elementBottom = y + offsetRect.top + offsetRect.height;
 
-    if ( offsetRect > elementBottom ) {
+    // console.log( 'onScroll', windowBottom, elementBottom  );
+
+    // element.bottom が insect しているかを調べます
+    if ( windowBottom > elementBottom ) {
       this.dispatch( { type: Rise.RISE, window: windowBottom, element: elementBottom } );
     }
   }

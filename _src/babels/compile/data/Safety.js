@@ -49,7 +49,7 @@ var _symbol = (0, _symbol3.default)();
  * 全て static
  */
 
-var Safety = exports.Safety = function () {
+var Safety = function () {
   /**
    * static class です、instance を作成できません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -155,6 +155,19 @@ var Safety = exports.Safety = function () {
 
       return value;
     }
+    /**
+     * Element かどうかを調べます
+     * @param {Element} element
+     * @returns {boolean} Element かどうかの真偽値を返します
+     */
+
+  }, {
+    key: 'element',
+    value: function element(_element) {
+      return _element !== null && typeof _element !== 'undefined' && 'appendChild' in _element;
+    }
   }]);
   return Safety;
 }();
+
+exports.Safety = Safety;

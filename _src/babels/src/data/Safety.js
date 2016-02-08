@@ -106,5 +106,12 @@ export class Safety {
 
     return value;
   }
-
+  /**
+   * Element かどうかを調べます
+   * @param {Element} element
+   * @returns {boolean} Element かどうかの真偽値を返します
+   */
+  static element( element:Element ):boolean {
+    return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
+  }
 }

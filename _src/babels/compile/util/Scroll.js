@@ -117,7 +117,7 @@ var Scroll = exports.Scroll = function (_EventDispatcher) {
 
       if (_instance === null) {
 
-        _instance = new Router(_symbol);
+        _instance = new Scroll(_symbol);
       }
 
       return _instance;
