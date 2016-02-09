@@ -19,12 +19,14 @@
       float: left;
       width: 160px;
       margin-top: 30px;
+      padding-bottom: 30px;
     }
 
     &-main {
       float: right;
       width: 520px;
       margin-top: 30px;
+      padding-bottom: 30px;
     }
   } //at-root
 }
@@ -88,6 +90,17 @@
     }
   } //at-root
 }
+
+
+
+
+// setting-heading
+.setting-heading {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    font-size: fz(20);
+  }
+} //.setting-heading
 
 
 
@@ -175,22 +188,15 @@
 
     &-submit {
       text-align: center;
+    }
 
-      input {
-        display: inline-block;
-        width: 250px;
-        line-height: 50px;
-        padding-right: 24px;
-        padding-left: 24px;
-        border-radius: 3px;
-        background-color: $highlight-color;
-        color: #fff;
-        font-weight: bold;
-        text-align: center;
+    &-btn-withdraw {
+      margin-top: 15px;
+      text-align: center;
 
-        &:hover {
-          @include hover-opacity;
-        }
+      a {
+        @include link-decoration(#999, #999, none, underline);
+        font-size: fz(12);
       }
     }
   } //at-root
@@ -270,27 +276,21 @@
 
 
 
-// related-sns
-.related-sns {
+// linkage-sns
+.linkage-sns {
   margin-top: 40px;
 
   @at-root {
-    &-list {
-      @include clearfix;
-    }
-
     &-item {
-      float: left;
-
-      &:nth-child(2) {
-        float: right;
+      & + & {
+        margin-top: 20px;
       }
     }
 
     &-link {
       @include link-decoration(#fff, #fff, none, none);
-      display: block;
-      width: 250px;
+      display: inline-block;
+      width: 280px;
       line-height: 50px;
       padding: 0 18px;
       border-radius: 3px;
@@ -312,6 +312,10 @@
       &:hover {
         @include hover-opacity;
       }
+
+      &.enable {
+        background-color: #999;
+      }
     }
 
     &-tw {
@@ -332,5 +336,23 @@
       }
     }
 
+    &-account {
+      margin-left: 10px;
+      font-weight: bold;
+      font-size: fz(12);
+    }
+
   } //at-root
-} //.related-sns
+} //.linkage-sns
+
+
+
+
+
+// btn-withdraw
+.btn-withdraw {
+  a {
+    width: 280px;
+    background-color: #e14343 !important;
+  }
+} //btn-withdraw

@@ -2672,7 +2672,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .comment-menu .dropMenu, .head-sec .notice-menu .dropMenu, .head-sec .preference-menu .dropMenu {
@@ -2952,7 +2952,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .post-detail {
@@ -3054,7 +3054,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .user-config {
@@ -3294,12 +3294,14 @@ table tr.w200 > td {
 .setting-side {
   float: left;
   width: 160px;
-  margin-top: 30px; }
+  margin-top: 30px;
+  padding-bottom: 30px; }
 
 .setting-main {
   float: right;
   width: 520px;
-  margin-top: 30px; }
+  margin-top: 30px;
+  padding-bottom: 30px; }
 
 .setting-side-nav-item + .setting-side-nav-item {
   margin-top: 15px; }
@@ -3348,6 +3350,10 @@ table tr.w200 > td {
   display: inline-block;
   width: 12px;
   height: 16px; }
+
+.setting-heading h1, .setting-heading h2, .setting-heading h3, .setting-heading h4, .setting-heading h5, .setting-heading h6 {
+  font-weight: bold;
+  font-size: 143%; }
 
 .setting-form input, .setting-form button, .setting-form textarea {
   border: none;
@@ -3427,21 +3433,18 @@ table tr.w200 > td {
 
 .setting-form-submit {
   text-align: center; }
-  .setting-form-submit input {
-    display: inline-block;
-    width: 250px;
-    line-height: 50px;
-    padding-right: 24px;
-    padding-left: 24px;
-    border-radius: 3px;
-    background-color: #e1438b;
-    color: #fff;
-    font-weight: bold;
-    text-align: center; }
-    .setting-form-submit input:hover {
-      opacity: 0.75;
-      -webkit-transition: opacity ease-out .4s;
-      transition: opacity ease-out .4s; }
+
+.setting-form-btn-withdraw {
+  margin-top: 15px;
+  text-align: center; }
+  .setting-form-btn-withdraw a {
+    font-size: 86%; }
+    .setting-form-btn-withdraw a:link, .setting-form-btn-withdraw a:visited, .setting-form-btn-withdraw a:hover, .setting-form-btn-withdraw a:active {
+      color: #999;
+      text-decoration: none; }
+    .setting-form-btn-withdraw a:hover {
+      color: #999;
+      text-decoration: underline; }
 
 .setting-form .note {
   margin-top: 30px;
@@ -3488,32 +3491,26 @@ table tr.w200 > td {
     color: #fff;
     background-image: url(/assets/images/setting/icon-check_o.png); }
 
-.related-sns {
+.linkage-sns {
   margin-top: 40px; }
-  .related-sns-list:before, .related-sns-list:after {
-    content: "";
-    display: table;
-    clear: both; }
-  .related-sns-item {
-    float: left; }
-    .related-sns-item:nth-child(2) {
-      float: right; }
-  .related-sns-link {
-    display: block;
-    width: 250px;
+  .linkage-sns-item + .linkage-sns-item {
+    margin-top: 20px; }
+  .linkage-sns-link {
+    display: inline-block;
+    width: 280px;
     line-height: 50px;
     padding: 0 18px;
     border-radius: 3px; }
-    .related-sns-link:link, .related-sns-link:visited, .related-sns-link:hover, .related-sns-link:active {
+    .linkage-sns-link:link, .linkage-sns-link:visited, .linkage-sns-link:hover, .linkage-sns-link:active {
       color: #fff;
       text-decoration: none; }
-    .related-sns-link:hover {
+    .linkage-sns-link:hover {
       color: #fff;
       text-decoration: none; }
-    .related-sns-link span {
+    .linkage-sns-link span {
       font-weight: bold;
       line-height: 24px; }
-      .related-sns-link span:before {
+      .linkage-sns-link span:before {
         content: '';
         position: relative;
         top: 5px;
@@ -3523,28 +3520,38 @@ table tr.w200 > td {
         text-indent: 100%;
         white-space: nowrap;
         outline: none; }
-    .related-sns-link:hover {
+    .linkage-sns-link:hover {
       opacity: 0.75;
       -webkit-transition: opacity ease-out .4s;
       transition: opacity ease-out .4s; }
-  .related-sns-tw {
+    .linkage-sns-link.enable {
+      background-color: #999; }
+  .linkage-sns-tw {
     background-color: #55acee; }
-    .related-sns-tw span:before {
+    .linkage-sns-tw span:before {
       background-position: -72px -24px;
       background-repeat: no-repeat;
       overflow: hidden;
       display: inline-block;
       width: 24px;
       height: 24px; }
-  .related-sns-fb {
+  .linkage-sns-fb {
     background-color: #3b579d; }
-    .related-sns-fb span:before {
+    .linkage-sns-fb span:before {
       background-position: -72px 0px;
       background-repeat: no-repeat;
       overflow: hidden;
       display: inline-block;
       width: 24px;
       height: 24px; }
+  .linkage-sns-account {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 86%; }
+
+.btn-withdraw a {
+  width: 280px;
+  background-color: #e14343 !important; }
 
 .signup {
   width: 100%;
@@ -3676,7 +3683,8 @@ table tr.w200 > td {
       float: right;
       width: 36.5384615385%; }
       .register-mail .setting-form-submit input {
-        width: 100%; }
+        width: 100%;
+        min-width: initial !important; }
     .register-mail p {
       clear: both;
       padding-top: 30px; }
@@ -3685,6 +3693,18 @@ table tr.w200 > td {
     .login-email .setting-form-mail input,
     .login-email .setting-form-pw input {
       width: 92%; }
+  .register .linkage-sns-list:before, .register .linkage-sns-list:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .register .linkage-sns-item {
+    float: left; }
+    .register .linkage-sns-item + .linkage-sns-item {
+      margin-top: 0; }
+    .register .linkage-sns-item:nth-child(2) {
+      float: right; }
+  .register .linkage-sns-link {
+    width: 250px; }
 
 .basic-setting {
   width: 520px;
@@ -3701,19 +3721,6 @@ table tr.w200 > td {
 .pw-reset {
   width: 520px;
   margin: 0 auto; }
-  .pw-reset .btn-home {
-    width: 250px;
-    margin: 40px auto 0; }
-    .pw-reset .btn-home a {
-      display: block;
-      line-height: 50px;
-      padding-right: 24px;
-      padding-left: 24px;
-      border-radius: 3px;
-      background-color: #e1438b;
-      color: #fff;
-      font-weight: bold;
-      text-align: center; }
 
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
@@ -3727,7 +3734,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .board-large:before, .board-large:after {
@@ -3985,7 +3992,9 @@ table tr.w200 > td {
 .mod-btnA01 a {
   display: inline-block;
   min-width: 160px;
-  padding: 12px 4px;
+  line-height: 50px;
+  padding-right: 4px;
+  padding-left: 4px;
   border: 2px solid #e1438b;
   font-weight: bold;
   text-align: center; }
@@ -4001,6 +4010,34 @@ table tr.w200 > td {
     -webkit-transition: background-color ease-out .4s;
     transition: background-color ease-out .4s; }
 
+.mod-btnB01 input[type="submit"],
+.mod-btnB01 a {
+  display: inline-block;
+  min-width: 250px;
+  line-height: 50px;
+  padding-right: 4px;
+  padding-left: 4px;
+  border-radius: 3px;
+  background-color: #e1438b;
+  font-weight: bold;
+  text-align: center; }
+  .mod-btnB01 input[type="submit"]:hover,
+  .mod-btnB01 a:hover {
+    opacity: 0.75;
+    -webkit-transition: opacity ease-out .4s;
+    transition: opacity ease-out .4s; }
+
+.mod-btnB01 a:link, .mod-btnB01 a:visited, .mod-btnB01 a:hover, .mod-btnB01 a:active {
+  color: #fff;
+  text-decoration: none; }
+
+.mod-btnB01 a:hover {
+  color: #fff;
+  text-decoration: none; }
+
+.mod-btnB01 input[type="submit"] {
+  color: #fff; }
+
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
@@ -4013,7 +4050,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .comment-heading {
@@ -4322,7 +4359,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 html, body {
