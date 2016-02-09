@@ -383,19 +383,25 @@ export class ViewPickup extends View {
           let large, caption;
 
           // mediaType データ取り出し変更
-          if ( dae.mediaType === 'image' ) {
-            // type image
-            large = dae.media.images.large;
-            caption = dae.media.images.caption;
-          } else {
-            // type video
-            large = dae.media.video.large;
-            caption = dae.media.video.caption;
-          }
+          // 2016-02-08 JSON 変更
+          //
+          //if ( dae.mediaType === 'image' ) {
+          //  // type image
+          //  large = dae.media.images.large;
+          //  caption = dae.media.images.caption;
+          //} else {
+          //  // type video
+          //  large = dae.media.video.large;
+          //  caption = dae.media.video.caption;
+          //}
+
+          large = dae.media.images.large;
+          caption = dae.media.images.caption;
 
           if ( !large ) {
             large = Empty.IMG_LARGE;
           }
+          caption = Safety.string( caption, '' );
 
           // HeadlineDom instance を使い render
           // iteration key は index を使う

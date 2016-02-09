@@ -88,13 +88,27 @@ export class ViewHeaderUser extends View {
 
     let element = this.element;
 
-    let UserDom = React.createClass( {
+    // --------------------------------------------------
+    // user notice
+    let UserNotice = React.createClass( {
+      propTypes: {
+        list: React.PropTypes.array.isRequired
+      },
       getInitialState: function() {
         return {
           clicked: false,
           open: 'close',
           bodyTimer: 0
         };
+      },
+      render: function() {
+
+      },
+      componentDidMount: function() {
+
+      },
+      componentWillUnmount: function() {
+
       },
       clickHandler: function( event ) {
 
@@ -141,13 +155,25 @@ export class ViewHeaderUser extends View {
         // document.body からclick event handler unbind
         document.body.removeEventListener( 'click', this.bodyClick );
 
+      }
+
+    } );
+
+    // --------------------------------------------------
+    // user setting
+    let SettingDom = React.createClass( {
+      getInitialState: function() {
+        return {
+          clicked: false,
+          open: 'close',
+          bodyTimer: 0
+        };
       },
       render: function() {
-
+        // ToDo: avatar image, get from JSON
         return (
-          <div className={'user signin ' + this.state.open}>
-            <a className="user-preference" href="#" onClick={this.clickHandler}>
-              <span className="user-notice">88</span>
+          <div className={'preference ' + this.state.open}>
+            <a className="preference-opener" href="#" onClick={this.clickHandler}>
               {
                 /*
                 * ToDo: avatar image 取得方法確認
@@ -168,8 +194,70 @@ export class ViewHeaderUser extends View {
       },
       componentWillUnmount: function() {
         this.destroy();
+      },
+      clickHandler: function( event ) {
+
+        event.preventDefault();
+        this.toggleState();
+
+      },
+      bodyClick: function() {
+
+        if ( this.state.open === 'open' ) {
+
+          // document.body が a より先に反応する
+          // native event bind と React 経由の違いかも
+          // body click 後の処理を遅延させる, 多分気づかない程度
+          let timer = setTimeout( this.toggleState, 100 );
+          this.setState( {bodyTimer: timer} );
+
+        }
+
+      },
+      toggleState: function() {
+
+        this.destroy();
+
+        if ( this.state.open === 'close' ) {
+          // close -> open
+          // document.body へ click event handler bind
+          this.setState( { open: 'open' } );
+          document.body.addEventListener( 'click', this.bodyClick, false );
+        } else {
+          // open -> close
+          this.setState( { open: 'close' } );
+        }
+      },
+      // timer cancel
+      // body.click unbind
+      // 後処理
+      destroy: function() {
+
+        // body click からの遅延処理を clear する
+        // timer を 0 にし error にならないようにする
+        clearTimeout( this.state.bodyTimer );
+        this.setState( {bodyTimer: 0} );
+        // document.body からclick event handler unbind
+        document.body.removeEventListener( 'click', this.bodyClick );
+
       }
     } );
+
+
+    // --------------------------------------------------
+    // user root
+    let UserDom = React.createClass( {
+
+      render: function() {
+        return (
+          <div className="user">
+            <SettingDom />
+          </div>
+        );
+      }
+
+    } );
+
 
     ReactDOM.render(
       <UserDom />,
@@ -189,7 +277,6 @@ export class ViewHeaderUser extends View {
 
         return (
           <div className="user">
-            {/* `/signup/` で良い？ */}
             <a className="user-signup" href="/signup/">無料登録 / ログイン</a>
           </div>
         );

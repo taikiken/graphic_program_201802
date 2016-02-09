@@ -297,11 +297,13 @@ var ViewVideos = exports.ViewVideos = function (_View) {
 
                 var dae = new _ArticleDae.ArticleDae(article);
                 var thumbnail = dae.media.video.medium;
+                var caption = dae.media.video.caption;
 
                 // thumbnail(16x9) を check なければ代替画像にする
                 if (!thumbnail) {
                   thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
                 }
+                caption = _Safety.Safety.string(caption, '');
 
                 // VideosDom instance を使い render
                 return React.createElement(VideosDom, {
@@ -313,7 +315,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
                   url: dae.url,
                   date: dae.formatDate,
                   title: dae.title,
-                  caption: dae.media.video.caption,
+                  caption: caption,
                   thumbnail: thumbnail
                 });
               }) // map

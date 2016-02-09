@@ -212,20 +212,25 @@ export class ViewRanking extends View {
                 let thumbnail, caption;
 
                 // mediaType データ取り出し変更
-                if ( dae.mediaType === 'image' ) {
-                  // type image
-                  thumbnail = dae.media.images.thumbnail;
-                  caption = dae.media.images.caption;
-                } else {
-                  // type video
-                  thumbnail = dae.media.video.thumbnail;
-                  caption = dae.media.video.caption;
-                }
+                // 2016-02-08 JSON 変更
+                //if ( dae.mediaType === 'image' ) {
+                //  // type image
+                //  thumbnail = dae.media.images.thumbnail;
+                //  caption = dae.media.images.caption;
+                //} else {
+                //  // type video
+                //  thumbnail = dae.media.video.thumbnail;
+                //  caption = dae.media.video.caption;
+                //}
+
+                thumbnail = dae.media.images.thumbnail;
+                caption = dae.media.images.caption;
 
                 // thumbnail を check なければ代替画像にする
                 if ( !thumbnail ) {
                   thumbnail = Empty.IMG_SMALL;
                 }
+                caption = Safety.string( caption, '' );
 
                 // RankingDom instance を使い render
                 return (

@@ -311,20 +311,25 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
                     caption = undefined;
 
                 // mediaType データ取り出し変更
-                if (dae.mediaType === 'image') {
-                  // type image
-                  thumbnail = dae.media.images.thumbnail;
-                  caption = dae.media.images.caption;
-                } else {
-                  // type video
-                  thumbnail = dae.media.video.thumbnail;
-                  caption = dae.media.video.caption;
-                }
+                // 2016-02-08 JSON 変更
+                //if ( dae.mediaType === 'image' ) {
+                //  // type image
+                //  thumbnail = dae.media.images.thumbnail;
+                //  caption = dae.media.images.caption;
+                //} else {
+                //  // type video
+                //  thumbnail = dae.media.video.thumbnail;
+                //  caption = dae.media.video.caption;
+                //}
+
+                thumbnail = dae.media.images.thumbnail;
+                caption = dae.media.images.caption;
 
                 // thumbnail を check しなければ代替画像にする
                 if (!thumbnail) {
                   thumbnail = _Empty.Empty.IMG_SMALL;
                 }
+                caption = _Safety.Safety.string(caption, '');
 
                 // HeadlineDom instance を使い render
                 return React.createElement(HeadlineDom, {

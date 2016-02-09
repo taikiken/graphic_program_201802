@@ -49,7 +49,7 @@ var _symbol = (0, _symbol3.default)();
  * 全て static
  */
 
-var Safety = function () {
+var Safety = exports.Safety = function () {
   /**
    * static class です、instance を作成できません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -115,7 +115,7 @@ var Safety = function () {
     value: function object() {
       var value = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-      if (value === null) {
+      if (value === null || typeof value === 'undefined') {
         value = (0, _create2.default)({});
       }
 
@@ -132,7 +132,7 @@ var Safety = function () {
     key: 'string',
     value: function string(value, defaultValue) {
 
-      if (value === null) {
+      if (value === null || typeof value === 'undefined') {
         value = defaultValue;
       }
 
@@ -162,12 +162,10 @@ var Safety = function () {
      */
 
   }, {
-    key: 'element',
-    value: function element(_element) {
-      return _element !== null && typeof _element !== 'undefined' && 'appendChild' in _element;
+    key: 'isElement',
+    value: function isElement(element) {
+      return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
     }
   }]);
   return Safety;
 }();
-
-exports.Safety = Safety;

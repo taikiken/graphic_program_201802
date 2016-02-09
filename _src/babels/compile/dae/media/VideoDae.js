@@ -65,36 +65,30 @@ var VideoDae = exports.VideoDae = function () {
     get: function get() {
       return this.video.caption;
     }
-    /**
-     * 1 x 1 small size
-     * @return {string} article.media.video.thumbnail
-     */
-
-  }, {
-    key: 'thumbnail',
-    get: function get() {
-      return this.video.thumbnail;
-    }
-    /**
-     * for slide
-     * @return {string} article.media.images.large
-     */
-
-  }, {
-    key: 'large',
-    get: function get() {
-      return this.video.large;
-    }
-    /**
-     * 16 x 9 記事一覧
-     * @return {string} article.media.images.medium
-     */
-
-  }, {
-    key: 'medium',
-    get: function get() {
-      return this.video.medium;
-    }
+    // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=1742013165
+    // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=404686668
+    // 2016-02-08 21:08:24 JSON 変更
+    ///**
+    // * 1 x 1 small size
+    // * @return {string} article.media.video.thumbnail
+    // */
+    //get thumbnail():string {
+    //  return this.video.thumbnail;
+    //}
+    ///**
+    // * for slide
+    // * @return {string} article.media.images.large
+    // */
+    //get large():string {
+    //  return this.video.large;
+    //}
+    ///**
+    // * 16 x 9 記事一覧
+    // * @return {string} article.media.images.medium
+    // */
+    //get medium():string {
+    //  return this.video.medium;
+    //}
     /**
      *
      * @return {string} article.media.video.url

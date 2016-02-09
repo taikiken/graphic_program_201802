@@ -133,9 +133,14 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
 
       var element = this.element;
 
-      var UserDom = React.createClass({
-        displayName: 'UserDom',
+      // --------------------------------------------------
+      // user notice
+      var UserNotice = React.createClass({
+        displayName: 'UserNotice',
 
+        propTypes: {
+          list: React.PropTypes.array.isRequired
+        },
         getInitialState: function getInitialState() {
           return {
             clicked: false,
@@ -143,6 +148,9 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
             bodyTimer: 0
           };
         },
+        render: function render() {},
+        componentDidMount: function componentDidMount() {},
+        componentWillUnmount: function componentWillUnmount() {},
         clickHandler: function clickHandler(event) {
 
           event.preventDefault();
@@ -184,20 +192,29 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
           this.setState({ bodyTimer: 0 });
           // document.body からclick event handler unbind
           document.body.removeEventListener('click', this.bodyClick);
+        }
+
+      });
+
+      // --------------------------------------------------
+      // user setting
+      var SettingDom = React.createClass({
+        displayName: 'SettingDom',
+
+        getInitialState: function getInitialState() {
+          return {
+            clicked: false,
+            open: 'close',
+            bodyTimer: 0
+          };
         },
         render: function render() {
-
           return React.createElement(
             'div',
-            { className: 'user signin ' + this.state.open },
+            { className: 'preference ' + this.state.open },
             React.createElement(
               'a',
-              { className: 'user-preference', href: '#', onClick: this.clickHandler },
-              React.createElement(
-                'span',
-                { className: 'user-notice' },
-                '88'
-              ),
+              { className: 'preference-opener', href: '#', onClick: this.clickHandler },
               React.createElement(
                 'span',
                 { className: 'user-avatar' },
@@ -245,7 +262,64 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
         },
         componentWillUnmount: function componentWillUnmount() {
           this.destroy();
+        },
+        clickHandler: function clickHandler(event) {
+
+          event.preventDefault();
+          this.toggleState();
+        },
+        bodyClick: function bodyClick() {
+
+          if (this.state.open === 'open') {
+
+            // document.body が a より先に反応する
+            // native event bind と React 経由の違いかも
+            // body click 後の処理を遅延させる, 多分気づかない程度
+            var timer = setTimeout(this.toggleState, 100);
+            this.setState({ bodyTimer: timer });
+          }
+        },
+        toggleState: function toggleState() {
+
+          this.destroy();
+
+          if (this.state.open === 'close') {
+            // close -> open
+            // document.body へ click event handler bind
+            this.setState({ open: 'open' });
+            document.body.addEventListener('click', this.bodyClick, false);
+          } else {
+            // open -> close
+            this.setState({ open: 'close' });
+          }
+        },
+        // timer cancel
+        // body.click unbind
+        // 後処理
+        destroy: function destroy() {
+
+          // body click からの遅延処理を clear する
+          // timer を 0 にし error にならないようにする
+          clearTimeout(this.state.bodyTimer);
+          this.setState({ bodyTimer: 0 });
+          // document.body からclick event handler unbind
+          document.body.removeEventListener('click', this.bodyClick);
         }
+      });
+
+      // --------------------------------------------------
+      // user root
+      var UserDom = React.createClass({
+        displayName: 'UserDom',
+
+        render: function render() {
+          return React.createElement(
+            'div',
+            { className: 'user' },
+            React.createElement(SettingDom, null)
+          );
+        }
+
       });
 
       ReactDOM.render(React.createElement(UserDom, null), element);

@@ -3951,10 +3951,14 @@ table tr.w200 > td {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 #board-container .board-large-column {
-  position: relative;
-  top: 99999px; }
+  width: 100%; }
   #board-container .board-large-column.column1, #board-container .board-large-column.column2 {
     float: none; }
+
+#board-container .board-item {
+  position: relative;
+  top: 99999px;
+  width: 340px; }
 
 #board-container-more {
   padding-top: 30px; }

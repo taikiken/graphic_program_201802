@@ -319,7 +319,7 @@ export class ViewArchiveMasonryInfinite extends View {
       // moreElement 存在チェックを行う
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
-      if ( Safety.element( moreElement ) && _this._moreRendered === null ) {
+      if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
       // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
 
         // チェックをパスし実行する
@@ -634,7 +634,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         // dom出力する
         return (
-          <div ref="boardRout">
+          <div ref="boardRout" className="board-large-column">
             {
               // loop start
               this.state.list.map( function( dae, i ) {
@@ -647,51 +647,46 @@ export class ViewArchiveMasonryInfinite extends View {
 
                 console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
 
+                thumbnail = dae.media.images.medium;
+                caption = dae.media.images.caption;
+
+                if ( !thumbnail ) {
+                  thumbnail = Empty.IMG_MIDDLE;
+                }
+                caption = Safety.string( caption, '' );
+
                 // media type で thumbnail 切替
                 if ( dae.mediaType === 'image' ) {
+
                   // type: image
-                  thumbnail = dae.media.images.medium;
-                  caption = dae.media.images.caption;
-
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.IMG_MIDDLE;
-                  }
-
                   figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
                     <img src={thumbnail} alt={caption}/>
                   </figure>;
 
                 } else {
+
                   // type: video
-                  thumbnail = dae.media.video.medium;
-                  caption = dae.media.video.caption;
-
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.VIDEO_THUMBNAIL;
-                  }
-
                   figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
                     <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
                     <img src={thumbnail} alt={caption}/>
                   </figure>;
+
                 }
 
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
-                  <div key={'archive-' + dae.id} className="board-large-column">
-                    <div className={'board-item board-item-' + i}>
-                      <a className="post" href={dae.url}>
-                        {figureTag}
-                        <div className="post-data">
-                          <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
-                          <h3 className='post-heading'>{dae.title}</h3>
-                          <p className="post-date">{dae.formatDate}</p>
-                          <div className="post-excerpt-text">{dae.description}</div>
-                        </div>
-                      </a>
+                  <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
+                    <a className="post" href={dae.url}>
+                      {figureTag}
+                      <div className="post-data">
+                        <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
+                        <h3 className='post-heading'>{dae.title}</h3>
+                        <p className="post-date">{dae.formatDate}</p>
+                        <div className="post-excerpt-text">{dae.description}</div>
+                      </div>
+                    </a>
 
-                      <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={dae.id} />
-                    </div>
+                    <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={dae.id} />
                   </div>
                 );
                 // loop end
@@ -777,7 +772,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         // isotope を行います
         this.isotope = new Isotope( this.refs.boardRout, {
-          itemSelector: '.board-large-column',
+          itemSelector: '.board-item',
           masonry: {
             gutter: 30
           }

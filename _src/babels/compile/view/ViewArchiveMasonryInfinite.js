@@ -378,7 +378,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         // moreElement 存在チェックを行う
         // Element 型を保証する
         // _moreRendered が null の時のみ, instance があれば state を update する
-        if (_Safety.Safety.element(moreElement) && _this._moreRendered === null) {
+        if (_Safety.Safety.isElement(moreElement) && _this._moreRendered === null) {
           // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
 
           // チェックをパスし実行する
@@ -748,7 +748,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           // dom出力する
           return React.createElement(
             'div',
-            { ref: 'boardRout' },
+            { ref: 'boardRout', className: 'board-large-column' },
 
             // loop start
             this.state.list.map(function (dae, i) {
@@ -761,30 +761,26 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
               console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
 
+              thumbnail = dae.media.images.medium;
+              caption = dae.media.images.caption;
+
+              if (!thumbnail) {
+                thumbnail = _Empty.Empty.IMG_MIDDLE;
+              }
+              caption = _Safety.Safety.string(caption, '');
+
               // media type で thumbnail 切替
               if (dae.mediaType === 'image') {
+
                 // type: image
-                thumbnail = dae.media.images.medium;
-                caption = dae.media.images.caption;
-
-                if (!thumbnail) {
-                  thumbnail = _Empty.Empty.IMG_MIDDLE;
-                }
-
                 figureTag = React.createElement(
                   'figure',
                   { className: 'post-thumb post-thumb-' + dae.mediaType },
                   React.createElement('img', { src: thumbnail, alt: caption })
                 );
               } else {
+
                 // type: video
-                thumbnail = dae.media.video.medium;
-                caption = dae.media.video.caption;
-
-                if (!thumbnail) {
-                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
-                }
-
                 figureTag = React.createElement(
                   'figure',
                   { className: 'post-thumb post-thumb-' + dae.mediaType },
@@ -796,41 +792,37 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
               // unique key(React)にarticle id(number)記事Idを使用します
               return React.createElement(
                 'div',
-                { key: 'archive-' + dae.id, className: 'board-large-column' },
+                { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
                 React.createElement(
-                  'div',
-                  { className: 'board-item board-item-' + i },
+                  'a',
+                  { className: 'post', href: dae.url },
+                  figureTag,
                   React.createElement(
-                    'a',
-                    { className: 'post', href: dae.url },
-                    figureTag,
+                    'div',
+                    { className: 'post-data' },
+                    React.createElement(
+                      'p',
+                      { className: 'post-category post-category-' + dae.category.slug },
+                      dae.category.label
+                    ),
+                    React.createElement(
+                      'h3',
+                      { className: 'post-heading' },
+                      dae.title
+                    ),
+                    React.createElement(
+                      'p',
+                      { className: 'post-date' },
+                      dae.formatDate
+                    ),
                     React.createElement(
                       'div',
-                      { className: 'post-data' },
-                      React.createElement(
-                        'p',
-                        { className: 'post-category post-category-' + dae.category.slug },
-                        dae.category.label
-                      ),
-                      React.createElement(
-                        'h3',
-                        { className: 'post-heading' },
-                        dae.title
-                      ),
-                      React.createElement(
-                        'p',
-                        { className: 'post-date' },
-                        dae.formatDate
-                      ),
-                      React.createElement(
-                        'div',
-                        { className: 'post-excerpt-text' },
-                        dae.description
-                      )
+                      { className: 'post-excerpt-text' },
+                      dae.description
                     )
-                  ),
-                  React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
-                )
+                  )
+                ),
+                React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
               );
               // loop end
             })
@@ -907,7 +899,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
           // isotope を行います
           this.isotope = new Isotope(this.refs.boardRout, {
-            itemSelector: '.board-large-column',
+            itemSelector: '.board-item',
             masonry: {
               gutter: 30
             }

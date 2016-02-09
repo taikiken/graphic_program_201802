@@ -72,7 +72,7 @@ export class Safety {
    * @return {Object} 必ずObjectを返します。引数が null の時は空Objectを返します
    */
   static object( value:Object = {} ):Object {
-    if ( value === null ) {
+    if ( value === null || typeof value === 'undefined' ) {
       value = Object.create( {} );
     }
 
@@ -86,7 +86,7 @@ export class Safety {
    */
   static string( value:string, defaultValue:string ):string {
 
-    if ( value === null ) {
+    if ( value === null || typeof value === 'undefined' ) {
       value = defaultValue;
     }
 
@@ -111,7 +111,7 @@ export class Safety {
    * @param {Element} element
    * @returns {boolean} Element かどうかの真偽値を返します
    */
-  static element( element:Element ):boolean {
+  static isElement( element:Element ):boolean {
     return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
   }
 }

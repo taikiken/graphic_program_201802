@@ -271,7 +271,7 @@ export class ViewComments extends View {
       // moreElement 存在チェックを行う
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
-      if ( Safety.element( moreElement ) && _this._moreRendered === null ) {
+      if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
 
         _this._moreRendered = ReactDOM.render(
           React.createElement( MoreView, { show: show } ),

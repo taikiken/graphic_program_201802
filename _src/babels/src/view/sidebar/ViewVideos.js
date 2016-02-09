@@ -211,11 +211,13 @@ export class ViewVideos extends View {
 
                 let dae = new ArticleDae( article );
                 let thumbnail = dae.media.video.medium;
+                let caption = dae.media.video.caption;
 
                 // thumbnail(16x9) を check なければ代替画像にする
                 if ( !thumbnail ) {
                   thumbnail = Empty.VIDEO_THUMBNAIL;
                 }
+                caption = Safety.string( caption, '' );
 
                 // VideosDom instance を使い render
                 return (
@@ -228,7 +230,7 @@ export class ViewVideos extends View {
                       url={dae.url}
                       date={dae.formatDate}
                       title={dae.title}
-                      caption={dae.media.video.caption}
+                      caption={caption}
                       thumbnail={thumbnail}
                     />
                 );

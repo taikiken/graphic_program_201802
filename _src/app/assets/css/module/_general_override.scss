@@ -7,8 +7,7 @@
 // -------------------------------------------------
 #board-container {
   .board-large-column {
-    position: relative;
-    top: 99999px;
+    width: 100%;
 
     &.column1,
     &.column2 {
@@ -16,9 +15,11 @@
     }
   }
 
-  //.board-item {
-  //  margin-top: 0;
-  //}
+  .board-item {
+    position: relative;
+    top: 99999px;
+    width: 340px;
+  }
 }
 
 
