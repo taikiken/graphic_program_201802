@@ -2672,7 +2672,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .comment-menu .dropMenu, .head-sec .notice-menu .dropMenu, .head-sec .preference-menu .dropMenu {
@@ -2952,7 +2952,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .post-detail {
@@ -3054,7 +3054,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .user-config {
@@ -3282,6 +3282,72 @@ table tr.w200 > td {
 
 .info-date {
   overflow: hidden; }
+
+.setting-sec {
+  min-height: 430px;
+  background: url(/assets/images/setting/bgline.png) 0 0 repeat-y; }
+  .setting-sec:before, .setting-sec:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.setting-side {
+  float: left;
+  width: 160px;
+  margin-top: 30px; }
+
+.setting-main {
+  float: right;
+  width: 520px;
+  margin-top: 30px; }
+
+.setting-side-nav-item + .setting-side-nav-item {
+  margin-top: 15px; }
+
+.setting-side-nav-link:link, .setting-side-nav-link:visited, .setting-side-nav-link:hover, .setting-side-nav-link:active {
+  color: #333;
+  text-decoration: none; }
+
+.setting-side-nav-link:hover {
+  color: #e1438b;
+  text-decoration: none; }
+
+.setting-side-nav-link span {
+  display: inline-block;
+  font-size: 86%; }
+  .setting-side-nav-link span:before {
+    content: '';
+    position: relative;
+    top: 2px;
+    margin-right: 4px; }
+
+.setting-side-nav-link.current span {
+  color: #e1438b;
+  font-weight: bold; }
+
+.setting-side-nav-basic span:before {
+  background-position: 0px -72px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 15px;
+  height: 15px; }
+
+.setting-side-nav-interest span:before {
+  background-position: -72px -48px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 16px;
+  height: 16px; }
+
+.setting-side-nav-sns span:before {
+  background-position: -96px 0px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  width: 12px;
+  height: 16px; }
 
 .setting-form input, .setting-form button, .setting-form textarea {
   border: none;
@@ -3661,7 +3727,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 .board-large:before, .board-large:after {
@@ -3947,7 +4013,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 #board-container .board-large-column {
@@ -4285,7 +4351,7 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
-.sprite-setting, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
 
 html, body {
