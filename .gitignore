@@ -31,6 +31,8 @@ php_ini.coffee
 #_src/app/router.php
 #_src/app/index.php
 
+# gulp .tmp
+_src/.tmp
 
 
 # environment
