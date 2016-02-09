@@ -9,3 +9,13 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+'use strict';
+
+import {View} from '../View';
+
+export class ViewHeaderMemberNotice extends View {
+  constructor( element:Element, option:Object = {} ) {
+    super( element, option );
+    // this._action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
+  }
+}
