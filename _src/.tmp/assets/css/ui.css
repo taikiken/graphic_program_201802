@@ -2663,6 +2663,18 @@ table tr.w200 > td {
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
   background-image: url(/assets/images/sprite/sprite-detail.png); }
 
@@ -2672,8 +2684,26 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
 .sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
 
 .comment-menu .dropMenu, .head-sec .notice-menu .dropMenu, .head-sec .preference-menu .dropMenu {
   position: relative;
@@ -2943,6 +2973,18 @@ table tr.w200 > td {
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
   background-image: url(/assets/images/sprite/sprite-detail.png); }
 
@@ -2952,8 +2994,26 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
 .sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
 
 .post-detail {
   margin-top: 30px; }
@@ -3045,6 +3105,18 @@ table tr.w200 > td {
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
   background-image: url(/assets/images/sprite/sprite-detail.png); }
 
@@ -3054,8 +3126,26 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
 .sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
 
 .user-config {
   background-color: #000; }
@@ -3718,6 +3808,18 @@ table tr.w200 > td {
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
   background-image: url(/assets/images/sprite/sprite-detail.png); }
 
@@ -3727,8 +3829,26 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
 .sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
 
 .board-large:before, .board-large:after {
   content: "";
@@ -4004,6 +4124,18 @@ table tr.w200 > td {
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
   background-image: url(/assets/images/sprite/sprite-detail.png); }
 
@@ -4013,8 +4145,26 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
 .sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
 
 #board-container .board-large-column {
   width: 100%; }
@@ -4342,6 +4492,18 @@ table tr.w200 > td {
 .sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
   background-image: url(/assets/images/sprite/sprite-common.png); }
 
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
 .sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
   background-image: url(/assets/images/sprite/sprite-detail.png); }
 
@@ -4351,8 +4513,26 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
 .sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
   background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .related-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
 
 html, body {
   width: 100%;
