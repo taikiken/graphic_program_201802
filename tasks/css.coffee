@@ -55,6 +55,7 @@ htdocs = dir.htdocs
 
 files = [
   app + '/**/*.{css,scss}'
+  '!' + app + '/**/ui.css'
   '!' + app + '/**/*.min.{css,scss}'
   '!' + app + '/**/*min.{css,scss}'
   '!' + app + '/**/*pack.{css,scss}'

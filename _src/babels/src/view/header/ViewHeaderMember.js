@@ -13,13 +13,18 @@
 
 import {View} from '../View';
 import {ViewHeaderMemberNotice} from './ViewHeaderMemberNotice';
-import {UserDae} from '../../dae/UserDae';
+
 import {Empty} from '../../app/const/Empty';
+import {UserDae} from '../../dae/UserDae';
+import {UsersSelf} from '../../action/users/UsersSelf';
 
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ *
+ */
 export class ViewHeaderMember extends View {
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
@@ -77,7 +82,7 @@ export class ViewHeaderMember extends View {
     // user setting
     let SettingDom = React.createClass( {
       propTypes: {
-        name: React.PropTypes.string.isRequired,
+        userName: React.PropTypes.string.isRequired,
         icon: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
@@ -90,7 +95,7 @@ export class ViewHeaderMember extends View {
       render: function() {
 
         let icon = this.props.icon;
-        let name = this.props.name;
+        let userName = this.props.userName;
 
         if ( !icon ) {
           icon = Empty.USER_PICTURE;
@@ -98,14 +103,14 @@ export class ViewHeaderMember extends View {
 
         return (
           <div className="user">
-            <div className="notice" ref="notice"></div>
+            <div className="notice-container" ref="notice"></div>
 
             <div className={'preference ' + this.state.open}>
               <a className="preference-opener" href="#" onClick={this.clickHandler}>
-                <span className="user-avatar"><img src={icon} alt={name} /></span>
+                <span className="user-avatar"><img src={icon} alt={userName} /></span>
               </a>
 
-              <nav className="user-menu">
+              <nav className="preference-menu">
                 <ul className="dropMenu">
                   <li className="dropMenu-item"><a className="dropMenu-link" href="/mypage/">ブックマーク<br />アクティビティ</a></li>
                   <li className="dropMenu-item"><a className="dropMenu-link" href="/settings/">設定</a></li>
@@ -181,8 +186,8 @@ export class ViewHeaderMember extends View {
     // --------------------------------------------------
     // user root
     ReactDOM.render(
-      <SettingDom icon={dae.profilePicture} name={dae.name} />,
-      element
+      <SettingDom icon={dae.profilePicture} userName={dae.userName} />,
+      this.element
     );
 
   }

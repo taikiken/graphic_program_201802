@@ -43,35 +43,30 @@ export class PopularDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
    * @return {Object|*} comment Object を返します
    */
   get comment():Object {
     return this._comment;
   }
   /**
-   *
    * @return {Number} comment.id を返します
    */
   get id():Number {
     return this.comment.id;
   }
   /**
-   *
    * @return {string} ISO8601 日付を返します
    */
   get date():string {
     return this.comment.date;
   }
   /**
-   *
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {
     return this._formatDate;
   }
   /**
-   *
    * @return {string} 相対日付返します
    */
   get displayDate():string {

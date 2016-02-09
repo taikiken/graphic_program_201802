@@ -62,8 +62,10 @@ var OffsetAuth = exports.OffsetAuth = function (_Offset) {
   /**
    * **要認証** Ajax 処理, queryあり<br>
    * **Next 読込** がある時に使用します
+   * @link Types.js
+   *
    * @param {string} token Authorization token
-   * @param {Type} types Types instance, Ajax request に使用します
+   * @param {Types} types Types instance, Ajax request に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値

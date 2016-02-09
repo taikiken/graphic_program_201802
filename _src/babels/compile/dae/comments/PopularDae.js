@@ -62,7 +62,6 @@ var PopularDae = exports.PopularDae = function () {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
    * @return {Object|*} comment Object を返します
    */
 
@@ -72,7 +71,6 @@ var PopularDae = exports.PopularDae = function () {
       return this._comment;
     }
     /**
-     *
      * @return {Number} comment.id を返します
      */
 
@@ -82,7 +80,6 @@ var PopularDae = exports.PopularDae = function () {
       return this.comment.id;
     }
     /**
-     *
      * @return {string} ISO8601 日付を返します
      */
 
@@ -92,7 +89,6 @@ var PopularDae = exports.PopularDae = function () {
       return this.comment.date;
     }
     /**
-     *
      * @return {string} ISO8601 を日本語形式日付にし返します
      */
 
@@ -102,7 +98,6 @@ var PopularDae = exports.PopularDae = function () {
       return this._formatDate;
     }
     /**
-     *
      * @return {string} 相対日付返します
      */
 

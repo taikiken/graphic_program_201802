@@ -24,10 +24,9 @@ let ReactDOM = self.ReactDOM;
 export class ViewHeaderUser extends View {
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
-    this.init();
   }
 
-  init():void {
+  start():void {
     if ( User.sign ) {
       // login member
       let member = new ViewHeaderMember( this.element );

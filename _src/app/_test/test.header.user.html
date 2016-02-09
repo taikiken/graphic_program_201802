@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>Ajax Auth</title>
+  <link rel="stylesheet" href="/assets/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <style>
+    body {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    ul {
+      list-style: disc;
+      margin: 0 0 1em 1em;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight:700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 24px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    h2 {
+      font-size: 18px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+    }
+    a {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<pre id="c1">Header User</pre>
+
+<div id="user-profile-container"></div>
+
+<script src="/assets/js/bundle/main.bundle.js"></script>
+<script>
+  ( function ( window ) {
+
+    'use strict';
+
+    var UT = self.UT;
+
+    // -------------------------------------------------
+    // develop mode
+    UT.app.App.develop();
+
+    // login
+    UT.app.User.login();
+
+    // -------------------------------------------------
+
+    function done( result ) {
+      console.log( 'result', result.args[0] );
+      // document.getElementById( 'result' ).querySelector( 'pre' ).innerHTML = JSON.stringify( result.data, null, 2 );
+    }
+
+    function fail( error ) {
+      console.log( 'fail', error.args[0] );
+      // document.getElementById( 'result' ).querySelector( 'pre' ).innerHTML = error.args[0].message;
+    }
+
+//    var usersSelf = new UT.action.users.UsersSelf( done, fail );
+    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    headerUser.start();
+
+  }( window ) );
+</script>
+</body>
+</html>
