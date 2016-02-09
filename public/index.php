@@ -1,28 +1,50 @@
 <?php
 
 /**
+*
 * ViewのルーティングにSlim導入
 * Slim - http://www.slimframework.com
 *
+* based on slim/slim-skeleton
 */
-require '../app/vendor/autoload.php';
 
-$app = new Slim\App();
+if (PHP_SAPI == 'cli-server') {
+  $file = __DIR__ . $_SERVER['REQUEST_URI'];
+  if (is_file($file)) {
+    return false;
+  }
+}
 
-# HOME
-# ==============================
-$app->get('/', function ( $request, $response, $args ) {
-  $response->write("Welcome to Slim! & undotsushin.com");
-  return $response;
-});
-
-
-$app->get('/hello[/{name}]', function ($request, $response, $args) {
-  $response->write("Hello, " . $args['name']);
-  return $response;
-})->setArgument('name', 'World!');
+// autoloader
+// ==============================
+require __DIR__ . '/../app/vendor/autoload.php';
 
 
+// initialize
+// ==============================
+$settings = require __DIR__ . '/../app/config/local.php';
+$app = new \Slim\App($settings);
+
+
+// dependencies
+// ==============================
+require __DIR__ . '/../app/src/dependencies.php';
+
+
+// middleware
+// ==============================
+require __DIR__ . '/../app/src/middleware.php';
+
+
+// routes
+// ==============================
+$routes = glob( __DIR__.'/../app/routes/*.router.php');
+foreach ($routes as $router) {
+  require $router;
+}
+
+
+// Run app
 $app->run();
 
 

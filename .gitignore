@@ -40,3 +40,6 @@ _src/.tmp
 
 # vagrant
 .vagrant
+
+# slim
+/app/logs/*.log
