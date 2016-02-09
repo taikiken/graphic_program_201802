@@ -76,8 +76,8 @@ let buildPath = () => {
     // カテゴリー一覧
     'categories': new Types(
       new Type( `${API_PATH}/category` ),
-      new Permalink( [ 'all', '*' ], true ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Permalink(),
+      new Queries()
     ),
     // --------------------------------------------
     // home / self

@@ -65,7 +65,9 @@ export class ViewTitle extends View {
         let label = this.props.label;
 
         return (
-          <h1 className="page-title">{label}</h1>
+          <div className="category-heading">
+            <h1>{label}</h1>
+          </div>
         );
 
       }

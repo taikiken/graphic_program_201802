@@ -29,6 +29,7 @@ import {Codes} from './app/Codes';
 import {User} from './app/User';
 import {Length} from './app/const/Length';
 import {CommentsType} from './app/const/CommentsType';
+import {Title} from './app/const/Title';
 
 // -------------------------------------
 // data
@@ -91,6 +92,7 @@ import {UsersSelf} from './action/users/UsersSelf';
 // model
 import {Model} from './model/Model';
 import {ModelUsersSelf} from './model/users/ModelUsersSelf';
+import {ModelCategories} from './model/categoires/ModelCategories';
 
 // -------------------------------------
 // view
@@ -144,7 +146,8 @@ var UT = {
     User: User,
     Router: Router,
     const: {
-      CommentsType: CommentsType
+      CommentsType: CommentsType,
+      Title: Title
     }
   },
   ui: {
@@ -228,6 +231,9 @@ var UT = {
     Model: Model,
     users: {
       ModelUsersSelf: ModelUsersSelf
+    },
+    categories: {
+      ModelCategories: ModelCategories
     }
   }
 };

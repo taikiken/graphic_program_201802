@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/22 - 17:08
+ * @date 2016/02/09 - 14:54
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,39 +11,53 @@
  */
 'use strict';
 
-import {Safety} from '../data/Safety';
+import {Safety} from '../../data/Safety';
 
 /**
- * article.category を管理します
+ * カテゴリー一覧, カテゴリー毎のデータ
  */
-export class CategoryDae {
+export class SlugDae {
   /**
-   * article.category を管理します
-   * @param {Object} [category={}] article.category
+   * カテゴリー一覧, カテゴリー毎のデータ
+   * @param {Object} [category={}] カテゴリー一覧, 1 カテゴリーdata
    */
   constructor( category:Object = {} ) {
+
     category = Safety.object( category );
     this._category = category;
+
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {Object|*} article.category を返します
+   * @return {Object|*} 1 カテゴリーdata
    */
   get category():Object {
     return this._category;
   }
   /**
-   * @return {string|undefined} article.category.label を返します
+   * @return {Number} category Id を返します
+   */
+  get id():Number {
+    return this.category.id;
+  }
+  /**
+   * @return {string} category label を返します
    */
   get label():string {
     return this.category.label;
   }
   /**
-   * @return {string|undefined} article.category.slug を返します
+   * @return {string} category slug を返します
    */
   get slug():string {
     return this.category.slug;
+  }
+  /**
+   * @return {string} category url を返します
+   */
+  get url():string {
+    return this.category.url;
   }
 }

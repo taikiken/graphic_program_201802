@@ -88,11 +88,13 @@
   .success -> #43e18a グリーン
   -->
 
+  <div id="page-title-container"></div><!--/title-->
+
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
 
-        <div class="newsboad">
+        <div class="board-large">
 
           <div id="board-container"></div><!--/archive-->
 
@@ -190,14 +192,48 @@
     headerUser.render();
 
     // ---------------------------------------------------------
+    // make title
+    function makeTitle( categoryTitle, type ) {
+      var typeTitle = UT.app.const.Title.categoryTitle( type );
+
+      if ( !!typeTitle ) {
+        categoryTitle = categoryTitle + ' ' + typeTitle;
+      }
+
+      var title = new UT.view.ViewTitle( categoryTitle, document.getElementById( 'page-title-container' ) );
+      title.render();
+
+    }
+
+    // category 一覧を取得し make title
+    function pageTitle( slug, type ) {
+
+      var option = {};
+      option[ UT.model.Model.COMPLETE ] = function( event ) {
+
+        var categories = event;
+        var dae = categories.bySlug( slug );
+        var categoryTitle = dae.label;
+
+        if ( !!categoryTitle ) {
+          makeTitle( categoryTitle, type );
+        }
+      };
+
+      var modelCategories = new UT.model.categories.ModelCategories( option );
+      modelCategories.start();
+
+    }
+
+    // ---------------------------------------------------------
     // show page
-    function page ( event ) {
+    function page( event ) {
 
       console.log( 'page ', event );
 
       var slug = event.slug;
       var type = event.slugType;
-
+      console.log( slug, type, event );
       // ---------------------------------------------------------
       // news
       // category 記事一覧は token 不要
@@ -226,6 +262,20 @@
       };
       var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), videosCallback, slug );
       videos.start();
+
+      // ---------------------------------------------------------
+      // page title
+      var categoryTitle = UT.app.const.Title.categoryTitle( slug );
+
+      if ( !categoryTitle ) {
+
+        pageTitle( slug, type );
+
+      } else {
+
+        makeTitle( categoryTitle, type );
+
+      }
 
     }
 

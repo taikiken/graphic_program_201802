@@ -16,6 +16,8 @@ var _Length = require('./app/const/Length');
 
 var _CommentsType = require('./app/const/CommentsType');
 
+var _Title = require('./app/const/Title');
+
 var _Data = require('./data/Data');
 
 var _Form = require('./data/Form');
@@ -76,6 +78,8 @@ var _Model = require('./model/Model');
 
 var _ModelUsersSelf = require('./model/users/ModelUsersSelf');
 
+var _ModelCategories = require('./model/categoires/ModelCategories');
+
 var _View = require('./view/View');
 
 var _ViewHeaderUser = require('./view/header/ViewHeaderUser');
@@ -124,28 +128,21 @@ var _Receiver = require('./ui/Receiver');
 // -------------------------------------
 // view
 
-// -------------------------------------
-// model
+// action/user
 
-// action/single
+// action/search
 
-// action/bookmark
-
-// action/archive
-
-// action/home
+// action/sidebar
 
 // -------------------------------------
-// action
-
-// net/types
+// app/App
 
 // -------------------------------------
-// data
+// net
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-09 14:17:54
+ * @date 2016-02-09 16:31:59
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -171,7 +168,8 @@ var UT = {
     User: _User.User,
     Router: _Router.Router,
     const: {
-      CommentsType: _CommentsType.CommentsType
+      CommentsType: _CommentsType.CommentsType,
+      Title: _Title.Title
     }
   },
   ui: {
@@ -255,6 +253,9 @@ var UT = {
     Model: _Model.Model,
     users: {
       ModelUsersSelf: _ModelUsersSelf.ModelUsersSelf
+    },
+    categories: {
+      ModelCategories: _ModelCategories.ModelCategories
     }
   }
 };
@@ -264,17 +265,24 @@ var UT = {
 
 // sidebar
 
-// action/user
+// -------------------------------------
+// model
 
-// action/search
+// action/single
 
-// action/sidebar
+// action/bookmark
+
+// action/archive
+
+// action/home
 
 // -------------------------------------
-// app/App
+// action
+
+// net/types
 
 // -------------------------------------
-// net
+// data
 
 // -------------------------------------
 // app

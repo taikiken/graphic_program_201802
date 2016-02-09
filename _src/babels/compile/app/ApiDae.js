@@ -87,7 +87,7 @@ var buildPath = function buildPath() {
     'users:logout': new _Types.Types(new _Type.Type(API_PATH + '/sessions', 'DELETE'), new _Permalink.Permalink(), new _Queries.Queries()),
     // --------------------------------------------
     // カテゴリー一覧
-    'categories': new _Types.Types(new _Type.Type(API_PATH + '/category'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+    'categories': new _Types.Types(new _Type.Type(API_PATH + '/category'), new _Permalink.Permalink(), new _Queries.Queries()),
     // --------------------------------------------
     // home / self
     // /api/v1/articles/home[/|/pickup|/headline]

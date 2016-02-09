@@ -97,9 +97,13 @@ var ViewTitle = exports.ViewTitle = function (_View) {
           var label = this.props.label;
 
           return React.createElement(
-            'h1',
-            { className: 'page-title' },
-            label
+            'div',
+            { className: 'category-heading' },
+            React.createElement(
+              'h1',
+              null,
+              label
+            )
           );
         }
       });

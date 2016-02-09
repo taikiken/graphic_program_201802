@@ -27,8 +27,8 @@ export class ViewCategory extends ViewArchiveMasonryInfinite {
    */
   constructor( slug:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option, true );
-    // Canvas Action を使う
-    // slug を送り 表示(render)は ViewArchiveMasonry を使う
+    // Category Action を使う
+    // slug を送り 表示(render)は ViewArchiveMasonryInfinite を使う
     this._action = new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
   }
 }

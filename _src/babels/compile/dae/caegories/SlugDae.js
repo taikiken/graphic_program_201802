@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/22 - 17:08
+ * @date 2016/02/09 - 14:54
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CategoryDae = undefined;
+exports.SlugDae = undefined;
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
@@ -24,23 +24,23 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _Safety = require('../data/Safety');
+var _Safety = require('../../data/Safety');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * article.category を管理します
+ * カテゴリー一覧, カテゴリー毎のデータ
  */
 
-var CategoryDae = exports.CategoryDae = function () {
+var SlugDae = exports.SlugDae = function () {
   /**
-   * article.category を管理します
-   * @param {Object} [category={}] article.category
+   * カテゴリー一覧, カテゴリー毎のデータ
+   * @param {Object} [category={}] カテゴリー一覧, 1 カテゴリーdata
    */
 
-  function CategoryDae() {
+  function SlugDae() {
     var category = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-    (0, _classCallCheck3.default)(this, CategoryDae);
+    (0, _classCallCheck3.default)(this, SlugDae);
 
     category = _Safety.Safety.object(category);
     this._category = category;
@@ -49,16 +49,25 @@ var CategoryDae = exports.CategoryDae = function () {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {Object|*} article.category を返します
+   * @return {Object|*} 1 カテゴリーdata
    */
 
-  (0, _createClass3.default)(CategoryDae, [{
+  (0, _createClass3.default)(SlugDae, [{
     key: 'category',
     get: function get() {
       return this._category;
     }
     /**
-     * @return {string|undefined} article.category.label を返します
+     * @return {Number} category Id を返します
+     */
+
+  }, {
+    key: 'id',
+    get: function get() {
+      return this.category.id;
+    }
+    /**
+     * @return {string} category label を返します
      */
 
   }, {
@@ -67,7 +76,7 @@ var CategoryDae = exports.CategoryDae = function () {
       return this.category.label;
     }
     /**
-     * @return {string|undefined} article.category.slug を返します
+     * @return {string} category slug を返します
      */
 
   }, {
@@ -75,6 +84,15 @@ var CategoryDae = exports.CategoryDae = function () {
     get: function get() {
       return this.category.slug;
     }
+    /**
+     * @return {string} category url を返します
+     */
+
+  }, {
+    key: 'url',
+    get: function get() {
+      return this.category.url;
+    }
   }]);
-  return CategoryDae;
+  return SlugDae;
 }();

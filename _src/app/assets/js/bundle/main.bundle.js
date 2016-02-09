@@ -62,93 +62,97 @@
 
 	var _CommentsType = __webpack_require__(84);
 
-	var _Data = __webpack_require__(85);
+	var _Title = __webpack_require__(85);
 
-	var _Form = __webpack_require__(86);
+	var _Data = __webpack_require__(86);
 
-	var _Result = __webpack_require__(87);
+	var _Form = __webpack_require__(87);
 
-	var _Ajax = __webpack_require__(88);
+	var _Result = __webpack_require__(88);
 
-	var _Api = __webpack_require__(89);
+	var _Ajax = __webpack_require__(89);
 
-	var _Types = __webpack_require__(90);
+	var _Api = __webpack_require__(90);
 
-	var _Permalink = __webpack_require__(92);
+	var _Types = __webpack_require__(91);
 
-	var _Query = __webpack_require__(94);
+	var _Permalink = __webpack_require__(93);
 
-	var _Queries = __webpack_require__(97);
+	var _Query = __webpack_require__(95);
 
-	var _Type = __webpack_require__(91);
+	var _Queries = __webpack_require__(98);
 
-	var _CommentType = __webpack_require__(98);
+	var _Type = __webpack_require__(92);
 
-	var _App = __webpack_require__(99);
+	var _CommentType = __webpack_require__(99);
 
-	var _Action = __webpack_require__(100);
+	var _App = __webpack_require__(100);
 
-	var _Offset = __webpack_require__(101);
+	var _Action = __webpack_require__(101);
 
-	var _Pickup = __webpack_require__(106);
+	var _Offset = __webpack_require__(102);
 
-	var _Headline = __webpack_require__(107);
+	var _Pickup = __webpack_require__(107);
 
-	var _News = __webpack_require__(108);
+	var _Headline = __webpack_require__(108);
 
-	var _PickupAuth = __webpack_require__(109);
+	var _News = __webpack_require__(109);
 
-	var _HeadlineAuth = __webpack_require__(112);
+	var _PickupAuth = __webpack_require__(110);
 
-	var _NewsAuth = __webpack_require__(113);
+	var _HeadlineAuth = __webpack_require__(113);
 
-	var _Category = __webpack_require__(115);
+	var _NewsAuth = __webpack_require__(114);
 
-	var _Ranking = __webpack_require__(116);
+	var _Category = __webpack_require__(116);
 
-	var _Videos = __webpack_require__(117);
+	var _Ranking = __webpack_require__(117);
 
-	var _Widget = __webpack_require__(118);
+	var _Videos = __webpack_require__(118);
 
-	var _Bookmark = __webpack_require__(119);
+	var _Widget = __webpack_require__(119);
 
-	var _Search = __webpack_require__(120);
+	var _Bookmark = __webpack_require__(120);
 
-	var _Single = __webpack_require__(121);
+	var _Search = __webpack_require__(121);
 
-	var _UsersSelf = __webpack_require__(122);
+	var _Single = __webpack_require__(122);
 
-	var _Model = __webpack_require__(123);
+	var _UsersSelf = __webpack_require__(123);
 
-	var _ModelUsersSelf = __webpack_require__(124);
+	var _Model = __webpack_require__(124);
 
-	var _View = __webpack_require__(127);
+	var _ModelUsersSelf = __webpack_require__(125);
 
-	var _ViewHeaderUser = __webpack_require__(128);
+	var _ModelCategories = __webpack_require__(128);
 
-	var _ViewArchive = __webpack_require__(129);
+	var _View = __webpack_require__(132);
 
-	var _ViewArchiveMasonry = __webpack_require__(139);
+	var _ViewHeaderUser = __webpack_require__(133);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(141);
+	var _ViewArchive = __webpack_require__(134);
 
-	var _ViewCategory = __webpack_require__(144);
+	var _ViewArchiveMasonry = __webpack_require__(144);
 
-	var _ViewSingle = __webpack_require__(145);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(146);
 
-	var _ViewTitle = __webpack_require__(150);
+	var _ViewCategory = __webpack_require__(149);
 
-	var _ViewComments = __webpack_require__(151);
+	var _ViewSingle = __webpack_require__(150);
 
-	var _ViewHeadline = __webpack_require__(156);
+	var _ViewTitle = __webpack_require__(155);
 
-	var _ViewPickup = __webpack_require__(157);
+	var _ViewComments = __webpack_require__(156);
 
-	var _ViewRanking = __webpack_require__(158);
+	var _ViewHeadline = __webpack_require__(161);
 
-	var _ViewVideos = __webpack_require__(159);
+	var _ViewPickup = __webpack_require__(162);
 
-	var _Receiver = __webpack_require__(160);
+	var _ViewRanking = __webpack_require__(163);
+
+	var _ViewVideos = __webpack_require__(164);
+
+	var _Receiver = __webpack_require__(165);
 
 	/**
 	 * ToDo: 確認事項
@@ -170,28 +174,21 @@
 	// -------------------------------------
 	// view
 
-	// -------------------------------------
-	// model
+	// action/user
 
-	// action/single
+	// action/search
 
-	// action/bookmark
-
-	// action/archive
-
-	// action/home
+	// action/sidebar
 
 	// -------------------------------------
-	// action
-
-	// net/types
+	// app/App
 
 	// -------------------------------------
-	// data
+	// net
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-09 14:17:54
+	 * @date 2016-02-09 16:31:59
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -217,7 +214,8 @@
 	    User: _User.User,
 	    Router: _Router.Router,
 	    const: {
-	      CommentsType: _CommentsType.CommentsType
+	      CommentsType: _CommentsType.CommentsType,
+	      Title: _Title.Title
 	    }
 	  },
 	  ui: {
@@ -301,6 +299,9 @@
 	    Model: _Model.Model,
 	    users: {
 	      ModelUsersSelf: _ModelUsersSelf.ModelUsersSelf
+	    },
+	    categories: {
+	      ModelCategories: _ModelCategories.ModelCategories
 	    }
 	  }
 	};
@@ -310,17 +311,24 @@
 
 	// sidebar
 
-	// action/user
+	// -------------------------------------
+	// model
 
-	// action/search
+	// action/single
 
-	// action/sidebar
+	// action/bookmark
+
+	// action/archive
+
+	// action/home
 
 	// -------------------------------------
-	// app/App
+	// action
+
+	// net/types
 
 	// -------------------------------------
-	// net
+	// data
 
 	// -------------------------------------
 	// app
@@ -4361,6 +4369,144 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 15:52
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Title = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(52);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+	var _category = {
+	  all: '新着順',
+	  ranking: 'ランキング',
+	  video: '動画'
+	};
+
+	/**
+	 * 各ページのタイトル
+	 */
+
+	var Title = exports.Title = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Title(target) {
+	    (0, _classCallCheck3.default)(this, Title);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Title is static Class. not use new Title().');
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {string} 検索キーワード置き換え文字列
+	   */
+
+	  (0, _createClass3.default)(Title, null, [{
+	    key: 'searchTitle',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * 検索タイトルの雛形 から 検索文字列 を使用しタイトルを生成します
+	     * @param {string} keyword 検索文字列
+	     * @return {string} 検索タイトルの雛形 から 検索文字列 を使用しタイトルを生成し返します
+	     */
+	    value: function searchTitle(keyword) {
+	      return Title.search.replace(Title.SEARCH_WORD, keyword);
+	    }
+	    /**
+	     *
+	     * @param {string} slug category slug, type
+	     * @return {*}
+	     */
+
+	  }, {
+	    key: 'categoryTitle',
+	    value: function categoryTitle(slug) {
+	      return _category[slug];
+	    }
+	  }, {
+	    key: 'SEARCH_WORD',
+	    get: function get() {
+	      return '|__SEARCH_WORD__|';
+	    }
+	    /**
+	     * @return {string} カテゴリー slug all のタイトルを返します
+	     */
+
+	  }, {
+	    key: 'all',
+	    get: function get() {
+	      return _category.all;
+	    }
+	    /**
+	     * @return {string} カテゴリー type ranking のタイトルを返します
+	     */
+
+	  }, {
+	    key: 'ranking',
+	    get: function get() {
+	      return _category.ranking;
+	    }
+	    /**
+	     * @return {string} カテゴリー type video のタイトルを返します
+	     */
+
+	  }, {
+	    key: 'video',
+	    get: function get() {
+	      return _category.video;
+	    }
+	    /**
+	     * @return {string} 検索タイトルの雛形を返します
+	     */
+
+	  }, {
+	    key: 'search',
+	    get: function get() {
+	      return '「' + Title.SEARCH_WORD + '」の検索結果';
+	    }
+	  }]);
+	  return Title;
+	}();
+
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/21 - 13:39
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -4431,7 +4577,7 @@
 	}();
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4468,7 +4614,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Data = __webpack_require__(85);
+	var _Data = __webpack_require__(86);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4555,7 +4701,7 @@
 	}();
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4714,7 +4860,7 @@
 	}();
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4747,7 +4893,7 @@
 
 	var _Codes = __webpack_require__(82);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4915,7 +5061,7 @@
 	}();
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4948,11 +5094,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Types = __webpack_require__(90);
+	var _Types = __webpack_require__(91);
 
 	var _User = __webpack_require__(78);
 
-	var _ApiDae = __webpack_require__(95);
+	var _ApiDae = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5337,7 +5483,7 @@
 	}();
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5366,11 +5512,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Type = __webpack_require__(91);
+	var _Type = __webpack_require__(92);
 
-	var _Permalink = __webpack_require__(92);
+	var _Permalink = __webpack_require__(93);
 
-	var _Quries = __webpack_require__(93);
+	var _Quries = __webpack_require__(94);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5468,7 +5614,7 @@
 	}();
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5592,7 +5738,7 @@
 	}();
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5703,7 +5849,7 @@
 	}();
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5736,7 +5882,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(94);
+	var _Query = __webpack_require__(95);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5827,7 +5973,7 @@
 	}();
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5927,7 +6073,7 @@
 	}();
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5962,17 +6108,17 @@
 
 	var _Env = __webpack_require__(80);
 
-	var _Path = __webpack_require__(96);
+	var _Path = __webpack_require__(97);
 
-	var _Types = __webpack_require__(90);
+	var _Types = __webpack_require__(91);
 
-	var _Type = __webpack_require__(91);
+	var _Type = __webpack_require__(92);
 
-	var _Permalink = __webpack_require__(92);
+	var _Permalink = __webpack_require__(93);
 
-	var _Queries = __webpack_require__(97);
+	var _Queries = __webpack_require__(98);
 
-	var _Query = __webpack_require__(94);
+	var _Query = __webpack_require__(95);
 
 	var _Loc = __webpack_require__(1);
 
@@ -6019,7 +6165,7 @@
 	    'users:logout': new _Types.Types(new _Type.Type(API_PATH + '/sessions', 'DELETE'), new _Permalink.Permalink(), new _Queries.Queries()),
 	    // --------------------------------------------
 	    // カテゴリー一覧
-	    'categories': new _Types.Types(new _Type.Type(API_PATH + '/category'), new _Permalink.Permalink(['all', '*'], true), new _Queries.Queries([new _Query.Query('offset', 'number', 0), new _Query.Query('length', 'number', 10)])),
+	    'categories': new _Types.Types(new _Type.Type(API_PATH + '/category'), new _Permalink.Permalink(), new _Queries.Queries()),
 	    // --------------------------------------------
 	    // home / self
 	    // /api/v1/articles/home[/|/pickup|/headline]
@@ -6241,7 +6387,7 @@
 	}();
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6435,7 +6581,7 @@
 	}();
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6468,7 +6614,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(94);
+	var _Query = __webpack_require__(95);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6560,7 +6706,7 @@
 	}();
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6603,7 +6749,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Query2 = __webpack_require__(94);
+	var _Query2 = __webpack_require__(95);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6659,7 +6805,7 @@
 	}(_Query2.Query);
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6694,7 +6840,7 @@
 
 	var _Env = __webpack_require__(80);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6769,7 +6915,7 @@
 	}();
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6798,11 +6944,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _Ajax = __webpack_require__(88);
+	var _Ajax = __webpack_require__(89);
 
-	var _Types = __webpack_require__(90);
+	var _Types = __webpack_require__(91);
 
 	var _Safety = __webpack_require__(44);
 
@@ -6919,7 +7065,7 @@
 	}();
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6956,7 +7102,7 @@
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _get2 = __webpack_require__(102);
+	var _get2 = __webpack_require__(103);
 
 	var _get3 = _interopRequireDefault(_get2);
 
@@ -6964,11 +7110,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _Action2 = __webpack_require__(100);
+	var _Action2 = __webpack_require__(101);
 
-	var _Types = __webpack_require__(90);
+	var _Types = __webpack_require__(91);
 
 	var _Length = __webpack_require__(83);
 
@@ -7158,12 +7304,12 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _Object$getOwnPropertyDescriptor = __webpack_require__(103)["default"];
+	var _Object$getOwnPropertyDescriptor = __webpack_require__(104)["default"];
 
 	exports["default"] = function get(_x, _x2, _x3) {
 	  var _again = true;
@@ -7207,23 +7353,23 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 103 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(104), __esModule: true };
-
-/***/ },
 /* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(105), __esModule: true };
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var $ = __webpack_require__(22);
-	__webpack_require__(105);
+	__webpack_require__(106);
 	module.exports = function getOwnPropertyDescriptor(it, key){
 	  return $.getDesc(it, key);
 	};
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
@@ -7236,7 +7382,7 @@
 	});
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7277,9 +7423,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(100);
+	var _Action2 = __webpack_require__(101);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _Length = __webpack_require__(83);
 
@@ -7340,7 +7486,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7381,9 +7527,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(100);
+	var _Action2 = __webpack_require__(101);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _Length = __webpack_require__(83);
 
@@ -7430,7 +7576,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7467,9 +7613,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(101);
+	var _Offset2 = __webpack_require__(102);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _Length = __webpack_require__(83);
 
@@ -7505,7 +7651,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7546,9 +7692,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuth2 = __webpack_require__(110);
+	var _ActionAuth2 = __webpack_require__(111);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _User = __webpack_require__(78);
 
@@ -7600,7 +7746,7 @@
 	}(_ActionAuth2.ActionAuth);
 
 /***/ },
-/* 110 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7641,17 +7787,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(100);
+	var _Action2 = __webpack_require__(101);
 
 	var _User = __webpack_require__(78);
 
-	var _Token = __webpack_require__(111);
+	var _Token = __webpack_require__(112);
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _Types = __webpack_require__(90);
+	var _Types = __webpack_require__(91);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7710,7 +7856,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7799,7 +7945,7 @@
 	exports.Token = Token;
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7840,9 +7986,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuth2 = __webpack_require__(110);
+	var _ActionAuth2 = __webpack_require__(111);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _User = __webpack_require__(78);
 
@@ -7894,7 +8040,7 @@
 	}(_ActionAuth2.ActionAuth);
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7931,9 +8077,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _OffsetAuth2 = __webpack_require__(114);
+	var _OffsetAuth2 = __webpack_require__(115);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _User = __webpack_require__(78);
 
@@ -7975,7 +8121,7 @@
 	}(_OffsetAuth2.OffsetAuth);
 
 /***/ },
-/* 114 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8016,17 +8162,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(101);
+	var _Offset2 = __webpack_require__(102);
 
 	var _Length = __webpack_require__(83);
 
-	var _Token = __webpack_require__(111);
+	var _Token = __webpack_require__(112);
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _Types = __webpack_require__(90);
+	var _Types = __webpack_require__(91);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8096,7 +8242,7 @@
 	// import {User} from '../app/User';
 
 /***/ },
-/* 115 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8137,9 +8283,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(101);
+	var _Offset2 = __webpack_require__(102);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _Safety = __webpack_require__(44);
 
@@ -8245,7 +8391,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8282,7 +8428,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Category2 = __webpack_require__(115);
+	var _Category2 = __webpack_require__(116);
 
 	var _Safety = __webpack_require__(44);
 
@@ -8316,7 +8462,7 @@
 	}(_Category2.Category);
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8353,7 +8499,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Category2 = __webpack_require__(115);
+	var _Category2 = __webpack_require__(116);
 
 	var _Safety = __webpack_require__(44);
 
@@ -8387,7 +8533,7 @@
 	}(_Category2.Category);
 
 /***/ },
-/* 118 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8421,9 +8567,9 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Ranking = __webpack_require__(116);
+	var _Ranking = __webpack_require__(117);
 
-	var _Videos = __webpack_require__(117);
+	var _Videos = __webpack_require__(118);
 
 	var _Length = __webpack_require__(83);
 
@@ -8508,7 +8654,7 @@
 	}();
 
 /***/ },
-/* 119 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8553,11 +8699,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Action2 = __webpack_require__(100);
+	var _Action2 = __webpack_require__(101);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
-	var _Path = __webpack_require__(96);
+	var _Path = __webpack_require__(97);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8684,7 +8830,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 120 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8725,9 +8871,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(101);
+	var _Offset2 = __webpack_require__(102);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _Length = __webpack_require__(83);
 
@@ -8799,7 +8945,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 121 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8840,11 +8986,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(100);
+	var _Action2 = __webpack_require__(101);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
-	var _Path = __webpack_require__(96);
+	var _Path = __webpack_require__(97);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8905,7 +9051,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8942,9 +9088,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuth2 = __webpack_require__(110);
+	var _ActionAuth2 = __webpack_require__(111);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _User = __webpack_require__(78);
 
@@ -8977,7 +9123,7 @@
 	}(_ActionAuth2.ActionAuth);
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9163,7 +9309,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9204,11 +9350,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Model2 = __webpack_require__(123);
+	var _Model2 = __webpack_require__(124);
 
-	var _UsersSelf = __webpack_require__(122);
+	var _UsersSelf = __webpack_require__(123);
 
-	var _UserDae = __webpack_require__(125);
+	var _UserDae = __webpack_require__(126);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9282,7 +9428,7 @@
 	}(_Model2.Model);
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9311,7 +9457,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _TypeDae = __webpack_require__(126);
+	var _TypeDae = __webpack_require__(127);
 
 	var _Safety = __webpack_require__(44);
 
@@ -9407,7 +9553,7 @@
 	}();
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9505,7 +9651,434 @@
 	}();
 
 /***/ },
-/* 127 */
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 14:45
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelCategories = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Model2 = __webpack_require__(124);
+
+	var _Categories = __webpack_require__(129);
+
+	var _CategoriesDae = __webpack_require__(130);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * カテゴリー一覧
+	 */
+
+	var ModelCategories = exports.ModelCategories = function (_Model) {
+	  (0, _inherits3.default)(ModelCategories, _Model);
+
+	  /**
+	   * カテゴリー一覧を取得し callback を発火します
+	   * @param option
+	   */
+
+	  function ModelCategories() {
+	    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, ModelCategories);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ModelCategories).call(this, option));
+
+	    _this._action = new _Categories.Categories(_this.done.bind(_this), _this.fail.bind(_this));
+	    return _this;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ModelCategories, [{
+	    key: 'start',
+	    value: function start() {
+
+	      this.action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var response = result.response;
+
+	      if (typeof response === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[USER_SELF:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error);
+	      } else {
+
+	        // 成功 callback
+	        this.executeSafely(_Model2.Model.COMPLETE, new _CategoriesDae.CategoriesDae(response));
+	      }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error);
+	    }
+	  }]);
+	  return ModelCategories;
+	}(_Model2.Model);
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 14:39
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Categories = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Action2 = __webpack_require__(101);
+
+	var _Api = __webpack_require__(90);
+
+	var _Path = __webpack_require__(97);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Categories = exports.Categories = function (_Action) {
+	  (0, _inherits3.default)(Categories, _Action);
+
+	  function Categories() {
+	    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    (0, _classCallCheck3.default)(this, Categories);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Categories).call(this, _Api.Api.categories(), resolve, reject));
+	  }
+
+	  return Categories;
+	}(_Action2.Action);
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 14:50
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CategoriesDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	var _SlugDae = __webpack_require__(131);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * カテゴリー一覧 response を管理します
+	 */
+
+	var CategoriesDae = exports.CategoriesDae = function () {
+	  /**
+	   * カテゴリー一覧 response を管理します
+	   * @param {Object} [response={}] JSON response
+	   */
+
+	  function CategoriesDae() {
+	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, CategoriesDae);
+
+	    response = _Safety.Safety.object(response);
+	    var categories = _Safety.Safety.array(response.categories);
+
+	    var cats = [];
+	    var bank = {};
+
+	    // categories からデータを取り出し SlugDae instance を作成
+	    // cats: 配列にそのまま保持
+	    // bank: slug をキーにそ保持
+	    categories.forEach(function (category) {
+
+	      var slugDae = new _SlugDae.SlugDae(category);
+	      cats.push(slugDae);
+	      bank[slugDae.slug] = slugDae;
+	    });
+
+	    this._response = response;
+	    this._categories = categories;
+	    this._cats = cats;
+	    this._bank = bank;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} JSON response を返します
+	   */
+
+	  (0, _createClass3.default)(CategoriesDae, [{
+	    key: 'bySlug',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * @param {string} slug 検索したい slug
+	     * @return {SlugDae} 該当 SlugDae を返します
+	     */
+	    value: function bySlug(slug) {
+	      return this._bank[slug];
+	    }
+	  }, {
+	    key: 'response',
+	    get: function get() {
+	      return this._response;
+	    }
+	    /**
+	     * @return {Array|*} JSON response.categories を返します
+	     */
+
+	  }, {
+	    key: 'categories',
+	    get: function get() {
+	      return this._categories;
+	    }
+	    /**
+	     * @return {Array<SlugDae>|*} response.categories を SlugDae instance 配列にし返します
+	     */
+
+	  }, {
+	    key: 'all',
+	    get: function get() {
+	      return this._cats;
+	    }
+	    /**
+	     * @return {{}|*} slug をキーにした SlugDae instance 全て
+	     */
+
+	  }, {
+	    key: 'bank',
+	    get: function get() {
+	      return this._bank;
+	    }
+	    /**
+	     * alias total
+	     * @return {Number} JSON response.count を返します
+	     */
+
+	  }, {
+	    key: 'count',
+	    get: function get() {
+	      return this.total;
+	    }
+	    /**
+	     * @return {Number} JSON response.count を返します
+	     */
+
+	  }, {
+	    key: 'total',
+	    get: function get() {
+	      return this.response.count;
+	    }
+	  }]);
+	  return CategoriesDae;
+	}();
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 14:54
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SlugDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * カテゴリー一覧, カテゴリー毎のデータ
+	 */
+
+	var SlugDae = exports.SlugDae = function () {
+	  /**
+	   * カテゴリー一覧, カテゴリー毎のデータ
+	   * @param {Object} [category={}] カテゴリー一覧, 1 カテゴリーdata
+	   */
+
+	  function SlugDae() {
+	    var category = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, SlugDae);
+
+	    category = _Safety.Safety.object(category);
+	    this._category = category;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} 1 カテゴリーdata
+	   */
+
+	  (0, _createClass3.default)(SlugDae, [{
+	    key: 'category',
+	    get: function get() {
+	      return this._category;
+	    }
+	    /**
+	     * @return {Number} category Id を返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.category.id;
+	    }
+	    /**
+	     * @return {string} category label を返します
+	     */
+
+	  }, {
+	    key: 'label',
+	    get: function get() {
+	      return this.category.label;
+	    }
+	    /**
+	     * @return {string} category slug を返します
+	     */
+
+	  }, {
+	    key: 'slug',
+	    get: function get() {
+	      return this.category.slug;
+	    }
+	    /**
+	     * @return {string} category url を返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.category.url;
+	    }
+	  }]);
+	  return SlugDae;
+	}();
+
+/***/ },
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9744,7 +10317,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 128 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9790,7 +10363,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
 	var _User = __webpack_require__(78);
 
@@ -10149,7 +10722,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 129 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10196,17 +10769,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(132);
+	var _ArticleDae = __webpack_require__(137);
 
 	var _Safety = __webpack_require__(44);
 
@@ -10983,7 +11556,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 130 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11150,7 +11723,7 @@
 	}();
 
 /***/ },
-/* 131 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11191,7 +11764,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
 	var _Safety = __webpack_require__(44);
 
@@ -11306,7 +11879,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 132 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11339,13 +11912,13 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(133);
+	var _CategoryDae = __webpack_require__(138);
 
-	var _MediaDae = __webpack_require__(134);
+	var _MediaDae = __webpack_require__(139);
 
-	var _UserDae = __webpack_require__(125);
+	var _UserDae = __webpack_require__(126);
 
-	var _CommentsPopularDae = __webpack_require__(137);
+	var _CommentsPopularDae = __webpack_require__(142);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11586,7 +12159,7 @@
 	}();
 
 /***/ },
-/* 133 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11626,7 +12199,7 @@
 	var CategoryDae = exports.CategoryDae = function () {
 	  /**
 	   * article.category を管理します
-	   * @param {Object} [category={}]
+	   * @param {Object} [category={}] article.category
 	   */
 
 	  function CategoryDae() {
@@ -11640,7 +12213,6 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   *
 	   * @return {Object|*} article.category を返します
 	   */
 
@@ -11650,7 +12222,6 @@
 	      return this._category;
 	    }
 	    /**
-	     *
 	     * @return {string|undefined} article.category.label を返します
 	     */
 
@@ -11660,7 +12231,6 @@
 	      return this.category.label;
 	    }
 	    /**
-	     *
 	     * @return {string|undefined} article.category.slug を返します
 	     */
 
@@ -11674,7 +12244,7 @@
 	}();
 
 /***/ },
-/* 134 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11707,9 +12277,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _ImagesDae = __webpack_require__(135);
+	var _ImagesDae = __webpack_require__(140);
 
-	var _VideoDae = __webpack_require__(136);
+	var _VideoDae = __webpack_require__(141);
 
 	var _Safety = __webpack_require__(44);
 
@@ -11815,7 +12385,7 @@
 	}();
 
 /***/ },
-/* 135 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11920,7 +12490,7 @@
 	}();
 
 /***/ },
-/* 136 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12029,7 +12599,7 @@
 	}();
 
 /***/ },
-/* 137 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12062,7 +12632,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(138);
+	var _PopularDae = __webpack_require__(143);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12239,7 +12809,7 @@
 	}();
 
 /***/ },
-/* 138 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12272,7 +12842,7 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _UserDae = __webpack_require__(125);
+	var _UserDae = __webpack_require__(126);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12440,7 +13010,7 @@
 	}(); // class
 
 /***/ },
-/* 139 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12483,19 +13053,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Scroll = __webpack_require__(140);
+	var _Scroll = __webpack_require__(145);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(132);
+	var _ArticleDae = __webpack_require__(137);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13258,7 +13828,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 140 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13415,7 +13985,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 141 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13460,23 +14030,23 @@
 
 	var _EventDispatcher = __webpack_require__(77);
 
-	var _Scroll = __webpack_require__(140);
+	var _Scroll = __webpack_require__(145);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
 	var _Safety = __webpack_require__(44);
 
-	var _ArticleDae = __webpack_require__(132);
+	var _ArticleDae = __webpack_require__(137);
 
-	var _Rise = __webpack_require__(142);
+	var _Rise = __webpack_require__(147);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14383,7 +14953,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 142 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14427,9 +14997,9 @@
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
-	var _Dom = __webpack_require__(143);
+	var _Dom = __webpack_require__(148);
 
-	var _Scroll = __webpack_require__(140);
+	var _Scroll = __webpack_require__(145);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14521,7 +15091,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 143 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14602,7 +15172,7 @@
 	}();
 
 /***/ },
-/* 144 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14639,9 +15209,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Category = __webpack_require__(115);
+	var _Category = __webpack_require__(116);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(141);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(146);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14664,8 +15234,8 @@
 	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
 	    (0, _classCallCheck3.default)(this, ViewCategory);
 
-	    // Canvas Action を使う
-	    // slug を送り 表示(render)は ViewArchiveMasonry を使う
+	    // Category Action を使う
+	    // slug を送り 表示(render)は ViewArchiveMasonryInfinite を使う
 
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCategory).call(this, element, moreElement, null, option, true));
 
@@ -14677,7 +15247,7 @@
 	}(_ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite);
 
 /***/ },
-/* 145 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14720,19 +15290,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
-	var _SingleInfo = __webpack_require__(146);
+	var _SingleInfo = __webpack_require__(151);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Single = __webpack_require__(121);
+	var _Single = __webpack_require__(122);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _SingleDae = __webpack_require__(147);
+	var _SingleDae = __webpack_require__(152);
 
 	var _Safety = __webpack_require__(44);
 
@@ -15098,7 +15668,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 146 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15131,7 +15701,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SingleDae = __webpack_require__(147);
+	var _SingleDae = __webpack_require__(152);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15187,7 +15757,7 @@
 	}();
 
 /***/ },
-/* 147 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15230,9 +15800,9 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(148);
+	var _KeywordsDae = __webpack_require__(153);
 
-	var _RelatedDae2 = __webpack_require__(149);
+	var _RelatedDae2 = __webpack_require__(154);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15323,7 +15893,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 148 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15417,7 +15987,7 @@
 	}();
 
 /***/ },
-/* 149 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15452,11 +16022,11 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(133);
+	var _CategoryDae = __webpack_require__(138);
 
-	var _MediaDae = __webpack_require__(134);
+	var _MediaDae = __webpack_require__(139);
 
-	var _UserDae = __webpack_require__(125);
+	var _UserDae = __webpack_require__(126);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15627,7 +16197,7 @@
 	}();
 
 /***/ },
-/* 150 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15668,7 +16238,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15729,9 +16299,13 @@
 	          var label = this.props.label;
 
 	          return React.createElement(
-	            'h1',
-	            { className: 'page-title' },
-	            label
+	            'div',
+	            { className: 'category-heading' },
+	            React.createElement(
+	              'h1',
+	              null,
+	              label
+	            )
 	          );
 	        }
 	      });
@@ -15756,7 +16330,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 151 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15799,21 +16373,21 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
 	var _CommentsType = __webpack_require__(84);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Comments = __webpack_require__(152);
+	var _Comments = __webpack_require__(157);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentsListDae = __webpack_require__(153);
+	var _CommentsListDae = __webpack_require__(158);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16323,7 +16897,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 152 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16368,13 +16942,13 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _OffsetAuth2 = __webpack_require__(114);
+	var _OffsetAuth2 = __webpack_require__(115);
 
-	var _Api = __webpack_require__(89);
+	var _Api = __webpack_require__(90);
 
 	var _User = __webpack_require__(78);
 
-	var _Path = __webpack_require__(96);
+	var _Path = __webpack_require__(97);
 
 	var _CommentsType = __webpack_require__(84);
 
@@ -16549,7 +17123,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 153 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16578,7 +17152,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(154);
+	var _CommentsDae = __webpack_require__(159);
 
 	var _Safety = __webpack_require__(44);
 
@@ -16660,7 +17234,7 @@
 	}();
 
 /***/ },
-/* 154 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16694,9 +17268,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(138);
+	var _PopularDae = __webpack_require__(143);
 
-	var _ReplyDae = __webpack_require__(155);
+	var _ReplyDae = __webpack_require__(160);
 
 	var _Safety = __webpack_require__(44);
 
@@ -16800,7 +17374,7 @@
 	}();
 
 /***/ },
-/* 155 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16829,7 +17403,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsPopularDae = __webpack_require__(137);
+	var _CommentsPopularDae = __webpack_require__(142);
 
 	var _Safety = __webpack_require__(44);
 
@@ -16887,7 +17461,7 @@
 	}();
 
 /***/ },
-/* 156 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16931,21 +17505,21 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Headline = __webpack_require__(107);
+	var _Headline = __webpack_require__(108);
 
-	var _HeadlineAuth = __webpack_require__(112);
+	var _HeadlineAuth = __webpack_require__(113);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(132);
+	var _ArticleDae = __webpack_require__(137);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17256,7 +17830,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 157 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17300,21 +17874,21 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Pickup = __webpack_require__(106);
+	var _Pickup = __webpack_require__(107);
 
-	var _PickupAuth = __webpack_require__(109);
+	var _PickupAuth = __webpack_require__(110);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(132);
+	var _ArticleDae = __webpack_require__(137);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17856,7 +18430,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 158 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17899,17 +18473,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Widget = __webpack_require__(118);
+	var _Widget = __webpack_require__(119);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(132);
+	var _ArticleDae = __webpack_require__(137);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18221,7 +18795,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 159 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18264,17 +18838,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(130);
+	var _Empty = __webpack_require__(135);
 
-	var _View2 = __webpack_require__(127);
+	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(131);
+	var _ViewError = __webpack_require__(136);
 
-	var _Widget = __webpack_require__(118);
+	var _Widget = __webpack_require__(119);
 
-	var _Result = __webpack_require__(87);
+	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(132);
+	var _ArticleDae = __webpack_require__(137);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18570,7 +19144,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 160 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
