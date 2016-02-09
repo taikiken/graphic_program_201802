@@ -214,6 +214,7 @@
 
         input {
           width: 100%;
+          min-width: initial !important;
         }
       }
 
@@ -234,6 +235,30 @@
       }
 
     }
+  } //at-root
+
+  .linkage-sns {
+    @at-root {
+      &-list {
+        @include clearfix;
+      }
+
+      &-item {
+        float: left;
+
+        & + .linkage-sns-item {
+          margin-top: 0;
+        }
+
+        &:nth-child(2) {
+          float: right;
+        }
+      }
+
+      &-link {
+        width: 250px;
+      }
+    } //at-root
   }
 } //.register
 
@@ -273,21 +298,4 @@
 .pw-reset {
   width: 520px;
   margin: 0 auto;
-
-  .btn-home {
-    width: 250px;
-    margin: 40px auto 0;
-
-    a {
-      display: block;
-      line-height: 50px;
-      padding-right: 24px;
-      padding-left: 24px;
-      border-radius: 3px;
-      background-color: $highlight-color;
-      color: #fff;
-      font-weight: bold;
-      text-align: center;
-    }
-  }
 } //.pw-reset

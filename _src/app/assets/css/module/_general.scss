@@ -397,7 +397,9 @@
     @include link-decoration($highlight-color, #fff, none, none);
     display: inline-block;
     min-width: 160px;
-    padding: 12px 4px;
+    line-height: 50px;
+    padding-right: 4px;
+    padding-left: 4px;
     border: 2px solid $highlight-color;
     font-weight: bold;
     text-align: center;
@@ -410,6 +412,37 @@
   }
 }
 
+
+
+
+
+// mod-btnB01
+.mod-btnB01 {
+  input[ type="submit" ],
+  a {
+    display: inline-block;
+    min-width: 250px;
+    line-height: 50px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border-radius: 3px;
+    background-color: $highlight-color;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover {
+      @include hover-opacity;
+    }
+  }
+
+  a {
+    @include link-decoration(#fff, #fff, none, none);
+  }
+
+  input[ type="submit" ] {
+    color: #fff;
+  }
+}
 
 
 

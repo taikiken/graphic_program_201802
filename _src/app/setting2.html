@@ -145,8 +145,8 @@
           <div class="setting-side">
             <nav class="setting-side-nav">
               <ul class="setting-side-nav-list">
-                <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-basic current" href="hoge"><span>基本情報設定</span></a></li>
-                <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-interest" href="hoge"><span>パーソナライズ設定</span></a></li>
+                <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-basic" href="hoge"><span>基本情報設定</span></a></li>
+                <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-interest current" href="hoge"><span>パーソナライズ設定</span></a></li>
                 <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-sns" href="hoge"><span>ソーシャル連携</span></a></li>
               </ul>
             </nav><!-- /.setting-side-nav -->
@@ -154,37 +154,100 @@
 
           <div class="setting-main">
             <div class="setting-heading">
-              <h1>基本情報設定</h1>
+              <h1>パーソナライズ設定</h1>
+              <p class="mt04">興味のある競技を選択してください。設定内容はあなたの一面に反映されます。</p>
             </div><!-- /.setting-heading -->
 
-            <div class="basic-setting setting-form">
+            <div class="interest-setting setting-form">
               <form action="">
-                <span class="setting-form-mail">
-                  <input type="text" id="setting-form-mail" name="setting-form-mail" placeholder="メールアドレスを入力">
-                </span>
-                <span class="setting-form-pw">
-                  <input type="password" id="setting-form-pw" name="setting-form-pw" placeholder="パスワードを入力">
-                </span>
-                <span class="setting-form-name">
-                  <input type="text" id="setting-form-name" name="setting-form-name" placeholder="ユーザー名を入力">
-                </span>
-                <span class="setting-form-job">
-                  <input type="text" id="setting-form-job" name="setting-form-job" placeholder="肩書を入力 (任意)">
-                </span>
-
-                <div class="setting-form-avatar">
-                  <h2 class="setting-form-avatar-heading">プロフィール写真選択</h2>
-                  <div class="setting-form-avatar-dropArea">&nbsp;</div>
-                </div><!-- /.setting-form-avatar -->
+                <div class="setting-form-interest">
+                  <ul class="setting-form-interest-list">
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest1" name="setting-form-interest1">
+                      <label class="setting-form-interest-title" for="setting-form-interest1"><span>野球</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest2" name="setting-form-interest2">
+                      <label class="setting-form-interest-title" for="setting-form-interest2"><span>MLB</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest3" name="setting-form-interest3">
+                      <label class="setting-form-interest-title" for="setting-form-interest3"><span>サッカー</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest4" name="setting-form-interest4">
+                      <label class="setting-form-interest-title" for="setting-form-interest4"><span>海外サッカー</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest5" name="setting-form-interest5">
+                      <label class="setting-form-interest-title" for="setting-form-interest5"><span>ゴルフ</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest6" name="setting-form-interest6">
+                      <label class="setting-form-interest-title" for="setting-form-interest6"><span>相撲</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest7" name="setting-form-interest7">
+                      <label class="setting-form-interest-title" for="setting-form-interest7"><span>格闘技</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest8" name="setting-form-interest8">
+                      <label class="setting-form-interest-title" for="setting-form-interest8"><span>陸上</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest9" name="setting-form-interest9">
+                      <label class="setting-form-interest-title" for="setting-form-interest9"><span>水泳</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest10" name="setting-form-interest10">
+                      <label class="setting-form-interest-title" for="setting-form-interest10"><span>柔道</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest11" name="setting-form-interest11">
+                      <label class="setting-form-interest-title" for="setting-form-interest11"><span>テニス</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest12" name="setting-form-interest12">
+                      <label class="setting-form-interest-title" for="setting-form-interest12"><span>バレーボール</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest13" name="setting-form-interest13">
+                      <label class="setting-form-interest-title" for="setting-form-interest13"><span>ラグビー</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest14" name="setting-form-interest14">
+                      <label class="setting-form-interest-title" for="setting-form-interest14"><span>フィギュア</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest15" name="setting-form-interest15">
+                      <label class="setting-form-interest-title" for="setting-form-interest15"><span>バスケットボール</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest16" name="setting-form-interest16">
+                      <label class="setting-form-interest-title" for="setting-form-interest16"><span class="f12">エクストリームスポーツ</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest17" name="setting-form-interest17">
+                      <label class="setting-form-interest-title" for="setting-form-interest17"><span>モータースポーツ</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest18" name="setting-form-interest18">
+                      <label class="setting-form-interest-title" for="setting-form-interest18"><span>ビジネス</span></label>
+                    </li>
+                    <li class="setting-form-interest-item">
+                      <input type="checkbox" id="setting-form-interest19" name="setting-form-interest19">
+                      <label class="setting-form-interest-title" for="setting-form-interest19"><span>その他競技</span></label>
+                    </li>
+                  </ul><!-- /.setting-form-interest-list -->
+                </div><!-- /.setting-form-interest -->
 
                 <span class="setting-form-submit mod-btnB01">
                   <input type="submit" value="保存する">
                 </span>
-
-                <p class="setting-form-btn-withdraw"><a href="hoge">退会する</a></p>
               </form>
-            </div><!-- /.basic-setting -->
+            </div><!-- /.interest-setting -->
           </div><!-- /.setting-main -->
+
         </div><!-- /.setting-sec -->
 
       </section><!-- /.main-sec -->
