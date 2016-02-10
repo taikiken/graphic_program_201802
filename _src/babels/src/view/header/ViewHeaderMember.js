@@ -23,9 +23,16 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- *
+ * header ログイン・メンバー 関連メニュー
  */
 export class ViewHeaderMember extends View {
+  /**
+   * <p>header ログイン・メンバー 関連メニュー<br>
+   * アイコン+drop down menu 表示</p>
+   *
+   * @param {Element} element insert root element
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
     this._action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
@@ -72,8 +79,11 @@ export class ViewHeaderMember extends View {
     // this.showError( error.message );
 
   }
-
-  render( response ) {
+  /**
+   * Dom を生成します
+   * @param {Object} response JSON response object
+   */
+  render( response:Object ):void {
 
     let dae = new UserDae( response );
     let _this = this;
@@ -86,10 +96,10 @@ export class ViewHeaderMember extends View {
         icon: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
+        this.timer = 0;
+
         return {
-          clicked: false,
-          open: 'close',
-          bodyTimer: 0
+          open: 'close'
         };
       },
       render: function() {
@@ -134,12 +144,18 @@ export class ViewHeaderMember extends View {
       componentWillUnmount: function() {
         this.destroy();
       },
+      // -------------------------------------------------------
+      // 以降 custom method
+
+      // icon click で drop menu open / close
       clickHandler: function( event ) {
 
         event.preventDefault();
         this.toggleState();
 
       },
+      // document.body.onClick event handler
+      // drop menu open 後に 領域外 click で閉じるため
       bodyClick: function() {
 
         if ( this.state.open === 'open' ) {
@@ -147,12 +163,12 @@ export class ViewHeaderMember extends View {
           // document.body が a より先に反応する
           // native event bind と React 経由の違いかも
           // body click 後の処理を遅延させる, 多分気づかない程度
-          let timer = setTimeout( this.toggleState, 100 );
-          this.setState( {bodyTimer: timer} );
+          this.timer = setTimeout( this.toggleState, 100 );
 
         }
 
       },
+      // open / close toggle
       toggleState: function() {
 
         this.destroy();
@@ -166,6 +182,7 @@ export class ViewHeaderMember extends View {
           // open -> close
           this.setState( { open: 'close' } );
         }
+
       },
       // timer cancel
       // body.click unbind
@@ -174,8 +191,8 @@ export class ViewHeaderMember extends View {
 
         // body click からの遅延処理を clear する
         // timer を 0 にし error にならないようにする
-        clearTimeout( this.state.bodyTimer );
-        this.setState( {bodyTimer: 0} );
+        clearTimeout( this.timer );
+        this.timer = 0;
         // document.body からclick event handler unbind
         document.body.removeEventListener( 'click', this.bodyClick );
 

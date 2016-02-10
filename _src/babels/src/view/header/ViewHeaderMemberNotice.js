@@ -27,13 +27,15 @@ let ReactDOM = self.ReactDOM;
  */
 export class ViewHeaderMemberNotice extends View {
   /**
-   * お知らせ(header)
-   * @param element
-   * @param option
+   * お知らせ(header) for login member
+   * @param {Element} element insert root element
+   * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
     this._action = new Notice( this.done.bind( this ), this.fail.bind( this ), 0, 5 );
+
+    this._menu = null;
   }
   /**
    * Ajax request を開始します
@@ -78,7 +80,11 @@ export class ViewHeaderMemberNotice extends View {
 
   }
 
-  render( responseObj ) {
+  /**
+   * お知らせ  ログインメンバー Dom を生成します
+   * @param {Object} responseObj JSON response
+   */
+  render( responseObj:Object ):void {
 
     let notificationsDae = new NotificationsDae( responseObj );
     let _this = this;
@@ -119,16 +125,20 @@ export class ViewHeaderMemberNotice extends View {
     // user notice dropMenu
     let NoticeMenu = React.createClass( {
       propTypes: {
-        notifications: React.PropTypes.object.isRequired
+        notifications: React.PropTypes.array.isRequired
       },
       render: function() {
 
         let notifications = this.props.notifications;
-        let readAll = '';
+        let readAll;
 
         if ( notifications.length > 0 ) {
 
           readAll = <div className="info-btn-readAll"><a href="#" onClick={this.allRead}>すべて既読にする</a></div>;
+
+        } else {
+
+          readAll = <div className="info-btn-readAll">&nbsp;</div>;
 
         }
 
@@ -144,7 +154,7 @@ export class ViewHeaderMemberNotice extends View {
 
                       let icon = notice.user.profilePicture;
                       if ( !icon ) {
-                        icon = Empty.USER_PICTURE;
+                        icon = Empty.USER_PICTURE_FEATURE;
                       }
 
                       return (
@@ -160,7 +170,8 @@ export class ViewHeaderMemberNotice extends View {
                       );
                     } )
                   }
-                  <li class="btn-viewmore"><a class="btn-viewmore-link" href="/notifications/"><span>すべて見る</span></a></li>
+                  {/* default link menu */}
+                  <li className="btn-viewmore"><a className="btn-viewmore-link" href="/notifications/"><span>すべて見る</span></a></li>
                 </ul>
               </div>
             </div>
@@ -169,7 +180,7 @@ export class ViewHeaderMemberNotice extends View {
 
       },
       allRead: function( event ) {
-
+        event.preventDefault();
       }
     } );
 
@@ -179,25 +190,37 @@ export class ViewHeaderMemberNotice extends View {
       propTypes: {
         response: React.PropTypes.object.isRequired
       },
+      getInitialState: function() {
+        this.timer = 0;
+
+        return {
+          response: this.props.response,
+          open: 'close'
+        };
+      },
       render: function() {
 
-        let response = this.props.response;
+        let response = this.state.response;
         let notifications = response.notifications;
         let noticeTotal = '';
         let noticeMenu;
 
-        if ( typeof notifications !== 'undefined' && notifications !== null ) {
-          if ( Array.isArray( notifications ) && notifications.length > 0 ) {
-            noticeMenu = <NoticeDom notifications={notifications} />;
-            noticeTotal = <span className="notice-num">{noticeTotal}</span>;
-          }
+        if ( Array.isArray( notifications ) ) {
+
+          // 配列（正常）な時はそのデータを使用しメニューを作成する
+          noticeMenu = <NoticeMenu notifications={notifications} />;
+          noticeTotal = <span className="notice-num">{response.total}</span>;
+
         } else {
-          // 空メニュー
+
+          // 異常な時は
+          // 空メニューを作成する、引数に 空配列 を送る
           noticeMenu = <NoticeDom notifications={[]} />;
+
         }
 
         return (
-          <div className="notice">
+          <div className={'notice ' + this.state.open}>
             <a href="#" className="notice-opener" onClick={this.clickHandler}>
               <i className="notice-icon">&nbsp;</i>
               {noticeTotal}
@@ -211,31 +234,74 @@ export class ViewHeaderMemberNotice extends View {
       },
       componentDidMount: function() {
 
+        // after mount
+        _this.executeSafely( View.DID_MOUNT );
+
       },
       componentWillUnmount: function() {
-
+        this.destroy();
       },
+      // -------------------------------------------------------
+      // 以降 custom method
       clickHandler: function( event ) {
-
+        event.preventDefault();
+        this.toggleState();
       },
       bodyClick: function() {
+        if ( this.state.open === 'open' ) {
 
+          // document.body が a より先に反応する
+          // native event bind と React 経由の違いかも
+          // body click 後の処理を遅延させる, 多分気づかない程度
+          this.timer = setTimeout( this.toggleState, 100 );
+
+        }
       },
       toggleState: function() {
+
+        this.destroy();
+
+        if ( this.state.open === 'close' ) {
+          // close -> open
+          // document.body へ click event handler bind
+          this.setState( { open: 'open' } );
+          document.body.addEventListener( 'click', this.bodyClick, false );
+        } else {
+          // open -> close
+          this.setState( { open: 'close' } );
+        }
 
       },
       destroy: function() {
 
+        // body click からの遅延処理を clear する
+        // timer を 0 にし error にならないようにする
+        clearTimeout( this.timer );
+        this.timer = 0;
+        // document.body からclick event handler unbind
+        document.body.removeEventListener( 'click', this.bodyClick );
+
+      },
+      updateResponse: function( response ) {
+        this.setState( { response: response } );
       }
     } );
 
-    console.log( '______________ notificationsDae', notificationsDae);
     // --------------------------------------------------
     // user root
-    ReactDOM.render(
-      <NoticeDom response={notificationsDae} />,
-      this.element
-    );
+    if ( this._menu === null ) {
+
+      this._menu = ReactDOM.render(
+        <NoticeDom response={notificationsDae} />,
+        this.element
+      );
+
+    } else {
+
+      this._menu.updateResponse( notificationsDae );
+
+    }
+
 
   }
 }

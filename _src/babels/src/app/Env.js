@@ -74,10 +74,24 @@ export class Env {
   static get TEST():string {
     return 'test';
   }
+  /**
+   * @readonly
+   * @return {string} 文字列 local を返します
+   */
+  static get LOCAL():string {
+    return 'local';
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
+   * ローカルテスト(vagrant)モードにします
+   */
+  static local():void {
+
+    _mode = Env.LOCAL;
+
+  }  /**
    * ローカルテストモードにします
    */
   static test():void {

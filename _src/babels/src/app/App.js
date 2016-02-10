@@ -40,9 +40,20 @@ export class App {
   // ---------------------------------------------------
   /**
    * <p>**Api 接続先** を変更します</p>
+   * ローカルテスト(vagrant)モードにします<br>
+   * <code>http://192.168.33.50/</code> へ接続します</p>
+   */
+  static local():void {
+
+    Env.local();
+    Api.rebuild();
+
+  }
+  /**
+   * <p>**Api 接続先** を変更します</p>
    * ローカルテストモードにします<br>
    * localhost/api へ接続します<br>
-   * 使用しないでください
+   * 使用しないでください</p>
    */
   static test():void {
 
@@ -54,7 +65,7 @@ export class App {
    * <p>**Api 接続先** を変更します</p>
    * 開発モードにします<br>
    * local から <code>http://undotsushin.com</code> へ API リクエストを行います<br>
-   * 開発中はこちらをお使いください
+   * 開発中はこちらをお使いください</p>
    */
   static develop():void {
 
@@ -65,7 +76,7 @@ export class App {
   /**
    * <p>**Api 接続先** を変更します</p>
    * 実行モードにします<br>
-   * デフォルトです
+   * デフォルトです</p>
    */
   static production():void {
 

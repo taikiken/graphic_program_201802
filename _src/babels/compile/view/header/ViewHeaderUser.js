@@ -50,14 +50,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var React = self.React;
 var ReactDOM = self.ReactDOM;
 
+/**
+ * header user 関連メニュー
+ */
+
 var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
   (0, _inherits3.default)(ViewHeaderUser, _View);
+
+  /**
+   * <p>header user 関連メニュー<br>
+   * ログイン / 非ログイン でメニューを変更</p>
+   * @param {Element} element insert root element
+   * @param {Object} [option={}] optional event handler
+   */
 
   function ViewHeaderUser(element) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     (0, _classCallCheck3.default)(this, ViewHeaderUser);
     return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
   }
+  /**
+   * Ajax request を開始します
+   */
 
   (0, _createClass3.default)(ViewHeaderUser, [{
     key: 'start',
@@ -67,10 +81,14 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
         var member = new _ViewHeaderMember.ViewHeaderMember(this.element);
         member.start();
       } else {
-        // normal user
+        // user menu
         this.render();
       }
     }
+    /**
+     * 非メンバー Dom を生成します
+     */
+
   }, {
     key: 'render',
     value: function render() {

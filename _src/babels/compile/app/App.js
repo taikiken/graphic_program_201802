@@ -61,12 +61,25 @@ var App = exports.App = function () {
   // ---------------------------------------------------
   /**
    * <p>**Api 接続先** を変更します</p>
-   * ローカルテストモードにします<br>
-   * localhost/api へ接続します<br>
-   * 使用しないでください
+   * ローカルテスト(vagrant)モードにします<br>
+   * <code>http://192.168.33.50/</code> へ接続します</p>
    */
 
   (0, _createClass3.default)(App, null, [{
+    key: 'local',
+    value: function local() {
+
+      _Env.Env.local();
+      _Api.Api.rebuild();
+    }
+    /**
+     * <p>**Api 接続先** を変更します</p>
+     * ローカルテストモードにします<br>
+     * localhost/api へ接続します<br>
+     * 使用しないでください</p>
+     */
+
+  }, {
     key: 'test',
     value: function test() {
 
@@ -77,7 +90,7 @@ var App = exports.App = function () {
      * <p>**Api 接続先** を変更します</p>
      * 開発モードにします<br>
      * local から <code>http://undotsushin.com</code> へ API リクエストを行います<br>
-     * 開発中はこちらをお使いください
+     * 開発中はこちらをお使いください</p>
      */
 
   }, {
@@ -90,7 +103,7 @@ var App = exports.App = function () {
     /**
      * <p>**Api 接続先** を変更します</p>
      * 実行モードにします<br>
-     * デフォルトです
+     * デフォルトです</p>
      */
 
   }, {

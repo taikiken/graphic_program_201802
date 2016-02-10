@@ -24,10 +24,30 @@ button {
       float: left;
     }
 
+    // notice
+    .notice-menu {
+      display: block;
+    }
+    // 非表示
+    .close {
+      .notice-menu {
+        overflow: hidden;
+        height: 0;
+        width: 0;
+      }
+    }
+    // 表示
+    .open {
+      .notice-menu {
+        overflow: visible;
+        width: 360px;
+        height: auto;
+      }
+    }
 
     // setting
     .preference-menu {
-      display: none;
+      display: block;
     }
     .dropMenu {
       opacity: 0;
@@ -48,20 +68,26 @@ button {
         transition-duration: 0.001s;
         transition-delay: 0.05s;
       }
-      .dropMenu {
-        opacity: 0;
-        transition-duration: 0.05s;
-      }
     }
 
     // 表示
     .open {
       .preference-menu {
-        display: block;
         overflow: visible;
         width: 160px;
         height: 162px;
       }
+    }
+
+    // ----------------------------------------------
+    // motion
+    .close {
+      .dropMenu {
+        opacity: 0;
+        transition-duration: 0.05s;
+      }
+    }
+    .open {
       .dropMenu {
         opacity: 1;
       }

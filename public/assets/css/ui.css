@@ -5061,8 +5061,21 @@ button {
 #user-profile-container .user .notice-container {
   float: left; }
 
+#user-profile-container .user .notice-menu {
+  display: block; }
+
+#user-profile-container .user .close .notice-menu {
+  overflow: hidden;
+  height: 0;
+  width: 0; }
+
+#user-profile-container .user .open .notice-menu {
+  overflow: visible;
+  width: 360px;
+  height: auto; }
+
 #user-profile-container .user .preference-menu {
-  display: none; }
+  display: block; }
 
 #user-profile-container .user .dropMenu {
   opacity: 0;
@@ -5084,16 +5097,15 @@ button {
   -webkit-transition-delay: 0.05s;
           transition-delay: 0.05s; }
 
+#user-profile-container .user .open .preference-menu {
+  overflow: visible;
+  width: 160px;
+  height: 162px; }
+
 #user-profile-container .user .close .dropMenu {
   opacity: 0;
   -webkit-transition-duration: 0.05s;
           transition-duration: 0.05s; }
-
-#user-profile-container .user .open .preference-menu {
-  display: block;
-  overflow: visible;
-  width: 160px;
-  height: 162px; }
 
 #user-profile-container .user .open .dropMenu {
   opacity: 1; }

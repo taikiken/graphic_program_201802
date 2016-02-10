@@ -53,11 +53,19 @@ var React = self.React;
 var ReactDOM = self.ReactDOM;
 
 /**
- *
+ * header ログイン・メンバー 関連メニュー
  */
 
 var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
   (0, _inherits3.default)(ViewHeaderMember, _View);
+
+  /**
+   * <p>header ログイン・メンバー 関連メニュー<br>
+   * アイコン+drop down menu 表示</p>
+   *
+   * @param {Element} element insert root element
+   * @param {Object} [option={}] optional event handler
+   */
 
   function ViewHeaderMember(element) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
@@ -114,6 +122,11 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
       // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
       // this.showError( error.message );
     }
+    /**
+     * Dom を生成します
+     * @param {Object} response JSON response object
+     */
+
   }, {
     key: 'render',
     value: function render(response) {
@@ -131,10 +144,10 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
           icon: React.PropTypes.string.isRequired
         },
         getInitialState: function getInitialState() {
+          this.timer = 0;
+
           return {
-            clicked: false,
-            open: 'close',
-            bodyTimer: 0
+            open: 'close'
           };
         },
         render: function render() {
@@ -214,11 +227,17 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
         componentWillUnmount: function componentWillUnmount() {
           this.destroy();
         },
+        // -------------------------------------------------------
+        // 以降 custom method
+
+        // icon click で drop menu open / close
         clickHandler: function clickHandler(event) {
 
           event.preventDefault();
           this.toggleState();
         },
+        // document.body.onClick event handler
+        // drop menu open 後に 領域外 click で閉じるため
         bodyClick: function bodyClick() {
 
           if (this.state.open === 'open') {
@@ -226,10 +245,10 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
             // document.body が a より先に反応する
             // native event bind と React 経由の違いかも
             // body click 後の処理を遅延させる, 多分気づかない程度
-            var timer = setTimeout(this.toggleState, 100);
-            this.setState({ bodyTimer: timer });
+            this.timer = setTimeout(this.toggleState, 100);
           }
         },
+        // open / close toggle
         toggleState: function toggleState() {
 
           this.destroy();
@@ -251,8 +270,8 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
 
           // body click からの遅延処理を clear する
           // timer を 0 にし error にならないようにする
-          clearTimeout(this.state.bodyTimer);
-          this.setState({ bodyTimer: 0 });
+          clearTimeout(this.timer);
+          this.timer = 0;
           // document.body からclick event handler unbind
           document.body.removeEventListener('click', this.bodyClick);
         }

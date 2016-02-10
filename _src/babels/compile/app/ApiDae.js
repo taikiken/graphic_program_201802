@@ -56,6 +56,9 @@ var apiRoot = function apiRoot(port) {
 
   switch (_Env.Env.mode) {
 
+    case _Env.Env.LOCAL:
+      return 'http://192.168.33.50/';
+
     case _Env.Env.TEST:
       return 'http://0.0.0.0:' + (n + 2);
 

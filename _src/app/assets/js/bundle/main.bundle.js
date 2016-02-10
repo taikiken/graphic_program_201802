@@ -188,7 +188,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-10 00:00:09
+	 * @date 2016-02-10 16:27:23
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -3711,14 +3711,23 @@
 	   */
 
 	  (0, _createClass3.default)(Env, null, [{
-	    key: 'test',
+	    key: 'local',
 
 	    // ---------------------------------------------------
 	    //  METHOD
 	    // ---------------------------------------------------
 	    /**
-	     * ローカルテストモードにします
+	     * ローカルテスト(vagrant)モードにします
 	     */
+	    value: function local() {
+
+	      _mode = Env.LOCAL;
+	    } /**
+	      * ローカルテストモードにします
+	      */
+
+	  }, {
+	    key: 'test',
 	    value: function test() {
 
 	      _mode = Env.TEST;
@@ -3779,6 +3788,16 @@
 	    key: 'TEST',
 	    get: function get() {
 	      return 'test';
+	    }
+	    /**
+	     * @readonly
+	     * @return {string} 文字列 local を返します
+	     */
+
+	  }, {
+	    key: 'LOCAL',
+	    get: function get() {
+	      return 'local';
 	    }
 	  }]);
 	  return Env;
@@ -6134,6 +6153,9 @@
 
 	  switch (_Env.Env.mode) {
 
+	    case _Env.Env.LOCAL:
+	      return 'http://192.168.33.50/';
+
 	    case _Env.Env.TEST:
 	      return 'http://0.0.0.0:' + (n + 2);
 
@@ -6871,12 +6893,25 @@
 	  // ---------------------------------------------------
 	  /**
 	   * <p>**Api 接続先** を変更します</p>
-	   * ローカルテストモードにします<br>
-	   * localhost/api へ接続します<br>
-	   * 使用しないでください
+	   * ローカルテスト(vagrant)モードにします<br>
+	   * <code>http://192.168.33.50/</code> へ接続します</p>
 	   */
 
 	  (0, _createClass3.default)(App, null, [{
+	    key: 'local',
+	    value: function local() {
+
+	      _Env.Env.local();
+	      _Api.Api.rebuild();
+	    }
+	    /**
+	     * <p>**Api 接続先** を変更します</p>
+	     * ローカルテストモードにします<br>
+	     * localhost/api へ接続します<br>
+	     * 使用しないでください</p>
+	     */
+
+	  }, {
 	    key: 'test',
 	    value: function test() {
 
@@ -6887,7 +6922,7 @@
 	     * <p>**Api 接続先** を変更します</p>
 	     * 開発モードにします<br>
 	     * local から <code>http://undotsushin.com</code> へ API リクエストを行います<br>
-	     * 開発中はこちらをお使いください
+	     * 開発中はこちらをお使いください</p>
 	     */
 
 	  }, {
@@ -6900,7 +6935,7 @@
 	    /**
 	     * <p>**Api 接続先** を変更します</p>
 	     * 実行モードにします<br>
-	     * デフォルトです
+	     * デフォルトです</p>
 	     */
 
 	  }, {
@@ -10374,14 +10409,28 @@
 	var React = self.React;
 	var ReactDOM = self.ReactDOM;
 
+	/**
+	 * header user 関連メニュー
+	 */
+
 	var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
 	  (0, _inherits3.default)(ViewHeaderUser, _View);
+
+	  /**
+	   * <p>header user 関連メニュー<br>
+	   * ログイン / 非ログイン でメニューを変更</p>
+	   * @param {Element} element insert root element
+	   * @param {Object} [option={}] optional event handler
+	   */
 
 	  function ViewHeaderUser(element) {
 	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	    (0, _classCallCheck3.default)(this, ViewHeaderUser);
 	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
 	  }
+	  /**
+	   * Ajax request を開始します
+	   */
 
 	  (0, _createClass3.default)(ViewHeaderUser, [{
 	    key: 'start',
@@ -10391,10 +10440,14 @@
 	        var member = new _ViewHeaderMember.ViewHeaderMember(this.element);
 	        member.start();
 	      } else {
-	        // normal user
+	        // user menu
 	        this.render();
 	      }
 	    }
+	    /**
+	     * 非メンバー Dom を生成します
+	     */
+
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -10487,11 +10540,19 @@
 	var ReactDOM = self.ReactDOM;
 
 	/**
-	 *
+	 * header ログイン・メンバー 関連メニュー
 	 */
 
 	var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
 	  (0, _inherits3.default)(ViewHeaderMember, _View);
+
+	  /**
+	   * <p>header ログイン・メンバー 関連メニュー<br>
+	   * アイコン+drop down menu 表示</p>
+	   *
+	   * @param {Element} element insert root element
+	   * @param {Object} [option={}] optional event handler
+	   */
 
 	  function ViewHeaderMember(element) {
 	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
@@ -10548,6 +10609,11 @@
 	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
 	      // this.showError( error.message );
 	    }
+	    /**
+	     * Dom を生成します
+	     * @param {Object} response JSON response object
+	     */
+
 	  }, {
 	    key: 'render',
 	    value: function render(response) {
@@ -10565,10 +10631,10 @@
 	          icon: React.PropTypes.string.isRequired
 	        },
 	        getInitialState: function getInitialState() {
+	          this.timer = 0;
+
 	          return {
-	            clicked: false,
-	            open: 'close',
-	            bodyTimer: 0
+	            open: 'close'
 	          };
 	        },
 	        render: function render() {
@@ -10648,11 +10714,17 @@
 	        componentWillUnmount: function componentWillUnmount() {
 	          this.destroy();
 	        },
+	        // -------------------------------------------------------
+	        // 以降 custom method
+
+	        // icon click で drop menu open / close
 	        clickHandler: function clickHandler(event) {
 
 	          event.preventDefault();
 	          this.toggleState();
 	        },
+	        // document.body.onClick event handler
+	        // drop menu open 後に 領域外 click で閉じるため
 	        bodyClick: function bodyClick() {
 
 	          if (this.state.open === 'open') {
@@ -10660,10 +10732,10 @@
 	            // document.body が a より先に反応する
 	            // native event bind と React 経由の違いかも
 	            // body click 後の処理を遅延させる, 多分気づかない程度
-	            var timer = setTimeout(this.toggleState, 100);
-	            this.setState({ bodyTimer: timer });
+	            this.timer = setTimeout(this.toggleState, 100);
 	          }
 	        },
+	        // open / close toggle
 	        toggleState: function toggleState() {
 
 	          this.destroy();
@@ -10685,8 +10757,8 @@
 
 	          // body click からの遅延処理を clear する
 	          // timer を 0 にし error にならないようにする
-	          clearTimeout(this.state.bodyTimer);
-	          this.setState({ bodyTimer: 0 });
+	          clearTimeout(this.timer);
+	          this.timer = 0;
 	          // document.body からclick event handler unbind
 	          document.body.removeEventListener('click', this.bodyClick);
 	        }
@@ -10766,9 +10838,9 @@
 	  (0, _inherits3.default)(ViewHeaderMemberNotice, _View);
 
 	  /**
-	   * お知らせ(header)
-	   * @param element
-	   * @param option
+	   * お知らせ(header) for login member
+	   * @param {Element} element insert root element
+	   * @param {Object} [option={}] optional event handler
 	   */
 
 	  function ViewHeaderMemberNotice(element) {
@@ -10778,6 +10850,8 @@
 	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderMemberNotice).call(this, element, option));
 
 	    _this2._action = new _Notice.Notice(_this2.done.bind(_this2), _this2.fail.bind(_this2), 0, 5);
+
+	    _this2._menu = null;
 	    return _this2;
 	  }
 	  /**
@@ -10826,6 +10900,12 @@
 	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
 	      // this.showError( error.message );
 	    }
+
+	    /**
+	     * お知らせ  ログインメンバー Dom を生成します
+	     * @param {Object} responseObj JSON response
+	     */
+
 	  }, {
 	    key: 'render',
 	    value: function render(responseObj) {
@@ -10876,12 +10956,12 @@
 	        displayName: 'NoticeMenu',
 
 	        propTypes: {
-	          notifications: React.PropTypes.object.isRequired
+	          notifications: React.PropTypes.array.isRequired
 	        },
 	        render: function render() {
 
 	          var notifications = this.props.notifications;
-	          var readAll = '';
+	          var readAll = undefined;
 
 	          if (notifications.length > 0) {
 
@@ -10893,6 +10973,13 @@
 	                { href: '#', onClick: this.allRead },
 	                'すべて既読にする'
 	              )
+	            );
+	          } else {
+
+	            readAll = React.createElement(
+	              'div',
+	              { className: 'info-btn-readAll' },
+	              ' '
 	            );
 	          }
 
@@ -10918,7 +11005,7 @@
 
 	                    var icon = notice.user.profilePicture;
 	                    if (!icon) {
-	                      icon = _Empty.Empty.USER_PICTURE;
+	                      icon = _Empty.Empty.USER_PICTURE_FEATURE;
 	                    }
 
 	                    return React.createElement(
@@ -10943,10 +11030,10 @@
 	                  }),
 	                  React.createElement(
 	                    'li',
-	                    { 'class': 'btn-viewmore' },
+	                    { className: 'btn-viewmore' },
 	                    React.createElement(
 	                      'a',
-	                      { 'class': 'btn-viewmore-link', href: '/notifications/' },
+	                      { className: 'btn-viewmore-link', href: '/notifications/' },
 	                      React.createElement(
 	                        'span',
 	                        null,
@@ -10959,7 +11046,9 @@
 	            )
 	          );
 	        },
-	        allRead: function allRead(event) {}
+	        allRead: function allRead(event) {
+	          event.preventDefault();
+	        }
 	      });
 
 	      // --------------------------------------------------
@@ -10970,30 +11059,40 @@
 	        propTypes: {
 	          response: React.PropTypes.object.isRequired
 	        },
+	        getInitialState: function getInitialState() {
+	          this.timer = 0;
+
+	          return {
+	            response: this.props.response,
+	            open: 'close'
+	          };
+	        },
 	        render: function render() {
 
-	          var response = this.props.response;
+	          var response = this.state.response;
 	          var notifications = response.notifications;
 	          var noticeTotal = '';
 	          var noticeMenu = undefined;
 
-	          if (typeof notifications !== 'undefined' && notifications !== null) {
-	            if (Array.isArray(notifications) && notifications.length > 0) {
-	              noticeMenu = React.createElement(NoticeDom, { notifications: notifications });
-	              noticeTotal = React.createElement(
-	                'span',
-	                { className: 'notice-num' },
-	                noticeTotal
-	              );
-	            }
+	          if (Array.isArray(notifications)) {
+
+	            // 配列（正常）な時はそのデータを使用しメニューを作成する
+	            noticeMenu = React.createElement(NoticeMenu, { notifications: notifications });
+	            noticeTotal = React.createElement(
+	              'span',
+	              { className: 'notice-num' },
+	              response.total
+	            );
 	          } else {
-	            // 空メニュー
+
+	            // 異常な時は
+	            // 空メニューを作成する、引数に 空配列 を送る
 	            noticeMenu = React.createElement(NoticeDom, { notifications: [] });
 	          }
 
 	          return React.createElement(
 	            'div',
-	            { className: 'notice' },
+	            { className: 'notice ' + this.state.open },
 	            React.createElement(
 	              'a',
 	              { href: '#', className: 'notice-opener', onClick: this.clickHandler },
@@ -11007,18 +11106,66 @@
 	            noticeMenu
 	          );
 	        },
-	        componentDidMount: function componentDidMount() {},
-	        componentWillUnmount: function componentWillUnmount() {},
-	        clickHandler: function clickHandler(event) {},
-	        bodyClick: function bodyClick() {},
-	        toggleState: function toggleState() {},
-	        destroy: function destroy() {}
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely(_View2.View.DID_MOUNT);
+	        },
+	        componentWillUnmount: function componentWillUnmount() {
+	          this.destroy();
+	        },
+	        // -------------------------------------------------------
+	        // 以降 custom method
+	        clickHandler: function clickHandler(event) {
+	          event.preventDefault();
+	          this.toggleState();
+	        },
+	        bodyClick: function bodyClick() {
+	          if (this.state.open === 'open') {
+
+	            // document.body が a より先に反応する
+	            // native event bind と React 経由の違いかも
+	            // body click 後の処理を遅延させる, 多分気づかない程度
+	            this.timer = setTimeout(this.toggleState, 100);
+	          }
+	        },
+	        toggleState: function toggleState() {
+
+	          this.destroy();
+
+	          if (this.state.open === 'close') {
+	            // close -> open
+	            // document.body へ click event handler bind
+	            this.setState({ open: 'open' });
+	            document.body.addEventListener('click', this.bodyClick, false);
+	          } else {
+	            // open -> close
+	            this.setState({ open: 'close' });
+	          }
+	        },
+	        destroy: function destroy() {
+
+	          // body click からの遅延処理を clear する
+	          // timer を 0 にし error にならないようにする
+	          clearTimeout(this.timer);
+	          this.timer = 0;
+	          // document.body からclick event handler unbind
+	          document.body.removeEventListener('click', this.bodyClick);
+	        },
+	        updateResponse: function updateResponse(response) {
+	          this.setState({ response: response });
+	        }
 	      });
 
-	      console.log('______________ notificationsDae', notificationsDae);
 	      // --------------------------------------------------
 	      // user root
-	      ReactDOM.render(React.createElement(NoticeDom, { response: notificationsDae }), this.element);
+	      if (this._menu === null) {
+
+	        this._menu = ReactDOM.render(React.createElement(NoticeDom, { response: notificationsDae }), this.element);
+	      } else {
+
+	        this._menu.updateResponse(notificationsDae);
+	      }
 	    }
 	  }]);
 	  return ViewHeaderMemberNotice;

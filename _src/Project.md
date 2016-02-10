@@ -43,7 +43,7 @@ node_modules インストールはプロジェクトルートで行います
 htdocs -> **public**  
 dev -> **(_src)**  
 
-public: 最終納品フィアルをデプロイします
+public: 最終納品ファイルをデプロイします
 
 ## HTML 名称
 
@@ -71,7 +71,7 @@ test が先頭につくHTMLは開発用になります
 
 **js** 
 
-app/**/js/**/*.js
+app/assets/js/*.js
 
 生JavaScript開発ディレクトリ  
 
@@ -89,7 +89,7 @@ JSHint + uglify し public へデプロイします
 
 **(_babel)**
 
-app/**/_babel/**/*.js
+app/assets/_babel/*.js
 
 ES2015(ES6, ES7)開発ディレクトリ
 

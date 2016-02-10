@@ -21,22 +21,35 @@ import {UserStatus} from '../../event/UserStatus';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * header user 関連メニュー
+ */
 export class ViewHeaderUser extends View {
+  /**
+   * <p>header user 関連メニュー<br>
+   * ログイン / 非ログイン でメニューを変更</p>
+   * @param {Element} element insert root element
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
   }
-
+  /**
+   * Ajax request を開始します
+   */
   start():void {
     if ( User.sign ) {
       // login member
       let member = new ViewHeaderMember( this.element );
       member.start();
     } else {
-      // normal user
+      // user menu
       this.render();
     }
   }
-
+  /**
+   * 非メンバー Dom を生成します
+   */
   render():void {
 
     let _this = this;
