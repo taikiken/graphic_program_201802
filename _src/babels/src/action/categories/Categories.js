@@ -15,7 +15,15 @@ import {Action} from '../Action';
 import {Api} from '../../net/Api';
 import {Path} from '../../app/const/Path';
 
+/**
+ * category action
+ */
 export class Categories extends Action {
+  /**
+   * category 一覧を取得します
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   */
   constructor( resolve:Function = null, reject:Function = null ) {
     super( Api.categories(), resolve, reject );
   }

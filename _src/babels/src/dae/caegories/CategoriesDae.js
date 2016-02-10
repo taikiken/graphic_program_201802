@@ -63,13 +63,13 @@ export class CategoriesDae {
     return this._categories;
   }
   /**
-   * @return {Array<SlugDae>|*} response.categories を SlugDae instance 配列にし返します
+   * @return {Array<SlugDae>} response.categories を SlugDae instance 配列にし返します
    */
   get all():Array<SlugDae> {
     return this._cats;
   }
   /**
-   * @return {{}|*} slug をキーにした SlugDae instance 全て
+   * @return {Object} slug をキーにした SlugDae instance 全て
    */
   get bank():Object {
     return this._bank;
