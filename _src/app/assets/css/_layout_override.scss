@@ -13,26 +13,54 @@ button {
 // -------------------------------------------------
 // head section
 // -------------------------------------------------
-#user-profile-nav {
+#user-profile-container {
   float: left;
 }
 
-#user-profile-nav {
-  .user.signin {
-    .user-menu {
+#user-profile-container {
+  .user {
+    // notice
+    .notice-container {
+      float: left;
+    }
+
+    // notice
+    .notice-menu {
       display: block;
     }
-    .dropmenu {
+    // 非表示
+    .close {
+      .notice-menu {
+        overflow: hidden;
+        height: 0;
+        width: 0;
+      }
+    }
+    // 表示
+    .open {
+      .notice-menu {
+        overflow: visible;
+        width: 360px;
+        height: auto;
+      }
+    }
+
+    // setting
+    .preference-menu {
+      display: block;
+    }
+    .dropMenu {
       opacity: 0;
 
       transition-property: opacity;
       transition-duration: 0.3s;
       transition-timing-function: linear;
     }
-    &.close {
-      .user-menu {
+
+    // 非表示
+    .close {
+      .preference-menu {
         overflow: hidden;
-        //top: 0;
         height: 0;
         width: 0;
 
@@ -40,18 +68,27 @@ button {
         transition-duration: 0.001s;
         transition-delay: 0.05s;
       }
-      .dropmenu {
-        opacity: 0;
-        transition-duration: 0.05s;
-      }
     }
-    &.open {
-      .user-menu {
+
+    // 表示
+    .open {
+      .preference-menu {
         overflow: visible;
         width: 160px;
         height: 162px;
       }
-      .dropmenu {
+    }
+
+    // ----------------------------------------------
+    // motion
+    .close {
+      .dropMenu {
+        opacity: 0;
+        transition-duration: 0.05s;
+      }
+    }
+    .open {
+      .dropMenu {
         opacity: 1;
       }
     }

@@ -69,14 +69,23 @@ var Env = exports.Env = function () {
    */
 
   (0, _createClass3.default)(Env, null, [{
-    key: 'test',
+    key: 'local',
 
     // ---------------------------------------------------
     //  METHOD
     // ---------------------------------------------------
     /**
-     * ローカルテストモードにします
+     * ローカルテスト(vagrant)モードにします
      */
+    value: function local() {
+
+      _mode = Env.LOCAL;
+    } /**
+      * ローカルテストモードにします
+      */
+
+  }, {
+    key: 'test',
     value: function test() {
 
       _mode = Env.TEST;
@@ -137,6 +146,16 @@ var Env = exports.Env = function () {
     key: 'TEST',
     get: function get() {
       return 'test';
+    }
+    /**
+     * @readonly
+     * @return {string} 文字列 local を返します
+     */
+
+  }, {
+    key: 'LOCAL',
+    get: function get() {
+      return 'local';
     }
   }]);
   return Env;

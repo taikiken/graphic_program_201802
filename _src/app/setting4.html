@@ -32,7 +32,68 @@
             </form>
           </div><!-- /.head-search -->
 
-          <div id="user-profile-container"></div><!--/header-user-->
+          <div class="user">
+            <div class="notice">
+              <a class="notice-opener" href="#">
+                <i class="notice-icon"></i>
+                <span class="notice-num">88</span>
+              </a>
+
+              <nav class="notice-menu">
+                <div class="dropMenu">
+                  <div class="info">
+                    <h2 class="info-heading">お知らせ</h2>
+                    <div class="info-btn-readAll"><a href="hoge">すべて既読にする</a></div>
+                    <ul class="info-list">
+                      <li class="info-item">
+                        <a class="info-link read" href="hoge1">
+                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                          <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Good</strong>しました。</p>
+                          <p class="info-date">29分前</p>
+                        </a>
+                      </li>
+                      <li class="info-item">
+                        <a class="info-link unread" href="hoge">
+                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                          <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Bad</strong>しました。</p>
+                          <p class="info-date">29分前</p>
+                        </a>
+                      </li>
+                      <li class="info-item">
+                        <a class="info-link read" href="hoge">
+                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                          <p class="info-content">〇〇さんがあなたの「長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合」へのコメントに<strong>コメント</strong>しました。</p>
+                          <p class="info-date">29分前</p>
+                        </a>
+                      </li>
+                      <li class="info-item">
+                        <a class="info-link read" href="hoge">
+                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
+                          <p class="info-content">〇〇さんがあなたの「長文が入って2行になった場合長文が入って2行になった場合長文が入って2行になった場合」へのコメントに<strong>Good</strong>しました。</p>
+                          <p class="info-date">29分前</p>
+                        </a>
+                      </li>
+                      <li class="btn-viewmore"><a class="btn-viewmore-link" href="hoge"><span>すべて見る</span></a></li>
+                    </ul>
+                  </div><!-- /.info -->
+                </div>
+              </nav><!-- /.notice-menu -->
+            </div><!-- /.notice -->
+
+            <div class="preference">
+              <a class="preference-opener" href="#">
+                <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
+              </a>
+
+              <nav class="preference-menu">
+                <ul class="dropMenu">
+                  <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ブックマーク<br>アクティビティ</a></li>
+                  <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">設定</a></li>
+                  <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ログアウト</a></li>
+                </ul>
+              </nav><!-- /.user-menu -->
+            </div><!-- /.user -->
+          </div><!-- /.user -->
 
         </aside>
       </div><!-- /.head-sec-inner -->
@@ -41,13 +102,13 @@
   <nav class="gnav-sec">
     <div class="row row1">
       <ul>
-        <li class="gnav1 gnav-headline"><a class="current" href="hoge">一面</a></li>
+        <li class="gnav1 gnav-headline"><a href="hoge">一面</a></li>
         <li class="gnav2 gnav-crazy"><a href="hoge"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
         <li class="gnav3 gnav-all"><a href="hoge">すべて</a></li>
         <li class="gnav4 gnav-baseball"><a href="hoge">野球</a></li>
         <li class="gnav5 gnav-mlb"><a href="hoge">MLB</a></li>
         <li class="gnav6 gnav-soccer"><a href="hoge">サッカー</a></li>
-        <li class="gnav7 gnav-w_soccer"><a href="hoge">海外サッカー</a></li>
+        <li class="gnav7 gnav-w_soccer"><a class="current" href="hoge">海外サッカー</a></li>
         <li class="gnav8 gnav-golf"><a href="hoge">ゴルフ</a></li>
         <li class="gnav9 gnav-sumo"><a href="hoge">相撲</a></li>
         <li class="gnav10 gnav-combative"><a href="hoge">格闘技</a></li>
@@ -72,48 +133,44 @@
     </div>
   </nav><!-- /.gnav-sec -->
 
-  <div class="dialogue-notice error">
-    <div class="dialogue-notice-inner">
-      <div class="dialogue-notice-info">
-        <p>パスワードが違います</p>
-      </div>
-      <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
-    </div>
-  </div><!-- /.dialogue-notice -->
-
-  <!--
-  .dialogue-noticeへクラス付与して背景色を変更
-  クラス名なし or .info -> #e1438b ピンク(ハイライトカラー)
-  .error -> #e14343 レッド
-  .success -> #43e18a グリーン
-  -->
-
-  <div id="pickup-container"></div><!-- /pickup -->
+  <div class="category-heading">
+    <h1>アカウント設定</h1>
+  </div><!-- /.category-heading -->
 
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-        <div id="headline-container"></div><!-- /headline -->
 
-        <div class="board-large">
+        <div class="setting-sec">
+          <div class="setting-side">
+            <nav class="setting-side-nav">
+              <ul class="setting-side-nav-list">
+                <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-basic" href="hoge"><span>基本情報設定</span></a></li>
+                <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-interest" href="hoge"><span>パーソナライズ設定</span></a></li>
+                <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-sns" href="hoge"><span>ソーシャル連携</span></a></li>
+              </ul>
+            </nav><!-- /.setting-side-nav -->
+          </div><!-- /.setting-side -->
 
-          <div id="board-container"></div><!--/archive-->
+          <div class="setting-main">
+            <div class="setting-heading">
+              <h1>退会</h1>
+              <p class="mt04">退会を行うと、登録済みの情報は全て閲覧する事が出来なくなります。</p>
+            </div><!-- /.setting-heading -->
 
-          <div id="board-container-more"></div><!--/archive-more-->
+            <div class="mod-btnB01 mt30 btn-withdraw">
+              <a href="hoge">運動通信から退会する</a>
+            </div><!-- /.mod-btnA01 -->
 
-        </div><!-- /.board-large -->
+          </div><!-- /.setting-main -->
+        </div><!-- /.setting-sec -->
+
       </section><!-- /.main-sec -->
 
       <section class="side-sec">
         <div class="sponsor-link"><a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-sponsor_1.jpg" alt=""></a></div>
 
         <div class="app-bnr"><a href="hoge"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 データ先読みで、電車でもサクサク記事が読める！"></a></div>
-
-        <div id="widget-ranking-container"></div><!--/ranking-->
-
-        <div id="widget-recommend-container"></div><!--/videos-->
-
-        <div class="sponsor-link nadir"><a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-sponsor_2.jpg" alt=""></a></div>
       </section><!-- /.side-sec -->
     </div>
   </div><!-- /.body-sec -->
@@ -165,100 +222,7 @@
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 </div><!-- /.whole -->
-<script src="../assets/js/bundle/main.bundle.js"></script>
-<script>
-  ( function ( window ) {
-
-    'use strict';
-
-    var
-      document = window.document;
-
-    var UT = self.UT;
-
-    // ---------------------------------------------------------
-    // test code
-    // develop mode
-    UT.app.App.develop();
-
-    // sign in
-    UT.app.User.login();
-
-    function switchLogin() {
-      console.log( '************ switchLogin ', UT.app.User.sign );
-      if (UT.app.User.sign) {
-        UT.app.User.logout();
-      } else {
-        UT.app.User.login()
-      }
-    }
-
-    // login / logout 通知テスト
-    // 外部要因で変わるかもしれないので...
-//    setInterval( switchLogin, 1000 * 5 );
-
-    // test code ここまで
-    // ---------------------------------------------------------
-
-    // ---------------------------------------------------------
-    // header.user
-    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
-    headerUser.start();
-
-    // ---------------------------------------------------------
-    // show page
-    function page ( event ) {
-
-      console.log( 'page ', event );
-
-      // ---------------------------------------------------------
-      // pickup
-      var pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
-      pickup.start();
-
-      // ---------------------------------------------------------
-      // headline
-      var headline = new UT.view.home.ViewHeadline( document.getElementById('headline-container') );
-      headline.start();
-
-      // ---------------------------------------------------------
-      // news
-      var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-      var archive = new UT.view.ViewArchiveMasonryInfinite( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
-      archive.start();
-
-      // ---------------------------------------------------------
-      // ranking
-      // slug all
-      var ranking = new UT.view.sidebar.ViewRanking( document.getElementById( 'widget-ranking-container' ) );
-      ranking.start();
-
-      // ---------------------------------------------------------
-      // video
-      // slug all
-      var videosCallback = {};
-      videosCallback[ UT.view.View.EMPTY_ERROR ] = function( error ) {
-        console.log( 'video empty error ', error );
-      };
-      videosCallback[ UT.view.View.RESPONSE_ERROR ] = function( error ) {
-        console.log( 'video RESPONSE_ERROR error ', error );
-      };
-      var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), videosCallback );
-      videos.start();
-
-    }
-
-    // ---------------------------------------------------------
-    // router check
-    var Router = UT.app.Router;
-    var router = Router.factory();
-
-    // event bind
-    router.on( Router.INDEX, page );
-    // location check
-    router.route();
-
-  }( window ) );
-</script>
+<script src="/assets/js/bundle/main.bundle.js"></script>
+<script src="/assets/js/xxx.bundle.js"></script>
 </body>
 </html>

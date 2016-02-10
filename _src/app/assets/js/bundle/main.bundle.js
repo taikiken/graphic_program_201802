@@ -130,29 +130,29 @@
 
 	var _ViewHeaderUser = __webpack_require__(133);
 
-	var _ViewArchive = __webpack_require__(134);
+	var _ViewArchive = __webpack_require__(143);
 
-	var _ViewArchiveMasonry = __webpack_require__(144);
+	var _ViewArchiveMasonry = __webpack_require__(151);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(146);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(153);
 
-	var _ViewCategory = __webpack_require__(149);
+	var _ViewCategory = __webpack_require__(156);
 
-	var _ViewSingle = __webpack_require__(150);
+	var _ViewSingle = __webpack_require__(157);
 
-	var _ViewTitle = __webpack_require__(155);
+	var _ViewTitle = __webpack_require__(162);
 
-	var _ViewComments = __webpack_require__(156);
+	var _ViewComments = __webpack_require__(163);
 
-	var _ViewHeadline = __webpack_require__(161);
+	var _ViewHeadline = __webpack_require__(168);
 
-	var _ViewPickup = __webpack_require__(162);
+	var _ViewPickup = __webpack_require__(169);
 
-	var _ViewRanking = __webpack_require__(163);
+	var _ViewRanking = __webpack_require__(170);
 
-	var _ViewVideos = __webpack_require__(164);
+	var _ViewVideos = __webpack_require__(171);
 
-	var _Receiver = __webpack_require__(165);
+	var _Receiver = __webpack_require__(172);
 
 	/**
 	 * ToDo: 確認事項
@@ -188,7 +188,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-09 16:31:59
+	 * @date 2016-02-10 16:27:23
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -3711,14 +3711,23 @@
 	   */
 
 	  (0, _createClass3.default)(Env, null, [{
-	    key: 'test',
+	    key: 'local',
 
 	    // ---------------------------------------------------
 	    //  METHOD
 	    // ---------------------------------------------------
 	    /**
-	     * ローカルテストモードにします
+	     * ローカルテスト(vagrant)モードにします
 	     */
+	    value: function local() {
+
+	      _mode = Env.LOCAL;
+	    } /**
+	      * ローカルテストモードにします
+	      */
+
+	  }, {
+	    key: 'test',
 	    value: function test() {
 
 	      _mode = Env.TEST;
@@ -3779,6 +3788,16 @@
 	    key: 'TEST',
 	    get: function get() {
 	      return 'test';
+	    }
+	    /**
+	     * @readonly
+	     * @return {string} 文字列 local を返します
+	     */
+
+	  }, {
+	    key: 'LOCAL',
+	    get: function get() {
+	      return 'local';
 	    }
 	  }]);
 	  return Env;
@@ -6134,6 +6153,9 @@
 
 	  switch (_Env.Env.mode) {
 
+	    case _Env.Env.LOCAL:
+	      return 'http://192.168.33.50/';
+
 	    case _Env.Env.TEST:
 	      return 'http://0.0.0.0:' + (n + 2);
 
@@ -6871,12 +6893,25 @@
 	  // ---------------------------------------------------
 	  /**
 	   * <p>**Api 接続先** を変更します</p>
-	   * ローカルテストモードにします<br>
-	   * localhost/api へ接続します<br>
-	   * 使用しないでください
+	   * ローカルテスト(vagrant)モードにします<br>
+	   * <code>http://192.168.33.50/</code> へ接続します</p>
 	   */
 
 	  (0, _createClass3.default)(App, null, [{
+	    key: 'local',
+	    value: function local() {
+
+	      _Env.Env.local();
+	      _Api.Api.rebuild();
+	    }
+	    /**
+	     * <p>**Api 接続先** を変更します</p>
+	     * ローカルテストモードにします<br>
+	     * localhost/api へ接続します<br>
+	     * 使用しないでください</p>
+	     */
+
+	  }, {
 	    key: 'test',
 	    value: function test() {
 
@@ -6887,7 +6922,7 @@
 	     * <p>**Api 接続先** を変更します</p>
 	     * 開発モードにします<br>
 	     * local から <code>http://undotsushin.com</code> へ API リクエストを行います<br>
-	     * 開発中はこちらをお使いください
+	     * 開発中はこちらをお使いください</p>
 	     */
 
 	  }, {
@@ -6900,7 +6935,7 @@
 	    /**
 	     * <p>**Api 接続先** を変更します</p>
 	     * 実行モードにします<br>
-	     * デフォルトです
+	     * デフォルトです</p>
 	     */
 
 	  }, {
@@ -8188,8 +8223,10 @@
 	  /**
 	   * **要認証** Ajax 処理, queryあり<br>
 	   * **Next 読込** がある時に使用します
+	   * @link Types.js
+	   *
 	   * @param {string} token Authorization token
-	   * @param {Type} types Types instance, Ajax request に使用します
+	   * @param {Types} types Types instance, Ajax request に使用します
 	   * @param {Function} [resolve=null] Ajax 成功時の callback
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
 	   * @param {Number} [offset=0] query offset 値
@@ -10323,7 +10360,7 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/02 - 20:47
+	 * @date 2016/02/09 - 17:44
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -10331,7 +10368,6 @@
 	 * This notice shall be included in all copies or substantial portions of the Software.
 	 *
 	 */
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -10359,11 +10395,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _symbol2 = __webpack_require__(52);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
 	var _View2 = __webpack_require__(132);
+
+	var _ViewHeaderMember = __webpack_require__(134);
 
 	var _User = __webpack_require__(78);
 
@@ -10371,290 +10405,54 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var _symbol = (0, _symbol3.default)();
-	var _instance = null;
-
 	// React
 	var React = self.React;
 	var ReactDOM = self.ReactDOM;
 
 	/**
-	 * <h3>header user 用メニュー</h3>
-	 * <p>Factory pattern です<br>
-	 * <code>new ViewHeaderUser()</code> はできません。<br>
-	 * <code>ViewHeaderUser.factory()</code> してください。<br>
-	 * </P>
-	 *
-	 * @ToDo user profile icon, notifications count 取得
+	 * header user 関連メニュー
 	 */
 
 	var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
 	  (0, _inherits3.default)(ViewHeaderUser, _View);
 
 	  /**
-	   * header user 用メニューを作成します
-	   *
-	   * @example
-	   * var headerUser = ViewHeaderUser.factory();
-	   * headerUser.element = document.getElementById('user-profile-nav');
-	   * headerUser.render();
-	   *
-	   * @param {Symbol} target Singleton を実現するための private symbol
-	   * @param {Element} element root element
+	   * <p>header user 関連メニュー<br>
+	   * ログイン / 非ログイン でメニューを変更</p>
+	   * @param {Element} element insert root element
 	   * @param {Object} [option={}] optional event handler
 	   */
 
-	  function ViewHeaderUser(target, element) {
-	    var _ret;
-
-	    var option = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	  function ViewHeaderUser(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	    (0, _classCallCheck3.default)(this, ViewHeaderUser);
-
-	    if (_symbol !== target) {
-
-	      throw new Error('UserStatus is static Class. not use new UserStatus().');
-	    }
-
-	    if (_instance === null) {
-	      var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
-
-	      _instance = _this;
-	    }
-	    return _ret = _instance, (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
 	  }
 	  /**
-	   * ユーザーメニューを作成します<br>
-	   * Userのstatusでメニューをだし分けします
+	   * Ajax request を開始します
 	   */
 
 	  (0, _createClass3.default)(ViewHeaderUser, [{
+	    key: 'start',
+	    value: function start() {
+	      if (_User.User.sign) {
+	        // login member
+	        var member = new _ViewHeaderMember.ViewHeaderMember(this.element);
+	        member.start();
+	      } else {
+	        // user menu
+	        this.render();
+	      }
+	    }
+	    /**
+	     * 非メンバー Dom を生成します
+	     */
+
+	  }, {
 	    key: 'render',
 	    value: function render() {
 
-	      if (!this._element) {
-	        throw new Error('ViewHeaderUser: set root element first');
-	      }
-
-	      if (_User.User.sign) {
-
-	        // ログイン済み
-	        this.renderLogin();
-	      } else {
-
-	        // 非ログイン
-	        this.renderLogout();
-	      }
-	    }
-	    /**
-	     * ログインユーザー用メニューを作成します
-	     */
-
-	  }, {
-	    key: 'renderLogin',
-	    value: function renderLogin() {
-
-	      var element = this.element;
-
-	      // --------------------------------------------------
-	      // user notice
-	      var UserNotice = React.createClass({
-	        displayName: 'UserNotice',
-
-	        propTypes: {
-	          list: React.PropTypes.array.isRequired
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            clicked: false,
-	            open: 'close',
-	            bodyTimer: 0
-	          };
-	        },
-	        render: function render() {},
-	        componentDidMount: function componentDidMount() {},
-	        componentWillUnmount: function componentWillUnmount() {},
-	        clickHandler: function clickHandler(event) {
-
-	          event.preventDefault();
-	          this.toggleState();
-	        },
-	        bodyClick: function bodyClick() {
-
-	          if (this.state.open === 'open') {
-
-	            // document.body が a より先に反応する
-	            // native event bind と React 経由の違いかも
-	            // body click 後の処理を遅延させる, 多分気づかない程度
-	            var timer = setTimeout(this.toggleState, 100);
-	            this.setState({ bodyTimer: timer });
-	          }
-	        },
-	        toggleState: function toggleState() {
-
-	          this.destroy();
-
-	          if (this.state.open === 'close') {
-	            // close -> open
-	            // document.body へ click event handler bind
-	            this.setState({ open: 'open' });
-	            document.body.addEventListener('click', this.bodyClick, false);
-	          } else {
-	            // open -> close
-	            this.setState({ open: 'close' });
-	          }
-	        },
-	        // timer cancel
-	        // body.click unbind
-	        // 後処理
-	        destroy: function destroy() {
-
-	          // body click からの遅延処理を clear する
-	          // timer を 0 にし error にならないようにする
-	          clearTimeout(this.state.bodyTimer);
-	          this.setState({ bodyTimer: 0 });
-	          // document.body からclick event handler unbind
-	          document.body.removeEventListener('click', this.bodyClick);
-	        }
-
-	      });
-
-	      // --------------------------------------------------
-	      // user setting
-	      var SettingDom = React.createClass({
-	        displayName: 'SettingDom',
-
-	        getInitialState: function getInitialState() {
-	          return {
-	            clicked: false,
-	            open: 'close',
-	            bodyTimer: 0
-	          };
-	        },
-	        render: function render() {
-	          return React.createElement(
-	            'div',
-	            { className: 'preference ' + this.state.open },
-	            React.createElement(
-	              'a',
-	              { className: 'preference-opener', href: '#', onClick: this.clickHandler },
-	              React.createElement(
-	                'span',
-	                { className: 'user-avatar' },
-	                React.createElement('img', { src: '/assets/images/dummy/avatar-40x40.jpg', alt: '' })
-	              )
-	            ),
-	            React.createElement(
-	              'nav',
-	              { className: 'user-menu' },
-	              React.createElement(
-	                'ul',
-	                { className: 'dropMenu' },
-	                React.createElement(
-	                  'li',
-	                  { className: 'dropMenu-item' },
-	                  React.createElement(
-	                    'a',
-	                    { className: 'dropMenu-link', href: '/mypage/' },
-	                    'ブックマーク',
-	                    React.createElement('br', null),
-	                    'アクティビティ'
-	                  )
-	                ),
-	                React.createElement(
-	                  'li',
-	                  { className: 'dropMenu-item' },
-	                  React.createElement(
-	                    'a',
-	                    { className: 'dropMenu-link', href: '/settings/' },
-	                    '設定'
-	                  )
-	                ),
-	                React.createElement(
-	                  'li',
-	                  { className: 'dropMenu-item' },
-	                  React.createElement(
-	                    'a',
-	                    { className: 'dropMenu-link', href: '/logout/' },
-	                    'ログアウト'
-	                  )
-	                )
-	              )
-	            )
-	          );
-	        },
-	        componentWillUnmount: function componentWillUnmount() {
-	          this.destroy();
-	        },
-	        clickHandler: function clickHandler(event) {
-
-	          event.preventDefault();
-	          this.toggleState();
-	        },
-	        bodyClick: function bodyClick() {
-
-	          if (this.state.open === 'open') {
-
-	            // document.body が a より先に反応する
-	            // native event bind と React 経由の違いかも
-	            // body click 後の処理を遅延させる, 多分気づかない程度
-	            var timer = setTimeout(this.toggleState, 100);
-	            this.setState({ bodyTimer: timer });
-	          }
-	        },
-	        toggleState: function toggleState() {
-
-	          this.destroy();
-
-	          if (this.state.open === 'close') {
-	            // close -> open
-	            // document.body へ click event handler bind
-	            this.setState({ open: 'open' });
-	            document.body.addEventListener('click', this.bodyClick, false);
-	          } else {
-	            // open -> close
-	            this.setState({ open: 'close' });
-	          }
-	        },
-	        // timer cancel
-	        // body.click unbind
-	        // 後処理
-	        destroy: function destroy() {
-
-	          // body click からの遅延処理を clear する
-	          // timer を 0 にし error にならないようにする
-	          clearTimeout(this.state.bodyTimer);
-	          this.setState({ bodyTimer: 0 });
-	          // document.body からclick event handler unbind
-	          document.body.removeEventListener('click', this.bodyClick);
-	        }
-	      });
-
-	      // --------------------------------------------------
-	      // user root
-	      var UserDom = React.createClass({
-	        displayName: 'UserDom',
-
-	        render: function render() {
-	          return React.createElement(
-	            'div',
-	            { className: 'user' },
-	            React.createElement(SettingDom, null)
-	          );
-	        }
-
-	      });
-
-	      ReactDOM.render(React.createElement(UserDom, null), element);
-	    }
-	    /**
-	     * 非ログインユーザー用メニューを作成します
-	     */
-
-	  }, {
-	    key: 'renderLogout',
-	    value: function renderLogout() {
-
-	      var element = this.element;
+	      var _this = this;
 
 	      var UserDom = React.createClass({
 	        displayName: 'UserDom',
@@ -10670,52 +10468,14 @@
 	              '無料登録 / ログイン'
 	            )
 	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          _this.executeSafely(_View2.View.DID_MOUNT);
 	        }
 	      });
 
-	      ReactDOM.render(React.createElement(UserDom, null), element);
-	    }
-
-	    /**
-	     * UserStatus.LOGE_IN event handler
-	     */
-
-	  }, {
-	    key: 'didLogin',
-	    value: function didLogin() {
-	      this.renderLogin();
-	    }
-	    /**
-	     * UserStatus.LOGE_OUT event handler
-	     */
-
-	  }, {
-	    key: 'didLogout',
-	    value: function didLogout() {
-	      this.renderLogout();
-	    }
-
-	    /**
-	     * instance を生成します
-	     * @param {Element} element root element
-	     * @param {Object} [option={}] optional event handler
-	     * @return {UserStatus} UserStatus instance を返します
-	     */
-
-	  }], [{
-	    key: 'factory',
-	    value: function factory(element) {
-	      var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-	      if (_instance === null) {
-
-	        _instance = new ViewHeaderUser(_symbol, element, option);
-	        var status = _UserStatus.UserStatus.factory();
-	        status.on(_UserStatus.UserStatus.LOGE_IN, _instance.didLogin.bind(_instance));
-	        status.on(_UserStatus.UserStatus.LOGE_OUT, _instance.didLogout.bind(_instance));
-	      }
-
-	      return _instance;
+	      ReactDOM.render(React.createElement(UserDom, null), this.element);
 	    }
 	  }]);
 	  return ViewHeaderUser;
@@ -10723,6 +10483,1577 @@
 
 /***/ },
 /* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/08 - 19:45
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderMember = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(132);
+
+	var _ViewHeaderMemberNotice = __webpack_require__(135);
+
+	var _Empty = __webpack_require__(137);
+
+	var _UserDae = __webpack_require__(126);
+
+	var _UsersSelf = __webpack_require__(123);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	var React = self.React;
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * header ログイン・メンバー 関連メニュー
+	 */
+
+	var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
+	  (0, _inherits3.default)(ViewHeaderMember, _View);
+
+	  /**
+	   * <p>header ログイン・メンバー 関連メニュー<br>
+	   * アイコン+drop down menu 表示</p>
+	   *
+	   * @param {Element} element insert root element
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ViewHeaderMember(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    (0, _classCallCheck3.default)(this, ViewHeaderMember);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderMember).call(this, element, option));
+
+	    _this2._action = new _UsersSelf.UsersSelf(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    return _this2;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewHeaderMember, [{
+	    key: 'start',
+	    value: function start() {
+
+	      this.action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var response = result.response;
+
+	      if (typeof response === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[MEMBER:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
+	        // this.showError( error.message );
+	      } else {
+
+	          this.render(response);
+	        }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+	    /**
+	     * Dom を生成します
+	     * @param {Object} response JSON response object
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(response) {
+
+	      var dae = new _UserDae.UserDae(response);
+	      var _this = this;
+
+	      // --------------------------------------------------
+	      // user setting
+	      var SettingDom = React.createClass({
+	        displayName: 'SettingDom',
+
+	        propTypes: {
+	          userName: React.PropTypes.string.isRequired,
+	          icon: React.PropTypes.string.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          this.timer = 0;
+
+	          return {
+	            open: 'close'
+	          };
+	        },
+	        render: function render() {
+
+	          var icon = this.props.icon;
+	          var userName = this.props.userName;
+
+	          if (!icon) {
+	            icon = _Empty.Empty.USER_PICTURE;
+	          }
+
+	          return React.createElement(
+	            'div',
+	            { className: 'user' },
+	            React.createElement('div', { className: 'notice-container', ref: 'notice' }),
+	            React.createElement(
+	              'div',
+	              { className: 'preference ' + this.state.open },
+	              React.createElement(
+	                'a',
+	                { className: 'preference-opener', href: '#', onClick: this.clickHandler },
+	                React.createElement(
+	                  'span',
+	                  { className: 'user-avatar' },
+	                  React.createElement('img', { src: icon, alt: userName })
+	                )
+	              ),
+	              React.createElement(
+	                'nav',
+	                { className: 'preference-menu' },
+	                React.createElement(
+	                  'ul',
+	                  { className: 'dropMenu' },
+	                  React.createElement(
+	                    'li',
+	                    { className: 'dropMenu-item' },
+	                    React.createElement(
+	                      'a',
+	                      { className: 'dropMenu-link', href: '/mypage/' },
+	                      'ブックマーク',
+	                      React.createElement('br', null),
+	                      'アクティビティ'
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'li',
+	                    { className: 'dropMenu-item' },
+	                    React.createElement(
+	                      'a',
+	                      { className: 'dropMenu-link', href: '/settings/' },
+	                      '設定'
+	                    )
+	                  ),
+	                  React.createElement(
+	                    'li',
+	                    { className: 'dropMenu-item' },
+	                    React.createElement(
+	                      'a',
+	                      { className: 'dropMenu-link', href: '/logout/' },
+	                      'ログアウト'
+	                    )
+	                  )
+	                )
+	              )
+	            )
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // callback
+	          _this.executeSafely(_View2.View.DID_MOUNT);
+
+	          // notice make
+	          var notice = new _ViewHeaderMemberNotice.ViewHeaderMemberNotice(this.refs.notice);
+	          notice.start();
+	        },
+	        componentWillUnmount: function componentWillUnmount() {
+	          this.destroy();
+	        },
+	        // -------------------------------------------------------
+	        // 以降 custom method
+
+	        // icon click で drop menu open / close
+	        clickHandler: function clickHandler(event) {
+
+	          event.preventDefault();
+	          this.toggleState();
+	        },
+	        // document.body.onClick event handler
+	        // drop menu open 後に 領域外 click で閉じるため
+	        bodyClick: function bodyClick() {
+
+	          if (this.state.open === 'open') {
+
+	            // document.body が a より先に反応する
+	            // native event bind と React 経由の違いかも
+	            // body click 後の処理を遅延させる, 多分気づかない程度
+	            this.timer = setTimeout(this.toggleState, 100);
+	          }
+	        },
+	        // open / close toggle
+	        toggleState: function toggleState() {
+
+	          this.destroy();
+
+	          if (this.state.open === 'close') {
+	            // close -> open
+	            // document.body へ click event handler bind
+	            this.setState({ open: 'open' });
+	            document.body.addEventListener('click', this.bodyClick, false);
+	          } else {
+	            // open -> close
+	            this.setState({ open: 'close' });
+	          }
+	        },
+	        // timer cancel
+	        // body.click unbind
+	        // 後処理
+	        destroy: function destroy() {
+
+	          // body click からの遅延処理を clear する
+	          // timer を 0 にし error にならないようにする
+	          clearTimeout(this.timer);
+	          this.timer = 0;
+	          // document.body からclick event handler unbind
+	          document.body.removeEventListener('click', this.bodyClick);
+	        }
+	      });
+
+	      // --------------------------------------------------
+	      // user root
+	      ReactDOM.render(React.createElement(SettingDom, { icon: dae.profilePicture, userName: dae.userName }), this.element);
+	    }
+	  }]);
+	  return ViewHeaderMember;
+	}(_View2.View);
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/08 - 19:46
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderMemberNotice = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(132);
+
+	var _Notice = __webpack_require__(136);
+
+	var _Empty = __webpack_require__(137);
+
+	var _NotificationsDae = __webpack_require__(138);
+
+	var _NoticeAction = __webpack_require__(142);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	var React = self.React;
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * お知らせ(header)
+	 */
+
+	var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
+	  (0, _inherits3.default)(ViewHeaderMemberNotice, _View);
+
+	  /**
+	   * お知らせ(header) for login member
+	   * @param {Element} element insert root element
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ViewHeaderMemberNotice(element) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    (0, _classCallCheck3.default)(this, ViewHeaderMemberNotice);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderMemberNotice).call(this, element, option));
+
+	    _this2._action = new _Notice.Notice(_this2.done.bind(_this2), _this2.fail.bind(_this2), 0, 5);
+
+	    _this2._menu = null;
+	    return _this2;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewHeaderMemberNotice, [{
+	    key: 'start',
+	    value: function start() {
+
+	      this.action.next();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var response = result.response;
+
+	      if (typeof response === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[MEMBER:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
+	        // this.showError( error.message );
+	      } else {
+
+	          this.render(response);
+	        }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
+	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+	      // this.showError( error.message );
+	    }
+
+	    /**
+	     * お知らせ  ログインメンバー Dom を生成します
+	     * @param {Object} responseObj JSON response
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(responseObj) {
+
+	      var notificationsDae = new _NotificationsDae.NotificationsDae(responseObj);
+	      var _this = this;
+
+	      // --------------------------------------------------
+	      // user notice dropMenu action message
+	      var NoticeMessage = React.createClass({
+	        displayName: 'NoticeMessage',
+
+	        propTypes: {
+	          notice: React.PropTypes.object.isRequired
+	        },
+	        render: function render() {
+
+	          var notice = this.props.notice;
+	          var action = notice.action;
+	          var message = _NoticeAction.NoticeAction.message(action);
+
+	          if (!action) {
+	            return null;
+	          }
+
+	          var user = notice.user;
+	          var article = notice.article;
+
+	          var txt = user.userName + 'さんがあなたの「' + article.title + '」へのコメントに';
+
+	          return React.createElement(
+	            'p',
+	            { className: 'info-content' },
+	            txt,
+	            React.createElement(
+	              'strong',
+	              null,
+	              message
+	            ),
+	            'しました。'
+	          );
+	        }
+	      });
+
+	      // --------------------------------------------------
+	      // user notice dropMenu
+	      var NoticeMenu = React.createClass({
+	        displayName: 'NoticeMenu',
+
+	        propTypes: {
+	          notifications: React.PropTypes.array.isRequired
+	        },
+	        render: function render() {
+
+	          var notifications = this.props.notifications;
+	          var readAll = undefined;
+
+	          if (notifications.length > 0) {
+
+	            readAll = React.createElement(
+	              'div',
+	              { className: 'info-btn-readAll' },
+	              React.createElement(
+	                'a',
+	                { href: '#', onClick: this.allRead },
+	                'すべて既読にする'
+	              )
+	            );
+	          } else {
+
+	            readAll = React.createElement(
+	              'div',
+	              { className: 'info-btn-readAll' },
+	              ' '
+	            );
+	          }
+
+	          return React.createElement(
+	            'nav',
+	            { className: 'notice-menu' },
+	            React.createElement(
+	              'div',
+	              { className: 'dropMenu' },
+	              React.createElement(
+	                'div',
+	                { className: 'info' },
+	                React.createElement(
+	                  'h2',
+	                  { className: 'info-heading' },
+	                  'お知らせ'
+	                ),
+	                readAll,
+	                React.createElement(
+	                  'ul',
+	                  { className: 'info-list' },
+	                  notifications.map(function (notice, i) {
+
+	                    var icon = notice.user.profilePicture;
+	                    if (!icon) {
+	                      icon = _Empty.Empty.USER_PICTURE_FEATURE;
+	                    }
+
+	                    return React.createElement(
+	                      'li',
+	                      { key: 'info-item-' + i, className: 'info-item info-item-' + i },
+	                      React.createElement(
+	                        'a',
+	                        { href: 'info-link' },
+	                        React.createElement(
+	                          'figure',
+	                          { className: 'info-user-thumb' },
+	                          React.createElement('img', { src: icon, alt: '' })
+	                        ),
+	                        React.createElement(NoticeMessage, { notice: notice }),
+	                        React.createElement(
+	                          'p',
+	                          { className: 'info-date' },
+	                          notice.displayDate
+	                        )
+	                      )
+	                    );
+	                  }),
+	                  React.createElement(
+	                    'li',
+	                    { className: 'btn-viewmore' },
+	                    React.createElement(
+	                      'a',
+	                      { className: 'btn-viewmore-link', href: '/notifications/' },
+	                      React.createElement(
+	                        'span',
+	                        null,
+	                        'すべて見る'
+	                      )
+	                    )
+	                  )
+	                )
+	              )
+	            )
+	          );
+	        },
+	        allRead: function allRead(event) {
+	          event.preventDefault();
+	        }
+	      });
+
+	      // --------------------------------------------------
+	      // user notice
+	      var NoticeDom = React.createClass({
+	        displayName: 'NoticeDom',
+
+	        propTypes: {
+	          response: React.PropTypes.object.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          this.timer = 0;
+
+	          return {
+	            response: this.props.response,
+	            open: 'close'
+	          };
+	        },
+	        render: function render() {
+
+	          var response = this.state.response;
+	          var notifications = response.notifications;
+	          var noticeTotal = '';
+	          var noticeMenu = undefined;
+
+	          if (Array.isArray(notifications)) {
+
+	            // 配列（正常）な時はそのデータを使用しメニューを作成する
+	            noticeMenu = React.createElement(NoticeMenu, { notifications: notifications });
+	            noticeTotal = React.createElement(
+	              'span',
+	              { className: 'notice-num' },
+	              response.total
+	            );
+	          } else {
+
+	            // 異常な時は
+	            // 空メニューを作成する、引数に 空配列 を送る
+	            noticeMenu = React.createElement(NoticeDom, { notifications: [] });
+	          }
+
+	          return React.createElement(
+	            'div',
+	            { className: 'notice ' + this.state.open },
+	            React.createElement(
+	              'a',
+	              { href: '#', className: 'notice-opener', onClick: this.clickHandler },
+	              React.createElement(
+	                'i',
+	                { className: 'notice-icon' },
+	                ' '
+	              ),
+	              noticeTotal
+	            ),
+	            noticeMenu
+	          );
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely(_View2.View.DID_MOUNT);
+	        },
+	        componentWillUnmount: function componentWillUnmount() {
+	          this.destroy();
+	        },
+	        // -------------------------------------------------------
+	        // 以降 custom method
+	        clickHandler: function clickHandler(event) {
+	          event.preventDefault();
+	          this.toggleState();
+	        },
+	        bodyClick: function bodyClick() {
+	          if (this.state.open === 'open') {
+
+	            // document.body が a より先に反応する
+	            // native event bind と React 経由の違いかも
+	            // body click 後の処理を遅延させる, 多分気づかない程度
+	            this.timer = setTimeout(this.toggleState, 100);
+	          }
+	        },
+	        toggleState: function toggleState() {
+
+	          this.destroy();
+
+	          if (this.state.open === 'close') {
+	            // close -> open
+	            // document.body へ click event handler bind
+	            this.setState({ open: 'open' });
+	            document.body.addEventListener('click', this.bodyClick, false);
+	          } else {
+	            // open -> close
+	            this.setState({ open: 'close' });
+	          }
+	        },
+	        destroy: function destroy() {
+
+	          // body click からの遅延処理を clear する
+	          // timer を 0 にし error にならないようにする
+	          clearTimeout(this.timer);
+	          this.timer = 0;
+	          // document.body からclick event handler unbind
+	          document.body.removeEventListener('click', this.bodyClick);
+	        },
+	        updateResponse: function updateResponse(response) {
+	          this.setState({ response: response });
+	        }
+	      });
+
+	      // --------------------------------------------------
+	      // user root
+	      if (this._menu === null) {
+
+	        this._menu = ReactDOM.render(React.createElement(NoticeDom, { response: notificationsDae }), this.element);
+	      } else {
+
+	        this._menu.updateResponse(notificationsDae);
+	      }
+	    }
+	  }]);
+	  return ViewHeaderMemberNotice;
+	}(_View2.View);
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 19:56
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Notice = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _OffsetAuth2 = __webpack_require__(115);
+
+	var _Api = __webpack_require__(90);
+
+	var _User = __webpack_require__(78);
+
+	var _Length = __webpack_require__(83);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * お知らせ(header) を表示します
+	 */
+
+	var Notice = exports.Notice = function (_OffsetAuth) {
+	  (0, _inherits3.default)(Notice, _OffsetAuth);
+
+	  /**
+	   * お知らせ一覧を取得
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   * @param {Number} [offset=0] query offset 値
+	   * @param {Number} [length=10] query length 値
+	   */
+
+	  function Notice() {
+	    var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var reject = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var offset = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+	    var length = arguments.length <= 3 || arguments[3] === undefined ? _Length.Length.archive : arguments[3];
+	    (0, _classCallCheck3.default)(this, Notice);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Notice).call(this, _User.User.token, _Api.Api.users('notice'), resolve, reject, offset, length));
+	  }
+
+	  return Notice;
+	}(_OffsetAuth2.OffsetAuth);
+
+/***/ },
+/* 137 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/23 - 15:53
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Empty = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(52);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	/**
+	 * <h3>代替画像パス</h3>
+	 * 全て static です
+	 */
+
+	var Empty = exports.Empty = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Empty(target) {
+	    (0, _classCallCheck3.default)(this, Empty);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Empty is static Class. not use new Empty().');
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  CONST 代わり
+	  // ---------------------------------------------------
+	  /**
+	   * img thumbnail 代替画像パス<br>
+	   * [Ex.] headline, sidebar image...
+	   * @readonly
+	   * @return {string} 代替画像パス【小】
+	   */
+
+	  (0, _createClass3.default)(Empty, null, [{
+	    key: 'IMG_SMALL',
+	    get: function get() {
+
+	      return '/assets/images/common/thumb-noimage-70x70.png';
+	    }
+	    /**
+	     * img middle 代替画像パス<br>
+	     * [Ex.] 記事一覧<br>
+	     * @readonly
+	     * @return {string} 代替画像パス【記事一覧】
+	     */
+
+	  }, {
+	    key: 'IMG_MIDDLE',
+	    get: function get() {
+
+	      return '/assets/images/common/thumb-noimage-340x150.png';
+	    }
+	    /**
+	     * img large 代替画像パス<br>
+	     * [Ex.] スライドショー<br>
+	     * @readonly
+	     * @return {string} 代替画像パス【スライドショー】
+	     */
+
+	  }, {
+	    key: 'IMG_LARGE',
+	    get: function get() {
+
+	      // ToDo: デザインができたらパスを正しいものに変更する
+	      return '/assets/images/common/xxx_slide.png';
+	    }
+	    /**
+	     * video thumbnail 代替画像パス<br>
+	     * [Ex.] sidebar video...
+	     * @readonly
+	     * @return {string} 代替画像パス【16 x 9】
+	     */
+
+	  }, {
+	    key: 'VIDEO_THUMBNAIL',
+	    get: function get() {
+
+	      // ToDo: デザインができたらパスを正しいものに変更する
+	      return '/assets/images/common/xxx.png';
+	    }
+	    /**
+	     * video play button overlay<br>
+	     * [Ex.] sidebar video...
+	     * @readonly
+	     * @return {string} 代替画像パス【小】
+	     */
+
+	  }, {
+	    key: 'VIDEO_PLAY',
+	    get: function get() {
+
+	      return '/assets/images/common/thumb-overlay-movie-340x150.png';
+	    }
+	    /**
+	     * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
+	     * [Ex.] コメントとか
+	     * @readonly
+	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+	     */
+
+	  }, {
+	    key: 'USER_PICTURE',
+	    get: function get() {
+
+	      return '/assets/images/common/thumb-user.png';
+	    }
+	    /**
+	     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)<br>
+	     * [Ex.] コメントとか
+	     * @readonly
+	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
+	     */
+
+	  }, {
+	    key: 'USER_PICTURE_FEATURE',
+	    get: function get() {
+
+	      return '/assets/images/common/thumb-user-feature.png';
+	    }
+	    /**
+	     * hero-slider カバーグラデーション画像
+	     * @return {string} hero-slider カバーグラデーション画像パスを返します
+	     */
+
+	  }, {
+	    key: 'KV_OVERLAY',
+	    get: function get() {
+	      return '/assets/images/index/kv-overlay.png';
+	    }
+	  }]);
+	  return Empty;
+	}();
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 20:11
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NotificationsDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	var _NoticeDae = __webpack_require__(139);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * お知らせ JSON response
+	 */
+
+	var NotificationsDae = exports.NotificationsDae = function () {
+	  /**
+	   * お知らせ JSON response
+	   * @param {Object} [response={}] JSON response
+	   */
+
+	  function NotificationsDae() {
+	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, NotificationsDae);
+
+	    response = _Safety.Safety.object(response);
+
+	    var notifications = response.notifications;
+	    notifications = _Safety.Safety.array(notifications);
+	    var list = [];
+	    notifications.forEach(function (notice) {
+
+	      list.push(new _NoticeDae.NoticeDae(notice));
+	    });
+
+	    this._response = response;
+	    this._notifications = list;
+	  }
+	  /**
+	   * @return {Object|*} JSON response を返します
+	   */
+
+	  (0, _createClass3.default)(NotificationsDae, [{
+	    key: 'response',
+	    get: function get() {
+	      return this._response;
+	    }
+	    /**
+	     * @return {Array<NoticeDae>} JSON response.notifications を返します
+	     */
+
+	  }, {
+	    key: 'notifications',
+	    get: function get() {
+	      return this._notifications;
+	    }
+	    /**
+	     * @return {Number} count を返します
+	     */
+
+	  }, {
+	    key: 'total',
+	    get: function get() {
+	      return this.response.count;
+	    }
+	    /**
+	     * alias total
+	     * @return {Number} count を返します
+	     */
+
+	  }, {
+	    key: 'count',
+	    get: function get() {
+	      return this.total;
+	    }
+	  }]);
+	  return NotificationsDae;
+	}();
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 20:10
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	var _Format = __webpack_require__(60);
+
+	var _UserDae = __webpack_require__(126);
+
+	var _NoticeArticleDae = __webpack_require__(140);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 通知単独データ
+	 */
+
+	var NoticeDae = exports.NoticeDae = function () {
+	  /**
+	   * 通知
+	   * @param {Object} [notice={}] JSON response.notifications 配列単独データ
+	   */
+
+	  function NoticeDae() {
+	    var notice = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, NoticeDae);
+
+	    notice = _Safety.Safety.object(notice);
+
+	    // date check
+	    if (_Safety.Safety.check(notice, 'date')) {
+
+	      this._formatDate = _Format.Format.date(notice.date);
+	    }
+
+	    this._notice = notice;
+
+	    // user
+	    this._user = new _UserDae.UserDae(notice.user);
+
+	    // article
+	    this._article = new _NoticeArticleDae.NoticeArticleDae(notice.article);
+	  }
+	  /**
+	   * @return {Object|*} JSON response.notifications 配列単独データ を返します
+	   */
+
+	  (0, _createClass3.default)(NoticeDae, [{
+	    key: 'notice',
+	    get: function get() {
+	      return this._notice;
+	    }
+	    /**
+	     * @return {Number} notifications id を返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.notice.id;
+	    }
+	    /**
+	     * @return {string} ISO8601 日付を返します
+	     */
+
+	  }, {
+	    key: 'date',
+	    get: function get() {
+	      return this.notice.date;
+	    }
+	    /**
+	     * @return {string} ISO8601 を日本語形式日付にし返します
+	     */
+
+	  }, {
+	    key: 'formatDate',
+	    get: function get() {
+	      return this._formatDate;
+	    }
+	    /**
+	     * @return {string} 相対日付返します
+	     */
+
+	  }, {
+	    key: 'displayDate',
+	    get: function get() {
+	      return this.notice.display_date;
+	    }
+	    /**
+	     * アクティビティの種類
+	     * - reply : 返信された
+	     * - good : goodされた
+	     * - bad : badされた
+	     * - notice : ニュース的通知
+	     *
+	     * @return {string} アクティビティの種類を返します
+	     */
+
+	  }, {
+	    key: 'action',
+	    get: function get() {
+	      return this.notice.action;
+	    }
+	    /**
+	     * @return {UserDae|*} 誰からの通知かユーザー情報を返します
+	     */
+
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	    /**
+	     * @return {NoticeArticleDae|*} 対象記事情報を返します
+	     */
+
+	  }, {
+	    key: 'article',
+	    get: function get() {
+	      return this._article;
+	    }
+	  }]);
+	  return NoticeDae;
+	}();
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 20:44
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeArticleDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	var _PopularDae = __webpack_require__(141);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * お知らせ 記事情報
+	 */
+
+	var NoticeArticleDae = exports.NoticeArticleDae = function () {
+	  /**
+	   * お知らせ 記事情報 JSON response.notifications.article
+	   * @param {Object} [article={}] お知らせ 記事情報
+	   */
+
+	  function NoticeArticleDae() {
+	    var article = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, NoticeArticleDae);
+
+	    article = _Safety.Safety.object(article);
+
+	    this._article = article;
+	    this._comment = new _PopularDae.PopularDae(article.comment);
+	    this._reply = new _PopularDae.PopularDae(article.reply);
+	  }
+	  /**
+	   *
+	   * @return {Object|*} お知らせ 記事情報 を返します
+	   */
+
+	  (0, _createClass3.default)(NoticeArticleDae, [{
+	    key: 'article',
+	    get: function get() {
+	      return this._article;
+	    }
+	    /**
+	     * @return {string} 記事タイトル を返します
+	     */
+
+	  }, {
+	    key: 'title',
+	    get: function get() {
+	      return this.article.title;
+	    }
+	    /**
+	     * @return {string} 記事 url を返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.article.url;
+	    }
+	    /**
+	     * @return {PopularDae|*} article.comment を返します
+	     */
+
+	  }, {
+	    key: 'comment',
+	    get: function get() {
+	      return this._comment;
+	    }
+	    /**
+	     * @return {PopularDae|*} article.reply を返します
+	     */
+
+	  }, {
+	    key: 'reply',
+	    get: function get() {
+	      return this._reply;
+	    }
+	  }]);
+	  return NoticeArticleDae;
+	}();
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/25 - 22:15
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PopularDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	var _Format = __webpack_require__(60);
+
+	var _UserDae = __webpack_require__(126);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * article.comments_popular 配列内 1 data
+	 */
+
+	var PopularDae = exports.PopularDae = function () {
+	  /**
+	   * article.comments_popular:[]
+	   * @param {Object} [comment={}] response.comment Object
+	   */
+
+	  function PopularDae() {
+	    var comment = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, PopularDae);
+
+	    comment = _Safety.Safety.object(comment);
+
+	    if (_Safety.Safety.check(comment, 'date')) {
+
+	      this._formatDate = _Format.Format.date(comment.date);
+	    }
+
+	    // comments_popular.user
+	    this._user = new _UserDae.UserDae(comment.user);
+	    // property
+	    this._comment = comment;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} comment Object を返します
+	   */
+
+	  (0, _createClass3.default)(PopularDae, [{
+	    key: 'comment',
+	    get: function get() {
+	      return this._comment;
+	    }
+	    /**
+	     * @return {Number} comment.id を返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.comment.id;
+	    }
+	    /**
+	     * @return {string} ISO8601 日付を返します
+	     */
+
+	  }, {
+	    key: 'date',
+	    get: function get() {
+	      return this.comment.date;
+	    }
+	    /**
+	     * @return {string} ISO8601 を日本語形式日付にし返します
+	     */
+
+	  }, {
+	    key: 'formatDate',
+	    get: function get() {
+	      return this._formatDate;
+	    }
+	    /**
+	     * @return {string} 相対日付返します
+	     */
+
+	  }, {
+	    key: 'displayDate',
+	    get: function get() {
+	      return this.comment.display_date;
+	    }
+	    /**
+	     *
+	     * @return {string} コメント本文を返します
+	     */
+
+	  }, {
+	    key: 'body',
+	    get: function get() {
+	      return this.comment.body;
+	    }
+	    /**
+	     *
+	     * @return {boolean} 自分がGood済みかどうか を返します
+	     */
+
+	  }, {
+	    key: 'isLike',
+	    get: function get() {
+	      return this.comment.is_like;
+	    }
+	    /**
+	     *
+	     * @return {boolean} 自分がBad済みかどうか を返します
+	     */
+
+	  }, {
+	    key: 'isBad',
+	    get: function get() {
+	      return this.comment.is_bad;
+	    }
+	    /**
+	     *
+	     * @return {Number} Good数 を返します
+	     */
+
+	  }, {
+	    key: 'good',
+	    get: function get() {
+	      return this.comment.like;
+	    }
+	    /**
+	     * this.good alias
+	     * @return {Number} Good数 を返します
+	     */
+
+	  }, {
+	    key: 'like',
+	    get: function get() {
+	      return this.good;
+	    }
+	    /**
+	     *
+	     * @return {Number|number} Bad数 を返します
+	     */
+
+	  }, {
+	    key: 'bad',
+	    get: function get() {
+	      return this.comment.bad;
+	    }
+	    /**
+	     *
+	     * @return {string} コメント詳細のURLを返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.comment.url;
+	    }
+	    /**
+	     *
+	     * @return {UserDae|*} comment した user 情報を返します
+	     */
+
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	  }]);
+	  return PopularDae;
+	}(); // class
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 23:12
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeAction = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(52);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+	var _message = {
+	  reply: 'コメント',
+	  good: 'Good',
+	  bad: 'Bad',
+	  notice: '通知'
+	};
+
+	var NoticeAction = exports.NoticeAction = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function NoticeAction(target) {
+	    (0, _classCallCheck3.default)(this, NoticeAction);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('NoticeAction is static Class. not use new NoticeAction().');
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * action に対応するメッセージ
+	   * - reply : 返信された
+	   * - good : goodされた
+	   * - bad : badされた
+	   * - notice : ニュース的通知
+	   *
+	   * @param {string} action アクティビティの種類
+	   * @return {string} action に対応するメッセージ を返します
+	   */
+
+	  (0, _createClass3.default)(NoticeAction, null, [{
+	    key: 'message',
+	    value: function message(action) {
+	      return _message[action];
+	    }
+	  }]);
+	  return NoticeAction;
+	}();
+
+/***/ },
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10769,17 +12100,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _User = __webpack_require__(78);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(137);
+	var _ArticleDae = __webpack_require__(145);
 
 	var _Safety = __webpack_require__(44);
 
@@ -11556,174 +12887,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 135 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/23 - 15:53
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Empty = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _symbol2 = __webpack_require__(52);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _symbol = (0, _symbol3.default)();
-
-	/**
-	 * <h3>代替画像パス</h3>
-	 * 全て static です
-	 */
-
-	var Empty = exports.Empty = function () {
-	  /**
-	   * static class です, instance を作成しません
-	   * @param {Symbol} target Singleton を実現するための private symbol
-	   */
-
-	  function Empty(target) {
-	    (0, _classCallCheck3.default)(this, Empty);
-
-	    if (_symbol !== target) {
-
-	      throw new Error('Empty is static Class. not use new Empty().');
-	    }
-	  }
-	  // ---------------------------------------------------
-	  //  CONST 代わり
-	  // ---------------------------------------------------
-	  /**
-	   * img thumbnail 代替画像パス<br>
-	   * [Ex.] headline, sidebar image...
-	   * @readonly
-	   * @return {string} 代替画像パス【小】
-	   */
-
-	  (0, _createClass3.default)(Empty, null, [{
-	    key: 'IMG_SMALL',
-	    get: function get() {
-
-	      return '/assets/images/common/thumb-noimage-70x70.png';
-	    }
-	    /**
-	     * img middle 代替画像パス<br>
-	     * [Ex.] 記事一覧<br>
-	     * @readonly
-	     * @return {string} 代替画像パス【記事一覧】
-	     */
-
-	  }, {
-	    key: 'IMG_MIDDLE',
-	    get: function get() {
-
-	      return '/assets/images/common/thumb-noimage-340x150.png';
-	    }
-	    /**
-	     * img large 代替画像パス<br>
-	     * [Ex.] スライドショー<br>
-	     * @readonly
-	     * @return {string} 代替画像パス【スライドショー】
-	     */
-
-	  }, {
-	    key: 'IMG_LARGE',
-	    get: function get() {
-
-	      // ToDo: デザインができたらパスを正しいものに変更する
-	      return '/assets/images/common/xxx_slide.png';
-	    }
-	    /**
-	     * video thumbnail 代替画像パス<br>
-	     * [Ex.] sidebar video...
-	     * @readonly
-	     * @return {string} 代替画像パス【16 x 9】
-	     */
-
-	  }, {
-	    key: 'VIDEO_THUMBNAIL',
-	    get: function get() {
-
-	      // ToDo: デザインができたらパスを正しいものに変更する
-	      return '/assets/images/common/xxx.png';
-	    }
-	    /**
-	     * video play button overlay<br>
-	     * [Ex.] sidebar video...
-	     * @readonly
-	     * @return {string} 代替画像パス【小】
-	     */
-
-	  }, {
-	    key: 'VIDEO_PLAY',
-	    get: function get() {
-
-	      return '/assets/images/common/thumb-overlay-movie-340x150.png';
-	    }
-	    /**
-	     * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
-	     * [Ex.] コメントとか
-	     * @readonly
-	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
-	     */
-
-	  }, {
-	    key: 'USER_PICTURE',
-	    get: function get() {
-
-	      return '/assets/images/common/thumb-user.png';
-	    }
-	    /**
-	     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)<br>
-	     * [Ex.] コメントとか
-	     * @readonly
-	     * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
-	     */
-
-	  }, {
-	    key: 'USER_PICTURE_FEATURE',
-	    get: function get() {
-
-	      return '/assets/images/common/thumb-user-feature.png';
-	    }
-	    /**
-	     * hero-slider カバーグラデーション画像
-	     * @return {string} hero-slider カバーグラデーション画像パスを返します
-	     */
-
-	  }, {
-	    key: 'KV_OVERLAY',
-	    get: function get() {
-	      return '/assets/images/index/kv-overlay.png';
-	    }
-	  }]);
-	  return Empty;
-	}();
-
-/***/ },
-/* 136 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11879,7 +13043,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 137 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11912,13 +13076,13 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(138);
+	var _CategoryDae = __webpack_require__(146);
 
-	var _MediaDae = __webpack_require__(139);
+	var _MediaDae = __webpack_require__(147);
 
 	var _UserDae = __webpack_require__(126);
 
-	var _CommentsPopularDae = __webpack_require__(142);
+	var _CommentsPopularDae = __webpack_require__(150);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12159,7 +13323,7 @@
 	}();
 
 /***/ },
-/* 138 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12244,7 +13408,7 @@
 	}();
 
 /***/ },
-/* 139 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12277,9 +13441,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _ImagesDae = __webpack_require__(140);
+	var _ImagesDae = __webpack_require__(148);
 
-	var _VideoDae = __webpack_require__(141);
+	var _VideoDae = __webpack_require__(149);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12385,7 +13549,7 @@
 	}();
 
 /***/ },
-/* 140 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12490,7 +13654,7 @@
 	}();
 
 /***/ },
-/* 141 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12599,7 +13763,7 @@
 	}();
 
 /***/ },
-/* 142 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12632,7 +13796,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(143);
+	var _PopularDae = __webpack_require__(141);
 
 	var _Safety = __webpack_require__(44);
 
@@ -12809,208 +13973,7 @@
 	}();
 
 /***/ },
-/* 143 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/25 - 22:15
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PopularDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(44);
-
-	var _Format = __webpack_require__(60);
-
-	var _UserDae = __webpack_require__(126);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * article.comments_popular 配列内 1 data
-	 */
-
-	var PopularDae = exports.PopularDae = function () {
-	  /**
-	   * article.comments_popular:[]
-	   * @param {Object} [comment={}] response.comment Object
-	   */
-
-	  function PopularDae() {
-	    var comment = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, PopularDae);
-
-	    comment = _Safety.Safety.object(comment);
-
-	    if (_Safety.Safety.check(comment, 'date')) {
-
-	      this._formatDate = _Format.Format.date(comment.date);
-	    }
-
-	    // comments_popular.user
-	    this._user = new _UserDae.UserDae(comment.user);
-	    // property
-	    this._comment = comment;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   *
-	   * @return {Object|*} comment Object を返します
-	   */
-
-	  (0, _createClass3.default)(PopularDae, [{
-	    key: 'comment',
-	    get: function get() {
-	      return this._comment;
-	    }
-	    /**
-	     *
-	     * @return {Number} comment.id を返します
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this.comment.id;
-	    }
-	    /**
-	     *
-	     * @return {string} ISO8601 日付を返します
-	     */
-
-	  }, {
-	    key: 'date',
-	    get: function get() {
-	      return this.comment.date;
-	    }
-	    /**
-	     *
-	     * @return {string} ISO8601 を日本語形式日付にし返します
-	     */
-
-	  }, {
-	    key: 'formatDate',
-	    get: function get() {
-	      return this._formatDate;
-	    }
-	    /**
-	     *
-	     * @return {string} 相対日付返します
-	     */
-
-	  }, {
-	    key: 'displayDate',
-	    get: function get() {
-	      return this.comment.display_date;
-	    }
-	    /**
-	     *
-	     * @return {string} コメント本文を返します
-	     */
-
-	  }, {
-	    key: 'body',
-	    get: function get() {
-	      return this.comment.body;
-	    }
-	    /**
-	     *
-	     * @return {boolean} 自分がGood済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isLike',
-	    get: function get() {
-	      return this.comment.is_like;
-	    }
-	    /**
-	     *
-	     * @return {boolean} 自分がBad済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isBad',
-	    get: function get() {
-	      return this.comment.is_bad;
-	    }
-	    /**
-	     *
-	     * @return {Number} Good数 を返します
-	     */
-
-	  }, {
-	    key: 'good',
-	    get: function get() {
-	      return this.comment.like;
-	    }
-	    /**
-	     * this.good alias
-	     * @return {Number} Good数 を返します
-	     */
-
-	  }, {
-	    key: 'like',
-	    get: function get() {
-	      return this.good;
-	    }
-	    /**
-	     *
-	     * @return {Number|number} Bad数 を返します
-	     */
-
-	  }, {
-	    key: 'bad',
-	    get: function get() {
-	      return this.comment.bad;
-	    }
-	    /**
-	     *
-	     * @return {string} コメント詳細のURLを返します
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.comment.url;
-	    }
-	    /**
-	     *
-	     * @return {UserDae|*} comment した user 情報を返します
-	     */
-
-	  }, {
-	    key: 'user',
-	    get: function get() {
-	      return this._user;
-	    }
-	  }]);
-	  return PopularDae;
-	}(); // class
-
-/***/ },
-/* 144 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13053,19 +14016,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Scroll = __webpack_require__(145);
+	var _Scroll = __webpack_require__(152);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _User = __webpack_require__(78);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(137);
+	var _ArticleDae = __webpack_require__(145);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13828,7 +14791,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 145 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13985,7 +14948,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 146 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14030,23 +14993,23 @@
 
 	var _EventDispatcher = __webpack_require__(77);
 
-	var _Scroll = __webpack_require__(145);
+	var _Scroll = __webpack_require__(152);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _User = __webpack_require__(78);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Result = __webpack_require__(88);
 
 	var _Safety = __webpack_require__(44);
 
-	var _ArticleDae = __webpack_require__(137);
+	var _ArticleDae = __webpack_require__(145);
 
-	var _Rise = __webpack_require__(147);
+	var _Rise = __webpack_require__(154);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14953,7 +15916,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 147 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14997,9 +15960,9 @@
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
-	var _Dom = __webpack_require__(148);
+	var _Dom = __webpack_require__(155);
 
-	var _Scroll = __webpack_require__(145);
+	var _Scroll = __webpack_require__(152);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15091,7 +16054,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 148 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15172,7 +16135,7 @@
 	}();
 
 /***/ },
-/* 149 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15211,7 +16174,7 @@
 
 	var _Category = __webpack_require__(116);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(146);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(153);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15247,7 +16210,7 @@
 	}(_ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite);
 
 /***/ },
-/* 150 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15290,19 +16253,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
-	var _SingleInfo = __webpack_require__(151);
+	var _SingleInfo = __webpack_require__(158);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Single = __webpack_require__(122);
 
 	var _Result = __webpack_require__(88);
 
-	var _SingleDae = __webpack_require__(152);
+	var _SingleDae = __webpack_require__(159);
 
 	var _Safety = __webpack_require__(44);
 
@@ -15668,7 +16631,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 151 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15701,7 +16664,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SingleDae = __webpack_require__(152);
+	var _SingleDae = __webpack_require__(159);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15757,7 +16720,7 @@
 	}();
 
 /***/ },
-/* 152 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15800,9 +16763,9 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(153);
+	var _KeywordsDae = __webpack_require__(160);
 
-	var _RelatedDae2 = __webpack_require__(154);
+	var _RelatedDae2 = __webpack_require__(161);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15893,7 +16856,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 153 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15987,7 +16950,7 @@
 	}();
 
 /***/ },
-/* 154 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16022,9 +16985,9 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(138);
+	var _CategoryDae = __webpack_require__(146);
 
-	var _MediaDae = __webpack_require__(139);
+	var _MediaDae = __webpack_require__(147);
 
 	var _UserDae = __webpack_require__(126);
 
@@ -16197,7 +17160,7 @@
 	}();
 
 /***/ },
-/* 155 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16330,7 +17293,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 156 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16373,21 +17336,21 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _CommentsType = __webpack_require__(84);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
-	var _Comments = __webpack_require__(157);
+	var _Comments = __webpack_require__(164);
 
 	var _Result = __webpack_require__(88);
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentsListDae = __webpack_require__(158);
+	var _CommentsListDae = __webpack_require__(165);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16897,7 +17860,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 157 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17123,7 +18086,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 158 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17152,7 +18115,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(159);
+	var _CommentsDae = __webpack_require__(166);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17234,7 +18197,7 @@
 	}();
 
 /***/ },
-/* 159 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17268,9 +18231,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(143);
+	var _PopularDae = __webpack_require__(141);
 
-	var _ReplyDae = __webpack_require__(160);
+	var _ReplyDae = __webpack_require__(167);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17374,7 +18337,7 @@
 	}();
 
 /***/ },
-/* 160 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17403,7 +18366,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsPopularDae = __webpack_require__(142);
+	var _CommentsPopularDae = __webpack_require__(150);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17461,7 +18424,7 @@
 	}();
 
 /***/ },
-/* 161 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17505,13 +18468,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _User = __webpack_require__(78);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Headline = __webpack_require__(108);
 
@@ -17519,7 +18482,7 @@
 
 	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(137);
+	var _ArticleDae = __webpack_require__(145);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17830,7 +18793,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 162 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17874,13 +18837,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _User = __webpack_require__(78);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Pickup = __webpack_require__(107);
 
@@ -17888,7 +18851,7 @@
 
 	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(137);
+	var _ArticleDae = __webpack_require__(145);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18430,7 +19393,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 163 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18473,17 +19436,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Widget = __webpack_require__(119);
 
 	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(137);
+	var _ArticleDae = __webpack_require__(145);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18795,7 +19758,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 164 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18838,17 +19801,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(135);
+	var _Empty = __webpack_require__(137);
 
 	var _View2 = __webpack_require__(132);
 
-	var _ViewError = __webpack_require__(136);
+	var _ViewError = __webpack_require__(144);
 
 	var _Widget = __webpack_require__(119);
 
 	var _Result = __webpack_require__(88);
 
-	var _ArticleDae = __webpack_require__(137);
+	var _ArticleDae = __webpack_require__(145);
 
 	var _Safety = __webpack_require__(44);
 
@@ -19144,7 +20107,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 165 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
