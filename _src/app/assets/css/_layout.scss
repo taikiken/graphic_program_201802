@@ -331,7 +331,7 @@ a {
   }
 
   @include prc-each(headline, crazy, all, baseball, mlb, soccer, w_soccer, golf, sumo, combative, athletic, swimming, judo, tennis, volleyball, rugby, figure, basketbal, xsports, motor, business, other) {
-    &.is-#{$arg} {
+    &.#{$arg} {
       .gnav-#{$arg} {
         a {
           padding-bottom: 10px;
