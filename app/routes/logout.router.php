@@ -6,7 +6,7 @@
 
 */
 
-$app->get('/logout[/]', function ($request, $response, $args) use ($app) {
+$app->get('/logout[/]', function ($request, $response, $args) {
 
   $args['page'] = array(
     'title'    => 'logout',
@@ -14,7 +14,7 @@ $app->get('/logout[/]', function ($request, $response, $args) use ($app) {
     'path'     => $args,
   );
 
-  return $this->renderer->render($response, "default.php", $args);
+  return $this->renderer->render($response, "_default.php", $args);
 
 });
 

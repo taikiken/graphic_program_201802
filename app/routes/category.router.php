@@ -13,9 +13,10 @@ $app->group('/category/{slug:'.join('|',$categorySlug).'}', function () {
     $args['page'] = array(
       'title'    => $args['slug'],
       'template' => 'category.php',
+      'path'     => $args,
     );
 
-    return $this->renderer->render($response, "default.php", $args);
+    return $this->renderer->render($response, "_default.php", $args);
 
   });
 
@@ -26,9 +27,10 @@ $app->group('/category/{slug:'.join('|',$categorySlug).'}', function () {
       'title'    => $args['slug'].' - '.$args['type'],
       'type'     => $args['type'],
       'template' => 'category.php',
+      'path'     => $args,
     );
 
-    return $this->renderer->render($response, "default.php", $args);
+    return $this->renderer->render($response, "_default.php", $args);
 
   });
 
