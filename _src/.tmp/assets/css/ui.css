@@ -3252,6 +3252,7 @@ table tr.w200 > td {
   color: #e1438b; }
 
 .info-btn-readAll {
+  min-height: 1em;
   margin-bottom: 20px;
   text-align: right; }
   .info-btn-readAll a {
