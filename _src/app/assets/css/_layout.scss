@@ -323,11 +323,22 @@ a {
     @include link-decoration(#ccc, $highlight-color, none, none);
     font-weight: bold;
 
-    &.current,
     &:hover {
       padding-bottom: 10px;
       border-bottom: 2px solid $highlight-color;
       color: $highlight-color;
+    }
+  }
+
+  @include prc-each(headline, crazy, all, baseball, mlb, soccer, w_soccer, golf, sumo, combative, athletic, swimming, judo, tennis, volleyball, rugby, figure, basketbal, xsports, motor, business, other) {
+    &.is-#{$arg} {
+      .gnav-#{$arg} {
+        a {
+          padding-bottom: 10px;
+          border-bottom: 2px solid $highlight-color;
+          color: $highlight-color;
+        }
+      }
     }
   }
 }
