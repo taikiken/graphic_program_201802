@@ -8,6 +8,8 @@
 * based on slim/slim-skeleton
 */
 
+date_default_timezone_set('Asia/Tokyo');
+
 if (PHP_SAPI == 'cli-server') {
   $file = __DIR__ . $_SERVER['REQUEST_URI'];
   if (is_file($file)) {
@@ -42,6 +44,22 @@ $routes = glob( __DIR__.'/../app/routes/*.router.php');
 foreach ($routes as $router) {
   require $router;
 }
+
+
+// demo
+// ==============================
+$app->get('/demo/{path:.*}', function ($request, $response, $args) {
+
+    // log
+    $this->logger->info("demo '/demo'", $args);
+
+    $args['request']  = $request;
+    $args['response'] = $response;
+    $args['args']     = $args['path'];
+
+    return $this->renderer->render($response, 'demo.php', $args);
+
+});
 
 
 // Run app
