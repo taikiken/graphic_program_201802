@@ -42,7 +42,7 @@ var KeywordsDae = exports.KeywordsDae = function () {
     var keywords = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
     (0, _classCallCheck3.default)(this, KeywordsDae);
 
-    this._keywords = keywords;
+    this._keywords = _Safety.Safety.array(keywords);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

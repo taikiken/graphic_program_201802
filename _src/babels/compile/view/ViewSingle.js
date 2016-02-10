@@ -11,7 +11,7 @@
  */
 'use strict';
 
-// app
+// view
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -38,39 +38,31 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Empty = require('../app/const/Empty');
-
-var _SingleInfo = require('../app/info/SingleInfo');
-
 var _View2 = require('./View');
 
 var _ViewError = require('./error/ViewError');
+
+var _ViewRelated = require('./single/ViewRelated');
+
+var _ViewSingleHeader = require('./single/ViewSingleHeader');
+
+var _ViewSingleFooter = require('./single/ViewSingleFooter');
 
 var _Single = require('../action/single/Single');
 
 var _Result = require('../data/Result');
 
-var _SingleDae = require('../dae/SingleDae');
-
 var _Safety = require('../data/Safety');
 
+var _SingleDae = require('../dae/SingleDae');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// React
-
-// dae
-
-// action
-
-// view
-var React = self.React;
-// data
-
-var ReactDOM = self.ReactDOM;
 
 /**
  * 記事詳細
  */
+
+// action
 
 var ViewSingle = function (_View) {
   (0, _inherits3.default)(ViewSingle, _View);
@@ -81,11 +73,7 @@ var ViewSingle = function (_View) {
    * @example
    * let elements = {}
    *  related: document.getElementById('related'),
-   *  comment: {
-   *    'self': document.getElementById('self'),
-   *    'official': document.getElementById('official'),
-   *    'user': document.getElementById('user')
-   *  }
+   *  footer: document.getElementById('footer')
    * }
    *
    * @param {Number} id article id, 記事Id
@@ -100,11 +88,20 @@ var ViewSingle = function (_View) {
 
     option = _Safety.Safety.object(option);
 
-    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
 
-    _this2._action = new _Single.Single(id, _this2.done.bind(_this2), _this2.fail.bind(_this2));
-    _this2._elements = elements;
-    return _this2;
+    _this._action = new _Single.Single(id, _this.done.bind(_this), _this.fail.bind(_this));
+    _this._elements = elements;
+    // mount event handler
+    _this._boundMount = _this.headerMount.bind(_this);
+    // related instance
+    _this._viewRelated = null;
+    // header instance
+    _this._header = null;
+    // footer instance
+    _this._footer = null;
+
+    return _this;
   }
   /**
    * Ajax request を開始します
@@ -177,143 +174,54 @@ var ViewSingle = function (_View) {
     key: 'render',
     value: function render(response) {
 
-      //console.log( 'single resoonse ', response );
       var single = new _SingleDae.SingleDae(response);
-      // global SingleInfoへ保存
-      // SingleInfo.dae = single;
 
       // beforeRender call
       this.executeSafely(_View2.View.BEFORE_RENDER, single);
 
-      var element = this.element;
-      var _this = this;
+      var header = undefined,
+          footer = undefined;
 
-      // --------------------------------------------
-      // image dom
-      var ImageDom = React.createClass({
-        displayName: 'ImageDom',
+      // header
+      if (this._header === null) {
 
-        propTypes: {
-          images: React.PropTypes.array.isRequired
-        },
-        render: function render() {
+        header = new _ViewSingleHeader.ViewSingleHeader(this.element, single);
+        header.on(_View2.View.DID_MOUNT, this._boundMount);
+        this._header = header;
+        header.start();
+      } else {
 
-          var images = this.props.images;
+        this._header.render(single);
+      }
 
-          return React.createElement(
-            'div',
-            { className: 'media-type-image' },
-            images.map(function (image, i) {
+      // footer
+      if (this._footer === null) {
 
-              if (typeof image.large !== 'undefined' && image.large !== '') {
-                return React.createElement(
-                  'div',
-                  { key: 'media-type-image-' + i, className: 'media-type-image-' + i },
-                  React.createElement('img', { src: image.large, alt: image.caption })
-                );
-              }
-            })
-          );
-        }
-      });
+        footer = new _ViewSingleFooter.ViewSingleFooter(this._elements.footer, single);
+        this._footer = footer;
+        footer.start();
+      } else {
 
-      // --------------------------------------------
-      // React Class
-      var ArticleDom = React.createClass({
-        displayName: 'ArticleDom',
-
-        propTypes: {
-          article: React.PropTypes.object.isRequired
-        },
-        // isRequired なので getDefaultProps がいらない
-        // getDefaultProps: function() {
-        //  return {
-        //    list: []
-        //  };
-        // },
-        render: function render() {
-
-          var article = this.props.article;
-
-          var bodyTag = function bodyTag() {
-            return {
-              __html: article.body
-            };
-          };
-
-          var thumbnail = '';
-          if (article.mediaType === 'image') {
-
-            // media type image
-            thumbnail = React.createElement(ImageDom, { images: article.media.list });
-          } else if (article.mediaType === 'video') {
-
-            if (article.media.video.thumbnail !== '') {
-
-              thumbnail = React.createElement(
-                'div',
-                { className: 'media-type-video' },
-                React.createElement('img', { src: article.media.video.thumbnail, alt: article.media.video.caption }),
-                React.createElement('img', { src: _Empty.Empty.VIDEO_PLAY, alt: '' })
-              );
-            }
-          }
-
-          return React.createElement(
-            'div',
-            null,
-            React.createElement(
-              'h1',
-              null,
-              article.title
-            ),
-            React.createElement(
-              'div',
-              null,
-              article.user.userName
-            ),
-            React.createElement(
-              'div',
-              null,
-              article.formatDate
-            ),
-            React.createElement(
-              'div',
-              null,
-              thumbnail
-            ),
-            React.createElement('div', { className: 'XXX-OUCH', dangerouslySetInnerHTML: bodyTag() }),
-            React.createElement(
-              'div',
-              null,
-              article.keywords.concat(' ')
-            )
-          );
-        },
-        componentWillMount: function componentWillMount() {
-
-          // after mount
-          _this.executeSafely(_View2.View.WILL_MOUNT);
-        },
-        componentDidMount: function componentDidMount() {
-
-          // after mount
-          _this.executeSafely(_View2.View.DID_MOUNT);
-        }
-      });
-
-      // dom 生成
-      ReactDOM.render(React.createElement(ArticleDom, { article: single }), element);
+        this._footer.render(single);
+      }
 
       // 関連記事 もしもあるなら
       if (single.hasRelated) {
+
         this.related(single.related);
       }
-
-      // comment 取得
-      // 自動化の場合はここに記述
-      // ここでコメントは取得しない
     } // render
+    /**
+     * header View.DID_MOUNT event handler
+     */
+
+  }, {
+    key: 'headerMount',
+    value: function headerMount() {
+
+      this._header.off(_View2.View.DID_MOUNT, this._boundMount);
+      this.executeSafely(_View2.View.DID_MOUNT);
+    }
     /**
      * 関連記事（記事詳細の）
      * @param {Array} related 配列内データ型はRelatedDom
@@ -326,91 +234,26 @@ var ViewSingle = function (_View) {
 
       _related = _Safety.Safety.array(_related);
 
-      var element = this._elements.related;
+      // 効率化のために
+      // ViewRelated instance が null の時は instance を作成し start を実行する
+      // instance が存在するときは render する
+      if (this._viewRelated === null) {
 
-      // tag block
-      var RelatedDom = React.createClass({
-        displayName: 'RelatedDom',
+        var viewRelated = new _ViewRelated.ViewRelated(this._elements.related, _related);
+        viewRelated.start();
+        this._viewRelated = viewRelated;
+      } else {
 
-        propTypes: {
-          index: React.PropTypes.number.isRequired,
-          id: React.PropTypes.string.isRequired,
-          slug: React.PropTypes.string.isRequired,
-          category: React.PropTypes.string.isRequired,
-          url: React.PropTypes.string.isRequired,
-          date: React.PropTypes.string.isRequired,
-          title: React.PropTypes.string.isRequired,
-          thumbnail: React.PropTypes.string.isRequired
-        },
-        render: function render() {
-          var p = this.props;
-          var thumbnail = p.thumbnail ? p.thumbnail : _Empty.Empty.IMG_SMALL;
-
-          return React.createElement(
-            'a',
-            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
-            React.createElement('img', { src: thumbnail, alt: p.title }),
-            React.createElement(
-              'p',
-              { className: 'cat cat-' + p.slug },
-              p.category
-            ),
-            React.createElement(
-              'h3',
-              { className: 'headline-title' },
-              p.title
-            ),
-            React.createElement(
-              'p',
-              { className: 'date' },
-              p.date
-            )
-          );
-        }
-      });
-
-      // React Class
-      var ArticleDom = React.createClass({
-        displayName: 'ArticleDom',
-
-        propTypes: {
-          list: React.PropTypes.array.isRequired
-        },
-        render: function render() {
-
-          var list = this.props.list;
-
-          return React.createElement(
-            'div',
-            null,
-            list.map(function (dae, i) {
-
-              var thumbnail = dae.media.images.thumbnail;
-              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
-
-              // HeadlineDom instance を使い render
-              return React.createElement(RelatedDom, {
-                key: 'headline-' + dae.id,
-                index: i,
-                id: String(dae.id),
-                slug: dae.category.slug,
-                category: dae.category.label,
-                url: dae.url,
-                date: dae.formatDate,
-                title: dae.title,
-                thumbnail: thumbnail
-              });
-            })
-          );
-        }
-      });
-
-      // 関連記事 dom 生成
-      ReactDOM.render(React.createElement(ArticleDom, { list: _related }), element);
+        this._viewRelated.render(_related);
+      }
     } // related
 
   }]);
   return ViewSingle;
 }(_View2.View);
+
+// dae
+
+// data
 
 exports.ViewSingle = ViewSingle;

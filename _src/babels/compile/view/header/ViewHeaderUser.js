@@ -105,7 +105,7 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
             { className: 'user' },
             React.createElement(
               'a',
-              { className: 'user-signup', href: '/signup/' },
+              { className: 'btn-signup', href: '/signup/' },
               '無料登録 / ログイン'
             )
           );

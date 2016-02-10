@@ -93,14 +93,13 @@
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-
         <div class="board-large">
 
           <div id="board-container"></div><!--/archive-->
 
           <div id="board-container-more"></div><!--/archive-more-->
 
-        </div><!-- /.newsboad -->
+        </div><!-- /.board-large -->
       </section><!-- /.main-sec -->
 
       <section class="side-sec">
@@ -188,8 +187,8 @@
 
     // ---------------------------------------------------------
     // header.user
-    var headerUser = UT.view.header.ViewHeaderUser.factory( document.getElementById('user-profile-container') );
-    headerUser.render();
+    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    headerUser.start();
 
     // ---------------------------------------------------------
     // make title

@@ -300,11 +300,15 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
 
             // 配列（正常）な時はそのデータを使用しメニューを作成する
             noticeMenu = React.createElement(NoticeMenu, { notifications: notifications });
-            noticeTotal = React.createElement(
-              'span',
-              { className: 'notice-num' },
-              response.total
-            );
+
+            if (notifications.length > 0) {
+              // total が 1 以上
+              noticeTotal = React.createElement(
+                'span',
+                { className: 'notice-num' },
+                response.total
+              );
+            }
           } else {
 
             // 異常な時は

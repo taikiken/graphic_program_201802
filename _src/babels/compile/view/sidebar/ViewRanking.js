@@ -200,7 +200,6 @@ var ViewRanking = exports.ViewRanking = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
-          caption: React.PropTypes.string.isRequired,
           thumbnail: React.PropTypes.string.isRequired,
           total: React.PropTypes.number.isRequired
         },
@@ -217,7 +216,7 @@ var ViewRanking = exports.ViewRanking = function (_View) {
               React.createElement(
                 'figure',
                 { className: 'post-thumb' },
-                React.createElement('img', { src: p.thumbnail, alt: p.caption })
+                React.createElement('img', { src: p.thumbnail, alt: p.title })
               ),
               React.createElement(
                 'div',
@@ -297,29 +296,12 @@ var ViewRanking = exports.ViewRanking = function (_View) {
               list.map(function (article, i) {
 
                 var dae = new _ArticleDae.ArticleDae(article);
-                var thumbnail = undefined,
-                    caption = undefined;
-
-                // mediaType データ取り出し変更
-                // 2016-02-08 JSON 変更
-                //if ( dae.mediaType === 'image' ) {
-                //  // type image
-                //  thumbnail = dae.media.images.thumbnail;
-                //  caption = dae.media.images.caption;
-                //} else {
-                //  // type video
-                //  thumbnail = dae.media.video.thumbnail;
-                //  caption = dae.media.video.caption;
-                //}
-
-                thumbnail = dae.media.images.thumbnail;
-                caption = dae.media.images.caption;
+                var thumbnail = dae.media.images.thumbnail;
 
                 // thumbnail を check なければ代替画像にする
                 if (!thumbnail) {
                   thumbnail = _Empty.Empty.IMG_SMALL;
                 }
-                caption = _Safety.Safety.string(caption, '');
 
                 // RankingDom instance を使い render
                 return React.createElement(RankingDom, {
@@ -332,7 +314,6 @@ var ViewRanking = exports.ViewRanking = function (_View) {
                   date: dae.formatDate,
                   title: dae.title,
                   thumbnail: thumbnail,
-                  caption: caption,
                   total: dae.commentsCount
                 });
               })

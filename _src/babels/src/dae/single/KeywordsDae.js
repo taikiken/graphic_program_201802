@@ -22,7 +22,7 @@ export class KeywordsDae {
    * @param {Array} [keywords=[]] keywords 配列
    */
   constructor( keywords:Array<string> = [] ) {
-    this._keywords = keywords;
+    this._keywords = Safety.array( keywords );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

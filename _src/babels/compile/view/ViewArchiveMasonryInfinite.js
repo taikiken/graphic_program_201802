@@ -11,7 +11,7 @@
  */
 'use strict';
 
-// event
+// app
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -38,10 +38,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _EventDispatcher = require('../event/EventDispatcher');
-
-var _Scroll = require('../util/Scroll');
-
 var _Empty = require('../app/const/Empty');
 
 var _User = require('../app/User');
@@ -67,13 +63,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // data
 
 // view
-
-// app
 var React = self.React;
 
 // ui
-
-// util
 
 var ReactDOM = self.ReactDOM;
 
@@ -742,9 +734,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         render: function render() {
 
           console.log('****************************************** render');
-
-          //let list = this.props.list;
-
           // dom出力する
           return React.createElement(
             'div',
@@ -756,18 +745,15 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
               var commentsPopular = dae.commentsPopular;
               var commentsTotal = dae.commentsCount;
               var thumbnail = undefined;
-              var caption = undefined;
               var figureTag = undefined;
 
               console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
 
               thumbnail = dae.media.images.medium;
-              caption = dae.media.images.caption;
 
               if (!thumbnail) {
                 thumbnail = _Empty.Empty.IMG_MIDDLE;
               }
-              caption = _Safety.Safety.string(caption, '');
 
               // media type で thumbnail 切替
               if (dae.mediaType === 'image') {
@@ -776,7 +762,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                 figureTag = React.createElement(
                   'figure',
                   { className: 'post-thumb post-thumb-' + dae.mediaType },
-                  React.createElement('img', { src: thumbnail, alt: caption })
+                  React.createElement('img', { src: thumbnail, alt: dae.title })
                 );
               } else {
 
@@ -785,7 +771,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                   'figure',
                   { className: 'post-thumb post-thumb-' + dae.mediaType },
                   React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY }),
-                  React.createElement('img', { src: thumbnail, alt: caption })
+                  React.createElement('img', { src: thumbnail, alt: dae.title })
                 );
               }
 

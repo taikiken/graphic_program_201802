@@ -293,7 +293,6 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
           large: React.PropTypes.string.isRequired,
-          caption: React.PropTypes.string.isRequired,
           commentsCount: React.PropTypes.number.isRequired
         },
         render: function render() {
@@ -306,7 +305,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
               'a',
               { href: p.url },
               React.createElement('img', { src: _Empty.Empty.KV_OVERLAY, alt: '', className: 'overlay' }),
-              React.createElement('img', { src: p.large, alt: p.caption }),
+              React.createElement('img', { src: p.large, alt: p.title }),
               React.createElement(
                 'div',
                 { className: 'post-overview' },
@@ -455,29 +454,11 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           var make = function make(article, i) {
 
             var dae = new _ArticleDae.ArticleDae(article);
-            var large = undefined,
-                caption = undefined;
-
-            // mediaType データ取り出し変更
-            // 2016-02-08 JSON 変更
-            //
-            //if ( dae.mediaType === 'image' ) {
-            //  // type image
-            //  large = dae.media.images.large;
-            //  caption = dae.media.images.caption;
-            //} else {
-            //  // type video
-            //  large = dae.media.video.large;
-            //  caption = dae.media.video.caption;
-            //}
-
-            large = dae.media.images.large;
-            caption = dae.media.images.caption;
+            var large = dae.media.images.large;
 
             if (!large) {
               large = _Empty.Empty.IMG_LARGE;
             }
-            caption = _Safety.Safety.string(caption, '');
 
             // HeadlineDom instance を使い render
             // iteration key は index を使う
@@ -492,7 +473,6 @@ var ViewPickup = exports.ViewPickup = function (_View) {
               date: dae.formatDate,
               title: dae.title,
               large: large,
-              caption: caption,
               commentsCount: dae.commentsCount
             });
           };

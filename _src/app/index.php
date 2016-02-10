@@ -31,7 +31,7 @@ switch ( $route ) {
         break;
 
     case 'p':
-        include_once '_test/test.single.html';
+        include_once 'tmp/single.tmp.html';
         break;
 }
 

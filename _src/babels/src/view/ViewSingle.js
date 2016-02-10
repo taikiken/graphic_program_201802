@@ -11,26 +11,21 @@
  */
 'use strict';
 
-// app
-import {Empty} from '../app/const/Empty';
-import {SingleInfo} from '../app/info/SingleInfo';
-
 // view
 import {View} from './View';
 import {ViewError} from './error/ViewError';
+import {ViewRelated} from './single/ViewRelated';
+import {ViewSingleHeader} from './single/ViewSingleHeader';
+import {ViewSingleFooter} from './single/ViewSingleFooter';
+
 // action
 import {Single} from '../action/single/Single';
 // data
 import {Result} from '../data/Result';
+import {Safety} from '../data/Safety';
 
 // dae
 import {SingleDae} from '../dae/SingleDae';
-
-import {Safety} from '../data/Safety';
-
-// React
-let React = self.React;
-let ReactDOM = self.ReactDOM;
 
 /**
  * 記事詳細
@@ -42,11 +37,7 @@ export class ViewSingle extends View {
    * @example
    * let elements = {}
    *  related: document.getElementById('related'),
-   *  comment: {
-   *    'self': document.getElementById('self'),
-   *    'official': document.getElementById('official'),
-   *    'user': document.getElementById('user')
-   *  }
+   *  footer: document.getElementById('footer')
    * }
    *
    * @param {Number} id article id, 記事Id
@@ -61,6 +52,15 @@ export class ViewSingle extends View {
     super( element, option );
     this._action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
     this._elements = elements;
+    // mount event handler
+    this._boundMount = this.headerMount.bind( this );
+    // related instance
+    this._viewRelated = null;
+    // header instance
+    this._header = null;
+    // footer instance
+    this._footer = null;
+
   }
   /**
    * Ajax request を開始します
@@ -123,132 +123,57 @@ export class ViewSingle extends View {
    */
   render( response:Object ):void {
 
-    //console.log( 'single resoonse ', response );
     let single = new SingleDae( response );
-    // global SingleInfoへ保存
-    // SingleInfo.dae = single;
 
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
 
-    let element = this.element;
-    let _this = this;
+    let header, footer;
 
-    // --------------------------------------------
-    // image dom
-    let ImageDom = React.createClass( {
-      propTypes: {
-        images: React.PropTypes.array.isRequired
-      },
-      render: function() {
+    // header
+    if ( this._header === null ) {
 
-        let images = this.props.images;
+      header = new ViewSingleHeader( this.element, single );
+      header.on( View.DID_MOUNT, this._boundMount );
+      this._header = header;
+      header.start();
 
-        return (
-          <div className="media-type-image">
-            {
-              images.map( function( image, i ) {
+    } else {
 
-                if ( typeof image.large !== 'undefined' && image.large !== '' ) {
-                  return (
-                    <div key={'media-type-image-' + i} className={'media-type-image-' + i}>
-                      <img src={image.large} alt={image.caption}/>
-                    </div>
-                  );
-                }
+      this._header.render( single );
 
-              } )
-            }
-          </div>
-        );
-      }
-    } );
+    }
 
-    // --------------------------------------------
-    // React Class
-    let ArticleDom = React.createClass( {
-      propTypes: {
-        article: React.PropTypes.object.isRequired
-      },
-      // isRequired なので getDefaultProps がいらない
-      // getDefaultProps: function() {
-      //  return {
-      //    list: []
-      //  };
-      // },
-      render: function() {
+    // footer
+    if ( this._footer === null ) {
 
-        let article = this.props.article;
+      footer = new ViewSingleFooter( this._elements.footer, single );
+      this._footer = footer;
+      footer.start();
 
-        let bodyTag = () => {
-          return {
-            __html: article.body
-          };
-        };
+    } else {
 
-        let thumbnail = '';
-        if ( article.mediaType === 'image' ) {
+      this._footer.render( single );
 
-          // media type image
-          thumbnail = <ImageDom images={article.media.list} />;
-
-        } else if ( article.mediaType === 'video' ) {
-
-          if ( article.media.video.thumbnail !== '' ) {
-
-            thumbnail = <div className="media-type-video">
-              <img src={article.media.video.thumbnail} alt={article.media.video.caption}/>
-              <img src={Empty.VIDEO_PLAY} alt=''/>
-            </div>;
-
-          }
-
-        }
-
-        return (
-
-          <div>
-            <h1>{article.title}</h1>
-            <div>{article.user.userName}</div>
-            <div>{article.formatDate}</div>
-            <div>{thumbnail}</div>
-            <div className="XXX-OUCH" dangerouslySetInnerHTML={bodyTag()} />
-            <div>{article.keywords.concat( ' ' )}</div>
-          </div>
-
-        );
-
-      },
-      componentWillMount: function() {
-
-        // after mount
-        _this.executeSafely( View.WILL_MOUNT );
-
-      },
-      componentDidMount: function() {
-
-        // after mount
-        _this.executeSafely( View.DID_MOUNT );
-
-      }
-    } );
-
-    // dom 生成
-    ReactDOM.render(
-      React.createElement( ArticleDom, { article: single } ),
-      element
-    );
+    }
 
     // 関連記事 もしもあるなら
     if ( single.hasRelated ) {
+
       this.related( single.related );
+
     }
 
-    // comment 取得
-    // 自動化の場合はここに記述
-    // ここでコメントは取得しない
-
   }// render
+  /**
+   * header View.DID_MOUNT event handler
+   */
+  headerMount():void {
+
+    this._header.off( View.DID_MOUNT, this._boundMount );
+    this.executeSafely( View.DID_MOUNT );
+
+  }
   /**
    * 関連記事（記事詳細の）
    * @param {Array} related 配列内データ型はRelatedDom
@@ -257,80 +182,20 @@ export class ViewSingle extends View {
 
     related = Safety.array( related );
 
-    let element = this._elements.related;
+    // 効率化のために
+    // ViewRelated instance が null の時は instance を作成し start を実行する
+    // instance が存在するときは render する
+    if ( this._viewRelated === null ) {
 
-    // tag block
-    let RelatedDom = React.createClass( {
-      propTypes: {
-        index: React.PropTypes.number.isRequired,
-        id: React.PropTypes.string.isRequired,
-        slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        url: React.PropTypes.string.isRequired,
-        date: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string.isRequired,
-        thumbnail: React.PropTypes.string.isRequired
-      },
-      render: function() {
-        let p = this.props;
-        let thumbnail = p.thumbnail ? p.thumbnail : Empty.IMG_SMALL;
+      let viewRelated = new ViewRelated( this._elements.related, related );
+      viewRelated.start();
+      this._viewRelated = viewRelated;
 
-        return (
-          <a href={p.url} id={'headline-' + p.id} className={'headline headline-' + p.index}>
-            <img src={thumbnail} alt={p.title}/>
-            <p className={'cat cat-' + p.slug}>{p.category}</p>
-            <h3 className='headline-title'>{p.title}</h3>
-            <p className="date">{p.date}</p>
-          </a>
-        );
-      }
-    } );
+    } else {
 
-    // React Class
-    let ArticleDom = React.createClass( {
-      propTypes: {
-        list: React.PropTypes.array.isRequired
-      },
-      render: function() {
+      this._viewRelated.render( related );
 
-        let list = this.props.list;
-
-        return (
-
-          <div>
-            {
-              list.map( function( dae, i ) {
-
-                let thumbnail = dae.media.images.thumbnail;
-                thumbnail = thumbnail !== '' ? thumbnail : Empty.IMG_SMALL;
-
-                // HeadlineDom instance を使い render
-                return <RelatedDom
-                  key={'headline-' + dae.id}
-                  index={i}
-                  id={String( dae.id )}
-                  slug={dae.category.slug}
-                  category={dae.category.label}
-                  url={dae.url}
-                  date={dae.formatDate}
-                  title={dae.title}
-                  thumbnail={thumbnail}
-                />;
-
-              } )
-            }
-          </div>
-
-        );
-
-      }
-    } );
-
-    // 関連記事 dom 生成
-    ReactDOM.render(
-      React.createElement( ArticleDom, { list: related } ),
-      element
-    );
+    }
 
   }// related
 

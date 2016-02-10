@@ -58,39 +58,37 @@
 
 	var _User = __webpack_require__(78);
 
-	var _Length = __webpack_require__(83);
+	var _CommentsType = __webpack_require__(83);
 
-	var _CommentsType = __webpack_require__(84);
+	var _Title = __webpack_require__(84);
 
-	var _Title = __webpack_require__(85);
+	var _Data = __webpack_require__(85);
 
-	var _Data = __webpack_require__(86);
+	var _Form = __webpack_require__(86);
 
-	var _Form = __webpack_require__(87);
+	var _Result = __webpack_require__(87);
 
-	var _Result = __webpack_require__(88);
+	var _Ajax = __webpack_require__(88);
 
-	var _Ajax = __webpack_require__(89);
+	var _Api = __webpack_require__(89);
 
-	var _Api = __webpack_require__(90);
+	var _Types = __webpack_require__(90);
 
-	var _Types = __webpack_require__(91);
+	var _Permalink = __webpack_require__(92);
 
-	var _Permalink = __webpack_require__(93);
+	var _Query = __webpack_require__(94);
 
-	var _Query = __webpack_require__(95);
+	var _Queries = __webpack_require__(97);
 
-	var _Queries = __webpack_require__(98);
+	var _Type = __webpack_require__(91);
 
-	var _Type = __webpack_require__(92);
+	var _CommentType = __webpack_require__(98);
 
-	var _CommentType = __webpack_require__(99);
+	var _App = __webpack_require__(99);
 
-	var _App = __webpack_require__(100);
+	var _Action = __webpack_require__(100);
 
-	var _Action = __webpack_require__(101);
-
-	var _Offset = __webpack_require__(102);
+	var _Offset = __webpack_require__(101);
 
 	var _Pickup = __webpack_require__(107);
 
@@ -130,34 +128,29 @@
 
 	var _ViewHeaderUser = __webpack_require__(133);
 
-	var _ViewArchive = __webpack_require__(143);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(143);
 
-	var _ViewArchiveMasonry = __webpack_require__(151);
+	var _ViewCategory = __webpack_require__(154);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(153);
+	var _ViewSingle = __webpack_require__(155);
 
-	var _ViewCategory = __webpack_require__(156);
+	var _ViewTitle = __webpack_require__(164);
 
-	var _ViewSingle = __webpack_require__(157);
+	var _ViewComments = __webpack_require__(165);
 
-	var _ViewTitle = __webpack_require__(162);
+	var _ViewHeadline = __webpack_require__(170);
 
-	var _ViewComments = __webpack_require__(163);
+	var _ViewPickup = __webpack_require__(171);
 
-	var _ViewHeadline = __webpack_require__(168);
+	var _ViewRanking = __webpack_require__(172);
 
-	var _ViewPickup = __webpack_require__(169);
+	var _ViewVideos = __webpack_require__(173);
 
-	var _ViewRanking = __webpack_require__(170);
-
-	var _ViewVideos = __webpack_require__(171);
-
-	var _Receiver = __webpack_require__(172);
+	var _Receiver = __webpack_require__(174);
 
 	/**
-	 * ToDo: 確認事項
 	 * ToDo: 対象外OS alert
-	 * ToDo: title, meta, ogp
+	 * ToDo: global 不要 class を除外する
 	 */
 
 	/**
@@ -170,6 +163,11 @@
 	 * @module UT
 	 * @type {Object}
 	 */
+
+	/*
+	import {ViewArchive} from './view/ViewArchive';
+	import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
+	*/
 
 	// -------------------------------------
 	// view
@@ -185,26 +183,9 @@
 
 	// -------------------------------------
 	// net
-	/*!
-	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-10 16:27:23
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 * @requires React, Sagen. IE: fetch, es5-promise
-	 *
-	 */
-	// -------------------------------------
-	//  main
-	//    target for babel compile
-	// -------------------------------------
 
 	// -------------------------------------
-	// util
+	// app
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -276,8 +257,10 @@
 	  },
 	  view: {
 	    View: _View.View,
-	    ViewArchive: _ViewArchive.ViewArchive,
-	    ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
+	    /*
+	    ViewArchive: ViewArchive,
+	    ViewArchiveMasonry: ViewArchiveMasonry,
+	    */
 	    ViewArchiveMasonryInfinite: _ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite,
 	    ViewCategory: _ViewCategory.ViewCategory,
 	    ViewSingle: _ViewSingle.ViewSingle,
@@ -329,9 +312,26 @@
 
 	// -------------------------------------
 	// data
+	/*!
+	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016-02-10 23:28:06
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * @requires React, Sagen. IE: fetch, es5-promise
+	 *
+	 */
+	// -------------------------------------
+	//  main
+	//    target for babel compile
+	// -------------------------------------
 
 	// -------------------------------------
-	// app
+	// util
 
 	self.UT = UT;
 
@@ -4112,182 +4112,6 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/29 - 16:05
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Length = undefined;
-
-	var _isInteger = __webpack_require__(45);
-
-	var _isInteger2 = _interopRequireDefault(_isInteger);
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _symbol2 = __webpack_require__(52);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _symbol = (0, _symbol3.default)();
-	var _pickup = 5;
-	var _headline = 6;
-	var _ranking = 5;
-	var _video = 5;
-	var _archive = 10;
-
-	/**
-	 * <h3>offset length default value</h3>
-	 * 全て static です
-	 */
-
-	var Length = exports.Length = function () {
-	  /**
-	   * static class です, instance を作成しません
-	   * @param {Symbol} target Singleton を実現するための private symbol
-	   */
-
-	  function Length(target) {
-	    (0, _classCallCheck3.default)(this, Length);
-
-	    if (_symbol !== target) {
-
-	      throw new Error('Length is static Class. not use new Length().');
-	    }
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * @return {Number} pickup default 取得数を返します
-	   */
-
-	  (0, _createClass3.default)(Length, null, [{
-	    key: 'pickup',
-	    get: function get() {
-	      return _pickup;
-	    }
-
-	    /**
-	     * @param {Number} value pickup default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        _pickup = value;
-	      } else {
-	        throw new Error('pickup: integer required. ' + value);
-	      }
-	    }
-
-	    /**
-	     * @return {Number} headline default 取得数を返します
-	     */
-
-	  }, {
-	    key: 'headline',
-	    get: function get() {
-	      return _headline;
-	    }
-	    /**
-	     * @param {Number} value headline default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        _headline = value;
-	      } else {
-	        throw new Error('headline: integer required. ' + value);
-	      }
-	    }
-	    /**
-	     * @return {Number} ranking default 取得数を返します
-	     */
-
-	  }, {
-	    key: 'ranking',
-	    get: function get() {
-	      return _ranking;
-	    }
-	    /**
-	     *
-	     * @param {Number} value ranking default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        _ranking = value;
-	      } else {
-	        throw new Error('ranking: integer required. ' + value);
-	      }
-	    }
-	    /**
-	     * @return {Number} video default 取得数を返します
-	     */
-
-	  }, {
-	    key: 'video',
-	    get: function get() {
-	      return _video;
-	    }
-	    /**
-	     * @param {Number} value video default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        _video = value;
-	      } else {
-	        throw new Error('video: integer required. ' + value);
-	      }
-	    }
-	    /**
-	     * @return {Number} archive default 取得数を返します
-	     */
-
-	  }, {
-	    key: 'archive',
-	    get: function get() {
-	      return _archive;
-	    }
-	    /**
-	     * @param {Number} value archive default 取得数
-	     */
-	    ,
-	    set: function set(value) {
-	      if ((0, _isInteger2.default)(value)) {
-	        _archive = value;
-	      } else {
-	        throw new Error('archive: integer required. ' + value);
-	      }
-	    }
-	  }]);
-	  return Length;
-	}();
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/29 - 18:09
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -4382,7 +4206,7 @@
 	}();
 
 /***/ },
-/* 85 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4520,7 +4344,7 @@
 	}();
 
 /***/ },
-/* 86 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4596,7 +4420,7 @@
 	}();
 
 /***/ },
-/* 87 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4633,7 +4457,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Data = __webpack_require__(86);
+	var _Data = __webpack_require__(85);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4720,7 +4544,7 @@
 	}();
 
 /***/ },
-/* 88 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4879,7 +4703,7 @@
 	}();
 
 /***/ },
-/* 89 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4912,7 +4736,7 @@
 
 	var _Codes = __webpack_require__(82);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5080,7 +4904,7 @@
 	}();
 
 /***/ },
-/* 90 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5113,11 +4937,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Types = __webpack_require__(91);
+	var _Types = __webpack_require__(90);
 
 	var _User = __webpack_require__(78);
 
-	var _ApiDae = __webpack_require__(96);
+	var _ApiDae = __webpack_require__(95);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5502,7 +5326,7 @@
 	}();
 
 /***/ },
-/* 91 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5531,11 +5355,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Type = __webpack_require__(92);
+	var _Type = __webpack_require__(91);
 
-	var _Permalink = __webpack_require__(93);
+	var _Permalink = __webpack_require__(92);
 
-	var _Quries = __webpack_require__(94);
+	var _Quries = __webpack_require__(93);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5633,7 +5457,7 @@
 	}();
 
 /***/ },
-/* 92 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5757,7 +5581,7 @@
 	}();
 
 /***/ },
-/* 93 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5868,7 +5692,7 @@
 	}();
 
 /***/ },
-/* 94 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5901,7 +5725,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(95);
+	var _Query = __webpack_require__(94);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5992,7 +5816,7 @@
 	}();
 
 /***/ },
-/* 95 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6092,7 +5916,7 @@
 	}();
 
 /***/ },
-/* 96 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6127,17 +5951,17 @@
 
 	var _Env = __webpack_require__(80);
 
-	var _Path = __webpack_require__(97);
+	var _Path = __webpack_require__(96);
 
-	var _Types = __webpack_require__(91);
+	var _Types = __webpack_require__(90);
 
-	var _Type = __webpack_require__(92);
+	var _Type = __webpack_require__(91);
 
-	var _Permalink = __webpack_require__(93);
+	var _Permalink = __webpack_require__(92);
 
-	var _Queries = __webpack_require__(98);
+	var _Queries = __webpack_require__(97);
 
-	var _Query = __webpack_require__(95);
+	var _Query = __webpack_require__(94);
 
 	var _Loc = __webpack_require__(1);
 
@@ -6409,7 +6233,7 @@
 	}();
 
 /***/ },
-/* 97 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6603,7 +6427,7 @@
 	}();
 
 /***/ },
-/* 98 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6636,7 +6460,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Query = __webpack_require__(95);
+	var _Query = __webpack_require__(94);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6728,7 +6552,7 @@
 	}();
 
 /***/ },
-/* 99 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6771,7 +6595,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Query2 = __webpack_require__(95);
+	var _Query2 = __webpack_require__(94);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6827,7 +6651,7 @@
 	}(_Query2.Query);
 
 /***/ },
-/* 100 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6862,7 +6686,7 @@
 
 	var _Env = __webpack_require__(80);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6950,7 +6774,7 @@
 	}();
 
 /***/ },
-/* 101 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6979,11 +6803,11 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
-	var _Ajax = __webpack_require__(89);
+	var _Ajax = __webpack_require__(88);
 
-	var _Types = __webpack_require__(91);
+	var _Types = __webpack_require__(90);
 
 	var _Safety = __webpack_require__(44);
 
@@ -7100,7 +6924,7 @@
 	}();
 
 /***/ },
-/* 102 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7137,7 +6961,7 @@
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _get2 = __webpack_require__(103);
+	var _get2 = __webpack_require__(102);
 
 	var _get3 = _interopRequireDefault(_get2);
 
@@ -7145,13 +6969,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
-	var _Action2 = __webpack_require__(101);
+	var _Action2 = __webpack_require__(100);
 
-	var _Types = __webpack_require__(91);
+	var _Types = __webpack_require__(90);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	var _Safety = __webpack_require__(44);
 
@@ -7339,12 +7163,12 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 103 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _Object$getOwnPropertyDescriptor = __webpack_require__(104)["default"];
+	var _Object$getOwnPropertyDescriptor = __webpack_require__(103)["default"];
 
 	exports["default"] = function get(_x, _x2, _x3) {
 	  var _again = true;
@@ -7388,23 +7212,23 @@
 	exports.__esModule = true;
 
 /***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(104), __esModule: true };
+
+/***/ },
 /* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(105), __esModule: true };
-
-/***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var $ = __webpack_require__(22);
-	__webpack_require__(106);
+	__webpack_require__(105);
 	module.exports = function getOwnPropertyDescriptor(it, key){
 	  return $.getDesc(it, key);
 	};
 
 /***/ },
-/* 106 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
@@ -7415,6 +7239,182 @@
 	    return $getOwnPropertyDescriptor(toIObject(it), key);
 	  };
 	});
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/29 - 16:05
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Length = undefined;
+
+	var _isInteger = __webpack_require__(45);
+
+	var _isInteger2 = _interopRequireDefault(_isInteger);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(52);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+	var _pickup = 5;
+	var _headline = 6;
+	var _ranking = 5;
+	var _video = 5;
+	var _archive = 10;
+
+	/**
+	 * <h3>offset length default value</h3>
+	 * 全て static です
+	 */
+
+	var Length = exports.Length = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Length(target) {
+	    (0, _classCallCheck3.default)(this, Length);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Length is static Class. not use new Length().');
+	    }
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Number} pickup default 取得数を返します
+	   */
+
+	  (0, _createClass3.default)(Length, null, [{
+	    key: 'pickup',
+	    get: function get() {
+	      return _pickup;
+	    }
+
+	    /**
+	     * @param {Number} value pickup default 取得数
+	     */
+	    ,
+	    set: function set(value) {
+	      if ((0, _isInteger2.default)(value)) {
+	        _pickup = value;
+	      } else {
+	        throw new Error('pickup: integer required. ' + value);
+	      }
+	    }
+
+	    /**
+	     * @return {Number} headline default 取得数を返します
+	     */
+
+	  }, {
+	    key: 'headline',
+	    get: function get() {
+	      return _headline;
+	    }
+	    /**
+	     * @param {Number} value headline default 取得数
+	     */
+	    ,
+	    set: function set(value) {
+	      if ((0, _isInteger2.default)(value)) {
+	        _headline = value;
+	      } else {
+	        throw new Error('headline: integer required. ' + value);
+	      }
+	    }
+	    /**
+	     * @return {Number} ranking default 取得数を返します
+	     */
+
+	  }, {
+	    key: 'ranking',
+	    get: function get() {
+	      return _ranking;
+	    }
+	    /**
+	     *
+	     * @param {Number} value ranking default 取得数
+	     */
+	    ,
+	    set: function set(value) {
+	      if ((0, _isInteger2.default)(value)) {
+	        _ranking = value;
+	      } else {
+	        throw new Error('ranking: integer required. ' + value);
+	      }
+	    }
+	    /**
+	     * @return {Number} video default 取得数を返します
+	     */
+
+	  }, {
+	    key: 'video',
+	    get: function get() {
+	      return _video;
+	    }
+	    /**
+	     * @param {Number} value video default 取得数
+	     */
+	    ,
+	    set: function set(value) {
+	      if ((0, _isInteger2.default)(value)) {
+	        _video = value;
+	      } else {
+	        throw new Error('video: integer required. ' + value);
+	      }
+	    }
+	    /**
+	     * @return {Number} archive default 取得数を返します
+	     */
+
+	  }, {
+	    key: 'archive',
+	    get: function get() {
+	      return _archive;
+	    }
+	    /**
+	     * @param {Number} value archive default 取得数
+	     */
+	    ,
+	    set: function set(value) {
+	      if ((0, _isInteger2.default)(value)) {
+	        _archive = value;
+	      } else {
+	        throw new Error('archive: integer required. ' + value);
+	      }
+	    }
+	  }]);
+	  return Length;
+	}();
 
 /***/ },
 /* 107 */
@@ -7458,11 +7458,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(101);
+	var _Action2 = __webpack_require__(100);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7562,11 +7562,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(101);
+	var _Action2 = __webpack_require__(100);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7648,11 +7648,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(102);
+	var _Offset2 = __webpack_require__(101);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7729,11 +7729,11 @@
 
 	var _ActionAuth2 = __webpack_require__(111);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	var _User = __webpack_require__(78);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7822,7 +7822,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(101);
+	var _Action2 = __webpack_require__(100);
 
 	var _User = __webpack_require__(78);
 
@@ -7830,9 +7830,9 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
-	var _Types = __webpack_require__(91);
+	var _Types = __webpack_require__(90);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8023,11 +8023,11 @@
 
 	var _ActionAuth2 = __webpack_require__(111);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	var _User = __webpack_require__(78);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8114,11 +8114,11 @@
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	var _User = __webpack_require__(78);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8197,17 +8197,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(102);
+	var _Offset2 = __webpack_require__(101);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	var _Token = __webpack_require__(112);
 
 	var _Safety = __webpack_require__(44);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
-	var _Types = __webpack_require__(91);
+	var _Types = __webpack_require__(90);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8320,9 +8320,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(102);
+	var _Offset2 = __webpack_require__(101);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	var _Safety = __webpack_require__(44);
 
@@ -8608,7 +8608,7 @@
 
 	var _Videos = __webpack_require__(118);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	var _Safety = __webpack_require__(44);
 
@@ -8736,11 +8736,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Action2 = __webpack_require__(101);
+	var _Action2 = __webpack_require__(100);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
-	var _Path = __webpack_require__(97);
+	var _Path = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8908,11 +8908,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Offset2 = __webpack_require__(102);
+	var _Offset2 = __webpack_require__(101);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9023,11 +9023,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(101);
+	var _Action2 = __webpack_require__(100);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
-	var _Path = __webpack_require__(97);
+	var _Path = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9127,7 +9127,7 @@
 
 	var _ActionAuth2 = __webpack_require__(111);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	var _User = __webpack_require__(78);
 
@@ -9844,11 +9844,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Action2 = __webpack_require__(101);
+	var _Action2 = __webpack_require__(100);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
-	var _Path = __webpack_require__(97);
+	var _Path = __webpack_require__(96);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10464,7 +10464,7 @@
 	            { className: 'user' },
 	            React.createElement(
 	              'a',
-	              { className: 'user-signup', href: '/signup/' },
+	              { className: 'btn-signup', href: '/signup/' },
 	              '無料登録 / ログイン'
 	            )
 	          );
@@ -11078,11 +11078,15 @@
 
 	            // 配列（正常）な時はそのデータを使用しメニューを作成する
 	            noticeMenu = React.createElement(NoticeMenu, { notifications: notifications });
-	            noticeTotal = React.createElement(
-	              'span',
-	              { className: 'notice-num' },
-	              response.total
-	            );
+
+	            if (notifications.length > 0) {
+	              // total が 1 以上
+	              noticeTotal = React.createElement(
+	                'span',
+	                { className: 'notice-num' },
+	                response.total
+	              );
+	            }
 	          } else {
 
 	            // 異常な時は
@@ -11211,11 +11215,11 @@
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	var _User = __webpack_require__(78);
 
-	var _Length = __webpack_require__(83);
+	var _Length = __webpack_require__(106);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12059,7 +12063,7 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/25 - 10:04
+	 * @date 2016/02/01 - 22:33
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -12068,17 +12072,13 @@
 	 *
 	 */
 	'use strict';
-	/*
-	View More がある Page
-	Home, Category, Search...
-	 */
 
 	// app
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ViewArchive = undefined;
+	exports.ViewArchiveMasonryInfinite = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -12108,80 +12108,65 @@
 
 	var _ViewError = __webpack_require__(144);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
+
+	var _Safety = __webpack_require__(44);
 
 	var _ArticleDae = __webpack_require__(145);
 
-	var _Safety = __webpack_require__(44);
+	var _Rise = __webpack_require__(151);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// React
 
 	// dae
-	var React = self.React;
-	// action
-	// import {Headline} from '../action/home/Headline';
+
 	// data
 
 	// view
+	var React = self.React;
+
+	// ui
 
 	var ReactDOM = self.ReactDOM;
+
+	// imagesLoaded, isotope
+	var imagesLoaded = self.imagesLoaded;
+	var Isotope = self.Isotope;
+
 	/**
-	 * <h2>View More がある 表示親クラス</h2>
+	 * archive 一覧を isotope で
 	 */
 
-	var ViewArchive = exports.ViewArchive = function (_View) {
-	  (0, _inherits3.default)(ViewArchive, _View);
+	var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (_View) {
+	  (0, _inherits3.default)(ViewArchiveMasonryInfinite, _View);
 
 	  /**
-	   * ページングを伴う基本クラス
-	   * @example
-	   * let headline;
-	   *
-	   * function didMount() {
-	   *    console.log( 'dom mount' );
-	   *  }
-	   * function errorMount( error ) {
-	   *    console.log( 'dom errorMount', error );
-	   *  }
-	   * function undefinedError( error ) {
-	   *    console.log( 'undefinedError', error );
-	   *  }
-	   * function emptyError( error ) {
-	   *    console.log( 'emptyError', error );
-	   *  }
-	   * function responseError( error ) {
-	   *    console.log( 'responseError', error );
-	   *
-	   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
-	   * }
-	   * let option = {
-	   *    didMount: didMount,
-	   *    errorMount: errorMount,
-	   *    undefinedError: undefinedError,
-	   *    emptyError: emptyError,
-	   *    responseError: responseError
-	   *  };
-	   *
-	   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), document.getElementById('moreId'), UT.action.home.News, option );
-	   * headline.start();
-	   *
+	   * <p>archive 一覧標示後 isotope で位置調整します<br>
+	   * + infinite scroll を実装します
+	   * </p>
 	   * @param {Element} element root element, Ajax result を配置する
 	   * @param {Element} moreElement more button root element, 'View More' を配置する
-	   * @param {*} ActionClass Request 対象の Action Class
+	   * @param {Function} [ActionClass=null] Request 対象の Action Class
 	   * @param {Object} [option={}] optional event handler
+	   * @param {boolean} [useMasonry=true] isotope を行うかの
 	   */
 
-	  function ViewArchive(element, moreElement, ActionClass) {
+	  function ViewArchiveMasonryInfinite(element, moreElement) {
+	    var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-	    (0, _classCallCheck3.default)(this, ViewArchive);
+	    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
+	    (0, _classCallCheck3.default)(this, ViewArchiveMasonryInfinite);
 
 	    option = _Safety.Safety.object(option);
 
-	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchive).call(this, element, option));
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonryInfinite).call(this, element, option));
 
-	    _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    if (typeof ActionClass === 'function') {
+
+	      _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
+	    }
 	    _this2._moreElement = moreElement;
 	    /**
 	     * 取得記事(articles)をArticleDae instance 配列として保存する
@@ -12189,18 +12174,14 @@
 	     * @private
 	     */
 	    _this2._articles = [];
-	    /**
-	     * 出力左側
-	     * @type {Array<ArticleDae>}
-	     * @private
-	     */
-	    _this2._evens = [];
-	    /**
-	     * 出力右側
-	     * @type {Array<ArticleDae>}
-	     * @private
-	     */
-	    _this2._odds = [];
+	    _this2._useMasonry = !!useMasonry;
+	    // ArticleDom instance を保持します
+	    // first render を区別するためにも使用します
+	    _this2._articleRendered = null;
+	    // more button instance を保持します
+	    _this2._moreRendered = null;
+	    // response.request object を保持する
+	    _this2._request = null;
 
 	    return _this2;
 	  }
@@ -12212,7 +12193,7 @@
 	   * @return {Element|*} more button root element を返します
 	   */
 
-	  (0, _createClass3.default)(ViewArchive, [{
+	  (0, _createClass3.default)(ViewArchiveMasonryInfinite, [{
 	    key: 'start',
 
 	    // ---------------------------------------------------
@@ -12235,7 +12216,7 @@
 	    value: function done(result) {
 
 	      var articles = result.articles;
-
+	      console.log('ViewArchiveMasonry done ', result);
 	      if (typeof articles === 'undefined') {
 
 	        // articles undefined
@@ -12252,6 +12233,7 @@
 	          // this.showError( error.message );
 	        } else {
 
+	            this._request = result.request;
 	            this.render(articles);
 	          }
 	    }
@@ -12293,15 +12275,15 @@
 	    key: 'render',
 	    value: function render(articles) {
 
-	      // ---
-	      // 左右に分割表示のためのglobal配列
-	      var evens = this._evens;
-	      var odds = this._odds;
+	      // Masonry flag
+	      var useMasonry = this._useMasonry;
+
+	      // 既存データ用のglobal配列
 	      var articlesList = this._articles;
+
 	      // 前回までの配列length
 	      // sequence な index のために必要
 	      var prevLast = this._articles.length;
-	      // ---
 
 	      // 記事挿入 root element
 	      var element = this.element;
@@ -12309,6 +12291,7 @@
 	      var moreElement = this.moreElement;
 	      // offset, length を使用する Action
 	      var action = this.action;
+	      // 参照を保持
 	      var _this = this;
 
 	      // --------------------------------------------
@@ -12318,32 +12301,32 @@
 	        displayName: 'MoreView',
 
 	        propTypes: {
-	          show: React.PropTypes.bool
+	          show: React.PropTypes.bool.isRequired,
+	          loading: React.PropTypes.string
 	        },
 	        getDefaultProps: function getDefaultProps() {
 	          return {
-	            show: false
+	            loading: ''
 	          };
 	        },
 	        getInitialState: function getInitialState() {
+	          // Rise instance を保持する
+	          this.rise = null;
+
 	          return {
-	            disable: false
+	            disable: false,
+	            show: this.props.show,
+	            loading: this.props.loading
 	          };
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          // disable
-	          this.setState({ disable: true });
-	          action.next();
 	        },
 	        render: function render() {
 
 	          // hasNext: true, button を表示する？
-	          if (this.props.show) {
+	          if (this.state.show) {
 
 	            return React.createElement(
 	              'div',
-	              { id: 'more', className:  true ? 'disable' : '' },
+	              { id: 'more', className: 'board-btn-viewmore' + this.state.loading },
 	              React.createElement(
 	                'a',
 	                { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
@@ -12361,18 +12344,113 @@
 	            );
 	          } else {
 
+	            // button 表示なし
 	            return React.createElement('div', { className: 'no-more' });
 	          }
-	        }
+	        },
+	        componentDidMount: function componentDidMount() {
 
+	          if (this.state.show && this.rise === null) {
+	            // mount 後
+	            // button が表示されているなら rise 監視を始める
+	            this.rise = new _Rise.Rise(element);
+	            this.rise.on(_Rise.Rise.RISE, this.onRise);
+	            this.rise.start();
+	          }
+	        },
+	        componentWillUnmount: function componentWillUnmount() {
+	          // unmount 時に rise 破棄を行う
+	          this.destroy();
+	        },
+	        // -----------------------------------------
+	        // button 関連 custom method
+	        // rise 関連 event を破棄する
+	        destroy: function destroy() {
+	          // rise 監視を破棄する
+	          if (this.rise !== null) {
+	            this.rise.stop();
+	            this.rise.off(_Rise.Rise.RISE, this.onRise);
+	            this.rise = null;
+	          }
+	        },
+	        // 緊急用, button click を残す
+	        handleClick: function handleClick(event) {
+	          event.preventDefault();
+	          // disable
+	          // this.setState( { loading: ' loading' } );
+	          // action.next();
+	          this.onRise();
+	        },
+	        // button 表示・非表示
+	        updateShow: function updateShow(show) {
+
+	          if (!show) {
+	            // button を非表示にするので rise 監視を止める
+	            this.destroy();
+	          } else {
+	            // button 表示, loading 表示を止める
+	            this.updateLoading(false);
+	          }
+
+	          this.setState({ show: show });
+	        },
+	        // loading 表示 on / off
+	        // on: true, off: false
+	        updateLoading: function updateLoading() {
+	          var loading = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+	          var loadingClass = '';
+	          if (loading && this.rise !== null) {
+
+	            // loading 中は監視を止める
+	            loadingClass = ' loading';
+	            this.rise.stop();
+	            action.next();
+	          } else {
+
+	            // loading が終わると監視開始
+	            this.rise.start();
+	          }
+
+	          // loading 表示のための css class を追加・削除
+	          this.setState({ loading: loadingClass });
+	        },
+	        // Rise.RISE event handler
+	        // 次 offset JSON を取得する
+	        onRise: function onRise(event) {
+	          console.log('========================== onRise ', event);
+
+	          this.updateLoading(true);
+	        }
 	      });
 
 	      // more button 作成関数
 	      // ArchiveDom から呼び出す
 	      var moreButton = function moreButton(show) {
 
-	        ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+	        show = !!show;
+	        // moreElement 存在チェックを行う
+	        // Element 型を保証する
+	        // _moreRendered が null の時のみ, instance があれば state を update する
+	        if (_Safety.Safety.isElement(moreElement) && _this._moreRendered === null) {
+	          // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
+
+	          // チェックをパスし実行する
+	          _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+	        } else {
+
+	          _this._moreRendered.updateShow(show);
+	        }
 	      };
+
+	      // more button 表示状態を loading on / off 切替えます
+	      /*
+	      let loadingButton = ( loading:boolean ) => {
+	         if ( _this._moreRendered !== null ) {
+	          _this._moreRendered.updateLoading( !!loading );
+	        }
+	       };
+	      */
 	      // --------------------------------------------
 	      // COMMENTS Popular second
 	      // --------------------------------------------
@@ -12387,7 +12465,7 @@
 
 	          var seconds = this.props.seconds;
 	          var articleId = this.props.articleId;
-	          console.log('seconds ', seconds);
+	          // console.log( 'seconds ', seconds );
 	          return React.createElement(
 	            'ul',
 	            { className: 'comments-second' },
@@ -12439,24 +12517,21 @@
 	            callback: function callback() {}
 	          };
 	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        },
 	        render: function render() {
 
 	          var sign = this.props.sign;
 	          var comment = this.props.comment;
 	          var active = this.props.active;
+	          // active（click可能）にするかを表す
 	          var activeClass = active ? ' active' : '';
 
 	          if (sign) {
 
 	            // login user
+	            // click ずみの時は不可
 	            return React.createElement(
 	              'a',
-	              { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
+	              { className: 'comment-reaction-btn comment-reaction-like' + activeClass, href: '#', onClick: this.handleClick },
 	              React.createElement(
 	                'i',
 	                null,
@@ -12471,9 +12546,10 @@
 	          } else {
 
 	            // not login user
+	            // click 不可
 	            return React.createElement(
 	              'span',
-	              { className: 'comment-response-btn comment-response-like' },
+	              { className: 'comment-reaction-btn comment-reaction-like' },
 	              React.createElement(
 	                'i',
 	                null,
@@ -12486,6 +12562,11 @@
 	              )
 	            );
 	          }
+	        },
+	        handleClick: function handleClick(event) {
+	          event.preventDefault();
+	          this.props.callback(this.props.comment);
+	          this.setState({ active: false });
 	        }
 	      });
 
@@ -12511,11 +12592,6 @@
 	            callback: function callback() {}
 	          };
 	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        },
 	        render: function render() {
 
 	          var sign = this.props.sign;
@@ -12524,11 +12600,10 @@
 	          var activeClass = active ? ' active' : '';
 
 	          if (sign) {
-
 	            // login user
 	            return React.createElement(
 	              'a',
-	              { className: 'comment-response-btn comment-response-dislike' + activeClass, href: '#', onClick: this.handleClick },
+	              { className: 'comment-reaction-btn comment-reaction-dislike' + activeClass, href: '#', onClick: this.handleClick },
 	              React.createElement(
 	                'i',
 	                null,
@@ -12541,11 +12616,10 @@
 	              )
 	            );
 	          } else {
-
 	            // not login user
 	            return React.createElement(
 	              'span',
-	              { className: 'comment-response-btn comment-response-dislike' },
+	              { className: 'comment-reaction-btn comment-reaction-dislike' },
 	              React.createElement(
 	                'i',
 	                null,
@@ -12558,6 +12632,11 @@
 	              )
 	            );
 	          }
+	        },
+	        handleClick: function handleClick(event) {
+	          event.preventDefault();
+	          this.props.callback(this.props.comment);
+	          this.setState({ active: false });
 	        }
 	      });
 
@@ -12570,18 +12649,6 @@
 	          commentsPopular: React.PropTypes.object.isRequired,
 	          total: React.PropTypes.number.isRequired,
 	          articleId: React.PropTypes.string.isRequired
-	        },
-	        goodClick: function goodClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('goodClick', commentId, userId);
-	        },
-	        badClick: function badClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('badClick', commentId, userId);
 	        },
 	        render: function render() {
 
@@ -12596,7 +12663,7 @@
 	          var hasSecond = commentsPopular.hasSecond;
 	          var firstDae = commentsPopular.first;
 	          var secondsDae = commentsPopular.seconds;
-	          console.log('commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae);
+	          // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
 	          if (hasSecond) {
 	            // 2件目以降も存在する
 	            // 2件目以降のDomを生成する
@@ -12604,19 +12671,20 @@
 	            total -= secondsDae.length;
 	          }
 
+	          // 1 件 comment があるかをチェクする
 	          if (hasFirst) {
 
 	            // 少なくとも1件は存在する
+	            // 総件数から 1 マイナス
 	            total -= 1;
-
 	            console.log('少なくとも1件は存在する ', articleId);
+
 	            // 1件目コメントデータを取り出し
 	            var first = firstDae;
-	            console.log('first ', articleId, first);
 	            // 1件目コメント・ユーザー
 	            var firstUser = first.user;
 	            // ユーザーサムネイル
-	            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
+	            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
 	            // login 済かを調べる
 	            var sign = _User.User.sign;
 
@@ -12653,14 +12721,10 @@
 	                    )
 	                  )
 	                ),
+	                React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
 	                React.createElement(
 	                  'div',
-	                  { className: 'comment-content' },
-	                  first.body
-	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'comment-response' },
+	                  { className: 'comment-reaction' },
 	                  React.createElement(GoodLink, {
 	                    sign: sign,
 	                    comment: first,
@@ -12690,130 +12754,28 @@
 	        }, // render
 	        componentDidMount: function componentDidMount() {
 	          // mount
-	        }
-	      });
-
-	      // --------------------------------------------
-	      // Main Dom
-	      // --------------------------------------------
-	      // 個別の 記事Dom
-	      var ArchiveDom = React.createClass({
-	        displayName: 'ArchiveDom',
-
-	        propTypes: {
-	          index: React.PropTypes.number.isRequired,
-	          id: React.PropTypes.string.isRequired,
-	          slug: React.PropTypes.string.isRequired,
-	          category: React.PropTypes.string.isRequired,
-	          url: React.PropTypes.string.isRequired,
-	          date: React.PropTypes.string.isRequired,
-	          title: React.PropTypes.string.isRequired,
-	          caption: React.PropTypes.string.isRequired,
-	          description: React.PropTypes.string.isRequired,
-	          thumbnail: React.PropTypes.string.isRequired,
-	          mediaType: React.PropTypes.string.isRequired,
-	          commentsPopular: React.PropTypes.object.isRequired,
-	          commentsCount: React.PropTypes.number.isRequired
 	        },
-	        render: function render() {
-	          var p = this.props;
-	          var commentsPopular = p.commentsPopular;
-	          var figureTag = undefined;
-	          var commentsTotal = p.commentsCount;
+	        // -----------------------------------------
+	        // good / bad 関連 custom method
+	        goodClick: function goodClick(comment) {
+	          var commentId = comment.id;
+	          var userId = comment.user.id;
 
-	          if (p.mediaType === 'image') {
-	            // type: image
-	            figureTag = React.createElement(
-	              'figure',
-	              { className: 'post-thumb post-thumb-' + p.mediaType },
-	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
-	            );
-	          } else {
-	            // type: video
-	            figureTag = React.createElement(
-	              'figure',
-	              { className: 'post-thumb post-thumb-' + p.mediaType },
-	              React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
-	              React.createElement('img', { src: p.thumbnail, alt: p.caption || p.title })
-	            );
-	          }
+	          console.log('goodClick', commentId, userId);
+	        },
+	        badClick: function badClick(comment) {
+	          var commentId = comment.id;
+	          var userId = comment.user.id;
 
-	          return React.createElement(
-	            'div',
-	            { className: 'board-item board-item-' + p.index },
-	            React.createElement(
-	              'a',
-	              { className: 'post', href: p.url },
-	              figureTag,
-	              React.createElement(
-	                'div',
-	                { className: 'post-data' },
-	                React.createElement(
-	                  'p',
-	                  { className: 'post-category post-category-' + p.slug },
-	                  p.category
-	                ),
-	                React.createElement(
-	                  'h3',
-	                  { className: 'post-heading' },
-	                  p.title
-	                ),
-	                React.createElement(
-	                  'p',
-	                  { className: 'post-date' },
-	                  p.date
-	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'post-excerpt-text' },
-	                  p.description
-	                )
-	              )
-	            ),
-	            React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: p.id })
-	          );
+	          console.log('badClick', commentId, userId);
 	        }
 	      });
-
-	      // ArticleDom 呼び出し用関数
-	      // list.forEach での ReactDOM.render 実行記述を簡略化するため
-	      var makeDom = function makeDom(dae) {
-
-	        var thumbnail = undefined;
-	        var caption = undefined;
-	        if (dae.mediaType === 'image') {
-	          thumbnail = dae.media.images.medium;
-	          caption = dae.media.images.caption;
-	        } else {
-	          thumbnail = dae.media.video.thumbnail;
-	          caption = dae.media.video.caption;
-	        }
-
-	        thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
-	        console.log('dae ', dae.id, dae);
-	        // unique key(React)にarticle id(number)記事Idを使用します
-	        return React.createElement(ArchiveDom, {
-	          key: 'archive-' + dae.id,
-	          index: dae.index,
-	          id: String(dae.id),
-	          slug: dae.category.slug,
-	          category: dae.category.label,
-	          url: dae.url,
-	          date: dae.formatDate,
-	          title: dae.title,
-	          caption: caption,
-	          thumbnail: thumbnail,
-	          mediaType: dae.mediaType,
-	          description: dae.description,
-	          commentsPopular: dae.commentsPopular,
-	          commentsCount: dae.commentsCount
-	        });
-	      };
 
 	      // ------------------------------------------------
 	      // 基点 React class
 	      // ------------------------------------------------
 
+	      // 個別の 記事Dom
 	      // React Class, Archive Dom
 	      var ArticleDom = React.createClass({
 	        displayName: 'ArticleDom',
@@ -12821,69 +12783,231 @@
 	        propTypes: {
 	          list: React.PropTypes.array.isRequired
 	        },
+	        getInitialState: function getInitialState() {
+	          this.isotope = null;
+	          this.img = null;
+	          this.elements = [];
+
+	          return {
+	            arranged: 'prepare',
+	            list: this.props.list
+	          };
+	        },
 	        render: function render() {
 
-	          var list = this.props.list;
-
-	          // even / odd setup
-	          // even(left) / odd(right) へ振り分けるための配列作成
-	          list.forEach(function (article, i) {
-
-	            var dae = new _ArticleDae.ArticleDae(article);
-
-	            dae.index = prevLast + i;
-	            articlesList.push(dae);
-
-	            if (i % 2 === 0) {
-	              // even
-	              evens.push(dae);
-	            } else {
-	              // odd
-	              odds.push(dae);
-	            }
-	          });
-
-	          // dom, 左右に振り分けて出力する
+	          console.log('****************************************** render');
+	          // dom出力する
 	          return React.createElement(
 	            'div',
-	            null,
-	            React.createElement(
-	              'div',
-	              { className: 'column1 board-column' },
-	              evens.map(function (dae) {
-	                return makeDom(dae);
-	              })
-	            ),
-	            React.createElement(
-	              'div',
-	              { className: 'column2 board-column' },
-	              odds.map(function (dae) {
-	                return makeDom(dae);
-	              })
-	            )
+	            { ref: 'boardRout', className: 'board-large-column' },
+
+	            // loop start
+	            this.state.list.map(function (dae, i) {
+
+	              var commentsPopular = dae.commentsPopular;
+	              var commentsTotal = dae.commentsCount;
+	              var thumbnail = undefined;
+	              var figureTag = undefined;
+
+	              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
+
+	              thumbnail = dae.media.images.medium;
+
+	              if (!thumbnail) {
+	                thumbnail = _Empty.Empty.IMG_MIDDLE;
+	              }
+
+	              // media type で thumbnail 切替
+	              if (dae.mediaType === 'image') {
+
+	                // type: image
+	                figureTag = React.createElement(
+	                  'figure',
+	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+	                  React.createElement('img', { src: thumbnail, alt: dae.title })
+	                );
+	              } else {
+
+	                // type: video
+	                figureTag = React.createElement(
+	                  'figure',
+	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
+	                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY }),
+	                  React.createElement('img', { src: thumbnail, alt: dae.title })
+	                );
+	              }
+
+	              // unique key(React)にarticle id(number)記事Idを使用します
+	              return React.createElement(
+	                'div',
+	                { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
+	                React.createElement(
+	                  'a',
+	                  { className: 'post', href: dae.url },
+	                  figureTag,
+	                  React.createElement(
+	                    'div',
+	                    { className: 'post-data' },
+	                    React.createElement(
+	                      'p',
+	                      { className: 'post-category post-category-' + dae.category.slug },
+	                      dae.category.label
+	                    ),
+	                    React.createElement(
+	                      'h3',
+	                      { className: 'post-heading' },
+	                      dae.title
+	                    ),
+	                    React.createElement(
+	                      'p',
+	                      { className: 'post-date' },
+	                      dae.formatDate
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'post-excerpt-text' },
+	                      dae.description
+	                    )
+	                  )
+	                ),
+	                React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
+	              );
+	              // loop end
+	            })
 	          );
 	        },
+	        // state 変更し dom が更新された後に呼び出される delegate
+	        componentDidUpdate: function componentDidUpdate() {
+	          console.log('+++++++++ componentDidUpdate');
+
+	          // isotope 対象 children
+	          var childNodes = this.refs.boardRout.childNodes;
+	          var elements = [];
+	          // 追加された Element を取得するための start / end point
+	          // start は request offset
+	          var i = _this._request.offset;
+	          // end は request offset へ request length を加算したものと
+	          // children length の小さい方
+	          var limit = Math.min(i + _this._request.length, childNodes.length);
+	          console.log('start ', i);
+	          console.log('end ', limit);
+
+	          // start / end から 対象 children を選別
+	          for (; i < limit; i++) {
+	            elements.push(childNodes[i]);
+	          }
+
+	          this.elements = elements;
+
+	          var img = imagesLoaded(elements);
+	          // 画像読み込む完了 event へ bind します
+	          img.on('always', this.appendImages);
+	          this.img = img;
+	        },
+	        // dom が表示された後に1度だけ呼び出される delegate
 	        componentDidMount: function componentDidMount() {
 	          // after mount
 	          _this.executeSafely(_View2.View.DID_MOUNT);
 	          // hasNext を元に More View button の表示非表示を決める
 	          moreButton(action.hasNext());
+
+	          // masonry flag が true の時に shouldMasonry を実行します
+	          if (useMasonry) {
+
+	            this.shouldMasonry();
+	          }
+	        },
+	        // dom が削除される前に呼び出される delegate
+	        componentWillUnmount: function componentWillUnmount() {
+	          console.log('************ componentWillUnmount ************');
+	          // unmount 時に isotope を破棄します
+	          this.isotope.destroy();
+	        },
+	        // -----------------------------------------------------
+	        // 以降 custom
+	        // isotope 前準備
+	        shouldMasonry: function shouldMasonry() {
+
+	          // isotope 前準備を実行します
+	          var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+	          var childNodes = boardRout.childNodes;
+
+	          // imagesLoaded を使用し画像ロード完了後に isotope を実行します
+	          var img = imagesLoaded(childNodes);
+	          // img {imagesLoaded} always event handler unbind するためにインスタンスを保存します
+	          this.img = img;
+	          // 画像読み込む完了 event へ bind します
+	          img.on('always', this.onImages);
+	        },
+	        // 画像読み込む完了 event handler, isotope を実行
+	        onImages: function onImages() {
+
+	          // event から event handler を unbind します
+	          this.img.off('always', this.onImages);
+
+	          // isotope を行います
+	          this.isotope = new Isotope(this.refs.boardRout, {
+	            itemSelector: '.board-item',
+	            masonry: {
+	              gutter: 30
+	            }
+	          });
+	        },
+	        updateList: function updateList(list) {
+	          // state を変更し appendChild + isotope を行う
+	          this.setState({ list: list });
+	        },
+	        // didUpdate から呼び出される
+	        appendImages: function appendImages() {
+
+	          console.log('++++++++++++++++++++ appendImages');
+
+	          // event から event handler を unbind します
+	          this.img.off('always', this.appendImages);
+
+	          // 追加とレイアウト
+	          this.isotope.appended(this.elements);
+	          // reload
+	          // http://isotope.metafizzy.co/methods.html#reloaditems
+	          this.isotope.reloadItems();
+	          // isotope 再度レイアウト
+	          this.isotope.layout();
+
+	          // hasNext を元に More View button の表示非表示を決める
+	          moreButton(action.hasNext());
 	        }
 	      }); // ArticleDom
 
-	      // dom 生成
-	      ReactDOM.render(React.createElement(ArticleDom, { list: articles }), element);
+	      // ------------------------------------------------
+	      // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
+	      articles.forEach(function (article, i) {
 
-	      // save
-	      // this._articles = concatArticles.splice( 0 );
-	    }
+	        var dae = new _ArticleDae.ArticleDae(article);
+
+	        dae.index = prevLast + i;
+	        articlesList.push(dae);
+	      });
+
+	      // this._articleRendered が null の時だけ ReactDOM.render する
+	      if (this._articleRendered === null) {
+
+	        // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+	        this._articleRendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
+	      } else {
+
+	        // instance が存在するので
+	        // state update でコンテナを追加する
+	        this._articleRendered.updateList(articlesList);
+	      }
+	    } // render
+
 	  }, {
 	    key: 'moreElement',
 	    get: function get() {
 	      return this._moreElement;
 	    }
 	  }]);
-	  return ViewArchive;
+	  return ViewArchiveMasonryInfinite;
 	}(_View2.View); // class
 
 /***/ },
@@ -13610,7 +13734,7 @@
 	      return this._images;
 	    }
 	    /**
-	     *
+	     * キャプション
 	     * @return {string} article.media.images.caption
 	     */
 
@@ -13620,7 +13744,7 @@
 	      return this.images.caption;
 	    }
 	    /**
-	     * for slide
+	     * スライド用
 	     * @return {string} article.media.images.large
 	     */
 
@@ -13630,7 +13754,7 @@
 	      return this.images.large;
 	    }
 	    /**
-	     * 記事一覧
+	     * 記事一覧用 - 横長 - 16:9
 	     * @return {string} article.media.images.medium
 	     */
 
@@ -13648,6 +13772,16 @@
 	    key: 'thumbnail',
 	    get: function get() {
 	      return this.images.thumbnail;
+	    }
+	    /**
+	     *  詳細用元比率画像
+	     * @return {string} article.media.images.original
+	     */
+
+	  }, {
+	    key: 'original',
+	    get: function get() {
+	      return this.images.original;
 	    }
 	  }]);
 	  return ImagesDae;
@@ -13977,24 +14111,23 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @license inazumatv.com
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/01 - 22:33
+	 * @date 2016/02/08
+	 *
+	 * Copyright (c) 2011-2015 inazumatv.com, inc.
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
 	 *
 	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
 	 */
 	'use strict';
-
-	// util
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ViewArchiveMasonry = undefined;
+	exports.Rise = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -14016,782 +14149,184 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Scroll = __webpack_require__(152);
+	var _EventDispatcher2 = __webpack_require__(77);
 
-	var _Empty = __webpack_require__(137);
+	var _Dom = __webpack_require__(152);
 
-	var _User = __webpack_require__(78);
-
-	var _View2 = __webpack_require__(132);
-
-	var _ViewError = __webpack_require__(144);
-
-	var _Result = __webpack_require__(88);
-
-	var _ArticleDae = __webpack_require__(145);
-
-	var _Safety = __webpack_require__(44);
+	var _Scroll = __webpack_require__(153);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// React
-
-	// dae
-	var React = self.React;
-	// action
-	// import {Headline} from '../action/home/Headline';
-	// data
-
-	// view
-
-	// app
-
-	var ReactDOM = self.ReactDOM;
-
-	// imagesLoaded, isotope
-	var imagesLoaded = self.imagesLoaded;
-	var Isotope = self.Isotope;
-
 	/**
-	 * archive 一覧を isotope で
+	 * 対象 element bottom が window.bottom を超えたら Event を発生させます
 	 */
 
-	var ViewArchiveMasonry = exports.ViewArchiveMasonry = function (_View) {
-	  (0, _inherits3.default)(ViewArchiveMasonry, _View);
+	var Rise = exports.Rise = function (_EventDispatcher) {
+	  (0, _inherits3.default)(Rise, _EventDispatcher);
 
 	  /**
-	   * archive 一覧標示後 isotope で位置調整します
-	   * @param {Element} element root element, Ajax result を配置する
-	   * @param {Element} moreElement more button root element, 'View More' を配置する
-	   * @param {Function} [ActionClass=null] Request 対象の Action Class
-	   * @param {Object} [option={}] optional event handler
-	   * @param {boolean} [useMasonry=true] isotope を行うかの
+	   * 対象 element bottom が window.bottom window.top に contain しているかを監視します
+	   * @param {Element} element 対象 element
+	   * @param {Number} [offset=0] 減産数値
 	   */
 
-	  function ViewArchiveMasonry(element, moreElement) {
-	    var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-	    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
-	    (0, _classCallCheck3.default)(this, ViewArchiveMasonry);
+	  function Rise(element) {
+	    var offset = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+	    (0, _classCallCheck3.default)(this, Rise);
 
-	    option = _Safety.Safety.object(option);
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Rise).call(this));
 
-	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonry).call(this, element, option));
-
-	    if (typeof ActionClass === 'function') {
-
-	      _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
-	    }
-	    _this2._moreElement = moreElement;
-	    /**
-	     * 取得記事(articles)をArticleDae instance 配列として保存する
-	     * @type {Array<ArticleDae>}
-	     * @private
-	     */
-	    _this2._articles = [];
-	    _this2._useMasonry = !!useMasonry;
-	    _this2._top = 0;
-
-	    return _this2;
+	    _this._element = element;
+	    _this._offset = offset;
+	    _this._dom = new _Dom.Dom(element);
+	    _this._boundScroll = _this.onScroll.bind(_this);
+	    _this._scroll = _Scroll.Scroll.factory();
+	    return _this;
 	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
+
 	  /**
-	   *
-	   * @return {Element|*} more button root element を返します
+	   * RISE event type
+	   * @returns {string} RISE event type を返します
 	   */
 
-	  (0, _createClass3.default)(ViewArchiveMasonry, [{
+	  (0, _createClass3.default)(Rise, [{
 	    key: 'start',
 
-	    // ---------------------------------------------------
-	    //  Method
-	    // ---------------------------------------------------
 	    /**
-	     * Ajax request を開始します
+	     * 監視を始めます
 	     */
 	    value: function start() {
+	      console.log('************************ Rise.start');
 
-	      this.action.next();
+	      this._scroll.on(_Scroll.Scroll.SCROLL, this._boundScroll);
+	      this._scroll.start();
 	    }
 	    /**
-	     * Ajax response success
-	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     * 監視を止めます
 	     */
 
 	  }, {
-	    key: 'done',
-	    value: function done(result) {
+	    key: 'stop',
+	    value: function stop() {
+	      console.log('------------------------ Rise.stop');
 
-	      var articles = result.articles;
-	      console.log('ViewArchiveMasonry done ', result);
-	      if (typeof articles === 'undefined') {
-
-	        // articles undefined
-	        // JSON に問題がある
-	        var error = new Error('[ARCHIVE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-	        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
-	        // this.showError( error.message );
-	      } else if (articles.length === 0) {
-
-	          // articles empty
-	          // request, JSON 取得に問題は無かったが data が取得できなかった
-	          var error = new Error('[ARCHIVE:EMPTY]サーバーレスポンスに問題が発生しました。');
-	          this.executeSafely(_View2.View.EMPTY_ERROR, error);
-	          // this.showError( error.message );
-	        } else {
-
-	            this.render(articles);
-	          }
+	      this._scroll.off(_Scroll.Scroll.SCROLL, this._boundScroll);
+	      this._scroll.stop();
 	    }
 	    /**
-	     * Ajax response error
-	     * @param {Error} error Error instance
+	     * Scroll.SCROLL event handler
+	     * @param {Object} event Scroll.SCROLL event object
 	     */
 
 	  }, {
-	    key: 'fail',
-	    value: function fail(error) {
+	    key: 'onScroll',
+	    value: function onScroll(event) {
+	      // window property
+	      // scrollTop
+	      var y = event.y;
+	      var windowHeight = window.innerHeight;
+	      var windowBottom = y + windowHeight - this._offset;
+	      // element property
+	      var offsetRect = this._dom.offset();
+	      var elementBottom = y + offsetRect.top + offsetRect.height;
 
-	      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
-	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
-	      // this.showError( error.message );
+	      // element.bottom が contain しているかを調べます
+	      if (windowBottom > elementBottom) {
+	        this.dispatch({ type: Rise.RISE, window: windowBottom, element: elementBottom });
+	      }
 	    }
-	    /**
-	     * ViewError でエラーコンテナを作成します
-	     * @param {string} message エラーメッセージ
-	     */
-
-	  }, {
-	    key: 'showError',
-	    value: function showError() {
-	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
-	      message = _Safety.Safety.string(message, '');
-
-	      // ToDo: Error 時の表示が決まったら変更する
-	      var error = new _ViewError.ViewError(this.element, this.option, message);
-	      error.render();
-	    }
-	    /**
-	     * dom を render します
-	     * @param {Array} articles JSON responce.articles
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render(articles) {
-
-	      // ---
-	      // Masonry flag
-	      var useMasonry = this._useMasonry;
-
-	      // 既存データ用のglobal配列
-	      var articlesList = this._articles;
-
-	      // 前回までの配列length
-	      // sequence な index のために必要
-	      var prevLast = this._articles.length;
-	      // ---
-
-	      // 記事挿入 root element
-	      var element = this.element;
-	      // 'View More' button root element
-	      var moreElement = this.moreElement;
-	      // offset, length を使用する Action
-	      var action = this.action;
-	      // 参照を保持
-	      var _this = this;
-
-	      // --------------------------------------------
-	      // More button
-	      // --------------------------------------------
-	      var MoreView = React.createClass({
-	        displayName: 'MoreView',
-
-	        propTypes: {
-	          show: React.PropTypes.bool
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            show: false
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            disable: false
-	          };
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          // disable
-	          this.setState({ disable: true });
-	          action.next();
-	          _this._top = _Scroll.Scroll.y;
-	        },
-	        render: function render() {
-
-	          // hasNext: true, button を表示する？
-	          if (this.props.show) {
-
-	            return React.createElement(
-	              'div',
-	              { id: 'more', className:  true ? 'disable' : '' },
-	              React.createElement(
-	                'a',
-	                { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
-	                React.createElement(
-	                  'span',
-	                  null,
-	                  'VIEW MORE'
-	                )
-	              ),
-	              React.createElement(
-	                'span',
-	                { className: 'board-btn-more-cover' },
-	                ' '
-	              )
-	            );
-	          } else {
-
-	            // button 表示なし
-	            return React.createElement('div', { className: 'no-more' });
-	          }
-	        }
-
-	      });
-
-	      // more button 作成関数
-	      // ArchiveDom から呼び出す
-	      var moreButton = function moreButton(show) {
-
-	        // moreElement 存在チェックを行う
-	        // Element 型を保証する
-	        if (moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement) {
-
-	          // チェックをパスし実行する
-	          ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
-	        }
-	      };
-	      // --------------------------------------------
-	      // COMMENTS Popular second
-	      // --------------------------------------------
-	      var CommentsSecond = React.createClass({
-	        displayName: 'CommentsSecond',
-
-	        propType: {
-	          seconds: React.PropTypes.array.isRequired,
-	          articleId: React.PropTypes.string.isRequired
-	        },
-	        render: function render() {
-
-	          var seconds = this.props.seconds;
-	          var articleId = this.props.articleId;
-	          console.log('seconds ', seconds);
-	          return React.createElement(
-	            'ul',
-	            { className: 'comments-second' },
-	            seconds.map(function (commentDae, i) {
-
-	              var userDae = commentDae.user;
-	              var picture = userDae.profilePicture ? userDae.profilePicture : _Empty.Empty.USER_PICTURE;
-
-	              // CommentsSecond unique key は  記事Id + index + user Id を使用する
-	              // 同一ユーザーが複数投稿することがあるため
-	              // render 内で unique なことを保証する必要がある
-	              return React.createElement(
-	                'li',
-	                { key: 'user-' + articleId + '-' + i + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
-	                React.createElement(
-	                  'a',
-	                  { className: 'commented-user-thumb', href: userDae.url },
-	                  React.createElement('img', { src: picture, alt: userDae.userName })
-	                )
-	              );
-	            })
-	          );
-	        }
-	      });
-
-	      // --------------------------------------------
-	      // COMMENTS Popular
-	      // --------------------------------------------
-
-	      // good link
-	      var GoodLink = React.createClass({
-	        displayName: 'GoodLink',
-
-	        propType: {
-	          sign: React.PropTypes.bool.isRequired,
-	          comment: React.PropTypes.object.isRequired,
-	          active: React.PropTypes.bool,
-	          callback: React.PropTypes.func
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        },
-	        render: function render() {
-
-	          var sign = this.props.sign;
-	          var comment = this.props.comment;
-	          var active = this.props.active;
-	          // active（click可能）にするかを表す
-	          var activeClass = active ? ' active' : '';
-
-	          if (sign) {
-
-	            // login user
-	            // click ずみの時は不可
-	            return React.createElement(
-	              'a',
-	              { className: 'comment-response-btn comment-response-like' + activeClass, href: '#', onClick: this.handleClick },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.good
-	              )
-	            );
-	          } else {
-
-	            // not login user
-	            // click 不可
-	            return React.createElement(
-	              'span',
-	              { className: 'comment-response-btn comment-response-like' },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.good
-	              )
-	            );
-	          }
-	        }
-	      });
-
-	      // bad link
-	      var BadLink = React.createClass({
-	        displayName: 'BadLink',
-
-	        propType: {
-	          sign: React.PropTypes.bool.isRequired,
-	          comment: React.PropTypes.object.isRequired,
-	          active: React.PropTypes.bool,
-	          callback: React.PropTypes.func
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        },
-	        render: function render() {
-
-	          var sign = this.props.sign;
-	          var comment = this.props.comment;
-	          var active = this.props.active;
-	          var activeClass = active ? ' active' : '';
-
-	          if (sign) {
-
-	            // login user
-	            return React.createElement(
-	              'a',
-	              { className: 'comment-response-btn comment-response-dislike' + activeClass, href: '#', onClick: this.handleClick },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.bad
-	              )
-	            );
-	          } else {
-
-	            // not login user
-	            return React.createElement(
-	              'span',
-	              { className: 'comment-response-btn comment-response-dislike' },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.bad
-	              )
-	            );
-	          }
-	        }
-	      });
-
-	      // --------------------------------------------
-	      // first + second comment container
-	      var PopularDom = React.createClass({
-	        displayName: 'PopularDom',
-
-	        propType: {
-	          commentsPopular: React.PropTypes.object.isRequired,
-	          total: React.PropTypes.number.isRequired,
-	          articleId: React.PropTypes.string.isRequired
-	        },
-	        goodClick: function goodClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('goodClick', commentId, userId);
-	        },
-	        badClick: function badClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('badClick', commentId, userId);
-	        },
-	        render: function render() {
-
-	          var commentsPopular = this.props.commentsPopular;
-	          var total = this.props.total;
-	          var articleId = this.props.articleId;
-
-	          var emptyFirst = React.createElement('div', { className: 'comments-popular comments-empty' });
-	          var second = React.createElement('div', { className: 'comments-second comments-empty' });
-
-	          var hasFirst = commentsPopular.hasFirst;
-	          var hasSecond = commentsPopular.hasSecond;
-	          var firstDae = commentsPopular.first;
-	          var secondsDae = commentsPopular.seconds;
-	          console.log('commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae);
-	          if (hasSecond) {
-	            // 2件目以降も存在する
-	            // 2件目以降のDomを生成する
-	            second = React.createElement(CommentsSecond, { seconds: secondsDae, articleId: articleId });
-	            total -= secondsDae.length;
-	          }
-
-	          if (hasFirst) {
-
-	            // 少なくとも1件は存在する
-	            total -= 1;
-
-	            console.log('少なくとも1件は存在する ', articleId);
-	            // 1件目コメントデータを取り出し
-	            var first = firstDae;
-	            console.log('first ', articleId, first);
-	            // 1件目コメント・ユーザー
-	            var firstUser = first.user;
-	            // ユーザーサムネイル
-	            var picture = firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
-	            // login 済かを調べる
-	            var sign = _User.User.sign;
-
-	            return React.createElement(
-	              'div',
-	              { className: 'comments-popular' },
-	              React.createElement(
-	                'div',
-	                { className: 'feature-user comment-item' },
-	                React.createElement(
-	                  'figure',
-	                  { className: 'comment-user' },
-	                  React.createElement(
-	                    'a',
-	                    { className: 'comment-user-link', href: firstUser.url },
-	                    React.createElement(
-	                      'span',
-	                      { className: 'comment-user-thumb' },
-	                      React.createElement('img', { src: picture, alt: firstUser.userName })
-	                    ),
-	                    React.createElement(
-	                      'div',
-	                      { className: 'comment-user-data' },
-	                      React.createElement(
-	                        'p',
-	                        { className: 'comment-user-name' },
-	                        firstUser.userName
-	                      ),
-	                      React.createElement(
-	                        'p',
-	                        { className: 'comment-user-job' },
-	                        firstUser.bio
-	                      )
-	                    )
-	                  )
-	                ),
-	                React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
-	                React.createElement(
-	                  'div',
-	                  { className: 'comment-response' },
-	                  React.createElement(GoodLink, {
-	                    sign: sign,
-	                    comment: first,
-	                    callback: this.goodClick
-	                  }),
-	                  React.createElement(BadLink, {
-	                    sign: sign,
-	                    comment: first,
-	                    callback: this.badClick
-	                  })
-	                )
-	              ),
-	              React.createElement(
-	                'div',
-	                { className: 'commented-user' },
-	                second,
-	                React.createElement(
-	                  'span',
-	                  { className: 'commented-user-andmore' },
-	                  total > 0 ? '+' + total : ''
-	                )
-	              )
-	            );
-	          }
-
-	          return emptyFirst;
-	        }, // render
-	        componentDidMount: function componentDidMount() {
-	          // mount
-	        }
-	      });
-
-	      // ------------------------------------------------
-	      // 基点 React class
-	      // ------------------------------------------------
-
-	      // 個別の 記事Dom
-	      // React Class, Archive Dom
-	      var ArticleDom = React.createClass({
-	        displayName: 'ArticleDom',
-
-	        propTypes: {
-	          list: React.PropTypes.array.isRequired
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            isotope: null,
-	            img: null,
-	            route: null,
-	            nodes: null,
-	            arranged: 'prepare'
-	          };
-	        },
-	        render: function render() {
-
-	          var list = this.props.list;
-
-	          // dom出力する
-	          return React.createElement(
-	            'div',
-	            { className: this.state.arranged, ref: 'boardRout' },
-	            list.map(function (dae, i) {
-
-	              //let dae = new ArticleDae( article );
-	              //articlesList.push( dae );
-
-	              var thumbnail = undefined;
-	              var caption = undefined;
-	              if (dae.mediaType === 'image') {
-	                thumbnail = dae.media.images.medium;
-	                caption = dae.media.images.caption;
-	              } else {
-	                thumbnail = dae.media.video.thumbnail;
-	                caption = dae.media.video.caption;
-	              }
-
-	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_MIDDLE;
-
-	              var commentsPopular = dae.commentsPopular;
-	              var figureTag = undefined;
-	              var commentsTotal = dae.commentsCount;
-
-	              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
-
-	              if (dae.mediaType === 'image') {
-	                // type: image
-	                figureTag = React.createElement(
-	                  'figure',
-	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                  React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-	                );
-	              } else {
-	                // type: video
-	                figureTag = React.createElement(
-	                  'figure',
-	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: '/assets/images/common/thumb-overlay-movie-340x150.png' }),
-	                  React.createElement('img', { src: thumbnail, alt: caption || dae.title })
-	                );
-	              }
-
-	              // unique key(React)にarticle id(number)記事Idを使用します
-	              return React.createElement(
-	                'div',
-	                { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
-	                React.createElement(
-	                  'a',
-	                  { className: 'post', href: dae.url },
-	                  figureTag,
-	                  React.createElement(
-	                    'div',
-	                    { className: 'post-data' },
-	                    React.createElement(
-	                      'p',
-	                      { className: 'post-category post-category-' + dae.category.slug },
-	                      dae.category.label
-	                    ),
-	                    React.createElement(
-	                      'h3',
-	                      { className: 'post-heading' },
-	                      dae.title
-	                    ),
-	                    React.createElement(
-	                      'p',
-	                      { className: 'post-date' },
-	                      dae.formatDate
-	                    ),
-	                    React.createElement(
-	                      'div',
-	                      { className: 'post-excerpt-text' },
-	                      dae.description
-	                    )
-	                  )
-	                ),
-	                React.createElement(PopularDom, { commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
-	              );
-	            })
-	          );
-	        },
-	        componentDidMount: function componentDidMount() {
-	          // after mount
-	          _this.executeSafely(_View2.View.DID_MOUNT);
-	          // hasNext を元に More View button の表示非表示を決める
-	          moreButton(action.hasNext());
-
-	          // masonry flag が true の時に shouldMasonry を実行します
-	          if (useMasonry) {
-
-	            this.shouldMasonry();
-	          }
-	        },
-	        shouldComponentUpdate: function shouldComponentUpdate() {
-	          console.log('------------+++++++++++++ shouldComponentUpdate ------------');
-	          // http://stackoverflow.com/questions/25135261/react-js-and-isotope-js
-	          // isotope がセットアップすると呼び出されるので
-	          // 常にfalseを返し無視させます
-	          return false;
-	        },
-	        componentWillUnmount: function componentWillUnmount() {
-	          console.log('************ componentWillUnmount ************');
-	          // unmount 時に isotope を破棄します
-	          this.state.isotope.destroy();
-	        },
-	        shouldMasonry: function shouldMasonry() {
-	          // isotope を実行します
-	          var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
-	          var childNodes = boardRout.childNodes;
-	          console.log('shouldMasonry', boardRout, childNodes);
-
-	          // imagesLoaded を使用し画像ロード完了後に isotope を実行します
-	          var img = imagesLoaded(childNodes);
-
-	          // img {imagesLoaded} always event handler unbind するためにインスタンスを state に保存します
-	          // route {Element} isotope 基準 element
-	          // nodes {ElementList} isotope 対象 childNodes, 現在は使用していません, ひょっとすると将来使うかも...
-	          this.setState({ img: img, nodes: childNodes, route: boardRout });
-
-	          // 画像読み込む完了 event へ bind します
-	          img.on('always', this.onImages);
-	        },
-	        // 画像読み込む完了 event handler
-	        onImages: function onImages() {
-
-	          var img = this.state.img;
-	          var route = this.state.route;
-
-	          // event から event handler を unbind します
-	          img.off('always', this.onImages);
-
-	          // isotope を行います
-	          var isotope = new Isotope(route, {
-	            itemSelector: '.board-item',
-	            masonry: {
-	              gutter: 30
-	            }
-	          });
-
-	          // ToDo: arranged: 'arranged' が効いていない様子 親コンテナの css class を変えたい
-	          // state は変更されている
-	          // element の class が変わらない
-	          this.setState({ isotope: isotope, arranged: 'arranged' });
-	          console.log('%%%%%%%%% arrangeComplete %%%%%%%%%%%', _this._top);
-	          // render 時に 0 位置に戻るので
-	          // click 時の pageOffsetY へ移動させる
-	          _Scroll.Scroll.y = _this._top;
-	        }
-	      }); // ArticleDom
-
-	      // ------------------------------------------------
-	      articles.forEach(function (article, i) {
-
-	        var dae = new _ArticleDae.ArticleDae(article);
-
-	        dae.index = prevLast + i;
-	        articlesList.push(dae);
-	      });
-
-	      // dom 生成
-	      ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
-	    }
-	  }, {
-	    key: 'moreElement',
+	  }], [{
+	    key: 'RISE',
 	    get: function get() {
-	      return this._moreElement;
+	      return 'rise';
 	    }
 	  }]);
-	  return ViewArchiveMasonry;
-	}(_View2.View);
+	  return Rise;
+	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
 /* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @license inazumatv.com
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/08
+	 *
+	 * Copyright (c) 2011-2015 inazumatv.com, inc.
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 */
+	'use strict';
+
+	/**
+	 * HTMLElement 要素にアクセスするヘルパー
+	 */
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Dom = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Dom = exports.Dom = function () {
+	  /**
+	   * element 要素処理ヘルパー
+	   * @param {Element} element 処理対象 Element
+	   */
+
+	  function Dom(element) {
+	    (0, _classCallCheck3.default)(this, Dom);
+
+	    this._element = element;
+	  }
+	  // ---------------------------------------------------
+	  //  METHOD
+	  // ---------------------------------------------------
+	  /**
+	   * getBoundingClientRect を計算します
+	   * @returns {ClientRect} getBoundingClientRect を返します
+	   */
+
+	  (0, _createClass3.default)(Dom, [{
+	    key: 'offset',
+	    value: function offset() {
+	      return Dom.offset(this._element);
+	    }
+	    // ---------------------------------------------------
+	    //  static METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * getBoundingClientRect を計算します
+	     * ```https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect```
+	     * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
+	     * @param {Element} element 処理対象 Element
+	     * @returns {ClientRect} getBoundingClientRect を返します
+	     */
+
+	  }], [{
+	    key: 'offset',
+	    value: function offset(element) {
+	      return element.getBoundingClientRect();
+	    }
+	  }]);
+	  return Dom;
+	}();
+
+/***/ },
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14948,1194 +14483,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 153 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/01 - 22:33
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	// event
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewArchiveMasonryInfinite = undefined;
-
-	var _getPrototypeOf = __webpack_require__(66);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(71);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(72);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _EventDispatcher = __webpack_require__(77);
-
-	var _Scroll = __webpack_require__(152);
-
-	var _Empty = __webpack_require__(137);
-
-	var _User = __webpack_require__(78);
-
-	var _View2 = __webpack_require__(132);
-
-	var _ViewError = __webpack_require__(144);
-
-	var _Result = __webpack_require__(88);
-
-	var _Safety = __webpack_require__(44);
-
-	var _ArticleDae = __webpack_require__(145);
-
-	var _Rise = __webpack_require__(154);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// React
-
-	// dae
-
-	// data
-
-	// view
-
-	// app
-	var React = self.React;
-
-	// ui
-
-	// util
-
-	var ReactDOM = self.ReactDOM;
-
-	// imagesLoaded, isotope
-	var imagesLoaded = self.imagesLoaded;
-	var Isotope = self.Isotope;
-
-	/**
-	 * archive 一覧を isotope で
-	 */
-
-	var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (_View) {
-	  (0, _inherits3.default)(ViewArchiveMasonryInfinite, _View);
-
-	  /**
-	   * <p>archive 一覧標示後 isotope で位置調整します<br>
-	   * + infinite scroll を実装します
-	   * </p>
-	   * @param {Element} element root element, Ajax result を配置する
-	   * @param {Element} moreElement more button root element, 'View More' を配置する
-	   * @param {Function} [ActionClass=null] Request 対象の Action Class
-	   * @param {Object} [option={}] optional event handler
-	   * @param {boolean} [useMasonry=true] isotope を行うかの
-	   */
-
-	  function ViewArchiveMasonryInfinite(element, moreElement) {
-	    var ActionClass = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-	    var useMasonry = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
-	    (0, _classCallCheck3.default)(this, ViewArchiveMasonryInfinite);
-
-	    option = _Safety.Safety.object(option);
-
-	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonryInfinite).call(this, element, option));
-
-	    if (typeof ActionClass === 'function') {
-
-	      _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));
-	    }
-	    _this2._moreElement = moreElement;
-	    /**
-	     * 取得記事(articles)をArticleDae instance 配列として保存する
-	     * @type {Array<ArticleDae>}
-	     * @private
-	     */
-	    _this2._articles = [];
-	    _this2._useMasonry = !!useMasonry;
-	    // ArticleDom instance を保持します
-	    // first render を区別するためにも使用します
-	    _this2._articleRendered = null;
-	    // more button instance を保持します
-	    _this2._moreRendered = null;
-	    // response.request object を保持する
-	    _this2._request = null;
-
-	    return _this2;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   *
-	   * @return {Element|*} more button root element を返します
-	   */
-
-	  (0, _createClass3.default)(ViewArchiveMasonryInfinite, [{
-	    key: 'start',
-
-	    // ---------------------------------------------------
-	    //  Method
-	    // ---------------------------------------------------
-	    /**
-	     * Ajax request を開始します
-	     */
-	    value: function start() {
-
-	      this.action.next();
-	    }
-	    /**
-	     * Ajax response success
-	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
-	     */
-
-	  }, {
-	    key: 'done',
-	    value: function done(result) {
-
-	      var articles = result.articles;
-	      console.log('ViewArchiveMasonry done ', result);
-	      if (typeof articles === 'undefined') {
-
-	        // articles undefined
-	        // JSON に問題がある
-	        var error = new Error('[ARCHIVE:UNDEFINED]サーバーレスポンスに問題が発生しました。');
-	        this.executeSafely(_View2.View.UNDEFINED_ERROR, error);
-	        // this.showError( error.message );
-	      } else if (articles.length === 0) {
-
-	          // articles empty
-	          // request, JSON 取得に問題は無かったが data が取得できなかった
-	          var error = new Error('[ARCHIVE:EMPTY]サーバーレスポンスに問題が発生しました。');
-	          this.executeSafely(_View2.View.EMPTY_ERROR, error);
-	          // this.showError( error.message );
-	        } else {
-
-	            this._request = result.request;
-	            this.render(articles);
-	          }
-	    }
-	    /**
-	     * Ajax response error
-	     * @param {Error} error Error instance
-	     */
-
-	  }, {
-	    key: 'fail',
-	    value: function fail(error) {
-
-	      this.executeSafely(_View2.View.RESPONSE_ERROR, error);
-	      // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
-	      // this.showError( error.message );
-	    }
-	    /**
-	     * ViewError でエラーコンテナを作成します
-	     * @param {string} message エラーメッセージ
-	     */
-
-	  }, {
-	    key: 'showError',
-	    value: function showError() {
-	      var message = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
-	      message = _Safety.Safety.string(message, '');
-
-	      // ToDo: Error 時の表示が決まったら変更する
-	      var error = new _ViewError.ViewError(this.element, this.option, message);
-	      error.render();
-	    }
-	    /**
-	     * dom を render します
-	     * @param {Array} articles JSON responce.articles
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render(articles) {
-
-	      // Masonry flag
-	      var useMasonry = this._useMasonry;
-
-	      // 既存データ用のglobal配列
-	      var articlesList = this._articles;
-
-	      // 前回までの配列length
-	      // sequence な index のために必要
-	      var prevLast = this._articles.length;
-
-	      // 記事挿入 root element
-	      var element = this.element;
-	      // 'View More' button root element
-	      var moreElement = this.moreElement;
-	      // offset, length を使用する Action
-	      var action = this.action;
-	      // 参照を保持
-	      var _this = this;
-
-	      // --------------------------------------------
-	      // More button
-	      // --------------------------------------------
-	      var MoreView = React.createClass({
-	        displayName: 'MoreView',
-
-	        propTypes: {
-	          show: React.PropTypes.bool.isRequired,
-	          loading: React.PropTypes.string
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            loading: ''
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          // Rise instance を保持する
-	          this.rise = null;
-
-	          return {
-	            disable: false,
-	            show: this.props.show,
-	            loading: this.props.loading
-	          };
-	        },
-	        render: function render() {
-
-	          // hasNext: true, button を表示する？
-	          if (this.state.show) {
-
-	            return React.createElement(
-	              'div',
-	              { id: 'more', className: 'board-btn-viewmore' + this.state.loading },
-	              React.createElement(
-	                'a',
-	                { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
-	                React.createElement(
-	                  'span',
-	                  null,
-	                  'VIEW MORE'
-	                )
-	              ),
-	              React.createElement(
-	                'span',
-	                { className: 'board-btn-more-cover' },
-	                ' '
-	              )
-	            );
-	          } else {
-
-	            // button 表示なし
-	            return React.createElement('div', { className: 'no-more' });
-	          }
-	        },
-	        componentDidMount: function componentDidMount() {
-
-	          if (this.state.show && this.rise === null) {
-	            // mount 後
-	            // button が表示されているなら rise 監視を始める
-	            this.rise = new _Rise.Rise(element);
-	            this.rise.on(_Rise.Rise.RISE, this.onRise);
-	            this.rise.start();
-	          }
-	        },
-	        componentWillUnmount: function componentWillUnmount() {
-	          // unmount 時に rise 破棄を行う
-	          this.destroy();
-	        },
-	        // -----------------------------------------
-	        // button 関連 custom method
-	        // rise 関連 event を破棄する
-	        destroy: function destroy() {
-	          // rise 監視を破棄する
-	          if (this.rise !== null) {
-	            this.rise.stop();
-	            this.rise.off(_Rise.Rise.RISE, this.onRise);
-	            this.rise = null;
-	          }
-	        },
-	        // 緊急用, button click を残す
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          // disable
-	          // this.setState( { loading: ' loading' } );
-	          // action.next();
-	          this.onRise();
-	        },
-	        // button 表示・非表示
-	        updateShow: function updateShow(show) {
-
-	          if (!show) {
-	            // button を非表示にするので rise 監視を止める
-	            this.destroy();
-	          } else {
-	            // button 表示, loading 表示を止める
-	            this.updateLoading(false);
-	          }
-
-	          this.setState({ show: show });
-	        },
-	        // loading 表示 on / off
-	        // on: true, off: false
-	        updateLoading: function updateLoading() {
-	          var loading = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-
-	          var loadingClass = '';
-	          if (loading && this.rise !== null) {
-
-	            // loading 中は監視を止める
-	            loadingClass = ' loading';
-	            this.rise.stop();
-	            action.next();
-	          } else {
-
-	            // loading が終わると監視開始
-	            this.rise.start();
-	          }
-
-	          // loading 表示のための css class を追加・削除
-	          this.setState({ loading: loadingClass });
-	        },
-	        // Rise.RISE event handler
-	        // 次 offset JSON を取得する
-	        onRise: function onRise(event) {
-	          console.log('========================== onRise ', event);
-
-	          this.updateLoading(true);
-	        }
-	      });
-
-	      // more button 作成関数
-	      // ArchiveDom から呼び出す
-	      var moreButton = function moreButton(show) {
-
-	        show = !!show;
-	        // moreElement 存在チェックを行う
-	        // Element 型を保証する
-	        // _moreRendered が null の時のみ, instance があれば state を update する
-	        if (_Safety.Safety.isElement(moreElement) && _this._moreRendered === null) {
-	          // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
-
-	          // チェックをパスし実行する
-	          _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
-	        } else {
-
-	          _this._moreRendered.updateShow(show);
-	        }
-	      };
-
-	      // more button 表示状態を loading on / off 切替えます
-	      /*
-	      let loadingButton = ( loading:boolean ) => {
-	         if ( _this._moreRendered !== null ) {
-	          _this._moreRendered.updateLoading( !!loading );
-	        }
-	       };
-	      */
-	      // --------------------------------------------
-	      // COMMENTS Popular second
-	      // --------------------------------------------
-	      var CommentsSecond = React.createClass({
-	        displayName: 'CommentsSecond',
-
-	        propType: {
-	          seconds: React.PropTypes.array.isRequired,
-	          articleId: React.PropTypes.string.isRequired
-	        },
-	        render: function render() {
-
-	          var seconds = this.props.seconds;
-	          var articleId = this.props.articleId;
-	          // console.log( 'seconds ', seconds );
-	          return React.createElement(
-	            'ul',
-	            { className: 'comments-second' },
-	            seconds.map(function (commentDae, i) {
-
-	              var userDae = commentDae.user;
-	              var picture = userDae.profilePicture ? userDae.profilePicture : _Empty.Empty.USER_PICTURE;
-
-	              // CommentsSecond unique key は  記事Id + index + user Id を使用する
-	              // 同一ユーザーが複数投稿することがあるため
-	              // render 内で unique なことを保証する必要がある
-	              return React.createElement(
-	                'li',
-	                { key: 'user-' + articleId + '-' + i + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
-	                React.createElement(
-	                  'a',
-	                  { className: 'commented-user-thumb', href: userDae.url },
-	                  React.createElement('img', { src: picture, alt: userDae.userName })
-	                )
-	              );
-	            })
-	          );
-	        }
-	      });
-
-	      // --------------------------------------------
-	      // COMMENTS Popular
-	      // --------------------------------------------
-
-	      // good link
-	      var GoodLink = React.createClass({
-	        displayName: 'GoodLink',
-
-	        propType: {
-	          sign: React.PropTypes.bool.isRequired,
-	          comment: React.PropTypes.object.isRequired,
-	          active: React.PropTypes.bool,
-	          callback: React.PropTypes.func
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        render: function render() {
-
-	          var sign = this.props.sign;
-	          var comment = this.props.comment;
-	          var active = this.props.active;
-	          // active（click可能）にするかを表す
-	          var activeClass = active ? ' active' : '';
-
-	          if (sign) {
-
-	            // login user
-	            // click ずみの時は不可
-	            return React.createElement(
-	              'a',
-	              { className: 'comment-reaction-btn comment-reaction-like' + activeClass, href: '#', onClick: this.handleClick },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.good
-	              )
-	            );
-	          } else {
-
-	            // not login user
-	            // click 不可
-	            return React.createElement(
-	              'span',
-	              { className: 'comment-reaction-btn comment-reaction-like' },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.good
-	              )
-	            );
-	          }
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        }
-	      });
-
-	      // bad link
-	      var BadLink = React.createClass({
-	        displayName: 'BadLink',
-
-	        propType: {
-	          sign: React.PropTypes.bool.isRequired,
-	          comment: React.PropTypes.object.isRequired,
-	          active: React.PropTypes.bool,
-	          callback: React.PropTypes.func
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        render: function render() {
-
-	          var sign = this.props.sign;
-	          var comment = this.props.comment;
-	          var active = this.props.active;
-	          var activeClass = active ? ' active' : '';
-
-	          if (sign) {
-	            // login user
-	            return React.createElement(
-	              'a',
-	              { className: 'comment-reaction-btn comment-reaction-dislike' + activeClass, href: '#', onClick: this.handleClick },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.bad
-	              )
-	            );
-	          } else {
-	            // not login user
-	            return React.createElement(
-	              'span',
-	              { className: 'comment-reaction-btn comment-reaction-dislike' },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.bad
-	              )
-	            );
-	          }
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        }
-	      });
-
-	      // --------------------------------------------
-	      // first + second comment container
-	      var PopularDom = React.createClass({
-	        displayName: 'PopularDom',
-
-	        propType: {
-	          commentsPopular: React.PropTypes.object.isRequired,
-	          total: React.PropTypes.number.isRequired,
-	          articleId: React.PropTypes.string.isRequired
-	        },
-	        render: function render() {
-
-	          var commentsPopular = this.props.commentsPopular;
-	          var total = this.props.total;
-	          var articleId = this.props.articleId;
-
-	          var emptyFirst = React.createElement('div', { className: 'comments-popular comments-empty' });
-	          var second = React.createElement('div', { className: 'comments-second comments-empty' });
-
-	          var hasFirst = commentsPopular.hasFirst;
-	          var hasSecond = commentsPopular.hasSecond;
-	          var firstDae = commentsPopular.first;
-	          var secondsDae = commentsPopular.seconds;
-	          // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
-	          if (hasSecond) {
-	            // 2件目以降も存在する
-	            // 2件目以降のDomを生成する
-	            second = React.createElement(CommentsSecond, { seconds: secondsDae, articleId: articleId });
-	            total -= secondsDae.length;
-	          }
-
-	          // 1 件 comment があるかをチェクする
-	          if (hasFirst) {
-
-	            // 少なくとも1件は存在する
-	            // 総件数から 1 マイナス
-	            total -= 1;
-	            console.log('少なくとも1件は存在する ', articleId);
-
-	            // 1件目コメントデータを取り出し
-	            var first = firstDae;
-	            // 1件目コメント・ユーザー
-	            var firstUser = first.user;
-	            // ユーザーサムネイル
-	            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
-	            // login 済かを調べる
-	            var sign = _User.User.sign;
-
-	            return React.createElement(
-	              'div',
-	              { className: 'comments-popular' },
-	              React.createElement(
-	                'div',
-	                { className: 'feature-user comment-item' },
-	                React.createElement(
-	                  'figure',
-	                  { className: 'comment-user' },
-	                  React.createElement(
-	                    'a',
-	                    { className: 'comment-user-link', href: firstUser.url },
-	                    React.createElement(
-	                      'span',
-	                      { className: 'comment-user-thumb' },
-	                      React.createElement('img', { src: picture, alt: firstUser.userName })
-	                    ),
-	                    React.createElement(
-	                      'div',
-	                      { className: 'comment-user-data' },
-	                      React.createElement(
-	                        'p',
-	                        { className: 'comment-user-name' },
-	                        firstUser.userName
-	                      ),
-	                      React.createElement(
-	                        'p',
-	                        { className: 'comment-user-job' },
-	                        firstUser.bio
-	                      )
-	                    )
-	                  )
-	                ),
-	                React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
-	                React.createElement(
-	                  'div',
-	                  { className: 'comment-reaction' },
-	                  React.createElement(GoodLink, {
-	                    sign: sign,
-	                    comment: first,
-	                    callback: this.goodClick
-	                  }),
-	                  React.createElement(BadLink, {
-	                    sign: sign,
-	                    comment: first,
-	                    callback: this.badClick
-	                  })
-	                )
-	              ),
-	              React.createElement(
-	                'div',
-	                { className: 'commented-user' },
-	                second,
-	                React.createElement(
-	                  'span',
-	                  { className: 'commented-user-andmore' },
-	                  total > 0 ? '+' + total : ''
-	                )
-	              )
-	            );
-	          }
-
-	          return emptyFirst;
-	        }, // render
-	        componentDidMount: function componentDidMount() {
-	          // mount
-	        },
-	        // -----------------------------------------
-	        // good / bad 関連 custom method
-	        goodClick: function goodClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('goodClick', commentId, userId);
-	        },
-	        badClick: function badClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('badClick', commentId, userId);
-	        }
-	      });
-
-	      // ------------------------------------------------
-	      // 基点 React class
-	      // ------------------------------------------------
-
-	      // 個別の 記事Dom
-	      // React Class, Archive Dom
-	      var ArticleDom = React.createClass({
-	        displayName: 'ArticleDom',
-
-	        propTypes: {
-	          list: React.PropTypes.array.isRequired
-	        },
-	        getInitialState: function getInitialState() {
-	          this.isotope = null;
-	          this.img = null;
-	          this.elements = [];
-
-	          return {
-	            arranged: 'prepare',
-	            list: this.props.list
-	          };
-	        },
-	        render: function render() {
-
-	          console.log('****************************************** render');
-
-	          //let list = this.props.list;
-
-	          // dom出力する
-	          return React.createElement(
-	            'div',
-	            { ref: 'boardRout', className: 'board-large-column' },
-
-	            // loop start
-	            this.state.list.map(function (dae, i) {
-
-	              var commentsPopular = dae.commentsPopular;
-	              var commentsTotal = dae.commentsCount;
-	              var thumbnail = undefined;
-	              var caption = undefined;
-	              var figureTag = undefined;
-
-	              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
-
-	              thumbnail = dae.media.images.medium;
-	              caption = dae.media.images.caption;
-
-	              if (!thumbnail) {
-	                thumbnail = _Empty.Empty.IMG_MIDDLE;
-	              }
-	              caption = _Safety.Safety.string(caption, '');
-
-	              // media type で thumbnail 切替
-	              if (dae.mediaType === 'image') {
-
-	                // type: image
-	                figureTag = React.createElement(
-	                  'figure',
-	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                  React.createElement('img', { src: thumbnail, alt: caption })
-	                );
-	              } else {
-
-	                // type: video
-	                figureTag = React.createElement(
-	                  'figure',
-	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY }),
-	                  React.createElement('img', { src: thumbnail, alt: caption })
-	                );
-	              }
-
-	              // unique key(React)にarticle id(number)記事Idを使用します
-	              return React.createElement(
-	                'div',
-	                { key: 'archive-' + dae.id, className: 'board-item board-item-' + i },
-	                React.createElement(
-	                  'a',
-	                  { className: 'post', href: dae.url },
-	                  figureTag,
-	                  React.createElement(
-	                    'div',
-	                    { className: 'post-data' },
-	                    React.createElement(
-	                      'p',
-	                      { className: 'post-category post-category-' + dae.category.slug },
-	                      dae.category.label
-	                    ),
-	                    React.createElement(
-	                      'h3',
-	                      { className: 'post-heading' },
-	                      dae.title
-	                    ),
-	                    React.createElement(
-	                      'p',
-	                      { className: 'post-date' },
-	                      dae.formatDate
-	                    ),
-	                    React.createElement(
-	                      'div',
-	                      { className: 'post-excerpt-text' },
-	                      dae.description
-	                    )
-	                  )
-	                ),
-	                React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
-	              );
-	              // loop end
-	            })
-	          );
-	        },
-	        // state 変更し dom が更新された後に呼び出される delegate
-	        componentDidUpdate: function componentDidUpdate() {
-	          console.log('+++++++++ componentDidUpdate');
-
-	          // isotope 対象 children
-	          var childNodes = this.refs.boardRout.childNodes;
-	          var elements = [];
-	          // 追加された Element を取得するための start / end point
-	          // start は request offset
-	          var i = _this._request.offset;
-	          // end は request offset へ request length を加算したものと
-	          // children length の小さい方
-	          var limit = Math.min(i + _this._request.length, childNodes.length);
-	          console.log('start ', i);
-	          console.log('end ', limit);
-
-	          // start / end から 対象 children を選別
-	          for (; i < limit; i++) {
-	            elements.push(childNodes[i]);
-	          }
-
-	          this.elements = elements;
-
-	          var img = imagesLoaded(elements);
-	          // 画像読み込む完了 event へ bind します
-	          img.on('always', this.appendImages);
-	          this.img = img;
-	        },
-	        // dom が表示された後に1度だけ呼び出される delegate
-	        componentDidMount: function componentDidMount() {
-	          // after mount
-	          _this.executeSafely(_View2.View.DID_MOUNT);
-	          // hasNext を元に More View button の表示非表示を決める
-	          moreButton(action.hasNext());
-
-	          // masonry flag が true の時に shouldMasonry を実行します
-	          if (useMasonry) {
-
-	            this.shouldMasonry();
-	          }
-	        },
-	        // dom が削除される前に呼び出される delegate
-	        componentWillUnmount: function componentWillUnmount() {
-	          console.log('************ componentWillUnmount ************');
-	          // unmount 時に isotope を破棄します
-	          this.isotope.destroy();
-	        },
-	        // -----------------------------------------------------
-	        // 以降 custom
-	        // isotope 前準備
-	        shouldMasonry: function shouldMasonry() {
-
-	          // isotope 前準備を実行します
-	          var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
-	          var childNodes = boardRout.childNodes;
-
-	          // imagesLoaded を使用し画像ロード完了後に isotope を実行します
-	          var img = imagesLoaded(childNodes);
-	          // img {imagesLoaded} always event handler unbind するためにインスタンスを保存します
-	          this.img = img;
-	          // 画像読み込む完了 event へ bind します
-	          img.on('always', this.onImages);
-	        },
-	        // 画像読み込む完了 event handler, isotope を実行
-	        onImages: function onImages() {
-
-	          // event から event handler を unbind します
-	          this.img.off('always', this.onImages);
-
-	          // isotope を行います
-	          this.isotope = new Isotope(this.refs.boardRout, {
-	            itemSelector: '.board-item',
-	            masonry: {
-	              gutter: 30
-	            }
-	          });
-	        },
-	        updateList: function updateList(list) {
-	          // state を変更し appendChild + isotope を行う
-	          this.setState({ list: list });
-	        },
-	        // didUpdate から呼び出される
-	        appendImages: function appendImages() {
-
-	          console.log('++++++++++++++++++++ appendImages');
-
-	          // event から event handler を unbind します
-	          this.img.off('always', this.appendImages);
-
-	          // 追加とレイアウト
-	          this.isotope.appended(this.elements);
-	          // reload
-	          // http://isotope.metafizzy.co/methods.html#reloaditems
-	          this.isotope.reloadItems();
-	          // isotope 再度レイアウト
-	          this.isotope.layout();
-
-	          // hasNext を元に More View button の表示非表示を決める
-	          moreButton(action.hasNext());
-	        }
-	      }); // ArticleDom
-
-	      // ------------------------------------------------
-	      // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
-	      articles.forEach(function (article, i) {
-
-	        var dae = new _ArticleDae.ArticleDae(article);
-
-	        dae.index = prevLast + i;
-	        articlesList.push(dae);
-	      });
-
-	      // this._articleRendered が null の時だけ ReactDOM.render する
-	      if (this._articleRendered === null) {
-
-	        // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-	        this._articleRendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
-	      } else {
-
-	        // instance が存在するので
-	        // state update でコンテナを追加する
-	        this._articleRendered.updateList(articlesList);
-	      }
-	    } // render
-
-	  }, {
-	    key: 'moreElement',
-	    get: function get() {
-	      return this._moreElement;
-	    }
-	  }]);
-	  return ViewArchiveMasonryInfinite;
-	}(_View2.View); // class
-
-/***/ },
 /* 154 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @license inazumatv.com
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/08
-	 *
-	 * Copyright (c) 2011-2015 inazumatv.com, inc.
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Rise = undefined;
-
-	var _getPrototypeOf = __webpack_require__(66);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(71);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(72);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _EventDispatcher2 = __webpack_require__(77);
-
-	var _Dom = __webpack_require__(155);
-
-	var _Scroll = __webpack_require__(152);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * 対象 element bottom が window.bottom を超えたら Event を発生させます
-	 */
-
-	var Rise = exports.Rise = function (_EventDispatcher) {
-	  (0, _inherits3.default)(Rise, _EventDispatcher);
-
-	  /**
-	   * 対象 element bottom が window.bottom window.top に contain しているかを監視します
-	   * @param {Element} element 対象 element
-	   * @param {Number} [offset=0] 減産数値
-	   */
-
-	  function Rise(element) {
-	    var offset = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
-	    (0, _classCallCheck3.default)(this, Rise);
-
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Rise).call(this));
-
-	    _this._element = element;
-	    _this._offset = offset;
-	    _this._dom = new _Dom.Dom(element);
-	    _this._boundScroll = _this.onScroll.bind(_this);
-	    _this._scroll = _Scroll.Scroll.factory();
-	    return _this;
-	  }
-
-	  /**
-	   * RISE event type
-	   * @returns {string} RISE event type を返します
-	   */
-
-	  (0, _createClass3.default)(Rise, [{
-	    key: 'start',
-
-	    /**
-	     * 監視を始めます
-	     */
-	    value: function start() {
-	      console.log('************************ Rise.start');
-
-	      this._scroll.on(_Scroll.Scroll.SCROLL, this._boundScroll);
-	      this._scroll.start();
-	    }
-	    /**
-	     * 監視を止めます
-	     */
-
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      console.log('------------------------ Rise.stop');
-
-	      this._scroll.off(_Scroll.Scroll.SCROLL, this._boundScroll);
-	      this._scroll.stop();
-	    }
-	    /**
-	     * Scroll.SCROLL event handler
-	     * @param {Object} event Scroll.SCROLL event object
-	     */
-
-	  }, {
-	    key: 'onScroll',
-	    value: function onScroll(event) {
-	      // window property
-	      // scrollTop
-	      var y = event.y;
-	      var windowHeight = window.innerHeight;
-	      var windowBottom = y + windowHeight - this._offset;
-	      // element property
-	      var offsetRect = this._dom.offset();
-	      var elementBottom = y + offsetRect.top + offsetRect.height;
-
-	      // element.bottom が contain しているかを調べます
-	      if (windowBottom > elementBottom) {
-	        this.dispatch({ type: Rise.RISE, window: windowBottom, element: elementBottom });
-	      }
-	    }
-	  }], [{
-	    key: 'RISE',
-	    get: function get() {
-	      return 'rise';
-	    }
-	  }]);
-	  return Rise;
-	}(_EventDispatcher2.EventDispatcher);
-
-/***/ },
-/* 155 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @license inazumatv.com
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/08
-	 *
-	 * Copyright (c) 2011-2015 inazumatv.com, inc.
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 */
-	'use strict';
-
-	/**
-	 * HTMLElement 要素にアクセスするヘルパー
-	 */
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Dom = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Dom = exports.Dom = function () {
-	  /**
-	   * element 要素処理ヘルパー
-	   * @param {Element} element 処理対象 Element
-	   */
-
-	  function Dom(element) {
-	    (0, _classCallCheck3.default)(this, Dom);
-
-	    this._element = element;
-	  }
-	  // ---------------------------------------------------
-	  //  METHOD
-	  // ---------------------------------------------------
-	  /**
-	   * getBoundingClientRect を計算します
-	   * @returns {ClientRect} getBoundingClientRect を返します
-	   */
-
-	  (0, _createClass3.default)(Dom, [{
-	    key: 'offset',
-	    value: function offset() {
-	      return Dom.offset(this._element);
-	    }
-	    // ---------------------------------------------------
-	    //  static METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * getBoundingClientRect を計算します
-	     * ```https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect```
-	     * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
-	     * @param {Element} element 処理対象 Element
-	     * @returns {ClientRect} getBoundingClientRect を返します
-	     */
-
-	  }], [{
-	    key: 'offset',
-	    value: function offset(element) {
-	      return element.getBoundingClientRect();
-	    }
-	  }]);
-	  return Dom;
-	}();
-
-/***/ },
-/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16174,7 +14522,7 @@
 
 	var _Category = __webpack_require__(116);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(153);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(143);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16210,7 +14558,7 @@
 	}(_ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite);
 
 /***/ },
-/* 157 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16226,7 +14574,7 @@
 	 */
 	'use strict';
 
-	// app
+	// view
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -16253,39 +14601,31 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
-
-	var _SingleInfo = __webpack_require__(158);
-
 	var _View2 = __webpack_require__(132);
 
 	var _ViewError = __webpack_require__(144);
 
+	var _ViewRelated = __webpack_require__(156);
+
+	var _ViewSingleHeader = __webpack_require__(158);
+
+	var _ViewSingleFooter = __webpack_require__(163);
+
 	var _Single = __webpack_require__(122);
 
-	var _Result = __webpack_require__(88);
-
-	var _SingleDae = __webpack_require__(159);
+	var _Result = __webpack_require__(87);
 
 	var _Safety = __webpack_require__(44);
 
+	var _SingleDae = __webpack_require__(161);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// React
-
-	// dae
-
-	// action
-
-	// view
-	var React = self.React;
-	// data
-
-	var ReactDOM = self.ReactDOM;
 
 	/**
 	 * 記事詳細
 	 */
+
+	// action
 
 	var ViewSingle = function (_View) {
 	  (0, _inherits3.default)(ViewSingle, _View);
@@ -16296,11 +14636,7 @@
 	   * @example
 	   * let elements = {}
 	   *  related: document.getElementById('related'),
-	   *  comment: {
-	   *    'self': document.getElementById('self'),
-	   *    'official': document.getElementById('official'),
-	   *    'user': document.getElementById('user')
-	   *  }
+	   *  footer: document.getElementById('footer')
 	   * }
 	   *
 	   * @param {Number} id article id, 記事Id
@@ -16315,11 +14651,20 @@
 
 	    option = _Safety.Safety.object(option);
 
-	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
 
-	    _this2._action = new _Single.Single(id, _this2.done.bind(_this2), _this2.fail.bind(_this2));
-	    _this2._elements = elements;
-	    return _this2;
+	    _this._action = new _Single.Single(id, _this.done.bind(_this), _this.fail.bind(_this));
+	    _this._elements = elements;
+	    // mount event handler
+	    _this._boundMount = _this.headerMount.bind(_this);
+	    // related instance
+	    _this._viewRelated = null;
+	    // header instance
+	    _this._header = null;
+	    // footer instance
+	    _this._footer = null;
+
+	    return _this;
 	  }
 	  /**
 	   * Ajax request を開始します
@@ -16392,143 +14737,54 @@
 	    key: 'render',
 	    value: function render(response) {
 
-	      //console.log( 'single resoonse ', response );
 	      var single = new _SingleDae.SingleDae(response);
-	      // global SingleInfoへ保存
-	      // SingleInfo.dae = single;
 
 	      // beforeRender call
 	      this.executeSafely(_View2.View.BEFORE_RENDER, single);
 
-	      var element = this.element;
-	      var _this = this;
+	      var header = undefined,
+	          footer = undefined;
 
-	      // --------------------------------------------
-	      // image dom
-	      var ImageDom = React.createClass({
-	        displayName: 'ImageDom',
+	      // header
+	      if (this._header === null) {
 
-	        propTypes: {
-	          images: React.PropTypes.array.isRequired
-	        },
-	        render: function render() {
+	        header = new _ViewSingleHeader.ViewSingleHeader(this.element, single);
+	        header.on(_View2.View.DID_MOUNT, this._boundMount);
+	        this._header = header;
+	        header.start();
+	      } else {
 
-	          var images = this.props.images;
+	        this._header.render(single);
+	      }
 
-	          return React.createElement(
-	            'div',
-	            { className: 'media-type-image' },
-	            images.map(function (image, i) {
+	      // footer
+	      if (this._footer === null) {
 
-	              if (typeof image.large !== 'undefined' && image.large !== '') {
-	                return React.createElement(
-	                  'div',
-	                  { key: 'media-type-image-' + i, className: 'media-type-image-' + i },
-	                  React.createElement('img', { src: image.large, alt: image.caption })
-	                );
-	              }
-	            })
-	          );
-	        }
-	      });
+	        footer = new _ViewSingleFooter.ViewSingleFooter(this._elements.footer, single);
+	        this._footer = footer;
+	        footer.start();
+	      } else {
 
-	      // --------------------------------------------
-	      // React Class
-	      var ArticleDom = React.createClass({
-	        displayName: 'ArticleDom',
-
-	        propTypes: {
-	          article: React.PropTypes.object.isRequired
-	        },
-	        // isRequired なので getDefaultProps がいらない
-	        // getDefaultProps: function() {
-	        //  return {
-	        //    list: []
-	        //  };
-	        // },
-	        render: function render() {
-
-	          var article = this.props.article;
-
-	          var bodyTag = function bodyTag() {
-	            return {
-	              __html: article.body
-	            };
-	          };
-
-	          var thumbnail = '';
-	          if (article.mediaType === 'image') {
-
-	            // media type image
-	            thumbnail = React.createElement(ImageDom, { images: article.media.list });
-	          } else if (article.mediaType === 'video') {
-
-	            if (article.media.video.thumbnail !== '') {
-
-	              thumbnail = React.createElement(
-	                'div',
-	                { className: 'media-type-video' },
-	                React.createElement('img', { src: article.media.video.thumbnail, alt: article.media.video.caption }),
-	                React.createElement('img', { src: _Empty.Empty.VIDEO_PLAY, alt: '' })
-	              );
-	            }
-	          }
-
-	          return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	              'h1',
-	              null,
-	              article.title
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              article.user.userName
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              article.formatDate
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              thumbnail
-	            ),
-	            React.createElement('div', { className: 'XXX-OUCH', dangerouslySetInnerHTML: bodyTag() }),
-	            React.createElement(
-	              'div',
-	              null,
-	              article.keywords.concat(' ')
-	            )
-	          );
-	        },
-	        componentWillMount: function componentWillMount() {
-
-	          // after mount
-	          _this.executeSafely(_View2.View.WILL_MOUNT);
-	        },
-	        componentDidMount: function componentDidMount() {
-
-	          // after mount
-	          _this.executeSafely(_View2.View.DID_MOUNT);
-	        }
-	      });
-
-	      // dom 生成
-	      ReactDOM.render(React.createElement(ArticleDom, { article: single }), element);
+	        this._footer.render(single);
+	      }
 
 	      // 関連記事 もしもあるなら
 	      if (single.hasRelated) {
+
 	        this.related(single.related);
 	      }
-
-	      // comment 取得
-	      // 自動化の場合はここに記述
-	      // ここでコメントは取得しない
 	    } // render
+	    /**
+	     * header View.DID_MOUNT event handler
+	     */
+
+	  }, {
+	    key: 'headerMount',
+	    value: function headerMount() {
+
+	      this._header.off(_View2.View.DID_MOUNT, this._boundMount);
+	      this.executeSafely(_View2.View.DID_MOUNT);
+	    }
 	    /**
 	     * 関連記事（記事詳細の）
 	     * @param {Array} related 配列内データ型はRelatedDom
@@ -16541,103 +14797,38 @@
 
 	      _related = _Safety.Safety.array(_related);
 
-	      var element = this._elements.related;
+	      // 効率化のために
+	      // ViewRelated instance が null の時は instance を作成し start を実行する
+	      // instance が存在するときは render する
+	      if (this._viewRelated === null) {
 
-	      // tag block
-	      var RelatedDom = React.createClass({
-	        displayName: 'RelatedDom',
+	        var viewRelated = new _ViewRelated.ViewRelated(this._elements.related, _related);
+	        viewRelated.start();
+	        this._viewRelated = viewRelated;
+	      } else {
 
-	        propTypes: {
-	          index: React.PropTypes.number.isRequired,
-	          id: React.PropTypes.string.isRequired,
-	          slug: React.PropTypes.string.isRequired,
-	          category: React.PropTypes.string.isRequired,
-	          url: React.PropTypes.string.isRequired,
-	          date: React.PropTypes.string.isRequired,
-	          title: React.PropTypes.string.isRequired,
-	          thumbnail: React.PropTypes.string.isRequired
-	        },
-	        render: function render() {
-	          var p = this.props;
-	          var thumbnail = p.thumbnail ? p.thumbnail : _Empty.Empty.IMG_SMALL;
-
-	          return React.createElement(
-	            'a',
-	            { href: p.url, id: 'headline-' + p.id, className: 'headline headline-' + p.index },
-	            React.createElement('img', { src: thumbnail, alt: p.title }),
-	            React.createElement(
-	              'p',
-	              { className: 'cat cat-' + p.slug },
-	              p.category
-	            ),
-	            React.createElement(
-	              'h3',
-	              { className: 'headline-title' },
-	              p.title
-	            ),
-	            React.createElement(
-	              'p',
-	              { className: 'date' },
-	              p.date
-	            )
-	          );
-	        }
-	      });
-
-	      // React Class
-	      var ArticleDom = React.createClass({
-	        displayName: 'ArticleDom',
-
-	        propTypes: {
-	          list: React.PropTypes.array.isRequired
-	        },
-	        render: function render() {
-
-	          var list = this.props.list;
-
-	          return React.createElement(
-	            'div',
-	            null,
-	            list.map(function (dae, i) {
-
-	              var thumbnail = dae.media.images.thumbnail;
-	              thumbnail = thumbnail !== '' ? thumbnail : _Empty.Empty.IMG_SMALL;
-
-	              // HeadlineDom instance を使い render
-	              return React.createElement(RelatedDom, {
-	                key: 'headline-' + dae.id,
-	                index: i,
-	                id: String(dae.id),
-	                slug: dae.category.slug,
-	                category: dae.category.label,
-	                url: dae.url,
-	                date: dae.formatDate,
-	                title: dae.title,
-	                thumbnail: thumbnail
-	              });
-	            })
-	          );
-	        }
-	      });
-
-	      // 関連記事 dom 生成
-	      ReactDOM.render(React.createElement(ArticleDom, { list: _related }), element);
+	        this._viewRelated.render(_related);
+	      }
 	    } // related
 
 	  }]);
 	  return ViewSingle;
 	}(_View2.View);
 
+	// dae
+
+	// data
+
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 158 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/28 - 19:01
+	 * @date 2016/02/10 - 17:52
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -16647,99 +14838,12 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.SingleInfo = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _symbol2 = __webpack_require__(52);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	var _SingleDae = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _symbol = (0, _symbol3.default)();
-	var _single = undefined;
-
-	/**
-	 * <h3>記事詳細情報</h3>
-	 * 全てstaticです<br>
-	 * **Singleton**
-	 * <p>
-	 * SingleDae を保持します。
-	 * </p>
-	 */
-
-	var SingleInfo = exports.SingleInfo = function () {
-	  /**
-	   * static class です, instance を作成しません
-	   * @param {Symbol} target Singleton を実現するための private symbol
-	   */
-
-	  function SingleInfo(target) {
-	    (0, _classCallCheck3.default)(this, SingleInfo);
-
-	    if (_symbol !== target) {
-
-	      throw new Error('Article is static Class. not use new Article().');
-	    }
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * 現在表示の記事詳細情報
-	   * @return {SingleDae} 現在表示の記事詳細情報 SingleDae instance を返します
-	   */
-
-	  (0, _createClass3.default)(SingleInfo, null, [{
-	    key: 'dae',
-	    get: function get() {
-	      return _single;
-	    }
-
-	    /**
-	     * @param {SingleDae} article 現在表示の記事詳細情報 SingleDae instance
-	     */
-	    ,
-	    set: function set(article) {
-	      _single = article;
-	    }
-	  }]);
-	  return SingleInfo;
-	}();
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/26 - 21:10
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
+	// app
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.SingleDae = undefined;
+	exports.ViewRelated = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -16761,196 +14865,168 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	var _Empty = __webpack_require__(137);
+
+	var _View2 = __webpack_require__(132);
+
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(160);
-
-	var _RelatedDae2 = __webpack_require__(161);
+	var _RelatedDae = __webpack_require__(157);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// React
+	var React = self.React;
+
+	// view
+
+	var ReactDOM = self.ReactDOM;
+
 	/**
-	 * 記事詳細の JSON.response
+	 * 関連記事表示
 	 */
 
-	var SingleDae = exports.SingleDae = function (_RelatedDae) {
-	  (0, _inherits3.default)(SingleDae, _RelatedDae);
+	var ViewRelated = exports.ViewRelated = function (_View) {
+	  (0, _inherits3.default)(ViewRelated, _View);
 
 	  /**
-	   * 記事詳細のresponceデータを後処理しやすいように加工します
-	   *
-	   * @param {Object} response JSON.response
+	   * 関連記事, ViewSingle から呼び出されます
+	   * @param {Element} element root element
+	   * @param {Array<RelatedDae>} [related=[]] response.related_articles 配列
 	   */
 
-	  function SingleDae() {
-	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, SingleDae);
+	  function ViewRelated(element) {
+	    var related = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+	    (0, _classCallCheck3.default)(this, ViewRelated);
 
-	    response = _Safety.Safety.object(response);
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewRelated).call(this, element));
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(SingleDae).call(this, response));
-
-	    _this._keywords = new _KeywordsDae.KeywordsDae(response.keywords);
-
-	    // related
-	    var related = [];
-	    if (_Safety.Safety.check(response, 'related_articles', 'array')) {
-
-	      response.related_articles.forEach(function (article) {
-
-	        related.push(new _RelatedDae2.RelatedDae(article));
-	      });
-
-	      console.log('related_articles ', related);
-	    }
-
-	    _this._related = related;
-
+	    _this._related = _Safety.Safety.array(related);
+	    _this._rendered = null;
 	    return _this;
 	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
 	  /**
-	   *
-	   * @return {string} 記事本文
+	   * render 処理を開始します
 	   */
 
-	  (0, _createClass3.default)(SingleDae, [{
-	    key: 'body',
-	    get: function get() {
-	      return this.response.body;
+	  (0, _createClass3.default)(ViewRelated, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render(this._related);
 	    }
 	    /**
-	     *
-	     * @return {boolean} 関連記事が存在するかの真偽値
+	     * Dom 生成します
+	     * @param {Array<RelatedDae>} [related=[]] response.related_articles 配列
 	     */
 
 	  }, {
-	    key: 'hasRelated',
-	    get: function get() {
-	      return this._related.length > 0;
-	    }
-	    /**
-	     *
-	     * @return {Array|*} 関連記事配列を返します
-	     */
+	    key: 'render',
+	    value: function render(related) {
 
-	  }, {
-	    key: 'related',
-	    get: function get() {
-	      return this._related;
-	    }
-	    /**
-	     *
-	     * @return {KeywordsDae|*} キーワードを返します
-	     */
+	      // -------------------------------------------------
+	      // 配列が空
+	      // 関連記事がないので処理中止
+	      if (related.length === 0) {
+	        return;
+	      }
 
-	  }, {
-	    key: 'keywords',
-	    get: function get() {
-	      return this._keywords;
+	      // -------------------------------------------------
+	      // 関連記事があった
+
+	      var element = this.element;
+
+	      // React Class
+	      var ArticleDom = React.createClass({
+	        displayName: 'ArticleDom',
+
+	        propTypes: {
+	          list: React.PropTypes.array.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            list: this.props.list
+	          };
+	        },
+	        render: function render() {
+
+	          var list = this.state.list;
+
+	          return React.createElement(
+	            'div',
+	            { className: 'related-post' },
+	            React.createElement(
+	              'div',
+	              { className: 'comment-heading' },
+	              React.createElement(
+	                'h2',
+	                null,
+	                '関連ニュース'
+	              )
+	            ),
+	            React.createElement(
+	              'ul',
+	              { className: 'board-small column2' },
+	              list.map(function (dae, i) {
+
+	                var thumbnail = dae.media.images.thumbnail;
+	                thumbnail = !!thumbnail ? thumbnail : _Empty.Empty.IMG_SMALL;
+
+	                return React.createElement(
+	                  'li',
+	                  { className: 'board-item column2', key: 'related-' + dae.id },
+	                  React.createElement(
+	                    'a',
+	                    { href: dae.url, id: 'related-' + dae.id, className: 'post post-' + i },
+	                    React.createElement(
+	                      'figure',
+	                      { className: 'post-thumb' },
+	                      React.createElement('img', { src: thumbnail, alt: dae.title })
+	                    ),
+	                    React.createElement(
+	                      'div',
+	                      { className: 'post-data' },
+	                      React.createElement(
+	                        'p',
+	                        { className: 'post-category post-category-' + dae.category.slug },
+	                        dae.category.label
+	                      ),
+	                      React.createElement(
+	                        'h3',
+	                        { className: 'post-heading' },
+	                        dae.title
+	                      ),
+	                      React.createElement(
+	                        'p',
+	                        { className: 'post-date' },
+	                        dae.formatDate
+	                      )
+	                    )
+	                  )
+	                );
+	              })
+	            )
+	          );
+	        },
+	        updateList: function updateList(list) {
+	          this.setState({ list: list });
+	        }
+	      });
+
+	      // 関連記事 dom 生成
+	      if (this._rendered === null) {
+
+	        this._rendered = ReactDOM.render(React.createElement(ArticleDom, { list: related }), element);
+	      } else {
+
+	        this._rendered.updateList(list);
+	      }
 	    }
 	  }]);
-	  return SingleDae;
-	}(_RelatedDae2.RelatedDae);
+	  return ViewRelated;
+	}(_View2.View);
 
 /***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/26 - 21:43
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.KeywordsDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(44);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * response.keywords
-	 */
-
-	var KeywordsDae = exports.KeywordsDae = function () {
-	  /**
-	   * 記事キーワード
-	   * @param {Array} [keywords=[]] keywords 配列
-	   */
-
-	  function KeywordsDae() {
-	    var keywords = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-	    (0, _classCallCheck3.default)(this, KeywordsDae);
-
-	    this._keywords = keywords;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   *
-	   * @return {Array.<string>|*} response.keywords を返します
-	   */
-
-	  (0, _createClass3.default)(KeywordsDae, [{
-	    key: 'concat',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * 連結子でキーワードをつなぎます
-	     * @param {string} [concatenation=', '] 連結子
-	     * @return {string} 連結子でつないだキーワードを返します
-	     */
-	    value: function concat() {
-	      var concatenation = arguments.length <= 0 || arguments[0] === undefined ? ', ' : arguments[0];
-
-	      concatenation = _Safety.Safety.string(concatenation, ', ');
-	      return this.keywords.join(concatenation);
-	    }
-	  }, {
-	    key: 'keywords',
-	    get: function get() {
-	      return this._keywords;
-	    }
-	    /**
-	     *
-	     * @return {boolean} keyword が存在するかの真偽値を返します
-	     */
-
-	  }, {
-	    key: 'hasKeyword',
-	    get: function get() {
-	      return this.keywords.length > 0;
-	    }
-	  }]);
-	  return KeywordsDae;
-	}();
-
-/***/ },
-/* 161 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17160,7 +15236,989 @@
 	}();
 
 /***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/10 - 19:55
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleHeader = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(132);
+
+	var _ViewImage = __webpack_require__(159);
+
+	var _ViewVideo = __webpack_require__(160);
+
+	var _SingleDae = __webpack_require__(161);
+
+	var _User = __webpack_require__(78);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+
+	// dae
+	var React = self.React;
+
+	// app
+
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * detail 上部
+	 */
+
+	var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
+	  (0, _inherits3.default)(ViewSingleHeader, _View);
+
+	  /**
+	   * detail 上部
+	   * @param {Element} element single header root element
+	   * @param {SingleDae} single 変換済み JSON data
+	   */
+
+	  function ViewSingleHeader(element, single) {
+	    (0, _classCallCheck3.default)(this, ViewSingleHeader);
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingleHeader).call(this, element));
+
+	    _this2._single = single;
+	    _this2._rendered = null;
+	    return _this2;
+	  }
+	  /**
+	   * render 処理を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewSingleHeader, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render(this._single);
+	    }
+	    /**
+	     * render します
+	     * @param {SingleDae} singleDae JSON 変換済みデータ
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(singleDae) {
+
+	      var element = this.element;
+	      var _this = this;
+
+	      var HeaderDom = React.createClass({
+	        displayName: 'HeaderDom',
+
+	        propTypes: {
+	          single: React.PropTypes.object.isRequired,
+	          sign: React.PropTypes.bool.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            sign: this.props.sign,
+	            single: this.props.single,
+	            status: this.props.single.isBookmarked,
+	            bookmarked: this.props.single.isBookmarked ? '' : 'bookmarked'
+	          };
+	        },
+	        render: function render() {
+
+	          var single = this.state.single;
+	          var message = this.state.status ? 'ブックマーク済' : 'ブックマークする';
+	          var right = '';
+
+	          if (this.state.sign) {
+	            // login member のみ bookmark action が使える
+	            right = React.createElement(
+	              'div',
+	              { className: 'f-right' },
+	              React.createElement(
+	                'div',
+	                { className: 'btn-bookmark' },
+	                React.createElement(
+	                  'a',
+	                  { href: '#', className: this.state.bookmarked, onClick: this.clickBookmark, ref: 'bookmarked' },
+	                  React.createElement(
+	                    'span',
+	                    null,
+	                    message
+	                  ),
+	                  React.createElement(
+	                    'i',
+	                    { className: 'loading' },
+	                    ' '
+	                  )
+	                )
+	              )
+	            );
+	          }
+
+	          return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	              'div',
+	              { className: 'post-heading' },
+	              React.createElement(
+	                'h1',
+	                null,
+	                single.title
+	              )
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'post-data' },
+	              React.createElement(
+	                'div',
+	                { className: 'f-left' },
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-author' },
+	                  single.user.userName
+	                ),
+	                React.createElement(
+	                  'p',
+	                  { className: 'post-date' },
+	                  single.formatDate
+	                )
+	              ),
+	              right
+	            ),
+	            React.createElement('div', { ref: 'singleImage' })
+	          );
+	        },
+	        componentWillMount: function componentWillMount() {
+
+	          // will mount
+	          _this.executeSafely(_View2.View.WILL_MOUNT);
+	        },
+	        componentDidMount: function componentDidMount() {
+
+	          // after mount
+	          _this.executeSafely(_View2.View.DID_MOUNT);
+
+	          // media type check
+	          var single = this.state.single;
+	          var img = undefined;
+
+	          // media type で image / video  処理分岐
+
+	          if (single.mediaType === 'image') {
+
+	            // image
+	            img = new _ViewImage.ViewImage(this.refs.singleImage, single.media.images);
+	            img.start();
+	          } else if (single.mediaType === 'video') {
+
+	            // video
+	            img = new _ViewVideo.ViewVideo(this.refs.singleImage, single.media);
+	            img.start();
+	          }
+	        },
+	        // --------------------------------------------
+	        // custom method
+	        updateSingle: function updateSingle(single, sign) {
+	          this.setState({ single: single, sign: sign });
+	        },
+	        clickBookmark: function clickBookmark(event) {
+	          event.preventDefault();
+	        },
+	        done: function done(result) {},
+	        fail: function fail(error) {}
+	      });
+
+	      if (this._rendered === null) {
+
+	        this._rendered = ReactDOM.render(React.createElement(HeaderDom, { single: singleDae, sign: _User.User.sign }), element);
+	      } else {
+
+	        this._rendered.updateSingle(singleDae, _User.User.sign);
+	      }
+	    } // render
+
+	  }]);
+	  return ViewSingleHeader;
+	}(_View2.View);
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/10 - 18:59
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewImage = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(132);
+
+	var _ImagesDae = __webpack_require__(148);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	var React = self.React;
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * 記事詳細上部画像
+	 */
+
+	var ViewImage = exports.ViewImage = function (_View) {
+	  (0, _inherits3.default)(ViewImage, _View);
+
+	  /**
+	   * 記事詳細上部画像
+	   * @param {Element} element root element
+	   * @param {ImagesDae} images response.media.images
+	   */
+
+	  function ViewImage(element, images) {
+	    (0, _classCallCheck3.default)(this, ViewImage);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewImage).call(this, element));
+
+	    _this._images = images;
+	    _this._rendered = null;
+	    return _this;
+	  }
+	  /**
+	   * render 処理を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewImage, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render(this._images);
+	    }
+	    /**
+	     * 記事詳細上部画像
+	     * @param {ImagesDae} images response.media.images
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(images) {
+
+	      // JSON data に不備あり, on 2016-02-10
+	      // 一時コメントにする
+	      // ToDo: JSON が正しくなったらコメント解除
+	      /*
+	      if ( !images.original ) {
+	        return;
+	      }
+	      */
+
+	      console.log('ViewImages ', images);
+
+	      // -------------------------------------------------
+	      // 画像があった
+
+	      var element = this.element;
+
+	      // --------------------------------------------
+	      // image dom
+	      var ImageDom = React.createClass({
+	        displayName: 'ImageDom',
+
+	        propTypes: {
+	          image: React.PropTypes.object.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            image: this.props.image
+	          };
+	        },
+	        render: function render() {
+
+	          var image = this.state.image;
+	          var caption = image.caption;
+	          var tag = '';
+	          var original = images.original || images.medium;
+
+	          if (!original) {
+	            // no image
+	            return null;
+	          }
+
+	          if (!!caption) {
+
+	            tag = React.createElement('figcaption', { dangerouslySetInnerHTML: { __html: caption } });
+	          }
+
+	          return React.createElement(
+	            'div',
+	            { className: 'post-kv' },
+	            React.createElement(
+	              'figure',
+	              null,
+	              React.createElement('img', { src: original, alt: '' }),
+	              tag
+	            )
+	          );
+	        },
+	        updateImage: function updateImage(image) {
+	          this.setState({ image: image });
+	        }
+	      });
+
+	      // 画像 dom 生成
+	      if (this._rendered === null) {
+
+	        this._rendered = ReactDOM.render(React.createElement(ImageDom, { image: images }), element);
+	      } else {
+
+	        this._rendered.updateImage(images);
+	      }
+	    }
+	  }]);
+	  return ViewImage;
+	}(_View2.View);
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/10 - 19:20
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewVideo = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(132);
+
+	var _MediaDae = __webpack_require__(147);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	var React = self.React;
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * 記事詳細上部動画
+	 */
+
+	var ViewVideo = exports.ViewVideo = function (_View) {
+	  (0, _inherits3.default)(ViewVideo, _View);
+
+	  /**
+	   * 記事詳細上部動画
+	   * @param {Element} element root element
+	   * @param {MediaDae} media response.media
+	   */
+
+	  function ViewVideo(element, media) {
+	    (0, _classCallCheck3.default)(this, ViewVideo);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewVideo).call(this, element));
+
+	    _this._media = media;
+	    _this._rendered = null;
+	    return _this;
+	  }
+	  /**
+	   * render 処理を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewVideo, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render(this._media);
+	    }
+	    /**
+	     * 記事詳細上部動画を生成します
+	     * @param {MediaDae} mediaDae response.media
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(mediaDae) {
+
+	      // データチェック
+	      if (!mediaDae.video || !mediaDae.video.url || !mediaDae.images || !mediaDae.images.medium) {
+	        return;
+	      }
+
+	      // -------------------------------------------------
+	      // 画像と動画あった
+	      var element = this.element;
+
+	      // --------------------------------------------
+	      // image dom
+	      var VideoDom = React.createClass({
+	        displayName: 'VideoDom',
+
+	        propTypes: {
+	          media: React.PropTypes.object.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            media: this.props.media
+	          };
+	        },
+	        render: function render() {
+
+	          var media = this.state.media;
+
+	          if (!!media.video.youtube) {
+
+	            // youtube id found
+	            this.youtube(media);
+	          } else {
+
+	            // HTML5 video tag
+	            this.video(media);
+	          }
+	        },
+	        video: function video(media) {
+
+	          var video = media.video;
+	          var images = media.images;
+	          var caption = video.caption;
+	          var tag = '';
+
+	          if (!!caption) {
+	            tag = React.createElement('div', { className: 'caption', dangerouslySetInnerHTML: { __html: caption } });
+	          }
+
+	          return React.createElement(
+	            'div',
+	            { className: 'post-kv' },
+	            React.createElement(
+	              'video',
+	              { poster: images.medium, preload: 'none' },
+	              React.createElement('source', { src: video.url, type: 'video/mp4' })
+	            ),
+	            tag
+	          );
+	        },
+	        youtube: function youtube(media) {
+	          // <iframe width="640" height="360" src="https://www.youtube.com/embed/Ro-_cbfdrYE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+	          var video = media.video;
+
+	          return React.createElement(
+	            'div',
+	            { className: 'post-kv' },
+	            React.createElement('iframe', { src: 'https://www.youtube.com/embed/' + video.youtube + '?rel=0&amp;showinfo=0', width: '710', height: '400', frameborder: '0', allowfullscreen: true })
+	          );
+	        },
+	        updateImage: function updateImage(media) {
+	          this.setState({ media: media });
+	        }
+	      });
+
+	      // video dom 生成
+	      if (this._rendered === null) {
+
+	        this._rendered = ReactDOM.render(React.createElement(VideoDom, { media: mediaDae }), element);
+	      } else {
+
+	        this._rendered.updateImage(mediaDae);
+	      }
+	    }
+	  }]);
+	  return ViewVideo;
+	}(_View2.View);
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 21:10
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SingleDae = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Safety = __webpack_require__(44);
+
+	var _KeywordsDae = __webpack_require__(162);
+
+	var _RelatedDae2 = __webpack_require__(157);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 記事詳細の JSON.response
+	 */
+
+	var SingleDae = exports.SingleDae = function (_RelatedDae) {
+	  (0, _inherits3.default)(SingleDae, _RelatedDae);
+
+	  /**
+	   * 記事詳細のresponceデータを後処理しやすいように加工します
+	   *
+	   * @param {Object} response JSON.response
+	   */
+
+	  function SingleDae() {
+	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, SingleDae);
+
+	    response = _Safety.Safety.object(response);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(SingleDae).call(this, response));
+
+	    _this._keywords = new _KeywordsDae.KeywordsDae(response.keywords);
+
+	    // related
+	    var related = [];
+	    if (_Safety.Safety.check(response, 'related_articles', 'array')) {
+
+	      response.related_articles.forEach(function (article) {
+
+	        related.push(new _RelatedDae2.RelatedDae(article));
+	      });
+
+	      console.log('related_articles ', related);
+	    }
+
+	    _this._related = related;
+
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {string} 記事本文
+	   */
+
+	  (0, _createClass3.default)(SingleDae, [{
+	    key: 'body',
+	    get: function get() {
+	      return this.response.body;
+	    }
+	    /**
+	     *
+	     * @return {boolean} 関連記事が存在するかの真偽値
+	     */
+
+	  }, {
+	    key: 'hasRelated',
+	    get: function get() {
+	      return this._related.length > 0;
+	    }
+	    /**
+	     *
+	     * @return {Array|*} 関連記事配列を返します
+	     */
+
+	  }, {
+	    key: 'related',
+	    get: function get() {
+	      return this._related;
+	    }
+	    /**
+	     *
+	     * @return {KeywordsDae|*} キーワードを返します
+	     */
+
+	  }, {
+	    key: 'keywords',
+	    get: function get() {
+	      return this._keywords;
+	    }
+	  }]);
+	  return SingleDae;
+	}(_RelatedDae2.RelatedDae);
+
+/***/ },
 /* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/26 - 21:43
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.KeywordsDae = undefined;
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _Safety = __webpack_require__(44);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * response.keywords
+	 */
+
+	var KeywordsDae = exports.KeywordsDae = function () {
+	  /**
+	   * 記事キーワード
+	   * @param {Array} [keywords=[]] keywords 配列
+	   */
+
+	  function KeywordsDae() {
+	    var keywords = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    (0, _classCallCheck3.default)(this, KeywordsDae);
+
+	    this._keywords = _Safety.Safety.array(keywords);
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   *
+	   * @return {Array.<string>|*} response.keywords を返します
+	   */
+
+	  (0, _createClass3.default)(KeywordsDae, [{
+	    key: 'concat',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * 連結子でキーワードをつなぎます
+	     * @param {string} [concatenation=', '] 連結子
+	     * @return {string} 連結子でつないだキーワードを返します
+	     */
+	    value: function concat() {
+	      var concatenation = arguments.length <= 0 || arguments[0] === undefined ? ', ' : arguments[0];
+
+	      concatenation = _Safety.Safety.string(concatenation, ', ');
+	      return this.keywords.join(concatenation);
+	    }
+	  }, {
+	    key: 'keywords',
+	    get: function get() {
+	      return this._keywords;
+	    }
+	    /**
+	     *
+	     * @return {boolean} keyword が存在するかの真偽値を返します
+	     */
+
+	  }, {
+	    key: 'hasKeyword',
+	    get: function get() {
+	      return this.keywords.length > 0;
+	    }
+	  }]);
+	  return KeywordsDae;
+	}();
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/10 - 21:45
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleFooter = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(132);
+
+	var _SingleDae = __webpack_require__(161);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	var React = self.React;
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * detail 下部(tag)
+	 */
+
+	var ViewSingleFooter = exports.ViewSingleFooter = function (_View) {
+	  (0, _inherits3.default)(ViewSingleFooter, _View);
+
+	  /**
+	   * detail 下部(tag)
+	   * @param {Element} element single footer root element
+	   * @param {SingleDae} single 変換済み JSON data
+	   */
+
+	  function ViewSingleFooter(element, single) {
+	    (0, _classCallCheck3.default)(this, ViewSingleFooter);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingleFooter).call(this, element));
+
+	    _this._single = single;
+	    _this._rendered = null;
+	    return _this;
+	  }
+	  /**
+	   * render 処理を開始します
+	   */
+
+	  (0, _createClass3.default)(ViewSingleFooter, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render(this._single);
+	    }
+	    /**
+	     * render します
+	     * @param {SingleDae} singleDae JSON 変換済みデータ
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(singleDae) {
+
+	      var element = this.element;
+
+	      var FooterDom = React.createClass({
+	        displayName: 'FooterDom',
+
+	        propTypes: {
+	          single: React.PropTypes.object.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            single: this.props.single
+	          };
+	        },
+	        render: function render() {
+
+	          var single = this.state.single;
+	          var keywords = single.keywords;
+
+	          if (keywords.hasKeyword) {
+
+	            return React.createElement(
+	              'div',
+	              { className: 'post-tags' },
+	              React.createElement(
+	                'h2',
+	                { className: 'post-tags-heading' },
+	                'TAGS'
+	              ),
+	              React.createElement(
+	                'ul',
+	                { className: 'post-tags-list' },
+	                keywords.keywords.map(function (keyword, i) {
+
+	                  return React.createElement(
+	                    'li',
+	                    { key: 'keyword-' + i, className: 'post-tags-item' },
+	                    React.createElement(
+	                      'a',
+	                      { href: '/search/' + keyword },
+	                      keyword
+	                    )
+	                  );
+	                })
+	              )
+	            );
+	          } else {
+
+	            return null;
+	          }
+	        },
+	        updateSingle: function updateSingle(single) {
+	          this.setState({ single: single });
+	        }
+	      });
+
+	      if (this._rendered === null) {
+
+	        this._rendered = ReactDOM.render(React.createElement(FooterDom, { single: singleDae }), element);
+	      } else {
+
+	        this._rendered.updateSingle(singleDae);
+	      }
+	    }
+	  }]);
+	  return ViewSingleFooter;
+	}(_View2.View);
+
+/***/ },
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17293,7 +16351,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 163 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17338,19 +16396,19 @@
 
 	var _Empty = __webpack_require__(137);
 
-	var _CommentsType = __webpack_require__(84);
+	var _CommentsType = __webpack_require__(83);
 
 	var _View2 = __webpack_require__(132);
 
 	var _ViewError = __webpack_require__(144);
 
-	var _Comments = __webpack_require__(164);
+	var _Comments = __webpack_require__(166);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentsListDae = __webpack_require__(165);
+	var _CommentsListDae = __webpack_require__(167);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17860,7 +16918,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 164 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17907,13 +16965,13 @@
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
-	var _Api = __webpack_require__(90);
+	var _Api = __webpack_require__(89);
 
 	var _User = __webpack_require__(78);
 
-	var _Path = __webpack_require__(97);
+	var _Path = __webpack_require__(96);
 
-	var _CommentsType = __webpack_require__(84);
+	var _CommentsType = __webpack_require__(83);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18086,7 +17144,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 165 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18115,7 +17173,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(166);
+	var _CommentsDae = __webpack_require__(168);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18197,7 +17255,7 @@
 	}();
 
 /***/ },
-/* 166 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18233,7 +17291,7 @@
 
 	var _PopularDae = __webpack_require__(141);
 
-	var _ReplyDae = __webpack_require__(167);
+	var _ReplyDae = __webpack_require__(169);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18337,7 +17395,7 @@
 	}();
 
 /***/ },
-/* 167 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18424,7 +17482,7 @@
 	}();
 
 /***/ },
-/* 168 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18480,7 +17538,7 @@
 
 	var _HeadlineAuth = __webpack_require__(113);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
 	var _ArticleDae = __webpack_require__(145);
 
@@ -18655,7 +17713,6 @@
 	          url: React.PropTypes.string.isRequired,
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
-	          caption: React.PropTypes.string.isRequired,
 	          thumbnail: React.PropTypes.string.isRequired
 	        },
 	        render: function render() {
@@ -18670,7 +17727,7 @@
 	              React.createElement(
 	                'figure',
 	                { className: 'post-thumb' },
-	                React.createElement('img', { src: p.thumbnail, alt: p.caption })
+	                React.createElement('img', { src: p.thumbnail, alt: p.title })
 	              ),
 	              React.createElement(
 	                'div',
@@ -18736,29 +17793,12 @@
 	              list.map(function (article, i) {
 
 	                var dae = new _ArticleDae.ArticleDae(article);
-	                var thumbnail = undefined,
-	                    caption = undefined;
-
-	                // mediaType データ取り出し変更
-	                // 2016-02-08 JSON 変更
-	                //if ( dae.mediaType === 'image' ) {
-	                //  // type image
-	                //  thumbnail = dae.media.images.thumbnail;
-	                //  caption = dae.media.images.caption;
-	                //} else {
-	                //  // type video
-	                //  thumbnail = dae.media.video.thumbnail;
-	                //  caption = dae.media.video.caption;
-	                //}
-
-	                thumbnail = dae.media.images.thumbnail;
-	                caption = dae.media.images.caption;
+	                var thumbnail = dae.media.images.thumbnail;
 
 	                // thumbnail を check しなければ代替画像にする
 	                if (!thumbnail) {
 	                  thumbnail = _Empty.Empty.IMG_SMALL;
 	                }
-	                caption = _Safety.Safety.string(caption, '');
 
 	                // HeadlineDom instance を使い render
 	                return React.createElement(HeadlineDom, {
@@ -18770,7 +17810,6 @@
 	                  url: dae.url,
 	                  date: dae.formatDate,
 	                  title: dae.title,
-	                  caption: caption,
 	                  thumbnail: thumbnail
 	                });
 	              })
@@ -18793,7 +17832,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 169 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18849,7 +17888,7 @@
 
 	var _PickupAuth = __webpack_require__(110);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
 	var _ArticleDae = __webpack_require__(145);
 
@@ -19091,7 +18130,6 @@
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
 	          large: React.PropTypes.string.isRequired,
-	          caption: React.PropTypes.string.isRequired,
 	          commentsCount: React.PropTypes.number.isRequired
 	        },
 	        render: function render() {
@@ -19104,7 +18142,7 @@
 	              'a',
 	              { href: p.url },
 	              React.createElement('img', { src: _Empty.Empty.KV_OVERLAY, alt: '', className: 'overlay' }),
-	              React.createElement('img', { src: p.large, alt: p.caption }),
+	              React.createElement('img', { src: p.large, alt: p.title }),
 	              React.createElement(
 	                'div',
 	                { className: 'post-overview' },
@@ -19253,29 +18291,11 @@
 	          var make = function make(article, i) {
 
 	            var dae = new _ArticleDae.ArticleDae(article);
-	            var large = undefined,
-	                caption = undefined;
-
-	            // mediaType データ取り出し変更
-	            // 2016-02-08 JSON 変更
-	            //
-	            //if ( dae.mediaType === 'image' ) {
-	            //  // type image
-	            //  large = dae.media.images.large;
-	            //  caption = dae.media.images.caption;
-	            //} else {
-	            //  // type video
-	            //  large = dae.media.video.large;
-	            //  caption = dae.media.video.caption;
-	            //}
-
-	            large = dae.media.images.large;
-	            caption = dae.media.images.caption;
+	            var large = dae.media.images.large;
 
 	            if (!large) {
 	              large = _Empty.Empty.IMG_LARGE;
 	            }
-	            caption = _Safety.Safety.string(caption, '');
 
 	            // HeadlineDom instance を使い render
 	            // iteration key は index を使う
@@ -19290,7 +18310,6 @@
 	              date: dae.formatDate,
 	              title: dae.title,
 	              large: large,
-	              caption: caption,
 	              commentsCount: dae.commentsCount
 	            });
 	          };
@@ -19393,7 +18412,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 170 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19444,7 +18463,7 @@
 
 	var _Widget = __webpack_require__(119);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
 	var _ArticleDae = __webpack_require__(145);
 
@@ -19598,7 +18617,6 @@
 	          url: React.PropTypes.string.isRequired,
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
-	          caption: React.PropTypes.string.isRequired,
 	          thumbnail: React.PropTypes.string.isRequired,
 	          total: React.PropTypes.number.isRequired
 	        },
@@ -19615,7 +18633,7 @@
 	              React.createElement(
 	                'figure',
 	                { className: 'post-thumb' },
-	                React.createElement('img', { src: p.thumbnail, alt: p.caption })
+	                React.createElement('img', { src: p.thumbnail, alt: p.title })
 	              ),
 	              React.createElement(
 	                'div',
@@ -19695,29 +18713,12 @@
 	              list.map(function (article, i) {
 
 	                var dae = new _ArticleDae.ArticleDae(article);
-	                var thumbnail = undefined,
-	                    caption = undefined;
-
-	                // mediaType データ取り出し変更
-	                // 2016-02-08 JSON 変更
-	                //if ( dae.mediaType === 'image' ) {
-	                //  // type image
-	                //  thumbnail = dae.media.images.thumbnail;
-	                //  caption = dae.media.images.caption;
-	                //} else {
-	                //  // type video
-	                //  thumbnail = dae.media.video.thumbnail;
-	                //  caption = dae.media.video.caption;
-	                //}
-
-	                thumbnail = dae.media.images.thumbnail;
-	                caption = dae.media.images.caption;
+	                var thumbnail = dae.media.images.thumbnail;
 
 	                // thumbnail を check なければ代替画像にする
 	                if (!thumbnail) {
 	                  thumbnail = _Empty.Empty.IMG_SMALL;
 	                }
-	                caption = _Safety.Safety.string(caption, '');
 
 	                // RankingDom instance を使い render
 	                return React.createElement(RankingDom, {
@@ -19730,7 +18731,6 @@
 	                  date: dae.formatDate,
 	                  title: dae.title,
 	                  thumbnail: thumbnail,
-	                  caption: caption,
 	                  total: dae.commentsCount
 	                });
 	              })
@@ -19758,7 +18758,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 171 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19809,7 +18809,7 @@
 
 	var _Widget = __webpack_require__(119);
 
-	var _Result = __webpack_require__(88);
+	var _Result = __webpack_require__(87);
 
 	var _ArticleDae = __webpack_require__(145);
 
@@ -19963,7 +18963,6 @@
 	          url: React.PropTypes.string.isRequired,
 	          date: React.PropTypes.string.isRequired,
 	          title: React.PropTypes.string.isRequired,
-	          caption: React.PropTypes.string.isRequired,
 	          thumbnail: React.PropTypes.string.isRequired
 	        },
 	        render: function render() {
@@ -19979,7 +18978,7 @@
 	                'figure',
 	                { className: 'post-thumb' },
 	                React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
-	                React.createElement('img', { src: p.thumbnail, alt: p.caption })
+	                React.createElement('img', { src: p.thumbnail, alt: p.title })
 	              ),
 	              React.createElement(
 	                'div',
@@ -20060,13 +19059,11 @@
 
 	                var dae = new _ArticleDae.ArticleDae(article);
 	                var thumbnail = dae.media.video.medium;
-	                var caption = dae.media.video.caption;
 
 	                // thumbnail(16x9) を check なければ代替画像にする
 	                if (!thumbnail) {
 	                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
 	                }
-	                caption = _Safety.Safety.string(caption, '');
 
 	                // VideosDom instance を使い render
 	                return React.createElement(VideosDom, {
@@ -20078,7 +19075,6 @@
 	                  url: dae.url,
 	                  date: dae.formatDate,
 	                  title: dae.title,
-	                  caption: caption,
 	                  thumbnail: thumbnail
 	                });
 	              }) // map
@@ -20107,7 +19103,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 172 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

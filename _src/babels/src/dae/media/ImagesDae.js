@@ -33,21 +33,21 @@ export class ImagesDae {
     return this._images;
   }
   /**
-   *
+   * キャプション
    * @return {string} article.media.images.caption
    */
   get caption():string {
     return this.images.caption;
   }
   /**
-   * for slide
+   * スライド用
    * @return {string} article.media.images.large
    */
   get large():string {
     return this.images.large;
   }
   /**
-   * 記事一覧
+   * 記事一覧用 - 横長 - 16:9
    * @return {string} article.media.images.medium
    */
   get medium():string {
@@ -59,5 +59,12 @@ export class ImagesDae {
    */
   get thumbnail():string {
     return this.images.thumbnail;
+  }
+  /**
+   *  詳細用元比率画像
+   * @return {string} article.media.images.original
+   */
+  get original():string {
+    return this.images.original;
   }
 }

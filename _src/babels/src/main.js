@@ -27,7 +27,6 @@ import {Router} from './app/Router';
 import {Env} from './app/Env';
 import {Codes} from './app/Codes';
 import {User} from './app/User';
-import {Length} from './app/const/Length';
 import {CommentsType} from './app/const/CommentsType';
 import {Title} from './app/const/Title';
 
@@ -99,9 +98,10 @@ import {ModelCategories} from './model/categoires/ModelCategories';
 import {View} from './view/View';
 
 import {ViewHeaderUser} from './view/header/ViewHeaderUser';
-
+/*
 import {ViewArchive} from './view/ViewArchive';
 import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
+*/
 import {ViewArchiveMasonryInfinite} from './view/ViewArchiveMasonryInfinite';
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
@@ -121,9 +121,8 @@ import {ViewVideos} from './view/sidebar/ViewVideos';
 import {Receiver} from './ui/Receiver';
 
 /**
- * ToDo: 確認事項
  * ToDo: 対象外OS alert
- * ToDo: title, meta, ogp
+ * ToDo: global 不要 class を除外する
  */
 
 
@@ -208,8 +207,10 @@ var UT = {
   },
   view: {
     View: View,
+    /*
     ViewArchive: ViewArchive,
     ViewArchiveMasonry: ViewArchiveMasonry,
+    */
     ViewArchiveMasonryInfinite: ViewArchiveMasonryInfinite,
     ViewCategory: ViewCategory,
     ViewSingle: ViewSingle,

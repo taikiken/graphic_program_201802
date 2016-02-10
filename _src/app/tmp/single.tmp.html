@@ -2,8 +2,17 @@
 <html dir="ltr" lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
-  <title>React Test Single</title>
+  <title>[pagetitle] | 運動通信</title>
+  <meta name="description" content="説明文">
+  <meta name="keywords" content="キーワード, キーワード, キーワード">
+  <meta property="og:title" content="[pagetitle] | 運動通信">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="http://undotsushin.com/img/common/sns.png">
+  <meta property="og:url" content="http://undotsushin.com/">
+  <meta property="og:description" content="説明文">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/ui.css">
   <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
   <script src="/assets/js/libs/vendor.min.js"></script>
@@ -12,22 +21,22 @@
 <body>
 <div class="whole">
   <header class="head-sec">
-    <div class="head-sec-inner">
-      <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
+      <div class="head-sec-inner">
+        <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
-      <aside class="f-right clearfix">
-        <div class="head-search">
-          <form action="">
-            <input id="head-search" nama="head-search" type="text" placeholder="記事を探す">
-            <input type="submit" value="">
-          </form>
-        </div><!-- /.head-search -->
+        <aside class="f-right clearfix">
+          <div class="head-search">
+            <form action="">
+              <input id="head-search" nama="head-search" type="text" placeholder="記事を探す">
+              <input type="submit" value="">
+            </form>
+          </div><!-- /.head-search -->
 
-        <div id="user-profile-container"></div><!--/header-user-->
+          <div id="user-profile-container"></div><!--/header-user-->
 
-      </aside>
-    </div><!-- /.head-sec-inner -->
-  </header><!-- /.head-sec -->
+        </aside>
+      </div><!-- /.head-sec-inner -->
+    </header><!-- /.head-sec -->
 
   <nav class="gnav-sec">
     <div class="row row1">
@@ -152,7 +161,7 @@
           <div class="text-block">
             <h3>運動通信とは</h3>
             <p>話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「運動通信」。<br />
-              高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
+            高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
             <ul>
               <li><a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
               <li><a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
@@ -211,10 +220,8 @@
 
     // ---------------------------------------------------------
     // header.user
-    var headerUser = UT.view.header.ViewHeaderUser.factory( document.getElementById('user-profile-container') );
-    headerUser.render();
-
-    // ---------------------------------------------------------
+    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    headerUser.start();
 
     // ---------------------------------------------------------
     // single JSON 取得後 category がわかる
@@ -228,7 +235,7 @@
       console.log( 'singleReceiver.beforeRender ', slug, single );
 
       // title
-      var title = new UT.view.ViewTitle( slug, label, document.getElementById( 'title-container' ) );
+      var title = new UT.view.ViewTitle( label, document.getElementById( 'page-title-container' ) );
       title.render();
 
       // ranking
@@ -243,9 +250,11 @@
 
     };
 
+    // ---------------------------------------------------------
     // show page
-    function page ( event ) {
-      console.log( 'event ', event );
+    function page( event ) {
+
+      console.log( '*********** page ********** ', event );
 
       var articleId = event.id;
 
@@ -258,16 +267,6 @@
       var single = new UT.view.ViewSingle( articleId, document.getElementById('single-header-container'), elements );
       single.on( UT.view.View.BEFORE_RENDER, singleReceiver.beforeRender );
       single.start();
-
-      // comment self
-
-//      // comment official
-//      var official = new UT.view.ViewComments( articleId, document.getElementById('official'), document.getElementById('official-more'), UT.app.const.CommentsType.OFFICIAL );
-//      official.start();
-//
-//      // comment normal
-//      var normal = new UT.view.ViewComments( articleId, document.getElementById('normal'), document.getElementById('normal-more'), UT.app.const.CommentsType.NORMAL );
-//      normal.start();
 
     }
 

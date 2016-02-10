@@ -56,7 +56,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this._images;
     }
     /**
-     *
+     * キャプション
      * @return {string} article.media.images.caption
      */
 
@@ -66,7 +66,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this.images.caption;
     }
     /**
-     * for slide
+     * スライド用
      * @return {string} article.media.images.large
      */
 
@@ -76,7 +76,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this.images.large;
     }
     /**
-     * 記事一覧
+     * 記事一覧用 - 横長 - 16:9
      * @return {string} article.media.images.medium
      */
 
@@ -94,6 +94,16 @@ var ImagesDae = exports.ImagesDae = function () {
     key: 'thumbnail',
     get: function get() {
       return this.images.thumbnail;
+    }
+    /**
+     *  詳細用元比率画像
+     * @return {string} article.media.images.original
+     */
+
+  }, {
+    key: 'original',
+    get: function get() {
+      return this.images.original;
     }
   }]);
   return ImagesDae;

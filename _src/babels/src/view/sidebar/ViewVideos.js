@@ -146,7 +146,6 @@ export class ViewVideos extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
-        caption: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired
       },
       render: function() {
@@ -157,7 +156,7 @@ export class ViewVideos extends View {
             <a href={p.url} className='post'>
               <figure className="post-thumb">
                 <img className="post-thumb-overlay-movie" src={Empty.VIDEO_PLAY} />
-                <img src={p.thumbnail} alt={p.caption}/>
+                <img src={p.thumbnail} alt={p.title}/>
               </figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{p.category}</p>
@@ -211,13 +210,11 @@ export class ViewVideos extends View {
 
                 let dae = new ArticleDae( article );
                 let thumbnail = dae.media.video.medium;
-                let caption = dae.media.video.caption;
 
                 // thumbnail(16x9) を check なければ代替画像にする
                 if ( !thumbnail ) {
                   thumbnail = Empty.VIDEO_THUMBNAIL;
                 }
-                caption = Safety.string( caption, '' );
 
                 // VideosDom instance を使い render
                 return (
@@ -230,7 +227,6 @@ export class ViewVideos extends View {
                       url={dae.url}
                       date={dae.formatDate}
                       title={dae.title}
-                      caption={caption}
                       thumbnail={thumbnail}
                     />
                 );

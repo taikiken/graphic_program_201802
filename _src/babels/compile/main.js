@@ -12,8 +12,6 @@ var _Codes = require('./app/Codes');
 
 var _User = require('./app/User');
 
-var _Length = require('./app/const/Length');
-
 var _CommentsType = require('./app/const/CommentsType');
 
 var _Title = require('./app/const/Title');
@@ -84,10 +82,6 @@ var _View = require('./view/View');
 
 var _ViewHeaderUser = require('./view/header/ViewHeaderUser');
 
-var _ViewArchive = require('./view/ViewArchive');
-
-var _ViewArchiveMasonry = require('./view/ViewArchiveMasonry');
-
 var _ViewArchiveMasonryInfinite = require('./view/ViewArchiveMasonryInfinite');
 
 var _ViewCategory = require('./view/ViewCategory');
@@ -109,9 +103,8 @@ var _ViewVideos = require('./view/sidebar/ViewVideos');
 var _Receiver = require('./ui/Receiver');
 
 /**
- * ToDo: 確認事項
  * ToDo: 対象外OS alert
- * ToDo: title, meta, ogp
+ * ToDo: global 不要 class を除外する
  */
 
 /**
@@ -124,6 +117,11 @@ var _Receiver = require('./ui/Receiver');
  * @module UT
  * @type {Object}
  */
+
+/*
+import {ViewArchive} from './view/ViewArchive';
+import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
+*/
 
 // -------------------------------------
 // view
@@ -139,26 +137,9 @@ var _Receiver = require('./ui/Receiver');
 
 // -------------------------------------
 // net
-/*!
- * Copyright (c) 2011-2016 inazumatv.com, Parachute.
- * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-10 16:27:23
- *
- * Distributed under the terms of the MIT license.
- * http://www.opensource.org/licenses/mit-license.html
- *
- * This notice shall be included in all copies or substantial portions of the Software.
- *
- * @requires React, Sagen. IE: fetch, es5-promise
- *
- */
-// -------------------------------------
-//  main
-//    target for babel compile
-// -------------------------------------
 
 // -------------------------------------
-// util
+// app
 var UT = {
   version: '1.0.0',
   app: {
@@ -230,8 +211,10 @@ var UT = {
   },
   view: {
     View: _View.View,
-    ViewArchive: _ViewArchive.ViewArchive,
-    ViewArchiveMasonry: _ViewArchiveMasonry.ViewArchiveMasonry,
+    /*
+    ViewArchive: ViewArchive,
+    ViewArchiveMasonry: ViewArchiveMasonry,
+    */
     ViewArchiveMasonryInfinite: _ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite,
     ViewCategory: _ViewCategory.ViewCategory,
     ViewSingle: _ViewSingle.ViewSingle,
@@ -283,8 +266,25 @@ var UT = {
 
 // -------------------------------------
 // data
+/*!
+ * Copyright (c) 2011-2016 inazumatv.com, Parachute.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016-02-10 23:28:06
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ * @requires React, Sagen. IE: fetch, es5-promise
+ *
+ */
+// -------------------------------------
+//  main
+//    target for babel compile
+// -------------------------------------
 
 // -------------------------------------
-// app
+// util
 
 self.UT = UT;

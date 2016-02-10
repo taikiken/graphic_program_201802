@@ -59,7 +59,7 @@ export class ViewHeaderUser extends View {
 
         return (
           <div className="user">
-            <a className="user-signup" href="/signup/">無料登録 / ログイン</a>
+            <a className="btn-signup" href="/signup/">無料登録 / ログイン</a>
           </div>
         );
       },

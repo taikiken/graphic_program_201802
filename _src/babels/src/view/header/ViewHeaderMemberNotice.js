@@ -209,7 +209,11 @@ export class ViewHeaderMemberNotice extends View {
 
           // 配列（正常）な時はそのデータを使用しメニューを作成する
           noticeMenu = <NoticeMenu notifications={notifications} />;
-          noticeTotal = <span className="notice-num">{response.total}</span>;
+
+          if ( notifications.length > 0 ) {
+            // total が 1 以上
+            noticeTotal = <span className="notice-num">{response.total}</span>;
+          }
 
         } else {
 

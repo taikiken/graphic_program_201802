@@ -11,12 +11,6 @@
  */
 'use strict';
 
-// event
-import {EventDispatcher} from '../event/EventDispatcher';
-
-// util
-import {Scroll} from '../util/Scroll';
-
 // app
 import {Empty} from '../app/const/Empty';
 import {User} from '../app/User';
@@ -629,9 +623,6 @@ export class ViewArchiveMasonryInfinite extends View {
       render: function() {
 
         console.log( '****************************************** render' );
-
-        //let list = this.props.list;
-
         // dom出力する
         return (
           <div ref="boardRout" className="board-large-column">
@@ -642,25 +633,22 @@ export class ViewArchiveMasonryInfinite extends View {
                 let commentsPopular = dae.commentsPopular;
                 let commentsTotal = dae.commentsCount;
                 let thumbnail;
-                let caption;
                 let figureTag;
 
                 console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
 
                 thumbnail = dae.media.images.medium;
-                caption = dae.media.images.caption;
 
                 if ( !thumbnail ) {
                   thumbnail = Empty.IMG_MIDDLE;
                 }
-                caption = Safety.string( caption, '' );
 
                 // media type で thumbnail 切替
                 if ( dae.mediaType === 'image' ) {
 
                   // type: image
                   figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
-                    <img src={thumbnail} alt={caption}/>
+                    <img src={thumbnail} alt={dae.title}/>
                   </figure>;
 
                 } else {
@@ -668,7 +656,7 @@ export class ViewArchiveMasonryInfinite extends View {
                   // type: video
                   figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
                     <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
-                    <img src={thumbnail} alt={caption}/>
+                    <img src={thumbnail} alt={dae.title}/>
                   </figure>;
 
                 }

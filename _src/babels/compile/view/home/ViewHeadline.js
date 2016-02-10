@@ -226,7 +226,6 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
-          caption: React.PropTypes.string.isRequired,
           thumbnail: React.PropTypes.string.isRequired
         },
         render: function render() {
@@ -241,7 +240,7 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
               React.createElement(
                 'figure',
                 { className: 'post-thumb' },
-                React.createElement('img', { src: p.thumbnail, alt: p.caption })
+                React.createElement('img', { src: p.thumbnail, alt: p.title })
               ),
               React.createElement(
                 'div',
@@ -307,29 +306,12 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
               list.map(function (article, i) {
 
                 var dae = new _ArticleDae.ArticleDae(article);
-                var thumbnail = undefined,
-                    caption = undefined;
-
-                // mediaType データ取り出し変更
-                // 2016-02-08 JSON 変更
-                //if ( dae.mediaType === 'image' ) {
-                //  // type image
-                //  thumbnail = dae.media.images.thumbnail;
-                //  caption = dae.media.images.caption;
-                //} else {
-                //  // type video
-                //  thumbnail = dae.media.video.thumbnail;
-                //  caption = dae.media.video.caption;
-                //}
-
-                thumbnail = dae.media.images.thumbnail;
-                caption = dae.media.images.caption;
+                var thumbnail = dae.media.images.thumbnail;
 
                 // thumbnail を check しなければ代替画像にする
                 if (!thumbnail) {
                   thumbnail = _Empty.Empty.IMG_SMALL;
                 }
-                caption = _Safety.Safety.string(caption, '');
 
                 // HeadlineDom instance を使い render
                 return React.createElement(HeadlineDom, {
@@ -341,7 +323,6 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
                   url: dae.url,
                   date: dae.formatDate,
                   title: dae.title,
-                  caption: caption,
                   thumbnail: thumbnail
                 });
               })

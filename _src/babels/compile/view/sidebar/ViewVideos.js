@@ -200,7 +200,6 @@ var ViewVideos = exports.ViewVideos = function (_View) {
           url: React.PropTypes.string.isRequired,
           date: React.PropTypes.string.isRequired,
           title: React.PropTypes.string.isRequired,
-          caption: React.PropTypes.string.isRequired,
           thumbnail: React.PropTypes.string.isRequired
         },
         render: function render() {
@@ -216,7 +215,7 @@ var ViewVideos = exports.ViewVideos = function (_View) {
                 'figure',
                 { className: 'post-thumb' },
                 React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
-                React.createElement('img', { src: p.thumbnail, alt: p.caption })
+                React.createElement('img', { src: p.thumbnail, alt: p.title })
               ),
               React.createElement(
                 'div',
@@ -297,13 +296,11 @@ var ViewVideos = exports.ViewVideos = function (_View) {
 
                 var dae = new _ArticleDae.ArticleDae(article);
                 var thumbnail = dae.media.video.medium;
-                var caption = dae.media.video.caption;
 
                 // thumbnail(16x9) を check なければ代替画像にする
                 if (!thumbnail) {
                   thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
                 }
-                caption = _Safety.Safety.string(caption, '');
 
                 // VideosDom instance を使い render
                 return React.createElement(VideosDom, {
@@ -315,7 +312,6 @@ var ViewVideos = exports.ViewVideos = function (_View) {
                   url: dae.url,
                   date: dae.formatDate,
                   title: dae.title,
-                  caption: caption,
                   thumbnail: thumbnail
                 });
               }) // map

@@ -169,7 +169,6 @@ export class ViewHeadline extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
-        caption: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired
       },
       render: function() {
@@ -178,7 +177,7 @@ export class ViewHeadline extends View {
         return (
           <li className={'board-item board-item-' + p.index}>
             <a className="post" href={p.url}>
-              <figure className="post-thumb"><img src={p.thumbnail} alt={p.caption}/></figure>
+              <figure className="post-thumb"><img src={p.thumbnail} alt={p.title}/></figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{p.category}</p>
                 <h3 className='post-heading'>{p.title}</h3>
@@ -218,28 +217,12 @@ export class ViewHeadline extends View {
                 list.map( function( article, i ) {
 
                   let dae = new ArticleDae( article );
-                  let thumbnail, caption;
-
-                  // mediaType データ取り出し変更
-                  // 2016-02-08 JSON 変更
-                  //if ( dae.mediaType === 'image' ) {
-                  //  // type image
-                  //  thumbnail = dae.media.images.thumbnail;
-                  //  caption = dae.media.images.caption;
-                  //} else {
-                  //  // type video
-                  //  thumbnail = dae.media.video.thumbnail;
-                  //  caption = dae.media.video.caption;
-                  //}
-
-                  thumbnail = dae.media.images.thumbnail;
-                  caption = dae.media.images.caption;
+                  let thumbnail = dae.media.images.thumbnail;
 
                   // thumbnail を check しなければ代替画像にする
                   if ( !thumbnail ) {
                     thumbnail = Empty.IMG_SMALL;
                   }
-                  caption = Safety.string( caption, '' );
 
                   // HeadlineDom instance を使い render
                   return <HeadlineDom
@@ -251,7 +234,6 @@ export class ViewHeadline extends View {
                     url={dae.url}
                     date={dae.formatDate}
                     title={dae.title}
-                    caption={caption}
                     thumbnail={thumbnail}
                   />;
 
