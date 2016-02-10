@@ -271,6 +271,7 @@
 .info {
   @at-root {
     &-btn-readAll {
+      min-height: 1em;
       margin-bottom: 20px;
       text-align: right;
 
