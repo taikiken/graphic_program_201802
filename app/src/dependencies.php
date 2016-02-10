@@ -3,6 +3,19 @@
 
 $container = $app->getContainer();
 
+
+$container['notFoundHandler'] = function ($c) {
+  return function ($request, $response) use ($c) {
+
+    $args['request']  = $request;
+    $args['response'] = $response;
+
+    return $c['renderer']->render($response, 'errors/404.php', $args)->withStatus(404);
+
+  };
+};
+
+
 // view renderer
 $container['renderer'] = function ($c) {
     $settings = $c->get('settings')['renderer'];
