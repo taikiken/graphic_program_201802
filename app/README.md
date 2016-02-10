@@ -16,6 +16,22 @@ slim/slim-skeleton をベースにしています。
 [slimphp/Slim-Skeleton: Slim Framework 3 skeleton application](https://github.com/slimphp/Slim-Skeleton)
 
 
+```
+├─ README.md
+├─ composer.json - 依存モジュール
+├─ composer.lock
+├─ composer.phar
+├─ config - 環境変数定義
+├─ logs - ログ出力
+├─ routes - ルーター定義
+├─ src - 基本設定/ミドルウェア(ヘルパー)
+├─ templates - HTMLテンプレート
+└─ vendor - モジュール
+```
+
+`/public/index.php` がアプリケーションの基点となります。
+
+
 ## templates(view)
 
 - `/app/templates/` にテンプレートファイルを設置してます
