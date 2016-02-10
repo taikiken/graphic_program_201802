@@ -1,16 +1,9 @@
 <?php
 
-/*
-
-/signup/
-/signup/account/
-/signup/interest/
-
-*/
-
-
 $app->group('/signup', function () {
 
+  // 新規登録 - /signup/
+  // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -23,7 +16,8 @@ $app->group('/signup', function () {
 
   });
 
-
+  // 新規登録/基本情報入力|興味のある競技を選択 - /signup/account|interest/
+  // ==============================
   $this->get('/{slug:account|interest}[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -36,8 +30,6 @@ $app->group('/signup', function () {
 
   });
 
-
 });
-
 
 ?>

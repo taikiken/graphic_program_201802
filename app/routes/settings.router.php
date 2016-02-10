@@ -1,17 +1,9 @@
 <?php
 
-/*
-
-/settings/
-/settings/interest/
-/settings/social/
-/settings/deactivate/
-
-*/
-
-
 $app->group('/settings', function () {
 
+  // プロフィール設定 - /settings/
+  // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -24,7 +16,8 @@ $app->group('/settings', function () {
 
   });
 
-
+  // プロフィール設定/好きな競技を設定|ソーシャル設定|退会 - /settings/interest|social|deactivate/
+  // ==============================
   $this->get('/{slug:interest|social|deactivate}[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -37,8 +30,6 @@ $app->group('/settings', function () {
 
   });
 
-
 });
-
 
 ?>

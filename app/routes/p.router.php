@@ -1,15 +1,9 @@
 <?php
 
-/*
-
-/p/:article_id/
-/p/:article_id/comment/:comment_id
-/p/:article_id/comment/:comment_id/:reply_commend_id
-
-*/
-
 $app->group('/p/{article_id:[0-9]+}', function () {
 
+  // 記事詳細 - /p/:article_id/
+  // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -22,7 +16,8 @@ $app->group('/p/{article_id:[0-9]+}', function () {
 
   });
 
-
+  // 記事詳細/コメントパーマリンク - /p/:article_id/comment/:comment_id
+  // ==============================
   $this->get('/comment/{commend_id:[0-9]+}[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -35,7 +30,8 @@ $app->group('/p/{article_id:[0-9]+}', function () {
 
   });
 
-
+  // 記事詳細/返信パーマリンク - /p/:article_id/comment/:comment_id/:reply_commend_id
+  // ==============================
   $this->get('/comment/{commend_id:[0-9]+}/{reply_id:[0-9]+}[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -48,9 +44,6 @@ $app->group('/p/{article_id:[0-9]+}', function () {
 
   });
 
-
-
 });
-
 
 ?>

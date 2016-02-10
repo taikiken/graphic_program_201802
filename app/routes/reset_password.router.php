@@ -1,15 +1,9 @@
 <?php
 
-/*
-
-/reset_password/
-/reset_password/resetting/
-
-*/
-
-
 $app->group('/reset_password', function () {
 
+  // パスワードリセット - /reset_password/
+  // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -23,6 +17,8 @@ $app->group('/reset_password', function () {
   });
 
 
+  // パスワードリセット/再設定 - /reset_password/resetting/
+  // ==============================
   $this->get('/{slug:resetting}[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -35,8 +31,6 @@ $app->group('/reset_password', function () {
 
   });
 
-
 });
-
 
 ?>

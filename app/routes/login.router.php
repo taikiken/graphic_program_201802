@@ -1,11 +1,7 @@
 <?php
 
-/*
-
-/login/
-
-*/
-
+// ログイン - /login/
+// ==============================
 $app->get('/login[/]', function ($request, $response, $args) {
 
   $args['page'] = array(
@@ -17,6 +13,5 @@ $app->get('/login[/]', function ($request, $response, $args) {
   return $this->renderer->render($response, "_default.php", $args);
 
 });
-
 
 ?>

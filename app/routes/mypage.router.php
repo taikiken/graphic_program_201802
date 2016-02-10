@@ -1,15 +1,9 @@
 <?php
 
-/*
-
-/mypage/
-/mypage/activities/
-
-*/
-
-
 $app->group('/mypage', function () {
 
+  // マイページ - /mypage/
+  // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -23,6 +17,8 @@ $app->group('/mypage', function () {
   });
 
 
+  // マイページ/アクティビティ - /mypage/activities/
+  // ==============================
   $this->get('/{slug:activities}[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
@@ -35,8 +31,6 @@ $app->group('/mypage', function () {
 
   });
 
-
 });
-
 
 ?>
