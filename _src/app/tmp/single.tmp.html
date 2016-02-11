@@ -254,7 +254,17 @@
     // ---------------------------------------------------------
     // header.user
     var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
-    headerUser.on( UT.view.View.BEFORE_RENDER, memberReceiver.beforeRender );
+    if ( UT.app.User.sign ) {
+
+      // login user はコメント投稿可能 -> 表示アイコン必要
+      headerUser.on( UT.view.View.BEFORE_RENDER, memberReceiver.beforeRender );
+
+    } else {
+
+      // 非ログインユーザーはアイコン取得いらない
+      ++prepared;
+
+    }
     headerUser.start();
 
     // ---------------------------------------------------------
