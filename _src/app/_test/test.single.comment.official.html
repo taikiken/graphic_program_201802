@@ -68,6 +68,7 @@
 <section id="comment-normal-more"></section>
 
 <section id="related"></section>
+<section id="single-footer-container"></section>
 
 <script src="/assets/js/bundle/main.bundle.js"></script>
 
@@ -87,47 +88,43 @@
     // -------------------------------------------------
     var single;
 
-    function beforeRender( responce ) {
-      console.log( 'beforeRender ****', responce );
-
-      // comments official
-//      var official = new UT.view.ViewComments( responce.id, document.getElementById('comment-official'), document.getElementById('comment-official-more'), UT.app.const.CommentsType.OFFICIAL );
+//    function beforeRender( responce ) {
+//      console.log( 'beforeRender ****', responce );
+//
+//      // comments official
+//      var official = new UT.view.ViewComments( responce.id, document.getElementById('comment-official'), UT.app.const.CommentsType.OFFICIAL );
 //      official.start();
-
-    }
-    function didMount() {
-      console.log( 'dom mount', this );
-    }
-    function errorMount( error ) {
-      console.log( 'dom errorMount', error );
-    }
-    function undefinedError( error ) {
-      console.log( 'undefinedError', error );
-    }
-    function emptyError( error ) {
-      console.log( 'emptyError', error );
-    }
-    function responseError( error ) {
-      console.log( 'responseError', error );
-
-      single.showError( 'まずい！ ' + error.name + ', ' + error.message );
-    }
-    var option = {
-      beforeRender: beforeRender,
-      didMount: didMount,
-      errorMount: errorMount,
-      undefinedError: undefinedError,
-      emptyError: emptyError,
-      responseError: responseError
-    };
-
+//
+//    }
+//    function didMount() {
+//      console.log( 'dom mount', this );
+//    }
+//    function errorMount( error ) {
+//      console.log( 'dom errorMount', error );
+//    }
+//    function undefinedError( error ) {
+//      console.log( 'undefinedError', error );
+//    }
+//    function emptyError( error ) {
+//      console.log( 'emptyError', error );
+//    }
+//    function responseError( error ) {
+//      console.log( 'responseError', error );
+//
+//      single.showError( 'まずい！ ' + error.name + ', ' + error.message );
+//    }
+//    var option = {
+//      beforeRender: beforeRender,
+//      didMount: didMount,
+//      errorMount: errorMount,
+//      undefinedError: undefinedError,
+//      emptyError: emptyError,
+//      responseError: responseError
+//    };
+//
     let elements = {
       related: document.getElementById('related'),
-      comment: {
-        'self': document.getElementById('comment-self'),
-        'official': document.getElementById('comment-official'),
-        'user': document.getElementById('comment-user')
-      }
+      footer: document.getElementById('single-footer-container')
     };
 
     // article id 30
@@ -142,7 +139,7 @@
       var single = event.args[ 0 ];
       console.log( 'singleReceiver.beforeRender ', single.id );
 
-      var official = new UT.view.ViewComments( single.id, document.getElementById('comment-official'), document.getElementById('comment-official-more'), UT.app.const.CommentsType.OFFICIAL );
+      var official = new UT.view.ViewComments( single.id, document.getElementById('comment-official'), UT.app.const.CommentsType.OFFICIAL );
       official.start();
 
     };

@@ -211,7 +211,7 @@ export class ViewArchiveMasonryInfinite extends View {
           return (
             <div id="more" className={'board-btn-viewmore' + this.state.loading}>
               <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>VIEW MORE</span></a>
-              <span className="board-btn-more-cover">&nbsp;</span>
+              <span className="loading-spinner">&nbsp;</span>
             </div>
           );
 
@@ -689,7 +689,8 @@ export class ViewArchiveMasonryInfinite extends View {
         console.log( '+++++++++ componentDidUpdate' );
 
         // isotope 対象 children
-        let childNodes = this.refs.boardRout.childNodes;
+        let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+        let childNodes = boardRout.childNodes;
         let elements = [];
         // 追加された Element を取得するための start / end point
         // start は request offset
@@ -759,7 +760,8 @@ export class ViewArchiveMasonryInfinite extends View {
         this.img.off( 'always', this.onImages );
 
         // isotope を行います
-        this.isotope = new Isotope( this.refs.boardRout, {
+        let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+        this.isotope = new Isotope( boardRout, {
           itemSelector: '.board-item',
           masonry: {
             gutter: 30

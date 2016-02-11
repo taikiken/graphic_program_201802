@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FormReply = undefined;
+exports.ReplyForm = undefined;
 
 var _ReplyStatus = require('../../event/ReplyStatus');
 
@@ -24,8 +24,8 @@ var _Form = require('../../data/Form');
 var React = self.React;
 // let ReactDOM = self.ReactDOM;
 
-var FormReply = exports.FormReply = React.createClass({
-  displayName: 'FormReply',
+var ReplyForm = exports.ReplyForm = React.createClass({
+  displayName: 'ReplyForm',
 
   propType: {
     // unique id（識別のために必要）

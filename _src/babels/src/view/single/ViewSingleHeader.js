@@ -82,7 +82,7 @@ export class ViewSingleHeader extends View {
               <a href="#" className={this.state.bookmarked} onClick={this.clickBookmark} ref='bookmarked'>
                 <span>{message}</span>
               </a>
-              <div className='loading'>&nbsp;</div>
+              <div className='loading-spinner'>&nbsp;</div>
             </div>
           </div>;
         }
@@ -118,20 +118,20 @@ export class ViewSingleHeader extends View {
 
         // media type check
         let single = this.state.single;
+        let imageNode = ReactDOM.findDOMNode(this.refs.singleImage);
         let img;
 
         // media type で image / video  処理分岐
-
         if ( single.mediaType === 'image' ) {
 
           // image
-          img = new ViewImage( this.refs.singleImage, single.media.images );
+          img = new ViewImage( imageNode, single.media.images );
           img.start();
 
         } else if ( single.mediaType === 'video' ) {
 
           // video
-          img = new ViewVideo( this.refs.singleImage, single.media );
+          img = new ViewVideo( imageNode, single.media );
           img.start();
 
         }

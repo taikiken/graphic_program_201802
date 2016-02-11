@@ -1,0 +1,349 @@
+/**
+ * @license inazumatv.com
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/02/11
+ *
+ * Copyright (c) 2011-2015 inazumatv.com, inc.
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ */
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CommentDom = undefined;
+
+var _Empty = require('../../app/const/Empty');
+
+// React
+var React = self.React;
+
+// 通報 drop menu
+var CommentMenu = React.createClass({
+  displayName: 'CommentMenu',
+
+  propTypes: {
+    articleId: React.PropTypes.string.isRequired,
+    commentId: React.PropTypes.string.isRequired,
+    sign: React.PropTypes.bool.isRequired
+  },
+  getInitialState: function getInitialState() {
+    this.timer = 0;
+
+    return {
+      open: 'close',
+      loading: ''
+    };
+  },
+  render: function render() {
+
+    if (this.props.sign) {
+      // ログインユーザーのみ
+      return React.createElement(
+        'div',
+        { className: 'comment-menu ' + this.state.open + ' ' + this.state.loading },
+        React.createElement(
+          'a',
+          { href: '#', className: 'comment-menu-btn', onClick: this.clickHandler },
+          'MENU'
+        ),
+        React.createElement(
+          'ul',
+          { className: 'dropMenu' },
+          React.createElement(
+            'li',
+            { className: 'dropMenu-item' },
+            React.createElement(
+              'a',
+              { href: '#', className: 'dropMenu-link-delete', onClick: this.deleteClick },
+              React.createElement(
+                'span',
+                null,
+                'このコメントを削除する'
+              )
+            )
+          ),
+          React.createElement(
+            'li',
+            { className: 'dropMenu-item' },
+            React.createElement(
+              'a',
+              { href: '#', className: 'dropMenu-link-report', onClick: this.reportClick },
+              React.createElement(
+                'span',
+                null,
+                'このコメントを通報する'
+              )
+            )
+          )
+        ),
+        React.createElement('div', { className: 'loading-spinner' })
+      );
+    } else {
+      // 非ログイン 出力しない
+      return null;
+    }
+  },
+  componentDidMount: function componentDidMount() {},
+  componentWillUnmount: function componentWillUnmount() {},
+  // -------------------------------------------------------
+  // 以降 custom method
+  deleteClick: function deleteClick(event) {
+    event.preventDefault();
+  },
+  reportClick: function reportClick(event) {
+    event.preventDefault();
+  },
+  // icon click で drop menu open / close
+  clickHandler: function clickHandler(event) {
+    event.preventDefault();
+    this.toggleState();
+  },
+  // document.body.onClick event handler
+  // drop menu open 後に 領域外 click で閉じるため
+  bodyClick: function bodyClick() {
+    if (this.state.open === 'open') {
+
+      // document.body が a より先に反応する
+      // native event bind と React 経由の違いかも
+      // body click 後の処理を遅延させる, 多分気づかない程度
+      this.timer = setTimeout(this.toggleState, 100);
+    }
+  },
+  // open / close toggle
+  toggleState: function toggleState() {
+
+    this.destroy();
+
+    if (this.state.open === 'close') {
+      // close -> open
+      // document.body へ click event handler bind
+      this.setState({ open: 'open' });
+      document.body.addEventListener('click', this.bodyClick, false);
+    } else {
+      // open -> close
+      this.setState({ open: 'close' });
+    }
+  },
+  // timer cancel
+  // body.click unbind
+  // 後処理
+  destroy: function destroy() {
+
+    // body click からの遅延処理を clear する
+    // timer を 0 にし error にならないようにする
+    clearTimeout(this.timer);
+    this.timer = 0;
+    // document.body からclick event handler unbind
+    document.body.removeEventListener('click', this.bodyClick);
+  }
+});
+
+var ReactionDom = React.createClass({
+  displayName: 'ReactionDom',
+
+  propTypes: {
+    // 記事 id
+    articleId: React.PropTypes.string.isRequired,
+    // コメント id（オプション）
+    commentId: React.PropTypes.string,
+    sign: React.PropTypes.bool.isRequired,
+    good: React.PropTypes.number.isRequired,
+    bad: React.PropTypes.number.isRequired
+  },
+  getInitialState: function getInitialState() {
+    return {
+      loading: '',
+      good: this.props.good,
+      bad: this.props.bad,
+      activate: this.props.sign
+    };
+  },
+  render: function render() {
+    var good = this.state.good !== 0 ? this.state.good : '';
+    var bad = this.state.bad !== 0 ? this.state.bad : '';
+
+    if (this.state.activate) {
+      return React.createElement(
+        'div',
+        { className: 'comment-reaction ' + this.state.loading },
+        React.createElement(
+          'a',
+          { className: 'comment-reaction-btn comment-reaction-like active', href: '#', onClick: this.goodClick },
+          React.createElement(
+            'i',
+            null,
+            ' '
+          ),
+          good
+        ),
+        React.createElement(
+          'a',
+          { className: 'comment-reaction-btn comment-reaction-dislike', href: '#', onClick: this.badClick },
+          React.createElement(
+            'i',
+            null,
+            ' '
+          ),
+          bad
+        ),
+        React.createElement('div', { className: 'loading-spinner' })
+      );
+    } else {
+      // 非ログイン
+      return React.createElement(
+        'div',
+        { className: 'comment-reaction ' + this.state.loading },
+        React.createElement(
+          'span',
+          { className: 'comment-reaction-btn comment-reaction-like active' },
+          React.createElement(
+            'i',
+            null,
+            ' '
+          ),
+          good
+        ),
+        React.createElement(
+          'span',
+          { className: 'comment-reaction-btn comment-reaction-dislike' },
+          React.createElement(
+            'i',
+            null,
+            ' '
+          ),
+          bad
+        ),
+        React.createElement('div', { className: 'loading-spinner' })
+      );
+    }
+  },
+  goodClick: function goodClick(event) {
+    event.preventDefault();
+    this.setState({ loading: 'loading' });
+  },
+  badClick: function badClick(event) {
+    event.preventDefault();
+    this.setState({ loading: 'loading' });
+  },
+  goodDone: function goodDone() {
+    this.setState({ good: ++this.state.good, bad: --this.state.bad, loading: '' });
+  },
+  badDone: function badDone() {
+    this.setState({ good: --this.state.good, bad: ++this.state.bad, loading: '' });
+  },
+  requestError: function requestError(error) {
+    console.warn('requestError ', error.message);
+    this.setState({ loading: '' });
+  }
+});
+
+var CommentDom = exports.CommentDom = React.createClass({
+  displayName: 'CommentDom',
+
+  propTypes: {
+    commentDae: React.PropTypes.object.isRequired,
+    // unique id（識別のために必要）
+    id: React.PropTypes.string.isRequired,
+    // コメント送信者（自分の）profile picture
+    icon: React.PropTypes.string.isRequired,
+    // 記事 id
+    articleId: React.PropTypes.string.isRequired,
+    // コメント id（オプション）
+    commentId: React.PropTypes.string,
+    // コメント数 default 0
+    commentCount: React.PropTypes.number,
+    // ログインの有無
+    sign: React.PropTypes.bool.isRequired,
+    // 親コメント? default false
+    parent: React.PropTypes.bool,
+    // 記事へのコメント送信 default false
+    independent: React.PropTypes.bool,
+    // フォームをopen（表示）するか default false
+    open: React.PropTypes.bool
+  },
+  getDefaultProps: function getDefaultProps() {
+    return {
+      commentId: '',
+      commentCount: 0,
+      parent: false,
+      independent: false,
+      open: false
+    };
+  },
+  getInitialState: function getInitialState() {
+    this.replyStatus = null;
+
+    return {
+      open: this.props.open,
+      loading: ''
+    };
+  },
+  render: function render() {
+    var commentDae = this.props.commentDae;
+    var comment = commentDae.comment;
+    var parent = this.props.parent;
+    var sign = this.props.sin;
+
+    // user icon
+    var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
+
+    // icon と名前
+
+    return React.createElement(
+      'li',
+      { className: 'comment-item' },
+      React.createElement(CommentMenu, {
+        sign: sign,
+        articleId: this.props.articleId,
+        commentId: this.props.commentId
+      }),
+      React.createElement(
+        'figure',
+        { className: 'comment-user' },
+        React.createElement(
+          'a',
+          { href: comment.user.url, className: 'comment-user-link' },
+          React.createElement(
+            'span',
+            { className: 'comment-user-thumb' },
+            React.createElement('img', { src: picture, alt: comment.user.userName })
+          ),
+          React.createElement(
+            'div',
+            { className: 'comment-user-data' },
+            React.createElement(
+              'p',
+              { className: 'comment-user-name' },
+              comment.user.userName
+            ),
+            React.createElement(
+              'p',
+              { className: 'comment-user-job' },
+              comment.user.bio || ''
+            ),
+            React.createElement(
+              'p',
+              { className: 'comment-date' },
+              comment.formatDate
+            )
+          )
+        )
+      ),
+      React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: comment.body } }),
+      React.createElement(ReactionDom, {
+        articleId: this.props.articleId,
+        commentId: this.props.commentId,
+        sign: sign,
+        good: comment.good,
+        bad: comment.bad
+      })
+    );
+  },
+  componentDidMount: function componentDidMount() {},
+  componentWillUnmount: function componentWillUnmount() {}
+});

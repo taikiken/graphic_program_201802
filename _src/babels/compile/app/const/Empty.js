@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Empty = undefined;
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -27,6 +22,11 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Empty = undefined;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -146,6 +146,18 @@ var Empty = exports.Empty = function () {
     get: function get() {
 
       return '/assets/images/common/thumb-user-feature.png';
+    }
+    /**
+     * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)透明<br>
+     * [Ex.] コメントとか
+     * @readonly
+     * @return {string} 代替透明画像パス ユーザー・プロファイル・アイコン
+     */
+
+  }, {
+    key: 'USER_EMPTY',
+    get: function get() {
+      return '/assets/images/common/thumb-user-empty.png';
     }
     /**
      * hero-slider カバーグラデーション画像

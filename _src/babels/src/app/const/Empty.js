@@ -114,6 +114,15 @@ export class Empty {
 
   }
   /**
+   * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)透明<br>
+   * [Ex.] コメントとか
+   * @readonly
+   * @return {string} 代替透明画像パス ユーザー・プロファイル・アイコン
+   */
+  static get USER_EMPTY():string {
+    return '/assets/images/common/thumb-user-empty.png';
+  }
+  /**
    * hero-slider カバーグラデーション画像
    * @return {string} hero-slider カバーグラデーション画像パスを返します
    */

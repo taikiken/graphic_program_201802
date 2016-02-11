@@ -13,11 +13,6 @@
 
 // app
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewComments = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -37,6 +32,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewComments = undefined;
 
 var _Empty = require('../app/const/Empty');
 
@@ -80,22 +80,21 @@ var ViewComments = exports.ViewComments = function (_View) {
    * コメントスレッド表示（記事詳細）
    * @param {Number} id 記事ID :article_id
    * @param {Element} element target HTMLElement
-   * @param {Element} moreElement more button root parent
    * @param {string} commentsType all|official|self|normal コメントリスト種類
    * @param {Object} [option={}] optional event handler
    */
 
-  function ViewComments(id, element, moreElement, commentsType) {
-    var option = arguments.length <= 4 || arguments[4] === undefined ? {} : arguments[4];
+  function ViewComments(id, element, commentsType) {
+    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
     (0, _classCallCheck3.default)(this, ViewComments);
 
     option = _Safety.Safety.object(option);
+    console.log('commentsType', commentsType);
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewComments).call(this, element, option));
 
     _this2._action = _Comments.Comments.type(commentsType, id, _this2.done.bind(_this2), _this2.fail.bind(_this2));
     _this2._articleId = id;
-    _this2._moreElement = moreElement;
     _this2._commentsListType = commentsType;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
@@ -112,22 +111,14 @@ var ViewComments = exports.ViewComments = function (_View) {
     return _this2;
   }
   // ---------------------------------------------------
-  //  GETTER / SETTER
+  //  Method
   // ---------------------------------------------------
   /**
-   *
-   * @return {Element|*} more button root element を返します
+   * Ajax request を開始します
    */
 
   (0, _createClass3.default)(ViewComments, [{
     key: 'start',
-
-    // ---------------------------------------------------
-    //  Method
-    // ---------------------------------------------------
-    /**
-     * Ajax request を開始します
-     */
     value: function start() {
 
       this.action.next();
@@ -253,8 +244,6 @@ var ViewComments = exports.ViewComments = function (_View) {
 
       // コメント挿入 root element
       var element = this.element;
-      // 'View More' button root element
-      var moreElement = this.moreElement;
       // offset, length を使用する Action
       var action = this.action;
       var _this = this;
@@ -316,7 +305,7 @@ var ViewComments = exports.ViewComments = function (_View) {
 
       // more button 作成関数
       // CommentsDom から呼び出す
-      var moreButton = function moreButton(show) {
+      var moreButton = function moreButton(show, moreElement) {
 
         show = !!show;
 
@@ -342,7 +331,12 @@ var ViewComments = exports.ViewComments = function (_View) {
 
         propType: {
           comment: React.PropTypes.object.isRequired,
-          parent: React.PropTypes.bool.isRequired
+          parent: React.PropTypes.bool
+        },
+        getDefaultProps: function getDefaultProps() {
+          return {
+            parent: false
+          };
         },
         render: function render() {
 
@@ -441,7 +435,9 @@ var ViewComments = exports.ViewComments = function (_View) {
 
         propType: {
           reply: React.PropTypes.object.isRequired,
-          id: React.PropTypes.string.isRequired
+          id: React.PropTypes.string.isRequired,
+          articleId: React.PropTypes.string.isRequired,
+          commentId: React.PropTypes.string.isRequired
         },
         render: function render() {
 
@@ -455,9 +451,12 @@ var ViewComments = exports.ViewComments = function (_View) {
             replyList.comments.map(function (replyComment) {
 
               /* 親コメントと子コメントのデータ形式が違う
-                 合わせるために object でラップする
+                 合わせるために object でラップする {comment: replyComment}
               */
-              return React.createElement(CommentOne, { key: 'reply-' + articleId + '-' + commentId + '-' + replyComment.id, comment: { comment: replyComment }, parent: false });
+              return React.createElement(CommentOne, {
+                key: 'reply-' + commentsListType + '-' + articleId + '-' + commentId + '-' + replyComment.id,
+                comment: { comment: replyComment },
+                parent: false });
             })
           );
         }
@@ -471,7 +470,10 @@ var ViewComments = exports.ViewComments = function (_View) {
 
         propType: {
           commentObject: React.PropTypes.object.isRequired,
-          total: React.PropTypes.number.isRequired
+          id: React.PropTypes.string.isRequired,
+          articleId: React.PropTypes.string.isRequired,
+          total: React.PropTypes.number.isRequired,
+          index: React.PropTypes.number.isRequired
         },
         render: function render() {
 
@@ -482,7 +484,11 @@ var ViewComments = exports.ViewComments = function (_View) {
 
           if (commentObject.reply.total > 0) {
             // コメント返信
-            replyElement = React.createElement(CommentReplyChild, { id: String(commentObject.comment.id), reply: commentObject.reply });
+            replyElement = React.createElement(CommentReplyChild, {
+              articleId: articleId,
+              commentId: String(commentObject.comment.id),
+              id: this.props.id,
+              reply: commentObject.reply });
           }
 
           return React.createElement(
@@ -518,12 +524,17 @@ var ViewComments = exports.ViewComments = function (_View) {
             list.map(function (commentId, index) {
 
               var commentObject = commentsBank[commentId];
+              var key = commentsListType + '-' + articleId + '-' + commentId;
 
               return React.createElement(CommentsParent, {
-                key: 'comment-' + articleId + '-' + commentsListType + '-' + index,
+                key: key,
+                id: key,
+                index: index,
+                articleId: String(articleId),
                 commentObject: commentObject,
                 total: commentsListDae.total });
-            })
+            }),
+            React.createElement('div', { className: 'comment-more', ref: 'commentMore' })
           );
         },
         componentDidMount: function componentDidMount() {
@@ -531,7 +542,7 @@ var ViewComments = exports.ViewComments = function (_View) {
           _this.executeSafely(_View2.View.DID_MOUNT);
           // hasNext を元に More View button の表示非表示を決める
           console.log('more has ', action.hasNext());
-          moreButton(action.hasNext());
+          moreButton(action.hasNext(), ReactDOM.findDOMNode(this.refs.commentMore));
         },
         updateList: function updateList(list) {
           // state を変更し appendChild を行う
@@ -552,11 +563,6 @@ var ViewComments = exports.ViewComments = function (_View) {
       }
     } // all
 
-  }, {
-    key: 'moreElement',
-    get: function get() {
-      return this._moreElement;
-    }
   }]);
   return ViewComments;
 }(_View2.View);

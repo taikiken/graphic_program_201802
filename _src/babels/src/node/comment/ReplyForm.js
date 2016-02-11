@@ -12,12 +12,13 @@
 'use strict';
 
 import {ReplyStatus} from '../../event/ReplyStatus';
+import {Form} from '../../data/Form';
 
 // React
 let React = self.React;
 // let ReactDOM = self.ReactDOM;
 
-export let FormReply = React.createClass( {
+export let ReplyForm = React.createClass( {
   propType: {
     // unique id（識別のために必要）
     id: React.PropTypes.string.isRequired,
@@ -52,7 +53,8 @@ export let FormReply = React.createClass( {
 
     return {
       open: this.props.open,
-      loading: ''
+      loading: '',
+      body: ''
     };
   },
   render: function() {
@@ -78,7 +80,7 @@ export let FormReply = React.createClass( {
       // コメント数を後ろに足す
       message += ` (${this.props.commentCount})`;
     }
-    
+
     let commentForm = '';
 
     if ( this.state.open ) {
@@ -89,11 +91,11 @@ export let FormReply = React.createClass( {
       }
 
       commentForm = <div className={'comment-form ' + this.state.loading}>
-        <form action="" onSubmit={this.submitClick} ref="form">
+        <form onSubmit={this.submitClick} ref="form">
           <i className="comment-form-user"><img src={this.props.icon} alt=""/></i>
           <div className="comment-form-comment-outer">
             <div className="comment-form-comment-inner">
-              <textarea ref="commentBody" name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" />
+              <textarea value={this.state.body} onChange={this.bodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" />
             </div>
           </div>
           <div className="comment-form-submit">
@@ -102,6 +104,7 @@ export let FormReply = React.createClass( {
           <input type="hidden" name="article_id" value={this.props.articleId}/>
           {commentId}
         </form>
+        <div className="loading-spinner">&nbsp;</div>
       </div>;
     }
 
@@ -136,12 +139,28 @@ export let FormReply = React.createClass( {
 
   },
   // ----------------------------------------
+  bodyChange: function( event ) {
+    let value = event.target.value;
+    this.setState( { body: event.target.value } );
+  },
   openerClick: function( event ) {
     event.preventDefault();
     this.replyStatus.open( this.props.id );
   },
   submitClick: function( event ) {
+    let body = this.state.body;
 
+    if ( body !== '' ) {
+
+      let formNode = ReactDOM.findDOMNode(this.refs.form);
+      let formData = Form.element( formNode );
+
+    } else {
+
+      // error
+      console.error( 'body empty', ReactDOM.findDOMNode(this.refs.form) );
+
+    }
   },
   checkId: function( event ) {
 

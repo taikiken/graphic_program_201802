@@ -41,18 +41,17 @@ export class ViewComments extends View {
    * コメントスレッド表示（記事詳細）
    * @param {Number} id 記事ID :article_id
    * @param {Element} element target HTMLElement
-   * @param {Element} moreElement more button root parent
    * @param {string} commentsType all|official|self|normal コメントリスト種類
    * @param {Object} [option={}] optional event handler
    */
-  constructor( id:Number, element:Element, moreElement:Element, commentsType:string, option:Object = {} ) {
+  constructor( id:Number, element:Element, commentsType:string, option:Object = {} ) {
 
     option = Safety.object( option );
+    console.log( 'commentsType', commentsType );
 
     super( element, option );
     this._action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
     this._articleId = id;
-    this._moreElement = moreElement;
     this._commentsListType = commentsType;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
@@ -66,16 +65,6 @@ export class ViewComments extends View {
     this._moreRendered = null;
     // CommentsDom instance を保持します
     this._commentsRendered = null;
-  }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   *
-   * @return {Element|*} more button root element を返します
-   */
-  get moreElement():Element {
-    return this._moreElement;
   }
   // ---------------------------------------------------
   //  Method
@@ -200,8 +189,6 @@ export class ViewComments extends View {
 
     // コメント挿入 root element
     let element = this.element;
-    // 'View More' button root element
-    let moreElement = this.moreElement;
     // offset, length を使用する Action
     let action = this.action;
     let _this = this;
@@ -264,7 +251,7 @@ export class ViewComments extends View {
 
     // more button 作成関数
     // CommentsDom から呼び出す
-    let moreButton = ( show ) => {
+    let moreButton = ( show, moreElement ) => {
 
       show = !!show;
 
@@ -294,7 +281,12 @@ export class ViewComments extends View {
     let CommentOne = React.createClass( {
       propType: {
         comment: React.PropTypes.object.isRequired,
-        parent: React.PropTypes.bool.isRequired
+        parent: React.PropTypes.bool
+      },
+      getDefaultProps: function() {
+        return {
+          parent: false
+        };
       },
       render: function() {
 
@@ -358,7 +350,9 @@ export class ViewComments extends View {
     let CommentReplyChild = React.createClass( {
       propType: {
         reply: React.PropTypes.object.isRequired,
-        id: React.PropTypes.string.isRequired
+        id: React.PropTypes.string.isRequired,
+        articleId: React.PropTypes.string.isRequired,
+        commentId: React.PropTypes.string.isRequired
       },
       render: function() {
 
@@ -372,9 +366,12 @@ export class ViewComments extends View {
               replyList.comments.map( function( replyComment ) {
 
                 /* 親コメントと子コメントのデータ形式が違う
-                   合わせるために object でラップする
+                   合わせるために object でラップする {comment: replyComment}
                 */
-                return <CommentOne key={'reply-' + articleId + '-' + commentId + '-' + replyComment.id} comment={{comment: replyComment}} parent={false} />;
+                return <CommentOne
+                  key={`reply-${commentsListType}-${articleId}-${commentId}-${replyComment.id}`}
+                  comment={{comment: replyComment}}
+                  parent={false} />;
 
               } )
             }
@@ -390,7 +387,10 @@ export class ViewComments extends View {
     let CommentsParent = React.createClass( {
       propType: {
         commentObject: React.PropTypes.object.isRequired,
-        total: React.PropTypes.number.isRequired
+        id: React.PropTypes.string.isRequired,
+        articleId: React.PropTypes.string.isRequired,
+        total: React.PropTypes.number.isRequired,
+        index: React.PropTypes.number.isRequired
       },
       render: function() {
 
@@ -401,7 +401,11 @@ export class ViewComments extends View {
 
         if ( commentObject.reply.total > 0 ) {
           // コメント返信
-          replyElement = <CommentReplyChild id={String(commentObject.comment.id)} reply={commentObject.reply} />;
+          replyElement = <CommentReplyChild
+            articleId={articleId}
+            commentId={String(commentObject.comment.id)}
+            id={this.props.id}
+            reply={commentObject.reply} />;
         }
 
         return (
@@ -439,13 +443,18 @@ export class ViewComments extends View {
               list.map( function( commentId, index ) {
 
                 let commentObject = commentsBank[ commentId ];
+                let key = `${commentsListType}-${articleId}-${commentId}`;
 
                 return <CommentsParent
-                  key={'comment-' + articleId + '-' + commentsListType + '-' + index}
+                  key={key}
+                  id={key}
+                  index={index}
+                  articleId={String(articleId)}
                   commentObject={commentObject}
                   total={commentsListDae.total} />;
               } )
             }
+            <div className="comment-more" ref="commentMore"></div>
           </div>
         );
 
@@ -455,7 +464,7 @@ export class ViewComments extends View {
         _this.executeSafely( View.DID_MOUNT );
         // hasNext を元に More View button の表示非表示を決める
         console.log( 'more has ', action.hasNext() );
-        moreButton( action.hasNext() );
+        moreButton( action.hasNext(), ReactDOM.findDOMNode(this.refs.commentMore) );
       },
       updateList: function( list ) {
         // state を変更し appendChild を行う

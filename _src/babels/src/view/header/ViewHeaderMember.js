@@ -142,7 +142,8 @@ export class ViewHeaderMember extends View {
         _this.executeSafely( View.DID_MOUNT );
 
         // notice make
-        let notice = new ViewHeaderMemberNotice( this.refs.notice );
+        let noticeNode = ReactDOM.findDOMNode(this.refs.notice);
+        let notice = new ViewHeaderMemberNotice( noticeNode );
         notice.start();
 
       },

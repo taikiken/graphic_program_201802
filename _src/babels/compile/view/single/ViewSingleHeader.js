@@ -13,11 +13,6 @@
 
 // view
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewSingleHeader = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -37,6 +32,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewSingleHeader = undefined;
 
 var _View2 = require('../View');
 
@@ -143,7 +143,7 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
                 ),
                 React.createElement(
                   'div',
-                  { className: 'loading' },
+                  { className: 'loading-spinner' },
                   ' '
                 )
               )
@@ -196,19 +196,19 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
 
           // media type check
           var single = this.state.single;
+          var imageNode = ReactDOM.findDOMNode(this.refs.singleImage);
           var img = undefined;
 
           // media type で image / video  処理分岐
-
           if (single.mediaType === 'image') {
 
             // image
-            img = new _ViewImage.ViewImage(this.refs.singleImage, single.media.images);
+            img = new _ViewImage.ViewImage(imageNode, single.media.images);
             img.start();
           } else if (single.mediaType === 'video') {
 
             // video
-            img = new _ViewVideo.ViewVideo(this.refs.singleImage, single.media);
+            img = new _ViewVideo.ViewVideo(imageNode, single.media);
             img.start();
           }
         },

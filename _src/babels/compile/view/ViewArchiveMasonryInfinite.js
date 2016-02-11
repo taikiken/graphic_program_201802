@@ -13,11 +13,6 @@
 
 // app
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewArchiveMasonryInfinite = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -37,6 +32,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewArchiveMasonryInfinite = undefined;
 
 var _Empty = require('../app/const/Empty');
 
@@ -276,7 +276,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
               ),
               React.createElement(
                 'span',
-                { className: 'board-btn-more-cover' },
+                { className: 'loading-spinner' },
                 ' '
               )
             );
@@ -819,7 +819,8 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           console.log('+++++++++ componentDidUpdate');
 
           // isotope 対象 children
-          var childNodes = this.refs.boardRout.childNodes;
+          var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+          var childNodes = boardRout.childNodes;
           var elements = [];
           // 追加された Element を取得するための start / end point
           // start は request offset
@@ -884,7 +885,8 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           this.img.off('always', this.onImages);
 
           // isotope を行います
-          this.isotope = new Isotope(this.refs.boardRout, {
+          var boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
+          this.isotope = new Isotope(boardRout, {
             itemSelector: '.board-item',
             masonry: {
               gutter: 30

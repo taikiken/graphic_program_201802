@@ -32,7 +32,7 @@
     position: relative;
     padding-top: 0;
 
-    .board-btn-more-cover {
+    .loading-spinner {
       display: block;
       overflow: hidden;
       position: absolute;
@@ -43,7 +43,7 @@
       background: rgba(255, 255, 255, 0.7);
     }
     &.loading {
-      .board-btn-more-cover {
+      .loading-spinner {
         height: 100%;
       }
     }

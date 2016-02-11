@@ -52,7 +52,6 @@ export class Form {
     return form;
 
   }
-
   /**
    * form element から FormData を作成します
    *
