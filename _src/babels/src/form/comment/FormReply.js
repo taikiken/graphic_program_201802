@@ -93,7 +93,7 @@ export let FormReply = React.createClass( {
           <i className="comment-form-user"><img src={this.props.icon} alt=""/></i>
           <div className="comment-form-comment-outer">
             <div className="comment-form-comment-inner">
-              <textarea ref="commentBody" name="body" cols="30" rows="6" className="comment-form-comment" />
+              <textarea ref="commentBody" name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" />
             </div>
           </div>
           <div className="comment-form-submit">
