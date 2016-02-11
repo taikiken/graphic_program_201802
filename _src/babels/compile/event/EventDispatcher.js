@@ -13,6 +13,7 @@
 
 /**
  * <h2>EventDispatcher</h2>
+ * Custom Event
  */
 
 Object.defineProperty(exports, "__esModule", {
@@ -36,8 +37,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var EventDispatcher = exports.EventDispatcher = function () {
   /**
-   * custom event を作成し管理します<br>
-   * **extends** して使います。
+   * <p>custom event を作成し管理します<br>
+   * **extends** して使います。<p>
+   * @example
+   * class Example extends EventDispatcher {
+   *  constructor() {
+   *    super();
+   *  }
+   * }
    */
 
   function EventDispatcher() {
@@ -45,7 +52,6 @@ var EventDispatcher = exports.EventDispatcher = function () {
 
     this._listeners = {};
   }
-
   /**
    * event type に リスナー関数を bind します
    * @param {string} type event type
@@ -59,14 +65,15 @@ var EventDispatcher = exports.EventDispatcher = function () {
       if (listener === null) {
         // listener が null
         // 処理しない
+        console.warn('have to need listener, listener is null on ' + type);
         return;
       }
 
       var listeners = this._listeners;
 
       // listeners.type が存在するかを調べます
-      // if ( !listeners[ type ].hasOwnProperty( type ) ) {
-      if (typeof listeners[type] === 'undefined') {
+      if (!listeners.hasOwnProperty(type)) {
+        // if ( typeof listeners[ type ] === 'undefined' ) {
 
         // listeners.type が存在しない
         // listeners.type 新規配列を作成し
@@ -83,7 +90,6 @@ var EventDispatcher = exports.EventDispatcher = function () {
         }
       }
     }
-
     /**
      * event type からリスナー関数を remove します<br>
      * 内部処理は一時的に null 設定にします
@@ -103,7 +109,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
 
       var listeners = this._listeners;
 
-      if (typeof listeners[type] === 'undefined') {
+      if (!listeners.hasOwnProperty(type)) {
+        // if ( typeof listeners[ type ] === 'undefined' ) {
         // listener.type が存在しない
         // 処理しない
         return;
@@ -126,7 +133,6 @@ var EventDispatcher = exports.EventDispatcher = function () {
 
       this.clean(type, types);
     }
-
     /**
      * 内部関数<br>
      * リスナーの中をクリンーンにします<br>
@@ -171,11 +177,10 @@ var EventDispatcher = exports.EventDispatcher = function () {
 
       if (!hasFunction) {
 
-        // null 以外が無い
+        // null 以外が無いので空にする
         this._listeners[type] = [];
       }
     }
-
     /**
      * event type にリスナー関数が登録されているかを調べます
      * @param {string} type event type
@@ -215,18 +220,20 @@ var EventDispatcher = exports.EventDispatcher = function () {
 
       var listeners = this._listeners;
 
-      console.log('dispatch ', event);
-      // console.log( 'listeners[ event.type ] ', listeners[ event.type ] );
-
-      if (typeof listeners[event.type] === 'undefined') {
+      if (!listeners.hasOwnProperty(event.type)) {
+        // if ( typeof listeners[ event.type ] === 'undefined' ) {
         // listener.type が存在しない
         // 処理しない
         return;
       }
 
+      // ToDo: deploy 時 log 削除
+      console.log('dispatch ', event);
+
       var types = listeners[event.type];
       event.target = this;
 
+      // callback を実行する
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
@@ -256,10 +263,9 @@ var EventDispatcher = exports.EventDispatcher = function () {
         }
       }
     }
-
     /**
-     * alias on,
-     * event type に リスナー関数を bind します
+     * **alias on**
+     * <p>event type に リスナー関数を bind します</p>
      * @param {string} type event type
      * @param {Function} listener callback関数
      */
@@ -270,8 +276,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
       this.on(type, listener);
     }
     /**
-     * alias off,
-     * event type からリスナー関数を remove します
+     * **alias off**
+     * <p>event type からリスナー関数を remove します</p>
      * @param {string} type event type
      * @param {Function} listener リスナー関数
      */
@@ -282,8 +288,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
       this.off(type, listener);
     }
     /**
-     * alias has,
-     * event type にリスナー関数が登録されているかを調べます
+     * **alias has**
+     * <p>event type にリスナー関数が登録されているかを調べます</p>
      * @param {string} type event type
      * @param {Function} listener リスナー関数
      * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
@@ -295,9 +301,8 @@ var EventDispatcher = exports.EventDispatcher = function () {
       return this.has(type, listener);
     }
     /**
-     * alias dispatch,
-     * イベントを発生させリスな関数を call します
-     *
+     * **alias dispatch**
+     * <p>イベントを発生させリスな関数を call します</p>
      * @param {Object} event type が必須です
      */
 

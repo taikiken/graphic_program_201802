@@ -15,6 +15,8 @@
 import {View} from '../View';
 import {SingleDae} from '../../dae/SingleDae';
 
+import {Url} from '../../app/const/Url';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -73,7 +75,7 @@ export class ViewSingleFooter extends View {
                     return (
                       <li key={'keyword-' + i} className="post-tags-item">
                         {/* link は 検索パターンにしています */}
-                        <a href={'/search/' + keyword}>{keyword}</a>
+                        <a href={Url.search( keyword )}>{keyword}</a>
                       </li>
                     );
 

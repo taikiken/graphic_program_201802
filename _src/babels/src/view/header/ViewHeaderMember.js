@@ -18,6 +18,8 @@ import {Empty} from '../../app/const/Empty';
 import {UserDae} from '../../dae/UserDae';
 import {UsersSelf} from '../../action/users/UsersSelf';
 
+import {Url} from '../../app/const/Url';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -88,6 +90,9 @@ export class ViewHeaderMember extends View {
     let dae = new UserDae( response );
     let _this = this;
 
+    console.log( '******** ---------- ********** ViewHeaderMember ', dae );
+    this.executeSafely( View.BEFORE_RENDER, dae );
+
     // --------------------------------------------------
     // user setting
     let SettingDom = React.createClass( {
@@ -122,9 +127,9 @@ export class ViewHeaderMember extends View {
 
               <nav className="preference-menu">
                 <ul className="dropMenu">
-                  <li className="dropMenu-item"><a className="dropMenu-link" href="/mypage/">ブックマーク<br />アクティビティ</a></li>
-                  <li className="dropMenu-item"><a className="dropMenu-link" href="/settings/">設定</a></li>
-                  <li className="dropMenu-item"><a className="dropMenu-link" href="/logout/">ログアウト</a></li>
+                  <li className="dropMenu-item"><a className="dropMenu-link" href={Url.mypage()}>ブックマーク<br />アクティビティ</a></li>
+                  <li className="dropMenu-item"><a className="dropMenu-link" href={Url.settings()}>設定</a></li>
+                  <li className="dropMenu-item"><a className="dropMenu-link" href={Url.logout()}>ログアウト</a></li>
                 </ul>
               </nav>
             </div>

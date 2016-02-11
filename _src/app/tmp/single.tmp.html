@@ -219,17 +219,53 @@
     // ---------------------------------------------------------
 
     // ---------------------------------------------------------
+    // user, single JSON 両方取得後 comment の書き出しが可能
+    var prepared = 0;
+    var userDae, singleDae;
+
+    function makeCommentDom() {
+
+      ++prepared;
+
+      if ( prepared !== 2 ) {
+        return;
+      }
+
+      console.log( '============ makeCommentDom start', userDae, singleDae );
+
+    }
+
+    // ---------------------------------------------------------
+    // before header.user render
+    var memberReceiver = new UT.ui.Receiver();
+    memberReceiver.beforeRender = function( event ) {
+
+      var member = event.args[ 0 ];
+      userDae = member;
+
+      console.log( '----------------------------------------------' );
+      console.log( member );
+      console.log( '----------------------------------------------' );
+
+      makeCommentDom();
+
+    };
+
+    // ---------------------------------------------------------
     // header.user
     var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    headerUser.on( UT.view.View.BEFORE_RENDER, memberReceiver.beforeRender );
     headerUser.start();
 
     // ---------------------------------------------------------
     // single JSON 取得後 category がわかる
     // single callback
     var singleReceiver = new UT.ui.Receiver();
-    singleReceiver.beforeRender = function ( event ) {
+    singleReceiver.beforeRender = function( event ) {
 
       var single = event.args[ 0 ];
+      singleDae = single;
+
       var slug = single.category.slug;
       var label = single.category.label;
       console.log( 'singleReceiver.beforeRender ', slug, single );
@@ -247,6 +283,10 @@
       // slug
       var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), null, slug );
       videos.start();
+
+      // -------------------------------------------------------
+      // comment
+      makeCommentDom();
 
     };
 

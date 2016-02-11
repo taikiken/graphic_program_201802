@@ -40,9 +40,9 @@ var _View2 = require('../View');
 
 var _ViewHeaderMember = require('./ViewHeaderMember');
 
-var _User = require('../../app/User');
+var _Url = require('../../app/const/Url');
 
-var _UserStatus = require('../../event/UserStatus');
+var _User = require('../../app/User');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78,7 +78,15 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
     value: function start() {
       if (_User.User.sign) {
         // login member
+        var boundCallback = this.memberCallback.bind(this);
         var member = new _ViewHeaderMember.ViewHeaderMember(this.element);
+        member.on(_View2.View.BEFORE_RENDER, boundCallback);
+        member.on(_View2.View.WILL_MOUNT, boundCallback);
+        member.on(_View2.View.DID_MOUNT, boundCallback);
+        member.on(_View2.View.ERROR_MOUNT, boundCallback);
+        member.on(_View2.View.UNDEFINED_ERROR, boundCallback);
+        member.on(_View2.View.EMPTY_ERROR, boundCallback);
+        member.on(_View2.View.RESPONSE_ERROR, boundCallback);
         member.start();
       } else {
         // user menu
@@ -105,7 +113,7 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
             { className: 'user' },
             React.createElement(
               'a',
-              { className: 'btn-signup', href: '/signup/' },
+              { className: 'btn-signup', href: _Url.Url.signup() },
               '無料登録 / ログイン'
             )
           );
@@ -117,6 +125,17 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
       });
 
       ReactDOM.render(React.createElement(UserDom, null), this.element);
+    }
+    /**
+     * ViewHeaderMember callback 中継
+     * @param {Object} event event object
+     */
+
+  }, {
+    key: 'memberCallback',
+    value: function memberCallback(event) {
+
+      this.dispatch(event);
     }
   }]);
   return ViewHeaderUser;

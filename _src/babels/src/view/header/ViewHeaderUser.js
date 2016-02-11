@@ -13,9 +13,8 @@
 
 import {View} from '../View';
 import {ViewHeaderMember} from './ViewHeaderMember';
+import {Url} from '../../app/const/Url';
 import {User} from '../../app/User';
-import {UserStatus} from '../../event/UserStatus';
-
 
 // React
 let React = self.React;
@@ -40,7 +39,15 @@ export class ViewHeaderUser extends View {
   start():void {
     if ( User.sign ) {
       // login member
+      let boundCallback = this.memberCallback.bind( this );
       let member = new ViewHeaderMember( this.element );
+      member.on( View.BEFORE_RENDER, boundCallback );
+      member.on( View.WILL_MOUNT, boundCallback );
+      member.on( View.DID_MOUNT, boundCallback );
+      member.on( View.ERROR_MOUNT, boundCallback );
+      member.on( View.UNDEFINED_ERROR, boundCallback );
+      member.on( View.EMPTY_ERROR, boundCallback );
+      member.on( View.RESPONSE_ERROR, boundCallback );
       member.start();
     } else {
       // user menu
@@ -59,7 +66,7 @@ export class ViewHeaderUser extends View {
 
         return (
           <div className="user">
-            <a className="btn-signup" href="/signup/">無料登録 / ログイン</a>
+            <a className="btn-signup" href={Url.signup()}>無料登録 / ログイン</a>
           </div>
         );
       },
@@ -74,5 +81,14 @@ export class ViewHeaderUser extends View {
       <UserDom />,
       this.element
     );
+  }
+  /**
+   * ViewHeaderMember callback 中継
+   * @param {Object} event event object
+   */
+  memberCallback( event ):void {
+
+    this.dispatch( event );
+
   }
 }

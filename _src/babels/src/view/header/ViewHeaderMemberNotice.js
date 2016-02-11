@@ -18,6 +18,8 @@ import {Empty} from '../../app/const/Empty';
 import {NotificationsDae} from '../../dae/user/NotificationsDae';
 import {NoticeAction} from '../../app/const/NoticeAction';
 
+import {Url} from '../../app/const/Url';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -122,14 +124,60 @@ export class ViewHeaderMemberNotice extends View {
     } );
 
     // --------------------------------------------------
+    // notice one block
+    let OneDom = React.createClass( {
+      propTypes: {
+        notice: React.PropTypes.object.isRequired,
+        index: React.PropTypes.number.isRequired
+      },
+      getInitialState: function() {
+        return {
+          notice: this.props.notice,
+          index: this.props.index
+        };
+      },
+      render: function() {
+
+        let notice = this.state.notice;
+        let i = this.state.i;
+
+        let icon = notice.user.profilePicture;
+        if ( !icon ) {
+          icon = Empty.USER_PICTURE_FEATURE;
+        }
+
+        return (
+          <li key={'info-item-' + i} className={'info-item info-item-' + i}>
+            <a href='#' className={'info-link'} onClick={this.oneClick}>
+              <figure className="info-user-thumb">
+                <img src={icon} alt=""/>
+              </figure>
+              <NoticeMessage notice={notice} />
+              <p className="info-date">{notice.displayDate}</p>
+            </a>
+          </li>
+        );
+
+      },
+      oneClick: function( event ) {
+        event.preventDefault();
+      }
+    } );
+
+    // --------------------------------------------------
     // user notice dropMenu
     let NoticeMenu = React.createClass( {
       propTypes: {
         notifications: React.PropTypes.array.isRequired
       },
+      getInitialState: function() {
+        return {
+          notifications: this.props.notifications
+        };
+      },
       render: function() {
 
-        let notifications = this.props.notifications;
+        let notifications = this.state.notifications;
         let readAll;
 
         if ( notifications.length > 0 ) {
@@ -152,26 +200,12 @@ export class ViewHeaderMemberNotice extends View {
                   {
                     notifications.map( function( notice, i ) {
 
-                      let icon = notice.user.profilePicture;
-                      if ( !icon ) {
-                        icon = Empty.USER_PICTURE_FEATURE;
-                      }
+                      return <OneDom notice={notice} index={i}/>;
 
-                      return (
-                        <li key={'info-item-' + i} className={'info-item info-item-' + i}>
-                          <a href={'info-link'}>
-                            <figure className="info-user-thumb">
-                              <img src={icon} alt=""/>
-                            </figure>
-                            <NoticeMessage notice={notice} />
-                            <p className="info-date">{notice.displayDate}</p>
-                          </a>
-                        </li>
-                      );
                     } )
                   }
                   {/* default link menu */}
-                  <li className="btn-viewmore"><a className="btn-viewmore-link" href="/notifications/"><span>すべて見る</span></a></li>
+                  <li className="btn-viewmore"><a className="btn-viewmore-link" href={Url.notifications()}><span>すべて見る</span></a></li>
                 </ul>
               </div>
             </div>

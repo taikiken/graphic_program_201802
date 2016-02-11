@@ -40,8 +40,18 @@ var _Path = require('../../app/const/Path');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * category action
+ */
+
 var Categories = exports.Categories = function (_Action) {
   (0, _inherits3.default)(Categories, _Action);
+
+  /**
+   * category 一覧を取得します
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   */
 
   function Categories() {
     var resolve = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];

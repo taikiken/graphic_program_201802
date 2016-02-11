@@ -221,11 +221,6 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           length: React.PropTypes.number.isRequired,
           onPager: React.PropTypes.func.isRequired
         },
-        handleClick: function handleClick(event) {
-          event.preventDefault();
-          console.log('PickupPager click ' + event.target.innerHTML);
-          this.props.onPager(event.target.innerHTML);
-        },
         render: function render() {
           var p = this.props;
 
@@ -239,6 +234,11 @@ var ViewPickup = exports.ViewPickup = function (_View) {
               p.index - p.length
             )
           );
+        },
+        handleClick: function handleClick(event) {
+          event.preventDefault();
+          console.log('PickupPager click ' + event.target.innerHTML);
+          this.props.onPager(event.target.innerHTML);
         }
       });
 
@@ -350,97 +350,6 @@ var ViewPickup = exports.ViewPickup = function (_View) {
             index: position
           };
         },
-        // next slide
-        updateNext: function updateNext() {
-          // last を超えたら 0 に戻す
-          var n = position + 1;
-          if (n > last) {
-            n = 0;
-          }
-          // change slide
-          this.jump(n);
-        },
-        // next button click
-        onNext: function onNext(event) {
-          event.preventDefault();
-          console.log('next click');
-          // next action は polling からも使うので関数化し共通化する
-          this.updateNext();
-        },
-        // prev button click
-        onPrev: function onPrev(event) {
-          event.preventDefault();
-          console.log('prev click');
-          // 0 未満になったら last へ戻す
-          var n = position - 1;
-          if (n < 0) {
-            n = last;
-          }
-          // change slide
-          this.jump(n);
-        },
-        // slide を変更
-        jump: function jump(index) {
-          console.log('jump ', index);
-          // polling stop
-          polling.stop();
-          // --------------
-          // 循環アニメーションのために
-          if (index === 0) {
-            // 先頭に戻る
-            if (position === last) {
-              // 現在がラストだったらアニメーションなしで移動させる
-              this.setState({ index: 999 });
-              this.delay(index);
-            } else {
-              // 通常移動
-              this.setup(index);
-            }
-          } else if (index === last) {
-            // 最終に戻る
-            if (position === 0) {
-              // 現在が先頭だったらアニメーションなしで移動させる
-              this.setState({ index: 1999 });
-              this.delay(index);
-            } else {
-              // 通常移動
-              this.setup(index);
-            }
-          } else {
-
-            // 通常移動
-            this.setup(index);
-          }
-        },
-        // 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
-        // アニメーション無しで移動させた後
-        // リフレッシュのために待機させる 1fps
-        delay: function delay(index) {
-          var me = this;
-          if (!!this.timer) {
-            clearTimeout(this.timer);
-          }
-          this.timer = setTimeout(function () {
-            me.setup(index);
-          }, 25);
-        },
-        // re position, polling restart
-        setup: function setup(index) {
-          // --------------
-          // state update
-          position = index;
-          this.setState({ index: index });
-          // polling start
-          polling.start();
-        },
-        // pager click から呼び出されます
-        onPagerClick: function onPagerClick(index) {
-          console.log('onPagerClick ', index);
-          // 子コンポーネント Pagers -> PickupPager から呼び出される
-          // innerHTML 数値を使うので
-          // Number 型へ変換する
-          this.jump(parseInt(index, 10));
-        },
 
         // --------------------------------------------
         // RENDER
@@ -550,6 +459,98 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           // bind はreactが内部的にする（様子） `this.updateNext.bind(this)` は不要
           polling.on(Polling.PAST, this.updateNext);
           polling.start();
+        },
+        // ----------------------------------------------------------------
+        // next slide
+        updateNext: function updateNext() {
+          // last を超えたら 0 に戻す
+          var n = position + 1;
+          if (n > last) {
+            n = 0;
+          }
+          // change slide
+          this.jump(n);
+        },
+        // next button click
+        onNext: function onNext(event) {
+          event.preventDefault();
+          console.log('next click');
+          // next action は polling からも使うので関数化し共通化する
+          this.updateNext();
+        },
+        // prev button click
+        onPrev: function onPrev(event) {
+          event.preventDefault();
+          console.log('prev click');
+          // 0 未満になったら last へ戻す
+          var n = position - 1;
+          if (n < 0) {
+            n = last;
+          }
+          // change slide
+          this.jump(n);
+        },
+        // slide を変更
+        jump: function jump(index) {
+          console.log('jump ', index);
+          // polling stop
+          polling.stop();
+          // --------------
+          // 循環アニメーションのために
+          if (index === 0) {
+            // 先頭に戻る
+            if (position === last) {
+              // 現在がラストだったらアニメーションなしで移動させる
+              this.setState({ index: 999 });
+              this.delay(index);
+            } else {
+              // 通常移動
+              this.setup(index);
+            }
+          } else if (index === last) {
+            // 最終に戻る
+            if (position === 0) {
+              // 現在が先頭だったらアニメーションなしで移動させる
+              this.setState({ index: 1999 });
+              this.delay(index);
+            } else {
+              // 通常移動
+              this.setup(index);
+            }
+          } else {
+
+            // 通常移動
+            this.setup(index);
+          }
+        },
+        // 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
+        // アニメーション無しで移動させた後
+        // リフレッシュのために待機させる 1fps
+        delay: function delay(index) {
+          var me = this;
+          if (!!this.timer) {
+            clearTimeout(this.timer);
+          }
+          this.timer = setTimeout(function () {
+            me.setup(index);
+          }, 25);
+        },
+        // re position, polling restart
+        setup: function setup(index) {
+          // --------------
+          // state update
+          position = index;
+          this.setState({ index: index });
+          // polling start
+          polling.start();
+        },
+        // pager click から呼び出されます
+        onPagerClick: function onPagerClick(index) {
+          console.log('onPagerClick ', index);
+          // 子コンポーネント Pagers -> PickupPager から呼び出される
+          // innerHTML 数値を使うので
+          // Number 型へ変換する
+          this.jump(parseInt(index, 10));
         }
       });
 

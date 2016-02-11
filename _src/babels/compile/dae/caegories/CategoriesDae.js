@@ -100,7 +100,7 @@ var CategoriesDae = exports.CategoriesDae = function () {
       return this._categories;
     }
     /**
-     * @return {Array<SlugDae>|*} response.categories を SlugDae instance 配列にし返します
+     * @return {Array<SlugDae>} response.categories を SlugDae instance 配列にし返します
      */
 
   }, {
@@ -109,7 +109,7 @@ var CategoriesDae = exports.CategoriesDae = function () {
       return this._cats;
     }
     /**
-     * @return {{}|*} slug をキーにした SlugDae instance 全て
+     * @return {Object} slug をキーにした SlugDae instance 全て
      */
 
   }, {

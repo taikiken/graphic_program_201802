@@ -275,7 +275,7 @@ var Api = exports.Api = function () {
           return _ApiDae.ApiDae.api('bookmark:add');
 
         default:
-          throw new Error('bookmark illegal action: ' + action + ',');
+          throw new Error('bookmark illegal action: ' + action);
       }
     }
     // ----------------------------------

@@ -77,8 +77,8 @@ export class Router extends EventDispatcher {
       // '/reset_password/resetting': _this.passwordResetting,
       '/mypage/': _this.mypage.bind( _this ),
       // '/mypage/activities': _this.activities,
-      '/notifications': _this.notifications.bind( _this ),
-      '/settings': _this.settings.bind( _this )
+      '/notifications/': _this.notifications.bind( _this ),
+      '/settings/': _this.settings.bind( _this )
       // '/settings/interest': _this.interest,
       // '/settings/social': _this.social,
       // '/settings/deactivate': _this.deactivate
@@ -132,20 +132,20 @@ export class Router extends EventDispatcher {
   }
   /**
    * 404 not found event fire
-   * @param {string} [fire=''] 発火場所
+   * @param {string} [where=''] 発火場所
    */
-  page404( fire:string = '' ):void {
+  page404( where:string = '' ):void {
 
-    this.dispatch( { type: Router.NOT_FOUND, fire: fire } );
+    this.dispatch( { type: Router.NOT_FOUND, where: where } );
 
   }
   /**
    * 403 forbidden event fire
-   * @param {string} [fire=''] 発火場所
+   * @param {string} [where=''] 発火場所
    */
-  authorityError( fire:string = '' ):void {
+  authorityError( where:string = '' ):void {
 
-    this.dispatch( { type: Router.AUTHORITY_ERROR, fire: fire } );
+    this.dispatch( { type: Router.AUTHORITY_ERROR, where: where } );
 
   }
   /**

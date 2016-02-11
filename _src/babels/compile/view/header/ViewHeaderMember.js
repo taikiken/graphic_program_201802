@@ -46,6 +46,8 @@ var _UserDae = require('../../dae/UserDae');
 
 var _UsersSelf = require('../../action/users/UsersSelf');
 
+var _Url = require('../../app/const/Url');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
@@ -134,6 +136,9 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
       var dae = new _UserDae.UserDae(response);
       var _this = this;
 
+      console.log('******** ---------- ********** ViewHeaderMember ', dae);
+      this.executeSafely(_View2.View.BEFORE_RENDER, dae);
+
       // --------------------------------------------------
       // user setting
       var SettingDom = React.createClass({
@@ -186,7 +191,7 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
                     { className: 'dropMenu-item' },
                     React.createElement(
                       'a',
-                      { className: 'dropMenu-link', href: '/mypage/' },
+                      { className: 'dropMenu-link', href: _Url.Url.mypage() },
                       'ブックマーク',
                       React.createElement('br', null),
                       'アクティビティ'
@@ -197,7 +202,7 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
                     { className: 'dropMenu-item' },
                     React.createElement(
                       'a',
-                      { className: 'dropMenu-link', href: '/settings/' },
+                      { className: 'dropMenu-link', href: _Url.Url.settings() },
                       '設定'
                     )
                   ),
@@ -206,7 +211,7 @@ var ViewHeaderMember = exports.ViewHeaderMember = function (_View) {
                     { className: 'dropMenu-item' },
                     React.createElement(
                       'a',
-                      { className: 'dropMenu-link', href: '/logout/' },
+                      { className: 'dropMenu-link', href: _Url.Url.logout() },
                       'ログアウト'
                     )
                   )

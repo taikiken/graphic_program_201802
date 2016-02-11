@@ -65,7 +65,8 @@ export class ViewSingleHeader extends View {
           sign: this.props.sign,
           single: this.props.single,
           status: this.props.single.isBookmarked,
-          bookmarked: this.props.single.isBookmarked ? '' : 'bookmarked'
+          bookmarked: this.props.single.isBookmarked ? 'bookmarked enable' : '',
+          loading: ''
         };
       },
       render: function() {
@@ -77,14 +78,13 @@ export class ViewSingleHeader extends View {
         if ( this.state.sign ) {
           // login member のみ bookmark action が使える
           right = <div className="f-right">
-            <div className="btn-bookmark">
+            <div className={this.state.loading + ' btn-bookmark'}>
               <a href="#" className={this.state.bookmarked} onClick={this.clickBookmark} ref='bookmarked'>
                 <span>{message}</span>
-                <i className="loading">&nbsp;</i>
               </a>
+              <div className='loading'>&nbsp;</div>
             </div>
           </div>;
-
         }
 
         return (

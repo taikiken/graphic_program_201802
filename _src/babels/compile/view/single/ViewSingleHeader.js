@@ -114,7 +114,8 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
             sign: this.props.sign,
             single: this.props.single,
             status: this.props.single.isBookmarked,
-            bookmarked: this.props.single.isBookmarked ? '' : 'bookmarked'
+            bookmarked: this.props.single.isBookmarked ? 'bookmarked enable' : '',
+            loading: ''
           };
         },
         render: function render() {
@@ -130,7 +131,7 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
               { className: 'f-right' },
               React.createElement(
                 'div',
-                { className: 'btn-bookmark' },
+                { className: this.state.loading + ' btn-bookmark' },
                 React.createElement(
                   'a',
                   { href: '#', className: this.state.bookmarked, onClick: this.clickBookmark, ref: 'bookmarked' },
@@ -138,12 +139,12 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
                     'span',
                     null,
                     message
-                  ),
-                  React.createElement(
-                    'i',
-                    { className: 'loading' },
-                    ' '
                   )
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'loading' },
+                  ' '
                 )
               )
             );

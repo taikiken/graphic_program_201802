@@ -42,6 +42,8 @@ var _View2 = require('../View');
 
 var _SingleDae = require('../../dae/SingleDae');
 
+var _Url = require('../../app/const/Url');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
@@ -126,7 +128,7 @@ var ViewSingleFooter = exports.ViewSingleFooter = function (_View) {
                     { key: 'keyword-' + i, className: 'post-tags-item' },
                     React.createElement(
                       'a',
-                      { href: '/search/' + keyword },
+                      { href: _Url.Url.search(keyword) },
                       keyword
                     )
                   );

@@ -46,6 +46,8 @@ var _NotificationsDae = require('../../dae/user/NotificationsDae');
 
 var _NoticeAction = require('../../app/const/NoticeAction');
 
+var _Url = require('../../app/const/Url');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
@@ -173,6 +175,56 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
       });
 
       // --------------------------------------------------
+      // notice one block
+      var OneDom = React.createClass({
+        displayName: 'OneDom',
+
+        propTypes: {
+          notice: React.PropTypes.object.isRequired,
+          index: React.PropTypes.number.isRequired
+        },
+        getInitialState: function getInitialState() {
+          return {
+            notice: this.props.notice,
+            index: this.props.index
+          };
+        },
+        render: function render() {
+
+          var notice = this.state.notice;
+          var i = this.state.i;
+
+          var icon = notice.user.profilePicture;
+          if (!icon) {
+            icon = _Empty.Empty.USER_PICTURE_FEATURE;
+          }
+
+          return React.createElement(
+            'li',
+            { key: 'info-item-' + i, className: 'info-item info-item-' + i },
+            React.createElement(
+              'a',
+              { href: '#', className: 'info-link', onClick: this.oneClick },
+              React.createElement(
+                'figure',
+                { className: 'info-user-thumb' },
+                React.createElement('img', { src: icon, alt: '' })
+              ),
+              React.createElement(NoticeMessage, { notice: notice }),
+              React.createElement(
+                'p',
+                { className: 'info-date' },
+                notice.displayDate
+              )
+            )
+          );
+        },
+        oneClick: function oneClick(event) {
+          event.preventDefault();
+        }
+      });
+
+      // --------------------------------------------------
       // user notice dropMenu
       var NoticeMenu = React.createClass({
         displayName: 'NoticeMenu',
@@ -180,9 +232,14 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
         propTypes: {
           notifications: React.PropTypes.array.isRequired
         },
+        getInitialState: function getInitialState() {
+          return {
+            notifications: this.props.notifications
+          };
+        },
         render: function render() {
 
-          var notifications = this.props.notifications;
+          var notifications = this.state.notifications;
           var readAll = undefined;
 
           if (notifications.length > 0) {
@@ -225,37 +282,14 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
                   { className: 'info-list' },
                   notifications.map(function (notice, i) {
 
-                    var icon = notice.user.profilePicture;
-                    if (!icon) {
-                      icon = _Empty.Empty.USER_PICTURE_FEATURE;
-                    }
-
-                    return React.createElement(
-                      'li',
-                      { key: 'info-item-' + i, className: 'info-item info-item-' + i },
-                      React.createElement(
-                        'a',
-                        { href: 'info-link' },
-                        React.createElement(
-                          'figure',
-                          { className: 'info-user-thumb' },
-                          React.createElement('img', { src: icon, alt: '' })
-                        ),
-                        React.createElement(NoticeMessage, { notice: notice }),
-                        React.createElement(
-                          'p',
-                          { className: 'info-date' },
-                          notice.displayDate
-                        )
-                      )
-                    );
+                    return React.createElement(OneDom, { notice: notice, index: i });
                   }),
                   React.createElement(
                     'li',
                     { className: 'btn-viewmore' },
                     React.createElement(
                       'a',
-                      { className: 'btn-viewmore-link', href: '/notifications/' },
+                      { className: 'btn-viewmore-link', href: _Url.Url.notifications() },
                       React.createElement(
                         'span',
                         null,
