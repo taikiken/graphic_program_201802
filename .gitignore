@@ -43,3 +43,15 @@ _src/.tmp
 
 # slim
 /app/logs/*.log
+=======
+.vagrant/machines/undotsushin.local/virtualbox/action_provision
+.vagrant/machines/undotsushin.local/virtualbox/action_set_name
+.vagrant/machines/undotsushin.local/virtualbox/chef_node_name
+.vagrant/machines/undotsushin.local/virtualbox/creator_uid
+.vagrant/machines/undotsushin.local/virtualbox/id
+.vagrant/machines/undotsushin.local/virtualbox/index_uuid
+.vagrant/machines/undotsushin.local/virtualbox/private_key
+.vagrant/machines/undotsushin.local/virtualbox/synced_folders
+
+# tmp
+_src/.tmp
