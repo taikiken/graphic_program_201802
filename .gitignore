@@ -35,3 +35,6 @@ crossdomain.xml
 .vagrant/machines/undotsushin.local/virtualbox/index_uuid
 .vagrant/machines/undotsushin.local/virtualbox/private_key
 .vagrant/machines/undotsushin.local/virtualbox/synced_folders
+
+# tmp
+_src/.tmp
