@@ -52,13 +52,45 @@ var CommentsType = exports.CommentsType = function () {
     }
   }
   // ---------------------------------------------------
-  //  static METHOD
+  //  METHOD
   // ---------------------------------------------------
   /**
-   * @return {string} comment type 'self' を返します
+   * 見出しタイトル
+   * @param {string} type comment type
+   * @return {string} 見出しタイトルを返します
    */
 
   (0, _createClass3.default)(CommentsType, null, [{
+    key: 'title',
+    value: function title(type) {
+      switch (type) {
+
+        case CommentsType.SELF:
+          return '自分のコメント';
+
+        case CommentsType.NORMAL:
+          return 'みんなのコメント';
+
+        case CommentsType.OFFICIAL:
+          return '公式コメンテーター';
+
+        case CommentsType.ALL:
+          return 'すべてのコメント';
+
+        default:
+          console.warn('title illegal action: ' + type + ', instead use default');
+          return 'すべてのコメント';
+
+      }
+    }
+    // ---------------------------------------------------
+    //  const
+    // ---------------------------------------------------
+    /**
+     * @return {string} comment type 'self' を返します
+     */
+
+  }, {
     key: 'SELF',
     get: function get() {
       return 'self';

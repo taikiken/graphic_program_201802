@@ -138,15 +138,15 @@
 
 	var _ViewComments = __webpack_require__(167);
 
-	var _ViewHeadline = __webpack_require__(172);
+	var _ViewHeadline = __webpack_require__(173);
 
-	var _ViewPickup = __webpack_require__(173);
+	var _ViewPickup = __webpack_require__(174);
 
-	var _ViewRanking = __webpack_require__(174);
+	var _ViewRanking = __webpack_require__(175);
 
-	var _ViewVideos = __webpack_require__(175);
+	var _ViewVideos = __webpack_require__(176);
 
-	var _Receiver = __webpack_require__(176);
+	var _Receiver = __webpack_require__(177);
 
 	/**
 	 * ToDo: 対象外OS alert
@@ -315,7 +315,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-12 15:56:39
+	 * @date 2016-02-12 19:49:16
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -4168,13 +4168,45 @@
 	    }
 	  }
 	  // ---------------------------------------------------
-	  //  static METHOD
+	  //  METHOD
 	  // ---------------------------------------------------
 	  /**
-	   * @return {string} comment type 'self' を返します
+	   * 見出しタイトル
+	   * @param {string} type comment type
+	   * @return {string} 見出しタイトルを返します
 	   */
 
 	  (0, _createClass3.default)(CommentsType, null, [{
+	    key: 'title',
+	    value: function title(type) {
+	      switch (type) {
+
+	        case CommentsType.SELF:
+	          return '自分のコメント';
+
+	        case CommentsType.NORMAL:
+	          return 'みんなのコメント';
+
+	        case CommentsType.OFFICIAL:
+	          return '公式コメンテーター';
+
+	        case CommentsType.ALL:
+	          return 'すべてのコメント';
+
+	        default:
+	          console.warn('title illegal action: ' + type + ', instead use default');
+	          return 'すべてのコメント';
+
+	      }
+	    }
+	    // ---------------------------------------------------
+	    //  const
+	    // ---------------------------------------------------
+	    /**
+	     * @return {string} comment type 'self' を返します
+	     */
+
+	  }, {
 	    key: 'SELF',
 	    get: function get() {
 	      return 'self';
@@ -12909,7 +12941,7 @@
 	                // render 内で unique なことを保証する必要がある
 	                return React.createElement(
 	                  'li',
-	                  { key: 'user-' + articleId + '-' + commentDae.id + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
+	                  { key: 'user-' + articleId + '-' + commentDae.id + '-' + userDae.id + '-' + i, className: 'commented-user-item commented-user-item-' + i },
 	                  React.createElement(
 	                    'span',
 	                    { className: 'commented-user-thumb' },
@@ -16813,6 +16845,8 @@
 
 	var _CommentsType = __webpack_require__(83);
 
+	var _User = __webpack_require__(78);
+
 	var _View2 = __webpack_require__(132);
 
 	var _ViewError = __webpack_require__(145);
@@ -16825,6 +16859,10 @@
 
 	var _CommentsListDae = __webpack_require__(169);
 
+	var _UserDae = __webpack_require__(126);
+
+	var _CommentDom = __webpack_require__(172);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// React
@@ -16833,6 +16871,8 @@
 
 	// view
 	var React = self.React;
+
+	// node
 
 	// dae
 
@@ -16879,19 +16919,33 @@
 	    _this2._moreRendered = null;
 	    // CommentsDom instance を保持します
 	    _this2._commentsRendered = null;
+
+	    // user 情報
+	    _this2._user = null;
 	    return _this2;
 	  }
 	  // ---------------------------------------------------
-	  //  Method
+	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   * Ajax request を開始します
+	   * ログイン user 情報
+	   * @return {UserDae} ログイン user 情報を返します
 	   */
 
 	  (0, _createClass3.default)(ViewComments, [{
 	    key: 'start',
+
+	    // ---------------------------------------------------
+	    //  Method
+	    // ---------------------------------------------------
+	    /**
+	     * Ajax request を開始します
+	     */
 	    value: function start() {
 
+	      if (_User.User.sign && this.user === null) {
+	        throw new Error('user info have to set before start.' + this._articleId + ', ' + this._commentsListType);
+	      }
 	      this.action.next();
 	    }
 	    /**
@@ -16960,7 +17014,7 @@
 	      // total check
 	      if (commentsListDae.total === 0) {
 	        // デーが無いので処理を止める
-	        console.log('(' + this._articleId + ')デーが無いので処理を止める');
+	        console.log('(' + this._articleId + ', ' + this._commentsListType + ') stop rendering.');
 	        this.executeSafely(_View2.View.EMPTY_ERROR);
 	        return;
 	      }
@@ -17009,9 +17063,9 @@
 	      var commentsBank = this._commentsBank;
 
 	      // comments type
-	      var commentsListType = this._commentsListType;
+	      // let commentsListType = this._commentsListType;
 
-	      var articleId = this._articleId;
+	      // let articleIdString = String(this._articleId);
 
 	      // コメント挿入 root element
 	      var element = this.element;
@@ -17097,106 +17151,60 @@
 	      // --------------------------------------------
 	      // COMMENT ONE
 	      // --------------------------------------------
-	      var CommentOne = React.createClass({
-	        displayName: 'CommentOne',
-
+	      /*
+	      let CommentOne = React.createClass( {
 	        propType: {
 	          comment: React.PropTypes.object.isRequired,
 	          parent: React.PropTypes.bool
 	        },
-	        getDefaultProps: function getDefaultProps() {
+	        getDefaultProps: function() {
 	          return {
 	            parent: false
 	          };
 	        },
-	        render: function render() {
-
-	          var commentDae = this.props.comment;
-	          var comment = commentDae.comment;
-	          var isParent = this.props.parent;
-
-	          var replyClass = '';
+	        render: function() {
+	           let commentDae = this.props.comment;
+	          let comment = commentDae.comment;
+	          let isParent = this.props.parent;
+	           let replyClass = '';
 	          // console.log( 'comment', comment );
 	          // console.log( 'comment.user', comment.user );
-	          var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
-	          var commentReply = commentDae.reply;
-	          var replyTotal = 0;
-	          var replyTotalElement = '';
-	          var replyLink = '';
-
-	          if (isParent) {
-
-	            if (typeof commentReply !== 'undefined' && commentReply !== null) {
+	          let picture = comment.user.profilePicture || Empty.USER_EMPTY;
+	          let commentReply = commentDae.reply;
+	          let replyTotal = 0;
+	          let replyTotalElement = '';
+	          let replyLink = '';
+	           if ( isParent ) {
+	             if ( typeof commentReply !== 'undefined' && commentReply !== null ) {
 	              replyTotal = commentReply.total;
-
-	              if (replyTotal !== 0) {
-	                replyTotalElement = '(' + replyTotal + ')';
+	               if ( replyTotal !== 0 ) {
+	                replyTotalElement = `(${replyTotal})`;
 	              }
 	            }
-
-	            replyLink = React.createElement(
-	              'div',
-	              null,
-	              React.createElement(
-	                'a',
-	                { href: 'xxx', 'data-reply': 'reply-to-' + comment.id },
-	                'コメントへ返信'
-	              ),
-	              replyTotalElement
-	            );
-	          }
-
-	          var bodyTag = function bodyTag() {
+	             replyLink = <div><a href="xxx" data-reply={'reply-to-' + comment.id}>コメントへ返信</a>{replyTotalElement}</div>;
+	           }
+	           let bodyTag = () => {
 	            return {
 	              __html: comment.body
 	            };
 	          };
-
-	          console.log('**** comment ', comment);
-
-	          // ToDo: 一般ユーザーは bio がない
-
-	          return React.createElement(
-	            'div',
-	            { className: 'comment-' + commentsListType + ' comment-' + commentsListType + '-' + comment.id + replyClass },
-	            React.createElement(
-	              'div',
-	              { className: 'comment-user-' + comment.user.id },
-	              React.createElement('img', { src: picture, alt: comment.user.userName })
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              comment.user.userName
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              comment.user.bio
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              comment.formatDate
-	            ),
-	            React.createElement('div', { className: 'comment-body', dangerouslySetInnerHTML: bodyTag() }),
-	            React.createElement(
-	              'div',
-	              null,
-	              'Good: ',
-	              comment.good
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              'Bad: ',
-	              comment.bad
-	            ),
-	            replyLink
+	           console.log( '**** comment ', comment );
+	           // ToDo: 一般ユーザーは bio がない
+	           return (
+	            <div className={'comment-' + commentsListType + ' comment-' + commentsListType + '-' + comment.id + replyClass}>
+	              <div className={'comment-user-' + comment.user.id}><img src={picture} alt={comment.user.userName}/></div>
+	              <div>{comment.user.userName}</div>
+	              <div>{comment.user.bio}</div>
+	              <div>{comment.formatDate}</div>
+	              <div  className="comment-body" dangerouslySetInnerHTML={bodyTag()} />
+	              <div>Good: {comment.good}</div>
+	              <div>Bad: {comment.bad}</div>
+	              {replyLink}
+	            </div>
 	          );
-	        }
-	      });
-
+	         }
+	      } );
+	      */
 	      // --------------------------------------------
 	      // COMMENT reply loop
 	      // 親コメントへ返信
@@ -17205,29 +17213,64 @@
 	        displayName: 'CommentReplyChild',
 
 	        propType: {
-	          reply: React.PropTypes.object.isRequired,
-	          id: React.PropTypes.string.isRequired,
+	          total: React.PropTypes.number.isRequired,
+	          sign: React.PropTypes.bool.isRequired,
+	          userId: React.PropTypes.string.isRequired,
 	          articleId: React.PropTypes.string.isRequired,
-	          commentId: React.PropTypes.string.isRequired
+	          commentId: React.PropTypes.string.isRequired,
+	          // id: React.PropTypes.string.isRequired,
+	          commentsListType: React.PropTypes.object.isRequired,
+	          reply: React.PropTypes.object.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            reply: this.props.reply
+	          };
 	        },
 	        render: function render() {
 
-	          var reply = this.props.reply;
+	          if (this.props.total === 0) {
+	            // 描画しない
+	            return null;
+	          }
+
+	          var reply = this.state.reply;
 	          var replyList = reply.comments;
-	          var commentId = this.props.id;
+	          var commentId = this.props.commentId;
+	          var userId = this.props.userId;
+	          var sign = this.props.sign;
+	          var articleId = this.props.articleId;
+	          var commentsListType = this.props.commentsListType;
 
 	          return React.createElement(
-	            'div',
-	            { className: 'comment-reply' },
+	            'ul',
+	            { className: 'comment-list' },
 	            replyList.comments.map(function (replyComment) {
 
 	              /* 親コメントと子コメントのデータ形式が違う
 	                 合わせるために object でラップする {comment: replyComment}
 	              */
-	              return React.createElement(CommentOne, {
-	                key: 'reply-' + commentsListType + '-' + articleId + '-' + commentId + '-' + replyComment.id,
-	                comment: { comment: replyComment },
-	                parent: false });
+	              /*
+	              return <CommentOne
+	                key={`reply-${commentsListType}-${articleId}-${commentId}-${replyComment.id}`}
+	                comment={{comment: replyComment}}
+	                parent={false} />;
+	              */
+
+	              /* independent, open 省略 */
+	              return React.createElement(
+	                'li',
+	                { key: 'reply-' + commentsListType + '-' + articleId + '-' + commentId + '-' + replyComment.id, className: 'comment-item' },
+	                React.createElement(_CommentDom.CommentDom, {
+	                  commentDae: { comment: replyComment },
+	                  userId: userId,
+	                  articleId: articleId,
+	                  commentId: commentId,
+	                  commentUserId: String(replyComment.user.id),
+	                  sign: sign,
+	                  parent: false
+	                })
+	              );
 	            })
 	          );
 	        }
@@ -17243,30 +17286,68 @@
 	          commentObject: React.PropTypes.object.isRequired,
 	          id: React.PropTypes.string.isRequired,
 	          articleId: React.PropTypes.string.isRequired,
+	          commentsListType: React.PropTypes.string.isRequired,
 	          total: React.PropTypes.number.isRequired,
 	          index: React.PropTypes.number.isRequired
 	        },
 	        render: function render() {
 
 	          var commentObject = this.props.commentObject;
-	          var replyElement = '';
+	          // let replyElement = '';
 
 	          console.log('commentObject ', commentObject);
+	          /*
+	                  if ( commentObject.reply.total > 0 ) {
+	                    // コメント返信
+	                    replyElement = <CommentReplyChild
+	                      articleId={articleId}
+	                      commentId={String(commentObject.comment.id)}
+	                      id={this.props.id}
+	                      reply={commentObject.reply} />;
+	                  }
+	          */
+	          var total = _Safety.Safety.integer(commentObject.reply.total, 0);
+	          var sign = _User.User.sign;
+	          var icon = '';
+	          var userId = '';
+	          var commentId = String(commentObject.comment.id);
+	          var articleId = this.props.articleId;
+	          var commentsListType = this.props.commentsListType;
 
-	          if (commentObject.reply.total > 0) {
-	            // コメント返信
-	            replyElement = React.createElement(CommentReplyChild, {
-	              articleId: articleId,
-	              commentId: String(commentObject.comment.id),
-	              id: this.props.id,
-	              reply: commentObject.reply });
+	          if (sign) {
+	            var user = this.user;
+	            icon = user.profilePicture;
+	            if (!icon) {
+	              icon = _Empty.Empty.USER_EMPTY;
+	            }
+	            userId = user.id;
 	          }
 
 	          return React.createElement(
-	            'div',
-	            { className: 'comment-parent' },
-	            React.createElement(CommentOne, { comment: commentObject, parent: true }),
-	            replyElement
+	            'ul',
+	            { className: 'comment-list' },
+	            React.createElement(
+	              'li',
+	              { className: 'comment-item' },
+	              React.createElement(_CommentDom.CommentDom, {
+	                commentDae: commentObject,
+	                icon: icon,
+	                userId: userId,
+	                articleId: articleId,
+	                commentId: commentId,
+	                commentUserId: String(commentObject.comment.user.id),
+	                sign: sign,
+	                parent: true
+	              }),
+	              React.createElement(CommentReplyChild, {
+	                total: total,
+	                sign: sign,
+	                userId: userId,
+	                articleId: articleId,
+	                commentId: commentId,
+	                commentsListType: commentsListType,
+	                reply: commentObject.reply })
+	            )
 	          );
 	        }
 	      });
@@ -17278,7 +17359,9 @@
 	        displayName: 'CommentsDom',
 
 	        propType: {
-	          commentsList: React.PropTypes.array.isRequired
+	          commentsList: React.PropTypes.array.isRequired,
+	          commentsListType: React.PropTypes.string.isRequired,
+	          articleId: React.PropTypes.string.isRequired
 	        },
 	        getInitialState: function getInitialState() {
 	          return {
@@ -17288,10 +17371,21 @@
 	        render: function render() {
 
 	          var list = this.state.commentsList;
+	          var articleId = this.props.articleId;
+	          var commentsListType = this.props.commentsListType;
 
 	          return React.createElement(
 	            'div',
 	            { className: 'comment-' + commentsListType },
+	            React.createElement(
+	              'div',
+	              { className: 'comment-heading' },
+	              React.createElement(
+	                'h2',
+	                null,
+	                _CommentsType.CommentsType.title(commentsListType)
+	              )
+	            ),
 	            list.map(function (commentId, index) {
 
 	              var commentObject = commentsBank[commentId];
@@ -17301,8 +17395,9 @@
 	                key: key,
 	                id: key,
 	                index: index,
-	                articleId: String(articleId),
+	                articleId: articleId,
 	                commentObject: commentObject,
+	                commentsListType: commentsListType,
 	                total: commentsListDae.total });
 	            }),
 	            React.createElement('div', { className: 'comment-more', ref: 'commentMore' })
@@ -17327,13 +17422,30 @@
 	      // this._commentsRendered が null の時だけ CommentsDom.render する
 	      if (this._commentsRendered === null) {
 
-	        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList }), element);
+	        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList,
+	          articleId: String(this._articleId),
+	          commentsListType: this._commentsListType
+	        }), element);
 	      } else {
 
 	        this._commentsRendered.updateList(commentsList);
 	      }
 	    } // all
 
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	    /**
+	     * ログイン user 情報を設定します<br>
+	     * start の前に設定します
+	     * @param {UserDae} user ログイン user 情報
+	     */
+	    ,
+	    set: function set(user) {
+	      this._user = user;
+	    }
 	  }]);
 	  return ViewComments;
 	}(_View2.View);
@@ -17907,6 +18019,299 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
+	 * @license inazumatv.com
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/11
+	 *
+	 * Copyright (c) 2011-2015 inazumatv.com, inc.
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentDom = undefined;
+
+	var _Empty = __webpack_require__(137);
+
+	var _ReactionDom = __webpack_require__(155);
+
+	// React
+	var React = self.React;
+
+	// コメント削除 自分のだけ
+
+	// node
+	var DeleteComment = React.createClass({
+	  displayName: 'DeleteComment',
+
+	  propTypes: {
+	    // user id
+	    userId: React.PropTypes.string.isRequired,
+	    commentUserId: React.PropTypes.string.isRequired,
+	    callback: React.PropTypes.func.isRequired
+	  },
+	  render: function render() {
+	    if (!this.props.userId || this.props.userId !== this.props.commentUserId) {
+	      return null;
+	    } else {
+	      return React.createElement(
+	        'li',
+	        { className: 'dropMenu-item' },
+	        React.createElement(
+	          'a',
+	          { href: '#', className: 'dropMenu-link-delete', onClick: this.props.callback },
+	          React.createElement(
+	            'span',
+	            null,
+	            'このコメントを削除する'
+	          )
+	        )
+	      );
+	    }
+	  }
+	});
+
+	// 通報 drop menu
+	var CommentMenu = React.createClass({
+	  displayName: 'CommentMenu',
+
+	  propTypes: {
+	    // user id
+	    userId: React.PropTypes.string.isRequired,
+	    commentUserId: React.PropTypes.string.isRequired,
+	    articleId: React.PropTypes.string.isRequired,
+	    commentId: React.PropTypes.string.isRequired,
+	    sign: React.PropTypes.bool.isRequired
+	  },
+	  getInitialState: function getInitialState() {
+	    this.timer = 0;
+
+	    return {
+	      open: 'close',
+	      loading: ''
+	    };
+	  },
+	  render: function render() {
+	    if (this.props.sign) {
+	      // ログインユーザーのみ
+	      return React.createElement(
+	        'div',
+	        { className: 'comment-menu ' + this.state.open + ' ' + this.state.loading },
+	        React.createElement(
+	          'a',
+	          { href: '#', className: 'comment-menu-btn', onClick: this.clickHandler },
+	          'MENU'
+	        ),
+	        React.createElement(
+	          'ul',
+	          { className: 'dropMenu' },
+	          React.createElement(DeleteComment, {
+	            userId: this.props.userId,
+	            commentUserId: this.props.commentUserId,
+	            callback: this.deleteClick
+	          }),
+	          React.createElement(
+	            'li',
+	            { className: 'dropMenu-item' },
+	            React.createElement(
+	              'a',
+	              { href: '#', className: 'dropMenu-link-report', onClick: this.reportClick },
+	              React.createElement(
+	                'span',
+	                null,
+	                'このコメントを通報する'
+	              )
+	            )
+	          )
+	        ),
+	        React.createElement('div', { className: 'loading-spinner' })
+	      );
+	    } else {
+	      // 非ログイン 出力しない
+	      return null;
+	    }
+	  },
+	  componentDidMount: function componentDidMount() {},
+	  componentWillUnmount: function componentWillUnmount() {},
+	  // -------------------------------------------------------
+	  // 以降 custom method
+	  deleteClick: function deleteClick(event) {
+	    event.preventDefault();
+	  },
+	  reportClick: function reportClick(event) {
+	    event.preventDefault();
+	  },
+	  // icon click で drop menu open / close
+	  clickHandler: function clickHandler(event) {
+	    event.preventDefault();
+	    this.toggleState();
+	  },
+	  // document.body.onClick event handler
+	  // drop menu open 後に 領域外 click で閉じるため
+	  bodyClick: function bodyClick() {
+	    if (this.state.open === 'open') {
+
+	      // document.body が a より先に反応する
+	      // native event bind と React 経由の違いかも
+	      // body click 後の処理を遅延させる, 多分気づかない程度
+	      this.timer = setTimeout(this.toggleState, 100);
+	    }
+	  },
+	  // open / close toggle
+	  toggleState: function toggleState() {
+
+	    this.destroy();
+
+	    if (this.state.open === 'close') {
+	      // close -> open
+	      // document.body へ click event handler bind
+	      this.setState({ open: 'open' });
+	      document.body.addEventListener('click', this.bodyClick, false);
+	    } else {
+	      // open -> close
+	      this.setState({ open: 'close' });
+	    }
+	  },
+	  // timer cancel
+	  // body.click unbind
+	  // 後処理
+	  destroy: function destroy() {
+
+	    // body click からの遅延処理を clear する
+	    // timer を 0 にし error にならないようにする
+	    clearTimeout(this.timer);
+	    this.timer = 0;
+	    // document.body からclick event handler unbind
+	    document.body.removeEventListener('click', this.bodyClick);
+	  }
+	});
+
+	var CommentDom = exports.CommentDom = React.createClass({
+	  displayName: 'CommentDom',
+
+	  propTypes: {
+	    commentDae: React.PropTypes.object.isRequired,
+	    // unique id（識別のために必要）
+	    // id: React.PropTypes.string.isRequired,
+	    // コメント送信者（自分の）profile picture
+	    icon: React.PropTypes.string,
+	    // user id（オプション）
+	    userId: React.PropTypes.string,
+	    // 記事 id
+	    articleId: React.PropTypes.string.isRequired,
+	    // コメント id（オプション）
+	    commentId: React.PropTypes.string,
+	    // コメントした user id
+	    commentUserId: React.PropTypes.string.isRequired,
+	    // コメント数 default 0
+	    commentCount: React.PropTypes.number,
+	    // ログインの有無
+	    sign: React.PropTypes.bool.isRequired,
+	    // 親コメント? default false
+	    parent: React.PropTypes.bool,
+	    // 記事へのコメント送信 default false
+	    independent: React.PropTypes.bool,
+	    // フォームをopen（表示）するか default false
+	    open: React.PropTypes.bool
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      userId: '',
+	      commentId: '',
+	      commentCount: 0,
+	      parent: false,
+	      independent: false,
+	      open: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    this.replyStatus = null;
+
+	    return {
+	      open: this.props.open,
+	      loading: ''
+	    };
+	  },
+	  render: function render() {
+	    var commentDae = this.props.commentDae;
+	    var comment = commentDae.comment;
+	    var parent = this.props.parent;
+	    var sign = this.props.sign;
+
+	    // user icon
+	    var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
+
+	    // icon と名前
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(CommentMenu, {
+	        sign: sign,
+	        userId: this.props.userId,
+	        commentUserId: this.props.commentUserId,
+	        articleId: this.props.articleId,
+	        commentId: this.props.commentId
+	      }),
+	      React.createElement(
+	        'figure',
+	        { className: 'comment-user' },
+	        React.createElement(
+	          'span',
+	          { className: 'comment-user-link' },
+	          React.createElement(
+	            'span',
+	            { className: 'comment-user-thumb' },
+	            React.createElement('img', { src: picture, alt: comment.user.userName })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'comment-user-data' },
+	            React.createElement(
+	              'p',
+	              { className: 'comment-user-name' },
+	              comment.user.userName
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'comment-user-job' },
+	              comment.user.bio || ''
+	            ),
+	            React.createElement(
+	              'p',
+	              { className: 'comment-date' },
+	              comment.formatDate
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: comment.body } }),
+	      React.createElement(_ReactionDom.ReactionDom, {
+	        articleId: this.props.articleId,
+	        commentId: this.props.commentId,
+	        sign: sign,
+	        good: comment.good,
+	        bad: comment.bad,
+	        isGood: comment.isGood,
+	        isBad: comment.isBad
+	      })
+	    );
+	  },
+	  componentDidMount: function componentDidMount() {},
+	  componentWillUnmount: function componentWillUnmount() {}
+	});
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/01/22 - 13:54
@@ -18253,7 +18658,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18834,7 +19239,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19180,7 +19585,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19525,7 +19930,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

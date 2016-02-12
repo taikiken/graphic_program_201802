@@ -4461,6 +4461,10 @@ table tr.w200 > td {
   top: 99999px;
   width: 340px; }
 
+.board-large .board-item .post-thumb img {
+  width: 100%;
+  height: auto; }
+
 #board-container-more {
   padding-top: 30px; }
   #board-container-more .board-btn-viewmore {
@@ -4776,6 +4780,63 @@ table tr.w200 > td {
   text-align: center; }
   .comment-andmore a {
     font-weight: bold; }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-common, .comment-menu .dropMenu:before, .head-sec .notice-menu .dropMenu:before, .head-sec .preference-menu .dropMenu:before, .user-config-nav a span:before, .user-config-btn-setting:before, .btn-bookmark span:before, .board-btn-viewmore-link span, .dialogue-notice-btn-close a, .comment-reaction i, .head-sec .notice-icon {
+  background-image: url(/assets/images/sprite/sprite-common.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-detail, .post-detail .post-sns-tw a, .post-detail .post-sns-fbshare a, .comment-menu-btn, [class^="dropMenu-link-"] span:before, .comment-respond-opener span:before {
+  background-image: url(/assets/images/sprite/sprite-detail.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-footer, .foot-sec .pagetop span, .foot-sec .sns-block ul a {
+  background-image: url(/assets/images/sprite/sprite-footer.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-setting, .setting-side-nav-link span:before, .setting-form-mail:before, .setting-form-pw:before, .setting-form-name:before, .setting-form-job:before, .linkage-sns-link span:before {
+  background-image: url(/assets/images/sprite/sprite-setting.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
+  background-image: url(/assets/images/sprite/sprite-header.png); }
+
+.comment-user .comment-user-thumb {
+  overflow: hidden; }
+  .comment-user .comment-user-thumb img {
+    width: 100%;
+    height: auto; }
+
+.commented-user-thumb {
+  overflow: hidden; }
+  .commented-user-thumb img {
+    width: 100%;
+    height: auto; }
 
 /*
   sprite

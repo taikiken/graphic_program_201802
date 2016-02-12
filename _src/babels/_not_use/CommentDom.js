@@ -29,7 +29,8 @@ let DeleteComment = React.createClass( {
     callback: React.PropTypes.func.isRequired
   },
   render: function() {
-    if ( !this.props.userId || this.props.userId !== this.props.commentUserId ) {
+
+    if ( this.props.userId !== this.props.commentUserId ) {
       return null;
     } else {
       return (
@@ -60,6 +61,7 @@ let CommentMenu = React.createClass( {
     };
   },
   render: function() {
+
     if ( this.props.sign ) {
       // ログインユーザーのみ
       return (
@@ -146,11 +148,12 @@ let CommentMenu = React.createClass( {
   }
 } );
 
+
 export let CommentDom = React.createClass( {
   propTypes: {
     commentDae: React.PropTypes.object.isRequired,
     // unique id（識別のために必要）
-    // id: React.PropTypes.string.isRequired,
+    id: React.PropTypes.string.isRequired,
     // コメント送信者（自分の）profile picture
     icon: React.PropTypes.string,
     // user id（オプション）
@@ -194,7 +197,7 @@ export let CommentDom = React.createClass( {
     let commentDae = this.props.commentDae;
     let comment = commentDae.comment;
     let parent = this.props.parent;
-    let sign = this.props.sign;
+    let sign = this.props.sin;
 
     // user icon
     let picture = comment.user.profilePicture || Empty.USER_EMPTY;
@@ -202,7 +205,7 @@ export let CommentDom = React.createClass( {
     // icon と名前
 
     return (
-      <div>
+      <li className="comment-item">
         <CommentMenu
           sign={sign}
           userId={this.props.userId}
@@ -211,14 +214,14 @@ export let CommentDom = React.createClass( {
           commentId={this.props.commentId}
         />
         <figure className="comment-user">
-          <span className="comment-user-link">
+          <a href={comment.user.url} className="comment-user-link">
             <span className="comment-user-thumb"><img src={picture} alt={comment.user.userName}/></span>
             <div className="comment-user-data">
               <p className="comment-user-name">{comment.user.userName}</p>
               <p className="comment-user-job">{comment.user.bio || ''}</p>
               <p className="comment-date">{comment.formatDate}</p>
             </div>
-          </span>
+          </a>
         </figure>
         <div className="comment-content" dangerouslySetInnerHTML={{__html: comment.body}} />
         <ReactionDom
@@ -230,7 +233,7 @@ export let CommentDom = React.createClass( {
           isGood={comment.isGood}
           isBad={comment.isBad}
         />
-      </div>
+      </li>
     );
   },
   componentDidMount: function() {

@@ -24,11 +24,47 @@ var _ReactionDom = require('./ReactionDom');
 // React
 var React = self.React;
 
+// コメント削除 自分のだけ
+
+// node
+var DeleteComment = React.createClass({
+  displayName: 'DeleteComment',
+
+  propTypes: {
+    // user id
+    userId: React.PropTypes.string.isRequired,
+    commentUserId: React.PropTypes.string.isRequired,
+    callback: React.PropTypes.func.isRequired
+  },
+  render: function render() {
+    if (!this.props.userId || this.props.userId !== this.props.commentUserId) {
+      return null;
+    } else {
+      return React.createElement(
+        'li',
+        { className: 'dropMenu-item' },
+        React.createElement(
+          'a',
+          { href: '#', className: 'dropMenu-link-delete', onClick: this.props.callback },
+          React.createElement(
+            'span',
+            null,
+            'このコメントを削除する'
+          )
+        )
+      );
+    }
+  }
+});
+
 // 通報 drop menu
 var CommentMenu = React.createClass({
   displayName: 'CommentMenu',
 
   propTypes: {
+    // user id
+    userId: React.PropTypes.string.isRequired,
+    commentUserId: React.PropTypes.string.isRequired,
     articleId: React.PropTypes.string.isRequired,
     commentId: React.PropTypes.string.isRequired,
     sign: React.PropTypes.bool.isRequired
@@ -42,7 +78,6 @@ var CommentMenu = React.createClass({
     };
   },
   render: function render() {
-
     if (this.props.sign) {
       // ログインユーザーのみ
       return React.createElement(
@@ -56,19 +91,11 @@ var CommentMenu = React.createClass({
         React.createElement(
           'ul',
           { className: 'dropMenu' },
-          React.createElement(
-            'li',
-            { className: 'dropMenu-item' },
-            React.createElement(
-              'a',
-              { href: '#', className: 'dropMenu-link-delete', onClick: this.deleteClick },
-              React.createElement(
-                'span',
-                null,
-                'このコメントを削除する'
-              )
-            )
-          ),
+          React.createElement(DeleteComment, {
+            userId: this.props.userId,
+            commentUserId: this.props.commentUserId,
+            callback: this.deleteClick
+          }),
           React.createElement(
             'li',
             { className: 'dropMenu-item' },
@@ -151,13 +178,17 @@ var CommentDom = exports.CommentDom = React.createClass({
   propTypes: {
     commentDae: React.PropTypes.object.isRequired,
     // unique id（識別のために必要）
-    id: React.PropTypes.string.isRequired,
+    // id: React.PropTypes.string.isRequired,
     // コメント送信者（自分の）profile picture
-    icon: React.PropTypes.string.isRequired,
+    icon: React.PropTypes.string,
+    // user id（オプション）
+    userId: React.PropTypes.string,
     // 記事 id
     articleId: React.PropTypes.string.isRequired,
     // コメント id（オプション）
     commentId: React.PropTypes.string,
+    // コメントした user id
+    commentUserId: React.PropTypes.string.isRequired,
     // コメント数 default 0
     commentCount: React.PropTypes.number,
     // ログインの有無
@@ -171,6 +202,7 @@ var CommentDom = exports.CommentDom = React.createClass({
   },
   getDefaultProps: function getDefaultProps() {
     return {
+      userId: '',
       commentId: '',
       commentCount: 0,
       parent: false,
@@ -190,7 +222,7 @@ var CommentDom = exports.CommentDom = React.createClass({
     var commentDae = this.props.commentDae;
     var comment = commentDae.comment;
     var parent = this.props.parent;
-    var sign = this.props.sin;
+    var sign = this.props.sign;
 
     // user icon
     var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
@@ -198,10 +230,12 @@ var CommentDom = exports.CommentDom = React.createClass({
     // icon と名前
 
     return React.createElement(
-      'li',
-      { className: 'comment-item' },
+      'div',
+      null,
       React.createElement(CommentMenu, {
         sign: sign,
+        userId: this.props.userId,
+        commentUserId: this.props.commentUserId,
         articleId: this.props.articleId,
         commentId: this.props.commentId
       }),
@@ -209,8 +243,8 @@ var CommentDom = exports.CommentDom = React.createClass({
         'figure',
         { className: 'comment-user' },
         React.createElement(
-          'a',
-          { href: comment.user.url, className: 'comment-user-link' },
+          'span',
+          { className: 'comment-user-link' },
           React.createElement(
             'span',
             { className: 'comment-user-thumb' },

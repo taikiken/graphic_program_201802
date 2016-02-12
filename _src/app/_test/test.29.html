@@ -91,7 +91,7 @@
       console.log( 'beforeRender ****', responce );
 
       // comments official
-//      var official = new UT.view.ViewComments( responce.id, document.getElementById('comment-official'), document.getElementById('comment-official-more'), UT.app.CommentsType.OFFICIAL );
+//      var official = new UT.view.ViewComments( responce.id, document.getElementById('comment-official'), UT.app.CommentsType.OFFICIAL );
 //      official.start();
 
     }
@@ -142,7 +142,7 @@
       var single = event.args[ 0 ];
       console.log( 'singleReceiver.beforeRender ', single.id );
 
-      var normal = new UT.view.ViewComments( single.id, document.getElementById('comment-normal'), document.getElementById('comment-normal-more'), UT.app.const.CommentsType.NORMAL );
+      var normal = new UT.view.ViewComments( single.id, document.getElementById('comment-normal'), UT.app.const.CommentsType.NORMAL );
       normal.start();
 
     };

@@ -42,6 +42,8 @@ var _Empty = require('../app/const/Empty');
 
 var _CommentsType = require('../app/const/CommentsType');
 
+var _User = require('../app/User');
+
 var _View2 = require('./View');
 
 var _ViewError = require('./error/ViewError');
@@ -54,6 +56,10 @@ var _Safety = require('../data/Safety');
 
 var _CommentsListDae = require('../dae/CommentsListDae');
 
+var _UserDae = require('../dae/UserDae');
+
+var _CommentDom = require('../node/comment/CommentDom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
@@ -62,6 +68,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // view
 var React = self.React;
+
+// node
 
 // dae
 
@@ -108,19 +116,33 @@ var ViewComments = exports.ViewComments = function (_View) {
     _this2._moreRendered = null;
     // CommentsDom instance を保持します
     _this2._commentsRendered = null;
+
+    // user 情報
+    _this2._user = null;
     return _this2;
   }
   // ---------------------------------------------------
-  //  Method
+  //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * Ajax request を開始します
+   * ログイン user 情報
+   * @return {UserDae} ログイン user 情報を返します
    */
 
   (0, _createClass3.default)(ViewComments, [{
     key: 'start',
+
+    // ---------------------------------------------------
+    //  Method
+    // ---------------------------------------------------
+    /**
+     * Ajax request を開始します
+     */
     value: function start() {
 
+      if (_User.User.sign && this.user === null) {
+        throw new Error('user info have to set before start.' + this._articleId + ', ' + this._commentsListType);
+      }
       this.action.next();
     }
     /**
@@ -189,7 +211,7 @@ var ViewComments = exports.ViewComments = function (_View) {
       // total check
       if (commentsListDae.total === 0) {
         // デーが無いので処理を止める
-        console.log('(' + this._articleId + ')デーが無いので処理を止める');
+        console.log('(' + this._articleId + ', ' + this._commentsListType + ') stop rendering.');
         this.executeSafely(_View2.View.EMPTY_ERROR);
         return;
       }
@@ -238,9 +260,9 @@ var ViewComments = exports.ViewComments = function (_View) {
       var commentsBank = this._commentsBank;
 
       // comments type
-      var commentsListType = this._commentsListType;
+      // let commentsListType = this._commentsListType;
 
-      var articleId = this._articleId;
+      // let articleIdString = String(this._articleId);
 
       // コメント挿入 root element
       var element = this.element;
@@ -326,106 +348,60 @@ var ViewComments = exports.ViewComments = function (_View) {
       // --------------------------------------------
       // COMMENT ONE
       // --------------------------------------------
-      var CommentOne = React.createClass({
-        displayName: 'CommentOne',
-
+      /*
+      let CommentOne = React.createClass( {
         propType: {
           comment: React.PropTypes.object.isRequired,
           parent: React.PropTypes.bool
         },
-        getDefaultProps: function getDefaultProps() {
+        getDefaultProps: function() {
           return {
             parent: false
           };
         },
-        render: function render() {
-
-          var commentDae = this.props.comment;
-          var comment = commentDae.comment;
-          var isParent = this.props.parent;
-
-          var replyClass = '';
+        render: function() {
+           let commentDae = this.props.comment;
+          let comment = commentDae.comment;
+          let isParent = this.props.parent;
+           let replyClass = '';
           // console.log( 'comment', comment );
           // console.log( 'comment.user', comment.user );
-          var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
-          var commentReply = commentDae.reply;
-          var replyTotal = 0;
-          var replyTotalElement = '';
-          var replyLink = '';
-
-          if (isParent) {
-
-            if (typeof commentReply !== 'undefined' && commentReply !== null) {
+          let picture = comment.user.profilePicture || Empty.USER_EMPTY;
+          let commentReply = commentDae.reply;
+          let replyTotal = 0;
+          let replyTotalElement = '';
+          let replyLink = '';
+           if ( isParent ) {
+             if ( typeof commentReply !== 'undefined' && commentReply !== null ) {
               replyTotal = commentReply.total;
-
-              if (replyTotal !== 0) {
-                replyTotalElement = '(' + replyTotal + ')';
+               if ( replyTotal !== 0 ) {
+                replyTotalElement = `(${replyTotal})`;
               }
             }
-
-            replyLink = React.createElement(
-              'div',
-              null,
-              React.createElement(
-                'a',
-                { href: 'xxx', 'data-reply': 'reply-to-' + comment.id },
-                'コメントへ返信'
-              ),
-              replyTotalElement
-            );
-          }
-
-          var bodyTag = function bodyTag() {
+             replyLink = <div><a href="xxx" data-reply={'reply-to-' + comment.id}>コメントへ返信</a>{replyTotalElement}</div>;
+           }
+           let bodyTag = () => {
             return {
               __html: comment.body
             };
           };
-
-          console.log('**** comment ', comment);
-
-          // ToDo: 一般ユーザーは bio がない
-
-          return React.createElement(
-            'div',
-            { className: 'comment-' + commentsListType + ' comment-' + commentsListType + '-' + comment.id + replyClass },
-            React.createElement(
-              'div',
-              { className: 'comment-user-' + comment.user.id },
-              React.createElement('img', { src: picture, alt: comment.user.userName })
-            ),
-            React.createElement(
-              'div',
-              null,
-              comment.user.userName
-            ),
-            React.createElement(
-              'div',
-              null,
-              comment.user.bio
-            ),
-            React.createElement(
-              'div',
-              null,
-              comment.formatDate
-            ),
-            React.createElement('div', { className: 'comment-body', dangerouslySetInnerHTML: bodyTag() }),
-            React.createElement(
-              'div',
-              null,
-              'Good: ',
-              comment.good
-            ),
-            React.createElement(
-              'div',
-              null,
-              'Bad: ',
-              comment.bad
-            ),
-            replyLink
+           console.log( '**** comment ', comment );
+           // ToDo: 一般ユーザーは bio がない
+           return (
+            <div className={'comment-' + commentsListType + ' comment-' + commentsListType + '-' + comment.id + replyClass}>
+              <div className={'comment-user-' + comment.user.id}><img src={picture} alt={comment.user.userName}/></div>
+              <div>{comment.user.userName}</div>
+              <div>{comment.user.bio}</div>
+              <div>{comment.formatDate}</div>
+              <div  className="comment-body" dangerouslySetInnerHTML={bodyTag()} />
+              <div>Good: {comment.good}</div>
+              <div>Bad: {comment.bad}</div>
+              {replyLink}
+            </div>
           );
-        }
-      });
-
+         }
+      } );
+      */
       // --------------------------------------------
       // COMMENT reply loop
       // 親コメントへ返信
@@ -434,29 +410,64 @@ var ViewComments = exports.ViewComments = function (_View) {
         displayName: 'CommentReplyChild',
 
         propType: {
-          reply: React.PropTypes.object.isRequired,
-          id: React.PropTypes.string.isRequired,
+          total: React.PropTypes.number.isRequired,
+          sign: React.PropTypes.bool.isRequired,
+          userId: React.PropTypes.string.isRequired,
           articleId: React.PropTypes.string.isRequired,
-          commentId: React.PropTypes.string.isRequired
+          commentId: React.PropTypes.string.isRequired,
+          // id: React.PropTypes.string.isRequired,
+          commentsListType: React.PropTypes.object.isRequired,
+          reply: React.PropTypes.object.isRequired
+        },
+        getInitialState: function getInitialState() {
+          return {
+            reply: this.props.reply
+          };
         },
         render: function render() {
 
-          var reply = this.props.reply;
+          if (this.props.total === 0) {
+            // 描画しない
+            return null;
+          }
+
+          var reply = this.state.reply;
           var replyList = reply.comments;
-          var commentId = this.props.id;
+          var commentId = this.props.commentId;
+          var userId = this.props.userId;
+          var sign = this.props.sign;
+          var articleId = this.props.articleId;
+          var commentsListType = this.props.commentsListType;
 
           return React.createElement(
-            'div',
-            { className: 'comment-reply' },
+            'ul',
+            { className: 'comment-list' },
             replyList.comments.map(function (replyComment) {
 
               /* 親コメントと子コメントのデータ形式が違う
                  合わせるために object でラップする {comment: replyComment}
               */
-              return React.createElement(CommentOne, {
-                key: 'reply-' + commentsListType + '-' + articleId + '-' + commentId + '-' + replyComment.id,
-                comment: { comment: replyComment },
-                parent: false });
+              /*
+              return <CommentOne
+                key={`reply-${commentsListType}-${articleId}-${commentId}-${replyComment.id}`}
+                comment={{comment: replyComment}}
+                parent={false} />;
+              */
+
+              /* independent, open 省略 */
+              return React.createElement(
+                'li',
+                { key: 'reply-' + commentsListType + '-' + articleId + '-' + commentId + '-' + replyComment.id, className: 'comment-item' },
+                React.createElement(_CommentDom.CommentDom, {
+                  commentDae: { comment: replyComment },
+                  userId: userId,
+                  articleId: articleId,
+                  commentId: commentId,
+                  commentUserId: String(replyComment.user.id),
+                  sign: sign,
+                  parent: false
+                })
+              );
             })
           );
         }
@@ -472,30 +483,68 @@ var ViewComments = exports.ViewComments = function (_View) {
           commentObject: React.PropTypes.object.isRequired,
           id: React.PropTypes.string.isRequired,
           articleId: React.PropTypes.string.isRequired,
+          commentsListType: React.PropTypes.string.isRequired,
           total: React.PropTypes.number.isRequired,
           index: React.PropTypes.number.isRequired
         },
         render: function render() {
 
           var commentObject = this.props.commentObject;
-          var replyElement = '';
+          // let replyElement = '';
 
           console.log('commentObject ', commentObject);
+          /*
+                  if ( commentObject.reply.total > 0 ) {
+                    // コメント返信
+                    replyElement = <CommentReplyChild
+                      articleId={articleId}
+                      commentId={String(commentObject.comment.id)}
+                      id={this.props.id}
+                      reply={commentObject.reply} />;
+                  }
+          */
+          var total = _Safety.Safety.integer(commentObject.reply.total, 0);
+          var sign = _User.User.sign;
+          var icon = '';
+          var userId = '';
+          var commentId = String(commentObject.comment.id);
+          var articleId = this.props.articleId;
+          var commentsListType = this.props.commentsListType;
 
-          if (commentObject.reply.total > 0) {
-            // コメント返信
-            replyElement = React.createElement(CommentReplyChild, {
-              articleId: articleId,
-              commentId: String(commentObject.comment.id),
-              id: this.props.id,
-              reply: commentObject.reply });
+          if (sign) {
+            var user = this.user;
+            icon = user.profilePicture;
+            if (!icon) {
+              icon = _Empty.Empty.USER_EMPTY;
+            }
+            userId = user.id;
           }
 
           return React.createElement(
-            'div',
-            { className: 'comment-parent' },
-            React.createElement(CommentOne, { comment: commentObject, parent: true }),
-            replyElement
+            'ul',
+            { className: 'comment-list' },
+            React.createElement(
+              'li',
+              { className: 'comment-item' },
+              React.createElement(_CommentDom.CommentDom, {
+                commentDae: commentObject,
+                icon: icon,
+                userId: userId,
+                articleId: articleId,
+                commentId: commentId,
+                commentUserId: String(commentObject.comment.user.id),
+                sign: sign,
+                parent: true
+              }),
+              React.createElement(CommentReplyChild, {
+                total: total,
+                sign: sign,
+                userId: userId,
+                articleId: articleId,
+                commentId: commentId,
+                commentsListType: commentsListType,
+                reply: commentObject.reply })
+            )
           );
         }
       });
@@ -507,7 +556,9 @@ var ViewComments = exports.ViewComments = function (_View) {
         displayName: 'CommentsDom',
 
         propType: {
-          commentsList: React.PropTypes.array.isRequired
+          commentsList: React.PropTypes.array.isRequired,
+          commentsListType: React.PropTypes.string.isRequired,
+          articleId: React.PropTypes.string.isRequired
         },
         getInitialState: function getInitialState() {
           return {
@@ -517,10 +568,21 @@ var ViewComments = exports.ViewComments = function (_View) {
         render: function render() {
 
           var list = this.state.commentsList;
+          var articleId = this.props.articleId;
+          var commentsListType = this.props.commentsListType;
 
           return React.createElement(
             'div',
             { className: 'comment-' + commentsListType },
+            React.createElement(
+              'div',
+              { className: 'comment-heading' },
+              React.createElement(
+                'h2',
+                null,
+                _CommentsType.CommentsType.title(commentsListType)
+              )
+            ),
             list.map(function (commentId, index) {
 
               var commentObject = commentsBank[commentId];
@@ -530,8 +592,9 @@ var ViewComments = exports.ViewComments = function (_View) {
                 key: key,
                 id: key,
                 index: index,
-                articleId: String(articleId),
+                articleId: articleId,
                 commentObject: commentObject,
+                commentsListType: commentsListType,
                 total: commentsListDae.total });
             }),
             React.createElement('div', { className: 'comment-more', ref: 'commentMore' })
@@ -556,13 +619,30 @@ var ViewComments = exports.ViewComments = function (_View) {
       // this._commentsRendered が null の時だけ CommentsDom.render する
       if (this._commentsRendered === null) {
 
-        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList }), element);
+        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList,
+          articleId: String(this._articleId),
+          commentsListType: this._commentsListType
+        }), element);
       } else {
 
         this._commentsRendered.updateList(commentsList);
       }
     } // all
 
+  }, {
+    key: 'user',
+    get: function get() {
+      return this._user;
+    }
+    /**
+     * ログイン user 情報を設定します<br>
+     * start の前に設定します
+     * @param {UserDae} user ログイン user 情報
+     */
+    ,
+    set: function set(user) {
+      this._user = user;
+    }
   }]);
   return ViewComments;
 }(_View2.View);

@@ -4,3 +4,22 @@
 // -------------------------------------------------
 // comment
 // -------------------------------------------------
+
+// user icon
+.comment-user {
+  .comment-user-thumb {
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.commented-user-thumb {
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}

@@ -14,6 +14,7 @@
 // app
 import {Empty} from '../app/const/Empty';
 import {CommentsType} from '../app/const/CommentsType';
+import {User} from '../app/User';
 
 // view
 import {View} from './View';
@@ -28,6 +29,10 @@ import {Safety} from '../data/Safety';
 
 // dae
 import {CommentsListDae} from '../dae/CommentsListDae';
+import {UserDae} from '../dae/UserDae';
+
+// node
+import {CommentDom} from '../node/comment/CommentDom';
 
 // React
 let React = self.React;
@@ -65,6 +70,27 @@ export class ViewComments extends View {
     this._moreRendered = null;
     // CommentsDom instance を保持します
     this._commentsRendered = null;
+
+    // user 情報
+    this._user = null;
+  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * ログイン user 情報
+   * @return {UserDae} ログイン user 情報を返します
+   */
+  get user():UserDae {
+    return this._user;
+  }
+  /**
+   * ログイン user 情報を設定します<br>
+   * start の前に設定します
+   * @param {UserDae} user ログイン user 情報
+   */
+  set user( user:UserDae ):void {
+    this._user = user;
   }
   // ---------------------------------------------------
   //  Method
@@ -74,6 +100,9 @@ export class ViewComments extends View {
    */
   start():void {
 
+    if ( User.sign && this.user === null ) {
+      throw new Error( `user info have to set before start.${this._articleId}, ${this._commentsListType}` );
+    }
     this.action.next();
 
   }
@@ -135,7 +164,7 @@ export class ViewComments extends View {
     // total check
     if ( commentsListDae.total === 0 ) {
       // デーが無いので処理を止める
-      console.log( `(${this._articleId})デーが無いので処理を止める` );
+      console.log( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
       this.executeSafely( View.EMPTY_ERROR );
       return;
     }
@@ -183,9 +212,9 @@ export class ViewComments extends View {
     let commentsBank = this._commentsBank;
 
     // comments type
-    let commentsListType = this._commentsListType;
+    // let commentsListType = this._commentsListType;
 
-    let articleId = this._articleId;
+    // let articleIdString = String(this._articleId);
 
     // コメント挿入 root element
     let element = this.element;
@@ -278,6 +307,7 @@ export class ViewComments extends View {
     // --------------------------------------------
     // COMMENT ONE
     // --------------------------------------------
+    /*
     let CommentOne = React.createClass( {
       propType: {
         comment: React.PropTypes.object.isRequired,
@@ -342,40 +372,74 @@ export class ViewComments extends View {
 
       }
     } );
-
+*/
     // --------------------------------------------
     // COMMENT reply loop
     // 親コメントへ返信
     // --------------------------------------------
     let CommentReplyChild = React.createClass( {
       propType: {
-        reply: React.PropTypes.object.isRequired,
-        id: React.PropTypes.string.isRequired,
+        total: React.PropTypes.number.isRequired,
+        sign: React.PropTypes.bool.isRequired,
+        userId: React.PropTypes.string.isRequired,
         articleId: React.PropTypes.string.isRequired,
-        commentId: React.PropTypes.string.isRequired
+        commentId: React.PropTypes.string.isRequired,
+        // id: React.PropTypes.string.isRequired,
+        commentsListType: React.PropTypes.object.isRequired,
+        reply: React.PropTypes.object.isRequired
+      },
+      getInitialState: function() {
+        return {
+          reply: this.props.reply
+        };
       },
       render: function() {
 
-        let reply = this.props.reply;
+        if ( this.props.total === 0 ) {
+          // 描画しない
+          return null;
+        }
+
+        let reply = this.state.reply;
         let replyList = reply.comments;
-        let commentId = this.props.id;
+        let commentId = this.props.commentId;
+        let userId = this.props.userId;
+        let sign = this.props.sign;
+        let articleId = this.props.articleId;
+        let commentsListType = this.props.commentsListType;
 
         return (
-          <div className="comment-reply">
+          <ul className="comment-list">
             {
               replyList.comments.map( function( replyComment ) {
 
                 /* 親コメントと子コメントのデータ形式が違う
                    合わせるために object でラップする {comment: replyComment}
                 */
+                /*
                 return <CommentOne
                   key={`reply-${commentsListType}-${articleId}-${commentId}-${replyComment.id}`}
                   comment={{comment: replyComment}}
                   parent={false} />;
+                */
 
+                /* independent, open 省略 */
+                return (
+                  <li key={`reply-${commentsListType}-${articleId}-${commentId}-${replyComment.id}`} className="comment-item">
+                    <CommentDom
+                      commentDae={{comment: replyComment}}
+                      userId={userId}
+                      articleId={articleId}
+                      commentId={commentId}
+                      commentUserId={String(replyComment.user.id)}
+                      sign={sign}
+                      parent={false}
+                    />
+                  </li>
+                );
               } )
             }
-          </div>
+          </ul>
         );
 
       }
@@ -389,16 +453,17 @@ export class ViewComments extends View {
         commentObject: React.PropTypes.object.isRequired,
         id: React.PropTypes.string.isRequired,
         articleId: React.PropTypes.string.isRequired,
+        commentsListType: React.PropTypes.string.isRequired,
         total: React.PropTypes.number.isRequired,
         index: React.PropTypes.number.isRequired
       },
       render: function() {
 
         let commentObject = this.props.commentObject;
-        let replyElement = '';
+        // let replyElement = '';
 
         console.log( 'commentObject ', commentObject );
-
+/*
         if ( commentObject.reply.total > 0 ) {
           // コメント返信
           replyElement = <CommentReplyChild
@@ -407,16 +472,56 @@ export class ViewComments extends View {
             id={this.props.id}
             reply={commentObject.reply} />;
         }
+*/
+        let total = Safety.integer( commentObject.reply.total, 0 );
+        let sign = User.sign;
+        let icon = '';
+        let userId = '';
+        let commentId = String(commentObject.comment.id);
+        let articleId = this.props.articleId;
+        let commentsListType = this.props.commentsListType;
+
+        if ( sign ) {
+          let user = this.user;
+          icon = user.profilePicture;
+          if ( !icon ) {
+            icon = Empty.USER_EMPTY;
+          }
+          userId = user.id;
+        }
 
         return (
 
-          <div className={'comment-parent'}>
-            <CommentOne comment={commentObject} parent={true} />
-            {replyElement}
-          </div>
+          <ul className={'comment-list'}>
+            <li className="comment-item">
+              {/*
+               <CommentOne comment={commentObject} parent={true} />
+               */}
+              {
+                /* independent, open 省略 */
+              }
+              <CommentDom
+                commentDae={commentObject}
+                icon={icon}
+                userId={userId}
+                articleId={articleId}
+                commentId={commentId}
+                commentUserId={String(commentObject.comment.user.id)}
+                sign={sign}
+                parent={true}
+              />
+              <CommentReplyChild
+                total={total}
+                sign={sign}
+                userId={userId}
+                articleId={articleId}
+                commentId={commentId}
+                commentsListType={commentsListType}
+                reply={commentObject.reply} />
+            </li>
+          </ul>
 
         );
-
 
       }
     } );
@@ -426,7 +531,9 @@ export class ViewComments extends View {
     // --------------------------------------------
     let CommentsDom = React.createClass( {
       propType: {
-        commentsList: React.PropTypes.array.isRequired
+        commentsList: React.PropTypes.array.isRequired,
+        commentsListType: React.PropTypes.string.isRequired,
+        articleId: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
         return {
@@ -436,9 +543,14 @@ export class ViewComments extends View {
       render: function() {
 
         let list = this.state.commentsList;
+        let articleId = this.props.articleId;
+        let commentsListType = this.props.commentsListType;
 
         return (
           <div className={'comment-' + commentsListType}>
+            <div className="comment-heading">
+              <h2>{CommentsType.title(commentsListType)}</h2>
+            </div>
             {
               list.map( function( commentId, index ) {
 
@@ -449,8 +561,9 @@ export class ViewComments extends View {
                   key={key}
                   id={key}
                   index={index}
-                  articleId={String(articleId)}
+                  articleId={articleId}
                   commentObject={commentObject}
+                  commentsListType={commentsListType}
                   total={commentsListDae.total} />;
               } )
             }
@@ -479,7 +592,10 @@ export class ViewComments extends View {
     if ( this._commentsRendered === null ) {
 
       this._commentsRendered = ReactDOM.render(
-        <CommentsDom commentsList={commentsList} />,
+        <CommentsDom commentsList={commentsList}
+                     articleId={String(this._articleId)}
+                     commentsListType={this._commentsListType}
+        />,
         element
       );
 

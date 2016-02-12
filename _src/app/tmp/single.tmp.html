@@ -213,7 +213,7 @@
     UT.app.App.develop();
 
     // sign in
-    UT.app.User.login();
+    // UT.app.User.login();
 
     // test code ここまで
     // ---------------------------------------------------------
@@ -232,6 +232,22 @@
       }
 
       console.log( '============ makeCommentDom start', userDae, singleDae );
+
+
+
+      // official
+      var official = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-official-container'), UT.app.const.CommentsType.OFFICIAL );
+      if ( !!userDae ) {
+        official.user = userDae;
+      }
+      official.start();
+
+      // normal
+      var normal = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-normal-container'), UT.app.const.CommentsType.NORMAL );
+      if ( !!userDae ) {
+        normal.user = userDae;
+      }
+      normal.start();
 
     }
 
@@ -287,12 +303,12 @@
       // ranking
       // slug
       var ranking = new UT.view.sidebar.ViewRanking( document.getElementById( 'widget-ranking-container' ), null, slug );
-      ranking.start();
+      // ranking.start();
 
       // video
       // slug
       var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), null, slug );
-      videos.start();
+      // videos.start();
 
       // -------------------------------------------------------
       // comment

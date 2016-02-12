@@ -269,7 +269,7 @@ var UT = {
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-12 15:56:39
+ * @date 2016-02-12 19:49:16
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html

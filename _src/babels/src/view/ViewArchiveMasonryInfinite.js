@@ -404,7 +404,7 @@ export class ViewArchiveMasonryInfinite extends View {
                   // 同一ユーザーが複数投稿することがあるため
                   // render 内で unique なことを保証する必要がある
                   return (
-                    <li key={'user-' + articleId + '-' + commentDae.id + '-' + userDae.id} className={'commented-user-item commented-user-item-' + i}>
+                    <li key={'user-' + articleId + '-' + commentDae.id + '-' + userDae.id + '-' + i} className={'commented-user-item commented-user-item-' + i}>
                       <span className="commented-user-thumb">
                         <img src={picture} alt={userDae.userName}/>
                       </span>

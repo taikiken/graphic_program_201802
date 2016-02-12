@@ -463,7 +463,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                 // render 内で unique なことを保証する必要がある
                 return React.createElement(
                   'li',
-                  { key: 'user-' + articleId + '-' + commentDae.id + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
+                  { key: 'user-' + articleId + '-' + commentDae.id + '-' + userDae.id + '-' + i, className: 'commented-user-item commented-user-item-' + i },
                   React.createElement(
                     'span',
                     { className: 'commented-user-thumb' },
