@@ -1,0 +1,1 @@
+<br><span class="lbl" style="color:#FF8A00">システムがエラーを返しました。<br><?=$err_message?><br><br><a href="javascript:history.back()">こちらから入力画面に戻ってください。</a><br></span>
