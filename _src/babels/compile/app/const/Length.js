@@ -11,6 +11,11 @@
  */
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Length = undefined;
+
 var _isInteger = require('babel-runtime/core-js/number/is-integer');
 
 var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -26,11 +31,6 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Length = undefined;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

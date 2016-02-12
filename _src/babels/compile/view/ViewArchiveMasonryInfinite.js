@@ -13,6 +13,11 @@
 
 // app
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewArchiveMasonryInfinite = undefined;
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -33,11 +38,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewArchiveMasonryInfinite = undefined;
-
 var _Empty = require('../app/const/Empty');
 
 var _User = require('../app/User');
@@ -54,18 +54,22 @@ var _ArticleDae = require('../dae/ArticleDae');
 
 var _Rise = require('../ui/Rise');
 
+var _ReactionDom = require('../node/comment/ReactionDom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
+
+// ui
+var React = self.React;
+
+// node(ReactClass)
 
 // dae
 
 // data
 
 // view
-var React = self.React;
-
-// ui
 
 var ReactDOM = self.ReactDOM;
 
@@ -392,39 +396,83 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
       // --------------------------------------------
       // COMMENTS Popular second
       // --------------------------------------------
+      var CommentedUsers = React.createClass({
+        displayName: 'CommentedUsers',
+
+        propType: {
+          total: React.PropTypes.number.isRequired
+        },
+        getInitialState: function getInitialState() {
+          return {
+            total: this.props.total
+          };
+        },
+        render: function render() {
+
+          if (this.state.total === 0) {
+            return null;
+          } else {
+
+            return React.createElement(
+              'span',
+              { className: 'commented-user-andmore' },
+              this.state.total
+            );
+          }
+        }
+
+      });
+
       var CommentsSecond = React.createClass({
         displayName: 'CommentsSecond',
 
         propType: {
           seconds: React.PropTypes.array.isRequired,
-          articleId: React.PropTypes.string.isRequired
+          articleId: React.PropTypes.string.isRequired,
+          total: React.PropTypes.number.isRequired,
+          hasSecond: React.PropTypes.bool.isRequired
+        },
+        getInitialState: function getInitialState() {
+          return {
+            seconds: this.props.seconds
+          };
         },
         render: function render() {
 
-          var seconds = this.props.seconds;
+          if (!this.props.hasSecond) {
+            // 描画要素がない
+            return null;
+          }
+
+          var seconds = this.state.seconds;
           var articleId = this.props.articleId;
-          // console.log( 'seconds ', seconds );
+
           return React.createElement(
-            'ul',
-            { className: 'comments-second' },
-            seconds.map(function (commentDae, i) {
+            'div',
+            { className: 'commented-user' },
+            React.createElement(
+              'ul',
+              { className: 'comments-second' },
+              seconds.map(function (commentDae, i) {
 
-              var userDae = commentDae.user;
-              var picture = userDae.profilePicture ? userDae.profilePicture : _Empty.Empty.USER_PICTURE;
+                var userDae = commentDae.user;
+                var picture = userDae.profilePicture ? userDae.profilePicture : _Empty.Empty.USER_EMPTY;
 
-              // CommentsSecond unique key は  記事Id + index + user Id を使用する
-              // 同一ユーザーが複数投稿することがあるため
-              // render 内で unique なことを保証する必要がある
-              return React.createElement(
-                'li',
-                { key: 'user-' + articleId + '-' + i + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
-                React.createElement(
-                  'a',
-                  { className: 'commented-user-thumb', href: userDae.url },
-                  React.createElement('img', { src: picture, alt: userDae.userName })
-                )
-              );
-            })
+                // CommentsSecond unique key は  記事Id + user Id を使用する
+                // 同一ユーザーが複数投稿することがあるため
+                // render 内で unique なことを保証する必要がある
+                return React.createElement(
+                  'li',
+                  { key: 'user-' + articleId + '-' + commentDae.id + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
+                  React.createElement(
+                    'span',
+                    { className: 'commented-user-thumb' },
+                    React.createElement('img', { src: picture, alt: userDae.userName })
+                  )
+                );
+              })
+            ),
+            React.createElement(CommentedUsers, { total: this.props.total })
           );
         }
       });
@@ -432,151 +480,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
       // --------------------------------------------
       // COMMENTS Popular
       // --------------------------------------------
-
-      // good link
-      var GoodLink = React.createClass({
-        displayName: 'GoodLink',
-
-        propType: {
-          sign: React.PropTypes.bool.isRequired,
-          comment: React.PropTypes.object.isRequired,
-          active: React.PropTypes.bool,
-          callback: React.PropTypes.func
-        },
-        getDefaultProps: function getDefaultProps() {
-          return {
-            active: false,
-            callback: function callback() {}
-          };
-        },
-        getInitialState: function getInitialState() {
-          return {
-            active: false,
-            callback: function callback() {}
-          };
-        },
-        render: function render() {
-
-          var sign = this.props.sign;
-          var comment = this.props.comment;
-          var active = this.props.active;
-          // active（click可能）にするかを表す
-          var activeClass = active ? ' active' : '';
-
-          if (sign) {
-
-            // login user
-            // click ずみの時は不可
-            return React.createElement(
-              'a',
-              { className: 'comment-reaction-btn comment-reaction-like' + activeClass, href: '#', onClick: this.handleClick },
-              React.createElement(
-                'i',
-                null,
-                ' '
-              ),
-              React.createElement(
-                'span',
-                null,
-                comment.good
-              )
-            );
-          } else {
-
-            // not login user
-            // click 不可
-            return React.createElement(
-              'span',
-              { className: 'comment-reaction-btn comment-reaction-like' },
-              React.createElement(
-                'i',
-                null,
-                ' '
-              ),
-              React.createElement(
-                'span',
-                null,
-                comment.good
-              )
-            );
-          }
-        },
-        handleClick: function handleClick(event) {
-          event.preventDefault();
-          this.props.callback(this.props.comment);
-          this.setState({ active: false });
-        }
-      });
-
-      // bad link
-      var BadLink = React.createClass({
-        displayName: 'BadLink',
-
-        propType: {
-          sign: React.PropTypes.bool.isRequired,
-          comment: React.PropTypes.object.isRequired,
-          active: React.PropTypes.bool,
-          callback: React.PropTypes.func
-        },
-        getDefaultProps: function getDefaultProps() {
-          return {
-            active: false,
-            callback: function callback() {}
-          };
-        },
-        getInitialState: function getInitialState() {
-          return {
-            active: false,
-            callback: function callback() {}
-          };
-        },
-        render: function render() {
-
-          var sign = this.props.sign;
-          var comment = this.props.comment;
-          var active = this.props.active;
-          var activeClass = active ? ' active' : '';
-
-          if (sign) {
-            // login user
-            return React.createElement(
-              'a',
-              { className: 'comment-reaction-btn comment-reaction-dislike' + activeClass, href: '#', onClick: this.handleClick },
-              React.createElement(
-                'i',
-                null,
-                ' '
-              ),
-              React.createElement(
-                'span',
-                null,
-                comment.bad
-              )
-            );
-          } else {
-            // not login user
-            return React.createElement(
-              'span',
-              { className: 'comment-reaction-btn comment-reaction-dislike' },
-              React.createElement(
-                'i',
-                null,
-                ' '
-              ),
-              React.createElement(
-                'span',
-                null,
-                comment.bad
-              )
-            );
-          }
-        },
-        handleClick: function handleClick(event) {
-          event.preventDefault();
-          this.props.callback(this.props.comment);
-          this.setState({ active: false });
-        }
-      });
 
       // --------------------------------------------
       // first + second comment container
@@ -605,7 +508,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           if (hasSecond) {
             // 2件目以降も存在する
             // 2件目以降のDomを生成する
-            second = React.createElement(CommentsSecond, { seconds: secondsDae, articleId: articleId });
+            // second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
             total -= secondsDae.length;
           }
 
@@ -622,7 +525,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             // 1件目コメント・ユーザー
             var firstUser = first.user;
             // ユーザーサムネイル
-            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
+            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_EMPTY;
             // login 済かを調べる
             var sign = _User.User.sign;
 
@@ -636,8 +539,8 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                   'figure',
                   { className: 'comment-user' },
                   React.createElement(
-                    'a',
-                    { className: 'comment-user-link', href: firstUser.url },
+                    'span',
+                    { className: 'comment-user-link' },
                     React.createElement(
                       'span',
                       { className: 'comment-user-thumb' },
@@ -660,31 +563,22 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                   )
                 ),
                 React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
-                React.createElement(
-                  'div',
-                  { className: 'comment-reaction' },
-                  React.createElement(GoodLink, {
-                    sign: sign,
-                    comment: first,
-                    callback: this.goodClick
-                  }),
-                  React.createElement(BadLink, {
-                    sign: sign,
-                    comment: first,
-                    callback: this.badClick
-                  })
-                )
+                React.createElement(_ReactionDom.ReactionDom, {
+                  articleId: String(articleId),
+                  commentId: String(first.id),
+                  sign: sign,
+                  good: first.good,
+                  bad: first.bad,
+                  isGood: first.isGood,
+                  isBad: first.isBad
+                })
               ),
-              React.createElement(
-                'div',
-                { className: 'commented-user' },
-                second,
-                React.createElement(
-                  'span',
-                  { className: 'commented-user-andmore' },
-                  total > 0 ? '+' + total : ''
-                )
-              )
+              React.createElement(CommentsSecond, {
+                seconds: secondsDae,
+                articleId: articleId,
+                total: total,
+                hasSecond: hasSecond
+              })
             );
           }
 
@@ -692,20 +586,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         }, // render
         componentDidMount: function componentDidMount() {
           // mount
-        },
-        // -----------------------------------------
-        // good / bad 関連 custom method
-        goodClick: function goodClick(comment) {
-          var commentId = comment.id;
-          var userId = comment.user.id;
-
-          console.log('goodClick', commentId, userId);
-        },
-        badClick: function badClick(comment) {
-          var commentId = comment.id;
-          var userId = comment.user.id;
-
-          console.log('badClick', commentId, userId);
         }
       });
 
@@ -808,7 +688,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                     )
                   )
                 ),
-                React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
+                React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: String(dae.id) })
               );
               // loop end
             })

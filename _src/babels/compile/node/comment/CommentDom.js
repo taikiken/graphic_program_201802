@@ -19,6 +19,8 @@ exports.CommentDom = undefined;
 
 var _Empty = require('../../app/const/Empty');
 
+var _ReactionDom = require('./ReactionDom');
+
 // React
 var React = self.React;
 
@@ -143,105 +145,6 @@ var CommentMenu = React.createClass({
   }
 });
 
-var ReactionDom = React.createClass({
-  displayName: 'ReactionDom',
-
-  propTypes: {
-    // 記事 id
-    articleId: React.PropTypes.string.isRequired,
-    // コメント id（オプション）
-    commentId: React.PropTypes.string,
-    sign: React.PropTypes.bool.isRequired,
-    good: React.PropTypes.number.isRequired,
-    bad: React.PropTypes.number.isRequired
-  },
-  getInitialState: function getInitialState() {
-    return {
-      loading: '',
-      good: this.props.good,
-      bad: this.props.bad,
-      activate: this.props.sign
-    };
-  },
-  render: function render() {
-    var good = this.state.good !== 0 ? this.state.good : '';
-    var bad = this.state.bad !== 0 ? this.state.bad : '';
-
-    if (this.state.activate) {
-      return React.createElement(
-        'div',
-        { className: 'comment-reaction ' + this.state.loading },
-        React.createElement(
-          'a',
-          { className: 'comment-reaction-btn comment-reaction-like active', href: '#', onClick: this.goodClick },
-          React.createElement(
-            'i',
-            null,
-            ' '
-          ),
-          good
-        ),
-        React.createElement(
-          'a',
-          { className: 'comment-reaction-btn comment-reaction-dislike', href: '#', onClick: this.badClick },
-          React.createElement(
-            'i',
-            null,
-            ' '
-          ),
-          bad
-        ),
-        React.createElement('div', { className: 'loading-spinner' })
-      );
-    } else {
-      // 非ログイン
-      return React.createElement(
-        'div',
-        { className: 'comment-reaction ' + this.state.loading },
-        React.createElement(
-          'span',
-          { className: 'comment-reaction-btn comment-reaction-like active' },
-          React.createElement(
-            'i',
-            null,
-            ' '
-          ),
-          good
-        ),
-        React.createElement(
-          'span',
-          { className: 'comment-reaction-btn comment-reaction-dislike' },
-          React.createElement(
-            'i',
-            null,
-            ' '
-          ),
-          bad
-        ),
-        React.createElement('div', { className: 'loading-spinner' })
-      );
-    }
-  },
-  goodClick: function goodClick(event) {
-    event.preventDefault();
-    this.setState({ loading: 'loading' });
-  },
-  badClick: function badClick(event) {
-    event.preventDefault();
-    this.setState({ loading: 'loading' });
-  },
-  goodDone: function goodDone() {
-    this.setState({ good: ++this.state.good, bad: --this.state.bad, loading: '' });
-  },
-  badDone: function badDone() {
-    this.setState({ good: --this.state.good, bad: ++this.state.bad, loading: '' });
-  },
-  requestError: function requestError(error) {
-    console.warn('requestError ', error.message);
-    this.setState({ loading: '' });
-  }
-});
-
 var CommentDom = exports.CommentDom = React.createClass({
   displayName: 'CommentDom',
 
@@ -335,12 +238,14 @@ var CommentDom = exports.CommentDom = React.createClass({
         )
       ),
       React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: comment.body } }),
-      React.createElement(ReactionDom, {
+      React.createElement(_ReactionDom.ReactionDom, {
         articleId: this.props.articleId,
         commentId: this.props.commentId,
         sign: sign,
         good: comment.good,
-        bad: comment.bad
+        bad: comment.bad,
+        isGood: comment.isGood,
+        isBad: comment.isBad
       })
     );
   },

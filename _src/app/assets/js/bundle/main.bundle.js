@@ -130,23 +130,23 @@
 
 	var _ViewArchiveMasonryInfinite = __webpack_require__(144);
 
-	var _ViewCategory = __webpack_require__(155);
+	var _ViewCategory = __webpack_require__(156);
 
-	var _ViewSingle = __webpack_require__(156);
+	var _ViewSingle = __webpack_require__(157);
 
-	var _ViewTitle = __webpack_require__(165);
+	var _ViewTitle = __webpack_require__(166);
 
-	var _ViewComments = __webpack_require__(166);
+	var _ViewComments = __webpack_require__(167);
 
-	var _ViewHeadline = __webpack_require__(171);
+	var _ViewHeadline = __webpack_require__(172);
 
-	var _ViewPickup = __webpack_require__(172);
+	var _ViewPickup = __webpack_require__(173);
 
-	var _ViewRanking = __webpack_require__(173);
+	var _ViewRanking = __webpack_require__(174);
 
-	var _ViewVideos = __webpack_require__(174);
+	var _ViewVideos = __webpack_require__(175);
 
-	var _Receiver = __webpack_require__(175);
+	var _Receiver = __webpack_require__(176);
 
 	/**
 	 * ToDo: 対象外OS alert
@@ -315,7 +315,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-12 01:08:57
+	 * @date 2016-02-12 15:56:39
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -353,6 +353,11 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Loc = undefined;
+
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -364,11 +369,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Loc = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -1178,21 +1178,19 @@
 
 	"use strict";
 
-	exports.__esModule = true;
-
 	exports.default = function (instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError("Cannot call a class as a function");
 	  }
 	};
 
+	exports.__esModule = true;
+
 /***/ },
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-
-	exports.__esModule = true;
 
 	var _defineProperty = __webpack_require__(42);
 
@@ -1217,6 +1215,8 @@
 	    return Constructor;
 	  };
 	})();
+
+	exports.__esModule = true;
 
 /***/ },
 /* 42 */
@@ -1250,6 +1250,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Safety = undefined;
+
 	var _isInteger = __webpack_require__(45);
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -1273,11 +1278,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Safety = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1798,6 +1798,11 @@
 
 	"use strict";
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Format = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -1809,11 +1814,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Format = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1894,6 +1894,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Router = undefined;
+
 	var _isInteger = __webpack_require__(45);
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -1925,11 +1930,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Router = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -2586,9 +2586,9 @@
 
 	        var _Loc$path$replace$spl18 = (0, _slicedToArray3.default)(_Loc$path$replace$spl17, 1);
 
-	        var keyword = _Loc$path$replace$spl18[0];
+	        var _keyword = _Loc$path$replace$spl18[0];
 
-	        return keyword;
+	        return _keyword;
 	      }
 	    }
 	    /**
@@ -2852,8 +2852,6 @@
 
 	"use strict";
 
-	exports.__esModule = true;
-
 	var _isIterable2 = __webpack_require__(63);
 
 	var _isIterable3 = _interopRequireDefault(_isIterable2);
@@ -2901,6 +2899,8 @@
 	    }
 	  };
 	})();
+
+	exports.__esModule = true;
 
 /***/ },
 /* 63 */
@@ -2987,8 +2987,6 @@
 
 	"use strict";
 
-	exports.__esModule = true;
-
 	var _typeof2 = __webpack_require__(51);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
@@ -3002,6 +3000,8 @@
 
 	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
 	};
+
+	exports.__esModule = true;
 
 /***/ },
 /* 72 */
@@ -3105,6 +3105,11 @@
 	 * Custom Event
 	 */
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.EventDispatcher = undefined;
+
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -3116,11 +3121,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.EventDispatcher = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3421,6 +3421,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.User = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3432,11 +3437,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.User = undefined;
 
 	var _Cookie = __webpack_require__(79);
 
@@ -3570,6 +3570,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Cookie = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3581,11 +3586,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Cookie = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3658,6 +3658,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Env = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3669,11 +3674,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Env = undefined;
 
 	var _Loc = __webpack_require__(1);
 
@@ -3825,6 +3825,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserStatus = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -3848,11 +3853,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UserStatus = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -3978,6 +3978,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Codes = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3989,11 +3994,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Codes = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4127,6 +4127,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsType = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4138,11 +4143,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsType = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4227,6 +4227,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Title = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4238,11 +4243,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Title = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4369,6 +4369,11 @@
 	 * FormData へ append する key, value
 	 */
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Data = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4376,11 +4381,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Data = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4441,6 +4441,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Form = undefined;
+
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -4456,11 +4461,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Form = undefined;
 
 	var _Data = __webpack_require__(85);
 
@@ -4568,6 +4568,11 @@
 	 * Ajax 結果を成功時に保存します
 	 */
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Result = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4575,11 +4580,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Result = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4723,6 +4723,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Ajax = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4730,11 +4735,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Ajax = undefined;
 
 	var _Env = __webpack_require__(80);
 
@@ -4924,6 +4924,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Api = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4935,11 +4940,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Api = undefined;
 
 	var _Types = __webpack_require__(90);
 
@@ -5346,6 +5346,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Types = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5353,11 +5358,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Types = undefined;
 
 	var _Type = __webpack_require__(91);
 
@@ -5477,6 +5477,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Type = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5484,11 +5489,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Type = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -5605,6 +5605,11 @@
 	 * Types.url へ追加可能なpathがあるかどうかを管理します
 	 */
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Permalink = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5612,11 +5617,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Permalink = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5840,6 +5840,11 @@
 	 * Api query option を key ごとに管理します
 	 */
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Query = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5847,11 +5852,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Query = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5936,6 +5936,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ApiDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5947,11 +5952,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ApiDae = undefined;
 
 	var _Env = __webpack_require__(80);
 
@@ -6253,6 +6253,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Path = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -6264,11 +6269,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Path = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6447,6 +6447,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Queries = undefined;
+
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -6458,11 +6463,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Queries = undefined;
 
 	var _Query = __webpack_require__(94);
 
@@ -6574,6 +6574,11 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentType = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -6593,11 +6598,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentType = undefined;
 
 	var _Query2 = __webpack_require__(94);
 
@@ -6671,6 +6671,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.App = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -6682,11 +6687,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.App = undefined;
 
 	var _Env = __webpack_require__(80);
 
@@ -6794,6 +6794,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Action = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -6801,11 +6806,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Action = undefined;
 
 	var _Result = __webpack_require__(87);
 
@@ -6944,6 +6944,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Offset = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -6967,11 +6972,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Offset = undefined;
 
 	var _Result = __webpack_require__(87);
 
@@ -7261,6 +7261,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Length = undefined;
+
 	var _isInteger = __webpack_require__(45);
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -7276,11 +7281,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Length = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7437,6 +7437,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Pickup = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7456,11 +7461,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Pickup = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -7541,6 +7541,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Headline = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7560,11 +7565,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Headline = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -7631,6 +7631,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.News = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7646,11 +7651,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.News = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -7706,6 +7706,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PickupAuth = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7725,11 +7730,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PickupAuth = undefined;
 
 	var _ActionAuth2 = __webpack_require__(111);
 
@@ -7801,6 +7801,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ActionAuth = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7820,11 +7825,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ActionAuth = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -7911,6 +7911,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Token = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -7922,11 +7927,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Token = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -8000,6 +8000,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.HeadlineAuth = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8019,11 +8024,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.HeadlineAuth = undefined;
 
 	var _ActionAuth2 = __webpack_require__(111);
 
@@ -8095,6 +8095,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NewsAuth = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8110,11 +8115,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NewsAuth = undefined;
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
@@ -8176,6 +8176,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.OffsetAuth = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8195,11 +8200,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.OffsetAuth = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -8299,6 +8299,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Category = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8318,11 +8323,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Category = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -8448,6 +8448,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Ranking = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8463,11 +8468,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Ranking = undefined;
 
 	var _Category2 = __webpack_require__(116);
 
@@ -8519,6 +8519,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Videos = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8534,11 +8539,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Videos = undefined;
 
 	var _Category2 = __webpack_require__(116);
 
@@ -8591,6 +8591,11 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Widget = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -8602,11 +8607,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Widget = undefined;
 
 	var _Ranking = __webpack_require__(117);
 
@@ -8711,6 +8711,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Bookmark = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8734,11 +8739,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Bookmark = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -8887,6 +8887,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Search = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8906,11 +8911,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Search = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -9002,6 +9002,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Single = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9021,11 +9026,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Single = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -9108,6 +9108,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UsersSelf = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9123,11 +9128,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UsersSelf = undefined;
 
 	var _ActionAuth2 = __webpack_require__(111);
 
@@ -9181,6 +9181,11 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Model = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9200,11 +9205,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Model = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -9366,6 +9366,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelUsersSelf = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9385,11 +9390,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ModelUsersSelf = undefined;
 
 	var _Model2 = __webpack_require__(124);
 
@@ -9485,6 +9485,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -9492,11 +9497,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UserDae = undefined;
 
 	var _TypeDae = __webpack_require__(127);
 
@@ -9610,6 +9610,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.TypeDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -9617,11 +9622,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.TypeDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -9708,6 +9708,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelCategories = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9727,11 +9732,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ModelCategories = undefined;
 
 	var _Model2 = __webpack_require__(124);
 
@@ -9827,6 +9827,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Categories = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9842,11 +9847,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Categories = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -9896,6 +9896,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CategoriesDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -9903,11 +9908,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CategoriesDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -10042,6 +10042,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SlugDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -10049,11 +10054,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.SlugDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -10134,6 +10134,11 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.View = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10153,11 +10158,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.View = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -10384,6 +10384,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderUser = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10403,11 +10408,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeaderUser = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -10531,6 +10531,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderMember = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10550,11 +10555,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeaderMember = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -10681,7 +10681,7 @@
 	          var userName = this.props.userName;
 
 	          if (!icon) {
-	            icon = _Empty.Empty.USER_PICTURE;
+	            icon = _Empty.Empty.USER_EMPTY;
 	          }
 
 	          return React.createElement(
@@ -10696,7 +10696,7 @@
 	                { className: 'preference-opener', href: '#', onClick: this.clickHandler },
 	                React.createElement(
 	                  'span',
-	                  { className: 'user-avatar' },
+	                  { className: 'preference-avatar' },
 	                  React.createElement('img', { src: icon, alt: userName })
 	                )
 	              ),
@@ -10828,6 +10828,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderMemberNotice = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10847,11 +10852,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeaderMemberNotice = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -11013,7 +11013,7 @@
 
 	          var icon = notice.user.profilePicture;
 	          if (!icon) {
-	            icon = _Empty.Empty.USER_PICTURE_FEATURE;
+	            icon = _Empty.Empty.USER_EMPTY;
 	          }
 
 	          return React.createElement(
@@ -11265,6 +11265,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Notice = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -11280,11 +11285,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Notice = undefined;
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
@@ -11340,6 +11340,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Empty = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -11351,11 +11356,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Empty = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11519,6 +11519,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NotificationsDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -11526,11 +11531,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NotificationsDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -11623,6 +11623,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -11630,11 +11635,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -11775,6 +11775,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeArticleDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -11782,11 +11787,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeArticleDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -11881,6 +11881,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PopularDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -11888,11 +11893,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PopularDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -11987,7 +11987,16 @@
 	      return this.comment.body;
 	    }
 	    /**
-	     *
+	     * alias isLike
+	     * @return {boolean} 自分がGood済みかどうか を返します
+	     */
+
+	  }, {
+	    key: 'isGood',
+	    get: function get() {
+	      return this.isLike;
+	    }
+	    /**
 	     * @return {boolean} 自分がGood済みかどうか を返します
 	     */
 
@@ -11997,7 +12006,6 @@
 	      return this.comment.is_like;
 	    }
 	    /**
-	     *
 	     * @return {boolean} 自分がBad済みかどうか を返します
 	     */
 
@@ -12007,7 +12015,6 @@
 	      return this.comment.is_bad;
 	    }
 	    /**
-	     *
 	     * @return {Number} Good数 を返します
 	     */
 
@@ -12027,7 +12034,6 @@
 	      return this.good;
 	    }
 	    /**
-	     *
 	     * @return {Number|number} Bad数 を返します
 	     */
 
@@ -12077,6 +12083,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeAction = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -12088,11 +12099,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeAction = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12158,6 +12164,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Url = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -12169,11 +12180,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Url = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12453,6 +12459,11 @@
 
 	// app
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewArchiveMasonryInfinite = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -12473,11 +12484,6 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewArchiveMasonryInfinite = undefined;
-
 	var _Empty = __webpack_require__(137);
 
 	var _User = __webpack_require__(78);
@@ -12494,18 +12500,22 @@
 
 	var _Rise = __webpack_require__(152);
 
+	var _ReactionDom = __webpack_require__(155);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// React
+
+	// ui
+	var React = self.React;
+
+	// node(ReactClass)
 
 	// dae
 
 	// data
 
 	// view
-	var React = self.React;
-
-	// ui
 
 	var ReactDOM = self.ReactDOM;
 
@@ -12832,39 +12842,83 @@
 	      // --------------------------------------------
 	      // COMMENTS Popular second
 	      // --------------------------------------------
+	      var CommentedUsers = React.createClass({
+	        displayName: 'CommentedUsers',
+
+	        propType: {
+	          total: React.PropTypes.number.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            total: this.props.total
+	          };
+	        },
+	        render: function render() {
+
+	          if (this.state.total === 0) {
+	            return null;
+	          } else {
+
+	            return React.createElement(
+	              'span',
+	              { className: 'commented-user-andmore' },
+	              this.state.total
+	            );
+	          }
+	        }
+
+	      });
+
 	      var CommentsSecond = React.createClass({
 	        displayName: 'CommentsSecond',
 
 	        propType: {
 	          seconds: React.PropTypes.array.isRequired,
-	          articleId: React.PropTypes.string.isRequired
+	          articleId: React.PropTypes.string.isRequired,
+	          total: React.PropTypes.number.isRequired,
+	          hasSecond: React.PropTypes.bool.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            seconds: this.props.seconds
+	          };
 	        },
 	        render: function render() {
 
-	          var seconds = this.props.seconds;
+	          if (!this.props.hasSecond) {
+	            // 描画要素がない
+	            return null;
+	          }
+
+	          var seconds = this.state.seconds;
 	          var articleId = this.props.articleId;
-	          // console.log( 'seconds ', seconds );
+
 	          return React.createElement(
-	            'ul',
-	            { className: 'comments-second' },
-	            seconds.map(function (commentDae, i) {
+	            'div',
+	            { className: 'commented-user' },
+	            React.createElement(
+	              'ul',
+	              { className: 'comments-second' },
+	              seconds.map(function (commentDae, i) {
 
-	              var userDae = commentDae.user;
-	              var picture = userDae.profilePicture ? userDae.profilePicture : _Empty.Empty.USER_PICTURE;
+	                var userDae = commentDae.user;
+	                var picture = userDae.profilePicture ? userDae.profilePicture : _Empty.Empty.USER_EMPTY;
 
-	              // CommentsSecond unique key は  記事Id + index + user Id を使用する
-	              // 同一ユーザーが複数投稿することがあるため
-	              // render 内で unique なことを保証する必要がある
-	              return React.createElement(
-	                'li',
-	                { key: 'user-' + articleId + '-' + i + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
-	                React.createElement(
-	                  'a',
-	                  { className: 'commented-user-thumb', href: userDae.url },
-	                  React.createElement('img', { src: picture, alt: userDae.userName })
-	                )
-	              );
-	            })
+	                // CommentsSecond unique key は  記事Id + user Id を使用する
+	                // 同一ユーザーが複数投稿することがあるため
+	                // render 内で unique なことを保証する必要がある
+	                return React.createElement(
+	                  'li',
+	                  { key: 'user-' + articleId + '-' + commentDae.id + '-' + userDae.id, className: 'commented-user-item commented-user-item-' + i },
+	                  React.createElement(
+	                    'span',
+	                    { className: 'commented-user-thumb' },
+	                    React.createElement('img', { src: picture, alt: userDae.userName })
+	                  )
+	                );
+	              })
+	            ),
+	            React.createElement(CommentedUsers, { total: this.props.total })
 	          );
 	        }
 	      });
@@ -12872,151 +12926,6 @@
 	      // --------------------------------------------
 	      // COMMENTS Popular
 	      // --------------------------------------------
-
-	      // good link
-	      var GoodLink = React.createClass({
-	        displayName: 'GoodLink',
-
-	        propType: {
-	          sign: React.PropTypes.bool.isRequired,
-	          comment: React.PropTypes.object.isRequired,
-	          active: React.PropTypes.bool,
-	          callback: React.PropTypes.func
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        render: function render() {
-
-	          var sign = this.props.sign;
-	          var comment = this.props.comment;
-	          var active = this.props.active;
-	          // active（click可能）にするかを表す
-	          var activeClass = active ? ' active' : '';
-
-	          if (sign) {
-
-	            // login user
-	            // click ずみの時は不可
-	            return React.createElement(
-	              'a',
-	              { className: 'comment-reaction-btn comment-reaction-like' + activeClass, href: '#', onClick: this.handleClick },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.good
-	              )
-	            );
-	          } else {
-
-	            // not login user
-	            // click 不可
-	            return React.createElement(
-	              'span',
-	              { className: 'comment-reaction-btn comment-reaction-like' },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.good
-	              )
-	            );
-	          }
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        }
-	      });
-
-	      // bad link
-	      var BadLink = React.createClass({
-	        displayName: 'BadLink',
-
-	        propType: {
-	          sign: React.PropTypes.bool.isRequired,
-	          comment: React.PropTypes.object.isRequired,
-	          active: React.PropTypes.bool,
-	          callback: React.PropTypes.func
-	        },
-	        getDefaultProps: function getDefaultProps() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        getInitialState: function getInitialState() {
-	          return {
-	            active: false,
-	            callback: function callback() {}
-	          };
-	        },
-	        render: function render() {
-
-	          var sign = this.props.sign;
-	          var comment = this.props.comment;
-	          var active = this.props.active;
-	          var activeClass = active ? ' active' : '';
-
-	          if (sign) {
-	            // login user
-	            return React.createElement(
-	              'a',
-	              { className: 'comment-reaction-btn comment-reaction-dislike' + activeClass, href: '#', onClick: this.handleClick },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.bad
-	              )
-	            );
-	          } else {
-	            // not login user
-	            return React.createElement(
-	              'span',
-	              { className: 'comment-reaction-btn comment-reaction-dislike' },
-	              React.createElement(
-	                'i',
-	                null,
-	                ' '
-	              ),
-	              React.createElement(
-	                'span',
-	                null,
-	                comment.bad
-	              )
-	            );
-	          }
-	        },
-	        handleClick: function handleClick(event) {
-	          event.preventDefault();
-	          this.props.callback(this.props.comment);
-	          this.setState({ active: false });
-	        }
-	      });
 
 	      // --------------------------------------------
 	      // first + second comment container
@@ -13045,7 +12954,7 @@
 	          if (hasSecond) {
 	            // 2件目以降も存在する
 	            // 2件目以降のDomを生成する
-	            second = React.createElement(CommentsSecond, { seconds: secondsDae, articleId: articleId });
+	            // second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
 	            total -= secondsDae.length;
 	          }
 
@@ -13062,7 +12971,7 @@
 	            // 1件目コメント・ユーザー
 	            var firstUser = first.user;
 	            // ユーザーサムネイル
-	            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_PICTURE_FEATURE;
+	            var picture = !!firstUser.profilePicture ? firstUser.profilePicture : _Empty.Empty.USER_EMPTY;
 	            // login 済かを調べる
 	            var sign = _User.User.sign;
 
@@ -13076,8 +12985,8 @@
 	                  'figure',
 	                  { className: 'comment-user' },
 	                  React.createElement(
-	                    'a',
-	                    { className: 'comment-user-link', href: firstUser.url },
+	                    'span',
+	                    { className: 'comment-user-link' },
 	                    React.createElement(
 	                      'span',
 	                      { className: 'comment-user-thumb' },
@@ -13100,31 +13009,22 @@
 	                  )
 	                ),
 	                React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
-	                React.createElement(
-	                  'div',
-	                  { className: 'comment-reaction' },
-	                  React.createElement(GoodLink, {
-	                    sign: sign,
-	                    comment: first,
-	                    callback: this.goodClick
-	                  }),
-	                  React.createElement(BadLink, {
-	                    sign: sign,
-	                    comment: first,
-	                    callback: this.badClick
-	                  })
-	                )
+	                React.createElement(_ReactionDom.ReactionDom, {
+	                  articleId: String(articleId),
+	                  commentId: String(first.id),
+	                  sign: sign,
+	                  good: first.good,
+	                  bad: first.bad,
+	                  isGood: first.isGood,
+	                  isBad: first.isBad
+	                })
 	              ),
-	              React.createElement(
-	                'div',
-	                { className: 'commented-user' },
-	                second,
-	                React.createElement(
-	                  'span',
-	                  { className: 'commented-user-andmore' },
-	                  total > 0 ? '+' + total : ''
-	                )
-	              )
+	              React.createElement(CommentsSecond, {
+	                seconds: secondsDae,
+	                articleId: articleId,
+	                total: total,
+	                hasSecond: hasSecond
+	              })
 	            );
 	          }
 
@@ -13132,20 +13032,6 @@
 	        }, // render
 	        componentDidMount: function componentDidMount() {
 	          // mount
-	        },
-	        // -----------------------------------------
-	        // good / bad 関連 custom method
-	        goodClick: function goodClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('goodClick', commentId, userId);
-	        },
-	        badClick: function badClick(comment) {
-	          var commentId = comment.id;
-	          var userId = comment.user.id;
-
-	          console.log('badClick', commentId, userId);
 	        }
 	      });
 
@@ -13248,7 +13134,7 @@
 	                    )
 	                  )
 	                ),
-	                React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: dae.id })
+	                React.createElement(PopularDom, { key: 'comment-' + dae.id, commentsPopular: commentsPopular, total: commentsTotal, articleId: String(dae.id) })
 	              );
 	              // loop end
 	            })
@@ -13407,6 +13293,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewError = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -13426,11 +13317,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewError = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -13563,6 +13449,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ArticleDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -13570,11 +13461,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ArticleDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -13843,6 +13729,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CategoryDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -13850,11 +13741,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CategoryDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -13928,6 +13814,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.MediaDae = undefined;
+
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -13939,11 +13830,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.MediaDae = undefined;
 
 	var _ImagesDae = __webpack_require__(149);
 
@@ -14069,6 +13955,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ImagesDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -14076,11 +13967,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ImagesDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -14184,6 +14070,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.VideoDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -14191,11 +14082,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.VideoDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -14293,6 +14179,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsPopularDae = undefined;
+
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -14304,11 +14195,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsPopularDae = undefined;
 
 	var _PopularDae = __webpack_require__(141);
 
@@ -14504,6 +14390,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Rise = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -14523,11 +14414,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Rise = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -14646,6 +14532,11 @@
 	 * HTMLElement 要素にアクセスするヘルパー
 	 */
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Dom = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -14653,11 +14544,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Dom = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14722,6 +14608,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Scroll = undefined;
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -14741,11 +14632,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Scroll = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -14864,6 +14750,152 @@
 
 /***/ },
 /* 155 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/12 - 14:16
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	// React
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var React = self.React;
+
+	var ReactionDom = exports.ReactionDom = React.createClass({
+	  displayName: 'ReactionDom',
+
+	  propTypes: {
+	    // 記事 id
+	    articleId: React.PropTypes.string.isRequired,
+	    // コメント id（オプション）
+	    commentId: React.PropTypes.string,
+	    // login or logout
+	    sign: React.PropTypes.bool.isRequired,
+	    // good 数
+	    good: React.PropTypes.number.isRequired,
+	    // bad 数
+	    bad: React.PropTypes.number.isRequired,
+	    // 自分がGood済みかどうか
+	    isGood: React.PropTypes.bool.isRequired,
+	    // 自分がBad済みがどうか
+	    isBad: React.PropTypes.bool.isRequired
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      loading: '',
+	      good: this.props.good,
+	      bad: this.props.bad,
+	      isGood: this.props.isGood,
+	      isBad: this.props.isBad,
+	      sign: this.props.sign
+	    };
+	  },
+	  render: function render() {
+
+	    var active = function active(mine) {
+	      return mine ? ' active' : '';
+	    };
+
+	    var count = function count() {
+	      var number = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+
+	      return number > 0 ? number : '';
+	    };
+
+	    if (this.state.sign) {
+	      return React.createElement(
+	        'div',
+	        { className: 'comment-reaction ' + this.state.loading },
+	        React.createElement(
+	          'a',
+	          { className: 'comment-reaction-btn comment-reaction-like' + active(this.isGood), href: '#', onClick: this.goodClick },
+	          React.createElement(
+	            'i',
+	            null,
+	            ' '
+	          ),
+	          count(this.state.good)
+	        ),
+	        React.createElement(
+	          'a',
+	          { className: 'comment-reaction-btn comment-reaction-dislike' + active(this.isBad), href: '#', onClick: this.badClick },
+	          React.createElement(
+	            'i',
+	            null,
+	            ' '
+	          ),
+	          count(this.state.bad)
+	        ),
+	        React.createElement('div', { className: 'loading-spinner' })
+	      );
+	    } else {
+	      // 非ログイン
+	      return React.createElement(
+	        'div',
+	        { className: 'comment-reaction ' + this.state.loading },
+	        React.createElement(
+	          'span',
+	          { className: 'comment-reaction-btn comment-reaction-like' },
+	          React.createElement(
+	            'i',
+	            null,
+	            ' '
+	          ),
+	          count(this.state.good)
+	        ),
+	        React.createElement(
+	          'span',
+	          { className: 'comment-reaction-btn comment-reaction-dislike' },
+	          React.createElement(
+	            'i',
+	            null,
+	            ' '
+	          ),
+	          count(this.state.bad)
+	        ),
+	        React.createElement('div', { className: 'loading-spinner' })
+	      );
+	    }
+	  },
+	  goodClick: function goodClick(event) {
+	    event.preventDefault();
+	    this.setState({ loading: 'loading', good: '...' });
+	  },
+	  badClick: function badClick(event) {
+	    event.preventDefault();
+	    this.setState({ loading: 'loading', bad: '...' });
+	  },
+	  goodAddDone: function goodAddDone() {
+	    this.setState({ good: ++this.state.good, loading: '', isGood: true });
+	  },
+	  goodDeleteDone: function goodDeleteDone() {
+	    this.setState({ good: --this.state.good, loading: '', isGood: false });
+	  },
+	  badAddDone: function badAddDone() {
+	    this.setState({ bad: ++this.state.bad, loading: '', isBad: true });
+	  },
+	  badDeleteDone: function badDeleteDone() {
+	    this.setState({ bad: --this.state.bad, loading: '', isBad: false });
+	  },
+	  requestError: function requestError(error) {
+	    console.warn('requestError ', error.message);
+	    this.setState({ loading: '' });
+	  }
+	});
+
+/***/ },
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14878,6 +14910,11 @@
 	 *
 	 */
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewCategory = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -14894,11 +14931,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewCategory = undefined;
 
 	var _Category = __webpack_require__(116);
 
@@ -14938,7 +14970,7 @@
 	}(_ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite);
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14955,6 +14987,11 @@
 	'use strict';
 
 	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingle = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -14976,20 +15013,15 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewSingle = undefined;
-
 	var _View2 = __webpack_require__(132);
 
 	var _ViewError = __webpack_require__(145);
 
-	var _ViewRelated = __webpack_require__(157);
+	var _ViewRelated = __webpack_require__(158);
 
-	var _ViewSingleHeader = __webpack_require__(159);
+	var _ViewSingleHeader = __webpack_require__(160);
 
-	var _ViewSingleFooter = __webpack_require__(164);
+	var _ViewSingleFooter = __webpack_require__(165);
 
 	var _Single = __webpack_require__(122);
 
@@ -14997,7 +15029,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _SingleDae = __webpack_require__(162);
+	var _SingleDae = __webpack_require__(163);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15202,7 +15234,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15219,6 +15251,11 @@
 	'use strict';
 
 	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewRelated = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -15240,18 +15277,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewRelated = undefined;
-
 	var _Empty = __webpack_require__(137);
 
 	var _View2 = __webpack_require__(132);
 
 	var _Safety = __webpack_require__(44);
 
-	var _RelatedDae = __webpack_require__(158);
+	var _RelatedDae = __webpack_require__(159);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15406,7 +15438,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15424,6 +15456,11 @@
 
 	// 記事詳細 関連記事結果
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.RelatedDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -15431,11 +15468,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.RelatedDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -15616,7 +15648,7 @@
 	}();
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15633,6 +15665,11 @@
 	'use strict';
 
 	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleHeader = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -15654,18 +15691,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewSingleHeader = undefined;
-
 	var _View2 = __webpack_require__(132);
 
-	var _ViewImage = __webpack_require__(160);
+	var _ViewImage = __webpack_require__(161);
 
-	var _ViewVideo = __webpack_require__(161);
+	var _ViewVideo = __webpack_require__(162);
 
-	var _SingleDae = __webpack_require__(162);
+	var _SingleDae = __webpack_require__(163);
 
 	var _User = __webpack_require__(78);
 
@@ -15859,7 +15891,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15876,6 +15908,11 @@
 	'use strict';
 
 	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewImage = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -15896,11 +15933,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewImage = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -16028,7 +16060,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16045,6 +16077,11 @@
 	'use strict';
 
 	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewVideo = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -16065,11 +16102,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewVideo = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -16208,7 +16240,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16223,6 +16255,11 @@
 	 *
 	 */
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SingleDae = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -16244,16 +16281,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.SingleDae = undefined;
-
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(163);
+	var _KeywordsDae = __webpack_require__(164);
 
-	var _RelatedDae2 = __webpack_require__(158);
+	var _RelatedDae2 = __webpack_require__(159);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16344,7 +16376,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16360,6 +16392,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.KeywordsDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -16367,11 +16404,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.KeywordsDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -16438,7 +16470,7 @@
 	}();
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16455,6 +16487,11 @@
 	'use strict';
 
 	// view
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleFooter = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -16476,14 +16513,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewSingleFooter = undefined;
-
 	var _View2 = __webpack_require__(132);
 
-	var _SingleDae = __webpack_require__(162);
+	var _SingleDae = __webpack_require__(163);
 
 	var _Url = __webpack_require__(143);
 
@@ -16601,7 +16633,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16616,6 +16648,11 @@
 	 *
 	 */
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewTitle = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -16636,11 +16673,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewTitle = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -16734,7 +16766,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16751,6 +16783,11 @@
 	'use strict';
 
 	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewComments = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -16772,11 +16809,6 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewComments = undefined;
-
 	var _Empty = __webpack_require__(137);
 
 	var _CommentsType = __webpack_require__(83);
@@ -16785,13 +16817,13 @@
 
 	var _ViewError = __webpack_require__(145);
 
-	var _Comments = __webpack_require__(167);
+	var _Comments = __webpack_require__(168);
 
 	var _Result = __webpack_require__(87);
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentsListDae = __webpack_require__(168);
+	var _CommentsListDae = __webpack_require__(169);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17086,7 +17118,7 @@
 	          var replyClass = '';
 	          // console.log( 'comment', comment );
 	          // console.log( 'comment.user', comment.user );
-	          var picture = comment.user.profilePicture || _Empty.Empty.USER_PICTURE_FEATURE;
+	          var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
 	          var commentReply = commentDae.reply;
 	          var replyTotal = 0;
 	          var replyTotalElement = '';
@@ -17307,7 +17339,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17322,6 +17354,11 @@
 	 *
 	 */
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Comments = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -17346,11 +17383,6 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Comments = undefined;
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
@@ -17533,7 +17565,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17549,6 +17581,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsListDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -17557,12 +17594,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsListDae = undefined;
-
-	var _CommentsDae = __webpack_require__(169);
+	var _CommentsDae = __webpack_require__(170);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17644,7 +17676,7 @@
 	}();
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17661,6 +17693,11 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsDae = undefined;
+
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -17673,14 +17710,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsDae = undefined;
-
 	var _PopularDae = __webpack_require__(141);
 
-	var _ReplyDae = __webpack_require__(170);
+	var _ReplyDae = __webpack_require__(171);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17784,7 +17816,7 @@
 	}();
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17800,6 +17832,11 @@
 	 */
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ReplyDae = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -17807,11 +17844,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ReplyDae = undefined;
 
 	var _CommentsPopularDae = __webpack_require__(151);
 
@@ -17871,7 +17903,7 @@
 	}();
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17889,6 +17921,11 @@
 
 	// app
 	// import {App} from '../../app/App';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeadline = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -17909,11 +17946,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeadline = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -18221,7 +18253,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18239,6 +18271,11 @@
 
 	// app
 	// import {App} from '../../app/App';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewPickup = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -18259,11 +18296,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewPickup = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -18802,7 +18834,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18819,6 +18851,11 @@
 	'use strict';
 
 	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewRanking = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -18839,11 +18876,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewRanking = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -19148,7 +19180,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19165,6 +19197,11 @@
 	'use strict';
 
 	// app
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewVideos = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -19185,11 +19222,6 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewVideos = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -19493,7 +19525,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19513,6 +19545,11 @@
 	 * View callback の定型
 	 */
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Receiver = undefined;
+
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -19520,11 +19557,6 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Receiver = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

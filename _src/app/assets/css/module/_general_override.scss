@@ -54,3 +54,15 @@
   }
 }
 
+// -------------------------------------------------
+// board-small
+// 汎用 ニュース一覧
+.board-small {
+  .post-thumb {
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

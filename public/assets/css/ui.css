@@ -4480,6 +4480,12 @@ table tr.w200 > td {
   #board-container-more .board-btn-viewmore-link {
     background-color: #fff; }
 
+.board-small .post-thumb {
+  overflow: hidden; }
+  .board-small .post-thumb img {
+    width: 100%;
+    height: auto; }
+
 .comment-heading {
   margin-top: 30px;
   padding: 6px 10px;
@@ -5467,5 +5473,9 @@ button {
 
 #user-profile-container .user .open .dropMenu {
   opacity: 1; }
+
+#user-profile-container .preference-opener {
+  border-radius: 100%;
+  overflow: hidden; }
 
 /*# sourceMappingURL=ui.css.map */

@@ -143,7 +143,7 @@ export class ViewHeaderMemberNotice extends View {
 
         let icon = notice.user.profilePicture;
         if ( !icon ) {
-          icon = Empty.USER_PICTURE_FEATURE;
+          icon = Empty.USER_EMPTY;
         }
 
         return (

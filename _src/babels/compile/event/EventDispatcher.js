@@ -16,6 +16,11 @@
  * Custom Event
  */
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.EventDispatcher = undefined;
+
 var _getIterator2 = require('babel-runtime/core-js/get-iterator');
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -27,11 +32,6 @@ var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.EventDispatcher = undefined;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

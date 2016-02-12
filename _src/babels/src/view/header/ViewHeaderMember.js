@@ -113,7 +113,7 @@ export class ViewHeaderMember extends View {
         let userName = this.props.userName;
 
         if ( !icon ) {
-          icon = Empty.USER_PICTURE;
+          icon = Empty.USER_EMPTY;
         }
 
         return (
@@ -122,7 +122,7 @@ export class ViewHeaderMember extends View {
 
             <div className={'preference ' + this.state.open}>
               <a className="preference-opener" href="#" onClick={this.clickHandler}>
-                <span className="user-avatar"><img src={icon} alt={userName} /></span>
+                <span className="preference-avatar"><img src={icon} alt={userName} /></span>
               </a>
 
               <nav className="preference-menu">

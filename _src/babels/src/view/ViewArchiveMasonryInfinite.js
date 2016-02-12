@@ -29,6 +29,9 @@ import {ArticleDae} from '../dae/ArticleDae';
 // ui
 import {Rise} from '../ui/Rise';
 
+// node(ReactClass)
+import {ReactionDom} from '../node/comment/ReactionDom';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -343,37 +346,75 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // COMMENTS Popular second
     // --------------------------------------------
-    let CommentsSecond = React.createClass( {
+    let CommentedUsers = React.createClass( {
       propType: {
-        seconds: React.PropTypes.array.isRequired,
-        articleId: React.PropTypes.string.isRequired
+        total: React.PropTypes.number.isRequired
+      },
+      getInitialState: function() {
+        return {
+          total: this.props.total
+        };
       },
       render: function() {
 
-        let seconds = this.props.seconds;
+        if ( this.state.total === 0 ) {
+          return null;
+        } else {
+
+          return <span className="commented-user-andmore">{this.state.total}</span>;
+        }
+
+      }
+
+    } );
+
+
+    let CommentsSecond = React.createClass( {
+      propType: {
+        seconds: React.PropTypes.array.isRequired,
+        articleId: React.PropTypes.string.isRequired,
+        total: React.PropTypes.number.isRequired,
+        hasSecond: React.PropTypes.bool.isRequired
+      },
+      getInitialState: function() {
+        return {
+          seconds: this.props.seconds
+        };
+      },
+      render: function() {
+
+        if ( !this.props.hasSecond ) {
+          // 描画要素がない
+          return null;
+        }
+
+        let seconds = this.state.seconds;
         let articleId = this.props.articleId;
-        // console.log( 'seconds ', seconds );
+
         return (
-          <ul className="comments-second">
-            {
-              seconds.map( function( commentDae, i ) {
+          <div className="commented-user">
+            <ul className="comments-second">
+              {
+                seconds.map( function( commentDae, i ) {
 
-                let userDae = commentDae.user;
-                let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_PICTURE;
+                  let userDae = commentDae.user;
+                  let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
 
-                // CommentsSecond unique key は  記事Id + index + user Id を使用する
-                // 同一ユーザーが複数投稿することがあるため
-                // render 内で unique なことを保証する必要がある
-                return (
-                  <li key={'user-' + articleId + '-' + i + '-' + userDae.id} className={'commented-user-item commented-user-item-' + i}>
-                    <a className="commented-user-thumb" href={userDae.url}>
-                      <img src={picture} alt={userDae.userName}/>
-                    </a>
-                  </li>
-                );
-              } )
-            }
-          </ul>
+                  // CommentsSecond unique key は  記事Id + user Id を使用する
+                  // 同一ユーザーが複数投稿することがあるため
+                  // render 内で unique なことを保証する必要がある
+                  return (
+                    <li key={'user-' + articleId + '-' + commentDae.id + '-' + userDae.id} className={'commented-user-item commented-user-item-' + i}>
+                      <span className="commented-user-thumb">
+                        <img src={picture} alt={userDae.userName}/>
+                      </span>
+                    </li>
+                  );
+                } )
+              }
+            </ul>
+            <CommentedUsers total={this.props.total} />
+          </div>
         );
 
       }
@@ -382,119 +423,6 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // COMMENTS Popular
     // --------------------------------------------
-
-    // good link
-    let GoodLink = React.createClass( {
-      propType: {
-        sign: React.PropTypes.bool.isRequired,
-        comment: React.PropTypes.object.isRequired,
-        active: React.PropTypes.bool,
-        callback: React.PropTypes.func
-      },
-      getDefaultProps: function() {
-        return {
-          active: false,
-          callback: function() {}
-        };
-      },
-      getInitialState: function() {
-        return {
-          active: false,
-          callback: function() {}
-        };
-      },
-      render: function() {
-
-        let sign = this.props.sign;
-        let comment = this.props.comment;
-        let active = this.props.active;
-        // active（click可能）にするかを表す
-        let activeClass = active ? ' active' : '';
-
-        if ( sign ) {
-
-          // login user
-          // click ずみの時は不可
-          return (
-            <a className={'comment-reaction-btn comment-reaction-like' + activeClass} href="#" onClick={this.handleClick}>
-              <i>&nbsp;</i>
-              <span>{comment.good}</span>
-            </a>
-          );
-
-        } else {
-
-          // not login user
-          // click 不可
-          return (
-            <span className="comment-reaction-btn comment-reaction-like">
-              <i>&nbsp;</i>
-              <span>{comment.good}</span>
-            </span>
-          );
-
-        }
-
-      },
-      handleClick: function( event ) {
-        event.preventDefault();
-        this.props.callback(this.props.comment);
-        this.setState( { active: false } );
-      }
-    } );
-
-    // bad link
-    let BadLink = React.createClass( {
-      propType: {
-        sign: React.PropTypes.bool.isRequired,
-        comment: React.PropTypes.object.isRequired,
-        active: React.PropTypes.bool,
-        callback: React.PropTypes.func
-      },
-      getDefaultProps: function() {
-        return {
-          active: false,
-          callback: function() {}
-        };
-      },
-      getInitialState: function() {
-        return {
-          active: false,
-          callback: function() {}
-        };
-      },
-      render: function() {
-
-        let sign = this.props.sign;
-        let comment = this.props.comment;
-        let active = this.props.active;
-        let activeClass = active ? ' active' : '';
-
-        if ( sign ) {
-          // login user
-          return (
-            <a className={'comment-reaction-btn comment-reaction-dislike' + activeClass} href="#" onClick={this.handleClick}>
-              <i>&nbsp;</i>
-              <span>{comment.bad}</span>
-            </a>
-          );
-        } else {
-          // not login user
-          return (
-            <span className="comment-reaction-btn comment-reaction-dislike">
-              <i>&nbsp;</i>
-              <span>{comment.bad}</span>
-            </span>
-          );
-        }
-
-      },
-      handleClick: function( event ) {
-        event.preventDefault();
-        this.props.callback(this.props.comment);
-        this.setState( { active: false } );
-      }
-    } );
 
     // --------------------------------------------
     // first + second comment container
@@ -521,7 +449,7 @@ export class ViewArchiveMasonryInfinite extends View {
         if ( hasSecond ) {
           // 2件目以降も存在する
           // 2件目以降のDomを生成する
-          second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
+          // second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
           total -= secondsDae.length;
         }
 
@@ -538,7 +466,7 @@ export class ViewArchiveMasonryInfinite extends View {
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
-          let picture = !!firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_PICTURE_FEATURE;
+          let picture = !!firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_EMPTY;
           // login 済かを調べる
           let sign = User.sign;
 
@@ -546,33 +474,38 @@ export class ViewArchiveMasonryInfinite extends View {
             <div className="comments-popular">
               <div className="feature-user comment-item">
                 <figure className="comment-user">
-                  <a className="comment-user-link" href={firstUser.url}>
+                  <span className="comment-user-link">
                     <span className="comment-user-thumb"><img src={picture} alt={firstUser.userName}/></span>
                     <div className="comment-user-data">
                       <p className="comment-user-name">{firstUser.userName}</p>
                       <p className="comment-user-job">{firstUser.bio}</p>
                     </div>
-                  </a>
+                  </span>
                 </figure>
                 {/* insert html tag into .comment-content innerHTML */}
                 <div className="comment-content" dangerouslySetInnerHTML={{__html: first.body}} />
-                <div className="comment-reaction">
-                  <GoodLink
-                    sign={sign}
-                    comment={first}
-                    callback={this.goodClick}
-                  />
-                  <BadLink
-                    sign={sign}
-                    comment={first}
-                    callback={this.badClick}
-                  />
-                </div>
+                <ReactionDom
+                  articleId={String(articleId)}
+                  commentId={String(first.id)}
+                  sign={sign}
+                  good={first.good}
+                  bad={first.bad}
+                  isGood={first.isGood}
+                  isBad={first.isBad}
+                />
               </div>
+              {/*
               <div className="commented-user">
                 {second}
                 <span className="commented-user-andmore">{total > 0 ? '+' + total : ''}</span>
               </div>
+              */}
+              <CommentsSecond
+                seconds={secondsDae}
+                articleId={articleId}
+                total={total}
+                hasSecond={hasSecond}
+              />
             </div>
           );
 
@@ -583,20 +516,6 @@ export class ViewArchiveMasonryInfinite extends View {
       }, // render
       componentDidMount: function() {
         // mount
-      },
-      // -----------------------------------------
-      // good / bad 関連 custom method
-      goodClick: function( comment ) {
-        let commentId = comment.id;
-        let userId = comment.user.id;
-
-        console.log( 'goodClick', commentId, userId );
-      },
-      badClick: function( comment ) {
-        let commentId = comment.id;
-        let userId = comment.user.id;
-
-        console.log( 'badClick', commentId, userId );
       }
     } );
 
@@ -674,7 +593,7 @@ export class ViewArchiveMasonryInfinite extends View {
                       </div>
                     </a>
 
-                    <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={dae.id} />
+                    <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={String(dae.id)} />
                   </div>
                 );
                 // loop end

@@ -13,6 +13,7 @@
 'use strict';
 
 import {Empty} from '../../app/const/Empty';
+import {ReactionDom} from './ReactionDom';
 
 // React
 let React = self.React;
@@ -118,66 +119,6 @@ let CommentMenu = React.createClass( {
   }
 } );
 
-let ReactionDom = React.createClass( {
-  propTypes: {
-    // 記事 id
-    articleId: React.PropTypes.string.isRequired,
-    // コメント id（オプション）
-    commentId: React.PropTypes.string,
-    sign: React.PropTypes.bool.isRequired,
-    good: React.PropTypes.number.isRequired,
-    bad: React.PropTypes.number.isRequired
-  },
-  getInitialState: function() {
-    return {
-      loading: '',
-      good: this.props.good,
-      bad: this.props.bad,
-      activate: this.props.sign
-    };
-  },
-  render: function() {
-    let good = this.state.good !== 0 ? this.state.good : '';
-    let bad = this.state.bad !== 0 ? this.state.bad : '';
-
-    if ( this.state.activate ) {
-      return (
-        <div className={'comment-reaction ' + this.state.loading}>
-          <a className="comment-reaction-btn comment-reaction-like active" href="#" onClick={this.goodClick}><i>&nbsp;</i>{good}</a>
-          <a className="comment-reaction-btn comment-reaction-dislike" href="#" onClick={this.badClick}><i>&nbsp;</i>{bad}</a>
-          <div className="loading-spinner"></div>
-        </div>
-      );
-    } else {
-      // 非ログイン
-      return (
-        <div className={'comment-reaction ' + this.state.loading}>
-          <span className="comment-reaction-btn comment-reaction-like active"><i>&nbsp;</i>{good}</span>
-          <span className="comment-reaction-btn comment-reaction-dislike"><i>&nbsp;</i>{bad}</span>
-          <div className="loading-spinner"></div>
-        </div>
-      );
-    }
-  },
-  goodClick: function( event ) {
-    event.preventDefault();
-    this.setState({loading: 'loading'});
-  },
-  badClick: function( event ) {
-    event.preventDefault();
-    this.setState({loading: 'loading'});
-  },
-  goodDone: function() {
-    this.setState( {good: ++this.state.good, bad: --this.state.bad, loading: ''} );
-  },
-  badDone: function() {
-    this.setState( {good: --this.state.good, bad: ++this.state.bad, loading: ''} );
-  },
-  requestError: function( error ) {
-    console.warn( 'requestError ', error.message );
-    this.setState({loading: ''});
-  }
-} );
 
 export let CommentDom = React.createClass( {
   propTypes: {
@@ -253,6 +194,8 @@ export let CommentDom = React.createClass( {
           sign={sign}
           good={comment.good}
           bad={comment.bad}
+          isGood={comment.isGood}
+          isBad={comment.isBad}
         />
       </li>
     );

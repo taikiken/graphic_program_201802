@@ -80,21 +80,25 @@ export class PopularDae {
     return this.comment.body;
   }
   /**
-   *
+   * alias isLike
+   * @return {boolean} 自分がGood済みかどうか を返します
+   */
+  get isGood():boolean {
+    return this.isLike;
+  }
+  /**
    * @return {boolean} 自分がGood済みかどうか を返します
    */
   get isLike():boolean {
     return this.comment.is_like;
   }
   /**
-   *
    * @return {boolean} 自分がBad済みかどうか を返します
    */
   get isBad():boolean {
     return this.comment.is_bad;
   }
   /**
-   *
    * @return {Number} Good数 を返します
    */
   get good():Number {
@@ -108,7 +112,6 @@ export class PopularDae {
     return this.good;
   }
   /**
-   *
    * @return {Number|number} Bad数 を返します
    */
   get bad():Number {

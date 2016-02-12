@@ -297,7 +297,7 @@ export class ViewComments extends View {
         let replyClass = '';
         // console.log( 'comment', comment );
         // console.log( 'comment.user', comment.user );
-        let picture = comment.user.profilePicture || Empty.USER_PICTURE_FEATURE;
+        let picture = comment.user.profilePicture || Empty.USER_EMPTY;
         let commentReply = commentDae.reply;
         let replyTotal = 0;
         let replyTotalElement = '';
