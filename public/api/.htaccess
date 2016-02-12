@@ -56,3 +56,6 @@ RewriteRule ^v1/users/self /api/json_userdetails.php [L]
 RewriteRule ^v1/users/([0-9]+) /api/json_userdetails.php?userid=$1 [L]
 
 RewriteRule ^v1/category /api/json_categorylist.php [L]
+
+#INITIALIZE
+RewriteRule ^v1/initialize /api/json_initialize.php [L]
