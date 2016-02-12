@@ -485,24 +485,19 @@ var ViewComments = exports.ViewComments = function (_View) {
           articleId: React.PropTypes.string.isRequired,
           commentsListType: React.PropTypes.string.isRequired,
           total: React.PropTypes.number.isRequired,
-          index: React.PropTypes.number.isRequired
+          index: React.PropTypes.number.isRequired,
+          user: React.PropTypes.object
+        },
+        getDefaultProps: function getDefaultProps() {
+          return {
+            user: {}
+          };
         },
         render: function render() {
 
           var commentObject = this.props.commentObject;
-          // let replyElement = '';
+          console.log('CommentsParent commentObject ', commentObject);
 
-          console.log('commentObject ', commentObject);
-          /*
-                  if ( commentObject.reply.total > 0 ) {
-                    // コメント返信
-                    replyElement = <CommentReplyChild
-                      articleId={articleId}
-                      commentId={String(commentObject.comment.id)}
-                      id={this.props.id}
-                      reply={commentObject.reply} />;
-                  }
-          */
           var total = _Safety.Safety.integer(commentObject.reply.total, 0);
           var sign = _User.User.sign;
           var icon = '';
@@ -512,14 +507,18 @@ var ViewComments = exports.ViewComments = function (_View) {
           var commentsListType = this.props.commentsListType;
 
           if (sign) {
-            var user = this.user;
-            icon = user.profilePicture;
+            var _user = this.props.user;
+            icon = _user.profilePicture;
             if (!icon) {
               icon = _Empty.Empty.USER_EMPTY;
             }
-            userId = user.id;
+            userId = _user.id;
+            if (!userId) {
+              userId = '';
+            }
           }
 
+          console.log('================================== parent =========================');
           return React.createElement(
             'ul',
             { className: 'comment-list' },
@@ -558,7 +557,8 @@ var ViewComments = exports.ViewComments = function (_View) {
         propType: {
           commentsList: React.PropTypes.array.isRequired,
           commentsListType: React.PropTypes.string.isRequired,
-          articleId: React.PropTypes.string.isRequired
+          articleId: React.PropTypes.string.isRequired,
+          user: React.PropTypes.object
         },
         getInitialState: function getInitialState() {
           return {
@@ -571,6 +571,12 @@ var ViewComments = exports.ViewComments = function (_View) {
           var articleId = this.props.articleId;
           var commentsListType = this.props.commentsListType;
 
+          if (!_Safety.Safety.array(list) || list.length === 0) {
+            // 描画しない
+            console.warn('list error ', commentsListType, list);
+            return null;
+          }
+          console.log('******************************* start render *******************************', list);
           return React.createElement(
             'div',
             { className: 'comment-' + commentsListType },
@@ -584,9 +590,9 @@ var ViewComments = exports.ViewComments = function (_View) {
               )
             ),
             list.map(function (commentId, index) {
-
               var commentObject = commentsBank[commentId];
               var key = commentsListType + '-' + articleId + '-' + commentId;
+              console.log('commentId ' + commentId + ', ' + key);
 
               return React.createElement(CommentsParent, {
                 key: key,
@@ -616,12 +622,17 @@ var ViewComments = exports.ViewComments = function (_View) {
       // --------------------------------------------
       // COMMENT Dom build
       // --------------------------------------------
+      var user = this.user;
+      if (user === null) {
+        user = {};
+      }
       // this._commentsRendered が null の時だけ CommentsDom.render する
       if (this._commentsRendered === null) {
 
         this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList,
           articleId: String(this._articleId),
-          commentsListType: this._commentsListType
+          commentsListType: this._commentsListType,
+          user: user
         }), element);
       } else {
 

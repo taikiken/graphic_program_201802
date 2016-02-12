@@ -455,24 +455,19 @@ export class ViewComments extends View {
         articleId: React.PropTypes.string.isRequired,
         commentsListType: React.PropTypes.string.isRequired,
         total: React.PropTypes.number.isRequired,
-        index: React.PropTypes.number.isRequired
+        index: React.PropTypes.number.isRequired,
+        user: React.PropTypes.object
+      },
+      getDefaultProps: function() {
+        return {
+          user: {}
+        };
       },
       render: function() {
 
         let commentObject = this.props.commentObject;
-        // let replyElement = '';
+        console.log( 'CommentsParent commentObject ', commentObject );
 
-        console.log( 'commentObject ', commentObject );
-/*
-        if ( commentObject.reply.total > 0 ) {
-          // コメント返信
-          replyElement = <CommentReplyChild
-            articleId={articleId}
-            commentId={String(commentObject.comment.id)}
-            id={this.props.id}
-            reply={commentObject.reply} />;
-        }
-*/
         let total = Safety.integer( commentObject.reply.total, 0 );
         let sign = User.sign;
         let icon = '';
@@ -482,14 +477,18 @@ export class ViewComments extends View {
         let commentsListType = this.props.commentsListType;
 
         if ( sign ) {
-          let user = this.user;
+          let user = this.props.user;
           icon = user.profilePicture;
           if ( !icon ) {
             icon = Empty.USER_EMPTY;
           }
           userId = user.id;
+          if (!userId) {
+            userId = '';
+          }
         }
 
+        console.log( '================================== parent =========================' );
         return (
 
           <ul className={'comment-list'}>
@@ -533,7 +532,8 @@ export class ViewComments extends View {
       propType: {
         commentsList: React.PropTypes.array.isRequired,
         commentsListType: React.PropTypes.string.isRequired,
-        articleId: React.PropTypes.string.isRequired
+        articleId: React.PropTypes.string.isRequired,
+        user: React.PropTypes.object
       },
       getInitialState: function() {
         return {
@@ -546,6 +546,12 @@ export class ViewComments extends View {
         let articleId = this.props.articleId;
         let commentsListType = this.props.commentsListType;
 
+        if ( !Safety.array( list ) || list.length === 0 ) {
+          // 描画しない
+          console.warn( 'list error ', commentsListType, list );
+          return null;
+        }
+        console.log( '******************************* start render *******************************', list );
         return (
           <div className={'comment-' + commentsListType}>
             <div className="comment-heading">
@@ -553,9 +559,9 @@ export class ViewComments extends View {
             </div>
             {
               list.map( function( commentId, index ) {
-
                 let commentObject = commentsBank[ commentId ];
                 let key = `${commentsListType}-${articleId}-${commentId}`;
+                console.log( 'commentId ' + commentId + ', ' + key );
 
                 return <CommentsParent
                   key={key}
@@ -588,6 +594,10 @@ export class ViewComments extends View {
     // --------------------------------------------
     // COMMENT Dom build
     // --------------------------------------------
+    let user = this.user;
+    if ( user === null ) {
+      user = {};
+    }
     // this._commentsRendered が null の時だけ CommentsDom.render する
     if ( this._commentsRendered === null ) {
 
@@ -595,6 +605,7 @@ export class ViewComments extends View {
         <CommentsDom commentsList={commentsList}
                      articleId={String(this._articleId)}
                      commentsListType={this._commentsListType}
+                     user={user}
         />,
         element
       );
