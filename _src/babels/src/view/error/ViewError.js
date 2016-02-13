@@ -95,7 +95,7 @@ export class ViewError extends View {
     } );
 
     ReactDOM.render(
-      <ErrorDom/>,
+      <ErrorDom />,
       element
     );
   }

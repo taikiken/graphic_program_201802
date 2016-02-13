@@ -287,19 +287,21 @@ export class ViewComments extends View {
       // moreElement 存在チェックを行う
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
-      if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
+      if ( Safety.isElement( moreElement ) ) {
+        if ( _this._moreRendered === null ) {
 
-        _this._moreRendered = ReactDOM.render(
-          React.createElement( MoreView, { show: show } ),
-          moreElement
-        );
+          _this._moreRendered = ReactDOM.render(
+            React.createElement( MoreView, { show: show } ),
+            moreElement
+          );
 
-      } else {
+        } else {
 
-        // instance がある, render 済み
-        // state を変更し button の表示・非表示を行う
-        _this._moreRendered.updateShow( show );
+          // instance がある, render 済み
+          // state を変更し button の表示・非表示を行う
+          _this._moreRendered.updateShow( show );
 
+        }
       }
 
     };
@@ -602,10 +604,11 @@ export class ViewComments extends View {
     if ( this._commentsRendered === null ) {
 
       this._commentsRendered = ReactDOM.render(
-        <CommentsDom commentsList={commentsList}
-                     articleId={String(this._articleId)}
-                     commentsListType={this._commentsListType}
-                     user={user}
+        <CommentsDom
+          commentsList={commentsList}
+          articleId={String(this._articleId)}
+          commentsListType={this._commentsListType}
+          user={user}
         />,
         element
       );

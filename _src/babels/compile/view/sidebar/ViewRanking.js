@@ -13,11 +13,6 @@
 
 // app
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewRanking = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -37,6 +32,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewRanking = undefined;
 
 var _Empty = require('../../app/const/Empty');
 
@@ -249,13 +249,6 @@ var ViewRanking = exports.ViewRanking = function (_View) {
         propTypes: {
           list: React.PropTypes.array.isRequired
         },
-
-        // isRequired なので getDefaultProps がいらない
-        // getDefaultProps: function() {
-        //  return {
-        //    list: []
-        //  };
-        // },
         render: function render() {
 
           var list = this.props.list;
@@ -300,6 +293,10 @@ var ViewRanking = exports.ViewRanking = function (_View) {
 
                 // thumbnail を check なければ代替画像にする
                 if (!thumbnail) {
+                  thumbnail = _Empty.Empty.IMG_SMALL;
+                } else if (!_Safety.Safety.isImg(thumbnail)) {
+                  // 画像ファイル名に拡張子がないのがあったので
+                  // 拡張子チェックを追加
                   thumbnail = _Empty.Empty.IMG_SMALL;
                 }
 

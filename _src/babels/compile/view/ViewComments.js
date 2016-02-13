@@ -13,11 +13,6 @@
 
 // app
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewComments = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -37,6 +32,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewComments = undefined;
 
 var _Empty = require('../app/const/Empty');
 
@@ -334,14 +334,16 @@ var ViewComments = exports.ViewComments = function (_View) {
         // moreElement 存在チェックを行う
         // Element 型を保証する
         // _moreRendered が null の時のみ, instance があれば state を update する
-        if (_Safety.Safety.isElement(moreElement) && _this._moreRendered === null) {
+        if (_Safety.Safety.isElement(moreElement)) {
+          if (_this._moreRendered === null) {
 
-          _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
-        } else {
+            _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+          } else {
 
-          // instance がある, render 済み
-          // state を変更し button の表示・非表示を行う
-          _this._moreRendered.updateShow(show);
+            // instance がある, render 済み
+            // state を変更し button の表示・非表示を行う
+            _this._moreRendered.updateShow(show);
+          }
         }
       };
 
@@ -629,7 +631,8 @@ var ViewComments = exports.ViewComments = function (_View) {
       // this._commentsRendered が null の時だけ CommentsDom.render する
       if (this._commentsRendered === null) {
 
-        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList,
+        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, {
+          commentsList: commentsList,
           articleId: String(this._articleId),
           commentsListType: this._commentsListType,
           user: user

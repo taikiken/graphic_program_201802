@@ -13,11 +13,6 @@
 
 // app
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewArchiveMasonryInfinite = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -37,6 +32,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewArchiveMasonryInfinite = undefined;
 
 var _Empty = require('../app/const/Empty');
 
@@ -268,7 +268,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
             return React.createElement(
               'div',
-              { id: 'more', className: 'board-btn-viewmore' + this.state.loading },
+              { id: 'more', className: 'board-btn-viewmore loading-root ' + this.state.loading },
               React.createElement(
                 'a',
                 { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
@@ -385,14 +385,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         }
       };
 
-      // more button 表示状態を loading on / off 切替えます
-      /*
-      let loadingButton = ( loading:boolean ) => {
-         if ( _this._moreRendered !== null ) {
-          _this._moreRendered.updateLoading( !!loading );
-        }
-       };
-      */
       // --------------------------------------------
       // COMMENTS Popular second
       // --------------------------------------------
@@ -497,9 +489,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           var total = this.props.total;
           var articleId = this.props.articleId;
 
-          var emptyFirst = React.createElement('div', { className: 'comments-popular comments-empty' });
-          var second = React.createElement('div', { className: 'comments-second comments-empty' });
-
           var hasFirst = commentsPopular.hasFirst;
           var hasSecond = commentsPopular.hasSecond;
           var firstDae = commentsPopular.first;
@@ -507,8 +496,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
           if (hasSecond) {
             // 2件目以降も存在する
-            // 2件目以降のDomを生成する
-            // second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
+            // 合計数からアイコン描画数を引く
             total -= secondsDae.length;
           }
 
@@ -516,7 +504,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           if (hasFirst) {
 
             // 少なくとも1件は存在する
-            // 総件数から 1 マイナス
+            // 総件数から 1（アイコン描画数） マイナス
             total -= 1;
             console.log('少なくとも1件は存在する ', articleId);
 
@@ -580,9 +568,11 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                 hasSecond: hasSecond
               })
             );
-          }
+          } else {
 
-          return emptyFirst;
+            // 描画するべきものがない
+            return null;
+          }
         }, // render
         componentDidMount: function componentDidMount() {
           // mount
@@ -592,6 +582,47 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
       // ------------------------------------------------
       // 基点 React class
       // ------------------------------------------------
+      // 記事一覧のサムネイル
+      var ThumbnailDom = React.createClass({
+        displayName: 'ThumbnailDom',
+
+        propType: {
+          mediaType: React.PropTypes.string.isRequired,
+          thumbnail: React.PropTypes.string.isRequired,
+          title: React.PropTypes.string.isRequired
+        },
+        getInitialState: function getInitialState() {
+          return {
+            mediaType: this.props.mediaType,
+            thumbnail: this.props.thumbnail,
+            title: this.props.title
+          };
+        },
+        render: function render() {
+          var mediaType = this.props.mediaType;
+
+          // media type で thumbnail 切替
+          if (mediaType === 'image') {
+            // type: image
+            return React.createElement(
+              'figure',
+              { className: 'post-thumb post-thumb-' + mediaType },
+              React.createElement('img', { src: this.props.thumbnail, alt: this.props.title })
+            );
+          } else if (mediaType === 'video') {
+            // type: video
+            return React.createElement(
+              'figure',
+              { className: 'post-thumb post-thumb-' + mediaType },
+              React.createElement('img', { className: 'video-thumbnail', src: this.props.thumbnail, alt: this.props.title }),
+              React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY })
+            );
+          } else {
+            // 該当なし
+            return null;
+          }
+        }
+      });
 
       // 個別の 記事Dom
       // React Class, Archive Dom
@@ -599,7 +630,11 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         displayName: 'ArticleDom',
 
         propTypes: {
-          list: React.PropTypes.array.isRequired
+          list: React.PropTypes.array.isRequired,
+          // request offset
+          offset: React.PropTypes.number.isRequired,
+          // request length
+          length: React.PropTypes.number.isRequired
         },
         getInitialState: function getInitialState() {
           this.isotope = null;
@@ -608,7 +643,9 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
           return {
             arranged: 'prepare',
-            list: this.props.list
+            list: this.props.list,
+            offset: this.props.offset,
+            length: this.props.length
           };
         },
         render: function render() {
@@ -627,34 +664,34 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
               var thumbnail = undefined;
               var figureTag = undefined;
 
-              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
+              // console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
 
               thumbnail = dae.media.images.medium;
 
+              // thumbnail が空の時は代替画像
               if (!thumbnail) {
+                thumbnail = _Empty.Empty.IMG_MIDDLE;
+              } else if (!_Safety.Safety.isImg(thumbnail)) {
+                // 画像ファイル名に拡張子がないのがあったので
+                // 拡張子チェックを追加
                 thumbnail = _Empty.Empty.IMG_MIDDLE;
               }
 
               // media type で thumbnail 切替
-              if (dae.mediaType === 'image') {
-
-                // type: image
-                figureTag = React.createElement(
-                  'figure',
-                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-                  React.createElement('img', { src: thumbnail, alt: dae.title })
-                );
-              } else {
-
-                // type: video
-                figureTag = React.createElement(
-                  'figure',
-                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY }),
-                  React.createElement('img', { src: thumbnail, alt: dae.title })
-                );
-              }
-
+              /*
+              if ( dae.mediaType === 'image' ) {
+                 // type: image
+                figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+                  <img src={thumbnail} alt={dae.title}/>
+                </figure>;
+               } else {
+                 // type: video
+                figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+                  <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+                  <img src={thumbnail} alt={dae.title}/>
+                </figure>;
+               }
+              */
               // unique key(React)にarticle id(number)記事Idを使用します
               return React.createElement(
                 'div',
@@ -662,7 +699,11 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                 React.createElement(
                   'a',
                   { className: 'post', href: dae.url },
-                  figureTag,
+                  React.createElement(ThumbnailDom, {
+                    mediaType: dae.mediaType,
+                    thumbnail: thumbnail,
+                    title: dae.title
+                  }),
                   React.createElement(
                     'div',
                     { className: 'post-data' },
@@ -704,12 +745,13 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
           var elements = [];
           // 追加された Element を取得するための start / end point
           // start は request offset
-          var i = _this._request.offset;
+          //let i = _this._request.offset;
+          var i = this.state.offset;
           // end は request offset へ request length を加算したものと
           // children length の小さい方
-          var limit = Math.min(i + _this._request.length, childNodes.length);
-          console.log('start ', i);
-          console.log('end ', limit);
+          //let limit = Math.min( i + _this._request.length, childNodes.length );
+          var limit = Math.min(i + this.state.length, childNodes.length);
+          console.log('start - end ', i + '-' + limit);
 
           // start / end から 対象 children を選別
           for (; i < limit; i++) {
@@ -773,9 +815,9 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
             }
           });
         },
-        updateList: function updateList(list) {
+        updateList: function updateList(list, offset, length) {
           // state を変更し appendChild + isotope を行う
-          this.setState({ list: list });
+          this.setState({ list: list, offset: offset, length: length });
         },
         // didUpdate から呼び出される
         appendImages: function appendImages() {
@@ -812,12 +854,12 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
       if (this._articleRendered === null) {
 
         // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-        this._articleRendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
+        this._articleRendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList, offset: this._request.offset, length: this._request.length }), element);
       } else {
 
         // instance が存在するので
         // state update でコンテナを追加する
-        this._articleRendered.updateList(articlesList);
+        this._articleRendered.updateList(articlesList, this._request.offset, this._request.length);
       }
     } // render
 

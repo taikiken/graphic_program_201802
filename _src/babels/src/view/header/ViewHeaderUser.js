@@ -32,6 +32,8 @@ export class ViewHeaderUser extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
+    this._boundCallback = this.memberCallback.bind( this );
+    this._member = null;
   }
   /**
    * Ajax request を開始します
@@ -39,8 +41,9 @@ export class ViewHeaderUser extends View {
   start():void {
     if ( User.sign ) {
       // login member
-      let boundCallback = this.memberCallback.bind( this );
+      let boundCallback = this._boundCallback;
       let member = new ViewHeaderMember( this.element );
+      this._member = member;
       member.on( View.BEFORE_RENDER, boundCallback );
       member.on( View.WILL_MOUNT, boundCallback );
       member.on( View.DID_MOUNT, boundCallback );
@@ -88,6 +91,11 @@ export class ViewHeaderUser extends View {
    */
   memberCallback( event ):void {
 
+    let member = this._member;
+    let callback = this._boundCallback;
+    if ( member !== null ) {
+      member.off( event.type, callback );
+    }
     this.dispatch( event );
 
   }

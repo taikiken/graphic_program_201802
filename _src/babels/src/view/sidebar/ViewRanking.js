@@ -173,12 +173,6 @@ export class ViewRanking extends View {
       propTypes: {
         list: React.PropTypes.array.isRequired
       },
-      // isRequired なので getDefaultProps がいらない
-      // getDefaultProps: function() {
-      //  return {
-      //    list: []
-      //  };
-      // },
       render: function() {
 
         let list = this.props.list;
@@ -212,6 +206,10 @@ export class ViewRanking extends View {
 
                 // thumbnail を check なければ代替画像にする
                 if ( !thumbnail ) {
+                  thumbnail = Empty.IMG_SMALL;
+                } else if ( !Safety.isImg( thumbnail ) ) {
+                  // 画像ファイル名に拡張子がないのがあったので
+                  // 拡張子チェックを追加
                   thumbnail = Empty.IMG_SMALL;
                 }
 

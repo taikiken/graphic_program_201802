@@ -65,7 +65,7 @@ export class Empty {
   static get IMG_LARGE():string {
 
     // ToDo: デザインができたらパスを正しいものに変更する
-    return '/assets/images/common/xxx_slide.png';
+    return '/assets/images/common/thumb-pickup-empty.png';
 
   }
   /**
@@ -77,7 +77,7 @@ export class Empty {
   static get VIDEO_THUMBNAIL():string {
 
     // ToDo: デザインができたらパスを正しいものに変更する
-    return '/assets/images/common/xxx.png';
+    return '/assets/images/common/thumb-16x9.png';
 
   }
   /**
@@ -88,7 +88,7 @@ export class Empty {
    */
   static get VIDEO_PLAY():string {
 
-    return '/assets/images/common/thumb-overlay-movie-340x150.png';
+    return '/assets/images/common/thumb-16x9-play.png';
 
   }
   /**

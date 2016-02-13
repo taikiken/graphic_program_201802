@@ -36,7 +36,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ViewImage = undefined;
+exports.ViewSingleImage = undefined;
 
 var _View2 = require('../View');
 
@@ -52,8 +52,8 @@ var ReactDOM = self.ReactDOM;
  * 記事詳細上部画像
  */
 
-var ViewImage = exports.ViewImage = function (_View) {
-  (0, _inherits3.default)(ViewImage, _View);
+var ViewSingleImage = exports.ViewSingleImage = function (_View) {
+  (0, _inherits3.default)(ViewSingleImage, _View);
 
   /**
    * 記事詳細上部画像
@@ -61,10 +61,10 @@ var ViewImage = exports.ViewImage = function (_View) {
    * @param {ImagesDae} images response.media.images
    */
 
-  function ViewImage(element, images) {
-    (0, _classCallCheck3.default)(this, ViewImage);
+  function ViewSingleImage(element, images) {
+    (0, _classCallCheck3.default)(this, ViewSingleImage);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewImage).call(this, element));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingleImage).call(this, element));
 
     _this._images = images;
     _this._rendered = null;
@@ -74,7 +74,7 @@ var ViewImage = exports.ViewImage = function (_View) {
    * render 処理を開始します
    */
 
-  (0, _createClass3.default)(ViewImage, [{
+  (0, _createClass3.default)(ViewSingleImage, [{
     key: 'start',
     value: function start() {
       this.render(this._images);
@@ -160,5 +160,5 @@ var ViewImage = exports.ViewImage = function (_View) {
       }
     }
   }]);
-  return ViewImage;
+  return ViewSingleImage;
 }(_View2.View);

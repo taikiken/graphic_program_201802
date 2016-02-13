@@ -13,11 +13,6 @@
 
 // view
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewSingleHeader = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -38,11 +33,16 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewSingleHeader = undefined;
+
 var _View2 = require('../View');
 
-var _ViewImage = require('../single/ViewImage');
+var _ViewSingleImage = require('../single/ViewSingleImage');
 
-var _ViewVideo = require('../single/ViewVideo');
+var _ViewSingleVideo = require('../single/ViewSingleVideo');
 
 var _SingleDae = require('../../dae/SingleDae');
 
@@ -131,7 +131,7 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
               { className: 'f-right' },
               React.createElement(
                 'div',
-                { className: this.state.loading + ' btn-bookmark' },
+                { className: this.state.loading + ' loading-root btn-bookmark' },
                 React.createElement(
                   'a',
                   { href: '#', className: this.state.bookmarked, onClick: this.clickBookmark, ref: 'bookmarked' },
@@ -203,12 +203,12 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
           if (single.mediaType === 'image') {
 
             // image
-            img = new _ViewImage.ViewImage(imageNode, single.media.images);
+            img = new _ViewSingleImage.ViewSingleImage(imageNode, single.media.images);
             img.start();
           } else if (single.mediaType === 'video') {
 
             // video
-            img = new _ViewVideo.ViewVideo(imageNode, single.media);
+            img = new _ViewSingleVideo.ViewSingleVideo(imageNode, single.media);
             img.start();
           }
         },

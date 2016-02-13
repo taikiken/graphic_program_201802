@@ -13,11 +13,6 @@
 
 // app
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewVideos = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -37,6 +32,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewVideos = undefined;
 
 var _Empty = require('../../app/const/Empty');
 
@@ -213,9 +213,9 @@ var ViewVideos = exports.ViewVideos = function (_View) {
               { href: p.url, className: 'post' },
               React.createElement(
                 'figure',
-                { className: 'post-thumb' },
-                React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
-                React.createElement('img', { src: p.thumbnail, alt: p.title })
+                { className: 'post-thumb post-thumb-video' },
+                React.createElement('img', { className: 'video-thumbnail', src: p.thumbnail, alt: p.title }),
+                React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY })
               ),
               React.createElement(
                 'div',
@@ -295,10 +295,14 @@ var ViewVideos = exports.ViewVideos = function (_View) {
               list.map(function (article, i) {
 
                 var dae = new _ArticleDae.ArticleDae(article);
-                var thumbnail = dae.media.video.medium;
+                var thumbnail = dae.media.images.medium;
 
                 // thumbnail(16x9) を check なければ代替画像にする
                 if (!thumbnail) {
+                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
+                } else if (!_Safety.Safety.isImg(thumbnail)) {
+                  // 画像ファイル名に拡張子がないのがあったので
+                  // 拡張子チェックを追加
                   thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
                 }
 

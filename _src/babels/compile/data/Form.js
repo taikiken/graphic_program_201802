@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Form = undefined;
-
 var _getIterator2 = require('babel-runtime/core-js/get-iterator');
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -31,6 +26,11 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Form = undefined;
 
 var _Data = require('./Data');
 

@@ -212,7 +212,7 @@ export class ViewArchiveMasonryInfinite extends View {
         if ( this.state.show ) {
 
           return (
-            <div id="more" className={'board-btn-viewmore' + this.state.loading}>
+            <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
               <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>VIEW MORE</span></a>
               <span className="loading-spinner">&nbsp;</span>
             </div>
@@ -333,16 +333,6 @@ export class ViewArchiveMasonryInfinite extends View {
 
     };
 
-    // more button 表示状態を loading on / off 切替えます
-    /*
-    let loadingButton = ( loading:boolean ) => {
-
-      if ( _this._moreRendered !== null ) {
-        _this._moreRendered.updateLoading( !!loading );
-      }
-
-    };
-    */
     // --------------------------------------------
     // COMMENTS Popular second
     // --------------------------------------------
@@ -438,9 +428,6 @@ export class ViewArchiveMasonryInfinite extends View {
         let total = this.props.total;
         let articleId = this.props.articleId;
 
-        let emptyFirst = <div className="comments-popular comments-empty"></div>;
-        let second = <div className="comments-second comments-empty"></div>;
-
         let hasFirst = commentsPopular.hasFirst;
         let hasSecond = commentsPopular.hasSecond;
         let firstDae = commentsPopular.first;
@@ -448,8 +435,7 @@ export class ViewArchiveMasonryInfinite extends View {
         // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
         if ( hasSecond ) {
           // 2件目以降も存在する
-          // 2件目以降のDomを生成する
-          // second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
+          // 合計数からアイコン描画数を引く
           total -= secondsDae.length;
         }
 
@@ -457,7 +443,7 @@ export class ViewArchiveMasonryInfinite extends View {
         if ( hasFirst ) {
 
           // 少なくとも1件は存在する
-          // 総件数から 1 マイナス
+          // 総件数から 1（アイコン描画数） マイナス
           total -= 1;
           console.log( '少なくとも1件は存在する ', articleId );
 
@@ -509,9 +495,12 @@ export class ViewArchiveMasonryInfinite extends View {
             </div>
           );
 
-        }
+        } else {
 
-        return emptyFirst;
+          // 描画するべきものがない
+          return null;
+
+        }
 
       }, // render
       componentDidMount: function() {
@@ -522,12 +511,55 @@ export class ViewArchiveMasonryInfinite extends View {
     // ------------------------------------------------
     // 基点 React class
     // ------------------------------------------------
+    // 記事一覧のサムネイル
+    let ThumbnailDom = React.createClass( {
+      propType: {
+        mediaType: React.PropTypes.string.isRequired,
+        thumbnail: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired
+      },
+      getInitialState: function() {
+        return {
+          mediaType: this.props.mediaType,
+          thumbnail: this.props.thumbnail,
+          title: this.props.title
+        };
+      },
+      render: function() {
+        let mediaType = this.props.mediaType;
+
+        // media type で thumbnail 切替
+        if ( mediaType === 'image' ) {
+          // type: image
+          return (
+            <figure className={'post-thumb post-thumb-' + mediaType}>
+              <img src={this.props.thumbnail} alt={this.props.title}/>
+            </figure>
+          );
+        } else if ( mediaType === 'video' ) {
+          // type: video
+          return (
+            <figure className={'post-thumb post-thumb-' + mediaType}>
+              <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
+              <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+            </figure>
+          );
+        } else {
+          // 該当なし
+          return null;
+        }
+      }
+    } );
 
     // 個別の 記事Dom
     // React Class, Archive Dom
     let ArticleDom = React.createClass( {
       propTypes: {
-        list: React.PropTypes.array.isRequired
+        list: React.PropTypes.array.isRequired,
+        // request offset
+        offset: React.PropTypes.number.isRequired,
+        // request length
+        length: React.PropTypes.number.isRequired
       },
       getInitialState: function() {
         this.isotope = null;
@@ -536,7 +568,9 @@ export class ViewArchiveMasonryInfinite extends View {
 
         return {
           arranged: 'prepare',
-          list: this.props.list
+          list: this.props.list,
+          offset: this.props.offset,
+          length: this.props.length
         };
       },
       render: function() {
@@ -554,15 +588,21 @@ export class ViewArchiveMasonryInfinite extends View {
                 let thumbnail;
                 let figureTag;
 
-                console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
+                // console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
 
                 thumbnail = dae.media.images.medium;
 
+                // thumbnail が空の時は代替画像
                 if ( !thumbnail ) {
+                  thumbnail = Empty.IMG_MIDDLE;
+                } else if ( !Safety.isImg( thumbnail ) ) {
+                  // 画像ファイル名に拡張子がないのがあったので
+                  // 拡張子チェックを追加
                   thumbnail = Empty.IMG_MIDDLE;
                 }
 
                 // media type で thumbnail 切替
+                /*
                 if ( dae.mediaType === 'image' ) {
 
                   // type: image
@@ -579,12 +619,17 @@ export class ViewArchiveMasonryInfinite extends View {
                   </figure>;
 
                 }
-
+*/
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
                   <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
                     <a className="post" href={dae.url}>
-                      {figureTag}
+                      {/*figureTag*/}
+                      <ThumbnailDom
+                        mediaType={dae.mediaType}
+                        thumbnail={thumbnail}
+                        title={dae.title}
+                      />
                       <div className="post-data">
                         <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
                         <h3 className='post-heading'>{dae.title}</h3>
@@ -613,12 +658,13 @@ export class ViewArchiveMasonryInfinite extends View {
         let elements = [];
         // 追加された Element を取得するための start / end point
         // start は request offset
-        let i = _this._request.offset;
+        //let i = _this._request.offset;
+        let i = this.state.offset;
         // end は request offset へ request length を加算したものと
         // children length の小さい方
-        let limit = Math.min( i + _this._request.length, childNodes.length );
-        console.log( 'start ', i );
-        console.log( 'end ', limit );
+        //let limit = Math.min( i + _this._request.length, childNodes.length );
+        let limit = Math.min( i + this.state.length, childNodes.length );
+        console.log( 'start - end ', i + '-' + limit );
 
         // start / end から 対象 children を選別
         for ( ; i < limit; i++ ) {
@@ -631,7 +677,6 @@ export class ViewArchiveMasonryInfinite extends View {
         // 画像読み込む完了 event へ bind します
         img.on( 'always', this.appendImages );
         this.img = img;
-
 
       },
       // dom が表示された後に1度だけ呼び出される delegate
@@ -688,9 +733,9 @@ export class ViewArchiveMasonryInfinite extends View {
         } );
 
       },
-      updateList: function( list ) {
+      updateList: function( list, offset, length ) {
         // state を変更し appendChild + isotope を行う
-        this.setState( { list: list } );
+        this.setState( { list: list, offset: offset, length: length } );
       },
       // didUpdate から呼び出される
       appendImages: function() {
@@ -730,7 +775,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this._articleRendered = ReactDOM.render(
-        React.createElement( ArticleDom, { list: articlesList } ),
+        React.createElement( ArticleDom, { list: articlesList, offset: this._request.offset, length: this._request.length } ),
         element
       );
 
@@ -738,7 +783,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList );
+      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
 
     }
 

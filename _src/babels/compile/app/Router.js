@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Router = undefined;
-
 var _isInteger = require('babel-runtime/core-js/number/is-integer');
 
 var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -47,6 +42,11 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Router = undefined;
 
 var _EventDispatcher2 = require('../event/EventDispatcher');
 
@@ -703,9 +703,9 @@ var Router = exports.Router = function (_EventDispatcher) {
 
         var _Loc$path$replace$spl18 = (0, _slicedToArray3.default)(_Loc$path$replace$spl17, 1);
 
-        var _keyword = _Loc$path$replace$spl18[0];
+        var keyword = _Loc$path$replace$spl18[0];
 
-        return _keyword;
+        return keyword;
       }
     }
     /**

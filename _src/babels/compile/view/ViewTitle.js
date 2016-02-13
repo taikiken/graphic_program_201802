@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewTitle = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -35,6 +30,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewTitle = undefined;
 
 var _View2 = require('./View');
 
@@ -89,12 +89,9 @@ var ViewTitle = exports.ViewTitle = function (_View) {
         displayName: 'TitleDom',
 
         propType: {
-          label: React.PropTypes.string.isRequired,
-          slug: React.PropTypes.string.isRequired
+          label: React.PropTypes.string.isRequired
         },
         render: function render() {
-
-          var label = this.props.label;
 
           return React.createElement(
             'div',
@@ -102,7 +99,7 @@ var ViewTitle = exports.ViewTitle = function (_View) {
             React.createElement(
               'h1',
               null,
-              label
+              this.props.label
             )
           );
         }

@@ -13,8 +13,8 @@
 
 // view
 import {View} from '../View';
-import {ViewImage} from '../single/ViewImage';
-import {ViewVideo} from '../single/ViewVideo';
+import {ViewSingleImage} from '../single/ViewSingleImage';
+import {ViewSingleVideo} from '../single/ViewSingleVideo';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';
@@ -78,7 +78,7 @@ export class ViewSingleHeader extends View {
         if ( this.state.sign ) {
           // login member のみ bookmark action が使える
           right = <div className="f-right">
-            <div className={this.state.loading + ' btn-bookmark'}>
+            <div className={this.state.loading + ' loading-root btn-bookmark'}>
               <a href="#" className={this.state.bookmarked} onClick={this.clickBookmark} ref='bookmarked'>
                 <span>{message}</span>
               </a>
@@ -125,13 +125,13 @@ export class ViewSingleHeader extends View {
         if ( single.mediaType === 'image' ) {
 
           // image
-          img = new ViewImage( imageNode, single.media.images );
+          img = new ViewSingleImage( imageNode, single.media.images );
           img.start();
 
         } else if ( single.mediaType === 'video' ) {
 
           // video
-          img = new ViewVideo( imageNode, single.media );
+          img = new ViewSingleVideo( imageNode, single.media );
           img.start();
 
         }

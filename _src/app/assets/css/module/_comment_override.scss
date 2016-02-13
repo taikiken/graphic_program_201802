@@ -23,3 +23,47 @@
     height: auto;
   }
 }
+
+// drop menu
+.comment-menu {
+
+  .dropMenu-container {
+    .dropMenu {
+      overflow: hidden;
+
+      .dropMenu-item {
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
+      }
+    }
+  }
+
+  &.close {
+    .dropMenu {
+      height: 0;
+
+      .dropMenu-item {
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+
+        .dropMenu-link-report,
+        .dropMenu-link-delete {
+          overflow: hidden;
+          font-size: 0;
+          line-height: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+  &.open {
+    .dropMenu {
+      height: auto;
+      .dropMenu-item {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewHeaderMemberNotice = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -36,17 +31,24 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewHeaderMemberNotice = undefined;
+
 var _View2 = require('../View');
 
 var _Notice = require('../../action/users/Notice');
 
 var _Empty = require('../../app/const/Empty');
 
-var _NotificationsDae = require('../../dae/user/NotificationsDae');
-
 var _NoticeAction = require('../../app/const/NoticeAction');
 
 var _Url = require('../../app/const/Url');
+
+var _NotificationsDae = require('../../dae/user/NotificationsDae');
+
+var _Safety = require('../../data/Safety');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -158,12 +160,10 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
           var user = notice.user;
           var article = notice.article;
 
-          var txt = user.userName + 'さんがあなたの「' + article.title + '」へのコメントに';
-
           return React.createElement(
             'p',
             { className: 'info-content' },
-            txt,
+            user.userName + 'さんがあなたの「' + article.title + '」へのコメントに',
             React.createElement(
               'strong',
               null,
@@ -176,8 +176,8 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
 
       // --------------------------------------------------
       // notice one block
-      var OneDom = React.createClass({
-        displayName: 'OneDom',
+      var NoticeItem = React.createClass({
+        displayName: 'NoticeItem',
 
         propTypes: {
           notice: React.PropTypes.object.isRequired,
@@ -192,7 +192,7 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
         render: function render() {
 
           var notice = this.state.notice;
-          var i = this.state.i;
+          var index = this.state.index;
 
           var icon = notice.user.profilePicture;
           if (!icon) {
@@ -201,10 +201,10 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
 
           return React.createElement(
             'li',
-            { key: 'info-item-' + i, className: 'info-item info-item-' + i },
+            { className: 'info-item info-item-' + notice.id },
             React.createElement(
               'a',
-              { href: '#', className: 'info-link', onClick: this.oneClick },
+              { href: '#', className: 'info-link info-link-' + notice.id, onClick: this.readedClick },
               React.createElement(
                 'figure',
                 { className: 'info-user-thumb' },
@@ -219,12 +219,63 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
             )
           );
         },
-        oneClick: function oneClick(event) {
+        readedClick: function readedClick(event) {
           event.preventDefault();
         }
       });
 
       // --------------------------------------------------
+      // read all On / Off
+      var ReadAll = React.createClass({
+        displayName: 'ReadAll',
+
+        propTypes: {
+          length: React.PropTypes.number.isRequired,
+          callback: React.PropTypes.func
+        },
+        getDefaultProps: function getDefaultProps() {
+          return {
+            callback: function callback() {}
+          };
+        },
+        getInitialState: function getInitialState() {
+          return {
+            length: this.props.length,
+            loading: ''
+          };
+        },
+        render: function render() {
+          if (this.state.length > 0) {
+            return React.createElement(
+              'div',
+              { className: 'info-btn-readAll loading-root ' + this.state.loading },
+              React.createElement(
+                'a',
+                { href: '#', onClick: this.readClick },
+                'すべて既読にする'
+              ),
+              React.createElement('div', { className: 'loading-spinner' })
+            );
+          } else {
+            return React.createElement(
+              'div',
+              { className: 'info-btn-readAll' },
+              ' '
+            );
+          }
+        },
+        readClick: function readClick(event) {
+          event.preventDefault();
+          this.setState({ loading: 'loading' });
+          this.props.callback();
+        },
+        done: function done(result) {
+          this.setState({ loading: '' });
+        },
+        fail: function fail(error) {
+          this.setState({ loading: '' });
+        }
+      });
       // user notice dropMenu
       var NoticeMenu = React.createClass({
         displayName: 'NoticeMenu',
@@ -240,27 +291,6 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
         render: function render() {
 
           var notifications = this.state.notifications;
-          var readAll = undefined;
-
-          if (notifications.length > 0) {
-
-            readAll = React.createElement(
-              'div',
-              { className: 'info-btn-readAll' },
-              React.createElement(
-                'a',
-                { href: '#', onClick: this.allRead },
-                'すべて既読にする'
-              )
-            );
-          } else {
-
-            readAll = React.createElement(
-              'div',
-              { className: 'info-btn-readAll' },
-              ' '
-            );
-          }
 
           return React.createElement(
             'nav',
@@ -276,13 +306,16 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
                   { className: 'info-heading' },
                   'お知らせ'
                 ),
-                readAll,
+                React.createElement(ReadAll, {
+                  length: notifications.length,
+                  callback: this.allRead
+                }),
                 React.createElement(
                   'ul',
                   { className: 'info-list' },
                   notifications.map(function (notice, i) {
 
-                    return React.createElement(OneDom, { notice: notice, index: i });
+                    return React.createElement(NoticeItem, { key: 'notice-' + notice.id, notice: notice, index: i });
                   }),
                   React.createElement(
                     'li',
@@ -308,6 +341,36 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
       });
 
       // --------------------------------------------------
+      // total 件数
+
+      var NoticeTotal = React.createClass({
+        displayName: 'NoticeTotal',
+
+        propTypes: {
+          total: React.PropTypes.number.isRequired
+        },
+        getInitialState: function getInitialState() {
+          return {
+            total: this.props.total
+          };
+        },
+        render: function render() {
+          var total = this.state.total;
+          if (total === 0) {
+            return null;
+          } else {
+            // 件数が1以上の時に描画
+            return React.createElement(
+              'span',
+              { className: 'notice-num' },
+              total
+            );
+          }
+        },
+        updateTotal: function updateTotal(total) {
+          this.setState({ total: total });
+        }
+      });
       // user notice
       var NoticeDom = React.createClass({
         displayName: 'NoticeDom',
@@ -326,29 +389,7 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
         render: function render() {
 
           var response = this.state.response;
-          var notifications = response.notifications;
-          var noticeTotal = '';
-          var noticeMenu = undefined;
-
-          if (Array.isArray(notifications)) {
-
-            // 配列（正常）な時はそのデータを使用しメニューを作成する
-            noticeMenu = React.createElement(NoticeMenu, { notifications: notifications });
-
-            if (notifications.length > 0) {
-              // total が 1 以上
-              noticeTotal = React.createElement(
-                'span',
-                { className: 'notice-num' },
-                response.total
-              );
-            }
-          } else {
-
-            // 異常な時は
-            // 空メニューを作成する、引数に 空配列 を送る
-            noticeMenu = React.createElement(NoticeDom, { notifications: [] });
-          }
+          var notifications = _Safety.Safety.array(response.notifications);
 
           return React.createElement(
             'div',
@@ -361,9 +402,9 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
                 { className: 'notice-icon' },
                 ' '
               ),
-              noticeTotal
+              React.createElement(NoticeTotal, { total: response.total })
             ),
-            noticeMenu
+            React.createElement(NoticeMenu, { notifications: notifications })
           );
         },
         componentDidMount: function componentDidMount() {

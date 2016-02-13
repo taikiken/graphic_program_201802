@@ -27,25 +27,48 @@ var React = self.React;
 // コメント削除 自分のだけ
 
 // node
-var DeleteComment = React.createClass({
-  displayName: 'DeleteComment',
+var CommentAction = React.createClass({
+  displayName: 'CommentAction',
 
   propTypes: {
     // user id
     userId: React.PropTypes.string.isRequired,
     commentUserId: React.PropTypes.string.isRequired,
-    callback: React.PropTypes.func.isRequired
+    commentId: React.PropTypes.string.isRequired,
+    delete: React.PropTypes.func.isRequired,
+    report: React.PropTypes.func.isRequired
+  },
+  getInitialState: function getInitialState() {
+    return {
+      deleteLoading: '',
+      reportLoading: ''
+    };
   },
   render: function render() {
-    if (!this.props.userId || this.props.userId !== this.props.commentUserId) {
-      return null;
-    } else {
+    if (this.props.userId === '0' || this.props.userId !== this.props.commentUserId) {
+      // 自分以外 & ユーザー情報が正しくは通報機能
       return React.createElement(
         'li',
-        { className: 'dropMenu-item' },
+        { className: 'dropMenu-item loading-root ' + this.state.deleteLoading },
         React.createElement(
           'a',
-          { href: '#', className: 'dropMenu-link-delete', onClick: this.props.callback },
+          { href: '#', className: 'dropMenu-link-report dropMenu-link', onClick: this.reportClick },
+          React.createElement(
+            'span',
+            null,
+            'このコメントを通報する'
+          )
+        ),
+        React.createElement('div', { className: 'loading-spinner' })
+      );
+    } else {
+      // 自分のは削除機能
+      return React.createElement(
+        'li',
+        { className: 'dropMenu-item loading-root ' + this.state.reportLoading },
+        React.createElement(
+          'a',
+          { href: '#', className: 'dropMenu-link-delete dropMenu-link-', onClick: this.deleteClick },
           React.createElement(
             'span',
             null,
@@ -54,6 +77,32 @@ var DeleteComment = React.createClass({
         )
       );
     }
+  },
+  componentWillUnMount: function componentWillUnMount() {},
+  deleteClick: function deleteClick(event) {
+    event.preventDefault();
+    // delete action
+    this.setState({ deleteLoading: 'loading ' });
+  },
+  deleteDone: function deleteDone(result) {
+    console.log('deleteDone', result);
+    this.props.delete(true);
+  },
+  deleteFail: function deleteFail(error) {
+    console.log('deleteFail', error);
+    this.props.delete(false);
+  },
+  reportClick: function reportClick(event) {
+    event.preventDefault();
+    this.setState({ reportLoading: 'loading ' });
+  },
+  reportDone: function reportDone(result) {
+    console.log('reportDone', result);
+    this.props.report(true);
+  },
+  reportFail: function reportFail(error) {
+    console.log('reportFail', error);
+    this.props.report(false);
   }
 });
 
@@ -74,44 +123,38 @@ var CommentMenu = React.createClass({
 
     return {
       open: 'close',
-      loading: ''
+      loading: '',
+      show: true
     };
   },
   render: function render() {
     if (this.props.sign) {
       // ログインユーザーのみ
-      return React.createElement(
-        'div',
-        { className: 'comment-menu ' + this.state.open + ' ' + this.state.loading },
-        React.createElement(
-          'a',
-          { href: '#', className: 'comment-menu-btn', onClick: this.clickHandler },
-          'MENU'
-        ),
-        React.createElement(
-          'ul',
-          { className: 'dropMenu' },
-          React.createElement(DeleteComment, {
-            userId: this.props.userId,
-            commentUserId: this.props.commentUserId,
-            callback: this.deleteClick
-          }),
+      if (this.state.show) {
+        return React.createElement(
+          'div',
+          { className: 'comment-menu ' + this.state.open + ' ' + this.state.loading },
           React.createElement(
-            'li',
-            { className: 'dropMenu-item' },
-            React.createElement(
-              'a',
-              { href: '#', className: 'dropMenu-link-report', onClick: this.reportClick },
-              React.createElement(
-                'span',
-                null,
-                'このコメントを通報する'
-              )
-            )
+            'a',
+            { href: '#', className: 'comment-menu-btn', onClick: this.clickHandler },
+            'MENU'
+          ),
+          React.createElement(
+            'ul',
+            { className: 'dropMenu' },
+            React.createElement(CommentAction, {
+              userId: this.props.userId,
+              commentUserId: this.props.commentUserId,
+              commentId: this.props.commentId,
+              'delete': this.didDelete,
+              report: this.didReport
+            })
           )
-        ),
-        React.createElement('div', { className: 'loading-spinner' })
-      );
+        );
+      } else {
+        // 非表示
+        return null;
+      }
     } else {
       // 非ログイン 出力しない
       return null;
@@ -121,12 +164,20 @@ var CommentMenu = React.createClass({
   componentWillUnmount: function componentWillUnmount() {},
   // -------------------------------------------------------
   // 以降 custom method
-  deleteClick: function deleteClick(event) {
-    event.preventDefault();
+  didDelete: function didDelete(success) {
+    if (success) {
+      // delete action が成功した
+      this.setState({ show: false });
+    }
   },
-  reportClick: function reportClick(event) {
-    event.preventDefault();
+  didReport: function didReport(success) {
+    if (success) {
+      // report action が成功した
+      this.setState({ show: false });
+    }
   },
+  // -----------------------------
+  // open / close control
   // icon click で drop menu open / close
   clickHandler: function clickHandler(event) {
     event.preventDefault();
@@ -226,8 +277,6 @@ var CommentDom = exports.CommentDom = React.createClass({
 
     // user icon
     var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
-
-    // icon と名前
 
     return React.createElement(
       'div',

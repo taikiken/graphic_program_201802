@@ -1,10 +1,5 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Format = undefined;
-
 var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -16,6 +11,11 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 var _symbol2 = require("babel-runtime/core-js/symbol");
 
 var _symbol3 = _interopRequireDefault(_symbol2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Format = undefined;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

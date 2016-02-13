@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Empty = undefined;
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -27,6 +22,11 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Empty = undefined;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -92,7 +92,7 @@ var Empty = exports.Empty = function () {
     get: function get() {
 
       // ToDo: デザインができたらパスを正しいものに変更する
-      return '/assets/images/common/xxx_slide.png';
+      return '/assets/images/common/thumb-pickup-empty.png';
     }
     /**
      * video thumbnail 代替画像パス<br>
@@ -106,7 +106,7 @@ var Empty = exports.Empty = function () {
     get: function get() {
 
       // ToDo: デザインができたらパスを正しいものに変更する
-      return '/assets/images/common/xxx.png';
+      return '/assets/images/common/thumb-16x9.png';
     }
     /**
      * video play button overlay<br>
@@ -119,7 +119,7 @@ var Empty = exports.Empty = function () {
     key: 'VIDEO_PLAY',
     get: function get() {
 
-      return '/assets/images/common/thumb-overlay-movie-340x150.png';
+      return '/assets/images/common/thumb-16x9-play.png';
     }
     /**
      * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>

@@ -315,7 +315,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-12 20:24:03
+	 * @date 2016-02-13 22:02:42
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -353,11 +353,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Loc = undefined;
-
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -369,6 +364,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Loc = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -1178,19 +1178,21 @@
 
 	"use strict";
 
+	exports.__esModule = true;
+
 	exports.default = function (instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError("Cannot call a class as a function");
 	  }
 	};
 
-	exports.__esModule = true;
-
 /***/ },
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+
+	exports.__esModule = true;
 
 	var _defineProperty = __webpack_require__(42);
 
@@ -1215,8 +1217,6 @@
 	    return Constructor;
 	  };
 	})();
-
-	exports.__esModule = true;
 
 /***/ },
 /* 42 */
@@ -1250,11 +1250,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Safety = undefined;
-
 	var _isInteger = __webpack_require__(45);
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -1278,6 +1273,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Safety = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1404,6 +1404,36 @@
 	    key: 'isElement',
 	    value: function isElement(element) {
 	      return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
+	    }
+	    /**
+	     * ファイル名から拡張子を取得します
+	     * @param {string} fileName 取得したいファイル名称
+	     * @returns {string} ファイル名の拡張子を返します
+	     */
+
+	  }, {
+	    key: 'getExtension',
+	    value: function getExtension(fileName) {
+	      // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
+	      var split = fileName.split('.');
+
+	      if (split.length === 1 || split[0] === '' && split.length === 2) {
+	        console.warn('not correct file name. ' + fileName);
+	        return '';
+	      }
+
+	      return split.pop().toLowerCase();
+	    }
+	    /**
+	     * 拡張子から画像ファイルかを調べます
+	     * @param {string} fileName 調査対象ファイル名
+	     * @returns {boolean} 'jpg', 'png', 'jpeg', 'gif', 'svg' のいづれかに該当するかの真偽値を返します
+	     */
+
+	  }, {
+	    key: 'isImg',
+	    value: function isImg(fileName) {
+	      return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf(Safety.getExtension(fileName)) !== -1;
 	    }
 	  }]);
 	  return Safety;
@@ -1798,11 +1828,6 @@
 
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Format = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -1814,6 +1839,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Format = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1894,11 +1924,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Router = undefined;
-
 	var _isInteger = __webpack_require__(45);
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -1930,6 +1955,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Router = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -2586,9 +2616,9 @@
 
 	        var _Loc$path$replace$spl18 = (0, _slicedToArray3.default)(_Loc$path$replace$spl17, 1);
 
-	        var _keyword = _Loc$path$replace$spl18[0];
+	        var keyword = _Loc$path$replace$spl18[0];
 
-	        return _keyword;
+	        return keyword;
 	      }
 	    }
 	    /**
@@ -2852,6 +2882,8 @@
 
 	"use strict";
 
+	exports.__esModule = true;
+
 	var _isIterable2 = __webpack_require__(63);
 
 	var _isIterable3 = _interopRequireDefault(_isIterable2);
@@ -2899,8 +2931,6 @@
 	    }
 	  };
 	})();
-
-	exports.__esModule = true;
 
 /***/ },
 /* 63 */
@@ -2987,6 +3017,8 @@
 
 	"use strict";
 
+	exports.__esModule = true;
+
 	var _typeof2 = __webpack_require__(51);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
@@ -3000,8 +3032,6 @@
 
 	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
 	};
-
-	exports.__esModule = true;
 
 /***/ },
 /* 72 */
@@ -3105,11 +3135,6 @@
 	 * Custom Event
 	 */
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.EventDispatcher = undefined;
-
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -3121,6 +3146,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.EventDispatcher = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3421,11 +3451,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.User = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3437,6 +3462,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.User = undefined;
 
 	var _Cookie = __webpack_require__(79);
 
@@ -3570,11 +3600,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Cookie = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3586,6 +3611,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Cookie = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3658,11 +3688,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Env = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3674,6 +3699,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Env = undefined;
 
 	var _Loc = __webpack_require__(1);
 
@@ -3825,11 +3855,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UserStatus = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -3853,6 +3878,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserStatus = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -3978,11 +4008,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Codes = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -3994,6 +4019,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Codes = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4127,11 +4157,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsType = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4143,6 +4168,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsType = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4259,11 +4289,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Title = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4275,6 +4300,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Title = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4401,11 +4431,6 @@
 	 * FormData へ append する key, value
 	 */
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Data = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4413,6 +4438,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Data = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4473,11 +4503,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Form = undefined;
-
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -4493,6 +4518,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Form = undefined;
 
 	var _Data = __webpack_require__(85);
 
@@ -4600,11 +4630,6 @@
 	 * Ajax 結果を成功時に保存します
 	 */
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Result = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4612,6 +4637,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Result = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4755,11 +4785,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Ajax = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4767,6 +4792,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Ajax = undefined;
 
 	var _Env = __webpack_require__(80);
 
@@ -4956,11 +4986,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Api = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -4972,6 +4997,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Api = undefined;
 
 	var _Types = __webpack_require__(90);
 
@@ -5378,11 +5408,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Types = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5390,6 +5415,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Types = undefined;
 
 	var _Type = __webpack_require__(91);
 
@@ -5509,11 +5539,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Type = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5521,6 +5546,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Type = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -5637,11 +5667,6 @@
 	 * Types.url へ追加可能なpathがあるかどうかを管理します
 	 */
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Permalink = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5649,6 +5674,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Permalink = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5872,11 +5902,6 @@
 	 * Api query option を key ごとに管理します
 	 */
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Query = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5884,6 +5909,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Query = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5968,11 +5998,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ApiDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -5984,6 +6009,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ApiDae = undefined;
 
 	var _Env = __webpack_require__(80);
 
@@ -6285,11 +6315,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Path = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -6301,6 +6326,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Path = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6479,11 +6509,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Queries = undefined;
-
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -6495,6 +6520,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Queries = undefined;
 
 	var _Query = __webpack_require__(94);
 
@@ -6606,11 +6636,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentType = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -6630,6 +6655,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentType = undefined;
 
 	var _Query2 = __webpack_require__(94);
 
@@ -6703,11 +6733,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.App = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -6719,6 +6744,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.App = undefined;
 
 	var _Env = __webpack_require__(80);
 
@@ -6826,11 +6856,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Action = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -6838,6 +6863,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Action = undefined;
 
 	var _Result = __webpack_require__(87);
 
@@ -6976,11 +7006,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Offset = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7004,6 +7029,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Offset = undefined;
 
 	var _Result = __webpack_require__(87);
 
@@ -7293,11 +7323,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Length = undefined;
-
 	var _isInteger = __webpack_require__(45);
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -7313,6 +7338,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Length = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7469,11 +7499,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Pickup = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7493,6 +7518,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Pickup = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -7573,11 +7603,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Headline = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7597,6 +7622,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Headline = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -7663,11 +7693,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.News = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7683,6 +7708,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.News = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -7738,11 +7768,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PickupAuth = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7762,6 +7787,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PickupAuth = undefined;
 
 	var _ActionAuth2 = __webpack_require__(111);
 
@@ -7833,11 +7863,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ActionAuth = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -7857,6 +7882,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ActionAuth = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -7943,11 +7973,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Token = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -7959,6 +7984,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Token = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -8032,11 +8062,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.HeadlineAuth = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8056,6 +8081,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.HeadlineAuth = undefined;
 
 	var _ActionAuth2 = __webpack_require__(111);
 
@@ -8127,11 +8157,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NewsAuth = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8147,6 +8172,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NewsAuth = undefined;
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
@@ -8208,11 +8238,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.OffsetAuth = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8232,6 +8257,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.OffsetAuth = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -8331,11 +8361,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Category = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8355,6 +8380,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Category = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -8480,11 +8510,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Ranking = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8500,6 +8525,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Ranking = undefined;
 
 	var _Category2 = __webpack_require__(116);
 
@@ -8551,11 +8581,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Videos = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8571,6 +8596,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Videos = undefined;
 
 	var _Category2 = __webpack_require__(116);
 
@@ -8623,11 +8653,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Widget = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -8639,6 +8664,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Widget = undefined;
 
 	var _Ranking = __webpack_require__(117);
 
@@ -8743,11 +8773,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Bookmark = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8771,6 +8796,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Bookmark = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -8919,11 +8949,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Search = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -8943,6 +8968,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Search = undefined;
 
 	var _Offset2 = __webpack_require__(101);
 
@@ -9034,11 +9064,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Single = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9058,6 +9083,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Single = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -9140,11 +9170,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UsersSelf = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9160,6 +9185,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UsersSelf = undefined;
 
 	var _ActionAuth2 = __webpack_require__(111);
 
@@ -9213,11 +9243,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Model = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9237,6 +9262,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Model = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -9398,11 +9428,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ModelUsersSelf = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9422,6 +9447,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelUsersSelf = undefined;
 
 	var _Model2 = __webpack_require__(124);
 
@@ -9517,11 +9547,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UserDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -9529,6 +9554,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserDae = undefined;
 
 	var _TypeDae = __webpack_require__(127);
 
@@ -9642,11 +9672,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.TypeDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -9654,6 +9679,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.TypeDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -9740,11 +9770,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ModelCategories = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9764,6 +9789,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelCategories = undefined;
 
 	var _Model2 = __webpack_require__(124);
 
@@ -9859,11 +9889,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Categories = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9879,6 +9904,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Categories = undefined;
 
 	var _Action2 = __webpack_require__(100);
 
@@ -9928,11 +9958,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CategoriesDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -9940,6 +9965,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CategoriesDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -10074,11 +10104,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.SlugDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -10086,6 +10111,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SlugDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -10166,11 +10196,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.View = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10190,6 +10215,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.View = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -10416,11 +10446,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeaderUser = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10441,11 +10466,16 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderUser = undefined;
+
 	var _View2 = __webpack_require__(132);
 
 	var _ViewHeaderMember = __webpack_require__(134);
 
-	var _Url = __webpack_require__(143);
+	var _Url = __webpack_require__(139);
 
 	var _User = __webpack_require__(78);
 
@@ -10472,7 +10502,12 @@
 	  function ViewHeaderUser(element) {
 	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	    (0, _classCallCheck3.default)(this, ViewHeaderUser);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
+
+	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
+
+	    _this2._boundCallback = _this2.memberCallback.bind(_this2);
+	    _this2._member = null;
+	    return _this2;
 	  }
 	  /**
 	   * Ajax request を開始します
@@ -10483,8 +10518,9 @@
 	    value: function start() {
 	      if (_User.User.sign) {
 	        // login member
-	        var boundCallback = this.memberCallback.bind(this);
+	        var boundCallback = this._boundCallback;
 	        var member = new _ViewHeaderMember.ViewHeaderMember(this.element);
+	        this._member = member;
 	        member.on(_View2.View.BEFORE_RENDER, boundCallback);
 	        member.on(_View2.View.WILL_MOUNT, boundCallback);
 	        member.on(_View2.View.DID_MOUNT, boundCallback);
@@ -10540,6 +10576,11 @@
 	    key: 'memberCallback',
 	    value: function memberCallback(event) {
 
+	      var member = this._member;
+	      var callback = this._boundCallback;
+	      if (member !== null) {
+	        member.off(event.type, callback);
+	      }
 	      this.dispatch(event);
 	    }
 	  }]);
@@ -10563,11 +10604,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeaderMember = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10588,6 +10624,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderMember = undefined;
+
 	var _View2 = __webpack_require__(132);
 
 	var _ViewHeaderMemberNotice = __webpack_require__(135);
@@ -10598,7 +10639,7 @@
 
 	var _UsersSelf = __webpack_require__(123);
 
-	var _Url = __webpack_require__(143);
+	var _Url = __webpack_require__(139);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10860,11 +10901,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeaderMemberNotice = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -10885,17 +10921,24 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeaderMemberNotice = undefined;
+
 	var _View2 = __webpack_require__(132);
 
 	var _Notice = __webpack_require__(136);
 
 	var _Empty = __webpack_require__(137);
 
-	var _NotificationsDae = __webpack_require__(138);
+	var _NoticeAction = __webpack_require__(138);
 
-	var _NoticeAction = __webpack_require__(142);
+	var _Url = __webpack_require__(139);
 
-	var _Url = __webpack_require__(143);
+	var _NotificationsDae = __webpack_require__(140);
+
+	var _Safety = __webpack_require__(44);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11007,12 +11050,10 @@
 	          var user = notice.user;
 	          var article = notice.article;
 
-	          var txt = user.userName + 'さんがあなたの「' + article.title + '」へのコメントに';
-
 	          return React.createElement(
 	            'p',
 	            { className: 'info-content' },
-	            txt,
+	            user.userName + 'さんがあなたの「' + article.title + '」へのコメントに',
 	            React.createElement(
 	              'strong',
 	              null,
@@ -11025,8 +11066,8 @@
 
 	      // --------------------------------------------------
 	      // notice one block
-	      var OneDom = React.createClass({
-	        displayName: 'OneDom',
+	      var NoticeItem = React.createClass({
+	        displayName: 'NoticeItem',
 
 	        propTypes: {
 	          notice: React.PropTypes.object.isRequired,
@@ -11041,7 +11082,7 @@
 	        render: function render() {
 
 	          var notice = this.state.notice;
-	          var i = this.state.i;
+	          var index = this.state.index;
 
 	          var icon = notice.user.profilePicture;
 	          if (!icon) {
@@ -11050,10 +11091,10 @@
 
 	          return React.createElement(
 	            'li',
-	            { key: 'info-item-' + i, className: 'info-item info-item-' + i },
+	            { className: 'info-item info-item-' + notice.id },
 	            React.createElement(
 	              'a',
-	              { href: '#', className: 'info-link', onClick: this.oneClick },
+	              { href: '#', className: 'info-link info-link-' + notice.id, onClick: this.readedClick },
 	              React.createElement(
 	                'figure',
 	                { className: 'info-user-thumb' },
@@ -11068,12 +11109,63 @@
 	            )
 	          );
 	        },
-	        oneClick: function oneClick(event) {
+	        readedClick: function readedClick(event) {
 	          event.preventDefault();
 	        }
 	      });
 
 	      // --------------------------------------------------
+	      // read all On / Off
+	      var ReadAll = React.createClass({
+	        displayName: 'ReadAll',
+
+	        propTypes: {
+	          length: React.PropTypes.number.isRequired,
+	          callback: React.PropTypes.func
+	        },
+	        getDefaultProps: function getDefaultProps() {
+	          return {
+	            callback: function callback() {}
+	          };
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            length: this.props.length,
+	            loading: ''
+	          };
+	        },
+	        render: function render() {
+	          if (this.state.length > 0) {
+	            return React.createElement(
+	              'div',
+	              { className: 'info-btn-readAll loading-root ' + this.state.loading },
+	              React.createElement(
+	                'a',
+	                { href: '#', onClick: this.readClick },
+	                'すべて既読にする'
+	              ),
+	              React.createElement('div', { className: 'loading-spinner' })
+	            );
+	          } else {
+	            return React.createElement(
+	              'div',
+	              { className: 'info-btn-readAll' },
+	              ' '
+	            );
+	          }
+	        },
+	        readClick: function readClick(event) {
+	          event.preventDefault();
+	          this.setState({ loading: 'loading' });
+	          this.props.callback();
+	        },
+	        done: function done(result) {
+	          this.setState({ loading: '' });
+	        },
+	        fail: function fail(error) {
+	          this.setState({ loading: '' });
+	        }
+	      });
 	      // user notice dropMenu
 	      var NoticeMenu = React.createClass({
 	        displayName: 'NoticeMenu',
@@ -11089,27 +11181,6 @@
 	        render: function render() {
 
 	          var notifications = this.state.notifications;
-	          var readAll = undefined;
-
-	          if (notifications.length > 0) {
-
-	            readAll = React.createElement(
-	              'div',
-	              { className: 'info-btn-readAll' },
-	              React.createElement(
-	                'a',
-	                { href: '#', onClick: this.allRead },
-	                'すべて既読にする'
-	              )
-	            );
-	          } else {
-
-	            readAll = React.createElement(
-	              'div',
-	              { className: 'info-btn-readAll' },
-	              ' '
-	            );
-	          }
 
 	          return React.createElement(
 	            'nav',
@@ -11125,13 +11196,16 @@
 	                  { className: 'info-heading' },
 	                  'お知らせ'
 	                ),
-	                readAll,
+	                React.createElement(ReadAll, {
+	                  length: notifications.length,
+	                  callback: this.allRead
+	                }),
 	                React.createElement(
 	                  'ul',
 	                  { className: 'info-list' },
 	                  notifications.map(function (notice, i) {
 
-	                    return React.createElement(OneDom, { notice: notice, index: i });
+	                    return React.createElement(NoticeItem, { key: 'notice-' + notice.id, notice: notice, index: i });
 	                  }),
 	                  React.createElement(
 	                    'li',
@@ -11157,6 +11231,36 @@
 	      });
 
 	      // --------------------------------------------------
+	      // total 件数
+
+	      var NoticeTotal = React.createClass({
+	        displayName: 'NoticeTotal',
+
+	        propTypes: {
+	          total: React.PropTypes.number.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            total: this.props.total
+	          };
+	        },
+	        render: function render() {
+	          var total = this.state.total;
+	          if (total === 0) {
+	            return null;
+	          } else {
+	            // 件数が1以上の時に描画
+	            return React.createElement(
+	              'span',
+	              { className: 'notice-num' },
+	              total
+	            );
+	          }
+	        },
+	        updateTotal: function updateTotal(total) {
+	          this.setState({ total: total });
+	        }
+	      });
 	      // user notice
 	      var NoticeDom = React.createClass({
 	        displayName: 'NoticeDom',
@@ -11175,29 +11279,7 @@
 	        render: function render() {
 
 	          var response = this.state.response;
-	          var notifications = response.notifications;
-	          var noticeTotal = '';
-	          var noticeMenu = undefined;
-
-	          if (Array.isArray(notifications)) {
-
-	            // 配列（正常）な時はそのデータを使用しメニューを作成する
-	            noticeMenu = React.createElement(NoticeMenu, { notifications: notifications });
-
-	            if (notifications.length > 0) {
-	              // total が 1 以上
-	              noticeTotal = React.createElement(
-	                'span',
-	                { className: 'notice-num' },
-	                response.total
-	              );
-	            }
-	          } else {
-
-	            // 異常な時は
-	            // 空メニューを作成する、引数に 空配列 を送る
-	            noticeMenu = React.createElement(NoticeDom, { notifications: [] });
-	          }
+	          var notifications = _Safety.Safety.array(response.notifications);
 
 	          return React.createElement(
 	            'div',
@@ -11210,9 +11292,9 @@
 	                { className: 'notice-icon' },
 	                ' '
 	              ),
-	              noticeTotal
+	              React.createElement(NoticeTotal, { total: response.total })
 	            ),
-	            noticeMenu
+	            React.createElement(NoticeMenu, { notifications: notifications })
 	          );
 	        },
 	        componentDidMount: function componentDidMount() {
@@ -11297,11 +11379,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Notice = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -11317,6 +11394,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Notice = undefined;
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
@@ -11372,11 +11454,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Empty = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -11388,6 +11465,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Empty = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11453,7 +11535,7 @@
 	    get: function get() {
 
 	      // ToDo: デザインができたらパスを正しいものに変更する
-	      return '/assets/images/common/xxx_slide.png';
+	      return '/assets/images/common/thumb-pickup-empty.png';
 	    }
 	    /**
 	     * video thumbnail 代替画像パス<br>
@@ -11467,7 +11549,7 @@
 	    get: function get() {
 
 	      // ToDo: デザインができたらパスを正しいものに変更する
-	      return '/assets/images/common/xxx.png';
+	      return '/assets/images/common/thumb-16x9.png';
 	    }
 	    /**
 	     * video play button overlay<br>
@@ -11480,7 +11562,7 @@
 	    key: 'VIDEO_PLAY',
 	    get: function get() {
 
-	      return '/assets/images/common/thumb-overlay-movie-340x150.png';
+	      return '/assets/images/common/thumb-16x9-play.png';
 	    }
 	    /**
 	     * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
@@ -11541,570 +11623,6 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/09 - 20:11
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NotificationsDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(44);
-
-	var _NoticeDae = __webpack_require__(139);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * お知らせ JSON response
-	 */
-
-	var NotificationsDae = exports.NotificationsDae = function () {
-	  /**
-	   * お知らせ JSON response
-	   * @param {Object} [response={}] JSON response
-	   */
-
-	  function NotificationsDae() {
-	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, NotificationsDae);
-
-	    response = _Safety.Safety.object(response);
-
-	    var notifications = response.notifications;
-	    notifications = _Safety.Safety.array(notifications);
-	    var list = [];
-	    notifications.forEach(function (notice) {
-
-	      list.push(new _NoticeDae.NoticeDae(notice));
-	    });
-
-	    this._response = response;
-	    this._notifications = list;
-	  }
-	  /**
-	   * @return {Object|*} JSON response を返します
-	   */
-
-	  (0, _createClass3.default)(NotificationsDae, [{
-	    key: 'response',
-	    get: function get() {
-	      return this._response;
-	    }
-	    /**
-	     * @return {Array<NoticeDae>} JSON response.notifications を返します
-	     */
-
-	  }, {
-	    key: 'notifications',
-	    get: function get() {
-	      return this._notifications;
-	    }
-	    /**
-	     * @return {Number} count を返します
-	     */
-
-	  }, {
-	    key: 'total',
-	    get: function get() {
-	      return this.response.count;
-	    }
-	    /**
-	     * alias total
-	     * @return {Number} count を返します
-	     */
-
-	  }, {
-	    key: 'count',
-	    get: function get() {
-	      return this.total;
-	    }
-	  }]);
-	  return NotificationsDae;
-	}();
-
-/***/ },
-/* 139 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/09 - 20:10
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(44);
-
-	var _Format = __webpack_require__(60);
-
-	var _UserDae = __webpack_require__(126);
-
-	var _NoticeArticleDae = __webpack_require__(140);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * 通知単独データ
-	 */
-
-	var NoticeDae = exports.NoticeDae = function () {
-	  /**
-	   * 通知
-	   * @param {Object} [notice={}] JSON response.notifications 配列単独データ
-	   */
-
-	  function NoticeDae() {
-	    var notice = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, NoticeDae);
-
-	    notice = _Safety.Safety.object(notice);
-
-	    // date check
-	    if (_Safety.Safety.check(notice, 'date')) {
-
-	      this._formatDate = _Format.Format.date(notice.date);
-	    }
-
-	    this._notice = notice;
-
-	    // user
-	    this._user = new _UserDae.UserDae(notice.user);
-
-	    // article
-	    this._article = new _NoticeArticleDae.NoticeArticleDae(notice.article);
-	  }
-	  /**
-	   * @return {Object|*} JSON response.notifications 配列単独データ を返します
-	   */
-
-	  (0, _createClass3.default)(NoticeDae, [{
-	    key: 'notice',
-	    get: function get() {
-	      return this._notice;
-	    }
-	    /**
-	     * @return {Number} notifications id を返します
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this.notice.id;
-	    }
-	    /**
-	     * @return {string} ISO8601 日付を返します
-	     */
-
-	  }, {
-	    key: 'date',
-	    get: function get() {
-	      return this.notice.date;
-	    }
-	    /**
-	     * @return {string} ISO8601 を日本語形式日付にし返します
-	     */
-
-	  }, {
-	    key: 'formatDate',
-	    get: function get() {
-	      return this._formatDate;
-	    }
-	    /**
-	     * @return {string} 相対日付返します
-	     */
-
-	  }, {
-	    key: 'displayDate',
-	    get: function get() {
-	      return this.notice.display_date;
-	    }
-	    /**
-	     * アクティビティの種類
-	     * - reply : 返信された
-	     * - good : goodされた
-	     * - bad : badされた
-	     * - notice : ニュース的通知
-	     *
-	     * @return {string} アクティビティの種類を返します
-	     */
-
-	  }, {
-	    key: 'action',
-	    get: function get() {
-	      return this.notice.action;
-	    }
-	    /**
-	     * @return {UserDae|*} 誰からの通知かユーザー情報を返します
-	     */
-
-	  }, {
-	    key: 'user',
-	    get: function get() {
-	      return this._user;
-	    }
-	    /**
-	     * @return {NoticeArticleDae|*} 対象記事情報を返します
-	     */
-
-	  }, {
-	    key: 'article',
-	    get: function get() {
-	      return this._article;
-	    }
-	  }]);
-	  return NoticeDae;
-	}();
-
-/***/ },
-/* 140 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/09 - 20:44
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeArticleDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(44);
-
-	var _PopularDae = __webpack_require__(141);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * お知らせ 記事情報
-	 */
-
-	var NoticeArticleDae = exports.NoticeArticleDae = function () {
-	  /**
-	   * お知らせ 記事情報 JSON response.notifications.article
-	   * @param {Object} [article={}] お知らせ 記事情報
-	   */
-
-	  function NoticeArticleDae() {
-	    var article = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, NoticeArticleDae);
-
-	    article = _Safety.Safety.object(article);
-
-	    this._article = article;
-	    this._comment = new _PopularDae.PopularDae(article.comment);
-	    this._reply = new _PopularDae.PopularDae(article.reply);
-	  }
-	  /**
-	   *
-	   * @return {Object|*} お知らせ 記事情報 を返します
-	   */
-
-	  (0, _createClass3.default)(NoticeArticleDae, [{
-	    key: 'article',
-	    get: function get() {
-	      return this._article;
-	    }
-	    /**
-	     * @return {string} 記事タイトル を返します
-	     */
-
-	  }, {
-	    key: 'title',
-	    get: function get() {
-	      return this.article.title;
-	    }
-	    /**
-	     * @return {string} 記事 url を返します
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.article.url;
-	    }
-	    /**
-	     * @return {PopularDae|*} article.comment を返します
-	     */
-
-	  }, {
-	    key: 'comment',
-	    get: function get() {
-	      return this._comment;
-	    }
-	    /**
-	     * @return {PopularDae|*} article.reply を返します
-	     */
-
-	  }, {
-	    key: 'reply',
-	    get: function get() {
-	      return this._reply;
-	    }
-	  }]);
-	  return NoticeArticleDae;
-	}();
-
-/***/ },
-/* 141 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/01/25 - 22:15
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PopularDae = undefined;
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _Safety = __webpack_require__(44);
-
-	var _Format = __webpack_require__(60);
-
-	var _UserDae = __webpack_require__(126);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * article.comments_popular 配列内 1 data
-	 */
-
-	var PopularDae = exports.PopularDae = function () {
-	  /**
-	   * article.comments_popular:[]
-	   * @param {Object} [comment={}] response.comment Object
-	   */
-
-	  function PopularDae() {
-	    var comment = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	    (0, _classCallCheck3.default)(this, PopularDae);
-
-	    comment = _Safety.Safety.object(comment);
-
-	    if (_Safety.Safety.check(comment, 'date')) {
-
-	      this._formatDate = _Format.Format.date(comment.date);
-	    }
-
-	    // comments_popular.user
-	    this._user = new _UserDae.UserDae(comment.user);
-	    // property
-	    this._comment = comment;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * @return {Object|*} comment Object を返します
-	   */
-
-	  (0, _createClass3.default)(PopularDae, [{
-	    key: 'comment',
-	    get: function get() {
-	      return this._comment;
-	    }
-	    /**
-	     * @return {Number} comment.id を返します
-	     */
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this.comment.id;
-	    }
-	    /**
-	     * @return {string} ISO8601 日付を返します
-	     */
-
-	  }, {
-	    key: 'date',
-	    get: function get() {
-	      return this.comment.date;
-	    }
-	    /**
-	     * @return {string} ISO8601 を日本語形式日付にし返します
-	     */
-
-	  }, {
-	    key: 'formatDate',
-	    get: function get() {
-	      return this._formatDate;
-	    }
-	    /**
-	     * @return {string} 相対日付返します
-	     */
-
-	  }, {
-	    key: 'displayDate',
-	    get: function get() {
-	      return this.comment.display_date;
-	    }
-	    /**
-	     *
-	     * @return {string} コメント本文を返します
-	     */
-
-	  }, {
-	    key: 'body',
-	    get: function get() {
-	      return this.comment.body;
-	    }
-	    /**
-	     * alias isLike
-	     * @return {boolean} 自分がGood済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isGood',
-	    get: function get() {
-	      return this.isLike;
-	    }
-	    /**
-	     * @return {boolean} 自分がGood済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isLike',
-	    get: function get() {
-	      return this.comment.is_like;
-	    }
-	    /**
-	     * @return {boolean} 自分がBad済みかどうか を返します
-	     */
-
-	  }, {
-	    key: 'isBad',
-	    get: function get() {
-	      return this.comment.is_bad;
-	    }
-	    /**
-	     * @return {Number} Good数 を返します
-	     */
-
-	  }, {
-	    key: 'good',
-	    get: function get() {
-	      return this.comment.like;
-	    }
-	    /**
-	     * this.good alias
-	     * @return {Number} Good数 を返します
-	     */
-
-	  }, {
-	    key: 'like',
-	    get: function get() {
-	      return this.good;
-	    }
-	    /**
-	     * @return {Number|number} Bad数 を返します
-	     */
-
-	  }, {
-	    key: 'bad',
-	    get: function get() {
-	      return this.comment.bad;
-	    }
-	    /**
-	     *
-	     * @return {string} コメント詳細のURLを返します
-	     */
-
-	  }, {
-	    key: 'url',
-	    get: function get() {
-	      return this.comment.url;
-	    }
-	    /**
-	     *
-	     * @return {UserDae|*} comment した user 情報を返します
-	     */
-
-	  }, {
-	    key: 'user',
-	    get: function get() {
-	      return this._user;
-	    }
-	  }]);
-	  return PopularDae;
-	}(); // class
-
-/***/ },
-/* 142 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/02/09 - 23:12
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -12114,11 +11632,6 @@
 	 *
 	 */
 	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NoticeAction = undefined;
 
 	var _classCallCheck2 = __webpack_require__(40);
 
@@ -12131,6 +11644,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeAction = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12180,7 +11698,7 @@
 	}();
 
 /***/ },
-/* 143 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12196,11 +11714,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Url = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -12212,6 +11725,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Url = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12473,6 +11991,570 @@
 	}();
 
 /***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 20:11
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NotificationsDae = undefined;
+
+	var _Safety = __webpack_require__(44);
+
+	var _NoticeDae = __webpack_require__(141);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * お知らせ JSON response
+	 */
+
+	var NotificationsDae = exports.NotificationsDae = function () {
+	  /**
+	   * お知らせ JSON response
+	   * @param {Object} [response={}] JSON response
+	   */
+
+	  function NotificationsDae() {
+	    var response = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, NotificationsDae);
+
+	    response = _Safety.Safety.object(response);
+
+	    var notifications = response.notifications;
+	    notifications = _Safety.Safety.array(notifications);
+	    var list = [];
+	    notifications.forEach(function (notice) {
+
+	      list.push(new _NoticeDae.NoticeDae(notice));
+	    });
+
+	    this._response = response;
+	    this._notifications = list;
+	  }
+	  /**
+	   * @return {Object|*} JSON response を返します
+	   */
+
+	  (0, _createClass3.default)(NotificationsDae, [{
+	    key: 'response',
+	    get: function get() {
+	      return this._response;
+	    }
+	    /**
+	     * @return {Array<NoticeDae>} JSON response.notifications を返します
+	     */
+
+	  }, {
+	    key: 'notifications',
+	    get: function get() {
+	      return this._notifications;
+	    }
+	    /**
+	     * @return {Number} count を返します
+	     */
+
+	  }, {
+	    key: 'total',
+	    get: function get() {
+	      return this.response.count;
+	    }
+	    /**
+	     * alias total
+	     * @return {Number} count を返します
+	     */
+
+	  }, {
+	    key: 'count',
+	    get: function get() {
+	      return this.total;
+	    }
+	  }]);
+	  return NotificationsDae;
+	}();
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 20:10
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeDae = undefined;
+
+	var _Safety = __webpack_require__(44);
+
+	var _Format = __webpack_require__(60);
+
+	var _UserDae = __webpack_require__(126);
+
+	var _NoticeArticleDae = __webpack_require__(142);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 通知単独データ
+	 */
+
+	var NoticeDae = exports.NoticeDae = function () {
+	  /**
+	   * 通知
+	   * @param {Object} [notice={}] JSON response.notifications 配列単独データ
+	   */
+
+	  function NoticeDae() {
+	    var notice = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, NoticeDae);
+
+	    notice = _Safety.Safety.object(notice);
+
+	    // date check
+	    if (_Safety.Safety.check(notice, 'date')) {
+
+	      this._formatDate = _Format.Format.date(notice.date);
+	    }
+
+	    this._notice = notice;
+
+	    // user
+	    this._user = new _UserDae.UserDae(notice.user);
+
+	    // article
+	    this._article = new _NoticeArticleDae.NoticeArticleDae(notice.article);
+	  }
+	  /**
+	   * @return {Object|*} JSON response.notifications 配列単独データ を返します
+	   */
+
+	  (0, _createClass3.default)(NoticeDae, [{
+	    key: 'notice',
+	    get: function get() {
+	      return this._notice;
+	    }
+	    /**
+	     * @return {Number} notifications id を返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.notice.id;
+	    }
+	    /**
+	     * @return {string} ISO8601 日付を返します
+	     */
+
+	  }, {
+	    key: 'date',
+	    get: function get() {
+	      return this.notice.date;
+	    }
+	    /**
+	     * @return {string} ISO8601 を日本語形式日付にし返します
+	     */
+
+	  }, {
+	    key: 'formatDate',
+	    get: function get() {
+	      return this._formatDate;
+	    }
+	    /**
+	     * @return {string} 相対日付返します
+	     */
+
+	  }, {
+	    key: 'displayDate',
+	    get: function get() {
+	      return this.notice.display_date;
+	    }
+	    /**
+	     * アクティビティの種類
+	     * - reply : 返信された
+	     * - good : goodされた
+	     * - bad : badされた
+	     * - notice : ニュース的通知
+	     *
+	     * @return {string} アクティビティの種類を返します
+	     */
+
+	  }, {
+	    key: 'action',
+	    get: function get() {
+	      return this.notice.action;
+	    }
+	    /**
+	     * @return {UserDae|*} 誰からの通知かユーザー情報を返します
+	     */
+
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	    /**
+	     * @return {NoticeArticleDae|*} 対象記事情報を返します
+	     */
+
+	  }, {
+	    key: 'article',
+	    get: function get() {
+	      return this._article;
+	    }
+	  }]);
+	  return NoticeDae;
+	}();
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/09 - 20:44
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NoticeArticleDae = undefined;
+
+	var _Safety = __webpack_require__(44);
+
+	var _PopularDae = __webpack_require__(143);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * お知らせ 記事情報
+	 */
+
+	var NoticeArticleDae = exports.NoticeArticleDae = function () {
+	  /**
+	   * お知らせ 記事情報 JSON response.notifications.article
+	   * @param {Object} [article={}] お知らせ 記事情報
+	   */
+
+	  function NoticeArticleDae() {
+	    var article = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, NoticeArticleDae);
+
+	    article = _Safety.Safety.object(article);
+
+	    this._article = article;
+	    this._comment = new _PopularDae.PopularDae(article.comment);
+	    this._reply = new _PopularDae.PopularDae(article.reply);
+	  }
+	  /**
+	   *
+	   * @return {Object|*} お知らせ 記事情報 を返します
+	   */
+
+	  (0, _createClass3.default)(NoticeArticleDae, [{
+	    key: 'article',
+	    get: function get() {
+	      return this._article;
+	    }
+	    /**
+	     * @return {string} 記事タイトル を返します
+	     */
+
+	  }, {
+	    key: 'title',
+	    get: function get() {
+	      return this.article.title;
+	    }
+	    /**
+	     * @return {string} 記事 url を返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.article.url;
+	    }
+	    /**
+	     * @return {PopularDae|*} article.comment を返します
+	     */
+
+	  }, {
+	    key: 'comment',
+	    get: function get() {
+	      return this._comment;
+	    }
+	    /**
+	     * @return {PopularDae|*} article.reply を返します
+	     */
+
+	  }, {
+	    key: 'reply',
+	    get: function get() {
+	      return this._reply;
+	    }
+	  }]);
+	  return NoticeArticleDae;
+	}();
+
+/***/ },
+/* 143 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/01/25 - 22:15
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PopularDae = undefined;
+
+	var _Safety = __webpack_require__(44);
+
+	var _Format = __webpack_require__(60);
+
+	var _UserDae = __webpack_require__(126);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * article.comments_popular 配列内 1 data
+	 */
+
+	var PopularDae = exports.PopularDae = function () {
+	  /**
+	   * article.comments_popular:[]
+	   * @param {Object} [comment={}] response.comment Object
+	   */
+
+	  function PopularDae() {
+	    var comment = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    (0, _classCallCheck3.default)(this, PopularDae);
+
+	    comment = _Safety.Safety.object(comment);
+
+	    if (_Safety.Safety.check(comment, 'date')) {
+
+	      this._formatDate = _Format.Format.date(comment.date);
+	    }
+
+	    // comments_popular.user
+	    this._user = new _UserDae.UserDae(comment.user);
+	    // property
+	    this._comment = comment;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * @return {Object|*} comment Object を返します
+	   */
+
+	  (0, _createClass3.default)(PopularDae, [{
+	    key: 'comment',
+	    get: function get() {
+	      return this._comment;
+	    }
+	    /**
+	     * @return {Number} comment.id を返します
+	     */
+
+	  }, {
+	    key: 'id',
+	    get: function get() {
+	      return this.comment.id;
+	    }
+	    /**
+	     * @return {string} ISO8601 日付を返します
+	     */
+
+	  }, {
+	    key: 'date',
+	    get: function get() {
+	      return this.comment.date;
+	    }
+	    /**
+	     * @return {string} ISO8601 を日本語形式日付にし返します
+	     */
+
+	  }, {
+	    key: 'formatDate',
+	    get: function get() {
+	      return this._formatDate;
+	    }
+	    /**
+	     * @return {string} 相対日付返します
+	     */
+
+	  }, {
+	    key: 'displayDate',
+	    get: function get() {
+	      return this.comment.display_date;
+	    }
+	    /**
+	     *
+	     * @return {string} コメント本文を返します
+	     */
+
+	  }, {
+	    key: 'body',
+	    get: function get() {
+	      return this.comment.body;
+	    }
+	    /**
+	     * alias isLike
+	     * @return {boolean} 自分がGood済みかどうか を返します
+	     */
+
+	  }, {
+	    key: 'isGood',
+	    get: function get() {
+	      return this.isLike;
+	    }
+	    /**
+	     * @return {boolean} 自分がGood済みかどうか を返します
+	     */
+
+	  }, {
+	    key: 'isLike',
+	    get: function get() {
+	      return this.comment.is_like;
+	    }
+	    /**
+	     * @return {boolean} 自分がBad済みかどうか を返します
+	     */
+
+	  }, {
+	    key: 'isBad',
+	    get: function get() {
+	      return this.comment.is_bad;
+	    }
+	    /**
+	     * @return {Number} Good数 を返します
+	     */
+
+	  }, {
+	    key: 'good',
+	    get: function get() {
+	      return this.comment.like;
+	    }
+	    /**
+	     * this.good alias
+	     * @return {Number} Good数 を返します
+	     */
+
+	  }, {
+	    key: 'like',
+	    get: function get() {
+	      return this.good;
+	    }
+	    /**
+	     * @return {Number|number} Bad数 を返します
+	     */
+
+	  }, {
+	    key: 'bad',
+	    get: function get() {
+	      return this.comment.bad;
+	    }
+	    /**
+	     *
+	     * @return {string} コメント詳細のURLを返します
+	     */
+
+	  }, {
+	    key: 'url',
+	    get: function get() {
+	      return this.comment.url;
+	    }
+	    /**
+	     *
+	     * @return {UserDae|*} comment した user 情報を返します
+	     */
+
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return this._user;
+	    }
+	  }]);
+	  return PopularDae;
+	}(); // class
+
+/***/ },
 /* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -12490,11 +12572,6 @@
 	'use strict';
 
 	// app
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewArchiveMasonryInfinite = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -12515,6 +12592,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewArchiveMasonryInfinite = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -12746,7 +12828,7 @@
 
 	            return React.createElement(
 	              'div',
-	              { id: 'more', className: 'board-btn-viewmore' + this.state.loading },
+	              { id: 'more', className: 'board-btn-viewmore loading-root ' + this.state.loading },
 	              React.createElement(
 	                'a',
 	                { className: 'board-btn-viewmore-link', href: '#more', onClick: this.handleClick },
@@ -12863,14 +12945,6 @@
 	        }
 	      };
 
-	      // more button 表示状態を loading on / off 切替えます
-	      /*
-	      let loadingButton = ( loading:boolean ) => {
-	         if ( _this._moreRendered !== null ) {
-	          _this._moreRendered.updateLoading( !!loading );
-	        }
-	       };
-	      */
 	      // --------------------------------------------
 	      // COMMENTS Popular second
 	      // --------------------------------------------
@@ -12975,9 +13049,6 @@
 	          var total = this.props.total;
 	          var articleId = this.props.articleId;
 
-	          var emptyFirst = React.createElement('div', { className: 'comments-popular comments-empty' });
-	          var second = React.createElement('div', { className: 'comments-second comments-empty' });
-
 	          var hasFirst = commentsPopular.hasFirst;
 	          var hasSecond = commentsPopular.hasSecond;
 	          var firstDae = commentsPopular.first;
@@ -12985,8 +13056,7 @@
 	          // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
 	          if (hasSecond) {
 	            // 2件目以降も存在する
-	            // 2件目以降のDomを生成する
-	            // second = <CommentsSecond seconds={secondsDae} articleId={articleId} />;
+	            // 合計数からアイコン描画数を引く
 	            total -= secondsDae.length;
 	          }
 
@@ -12994,7 +13064,7 @@
 	          if (hasFirst) {
 
 	            // 少なくとも1件は存在する
-	            // 総件数から 1 マイナス
+	            // 総件数から 1（アイコン描画数） マイナス
 	            total -= 1;
 	            console.log('少なくとも1件は存在する ', articleId);
 
@@ -13058,9 +13128,11 @@
 	                hasSecond: hasSecond
 	              })
 	            );
-	          }
+	          } else {
 
-	          return emptyFirst;
+	            // 描画するべきものがない
+	            return null;
+	          }
 	        }, // render
 	        componentDidMount: function componentDidMount() {
 	          // mount
@@ -13070,6 +13142,47 @@
 	      // ------------------------------------------------
 	      // 基点 React class
 	      // ------------------------------------------------
+	      // 記事一覧のサムネイル
+	      var ThumbnailDom = React.createClass({
+	        displayName: 'ThumbnailDom',
+
+	        propType: {
+	          mediaType: React.PropTypes.string.isRequired,
+	          thumbnail: React.PropTypes.string.isRequired,
+	          title: React.PropTypes.string.isRequired
+	        },
+	        getInitialState: function getInitialState() {
+	          return {
+	            mediaType: this.props.mediaType,
+	            thumbnail: this.props.thumbnail,
+	            title: this.props.title
+	          };
+	        },
+	        render: function render() {
+	          var mediaType = this.props.mediaType;
+
+	          // media type で thumbnail 切替
+	          if (mediaType === 'image') {
+	            // type: image
+	            return React.createElement(
+	              'figure',
+	              { className: 'post-thumb post-thumb-' + mediaType },
+	              React.createElement('img', { src: this.props.thumbnail, alt: this.props.title })
+	            );
+	          } else if (mediaType === 'video') {
+	            // type: video
+	            return React.createElement(
+	              'figure',
+	              { className: 'post-thumb post-thumb-' + mediaType },
+	              React.createElement('img', { className: 'video-thumbnail', src: this.props.thumbnail, alt: this.props.title }),
+	              React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY })
+	            );
+	          } else {
+	            // 該当なし
+	            return null;
+	          }
+	        }
+	      });
 
 	      // 個別の 記事Dom
 	      // React Class, Archive Dom
@@ -13077,7 +13190,11 @@
 	        displayName: 'ArticleDom',
 
 	        propTypes: {
-	          list: React.PropTypes.array.isRequired
+	          list: React.PropTypes.array.isRequired,
+	          // request offset
+	          offset: React.PropTypes.number.isRequired,
+	          // request length
+	          length: React.PropTypes.number.isRequired
 	        },
 	        getInitialState: function getInitialState() {
 	          this.isotope = null;
@@ -13086,7 +13203,9 @@
 
 	          return {
 	            arranged: 'prepare',
-	            list: this.props.list
+	            list: this.props.list,
+	            offset: this.props.offset,
+	            length: this.props.length
 	          };
 	        },
 	        render: function render() {
@@ -13105,34 +13224,34 @@
 	              var thumbnail = undefined;
 	              var figureTag = undefined;
 
-	              console.log('ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular);
+	              // console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
 
 	              thumbnail = dae.media.images.medium;
 
+	              // thumbnail が空の時は代替画像
 	              if (!thumbnail) {
+	                thumbnail = _Empty.Empty.IMG_MIDDLE;
+	              } else if (!_Safety.Safety.isImg(thumbnail)) {
+	                // 画像ファイル名に拡張子がないのがあったので
+	                // 拡張子チェックを追加
 	                thumbnail = _Empty.Empty.IMG_MIDDLE;
 	              }
 
 	              // media type で thumbnail 切替
-	              if (dae.mediaType === 'image') {
-
-	                // type: image
-	                figureTag = React.createElement(
-	                  'figure',
-	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                  React.createElement('img', { src: thumbnail, alt: dae.title })
-	                );
-	              } else {
-
-	                // type: video
-	                figureTag = React.createElement(
-	                  'figure',
-	                  { className: 'post-thumb post-thumb-' + dae.mediaType },
-	                  React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY }),
-	                  React.createElement('img', { src: thumbnail, alt: dae.title })
-	                );
-	              }
-
+	              /*
+	              if ( dae.mediaType === 'image' ) {
+	                 // type: image
+	                figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+	                  <img src={thumbnail} alt={dae.title}/>
+	                </figure>;
+	               } else {
+	                 // type: video
+	                figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
+	                  <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+	                  <img src={thumbnail} alt={dae.title}/>
+	                </figure>;
+	               }
+	              */
 	              // unique key(React)にarticle id(number)記事Idを使用します
 	              return React.createElement(
 	                'div',
@@ -13140,7 +13259,11 @@
 	                React.createElement(
 	                  'a',
 	                  { className: 'post', href: dae.url },
-	                  figureTag,
+	                  React.createElement(ThumbnailDom, {
+	                    mediaType: dae.mediaType,
+	                    thumbnail: thumbnail,
+	                    title: dae.title
+	                  }),
 	                  React.createElement(
 	                    'div',
 	                    { className: 'post-data' },
@@ -13182,12 +13305,13 @@
 	          var elements = [];
 	          // 追加された Element を取得するための start / end point
 	          // start は request offset
-	          var i = _this._request.offset;
+	          //let i = _this._request.offset;
+	          var i = this.state.offset;
 	          // end は request offset へ request length を加算したものと
 	          // children length の小さい方
-	          var limit = Math.min(i + _this._request.length, childNodes.length);
-	          console.log('start ', i);
-	          console.log('end ', limit);
+	          //let limit = Math.min( i + _this._request.length, childNodes.length );
+	          var limit = Math.min(i + this.state.length, childNodes.length);
+	          console.log('start - end ', i + '-' + limit);
 
 	          // start / end から 対象 children を選別
 	          for (; i < limit; i++) {
@@ -13251,9 +13375,9 @@
 	            }
 	          });
 	        },
-	        updateList: function updateList(list) {
+	        updateList: function updateList(list, offset, length) {
 	          // state を変更し appendChild + isotope を行う
-	          this.setState({ list: list });
+	          this.setState({ list: list, offset: offset, length: length });
 	        },
 	        // didUpdate から呼び出される
 	        appendImages: function appendImages() {
@@ -13290,12 +13414,12 @@
 	      if (this._articleRendered === null) {
 
 	        // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-	        this._articleRendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList }), element);
+	        this._articleRendered = ReactDOM.render(React.createElement(ArticleDom, { list: articlesList, offset: this._request.offset, length: this._request.length }), element);
 	      } else {
 
 	        // instance が存在するので
 	        // state update でコンテナを追加する
-	        this._articleRendered.updateList(articlesList);
+	        this._articleRendered.updateList(articlesList, this._request.offset, this._request.length);
 	      }
 	    } // render
 
@@ -13325,11 +13449,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewError = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -13349,6 +13468,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewError = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -13481,11 +13605,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ArticleDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -13493,6 +13612,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ArticleDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -13761,11 +13885,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CategoryDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -13773,6 +13892,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CategoryDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -13846,11 +13970,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.MediaDae = undefined;
-
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -13862,6 +13981,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.MediaDae = undefined;
 
 	var _ImagesDae = __webpack_require__(149);
 
@@ -13987,11 +14111,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ImagesDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -13999,6 +14118,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ImagesDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -14102,11 +14226,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.VideoDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -14114,6 +14233,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.VideoDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -14211,11 +14335,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsPopularDae = undefined;
-
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -14228,7 +14347,12 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(141);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsPopularDae = undefined;
+
+	var _PopularDae = __webpack_require__(143);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14422,11 +14546,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Rise = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -14446,6 +14565,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Rise = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -14564,11 +14688,6 @@
 	 * HTMLElement 要素にアクセスするヘルパー
 	 */
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Dom = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -14576,6 +14695,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Dom = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14640,11 +14764,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Scroll = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -14664,6 +14783,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Scroll = undefined;
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
@@ -14943,11 +15067,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewCategory = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -14963,6 +15082,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewCategory = undefined;
 
 	var _Category = __webpack_require__(116);
 
@@ -15020,11 +15144,6 @@
 
 	// view
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewSingle = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -15044,6 +15163,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingle = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -15284,11 +15408,6 @@
 
 	// app
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewRelated = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -15308,6 +15427,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewRelated = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -15488,11 +15612,6 @@
 
 	// 記事詳細 関連記事結果
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.RelatedDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -15500,6 +15619,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.RelatedDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -15698,11 +15822,6 @@
 
 	// view
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewSingleHeader = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -15723,11 +15842,16 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleHeader = undefined;
+
 	var _View2 = __webpack_require__(132);
 
-	var _ViewImage = __webpack_require__(161);
+	var _ViewSingleImage = __webpack_require__(161);
 
-	var _ViewVideo = __webpack_require__(162);
+	var _ViewSingleVideo = __webpack_require__(162);
 
 	var _SingleDae = __webpack_require__(163);
 
@@ -15816,7 +15940,7 @@
 	              { className: 'f-right' },
 	              React.createElement(
 	                'div',
-	                { className: this.state.loading + ' btn-bookmark' },
+	                { className: this.state.loading + ' loading-root btn-bookmark' },
 	                React.createElement(
 	                  'a',
 	                  { href: '#', className: this.state.bookmarked, onClick: this.clickBookmark, ref: 'bookmarked' },
@@ -15888,12 +16012,12 @@
 	          if (single.mediaType === 'image') {
 
 	            // image
-	            img = new _ViewImage.ViewImage(imageNode, single.media.images);
+	            img = new _ViewSingleImage.ViewSingleImage(imageNode, single.media.images);
 	            img.start();
 	          } else if (single.mediaType === 'video') {
 
 	            // video
-	            img = new _ViewVideo.ViewVideo(imageNode, single.media);
+	            img = new _ViewSingleVideo.ViewSingleVideo(imageNode, single.media);
 	            img.start();
 	          }
 	        },
@@ -15941,11 +16065,6 @@
 
 	// view
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewImage = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -15966,6 +16085,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleImage = undefined;
+
 	var _View2 = __webpack_require__(132);
 
 	var _ImagesDae = __webpack_require__(149);
@@ -15980,8 +16104,8 @@
 	 * 記事詳細上部画像
 	 */
 
-	var ViewImage = exports.ViewImage = function (_View) {
-	  (0, _inherits3.default)(ViewImage, _View);
+	var ViewSingleImage = exports.ViewSingleImage = function (_View) {
+	  (0, _inherits3.default)(ViewSingleImage, _View);
 
 	  /**
 	   * 記事詳細上部画像
@@ -15989,10 +16113,10 @@
 	   * @param {ImagesDae} images response.media.images
 	   */
 
-	  function ViewImage(element, images) {
-	    (0, _classCallCheck3.default)(this, ViewImage);
+	  function ViewSingleImage(element, images) {
+	    (0, _classCallCheck3.default)(this, ViewSingleImage);
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewImage).call(this, element));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingleImage).call(this, element));
 
 	    _this._images = images;
 	    _this._rendered = null;
@@ -16002,7 +16126,7 @@
 	   * render 処理を開始します
 	   */
 
-	  (0, _createClass3.default)(ViewImage, [{
+	  (0, _createClass3.default)(ViewSingleImage, [{
 	    key: 'start',
 	    value: function start() {
 	      this.render(this._images);
@@ -16088,7 +16212,7 @@
 	      }
 	    }
 	  }]);
-	  return ViewImage;
+	  return ViewSingleImage;
 	}(_View2.View);
 
 /***/ },
@@ -16110,11 +16234,6 @@
 
 	// view
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewVideo = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -16135,6 +16254,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleVideo = undefined;
+
 	var _View2 = __webpack_require__(132);
 
 	var _MediaDae = __webpack_require__(148);
@@ -16149,8 +16273,8 @@
 	 * 記事詳細上部動画
 	 */
 
-	var ViewVideo = exports.ViewVideo = function (_View) {
-	  (0, _inherits3.default)(ViewVideo, _View);
+	var ViewSingleVideo = exports.ViewSingleVideo = function (_View) {
+	  (0, _inherits3.default)(ViewSingleVideo, _View);
 
 	  /**
 	   * 記事詳細上部動画
@@ -16158,10 +16282,10 @@
 	   * @param {MediaDae} media response.media
 	   */
 
-	  function ViewVideo(element, media) {
-	    (0, _classCallCheck3.default)(this, ViewVideo);
+	  function ViewSingleVideo(element, media) {
+	    (0, _classCallCheck3.default)(this, ViewSingleVideo);
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewVideo).call(this, element));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingleVideo).call(this, element));
 
 	    _this._media = media;
 	    _this._rendered = null;
@@ -16171,7 +16295,7 @@
 	   * render 処理を開始します
 	   */
 
-	  (0, _createClass3.default)(ViewVideo, [{
+	  (0, _createClass3.default)(ViewSingleVideo, [{
 	    key: 'start',
 	    value: function start() {
 	      this.render(this._media);
@@ -16225,12 +16349,14 @@
 
 	          var video = media.video;
 	          var images = media.images;
-	          var caption = video.caption;
-	          var tag = '';
 
-	          if (!!caption) {
-	            tag = React.createElement('div', { className: 'caption', dangerouslySetInnerHTML: { __html: caption } });
-	          }
+	          var captionTag = function captionTag(caption) {
+	            if (!!caption) {
+	              return React.createElement('div', { className: 'caption', dangerouslySetInnerHTML: { __html: caption } });
+	            } else {
+	              return '';
+	            }
+	          };
 
 	          return React.createElement(
 	            'div',
@@ -16240,7 +16366,7 @@
 	              { poster: images.medium, preload: 'none' },
 	              React.createElement('source', { src: video.url, type: 'video/mp4' })
 	            ),
-	            tag
+	            captionTag(video.caption)
 	          );
 	        },
 	        youtube: function youtube(media) {
@@ -16268,7 +16394,7 @@
 	      }
 	    }
 	  }]);
-	  return ViewVideo;
+	  return ViewSingleVideo;
 	}(_View2.View);
 
 /***/ },
@@ -16287,11 +16413,6 @@
 	 *
 	 */
 	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.SingleDae = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -16312,6 +16433,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SingleDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -16424,11 +16550,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.KeywordsDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -16436,6 +16557,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.KeywordsDae = undefined;
 
 	var _Safety = __webpack_require__(44);
 
@@ -16520,11 +16646,6 @@
 
 	// view
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewSingleFooter = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -16545,11 +16666,16 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewSingleFooter = undefined;
+
 	var _View2 = __webpack_require__(132);
 
 	var _SingleDae = __webpack_require__(163);
 
-	var _Url = __webpack_require__(143);
+	var _Url = __webpack_require__(139);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16681,11 +16807,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewTitle = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -16705,6 +16826,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewTitle = undefined;
 
 	var _View2 = __webpack_require__(132);
 
@@ -16759,12 +16885,9 @@
 	        displayName: 'TitleDom',
 
 	        propType: {
-	          label: React.PropTypes.string.isRequired,
-	          slug: React.PropTypes.string.isRequired
+	          label: React.PropTypes.string.isRequired
 	        },
 	        render: function render() {
-
-	          var label = this.props.label;
 
 	          return React.createElement(
 	            'div',
@@ -16772,7 +16895,7 @@
 	            React.createElement(
 	              'h1',
 	              null,
-	              label
+	              this.props.label
 	            )
 	          );
 	        }
@@ -16816,11 +16939,6 @@
 
 	// app
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewComments = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -16840,6 +16958,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewComments = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -17137,14 +17260,16 @@
 	        // moreElement 存在チェックを行う
 	        // Element 型を保証する
 	        // _moreRendered が null の時のみ, instance があれば state を update する
-	        if (_Safety.Safety.isElement(moreElement) && _this._moreRendered === null) {
+	        if (_Safety.Safety.isElement(moreElement)) {
+	          if (_this._moreRendered === null) {
 
-	          _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
-	        } else {
+	            _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+	          } else {
 
-	          // instance がある, render 済み
-	          // state を変更し button の表示・非表示を行う
-	          _this._moreRendered.updateShow(show);
+	            // instance がある, render 済み
+	            // state を変更し button の表示・非表示を行う
+	            _this._moreRendered.updateShow(show);
+	          }
 	        }
 	      };
 
@@ -17432,7 +17557,8 @@
 	      // this._commentsRendered が null の時だけ CommentsDom.render する
 	      if (this._commentsRendered === null) {
 
-	        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, { commentsList: commentsList,
+	        this._commentsRendered = ReactDOM.render(React.createElement(CommentsDom, {
+	          commentsList: commentsList,
 	          articleId: String(this._articleId),
 	          commentsListType: this._commentsListType,
 	          user: user
@@ -17478,11 +17604,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Comments = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -17506,6 +17627,11 @@
 	var _symbol2 = __webpack_require__(52);
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Comments = undefined;
 
 	var _OffsetAuth2 = __webpack_require__(115);
 
@@ -17704,11 +17830,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsListDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -17716,6 +17837,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsListDae = undefined;
 
 	var _CommentsDae = __webpack_require__(170);
 
@@ -17816,11 +17942,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommentsDae = undefined;
-
 	var _getIterator2 = __webpack_require__(2);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
@@ -17833,7 +17954,12 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(141);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentsDae = undefined;
+
+	var _PopularDae = __webpack_require__(143);
 
 	var _ReplyDae = __webpack_require__(171);
 
@@ -17955,11 +18081,6 @@
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ReplyDae = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -17967,6 +18088,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ReplyDae = undefined;
 
 	var _CommentsPopularDae = __webpack_require__(151);
 
@@ -18058,25 +18184,48 @@
 	// コメント削除 自分のだけ
 
 	// node
-	var DeleteComment = React.createClass({
-	  displayName: 'DeleteComment',
+	var CommentAction = React.createClass({
+	  displayName: 'CommentAction',
 
 	  propTypes: {
 	    // user id
 	    userId: React.PropTypes.string.isRequired,
 	    commentUserId: React.PropTypes.string.isRequired,
-	    callback: React.PropTypes.func.isRequired
+	    commentId: React.PropTypes.string.isRequired,
+	    delete: React.PropTypes.func.isRequired,
+	    report: React.PropTypes.func.isRequired
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      deleteLoading: '',
+	      reportLoading: ''
+	    };
 	  },
 	  render: function render() {
-	    if (!this.props.userId || this.props.userId !== this.props.commentUserId) {
-	      return null;
-	    } else {
+	    if (this.props.userId === '0' || this.props.userId !== this.props.commentUserId) {
+	      // 自分以外 & ユーザー情報が正しくは通報機能
 	      return React.createElement(
 	        'li',
-	        { className: 'dropMenu-item' },
+	        { className: 'dropMenu-item loading-root ' + this.state.deleteLoading },
 	        React.createElement(
 	          'a',
-	          { href: '#', className: 'dropMenu-link-delete', onClick: this.props.callback },
+	          { href: '#', className: 'dropMenu-link-report dropMenu-link', onClick: this.reportClick },
+	          React.createElement(
+	            'span',
+	            null,
+	            'このコメントを通報する'
+	          )
+	        ),
+	        React.createElement('div', { className: 'loading-spinner' })
+	      );
+	    } else {
+	      // 自分のは削除機能
+	      return React.createElement(
+	        'li',
+	        { className: 'dropMenu-item loading-root ' + this.state.reportLoading },
+	        React.createElement(
+	          'a',
+	          { href: '#', className: 'dropMenu-link-delete dropMenu-link-', onClick: this.deleteClick },
 	          React.createElement(
 	            'span',
 	            null,
@@ -18085,6 +18234,32 @@
 	        )
 	      );
 	    }
+	  },
+	  componentWillUnMount: function componentWillUnMount() {},
+	  deleteClick: function deleteClick(event) {
+	    event.preventDefault();
+	    // delete action
+	    this.setState({ deleteLoading: 'loading ' });
+	  },
+	  deleteDone: function deleteDone(result) {
+	    console.log('deleteDone', result);
+	    this.props.delete(true);
+	  },
+	  deleteFail: function deleteFail(error) {
+	    console.log('deleteFail', error);
+	    this.props.delete(false);
+	  },
+	  reportClick: function reportClick(event) {
+	    event.preventDefault();
+	    this.setState({ reportLoading: 'loading ' });
+	  },
+	  reportDone: function reportDone(result) {
+	    console.log('reportDone', result);
+	    this.props.report(true);
+	  },
+	  reportFail: function reportFail(error) {
+	    console.log('reportFail', error);
+	    this.props.report(false);
 	  }
 	});
 
@@ -18105,44 +18280,38 @@
 
 	    return {
 	      open: 'close',
-	      loading: ''
+	      loading: '',
+	      show: true
 	    };
 	  },
 	  render: function render() {
 	    if (this.props.sign) {
 	      // ログインユーザーのみ
-	      return React.createElement(
-	        'div',
-	        { className: 'comment-menu ' + this.state.open + ' ' + this.state.loading },
-	        React.createElement(
-	          'a',
-	          { href: '#', className: 'comment-menu-btn', onClick: this.clickHandler },
-	          'MENU'
-	        ),
-	        React.createElement(
-	          'ul',
-	          { className: 'dropMenu' },
-	          React.createElement(DeleteComment, {
-	            userId: this.props.userId,
-	            commentUserId: this.props.commentUserId,
-	            callback: this.deleteClick
-	          }),
+	      if (this.state.show) {
+	        return React.createElement(
+	          'div',
+	          { className: 'comment-menu ' + this.state.open + ' ' + this.state.loading },
 	          React.createElement(
-	            'li',
-	            { className: 'dropMenu-item' },
-	            React.createElement(
-	              'a',
-	              { href: '#', className: 'dropMenu-link-report', onClick: this.reportClick },
-	              React.createElement(
-	                'span',
-	                null,
-	                'このコメントを通報する'
-	              )
-	            )
+	            'a',
+	            { href: '#', className: 'comment-menu-btn', onClick: this.clickHandler },
+	            'MENU'
+	          ),
+	          React.createElement(
+	            'ul',
+	            { className: 'dropMenu' },
+	            React.createElement(CommentAction, {
+	              userId: this.props.userId,
+	              commentUserId: this.props.commentUserId,
+	              commentId: this.props.commentId,
+	              'delete': this.didDelete,
+	              report: this.didReport
+	            })
 	          )
-	        ),
-	        React.createElement('div', { className: 'loading-spinner' })
-	      );
+	        );
+	      } else {
+	        // 非表示
+	        return null;
+	      }
 	    } else {
 	      // 非ログイン 出力しない
 	      return null;
@@ -18152,12 +18321,20 @@
 	  componentWillUnmount: function componentWillUnmount() {},
 	  // -------------------------------------------------------
 	  // 以降 custom method
-	  deleteClick: function deleteClick(event) {
-	    event.preventDefault();
+	  didDelete: function didDelete(success) {
+	    if (success) {
+	      // delete action が成功した
+	      this.setState({ show: false });
+	    }
 	  },
-	  reportClick: function reportClick(event) {
-	    event.preventDefault();
+	  didReport: function didReport(success) {
+	    if (success) {
+	      // report action が成功した
+	      this.setState({ show: false });
+	    }
 	  },
+	  // -----------------------------
+	  // open / close control
 	  // icon click で drop menu open / close
 	  clickHandler: function clickHandler(event) {
 	    event.preventDefault();
@@ -18258,8 +18435,6 @@
 	    // user icon
 	    var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
 
-	    // icon と名前
-
 	    return React.createElement(
 	      'div',
 	      null,
@@ -18338,11 +18513,6 @@
 	// app
 	// import {App} from '../../app/App';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewHeadline = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -18362,6 +18532,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewHeadline = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -18688,11 +18863,6 @@
 	// app
 	// import {App} from '../../app/App';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewPickup = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -18712,6 +18882,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewPickup = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -19128,6 +19303,7 @@
 	          // after mount
 	          // callback
 	          _this.executeSafely(_View2.View.DID_MOUNT);
+
 	          // interval animation
 	          // mount 後 animation を開始します
 	          // bind はreactが内部的にする（様子） `this.updateNext.bind(this)` は不要
@@ -19268,11 +19444,6 @@
 
 	// app
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewRanking = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -19292,6 +19463,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewRanking = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -19504,13 +19680,6 @@
 	        propTypes: {
 	          list: React.PropTypes.array.isRequired
 	        },
-
-	        // isRequired なので getDefaultProps がいらない
-	        // getDefaultProps: function() {
-	        //  return {
-	        //    list: []
-	        //  };
-	        // },
 	        render: function render() {
 
 	          var list = this.props.list;
@@ -19555,6 +19724,10 @@
 
 	                // thumbnail を check なければ代替画像にする
 	                if (!thumbnail) {
+	                  thumbnail = _Empty.Empty.IMG_SMALL;
+	                } else if (!_Safety.Safety.isImg(thumbnail)) {
+	                  // 画像ファイル名に拡張子がないのがあったので
+	                  // 拡張子チェックを追加
 	                  thumbnail = _Empty.Empty.IMG_SMALL;
 	                }
 
@@ -19614,11 +19787,6 @@
 
 	// app
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewVideos = undefined;
-
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -19638,6 +19806,11 @@
 	var _inherits2 = __webpack_require__(72);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewVideos = undefined;
 
 	var _Empty = __webpack_require__(137);
 
@@ -19814,9 +19987,9 @@
 	              { href: p.url, className: 'post' },
 	              React.createElement(
 	                'figure',
-	                { className: 'post-thumb' },
-	                React.createElement('img', { className: 'post-thumb-overlay-movie', src: _Empty.Empty.VIDEO_PLAY }),
-	                React.createElement('img', { src: p.thumbnail, alt: p.title })
+	                { className: 'post-thumb post-thumb-video' },
+	                React.createElement('img', { className: 'video-thumbnail', src: p.thumbnail, alt: p.title }),
+	                React.createElement('img', { className: 'post-thumb-overlay-movie type-movie', src: _Empty.Empty.VIDEO_PLAY })
 	              ),
 	              React.createElement(
 	                'div',
@@ -19896,10 +20069,14 @@
 	              list.map(function (article, i) {
 
 	                var dae = new _ArticleDae.ArticleDae(article);
-	                var thumbnail = dae.media.video.medium;
+	                var thumbnail = dae.media.images.medium;
 
 	                // thumbnail(16x9) を check なければ代替画像にする
 	                if (!thumbnail) {
+	                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
+	                } else if (!_Safety.Safety.isImg(thumbnail)) {
+	                  // 画像ファイル名に拡張子がないのがあったので
+	                  // 拡張子チェックを追加
 	                  thumbnail = _Empty.Empty.VIDEO_THUMBNAIL;
 	                }
 
@@ -19961,11 +20138,6 @@
 	 * View callback の定型
 	 */
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Receiver = undefined;
-
 	var _classCallCheck2 = __webpack_require__(40);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -19973,6 +20145,11 @@
 	var _createClass2 = __webpack_require__(41);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Receiver = undefined;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

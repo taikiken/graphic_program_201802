@@ -23,7 +23,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * 記事詳細上部動画
  */
-export class ViewVideo extends View {
+export class ViewSingleVideo extends View {
   /**
    * 記事詳細上部動画
    * @param {Element} element root element
@@ -87,19 +87,21 @@ export class ViewVideo extends View {
 
         let video = media.video;
         let images = media.images;
-        let caption = video.caption;
-        let tag = '';
 
-        if ( !!caption ) {
-          tag = <div className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
-        }
+        let captionTag = ( caption ) => {
+          if ( !!caption ) {
+            return <div className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
+          } else {
+            return '';
+          }
+        };
 
         return (
           <div className="post-kv">
             <video poster={images.medium} preload="none">
               <source src={video.url}  type="video/mp4"/>
             </video>
-            {tag}
+            {captionTag( video.caption )}
           </div>
         );
 

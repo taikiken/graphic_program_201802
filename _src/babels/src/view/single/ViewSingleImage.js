@@ -23,7 +23,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * 記事詳細上部画像
  */
-export class ViewImage extends View {
+export class ViewSingleImage extends View {
   /**
    * 記事詳細上部画像
    * @param {Element} element root element

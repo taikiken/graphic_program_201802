@@ -7,19 +7,20 @@
 #single-header-container {
   .post-data {
     // div
+    .loading-root,
     .btn-bookmark {
       position: relative;
 
       // bookmark する click 後一時的に click 無効にするため + animation 表示
       .loading-spinner {
-        overflow: hidden;
-        position: absolute;
-        left: 0;
-        top: 0;
+        //overflow: hidden;
+        //position: absolute;
+        //left: 0;
+        //top: 0;
         width: 0;
         height: 0;
-        // ToDo クルクル gif animation 設置
-        background-color: rgba(255, 255, 255, 0.7);
+        //// ToDo クルクル gif animation 設置
+        //background-color: rgba(255, 255, 255, 0.7);
         opacity: 0;
 
         transition-property: opacity;

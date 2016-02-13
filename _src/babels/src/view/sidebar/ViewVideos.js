@@ -154,9 +154,9 @@ export class ViewVideos extends View {
         return (
           <li className={'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
             <a href={p.url} className='post'>
-              <figure className="post-thumb">
-                <img className="post-thumb-overlay-movie" src={Empty.VIDEO_PLAY} />
-                <img src={p.thumbnail} alt={p.title}/>
+              <figure className="post-thumb post-thumb-video">
+                <img className="video-thumbnail" src={p.thumbnail} alt={p.title}/>
+                <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
               </figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{p.category}</p>
@@ -209,10 +209,14 @@ export class ViewVideos extends View {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-                let thumbnail = dae.media.video.medium;
+                let thumbnail = dae.media.images.medium;
 
                 // thumbnail(16x9) を check なければ代替画像にする
                 if ( !thumbnail ) {
+                  thumbnail = Empty.VIDEO_THUMBNAIL;
+                } else if ( !Safety.isImg( thumbnail ) ) {
+                  // 画像ファイル名に拡張子がないのがあったので
+                  // 拡張子チェックを追加
                   thumbnail = Empty.VIDEO_THUMBNAIL;
                 }
 

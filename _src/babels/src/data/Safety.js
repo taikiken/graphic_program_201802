@@ -114,4 +114,28 @@ export class Safety {
   static isElement( element:Element ):boolean {
     return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
   }
+  /**
+   * ファイル名から拡張子を取得します
+   * @param {string} fileName 取得したいファイル名称
+   * @returns {string} ファイル名の拡張子を返します
+   */
+  static getExtension( fileName:string ):string {
+    // http://stackoverflow.com/questions/190852/how-can-i-get-file-extensions-with-javascript
+    var split = fileName.split( '.' );
+
+    if ( split.length === 1 || ( split[0] === '' && split.length === 2 ) ) {
+      console.warn( `not correct file name. ${fileName}` );
+      return '';
+    }
+
+    return split.pop().toLowerCase();
+  }
+  /**
+   * 拡張子から画像ファイルかを調べます
+   * @param {string} fileName 調査対象ファイル名
+   * @returns {boolean} 'jpg', 'png', 'jpeg', 'gif', 'svg' のいづれかに該当するかの真偽値を返します
+   */
+  static isImg( fileName:string ):boolean {
+    return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf( Safety.getExtension( fileName ) ) !== -1;
+  }
 }

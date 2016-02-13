@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Comments = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -39,6 +34,11 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Comments = undefined;
 
 var _OffsetAuth2 = require('../OffsetAuth');
 

@@ -3192,16 +3192,13 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+#single-header-container .post-data .loading-root,
 #single-header-container .post-data .btn-bookmark {
   position: relative; }
+  #single-header-container .post-data .loading-root .loading-spinner,
   #single-header-container .post-data .btn-bookmark .loading-spinner {
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 0;
     height: 0;
-    background-color: rgba(255, 255, 255, 0.7);
     opacity: 0;
     -webkit-transition-property: opacity;
     transition-property: opacity;
@@ -3209,6 +3206,7 @@ table tr.w200 > td {
             transition-duration: 0.3s;
     -webkit-transition-timing-function: linear;
             transition-timing-function: linear; }
+  #single-header-container .post-data .loading-root.loading .loading-spinner,
   #single-header-container .post-data .btn-bookmark.loading .loading-spinner {
     width: 100%;
     height: 100%;
@@ -4451,6 +4449,22 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.loading-root {
+  position: relative; }
+  .loading-root .loading-spinner {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(255, 255, 255, 0.7); }
+  .loading-root.loading .loading-spinner {
+    height: 100%; }
+  .loading-root.disable .loading-spinner {
+    height: 100%; }
+
 #board-container .board-large-column {
   width: 100%; }
   #board-container .board-large-column.column1, #board-container .board-large-column.column2 {
@@ -4465,12 +4479,28 @@ table tr.w200 > td {
   width: 100%;
   height: auto; }
 
+.board-item .post-thumb-video {
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+  .board-item .post-thumb-video .video-thumbnail {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 100%; }
+  .board-item .post-thumb-video .post-thumb-overlay-movie {
+    position: relative;
+    width: 100%;
+    height: auto; }
+
 #board-container-more {
   padding-top: 30px; }
-  #board-container-more .board-btn-viewmore {
-    position: relative;
-    padding-top: 0; }
-    #board-container-more .board-btn-viewmore .loading-spinner {
+  #board-container-more .loading-root {
+    padding-top: 0;
+    /*
+    .loading-spinner {
       display: block;
       overflow: hidden;
       position: absolute;
@@ -4478,11 +4508,14 @@ table tr.w200 > td {
       top: 0;
       width: 100%;
       height: 0;
-      background: rgba(255, 255, 255, 0.7); }
-    #board-container-more .board-btn-viewmore.loading .loading-spinner {
-      height: 100%; }
-  #board-container-more .board-btn-viewmore-link {
-    background-color: #fff; }
+      background: rgba(255, 255, 255, 0.7);
+    }
+    &.loading {
+      .loading-spinner {
+        height: 100%;
+      }
+    }
+    */ }
 
 .board-small .post-thumb {
   overflow: hidden; }
@@ -4837,6 +4870,34 @@ table tr.w200 > td {
   .commented-user-thumb img {
     width: 100%;
     height: auto; }
+
+.comment-menu .dropMenu-container .dropMenu {
+  overflow: hidden; }
+  .comment-menu .dropMenu-container .dropMenu .dropMenu-item {
+    -webkit-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+    -webkit-transition-timing-function: linear;
+            transition-timing-function: linear; }
+
+.comment-menu.close .dropMenu {
+  height: 0; }
+  .comment-menu.close .dropMenu .dropMenu-item {
+    overflow: hidden;
+    height: 0;
+    opacity: 0; }
+    .comment-menu.close .dropMenu .dropMenu-item .dropMenu-link-report,
+    .comment-menu.close .dropMenu .dropMenu-item .dropMenu-link-delete {
+      overflow: hidden;
+      font-size: 0;
+      line-height: 0;
+      padding: 0; }
+
+.comment-menu.open .dropMenu {
+  height: auto; }
+  .comment-menu.open .dropMenu .dropMenu-item {
+    opacity: 1; }
 
 /*
   sprite

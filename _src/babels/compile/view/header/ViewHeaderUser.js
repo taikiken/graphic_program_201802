@@ -11,11 +11,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewHeaderUser = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -35,6 +30,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewHeaderUser = undefined;
 
 var _View2 = require('../View');
 
@@ -67,7 +67,12 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
   function ViewHeaderUser(element) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     (0, _classCallCheck3.default)(this, ViewHeaderUser);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
+
+    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewHeaderUser).call(this, element, option));
+
+    _this2._boundCallback = _this2.memberCallback.bind(_this2);
+    _this2._member = null;
+    return _this2;
   }
   /**
    * Ajax request を開始します
@@ -78,8 +83,9 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
     value: function start() {
       if (_User.User.sign) {
         // login member
-        var boundCallback = this.memberCallback.bind(this);
+        var boundCallback = this._boundCallback;
         var member = new _ViewHeaderMember.ViewHeaderMember(this.element);
+        this._member = member;
         member.on(_View2.View.BEFORE_RENDER, boundCallback);
         member.on(_View2.View.WILL_MOUNT, boundCallback);
         member.on(_View2.View.DID_MOUNT, boundCallback);
@@ -135,6 +141,11 @@ var ViewHeaderUser = exports.ViewHeaderUser = function (_View) {
     key: 'memberCallback',
     value: function memberCallback(event) {
 
+      var member = this._member;
+      var callback = this._boundCallback;
+      if (member !== null) {
+        member.off(event.type, callback);
+      }
       this.dispatch(event);
     }
   }]);

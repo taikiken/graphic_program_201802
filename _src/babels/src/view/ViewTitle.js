@@ -57,16 +57,13 @@ export class ViewTitle extends View {
 
     let TitleDom = React.createClass( {
       propType: {
-        label: React.PropTypes.string.isRequired,
-        slug: React.PropTypes.string.isRequired
+        label: React.PropTypes.string.isRequired
       },
       render: function() {
 
-        let label = this.props.label;
-
         return (
           <div className="category-heading">
-            <h1>{label}</h1>
+            <h1>{this.props.label}</h1>
           </div>
         );
 

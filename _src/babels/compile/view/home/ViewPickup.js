@@ -14,11 +14,6 @@
 // app
 // import {App} from '../../app/App';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewPickup = undefined;
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -38,6 +33,11 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewPickup = undefined;
 
 var _Empty = require('../../app/const/Empty');
 
@@ -454,6 +454,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
           // after mount
           // callback
           _this.executeSafely(_View2.View.DID_MOUNT);
+
           // interval animation
           // mount 後 animation を開始します
           // bind はreactが内部的にする（様子） `this.updateNext.bind(this)` は不要

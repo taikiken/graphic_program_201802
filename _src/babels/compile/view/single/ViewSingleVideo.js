@@ -36,7 +36,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ViewVideo = undefined;
+exports.ViewSingleVideo = undefined;
 
 var _View2 = require('../View');
 
@@ -52,8 +52,8 @@ var ReactDOM = self.ReactDOM;
  * 記事詳細上部動画
  */
 
-var ViewVideo = exports.ViewVideo = function (_View) {
-  (0, _inherits3.default)(ViewVideo, _View);
+var ViewSingleVideo = exports.ViewSingleVideo = function (_View) {
+  (0, _inherits3.default)(ViewSingleVideo, _View);
 
   /**
    * 記事詳細上部動画
@@ -61,10 +61,10 @@ var ViewVideo = exports.ViewVideo = function (_View) {
    * @param {MediaDae} media response.media
    */
 
-  function ViewVideo(element, media) {
-    (0, _classCallCheck3.default)(this, ViewVideo);
+  function ViewSingleVideo(element, media) {
+    (0, _classCallCheck3.default)(this, ViewSingleVideo);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewVideo).call(this, element));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingleVideo).call(this, element));
 
     _this._media = media;
     _this._rendered = null;
@@ -74,7 +74,7 @@ var ViewVideo = exports.ViewVideo = function (_View) {
    * render 処理を開始します
    */
 
-  (0, _createClass3.default)(ViewVideo, [{
+  (0, _createClass3.default)(ViewSingleVideo, [{
     key: 'start',
     value: function start() {
       this.render(this._media);
@@ -128,12 +128,14 @@ var ViewVideo = exports.ViewVideo = function (_View) {
 
           var video = media.video;
           var images = media.images;
-          var caption = video.caption;
-          var tag = '';
 
-          if (!!caption) {
-            tag = React.createElement('div', { className: 'caption', dangerouslySetInnerHTML: { __html: caption } });
-          }
+          var captionTag = function captionTag(caption) {
+            if (!!caption) {
+              return React.createElement('div', { className: 'caption', dangerouslySetInnerHTML: { __html: caption } });
+            } else {
+              return '';
+            }
+          };
 
           return React.createElement(
             'div',
@@ -143,7 +145,7 @@ var ViewVideo = exports.ViewVideo = function (_View) {
               { poster: images.medium, preload: 'none' },
               React.createElement('source', { src: video.url, type: 'video/mp4' })
             ),
-            tag
+            captionTag(video.caption)
           );
         },
         youtube: function youtube(media) {
@@ -171,5 +173,5 @@ var ViewVideo = exports.ViewVideo = function (_View) {
       }
     }
   }]);
-  return ViewVideo;
+  return ViewSingleVideo;
 }(_View2.View);

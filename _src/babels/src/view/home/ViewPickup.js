@@ -370,6 +370,7 @@ export class ViewPickup extends View {
         // after mount
         // callback
         _this.executeSafely( View.DID_MOUNT );
+
         // interval animation
         // mount 後 animation を開始します
         // bind はreactが内部的にする（様子） `this.updateNext.bind(this)` は不要

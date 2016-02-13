@@ -15,10 +15,12 @@ import {View} from '../View';
 import {Notice} from '../../action/users/Notice';
 
 import {Empty} from '../../app/const/Empty';
-import {NotificationsDae} from '../../dae/user/NotificationsDae';
 import {NoticeAction} from '../../app/const/NoticeAction';
-
 import {Url} from '../../app/const/Url';
+
+import {NotificationsDae} from '../../dae/user/NotificationsDae';
+
+import {Safety} from '../../data/Safety';
 
 // React
 let React = self.React;
@@ -110,12 +112,10 @@ export class ViewHeaderMemberNotice extends View {
         let user = notice.user;
         let article = notice.article;
 
-        let txt = `${user.userName}さんがあなたの「${article.title}」へのコメントに`;
-
         return (
 
           <p className="info-content">
-            {txt}
+            {`${user.userName}さんがあなたの「${article.title}」へのコメントに`}
             <strong>{message}</strong>しました。
           </p>
 
@@ -125,7 +125,7 @@ export class ViewHeaderMemberNotice extends View {
 
     // --------------------------------------------------
     // notice one block
-    let OneDom = React.createClass( {
+    let NoticeItem = React.createClass( {
       propTypes: {
         notice: React.PropTypes.object.isRequired,
         index: React.PropTypes.number.isRequired
@@ -139,7 +139,7 @@ export class ViewHeaderMemberNotice extends View {
       render: function() {
 
         let notice = this.state.notice;
-        let i = this.state.i;
+        let index = this.state.index;
 
         let icon = notice.user.profilePicture;
         if ( !icon ) {
@@ -147,8 +147,8 @@ export class ViewHeaderMemberNotice extends View {
         }
 
         return (
-          <li key={'info-item-' + i} className={'info-item info-item-' + i}>
-            <a href='#' className={'info-link'} onClick={this.oneClick}>
+          <li className={'info-item info-item-' + notice.id}>
+            <a href='#' className={'info-link info-link-' + notice.id} onClick={this.readedClick}>
               <figure className="info-user-thumb">
                 <img src={icon} alt=""/>
               </figure>
@@ -159,12 +159,53 @@ export class ViewHeaderMemberNotice extends View {
         );
 
       },
-      oneClick: function( event ) {
+      readedClick: function( event ) {
         event.preventDefault();
       }
     } );
 
     // --------------------------------------------------
+    // read all On / Off
+    let ReadAll = React.createClass( {
+      propTypes: {
+        length: React.PropTypes.number.isRequired,
+        callback: React.PropTypes.func
+      },
+      getDefaultProps: function() {
+        return {
+          callback: function() {}
+        };
+      },
+      getInitialState: function() {
+        return {
+          length: this.props.length,
+          loading: ''
+        };
+      },
+      render: function() {
+        if ( this.state.length > 0 ) {
+          return (
+            <div className={'info-btn-readAll loading-root ' + this.state.loading}>
+              <a href="#" onClick={this.readClick}>すべて既読にする</a>
+              <div className="loading-spinner"></div>
+            </div>
+          );
+        } else {
+          return <div className="info-btn-readAll">&nbsp;</div>;
+        }
+      },
+      readClick: function( event ) {
+        event.preventDefault();
+        this.setState( { loading: 'loading' } );
+        this.props.callback();
+      },
+      done: function( result ) {
+        this.setState( { loading: '' } );
+      },
+      fail: function( error ) {
+        this.setState( { loading: '' } );
+      }
+    } );
     // user notice dropMenu
     let NoticeMenu = React.createClass( {
       propTypes: {
@@ -178,29 +219,21 @@ export class ViewHeaderMemberNotice extends View {
       render: function() {
 
         let notifications = this.state.notifications;
-        let readAll;
-
-        if ( notifications.length > 0 ) {
-
-          readAll = <div className="info-btn-readAll"><a href="#" onClick={this.allRead}>すべて既読にする</a></div>;
-
-        } else {
-
-          readAll = <div className="info-btn-readAll">&nbsp;</div>;
-
-        }
 
         return (
           <nav className="notice-menu">
             <div className="dropMenu">
               <div className="info">
                 <h2 className="info-heading">お知らせ</h2>
-                {readAll}
+                <ReadAll
+                  length={notifications.length}
+                  callback={this.allRead}
+                />
                 <ul className="info-list">
                   {
                     notifications.map( function( notice, i ) {
 
-                      return <OneDom notice={notice} index={i}/>;
+                      return <NoticeItem key={'notice-' + notice.id} notice={notice} index={i}/>;
 
                     } )
                   }
@@ -219,6 +252,30 @@ export class ViewHeaderMemberNotice extends View {
     } );
 
     // --------------------------------------------------
+    // total 件数
+
+    let NoticeTotal = React.createClass( {
+      propTypes: {
+        total: React.PropTypes.number.isRequired
+      },
+      getInitialState: function() {
+        return {
+          total: this.props.total
+        };
+      },
+      render: function() {
+        let total = this.state.total;
+        if ( total === 0 ) {
+          return null;
+        } else {
+          // 件数が1以上の時に描画
+          return <span className="notice-num">{total}</span>;
+        }
+      },
+      updateTotal: function( total ) {
+        this.setState( { total: total } );
+      }
+    } );
     // user notice
     let NoticeDom = React.createClass( {
       propTypes: {
@@ -235,36 +292,15 @@ export class ViewHeaderMemberNotice extends View {
       render: function() {
 
         let response = this.state.response;
-        let notifications = response.notifications;
-        let noticeTotal = '';
-        let noticeMenu;
-
-        if ( Array.isArray( notifications ) ) {
-
-          // 配列（正常）な時はそのデータを使用しメニューを作成する
-          noticeMenu = <NoticeMenu notifications={notifications} />;
-
-          if ( notifications.length > 0 ) {
-            // total が 1 以上
-            noticeTotal = <span className="notice-num">{response.total}</span>;
-          }
-
-        } else {
-
-          // 異常な時は
-          // 空メニューを作成する、引数に 空配列 を送る
-          noticeMenu = <NoticeDom notifications={[]} />;
-
-        }
+        let notifications = Safety.array( response.notifications );
 
         return (
           <div className={'notice ' + this.state.open}>
             <a href="#" className="notice-opener" onClick={this.clickHandler}>
               <i className="notice-icon">&nbsp;</i>
-              {noticeTotal}
+              <NoticeTotal total={response.total} />
             </a>
-
-            {noticeMenu}
+            <NoticeMenu notifications={notifications} />
           </div>
         );
 
