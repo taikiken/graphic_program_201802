@@ -128,3 +128,11 @@ th,td{
 .img{
 	padding:10px 0 0 0;
 }
+
+.api24 li{
+	width:190px;
+	float:left;
+}
+.api24 li label,.api24 li input{
+	cursor:pointer;
+}

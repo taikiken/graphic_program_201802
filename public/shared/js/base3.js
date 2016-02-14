@@ -234,6 +234,18 @@ $(function(){
 			data=new FormData($("form")[0]);
 			uu=u;
 
+		}else if(n==24){
+			
+			data=new FormData($("form")[1]);
+			uu=u;
+
+		}else if(n==25){			
+			vl[0]=trim(vl[0]);
+			vl[1]=trim(vl[1]);
+
+			data=sprintf("email=%s&password=%s",vl[0],vl[1]);
+			uu=u;
+
 		}else if(n==1||n==23){
 			uu=u;
 		}else{
@@ -246,7 +258,7 @@ $(function(){
 			type:g,
 			data:data,
 			url:dmn+uu,
-			contentType:false,
+			contentType:(n==22||n==24)?false:"application/x-www-form-urlencoded",
 			processData:false,
 			beforeSend:function(m){
 				m.setRequestHeader("Authorization","OAuth realm=undotsushin.com, oautn_token="+$("option:selected",".sapi2").val());
