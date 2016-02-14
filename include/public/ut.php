@@ -112,4 +112,45 @@ function stripbr($s){
 	return $s;
 }
 
+function check_email($email,$conf=0){
+	
+	global $o;
+
+	$err="";
+	
+	if(strlen($email)==0){
+		$err="メールアドレスは必須項目です。";
+	}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+		$err="正しいメールアドレスを入力してください。";
+	}else{
+		if($conf==0){
+			$sql=sprintf("select id from repo_n where t1='%s' and flag=1",$email);
+			$o->query($sql);
+			$f=$o->fetch_array();
+			
+			if(strlen($f["id"])>0){
+				$err=sprintf("入力いただいたメールアドレス%sはすでに登録されております。",$email);
+			}
+		}
+	}
+	
+	return $err;
+}
+
+function check_passwd($passwd){
+	
+	/* 英数字8桁以上 */
+	
+	$err="";
+	
+	if(strlen($passwd)==0){
+		$err="パスワードは必須項目です。";
+	}elseif(strlen($passwd)<8){
+		$err="パスワードは8桁以上の英数字で入力してください。";
+	}elseif(!preg_match("/^[0-9a-zA-Z]+$/",$passwd)){
+		$err="パスワードは英数字で入力してください。";
+	}
+	return $err;
+}
+
 ?>
