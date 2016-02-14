@@ -44,7 +44,12 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if($s["u_time"]!=$f["u_time"]){
-				$s["img1"]=outimg($s["t30"]);
+				if(strlen($s["t30"])>0){
+					$s["img1"]=outimg($s["t30"]);
+				}else{
+					$s["img1"]="";
+					$s["t1"]="";
+				}
 				splittime($s["m_time"],$s["u_time"]);
 				$sqla[]=makesql($s,$f["id"]);
 			}
