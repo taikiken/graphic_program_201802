@@ -5,7 +5,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$minute=60*24*10;
+$minute=60*24*3;
 
 $sql=sprintf("
 
