@@ -21,6 +21,7 @@ import {Url} from '../../app/const/Url';
 import {NotificationsDae} from '../../dae/user/NotificationsDae';
 
 import {Safety} from '../../data/Safety';
+import {Result} from '../../data/Result';
 
 // React
 let React = self.React;

@@ -101,6 +101,14 @@
             <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>
             <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>
             <p>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</p>
+            <ul>
+              <li>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</li>
+              <li>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</li>
+            </ul>
+            <ol>
+              <li>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</li>
+              <li>ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</li>
+            </ol>
           </div><!-- /.post-content -->
 
           <div class="sponsor-link">
@@ -303,12 +311,12 @@
       // ranking
       // slug
       var ranking = new UT.view.sidebar.ViewRanking( document.getElementById( 'widget-ranking-container' ), null, slug );
-      // ranking.start();
+      ranking.start();
 
       // video
       // slug
       var videos = new UT.view.sidebar.ViewVideos( document.getElementById( 'widget-recommend-container' ), null, slug );
-      // videos.start();
+      videos.start();
 
       // -------------------------------------------------------
       // comment

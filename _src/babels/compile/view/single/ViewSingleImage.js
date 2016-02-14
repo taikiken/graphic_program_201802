@@ -40,6 +40,8 @@ exports.ViewSingleImage = undefined;
 
 var _View2 = require('../View');
 
+var _Safety = require('../../data/Safety');
+
 var _ImagesDae = require('../../dae/media/ImagesDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -126,6 +128,10 @@ var ViewSingleImage = exports.ViewSingleImage = function (_View) {
 
           if (!original) {
             // no image
+            return null;
+          }
+          if (!_Safety.Safety.isImg(original)) {
+            // no correct image extension
             return null;
           }
 

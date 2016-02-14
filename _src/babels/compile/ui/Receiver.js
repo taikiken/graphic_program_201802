@@ -56,7 +56,9 @@ var Receiver = exports.Receiver = function () {
 
   (0, _createClass3.default)(Receiver, [{
     key: 'beforeRender',
-    value: function beforeRender(event) {}
+    value: function beforeRender(event) {
+      console.log('beforeRender', event);
+    }
     /**
      * React.componentWillMount callback
      * @param {Object} event Event object
@@ -64,7 +66,9 @@ var Receiver = exports.Receiver = function () {
 
   }, {
     key: 'willMount',
-    value: function willMount(event) {}
+    value: function willMount(event) {
+      console.log('willMount', event);
+    }
     /**
      * React.componentDidMount callback
      * @param {Object} event Event object
@@ -72,7 +76,9 @@ var Receiver = exports.Receiver = function () {
 
   }, {
     key: 'didMount',
-    value: function didMount(event) {}
+    value: function didMount(event) {
+      console.log('didMount', event);
+    }
     /**
      * データが見つからない時に呼び出されます
      * @param {Error} error エラーインスタンス
@@ -80,7 +86,9 @@ var Receiver = exports.Receiver = function () {
 
   }, {
     key: 'undefinedError',
-    value: function undefinedError(error) {}
+    value: function undefinedError(error) {
+      console.log('undefinedError', error);
+    }
     /**
      * データが空の時に呼び出されます
      * @param {Error} error エラーインスタンス
@@ -88,7 +96,9 @@ var Receiver = exports.Receiver = function () {
 
   }, {
     key: 'emptyError',
-    value: function emptyError(error) {}
+    value: function emptyError(error) {
+      console.log('beforeRender', error);
+    }
     /**
      * 処理中にエラーが起きた時に呼び出されます
      * @param {Error} error エラーインスタンス
@@ -96,8 +106,9 @@ var Receiver = exports.Receiver = function () {
 
   }, {
     key: 'responseError',
-    value: function responseError(error) {}
-
+    value: function responseError(error) {
+      console.log('responseError', error);
+    }
     /**
      * エラーDOMがマウントされた時に呼び出されます
      * @param {Error} error エラーインスタンス
@@ -105,7 +116,9 @@ var Receiver = exports.Receiver = function () {
 
   }, {
     key: 'errorMount',
-    value: function errorMount(error) {}
+    value: function errorMount(error) {
+      console.log('errorMount', error);
+    }
   }]);
   return Receiver;
 }();

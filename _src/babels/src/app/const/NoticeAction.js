@@ -18,9 +18,12 @@ let _message = {
   bad: 'Bad',
   notice: '通知'
 };
-
+/**
+ * <h3>お知らせ定型文</h3>
+ */
 export class NoticeAction {
   /**
+   *
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

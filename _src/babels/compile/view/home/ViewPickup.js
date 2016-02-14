@@ -367,6 +367,10 @@ var ViewPickup = exports.ViewPickup = function (_View) {
 
             if (!large) {
               large = _Empty.Empty.IMG_LARGE;
+            } else if (!_Safety.Safety.isImg(large)) {
+              // 画像ファイル名に拡張子がないのがあったので
+              // 拡張子チェックを追加
+              large = _Empty.Empty.IMG_LARGE;
             }
 
             // HeadlineDom instance を使い render

@@ -47,9 +47,6 @@ var ReplyDae = exports.ReplyDae = function () {
     reply = _Safety.Safety.object(reply);
 
     var total = parseInt(reply.count, 10);
-    //if ( !Number.isInteger( total ) ) {
-    //  total = 0;
-    //}
     total = _Safety.Safety.integer(total, 0);
     this._total = total;
     this._comments = new _CommentsPopularDae.CommentsPopularDae(reply.comments);

@@ -34,7 +34,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ImagesDae = exports.ImagesDae = function () {
   /**
-   *
+   * article.media.images 画像情報を保存します
    * @param {Object} [images={}] article.media.images
    */
 
@@ -46,7 +46,6 @@ var ImagesDae = exports.ImagesDae = function () {
     this._images = images;
   }
   /**
-   *
    * @return {Object|*} article.media.images
    */
 
@@ -76,7 +75,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this.images.large;
     }
     /**
-     * 記事一覧用 - 横長 - 16:9
+     * 記事一覧用 - 横長 or 16:9
      * @return {string} article.media.images.medium
      */
 
@@ -96,7 +95,7 @@ var ImagesDae = exports.ImagesDae = function () {
       return this.images.thumbnail;
     }
     /**
-     *  詳細用元比率画像
+     * 詳細用元比率画像
      * @return {string} article.media.images.original
      */
 

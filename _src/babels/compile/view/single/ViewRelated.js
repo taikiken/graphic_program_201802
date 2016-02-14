@@ -142,7 +142,14 @@ var ViewRelated = exports.ViewRelated = function (_View) {
               list.map(function (dae, i) {
 
                 var thumbnail = dae.media.images.thumbnail;
-                thumbnail = !!thumbnail ? thumbnail : _Empty.Empty.IMG_SMALL;
+                // thumbnail = !!thumbnail ? thumbnail : Empty.IMG_SMALL;
+                if (!thumbnail) {
+                  thumbnail = _Empty.Empty.IMG_SMALL;
+                } else if (!_Safety.Safety.isImg(thumbnail)) {
+                  // 画像ファイル名に拡張子がないのがあったので
+                  // 拡張子チェックを追加
+                  thumbnail = _Empty.Empty.IMG_SMALL;
+                }
 
                 return React.createElement(
                   'li',
@@ -191,7 +198,7 @@ var ViewRelated = exports.ViewRelated = function (_View) {
         this._rendered = ReactDOM.render(React.createElement(ArticleDom, { list: related }), element);
       } else {
 
-        this._rendered.updateList(list);
+        this._rendered.updateList(related);
       }
     }
   }]);

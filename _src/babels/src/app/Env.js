@@ -11,8 +11,6 @@
  */
 'use strict';
 
-import {Loc} from '../util/Loc';
-
 let _symbol = Symbol();
 let _mode = 'production';
 
@@ -52,7 +50,6 @@ export class Env {
     return _mode;
 
   }
-
   /**
    * @readonly
    * @return {string} 文字列 production を返します

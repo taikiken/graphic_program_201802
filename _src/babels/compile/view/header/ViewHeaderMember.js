@@ -48,6 +48,8 @@ var _UsersSelf = require('../../action/users/UsersSelf');
 
 var _Url = require('../../app/const/Url');
 
+var _Result = require('../../data/Result');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React

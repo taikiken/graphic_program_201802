@@ -291,6 +291,10 @@ export class ViewPickup extends View {
 
           if ( !large ) {
             large = Empty.IMG_LARGE;
+          } else if ( !Safety.isImg( large ) ) {
+            // 画像ファイル名に拡張子がないのがあったので
+            // 拡張子チェックを追加
+            large = Empty.IMG_LARGE;
           }
 
           // HeadlineDom instance を使い render

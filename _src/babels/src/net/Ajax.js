@@ -140,8 +140,11 @@ export class Ajax {
         // something bad
         let code = result.status.code;
         let error = new Error( `status:${code}, user:${result.status.user_message}, dev:${result.status.developer_message}` );
+        /*
         error.response = result.response;
         error.number = result.status.code;
+        */
+        error.result = result;
         throw error;
 
       }

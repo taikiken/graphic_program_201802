@@ -15,11 +15,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CommentDom = undefined;
+exports.CommentNode = undefined;
 
 var _Empty = require('../../app/const/Empty');
 
-var _ReactionDom = require('./ReactionDom');
+var _ReactionNode = require('./ReactionNode');
 
 // React
 var React = self.React;
@@ -208,9 +208,24 @@ var CommentMenu = React.createClass({
   // -------------------------------------------------------
   // 以降 custom method
   didDelete: function didDelete(type) {
-    if (string) {
-      // delete action が成功した
-      this.setState({ show: false });
+    console.log('didDelete', type);
+
+    switch (type) {
+      case 'click':
+        this.destroy();
+        break;
+
+      case 'done':
+        this.setState({ show: false });
+        break;
+
+      case 'fail':
+        this.activateBodyClick();
+        break;
+
+      default:
+        this.activateBodyClick();
+        break;
     }
   },
   didReport: function didReport(type) {
@@ -231,7 +246,7 @@ var CommentMenu = React.createClass({
         break;
 
       default:
-        this.toggleState();
+        this.activateBodyClick();
         break;
     }
   },
@@ -284,13 +299,19 @@ var CommentMenu = React.createClass({
     document.body.removeEventListener('click', this.bodyClick);
   }
 });
-
-var CommentDom = exports.CommentDom = React.createClass({
-  displayName: 'CommentDom',
+/**
+ * <h3>React class</h3>
+ * 記事詳細 > コメント一覧 node を作成します
+ * @class CommentNode
+ * @type {Function}
+ */
+var CommentNode = exports.CommentNode = React.createClass({
+  displayName: 'CommentNode',
 
   propTypes: {
     commentDae: React.PropTypes.object.isRequired,
     // unique id（識別のために必要）
+    uniqueId: React.PropTypes.string.isRequired,
     // id: React.PropTypes.string.isRequired,
     // コメント送信者（自分の）profile picture
     icon: React.PropTypes.string,
@@ -342,7 +363,7 @@ var CommentDom = exports.CommentDom = React.createClass({
 
     return React.createElement(
       'div',
-      null,
+      { className: 'comment-root' },
       React.createElement(CommentMenu, {
         sign: sign,
         userId: this.props.userId,
@@ -383,7 +404,7 @@ var CommentDom = exports.CommentDom = React.createClass({
         )
       ),
       React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: comment.body } }),
-      React.createElement(_ReactionDom.ReactionDom, {
+      React.createElement(_ReactionNode.ReactionNode, {
         articleId: this.props.articleId,
         commentId: this.props.commentId,
         sign: sign,

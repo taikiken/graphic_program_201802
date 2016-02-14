@@ -40,6 +40,10 @@ exports.ViewSingleVideo = undefined;
 
 var _View2 = require('../View');
 
+var _Empty = require('../../app/const/Empty');
+
+var _Safety = require('../../data/Safety');
+
 var _MediaDae = require('../../dae/MediaDae');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -137,12 +141,19 @@ var ViewSingleVideo = exports.ViewSingleVideo = function (_View) {
             }
           };
 
+          var poster = images.medium;
+          if (!poster) {
+            poster = _Empty.Empty.VIDEO_THUMBNAIL;
+          } else if (!_Safety.Safety.isImg(poster)) {
+            poster = _Empty.Empty.VIDEO_THUMBNAIL;
+          }
+
           return React.createElement(
             'div',
             { className: 'post-kv' },
             React.createElement(
               'video',
-              { poster: images.medium, preload: 'none' },
+              { poster: poster, preload: 'none' },
               React.createElement('source', { src: video.url, type: 'video/mp4' })
             ),
             captionTag(video.caption)

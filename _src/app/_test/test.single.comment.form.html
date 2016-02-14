@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>React Test Single</title>
+  <link rel="stylesheet" href="/assets/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <style>
+    body {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    ul {
+      list-style: disc;
+      margin: 0 0 1em 1em;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight:700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 24px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    h2 {
+      font-size: 18px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+    }
+    a {
+      color: #333;
+    }
+    #single {
+      margin-bottom: 16px;
+    }
+
+    #related {
+      margin-bottom: 16px;
+      border: 1px solid #333;
+      padding: 16px;
+    }
+
+    #sidebar-video,
+    #sidebar-ranking {
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="c1">React Test Single: Comment Form</h1>
+<div id="user-profile-container"></div><!--/header-user-->
+
+<div id="page-title-container"></div><!--/title-->
+
+<div id="single-header-container"></div>
+<div id="single-footer-container"></div>
+
+<div class="comment">
+
+  <div id="comment-form-container"></div>
+
+  <div id="comment-self-container"></div>
+
+  <div id="comment-official-container"></div>
+
+  <div id="comment-normal-container"></div>
+
+</div><!-- /.comment -->
+
+<div id="single-related-container"></div>
+
+<script src="/assets/js/bundle/main.bundle.js"></script>
+
+<script>
+  ( function ( window ) {
+
+    'use strict';
+
+    var
+      document = window.document;
+
+    var UT = self.UT;
+
+    // develop mode
+    UT.app.App.develop();
+
+    // sign in
+    UT.app.User.login();
+
+    // -------------------------------------------------
+    // ---------------------------------------------------------
+    // user, single JSON 両方取得後 comment の書き出しが可能
+    var prepared = 0;
+    var userDae, singleDae;
+
+    function makeCommentDom() {
+
+      ++prepared;
+
+      if ( prepared !== 2 ) {
+        return;
+      }
+
+      console.log( '============ makeCommentDom start', userDae, singleDae );
+
+      var commentForm = new UT.view.comment.ViewCommentForm(document.getElementById('comment-form-container'), singleDae.id, userDae.profilePicture);
+      commentForm.start();
+
+      // official
+      var official = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-official-container'), UT.app.const.CommentsType.OFFICIAL );
+      if ( !!userDae ) {
+        official.user = userDae;
+      }
+      official.start();
+//
+//      // normal
+//      var normal = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-normal-container'), UT.app.const.CommentsType.NORMAL );
+//      if ( !!userDae ) {
+//        normal.user = userDae;
+//      }
+//      normal.start();
+
+    }
+
+    // ---------------------------------------------------------
+    // before header.user render
+    var memberReceiver = new UT.ui.Receiver();
+    memberReceiver.beforeRender = function( event ) {
+
+      var member = event.args[ 0 ];
+      userDae = member;
+
+      console.log( '----------------------------------------------' );
+      console.log( member );
+      console.log( '----------------------------------------------' );
+
+      makeCommentDom();
+
+    };
+
+    // ---------------------------------------------------------
+    // header.user
+    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    if ( UT.app.User.sign ) {
+
+      // login user はコメント投稿可能 -> 表示アイコン必要
+      headerUser.on( UT.view.View.BEFORE_RENDER, memberReceiver.beforeRender );
+
+    } else {
+
+      // 非ログインユーザーはアイコン取得いらない
+      ++prepared;
+
+    }
+    headerUser.start();
+
+    // ---------------------------------------------------------
+    // single JSON 取得後 category がわかる
+    // single callback
+    var singleReceiver = new UT.ui.Receiver();
+    singleReceiver.beforeRender = function( event ) {
+
+      var single = event.args[ 0 ];
+      singleDae = single;
+
+      var slug = single.category.slug;
+      var label = single.category.label;
+      console.log( 'singleReceiver.beforeRender ', slug, single );
+
+      // title
+      var title = new UT.view.ViewTitle( label, document.getElementById( 'page-title-container' ) );
+      title.render();
+
+      // -------------------------------------------------------
+      // comment
+      makeCommentDom();
+
+    };
+
+    // ---------------------------------------------------------
+    // show page
+    function page() {
+
+      console.log( '*********** page ********** ' );
+
+      var articleId = 29;
+
+      var elements = {
+        related: document.getElementById('single-related-container'),
+        footer: document.getElementById('single-footer-container')
+      };
+
+      // single page
+      var single = new UT.view.ViewSingle( articleId, document.getElementById('single-header-container'), elements );
+      single.on( UT.view.View.BEFORE_RENDER, singleReceiver.beforeRender );
+      single.start();
+
+    }
+    page();
+    // article id 30
+//    single = new UT.view.ViewSingle( 30, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 16, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 38, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 32, document.getElementById('single'), elements, option );
+//    single = new UT.view.ViewSingle( 29, document.getElementById('single'), elements, option );
+
+
+  }( window ) );
+</script>
+</body>
+</html>

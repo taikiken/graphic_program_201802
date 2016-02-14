@@ -30,7 +30,7 @@ import {ArticleDae} from '../dae/ArticleDae';
 import {Rise} from '../ui/Rise';
 
 // node(ReactClass)
-import {ReactionDom} from '../node/comment/ReactionDom';
+import {ReactionNode} from '../node/comment/ReactionNode';
 
 // React
 let React = self.React;
@@ -85,7 +85,6 @@ export class ViewArchiveMasonryInfinite extends View {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
    * @return {Element|*} more button root element を返します
    */
   get moreElement():Element {
@@ -470,7 +469,7 @@ export class ViewArchiveMasonryInfinite extends View {
                 </figure>
                 {/* insert html tag into .comment-content innerHTML */}
                 <div className="comment-content" dangerouslySetInnerHTML={{__html: first.body}} />
-                <ReactionDom
+                <ReactionNode
                   articleId={String(articleId)}
                   commentId={String(first.id)}
                   sign={sign}
@@ -586,9 +585,6 @@ export class ViewArchiveMasonryInfinite extends View {
                 let commentsPopular = dae.commentsPopular;
                 let commentsTotal = dae.commentsCount;
                 let thumbnail;
-                let figureTag;
-
-                // console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
 
                 thumbnail = dae.media.images.medium;
 
@@ -601,30 +597,10 @@ export class ViewArchiveMasonryInfinite extends View {
                   thumbnail = Empty.IMG_MIDDLE;
                 }
 
-                // media type で thumbnail 切替
-                /*
-                if ( dae.mediaType === 'image' ) {
-
-                  // type: image
-                  figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
-                    <img src={thumbnail} alt={dae.title}/>
-                  </figure>;
-
-                } else {
-
-                  // type: video
-                  figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
-                    <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
-                    <img src={thumbnail} alt={dae.title}/>
-                  </figure>;
-
-                }
-*/
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
                   <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
                     <a className="post" href={dae.url}>
-                      {/*figureTag*/}
                       <ThumbnailDom
                         mediaType={dae.mediaType}
                         thumbnail={thumbnail}

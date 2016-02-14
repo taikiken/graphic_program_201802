@@ -18,7 +18,7 @@ import {Safety} from '../../data/Safety';
  */
 export class ImagesDae {
   /**
-   *
+   * article.media.images 画像情報を保存します
    * @param {Object} [images={}] article.media.images
    */
   constructor( images:Object = {} ) {
@@ -26,7 +26,6 @@ export class ImagesDae {
     this._images = images;
   }
   /**
-   *
    * @return {Object|*} article.media.images
    */
   get images():Object {
@@ -47,7 +46,7 @@ export class ImagesDae {
     return this.images.large;
   }
   /**
-   * 記事一覧用 - 横長 - 16:9
+   * 記事一覧用 - 横長 or 16:9
    * @return {string} article.media.images.medium
    */
   get medium():string {
@@ -61,7 +60,7 @@ export class ImagesDae {
     return this.images.thumbnail;
   }
   /**
-   *  詳細用元比率画像
+   * 詳細用元比率画像
    * @return {string} article.media.images.original
    */
   get original():string {

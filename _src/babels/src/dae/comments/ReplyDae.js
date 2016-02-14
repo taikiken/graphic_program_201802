@@ -27,9 +27,6 @@ export class ReplyDae {
     reply = Safety.object( reply );
 
     let total = parseInt( reply.count, 10 );
-    //if ( !Number.isInteger( total ) ) {
-    //  total = 0;
-    //}
     total = Safety.integer( total, 0 );
     this._total = total;
     this._comments = new CommentsPopularDae( reply.comments );

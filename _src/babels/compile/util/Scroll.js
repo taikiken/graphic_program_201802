@@ -110,7 +110,7 @@ var Scroll = exports.Scroll = function (_EventDispatcher) {
     //  static method
     // ---------------------------------------------------
     /**
-     * instance を生成します
+     * singleton instance を生成します
      * @return {Scroll} Scroll instance を返します
      */
     value: function factory() {
@@ -125,7 +125,7 @@ var Scroll = exports.Scroll = function (_EventDispatcher) {
   }, {
     key: 'SCROLL',
     get: function get() {
-      return 'scroll';
+      return 'scrollScroll';
     }
     /**
      * scroll top 位置
@@ -141,7 +141,7 @@ var Scroll = exports.Scroll = function (_EventDispatcher) {
     }
     /**
      * scroll top 位置 を設定します
-     * @param {Number} top
+     * @param {Number} top スクロール位置(px)
      */
     ,
     set: function set(top) {

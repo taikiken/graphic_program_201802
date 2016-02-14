@@ -28,8 +28,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Env = undefined;
 
-var _Loc = require('../util/Loc');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -116,7 +114,6 @@ var Env = exports.Env = function () {
 
       return _mode;
     }
-
     /**
      * @readonly
      * @return {string} 文字列 production を返します

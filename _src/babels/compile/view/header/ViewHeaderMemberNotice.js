@@ -50,6 +50,8 @@ var _NotificationsDae = require('../../dae/user/NotificationsDae');
 
 var _Safety = require('../../data/Safety');
 
+var _Result = require('../../data/Result');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
