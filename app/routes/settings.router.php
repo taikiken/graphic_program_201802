@@ -1,13 +1,14 @@
 <?php
 
-$app->group('/settings', function () {
+$app->group('/settings', function () use ($app) {
 
-  // プロフィール設定 - /settings/
+
+// 基本情報設定 - /settings/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = array(
-      'title'    => 'settings',
+      'title'    => '基本情報設定 | 設定',
       'template' => 'settings.php',
       'path'     => $args,
     );
@@ -16,12 +17,13 @@ $app->group('/settings', function () {
 
   });
 
-  // プロフィール設定/好きな競技を設定|ソーシャル設定|退会 - /settings/interest|social|deactivate/
+
+  // パーソナライズ設定 - /settings/interest/
   // ==============================
-  $this->get('/{slug:interest|social|deactivate}[/]', function ($request, $response, $args) {
+  $this->get('/{slug:interest}[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = array(
-      'title'    => 'settings / '.$args['slug'],
+      'title'    => 'パーソナライズ設定 | 設定',
       'template' => 'settings.'.$args['slug'].'.php',
       'path'     => $args,
     );
@@ -29,6 +31,37 @@ $app->group('/settings', function () {
     return $this->renderer->render($response, "_default.php", $args);
 
   });
+
+
+  // ソーシャル連携 - /settings/social/
+  // ==============================
+  $this->get('/{slug:social}[/]', function ($request, $response, $args) use ($app) {
+
+    $args['page'] = array(
+      'title'    => 'ソーシャル連携 | 設定',
+      'template' => 'settings.'.$args['slug'].'.php',
+      'path'     => $args,
+    );
+
+    return $this->renderer->render($response, "_default.php", $args);
+
+  });
+
+
+  // 退会 - /settings/deactivate/
+  // ==============================
+  $this->get('/{slug:deactivate}[/]', function ($request, $response, $args) use ($app) {
+
+    $args['page'] = array(
+      'title'    => '基本情報設定 | 設定',
+      'template' => 'settings.'.$args['slug'].'.php',
+      'path'     => $args,
+    );
+
+    return $this->renderer->render($response, "_default.php", $args);
+
+  });
+
 
 });
 

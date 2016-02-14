@@ -1,13 +1,14 @@
 <?php
 
-$app->group('/signup', function () {
+$app->group('/signup', function () use ($app) {
+
 
   // 新規登録 - /signup/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = array(
-      'title'    => 'signup',
+      'title'    => '新規会員登録',
       'template' => 'signup.php',
       'path'     => $args,
     );
@@ -16,12 +17,28 @@ $app->group('/signup', function () {
 
   });
 
-  // 新規登録/基本情報入力|興味のある競技を選択 - /signup/account|interest/
+
+  // 新規登録/基本情報入力 - /signup/account/
   // ==============================
-  $this->get('/{slug:account|interest}[/]', function ($request, $response, $args) {
+  $this->get('/{slug:account}[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = array(
-      'title'    => 'signup / '.$args['slug'],
+      'title'    => '基本情報入力 | 新規会員登録',
+      'template' => 'signup.'.$args['slug'].'.php',
+      'path'     => $args,
+    );
+
+    return $this->renderer->render($response, "_default.php", $args);
+
+  });
+
+
+  // 新規登録/興味のある競技を選択 - /signup/interest/
+  // ==============================
+  $this->get('/{slug:interest}[/]', function ($request, $response, $args) use ($app) {
+
+    $args['page'] = array(
+      'title'    => '興味のある競技を選択 | 新規会員登録',
       'template' => 'signup.'.$args['slug'].'.php',
       'path'     => $args,
     );
@@ -31,5 +48,6 @@ $app->group('/signup', function () {
   });
 
 });
+
 
 ?>

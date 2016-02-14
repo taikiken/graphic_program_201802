@@ -2,10 +2,10 @@
 
 // ログアウト - /logout/
 // ==============================
-$app->get('/logout[/]', function ($request, $response, $args) {
+$app->get('/logout[/]', function ($request, $response, $args) use ($app) {
 
   $args['page'] = array(
-    'title'    => 'logout',
+    'title'    => 'ログアウト',
     'template' => 'logout.php',
     'path'     => $args,
   );

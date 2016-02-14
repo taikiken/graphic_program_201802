@@ -2,10 +2,10 @@
 
 // ログイン - /login/
 // ==============================
-$app->get('/login[/]', function ($request, $response, $args) {
+$app->get('/login[/]', function ($request, $response, $args) use ($app) {
 
   $args['page'] = array(
-    'title'    => 'login',
+    'title'    => 'ログイン',
     'template' => 'login.php',
     'path'     => $args,
   );
