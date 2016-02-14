@@ -42,6 +42,8 @@ var _UsersSelf = require('../../action/users/UsersSelf');
 
 var _UserDae = require('../../dae/UserDae');
 
+var _Result = require('../../data/Result');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**

@@ -43,6 +43,10 @@
     .dropMenu {
       height: 0;
 
+      &:before {
+        visibility: hidden;
+      }
+
       .dropMenu-item {
         overflow: hidden;
         height: 0;
@@ -51,6 +55,8 @@
         .dropMenu-link-report,
         .dropMenu-link-delete {
           overflow: hidden;
+          display: block;
+          height: 0;
           font-size: 0;
           line-height: 0;
           padding: 0;

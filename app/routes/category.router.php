@@ -1,19 +1,47 @@
 <?php
 
 
-// TODO - これDBからひっぱる必要あり
-$categorySlug = array('baseball','mlb','soccer','worldsoccer','golf','sumo','battle','athletics','swimming','judo','tennis','volleyball','rugby','figureskate','basketball','extremesports','motorsports','business','etc');
+if ( $app->config['categories'] ) :
+
+  // ルーティングのためのスラッグを設定する
+  $category_slug = array_keys( $app->config['categories'] );
+
+else :
+
+  // TODO : ダミーカテゴリ、デバッグ用、後で消す
+  $category_slug = array('baseball','mlb','soccer','worldsoccer','golf','sumo','battle','athletics','swimming','judo','tennis','volleyball','rugby','figureskate','basketball','extremesports','motorsports','business','etc');
+
+endif;
 
 
-$app->group('/category/{category_slug:'.join('|',$categorySlug).'}', function () {
+$app->group('/category/{category_slug:'.join('|',$category_slug).'}', function () use($app) {
 
 
-  // カテゴリー - /category/:category_slug/
+  // 各カテゴリートップ - /category/:category_slug/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+
+    $category = $app->config['categories'][$args['category_slug']];
 
     $args['page'] = array(
-      'title'    => 'category / '.$args['category_slug'],
+      'title'      => $category['label'].'のニュース',
+      'template'   => 'category.php',
+      'path'       => $args,
+    );
+
+    return $this->renderer->render($response, "_default.php", $args);
+
+  });
+
+  // カテゴリー/ランキング - /category/:category_slug/ranking/
+  // ==============================
+  $this->get('/{type:ranking}[/]', function ($request, $response, $args) use ($app) {
+
+    $category = $app->config['categories'][$args['category_slug']];
+
+    $args['page'] = array(
+      'title'    => $category['label'].'のランキング',
+      'type'     => 'ranking',
       'template' => 'category.php',
       'path'     => $args,
     );
@@ -22,13 +50,16 @@ $app->group('/category/{category_slug:'.join('|',$categorySlug).'}', function ()
 
   });
 
-  // カテゴリー/ランキング|動画 - /category/:category_slug/:type
+
+  // カテゴリー/動画 - /category/:category_slug/video/
   // ==============================
-  $this->get('/{type:ranking|video}[/]', function ($request, $response, $args) {
+  $this->get('/{type:video}[/]', function ($request, $response, $args) use ($app) {
+
+    $category = $app->config['categories'][$args['category_slug']];
 
     $args['page'] = array(
-      'title'    => 'category / '.$args['category_slug'].' - '.$args['type'],
-      'type'     => $args['type'],
+      'title'    => $category['label'].'の動画',
+      'type'     => 'video',
       'template' => 'category.php',
       'path'     => $args,
     );
@@ -36,7 +67,9 @@ $app->group('/category/{category_slug:'.join('|',$categorySlug).'}', function ()
     return $this->renderer->render($response, "_default.php", $args);
 
   });
+
 
 });
+
 
 ?>

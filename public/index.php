@@ -32,6 +32,14 @@ $settings = require __DIR__ . '/../app/config/local.php';
 $app = new \Slim\App($settings);
 
 
+// config
+// TODO : 外出しするなり拡張するなり
+// ==============================
+$app->config = array(
+  'title' => '運動通信',
+);
+
+
 // dependencies
 // ==============================
 require __DIR__ . '/../app/src/dependencies.php';
@@ -40,6 +48,19 @@ require __DIR__ . '/../app/src/dependencies.php';
 // middleware
 // ==============================
 require __DIR__ . '/../app/src/middleware.php';
+
+
+// TODO - これDBからひっぱる必要あり〼 ref. #117
+// カテゴリーを取得する
+// ひとまず file_get_contentsで取得しておきますがパフォーマンスでないのでDBから直接 or キャッシュなりが理想です
+$categories = file_get_contents('http://undotsushin.com/api/v1/category');
+if ( $categories ) :
+  $categories = json_decode($categories, true);
+  foreach( $categories['response']['categories'] as $key => $value ) :
+    // APIから取得したカテゴリー一覧を$appに格納しておく
+    $app->config['categories'][$value['slug']] = $value;
+  endforeach;
+endif;
 
 
 // routes

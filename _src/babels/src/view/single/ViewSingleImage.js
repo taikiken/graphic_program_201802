@@ -13,6 +13,7 @@
 
 // view
 import {View} from '../View';
+import {Safety} from '../../data/Safety';
 
 import {ImagesDae} from '../../dae/media/ImagesDae';
 
@@ -82,6 +83,10 @@ export class ViewSingleImage extends View {
 
         if ( !original ) {
           // no image
+          return null;
+        }
+        if (!Safety.isImg(original)) {
+          // no correct image extension
           return null;
         }
 

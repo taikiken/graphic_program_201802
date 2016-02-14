@@ -1,11 +1,12 @@
 <?php
 
-$app->get('/', function ($request, $response, $args) {
+$app->get('/', function ($request, $response, $args) use ($app) {
 
   $args['page'] = array(
-    'title'    => '運動通信',
+    'title'    => '',
     'template' => 'index.php',
     'path'     => $args,
+    'og_type'  => 'website',
   );
 
   return $this->renderer->render($response, "_default.php", $args);

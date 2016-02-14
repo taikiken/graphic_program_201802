@@ -15,6 +15,7 @@ import {EventDispatcher} from '../event/EventDispatcher';
 
 let _symbol = null;
 let _instance = null;
+let _watch = false;
 
 /**
  * scroll に関する処理
@@ -43,12 +44,26 @@ export class Scroll extends EventDispatcher {
   // ---------------------------------------------------
   //  method
   // ---------------------------------------------------
+  /**
+   * window scroll 監視を開始します
+   */
   start():void {
-    window.addEventListener( 'scroll', this.boundScroll, false );
+    if ( !_watch ) {
+      _watch = true;
+      window.addEventListener( 'scroll', this.boundScroll, false );
+    }
   }
+  /**
+   * window scroll 監視を止めます
+   */
   stop():void {
+    _watch = false;
     window.removeEventListener( 'scroll', this.boundScroll );
   }
+  /**
+   * window.onscroll event handler
+   * @param event
+   */
   onScroll( event:Event ):void {
     this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
   }
@@ -56,7 +71,7 @@ export class Scroll extends EventDispatcher {
   //  static GETTER / SETTER
   // ---------------------------------------------------
   static get SCROLL():string {
-    return 'scroll';
+    return 'scrollScroll';
   }
   /**
    * scroll top 位置
@@ -69,7 +84,7 @@ export class Scroll extends EventDispatcher {
   }
   /**
    * scroll top 位置 を設定します
-   * @param {Number} top
+   * @param {Number} top スクロール位置(px)
    */
   static set y( top:Number ):void {
     window.scrollTo( 0, top );
@@ -83,7 +98,7 @@ export class Scroll extends EventDispatcher {
   //  static method
   // ---------------------------------------------------
   /**
-   * instance を生成します
+   * singleton instance を生成します
    * @return {Scroll} Scroll instance を返します
    */
   static factory():Scroll {

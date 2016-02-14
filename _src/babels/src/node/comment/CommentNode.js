@@ -15,14 +15,18 @@
 import {Empty} from '../../app/const/Empty';
 
 // node
-import {ReactionDom} from './ReactionDom';
+import {ReactionNode} from './ReactionNode';
 
 // React
 let React = self.React;
 
-// コメント削除 自分のだけ
+// コメント削除・通報 削除は自分のだけ, 他人のコメントは通報
 let CommentAction = React.createClass( {
   propTypes: {
+    // menu が 開いているか閉じているか open / close
+    toggle: React.PropTypes.string.isRequired,
+    // mine or others, others: true
+    others: React.PropTypes.bool.isRequired,
     // user id
     userId: React.PropTypes.string.isRequired,
     commentUserId: React.PropTypes.string.isRequired,
@@ -37,10 +41,12 @@ let CommentAction = React.createClass( {
     };
   },
   render: function() {
-    if ( this.props.userId === '0' || this.props.userId !== this.props.commentUserId ) {
+    console.log( '****************** render', this.props.others, this.state.reportLoading );
+
+    if ( this.props.others ) {
       // 自分以外 & ユーザー情報が正しくは通報機能
       return (
-        <li className={'dropMenu-item loading-root ' + this.state.deleteLoading}>
+        <li className={'dropMenu-item loading-root ' + this.state.reportLoading}>
           <a href="#" className="dropMenu-link-report dropMenu-link" onClick={this.reportClick}><span>このコメントを通報する</span></a>
           <div className="loading-spinner"></div>
         </li>
@@ -48,39 +54,67 @@ let CommentAction = React.createClass( {
     } else {
       // 自分のは削除機能
       return (
-        <li className={'dropMenu-item loading-root ' + this.state.reportLoading}>
+        <li className={'dropMenu-item loading-root ' + this.state.deleteLoading}>
           <a href="#" className="dropMenu-link-delete dropMenu-link-" onClick={this.deleteClick}><span>このコメントを削除する</span></a>
         </li>
       );
     }
   },
-  componentWillUnMount: function() {
+  shouldComponentUpdate: function(nextProps, nextState) {
+    // menu が閉じたら loading class を削除する
+    if ( nextState.toggle === 'close' ) {
+      if ( this.state.deleteLoading === 'loading' ) {
+        this.setState( {deleteLoading: ''} );
+      }
+      if ( this.state.reportLoading === 'loading' ) {
+        this.setState( {reportLoading: ''} );
+      }
+    }
 
+    return true;
+  },
+  componentWillUnMount: function() {
+    this.setState( {reportLoading: '', deleteLoading: ''} );
   },
   deleteClick: function( event ) {
     event.preventDefault();
+    event.stopPropagation();
     // delete action
-    this.setState( { deleteLoading: 'loading '} );
+    this.setState( { deleteLoading: 'loading'} );
+    this.props.delete( 'click' );
   },
   deleteDone: function(result) {
     console.log( 'deleteDone', result );
-    this.props.delete( true );
+    this.props.delete( 'done' );
   },
   deleteFail: function(error) {
     console.log( 'deleteFail', error );
     this.props.delete( false );
+    this.props.delete( 'fail' );
   },
   reportClick: function( event ) {
     event.preventDefault();
-    this.setState( { reportLoading: 'loading '} );
+    // event.stopPropagation();
+    console.log( 'reportClick', event );
+
+    this.setState( { reportLoading: 'loading'} );
+    this.props.report( 'click' );
+
+    // test code
+    /*
+    setTimeout( this.reportDone, 1000 );
+    setTimeout( this.reportFail, 1000 );
+    */
   },
   reportDone: function(result) {
     console.log( 'reportDone', result );
-    this.props.report( true );
+    this.setState( { reportLoading: ''} );
+    this.props.report( 'done' );
   },
   reportFail: function(error) {
     console.log( 'reportFail', error );
-    this.props.report( false );
+    this.setState( { reportLoading: ''} );
+    this.props.report( 'fail' );
   }
 } );
 
@@ -104,6 +138,7 @@ let CommentMenu = React.createClass( {
     };
   },
   render: function() {
+    let others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
     if ( this.props.sign ) {
       // ログインユーザーのみ
       if ( this.state.show ) {
@@ -112,6 +147,8 @@ let CommentMenu = React.createClass( {
             <a href="#" className="comment-menu-btn" onClick={this.clickHandler}>MENU</a>
             <ul className="dropMenu">
               <CommentAction
+                toggle={this.state.open}
+                others={others}
                 userId={this.props.userId}
                 commentUserId={this.props.commentUserId}
                 commentId={this.props.commentId}
@@ -136,20 +173,54 @@ let CommentMenu = React.createClass( {
 
   },
   componentWillUnmount: function() {
-
+    // event handler unbind
+    // timer clear
+    this.destroy();
   },
   // -------------------------------------------------------
   // 以降 custom method
-  didDelete: function( success:boolean ) {
-    if ( success ) {
-      // delete action が成功した
-      this.setState( {show: false} );
+  didDelete: function( type:string ) {
+    console.log( 'didDelete', type );
+
+    switch ( type ) {
+      case 'click':
+        this.destroy();
+        break;
+
+      case 'done':
+        this.setState( {show: false} );
+        break;
+
+      case 'fail':
+        this.activateBodyClick();
+        break;
+
+      default:
+        this.activateBodyClick();
+        break;
     }
+
   },
-  didReport: function( success:boolean ) {
-    if ( success ) {
-      // report action が成功した
-      this.setState( {show: false} );
+  didReport: function( type:string ) {
+    console.log( 'didReport', type );
+
+    switch ( type ) {
+      case 'click':
+        this.destroy();
+        break;
+
+      case 'done':
+        this.setState( {show: false} );
+        this.toggleState();
+        break;
+
+      case 'fail':
+        this.activateBodyClick();
+        break;
+
+      default:
+        this.activateBodyClick();
+        break;
     }
   },
   // -----------------------------
@@ -171,6 +242,9 @@ let CommentMenu = React.createClass( {
 
     }
   },
+  activateBodyClick: function() {
+    document.body.addEventListener( 'click', this.bodyClick, false );
+  },
   // open / close toggle
   toggleState: function() {
 
@@ -180,7 +254,7 @@ let CommentMenu = React.createClass( {
       // close -> open
       // document.body へ click event handler bind
       this.setState( { open: 'open' } );
-      document.body.addEventListener( 'click', this.bodyClick, false );
+      this.activateBodyClick();
     } else {
       // open -> close
       this.setState( { open: 'close' } );
@@ -201,11 +275,17 @@ let CommentMenu = React.createClass( {
 
   }
 } );
-
-export let CommentDom = React.createClass( {
+/**
+ * <h3>React class</h3>
+ * 記事詳細 > コメント一覧 node を作成します
+ * @class CommentNode
+ * @type {Function}
+ */
+export let CommentNode = React.createClass( {
   propTypes: {
     commentDae: React.PropTypes.object.isRequired,
     // unique id（識別のために必要）
+    uniqueId: React.PropTypes.string.isRequired,
     // id: React.PropTypes.string.isRequired,
     // コメント送信者（自分の）profile picture
     icon: React.PropTypes.string,
@@ -256,7 +336,7 @@ export let CommentDom = React.createClass( {
     let picture = comment.user.profilePicture || Empty.USER_EMPTY;
 
     return (
-      <div>
+      <div className="comment-root">
         <CommentMenu
           sign={sign}
           userId={this.props.userId}
@@ -275,7 +355,7 @@ export let CommentDom = React.createClass( {
           </span>
         </figure>
         <div className="comment-content" dangerouslySetInnerHTML={{__html: comment.body}} />
-        <ReactionDom
+        <ReactionNode
           articleId={this.props.articleId}
           commentId={this.props.commentId}
           sign={sign}

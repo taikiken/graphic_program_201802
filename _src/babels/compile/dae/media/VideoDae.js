@@ -34,7 +34,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var VideoDae = exports.VideoDae = function () {
   /**
-   *
+   * article.media.video 動画情報を保存します
    * @param {Object} [video={}] article.media.video
    */
 
@@ -46,7 +46,6 @@ var VideoDae = exports.VideoDae = function () {
     this._video = video;
   }
   /**
-   *
    * @return {Object|*} article.media.video
    */
 
@@ -56,7 +55,8 @@ var VideoDae = exports.VideoDae = function () {
       return this._video;
     }
     /**
-     *
+     * video caption
+     * @ToDo 使い道がわからない
      * @return {string} article.media.video.caption
      */
 
@@ -65,32 +65,9 @@ var VideoDae = exports.VideoDae = function () {
     get: function get() {
       return this.video.caption;
     }
-    // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=1742013165
-    // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=404686668
-    // 2016-02-08 21:08:24 JSON 変更
-    ///**
-    // * 1 x 1 small size
-    // * @return {string} article.media.video.thumbnail
-    // */
-    //get thumbnail():string {
-    //  return this.video.thumbnail;
-    //}
-    ///**
-    // * for slide
-    // * @return {string} article.media.images.large
-    // */
-    //get large():string {
-    //  return this.video.large;
-    //}
-    ///**
-    // * 16 x 9 記事一覧
-    // * @return {string} article.media.images.medium
-    // */
-    //get medium():string {
-    //  return this.video.medium;
-    //}
     /**
-     *
+     * 動画パス
+     * @ToDo youtube ドメインから取得する？
      * @return {string} article.media.video.url
      */
 

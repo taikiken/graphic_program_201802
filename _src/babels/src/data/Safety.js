@@ -108,11 +108,20 @@ export class Safety {
   }
   /**
    * Element かどうかを調べます
-   * @param {Element} element
+   * @param {Element} element 調査対象 Element
    * @returns {boolean} Element かどうかの真偽値を返します
    */
   static isElement( element:Element ):boolean {
     return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
+  }
+
+  /**
+   * FormData かどうかを調べます
+   * @param {FormData} formData 調査対象 FormData
+   * @returns {boolean} FormData かどうかの真偽値を返します
+   */
+  static isFormData( formData:FormData ):boolean {
+    return formData !== null && typeof formData !== 'undefined' && 'append' in formData;
   }
   /**
    * ファイル名から拡張子を取得します

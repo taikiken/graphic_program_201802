@@ -130,7 +130,6 @@ var Action = exports.Action = function () {
     get: function get() {
       return this._url;
     }
-
     /**
      * @return {string|*} method, GET|POST|DELETE|PUT... を返します
      */

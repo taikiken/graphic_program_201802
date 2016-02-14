@@ -1,13 +1,13 @@
 <?php
 
-$app->group('/reset_password', function () {
+$app->group('/reset_password', function () use ($app) {
 
   // パスワードリセット - /reset_password/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = array(
-      'title'    => 'reset_password',
+      'title'    => 'パスワードをリセットする',
       'template' => 'reset_password.php',
       'path'     => $args,
     );
@@ -19,10 +19,10 @@ $app->group('/reset_password', function () {
 
   // パスワードリセット/再設定 - /reset_password/resetting/
   // ==============================
-  $this->get('/{slug:resetting}[/]', function ($request, $response, $args) {
+  $this->get('/{slug:resetting}[/]', function ($request, $response, $args) use ($app)  {
 
     $args['page'] = array(
-      'title'    => 'reset_password / '.$args['slug'],
+      'title'    => '再設定 | パスワードをリセットする',
       'template' => 'reset_password.'.$args['slug'].'.php',
       'path'     => $args,
     );

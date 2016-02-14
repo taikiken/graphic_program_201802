@@ -54,7 +54,7 @@ var _ArticleDae = require('../dae/ArticleDae');
 
 var _Rise = require('../ui/Rise');
 
-var _ReactionDom = require('../node/comment/ReactionDom');
+var _ReactionNode = require('../node/comment/ReactionNode');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -551,7 +551,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                   )
                 ),
                 React.createElement('div', { className: 'comment-content', dangerouslySetInnerHTML: { __html: first.body } }),
-                React.createElement(_ReactionDom.ReactionDom, {
+                React.createElement(_ReactionNode.ReactionNode, {
                   articleId: String(articleId),
                   commentId: String(first.id),
                   sign: sign,

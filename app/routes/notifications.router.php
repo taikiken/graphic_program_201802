@@ -2,10 +2,10 @@
 
 // お知らせ - /notifications
 // ==============================
-$app->get('/notifications[/]', function ($request, $response, $args) {
+$app->get('/notifications[/]', function ($request, $response, $args) use ($app) {
 
   $args['page'] = array(
-    'title'    => 'notifications',
+    'title'    => 'お知らせ',
     'template' => 'notifications.php',
     'path'     => $args,
   );

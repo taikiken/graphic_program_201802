@@ -19,7 +19,7 @@ Object.defineProperty(exports, "__esModule", {
 var React = self.React;
 
 var ReactionDom = exports.ReactionDom = React.createClass({
-  displayName: 'ReactionDom',
+  displayName: 'ReactionNode',
 
   propTypes: {
     // 記事 id

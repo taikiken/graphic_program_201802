@@ -311,6 +311,10 @@ var ViewHeadline = exports.ViewHeadline = function (_View) {
                 // thumbnail を check しなければ代替画像にする
                 if (!thumbnail) {
                   thumbnail = _Empty.Empty.IMG_SMALL;
+                } else if (!_Safety.Safety.isImg(thumbnail)) {
+                  // 画像ファイル名に拡張子がないのがあったので
+                  // 拡張子チェックを追加
+                  thumbnail = _Empty.Empty.IMG_SMALL;
                 }
 
                 // HeadlineDom instance を使い render

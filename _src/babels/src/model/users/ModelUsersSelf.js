@@ -14,6 +14,7 @@
 import {Model} from '../Model';
 import {UsersSelf} from '../../action/users/UsersSelf';
 import {UserDae} from '../../dae/UserDae';
+import {Result} from '../../data/Result';
 
 /**
  * 自分の情報
@@ -39,7 +40,7 @@ export class ModelUsersSelf extends Model {
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result ):void {
+  done( result:Result ):void {
 
     let response = result.response;
 

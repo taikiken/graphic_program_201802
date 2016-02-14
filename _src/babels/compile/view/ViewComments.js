@@ -58,7 +58,7 @@ var _CommentsListDae = require('../dae/CommentsListDae');
 
 var _UserDae = require('../dae/UserDae');
 
-var _CommentDom = require('../node/comment/CommentDom');
+var _CommentNode = require('../node/comment/CommentNode');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -255,14 +255,8 @@ var ViewComments = exports.ViewComments = function (_View) {
     key: 'all',
     value: function all(commentsListDae) {
 
-      //
       var commentsList = this._commentsList;
       var commentsBank = this._commentsBank;
-
-      // comments type
-      // let commentsListType = this._commentsListType;
-
-      // let articleIdString = String(this._articleId);
 
       // コメント挿入 root element
       var element = this.element;
@@ -348,63 +342,6 @@ var ViewComments = exports.ViewComments = function (_View) {
       };
 
       // --------------------------------------------
-      // COMMENT ONE
-      // --------------------------------------------
-      /*
-      let CommentOne = React.createClass( {
-        propType: {
-          comment: React.PropTypes.object.isRequired,
-          parent: React.PropTypes.bool
-        },
-        getDefaultProps: function() {
-          return {
-            parent: false
-          };
-        },
-        render: function() {
-           let commentDae = this.props.comment;
-          let comment = commentDae.comment;
-          let isParent = this.props.parent;
-           let replyClass = '';
-          // console.log( 'comment', comment );
-          // console.log( 'comment.user', comment.user );
-          let picture = comment.user.profilePicture || Empty.USER_EMPTY;
-          let commentReply = commentDae.reply;
-          let replyTotal = 0;
-          let replyTotalElement = '';
-          let replyLink = '';
-           if ( isParent ) {
-             if ( typeof commentReply !== 'undefined' && commentReply !== null ) {
-              replyTotal = commentReply.total;
-               if ( replyTotal !== 0 ) {
-                replyTotalElement = `(${replyTotal})`;
-              }
-            }
-             replyLink = <div><a href="xxx" data-reply={'reply-to-' + comment.id}>コメントへ返信</a>{replyTotalElement}</div>;
-           }
-           let bodyTag = () => {
-            return {
-              __html: comment.body
-            };
-          };
-           console.log( '**** comment ', comment );
-           // ToDo: 一般ユーザーは bio がない
-           return (
-            <div className={'comment-' + commentsListType + ' comment-' + commentsListType + '-' + comment.id + replyClass}>
-              <div className={'comment-user-' + comment.user.id}><img src={picture} alt={comment.user.userName}/></div>
-              <div>{comment.user.userName}</div>
-              <div>{comment.user.bio}</div>
-              <div>{comment.formatDate}</div>
-              <div  className="comment-body" dangerouslySetInnerHTML={bodyTag()} />
-              <div>Good: {comment.good}</div>
-              <div>Bad: {comment.bad}</div>
-              {replyLink}
-            </div>
-          );
-         }
-      } );
-      */
-      // --------------------------------------------
       // COMMENT reply loop
       // 親コメントへ返信
       // --------------------------------------------
@@ -414,10 +351,10 @@ var ViewComments = exports.ViewComments = function (_View) {
         propType: {
           total: React.PropTypes.number.isRequired,
           sign: React.PropTypes.bool.isRequired,
+          uniqueId: React.PropTypes.string.isRequired,
           userId: React.PropTypes.string.isRequired,
           articleId: React.PropTypes.string.isRequired,
           commentId: React.PropTypes.string.isRequired,
-          // id: React.PropTypes.string.isRequired,
           commentsListType: React.PropTypes.object.isRequired,
           reply: React.PropTypes.object.isRequired
         },
@@ -439,7 +376,7 @@ var ViewComments = exports.ViewComments = function (_View) {
           var userId = this.props.userId;
           var sign = this.props.sign;
           var articleId = this.props.articleId;
-          var commentsListType = this.props.commentsListType;
+          var uniqueId = this.props.uniqueId;
 
           return React.createElement(
             'ul',
@@ -449,18 +386,12 @@ var ViewComments = exports.ViewComments = function (_View) {
               /* 親コメントと子コメントのデータ形式が違う
                  合わせるために object でラップする {comment: replyComment}
               */
-              /*
-              return <CommentOne
-                key={`reply-${commentsListType}-${articleId}-${commentId}-${replyComment.id}`}
-                comment={{comment: replyComment}}
-                parent={false} />;
-              */
-
               /* independent, open 省略 */
               return React.createElement(
                 'li',
-                { key: 'reply-' + commentsListType + '-' + articleId + '-' + commentId + '-' + replyComment.id, className: 'comment-item' },
-                React.createElement(_CommentDom.CommentDom, {
+                { key: uniqueId + '-' + replyComment.id, className: 'comment-item' },
+                React.createElement(_CommentNode.CommentNode, {
+                  uniqueId: uniqueId + '-' + replyComment.id,
                   commentDae: { comment: replyComment },
                   userId: userId,
                   articleId: articleId,
@@ -483,7 +414,7 @@ var ViewComments = exports.ViewComments = function (_View) {
 
         propType: {
           commentObject: React.PropTypes.object.isRequired,
-          id: React.PropTypes.string.isRequired,
+          uniqueId: React.PropTypes.string.isRequired,
           articleId: React.PropTypes.string.isRequired,
           commentsListType: React.PropTypes.string.isRequired,
           total: React.PropTypes.number.isRequired,
@@ -527,7 +458,8 @@ var ViewComments = exports.ViewComments = function (_View) {
             React.createElement(
               'li',
               { className: 'comment-item' },
-              React.createElement(_CommentDom.CommentDom, {
+              React.createElement(_CommentNode.CommentNode, {
+                uniqueId: this.props.uniqueId + '-' + commentId,
                 commentDae: commentObject,
                 icon: icon,
                 userId: userId,
@@ -538,6 +470,7 @@ var ViewComments = exports.ViewComments = function (_View) {
                 parent: true
               }),
               React.createElement(CommentReplyChild, {
+                uniqueId: this.props.uniqueId + '-' + commentId + '-reply',
                 total: total,
                 sign: sign,
                 userId: userId,
@@ -598,7 +531,7 @@ var ViewComments = exports.ViewComments = function (_View) {
 
               return React.createElement(CommentsParent, {
                 key: key,
-                id: key,
+                uniqueId: key,
                 index: index,
                 articleId: articleId,
                 commentObject: commentObject,

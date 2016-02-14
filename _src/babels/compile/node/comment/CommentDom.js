@@ -24,13 +24,17 @@ var _ReactionDom = require('./ReactionDom');
 // React
 var React = self.React;
 
-// コメント削除 自分のだけ
+// コメント削除・通報 削除は自分のだけ, 他人のコメントは通報
 
 // node
 var CommentAction = React.createClass({
   displayName: 'CommentAction',
 
   propTypes: {
+    // menu が 開いているか閉じているか open / close
+    toggle: React.PropTypes.string.isRequired,
+    // mine or others, others: true
+    others: React.PropTypes.bool.isRequired,
     // user id
     userId: React.PropTypes.string.isRequired,
     commentUserId: React.PropTypes.string.isRequired,
@@ -45,11 +49,13 @@ var CommentAction = React.createClass({
     };
   },
   render: function render() {
-    if (this.props.userId === '0' || this.props.userId !== this.props.commentUserId) {
+    console.log('****************** render', this.props.others, this.state.reportLoading);
+
+    if (this.props.others) {
       // 自分以外 & ユーザー情報が正しくは通報機能
       return React.createElement(
         'li',
-        { className: 'dropMenu-item loading-root ' + this.state.deleteLoading },
+        { className: 'dropMenu-item loading-root ' + this.state.reportLoading },
         React.createElement(
           'a',
           { href: '#', className: 'dropMenu-link-report dropMenu-link', onClick: this.reportClick },
@@ -65,7 +71,7 @@ var CommentAction = React.createClass({
       // 自分のは削除機能
       return React.createElement(
         'li',
-        { className: 'dropMenu-item loading-root ' + this.state.reportLoading },
+        { className: 'dropMenu-item loading-root ' + this.state.deleteLoading },
         React.createElement(
           'a',
           { href: '#', className: 'dropMenu-link-delete dropMenu-link-', onClick: this.deleteClick },
@@ -78,31 +84,61 @@ var CommentAction = React.createClass({
       );
     }
   },
-  componentWillUnMount: function componentWillUnMount() {},
+  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+    // menu が閉じたら loading class を削除する
+    if (nextState.toggle === 'close') {
+      if (this.state.deleteLoading === 'loading') {
+        this.setState({ deleteLoading: '' });
+      }
+      if (this.state.reportLoading === 'loading') {
+        this.setState({ reportLoading: '' });
+      }
+    }
+
+    return true;
+  },
+  componentWillUnMount: function componentWillUnMount() {
+    this.setState({ reportLoading: '', deleteLoading: '' });
+  },
   deleteClick: function deleteClick(event) {
     event.preventDefault();
+    event.stopPropagation();
     // delete action
-    this.setState({ deleteLoading: 'loading ' });
+    this.setState({ deleteLoading: 'loading' });
+    this.props.delete('click');
   },
   deleteDone: function deleteDone(result) {
     console.log('deleteDone', result);
-    this.props.delete(true);
+    this.props.delete('done');
   },
   deleteFail: function deleteFail(error) {
     console.log('deleteFail', error);
     this.props.delete(false);
+    this.props.delete('fail');
   },
   reportClick: function reportClick(event) {
     event.preventDefault();
-    this.setState({ reportLoading: 'loading ' });
+    // event.stopPropagation();
+    console.log('reportClick', event);
+
+    this.setState({ reportLoading: 'loading' });
+    this.props.report('click');
+
+    // test code
+    /*
+    setTimeout( this.reportDone, 1000 );
+    setTimeout( this.reportFail, 1000 );
+    */
   },
   reportDone: function reportDone(result) {
     console.log('reportDone', result);
-    this.props.report(true);
+    this.setState({ reportLoading: '' });
+    this.props.report('done');
   },
   reportFail: function reportFail(error) {
     console.log('reportFail', error);
-    this.props.report(false);
+    this.setState({ reportLoading: '' });
+    this.props.report('fail');
   }
 });
 
@@ -128,6 +164,7 @@ var CommentMenu = React.createClass({
     };
   },
   render: function render() {
+    var others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
     if (this.props.sign) {
       // ログインユーザーのみ
       if (this.state.show) {
@@ -143,6 +180,8 @@ var CommentMenu = React.createClass({
             'ul',
             { className: 'dropMenu' },
             React.createElement(CommentAction, {
+              toggle: this.state.open,
+              others: others,
               userId: this.props.userId,
               commentUserId: this.props.commentUserId,
               commentId: this.props.commentId,
@@ -161,19 +200,39 @@ var CommentMenu = React.createClass({
     }
   },
   componentDidMount: function componentDidMount() {},
-  componentWillUnmount: function componentWillUnmount() {},
+  componentWillUnmount: function componentWillUnmount() {
+    // event handler unbind
+    // timer clear
+    this.destroy();
+  },
   // -------------------------------------------------------
   // 以降 custom method
-  didDelete: function didDelete(success) {
-    if (success) {
+  didDelete: function didDelete(type) {
+    if (string) {
       // delete action が成功した
       this.setState({ show: false });
     }
   },
-  didReport: function didReport(success) {
-    if (success) {
-      // report action が成功した
-      this.setState({ show: false });
+  didReport: function didReport(type) {
+    console.log('didReport', type);
+
+    switch (type) {
+      case 'click':
+        this.destroy();
+        break;
+
+      case 'done':
+        this.setState({ show: false });
+        this.toggleState();
+        break;
+
+      case 'fail':
+        this.activateBodyClick();
+        break;
+
+      default:
+        this.toggleState();
+        break;
     }
   },
   // -----------------------------
@@ -194,6 +253,9 @@ var CommentMenu = React.createClass({
       this.timer = setTimeout(this.toggleState, 100);
     }
   },
+  activateBodyClick: function activateBodyClick() {
+    document.body.addEventListener('click', this.bodyClick, false);
+  },
   // open / close toggle
   toggleState: function toggleState() {
 
@@ -203,7 +265,7 @@ var CommentMenu = React.createClass({
       // close -> open
       // document.body へ click event handler bind
       this.setState({ open: 'open' });
-      document.body.addEventListener('click', this.bodyClick, false);
+      this.activateBodyClick();
     } else {
       // open -> close
       this.setState({ open: 'close' });

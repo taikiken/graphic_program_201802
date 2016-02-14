@@ -27,13 +27,6 @@ export class CommentsPopularDae {
     comments = Safety.array( comments );
     this._comments = comments;
 
-    //let popularComments = [];
-    //for ( var comment of comments ) {
-    //  popularComments.push( new PopularDae( comment ) );
-    //}
-    //
-    //this._popularComments = popularComments;
-
     this._popularComments = null;
     this.init();
   }

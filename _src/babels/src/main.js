@@ -11,6 +11,8 @@
  * @requires React, Sagen. IE: fetch, es5-promise
  *
  */
+'use strict';
+
 // -------------------------------------
 //  main
 //    target for babel compile
@@ -108,6 +110,7 @@ import {ViewSingle} from './view/ViewSingle';
 import {ViewTitle} from './view/ViewTitle';
 
 import {ViewComments} from './view/ViewComments';
+import {ViewCommentForm} from './view/comment/ViewCommentForm';
 
 import {ViewHeadline} from './view/home/ViewHeadline';
 import {ViewPickup} from './view/home/ViewPickup';
@@ -216,6 +219,9 @@ var UT = {
     ViewSingle: ViewSingle,
     ViewTitle: ViewTitle,
     ViewComments: ViewComments,
+    comment: {
+      ViewCommentForm: ViewCommentForm
+    },
     header: {
       ViewHeaderUser: ViewHeaderUser
     },

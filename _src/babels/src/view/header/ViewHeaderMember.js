@@ -19,6 +19,7 @@ import {UserDae} from '../../dae/UserDae';
 import {UsersSelf} from '../../action/users/UsersSelf';
 
 import {Url} from '../../app/const/Url';
+import {Result} from '../../data/Result';
 
 // React
 let React = self.React;

@@ -13,6 +13,8 @@
 
 // view
 import {View} from '../View';
+import {Empty} from '../../app/const/Empty';
+import {Safety} from '../../data/Safety';
 
 import {MediaDae} from '../../dae/MediaDae';
 
@@ -96,10 +98,17 @@ export class ViewSingleVideo extends View {
           }
         };
 
+        let poster = images.medium;
+        if ( !poster ) {
+          poster = Empty.VIDEO_THUMBNAIL;
+        } else if (!Safety.isImg(poster)) {
+          poster = Empty.VIDEO_THUMBNAIL;
+        }
+
         return (
           <div className="post-kv">
-            <video poster={images.medium} preload="none">
-              <source src={video.url}  type="video/mp4"/>
+            <video poster={poster} preload="none">
+              <source src={video.url} type="video/mp4"/>
             </video>
             {captionTag( video.caption )}
           </div>

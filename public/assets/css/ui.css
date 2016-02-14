@@ -4883,6 +4883,8 @@ table tr.w200 > td {
 
 .comment-menu.close .dropMenu {
   height: 0; }
+  .comment-menu.close .dropMenu:before {
+    visibility: hidden; }
   .comment-menu.close .dropMenu .dropMenu-item {
     overflow: hidden;
     height: 0;
@@ -4890,6 +4892,8 @@ table tr.w200 > td {
     .comment-menu.close .dropMenu .dropMenu-item .dropMenu-link-report,
     .comment-menu.close .dropMenu .dropMenu-item .dropMenu-link-delete {
       overflow: hidden;
+      display: block;
+      height: 0;
       font-size: 0;
       line-height: 0;
       padding: 0; }

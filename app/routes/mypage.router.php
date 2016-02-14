@@ -1,13 +1,13 @@
 <?php
 
-$app->group('/mypage', function () {
+$app->group('/mypage', function () use ($app) {
 
   // マイページ - /mypage/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) {
+  $this->map(['GET'], '[/]', function ($request, $response, $args) use ( $app ) {
 
     $args['page'] = array(
-      'title'    => 'mypage',
+      'title'    => 'マイページ',
       'template' => 'mypage.php',
       'path'     => $args,
    );
@@ -22,7 +22,7 @@ $app->group('/mypage', function () {
   $this->get('/{slug:activities}[/]', function ($request, $response, $args) {
 
     $args['page'] = array(
-      'title'    => 'mypage / '.$args['slug'],
+      'title'    => 'アクティビティ | マイページ',
       'template' => 'mypage.'.$args['slug'].'.php',
       'path'     => $args,
     );

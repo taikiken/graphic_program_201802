@@ -14,7 +14,7 @@
 // React
 let React = self.React;
 
-export let ReactionDom = React.createClass( {
+export let ReactionNode = React.createClass( {
   propTypes: {
     // 記事 id
     articleId: React.PropTypes.string.isRequired,
