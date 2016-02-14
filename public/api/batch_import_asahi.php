@@ -27,7 +27,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$s["t7"]=$data["channel"]["item"][$i]["guid"];
 	
 	$s["keyword"]=$data["channel"]["item"][$i]["keyword"];
-	$s["m1"]=categorysearch($data["channel"]["item"][$i]["keyword"]);
+	$s["m1"]=categorysearch($r,$data["channel"]["item"][$i]["keyword"]);
 	$s["body"]=$data["channel"]["item"][$i]["description"];
 	
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
@@ -45,6 +45,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if($s["u_time"]!=$f["u_time"]){
 				$s["img1"]=outimg($s["t30"]);
+				splittime($s["m_time"],$s["u_time"]);
 				$sqla[]=makesql($s,$f["id"]);
 			}
 		}elseif($data["channel"]["item"][$i]["status"]==9){
