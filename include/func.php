@@ -279,6 +279,7 @@ function dateOffset($offset,$y,$m,$d){
 }
 
 function logIns($message,$usr,$error="",$sqls=""){
+	
 	global $o;
 	$sql="select max(n) as n from rireki";
 	$o->query($sql);
@@ -287,6 +288,8 @@ function logIns($message,$usr,$error="",$sqls=""){
 	
 	$sql=sprintf("insert into rireki(usr,message,m_time,n,flag,error,sql) values('%s','%s',now(),%s,%s,%s,'%s')",$usr,addslashes($message),$NNN,(strlen($error)>0)?0:1,(strlen($error)>0)?sprintf("'%s'",addslashes($error)):"null",addslashes($sqls));
 	$o->query($sql);
+	
+	echo $sql;
 	
 	$fp=@fopen("d:/log/errlog.txt","a");
 	@fputs($fp,sprintf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",date("Y-m-d H:i:s"),$usr,$message,$NNN,(strlen($error)>0)?0:1,$error,preg_replace('/(\n|\t)/',"",$sqls)));

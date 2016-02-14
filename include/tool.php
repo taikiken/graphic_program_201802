@@ -1,58 +1,5 @@
 <?php
 
-/*
-function fetchdata($gBILL,$DIRECTORY,$CONTENTSEDIT,$p){
-	
-	global $o,$LANG,$_GET;
-	
-	$l="<table class='notcs'>";
-	
-	if($gBILL!=1){
-		
-		if(strlen($DIRECTORY)>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\"><img src=\"/shared/cms/img/icon_browser.gif\" width=\"16\" height=\"16\" ></a>",rewrite($DIRECTORY,$p[$i]));
-		
-		if($_GET["cid"]==1){
-			$title =sprintf("[%s-%s-%s %s:%s] ",$p[$i]["a1"],$p[$i]["a2"],$p[$i]["a3"],$p[$i]["a4"],$p[$i]["a5"]);
-			$title.=mod_HTML($p[$i]["title"],1);
-			
-			$sql=sprintf("select t1 from repo_n where id=%s",$p[$i]["d2"]);
-			$o->query($sql);
-			$f=$o->fetch_array();
-			$title.=sprintf("（%s）",$f["t1"]);
-		
-		}elseif($_GET["rid"]==2){
-		
-			$title="";
-			$title.=mod_HTML($p[$i]["t1"]);
-			$title.=mod_HTML($p[$i]["t2"]);
-		
-		}else{
-		
-			$title=mod_HTML($p[$i]["title"],1);
-		
-		}
-		$l.=$title;
-		
-	}else{
-		for($EI=0;$EI<count($LANG);$EI++){
-			$TITLEFLAG=strlen($p[$i]["title".$LANG[$EI]])>0;
-			$l.=sprintf("<tr class=\"%s\"><td class=\"clearfix mnlang\"><span class=\"sp00e\">%s</span></td>",$LANG[$EI],strtoupper($LANG[$EI]));
-			$l.=sprintf("<td class=\"mndisp\"><div class=\"dp\"><img src=\"/shared/cms/img/cmd_%sactive.gif\" width=\"13\" height=\"13\" class=\"flagswitch lang_%s\" id=\"e%s\"></div></td>",($p[$i]["flag".$LANG[$EI]]!=1)?"dis":"",$LANG[$EI],$p[$i]["id"]);
-			if(strlen($DIRECTORY)>0&&$TITLEFLAG==1){
-				$l.=sprintf("<a href=\"%s\" target=\"_blank\"><img src=\"/shared/cms/img/icon_browser.gif\" width=\"16\" height=\"16\"></a>",rewrite($DIRECTORY,$p[$i],$LANG[$EI]));
-			}
-			$l.=$TITLEFLAG==1?sprintf("[<b class=\"sedx\">%s</b>] %s</td>",timemapping($p[$i]["m_time"]),mod_HTML($p[$i]["title".$LANG[$EI]],1)):"<span class=\"colred\">タイトル未設定</span>";
-			if($CONTENTSEDIT==1){
-				$l.=sprintf("<td class=\"pl5\"><a href=\"../repo_e/?nid=%s&%s\" class=\"toe\"><img src=\"/shared/cms/img/file.png\" width=\"17\" height=\"16\">[%s]ページ管理</a></td>",$p[$i]["id"],$g->g_url(),strtoupper($LANG[$EI]));
-			}
-		}
-	}
-	
-	$l.="</table>";
-}
-*/
-
-
 function makeContentsPreview($d){
 	
 	global $LANG;

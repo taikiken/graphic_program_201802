@@ -1,9 +1,8 @@
 <?php
 
 
-function categorysearch($k){
-	global $r;
-	$x=130;
+function categorysearch($r,$k){
+	$x=129;
 	for($i=0;$i<count($r);$i++){
 		for($j=0;$j<count($r[$i][1]);$j++){
 			if(preg_match("/".$r[$i][1][$j]."/",$k))$x=$r[$i][0];

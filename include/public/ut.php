@@ -106,4 +106,10 @@ function get_summary($description,$body){
 	return mod_HTML($s);
 }
 
+function stripbr($s){
+	$s=str_replace("</p><p>","\n\n",$s);
+	$s=strip_tags($s);
+	return $s;
+}
+
 ?>
