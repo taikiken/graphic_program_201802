@@ -17,7 +17,7 @@ if(strlen($type)==0){
 	
 	if(strlen($commentid)==0){
 	
-		$sql=sprintf("select *,(good+bad) as rank from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday,(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad%s from u_comment where pageid=%s and commentid=0 and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by rank desc,relativetime limit %s offset %s",
+		$sql=sprintf("select *,(good+bad) as rank from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday,(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad%s from u_comment where pageid=%s and commentid=0 and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by relativetime desc limit %s offset %s",
 		$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",$pageid,$length,$offset);
 
 		$nsql=sprintf("select count(*) as n from u_comment where pageid=%s and commentid=0 and flag=1",$pageid);
@@ -37,10 +37,34 @@ if(strlen($type)==0){
 		case "official":$user=5;break;
 	}
 	
-	$sql=sprintf("select *,(good+bad) as rank from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday,(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad%s from u_comment where pageid=%s and commentid=0 and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and cid=%s) as t2 where t1.userid=t2.userid order by rank desc,relativetime limit %s offset %s",
-	$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction order by rank desc,relativetime limit %s offset %s",$uid):"",$pageid,$user,$length,$offset);
+	$sql=sprintf("select *,(good+bad) as rank from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday,(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad%s from u_comment where pageid=%s and commentid=0 and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and cid=%s) as t2 where t1.userid=t2.userid order by relativetime desc limit %s offset %s",
+	$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",$pageid,$user,$length,$offset);
 
-	$nsql=sprintf("select count(*) as n from (select id,userid from u_comment where pageid=%s and commentid=0 and flag=1) as t1,(select id from repo_n where cid=%s) as  t2 where t1.userid=t2.id",$pageid,$user);
+	$nsql=sprintf("select count(*) as n from (select id,userid from u_comment where pageid=%s and commentid=0 and flag=1) as t1,(select id from repo_n where cid=%s) as t2 where t1.userid=t2.id",$pageid,$user);
+
+}elseif(preg_match("/self/",$type,$r)){
+	
+	$sql=sprintf("select *,(good+bad) as rank from (
+	select 
+		id,
+		comment,
+		userid,
+		(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,
+		to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,
+		extract(epoch from (now()-regitime))/60 as relativetime,
+		to_char(regitime,'MM月DD日 HH24時MI分') as date,
+		extract(dow from regitime) as weekday,
+		(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,
+		(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad,
+		(select reaction from u_reaction where commentid=u_comment.id and userid=6 and flag=1) as isreaction 
+	from 
+		u_comment 
+	where id in (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid))) as t1,
+		(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 
+	where t1.userid=t2.userid order by relativetime desc",
+	$pageid,$uid,$pageid,$uid);
+	
+	$nsql=sprintf("select count(*) as n from (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid)) as t",$pageid,$uid,$pageid,$uid);
 
 }
 
@@ -61,6 +85,7 @@ for($i=0;$i<count($p);$i++){
 	$s[$i]["date"]=str_replace(" ","T",$p[$i]["isotime"]);
 	$s[$i]["display_date"]=get_relativetime($p[$i]["relativetime"],$p[$i]["date"],$p[$i]["weekday"]);
 	$s[$i]["body"]=mod_HTML($p[$i]["comment"],2);
+	$s[$i]["body_escape"]=mod_HTML($p[$i]["comment"]);
 	
 	$s[$i]["is_like"]=$p[$i]["isreaction"]!=1?false:true;
 	$s[$i]["is_bad"]=$p[$i]["isreaction"]!=2?false:true;
@@ -87,10 +112,15 @@ for($i=0;$i<count($p);$i++){
 	if($f["n"]>0){
 
 		$n=0;
-
-		$sql=sprintf("select *,(good+bad) as rank from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad%s from u_comment where pageid=%s and commentid=%s and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by rank desc,relativetime",
-		$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",$pageid,$p[$i]["id"]);
-
+		
+		if(!preg_match("/self/",$type,$r)){
+			$sql=sprintf("select *,(good+bad) as rank from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad%s from u_comment where pageid=%s and commentid=%s and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by relativetime desc",
+			$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",$pageid,$p[$i]["id"]);
+		}else{
+			$sql=sprintf("select *,(good+bad) as rank from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad%s from u_comment where pageid=%s and commentid=%s and userid=%s and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by relativetime desc",
+			$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",$pageid,$p[$i]["id"],$uid);
+		}
+		
 		$o->query($sql);
 		while($f=$o->fetch_array()){
 			
@@ -98,6 +128,7 @@ for($i=0;$i<count($p);$i++){
 			$s[$i]["reply"]["comments"][$n]["date"]=str_replace(" ","T",$f["isotime"]);
 			$s[$i]["reply"]["comments"][$n]["display_date"]=get_relativetime($f["relativetime"],$f["date"],$f["weekday"]);
 			$s[$i]["reply"]["comments"][$n]["body"]=mod_HTML($f["comment"],2);
+			$s[$i]["reply"]["comments"][$n]["body_escape"]=mod_HTML($f["comment"]);
 			
 			$s[$i]["reply"]["comments"][$n]["is_like"]=$f["isreaction"]!=1?false:true;
 			$s[$i]["reply"]["comments"][$n]["is_bad"]=$f["isreaction"]!=2?false:true;
