@@ -46,6 +46,7 @@ if(strlen($pageid)>0){
 						$s["date"]=str_replace(" ","T",$f["isotime"]);
 						$s["display_date"]=get_relativetime($f["relativetime"],$f["date"],$f["weekday"]);
 						$s["body"]=mod_HTML($f["comment"],2);
+						$s["body_escape"]=mod_HTML($f["comment"]);
 						
 						$s["is_like"]=false;
 						$s["is_bad"]=false;
