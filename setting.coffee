@@ -73,6 +73,10 @@ babels =
   src: '_src/babels/src'
   compile: '_src/babels/compile'
 
+# babel 実行ファイル
+exe =
+  src: '_src/babels_exe/src'
+  compile: '_src/babels_exe/compile'
 
 # libs
 # bower_exports から concat せず使用するライブラリの設置階層
@@ -211,6 +215,7 @@ module.exports =
       root: sprite
     htdocs: htdocs
     babels: babels
+    exe: exe
 
   gulp: gulp
   $: $

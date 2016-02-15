@@ -109,3 +109,56 @@ gulp.task 'webpack:babels:main:build', ( cb ) ->
     cb
   )
   return
+
+# --------------------------------------------
+# exe 実行 file
+# --------------------------------------------
+gulp.task 'webpack:babels:exe:babel:dev', ( cb ) ->
+  conf = Object.create config
+
+  conf.plugins = [
+    new webpack.optimize.DedupePlugin()
+#    new webpack.optimize.UglifyJsPlugin compress: warnings: true
+  ]
+  conf.entry = conf.entry + '/_src/babels_exe/compile/exe.js'
+  conf.output.filename = 'exe.bundle.js'
+
+  webpack conf, ( err, stats ) ->
+    if ( err )
+      throw new $.util.PluginError( 'webpack', err )
+
+    $.util.log '[webpack]', stats.toString colors: true, progress: true
+    cb()
+  return
+
+gulp.task 'webpack:babels:exe:babel:build', ( cb ) ->
+  conf = Object.create config
+
+  conf.plugins = [
+    new webpack.optimize.DedupePlugin()
+    new webpack.optimize.UglifyJsPlugin compress: warnings: true
+  ]
+  conf.entry = conf.entry + '/_src/babels_exe/compile/exe.js'
+  conf.output.filename = 'exe.bundle.js'
+
+  webpack conf, ( err, stats ) ->
+    if ( err )
+      throw new $.util.PluginError( 'webpack', err )
+
+    $.util.log '[webpack]', stats.toString colors: true, progress: true
+    cb()
+  return
+
+gulp.task 'webpack:babels:exe:dev', ( cb ) ->
+  runSequence(
+    'webpack:babels:exe:babel:dev'
+    cb
+  )
+  return
+
+gulp.task 'webpack:babels:exe:build', ( cb ) ->
+  runSequence(
+    'webpack:babels:exe:babel:build'
+    cb
+  )
+  return

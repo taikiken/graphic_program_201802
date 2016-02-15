@@ -52,7 +52,7 @@ export class App {
   /**
    * <p>**Api 接続先** を変更します</p>
    * ローカルテストモードにします<br>
-   * localhost/api へ接続します<br>
+   * <code>http://undotsushin.local/</code> へ接続します<br>
    * 使用しないでください</p>
    */
   static test():void {

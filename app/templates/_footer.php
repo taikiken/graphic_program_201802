@@ -46,8 +46,26 @@
   </footer><!-- /.foot-sec -->
 </div><!-- /.whole -->
 <script src="/assets/js/bundle/main.bundle.js"></script>
-<script src="/assets/js/xxx.bundle.js"></script>
+<script>
+( function () {
 
+  'use strict';
+
+  // -------------------------------------------
+  // dev code
+  // ToDo: 本番で削除
+  // -------------------------------------------
+  var UT = self.UT;
+
+  // local develop mode
+  UT.app.App.develop();
+
+  // sign in
+  UT.app.User.login();
+
+}() );
+</script>
+<script src="/assets/js/bundle/exe.bundle.js"></script>
 
 </body>
 </html>

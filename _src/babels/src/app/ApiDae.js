@@ -31,10 +31,10 @@ let apiRoot = ( port:string ) => {
   switch ( Env.mode ) {
 
     case Env.LOCAL :
-      return `http://192.168.33.50/`;
+      return `http://192.168.33.50`;
 
     case Env.TEST :
-      return `http://0.0.0.0:${n + 2}`;
+      return `http://undotsushin.local`;
 
     case Env.DEVELOP :
       return 'http://undotsushin.com';

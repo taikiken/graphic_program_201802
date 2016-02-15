@@ -69,6 +69,7 @@ gulp.task 'babels:dev', (cb) ->
   runSequence(
     'babels:make'
     'webpack:babels:main:dev'
+    'bundle:copy'
     cb
   )
   return
@@ -78,6 +79,27 @@ gulp.task 'babels:build', (cb) ->
   runSequence(
     'babels:make'
     'webpack:babels:main:build'
+    'bundle:copy'
+    cb
+  )
+  return
+
+# exe dev
+gulp.task 'exe:dev', (cb) ->
+  runSequence(
+    'exe:make'
+    'webpack:babels:exe:dev'
+    'bundle:copy'
+    cb
+  )
+  return
+
+# exe build
+gulp.task 'exe:build', (cb) ->
+  runSequence(
+    'exe:make'
+    'webpack:babels:exe:build'
+    'bundle:copy'
     cb
   )
   return

@@ -8,14 +8,16 @@
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  *
- * @requires React, Sagen. IE: fetch, es5-promise
+ * @requires React. IE: fetch, es5-promise
  *
  */
 'use strict';
 
 // -------------------------------------
 //  main
-//    target for babel compile
+//
+//  undotsushin.com library
+//  メインライブラリとして使用します
 // -------------------------------------
 
 // -------------------------------------

@@ -565,7 +565,7 @@ var Router = exports.Router = function (_EventDispatcher) {
       return _instance;
     }
     // ---------------------------------------------------
-    //  deprecated, 互換のために残します
+    //  deprecated, 以下互換のために残します
     //  ToDo: 問題ないことが確認できたら削除する
     // ---------------------------------------------------
     /**
