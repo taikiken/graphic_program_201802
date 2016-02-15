@@ -25,7 +25,7 @@ var React = self.React;
 // let ReactDOM = self.ReactDOM;
 
 var ReplyForm = exports.ReplyForm = React.createClass({
-  displayName: 'ReplyForm',
+  displayName: 'CommentForm',
 
   propType: {
     // unique id（識別のために必要）

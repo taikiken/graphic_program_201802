@@ -11,6 +11,11 @@
  */
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.User = undefined;
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -22,11 +27,6 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.User = undefined;
 
 var _Cookie = require('../net/Cookie');
 
@@ -125,7 +125,9 @@ var User = exports.User = function () {
           case _Env.Env.TEST:
           case _Env.Env.DEVELOP:
             // return [ 'fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f' ][ Math.floor( Math.random() * 3 ) ];
-            return 'fee1a989f120b99cec0f8206d68f6365';
+            // profile picture ない 山際武
+            // return 'fee1a989f120b99cec0f8206d68f6365';
+            return '608c8868d866a46fa3ae6566ce62e0be';
 
           case _Env.Env.PRODUCTION:
           default:

@@ -43,7 +43,7 @@ export class Ajax {
   //  METHOD
   // ---------------------------------------------------
   /**
-   *
+   * Ajax request を開始します
    * @param {string} url request URL
    * @param {string} method POST|GET...
    * @param {Function} resolve success callback
@@ -117,8 +117,11 @@ export class Ajax {
 
         // bad response, サーバーからのエラーメッセージ
         let error = new Error( `status:${status}, message:${response.statusText}` );
-        error.response = response;
-        error.number = status;
+        /*
+         error.response = result.response;
+         error.number = result.status.code;
+         */
+        error.result = result;
         throw error;
 
       }
@@ -149,6 +152,7 @@ export class Ajax {
 
       }
 
+      // success callback
       _this.enable();
       resolve( result );
 
@@ -157,6 +161,7 @@ export class Ajax {
 
       // 何か問題発生
       // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
+      // error callback
       _this.enable();
       reject( error );
 

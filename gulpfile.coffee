@@ -132,7 +132,7 @@ gulp.task 'app:watch', ->
   # watch
   gulp.watch [ sprite + '/**/*.{png,jpg,gif,svg}' ], [ 'sprite:build' ]
 
-  gulp.watch [ app + '/**/*.html' ], 'html:build'
+#  gulp.watch [ app + '/**/*.html' ], 'html:build'
   gulp.watch [ app + '/**/*.{scss,css}', scss + '/**/*.scss' ], [ 'css:dev' ]
   gulp.watch [ app + '/**/*.js' ], [ 'js:dev' ]
   gulp.watch [ app + '/**/*.{png,jpg,gif,svg}' ], [ 'image:copy' ]
@@ -154,7 +154,7 @@ gulp.task 'copy', (cb) ->
     [
       'bundle:copy'
       'libs:copy'
-      'html:build'
+#      'html:build'
       'js:dev'
       'image:copy'
       'css:dev'
@@ -180,7 +180,7 @@ gulp.task 'default', (cb) ->
     [
       'bundle:copy'
       'libs:copy'
-      'html:build'
+#      'html:build'
       'js:build'
       'image:build'
       'css:build'

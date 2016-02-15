@@ -11,6 +11,11 @@
  */
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Scroll = undefined;
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -31,17 +36,13 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Scroll = undefined;
-
 var _EventDispatcher2 = require('../event/EventDispatcher');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = null;
 var _instance = null;
+var _watch = false;
 
 /**
  * scroll に関する処理
@@ -78,17 +79,33 @@ var Scroll = exports.Scroll = function (_EventDispatcher) {
   // ---------------------------------------------------
   //  method
   // ---------------------------------------------------
+  /**
+   * window scroll 監視を開始します
+   */
 
   (0, _createClass3.default)(Scroll, [{
     key: 'start',
     value: function start() {
-      window.addEventListener('scroll', this.boundScroll, false);
+      if (!_watch) {
+        _watch = true;
+        window.addEventListener('scroll', this.boundScroll, false);
+      }
     }
+    /**
+     * window scroll 監視を止めます
+     */
+
   }, {
     key: 'stop',
     value: function stop() {
+      _watch = false;
       window.removeEventListener('scroll', this.boundScroll);
     }
+    /**
+     * window.onscroll event handler
+     * @param event
+     */
+
   }, {
     key: 'onScroll',
     value: function onScroll(event) {

@@ -13,13 +13,13 @@
 'use strict';
 
 import {Model} from '../Model';
-import {Reply} from '../../action/comment/Reply';
+import {Comment} from '../../action/comment/Comment';
 import {Result} from '../../data/Result';
 
 /**
  * コメント送信
  */
-export class ModelReply extends Model {
+export class ModelComment extends Model {
   /**
    * コメント送信
    * @param {string} articleId 記事 id
@@ -28,7 +28,7 @@ export class ModelReply extends Model {
    */
   constructor( articleId:string, formData:FormData, option:Object = {} ) {
     super( option );
-    this._action = new Reply( articleId, formData, this.done.bind( this ), this.fail.bind( this ) );
+    this._action = new Comment( articleId, formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

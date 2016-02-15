@@ -13,6 +13,11 @@
 
 // app
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewArchiveMasonryInfinite = undefined;
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -32,11 +37,6 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewArchiveMasonryInfinite = undefined;
 
 var _Empty = require('../app/const/Empty');
 
@@ -131,7 +131,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
    * @return {Element|*} more button root element を返します
    */
 
@@ -662,9 +661,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
               var commentsPopular = dae.commentsPopular;
               var commentsTotal = dae.commentsCount;
               var thumbnail = undefined;
-              var figureTag = undefined;
-
-              // console.log( 'ArchiveDom ', dae.id, dae.commentsCount, dae.commentsPopular );
 
               thumbnail = dae.media.images.medium;
 
@@ -677,21 +673,6 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                 thumbnail = _Empty.Empty.IMG_MIDDLE;
               }
 
-              // media type で thumbnail 切替
-              /*
-              if ( dae.mediaType === 'image' ) {
-                 // type: image
-                figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
-                  <img src={thumbnail} alt={dae.title}/>
-                </figure>;
-               } else {
-                 // type: video
-                figureTag = <figure className={'post-thumb post-thumb-' + dae.mediaType}>
-                  <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
-                  <img src={thumbnail} alt={dae.title}/>
-                </figure>;
-               }
-              */
               // unique key(React)にarticle id(number)記事Idを使用します
               return React.createElement(
                 'div',

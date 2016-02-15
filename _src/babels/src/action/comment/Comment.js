@@ -21,7 +21,7 @@ import {Path} from '../../app/const/Path';
 /**
  * FormData を送る token 付き Action
  */
-export class Reply extends ActionAuthBehavior {
+export class Comment extends ActionAuthBehavior {
   /**
    * <h3>コメント送信</h3>
    * FormData を送る token 付き Action

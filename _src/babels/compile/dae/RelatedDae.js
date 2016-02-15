@@ -13,6 +13,11 @@
 
 // 記事詳細 関連記事結果
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RelatedDae = undefined;
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,11 +25,6 @@ var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RelatedDae = undefined;
 
 var _Safety = require('../data/Safety');
 

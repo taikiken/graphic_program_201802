@@ -19,7 +19,7 @@ import {Safety} from '../../data/Safety';
 import {Result} from '../../data/Result';
 
 // model
-import {ModelReply} from '../../model/comment/ModelReply';
+import {ModelComment} from '../../model/comment/ModelComment';
 import {Model} from '../../model/Model';
 
 // React
@@ -41,7 +41,7 @@ let HiddenCommentId = React.createClass( {
 } );
 
 // comment form
-let ReplyForm = React.createClass( {
+let CommentForm = React.createClass( {
   propTypes: {
     toggle: React.PropTypes.string.isRequired,
     independent: React.PropTypes.bool.isRequired,
@@ -55,7 +55,7 @@ let ReplyForm = React.createClass( {
     };
   },
   getInitialState: function() {
-    this.reply = null;
+    this.comment = null;
 
     return {
       loading: '',
@@ -131,13 +131,14 @@ let ReplyForm = React.createClass( {
     option[ Model.COMPLETE ] = this.done;
     option[ Model.UNDEFINED_ERROR ] = this.done.fail;
     option[ Model.RESPONSE_ERROR ] = this.done.fail;*/
+    let comment;
 
-    let reply = new ModelReply( this.props.articleId, formData );
-    this.reply = reply;
-    reply.on( Model.COMPLETE, this.done );
-    reply.on( Model.UNDEFINED_ERROR, this.fail );
-    reply.on( Model.RESPONSE_ERROR, this.fail );
-    reply.start();
+    let comment = new ModelComment( this.props.articleId, formData );
+    this.comment = comment;
+    comment.on( Model.COMPLETE, this.done );
+    comment.on( Model.UNDEFINED_ERROR, this.fail );
+    comment.on( Model.RESPONSE_ERROR, this.fail );
+    comment.start();
   },
   done: function( event ) {
     console.log( 'done', event );
@@ -151,11 +152,11 @@ let ReplyForm = React.createClass( {
   dispose: function() {
     // event unbind
     this.setState( {loading: ''} );
-    let reply = this.reply;
-    if ( reply !== null ) {
-      reply.off( Model.COMPLETE, this.done );
-      reply.off( Model.UNDEFINED_ERROR, this.fail );
-      reply.off( Model.RESPONSE_ERROR, this.fail );
+    let comment = this.comment;
+    if ( comment !== null ) {
+      comment.off( Model.COMPLETE, this.done );
+      comment.off( Model.UNDEFINED_ERROR, this.fail );
+      comment.off( Model.RESPONSE_ERROR, this.fail );
     }
   }
 } );
@@ -209,7 +210,7 @@ let OpenerDom = React.createClass( {
 } );
 
 // wrapper dom + form
-export let ReplyNode = React.createClass( {
+export let CommentFormNode = React.createClass( {
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,
     // コメント送信者（自分の）profile picture
@@ -291,7 +292,7 @@ export let ReplyNode = React.createClass( {
             actionMessage={actionMessage}
             callback={this.openerClick}
           />
-          <ReplyForm
+          <CommentForm
             toggle={this.state.toggle}
             independent={this.props.independent}
             icon={this.props.icon}

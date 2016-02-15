@@ -10,6 +10,11 @@
  */
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewCommentForm = undefined;
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -30,11 +35,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ViewCommentForm = undefined;
-
 var _View2 = require('../View');
 
 var _User = require('../../app/User');
@@ -47,8 +47,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // let React = self.React;
 var ReactDOM = self.ReactDOM;
 
+/**
+ * 記事へのコメント
+ */
+
 var ViewCommentForm = exports.ViewCommentForm = function (_View) {
   (0, _inherits3.default)(ViewCommentForm, _View);
+
+  /**
+   * 記事へのコメントフォーム
+   * @param {Element} element root element
+   * @param {Number} articleId 記事Id
+   * @param {string} icon ユーザー画像パス
+   */
 
   function ViewCommentForm(element, articleId, icon) {
     (0, _classCallCheck3.default)(this, ViewCommentForm);
@@ -59,12 +70,20 @@ var ViewCommentForm = exports.ViewCommentForm = function (_View) {
     _this._icon = icon;
     return _this;
   }
+  /**
+   * render start
+   */
 
   (0, _createClass3.default)(ViewCommentForm, [{
     key: 'start',
     value: function start() {
       this.render(this._articleId);
     }
+    /**
+     * フォーム生成を開始します
+     * @param {string} id 記事Id
+     */
+
   }, {
     key: 'render',
     value: function render(id) {

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>Ajax Auth by fetch</title>
+  <link rel="stylesheet" href="/assets/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <style>
+    body {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    ul {
+      list-style: disc;
+      margin: 0 0 1em 1em;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight:700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 24px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    h2 {
+      font-size: 18px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+    }
+    a {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<pre id="c1">Ajax Auth</pre>
+
+<dl>
+  <dt>url</dt>
+  <dd id="url"></dd>
+  <dt>token</dt>
+  <dd id="token"></dd>
+</dl>
+
+<section id="f1">
+  <pre id="result"></pre>
+</section>
+
+<div id="user-profile-container"></div><!--/header-user-->
+
+<script src="/assets/js/bundle/main.bundle.js"></script>
+<script>
+  ( function ( window ) {
+
+    'use strict';
+    var UT = self.UT;
+
+    // ---------------------------------------------------------
+    // test code
+    // develop mode
+    UT.app.App.develop();
+
+    // sign in
+    UT.app.User.login();
+    // ---------------------------------------------------------
+
+//    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+//    headerUser.start();
+
+    var url = 'http://undotsushin.com/api/v1/users/self/';
+    var token = '608c8868d866a46fa3ae6566ce62e0be';
+
+    var headers = new Headers();
+    headers.append('Authorization','OAuth realm=undotsushin.com, oautn_token=' + token);
+//    headers.append('method','GET');
+//    headers.append('mode','cors');
+
+    console.log( 'headers authorization', headers.get('authorization') );
+    console.log( 'headers Authorization', headers.get('Authorization') );
+    console.log( 'headers authoRization', headers.get('authoRization') );
+
+    var request = new Request(
+      url, {
+        headers: headers
+//        method: 'GET',
+//        mode: 'cors'
+      }
+    );
+
+//    fetch( url, {
+//      headers: {
+//        Authorization: 'OAuth realm=undotsushin.com, oautn_token=' + token
+//      },
+//      mode: 'cors',
+//      method: 'GET'
+//    } )、
+    fetch( request )
+      .then( function(response) {
+        console.log( 'then ', response, response.status );
+        $('#f1').find('pre').html( JSON.stringify(response, null, 2) );
+        $('#url' ).html(url);
+        $('#token' ).html(token);
+      } )
+      .catch( function( error ) {
+        console.log( 'error ', erro );
+      } );
+
+  }( window ) );
+</script>
+</body>
+</html>

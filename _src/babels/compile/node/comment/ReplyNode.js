@@ -54,7 +54,7 @@ var HiddenCommentId = React.createClass({
 
 // comment form
 var ReplyForm = React.createClass({
-  displayName: 'ReplyForm',
+  displayName: 'CommentForm',
 
   propTypes: {
     toggle: React.PropTypes.string.isRequired,
@@ -254,7 +254,7 @@ var OpenerDom = React.createClass({
 
 // wrapper dom + form
 var ReplyNode = exports.ReplyNode = React.createClass({
-  displayName: 'ReplyNode',
+  displayName: 'CommentFormNode',
 
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,

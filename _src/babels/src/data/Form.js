@@ -32,9 +32,8 @@ export class Form {
     }
 
   }
-
   /**
-   *
+   * 配列からFormDataを作成します
    * @param {Array<Data>} option [data...] key: value 値 配列
    * @return {FormData} 引数 option（配列）から作成したFormData instance を返します
    */

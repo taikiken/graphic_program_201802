@@ -50,7 +50,9 @@ htdocs = dir.htdocs
 # --------------------------------------------
 
 gulp.task 'lec:build', ->
-  return gulp.src htdocs + '/**/*.{html,css,js,svg}'
+  return gulp.src [
+    htdocs + '/assets/**/*.{html,css,js,svg}'
+  ]
   .pipe $.lineEndingCorrector verbose:true, eolc: 'LF', encoding:'utf8'
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** lec:build ***'

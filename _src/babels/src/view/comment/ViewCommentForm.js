@@ -13,7 +13,7 @@
 import {View} from '../View';
 import {User} from '../../app/User';
 
-import {ReplyNode} from '../../node/comment/ReplyNode';
+import {CommentFormNode} from '../../node/comment/CommentFormNode';
 
 // React
 // let React = self.React;
@@ -46,7 +46,7 @@ export class ViewCommentForm extends View {
    */
   render( id:string ):void {
     ReactDOM.render(
-      <ReplyNode
+      <CommentFormNode
         uniqueId={'comment-to-' + id}
         icon={this._icon}
         articleId={id}

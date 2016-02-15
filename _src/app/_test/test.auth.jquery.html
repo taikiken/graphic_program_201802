@@ -40,7 +40,7 @@
 </head>
 <body>
 
-<pre id="c1">Ajax Auth</pre>
+<pre id="c1">Ajax Auth by Fetch</pre>
 
 <dl>
   <dt>url</dt>
@@ -60,8 +60,11 @@
     'use strict';
     var data;
 
-    var url = 'http://undotsushin.com/api/v1/articles/self?offset=0&length=10';
-    var token = 'fee1a989f120b99cec0f8206d68f6365';
+//    var url = 'http://undotsushin.com/api/v1/articles/self?offset=0&length=10';
+    // user information
+    var url = 'http://undotsushin.com/api/v1/users/self/';
+//    var token = 'fee1a989f120b99cec0f8206d68f6365';
+    var token = '608c8868d866a46fa3ae6566ce62e0be';
 
     $.ajax({
       type:'GET',

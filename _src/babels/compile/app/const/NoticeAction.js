@@ -11,6 +11,11 @@
  */
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NoticeAction = undefined;
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -23,11 +28,6 @@ var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NoticeAction = undefined;
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -37,9 +37,13 @@ var _message = {
   bad: 'Bad',
   notice: '通知'
 };
+/**
+ * <h3>お知らせ定型文</h3>
+ */
 
 var NoticeAction = exports.NoticeAction = function () {
   /**
+   *
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
