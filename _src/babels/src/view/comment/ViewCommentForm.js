@@ -12,6 +12,8 @@
 
 import {View} from '../View';
 import {User} from '../../app/User';
+import {Empty} from '../../app/const/Empty';
+import {Safety} from '../../data/Safety';
 
 import {CommentFormNode} from '../../node/comment/CommentFormNode';
 
@@ -32,6 +34,11 @@ export class ViewCommentForm extends View {
   constructor( element:Element, articleId:Number, icon:string ) {
     super( element );
     this._articleId = String(articleId);
+    if ( !icon ) {
+      icon = Empty.USER_EMPTY;
+    } else if ( !Safety.isImg( icon ) ) {
+      icon = Empty.USER_EMPTY;
+    }
     this._icon = icon;
   }
   /**

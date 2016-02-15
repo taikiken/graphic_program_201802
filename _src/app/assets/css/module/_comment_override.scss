@@ -73,3 +73,14 @@
     }
   }
 }
+
+// ---------------------
+// form
+.form-root {
+  clear: both;
+}
+.comment-respond {
+  .form-root {
+    padding-top: 20px;
+  }
+}

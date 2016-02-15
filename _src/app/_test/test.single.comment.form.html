@@ -113,7 +113,7 @@
 
       console.log( '============ makeCommentDom start', userDae, singleDae );
 
-      var commentForm = new UT.view.comment.ViewCommentForm(document.getElementById('comment-form-container'), singleDae.id, userDae.profilePicture);
+      var commentForm = new UT.view.comment.ViewCommentForm(document.getElementById('comment-form-container'), singleDae.id, userDae.profilePicture );
       commentForm.start();
 
       // official
@@ -122,13 +122,13 @@
         official.user = userDae;
       }
       official.start();
-//
-//      // normal
-//      var normal = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-normal-container'), UT.app.const.CommentsType.NORMAL );
-//      if ( !!userDae ) {
-//        normal.user = userDae;
-//      }
-//      normal.start();
+
+      // normal
+      var normal = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-normal-container'), UT.app.const.CommentsType.NORMAL );
+      if ( !!userDae ) {
+        normal.user = userDae;
+      }
+      normal.start();
 
     }
 

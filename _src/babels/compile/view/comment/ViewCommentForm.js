@@ -39,7 +39,11 @@ var _View2 = require('../View');
 
 var _User = require('../../app/User');
 
-var _ReplyNode = require('../../node/comment/ReplyNode');
+var _Empty = require('../../app/const/Empty');
+
+var _Safety = require('../../data/Safety');
+
+var _CommentFormNode = require('../../node/comment/CommentFormNode');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67,6 +71,11 @@ var ViewCommentForm = exports.ViewCommentForm = function (_View) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCommentForm).call(this, element));
 
     _this._articleId = String(articleId);
+    if (!icon) {
+      icon = _Empty.Empty.USER_EMPTY;
+    } else if (!_Safety.Safety.isImg(icon)) {
+      icon = _Empty.Empty.USER_EMPTY;
+    }
     _this._icon = icon;
     return _this;
   }
@@ -87,7 +96,7 @@ var ViewCommentForm = exports.ViewCommentForm = function (_View) {
   }, {
     key: 'render',
     value: function render(id) {
-      ReactDOM.render(React.createElement(_ReplyNode.ReplyNode, {
+      ReactDOM.render(React.createElement(_CommentFormNode.CommentFormNode, {
         uniqueId: 'comment-to-' + id,
         icon: this._icon,
         articleId: id,

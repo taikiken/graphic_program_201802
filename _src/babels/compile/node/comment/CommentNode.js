@@ -19,14 +19,18 @@ exports.CommentNode = undefined;
 
 var _Empty = require('../../app/const/Empty');
 
+var _Safety = require('../../data/Safety');
+
 var _ReactionNode = require('./ReactionNode');
 
+var _CommentFormNode = require('./CommentFormNode');
+
 // React
+
+// node
 var React = self.React;
 
 // コメント削除・通報 削除は自分のだけ, 他人のコメントは通報
-
-// node
 var CommentAction = React.createClass({
   displayName: 'CommentAction',
 
@@ -312,7 +316,6 @@ var CommentNode = exports.CommentNode = React.createClass({
     commentDae: React.PropTypes.object.isRequired,
     // unique id（識別のために必要）
     uniqueId: React.PropTypes.string.isRequired,
-    // id: React.PropTypes.string.isRequired,
     // コメント送信者（自分の）profile picture
     icon: React.PropTypes.string,
     // user id（オプション）
@@ -336,6 +339,7 @@ var CommentNode = exports.CommentNode = React.createClass({
   },
   getDefaultProps: function getDefaultProps() {
     return {
+      icon: '',
       userId: '',
       commentId: '',
       commentCount: 0,
@@ -355,11 +359,15 @@ var CommentNode = exports.CommentNode = React.createClass({
   render: function render() {
     var commentDae = this.props.commentDae;
     var comment = commentDae.comment;
-    var parent = this.props.parent;
     var sign = this.props.sign;
 
     // user icon
-    var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
+    var picture = comment.user.profilePicture;
+    if (!picture) {
+      picture = _Empty.Empty.USER_EMPTY;
+    } else if (!_Safety.Safety.isImg(picture)) {
+      picture = _Empty.Empty.USER_EMPTY;
+    }
 
     return React.createElement(
       'div',
@@ -412,6 +420,16 @@ var CommentNode = exports.CommentNode = React.createClass({
         bad: comment.bad,
         isGood: comment.isGood,
         isBad: comment.isBad
+      }),
+      React.createElement(_CommentFormNode.CommentFormNode, {
+        uniqueId: this.props.uniqueId,
+        icon: this.props.icon,
+        articleId: this.props.articleId,
+        commentId: this.props.commentId,
+        commentCount: this.props.commentCount,
+        sign: sign,
+        parent: this.props.parent,
+        independent: this.props.independent
       })
     );
   },

@@ -1,34 +1,34 @@
 /**
- * @license inazumatv.com
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/14
- *
- * Copyright (c) 2011-2015 inazumatv.com, inc.
+ * @date 2016/02/15 - 16:39
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
+ *
  */
 'use strict';
 
 import {Model} from '../Model';
-import {Comment} from '../../action/comment/Comment';
 import {Result} from '../../data/Result';
+import {CommentReply} from '../../action/comment/CommentReply';
 
 /**
- * コメント送信
+ * コメントへのコメント送信
  */
-export class ModelComment extends Model {
+export class ModelCommentReply extends Model {
   /**
-   * コメント送信
+   * コメントへのコメント送信
    * @param {string} articleId 記事 id
+   * @param commentID
    * @param {FormData} formData comment form FormData
    * @param {Object} [option={}] optional event handler
    */
-  constructor( articleId:string, formData:FormData, option:Object = {} ) {
+  constructor( articleId:string, commentID:string, formData:FormData, option:Object = {} ) {
     super( option );
-    this._action = new Comment( articleId, formData, this.done.bind( this ), this.fail.bind( this ) );
+    this._action = new CommentReply( articleId, commentID, formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します
@@ -50,7 +50,7 @@ export class ModelComment extends Model {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[MODEL_COMMENT:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[MODEL_COMMENT_REPLY:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( Model.UNDEFINED_ERROR, error );
 
     } else {

@@ -342,7 +342,7 @@ export class ViewComments extends View {
                 /* 親コメントと子コメントのデータ形式が違う
                    合わせるために object でラップする {comment: replyComment}
                 */
-                /* independent, open 省略 */
+                /* independent, open, commentCount 省略 */
                 return (
                   <li key={`${uniqueId}-${replyComment.id}`} className="comment-item">
                     <CommentNode
@@ -390,7 +390,7 @@ export class ViewComments extends View {
 
         let total = Safety.integer( commentObject.reply.total, 0 );
         let sign = User.sign;
-        let icon = '';
+        let icon;
         let userId = '';
         let commentId = String(commentObject.comment.id);
         let articleId = this.props.articleId;
@@ -401,7 +401,11 @@ export class ViewComments extends View {
           icon = user.profilePicture;
           if ( !icon ) {
             icon = Empty.USER_EMPTY;
+          } else if ( Safety.isImg( icon ) ) {
+            icon = Empty.USER_EMPTY;
           }
+
+          // id
           userId = user.id;
           if (!userId) {
             userId = '';
@@ -422,6 +426,7 @@ export class ViewComments extends View {
                 articleId={articleId}
                 commentId={commentId}
                 commentUserId={String(commentObject.comment.user.id)}
+                commentCount={commentObject.reply.total}
                 sign={sign}
                 parent={true}
               />

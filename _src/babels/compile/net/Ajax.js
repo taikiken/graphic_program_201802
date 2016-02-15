@@ -61,7 +61,7 @@ var Ajax = exports.Ajax = function () {
     //  METHOD
     // ---------------------------------------------------
     /**
-     *
+     * Ajax request を開始します
      * @param {string} url request URL
      * @param {string} method POST|GET...
      * @param {Function} resolve success callback
@@ -132,8 +132,11 @@ var Ajax = exports.Ajax = function () {
 
           // bad response, サーバーからのエラーメッセージ
           var error = new Error('status:' + status + ', message:' + response.statusText);
-          error.response = response;
-          error.number = status;
+          /*
+           error.response = result.response;
+           error.number = result.status.code;
+           */
+          error.result = new ResultClass(response.json());
           throw error;
         }
       }).then(function (response) {
@@ -158,12 +161,14 @@ var Ajax = exports.Ajax = function () {
           throw error;
         }
 
+        // success callback
         _this.enable();
         resolve(result);
       }).catch(function (error) {
 
         // 何か問題発生
         // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
+        // error callback
         _this.enable();
         reject(error);
       });

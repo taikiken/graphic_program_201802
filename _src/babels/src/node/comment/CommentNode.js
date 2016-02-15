@@ -13,9 +13,11 @@
 'use strict';
 
 import {Empty} from '../../app/const/Empty';
+import {Safety} from '../../data/Safety';
 
 // node
 import {ReactionNode} from './ReactionNode';
+import {CommentFormNode} from './CommentFormNode';
 
 // React
 let React = self.React;
@@ -286,7 +288,6 @@ export let CommentNode = React.createClass( {
     commentDae: React.PropTypes.object.isRequired,
     // unique id（識別のために必要）
     uniqueId: React.PropTypes.string.isRequired,
-    // id: React.PropTypes.string.isRequired,
     // コメント送信者（自分の）profile picture
     icon: React.PropTypes.string,
     // user id（オプション）
@@ -310,6 +311,7 @@ export let CommentNode = React.createClass( {
   },
   getDefaultProps: function() {
     return {
+      icon: '',
       userId: '',
       commentId: '',
       commentCount: 0,
@@ -329,11 +331,15 @@ export let CommentNode = React.createClass( {
   render: function() {
     let commentDae = this.props.commentDae;
     let comment = commentDae.comment;
-    let parent = this.props.parent;
     let sign = this.props.sign;
 
     // user icon
-    let picture = comment.user.profilePicture || Empty.USER_EMPTY;
+    let picture = comment.user.profilePicture;
+    if ( !picture ) {
+      picture = Empty.USER_EMPTY;
+    } else if ( !Safety.isImg( picture ) ) {
+      picture = Empty.USER_EMPTY;
+    }
 
     return (
       <div className="comment-root">
@@ -363,6 +369,16 @@ export let CommentNode = React.createClass( {
           bad={comment.bad}
           isGood={comment.isGood}
           isBad={comment.isBad}
+        />
+        <CommentFormNode
+          uniqueId={this.props.uniqueId}
+          icon={this.props.icon}
+          articleId={this.props.articleId}
+          commentId={this.props.commentId}
+          commentCount={this.props.commentCount}
+          sign={sign}
+          parent={this.props.parent}
+          independent={this.props.independent}
         />
       </div>
     );

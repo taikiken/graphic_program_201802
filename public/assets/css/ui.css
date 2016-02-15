@@ -4903,6 +4903,12 @@ table tr.w200 > td {
   .comment-menu.open .dropMenu .dropMenu-item {
     opacity: 1; }
 
+.form-root {
+  clear: both; }
+
+.comment-respond .form-root {
+  padding-top: 20px; }
+
 /*
   sprite
 * *********************************** */

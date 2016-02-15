@@ -121,7 +121,7 @@ export class Ajax {
          error.response = result.response;
          error.number = result.status.code;
          */
-        error.result = result;
+        error.result = new ResultClass( response.json() );
         throw error;
 
       }

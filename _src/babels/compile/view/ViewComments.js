@@ -386,7 +386,7 @@ var ViewComments = exports.ViewComments = function (_View) {
               /* 親コメントと子コメントのデータ形式が違う
                  合わせるために object でラップする {comment: replyComment}
               */
-              /* independent, open 省略 */
+              /* independent, open, commentCount 省略 */
               return React.createElement(
                 'li',
                 { key: uniqueId + '-' + replyComment.id, className: 'comment-item' },
@@ -433,7 +433,7 @@ var ViewComments = exports.ViewComments = function (_View) {
 
           var total = _Safety.Safety.integer(commentObject.reply.total, 0);
           var sign = _User.User.sign;
-          var icon = '';
+          var icon = undefined;
           var userId = '';
           var commentId = String(commentObject.comment.id);
           var articleId = this.props.articleId;
@@ -444,7 +444,11 @@ var ViewComments = exports.ViewComments = function (_View) {
             icon = _user.profilePicture;
             if (!icon) {
               icon = _Empty.Empty.USER_EMPTY;
+            } else if (_Safety.Safety.isImg(icon)) {
+              icon = _Empty.Empty.USER_EMPTY;
             }
+
+            // id
             userId = _user.id;
             if (!userId) {
               userId = '';
@@ -466,6 +470,7 @@ var ViewComments = exports.ViewComments = function (_View) {
                 articleId: articleId,
                 commentId: commentId,
                 commentUserId: String(commentObject.comment.user.id),
+                commentCount: commentObject.reply.total,
                 sign: sign,
                 parent: true
               }),
