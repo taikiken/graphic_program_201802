@@ -92,7 +92,7 @@ export class ViewSingleImage extends View {
 
         if ( !!caption ) {
 
-          tag = <figcaption dangerouslySetInnerHTML={{__html: caption}} />;
+          tag = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
 
         }
 

@@ -137,7 +137,7 @@ var ViewSingleImage = exports.ViewSingleImage = function (_View) {
 
           if (!!caption) {
 
-            tag = React.createElement('figcaption', { dangerouslySetInnerHTML: { __html: caption } });
+            tag = React.createElement('figcaption', { className: 'caption', dangerouslySetInnerHTML: { __html: caption } });
           }
 
           return React.createElement(

@@ -241,7 +241,9 @@
 
       console.log( '============ makeCommentDom start', userDae, singleDae );
 
-
+      // comment form
+      var commentForm = new UT.view.comment.ViewCommentForm(document.getElementById('comment-form-container'), singleDae.id, userDae.profilePicture );
+      commentForm.start();
 
       // official
       var official = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-official-container'), UT.app.const.CommentsType.OFFICIAL );

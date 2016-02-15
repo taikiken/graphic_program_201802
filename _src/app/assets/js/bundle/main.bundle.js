@@ -47,7 +47,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-15 12:44:47
+	 * @date 2016-02-15 20:22:50
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -159,17 +159,17 @@
 
 	var _ViewComments = __webpack_require__(167);
 
-	var _ViewCommentForm = __webpack_require__(173);
+	var _ViewCommentForm = __webpack_require__(180);
 
-	var _ViewHeadline = __webpack_require__(179);
+	var _ViewHeadline = __webpack_require__(181);
 
-	var _ViewPickup = __webpack_require__(180);
+	var _ViewPickup = __webpack_require__(182);
 
-	var _ViewRanking = __webpack_require__(181);
+	var _ViewRanking = __webpack_require__(183);
 
-	var _ViewVideos = __webpack_require__(182);
+	var _ViewVideos = __webpack_require__(184);
 
-	var _Receiver = __webpack_require__(183);
+	var _Receiver = __webpack_require__(185);
 
 	/**
 	 * ToDo: 対象外OS alert
@@ -4565,9 +4565,8 @@
 	      throw new Error('Form is static Class. not use new Form().');
 	    }
 	  }
-
 	  /**
-	   *
+	   * 配列からFormDataを作成します
 	   * @param {Array<Data>} option [data...] key: value 値 配列
 	   * @return {FormData} 引数 option（配列）から作成したFormData instance を返します
 	   */
@@ -4852,7 +4851,7 @@
 	    //  METHOD
 	    // ---------------------------------------------------
 	    /**
-	     *
+	     * Ajax request を開始します
 	     * @param {string} url request URL
 	     * @param {string} method POST|GET...
 	     * @param {Function} resolve success callback
@@ -4923,8 +4922,11 @@
 
 	          // bad response, サーバーからのエラーメッセージ
 	          var error = new Error('status:' + status + ', message:' + response.statusText);
-	          error.response = response;
-	          error.number = status;
+	          /*
+	           error.response = result.response;
+	           error.number = result.status.code;
+	           */
+	          error.result = new ResultClass(response.json());
 	          throw error;
 	        }
 	      }).then(function (response) {
@@ -4949,12 +4951,14 @@
 	          throw error;
 	        }
 
+	        // success callback
 	        _this.enable();
 	        resolve(result);
 	      }).catch(function (error) {
 
 	        // 何か問題発生
 	        // 注意！Promise が永遠に続くので Dom rendering error でもここに戻る
+	        // error callback
 	        _this.enable();
 	        reject(error);
 	      });
@@ -16192,7 +16196,7 @@
 
 	          if (!!caption) {
 
-	            tag = React.createElement('figcaption', { dangerouslySetInnerHTML: { __html: caption } });
+	            tag = React.createElement('figcaption', { className: 'caption', dangerouslySetInnerHTML: { __html: caption } });
 	          }
 
 	          return React.createElement(
@@ -17332,7 +17336,7 @@
 	              /* 親コメントと子コメントのデータ形式が違う
 	                 合わせるために object でラップする {comment: replyComment}
 	              */
-	              /* independent, open 省略 */
+	              /* independent, open, commentCount 省略 */
 	              return React.createElement(
 	                'li',
 	                { key: uniqueId + '-' + replyComment.id, className: 'comment-item' },
@@ -17379,7 +17383,7 @@
 
 	          var total = _Safety.Safety.integer(commentObject.reply.total, 0);
 	          var sign = _User.User.sign;
-	          var icon = '';
+	          var icon = undefined;
 	          var userId = '';
 	          var commentId = String(commentObject.comment.id);
 	          var articleId = this.props.articleId;
@@ -17390,7 +17394,11 @@
 	            icon = _user.profilePicture;
 	            if (!icon) {
 	              icon = _Empty.Empty.USER_EMPTY;
+	            } else if (_Safety.Safety.isImg(icon)) {
+	              icon = _Empty.Empty.USER_EMPTY;
 	            }
+
+	            // id
 	            userId = _user.id;
 	            if (!userId) {
 	              userId = '';
@@ -17412,6 +17420,7 @@
 	                articleId: articleId,
 	                commentId: commentId,
 	                commentUserId: String(commentObject.comment.user.id),
+	                commentCount: commentObject.reply.total,
 	                sign: sign,
 	                parent: true
 	              }),
@@ -18126,14 +18135,18 @@
 
 	var _Empty = __webpack_require__(137);
 
+	var _Safety = __webpack_require__(44);
+
 	var _ReactionNode = __webpack_require__(155);
 
+	var _CommentFormNode = __webpack_require__(173);
+
 	// React
+
+	// node
 	var React = self.React;
 
 	// コメント削除・通報 削除は自分のだけ, 他人のコメントは通報
-
-	// node
 	var CommentAction = React.createClass({
 	  displayName: 'CommentAction',
 
@@ -18419,7 +18432,6 @@
 	    commentDae: React.PropTypes.object.isRequired,
 	    // unique id（識別のために必要）
 	    uniqueId: React.PropTypes.string.isRequired,
-	    // id: React.PropTypes.string.isRequired,
 	    // コメント送信者（自分の）profile picture
 	    icon: React.PropTypes.string,
 	    // user id（オプション）
@@ -18443,6 +18455,7 @@
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
+	      icon: '',
 	      userId: '',
 	      commentId: '',
 	      commentCount: 0,
@@ -18462,11 +18475,15 @@
 	  render: function render() {
 	    var commentDae = this.props.commentDae;
 	    var comment = commentDae.comment;
-	    var parent = this.props.parent;
 	    var sign = this.props.sign;
 
 	    // user icon
-	    var picture = comment.user.profilePicture || _Empty.Empty.USER_EMPTY;
+	    var picture = comment.user.profilePicture;
+	    if (!picture) {
+	      picture = _Empty.Empty.USER_EMPTY;
+	    } else if (!_Safety.Safety.isImg(picture)) {
+	      picture = _Empty.Empty.USER_EMPTY;
+	    }
 
 	    return React.createElement(
 	      'div',
@@ -18519,6 +18536,16 @@
 	        bad: comment.bad,
 	        isGood: comment.isGood,
 	        isBad: comment.isBad
+	      }),
+	      React.createElement(_CommentFormNode.CommentFormNode, {
+	        uniqueId: this.props.uniqueId,
+	        icon: this.props.icon,
+	        articleId: this.props.articleId,
+	        commentId: this.props.commentId,
+	        commentCount: this.props.commentCount,
+	        sign: sign,
+	        parent: this.props.parent,
+	        independent: this.props.independent
 	      })
 	    );
 	  },
@@ -18528,111 +18555,6 @@
 
 /***/ },
 /* 173 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/14
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ViewCommentForm = undefined;
-
-	var _getPrototypeOf = __webpack_require__(66);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(71);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(72);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _View2 = __webpack_require__(132);
-
-	var _User = __webpack_require__(78);
-
-	var _ReplyNode = __webpack_require__(174);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// React
-	// let React = self.React;
-	var ReactDOM = self.ReactDOM;
-
-	/**
-	 * 記事へのコメント
-	 */
-
-	var ViewCommentForm = exports.ViewCommentForm = function (_View) {
-	  (0, _inherits3.default)(ViewCommentForm, _View);
-
-	  /**
-	   * 記事へのコメントフォーム
-	   * @param {Element} element root element
-	   * @param {Number} articleId 記事Id
-	   * @param {string} icon ユーザー画像パス
-	   */
-
-	  function ViewCommentForm(element, articleId, icon) {
-	    (0, _classCallCheck3.default)(this, ViewCommentForm);
-
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCommentForm).call(this, element));
-
-	    _this._articleId = String(articleId);
-	    _this._icon = icon;
-	    return _this;
-	  }
-	  /**
-	   * render start
-	   */
-
-	  (0, _createClass3.default)(ViewCommentForm, [{
-	    key: 'start',
-	    value: function start() {
-	      this.render(this._articleId);
-	    }
-	    /**
-	     * フォーム生成を開始します
-	     * @param {string} id 記事Id
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render(id) {
-	      ReactDOM.render(React.createElement(_ReplyNode.ReplyNode, {
-	        uniqueId: 'comment-to-' + id,
-	        icon: this._icon,
-	        articleId: id,
-	        sign: _User.User.sign,
-	        independent: true
-	      }), this.element);
-	    }
-	  }]);
-	  return ViewCommentForm;
-	}(_View2.View);
-
-/***/ },
-/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18651,9 +18573,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ReplyNode = undefined;
+	exports.CommentFormNode = undefined;
 
-	var _ReplyStatus = __webpack_require__(175);
+	var _ReplyStatus = __webpack_require__(174);
 
 	var _Empty = __webpack_require__(137);
 
@@ -18663,25 +18585,31 @@
 
 	var _Result = __webpack_require__(87);
 
-	var _ModelReply = __webpack_require__(176);
+	var _ModelComment = __webpack_require__(175);
+
+	var _ModelCommentReply = __webpack_require__(178);
 
 	var _Model = __webpack_require__(124);
 
 	// React
+	var React = self.React;
 
 	// model
-	var React = self.React;
+
 	var ReactDOM = self.ReactDOM;
 
 	var HiddenCommentId = React.createClass({
 	  displayName: 'HiddenCommentId',
 
 	  propTypes: {
+	    independent: React.PropTypes.bool.isRequired,
 	    commentId: React.PropTypes.string.isRequired
 	  },
 	  render: function render() {
 	    var commentId = this.props.commentId;
-	    if (commentId === '' || commentId === '0') {
+
+	    if (this.props.independent || commentId === '' || commentId === '0') {
+	      // 記事コメント or commentId がない
 	      return null;
 	    } else {
 	      return React.createElement('input', { type: 'hidden', name: 'commend_id', value: this.props.commentId });
@@ -18690,10 +18618,11 @@
 	});
 
 	// comment form
-	var ReplyForm = React.createClass({
-	  displayName: 'ReplyForm',
+	var CommentForm = React.createClass({
+	  displayName: 'CommentForm',
 
 	  propTypes: {
+	    uniqueId: React.PropTypes.string.isRequired,
 	    toggle: React.PropTypes.string.isRequired,
 	    independent: React.PropTypes.bool.isRequired,
 	    icon: React.PropTypes.string.isRequired,
@@ -18706,17 +18635,28 @@
 	    };
 	  },
 	  getInitialState: function getInitialState() {
-	    this.reply = null;
+	    this.comment = null;
+	    this.replyStatus = null;
 
 	    return {
 	      loading: '',
 	      body: '',
-	      toggle: this.props.toggle
+	      open: this.props.toggle === 'open'
 	    };
 	  },
 	  render: function render() {
 
-	    if (this.state.toggle === 'open') {
+	    if (!this.props.independent) {
+	      var commentId = this.props.commentId;
+	      if (!commentId || commentId === '0') {
+	        throw new Error('need comment Id ' + commentId);
+	      }
+	    }
+
+	    console.log('------------ Form ', this.props.uniqueId, this.state.open);
+	    if (this.state.open) {
+
+	      // user icon
 	      var picture = this.props.icon;
 	      if (!picture) {
 	        picture = _Empty.Empty.USER_PICTURE_FEATURE;
@@ -18726,7 +18666,7 @@
 
 	      return React.createElement(
 	        'div',
-	        { className: 'comment-form loading-root ' + this.state.loading },
+	        { className: 'form-root loading-root ' + this.state.loading },
 	        React.createElement(
 	          'form',
 	          { onSubmit: this.onSubmit, ref: 'form' },
@@ -18750,7 +18690,7 @@
 	            React.createElement('input', { type: 'submit', value: 'コメントを投稿' })
 	          ),
 	          React.createElement('input', { type: 'hidden', name: 'article_id', value: this.props.articleId }),
-	          React.createElement(HiddenCommentId, { commentId: this.props.commentId })
+	          React.createElement(HiddenCommentId, { independent: this.props.independent, commentId: this.props.commentId })
 	        ),
 	        React.createElement(
 	          'div',
@@ -18762,10 +18702,35 @@
 	      return null;
 	    }
 	  },
-	  componentDidMount: function componentDidMount() {},
-	  componentWillUnMount: function componentWillUnMount() {
-	    // this.setState( {loading: ''} );
+	  componentDidMount: function componentDidMount() {
+	    var replyStatus = _ReplyStatus.ReplyStatus.factory();
+	    this.replyStatus = replyStatus;
+
+	    replyStatus.on(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
+	    replyStatus.on(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
 	  },
+	  componentWillUnMount: function componentWillUnMount() {
+	    this.dispose();
+	  },
+	  // ----------------------------------------
+	  checkId: function checkId(event) {
+
+	    return this.props.uniqueId === event.id;
+	  },
+	  // ----------------------------------------
+	  // listener
+	  replyOpen: function replyOpen(event) {
+	    this.setState({ open: this.checkId(event) });
+	  },
+	  replyClose: function replyClose() {
+	    if (this.props.independent) {
+	      this.setState({ open: true });
+	    } else {
+	      this.setState({ open: false });
+	    }
+	  },
+	  // ----------------------------------------
+	  // form
 	  onBodyChange: function onBodyChange(event) {
 	    this.setState({ body: event.target.value });
 	  },
@@ -18790,36 +18755,48 @@
 	    var formNode = ReactDOM.findDOMNode(this.refs.form);
 	    var formData = _Form.Form.element(formNode);
 	    console.log('sending ===============', this.props.articleId, formNode, formData);
-	    /*
-	        let option = {};
-	        option[ Model.COMPLETE ] = this.done;
-	        option[ Model.UNDEFINED_ERROR ] = this.done.fail;
-	        option[ Model.RESPONSE_ERROR ] = this.done.fail;*/
 
-	    var reply = new _ModelReply.ModelReply(this.props.articleId, formData);
-	    this.reply = reply;
-	    reply.on(_Model.Model.COMPLETE, this.done);
-	    reply.on(_Model.Model.UNDEFINED_ERROR, this.fail);
-	    reply.on(_Model.Model.RESPONSE_ERROR, this.fail);
-	    reply.start();
+	    this.replyStatus.start(this.props.uniqueId);
+
+	    var comment = undefined;
+	    if (this.props.independent) {
+	      // 記事へのコメント
+	      comment = new _ModelComment.ModelComment(this.props.articleId, formData);
+	    } else {
+	      // コメントへのコメント
+	      comment = new _ModelCommentReply.ModelCommentReply(this.props.articleId, this.props.commentId, formData);
+	    }
+	    this.comment = comment;
+	    comment.on(_Model.Model.COMPLETE, this.done);
+	    comment.on(_Model.Model.UNDEFINED_ERROR, this.fail);
+	    comment.on(_Model.Model.RESPONSE_ERROR, this.fail);
+	    comment.start();
 	  },
 	  done: function done(event) {
 	    console.log('done', event);
+	    this.replyStatus.complete(this.props.uniqueId);
 	    this.dispose();
 	  },
 	  fail: function fail(event) {
 	    var error = event.args[0];
 	    console.log('fail', error.message, error.result.status);
+	    this.replyStatus.complete(this.props.uniqueId);
 	    this.dispose();
 	  },
 	  dispose: function dispose() {
 	    // event unbind
 	    this.setState({ loading: '' });
-	    var reply = this.reply;
-	    if (reply !== null) {
-	      reply.off(_Model.Model.COMPLETE, this.done);
-	      reply.off(_Model.Model.UNDEFINED_ERROR, this.fail);
-	      reply.off(_Model.Model.RESPONSE_ERROR, this.fail);
+	    var comment = this.comment;
+	    if (comment !== null) {
+	      comment.off(_Model.Model.COMPLETE, this.done);
+	      comment.off(_Model.Model.UNDEFINED_ERROR, this.fail);
+	      comment.off(_Model.Model.RESPONSE_ERROR, this.fail);
+	    }
+
+	    var replyStatus = this.replyStatus;
+	    if (replyStatus !== null) {
+	      replyStatus.off(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
+	      replyStatus.off(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
 	    }
 	  }
 	});
@@ -18829,12 +18806,16 @@
 	  displayName: 'OpenerDom',
 
 	  propTypes: {
+	    uniqueId: React.PropTypes.string.isRequired,
 	    independent: React.PropTypes.bool.isRequired,
 	    staticMessage: React.PropTypes.string.isRequired,
 	    actionMessage: React.PropTypes.string.isRequired,
 	    callback: React.PropTypes.func.isRequired
 	  },
 	  getInitialState: function getInitialState() {
+	    this.replyStatus = null;
+	    this.canOpen = true;
+
 	    return {
 	      // reply / cancel
 	      toggle: 'reply'
@@ -18851,25 +18832,25 @@
 	          { href: '#', className: 'comment-respond-opener', onClick: this.openerClick },
 	          React.createElement(
 	            'span',
-	            null,
+	            { className: 'icon-comment' },
 	            this.props.actionMessage
 	          )
 	        );
 	      } else {
 	        return React.createElement(
 	          'p',
-	          { className: 'comment-respond-cancel' },
+	          { className: 'comment-respond-opener comment-respond-cancel' },
 	          React.createElement(
 	            'span',
-	            null,
+	            { className: 'icon-comment' },
 	            this.props.staticMessage
 	          ),
 	          React.createElement(
 	            'a',
 	            { href: '#', onClick: this.cancelClick },
 	            React.createElement(
-	              'span',
-	              null,
+	              'i',
+	              { className: 'icon-cancel' },
 	              'キャンセル'
 	            )
 	          )
@@ -18877,26 +18858,94 @@
 	      }
 	    }
 	  },
+	  componentDidMount: function componentDidMount() {
+
+	    // ---------------------------
+	    // event bind
+	    var replyStatus = _ReplyStatus.ReplyStatus.factory();
+
+	    if (!this.props.independent) {
+	      replyStatus.on(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
+	      replyStatus.on(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
+	    }
+
+	    replyStatus.on(_ReplyStatus.ReplyStatus.START, this.replyStart);
+	    replyStatus.on(_ReplyStatus.ReplyStatus.COMPLETE, this.replyComplete);
+	    this.replyStatus = replyStatus;
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+
+	    var replyStatus = this.replyStatus;
+
+	    if (!this.props.independent) {
+	      replyStatus.off(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
+	      replyStatus.off(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
+	    }
+
+	    replyStatus.off(_ReplyStatus.ReplyStatus.START, this.replyStart);
+	    replyStatus.off(_ReplyStatus.ReplyStatus.COMPLETE, this.replyComplete);
+	  },
+	  // ----------------------------------------
+	  // open / cancel click handler
 	  openerClick: function openerClick(event) {
 	    event.preventDefault();
-	    this.setState({ toggle: 'cancel' });
-	    this.props.callback('open');
+
+	    if (!this.canOpen) {
+	      return;
+	    }
+
+	    this.willOpen();
+	    this.replyStatus.open(this.props.uniqueId);
 	  },
 	  cancelClick: function cancelClick(event) {
 	    event.preventDefault();
+
+	    if (!this.canOpen) {
+	      return;
+	    }
+
+	    this.willClose();
+	    this.replyStatus.close(this.props.uniqueId);
+	  },
+	  willOpen: function willOpen() {
+	    // this.props.callback( 'open' );
+	    this.setState({ toggle: 'cancel' });
+	  },
+	  willClose: function willClose() {
 	    this.setState({ toggle: 'reply' });
-	    this.props.callback('cancel');
+	    // this.props.callback( 'close' );
+	  },
+	  // ----------------------------------------
+	  checkId: function checkId(event) {
+
+	    return this.props.uniqueId === event.id;
+	  },
+	  // ----------------------------------------
+	  // listener
+	  replyOpen: function replyOpen(event) {
+	    var mine = this.checkId(event);
+	    if (!mine) {
+	      console.log('replyOpen handler to close', this.props.uniqueId);
+	      this.willClose();
+	    }
+	  },
+	  replyClose: function replyClose(event) {},
+	  replyStart: function replyStart(event) {
+	    this.cancelClick = false;
+	  },
+	  replyComplete: function replyComplete(event) {
+	    this.cancelClick = true;
 	  }
 	});
 
 	// wrapper dom + form
-	var ReplyNode = exports.ReplyNode = React.createClass({
-	  displayName: 'ReplyNode',
+	var CommentFormNode = exports.CommentFormNode = React.createClass({
+	  displayName: 'CommentFormNode',
 
 	  propTypes: {
 	    uniqueId: React.PropTypes.string.isRequired,
 	    // コメント送信者（自分の）profile picture
-	    icon: React.PropTypes.string.isRequired,
+	    icon: React.PropTypes.string,
 	    // 記事 id
 	    articleId: React.PropTypes.string.isRequired,
 	    // コメント id（オプション）
@@ -18912,6 +18961,8 @@
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
+	      toggle: 'close',
+	      icon: '',
 	      commentId: '',
 	      commentCount: 0,
 	      parent: false,
@@ -18920,9 +18971,11 @@
 	  },
 	  getInitialState: function getInitialState() {
 	    this.replyStatus = null;
+	    this.canOpen = true;
 
 	    return {
-	      toggle: this.props.independent ? 'open' : 'close',
+	      // form 表示初期値, 記事コメント以外は閉じる
+	      // toggle: this.props.independent ? 'open' : 'close',
 	      loading: '',
 	      body: ''
 	    };
@@ -18930,7 +18983,6 @@
 	  render: function render() {
 
 	    var sign = this.props.sign;
-
 	    // ----------------------------
 	    // dom
 
@@ -18942,15 +18994,19 @@
 
 	    // -------------------------
 	    // prent or independent 何かを表示する
+	    var toggle = this.props.toggle;
+	    if (this.props.independent) {
+	      toggle = 'open';
+	    }
 
 	    var message = 'コメント';
 	    var staticMessage = '';
-	    var actionMessage = '';
+	    var actionMessage = message + 'へ返信';
 	    if (this.props.commentCount > 0) {
 	      // コメント数のみ表示
 	      staticMessage = message + ' (' + this.props.commentCount + ')';
-	      // 「返信」とコメント数を足す
-	      actionMessage = message + 'へ返信 (' + this.props.commentCount + ')';
+	      // 「返信」とコメント数
+	      actionMessage = actionMessage + ' (' + this.props.commentCount + ')';
 	    }
 
 	    if (!sign) {
@@ -18976,15 +19032,17 @@
 
 	      return React.createElement(
 	        'div',
-	        { className: commentClass + ' ' + this.state.toggle },
+	        { className: commentClass + ' comment-root' },
 	        React.createElement(OpenerDom, {
+	          uniqueId: this.props.uniqueId,
 	          independent: this.props.independent,
 	          staticMessage: staticMessage,
 	          actionMessage: actionMessage,
 	          callback: this.openerClick
 	        }),
-	        React.createElement(ReplyForm, {
-	          toggle: this.state.toggle,
+	        React.createElement(CommentForm, {
+	          uniqueId: this.props.uniqueId,
+	          toggle: toggle,
 	          independent: this.props.independent,
 	          icon: this.props.icon,
 	          articleId: this.props.articleId,
@@ -18993,76 +19051,22 @@
 	      );
 	    } //if
 	  },
-	  componentDidMount: function componentDidMount() {
-
-	    // ---------------------------
-	    // event bind
-	    var replyStatus = _ReplyStatus.ReplyStatus.factory();
-	    replyStatus.on(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
-	    replyStatus.on(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
-	    replyStatus.on(_ReplyStatus.ReplyStatus.START, this.replyStart);
-	    replyStatus.on(_ReplyStatus.ReplyStatus.COMPLETE, this.replyComplete);
-	    this.replyStatus = replyStatus;
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-
-	    var replyStatus = this.replyStatus;
-	    replyStatus.off(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
-	    replyStatus.off(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
-	    replyStatus.off(_ReplyStatus.ReplyStatus.START, this.replyStart);
-	    replyStatus.off(_ReplyStatus.ReplyStatus.COMPLETE, this.replyComplete);
-	  },
+	  componentDidMount: function componentDidMount() {},
+	  componentWillUnmount: function componentWillUnmount() {},
 	  // ----------------------------------------
 	  bodyChange: function bodyChange(event) {
-	    var value = event.target.value;
+	    // textarea value
 	    this.setState({ body: event.target.value });
 	  },
 	  openerClick: function openerClick(status) {
-
-	    switch (status) {
-
-	      case 'open':
-	        this.replyStatus.open(this.props.uniqueId);
-	        break;
-
-	      case 'close':
-	        this.replyStatus.close(this.props.uniqueId);
-	        break;
-
-	      default:
-	        console.warn('status is illegal operation. ' + status);
-	        break;
-
-	    }
-	  },
-	  checkId: function checkId(event) {
-
-	    return this.props.uniqueId === event.id;
-	  },
-	  // ----------------------------------------
-	  // listener
-	  replyOpen: function replyOpen(event) {
-	    var mine = this.checkId(event);
-	    this.setState({ open: mine });
-	  },
-	  replyClose: function replyClose(event) {
-	    var mine = this.checkId(event);
-	    if (!mine) {
-	      this.setState({ open: false });
-	    }
-	  },
-	  replyStart: function replyStart(event) {
-	    // let mine = this.checkId( event );
-	    this.setState({ loading: 'loading' });
-	  },
-	  replyComplete: function replyComplete(event) {
-	    // let mine = this.checkId( event );
-	    this.setState({ loading: '' });
+	    console.log('********** root openerClick ', this.props.uniqueId, status);
+	    // open / close が opener から送られてくる
+	    // this.setState( { toggle: status } );
 	  }
 	});
 
 /***/ },
-/* 175 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19257,7 +19261,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 176 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19277,7 +19281,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ModelReply = undefined;
+	exports.ModelComment = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -19301,7 +19305,7 @@
 
 	var _Model2 = __webpack_require__(124);
 
-	var _Reply = __webpack_require__(177);
+	var _Comment = __webpack_require__(176);
 
 	var _Result = __webpack_require__(87);
 
@@ -19311,8 +19315,8 @@
 	 * コメント送信
 	 */
 
-	var ModelReply = exports.ModelReply = function (_Model) {
-	  (0, _inherits3.default)(ModelReply, _Model);
+	var ModelComment = exports.ModelComment = function (_Model) {
+	  (0, _inherits3.default)(ModelComment, _Model);
 
 	  /**
 	   * コメント送信
@@ -19321,20 +19325,20 @@
 	   * @param {Object} [option={}] optional event handler
 	   */
 
-	  function ModelReply(articleId, formData) {
+	  function ModelComment(articleId, formData) {
 	    var option = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	    (0, _classCallCheck3.default)(this, ModelReply);
+	    (0, _classCallCheck3.default)(this, ModelComment);
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ModelReply).call(this, option));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ModelComment).call(this, option));
 
-	    _this._action = new _Reply.Reply(articleId, formData, _this.done.bind(_this), _this.fail.bind(_this));
+	    _this._action = new _Comment.Comment(articleId, formData, _this.done.bind(_this), _this.fail.bind(_this));
 	    return _this;
 	  }
 	  /**
 	   * Ajax request を開始します
 	   */
 
-	  (0, _createClass3.default)(ModelReply, [{
+	  (0, _createClass3.default)(ModelComment, [{
 	    key: 'start',
 	    value: function start() {
 
@@ -19355,7 +19359,7 @@
 
 	        // articles undefined
 	        // JSON に問題がある
-	        var error = new Error('[MODEL_REPLY:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        var error = new Error('[MODEL_COMMENT:UNDEFINED]サーバーレスポンスに問題が発生しました。');
 	        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error);
 	      } else {
 
@@ -19375,11 +19379,11 @@
 	      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error);
 	    }
 	  }]);
-	  return ModelReply;
+	  return ModelComment;
 	}(_Model2.Model);
 
 /***/ },
-/* 177 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19399,7 +19403,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Reply = undefined;
+	exports.Comment = undefined;
 
 	var _getPrototypeOf = __webpack_require__(66);
 
@@ -19421,7 +19425,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuthBehavior2 = __webpack_require__(178);
+	var _ActionAuthBehavior2 = __webpack_require__(177);
 
 	var _Api = __webpack_require__(89);
 
@@ -19437,8 +19441,8 @@
 	 * FormData を送る token 付き Action
 	 */
 
-	var Reply = exports.Reply = function (_ActionAuthBehavior) {
-	  (0, _inherits3.default)(Reply, _ActionAuthBehavior);
+	var Comment = exports.Comment = function (_ActionAuthBehavior) {
+	  (0, _inherits3.default)(Comment, _ActionAuthBehavior);
 
 	  /**
 	   * <h3>コメント送信</h3>
@@ -19449,16 +19453,16 @@
 	   * @param {Function} [reject=null] Ajax 失敗時の callback
 	   */
 
-	  function Reply(articleId, formData) {
+	  function Comment(articleId, formData) {
 	    var resolve = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 	    var reject = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
-	    (0, _classCallCheck3.default)(this, Reply);
+	    (0, _classCallCheck3.default)(this, Comment);
 
 	    if (!_Safety.Safety.isFormData(formData)) {
 	      throw new Error('need correct formData ', formData);
 	    }
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Reply).call(this, _User.User.token, _Api.Api.comment('send'), formData, resolve, reject));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Comment).call(this, _User.User.token, _Api.Api.comment('send'), formData, resolve, reject));
 
 	    _this._articleId = articleId;
 	    return _this;
@@ -19471,17 +19475,17 @@
 	   * @return {string} 作成した url を返します
 	   */
 
-	  (0, _createClass3.default)(Reply, [{
+	  (0, _createClass3.default)(Comment, [{
 	    key: 'url',
 	    get: function get() {
 	      return _Path.Path.article(this._url, this._articleId);
 	    }
 	  }]);
-	  return Reply;
+	  return Comment;
 	}(_ActionAuthBehavior2.ActionAuthBehavior);
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19604,7 +19608,345 @@
 	}(_ActionAuth2.ActionAuth);
 
 /***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/15 - 16:39
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelCommentReply = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Model2 = __webpack_require__(124);
+
+	var _Result = __webpack_require__(87);
+
+	var _CommentReply = __webpack_require__(179);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * コメントへのコメント送信
+	 */
+
+	var ModelCommentReply = exports.ModelCommentReply = function (_Model) {
+	  (0, _inherits3.default)(ModelCommentReply, _Model);
+
+	  /**
+	   * コメントへのコメント送信
+	   * @param {string} articleId 記事 id
+	   * @param commentID
+	   * @param {FormData} formData comment form FormData
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ModelCommentReply(articleId, commentID, formData) {
+	    var option = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	    (0, _classCallCheck3.default)(this, ModelCommentReply);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ModelCommentReply).call(this, option));
+
+	    _this._action = new _CommentReply.CommentReply(articleId, commentID, formData, _this.done.bind(_this), _this.fail.bind(_this));
+	    return _this;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ModelCommentReply, [{
+	    key: 'start',
+	    value: function start() {
+
+	      this.action.start();
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var response = result.response;
+
+	      if (typeof response === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[MODEL_COMMENT_REPLY:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error);
+	      } else {
+
+	        // 成功 callback
+	        this.executeSafely(_Model2.Model.COMPLETE, result);
+	      }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error);
+	    }
+	  }]);
+	  return ModelCommentReply;
+	}(_Model2.Model);
+
+/***/ },
 /* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/15 - 16:31
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CommentReply = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _ActionAuthBehavior2 = __webpack_require__(177);
+
+	var _Api = __webpack_require__(89);
+
+	var _Safety = __webpack_require__(44);
+
+	var _User = __webpack_require__(78);
+
+	var _Path = __webpack_require__(96);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * コメント返信
+	 */
+
+	var CommentReply = exports.CommentReply = function (_ActionAuthBehavior) {
+	  (0, _inherits3.default)(CommentReply, _ActionAuthBehavior);
+
+	  /**
+	   * コメント返信
+	   * @param {string} articleId 記事 id
+	   * @param {string} commentId コメント id
+	   * @param {FormData} formData body に送る FormData
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
+
+	  function CommentReply(articleId, commentId, formData) {
+	    var resolve = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+	    var reject = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
+	    (0, _classCallCheck3.default)(this, CommentReply);
+
+	    if (!_Safety.Safety.isFormData(formData)) {
+	      throw new Error('need correct formData ', formData);
+	    }
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(CommentReply).call(this, _User.User.token, _Api.Api.comment('reply'), formData, resolve, reject));
+
+	    _this._articleId = articleId;
+	    _this._commentId = commentId;
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * url を作成します
+	   * @return {string} 作成した url を返します
+	   */
+
+	  (0, _createClass3.default)(CommentReply, [{
+	    key: 'url',
+	    get: function get() {
+	      return _Path.Path.comment(_Path.Path.article(this._url, this._articleId), this._commentId);
+	    }
+	  }]);
+	  return CommentReply;
+	}(_ActionAuthBehavior2.ActionAuthBehavior);
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/14
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ViewCommentForm = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _View2 = __webpack_require__(132);
+
+	var _User = __webpack_require__(78);
+
+	var _Empty = __webpack_require__(137);
+
+	var _Safety = __webpack_require__(44);
+
+	var _CommentFormNode = __webpack_require__(173);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// React
+	// let React = self.React;
+	var ReactDOM = self.ReactDOM;
+
+	/**
+	 * 記事へのコメント
+	 */
+
+	var ViewCommentForm = exports.ViewCommentForm = function (_View) {
+	  (0, _inherits3.default)(ViewCommentForm, _View);
+
+	  /**
+	   * 記事へのコメントフォーム
+	   * @param {Element} element root element
+	   * @param {Number} articleId 記事Id
+	   * @param {string} icon ユーザー画像パス
+	   */
+
+	  function ViewCommentForm(element, articleId, icon) {
+	    (0, _classCallCheck3.default)(this, ViewCommentForm);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCommentForm).call(this, element));
+
+	    _this._articleId = String(articleId);
+	    if (!icon) {
+	      icon = _Empty.Empty.USER_EMPTY;
+	    } else if (!_Safety.Safety.isImg(icon)) {
+	      icon = _Empty.Empty.USER_EMPTY;
+	    }
+	    _this._icon = icon;
+	    return _this;
+	  }
+	  /**
+	   * render start
+	   */
+
+	  (0, _createClass3.default)(ViewCommentForm, [{
+	    key: 'start',
+	    value: function start() {
+	      this.render(this._articleId);
+	    }
+	    /**
+	     * フォーム生成を開始します
+	     * @param {string} id 記事Id
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render(id) {
+	      ReactDOM.render(React.createElement(_CommentFormNode.CommentFormNode, {
+	        uniqueId: 'comment-to-' + id,
+	        icon: this._icon,
+	        articleId: id,
+	        sign: _User.User.sign,
+	        independent: true
+	      }), this.element);
+	    }
+	  }]);
+	  return ViewCommentForm;
+	}(_View2.View);
+
+/***/ },
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19958,7 +20300,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 180 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20544,7 +20886,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 181 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20887,7 +21229,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 182 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21236,7 +21578,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 183 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
