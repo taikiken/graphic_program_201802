@@ -20,7 +20,7 @@ $s["date"]=$f["isotime"];
 $s["display_date"]=get_relativetime($f["relativetime"],$f["date"],$f["weekday"]);
 $s["title"]=mod_HTML($f["title"]);
 $s["description"]=get_summary($f["b1"],$f["body"]);
-$s["body"]=tmod($f["body"]);
+$s["body"]=preg_replace("/\n/","",$f["body"]);
 $s["body_escape"]=stripbr($f["body"]);
 $s["category"]["label"]=$f["category"]; 
 $s["category"]["slug"]=$f["slug"]; 
@@ -49,9 +49,8 @@ $s["media"]["images"]["original"]=strlen($f["img1"])>0?sprintf("%s/prg_img/raw/%
 $s["media"]["images"]["caption"]=checkstr($f["t1"],1);
 
 $s["media"]["video"]["url"]=strlen($f["video"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["video"]):"";
+$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 $s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
-
-$s["media"]["youtube"]=checkstr($f["youtube"],1);
 
 $s["user"]["id"]=(int)$f["uid"];
 $s["user"]["name"]=mod_HTML($f["name"]);
