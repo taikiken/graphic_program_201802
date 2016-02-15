@@ -21,7 +21,15 @@ let _symbol = Symbol();
 let UT = self.UT;
 let Router = UT.app.Router;
 
+/**
+ * <h3>ページ振り分け</h3>
+ * 全て static です
+ */
 export class Page {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -29,6 +37,9 @@ export class Page {
 
     }
   }
+  /**
+   * Page 初期化, UT.app.Router event を listen します
+   */
   static init():void {
 
     let router = Router.factory();
@@ -44,10 +55,17 @@ export class Page {
     router.route();
 
   }
+  /**
+   * home, index page
+   */
   static index():void {
     Index.start();
   }
-  static category( event ):void {
+  /**
+   * category page
+   * @param {Object} event
+   */
+  static category( event:Object ):void {
 
     let slug = event.slug;
     let type = event.slugType;
@@ -55,6 +73,10 @@ export class Page {
     Category.start( slug, type );
 
   }
+  /**
+   * single, detail page
+   * @param {Object} event
+   */
   static single( event ):void {
 
     let articleId = event.id;
