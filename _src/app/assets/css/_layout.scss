@@ -122,6 +122,10 @@ a {
     float: left;
 
     @at-root {
+      &-opener {
+        @include link-decoration(null, null, none, none);
+      }
+
       &-icon {
         @extend .sprite-common;
         @include sprite( $common-icon-notice );
