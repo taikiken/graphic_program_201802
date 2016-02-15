@@ -74,6 +74,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}
 }
 
+$sqla[]="select setval('repo_n_id_seq',(select max(id) from repo_n));";
+
 $sqla=implode("\n",$sqla);
 $o->query($sqla);
 
