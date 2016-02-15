@@ -2,6 +2,7 @@
 
 $domain="http://www.undotsushin.com";
 $H=getallheaders();
+$Ys=$H;
 
 $yh=explode("=",$H["Authorization"]);
 $H["Authorization"]=$yh[2];
@@ -75,12 +76,27 @@ function tmod($s){
 }
 
 function auth($c){
-	global $o;
+	
+	global $o,$Ys,$_SERVER;
+
 	if(strlen($c)>0){
 		$sql=sprintf("select id from repo_n where a15='%s'",trim($c));
 		$o->query($sql);
 		$f=$o->fetch_array();
 	}
+
+	$log=$Ys;
+	$log["REQUEST_URI"]=$_SERVER['REQUEST_URI'];
+	$log["ACCESS_TOKEN"]=$c;
+	$log["USERID"]=$f["id"];
+	$log["IP"]=$_SERVER['REMOTE_ADDR'];
+	$log["TIMESTAMP"]=date("Y-m-d H:i:s");
+	
+	$out=print_r($log,true);
+	$fp=fopen("log.txt","a");
+	fputs($fp,$out);
+	fclose($fp);
+
 	return isset($f["id"])?$f["id"]:"";
 }
 

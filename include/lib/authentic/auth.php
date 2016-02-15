@@ -41,6 +41,9 @@ while($f=$o->fetch_array()){
 	$REPOVALUE[]=mod_HTML($f["name"]);
 }
 
+unset($sv["p_repo"]);
+$sv["p_repo"]=implode(",",$_POST["p_repo"]);
+
 echo implode("<br >",$REPOVALUE);
 
 }else{
@@ -89,6 +92,9 @@ $o->query($sql);
 while($f=$o->fetch_array()){
 	$REPOVALUE[]=mod_HTML($f["name"]);
 }
+
+unset($sv["p_repo"]);
+$sv["p_repo"]=implode(",",$_POST["p_repo"]);
 
 echo implode("<br >",$REPOVALUE);
 
