@@ -26,10 +26,7 @@ echo '-->';
         <div id="single-header-container"></div>
 
         <div class="post-content">
-          <?php
-          // PHP 出力対象
-          echo '<p style="color: red">php で 出力</p>';
-          ?>
+          <?php print_r($page['post']['body']); ?>
         </div><!-- /.post-content -->
 
         <div class="sponsor-link">

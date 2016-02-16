@@ -23,6 +23,9 @@ class ViewModel {
     // meta
     'canonical'          => '',
 
+    // post
+    'post'               => '',
+
     // layout
     'template'           => '',
     'template_classname' => '',
@@ -82,7 +85,7 @@ class ViewModel {
 
 
   /**
-  * カテゴリーを取得する
+  * category  - サイト内カテゴリーを取得する
   *
   * @return array  カテゴリー一覧の配列
   */
@@ -107,7 +110,7 @@ class ViewModel {
 
 
   /**
-  * category_slugからカテゴリー情報を取得する
+  * category - category_slugからカテゴリー情報を取得する
   *
   * @param  string  $slug カテゴリースラッグ
   * @return array   該当カテゴリー情報
@@ -116,6 +119,25 @@ class ViewModel {
 
     if ( $this->default['site_categories'][$slug] ) :
       return $this->default['site_categories'][$slug];
+    endif;
+
+  }
+
+
+  /**
+  * post - 記事IDから記事情報を取得する
+  *
+  * @param  string  $id 記事IDカテゴリースラッグ
+  * @return array   記事データ
+  */
+  public function get_post($id) {
+
+    // TODO - ひとまずfile_get_contentsで取得
+    $post = file_get_contents('http://undotsushin.com/api/v1/articles/'.$id);
+
+    if ( $post ) :
+      $post = json_decode($post, true);
+      return $post['response'];
     endif;
 
   }
