@@ -140,9 +140,10 @@ let CommentMenu = React.createClass( {
     };
   },
   render: function() {
-    let others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
     if ( this.props.sign ) {
       // ログインユーザーのみ
+      let others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
+      // console.log( 'others ', others, this.props.userId, this.props.commentUserId );
       if ( this.state.show ) {
         return (
           <div className={`comment-menu ${this.state.open} ${this.state.loading}`}>
@@ -344,6 +345,7 @@ export let CommentNode = React.createClass( {
     return (
       <div className="comment-root">
         <CommentMenu
+          key={`${this.props.uniqueId}-menu`}
           sign={sign}
           userId={this.props.userId}
           commentUserId={this.props.commentUserId}

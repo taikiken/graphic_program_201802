@@ -105,6 +105,10 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
 
     var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonryInfinite).call(this, element, option));
 
+    if (!_Safety.Safety.isElement(moreElement)) {
+      console.warn('un accessible more element. ' + moreElement);
+    }
+
     if (typeof ActionClass === 'function') {
 
       _this2._action = new ActionClass(_this2.done.bind(_this2), _this2.fail.bind(_this2));

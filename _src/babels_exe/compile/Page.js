@@ -42,7 +42,17 @@ var _symbol = (0, _symbol3.default)();
 var UT = self.UT;
 var Router = UT.app.Router;
 
+/**
+ * <h3>ページ振り分け</h3>
+ * 全て static です
+ */
+
 var Page = exports.Page = function () {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
+
   function Page(target) {
     (0, _classCallCheck3.default)(this, Page);
 
@@ -51,6 +61,9 @@ var Page = exports.Page = function () {
       throw new Error('Page is static Class. not use new Page().');
     }
   }
+  /**
+   * Page 初期化, UT.app.Router event を listen します
+   */
 
   (0, _createClass3.default)(Page, null, [{
     key: 'init',
@@ -67,11 +80,20 @@ var Page = exports.Page = function () {
 
       router.route();
     }
+    /**
+     * home, index page
+     */
+
   }, {
     key: 'index',
     value: function index() {
       _Index.Index.start();
     }
+    /**
+     * category page
+     * @param {Object} event Router event object
+     */
+
   }, {
     key: 'category',
     value: function category(event) {
@@ -81,6 +103,11 @@ var Page = exports.Page = function () {
 
       _Category.Category.start(slug, type);
     }
+    /**
+     * single, detail page
+     * @param {Object} event Router event object
+     */
+
   }, {
     key: 'single',
     value: function single(event) {

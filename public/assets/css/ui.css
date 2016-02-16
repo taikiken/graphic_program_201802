@@ -4449,6 +4449,9 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.whole {
+  overflow: hidden; }
+
 .loading-root {
   position: relative; }
   .loading-root .loading-spinner {
@@ -4475,9 +4478,11 @@ table tr.w200 > td {
   top: 99999px;
   width: 340px; }
 
-.board-large .board-item .post-thumb img {
-  width: 100%;
-  height: auto; }
+.board-large .board-item .post-thumb {
+  background-color: #ccc; }
+  .board-large .board-item .post-thumb img {
+    width: 100%;
+    height: auto; }
 
 .board-item .post-thumb-video {
   position: relative;

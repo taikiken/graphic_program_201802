@@ -28,6 +28,8 @@ var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
 
+var _Dom = require('../dom/Dom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -35,7 +37,17 @@ var _symbol = (0, _symbol3.default)();
 // UT
 var UT = self.UT;
 
+/**
+ * <h3>Sidebar ranking / video 表示</h3>
+ * 全て static です
+ */
+
 var Sidebar = exports.Sidebar = function () {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
+
   function Sidebar(target) {
     (0, _classCallCheck3.default)(this, Sidebar);
 
@@ -44,6 +56,10 @@ var Sidebar = exports.Sidebar = function () {
       throw new Error('Sidebar is static Class. not use new Sidebar().');
     }
   }
+  /**
+   * sidebar ranking / video rendering 開始
+   * @param {string} [slug=all] category slug
+   */
 
   (0, _createClass3.default)(Sidebar, null, [{
     key: 'start',
@@ -51,11 +67,11 @@ var Sidebar = exports.Sidebar = function () {
       var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
 
       // ranking
-      var ranking = new UT.view.sidebar.ViewRanking(document.getElementById('widget-ranking-container'), null, slug);
+      var ranking = new UT.view.sidebar.ViewRanking(_Dom.Dom.ranking(), null, slug);
       ranking.start();
 
       // video
-      var videos = new UT.view.sidebar.ViewVideos(document.getElementById('widget-recommend-container'), null, slug);
+      var videos = new UT.view.sidebar.ViewVideos(_Dom.Dom.video(), null, slug);
       videos.start();
     }
   }]);

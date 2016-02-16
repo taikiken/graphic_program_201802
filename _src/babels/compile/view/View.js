@@ -62,6 +62,9 @@ var View = exports.View = function (_EventDispatcher) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     (0, _classCallCheck3.default)(this, View);
 
+    if (!_Safety.Safety.isElement(element)) {
+      console.warn('un accessible element. ' + element);
+    }
     option = _Safety.Safety.object(option);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(View).call(this));

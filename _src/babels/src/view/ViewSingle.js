@@ -51,6 +51,13 @@ export class ViewSingle extends View {
 
     super( element, option );
     this._action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
+    if ( !Safety.isElement( elements.related ) ) {
+      console.warn( `un accessible elements.related . ${elements.related }` );
+    }
+    if ( !Safety.isElement( elements.footer ) ) {
+      console.warn( `un accessible elements.footer . ${elements.footer }` );
+    }
+
     this._elements = elements;
     // mount event handler
     this._boundMount = this.headerMount.bind( this );

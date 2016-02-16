@@ -11,6 +11,8 @@
  */
 'use strict';
 
+// import {Header} from './Header';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -28,9 +30,9 @@ var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
 
-var _Header = require('./Header');
-
 var _Sidebar = require('./Sidebar');
+
+var _Dom = require('../dom/Dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43,6 +45,12 @@ var _prepared = 0;
 var _singleDae = null;
 var _userDae = null;
 var _viewSingle = null;
+var _headerUser = null;
+
+/**
+ * <h3>Single(detail)記事詳細</h3>
+ * 全て static です
+ */
 
 var Single = exports.Single = function () {
   function Single(target) {
@@ -53,6 +61,10 @@ var Single = exports.Single = function () {
       throw new Error('Single is static Class. not use new Single().');
     }
   }
+  /**
+   * 記事詳細, 上部 / 下部 rendering 開始
+   * @param {Number} articleId 記事 Id (:article_id)
+   */
 
   (0, _createClass3.default)(Single, null, [{
     key: 'start',
@@ -60,10 +72,11 @@ var Single = exports.Single = function () {
 
       // header
       // header.user
-      var headerUser = new UT.view.header.ViewHeaderUser(document.getElementById('user-profile-container'));
+      var headerUser = new UT.view.header.ViewHeaderUser(_Dom.Dom.profile());
       if (UT.app.User.sign) {
 
         // login user はコメント投稿可能 -> 表示アイコン必要
+        _headerUser = headerUser;
         headerUser.on(UT.view.View.BEFORE_RENDER, Single.onHeader);
       } else {
 
@@ -75,21 +88,34 @@ var Single = exports.Single = function () {
 
       // single page
       var elements = {
-        related: document.getElementById('single-related-container'),
-        footer: document.getElementById('single-footer-container')
+        related: _Dom.Dom.related(),
+        footer: _Dom.Dom.singleFooter()
       };
 
-      var single = new UT.view.ViewSingle(articleId, document.getElementById('single-header-container'), elements);
+      var single = new UT.view.ViewSingle(articleId, _Dom.Dom.singleHeader(), elements);
       _viewSingle = single;
       single.on(UT.view.View.BEFORE_RENDER, Single.before);
       single.start();
     }
+    /**
+     * header View.BEFORE_RENDER event handler
+     * <p>ユーザー: アイコン, Id 取得のために event を bind し情報を取得します</p>
+     * @param {Object} event event object
+     */
+
   }, {
     key: 'onHeader',
     value: function onHeader(event) {
+      _headerUser.on(UT.view.View.BEFORE_RENDER, Single.onHeader);
       _userDae = event.args[0];
       Single.comment();
     }
+    /**
+     * single View.BEFORE_RENDER event handler
+     * <p>記事所属カテゴリ取得のために event を bind</p>
+     * @param {Object} event event object
+     */
+
   }, {
     key: 'before',
     value: function before(event) {
@@ -100,17 +126,23 @@ var Single = exports.Single = function () {
       _singleDae = single;
 
       var slug = single.category.slug;
-      var label = single.category.label;
+      // let label = single.category.label;
 
-      // title
-      var title = new UT.view.ViewTitle(label, document.getElementById('page-title-container'));
-      title.render();
+      // title は backend output
 
       // sidebar
       _Sidebar.Sidebar.start(slug);
 
       Single.comment();
     }
+    /**
+     * **ログイン**
+     * <p>ユーザー情報, 記事 Id 必須</p>
+     *
+     * **非ログイン**
+     * <p>記事 Id 必須</p>
+     */
+
   }, {
     key: 'comment',
     value: function comment() {
@@ -120,21 +152,38 @@ var Single = exports.Single = function () {
         return;
       }
 
+      // user icon
+      // _userDae null check
+      //  _userDae.profilePicture undefined check
+      var picture = '';
+      if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
+        picture = _userDae.profilePicture;
+      }
+
+      // article id
+      var articleId = _singleDae.id;
+      var ViewComments = UT.view.ViewComments;
+
       // comment form
-      var commentForm = new UT.view.comment.ViewCommentForm(document.getElementById('comment-form-container'), _singleDae.id, _userDae.profilePicture);
+      var commentForm = new UT.view.comment.ViewCommentForm(_Dom.Dom.commentForm(), articleId, picture);
       commentForm.start();
 
       // self
+      var commentSelf = new ViewComments(articleId, _Dom.Dom.commentSelf(), UT.app.const.CommentsType.SELF);
+      if (_userDae !== null) {
+        commentSelf.user = _userDae;
+      }
+      commentSelf.start();
 
       // official
-      var official = new UT.view.ViewComments(_singleDae.id, document.getElementById('comment-official-container'), UT.app.const.CommentsType.OFFICIAL);
+      var official = new ViewComments(articleId, _Dom.Dom.commentOfficial(), UT.app.const.CommentsType.OFFICIAL);
       if (_userDae !== null) {
         official.user = _userDae;
       }
       official.start();
 
       // normal
-      var normal = new UT.view.ViewComments(_singleDae.id, document.getElementById('comment-normal-container'), UT.app.const.CommentsType.NORMAL);
+      var normal = new ViewComments(articleId, _Dom.Dom.commentNormal(), UT.app.const.CommentsType.NORMAL);
       if (_userDae !== null) {
         normal.user = _userDae;
       }

@@ -39,6 +39,7 @@ import {Title} from './app/const/Title';
 import {Data} from './data/Data';
 import {Form} from './data/Form';
 import {Result} from './data/Result';
+import {Safety} from './data/Safety';
 
 // -------------------------------------
 // net
@@ -160,7 +161,8 @@ var UT = {
   data: {
     Data: Data,
     Form: Form,
-    Result: Result
+    Result: Result,
+    Safety: Safety
   },
   util: {
     Loc: Loc,

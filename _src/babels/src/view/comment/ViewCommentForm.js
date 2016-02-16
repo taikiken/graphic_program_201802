@@ -29,17 +29,22 @@ export class ViewCommentForm extends View {
    * 記事へのコメントフォーム
    * @param {Element} element root element
    * @param {Number} articleId 記事Id
-   * @param {string} icon ユーザー画像パス
+   * @param {string} [icon=''] ユーザー画像パス
    */
-  constructor( element:Element, articleId:Number, icon:string ) {
+  constructor( element:Element, articleId:Number, icon:string = '' ) {
+
     super( element );
+
     this._articleId = String(articleId);
+
     if ( !icon ) {
       icon = Empty.USER_EMPTY;
     } else if ( !Safety.isImg( icon ) ) {
       icon = Empty.USER_EMPTY;
     }
+
     this._icon = icon;
+
   }
   /**
    * render start

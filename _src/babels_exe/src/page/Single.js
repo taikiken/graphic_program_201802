@@ -11,8 +11,9 @@
  */
 'use strict';
 
-import {Header} from './Header';
+// import {Header} from './Header';
 import {Sidebar} from './Sidebar';
+import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
@@ -23,7 +24,12 @@ let _prepared = 0;
 let _singleDae = null;
 let _userDae = null;
 let _viewSingle = null;
+let _headerUser = null;
 
+/**
+ * <h3>Single(detail)記事詳細</h3>
+ * 全て static です
+ */
 export class Single {
   constructor( target ) {
     if ( _symbol !== target ) {
@@ -32,14 +38,19 @@ export class Single {
 
     }
   }
+  /**
+   * 記事詳細, 上部 / 下部 rendering 開始
+   * @param {Number} articleId 記事 Id (:article_id)
+   */
   static start( articleId:Number ):void {
 
     // header
     // header.user
-    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    var headerUser = new UT.view.header.ViewHeaderUser( Dom.profile() );
     if ( UT.app.User.sign ) {
 
       // login user はコメント投稿可能 -> 表示アイコン必要
+      _headerUser = headerUser;
       headerUser.on( UT.view.View.BEFORE_RENDER, Single.onHeader );
 
     } else {
@@ -53,20 +64,31 @@ export class Single {
 
     // single page
     let elements = {
-      related: document.getElementById('single-related-container'),
-      footer: document.getElementById('single-footer-container')
+      related: Dom.related(),
+      footer: Dom.singleFooter()
     };
 
-    let single = new UT.view.ViewSingle( articleId, document.getElementById('single-header-container'), elements );
+    let single = new UT.view.ViewSingle( articleId, Dom.singleHeader(), elements );
     _viewSingle = single;
     single.on( UT.view.View.BEFORE_RENDER, Single.before );
     single.start();
 
   }
+  /**
+   * header View.BEFORE_RENDER event handler
+   * <p>ユーザー: アイコン, Id 取得のために event を bind し情報を取得します</p>
+   * @param {Object} event event object
+   */
   static onHeader( event ):void {
+    _headerUser.on( UT.view.View.BEFORE_RENDER, Single.onHeader );
     _userDae = event.args[ 0 ];
     Single.comment();
   }
+  /**
+   * single View.BEFORE_RENDER event handler
+   * <p>記事所属カテゴリ取得のために event を bind</p>
+   * @param {Object} event event object
+   */
   static before( event ):void {
 
     _viewSingle.off( UT.view.View.BEFORE_RENDER, Single.before );
@@ -75,11 +97,9 @@ export class Single {
     _singleDae = single;
 
     let slug = single.category.slug;
-    let label = single.category.label;
+    // let label = single.category.label;
 
-    // title
-    let title = new UT.view.ViewTitle( label, document.getElementById( 'page-title-container' ) );
-    title.render();
+    // title は backend output
 
     // sidebar
     Sidebar.start( slug );
@@ -87,6 +107,13 @@ export class Single {
     Single.comment();
 
   }
+  /**
+   * **ログイン**
+   * <p>ユーザー情報, 記事 Id 必須</p>
+   *
+   * **非ログイン**
+   * <p>記事 Id 必須</p>
+   */
   static comment():void {
     ++_prepared;
 
@@ -94,21 +121,38 @@ export class Single {
       return;
     }
 
+    // user icon
+    // _userDae null check
+    //  _userDae.profilePicture undefined check
+    let picture = '';
+    if ( _userDae !== null && typeof _userDae.profilePicture !== 'undefined' ) {
+      picture = _userDae.profilePicture;
+    }
+
+    // article id
+    let articleId = _singleDae.id;
+    let ViewComments = UT.view.ViewComments;
+
     // comment form
-    var commentForm = new UT.view.comment.ViewCommentForm(document.getElementById('comment-form-container'), _singleDae.id, _userDae.profilePicture );
+    let commentForm = new UT.view.comment.ViewCommentForm( Dom.commentForm(), articleId, picture );
     commentForm.start();
 
     // self
+    let commentSelf = new ViewComments( articleId, Dom.commentSelf(), UT.app.const.CommentsType.SELF );
+    if ( _userDae !== null ) {
+      commentSelf.user = _userDae;
+    }
+    commentSelf.start();
 
     // official
-    var official = new UT.view.ViewComments( _singleDae.id, document.getElementById('comment-official-container'), UT.app.const.CommentsType.OFFICIAL );
+    let official = new ViewComments( articleId, Dom.commentOfficial(), UT.app.const.CommentsType.OFFICIAL );
     if ( _userDae !== null ) {
       official.user = _userDae;
     }
     official.start();
 
     // normal
-    var normal = new UT.view.ViewComments( _singleDae.id, document.getElementById('comment-normal-container'), UT.app.const.CommentsType.NORMAL );
+    let normal = new ViewComments( articleId, Dom.commentNormal(), UT.app.const.CommentsType.NORMAL );
     if ( _userDae !== null ) {
       normal.user = _userDae;
     }

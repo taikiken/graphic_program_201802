@@ -133,7 +133,7 @@ var Comments = function (_OffsetAuth) {
       switch (_type) {
 
         case _CommentsType.CommentsType.SELF:
-          return Comments.min(id, resolve, reject);
+          return Comments.mine(id, resolve, reject);
 
         case _CommentsType.CommentsType.NORMAL:
           return Comments.normal(id, resolve, reject);

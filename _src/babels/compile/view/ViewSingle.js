@@ -91,6 +91,13 @@ var ViewSingle = function (_View) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
 
     _this._action = new _Single.Single(id, _this.done.bind(_this), _this.fail.bind(_this));
+    if (!_Safety.Safety.isElement(elements.related)) {
+      console.warn('un accessible elements.related . ' + elements.related);
+    }
+    if (!_Safety.Safety.isElement(elements.footer)) {
+      console.warn('un accessible elements.footer . ' + elements.footer);
+    }
+
     _this._elements = elements;
     // mount event handler
     _this._boundMount = _this.headerMount.bind(_this);

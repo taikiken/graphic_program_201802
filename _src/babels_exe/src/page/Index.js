@@ -13,13 +13,22 @@
 
 import {Header} from './Header';
 import {Sidebar} from './Sidebar';
+import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
 
+/**
+ * <h3>Home(index)</h3>
+ * 全て static です
+ */
 export class Index {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -27,6 +36,9 @@ export class Index {
 
     }
   }
+  /**
+   * home rendering 開始
+   */
   static start():void {
 
     // header
@@ -34,18 +46,18 @@ export class Index {
 
     // ---------------------------------------------------------
     // pickup
-    let pickup = new UT.view.home.ViewPickup( document.getElementById('pickup-container') );
+    let pickup = new UT.view.home.ViewPickup( Dom.pickup() );
     pickup.start();
 
     // ---------------------------------------------------------
     // headline
-    let headline = new UT.view.home.ViewHeadline( document.getElementById('headline-container') );
+    let headline = new UT.view.home.ViewHeadline( Dom.headline() );
     headline.start();
 
     // ---------------------------------------------------------
     // news
     let archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-    let archive = new UT.view.ViewArchiveMasonryInfinite( document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction );
+    let archive = new UT.view.ViewArchiveMasonryInfinite( Dom.board(), Dom.boardMore(), archiveAction );
     archive.start();
 
     // sidebar, slug なし(=all)

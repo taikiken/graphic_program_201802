@@ -53,12 +53,12 @@
       padding: 16px;
       border-radius: 8px;
     }
-
   </style>
 </head>
 <body>
 
-<h1 id="c1">React Test Single</h1>
+<h1 id="c1">React Test Single: Comment Official</h1>
+<div id="user-profile-container"></div><!--/header-user-->
 
 <section id="single"></section>
 <section id="comment-self"></section>
@@ -69,6 +69,7 @@
 <section id="comment-normal-more"></section>
 
 <section id="related"></section>
+<section id="single-footer-container"></section>
 
 <script src="/assets/js/bundle/main.bundle.js"></script>
 
@@ -88,50 +89,63 @@
     // sign in
     UT.app.User.login();
 
+    // ---------------------------------------------------------
+    // user, single JSON 両方取得後 comment の書き出しが可能
+    var prepared = 0;
+    var userDae, singleDae;
+
+    function makeCommentDom() {
+
+      ++prepared;
+
+      if ( prepared !== 2 ) {
+        return;
+      }
+
+      var comment = new UT.view.ViewComments( singleDae.id, document.getElementById('comment-self'), UT.app.const.CommentsType.SELF );
+      comment.user = userDae;
+      comment.start();
+
+    }
+
+    // ---------------------------------------------------------
+    // before header.user render
+    var memberReceiver = new UT.ui.Receiver();
+    memberReceiver.beforeRender = function( event ) {
+
+      var member = event.args[ 0 ];
+      userDae = member;
+
+      console.log( '----------------------------------------------' );
+      console.log( member );
+      console.log( '----------------------------------------------' );
+
+      makeCommentDom();
+
+    };
+
+    // ---------------------------------------------------------
+    // header.user
+    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    if ( UT.app.User.sign ) {
+
+      // login user はコメント投稿可能 -> 表示アイコン必要
+      headerUser.on( UT.view.View.BEFORE_RENDER, memberReceiver.beforeRender );
+
+    } else {
+
+      // 非ログインユーザーはアイコン取得いらない
+      ++prepared;
+
+    }
+    headerUser.start();
+
     // -------------------------------------------------
     var single;
 
-    function beforeRender( responce ) {
-      console.log( 'beforeRender ****', responce );
-
-      // comments official
-//      var official = new UT.view.ViewComments( responce.id, document.getElementById('comment-official'), UT.app.const.CommentsType.OFFICIAL );
-//      official.start();
-
-    }
-    function didMount() {
-      console.log( 'dom mount', this );
-    }
-    function errorMount( error ) {
-      console.log( 'dom errorMount', error );
-    }
-    function undefinedError( error ) {
-      console.log( 'undefinedError', error );
-    }
-    function emptyError( error ) {
-      console.log( 'emptyError', error );
-    }
-    function responseError( error ) {
-      console.log( 'responseError', error );
-
-      single.showError( 'まずい！ ' + error.name + ', ' + error.message );
-    }
-    var option = {
-      beforeRender: beforeRender,
-      didMount: didMount,
-      errorMount: errorMount,
-      undefinedError: undefinedError,
-      emptyError: emptyError,
-      responseError: responseError
-    };
-
     let elements = {
       related: document.getElementById('related'),
-      comment: {
-        'self': document.getElementById('comment-self'),
-        'official': document.getElementById('comment-official'),
-        'user': document.getElementById('comment-user')
-      }
+      footer: document.getElementById('single-footer-container')
     };
 
     // article id 30
@@ -146,11 +160,12 @@
       var single = event.args[ 0 ];
       console.log( 'singleReceiver.beforeRender ', single.id );
 
-      var normal = new UT.view.ViewComments( single.id, document.getElementById('comment-normal'), UT.app.const.CommentsType.NORMAL );
-      normal.start();
+      singleDae = single;
+      makeCommentDom();
 
     };
 
+//    single = new UT.view.ViewSingle( 34, document.getElementById('single'), elements );
     single = new UT.view.ViewSingle( 29, document.getElementById('single'), elements );
     single.on( UT.view.View.BEFORE_RENDER, singleReceiver.beforeRender );
     single.start();
