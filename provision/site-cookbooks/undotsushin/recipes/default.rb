@@ -41,10 +41,10 @@ include_recipe 'undotsushin::setup'
 
 
 # npm
-# execute "npm install -g gulp" do
-#   user "root"
-#   group "root"
-# end
+execute "npm install -g gulp" do
+  user "root"
+  group "root"
+end
 
 
 # gem
