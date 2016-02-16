@@ -71,16 +71,31 @@ foreach ($routes as $router) {
 }
 
 
+// helper
+// ==============================
+$helpers = glob( __DIR__.'/../app/helpers/*.helper.php');
+foreach ($helpers as $helper) {
+  require $helper;
+}
+
+// UA - 設定 mobile|tablet|others
+$ua      = new UserAgent();
+$app->ua = $ua->set();
+
+
 // demo
 // ==============================
-$app->get('/demo/{path:.*}', function ($request, $response, $args) {
+$app->get('/demo/{path:.*}', function ($request, $response, $args) use ( $app ) {
 
     // log
     $this->logger->info("demo '/demo'", $args);
 
     $args['request']  = $request;
     $args['response'] = $response;
-    $args['args']     = $args['path'];
+    $args['args']     = array(
+      'path' => $args['path'],
+      'ua'   => $app->ua
+    );
 
     return $this->renderer->render($response, 'demo.php', $args);
 
