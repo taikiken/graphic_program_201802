@@ -13,7 +13,8 @@
 
 let _symbol = Symbol();
 let _message = {
-  reply: 'コメント',
+  comment: '返信',
+  reply: '返信',
   good: 'Good',
   bad: 'Bad',
   notice: '通知'

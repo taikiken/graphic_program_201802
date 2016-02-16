@@ -229,27 +229,31 @@ export class ViewComments extends View {
     // --------------------------------------------
     let MoreView = React.createClass( {
       propTypes: {
-        show: React.PropTypes.bool.isRequired
+        show: React.PropTypes.bool.isRequired,
+        rest: React.PropTypes.number
       },
       getDefaultProps: function() {
         return {
-          show: false
+          show: false,
+          rest: 0
         };
       },
       getInitialState: function() {
         return {
-          loading: false,
-          show: this.props.show
+          loading: '',
+          show: this.props.show,
+          rest: this.props.rest
         };
       },
       render: function() {
 
         // hasNext: true, button を表示する？
-        if ( this.state.show ) {
+        if ( this.state.show && this.state.rest > 0 ) {
 
           return (
-            <div className={this.state.loading ? 'loading' : ''}>
-              <a href={'#more'} onClick={this.handleClick} >More View</a>
+            <div id="more" className={'comment-andmore loading-root ' + this.state.loading}>
+              <a href={'#more'} onClick={this.handleClick} >他{this.state.rest}件を表示</a>
+              <span className="loading-spinner">&nbsp;</span>
             </div>
           );
 
@@ -268,21 +272,22 @@ export class ViewComments extends View {
       handleClick: function( event ) {
         event.preventDefault();
         // loading 表示
-        this.setState( { loading: true } );
+        this.setState( { loading: 'loading' } );
         action.next();
       },
       // button 表示・非表示
-      updateShow: function( show:boolean ) {
+      updateShow: function( show:boolean, rest:Number ) {
 
-        this.setState( { show: show } );
+        this.setState( { show: show, rest: rest } );
 
       }
     } );
 
     // more button 作成関数
     // CommentsDom から呼び出す
-    let moreButton = ( show, moreElement ) => {
+    let moreButton = ( show, rest, moreElement ) => {
 
+      console.log( '========================= more button ', action.hasNext(), action );
       show = !!show;
 
       // moreElement 存在チェックを行う
@@ -292,7 +297,7 @@ export class ViewComments extends View {
         if ( _this._moreRendered === null ) {
 
           _this._moreRendered = ReactDOM.render(
-            React.createElement( MoreView, { show: show } ),
+            React.createElement( MoreView, { show: show, rest: rest } ),
             moreElement
           );
 
@@ -300,7 +305,7 @@ export class ViewComments extends View {
 
           // instance がある, render 済み
           // state を変更し button の表示・非表示を行う
-          _this._moreRendered.updateShow( show );
+          _this._moreRendered.updateShow( show, rest );
 
         }
       }
@@ -532,7 +537,10 @@ export class ViewComments extends View {
         _this.executeSafely( View.DID_MOUNT );
         // hasNext を元に More View button の表示非表示を決める
         console.log( 'more has ', action.hasNext() );
-        moreButton( action.hasNext(), ReactDOM.findDOMNode(this.refs.commentMore) );
+        moreButton( action.hasNext(), action.rest(), ReactDOM.findDOMNode(this.refs.commentMore) );
+      },
+      componentDidUpdate: function() {
+        moreButton( action.hasNext(), action.rest(), ReactDOM.findDOMNode(this.refs.commentMore) );
       },
       updateList: function( list ) {
         // state を変更し appendChild を行う

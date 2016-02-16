@@ -279,31 +279,41 @@ var ViewComments = exports.ViewComments = function (_View) {
         displayName: 'MoreView',
 
         propTypes: {
-          show: React.PropTypes.bool.isRequired
+          show: React.PropTypes.bool.isRequired,
+          rest: React.PropTypes.number
         },
         getDefaultProps: function getDefaultProps() {
           return {
-            show: false
+            show: false,
+            rest: 0
           };
         },
         getInitialState: function getInitialState() {
           return {
-            loading: false,
-            show: this.props.show
+            loading: '',
+            show: this.props.show,
+            rest: this.props.rest
           };
         },
         render: function render() {
 
           // hasNext: true, button を表示する？
-          if (this.state.show) {
+          if (this.state.show && this.state.rest > 0) {
 
             return React.createElement(
               'div',
-              { className: this.state.loading ? 'loading' : '' },
+              { id: 'more', className: 'comment-andmore loading-root ' + this.state.loading },
               React.createElement(
                 'a',
                 { href: '#more', onClick: this.handleClick },
-                'More View'
+                '他',
+                this.state.rest,
+                '件を表示'
+              ),
+              React.createElement(
+                'span',
+                { className: 'loading-spinner' },
+                ' '
               )
             );
           } else {
@@ -317,20 +327,21 @@ var ViewComments = exports.ViewComments = function (_View) {
         handleClick: function handleClick(event) {
           event.preventDefault();
           // loading 表示
-          this.setState({ loading: true });
+          this.setState({ loading: 'loading' });
           action.next();
         },
         // button 表示・非表示
-        updateShow: function updateShow(show) {
+        updateShow: function updateShow(show, rest) {
 
-          this.setState({ show: show });
+          this.setState({ show: show, rest: rest });
         }
       });
 
       // more button 作成関数
       // CommentsDom から呼び出す
-      var moreButton = function moreButton(show, moreElement) {
+      var moreButton = function moreButton(show, rest, moreElement) {
 
+        console.log('========================= more button ', action.hasNext(), action);
         show = !!show;
 
         // moreElement 存在チェックを行う
@@ -339,12 +350,12 @@ var ViewComments = exports.ViewComments = function (_View) {
         if (_Safety.Safety.isElement(moreElement)) {
           if (_this._moreRendered === null) {
 
-            _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show }), moreElement);
+            _this._moreRendered = ReactDOM.render(React.createElement(MoreView, { show: show, rest: rest }), moreElement);
           } else {
 
             // instance がある, render 済み
             // state を変更し button の表示・非表示を行う
-            _this._moreRendered.updateShow(show);
+            _this._moreRendered.updateShow(show, rest);
           }
         }
       };
@@ -576,7 +587,10 @@ var ViewComments = exports.ViewComments = function (_View) {
           _this.executeSafely(_View2.View.DID_MOUNT);
           // hasNext を元に More View button の表示非表示を決める
           console.log('more has ', action.hasNext());
-          moreButton(action.hasNext(), ReactDOM.findDOMNode(this.refs.commentMore));
+          moreButton(action.hasNext(), action.rest(), ReactDOM.findDOMNode(this.refs.commentMore));
+        },
+        componentDidUpdate: function componentDidUpdate() {
+          moreButton(action.hasNext(), action.rest(), ReactDOM.findDOMNode(this.refs.commentMore));
         },
         updateList: function updateList(list) {
           // state を変更し appendChild を行う

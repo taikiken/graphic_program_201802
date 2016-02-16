@@ -128,7 +128,6 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
       // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
       // this.showError( error.message );
     }
-
     /**
      * お知らせ  ログインメンバー Dom を生成します
      * @param {Object} responseObj JSON response

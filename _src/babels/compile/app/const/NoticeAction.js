@@ -32,7 +32,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _symbol = (0, _symbol3.default)();
 var _message = {
-  reply: 'コメント',
+  comment: '返信',
+  reply: '返信',
   good: 'Good',
   bad: 'Bad',
   notice: '通知'

@@ -116,6 +116,13 @@ export class Offset extends Action {
 
   }
   /**
+   * 残り数
+   * @return {number} total から 次の offset を」引いた数を返します
+   */
+  rest():Number {
+    return this.total - this.offset;
+  }
+  /**
    * 次があるかを調べます
    * @return {boolean} 次があるかの真偽値を返します
    */

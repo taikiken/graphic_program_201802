@@ -84,7 +84,6 @@ export class ViewHeaderMemberNotice extends View {
     // this.showError( error.message );
 
   }
-
   /**
    * お知らせ  ログインメンバー Dom を生成します
    * @param {Object} responseObj JSON response
