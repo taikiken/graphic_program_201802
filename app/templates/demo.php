@@ -23,11 +23,15 @@
             }
 
             pre {
-                text-align:left;
-                background:#eee;
-                font-family:monospace;
-                margin:20px;
+                display:block; width:93%; background:#eee; font-family:monospace; font-size:12px; padding:20px;"
+                color:#000;
             }
+
+
+            textarea {
+              display:block; width:93%; height:600px; background:#eee; font-family:monospace; font-size:12px; padding:20px;
+            }
+
         </style>
     </head>
     <body>
@@ -157,11 +161,14 @@ endif;
 <?php var_dump($request); ?>
 
         <h2>$response</h2>
-<?php var_dump($response); ?>
+<textarea>
+<?php print_r($response); ?>
+</textarea>
 
         <h2>$args</h2>
-<?php var_dump($args); ?>
-
+<textarea>
+<?php print_r($args); ?>
+</textarea>
 
     </body>
 </html>
