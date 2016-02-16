@@ -16,7 +16,7 @@ $o->connect();
 
 */
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 
 if(strlen($uid)>0){
 

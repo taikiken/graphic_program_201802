@@ -2,10 +2,6 @@
 
 $domain="http://www.undotsushin.com";
 $H=getallheaders();
-$Ys=$H;
-
-$yh=explode("=",$H["Authorization"]);
-$H["Authorization"]=$yh[2];
 
 $SIZE=300;
 
@@ -41,6 +37,51 @@ from
 	where 
 		t1.d2=t2.uid";
 
+function check_token($h){
+	
+	if(strlen($h["Authorization"])>0)$f=$h["Authorization"];
+	else if(strlen($h["authorization"])>0)$f=$h["authorization"];
+	else $f="";
+	
+	$s=array();
+	
+	if(strlen($f)>0){
+		$f=str_replace("OAuth ","",$f);
+		$f=explode(",",$f);
+		for($i=0;$i<count($f);$i++){
+			$e=explode("=",$f[$i]);
+			$s[trim($e[0])]=trim($e[1]);
+		}
+	}
+	
+	return $s;
+}
+function auth(){
+	
+	global $o,$H,$_SERVER;
+	$token=check_token($H);
+
+	if(strlen($token["oautn_token"])>0){
+		$sql=sprintf("select id from repo_n where a15='%s'",trim($token["oautn_token"]));
+		$o->query($sql);
+		$f=$o->fetch_array();
+	}
+
+	$log=$H;
+	$log["REQUEST_URI"]=$_SERVER['REQUEST_URI'];
+	$log["ACCESS_TOKEN"]=$token["oautn_token"];
+	$log["USERID"]=$f["id"];
+	$log["IP"]=$_SERVER['REMOTE_ADDR'];
+	$log["TIMESTAMP"]=date("Y-m-d H:i:s");
+	
+	$out=print_r($log,true);
+	$fp=fopen("log.txt","a");
+	fputs($fp,$out);
+	fclose($fp);
+
+	return isset($f["id"])?$f["id"]:"";
+}
+
 function get_weekday($a){
 	$w=array("日","月","火","水","木","金","土");
 	return $w[$a];
@@ -73,31 +114,6 @@ function tmod($s){
 		$s[$i]=sprintf("<p>%s</p>",trim($s[$i]));
 	}
 	return implode("",$s);
-}
-
-function auth($c){
-	
-	global $o,$Ys,$_SERVER;
-
-	if(strlen($c)>0){
-		$sql=sprintf("select id from repo_n where a15='%s'",trim($c));
-		$o->query($sql);
-		$f=$o->fetch_array();
-	}
-
-	$log=$Ys;
-	$log["REQUEST_URI"]=$_SERVER['REQUEST_URI'];
-	$log["ACCESS_TOKEN"]=$c;
-	$log["USERID"]=$f["id"];
-	$log["IP"]=$_SERVER['REMOTE_ADDR'];
-	$log["TIMESTAMP"]=date("Y-m-d H:i:s");
-	
-	$out=print_r($log,true);
-	$fp=fopen("log.txt","a");
-	fputs($fp,$out);
-	fclose($fp);
-
-	return isset($f["id"])?$f["id"]:"";
 }
 
 function esc($v){

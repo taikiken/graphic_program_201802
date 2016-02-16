@@ -5,7 +5,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 $offset=isset($_REQUEST["offset"])?$_REQUEST["offset"]:0;
 $length=isset($_REQUEST["length"])?$_REQUEST["length"]:10;
 

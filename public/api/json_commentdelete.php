@@ -5,7 +5,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 $pageid=$_REQUEST["pageid"];
 $commentid=$_REQUEST["commentid"];
 $replyid=$_REQUEST["replyid"];

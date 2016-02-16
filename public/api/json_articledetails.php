@@ -5,7 +5,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 $id=$_REQUEST["id"];
 
 $sql=sprintf("select t1.*,t2.* from (select id,title,body,b1,m1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday,t10,t11,t12,t13,t14,youtube%s from repo_n where id=%s and flag=1) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid",

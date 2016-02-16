@@ -6,7 +6,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 
 if($_SERVER["REQUEST_METHOD"]=="PUT"){
 	$category=$_POST["interest"];

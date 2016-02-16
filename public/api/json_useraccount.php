@@ -6,7 +6,7 @@ include $INCLUDEPATH."tool.php";
 $o=new db;
 $o->connect();
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 
 $y=array();
 $y["status"]["code"]=200;

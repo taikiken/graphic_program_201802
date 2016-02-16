@@ -6,7 +6,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 
 $o->query("select id,name,name_e from pm_ where cid=20 and flag=1 order by n");
 

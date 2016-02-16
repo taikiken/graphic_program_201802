@@ -5,7 +5,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$uid=auth($H["Authorization"]);
+$uid=auth();
 $commentid=$_REQUEST["comment_id"];
 $type=$_REQUEST["reaction"]=="good"?1:2;
 $ermsg="";
