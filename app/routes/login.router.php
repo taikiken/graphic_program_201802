@@ -4,11 +4,11 @@
 // ==============================
 $app->get('/login[/]', function ($request, $response, $args) use ($app) {
 
-  $args['page'] = array(
+  $args['page'] = $app->model->set(array(
     'title'    => 'ログイン',
     'template' => 'login.php',
     'path'     => $args,
-  );
+  ));
 
   return $this->renderer->render($response, "_default.php", $args);
 
