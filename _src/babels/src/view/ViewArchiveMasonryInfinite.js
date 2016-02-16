@@ -59,6 +59,10 @@ export class ViewArchiveMasonryInfinite extends View {
     option = Safety.object( option );
 
     super( element, option );
+    if ( !Safety.isElement( moreElement ) ) {
+      console.warn( `un accessible more element. ${moreElement}` );
+    }
+
     if ( typeof ActionClass === 'function' ) {
 
       this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );

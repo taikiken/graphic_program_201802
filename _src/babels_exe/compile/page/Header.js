@@ -28,6 +28,8 @@ var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
 
+var _Dom = require('../dom/Dom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -35,7 +37,17 @@ var _symbol = (0, _symbol3.default)();
 // UT
 var UT = self.UT;
 
+/**
+ * <h3>header user information / signup</h3>
+ * 全て static です
+ */
+
 var Header = exports.Header = function () {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
+
   function Header(target) {
     (0, _classCallCheck3.default)(this, Header);
 
@@ -44,12 +56,15 @@ var Header = exports.Header = function () {
       throw new Error('Header is static Class. not use new Header().');
     }
   }
+  /**
+   * header rendering 開始
+   */
 
   (0, _createClass3.default)(Header, null, [{
     key: 'start',
     value: function start() {
       // header.user
-      var headerUser = new UT.view.header.ViewHeaderUser(document.getElementById('user-profile-container'));
+      var headerUser = new UT.view.header.ViewHeaderUser(_Dom.Dom.profile());
       headerUser.start();
     }
   }]);

@@ -168,9 +168,10 @@ var CommentMenu = React.createClass({
     };
   },
   render: function render() {
-    var others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
     if (this.props.sign) {
       // ログインユーザーのみ
+      var others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
+      // console.log( 'others ', others, this.props.userId, this.props.commentUserId );
       if (this.state.show) {
         return React.createElement(
           'div',
@@ -373,6 +374,7 @@ var CommentNode = exports.CommentNode = React.createClass({
       'div',
       { className: 'comment-root' },
       React.createElement(CommentMenu, {
+        key: this.props.uniqueId + '-menu',
         sign: sign,
         userId: this.props.userId,
         commentUserId: this.props.commentUserId,

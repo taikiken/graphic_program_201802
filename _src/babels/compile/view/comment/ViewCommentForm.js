@@ -62,21 +62,25 @@ var ViewCommentForm = exports.ViewCommentForm = function (_View) {
    * 記事へのコメントフォーム
    * @param {Element} element root element
    * @param {Number} articleId 記事Id
-   * @param {string} icon ユーザー画像パス
+   * @param {string} [icon=''] ユーザー画像パス
    */
 
-  function ViewCommentForm(element, articleId, icon) {
+  function ViewCommentForm(element, articleId) {
+    var icon = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
     (0, _classCallCheck3.default)(this, ViewCommentForm);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCommentForm).call(this, element));
 
     _this._articleId = String(articleId);
+
     if (!icon) {
       icon = _Empty.Empty.USER_EMPTY;
     } else if (!_Safety.Safety.isImg(icon)) {
       icon = _Empty.Empty.USER_EMPTY;
     }
+
     _this._icon = icon;
+
     return _this;
   }
   /**

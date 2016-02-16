@@ -1,7 +1,7 @@
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-15 23:09:39
+ * @date 2016-02-16 22:42:32
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -44,6 +44,8 @@ var _Data = require('./data/Data');
 var _Form = require('./data/Form');
 
 var _Result = require('./data/Result');
+
+var _Safety = require('./data/Safety');
 
 var _Ajax = require('./net/Ajax');
 
@@ -160,7 +162,7 @@ var _Receiver = require('./ui/Receiver');
 // net/types
 
 // -------------------------------------
-// data
+// app
 var UT = {
   version: '1.0.0',
   app: {
@@ -180,7 +182,8 @@ var UT = {
   data: {
     Data: _Data.Data,
     Form: _Form.Form,
-    Result: _Result.Result
+    Result: _Result.Result,
+    Safety: _Safety.Safety
   },
   util: {
     Loc: _Loc.Loc,
@@ -293,6 +296,6 @@ import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
 // net
 
 // -------------------------------------
-// app
+// data
 
 self.UT = UT;

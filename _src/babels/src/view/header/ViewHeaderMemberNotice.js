@@ -93,7 +93,7 @@ export class ViewHeaderMemberNotice extends View {
 
     let notificationsDae = new NotificationsDae( responseObj );
     let _this = this;
-
+    console.log( '*** notificationsDae ***', notificationsDae );
     // --------------------------------------------------
     // user notice dropMenu action message
     let NoticeMessage = React.createClass( {
@@ -277,6 +277,7 @@ export class ViewHeaderMemberNotice extends View {
         this.setState( { total: total } );
       }
     } );
+
     // user notice
     let NoticeDom = React.createClass( {
       propTypes: {

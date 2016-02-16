@@ -32,6 +32,8 @@ var _Header = require('./Header');
 
 var _Sidebar = require('./Sidebar');
 
+var _Dom = require('../dom/Dom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -39,7 +41,17 @@ var _symbol = (0, _symbol3.default)();
 // UT
 var UT = self.UT;
 
+/**
+ * <h3>Home(index)</h3>
+ * 全て static です
+ */
+
 var Index = exports.Index = function () {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
+
   function Index(target) {
     (0, _classCallCheck3.default)(this, Index);
 
@@ -48,6 +60,9 @@ var Index = exports.Index = function () {
       throw new Error('Index is static Class. not use new Index().');
     }
   }
+  /**
+   * home rendering 開始
+   */
 
   (0, _createClass3.default)(Index, null, [{
     key: 'start',
@@ -58,18 +73,18 @@ var Index = exports.Index = function () {
 
       // ---------------------------------------------------------
       // pickup
-      var pickup = new UT.view.home.ViewPickup(document.getElementById('pickup-container'));
+      var pickup = new UT.view.home.ViewPickup(_Dom.Dom.pickup());
       pickup.start();
 
       // ---------------------------------------------------------
       // headline
-      var headline = new UT.view.home.ViewHeadline(document.getElementById('headline-container'));
+      var headline = new UT.view.home.ViewHeadline(_Dom.Dom.headline());
       headline.start();
 
       // ---------------------------------------------------------
       // news
       var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-      var archive = new UT.view.ViewArchiveMasonryInfinite(document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction);
+      var archive = new UT.view.ViewArchiveMasonryInfinite(_Dom.Dom.board(), _Dom.Dom.boardMore(), archiveAction);
       archive.start();
 
       // sidebar, slug なし(=all)

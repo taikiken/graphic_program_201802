@@ -13,13 +13,22 @@
 
 import {Header} from './Header';
 import {Sidebar} from './Sidebar';
+import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
 
+/**
+ * <h3>category 一覧</h3>
+ * 全て static です
+ */
 export class Category {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -27,13 +36,19 @@ export class Category {
 
     }
   }
+
+  /**
+   * rendering 開始
+   * @param {string} slug category slug
+   * @param {string} [type=''] ranking | video \ '' の 3つ
+   */
   static start( slug:string, type:string = '' ):void {
 
     // header
     Header.start();
 
     // list
-    let archive = new UT.view.ViewCategory( slug, document.getElementById('board-container'), document.getElementById('board-container-more') );
+    let archive = new UT.view.ViewCategory( slug, Dom.board(), Dom.boardMore() );
     archive.start();
 
     // sidebar

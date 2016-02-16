@@ -76,7 +76,7 @@ export class Comments extends OffsetAuth {
     switch ( type ) {
 
       case CommentsType.SELF :
-        return Comments.min( id, resolve, reject );
+        return Comments.mine( id, resolve, reject );
 
       case CommentsType.NORMAL :
         return Comments.normal( id, resolve, reject );

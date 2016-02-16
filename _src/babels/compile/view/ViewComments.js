@@ -18,6 +18,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ViewComments = undefined;
 
+var _create = require('babel-runtime/core-js/object/create');
+
+var _create2 = _interopRequireDefault(_create);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -226,26 +230,30 @@ var ViewComments = exports.ViewComments = function (_View) {
         bank[commentId] = commentsListDae.comments.bank[commentId];
       });
 
+      /*
       // 処理開始 関数振り分け
-      switch (this._commentsListType) {
-
-        case _CommentsType.CommentsType.SELF:
-          this.mine(commentsListDae);
+      switch ( this._commentsListType ) {
+         case CommentsType.SELF :
+          //this.mine( commentsListDae );
+          this.all( commentsListDae );
           break;
-
-        case _CommentsType.CommentsType.OFFICIAL:
-        case _CommentsType.CommentsType.NORMAL:
-        case _CommentsType.CommentsType.ALL:
+         case CommentsType.OFFICIAL :
+        case CommentsType.NORMAL :
+        case CommentsType.ALL :
         default:
-          this.all(commentsListDae);
+          this.all( commentsListDae );
           break;
+       }
+      */
 
-      }
+      // 処理開始 関数振り分け いらないんじゃないか疑惑
+      this.all(commentsListDae);
     } // render
 
-  }, {
-    key: 'mine',
-    value: function mine(commentsListDae) {}
+    /*
+    mine( commentsListDae:CommentsListDae ) {
+     }
+    */
     /**
      * normal, official, all をレンダリング
      * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
@@ -353,6 +361,7 @@ var ViewComments = exports.ViewComments = function (_View) {
           sign: React.PropTypes.bool.isRequired,
           uniqueId: React.PropTypes.string.isRequired,
           userId: React.PropTypes.string.isRequired,
+          icon: React.PropTypes.string.isRequired,
           articleId: React.PropTypes.string.isRequired,
           commentId: React.PropTypes.string.isRequired,
           commentsListType: React.PropTypes.object.isRequired,
@@ -377,6 +386,7 @@ var ViewComments = exports.ViewComments = function (_View) {
           var sign = this.props.sign;
           var articleId = this.props.articleId;
           var uniqueId = this.props.uniqueId;
+          var icon = this.props.icon;
 
           return React.createElement(
             'ul',
@@ -394,6 +404,7 @@ var ViewComments = exports.ViewComments = function (_View) {
                   uniqueId: uniqueId + '-' + replyComment.id,
                   commentDae: { comment: replyComment },
                   userId: userId,
+                  icon: icon,
                   articleId: articleId,
                   commentId: commentId,
                   commentUserId: String(replyComment.user.id),
@@ -449,13 +460,13 @@ var ViewComments = exports.ViewComments = function (_View) {
             }
 
             // id
-            userId = _user.id;
+            userId = String(_user.id);
             if (!userId) {
               userId = '';
             }
           }
 
-          console.log('================================== parent =========================');
+          console.log('================================== parent =========================', this.props.user, userId, ', comment:', commentObject.comment.user.id);
           return React.createElement(
             'ul',
             { className: 'comment-list' },
@@ -463,7 +474,7 @@ var ViewComments = exports.ViewComments = function (_View) {
               'li',
               { className: 'comment-item' },
               React.createElement(_CommentNode.CommentNode, {
-                uniqueId: this.props.uniqueId + '-' + commentId,
+                uniqueId: '' + this.props.uniqueId,
                 commentDae: commentObject,
                 icon: icon,
                 userId: userId,
@@ -475,10 +486,11 @@ var ViewComments = exports.ViewComments = function (_View) {
                 parent: true
               }),
               React.createElement(CommentReplyChild, {
-                uniqueId: this.props.uniqueId + '-' + commentId + '-reply',
+                uniqueId: this.props.uniqueId + '-reply',
                 total: total,
                 sign: sign,
                 userId: userId,
+                icon: icon,
                 articleId: articleId,
                 commentId: commentId,
                 commentsListType: commentsListType,
@@ -500,6 +512,11 @@ var ViewComments = exports.ViewComments = function (_View) {
           articleId: React.PropTypes.string.isRequired,
           user: React.PropTypes.object
         },
+        getDefaultProps: function getDefaultProps() {
+          return {
+            user: null
+          };
+        },
         getInitialState: function getInitialState() {
           return {
             commentsList: this.props.commentsList
@@ -510,6 +527,12 @@ var ViewComments = exports.ViewComments = function (_View) {
           var list = this.state.commentsList;
           var articleId = this.props.articleId;
           var commentsListType = this.props.commentsListType;
+          var userId = '0';
+          var user = (0, _create2.default)({});
+          if (this.props.user !== null) {
+            userId = String(this.props.user.id);
+            user = this.props.user;
+          }
 
           if (!_Safety.Safety.array(list) || list.length === 0) {
             // 描画しない
@@ -531,7 +554,7 @@ var ViewComments = exports.ViewComments = function (_View) {
             ),
             list.map(function (commentId, index) {
               var commentObject = commentsBank[commentId];
-              var key = commentsListType + '-' + articleId + '-' + commentId;
+              var key = index + '-' + commentsListType + '-' + articleId + '-' + commentId + '-' + userId;
               console.log('commentId ' + commentId + ', ' + key);
 
               return React.createElement(CommentsParent, {
@@ -541,7 +564,9 @@ var ViewComments = exports.ViewComments = function (_View) {
                 articleId: articleId,
                 commentObject: commentObject,
                 commentsListType: commentsListType,
-                total: commentsListDae.total });
+                total: commentsListDae.total,
+                user: user
+              });
             }),
             React.createElement('div', { className: 'comment-more', ref: 'commentMore' })
           );
@@ -564,7 +589,7 @@ var ViewComments = exports.ViewComments = function (_View) {
       // --------------------------------------------
       var user = this.user;
       if (user === null) {
-        user = {};
+        user = (0, _create2.default)({});
       }
       // this._commentsRendered が null の時だけ CommentsDom.render する
       if (this._commentsRendered === null) {

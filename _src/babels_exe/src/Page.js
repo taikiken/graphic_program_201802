@@ -51,7 +51,6 @@ export class Page {
     // single(detail|p)
     router.on( Router.SINGLE, Page.single );
 
-
     router.route();
 
   }
@@ -63,7 +62,7 @@ export class Page {
   }
   /**
    * category page
-   * @param {Object} event
+   * @param {Object} event Router event object
    */
   static category( event:Object ):void {
 
@@ -75,7 +74,7 @@ export class Page {
   }
   /**
    * single, detail page
-   * @param {Object} event
+   * @param {Object} event Router event object
    */
   static single( event ):void {
 

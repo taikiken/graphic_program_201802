@@ -47,7 +47,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-15 23:09:39
+	 * @date 2016-02-16 22:42:32
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -90,6 +90,8 @@
 	var _Form = __webpack_require__(86);
 
 	var _Result = __webpack_require__(87);
+
+	var _Safety = __webpack_require__(44);
 
 	var _Ajax = __webpack_require__(88);
 
@@ -206,7 +208,7 @@
 	// net/types
 
 	// -------------------------------------
-	// data
+	// app
 	var UT = {
 	  version: '1.0.0',
 	  app: {
@@ -226,7 +228,8 @@
 	  data: {
 	    Data: _Data.Data,
 	    Form: _Form.Form,
-	    Result: _Result.Result
+	    Result: _Result.Result,
+	    Safety: _Safety.Safety
 	  },
 	  util: {
 	    Loc: _Loc.Loc,
@@ -339,7 +342,7 @@
 	// net
 
 	// -------------------------------------
-	// app
+	// data
 
 	self.UT = UT;
 
@@ -10285,6 +10288,9 @@
 	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	    (0, _classCallCheck3.default)(this, View);
 
+	    if (!_Safety.Safety.isElement(element)) {
+	      console.warn('un accessible element. ' + element);
+	    }
 	    option = _Safety.Safety.object(option);
 
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(View).call(this));
@@ -11059,7 +11065,7 @@
 
 	      var notificationsDae = new _NotificationsDae.NotificationsDae(responseObj);
 	      var _this = this;
-
+	      console.log('*** notificationsDae ***', notificationsDae);
 	      // --------------------------------------------------
 	      // user notice dropMenu action message
 	      var NoticeMessage = React.createClass({
@@ -11292,6 +11298,7 @@
 	          this.setState({ total: total });
 	        }
 	      });
+
 	      // user notice
 	      var NoticeDom = React.createClass({
 	        displayName: 'NoticeDom',
@@ -12699,6 +12706,10 @@
 	    option = _Safety.Safety.object(option);
 
 	    var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewArchiveMasonryInfinite).call(this, element, option));
+
+	    if (!_Safety.Safety.isElement(moreElement)) {
+	      console.warn('un accessible more element. ' + moreElement);
+	    }
 
 	    if (typeof ActionClass === 'function') {
 
@@ -15224,6 +15235,13 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
 
 	    _this._action = new _Single.Single(id, _this.done.bind(_this), _this.fail.bind(_this));
+	    if (!_Safety.Safety.isElement(elements.related)) {
+	      console.warn('un accessible elements.related . ' + elements.related);
+	    }
+	    if (!_Safety.Safety.isElement(elements.footer)) {
+	      console.warn('un accessible elements.footer . ' + elements.footer);
+	    }
+
 	    _this._elements = elements;
 	    // mount event handler
 	    _this._boundMount = _this.headerMount.bind(_this);
@@ -16970,6 +16988,10 @@
 	});
 	exports.ViewComments = undefined;
 
+	var _create = __webpack_require__(49);
+
+	var _create2 = _interopRequireDefault(_create);
+
 	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -17178,26 +17200,30 @@
 	        bank[commentId] = commentsListDae.comments.bank[commentId];
 	      });
 
+	      /*
 	      // 処理開始 関数振り分け
-	      switch (this._commentsListType) {
-
-	        case _CommentsType.CommentsType.SELF:
-	          this.mine(commentsListDae);
+	      switch ( this._commentsListType ) {
+	         case CommentsType.SELF :
+	          //this.mine( commentsListDae );
+	          this.all( commentsListDae );
 	          break;
-
-	        case _CommentsType.CommentsType.OFFICIAL:
-	        case _CommentsType.CommentsType.NORMAL:
-	        case _CommentsType.CommentsType.ALL:
+	         case CommentsType.OFFICIAL :
+	        case CommentsType.NORMAL :
+	        case CommentsType.ALL :
 	        default:
-	          this.all(commentsListDae);
+	          this.all( commentsListDae );
 	          break;
+	       }
+	      */
 
-	      }
+	      // 処理開始 関数振り分け いらないんじゃないか疑惑
+	      this.all(commentsListDae);
 	    } // render
 
-	  }, {
-	    key: 'mine',
-	    value: function mine(commentsListDae) {}
+	    /*
+	    mine( commentsListDae:CommentsListDae ) {
+	     }
+	    */
 	    /**
 	     * normal, official, all をレンダリング
 	     * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
@@ -17305,6 +17331,7 @@
 	          sign: React.PropTypes.bool.isRequired,
 	          uniqueId: React.PropTypes.string.isRequired,
 	          userId: React.PropTypes.string.isRequired,
+	          icon: React.PropTypes.string.isRequired,
 	          articleId: React.PropTypes.string.isRequired,
 	          commentId: React.PropTypes.string.isRequired,
 	          commentsListType: React.PropTypes.object.isRequired,
@@ -17329,6 +17356,7 @@
 	          var sign = this.props.sign;
 	          var articleId = this.props.articleId;
 	          var uniqueId = this.props.uniqueId;
+	          var icon = this.props.icon;
 
 	          return React.createElement(
 	            'ul',
@@ -17346,6 +17374,7 @@
 	                  uniqueId: uniqueId + '-' + replyComment.id,
 	                  commentDae: { comment: replyComment },
 	                  userId: userId,
+	                  icon: icon,
 	                  articleId: articleId,
 	                  commentId: commentId,
 	                  commentUserId: String(replyComment.user.id),
@@ -17401,13 +17430,13 @@
 	            }
 
 	            // id
-	            userId = _user.id;
+	            userId = String(_user.id);
 	            if (!userId) {
 	              userId = '';
 	            }
 	          }
 
-	          console.log('================================== parent =========================');
+	          console.log('================================== parent =========================', this.props.user, userId, ', comment:', commentObject.comment.user.id);
 	          return React.createElement(
 	            'ul',
 	            { className: 'comment-list' },
@@ -17415,7 +17444,7 @@
 	              'li',
 	              { className: 'comment-item' },
 	              React.createElement(_CommentNode.CommentNode, {
-	                uniqueId: this.props.uniqueId + '-' + commentId,
+	                uniqueId: '' + this.props.uniqueId,
 	                commentDae: commentObject,
 	                icon: icon,
 	                userId: userId,
@@ -17427,10 +17456,11 @@
 	                parent: true
 	              }),
 	              React.createElement(CommentReplyChild, {
-	                uniqueId: this.props.uniqueId + '-' + commentId + '-reply',
+	                uniqueId: this.props.uniqueId + '-reply',
 	                total: total,
 	                sign: sign,
 	                userId: userId,
+	                icon: icon,
 	                articleId: articleId,
 	                commentId: commentId,
 	                commentsListType: commentsListType,
@@ -17452,6 +17482,11 @@
 	          articleId: React.PropTypes.string.isRequired,
 	          user: React.PropTypes.object
 	        },
+	        getDefaultProps: function getDefaultProps() {
+	          return {
+	            user: null
+	          };
+	        },
 	        getInitialState: function getInitialState() {
 	          return {
 	            commentsList: this.props.commentsList
@@ -17462,6 +17497,12 @@
 	          var list = this.state.commentsList;
 	          var articleId = this.props.articleId;
 	          var commentsListType = this.props.commentsListType;
+	          var userId = '0';
+	          var user = (0, _create2.default)({});
+	          if (this.props.user !== null) {
+	            userId = String(this.props.user.id);
+	            user = this.props.user;
+	          }
 
 	          if (!_Safety.Safety.array(list) || list.length === 0) {
 	            // 描画しない
@@ -17483,7 +17524,7 @@
 	            ),
 	            list.map(function (commentId, index) {
 	              var commentObject = commentsBank[commentId];
-	              var key = commentsListType + '-' + articleId + '-' + commentId;
+	              var key = index + '-' + commentsListType + '-' + articleId + '-' + commentId + '-' + userId;
 	              console.log('commentId ' + commentId + ', ' + key);
 
 	              return React.createElement(CommentsParent, {
@@ -17493,7 +17534,9 @@
 	                articleId: articleId,
 	                commentObject: commentObject,
 	                commentsListType: commentsListType,
-	                total: commentsListDae.total });
+	                total: commentsListDae.total,
+	                user: user
+	              });
 	            }),
 	            React.createElement('div', { className: 'comment-more', ref: 'commentMore' })
 	          );
@@ -17516,7 +17559,7 @@
 	      // --------------------------------------------
 	      var user = this.user;
 	      if (user === null) {
-	        user = {};
+	        user = (0, _create2.default)({});
 	      }
 	      // this._commentsRendered が null の時だけ CommentsDom.render する
 	      if (this._commentsRendered === null) {
@@ -17690,7 +17733,7 @@
 	      switch (_type) {
 
 	        case _CommentsType.CommentsType.SELF:
-	          return Comments.min(id, resolve, reject);
+	          return Comments.mine(id, resolve, reject);
 
 	        case _CommentsType.CommentsType.NORMAL:
 	          return Comments.normal(id, resolve, reject);
@@ -18286,9 +18329,10 @@
 	    };
 	  },
 	  render: function render() {
-	    var others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
 	    if (this.props.sign) {
 	      // ログインユーザーのみ
+	      var others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
+	      // console.log( 'others ', others, this.props.userId, this.props.commentUserId );
 	      if (this.state.show) {
 	        return React.createElement(
 	          'div',
@@ -18491,6 +18535,7 @@
 	      'div',
 	      { className: 'comment-root' },
 	      React.createElement(CommentMenu, {
+	        key: this.props.uniqueId + '-menu',
 	        sign: sign,
 	        userId: this.props.userId,
 	        commentUserId: this.props.commentUserId,
@@ -18600,35 +18645,72 @@
 
 	var ReactDOM = self.ReactDOM;
 
-	var HiddenCommentId = React.createClass({
-	  displayName: 'HiddenCommentId',
+	var CommentMessage = React.createClass({
+	  displayName: 'CommentMessage',
 
 	  propTypes: {
-	    independent: React.PropTypes.bool.isRequired,
-	    commentId: React.PropTypes.string.isRequired
+	    message: React.PropTypes.string,
+	    messageClass: React.PropTypes.string
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      message: '',
+	      messageClass: ''
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      message: this.props.message,
+	      messageClass: this.props.messageClass
+	    };
 	  },
 	  render: function render() {
-	    var commentId = this.props.commentId;
 
-	    if (this.props.independent || commentId === '' || commentId === '0') {
-	      // 記事コメント or commentId がない
+	    if (this.state.message === '') {
+
+	      // 非表示
 	      return null;
 	    } else {
-	      return React.createElement('input', { type: 'hidden', name: 'commend_id', value: this.props.commentId });
+
+	      return React.createElement(
+	        'div',
+	        { className: 'comment-form-message' },
+	        React.createElement(
+	          'div',
+	          { className: this.state.messageClass },
+	          this.state.message
+	        )
+	      );
 	    }
+	  },
+	  componentDidMount: function componentDidMount() {},
+	  componentWillUnMount: function componentWillUnMount() {},
+	  update: function update(message) {
+	    var error = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
+	    this.setState({ message: message, error: error ? 'error' : 'message' });
 	  }
 	});
 
 	// comment form
+	/**
+	 * コメント送信用 form
+	 */
 	var CommentForm = React.createClass({
 	  displayName: 'CommentForm',
 
 	  propTypes: {
+	    // 識別用 unique Id
 	    uniqueId: React.PropTypes.string.isRequired,
+	    // open / close
 	    toggle: React.PropTypes.string.isRequired,
+	    // 記事へのコメント？
 	    independent: React.PropTypes.bool.isRequired,
+	    // user profile picture: icon がない（空は可）（非ログイン）は投稿できない
 	    icon: React.PropTypes.string.isRequired,
+	    // 記事 Id ＊必須
 	    articleId: React.PropTypes.string.isRequired,
+	    // コメント Id オプション
 	    commentId: React.PropTypes.string
 	  },
 	  getDefaultProps: function getDefaultProps() {
@@ -18637,8 +18719,15 @@
 	    };
 	  },
 	  getInitialState: function getInitialState() {
+	    // ModelComment / ModelCommentReply instance
 	    this.comment = null;
+	    // ReplyStatus instance
+	    // form の表示非表示
+	    // active / inactive
+	    // などの UI に使用します
 	    this.replyStatus = null;
+
+	    this.message = null;
 
 	    return {
 	      loading: '',
@@ -18649,13 +18738,15 @@
 	  render: function render() {
 
 	    if (!this.props.independent) {
+	      // コメントへのコメント
 	      var commentId = this.props.commentId;
+
 	      if (!commentId || commentId === '0') {
 	        throw new Error('need comment Id ' + commentId);
 	      }
 	    }
 
-	    console.log('------------ Form ', this.props.uniqueId, this.state.open);
+	    // console.log( '------------ Form ', this.props.uniqueId, this.state.open );
 	    if (this.state.open) {
 
 	      // user icon
@@ -18690,10 +18781,9 @@
 	            'div',
 	            { className: 'comment-form-submit' },
 	            React.createElement('input', { type: 'submit', value: 'コメントを投稿' })
-	          ),
-	          React.createElement('input', { type: 'hidden', name: 'article_id', value: this.props.articleId }),
-	          React.createElement(HiddenCommentId, { independent: this.props.independent, commentId: this.props.commentId })
+	          )
 	        ),
+	        React.createElement('div', { ref: 'commentMessage' }),
 	        React.createElement(
 	          'div',
 	          { className: 'loading-spinner' },
@@ -18705,29 +18795,65 @@
 	    }
 	  },
 	  componentDidMount: function componentDidMount() {
+
 	    var replyStatus = _ReplyStatus.ReplyStatus.factory();
 	    this.replyStatus = replyStatus;
 
-	    replyStatus.on(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
-	    replyStatus.on(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
+	    // 記事へのコメントは閉じない
+	    if (!this.props.independent) {
+
+	      replyStatus.on(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
+	      replyStatus.on(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
+	    }
+
+	    // message container
+	    /*
+	    this.message = ReactDOM.render(
+	      <CommentMessage />,
+	      ReactDOM.findDOMNode(this.refs.commentMessage)
+	    );*/
 	  },
 	  componentWillUnMount: function componentWillUnMount() {
 	    this.dispose();
 	  },
 	  // ----------------------------------------
-	  checkId: function checkId(event) {
+	  // all event unbind
+	  dispose: function dispose() {
+	    // event unbind
+	    this.setState({ loading: '' });
+	    var comment = this.comment;
+	    if (comment !== null) {
+	      comment.off(_Model.Model.COMPLETE, this.done);
+	      comment.off(_Model.Model.UNDEFINED_ERROR, this.fail);
+	      comment.off(_Model.Model.RESPONSE_ERROR, this.fail);
+	    }
 
+	    var replyStatus = this.replyStatus;
+	    if (replyStatus !== null) {
+	      replyStatus.off(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
+	      replyStatus.off(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
+	    }
+	  },
+	  // ----------------------------------------
+	  checkId: function checkId(event) {
 	    return this.props.uniqueId === event.id;
 	  },
 	  // ----------------------------------------
 	  // listener
 	  replyOpen: function replyOpen(event) {
-	    this.setState({ open: this.checkId(event) });
-	  },
-	  replyClose: function replyClose() {
-	    if (this.props.independent) {
+	    // console.log( '+++++ replyOpen ', this.props.uniqueId, event.id, this.checkId( event ), this.state.open );
+	    if (!this.state.open && this.checkId(event)) {
 	      this.setState({ open: true });
-	    } else {
+	    }
+	  },
+	  replyClose: function replyClose(event) {
+	    // console.log( '----- replyClose ', this.props.uniqueId, event.id, this.checkId( event ), this.state.open );
+	    //if ( this.props.independent ) {
+	    //  this.setState( { open: true } );
+	    //} else {
+	    //  this.setState( { open: false } );
+	    //}
+	    if (this.state.open && this.checkId(event)) {
 	      this.setState({ open: false });
 	    }
 	  },
@@ -18740,6 +18866,7 @@
 	    event.preventDefault();
 
 	    var body = this.state.body;
+
 	    if (body === '') {
 	      this.error('コメントは必須入力です！');
 	    } else {
@@ -18768,6 +18895,7 @@
 	      // コメントへのコメント
 	      comment = new _ModelCommentReply.ModelCommentReply(this.props.articleId, this.props.commentId, formData);
 	    }
+
 	    this.comment = comment;
 	    comment.on(_Model.Model.COMPLETE, this.done);
 	    comment.on(_Model.Model.UNDEFINED_ERROR, this.fail);
@@ -18777,6 +18905,7 @@
 	  done: function done(event) {
 	    console.log('done', event);
 	    this.replyStatus.complete(this.props.uniqueId);
+	    this.setState({ body: '' });
 	    this.dispose();
 	  },
 	  fail: function fail(event) {
@@ -18784,22 +18913,6 @@
 	    console.log('fail', error.message, error.result.status);
 	    this.replyStatus.complete(this.props.uniqueId);
 	    this.dispose();
-	  },
-	  dispose: function dispose() {
-	    // event unbind
-	    this.setState({ loading: '' });
-	    var comment = this.comment;
-	    if (comment !== null) {
-	      comment.off(_Model.Model.COMPLETE, this.done);
-	      comment.off(_Model.Model.UNDEFINED_ERROR, this.fail);
-	      comment.off(_Model.Model.RESPONSE_ERROR, this.fail);
-	    }
-
-	    var replyStatus = this.replyStatus;
-	    if (replyStatus !== null) {
-	      replyStatus.off(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
-	      replyStatus.off(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
-	    }
 	  }
 	});
 
@@ -18824,14 +18937,16 @@
 	    };
 	  },
 	  render: function render() {
+	    // console.log( 'comment-respond-opener independent ', this.state.toggle, this.props.independent );
+
 	    if (this.props.independent) {
 	      return null;
 	    } else {
-
+	      // console.log( 'comment-respond-opener ', this.state.toggle, this.props.uniqueId );
 	      if (this.state.toggle === 'reply') {
 	        return React.createElement(
 	          'a',
-	          { href: '#', className: 'comment-respond-opener', onClick: this.openerClick },
+	          { href: '#', className: 'comment-respond-opener', 'data-id': this.props.uniqueId, onClick: this.openerClick },
 	          React.createElement(
 	            'span',
 	            { className: 'icon-comment' },
@@ -18879,10 +18994,10 @@
 
 	    var replyStatus = this.replyStatus;
 
-	    if (!this.props.independent) {
-	      replyStatus.off(_ReplyStatus.ReplyStatus.OPEN, this.replyOpen);
-	      replyStatus.off(_ReplyStatus.ReplyStatus.CLOSE, this.replyClose);
-	    }
+	    //if ( !this.props.independent ) {
+	    //  replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
+	    //  replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
+	    //}
 
 	    replyStatus.off(_ReplyStatus.ReplyStatus.START, this.replyStart);
 	    replyStatus.off(_ReplyStatus.ReplyStatus.COMPLETE, this.replyComplete);
@@ -18891,6 +19006,8 @@
 	  // open / cancel click handler
 	  openerClick: function openerClick(event) {
 	    event.preventDefault();
+
+	    console.log('************** opener click ****************** ', this.props.uniqueId);
 
 	    if (!this.canOpen) {
 	      return;
@@ -18910,8 +19027,8 @@
 	    this.replyStatus.close(this.props.uniqueId);
 	  },
 	  willOpen: function willOpen() {
-	    // this.props.callback( 'open' );
 	    this.setState({ toggle: 'cancel' });
+	    // this.props.callback( 'open' );
 	  },
 	  willClose: function willClose() {
 	    this.setState({ toggle: 'reply' });
@@ -18924,13 +19041,7 @@
 	  },
 	  // ----------------------------------------
 	  // listener
-	  replyOpen: function replyOpen(event) {
-	    var mine = this.checkId(event);
-	    if (!mine) {
-	      console.log('replyOpen handler to close', this.props.uniqueId);
-	      this.willClose();
-	    }
-	  },
+	  replyOpen: function replyOpen(event) {},
 	  replyClose: function replyClose(event) {},
 	  replyStart: function replyStart(event) {
 	    this.cancelClick = false;
@@ -19030,7 +19141,7 @@
 	      // ログイン
 
 	      var commentClass = this.props.independent ? 'comment-form' : 'comment-respond';
-	      console.log('form render ', this.state.toggle, this.props.independent, this.props.articleId, this.props.commentId);
+	      // console.log( 'form render ', this.props.independent, this.props.articleId, this.props.commentId );
 
 	      return React.createElement(
 	        'div',
@@ -19901,21 +20012,25 @@
 	   * 記事へのコメントフォーム
 	   * @param {Element} element root element
 	   * @param {Number} articleId 記事Id
-	   * @param {string} icon ユーザー画像パス
+	   * @param {string} [icon=''] ユーザー画像パス
 	   */
 
-	  function ViewCommentForm(element, articleId, icon) {
+	  function ViewCommentForm(element, articleId) {
+	    var icon = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
 	    (0, _classCallCheck3.default)(this, ViewCommentForm);
 
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewCommentForm).call(this, element));
 
 	    _this._articleId = String(articleId);
+
 	    if (!icon) {
 	      icon = _Empty.Empty.USER_EMPTY;
 	    } else if (!_Safety.Safety.isImg(icon)) {
 	      icon = _Empty.Empty.USER_EMPTY;
 	    }
+
 	    _this._icon = icon;
+
 	    return _this;
 	  }
 	  /**

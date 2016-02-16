@@ -32,6 +32,8 @@ var _Header = require('./Header');
 
 var _Sidebar = require('./Sidebar');
 
+var _Dom = require('../dom/Dom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -39,7 +41,17 @@ var _symbol = (0, _symbol3.default)();
 // UT
 var UT = self.UT;
 
+/**
+ * <h3>category 一覧</h3>
+ * 全て static です
+ */
+
 var Category = exports.Category = function () {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
+
   function Category(target) {
     (0, _classCallCheck3.default)(this, Category);
 
@@ -48,6 +60,12 @@ var Category = exports.Category = function () {
       throw new Error('Category is static Class. not use new Category().');
     }
   }
+
+  /**
+   * rendering 開始
+   * @param {string} slug category slug
+   * @param {string} [type=''] ranking | video \ '' の 3つ
+   */
 
   (0, _createClass3.default)(Category, null, [{
     key: 'start',
@@ -58,7 +76,7 @@ var Category = exports.Category = function () {
       _Header.Header.start();
 
       // list
-      var archive = new UT.view.ViewCategory(slug, document.getElementById('board-container'), document.getElementById('board-container-more'));
+      var archive = new UT.view.ViewCategory(slug, _Dom.Dom.board(), _Dom.Dom.boardMore());
       archive.start();
 
       // sidebar

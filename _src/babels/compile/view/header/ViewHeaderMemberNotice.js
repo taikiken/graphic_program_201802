@@ -140,7 +140,7 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
 
       var notificationsDae = new _NotificationsDae.NotificationsDae(responseObj);
       var _this = this;
-
+      console.log('*** notificationsDae ***', notificationsDae);
       // --------------------------------------------------
       // user notice dropMenu action message
       var NoticeMessage = React.createClass({
@@ -373,6 +373,7 @@ var ViewHeaderMemberNotice = exports.ViewHeaderMemberNotice = function (_View) {
           this.setState({ total: total });
         }
       });
+
       // user notice
       var NoticeDom = React.createClass({
         displayName: 'NoticeDom',

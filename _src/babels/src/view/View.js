@@ -27,6 +27,9 @@ export class View extends EventDispatcher {
    */
   constructor( element:Element, option:Object = {} ) {
 
+    if ( !Safety.isElement( element ) ) {
+      console.warn( `un accessible element. ${element}` );
+    }
     option = Safety.object( option );
 
     super();

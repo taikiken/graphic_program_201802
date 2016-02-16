@@ -11,12 +11,22 @@
  */
 'use strict';
 
+import {Dom} from '../dom/Dom';
+
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
 
+/**
+ * <h3>header user information / signup</h3>
+ * 全て static です
+ */
 export class Header {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -24,9 +34,12 @@ export class Header {
 
     }
   }
+  /**
+   * header rendering 開始
+   */
   static start():void {
     // header.user
-    var headerUser = new UT.view.header.ViewHeaderUser( document.getElementById('user-profile-container') );
+    var headerUser = new UT.view.header.ViewHeaderUser( Dom.profile() );
     headerUser.start();
   }
 }

@@ -47,7 +47,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-15 23:06:43
+	 * @date 2016-02-16 16:35:28
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -99,9 +99,9 @@
 
 	var _Index = __webpack_require__(37);
 
-	var _Category = __webpack_require__(40);
+	var _Category = __webpack_require__(41);
 
-	var _Single = __webpack_require__(41);
+	var _Single = __webpack_require__(42);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -111,7 +111,17 @@
 	var UT = self.UT;
 	var Router = UT.app.Router;
 
+	/**
+	 * <h3>ページ振り分け</h3>
+	 * 全て static です
+	 */
+
 	var Page = exports.Page = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
 	  function Page(target) {
 	    (0, _classCallCheck3.default)(this, Page);
 
@@ -120,6 +130,9 @@
 	      throw new Error('Page is static Class. not use new Page().');
 	    }
 	  }
+	  /**
+	   * Page 初期化, UT.app.Router event を listen します
+	   */
 
 	  (0, _createClass3.default)(Page, null, [{
 	    key: 'init',
@@ -136,11 +149,20 @@
 
 	      router.route();
 	    }
+	    /**
+	     * home, index page
+	     */
+
 	  }, {
 	    key: 'index',
 	    value: function index() {
 	      _Index.Index.start();
 	    }
+	    /**
+	     * category page
+	     * @param {Object} event Router event object
+	     */
+
 	  }, {
 	    key: 'category',
 	    value: function category(event) {
@@ -150,6 +172,11 @@
 
 	      _Category.Category.start(slug, type);
 	    }
+	    /**
+	     * single, detail page
+	     * @param {Object} event Router event object
+	     */
+
 	  }, {
 	    key: 'single',
 	    value: function single(event) {
@@ -913,7 +940,9 @@
 
 	var _Header = __webpack_require__(38);
 
-	var _Sidebar = __webpack_require__(39);
+	var _Sidebar = __webpack_require__(40);
+
+	var _Dom = __webpack_require__(39);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -922,7 +951,17 @@
 	// UT
 	var UT = self.UT;
 
+	/**
+	 * <h3>Home(index)</h3>
+	 * 全て static です
+	 */
+
 	var Index = exports.Index = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
 	  function Index(target) {
 	    (0, _classCallCheck3.default)(this, Index);
 
@@ -931,6 +970,9 @@
 	      throw new Error('Index is static Class. not use new Index().');
 	    }
 	  }
+	  /**
+	   * home rendering 開始
+	   */
 
 	  (0, _createClass3.default)(Index, null, [{
 	    key: 'start',
@@ -941,18 +983,18 @@
 
 	      // ---------------------------------------------------------
 	      // pickup
-	      var pickup = new UT.view.home.ViewPickup(document.getElementById('pickup-container'));
+	      var pickup = new UT.view.home.ViewPickup(_Dom.Dom.pickup());
 	      pickup.start();
 
 	      // ---------------------------------------------------------
 	      // headline
-	      var headline = new UT.view.home.ViewHeadline(document.getElementById('headline-container'));
+	      var headline = new UT.view.home.ViewHeadline(_Dom.Dom.headline());
 	      headline.start();
 
 	      // ---------------------------------------------------------
 	      // news
 	      var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-	      var archive = new UT.view.ViewArchiveMasonryInfinite(document.getElementById('board-container'), document.getElementById('board-container-more'), archiveAction);
+	      var archive = new UT.view.ViewArchiveMasonryInfinite(_Dom.Dom.board(), _Dom.Dom.boardMore(), archiveAction);
 	      archive.start();
 
 	      // sidebar, slug なし(=all)
@@ -996,6 +1038,8 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
+	var _Dom = __webpack_require__(39);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var _symbol = (0, _symbol3.default)();
@@ -1003,7 +1047,17 @@
 	// UT
 	var UT = self.UT;
 
+	/**
+	 * <h3>header user information / signup</h3>
+	 * 全て static です
+	 */
+
 	var Header = exports.Header = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
 	  function Header(target) {
 	    (0, _classCallCheck3.default)(this, Header);
 
@@ -1012,12 +1066,15 @@
 	      throw new Error('Header is static Class. not use new Header().');
 	    }
 	  }
+	  /**
+	   * header rendering 開始
+	   */
 
 	  (0, _createClass3.default)(Header, null, [{
 	    key: 'start',
 	    value: function start() {
 	      // header.user
-	      var headerUser = new UT.view.header.ViewHeaderUser(document.getElementById('user-profile-container'));
+	      var headerUser = new UT.view.header.ViewHeaderUser(_Dom.Dom.profile());
 	      headerUser.start();
 	    }
 	  }]);
@@ -1026,6 +1083,230 @@
 
 /***/ },
 /* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/16 - 15:59
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Dom = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(7);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	// UT
+	var UT = self.UT;
+	var Safety = UT.data.Safety;
+
+	/**
+	 * <h3>React Dom insert container element</h3>
+	 * <p>document.getElementById で取得する element</p>
+	 * 全て static です
+	 */
+
+	var Dom = exports.Dom = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Dom(target) {
+	    (0, _classCallCheck3.default)(this, Dom);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Dom is static Class. not use new Dom().');
+	    }
+	  }
+	  /**
+	   * element を取得します
+	   * @param {string} id 取得 element id
+	   * @return {Element} id から取得した element を返します
+	   */
+
+	  (0, _createClass3.default)(Dom, null, [{
+	    key: 'get',
+	    value: function get(id) {
+
+	      var element = document.getElementById(id);
+	      if (!Safety.isElement(element)) {
+	        throw new Error('element by ' + id + ' not found.');
+	      }
+
+	      return element;
+	    }
+	    /**
+	     * header user profile
+	     * @return {Element} 'user-profile-container' element を返します
+	     */
+
+	  }, {
+	    key: 'profile',
+	    value: function profile() {
+	      return Dom.get('user-profile-container');
+	    }
+	    /**
+	     * sidebar ranking
+	     * @return {Element} widget-ranking-container element を返します
+	     */
+
+	  }, {
+	    key: 'ranking',
+	    value: function ranking() {
+	      return Dom.get('widget-ranking-container');
+	    }
+	    /**
+	     * sidebar video
+	     * @return {Element} widget-recommend-container element を返します
+	     */
+
+	  }, {
+	    key: 'video',
+	    value: function video() {
+	      return Dom.get('widget-recommend-container');
+	    }
+	    /**
+	     * home slide show(pickup)
+	     * @return {Element} pickup-container を返します
+	     */
+
+	  }, {
+	    key: 'pickup',
+	    value: function pickup() {
+	      return Dom.get('pickup-container');
+	    }
+	    /**
+	     * home headline 注目の記事
+	     * @return {Element} headline-container を返します
+	     */
+
+	  }, {
+	    key: 'headline',
+	    value: function headline() {
+	      return Dom.get('headline-container');
+	    }
+	    /**
+	     * archive container
+	     * @return {Element} board-container を返します
+	     */
+
+	  }, {
+	    key: 'board',
+	    value: function board() {
+	      return Dom.get('board-container');
+	    }
+	    /**
+	     * archive container: more button
+	     * @return {Element} board-container-more を返します
+	     */
+
+	  }, {
+	    key: 'boardMore',
+	    value: function boardMore() {
+	      return Dom.get('board-container-more');
+	    }
+	    /**
+	     * single 関連記事
+	     * @return {Element} single-related-container を返します
+	     */
+
+	  }, {
+	    key: 'related',
+	    value: function related() {
+	      return Dom.get('single-related-container');
+	    }
+	    /**
+	     * single 本文下, tag とか...
+	     * @return {Element} single-footer-container を返します
+	     */
+
+	  }, {
+	    key: 'singleFooter',
+	    value: function singleFooter() {
+	      return Dom.get('single-footer-container');
+	    }
+	    /**
+	     * single 本文上, title, 投稿者とか...
+	     * @return {Element} single-header-container を返します
+	     */
+
+	  }, {
+	    key: 'singleHeader',
+	    value: function singleHeader() {
+	      return Dom.get('single-header-container');
+	    }
+	    /**
+	     * single comment, 記事へのコメント
+	     * @return {Element} comment-form-container を返します
+	     */
+
+	  }, {
+	    key: 'commentForm',
+	    value: function commentForm() {
+	      return Dom.get('comment-form-container');
+	    }
+	    /**
+	     * single comment, 自分のコメント
+	     * @return {Element} comment-self-container を返します
+	     */
+
+	  }, {
+	    key: 'commentSelf',
+	    value: function commentSelf() {
+	      return Dom.get('comment-self-container');
+	    }
+	    /**
+	     * single comment, 公式コメント
+	     * @return {Element} comment-official-container を返します
+	     */
+
+	  }, {
+	    key: 'commentOfficial',
+	    value: function commentOfficial() {
+	      return Dom.get('comment-official-container');
+	    }
+	    /**
+	     * single comment, みんなのコメント
+	     * @return {Element} comment-normal-container を返します
+	     */
+
+	  }, {
+	    key: 'commentNormal',
+	    value: function commentNormal() {
+	      return Dom.get('comment-normal-container');
+	    }
+	  }]);
+	  return Dom;
+	}();
+	// return Dom.get( '' );
+
+/***/ },
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1058,6 +1339,8 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
+	var _Dom = __webpack_require__(39);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var _symbol = (0, _symbol3.default)();
@@ -1065,7 +1348,17 @@
 	// UT
 	var UT = self.UT;
 
+	/**
+	 * <h3>Sidebar ranking / video 表示</h3>
+	 * 全て static です
+	 */
+
 	var Sidebar = exports.Sidebar = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
 	  function Sidebar(target) {
 	    (0, _classCallCheck3.default)(this, Sidebar);
 
@@ -1074,6 +1367,10 @@
 	      throw new Error('Sidebar is static Class. not use new Sidebar().');
 	    }
 	  }
+	  /**
+	   * sidebar ranking / video rendering 開始
+	   * @param {string} [slug=all] category slug
+	   */
 
 	  (0, _createClass3.default)(Sidebar, null, [{
 	    key: 'start',
@@ -1081,11 +1378,11 @@
 	      var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
 
 	      // ranking
-	      var ranking = new UT.view.sidebar.ViewRanking(document.getElementById('widget-ranking-container'), null, slug);
+	      var ranking = new UT.view.sidebar.ViewRanking(_Dom.Dom.ranking(), null, slug);
 	      ranking.start();
 
 	      // video
-	      var videos = new UT.view.sidebar.ViewVideos(document.getElementById('widget-recommend-container'), null, slug);
+	      var videos = new UT.view.sidebar.ViewVideos(_Dom.Dom.video(), null, slug);
 	      videos.start();
 	    }
 	  }]);
@@ -1093,7 +1390,7 @@
 	}();
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1128,7 +1425,9 @@
 
 	var _Header = __webpack_require__(38);
 
-	var _Sidebar = __webpack_require__(39);
+	var _Sidebar = __webpack_require__(40);
+
+	var _Dom = __webpack_require__(39);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1137,7 +1436,17 @@
 	// UT
 	var UT = self.UT;
 
+	/**
+	 * <h3>category 一覧</h3>
+	 * 全て static です
+	 */
+
 	var Category = exports.Category = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
 	  function Category(target) {
 	    (0, _classCallCheck3.default)(this, Category);
 
@@ -1146,6 +1455,12 @@
 	      throw new Error('Category is static Class. not use new Category().');
 	    }
 	  }
+
+	  /**
+	   * rendering 開始
+	   * @param {string} slug category slug
+	   * @param {string} [type=''] ranking | video \ '' の 3つ
+	   */
 
 	  (0, _createClass3.default)(Category, null, [{
 	    key: 'start',
@@ -1156,7 +1471,7 @@
 	      _Header.Header.start();
 
 	      // list
-	      var archive = new UT.view.ViewCategory(slug, document.getElementById('board-container'), document.getElementById('board-container-more'));
+	      var archive = new UT.view.ViewCategory(slug, _Dom.Dom.board(), _Dom.Dom.boardMore());
 	      archive.start();
 
 	      // sidebar
@@ -1170,7 +1485,7 @@
 	}();
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1185,6 +1500,8 @@
 	 *
 	 */
 	'use strict';
+
+	// import {Header} from './Header';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -1203,9 +1520,9 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Header = __webpack_require__(38);
+	var _Sidebar = __webpack_require__(40);
 
-	var _Sidebar = __webpack_require__(39);
+	var _Dom = __webpack_require__(39);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1218,6 +1535,12 @@
 	var _singleDae = null;
 	var _userDae = null;
 	var _viewSingle = null;
+	var _headerUser = null;
+
+	/**
+	 * <h3>Single(detail)記事詳細</h3>
+	 * 全て static です
+	 */
 
 	var Single = exports.Single = function () {
 	  function Single(target) {
@@ -1228,6 +1551,10 @@
 	      throw new Error('Single is static Class. not use new Single().');
 	    }
 	  }
+	  /**
+	   * 記事詳細, 上部 / 下部 rendering 開始
+	   * @param {Number} articleId 記事 Id (:article_id)
+	   */
 
 	  (0, _createClass3.default)(Single, null, [{
 	    key: 'start',
@@ -1235,10 +1562,11 @@
 
 	      // header
 	      // header.user
-	      var headerUser = new UT.view.header.ViewHeaderUser(document.getElementById('user-profile-container'));
+	      var headerUser = new UT.view.header.ViewHeaderUser(_Dom.Dom.profile());
 	      if (UT.app.User.sign) {
 
 	        // login user はコメント投稿可能 -> 表示アイコン必要
+	        _headerUser = headerUser;
 	        headerUser.on(UT.view.View.BEFORE_RENDER, Single.onHeader);
 	      } else {
 
@@ -1250,21 +1578,34 @@
 
 	      // single page
 	      var elements = {
-	        related: document.getElementById('single-related-container'),
-	        footer: document.getElementById('single-footer-container')
+	        related: _Dom.Dom.related(),
+	        footer: _Dom.Dom.singleFooter()
 	      };
 
-	      var single = new UT.view.ViewSingle(articleId, document.getElementById('single-header-container'), elements);
+	      var single = new UT.view.ViewSingle(articleId, _Dom.Dom.singleHeader(), elements);
 	      _viewSingle = single;
 	      single.on(UT.view.View.BEFORE_RENDER, Single.before);
 	      single.start();
 	    }
+	    /**
+	     * header View.BEFORE_RENDER event handler
+	     * <p>ユーザー: アイコン, Id 取得のために event を bind し情報を取得します</p>
+	     * @param {Object} event event object
+	     */
+
 	  }, {
 	    key: 'onHeader',
 	    value: function onHeader(event) {
+	      _headerUser.on(UT.view.View.BEFORE_RENDER, Single.onHeader);
 	      _userDae = event.args[0];
 	      Single.comment();
 	    }
+	    /**
+	     * single View.BEFORE_RENDER event handler
+	     * <p>記事所属カテゴリ取得のために event を bind</p>
+	     * @param {Object} event event object
+	     */
+
 	  }, {
 	    key: 'before',
 	    value: function before(event) {
@@ -1275,17 +1616,23 @@
 	      _singleDae = single;
 
 	      var slug = single.category.slug;
-	      var label = single.category.label;
+	      // let label = single.category.label;
 
-	      // title
-	      var title = new UT.view.ViewTitle(label, document.getElementById('page-title-container'));
-	      title.render();
+	      // title は backend output
 
 	      // sidebar
 	      _Sidebar.Sidebar.start(slug);
 
 	      Single.comment();
 	    }
+	    /**
+	     * **ログイン**
+	     * <p>ユーザー情報, 記事 Id 必須</p>
+	     *
+	     * **非ログイン**
+	     * <p>記事 Id 必須</p>
+	     */
+
 	  }, {
 	    key: 'comment',
 	    value: function comment() {
@@ -1295,21 +1642,38 @@
 	        return;
 	      }
 
+	      // user icon
+	      // _userDae null check
+	      //  _userDae.profilePicture undefined check
+	      var picture = '';
+	      if (_userDae !== null && typeof _userDae.profilePicture !== 'undefined') {
+	        picture = _userDae.profilePicture;
+	      }
+
+	      // article id
+	      var articleId = _singleDae.id;
+	      var ViewComments = UT.view.ViewComments;
+
 	      // comment form
-	      var commentForm = new UT.view.comment.ViewCommentForm(document.getElementById('comment-form-container'), _singleDae.id, _userDae.profilePicture);
+	      var commentForm = new UT.view.comment.ViewCommentForm(_Dom.Dom.commentForm(), articleId, picture);
 	      commentForm.start();
 
 	      // self
+	      var commentSelf = new ViewComments(articleId, _Dom.Dom.commentSelf(), UT.app.const.CommentsType.SELF);
+	      if (_userDae !== null) {
+	        commentSelf.user = _userDae;
+	      }
+	      commentSelf.start();
 
 	      // official
-	      var official = new UT.view.ViewComments(_singleDae.id, document.getElementById('comment-official-container'), UT.app.const.CommentsType.OFFICIAL);
+	      var official = new ViewComments(articleId, _Dom.Dom.commentOfficial(), UT.app.const.CommentsType.OFFICIAL);
 	      if (_userDae !== null) {
 	        official.user = _userDae;
 	      }
 	      official.start();
 
 	      // normal
-	      var normal = new UT.view.ViewComments(_singleDae.id, document.getElementById('comment-normal-container'), UT.app.const.CommentsType.NORMAL);
+	      var normal = new ViewComments(articleId, _Dom.Dom.commentNormal(), UT.app.const.CommentsType.NORMAL);
 	      if (_userDae !== null) {
 	        normal.user = _userDae;
 	      }
