@@ -75,3 +75,14 @@
       </ul>
     </div>
   </nav><!-- /.gnav-sec -->
+
+  <!--
+  # カテゴリー一覧
+
+  ```
+  <?php print_r($page['site_categories']); ?>
+  ```
+
+   -->
+
+
