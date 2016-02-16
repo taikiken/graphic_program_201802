@@ -107,7 +107,7 @@ $y["status"]["user_message"]="";
 $y["status"]["developer_message"]="";
 
 $y["response"]["count"]=(int)$count;
-$y["response"]["activities"]=$s;
+$y["response"]["notifications"]=$s;
 
 if(strlen($_REQUEST["length"])>0)$y["request"]["length"]=(int)$_REQUEST["length"];
 if(strlen($_REQUEST["offset"])>0)$y["request"]["offset"]=(int)$_REQUEST["offset"];
