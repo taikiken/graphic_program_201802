@@ -40,6 +40,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.hostname = _conf['hostname']
   config.vm.network :private_network, ip: _conf['ip']
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # sync
   # ------------------------------
