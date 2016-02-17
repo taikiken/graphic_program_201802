@@ -9,11 +9,11 @@ $app->group('/signup', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '新規会員登録',
-      'template' => 'signup.php',
+      'template' => 'signup',
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -24,11 +24,11 @@ $app->group('/signup', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '基本情報入力 | 新規会員登録',
-      'template' => 'signup.'.$args['slug'].'.php',
+      'template' => 'signup.'.$args['slug'],
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -39,11 +39,11 @@ $app->group('/signup', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '興味のある競技を選択 | 新規会員登録',
-      'template' => 'signup.'.$args['slug'].'.php',
+      'template' => 'signup.'.$args['slug'],
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 

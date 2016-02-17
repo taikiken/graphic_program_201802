@@ -9,11 +9,11 @@ $app->group('/settings', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '基本情報設定 | 設定',
-      'template' => 'settings.php',
+      'template' => 'settings',
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -24,11 +24,11 @@ $app->group('/settings', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'パーソナライズ設定 | 設定',
-      'template' => 'settings.'.$args['slug'].'.php',
+      'template' => 'settings.'.$args['slug'],
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -39,11 +39,11 @@ $app->group('/settings', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'ソーシャル連携 | 設定',
-      'template' => 'settings.'.$args['slug'].'.php',
+      'template' => 'settings.'.$args['slug'],
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -58,7 +58,7 @@ $app->group('/settings', function () use ($app) {
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 

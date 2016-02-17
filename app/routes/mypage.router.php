@@ -8,11 +8,11 @@ $app->group('/mypage', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'マイページ',
-      'template' => 'mypage.php',
+      'template' => 'mypage',
       'path'     => $args,
    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -23,11 +23,11 @@ $app->group('/mypage', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'アクティビティ | マイページ',
-      'template' => 'mypage.'.$args['slug'].'.php',
+      'template' => 'mypage.'.$args['slug'],
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
