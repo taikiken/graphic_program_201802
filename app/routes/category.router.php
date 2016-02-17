@@ -28,11 +28,11 @@ $app->group('/category/{category_slug:'.join('|',$category_slug).'}', function (
 
     $args['page'] = $app->model->set(array(
       'title'      => $category['label'].'のニュース',
-      'template'   => 'category.php',
+      'template'   => 'category',
       'path'       => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -46,11 +46,11 @@ $app->group('/category/{category_slug:'.join('|',$category_slug).'}', function (
     $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'のランキング',
       'type'     => 'ranking',
-      'template' => 'category.php',
+      'template' => 'category',
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -64,11 +64,11 @@ $app->group('/category/{category_slug:'.join('|',$category_slug).'}', function (
     $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'の動画',
       'type'     => 'video',
-      'template' => 'category.php',
+      'template' => 'category',
       'path'     => $args,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 

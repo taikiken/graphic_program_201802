@@ -4,12 +4,12 @@ $app->get('/', function ($request, $response, $args) use ($app) {
 
   $args['page'] = $app->model->set(array(
     'title'    => '',
-    'template' => 'index.php',
+    'template' => 'index',
     'path'     => $args,
     'og_type'  => 'website',
   ));
 
-  return $this->renderer->render($response, "_default.php", $args);
+  return $this->renderer->render($response, "default.php", $args);
 
 });
 

@@ -11,12 +11,12 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'article - '.$args['article_id'],
-      'template' => 'p.php',
+      'template' => 'p',
       'path'     => $args,
       'post'     => $post,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -29,12 +29,12 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'article - '.$args['article_id'].' / commment - '.$args['commend_id'],
-      'template' => 'p.php',
+      'template' => 'p',
       'path'     => $args,
       'post'     => $post,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -47,12 +47,12 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'article - '.$args['article_id'].' / commment - '.$args['commend_id'].' / reply - '.$args['reply_id'],
-      'template' => 'p.php',
+      'template' => 'p',
       'path'     => $args,
       'post'     => $post,
     ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
