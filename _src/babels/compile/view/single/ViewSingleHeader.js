@@ -256,7 +256,13 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
         },
         done: function done(result) {
 
-          this.setState({ loading: '', status: !this.state.status });
+          var bookmarked = '';
+          if (!this.state.status) {
+            // 現在がbookmark 済み
+            bookmarked = 'bookmarked enable';
+          }
+
+          this.setState({ loading: '', status: !this.state.status, bookmarked: bookmarked });
         },
         fail: function fail(error) {
 
