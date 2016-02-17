@@ -14,8 +14,6 @@
 import {ActionAuthBehavior} from '../ActionAuthBehavior';
 import {Api} from '../../net/Api';
 import {Path} from '../../app/const/Path';
-import {Form} from '../../data/Form';
-import {Data} from '../../data/Data';
 import {User} from '../../app/User';
 
 /**
@@ -31,17 +29,13 @@ export class Bookmark extends ActionAuthBehavior {
    */
   constructor( articleId:Number, resolve:Function = null, reject:Function = null ) {
 
-    // send form data 作成 article_id: article id
-    let data = new Data( Path.ARTICLE_ID.toLowerCase(), String( articleId ) );
-    let formData = Form.data( [ data ] );
-
     // 登録
     let add = Api.bookmark( 'add' );
     // 解除
     let remove = Api.bookmark( 'delete' );
 
     // 登録用で super 実行
-    super( User.token, add, formData, resolve, reject );
+    super( User.token, add, null, resolve, reject );
 
     // global へ( super の後 )
     this._add = add;
@@ -75,7 +69,7 @@ export class Bookmark extends ActionAuthBehavior {
    */
   add():void {
 
-    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ) );
+    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 
   }
   /**
@@ -83,7 +77,7 @@ export class Bookmark extends ActionAuthBehavior {
    */
   remove():void {
 
-    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ) );
+    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 
   }
 }

@@ -3192,6 +3192,12 @@ table tr.w200 > td {
 .sprite-header, .head-sec-inner h1 a, .head-sec .head-search input[type="submit"] {
   background-image: url(/assets/images/sprite/sprite-header.png); }
 
+.post-kv .post-single-figure {
+  text-align: center; }
+  .post-kv .post-single-figure .caption {
+    text-align: left;
+    margin-top: 8px; }
+
 #single-header-container .post-data .loading-root,
 #single-header-container .post-data .btn-bookmark {
   position: relative; }

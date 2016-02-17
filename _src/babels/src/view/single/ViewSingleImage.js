@@ -50,11 +50,9 @@ export class ViewSingleImage extends View {
     // JSON data に不備あり, on 2016-02-10
     // 一時コメントにする
     // ToDo: JSON が正しくなったらコメント解除
-    /*
     if ( !images.original ) {
       return;
     }
-    */
 
     console.log( 'ViewImages ', images );
 
@@ -98,8 +96,8 @@ export class ViewSingleImage extends View {
 
         return (
           <div className="post-kv">
-            <figure>
-              <img src={original} alt=""/>
+            <figure className="post-single-figure">
+              <img src={original} alt="" className="post-single-image"/>
               {tag}
             </figure>
           </div>

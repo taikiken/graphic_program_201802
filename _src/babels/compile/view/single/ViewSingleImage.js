@@ -93,11 +93,9 @@ var ViewSingleImage = exports.ViewSingleImage = function (_View) {
       // JSON data に不備あり, on 2016-02-10
       // 一時コメントにする
       // ToDo: JSON が正しくなったらコメント解除
-      /*
-      if ( !images.original ) {
+      if (!images.original) {
         return;
       }
-      */
 
       console.log('ViewImages ', images);
 
@@ -145,8 +143,8 @@ var ViewSingleImage = exports.ViewSingleImage = function (_View) {
             { className: 'post-kv' },
             React.createElement(
               'figure',
-              null,
-              React.createElement('img', { src: original, alt: '' }),
+              { className: 'post-single-figure' },
+              React.createElement('img', { src: original, alt: '', className: 'post-single-image' }),
               tag
             )
           );

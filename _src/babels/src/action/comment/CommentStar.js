@@ -94,7 +94,7 @@ export class CommentStar extends ActionAuthBehavior {
    */
   add():void {
 
-    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ) );
+    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 
   }
   /**
@@ -102,7 +102,7 @@ export class CommentStar extends ActionAuthBehavior {
    */
   remove():void {
 
-    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ) );
+    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers, this._data );
 
   }
   // ---------------------------------------------------

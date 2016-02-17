@@ -132,7 +132,7 @@ var CommentStar = exports.CommentStar = function (_ActionAuthBehavior) {
     key: 'add',
     value: function add() {
 
-      this._ajax.start(this.url, this._add.method, this.success.bind(this), this.fail.bind(this));
+      this._ajax.start(this.url, this._add.method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers);
     }
     /**
      * コメント Good / Bad 解除
@@ -142,7 +142,7 @@ var CommentStar = exports.CommentStar = function (_ActionAuthBehavior) {
     key: 'remove',
     value: function remove() {
 
-      this._ajax.start(this.url, this._remove.method, this.success.bind(this), this.fail.bind(this));
+      this._ajax.start(this.url, this._remove.method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers, this._data);
     }
     // ---------------------------------------------------
     //  static METHOD

@@ -4,6 +4,21 @@
 // -------------------------------------------------
 // detail
 // -------------------------------------------------
+
+// image
+.post-kv {
+  // figure
+  .post-single-figure {
+    text-align: center;
+
+    .caption {
+      text-align: left;
+      margin-top: 8px;
+    }
+  }
+}
+
+// bookmark button
 #single-header-container {
   .post-data {
     // div

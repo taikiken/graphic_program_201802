@@ -42,10 +42,6 @@ var _Api = require('../../net/Api');
 
 var _Path = require('../../app/const/Path');
 
-var _Form = require('../../data/Form');
-
-var _Data = require('../../data/Data');
-
 var _User = require('../../app/User');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -70,10 +66,6 @@ var Bookmark = exports.Bookmark = function (_ActionAuthBehavior) {
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     (0, _classCallCheck3.default)(this, Bookmark);
 
-    // send form data 作成 article_id: article id
-    var data = new _Data.Data(_Path.Path.ARTICLE_ID.toLowerCase(), String(articleId));
-    var formData = _Form.Form.data([data]);
-
     // 登録
     var add = _Api.Api.bookmark('add');
     // 解除
@@ -83,7 +75,7 @@ var Bookmark = exports.Bookmark = function (_ActionAuthBehavior) {
 
     // global へ( super の後 )
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _User.User.token, add, formData, resolve, reject));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _User.User.token, add, null, resolve, reject));
 
     _this._add = add;
     _this._remove = remove;
@@ -122,7 +114,7 @@ var Bookmark = exports.Bookmark = function (_ActionAuthBehavior) {
     key: 'add',
     value: function add() {
 
-      this._ajax.start(this.url, this._add.method, this.success.bind(this), this.fail.bind(this));
+      this._ajax.start(this.url, this._add.method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers);
     }
     /**
      * 記事のブックマーク解除
@@ -132,7 +124,7 @@ var Bookmark = exports.Bookmark = function (_ActionAuthBehavior) {
     key: 'remove',
     value: function remove() {
 
-      this._ajax.start(this.url, this._remove.method, this.success.bind(this), this.fail.bind(this));
+      this._ajax.start(this.url, this._remove.method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers);
     }
   }, {
     key: 'url',

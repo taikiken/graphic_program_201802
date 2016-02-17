@@ -48,9 +48,15 @@ var _SingleDae = require('../../dae/SingleDae');
 
 var _User = require('../../app/User');
 
+var _Model = require('../../model/Model');
+
+var _ModelBookmark = require('../../model/users/ModelBookmark');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
+
+// model
 
 // dae
 var React = self.React;
@@ -110,6 +116,8 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
           sign: React.PropTypes.bool.isRequired
         },
         getInitialState: function getInitialState() {
+          this.action = null;
+
           return {
             sign: this.props.sign,
             single: this.props.single,
@@ -119,7 +127,7 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
           };
         },
         render: function render() {
-
+          console.log('----------------------- HeaderDom ', this.state.single);
           var single = this.state.single;
           var message = this.state.status ? 'ブックマーク済' : 'ブックマークする';
           var right = '';
@@ -194,6 +202,7 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
           // after mount
           _this.executeSafely(_View2.View.DID_MOUNT);
 
+          // 上部画像
           // media type check
           var single = this.state.single;
           var imageNode = ReactDOM.findDOMNode(this.refs.singleImage);
@@ -219,6 +228,19 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
           if (typeof img !== 'undefined') {
             img.start();
           }
+
+          // ---------------------
+          // bookmark 処理
+          if (this.state.sign) {
+            var action = new _ModelBookmark.ModelBookmark(this.state.single.id);
+            this.action = action;
+            action.on(_Model.Model.COMPLETE, this.done);
+            action.on(_Model.Model.UNDEFINED_ERROR, this.fail);
+            action.on(_Model.Model.RESPONSE_ERROR, this.fail);
+          }
+        },
+        componentWillUnMount: function componentWillUnMount() {
+          this.dispose();
         },
         // --------------------------------------------
         // custom method
@@ -227,9 +249,28 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
         },
         clickBookmark: function clickBookmark(event) {
           event.preventDefault();
+
+          this.setState({ loading: 'loading' });
+
+          this.action.start(!this.state.status);
         },
-        done: function done(result) {},
-        fail: function fail(error) {}
+        done: function done(result) {
+
+          this.setState({ loading: '', status: !this.state.status });
+        },
+        fail: function fail(error) {
+
+          this.setState({ loading: '' });
+        },
+        dispose: function dispose() {
+
+          var action = this.action;
+          if (action !== null) {
+            action.off(_Model.Model.COMPLETE, this.done);
+            action.off(_Model.Model.UNDEFINED_ERROR, this.fail);
+            action.off(_Model.Model.RESPONSE_ERROR, this.fail);
+          }
+        }
       });
 
       if (this._rendered === null) {

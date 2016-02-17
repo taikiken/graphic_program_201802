@@ -47,7 +47,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-17 21:14:38
+	 * @date 2016-02-17 22:12:54
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -159,21 +159,21 @@
 
 	var _ViewSingle = __webpack_require__(158);
 
-	var _ViewTitle = __webpack_require__(167);
+	var _ViewTitle = __webpack_require__(168);
 
-	var _ViewComments = __webpack_require__(168);
+	var _ViewComments = __webpack_require__(169);
 
-	var _ViewCommentForm = __webpack_require__(180);
+	var _ViewCommentForm = __webpack_require__(181);
 
-	var _ViewHeadline = __webpack_require__(181);
+	var _ViewHeadline = __webpack_require__(182);
 
-	var _ViewPickup = __webpack_require__(182);
+	var _ViewPickup = __webpack_require__(183);
 
-	var _ViewRanking = __webpack_require__(183);
+	var _ViewRanking = __webpack_require__(184);
 
-	var _ViewVideos = __webpack_require__(184);
+	var _ViewVideos = __webpack_require__(185);
 
-	var _Receiver = __webpack_require__(185);
+	var _Receiver = __webpack_require__(186);
 
 	/**
 	 * ToDo: 対象外OS alert
@@ -8887,10 +8887,6 @@
 
 	var _Path = __webpack_require__(96);
 
-	var _Form = __webpack_require__(86);
-
-	var _Data = __webpack_require__(85);
-
 	var _User = __webpack_require__(78);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -8915,10 +8911,6 @@
 	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 	    (0, _classCallCheck3.default)(this, Bookmark);
 
-	    // send form data 作成 article_id: article id
-	    var data = new _Data.Data(_Path.Path.ARTICLE_ID.toLowerCase(), String(articleId));
-	    var formData = _Form.Form.data([data]);
-
 	    // 登録
 	    var add = _Api.Api.bookmark('add');
 	    // 解除
@@ -8928,7 +8920,7 @@
 
 	    // global へ( super の後 )
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _User.User.token, add, formData, resolve, reject));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _User.User.token, add, null, resolve, reject));
 
 	    _this._add = add;
 	    _this._remove = remove;
@@ -8967,7 +8959,7 @@
 	    key: 'add',
 	    value: function add() {
 
-	      this._ajax.start(this.url, this._add.method, this.success.bind(this), this.fail.bind(this));
+	      this._ajax.start(this.url, this._add.method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers);
 	    }
 	    /**
 	     * 記事のブックマーク解除
@@ -8977,7 +8969,7 @@
 	    key: 'remove',
 	    value: function remove() {
 
-	      this._ajax.start(this.url, this._remove.method, this.success.bind(this), this.fail.bind(this));
+	      this._ajax.start(this.url, this._remove.method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers);
 	    }
 	  }, {
 	    key: 'url',
@@ -15351,7 +15343,7 @@
 
 	var _ViewSingleHeader = __webpack_require__(161);
 
-	var _ViewSingleFooter = __webpack_require__(166);
+	var _ViewSingleFooter = __webpack_require__(167);
 
 	var _Single = __webpack_require__(123);
 
@@ -16045,9 +16037,15 @@
 
 	var _User = __webpack_require__(78);
 
+	var _Model = __webpack_require__(125);
+
+	var _ModelBookmark = __webpack_require__(166);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// React
+
+	// model
 
 	// dae
 	var React = self.React;
@@ -16107,6 +16105,8 @@
 	          sign: React.PropTypes.bool.isRequired
 	        },
 	        getInitialState: function getInitialState() {
+	          this.action = null;
+
 	          return {
 	            sign: this.props.sign,
 	            single: this.props.single,
@@ -16116,7 +16116,7 @@
 	          };
 	        },
 	        render: function render() {
-
+	          console.log('----------------------- HeaderDom ', this.state.single);
 	          var single = this.state.single;
 	          var message = this.state.status ? 'ブックマーク済' : 'ブックマークする';
 	          var right = '';
@@ -16191,6 +16191,7 @@
 	          // after mount
 	          _this.executeSafely(_View2.View.DID_MOUNT);
 
+	          // 上部画像
 	          // media type check
 	          var single = this.state.single;
 	          var imageNode = ReactDOM.findDOMNode(this.refs.singleImage);
@@ -16216,6 +16217,19 @@
 	          if (typeof img !== 'undefined') {
 	            img.start();
 	          }
+
+	          // ---------------------
+	          // bookmark 処理
+	          if (this.state.sign) {
+	            var action = new _ModelBookmark.ModelBookmark(this.state.single.id);
+	            this.action = action;
+	            action.on(_Model.Model.COMPLETE, this.done);
+	            action.on(_Model.Model.UNDEFINED_ERROR, this.fail);
+	            action.on(_Model.Model.RESPONSE_ERROR, this.fail);
+	          }
+	        },
+	        componentWillUnMount: function componentWillUnMount() {
+	          this.dispose();
 	        },
 	        // --------------------------------------------
 	        // custom method
@@ -16224,9 +16238,28 @@
 	        },
 	        clickBookmark: function clickBookmark(event) {
 	          event.preventDefault();
+
+	          this.setState({ loading: 'loading' });
+
+	          this.action.start(!this.state.status);
 	        },
-	        done: function done(result) {},
-	        fail: function fail(error) {}
+	        done: function done(result) {
+
+	          this.setState({ loading: '', status: !this.state.status });
+	        },
+	        fail: function fail(error) {
+
+	          this.setState({ loading: '' });
+	        },
+	        dispose: function dispose() {
+
+	          var action = this.action;
+	          if (action !== null) {
+	            action.off(_Model.Model.COMPLETE, this.done);
+	            action.off(_Model.Model.UNDEFINED_ERROR, this.fail);
+	            action.off(_Model.Model.RESPONSE_ERROR, this.fail);
+	          }
+	        }
 	      });
 
 	      if (this._rendered === null) {
@@ -16341,11 +16374,9 @@
 	      // JSON data に不備あり, on 2016-02-10
 	      // 一時コメントにする
 	      // ToDo: JSON が正しくなったらコメント解除
-	      /*
-	      if ( !images.original ) {
+	      if (!images.original) {
 	        return;
 	      }
-	      */
 
 	      console.log('ViewImages ', images);
 
@@ -16393,8 +16424,8 @@
 	            { className: 'post-kv' },
 	            React.createElement(
 	              'figure',
-	              null,
-	              React.createElement('img', { src: original, alt: '' }),
+	              { className: 'post-single-figure' },
+	              React.createElement('img', { src: original, alt: '', className: 'post-single-image' }),
 	              tag
 	            )
 	          );
@@ -16847,6 +16878,131 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/17 - 21:37
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ModelBookmark = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _Model2 = __webpack_require__(125);
+
+	var _Result = __webpack_require__(87);
+
+	var _Bookmark = __webpack_require__(120);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * bookmark 登録・解除
+	 */
+
+	var ModelBookmark = exports.ModelBookmark = function (_Model) {
+	  (0, _inherits3.default)(ModelBookmark, _Model);
+
+	  /**
+	   * bookmark 登録・解除 を行い event を発火します
+	   * @param {Number} articleId 記事 Id
+	   * @param {Object} [option={}] optional event handler
+	   */
+
+	  function ModelBookmark(articleId) {
+	    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    (0, _classCallCheck3.default)(this, ModelBookmark);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ModelBookmark).call(this, option));
+
+	    _this._action = new _Bookmark.Bookmark(articleId, _this.done.bind(_this), _this.fail.bind(_this));
+	    _this._articleId = articleId;
+	    return _this;
+	  }
+	  /**
+	   * Ajax request を開始します
+	   */
+
+	  (0, _createClass3.default)(ModelBookmark, [{
+	    key: 'start',
+	    value: function start(add) {
+
+	      if (add) {
+	        this.action.add();
+	      } else {
+	        this.action.remove();
+	      }
+	    }
+	    /**
+	     * Ajax response success
+	     * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+	     */
+
+	  }, {
+	    key: 'done',
+	    value: function done(result) {
+
+	      var response = result.response;
+
+	      if (typeof response === 'undefined') {
+
+	        // articles undefined
+	        // JSON に問題がある
+	        var error = new Error('[MODEL_BOOKMARK:UNDEFINED]サーバーレスポンスに問題が発生しました。');
+	        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error);
+	      } else {
+
+	        // 成功 callback
+	        this.executeSafely(_Model2.Model.COMPLETE, result);
+	      }
+	    }
+	    /**
+	     * Ajax response error
+	     * @param {Error} error Error instance
+	     */
+
+	  }, {
+	    key: 'fail',
+	    value: function fail(error) {
+
+	      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error);
+	    }
+	  }]);
+	  return ModelBookmark;
+	}(_Model2.Model);
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/02/10 - 21:45
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -17004,7 +17160,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17134,7 +17290,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17191,17 +17347,17 @@
 
 	var _ViewError = __webpack_require__(146);
 
-	var _Comments = __webpack_require__(169);
+	var _Comments = __webpack_require__(170);
 
 	var _Result = __webpack_require__(87);
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentsListDae = __webpack_require__(170);
+	var _CommentsListDae = __webpack_require__(171);
 
 	var _UserDae = __webpack_require__(127);
 
-	var _CommentNode = __webpack_require__(173);
+	var _CommentNode = __webpack_require__(174);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17778,7 +17934,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18004,7 +18160,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18033,7 +18189,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(171);
+	var _CommentsDae = __webpack_require__(172);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18115,7 +18271,7 @@
 	}();
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18151,7 +18307,7 @@
 
 	var _PopularDae = __webpack_require__(144);
 
-	var _ReplyDae = __webpack_require__(172);
+	var _ReplyDae = __webpack_require__(173);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18255,7 +18411,7 @@
 	}();
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18339,7 +18495,7 @@
 	}();
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18367,7 +18523,7 @@
 
 	var _ReactionNode = __webpack_require__(156);
 
-	var _CommentFormNode = __webpack_require__(174);
+	var _CommentFormNode = __webpack_require__(175);
 
 	// React
 
@@ -18784,7 +18940,7 @@
 	});
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18805,7 +18961,7 @@
 	});
 	exports.CommentFormNode = undefined;
 
-	var _ReplyStatus = __webpack_require__(175);
+	var _ReplyStatus = __webpack_require__(176);
 
 	var _Empty = __webpack_require__(138);
 
@@ -18815,9 +18971,9 @@
 
 	var _Result = __webpack_require__(87);
 
-	var _ModelComment = __webpack_require__(176);
+	var _ModelComment = __webpack_require__(177);
 
-	var _ModelCommentReply = __webpack_require__(178);
+	var _ModelCommentReply = __webpack_require__(179);
 
 	var _Model = __webpack_require__(125);
 
@@ -19362,7 +19518,7 @@
 	});
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19557,7 +19713,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19601,7 +19757,7 @@
 
 	var _Model2 = __webpack_require__(125);
 
-	var _Comment = __webpack_require__(177);
+	var _Comment = __webpack_require__(178);
 
 	var _Result = __webpack_require__(87);
 
@@ -19679,7 +19835,7 @@
 	}(_Model2.Model);
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19782,7 +19938,7 @@
 	}(_ActionAuthBehavior2.ActionAuthBehavior);
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19827,7 +19983,7 @@
 
 	var _Result = __webpack_require__(87);
 
-	var _CommentReply = __webpack_require__(179);
+	var _CommentReply = __webpack_require__(180);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19904,7 +20060,7 @@
 	}(_Model2.Model);
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20006,7 +20162,7 @@
 	}(_ActionAuthBehavior2.ActionAuthBehavior);
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20054,7 +20210,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentFormNode = __webpack_require__(174);
+	var _CommentFormNode = __webpack_require__(175);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20124,7 +20280,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20478,7 +20634,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21064,7 +21220,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21407,7 +21563,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21756,7 +21912,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

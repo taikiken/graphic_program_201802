@@ -22,6 +22,10 @@ import {SingleDae} from '../../dae/SingleDae';
 // app
 import {User} from '../../app/User';
 
+// model
+import {Model} from '../../model/Model';
+import {ModelBookmark} from '../../model/users/ModelBookmark';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -61,6 +65,8 @@ export class ViewSingleHeader extends View {
         sign: React.PropTypes.bool.isRequired
       },
       getInitialState: function() {
+        this.action = null;
+
         return {
           sign: this.props.sign,
           single: this.props.single,
@@ -70,7 +76,7 @@ export class ViewSingleHeader extends View {
         };
       },
       render: function() {
-
+        console.log( '----------------------- HeaderDom ', this.state.single );
         let single = this.state.single;
         let message = this.state.status ? 'ブックマーク済' : 'ブックマークする';
         let right = '';
@@ -116,6 +122,7 @@ export class ViewSingleHeader extends View {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
 
+        // 上部画像
         // media type check
         let single = this.state.single;
         let imageNode = ReactDOM.findDOMNode(this.refs.singleImage);
@@ -145,6 +152,19 @@ export class ViewSingleHeader extends View {
           img.start();
         }
 
+        // ---------------------
+        // bookmark 処理
+        if ( this.state.sign ) {
+          let action = new ModelBookmark( this.state.single.id );
+          this.action = action;
+          action.on( Model.COMPLETE, this.done );
+          action.on( Model.UNDEFINED_ERROR, this.fail );
+          action.on( Model.RESPONSE_ERROR, this.fail );
+        }
+
+      },
+      componentWillUnMount: function() {
+        this.dispose();
       },
       // --------------------------------------------
       // custom method
@@ -154,12 +174,29 @@ export class ViewSingleHeader extends View {
       clickBookmark: function( event ) {
         event.preventDefault();
 
+        this.setState( { loading: 'loading' } );
+
+        this.action.start( !this.state.status );
 
       },
       done: function( result ) {
 
+        this.setState( { loading: '', status: !this.state.status } );
+
       },
       fail: function( error ) {
+
+        this.setState( { loading: '' } );
+
+      },
+      dispose: function() {
+
+        let action = this.action;
+        if ( action !== null ) {
+          action.off( Model.COMPLETE, this.done );
+          action.off( Model.UNDEFINED_ERROR, this.fail );
+          action.off( Model.RESPONSE_ERROR, this.fail );
+        }
 
       }
     } );
