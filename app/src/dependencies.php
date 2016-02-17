@@ -4,8 +4,12 @@
 $container = $app->getContainer();
 
 
-$container['notFoundHandler'] = function ($c) {
-  return function ($request, $response) use ($c) {
+$container['notFoundHandler'] = function ($c) use ($app) {
+  return function ($request, $response) use ($app, $c) {
+
+    $args['page'] = $app->model->set(array(
+      'title'    => '404 Not Found',
+    ));
 
     $args['request']  = $request;
     $args['response'] = $response;

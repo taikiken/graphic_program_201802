@@ -1,17 +1,20 @@
 <?php
 
 
-if ( $app->config['categories'] ) :
+$categories = $app->model->property('site_categories');
+
+if ( $categories ) :
 
   // ルーティングのためのスラッグを設定する
-  $category_slug = array_keys( $app->config['categories'] );
+  $category_slug = array_keys( $categories );
 
 else :
 
-  // TODO : ダミーカテゴリ、デバッグ用、後で消す
+  // TODO : ダミーカテゴリ、APIから取得できなかった時用
   $category_slug = array('baseball','mlb','soccer','worldsoccer','golf','sumo','battle','athletics','swimming','judo','tennis','volleyball','rugby','figureskate','basketball','extremesports','motorsports','business','etc');
 
 endif;
+
 
 
 $app->group('/category/{category_slug:'.join('|',$category_slug).'}', function () use($app) {
@@ -21,32 +24,33 @@ $app->group('/category/{category_slug:'.join('|',$category_slug).'}', function (
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->config['categories'][$args['category_slug']];
+    $category = $app->model->get_category_by_slug($args['category_slug']);
 
-    $args['page'] = array(
+    $args['page'] = $app->model->set(array(
       'title'      => $category['label'].'のニュース',
-      'template'   => 'category.php',
+      'template'   => 'category',
       'path'       => $args,
-    );
+    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
+
 
   // カテゴリー/ランキング - /category/:category_slug/ranking/
   // ==============================
   $this->get('/{type:ranking}[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->config['categories'][$args['category_slug']];
+    $category = $app->model->get_category_by_slug($args['category_slug']);
 
-    $args['page'] = array(
+    $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'のランキング',
       'type'     => 'ranking',
-      'template' => 'category.php',
+      'template' => 'category',
       'path'     => $args,
-    );
+    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -55,16 +59,16 @@ $app->group('/category/{category_slug:'.join('|',$category_slug).'}', function (
   // ==============================
   $this->get('/{type:video}[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->config['categories'][$args['category_slug']];
+    $category = $app->model->get_category_by_slug($args['category_slug']);
 
-    $args['page'] = array(
+    $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'の動画',
       'type'     => 'video',
-      'template' => 'category.php',
+      'template' => 'category',
       'path'     => $args,
-    );
+    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 

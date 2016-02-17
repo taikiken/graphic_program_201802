@@ -4,13 +4,13 @@
 // ==============================
 $app->get('/notifications[/]', function ($request, $response, $args) use ($app) {
 
-  $args['page'] = array(
+  $args['page'] = $app->model->set(array(
     'title'    => 'お知らせ',
-    'template' => 'notifications.php',
+    'template' => 'notifications',
     'path'     => $args,
-  );
+  ));
 
-  return $this->renderer->render($response, "_default.php", $args);
+  return $this->renderer->render($response, "default.php", $args);
 
 });
 

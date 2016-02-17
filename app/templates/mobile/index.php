@@ -1,45 +1,6 @@
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Slim 3</title>
-        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-        <style>
-            body {
-                margin: 50px 0 0 0;
-                padding: 20px;
-                width: 100%;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                color: #aaa;
-                font-size: 18px;
-            }
-
-            h1 {
-                color: #719e40;
-                letter-spacing: -3px;
-                font-family: 'Lato', sans-serif;
-                font-size: 100px;
-                font-weight: 200;
-                margin-bottom: 0;
-            }
-
-            pre {
-                display:block; width:93%; background:#eee; font-family:monospace; font-size:12px; padding:20px;"
-                color:#000;
-            }
-
-
-            textarea {
-              display:block; width:93%; height:600px; background:#eee; font-family:monospace; font-size:12px; padding:20px;
-            }
-
-        </style>
-    </head>
-    <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
-        <p>Try <a href="/SlimFramework">/SlimFramework</a>
-
-<hr />
+<h1>
+  <?php echo $page['title']; ?>
+</h1>
 
 
 <h2>ホーム</h2>
@@ -60,10 +21,7 @@
 
 <ul>
 <?php
-$categories = file_get_contents('http://undotsushin.com/api/v1/category');
-if ( $categories ) :
-  $categories = json_decode($categories, true);
-  foreach( $categories['response']['categories'] as $key => $value ) :
+  foreach( $page['site_categories'] as $key => $value ) :
 ?>
   <li>
     <a href="/category/<?php echo $value['slug']; ?>/">記事一覧 - <?php echo $value['label']; ?></a>
@@ -78,7 +36,6 @@ if ( $categories ) :
   </li>
 <?php
   endforeach;
-endif;
 ?>
 
 </ul>
@@ -154,21 +111,5 @@ endif;
   </li>
 </ul>
 
-<hr />
 
-
-        <h2>$request</h2>
-<?php var_dump($request); ?>
-
-        <h2>$response</h2>
-<textarea>
-<?php print_r($response); ?>
-</textarea>
-
-        <h2>$args</h2>
-<textarea>
-<?php print_r($args); ?>
-</textarea>
-
-    </body>
-</html>
+<?php var_dump($page); ?>

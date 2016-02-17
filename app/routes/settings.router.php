@@ -7,13 +7,13 @@ $app->group('/settings', function () use ($app) {
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
-    $args['page'] = array(
+    $args['page'] = $app->model->set(array(
       'title'    => '基本情報設定 | 設定',
-      'template' => 'settings.php',
+      'template' => 'settings',
       'path'     => $args,
-    );
+    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -22,13 +22,13 @@ $app->group('/settings', function () use ($app) {
   // ==============================
   $this->get('/{slug:interest}[/]', function ($request, $response, $args) use ($app) {
 
-    $args['page'] = array(
+    $args['page'] = $app->model->set(array(
       'title'    => 'パーソナライズ設定 | 設定',
-      'template' => 'settings.'.$args['slug'].'.php',
+      'template' => 'settings.'.$args['slug'],
       'path'     => $args,
-    );
+    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -37,13 +37,13 @@ $app->group('/settings', function () use ($app) {
   // ==============================
   $this->get('/{slug:social}[/]', function ($request, $response, $args) use ($app) {
 
-    $args['page'] = array(
+    $args['page'] = $app->model->set(array(
       'title'    => 'ソーシャル連携 | 設定',
-      'template' => 'settings.'.$args['slug'].'.php',
+      'template' => 'settings.'.$args['slug'],
       'path'     => $args,
-    );
+    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 
@@ -52,13 +52,13 @@ $app->group('/settings', function () use ($app) {
   // ==============================
   $this->get('/{slug:deactivate}[/]', function ($request, $response, $args) use ($app) {
 
-    $args['page'] = array(
+    $args['page'] = $app->model->set(array(
       'title'    => '基本情報設定 | 設定',
       'template' => 'settings.'.$args['slug'].'.php',
       'path'     => $args,
-    );
+    ));
 
-    return $this->renderer->render($response, "_default.php", $args);
+    return $this->renderer->render($response, "default.php", $args);
 
   });
 

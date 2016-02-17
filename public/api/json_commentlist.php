@@ -61,8 +61,10 @@ if(strlen($type)==0){
 		u_comment 
 	where id in (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid))) as t1,
 		(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 
-	where t1.userid=t2.userid order by relativetime desc",
-	$pageid,$uid,$pageid,$uid);
+	where t1.userid=t2.userid order by relativetime desc limit %s offset %s",
+	$pageid,$uid,$pageid,$uid,$length,$offset);
+	
+	echo $sql;
 	
 	$nsql=sprintf("select count(*) as n from (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid)) as t",$pageid,$uid,$pageid,$uid);
 
