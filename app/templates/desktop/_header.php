@@ -57,4 +57,11 @@
     </ul>
   </nav><!-- /.gnav-sec -->
 
-
+  <div id="dialogue-notice" class="dialogue-notice">
+    <div class="dialogue-notice-inner">
+      <div id="dialogue-notice-info" class="dialogue-notice-info">
+        <p>パスワードが違います</p>
+      </div>
+      <div id="dialogue-notice-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice-info">CLOSE</a></div>
+    </div>
+  </div><!-- /.dialogue-notice -->
