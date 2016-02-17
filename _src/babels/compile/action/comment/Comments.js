@@ -57,7 +57,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _symbol = (0, _symbol3.default)();
 
 /**
- * コメント一覧
+ * <h3>コメント一覧<h3>
  */
 
 var Comments = function (_OffsetAuth) {

@@ -1,21 +1,4 @@
-
-  <div class="dialogue-notice error">
-    <div class="dialogue-notice-inner">
-      <div class="dialogue-notice-info">
-        <p>パスワードが違います</p>
-      </div>
-      <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
-    </div>
-  </div><!-- /.dialogue-notice -->
-
-  <!--
-  .dialogue-noticeへクラス付与して背景色を変更
-  クラス名なし or .info -> #e1438b ピンク(ハイライトカラー)
-  .error -> #e14343 レッド
-  .success -> #43e18a グリーン
-  -->
-
-  <div id="pickup-container"></div><!-- /pickup -->
+<div id="pickup-container"></div><!-- /pickup -->
 
   <div class="body-sec">
     <div class="body-sec-inner">

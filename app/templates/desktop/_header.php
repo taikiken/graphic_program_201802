@@ -44,7 +44,7 @@
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
 <!--
-    ToDo: crazy, すべて の URL を正規のものにする
+    ToDo: crazy の URL を正規のものにする
     -->
       <li class="gnav-home"><a href="/">一面</a></li>
       <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
@@ -57,13 +57,13 @@
     </ul>
   </nav><!-- /.gnav-sec -->
 
-  <!--
-  # カテゴリー一覧
-
-  ```
-  <?php //print_r($page['site_categories']); ?>
-  ```
-
-   -->
+  <div id="dialogue-notice" class="dialogue-notice">
+    <div class="dialogue-notice-inner">
+      <div id="dialogue-notice-info" class="dialogue-notice-info">
+        <p>パスワードが違います</p>
+      </div>
+      <div id="dialogue-notice-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice-info">CLOSE</a></div>
+    </div>
+  </div><!-- /.dialogue-notice -->
 
 

@@ -11,57 +11,54 @@
  */
 'use strict';
 
-import {Action} from '../Action';
+import {ActionAuthBehavior} from '../ActionAuthBehavior';
 import {Api} from '../../net/Api';
 import {Path} from '../../app/const/Path';
-
-let _symbol = Symbol();
+import {Form} from '../../data/Form';
+import {Data} from '../../data/Data';
+import {User} from '../../app/User';
 
 /**
  * 記事のブックマーク登録 / 解除<br>
  * <code>/api/v1/articles/bookmark/{:article_id}</code>
  */
-export class Bookmark extends Action {
-    /**
+export class Bookmark extends ActionAuthBehavior {
+  /**
    * 記事のブックマーク登録 / 解除 を行います
-   * @ToDo 完成させる, add / remove
-   * @param {Symbol} target Factory pattern のために使用
-   * @param {string} actionType add / delete 登録
-   * @param {Number|string} id article id 記事ID
+   * @param {Number|string} articleId article id 記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( target:Symbol, actionType:string, id:Number, resolve:Function = null, reject:Function = null ) {
+  constructor( articleId:Number, resolve:Function = null, reject:Function = null ) {
 
-    if ( _symbol !== target ) {
+    // send form data 作成 article_id: article id
+    let data = new Data( Path.ARTICLE_ID.toLowerCase(), String( articleId ) );
+    let formData = Form.data( [ data ] );
 
-      throw new Error( `not use new Bookmark(). instead Bookmark.register() or Bookmark.cancel()` );
+    // 登録
+    let add = Api.bookmark( 'add' );
+    // 解除
+    let remove = Api.bookmark( 'delete' );
 
-    }
+    // 登録用で super 実行
+    super( User.token, add, formData, resolve, reject );
 
-    super( Api.bookmark( actionType ), resolve, reject );
-    // 記事IDをparseIntはまずいと思う, 頭 0 が消えるから
-    // this._id = parseInt( id, 10 );
-    this._id = id;
+    // global へ( super の後 )
+    this._add = add;
+    this._remove = remove;
+    this._articleId = articleId;
 
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
-   * @return {Number|*} 記事 ID を返します
-   */
-  get id():Number {
-    return this._id;
-  }
-  /**
    * url を作成します
    * @return {string} 作成した url を返します
    */
   get url():string {
-    // return `${this._url}/${this.id}`;
-    return Path.article( this._url, this.id );
+    // 登録 / 解除 の URL は同じ
+    return Path.article( this._url, this._articleId );
   }
   // ---------------------------------------------------
   //  METHOD
@@ -71,14 +68,14 @@ export class Bookmark extends Action {
    * @param {string} method request method
    */
   start( method:string = '' ):void {
-    console.error( 'illegal operation, use start with method: ' + method );
+    console.error( 'illegal operation, use start. instead add / delete.' );
   }
   /**
    * 記事のブックマーク登録
    */
   add():void {
 
-    this._ajax.start( this.url, 'POST', this.success.bind( this ), this.fail.bind( this ) );
+    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ) );
 
   }
   /**
@@ -86,16 +83,7 @@ export class Bookmark extends Action {
    */
   remove():void {
 
-    this._ajax.start( this.url, 'DELETE', this.success.bind( this ), this.fail.bind( this ) );
+    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ) );
 
-  }
-  // ---------------------------------------------------
-  //  static METHOD
-  // ---------------------------------------------------
-  static register( id:Number, resolve:Function = null, reject:Function = null ):Bookmark {
-    return new Bookmark( _symbol, 'add', id, resolve, reject );
-  }
-  static cancel( id:Number, resolve:Function = null, reject:Function = null ):Bookmark {
-    return new Bookmark( _symbol, 'delete', id, resolve, reject );
   }
 }

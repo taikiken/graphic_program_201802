@@ -56,8 +56,7 @@ var VideoDae = exports.VideoDae = function () {
     }
     /**
      * video caption
-     * @ToDo 使い道がわからない
-     * @return {string} article.media.video.caption
+     * @return {string} article.media.video.caption を返します
      */
 
   }, {
@@ -67,14 +66,23 @@ var VideoDae = exports.VideoDae = function () {
     }
     /**
      * 動画パス
-     * @ToDo youtube ドメインから取得する？
-     * @return {string} article.media.video.url
+     * @return {string} article.media.video.url を返します
      */
 
   }, {
     key: 'url',
     get: function get() {
-      return this.video.return;
+      return this.video.url;
+    }
+    /**
+     * YouTube video id
+     * @return {string} YouTube video id article.media.video.youtube を返します
+     */
+
+  }, {
+    key: 'youtube',
+    get: function get() {
+      return this.video.youtube;
     }
   }]);
   return VideoDae;

@@ -147,4 +147,20 @@ export class Safety {
   static isImg( fileName:string ):boolean {
     return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf( Safety.getExtension( fileName ) ) !== -1;
   }
+  /**
+   * 引数が正規なものかをチェックします
+   * @param {string} target 調査対象
+   * @param {Array<string>} allowed 正しい対象値
+   * @return {boolean}
+   */
+  static normalize( target:string, allowed:Array<string> ):boolean {
+    var bool = false;
+    for ( var value of allowed ) {
+      if ( target === value ) {
+        bool = true;
+        break;
+      }
+    }
+    return bool;
+  }
 }

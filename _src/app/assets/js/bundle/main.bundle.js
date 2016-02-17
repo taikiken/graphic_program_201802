@@ -47,7 +47,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-16 23:34:36
+	 * @date 2016-02-17 21:14:38
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -137,31 +137,31 @@
 
 	var _Bookmark = __webpack_require__(120);
 
-	var _Search = __webpack_require__(121);
+	var _Search = __webpack_require__(122);
 
-	var _Single = __webpack_require__(122);
+	var _Single = __webpack_require__(123);
 
-	var _UsersSelf = __webpack_require__(123);
+	var _UsersSelf = __webpack_require__(124);
 
-	var _Model = __webpack_require__(124);
+	var _Model = __webpack_require__(125);
 
-	var _ModelUsersSelf = __webpack_require__(125);
+	var _ModelUsersSelf = __webpack_require__(126);
 
-	var _ModelCategories = __webpack_require__(128);
+	var _ModelCategories = __webpack_require__(129);
 
-	var _View = __webpack_require__(132);
+	var _View = __webpack_require__(133);
 
-	var _ViewHeaderUser = __webpack_require__(133);
+	var _ViewHeaderUser = __webpack_require__(134);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(144);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(145);
 
-	var _ViewCategory = __webpack_require__(156);
+	var _ViewCategory = __webpack_require__(157);
 
-	var _ViewSingle = __webpack_require__(157);
+	var _ViewSingle = __webpack_require__(158);
 
-	var _ViewTitle = __webpack_require__(166);
+	var _ViewTitle = __webpack_require__(167);
 
-	var _ViewComments = __webpack_require__(167);
+	var _ViewComments = __webpack_require__(168);
 
 	var _ViewCommentForm = __webpack_require__(180);
 
@@ -1266,6 +1266,10 @@
 	});
 	exports.Safety = undefined;
 
+	var _getIterator2 = __webpack_require__(2);
+
+	var _getIterator3 = _interopRequireDefault(_getIterator2);
+
 	var _isInteger = __webpack_require__(45);
 
 	var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -1457,6 +1461,47 @@
 	    key: 'isImg',
 	    value: function isImg(fileName) {
 	      return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf(Safety.getExtension(fileName)) !== -1;
+	    }
+	    /**
+	     * 引数が正規なものかをチェックします
+	     * @param {string} target 調査対象
+	     * @param {Array<string>} allowed 正しい対象値
+	     * @return {boolean}
+	     */
+
+	  }, {
+	    key: 'normalize',
+	    value: function normalize(target, allowed) {
+	      var bool = false;
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = (0, _getIterator3.default)(allowed), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var value = _step.value;
+
+	          if (target === value) {
+	            bool = true;
+	            break;
+	          }
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+
+	      return bool;
 	    }
 	  }]);
 	  return Safety;
@@ -8836,54 +8881,58 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _symbol2 = __webpack_require__(52);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	var _Action2 = __webpack_require__(100);
+	var _ActionAuthBehavior2 = __webpack_require__(121);
 
 	var _Api = __webpack_require__(89);
 
 	var _Path = __webpack_require__(96);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _Form = __webpack_require__(86);
 
-	var _symbol = (0, _symbol3.default)();
+	var _Data = __webpack_require__(85);
+
+	var _User = __webpack_require__(78);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
 	 * 記事のブックマーク登録 / 解除<br>
 	 * <code>/api/v1/articles/bookmark/{:article_id}</code>
 	 */
 
-	var Bookmark = exports.Bookmark = function (_Action) {
-	  (0, _inherits3.default)(Bookmark, _Action);
+	var Bookmark = exports.Bookmark = function (_ActionAuthBehavior) {
+	  (0, _inherits3.default)(Bookmark, _ActionAuthBehavior);
 
 	  /**
-	  * 記事のブックマーク登録 / 解除 を行います
-	  * @ToDo 完成させる, add / remove
-	  * @param {Symbol} target Factory pattern のために使用
-	  * @param {string} actionType add / delete 登録
-	  * @param {Number|string} id article id 記事ID
-	  * @param {Function} [resolve=null] Ajax 成功時の callback
-	  * @param {Function} [reject=null] Ajax 失敗時の callback
-	  */
+	   * 記事のブックマーク登録 / 解除 を行います
+	   * @param {Number|string} articleId article id 記事ID
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   */
 
-	  function Bookmark(target, actionType, id) {
-	    var resolve = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
-	    var reject = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
+	  function Bookmark(articleId) {
+	    var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	    var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 	    (0, _classCallCheck3.default)(this, Bookmark);
 
-	    if (_symbol !== target) {
+	    // send form data 作成 article_id: article id
+	    var data = new _Data.Data(_Path.Path.ARTICLE_ID.toLowerCase(), String(articleId));
+	    var formData = _Form.Form.data([data]);
 
-	      throw new Error('not use new Bookmark(). instead Bookmark.register() or Bookmark.cancel()');
-	    }
+	    // 登録
+	    var add = _Api.Api.bookmark('add');
+	    // 解除
+	    var remove = _Api.Api.bookmark('delete');
 
-	    // 記事IDをparseIntはまずいと思う, 頭 0 が消えるから
-	    // this._id = parseInt( id, 10 );
+	    // 登録用で super 実行
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _Api.Api.bookmark(actionType), resolve, reject));
+	    // global へ( super の後 )
 
-	    _this._id = id;
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Bookmark).call(this, _User.User.token, add, formData, resolve, reject));
+
+	    _this._add = add;
+	    _this._remove = remove;
+	    _this._articleId = articleId;
 
 	    return _this;
 	  }
@@ -8891,8 +8940,8 @@
 	  //  GETTER / SETTER
 	  // ---------------------------------------------------
 	  /**
-	   *
-	   * @return {Number|*} 記事 ID を返します
+	   * url を作成します
+	   * @return {string} 作成した url を返します
 	   */
 
 	  (0, _createClass3.default)(Bookmark, [{
@@ -8908,7 +8957,7 @@
 	    value: function start() {
 	      var method = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
-	      console.error('illegal operation, use start with method: ' + method);
+	      console.error('illegal operation, use start. instead add / delete.');
 	    }
 	    /**
 	     * 記事のブックマーク登録
@@ -8918,7 +8967,7 @@
 	    key: 'add',
 	    value: function add() {
 
-	      this._ajax.start(this.url, 'POST', this.success.bind(this), this.fail.bind(this));
+	      this._ajax.start(this.url, this._add.method, this.success.bind(this), this.fail.bind(this));
 	    }
 	    /**
 	     * 記事のブックマーク解除
@@ -8928,50 +8977,143 @@
 	    key: 'remove',
 	    value: function remove() {
 
-	      this._ajax.start(this.url, 'DELETE', this.success.bind(this), this.fail.bind(this));
+	      this._ajax.start(this.url, this._remove.method, this.success.bind(this), this.fail.bind(this));
 	    }
-	    // ---------------------------------------------------
-	    //  static METHOD
-	    // ---------------------------------------------------
-
-	  }, {
-	    key: 'id',
-	    get: function get() {
-	      return this._id;
-	    }
-	    /**
-	     * url を作成します
-	     * @return {string} 作成した url を返します
-	     */
-
 	  }, {
 	    key: 'url',
 	    get: function get() {
-	      // return `${this._url}/${this.id}`;
-	      return _Path.Path.article(this._url, this.id);
-	    }
-	  }], [{
-	    key: 'register',
-	    value: function register(id) {
-	      var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-	      var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-
-	      return new Bookmark(_symbol, 'add', id, resolve, reject);
-	    }
-	  }, {
-	    key: 'cancel',
-	    value: function cancel(id) {
-	      var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-	      var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-
-	      return new Bookmark(_symbol, 'delete', id, resolve, reject);
+	      // 登録 / 解除 の URL は同じ
+	      return _Path.Path.article(this._url, this._articleId);
 	    }
 	  }]);
 	  return Bookmark;
-	}(_Action2.Action);
+	}(_ActionAuthBehavior2.ActionAuthBehavior);
 
 /***/ },
 /* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @license inazumatv.com
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/14
+	 *
+	 * Copyright (c) 2011-2015 inazumatv.com, inc.
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ActionAuthBehavior = undefined;
+
+	var _getPrototypeOf = __webpack_require__(66);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(40);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(41);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(71);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(72);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _ActionAuth2 = __webpack_require__(111);
+
+	var _Result = __webpack_require__(87);
+
+	var _Safety = __webpack_require__(44);
+
+	var _Types = __webpack_require__(90);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Ajax request, POST / PUT / DELETE
+	 */
+
+	var ActionAuthBehavior = exports.ActionAuthBehavior = function (_ActionAuth) {
+	  (0, _inherits3.default)(ActionAuthBehavior, _ActionAuth);
+
+	  /**
+	   * GET 以外の token 付きリクエストに使用します
+	   * @param {string} token Authorization token
+	   * @param {Type} types Types instance, Ajax request に使用します
+	   * @param {FormData} [formData=null] FormData リクエストで必要の場合に使用します
+	   * @param {Function} [resolve=null] Ajax 成功時の callback
+	   * @param {Function} [reject=null] Ajax 失敗時の callback
+	   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
+	   */
+
+	  function ActionAuthBehavior(token, types) {
+	    var formData = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	    var resolve = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+	    var reject = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
+	    var ResultClass = arguments.length <= 5 || arguments[5] === undefined ? _Result.Result : arguments[5];
+	    (0, _classCallCheck3.default)(this, ActionAuthBehavior);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ActionAuthBehavior).call(this, token, types, resolve, reject, ResultClass));
+
+	    _this._data = formData;
+	    return _this;
+	  }
+	  // ---------------------------------------------------
+	  //  GETTER / SETTER
+	  // ---------------------------------------------------
+	  /**
+	   * 設定された FormData instance
+	   * @returns {FormData} 設定された FormData instance を返します
+	   */
+
+	  (0, _createClass3.default)(ActionAuthBehavior, [{
+	    key: 'start',
+
+	    // ---------------------------------------------------
+	    //  METHOD
+	    // ---------------------------------------------------
+	    /**
+	     * Ajax request を開始します
+	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
+	     */
+	    value: function start() {
+	      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
+
+	      method = _Safety.Safety.string(method, this.method);
+	      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers, this._data);
+	    }
+	  }, {
+	    key: 'data',
+	    get: function get() {
+	      return this._data;
+	    }
+	    /**
+	     * FormData instance 設定します
+	     * @param {FormData} formData FormData instance
+	     */
+	    ,
+	    set: function set(formData) {
+	      this._data = formData;
+	    }
+	  }]);
+	  return ActionAuthBehavior;
+	}(_ActionAuth2.ActionAuth);
+
+/***/ },
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9086,7 +9228,7 @@
 	}(_Offset2.Offset);
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9192,7 +9334,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9264,7 +9406,7 @@
 	}(_ActionAuth2.ActionAuth);
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9450,7 +9592,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9491,11 +9633,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Model2 = __webpack_require__(124);
+	var _Model2 = __webpack_require__(125);
 
-	var _UsersSelf = __webpack_require__(123);
+	var _UsersSelf = __webpack_require__(124);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(127);
 
 	var _Result = __webpack_require__(87);
 
@@ -9571,7 +9713,7 @@
 	}(_Model2.Model);
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9600,7 +9742,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _TypeDae = __webpack_require__(127);
+	var _TypeDae = __webpack_require__(128);
 
 	var _Safety = __webpack_require__(44);
 
@@ -9696,7 +9838,7 @@
 	}();
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9794,7 +9936,7 @@
 	}();
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9835,11 +9977,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Model2 = __webpack_require__(124);
+	var _Model2 = __webpack_require__(125);
 
-	var _Categories = __webpack_require__(129);
+	var _Categories = __webpack_require__(130);
 
-	var _CategoriesDae = __webpack_require__(130);
+	var _CategoriesDae = __webpack_require__(131);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9913,7 +10055,7 @@
 	}(_Model2.Model);
 
 /***/ },
-/* 129 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9954,12 +10096,13 @@
 
 	var _Api = __webpack_require__(89);
 
-	var _Path = __webpack_require__(96);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// import {Path} from '../../app/const/Path';
+
 	/**
-	 * category action
+	 * **category 一覧を取得**
+	 * <p>category action</p>
 	 */
 
 	var Categories = exports.Categories = function (_Action) {
@@ -9982,7 +10125,7 @@
 	}(_Action2.Action);
 
 /***/ },
-/* 130 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10013,7 +10156,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _SlugDae = __webpack_require__(131);
+	var _SlugDae = __webpack_require__(132);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10128,7 +10271,7 @@
 	}();
 
 /***/ },
-/* 131 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10231,7 +10374,7 @@
 	}();
 
 /***/ },
-/* 132 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10473,7 +10616,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10514,11 +10657,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewHeaderMember = __webpack_require__(134);
+	var _ViewHeaderMember = __webpack_require__(135);
 
-	var _Url = __webpack_require__(139);
+	var _Url = __webpack_require__(140);
 
 	var _User = __webpack_require__(78);
 
@@ -10631,7 +10774,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10672,17 +10815,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewHeaderMemberNotice = __webpack_require__(135);
+	var _ViewHeaderMemberNotice = __webpack_require__(136);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(127);
 
-	var _UsersSelf = __webpack_require__(123);
+	var _UsersSelf = __webpack_require__(124);
 
-	var _Url = __webpack_require__(139);
+	var _Url = __webpack_require__(140);
 
 	var _Result = __webpack_require__(87);
 
@@ -10930,7 +11073,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10971,17 +11114,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _Notice = __webpack_require__(136);
+	var _Notice = __webpack_require__(137);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
-	var _NoticeAction = __webpack_require__(138);
+	var _NoticeAction = __webpack_require__(139);
 
-	var _Url = __webpack_require__(139);
+	var _Url = __webpack_require__(140);
 
-	var _NotificationsDae = __webpack_require__(140);
+	var _NotificationsDae = __webpack_require__(141);
 
 	var _Safety = __webpack_require__(44);
 
@@ -11410,7 +11553,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11485,7 +11628,7 @@
 	}(_OffsetAuth2.OffsetAuth);
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11664,7 +11807,7 @@
 	}();
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11750,7 +11893,7 @@
 	}();
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12043,7 +12186,7 @@
 	}();
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12074,7 +12217,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _NoticeDae = __webpack_require__(141);
+	var _NoticeDae = __webpack_require__(142);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12147,7 +12290,7 @@
 	}();
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12180,9 +12323,9 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(127);
 
-	var _NoticeArticleDae = __webpack_require__(142);
+	var _NoticeArticleDae = __webpack_require__(143);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12299,7 +12442,7 @@
 	}();
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12330,7 +12473,7 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _PopularDae = __webpack_require__(143);
+	var _PopularDae = __webpack_require__(144);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12405,7 +12548,7 @@
 	}();
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12438,7 +12581,7 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(127);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12607,7 +12750,7 @@
 	}(); // class
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12650,23 +12793,23 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewError = __webpack_require__(145);
+	var _ViewError = __webpack_require__(146);
 
 	var _Result = __webpack_require__(87);
 
 	var _Safety = __webpack_require__(44);
 
-	var _ArticleDae = __webpack_require__(146);
+	var _ArticleDae = __webpack_require__(147);
 
-	var _Rise = __webpack_require__(152);
+	var _Rise = __webpack_require__(153);
 
-	var _ReactionNode = __webpack_require__(155);
+	var _ReactionNode = __webpack_require__(156);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13470,7 +13613,7 @@
 	}(_View2.View); // class
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13511,7 +13654,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
 	var _Safety = __webpack_require__(44);
 
@@ -13626,7 +13769,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13659,13 +13802,13 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(147);
+	var _CategoryDae = __webpack_require__(148);
 
-	var _MediaDae = __webpack_require__(148);
+	var _MediaDae = __webpack_require__(149);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(127);
 
-	var _CommentsPopularDae = __webpack_require__(151);
+	var _CommentsPopularDae = __webpack_require__(152);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13906,7 +14049,7 @@
 	}();
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13991,7 +14134,7 @@
 	}();
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14024,9 +14167,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _ImagesDae = __webpack_require__(149);
+	var _ImagesDae = __webpack_require__(150);
 
-	var _VideoDae = __webpack_require__(150);
+	var _VideoDae = __webpack_require__(151);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14132,7 +14275,7 @@
 	}();
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14246,7 +14389,7 @@
 	}();
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14307,8 +14450,7 @@
 	    }
 	    /**
 	     * video caption
-	     * @ToDo 使い道がわからない
-	     * @return {string} article.media.video.caption
+	     * @return {string} article.media.video.caption を返します
 	     */
 
 	  }, {
@@ -14318,21 +14460,30 @@
 	    }
 	    /**
 	     * 動画パス
-	     * @ToDo youtube ドメインから取得する？
-	     * @return {string} article.media.video.url
+	     * @return {string} article.media.video.url を返します
 	     */
 
 	  }, {
 	    key: 'url',
 	    get: function get() {
-	      return this.video.return;
+	      return this.video.url;
+	    }
+	    /**
+	     * YouTube video id
+	     * @return {string} YouTube video id article.media.video.youtube を返します
+	     */
+
+	  }, {
+	    key: 'youtube',
+	    get: function get() {
+	      return this.video.youtube;
 	    }
 	  }]);
 	  return VideoDae;
 	}();
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14365,7 +14516,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(143);
+	var _PopularDae = __webpack_require__(144);
 
 	var _Safety = __webpack_require__(44);
 
@@ -14535,7 +14686,7 @@
 	}();
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14579,9 +14730,9 @@
 
 	var _EventDispatcher2 = __webpack_require__(77);
 
-	var _Dom = __webpack_require__(153);
+	var _Dom = __webpack_require__(154);
 
-	var _Scroll = __webpack_require__(154);
+	var _Scroll = __webpack_require__(155);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14673,7 +14824,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14754,7 +14905,7 @@
 	}();
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14928,7 +15079,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports) {
 
 	/**
@@ -15074,7 +15225,7 @@
 	});
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15113,7 +15264,7 @@
 
 	var _Category = __webpack_require__(116);
 
-	var _ViewArchiveMasonryInfinite = __webpack_require__(144);
+	var _ViewArchiveMasonryInfinite = __webpack_require__(145);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15149,7 +15300,7 @@
 	}(_ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite);
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15192,23 +15343,23 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewError = __webpack_require__(145);
+	var _ViewError = __webpack_require__(146);
 
-	var _ViewRelated = __webpack_require__(158);
+	var _ViewRelated = __webpack_require__(159);
 
-	var _ViewSingleHeader = __webpack_require__(160);
+	var _ViewSingleHeader = __webpack_require__(161);
 
-	var _ViewSingleFooter = __webpack_require__(165);
+	var _ViewSingleFooter = __webpack_require__(166);
 
-	var _Single = __webpack_require__(122);
+	var _Single = __webpack_require__(123);
 
 	var _Result = __webpack_require__(87);
 
 	var _Safety = __webpack_require__(44);
 
-	var _SingleDae = __webpack_require__(163);
+	var _SingleDae = __webpack_require__(164);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15420,7 +15571,7 @@
 	exports.ViewSingle = ViewSingle;
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15463,13 +15614,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
 	var _Safety = __webpack_require__(44);
 
-	var _RelatedDae = __webpack_require__(159);
+	var _RelatedDae = __webpack_require__(160);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15631,7 +15782,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15666,11 +15817,11 @@
 
 	var _Format = __webpack_require__(60);
 
-	var _CategoryDae = __webpack_require__(147);
+	var _CategoryDae = __webpack_require__(148);
 
-	var _MediaDae = __webpack_require__(148);
+	var _MediaDae = __webpack_require__(149);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(127);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15841,7 +15992,7 @@
 	}();
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15884,13 +16035,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewSingleImage = __webpack_require__(161);
+	var _ViewSingleImage = __webpack_require__(162);
 
-	var _ViewSingleVideo = __webpack_require__(162);
+	var _ViewSingleVideo = __webpack_require__(163);
 
-	var _SingleDae = __webpack_require__(163);
+	var _SingleDae = __webpack_require__(164);
 
 	var _User = __webpack_require__(78);
 
@@ -16050,11 +16201,19 @@
 
 	            // image
 	            img = new _ViewSingleImage.ViewSingleImage(imageNode, single.media.images);
-	            img.start();
 	          } else if (single.mediaType === 'video') {
 
-	            // video
-	            img = new _ViewSingleVideo.ViewSingleVideo(imageNode, single.media);
+	            var mediaDae = single.media;
+	            if (!mediaDae.video || !mediaDae.video.url && !mediaDae.video.youtube) {
+	              // not movie data
+	              img = new _ViewSingleImage.ViewSingleImage(imageNode, single.media.images);
+	            } else {
+	              // found video data
+	              img = new _ViewSingleVideo.ViewSingleVideo(imageNode, mediaDae);
+	            }
+	          }
+
+	          if (typeof img !== 'undefined') {
 	            img.start();
 	          }
 	        },
@@ -16084,7 +16243,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16127,11 +16286,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
 	var _Safety = __webpack_require__(44);
 
-	var _ImagesDae = __webpack_require__(149);
+	var _ImagesDae = __webpack_require__(150);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16259,7 +16418,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16302,13 +16461,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _Safety = __webpack_require__(44);
 
-	var _MediaDae = __webpack_require__(148);
+	var _MediaDae = __webpack_require__(149);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16357,7 +16516,7 @@
 	    value: function render(mediaDae) {
 
 	      // データチェック
-	      if (!mediaDae.video || !mediaDae.video.url || !mediaDae.images || !mediaDae.images.medium) {
+	      if (!mediaDae.video || !mediaDae.video.url && !mediaDae.video.youtube) {
 	        return;
 	      }
 
@@ -16385,11 +16544,11 @@
 	          if (!!media.video.youtube) {
 
 	            // youtube id found
-	            this.youtube(media);
+	            return this.youtube(media);
 	          } else {
 
 	            // HTML5 video tag
-	            this.video(media);
+	            return this.video(media);
 	          }
 	        },
 	        video: function video(media) {
@@ -16430,7 +16589,7 @@
 	          return React.createElement(
 	            'div',
 	            { className: 'post-kv' },
-	            React.createElement('iframe', { src: 'https://www.youtube.com/embed/' + video.youtube + '?rel=0&amp;showinfo=0', width: '710', height: '400', frameborder: '0', allowfullscreen: true })
+	            React.createElement('iframe', { src: 'https://www.youtube.com/embed/' + video.youtube + '?rel=0&amp;showinfo=0', width: '710', height: '400', frameBorder: '0', allowFullScreen: true })
 	          );
 	        },
 	        updateImage: function updateImage(media) {
@@ -16452,7 +16611,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16495,9 +16654,9 @@
 
 	var _Safety = __webpack_require__(44);
 
-	var _KeywordsDae = __webpack_require__(164);
+	var _KeywordsDae = __webpack_require__(165);
 
-	var _RelatedDae2 = __webpack_require__(159);
+	var _RelatedDae2 = __webpack_require__(160);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16588,7 +16747,7 @@
 	}(_RelatedDae2.RelatedDae);
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16682,7 +16841,7 @@
 	}();
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16725,11 +16884,11 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _SingleDae = __webpack_require__(163);
+	var _SingleDae = __webpack_require__(164);
 
-	var _Url = __webpack_require__(139);
+	var _Url = __webpack_require__(140);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16845,7 +17004,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16886,7 +17045,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16975,7 +17134,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17022,27 +17181,27 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _CommentsType = __webpack_require__(83);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewError = __webpack_require__(145);
+	var _ViewError = __webpack_require__(146);
 
-	var _Comments = __webpack_require__(168);
+	var _Comments = __webpack_require__(169);
 
 	var _Result = __webpack_require__(87);
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentsListDae = __webpack_require__(169);
+	var _CommentsListDae = __webpack_require__(170);
 
-	var _UserDae = __webpack_require__(126);
+	var _UserDae = __webpack_require__(127);
 
-	var _CommentNode = __webpack_require__(172);
+	var _CommentNode = __webpack_require__(173);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17619,7 +17778,7 @@
 	}(_View2.View);
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17681,7 +17840,7 @@
 	var _symbol = (0, _symbol3.default)();
 
 	/**
-	 * コメント一覧
+	 * <h3>コメント一覧<h3>
 	 */
 
 	var Comments = function (_OffsetAuth) {
@@ -17845,7 +18004,7 @@
 	exports.Comments = Comments;
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17874,7 +18033,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsDae = __webpack_require__(170);
+	var _CommentsDae = __webpack_require__(171);
 
 	var _Safety = __webpack_require__(44);
 
@@ -17956,7 +18115,7 @@
 	}();
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17990,9 +18149,9 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _PopularDae = __webpack_require__(143);
+	var _PopularDae = __webpack_require__(144);
 
-	var _ReplyDae = __webpack_require__(171);
+	var _ReplyDae = __webpack_require__(172);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18096,7 +18255,7 @@
 	}();
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18125,7 +18284,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _CommentsPopularDae = __webpack_require__(151);
+	var _CommentsPopularDae = __webpack_require__(152);
 
 	var _Safety = __webpack_require__(44);
 
@@ -18180,7 +18339,7 @@
 	}();
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18202,13 +18361,13 @@
 	});
 	exports.CommentNode = undefined;
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _Safety = __webpack_require__(44);
 
-	var _ReactionNode = __webpack_require__(155);
+	var _ReactionNode = __webpack_require__(156);
 
-	var _CommentFormNode = __webpack_require__(173);
+	var _CommentFormNode = __webpack_require__(174);
 
 	// React
 
@@ -18625,7 +18784,7 @@
 	});
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18646,9 +18805,9 @@
 	});
 	exports.CommentFormNode = undefined;
 
-	var _ReplyStatus = __webpack_require__(174);
+	var _ReplyStatus = __webpack_require__(175);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _Form = __webpack_require__(86);
 
@@ -18656,11 +18815,11 @@
 
 	var _Result = __webpack_require__(87);
 
-	var _ModelComment = __webpack_require__(175);
+	var _ModelComment = __webpack_require__(176);
 
 	var _ModelCommentReply = __webpack_require__(178);
 
-	var _Model = __webpack_require__(124);
+	var _Model = __webpack_require__(125);
 
 	// React
 	var React = self.React;
@@ -19203,7 +19362,7 @@
 	});
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19398,7 +19557,7 @@
 	}(_EventDispatcher2.EventDispatcher);
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19440,9 +19599,9 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Model2 = __webpack_require__(124);
+	var _Model2 = __webpack_require__(125);
 
-	var _Comment = __webpack_require__(176);
+	var _Comment = __webpack_require__(177);
 
 	var _Result = __webpack_require__(87);
 
@@ -19520,7 +19679,7 @@
 	}(_Model2.Model);
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19562,7 +19721,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuthBehavior2 = __webpack_require__(177);
+	var _ActionAuthBehavior2 = __webpack_require__(121);
 
 	var _Api = __webpack_require__(89);
 
@@ -19575,6 +19734,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**
+	 * **コメント送信**
 	 * FormData を送る token 付き Action
 	 */
 
@@ -19622,129 +19782,6 @@
 	}(_ActionAuthBehavior2.ActionAuthBehavior);
 
 /***/ },
-/* 177 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @license inazumatv.com
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/14
-	 *
-	 * Copyright (c) 2011-2015 inazumatv.com, inc.
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ActionAuthBehavior = undefined;
-
-	var _getPrototypeOf = __webpack_require__(66);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(40);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(41);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(71);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(72);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _ActionAuth2 = __webpack_require__(111);
-
-	var _Result = __webpack_require__(87);
-
-	var _Safety = __webpack_require__(44);
-
-	var _Types = __webpack_require__(90);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * Ajax request, POST / PUT / DELETE
-	 */
-
-	var ActionAuthBehavior = exports.ActionAuthBehavior = function (_ActionAuth) {
-	  (0, _inherits3.default)(ActionAuthBehavior, _ActionAuth);
-
-	  /**
-	   * GET 以外の token 付きリクエストに使用します
-	   * @param {string} token Authorization token
-	   * @param {Type} types Types instance, Ajax request に使用します
-	   * @param {FormData} [formData=null] FormData リクエストで必要の場合に使用します
-	   * @param {Function} [resolve=null] Ajax 成功時の callback
-	   * @param {Function} [reject=null] Ajax 失敗時の callback
-	   * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
-	   */
-
-	  function ActionAuthBehavior(token, types) {
-	    var formData = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-	    var resolve = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
-	    var reject = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
-	    var ResultClass = arguments.length <= 5 || arguments[5] === undefined ? _Result.Result : arguments[5];
-	    (0, _classCallCheck3.default)(this, ActionAuthBehavior);
-
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ActionAuthBehavior).call(this, token, types, resolve, reject, ResultClass));
-
-	    _this._data = formData;
-	    return _this;
-	  }
-	  // ---------------------------------------------------
-	  //  GETTER / SETTER
-	  // ---------------------------------------------------
-	  /**
-	   * 設定された FormData instance
-	   * @returns {FormData} 設定された FormData instance を返します
-	   */
-
-	  (0, _createClass3.default)(ActionAuthBehavior, [{
-	    key: 'start',
-
-	    // ---------------------------------------------------
-	    //  METHOD
-	    // ---------------------------------------------------
-	    /**
-	     * Ajax request を開始します
-	     * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
-	     */
-	    value: function start() {
-	      var method = arguments.length <= 0 || arguments[0] === undefined ? this.method : arguments[0];
-
-	      method = _Safety.Safety.string(method, this.method);
-	      this._ajax.start(this.url, method, this.success.bind(this), this.fail.bind(this), this._resultClass, this._headers, this._data);
-	    }
-	  }, {
-	    key: 'data',
-	    get: function get() {
-	      return this._data;
-	    }
-	    /**
-	     * FormData instance 設定します
-	     * @param {FormData} formData FormData instance
-	     */
-	    ,
-	    set: function set(formData) {
-	      this._data = formData;
-	    }
-	  }]);
-	  return ActionAuthBehavior;
-	}(_ActionAuth2.ActionAuth);
-
-/***/ },
 /* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -19786,7 +19823,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Model2 = __webpack_require__(124);
+	var _Model2 = __webpack_require__(125);
 
 	var _Result = __webpack_require__(87);
 
@@ -19908,7 +19945,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _ActionAuthBehavior2 = __webpack_require__(177);
+	var _ActionAuthBehavior2 = __webpack_require__(121);
 
 	var _Api = __webpack_require__(89);
 
@@ -20009,15 +20046,15 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
 	var _User = __webpack_require__(78);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _Safety = __webpack_require__(44);
 
-	var _CommentFormNode = __webpack_require__(173);
+	var _CommentFormNode = __webpack_require__(174);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20131,13 +20168,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewError = __webpack_require__(145);
+	var _ViewError = __webpack_require__(146);
 
 	var _Headline = __webpack_require__(108);
 
@@ -20145,7 +20182,7 @@
 
 	var _Result = __webpack_require__(87);
 
-	var _ArticleDae = __webpack_require__(146);
+	var _ArticleDae = __webpack_require__(147);
 
 	var _Safety = __webpack_require__(44);
 
@@ -20485,13 +20522,13 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
 	var _User = __webpack_require__(78);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewError = __webpack_require__(145);
+	var _ViewError = __webpack_require__(146);
 
 	var _Pickup = __webpack_require__(107);
 
@@ -20499,7 +20536,7 @@
 
 	var _Result = __webpack_require__(87);
 
-	var _ArticleDae = __webpack_require__(146);
+	var _ArticleDae = __webpack_require__(147);
 
 	var _Safety = __webpack_require__(44);
 
@@ -21070,17 +21107,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewError = __webpack_require__(145);
+	var _ViewError = __webpack_require__(146);
 
 	var _Widget = __webpack_require__(119);
 
 	var _Result = __webpack_require__(87);
 
-	var _ArticleDae = __webpack_require__(146);
+	var _ArticleDae = __webpack_require__(147);
 
 	var _Safety = __webpack_require__(44);
 
@@ -21413,17 +21450,17 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _Empty = __webpack_require__(137);
+	var _Empty = __webpack_require__(138);
 
-	var _View2 = __webpack_require__(132);
+	var _View2 = __webpack_require__(133);
 
-	var _ViewError = __webpack_require__(145);
+	var _ViewError = __webpack_require__(146);
 
 	var _Widget = __webpack_require__(119);
 
 	var _Result = __webpack_require__(87);
 
-	var _ArticleDae = __webpack_require__(146);
+	var _ArticleDae = __webpack_require__(147);
 
 	var _Safety = __webpack_require__(44);
 

@@ -73,6 +73,18 @@ var Dom = exports.Dom = function () {
 
       return element;
     }
+
+    /**
+     * pageTop container
+     * @return {Element} pageTop element を返します
+     */
+
+  }, {
+    key: 'pageTop',
+    value: function pageTop() {
+      return Dom.get('pageTop');
+    }
+    // header
     /**
      * header user profile
      * @return {Element} 'user-profile-container' element を返します
@@ -83,6 +95,7 @@ var Dom = exports.Dom = function () {
     value: function profile() {
       return Dom.get('user-profile-container');
     }
+    // sidebar
     /**
      * sidebar ranking
      * @return {Element} widget-ranking-container element を返します
@@ -103,6 +116,7 @@ var Dom = exports.Dom = function () {
     value: function video() {
       return Dom.get('widget-recommend-container');
     }
+    // home
     /**
      * home slide show(pickup)
      * @return {Element} pickup-container を返します
@@ -123,6 +137,7 @@ var Dom = exports.Dom = function () {
     value: function headline() {
       return Dom.get('headline-container');
     }
+    // archive / category
     /**
      * archive container
      * @return {Element} board-container を返します
@@ -143,6 +158,7 @@ var Dom = exports.Dom = function () {
     value: function boardMore() {
       return Dom.get('board-container-more');
     }
+    // single
     /**
      * single 関連記事
      * @return {Element} single-related-container を返します

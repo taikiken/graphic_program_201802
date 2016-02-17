@@ -28,6 +28,8 @@ var _symbol2 = require('babel-runtime/core-js/symbol');
 
 var _symbol3 = _interopRequireDefault(_symbol2);
 
+var _PageTop = require('./ui/PageTop');
+
 var _Index = require('./page/Index');
 
 var _Category = require('./page/Category');
@@ -79,6 +81,9 @@ var Page = exports.Page = function () {
       router.on(Router.SINGLE, Page.single);
 
       router.route();
+
+      var pageTop = new _PageTop.PageTop();
+      pageTop.init();
     }
     /**
      * home, index page

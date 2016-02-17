@@ -50,6 +50,7 @@ var _Path = require('../../app/const/Path');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * **コメント送信**
  * FormData を送る token 付き Action
  */
 

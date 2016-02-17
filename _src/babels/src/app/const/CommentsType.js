@@ -87,18 +87,4 @@ export class CommentsType {
   static get ALL():string {
     return '';
   }
-  // ---------------
-  // good / bad
-  static get GOOD():string {
-    return 'good';
-  }
-  static get BAD():string {
-    return 'bad';
-  }
-  static get ADD():string {
-    return 'add';
-  }
-  static get DELETE():string {
-    return 'delete';
-  }
 }

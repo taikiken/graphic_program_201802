@@ -47,7 +47,7 @@
 	/*!
 	 * Copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-02-16 16:35:28
+	 * @date 2016-02-17 18:47:02
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -97,11 +97,13 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Index = __webpack_require__(37);
+	var _PageTop = __webpack_require__(37);
 
-	var _Category = __webpack_require__(41);
+	var _Index = __webpack_require__(39);
 
-	var _Single = __webpack_require__(42);
+	var _Category = __webpack_require__(42);
+
+	var _Single = __webpack_require__(43);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -148,6 +150,9 @@
 	      router.on(Router.SINGLE, Page.single);
 
 	      router.route();
+
+	      var pageTop = new _PageTop.PageTop();
+	      pageTop.init();
 	    }
 	    /**
 	     * home, index page
@@ -911,7 +916,7 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/15 - 21:37
+	 * @date 2016/02/17 - 18:14
 	 *
 	 * Distributed under the terms of the MIT license.
 	 * http://www.opensource.org/licenses/mit-license.html
@@ -924,7 +929,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Index = undefined;
+	exports.PageTop = undefined;
 
 	var _classCallCheck2 = __webpack_require__(2);
 
@@ -934,155 +939,78 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _symbol2 = __webpack_require__(7);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	var _Header = __webpack_require__(38);
-
-	var _Sidebar = __webpack_require__(40);
-
-	var _Dom = __webpack_require__(39);
+	var _Dom = __webpack_require__(38);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var _symbol = (0, _symbol3.default)();
-
-	// UT
-	var UT = self.UT;
+	var TweenLite = self.TweenLite;
+	var easing = self.com.greensock.easing;
 
 	/**
-	 * <h3>Home(index)</h3>
-	 * 全て static です
+	 * page top に戻る
 	 */
 
-	var Index = exports.Index = function () {
+	var PageTop = exports.PageTop = function () {
 	  /**
-	   * static class です, instance を作成しません
-	   * @param {Symbol} target Singleton を実現するための private symbol
+	   * page top に戻る motion
 	   */
 
-	  function Index(target) {
-	    (0, _classCallCheck3.default)(this, Index);
+	  function PageTop() {
+	    (0, _classCallCheck3.default)(this, PageTop);
 
-	    if (_symbol !== target) {
-
-	      throw new Error('Index is static Class. not use new Index().');
-	    }
+	    this._boundComplete = this.onComplete.bind(this);
+	    this._can = true;
 	  }
 	  /**
-	   * home rendering 開始
+	   * click event を bind します
 	   */
 
-	  (0, _createClass3.default)(Index, null, [{
-	    key: 'start',
-	    value: function start() {
+	  (0, _createClass3.default)(PageTop, [{
+	    key: 'init',
+	    value: function init() {
+	      _Dom.Dom.pageTop().addEventListener('click', this.onClick.bind(this), false);
+	    }
+	    /**
+	     * element event handler
+	     * @param {Event} event native event, click event
+	     */
 
-	      // header
-	      _Header.Header.start();
+	  }, {
+	    key: 'onClick',
+	    value: function onClick(event) {
+	      event.preventDefault();
 
-	      // ---------------------------------------------------------
-	      // pickup
-	      var pickup = new UT.view.home.ViewPickup(_Dom.Dom.pickup());
-	      pickup.start();
+	      if (!this._can) {
+	        return;
+	      }
 
-	      // ---------------------------------------------------------
-	      // headline
-	      var headline = new UT.view.home.ViewHeadline(_Dom.Dom.headline());
-	      headline.start();
+	      var complete = this._boundComplete;
+	      this._can = false;
 
-	      // ---------------------------------------------------------
-	      // news
-	      var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-	      var archive = new UT.view.ViewArchiveMasonryInfinite(_Dom.Dom.board(), _Dom.Dom.boardMore(), archiveAction);
-	      archive.start();
+	      TweenLite.to(window, 0.5, {
+	        scrollTo: {
+	          y: 0,
+	          autoKill: false
+	        },
+	        ease: easing.Power4.easeInOut,
+	        onComplete: complete
+	      });
+	    }
+	    /**
+	     * page top motion complete
+	     */
 
-	      // sidebar, slug なし(=all)
-	      _Sidebar.Sidebar.start();
+	  }, {
+	    key: 'onComplete',
+	    value: function onComplete() {
+	      this._can = true;
 	    }
 	  }]);
-	  return Index;
+	  return PageTop;
 	}();
 
 /***/ },
 /* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/15 - 21:39
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Header = undefined;
-
-	var _classCallCheck2 = __webpack_require__(2);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(3);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _symbol2 = __webpack_require__(7);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	var _Dom = __webpack_require__(39);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _symbol = (0, _symbol3.default)();
-
-	// UT
-	var UT = self.UT;
-
-	/**
-	 * <h3>header user information / signup</h3>
-	 * 全て static です
-	 */
-
-	var Header = exports.Header = function () {
-	  /**
-	   * static class です, instance を作成しません
-	   * @param {Symbol} target Singleton を実現するための private symbol
-	   */
-
-	  function Header(target) {
-	    (0, _classCallCheck3.default)(this, Header);
-
-	    if (_symbol !== target) {
-
-	      throw new Error('Header is static Class. not use new Header().');
-	    }
-	  }
-	  /**
-	   * header rendering 開始
-	   */
-
-	  (0, _createClass3.default)(Header, null, [{
-	    key: 'start',
-	    value: function start() {
-	      // header.user
-	      var headerUser = new UT.view.header.ViewHeaderUser(_Dom.Dom.profile());
-	      headerUser.start();
-	    }
-	  }]);
-	  return Header;
-	}();
-
-/***/ },
-/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1160,6 +1088,18 @@
 
 	      return element;
 	    }
+
+	    /**
+	     * pageTop container
+	     * @return {Element} pageTop element を返します
+	     */
+
+	  }, {
+	    key: 'pageTop',
+	    value: function pageTop() {
+	      return Dom.get('pageTop');
+	    }
+	    // header
 	    /**
 	     * header user profile
 	     * @return {Element} 'user-profile-container' element を返します
@@ -1170,6 +1110,7 @@
 	    value: function profile() {
 	      return Dom.get('user-profile-container');
 	    }
+	    // sidebar
 	    /**
 	     * sidebar ranking
 	     * @return {Element} widget-ranking-container element を返します
@@ -1190,6 +1131,7 @@
 	    value: function video() {
 	      return Dom.get('widget-recommend-container');
 	    }
+	    // home
 	    /**
 	     * home slide show(pickup)
 	     * @return {Element} pickup-container を返します
@@ -1210,6 +1152,7 @@
 	    value: function headline() {
 	      return Dom.get('headline-container');
 	    }
+	    // archive / category
 	    /**
 	     * archive container
 	     * @return {Element} board-container を返します
@@ -1230,6 +1173,7 @@
 	    value: function boardMore() {
 	      return Dom.get('board-container-more');
 	    }
+	    // single
 	    /**
 	     * single 関連記事
 	     * @return {Element} single-related-container を返します
@@ -1306,7 +1250,184 @@
 	// return Dom.get( '' );
 
 /***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/15 - 21:37
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Index = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(7);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _Header = __webpack_require__(40);
+
+	var _Sidebar = __webpack_require__(41);
+
+	var _Dom = __webpack_require__(38);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	// UT
+	var UT = self.UT;
+
+	/**
+	 * <h3>Home(index)</h3>
+	 * 全て static です
+	 */
+
+	var Index = exports.Index = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Index(target) {
+	    (0, _classCallCheck3.default)(this, Index);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Index is static Class. not use new Index().');
+	    }
+	  }
+	  /**
+	   * home rendering 開始
+	   */
+
+	  (0, _createClass3.default)(Index, null, [{
+	    key: 'start',
+	    value: function start() {
+
+	      // header
+	      _Header.Header.start();
+
+	      // ---------------------------------------------------------
+	      // pickup
+	      var pickup = new UT.view.home.ViewPickup(_Dom.Dom.pickup());
+	      pickup.start();
+
+	      // ---------------------------------------------------------
+	      // headline
+	      var headline = new UT.view.home.ViewHeadline(_Dom.Dom.headline());
+	      headline.start();
+
+	      // ---------------------------------------------------------
+	      // news
+	      var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
+	      var archive = new UT.view.ViewArchiveMasonryInfinite(_Dom.Dom.board(), _Dom.Dom.boardMore(), archiveAction);
+	      archive.start();
+
+	      // sidebar, slug なし(=all)
+	      _Sidebar.Sidebar.start();
+	    }
+	  }]);
+	  return Index;
+	}();
+
+/***/ },
 /* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/15 - 21:39
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Header = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(7);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _Dom = __webpack_require__(38);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	// UT
+	var UT = self.UT;
+
+	/**
+	 * <h3>header user information / signup</h3>
+	 * 全て static です
+	 */
+
+	var Header = exports.Header = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function Header(target) {
+	    (0, _classCallCheck3.default)(this, Header);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('Header is static Class. not use new Header().');
+	    }
+	  }
+	  /**
+	   * header rendering 開始
+	   */
+
+	  (0, _createClass3.default)(Header, null, [{
+	    key: 'start',
+	    value: function start() {
+	      // header.user
+	      var headerUser = new UT.view.header.ViewHeaderUser(_Dom.Dom.profile());
+	      headerUser.start();
+	    }
+	  }]);
+	  return Header;
+	}();
+
+/***/ },
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1339,7 +1460,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Dom = __webpack_require__(39);
+	var _Dom = __webpack_require__(38);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1390,7 +1511,7 @@
 	}();
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1423,11 +1544,11 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Header = __webpack_require__(38);
+	var _Header = __webpack_require__(40);
 
-	var _Sidebar = __webpack_require__(40);
+	var _Sidebar = __webpack_require__(41);
 
-	var _Dom = __webpack_require__(39);
+	var _Dom = __webpack_require__(38);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1485,7 +1606,7 @@
 	}();
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1520,9 +1641,9 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _Sidebar = __webpack_require__(40);
+	var _Sidebar = __webpack_require__(41);
 
-	var _Dom = __webpack_require__(39);
+	var _Dom = __webpack_require__(38);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

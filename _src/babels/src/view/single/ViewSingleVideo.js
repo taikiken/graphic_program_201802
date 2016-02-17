@@ -49,7 +49,7 @@ export class ViewSingleVideo extends View {
   render( mediaDae:MediaDae ) {
 
     // データチェック
-    if ( !mediaDae.video || !mediaDae.video.url || !mediaDae.images || !mediaDae.images.medium ) {
+    if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube) ) {
       return;
     }
 
@@ -75,12 +75,12 @@ export class ViewSingleVideo extends View {
         if ( !!media.video.youtube ) {
 
           // youtube id found
-          this.youtube( media );
+          return this.youtube( media );
 
         } else {
 
           // HTML5 video tag
-          this.video( media );
+          return this.video( media );
 
         }
 
@@ -121,7 +121,7 @@ export class ViewSingleVideo extends View {
 
         return (
           <div className="post-kv">
-            <iframe src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0`} width="710" height="400" frameborder="0" allowfullscreen></iframe>
+            <iframe src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0`} width="710" height="400" frameBorder="0" allowFullScreen></iframe>
           </div>
         );
       },

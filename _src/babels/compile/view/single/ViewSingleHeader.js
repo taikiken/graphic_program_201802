@@ -204,11 +204,19 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
 
             // image
             img = new _ViewSingleImage.ViewSingleImage(imageNode, single.media.images);
-            img.start();
           } else if (single.mediaType === 'video') {
 
-            // video
-            img = new _ViewSingleVideo.ViewSingleVideo(imageNode, single.media);
+            var mediaDae = single.media;
+            if (!mediaDae.video || !mediaDae.video.url && !mediaDae.video.youtube) {
+              // not movie data
+              img = new _ViewSingleImage.ViewSingleImage(imageNode, single.media.images);
+            } else {
+              // found video data
+              img = new _ViewSingleVideo.ViewSingleVideo(imageNode, mediaDae);
+            }
+          }
+
+          if (typeof img !== 'undefined') {
             img.start();
           }
         },

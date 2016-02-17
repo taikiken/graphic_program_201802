@@ -48,6 +48,15 @@ export class Dom {
 
     return element;
   }
+
+  /**
+   * pageTop container
+   * @return {Element} pageTop element を返します
+   */
+  static pageTop():Element {
+    return Dom.get( 'pageTop' );
+  }
+  // header
   /**
    * header user profile
    * @return {Element} 'user-profile-container' element を返します
@@ -55,6 +64,7 @@ export class Dom {
   static profile():Element {
     return Dom.get( 'user-profile-container' );
   }
+  // sidebar
   /**
    * sidebar ranking
    * @return {Element} widget-ranking-container element を返します
@@ -69,6 +79,7 @@ export class Dom {
   static video():Element {
     return Dom.get( 'widget-recommend-container' );
   }
+  // home
   /**
    * home slide show(pickup)
    * @return {Element} pickup-container を返します
@@ -83,6 +94,7 @@ export class Dom {
   static headline():Element {
     return Dom.get( 'headline-container' );
   }
+  // archive / category
   /**
    * archive container
    * @return {Element} board-container を返します
@@ -97,6 +109,7 @@ export class Dom {
   static boardMore():Element {
     return Dom.get( 'board-container-more' );
   }
+  // single
   /**
    * single 関連記事
    * @return {Element} single-related-container を返します

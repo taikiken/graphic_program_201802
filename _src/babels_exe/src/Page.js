@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {PageTop} from './ui/PageTop';
+
 import {Index} from './page/Index';
 import {Category} from './page/Category';
 import {Single} from './page/Single';
@@ -53,6 +55,8 @@ export class Page {
 
     router.route();
 
+    let pageTop = new PageTop();
+    pageTop.init();
   }
   /**
    * home, index page

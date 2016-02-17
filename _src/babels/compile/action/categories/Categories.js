@@ -36,12 +36,13 @@ var _Action2 = require('../Action');
 
 var _Api = require('../../net/Api');
 
-var _Path = require('../../app/const/Path');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import {Path} from '../../app/const/Path';
+
 /**
- * category action
+ * **category 一覧を取得**
+ * <p>category action</p>
  */
 
 var Categories = exports.Categories = function (_Action) {

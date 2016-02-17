@@ -33,18 +33,23 @@ export class VideoDae {
   }
   /**
    * video caption
-   * @ToDo 使い道がわからない
-   * @return {string} article.media.video.caption
+   * @return {string} article.media.video.caption を返します
    */
   get caption():string {
     return this.video.caption;
   }
   /**
    * 動画パス
-   * @ToDo youtube ドメインから取得する？
-   * @return {string} article.media.video.url
+   * @return {string} article.media.video.url を返します
    */
   get url():string {
-    return this.video.return;
+    return this.video.url;
+  }
+  /**
+   * YouTube video id
+   * @return {string} YouTube video id article.media.video.youtube を返します
+   */
+  get youtube():string {
+    return this.video.youtube;
   }
 }

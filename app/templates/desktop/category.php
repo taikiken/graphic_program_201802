@@ -1,12 +1,3 @@
-<div class="dialogue-notice error">
-  <div class="dialogue-notice-inner">
-    <div class="dialogue-notice-info">
-      <p>パスワードが違います</p>
-    </div>
-    <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
-  </div>
-</div><!-- /.dialogue-notice -->
-
 <div class="category-heading">
   <h1>
     <?php echo $page['title']; ?>

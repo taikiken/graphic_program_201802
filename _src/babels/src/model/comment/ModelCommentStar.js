@@ -14,6 +14,8 @@
 import {Model} from '../Model';
 import {Result} from '../../data/Result';
 import {CommentStar} from '../../action/comment/CommentStar';
+import {ActionType} from '../../app/const/ActionType';
+import {Safety} from '../../data/Safety';
 
 /**
  * コメント GOOD / BAD を行い結果 event を返します
@@ -23,21 +25,32 @@ export class ModelCommentStar extends Model {
    * コメント GOOD / BAD を行い結果 event を返します
    * @param {Number} commentId コメント Id
    * @param {string} type GOOD / BAD どちらか
-   * @param {string} mode ADD / DELETE どちらか
    * @param {Object} [option={}] optional event handler
    */
-  constructor( commentId:Number, type:string, mode:string, option:Object = {} ) {
+  constructor( commentId:Number, type:string, option:Object = {} ) {
+
+    if ( !Safety.normalize( type, [ ActionType.GOOD, ActionType.BAD ] ) ) {
+      throw new Error( `type is not correct. ${type}` );
+    }
+
     super( option );
-    this._action = new CommentStar( commentId, type, mode, this.done.bind( this ), this.fail.bind( this ) );
+
+    this._action = type === ActionType.GOOD ?
+      CommentStar.good( commentId, this.done.bind( this ), this.fail.bind( this ) ) :
+      CommentStar.bad( commentId, this.done.bind( this ), this.fail.bind( this ) );
+
     this._actionType = type;
-    this._actionMode = mode;
   }
   /**
    * Ajax request を開始します
    */
-  start():void {
+  start( add:boolean ):void {
 
-    this.action.start();
+    if ( add ) {
+      this.action.add();
+    } else {
+      this.action.remove();
+    }
 
   }
   /**
@@ -52,7 +65,7 @@ export class ModelCommentStar extends Model {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( `[MODEL_STAR:UNDEFINED]${this._actionType}:${this._actionMode}.サーバーレスポンスに問題が発生しました。` );
+      let error = new Error( `[MODEL_STAR:UNDEFINED]${this._actionType}.サーバーレスポンスに問題が発生しました。` );
       this.executeSafely( Model.UNDEFINED_ERROR, error );
 
     } else {

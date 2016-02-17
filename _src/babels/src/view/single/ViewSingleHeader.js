@@ -126,14 +126,23 @@ export class ViewSingleHeader extends View {
 
           // image
           img = new ViewSingleImage( imageNode, single.media.images );
-          img.start();
 
         } else if ( single.mediaType === 'video' ) {
 
-          // video
-          img = new ViewSingleVideo( imageNode, single.media );
-          img.start();
+          let mediaDae = single.media;
+          if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube) ) {
+            // not movie data
+            img = new ViewSingleImage( imageNode, single.media.images );
 
+          } else {
+            // found video data
+            img = new ViewSingleVideo( imageNode, mediaDae );
+          }
+
+        }
+
+        if ( typeof img !== 'undefined' ) {
+          img.start();
         }
 
       },
@@ -144,6 +153,8 @@ export class ViewSingleHeader extends View {
       },
       clickBookmark: function( event ) {
         event.preventDefault();
+
+
       },
       done: function( result ) {
 

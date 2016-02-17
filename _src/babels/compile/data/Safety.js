@@ -16,6 +16,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Safety = undefined;
 
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
 var _isInteger = require('babel-runtime/core-js/number/is-integer');
 
 var _isInteger2 = _interopRequireDefault(_isInteger);
@@ -207,6 +211,47 @@ var Safety = exports.Safety = function () {
     key: 'isImg',
     value: function isImg(fileName) {
       return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf(Safety.getExtension(fileName)) !== -1;
+    }
+    /**
+     * 引数が正規なものかをチェックします
+     * @param {string} target 調査対象
+     * @param {Array<string>} allowed 正しい対象値
+     * @return {boolean}
+     */
+
+  }, {
+    key: 'normalize',
+    value: function normalize(target, allowed) {
+      var bool = false;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = (0, _getIterator3.default)(allowed), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var value = _step.value;
+
+          if (target === value) {
+            bool = true;
+            break;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return bool;
     }
   }]);
   return Safety;

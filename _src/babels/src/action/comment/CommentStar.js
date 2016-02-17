@@ -16,7 +16,9 @@ import {Api} from '../../net/Api';
 import {Path} from '../../app/const/Path';
 import {Safety} from '../../data/Safety';
 import {User} from '../../app/User';
-import {CommentsType} from '../../app/const/CommentsType';
+import {ActionType} from '../../app/const/ActionType';
+
+let _symbol = Symbol();
 
 /**
  * コメント GOOD / BAD を行います
@@ -30,18 +32,30 @@ export class CommentStar extends ActionAuthBehavior {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( commentId:Number, type:string, mode:string, resolve:Function = null, reject:Function = null ) {
+  constructor( target:Symbol, commentId:Number, type:string, resolve:Function = null, reject:Function = null ) {
+    if ( _symbol !== target ) {
+
+      throw new Error( `CommentStar is static Class. not use new CommentStar(). instead CommentStar.add, CommentStar.remove` );
+
+    }
     // 正規化
     // type は good | bad
     // mode は add | delete
-    if ( !CommentStar.normalize( type, [ CommentsType.GOOD, CommentsType.BAD ] ) ) {
+    if ( !Safety.normalize( type, [ ActionType.GOOD, ActionType.BAD ] ) ) {
       throw new Error( `type is not correct. ${type}` );
     }
-    if ( !CommentStar.normalize( mode, [ CommentsType.ADD, CommentsType.DELETE ] ) ) {
-      throw new Error( `mode is not correct. ${mode}` );
-    }
 
-    super( User.token, Api.comment( `${type}:${mode}` ), null, resolve, reject );
+    // 登録
+    let add = Api.comment( `${type}:${ActionType.ADD}` );
+    // 解除
+    let remove = Api.comment( `${type}:${ActionType.DELETE}` );
+
+    // 登録用で super 実行
+    super( User.token, add, null, resolve, reject );
+
+    // global へ( super の後 )
+    this._add = add;
+    this._remove = remove;
     this._commentId = commentId;
   }
   /**
@@ -65,20 +79,54 @@ export class CommentStar extends ActionAuthBehavior {
   get url():string {
     return Path.comment( this._url, this.commentId );
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
-   * 引数が正規なものかをチェックします
-   * @param {string} target 調査対象
-   * @param {Array<string>} allowed 正しい対象値
-   * @return {boolean}
+   * start は使えません, add / remove を使用します
+   * @param {string} method request method
    */
-  static normalize( target:string, allowed:Array<string> ):boolean {
-    var bool = false;
-    for ( var value of allowed ) {
-      if ( target === value ) {
-        bool = true;
-        break;
-      }
-    }
-    return bool;
+  start( method:string = '' ):void {
+    console.error( 'illegal operation, use start. instead add / delete.' );
   }
+  /**
+   * コメント Good / Bad 登録
+   */
+  add():void {
+
+    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ) );
+
+  }
+  /**
+   * コメント Good / Bad 解除
+   */
+  remove():void {
+
+    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ) );
+
+  }
+  // ---------------------------------------------------
+  //  static METHOD
+  // ---------------------------------------------------
+  /**
+   * comment good instance 作成
+   * @param {Number} commentId コメント Id
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @return {CommentStar} comment good instance を返します
+   */
+  static good( commentId:Number, resolve:Function = null, reject:Function = null ):CommentStar {
+    return new CommentStar( _symbol, commentId, ActionType.GOOD, resolve, reject );
+  }
+  /**
+   * comment bad instance 作成
+   * @param {Number} commentId コメント Id
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @return {CommentStar} comment bad instance を返します
+   */
+  static bad( commentId:Number, resolve:Function = null, reject:Function = null ):CommentStar {
+    return new CommentStar( _symbol, commentId, ActionType.BAD, resolve, reject );
+  }
+
 }
