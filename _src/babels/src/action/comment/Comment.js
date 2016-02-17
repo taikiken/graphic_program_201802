@@ -19,6 +19,7 @@ import {User} from '../../app/User';
 import {Path} from '../../app/const/Path';
 
 /**
+ * **コメント送信**
  * FormData を送る token 付き Action
  */
 export class Comment extends ActionAuthBehavior {

@@ -45,7 +45,6 @@
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 </div><!-- /.whole -->
-<script src="/assets/js/bundle/main.bundle.js"></script>
 <script>
 ( function () {
 

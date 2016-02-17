@@ -60,15 +60,15 @@ htdocs = dir.htdocs
 vendors = []
 #vendors.push exports + '/jquery2/*.js'
 #vendors.push exports + '/jquery-migrate/*.js'
-vendors.push exports + '/jquery.smooth-scroll/*.js'
-vendors.push exports + '/matchHeight/*.js'
+#vendors.push exports + '/jquery.smooth-scroll/*.js'
+#vendors.push exports + '/matchHeight/*.js'
 
-gulp.task 'vendor:build', ->
-  return gulp.src vendors
-  .pipe $.concat 'vendor.min.js'
-  .pipe $.uglify preserveComments: 'license'
-  .pipe gulp.dest dir.libs
-  .pipe $.size title: '*** vendor:build ***'
+#gulp.task 'vendor:build', ->
+#  return gulp.src vendors
+#  .pipe $.concat 'vendor.min.js'
+#  .pipe $.uglify preserveComments: 'license'
+#  .pipe gulp.dest dir.libs
+#  .pipe $.size title: '*** vendor:build ***'
 
 
 ###
@@ -83,6 +83,8 @@ gulp.task 'vendor:react:build', ->
     exportsPath + '/react/react-dom.min.js'
     exportsPath + '/isotope/isotope.pkgd.min.js'
     exportsPath + '/imagesloaded/imagesloaded.pkgd.min.js'
+    exportsPath + '/greensock/TweenLite.min.js'
+    exportsPath + '/greensock/ScrollToPlugin.min.js'
   ]
   .pipe $.concat 'vendor.react.js'
   .pipe $.uglify preserveComments: 'license'
@@ -101,6 +103,8 @@ gulp.task 'vendor:react:dev', ->
     exportsPath + '/react/react-dom.js'
     exportsPath + '/isotope/isotope.pkgd.js'
     exportsPath + '/imagesloaded/imagesloaded.pkgd.js'
+    exportsPath + '/greensock/TweenLite.min.js'
+    exportsPath + '/greensock/ScrollToPlugin.min.js'
   ]
   .pipe $.concat 'vendor.react.js'
   .pipe gulp.dest dir.libs
@@ -113,11 +117,11 @@ gulp.task 'vendor:react:dev', ->
 # copy libraries
 exportsPath = exports + '/**'
 libraries = []
-libraries.push exportsPath + '/jquery2/**/*.js'
+#libraries.push exportsPath + '/jquery2/**/*.js'
 libraries.push exportsPath + '/sagen/**/sagen.min.js'
 libraries.push exportsPath + '/html5shiv/**/*'
-libraries.push exportsPath + '/fancybox/**/*'
-libraries.push exportsPath + '/bxslider4/**/*'
+#libraries.push exportsPath + '/fancybox/**/*'
+#libraries.push exportsPath + '/bxslider4/**/*'
 #libraries.push exportsPath + '/isotope/**/*'
 #libraries.push exportsPath + '/react/**/*'
 
@@ -127,5 +131,6 @@ gulp.task 'vendor:copy', ->
   .pipe $.size title: '*** vendor:copy ***'
 
 # vendor.min.js + copy
-gulp.task 'vendor:init', ['vendor:build', 'vendor:copy', 'vendor:react:build'], ->
+#gulp.task 'vendor:init', ['vendor:build', 'vendor:copy', 'vendor:react:build'], ->
+gulp.task 'vendor:init', ['vendor:copy', 'vendor:react:build'], ->
   return

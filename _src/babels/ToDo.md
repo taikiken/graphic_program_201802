@@ -7,10 +7,10 @@
 
 ## Router
 1. Home(index)
-    - []
+    - [X]
 
 1. single 記事詳細
-    - []
+    - [X]
 
 1. category
     - [X]
@@ -46,6 +46,9 @@
     - [] 退会
 
 ## Pagination
+
+**いらないかも**
+
 1. 対象URL 特定
     - [] 対象URL 特定
     - [] location.search からリクエスト作成
@@ -55,17 +58,15 @@
 **user** popup
 
 1. ログイン
-    - [] model
-    データ取得要？  
-    ユーザーアイコンはApiで取得？  
-    local から token 含むリクエストが成功しない...
+    - [] ログイン判定  
+    API 未設定
+    - [X] ユーザー情報取得 model
+    - [X] ユーザーアイコンを ユーザー情報取得後に取得
+    - [X] local から token 含むリクエストが成功しない... -> 2016-02-16 解決
     - [X] view
     - [X] UI drop menu
 
 1. 非ログイン
-    - [] model
-    データ取得要？
-    登録済みでログアウトしたユーザのリンク違う？
     - [X] view
 
 ## index
@@ -73,24 +74,24 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 
 1. pickup
     - [X] model
-    - [-] view
+    - [X] view
     
 1. headline
     - [X] model
-    - [-] view
+    - [X] view
     
 1. 一覧
     - [X] model
-    - [-] view
+    - [X] view
     - [X] infinite scroll
     
 1. ranking
     - [X] model
-    - [-] view
+    - [X] view
     
 1. video
     - [X] model
-    - [-] view
+    - [X] view
     
 ## 記事詳細
 1. URLからID抽出
@@ -98,7 +99,8 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 
 1. 記事
     - [X] model
-    - [] view
+    - [X] view
+    - [] 本文 PHP 出力
     
 1. bookmark
     - [] model
@@ -108,14 +110,17 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     
 1. 関連記事
     - [X] model
-    - [] view
+    - [X] view
     
 1. コメント self  
-    ToDo: Token ありリクエストができるようになったら作成する
-    - [] model
-    - [] view
-    - [] send
-    - [] edit
+    ToDo: Token ありリクエストができるようになったら作成する -> 2016-02-16
+    - [X] model
+    - [X] view
+    - [X] paging  
+    - [X] send
+    - [] send 後の view
+    - [-] edit  
+    先送り
     - [] delete
     - [] good
     - [] good delete
@@ -125,10 +130,11 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1. コメント official
     記事IDから取得する
     - [X] model
-    - [] view
+    - [X] view
     - [-] paging  
         データが足りないので未テスト
-    - [] send
+    - [X] send
+    - [] send 後の view
     - [] edit
     - [] delete
     - [] good
@@ -139,10 +145,11 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1. コメント normal
     記事IDから取得する
     - [X] model
-    - [] view
+    - [X] view
     - [-] paging  
         データが足りないので未テスト
-    - [] send
+    - [X] send
+    - [] send 後の view
     - [] edit
     - [] delete
     - [] good
@@ -154,17 +161,17 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     クリックで Form 表示  
     同じ form を状態に合わせ 表示・非表示  
     ユーザー視線では Form が移動したように見える
-    - [] UI
+    - [X] UI
     
 1. ranking
     記事カテゴリーから取得する
     - [X] model
-    - [] view
+    - [X] view
     
 1. video
     記事カテゴリーから取得する
     - [X] model
-    - [] view
+    - [X] view
 
    
 ## カテゴリー
@@ -176,16 +183,16 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 
 1. 一覧
     - [X] model
-    - [-] view
+    - [X] view
     - [X] infinite scroll
         
 1. ranking
     - [X] model
-    - [-] view
+    - [X] view
     
 1. video
     - [X] model
-    - [-] view
+    - [X] view
 
 ## カテゴリー slug あり
 ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
@@ -198,7 +205,7 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
         
 1. ranking
     - [X] model
-    - [-] view
+    - [X] view
     
 1. video
     - [X] model

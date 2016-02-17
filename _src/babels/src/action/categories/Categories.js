@@ -13,10 +13,11 @@
 
 import {Action} from '../Action';
 import {Api} from '../../net/Api';
-import {Path} from '../../app/const/Path';
+// import {Path} from '../../app/const/Path';
 
 /**
- * category action
+ * **category 一覧を取得**
+ * <p>category action</p>
  */
 export class Categories extends Action {
   /**

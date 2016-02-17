@@ -21,7 +21,7 @@ import {Safety} from '../../data/Safety';
 let _symbol = Symbol();
 
 /**
- * コメント一覧
+ * <h3>コメント一覧<h3>
  */
 export class Comments extends OffsetAuth {
   /**

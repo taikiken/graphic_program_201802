@@ -16,9 +16,8 @@
 
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/ui.css">
-  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="/assets/js/libs/vendor.min.js"></script>
   <script src="/assets/js/libs/vendor.react.js"></script>
+  <script src="/assets/js/bundle/main.bundle.js"></script>
 </head>
 <body>
 
