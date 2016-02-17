@@ -17,14 +17,22 @@ endif;
 
 
 
-$app->group('/category/{category_slug:'.join('|',$category_slug).'}', function () use($app) {
+$app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', function () use($app) {
 
 
   // 各カテゴリートップ - /category/:category_slug/
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->model->get_category_by_slug($args['category_slug']);
+    if ( $args['category_slug'] === 'all' ) :
+      $category = array(
+        'label' => 'すべて',
+        'slug'  => $args['category_slug'],
+        'url'   => $app->model->property('site_url').'category/all/',
+      );
+    else :
+      $category = $app->model->get_category_by_slug($args['category_slug']);
+    endif;
 
     $args['page'] = $app->model->set(array(
       'title'      => $category['label'].'のニュース',
