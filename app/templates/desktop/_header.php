@@ -51,19 +51,10 @@
       <li class="gnav-all"><a href="/category/all/">すべて</a></li>
       <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
         <li class="gnav-<?php echo $category[ 'slug' ]; ?>">
-          <a href="<?php echo $category[ 'url' ]; ?>"><?php echo $category[ 'label' ]; ?></a>
+          <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
         </li>
       <?php }//foreach ?>
     </ul>
   </nav><!-- /.gnav-sec -->
-
-  <!--
-  # カテゴリー一覧
-
-  ```
-  <?php //print_r($page['site_categories']); ?>
-  ```
-
-   -->
 
 
