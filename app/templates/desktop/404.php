@@ -15,8 +15,8 @@ include_once __DIR__."/_header.php";
 <?php var_dump($request); ?>
 
 
-<h2>$args</h2>
-<?php var_dump($args); ?>
+<h2>$page</h2>
+<?php var_dump($page); ?>
 
 
 <?php
