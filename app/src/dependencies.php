@@ -14,7 +14,11 @@ $container['notFoundHandler'] = function ($c) use ($app) {
     $args['request']  = $request;
     $args['response'] = $response;
 
-    return $c['renderer']->render($response, 'errors/404.php', $args)->withStatus(404);
+    if ( $app->model->property('ua') === 'desktop' ) :
+        return $c['renderer']->render($response, 'desktop/404.php', $args)->withStatus(404);
+    else :
+        return $c['renderer']->render($response, 'mobile/404.php', $args)->withStatus(404);
+    endif;
 
   };
 };
