@@ -294,38 +294,36 @@ a {
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .gnav-sec {
-  .row1 {
-    background-color: #111;
-  }
-
-  .row2 {
-    background-color: #222;
-  }
+  background: #111 url(/assets/images/common/gnav-bg.png) 0 0 repeat-x;
 
   ul {
-    display: table;
     width: 1070px;
     margin: 0 auto;
+    letter-spacing: ls( inline-block );
   }
 
   li {
-    display: table-cell;
+    display: inline-block;
     padding: 0 11px 0 0;
     background: url(/assets/images/common/gnav-separator.png) right center no-repeat;
     text-align: center;
     vertical-align: middle;
+    letter-spacing: normal;
 
-    &:last-child {
-      padding-right: 0;
-      background: none;
-    }
+    // &:last-child {
+    //   padding-right: 0;
+    //   background: none;
+    // }
   }
 
   a {
     display: block;
-    padding: 10px 0 12px 0;
+    max-height: 40px;
+    // line-height: 40px;
+    padding: 10px 8px 12px;
     @include link-decoration(#ccc, $highlight-color, none, none);
     font-weight: bold;
+    white-space: nowrap;
 
     &:hover {
       padding-bottom: 10px;
@@ -334,7 +332,7 @@ a {
     }
   }
 
-  @include prc-each(headline, crazy, all, baseball, mlb, soccer, w_soccer, golf, sumo, combative, athletic, swimming, judo, tennis, volleyball, rugby, figure, basketbal, xsports, motor, business, other) {
+  @include prc-each(home, crazy, all, baseball, soccer, basketball, golf, tennis, battle, volleyball, rugby, americanfootball, athletics, swimming, pingpong, motorsports, extremesports, wintersports, disabledsports, etc, business) {
     &.#{$arg} {
       .gnav-#{$arg} {
         a {

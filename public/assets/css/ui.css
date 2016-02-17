@@ -5165,151 +5165,119 @@ a:hover {
           color: #333;
           text-decoration: underline; }
 
-.gnav-sec .row1 {
-  background-color: #111; }
-
-.gnav-sec .row2 {
-  background-color: #222; }
-
-.gnav-sec ul {
-  display: table;
-  width: 1070px;
-  margin: 0 auto; }
-
-.gnav-sec li {
-  display: table-cell;
-  padding: 0 11px 0 0;
-  background: url(/assets/images/common/gnav-separator.png) right center no-repeat;
-  text-align: center;
-  vertical-align: middle; }
-  .gnav-sec li:last-child {
-    padding-right: 0;
-    background: none; }
-
-.gnav-sec a {
-  display: block;
-  padding: 10px 0 12px 0;
-  font-weight: bold; }
-  .gnav-sec a:link, .gnav-sec a:visited, .gnav-sec a:hover, .gnav-sec a:active {
-    color: #ccc;
-    text-decoration: none; }
-  .gnav-sec a:hover {
-    color: #e1438b;
-    text-decoration: none; }
-  .gnav-sec a:hover {
+.gnav-sec {
+  background: #111 url(/assets/images/common/gnav-bg.png) 0 0 repeat-x; }
+  .gnav-sec ul {
+    width: 1070px;
+    margin: 0 auto;
+    letter-spacing: -0.4em; }
+  .gnav-sec li {
+    display: inline-block;
+    padding: 0 11px 0 0;
+    background: url(/assets/images/common/gnav-separator.png) right center no-repeat;
+    text-align: center;
+    vertical-align: middle;
+    letter-spacing: normal; }
+  .gnav-sec a {
+    display: block;
+    max-height: 40px;
+    padding: 10px 8px 12px;
+    font-weight: bold;
+    white-space: nowrap; }
+    .gnav-sec a:link, .gnav-sec a:visited, .gnav-sec a:hover, .gnav-sec a:active {
+      color: #ccc;
+      text-decoration: none; }
+    .gnav-sec a:hover {
+      color: #e1438b;
+      text-decoration: none; }
+    .gnav-sec a:hover {
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e1438b;
+      color: #e1438b; }
+  .gnav-sec.home .gnav-home a {
     padding-bottom: 10px;
     border-bottom: 2px solid #e1438b;
     color: #e1438b; }
-
-.gnav-sec.headline .gnav-headline a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.crazy .gnav-crazy a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.all .gnav-all a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.baseball .gnav-baseball a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.mlb .gnav-mlb a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.soccer .gnav-soccer a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.w_soccer .gnav-w_soccer a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.golf .gnav-golf a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.sumo .gnav-sumo a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.combative .gnav-combative a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.athletic .gnav-athletic a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.swimming .gnav-swimming a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.judo .gnav-judo a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.tennis .gnav-tennis a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.volleyball .gnav-volleyball a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.rugby .gnav-rugby a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.figure .gnav-figure a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.basketbal .gnav-basketbal a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.xsports .gnav-xsports a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.motor .gnav-motor a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.business .gnav-business a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
-
-.gnav-sec.other .gnav-other a {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e1438b;
-  color: #e1438b; }
+  .gnav-sec.crazy .gnav-crazy a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.all .gnav-all a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.baseball .gnav-baseball a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.soccer .gnav-soccer a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.basketball .gnav-basketball a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.golf .gnav-golf a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.tennis .gnav-tennis a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.battle .gnav-battle a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.volleyball .gnav-volleyball a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.rugby .gnav-rugby a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.americanfootball .gnav-americanfootball a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.athletics .gnav-athletics a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.swimming .gnav-swimming a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.pingpong .gnav-pingpong a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.motorsports .gnav-motorsports a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.extremesports .gnav-extremesports a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.wintersports .gnav-wintersports a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.disabledsports .gnav-disabledsports a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.etc .gnav-etc a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
+  .gnav-sec.business .gnav-business a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1438b;
+    color: #e1438b; }
 
 .foot-sec {
   padding-top: 20px;
