@@ -43,10 +43,13 @@
 
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
+<!--
+    ToDo: crazy, すべて の URL を正規のものにする
+    -->
       <li class="gnav-home"><a href="/">一面</a></li>
       <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
-      <li class="gnav-all"><a href="/all/">すべて</a></li>
-      <?php foreach( $page['site_categories'] as $category ) { ?>
+      <li class="gnav-all"><a href="/category/all/">すべて</a></li>
+      <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
         <li class="gnav-<?php echo $category[ 'slug' ]; ?>">
           <a href="<?php echo $category[ 'url' ]; ?>"><?php echo $category[ 'label' ]; ?></a>
         </li>
@@ -58,7 +61,7 @@
   # カテゴリー一覧
 
   ```
-  <?php print_r($page['site_categories']); ?>
+  <?php //print_r($page['site_categories']); ?>
   ```
 
    -->
