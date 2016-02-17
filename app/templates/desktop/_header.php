@@ -44,26 +44,17 @@
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
 <!--
-    ToDo: crazy の URL を正規のものにする
+    ToDo: crazy, すべて の URL を正規のものにする
     -->
       <li class="gnav-home"><a href="/">一面</a></li>
       <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
       <li class="gnav-all"><a href="/category/all/">すべて</a></li>
       <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
         <li class="gnav-<?php echo $category[ 'slug' ]; ?>">
-          <a href="<?php echo $category[ 'url' ]; ?>"><?php echo $category[ 'label' ]; ?></a>
+          <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
         </li>
       <?php }//foreach ?>
     </ul>
   </nav><!-- /.gnav-sec -->
-
-  <div id="dialogue-notice" class="dialogue-notice">
-    <div class="dialogue-notice-inner">
-      <div id="dialogue-notice-info" class="dialogue-notice-info">
-        <p>パスワードが違います</p>
-      </div>
-      <div id="dialogue-notice-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice-info">CLOSE</a></div>
-    </div>
-  </div><!-- /.dialogue-notice -->
 
 
