@@ -73,7 +73,7 @@ gulp.task 'css:dev', ->
   .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
 #  .pipe $.if '*.css' && compress.css, $.cssnano
-  .pipe $.sourcemaps.write '.'
+  .pipe $.sourcemaps.write './'
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** css:dev ***'

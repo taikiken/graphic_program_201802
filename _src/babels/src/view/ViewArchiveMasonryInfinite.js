@@ -424,7 +424,8 @@ export class ViewArchiveMasonryInfinite extends View {
       propType: {
         commentsPopular: React.PropTypes.object.isRequired,
         total: React.PropTypes.number.isRequired,
-        articleId: React.PropTypes.string.isRequired
+        articleId: React.PropTypes.string.isRequired,
+        uniqueId: React.PropTypes.string.isRequired
       },
       render: function() {
 
@@ -475,6 +476,7 @@ export class ViewArchiveMasonryInfinite extends View {
                 {/* insert html tag into .comment-content innerHTML */}
                 <div className="comment-content" dangerouslySetInnerHTML={{__html: first.body}} />
                 <ReactionNode
+                  uniqueId={this.props.uniqueId}
                   articleId={String(articleId)}
                   commentId={String(first.id)}
                   sign={sign}
@@ -614,7 +616,12 @@ export class ViewArchiveMasonryInfinite extends View {
                         <div className="post-excerpt-text">{dae.description}</div>
                       </div>
                     </a>
-                    <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={String(dae.id)} />
+                    <PopularDom
+                      key={'comment-' + dae.id}
+                      uniqueId={'comment-' + dae.id}
+                      commentsPopular={commentsPopular}
+                      total={commentsTotal}
+                      articleId={String(dae.id)} />
                   </div>
                 );
                 // loop end

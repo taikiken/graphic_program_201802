@@ -365,6 +365,7 @@ export let CommentNode = React.createClass( {
         </figure>
         <div className="comment-content" dangerouslySetInnerHTML={{__html: comment.body}} />
         <ReactionNode
+          uniqueId={this.props.uniqueId}
           articleId={this.props.articleId}
           commentId={this.props.commentId}
           sign={sign}

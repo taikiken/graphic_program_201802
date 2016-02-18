@@ -22,6 +22,8 @@ let React = self.React;
 
 export let ReactionNode = React.createClass( {
   propTypes: {
+    // unique id
+    uniqueId: React.PropTypes.string.isRequired,
     // 記事 id
     articleId: React.PropTypes.string.isRequired,
     // コメント id（オプション）
@@ -57,7 +59,7 @@ export let ReactionNode = React.createClass( {
     };
   },
   render: function() {
-    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render +++++++++++++++++++++++++++++++++', this.state.isGood, this.state.isBad );
+    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render +++++++++++++++++++++++++++++++++', this.props.uniqueId, this.state.isGood, this.state.isBad );
 
     let active = ( mine ) => {
       return mine ? ' active' : '';
@@ -142,13 +144,16 @@ export let ReactionNode = React.createClass( {
     this.setState({loading: 'loading', bad: '...'});
 
     // bad sequence
-    if ( this.state.isGood ) {
+    if ( this.state.isBad ) {
+
+      console.log( 'bad -> DELETE' );
       // bad -> DELETE
       this.badStar.on( Model.COMPLETE, this.badDeleteDone );
       this.badStar.start( ActionType.DELETE );
 
     } else {
 
+      console.log( ' no bad -> ADD' );
       // no bad -> ADD
       this.badStar.on( Model.COMPLETE, this.badAddDone );
       this.badStar.start( ActionType.ADD );
