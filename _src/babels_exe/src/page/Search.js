@@ -33,45 +33,66 @@ export class Search {
 
     }
   }
+  /**
+   * 検索ページ rendering 開始
+   * @param {string} keyword 検索キーワード
+   */
   static start( keyword:string ):void {
 
     // header
     Header.start();
 
     // list
+    // 検索キーワードで page 取得
+    // 結果セットを使い sidebar を rendering
     let search = new UT.view.ViewSearch( keyword, Dom.board(), Dom.boardMore() );
+    /*
     _search = search;
     search.on( UT.view.View.BEFORE_RENDER, Search.onBefore );
     search.on( UT.view.View.UNDEFINED_ERROR, Search.onError );
     search.on( UT.view.View.EMPTY_ERROR, Search.onError );
     search.on( UT.view.View.RESPONSE_ERROR, Search.onError );
+    */
     search.start();
 
-  }
-  static dispose():void {
+    // 検索結果が同じカテゴリーとは限らないので all で表示します
+    Sidebar.start();
 
+  }
+  /**
+   * event handler unbind
+   */
+  static dispose():void {
     let search = _search;
     search.off( UT.view.View.BEFORE_RENDER, Search.onBefore );
     search.off( UT.view.View.UNDEFINED_ERROR, Search.onError );
     search.off( UT.view.View.EMPTY_ERROR, Search.onError );
     search.off( UT.view.View.RESPONSE_ERROR, Search.onError );
-
   }
+  /**
+   * View.BEFORE_RENDER event handler
+   * @param {Object} event event object, category.slug を取り出します
+   */
   static onBefore( event ):void {
-
     Search.dispose();
 
     let articles = event.args[ 0 ];
     let article = articles[ 0 ];
     Search.sidebar( article.category.slug );
-
   }
+  /**
+   * View error handler
+   */
   static onError():void {
 
     Search.dispose();
     Search.sidebar();
 
   }
+  /**
+   * sidebar slug 指定し rendering
+   * @param {string} slug category slug
+   */
   static sidebar( slug:string = 'all' ):void {
     // sidebar
     Sidebar.start( slug );

@@ -100,6 +100,10 @@ export class Page {
   static comment():void {
 
   }
+  /**
+   * 検索ページ
+   * @param {Object} event
+   */
   static search( event ):void {
 
     Search.start( event.keyword );

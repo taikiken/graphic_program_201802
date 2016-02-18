@@ -56,6 +56,10 @@ var Search = exports.Search = function () {
       throw new Error('Category is static Class. not use new Category().');
     }
   }
+  /**
+   * 検索ページ rendering 開始
+   * @param {string} keyword 検索キーワード
+   */
 
   (0, _createClass3.default)(Search, null, [{
     key: 'start',
@@ -65,34 +69,52 @@ var Search = exports.Search = function () {
       _Header.Header.start();
 
       // list
+      // 検索キーワードで page 取得
+      // 結果セットを使い sidebar を rendering
       var search = new UT.view.ViewSearch(keyword, _Dom.Dom.board(), _Dom.Dom.boardMore());
+      /*
       _search = search;
-      search.on(UT.view.View.BEFORE_RENDER, Search.onBefore);
-      search.on(UT.view.View.UNDEFINED_ERROR, Search.onError);
-      search.on(UT.view.View.EMPTY_ERROR, Search.onError);
-      search.on(UT.view.View.RESPONSE_ERROR, Search.onError);
+      search.on( UT.view.View.BEFORE_RENDER, Search.onBefore );
+      search.on( UT.view.View.UNDEFINED_ERROR, Search.onError );
+      search.on( UT.view.View.EMPTY_ERROR, Search.onError );
+      search.on( UT.view.View.RESPONSE_ERROR, Search.onError );
+      */
       search.start();
+
+      // 検索結果が同じカテゴリーとは限らないので all で表示します
+      _Sidebar.Sidebar.start();
     }
+    /**
+     * event handler unbind
+     */
+
   }, {
     key: 'dispose',
     value: function dispose() {
-
       var search = _search;
       search.off(UT.view.View.BEFORE_RENDER, Search.onBefore);
       search.off(UT.view.View.UNDEFINED_ERROR, Search.onError);
       search.off(UT.view.View.EMPTY_ERROR, Search.onError);
       search.off(UT.view.View.RESPONSE_ERROR, Search.onError);
     }
+    /**
+     * View.BEFORE_RENDER event handler
+     * @param {Object} event event object, category.slug を取り出します
+     */
+
   }, {
     key: 'onBefore',
     value: function onBefore(event) {
-
       Search.dispose();
 
       var articles = event.args[0];
       var article = articles[0];
       Search.sidebar(article.category.slug);
     }
+    /**
+     * View error handler
+     */
+
   }, {
     key: 'onError',
     value: function onError() {
@@ -100,6 +122,11 @@ var Search = exports.Search = function () {
       Search.dispose();
       Search.sidebar();
     }
+    /**
+     * sidebar slug 指定し rendering
+     * @param {string} slug category slug
+     */
+
   }, {
     key: 'sidebar',
     value: function sidebar() {

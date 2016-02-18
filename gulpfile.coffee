@@ -161,16 +161,21 @@ gulp.task 'app:watch', ->
   gulp.watch [ dir.libs + '/**/*' ], [ 'libs:copy' ]
   return
 
-
-# copy only
+# --------------------------------------------
 # 【開発】
+# copy only
+# とりあえず vagrant で確認作業を行たい人のための
+# 1回だけ 必要ファイルを書き出す task
+#
 # app から デプロイ・ディレクトリへ コピーを行います
 # watch なし
 gulp.task 'copy', (cb) ->
   runSequence(
+    'vendor:init'
     [
       'sprite:build'
       'babels:dev'
+      'exe:dev'
       'single:dev'
     ]
     [
@@ -185,6 +190,12 @@ gulp.task 'copy', (cb) ->
     'lec:build'
     cb
   )
+  return
+
+# alias copy
+# とりあえず vagrant で確認作業を行たい人のための
+# 1回だけ 必要ファイルを書き出す task
+gulp.task 'dev:init', ['copy'], ->
   return
 
 # --------------------------------------------

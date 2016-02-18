@@ -134,6 +134,11 @@ var Page = exports.Page = function () {
   }, {
     key: 'comment',
     value: function comment() {}
+    /**
+     * 検索ページ
+     * @param {Object} event
+     */
+
   }, {
     key: 'search',
     value: function search(event) {
