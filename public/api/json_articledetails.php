@@ -25,7 +25,7 @@ $s["body_escape"]=stripbr($f["body"]);
 $s["category"]["label"]=$f["category"]; 
 $s["category"]["slug"]=$f["slug"]; 
 $s["url"]=sprintf("%s/%s/%s",$domain,"p",$f["id"]);
-$s["is_bookmarked"]=strlen($f["is_bookmarked"])>0?true:false;
+$s["is_bookmarked"]=strlen($f["is_bookmark"])>0?true:false;
 $s["media_type"]=strlen($f["video"])>0||strlen($f["youtube"])>0?"video":"image";
 
 /*
