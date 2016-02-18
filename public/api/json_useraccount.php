@@ -54,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$filename=sprintf("%s.%s",md5("ut".$uid),$ext);
 		if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
 			imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
-			$sv["profile_picture"]=$filename;
+			$sv[$sn[]="profile_picture"]=$filename;
 			$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$filename);
 		}else{
 			
@@ -71,6 +71,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	}
 	if(count($q)>0){
 		$sql=sprintf("update repo_n set %s where id=%s",implode(",",$q),$uid);
+		
+		echo $sql;
+		
 		$o->query($sql);
 		$e=$o->affected_rows2();
 		if(!$e){
