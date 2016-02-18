@@ -44,3 +44,14 @@ _src/.tmp
 # slim
 /app/logs/*.log
 
+
+# gulp build files
+# ==============================
+# public assets all
+public/assets
+
+# _src bundle
+_src/app/assets/js/bundle/
+_src/app/assets/js/*.bundle.js
+_src/app/assets/images/sprite
+_src/app/assets/css/_sprite.scss

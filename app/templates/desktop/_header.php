@@ -47,7 +47,9 @@
     ToDo: crazy, すべて の URL を正規のものにする
     -->
       <li class="gnav-home"><a href="/">一面</a></li>
+<?php if (0) : ?>
       <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
+<?php endif;// crazy remove ?>
       <li class="gnav-all"><a href="/category/all/">すべて</a></li>
       <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
         <li class="gnav-<?php echo $category[ 'slug' ]; ?>">
