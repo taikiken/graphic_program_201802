@@ -94,7 +94,7 @@ if(count($ermsg)>0){
 	
 	if($e){
 		
-		$sql=sprintf("select id from repo_n where t1='%s'",$email);
+		$sql=sprintf("select id from repo_n where t1='%s' and flag=1",$email);
 		$o->query($sql);
 		$f=$o->fetch_array();
 		$ID=$f["id"];
