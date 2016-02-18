@@ -61,10 +61,12 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 			$f=$o->fetch_array();
 			if(strlen($f["id"])>0){
 				$sql=sprintf("update u_bookmark set flag=0,regitime=now() where id=%s;",$f["id"]);
-				$sql.=sprintf("update u_activity set flag=0,regitime=now() where activity=3 and activityid=%s;",$f["id"]);
+				$sql.=sprintf("update u_activity set flag=0,regitime=now() where activity=4 and activityid=%s;",$f["id"]);
 				$o->query($sql);
 				$e=$o->affected_rows2();
-				if(!$e)$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				if(!$e){
+					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				}
 			}else{
 				$ermsg="指定されたページはブックマークがされておりません。";
 			}		
