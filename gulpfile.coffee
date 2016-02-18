@@ -193,9 +193,32 @@ gulp.task 'copy', (cb) ->
   return
 
 # alias copy
-# とりあえず vagrant で確認作業を行たい人のための
-# 1回だけ 必要ファイルを書き出す task
-gulp.task 'dev:init', ['copy'], ->
+#
+gulp.task 'dev:init', (cb) ->
+  runSequence(
+    [
+      'vendor:init'
+      'babels:dev'
+      'exe:dev'
+    ]
+    [
+      'sprite:build'
+      'babels:dev'
+      'exe:dev'
+      'single:dev'
+    ]
+    [
+      'bundle:copy'
+      'libs:copy'
+#      'html:build'
+      'js:dev'
+      'image:copy'
+      'css:dev'
+    ]
+#    'clean:all'
+    'lec:build'
+    cb
+  )
   return
 
 # --------------------------------------------
