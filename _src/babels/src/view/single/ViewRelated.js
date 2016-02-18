@@ -107,7 +107,7 @@ export class ViewRelated extends View {
                         <div className="post-data">
                           <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
                           <h3 className='post-heading'>{dae.title}</h3>
-                          <p className="post-date">{dae.formatDate}</p>
+                          <p className="post-date">{dae.displayDate}</p>
                         </div>
                       </a>
                     </li>

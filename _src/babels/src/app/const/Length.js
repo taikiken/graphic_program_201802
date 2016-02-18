@@ -13,7 +13,8 @@
 
 let _symbol = Symbol();
 let _pickup = 5;
-let _headline = 6;
+// last 1 を CM にするために 6 -> 5 にする
+let _headline = 5;
 let _ranking = 5;
 let _video = 5;
 let _archive = 10;

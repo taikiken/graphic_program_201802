@@ -1,7 +1,7 @@
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-18 12:51:48
+ * @date 2016-02-18 16:34:48
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -107,6 +107,8 @@ var _View = require('./view/View');
 
 var _ViewHeaderUser = require('./view/header/ViewHeaderUser');
 
+var _ViewHeaderSearch = require('./view/header/ViewHeaderSearch');
+
 var _ViewArchiveMasonryInfinite = require('./view/ViewArchiveMasonryInfinite');
 
 var _ViewCategory = require('./view/ViewCategory');
@@ -114,6 +116,8 @@ var _ViewCategory = require('./view/ViewCategory');
 var _ViewSingle = require('./view/ViewSingle');
 
 var _ViewTitle = require('./view/ViewTitle');
+
+var _ViewSearch = require('./view/ViewSearch');
 
 var _ViewComments = require('./view/ViewComments');
 
@@ -244,11 +248,13 @@ var UT = {
     ViewSingle: _ViewSingle.ViewSingle,
     ViewTitle: _ViewTitle.ViewTitle,
     ViewComments: _ViewComments.ViewComments,
+    ViewSearch: _ViewSearch.ViewSearch,
     comment: {
       ViewCommentForm: _ViewCommentForm.ViewCommentForm
     },
     header: {
-      ViewHeaderUser: _ViewHeaderUser.ViewHeaderUser
+      ViewHeaderUser: _ViewHeaderUser.ViewHeaderUser,
+      ViewHeaderSearch: _ViewHeaderSearch.ViewHeaderSearch
     },
     sidebar: {
       ViewRanking: _ViewRanking.ViewRanking,
@@ -275,10 +281,9 @@ var UT = {
 
 // sidebar
 
-/*
-import {ViewArchive} from './view/ViewArchive';
-import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
-*/
+// home
+
+// comment
 
 // -------------------------------------
 // view

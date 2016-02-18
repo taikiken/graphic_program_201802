@@ -178,7 +178,7 @@ var ViewRelated = exports.ViewRelated = function (_View) {
                       React.createElement(
                         'p',
                         { className: 'post-date' },
-                        dae.formatDate
+                        dae.displayDate
                       )
                     )
                   )

@@ -103,18 +103,19 @@ import {ModelCategories} from './model/categoires/ModelCategories';
 import {View} from './view/View';
 
 import {ViewHeaderUser} from './view/header/ViewHeaderUser';
-/*
-import {ViewArchive} from './view/ViewArchive';
-import {ViewArchiveMasonry} from './view/ViewArchiveMasonry';
-*/
+import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';
+
 import {ViewArchiveMasonryInfinite} from './view/ViewArchiveMasonryInfinite';
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
 import {ViewTitle} from './view/ViewTitle';
+import {ViewSearch} from './view/ViewSearch';
 
+// comment
 import {ViewComments} from './view/ViewComments';
 import {ViewCommentForm} from './view/comment/ViewCommentForm';
 
+// home
 import {ViewHeadline} from './view/home/ViewHeadline';
 import {ViewPickup} from './view/home/ViewPickup';
 
@@ -223,11 +224,13 @@ var UT = {
     ViewSingle: ViewSingle,
     ViewTitle: ViewTitle,
     ViewComments: ViewComments,
+    ViewSearch: ViewSearch,
     comment: {
       ViewCommentForm: ViewCommentForm
     },
     header: {
-      ViewHeaderUser: ViewHeaderUser
+      ViewHeaderUser: ViewHeaderUser,
+      ViewHeaderSearch: ViewHeaderSearch
     },
     sidebar: {
       ViewRanking: ViewRanking,

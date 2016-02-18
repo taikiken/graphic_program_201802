@@ -16,6 +16,9 @@ import {PageTop} from './ui/PageTop';
 import {Index} from './page/Index';
 import {Category} from './page/Category';
 import {Single} from './page/Single';
+import {Search} from './page/Search';
+
+import {SearchFrom} from './header/SearchFrom';
 
 let _symbol = Symbol();
 
@@ -52,11 +55,18 @@ export class Page {
     router.on( Router.CATEGORY, Page.category );
     // single(detail|p)
     router.on( Router.SINGLE, Page.single );
+    // search
+    router.on( Router.SEARCH, Page.search );
 
     router.route();
 
+    // page top
     let pageTop = new PageTop();
     pageTop.init();
+
+    // search from
+    SearchFrom.start();
+
   }
   /**
    * home, index page
@@ -90,7 +100,9 @@ export class Page {
   static comment():void {
 
   }
-  static search():void {
+  static search( event ):void {
+
+    Search.start( event.keyword );
 
   }
   static signup():void {

@@ -408,7 +408,7 @@ var CommentNode = exports.CommentNode = React.createClass({
             React.createElement(
               'p',
               { className: 'comment-date' },
-              comment.formatDate
+              comment.displayDate
             )
           )
         )

@@ -184,7 +184,7 @@ var ViewSingleHeader = exports.ViewSingleHeader = function (_View) {
                 React.createElement(
                   'p',
                   { className: 'post-date' },
-                  single.formatDate
+                  single.displayDate
                 )
               ),
               right

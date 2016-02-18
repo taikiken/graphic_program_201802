@@ -358,7 +358,7 @@ export let CommentNode = React.createClass( {
             <div className="comment-user-data">
               <p className="comment-user-name">{comment.user.userName}</p>
               <p className="comment-user-job">{comment.user.bio || ''}</p>
-              <p className="comment-date">{comment.formatDate}</p>
+              <p className="comment-date">{comment.displayDate}</p>
             </div>
           </span>
         </figure>

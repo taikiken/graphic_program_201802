@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/15 - 21:49
+ * @date 2016/02/18 - 15:22
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,8 +11,6 @@
  */
 'use strict';
 
-import {Header} from './Header';
-import {Sidebar} from './Sidebar';
 import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
@@ -21,10 +19,10 @@ let _symbol = Symbol();
 let UT = self.UT;
 
 /**
- * <h3>category 一覧</h3>
+ * <h3>header user information / signup</h3>
  * 全て static です
  */
-export class Category {
+export class SearchFrom {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -32,30 +30,16 @@ export class Category {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Category is static Class. not use new Category().` );
+      throw new Error( `Search is static Class. not use new Search().` );
 
     }
   }
   /**
-   * rendering 開始
-   * @param {string} slug category slug
-   * @param {string} [type=''] ranking | video \ '' の 3つ
+   * search form rendering 開始
    */
-  static start( slug:string, type:string = '' ):void {
-
-    // header
-    Header.start();
-
-    // list
-    let archive = new UT.view.ViewCategory( slug, Dom.board(), Dom.boardMore() );
-    archive.start();
-
-    // sidebar
-    Sidebar.start( slug );
-
-    // title
-    console.log( 'type', slug, type );
-
+  static start():void {
+    // header.user
+    var searchFrom = new UT.view.header.ViewHeaderSearch( Dom.search() );
+    searchFrom.start();
   }
-
 }

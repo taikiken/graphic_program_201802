@@ -28,11 +28,13 @@
         <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
         <aside class="f-right clearfix">
-          <div class="head-search">
+          <div id="head-search-container" class="head-search">
+<?php if (0) : ?>
             <form action="">
               <input id="head-search" nama="head-search" type="text" placeholder="記事を探す">
               <input type="submit" value="">
             </form>
+<?php endif;// JS output ?>
           </div><!-- /.head-search -->
 
           <div id="user-profile-container"></div><!--/header-user-->
@@ -43,9 +45,6 @@
 
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
-<!--
-    ToDo: crazy, すべて の URL を正規のものにする
-    -->
       <li class="gnav-home"><a href="/">一面</a></li>
 <?php if (0) : ?>
       <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
@@ -64,6 +63,6 @@
       <div id="dialogue-notice-info" class="dialogue-notice-info">
         <p>パスワードが違います</p>
       </div>
-      <div id="dialogue-notice-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice-info">CLOSE</a></div>
+      <div id="dialogue-notice-btn-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice">CLOSE</a></div>
     </div>
   </div><!-- /.dialogue-notice -->

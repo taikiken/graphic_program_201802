@@ -308,7 +308,7 @@ var ViewRanking = exports.ViewRanking = function (_View) {
                   slug: dae.category.slug,
                   category: dae.category.label,
                   url: dae.url,
-                  date: dae.formatDate,
+                  date: dae.displayDate,
                   title: dae.title,
                   thumbnail: thumbnail,
                   total: dae.commentsCount

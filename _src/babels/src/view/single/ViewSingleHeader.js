@@ -101,7 +101,7 @@ export class ViewSingleHeader extends View {
             <div className="post-data">
               <div className="f-left">
                 <p className="post-author">{single.user.userName}</p>
-                <p className="post-date">{single.formatDate}</p>
+                <p className="post-date">{single.displayDate}</p>
               </div>
               {right}
             </div>

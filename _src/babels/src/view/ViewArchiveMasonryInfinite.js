@@ -613,7 +613,7 @@ export class ViewArchiveMasonryInfinite extends View {
                       <div className="post-data">
                         <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
                         <h3 className='post-heading'>{dae.title}</h3>
-                        <p className="post-date">{dae.formatDate}</p>
+                        <p className="post-date">{dae.displayDate}</p>
                         <div className="post-excerpt-text">{dae.description}</div>
                       </div>
                     </a>
@@ -749,6 +749,9 @@ export class ViewArchiveMasonryInfinite extends View {
       articlesList.push( dae );
 
     } );
+
+    // 通知
+    this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
     if ( this._articleRendered === null ) {

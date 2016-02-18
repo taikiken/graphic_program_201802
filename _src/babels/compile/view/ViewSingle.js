@@ -50,17 +50,25 @@ var _ViewSingleFooter = require('./single/ViewSingleFooter');
 
 var _Single = require('../action/single/Single');
 
+var _SingleAuth = require('../action/single/SingleAuth');
+
 var _Result = require('../data/Result');
 
 var _Safety = require('../data/Safety');
 
 var _SingleDae = require('../dae/SingleDae');
 
+var _User = require('../app/User');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * 記事詳細
  */
+
+// dae
+
+// data
 
 // action
 
@@ -90,7 +98,9 @@ var ViewSingle = function (_View) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSingle).call(this, element, option));
 
-    _this._action = new _Single.Single(id, _this.done.bind(_this), _this.fail.bind(_this));
+    var ActionClass = _User.User.sign ? _SingleAuth.SingleAuth : _Single.Single;
+    _this._action = new ActionClass(id, _this.done.bind(_this), _this.fail.bind(_this));
+
     if (!_Safety.Safety.isElement(elements.related)) {
       console.warn('un accessible elements.related . ' + elements.related);
     }
@@ -258,9 +268,5 @@ var ViewSingle = function (_View) {
   }]);
   return ViewSingle;
 }(_View2.View);
-
-// dae
-
-// data
 
 exports.ViewSingle = ViewSingle;

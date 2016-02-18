@@ -36,6 +36,10 @@ var _Category = require('./page/Category');
 
 var _Single = require('./page/Single');
 
+var _Search = require('./page/Search');
+
+var _SearchFrom = require('./header/SearchFrom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _symbol = (0, _symbol3.default)();
@@ -79,11 +83,17 @@ var Page = exports.Page = function () {
       router.on(Router.CATEGORY, Page.category);
       // single(detail|p)
       router.on(Router.SINGLE, Page.single);
+      // search
+      router.on(Router.SEARCH, Page.search);
 
       router.route();
 
+      // page top
       var pageTop = new _PageTop.PageTop();
       pageTop.init();
+
+      // search from
+      _SearchFrom.SearchFrom.start();
     }
     /**
      * home, index page
@@ -126,7 +136,10 @@ var Page = exports.Page = function () {
     value: function comment() {}
   }, {
     key: 'search',
-    value: function search() {}
+    value: function search(event) {
+
+      _Search.Search.start(event.keyword);
+    }
   }, {
     key: 'signup',
     value: function signup() {}

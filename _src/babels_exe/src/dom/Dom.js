@@ -64,6 +64,13 @@ export class Dom {
   static profile():Element {
     return Dom.get( 'user-profile-container' );
   }
+  /**
+   * header search from
+   * @return {Element} head-search-container element を返します
+   */
+  static search():Element {
+    return Dom.get( 'head-search-container' );
+  }
   // sidebar
   /**
    * sidebar ranking

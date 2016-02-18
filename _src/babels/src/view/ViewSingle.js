@@ -20,12 +20,15 @@ import {ViewSingleFooter} from './single/ViewSingleFooter';
 
 // action
 import {Single} from '../action/single/Single';
+import {SingleAuth} from '../action/single/SingleAuth';
 // data
 import {Result} from '../data/Result';
 import {Safety} from '../data/Safety';
 
 // dae
 import {SingleDae} from '../dae/SingleDae';
+
+import {User} from '../app/User';
 
 /**
  * 記事詳細
@@ -50,7 +53,9 @@ export class ViewSingle extends View {
     option = Safety.object( option );
 
     super( element, option );
-    this._action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
+    let ActionClass = User.sign ? SingleAuth : Single;
+    this._action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
+
     if ( !Safety.isElement( elements.related ) ) {
       console.warn( `un accessible elements.related . ${elements.related }` );
     }

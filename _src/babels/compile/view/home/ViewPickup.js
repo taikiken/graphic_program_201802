@@ -383,7 +383,7 @@ var ViewPickup = exports.ViewPickup = function (_View) {
               slug: dae.category.slug,
               category: dae.category.label,
               url: dae.url,
-              date: dae.formatDate,
+              date: dae.displayDate,
               title: dae.title,
               large: large,
               commentsCount: dae.commentsCount

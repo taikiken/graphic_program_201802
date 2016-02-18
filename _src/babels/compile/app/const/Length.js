@@ -36,7 +36,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _symbol = (0, _symbol3.default)();
 var _pickup = 5;
-var _headline = 6;
+// last 1 を CM にするために 6 -> 5 にする
+var _headline = 5;
 var _ranking = 5;
 var _video = 5;
 var _archive = 10;

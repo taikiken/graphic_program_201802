@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/13 - 14:54
+ * @date 2016/02/18 - 14:20
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Single = undefined;
+exports.SingleAuth = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -36,9 +36,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Action2 = require('../Action');
+var _ActionAuth2 = require('../ActionAuth');
 
 var _Api = require('../../net/Api');
+
+var _User = require('../../app/User');
 
 var _Path = require('../../app/const/Path');
 
@@ -46,27 +48,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * 記事詳細を取得します
+ * **ログインユーザー**
  */
 
-var Single = exports.Single = function (_Action) {
-  (0, _inherits3.default)(Single, _Action);
+var SingleAuth = exports.SingleAuth = function (_ActionAuth) {
+  (0, _inherits3.default)(SingleAuth, _ActionAuth);
 
   /**
    * 記事詳細を記事IDから取得します
+   * **ログインユーザー**
    * @param {Number} id 記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
 
-  function Single(id) {
+  function SingleAuth(id) {
     var resolve = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
     var reject = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-    (0, _classCallCheck3.default)(this, Single);
+    (0, _classCallCheck3.default)(this, SingleAuth);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Single).call(this, _Api.Api.single(), resolve, reject));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(SingleAuth).call(this, _User.User.token, _Api.Api.single(), resolve, reject));
 
     _this._id = id;
-
     return _this;
   }
   // ---------------------------------------------------
@@ -77,7 +80,7 @@ var Single = exports.Single = function (_Action) {
    * @return {Number|*} 記事IDを返します
    */
 
-  (0, _createClass3.default)(Single, [{
+  (0, _createClass3.default)(SingleAuth, [{
     key: 'id',
     get: function get() {
       return this._id;
@@ -93,5 +96,5 @@ var Single = exports.Single = function (_Action) {
       return _Path.Path.article(this._url, this.id);
     }
   }]);
-  return Single;
-}(_Action2.Action);
+  return SingleAuth;
+}(_ActionAuth2.ActionAuth);

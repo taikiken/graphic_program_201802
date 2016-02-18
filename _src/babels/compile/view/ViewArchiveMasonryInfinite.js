@@ -705,7 +705,7 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
                     React.createElement(
                       'p',
                       { className: 'post-date' },
-                      dae.formatDate
+                      dae.displayDate
                     ),
                     React.createElement(
                       'div',
@@ -834,6 +834,9 @@ var ViewArchiveMasonryInfinite = exports.ViewArchiveMasonryInfinite = function (
         dae.index = prevLast + i;
         articlesList.push(dae);
       });
+
+      // 通知
+      this.executeSafely(_View2.View.BEFORE_RENDER, articlesList);
 
       // this._articleRendered が null の時だけ ReactDOM.render する
       if (this._articleRendered === null) {

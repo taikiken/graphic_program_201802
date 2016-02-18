@@ -95,6 +95,16 @@ var Dom = exports.Dom = function () {
     value: function profile() {
       return Dom.get('user-profile-container');
     }
+    /**
+     * header search from
+     * @return {Element} head-search-container element を返します
+     */
+
+  }, {
+    key: 'search',
+    value: function search() {
+      return Dom.get('head-search-container');
+    }
     // sidebar
     /**
      * sidebar ranking
