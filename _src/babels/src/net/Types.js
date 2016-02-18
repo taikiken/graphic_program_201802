@@ -13,7 +13,7 @@
 
 import {Type} from './types/Type';
 import {Permalink} from './types/Permalink';
-import {Queries} from './types/Quries';
+import {Queries} from './types/Queries';
 
 /**
  * API url, path option, query 情報を保持します
