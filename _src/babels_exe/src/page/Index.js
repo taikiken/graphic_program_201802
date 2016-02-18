@@ -56,8 +56,7 @@ export class Index {
 
     // ---------------------------------------------------------
     // news
-    let archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-    let archive = new UT.view.ViewArchiveMasonryInfinite( Dom.board(), Dom.boardMore(), archiveAction );
+    let archive = new UT.view.home.ViewNews( Dom.board(), Dom.boardMore() );
     archive.start();
 
     // sidebar, slug なし(=all)

@@ -44,12 +44,24 @@ export class ModelCommentStar extends Model {
   /**
    * Ajax request を開始します
    */
-  start( add:boolean ):void {
+  start( type:string ):void {
 
-    if ( add ) {
-      this.action.add();
-    } else {
-      this.action.remove();
+    console.log( '=============== ModelCommentStar ', type );
+
+    switch ( type ) {
+
+      case ActionType.DELETE:
+        this.action.remove();
+        break;
+
+      case ActionType.ADD:
+        this.action.add();
+        break;
+
+      default:
+        console.warn( `ModelCommentStar illegal type. ${type}` );
+        break;
+
     }
 
   }
@@ -66,12 +78,12 @@ export class ModelCommentStar extends Model {
       // articles undefined
       // JSON に問題がある
       let error = new Error( `[MODEL_STAR:UNDEFINED]${this._actionType}.サーバーレスポンスに問題が発生しました。` );
-      this.executeSafely( Model.UNDEFINED_ERROR, error );
+      this.executeSafely( Model.UNDEFINED_ERROR, error, this._actionType );
 
     } else {
 
       // 成功 callback
-      this.executeSafely( Model.COMPLETE, result );
+      this.executeSafely( Model.COMPLETE, result, this._actionType );
 
     }
 
@@ -82,7 +94,7 @@ export class ModelCommentStar extends Model {
    */
   fail( error ):void {
 
-    this.executeSafely( Model.RESPONSE_ERROR, error );
+    this.executeSafely( Model.RESPONSE_ERROR, error, this._actionType );
 
   }
 }

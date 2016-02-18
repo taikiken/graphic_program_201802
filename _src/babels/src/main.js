@@ -105,7 +105,6 @@ import {View} from './view/View';
 import {ViewHeaderUser} from './view/header/ViewHeaderUser';
 import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';
 
-import {ViewArchiveMasonryInfinite} from './view/ViewArchiveMasonryInfinite';
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
 import {ViewTitle} from './view/ViewTitle';
@@ -118,6 +117,7 @@ import {ViewCommentForm} from './view/comment/ViewCommentForm';
 // home
 import {ViewHeadline} from './view/home/ViewHeadline';
 import {ViewPickup} from './view/home/ViewPickup';
+import {ViewNews} from './view/home/ViewNews';
 
 // sidebar
 import {ViewRanking} from './view/sidebar/ViewRanking';
@@ -219,7 +219,6 @@ var UT = {
     ViewArchive: ViewArchive,
     ViewArchiveMasonry: ViewArchiveMasonry,
     */
-    ViewArchiveMasonryInfinite: ViewArchiveMasonryInfinite,
     ViewCategory: ViewCategory,
     ViewSingle: ViewSingle,
     ViewTitle: ViewTitle,
@@ -238,7 +237,8 @@ var UT = {
     },
     home: {
       ViewHeadline: ViewHeadline,
-      ViewPickup: ViewPickup
+      ViewPickup: ViewPickup,
+      ViewNews: ViewNews
     }
   },
   model: {

@@ -13,6 +13,9 @@
  */
 'use strict';
 
+/**
+ * UT library を使い実行します
+ */
 import {Page} from './Page';
-
+// Page class をキックします
 Page.init();

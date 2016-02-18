@@ -83,8 +83,7 @@ var Index = exports.Index = function () {
 
       // ---------------------------------------------------------
       // news
-      var archiveAction = UT.app.User.sign ? UT.action.home.NewsAuth : UT.action.home.News;
-      var archive = new UT.view.ViewArchiveMasonryInfinite(_Dom.Dom.board(), _Dom.Dom.boardMore(), archiveAction);
+      var archive = new UT.view.home.ViewNews(_Dom.Dom.board(), _Dom.Dom.boardMore());
       archive.start();
 
       // sidebar, slug なし(=all)

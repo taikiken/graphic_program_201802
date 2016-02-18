@@ -11,6 +11,12 @@
  */
 'use strict';
 
+import {ActionType} from '../../app/const/ActionType';
+import {Good} from '../../event/comment/Good';
+import {Bad} from '../../event/comment/Bad';
+import {ModelCommentStar} from '../../model/comment/ModelCommentStar';
+import {Model} from '../../model/Model';
+
 // React
 let React = self.React;
 
@@ -32,6 +38,15 @@ export let ReactionNode = React.createClass( {
     isBad: React.PropTypes.bool.isRequired
   },
   getInitialState: function() {
+    // event Good
+    this.good = null;
+    // event Bad
+    this.bad = null;
+    // model good
+    this.goodStar = null;
+    // model bad
+    this.badStar = null;
+
     return {
       loading: '',
       good: this.props.good,
@@ -42,6 +57,7 @@ export let ReactionNode = React.createClass( {
     };
   },
   render: function() {
+    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render +++++++++++++++++++++++++++++++++', this.state.isGood, this.state.isBad );
 
     let active = ( mine ) => {
       return mine ? ' active' : '';
@@ -54,8 +70,8 @@ export let ReactionNode = React.createClass( {
     if ( this.state.sign ) {
       return (
         <div className={'comment-reaction ' + this.state.loading}>
-          <a className={'comment-reaction-btn comment-reaction-like' + active( this.isGood )} href="#" onClick={this.goodClick}><i>&nbsp;</i>{count(this.state.good)}</a>
-          <a className={'comment-reaction-btn comment-reaction-dislike' + active( this.isBad )} href="#" onClick={this.badClick}><i>&nbsp;</i>{count(this.state.bad)}</a>
+          <a className={'comment-reaction-btn comment-reaction-like' + active( this.state.isGood )} href="#" onClick={this.goodClick}><i>&nbsp;</i>{count(this.state.good)}</a>
+          <a className={'comment-reaction-btn comment-reaction-dislike' + active( this.state.isBad )} href="#" onClick={this.badClick}><i>&nbsp;</i>{count(this.state.bad)}</a>
           <div className="loading-spinner"></div>
         </div>
       );
@@ -70,28 +86,109 @@ export let ReactionNode = React.createClass( {
       );
     }
   },
+  componentDidMount: function() {
+    if ( this.state.sign ) {
+      this.good = Good.factory();
+      this.bad = Bad.factory();
+
+      let goodStar = new ModelCommentStar( this.props.commentId, ActionType.GOOD );
+      this.goodStar = goodStar;
+      goodStar.on( Model.UNDEFINED_ERROR, this.goodError );
+      goodStar.on( Model.RESPONSE_ERROR, this.goodError );
+
+      let badStar = new ModelCommentStar( this.props.commentId, ActionType.BAD );
+      badStar.on( Model.UNDEFINED_ERROR, this.badError );
+      badStar.on( Model.RESPONSE_ERROR, this.badError );
+      this.badStar = badStar;
+    }
+  },
+  componentWillUnMount: function() {
+    if ( this.state.sign ) {
+
+      let goodStar = this.goodStar;
+      goodStar.off( Model.UNDEFINED_ERROR, this.goodError );
+      goodStar.off( Model.RESPONSE_ERROR, this.goodError );
+
+      let badStar = this.badStar;
+      badStar.off( Model.UNDEFINED_ERROR, this.badError );
+      badStar.off( Model.RESPONSE_ERROR, this.badError );
+
+      this.good = null;
+      this.bad = null;
+
+    }
+  },
   goodClick: function( event ) {
     event.preventDefault();
     this.setState({loading: 'loading', good: '...'});
+
+    // good sequence
+    if ( this.state.isGood ) {
+      // good済み -> DELETE
+      this.goodStar.on( Model.COMPLETE, this.goodDeleteDone );
+      this.goodStar.start( ActionType.DELETE );
+
+    } else {
+
+      // no good -> ADD
+      this.goodStar.on( Model.COMPLETE, this.goodAddDone );
+      this.goodStar.start( ActionType.ADD );
+
+    }
+
   },
   badClick: function( event ) {
     event.preventDefault();
     this.setState({loading: 'loading', bad: '...'});
+
+    // bad sequence
+    if ( this.state.isGood ) {
+      // bad -> DELETE
+      this.badStar.on( Model.COMPLETE, this.badDeleteDone );
+      this.badStar.start( ActionType.DELETE );
+
+    } else {
+
+      // no bad -> ADD
+      this.badStar.on( Model.COMPLETE, this.badAddDone );
+      this.badStar.start( ActionType.ADD );
+
+    }
   },
   goodAddDone: function() {
-    this.setState( {good: ++this.state.good, loading: '', isGood: true} );
+    this.goodStar.off( Model.COMPLETE, this.goodAddDone );
+
+    let good = this.state.good + 1;
+    this.setState( {good: good, loading: '', isGood: true} );
+    // this.replaceProps( { good: good, isGood: true } );
   },
   goodDeleteDone: function() {
-    this.setState( {good: --this.state.good, loading: '', isGood: false} );
+    this.goodStar.off( Model.COMPLETE, this.goodDeleteDone );
+
+    let good = this.state.good - 1;
+    this.setState( {good: good, loading: '', isGood: false} );
+    // this.replaceProps( { good: good, isGood: false } );
   },
   badAddDone: function() {
-    this.setState( {bad: ++this.state.bad, loading: '', isBad: true} );
+    this.goodStar.off( Model.COMPLETE, this.badAddDone );
+
+    let bad = this.state.bad + 1;
+    this.setState( {bad: bad, loading: '', isBad: true} );
+    // this.replaceProps( { bad: bad, isBad: true } );
   },
   badDeleteDone: function() {
-    this.setState( {bad: --this.state.bad, loading: '', isBad: false} );
+    this.goodStar.off( Model.COMPLETE, this.badDeleteDone );
+
+    let bad = this.state.bad - 1;
+    this.setState( {bad: bad, loading: '', isBad: false} );
+    // this.replaceProps( { bad: bad, isBad: false } );
   },
-  requestError: function( error ) {
-    console.warn( 'requestError ', error.message );
+  goodError: function( error ) {
+    console.warn( 'goodError ', error.message );
+    this.setState({loading: ''});
+  },
+  badError: function( error ) {
+    console.warn( 'badError ', error.message );
     this.setState({loading: ''});
   }
 } );

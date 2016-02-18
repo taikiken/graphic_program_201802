@@ -168,7 +168,7 @@ export class ViewArchiveMasonryInfinite extends View {
   render( articles:Array ):void {
 
     // Masonry flag
-    let useMasonry = this._useMasonry;
+    // let useMasonry = this._useMasonry;
 
     // 既存データ用のglobal配列
     let articlesList = this._articles;
@@ -182,7 +182,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // 'View More' button root element
     let moreElement = this.moreElement;
     // offset, length を使用する Action
-    let action = this.action;
+    // let action = this.action;
     // 参照を保持
     let _this = this;
 
@@ -192,6 +192,7 @@ export class ViewArchiveMasonryInfinite extends View {
     let MoreView = React.createClass( {
       propTypes: {
         show: React.PropTypes.bool.isRequired,
+        action: React.PropTypes.object.isRequired,
         loading: React.PropTypes.string
       },
       getDefaultProps: function() {
@@ -289,7 +290,7 @@ export class ViewArchiveMasonryInfinite extends View {
           // loading 中は監視を止める
           loadingClass = ' loading';
           this.rise.stop();
-          action.next();
+          this.props.action.next();
 
         } else {
 
@@ -324,7 +325,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         // チェックをパスし実行する
         _this._moreRendered = ReactDOM.render(
-          React.createElement( MoreView, { show: show } ),
+          React.createElement( MoreView, { show: show, action: this.action } ),
           moreElement
         );
 
@@ -483,12 +484,6 @@ export class ViewArchiveMasonryInfinite extends View {
                   isBad={first.isBad}
                 />
               </div>
-              {/*
-              <div className="commented-user">
-                {second}
-                <span className="commented-user-andmore">{total > 0 ? '+' + total : ''}</span>
-              </div>
-              */}
               <CommentsSecond
                 seconds={secondsDae}
                 articleId={articleId}
@@ -519,7 +514,9 @@ export class ViewArchiveMasonryInfinite extends View {
       propType: {
         mediaType: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string.isRequired
+        title: React.PropTypes.string.isRequired,
+        masonry: React.PropTypes.bool.isRequired,
+        action: React.PropTypes.object.isRequired
       },
       getInitialState: function() {
         return {
@@ -617,7 +614,6 @@ export class ViewArchiveMasonryInfinite extends View {
                         <div className="post-excerpt-text">{dae.description}</div>
                       </div>
                     </a>
-
                     <PopularDom key={'comment-' + dae.id} commentsPopular={commentsPopular} total={commentsTotal} articleId={String(dae.id)} />
                   </div>
                 );
@@ -661,13 +657,14 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // dom が表示された後に1度だけ呼び出される delegate
       componentDidMount: function() {
+        console.log( '************ componentDidMount ************', this.props.masonry );
         // after mount
         _this.executeSafely( View.DID_MOUNT );
         // hasNext を元に More View button の表示非表示を決める
-        moreButton( action.hasNext() );
+        moreButton( this.props.action.hasNext() );
 
         // masonry flag が true の時に shouldMasonry を実行します
-        if ( useMasonry ) {
+        if ( this.props.masonry ) {
 
           this.shouldMasonry();
 
@@ -676,7 +673,6 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // dom が削除される前に呼び出される delegate
       componentWillUnmount: function() {
-        console.log( '************ componentWillUnmount ************' );
         // unmount 時に isotope を破棄します
         this.isotope.destroy();
       },
@@ -685,6 +681,7 @@ export class ViewArchiveMasonryInfinite extends View {
       // isotope 前準備
       shouldMasonry: function() {
 
+        console.log( '************ shouldMasonry ************' );
         // isotope 前準備を実行します
         let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
         let childNodes = boardRout.childNodes;
@@ -734,7 +731,7 @@ export class ViewArchiveMasonryInfinite extends View {
         this.isotope.layout();
 
         // hasNext を元に More View button の表示非表示を決める
-        moreButton( action.hasNext() );
+        moreButton( this.props.action.hasNext() );
 
       }
     } );// ArticleDom
@@ -758,7 +755,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this._articleRendered = ReactDOM.render(
-        React.createElement( ArticleDom, { list: articlesList, offset: this._request.offset, length: this._request.length } ),
+        React.createElement( ArticleDom, { list: articlesList, offset: this._request.offset, length: this._request.length, masonry: this._useMasonry, action: this.action } ),
         element
       );
 

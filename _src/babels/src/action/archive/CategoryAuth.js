@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/17 - 15:38
+ * @date 2016/02/18 - 21:39
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,19 +11,19 @@
  */
 'use strict';
 
-import {Offset} from '../Offset';
+import {OffsetAuth} from '../OffsetAuth';
 import {Api} from '../../net/Api';
 import {Safety} from '../../data/Safety';
+import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
  * 記事一覧, カテゴリー別, 全て...
+ * <p>+ token</p>
  */
-export class Category extends Offset {
-  // 引数の順番を失敗した
-  // resolve, reject が先だった...
+export class CategoryAuth extends OffsetAuth {
   /**
-   * 記事一覧を取得します
+   * 記事一覧を取得します + token
    * @param {string} [slug=all] category slug です
    * @param {string} [type=''] request type, '' | 'ranking' | 'video' です
    * @param {Function} [resolve=null] Ajax 成功時の callback
@@ -32,11 +32,10 @@ export class Category extends Offset {
    * @param {Number} [length=10] query length 値
    * */
   constructor( slug:string = 'all', type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
-
     slug = Safety.string( slug, 'all' );
     type = Safety.string( type, '' );
 
-    super( Api.category(), resolve, reject, offset, length );
+    super( User.token, Api.category(), resolve, reject, offset, length );
     this._slug = slug;
 
     if ( Safety.normalize( type, [ '', 'ranking', 'video' ] ) ) {

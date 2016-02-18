@@ -11,14 +11,17 @@
  */
 'use strict';
 
+import {SearchAuth} from '../action/search/SearchAuth';
 import {Search} from '../action/search/Search';
 import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
 // view
 import {View} from './View';
-import {ViewError} from './error/ViewError';
+// import {ViewError} from './error/ViewError';
 // data
 import {Result} from '../data/Result';
 import {Safety} from '../data/Safety';
+
+import {User} from '../app/User';
 
 // React
 let React = self.React;
@@ -38,7 +41,9 @@ export class ViewSearch extends ViewArchiveMasonryInfinite {
   constructor( word:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option, true );
     // keyword 検索
-    this._action = new Search( word, this.done.bind( this ), this.fail.bind( this ) );
+    this._action = User.sign ?
+      new SearchAuth( word, this.done.bind( this ), this.fail.bind( this ) ) :
+      new Search( word, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax response success

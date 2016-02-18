@@ -83,12 +83,22 @@ var ModelCommentStar = exports.ModelCommentStar = function (_Model) {
 
   (0, _createClass3.default)(ModelCommentStar, [{
     key: 'start',
-    value: function start(add) {
+    value: function start(type) {
 
-      if (add) {
-        this.action.add();
-      } else {
-        this.action.remove();
+      switch (type) {
+
+        case _ActionType.ActionType.DELETE:
+          this.action.remove();
+          break;
+
+        case _ActionType.ActionType.ADD:
+          this.action.add();
+          break;
+
+        default:
+          console.warn('ModelCommentStar illegal type. ' + type);
+          break;
+
       }
     }
     /**
@@ -107,11 +117,11 @@ var ModelCommentStar = exports.ModelCommentStar = function (_Model) {
         // articles undefined
         // JSON に問題がある
         var error = new Error('[MODEL_STAR:UNDEFINED]' + this._actionType + '.サーバーレスポンスに問題が発生しました。');
-        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error);
+        this.executeSafely(_Model2.Model.UNDEFINED_ERROR, error, this._actionType);
       } else {
 
         // 成功 callback
-        this.executeSafely(_Model2.Model.COMPLETE, result);
+        this.executeSafely(_Model2.Model.COMPLETE, result, this._actionType);
       }
     }
     /**
@@ -123,7 +133,7 @@ var ModelCommentStar = exports.ModelCommentStar = function (_Model) {
     key: 'fail',
     value: function fail(error) {
 
-      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error);
+      this.executeSafely(_Model2.Model.RESPONSE_ERROR, error, this._actionType);
     }
   }]);
   return ModelCommentStar;

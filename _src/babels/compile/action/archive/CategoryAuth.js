@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/17 - 15:38
+ * @date 2016/02/18 - 21:39
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -14,7 +14,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Category = undefined;
+exports.CategoryAuth = undefined;
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -36,11 +36,13 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _Offset2 = require('../Offset');
+var _OffsetAuth2 = require('../OffsetAuth');
 
 var _Api = require('../../net/Api');
 
 var _Safety = require('../../data/Safety');
+
+var _User = require('../../app/User');
 
 var _Length = require('../../app/const/Length');
 
@@ -48,15 +50,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * 記事一覧, カテゴリー別, 全て...
+ * <p>+ token</p>
  */
 
-var Category = exports.Category = function (_Offset) {
-  (0, _inherits3.default)(Category, _Offset);
+var CategoryAuth = exports.CategoryAuth = function (_OffsetAuth) {
+  (0, _inherits3.default)(CategoryAuth, _OffsetAuth);
 
-  // 引数の順番を失敗した
-  // resolve, reject が先だった...
   /**
-   * 記事一覧を取得します
+   * 記事一覧を取得します + token
    * @param {string} [slug=all] category slug です
    * @param {string} [type=''] request type, '' | 'ranking' | 'video' です
    * @param {Function} [resolve=null] Ajax 成功時の callback
@@ -65,19 +66,19 @@ var Category = exports.Category = function (_Offset) {
    * @param {Number} [length=10] query length 値
    * */
 
-  function Category() {
+  function CategoryAuth() {
     var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
     var type = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
     var resolve = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
     var reject = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
     var offset = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
     var length = arguments.length <= 5 || arguments[5] === undefined ? _Length.Length.archive : arguments[5];
-    (0, _classCallCheck3.default)(this, Category);
+    (0, _classCallCheck3.default)(this, CategoryAuth);
 
     slug = _Safety.Safety.string(slug, 'all');
     type = _Safety.Safety.string(type, '');
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Category).call(this, _Api.Api.category(), resolve, reject, offset, length));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(CategoryAuth).call(this, _User.User.token, _Api.Api.category(), resolve, reject, offset, length));
 
     _this._slug = slug;
 
@@ -97,7 +98,7 @@ var Category = exports.Category = function (_Offset) {
    * @return {string|*} category slug を返します
    */
 
-  (0, _createClass3.default)(Category, [{
+  (0, _createClass3.default)(CategoryAuth, [{
     key: 'slug',
     get: function get() {
 
@@ -134,5 +135,5 @@ var Category = exports.Category = function (_Offset) {
       }
     }
   }]);
-  return Category;
-}(_Offset2.Offset);
+  return CategoryAuth;
+}(_OffsetAuth2.OffsetAuth);

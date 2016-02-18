@@ -12,7 +12,9 @@
 'use strict';
 
 import {Category} from '../action/archive/Category';
+import {CategoryAuth} from '../action/archive/CategoryAuth';
 import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
+import {User} from '../app/User';
 
 /**
  * category 一覧表示
@@ -29,6 +31,8 @@ export class ViewCategory extends ViewArchiveMasonryInfinite {
     super( element, moreElement, null, option, true );
     // Category Action を使う
     // slug を送り 表示(render)は ViewArchiveMasonryInfinite を使う
-    this._action = new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
+    this._action = User.sign ?
+      new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
+      new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
   }
 }

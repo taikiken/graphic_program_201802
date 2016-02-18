@@ -1,7 +1,7 @@
 /*!
  * Copyright (c) 2011-2016 inazumatv.com, Parachute.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016-02-18 16:56:52
+ * @date 2016-02-18 22:32:11
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -109,8 +109,6 @@ var _ViewHeaderUser = require('./view/header/ViewHeaderUser');
 
 var _ViewHeaderSearch = require('./view/header/ViewHeaderSearch');
 
-var _ViewArchiveMasonryInfinite = require('./view/ViewArchiveMasonryInfinite');
-
 var _ViewCategory = require('./view/ViewCategory');
 
 var _ViewSingle = require('./view/ViewSingle');
@@ -126,6 +124,8 @@ var _ViewCommentForm = require('./view/comment/ViewCommentForm');
 var _ViewHeadline = require('./view/home/ViewHeadline');
 
 var _ViewPickup = require('./view/home/ViewPickup');
+
+var _ViewNews = require('./view/home/ViewNews');
 
 var _ViewRanking = require('./view/sidebar/ViewRanking');
 
@@ -148,6 +148,10 @@ var _Receiver = require('./ui/Receiver');
  * @module UT
  * @type {Object}
  */
+
+// home
+
+// comment
 
 // -------------------------------------
 // model
@@ -243,7 +247,6 @@ var UT = {
     ViewArchive: ViewArchive,
     ViewArchiveMasonry: ViewArchiveMasonry,
     */
-    ViewArchiveMasonryInfinite: _ViewArchiveMasonryInfinite.ViewArchiveMasonryInfinite,
     ViewCategory: _ViewCategory.ViewCategory,
     ViewSingle: _ViewSingle.ViewSingle,
     ViewTitle: _ViewTitle.ViewTitle,
@@ -262,7 +265,8 @@ var UT = {
     },
     home: {
       ViewHeadline: _ViewHeadline.ViewHeadline,
-      ViewPickup: _ViewPickup.ViewPickup
+      ViewPickup: _ViewPickup.ViewPickup,
+      ViewNews: _ViewNews.ViewNews
     }
   },
   model: {
@@ -280,10 +284,6 @@ var UT = {
 // ui
 
 // sidebar
-
-// home
-
-// comment
 
 // -------------------------------------
 // view

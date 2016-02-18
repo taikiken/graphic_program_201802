@@ -56,7 +56,7 @@ var PageTop = exports.PageTop = function () {
       _Dom.Dom.pageTop().addEventListener('click', this.onClick.bind(this), false);
     }
     /**
-     * element event handler
+     * element click event handler
      * @param {Event} event native event, click event
      */
 
@@ -65,6 +65,7 @@ var PageTop = exports.PageTop = function () {
     value: function onClick(event) {
       event.preventDefault();
 
+      // click 不可のときは処理しない
       if (!this._can) {
         return;
       }
@@ -72,11 +73,13 @@ var PageTop = exports.PageTop = function () {
       var complete = this._boundComplete;
       this._can = false;
 
+      // scrolling
       TweenLite.to(window, 0.5, {
         scrollTo: {
           y: 0,
           autoKill: false
         },
+        // easing
         ease: easing.Power4.easeInOut,
         onComplete: complete
       });

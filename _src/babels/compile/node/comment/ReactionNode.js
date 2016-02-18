@@ -11,11 +11,22 @@
  */
 'use strict';
 
-// React
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.ReactionNode = undefined;
+
+var _ActionType = require('../../app/const/ActionType');
+
+var _Good = require('../../event/comment/Good');
+
+var _Bad = require('../../event/comment/Bad');
+
+var _ModelCommentStar = require('../../model/comment/ModelCommentStar');
+
+var _Model = require('../../model/Model');
+
+// React
 var React = self.React;
 
 var ReactionNode = exports.ReactionNode = React.createClass({
@@ -38,6 +49,15 @@ var ReactionNode = exports.ReactionNode = React.createClass({
     isBad: React.PropTypes.bool.isRequired
   },
   getInitialState: function getInitialState() {
+    // event Good
+    this.good = null;
+    // event Bad
+    this.bad = null;
+    // model good
+    this.goodStar = null;
+    // model bad
+    this.badStar = null;
+
     return {
       loading: '',
       good: this.props.good,
@@ -48,6 +68,7 @@ var ReactionNode = exports.ReactionNode = React.createClass({
     };
   },
   render: function render() {
+    console.log('+++++++++++++++++++++++++++++++++ ReactionNode render +++++++++++++++++++++++++++++++++', this.state.isGood, this.state.isBad);
 
     var active = function active(mine) {
       return mine ? ' active' : '';
@@ -65,7 +86,7 @@ var ReactionNode = exports.ReactionNode = React.createClass({
         { className: 'comment-reaction ' + this.state.loading },
         React.createElement(
           'a',
-          { className: 'comment-reaction-btn comment-reaction-like' + active(this.isGood), href: '#', onClick: this.goodClick },
+          { className: 'comment-reaction-btn comment-reaction-like' + active(this.state.isGood), href: '#', onClick: this.goodClick },
           React.createElement(
             'i',
             null,
@@ -75,7 +96,7 @@ var ReactionNode = exports.ReactionNode = React.createClass({
         ),
         React.createElement(
           'a',
-          { className: 'comment-reaction-btn comment-reaction-dislike' + active(this.isBad), href: '#', onClick: this.badClick },
+          { className: 'comment-reaction-btn comment-reaction-dislike' + active(this.state.isBad), href: '#', onClick: this.badClick },
           React.createElement(
             'i',
             null,
@@ -114,28 +135,103 @@ var ReactionNode = exports.ReactionNode = React.createClass({
       );
     }
   },
+  componentDidMount: function componentDidMount() {
+    if (this.state.sign) {
+      this.good = _Good.Good.factory();
+      this.bad = _Bad.Bad.factory();
+
+      var goodStar = new _ModelCommentStar.ModelCommentStar(this.props.commentId, _ActionType.ActionType.GOOD);
+      this.goodStar = goodStar;
+      goodStar.on(_Model.Model.UNDEFINED_ERROR, this.goodError);
+      goodStar.on(_Model.Model.RESPONSE_ERROR, this.goodError);
+
+      var badStar = new _ModelCommentStar.ModelCommentStar(this.props.commentId, _ActionType.ActionType.BAD);
+      badStar.on(_Model.Model.UNDEFINED_ERROR, this.badError);
+      badStar.on(_Model.Model.RESPONSE_ERROR, this.badError);
+      this.badStar = badStar;
+    }
+  },
+  componentWillUnMount: function componentWillUnMount() {
+    if (this.state.sign) {
+
+      var goodStar = this.goodStar;
+      goodStar.off(_Model.Model.UNDEFINED_ERROR, this.goodError);
+      goodStar.off(_Model.Model.RESPONSE_ERROR, this.goodError);
+
+      var badStar = this.badStar;
+      badStar.off(_Model.Model.UNDEFINED_ERROR, this.badError);
+      badStar.off(_Model.Model.RESPONSE_ERROR, this.badError);
+
+      this.good = null;
+      this.bad = null;
+    }
+  },
   goodClick: function goodClick(event) {
     event.preventDefault();
     this.setState({ loading: 'loading', good: '...' });
+
+    // good sequence
+    if (this.state.isGood) {
+      // good済み -> DELETE
+      this.goodStar.on(_Model.Model.COMPLETE, this.goodDeleteDone);
+      this.goodStar.start(_ActionType.ActionType.DELETE);
+    } else {
+
+      // no good -> ADD
+      this.goodStar.on(_Model.Model.COMPLETE, this.goodAddDone);
+      this.goodStar.start(_ActionType.ActionType.ADD);
+    }
   },
   badClick: function badClick(event) {
     event.preventDefault();
     this.setState({ loading: 'loading', bad: '...' });
+
+    // bad sequence
+    if (this.state.isGood) {
+      // bad -> DELETE
+      this.badStar.on(_Model.Model.COMPLETE, this.badDeleteDone);
+      this.badStar.start(_ActionType.ActionType.DELETE);
+    } else {
+
+      // no bad -> ADD
+      this.badStar.on(_Model.Model.COMPLETE, this.badAddDone);
+      this.badStar.start(_ActionType.ActionType.ADD);
+    }
   },
   goodAddDone: function goodAddDone() {
-    this.setState({ good: ++this.state.good, loading: '', isGood: true });
+    this.goodStar.off(_Model.Model.COMPLETE, this.goodAddDone);
+
+    var good = this.state.good + 1;
+    this.setState({ good: good, loading: '', isGood: true });
+    // this.replaceProps( { good: good, isGood: true } );
   },
   goodDeleteDone: function goodDeleteDone() {
-    this.setState({ good: --this.state.good, loading: '', isGood: false });
+    this.goodStar.off(_Model.Model.COMPLETE, this.goodDeleteDone);
+
+    var good = this.state.good - 1;
+    this.setState({ good: good, loading: '', isGood: false });
+    // this.replaceProps( { good: good, isGood: false } );
   },
   badAddDone: function badAddDone() {
-    this.setState({ bad: ++this.state.bad, loading: '', isBad: true });
+    this.goodStar.off(_Model.Model.COMPLETE, this.badAddDone);
+
+    var bad = this.state.bad + 1;
+    this.setState({ bad: bad, loading: '', isBad: true });
+    // this.replaceProps( { bad: bad, isBad: true } );
   },
   badDeleteDone: function badDeleteDone() {
-    this.setState({ bad: --this.state.bad, loading: '', isBad: false });
+    this.goodStar.off(_Model.Model.COMPLETE, this.badDeleteDone);
+
+    var bad = this.state.bad - 1;
+    this.setState({ bad: bad, loading: '', isBad: false });
+    // this.replaceProps( { bad: bad, isBad: false } );
   },
-  requestError: function requestError(error) {
-    console.warn('requestError ', error.message);
+  goodError: function goodError(error) {
+    console.warn('goodError ', error.message);
+    this.setState({ loading: '' });
+  },
+  badError: function badError(error) {
+    console.warn('badError ', error.message);
     this.setState({ loading: '' });
   }
 });

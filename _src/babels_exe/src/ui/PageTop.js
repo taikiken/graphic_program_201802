@@ -34,12 +34,13 @@ export class PageTop {
     Dom.pageTop().addEventListener( 'click', this.onClick.bind( this ), false );
   }
   /**
-   * element event handler
+   * element click event handler
    * @param {Event} event native event, click event
    */
   onClick( event:Event ):void {
     event.preventDefault();
 
+    // click 不可のときは処理しない
     if ( !this._can ) {
       return;
     }
@@ -47,6 +48,7 @@ export class PageTop {
     let complete = this._boundComplete;
     this._can = false;
 
+    // scrolling
     TweenLite.to(
       window,
       0.5,
@@ -55,6 +57,7 @@ export class PageTop {
           y: 0,
           autoKill: false
         },
+        // easing
         ease: easing.Power4.easeInOut,
         onComplete: complete
       }

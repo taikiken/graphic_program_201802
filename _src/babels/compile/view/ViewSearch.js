@@ -36,26 +36,29 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _SearchAuth = require('../action/search/SearchAuth');
+
 var _Search = require('../action/search/Search');
 
 var _ViewArchiveMasonryInfinite = require('./ViewArchiveMasonryInfinite');
 
 var _View = require('./View');
 
-var _ViewError = require('./error/ViewError');
-
 var _Result = require('../data/Result');
 
 var _Safety = require('../data/Safety');
+
+var _User = require('../app/User');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // React
 
-// data
-
 // view
 var React = self.React;
+// import {ViewError} from './error/ViewError';
+// data
+
 var ReactDOM = self.ReactDOM;
 
 /**
@@ -81,7 +84,7 @@ var ViewSearch = exports.ViewSearch = function (_ViewArchiveMasonryIn) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ViewSearch).call(this, element, moreElement, null, option, true));
 
-    _this._action = new _Search.Search(word, _this.done.bind(_this), _this.fail.bind(_this));
+    _this._action = _User.User.sign ? new _SearchAuth.SearchAuth(word, _this.done.bind(_this), _this.fail.bind(_this)) : new _Search.Search(word, _this.done.bind(_this), _this.fail.bind(_this));
     return _this;
   }
   /**

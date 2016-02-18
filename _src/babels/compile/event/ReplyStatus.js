@@ -70,7 +70,7 @@ var ReplyStatus = exports.ReplyStatus = function (_EventDispatcher) {
 
     if (_symbol !== target) {
 
-      throw new Error('ReplyStatus is static Class. not use new ReplyStatus().');
+      throw new Error('ReplyStatus is static Class. not use new ReplyStatus(). instead ReplyStatus.factory()');
     }
 
     if (_instance === null) {

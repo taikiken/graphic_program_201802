@@ -286,13 +286,14 @@ let CommentMenu = React.createClass( {
  */
 export let CommentNode = React.createClass( {
   propTypes: {
-    commentDae: React.PropTypes.object.isRequired,
     // unique id（識別のために必要）
     uniqueId: React.PropTypes.string.isRequired,
-    // コメント送信者（自分の）profile picture
-    icon: React.PropTypes.string,
+    // CommentDae instance
+    commentDae: React.PropTypes.object.isRequired,
     // user id（オプション）
     userId: React.PropTypes.string,
+    // コメント送信者（自分の）profile picture
+    icon: React.PropTypes.string,
     // 記事 id
     articleId: React.PropTypes.string.isRequired,
     // コメント id（オプション）
