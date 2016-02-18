@@ -9,10 +9,10 @@ $uid=auth();
 $offset=isset($_REQUEST["offset"])?$_REQUEST["offset"]:0;
 $length=isset($_REQUEST["length"])?$_REQUEST["length"]:10;
 
-$sql=sprintf("select * from (select *,(select title from repo_n where id=pageid) as title,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_activity where reuserid=%s and activity<=2 and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by regitime desc limit %s offset %s",
+$sql=sprintf("select * from (select *,(select title from repo_n where id=pageid) as title,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_activity where reuserid=%s and activity<=2 and notice=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by regitime desc limit %s offset %s",
 $uid,$length,$offset);
 
-$nsql=sprintf("select count(*) as n from u_activity where reuserid=%s and activity<=2 and flag=1",$uid);
+$nsql=sprintf("select count(*) as n from u_activity where reuserid=%s and activity<=2 and notice=1",$uid);
 
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
