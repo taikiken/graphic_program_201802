@@ -171,10 +171,14 @@
   @include clearfix;
 
   &.column2 {
+    margin-top: 0;
+    border-top: none;
+
     .board-item {
       float: left;
       width: 340px;
       border-top: 1px solid $border-primary-color;
+      border-bottom: none;
 
       &:nth-child(2n) {
         float: right;

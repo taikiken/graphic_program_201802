@@ -596,6 +596,10 @@ a {
     .widget-recommend {
       margin-top: 30px;
 
+      &.board-small {
+        border-top: none;
+      }
+
       &-heading {
         padding-bottom: 10px;
         border-bottom: 1px solid $border-primary-color;
@@ -616,6 +620,10 @@ a {
           font-size: fz(10);
         }
       } // .widget-ranking-heading
+
+      .board-item {
+        border-bottom: none;
+      }
 
       .post {
         border-bottom: 1px solid $border-primary-color;
