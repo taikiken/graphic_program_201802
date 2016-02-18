@@ -320,13 +320,14 @@
 .comment-respond {
   @include clearfix;
   position: relative;
-  margin-top: -18px;
   padding-bottom: 20px;
 
   @at-root {
     &-opener {
       @include link-decoration(#333, #333, none, underline);
-      float: right;
+      position: absolute;
+      top: -18px;
+      right: 0;
 
       span {
         font-weight: bold;
