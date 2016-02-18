@@ -246,6 +246,14 @@ $(function(){
 			data=sprintf("email=%s&password=%s",vl[0],vl[1]);
 			uu=u;
 
+		}else if(n==26||n==27||n==28){
+			ud=$(".sapi2 option:selected").val();
+			if(ud==""){
+				alert("ログインユーザを選択してください");
+				return;
+			}
+			uu=u;
+
 		}else if(n==1||n==23){
 			uu=u;
 		}else{
@@ -265,6 +273,10 @@ $(function(){
 			},
 			success:function(m){
 				$("pre").html(m);
+				if(n==22){
+					var s=$(".api22 .img img").attr("src")+"?s="+Math.random()*10000000;
+					$(".api22 .img img").attr("src",s);
+				}
 			}
 		});
 	});

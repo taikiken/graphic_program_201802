@@ -28,9 +28,12 @@ $api=array(
 	array("/api/v1/users/self/settings/interest","[M] 興味のある競技更新",18,"PUT"),
 	array("/api/v1/users/self/activities","[M] アクティビティ取得",19,"GET"),
 	array("/api/v1/users/self/notifications","[M] お知らせ取得",20,"GET"),
+	array("/api/v1/users/self/notifications/count","[M] お知らせ未読数取得",28,"GET"),
+	array("/api/v1/users/self/notifications/read","[M] お知らせ既読化",26,"PUT"),
 	array("/api/v1/users/self/settings/account","[M] アカウント情報の取得",21,"GET"),
 	array("/api/v1/users/self/settings/account","[M] アカウント情報の更新",22,"POST"),
-	array("/api/v1/users/","[-] 新規ユーザ登録",24,"POST")
+	array("/api/v1/users/","[-] 新規ユーザ登録",24,"POST"),
+	array("/api/v1/users/","[-] 退会",27,"DELETE")
 );
 
 $api2[]=array("all","すべて（all）");
@@ -436,6 +439,19 @@ while($f=$o->fetch_array()){
 </table>
 <span class="btns">ログイン</span>
 </div>
+
+<div class="apibox api26 clearfix pt20">
+<span class="btns">お知らせ既読化</span>
+</div>
+
+<div class="apibox api27 clearfix pt20">
+<span class="btns">退会する</span>
+</div>
+
+<div class="apibox api28 clearfix pt20">
+<span class="btns">データを確認</span>
+</div>
+
 
 </div>
 
