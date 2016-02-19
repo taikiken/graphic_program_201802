@@ -24,6 +24,8 @@
 - ID : ut
 - PASS : ut2016
 
+※ 正式URLは www ありです。
+
 #### サイト管理画面
 
 - http://www.undotsushin.com/editdm/index_s.php
