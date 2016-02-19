@@ -18,6 +18,18 @@
   }
 }
 
+// video
+.post-video-kv {
+  .video-container {
+    position: relative;
+  }
+  .post-thumb-overlay-movie {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
 // bookmark button
 #single-header-container {
   .post-data {
