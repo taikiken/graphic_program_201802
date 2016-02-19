@@ -484,6 +484,7 @@ export class ViewArchiveMasonryInfinite extends View {
                   bad={first.bad}
                   isGood={first.isGood}
                   isBad={first.isBad}
+                  activate={false}
                 />
               </div>
               <CommentsSecond

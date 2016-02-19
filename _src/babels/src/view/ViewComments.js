@@ -366,7 +366,7 @@ export class ViewComments extends View {
                       userId={userId}
                       icon={icon}
                       articleId={articleId}
-                      commentId={commentId}
+                      commentId={replyComment.id}
                       commentUserId={String(replyComment.user.id)}
                       sign={sign}
                       parent={false}
