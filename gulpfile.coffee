@@ -231,6 +231,7 @@ gulp.task 'default', (cb) ->
     [
       'sprite:build'
       'babels:build'
+      'exe:build'
       'single:build'
     ]
     [
