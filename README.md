@@ -16,11 +16,33 @@
 [Wiki](https://github.com/undotsushin/undotsushin/wiki) を参照してください
 
 
-### デザイン確認
+### 確認系URL
+
+#### Webサイト
+
+- http://www.undotsushin.com/
+- ID : ut
+- PASS : ut2016
+
+#### サイト管理画面
+
+- http://www.undotsushin.com/editdm/index_s.php
+- ID : ut
+- PASS : ut2016
+
+#### API確認
+
+- http://www.undotsushin.com/debugger.php
+- ID : ut
+- PASS : ut2016
+
+#### デザイン
 
 - http://logr.am/undo-tsushin/
 - user: ut
 - pass: utut
+
+※ 上に上がっていない場合あるのでDropboxの `/運動通信 - resource/design/Preview` みていただいたほうが確実。
 
 
 ### スケジュール
