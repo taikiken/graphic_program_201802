@@ -18,6 +18,9 @@ import {Safety} from '../../data/Safety';
 
 import {MediaDae} from '../../dae/MediaDae';
 
+// node
+import {VideoNode} from '../../node/media/VideoNode';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -58,7 +61,8 @@ export class ViewSingleVideo extends View {
     let element = this.element;
 
     // --------------------------------------------
-    // image dom
+    // video dom
+
     let VideoDom = React.createClass( {
       propTypes: {
         media: React.PropTypes.object.isRequired
@@ -71,8 +75,9 @@ export class ViewSingleVideo extends View {
       render: function() {
 
         let media = this.state.media;
+        let yt = media.video.youtube;
 
-        if ( !!media.video.youtube ) {
+        if ( typeof yt !== 'undefined' && yt !== '' && yt.length > 10 ) {
 
           // youtube id found
           return this.youtube( media );
@@ -85,36 +90,29 @@ export class ViewSingleVideo extends View {
         }
 
       },
+      // video
       video: function( media:MediaDae ) {
 
         let video = media.video;
         let images = media.images;
-
-        let captionTag = ( caption ) => {
-          if ( !!caption ) {
-            return <div className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
-          } else {
-            return '';
-          }
-        };
-
         let poster = images.medium;
+        let caption = video.caption || '';
+
         if ( !poster ) {
           poster = Empty.VIDEO_THUMBNAIL;
         } else if (!Safety.isImg(poster)) {
           poster = Empty.VIDEO_THUMBNAIL;
         }
 
-        return (
-          <div className="post-kv">
-            <video poster={poster} preload="none">
-              <source src={video.url} type="video/mp4"/>
-            </video>
-            {captionTag( video.caption )}
-          </div>
-        );
+        return <VideoNode
+          video={video}
+          poster={poster}
+          caption={caption}
+          playImage={Empty.VIDEO_PLAY}
+        />;
 
       },
+      // youtube
       youtube: function( media:MediaDae ) {
         // <iframe width="640" height="360" src="https://www.youtube.com/embed/Ro-_cbfdrYE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
         let video = media.video;

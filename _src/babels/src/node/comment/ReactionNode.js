@@ -37,7 +37,14 @@ export let ReactionNode = React.createClass( {
     // 自分がGood済みかどうか
     isGood: React.PropTypes.bool.isRequired,
     // 自分がBad済みがどうか
-    isBad: React.PropTypes.bool.isRequired
+    isBad: React.PropTypes.bool.isRequired,
+    // good / bad を行うか default true: click action あり
+    activate: React.PropTypes.bool
+  },
+  getDefaultProps: function() {
+    return {
+      activate: true
+    };
   },
   getInitialState: function() {
     // event Good
@@ -49,17 +56,21 @@ export let ReactionNode = React.createClass( {
     // model bad
     this.badStar = null;
 
+    this.goodCount = this.props.good;
+    this.badCount = this.props.bad;
+
     return {
       loading: '',
       good: this.props.good,
       bad: this.props.bad,
       isGood: this.props.isGood,
       isBad: this.props.isBad,
-      sign: this.props.sign
+      sign: this.props.sign,
+      activate: this.props.activate
     };
   },
   render: function() {
-    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render +++++++++++++++++++++++++++++++++', this.props.uniqueId, this.state.isGood, this.state.isBad );
+    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render ', this.props.uniqueId, this.state.isGood, this.state.isBad, this.state.good, this.state.bad );
 
     let active = ( mine ) => {
       return mine ? ' active' : '';
@@ -69,7 +80,7 @@ export let ReactionNode = React.createClass( {
       return number > 0 ? number : '';
     };
 
-    if ( this.state.sign ) {
+    if ( this.state.activate && this.state.sign ) {
       return (
         <div className={'comment-reaction ' + this.state.loading}>
           <a className={'comment-reaction-btn comment-reaction-like' + active( this.state.isGood )} href="#" onClick={this.goodClick}><i>&nbsp;</i>{count(this.state.good)}</a>
@@ -89,7 +100,7 @@ export let ReactionNode = React.createClass( {
     }
   },
   componentDidMount: function() {
-    if ( this.state.sign ) {
+    if ( this.state.activate && this.state.sign ) {
       this.good = Good.factory();
       this.bad = Bad.factory();
 
@@ -105,7 +116,7 @@ export let ReactionNode = React.createClass( {
     }
   },
   componentWillUnMount: function() {
-    if ( this.state.sign ) {
+    if ( this.state.activate && this.state.sign ) {
 
       let goodStar = this.goodStar;
       goodStar.off( Model.UNDEFINED_ERROR, this.goodError );
@@ -162,38 +173,34 @@ export let ReactionNode = React.createClass( {
   },
   goodAddDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodAddDone );
-
-    let good = this.state.good + 1;
+    console.log( '+++++ goodAddDone' );
+    let good = ++this.goodCount;
     this.setState( {good: good, loading: '', isGood: true} );
-    // this.replaceProps( { good: good, isGood: true } );
   },
   goodDeleteDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodDeleteDone );
-
-    let good = this.state.good - 1;
+    console.log( '+++++ goodDeleteDone' );
+    let good = --this.goodCount;
     this.setState( {good: good, loading: '', isGood: false} );
-    // this.replaceProps( { good: good, isGood: false } );
   },
   badAddDone: function() {
-    this.goodStar.off( Model.COMPLETE, this.badAddDone );
-
-    let bad = this.state.bad + 1;
+    this.badStar.off( Model.COMPLETE, this.badAddDone );
+    console.log( '--- badAddDone' );
+    let bad = ++this.badCount;
     this.setState( {bad: bad, loading: '', isBad: true} );
-    // this.replaceProps( { bad: bad, isBad: true } );
   },
   badDeleteDone: function() {
-    this.goodStar.off( Model.COMPLETE, this.badDeleteDone );
-
-    let bad = this.state.bad - 1;
+    this.badStar.off( Model.COMPLETE, this.badDeleteDone );
+    console.log( '--- badDeleteDone' );
+    let bad = --this.badCount;
     this.setState( {bad: bad, loading: '', isBad: false} );
-    // this.replaceProps( { bad: bad, isBad: false } );
   },
   goodError: function( error ) {
-    console.warn( 'goodError ', error.message );
+    console.warn( 'goodError ', error );
     this.setState({loading: ''});
   },
   badError: function( error ) {
-    console.warn( 'badError ', error.message );
+    console.warn( 'badError ', error );
     this.setState({loading: ''});
   }
 } );
