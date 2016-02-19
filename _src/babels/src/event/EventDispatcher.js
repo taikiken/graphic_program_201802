@@ -99,6 +99,7 @@ export class EventDispatcher {
     if ( index === -1 ) {
       // 配列位置が -1, 見つからなかった
       // 処理しない
+      // console.warn( 'not found k=listener ', type, types );
       return;
     }
 

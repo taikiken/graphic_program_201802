@@ -56,6 +56,9 @@ export let ReactionNode = React.createClass( {
     // model bad
     this.badStar = null;
 
+    this.goodCount = this.props.good;
+    this.badCount = this.props.bad;
+
     return {
       loading: '',
       good: this.props.good,
@@ -67,7 +70,7 @@ export let ReactionNode = React.createClass( {
     };
   },
   render: function() {
-    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render +++++++++++++++++++++++++++++++++', this.props.uniqueId, this.state.isGood, this.state.isBad );
+    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render ', this.props.uniqueId, this.state.isGood, this.state.isBad, this.state.good, this.state.bad );
 
     let active = ( mine ) => {
       return mine ? ' active' : '';
@@ -170,38 +173,34 @@ export let ReactionNode = React.createClass( {
   },
   goodAddDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodAddDone );
-
-    let good = this.props.good + 1;
+    console.log( '+++++ goodAddDone' );
+    let good = ++this.goodCount;
     this.setState( {good: good, loading: '', isGood: true} );
-    // this.replaceProps( { good: good, isGood: true } );
   },
   goodDeleteDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodDeleteDone );
-
-    let good = this.props.good - 1;
+    console.log( '+++++ goodDeleteDone' );
+    let good = --this.goodCount;
     this.setState( {good: good, loading: '', isGood: false} );
-    // this.replaceProps( { good: good, isGood: false } );
   },
   badAddDone: function() {
-    this.goodStar.off( Model.COMPLETE, this.badAddDone );
-
-    let bad = this.props.bad + 1;
+    this.badStar.off( Model.COMPLETE, this.badAddDone );
+    console.log( '--- badAddDone' );
+    let bad = ++this.badCount;
     this.setState( {bad: bad, loading: '', isBad: true} );
-    // this.replaceProps( { bad: bad, isBad: true } );
   },
   badDeleteDone: function() {
-    this.goodStar.off( Model.COMPLETE, this.badDeleteDone );
-
-    let bad = this.props.bad - 1;
+    this.badStar.off( Model.COMPLETE, this.badDeleteDone );
+    console.log( '--- badDeleteDone' );
+    let bad = --this.badCount;
     this.setState( {bad: bad, loading: '', isBad: false} );
-    // this.replaceProps( { bad: bad, isBad: false } );
   },
   goodError: function( error ) {
-    console.warn( 'goodError ', error.message );
+    console.warn( 'goodError ', error );
     this.setState({loading: ''});
   },
   badError: function( error ) {
-    console.warn( 'badError ', error[0].message, error[1] );
+    console.warn( 'badError ', error );
     this.setState({loading: ''});
   }
 } );
