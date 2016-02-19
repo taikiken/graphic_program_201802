@@ -36,6 +36,15 @@
 - ID : ut
 - PASS : ut2016
 
+※ 適宜記事編集、ユーザー編集していただいてOK
+
+#### iOSアプリ
+
+AdHock版ダウンロード
+
+- https://www.limret.com/apps/undotsushin/1.0.0/
+
+
 #### デザイン
 
 - http://logr.am/undo-tsushin/
