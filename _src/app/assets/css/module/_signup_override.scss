@@ -4,3 +4,50 @@
 // -------------------------------------------------
 // signup
 // -------------------------------------------------
+
+// 表示 / 非表示
+.signup-1 {
+  .legend-container-2,
+  .legend-container-3 {
+    display: none;
+  }
+}
+.signup-2 {
+  .legend-container-1,
+  .legend-container-3 {
+    display: none;
+  }
+}
+.signup-3 {
+  .legend-container-1,
+  .legend-container-2 {
+    display: none;
+  }
+}
+
+
+
+// -------------------------------------------------
+// step 1
+// -------------------------------------------------
+
+.legend-step-1 {
+  width: 100%;
+
+  .form-parts {
+    float: left;
+    // ceil( 320/520 )
+    width: 62%;
+  }
+}
+.legend-step-2 {
+  width: 100%;
+
+  .form-parts {
+    display: block;
+  }
+}
+
+.register-mail .setting-form-mail {
+  width: 100%;
+}

@@ -166,5 +166,10 @@ export class Dom {
   static commentNormal():Element {
     return Dom.get( 'comment-normal-container' );
   }
+
+  // --------------------------------------
+  static signup():Element {
+    return Dom.get( 'signup-container' );
+  }
 }
 // return Dom.get( '' );

@@ -9,10 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-import {Empty} from '../../app/const/Empty';
-import {Safety} from '../../data/Safety';
-
-import {MediaDae} from '../../dae/MediaDae';
+'use strict';
 
 // React
 let React = self.React;
@@ -67,6 +64,11 @@ let VideoPlay = React.createClass( {
 } );
 
 // main video tag
+/**
+ * <h3>記事詳細 HTML5 video</h3>
+ * <p>記事詳細上部動画</p>
+ * @class VideoNode
+ */
 export let VideoNode = React.createClass( {
   propTypes: {
     video: React.PropTypes.object.isRequired,

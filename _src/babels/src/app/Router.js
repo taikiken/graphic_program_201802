@@ -106,6 +106,7 @@ export class Router extends EventDispatcher {
             // not kyeLength 1,
             // 通常 key
             if ( path.substr( 0, keyLength ) === key ) {
+              console.log( 'rote activate ', key );
               rule[ key ]();
               found = true;
               break;
@@ -256,6 +257,7 @@ export class Router extends EventDispatcher {
    */
   signup():void {
 
+    /*
     let [ option ] = Loc.path.replace( '/signup/', '' ).split('/');
 
     if ( option === 'account' ) {
@@ -274,6 +276,12 @@ export class Router extends EventDispatcher {
       this.dispatch( { type: Router.SIGNUP } );
 
     }
+    */
+
+    console.log( 'signup page in fired' );
+    // URL 遷移しない
+    // 1 page コンテンツ
+    this.dispatch( { type: Router.SIGNUP } );
 
   }
   /**

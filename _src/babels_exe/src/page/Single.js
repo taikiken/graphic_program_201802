@@ -31,6 +31,10 @@ let _headerUser = null;
  * 全て static です
  */
 export class Single {
+  /**
+   * 記事詳細 singleton class です
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 

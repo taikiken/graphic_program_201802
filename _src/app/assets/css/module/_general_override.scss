@@ -144,3 +144,32 @@
     }
   }
 }
+
+// -------------------------------------------------
+// mod-btnB01
+.mod-btnB01 {
+  input[ type="button" ],
+  a {
+    display: inline-block;
+    min-width: 250px;
+    line-height: 50px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border-radius: 3px;
+    background-color: $highlight-color;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover {
+      @include hover-opacity;
+    }
+  }
+
+  a {
+    @include link-decoration(#fff, #fff, none, none);
+  }
+
+  input[ type="button" ] {
+    color: #fff;
+  }
+}

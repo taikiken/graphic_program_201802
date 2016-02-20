@@ -89,6 +89,14 @@ export class Api {
   static leave():Types {
     return ApiDae.api( 'users:delete' );
   }
+  /**
+   * signup 時
+   * email が登録済みかを調べます
+   * @return {Types}
+   */
+  static email():Types {
+    return ApiDae.api( 'users:email' );
+  }
 
 //  /**
 //   * ユーザー関連の API
