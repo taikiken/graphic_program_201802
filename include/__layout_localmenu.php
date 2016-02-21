@@ -4,7 +4,7 @@
 	<li class="ds"><a href="./search/?<?=$g->g_url()?>">絞り込み検索</a></li>
     <?php } ?>
 	<?php if($_GET["cid"]==1||$_GET["cid"]==5){ ?>
-<li class="ds"><a href="./search/?<?=$g->g_url()?>">絞り込み検索</a></li>
+<li class="ds"><a href="./search/?<?=$g->g_url()?>">検索</a></li>
 <li>　｜　並び替え：<select class="orderby">
 <?php
 
@@ -47,7 +47,7 @@ $c=!isset($_COOKIE["excategory"])?0:$_COOKIE["excategory"];
 
 <?php
 
-$sql="select id,name from pm_ where cid=20  and flag=1 order by n";
+$sql="select id,name,case when num is null then 0 else num end from (select id,name,n from pm_ where cid=20 and flag=1) as t1 left join (select m1,count(m1) as num from repo_n where cid=1 group by m1) as t2 on t1.id=t2.m1 order by n";
 $o->query($sql);
 
 echo sprintf("<option value=\"\"%s>　すべてのカテゴリー</option>",$c==0?" selected=\"selected\"":"");
@@ -55,7 +55,7 @@ echo sprintf("<option value=\"\"%s>　すべてのカテゴリー</option>",$c==
 while($f=$o->fetch_array()){
 
 ?>
-<option value="<?=$f["id"]?>"<?=$c==$f["id"]?" selected=\"selected\"":""?>>　<?=$f["name"]?></option>
+<option value="<?=$f["id"]?>"<?=$c==$f["id"]?" selected=\"selected\"":""?>>　<?=$f["name"]?>(<?=$f["num"]?>)</option>
 <?php } ?>
 <option value="a"<?=$c==="a"?" selected=\"selected\"":""?>>　指定なし</option>
 </select>
