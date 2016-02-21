@@ -41,7 +41,7 @@ if(strlen($name)>0){
 
 if(count($ermsg)>0){
 
-	$y["status"]["code"]=500;
+	$y["status"]["code"]=400;
 	$y["status"]["user_message"]="入力内容が間違っています。";
 	$y["status"]["developer_message"]="リクエストデータに不正値がある";
 	
