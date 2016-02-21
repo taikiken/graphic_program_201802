@@ -64,7 +64,7 @@ export class ModelUserDetect extends Model {
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error ):void {
+  fail( error:Error ):void {
 
     this.executeSafely( Model.RESPONSE_ERROR, error );
 

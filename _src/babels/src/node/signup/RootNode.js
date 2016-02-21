@@ -66,7 +66,7 @@ export let RootNode = React.createClass( {
         <div className="body-sec-inner">
           <SignupHeading step={this.state.step} />
            <div className={stepClassSelector(this.state.step)}>
-              <form ref="signup" onSubmit={this.submitHandler}>
+              <form ref="signup" enctype="multipart/form-data" onSubmit={this.submitHandler}>
                 <LegendStep1 step={this.props.step} />
                 <LegendStep2 step={this.props.step + 1} />
                 <LegendStep3 step={this.props.step + 2} categories={this.props.categories} />

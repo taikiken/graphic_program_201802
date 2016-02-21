@@ -151,6 +151,7 @@ export class Url {
       case '#interest':
         return 3;
 
+      case '#':
       case '':
         return 1;
 

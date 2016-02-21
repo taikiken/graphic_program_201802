@@ -5,6 +5,29 @@
 // signup
 // -------------------------------------------------
 
+// common
+legend {
+  input,
+  textarea {
+    color: #333;
+  }
+}
+
+// error
+.error {
+  .form-input {
+    border-color: #e14343;
+  }
+
+  .error-message-container {
+    margin: 8px 0;
+    .error-message-txt {
+      font-size: 12px;
+      color: #e14343;
+    }
+  }
+}
+
 // 表示 / 非表示
 .signup-1 {
   .legend-container-2,

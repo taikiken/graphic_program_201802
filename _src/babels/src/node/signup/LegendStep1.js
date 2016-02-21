@@ -15,6 +15,20 @@ import {SignupStatus} from '../../event/SignupStatus';
 import {Loc} from '../../util/Loc';
 import {Url} from '../../app/const/Url';
 
+// data
+import {Result} from '../../data/Result';
+import {Data} from '../../data/Data';
+import {Form} from '../../data/Form';
+import {ErrorMessage} from '../../data/ErrorMessage';
+
+// model
+import {Model} from '../../model/Model';
+import {ModelUserDetect} from '../../model/signup/ModelUserDetect';
+
+// node
+import {ErrorNode} from '../error/ErrorNode';
+
+// React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
@@ -24,21 +38,29 @@ let Step1Form = React.createClass( {
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
+    this.callback = null;
+    this.errors = { errorEmail: new ErrorMessage() };
 
     return {
       email: '',
       step: 1,
-      error: {
-        email: false
-      }
+      errorEmail: false
     };
   },
   render: function() {
 
+    let errorClass = ( keyName:string ) => {
+      return this.state[ keyName ] ? 'error' : '';
+    };
+    let message = ( keyName:string ) => {
+      console.log( 'message ', this.errors[ keyName ], ';' );
+      return this.errors[ keyName ].message;
+    };
+
     return (
       <legend className="legend-step-1">
-          <span className={'form-parts '}>
-            <span className="setting-form-mail">
+          <span className={'form-parts ' + errorClass('errorEmail')}>
+            <span className="setting-form-mail form-input">
               <input
                 type="text"
                 name="email"
@@ -47,6 +69,7 @@ let Step1Form = React.createClass( {
                 placeholder="メールアドレスを入力"
               />
             </span>
+            <ErrorNode message={message('errorEmail')} />
           </span>
           <span className="setting-form-submit mod-btnB01">
             <input type="button" value="アカウント作成 (無料)" onClick={this.nextHandler}/>
@@ -55,11 +78,24 @@ let Step1Form = React.createClass( {
     );
 
   },
+  // ---------------------------------------------------
+  // delegate
   componentDidMount: function() {
+    // submit event listen
+    // enter の後発生します
     this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+
+    if ( this.callback === null ) {
+      let callback = {};
+      this.callback = callback;
+      callback[ Model.COMPLETE ] = this.done;
+      callback[ Model.UNDEFINED_ERROR ] = this.fail;
+      callback[ Model.RESPONSE_ERROR ] = this.fail;
+    }
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+    this.dispose();
   },
   // ---------------------------------------------------
   // input onchange
@@ -76,6 +112,7 @@ let Step1Form = React.createClass( {
   },
   // ---------------------------------------------------
   // submit click 通知
+  // SignupStatus.SIGNUP_SUBMIT event handler
   submitHandler: function( event:Object ) {
     let step = event.step;
     if ( step === this.props.step ) {
@@ -90,8 +127,13 @@ let Step1Form = React.createClass( {
 
   },
   prepareNext: function():void {
-    // 遷移テスト
-    this.next();
+    let data = new Data( 'email', this.state.email );
+    let formData = Form.data( [ data ] );
+    let detect = new ModelUserDetect( formData, this.callback );
+    // error 消去
+    this.reset();
+    // ajax start
+    detect.start();
   },
   next: function() {
     // next step
@@ -110,26 +152,43 @@ let Step1Form = React.createClass( {
   // ---------------------------------------------------
   // ajax
   // duplicate email check
-  done: function() {
+  done: function( result:Result ) {
+    console.log( 'done ', result );
+    if ( result.status.code === 200 ) {
+      // OK
+      this.next();
+    }
+  },
+  fail: function( error:Error ) {
+    console.log( 'fail ', error.result.response.errors );
+    let message = error.result.response.errors.email;
+    this.errors.errorEmail.message = message;
+    this.setState( { errorEmail: true } );
 
   },
-  fail: function() {
-
+  reset: function() {
+    this.errors.errorEmail.reset();
+    this.setState( { errorEmail: false } );
   },
   dispose: function() {
 
   }
 } );
 
+/**
+ * signup step 1
+ * 入力フォームコンテナ
+ */
 export let LegendStep1 = React.createClass( {
   propTypes: {
+    // 担当 step 1
     step: React.PropTypes.number.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
 
     return {
-      step: this.props.step
+      step: 1
     };
   },
   render: function() {
@@ -159,6 +218,8 @@ export let LegendStep1 = React.createClass( {
     );
 
   },
+  // ---------------------------------------------------
+  // delegate
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
   },
@@ -168,11 +229,13 @@ export let LegendStep1 = React.createClass( {
   shouldComponentUpdate: function( nextProps, nextState ) {
     return this.props.step === nextState.step;
   },
+  // ---------------------------------------------------
+  // custom
+  // listener step change
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );
   },
   updateStep: function( step:Number ):void {
-    console.log( 'updateStep 2 ', this.state.email );
     this.setState( { step: step } );
   }
 } );

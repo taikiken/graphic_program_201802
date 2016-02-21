@@ -11,11 +11,27 @@
  */
 'use strict';
 
+// event
 import {SignupStatus} from '../../event/SignupStatus';
-import {Loc} from '../../util/Loc';
+
+// app
 import {Url} from '../../app/const/Url';
 import {Empty} from '../../app/const/Empty';
+
+// util
+import {Loc} from '../../util/Loc';
+
+// ui
 import {Thumbnail} from '../../ui/Thumbnail';
+
+// data
+import {Result} from '../../data/Result';
+import {Data} from '../../data/Data';
+import {Form} from '../../data/Form';
+import {ErrorMessage} from '../../data/ErrorMessage';
+
+// node
+import {ErrorNode} from '../error/ErrorNode';
 
 let React = self.React;
 
@@ -71,10 +87,20 @@ let Step2Form = React.createClass( {
 
     let zoneEntered = this.state.entered ? 'entered' : '';
 
+    let errorClass = ( keyName:string ) => {
+      // return this.state[ keyName ] ? 'error' : '';
+      return '';
+    };
+    let message = ( keyName:string ) => {
+      //console.log( 'message ', this.errors[ keyName ], ';' );
+      //return this.errors[ keyName ].message;
+      return '';
+    };
+
     return (
       <legend className="legend-step-2">
         {/* password */}
-        <span className="form-parts">
+        <span className={'form-parts ' + errorClass('errorPassword')}>
           <span className="setting-form-pw">
             <input
               type="password"
@@ -84,9 +110,10 @@ let Step2Form = React.createClass( {
               onChange={this.passwordChange}
             />
           </span>
+          <ErrorNode message={message('errorPassword')} />
         </span>
         {/* name */}
-        <span className="form-parts">
+        <span className={'form-parts ' + errorClass('errorName')}>
           <span className="setting-form-name">
             <input
               type="text"
@@ -96,6 +123,7 @@ let Step2Form = React.createClass( {
               onChange={this.nameChange}
             />
           </span>
+          <ErrorNode message={message('errorName')} />
         </span>
         {/* bio */}
         <span className="form-parts">
