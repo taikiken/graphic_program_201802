@@ -40,7 +40,6 @@ export class Loc {
 
   }
   /**
-   *
    * @return {string} location.pathname(urlからprotocol+hostを除く)を返します
    */
   static get path():string {
@@ -56,6 +55,14 @@ export class Loc {
 
     return self.location.hash;
 
+  }
+
+  /**
+   * location.hashを設定します
+   * @param {string} hash 設定する hash
+   */
+  static set hash( hash:string ):void {
+    self.location.hash = hash;
   }
   /**
    * url の query 文字列
@@ -75,7 +82,6 @@ export class Loc {
     // host + port number
     return self.location.host;
   }
-
   /**
    *
    * @return {string} host name だけを返します
@@ -84,7 +90,6 @@ export class Loc {
     // host only
     return self.location.hostname;
   }
-
   /**
    *
    * @return {string} port number を返します

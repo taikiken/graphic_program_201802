@@ -11,9 +11,10 @@
  */
 'use strict';
 
+import {Url} from '../../app/const/Url';
+
 // React
 let React = self.React;
-let ReactDOM = self.ReactDOM;
 
 export let SignupHeading = React.createClass( {
   propTypes: {
@@ -28,7 +29,7 @@ export let SignupHeading = React.createClass( {
         return (
           <div className="signup-heading">
             <h1>新規会員登録</h1>
-            <p className="btn"><a href="/login/">ログインはこちら &gt;</a></p>
+            <p className="btn"><a href={Url.login()}>ログインはこちら &gt;</a></p>
           </div>
         );
 

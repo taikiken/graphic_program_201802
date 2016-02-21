@@ -21,7 +21,8 @@ let React = self.React;
 
 let Step3Form = React.createClass( {
   propTypes: {
-    step: React.PropTypes.number.isRequired
+    step: React.PropTypes.number.isRequired,
+    categories: React.PropTypes.array.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -36,24 +37,28 @@ let Step3Form = React.createClass( {
   },
   render: function() {
 
-    switch (this.state.step) {
+    return (
+      <legend className="legend-step-3">
+        <div className="setting-form-interest">
+          <ul className="setting-form-interest-list">
+            {
+              this.props.categories.map( function( category, i ) {
 
-      case 3:
-        return (
-          <legend className="legend-step-3">
-            ここに step 3のフォーム
-          </legend>
-        );
+                return (
+                  <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug }>
+                    <input type="checkbox" name={category.slug} id={'interest-item-' + category.slug} />
+                    <label htmlFor={'interest-item-' + category.slug} className="setting-form-interest-title">
+                      <span>{category.label}</span>
+                    </label>
+                  </li>
+                );
 
-      case 1:
-      case 2:
-      default:
-        return (
-          <legend className="legend-step-3">
-            ここに step 3のフォーム見えてはいけない
-          </legend>
-        );
-    }
+              } )
+            }
+          </ul>
+        </div>
+      </legend>
+    );
 
   },
   componentDidMount: function() {
@@ -96,7 +101,8 @@ let Step3Form = React.createClass( {
 
 export let LegendStep3 = React.createClass( {
   propTypes: {
-    step: React.PropTypes.number.isRequired
+    step: React.PropTypes.number.isRequired,
+    categories: React.PropTypes.array.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -110,7 +116,7 @@ export let LegendStep3 = React.createClass( {
 
     return (
       <div className="legend-container legend-container-3">
-        <Step3Form step={this.state.step} />
+        <Step3Form step={this.state.step} categories={this.props.categories} />
       </div>
     );
 
@@ -121,6 +127,9 @@ export let LegendStep3 = React.createClass( {
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
   },
+  //shouldComponentUpdate: function( nextProps, nextState ) {
+  //  return this.state.step !== nextState.step;
+  //},
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );
   },

@@ -12,6 +12,8 @@
 'use strict';
 
 import {SignupStatus} from '../../event/SignupStatus';
+import {Loc} from '../../util/Loc';
+import {Url} from '../../app/const/Url';
 
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -77,10 +79,15 @@ let Step1Form = React.createClass( {
 
     // 遷移テスト
     this.next();
+
   },
   next: function() {
     // next step
-    this.status.step( this.props.step + 1 );
+    // this.status.step( this.props.step + 1 );
+    // email ok
+    this.status.email( this.state.email );
+    // hash
+    Loc.hash = Url.signupHash( this.props.step + 1 );
   },
   // ---------------------------------------------------
   error: function() {
@@ -110,8 +117,7 @@ export let LegendStep1 = React.createClass( {
     this.status = SignupStatus.factory();
 
     return {
-      step: this.props.step,
-      email: ''
+      step: this.props.step
     };
   },
   render: function() {
@@ -146,6 +152,9 @@ export let LegendStep1 = React.createClass( {
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
+  },
+  shouldComponentUpdate: function( nextProps, nextState ) {
+    return this.state.step !== nextState.step;
   },
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );

@@ -34,7 +34,8 @@ let React = self.React;
  * */
 export let RootNode = React.createClass( {
   propTypes: {
-    step: React.PropTypes.number.isRequired
+    step: React.PropTypes.number.isRequired,
+    categories: React.PropTypes.array.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -68,7 +69,7 @@ export let RootNode = React.createClass( {
               <form ref="signup" onSubmit={this.submitHandler}>
                 <LegendStep1 step={this.props.step} />
                 <LegendStep2 step={this.props.step + 1} />
-                <LegendStep3 step={this.props.step + 2} />
+                <LegendStep3 step={this.props.step + 2} categories={this.props.categories} />
                 <div className="submit-hidden-container"><input type="submit" /></div>
               </form>
           </div>
@@ -82,6 +83,9 @@ export let RootNode = React.createClass( {
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
     this.dispose();
+  },
+  shouldComponentUpdate: function( nextProps, nextState ) {
+    return this.state.step !== nextState.step;
   },
   submitHandler: function( event:Event ):void {
     event.preventDefault();

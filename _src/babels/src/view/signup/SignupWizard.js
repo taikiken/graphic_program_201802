@@ -11,31 +11,100 @@
  */
 'use strict';
 
+// parent class
 import {View} from '../View';
+
+// app
+import {Message} from '../../app/const/Message';
+import {Url} from '../../app/const/Url';
+
+// action
+import {Categories} from '../../action/categories/Categories';
+
+// model
+import {Model} from '../../model/Model';
 import {ModelUserDetect} from '../../model/signup/ModelUserDetect';
+import {ModelCategories} from '../../model/categoires/ModelCategories';
+
+// dae
+import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
 
 // node
 import {HeadingNode} from '../../node/signup/HeadingNode';
 import {RootNode} from '../../node/signup/RootNode';
 
+// event
 import {SignupStatus} from '../../event/SignupStatus';
 
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * ユーザー新規登録ウィザード
+ */
 export class SignupWizard extends View {
+  /**
+   * action/Headline を使い Ajax request 後 element へ dom を作成します
+   * @param {Element} element root element
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
-  }
-  start():void {
-    this.render( 1 );
-  }
-  render( stepNumber:Number = 1 ):void {
+    //
+    // this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
 
+    // get categories by model
+    // 処理一貫性のため ModelCategories を使い取得
+    let boundError = this.error.bind( this );
+    let callbacks = {};
+    this._callbacks = callbacks;
+    callbacks[ Model.COMPLETE ] = this.complete.bind( this );
+    callbacks[ Model.UNDEFINED_ERROR ] = boundError;
+    callbacks[ Model.RESPONSE_ERROR ] = boundError;
+    this._action = new ModelCategories( callbacks );
+
+    // SignupStatus instance
+    this._status = SignupStatus.factory();
+
+    this._step = 1;
+
+    this._boundHash = null;
+  }
+  /**
+   * Ajax request を開始します
+   */
+  start():void {
+    this.action.start();
+  }
+  /**
+   * Ajax response success
+   * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
+   */
+  complete( result:CategoriesDae ):void {
+
+    this.render( result, this._step );
+  }
+  /**
+   * Ajax response error
+   * @param {Error} error Error instance
+   */
+  error( error ):void {
+
+    console.log( 'Signup complete', error );
+
+  }
+  render( categoriesDae:CategoriesDae, stepNumber:Number = 1 ):void {
+
+    // variable
+    let _this = this;
+
+    // main dom
     let SignupDom = React.createClass( {
       propTypes: {
-        step: React.PropTypes.number.isRequired
+        step: React.PropTypes.number.isRequired,
+        // 興味のあるカテゴリーに使用するカテゴリー一覧
+        categoriesDae: React.PropTypes.object.isRequired
       },
       getInitialState: function() {
         this.status = SignupStatus.factory();
@@ -47,22 +116,29 @@ export class SignupWizard extends View {
       render: function() {
         return (
           <div className={'signup signup-' + this.state.step }>
-            {/**/}
             <HeadingNode step={this.props.step} />
-            <RootNode step={this.props.step} />
+            <RootNode
+              step={this.props.step}
+              categories={this.props.categoriesDae.categories}
+            />
           </div>
         );
       },
       componentDidMount: function() {
+        // status event bind
+        _this.didMount();
         this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
       },
       componentWillUnMount: function() {
+        // status event unbind
         this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
       },
       stepChange: function( event:Object ):void {
+        // SignupStatus.SIGNUP_STEP 発生後 step 値を update する
         this.updateStep( event.step );
       },
       updateStep: function( step:Number ) {
+        // step値を update -> CSS クラス signup-n のナンバリングに使用
         this.setState( { step: step } );
       }
     } );
@@ -70,9 +146,52 @@ export class SignupWizard extends View {
     ReactDOM.render(
       <SignupDom
         step={stepNumber}
+        categoriesDae={categoriesDae}
       />,
       this.element
     );
 
   }
+
+  didMount():void {
+    // dom mound after
+
+    // SignupStatus event bind
+    this._status.on( SignupStatus.SIGNUP_STEP, this.stepChange.bind( this ) );
+
+    // 多分 email のチェックが終わり次のステップに遷移
+    // window blur と hash change 監視を開始
+    if ( this._boundHash === null ) {
+      this.activateHashChange();
+    }
+
+  }
+
+  stepChange( event:Object ):void {
+
+    let step = event.step;
+    this._step = step;
+
+  }
+
+  activateHashChange():void {
+
+    let boundHash = this.onHash.bind( this );
+    this._boundHash = boundHash;
+    // ToDo: 開発中はコメントにする, 本番でコメントアウト
+    //window.onbeforeunload = function() {
+    //  return Message.UNLOAD;
+    //};
+    window.addEventListener( 'hashchange', boundHash, false );
+
+  }
+
+  onHash( event:HashChangeEvent ):void {
+    console.log( 'hashchange event ', event );
+    let hash = event.newURL.split( '/' ).pop();
+    let step = Url.signupStepByHash( hash );
+    this._status.step( step );
+  }
+
+
 }

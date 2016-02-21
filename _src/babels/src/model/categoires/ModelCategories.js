@@ -14,6 +14,7 @@
 import {Model} from '../Model';
 import {Categories} from '../../action/categories/Categories';
 import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
+import {Result} from '../../data/Result';
 
 /**
  * カテゴリー一覧
@@ -39,7 +40,7 @@ export class ModelCategories extends Model {
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  done( result ):void {
+  done( result:Result ):void {
 
     let response = result.response;
 
@@ -47,7 +48,7 @@ export class ModelCategories extends Model {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[USER_SELF:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[MODEL_CATEGORIES:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( Model.UNDEFINED_ERROR, error );
 
     } else {
@@ -62,7 +63,7 @@ export class ModelCategories extends Model {
    * Ajax response error
    * @param {Error} error Error instance
    */
-  fail( error ):void {
+  fail( error:Error ):void {
 
     this.executeSafely( Model.RESPONSE_ERROR, error );
 

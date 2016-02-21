@@ -12,6 +12,8 @@
 'use strict';
 
 import {SignupStatus} from '../../event/SignupStatus';
+import {Loc} from '../../util/Loc';
+import {Url} from '../../app/const/Url';
 
 let React = self.React;
 
@@ -149,7 +151,9 @@ let Step2Form = React.createClass( {
   next: function() {
     // next step
     console.log( 'Step2Form ', this.state.step );
-    this.status.step( this.state.step + 1 );
+    // this.status.step( this.state.step + 1 );
+    // hash
+    Loc.hash = Url.signupHash( this.props.step + 1 );
   },
   // ---------------------------------------------------
   error: function() {
@@ -192,6 +196,7 @@ export let LegendStep2 = React.createClass( {
   },
   render: function() {
 
+    console.log( 'render step 2 email ', this.state.email );
     return (
       <div className="legend-container legend-container-2">
         <span className="setting-form-mail disabled">
@@ -213,6 +218,9 @@ export let LegendStep2 = React.createClass( {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
     this.status.off( SignupStatus.SIGNUP_EMAIL, this.emailChange );
   },
+  shouldComponentUpdate: function( nextProps, nextState ) {
+    return this.state.email !== nextState.email || this.state.step !== nextState.step;
+  },
   // -----------------------------------------------------------
   // form event handler
   inputChange( event:Event ):void {
@@ -223,13 +231,14 @@ export let LegendStep2 = React.createClass( {
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );
   },
-  emailChange: function( event:Object ):void {
-    this.updateEmail( event.step );
-  },
   updateStep: function( step:Number ):void {
     this.setState( { step: step } );
   },
+  emailChange: function( event:Object ):void {
+    this.updateEmail( event.email );
+  },
   updateEmail: function( email:string ):void {
+    console.log( 'updateEmail ', email );
     this.setState( { email: email } );
   }
 } );
