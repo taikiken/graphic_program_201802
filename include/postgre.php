@@ -48,6 +48,10 @@ class db{
 		pg_freeresult($this->rsc);
 	}
 
+	function get_error(){
+		pg_last_error($this->rsc);
+	}
+	
 	function num_rows(){
 		return $this->r=pg_num_rows($this->rsc);
 	}
