@@ -5,37 +5,66 @@ $H=getallheaders();
 
 $SIZE=300;
 
-$articletable="select 
-	* 
+$articletable="
+(select 
+	%s
+	id,
+	title,
+	body,
+	b1,
+	img1,
+	(select name from repo where id=d1) as type,
+	d2,
+	t1,
+	m1,
+	t10,t11,t12,t13,t14,
+	swf as video,
+	youtube,
+	facebook,
+	t6 as videocaption,
+	(select name from pm_ where id=m1) as category,
+	(select name_e from pm_ where id=m1) as slug,
+	(case when m2 is not null then (select name from pm_ where id=m2) else null end)  as category2,
+	(case when m2 is not null then (select name_e from pm_ where id=m2) else null end) as slug2,
+	extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,
+	a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,
+	extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday 
+from repo_n where cid=1 and flag=1%s) as t1,
+(select 
+	id as uid,
+	cid as typeid,
+	title as name,
+	t2 as profile,
+	img1 as icon 
+from repo_n where qid=2 and flag=1) as t2 
+where t1.d2=t2.uid";
+
+$commenttable="
+(select 
+	id,
+	comment,
+	userid,
+	(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,
+	to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,
+	extract(epoch from (now()-regitime))/60 as relativetime,
+	to_char(regitime,'MM月DD日 HH24時MI分') as date,
+	extract(dow from regitime) as weekday,
+	(select count(reaction) from u_reaction where reaction=1 and commentid=u_comment.id and flag=1) as good,
+	(select count(reaction) from u_reaction where reaction=2 and commentid=u_comment.id and flag=1) as bad,
+	(select n from (select commentid,count(commentid) as n from u_comment where commentid!=0 and flag=1 group by commentid) as t where t.commentid=u_comment.id) as reply
+	%s 
 from 
-	(select 
-		id,
-		title,
-		body,
-		b1,
-		img1,
-		(select name from repo where id=d1) as type,
-		d2,
-		t1,
-		swf as video,
-		t6 as videocaption,
-		img6 as videoimg,
-		(select name from pm_ where id=m1) as category,
-		(select name_e from pm_ where id=m1) as slug,
-		extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,
-		a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,
-		a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,
-		extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday 
-	from repo_n where cid=1 and flag=1) as t1,
-	(select 
-		id as uid,
-		cid as typeid,
-		title as name,
-		t2 as profile,
-		img1 as icon 
-	from repo_n where qid=2 and flag=1) as t2
-	where 
-		t1.d2=t2.uid";
+u_comment where %s) as t1,
+(select 
+	id as userid,
+	cid as typeid,
+	(select name from repo where id=cid) as type,
+	title as name,
+	t2 as profile,
+	img1 as icon 
+from repo_n where qid=2%s) as t2";
+
+$bookmarkfield="(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,";
 
 function check_token($h){
 	
@@ -58,7 +87,7 @@ function check_token($h){
 }
 function auth(){
 	
-	global $o,$H,$_SERVER;
+	global $o,$H,$_SERVER,$_GET,$_POST,$_FILES;
 	$token=check_token($H);
 
 	if(strlen($token["oautn_token"])>0){
@@ -72,7 +101,12 @@ function auth(){
 	$log["ACCESS_TOKEN"]=$token["oautn_token"];
 	$log["USERID"]=$f["id"];
 	$log["IP"]=$_SERVER['REMOTE_ADDR'];
+	$log["UA"]=$_SERVER['HTTP_USER_AGENT'];
 	$log["TIMESTAMP"]=date("Y-m-d H:i:s");
+	$log["REQUEST"]["GET"]=$_GET;
+	$log["REQUEST"]["POST"]=$_POST;
+	$log["REQUEST"]["FILES"]=$_FILES;
+	
 	
 	$out=print_r($log,true);
 	$fp=fopen("log.txt","a");
@@ -183,6 +217,14 @@ function check_passwd($passwd){
 		$err="パスワードは英数字で入力してください。";
 	}
 	return $err;
+}
+
+function get_videotype($v1,$v2,$v3){
+	if(strlen($v1)>0)$s="brightcove";
+	elseif(strlen($v2)>0)$s="youtube";
+	elseif(strlen($v3)>0)$s="facebook";
+	else $s="";
+	return $s;
 }
 
 ?>
