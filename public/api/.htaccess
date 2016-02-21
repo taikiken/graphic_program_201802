@@ -31,7 +31,7 @@ RewriteCond %{REQUEST_METHOD} POST
 RewriteRule ^v1/comments/article/([0-9]+) /api/json_commentpost.php?article_id=$1 [L,QSA]
 
 #Good Bad
-RewriteRule ^v1/comments/(bad|good)/([0-9]+) /api/json_commentreaction.php?comment_id=$2&reaction=$1 [L]
+RewriteRule ^v1/comments/(bad|like)/([0-9]+) /api/json_commentreaction.php?comment_id=$2&reaction=$1 [L]
 
 #Bookmark
 RewriteRule ^v1/articles/([0-9]+)/bookmark /api/json_bookmark.php?article_id=$1 [L,QSA]
@@ -50,12 +50,23 @@ RewriteRule ^v1/articles/home /api/json_articlelist.php?api=home [L,QSA]
 #USER
 RewriteRule ^v1/users/self/settings/account /api/json_useraccount.php [L]
 RewriteRule ^v1/users/self/settings/interest /api/json_usercategory.php [L]
-RewriteRule ^v1/users/self/notification /api/json_usernotification.php [L]
+RewriteRule ^v1/users/self/notifications/read /api/json_userread.php [L]
+RewriteRule ^v1/users/self/notifications/count /api/json_usernotificationcount.php [L]
+RewriteRule ^v1/users/self/notifications /api/json_usernotification.php [L]
 RewriteRule ^v1/users/self/activities /api/json_useractivity.php [L]
 RewriteRule ^v1/users/self /api/json_userdetails.php [L]
 RewriteRule ^v1/users/([0-9]+) /api/json_userdetails.php?userid=$1 [L]
+RewriteRule ^v1/users/email /api/json_useremail.php [L]
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^v1/users/ /api/json_userregister.php [L]
+RewriteCond %{REQUEST_METHOD} DELETE
+RewriteRule ^v1/users/ /api/json_userunregister.php [L]
 
+#CATEGORY
 RewriteRule ^v1/category /api/json_categorylist.php [L]
 
 #INITIALIZE
 RewriteRule ^v1/initialize /api/json_initialize.php [L]
+
+#LOGIN
+RewriteRule ^v1/sessions/ /api/json_login.php [L]
