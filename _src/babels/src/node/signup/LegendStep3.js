@@ -71,13 +71,25 @@ let Step3Form = React.createClass( {
     );
 
   },
+  // ---------------------------------------------------
+  // delegate
   componentDidMount: function() {
-    // this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
+    this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
   },
   componentWillUnMount: function() {
-    // this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
+    this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+  },
+  shouldComponentUpdate: function( nextProps, nextState ) {
+    return this.props.step === nextState.step;
+  },
+  // ---------------------------------------------------
+  stepChange: function( event:Object ):void {
+    this.updateStep( event.step );
+  },
+  updateStep: function( step:Number ):void {
+    this.setState( { step: step } );
   },
   changeBox: function( slug ) {
     let checkbox = ReactDOM.findDOMNode( this.refs[ slug ] );
@@ -140,24 +152,13 @@ export let LegendStep3 = React.createClass( {
 
     return (
       <div className="legend-container legend-container-3">
-        <Step3Form step={this.state.step} categories={this.props.categories} />
+        <Step3Form step={this.props.step} categories={this.props.categories} />
       </div>
     );
 
   },
   componentDidMount: function() {
-    this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
   },
   componentWillUnMount: function() {
-    this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
-  },
-  shouldComponentUpdate: function( nextProps, nextState ) {
-    return this.props.step === nextState.step;
-  },
-  stepChange: function( event:Object ):void {
-    this.updateStep( event.step );
-  },
-  updateStep: function( step:Number ):void {
-    this.setState( { step: step } );
   }
 } );

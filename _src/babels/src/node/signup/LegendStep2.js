@@ -146,22 +146,32 @@ let Step2Form = React.createClass( {
     );
 
   },
+  // -------------------------------------------------------
+  // delegate
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+    this.dispose();
   },
+  // -------------------------------------------------------
+  // custom method
 
+  // input changes
+  // password
   passwordChange: function( event ) {
     this.setState( {password: event.target.value} );
   },
+  // name
   nameChange: function( event ) {
     this.setState( {name: event.target.value} );
   },
+  // bio
   bioChange: function( event ) {
     this.setState( {bio: event.target.value} );
   },
+  // file
   pictureChange: function( event ) {
     console.log( 'pictureChange ', event );
     this.setState( {picture: event.target.value} );
@@ -180,6 +190,7 @@ let Step2Form = React.createClass( {
       }
     }
   },
+  // -------------------------------------------------------
   // thumbnail make
   // after picture change
   avatarLoad: function( event ) {
