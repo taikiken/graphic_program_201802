@@ -9,19 +9,53 @@ $o->connect();
 $sql="select id,name,yobi from pm_ where cid=20 and flag=1 and id<130 order by id desc";
 $o->query($sql);
 while($f=$o->fetch_array()){
-	$s=strlen($f["yobi"])>0?@explode(",",$f["yobi"]):array();
-	$s[]=$f["name"];
-	$r[]=array($f["id"],$s,$f["name"]);
+	$sw=strlen($f["yobi"])>0?@explode(",",$f["yobi"]):array();
+	$sw[]=$f["name"];
+	$r[]=array($f["id"],$sw,$f["name"]);
+	$R[]=$f["name"];
 }
 
-$xml=file_get_contents('http://www3.asahi.com/rss/Asahi-Undou/sokuhou.xml');
+function categorymatching($r,$k){
+	
+	$exword=$r;
+	$exword[]="スポーツ";
+	$exword[]="一般スポーツ";
+	$exword[]="その他";
+	$exword[]="ニュース";
+	$exword[]="国内・海外・その他";
+	$exword[]="格闘技";
+	$exword[]="陸上";
+	$exword[]="ウインタースポーツ";
+	
+	$k=explode(",",$k);
+	$w=array();
+	
+	for($i=0;$i<count($k);$i++){
+		$d=trim($k[$i]);
+		$w[]=$d;
+		for($j=0;$j<count($exword);$j++){
+			//echo sprintf("%s=%s\n",$d,$exword[$j]);
+			if($d==$exword[$j]){
+				array_pop($w);
+				break;
+			}
+		}
+	}
+	
+	return $w;
+	
+}
+
+//$xml=file_get_contents('http://www3.asahi.com/rss/Asahi-Undou/sokuhou.xml');
+$xml=file_get_contents('a.xml');
+
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	unset($s);
-		
+	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
 	$s["t9"]=$data["channel"]["item"][$i]["link"];
 	$s["t7"]=$data["channel"]["item"][$i]["guid"];
@@ -35,6 +69,13 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	if($data["channel"]["item"][$i]["enclosure"]){
 		$s["t30"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["url"];
 		$s["t1"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["caption"];
+	}
+	
+	$tag=categorymatching($R,$data["channel"]["item"][$i]["keyword"]);
+	if(count($tag)>0){
+		for($cnt=0;$cnt<count($tag);$cnt++){
+			$s["t1".$cnt]=$tag[$cnt];
+		}
 	}
 	
 	$sql=sprintf("select * from repo_n where t7='%s'",$data["channel"]["item"][$i]["guid"]);
@@ -65,7 +106,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
-			$s["id"]="(select max(id)+1 from repo_n)";
+			//$s["id"]="(select max(id)+1 from repo_n)";
 			
 			if(strlen($s["t30"])>0)$s["img1"]=outimg($s["t30"]);
 			splittime($s["m_time"],$s["u_time"]);
@@ -74,7 +115,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}
 }
 
-$sqla[]="select setval('repo_n_id_seq',(select max(id) from repo_n));";
+var_dump($s);
+
+//$sqla[]="select setval('repo_n_id_seq',(select max(id) from repo_n));";
 
 $sqla=implode("\n",$sqla);
 $o->query($sqla);
