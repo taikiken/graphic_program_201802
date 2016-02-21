@@ -101,7 +101,7 @@ let Step2Form = React.createClass( {
       <legend className="legend-step-2">
         {/* password */}
         <span className={'form-parts ' + errorClass('errorPassword')}>
-          <span className="setting-form-pw">
+          <span className="setting-form-pw form-input">
             <input
               type="password"
               placeholder="パスワードを入力"
@@ -114,7 +114,7 @@ let Step2Form = React.createClass( {
         </span>
         {/* name */}
         <span className={'form-parts ' + errorClass('errorName')}>
-          <span className="setting-form-name">
+          <span className="setting-form-name form-input">
             <input
               type="text"
               placeholder="ユーザー名を入力"
@@ -127,7 +127,7 @@ let Step2Form = React.createClass( {
         </span>
         {/* bio */}
         <span className="form-parts">
-          <span className="setting-form-job">
+          <span className="setting-form-job form-input">
             <input
               type="text"
               placeholder="肩書を入力 (任意)"
@@ -161,7 +161,7 @@ let Step2Form = React.createClass( {
               accept="image/*"
               value={this.state.picture}
               onChange={this.pictureChange}
-              className="setting-form-profile_picture"
+              className="setting-form-picture form-input"
             />
           </div>
         </div>
