@@ -7,7 +7,7 @@ $o->connect();
 
 $uid=auth();
 $commentid=$_REQUEST["comment_id"];
-$type=$_REQUEST["reaction"]=="good"?1:2;
+$type=$_REQUEST["reaction"]=="like"?1:2;
 $ermsg="";
 
 if($_SERVER["REQUEST_METHOD"]=="PUT"){
@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
 			}else{
-				$ermsg=sprintf("すでに%sされております。",$type==1?"good":"bad");
+				$ermsg=sprintf("すでに%sされております。",$type==1?"like":"bad");
 			}
 			
 		}else{
@@ -93,7 +93,7 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
 			}else{
-				$ermsg=sprintf("%sされておりません。",$type==1?"good":"bad");
+				$ermsg=sprintf("%sされておりません。",$type==1?"like":"bad");
 			}
 			
 		}else{

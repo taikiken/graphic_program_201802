@@ -51,11 +51,10 @@ if(strlen($uid)>0){
 }
 
 
-if(strlen($uid)>0){
-	/* まだ手をつけていない */
+if(strlen($uid)==0){
 	$sql="select id,name,name_e from pm_ where cid=20 and flag=1 order by n";
 }else{
-	$sql="select id,name,name_e from pm_ where cid=20 and flag=1 order by n";
+	$sql=sprintf("select id,name,name_e,n,1 as m from pm_ where id in (select categoryid from u_category where userid=%s and flag=1) and flag=1 union select id,name,name_e,n,2 as m from pm_ where cid=20 and flag=1 and id not in (select categoryid from u_category where userid=%s and flag=1) order by m,n",$uid,$uid);
 }
 
 $o->query($sql);
@@ -85,12 +84,12 @@ if(strlen($uid)>0){
 unset($p);
 
 $sql=sprintf("
-select 0 as h,t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid
+select 0 as h,t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,facebook,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid
  union 
-select 1 as h,t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=9 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid
+select 1 as h,t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=9 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,facebook,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid
  union 
-(select 2 as h,t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday, 1 as sort from repo_n where id not in (select d2 from repo_n where qid=7 and flag=1)) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid limit 10 offset 0) order by h,sort,relativetime",
-$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"");
+(select 2 as h,t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,facebook,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday, 1 as sort from repo_n where id not in (select d2 from repo_n where qid=7 and flag=1)) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid limit 10 offset 0) order by h,sort,relativetime",
+$uid!=""?sprintf($bookmarkfield,$uid):"",$uid!=""?sprintf($bookmarkfield,$uid):"",$uid!=""?sprintf($bookmarkfield,$uid):"");
 
 $hg=array("headline","pickup","latest");
 
@@ -125,8 +124,10 @@ for($i=0;$i<count($p);$i++){
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["original"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/raw/%s",$domain,$p[$i]["img1"]):"";
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["caption"]=checkstr($p[$i]["t1"],1);
 	
+	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["type"]=get_videotype($p[$i]["video"],$p[$i]["youtube"],$p[$i]["facebook"]);
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["url"]=strlen($p[$i]["video"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["video"]):"";
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["youtube"]=checkstr($p[$i]["youtube"],1);
+	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["facebook"]=checkstr($p[$i]["facebook"],1);
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["caption"]=checkstr($p[$i]["videocaption"],1);
 	
 	$s[$hg[$p[$i]["h"]]][$nm]["user"]["id"]=(int)$p[$i]["uid"];
@@ -146,25 +147,8 @@ for($i=0;$i<count($p);$i++){
 	
 	if($f["n"]>0){
 
-		$sql=sprintf("
-
-select t1.*,t2.*,(good+bad) as popular,%s from 
-
-	(select id,
-			pageid,
-			userid,
-			to_char(regitime,'YYYY-MM-DD HH24:MI:SS') as regitime,
-			extract(epoch from (now()-regitime)/60) as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday,
-			comment,
-			(select count(id) as n from u_reaction where commentid=u_comment.id and reaction=1 and flag=1) as good,
-			(select count(id) as n from u_reaction where commentid=u_comment.id and reaction=2 and flag=1) as bad 
-		from u_comment where pageid=%s and commentid=0 and flag=1) as t1,
-
-	(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon,(select name from repo where id=cid) as label from repo_n where qid=2 and flag=1) as t2 
-
-where t1.userid=t2.uid order by popular desc limit 6 offset 0",
-	
-$uid!=""?sprintf("(select id from u_reaction where userid=%s and commentid=t1.id and reaction=1 and flag=1) as isgood,(select id from u_reaction where userid=%s and commentid=t1.id and reaction=2 and flag=1) as isbad",$uid,$uid):"null as isgood,null as isbad",$p[$i]["id"]);
+		$sql=sprintf("select t1.*,t2.*,(good+bad+case when reply is null then 0 else reply end) as rank from %s where t1.userid=t2.userid order by rank desc limit 6 offset 0",
+		sprintf($commenttable,$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",sprintf("pageid=%s and commentid=0 and flag=1",$p[$i]["id"]),""));
 		
 		$o->query($sql);
 
@@ -172,11 +156,11 @@ $uid!=""?sprintf("(select id from u_reaction where userid=%s and commentid=t1.id
 
 		while($f=$o->fetch_array()){
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["id"]=(int)$f["id"];
-			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["date"]=str_replace(" ","T",$f["regitime"])."+09:00";
+			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["date"]=str_replace(" ","T",$f["isotime"]);
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["display_date"]=get_relativetime($f["relativetime"],$f["date"],$f["weekday"]);
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["body"]=mod_HTML($f["comment"],2);
-			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["is_like"]=strlen($f["isgood"])>0?true:false;
-			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["is_bad"]=strlen($f["isbad"])>0?true:false;
+			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["is_like"]=$f["isreaction"]!=1?false:true;
+			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["is_bad"]=$f["isreaction"]!=2?false:true;
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["like"]=(int)$f["good"];
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["bad"]=(int)$f["bad"];
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["url"]=sprintf("%s/%s/%s/comment/%s",$domain,"p",$p[$i]["id"],$f["id"]);
@@ -188,7 +172,7 @@ $uid!=""?sprintf("(select id from u_reaction where userid=%s and commentid=t1.id
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["type"]["id"]=(int)$f["typeid"];
-			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["type"]["label"]=$f["label"];
+			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["type"]["label"]=$f["type"];
 
 			$n++;
 		}

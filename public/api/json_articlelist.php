@@ -21,55 +21,26 @@ if($_REQUEST["api"]=="category"){
 	
 	if(!isset($_REQUEST["type"])){
 
-		$sql=sprintf("select t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n where cid=1 and flag=1%s) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by relativetime limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$c,$length,$offset);
+		$sql=sprintf("select t1.*,t2.* from %s order by relativetime limit %s offset %s",
+		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 		
 	}elseif($_REQUEST["type"]=="ranking"){
 		
-		$sql=sprintf("select rt1.n,rt2.* from u_ranking as rt1,(select %s* from (select t1.*,t2.* from (select id,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n where cid=1 and flag=1%s) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid) as t3) as rt2 where rt1.id=rt2.id order by n desc,relativetime limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$c,$length,$offset);
+		$sql=sprintf("select rt1.n,rt2.* from u_ranking as rt1,(select * from (select t1.*,t2.* from %s) as t3) as rt2 where rt1.id=rt2.id order by n desc,relativetime limit %s offset %s",
+		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 
 	}elseif($_REQUEST["type"]=="video"){
 
-		$sql=sprintf("select t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n where cid=1 and flag=1 and (t8 is not null or youtube is not null)%s) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by relativetime limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$c,$length,$offset);
+		$sql=sprintf("select t1.*,t2.* from %s order by relativetime limit %s offset %s",
+		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c." and (t8 is not null or youtube is not null or facebook is not null)"),$length,$offset);
 
-		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and t8 is not null or youtube is not null%s",$c);
+		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and (t8 is not null or youtube is not null or facebook is not null)%s",$c);
 	}
-	
-}elseif($_REQUEST["api"]=="self"){
-
-	/* まだ手を付けていない */
-	
-	$c=isset($_REQUEST["c"])?$_REQUEST["c"]:"home";
-	
-	if($c=="home"){
-
-		$sql=sprintf("select t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n where cid=1 and flag=1) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by relativetime limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$length,$offset);
 		
-		$nsql="select count(*) as n from repo_n where cid=1 and flag=1";
-
-	}elseif($c=="headline"){
-
-		$sql=sprintf("select t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by sort limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$length,$offset);
-		
-		$nsql="select count(*) as n from repo_n where cid=8 and flag=1";
-
-	}elseif($c=="pickup"){
-
-		$sql=sprintf("select t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=9 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by sort limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$length,$offset);
-		
-		$nsql="select count(*) as n from repo_n where cid=9 and flag=1";
-		
-	}
-	
 }elseif($_REQUEST["api"]=="search"){
 
 	$q=str_replace(array(" ","　","|","、"),",",trim(strip_tags($_REQUEST["q"])));
@@ -78,40 +49,43 @@ if($_REQUEST["api"]=="category"){
 		$q[$i]=sprintf("txt like '%s%s%s'","%",$q[$i],"%");
 	}
 	$q=implode(" and ",$q);
+	$c="";
 	
-	$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n where cid=1 and flag=1) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid) as st02 where st01.id=st02.id order by relativetime limit %s offset %s",$q,$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$length,$offset);
+	$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select t1.*,t2.* from %s) as st02 where st01.id=st02.id order by relativetime limit %s offset %s",	
+	$q,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+	
 	$nsql=sprintf("select count(*) as n from (select id from u_index where %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
 
-}elseif($_REQUEST["api"]=="home"){
+}elseif($_REQUEST["api"]=="home"||$_REQUEST["api"]=="self"){
 
-	$c=isset($_REQUEST["c"])?$_REQUEST["c"]:"home";
+	$cx=isset($_REQUEST["c"])?$_REQUEST["c"]:"home";
 	
-	if($c=="home"){
+	if($cx=="home"){
 
-		$sql=sprintf("select t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n where cid=1 and flag=1) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by relativetime limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$length,$offset);
+		$sql=sprintf("select t1.*,t2.* from %s order by relativetime limit %s offset %s",
+		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 
 		$nsql="select count(*) as n from repo_n where cid=1 and flag=1";
 
-	}elseif($c=="headline"){
+	}elseif($cx=="headline"){
 
-		$sql=sprintf("select t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by sort limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$length,$offset);
+		$sql=sprintf("select rt1.*,rt2.* from (select d2,n as sort from repo_n where cid=8 and flag=1) as rt1,(select t1.*,t2.* from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",
+		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 
 		$nsql="select count(*) as n from repo_n where cid=8 and flag=1";
 
-	}elseif($c=="pickup"){
+	}elseif($cx=="pickup"){
 
-		$sql=sprintf("select t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=9 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid order by sort limit %s offset %s",
-		$uid!=""?sprintf(",(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$length,$offset);
+		$sql=sprintf("select rt1.*,rt2.* from (select d2,n as sort from repo_n where cid=9 and flag=1) as rt1,(select t1.*,t2.* from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",
+		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 
 		$nsql="select count(*) as n from repo_n where cid=9 and flag=1";
 
 	}
 }elseif($_REQUEST["api"]=="bookmark"){
 	
-		$sql=sprintf("select bm01.*,bm02.orders from (select t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n where cid=1 and flag=1 and id in (select pageid from u_bookmark where userid=%s and flag=1)) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid) as bm01,(select pageid,regitime as orders from u_bookmark where userid=%s and flag=1) as bm02 where bm01.id=bm02.pageid order by orders desc limit %s offset %s",
-		$uid!=""?sprintf("(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,",$uid):"",$uid,$uid,$length,$offset);
+		$sql=sprintf("select rt1.*,rt2.* from (select pageid,regitime from u_bookmark where userid=%s and flag=1) as rt1,(select t1.*,t2.* from %s) as rt2 where rt1.pageid=rt2.id order by regitime desc limit %s offset %s",
+		$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 		
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and id in(select pageid from u_bookmark where userid=%s and flag=1)",$uid);
 }
@@ -119,7 +93,6 @@ if($_REQUEST["api"]=="category"){
 $o->query($nsql);
 $f=$o->fetch_array();
 $count=$f["n"];
-
 
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
@@ -132,18 +105,23 @@ for($i=0;$i<count($p);$i++){
 	$s[$i]["description"]=get_summary($p[$i]["b1"],$p[$i]["body"]);
 	$s[$i]["category"]["label"]=$p[$i]["category"];
 	$s[$i]["category"]["slug"]=$p[$i]["slug"]; 
+	$s[$i]["category2"]["label"]=$p[$i]["category2"];
+	$s[$i]["category2"]["slug"]=$p[$i]["slug2"]; 
 	$s[$i]["url"]=sprintf("%s/%s/%s",$domain,"p",$p[$i]["id"]);
 	$s[$i]["is_bookmarked"]=strlen($p[$i]["is_bookmark"])>0?true:false;
-	$s[$i]["media_type"]=(strlen($p[$i]["video"])>0||strlen($p[$i]["youtube"])>0)?"video":"image";
-
+	
+	$video=get_videotype($p[$i]["video"],$p[$i]["youtube"],$p[$i]["facebook"]);
+	$s[$i]["media_type"]=(strlen($video)>0)?"video":"image";
 	$s[$i]["media"]["images"]["thumbnail"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$domain,$p[$i]["img1"]):"";
 	$s[$i]["media"]["images"]["medium"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$domain,$p[$i]["img1"]):"";
 	$s[$i]["media"]["images"]["large"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["img1"]):"";
 	$s[$i]["media"]["images"]["original"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/raw/%s",$domain,$p[$i]["img1"]):"";
 	$s[$i]["media"]["images"]["caption"]=checkstr($p[$i]["t1"],1);
 	
+	$s[$i]["media"]["video"]["type"]=$video;
 	$s[$i]["media"]["video"]["url"]=strlen($p[$i]["video"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["video"]):"";
 	$s[$i]["media"]["video"]["youtube"]=checkstr($p[$i]["youtube"],1);
+	$s[$i]["media"]["video"]["facebook"]=checkstr($p[$i]["facebook"],1);
 	$s[$i]["media"]["video"]["caption"]=checkstr($p[$i]["videocaption"],1);
 	
 	$s[$i]["user"]["id"]=(int)$p[$i]["uid"];
@@ -159,29 +137,12 @@ for($i=0;$i<count($p);$i++){
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
-	$s[$i]["comments_count"]=$f["n"];
+	$s[$i]["comments_count"]=(int)$f["n"];
 	
 	if($f["n"]>0){
 
-		$sql=sprintf("
-
-select t1.*,t2.*,(good+bad) as popular,%s from 
-
-	(select id,
-			pageid,
-			userid,
-			to_char(regitime,'YYYY-MM-DD HH24:MI:SS') as regitime,
-			extract(epoch from (now()-regitime)/60) as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday,
-			comment,
-			(select count(id) as n from u_reaction where commentid=u_comment.id and reaction=1 and flag=1) as good,
-			(select count(id) as n from u_reaction where commentid=u_comment.id and reaction=2 and flag=1) as bad 
-		from u_comment where pageid=%s and commentid=0 and flag=1) as t1,
-
-	(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon,(select name from repo where id=cid) as label from repo_n where qid=2 and flag=1) as t2 
-
-where t1.userid=t2.uid order by popular desc limit 6 offset 0",
-	
-$uid!=""?sprintf("(select id from u_reaction where userid=%s and commentid=t1.id and reaction=1 and flag=1) as isgood,(select id from u_reaction where userid=%s and commentid=t1.id and reaction=2 and flag=1) as isbad",$uid,$uid):"null as isgood,null as isbad",$p[$i]["id"]);
+		$sql=sprintf("select t1.*,t2.*,(good+bad+case when reply is null then 0 else reply end) as rank from %s where t1.userid=t2.userid order by rank desc limit 6 offset 0",
+		sprintf($commenttable,$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",sprintf("pageid=%s and commentid=0 and flag=1",$p[$i]["id"]),""));
 		
 		$o->query($sql);
 
@@ -189,12 +150,12 @@ $uid!=""?sprintf("(select id from u_reaction where userid=%s and commentid=t1.id
 
 		while($f=$o->fetch_array()){
 			$s[$i]["comments_popular"][$n]["id"]=(int)$f["id"];
-			$s[$i]["comments_popular"][$n]["date"]=str_replace(" ","T",$f["regitime"])."+09:00";
+			$s[$i]["comments_popular"][$n]["date"]=str_replace(" ","T",$f["isotime"]);
 			$s[$i]["comments_popular"][$n]["display_date"]=get_relativetime($f["relativetime"],$f["date"],$f["weekday"]);
 			$s[$i]["comments_popular"][$n]["body"]=mod_HTML($f["comment"],2);
 			$s[$i]["comments_popular"][$n]["body_escape"]=mod_HTML($f["comment"]);
-			$s[$i]["comments_popular"][$n]["is_like"]=strlen($f["isgood"])>0?true:false;
-			$s[$i]["comments_popular"][$n]["is_bad"]=strlen($f["isbad"])>0?true:false;
+			$s[$i]["comments_popular"][$n]["is_like"]=$f["isreaction"]!=1?false:true;
+			$s[$i]["comments_popular"][$n]["is_bad"]=$f["isreaction"]!=2?false:true;
 			$s[$i]["comments_popular"][$n]["like"]=(int)$f["good"];
 			$s[$i]["comments_popular"][$n]["bad"]=(int)$f["bad"];
 			$s[$i]["comments_popular"][$n]["url"]=sprintf("%s/%s/%s/comment/%s",$domain,"p",$p[$i]["id"],$f["id"]);
@@ -206,7 +167,7 @@ $uid!=""?sprintf("(select id from u_reaction where userid=%s and commentid=t1.id
 			$s[$i]["comments_popular"][$n]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			
 			$s[$i]["comments_popular"][$n]["user"]["type"]["id"]=(int)$f["typeid"];
-			$s[$i]["comments_popular"][$n]["user"]["type"]["label"]=$f["label"];
+			$s[$i]["comments_popular"][$n]["user"]["type"]["label"]=$f["type"];
 
 			$n++;
 		}
