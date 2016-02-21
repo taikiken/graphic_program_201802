@@ -27,7 +27,7 @@ let Step1Form = React.createClass( {
 
     return {
       email: '',
-      step: this.props.step,
+      step: 1,
       error: {
         email: false
       }
@@ -56,8 +56,10 @@ let Step1Form = React.createClass( {
 
   },
   componentDidMount: function() {
+    this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
   },
   componentWillUnMount: function() {
+    this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
   },
   // ---------------------------------------------------
   // input onchange
@@ -73,13 +75,23 @@ let Step1Form = React.createClass( {
     return this.state.error[ which ] ? 'error' : '';
   },
   // ---------------------------------------------------
+  // submit click 通知
+  submitHandler: function( event:Object ) {
+    let step = event.step;
+    if ( step === this.props.step ) {
+      this.prepareNext();
+    }
+  },
   // next button click
-  nextHandler: function( event ) {
+  nextHandler: function( event:Event ) {
     event.preventDefault();
 
+    this.prepareNext();
+
+  },
+  prepareNext: function():void {
     // 遷移テスト
     this.next();
-
   },
   next: function() {
     // next step
@@ -154,7 +166,7 @@ export let LegendStep1 = React.createClass( {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
   },
   shouldComponentUpdate: function( nextProps, nextState ) {
-    return this.state.step !== nextState.step;
+    return this.props.step === nextState.step;
   },
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );

@@ -14,10 +14,7 @@
 import {SignupStatus} from '../../event/SignupStatus';
 
 let React = self.React;
-//
-//let Step3List = React.createClass( {
-//
-//} );
+let ReactDOM = self.ReactDOM;
 
 let Step3Form = React.createClass( {
   propTypes: {
@@ -28,7 +25,7 @@ let Step3Form = React.createClass( {
     this.status = SignupStatus.factory();
 
     return {
-      email: '',
+      categories: this.props.categories,
       step: this.props.step,
       error: {
         email: false
@@ -37,16 +34,26 @@ let Step3Form = React.createClass( {
   },
   render: function() {
 
+    var _this = this;
+
     return (
       <legend className="legend-step-3">
         <div className="setting-form-interest">
           <ul className="setting-form-interest-list">
             {
-              this.props.categories.map( function( category, i ) {
+              this.state.categories.map( function( category, i ) {
+
+                console.log( 'checkedValue ', category.slug, _this.state[category.slug] );
+                var boundBox = _this.changeBox.bind(_this, category.slug);
 
                 return (
                   <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug }>
-                    <input type="checkbox" name={category.slug} id={'interest-item-' + category.slug} />
+                    <input
+                      type="checkbox"
+                      name="interest[]"
+                      id={'interest-item-' + category.slug}
+                      defaultValue={category.id}
+                    />
                     <label htmlFor={'interest-item-' + category.slug} className="setting-form-interest-title">
                       <span>{category.label}</span>
                     </label>
@@ -57,18 +64,25 @@ let Step3Form = React.createClass( {
             }
           </ul>
         </div>
+        <span className="setting-form-submit mod-btnB01">
+          <input type="button" value="登録する" onClick={this.nextHandler}/>
+        </span>
       </legend>
     );
 
   },
   componentDidMount: function() {
-    this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
+    // this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
+    this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
   },
   componentWillUnMount: function() {
-    this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
+    // this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
+    this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
   },
-  emailChange: function( event ) {
-    this.setState( {email: event.target.value} );
+  changeBox: function( slug ) {
+    let checkbox = ReactDOM.findDOMNode( this.refs[ slug ] );
+    console.log( 'checkbox ', checkbox.checked, 'slug: ', slug );
+    this.setState( {slug: checkbox.checked} );
   },
   /**
    * エラーがあるかを返します
@@ -78,8 +92,24 @@ let Step3Form = React.createClass( {
   hasError: function( which:string ):string {
     return this.state.error[ which ] ? 'error' : '';
   },
-  clickHandler: function( event ) {
+  // ---------------------------------------------------
+  // submit click 通知
+  submitHandler: function( event:Object ) {
+    let step = event.step;
+    if ( step === this.props.step ) {
+      this.prepareNext();
+    }
+  },
+  // next button click
+  nextHandler: function( event:Event ) {
     event.preventDefault();
+
+  },
+  prepareNext: function():void {
+    // 遷移テスト
+    this.next();
+  },
+  next: function() {
 
   },
   done: function() {
@@ -90,12 +120,6 @@ let Step3Form = React.createClass( {
   },
   dispose: function() {
 
-  },
-  stepChange: function( event:Object ):void {
-    this.updateStep( event.step );
-  },
-  updateStep: function( step:Number ):void {
-    this.setState( { step: step } );
   }
 } );
 
@@ -108,7 +132,7 @@ export let LegendStep3 = React.createClass( {
     this.status = SignupStatus.factory();
 
     return {
-      step: this.props.step,
+      step: 1,
       email: ''
     };
   },
@@ -127,16 +151,13 @@ export let LegendStep3 = React.createClass( {
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
   },
-  //shouldComponentUpdate: function( nextProps, nextState ) {
-  //  return this.state.step !== nextState.step;
-  //},
+  shouldComponentUpdate: function( nextProps, nextState ) {
+    return this.props.step === nextState.step;
+  },
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );
   },
   updateStep: function( step:Number ):void {
     this.setState( { step: step } );
-  },
-  updateEmail: function( email:string ):void {
-    this.setState( { email: email } );
   }
 } );

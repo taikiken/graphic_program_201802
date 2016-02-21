@@ -123,6 +123,13 @@ export class Empty {
     return '/assets/images/common/thumb-user-empty.png';
   }
   /**
+   * ユーザー登録 sample avatar
+   * @return {string} sample avatar image path
+   */
+  static get SETTING_AVATAR():string {
+    return '/assets/images/setting/thumb-avatar.png';
+  }
+  /**
    * hero-slider カバーグラデーション画像
    * @return {string} hero-slider カバーグラデーション画像パスを返します
    */

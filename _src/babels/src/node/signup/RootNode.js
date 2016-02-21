@@ -89,12 +89,7 @@ export let RootNode = React.createClass( {
   },
   submitHandler: function( event:Event ):void {
     event.preventDefault();
-
-    if ( this.state.step === 3 ) {
-      // last step
-      // 登録処理開始
-      console.log( '開始' );
-    }
+    this.status.submit( this.state.step );
   },
   requestDone: function( event ):void {
 

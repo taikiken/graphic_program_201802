@@ -18,6 +18,9 @@ import {View} from '../View';
 import {Message} from '../../app/const/Message';
 import {Url} from '../../app/const/Url';
 
+// util
+import {Loc} from '../../util/Loc';
+
 // action
 import {Categories} from '../../action/categories/Categories';
 
@@ -70,6 +73,9 @@ export class SignupWizard extends View {
     this._step = 1;
 
     this._boundHash = null;
+
+    // location hash なしにする
+    Loc.hash = '';
   }
   /**
    * Ajax request を開始します

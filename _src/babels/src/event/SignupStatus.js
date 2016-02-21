@@ -38,18 +38,25 @@ export class SignupStatus extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * 現在の step を通知
-   * @param step
+   * @param {Number} step 現在の step No.
    */
   step( step:Number ):void {
     this.dispatch( { type: SignupStatus.SIGNUP_STEP, step: step} );
   }
-
   /**
    * 入力 email が二重登録で無い時に call します
    * @param {string} email 入力された email
    */
   email( email:string ):void {
     this.dispatch( { type: SignupStatus.SIGNUP_EMAIL, email: email} );
+  }
+
+  /**
+   * submit を通知します
+   * @param {Number} step 現在の step No.
+   */
+  submit( step:Number ):void {
+    this.dispatch( { type: SignupStatus.SIGNUP_SUBMIT, step: step} );
   }
   // ---------------------------------------------------
   //  CONST
@@ -64,10 +71,16 @@ export class SignupStatus extends EventDispatcher {
   /**
    * SIGNUP_EMAIL
    * @return {string} signupEmail を返します
-   * @constructor
    */
   static get SIGNUP_EMAIL():string {
     return 'signupEmail';
+  }
+  /**
+   * SIGNUP_SUBMIT
+   * @return {string} signupSubmit を返します
+   */
+  static get SIGNUP_SUBMIT():string {
+    return 'signupSubmit';
   }
   // ---------------------------------------------------
   //  static method
