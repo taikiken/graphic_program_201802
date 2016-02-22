@@ -118,6 +118,51 @@ export class Url {
 
   }
   /**
+   * step number から hash を取得します
+   * @param {Number} step wizard step number, 現在位置
+   * @return {string} location hash にセットする文字列を返します
+   */
+  static signupHash( step:Number = 1 ):string {
+
+    switch ( step ) {
+
+      case 2:
+        return `account`;
+
+      case 3:
+        return `interest`;
+
+      case 1:
+        return '';
+
+      default:
+        console.warn( `signup illegal value: ${step}, instead use default` );
+        return '';
+
+    }
+  }
+  static signupStepByHash( hash:string = '' ):Number {
+
+    switch ( hash ) {
+
+      case '#account':
+        return 2;
+
+      case '#interest':
+        return 3;
+
+      case '#':
+      case '':
+        return 1;
+
+      default:
+        console.warn( `signup illegal value: ${hash}, instead use default` );
+        return 1;
+
+    }
+
+  }
+  /**
    * login url
    * @return {string} login url を返します
    */

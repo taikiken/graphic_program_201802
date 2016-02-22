@@ -123,6 +123,10 @@ import {ViewNews} from './view/home/ViewNews';
 import {ViewRanking} from './view/sidebar/ViewRanking';
 import {ViewVideos} from './view/sidebar/ViewVideos';
 
+// ----------- users
+// signup
+import {SignupWizard} from './view/signup/SignupWizard';
+
 // -------------------------------------
 // ui
 import {Receiver} from './ui/Receiver';
@@ -239,6 +243,9 @@ var UT = {
       ViewHeadline: ViewHeadline,
       ViewPickup: ViewPickup,
       ViewNews: ViewNews
+    },
+    signup: {
+      SignupWizard: SignupWizard
     }
   },
   model: {

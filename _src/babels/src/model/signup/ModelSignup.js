@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/09 - 14:45
+ * @date 2016/02/22 - 14:37
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -12,27 +12,44 @@
 'use strict';
 
 import {Model} from '../Model';
-import {Categories} from '../../action/categories/Categories';
-import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
 import {Result} from '../../data/Result';
+import {Signup} from '../../action/signup/Signup';
 
 /**
- * カテゴリー一覧
+ * signup action を実行します
  */
-export class ModelCategories extends Model {
+export class ModelSignup extends Model {
   /**
-   * カテゴリー一覧を取得し callback を発火します
-   * @param option
+   * signup action を実行します
+   * @param {FormData} [formData=null] リクエスト FormData
+   * @param {Object} [option={}] optional event handler
    */
-  constructor( option:Object = {} ) {
+  constructor( formData:FormData = null, option:Object = {} ) {
     super( option );
-    this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
+    this._data = formData;
+    this._action = new Signup( formData, this.done.bind( this ), this.fail.bind( this ) );
+  }
+  /**
+   * @return {FormData|*} 設定された FormData を返します
+   */
+  get data():FormData {
+    return this._action.data;
+  }
+  /**
+   * FormData を設定します
+   * @param {FormData} formData 設定する FormData
+   */
+  set data( formData:FormData ):void {
+    this._action.data = formData;
   }
   /**
    * Ajax request を開始します
    */
   start():void {
 
+    if ( this.data === null ) {
+      throw new Error( 'form data set first.' );
+    }
     this.action.start();
 
   }
@@ -48,13 +65,13 @@ export class ModelCategories extends Model {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[MODEL_CATEGORIES:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[SIGNUP:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( Model.UNDEFINED_ERROR, error );
 
     } else {
 
       // 成功 callback
-      this.executeSafely( Model.COMPLETE, new CategoriesDae( response ) );
+      this.executeSafely( Model.COMPLETE, result );
 
     }
 

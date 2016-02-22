@@ -17,6 +17,7 @@ import {Index} from './page/Index';
 import {Category} from './page/Category';
 import {Single} from './page/Single';
 import {Search} from './page/Search';
+import {Signup} from './page/Signup';
 
 import {SearchFrom} from './header/SearchFrom';
 
@@ -57,6 +58,32 @@ export class Page {
     router.on( Router.SINGLE, Page.single );
     // search
     router.on( Router.SEARCH, Page.search );
+
+    // 管理系
+    // signup
+    router.on( Router.SIGNUP, Page.signup );
+    // login
+    router.on( Router.LOGIN, Page.login );
+    // logout
+    router.on( Router.LOGOUT, Page.logout );
+    // reset_password
+    router.on( Router.RESET_PASSWORD, Page.password );
+    // reset_password/resetting
+    router.on( Router.RESET_PASSWORD_RESETTING, Page.passwordResetting );
+    // mypage
+    router.on( Router.MYPAGE, Page.mypage );
+    // mypage/activities
+    router.on( Router.MYPAGE_ACTIVITIES, Page.activities );
+    // notifications
+    router.on( Router.NOTIFICATIONS, Page.notifications );
+    // setting
+    router.on( Router.SETTING, Page.settings );
+    // setting/interest
+    router.on( Router.SETTING_INTEREST, Page.interest );
+    // setting/social
+    router.on( Router.SETTING_SOCIAL, Page.social );
+    // setting/deactivate
+    router.on( Router.SETTING_DEACTIVATE, Page.deactivate );
 
     router.route();
 
@@ -109,8 +136,12 @@ export class Page {
     Search.start( event.keyword );
 
   }
+  /**
+   * signup page
+   */
   static signup():void {
-
+    console.log( 'signup page start' );
+    Signup.start();
   }
   static login():void {
 

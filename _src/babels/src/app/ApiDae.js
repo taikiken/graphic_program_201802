@@ -18,15 +18,15 @@ import {Type} from '../net/types/Type';
 import {Permalink} from '../net/types/Permalink';
 import {Queries} from '../net/types/Queries';
 import {Query} from '../net/types/Query';
-import {Loc} from '../util/Loc';
+// mport {Loc} from '../util/Loc';
 
 // test mode 時に api アクセス先を 0.0.0.0: + (port +2) へ
 // develop mode
 // - IP: 52.69.203.137
 // - HOST: undotsushin.com
-let apiRoot = ( port:string ) => {
+let apiRoot = () => {
 
-  let n = parseInt( port, 10 );
+  // let n = parseInt( port, 10 );
 
   switch ( Env.mode ) {
 
@@ -54,7 +54,7 @@ let apiRoot = ( port:string ) => {
 let buildPath = () => {
   // 共通パス
   // 先頭 protocol + host 部分を develop / production で変える
-  let API_PATH = apiRoot( Loc.port ) + '/api/v1';
+  let API_PATH = apiRoot() + '/api/v1';
 
   return {
     // --------------------------------------------
@@ -72,6 +72,13 @@ let buildPath = () => {
     ),
     'users:logout': new Types(
       new Type( `${API_PATH}/sessions`, 'DELETE' ),
+      new Permalink(),
+      new Queries()
+    ),
+
+    // email 登録済み? を調べる
+    'users:email': new Types(
+      new Type( `${API_PATH}/users/email`, 'POST' ),
       new Permalink(),
       new Queries()
     ),

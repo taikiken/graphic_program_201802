@@ -143,7 +143,7 @@ let CommentForm = React.createClass( {
             <i className="comment-form-user"><img src={picture} alt=""/></i>
             <div className="comment-form-comment-outer">
               <div className="comment-form-comment-inner">
-                <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" />
+                <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" autoFocus="true" />
               </div>
             </div>
             <div className="comment-form-submit">

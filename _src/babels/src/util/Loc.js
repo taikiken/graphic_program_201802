@@ -39,8 +39,10 @@ export class Loc {
     return self.location.href;
 
   }
+  static set current( href:string ):void {
+    self.location.href = href;
+  }
   /**
-   *
    * @return {string} location.pathname(urlからprotocol+hostを除く)を返します
    */
   static get path():string {
@@ -49,13 +51,35 @@ export class Loc {
 
   }
   /**
-   *
+   * location.pathname をセットします
+   * @param {string} path 設定する pathname
+   */
+  static set path( path:string ):void {
+    self.location.pathname = path;
+  }
+  /**
    * @return {string} location.hashを返します
    */
   static get hash():string {
 
     return self.location.hash;
 
+  }
+  /**
+   * location.hashを設定します
+   * @param {string} hash 設定する hash
+   */
+  static set hash( hash:string ):void {
+    self.location.hash = hash;
+  }
+  static hashClean():void {
+    Loc.hash = '';
+    let path = Loc.path;
+    let hashIndex = path.lastIndexOf( '#' );
+
+    if ( hashIndex !== -1 ) {
+      Loc.path = path.substring( 0, hashIndex - 1 );
+    }
   }
   /**
    * url の query 文字列
@@ -75,7 +99,6 @@ export class Loc {
     // host + port number
     return self.location.host;
   }
-
   /**
    *
    * @return {string} host name だけを返します
@@ -84,7 +107,6 @@ export class Loc {
     // host only
     return self.location.hostname;
   }
-
   /**
    *
    * @return {string} port number を返します
