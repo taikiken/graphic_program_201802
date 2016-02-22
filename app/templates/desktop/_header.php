@@ -20,7 +20,14 @@
   <script src="/assets/js/bundle/main.bundle.js"></script>
 </head>
 <body>
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.3";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 <div class="whole">
 
   <header class="head-sec">
@@ -28,14 +35,7 @@
         <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
         <aside class="f-right clearfix">
-          <div id="head-search-container" class="head-search">
-<?php if (0) : ?>
-            <form action="">
-              <input id="head-search" nama="head-search" type="text" placeholder="記事を探す">
-              <input type="submit" value="">
-            </form>
-<?php endif;// JS output ?>
-          </div><!-- /.head-search -->
+          <div id="head-search-container" class="head-search"></div><!-- /.head-search -->
 
           <div id="user-profile-container"></div><!--/header-user-->
 

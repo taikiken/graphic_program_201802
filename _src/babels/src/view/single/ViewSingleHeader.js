@@ -21,6 +21,7 @@ import {SingleDae} from '../../dae/SingleDae';
 
 // app
 import {User} from '../../app/User';
+import {MediaType} from '../../app/const/MediaType';
 
 // model
 import {Model} from '../../model/Model';
@@ -129,12 +130,12 @@ export class ViewSingleHeader extends View {
         let img;
 
         // media type で image / video  処理分岐
-        if ( single.mediaType === 'image' ) {
+        if ( single.mediaType === MediaType.IMAGE ) {
 
           // image
           img = new ViewSingleImage( imageNode, single.media.images );
 
-        } else if ( single.mediaType === 'video' ) {
+        } else if ( single.mediaType === MediaType.VIDEO ) {
 
           let mediaDae = single.media;
           if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube) ) {

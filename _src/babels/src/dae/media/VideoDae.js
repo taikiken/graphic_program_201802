@@ -53,8 +53,15 @@ export class VideoDae {
     return this.video.youtube;
   }
   /**
+   * Facebook 動画URL
+   * @return {string} Facebook article.media.video.facebook 動画URL を返します
+   */
+  get facebook():string {
+    return this.video.facebook;
+  }
+  /**
    * 動画タイプ
-   * @return {string}
+   * @return {string} article.media.video.type 動画タイプ を返します
    */
   get type():string {
     return this.video.type;

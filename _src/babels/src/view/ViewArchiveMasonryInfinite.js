@@ -14,6 +14,7 @@
 // app
 import {Empty} from '../app/const/Empty';
 import {User} from '../app/User';
+import {MediaType} from '../app/const/MediaType';
 
 // view
 import {View} from './View';
@@ -532,14 +533,14 @@ export class ViewArchiveMasonryInfinite extends View {
         let mediaType = this.props.mediaType;
 
         // media type で thumbnail 切替
-        if ( mediaType === 'image' ) {
+        if ( mediaType === MediaType.IMAGE ) {
           // type: image
           return (
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img src={this.props.thumbnail} alt={this.props.title}/>
             </figure>
           );
-        } else if ( mediaType === 'video' ) {
+        } else if ( mediaType === MediaType.VIDEO ) {
           // type: video
           return (
             <figure className={'post-thumb post-thumb-' + mediaType}>

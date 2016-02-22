@@ -306,13 +306,17 @@ let Step2Form = React.createClass( {
       let file = files[ 0 ];
 
       if ( file.type.match( /image.*/ ) ) {
-        // image file
+        // image file,
+        // input type files の drop へ event を送る
         this.setState( { entered: false } );
+
       } else {
+        // illegal stop all
         event.preventDefault();
         this.setState( { entered: false } );
       }
     } else {
+      // illegal stop all
       event.preventDefault();
       this.setState( { entered: false } );
     }

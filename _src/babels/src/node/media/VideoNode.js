@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Content} from '../../app/const/Content';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -98,7 +100,7 @@ export let VideoNode = React.createClass( {
     return (
       <div className="post-kv post-video-kv">
         <div className="video-container">
-          <video poster={poster} width="710" height="400" preload="none" controls ref="video">
+          <video poster={poster} width={Content.WIDTH} height={Content.HD_HEIGHT} preload="none" controls ref="video">
             <source src={video.url} type="video/mp4"/>
           </video>
           <VideoPlay

@@ -13,13 +13,16 @@
 
 // view
 import {View} from '../View';
-import {Empty} from '../../app/const/Empty';
+// data
 import {Safety} from '../../data/Safety';
-
+// dae
 import {MediaDae} from '../../dae/MediaDae';
-
 // node
 import {VideoNode} from '../../node/media/VideoNode';
+// app
+import {Empty} from '../../app/const/Empty';
+import {VideoType} from '../../app/const/VideoType';
+import {Content} from '../../app/const/Content';
 
 // React
 let React = self.React;
@@ -75,6 +78,9 @@ export class ViewSingleVideo extends View {
       render: function() {
 
         let media = this.state.media;
+        /*
+        // 2016-02-22 video.type 追加
+        // method 変更する
         let yt = media.video.youtube;
 
         if ( typeof yt !== 'undefined' && yt !== '' && yt.length > 10 ) {
@@ -86,6 +92,25 @@ export class ViewSingleVideo extends View {
 
           // HTML5 video tag
           return this.video( media );
+
+        }
+        */
+        let type = media.type;
+
+        switch ( type ) {
+
+          case VideoType.BRIGHTCOVE:
+            return this.video( media );
+
+          case VideoType.YOUTUBE:
+            return this.youtube( media );
+
+          case VideoType.FACEBOOK:
+            return this.facebook( media );
+
+          default:
+            console.warn(`illegal type. ${type}`);
+            break;
 
         }
 
@@ -119,8 +144,17 @@ export class ViewSingleVideo extends View {
 
         return (
           <div className="post-kv">
-            <iframe src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0`} width="710" height="400" frameBorder="0" allowFullScreen></iframe>
+            <iframe src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0`} width={Content.WIDTH} height={Content.HD_HEIGHT} frameBorder="0" allowFullScreen></iframe>
           </div>
+        );
+      },
+      facebook: function( media:MediaDae ) {
+        // <div class="fb-video" data-href="{your-video-post-url}"
+        // data-allowfullscreen="true" data-width="500"></div>
+
+        let video = media.video;
+        return (
+          <div className="fb-video" data-href={video.facebook} data-allowfullscreen="true" data-width={Content.WIDTH}></div>
         );
       },
       updateImage: function( media ) {
