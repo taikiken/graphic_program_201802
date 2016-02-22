@@ -13,26 +13,43 @@
 
 import {Safety} from './Safety';
 
+/**
+ * form error
+ */
 export class ErrorMessage {
-  constructor( error:boolean = false, message:string = '' ) {
-    this._error = error;
+  /**
+   * form error
+   * @param {string} message 初期設定エラーメッセージ
+   */
+  constructor( message:string = '' ) {
     this._message = message;
   }
+
+  /**
+   * エラー有無
+   * @return {boolean} エラー有無を返します。 エラーあり: true
+   */
   get error():boolean {
-    return this._error;
+    return this._message !== '';
   }
-  set error( error:boolean ):void {
-    this._error = !!error;
-  }
+  /**
+   * エラーメッセージ
+   * @return {string|*} エラーメッセージ を返します
+   */
   get message():string {
     return this._message;
   }
+  /**
+   * エラーメッセージ を設定します
+   * @param {string} message エラーメッセージ
+   */
   set message( message:string ):void {
     this._message = Safety.string( message, '' );
   }
-
+  /**
+   * エラーなしにします
+   */
   reset():void {
-    this.error = false;
     this.message = '';
   }
 }

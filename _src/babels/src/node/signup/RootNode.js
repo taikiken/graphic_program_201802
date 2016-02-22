@@ -20,6 +20,7 @@ import {LegendStep3} from './LegendStep3';
 
 // React
 let React = self.React;
+let ReactDOM = self.ReactDOM;
 /**
  * @description
  * signup main HTML
@@ -66,7 +67,7 @@ export let RootNode = React.createClass( {
         <div className="body-sec-inner">
           <SignupHeading step={this.state.step} />
            <div className={stepClassSelector(this.state.step)}>
-              <form ref="signup" enctype="multipart/form-data" onSubmit={this.submitHandler}>
+              <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
                 <LegendStep1 step={this.props.step} />
                 <LegendStep2 step={this.props.step + 1} />
                 <LegendStep3 step={this.props.step + 2} categories={this.props.categories} />
@@ -79,6 +80,9 @@ export let RootNode = React.createClass( {
   },
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
+    // form 通知
+    let form = ReactDOM.findDOMNode( this.refs.signup );
+    this.status.form( form );
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );

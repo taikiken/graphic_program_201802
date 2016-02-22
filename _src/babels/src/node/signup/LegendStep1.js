@@ -30,7 +30,6 @@ import {ErrorNode} from '../error/ErrorNode';
 
 // React
 let React = self.React;
-let ReactDOM = self.ReactDOM;
 
 let Step1Form = React.createClass( {
   propTypes: {
@@ -38,8 +37,9 @@ let Step1Form = React.createClass( {
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
-    this.callback = null;
     this.errors = { errorEmail: new ErrorMessage() };
+    this.callback = null;
+    this.model = null;
 
     return {
       email: '',
@@ -102,14 +102,6 @@ let Step1Form = React.createClass( {
   emailChange: function( event ) {
     this.setState( {email: event.target.value} );
   },
-  /**
-   * エラーがあるかを返します
-   * @param {string} which form name
-   * @return {string} error がある時は 'error' を返し 無い時は '' を返します
-   */
-  hasError: function( which:string ):string {
-    return this.state.error[ which ] ? 'error' : '';
-  },
   // ---------------------------------------------------
   // submit click 通知
   // SignupStatus.SIGNUP_SUBMIT event handler
@@ -122,19 +114,28 @@ let Step1Form = React.createClass( {
   // next button click
   nextHandler: function( event:Event ) {
     event.preventDefault();
-
     this.prepareNext();
-
   },
+  // server へリクエストし
+  // 登録済み email かを調べます
   prepareNext: function():void {
     let data = new Data( 'email', this.state.email );
     let formData = Form.data( [ data ] );
-    let detect = new ModelUserDetect( formData, this.callback );
+
+    let model = this.model;
+    if ( model === null ) {
+      model = new ModelUserDetect( formData, this.callback );
+      this.model = model;
+    } else {
+      model.data = formData;
+    }
+    // let detect = new ModelUserDetect( formData, this.callback );
     // error 消去
     this.reset();
     // ajax start
-    detect.start();
+    model.start();
   },
+  // 登録済み email でなかったので次の step へ移動します
   next: function() {
     // next step
     // this.status.step( this.props.step + 1 );

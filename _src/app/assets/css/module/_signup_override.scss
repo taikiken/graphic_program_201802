@@ -75,14 +75,42 @@ legend {
   width: 100%;
 }
 
+// -------------------------------------------------
+// step 2
+// drag / drop
+// -------------------------------------------------
 // step2 avatar size
 .setting-form-avatar-dropArea {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
   background: #fff;
+
+  position: relative;
+
+  &.entered {
+    border: 3px solid #ccc;
+    background-color: #FFEEAC;
+    border-radius: 10px;
+
+    .avatar-container {
+      opacity: 0;
+    }
+  }
 }
 .avatar-stage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX( -50% );
+  display: table-row;
+  vertical-align: middle;
+
   .avatar-container {
     overflow: hidden;
-    display: inline-block;
+    //display: inline-block;
+    display: table-cell;
     width: 120px;
     height: 120px;
     border-radius: 100%;
@@ -94,4 +122,31 @@ legend {
       height: auto;
     }
   }
+
+  .should-change-avatar {
+    display: table-cell;
+    //margin-top: -45px;
+    height: 120px;
+    width: 120px;
+    vertical-align: middle;
+  }
+}
+
+// thumbnail が見えてる時は input tag を見えなくする
+.show-thumbnail {
+  // input type: file
+  .setting-form-picture {
+    display: none;
+  }
+}
+
+// input type file を非表示にし
+// drop area 全体に広げる
+.setting-form-picture {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 510px;
+  height: 210px;
+  opacity: 0;
 }

@@ -33,6 +33,10 @@ import {ErrorMessage} from '../../data/ErrorMessage';
 // node
 import {ErrorNode} from '../error/ErrorNode';
 
+// model
+import {Model} from '../../model/Model';
+import {ModelSignup} from '../../model/signup/ModelSignup';
+
 let React = self.React;
 
 let ChangeAvatar = React.createClass( {
@@ -70,17 +74,18 @@ let Step2Form = React.createClass( {
   getInitialState: function() {
     this.status = SignupStatus.factory();
     this.thumbnail = null;
+    this.form = null;
+    this.model = null;
+    this.errors = {
+      password: new ErrorMessage(),
+      name: new ErrorMessage()
+    };
 
     return {
       step: this.props.step,
       avatar: this.props.avatar,
       entered: false,
-      error: {
-        password: false,
-        name: false,
-        bio: false,
-        picture: false
-      }
+      error: false
     };
   },
   render: function() {
@@ -95,6 +100,10 @@ let Step2Form = React.createClass( {
       //console.log( 'message ', this.errors[ keyName ], ';' );
       //return this.errors[ keyName ].message;
       return '';
+    };
+
+    let stageClass = () => {
+      return this.props.avatar !== this.state.avatar ? 'show-thumbnail' : '';
     };
 
     return (
@@ -139,7 +148,7 @@ let Step2Form = React.createClass( {
         </span>
 
         {/* profile_picture */}
-        <div className="setting-form-avatar">
+        <div className={'setting-form-avatar ' + stageClass()}>
           <h2 className="setting-form-avatar-heading">プロフィール写真選択</h2>
           <div
             className={'setting-form-avatar-dropArea ' + zoneEntered}
@@ -148,7 +157,7 @@ let Step2Form = React.createClass( {
             onDragLeave={this.handleDragLeave}
             onDrop={this.handleDrop}
           >
-            <div className="avatar-stage">
+            <div className={'avatar-stage'}>
               <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
               <ChangeAvatar
                 show={this.props.avatar !== this.state.avatar}
@@ -178,6 +187,16 @@ let Step2Form = React.createClass( {
   // delegate
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+    this.status.on( SignupStatus.SIGNUP_FORM, this.formHandler );
+
+    if ( this.callback === null ) {
+      let callback = {};
+      this.callback = callback;
+      callback[ Model.COMPLETE ] = this.done;
+      callback[ Model.UNDEFINED_ERROR ] = this.fail;
+      callback[ Model.RESPONSE_ERROR ] = this.fail;
+    }
+
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
@@ -185,7 +204,13 @@ let Step2Form = React.createClass( {
   },
   // -------------------------------------------------------
   // custom method
-
+  // form element を取得
+  // 入力チェック時に使う
+  formHandler: function( event:Object ) {
+    this.status.off( SignupStatus.SIGNUP_FORM, this.formHandler );
+    this.form = event.form;
+  },
+  // -------------------------------------------------------
   // input changes
   // password
   passwordChange: function( event ) {
@@ -238,18 +263,19 @@ let Step2Form = React.createClass( {
   },
   // -------------------------------------------------------
   // drag / drop
-  handleDragOver: function( event ) {},
-  handleDragEnter: function( event ) {},
-  handleDragLeave: function( event ) {},
-  handleDrop: function( event ) {},
-  // -------------------------------------------------------
-  /**
-   * エラーがあるかを返します
-   * @param {string} which form name
-   * @return {string} error がある時は 'error' を返し 無い時は '' を返します
-   */
-  hasError: function( which:string ):string {
-    return this.state.error[ which ] ? 'error' : '';
+  handleDragOver: function( event ) {
+    event.preventDefault();
+    console.log( 'drag start---------' );
+  },
+  handleDragEnter: function() {
+    this.setState( { entered: true } );
+  },
+  handleDragLeave: function() {
+    this.setState( { entered: false } );
+  },
+  handleDrop: function( event ) {
+    console.log( 'drop ++++++++++++', event );
+    this.setState( { entered: false } );
   },
   // ---------------------------------------------------
   // submit click 通知
@@ -267,8 +293,23 @@ let Step2Form = React.createClass( {
 
   },
   prepareNext: function():void {
-    // 遷移テスト
-    this.next();
+    let formData = Form.element( this.form );
+    // not create
+    // 入力検証のみ
+    formData.append( 'create', false );
+
+    let model = this.model;
+    if ( model === null ) {
+      model = new ModelSignup( formData, this.callback );
+      this.model = model;
+    } else {
+      model.data = formData;
+    }
+
+    // error 消去
+    this.reset();
+    // ajax start
+    model.start();
   },
   next: function() {
     // next step
@@ -289,11 +330,21 @@ let Step2Form = React.createClass( {
     // response error
     // show error
   },
-  done: function() {
-
+  done: function( result:Result ) {
+    console.log( 'done ', result );
+    if ( result.status.code === 200 ) {
+      // OK
+      this.next();
+    }
   },
-  fail: function() {
-
+  fail: function( error:Error ) {
+    console.log( 'fail ', error.result.response.errors );
+    this.setState( { error: true } );
+  },
+  reset: function() {
+    this.errors.password.reset();
+    this.errors.name.reset();
+    this.setState( { error: false } );
   },
   dispose: function() {
 

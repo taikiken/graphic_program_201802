@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/19 - 20:21
+ * @date 2016/02/22 - 14:37
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -13,21 +13,21 @@
 
 import {Model} from '../Model';
 import {Result} from '../../data/Result';
-import {UserDetect} from '../../action/signup/UserDetect';
+import {Signup} from '../../action/signup/Signup';
 
 /**
- * user が存在するかのチェック
+ * signup action を実行します
  */
-export class ModelUserDetect extends Model {
+export class ModelSignup extends Model {
   /**
-   * <h3>user が存在するかのチェック</h3>
-   * email が登録済みかを調べる
-   * @param {FormData} [formData=null] email: string の form data
+   * signup action を実行します
+   * @param {FormData} [formData=null] リクエスト FormData
    * @param {Object} [option={}] optional event handler
    */
   constructor( formData:FormData = null, option:Object = {} ) {
     super( option );
-    this._action = new UserDetect( formData, this.done.bind( this ), this.fail.bind( this ) );
+    this._data = formData;
+    this._action = new Signup( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * @return {FormData|*} 設定された FormData を返します
@@ -65,7 +65,7 @@ export class ModelUserDetect extends Model {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[MODEL_USER_DETECT:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[SIGNUP:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( Model.UNDEFINED_ERROR, error );
 
     } else {
