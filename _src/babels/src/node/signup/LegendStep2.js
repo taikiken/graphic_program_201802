@@ -38,6 +38,7 @@ import {Model} from '../../model/Model';
 import {ModelSignup} from '../../model/signup/ModelSignup';
 
 let React = self.React;
+let Sagen = self.Sagen;
 
 let ChangeAvatar = React.createClass( {
   propTypes: {
@@ -80,6 +81,7 @@ let Step2Form = React.createClass( {
       password: new ErrorMessage(),
       name: new ErrorMessage()
     };
+    this.ie = Sagen.Browser.IE.is();
 
     return {
       step: this.props.step,
@@ -263,19 +265,58 @@ let Step2Form = React.createClass( {
   },
   // -------------------------------------------------------
   // drag / drop
-  handleDragOver: function( event ) {
+  handleDragOver: function( event:Event ) {
     event.preventDefault();
     console.log( 'drag start---------' );
   },
-  handleDragEnter: function() {
+  handleDragEnter: function( event ) {
+    if ( this.ie ) {
+      event.preventDefault();
+      return;
+    }
+
     this.setState( { entered: true } );
   },
-  handleDragLeave: function() {
+  handleDragLeave: function( event ) {
+    if ( this.ie ) {
+      event.preventDefault();
+      return;
+    }
+
     this.setState( { entered: false } );
   },
   handleDrop: function( event ) {
     console.log( 'drop ++++++++++++', event );
-    this.setState( { entered: false } );
+    if ( this.ie ) {
+      event.preventDefault();
+      return;
+    }
+
+    // check file type
+    let files;
+
+    if ( event.dataTransfer !== null && typeof event.dataTransfer !== 'undefined' ) {
+      files = event.dataTransfer.files;
+    } else if ( event.target !== null && event.target !== 'undefined' ) {
+      files = event.target.files;
+    }
+
+    if ( files !== null && typeof files !== 'undefined' && typeof files.length !== 'undefined' && files.length > 0 ) {
+      // files 有効
+      let file = files[ 0 ];
+
+      if ( file.type.match( /image.*/ ) ) {
+        // image file
+        this.setState( { entered: false } );
+      } else {
+        event.preventDefault();
+        this.setState( { entered: false } );
+      }
+    } else {
+      event.preventDefault();
+      this.setState( { entered: false } );
+    }
+
   },
   // ---------------------------------------------------
   // submit click 通知

@@ -52,4 +52,11 @@ export class VideoDae {
   get youtube():string {
     return this.video.youtube;
   }
+  /**
+   * 動画タイプ
+   * @return {string}
+   */
+  get type():string {
+    return this.video.type;
+  }
 }
