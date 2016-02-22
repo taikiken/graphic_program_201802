@@ -95,7 +95,10 @@ export class ViewSingleVideo extends View {
 
         }
         */
-        let type = media.type;
+        // 2016-02-22
+        // api JSON が最新版に対応していないので
+        // やむおえずの対応
+        let type = media.video.type || media.video.player;
 
         switch ( type ) {
 
@@ -109,7 +112,7 @@ export class ViewSingleVideo extends View {
             return this.facebook( media );
 
           default:
-            console.warn(`illegal type. ${type}`);
+            console.warn(`illegal type and player. type: ${type}`);
             break;
 
         }

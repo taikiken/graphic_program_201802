@@ -90,7 +90,9 @@ let CommentForm = React.createClass( {
     // 記事 Id ＊必須
     articleId: React.PropTypes.string.isRequired,
     // コメント Id オプション
-    commentId: React.PropTypes.string
+    commentId: React.PropTypes.string,
+    // コメント
+    commentType: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -159,27 +161,45 @@ let CommentForm = React.createClass( {
     }
 
   },
+  // ----------------------------------------
+  // delegate
   componentDidMount: function() {
 
-    let replyStatus = ReplyStatus.factory();
-    this.replyStatus = replyStatus;
+    let replyStatus = this.replyStatus;
+    console.log( '+++++++++++ componentDidMount ', this.props.uniqueId, replyStatus );
 
-    // 記事へのコメントは閉じない
-    if ( !this.props.independent ) {
+    if ( replyStatus === null ) {
+      replyStatus = ReplyStatus.factory();
+      this.replyStatus = replyStatus;
 
-      replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
-      replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
+      // 記事へのコメントは閉じない
+      if ( !this.props.independent ) {
 
+        replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
+        replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
+
+      }
     }
 
-    // message container
-    /*
-    this.message = ReactDOM.render(
-      <CommentMessage />,
-      ReactDOM.findDOMNode(this.refs.commentMessage)
-    );*/
+  },
+  componentDidUpdate: function() {
+    let replyStatus = this.replyStatus;
+
+    if ( replyStatus === null ) {
+      replyStatus = ReplyStatus.factory();
+      this.replyStatus = replyStatus;
+
+      // 記事へのコメントは閉じない
+      if ( !this.props.independent ) {
+
+        replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
+        replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
+
+      }
+    }
   },
   componentWillUnMount: function() {
+    console.log( '---------- componentWillUnMount ', this.props.uniqueId );
     this.dispose();
   },
   // ----------------------------------------
@@ -196,8 +216,11 @@ let CommentForm = React.createClass( {
 
     let replyStatus = this.replyStatus;
     if ( replyStatus !== null ) {
-      replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
-      replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
+      if ( !this.props.independent ) {
+        replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
+        replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
+        this.replyStatus = null;
+      }
     }
   },
   // ----------------------------------------
@@ -207,19 +230,36 @@ let CommentForm = React.createClass( {
   // ----------------------------------------
   // listener
   replyOpen: function( event ) {
-    // console.log( '+++++ replyOpen ', this.props.uniqueId, event.id, this.checkId( event ), this.state.open );
+    /*
+    if ( this.state ) {
+      if ( !this.state.open && this.checkId( event ) ) {
+        try {
+          this.setState( { open: true } );
+        } catch ( error ) {
+          console.log( `open state error ${this.props.uniqueId}`, error );
+        }
+      }
+    }*/
+    console.log( '==== replyOpen === ', this.props.uniqueId );
+
     if ( !this.state.open && this.checkId( event ) ) {
       this.setState( { open: true } );
     }
   },
   replyClose: function( event ) {
-    // console.log( '----- replyClose ', this.props.uniqueId, event.id, this.checkId( event ), this.state.open );
-    //if ( this.props.independent ) {
-    //  this.setState( { open: true } );
-    //} else {
-    //  this.setState( { open: false } );
-    //}
+    /*
+    if ( this.state ) {
+      if ( this.state.open && this.checkId( event ) ) {
+        try {
+          this.setState( { open: false } );
+        } catch ( error ) {
+          console.log( `close state error ${this.props.uniqueId}`, error );
+        }
+      }
+    }
+    */
     if ( this.state.open && this.checkId( event ) ) {
+      console.log( '*** replyOpen *** ', this.props.uniqueId );
       this.setState( { open: false } );
     }
   },
@@ -270,7 +310,7 @@ let CommentForm = React.createClass( {
   },
   done: function( event ) {
     console.log( 'done', event );
-    this.replyStatus.complete( this.props.uniqueId );
+    this.replyStatus.complete( this.props.uniqueId, this.props.commentType );
     this.setState( { body: '' } );
     this.dispose();
   },
@@ -328,29 +368,40 @@ let OpenerDom = React.createClass( {
 
     // ---------------------------
     // event bind
-    let replyStatus = ReplyStatus.factory();
+    let replyStatus = this.replyStatus;
 
-    if ( !this.props.independent ) {
-      replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
-      replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
+    if ( replyStatus === null ) {
+
+      replyStatus = ReplyStatus.factory();
+      this.replyStatus = replyStatus;
+
+      if ( !this.props.independent ) {
+        replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
+        replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
+      }
+
+      replyStatus.on( ReplyStatus.START, this.replyStart );
+      replyStatus.on( ReplyStatus.COMPLETE, this.replyComplete );
+
     }
-
-    replyStatus.on( ReplyStatus.START, this.replyStart );
-    replyStatus.on( ReplyStatus.COMPLETE, this.replyComplete );
-    this.replyStatus = replyStatus;
 
   },
   componentWillUnmount: function() {
 
     let replyStatus = this.replyStatus;
 
-    //if ( !this.props.independent ) {
-    //  replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
-    //  replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
-    //}
+    if ( replyStatus !== null ) {
 
-    replyStatus.off( ReplyStatus.START, this.replyStart );
-    replyStatus.off( ReplyStatus.COMPLETE, this.replyComplete );
+      if ( !this.props.independent ) {
+        replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
+        replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
+      }
+
+      replyStatus.off( ReplyStatus.START, this.replyStart );
+      replyStatus.off( ReplyStatus.COMPLETE, this.replyComplete );
+      this.replyStatus = null;
+
+    }
 
   },
   // ----------------------------------------
@@ -424,7 +475,9 @@ export let CommentFormNode = React.createClass( {
     // 親コメント? default false
     parent: React.PropTypes.bool,
     // 記事へのコメント送信 default false
-    independent: React.PropTypes.bool
+    independent: React.PropTypes.bool,
+    // コメント種類
+    commentType: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -505,6 +558,7 @@ export let CommentFormNode = React.createClass( {
             icon={this.props.icon}
             articleId={this.props.articleId}
             commentId={this.props.commentId}
+            commentType={this.props.commentType}
           />
         </div>
       );

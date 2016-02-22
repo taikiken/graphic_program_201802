@@ -42,6 +42,8 @@ export class Offset extends Action {
     this._total = -1;
     this._resultClass = ResultClass;
 
+    this._reload = false;
+
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -145,7 +147,7 @@ export class Offset extends Action {
     if ( this.hasNext() ) {
 
       method = Safety.string( method, this.method );
-      this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass );
+      this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass );
 
     }
 
@@ -156,7 +158,12 @@ export class Offset extends Action {
    */
   success( result:Result ):void {
 
-    this.update();
+    if ( !this._reload ) {
+      this.update( this._length );
+    } else {
+      this._reload = false;
+    }
+
     // 合計数をupdate
     this.total = result.total;
     // success

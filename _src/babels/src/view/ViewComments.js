@@ -34,6 +34,9 @@ import {UserDae} from '../dae/UserDae';
 // node
 import {CommentNode} from '../node/comment/CommentNode';
 
+// event
+import {ReplyStatus} from '../event/ReplyStatus';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -73,6 +76,13 @@ export class ViewComments extends View {
 
     // user 情報
     this._user = null;
+
+    // コメント投稿後の再読み込み設定
+    let status = ReplyStatus.factory();
+    status.on( ReplyStatus.COMPLETE, this.onComplete.bind( this ) );
+    this._status = status;
+
+    this._reload = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -287,9 +297,10 @@ export class ViewComments extends View {
     // CommentsDom から呼び出す
     let moreButton = ( show, rest, moreElement ) => {
 
-      console.log( '========================= more button ', action.hasNext(), action );
+      console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
       show = !!show;
 
+      /*
       // moreElement 存在チェックを行う
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
@@ -309,6 +320,13 @@ export class ViewComments extends View {
 
         }
       }
+      */
+
+      // とにかく render する
+      ReactDOM.render(
+        React.createElement( MoreView, { show: show, rest: rest } ),
+        moreElement
+      );
 
     };
 
@@ -343,6 +361,7 @@ export class ViewComments extends View {
         let reply = this.state.reply;
         let replyList = reply.comments;
         let commentId = this.props.commentId;
+        let commentsListType = this.props.commentsListType;
         let userId = this.props.userId;
         let sign = this.props.sign;
         let articleId = this.props.articleId;
@@ -370,6 +389,7 @@ export class ViewComments extends View {
                       commentUserId={String(replyComment.user.id)}
                       sign={sign}
                       parent={false}
+                      commentsListType={commentsListType}
                     />
                   </li>
                 );
@@ -445,6 +465,7 @@ export class ViewComments extends View {
                 commentCount={commentObject.reply.total}
                 sign={sign}
                 parent={true}
+                commentsListType={commentsListType}
               />
               {/* comment reply */}
               <CommentReplyChild
@@ -512,7 +533,7 @@ export class ViewComments extends View {
             {
               list.map( function( commentId, index ) {
                 let commentObject = commentsBank[ commentId ];
-                let key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
+                let key = `${commentsListType}-${articleId}-${commentId}-${userId}`;
                 console.log( 'commentId ' + commentId + ', ' + key );
 
                 return <CommentsParent
@@ -555,24 +576,75 @@ export class ViewComments extends View {
     if ( user === null ) {
       user = Object.create( {} );
     }
-    // this._commentsRendered が null の時だけ CommentsDom.render する
-    if ( this._commentsRendered === null ) {
 
-      this._commentsRendered = ReactDOM.render(
-        <CommentsDom
-          commentsList={commentsList}
-          articleId={String(this._articleId)}
-          commentsListType={this._commentsListType}
-          user={user}
-        />,
-        element
-      );
+    //// this._commentsRendered が null の時だけ CommentsDom.render する
+    //if ( this._commentsRendered === null || this._reload ) {
+    //
+    //  this._reload = false;
+    //
+    //  this._commentsRendered = ReactDOM.render(
+    //    <CommentsDom
+    //      commentsList={commentsList}
+    //      articleId={String(this._articleId)}
+    //      commentsListType={this._commentsListType}
+    //      user={user}
+    //    />,
+    //    element
+    //  );
+    //
+    //} else {
+    //
+    //  this._commentsRendered.updateList( commentsList );
+    //
+    //}
 
-    } else {
 
-      this._commentsRendered.updateList( commentsList );
-
-    }
+    // とにかくそのまま
+    ReactDOM.render(
+      <CommentsDom
+        commentsList={commentsList}
+        articleId={String(this._articleId)}
+        commentsListType={this._commentsListType}
+        user={user}
+      />,
+      element
+    );
 
   }// all
+  /**
+   * ReplyStatus.COMPLETE event handler
+   * <p>再読み込みを行うかを決める</p>
+   * @param {Object} event ReplyStatus.COMPLETE event
+   */
+  onComplete( event:Object ):void {
+    /*
+    console.log( 'ViewComments onComplete ', User.sign, this._commentsListType, event );
+    if ( event.kind === this._commentsListType ) {
+      this.reload();
+    } else {
+
+      if ( User.sign && event.kind === CommentsType.INDEPENDENT && this._commentsListType === CommentsType.SELF ) {
+        // 記事へのコメント
+        // ログインユーザー
+        // 自分のコメントを再読み込み
+        this.reload();
+      }
+
+    }
+    */
+
+    // とにかくreloadが良さそう
+    this.reload();
+  }
+  /**
+   * 再読み込み
+   */
+  reload():void {
+    // 既存リストを空にする
+    this._commentsList = [];
+    // reload flag on
+    this._reload = true;
+    // ajax start
+    this._action.reload();
+  }
 }

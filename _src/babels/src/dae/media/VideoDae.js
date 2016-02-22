@@ -66,4 +66,11 @@ export class VideoDae {
   get type():string {
     return this.video.type;
   }
+  /**
+   * 動画タイプ？ 古い JSON に残っているので追加する(2016-02-22)
+   * @return {string} 多分動画タイプ...
+   */
+  get player():string {
+    return this.video.player;
+  }
 }

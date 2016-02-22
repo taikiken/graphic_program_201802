@@ -43,6 +43,8 @@ export class Action {
     this._url = types.url;
     this._method = types.method;
     this._resultClass = ResultClass;
+    this._boundSuccess = this.success.bind( this );
+    this._boundFail = this.fail.bind( this );
 
   }
   // ---------------------------------------------------
@@ -72,7 +74,7 @@ export class Action {
   start( method:string = this.method ):void {
 
     method = Safety.string( method, this.method );
-    this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass );
+    this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass );
 
   }
   /**

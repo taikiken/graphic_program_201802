@@ -59,7 +59,7 @@ export class ActionBehavior extends Action {
   start( method:string = this.method ):void {
 
     method = Safety.string( method, this.method );
-    this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, null, this._data );
+    this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass, null, this._data );
 
   }
 }

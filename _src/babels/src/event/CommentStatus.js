@@ -81,12 +81,25 @@ export class CommentStatus extends EventDispatcher {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * イベント強制発火
+   * @param {string} type コメントタイプ
+   * @param {string|Number} commentId コメント Id
+   */
   fire( type:string, commentId:string ):void {
     this.dispatch( { type: type, commentId: commentId } );
   }
+  /**
+   * コメント削除
+   * @param {string|Number} commentId コメント Id
+   */
   remove( commentId:string ):void {
     this.fire( CommentStatus.DELETE, commentId );
   }
+  /**
+   * 通報
+   * @param {string|Number} commentId コメント Id
+   */
   notice( commentId:string ):void {
     this.fire( CommentStatus.NOTICE, commentId );
   }

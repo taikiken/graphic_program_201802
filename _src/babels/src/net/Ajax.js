@@ -78,11 +78,13 @@ export class Ajax {
 
     // local, develop mode
     // cross domain set
+    /*
     if ( Env.mode !== Env.PRODUCTION ) {
 
       option.mode = 'cors';
 
     }
+    */
 
     // body へ FormData をセット
     if ( formData !== null && typeof formData !== 'undefined' ) {

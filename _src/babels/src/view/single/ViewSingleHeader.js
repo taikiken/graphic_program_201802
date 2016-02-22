@@ -155,6 +155,7 @@ export class ViewSingleHeader extends View {
 
         // ---------------------
         // bookmark 処理
+        console.log( 'bookmark 処理', this.state.sign  );
         if ( this.state.sign ) {
           let action = new ModelBookmark( this.state.single.id );
           this.action = action;
@@ -176,7 +177,7 @@ export class ViewSingleHeader extends View {
         event.preventDefault();
 
         this.setState( { loading: 'loading' } );
-
+        console.log( 'clickBookmark ', this.action );
         this.action.start( !this.state.status );
 
       },

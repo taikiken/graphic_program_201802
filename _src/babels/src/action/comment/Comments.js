@@ -47,6 +47,16 @@ export class Comments extends OffsetAuth {
     super( User.token, Api.comment( type ), resolve, reject );
     this._id = id;
   }
+  // reload 追加
+  /**
+   * 再読み込み
+   */
+  reload():void {
+    this._reload = true;
+    let url = `${Path.article( this._url, this.id )}?offset=0&length=${this.offset}`;
+    this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
+
+  }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------

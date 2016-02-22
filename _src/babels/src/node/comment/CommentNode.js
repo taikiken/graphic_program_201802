@@ -309,7 +309,9 @@ export let CommentNode = React.createClass( {
     // 記事へのコメント送信 default false
     independent: React.PropTypes.bool,
     // フォームをopen（表示）するか default false
-    open: React.PropTypes.bool
+    open: React.PropTypes.bool,
+    // comment type
+    commentsListType: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -383,6 +385,7 @@ export let CommentNode = React.createClass( {
           sign={sign}
           parent={this.props.parent}
           independent={this.props.independent}
+          commentType={this.props.commentsListType}
         />
       </div>
     );

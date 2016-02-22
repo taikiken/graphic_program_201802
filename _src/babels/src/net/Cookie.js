@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Safety} from '../data/Safety';
+
 let _symbol = Symbol();
 
 /**
@@ -39,7 +41,7 @@ export class Cookie {
    * @return {string} cookie key name を返します
    */
   static get TARGET():string {
-    return 'COOKIE_NAME';
+    return 'auth_token';
   }
   /**
    * cookie value を取得します
@@ -49,7 +51,54 @@ export class Cookie {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  static item( keyName:string ):string {
+  static get( keyName:string ) {
     return decodeURIComponent( document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') ) || null;
+  }
+  /**
+   * cookie を保存します
+   * @param {string} value 保存値
+   * @param {string} [keyName=Cookie.TARGET] cookie 名称
+   * @param {Date} [end] expires date 90days 1000 * 60 * 60 * 24 * 90
+   * @param {string} [path='/'] cookie 指定したパスが設定されます
+   * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
+   * @param {boolean} [secure=false] https通信のときのみ、クッキーが送信されます
+   * @return {boolean} 保存 成功か否かの真偽値 を返します
+   */
+  static save( value:string, keyName:string = Cookie.TARGET, end:Date = new Date( Date.now() + (1000 * 60 * 60 * 24 * 90)), path:string = '/', domain:string = '', secure:boolean = false ):boolean {
+
+    value = Safety.string( value, '' );
+    keyName = Safety.string( keyName, Cookie.TARGET );
+    path = Safety.string( path, '/' );
+    domain = Safety.string( domain, '' );
+
+    path = path !== '' ? `; path=${path}` : '';
+    domain = domain !== '' ? `; domain=${domain}` : '';
+    let secureSetting = secure ? `; secure` : '';
+
+    // cookie へ保存
+    document.cookie = `${encodeURIComponent(keyName)}=${encodeURIComponent(value)}; expires=${end.toUTCString()}${domain}${path}${secureSetting}`;
+    return true;
+
+  }
+  /**
+   * 指定名称の cookie が存在するかを調べます
+   * @param {string} keyName 調査対象 cookie 名称
+   * @return {boolean} cookie が存在するかの真偽値 を返します
+   */
+  static has( keyName:string ):boolean {
+    return Cookie.item( keyName ) !== null;
+  }
+  /**
+   * 指定名称の cookie を削除します
+   * @param {string} keyName cookie 名称
+   * @param {string} [path='/'] cookie 指定したパスが設定されます
+   * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
+   * @return {boolean} 削除 成功か否かの真偽値 を返します
+   */
+  static remove( keyName:string = Cookie.TARGET, path:string = '/', domain:string = '' ):boolean {
+    if ( Cookie.has( keyName ) ) {
+      return Cookie.save( '', keyName, new Date(), path, domain );
+    }
+    return false;
   }
 }

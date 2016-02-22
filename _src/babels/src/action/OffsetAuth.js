@@ -62,7 +62,7 @@ export class OffsetAuth extends Offset {
     if ( this.hasNext() ) {
 
       method = Safety.string( method, this.method );
-      this._ajax.start( this.url, method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
+      this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
 
     }
 

@@ -99,9 +99,10 @@ export class ReplyStatus extends EventDispatcher {
   /**
    * complete event を発火します
    * @param {Number} id comment id, form 設置 ID, 要 Page 内ユニーク
+   * @param {string} kind 記事へのコメントかを表すための文字列 normal | official | self | independent
    */
-  complete( id:string ):void {
-    this.dispatch( { type: ReplyStatus.COMPLETE, id: id } );
+  complete( id:string, kind:string = '' ):void {
+    this.dispatch( { type: ReplyStatus.COMPLETE, id: id, kind: kind } );
   }
   // ---------------------------------------------------
   //  static method

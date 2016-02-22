@@ -87,4 +87,10 @@ export class CommentsType {
   static get ALL():string {
     return '';
   }
+  /**
+   * @return {string} comment type independent 記事へのコメントを返します
+   */
+  static get INDEPENDENT():string {
+    return 'independent';
+  }
 }

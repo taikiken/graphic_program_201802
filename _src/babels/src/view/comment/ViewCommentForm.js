@@ -10,9 +10,13 @@
  */
 'use strict';
 
+
 import {View} from '../View';
+
 import {User} from '../../app/User';
 import {Empty} from '../../app/const/Empty';
+import {CommentsType} from '../../app/const/CommentsType';
+
 import {Safety} from '../../data/Safety';
 
 import {CommentFormNode} from '../../node/comment/CommentFormNode';
@@ -64,6 +68,7 @@ export class ViewCommentForm extends View {
         articleId={id}
         sign={User.sign}
         independent={true}
+        commentType={CommentsType.INDEPENDENT}
       />,
       this.element
     );
