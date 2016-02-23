@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/02/14
  *

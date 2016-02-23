@@ -52,6 +52,8 @@ public/assets
 
 # _src bundle
 _src/app/assets/js/bundle/
+_src/app/assets/_babel/*.babel.js
+_src/app/assets/_babel/_*.js
 _src/app/assets/js/*.bundle.js
 _src/app/assets/images/sprite
 _src/app/assets/css/_sprite.scss
