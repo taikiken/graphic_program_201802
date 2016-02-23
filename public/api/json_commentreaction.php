@@ -68,9 +68,10 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 	}
 }else{
 	if(strlen($commentid)>0){
+				
 		if(strlen($uid)>0){
 			
-			$sql=sprintf("select id,reaction from u_reaction where commentid=%s and userid=%s and flag=1",$commentid,$uid);
+			$sql=sprintf("select id,reaction from u_reaction where commentid=%s and userid=%s and reaction=%s and flag=1",$commentid,$uid,$_REQUEST["reaction"]=="like"?1:2);
 			$o->query($sql);
 			$f=$o->fetch_array();
 			
