@@ -143,7 +143,7 @@ for($i=0;$i<count($p);$i++){
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
-	$s[$hg[$p[$i]["h"]]][$nm]["comments_count"]=$f["n"];
+	$s[$hg[$p[$i]["h"]]][$nm]["comments_count"]=(int)$f["n"];
 	
 	if($f["n"]>0){
 
