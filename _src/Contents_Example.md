@@ -54,3 +54,4 @@ issue 147: [記事本文（通常 / YouTube / Facebook 動画）: 開発 (Backen
       
 ### YouTube
 
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/Ro-_cbfdrYE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
