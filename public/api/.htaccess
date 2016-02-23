@@ -1,7 +1,7 @@
-Header set Access-Control-Allow-Origin *
-Header set Access-Control-Allow-Credentials true
-Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
-Header always set Access-Control-Allow-Headers "Authorization"
+#Header set Access-Control-Allow-Origin *
+#Header set Access-Control-Allow-Credentials true
+#Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
+#Header always set Access-Control-Allow-Headers "Authorization, authorization"
 
 Satisfy any
 order allow,deny
@@ -10,6 +10,9 @@ allow from all
 Options FollowSymLinks Includes
 RewriteEngine on
 RewriteBase /
+
+#Good Bad
+RewriteRule ^v1/comments/(bad|like)/([0-9]+) /api/json_commentreaction.php?comment_id=$2&reaction=$1 [L]
 
 #Comment
 RewriteCond %{REQUEST_METHOD} DELETE
@@ -29,9 +32,6 @@ RewriteCond %{REQUEST_METHOD} GET
 RewriteRule ^v1/comments/article/([0-9]+) /api/json_commentlist.php?id=$1 [L,QSA]
 RewriteCond %{REQUEST_METHOD} POST
 RewriteRule ^v1/comments/article/([0-9]+) /api/json_commentpost.php?article_id=$1 [L,QSA]
-
-#Good Bad
-RewriteRule ^v1/comments/(bad|like)/([0-9]+) /api/json_commentreaction.php?comment_id=$2&reaction=$1 [L]
 
 #Bookmark
 RewriteRule ^v1/articles/([0-9]+)/bookmark /api/json_bookmark.php?article_id=$1 [L,QSA]

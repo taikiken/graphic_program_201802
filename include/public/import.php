@@ -106,7 +106,8 @@ function outimg($oimg){
 
 function splittime($a,$b){
 	global $s;
-	$ss=$a.",".$b;
+	if(strlen($b)>0)$ss=$a.",".$b;
+	else $ss=$a;
 	$ss=explode(",",str_replace(array(" ","-",":"),",",$ss));
 	for($i=0;$i<count($ss);$i++){
 		$s["a".($i+1)]=$ss[$i];

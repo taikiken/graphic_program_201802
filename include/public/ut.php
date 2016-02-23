@@ -151,6 +151,8 @@ function tmod($s){
 }
 
 function esc($v){
+	$v=trim($v);
+	$v=urldecode($v);
 	$v=stripslashes($v);
 	$v=str_replace(array("\r\n","\r"),"\n",$v);
 	$v=str_replace("―","-",$v);
