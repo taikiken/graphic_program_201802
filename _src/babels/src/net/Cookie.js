@@ -86,7 +86,7 @@ export class Cookie {
    * @return {boolean} cookie が存在するかの真偽値 を返します
    */
   static has( keyName:string ):boolean {
-    return Cookie.item( keyName ) !== null;
+    return Cookie.get( keyName ) !== null;
   }
   /**
    * 指定名称の cookie を削除します

@@ -14,6 +14,7 @@
 import {Cookie} from '../net/Cookie';
 import {Env} from './Env';
 import {UserStatus} from '../event/UserStatus';
+import {Safety} from '../data/Safety';
 
 let _symbol = Symbol();
 let _sign = false;
@@ -74,6 +75,7 @@ export class User {
   static get token():string {
 
     if ( _sign ) {
+      /*
       switch ( Env.mode ) {
 
         case Env.TEST:
@@ -85,9 +87,12 @@ export class User {
 
         case Env.PRODUCTION:
         default:
-          return Cookie.item( Cookie.TARGET );
+          return Cookie.get( Cookie.TARGET );
 
-      }
+      }*/
+
+      return Cookie.get( Cookie.TARGET );
+
     } else {
       // 非ログインは空文字を返す
       // debugger
@@ -101,14 +106,36 @@ export class User {
   // ---------------------------------------------------
   /**
    * ログイン設定をします
+   * @return {boolean} login が成功したかを返します
    */
-  static login():void {
-    User.sign = true;
+  static login( token:string ):boolean {
+    token = Safety.string( token, '' );
+    if ( token === '' ) {
+      return false;
+    }
+
+    let result = Cookie.save( token );
+    User.sign = result;
+    return result;
   }
   /**
    * ログアウト設定をします
    */
   static logout():void {
+    Cookie.remove( Cookie.TARGET );
     User.sign = false;
+  }
+
+  /**
+   * ログイン・非ログインを確認します
+   */
+  static init():void {
+    let token = User.token;
+    if ( typeof token !== 'undefined' && token !== null && token !== '' ) {
+      // may be login
+      User.sign = true;
+    } else {
+      User.sign = false;
+    }
   }
 }

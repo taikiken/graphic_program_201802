@@ -70,7 +70,7 @@ export let RootNode = React.createClass( {
               <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
                 <LegendStep1 step={this.props.step} />
                 <LegendStep2 step={this.props.step + 1} getForm={this.getForm} />
-                <LegendStep3 step={this.props.step + 2} categories={this.props.categories} />
+                <LegendStep3 step={this.props.step + 2} categories={this.props.categories} getForm={this.getForm} />
                 <div className="submit-hidden-container"><input type="submit" /></div>
               </form>
           </div>

@@ -13,23 +13,45 @@
 
 import {SignupStatus} from '../../event/SignupStatus';
 
+// app
+import {Url} from '../../app/const/Url';
+import {User} from '../../app/User';
+
+// model
+import {Model} from '../../model/Model';
+import {ModelSignup} from '../../model/signup/ModelSignup';
+
+// data
+import {Result} from '../../data/Result';
+import {Form} from '../../data/Form';
+import {ErrorMessage} from '../../data/ErrorMessage';
+
+// dae
+import {UserDae} from '../../dae/UserDae';
+
+
+// util
+import {Loc} from '../../util/Loc';
+
+// React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 let Step3Form = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
-    categories: React.PropTypes.array.isRequired
+    categories: React.PropTypes.array.isRequired,
+    getForm: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
+    this.model = null;
+    this.callback = null;
 
     return {
       categories: this.props.categories,
       step: this.props.step,
-      error: {
-        email: false
-      }
+      error: false
     };
   },
   render: function() {
@@ -75,7 +97,16 @@ let Step3Form = React.createClass( {
   // delegate
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
-    this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+    this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+
+    if ( this.callback === null ) {
+      let callback = {};
+      this.callback = callback;
+      callback[ Model.COMPLETE ] = this.done;
+      callback[ Model.UNDEFINED_ERROR ] = this.fail;
+      callback[ Model.RESPONSE_ERROR ] = this.fail;
+    }
+
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
@@ -96,14 +127,6 @@ let Step3Form = React.createClass( {
     console.log( 'checkbox ', checkbox.checked, 'slug: ', slug );
     this.setState( {slug: checkbox.checked} );
   },
-  /**
-   * エラーがあるかを返します
-   * @param {string} which form name
-   * @return {string} error がある時は 'error' を返し 無い時は '' を返します
-   */
-  hasError: function( which:string ):string {
-    return this.state.error[ which ] ? 'error' : '';
-  },
   // ---------------------------------------------------
   // submit click 通知
   submitHandler: function( event:Object ) {
@@ -115,19 +138,53 @@ let Step3Form = React.createClass( {
   // next button click
   nextHandler: function( event:Event ) {
     event.preventDefault();
-
+    this.prepareNext();
   },
   prepareNext: function():void {
-    // 遷移テスト
-    this.next();
-  },
-  next: function() {
+    let formData = Form.element( this.props.getForm() );
+    // create
+    // 新規登録
+    formData.append( 'create', true );
+
+    let model = this.model;
+    if ( model === null ) {
+      model = new ModelSignup( formData, this.callback );
+      this.model = model;
+    } else {
+      model.data = formData;
+    }
+
+    // error 消去
+    this.reset();
+    // ajax start
+    model.start();
 
   },
-  done: function() {
+  next: function( token:string ) {
+    // login
+    // token setup
+    if ( User.login( token ) ) {
+      // home
+      Loc.current = Url.index();
+    } else {
+      console.log( 'fail login ...' );
+    }
 
   },
-  fail: function() {
+  done: function( result:Result ) {
+    console.log( 'done ', result );
+    if ( result.status.code === 200 ) {
+      // OK
+      // token 取り出し
+      let userDae = new UserDae( result.response );
+      // -> next step
+      this.next( userDae.accessToken );
+    }
+  },
+  fail: function( error:Error ) {
+    console.log( 'error step3', error );
+  },
+  reset: function() {
 
   },
   dispose: function() {
@@ -138,7 +195,8 @@ let Step3Form = React.createClass( {
 export let LegendStep3 = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
-    categories: React.PropTypes.array.isRequired
+    categories: React.PropTypes.array.isRequired,
+    getForm: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -152,7 +210,11 @@ export let LegendStep3 = React.createClass( {
 
     return (
       <div className="legend-container legend-container-3">
-        <Step3Form step={this.props.step} categories={this.props.categories} />
+        <Step3Form
+          step={this.props.step}
+          categories={this.props.categories}
+          getForm={this.props.getForm}
+        />
       </div>
     );
 

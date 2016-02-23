@@ -26,7 +26,6 @@ import {Thumbnail} from '../../ui/Thumbnail';
 
 // data
 import {Result} from '../../data/Result';
-import {Data} from '../../data/Data';
 import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
 
@@ -76,7 +75,7 @@ let Step2Form = React.createClass( {
   getInitialState: function() {
     this.status = SignupStatus.factory();
     this.thumbnail = null;
-    this.form = null;
+    // this.form = null;
     this.model = null;
     this.errors = {
       password: new ErrorMessage(),
@@ -204,6 +203,7 @@ let Step2Form = React.createClass( {
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
     this.dispose();
   },
+  /*
   // -------------------------------------------------------
   // custom method
   // form element を取得
@@ -212,6 +212,7 @@ let Step2Form = React.createClass( {
     this.status.off( SignupStatus.SIGNUP_FORM, this.formHandler );
     this.form = event.form;
   },
+  */
   // -------------------------------------------------------
   // input changes
   // password

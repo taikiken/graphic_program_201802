@@ -1,0 +1,44 @@
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/02/24 - 0:14
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+'use strict';
+
+import {Safety} from '../../data/Safety';
+
+/**
+ * ユーザーの興味がある競技
+ */
+export class InterestDae {
+  /**
+   * ユーザーの興味がある競技
+   * @param {Object} [interest={}] response.interest
+   */
+  constructor( interest:Object = {} ) {
+    interest = Safety.object( interest );
+    this._interest = interest;
+  }
+  /**
+   * @return {Object|*} response.interest を返します
+   */
+  get interest():Object {
+    return this._interest;
+  }
+  /**
+   * @return {Array} response.interest.category を返します
+   */
+  get category():Array {
+    let category = this.interest.category;
+    if ( !Array.isArray( category ) ) {
+      category = [];
+    }
+    return category;
+  }
+}
