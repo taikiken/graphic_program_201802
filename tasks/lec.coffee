@@ -54,5 +54,5 @@ gulp.task 'lec:build', ->
     htdocs + '/assets/**/*.{html,css,js,svg}'
   ]
   .pipe $.lineEndingCorrector verbose:true, eolc: 'LF', encoding:'utf8'
-  .pipe gulp.dest htdocs
+  .pipe gulp.dest htdocs + '/assets'
   .pipe $.size title: '*** lec:build ***'
