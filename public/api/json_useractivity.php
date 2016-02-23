@@ -41,7 +41,8 @@ for($i=0;$i<count($p);$i++){
 	$s[$i]["user"]["url"]=sprintf("%s/mypage/",$domain);
 	$s[$i]["user"]["type"]["id"]=(int)$p[$i]["typeid"];
 	$s[$i]["user"]["type"]["label"]=$p[$i]["type"];
-
+	
+	$s[$i]["article"]["id"]=$p[$i]["pageid"];
 	$s[$i]["article"]["title"]=$p[$i]["title"];
 	$s[$i]["article"]["url"]=sprintf("%s/%s/%s",$domain,"p",$p[$i]["pageid"]);
 
