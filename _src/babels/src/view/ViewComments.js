@@ -437,7 +437,7 @@ export class ViewComments extends View {
           icon = user.profilePicture;
           if ( !icon ) {
             icon = Empty.USER_EMPTY;
-          } else if ( Safety.isImg( icon ) ) {
+          } else if ( !Safety.isImg( icon ) ) {
             icon = Empty.USER_EMPTY;
           }
 
@@ -448,14 +448,14 @@ export class ViewComments extends View {
           }
         }
 
-        console.log( '================================== parent =========================', this.props.user, userId, ', comment:', commentObject.comment.user.id );
+        console.log( '================================== parent =========================', icon, this.props.user, userId, ', comment:', commentObject.comment.user.id );
         return (
 
           <ul className={'comment-list'}>
             <li className="comment-item">
               {/* independent, open 省略 */}
               <CommentNode
-                uniqueId={`${this.props.uniqueId}`}
+                uniqueId={`comment-${this.props.uniqueId}`}
                 commentDae={commentObject}
                 icon={icon}
                 userId={userId}
@@ -469,7 +469,7 @@ export class ViewComments extends View {
               />
               {/* comment reply */}
               <CommentReplyChild
-                uniqueId={`${this.props.uniqueId}-reply`}
+                uniqueId={`reply-${this.props.uniqueId}`}
                 total={total}
                 sign={sign}
                 userId={userId}

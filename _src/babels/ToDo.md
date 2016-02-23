@@ -17,33 +17,32 @@
     - [X] slug あり
 
 1. search
-    - []
+    - [X]
 
 1. 新規登録
-    - []
-    - [] 基本情報入力
-    - [] 興味のある競技を選択
+    - [X]  
+    hash リンク
     
 1. ログイン / ログアウト
-    - [] ログイン
-    - [] ログアウト
+    - [-] ログイン
+    - [-] ログアウト
 
 1. パスワード
-    - [] リセット
-    - [] 再設定
+    - [-] リセット
+    - [-] 再設定
 
 1. マイページ
-    - [] default ブックマーク一覧
-    - [] アクティビティ
+    - [-] default ブックマーク一覧
+    - [-] アクティビティ
 
 1. お知らせ
-    - []
+    - [-]
 
 1. 設定
-    - [] プロフィール
-    - [] 好きな競技
-    - [] ソーシャル
-    - [] 退会
+    - [-] プロフィール
+    - [-] 好きな競技
+    - [-] ソーシャル
+    - [-] 退会
 
 ## Pagination
 
@@ -100,13 +99,13 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1. 記事
     - [X] model
     - [X] view
-    - [] 本文 PHP 出力
+    - [X] 記事コメント
     
 1. bookmark
-    - [] model
-    - [] view
-    - [] add
-    - [] delete
+    - [X] model
+    - [X] view
+    - [X] add
+    - [X] delete
     
 1. 関連記事
     - [X] model
@@ -115,53 +114,56 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1. コメント self  
     ToDo: Token ありリクエストができるようになったら作成する -> 2016-02-16
     - [X] model
-    - [X] view
+    - [-] view  
+    ToDo: 再表示後 form 表示時の React warning
     - [X] paging  
     - [X] send
-    - [] send 後の view
+    - [-] send 後の view
     - [-] edit  
     先送り
     - [] delete
-    - [] good
-    - [] good delete
-    - [] bad
-    - [] bad delete
+    - [] notice
+    - [X] good
+    - [X] good delete
+    - [X] bad
+    - [X] bad delete
     
 1. コメント official
     記事IDから取得する
     - [X] model
-    - [X] view
-    - [-] paging  
-        データが足りないので未テスト
+    - [-] view  
+    ToDo: 再表示後 form 表示時の React warning
+    - [X] paging  
     - [X] send
-    - [] send 後の view
-    - [] edit
+    - [X] send 後の view
+    - [-] edit
+    先送り
     - [] delete
-    - [] good
-    - [] good delete
-    - [] bad
-    - [] bad delete
+    - [] notice
+    - [X] good
+    - [X] good delete
+    - [X] bad
+    - [X] bad delete
         
 1. コメント normal
     記事IDから取得する
     - [X] model
-    - [X] view
-    - [-] paging  
-        データが足りないので未テスト
+    - [-] view  
+    ToDo: 再表示後 form 表示時の React warning
+    - [X] paging  
     - [X] send
-    - [] send 後の view
-    - [] edit
+    - [X] send 後の view
+    - [-] edit
+    先送り
     - [] delete
-    - [] good
-    - [] good delete
-    - [] bad
-    - [] bad delete
+    - [] notice
+    - [X] good
+    - [X] good delete
+    - [X] bad
+    - [X] bad delete
     
 1. コメント Form
-    クリックで Form 表示  
-    同じ form を状態に合わせ 表示・非表示  
-    ユーザー視線では Form が移動したように見える
-    - [X] UI
+    - [X] open / close
     
 1. ranking
     記事カテゴリーから取得する
@@ -214,9 +216,9 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     
 ## 検索
 1. 一覧
-    - [] keyword
-    - [] model
-    - [] view
+    - [X] keyword
+    - [X] model
+    - [X] view
     - [] infinite scroll   
 
 
@@ -243,3 +245,11 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [] model
     
 
+## signup
+1. 登録
+    - [X] email detect
+    - [X] error 表示
+    - [] 基本情報入力
+    - [-] thumbnail  
+    ToDo: document.body へ drop されたとき問題...
+    - [X] 興味のある競技を選択

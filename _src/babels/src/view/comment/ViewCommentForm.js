@@ -64,10 +64,12 @@ export class ViewCommentForm extends View {
     ReactDOM.render(
       <CommentFormNode
         uniqueId={'comment-to-' + id}
+        toggle="open"
         icon={this._icon}
         articleId={id}
         sign={User.sign}
         independent={true}
+        parent={false}
         commentType={CommentsType.INDEPENDENT}
       />,
       this.element

@@ -34,10 +34,10 @@ let apiRoot = () => {
       return `http://192.168.33.50`;
 
     case Env.TEST :
-      return `http://undotsushin.local`;
+      return `http://www.undotsushin.local`;
 
     case Env.DEVELOP :
-      return 'http://undotsushin.com';
+      return 'http://www.undotsushin.com';
 
     case Env.PRODUCTION :
       return '';
@@ -60,25 +60,25 @@ let buildPath = () => {
     // --------------------------------------------
     // 登録
     'users:add': new Types(
-      new Type( `${API_PATH}/users`, 'POST' ),
+      new Type( `${API_PATH}/users/`, 'POST' ),
       new Permalink(),
       new Queries()
     ),
     // login / logout
     'users:login': new Types(
-      new Type( `${API_PATH}/sessions`, 'POST' ),
+      new Type( `${API_PATH}/sessions/`, 'POST' ),
       new Permalink(),
       new Queries()
     ),
     'users:logout': new Types(
-      new Type( `${API_PATH}/sessions`, 'DELETE' ),
+      new Type( `${API_PATH}/sessions/`, 'DELETE' ),
       new Permalink(),
       new Queries()
     ),
 
     // email 登録済み? を調べる
     'users:email': new Types(
-      new Type( `${API_PATH}/users/email`, 'POST' ),
+      new Type( `${API_PATH}/users/email/`, 'POST' ),
       new Permalink(),
       new Queries()
     ),

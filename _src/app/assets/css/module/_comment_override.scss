@@ -76,6 +76,12 @@
 
 // ---------------------
 // form
+.form-open {
+  display: block;
+}
+.form-close {
+  display: none;
+}
 .form-root {
   clear: both;
 }

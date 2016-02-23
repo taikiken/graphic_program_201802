@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <title>Ajax Auth</title>
+  <link rel="stylesheet" href="/assets/css/ui.css">
+  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+  <script src="/assets/js/libs/vendor.min.js"></script>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <style>
+    body {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    ul {
+      list-style: disc;
+      margin: 0 0 1em 1em;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight:700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 24px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    h2 {
+      font-size: 18px;
+      padding: 0 0 3px 5px;
+      border-left: 5px solid #ccc;
+    }
+    a {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<pre id="c1">Ajax Auth by Fetch</pre>
+
+<dl>
+  <dt>url</dt>
+  <dd id="url"></dd>
+  <dt>token</dt>
+  <dd id="token"></dd>
+</dl>
+
+<section id="f1">
+  <pre></pre>
+</section>
+
+<script src="/assets/js/bundle/main.bundle.js"></script>
+<script>
+  ( function ( window ) {
+
+    'use strict';
+    var data;
+
+//    var url = 'http://undotsushin.com/api/v1/articles/self?offset=0&length=10';
+    // user information
+    var url = 'http://undotsushin.com/api/v1/users/self/';
+//    var token = 'fee1a989f120b99cec0f8206d68f6365';
+    var token = '608c8868d866a46fa3ae6566ce62e0be';
+
+    $.ajax({
+      type:'GET',
+      crossDomain: true,
+      url: url,
+      beforeSend:function(m){
+        m.setRequestHeader("Authorization","OAuth realm=undotsushin.com, oautn_token=" + token);
+      },
+      success:function(m){
+        console.log(m);
+        $('#f1').find('pre').html( JSON.stringify(m, null, 2) );
+        $('#url' ).html(url);
+        $('#token' ).html(token);
+      }
+    });
+
+  }( window ) );
+</script>
+</body>
+</html>

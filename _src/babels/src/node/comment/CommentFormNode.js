@@ -83,6 +83,8 @@ let CommentForm = React.createClass( {
     uniqueId: React.PropTypes.string.isRequired,
     // open / close
     toggle: React.PropTypes.string.isRequired,
+    // open / close を boolean で
+    open: React.PropTypes.bool.isRequired,
     // 記事へのコメント？
     independent: React.PropTypes.bool.isRequired,
     // user profile picture: icon がない（空は可）（非ログイン）は投稿できない
@@ -110,10 +112,13 @@ let CommentForm = React.createClass( {
 
     this.message = null;
 
+    this.mounted = false;
+
     return {
       loading: '',
       body: '',
-      open: this.props.toggle === 'open'
+      //open: this.props.toggle === 'open'
+      open: this.props.open
     };
   },
   render: function() {
@@ -128,7 +133,6 @@ let CommentForm = React.createClass( {
 
     }
 
-    // console.log( '------------ Form ', this.props.uniqueId, this.state.open );
     if ( this.state.open ) {
 
       // user icon
@@ -159,12 +163,43 @@ let CommentForm = React.createClass( {
     } else {
       return null;
     }
+    /*
+    // user icon
+    let picture = this.props.icon;
+    if ( !picture ) {
+      picture = Empty.USER_PICTURE_FEATURE;
+    } else if ( !Safety.isImg( picture ) ) {
+      picture = Empty.USER_PICTURE_FEATURE;
+    }
 
+    console.log( 'render form +++ ', this.state.open, this.props.uniqueId );
+
+    return (
+      <div className={this.state.open ? 'form-open' : 'form-close'}>
+        <div className={'form-root loading-root ' + this.state.loading}>
+          <form onSubmit={this.onSubmit} ref="form">
+            <i className="comment-form-user"><img src={picture} alt=""/></i>
+            <div className="comment-form-comment-outer">
+              <div className="comment-form-comment-inner">
+                <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" autoFocus="true" />
+              </div>
+            </div>
+            <div className="comment-form-submit">
+              <input type="submit" value="コメントを投稿"/>
+            </div>
+          </form>
+          <div ref="commentMessage"></div>
+          <div className="loading-spinner">&nbsp;</div>
+        </div>
+      </div>
+    );
+    */
   },
   // ----------------------------------------
   // delegate
   componentDidMount: function() {
 
+    this.mounted = true;
     let replyStatus = this.replyStatus;
     console.log( '+++++++++++ componentDidMount ', this.props.uniqueId, replyStatus );
 
@@ -183,6 +218,7 @@ let CommentForm = React.createClass( {
 
   },
   componentDidUpdate: function() {
+    /*
     let replyStatus = this.replyStatus;
 
     if ( replyStatus === null ) {
@@ -197,9 +233,11 @@ let CommentForm = React.createClass( {
 
       }
     }
+    */
   },
   componentWillUnMount: function() {
     console.log( '---------- componentWillUnMount ', this.props.uniqueId );
+    this.mounted = false;
     this.dispose();
   },
   // ----------------------------------------
@@ -240,10 +278,12 @@ let CommentForm = React.createClass( {
         }
       }
     }*/
-    console.log( '==== replyOpen === ', this.props.uniqueId );
-
-    if ( !this.state.open && this.checkId( event ) ) {
-      this.setState( { open: true } );
+    let uniqueId = this.props.uniqueId;
+    if ( this.mounted && !this.state.open && this.checkId( event ) ) {
+      console.log( '*** replyOpen *** ', this.props.uniqueId, this.mounted );
+      this.setState( { open: true }, function() {
+        console.log( 'after setState open', uniqueId );
+      } );
     }
   },
   replyClose: function( event ) {
@@ -258,9 +298,12 @@ let CommentForm = React.createClass( {
       }
     }
     */
-    if ( this.state.open && this.checkId( event ) ) {
-      console.log( '*** replyOpen *** ', this.props.uniqueId );
-      this.setState( { open: false } );
+    let uniqueId = this.props.uniqueId;
+    if ( this.mounted && this.state.open && this.checkId( event ) ) {
+      console.log( '*** replyClose *** ', this.props.uniqueId, this.mounted );
+      this.setState( { open: false }, function() {
+        console.log( 'after setState close ', uniqueId );
+      } );
     }
   },
   // ----------------------------------------
@@ -353,13 +396,15 @@ let OpenerDom = React.createClass( {
             <span className="icon-comment">{this.props.actionMessage}</span>
           </a>
         );
-      } else {
+      } else if ( this.state.toggle === 'cancel' ) {
         return (
           <p className="comment-respond-opener comment-respond-cancel">
             <span className="icon-comment">{this.props.staticMessage}</span>
             <a href="#" onClick={this.cancelClick}><i className="icon-cancel">キャンセル</i></a>
           </p>
         );
+      } else {
+        return null;
       }
 
     }
@@ -462,6 +507,8 @@ let OpenerDom = React.createClass( {
 export let CommentFormNode = React.createClass( {
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,
+    // open / close, default close
+    toggle: React.PropTypes.string,
     // コメント送信者（自分の）profile picture
     icon: React.PropTypes.string,
     // 記事 id
@@ -520,7 +567,9 @@ export let CommentFormNode = React.createClass( {
     }
 
     let message = 'コメント';
+    // コメント数のみ表示
     let staticMessage = '';
+    // 返信アクション付きコメント数
     let actionMessage = `${message}へ返信`;
     if ( this.props.commentCount > 0 ) {
       // コメント数のみ表示
@@ -538,9 +587,9 @@ export let CommentFormNode = React.createClass( {
       );
     } else {
       // ログイン
+      // ログインユーザーのみフォームを表示する
 
       let commentClass = this.props.independent ? 'comment-form' : 'comment-respond';
-      // console.log( 'form render ', this.props.independent, this.props.articleId, this.props.commentId );
 
       return (
         <div className={commentClass + ' comment-root'}>
@@ -554,6 +603,7 @@ export let CommentFormNode = React.createClass( {
           <CommentForm
             uniqueId={this.props.uniqueId}
             toggle={toggle}
+            open={toggle === 'open'}
             independent={this.props.independent}
             icon={this.props.icon}
             articleId={this.props.articleId}
