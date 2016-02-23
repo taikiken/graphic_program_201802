@@ -6,6 +6,8 @@ include $INCLUDEPATH."tool.php";
 $o=new db;
 $o->connect();
 
+$uid=auth();
+
 $y=array();
 $y["status"]["code"]=200;
 $y["status"]["user_message"]="";
@@ -51,84 +53,99 @@ if(count($ermsg)>0){
 
 }else{
 	
-	$bio=trim($_POST["bio"]);
-	$sv[$sn[]="t2"]=$bio;
-
-	if($_FILES){
-		$ext=checkFileType($_FILES["profile_picture"]);
-		$filename=sprintf("%s.%s",md5("ut".$email),$ext);
-		if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
-			imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
-			$sv[$sn[]="img1"]=$filename;
-		}else{
-			$ermsg[]="ファイルのアップロードに失敗しました。";
+	if($_POST["create"]!=false){
+	
+		$bio=trim($_POST["bio"]);
+		$sv[$sn[]="t2"]=$bio;
+	
+		if($_FILES){
+			$ext=checkFileType($_FILES["profile_picture"]);
+			$filename=sprintf("%s.%s",md5("ut".$email),$ext);
+			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
+				imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
+				$sv[$sn[]="img1"]=$filename;
+			}else{
+				$ermsg[]="ファイルのアップロードに失敗しました。";
+			}
 		}
-	}
-	
-	if(count($_POST["interest"])>0){
-		$sv[$sn[]="t20"]=implode(",",$_POST["interest"]);
-		$interest=$_POST["interest"];
-	}
-	
-	while(list($k,$v)=each($sv)){
-		$v=stripslashes($v);
-		$v=addslashes($v);
-		$v=str_replace("\'","''",$v);
-		$v=preg_replace("/(\r\n|\r)/","\n",$v);
-		$sv[$k]=sprintf("'%s'",$v);
-	}
-	
-	$sv[$sn[]="m_time"]="now()";
-	$sv[$sn[]="u_time"]="now()";
-	$sv[$sn[]="flag"]="1";
-	$sv[$sn[]="qid"]="2";
-	$sv[$sn[]="cid"]="6";
-	$sv[$sn[]="n"]="(select max(n)+1 from repo_n where cid=6 and qid=2)";
-	
-	$o->query("begin");
-	
-	$sql=sprintf("insert into repo_n(%s) values(%s);",implode(",",$sn),implode(",",$sv));
-	$o->query($sql);
-	
-	$e=$o->affected_rows2();
-	
-	if($e){
 		
-		$sql=sprintf("select id from repo_n where t1='%s' and flag=1",$email);
+		if(count($_POST["interest"])>0){
+			$sv[$sn[]="t20"]=implode(",",$_POST["interest"]);
+			$interest=$_POST["interest"];
+		}
+		
+		while(list($k,$v)=each($sv)){
+			$v=stripslashes($v);
+			$v=addslashes($v);
+			$v=str_replace("\'","''",$v);
+			$v=preg_replace("/(\r\n|\r)/","\n",$v);
+			$sv[$k]=sprintf("'%s'",$v);
+		}
+		
+		$sv[$sn[]="m_time"]="now()";
+		$sv[$sn[]="u_time"]="now()";
+		$sv[$sn[]="flag"]="1";
+		$sv[$sn[]="qid"]="2";
+		$sv[$sn[]="cid"]="6";
+		$sv[$sn[]="n"]="(select max(n)+1 from repo_n where cid=6 and qid=2)";
+		
+		$o->query("begin");
+		
+		$sql=sprintf("insert into repo_n(%s) values(%s);",implode(",",$sn),implode(",",$sv));
 		$o->query($sql);
-		$f=$o->fetch_array();
-		$ID=$f["id"];
-		
-		for($i=0;$i<count($interest);$i++){
-			$sl[]=sprintf("insert into u_category(categoryid,userid,flag,regitime) values(%s,%s,1,now());",$interest[$i],$ID);
-		}
-		$sl=implode("\n",$sl);
-		$o->query($sl);
 		
 		$e=$o->affected_rows2();
 		
 		if($e){
 			
-			$o->query("commit");
-			
-			$sql=sprintf("select name from pm_ where id in (%s) and flag=1 order by n",implode(",",$interest));
+			$sql=sprintf("select id from repo_n where t1='%s' and flag=1",$email);
 			$o->query($sql);
-			while($f=$o->fetch_array()){
-				$interestcategory[]=$f["name"];
+			$f=$o->fetch_array();
+			$ID=$f["id"];
+			
+			if(count($interest)>0){
+				for($i=0;$i<count($interest);$i++){
+					$sl[]=sprintf("insert into u_category(categoryid,userid,flag,regitime) values(%s,%s,1,now());",$interest[$i],$ID);
+				}
+				$sl=implode("\n",$sl);
+				$o->query($sl);
+				
+				$e=$o->affected_rows2();
+			
+			}else{
+				
+				$e=1;
+				
 			}
-			
-			$s["id"]=$ID;
-			$s["name"]=$name;
-			$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$filename);
-			$s["bio"]=$bio;
-			$s["url"]=sprintf("%s/mypage/",$domain,$ID);
-			$s["type"]["id"]=6;
-			$s["type"]["label"]="一般ユーザ";
-			$s["interest"]["category"]=$interestcategory;
-			$s["access_token"]=$access_token;
-			$s["session_token"]="";
-			
-			
+	
+			if($e){
+				
+				$o->query("commit");
+				
+				$sql=sprintf("select name from pm_ where id in (%s) and flag=1 order by n",implode(",",$interest));
+				$o->query($sql);
+				while($f=$o->fetch_array()){
+					$interestcategory[]=$f["name"];
+				}
+				
+				$s["id"]=$ID;
+				$s["name"]=$name;
+				$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$filename);
+				$s["bio"]=$bio;
+				$s["url"]=sprintf("%s/mypage/",$domain,$ID);
+				$s["type"]["id"]=6;
+				$s["type"]["label"]="一般ユーザ";
+				$s["interest"]["category"]=$interestcategory;
+				$s["access_token"]=$access_token;
+				$s["session_token"]="";
+				
+				
+			}else{
+				$o->query("abort");
+				$y["status"]["code"]=500;
+				$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				$y["status"]["developer_message"]="データベースへの接続に失敗しました。";
+			}
 		}else{
 			$o->query("abort");
 			$y["status"]["code"]=500;
@@ -136,10 +153,7 @@ if(count($ermsg)>0){
 			$y["status"]["developer_message"]="データベースへの接続に失敗しました。";
 		}
 	}else{
-		$o->query("abort");
-		$y["status"]["code"]=500;
-		$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
-		$y["status"]["developer_message"]="データベースへの接続に失敗しました。";
+		$s=(object)array();
 	}
 }
 
