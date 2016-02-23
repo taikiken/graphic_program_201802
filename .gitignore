@@ -57,3 +57,6 @@ _src/app/assets/images/sprite
 _src/app/assets/css/_sprite.scss
 _src/babels/compile
 _src/babels_exe/compile
+
+# sc5 docs
+_src/sc5-guide

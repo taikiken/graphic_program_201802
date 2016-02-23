@@ -390,8 +390,8 @@ tr.v-bottom {
 // 4. space
 // -------------------------------------------------------------
 
+// styleguide:ignore:start
 $spaceValue: 100;
-
 @include prc-each('mt', 'mb', 'pt', 'pb') {
   $tmp: null;
   $properties: null;
@@ -418,10 +418,12 @@ $spaceValue: 100;
     }
   }
 }
+// styleguide:ignore:end
 
 // 5. table cell width
 // -------------------------------------------------------------
 
+// styleguide:ignore:start
 @include prc-each(auto, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200) {
   table {
     th, td {
@@ -461,6 +463,7 @@ $spaceValue: 100;
     }
   }
 }
+// styleguide:ignore:end
 
 // 6. text style
 // -------------------------------------------------------------
