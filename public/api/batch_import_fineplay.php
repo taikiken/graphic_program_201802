@@ -32,7 +32,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$tag=explode(",",$data["channel"]["item"][$i]["keyword"]);
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
-			$s["t1".$cnt]=trim(str_replace("+"," ",$tag[$cnt]));
+			$s["t1".$cnt]=esc(str_replace("+"," ",$tag[$cnt]));
 		}
 	}
 

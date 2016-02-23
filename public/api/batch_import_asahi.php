@@ -32,12 +32,13 @@ function categorymatching($r,$k){
 	
 	for($i=0;$i<count($k);$i++){
 		$d=trim($k[$i]);
-		$w[]=$d;
-		for($j=0;$j<count($exword);$j++){
-			//echo sprintf("%s=%s\n",$d,$exword[$j]);
-			if($d==$exword[$j]){
-				array_pop($w);
-				break;
+		if(strlen($d)>0){
+			$w[]=$d;
+			for($j=0;$j<count($exword);$j++){
+				if($d==$exword[$j]){
+					array_pop($w);
+					break;
+				}
 			}
 		}
 	}
@@ -46,8 +47,8 @@ function categorymatching($r,$k){
 	
 }
 
-//$xml=file_get_contents('http://www3.asahi.com/rss/Asahi-Undou/sokuhou.xml');
-$xml=file_get_contents('a.xml');
+$xml=file_get_contents('http://www3.asahi.com/rss/Asahi-Undou/sokuhou.xml');
+//$xml=file_get_contents('a.xml');
 
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
@@ -74,7 +75,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$tag=categorymatching($R,$data["channel"]["item"][$i]["keyword"]);
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
-			$s["t1".$cnt]=$tag[$cnt];
+			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}
 	
@@ -114,8 +115,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}
 }
-
-var_dump($s);
 
 //$sqla[]="select setval('repo_n_id_seq',(select max(id) from repo_n));";
 
