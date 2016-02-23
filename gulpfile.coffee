@@ -229,7 +229,7 @@ gulp.task 'dev:init', (cb) ->
 gulp.task 'default', (cb) ->
   runSequence(
     [
-      'sprite:build'
+      # 'sprite:build'
       'babels:build'
       'exe:build'
       'single:build'
@@ -243,8 +243,8 @@ gulp.task 'default', (cb) ->
       'css:build'
     ]
     [
-      # デプロイ時css document再生成
-      'sc5:make'
+      # デプロイ時css document再生成, 体制に影響無いので外す
+      # 'sc5:make'
       'clean:all'
     ]
     'lec:build'
@@ -271,4 +271,18 @@ gulp.task 'serve:htdocs', [ 'default' ], ->
     port: port
 
   browserSync option
+  return
+
+gulp.task 'deploy:test', (cb) ->
+  runSequence(
+    [
+      'bundle:copy'
+      'libs:copy'
+#      'html:build'
+      'js:build'
+      'image:build'
+      'css:build'
+    ]
+    'lec:build'
+  )
   return
