@@ -229,8 +229,11 @@ gulp.task 'dev:init', (cb) ->
 gulp.task 'default', (cb) ->
   runSequence(
     [
-       'sprite:build'
+      'vendor:init'
       'babels:build'
+      'sprite:build'
+    ]
+    [
       'exe:build'
       'single:build'
     ]

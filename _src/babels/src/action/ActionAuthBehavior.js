@@ -1,9 +1,6 @@
 /**
- * @license inazumatv.com
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/02/14
- *
- * Copyright (c) 2011-2015 inazumatv.com, inc.
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html

@@ -130,6 +130,13 @@ gulp.task 'vendor:copy', ->
   .pipe gulp.dest dir.libs
   .pipe $.size title: '*** vendor:copy ***'
 
+# --------------------------------------------
+# 【開発】
+gulp.task 'vendor:dev', ['vendor:copy', 'vendor:react:dev'], ->
+  return
+
+# --------------------------------------------
+# 【デプロイ】
 # vendor.min.js + copy
 #gulp.task 'vendor:init', ['vendor:build', 'vendor:copy', 'vendor:react:build'], ->
 gulp.task 'vendor:init', ['vendor:copy', 'vendor:react:build'], ->
