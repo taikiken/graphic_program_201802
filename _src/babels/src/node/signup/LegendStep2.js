@@ -65,7 +65,8 @@ let ChangeAvatar = React.createClass( {
 let Step2Form = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
-    avatar: React.PropTypes.string
+    avatar: React.PropTypes.string,
+    getForm: React.PropTypes.func.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -82,6 +83,7 @@ let Step2Form = React.createClass( {
       name: new ErrorMessage()
     };
     this.ie = Sagen.Browser.IE.is();
+    this.callback = null;
 
     return {
       step: this.props.step,
@@ -95,13 +97,10 @@ let Step2Form = React.createClass( {
     let zoneEntered = this.state.entered ? 'entered' : '';
 
     let errorClass = ( keyName:string ) => {
-      // return this.state[ keyName ] ? 'error' : '';
-      return '';
+      return this.errors[ keyName ].error ? 'error' : '';
     };
     let message = ( keyName:string ) => {
-      //console.log( 'message ', this.errors[ keyName ], ';' );
-      //return this.errors[ keyName ].message;
-      return '';
+      return this.errors[ keyName ].message;
     };
 
     let stageClass = () => {
@@ -111,7 +110,7 @@ let Step2Form = React.createClass( {
     return (
       <legend className="legend-step-2">
         {/* password */}
-        <span className={'form-parts ' + errorClass('errorPassword')}>
+        <span className={'form-parts ' + errorClass('password')}>
           <span className="setting-form-pw form-input">
             <input
               type="password"
@@ -121,10 +120,10 @@ let Step2Form = React.createClass( {
               onChange={this.passwordChange}
             />
           </span>
-          <ErrorNode message={message('errorPassword')} />
+          <ErrorNode message={message('password')} />
         </span>
         {/* name */}
-        <span className={'form-parts ' + errorClass('errorName')}>
+        <span className={'form-parts ' + errorClass('name')}>
           <span className="setting-form-name form-input">
             <input
               type="text"
@@ -134,7 +133,7 @@ let Step2Form = React.createClass( {
               onChange={this.nameChange}
             />
           </span>
-          <ErrorNode message={message('errorName')} />
+          <ErrorNode message={message('name')} />
         </span>
         {/* bio */}
         <span className="form-parts">
@@ -189,7 +188,8 @@ let Step2Form = React.createClass( {
   // delegate
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
-    this.status.on( SignupStatus.SIGNUP_FORM, this.formHandler );
+
+    // this.status.on( SignupStatus.SIGNUP_FORM, this.formHandler );
 
     if ( this.callback === null ) {
       let callback = {};
@@ -338,7 +338,8 @@ let Step2Form = React.createClass( {
 
   },
   prepareNext: function():void {
-    let formData = Form.element( this.form );
+    console.log( 'from element ', this.props.getForm() );
+    let formData = Form.element( this.props.getForm() );
     // not create
     // 入力検証のみ
     formData.append( 'create', false );
@@ -378,12 +379,29 @@ let Step2Form = React.createClass( {
   done: function( result:Result ) {
     console.log( 'done ', result );
     if ( result.status.code === 200 ) {
-      // OK
+      // OK -> next step
       this.next();
     }
   },
   fail: function( error:Error ) {
     console.log( 'fail ', error.result.response.errors );
+    let errors = error.result.response.errors;
+    if ( Array.isArray( errors ) ) {
+
+      for ( var errorObject of errors ) {
+
+        for ( var key in errorObject ) {
+
+          if ( errorObject.hasOwnProperty( key ) ) {
+            this.errors[ key ].message = errorObject[ key ];
+          }
+
+        }
+
+      }
+
+    }
+    console.log( '------------------------- fail ', this.errors );
     this.setState( { error: true } );
   },
   reset: function() {
@@ -398,7 +416,8 @@ let Step2Form = React.createClass( {
 
 export let LegendStep2 = React.createClass( {
   propTypes: {
-    step: React.PropTypes.number.isRequired
+    step: React.PropTypes.number.isRequired,
+    getForm: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -423,6 +442,7 @@ export let LegendStep2 = React.createClass( {
         </span>
         <Step2Form
           step={this.props.step}
+          getForm={this.props.getForm}
         />
       </div>
     );

@@ -69,7 +69,7 @@ export let RootNode = React.createClass( {
            <div className={stepClassSelector(this.state.step)}>
               <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
                 <LegendStep1 step={this.props.step} />
-                <LegendStep2 step={this.props.step + 1} />
+                <LegendStep2 step={this.props.step + 1} getForm={this.getForm} />
                 <LegendStep3 step={this.props.step + 2} categories={this.props.categories} />
                 <div className="submit-hidden-container"><input type="submit" /></div>
               </form>
@@ -80,9 +80,11 @@ export let RootNode = React.createClass( {
   },
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
+    /*
     // form 通知
     let form = ReactDOM.findDOMNode( this.refs.signup );
     this.status.form( form );
+    */
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
@@ -109,5 +111,8 @@ export let RootNode = React.createClass( {
   },
   updateStep: function( step:Number ):void {
     this.setState( { step: step } );
+  },
+  getForm() {
+    return ReactDOM.findDOMNode( this.refs.signup );
   }
 } );
