@@ -46,15 +46,23 @@ export class Category {
     // header
     Header.start();
 
-    // list
-    let archive = new UT.view.ViewCategory( slug, Dom.board(), Dom.boardMore() );
-    archive.start();
+    let element = Dom.board();
+    let elementMore = Dom.boardMore();
 
-    // sidebar
-    Sidebar.start( slug );
+    if ( element !== null && elementMore !== null ) {
 
-    // title
-    console.log( 'type', slug, type );
+      // list
+      let archive = new UT.view.ViewCategory( slug, element, elementMore );
+      archive.start();
+
+      // sidebar
+      Sidebar.start( slug );
+
+      // title
+      // console.log( 'type', slug, type );
+
+    }
+
 
   }
 

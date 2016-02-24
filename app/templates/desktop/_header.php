@@ -25,19 +25,32 @@
 </head>
 <body>
 <div class="whole">
+<?php
+// header 表示条件 start
+$template_name = $page['template'];
 
+if (
+  $template_name == 'index' ||
+  $template_name == '404' ||
+  $template_name == 'category' ||
+  $template_name == 'p' ||
+  $template_name == 'search' ||
+  $template_name == 'setting' ||
+  $template_name == 'mypage' ||
+  $template_name == 'mypage.activities' ||
+  $template_name == 'notifications'
+) :
+?>
   <header class="head-sec">
-      <div class="head-sec-inner">
-        <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
+    <div class="head-sec-inner">
+      <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
-        <aside class="f-right clearfix">
-          <div id="head-search-container" class="head-search"></div><!-- /.head-search -->
-
-          <div id="user-profile-container"></div><!--/header-user-->
-
-        </aside>
-      </div><!-- /.head-sec-inner -->
-    </header><!-- /.head-sec -->
+      <aside class="f-right clearfix">
+        <div id="head-search-container" class="head-search"></div><!-- /.head-search -->
+        <div id="user-profile-container"></div><!--/header-user-->
+      </aside>
+    </div><!-- /.head-sec-inner -->
+  </header><!-- /.head-sec -->
 
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
@@ -62,3 +75,7 @@
       <div id="dialogue-notice-btn-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice">CLOSE</a></div>
     </div>
   </div><!-- /.dialogue-notice -->
+<?php
+endif;
+// header 表示条件 end
+?>

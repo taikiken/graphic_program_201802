@@ -50,21 +50,24 @@ export class Single {
 
     // header
     // header.user
-    var headerUser = new UT.view.header.ViewHeaderUser( Dom.profile() );
-    if ( UT.app.User.sign ) {
+    let profileElement = Dom.profile();
+    let headerUser;
+    if ( profileElement !== null ) {
+      headerUser = new UT.view.header.ViewHeaderUser( profileElement );
+      if ( UT.app.User.sign ) {
 
-      // login user はコメント投稿可能 -> 表示アイコン必要
-      _headerUser = headerUser;
-      headerUser.on( UT.view.View.BEFORE_RENDER, Single.onHeader );
+        // login user はコメント投稿可能 -> 表示アイコン必要
+        _headerUser = headerUser;
+        headerUser.on( UT.view.View.BEFORE_RENDER, Single.onHeader );
 
-    } else {
+      } else {
 
-      // 非ログインユーザーはアイコン取得いらない
-      ++_prepared;
+        // 非ログインユーザーはアイコン取得いらない
+        ++_prepared;
 
+      }
+      headerUser.start();
     }
-
-    headerUser.start();
 
     // single page
     let elements = {
@@ -72,10 +75,15 @@ export class Single {
       footer: Dom.singleFooter()
     };
 
-    let single = new UT.view.ViewSingle( articleId, Dom.singleHeader(), elements );
-    _viewSingle = single;
-    single.on( UT.view.View.BEFORE_RENDER, Single.before );
-    single.start();
+    let singleHeaderElement = Dom.singleHeader();
+
+    if ( singleHeaderElement !== null && elements.related !== null && elements.footer !== null ) {
+      let single = new UT.view.ViewSingle( articleId, singleHeaderElement, elements );
+      _viewSingle = single;
+      single.on( UT.view.View.BEFORE_RENDER, Single.before );
+      single.start();
+    }
+
 
   }
   /**
@@ -138,29 +146,41 @@ export class Single {
     let ViewComments = UT.view.ViewComments;
 
     // comment form
-    let commentForm = new UT.view.comment.ViewCommentForm( Dom.commentForm(), articleId, picture );
-    commentForm.start();
+    let commentFormElement = Dom.commentForm();
+    if ( commentFormElement !== null ) {
+      let commentForm = new UT.view.comment.ViewCommentForm( commentFormElement, articleId, picture );
+      commentForm.start();
+    }
 
     // self
-    let commentSelf = new ViewComments( articleId, Dom.commentSelf(), UT.app.const.CommentsType.SELF );
-    if ( _userDae !== null ) {
-      commentSelf.user = _userDae;
+    let selfElement =  Dom.commentSelf();
+    if ( selfElement !== null ) {
+      let commentSelf = new ViewComments( articleId, selfElement, UT.app.const.CommentsType.SELF );
+      if ( _userDae !== null ) {
+        commentSelf.user = _userDae;
+      }
+      commentSelf.start();
     }
-    commentSelf.start();
 
     // official
-    let official = new ViewComments( articleId, Dom.commentOfficial(), UT.app.const.CommentsType.OFFICIAL );
-    if ( _userDae !== null ) {
-      official.user = _userDae;
+    let officialElement = Dom.commentOfficial();
+    if ( officialElement !== null ) {
+      let official = new ViewComments( articleId, officialElement, UT.app.const.CommentsType.OFFICIAL );
+      if ( _userDae !== null ) {
+        official.user = _userDae;
+      }
+      official.start();
     }
-    official.start();
 
     // normal
-    let normal = new ViewComments( articleId, Dom.commentNormal(), UT.app.const.CommentsType.NORMAL );
-    if ( _userDae !== null ) {
-      normal.user = _userDae;
+    let normalElement = Dom.commentNormal();
+    if ( normalElement !== null ) {
+      let normal = new ViewComments( articleId, normalElement, UT.app.const.CommentsType.NORMAL );
+      if ( _userDae !== null ) {
+        normal.user = _userDae;
+      }
+      normal.start();
     }
-    normal.start();
 
   }
 }

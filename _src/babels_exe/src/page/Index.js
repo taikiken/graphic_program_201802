@@ -46,18 +46,28 @@ export class Index {
 
     // ---------------------------------------------------------
     // pickup
-    let pickup = new UT.view.home.ViewPickup( Dom.pickup() );
-    pickup.start();
+    let pickupElement = Dom.pickup();
+    if ( pickupElement !== null ) {
+      let pickup = new UT.view.home.ViewPickup( pickupElement );
+      pickup.start();
+    }
 
     // ---------------------------------------------------------
     // headline
-    let headline = new UT.view.home.ViewHeadline( Dom.headline() );
-    headline.start();
+    let headlineElement =  Dom.headline();
+    if ( headlineElement !== null ) {
+      let headline = new UT.view.home.ViewHeadline( headlineElement );
+      headline.start();
+    }
 
     // ---------------------------------------------------------
     // news
-    let archive = new UT.view.home.ViewNews( Dom.board(), Dom.boardMore() );
-    archive.start();
+    let boardElement = Dom.board();
+    let moreElement = Dom.boardMore();
+    if ( boardElement !== null && moreElement !== null ) {
+      let archive = new UT.view.home.ViewNews( boardElement, moreElement );
+      archive.start();
+    }
 
     // sidebar, slug なし(=all)
     Sidebar.start();

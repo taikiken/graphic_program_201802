@@ -39,7 +39,11 @@ export class SearchFrom {
    */
   static start():void {
     // header.user
-    var searchFrom = new UT.view.header.ViewHeaderSearch( Dom.search() );
-    searchFrom.start();
+    let searchElement = Dom.search();
+    if ( searchElement !== null ) {
+      let searchFrom = new UT.view.header.ViewHeaderSearch( searchElement );
+      searchFrom.start();
+    }
+
   }
 }

@@ -15,6 +15,8 @@ import {Dom} from '../dom/Dom';
 
 let TweenLite = self.TweenLite;
 let easing = self.com.greensock.easing;
+// UT
+let UT = self.UT;
 
 /**
  * page top に戻る
@@ -31,7 +33,10 @@ export class PageTop {
    * click event を bind します
    */
   init():void {
-    Dom.pageTop().addEventListener( 'click', this.onClick.bind( this ), false );
+    let element = Dom.pageTop();
+    if ( element !== null ) {
+      element.addEventListener( 'click', this.onClick.bind( this ), false );
+    }
   }
   /**
    * element click event handler
