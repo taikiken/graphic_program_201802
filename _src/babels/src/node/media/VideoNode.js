@@ -18,7 +18,7 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 // video caption
-let VideoCaption = React.createClass( {
+let VideoCaptionNode = React.createClass( {
   propTypes: {
     caption: React.PropTypes.string
   },
@@ -39,7 +39,7 @@ let VideoCaption = React.createClass( {
 } );
 
 // play button
-let VideoPlay = React.createClass( {
+let VideoPlayNode = React.createClass( {
   propTypes: {
     playImage: React.PropTypes.string.isRequired,
     callback: React.PropTypes.func.isRequired,
@@ -103,13 +103,13 @@ export let VideoNode = React.createClass( {
           <video poster={poster} width={Content.WIDTH} height={Content.HD_HEIGHT} preload="none" controls ref="video">
             <source src={video.url} type="video/mp4"/>
           </video>
-          <VideoPlay
+          <VideoPlayNode
             playImage={this.props.playImage}
             callback={this.playClick}
             showPlay={this.state.showPlay}
           />
         </div>
-        <VideoCaption caption={caption} />
+        <VideoCaptionNode caption={caption} />
       </div>
     );
   },

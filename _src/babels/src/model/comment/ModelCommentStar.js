@@ -43,6 +43,7 @@ export class ModelCommentStar extends Model {
   }
   /**
    * Ajax request を開始します
+   * @param {string} type action type ActionType.DELETE | ActionType.ADD
    */
   start( type:string ):void {
 

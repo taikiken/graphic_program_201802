@@ -26,9 +26,9 @@ let _symbol = Symbol();
 export class CommentStar extends ActionAuthBehavior {
   /**
    * コメント GOOD / BAD を行います
+   * @param {Symbol} target new でインスタンスを作成しないための private symbol
    * @param {Number} commentId コメント Id
    * @param {string} type good or bad
-   * @param {string} mode add or delete
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
@@ -87,7 +87,7 @@ export class CommentStar extends ActionAuthBehavior {
    * @param {string} method request method
    */
   start( method:string = '' ):void {
-    console.error( 'illegal operation, use start. instead add / delete.' );
+    console.error( 'illegal operation, use start. instead add / delete.' + method );
   }
   /**
    * コメント Good / Bad 登録

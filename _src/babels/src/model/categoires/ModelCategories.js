@@ -22,7 +22,7 @@ import {Result} from '../../data/Result';
 export class ModelCategories extends Model {
   /**
    * カテゴリー一覧を取得し callback を発火します
-   * @param option
+   * @param {Object} [option={}] optional event handler
    */
   constructor( option:Object = {} ) {
     super( option );

@@ -71,8 +71,6 @@ export class ViewComments extends View {
 
     // more button instance 用
     this._moreRendered = null;
-    // CommentsDom instance を保持します
-    this._commentsRendered = null;
 
     // user 情報
     this._user = null;
@@ -190,25 +188,6 @@ export class ViewComments extends View {
 
     } );
 
-    /*
-    // 処理開始 関数振り分け
-    switch ( this._commentsListType ) {
-
-      case CommentsType.SELF :
-        //this.mine( commentsListDae );
-        this.all( commentsListDae );
-        break;
-
-      case CommentsType.OFFICIAL :
-      case CommentsType.NORMAL :
-      case CommentsType.ALL :
-      default:
-        this.all( commentsListDae );
-        break;
-
-    }
-    */
-
     // 処理開始 関数振り分け いらないんじゃないか疑惑
     this.all( commentsListDae );
 
@@ -300,28 +279,6 @@ export class ViewComments extends View {
       console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
       show = !!show;
 
-      /*
-      // moreElement 存在チェックを行う
-      // Element 型を保証する
-      // _moreRendered が null の時のみ, instance があれば state を update する
-      if ( Safety.isElement( moreElement ) ) {
-        if ( _this._moreRendered === null ) {
-
-          _this._moreRendered = ReactDOM.render(
-            React.createElement( MoreView, { show: show, rest: rest } ),
-            moreElement
-          );
-
-        } else {
-
-          // instance がある, render 済み
-          // state を変更し button の表示・非表示を行う
-          _this._moreRendered.updateShow( show, rest );
-
-        }
-      }
-      */
-
       // とにかく render する
       ReactDOM.render(
         React.createElement( MoreView, { show: show, rest: rest } ),
@@ -334,7 +291,7 @@ export class ViewComments extends View {
     // COMMENT reply loop
     // 親コメントへ返信
     // --------------------------------------------
-    let CommentReplyChild = React.createClass( {
+    let CommentReplyChildDom = React.createClass( {
       propType: {
         total: React.PropTypes.number.isRequired,
         sign: React.PropTypes.bool.isRequired,
@@ -360,7 +317,6 @@ export class ViewComments extends View {
 
         let reply = this.state.reply;
         let replyList = reply.comments;
-        let commentId = this.props.commentId;
         let commentsListType = this.props.commentsListType;
         let userId = this.props.userId;
         let sign = this.props.sign;
@@ -404,7 +360,7 @@ export class ViewComments extends View {
     // --------------------------------------------
     // COMMENT Parent
     // --------------------------------------------
-    let CommentsParent = React.createClass( {
+    let CommentsParentDom = React.createClass( {
       propType: {
         commentObject: React.PropTypes.object.isRequired,
         uniqueId: React.PropTypes.string.isRequired,
@@ -435,11 +391,16 @@ export class ViewComments extends View {
         if ( sign ) {
           let user = this.props.user;
           icon = user.profilePicture;
+
+          /*
           if ( !icon ) {
             icon = Empty.USER_EMPTY;
           } else if ( !Safety.isImg( icon ) ) {
+            // 画像ファイル名に拡張子がないのがあったので
+            // 拡張子チェックを追加
             icon = Empty.USER_EMPTY;
           }
+          */
 
           // id
           userId = String( user.id );
@@ -468,7 +429,7 @@ export class ViewComments extends View {
                 commentsListType={commentsListType}
               />
               {/* comment reply */}
-              <CommentReplyChild
+              <CommentReplyChildDom
                 uniqueId={`reply-${this.props.uniqueId}`}
                 total={total}
                 sign={sign}
@@ -536,7 +497,7 @@ export class ViewComments extends View {
                 let key = `${commentsListType}-${articleId}-${commentId}-${userId}`;
                 console.log( 'commentId ' + commentId + ', ' + key );
 
-                return <CommentsParent
+                return <CommentsParentDom
                   key={key}
                   uniqueId={key}
                   index={index}
@@ -553,6 +514,8 @@ export class ViewComments extends View {
         );
 
       },
+      // --------------------------------------------
+      // delegate
       componentDidMount: function() {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
@@ -563,6 +526,7 @@ export class ViewComments extends View {
       componentDidUpdate: function() {
         moreButton( action.hasNext(), action.rest(), ReactDOM.findDOMNode(this.refs.commentMore) );
       },
+      // --------------------------------------------
       updateList: function( list ) {
         // state を変更し appendChild を行う
         this.setState( { commentsList: list } );
@@ -576,28 +540,6 @@ export class ViewComments extends View {
     if ( user === null ) {
       user = Object.create( {} );
     }
-
-    //// this._commentsRendered が null の時だけ CommentsDom.render する
-    //if ( this._commentsRendered === null || this._reload ) {
-    //
-    //  this._reload = false;
-    //
-    //  this._commentsRendered = ReactDOM.render(
-    //    <CommentsDom
-    //      commentsList={commentsList}
-    //      articleId={String(this._articleId)}
-    //      commentsListType={this._commentsListType}
-    //      user={user}
-    //    />,
-    //    element
-    //  );
-    //
-    //} else {
-    //
-    //  this._commentsRendered.updateList( commentsList );
-    //
-    //}
-
 
     // とにかくそのまま
     ReactDOM.render(
@@ -617,21 +559,6 @@ export class ViewComments extends View {
    * @param {Object} event ReplyStatus.COMPLETE event
    */
   onComplete( event:Object ):void {
-    /*
-    console.log( 'ViewComments onComplete ', User.sign, this._commentsListType, event );
-    if ( event.kind === this._commentsListType ) {
-      this.reload();
-    } else {
-
-      if ( User.sign && event.kind === CommentsType.INDEPENDENT && this._commentsListType === CommentsType.SELF ) {
-        // 記事へのコメント
-        // ログインユーザー
-        // 自分のコメントを再読み込み
-        this.reload();
-      }
-
-    }
-    */
 
     // とにかくreloadが良さそう
     this.reload();

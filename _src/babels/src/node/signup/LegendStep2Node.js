@@ -39,7 +39,10 @@ import {ModelSignup} from '../../model/signup/ModelSignup';
 let React = self.React;
 let Sagen = self.Sagen;
 
-let ChangeAvatar = React.createClass( {
+// ------------------------------------------
+// user picture thumbnail 作成
+// ------------------------------------------
+let ChangeAvatarNode = React.createClass( {
   propTypes: {
     show: React.PropTypes.bool.isRequired,
     handler: React.PropTypes.func.isRequired
@@ -61,7 +64,10 @@ let ChangeAvatar = React.createClass( {
   }
 } );
 
-let Step2Form = React.createClass( {
+// ------------------------------------------
+// step 2 入力フォーム
+// ------------------------------------------
+let Step2FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     avatar: React.PropTypes.string,
@@ -159,7 +165,7 @@ let Step2Form = React.createClass( {
           >
             <div className={'avatar-stage'}>
               <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
-              <ChangeAvatar
+              <ChangeAvatarNode
                 show={this.props.avatar !== this.state.avatar}
                 handler={this.avatarChangeHandler}
               />
@@ -176,9 +182,11 @@ let Step2Form = React.createClass( {
         </div>
 
         {/* button */}
-        <span className="setting-form-submit mod-btnB01">
-          <input type="button" value="次へ" onClick={this.nextHandler} />
-        </span>
+        <div className="form-parts">
+          <span className="setting-form-submit mod-btnB01">
+            <input type="button" value="次へ" onClick={this.nextHandler} />
+          </span>
+        </div>
       </legend>
     );
 
@@ -203,16 +211,6 @@ let Step2Form = React.createClass( {
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
     this.dispose();
   },
-  /*
-  // -------------------------------------------------------
-  // custom method
-  // form element を取得
-  // 入力チェック時に使う
-  formHandler: function( event:Object ) {
-    this.status.off( SignupStatus.SIGNUP_FORM, this.formHandler );
-    this.form = event.form;
-  },
-  */
   // -------------------------------------------------------
   // input changes
   // password
@@ -397,12 +395,11 @@ let Step2Form = React.createClass( {
             this.errors[ key ].message = errorObject[ key ];
           }
 
-        }
+        }// for in
 
-      }
+      }// for of
 
-    }
-    console.log( '------------------------- fail ', this.errors );
+    }// if ( Array.isArray( errors ) )
     this.setState( { error: true } );
   },
   reset: function() {
@@ -415,7 +412,12 @@ let Step2Form = React.createClass( {
   }
 } );
 
-export let LegendStep2 = React.createClass( {
+/**
+ * <h3>React component<h3>
+ * **signup step 2**
+ * 基本情報設定
+ */
+export let LegendStep2Node = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     getForm: React.PropTypes.func.isRequired
@@ -441,7 +443,7 @@ export let LegendStep2 = React.createClass( {
           <input type="text" value={this.state.email}/>
           <div className="disabled"></div>
         </span>
-        <Step2Form
+        <Step2FormNode
           step={this.props.step}
           getForm={this.props.getForm}
         />
@@ -449,6 +451,8 @@ export let LegendStep2 = React.createClass( {
     );
 
   },
+  // -----------------------------------------------------------
+  // delegate
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
     this.status.on( SignupStatus.SIGNUP_EMAIL, this.emailChange );

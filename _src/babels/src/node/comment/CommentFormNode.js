@@ -26,7 +26,7 @@ import {Model} from '../../model/Model';
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
-
+/*
 let CommentMessage = React.createClass( {
   propTypes: {
     message: React.PropTypes.string,
@@ -72,12 +72,13 @@ let CommentMessage = React.createClass( {
     this.setState( { message: message, error: error ? 'error' : 'message' } );
   }
 } );
+*/
 
 // comment form
 /**
  * コメント送信用 form
  */
-let CommentForm = React.createClass( {
+let FormElementNode = React.createClass( {
   propTypes: {
     // 識別用 unique Id
     uniqueId: React.PropTypes.string.isRequired,
@@ -117,7 +118,6 @@ let CommentForm = React.createClass( {
     return {
       loading: '',
       body: '',
-      //open: this.props.toggle === 'open'
       open: this.props.open
     };
   },
@@ -140,13 +140,17 @@ let CommentForm = React.createClass( {
       if ( !picture ) {
         picture = Empty.USER_PICTURE_FEATURE;
       } else if ( !Safety.isImg( picture ) ) {
+        // 画像ファイル名に拡張子がないのがあったので
+        // 拡張子チェックを追加
         picture = Empty.USER_PICTURE_FEATURE;
       }
+
+      let loggedIn = picture === Empty.USER_PICTURE_FEATURE ? '' : 'user-logged-in';
 
       return (
         <div className={'form-root loading-root ' + this.state.loading}>
           <form onSubmit={this.onSubmit} ref="form">
-            <i className="comment-form-user"><img src={picture} alt=""/></i>
+            <i className={'comment-form-user ' + loggedIn}><img src={picture} alt=""/></i>
             <div className="comment-form-comment-outer">
               <div className="comment-form-comment-inner">
                 <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" autoFocus="true" />
@@ -163,37 +167,6 @@ let CommentForm = React.createClass( {
     } else {
       return null;
     }
-    /*
-    // user icon
-    let picture = this.props.icon;
-    if ( !picture ) {
-      picture = Empty.USER_PICTURE_FEATURE;
-    } else if ( !Safety.isImg( picture ) ) {
-      picture = Empty.USER_PICTURE_FEATURE;
-    }
-
-    console.log( 'render form +++ ', this.state.open, this.props.uniqueId );
-
-    return (
-      <div className={this.state.open ? 'form-open' : 'form-close'}>
-        <div className={'form-root loading-root ' + this.state.loading}>
-          <form onSubmit={this.onSubmit} ref="form">
-            <i className="comment-form-user"><img src={picture} alt=""/></i>
-            <div className="comment-form-comment-outer">
-              <div className="comment-form-comment-inner">
-                <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" autoFocus="true" />
-              </div>
-            </div>
-            <div className="comment-form-submit">
-              <input type="submit" value="コメントを投稿"/>
-            </div>
-          </form>
-          <div ref="commentMessage"></div>
-          <div className="loading-spinner">&nbsp;</div>
-        </div>
-      </div>
-    );
-    */
   },
   // ----------------------------------------
   // delegate
@@ -218,25 +191,8 @@ let CommentForm = React.createClass( {
 
   },
   componentDidUpdate: function() {
-    /*
-    let replyStatus = this.replyStatus;
-
-    if ( replyStatus === null ) {
-      replyStatus = ReplyStatus.factory();
-      this.replyStatus = replyStatus;
-
-      // 記事へのコメントは閉じない
-      if ( !this.props.independent ) {
-
-        replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
-        replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
-
-      }
-    }
-    */
   },
   componentWillUnMount: function() {
-    console.log( '---------- componentWillUnMount ', this.props.uniqueId );
     this.mounted = false;
     this.dispose();
   },
@@ -366,7 +322,7 @@ let CommentForm = React.createClass( {
 } );
 
 // open / close anchor tag
-let OpenerDom = React.createClass( {
+let OpenerNode = React.createClass( {
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,
     independent: React.PropTypes.bool.isRequired,
@@ -489,21 +445,27 @@ let OpenerDom = React.createClass( {
   },
   // ----------------------------------------
   // listener
+  /*
   replyOpen: function( event ) {
 
   },
   replyClose: function( event ) {
 
   },
-  replyStart: function( event ) {
+  */
+  replyStart: function() {
     this.cancelClick = false;
   },
-  replyComplete: function( event ) {
+  replyComplete: function() {
     this.cancelClick = true;
   }
 } );
 
 // wrapper dom + form
+/**
+ * <h3>React component<h3>
+ * comment form
+ */
 export let CommentFormNode = React.createClass( {
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,
@@ -593,14 +555,14 @@ export let CommentFormNode = React.createClass( {
 
       return (
         <div className={commentClass + ' comment-root'}>
-          <OpenerDom
+          <OpenerNode
             uniqueId={this.props.uniqueId}
             independent={this.props.independent}
             staticMessage={staticMessage}
             actionMessage={actionMessage}
             callback={this.openerClick}
           />
-          <CommentForm
+          <FormElementNode
             uniqueId={this.props.uniqueId}
             toggle={toggle}
             open={toggle === 'open'}
@@ -628,7 +590,7 @@ export let CommentFormNode = React.createClass( {
     this.setState( { body: event.target.value } );
   },
   openerClick: function( status:string ) {
-    console.log( '********** root openerClick ', this.props.uniqueId, status );
+    // console.log( '********** root openerClick ', this.props.uniqueId, status );
     // open / close が opener から送られてくる
     // this.setState( { toggle: status } );
 

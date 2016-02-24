@@ -37,6 +37,6 @@ export class Message {
   //  CONST 代わり
   // ---------------------------------------------------
   static get UNLOAD():string {
-    return '新規登録がキャンセルされます！';
+    return '入力内容が取消しされます！';
   }
 }

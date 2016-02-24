@@ -62,7 +62,7 @@ export class Bookmark extends ActionAuthBehavior {
    * @param {string} method request method
    */
   start( method:string = '' ):void {
-    console.error( 'illegal operation, use start. instead add / delete.' );
+    console.error( 'illegal operation, use start. instead add / delete.' + method );
   }
   /**
    * 記事のブックマーク登録

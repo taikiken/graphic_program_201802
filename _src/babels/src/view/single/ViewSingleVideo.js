@@ -129,6 +129,8 @@ export class ViewSingleVideo extends View {
         if ( !poster ) {
           poster = Empty.VIDEO_THUMBNAIL;
         } else if (!Safety.isImg(poster)) {
+          // 画像ファイル名に拡張子がないのがあったので
+          // 拡張子チェックを追加
           poster = Empty.VIDEO_THUMBNAIL;
         }
 

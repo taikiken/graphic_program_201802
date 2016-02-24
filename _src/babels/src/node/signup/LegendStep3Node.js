@@ -37,7 +37,7 @@ import {Loc} from '../../util/Loc';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
-let Step3Form = React.createClass( {
+let Step3FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
@@ -56,21 +56,16 @@ let Step3Form = React.createClass( {
   },
   render: function() {
 
-    var _this = this;
-
     return (
       <legend className="legend-step-3">
         <div className="setting-form-interest">
           <ul className="setting-form-interest-list">
             {
               this.state.categories.map( function( category, i ) {
-
-                console.log( 'checkedValue ', category.slug, _this.state[category.slug] );
-                var boundBox = _this.changeBox.bind(_this, category.slug);
-
                 return (
                   <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug }>
                     <input
+                      className={'interest-item interest-item-' + i}
                       type="checkbox"
                       name="interest[]"
                       id={'interest-item-' + category.slug}
@@ -81,14 +76,15 @@ let Step3Form = React.createClass( {
                     </label>
                   </li>
                 );
-
               } )
             }
           </ul>
         </div>
-        <span className="setting-form-submit mod-btnB01">
-          <input type="button" value="登録する" onClick={this.nextHandler}/>
-        </span>
+        <div className="form-parts">
+          <span className="setting-form-submit mod-btnB01">
+            <input type="button" value="登録する" onClick={this.nextHandler}/>
+          </span>
+        </div>
       </legend>
     );
 
@@ -162,12 +158,13 @@ let Step3Form = React.createClass( {
   },
   next: function( token:string ) {
     // login
+    console.log( '----success--- ', token );
     // token setup
     if ( User.login( token ) ) {
       // home
       Loc.current = Url.index();
     } else {
-      console.log( 'fail login ...' );
+      console.log( 'fail login ...', token );
     }
 
   },
@@ -192,7 +189,12 @@ let Step3Form = React.createClass( {
   }
 } );
 
-export let LegendStep3 = React.createClass( {
+/**
+ * <h3>React component<h3>
+ * **signup step 3**
+ * 「興味のある競技」入力フォームコンテナ
+ */
+export let LegendStep3Node = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
@@ -210,7 +212,7 @@ export let LegendStep3 = React.createClass( {
 
     return (
       <div className="legend-container legend-container-3">
-        <Step3Form
+        <Step3FormNode
           step={this.props.step}
           categories={this.props.categories}
           getForm={this.props.getForm}

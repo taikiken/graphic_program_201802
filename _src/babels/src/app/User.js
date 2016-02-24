@@ -73,45 +73,60 @@ export class User {
    * @return {string} token を返します, 見つからない時はnullを返します
    */
   static get token():string {
+    //
+    //if ( _sign ) {
+    //  /*
+    //  switch ( Env.mode ) {
+    //
+    //    case Env.TEST:
+    //    case Env.DEVELOP:
+    //      // return [ 'fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f' ][ Math.floor( Math.random() * 3 ) ];
+    //      // profile picture ない 山際武
+    //      // return 'fee1a989f120b99cec0f8206d68f6365';
+    //      return '608c8868d866a46fa3ae6566ce62e0be';
+    //
+    //    case Env.PRODUCTION:
+    //    default:
+    //      return Cookie.get( Cookie.TARGET );
+    //
+    //  }*/
+    //
+    //  return Cookie.get( Cookie.TARGET );
+    //
+    //} else {
+    //  // 非ログインは空文字を返す
+    //  return '';
+    //}
 
-    if ( _sign ) {
-      /*
-      switch ( Env.mode ) {
+    return Cookie.get( Cookie.TARGET );
 
-        case Env.TEST:
-        case Env.DEVELOP:
-          // return [ 'fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f' ][ Math.floor( Math.random() * 3 ) ];
-          // profile picture ない 山際武
-          // return 'fee1a989f120b99cec0f8206d68f6365';
-          return '608c8868d866a46fa3ae6566ce62e0be';
+  }
 
-        case Env.PRODUCTION:
-        default:
-          return Cookie.get( Cookie.TARGET );
-
-      }*/
-
-      return Cookie.get( Cookie.TARGET );
-
-    } else {
-      // 非ログインは空文字を返す
-      // debugger
-      // Authorization:OAuth realm=undotsushin.com, oautn_token=
-      return '';
-    }
-
+  /**
+   * 開発用 method
+   * @return {string} 開発 token
+   */
+  static fake():string {
+    return '608c8868d866a46fa3ae6566ce62e0be';
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * ログイン設定をします
+   * @param {string} token 開発中の引数はオプション扱いです
    * @return {boolean} login が成功したかを返します
    */
   static login( token:string ):boolean {
     token = Safety.string( token, '' );
+    console.log( 'token ', token );
     if ( token === '' ) {
-      return false;
+      if ( Env.mode === Env.PRODUCTION ) {
+        throw new Error( 'token have to need.', token );
+      } else {
+        token = User.fake();
+        console.warn( `illegal token instead use fake. ${token}` );
+      }
     }
 
     let result = Cookie.save( token );
@@ -128,14 +143,15 @@ export class User {
 
   /**
    * ログイン・非ログインを確認します
+   * <p>ログイン（token発見）時は login 処理を行います</p>
    */
   static init():void {
     let token = User.token;
-    if ( typeof token !== 'undefined' && token !== null && token !== '' ) {
-      // may be login
-      User.sign = true;
-    } else {
+    console.log( 'user init token ', token, ';' );
+    if ( token === null || typeof token === 'undefined' || token === '' ) {
       User.sign = false;
+    } else {
+      User.login( token );
     }
   }
 }

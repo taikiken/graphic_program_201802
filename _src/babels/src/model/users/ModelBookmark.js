@@ -31,10 +31,11 @@ export class ModelBookmark extends Model {
   }
   /**
    * Ajax request を開始します
+   * @param {boolean} add 追加: true / 削除: false
    */
   start( add:boolean ):void {
 
-    if ( add ) {
+    if ( !!add ) {
       this.action.add();
     } else {
       this.action.remove();

@@ -62,6 +62,14 @@ legend {
     // ceil( 320/520 )
     width: 62%;
   }
+
+  .form-parts.align-right {
+    float: right;
+    width: 37%;
+    .setting-form-submit {
+      width: 100%;
+    }
+  }
 }
 .legend-step-2 {
   width: 100%;

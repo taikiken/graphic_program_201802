@@ -190,7 +190,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // More button
     // --------------------------------------------
-    let MoreView = React.createClass( {
+    let MoreViewDom = React.createClass( {
       propTypes: {
         show: React.PropTypes.bool.isRequired,
         action: React.PropTypes.object.isRequired,
@@ -326,7 +326,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         // チェックをパスし実行する
         _this._moreRendered = ReactDOM.render(
-          React.createElement( MoreView, { show: show, action: this.action } ),
+          React.createElement( MoreViewDom, { show: show, action: this.action } ),
           moreElement
         );
 
@@ -341,7 +341,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // COMMENTS Popular second
     // --------------------------------------------
-    let CommentedUsers = React.createClass( {
+    let CommentedUsersDom = React.createClass( {
       propType: {
         total: React.PropTypes.number.isRequired
       },
@@ -364,7 +364,7 @@ export class ViewArchiveMasonryInfinite extends View {
     } );
 
 
-    let CommentsSecond = React.createClass( {
+    let CommentsSecondDom = React.createClass( {
       propType: {
         seconds: React.PropTypes.array.isRequired,
         articleId: React.PropTypes.string.isRequired,
@@ -408,7 +408,7 @@ export class ViewArchiveMasonryInfinite extends View {
                 } )
               }
             </ul>
-            <CommentedUsers total={this.props.total} />
+            <CommentedUsersDom total={this.props.total} />
           </div>
         );
 
@@ -458,7 +458,18 @@ export class ViewArchiveMasonryInfinite extends View {
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
-          let picture = !!firstUser.profilePicture ? firstUser.profilePicture : Empty.USER_EMPTY;
+          let picture = firstUser.profilePicture;
+
+          if ( !picture ) {
+            picture = Empty.USER_EMPTY;
+          } else if ( !Safety.isImg( picture ) ) {
+            // 画像ファイル名に拡張子がないのがあったので
+            // 拡張子チェックを追加
+            picture = Empty.USER_EMPTY;
+          }
+
+          let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
+
           // login 済かを調べる
           let sign = User.sign;
 
@@ -467,7 +478,7 @@ export class ViewArchiveMasonryInfinite extends View {
               <div className="feature-user comment-item">
                 <figure className="comment-user">
                   <span className="comment-user-link">
-                    <span className="comment-user-thumb"><img src={picture} alt={firstUser.userName}/></span>
+                    <span className={'comment-user-thumb ' + loggedIn}><img src={picture} alt={firstUser.userName}/></span>
                     <div className="comment-user-data">
                       <p className="comment-user-name">{firstUser.userName}</p>
                       <p className="comment-user-job">{firstUser.bio}</p>
@@ -488,7 +499,7 @@ export class ViewArchiveMasonryInfinite extends View {
                   activate={false}
                 />
               </div>
-              <CommentsSecond
+              <CommentsSecondDom
                 seconds={secondsDae}
                 articleId={articleId}
                 total={total}
@@ -643,11 +654,9 @@ export class ViewArchiveMasonryInfinite extends View {
         let elements = [];
         // 追加された Element を取得するための start / end point
         // start は request offset
-        //let i = _this._request.offset;
         let i = this.state.offset;
         // end は request offset へ request length を加算したものと
         // children length の小さい方
-        //let limit = Math.min( i + _this._request.length, childNodes.length );
         let limit = Math.min( i + this.state.length, childNodes.length );
         console.log( 'start - end ', i + '-' + limit );
 

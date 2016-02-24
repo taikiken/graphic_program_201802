@@ -92,7 +92,7 @@ export class Api {
   /**
    * signup 時
    * email が登録済みかを調べます
-   * @return {Types}
+   * @return {Types} email が登録済みかを調べる API をTypes instanceで返します
    */
   static email():Types {
     return ApiDae.api( 'users:email' );

@@ -39,7 +39,7 @@ let SignupStep = React.createClass( {
   }
 } );
 
-export let SignupHeading = React.createClass( {
+export let SignupHeadingNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired
   },

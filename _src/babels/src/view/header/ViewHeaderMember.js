@@ -20,6 +20,7 @@ import {UsersSelf} from '../../action/users/UsersSelf';
 
 import {Url} from '../../app/const/Url';
 import {Result} from '../../data/Result';
+import {Safety} from '../../data/Safety';
 
 // React
 let React = self.React;
@@ -112,10 +113,15 @@ export class ViewHeaderMember extends View {
 
         let icon = this.props.icon;
         let userName = this.props.userName;
-
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
+        } else if ( !Safety.isImg( icon ) ) {
+          // 画像ファイル名に拡張子がないのがあったので
+          // 拡張子チェックを追加
+          icon = Empty.USER_EMPTY;
         }
+
+        let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
 
         return (
           <div className="user">
@@ -123,7 +129,7 @@ export class ViewHeaderMember extends View {
 
             <div className={'preference ' + this.state.open}>
               <a className="preference-opener" href="#" onClick={this.clickHandler}>
-                <span className="preference-avatar"><img src={icon} alt={userName} /></span>
+                <span className={'preference-avatar ' + loggedIn}><img src={icon} alt={userName} /></span>
               </a>
 
               <nav className="preference-menu">

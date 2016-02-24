@@ -25,7 +25,6 @@ let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
-let Router = UT.app.Router;
 
 /**
  * <h3>ページ振り分け</h3>
@@ -48,6 +47,11 @@ export class Page {
    */
   static init():void {
 
+    // user login check
+    UT.app.User.init();
+
+    // router
+    let Router = UT.app.Router;
     let router = Router.factory();
 
     // index

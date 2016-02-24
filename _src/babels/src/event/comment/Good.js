@@ -14,6 +14,7 @@
 import {EventDispatcher} from '../EventDispatcher';
 import {CommentStatus} from '../CommentStatus';
 
+let _symbol = Symbol();
 let _instance = null;
 
 /**
@@ -23,9 +24,15 @@ export class Good extends EventDispatcher {
   /**
    * <h3>Singleton</h3>
    * コメントの good
-   * @return {*}
+   * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {Good} Good instance
    */
-  constructor() {
+  constructor( target ) {
+    if ( _symbol !== target ) {
+
+      throw new Error( `Good is static Class. not use new Good(). instead Good.factory()` );
+
+    }
 
     if ( _instance === null ) {
       super();
@@ -37,6 +44,14 @@ export class Good extends EventDispatcher {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * イベント強制発火
+   * @param {string} type コメントタイプ
+   * @param {string|Number} commentId コメント Id
+   */
+  fire( type:string, commentId:string ):void {
+    this.dispatch( { type: type, commentId: commentId } );
+  }
   /**
    * good する
    * @param {string} commentId コメントId
@@ -62,7 +77,7 @@ export class Good extends EventDispatcher {
 
     if ( _instance === null ) {
 
-      _instance = new Good();
+      _instance = new Good( _symbol );
 
     }
 

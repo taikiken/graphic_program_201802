@@ -21,12 +21,8 @@ import {Url} from '../../app/const/Url';
 // util
 import {Loc} from '../../util/Loc';
 
-// action
-import {Categories} from '../../action/categories/Categories';
-
 // model
 import {Model} from '../../model/Model';
-import {ModelUserDetect} from '../../model/signup/ModelUserDetect';
 import {ModelCategories} from '../../model/categoires/ModelCategories';
 
 // dae
