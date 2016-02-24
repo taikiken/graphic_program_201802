@@ -13,19 +13,26 @@
 
 // view
 import {View} from '../View';
+/*
 import {ViewSingleImage} from '../single/ViewSingleImage';
 import {ViewSingleVideo} from '../single/ViewSingleVideo';
+*/
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';
 
 // app
 import {User} from '../../app/User';
+/*
 import {MediaType} from '../../app/const/MediaType';
+*/
 
 // model
 import {Model} from '../../model/Model';
 import {ModelBookmark} from '../../model/users/ModelBookmark';
+
+// node
+import {MediaNode} from '../../node/single/MediaNode';
 
 // React
 let React = self.React;
@@ -111,7 +118,14 @@ export class ViewSingleHeader extends View {
               {right}
             </div>
             {/* 記事上 画像 or 動画 */}
+            {/*
+            React component へ変更
             <div ref="singleImage"></div>
+             */}
+            <MediaNode
+              mediaType={this.state.single.mediaType}
+              media={this.state.single.media}
+            />
           </div>
         );
 
@@ -129,6 +143,7 @@ export class ViewSingleHeader extends View {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
 
+        /*
         // 上部画像
         // media type check
         let single = this.state.single;
@@ -159,6 +174,7 @@ export class ViewSingleHeader extends View {
         if ( typeof img !== 'undefined' ) {
           img.start();
         }
+        */
 
         // ---------------------
         // bookmark 処理
