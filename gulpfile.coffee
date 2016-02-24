@@ -228,28 +228,19 @@ gulp.task 'dev:init', (cb) ->
 # 【デプロイ】 build
 gulp.task 'default', (cb) ->
   runSequence(
-    [
-      'vendor:init'
-      'babels:build'
-      'sprite:build'
-    ]
-    [
-      'exe:build'
-      'single:build'
-    ]
-    [
-      'bundle:copy'
-      'libs:copy'
-#      'html:build'
-      'js:build'
-      'image:build'
-      'css:build'
-    ]
-    [
-      # デプロイ時css document再生成, 体制に影響無いので外す
-      # 'sc5:make'
-      'clean:all'
-    ]
+    'vendor:init'
+    'babels:build'
+    'sprite:build'
+    'exe:build'
+    'single:build'
+    'bundle:copy'
+    'libs:copy'
+    #'html:build'
+    'js:build'
+    'image:build'
+    'css:build'
+    # 'sc5:make' - デプロイ時css document再生成, 体制に影響無いので外す
+    'clean:all'
     'lec:build'
     cb
   )
