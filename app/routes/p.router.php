@@ -10,7 +10,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     $args['page'] = $app->model->set(array(
-      'title'    => 'article - '.$args['article_id'],
+      'title'    => $post['title'],
+      'category' => $post['category'],
       'template' => 'p',
       'path'     => $args,
       'post'     => $post,
@@ -28,7 +29,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     $args['page'] = $app->model->set(array(
-      'title'    => 'article - '.$args['article_id'].' / commment - '.$args['commend_id'],
+      'title'    => $post['title'],
+      'category' => $post['category'],
       'template' => 'p',
       'path'     => $args,
       'post'     => $post,
@@ -46,7 +48,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     $args['page'] = $app->model->set(array(
-      'title'    => 'article - '.$args['article_id'].' / commment - '.$args['commend_id'].' / reply - '.$args['reply_id'],
+      'title'    => $post['title'],
+      'category' => $post['category'],
       'template' => 'p',
       'path'     => $args,
       'post'     => $post,
