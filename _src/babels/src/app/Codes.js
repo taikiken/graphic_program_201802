@@ -80,7 +80,7 @@ export class Codes {
   /**
    * status codeの意味（メッセージ）を調べます
    * @param {Number} code サーバーからのresponse status code
-   * @return {{en: string|*, jp: string|*}} status codeの意味を返します
+   * @return {Object} status codeの意味を返します {en: string|*, jp: string|*}
    */
   static message( code:Number ):Object {
 

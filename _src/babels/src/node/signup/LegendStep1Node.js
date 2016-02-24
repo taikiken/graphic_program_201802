@@ -31,7 +31,7 @@ import {ErrorNode} from '../error/ErrorNode';
 // React
 let React = self.React;
 
-let Step1Form = React.createClass( {
+let Step1FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired
   },
@@ -59,21 +59,23 @@ let Step1Form = React.createClass( {
 
     return (
       <legend className="legend-step-1">
-          <span className={'form-parts ' + errorClass('errorEmail')}>
-            <span className="setting-form-mail form-input">
-              <input
-                type="text"
-                name="email"
-                value={this.state.email}
-                onChange={this.emailChange}
-                placeholder="メールアドレスを入力"
-              />
-            </span>
-            <ErrorNode message={message('errorEmail')} />
+        <span className={'form-parts ' + errorClass('errorEmail')}>
+          <span className="setting-form-mail form-input">
+            <input
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={this.emailChange}
+              placeholder="メールアドレスを入力"
+            />
           </span>
+          <ErrorNode message={message('errorEmail')} />
+        </span>
+        <span className="form-parts align-right">
           <span className="setting-form-submit mod-btnB01">
             <input type="button" value="アカウント作成 (無料)" onClick={this.nextHandler}/>
           </span>
+        </span>
       </legend>
     );
 
@@ -162,8 +164,7 @@ let Step1Form = React.createClass( {
   },
   fail: function( error:Error ) {
     console.log( 'fail ', error.result.response.errors );
-    let message = error.result.response.errors.email;
-    this.errors.errorEmail.message = message;
+    this.errors.errorEmail.message = error.result.response.errors.email;
     this.setState( { errorEmail: true } );
 
   },
@@ -177,10 +178,11 @@ let Step1Form = React.createClass( {
 } );
 
 /**
- * signup step 1
- * 入力フォームコンテナ
+ * <h3>React component<h3>
+ * **signup step 1**
+ * 「新規会員登録」入力フォームコンテナ
  */
-export let LegendStep1 = React.createClass( {
+export let LegendStep1Node = React.createClass( {
   propTypes: {
     // 担当 step 1
     step: React.PropTypes.number.isRequired
@@ -208,7 +210,7 @@ export let LegendStep1 = React.createClass( {
         </div>
         <p className="register-or">または</p>
         <div className="register-mail setting-form">
-          <Step1Form
+          <Step1FormNode
             step={this.props.step}
           />
           <p className="note">

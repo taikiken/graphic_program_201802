@@ -151,7 +151,7 @@ export class Safety {
    * 引数が正規なものかをチェックします
    * @param {string} target 調査対象
    * @param {Array<string>} allowed 正しい対象値
-   * @return {boolean}
+   * @return {boolean} 引数が正規なものかをチェックし true / false を返します
    */
   static normalize( target:string, allowed:Array<string> ):boolean {
     var bool = false;

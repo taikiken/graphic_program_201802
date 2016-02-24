@@ -166,7 +166,7 @@ export class ViewPickup extends View {
     // --------------------------------------------
     // pager
     // --------------------------------------------
-    let PickupPager = React.createClass( {
+    let PickupPagerDom = React.createClass( {
       propTypes: {
         index: React.PropTypes.number.isRequired,
         id: React.PropTypes.string.isRequired,
@@ -185,13 +185,12 @@ export class ViewPickup extends View {
       },
       handleClick: function( event ) {
         event.preventDefault();
-        console.log( 'PickupPager click ' + event.target.innerHTML );
         this.props.onPager( event.target.innerHTML );
       }
     } );
 
     // pagers 親コンポーネント
-    let Pagers = React.createClass( {
+    let PagersDom = React.createClass( {
       propTypes: {
         offset: React.PropTypes.number.isRequired,
         list: React.PropTypes.array.isRequired,
@@ -210,7 +209,7 @@ export class ViewPickup extends View {
 
                 let dae = new ArticleDae( article );
 
-                return <PickupPager
+                return <PickupPagerDom
                   key={'pager-' + dae.id}
                   id={String(dae.id)}
                   index={offset++}
@@ -356,7 +355,7 @@ export class ViewPickup extends View {
                 </div>
                 {/* pagers */}
                 <div className="pager">
-                  <Pagers
+                  <PagersDom
                     list={articles}
                     offset={articles.length}
                     onPager={this.onPagerClick}

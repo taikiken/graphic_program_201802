@@ -23,7 +23,7 @@ export class ReplyStatus extends EventDispatcher {
   /**
    * コメント返信フォームの open, close, sending, complete を通知します。
    * @example
-   * var eplyStatus = ReplyStatus.factory();
+   * var replyStatus = ReplyStatus.factory();
    *
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {ReplyStatus} ReplyStatus instance を返します

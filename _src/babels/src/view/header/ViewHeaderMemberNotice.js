@@ -95,7 +95,7 @@ export class ViewHeaderMemberNotice extends View {
     console.log( '*** notificationsDae ***', notificationsDae );
     // --------------------------------------------------
     // user notice dropMenu action message
-    let NoticeMessage = React.createClass( {
+    let NoticeMessageDom = React.createClass( {
       propTypes: {
         notice: React.PropTypes.object.isRequired
       },
@@ -125,7 +125,7 @@ export class ViewHeaderMemberNotice extends View {
 
     // --------------------------------------------------
     // notice one block
-    let NoticeItem = React.createClass( {
+    let NoticeItemDom = React.createClass( {
       propTypes: {
         notice: React.PropTypes.object.isRequired,
         index: React.PropTypes.number.isRequired
@@ -139,20 +139,26 @@ export class ViewHeaderMemberNotice extends View {
       render: function() {
 
         let notice = this.state.notice;
-        let index = this.state.index;
+        // let index = this.state.index;
 
         let icon = notice.user.profilePicture;
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
+        } else if ( !Safety.isImg( icon ) ) {
+          // 画像ファイル名に拡張子がないのがあったので
+          // 拡張子チェックを追加
+          icon = Empty.USER_EMPTY;
         }
+
+        let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
 
         return (
           <li className={'info-item info-item-' + notice.id}>
             <a href='#' className={'info-link info-link-' + notice.id} onClick={this.readedClick}>
-              <figure className="info-user-thumb">
+              <figure className={'info-user-thumb ' + loggedIn}>
                 <img src={icon} alt=""/>
               </figure>
-              <NoticeMessage notice={notice} />
+              <NoticeMessageDom notice={notice} />
               <p className="info-date">{notice.displayDate}</p>
             </a>
           </li>
@@ -166,7 +172,7 @@ export class ViewHeaderMemberNotice extends View {
 
     // --------------------------------------------------
     // read all On / Off
-    let ReadAll = React.createClass( {
+    let ReadAllDom = React.createClass( {
       propTypes: {
         length: React.PropTypes.number.isRequired,
         callback: React.PropTypes.func
@@ -198,6 +204,7 @@ export class ViewHeaderMemberNotice extends View {
         event.preventDefault();
         this.setState( { loading: 'loading' } );
         this.props.callback();
+        // ToDo: ajax request
       },
       done: function( result ) {
         this.setState( { loading: '' } );
@@ -225,7 +232,7 @@ export class ViewHeaderMemberNotice extends View {
             <div className="dropMenu">
               <div className="info">
                 <h2 className="info-heading">お知らせ</h2>
-                <ReadAll
+                <ReadAllDom
                   length={notifications.length}
                   callback={this.allRead}
                 />
@@ -233,7 +240,7 @@ export class ViewHeaderMemberNotice extends View {
                   {
                     notifications.map( function( notice, i ) {
 
-                      return <NoticeItem key={'notice-' + notice.id} notice={notice} index={i}/>;
+                      return <NoticeItemDom key={'notice-' + notice.id} notice={notice} index={i}/>;
 
                     } )
                   }

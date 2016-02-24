@@ -32,7 +32,12 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * detail 上部
+ * <h3>React component<h3>
+ * 記事詳細(detail) 上部
+ * - bookmark
+ * - title
+ * - 投稿者
+ * - 日付
  */
 export class ViewSingleHeader extends View {
   /**
@@ -77,7 +82,6 @@ export class ViewSingleHeader extends View {
         };
       },
       render: function() {
-        console.log( '----------------------- HeaderDom ', this.state.single );
         let single = this.state.single;
         let message = this.state.status ? 'ブックマーク済' : 'ブックマークする';
         let right = '';
@@ -112,6 +116,8 @@ export class ViewSingleHeader extends View {
         );
 
       },
+      // --------------------------------------------
+      // delegate
       componentWillMount: function() {
 
         // will mount
@@ -155,7 +161,6 @@ export class ViewSingleHeader extends View {
 
         // ---------------------
         // bookmark 処理
-        console.log( 'bookmark 処理', this.state.sign  );
         if ( this.state.sign ) {
           let action = new ModelBookmark( this.state.single.id );
           this.action = action;
@@ -170,33 +175,6 @@ export class ViewSingleHeader extends View {
       },
       // --------------------------------------------
       // custom method
-      updateSingle: function( single, sign ) {
-        this.setState( { single: single, sign: sign } );
-      },
-      clickBookmark: function( event ) {
-        event.preventDefault();
-
-        this.setState( { loading: 'loading' } );
-        console.log( 'clickBookmark ', this.action );
-        this.action.start( !this.state.status );
-
-      },
-      done: function( result ) {
-
-        let bookmarked = '';
-        if ( !this.state.status ) {
-          // 現在がbookmark 済み
-          bookmarked = 'bookmarked enable';
-        }
-
-        this.setState( { loading: '', status: !this.state.status, bookmarked: bookmarked } );
-
-      },
-      fail: function( error ) {
-
-        this.setState( { loading: '' } );
-
-      },
       dispose: function() {
 
         let action = this.action;
@@ -206,6 +184,38 @@ export class ViewSingleHeader extends View {
           action.off( Model.RESPONSE_ERROR, this.fail );
         }
 
+      },
+      // --------------------------------------------
+      // click -> ajax -> done | fail
+      clickBookmark: function( event ) {
+        event.preventDefault();
+
+        this.setState( { loading: 'loading' } );
+        this.action.start( !this.state.status );
+
+      },
+      done: function() {
+
+        let bookmarked = '';
+        if ( !this.state.status ) {
+          // 現在がbookmark 済み
+          bookmarked = 'bookmarked enable';
+        }
+
+        // loading 解除, 表示更新
+        this.setState( { loading: '', status: !this.state.status, bookmarked: bookmarked } );
+
+      },
+      fail: function() {
+
+        // loading 解除
+        this.setState( { loading: '' } );
+
+      },
+      // --------------------------------------------
+      // update
+      updateSingle: function( single, sign ) {
+        this.setState( { single: single, sign: sign } );
       }
     } );
 

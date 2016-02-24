@@ -62,7 +62,7 @@ export class Scroll extends EventDispatcher {
   }
   /**
    * window.onscroll event handler
-   * @param event
+   * @param {Event} event window scroll event
    */
   onScroll( event:Event ):void {
     this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );

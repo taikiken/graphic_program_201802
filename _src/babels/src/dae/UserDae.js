@@ -12,6 +12,8 @@
 'use strict';
 
 import {TypeDae} from './user/TypeDae';
+import {InterestDae} from './user/InterestDae';
+
 import {Safety} from '../data/Safety';
 
 /**
@@ -28,6 +30,7 @@ export class UserDae {
 
     this._user = user;
     this._type = new TypeDae( user.type );
+    this._interest = new InterestDae( user.interest );
 
   }
   // ---------------------------------------------------
@@ -75,5 +78,28 @@ export class UserDae {
   get bio():string {
     return this.user.bio;
   }
-
+  // --------------------------------------------------------------------
+  // 以下リクエストによっては undefined になります
+  // 登録系, ログイン系 などのリクエストの時に情報を持ちます
+  /**
+   * メアド、パスワードから生成されるアクセストークン
+   * @return {string} メアド、パスワードから生成されるアクセストークン を返します
+   */
+  get accessToken():string {
+    return this.user.access_token;
+  }
+  /**
+   * セッションID *用途なさそうだけど一応
+   * @return {string} セッションID *用途なさそうだけど一応 返します
+   */
+  get sessionToken():string {
+    return this.user.session_token;
+  }
+  /**
+   * 興味がある
+   * @return {InterestDae|*} 興味がある項目を返します, undefined になることがあります
+   */
+  get interest():InterestDae {
+    return this._interest;
+  }
 }

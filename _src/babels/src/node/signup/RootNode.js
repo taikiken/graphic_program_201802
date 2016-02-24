@@ -13,10 +13,10 @@
 
 import {SignupStatus} from '../../event/SignupStatus';
 
-import {SignupHeading} from './SignupHeading';
-import {LegendStep1} from './LegendStep1';
-import {LegendStep2} from './LegendStep2';
-import {LegendStep3} from './LegendStep3';
+import {SignupHeadingNode} from './SignupHeadingNode';
+import {LegendStep1Node} from './LegendStep1Node';
+import {LegendStep2Node} from './LegendStep2Node';
+import {LegendStep3Node} from './LegendStep3Node';
 
 // React
 let React = self.React;
@@ -26,7 +26,7 @@ let ReactDOM = self.ReactDOM;
  * signup main HTML
  * <code>
  *  <RootNode />
- *    <SignupHeading />
+ *    <SignupHeadingNode />
  *    <form />
  *      <LegendStep1 />
  *      <LegendStep2 />
@@ -65,12 +65,12 @@ export let RootNode = React.createClass( {
     return (
       <div className="body-sec">
         <div className="body-sec-inner">
-          <SignupHeading step={this.state.step} />
+          <SignupHeadingNode step={this.state.step} />
            <div className={stepClassSelector(this.state.step)}>
               <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
-                <LegendStep1 step={this.props.step} />
-                <LegendStep2 step={this.props.step + 1} getForm={this.getForm} />
-                <LegendStep3 step={this.props.step + 2} categories={this.props.categories} />
+                <LegendStep1Node step={this.props.step} />
+                <LegendStep2Node step={this.props.step + 1} getForm={this.getForm} />
+                <LegendStep3Node step={this.props.step + 2} categories={this.props.categories} getForm={this.getForm} />
                 <div className="submit-hidden-container"><input type="submit" /></div>
               </form>
           </div>
@@ -80,11 +80,6 @@ export let RootNode = React.createClass( {
   },
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
-    /*
-    // form 通知
-    let form = ReactDOM.findDOMNode( this.refs.signup );
-    this.status.form( form );
-    */
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
@@ -96,15 +91,6 @@ export let RootNode = React.createClass( {
   submitHandler: function( event:Event ):void {
     event.preventDefault();
     this.status.submit( this.state.step );
-  },
-  requestDone: function( event ):void {
-
-  },
-  requestError: function( event ):void {
-
-  },
-  dispose: function():void {
-
   },
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );

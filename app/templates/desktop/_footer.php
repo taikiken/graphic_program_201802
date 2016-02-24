@@ -60,7 +60,7 @@
   UT.app.App.develop();
 
   // sign in
-  UT.app.User.login();
+  // UT.app.User.login();
 
 }() );
 </script>

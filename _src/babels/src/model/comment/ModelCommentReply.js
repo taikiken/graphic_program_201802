@@ -22,13 +22,13 @@ export class ModelCommentReply extends Model {
   /**
    * コメントへのコメント送信
    * @param {string} articleId 記事 id
-   * @param commentID
+   * @param {string|Number} commentId コメント ID
    * @param {FormData} formData comment form FormData
    * @param {Object} [option={}] optional event handler
    */
-  constructor( articleId:string, commentID:string, formData:FormData, option:Object = {} ) {
+  constructor( articleId:string, commentId:string, formData:FormData, option:Object = {} ) {
     super( option );
-    this._action = new CommentReply( articleId, commentID, formData, this.done.bind( this ), this.fail.bind( this ) );
+    this._action = new CommentReply( articleId, commentId, formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

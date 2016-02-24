@@ -20,7 +20,7 @@ import {CommentFormNode} from './CommentFormNode';
 let React = self.React;
 
 // コメント削除・通報 削除は自分のだけ, 他人のコメントは通報
-let CommentAction = React.createClass( {
+let CommentActionNode = React.createClass( {
   propTypes: {
     // menu が 開いているか閉じているか open / close
     toggle: React.PropTypes.string.isRequired,
@@ -118,7 +118,7 @@ let CommentAction = React.createClass( {
 } );
 
 // 通報 drop menu
-let CommentMenu = React.createClass( {
+let CommentMenuNode = React.createClass( {
   propTypes: {
     // user id
     userId: React.PropTypes.string.isRequired,
@@ -146,7 +146,7 @@ let CommentMenu = React.createClass( {
           <div className={`comment-menu ${this.state.open} ${this.state.loading}`}>
             <a href="#" className="comment-menu-btn" onClick={this.clickHandler}>MENU</a>
             <ul className="dropMenu">
-              <CommentAction
+              <CommentActionNode
                 toggle={this.state.open}
                 others={others}
                 userId={this.props.userId}
@@ -339,12 +339,16 @@ export let CommentNode = React.createClass( {
     if ( !picture ) {
       picture = Empty.USER_EMPTY;
     } else if ( !Safety.isImg( picture ) ) {
+      // 画像ファイル名に拡張子がないのがあったので
+      // 拡張子チェックを追加
       picture = Empty.USER_EMPTY;
     }
 
+    let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
+
     return (
       <div className="comment-root">
-        <CommentMenu
+        <CommentMenuNode
           key={`${this.props.uniqueId}-menu`}
           sign={sign}
           userId={this.props.userId}
@@ -354,7 +358,7 @@ export let CommentNode = React.createClass( {
         />
         <figure className="comment-user">
           <span className="comment-user-link">
-            <span className="comment-user-thumb"><img src={picture} alt={comment.user.userName}/></span>
+            <span className={'comment-user-thumb ' + loggedIn}><img src={picture} alt={comment.user.userName}/></span>
             <div className="comment-user-data">
               <p className="comment-user-name">{comment.user.userName}</p>
               <p className="comment-user-job">{comment.user.bio || ''}</p>
