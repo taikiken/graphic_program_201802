@@ -10,11 +10,12 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     $args['page'] = $app->model->set(array(
-      'title'    => $post['title'],
-      'category' => $post['category'],
-      'template' => 'p',
-      'path'     => $args,
-      'post'     => $post,
+      'title'     => $post['title'],
+      'category'  => $post['category'],
+      'template'  => 'p',
+      'path'      => $args,
+      'post'      => $post,
+      'canonical' => "p/{$post['id']}/",
     ));
 
     return $this->renderer->render($response, "default.php", $args);
@@ -29,11 +30,12 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     $args['page'] = $app->model->set(array(
-      'title'    => $post['title'],
-      'category' => $post['category'],
-      'template' => 'p',
-      'path'     => $args,
-      'post'     => $post,
+      'title'     => $post['title'],
+      'category'  => $post['category'],
+      'template'  => 'p',
+      'path'      => $args,
+      'post'      => $post,
+      'canonical' => "p/{$post['id']}/",
     ));
 
     return $this->renderer->render($response, "default.php", $args);
@@ -48,11 +50,12 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $post = $app->model->get_post($args['article_id']);
 
     $args['page'] = $app->model->set(array(
-      'title'    => $post['title'],
-      'category' => $post['category'],
-      'template' => 'p',
-      'path'     => $args,
-      'post'     => $post,
+      'title'     => $post['title'],
+      'category'  => $post['category'],
+      'template'  => 'p',
+      'path'      => $args,
+      'post'      => $post,
+      'canonical' => "p/{$post['id']}/",
     ));
 
     return $this->renderer->render($response, "default.php", $args);

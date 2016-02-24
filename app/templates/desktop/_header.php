@@ -14,6 +14,10 @@
   <meta property="og:url" content="http://undotsushin.com/">
   <meta property="og:description" content="説明文">
 
+  <?php if ( $page['canonical'] ) : ?>
+  <link rel="canonical" href="<?php echo $page['site_url'].$page['canonical']; ?>">
+  <?php endif; ?>
+
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/ui.css">
   <script src="/assets/js/libs/vendor.react.js"></script>
