@@ -55,7 +55,7 @@ export class ViewSingleVideo extends View {
   render( mediaDae:MediaDae ) {
 
     // データチェック
-    if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube) ) {
+    if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube && !mediaDae.video.facebook ) ) {
       return;
     }
 
@@ -78,27 +78,12 @@ export class ViewSingleVideo extends View {
       render: function() {
 
         let media = this.state.media;
-        /*
-        // 2016-02-22 video.type 追加
-        // method 変更する
-        let yt = media.video.youtube;
 
-        if ( typeof yt !== 'undefined' && yt !== '' && yt.length > 10 ) {
-
-          // youtube id found
-          return this.youtube( media );
-
-        } else {
-
-          // HTML5 video tag
-          return this.video( media );
-
-        }
-        */
         // 2016-02-22
         // api JSON が最新版に対応していないので
         // やむおえずの対応
         let type = media.video.type || media.video.player;
+        console.log( 'video type ', type );
 
         switch ( type ) {
 

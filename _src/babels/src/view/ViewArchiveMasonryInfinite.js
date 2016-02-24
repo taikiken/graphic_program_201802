@@ -393,14 +393,24 @@ export class ViewArchiveMasonryInfinite extends View {
                 seconds.map( function( commentDae, i ) {
 
                   let userDae = commentDae.user;
-                  let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
+                  // let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
+                  let picture = userDae.profilePicture;
+                  if ( !picture ) {
+                    picture = Empty.USER_EMPTY;
+                  } else if ( !Safety.isImg( picture ) ) {
+                    // 画像ファイル名に拡張子がないのがあったので
+                    // 拡張子チェックを追加
+                    picture = Empty.USER_EMPTY;
+                  }
+
+                  let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
 
                   // CommentsSecond unique key は  記事Id + user Id を使用する
                   // 同一ユーザーが複数投稿することがあるため
                   // render 内で unique なことを保証する必要がある
                   return (
                     <li key={'user-' + articleId + '-' + commentDae.id + '-' + userDae.id + '-' + i} className={'commented-user-item commented-user-item-' + i}>
-                      <span className="commented-user-thumb">
+                      <span className={'commented-user-thumb ' + loggedIn}>
                         <img src={picture} alt={userDae.userName}/>
                       </span>
                     </li>

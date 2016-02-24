@@ -144,7 +144,8 @@ export class ViewSingleHeader extends View {
         } else if ( single.mediaType === MediaType.VIDEO ) {
 
           let mediaDae = single.media;
-          if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube) ) {
+          // facebook 追加
+          if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube && !mediaDae.video.facebook ) ) {
             // not movie data
             img = new ViewSingleImage( imageNode, single.media.images );
 
