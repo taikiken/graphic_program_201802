@@ -1,6 +1,6 @@
 <div class="category-heading">
   <h1>
-    <?php echo $page['title']; ?>
+    <?php echo $page['category']['label']; ?>
   </h1>
 </div><!-- /.category-heading -->
 
