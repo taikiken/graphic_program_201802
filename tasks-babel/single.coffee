@@ -177,7 +177,7 @@ gulp.task 'single:dev', ( cb ) ->
 # build
 gulp.task 'single:build', ( cb ) ->
   runSequence(
-    'single:eslint'
+    # 'single:eslint' build時はeslintをskip / lintはdev時に担保する
     'single:compile'
     'single:webpack:build'
     cb
