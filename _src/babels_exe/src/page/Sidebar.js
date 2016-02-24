@@ -40,11 +40,18 @@ export class Sidebar {
    */
   static start( slug:string = 'all' ):void {
     // ranking
-    let ranking = new UT.view.sidebar.ViewRanking( Dom.ranking(), null, slug );
-    ranking.start();
+    let rankingElement = Dom.ranking();
+    if ( rankingElement !== null ) {
+      let ranking = new UT.view.sidebar.ViewRanking( rankingElement, null, slug );
+      ranking.start();
+    }
 
     // video
-    var videos = new UT.view.sidebar.ViewVideos( Dom.video(), null, slug );
-    videos.start();
+    let videoElement = Dom.video();
+    if ( videoElement !== null ) {
+      let videos = new UT.view.sidebar.ViewVideos( videoElement, null, slug );
+      videos.start();
+    }
+
   }
 }

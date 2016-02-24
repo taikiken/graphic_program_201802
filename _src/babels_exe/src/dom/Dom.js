@@ -43,7 +43,8 @@ export class Dom {
 
     let element = document.getElementById(id);
     if ( !Safety.isElement( element ) ) {
-      throw new Error( `element by ${id} not found.` );
+      console.warn( `element by ${id} not found.` );
+      return null;
     }
 
     return element;

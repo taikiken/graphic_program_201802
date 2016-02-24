@@ -1,3 +1,19 @@
+<?php
+// footer 表示条件 start
+$template_name = $page['template'];
+
+if (
+  $template_name == 'index' ||
+  $template_name == '404' ||
+  $template_name == 'category' ||
+  $template_name == 'p' ||
+  $template_name == 'search' ||
+  $template_name == 'setting' ||
+  $template_name == 'mypage' ||
+  $template_name == 'mypage.activities' ||
+  $template_name == 'notifications'
+) :
+?>
   <footer class="foot-sec">
     <div class="foot-sec-inner">
       <div class="foot-pr">
@@ -44,6 +60,11 @@
       <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
+<?php
+endif;
+// footer 表示条件 end
+// ------------------------------------------------------
+?>
 </div><!-- /.whole -->
 <script>
 ( function () {

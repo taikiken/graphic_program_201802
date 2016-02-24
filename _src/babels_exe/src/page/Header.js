@@ -39,7 +39,10 @@ export class Header {
    */
   static start():void {
     // header.user
-    var headerUser = new UT.view.header.ViewHeaderUser( Dom.profile() );
-    headerUser.start();
+    let element = Dom.profile();
+    if ( element !== null ) {
+      let headerUser = new UT.view.header.ViewHeaderUser( element );
+      headerUser.start();
+    }
   }
 }

@@ -38,7 +38,10 @@ export class Signup {
   }
 
   static start():void {
-    let signup = new UT.view.signup.SignupWizard( Dom.signup() );
-    signup.start();
+    let signupElement = Dom.signup();
+    if ( signupElement !== null ) {
+      let signup = new UT.view.signup.SignupWizard( signupElement );
+      signup.start();
+    }
   }
 }
