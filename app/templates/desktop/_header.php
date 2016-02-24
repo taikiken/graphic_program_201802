@@ -20,19 +20,23 @@
   <script src="/assets/js/bundle/main.bundle.js"></script>
 </head>
 <body>
-<?php if (0):
-// 開発中にsdk errorが発生するので一旦コメントにする
-// ToDo:
-?>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.3";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-<?php endif; ?>
+<script>
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '842032129256034',
+        xfbml      : true,
+        version    : 'v2.5'
+    });
+};
+
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 <div class="whole">
 
   <header class="head-sec">

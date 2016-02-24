@@ -36,7 +36,10 @@ issue 147: [記事本文（通常 / YouTube / Facebook 動画）: 開発 (Backen
 
 [Embedded Video Player - Social Plugins](https://developers.facebook.com/docs/plugins/embedded-video-player?locale=ja_JP)
 
-** fb SDKコードの読み込み **
+
+**fb SDKコードの読み込み**  
+
+[issues/151](https://github.com/undotsushin/undotsushin/issues/151#issuecomment-188093173)
 
     <script>
       window.fbAsyncInit = function() {
@@ -56,7 +59,7 @@ issue 147: [記事本文（通常 / YouTube / Facebook 動画）: 開発 (Backen
        }(document, 'script', 'facebook-jssdk'));
     </script>
     
-**表示するDOMを出力 `{your-video-post-url}` が APIの facebookの中身 **
+**表示するDOMを出力 `{your-video-post-url}` が APIの facebookの中身**
 
     <div class="fb-video" data-href="https://www.facebook.com/facebook/videos/10153231379946729/"
       data-allowfullscreen="true" data-width="500"></div>
