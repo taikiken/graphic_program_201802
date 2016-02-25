@@ -13,6 +13,7 @@ legend {
   }
 }
 
+// -------------------------------------------------
 // error
 .error {
   .form-input {
@@ -20,7 +21,9 @@ legend {
   }
 
   .error-message-container {
+    display: inline-block;
     margin: 8px 0;
+
     .error-message-txt {
       font-size: 12px;
       color: #e14343;
@@ -28,6 +31,16 @@ legend {
   }
 }
 
+// -------------------------------------------------
+// submit 上 エラーメッセージ
+.form-submit-parts.error {
+  .error-message-container {
+    display: block;
+    text-align: center;
+  }
+}
+
+// -------------------------------------------------
 // 表示 / 非表示
 .signup-1 {
   .legend-container-2,
@@ -158,4 +171,19 @@ legend {
   width: 510px;
   height: 120px;
   opacity: 0;
+}
+
+// -------------------------------------------------
+// 非表示 submit
+.submit-hidden-container {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  input[type="submit"] {
+    position: absolute;
+    left: -100%;
+    top: -100%;
+    width: 0;
+    height: 0;
+  }
 }

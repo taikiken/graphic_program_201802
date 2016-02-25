@@ -16,7 +16,7 @@ import {Url} from '../../app/const/Url';
 // React
 let React = self.React;
 
-let SignupStep = React.createClass( {
+let SignupStepNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired
   },
@@ -62,7 +62,7 @@ export let SignupHeadingNode = React.createClass( {
         // input name and upload image
         return (
           <div className="signup-heading-container">
-            <SignupStep step={1} />
+            <SignupStepNode step={1} />
             <div className="signup-heading">
               <h1>新規会員登録</h1>
             </div>
@@ -73,7 +73,7 @@ export let SignupHeadingNode = React.createClass( {
         // select interest sports
         return (
           <div className="signup-heading-container">
-            <SignupStep step={2} />
+            <SignupStepNode step={2} />
             <div className="signup-heading">
               <h1>興味のある競技を選択</h1>
             </div>

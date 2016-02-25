@@ -29,7 +29,7 @@ export class ActionBehavior extends Action {
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
   constructor( types:Types, formData:FormData = null, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
-    super( types, resolve, reject );
+    super( types, resolve, reject, ResultClass );
     this._data = formData;
   }
   // ---------------------------------------------------

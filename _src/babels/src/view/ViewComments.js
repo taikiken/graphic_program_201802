@@ -12,7 +12,6 @@
 'use strict';
 
 // app
-import {Empty} from '../app/const/Empty';
 import {CommentsType} from '../app/const/CommentsType';
 import {User} from '../app/User';
 
@@ -556,9 +555,8 @@ export class ViewComments extends View {
   /**
    * ReplyStatus.COMPLETE event handler
    * <p>再読み込みを行うかを決める</p>
-   * @param {Object} event ReplyStatus.COMPLETE event
    */
-  onComplete( event:Object ):void {
+  onComplete():void {
 
     // とにかくreloadが良さそう
     this.reload();

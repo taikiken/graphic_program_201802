@@ -127,6 +127,9 @@ import {ViewVideos} from './view/sidebar/ViewVideos';
 // signup
 import {SignupWizard} from './view/signup/SignupWizard';
 
+// login
+import {ViewLogin} from './view/login/ViewLogin';
+
 // -------------------------------------
 // ui
 import {Receiver} from './ui/Receiver';
@@ -246,6 +249,9 @@ var UT = {
     },
     signup: {
       SignupWizard: SignupWizard
+    },
+    login: {
+      ViewLogin: ViewLogin
     }
   },
   model: {

@@ -14,7 +14,6 @@
 import {SignupStatus} from '../../event/SignupStatus';
 
 // app
-import {Url} from '../../app/const/Url';
 import {User} from '../../app/User';
 
 // model
@@ -24,18 +23,15 @@ import {ModelSignup} from '../../model/signup/ModelSignup';
 // data
 import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
-import {ErrorMessage} from '../../data/ErrorMessage';
 
 // dae
 import {UserDae} from '../../dae/UserDae';
-
 
 // util
 import {Loc} from '../../util/Loc';
 
 // React
 let React = self.React;
-let ReactDOM = self.ReactDOM;
 
 let Step3FormNode = React.createClass( {
   propTypes: {
@@ -118,11 +114,12 @@ let Step3FormNode = React.createClass( {
   updateStep: function( step:Number ):void {
     this.setState( { step: step } );
   },
+  /*
   changeBox: function( slug ) {
     let checkbox = ReactDOM.findDOMNode( this.refs[ slug ] );
-    console.log( 'checkbox ', checkbox.checked, 'slug: ', slug );
     this.setState( {slug: checkbox.checked} );
   },
+  */
   // ---------------------------------------------------
   // submit click 通知
   submitHandler: function( event:Object ) {
@@ -162,7 +159,7 @@ let Step3FormNode = React.createClass( {
     // token setup
     if ( User.login( token ) ) {
       // home
-      Loc.current = Url.index();
+      Loc.index();
     } else {
       console.log( 'fail login ...', token );
     }

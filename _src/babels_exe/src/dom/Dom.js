@@ -169,8 +169,19 @@ export class Dom {
   }
 
   // --------------------------------------
+  /**
+   * signup 新規登録
+   * @return {Element} signup-container を返します
+   */
   static signup():Element {
     return Dom.get( 'signup-container' );
+  }
+  /**
+   * login form
+   * @return {Element} login-email-container を返します
+   */
+  static login():Element {
+    return Dom.get( 'login-email-container' );
   }
 }
 // return Dom.get( '' );

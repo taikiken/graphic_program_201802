@@ -16,7 +16,6 @@ import {Sidebar} from './Sidebar';
 import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
-let _search = null;
 
 // UT
 let UT = self.UT;
@@ -56,42 +55,4 @@ export class Search {
     Sidebar.start();
 
   }
-  ///**
-  // * event handler unbind
-  // */
-  //static dispose():void {
-  //  let search = _search;
-  //  search.off( UT.view.View.BEFORE_RENDER, Search.onBefore );
-  //  search.off( UT.view.View.UNDEFINED_ERROR, Search.onError );
-  //  search.off( UT.view.View.EMPTY_ERROR, Search.onError );
-  //  search.off( UT.view.View.RESPONSE_ERROR, Search.onError );
-  //}
-  ///**
-  // * View.BEFORE_RENDER event handler
-  // * @param {Object} event event object, category.slug を取り出します
-  // */
-  //static onBefore( event ):void {
-  //  Search.dispose();
-  //
-  //  let articles = event.args[ 0 ];
-  //  let article = articles[ 0 ];
-  //  Search.sidebar( article.category.slug );
-  //}
-  ///**
-  // * View error handler
-  // */
-  //static onError():void {
-  //
-  //  Search.dispose();
-  //  Search.sidebar();
-  //
-  //}
-  ///**
-  // * sidebar slug 指定し rendering
-  // * @param {string} slug category slug
-  // */
-  //static sidebar( slug:string = 'all' ):void {
-  //  // sidebar
-  //  Sidebar.start( slug );
-  //}
 }
