@@ -254,6 +254,8 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     
 
 ## お知らせ
+[issue:330](https://github.com/undotsushin/undotsushin/issues/330)
+
 1. 一覧
     - [] model
     - [] view
@@ -315,3 +317,10 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1.再設定
     - [] model  
     - [] view  
+
+# バリデーション
+[issues:100](https://github.com/undotsushin/undotsushin/issues/100)
+
+[issues:184](https://github.com/undotsushin/undotsushin/issues/184)
+
+[issues:185](https://github.com/undotsushin/undotsushin/issues/185)
