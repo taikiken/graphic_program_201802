@@ -36,7 +36,18 @@ export class Message {
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
+  /**
+   * UNLOAD
+   * @return {string} 入力内容が取消しされます
+   */
   static get UNLOAD():string {
     return '入力内容が取消しされます！';
+  }
+  /**
+   * DELETE
+   * @return {string} このコメントを削除しますか
+   */
+  static get DELETE():string {
+    return 'このコメントを削除しますか？';
   }
 }

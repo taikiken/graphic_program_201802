@@ -123,6 +123,9 @@ import {ViewNews} from './view/home/ViewNews';
 import {ViewRanking} from './view/sidebar/ViewRanking';
 import {ViewVideos} from './view/sidebar/ViewVideos';
 
+// modal
+import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
+
 // ----------- users
 // signup
 import {SignupWizard} from './view/signup/SignupWizard';
@@ -223,10 +226,6 @@ var UT = {
   },
   view: {
     View: View,
-    /*
-    ViewArchive: ViewArchive,
-    ViewArchiveMasonry: ViewArchiveMasonry,
-    */
     ViewCategory: ViewCategory,
     ViewSingle: ViewSingle,
     ViewTitle: ViewTitle,
@@ -254,6 +253,9 @@ var UT = {
     login: {
       ViewLogin: ViewLogin,
       ViewLogout: ViewLogout
+    },
+    modal: {
+      ViewDeleteModal: ViewDeleteModal
     }
   },
   model: {

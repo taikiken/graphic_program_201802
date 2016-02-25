@@ -85,6 +85,14 @@ export class CommentStatus extends EventDispatcher {
   static get NOTICE():string {
     return 'commentNotice';
   }
+
+  /**
+   * event COMMENT_WILL_DELETE 削除
+   * @return {string} commentWillDelete を返します
+   */
+  static get COMMENT_WILL_DELETE():string {
+    return 'commentWillDelete';
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------

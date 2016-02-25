@@ -12,6 +12,10 @@
 import {Empty} from '../../app/const/Empty';
 import {Safety} from '../../data/Safety';
 
+// event
+import {MessageStatus} from '../../event/MessageStatus';
+import {CommentStatus} from '../../event/CommentStatus';
+
 // node
 import {ReactionNode} from './ReactionNode';
 import {CommentFormNode} from './CommentFormNode';
@@ -30,10 +34,13 @@ let CommentActionNode = React.createClass( {
     userId: React.PropTypes.string.isRequired,
     commentUserId: React.PropTypes.string.isRequired,
     commentId: React.PropTypes.string.isRequired,
-    delete: React.PropTypes.func.isRequired,
+    remove: React.PropTypes.func.isRequired,
     report: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
+    this.message = MessageStatus.factory();
+    this.comment = CommentStatus.factory();
+
     return {
       deleteLoading: '',
       reportLoading: ''
@@ -44,12 +51,16 @@ let CommentActionNode = React.createClass( {
 
     if ( this.props.others ) {
       // 自分以外 & ユーザー情報が正しくは通報機能
+      // 通報機能 drop 2016-02-25
+      /*
       return (
         <li className={'dropMenu-item loading-root ' + this.state.reportLoading}>
           <a href="#" className="dropMenu-link-report dropMenu-link" onClick={this.reportClick}><span>このコメントを通報する</span></a>
           <div className="loading-spinner"></div>
         </li>
       );
+      */
+      return null;
     } else {
       // 自分のは削除機能
       return (
@@ -58,6 +69,9 @@ let CommentActionNode = React.createClass( {
         </li>
       );
     }
+  },
+  componentDidMount: function() {
+
   },
   shouldComponentUpdate: function(nextProps, nextState) {
     // menu が閉じたら loading class を削除する
@@ -75,22 +89,39 @@ let CommentActionNode = React.createClass( {
   componentWillUnMount: function() {
     this.setState( {reportLoading: '', deleteLoading: ''} );
   },
+  // -------------------------------------------------
+  // delete
   deleteClick: function( event ) {
     event.preventDefault();
     event.stopPropagation();
     // delete action
     this.setState( { deleteLoading: 'loading'} );
-    this.props.delete( 'click' );
+    this.props.remove( 'click' );
+
+    // modal open fire
+    this.message.remove( this.shouldDelete, this.shouldCancel );
+  },
+  // confirm ok click
+  shouldDelete: function() {
+    console.log( 'comment shouldDelete' );
+  },
+  shouldCancel: function() {
+    console.log( 'shouldCancel' );
+    this.props.remove( 'cancel' );
   },
   deleteDone: function(result) {
     console.log( 'deleteDone', result );
     this.props.delete( 'done' );
+
+    // event 通知
+    this.comment.remove( this.props.commentId );
   },
   deleteFail: function(error) {
     console.log( 'deleteFail', error );
     this.props.delete( false );
     this.props.delete( 'fail' );
   },
+  // -------------------------------------------------
   reportClick: function( event ) {
     event.preventDefault();
     // event.stopPropagation();
@@ -141,7 +172,10 @@ let CommentMenuNode = React.createClass( {
       // ログインユーザーのみ
       let others = this.props.userId === '' || this.props.userId === '0' || this.props.userId !== this.props.commentUserId;
       // console.log( 'others ', others, this.props.userId, this.props.commentUserId );
-      if ( this.state.show ) {
+      // 通報実装なしになったので
+      // 「削除」以外の表示がいらなくなった
+      // && !others を追加
+      if ( this.state.show && !others ) {
         return (
           <div className={`comment-menu ${this.state.open} ${this.state.loading}`}>
             <a href="#" className="comment-menu-btn" onClick={this.clickHandler}>MENU</a>
@@ -152,7 +186,7 @@ let CommentMenuNode = React.createClass( {
                 userId={this.props.userId}
                 commentUserId={this.props.commentUserId}
                 commentId={this.props.commentId}
-                delete={this.didDelete}
+                remove={this.didDelete}
                 report={this.didReport}
               />
             </ul>
@@ -210,7 +244,7 @@ let CommentMenuNode = React.createClass( {
         break;
 
       case 'done':
-        this.setState( {show: false} );
+        // this.setState( {show: false} );
         this.toggleState();
         break;
 

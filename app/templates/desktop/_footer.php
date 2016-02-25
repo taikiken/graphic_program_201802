@@ -12,24 +12,29 @@ if (
   $template_name == 'mypage' ||
   $template_name == 'mypage.activities' ||
   $template_name == 'notifications'
-) :
-?>
+) {
+  ?>
   <footer class="foot-sec">
     <div class="foot-sec-inner">
       <div class="foot-pr">
         <div class="foot-pr-inner">
           <figure>
-            <figcaption><img src="/assets/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></figcaption>
+            <figcaption><img src="/assets/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS">
+            </figcaption>
             <img src="/assets/images/common/footer-overview-figure.png" alt="">
           </figure>
 
           <div class="text-block">
             <h3>運動通信とは</h3>
-            <p>話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「運動通信」。<br />
-            高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
+            <p>話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「運動通信」。<br/>
+              高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
             <ul>
-              <li><a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
-              <li><a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
+              <li>
+                <a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store"/></a>
+              </li>
+              <li>
+                <a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a>
+              </li>
             </ul>
           </div><!-- /.text-block -->
         </div><!-- /.foot-pr-inner -->
@@ -61,21 +66,22 @@ if (
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 <?php
-elseif (
+} else if (
   $template_name == 'signup' ||
   $template_name == 'login' ||
   $template_name == 'logout' ||
   $template_name == 'reset_password' ||
   $template_name == 'reset_password.resetting'
-) :
+) {
 ?>
   <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
 <?php
-endif;
+}// end if
 // footer 表示条件 end
 // ------------------------------------------------------
 ?>
 </div><!-- /.whole -->
+<div id="modal-container"></div>
 <script>
 ( function () {
 

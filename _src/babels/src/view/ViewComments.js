@@ -35,6 +35,7 @@ import {CommentNode} from '../node/comment/CommentNode';
 
 // event
 import {ReplyStatus} from '../event/ReplyStatus';
+import {CommentStatus} from '../event/CommentStatus';
 
 // React
 let React = self.React;
@@ -76,8 +77,14 @@ export class ViewComments extends View {
 
     // コメント投稿後の再読み込み設定
     let status = ReplyStatus.factory();
-    status.on( ReplyStatus.COMPLETE, this.onComplete.bind( this ) );
+    let boudnComplete = this.onComplete.bind( this );
+    status.on( ReplyStatus.COMPLETE, boudnComplete );
     this._status = status;
+
+    // コメント削除後の再読み込み設定
+    let comment = CommentStatus.factory();
+    comment.on( CommentStatus.COMMENT_DELETE, boudnComplete );
+    this._commentStatus = comment;
 
     this._reload = false;
   }

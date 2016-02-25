@@ -21,6 +21,8 @@ import {Signup} from './page/Signup';
 
 import {SearchFrom} from './header/SearchFrom';
 
+import {CommentDelete} from './modal/CommentDelete';
+
 import {Dom} from './dom/Dom';
 
 let _symbol = Symbol();
@@ -51,6 +53,9 @@ export class Page {
 
     // user login check
     UT.app.User.init();
+
+    // modal
+    CommentDelete.start();
 
     // router
     let Router = UT.app.Router;
