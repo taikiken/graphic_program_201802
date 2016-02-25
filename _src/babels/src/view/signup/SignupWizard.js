@@ -155,6 +155,9 @@ export class SignupWizard extends View {
 
   }
 
+  /**
+   * component が mount された
+   */
   didMount():void {
     // dom mound after
 
@@ -169,27 +172,38 @@ export class SignupWizard extends View {
 
   }
 
+  /**
+   * SignupStatus.SIGNUP_STEP event handler
+   * @param {Object} event SignupStatus event object
+   */
   stepChange( event:Object ):void {
 
     let step = event.step;
     this._step = step;
 
   }
-
+  /**
+   * hash change event を監視開始
+   */
   activateHashChange():void {
 
     let boundHash = this.onHash.bind( this );
     this._boundHash = boundHash;
     // ToDo: 開発中はコメントにする, 本番でコメントアウト
-    //window.onbeforeunload = function() {
-    //  return Message.UNLOAD;
-    //};
+    /*
+    window.onbeforeunload = function() {
+      return Message.UNLOAD;
+    };
+    */
     window.addEventListener( 'hashchange', boundHash, false );
 
   }
 
+  /**
+   * HashChangeEvent event handler, hash が変更された後に呼び出されます
+   * @param {HashChangeEvent} event HashChangeEvent インsたんcえinstance
+   */
   onHash( event:HashChangeEvent ):void {
-    console.log( 'hashchange event ', event );
     let hash = event.newURL.split( '/' ).pop();
     let step = Url.signupStepByHash( hash );
     this._status.step( step );

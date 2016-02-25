@@ -74,7 +74,7 @@ export class User {
    */
   static get token():string {
     //
-    //if ( _sign ) {
+    // if ( _sign ) {
     //  /*
     //  switch ( Env.mode ) {
     //
@@ -96,7 +96,7 @@ export class User {
     //} else {
     //  // 非ログインは空文字を返す
     //  return '';
-    //}
+    // }
 
     return Cookie.get( Cookie.TARGET );
 

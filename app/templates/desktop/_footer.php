@@ -61,6 +61,16 @@ if (
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 <?php
+elseif (
+  $template_name == 'signup' ||
+  $template_name == 'login' ||
+  $template_name == 'logout' ||
+  $template_name == 'reset_password' ||
+  $template_name == 'reset_password.resetting'
+) :
+?>
+  <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
+<?php
 endif;
 // footer 表示条件 end
 // ------------------------------------------------------

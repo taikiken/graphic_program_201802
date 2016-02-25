@@ -24,8 +24,8 @@
     hash リンク
     
 1. ログイン / ログアウト
-    - [-] ログイン
-    - [-] ログアウト
+    - [X] ログイン
+    - [X] ログアウト  
 
 1. パスワード
     - [-] リセット
@@ -57,15 +57,22 @@
 **user** popup
 
 1. ログイン
-    - [] ログイン判定  
-    API 未設定
+    - [X] ログイン判定  
+    ~~API 未設定~~ Cookie 判定
     - [X] ユーザー情報取得 model
     - [X] ユーザーアイコンを ユーザー情報取得後に取得
     - [X] local から token 含むリクエストが成功しない... -> 2016-02-16 解決
     - [X] view
     - [X] UI drop menu
+    - [X] お知らせ
+    - [-] お知らせ既読  
+    機能未策定
 
 1. 非ログイン
+    - [X] view
+    
+1. 検索
+    - [X] model
     - [X] view
 
 ## index
@@ -112,13 +119,11 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [X] view
     
 1. コメント self  
-    ToDo: Token ありリクエストができるようになったら作成する -> 2016-02-16
     - [X] model
-    - [-] view  
-    ToDo: 再表示後 form 表示時の React warning
+    - [X] view  
     - [X] paging  
     - [X] send
-    - [-] send 後の view
+    - [X] send 後の view
     - [-] edit  
     先送り
     - [] delete
@@ -131,7 +136,7 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1. コメント official
     記事IDから取得する
     - [X] model
-    - [-] view  
+    - [X] view  
     ToDo: 再表示後 form 表示時の React warning
     - [X] paging  
     - [X] send
@@ -148,7 +153,7 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1. コメント normal
     記事IDから取得する
     - [X] model
-    - [-] view  
+    - [X] view  
     ToDo: 再表示後 form 表示時の React warning
     - [X] paging  
     - [X] send
@@ -175,7 +180,15 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [X] model
     - [X] view
 
-   
+1. bookmark 登録
+    - [X] model
+    - [X] view
+    
+1. bookmark 削除
+    - [X] model
+    - [X] view
+
+
 ## カテゴリー
 1. URLからslug抽出
     - [X]
@@ -202,8 +215,7 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
 1. 一覧
     - [X] model
     - [X] view
-    - [-] infinite scroll  
-    データが足りないので未テスト
+    - [X] infinite scroll  
         
 1. ranking
     - [X] model
@@ -211,8 +223,9 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     
 1. video
     - [X] model
-    - [-] view
-    JSON データ戻り値がnullのため未テスト
+    - [X] view
+    - [] infinite scroll   
+    データ足りないので「次」未テスト
     
 ## 検索
 1. 一覧
@@ -220,17 +233,10 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [X] model
     - [X] view
     - [] infinite scroll   
+    データ足りないので「次」未テスト
 
 
-## お知らせ
-1. 一覧
-    - [] model
-    - [] view
-    - [] infinite scroll  
-    
-1. 既読化
-    - [] model
-    
+# プロフィールページ
     
 ## bookmark
 1. 一覧
@@ -240,16 +246,72 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     
 1. 登録
     - [] model
+    - [] view
     
 1. 削除
     - [] model
+    - [] view
     
+
+## お知らせ
+1. 一覧
+    - [] model
+    - [] view
+    - [] infinite scroll  
+    
+1. 既読化
+    - [] model
+   
+
+## アクティヴィティ
+1. 一覧
+    - [] model
+    - [] view  
+
+# アカウント設定
+1. 基本情報
+    - [] model
+    - [] view  
+
+1. パーソナライズ
+    - [] model
+    - [] view  
+    
+1. ソーシャル連携
+    - [] model
+    - [] view  
+    
+1. 退会
+    - [] model
+    - [] view  
+
+# 会員登録
 
 ## signup
 1. 登録
     - [X] email detect
     - [X] error 表示
-    - [] 基本情報入力
+    - [X] 基本情報入力
     - [-] thumbnail  
     ToDo: document.body へ drop されたとき問題...
     - [X] 興味のある競技を選択
+
+## login
+1. form
+    - [X] model
+    - [X] view
+    
+## logout
+1. button
+    - [X] model
+    - [] view  
+    デザインがまだ
+    
+## パスワード
+1. リセット  
+    - [] model  
+    - [] view  
+    
+1.再設定
+    - [] model  
+    - [] view  

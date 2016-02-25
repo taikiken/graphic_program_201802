@@ -51,6 +51,11 @@ export class ViewRelated extends View {
    */
   render( related ):void {
 
+    if ( !Safety.isElement( this.element ) ) {
+      // nothing do
+      return;
+    }
+
     // -------------------------------------------------
     // 配列が空
     // 関連記事がないので処理中止

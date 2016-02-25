@@ -21,6 +21,8 @@ import {Signup} from './page/Signup';
 
 import {SearchFrom} from './header/SearchFrom';
 
+import {Dom} from './dom/Dom';
+
 let _symbol = Symbol();
 
 // UT
@@ -133,7 +135,7 @@ export class Page {
   }
   /**
    * 検索ページ
-   * @param {Object} event
+   * @param {Object} event Router.SEARCH event object
    */
   static search( event ):void {
 
@@ -144,14 +146,28 @@ export class Page {
    * signup page
    */
   static signup():void {
-    console.log( 'signup page start' );
     Signup.start();
   }
+  /**
+   * login page
+   */
   static login():void {
-
+    let loginElement = Dom.login();
+    if ( loginElement !== null ) {
+      let login = new UT.view.login.ViewLogin( loginElement );
+      login.start();
+    }
   }
-  static logout():void {
 
+  /**
+   * logout
+   */
+  static logout():void {
+    let logoutElement = Dom.logout();
+    if ( logoutElement !== null ) {
+      let logout = new UT.view.login.ViewLogout( logoutElement );
+      logout.start();
+    }
   }
   static password():void {
 

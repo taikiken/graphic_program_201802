@@ -12,8 +12,9 @@
 
 'use strict';
 
+import {Url} from '../app/const/Url';
+
 import {Safety} from '../data/Safety';
-// window.location に関する Utility
 
 /**
  * location に関する utility
@@ -90,7 +91,6 @@ export class Loc {
     return self.location.search.substring( 1 );
 
   }
-
   /**
    *
    * @return {string} host name + port number を返します
@@ -218,5 +218,10 @@ export class Loc {
         host.indexOf( '127.0.0.1' ) === 0;
 
   }
-
+  /**
+   * index(home) へ遷移します
+   */
+  static index():void {
+    Loc.current = Url.index();
+  }
 }

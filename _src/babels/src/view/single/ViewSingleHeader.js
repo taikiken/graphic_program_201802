@@ -120,6 +120,7 @@ export class ViewSingleHeader extends View {
             {/* 記事上 画像 or 動画 */}
             {/*
             React component へ変更
+            Facebook Video のレンダリングが間に合わず sdk 描画が空振りすることがあるため
             <div ref="singleImage"></div>
              */}
             <MediaNode

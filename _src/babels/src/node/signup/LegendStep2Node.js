@@ -81,7 +81,6 @@ let Step2FormNode = React.createClass( {
   getInitialState: function() {
     this.status = SignupStatus.factory();
     this.thumbnail = null;
-    // this.form = null;
     this.model = null;
     this.errors = {
       password: new ErrorMessage(),

@@ -70,6 +70,7 @@ export class Single {
     }
 
     // single page
+    // related いらなくる予定
     let elements = {
       related: Dom.related(),
       footer: Dom.singleFooter()
@@ -77,7 +78,7 @@ export class Single {
 
     let singleHeaderElement = Dom.singleHeader();
 
-    if ( singleHeaderElement !== null && elements.related !== null && elements.footer !== null ) {
+    if ( singleHeaderElement !== null && elements.footer !== null ) {
       let single = new UT.view.ViewSingle( articleId, singleHeaderElement, elements );
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, Single.before );

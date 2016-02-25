@@ -206,15 +206,15 @@ export class ViewHeaderMemberNotice extends View {
         this.props.callback();
         // ToDo: ajax request
       },
-      done: function( result ) {
+      done: function() {
         this.setState( { loading: '' } );
       },
-      fail: function( error ) {
+      fail: function() {
         this.setState( { loading: '' } );
       }
     } );
     // user notice dropMenu
-    let NoticeMenu = React.createClass( {
+    let NoticeMenuDom = React.createClass( {
       propTypes: {
         notifications: React.PropTypes.array.isRequired
       },
@@ -261,7 +261,7 @@ export class ViewHeaderMemberNotice extends View {
     // --------------------------------------------------
     // total 件数
 
-    let NoticeTotal = React.createClass( {
+    let NoticeTotalDom = React.createClass( {
       propTypes: {
         total: React.PropTypes.number.isRequired
       },
@@ -306,9 +306,9 @@ export class ViewHeaderMemberNotice extends View {
           <div className={'notice ' + this.state.open}>
             <a href="#" className="notice-opener" onClick={this.clickHandler}>
               <i className="notice-icon">&nbsp;</i>
-              <NoticeTotal total={response.total} />
+              <NoticeTotalDom total={response.total} />
             </a>
-            <NoticeMenu notifications={notifications} />
+            <NoticeMenuDom notifications={notifications} />
           </div>
         );
 

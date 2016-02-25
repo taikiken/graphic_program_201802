@@ -15,8 +15,6 @@ import {Dom} from '../dom/Dom';
 
 let TweenLite = self.TweenLite;
 let easing = self.com.greensock.easing;
-// UT
-let UT = self.UT;
 
 /**
  * page top に戻る

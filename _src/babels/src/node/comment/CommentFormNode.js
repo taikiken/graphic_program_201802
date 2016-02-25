@@ -575,7 +575,7 @@ export let CommentFormNode = React.createClass( {
         </div>
       );
 
-    }//if
+    }// if / else
 
   },
   componentDidMount: function() {
@@ -589,7 +589,7 @@ export let CommentFormNode = React.createClass( {
     // textarea value
     this.setState( { body: event.target.value } );
   },
-  openerClick: function( status:string ) {
+  openerClick: function( /* status:string */ ) {
     // console.log( '********** root openerClick ', this.props.uniqueId, status );
     // open / close が opener から送られてくる
     // this.setState( { toggle: status } );
