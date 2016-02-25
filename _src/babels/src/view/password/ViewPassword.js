@@ -9,3 +9,20 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+'use strict';
+
+// view
+import {View} from '../View';
+
+import {Safety} from '../../data/Safety';
+
+// React
+let React = self.React;
+let ReactDOM = self.ReactDOM;
+
+export class ViewPassword extends View {
+  constructor( element:Element, option:Object = {} ) {
+    super( element, option );
+  }
+
+}

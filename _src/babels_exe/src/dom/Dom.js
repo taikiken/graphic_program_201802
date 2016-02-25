@@ -190,5 +190,19 @@ export class Dom {
   static logout():Element {
     return Dom.get( 'logout-form-container' );
   }
+  /**
+   * パスワードをリセットする メール入力
+   * @return {Element} reset_password-container
+   */
+  static password():Element {
+    return Dom.get( 'reset_password-container' );
+  }
+  /**
+   * パスワードをリセットする パスワード入力
+   * @return {Element} reset_password-container
+   */
+  static passwordResetting():Element {
+    return Dom.get( 'reset_password-resetting-container' );
+  }
 }
 // return Dom.get( '' );
