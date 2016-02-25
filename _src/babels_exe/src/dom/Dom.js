@@ -178,10 +178,17 @@ export class Dom {
   }
   /**
    * login form
-   * @return {Element} login-email-container を返します
+   * @return {Element} login-form-container を返します
    */
   static login():Element {
-    return Dom.get( 'login-email-container' );
+    return Dom.get( 'login-form-container' );
+  }
+  /**
+   * logout form
+   * @return {Element} logout-form-container を返します
+   */
+  static logout():Element {
+    return Dom.get( 'logout-form-container' );
   }
 }
 // return Dom.get( '' );

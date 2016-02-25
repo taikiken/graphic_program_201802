@@ -24,7 +24,7 @@
         <p class="register-or">または</p>
 
         <div class="login-email setting-form">
-          <div id="login-email-container"></div>
+          <div id="login-form-container"></div>
           <p class="note">パスワードをお忘れの方は<a href="hoge" target="_blank">こちら</a></p>
         </div><!-- /.login-email -->
       </div><!-- /.register -->

@@ -129,6 +129,7 @@ import {SignupWizard} from './view/signup/SignupWizard';
 
 // login
 import {ViewLogin} from './view/login/ViewLogin';
+import {ViewLogout} from './view/login/ViewLogout';
 
 // -------------------------------------
 // ui
@@ -251,7 +252,8 @@ var UT = {
       SignupWizard: SignupWizard
     },
     login: {
-      ViewLogin: ViewLogin
+      ViewLogin: ViewLogin,
+      ViewLogout: ViewLogout
     }
   },
   model: {

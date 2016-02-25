@@ -158,8 +158,16 @@ export class Page {
       login.start();
     }
   }
-  static logout():void {
 
+  /**
+   * logout
+   */
+  static logout():void {
+    let logoutElement = Dom.logout();
+    if ( logoutElement !== null ) {
+      let logout = new UT.view.login.ViewLogout( logoutElement );
+      logout.start();
+    }
   }
   static password():void {
 
