@@ -7,7 +7,6 @@
 
 */
 ?>
-<div class="signup">
   <header class="signup-header">
     <h1 class="heading">運動通信</h1>
   </header><!-- /.signup-header -->
@@ -44,4 +43,3 @@
       </div><!-- /.pw-reset -->
     </div>
   </div><!-- /.body-sec -->
-</div>
