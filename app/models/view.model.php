@@ -94,7 +94,7 @@ class ViewModel {
     // TODO - これDBからひっぱる必要あり〼 ref. #117
     // カテゴリーを取得する
     // ひとまず file_get_contentsで取得しておきます
-    $categories = file_get_contents('http://undotsushin.com/api/v1/category');
+    $categories = file_get_contents('http://www.undotsushin.com/api/v1/category');
 
     if ( $categories ) :
       $categories = json_decode($categories, true);
@@ -133,7 +133,7 @@ class ViewModel {
   public function get_post($id) {
 
     // TODO - ひとまずfile_get_contentsで取得
-    $post = file_get_contents('http://undotsushin.com/api/v1/articles/'.$id);
+    $post = file_get_contents('http://www.undotsushin.com/api/v1/articles/'.$id);
 
     if ( $post ) :
       $post = json_decode($post, true);

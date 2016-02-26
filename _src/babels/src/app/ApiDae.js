@@ -228,7 +228,7 @@ let buildPath = () => {
     // コメント返信コメント 削除
     // /api/v1/comments/article/{:article_id}/{:commend_id}/{:reply_id}
     'comment:reply:delete': new Types(
-      new Type( `${API_PATH}/comments/${Path.ARTICLE_ID}/${Path.COMMENT_ID}/${Path.REPLY_ID}`, 'DELETE' ),
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/${Path.COMMENT_ID}/${Path.REPLY_ID}`, 'DELETE' ),
       new Permalink( [ '*' ], true ),
       new Queries(),
       true

@@ -85,6 +85,14 @@ export class CommentStatus extends EventDispatcher {
   static get NOTICE():string {
     return 'commentNotice';
   }
+
+  /**
+   * event COMMENT_WILL_DELETE 削除
+   * @return {string} commentWillDelete を返します
+   */
+  static get COMMENT_WILL_DELETE():string {
+    return 'commentWillDelete';
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -101,7 +109,7 @@ export class CommentStatus extends EventDispatcher {
    * @param {string|Number} commentId コメント Id
    */
   remove( commentId:string ):void {
-    this.fire( CommentStatus.DELETE, commentId );
+    this.fire( CommentStatus.COMMENT_DELETE, commentId );
   }
   /**
    * 通報

@@ -6,7 +6,7 @@
 // -------------------------------------------------
 
 // common
-legend {
+fieldset {
   input,
   textarea {
     color: #333;
@@ -16,6 +16,9 @@ legend {
 // -------------------------------------------------
 // error
 .error {
+  textarea {
+    border: 1px solid #e14343!important;
+  }
   .form-input {
     border-color: #e14343;
   }
@@ -43,20 +46,20 @@ legend {
 // -------------------------------------------------
 // 表示 / 非表示
 .signup-1 {
-  .legend-container-2,
-  .legend-container-3 {
+  .fieldset-container-2,
+  .fieldset-container-3 {
     display: none;
   }
 }
 .signup-2 {
-  .legend-container-1,
-  .legend-container-3 {
+  .fieldset-container-1,
+  .fieldset-container-3 {
     display: none;
   }
 }
 .signup-3 {
-  .legend-container-1,
-  .legend-container-2 {
+  .fieldset-container-1,
+  .fieldset-container-2 {
     display: none;
   }
 }
@@ -67,7 +70,7 @@ legend {
 // step 1~3
 // -------------------------------------------------
 
-.legend-step-1 {
+.fieldset-step-1 {
   width: 100%;
 
   .form-parts {
@@ -84,7 +87,7 @@ legend {
     }
   }
 }
-.legend-step-2 {
+.fieldset-step-2 {
   width: 100%;
 
   .form-parts {

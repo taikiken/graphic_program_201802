@@ -17,66 +17,24 @@ import {Empty} from '../../app/const/Empty';
 import {Form} from '../../data/Form';
 import {Safety} from '../../data/Safety';
 import {Result} from '../../data/Result';
+import {ErrorMessage} from '../../data/ErrorMessage';
 
 // model
 import {ModelComment} from '../../model/comment/ModelComment';
 import {ModelCommentReply} from '../../model/comment/ModelCommentReply';
 import {Model} from '../../model/Model';
 
+// node
+import {ErrorNode} from '../error/ErrorNode';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
-/*
-let CommentMessage = React.createClass( {
-  propTypes: {
-    message: React.PropTypes.string,
-    messageClass: React.PropTypes.string
-  },
-  getDefaultProps: function() {
-    return {
-      message: '',
-      messageClass: ''
-    };
-  },
-  getInitialState: function() {
-    return {
-      message: this.props.message,
-      messageClass: this.props.messageClass
-    };
-  },
-  render: function() {
-
-    if ( this.state.message === '' ) {
-
-      // 非表示
-      return null;
-
-    } else {
-
-      return (
-        <div className="comment-form-message">
-          <div className={this.state.messageClass}>{this.state.message}</div>
-        </div>
-      );
-
-    }
-
-  },
-  componentDidMount: function() {
-
-  },
-  componentWillUnMount: function() {
-
-  },
-  update: function( message:string, error:boolean = false ) {
-    this.setState( { message: message, error: error ? 'error' : 'message' } );
-  }
-} );
-*/
 
 // comment form
 /**
  * コメント送信用 form
+ * @type {React.component} コメント送信フォーム
  */
 let FormElementNode = React.createClass( {
   propTypes: {
@@ -115,7 +73,12 @@ let FormElementNode = React.createClass( {
 
     this.mounted = false;
 
+    this.errors = {
+      body: new ErrorMessage()
+    };
+
     return {
+      error: false,
       loading: '',
       body: '',
       open: this.props.open
@@ -147,13 +110,22 @@ let FormElementNode = React.createClass( {
 
       let loggedIn = picture === Empty.USER_PICTURE_FEATURE ? '' : 'user-logged-in';
 
+      let errorClass = ( keyName:string ) => {
+        return this.errors[ keyName ].error ? 'error' : '';
+      };
+
+      let message = ( keyName:string ) => {
+        return this.errors[ keyName ].message;
+      };
+
       return (
         <div className={'form-root loading-root ' + this.state.loading}>
           <form onSubmit={this.onSubmit} ref="form">
             <i className={'comment-form-user ' + loggedIn}><img src={picture} alt=""/></i>
             <div className="comment-form-comment-outer">
-              <div className="comment-form-comment-inner">
+              <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
                 <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" autoFocus="true" />
+                <ErrorNode message={message('body')} />
               </div>
             </div>
             <div className="comment-form-submit">
@@ -173,8 +145,21 @@ let FormElementNode = React.createClass( {
   componentDidMount: function() {
 
     this.mounted = true;
+    this.listen();
+
+  },
+  componentDidUpdate: function() {
+  },
+  componentWillUnMount: function() {
+    console.log( '+++++++++++ componentWillUnMount +++++++++++', this.props.uniqueId );
+
+    this.mounted = false;
+    this.dispose();
+  },
+  // ----------------------------------------
+  listen: function() {
     let replyStatus = this.replyStatus;
-    console.log( '+++++++++++ componentDidMount ', this.props.uniqueId, replyStatus );
+    console.log( '+++++++++++ listen ', this.props.uniqueId, replyStatus );
 
     if ( replyStatus === null ) {
       replyStatus = ReplyStatus.factory();
@@ -188,15 +173,7 @@ let FormElementNode = React.createClass( {
 
       }
     }
-
   },
-  componentDidUpdate: function() {
-  },
-  componentWillUnMount: function() {
-    this.mounted = false;
-    this.dispose();
-  },
-  // ----------------------------------------
   // all event unbind
   dispose: function() {
     // event unbind
@@ -271,9 +248,10 @@ let FormElementNode = React.createClass( {
     event.preventDefault();
 
     var body = this.state.body;
+    this.reset();
 
     if ( body === '' ) {
-      this.error( 'コメントは必須入力です！' );
+      this.error( 'コメントは必須入力です。' );
     } else {
       // submit sequence
       this.sending();
@@ -281,7 +259,12 @@ let FormElementNode = React.createClass( {
   },
   // show error
   error: function( message:string ) {
-    throw new Error(message);
+    this.errors.body.message = message;
+    this.setState( { error: true } );
+  },
+  reset: function() {
+    this.errors.body.reset();
+    this.setState( { error: false } );
   },
   // ajax start
   sending: function() {

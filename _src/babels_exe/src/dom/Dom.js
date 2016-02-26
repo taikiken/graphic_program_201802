@@ -204,5 +204,12 @@ export class Dom {
   static passwordResetting():Element {
     return Dom.get( 'reset_password-resetting-container' );
   }
+  /**
+   * modal
+   * @return {Element} modal-container
+   */
+  static modal():Element {
+    return Dom.get( 'modal-container' );
+  }
 }
 // return Dom.get( '' );

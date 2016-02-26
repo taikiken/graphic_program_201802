@@ -64,33 +64,72 @@ export class MessageStatus extends EventDispatcher {
   static get ALERT():string {
     return 'messageAlert';
   }
+  /**
+   * comment delete confirm
+   * @return {string} messageDelete を返します
+   */
+  static get DELETE():string {
+    return 'messageDelete';
+  }
+  // ---------------------------------------------------
+  //  CONST
+  // ---------------------------------------------------
+  /**
+   * メッセージ種類 INFO
+   * @return {string} info
+   */
+  static get INFO():string {
+    return 'info';
+  }
+  /**
+   * メッセージ種類 ERROR
+   * @return {string} error
+   */
+  static get ERROR():string {
+    return 'error';
+  }
+  /**
+   * メッセージ種類 SUCCESS
+   * @return {string} success
+   */
+  static get SUCCESS():string {
+    return 'success';
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * flush message event を発火します
    * @param {string} message 表示文字列
+   * @param {Function} [ok=null] after callback method
+   * @param {string} [type=info] after callback method
    */
-  flush( message:string ):void {
-    this.dispatch( {type: MessageStatus.FLUSH, message: message} );
+  flush( message:string, ok:Function = null, type:string = MessageStatus.INFO ):void {
+    this.dispatch( {type: MessageStatus.FLUSH, message: message, ok: ok, kind: type} );
   }
   /**
    * confirm window event を発火します
    * @param {string} message 表示文字列
    * @param {Function} ok ok click callback
    * @param {Function} cancel cancel click callback
+   * @param {string} [type=info] after callback method
    */
-  alert( message:string, ok:Function, cancel:Function ):void {
-    this.dispatch( {type: MessageStatus.ALERT, message: message, ok: ok, cancel: cancel} );
+  alert( message:string, ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
+    this.dispatch( {type: MessageStatus.ALERT, message: message, ok: ok, cancel: cancel, kind: type} );
   }
   /**
    * alert window event を発火します
    * @param {string} message 表示文字列
    * @param {Function} ok ok click callback
    * @param {Function} cancel cancel click callback
+   * @param {string} [type=info] after callback method
    */
-  confirm( message:string, ok:Function, cancel:Function ):void {
-    this.dispatch( {type: MessageStatus.CONFIRM, message: message, ok: ok, cancel: cancel} );
+  confirm( message:string, ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
+    this.dispatch( {type: MessageStatus.CONFIRM, message: message, ok: ok, cancel: cancel, kind: type} );
+  }
+
+  remove( ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
+    this.dispatch( {type: MessageStatus.DELETE, ok: ok, cancel: cancel, kind: type} );
   }
   // ---------------------------------------------------
   //  static method

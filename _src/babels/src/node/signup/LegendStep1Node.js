@@ -58,7 +58,7 @@ let Step1FormNode = React.createClass( {
     };
 
     return (
-      <legend className="legend-step-1">
+      <fieldset className="fieldset-step-1">
         <span className={'form-parts ' + errorClass('errorEmail')}>
           <span className="setting-form-mail form-input">
             <input
@@ -76,7 +76,7 @@ let Step1FormNode = React.createClass( {
             <input type="button" value="アカウント作成 (無料)" onClick={this.nextHandler}/>
           </span>
         </span>
-      </legend>
+      </fieldset>
     );
 
   },
@@ -197,7 +197,7 @@ export let LegendStep1Node = React.createClass( {
   render: function() {
 
     return (
-      <div className="legend-container legend-container-1">
+      <div className="fieldset-container fieldset-container-1">
         <div className="linkage-sns">
           <ul className="linkage-sns-list">
             <li className="linkage-sns-item">

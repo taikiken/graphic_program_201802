@@ -35,6 +35,7 @@ import {CommentNode} from '../node/comment/CommentNode';
 
 // event
 import {ReplyStatus} from '../event/ReplyStatus';
+import {CommentStatus} from '../event/CommentStatus';
 
 // React
 let React = self.React;
@@ -76,8 +77,14 @@ export class ViewComments extends View {
 
     // コメント投稿後の再読み込み設定
     let status = ReplyStatus.factory();
-    status.on( ReplyStatus.COMPLETE, this.onComplete.bind( this ) );
-    this._status = status;
+    let boundComplete = this.onComplete.bind( this );
+    status.on( ReplyStatus.COMPLETE, boundComplete );
+    // this._status = status;
+
+    // コメント削除後の再読み込み設定
+    let comment = CommentStatus.factory();
+    comment.on( CommentStatus.COMMENT_DELETE, boundComplete );
+    // this._commentStatus = comment;
 
     this._reload = false;
   }
@@ -322,6 +329,7 @@ export class ViewComments extends View {
         let articleId = this.props.articleId;
         let uniqueId = this.props.uniqueId;
         let icon = this.props.icon;
+        let commentId = this.props.commentId;
 
         return (
           <ul className="comment-list">
@@ -340,7 +348,8 @@ export class ViewComments extends View {
                       userId={userId}
                       icon={icon}
                       articleId={articleId}
-                      commentId={String(replyComment.id)}
+                      commentId={commentId}
+                      replyId={String(replyComment.id)}
                       commentUserId={String(replyComment.user.id)}
                       sign={sign}
                       parent={false}
@@ -557,7 +566,7 @@ export class ViewComments extends View {
    * <p>再読み込みを行うかを決める</p>
    */
   onComplete():void {
-
+    console.log( 'onComplete' );
     // とにかくreloadが良さそう
     this.reload();
   }

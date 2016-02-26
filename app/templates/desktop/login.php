@@ -25,7 +25,7 @@
 
         <div class="login-email setting-form">
           <div id="login-form-container"></div>
-          <p class="note">パスワードをお忘れの方は<a href="hoge" target="_blank">こちら</a></p>
+          <p class="note">パスワードをお忘れの方は<a href="/reset_password/" target="_blank">こちら</a></p>
         </div><!-- /.login-email -->
       </div><!-- /.register -->
     </div>
