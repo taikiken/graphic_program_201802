@@ -1,3 +1,12 @@
+<?php
+/*
+
+
+完了画面URLわけてますが処理的に同一でも問題ないかと思います。
+
+
+*/
+?>
 <div class="signup">
   <header class="signup-header">
     <h1 class="heading">運動通信</h1>
@@ -11,7 +20,7 @@
 
       <div class="pw-reset setting-form">
         <p class="mt40">新しいパスワードを入力してください。</p>
-        <form action="">
+        <form action="/reset_password/resetting/complete/" method="post" enctype="application/x-www-form-urlencoded">
           <div class="setting-form">
             <form action="">
               <span class="form-parts">
