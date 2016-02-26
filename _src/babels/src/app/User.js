@@ -17,7 +17,7 @@ import {UserStatus} from '../event/UserStatus';
 import {Safety} from '../data/Safety';
 
 let _symbol = Symbol();
-let _sign = false;
+// let _sign = false;
 
 /**
  * <h3>ユーザー情報を管理します</h3>
@@ -46,7 +46,10 @@ export class User {
    */
   static get sign():boolean {
 
-    return _sign;
+    //return _sign;
+    // 開発フェーズは簡易的に変数管理していたが
+    // cookie token 管理へ変更する
+    return User.token !== null;
 
   }
   /**
@@ -55,8 +58,14 @@ export class User {
    */
   static set sign( bool:boolean ) {
 
+    /*
+     // 開発フェーズは簡易的に変数管理していたが
+     // cookie token 管理へ変更する
     _sign = bool;
+    */
+    bool = !!bool;
 
+    //
     if ( bool ) {
 
       UserStatus.factory().login();
@@ -70,7 +79,7 @@ export class User {
   }
   /**
    *
-   * @return {string} token を返します, 見つからない時はnullを返します
+   * @return {string|null} token を返します, 見つからない時はnullを返します
    */
   static get token():string {
     //
@@ -104,6 +113,7 @@ export class User {
 
   /**
    * 開発用 method
+   * @ToDo 本番環境で削除 or コメント
    * @return {string} 開発 token
    */
   static fake():string {
@@ -120,6 +130,12 @@ export class User {
   static login( token:string ):boolean {
     token = Safety.string( token, '' );
     console.log( 'token ', token );
+    // ToDo: 本番環境でコメント外す
+    /*
+    throw new Error( 'token have to need.', token );
+    */
+    // 開発中は token が cookie になくても default user でログインさせちゃう
+    // ToDo: 本番環境で削除 or コメント
     if ( token === '' ) {
       if ( Env.mode === Env.PRODUCTION ) {
         throw new Error( 'token have to need.', token );
@@ -140,7 +156,6 @@ export class User {
     Cookie.remove( Cookie.TARGET );
     User.sign = false;
   }
-
   /**
    * ログイン・非ログインを確認します
    * <p>ログイン（token発見）時は login 処理を行います</p>

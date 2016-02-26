@@ -16,6 +16,9 @@ fieldset {
 // -------------------------------------------------
 // error
 .error {
+  textarea {
+    border: 1px solid #e14343!important;
+  }
   .form-input {
     border-color: #e14343;
   }

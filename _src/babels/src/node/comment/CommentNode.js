@@ -12,141 +12,16 @@
 import {Empty} from '../../app/const/Empty';
 import {Safety} from '../../data/Safety';
 
-// event
-import {MessageStatus} from '../../event/MessageStatus';
-import {CommentStatus} from '../../event/CommentStatus';
-
 // node
 import {ReactionNode} from './ReactionNode';
 import {CommentFormNode} from './CommentFormNode';
+import {CommentActionNode} from './CommentActionNode';
+
+// node
+
 
 // React
 let React = self.React;
-
-// コメント削除・通報 削除は自分のだけ, 他人のコメントは通報
-let CommentActionNode = React.createClass( {
-  propTypes: {
-    // menu が 開いているか閉じているか open / close
-    toggle: React.PropTypes.string.isRequired,
-    // mine or others, others: true
-    others: React.PropTypes.bool.isRequired,
-    // user id
-    userId: React.PropTypes.string.isRequired,
-    commentUserId: React.PropTypes.string.isRequired,
-    commentId: React.PropTypes.string.isRequired,
-    remove: React.PropTypes.func.isRequired,
-    report: React.PropTypes.func.isRequired
-  },
-  getInitialState: function() {
-    this.message = MessageStatus.factory();
-    this.comment = CommentStatus.factory();
-
-    return {
-      deleteLoading: '',
-      reportLoading: ''
-    };
-  },
-  render: function() {
-    console.log( '****************** render', this.props.others, this.state.reportLoading );
-
-    if ( this.props.others ) {
-      // 自分以外 & ユーザー情報が正しくは通報機能
-      // 通報機能 drop 2016-02-25
-      /*
-      return (
-        <li className={'dropMenu-item loading-root ' + this.state.reportLoading}>
-          <a href="#" className="dropMenu-link-report dropMenu-link" onClick={this.reportClick}><span>このコメントを通報する</span></a>
-          <div className="loading-spinner"></div>
-        </li>
-      );
-      */
-      return null;
-    } else {
-      // 自分のは削除機能
-      return (
-        <li className={'dropMenu-item loading-root ' + this.state.deleteLoading}>
-          <a href="#" className="dropMenu-link-delete dropMenu-link-" onClick={this.deleteClick}><span>このコメントを削除する</span></a>
-        </li>
-      );
-    }
-  },
-  componentDidMount: function() {
-
-  },
-  shouldComponentUpdate: function(nextProps, nextState) {
-    // menu が閉じたら loading class を削除する
-    if ( nextState.toggle === 'close' ) {
-      if ( this.state.deleteLoading === 'loading' ) {
-        this.setState( {deleteLoading: ''} );
-      }
-      if ( this.state.reportLoading === 'loading' ) {
-        this.setState( {reportLoading: ''} );
-      }
-    }
-
-    return true;
-  },
-  componentWillUnMount: function() {
-    this.setState( {reportLoading: '', deleteLoading: ''} );
-  },
-  // -------------------------------------------------
-  // delete
-  deleteClick: function( event ) {
-    event.preventDefault();
-    event.stopPropagation();
-    // delete action
-    this.setState( { deleteLoading: 'loading'} );
-    this.props.remove( 'click' );
-
-    // modal open fire
-    this.message.remove( this.shouldDelete, this.shouldCancel );
-  },
-  // confirm ok click
-  shouldDelete: function() {
-    console.log( 'comment shouldDelete' );
-  },
-  shouldCancel: function() {
-    console.log( 'shouldCancel' );
-    this.props.remove( 'cancel' );
-  },
-  deleteDone: function(result) {
-    console.log( 'deleteDone', result );
-    this.props.delete( 'done' );
-
-    // event 通知
-    this.comment.remove( this.props.commentId );
-  },
-  deleteFail: function(error) {
-    console.log( 'deleteFail', error );
-    this.props.delete( false );
-    this.props.delete( 'fail' );
-  },
-  // -------------------------------------------------
-  reportClick: function( event ) {
-    event.preventDefault();
-    // event.stopPropagation();
-    console.log( 'reportClick', event );
-
-    this.setState( { reportLoading: 'loading'} );
-    this.props.report( 'click' );
-
-    // test code
-    /*
-    setTimeout( this.reportDone, 1000 );
-    setTimeout( this.reportFail, 1000 );
-    */
-  },
-  reportDone: function(result) {
-    console.log( 'reportDone', result );
-    this.setState( { reportLoading: ''} );
-    this.props.report( 'done' );
-  },
-  reportFail: function(error) {
-    console.log( 'reportFail', error );
-    this.setState( { reportLoading: ''} );
-    this.props.report( 'fail' );
-  }
-} );
 
 // 通報 drop menu
 let CommentMenuNode = React.createClass( {
@@ -156,6 +31,11 @@ let CommentMenuNode = React.createClass( {
     commentUserId: React.PropTypes.string.isRequired,
     articleId: React.PropTypes.string.isRequired,
     commentId: React.PropTypes.string.isRequired,
+    // 返信 id
+    replyId: React.PropTypes.string.isRequired,
+    // 親コメント? default false
+    parent: React.PropTypes.bool.isRequired,
+
     sign: React.PropTypes.bool.isRequired
   },
   getInitialState: function() {
@@ -186,6 +66,9 @@ let CommentMenuNode = React.createClass( {
                 userId={this.props.userId}
                 commentUserId={this.props.commentUserId}
                 commentId={this.props.commentId}
+                replyId={this.props.replyId}
+                articleId={this.props.articleId}
+                parent={this.props.parent}
                 remove={this.didDelete}
                 report={this.didReport}
               />
@@ -329,6 +212,8 @@ export let CommentNode = React.createClass( {
     articleId: React.PropTypes.string.isRequired,
     // コメント id（オプション）
     commentId: React.PropTypes.string,
+    // 返信 id（オプション）
+    replyId: React.PropTypes.string,
     // コメントした user id
     commentUserId: React.PropTypes.string.isRequired,
     // コメント数 default 0
@@ -349,6 +234,7 @@ export let CommentNode = React.createClass( {
       icon: '',
       userId: '',
       commentId: '',
+      replyId: '',
       commentCount: 0,
       parent: false,
       independent: false,
@@ -389,6 +275,8 @@ export let CommentNode = React.createClass( {
           commentUserId={this.props.commentUserId}
           articleId={this.props.articleId}
           commentId={this.props.commentId}
+          replyId={this.props.replyId}
+          parent={this.props.parent}
         />
         <figure className="comment-user">
           <span className="comment-user-link">
@@ -404,7 +292,7 @@ export let CommentNode = React.createClass( {
         <ReactionNode
           uniqueId={this.props.uniqueId}
           articleId={this.props.articleId}
-          commentId={this.props.commentId}
+          commentId={this.props.parent ? this.props.commentId : this.props.replyId}
           sign={sign}
           good={comment.good}
           bad={comment.bad}

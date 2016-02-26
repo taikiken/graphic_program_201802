@@ -10,8 +10,8 @@
 
   <meta property="og:title" content="<?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?>">
   <meta property="og:type" content="<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>">
-  <meta property="og:image" content="http://undotsushin.com/img/common/sns.png">
-  <meta property="og:url" content="http://undotsushin.com/">
+  <meta property="og:image" content="http://www.undotsushin.com/img/common/sns.png">
+  <meta property="og:url" content="http://www.undotsushin.com/">
   <meta property="og:description" content="説明文">
 
   <link rel="shortcut icon" href="/favicon.ico">

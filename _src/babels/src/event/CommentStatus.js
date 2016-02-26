@@ -109,7 +109,7 @@ export class CommentStatus extends EventDispatcher {
    * @param {string|Number} commentId コメント Id
    */
   remove( commentId:string ):void {
-    this.fire( CommentStatus.DELETE, commentId );
+    this.fire( CommentStatus.COMMENT_DELETE, commentId );
   }
   /**
    * 通報

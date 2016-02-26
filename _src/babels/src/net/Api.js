@@ -239,7 +239,7 @@ export class Api {
    * @param {string} action path option を指定します
    * @return {Types} comment API をTypes instanceで返します
    */
-  static comment( action ):Types {
+  static comment( action:string ):Types {
 
     switch ( action ) {
 
@@ -261,6 +261,7 @@ export class Api {
       case 'reply':
         return ApiDae.api( 'comment:reply' );
 
+      case 'delete':
       case 'send:delete':
         return ApiDae.api( 'comment:send:delete' );
 
@@ -288,6 +289,24 @@ export class Api {
         return ApiDae.api( 'comment' );
     }
 
+  }
+  /**
+   * コメント返信 を comment 関数から抽出
+   * @param {string} action path option を指定します
+   * @return {Types} comment API をTypes instanceで返します
+   */
+  static replay( action:string = '' ):Types {
+    switch ( action ) {
+      case 'delete':
+        return Api.comment( 'reply:delete' );
+
+      case '':
+        return Api.comment( 'reply' );
+
+      default:
+        console.warn( `replay illegal action: ${action}, instead use default` );
+        return Api.comment( 'reply' );
+    }
   }
 
   // ----------------------------------
