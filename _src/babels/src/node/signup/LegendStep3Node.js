@@ -53,7 +53,7 @@ let Step3FormNode = React.createClass( {
   render: function() {
 
     return (
-      <legend className="legend-step-3">
+      <fieldset className="fieldset-step-3">
         <div className="setting-form-interest">
           <ul className="setting-form-interest-list">
             {
@@ -81,7 +81,7 @@ let Step3FormNode = React.createClass( {
             <input type="button" value="登録する" onClick={this.nextHandler}/>
           </span>
         </div>
-      </legend>
+      </fieldset>
     );
 
   },
@@ -208,7 +208,7 @@ export let LegendStep3Node = React.createClass( {
   render: function() {
 
     return (
-      <div className="legend-container legend-container-3">
+      <div className="fieldset-container fieldset-container-3">
         <Step3FormNode
           step={this.props.step}
           categories={this.props.categories}

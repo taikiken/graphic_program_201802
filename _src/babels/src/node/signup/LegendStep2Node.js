@@ -112,7 +112,7 @@ let Step2FormNode = React.createClass( {
     };
 
     return (
-      <legend className="legend-step-2">
+      <fieldset className="fieldset-step-2">
         {/* password */}
         <span className={'form-parts ' + errorClass('password')}>
           <span className="setting-form-pw form-input">
@@ -186,7 +186,7 @@ let Step2FormNode = React.createClass( {
             <input type="button" value="次へ" onClick={this.nextHandler} />
           </span>
         </div>
-      </legend>
+      </fieldset>
     );
 
   },
@@ -437,7 +437,7 @@ export let LegendStep2Node = React.createClass( {
 
     console.log( 'render step 2 email ', this.state.email );
     return (
-      <div className="legend-container legend-container-2">
+      <div className="fieldset-container fieldset-container-2">
         <span className="setting-form-mail disabled">
           <input type="text" value={this.state.email}/>
           <div className="disabled"></div>
