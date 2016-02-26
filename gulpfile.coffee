@@ -41,6 +41,10 @@ components = dir.bower.components
 exports = dir.bower.exports
 htdocs = dir.htdocs
 
+# --------------------------------------------
+# 外部 task load
+# --------------------------------------------
+
 # Load custom tasks from the `tasks` directory
 # 不要の時はコメントアウトしてください
 # 基本 task読み込み
@@ -52,6 +56,12 @@ catch error
 # babel 関連task読み込み
 try
   require( 'require-dir' )( 'tasks-babel' )
+catch error
+  console.error error
+
+# sp 専用 task
+try
+  require( 'require-dir' )( 'tasks-sp' )
 catch error
   console.error error
 
