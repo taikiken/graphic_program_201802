@@ -10,6 +10,7 @@ $app->group('/reset_password', function () use ($app) {
       'title'    => 'パスワードをリセットする',
       'template' => 'reset_password',
       'path'     => $args,
+      'template_classname' => 'signup',
     ));
 
     return $this->renderer->render($response, "default.php", $args);
@@ -25,6 +26,7 @@ $app->group('/reset_password', function () use ($app) {
       'title'    => 'パスワードをリセットする',
       'template' => 'reset_password.complete',
       'path'     => $args,
+      'template_classname' => 'signup',
     ));
 
     return $this->renderer->render($response, "default.php", $args);
@@ -40,6 +42,7 @@ $app->group('/reset_password', function () use ($app) {
       'title'    => '再設定 | パスワードをリセットする',
       'template' => 'reset_password.resetting',
       'path'     => $args,
+      'template_classname' => 'signup',
     ));
 
     return $this->renderer->render($response, "default.php", $args);
@@ -55,6 +58,7 @@ $app->group('/reset_password', function () use ($app) {
       'title'    => '再設定 | パスワードをリセットする',
       'template' => 'reset_password.resetting.complete',
       'path'     => $args,
+      'template_classname' => 'signup',
     ));
 
     return $this->renderer->render($response, "default.php", $args);
