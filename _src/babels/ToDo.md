@@ -126,8 +126,11 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [X] send 後の view
     - [-] edit  
     先送り
-    - [] delete
-    - [] notice
+    - [X] delete
+    - [] delete view  
+    デザインがまだ
+    - [-] notice  
+    見送り
     - [X] good
     - [X] good delete
     - [X] bad
@@ -141,10 +144,13 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [X] paging  
     - [X] send
     - [X] send 後の view
-    - [-] edit
+    - [-] edit  
     先送り
-    - [] delete
-    - [] notice
+    - [X] delete
+    - [] delete view  
+    デザインがまだ
+    - [-] notice  
+    見送り
     - [X] good
     - [X] good delete
     - [X] bad
@@ -158,10 +164,13 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [X] paging  
     - [X] send
     - [X] send 後の view
-    - [-] edit
+    - [-] edit  
     先送り
-    - [] delete
-    - [] notice
+    - [X] delete
+    - [] delete view  
+    デザインがまだ
+    - [-] notice  
+    見送り
     - [X] good
     - [X] good delete
     - [X] bad
@@ -169,6 +178,8 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     
 1. コメント Form
     - [X] open / close
+    - [] cancel button  
+    デザインがまだ
     
 1. ranking
     記事カテゴリーから取得する
@@ -243,15 +254,7 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [] model
     - [] view
     - [] infinite scroll  
-    
-1. 登録
-    - [] model
-    - [] view
-    
-1. 削除
-    - [] model
-    - [] view
-    
+
 
 ## お知らせ
 [issue:330](https://github.com/undotsushin/undotsushin/issues/330)
@@ -310,13 +313,22 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     デザインがまだ
     
 ## パスワード
+[slack](https://undo-tsushin.slack.com/archives/web-frontenders/p1456448465000002)
+
+> すみません..ちゃんとイシュー更新できてなくて パスワードリマインダ、API処理しなくて大丈夫な箇所です。（再設定のURLの失効化とかあると思うでバックエンドで処理してもらいます）
+  ここでのフロントタスクは
+  - テンプレ用意する
+  - (追々)form post前の(簡易的な)validationかけてあげる
+  になるかと思います  :bow:
+  
 1. リセット  
-    - [] model  
-    - [] view  
+    - [-] model  
+    - [X] view  
     
-1.再設定
-    - [] model  
-    - [] view  
+1. 再設定
+    - [-] model
+    - [X] view  
+
 
 # バリデーション
 [issues:100](https://github.com/undotsushin/undotsushin/issues/100)
