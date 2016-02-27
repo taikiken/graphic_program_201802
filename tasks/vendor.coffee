@@ -133,6 +133,9 @@ gulp.task 'vendor:copy', ->
 # --------------------------------------------
 # 【開発】
 gulp.task 'vendor:dev', ['vendor:copy', 'vendor:react:dev'], ->
+  runSequence(
+    'libs:copy'
+  )
   return
 
 # --------------------------------------------

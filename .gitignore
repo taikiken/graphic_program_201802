@@ -51,6 +51,7 @@ _src/.tmp
 public/assets
 
 # _src bundle
+_src/app/js/*
 _src/app/js/test.bundle.js
 _src/app/assets/js/bundle/
 _src/app/assets/js/libs/vendor.react.js
