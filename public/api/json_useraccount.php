@@ -71,17 +71,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	}
 	if(count($q)>0){
 		$sql=sprintf("update repo_n set %s where id=%s",implode(",",$q),$uid);
-		
-		echo $sql;
-		
+				
 		$o->query($sql);
 		$e=$o->affected_rows2();
 		if(!$e){
 			$y["status"]["code"]=500;
-			$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+			$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 		}
 	}else{
-		$y["status"]["code"]=500;
+		$y["status"]["code"]=400;
 		$y["status"]["user_message"]="変更箇所はありませんでした。";
 	}
 

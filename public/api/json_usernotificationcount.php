@@ -20,7 +20,6 @@ $y["status"]["developer_message"]="";
 
 $y["response"]["count"]=(int)$count;
 
-
 if(preg_match("/debugger\.php/",$_SERVER['HTTP_REFERER'])){
 	print_r(json_encode($y,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 }else{

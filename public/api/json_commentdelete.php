@@ -24,22 +24,32 @@ if(strlen($pageid)>0){
 				$sql.=sprintf("update u_activity set flag=0,regitime=now() where activity=1 and activityid=%s;",$f["id"]);
 				$o->query($sql);
 				$e=$o->affected_rows2();
-				if(!$e)$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				if(!$e){
+					$code=500;
+					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				}else{
+					$ermsg="";
+					$code=200;
+				}
 			}else{
+				$code=409;
 				$ermsg="指定されたコメントIDは存在しません。";
 			}
 		}else{
+			$code=409;
 			$ermsg="コメントIDが指定されておりません。";
 		}
 	}else{
+		$code=401;
 		$ermsg="ユーザIDが指定されておりません。";
 	}
 }else{
+	$code=400;
 	$ermsg="ページIDが指定されておりません。";
 }
 
 
-$y["status"]["code"]=strlen($ermsg)>0?500:200;
+$y["status"]["code"]=$code;
 $y["status"]["user_message"]=$ermsg;
 $y["status"]["developer_message"]="";
 $y["response"]=(object)array();

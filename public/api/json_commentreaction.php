@@ -8,7 +8,6 @@ $o->connect();
 $uid=auth();
 $commentid=$_REQUEST["comment_id"];
 $type=$_REQUEST["reaction"]=="like"?1:2;
-$ermsg="";
 
 if($_SERVER["REQUEST_METHOD"]=="PUT"){
 	if(strlen($commentid)>0){
@@ -42,6 +41,9 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 						
 						$o->query("commit");
 						
+						$code=200;
+						$ermsg="";
+						
 						$sql=sprintf("select count(*) as n from u_reaction where commentid=%s and reaction=%s and flag=1",$commentid,$type);
 						$o->query($sql);
 						$f=$o->fetch_array();
@@ -50,20 +52,24 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 						
 					}else{
 						$o->query("abort");
+						$code=500;
 						$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 					}
 				}else{
 					$o->query("abort");
+					$code=500;
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
 			}else{
+				$code=409;
 				$ermsg=sprintf("すでに%sされております。",$type==1?"like":"bad");
 			}
-			
 		}else{
+			$code=401;
 			$ermsg="ユーザIDが指定されておりません。";
 		}
 	}else{
+		$code=400;
 		$ermsg="コメントIDが指定されておりません。";
 	}
 }else{
@@ -83,7 +89,10 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 				$e=$o->affected_rows2();
 	
 				if($e){
-					
+
+					$code=200;
+					$ermsg="";
+
 					$sql=sprintf("select count(*) as n from u_reaction where commentid=%s and reaction=%s and flag=1",$commentid,$type);
 					$o->query($sql);
 					$f=$o->fetch_array();
@@ -91,21 +100,25 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 					$num=$f["n"];
 					
 				}else{
+					$code=500;
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
 			}else{
+				$code=400;
 				$ermsg=sprintf("%sされておりません。",$type==1?"like":"bad");
 			}
 			
 		}else{
+			$code=401;
 			$ermsg="ユーザIDが指定されておりません。";
 		}
 	}else{
+		$code=409;
 		$ermsg="コメントIDが指定されておりません。";
 	}
 }
 
-$y["status"]["code"]=strlen($ermsg)>0?500:200;
+$y["status"]["code"]=$code;
 $y["status"]["user_message"]=$ermsg;
 $y["status"]["developer_message"]="";
 $y["response"]=(int)$num;

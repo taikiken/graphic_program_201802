@@ -84,12 +84,14 @@ if(strlen($uid)>0){
 unset($p);
 
 $sql=sprintf("
-select 0 as h,t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,facebook,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid
+select 0 as h,tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id
  union 
-select 1 as h,t1.*,t2.* from (select tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=9 and flag=1) as tt2,(select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,facebook,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday from repo_n) as tt1 where tt2.d2=tt1.id) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid
+select 1 as h,tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id
  union 
-(select 2 as h,t1.*,t2.* from (select %sid,title,body,b1,img1,(select name from repo where id=d1) as type,d2,t1,swf as video,youtube,facebook,t6 as videocaption,img6 as videoimg,(select name from pm_ where id=m1) as category,(select name_e from pm_ where id=m1) as slug,extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday, 1 as sort from repo_n where id not in (select d2 from repo_n where qid=7 and flag=1)) as t1,(select id as uid,cid as typeid,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.d2=t2.uid limit 10 offset 0) order by h,sort,relativetime",
-$uid!=""?sprintf($bookmarkfield,$uid):"",$uid!=""?sprintf($bookmarkfield,$uid):"",$uid!=""?sprintf($bookmarkfield,$uid):"");
+(select 2 as h,t1.*,t2.*,1 as sort from %s order by relativetime limit 10 offset 0) order by h,sort,relativetime",
+sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),
+sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),
+sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""));
 
 $hg=array("headline","pickup","latest");
 

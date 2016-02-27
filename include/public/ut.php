@@ -91,7 +91,7 @@ function auth(){
 	$token=check_token($H);
 
 	if(strlen($token["oautn_token"])>0){
-		$sql=sprintf("select id from repo_n where a15='%s'",trim($token["oautn_token"]));
+		$sql=sprintf("select id from repo_n where a15='%s' and flag=1",trim($token["oautn_token"]));
 		$o->query($sql);
 		$f=$o->fetch_array();
 	}
@@ -227,6 +227,21 @@ function get_videotype($v1,$v2,$v3){
 	elseif(strlen($v3)>0)$s="facebook";
 	else $s="";
 	return $s;
+}
+
+function sendmail($to,$subject,$body,$from,$reply){
+
+	$sbj="=?iso-2022-jp?B?".base64_encode(mb_convert_encoding($subject,"JIS","UTF-8"))."?=";
+	$msg=stripslashes($body);
+	$msg=addslashes($msg);
+	$msg=mb_convert_encoding($msg,"JIS","UTF-8");
+	$header="From:=?iso-2022-jp?B?".base64_encode(mb_convert_encoding("運動通信","JIS","UTF-8"))."?=<".$from.">\n";
+	$header.="Bcc: info@undotsushin.com\n";
+	$header.="Reply-To:".$reply."\n";
+	$header.="Return-Path:".$from."\n";
+	$header.="Content-Type:text/plain;charset=\"ISO-2022-JP\"";
+
+	return mail($to,$sbj,$msg,$header,sprintf("-f%s",$from));
 }
 
 ?>

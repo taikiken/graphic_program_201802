@@ -23,7 +23,7 @@ $s["url"]=sprintf("%s/mypage/",$domain,$f["uid"]);
 $s["type"]["id"]=(int)$f["typeid"];
 $s["type"]["label"]=$f["type"];
 
-$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from pm_ where cid=20) as t2 where t1.categoryid=t2.id order by id",$uid);
+$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from pm_ where cid=20) as t2 where t1.categoryid=t2.id order by id",!$_REQUEST["userid"]?$uid:$_REQUEST["userid"]);
 $o->query($sql);
 
 $n=0;

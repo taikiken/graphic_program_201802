@@ -8,11 +8,11 @@ $o->connect();
 $uid=auth();
 $id=$_REQUEST["id"];
 
-$sql=sprintf("select t1.*,t2.* from %s",
-sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",sprintf(" and id=%s",$id)));
+//ランキング
+$o->query(sprintf("insert into u_view(pageid,regitime) values(%s,now());",$id));
 
+$sql=sprintf("select * from %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",sprintf(" and id=%s",$id)));
 $o->query($sql);
-
 $f=$o->fetch_array();
 
 $s["id"]=(int)$f["id"];
@@ -57,7 +57,7 @@ for($i=10;$i<=14;$i++){
 	if(strlen($f["t".$i])>0)$s["keywords"][]=$f["t".$i];
 }
 
-$sql=sprintf("select t1.*,t2.* from %s order by relativetime limit 4 offset 0",
+$sql=sprintf("select * from %s order by relativetime limit 4 offset 0",
 sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",sprintf(" and m1=%s and id!=%s",$f["m1"],$f["id"])));
 
 $o->query($sql);

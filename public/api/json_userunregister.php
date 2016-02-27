@@ -19,11 +19,13 @@ if(strlen($uid)>0){
 	if($e){
 		$y["status"]["code"]=200;
 	}else{
-		$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+		$y["status"]["code"]=500;
+		$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 	}
 	
 }else{
-	$ermsg="指定したアクセストークンが存在しません。";	
+	$y["status"]["code"]=400;
+	$y["status"]["user_message"]="指定したアクセストークンが存在しません。";	
 }
 
 $y["response"]=(object)array();

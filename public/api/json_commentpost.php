@@ -36,6 +36,9 @@ if(strlen($pageid)>0){
 					if($e){
 					
 						$o->query("commit");
+						
+						$code=200;
+						$ermsg="";
 					
 						$sql=sprintf("select* from (select id,comment,userid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_comment where pageid=%s and userid=%s and commentid=%s order by relativetime limit 1 offset 0) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid",
 						$pageid,$uid,$commentid);
@@ -64,27 +67,33 @@ if(strlen($pageid)>0){
 					
 					}else{
 						$o->query("abort");
+						$code=500;
 						$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 					}
 				}else{
 					$o->query("abort");
+					$code=500;
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
 			}else{
+				$code=409;
 				$ermsg="同じコメントが投稿されております。";
 			}
 		}else{
+			$code=400;
 			$ermsg="コメントが入力されておりません。";
 		}		
 	}else{
+		$code=401;
 		$ermsg="ユーザIDが指定されておりません。";
 	}
 }else{
+	$code=400;
 	$ermsg="ページIDが指定されておりません。";
 }
 
 
-$y["status"]["code"]=strlen($ermsg)>0?500:200;
+$y["status"]["code"]=$code;
 $y["status"]["user_message"]=$ermsg;
 $y["status"]["developer_message"]="";
 $y["response"]=$s;

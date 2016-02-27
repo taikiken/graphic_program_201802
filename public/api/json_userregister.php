@@ -8,6 +8,37 @@ $o->connect();
 
 $uid=auth();
 
+function mailregister($email,$name){
+
+	$to=$email;
+	$subject="【運動通信】会員登録完了のお知らせ";
+	$body=sprintf("この度は、運動通信Crazy for sports www.undotsushin.com にご登録いただき、誠にありがとうございます。
+	会員登録が完了しましたのでお知らせいたします。
+	下記登録内容をご確認の上、大切に保管ください。
+	
+	[登録内容]
+	メールアドレス： %s
+	ユーザー名：　%s
+	パスワード：　セキュリティ保持のため非公開
+	
+	※	パスワードを忘れた場合は、以下のURLから再登録をお願いいたします。
+	　{ここにパスワード変更のURL}
+	
+	ご不明な点等ございましたら、以下の運動通信カスタマーセンターまでお問い合わせください。
+	info@undotsushin.com
+	
+	※	当社コンテンツをご使用の際は、必ず下記の利用規約をお読みください。
+	{ここに利用規約のURL}
+	
+	[ご注意]
+	こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$email,$name);
+	$from="noreply@undotsushin.com";
+	$reply="info@undotsushin.com";
+
+	sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
+	
+}
+
 $y=array();
 $y["status"]["code"]=200;
 $y["status"]["user_message"]="";
@@ -53,8 +84,8 @@ if(count($ermsg)>0){
 
 }else{
 	
-	if($_POST["create"]!=false){
-	
+	if($_POST["create"]!="false"){
+			
 		$bio=trim($_POST["bio"]);
 		$sv[$sn[]="t2"]=$bio;
 	
@@ -69,6 +100,13 @@ if(count($ermsg)>0){
 			}
 		}
 		
+		if(is_string($_POST["interest"])){
+			if(strlen($_POST["interest"])>0){
+				$_POST["interest"]=@explode(",",$_POST["interest"]);
+			}else{
+				$_POST["interest"]=array();
+			}
+		}
 		if(count($_POST["interest"])>0){
 			$sv[$sn[]="t20"]=implode(",",$_POST["interest"]);
 			$interest=$_POST["interest"];
@@ -121,6 +159,7 @@ if(count($ermsg)>0){
 			if($e){
 				
 				$o->query("commit");
+				mailregister($email,$name);
 				
 				$sql=sprintf("select name from pm_ where id in (%s) and flag=1 order by n",implode(",",$interest));
 				$o->query($sql);

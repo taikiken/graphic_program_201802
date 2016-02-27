@@ -17,27 +17,21 @@ if($_REQUEST["api"]=="category"){
 		$caa[$f["name_e"]]=$f["id"];
 	}
 
-	$c=$_REQUEST["category"]=="all"?"":sprintf(" and m1=%s",$caa[$_REQUEST["category"]]);
+	$c=$_REQUEST["category"]=="all"?"":sprintf(" and (m1=%s or m2=%s)",$caa[$_REQUEST["category"]],$caa[$_REQUEST["category"]]);
 	
 	if(!isset($_REQUEST["type"])){
 
-		$sql=sprintf("select t1.*,t2.* from %s order by relativetime limit %s offset %s",
-		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
-		
+		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 		
 	}elseif($_REQUEST["type"]=="ranking"){
 		
-		$sql=sprintf("select rt1.n,rt2.* from u_ranking as rt1,(select * from (select t1.*,t2.* from %s) as t3) as rt2 where rt1.id=rt2.id order by n desc,relativetime limit %s offset %s",
-		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
-		
+		$sql=sprintf("select tt1.*,(case when num is not null then num else 0 end) as num from (select * from %s) as tt1 left join (select pageid,count(pageid) as num from u_view where regitime > now() - interval '3 day' group by pageid) as tt2 on tt1.id=tt2.pageid order by num desc,relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 
 	}elseif($_REQUEST["type"]=="video"){
 
-		$sql=sprintf("select t1.*,t2.* from %s order by relativetime limit %s offset %s",
-		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c." and (t8 is not null or youtube is not null or facebook is not null)"),$length,$offset);
-
+		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c." and (t8 is not null or youtube is not null or facebook is not null)"),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and (t8 is not null or youtube is not null or facebook is not null)%s",$c);
 	}
 		
@@ -51,9 +45,7 @@ if($_REQUEST["api"]=="category"){
 	$q=implode(" and ",$q);
 	$c="";
 	
-	$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select t1.*,t2.* from %s) as st02 where st01.id=st02.id order by relativetime limit %s offset %s",	
-	$q,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
-	
+	$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select * from %s) as st02 where st01.id=st02.id order by relativetime limit %s offset %s",$q,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 	$nsql=sprintf("select count(*) as n from (select id from u_index where %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
 
 }elseif($_REQUEST["api"]=="home"||$_REQUEST["api"]=="self"){
@@ -62,31 +54,23 @@ if($_REQUEST["api"]=="category"){
 	
 	if($cx=="home"){
 
-		$sql=sprintf("select t1.*,t2.* from %s order by relativetime limit %s offset %s",
-		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
-
+		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 		$nsql="select count(*) as n from repo_n where cid=1 and flag=1";
 
 	}elseif($cx=="headline"){
 
-		$sql=sprintf("select rt1.*,rt2.* from (select d2,n as sort from repo_n where cid=8 and flag=1) as rt1,(select t1.*,t2.* from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",
-		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
-
+		$sql=sprintf("select * from (select d2,n as sort from repo_n where cid=8 and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 		$nsql="select count(*) as n from repo_n where cid=8 and flag=1";
 
 	}elseif($cx=="pickup"){
 
-		$sql=sprintf("select rt1.*,rt2.* from (select d2,n as sort from repo_n where cid=9 and flag=1) as rt1,(select t1.*,t2.* from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",
-		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
-
-		$nsql="select count(*) as n from repo_n where cid=9 and flag=1";
+		$sql=sprintf("select * from (select d2,n as sort from repo_n where cid=8 and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
+		$nsql="select count(*) as n from repo_n where cid=8 and flag=1";
 
 	}
 }elseif($_REQUEST["api"]=="bookmark"){
 	
-		$sql=sprintf("select rt1.*,rt2.* from (select pageid,regitime from u_bookmark where userid=%s and flag=1) as rt1,(select t1.*,t2.* from %s) as rt2 where rt1.pageid=rt2.id order by regitime desc limit %s offset %s",
-		$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
-		
+		$sql=sprintf("select * from (select pageid,regitime from u_bookmark where userid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.pageid=rt2.id order by regitime desc limit %s offset %s",$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and id in(select pageid from u_bookmark where userid=%s and flag=1)",$uid);
 }
 
@@ -141,7 +125,7 @@ for($i=0;$i<count($p);$i++){
 	
 	if($f["n"]>0){
 
-		$sql=sprintf("select t1.*,t2.*,(good+bad+case when reply is null then 0 else reply end) as rank from %s where t1.userid=t2.userid order by rank desc limit 6 offset 0",
+		$sql=sprintf("select *,(good+bad+case when reply is null then 0 else reply end) as rank from %s where t1.userid=t2.userid order by rank desc limit 6 offset 0",
 		sprintf($commenttable,$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",sprintf("pageid=%s and commentid=0 and flag=1",$p[$i]["id"]),""));
 		
 		$o->query($sql);

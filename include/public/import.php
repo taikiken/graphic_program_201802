@@ -19,7 +19,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 		if($size[0]*$ptage_h<$re_size[0]){
 			$ptg=$ptage_w;
 			$x=0;
-			$y=ceil(($size[1]*$ptg-$re_size[1])/6);
+			$y=ceil(($size[1]*$ptg-$re_size[1])/2.5);
 		}else{
 			$ptg=$ptage_h;
 			$x=ceil(($size[0]*$ptg-$re_size[0])/2);

@@ -35,22 +35,28 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 					$o->query($sql2);
 					$e=$o->affected_rows2();
 					if($e){
+						$code=200;
 						$o->query("commit");
 					}else{
 						$o->query("abort");
+						$code=500;
 						$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";						
 					}
 				}else{
 					$o->query("abort");
+					$code=500;
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
 			}else{
+				$code=409;
 				$ermsg="指定されたページはすでにブックマークがされています。";
 			}		
 		}else{
+			$code=401;
 			$ermsg="ユーザIDが指定されておりません。";
 		}
 	}else{
+		$code=400;
 		$ermsg="ページIDが指定されておりません。";
 	}
 }else{
@@ -65,20 +71,26 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 				$o->query($sql);
 				$e=$o->affected_rows2();
 				if(!$e){
+					$code=500;
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				}else{
+					$code=200;
 				}
 			}else{
+				$code=409;
 				$ermsg="指定されたページはブックマークがされておりません。";
 			}		
 		}else{
+			$code=401;
 			$ermsg="ユーザIDが指定されておりません。";
 		}
 	}else{
+		$code=400;
 		$ermsg="ページIDが指定されておりません。";
 	}
 }
 
-$y["status"]["code"]=strlen($ermsg)>0?500:200;
+$y["status"]["code"]=$code;
 $y["status"]["user_message"]=$ermsg;
 $y["status"]["developer_message"]="";
 $y["response"]=(object)array();

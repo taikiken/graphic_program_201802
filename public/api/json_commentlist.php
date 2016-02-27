@@ -45,9 +45,9 @@ if(strlen($type)==0){
 }elseif(preg_match("/self/",$type,$r)){
 	
 	$sql=sprintf("select *,(good+bad+case when reply is null then 0 else reply end) as rank from %s where t1.userid=t2.userid order by rank desc limit %s offset %s",
-	sprintf($commenttable,$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",sprintf("id in (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid))",$pageid,$uid,$pageid,$uid),""),$length,$offset);
+	sprintf($commenttable,$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",sprintf("flag=1 and id in (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid))",$pageid,$uid,$pageid,$uid),""),$length,$offset);
 	
-	$nsql=sprintf("select count(*) as n from (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid)) as t",$pageid,$uid,$pageid,$uid);
+	$nsql=sprintf("select count(*) as n from (select id from u_comment where pageid=%s and userid=%s and commentid=0 union select commentid from u_comment where flag=1 and id in (select max(id) from u_comment where pageid=%s and userid=%s and commentid!=0 group by commentid)) as t",$pageid,$uid,$pageid,$uid);
 
 }
 
@@ -65,10 +65,12 @@ if(strlen($nsql)>0){
 for($i=0;$i<count($p);$i++){
 
 	$s[$i]["id"]=(int)$p[$i]["id"];
+/*
 	$s[$i]["rank"]["goog"]=(int)$p[$i]["good"];
 	$s[$i]["rank"]["bad"]=(int)$p[$i]["bad"];
 	$s[$i]["rank"]["reply"]=(int)$p[$i]["reply"];
 	$s[$i]["rank"]["rank"]=(int)$p[$i]["rank"];
+*/
 	$s[$i]["date"]=str_replace(" ","T",$p[$i]["isotime"]);
 	$s[$i]["display_date"]=get_relativetime($p[$i]["relativetime"],$p[$i]["date"],$p[$i]["weekday"]);
 	$s[$i]["body"]=mod_HTML($p[$i]["comment"],2);

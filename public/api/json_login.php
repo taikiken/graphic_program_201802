@@ -55,7 +55,7 @@ if($ermsg==""){
 	$y["status"]["code"]=200;
 	$y["response"]=$s;
 }else{
-	$y["status"]["code"]=500;
+	$y["status"]["code"]=400;
 	$y["status"]["user_message"]=$ermsg;
 }
 

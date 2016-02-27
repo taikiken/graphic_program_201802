@@ -8,20 +8,33 @@ $o->connect();
 
 $uid=auth();
 
-if($_SERVER["REQUEST_METHOD"]=="PUT"){
-	$category=$_POST["interest"];
-	$sql=sprintf("update u_category set flag=0,regitime=now() where userId=%s and categoryid not in(%s)",$uid,$category);
-	$o->query($sql);
-	$sql=sprintf("update u_category set flag=1,regitime=now() where userId=%s and categoryid in(%s)",$uid,$category);
-	$o->query($sql);
+if($_SERVER["REQUEST_METHOD"]=="POST"){
 	
-	$category=@explode(",",$category);			
-	if(count($category)>0&&$category!=$p){
+	if(is_string($_REQUEST["interest"])){
+		if(strlen($_REQUEST["interest"])>0){
+			$category=@explode(",",$_REQUEST["interest"]);
+		}else{
+			$category=array();
+		}
+	}else{
+		$category=$_REQUEST["interest"];
+	}
+
+	if(count($category)>0){
+		
+		$category=implode(",",$category);
+		$sql=sprintf("update u_category set flag=0,regitime=now() where userId=%s and categoryid not in(%s)",$uid,$category);
+		$o->query($sql);
+		$sql=sprintf("update u_category set flag=1,regitime=now() where userId=%s and categoryid in(%s)",$uid,$category);
+		$o->query($sql);
+		
+		$category=explode(",",$category);	
 		for($i=0;$i<count($category);$i++){
 			$s[]=sprintf("insert into u_category(userId,categoryId,flag,regitime) select %s,%s,1,now() where not exists (select 1 from u_category where userid=%s and categoryid=%s);",$uid,$category[$i],$uid,$category[$i]);
 		}
 		$sql=implode("\n",$s);
 		$o->query($sql);
+
 	}
 }
 
