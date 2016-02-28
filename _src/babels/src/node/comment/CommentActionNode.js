@@ -32,6 +32,8 @@ let React = self.React;
  */
 export let CommentActionNode = React.createClass( {
   propTypes: {
+    // unique id（識別のために必要）
+    uniqueId: React.PropTypes.string.isRequired,
     // menu が 開いているか閉じているか open / close
     toggle: React.PropTypes.string.isRequired,
     // mine or others, others: true
@@ -74,26 +76,36 @@ export let CommentActionNode = React.createClass( {
   render: function() {
     console.log( '****************** render', this.props.others, this.state.reportLoading );
 
-    if ( this.props.others ) {
-      // 自分以外 & ユーザー情報が正しくは通報機能
-      // 通報機能 drop 2016-02-25
-      /*
-       return (
-       <li className={'dropMenu-item loading-root ' + this.state.reportLoading}>
-       <a href="#" className="dropMenu-link-report dropMenu-link" onClick={this.reportClick}><span>このコメントを通報する</span></a>
-       <div className="loading-spinner"></div>
-       </li>
-       );
-       */
-      return null;
+    let replyClass = ( replyId ) => {
+      return replyId === '' ? '' : 'item-reply-' + replyId;
+    };
+
+    if ( this.props.toggle === 'open' ) {
+      if ( this.props.others ) {
+        // 自分以外 & ユーザー情報が正しくは通報機能
+        // 通報機能 drop 2016-02-25
+        /*
+         return (
+         <li className={'dropMenu-item loading-root ' + this.state.reportLoading}>
+         <a href="#" className="dropMenu-link-report dropMenu-link" onClick={this.reportClick}><span>このコメントを通報する</span></a>
+         <div className="loading-spinner"></div>
+         </li>
+         );
+         */
+        return null;
+      } else {
+        // 自分のは削除機能
+        return (
+          <li className={`dropMenu-item loading-root item-comment-${this.props.commentId} ${replyClass(this.props.replyId)} ${this.state.deleteLoading}`}>
+            <a href="#" className="dropMenu-link-delete" onClick={this.deleteClick}><span>このコメントを削除する</span></a>
+            <div className="loading-spinner"></div>
+          </li>
+        );
+      }
     } else {
-      // 自分のは削除機能
-      return (
-        <li className={'dropMenu-item loading-root ' + this.state.deleteLoading}>
-          <a href="#" className="dropMenu-link-delete dropMenu-link-" onClick={this.deleteClick}><span>このコメントを削除する</span></a>
-        </li>
-      );
+      return <li>&nbsp;</li>;
     }
+
   },
   componentDidMount: function() {
     // model, callback initialize
@@ -140,11 +152,15 @@ export let CommentActionNode = React.createClass( {
     this.props.remove( 'click' );
 
     // modal open fire
-    this.message.remove( this.shouldDelete, this.shouldCancel );
+    this.message.on( MessageStatus.OK_CLICK, this.onOk );
+    this.message.on( MessageStatus.CANCEL_CLICK, this.onCancel );
+    console.log( 'modal delete click open ', this.props.articleId, this.props.commentId, this.props.replyId );
+    this.message.remove( this.props.uniqueId );
+    //this.message.remove( this.props.uniqueId, this.shouldDelete, this.shouldCancel );
   },
   // confirm ok click
   shouldDelete: function() {
-    console.log( 'comment shouldDelete' );
+    console.log( 'comment shouldDelete', this.props.uniqueId, this.props.articleId, this.props.commentId, this.props.replyId );
 
     // comment 削除
     if ( this.model.remove !== null ) {
@@ -152,13 +168,30 @@ export let CommentActionNode = React.createClass( {
     }
 
   },
+  onOk: function( event ) {
+    if ( this.props.uniqueId === event.id ) {
+      this.deleteDispose();
+      this.shouldDelete();
+    }
+  },
+  onCancel: function( event ) {
+    if ( this.props.uniqueId === event.id ) {
+      this.deleteDispose();
+      this.shouldCancel();
+    }
+  },
+  deleteDispose: function() {
+    this.message.off( MessageStatus.OK_CLICK, this.onOk );
+    this.message.off( MessageStatus.CANCEL_CLICK, this.onCancel );
+  },
   shouldCancel: function() {
-    console.log( 'shouldCancel' );
+    console.log( 'shouldCancel', this.props.uniqueId );
+    this.setState( { deleteLoading: ''} );
     this.props.remove( 'cancel' );
   },
   deleteDone: function(result) {
-    console.log( 'deleteDone', result );
-
+    console.log( 'deleteDone', this.props.uniqueId, result );
+    this.setState( { deleteLoading: ''} );
     this.props.remove( 'done' );
 
     // event 通知
@@ -166,6 +199,7 @@ export let CommentActionNode = React.createClass( {
   },
   deleteFail: function(error) {
     console.log( 'deleteFail', error );
+    this.setState( { deleteLoading: ''} );
     this.props.remove( 'fail' );
   },
   // -------------------------------------------------

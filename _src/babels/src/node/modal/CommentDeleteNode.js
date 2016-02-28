@@ -25,13 +25,16 @@ let easing = greensock.easing;
 
 export let CommentDeleteNode = React.createClass( {
   propTypes: {
+    id: React.PropTypes.string.isRequired,
     type: React.PropTypes.string,
-    ok: React.PropTypes.func.isRequired,
-    cancel: React.PropTypes.func.isRequired
+    ok: React.PropTypes.func,
+    cancel: React.PropTypes.func
   },
   getDefaultProps: function() {
     return {
-      type: MessageStatus.INFO
+      type: MessageStatus.INFO,
+      ok: function() {},
+      cancel: function() {}
     };
   },
   getInitialState: function() {
@@ -39,6 +42,10 @@ export let CommentDeleteNode = React.createClass( {
 
     return {
       show: true,
+      id: this.props.id,
+      ok: this.props.ok,
+      cancel: this.props.cancel,
+      type: this.props.type,
       css: {opacity: 0}
     };
   },
@@ -78,11 +85,15 @@ export let CommentDeleteNode = React.createClass( {
   },
   cancelClick: function( event:Event ) {
     event.preventDefault();
+    console.log( 'cancelClick ', this.props.id );
+    this.status.dispatch( {type: MessageStatus.CANCEL_CLICK, id: this.state.id} );
     this.props.cancel();
     this.closeModal();
   },
   deleteClick: function( event:Event ) {
     event.preventDefault();
+    console.log( 'deleteClick ', this.props.id );
+    this.status.dispatch( {type: MessageStatus.OK_CLICK, id: this.state.id} );
     this.props.ok();
     this.closeModal( 0.5 );
   },
@@ -126,8 +137,8 @@ export let CommentDeleteNode = React.createClass( {
       }
     );
   },
-  updateShow: function( show:boolean ) {
-    this.setState( { show: show } );
+  updateShow: function( show:boolean, id, ok, cancel, type ) {
+    this.setState( { show: show, id: id, ok: ok, cancel: cancel, type: type } );
     if ( show ) {
       this.openModal();
     }

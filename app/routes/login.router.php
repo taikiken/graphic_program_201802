@@ -8,6 +8,7 @@ $app->get('/login[/]', function ($request, $response, $args) use ($app) {
     'title'    => 'ログイン',
     'template' => 'login',
     'path'     => $args,
+    'template_classname' => 'signup',
   ));
 
   return $this->renderer->render($response, "default.php", $args);

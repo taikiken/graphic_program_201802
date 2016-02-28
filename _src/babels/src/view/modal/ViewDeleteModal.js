@@ -33,6 +33,7 @@ export class ViewDeleteModal extends View {
     if ( this._render === null ) {
       this._render = ReactDOM.render(
         <CommentDeleteNode
+          id={event.id}
           type={event.kind}
           ok={event.ok}
           cancel={event.cancel}
@@ -41,7 +42,7 @@ export class ViewDeleteModal extends View {
       );
     } else {
 
-      this._render.updateShow( true );
+      this._render.updateShow( true, event.id, event.ok, event.cancel, event.type );
 
     }
 

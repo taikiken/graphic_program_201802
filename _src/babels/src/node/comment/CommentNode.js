@@ -26,6 +26,8 @@ let React = self.React;
 // 通報 drop menu
 let CommentMenuNode = React.createClass( {
   propTypes: {
+    // unique id（識別のために必要）
+    uniqueId: React.PropTypes.string.isRequired,
     // user id
     userId: React.PropTypes.string.isRequired,
     commentUserId: React.PropTypes.string.isRequired,
@@ -61,6 +63,7 @@ let CommentMenuNode = React.createClass( {
             <a href="#" className="comment-menu-btn" onClick={this.clickHandler}>MENU</a>
             <ul className="dropMenu">
               <CommentActionNode
+                uniqueId={this.props.uniqueId}
                 toggle={this.state.open}
                 others={others}
                 userId={this.props.userId}
@@ -171,6 +174,7 @@ let CommentMenuNode = React.createClass( {
       // close -> open
       // document.body へ click event handler bind
       this.setState( { open: 'open' } );
+      console.log( 'open click ', this.props.articleId, this.props.commentId, this.props.replyId );
       this.activateBodyClick();
     } else {
       // open -> close
@@ -266,10 +270,15 @@ export let CommentNode = React.createClass( {
 
     let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
 
+    let replyClass = ( replyId ) => {
+      return replyId === '' ? '' : ` comment-content-reply-${replyId}`;
+    };
+
     return (
       <div className="comment-root">
         <CommentMenuNode
           key={`${this.props.uniqueId}-menu`}
+          uniqueId={`${this.props.uniqueId}-menu`}
           sign={sign}
           userId={this.props.userId}
           commentUserId={this.props.commentUserId}
@@ -288,7 +297,7 @@ export let CommentNode = React.createClass( {
             </div>
           </span>
         </figure>
-        <div className="comment-content" dangerouslySetInnerHTML={{__html: comment.body}} />
+        <div className={`comment-content comment-content-${this.props.commentId}${replyClass(this.props.replyId)}`} dangerouslySetInnerHTML={{__html: comment.body}} />
         <ReactionNode
           uniqueId={this.props.uniqueId}
           articleId={this.props.articleId}

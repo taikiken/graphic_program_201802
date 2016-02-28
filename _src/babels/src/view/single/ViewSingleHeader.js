@@ -107,7 +107,7 @@ export class ViewSingleHeader extends View {
 
         return (
           <div>
-            <div className="post-heading">
+            <div className={'post-heading post-heading-' + single.id}>
               <h1>{single.title}</h1>
             </div>
             <div className="post-data">

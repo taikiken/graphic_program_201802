@@ -502,7 +502,7 @@ export class ViewComments extends View {
             {
               list.map( function( commentId, index ) {
                 let commentObject = commentsBank[ commentId ];
-                let key = `${commentsListType}-${articleId}-${commentId}-${userId}`;
+                let key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
                 console.log( 'commentId ' + commentId + ', ' + key );
 
                 return <CommentsParentDom

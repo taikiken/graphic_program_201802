@@ -71,6 +71,12 @@ export class MessageStatus extends EventDispatcher {
   static get DELETE():string {
     return 'messageDelete';
   }
+  static get OK_CLICK():string {
+    return 'messageOkClick';
+  }
+  static get CANCEL_CLICK():string {
+    return 'messageCancelClick';
+  }
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------
@@ -128,8 +134,14 @@ export class MessageStatus extends EventDispatcher {
     this.dispatch( {type: MessageStatus.CONFIRM, message: message, ok: ok, cancel: cancel, kind: type} );
   }
 
-  remove( ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
-    this.dispatch( {type: MessageStatus.DELETE, ok: ok, cancel: cancel, kind: type} );
+  remove( id:string, ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
+    if ( !ok ) {
+      ok = function() {};
+    }
+    if ( !cancel ) {
+      cancel = function() {};
+    }
+    this.dispatch( {type: MessageStatus.DELETE, id: id, ok: ok, cancel: cancel, kind: type} );
   }
   // ---------------------------------------------------
   //  static method

@@ -11,6 +11,7 @@ $app->group('/signup', function () use ($app) {
       'title'    => '新規会員登録',
       'template' => 'signup',
       'path'     => $args,
+      'template_classname' => 'signup',
     ));
 
     return $this->renderer->render($response, "default.php", $args);
@@ -26,6 +27,7 @@ $app->group('/signup', function () use ($app) {
       'title'    => '基本情報入力 | 新規会員登録',
       'template' => 'signup.'.$args['slug'],
       'path'     => $args,
+      'template_classname' => 'signup',
     ));
 
     return $this->renderer->render($response, "default.php", $args);
@@ -41,6 +43,7 @@ $app->group('/signup', function () use ($app) {
       'title'    => '興味のある競技を選択 | 新規会員登録',
       'template' => 'signup.'.$args['slug'],
       'path'     => $args,
+      'template_classname' => 'signup',
     ));
 
     return $this->renderer->render($response, "default.php", $args);
