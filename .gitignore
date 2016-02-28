@@ -1,39 +1,27 @@
 # Created by .ignore support plugin (hsz.mobi)
-port.coffee
-bower_components
-_no
-_docs
-npm-debug.log
-# css document イキ
-#sc5-guide
-
 # ignore system files
+# ==============================
 thumbs.db
 .DS_Store
 __MACOSX
 ._*
 .sass-cache
-node_modules
 _bin
-*.css.map
 
+# npm
+# ==============================
+node_modules
+npm-debug.log
 
-# intellij
+# editor
+# ==============================
 .idea
 *.iml
 
-# crossdomain.xml
-crossdomain.xml
-
-# test php
-php_ini.coffee
-#php.coffee
-#_src/app/router.php
-#_src/app/index.php
-
-# gulp .tmp
-_src/.tmp
-
+# global ignore directory
+# ==============================
+_no
+_docs
 
 # environment
 # ==============================
@@ -45,23 +33,74 @@ _src/.tmp
 /app/logs/*.log
 
 
+# bower
+# ==============================
+# bower install で作成される
+bower_components
+# bower_components から必要ファイルだけを抽出
+# bower_exports
+
+
+# gulp setting file
+# ==============================
+# local port
+# それぞれで環境が違うので個別に作ること
+port.coffee
+
+# test php
+# -----------
+# php server を立てる時に使用します
+php_ini.coffee
+#
+# vagrant へ移行するので不要となりました
+#
+#php.coffee
+#_src/_test/router.php
+#_src/_test/index.php
+
 # gulp build files
 # ==============================
+# conflict するので 生成ファイルを ignore します
+
+# css document
+# ------------
+# イキ
+# default task から外したので ignore 対象外にする予定
+sc5-guide
+
+# css map
+# ------------
+*.css.map
+
 # public assets all
+# ------------
 public/assets
 
-# _src bundle
+# 開発 css 出力 directory
+# ------------
+_src/.tmp
+
+# _src js
+# -----------
 _src/app/js/*
-_src/app/js/test.bundle.js
 _src/app/assets/js/bundle/
-_src/app/assets/js/libs/vendor.react.js
+_src/app/assets/js/libs/
 _src/app/assets/_babel/*.babel.js
 _src/app/assets/_babel/_*.js
-_src/app/assets/js/*.bundle.js
-_src/app/assets/images/sprite
+_src/app/assets/images/sprite/
+
+# _src scss
+# -----------
+# sprite 画像 scss, sprite:make で生成されるので ignore にします
 _src/app/assets/css/_sprite.scss
+
+# _src babels
+# -----------
 _src/babels/compile
 _src/babels_exe/compile
 
-# sc5 docs
-_src/sc5-guide
+
+# project files
+# ==============================
+# 作業テストのために作成しました、削除済みです
+crossdomain.xml
