@@ -156,6 +156,10 @@ gulp.task 'sprite:css:concat', ->
 # build
 # sprity option で directory 毎に sprite 画像生成可能
 # こちらを使う
+
+# css file から画像ファイルまでの path
+# 相対, ルート相対で記述
+# 今回は 「ルート相対」
 cssPath = dir.sprite.img.replace app, ''
 gulp.task 'sprite:build', ->
   # sprite directory が空の時走るとエラーになるので

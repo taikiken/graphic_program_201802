@@ -203,30 +203,21 @@ gulp.task 'copy', (cb) ->
   return
 
 # alias copy
-#
+# vagrant をサーバーにする時に
+# 手っ取り早く確認用ファイルを生成する... ハズ
 gulp.task 'dev:init', (cb) ->
   runSequence(
-    [
-      'vendor:init'
-      'babels:dev'
-      'exe:dev'
-    ]
-    [
-      'sprite:build'
-      'babels:dev'
-      'exe:dev'
-      'single:dev'
-    ]
-    [
-      'bundle:copy'
-      'libs:copy'
+    'vendor:init'
+    'babels:dev'
+    'exe:dev'
+    'sprite:build'
+    'single:dev'
+    'bundle:copy'
+    'libs:copy'
 #      'html:build'
-      'js:dev'
-      'image:copy'
-      'css:dev'
-    ]
-#    'clean:all'
-    'lec:build'
+    'js:dev'
+    'image:copy'
+    'css:dev'
     cb
   )
   return
