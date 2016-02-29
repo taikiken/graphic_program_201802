@@ -388,7 +388,7 @@ a {
 
         figcaption {
           float: left;
-          margin: 40px 37px 0 0;
+          margin: 50px 37px 0 0;
         }
       }
 
@@ -413,7 +413,7 @@ a {
 
         ul {
           @include clearfix;
-          margin-top: 20px;
+          margin-top: 16px;
 
           li {
             float: left;
