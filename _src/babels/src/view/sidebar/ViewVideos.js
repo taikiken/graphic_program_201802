@@ -166,7 +166,7 @@ export class ViewVideos extends View {
             <a href={p.url} className='post'>
               <figure className="post-thumb post-thumb-video">
                 <img className="video-thumbnail" src={p.thumbnail} alt={p.title}/>
-                <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+                <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} />
               </figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
