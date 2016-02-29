@@ -19,7 +19,7 @@ $app->group('/mypage', function () use ($app) {
 
   // マイページ/アクティビティ - /mypage/activities/
   // ==============================
-  $this->get('/{slug:activities}[/]', function ($request, $response, $args) {
+  $this->get('/{slug:activities}[/]', function ($request, $response, $args) use ( $app ) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'アクティビティ | マイページ',

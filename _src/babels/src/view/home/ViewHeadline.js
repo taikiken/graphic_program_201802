@@ -184,7 +184,6 @@ export class ViewHeadline extends View {
           return !label ? '' : <span className="category-label">{label}</span>;
         };
 
-
         return (
           <li className={'board-item board-item-' + p.index}>
             <a className="post" href={p.url}>

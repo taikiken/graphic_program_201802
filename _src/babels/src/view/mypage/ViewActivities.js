@@ -16,10 +16,6 @@ import {ViewError} from '../error/ViewError';
 
 import {Activities} from '../../action/mypage/Activities';
 
-// model
-import {Model} from '../../model/Model';
-import {ModelBookmark} from '../../model/users/ModelBookmark';
-
 // app
 import {Empty} from '../../app/const/Empty';
 
@@ -88,27 +84,28 @@ export class ViewActivities extends View {
    */
   done( result:Result ):void {
 
-    let articles = result.articles;
-    if ( typeof articles === 'undefined' ) {
+    let activities = result.response.activities;
+
+    if ( typeof activities === 'undefined' ) {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[BOOKMARKS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[ACTIVITIES:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
-    } else if ( articles.length === 0 ) {
+    } else if ( activities.length === 0 ) {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[BOOKMARKS:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( '[ACTIVITIES:EMPTY]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
     } else {
 
       this._request = result.request;
-      this.render( articles );
+      this.render( activities );
 
     }
 
@@ -142,7 +139,6 @@ export class ViewActivities extends View {
    * @param {Array} articles JSON responce.articles
    */
   render( articles:Array ):void {
-
     // 既存データ用のglobal配列
     let articlesList = this._articles;
 
@@ -258,87 +254,72 @@ export class ViewActivities extends View {
     };
 
     // --------------------------------------------
-    // bookmark button
+    // activities 親
     // --------------------------------------------
-    let BookmarkButtonDom = React.createClass( {
+    let MessageDom = React.createClass( {
       propType: {
-        articleId: React.PropTypes.string.isRequired,
-        bookmarked: React.PropTypes.bool.isRequired
-      },
-      getInitialState: function() {
-        this.model = null;
-
-        return {
-          articleId: this.props.articleId,
-          bookmarked: this.props.bookmarked,
-          loading: ''
-        };
+        dae: React.PropTypes.object.isRequired
       },
       render: function() {
-        let bookmarkClass = ( bookmarked:boolean ):string => {
-          return bookmarked ? 'bookmarked enable' : '';
-        };
-        let bookmarkMessage = ( bookmarked:boolean ):string => {
-          return bookmarked ? 'ブックマーク済' : 'ブックマークする';
-        };
 
-        return (
-          <div className={'btn-bookmark ' + this.state.loading}>
-            <a href="#" className={bookmarkClass(this.state.bookmarked)} onClick={this.clickHandler}>
-              <span>{bookmarkMessage(this.state.bookmarked)}</span>
-            </a>
-            <div className='loading-spinner'></div>
-          </div>
-        );
-      },
-      componentDidMount: function() {
-        if ( this.model === null ) {
-          let model = new ModelBookmark( this.state.articleId );
-          this.model = model;
-          model.on( Model.COMPLETE, this.done );
-          model.on( Model.UNDEFINED_ERROR, this.fail );
-          model.on( Model.RESPONSE_ERROR, this.fail );
+        let dae = this.props.dae;
+        let data = dae.article;
+        let article = data.article;
+        let action = data.action;
+
+        console.log( 'article comment', action, article );
+
+        switch ( action ) {
+
+          case 'comment':
+            return (
+              <div>
+                「<a href={article.url}>{article.title}</a>」へ<a href={article.comments.url}>コメント</a>しました。
+              </div>
+            );
+
+          case 'reply':
+            return (
+              <div>
+                「<a href={article.url}>{article.title}</a>」
+                の{article.comments.user.userName}さんのコメントに<a href={article.reply.url}>コメント</a>しました。
+              </div>
+            );
+
+          case 'good':
+            return (
+              <div>
+                「<a href={article.url}>{article.title}</a>」
+                の{article.comments.user.name}さんの<a href={article.comments.url}>コメント</a>に<strong>GOOD</strong>しました。
+              </div>
+            );
+
+          case 'bad':
+            return (
+              <div>
+                「<a href={article.url}>{article.title}</a>」
+                の{article.comments.user.name}さんの<a href={article.article.comments.url}>コメント</a>に<strong>BAD</strong>しました。
+              </div>
+            );
+
+          case 'bookmark':
+            return (
+              <div>
+                「<a href={article.url}>{article.title}</a>」
+                をブックマークしました。
+              </div>
+            );
+
+          default:
+            console.warn(`illegal action.${action}`);
+            return null;
+
         }
-      },
-      componentWillUnMount: function() {
-        this.dispose();
-      },
-      clickHandler: function( event:Event ) {
-        event.preventDefault();
-        this.setState( { loading: 'loading' } );
-        this.model.start( !this.state.bookmarked );
-      },
-      // --------------------------------------------
-      // custom method
-      dispose: function() {
-
-        let model = this.model;
-        if ( model !== null ) {
-          model.off( Model.COMPLETE, this.done );
-          model.off( Model.UNDEFINED_ERROR, this.fail );
-          model.off( Model.RESPONSE_ERROR, this.fail );
-          this.model = null;
-        }
-
-      },
-      done: function() {
-
-        // loading 解除, 表示更新
-        this.setState( { loading: '', bookmarked: !this.state.bookmarked } );
-
-      },
-      fail: function() {
-
-        // loading 解除
-        this.setState( { loading: '' } );
 
       }
     } );
 
-    // --------------------------------------------
-    // bookmarks 親
-    // --------------------------------------------
-    let BookmarksDom = React.createClass( {
+    let ActivitiesDom = React.createClass( {
       propType: {
         list: React.PropTypes.array.isRequired,
         // request offset
@@ -360,35 +341,20 @@ export class ViewActivities extends View {
       render: function() {
 
         return (
-          <div className="bookmarks">
-            <ul className="board-small">
+          <div className="activity">
+            <ul className="activity-list">
               {
                 // loop start
                 this.state.list.map( function( dae, i ) {
 
-                  let thumbnail = dae.media.images.thumbnail;
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.IMG_SMALL;
-                  } else if ( !Safety.isImg( thumbnail ) ) {
-                    thumbnail = Empty.IMG_SMALL;
-                  }
-
                   return (
-                    <li key={'bookmarks-' + dae.id} className="board-stacks board-item">
-                      <BookmarkButtonDom
-                        articleId={dae.id}
-                        bookmarked={dae.isBookmarked}
-                      />
-                      <a href={dae.url} className="post">
-                        <figure className="post-thumb">
-                          <img src={thumbnail} alt={dae.title}/>
-                        </figure>
-                        <div className="post-data">
-                          <p className="post-category">{dae.category.label}</p>
-                          <h2 className="post-heading">{dae.title}</h2>
-                          <p className="post-date">{dae.displayDate}</p>
+                    <li key={'activity-' + dae.id} className="board-stacks activity-item">
+                      <span className="post activity-item-line">
+                        <div className="activity-content">
+                          <MessageDom dae={dae} />
                         </div>
-                      </a>
+                        <p className="act-date">{dae.displayDate}</p>
+                      </span>
                     </li>
                   );
                 } )// map
@@ -434,7 +400,7 @@ export class ViewActivities extends View {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this._articleRendered = ReactDOM.render(
-        React.createElement( BookmarksDom, { list: articlesList, offset: this._request.offset, length: this._request.length, action: this.action } ),
+        React.createElement( ActivitiesDom, { list: articlesList, offset: this._request.offset, length: this._request.length, action: this.action } ),
         element
       );
 

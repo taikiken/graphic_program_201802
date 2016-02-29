@@ -373,6 +373,10 @@ export class ViewBookmarks extends View {
                     thumbnail = Empty.IMG_SMALL;
                   }
 
+                  let category = ( label ):string => {
+                    return !label ? '' : <span className="category-label">{label}</span>;
+                  };
+
                   return (
                     <li key={'bookmarks-' + dae.id} className="board-stacks board-item">
                       <BookmarkButtonDom
@@ -384,7 +388,7 @@ export class ViewBookmarks extends View {
                           <img src={thumbnail} alt={dae.title}/>
                         </figure>
                         <div className="post-data">
-                          <p className="post-category">{dae.category.label}</p>
+                          <p className="post-category">{category(dae.category.label)}{category(dae.category2.label)}</p>
                           <h2 className="post-heading">{dae.title}</h2>
                           <p className="post-date">{dae.displayDate}</p>
                         </div>
