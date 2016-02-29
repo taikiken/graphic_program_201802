@@ -274,7 +274,7 @@ export class ViewActivities extends View {
           case 'comment':
             return (
               <div>
-                「<a href={article.url}>{article.title}</a>」へ<a href={article.comments.url}>コメント</a>しました。
+                「<a href={article.url}>{article.title}</a>」へ<a href={article.comments.url}><strong>コメント</strong></a>しました。
               </div>
             );
 
@@ -282,7 +282,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                の<strong>{article.comments.user.name}</strong>さんのコメントに<a href={article.reply.url}>コメント</a>しました。
+                の<strong>{article.comments.user.name}</strong>さんのコメントに<a href={article.reply.url}><strong>コメント</strong></a>しました。
               </div>
             );
 
@@ -306,7 +306,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                をブックマークしました。
+                を<strong>ブックマーク</strong>しました。
               </div>
             );
 
