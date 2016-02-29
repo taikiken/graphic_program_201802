@@ -90,30 +90,30 @@ export class Model extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * event UNDEFINED_ERROR
-   * @return {string} beforeRender を返します
+   * @return {string} modelUndefinedError を返します
    */
   static get UNDEFINED_ERROR():string {
-    return 'undefinedError';
+    return 'modelUndefinedError';
   }
   /**
    * event EMPTY_ERROR
-   * @return {string} beforeRender を返します
+   * @return {string} modelEmptyError を返します
    */
   static get EMPTY_ERROR():string {
-    return 'emptyError';
+    return 'modelEmptyError';
   }
   /**
    * event RESPONSE_ERROR
-   * @return {string} beforeRender を返します
+   * @return {string} modelResponseError を返します
    */
   static get RESPONSE_ERROR():string {
-    return 'responseError';
+    return 'modelResponseError';
   }
   /**
    * event COMPLETE, action 終了後 success 時に使用します
-   * @return {string} actionComplete を返します
+   * @return {string} modelComplete を返します
    */
   static get COMPLETE():string {
-    return 'actionComplete';
+    return 'modelComplete';
   }
 }

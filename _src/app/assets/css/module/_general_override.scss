@@ -60,6 +60,15 @@
   }
 }
 
+// not isotope
+#board-container {
+  .board-stacks {
+    position: static;
+    top: inherit;
+    width: 100%;
+  }
+}
+
 .board-large {
   .board-item {
     .post-thumb {

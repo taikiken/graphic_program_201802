@@ -187,19 +187,34 @@ export class Page {
 
   }
   static mypage():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
     UserProfile.start();
     Sidebar.start();
     Header.start();
+    Bookmarks.start();
   }
   static activities():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
     UserProfile.start();
     Sidebar.start();
     Header.start();
+    Activities.start();
   }
   static notifications():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
     UserProfile.start();
     Sidebar.start();
     Header.start();
+    Notifications.start();
   }
   static settings():void {
 
