@@ -233,6 +233,8 @@ a {
         display: block;
         width: 35px;
         height: 35px;
+        overflow: hidden;
+        border-radius: 100%;
         background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
         background-size: 35px;
       }
@@ -244,6 +246,10 @@ a {
           width: 35px;
           height: 35px;
           border-radius: 100%;
+        }
+
+        &.user-logged-in {
+          background-color: #fff;
         }
       }
 

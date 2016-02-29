@@ -36,6 +36,7 @@
       width: 40px;
       height: 40px;
       margin-right: -50px;
+      overflow: hidden;
       border-radius: 100%;
       background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
       background-size: 40px;
@@ -44,6 +45,10 @@
         width: 100%;
         height: 100%;
         border-radius: 100%;
+      }
+
+      &.user-logged-in {
+        background: #fff none;
       }
     } //.comment-form-user
 
