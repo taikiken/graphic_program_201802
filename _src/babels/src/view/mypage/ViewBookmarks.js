@@ -22,9 +22,6 @@ import {ModelBookmark} from '../../model/users/ModelBookmark';
 
 // app
 import {Empty} from '../../app/const/Empty';
-import {User} from '../../app/User';
-import {MediaType} from '../../app/const/MediaType';
-// import {Url} from '../../app/const/Url';
 
 // data
 import {Result} from '../../data/Result';
@@ -376,6 +373,10 @@ export class ViewBookmarks extends View {
                     thumbnail = Empty.IMG_SMALL;
                   }
 
+                  let category = ( label ):string => {
+                    return !label ? '' : <span className="category-label">{label}</span>;
+                  };
+
                   return (
                     <li key={'bookmarks-' + dae.id} className="board-stacks board-item">
                       <BookmarkButtonDom
@@ -387,7 +388,7 @@ export class ViewBookmarks extends View {
                           <img src={thumbnail} alt={dae.title}/>
                         </figure>
                         <div className="post-data">
-                          <p className="post-category">{dae.category.label}</p>
+                          <p className="post-category">{category(dae.category.label)}{category(dae.category2.label)}</p>
                           <h2 className="post-heading">{dae.title}</h2>
                           <p className="post-date">{dae.displayDate}</p>
                         </div>

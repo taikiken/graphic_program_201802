@@ -92,6 +92,17 @@ export class Empty {
 
   }
   /**
+   * video play button overlay sidebar small<br>
+   * [Ex.] sidebar video...
+   * @readonly
+   * @return {string} 代替画像パス【小】
+   */
+  static get VIDEO_PLAY_SMALL():string {
+
+    return '/assets/images/common/thumb-16x9-play-s.png';
+
+  }
+  /**
    * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
    * [Ex.] コメントとか
    * @readonly

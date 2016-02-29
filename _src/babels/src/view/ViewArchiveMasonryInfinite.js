@@ -590,7 +590,7 @@ export class ViewArchiveMasonryInfinite extends View {
         length: React.PropTypes.number.isRequired,
 
         // action instance
-        action: React.PropTypes.func.isRequired
+        action: React.PropTypes.object.isRequired
       },
       getInitialState: function() {
         this.isotope = null;
@@ -629,6 +629,10 @@ export class ViewArchiveMasonryInfinite extends View {
                   thumbnail = Empty.IMG_MIDDLE;
                 }
 
+                let category = ( label ):string => {
+                  return !label ? '' : <span className="category-label">{label}</span>;
+                };
+
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
                   <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
@@ -639,7 +643,7 @@ export class ViewArchiveMasonryInfinite extends View {
                         title={dae.title}
                       />
                       <div className="post-data">
-                        <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
+                        <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
                         <h3 className='post-heading'>{dae.title}</h3>
                         <p className="post-date">{dae.displayDate}</p>
                         <div className="post-excerpt-text">{dae.description}</div>

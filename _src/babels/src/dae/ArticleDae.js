@@ -35,6 +35,9 @@ export class ArticleDae {
     this._article = article;
     // article.category
     this._category = new CategoryDae( article.category );
+    // 2016-02-29 category2 追加になった
+    // https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
+    this._category2 = new CategoryDae( article.category2 );
     // article.media
     this._media = new MediaDae( article.media );
     // article.user
@@ -97,6 +100,13 @@ export class ArticleDae {
    */
   get category():CategoryDae {
     return this._category;
+  }
+  /**
+   *
+   * @return {CategoryDae|*} article.category2
+   */
+  get category2():CategoryDae {
+    return this._category2;
   }
   /**
    * alias commentsTotal

@@ -15,6 +15,9 @@ import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
+// UT
+let UT = self.UT;
+
 export class Activities {
   constructor( target ) {
     if ( _symbol !== target ) {
@@ -24,6 +27,12 @@ export class Activities {
     }
   }
   static start():void {
-
+    let element = Dom.board();
+    let elementMore = Dom.boardMore();
+    if ( element !== null && elementMore !== null ) {
+      // list
+      let archive = new UT.view.mypage.ViewActivities( element, elementMore );
+      archive.start();
+    }
   }
 }
