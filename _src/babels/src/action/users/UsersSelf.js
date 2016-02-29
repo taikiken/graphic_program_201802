@@ -16,7 +16,7 @@ import {Api} from '../../net/Api';
 import {User} from '../../app/User';
 
 /**
- * <h4>マイページの表示に利用</h4>
+ * <h4>ユーザー情報・マイページの表示に利用</h4>
  * 自分の情報
  */
 export class UsersSelf extends ActionAuth {

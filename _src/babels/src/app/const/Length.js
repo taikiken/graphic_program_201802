@@ -18,6 +18,7 @@ let _headline = 5;
 let _ranking = 5;
 let _video = 5;
 let _archive = 10;
+let _max = 999;
 
 /**
  * <h3>offset length default value</h3>
@@ -46,7 +47,6 @@ export class Length {
   static get pickup():Number {
     return _pickup;
   }
-
   /**
    * @param {Number} value pickup default 取得数
    */
@@ -57,7 +57,6 @@ export class Length {
       throw new Error( `pickup: integer required. ${value}` );
     }
   }
-
   /**
    * @return {Number} headline default 取得数を返します
    */
@@ -122,5 +121,12 @@ export class Length {
     } else {
       throw new Error( `archive: integer required. ${value}` );
     }
+  }
+  /**
+   * 最大値
+   * @return {number} length 最大値を返します
+   */
+  static get max():Number {
+    return _max;
   }
 }

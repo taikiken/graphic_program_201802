@@ -134,6 +134,9 @@ import {SignupWizard} from './view/signup/SignupWizard';
 import {ViewLogin} from './view/login/ViewLogin';
 import {ViewLogout} from './view/login/ViewLogout';
 
+// mypage
+import {ViewUserProfile} from './view/mypage/ViewUserProfile';
+
 // -------------------------------------
 // ui
 import {Receiver} from './ui/Receiver';
@@ -253,6 +256,9 @@ var UT = {
     login: {
       ViewLogin: ViewLogin,
       ViewLogout: ViewLogout
+    },
+    mypage: {
+      ViewUserProfile: ViewUserProfile
     },
     modal: {
       ViewDeleteModal: ViewDeleteModal
