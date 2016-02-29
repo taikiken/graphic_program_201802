@@ -22,9 +22,6 @@ import {ModelBookmark} from '../../model/users/ModelBookmark';
 
 // app
 import {Empty} from '../../app/const/Empty';
-import {User} from '../../app/User';
-import {MediaType} from '../../app/const/MediaType';
-// import {Url} from '../../app/const/Url';
 
 // data
 import {Result} from '../../data/Result';

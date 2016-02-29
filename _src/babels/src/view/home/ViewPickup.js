@@ -235,14 +235,24 @@ export class ViewPickup extends View {
         id: React.PropTypes.string.isRequired,
         slug: React.PropTypes.string.isRequired,
         category: React.PropTypes.string.isRequired,
+        category2: React.PropTypes.string,
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         large: React.PropTypes.string.isRequired,
         commentsCount: React.PropTypes.number.isRequired
       },
+      getDefaultPropTypes: function() {
+        return {
+          category2: ''
+        };
+      },
       render: function() {
         let p = this.props;
+
+        let category = ( label ):string => {
+          return !label ? '' : <span className="category-label">{label}</span>;
+        };
 
         return (
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
@@ -250,7 +260,7 @@ export class ViewPickup extends View {
               <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
               <img src={p.large} alt={p.title}/>
               <div className="post-overview">
-                <p className={'post-category post-category-' + p.slug}>{p.category}</p>
+                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category( p.category2)}</p>
                 <h2 className='post-heading'>{p.title}</h2>
                 <p className="post-date">{p.date}</p>
                 <p className="post-comment-num">{p.commentsCount}</p>
@@ -305,6 +315,7 @@ export class ViewPickup extends View {
             id={String( dae.id )}
             slug={dae.category.slug}
             category={dae.category.label}
+            category2={dae.category2.label}
             url={dae.url}
             date={dae.displayDate}
             title={dae.title}
