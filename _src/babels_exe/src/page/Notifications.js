@@ -23,7 +23,7 @@ export class Notifications {
 
     }
   }
-  start():void {
+  static start():void {
 
   }
 }

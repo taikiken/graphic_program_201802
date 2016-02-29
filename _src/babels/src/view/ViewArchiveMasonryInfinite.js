@@ -587,7 +587,10 @@ export class ViewArchiveMasonryInfinite extends View {
         // request offset
         offset: React.PropTypes.number.isRequired,
         // request length
-        length: React.PropTypes.number.isRequired
+        length: React.PropTypes.number.isRequired,
+
+        // action instance
+        action: React.PropTypes.func.isRequired
       },
       getInitialState: function() {
         this.isotope = null;

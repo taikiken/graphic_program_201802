@@ -100,7 +100,7 @@ export class ViewSingleHeader extends View {
               <a href="#" className={this.state.bookmarked} onClick={this.clickBookmark} ref='bookmarked'>
                 <span>{message}</span>
               </a>
-              <div className='loading-spinner'>&nbsp;</div>
+              <div className='loading-spinner'></div>
             </div>
           </div>;
         }
@@ -200,6 +200,7 @@ export class ViewSingleHeader extends View {
           action.off( Model.COMPLETE, this.done );
           action.off( Model.UNDEFINED_ERROR, this.fail );
           action.off( Model.RESPONSE_ERROR, this.fail );
+          this.action = null;
         }
 
       },

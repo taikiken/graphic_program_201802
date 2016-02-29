@@ -114,51 +114,51 @@ export class View extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * event BEFORE_RENDER
-   * @return {string} beforeRender を返します
+   * @return {string} viewBeforeRender を返します
    */
   static get BEFORE_RENDER():string {
-    return 'beforeRender';
+    return 'viewBeforeRender';
   }
   /**
    * event WILL_MOUNT
-   * @return {string} beforeRender を返します
+   * @return {string} viewWillMount を返します
    */
   static get WILL_MOUNT():string {
-    return 'willMount';
+    return 'viewWillMount';
   }
   /**
    * event DID_MOUNT
-   * @return {string} beforeRender を返します
+   * @return {string} viewDidMount を返します
    */
   static get DID_MOUNT():string {
-    return 'didMount';
+    return 'viewDidMount';
   }
   /**
    * event ERROR_MOUNT
-   * @return {string} beforeRender を返します
+   * @return {string} viewErrorMount を返します
    */
   static get ERROR_MOUNT():string {
-    return 'errorMount';
+    return 'viewErrorMount';
   }
   /**
    * event UNDEFINED_ERROR
-   * @return {string} beforeRender を返します
+   * @return {string} viewUndefinedError を返します
    */
   static get UNDEFINED_ERROR():string {
-    return 'undefinedError';
+    return 'viewUndefinedError';
   }
   /**
    * event EMPTY_ERROR
-   * @return {string} beforeRender を返します
+   * @return {string} viewEmptyError を返します
    */
   static get EMPTY_ERROR():string {
-    return 'emptyError';
+    return 'viewEmptyError';
   }
   /**
    * event RESPONSE_ERROR
-   * @return {string} beforeRender を返します
+   * @return {string} viewResponseError を返します
    */
   static get RESPONSE_ERROR():string {
-    return 'responseError';
+    return 'viewResponseError';
   }
 }

@@ -15,6 +15,9 @@ import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
+// UT
+let UT = self.UT;
+
 export class Bookmarks {
   constructor( target ) {
     if ( _symbol !== target ) {
@@ -23,7 +26,13 @@ export class Bookmarks {
 
     }
   }
-  start():void {
-
+  static start():void {
+    let element = Dom.board();
+    let elementMore = Dom.boardMore();
+    if ( element !== null && elementMore !== null ) {
+      // list
+      let archive = new UT.view.mypage.ViewBookmarks( element, elementMore );
+      archive.start();
+    }
   }
 }

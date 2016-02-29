@@ -23,7 +23,7 @@ export class Activities {
 
     }
   }
-  start():void {
+  static start():void {
 
   }
 }

@@ -136,6 +136,7 @@ import {ViewLogout} from './view/login/ViewLogout';
 
 // mypage
 import {ViewUserProfile} from './view/mypage/ViewUserProfile';
+import {ViewBookmarks} from './view/mypage/ViewBookmarks';
 
 // -------------------------------------
 // ui
@@ -258,7 +259,8 @@ var UT = {
       ViewLogout: ViewLogout
     },
     mypage: {
-      ViewUserProfile: ViewUserProfile
+      ViewUserProfile: ViewUserProfile,
+      ViewBookmarks: ViewBookmarks
     },
     modal: {
       ViewDeleteModal: ViewDeleteModal
