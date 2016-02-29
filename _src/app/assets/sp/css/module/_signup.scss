@@ -1,0 +1,305 @@
+@import "../../../../../scss/asset";
+
+// Signup
+//
+// design module signup
+//
+// Styleguide 2.7.0
+
+// signup
+// bodyの背景に画像
+.signup {
+  width: 100%;
+  min-height: 100%;
+  background: #000 url(/assets/images/signup/bg.jpg) center center no-repeat;
+  background-size: cover;
+}
+
+
+
+
+
+// body-sec
+// .body-secをオーバーライド
+.signup {
+  .body-sec {
+    margin-top: 40px;
+    margin-bottom: 56px;
+    background: none;
+
+    &:before {
+      background: none;
+    }
+
+    @at-root {
+      &-inner {
+        width: 600px;
+        padding-bottom: 40px;
+        border-radius: 3px;
+        background: none;
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+
+
+
+
+// signup-header
+.signup-header {
+  padding-top: 80px;
+  width: 600px;
+  margin: 0 auto;
+
+  .heading {
+    display: block;
+    width: 170px;
+    height: 65px;
+    background: url(/assets/images/signup/logo.png) 0 0 no-repeat;
+    @include hide-text;
+    margin: 0 auto;
+  }
+
+  .lead {
+    margin-top: 30px;
+    color: #fff;
+    font-size: fz(16);
+    text-align: center;
+  }
+}
+
+
+
+
+
+// signup-heading
+.signup-heading {
+  position: relative;
+  padding: 60px 0;
+  border-bottom: 1px solid $border-primary-color;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: fz(24);
+    text-align: center;
+  }
+
+  .btn {
+    position: absolute;
+    bottom: 22px;
+    width: 100%;
+    text-align: center;
+  }
+} //.signup-heading
+
+
+
+
+
+// signup-step
+.signup-step {
+  width: 520px;
+  margin: 0 auto;
+  padding-top: 40px;
+
+  @at-root {
+    &-list {
+      letter-spacing: ls( inline-block );
+      background-color: #ccc;
+      border-radius: 3px;
+    }
+
+    &-item {
+      position: relative;
+      display: inline-block;
+      width: 33.3%;
+      letter-spacing: normal;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -10px;
+        display: inline-block;
+        width: 10px;
+        height: 30px;
+        background: url(/assets/images/signup/step-bg.png) 0 0 no-repeat;
+        @include hide-text;
+      }
+
+      span {
+        display: block;
+        line-height: 30px;
+        text-align: center;
+      }
+
+      &.current {
+        background-color: $highlight-color;
+
+        &:after {
+          background-image: url(/assets/images/signup/step-bg_o.png);
+        }
+
+        span {
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+    }
+
+    &-step1,
+    &-step2 {
+      background-color: #bbb;
+    }
+
+    &-step1 {
+      z-index: 3;
+      border-radius: 3px 0 0 3px;
+    }
+
+    &-step2 {
+      z-index: 2;
+    }
+
+    &-step3 {
+      z-index: 1;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+} //.signup-step
+
+
+
+
+
+// register
+.register {
+  width: 520px;
+  margin: 0 auto;
+
+  @at-root {
+    &-or {
+      margin-top: 30px;
+      background: url(/assets/images/signup/bg-or.png) center center no-repeat;
+      font-weight: bold;
+      text-align: center;
+    } //.register-or
+
+    &-mail {
+      @include clearfix;
+      width: 100%;
+      margin-top: 30px;
+
+      .setting-form-mail,
+      .setting-form-submit {
+        margin-top: 0;
+      }
+
+      .setting-form-mail {
+        float: left;
+        width: perCalc(320, 520);
+
+        input {
+          width: 86%;
+        }
+      }
+
+      .setting-form-submit {
+        float: right;
+        width: perCalc(190, 520);
+
+        input {
+          width: 100%;
+          min-width: initial !important;
+        }
+      }
+
+      p {
+        clear: both;
+        padding-top: 30px;
+      }
+    }
+
+    .login-email {
+      margin-top: 30px;
+
+      .setting-form-mail,
+      .setting-form-pw {
+        input {
+          width: 92%;
+        }
+      }
+
+    }
+  } //at-root
+
+  .linkage-sns {
+    @at-root {
+      &-list {
+        @include clearfix;
+      }
+
+      &-item {
+        float: left;
+
+        & + .linkage-sns-item {
+          margin-top: 0;
+        }
+
+        &:nth-child(2) {
+          float: right;
+        }
+      }
+
+      &-link {
+        width: 250px;
+      }
+    } //at-root
+  }
+} //.register
+
+
+
+
+
+// basic-setting
+.basic-setting {
+  width: 520px;
+  margin: 40px auto 0;
+
+  .setting-form-submit {
+    margin-top: 40px;
+  }
+} //.basic-setting
+
+
+
+
+
+// interest-setting
+.interest-setting {
+  width: 520px;
+  margin: 40px auto 0;
+
+  .setting-form-submit {
+    margin-top: 20px;
+  }
+} //.interest-setting
+
+
+
+
+
+// pw-reset
+.pw-reset {
+  width: 520px;
+  margin: 0 auto;
+} //.pw-reset
+
+// -------------------------------------------------
+// override
+@import "signup_override";

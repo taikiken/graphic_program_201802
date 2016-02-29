@@ -1,0 +1,38 @@
+@import "../../../../../scss/asset";
+@import "../sprite";
+
+// Utility
+//
+// design module utility
+//
+// Styleguide 2.1.0
+
+// hover-opacity
+// hover で 透過率 0.75 にします (CSSアニメーション付)
+// $opacity=.75 - hover時の透過率
+@mixin hover-opacity($opacity:.75) {
+  opacity: $opacity;
+  transition: opacity ease-out .4s;
+  @content;
+}
+
+// dropMenu
+%dropMenu {
+  position: relative;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0,0,0,.2);
+  // box-shadow:rgba(0, 0, 0, 0.08) 0px 0px 5px 1px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 13px;
+    @extend .sprite-common;
+    @include sprite( $common-icon-user-menu );
+    // width: 9px;
+    // height: 5px;
+    // background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat;
+  }
+}

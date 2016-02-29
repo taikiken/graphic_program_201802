@@ -1,0 +1,30 @@
+// Utility function
+//
+// Compatible in latest Browser
+// Styleguide 1.1.2
+
+// ---------------------------------------------
+// *setting.scss 依存
+// ---------------------------------------------
+
+@import "../setting";
+
+// It strips the unit of measure and returns it
+// $num - number
+@function strip-unit($num) {
+  @if type-of($num) != number {
+    @warn '#{$num} is not a number.';
+    @return $num;
+  }
+  @return $num / ($num * 0 + 1);
+}
+
+
+
+
+
+// Converts "px" to "%" using the ($)size-base
+@function perCalc($target-value, $base-value: $small-screen) {
+  $value: strip-unit($target-value) / strip-unit($base-value) * 100%;
+  @return $value;
+}

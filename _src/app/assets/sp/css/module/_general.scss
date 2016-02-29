@@ -1,0 +1,456 @@
+@import "../../../../../scss/asset";
+@import "../sprite";
+
+// general
+//
+// design module general
+//
+// Styleguide 2.8.0
+
+// board-large
+// 汎用 ニュース一覧
+.board-large {
+  @include clearfix;
+
+  @at-root {
+    &-column {
+      width: 340px;
+
+      &.column1 {
+        float: left;
+      }
+
+      &.column2 {
+        float: right;
+      }
+    } //.board-column
+
+
+
+    // .btn-bookmark,
+    // .btn-bookmark-disable {
+    //   @include link-decoration(#fff, #fff, none, none);
+    //   position: absolute;
+    //   top: 0;
+    //   right: 0;
+    //   display: inline-block;
+    //   line-height: 1;
+    //   padding: 8px 10px;
+
+    //   span {
+    //     color: #fff;
+    //     font-weight: bold;
+    //     font-size: fz(12);
+
+    //     &:before {
+    //       content: '';
+    //       @extend .sprite-common;
+    //       @include sprite( $common-icon-bookmark, inline-block );
+    //       margin-right: 5px;
+    //       position: relative;
+    //       top: 2px;
+    //     }
+    //   }
+
+    //   &:hover {
+    //     transition: background-color ease-out .4s;
+    //   }
+
+    //   @at-root {
+    //     & {
+    //       background-color: #787878;
+
+    //       &:hover {
+    //         background-color: lighten( #787878, 8% );
+    //       }
+    //     }
+
+    //     &-disable {
+    //       background-color: $highlight-color;
+
+    //       &:hover {
+    //         background-color: lighten( $highlight-color, 8% );
+    //       }
+    //     }
+    //   }
+    // } //.btn-bookmark
+
+
+
+    .feature-user {
+      &.comment-item {
+        margin-top: 10px;
+        padding-top: 0;
+        border-top: none;
+        background-color: #f5f5f5;
+      }
+
+      .comment-user-job {
+        font-size: fz(12);
+      }
+
+      .comment-content {
+        padding-right: 10px;
+        padding-left: 10px;
+        font-size: fz(12);
+      } //.comment-content
+
+      .comment-reaction {
+        padding-right: 8px;
+        padding-bottom: 8px;
+        padding-left: 8px;
+      }
+    } //.feature-user
+
+
+
+    .commented-user {
+      @include clearfix;
+      margin-top: 10px;
+
+      &-item {
+        float: left;
+
+        & + & {
+          margin-left: 2px;
+        }
+      }
+
+      &-thumb {
+        @include link-decoration(null, null, none, none);
+        display: block;
+        width: 25px;
+        height: 25px;
+        background: url(/assets/images/common/thumb-user.png) 0 0 no-repeat;
+
+        &:hover {
+          @include hover-opacity;
+        }
+      }
+
+      &-andmore {
+        line-height: 25px;
+        margin-left: 5px;
+        font-size: fz(12);
+      }
+    } //.commented-user
+  }
+
+  .board-item {
+    position: relative;
+    margin-top: 30px;
+
+    .post {
+      &-thumb {
+        &-overlay-movie {}
+      } //post-thumb
+
+      &-data {
+        margin-top: .75em;
+      }
+
+      &-category {}
+
+      &-heading {
+        font-size: fz(20);
+      }
+
+      &-date {}
+    } //.board-large .post
+  }
+
+} //.board-large
+
+
+
+
+
+// board-small
+// 汎用 ニュース一覧
+.board-small {
+  @include clearfix;
+
+  &.column2 {
+    margin-top: 0;
+    border-top: none;
+
+    .board-item {
+      float: left;
+      width: 340px;
+      border-top: 1px solid $border-primary-color;
+      border-bottom: none;
+
+      &:nth-child(2n) {
+        float: right;
+      }
+
+      .post {
+        &-heading {
+          min-height: 2.6em;
+        }
+      }
+    }
+  }
+
+  .post {
+    padding: 15px 0;
+    overflow: hidden;
+
+    &-thumb {
+      float: left;
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      background: #ccc url(/assets/images/common/thumb-noimage-70x70.png) center center no-repeat;
+    }
+
+    &-data {
+      overflow: hidden;
+    }
+
+    &-category {}
+
+    &-heading {
+      line-height: lh(18, 14);
+    }
+
+    &-date {}
+  } //.board-small .post
+
+  .btn-bookmark {
+    float: right;
+    margin-top: 20px + 18;
+    margin-left: 10px;
+  }
+}
+
+
+
+
+
+[ class^="board-" ] {
+  .post {
+    @include link-decoration(#333, #333, none, none);
+    @include clearfix;
+    display: block;
+
+    &-thumb {
+      &-overlay-movie {
+        display: none;
+        position: absolute;
+
+        &.type-movie {
+          display: block;
+        }
+      }
+    }
+
+    &-data {}
+
+    &-category {
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: fz(12);
+    }
+
+    &-heading {
+      font-weight: bold;
+    }
+
+    &-date {
+      margin-top: .25em;
+      color: #666;
+      font-size: fz(10);
+    }
+
+    &-excerpt-text {
+      margin-top: 0.25em;
+    }
+
+    &:hover {
+      .post-thumb {
+        @include hover-opacity;
+      }
+
+      .post-heading {
+        color: $highlight-color;
+      }
+    }
+  } // .post
+}
+
+
+
+
+
+// btn-bookmark
+.btn-bookmark {
+  a {
+    @include link-decoration($highlight-color, #fff, none, none);
+    display: block;
+    min-width: 10.8em;
+    padding: 6px 9px;
+    border-radius: 4px;
+    border: 1px solid $highlight-color;
+    font-weight: bold;
+    font-size: fz(12);
+    vertical-align: middle;
+  }
+
+  span {
+    display: inline-block;
+
+    &:before {
+      position: relative;
+      top: 2px;
+      margin-right: 5px;
+      content: '';
+      @extend .sprite-common;
+      @include sprite( $common-icon-bookmark_o, inline-block);
+      @include hide-text;
+    }
+  }
+
+  a.enable,
+  a:hover {
+    background-color: $highlight-color;
+    color: #fff;
+
+    span:before {
+      @include sprite( $common-icon-bookmark, inline-block);
+      @include hide-text;
+    }
+  }
+} //.btn-bookmark
+
+
+
+
+
+// board-btn-viewmore
+// VIEW MORE (もっと見る)ボタン
+.board-btn-viewmore {
+  clear: both;
+  padding-top: 30px;
+
+  &-link {
+    display: block;
+    padding: 18px 0;
+    border: 2px solid $highlight-color;
+
+    span {
+      @extend .sprite-common;
+      @include sprite( $common-btn-viewmore );
+      @include hide-text;
+      margin: 0 auto;
+    }
+  }
+} //.board-btn-viewmore
+
+
+
+
+
+// dialogue-notice
+// 汎用ダイアログボックス
+.dialogue-notice {
+  &.error { background-color: #e14343;}
+  &.success { background-color: #43e18a;}
+  &, &.info { background-color: $highlight-color;}
+
+  @at-root {
+    &-inner {
+      position: relative;
+      width: 1070px;
+      height: 80px;
+      margin: 0 auto;
+    }
+
+    &-info {
+      @include table-cell;
+      width: 1170px - 30;
+      height: 80px;
+      color: #fff;
+      text-align: center;
+
+      cursor: default;
+    }
+
+    &-btn-close {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -15px;
+
+      a {
+        @extend .sprite-common;
+        @include sprite( $common-btn-notice-close );
+        @include hide-text;
+      }
+    }
+  }
+}
+
+
+
+
+
+// mod-btnA01
+.mod-btnA01 {
+  a {
+    @include link-decoration($highlight-color, #fff, none, none);
+    display: inline-block;
+    min-width: 160px;
+    line-height: 50px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border: 2px solid $highlight-color;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover {
+      border: none;
+      background-color: $highlight-color;
+      transition: background-color ease-out .4s;
+    }
+  }
+}
+
+
+
+
+
+// mod-btnB01
+.mod-btnB01 {
+  input[ type="submit" ],
+  a {
+    display: inline-block;
+    min-width: 250px;
+    line-height: 50px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border-radius: 3px;
+    background-color: $highlight-color;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover {
+      @include hover-opacity;
+    }
+  }
+
+  a {
+    @include link-decoration(#fff, #fff, none, none);
+  }
+
+  input[ type="submit" ] {
+    color: #fff;
+  }
+}
+
+
+
+
+// -------------------------------------------------
+// override
+@import "./general_override";

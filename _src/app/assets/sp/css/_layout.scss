@@ -1,4 +1,4 @@
-@import "../../../scss/asset";
+@import "../../../../scss/asset";
 
 // sprite 不要の時はコメントに
 /*
@@ -33,7 +33,7 @@ html, body {
 }
 
 a {
-  @include link-decoration($highlight-color, $highlight-color, none, underline);
+  @include link-decoration($highlight-color, $highlight-color, none, none);
 }
 
 input,
@@ -42,7 +42,6 @@ select,
 button {
   outline: none;
 }
-
 
 
 

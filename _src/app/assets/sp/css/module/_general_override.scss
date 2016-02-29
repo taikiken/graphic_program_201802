@@ -1,0 +1,207 @@
+@import "../../../../../scss/asset";
+@import "../sprite";
+
+// -------------------------------------------------
+// whole
+// -------------------------------------------------
+.whole {
+  overflow: hidden;
+}
+
+// -------------------------------------------------
+// loading
+// -------------------------------------------------
+.loading-root {
+  position: relative;
+
+  .loading-spinner {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0;
+    // ToDo spinner gif animation
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  &.loading {
+    .loading-spinner {
+      height: 100%;
+    }
+  }
+
+  &.disable {
+    .loading-spinner {
+      height: 100%;
+    }
+  }
+}
+
+// -------------------------------------------------
+// 記事一覧
+// board
+// -------------------------------------------------
+#board-container {
+  .board-large-column {
+    width: 100%;
+
+    &.column1,
+    &.column2 {
+      float: none;
+    }
+  }
+
+  .board-item {
+    position: relative;
+    top: 99999px;
+    width: 340px;
+  }
+}
+
+.board-large {
+  .board-item {
+    .post-thumb {
+      background-color: #ccc;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+// movie thumbnail
+.board-item {
+  // figure
+  .post-thumb-video {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    // thumbnail
+    .video-thumbnail {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+    }
+    // play mark
+    .post-thumb-overlay-movie {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+  }
+}
+
+// -------------------------------------------------
+// more button
+#board-container-more {
+  padding-top: 30px;
+
+  .loading-root {
+  //.board-btn-viewmore {
+  //  position: relative;
+    padding-top: 0;
+
+    /*
+    .loading-spinner {
+      display: block;
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(255, 255, 255, 0.7);
+    }
+    &.loading {
+      .loading-spinner {
+        height: 100%;
+      }
+    }
+    */
+  }
+  //
+  //.board-btn-viewmore-link {
+  //  background-color: #fff;
+  //}
+}
+
+// -------------------------------------------------
+// board-small
+// 汎用 ニュース一覧
+.board-small {
+  .post-thumb {
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// -------------------------------------------------
+// mod-btnB01
+.mod-btnB01 {
+  input[ type="button" ],
+  a {
+    display: inline-block;
+    min-width: 250px;
+    line-height: 50px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border-radius: 3px;
+    background-color: $highlight-color;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover {
+      @include hover-opacity;
+    }
+  }
+
+  a {
+    @include link-decoration(#fff, #fff, none, none);
+  }
+
+  input[ type="button" ] {
+    color: #fff;
+  }
+}
+
+// -------------------------------------------------
+// modal
+.modal-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 720px;
+
+  &.opaque {
+    opacity: 0;
+  }
+
+  .modal-container-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    min-height: 720px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .modal-container-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX( -50% ) translateY( -50% );
+    width: 710px;
+    background-color: #fff;
+  }
+}

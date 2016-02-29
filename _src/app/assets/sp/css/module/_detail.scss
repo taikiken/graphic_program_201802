@@ -1,0 +1,143 @@
+@import "../../../../../scss/asset";
+@import "../sprite";
+
+// Detail
+//
+// design module detail
+//
+// Styleguide 2.4.0
+
+// post-detail
+.post-detail {
+  margin-top: 30px;
+
+  // post-heading
+  .post-heading {
+    padding-bottom: 24px;
+    border-bottom: 1px solid $border-primary-color;
+    font-weight: bold;
+    font-size: fz(34);
+  } //.post-heading
+
+  // post-data
+  .post-data {
+    @include clearfix;
+    margin-top: 20px;
+
+    @at-root {
+      // post-author
+      .post-author {
+      } //.post-author
+
+      // post-date
+      .post-date {
+        color: #999;
+      } //.post-date
+
+      // btn-bookmark
+      .btn-bookmark {
+      } //.btn-bookmark
+    }
+  } //.post-data
+
+  // post-kv
+  .post-kv {
+    margin-top: 30px;
+  } //.post-kv
+
+  // post-content
+  .post-content {
+    p {
+      margin-top: 1.5em;
+    }
+  } //.post-content
+
+  // sponsor-link
+  .sponsor-link {
+    margin-top: 20px;
+
+    & + .post-tags {
+      margin-top: 20px;
+    }
+  }
+
+  // post-tags
+  .post-tags {
+    margin-top: 40px;
+
+    @at-root {
+      &-heading {
+        width: 41px;
+        height: 14px;
+        background: url(/assets/images/common/heading-tags.png) 0 0 no-repeat;
+        @include hide-text;
+      }
+
+      &-list {
+        margin-top: 10px;
+        letter-spacing: ls( inline-block );
+      }
+
+      &-item {
+        display: inline-block;
+        letter-spacing: normal;
+
+        & + .post-tags-item {
+          margin-left: 20px;
+        }
+
+        a {
+          @include link-decoration(null, null, none, underline);
+        }
+      }
+    }
+  } //.post-tags
+
+  // post-sns
+  .post-sns {
+    margin-top: 30px;
+    padding: 29px;
+    border: 1px solid $border-primary-color;
+
+    @at-root {
+      &-list {
+        letter-spacing: ls( inline-block );
+        text-align: center;
+
+        [ class^="post-sns-" ] {
+          display: inline-block;
+          margin: 0 5px;
+          letter-spacing: normal;
+          vertical-align: top;
+
+          a:hover {
+            @include hover-opacity;
+          }
+        }
+      }
+
+      &-tw {
+        a {
+          @extend .sprite-detail;
+          @include sprite( $detail-icon-sns-tw );
+          @include hide-text;
+        }
+      }
+
+      &-fbshare {
+        a {
+          @extend .sprite-detail;
+          @include sprite( $detail-icon-sns-fb );
+          @include hide-text;
+        }
+      }
+
+      &-fbgood {}
+      &-gt {}
+    }
+  } //.post-sns
+}
+
+// -------------------------------------------------
+// override
+@import "detail_override";
