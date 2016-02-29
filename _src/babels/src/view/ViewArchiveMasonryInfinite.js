@@ -60,9 +60,11 @@ export class ViewArchiveMasonryInfinite extends View {
     option = Safety.object( option );
 
     super( element, option );
+    /*
     if ( !Safety.isElement( moreElement ) ) {
       console.warn( `un accessible more element. ${moreElement}` );
     }
+    */
 
     if ( typeof ActionClass === 'function' ) {
 
@@ -321,7 +323,8 @@ export class ViewArchiveMasonryInfinite extends View {
       // moreElement 存在チェックを行う
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
-      if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
+      // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
+      if ( _this._moreRendered === null ) {
       // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
 
         // チェックをパスし実行する

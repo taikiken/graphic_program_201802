@@ -18,6 +18,12 @@ import {Category} from './page/Category';
 import {Single} from './page/Single';
 import {Search} from './page/Search';
 import {Signup} from './page/Signup';
+import {UserProfile} from './page/UserProfile';
+import {Sidebar} from './page/Sidebar';
+import {Header} from './page/Header';
+import {Bookmarks} from './page/Bookmarks';
+import {Activities} from './page/Activities';
+import {Notifications} from './page/Notifications';
 
 import {SearchFrom} from './header/SearchFrom';
 
@@ -181,13 +187,19 @@ export class Page {
 
   }
   static mypage():void {
-
+    UserProfile.start();
+    Sidebar.start();
+    Header.start();
   }
   static activities():void {
-
+    UserProfile.start();
+    Sidebar.start();
+    Header.start();
   }
   static notifications():void {
-
+    UserProfile.start();
+    Sidebar.start();
+    Header.start();
   }
   static settings():void {
 
