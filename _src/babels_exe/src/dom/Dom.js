@@ -221,5 +221,15 @@ export class Dom {
   static userProfile():Element {
     return Dom.get( 'mypage-profile-container' );
   }
+
+  // --------------------------------------
+  // nav
+  /**
+   * main nav, category slug を設定するために
+   * @return {Element} global-nav-container
+   */
+  static nav():Element {
+    return Dom.get( 'global-nav-container' );
+  }
 }
 // return Dom.get( '' );

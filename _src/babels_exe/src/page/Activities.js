@@ -18,7 +18,14 @@ let _symbol = Symbol();
 // UT
 let UT = self.UT;
 
+/**
+ * アクティビティーズ
+ */
 export class Activities {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -26,6 +33,9 @@ export class Activities {
 
     }
   }
+  /**
+   * rendering 開始
+   */
   static start():void {
     let element = Dom.board();
     let elementMore = Dom.boardMore();

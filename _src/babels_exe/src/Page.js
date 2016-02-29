@@ -12,6 +12,7 @@
 'use strict';
 
 import {PageTop} from './ui/PageTop';
+import {Nav} from './ui/Nav';
 
 import {Index} from './page/Index';
 import {Category} from './page/Category';
@@ -24,7 +25,6 @@ import {Header} from './page/Header';
 import {Bookmarks} from './page/Bookmarks';
 import {Activities} from './page/Activities';
 import {Notifications} from './page/Notifications';
-
 import {SearchFrom} from './header/SearchFrom';
 
 import {CommentDelete} from './modal/CommentDelete';
@@ -117,6 +117,7 @@ export class Page {
    */
   static index():void {
     Index.start();
+    Nav.start( 'home' );
   }
   /**
    * category page
@@ -128,6 +129,7 @@ export class Page {
     let type = event.slugType;
 
     Category.start( slug, type );
+    Nav.start( slug );
 
   }
   /**
