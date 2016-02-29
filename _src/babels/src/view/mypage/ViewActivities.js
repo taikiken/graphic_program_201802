@@ -282,7 +282,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                の{article.comments.user.userName}さんのコメントに<a href={article.reply.url}>コメント</a>しました。
+                の<strong>{article.comments.user.name}</strong>さんのコメントに<a href={article.reply.url}>コメント</a>しました。
               </div>
             );
 
@@ -290,7 +290,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                の{article.comments.user.name}さんの<a href={article.comments.url}>コメント</a>に<strong>GOOD</strong>しました。
+                の<strong>{article.comments.user.name}</strong>さんの<a href={article.comments.url}>コメント</a>に<strong>GOOD</strong>しました。
               </div>
             );
 
@@ -298,7 +298,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                の{article.comments.user.name}さんの<a href={article.article.comments.url}>コメント</a>に<strong>BAD</strong>しました。
+                の<strong>{article.comments.user.name}</strong>さんの<a href={article.comments.url}>コメント</a>に<strong>BAD</strong>しました。
               </div>
             );
 

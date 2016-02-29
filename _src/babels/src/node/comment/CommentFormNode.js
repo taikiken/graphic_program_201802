@@ -337,10 +337,9 @@ let OpenerNode = React.createClass( {
         );
       } else if ( this.state.toggle === 'cancel' ) {
         return (
-          <p className="comment-respond-opener comment-respond-cancel">
-            <span className="icon-comment">{this.props.staticMessage}</span>
-            <a href="#" onClick={this.cancelClick}><i className="icon-cancel">キャンセル</i></a>
-          </p>
+          <a href="#" className="comment-respond-opener" data-id={this.props.uniqueId} onClick={this.cancelClick}>
+            <span className="icon-comment">{this.props.actionMessage}</span>
+          </a>
         );
       } else {
         return null;
