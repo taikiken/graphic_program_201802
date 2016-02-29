@@ -324,14 +324,18 @@ export class Api {
       case 'self':
         return ApiDae.api( 'users:self' );
 
+
       case 'id':
         return ApiDae.api( 'users:id' );
 
       case 'self:bookmark':
         return ApiDae.api( 'users:self:bookmark' );
 
+      /*
+       無くなった様子
       case 'id:bookmark':
         return ApiDae.api( 'users:id:bookmark' );
+       */
 
       case 'activities':
       case 'activity':

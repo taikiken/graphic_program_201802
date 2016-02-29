@@ -38,6 +38,7 @@ _docs
 # bower install で作成される
 bower_components
 # bower_components から必要ファイルだけを抽出
+# vendor 系 task で参照してたので修正するまでイキ
 # bower_exports
 
 
@@ -87,12 +88,18 @@ _src/app/assets/js/bundle/
 _src/app/assets/js/libs/
 _src/app/assets/_babel/*.babel.js
 _src/app/assets/_babel/_*.js
+
+# sprite image
 _src/app/assets/images/sprite/
+# sp
+_src/app/assets/sp/images/sprite/
 
 # _src scss
 # -----------
 # sprite 画像 scss, sprite:make で生成されるので ignore にします
 _src/app/assets/css/_sprite.scss
+# sp
+_src/app/assets/sp/css/_sprite.scss
 
 # _src babels
 # -----------

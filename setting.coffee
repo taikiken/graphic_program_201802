@@ -90,6 +90,20 @@ spriteCssPath = app + '/assets/css'
 spriteImgPath =  app + '/assets/images/sprite'
 
 # ------------------------------------------------------
+# directory SP
+# ------------------------------------------------------
+sp =
+  # sp 用 scss library
+  scss: '_src/scss_sp'
+  # sp 用 sprite directory
+  sprite:
+    root: '_src/sprite_sp'
+    css: app + '/assets/sp/css'
+    img: app + '/assets/sp/images/sprite'
+    path: '/assets/sp/images/sprite'
+
+
+# ------------------------------------------------------
 # Sass prefix (Browser vendor prefix)
 # ------------------------------------------------------
 AUTO_PREFIX_BROWSERS = [
@@ -216,6 +230,8 @@ module.exports =
     htdocs: htdocs
     babels: babels
     exe: exe
+    # SP
+    sp: sp
 
   gulp: gulp
   $: $

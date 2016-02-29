@@ -26,16 +26,19 @@ export class InterestDae {
     this._interest = interest;
   }
   /**
-   * @return {Object|*} response.interest を返します
+   * @return {Array|*} response.interest を返します
    */
-  get interest():Object {
+  get interest():Array {
     return this._interest;
   }
   /**
    * @return {Array} response.interest.category を返します
    */
   get category():Array {
-    let category = this.interest.category;
+    // let category = this.interest.category;
+    // API 戻り値がどうも変わった様子
+    // interest: [{id:int, slug:text, label:text},{}]
+    let category = this.interest;
     if ( !Array.isArray( category ) ) {
       category = [];
     }

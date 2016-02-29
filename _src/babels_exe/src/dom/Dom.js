@@ -211,5 +211,15 @@ export class Dom {
   static modal():Element {
     return Dom.get( 'modal-container' );
   }
+
+  // --------------------------------------
+  // mypage
+  /**
+   * mypage ユーザー情報
+   * @return {Element} mypage-profile-container
+   */
+  static userProfile():Element {
+    return Dom.get( 'mypage-profile-container' );
+  }
 }
 // return Dom.get( '' );
