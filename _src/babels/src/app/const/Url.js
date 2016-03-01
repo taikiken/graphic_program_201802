@@ -58,7 +58,6 @@ export class Url {
   static index():string {
     return '/';
   }
-
   /**
    * category url
    * @param {string} [slug=all] category slug
@@ -141,6 +140,12 @@ export class Url {
 
     }
   }
+
+  /**
+   * location.hash から signup step number を取得します
+   * @param {string} [hash='']
+   * @return {number} step number
+   */
   static signupStepByHash( hash:string = '' ):Number {
 
     switch ( hash ) {

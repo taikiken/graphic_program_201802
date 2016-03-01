@@ -384,6 +384,9 @@ export class ViewActivities extends View {
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
     articles.forEach( function( article, i ) {
 
+      // 正しくは ActivitiesDae だけど
+      // これでも動いている
+      // このままにしておく
       let dae = new ArticleDae( article );
 
       dae.index = prevLast + i;

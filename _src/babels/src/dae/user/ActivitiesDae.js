@@ -14,8 +14,9 @@
 import {Safety} from '../../data/Safety';
 import {ActivityDae} from './ActivityDae';
 
+
 export class ActivitiesDae {
-  onstructor( response:Object = {} ) {
+  constructor( response:Object = {} ) {
     response = Safety.object( response );
     let activities = response.activities;
     activities = Safety.array( activities );

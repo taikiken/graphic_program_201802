@@ -14,7 +14,16 @@
 import {ActionBehavior} from '../ActionBehavior';
 import {Api} from '../../net/Api';
 
+/**
+ * signup, 新規登録
+ */
 export class Signup extends ActionBehavior {
+  /**
+   * signup, 新規登録
+   * @param {FormData} [formData=null] FormData リクエストで必要の場合に使用します email:string 必須です
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   */
   constructor( formData:FormData, resolve:Function = null, reject:Function = null ) {
     super( Api.join(), formData, resolve, reject );
   }
