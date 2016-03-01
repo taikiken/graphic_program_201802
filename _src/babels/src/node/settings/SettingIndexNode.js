@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/20 - 14:37
+ * @date 2016/03/01 - 20:41
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -12,14 +12,12 @@
 'use strict';
 
 // event
-import {SignupStatus} from '../../event/SignupStatus';
+// import {SignupStatus} from '../../event/SignupStatus';
 
 // app
 import {Url} from '../../app/const/Url';
 import {Empty} from '../../app/const/Empty';
 
-// util
-import {Loc} from '../../util/Loc';
 
 // ui
 import {Thumbnail} from '../../ui/Thumbnail';
@@ -33,48 +31,59 @@ import {ErrorMessage} from '../../data/ErrorMessage';
 import {ErrorNode} from '../error/ErrorNode';
 import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 
+// event
+import {SettingsStatus} from '../../event/SettingsStatus';
+
 // model
 import {Model} from '../../model/Model';
-import {ModelSignup} from '../../model/signup/ModelSignup';
+import {ModelAccountEdit} from '../../model/settings/ModelAccountEdit';
+
 
 let React = self.React;
-let Sagen = self.Sagen;
+let ReactDOM = self.ReactDOM;
 
+let Sagen = self.Sagen;
 
 // ------------------------------------------
 // step 2 入力フォーム
 // ------------------------------------------
-let Step2FormNode = React.createClass( {
+let SettingInputNode = React.createClass( {
   propTypes: {
-    step: React.PropTypes.number.isRequired,
+    empty: React.PropTypes.string,
     avatar: React.PropTypes.string,
-    getForm: React.PropTypes.func.isRequired
+    email: React.PropTypes.string.isRequired,
+    password: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
+    bio: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
-      avatar: Empty.SETTING_AVATAR
+      avatar: Empty.SETTING_AVATAR,
+      empty: Empty.SETTING_AVATAR
     };
   },
   getInitialState: function() {
-    this.status = SignupStatus.factory();
+    this.status = SettingsStatus.factory();
+
     this.thumbnail = null;
     this.model = null;
     this.errors = {
+      email: new ErrorMessage(),
       password: new ErrorMessage(),
       name: new ErrorMessage()
     };
     this.ie = Sagen.Browser.IE.is();
     this.callback = null;
+    this.icon = null;
 
     return {
-      step: this.props.step,
       avatar: this.props.avatar,
       entered: false,
       error: false,
-      password: '',
-      name: '',
-      bio: '',
-      picture: ''
+      email: this.props.email,
+      password: this.props.password,
+      name: this.props.name,
+      bio: this.props.bio
     };
   },
   render: function() {
@@ -93,88 +102,103 @@ let Step2FormNode = React.createClass( {
     };
 
     return (
-      <fieldset className="fieldset-step-2">
-        {/* password */}
-        <span className={'form-parts ' + errorClass('password')}>
-          <span className="setting-form-pw form-input">
-            <input
-              type="password"
-              placeholder="パスワードを入力"
-              name="password"
-              value={this.state.password}
-              onChange={this.passwordChange}
-            />
+      <form ref="settings" encType="multipart/form-data" onSubmit={this.submitHandler}>
+        <fieldset className="fieldset-step-2">
+          {/* email */}
+          <span className={'form-parts ' + errorClass('email')}>
+            <span className="setting-form-mail form-input">
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.emailChange}
+                placeholder="メールアドレスを入力"
+              />
+            </span>
+            <ErrorNode message={message('email')} />
           </span>
-          <ErrorNode message={message('password')} />
-        </span>
-        {/* name */}
-        <span className={'form-parts ' + errorClass('name')}>
-          <span className="setting-form-name form-input">
-            <input
-              type="text"
-              placeholder="ユーザー名を入力"
-              name="name"
-              value={this.state.name}
-              onChange={this.nameChange}
-            />
+          {/* password */}
+          <span className={'form-parts ' + errorClass('password')}>
+            <span className="setting-form-pw form-input">
+              <input
+                type="password"
+                placeholder="パスワードを入力"
+                name="password"
+                value={this.state.password}
+                onChange={this.passwordChange}
+              />
+            </span>
+            <ErrorNode message={message('password')} />
           </span>
-          <ErrorNode message={message('name')} />
-        </span>
-        {/* bio */}
-        <span className="form-parts">
-          <span className="setting-form-job form-input">
-            <input
-              type="text"
-              placeholder="肩書を入力 (任意)"
-              name="bio"
-              value={this.state.bio}
-              onChange={this.bioChange}
-            />
+          {/* name */}
+          <span className={'form-parts ' + errorClass('name')}>
+            <span className="setting-form-name form-input">
+              <input
+                type="text"
+                placeholder="ユーザー名を入力"
+                name="name"
+                value={this.state.name}
+                onChange={this.nameChange}
+              />
+            </span>
+            <ErrorNode message={message('name')} />
           </span>
-        </span>
+          {/* bio */}
+          <span className="form-parts">
+            <span className="setting-form-job form-input">
+              <input
+                type="text"
+                placeholder="肩書を入力 (任意)"
+                name="bio"
+                value={this.state.bio}
+                onChange={this.bioChange}
+              />
+            </span>
+          </span>
 
-        {/* profile_picture */}
-        <div className={'setting-form-avatar ' + stageClass()}>
-          <h2 className="setting-form-avatar-heading">プロフィール写真選択</h2>
-          <div
-            className={'setting-form-avatar-dropArea ' + zoneEntered}
-            onDragOver={this.handleDragOver}
-            onDragEnter={this.handleDragEnter}
-            onDragLeave={this.handleDragLeave}
-            onDrop={this.handleDrop}
-          >
-            <div className={'avatar-stage'}>
-              <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
-              <ChangeAvatarNode
-                show={this.props.avatar !== this.state.avatar}
-                handler={this.avatarChangeHandler}
+          {/* profile_picture */}
+          <div className={'setting-form-avatar ' + stageClass()}>
+            <h2 className="setting-form-avatar-heading">プロフィール写真選択</h2>
+            <div
+              className={'setting-form-avatar-dropArea ' + zoneEntered}
+              onDragOver={this.handleDragOver}
+              onDragEnter={this.handleDragEnter}
+              onDragLeave={this.handleDragLeave}
+              onDrop={this.handleDrop}
+            >
+              <div className={'avatar-stage'}>
+                <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
+                <ChangeAvatarNode
+                  show={this.props.empty !== this.state.avatar}
+                  handler={this.avatarChangeHandler}
+                />
+              </div>
+              <input
+                type="file"
+                name="profile_picture"
+                accept="image/*"
+                value={this.state.picture}
+                onChange={this.pictureChange}
+                className="setting-form-picture form-input"
               />
             </div>
-            <input
-              type="file"
-              name="profile_picture"
-              accept="image/*"
-              value={this.state.picture}
-              onChange={this.pictureChange}
-              className="setting-form-picture form-input"
-            />
           </div>
-        </div>
 
-        {/* button */}
-        <div className="form-parts">
+          {/* button */}
+          <div className="form-parts">
           <span className="setting-form-submit mod-btnB01">
-            <input type="button" value="次へ" onClick={this.nextHandler} />
+            <input type="submit" value="保存する" />
           </span>
-        </div>
-      </fieldset>
+          </div>
+        </fieldset>
+      </form>
     );
 
   },
   // -------------------------------------------------------
   // delegate
   componentDidMount: function() {
-    this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+    // this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
 
     // this.status.on( SignupStatus.SIGNUP_FORM, this.formHandler );
 
@@ -188,11 +212,15 @@ let Step2FormNode = React.createClass( {
 
   },
   componentWillUnMount: function() {
-    this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
+    // this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
     this.dispose();
   },
   // -------------------------------------------------------
   // input changes
+  // password
+  emailChange: function( event ) {
+    this.setState( {email: event.target.value} );
+  },
   // password
   passwordChange: function( event ) {
     this.setState( {password: event.target.value} );
@@ -303,29 +331,16 @@ let Step2FormNode = React.createClass( {
   },
   // ---------------------------------------------------
   // submit click 通知
-  submitHandler: function( event:Object ) {
-    let step = event.step;
-    if ( step === this.props.step ) {
-      this.prepareNext();
-    }
-  },
-  // next button click
-  nextHandler: function( event:Event ) {
+  submitHandler: function( event:Event ) {
     event.preventDefault();
-
     this.prepareNext();
-
   },
   prepareNext: function():void {
-    console.log( 'from element ', this.props.getForm() );
-    let formData = Form.element( this.props.getForm() );
-    // not create
-    // 入力検証のみ
-    formData.append( 'create', false );
+    let formData = Form.element( ReactDOM.findDOMNode( this.refs.settings ) );
 
     let model = this.model;
     if ( model === null ) {
-      model = new ModelSignup( formData, this.callback );
+      model = new ModelAccountEdit( formData, this.callback );
       this.model = model;
     } else {
       model.data = formData;
@@ -338,10 +353,7 @@ let Step2FormNode = React.createClass( {
   },
   next: function() {
     // next step
-    console.log( 'Step2Form ', this.state.step );
-    // this.status.step( this.state.step + 1 );
-    // hash
-    Loc.hash = Url.signupHash( this.props.step + 1 );
+    this.status.dispatch( { type: SettingsStatus.ACCOUNT_COMPLETE } );
   },
   // ---------------------------------------------------
   // avatar change click
@@ -362,8 +374,9 @@ let Step2FormNode = React.createClass( {
       this.next();
     }
   },
-  fail: function( error:Error ) {
-    console.log( 'fail ', error.result.response.errors );
+  fail: function( error:Object ) {
+    console.log( 'fail ', error.errors, error.result );
+
     let errors = error.result.response.errors;
     if ( Array.isArray( errors ) ) {
 
@@ -394,38 +407,32 @@ let Step2FormNode = React.createClass( {
 
 /**
  * <h3>React component<h3>
- * **signup step 2**
+ * **SettingInputNode**
  * 基本情報設定
  */
-export let LegendStep2Node = React.createClass( {
+export let SettingIndexNode = React.createClass( {
   propTypes: {
-    step: React.PropTypes.number.isRequired,
-    getForm: React.PropTypes.func.isRequired
+    email: React.PropTypes.string.isRequired,
+    password: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
+    bio: React.PropTypes.string.isRequired,
+    picture: React.PropTypes.string.isRequired
   },
-  getInitialState: function() {
-    this.status = SignupStatus.factory();
-
+  getDefaultProps: function() {
     return {
-      step: 1,
-      email: '',
-      password: '',
-      name: '',
-      bio: '',
-      picture: ''
+      password: ''
     };
   },
   render: function() {
-
-    console.log( 'render step 2 email ', this.state.email );
+    console.log( 'SettingIndexNode render', this.props.email );
     return (
-      <div className="fieldset-container fieldset-container-2">
-        <span className="setting-form-mail disabled">
-          <input type="text" value={this.state.email}/>
-          <div className="disabled"></div>
-        </span>
-        <Step2FormNode
-          step={this.props.step}
-          getForm={this.props.getForm}
+      <div className="basic-setting setting-form">
+        <SettingInputNode
+          email={this.props.email}
+          password={this.props.password}
+          name={this.props.name}
+          bio={this.props.bio}
+          avatar={this.props.picture}
         />
       </div>
     );
@@ -434,34 +441,15 @@ export let LegendStep2Node = React.createClass( {
   // -----------------------------------------------------------
   // delegate
   componentDidMount: function() {
+    /*
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
     this.status.on( SignupStatus.SIGNUP_EMAIL, this.emailChange );
+    */
   },
   componentWillUnMount: function() {
+    /*
     this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
     this.status.off( SignupStatus.SIGNUP_EMAIL, this.emailChange );
-  },
-  shouldComponentUpdate: function( nextProps, nextState ) {
-    return this.state.email !== nextState.email || this.props.step === nextState.step;
-  },
-  // -----------------------------------------------------------
-  // form event handler
-  inputChange( event:Event ):void {
-    console.log( 'input event ', event );
-  },
-  // -----------------------------------------------------------
-  // SignupStatus event handler
-  stepChange: function( event:Object ):void {
-    this.updateStep( event.step );
-  },
-  updateStep: function( step:Number ):void {
-    this.setState( { step: step } );
-  },
-  emailChange: function( event:Object ):void {
-    this.updateEmail( event.email );
-  },
-  updateEmail: function( email:string ):void {
-    console.log( 'updateEmail ', email );
-    this.setState( { email: email } );
+    */
   }
 } );

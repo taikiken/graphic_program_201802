@@ -17,9 +17,12 @@ import {ActivityDae} from './ActivityDae';
 
 export class ActivitiesDae {
   constructor( response:Object = {} ) {
+
     response = Safety.object( response );
+
     let activities = response.activities;
     activities = Safety.array( activities );
+
     let list = [];
     activities.forEach( function( activity ) {
 

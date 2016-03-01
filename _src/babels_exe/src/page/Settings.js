@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/20 - 15:49
+ * @date 2016/03/01 - 22:25
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -9,7 +9,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
 
 import {Dom} from '../dom/Dom';
 
@@ -18,30 +17,34 @@ let _symbol = Symbol();
 // UT
 let UT = self.UT;
 
-/**
- * <h3>signup wizard</h3>
- * 全て static です
- */
-export class Signup {
+export class Settings {
   /**
-   * signup wizard (3 step) singleton class です
+   * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Signup is static Class. not use new Signup().` );
+      throw new Error( `Settings is static Class. not use new Settings().` );
 
     }
   }
-  /**
-   * rendering 開始
-   */
-  static start():void {
-    let signupElement = Dom.signup();
-    if ( signupElement !== null ) {
-      let signup = new UT.view.signup.SignupWizard( signupElement );
-      signup.start();
+
+  static account():void {
+    let settings = Dom.settings();
+    console.log( 'account ', settings );
+    if ( settings !== null ) {
+      let setting = new UT.view.settings.ViewSettingsIndex( settings );
+      setting.start();
     }
+  }
+  static interest():void {
+
+  }
+  static social():void {
+
+  }
+  static deactivate():void {
+
   }
 }

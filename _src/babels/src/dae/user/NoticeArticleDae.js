@@ -28,6 +28,7 @@ export class NoticeArticleDae {
 
     this._article = article;
     this._comment = new PopularDae( article.comment );
+    this._comments = new PopularDae( article.comments );
     this._reply = new PopularDae( article.reply );
 
   }
@@ -55,6 +56,12 @@ export class NoticeArticleDae {
    */
   get comment():PopularDae {
     return this._comment;
+  }
+  /**
+   * @return {PopularDae|*} article.comment を返します
+   */
+  get comments():PopularDae {
+    return this._comments;
   }
   /**
    * @return {PopularDae|*} article.reply を返します

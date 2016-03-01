@@ -231,5 +231,15 @@ export class Dom {
   static nav():Element {
     return Dom.get( 'global-nav-container' );
   }
+
+  // --------------------------------------
+  // settings
+  /**
+   * 設定 form container
+   * @return {Element} setting-form-container
+   */
+  static settings():Element {
+    return Dom.get( 'setting-form-container' );
+  }
 }
 // return Dom.get( '' );

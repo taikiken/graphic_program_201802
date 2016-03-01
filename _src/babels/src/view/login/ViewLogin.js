@@ -215,7 +215,7 @@ export class ViewLogin extends View {
         let errorDae = new ErrorDae( error.result );
         if ( errorDae.errors.hasErrors() ) {
           // errors あり
-          let errors =  errorDae.errors;
+          let errors = errorDae.errors;
           let list = errors.list;
 
           for ( var key of list ) {

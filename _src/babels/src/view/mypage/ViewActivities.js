@@ -25,6 +25,7 @@ import {Safety} from '../../data/Safety';
 
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
+import {ActivitiesDae} from '../../dae/user/ActivitiesDae';
 
 // React
 let React = self.React;
@@ -105,7 +106,8 @@ export class ViewActivities extends View {
     } else {
 
       this._request = result.request;
-      this.render( activities );
+      let dae = new ActivitiesDae( result.response );
+      this.render( dae.activities );
 
     }
 
@@ -263,11 +265,20 @@ export class ViewActivities extends View {
       render: function() {
 
         let dae = this.props.dae;
-        let data = dae.article;
-        let article = data.article;
-        let action = data.action;
+        // let data = dae.article;
+        let article = dae.article;
+        let action = dae.action;
 
         console.log( 'article comment', action, article );
+
+        let who = ( commentUser, me ) => {
+          if ( me.id === commentUser.id ) {
+            return <strong>自分</strong>;
+          } else {
+            console.log( 'commentUser ', commentUser.userName );
+            return <span><strong>{commentUser.userName}</strong>さん</span>;
+          }
+        };
 
         switch ( action ) {
 
@@ -282,7 +293,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                の<strong>{article.comments.user.name}</strong>さんのコメントに<a href={article.reply.url}><strong>コメント</strong></a>しました。
+                の{who(article.comments.user, dae.user)}の<a href={article.comments.url}><strong>コメント</strong></a>に<a href={article.reply.url}><strong>返信</strong></a>しました。
               </div>
             );
 
@@ -290,7 +301,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                の<strong>{article.comments.user.name}</strong>さんの<a href={article.comments.url}>コメント</a>に<strong>GOOD</strong>しました。
+                の{who(article.comments.user, dae.user)}の<a href={article.comments.url}>コメント</a>に<strong>GOOD</strong>しました。
               </div>
             );
 
@@ -298,7 +309,7 @@ export class ViewActivities extends View {
             return (
               <div>
                 「<a href={article.url}>{article.title}</a>」
-                の<strong>{article.comments.user.name}</strong>さんの<a href={article.comments.url}>コメント</a>に<strong>BAD</strong>しました。
+                の{who(article.comments.user, dae.user)}の<a href={article.comments.url}>コメント</a>に<strong>BAD</strong>しました。
               </div>
             );
 
@@ -387,10 +398,13 @@ export class ViewActivities extends View {
       // 正しくは ActivitiesDae だけど
       // これでも動いている
       // このままにしておく
-      let dae = new ArticleDae( article );
+      // let dae = new ArticleDae( article );
+      // let dae = new ActivitiesDae( article );
 
-      dae.index = prevLast + i;
-      articlesList.push( dae );
+      // dae.index = prevLast + i;
+      article.index = prevLast + i;
+      // articlesList.push( dae );
+      articlesList.push( article );
 
     } );
 

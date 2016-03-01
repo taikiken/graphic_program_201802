@@ -349,7 +349,7 @@ let buildPath = () => {
     // アカウント情報を更新
     // /api/v1/users/self/settings/account
     'users:settings:account:edit': new Types(
-      new Type( `${API_PATH}/users/self/settings/account`, 'PUT' ),
+      new Type( `${API_PATH}/users/self/settings/account`, 'POST' ),
       new Permalink(),
       new Queries(),
       true
@@ -368,7 +368,7 @@ let buildPath = () => {
     // 興味のある競技を取得
     // /api/v1/users/self/settings/interest
     'users:settings:interest:edit': new Types(
-      new Type( `${API_PATH}/users/self/settings/interest`, 'PUT' ),
+      new Type( `${API_PATH}/users/self/settings/interest`, 'POST' ),
       new Permalink(),
       new Queries(),
       true

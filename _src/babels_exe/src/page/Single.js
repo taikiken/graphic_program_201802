@@ -154,7 +154,7 @@ export class Single {
     }
 
     // self
-    let selfElement =  Dom.commentSelf();
+    let selfElement = Dom.commentSelf();
     if ( selfElement !== null ) {
       let commentSelf = new ViewComments( articleId, selfElement, UT.app.const.CommentsType.SELF );
       if ( _userDae !== null ) {
