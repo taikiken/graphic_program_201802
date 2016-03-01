@@ -1,4 +1,4 @@
-@import "../../../../scss/asset";
+@import "../../../../scss_sp/asset";
 
 // sprite 不要の時はコメントに
 /*
@@ -30,6 +30,18 @@
 html, body {
   width: 100%;
   height: 100%;
+}
+
+.whole {
+  overflow-x: hidden;
+
+  img {
+    @include fluid-img(100%);
+  }
+
+  input {
+    font-size: 16px;
+  }
 }
 
 a {

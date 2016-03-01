@@ -1,11 +1,11 @@
 @charset "UTF-8";
 // import mixin / function
-@import "../../../../scss/asset";
+@import "../../../../scss_sp/asset";
 
 // normalize / reset / 基本 class, tag 設定
 @import "../../../../bower_exports/modularized/normalize";
-@import "../../../../scss/style/reset";
-@import "../../../../scss/dependencies/style";
+@import "../../../../scss_sp/style/reset";
+@import "../../../../scss_sp/dependencies/style";
 
 // --------------------------------------------
 // 以下、import ファイルを編集

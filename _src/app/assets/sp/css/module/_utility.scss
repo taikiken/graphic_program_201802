@@ -1,4 +1,4 @@
-@import "../../../../../scss/asset";
+@import "../../../../../scss_sp/asset";
 @import "../sprite";
 
 // Utility
@@ -31,8 +31,5 @@
     right: 13px;
     @extend .sprite-common;
     @include sprite( $common-icon-user-menu );
-    // width: 9px;
-    // height: 5px;
-    // background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat;
   }
 }
