@@ -101,6 +101,9 @@ sp =
     css: app + '/assets/sp/css'
     img: app + '/assets/sp/images/sprite'
     path: '/assets/sp/images/sprite'
+  js: app + '/assets/sp/js'
+  css: app + '/assets/sp/css'
+  images: app + '/assets/sp/images'
 
 
 # ------------------------------------------------------

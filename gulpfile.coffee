@@ -145,10 +145,25 @@ gulp.task 'serve:app', ->
   # watch
   gulp.watch [ sprite + '/**/*.{png,jpg,gif,svg}' ], [ 'sprite:build' ]
   gulp.watch [ app + '/**/*.html', '!' + app + '/**/*tmp*.html', '!' + app + '/**/*test*.html' ], reload
-  gulp.watch [ app + '/**/*.{scss,css}', scss + '/**/*.scss' ], [ 'css:dev', reload ]
-  gulp.watch [ app + '/**/*.js', '!' + app + '/**/_babel/*.js', '!' + app + '/**/*.bundle.js', '!' + app + '/**/*.babel.js' ], [ 'js:hint', reload ]
+  gulp.watch [
+    app + '/**/*.{scss,css}'
+    scss + '/**/*.scss'
+    '!' + dir.sp.css + '/**/*.{scss,css}'
+  ], [ 'css:dev', reload ]
+  gulp.watch [
+    app + '/**/*.js'
+    '!' + app + '/**/_babel/*.js'
+    '!' + app + '/**/*.bundle.js'
+    '!' + app + '/**/*.babel.js'
+  ], [ 'js:hint', reload ]
   gulp.watch [ app + '/**/*.{png,jpg,gif,svg}' ], reload
   gulp.watch [ dir.libs + '/**/*' ], reload
+
+  # sp watch
+  gulp.watch [
+    dir.sp.css + '/**/*.{scss,css}'
+    dir.sp.scss + '/**/*.{scss,css}'
+  ], [ 'sp:css:dev', reload ]
 
   # babel: eslint -> babel -> webpack が負荷が高い様子
   # 一時的に watch task から外します

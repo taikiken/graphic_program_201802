@@ -82,10 +82,10 @@ gulp.task 'sp:sprite:build', ->
         sprity.src
           src: [ sp.sprite.root + '/**/*.*', '!' + sp.sprite.root + '/css/**/*.*' ]
           style: '_sprite.scss'
-          name:'sprite'
+          name:'sp-sprite'
           cssPath: sp.sprite.path
           processor: 'sprity-sass'
-          prefix: 'sprite'
+          prefix: 'sp-sprite'
 #          orientation: 'binary-tree'
           orientation: setting.sprite.option
           margin: 0

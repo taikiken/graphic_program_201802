@@ -54,12 +54,8 @@ htdocs = dir.htdocs
 # --------------------------------------------
 
 files = [
-  # library
-  scss + '/**/*.scss'
-  # project root
-  app + '/**/*.{css,scss}'
-  # sp 除外
-  '!' + dir.sp.css + '/**/*.{css,scss}'
+  dir.sp.sprite.root + '/**/*.scss'
+  app + '/**/sp/**/*.{css,scss}'
   # その他 min 済ファイル除外
   '!' + app + '/**/ui.css'
   '!' + app + '/**/*.min.{css,scss}'
@@ -71,11 +67,11 @@ files = [
 
 # dev
 # sourcemap, dest: tmp
-gulp.task 'css:dev', ->
+gulp.task 'sp:css:dev', ->
   return gulp.src files
   .pipe $.plumber()
   .pipe $.sourcemaps.init()
-  .pipe $.changed app + '/**', extension: '.css'
+  .pipe $.changed dir.sp.css + '/**', extension: '.css'
   .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
 #  .pipe $.if '*.css' && compress.css, $.cssnano
@@ -84,10 +80,10 @@ gulp.task 'css:dev', ->
   .pipe $.sourcemaps.write ''
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
-  .pipe $.size title: '*** css:dev ***'
+  .pipe $.size title: '*** sp:css:dev ***'
 
 # build
-gulp.task 'css:build', ->
+gulp.task 'sp:css:build', ->
   return gulp.src files
   .pipe $.plumber()
 #  .pipe $.changed app + '/**', extension: '.css'
@@ -97,4 +93,4 @@ gulp.task 'css:build', ->
   .pipe $.if '*.css' && compress.css, $.cssnano()
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
-  .pipe $.size title: '*** css:build ***'
+  .pipe $.size title: '*** sp:css:build ***'
