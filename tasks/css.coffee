@@ -73,7 +73,7 @@ files = [
 # sourcemap, dest: tmp
 gulp.task 'css:dev', ->
   return gulp.src files
-  .pipe $.sourcemaps.init()
+  .pipe $.sourcemaps.init debug:true
   .pipe $.changed app + '/**', extension: '.css'
   .pipe $.sass(
     precision: 10
