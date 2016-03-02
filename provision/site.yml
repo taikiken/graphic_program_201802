@@ -36,3 +36,15 @@ group: vagrant
 # Linked Clone for Vagrant v1.8
 #
 linked_clone: false
+
+
+#
+# ssh settings for $ vagrant push - default
+# ==============================
+#
+# profile.ymlで設定する値のデフォルト値
+# 詳細は _profile.yml参照
+#
+ssh_user : username
+ssh_host : undotsushin.com
+

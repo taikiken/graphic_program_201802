@@ -1,0 +1,38 @@
+# encoding: utf-8
+# vim: ft=ruby expandtab shiftwidth=2 tabstop=2
+#
+#
+# このファイルを複製し `profile.yml` として下記設定してください
+#
+
+
+# ssh settings for $ vagrant push
+# ==============================
+#
+# $ vagrant push でサーバにファイルをアップするための設定
+#
+# ```~/.ssh/config 設定例
+# Host undotsushin.com
+#   Hostname 52.69.203.137
+#   User [配布されているusername]
+#   IdentitiesOnly yes
+#   IdentityFile ~/.ssh/[配布されている鍵].pem
+#   Port 22
+# ```
+#
+#
+# 配布されているsshのUserを記載してください
+ssh_user : username
+#
+# ~/.ssh/config に設定しているHostを変更されている場合は
+# コメントを解除して設定してください
+# ssh_host : undotsushin.com
+
+
+#
+# Virtual Machine Settings
+# ==============================
+# マシン環境に余裕ある方は以下でメモリとCPUコア数の変更ができます
+# 増やすとVMの動作速くなるかと
+memory: 1024
+cpus: 1

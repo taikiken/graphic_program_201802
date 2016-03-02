@@ -17,6 +17,19 @@ Vagrant.configure(2) do |config|
     ).read
   )
 
+  # profile
+  # ------------------------------
+  if File.exists?(File.join(File.dirname(__FILE__), 'provision/profile.yml'))
+    _site = YAML.load(
+      File.open(
+        File.join(File.dirname(__FILE__), 'provision/profile.yml'),
+        File::RDONLY
+      ).read
+    )
+    _conf.merge!(_site) if _site.is_a?(Hash)
+  end
+
+
   # load cookbook
   # ------------------------------
   if File.exists?(_conf['chef_cookbook_path'])
@@ -152,5 +165,24 @@ Vagrant.configure(2) do |config|
   if File.exists?(File.join(File.dirname(__FILE__), 'provision/provision-post.sh')) then
     config.vm.provision :shell, :path => File.join( File.dirname(__FILE__), 'provision/provision-post.sh' )
   end
+
+
+
+  # push
+  # ------------------------------
+  config.push.define "dev", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/public/
+    SCRIPT
+  end
+
+  config.push.define "stg", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
+    SCRIPT
+  end
+
 
 end

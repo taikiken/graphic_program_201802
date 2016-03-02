@@ -29,6 +29,9 @@ _docs
 # vagrant
 .vagrant
 
+## vagrantの個人用設定ファイル
+/provision/profile.yml
+
 # slim
 /app/logs/*.log
 

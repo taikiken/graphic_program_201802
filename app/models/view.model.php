@@ -33,6 +33,9 @@ class ViewModel {
 
     // env
     'ua'                 => '',
+    'hostname'           => 'www.undotsushin.com',
+    'apiRoot'            => 'http://www.undotsushin.com',
+    'ENV'                => 'PRODUCTION',
 
     // slim param
     'request'            => '',
@@ -44,9 +47,10 @@ class ViewModel {
 
   function __construct() {
 
-    $this->default['site_url']        = $this->get_site_url();
-    $this->default['site_categories'] = $this->get_site_categories();
-    $this->default['ua']              = $this->get_ua();
+    $this->default['site_url']        = $this->set_site_url();
+    $this->default['site_categories'] = $this->set_site_categories();
+    $this->default['ua']              = $this->set_ua();
+    $this->set_ENV();
 
   }
 
@@ -73,7 +77,7 @@ class ViewModel {
   *
   * @return string  http|https://[host]:[port]
   */
-  public function get_site_url() {
+  public function set_site_url() {
 
     $protocol = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
     $host = $_SERVER['HTTP_HOST'];
@@ -89,7 +93,7 @@ class ViewModel {
   *
   * @return array  カテゴリー一覧の配列
   */
-  public function get_site_categories() {
+  public function set_site_categories() {
 
     // TODO - これDBからひっぱる必要あり〼 ref. #117
     // カテゴリーを取得する
@@ -150,7 +154,7 @@ class ViewModel {
   *
   * @return string  mobile | desktop
   */
-  public function get_ua() {
+  public function set_ua() {
 
     $ua = new UserAgent();
 
@@ -164,6 +168,56 @@ class ViewModel {
     endif;
   }
 
+
+  // TODO : ENVはグローバルに定義すべき - ひとまずView側のModelに書きます
+  /**
+  * env - hostname
+  *
+  * @return string  hostname
+  */
+  public function set_ENV() {
+
+    $hostname = gethostname();
+    $ENV     = null;
+    $apiRoot = null;
+
+    if ( $hostname ) :
+      $this->default['hostname'] = $hostname;
+
+      switch( $hostname ) :
+        case '192.168.33.50' :
+          $ENV     = 'LOCAL';
+          #$apiRoot = '';
+          break;
+
+        case 'undotsushin.local' :
+          $ENV = 'LOCAL';
+          #$apiRoot = '';
+          break;
+
+        case 'dev.undotsushin.com' :
+          $ENV = 'DEVELOP';
+          #$apiRoot = '';
+          break;
+
+        case 'stg.undotsushin.com' :
+          $ENV = 'STAGING';
+          #$apiRoot = '';
+          break;
+
+      endswitch;
+
+      if ( $ENV ) :
+        $this->default['ENV'] = $ENV;
+      endif;
+
+      if ( $apiRoot ) :
+        $this->default['apiRoot'] = $apiRoot;
+      endif;
+
+    endif;
+
+  }
 
 
   /**
