@@ -85,13 +85,10 @@ gulp.task 'css:dev', ->
 #  .pipe $.sourcemaps.write './'
   # inline map にする
   .pipe $.sourcemaps.write './', {
-    addComment: true
-    loadMaps: true
-    includeContent: false
+#    addComment: true
+#    loadMaps: true
+#    includeContent: false
     sourceRoot: ['../../../app', '../../../scss']
-#    sourceMappingURL: ( file ) ->
-#      console.log 'file', file.relative, file
-#      return file.relative + '.map'
   }
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
