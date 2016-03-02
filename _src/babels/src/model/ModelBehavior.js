@@ -13,7 +13,15 @@
 
 import {Model} from './Model';
 
+/**
+ * View がない Api request + formData
+ */
 export class ModelBehavior extends Model {
+  /**
+   *  View がない Api request + formData
+   * @param {FormData} formData POST form data
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( formData:FormData = null, option:Object = {} ) {
     super( option );
     this._data = formData;

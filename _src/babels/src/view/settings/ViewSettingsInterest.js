@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/03/01 - 19:08
+ * @date 2016/03/02 - 17:39
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -15,30 +15,21 @@ import {View} from '../View';
 
 // model
 import {Model} from '../../model/Model';
-import {ModelAccount} from '../../model/settings/ModelAccount';
+import {ModelInterest} from '../../model/settings/ModelInterest';
 
 // dae
-import {UserDae} from '../../dae/UserDae';
-
-// node
-import {SettingsIndexNode} from '../../node/settings/SettingsIndexNode';
+import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
 
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';
 
+// node
+import {SettingsInterestNode} from '../../node/settings/SettingsInterestNode';
+
 // React
-// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
-/**
- * 設定 アカウント
- */
-export class ViewSettingsIndex extends View {
-  /**
-   * 設定 アカウント
-   * @param {Element} element root element, Ajax result を配置する
-   * @param {Object} [option={}] optional event handler
-   */
+export class ViewSettingsInterest extends View {
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
 
@@ -49,10 +40,10 @@ export class ViewSettingsIndex extends View {
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     callbacks[ Model.RESPONSE_ERROR ] = boundError;
-    this._action = new ModelAccount( callbacks );
+    this._action = new ModelInterest( callbacks );
 
     let status = SettingsStatus.factory();
-    status.on( SettingsStatus.ACCOUNT_COMPLETE, this.reload.bind( this ) );
+    status.on( SettingsStatus.INTEREST_COMPLETE, this.reload.bind( this ) );
   }
   /**
    * Ajax request を開始します
@@ -64,7 +55,7 @@ export class ViewSettingsIndex extends View {
    * Ajax response success
    * @param {CategoriesDae} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
-  complete( result:UserDae ):void {
+  complete( result:CategoriesDae ):void {
     this.render( result );
   }
   /**
@@ -74,21 +65,15 @@ export class ViewSettingsIndex extends View {
   error( error ):void {
     console.log( 'Signup complete', error );
   }
-
   /**
    * form 出力
-   * @param {UserDae} dae アカウント情報
+   * @param {CategoriesDae} dae 興味のあるカテゴリー
    */
-  render( dae:UserDae ):void {
-
-    console.log( 'ViewSettingsIndex render ', dae, this.element );
+  render( dae:CategoriesDae ):void {
 
     ReactDOM.render(
-      <SettingsIndexNode
-        email={dae.email}
-        name={dae.userName}
-        bio={dae.bio}
-        picture={dae.profilePicture}
+      <SettingsInterestNode
+        dae={dae}
       />,
       this.element
     );

@@ -23,8 +23,12 @@
           </div><!-- /.setting-heading -->
 
           <div id="setting-form-container"></div>
-
-          <p class="setting-form-btn-withdraw"><a href="/settings/deactivate/">退会する</a></p>
+          <div class="linkage-sns">
+            <ul class="linkage-sns-list">
+              <li class="linkage-sns-item"><a class="linkage-sns-link linkage-sns-tw enable" href="hoge"><span>twitterとの連携を解除</span></a><span class="linkage-sns-account">@yamada1938で連携中</span></li>
+              <li class="linkage-sns-item"><a class="linkage-sns-link linkage-sns-fb" href="hoge"><span>facebookでログイン</span></a></li>
+            </ul>
+          </div><!-- /.linkage-sns -->
 
         </div><!-- /.setting-main -->
 
