@@ -6,13 +6,19 @@
 //
 // Styleguide 2.6.0
 
+// body-sec-inner override
+.body-sec-inner {
+  &.setting-bg {
+    background-image: url(/assets/images/setting/bg-bodysec.png);
+  }
+}
+
 // setting-sec
 .setting {
   @at-root {
     &-sec {
       @include clearfix;
       min-height: 430px;
-      background: url(/assets/images/setting/bgline.png) 0 0 repeat-y;
     }
 
     &-side {
@@ -265,6 +271,12 @@
             color: #fff;
             background-image: url(/assets/images/setting/icon-check_o.png);
           }
+        }
+      }
+
+      .interest-item-extremesports {
+        label {
+          font-size: fz(12);
         }
       }
     }
