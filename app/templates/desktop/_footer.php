@@ -11,6 +11,7 @@ if (
   $template_name == 'settings' ||
   $template_name == 'settings.social' ||
   $template_name == 'settings.account' ||
+  $template_name == 'settings.deactivate' ||
   $template_name == 'mypage' ||
   $template_name == 'mypage.activities' ||
   $template_name == 'notifications'
