@@ -86,10 +86,15 @@ gulp.task 'sp:sprite:build', ->
           cssPath: sp.sprite.path
           processor: 'sprity-sass'
           prefix: 'sp-sprite'
-#          orientation: 'binary-tree'
-          orientation: setting.sprite.option
-          margin: 0
+          # sprity の margin bug 捨て画像のため horizontal 変更
+          orientation: 'horizontal'
+#          orientation: setting.sprite.option
+          #margin: +5
           split: true
+          'dimension': [
+            {ratio: 1, dpi: 72}
+            {ratio: 2, dpi: 192}
+          ]
         .pipe $.if( '*.png', gulp.dest( sp.sprite.img ), gulp.dest( sp.sprite.css ) )
         .pipe $.size title: '*** sp:sprite:build ***'
       else
