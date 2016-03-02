@@ -41,7 +41,7 @@ export class ViewActivities extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
-    super( element, moreElement, null, option, true );
+    super( element, option );
     this._action = new Activities( this.done.bind( this ), this.fail.bind( this ) );
     this._moreElement = moreElement;
 
@@ -400,12 +400,6 @@ export class ViewActivities extends View {
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
     articles.forEach( function( article, i ) {
-
-      // 正しくは ActivitiesDae だけど
-      // これでも動いている
-      // このままにしておく
-      // let dae = new ArticleDae( article );
-      // let dae = new ActivitiesDae( article );
 
       // dae.index = prevLast + i;
       article.index = prevLast + i;

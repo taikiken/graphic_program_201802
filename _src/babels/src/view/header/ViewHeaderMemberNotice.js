@@ -92,7 +92,7 @@ export class ViewHeaderMemberNotice extends View {
 
     let notificationsDae = new NotificationsDae( responseObj );
     let _this = this;
-    console.log( '*** notificationsDae ***', notificationsDae );
+
     // --------------------------------------------------
     // user notice dropMenu action message
     let NoticeMessageDom = React.createClass( {
@@ -115,8 +115,7 @@ export class ViewHeaderMemberNotice extends View {
         return (
 
           <p className="info-content">
-            {`${user.userName}さんがあなたの「${article.title}」へのコメントに`}
-            <strong>{message}</strong>しました。
+            {`${user.userName}さんがあなたの「${article.title}」へのコメントに`}<strong>{message}</strong>しました。
           </p>
 
         );
@@ -152,17 +151,51 @@ export class ViewHeaderMemberNotice extends View {
 
         let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
 
-        return (
-          <li className={'info-item info-item-' + notice.id}>
-            <a href='#' className={'info-link info-link-' + notice.id} onClick={this.readedClick}>
-              <figure className={'info-user-thumb ' + loggedIn}>
-                <img src={icon} alt=""/>
-              </figure>
-              <NoticeMessageDom notice={notice} />
-              <p className="info-date">{notice.displayDate}</p>
-            </a>
-          </li>
-        );
+        switch ( notice.action ) {
+          case 'comment':
+          case 'reply':
+            return (
+              <li className={'info-item info-item-' + notice.id}>
+                <a href={notice.article.reply.url} className={'info-link info-link-' + notice.id} onClick={this.readedClick}>
+                  <figure className={'info-user-thumb ' + loggedIn}>
+                    <img src={icon} alt=""/>
+                  </figure>
+                  <NoticeMessageDom notice={notice} />
+                  <p className="info-date">{notice.displayDate}</p>
+                </a>
+              </li>
+            );
+
+          case 'bad':
+          case 'good':
+            return (
+              <li className={'info-item info-item-' + notice.id}>
+                <a href={notice.article.comments.url} className={'info-link info-link-' + notice.id} onClick={this.readedClick}>
+                  <figure className={'info-user-thumb ' + loggedIn}>
+                    <img src={icon} alt=""/>
+                  </figure>
+                  <NoticeMessageDom notice={notice} />
+                  <p className="info-date">{notice.displayDate}</p>
+                </a>
+              </li>
+            );
+
+          case 'notice':
+            return (
+              <a href={notice.url} className="info-link">
+                <div className="activity-content">
+                  {notice.body}
+                </div>
+                <p className="act-date">{notice.displayDate}</p>
+              </a>
+            );
+
+          default:
+            console.warn(`illegal action.${notice.action}`);
+            return null;
+
+        }
+
 
       },
       readedClick: function( event ) {

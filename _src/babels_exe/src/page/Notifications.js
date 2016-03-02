@@ -15,7 +15,17 @@ import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
+// UT
+let UT = self.UT;
+
+/**
+ * お知らせ
+ */
 export class Notifications {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -23,7 +33,17 @@ export class Notifications {
 
     }
   }
+  /**
+   * rendering 開始
+   */
   static start():void {
-
+    let element = Dom.board();
+    let elementMore = Dom.boardMore();
+    console.log( 'Notifications rendering ' );
+    if ( element !== null && elementMore !== null ) {
+      // list
+      let archive = new UT.view.mypage.ViewNotifications( element, elementMore );
+      archive.start();
+    }
   }
 }
