@@ -1,5 +1,8 @@
 <?php
 
+include_once "local.php";
+include_once "public/ut.php";
+
 /**
 *
 * ViewのルーティングにSlim導入

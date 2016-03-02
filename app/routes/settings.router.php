@@ -54,7 +54,7 @@ $app->group('/settings', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '基本情報設定 | 設定',
-      'template' => 'settings.'.$args['slug'].'.php',
+      'template' => 'settings.'.$args['slug'],
       'path'     => $args,
     ));
 

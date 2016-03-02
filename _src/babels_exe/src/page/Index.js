@@ -54,7 +54,7 @@ export class Index {
 
     // ---------------------------------------------------------
     // headline
-    let headlineElement =  Dom.headline();
+    let headlineElement = Dom.headline();
     if ( headlineElement !== null ) {
       let headline = new UT.view.home.ViewHeadline( headlineElement );
       headline.start();

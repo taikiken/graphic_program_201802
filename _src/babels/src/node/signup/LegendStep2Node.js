@@ -31,6 +31,7 @@ import {ErrorMessage} from '../../data/ErrorMessage';
 
 // node
 import {ErrorNode} from '../error/ErrorNode';
+import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 
 // model
 import {Model} from '../../model/Model';
@@ -39,30 +40,6 @@ import {ModelSignup} from '../../model/signup/ModelSignup';
 let React = self.React;
 let Sagen = self.Sagen;
 
-// ------------------------------------------
-// user picture thumbnail 作成
-// ------------------------------------------
-let ChangeAvatarNode = React.createClass( {
-  propTypes: {
-    show: React.PropTypes.bool.isRequired,
-    handler: React.PropTypes.func.isRequired
-  },
-  render: function() {
-    if ( this.props.show ) {
-      return (
-        <span className="should-change-avatar">
-        <a href="#" onClick={this.clickHandler}>写真を変更する</a>
-      </span>
-      );
-    } else {
-      return null;
-    }
-  },
-  clickHandler: function( event:Event ) {
-    event.preventDefault();
-    this.props.handler();
-  }
-} );
 
 // ------------------------------------------
 // step 2 入力フォーム
@@ -93,7 +70,11 @@ let Step2FormNode = React.createClass( {
       step: this.props.step,
       avatar: this.props.avatar,
       entered: false,
-      error: false
+      error: false,
+      password: '',
+      name: '',
+      bio: '',
+      picture: ''
     };
   },
   render: function() {

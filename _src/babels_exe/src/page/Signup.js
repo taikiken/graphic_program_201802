@@ -34,7 +34,9 @@ export class Signup {
 
     }
   }
-
+  /**
+   * rendering 開始
+   */
   static start():void {
     let signupElement = Dom.signup();
     if ( signupElement !== null ) {

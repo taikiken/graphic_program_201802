@@ -23,11 +23,12 @@
 // -------------------------------------
 // util
 import {Loc} from './util/Loc';
-import {Format} from './util/Format';
 import {Router} from './app/Router';
+import {Format} from './util/Format';
 
 // -------------------------------------
 // app
+import {App} from './app/App';
 import {Env} from './app/Env';
 import {Codes} from './app/Codes';
 import {User} from './app/User';
@@ -53,10 +54,6 @@ import {Query} from './net/types/Query';
 import {Queries} from './net/types/Queries';
 import {Type} from './net/types/Type';
 import {CommentType} from './net/types/CommentType';
-
-// -------------------------------------
-// app/App
-import {App} from './app/App';
 
 // -------------------------------------
 // action
@@ -139,6 +136,10 @@ import {ViewUserProfile} from './view/mypage/ViewUserProfile';
 import {ViewBookmarks} from './view/mypage/ViewBookmarks';
 import {ViewActivities} from './view/mypage/ViewActivities';
 import {ViewNotifications} from './view/mypage/ViewNotifications';
+
+// settings
+import {ViewSettingsIndex} from './view/settings/ViewSettingsIndex';
+import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
 
 // -------------------------------------
 // ui
@@ -265,6 +266,10 @@ var UT = {
       ViewBookmarks: ViewBookmarks,
       ViewActivities: ViewActivities,
       ViewNotifications: ViewNotifications
+    },
+    settings: {
+      ViewSettingsIndex: ViewSettingsIndex,
+      ViewSettingsInterest: ViewSettingsInterest
     },
     modal: {
       ViewDeleteModal: ViewDeleteModal

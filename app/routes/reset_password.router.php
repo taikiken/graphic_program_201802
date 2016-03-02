@@ -4,7 +4,7 @@ $app->group('/reset_password', function () use ($app) {
 
   // パスワードリセット - /reset_password/
   // ==============================
-  $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
+  $this->map(['GET','POST'], '[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'パスワードをリセットする',

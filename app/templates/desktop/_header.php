@@ -35,7 +35,11 @@ if (
   $template_name == 'category' ||
   $template_name == 'p' ||
   $template_name == 'search' ||
-  $template_name == 'setting' ||
+  $template_name == 'settings' ||
+  $template_name == 'settings.social' ||
+  $template_name == 'settings.account' ||
+  $template_name == 'settings.interest' ||
+  $template_name == 'settings.deactivate' ||
   $template_name == 'mypage' ||
   $template_name == 'mypage.activities' ||
   $template_name == 'notifications'

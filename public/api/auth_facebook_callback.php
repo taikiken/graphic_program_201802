@@ -19,13 +19,14 @@ foreach($userinfo["picture"] as $k=>$v){
 	if($k=="url")$picture=$v;
 }
 
-var_dump(array(
+$y=array(
 	"token"=>$accessToken->getValue(),
 	"id"=>$userinfo["id"],
 	"name"=>$userinfo["name"],
 	"email"=>$userinfo["email"],
 	"profile"=>$userinfo["description"],
 	"icon"=>$picture
-));
+);
 
 ?>
+<pre><?php print_r(json_encode($y,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)); ?></pre>

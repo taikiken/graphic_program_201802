@@ -78,6 +78,12 @@ export class UserDae {
   get bio():string {
     return this.user.bio;
   }
+  /**
+   * @return {string} email 情報を返します
+   */
+  get email():string {
+    return this.user.email;
+  }
   // --------------------------------------------------------------------
   // 以下リクエストによっては undefined になります
   // 登録系, ログイン系 などのリクエストの時に情報を持ちます

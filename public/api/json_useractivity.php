@@ -32,7 +32,7 @@ for($i=0;$i<count($p);$i++){
 	$s[$i]["id"]=(int)$p[$i]["id"];
 	$s[$i]["date"]=str_replace(" ","T",$p[$i]["isotime"]);
 	$s[$i]["display_date"]=get_relativetime($p[$i]["relativetime"],$p[$i]["date"],$p[$i]["weekday"]);
-	$s[$i]["action"]=get_action($p[$i]["activity"]);
+	$s[$i]["action"]=get_action($p[$i]["activity"],$p[$i]["activityid"]);
 	
 	$s[$i]["user"]["id"]=(int)$p[$i]["userid"];
 	$s[$i]["user"]["name"]=mod_HTML($p[$i]["name"]);

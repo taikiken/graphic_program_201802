@@ -57,11 +57,11 @@ files = [
   # library
   scss + '/**/*.scss'
   # project root
-  app + '/**/*.{css,scss}'
+  app + '/**/*.scss'
   # sp 除外
   '!' + dir.sp.css + '/**/*.{css,scss}'
   # その他 min 済ファイル除外
-  '!' + app + '/**/ui.css'
+#  '!' + app + '/**/ui.css'
   '!' + app + '/**/*.min.{css,scss}'
   '!' + app + '/**/*min.{css,scss}'
   '!' + app + '/**/*pack.{css,scss}'
@@ -73,15 +73,26 @@ files = [
 # sourcemap, dest: tmp
 gulp.task 'css:dev', ->
   return gulp.src files
-  .pipe $.plumber()
   .pipe $.sourcemaps.init()
   .pipe $.changed app + '/**', extension: '.css'
-  .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
+  .pipe $.sass(
+    precision: 10
+    sourceMap: true
+    sourceComments: true
+  ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
 #  .pipe $.if '*.css' && compress.css, $.cssnano
 #  .pipe $.sourcemaps.write './'
   # inline map にする
-  .pipe $.sourcemaps.write ''
+  .pipe $.sourcemaps.write './', {
+    addComment: true
+    loadMaps: true
+    includeContent: false
+    sourceRoot: ['../../../app', '../../../scss']
+#    sourceMappingURL: ( file ) ->
+#      console.log 'file', file.relative, file
+#      return file.relative + '.map'
+  }
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** css:dev ***'

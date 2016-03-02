@@ -8,7 +8,7 @@ $o->connect();
 $uid=auth();
 
 
-$sql=sprintf("select id as uid,cid as typeid,(select name from repo where id=repo_n.cid) as type,title as name,t2 as profile,img1 as icon from repo_n where id=%s",!$_REQUEST["userid"]?$uid:$_REQUEST["userid"]);
+$sql=sprintf("select id as uid,t1 as email,cid as typeid,(select name from repo where id=repo_n.cid) as type,title as name,t2 as profile,img1 as icon from repo_n where id=%s",!$_REQUEST["userid"]?$uid:$_REQUEST["userid"]);
 
 $o->query($sql);
 
@@ -16,6 +16,7 @@ $f=$o->fetch_array();
 
 $s["id"]=(int)$f["uid"];
 $s["name"]=mod_HTML($f["name"]);
+$s["email"]=mod_HTML($f["email"]);
 $s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
 $s["bio"]=checkstr($f["profile"]);
 $s["url"]=sprintf("%s/mypage/",$domain,$f["uid"]);
