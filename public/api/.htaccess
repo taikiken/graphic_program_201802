@@ -3,9 +3,9 @@
 #Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
 #Header always set Access-Control-Allow-Headers "Authorization, authorization"
 
-Satisfy any
-order allow,deny
-allow from all
+#Satisfy any
+#order allow,deny
+#allow from all
 
 Options FollowSymLinks Includes
 RewriteEngine on
@@ -37,7 +37,7 @@ RewriteRule ^v1/comments/article/([0-9]+) /api/json_commentpost.php?article_id=$
 RewriteRule ^v1/articles/([0-9]+)/bookmark /api/json_bookmark.php?article_id=$1 [L,QSA]
 
 #Article
-RewriteRule ^v1/users/bookmark /api/json_articlelist.php?api=bookmark [L,QSA]
+RewriteRule ^v1/users/self/bookmark /api/json_articlelist.php?api=bookmark [L,QSA]
 RewriteRule ^v1/articles/([0-9]+) /api/json_articledetails.php?id=$1 [L]
 RewriteRule ^v1/articles/search/(.+) /api/json_articlelist.php?api=search&q=$1 [L,QSA]
 RewriteRule ^v1/articles/category/([a-z]+)/([a-z]+) /api/json_articlelist.php?api=category&category=$1&type=$2 [L,QSA]
@@ -69,4 +69,6 @@ RewriteRule ^v1/category /api/json_categorylist.php [L]
 RewriteRule ^v1/initialize /api/json_initialize.php [L]
 
 #LOGIN
+RewriteRule ^v1/sessions/social /api/json_loginsocial.php [L]
+RewriteRule ^v1/sessions/update /api/json_loginsocialupdate.php [L]
 RewriteRule ^v1/sessions/ /api/json_login.php [L]
