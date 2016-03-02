@@ -8,85 +8,112 @@ $o->connect();
 
 $uid=auth();
 
+$s=array();
 $y=array();
 $y["status"]["code"]=200;
 $y["status"]["user_message"]="";
 $y["status"]["developer_message"]="";
 
-
-$sql=sprintf("select id as uid,t1,passwd,a15,cid as typeid,(select name from repo where id=repo_n.cid) as type,title,t2,img1 from repo_n where id=%s",$uid);
-$o->query($sql);
-$f=$o->fetch_array();
-
-$s["id"]=(int)$f["uid"];
-$s["name"]=mod_HTML($f["title"]);
-$s["profile_picture"]=strlen($f["img1"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["img1"]):"";
-$s["bio"]=checkstr($f["t2"]);
-$s["url"]=sprintf("%s/mypage/",$domain,$f["uid"]);
-
-$ex=array(
-	"email"=>"t1",
-	"name"=>"title",
-	"bio"=>"t2",
-	"profile_picture"=>"img1",
-	"password"=>"passwd"
-);
-while(list($k,$v)=each($ex))$r[$k]=$f[$v];
-
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-		
-	while(list($k,$v)=each($_POST)){
-		if(strlen($v)>0&&$r[$k]!=$v){
-			$v=trim($v);
-			$sv[$sn[]=$k]=$v;
-			if($k!="password")$s[$k]=$v;
-		}
-	}
-	if(strlen($sv["password"])>0){
-		$sv[$sn[]="a15"]=md5($sv["email"].$sv["password"]);
-		$sv["password"]=md5($MAGIC_STRING.$sv["password"]);
-		if($sv["password"]==$r["password"]){
-			unset($sv["a15"]);unset($sv["password"]);
-		}
-	}
-	if($_FILES){
-		$ext=checkFileType($_FILES["profile_picture"]);
-		$filename=sprintf("%s.%s",md5("ut".$uid),$ext);
-		if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
-			imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
-			$sv[$sn[]="profile_picture"]=$filename;
-			$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$filename);
-		}else{
-			
-		}
-	}
-	$q=array();	
-	while(list($k,$v)=each($sv)){
-		$v=stripslashes($v);
-		$v=str_replace("―","-",$v);
-		$v=addslashes($v);
-		$v=str_replace("\'","''",$v);
-		$v=str_replace(array("\r\n","\r"),"\n",$v);
-		$q[]=sprintf("%s='%s'",$ex[$k],$v);
-	}
-	if(count($q)>0){
-		$sql=sprintf("update repo_n set %s where id=%s",implode(",",$q),$uid);
-				
-		$o->query($sql);
-		$e=$o->affected_rows2();
-		if(!$e){
-			$y["status"]["code"]=500;
-			$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
-		}
+
+	$email=trim($_POST["email"]);
+	$emailcheck=check_email($email,1);
+	if($emailcheck==""){
+		$sv[$sn[]="t1"]=$email;
 	}else{
-		$y["status"]["code"]=400;
-		$y["status"]["user_message"]="変更箇所はありませんでした。";
+		$ermsg["email"]=$emailcheck;
+	}
+	
+	$passwd=trim($_POST["password"]);
+	if(strlen($passwd)>0){
+		$passwdcheck=check_passwd($passwd);
+		if($passwdcheck==""){
+			$access_token=md5($email.$passwd);
+			$sv[$sn[]="a15"]=$access_token;
+			$sv[$sn[]="passwd"]=md5($MAGIC_STRING.$passwd);	
+		}else{
+			$ermsg["password"]=$passwdcheck;
+		}
+	}
+	
+	$name=trim($_POST["name"]);
+	if(strlen($name)>0){
+		$sv[$sn[]="title"]=$name;
+	}else{
+		$ermsg["name"]="名前は必須項目です。";
 	}
 
+	if(count($ermsg)>0){
+	
+		$y["status"]["code"]=400;
+		$y["status"]["user_message"]="入力内容が間違っています。";
+		$y["status"]["developer_message"]="リクエストデータに不正値がある";
+		
+		while(list($k,$v)=each($ermsg)){
+			$s["errors"][][$k]=$v;
+		}
+	
+	}else{
+				
+		$bio=trim($_POST["bio"]);
+		$sv[$sn[]="t2"]=$bio;
+	
+		if($_FILES){
+			$ext=checkFileType($_FILES["profile_picture"]);
+			$filename=sprintf("%s.%s",md5("ut".$email),$ext);
+			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
+				imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
+				$sv[$sn[]="img1"]=$filename;
+			}else{
+				$ermsg[]="ファイルのアップロードに失敗しました。";
+			}
+		}
+	
+		$q=array();	
+		while(list($k,$v)=each($sv)){
+			$v=stripslashes($v);
+			$v=str_replace("―","-",$v);
+			$v=addslashes($v);
+			$v=str_replace("\'","''",$v);
+			$v=str_replace(array("\r\n","\r"),"\n",$v);
+			$q[]=sprintf("%s='%s'",$k,$v);
+		}
+		
+		if(count($q)>0){
+			
+			$sql=sprintf("update repo_n set %s where id=%s",implode(",",$q),$uid);
+			
+			$o->query($sql);
+			$e=$o->affected_rows2();
+			
+			if(!$e){
+				$y["status"]["code"]=500;
+				$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+			}
+
+		}else{
+			$y["status"]["code"]=400;
+			$y["status"]["user_message"]="変更箇所はありませんでした。";
+		}
+	}
 }
 
-$s["type"]["id"]=(int)$f["typeid"];
-$s["type"]["label"]=$f["type"];
+if(count($s)==0){
+
+	$sql=sprintf("select id as uid,t1 as email,cid as typeid,(select name from repo where id=repo_n.cid) as type,title as name,t2 as profile,img1 as icon from repo_n where id=%s",$uid);
+	$o->query($sql);
+	$f=$o->fetch_array();
+	
+	$s["id"]=(int)$f["uid"];
+	$s["name"]=mod_HTML($f["name"]);
+	$s["email"]=mod_HTML($f["email"]);
+	$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+	$s["bio"]=checkstr($f["profile"]);
+	$s["url"]=sprintf("%s/mypage/",$domain,$f["uid"]);
+	
+	$s["type"]["id"]=(int)$f["typeid"];
+	$s["type"]["label"]=$f["type"];
+}
 
 $y["response"]=$s;
 
