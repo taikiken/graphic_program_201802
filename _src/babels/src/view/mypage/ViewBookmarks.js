@@ -44,7 +44,7 @@ export class ViewBookmarks extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
-    super( element, moreElement, null, option, true );
+    super( element, option );
     this._action = new Bookmarks( this.done.bind( this ), this.fail.bind( this ) );
     this._moreElement = moreElement;
 

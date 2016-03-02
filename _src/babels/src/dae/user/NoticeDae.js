@@ -98,4 +98,19 @@ export class NoticeDae {
   get article():NoticeArticleDae {
     return this._article;
   }
+  /**
+   * 運動通信編集部からのお知らせ
+   * @return {string} 運動通信編集部からのお知らせ
+   */
+  get body():string {
+    return this.notice.body;
+  }
+
+  /**
+   * 運動通信編集部からのお知らせ url
+   * @return {string} 運動通信編集部からのお知らせ url
+   */
+  get url():string {
+    return this.notice.url;
+  }
 }
