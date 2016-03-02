@@ -81,14 +81,6 @@ $arg_i: null;
   height: auto;
 }
 
-//// fluid_img
-//// alias fluid-img
-//// deprecated instead use fluid-img
-//// $w=null - width 設定値
-//@mixin fluid_img($w: null) {
-//  @include fluid-img($w);
-//}
-
 // font smoothing
 // CSS3 font-smoothing 設定
 // $value=on - 設定値をどちらにするか
