@@ -86,10 +86,10 @@ gulp.task 'sp:sprite:build', ->
           cssPath: sp.sprite.path
           processor: 'sprity-sass'
           prefix: 'sp-sprite'
-          # sprity の margin bug 捨て画像のため horizontal 変更
-          orientation: 'horizontal'
-#          orientation: setting.sprite.option
-          #margin: +5
+          # sprity の margin bug 捨て画像のため horizontal 変更, 使えなかった
+          #orientation: 'horizontal'
+          orientation: setting.sprite.option
+          margin: 0
           split: true
           'dimension': [
             {ratio: 1, dpi: 72}
