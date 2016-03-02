@@ -75,7 +75,11 @@ gulp.task 'css:dev', ->
   return gulp.src files
   .pipe $.sourcemaps.init()
   .pipe $.changed app + '/**', extension: '.css'
-  .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
+  .pipe $.sass(
+    precision: 10
+    sourceMap: true
+    sourceComments: true
+  ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
 #  .pipe $.if '*.css' && compress.css, $.cssnano
 #  .pipe $.sourcemaps.write './'
