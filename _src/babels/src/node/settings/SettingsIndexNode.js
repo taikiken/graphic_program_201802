@@ -11,13 +11,8 @@
  */
 'use strict';
 
-// event
-// import {SignupStatus} from '../../event/SignupStatus';
-
 // app
-import {Url} from '../../app/const/Url';
 import {Empty} from '../../app/const/Empty';
-
 
 // ui
 import {Thumbnail} from '../../ui/Thumbnail';
@@ -38,10 +33,11 @@ import {SettingsStatus} from '../../event/SettingsStatus';
 import {Model} from '../../model/Model';
 import {ModelAccountEdit} from '../../model/settings/ModelAccountEdit';
 
-
+// react
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+// Sagen
 let Sagen = self.Sagen;
 
 // ------------------------------------------
@@ -83,7 +79,8 @@ let SettingInputNode = React.createClass( {
       email: this.props.email,
       password: this.props.password,
       name: this.props.name,
-      bio: this.props.bio
+      bio: this.props.bio,
+      loading: ''
     };
   },
   render: function() {
@@ -98,11 +95,13 @@ let SettingInputNode = React.createClass( {
     };
 
     let stageClass = () => {
-      return this.props.avatar !== this.state.avatar ? 'show-thumbnail' : '';
+      // return this.props.avatar !== this.state.avatar ? 'show-thumbnail' : '';
+      // input:file を常に有効にする
+      return '';
     };
 
     return (
-      <form ref="settings" encType="multipart/form-data" onSubmit={this.submitHandler}>
+      <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
         <fieldset className="fieldset-step-2">
           {/* email */}
           <span className={'form-parts ' + errorClass('email')}>
@@ -183,14 +182,14 @@ let SettingInputNode = React.createClass( {
               />
             </div>
           </div>
-
-          {/* button */}
-          <div className="form-parts">
+        </fieldset>
+        {/* button */}
+        <div className="form-parts">
           <span className="setting-form-submit mod-btnB01">
             <input type="submit" value="保存する" />
           </span>
-          </div>
-        </fieldset>
+        </div>
+        <div className="loading-spinner"></div>
       </form>
     );
 
@@ -333,6 +332,7 @@ let SettingInputNode = React.createClass( {
   // submit click 通知
   submitHandler: function( event:Event ) {
     event.preventDefault();
+    this.setState( { loading: 'loading' } );
     this.prepareNext();
   },
   prepareNext: function():void {
@@ -369,6 +369,8 @@ let SettingInputNode = React.createClass( {
   },
   done: function( result:Result ) {
     console.log( 'done ', result );
+    this.setState( { loading: '' } );
+
     if ( result.status.code === 200 ) {
       // OK -> next step
       this.next();
@@ -376,6 +378,7 @@ let SettingInputNode = React.createClass( {
   },
   fail: function( error:Object ) {
     console.log( 'fail ', error.errors, error.result );
+    this.setState( { loading: '' } );
 
     let errors = error.result.response.errors;
     if ( Array.isArray( errors ) ) {
@@ -396,6 +399,7 @@ let SettingInputNode = React.createClass( {
     this.setState( { error: true } );
   },
   reset: function() {
+    this.errors.email.reset();
     this.errors.password.reset();
     this.errors.name.reset();
     this.setState( { error: false } );
@@ -407,10 +411,10 @@ let SettingInputNode = React.createClass( {
 
 /**
  * <h3>React component<h3>
- * **SettingInputNode**
+ * **SettingIndexNode**
  * 基本情報設定
  */
-export let SettingIndexNode = React.createClass( {
+export let SettingsIndexNode = React.createClass( {
   propTypes: {
     email: React.PropTypes.string.isRequired,
     password: React.PropTypes.string,
@@ -424,7 +428,7 @@ export let SettingIndexNode = React.createClass( {
     };
   },
   render: function() {
-    console.log( 'SettingIndexNode render', this.props.email );
+    console.log( 'SettingsIndexNode render', this.props.email );
     return (
       <div className="basic-setting setting-form">
         <SettingInputNode

@@ -25,8 +25,6 @@
 
           <div id="setting-form-container"></div>
 
-          <p class="setting-form-btn-withdraw"><a href="/settings/deactivate/">退会する</a></p>
-
         </div><!-- /.setting-main -->
 
     </section><!-- /.main-sec -->

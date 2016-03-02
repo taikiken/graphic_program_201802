@@ -16,9 +16,17 @@ import {ModelBehavior} from '../ModelBehavior';
 import {Result} from '../../data/Result';
 import {SettingsInterestEdit} from '../../action/settings/SettingsInterestEdit';
 
+/**
+ *
+ */
 export class ModelInterestEdit extends ModelBehavior {
+  /**
+   *
+   * @param formData
+   * @param option
+   */
   constructor( formData:FormData, option:Object = {} ) {
-    super( option );
+    super( formData, option );
     this._action = new SettingsInterestEdit( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

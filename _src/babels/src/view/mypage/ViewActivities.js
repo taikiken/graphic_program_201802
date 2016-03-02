@@ -284,41 +284,52 @@ export class ViewActivities extends View {
 
           case 'comment':
             return (
-              <div>
-                「<a href={article.url}>{article.title}</a>」へ<a href={article.comments.url}><strong>コメント</strong></a>しました。
-              </div>
+              <a href={article.comments.url} className="activity-link">
+                <div className="activity-content">
+                「{article.title}」へ<strong>コメント</strong>しました。
+                </div>
+                <p className="act-date">{dae.displayDate}</p>
+              </a>
             );
 
           case 'reply':
             return (
-              <div>
-                「<a href={article.url}>{article.title}</a>」
-                の{who(article.comments.user, dae.user)}の<a href={article.comments.url}><strong>コメント</strong></a>に<a href={article.reply.url}><strong>返信</strong></a>しました。
-              </div>
+              <a href={article.reply.url} className="activity-link">
+                <div className="activity-content">
+                  「{article.title}」の{who(article.comments.user, dae.user)}のコメントに<strong>返信</strong>しました。
+                </div>
+                <p className="act-date">{dae.displayDate}</p>
+              </a>
             );
 
           case 'good':
             return (
-              <div>
-                「<a href={article.url}>{article.title}</a>」
-                の{who(article.comments.user, dae.user)}の<a href={article.comments.url}>コメント</a>に<strong>GOOD</strong>しました。
-              </div>
+              <a href={article.comments.url} className="activity-link">
+                <div className="activity-content">
+                  「{article.title}」の{who(article.comments.user, dae.user)}のコメントに<strong>GOOD</strong>しました。
+                </div>
+                <p className="act-date">{dae.displayDate}</p>
+              </a>
             );
 
           case 'bad':
             return (
-              <div>
-                「<a href={article.url}>{article.title}</a>」
-                の{who(article.comments.user, dae.user)}の<a href={article.comments.url}>コメント</a>に<strong>BAD</strong>しました。
-              </div>
+              <a href={article.comments.url} className="activity-link">
+                <div className="activity-content">
+                「{article.title}」の{who(article.comments.user, dae.user)}のコメントに<strong>BAD</strong>しました。
+                </div>
+                <p className="act-date">{dae.displayDate}</p>
+              </a>
             );
 
           case 'bookmark':
             return (
-              <div>
-                「<a href={article.url}>{article.title}</a>」
-                を<strong>ブックマーク</strong>しました。
-              </div>
+              <a href={article.url} className="activity-link">
+                <div className="activity-content">
+                  「{article.title}」を<strong>ブックマーク</strong>しました。
+                </div>
+                <p className="act-date">{dae.displayDate}</p>
+              </a>
             );
 
           default:
@@ -356,16 +367,11 @@ export class ViewActivities extends View {
             <ul className="activity-list">
               {
                 // loop start
-                this.state.list.map( function( dae, i ) {
+                this.state.list.map( function( dae ) {
 
                   return (
-                    <li key={'activity-' + dae.id} className="board-stacks activity-item">
-                      <span className="post activity-item-line">
-                        <div className="activity-content">
-                          <MessageDom dae={dae} />
-                        </div>
-                        <p className="act-date">{dae.displayDate}</p>
-                      </span>
+                    <li key={'activity-' + dae.id} className={'board-stacks activity-item activity-item-' + dae.id}>
+                      <MessageDom dae={dae} />
                     </li>
                   );
                 } )// map

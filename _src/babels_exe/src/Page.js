@@ -246,7 +246,6 @@ export class Page {
       // not login
       return;
     }
-    console.log( 'settings start ------------ ' );
 
     Sidebar.start();
     Header.start();

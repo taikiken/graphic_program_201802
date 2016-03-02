@@ -50,7 +50,7 @@ export class SettingsStatus extends EventDispatcher {
   static get INTEREST_COMPLETE():string {
     return 'settingsInterestComplete';
   }
-  static get INETEREST_ERROR():string {
+  static get INTEREST_ERROR():string {
     return 'settingsInterestError';
   }
   // ---------------------------------------------------

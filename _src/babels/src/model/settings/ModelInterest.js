@@ -13,7 +13,7 @@
 
 import {Model} from '../Model';
 import {SettingsInterest} from '../../action/settings/SettingsInterest';
-import {UserDae} from '../../dae/UserDae';
+import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
 import {Result} from '../../data/Result';
 
 export class ModelInterest extends Model {
@@ -47,7 +47,7 @@ export class ModelInterest extends Model {
     } else {
 
       // 成功 callback
-      this.executeSafely( Model.COMPLETE, new UserDae( response ) );
+      this.executeSafely( Model.COMPLETE, new CategoriesDae( response ) );
 
     }
 

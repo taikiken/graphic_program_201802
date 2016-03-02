@@ -29,21 +29,37 @@ export class Settings {
 
     }
   }
-
+  /**
+   * 基本情報設定
+   */
   static account():void {
     let settings = Dom.settings();
-    console.log( 'account ', settings );
+
     if ( settings !== null ) {
       let setting = new UT.view.settings.ViewSettingsIndex( settings );
       setting.start();
     }
   }
+  /**
+   * パーソナライズ設定
+   */
   static interest():void {
+    let settings = Dom.settings();
 
+    if ( settings !== null ) {
+      let setting = new UT.view.settings.ViewSettingsInterest( settings );
+      setting.start();
+    }
   }
+  /**
+   * ソーシャル連携
+   */
   static social():void {
 
   }
+  /**
+   * 退会
+   */
   static deactivate():void {
 
   }
