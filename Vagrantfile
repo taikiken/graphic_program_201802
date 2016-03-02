@@ -172,15 +172,15 @@ Vagrant.configure(2) do |config|
   # ------------------------------
   config.push.define "dev", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT
-      rsync -vrt --chmod=Dug=rwx,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/
-      rsync -vrt --chmod=Dug=rwx,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/public/
     SCRIPT
   end
 
   config.push.define "stg", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT
-      rsync -vrt --chmod=Dug=rwx,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/
-      rsync -vrt --chmod=Dug=rwx,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
     SCRIPT
   end
 
