@@ -48,33 +48,32 @@ if(isset($_POST["setting-form-mail"])){
 	}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$err="正しいメールアドレスを入力してください。";
 	}else{
-		if($conf==0){
-			$sql=sprintf("select id,title from repo_n where t1='%s' and flag=1",$email);
-			$o->query($sql);
-			$f=$o->fetch_array();
+
+		$sql=sprintf("select id,title from repo_n where t1='%s' and flag=1",$email);
+		$o->query($sql);
+		$f=$o->fetch_array();
+		
+		if(strlen($f["id"])>0){
 			
-			if(strlen($f["id"])>0){
+			$hash=md5($email.date("YmdHis"));
+			$e=mailreminder($email,$f["title"],$hash);
+			if($e){
+				$sql=sprintf("insert into u_reminder(userid,hash,regitime) values(%s,'%s',now())",$f["id"],$hash);
+				$o->query($sql);
 				
-				$hash=md5($email.date("YmdHis"));
-				$e=mailreminder($email,$f["title"],$hash);
+				$e=$o->affected_rows2();
+				
 				if($e){
-					$sql=sprintf("insert into u_reminder(userid,hash,regitime) values(%s,'%s',now())",$f["id"],$hash);
-					$o->query($sql);
-					
-					$e=$o->affected_rows2();
-					
-					if($e){
-						$complete=1;
-					}else{
-						$err="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
-					}
-					
+					$complete=1;
 				}else{
-					$err="メールを送信できませんでした。時間をおいてもう一度お試しください。";
+					$err="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
+				
 			}else{
-				$err=sprintf("入力されたメールアドレス %s では登録がございません。",$email);
+				$err="メールを送信できませんでした。時間をおいてもう一度お試しください。";
 			}
+		}else{
+			$err=sprintf("入力されたメールアドレス %s では登録がございません。",$email);
 		}
 	}
 
