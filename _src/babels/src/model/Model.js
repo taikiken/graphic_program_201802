@@ -26,7 +26,6 @@ export class Model extends EventDispatcher {
    */
   constructor( option:Object = {} ) {
     option = Safety.object( option );
-
     super();
 
     this._option = option;
@@ -75,7 +74,7 @@ export class Model extends EventDispatcher {
   executeSafely( keyName, ...args ):void {
 
     let option = this.option;
-    if ( option.hasOwnProperty( keyName ) && typeof option[ keyName] === 'function' ) {
+    if ( option.hasOwnProperty( keyName ) && typeof option[ keyName ] === 'function' ) {
 
       // callback 側で通常の引数として取り出せるように apply します
       option[ keyName ].apply( this, args );

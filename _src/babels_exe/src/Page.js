@@ -25,6 +25,8 @@ import {Header} from './page/Header';
 import {Bookmarks} from './page/Bookmarks';
 import {Activities} from './page/Activities';
 import {Notifications} from './page/Notifications';
+import {Settings} from './page/Settings';
+
 import {SearchFrom} from './header/SearchFrom';
 
 import {CommentDelete} from './modal/CommentDelete';
@@ -83,23 +85,25 @@ export class Page {
     router.on( Router.LOGIN, Page.login );
     // logout
     router.on( Router.LOGOUT, Page.logout );
+    /*
     // reset_password
     router.on( Router.RESET_PASSWORD, Page.password );
     // reset_password/resetting
     router.on( Router.RESET_PASSWORD_RESETTING, Page.passwordResetting );
+    */
     // mypage
     router.on( Router.MYPAGE, Page.mypage );
     // mypage/activities
     router.on( Router.MYPAGE_ACTIVITIES, Page.activities );
     // notifications
     router.on( Router.NOTIFICATIONS, Page.notifications );
-    // setting
+    // settings
     router.on( Router.SETTING, Page.settings );
-    // setting/interest
+    // settings/interest
     router.on( Router.SETTING_INTEREST, Page.interest );
-    // setting/social
+    // settings/social
     router.on( Router.SETTING_SOCIAL, Page.social );
-    // setting/deactivate
+    // settings/deactivate
     router.on( Router.SETTING_DEACTIVATE, Page.deactivate );
 
     router.route();
@@ -182,12 +186,20 @@ export class Page {
       logout.start();
     }
   }
+  /*
+  PHP で output
   static password():void {
 
   }
   static passwordResetting():void {
 
   }
+  */
+  // ------------------------------
+  // my page
+  /**
+   * マイページ, index（ブックマーク一覧）
+   */
   static mypage():void {
     if ( !UT.app.User.sign ) {
       // not login
@@ -198,6 +210,9 @@ export class Page {
     Header.start();
     Bookmarks.start();
   }
+  /**
+   * マイページ / アクティビティーズ一覧
+   */
   static activities():void {
     if ( !UT.app.User.sign ) {
       // not login
@@ -208,6 +223,9 @@ export class Page {
     Header.start();
     Activities.start();
   }
+  /**
+   * マイページ / お知らせ一覧
+   */
   static notifications():void {
     if ( !UT.app.User.sign ) {
       // not login
@@ -218,16 +236,63 @@ export class Page {
     Header.start();
     Notifications.start();
   }
+  // ------------------------------
+  // settings 設定
+  /**
+   * 設定 基本情報設定
+   */
   static settings():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
+    console.log( 'settings start ------------ ' );
 
+    Sidebar.start();
+    Header.start();
+
+    Settings.account();
   }
+  /**
+   * 設定 パーソナライズ設定 興味のある競技
+   */
   static interest():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
 
+    Sidebar.start();
+    Header.start();
+
+    Settings.interest();
   }
+  /**
+   * 設定 ソーシャル連携
+   */
   static social():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
 
+    Sidebar.start();
+    Header.start();
+
+    Settings.social();
   }
+  /**
+   * 退会
+   */
   static deactivate():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
 
+    Sidebar.start();
+    Header.start();
+
+    Settings.deactivate();
   }
 }

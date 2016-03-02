@@ -15,7 +15,7 @@
 import {View} from '../View';
 
 // app
-import {Message} from '../../app/const/Message';
+// import {Message} from '../../app/const/Message';
 import {Url} from '../../app/const/Url';
 
 // util

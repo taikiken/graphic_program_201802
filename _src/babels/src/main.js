@@ -140,6 +140,9 @@ import {ViewBookmarks} from './view/mypage/ViewBookmarks';
 import {ViewActivities} from './view/mypage/ViewActivities';
 import {ViewNotifications} from './view/mypage/ViewNotifications';
 
+// settings
+import {ViewSettingsIndex} from './view/settings/ViewSettingsIndex';
+
 // -------------------------------------
 // ui
 import {Receiver} from './ui/Receiver';
@@ -265,6 +268,9 @@ var UT = {
       ViewBookmarks: ViewBookmarks,
       ViewActivities: ViewActivities,
       ViewNotifications: ViewNotifications
+    },
+    settings: {
+      ViewSettingsIndex: ViewSettingsIndex
     },
     modal: {
       ViewDeleteModal: ViewDeleteModal
