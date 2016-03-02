@@ -5,17 +5,6 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-/*
-
--ユーザー情報
--記事カテゴリー
--お知らせ未読数
-ホームの冒頭記事（1枚スライド）
-ホームのヘッドライン
-ホームの記事（ひとまずデフォルト10件）
-
-*/
-
 $uid=auth();
 
 if(strlen($uid)>0){
@@ -50,7 +39,6 @@ if(strlen($uid)>0){
 
 }
 
-
 if(strlen($uid)==0){
 	$sql="select id,name,name_e from pm_ where cid=20 and flag=1 order by n";
 }else{
@@ -84,14 +72,18 @@ if(strlen($uid)>0){
 unset($p);
 
 $sql=sprintf("
-select 0 as h,tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id
- union 
-select 1 as h,tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id
- union 
-(select 2 as h,t1.*,t2.*,1 as sort from %s order by relativetime limit 10 offset 0) order by h,sort,relativetime",
+select 0 as h,0 as recommend,tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id union all 
+select 1 as h,0 as recommend,tt1.*,tt2.sort from (select d2,n as sort from repo_n where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id union all ",
 sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),
-sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),
-sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""));
+sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"","")
+);
+if($uid!=""){
+	$sql.=sprintf("(select 2 as h,1 as recommend,st02.*,1 as sort from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select 2 as h,0 as recommend,*,1 as sort from %s) order by recommend desc,relativetime limit 10 offset 0)",
+	$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""));
+}else{
+	$sql.=sprintf("(select 2 as h,0 as recommend,*,1 as sort from %s order by relativetime limit 10 offset 0)",sprintf($articletable,"",""));
+}
+$sql.=" order by h,sort,recommend desc,relativetime";
 
 $hg=array("headline","pickup","latest");
 
@@ -102,7 +94,7 @@ $nn=0;
 
 for($i=0;$i<count($p);$i++){
 	
-	if($p[$i]["h"]!=2){
+	if($p[$i]["h"]<=1){
 		$nm=$p[$i]["sort"]-1;
 	}else{
 		$nm=$nn;
@@ -114,10 +106,23 @@ for($i=0;$i<count($p);$i++){
 	$s[$hg[$p[$i]["h"]]][$nm]["display_date"]=get_relativetime($p[$i]["relativetime"],$p[$i]["date"],$p[$i]["weekday"]);
 	$s[$hg[$p[$i]["h"]]][$nm]["title"]=mod_HTML($p[$i]["title"]);
 	$s[$hg[$p[$i]["h"]]][$nm]["description"]=get_summary($p[$i]["b1"],$p[$i]["body"]);
+	
 	$s[$hg[$p[$i]["h"]]][$nm]["category"]["label"]=$p[$i]["category"];
 	$s[$hg[$p[$i]["h"]]][$nm]["category"]["slug"]=$p[$i]["slug"]; 
+	$s[$hg[$p[$i]["h"]]][$nm]["category2"]["label"]=$p[$i]["category2"];
+	$s[$hg[$p[$i]["h"]]][$nm]["category2"]["slug"]=$p[$i]["slug2"];
+	
+	$s[$hg[$p[$i]["h"]]][$nm]["categories"][0]["label"]=$p[$i]["category"];
+	$s[$hg[$p[$i]["h"]]][$nm]["categories"][0]["slug"]=$p[$i]["slug"];
+	
+	if(strlen($p[$i]["category2"])>0){
+		$s[$hg[$p[$i]["h"]]][$nm]["categories"][1]["label"]=$p[$i]["category2"];
+		$s[$hg[$p[$i]["h"]]][$nm]["categories"][1]["slug"]=$p[$i]["slug2"]; 	$s[$hg[$p[$i]["h"]]][$nm]["url"]=sprintf("%s/%s/%s",$domain,"p",$p[$i]["id"]);
+	}
+	
 	$s[$hg[$p[$i]["h"]]][$nm]["url"]=sprintf("%s/%s/%s",$domain,"p",$p[$i]["id"]);
 	$s[$hg[$p[$i]["h"]]][$nm]["is_bookmarked"]=strlen($p[$i]["is_bookmark"])>0?true:false;
+	$s[$hg[$p[$i]["h"]]][$nm]["is_recommend"]=$p[$i]["recommend"]==1?true:false;
 	$s[$hg[$p[$i]["h"]]][$nm]["media_type"]=(strlen($p[$i]["video"])>0||strlen($p[$i]["youtube"])>0)?"video":"image";
 
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["thumbnail"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$domain,$p[$i]["img1"]):"";

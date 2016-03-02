@@ -40,7 +40,7 @@ if($_REQUEST["api"]=="category"){
 	$q=str_replace(array(" ","　","|","、"),",",trim(strip_tags($_REQUEST["q"])));
 	$q=explode(",",$q);
 	for($i=0;$i<count($q);$i++){
-		$q[$i]=sprintf("txt like '%s%s%s'","%",$q[$i],"%");
+		$q[$i]=sprintf("txt like '%s%s%s'","%",strtolower(mb_convert_kana($q[$i],"KVa")),"%");
 	}
 	$q=implode(" and ",$q);
 	$c="";
@@ -53,10 +53,16 @@ if($_REQUEST["api"]=="category"){
 	$cx=isset($_REQUEST["c"])?$_REQUEST["c"]:"home";
 	
 	if($cx=="home"){
-
-		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
+		
+		if($uid!=""){
+			$sql=sprintf("select st02.*,1 as recommend from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select *,0 as recommend from %s) order by recommend desc,relativetime limit %s offset %s",
+			$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
+		}else{
+			$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,"",""),$length,$offset);
+		}
+		echo $sql;
 		$nsql="select count(*) as n from repo_n where cid=1 and flag=1";
-
+		
 	}elseif($cx=="headline"){
 
 		$sql=sprintf("select * from (select d2,n as sort from repo_n where cid=8 and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
@@ -67,6 +73,11 @@ if($_REQUEST["api"]=="category"){
 		$sql=sprintf("select * from (select d2,n as sort from repo_n where cid=8 and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 		$nsql="select count(*) as n from repo_n where cid=8 and flag=1";
 
+	}elseif($cx=="personalized"){
+		
+		$c=$uid!=""?sprintf(" and (m1 in (select categoryid from u_category where userid=%s and flag=1) or m2 in (select categoryid from u_category where userid=%s and flag=1)) and m_time > now() - interval '3 day'",$uid,$uid):"";
+		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 	}
 }elseif($_REQUEST["api"]=="bookmark"){
 	
@@ -88,11 +99,20 @@ for($i=0;$i<count($p);$i++){
 	$s[$i]["title"]=mod_HTML($p[$i]["title"]);
 	$s[$i]["description"]=get_summary($p[$i]["b1"],$p[$i]["body"]);
 	$s[$i]["category"]["label"]=$p[$i]["category"];
-	$s[$i]["category"]["slug"]=$p[$i]["slug"]; 
+	$s[$i]["category"]["slug"]=$p[$i]["slug"];
 	$s[$i]["category2"]["label"]=$p[$i]["category2"];
-	$s[$i]["category2"]["slug"]=$p[$i]["slug2"]; 
+	$s[$i]["category2"]["slug"]=$p[$i]["slug2"];
+
+	$s[$i]["categories"][0]["label"]=$p[$i]["category"];
+	$s[$i]["categories"][0]["slug"]=$p[$i]["slug"];
+	if(strlen($p[$i]["category2"])>0){
+		$s[$i]["categories"][1]["label"]=$p[$i]["category2"];
+		$s[$i]["categories"][1]["slug"]=$p[$i]["slug2"];
+	}
+
 	$s[$i]["url"]=sprintf("%s/%s/%s",$domain,"p",$p[$i]["id"]);
 	$s[$i]["is_bookmarked"]=strlen($p[$i]["is_bookmark"])>0?true:false;
+	$s[$i]["is_recommend"]=$p[$i]["recommend"]==1?true:false;
 	
 	$video=get_videotype($p[$i]["video"],$p[$i]["youtube"],$p[$i]["facebook"]);
 	$s[$i]["media_type"]=(strlen($video)>0)?"video":"image";

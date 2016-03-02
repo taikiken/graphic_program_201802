@@ -26,6 +26,13 @@ $s["category"]["label"]=$f["category"];
 $s["category"]["slug"]=$f["slug"]; 
 $s["category2"]["label"]=$f["category2"]; 
 $s["category2"]["slug"]=$f["slug2"]; 
+
+$s["categories"][0]["label"]=$f["category"]; 
+$s["categories"][0]["slug"]=$f["slug"];
+if(strlen($f["category2"])>0){
+	$s["categories"][1]["label"]=$f["category2"]; 
+	$s["categories"][1]["slug"]=$f["slug2"]; 
+}
 $s["url"]=sprintf("%s/%s/%s",$domain,"p",$f["id"]);
 $s["is_bookmarked"]=strlen($f["is_bookmark"])>0?true:false;
 
