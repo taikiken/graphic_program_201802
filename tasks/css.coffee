@@ -73,21 +73,22 @@ files = [
 # sourcemap, dest: tmp
 gulp.task 'css:dev', ->
   return gulp.src files
-  .pipe $.sourcemaps.init()
+  .pipe $.sourcemaps.init debug:true
   .pipe $.changed app + '/**', extension: '.css'
-  .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
+  .pipe $.sass(
+    precision: 10
+    sourceMap: true
+    sourceComments: true
+  ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
 #  .pipe $.if '*.css' && compress.css, $.cssnano
 #  .pipe $.sourcemaps.write './'
   # inline map にする
   .pipe $.sourcemaps.write './', {
-    addComment: true
-    loadMaps: true
-    includeContent: false
+#    addComment: true
+#    loadMaps: true
+#    includeContent: false
     sourceRoot: ['../../../app', '../../../scss']
-#    sourceMappingURL: ( file ) ->
-#      console.log 'file', file.relative, file
-#      return file.relative + '.map'
   }
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs

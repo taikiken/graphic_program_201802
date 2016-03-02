@@ -75,6 +75,44 @@ if(strlen($name)>0){
 	$ermsg["name"]="名前は必須項目です。";
 }
 
+if(strlen($_POST["facebook_id"])>0){
+	
+	$facebookid=trim($_POST["facebook_id"]);
+	
+	$sql="select id from repo_n where a1='%s' and flag=1";
+	$o->query($sql);
+	$f=$o->fetch_array();
+	
+	if(strlen($f["id"])>0){
+		$ermsg["facebook_id"]="ログインいただいているFacebookアカウントはすでに登録されています。";
+	}else{
+		$sv[$sn[]="a1"]=$facebookid;
+		$sv[$sn[]="a2"]=$_POST["facebook_token"];	
+	}
+}
+
+if(strlen($_POST["twitter_id"])>0){
+	
+	$twitterid=trim($_POST["twitter_id"]);
+	
+	$sql="select id from repo_n where a3='%s' and flag=1";
+	$o->query($sql);
+	$f=$o->fetch_array();
+	
+	if(strlen($f["id"])>0){
+		$ermsg["twitter_id"]="ログインいただいているTwitterアカウントはすでに登録されています。";
+	}else{
+		$sv[$sn[]="a3"]=$twitterid;
+		$sv[$sn[]="a4"]=$_POST["twitter_id"];	
+	}
+}
+
+
+if(strlen($_POST["twitter_id"])>0){
+	$sv[$sn[]="a3"]=$_POST["twitter_id"];
+	$sv[$sn[]="a4"]=$_POST["twitter_token"];
+}
+
 if(count($ermsg)>0){
 
 	$y["status"]["code"]=400;
@@ -114,15 +152,7 @@ if(count($ermsg)>0){
 			$sv[$sn[]="t20"]=implode(",",$_POST["interest"]);
 			$interest=$_POST["interest"];
 		}
-		
-		if(strlen($_POST["facebook_id"])>0){
-			$sv[$sn[]="a1"]=$_POST["facebook_id"];
-			$sv[$sn[]="a2"]=$_POST["facebook_token"];
-		}elseif(strlen($_POST["twitter_id"])>0){
-			$sv[$sn[]="a3"]=$_POST["twitter_id"];
-			$sv[$sn[]="a4"]=$_POST["twitter_token"];
-		}
-		
+	
 		while(list($k,$v)=each($sv)){
 			$v=stripslashes($v);
 			$v=addslashes($v);

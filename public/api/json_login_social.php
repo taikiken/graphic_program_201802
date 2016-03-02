@@ -24,7 +24,7 @@ $ermsg="";
 
 if(strlen($field)>0&&strlen($id)>0&&strlen($token)>0){
 	
-	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15,a2,a4 from repo_n where a%s='%s'",$field,$id);
+	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15,a2,a4 from repo_n where a%s='%s' and flag=1 order by id desc limit 1 offset 0",$field,$id);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	

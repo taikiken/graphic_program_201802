@@ -54,8 +54,8 @@ htdocs = dir.htdocs
 # --------------------------------------------
 
 files = [
-  dir.sp.sprite.root + '/**/*.scss'
-  app + '/**/sp/**/*.{css,scss}'
+  dir.sp.scss+ '/**/*.scss'
+  dir.sp.css + '/**/*.{css,scss}'
   # その他 min 済ファイル除外
   '!' + app + '/**/ui.css'
   '!' + app + '/**/*.min.{css,scss}'
@@ -70,14 +70,23 @@ files = [
 gulp.task 'sp:css:dev', ->
   return gulp.src files
   .pipe $.plumber()
-  .pipe $.sourcemaps.init()
+  .pipe $.sourcemaps.init debug:true
   .pipe $.changed dir.sp.css + '/**', extension: '.css'
-  .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
+  .pipe $.sass(
+    precision: 10
+    sourceMap: true
+    sourceComments: true
+  ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
 #  .pipe $.if '*.css' && compress.css, $.cssnano
 #  .pipe $.sourcemaps.write './'
   # inline map にする
-  .pipe $.sourcemaps.write ''
+  .pipe $.sourcemaps.write './', {
+#    addComment: true
+#    loadMaps: true
+#    includeContent: false
+    sourceRoot: ['../../../app', '../../../scss']
+  }
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** sp:css:dev ***'

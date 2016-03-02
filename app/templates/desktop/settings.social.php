@@ -3,7 +3,7 @@
 </div><!-- /.category-heading -->
 
 <div class="body-sec">
-  <div class="body-sec-inner">
+  <div class="body-sec-inner setting-bg">
     <section class="main-sec">
 
       <div class="setting-sec">
