@@ -95,6 +95,19 @@ if (
   // dev code
   // ToDo: 本番で削除
   // -------------------------------------------
+  /*
+
+  # php ENV系各種 - ただし当面apiRootは各環境httpsなしwww => #347
+
+  - ENV      : <?php echo $page['ENV']; ?>
+
+  - hostname : <?php echo $page['hostname']; ?>
+
+  - apiRoot  : <?php echo $page['apiRoot']; ?>
+
+
+  */
+
   var UT = self.UT;
 
   // local develop mode
