@@ -55,7 +55,7 @@ htdocs = dir.htdocs
 
 files = [
   dir.sp.scss+ '/**/*.scss'
-  dir.sp.css + '/**/*.{css,scss}'
+  app + '/**/sp/**/*.{css,scss}'
   # その他 min 済ファイル除外
   '!' + app + '/**/ui.css'
   '!' + app + '/**/*.min.{css,scss}'
