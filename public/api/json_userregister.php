@@ -12,7 +12,10 @@ function mailregister($email,$name){
 
 	$to=$email;
 	$subject="【運動通信】会員登録完了のお知らせ";
-	$body=sprintf("この度は、運動通信Crazy for sports www.undotsushin.com にご登録いただき、誠にありがとうございます。
+	$body=sprintf("%s様
+	
+	この度は、運動通信Crazy for sports www.undotsushin.com にご登録いただき、誠にありがとうございます。
+	
 	会員登録が完了しましたのでお知らせいたします。
 	下記登録内容をご確認の上、大切に保管ください。
 	
@@ -22,20 +25,20 @@ function mailregister($email,$name){
 	パスワード：　セキュリティ保持のため非公開
 	
 	※	パスワードを忘れた場合は、以下のURLから再登録をお願いいたします。
-	　{ここにパスワード変更のURL}
+	https://www.undotsushin.com/reset_password/
 	
 	ご不明な点等ございましたら、以下の運動通信カスタマーセンターまでお問い合わせください。
 	info@undotsushin.com
 	
 	※	当社コンテンツをご使用の際は、必ず下記の利用規約をお読みください。
-	{ここに利用規約のURL}
+	https://www.undotsushin.com/about/terms/
 	
 	[ご注意]
-	こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$email,$name);
+	こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$name,$email,$name);
 	$from="noreply@undotsushin.com";
 	$reply="info@undotsushin.com";
 
-	sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
+	return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
 	
 }
 
@@ -112,6 +115,14 @@ if(count($ermsg)>0){
 			$interest=$_POST["interest"];
 		}
 		
+		if(strlen($_POST["facebook_id"])>0){
+			$sv[$sn[]="a1"]=$_POST["facebook_id"];
+			$sv[$sn[]="a2"]=$_POST["facebook_token"];
+		}elseif(strlen($_POST["twitter_id"])>0){
+			$sv[$sn[]="a3"]=$_POST["twitter_id"];
+			$sv[$sn[]="a4"]=$_POST["twitter_token"];
+		}
+		
 		while(list($k,$v)=each($sv)){
 			$v=stripslashes($v);
 			$v=addslashes($v);
@@ -159,7 +170,7 @@ if(count($ermsg)>0){
 			if($e){
 				
 				$o->query("commit");
-				mailregister($email,$name);
+				$e=mailregister($email,$name);
 				
 				$sql=sprintf("select name from pm_ where id in (%s) and flag=1 order by n",implode(",",$interest));
 				$o->query($sql);
@@ -169,6 +180,7 @@ if(count($ermsg)>0){
 				
 				$s["id"]=$ID;
 				$s["name"]=$name;
+				$s["email"]=$email;
 				$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$filename);
 				$s["bio"]=$bio;
 				$s["url"]=sprintf("%s/mypage/",$domain,$ID);
