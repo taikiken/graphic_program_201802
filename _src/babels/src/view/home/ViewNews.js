@@ -33,6 +33,9 @@ export class ViewNews extends ViewArchiveMasonryInfinite {
     this._action = User.sign ?
       new NewsAuth( this.done.bind( this ), this.fail.bind( this ) ) :
       new News( this.done.bind( this ), this.fail.bind( this ) );
+
+    // home flag on
+    this.home = true;
   }
 
 }

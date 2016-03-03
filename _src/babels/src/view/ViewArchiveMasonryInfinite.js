@@ -87,6 +87,8 @@ export class ViewArchiveMasonryInfinite extends View {
     // response.request object を保持する
     this._request = null;
 
+    this._home = false;
+
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -96,6 +98,13 @@ export class ViewArchiveMasonryInfinite extends View {
    */
   get moreElement():Element {
     return this._moreElement;
+  }
+
+  get home():boolean {
+    return this._home;
+  }
+  set home( home:boolean ):void {
+    this._home = home;
   }
   // ---------------------------------------------------
   //  Method
@@ -544,7 +553,8 @@ export class ViewArchiveMasonryInfinite extends View {
         thumbnail: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         masonry: React.PropTypes.bool.isRequired,
-        action: React.PropTypes.object.isRequired
+        action: React.PropTypes.object.isRequired,
+        recommend: React.PropTypes.bool.isRequired
       },
       getInitialState: function() {
         return {
@@ -556,12 +566,18 @@ export class ViewArchiveMasonryInfinite extends View {
       render: function() {
         let mediaType = this.props.mediaType;
 
+        let recommend = '';
+        if ( this.props.recommend ) {
+          recommend = <i className="post-label_recommend">おすすめ記事</i>;
+        }
+
         // media type で thumbnail 切替
         if ( mediaType === MediaType.IMAGE ) {
           // type: image
           return (
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img src={this.props.thumbnail} alt={this.props.title}/>
+              {recommend}
             </figure>
           );
         } else if ( mediaType === MediaType.VIDEO ) {
@@ -570,6 +586,7 @@ export class ViewArchiveMasonryInfinite extends View {
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
               <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+              {recommend}
             </figure>
           );
         } else {
@@ -641,6 +658,7 @@ export class ViewArchiveMasonryInfinite extends View {
                         mediaType={dae.mediaType}
                         thumbnail={thumbnail}
                         title={dae.title}
+                        recommend={!!dae.isRecommend && _this.home}
                       />
                       <div className="post-data">
                         <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
