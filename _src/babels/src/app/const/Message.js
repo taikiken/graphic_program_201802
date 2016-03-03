@@ -50,4 +50,8 @@ export class Message {
   static get DELETE():string {
     return 'このコメントを削除しますか？';
   }
+
+  static get DEACTIVATE():string {
+    return '退会を行うと、登録済みの情報は全て閲覧する事が出来なくなります。';
+  }
 }

@@ -101,8 +101,10 @@ export class Page {
     router.on( Router.SETTING, Page.settings );
     // settings/interest
     router.on( Router.SETTING_INTEREST, Page.interest );
+
     // settings/social
-    router.on( Router.SETTING_SOCIAL, Page.social );
+    // router.on( Router.SETTING_SOCIAL, Page.social );
+
     // settings/deactivate
     router.on( Router.SETTING_DEACTIVATE, Page.deactivate );
 
@@ -266,20 +268,20 @@ export class Page {
 
     Settings.interest();
   }
-  /**
-   * 設定 ソーシャル連携
-   */
-  static social():void {
-    if ( !UT.app.User.sign ) {
-      // not login
-      return;
-    }
-
-    Sidebar.start();
-    Header.start();
-
-    Settings.social();
-  }
+  ///**
+  // * 設定 ソーシャル連携
+  // */
+  //static social():void {
+  //  if ( !UT.app.User.sign ) {
+  //    // not login
+  //    return;
+  //  }
+  //
+  //  Sidebar.start();
+  //  Header.start();
+  //
+  //  Settings.social();
+  //}
   /**
    * 退会
    */

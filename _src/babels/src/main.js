@@ -126,6 +126,7 @@ import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
 // ----------- users
 // signup
 import {SignupWizard} from './view/signup/SignupWizard';
+import {ViewSignOut} from './view/signup/ViewSignOut';
 
 // login
 import {ViewLogin} from './view/login/ViewLogin';
@@ -255,7 +256,8 @@ var UT = {
       ViewNews: ViewNews
     },
     signup: {
-      SignupWizard: SignupWizard
+      SignupWizard: SignupWizard,
+      ViewSignOut: ViewSignOut
     },
     login: {
       ViewLogin: ViewLogin,

@@ -15,7 +15,7 @@
 import {View} from '../View';
 
 // app
-// import {Message} from '../../app/const/Message';
+import {Message} from '../../app/const/Message';
 import {Url} from '../../app/const/Url';
 
 // util
@@ -72,6 +72,9 @@ export class SignupWizard extends View {
 
     // location hash なしにする
     Loc.hash = '';
+
+    // activate unload
+    this._unload = false;
   }
   /**
    * Ajax request を開始します
@@ -180,6 +183,10 @@ export class SignupWizard extends View {
 
     let step = event.step;
     this._step = step;
+    if ( !this._unload ) {
+      this._unload = true;
+      this.activateUnload();
+    }
 
   }
   /**
@@ -189,14 +196,20 @@ export class SignupWizard extends View {
 
     let boundHash = this.onHash.bind( this );
     this._boundHash = boundHash;
-    // ToDo: 開発中はコメントにする, 本番でコメントアウト
-    /*
+
+
+    window.addEventListener( 'hashchange', boundHash, false );
+
+  }
+  /**
+   * onbeforeunload を実装する
+   */
+  activateUnload():void {
+    // 開発中はコメントにする, 本番でコメントアウト
+    // 入力途中で page を離れようとすると alert を表示する
     window.onbeforeunload = function() {
       return Message.UNLOAD;
     };
-    */
-    window.addEventListener( 'hashchange', boundHash, false );
-
   }
 
   /**
