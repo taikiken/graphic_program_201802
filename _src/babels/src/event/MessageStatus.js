@@ -71,9 +71,17 @@ export class MessageStatus extends EventDispatcher {
   static get DELETE():string {
     return 'messageDelete';
   }
+  /**
+   * OK_CLICK
+   * @return {string} messageOkClick
+   */
   static get OK_CLICK():string {
     return 'messageOkClick';
   }
+  /**
+   * CANCEL_CLICK
+   * @return {string} messageCancelClick
+   */
   static get CANCEL_CLICK():string {
     return 'messageCancelClick';
   }
@@ -133,7 +141,13 @@ export class MessageStatus extends EventDispatcher {
   confirm( message:string, ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
     this.dispatch( {type: MessageStatus.CONFIRM, message: message, ok: ok, cancel: cancel, kind: type} );
   }
-
+  /**
+   * 削除モーダル
+   * @param {string} id unique id
+   * @param {Function} [ok] ok callback
+   * @param {Function} [cancel] cancel callback
+   * @param {string} [type=MessageStatus.INFO]
+   */
   remove( id:string, ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
     if ( !ok ) {
       ok = function() {};

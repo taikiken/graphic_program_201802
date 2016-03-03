@@ -52,15 +52,14 @@ export class Settings {
     }
   }
   /**
-   * ソーシャル連携
-   */
-  static social():void {
-
-  }
-  /**
    * 退会
    */
   static deactivate():void {
-
+    let settings = Dom.settings();
+    let modal = Dom.modal();
+    if ( settings !== null && modal !== null ) {
+      let deactivate = new UT.view.signup.ViewSignOut( settings, modal );
+      deactivate.start();
+    }
   }
 }

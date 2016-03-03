@@ -164,18 +164,17 @@ let FormElementNode = React.createClass( {
     console.log( '+++++++++++ listen ', this.props.uniqueId, replyStatus );
 
     if ( replyStatus === null ) {
-      replyStatus = ReplyStatus.factory();
-      this.replyStatus = replyStatus;
 
       // 記事へのコメントは閉じない
       if ( !this.props.independent ) {
 
+        replyStatus = ReplyStatus.factory();
+        this.replyStatus = replyStatus;
         replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
         replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
+        replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
 
       }
-
-      replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
 
     }
   },
@@ -201,10 +200,8 @@ let FormElementNode = React.createClass( {
 
     let replyStatus = this.replyStatus;
     if ( replyStatus !== null ) {
-      if ( !this.props.independent ) {
-        replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
-        replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
-      }
+      replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
+      replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
       replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
       this.replyStatus = null;
     }

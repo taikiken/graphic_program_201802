@@ -19,15 +19,30 @@ import {CommentDeleteNode} from '../../node/modal/CommentDeleteNode';
 // React
 let ReactDOM = self.ReactDOM;
 
+/**
+ * コメント削除モーダル
+ */
 export class ViewDeleteModal extends View {
+  /**
+   * コメント削除モーダル
+   * @param {Element} element target HTMLElement
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
     this._render = null;
   }
+  /**
+   * 初期化
+   */
   start() {
     let status = MessageStatus.factory();
     status.on( MessageStatus.DELETE, this.onModal.bind( this ) );
   }
+  /**
+   *
+   * @param {Object} event
+   */
   onModal( event:Object ):void {
 
     if ( this._render === null ) {
