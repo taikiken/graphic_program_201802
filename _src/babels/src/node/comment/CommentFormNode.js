@@ -34,6 +34,8 @@ let ReactDOM = self.ReactDOM;
 // comment form
 /**
  * コメント送信用 form
+ * inner class
+ * @private
  * @type {React.component} コメント送信フォーム
  */
 let FormElementNode = React.createClass( {
@@ -172,17 +174,29 @@ let FormElementNode = React.createClass( {
         replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
 
       }
+
+      replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
+
+    }
+  },
+  // コメント送信成功後 reload するとき
+  // 何もかも白紙にする
+  beforeReload: function() {
+    if ( !this.props.independent ) {
+      // 記事へのコメント以外は dispose 処理をする
+      this.dispose();
     }
   },
   // all event unbind
   dispose: function() {
     // event unbind
-    this.setState( {loading: ''} );
+    this.setState( {loading: '', open: false} );
     let comment = this.comment;
     if ( comment !== null ) {
       comment.off( Model.COMPLETE, this.done );
       comment.off( Model.UNDEFINED_ERROR, this.fail );
       comment.off( Model.RESPONSE_ERROR, this.fail );
+      this.comment = null;
     }
 
     let replyStatus = this.replyStatus;
@@ -190,8 +204,9 @@ let FormElementNode = React.createClass( {
       if ( !this.props.independent ) {
         replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
         replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
-        this.replyStatus = null;
       }
+      replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
+      this.replyStatus = null;
     }
   },
   // ----------------------------------------
@@ -201,16 +216,6 @@ let FormElementNode = React.createClass( {
   // ----------------------------------------
   // listener
   replyOpen: function( event ) {
-    /*
-    if ( this.state ) {
-      if ( !this.state.open && this.checkId( event ) ) {
-        try {
-          this.setState( { open: true } );
-        } catch ( error ) {
-          console.log( `open state error ${this.props.uniqueId}`, error );
-        }
-      }
-    }*/
     let uniqueId = this.props.uniqueId;
     if ( this.mounted && !this.state.open && this.checkId( event ) ) {
       console.log( '*** replyOpen *** ', this.props.uniqueId, this.mounted );
@@ -220,17 +225,6 @@ let FormElementNode = React.createClass( {
     }
   },
   replyClose: function( event ) {
-    /*
-    if ( this.state ) {
-      if ( this.state.open && this.checkId( event ) ) {
-        try {
-          this.setState( { open: false } );
-        } catch ( error ) {
-          console.log( `close state error ${this.props.uniqueId}`, error );
-        }
-      }
-    }
-    */
     let uniqueId = this.props.uniqueId;
     if ( this.mounted && this.state.open && this.checkId( event ) ) {
       console.log( '*** replyClose *** ', this.props.uniqueId, this.mounted );
@@ -251,7 +245,7 @@ let FormElementNode = React.createClass( {
     this.reset();
 
     if ( body === '' ) {
-      this.error( 'コメントは必須入力です。' );
+      this.error( 'コメントは必須項目です。' );
     } else {
       // submit sequence
       this.sending();
@@ -305,6 +299,12 @@ let FormElementNode = React.createClass( {
 } );
 
 // open / close anchor tag
+/**
+ * コメント入力欄の 表示 / 非表示
+ * inner class
+ * @private
+ * @type {React.component}
+ */
 let OpenerNode = React.createClass( {
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,
@@ -314,8 +314,10 @@ let OpenerNode = React.createClass( {
     callback: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
+    // ReplyStatus instance
     this.replyStatus = null;
-    this.canOpen = true;
+
+    // this.canOpen = true;
 
     return {
       // reply / cancel
@@ -358,10 +360,11 @@ let OpenerNode = React.createClass( {
       replyStatus = ReplyStatus.factory();
       this.replyStatus = replyStatus;
 
+      /*
       if ( !this.props.independent ) {
         replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
         replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
-      }
+      }*/
 
       replyStatus.on( ReplyStatus.START, this.replyStart );
       replyStatus.on( ReplyStatus.COMPLETE, this.replyComplete );
@@ -375,10 +378,12 @@ let OpenerNode = React.createClass( {
 
     if ( replyStatus !== null ) {
 
+      /*
       if ( !this.props.independent ) {
         replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
         replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
       }
+      */
 
       replyStatus.off( ReplyStatus.START, this.replyStart );
       replyStatus.off( ReplyStatus.COMPLETE, this.replyComplete );
@@ -394,9 +399,11 @@ let OpenerNode = React.createClass( {
 
     console.log( '************** opener click ****************** ', this.props.uniqueId );
 
+    /*
     if ( !this.canOpen ) {
       return;
     }
+    */
 
     this.willOpen();
     this.replyStatus.open( this.props.uniqueId );
@@ -404,9 +411,11 @@ let OpenerNode = React.createClass( {
   cancelClick: function( event ) {
     event.preventDefault();
 
+    /*
     if ( !this.canOpen ) {
       return;
     }
+    */
 
     this.willClose();
     this.replyStatus.close( this.props.uniqueId );
@@ -447,6 +456,7 @@ let OpenerNode = React.createClass( {
 /**
  * <h3>React component<h3>
  * comment form
+ * @type {React.component}
  */
 export let CommentFormNode = React.createClass( {
   propTypes: {
@@ -482,7 +492,7 @@ export let CommentFormNode = React.createClass( {
   },
   getInitialState: function() {
     this.replyStatus = null;
-    this.canOpen = true;
+    // this.canOpen = true;
 
     return {
       // form 表示初期値, 記事コメント以外は閉じる
