@@ -23,6 +23,10 @@ let greensock = self.com.greensock;
 let TweenLite = greensock.TweenLite;
 let easing = greensock.easing;
 
+/**
+ * 削除 モーダル
+ * @type {React.component}
+ */
 export let CommentDeleteNode = React.createClass( {
   propTypes: {
     id: React.PropTypes.string.isRequired,
@@ -54,24 +58,14 @@ export let CommentDeleteNode = React.createClass( {
       return null;
     } else {
       return (
-        <div className="modal-container opaque" ref="modalContainer" style={this.state.css}>
-          <div className="modal-container-bg"></div>
-          <div className={'modal-container-content ' + this.props.type}>
-            <div className="modal-container-message">
-              <p>{Message.DELETE}</p>
-            </div>
-            <div className="modal-container-buttons">
-              <div className="button-cancel">
-                <span className="setting-form-submit mod-btnB01">
-                  <input type="button" value="キャンセル" onClick={this.cancelClick}/>
-                </span>
-              </div>
-              <div className="button-ok">
-                <span className="setting-form-submit mod-btnB01">
-                  <input type="button" value="削除" onClick={this.deleteClick}/>
-                </span>
-              </div>
-            </div>
+        <div className="modal-dialogue modal-dialogue_delete" ref="modalContainer" style={this.state.css}>
+          <div className={'modal-dialogue-contents ' + this.props.type}>
+            <a href="#" className="modal-dialogue-close" onClick={this.cancelClick}>閉じる</a>
+            <p className="lead">{Message.DELETE}</p>
+            <ul className="btn-block">
+              <li className="btn-item"><a href="#" className="btn-link btn-link_cancel" onClick={this.cancelClick}>キャンセル</a></li>
+              <li className="btn-item"><a href="#" className="btn-link btn-link_submit" onClick={this.deleteClick}>削除</a></li>
+            </ul>
           </div>
         </div>
       );

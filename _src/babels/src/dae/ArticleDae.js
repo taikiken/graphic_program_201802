@@ -17,6 +17,7 @@ import {CategoryDae} from './CategoryDae';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
 import {CommentsPopularDae} from './CommentsPopularDae';
+import {CategoriesDae} from './caegories/CategoriesDae';
 
 /**
  * articles 記事一つのデータを管理します
@@ -38,6 +39,11 @@ export class ArticleDae {
     // 2016-02-29 category2 追加になった
     // https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
     this._category2 = new CategoryDae( article.category2 );
+
+    // category, category2 を配列へ
+    // そのうち使うはず
+    this._categories = new CategoriesDae( article );
+
     // article.media
     this._media = new MediaDae( article.media );
     // article.user
@@ -108,15 +114,19 @@ export class ArticleDae {
   get category2():CategoryDae {
     return this._category2;
   }
+
+  /**
+   * response.categories を CategoriesDae へ
+   * @return {CategoriesDae|*} response.categories を CategoriesDaeにし返します
+   */
+  get categories():CategoriesDae {
+    return this._categories;
+  }
   /**
    * alias commentsTotal
    * @return {Number} article.comments_count
    */
   get commentsCount():Number {
-    /*
-    console.log( 'article.comments_count', this._article.comments_count );
-    return parseInt( this.article.comments_count, 10);
-    */
     return this.commentsTotal;
   }
 
@@ -172,6 +182,13 @@ export class ArticleDae {
    */
   get isBookmarked():boolean {
     return this.article.is_bookmarked;
+  }
+  /**
+   * パーソナライズされたニュースは is_recommend(キー名は仮） をたてて「おすすめ」アイコンを表示する
+   * @return {boolean} パーソナライズされたニュース の真偽値を返します
+   */
+  get isRecommend():boolean {
+    return this.article.is_recommend;
   }
   /**
    *

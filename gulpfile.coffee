@@ -222,7 +222,7 @@ gulp.task 'copy', (cb) ->
 # 手っ取り早く確認用ファイルを生成する... ハズ
 gulp.task 'dev:init', (cb) ->
   runSequence(
-    'vendor:init'
+    'vendor:dev'
     'babels:dev'
     'exe:dev'
     'sprite:build'
