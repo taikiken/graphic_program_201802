@@ -115,7 +115,7 @@ export class ViewArchiveMasonryInfinite extends View {
   done( result:Result ):void {
 
     let articles = result.articles;
-    console.log( 'ViewArchiveMasonry done ', result );
+    // console.log( 'ViewArchiveMasonry done ', result );
     if ( typeof articles === 'undefined' ) {
 
       // articles undefined
@@ -779,7 +779,7 @@ export class ViewArchiveMasonryInfinite extends View {
     articles.forEach( function( article, i ) {
 
       let dae = new ArticleDae( article );
-
+      console.log( 'dae ', dae );
       dae.index = prevLast + i;
       articlesList.push( dae );
 
