@@ -334,6 +334,15 @@ let buildPath = () => {
       new Queries(),
       true
     ),
+    // 知らない間に追加されてた on 2016-03-03
+    // 他人からの通知数を取得する
+    // /api/v1/users/self/notifications/count
+    'users:self:notifications:count': new Types(
+      new Type( `${API_PATH}/users/self/notifications/count` ),
+      new Permalink(),
+      new Queries(),
+      true
+    ),
     // -----------------
     // settings/account
     // -----------------

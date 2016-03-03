@@ -15,6 +15,7 @@ import {View} from '../View';
 import {ViewHeaderMember} from './ViewHeaderMember';
 import {Url} from '../../app/const/Url';
 import {User} from '../../app/User';
+import {UserStatus} from '../../event/UserStatus';
 
 // React
 let React = self.React;
@@ -33,7 +34,17 @@ export class ViewHeaderUser extends View {
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
     this._boundCallback = this.memberCallback.bind( this );
+
+    // login user view instance
     this._member = null;
+
+    // User.sign boolean
+    this._sign = User.sign;
+
+    let userSatus = UserStatus.factory();
+    let boundSign = this.onSign.bind( this );
+    userSatus.on( UserStatus.LOG_IN, boundSign );
+    userSatus.on( UserStatus.LOG_OUT, boundSign );
   }
   /**
    * Ajax request を開始します
@@ -41,8 +52,14 @@ export class ViewHeaderUser extends View {
   start():void {
     if ( User.sign ) {
       // login member
+      let member = this._member;
+
+      if ( member !== null ) {
+        this.dispose();
+      }
+
       let boundCallback = this._boundCallback;
-      let member = new ViewHeaderMember( this.element );
+      member = new ViewHeaderMember( this.element );
       this._member = member;
       member.on( View.BEFORE_RENDER, boundCallback );
       member.on( View.WILL_MOUNT, boundCallback );
@@ -52,9 +69,11 @@ export class ViewHeaderUser extends View {
       member.on( View.EMPTY_ERROR, boundCallback );
       member.on( View.RESPONSE_ERROR, boundCallback );
       member.start();
+
     } else {
       // user menu
       this.render();
+      this.dispose();
     }
   }
   /**
@@ -84,6 +103,7 @@ export class ViewHeaderUser extends View {
       <UserDom />,
       this.element
     );
+
   }
   /**
    * ViewHeaderMember callback 中継
@@ -98,5 +118,37 @@ export class ViewHeaderUser extends View {
     }
     this.dispatch( event );
 
+  }
+  /**
+   * member event handler dispose
+   */
+  dispose():void {
+    let member = this._member;
+
+    if ( member !== null ) {
+
+      let boundCallback = this._boundCallback;
+      member.off( View.BEFORE_RENDER, boundCallback );
+      member.off( View.WILL_MOUNT, boundCallback );
+      member.off( View.DID_MOUNT, boundCallback );
+      member.off( View.ERROR_MOUNT, boundCallback );
+      member.off( View.UNDEFINED_ERROR, boundCallback );
+      member.off( View.EMPTY_ERROR, boundCallback );
+      member.off( View.RESPONSE_ERROR, boundCallback );
+      this._member = null;
+
+    }
+  }
+  /**
+   * UserStatus event handler, LOG_IN / LOG_OUT
+   * @param {Object} event UserStatus event object
+   */
+  onSign( event:Object ):void {
+    let sign = event.sign;
+
+    if ( sign !== this._sign ) {
+      this._sign = sign;
+      this.start();
+    }
   }
 }

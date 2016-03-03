@@ -97,37 +97,6 @@ export class Api {
   static email():Types {
     return ApiDae.api( 'users:email' );
   }
-
-//  /**
-//   * ユーザー関連の API
-//   * @param {string} [action=''] action path option を指定します
-//   * @return {Types}  ユーザー関連の API をTypes instanceで返します
-//   */
-/*
-  static user( action:string = '' ):Types {
-
-    switch ( action ) {
-
-      case 'edit':
-        return ApiDae.api( 'user:edit' );
-
-      case 'add':
-        return Api.join();
-
-      case 'delete':
-        return Api.leave();
-
-      case '':
-        return ApiDae.api( 'user' );
-
-      default:
-        console.warn( `user illegal action: ${action}, instead use default` );
-        return ApiDae.api( 'user' );
-
-    }
-
-  }
-*/
   // ----------------------------------
   // カテゴリー一覧
   /**
@@ -349,12 +318,47 @@ export class Api {
       case 'notice:read':
         return ApiDae.api( 'users:self:notifications:read' );
 
+      case 'notifications:count':
+      case 'notice:count':
+        return ApiDae.api( 'users:self:notifications:count' );
+
       default:
         throw new Error( `users illegal action: ${action}.` );
 
     }
   }
+  /**
+   * お知らせ API
+   * @param {string} action path option を指定します read | count | ''
+   * @return {Types} お知らせ系 users API を Types instance で返します
+   */
+  static notice( action:string = '' ):Types {
 
+    switch ( action ) {
+
+      case 'read':
+        return Api.users( `notice:${action}` );
+
+      case 'count':
+        return Api.users( `notice:${action}` );
+
+      case '':
+        return Api.users( `notice` );
+
+      default:
+        throw new Error( `notice illegal action: ${action}.` );
+
+    }
+
+  }
+  /**
+   * alias Api,notice, お知らせ API
+   * @param {string} action path option を指定します read | count | ''
+   * @return {Types} お知らせ系 users API を Types instance で返します
+   */
+  static notifications( action:string ):Types {
+    return Api.notice( action );
+  }
   /**
    * users:settings API を取得します
    * @param {string} action path option を指定します

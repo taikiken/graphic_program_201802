@@ -23,9 +23,19 @@ import {NotificationsDae} from '../../dae/user/NotificationsDae';
 import {Safety} from '../../data/Safety';
 import {Result} from '../../data/Result';
 
+// model
+import {Model} from '../../model/Model';
+import {ModelNoticeCount} from '../../model/notice/ModelNoticeCount';
+
+import {NoticeCountDae} from '../../dae/notice/NoticeCountDae';
+import {NoticeStatus} from '../../event/NoticeStatus';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
+
+// Sagen
+let Gasane = self.Gasane;
 
 /**
  * お知らせ(header)
@@ -40,7 +50,12 @@ export class ViewHeaderMemberNotice extends View {
     super( element, option );
     this._action = new Notice( this.done.bind( this ), this.fail.bind( this ), 0, 5 );
 
+    // React instance, NoticeDom
     this._menu = null;
+    // NoticeStatus instance
+    this._status = null;
+    // event handler
+    this._boundNotice = this.onNoticeUpdate.bind( this );
   }
   /**
    * Ajax request を開始します
@@ -203,6 +218,7 @@ export class ViewHeaderMemberNotice extends View {
       }
     } );
 
+    /*
     // --------------------------------------------------
     // read all On / Off
     let ReadAllDom = React.createClass( {
@@ -246,6 +262,9 @@ export class ViewHeaderMemberNotice extends View {
         this.setState( { loading: '' } );
       }
     } );
+    */
+
+    // --------------------------------------------------
     // user notice dropMenu
     let NoticeMenuDom = React.createClass( {
       propTypes: {
@@ -258,22 +277,32 @@ export class ViewHeaderMemberNotice extends View {
       },
       render: function() {
 
-        let notifications = this.state.notifications;
+        let notifications = this.props.notifications;
 
         return (
           <nav className="notice-menu">
             <div className="dropMenu">
               <div className="info">
                 <h2 className="info-heading">お知らせ</h2>
+                {/*
+                // 機能 既読にする を drop
                 <ReadAllDom
                   length={notifications.length}
                   callback={this.allRead}
                 />
+                 */}
+                <div className="info-btn-readAll">&nbsp;</div>
                 <ul className="info-list">
                   {
                     notifications.map( function( notice, i ) {
 
-                      return <NoticeItemDom key={'notice-' + notice.id} notice={notice} index={i}/>;
+                      return (
+                        <NoticeItemDom
+                          key={'notice-' + notice.id}
+                          notice={notice}
+                          index={i}
+                        />
+                      );
 
                     } )
                   }
@@ -294,11 +323,19 @@ export class ViewHeaderMemberNotice extends View {
     // --------------------------------------------------
     // total 件数
 
+    // お知らせ件数を表示
+    // 定期的に更新, 1000ms
+    // 件数が変更されたら NoticeStatus.UPDATE_COUNT event fire
     let NoticeTotalDom = React.createClass( {
       propTypes: {
         total: React.PropTypes.number.isRequired
       },
       getInitialState: function() {
+        this.polling = null;
+        this.callback = null;
+        this.model = null;
+        this.status = null;
+
         return {
           total: this.props.total
         };
@@ -312,11 +349,87 @@ export class ViewHeaderMemberNotice extends View {
           return <span className="notice-num">{total}</span>;
         }
       },
+      componentDidMount: function() {
+        // after mount, start polling
+
+        // callback
+        let callback = this.callback;
+        if ( callback === null ) {
+          callback = {};
+          this.callback = callback;
+          callback[ Model.COMPLETE ] = this.done;
+          callback[ Model.UNDEFINED_ERROR ] = this.fail;
+          callback[ Model.RESPONSE_ERROR ] = this.fail;
+        }
+
+        // model
+        if ( this.model === null ) {
+          this.model = new ModelNoticeCount( callback );
+        }
+
+        // status
+        if ( this.status === null ) {
+          this.status = NoticeStatus.factory();
+        }
+
+        // polling
+        let polling = this.polling;
+
+        if ( polling === null ) {
+
+          polling = new Gasane.Polling( 1000 );
+          this.polling = polling;
+          polling.on( Gasane.Polling.PAST, this.update );
+          polling.start();
+
+        } else {
+
+          this.restart();
+
+        }
+
+      },
+      componentWillUnmount: function() {
+        this.dispose();
+      },
+      dispose: function() {
+        // unbind event
+        this.polling.off( Gasane.Polling.PAST, this.update );
+      },
+      restart: function() {
+        let polling = this.polling;
+        if ( polling !== null ) {
+          // 念のため一旦 unbind し bind する
+          polling.off( Gasane.Polling.PAST, this.update );
+          polling.on( Gasane.Polling.PAST, this.update );
+
+          polling.setPolling( 1000 );
+        }
+      },
+      update: function() {
+        this.polling.off( Gasane.Polling.PAST, this.update );
+        this.model.start();
+      },
+      done: function( result:NoticeCountDae ) {
+        let count = result.count;
+        if ( Number.isInteger( count ) ) {
+          if ( this.state.total !== count ) {
+            this.updateTotal( count );
+          }
+        }
+
+        this.restart();
+      },
+      fail: function() {
+        this.restart();
+      },
       updateTotal: function( total ) {
         this.setState( { total: total } );
+        this.status.update( total );
       }
     } );
 
+    // --------------------------------------------------
     // user notice
     let NoticeDom = React.createClass( {
       propTypes: {
@@ -351,10 +464,12 @@ export class ViewHeaderMemberNotice extends View {
 
         // after mount
         _this.executeSafely( View.DID_MOUNT );
+        _this.onMount();
 
       },
       componentWillUnmount: function() {
         this.destroy();
+        _this.dispose();
       },
       // -------------------------------------------------------
       // 以降 custom method
@@ -398,6 +513,7 @@ export class ViewHeaderMemberNotice extends View {
 
       },
       updateResponse: function( response ) {
+        console.log( '-------------------------------- updateResponse ', response );
         this.setState( { response: response } );
       }
     } );
@@ -417,6 +533,38 @@ export class ViewHeaderMemberNotice extends View {
 
     }
 
-
   }
+  /**
+   * NoticeStatus.UPDATE_COUNT unbind
+   */
+  dispose():void {
+    this.status.off( NoticeStatus.UPDATE_COUNT, this._boundNotice );
+  }
+  /**
+   * main dom が mount されたら呼び出されます
+   * componentDidMount callback
+   */
+  onMount():void {
+    let status = NoticeStatus.factory();
+    this._status = status;
+    status.on( NoticeStatus.UPDATE_COUNT, this._boundNotice );
+  }
+  /**
+   * NoticeStatus.UPDATE_COUNT event handler
+   * @param {Object} event NoticeStatus.UPDATE_COUNT event object, event.count が 0 以外の時に reload します
+   */
+  onNoticeUpdate( event:Object ):void {
+    // お知らせ件数が0の時はreloadしない
+    if ( event.count !== 0 ) {
+      this.reload();
+    }
+  }
+  /**
+   * 再読み込み
+   */
+  reload():void {
+    // ajax start
+    this._action.reload();
+  }
+
 }
