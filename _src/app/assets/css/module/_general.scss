@@ -145,6 +145,22 @@
         &-overlay-movie {}
       } //post-thumb
 
+      [ class^="post-label_" ] {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      &-label_recommend {
+        display: inline-block;
+        line-height: 1em;
+        padding: 4px 6px;
+        background-color: $highlight-color;
+        color: #fff;
+        font-weight: bold;
+        font-size: fz(12);
+      }
+
       &-data {
         margin-top: .75em;
       }
