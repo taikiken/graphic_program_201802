@@ -278,7 +278,7 @@ export class ViewHeaderMemberNotice extends View {
       render: function() {
 
         let notifications = this.props.notifications;
-        console.log( 'NoticeMenuDom notifications ******** ', notifications );
+
         return (
           <nav className="notice-menu">
             <div className="dropMenu">
@@ -296,7 +296,6 @@ export class ViewHeaderMemberNotice extends View {
                   {
                     notifications.map( function( notice, i ) {
 
-                      console.log( '*** header notice ', notice.id );
                       return (
                         <NoticeItemDom
                           key={'notice-' + notice.id}
@@ -382,7 +381,6 @@ export class ViewHeaderMemberNotice extends View {
           this.polling = polling;
           polling.on( Gasane.Polling.PAST, this.update );
           polling.start();
-          console.log( '******* polling start ******' );
 
         } else {
 
@@ -426,7 +424,6 @@ export class ViewHeaderMemberNotice extends View {
         this.restart();
       },
       updateTotal: function( total ) {
-        console.log( '******************** total ', total );
         this.setState( { total: total } );
         this.status.update( total );
       }
@@ -450,8 +447,6 @@ export class ViewHeaderMemberNotice extends View {
 
         let response = this.state.response;
         let notifications = Safety.array( response.notifications );
-
-        console.log( 'NoticeDom render ', notifications );
 
         return (
           <div className={'notice ' + this.state.open}>
@@ -550,7 +545,6 @@ export class ViewHeaderMemberNotice extends View {
    * componentDidMount callback
    */
   onMount():void {
-    console.log( '****************** onMount' );
     let status = NoticeStatus.factory();
     this._status = status;
     status.on( NoticeStatus.UPDATE_COUNT, this._boundNotice );
@@ -561,7 +555,6 @@ export class ViewHeaderMemberNotice extends View {
    */
   onNoticeUpdate( event:Object ):void {
     // お知らせ件数が0の時はreloadしない
-    console.log( '****************** onNoticeUpdate ', event.count );
     if ( event.count !== 0 ) {
       this.reload();
     }
@@ -571,7 +564,6 @@ export class ViewHeaderMemberNotice extends View {
    */
   reload():void {
     // ajax start
-    console.log( '****************** reload ', this._action );
     this._action.reload();
   }
 

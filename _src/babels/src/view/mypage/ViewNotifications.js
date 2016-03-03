@@ -25,6 +25,9 @@ import {Result} from '../../data/Result';
 
 import {NoticeStatus} from '../../event/NoticeStatus';
 
+// model
+import {ModelNoticeRead} from '../../model/notice/ModelNoticeRead';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -60,6 +63,9 @@ export class ViewNotifications extends View {
     this._status = null;
     // event handler
     this._boundNotice = this.onNoticeUpdate.bind( this );
+
+    // 既読にする
+    this._clear = new ModelNoticeRead();
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -421,6 +427,9 @@ export class ViewNotifications extends View {
       this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
 
     }
+
+    // 読み込みが終わったら 既読 にする
+    this.clear();
   }
   /**
    * NoticeStatus.UPDATE_COUNT unbind
@@ -437,6 +446,7 @@ export class ViewNotifications extends View {
     this._status = status;
     // お知らせカウントがアップデートされたら再読み込みを行うので bind する
     status.on( NoticeStatus.UPDATE_COUNT, this._boundNotice );
+
   }
   /**
    * NoticeStatus.UPDATE_COUNT event handler
@@ -456,5 +466,11 @@ export class ViewNotifications extends View {
     this._articles = [];
     // ajax start
     this._action.reload();
+  }
+  /**
+   * 既読にする
+   */
+  clear():void {
+    this._clear.start();
   }
 }
