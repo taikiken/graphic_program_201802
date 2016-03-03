@@ -14,8 +14,14 @@
 import {Safety} from '../../data/Safety';
 import {ActivityDae} from './ActivityDae';
 
-
+/**
+ * アクティビティ一覧配列
+ */
 export class ActivitiesDae {
+  /**
+   * アクティビティ一覧配列
+   * @param {Object} [response={}] JSON response
+   */
   constructor( response:Object = {} ) {
 
     response = Safety.object( response );

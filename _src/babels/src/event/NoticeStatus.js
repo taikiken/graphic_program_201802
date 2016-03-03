@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/02 - 20:54
+ * @date 2016/03/03 - 17:06
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -17,13 +17,13 @@ let _symbol = Symbol();
 let _instance = null;
 
 /**
- * ログイン / ログアウト を通知
+ * お知らせ更新を通知
  */
-export class UserStatus extends EventDispatcher {
+export class NoticeStatus extends EventDispatcher {
   /**
-   * ログイン / ログアウト を通知する SingleTon
+   * お知らせ更新 を通知する SingleTon
    * @example
-   * var userStatus = UserStatus.factory();
+   * var status = NoticeStatus.factory();
    *
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {UserStatus} UserStatus インスタンスを返します
@@ -31,7 +31,7 @@ export class UserStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `UserStatus is static Class. not use new UserStatus().` );
+      throw new Error( `NoticeStatus is static Class. not use new NoticeStatus().` );
 
     }
 
@@ -42,49 +42,37 @@ export class UserStatus extends EventDispatcher {
     return _instance;
   }
   // ---------------------------------------------------
-  //  method
+  //  EVENT
   // ---------------------------------------------------
   /**
-   * UserStatus.LOG_IN event を fire します
+   * UPDATE_COUNT, お知らせが更新された Event
+   * @return {string} noticeUpdateCount を返します
    */
-  login():void {
-    this.dispatch( { type: UserStatus.LOG_IN, sign: true } );
-  }
-  /**
-   * UserStatus.LOG_OUT event を fire します
-   */
-  logout():void {
-    this.dispatch( { type: UserStatus.LOG_OUT, sign: false } );
+  static get UPDATE_COUNT():string {
+    return 'noticeUpdateCount';
   }
   // ---------------------------------------------------
-  //  static const
+  //  METHOD
   // ---------------------------------------------------
   /**
-   * LOG_IN event
-   * @return {string} LOG_IN event type を返します
+   * お知らせが更新 Event を発火させます
+   * @param {Number} count お知らせ件数
    */
-  static get LOG_IN():string {
-    return 'logIn';
-  }
-  /**
-   * LOG_OUT event
-   * @return {string} LOG_OUT event type を返します
-   */
-  static get LOG_OUT():string {
-    return 'logOut';
+  update( count:Number ):void {
+    this.dispatch( { type: NoticeStatus.UPDATE_COUNT, count: count } );
   }
   // ---------------------------------------------------
   //  static method
   // ---------------------------------------------------
   /**
    * instance を生成します
-   * @return {UserStatus} UserStatus instance を返します
+   * @return {NoticeStatus} NoticeStatus instance を返します
    */
-  static factory():UserStatus {
+  static factory():NoticeStatus {
 
     if ( _instance === null ) {
 
-      _instance = new UserStatus( _symbol );
+      _instance = new NoticeStatus( _symbol );
 
     }
 

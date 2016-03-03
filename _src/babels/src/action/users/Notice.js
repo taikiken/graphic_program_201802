@@ -28,6 +28,15 @@ export class Notice extends OffsetAuth {
    * @param {Number} [length=10] query length 値
    */
   constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
-    super( User.token, Api.users( 'notice' ), resolve, reject, offset, length );
+    super( User.token, Api.notice( '' ), resolve, reject, offset, length );
+  }
+  // reload 追加
+  /**
+   * 再読み込み
+   */
+  reload():void {
+    this._reload = true;
+    let url = `${this._url}?offset=0&length=${this.offset}`;
+    this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
   }
 }

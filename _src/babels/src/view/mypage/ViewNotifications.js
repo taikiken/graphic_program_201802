@@ -23,6 +23,8 @@ import {NoticeDae} from '../../dae/user/NoticeDae';
 import {Safety} from '../../data/Safety';
 import {Result} from '../../data/Result';
 
+import {NoticeStatus} from '../../event/NoticeStatus';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -53,6 +55,11 @@ export class ViewNotifications extends View {
     this._moreRendered = null;
     // response.request object を保持する
     this._request = null;
+
+    // NoticeStatus instance
+    this._status = null;
+    // event handler
+    this._boundNotice = this.onNoticeUpdate.bind( this );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -370,6 +377,7 @@ export class ViewNotifications extends View {
       componentDidMount: function() {
         // hasNext を元に More View button の表示非表示を決める
         console.log( 'hasNext ', this.props.action.hasNext() );
+        _this.onMount();
         moreButton( this.props.action.hasNext(), this.props.action );
       },
       componentWillUnMount: function() {
@@ -406,8 +414,6 @@ export class ViewNotifications extends View {
         element
       );
 
-      console.log( 'this._articleRendered ', this._articleRendered );
-
     } else {
 
       // instance が存在するので
@@ -415,5 +421,40 @@ export class ViewNotifications extends View {
       this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
 
     }
+  }
+  /**
+   * NoticeStatus.UPDATE_COUNT unbind
+   */
+  dispose():void {
+    this.status.off( NoticeStatus.UPDATE_COUNT, this._boundNotice );
+  }
+  /**
+   * main dom が mount されたら呼び出されます
+   * componentDidMount callback
+   */
+  onMount():void {
+    let status = NoticeStatus.factory();
+    this._status = status;
+    // お知らせカウントがアップデートされたら再読み込みを行うので bind する
+    status.on( NoticeStatus.UPDATE_COUNT, this._boundNotice );
+  }
+  /**
+   * NoticeStatus.UPDATE_COUNT event handler
+   * @param {Object} event NoticeStatus.UPDATE_COUNT event object, event.count が 0 以外の時に reload します
+   */
+  onNoticeUpdate( event:Object ):void {
+    // お知らせ件数が0の時はreloadしない
+    if ( event.count !== 0 ) {
+      this.reload();
+    }
+  }
+  /**
+   * 再読み込み
+   */
+  reload():void {
+    // 既存リストを空にする
+    this._articles = [];
+    // ajax start
+    this._action.reload();
   }
 }
