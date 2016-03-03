@@ -16,6 +16,10 @@
   @content;
 }
 
+
+
+
+
 // dropMenu
 %dropMenu {
   position: relative;
@@ -36,3 +40,40 @@
     // background: url(/assets/images/common/icon-user-menu.png) 0 0 no-repeat;
   }
 }
+
+
+
+
+
+// modal-dialogue
+%modal-dialogue {
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .2);
+
+  .modal-dialogue-contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    padding: 28px;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  .modal-dialogue-close {
+    position: absolute;
+    top: 5px;
+    right: 4px;
+
+    @extend .sprite-common;
+    @include sprite( $common-btn-dialogue-close );
+    @include hide-text;
+  }
+}
+

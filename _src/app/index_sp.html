@@ -17,6 +17,7 @@
   <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
   <script src="/assets/js/libs/vendor.min.js"></script>
   <script src="/assets/js/libs/vendor.react.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
 <div class="whole">
@@ -34,69 +35,11 @@
           </div><!-- /.head-search -->
 
           <div class="user">
-            <a class="btn-signup" href="hoge">無料登録 / ログイン</a>
-          </div><!-- /.user -->
-
-          <div class="user">
-            <div class="notice">
-              <a class="notice-opener" href="#">
-                <i class="notice-icon"></i>
-                <span class="notice-num">88</span>
-              </a>
-
-              <nav class="notice-menu" style="display: block;">
-                <div class="dropMenu">
-                  <div class="info">
-                    <h2 class="info-heading">お知らせ</h2>
-                    <div class="info-btn-readAll"><a href="hoge">すべて既読にする</a></div>
-                    <ul class="info-list">
-                      <li class="info-item">
-                        <a class="info-link read" href="hoge1">
-                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
-                          <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Good</strong>しました。</p>
-                          <p class="info-date">29分前</p>
-                        </a>
-                      </li>
-                      <li class="info-item">
-                        <a class="info-link unread" href="hoge">
-                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
-                          <p class="info-content">〇〇さんがあなたの「アロンソ、今季の「痛み」で闘志に再び火」へのコメントに<strong>Bad</strong>しました。</p>
-                          <p class="info-date">29分前</p>
-                        </a>
-                      </li>
-                      <li class="info-item">
-                        <a class="info-link read" href="hoge">
-                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
-                          <p class="info-content">〇〇さんがあなたの「長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合長文が入って3行になった場合」へのコメントに<strong>コメント</strong>しました。</p>
-                          <p class="info-date">29分前</p>
-                        </a>
-                      </li>
-                      <li class="info-item">
-                        <a class="info-link read" href="hoge">
-                          <figure class="info-user-thumb"><img src="/assets/images/common/thumb-user-info.png" alt=""></figure>
-                          <p class="info-content">〇〇さんがあなたの「長文が入って2行になった場合長文が入って2行になった場合長文が入って2行になった場合」へのコメントに<strong>Good</strong>しました。</p>
-                          <p class="info-date">29分前</p>
-                        </a>
-                      </li>
-                      <li class="btn-viewmore"><a class="btn-viewmore-link" href="hoge"><span>すべて見る</span></a></li>
-                    </ul>
-                  </div><!-- /.info -->
-                </div>
-              </nav><!-- /.notice-menu -->
-            </div><!-- /.notice -->
-
             <div class="preference">
               <a class="preference-opener" href="#">
                 <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
               </a>
-
-              <nav class="preference-menu" style="display: block;">
-                <ul class="dropMenu">
-                  <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ブックマーク<br>アクティビティ</a></li>
-                  <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">設定</a></li>
-                  <li class="dropMenu-item"><a class="dropMenu-link" href="hoge">ログアウト</a></li>
-                </ul>
-              </nav><!-- /.preference-menu -->
+              <span class="preference-num">88</span>
             </div><!-- /.preference -->
           </div><!-- /.user -->
 
@@ -107,7 +50,7 @@
   <nav class="gnav-sec home">
     <ul>
       <li class="gnav-home"><a href="hoge">一面</a></li>
-      <li class="gnav-crazy"><a href="hoge"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
+      <li class="gnav-crazy"><a href="hoge">CRAZY</a></li>
       <li class="gnav-all"><a href="hoge">すべて</a></li>
       <li class="gnav-baseball"><a href="hoge">野球</a></li>
       <li class="gnav-soccer"><a href="hoge">サッカー</a></li>
@@ -130,7 +73,7 @@
     </ul>
   </nav><!-- /.gnav-sec -->
 
-  <div class="dialogue-notice error">
+  <div class="dialogue-notice error hide">
     <div class="dialogue-notice-inner">
       <div class="dialogue-notice-info">
         <p>パスワードが違います</p>
@@ -146,7 +89,7 @@
   .success -> #43e18a グリーン
   -->
 
-  <div class="hero-sec">
+  <div class="hero-sec hide">
     <div class="hero-slider">
       <div class="hero-slider-inner">
         <ul>
@@ -208,7 +151,7 @@
     </div><!-- /.hero-slider -->
   </div><!-- /.hero-sec -->
 
-  <div class="body-sec">
+  <div class="body-sec hide">
     <div class="body-sec-inner">
       <section class="main-sec">
         <div class="headline">
@@ -489,7 +432,7 @@
     </div>
   </div><!-- /.body-sec -->
 
-  <footer class="foot-sec">
+  <footer class="foot-sec hide">
     <div class="foot-sec-inner">
       <div class="foot-pr">
         <div class="foot-pr-inner">

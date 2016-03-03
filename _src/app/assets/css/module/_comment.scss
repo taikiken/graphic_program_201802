@@ -369,6 +369,62 @@
   }
 } //.comment-andmore
 
+
+
+
+// modal-dialogue-delete
+.modal-dialogue_delete {
+  @extend %modal-dialogue;
+
+  .modal-dialogue-contents {
+    // width: 210px + 30*2;
+  }
+
+  .lead {}
+
+  .btn-block {
+    @include clearfix;
+    margin-top: 16px;
+
+    @at-root {
+      .btn-item {
+        float: right;
+        width: perCalc(100, 210);
+
+        &:first-child {
+          float: left;
+        }
+      }
+
+      .btn-link {
+        @include link-decoration(#fff, #fff, none, none);
+        display: block;
+        line-height: 1em;
+        padding: 8px 2px;
+        border-radius: 3px;
+        background-color: #666;
+        font-weight: bold;
+        font-size: fz(12);
+        text-align: center;
+        white-space: nowrap;
+
+        &:hover {
+          @include hover-opacity;
+        }
+
+        &_cancel {
+          background-color: $highlight-color;
+        }
+      }
+    }
+  }
+} //.modal-dialogue-delete
+
+
+
+
+
+
 // -------------------------------------------------
 // override
 @import "comment_override";
