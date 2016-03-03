@@ -16,7 +16,14 @@ import {SettingsAccount} from '../../action/settings/SettingsAccount';
 import {UserDae} from '../../dae/UserDae';
 import {Result} from '../../data/Result';
 
+/**
+ * 設定・アカウント 取得
+ */
 export class ModelAccount extends Model {
+  /**
+   * 設定・アカウント 取得
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( option:Object = {} ) {
     super( option );
     this._action = new SettingsAccount( this.done.bind( this ), this.fail.bind( this ) );

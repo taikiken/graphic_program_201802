@@ -13,7 +13,7 @@
 
 import {OffsetAuth} from '../OffsetAuth';
 import {Api} from '../../net/Api';
-import {Safety} from '../../data/Safety';
+// import {Safety} from '../../data/Safety';
 import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 

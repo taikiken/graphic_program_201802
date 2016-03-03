@@ -24,7 +24,7 @@ export class MessageStatus extends EventDispatcher {
    * <h3>flush message</h3>
    * <p>完了・注意など一時表示メッセージイベント</p>
    * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {*}
+   * @return {*} MessageStatus instance を返します
    */
   constructor( target ) {
     if ( _symbol !== target ) {

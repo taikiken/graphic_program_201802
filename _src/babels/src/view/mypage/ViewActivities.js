@@ -17,14 +17,14 @@ import {ViewError} from '../error/ViewError';
 import {Activities} from '../../action/mypage/Activities';
 
 // app
-import {Empty} from '../../app/const/Empty';
+// import {Empty} from '../../app/const/Empty';
 
 // data
 import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // dae
-import {ArticleDae} from '../../dae/ArticleDae';
+// import {ArticleDae} from '../../dae/ArticleDae';
 import {ActivitiesDae} from '../../dae/user/ActivitiesDae';
 
 // React

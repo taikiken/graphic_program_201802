@@ -24,7 +24,7 @@ export class Scroll extends EventDispatcher {
   /**
    * scroll に関する singleton class
    * @param {Symbol} target Singleton を実現するための private symbol
-   * @returns {Scroll}
+   * @returns {Scroll} Scroll instance を返します
    */
   constructor( target:Symbol ) {
     if ( _symbol !== target ) {

@@ -16,7 +16,15 @@ import {ModelBehavior} from '../ModelBehavior';
 import {Result} from '../../data/Result';
 import {SettingsAccountEdit} from '../../action/settings/SettingsAccountEdit';
 
+/**
+ * 設定・アカウント 更新系
+ */
 export class ModelAccountEdit extends ModelBehavior {
+  /**
+   * 設定・アカウント 更新系
+   * @param {FormData} formData POST form data
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( formData:FormData, option:Object = {} ) {
     super( formData, option );
     this._action = new SettingsAccountEdit( formData, this.done.bind( this ), this.fail.bind( this ) );

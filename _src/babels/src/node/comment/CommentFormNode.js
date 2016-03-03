@@ -16,7 +16,7 @@ import {ReplyStatus} from '../../event/ReplyStatus';
 import {Empty} from '../../app/const/Empty';
 import {Form} from '../../data/Form';
 import {Safety} from '../../data/Safety';
-import {Result} from '../../data/Result';
+// import {Result} from '../../data/Result';
 import {ErrorMessage} from '../../data/ErrorMessage';
 
 // model

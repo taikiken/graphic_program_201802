@@ -17,13 +17,13 @@ import {Result} from '../../data/Result';
 import {SettingsInterestEdit} from '../../action/settings/SettingsInterestEdit';
 
 /**
- *
+ * 設定・興味のある競技 更新系
  */
 export class ModelInterestEdit extends ModelBehavior {
   /**
-   *
-   * @param formData
-   * @param option
+   * 設定・興味のある競技 更新系
+   * @param {FormData} formData POST form data
+   * @param {Object} [option={}] optional event handler
    */
   constructor( formData:FormData, option:Object = {} ) {
     super( formData, option );

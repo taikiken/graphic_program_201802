@@ -18,6 +18,7 @@ let _symbol = Symbol();
  * 全て static です
  */
 export class Url {
+  //
   /**
    * <h4>Page 遷移 URL</h4>
    * <p>a tag href へハードコードされる URL 定義</p>
@@ -85,7 +86,7 @@ export class Url {
   /**
    * 検索ページ url
    * @param {string} keyword 検索ワード
-   * @return {*string} 検索ページ url を返します
+   * @return {*|string} 検索ページ url を返します
    */
   static search( keyword:string ):string {
     return `/search/${keyword}`;
@@ -143,7 +144,7 @@ export class Url {
 
   /**
    * location.hash から signup step number を取得します
-   * @param {string} [hash='']
+   * @param {string} [hash=''] location.hash #付き
    * @return {number} step number
    */
   static signupStepByHash( hash:string = '' ):Number {

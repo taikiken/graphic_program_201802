@@ -83,9 +83,9 @@ rules:
   space-return-throw-case: 2
   space-unary-ops: [2, {words: true, nonwords: false}]
   spaced-comment: [1, "always", { exceptions: ["-", "/"], markers: [".", "}" ,")" ,"var", "!", "*"]}]
-  strict: [1, "global"]
+  strict: [0, "global"]
 #  valid-jsdoc: [1, { prefer: { "return": "returns"}}]
-  valid-jsdoc: 1
+  valid-jsdoc: [1, { "requireReturn": false }]
   wrap-iife: 2
   yoda: [2, "never"]
 

@@ -107,6 +107,8 @@ export let CommentActionNode = React.createClass( {
     }
 
   },
+  // -------------------------------------------------
+  // delegate
   componentDidMount: function() {
     // model, callback initialize
     let model = this.model;
@@ -146,7 +148,7 @@ export let CommentActionNode = React.createClass( {
   // delete
   deleteClick: function( event ) {
     event.preventDefault();
-    event.stopPropagation();
+    // event.stopPropagation();
     // delete action
     this.setState( { deleteLoading: 'loading'} );
     this.props.remove( 'click' );
@@ -156,7 +158,6 @@ export let CommentActionNode = React.createClass( {
     this.message.on( MessageStatus.CANCEL_CLICK, this.onCancel );
     console.log( 'modal delete click open ', this.props.articleId, this.props.commentId, this.props.replyId );
     this.message.remove( this.props.uniqueId );
-    //this.message.remove( this.props.uniqueId, this.shouldDelete, this.shouldCancel );
   },
   // confirm ok click
   shouldDelete: function() {
@@ -189,41 +190,31 @@ export let CommentActionNode = React.createClass( {
     this.setState( { deleteLoading: ''} );
     this.props.remove( 'cancel' );
   },
-  deleteDone: function(result) {
-    console.log( 'deleteDone', this.props.uniqueId, result );
+  deleteDone: function(/* result */) {
+    // console.log( 'deleteDone', this.props.uniqueId, result );
     this.setState( { deleteLoading: ''} );
     this.props.remove( 'done' );
 
     // event 通知
     this.comment.remove( this.props.commentId );
   },
-  deleteFail: function(error) {
-    console.log( 'deleteFail', error );
+  deleteFail: function(/* error */) {
+    // console.log( 'deleteFail', error );
     this.setState( { deleteLoading: ''} );
     this.props.remove( 'fail' );
   },
   // -------------------------------------------------
   reportClick: function( event ) {
     event.preventDefault();
-    // event.stopPropagation();
-    console.log( 'reportClick', event );
 
     this.setState( { reportLoading: 'loading'} );
     this.props.report( 'click' );
-
-    // test code
-    /*
-     setTimeout( this.reportDone, 1000 );
-     setTimeout( this.reportFail, 1000 );
-     */
   },
-  reportDone: function(result) {
-    console.log( 'reportDone', result );
+  reportDone: function(/* result */) {
     this.setState( { reportLoading: ''} );
     this.props.report( 'done' );
   },
-  reportFail: function(error) {
-    console.log( 'reportFail', error );
+  reportFail: function(/* error */) {
     this.setState( { reportLoading: ''} );
     this.props.report( 'fail' );
   }

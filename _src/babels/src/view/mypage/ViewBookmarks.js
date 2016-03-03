@@ -364,7 +364,7 @@ export class ViewBookmarks extends View {
             <ul className="board-small">
               {
                 // loop start
-                this.state.list.map( function( dae, i ) {
+                this.state.list.map( function( dae ) {
 
                   let thumbnail = dae.media.images.thumbnail;
                   if ( !thumbnail ) {

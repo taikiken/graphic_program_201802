@@ -37,6 +37,7 @@ export class Router extends EventDispatcher {
    * router.route();
    *
    * @param {Symbol} target Singleton を実現するための private symbol
+   * @return {Router} Router instance を返します
    */
   constructor( target ) {
 

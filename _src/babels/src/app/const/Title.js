@@ -82,7 +82,7 @@ export class Title {
   /**
    *
    * @param {string} slug category slug, type
-   * @return {*}
+   * @return {string} category label を返します
    */
   static categoryTitle( slug:string ):string {
     return _category[ slug ];

@@ -40,7 +40,6 @@ export class ErrorsDae {
     }
 
   }
-
   /**
    * errors が配列の時の処理
    * @param {Array} errors response.errors
@@ -60,7 +59,7 @@ export class ErrorsDae {
   }
   /**
    * errors が配列以外(hash === object)の時の処理
-   * @param errors
+   * @param {Object} errors errors が object の時の処理 JSON errors
    */
   initHash( errors:Object ):void {
     let bank = this._bank;
@@ -95,7 +94,7 @@ export class ErrorsDae {
     return this._bank;
   }
   /**
-   * @param {string} errorKey
+   * @param {string} errorKey error object の key（多分 input: name 値）
    * @return {string} キー値のエラーメッセージを返します
    */
   message( errorKey:string ):string {

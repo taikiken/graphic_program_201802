@@ -16,7 +16,14 @@ import {SettingsInterest} from '../../action/settings/SettingsInterest';
 import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
 import {Result} from '../../data/Result';
 
+/**
+ * 設定・興味のある競技 取得
+ */
 export class ModelInterest extends Model {
+  /**
+   * 設定・興味のある競技 取得
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( option:Object = {} ) {
     super( option );
     this._action = new SettingsInterest( this.done.bind( this ), this.fail.bind( this ) );
