@@ -11,7 +11,9 @@
  */
 'use strict';
 
+// event
 import {ReplyStatus} from '../../event/ReplyStatus';
+import {CommentStatus} from '../../event/CommentStatus';
 
 import {Empty} from '../../app/const/Empty';
 import {Form} from '../../data/Form';
@@ -71,7 +73,8 @@ let FormElementNode = React.createClass( {
     // などの UI に使用します
     this.replyStatus = null;
 
-    this.message = null;
+    this.commentStatus = null;
+    // this.message = null;
 
     this.mounted = false;
 
@@ -177,6 +180,16 @@ let FormElementNode = React.createClass( {
       }
 
     }
+
+    let commentStatus = this.commentStatus;
+
+    if ( commentStatus === null ) {
+      if ( !this.props.independent ) {
+        commentStatus = CommentStatus.factory();
+        this.commentStatus = commentStatus;
+        commentStatus.on( CommentStatus.COMMENT_DELETE, this.beforeReload );
+      }
+    }
   },
   // コメント送信成功後 reload するとき
   // 何もかも白紙にする
@@ -204,6 +217,11 @@ let FormElementNode = React.createClass( {
       replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
       replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
       this.replyStatus = null;
+    }
+
+    let commentStatus = this.commentStatus;
+    if ( commentStatus !== null ) {
+      commentStatus.off( CommentStatus.COMMENT_DELETE, this.beforeReload );
     }
   },
   // ----------------------------------------
