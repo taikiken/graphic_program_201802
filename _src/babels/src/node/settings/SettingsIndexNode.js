@@ -13,6 +13,10 @@
 
 // app
 import {Empty} from '../../app/const/Empty';
+import {ErrorTxt} from '../../app/const/ErrorTxt';
+
+// util
+import {Validate} from '../../util/Validate';
 
 // ui
 import {Thumbnail} from '../../ui/Thumbnail';
@@ -21,6 +25,7 @@ import {Thumbnail} from '../../ui/Thumbnail';
 import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
+import {Safety} from '../../data/Safety';
 
 // node
 import {ErrorNode} from '../error/ErrorNode';
@@ -66,20 +71,26 @@ let SettingInputNode = React.createClass( {
     this.errors = {
       email: new ErrorMessage(),
       password: new ErrorMessage(),
-      name: new ErrorMessage()
+      name: new ErrorMessage(),
+      profile_picture: new ErrorMessage()
     };
     this.ie = Sagen.Browser.IE.is();
     this.callback = null;
     this.icon = null;
 
     return {
-      avatar: this.props.avatar,
       entered: false,
       error: false,
+
       email: this.props.email,
       password: this.props.password,
       name: this.props.name,
       bio: this.props.bio,
+      // input[type="file"] 入力値
+      picture: '',
+      // 入力済みの profile picture path
+      avatar: this.props.avatar,
+
       loading: ''
     };
   },
@@ -99,6 +110,17 @@ let SettingInputNode = React.createClass( {
       // input:file を常に有効にする
       return '';
     };
+
+    // 登録済み avatar
+    let avatar = this.state.avatar;
+    if ( !avatar ) {
+      avatar = Empty.USER_EMPTY;
+    }
+    /*
+    else if ( !Safety.isImg( avatar ) ) {
+      avatar = Empty.USER_EMPTY;
+    }
+    */
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
@@ -158,28 +180,31 @@ let SettingInputNode = React.createClass( {
           {/* profile_picture */}
           <div className={'setting-form-avatar ' + stageClass()}>
             <h2 className="setting-form-avatar-heading">プロフィール写真選択</h2>
-            <div
-              className={'setting-form-avatar-dropArea ' + zoneEntered}
-              onDragOver={this.handleDragOver}
-              onDragEnter={this.handleDragEnter}
-              onDragLeave={this.handleDragLeave}
-              onDrop={this.handleDrop}
-            >
-              <div className={'avatar-stage'}>
-                <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
-                <ChangeAvatarNode
-                  show={this.props.empty !== this.state.avatar}
-                  handler={this.avatarChangeHandler}
+            <div className={'form-parts ' + errorClass('profile_picture')}>
+              <div
+                className={'setting-form-avatar-dropArea ' + zoneEntered}
+                onDragOver={this.handleDragOver}
+                onDragEnter={this.handleDragEnter}
+                onDragLeave={this.handleDragLeave}
+                onDrop={this.handleDrop}
+              >
+                <div className={'avatar-stage'}>
+                  <sapn className="avatar-container"><img src={avatar} alt=""/></sapn>
+                  <ChangeAvatarNode
+                    show={this.props.avatar !== this.state.avatar}
+                    handler={this.avatarChangeHandler}
+                  />
+                </div>
+                <input
+                  type="file"
+                  name="profile_picture"
+                  accept="image/*"
+                  value={this.state.picture}
+                  onChange={this.pictureChange}
+                  className="setting-form-picture form-input"
                 />
               </div>
-              <input
-                type="file"
-                name="profile_picture"
-                accept="image/*"
-                value={this.state.picture}
-                onChange={this.pictureChange}
-                className="setting-form-picture form-input"
-              />
+              <ErrorNode message={message('profile_picture')} />
             </div>
           </div>
         </fieldset>
@@ -335,7 +360,54 @@ let SettingInputNode = React.createClass( {
     this.setState( { loading: 'loading' } );
     this.prepareNext();
   },
+  // validate
   prepareNext: function():void {
+    // error 消去
+    this.reset();
+
+    let count = 0;
+    let errors = this.errors;
+
+    // email
+    let email = this.state.email;
+    if ( email === '' ) {
+      errors.email.message = ErrorTxt.EMAIL_EMPTY;
+      ++count;
+    } else if ( !Validate.email( email ) ) {
+      errors.email.message = ErrorTxt.EMAIL_INVALID;
+      ++count;
+    }
+
+    // password
+    let password = this.state.password;
+    if ( password !== '' ) {
+      // 入力があった時だけ validate します
+      if ( password.length < 8 ) {
+        errors.password.message = ErrorTxt.PASSWORD_SHORT;
+        ++count;
+      } else if ( !Validate.alphaNum( password ) ) {
+        errors.password.message = ErrorTxt.PASSWORD_INVALID;
+        ++count;
+      }
+    }
+
+    // name
+    let name = this.state.name;
+    if ( name === '' ) {
+      errors.name.message = ErrorTxt.NAME_EMPTY;
+      ++count;
+    }
+
+    // error がない時だけ
+    if ( count === 0 ) {
+      this.request();
+    } else {
+      this.error();
+    }
+
+  },
+  // request
+  request: function():void {
     let formData = Form.element( ReactDOM.findDOMNode( this.refs.settings ) );
 
     let model = this.model;
@@ -346,8 +418,6 @@ let SettingInputNode = React.createClass( {
       model.data = formData;
     }
 
-    // error 消去
-    this.reset();
     // ajax start
     model.start();
   },
@@ -364,8 +434,8 @@ let SettingInputNode = React.createClass( {
   // ---------------------------------------------------
   error: function() {
     // input error
-    // response error
     // show error
+    this.setState( { error: true, loading: '' } );
   },
   done: function( result:Result ) {
     console.log( 'done ', result );
@@ -402,6 +472,7 @@ let SettingInputNode = React.createClass( {
     this.errors.email.reset();
     this.errors.password.reset();
     this.errors.name.reset();
+    this.errors.profile_picture.reset();
     this.setState( { error: false } );
   },
   dispose: function() {

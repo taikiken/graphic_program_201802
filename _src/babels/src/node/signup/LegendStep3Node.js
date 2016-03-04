@@ -37,7 +37,8 @@ let Step3FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
-    getForm: React.PropTypes.func.isRequired
+    getForm: React.PropTypes.func.isRequired,
+    beforeRedirect: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -158,6 +159,9 @@ let Step3FormNode = React.createClass( {
     console.log( '----success--- ', token );
     // token setup
     if ( User.login( token ) ) {
+      // redirect 通知
+      // beforeunload を解除するため
+      this.props.beforeRedirect();
       // home
       Loc.index();
     } else {
@@ -195,7 +199,8 @@ export let LegendStep3Node = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
-    getForm: React.PropTypes.func.isRequired
+    getForm: React.PropTypes.func.isRequired,
+    beforeRedirect: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -213,6 +218,7 @@ export let LegendStep3Node = React.createClass( {
           step={this.props.step}
           categories={this.props.categories}
           getForm={this.props.getForm}
+          beforeRedirect={this.props.beforeRedirect}
         />
       </div>
     );

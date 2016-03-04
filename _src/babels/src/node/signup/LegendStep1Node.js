@@ -11,9 +11,16 @@
  */
 'use strict';
 
-import {SignupStatus} from '../../event/SignupStatus';
-import {Loc} from '../../util/Loc';
+// app
 import {Url} from '../../app/const/Url';
+import {ErrorTxt} from '../../app/const/ErrorTxt';
+
+// event
+import {SignupStatus} from '../../event/SignupStatus';
+
+// util
+import {Loc} from '../../util/Loc';
+import {Validate} from '../../util/Validate';
 
 // data
 import {Result} from '../../data/Result';
@@ -62,7 +69,7 @@ let Step1FormNode = React.createClass( {
         <span className={'form-parts ' + errorClass('errorEmail')}>
           <span className="setting-form-mail form-input">
             <input
-              type="text"
+              type="email"
               name="email"
               value={this.state.email}
               onChange={this.emailChange}
@@ -118,9 +125,32 @@ let Step1FormNode = React.createClass( {
     event.preventDefault();
     this.prepareNext();
   },
+  // 入力チェック
+  // ok -> this.request()
+  prepareNext: function():void {
+    // error 消去
+    this.reset();
+
+    // validate 開始
+    let email = this.state.email;
+    // email empty check
+    if ( email === '' ) {
+      this.error( ErrorTxt.EMAIL_EMPTY );
+      return;
+    }
+
+    if ( !Validate.email( email ) ) {
+      // not correct email pattern
+      this.error( ErrorTxt.EMAIL_INVALID );
+      return;
+    }
+
+    // validate OK
+    this.request();
+  },
   // server へリクエストし
   // 登録済み email かを調べます
-  prepareNext: function():void {
+  request: function():void {
     let data = new Data( 'email', this.state.email );
     let formData = Form.data( [ data ] );
 
@@ -131,26 +161,24 @@ let Step1FormNode = React.createClass( {
     } else {
       model.data = formData;
     }
-    // let detect = new ModelUserDetect( formData, this.callback );
-    // error 消去
-    this.reset();
+
     // ajax start
     model.start();
   },
   // 登録済み email でなかったので次の step へ移動します
   next: function() {
     // next step
-    // this.status.step( this.props.step + 1 );
     // email ok
     this.status.email( this.state.email );
     // hash
     Loc.hash = Url.signupHash( this.props.step + 1 );
   },
   // ---------------------------------------------------
-  error: function() {
+  error: function( message:string ) {
     // input error
-    // response error
     // show error
+    this.errors.errorEmail.message = message;
+    this.setState( { errorEmail: true } );
   },
   // ---------------------------------------------------
   // ajax
@@ -166,7 +194,6 @@ let Step1FormNode = React.createClass( {
     console.log( 'fail ', error.result.response.errors );
     this.errors.errorEmail.message = error.result.response.errors.email;
     this.setState( { errorEmail: true } );
-
   },
   reset: function() {
     this.errors.errorEmail.reset();
@@ -214,7 +241,7 @@ export let LegendStep1Node = React.createClass( {
             step={this.props.step}
           />
           <p className="note">
-            <a href="hoge" target="_blank">利用規約</a>と<a href="hoge" target="_blank">個人情報の取扱</a>に同意したものとみなします。
+            <a href="/about/terms/" target="_blank">利用規約</a>と<a href="/about/privacy/" target="_blank">個人情報の取扱</a>に同意したものとみなします。
           </p>
         </div>
       </div>
