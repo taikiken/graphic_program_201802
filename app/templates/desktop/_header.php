@@ -34,6 +34,7 @@ if (
   $template_name == '404' ||
   $template_name == 'category' ||
   $template_name == 'p' ||
+  $template_name == 'comment' ||
   $template_name == 'search' ||
   $template_name == 'settings' ||
   $template_name == 'settings.social' ||
