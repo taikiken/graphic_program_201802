@@ -81,6 +81,19 @@ if (
 ?>
 </div><!-- /.whole -->
 <div id="modal-container"></div>
+<?php
+/*
+ * php ENV, apiRoot を元に API request 先を決定します
+ * apiRoot が http://www.undotsushin.com の時に
+ * UT.app.App.develop(); を行います
+ *
+ * それ以外の時は default '/api/...' へアクセスします
+ * protocol, hostname それぞれ持たないので http|https どちらでも問題ないかと思います
+*/
+if ( $page['apiRoot'] === 'http://www.undotsushin.com' ) :
+  // develop mode
+  // dev, stg, local から起動の時のみ script tag を有効にします
+?>
 <script>
 ( function () {
 
@@ -104,15 +117,15 @@ if (
   */
 
   var UT = self.UT;
-
-  // local develop mode
+  // API request 先頭に http://www.undotsushin.com を追加します
   UT.app.App.develop();
-
-  // sign in
-  // UT.app.User.login();
 
 }() );
 </script>
+<?php
+endif;
+// if $page['apiRoot']
+?>
 <script src="/assets/js/bundle/exe.bundle.js"></script>
 <script>
   window.fbAsyncInit = function() {
