@@ -168,11 +168,12 @@ let FormElementNode = React.createClass( {
 
     if ( replyStatus === null ) {
 
+      replyStatus = ReplyStatus.factory();
+      this.replyStatus = replyStatus;
+
       // 記事へのコメントは閉じない
       if ( !this.props.independent ) {
 
-        replyStatus = ReplyStatus.factory();
-        this.replyStatus = replyStatus;
         replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
         replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
         replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );

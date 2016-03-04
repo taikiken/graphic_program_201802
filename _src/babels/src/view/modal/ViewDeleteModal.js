@@ -40,8 +40,9 @@ export class ViewDeleteModal extends View {
     status.on( MessageStatus.DELETE, this.onModal.bind( this ) );
   }
   /**
-   *
-   * @param {Object} event
+   * MessageStatus.DELETE event handler,
+   * modal window を open します
+   * @param {Object} event MessageStatus.DELETE event instance
    */
   onModal( event:Object ):void {
 

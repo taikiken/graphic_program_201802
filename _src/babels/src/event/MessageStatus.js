@@ -146,7 +146,7 @@ export class MessageStatus extends EventDispatcher {
    * @param {string} id unique id
    * @param {Function} [ok] ok callback
    * @param {Function} [cancel] cancel callback
-   * @param {string} [type=MessageStatus.INFO]
+   * @param {string} [type=MessageStatus.INFO] message type MessageStatus.INFO | MessageStatus.ERROR | MessageStatus.SUCCESS
    */
   remove( id:string, ok:Function, cancel:Function, type:string = MessageStatus.INFO ):void {
     if ( !ok ) {
