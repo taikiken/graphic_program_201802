@@ -4,12 +4,6 @@
   </h1>
 </div><!-- /.category-heading -->
 
-<?php
-echo '<!--';
-var_dump($page);
-echo '-->';
-?>
-
 
   <h1>これはコメント詳細用のテンプレートです</h1>
 
@@ -19,17 +13,11 @@ echo '-->';
     <section class="main-sec">
       <div class="post-detail">
 
-        <div id="single-header-container"></div>
-
-        <div class="post-content">
-          <?php print_r($page['post']['body']); ?>
-        </div><!-- /.post-content -->
+        <div id="comment-normal-container"></div>
 
         <div class="sponsor-link">
           <a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-710x78.jpg" alt=""></a>
         </div>
-
-        <div id="single-footer-container"></div>
 
         <div class="post-sns">
           <ul class="post-sns-list">
@@ -41,19 +29,6 @@ echo '-->';
         </div><!-- /.post-sns -->
 
       </div><!-- /.post-detail -->
-      <div class="comment">
-
-        <div id="comment-form-container"></div>
-
-        <div id="comment-self-container"></div>
-
-        <div id="comment-official-container"></div>
-
-        <div id="comment-normal-container"></div>
-
-      </div><!-- /.comment -->
-
-      <div id="single-related-container"></div>
 
     </section><!-- /.main-sec -->
 

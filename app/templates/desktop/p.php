@@ -4,11 +4,6 @@
   </h1>
 </div><!-- /.category-heading -->
 
-<?php
-echo '<!--';
-var_dump($page);
-echo '-->';
-?>
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">
