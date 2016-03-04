@@ -1,0 +1,152 @@
+@charset "utf-8";
+/* top.css */
+
+/*　トップページ
+////////////////////////////////////////////////////*/
+#tubular-container {
+	z-index: -1;
+}
+
+@media (max-width: 797px) {
+	#movie_box iframe {
+		width: 100%;
+		height: 300px;
+	}
+
+	#main_visual .caption {
+		margin: 10px 20px 46px;
+	}
+
+	#main_visual .caption li {
+		color: #999;
+		font-size: 9px;
+	}
+
+	.caption_txt {
+		margin: 10px 20px;
+		color: #999;
+		font-size: 9px;
+	}
+
+	#concept_box header h1 img {
+		width: 211px;
+	}
+
+	#concept_box header h2 {
+		margin: 33px 0 34px;
+	}
+
+	#concept_box header h2 img {
+		width: 251px;
+	}
+
+	#concept_box dd img {
+		width: 100%;
+	}
+
+	#concept_box dt {
+		margin: 70px 0 0;
+	}
+
+	#concept_box dt img {
+		width: 75px;
+	}
+
+	#concept_box dt {
+		margin: 35px 0 0;
+	}
+}
+
+@media (min-width: 798px) {
+	#main_visual {
+		position: relative;
+		z-index: 1000;
+	}
+
+	.caption_txt {
+		margin: 20px auto;
+		color: #999;
+		font-size: 11px;
+		width: 1139px;
+	}
+
+	#movie_box {
+		margin: 0 auto 20px;
+		position: relative;
+		overflow: hidden;
+		width: 1139px;
+	}
+
+	#movie_box iframe {
+		width: 1139px;
+		height: 576px;
+	}
+
+	#main_visual .caption {
+		width: 1139px;
+		margin: 0 auto;
+		text-align: right;
+	}
+
+	#main_visual .caption li {
+		display: inline;
+		color: #999;
+		font-size: 11px;
+	}
+
+	#main_visual .caption li:first-child {
+		display: block;
+	}
+
+	#concept_box img {
+		display: none;
+	}
+
+	#concept_box header h1:after {
+		content: "";
+		background: url(../img/h_spring2016.png) no-repeat left top;
+		width: 404px;
+		height: 99px;
+		display: inline-block;
+		background-size: contain;
+	}
+
+	#concept_box header h2 {
+		margin: 107px 0 72px;
+	}
+
+	#concept_box header h2:after {
+		content: "";
+		background: url(../img/h_crazy.png) no-repeat left top;
+		width: 445px;
+		height: 34px;
+		display: inline-block;
+		background-size: contain;
+	}
+
+	#concept_box dd {
+		margin: 70px 0 0;
+	}
+
+	#concept_box dd:after {
+		content: "";
+		background: url(../img/txt_content.png) no-repeat left top;
+		width: 747px;
+		height: 561px;
+		display: inline-block;
+		background-size: contain;
+	}
+
+	#concept_box dt {
+		margin: 70px 0 0;
+	}
+
+	#concept_box dt:after {
+		content: "";
+		background: url(../img/logo02.png) no-repeat left top;
+		width: 130px;
+		height: 26px;
+		display: inline-block;
+		background-size: contain;
+	}
+}
