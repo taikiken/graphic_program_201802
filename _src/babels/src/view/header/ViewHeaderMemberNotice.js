@@ -380,9 +380,9 @@ export class ViewHeaderMemberNotice extends View {
           polling = new Gasane.Polling( 1000 );
           this.polling = polling;
           polling.on( Gasane.Polling.PAST, this.update );
-          // ToDo: コメント解除
-          // うざいので止める
-          // polling.start();
+
+          // polling で お知らせ count 数 監視
+          polling.start();
 
         } else {
 

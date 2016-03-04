@@ -11,7 +11,9 @@
  */
 'use strict';
 
+// event
 import {ReplyStatus} from '../../event/ReplyStatus';
+import {CommentStatus} from '../../event/CommentStatus';
 
 import {Empty} from '../../app/const/Empty';
 import {Form} from '../../data/Form';
@@ -71,7 +73,8 @@ let FormElementNode = React.createClass( {
     // などの UI に使用します
     this.replyStatus = null;
 
-    this.message = null;
+    this.commentStatus = null;
+    // this.message = null;
 
     this.mounted = false;
 
@@ -165,17 +168,28 @@ let FormElementNode = React.createClass( {
 
     if ( replyStatus === null ) {
 
+      replyStatus = ReplyStatus.factory();
+      this.replyStatus = replyStatus;
+
       // 記事へのコメントは閉じない
       if ( !this.props.independent ) {
 
-        replyStatus = ReplyStatus.factory();
-        this.replyStatus = replyStatus;
         replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
         replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
         replyStatus.on( ReplyStatus.COMPLETE, this.beforeReload );
 
       }
 
+    }
+
+    let commentStatus = this.commentStatus;
+
+    if ( commentStatus === null ) {
+      if ( !this.props.independent ) {
+        commentStatus = CommentStatus.factory();
+        this.commentStatus = commentStatus;
+        commentStatus.on( CommentStatus.COMMENT_DELETE, this.beforeReload );
+      }
     }
   },
   // コメント送信成功後 reload するとき
@@ -204,6 +218,11 @@ let FormElementNode = React.createClass( {
       replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
       replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
       this.replyStatus = null;
+    }
+
+    let commentStatus = this.commentStatus;
+    if ( commentStatus !== null ) {
+      commentStatus.off( CommentStatus.COMMENT_DELETE, this.beforeReload );
     }
   },
   // ----------------------------------------

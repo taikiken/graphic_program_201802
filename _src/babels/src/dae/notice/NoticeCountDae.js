@@ -11,7 +11,7 @@
  */
 'use strict';
 
-import {Safety} from '../../data/Safety';
+// import {Safety} from '../../data/Safety';
 import {StatusDae} from '../../dae/StatusDae';
 import {Result} from '../../data/Result';
 

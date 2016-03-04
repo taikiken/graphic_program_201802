@@ -197,7 +197,6 @@ export class SignupWizard extends View {
     let boundHash = this.onHash.bind( this );
     this._boundHash = boundHash;
 
-
     window.addEventListener( 'hashchange', boundHash, false );
 
   }

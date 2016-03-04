@@ -203,40 +203,45 @@ export class Page {
    * マイページ, index（ブックマーク一覧）
    */
   static mypage():void {
-    if ( !UT.app.User.sign ) {
-      // not login
-      return;
-    }
-    UserProfile.start();
+
     Sidebar.start();
     Header.start();
-    Bookmarks.start();
+
+    if ( UT.app.User.sign ) {
+      // login only
+      UserProfile.start();
+      Bookmarks.start();
+    }
+
   }
   /**
    * マイページ / アクティビティーズ一覧
    */
   static activities():void {
-    if ( !UT.app.User.sign ) {
-      // not login
-      return;
-    }
-    UserProfile.start();
+
     Sidebar.start();
     Header.start();
-    Activities.start();
+
+    if ( UT.app.User.sign ) {
+      // login only
+      UserProfile.start();
+      Activities.start();
+    }
+
   }
   /**
    * マイページ / お知らせ一覧
    */
   static notifications():void {
-    if ( !UT.app.User.sign ) {
-      // not login
-      return;
-    }
-    UserProfile.start();
+
     Sidebar.start();
     Header.start();
-    Notifications.start();
+    if ( UT.app.User.sign ) {
+      // login only
+      UserProfile.start();
+      Notifications.start();
+    }
+
   }
   // ------------------------------
   // settings 設定
@@ -244,29 +249,29 @@ export class Page {
    * 設定 基本情報設定
    */
   static settings():void {
-    if ( !UT.app.User.sign ) {
-      // not login
-      return;
-    }
 
     Sidebar.start();
     Header.start();
 
-    Settings.account();
+    if ( UT.app.User.sign ) {
+      // login only
+      Settings.account();
+    }
+
   }
   /**
    * 設定 パーソナライズ設定 興味のある競技
    */
   static interest():void {
-    if ( !UT.app.User.sign ) {
-      // not login
-      return;
-    }
 
     Sidebar.start();
     Header.start();
 
-    Settings.interest();
+    if ( UT.app.User.sign ) {
+      // login only
+      Settings.interest();
+    }
+
   }
   ///**
   // * 設定 ソーシャル連携
@@ -286,14 +291,14 @@ export class Page {
    * 退会
    */
   static deactivate():void {
-    if ( !UT.app.User.sign ) {
-      // not login
-      return;
-    }
 
     Sidebar.start();
     Header.start();
 
-    Settings.deactivate();
+    if ( UT.app.User.sign ) {
+      // login only
+      Settings.deactivate();
+    }
+
   }
 }
