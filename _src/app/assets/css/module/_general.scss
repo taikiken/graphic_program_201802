@@ -126,6 +126,10 @@
         &:hover {
           @include hover-opacity;
         }
+
+        &.user-logged-in {
+          background: none;
+        }
       }
 
       &-andmore {
