@@ -170,7 +170,12 @@ export class Page {
 
     // page top
     PageTop.start();
+    // search from
+    SearchFrom.start();
 
+    // ToDo slug 指定
+    // Sidebar.start();
+    Header.start();
     Comment.comment( event.article, event.comment );
 
     // ToDo Nav どうする？
@@ -184,6 +189,12 @@ export class Page {
 
     // page top
     PageTop.start();
+    // search from
+    SearchFrom.start();
+
+    // ToDo slug 指定
+    // Sidebar.start();
+    Header.start();
 
     Comment.reply( event.article, event.comment, event.article );
 
