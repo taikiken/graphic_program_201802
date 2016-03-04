@@ -39,7 +39,7 @@ export class CommentSingle extends OffsetAuth {
    */
   reload():void {
     this._reload = true;
-    let url = `${Path.comment( Path.article( this._url, this.id ), this._commentId )}?offset=0&length=${this.offset}`;
+    let url = `${Path.comment( Path.article( this._url, this.id ), this.commentId )}?offset=0&length=${this.offset}`;
     this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
   }
   // ---------------------------------------------------
@@ -53,10 +53,17 @@ export class CommentSingle extends OffsetAuth {
     return this._id;
   }
   /**
+   * コメント ID
+   * @return {Number|*} コメント IDを返します
+   */
+  get commentId():Number {
+    return this._commentId;
+  }
+  /**
    * url を作成します
    * @return {string} 作成した url を返します
    */
   get url():string {
-    return `${Path.comment( Path.article( this._url, this.id ), this._commentId )}?offset=${this.offset}&length=${this.length}`;
+    return `${Path.comment( Path.article( this._url, this.id ), this.commentId )}?offset=${this.offset}&length=${this.length}`;
   }
 }

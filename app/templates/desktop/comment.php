@@ -4,10 +4,6 @@
   </h1>
 </div><!-- /.category-heading -->
 
-
-  <h1>これはコメント詳細用のテンプレートです</h1>
-
-
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">

@@ -26,6 +26,7 @@ import {Bookmarks} from './page/Bookmarks';
 import {Activities} from './page/Activities';
 import {Notifications} from './page/Notifications';
 import {Settings} from './page/Settings';
+import {Comment} from './page/Comment';
 
 import {SearchFrom} from './header/SearchFrom';
 
@@ -77,6 +78,10 @@ export class Page {
     router.on( Router.SINGLE, Page.single );
     // search
     router.on( Router.SEARCH, Page.search );
+
+    // comment
+    router.on( Router.COMMENT, Page.comment );
+    router.on( Router.COMMENT_REPLY, Page.commentReply );
 
     // 管理系
     // signup
@@ -146,7 +151,7 @@ export class Page {
    * single, detail page
    * @param {Object} event Router event object
    */
-  static single( event ):void {
+  static single( event:Object ):void {
 
     let articleId = event.id;
     // page top
@@ -157,14 +162,37 @@ export class Page {
     Single.start( articleId );
 
   }
-  static comment():void {
+  /**
+   * コメント詳細
+   * @param {Object} event Router event object
+   */
+  static comment( event:Object ):void {
+
+    // page top
+    PageTop.start();
+
+    Comment.comment( event.article, event.comment );
+
+    // ToDo Nav どうする？
+
+  }
+  /**
+   * コメント返信 詳細
+   * @param {Object} event Router event object
+   */
+  static commentReply( event:Object ):void {
+
+    // page top
+    PageTop.start();
+
+    Comment.reply( event.article, event.comment, event.article );
 
   }
   /**
    * 検索ページ
    * @param {Object} event Router.SEARCH event object
    */
-  static search( event ):void {
+  static search( event:Object ):void {
     // page top
     PageTop.start();
     // search from

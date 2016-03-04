@@ -207,7 +207,7 @@ export class Router extends EventDispatcher {
    * comment / comment reply page
    * @param {string} articleId article Id 記事 Id
    * @param {string} commentId comment Id
-   * @param {string} replyId comment reply Id
+   * @param {string} [replyId=undefined] comment reply Id
    */
   comment( articleId:string, commentId:string, replyId:string ):void {
 

@@ -20,6 +20,7 @@ import {ViewError} from './error/ViewError';
 
 // action
 import {CommentSingle} from '../action/comment/CommentSingle';
+import {CommentSingleReply} from '../action/comment/CommentSingleReply';
 
 // data
 import {Result} from '../data/Result';
@@ -49,16 +50,21 @@ export class ViewCommentSingle extends View {
    * @param {Number} articleId 記事 ID :article_id
    * @param {Number} commentId コメント ID
    * @param {Element} element target HTMLElement
-   * @param {Element} titleElement 記事タイトルよう
+   * @param {Number} [replyId=0] コメント返信 ID
    * @param {Object} [option={}] optional event handler
    */
-  constructor( articleId:Number, commentId:Number, element:Element, titleElement:Element, option:Object = {} ) {
+  constructor( articleId:Number, commentId:Number, element:Element, replyId:Number = 0, option:Object = {} ) {
     option = Safety.object( option );
     super( element, option );
-    this._action = new CommentSingle( articleId, commentId, this.done.bind( this ), this.fail.bind( this ) );
+
+    replyId = Safety.integer( replyId, 0 );
+
+    this._action = replyId !== 0 ?
+      new CommentSingle( articleId, commentId, this.done.bind( this ), this.fail.bind( this ) ) :
+      new CommentSingleReply( articleId, commentId, replyId, this.done.bind( this ), this.fail.bind( this ) );
+
     this._articleId = articleId;
     this._commentId = commentId;
-    this._titleElement = titleElement;
 
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
@@ -113,9 +119,11 @@ export class ViewCommentSingle extends View {
    */
   start():void {
 
+    /*
     if ( User.sign && this.user === null ) {
       throw new Error( `user info have to set before start.${this._articleId}` );
     }
+    */
     this.action.next();
 
   }
@@ -534,7 +542,7 @@ export class ViewCommentSingle extends View {
       <CommentsDom
         commentsList={commentsList}
         articleId={String(this._articleId)}
-        commentsListType={this._commentsListType}
+        commentsListType={'single'}
         user={user}
       />,
       element

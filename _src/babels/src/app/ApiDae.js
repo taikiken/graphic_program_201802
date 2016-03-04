@@ -209,6 +209,14 @@ let buildPath = () => {
       new Queries( [ new Query( 'body', 'number', '', true ) ] ),
       true
     ),
+    // コメント返信
+    // /api/v1/comments/article/{:article_id}/{:comment_id}
+    'comment:reply:reply': new Types(
+      new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/${Path.COMMENT_ID}/${Path.REPLY_ID}`, 'POST' ),
+      new Permalink( [ '*' ], true ),
+      new Queries( [ new Query( 'body', 'number', '', true ) ] ),
+      true
+    ),
 /*
 初期要件からはずれました。
     // 記事へのコメント編集
