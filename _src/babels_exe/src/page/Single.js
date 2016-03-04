@@ -15,6 +15,9 @@
 import {Sidebar} from './Sidebar';
 import {Dom} from '../dom/Dom';
 
+// ui
+import {Nav} from '../ui/Nav';
+
 let _symbol = Symbol();
 
 // UT
@@ -116,6 +119,9 @@ export class Single {
 
     // sidebar
     Sidebar.start( slug );
+
+    // nav current
+    Nav.start( slug );
 
     Single.comment();
 
