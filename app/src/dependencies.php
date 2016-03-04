@@ -7,17 +7,27 @@ $container = $app->getContainer();
 $container['notFoundHandler'] = function ($c) use ($app) {
   return function ($request, $response) use ($app, $c) {
 
-    $args['page'] = $app->model->set(array(
-      'title'    => '404 Not Found',
-    ));
+    if ( UT_ENV === 'PRODUCTION' ) :
+        return $c['response']
+            ->withStatus(404)
+            ->withHeader('Content-Type', 'text/html')
+            ->write('<h1>404 : Page not found</h1>');
 
-    $args['request']  = $request;
-    $args['response'] = $response;
-
-    if ( $app->model->property('ua') === 'desktop' ) :
-        return $c['renderer']->render($response, 'desktop/404.php', $args)->withStatus(404);
     else :
-        return $c['renderer']->render($response, 'mobile/404.php', $args)->withStatus(404);
+
+        $args['page'] = $app->model->set(array(
+          'title'    => '404 Not Found',
+        ));
+
+        $args['request']  = $request;
+        $args['response'] = $response;
+
+        if ( $app->model->property('ua') === 'desktop' ) :
+            return $c['renderer']->render($response, 'desktop/404.php', $args)->withStatus(404);
+        else :
+            return $c['renderer']->render($response, 'mobile/404.php', $args)->withStatus(404);
+        endif;
+
     endif;
 
   };

@@ -7,7 +7,8 @@ require __DIR__ . '/vendor/autoload.php';
 
 // initialize
 // ==============================
-$settings = require __DIR__ . '/config/local.php';
+// TODO : 環境に応じてsettingsを切り替える
+$settings = require __DIR__ . '/settings/local.php';
 $app = new \Slim\App($settings);
 
 
@@ -42,9 +43,9 @@ $app->model = new ViewModel();
 
 // routes / render
 // ==============================
-if ( $app->model->property('is_teaser') ) :
+if ( UT_ENV === 'PRODUCTION' ) :
 
-  // teaser期は必要なルーティングだけ読み込み
+  // 本番では必要なルーティングだけ読み込み
   // ------------------------------
 
   // ティザーページ

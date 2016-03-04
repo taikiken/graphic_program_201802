@@ -35,7 +35,6 @@ class ViewModel {
     'ua'                 => '',
     'hostname'           => 'www.undotsushin.com',
     'apiRoot'            => 'http://www.undotsushin.com',
-    'ENV'                => 'PRODUCTION',
 
     // slim param
     'request'            => '',
@@ -50,7 +49,11 @@ class ViewModel {
     $this->default['site_url']        = $this->set_site_url();
     $this->default['site_categories'] = $this->set_site_categories();
     $this->default['ua']              = $this->set_ua();
-    $this->set_ENV();
+    $this->default['hostname']        = $_SERVER['SERVER_NAME'];
+
+    if ( UT_ENV === 'PRODUCTION' ) :
+      $this->default['apiRoot'] = '';
+    endif;
 
   }
 
@@ -166,57 +169,6 @@ class ViewModel {
       return 'desktop';
 
     endif;
-  }
-
-
-  // TODO : ENVはグローバルに定義すべき - ひとまずView側のModelに書きます
-  /**
-  * env - hostname
-  *
-  * @return string  hostname
-  */
-  public function set_ENV() {
-
-    $hostname = gethostname();
-    $ENV     = null;
-    $apiRoot = null;
-
-    if ( $hostname ) :
-      $this->default['hostname'] = $hostname;
-
-      switch( $hostname ) :
-        case '192.168.33.50' :
-          $ENV     = 'LOCAL';
-          #$apiRoot = '';
-          break;
-
-        case 'undotsushin.local' :
-          $ENV = 'LOCAL';
-          #$apiRoot = '';
-          break;
-
-        case 'dev.undotsushin.com' :
-          $ENV = 'DEVELOP';
-          #$apiRoot = '';
-          break;
-
-        case 'stg.undotsushin.com' :
-          $ENV = 'STAGING';
-          #$apiRoot = '';
-          break;
-
-      endswitch;
-
-      if ( $ENV ) :
-        $this->default['ENV'] = $ENV;
-      endif;
-
-      if ( $apiRoot ) :
-        $this->default['apiRoot'] = $apiRoot;
-      endif;
-
-    endif;
-
   }
 
 
