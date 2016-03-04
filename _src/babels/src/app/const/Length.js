@@ -133,7 +133,7 @@ export class Length {
   // --- max
   /**
    * 最大値
-   * @return {number} length 最大値を返します
+   * @return {Number} length 最大値を返します
    */
   static get max():Number {
     return _max;

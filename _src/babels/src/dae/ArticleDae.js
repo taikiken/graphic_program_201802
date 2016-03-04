@@ -56,7 +56,7 @@ export class ArticleDae {
     // ToDo: 問題がないことを確認したらコメントブロックを削除する
     // comments_count check
     /*
-    if ( !Safety.check( article, 'comments_count', 'number' ) ) {
+    if ( !Safety.check( article, 'comments_count', 'Number' ) ) {
 
       article.comments_count = 0;
 
@@ -81,15 +81,15 @@ export class ArticleDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {number|*|Number} index number を返します, default -1, -1 の時は未設定なので使用してはいけない
+   * @return {Number|*|Number} index Number を返します, default -1, -1 の時は未設定なので使用してはいけない
    */
   get index():Number {
     return this._index;
   }
 
   /**
-   * index number を設定します
-   * @param {Number} index index number
+   * index Number を設定します
+   * @param {Number} index index Number
    */
   set index( index:Number ):void {
     this._index = index;

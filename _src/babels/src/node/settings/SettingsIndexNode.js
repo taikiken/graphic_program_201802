@@ -25,7 +25,7 @@ import {Thumbnail} from '../../ui/Thumbnail';
 import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
-import {Safety} from '../../data/Safety';
+// import {Safety} from '../../data/Safety';
 
 // node
 import {ErrorNode} from '../error/ErrorNode';

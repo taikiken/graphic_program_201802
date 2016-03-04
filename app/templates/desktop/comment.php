@@ -13,6 +13,8 @@
     <section class="main-sec">
       <div class="post-detail">
 
+        <div id="single-header-container"></div>
+
         <div id="comment-normal-container"></div>
 
         <div class="sponsor-link">

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/28 - 20:51
+ * @date 2016/03/04 - 21:56
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -12,7 +12,6 @@
 'use strict';
 
 // app
-import {CommentsType} from '../app/const/CommentsType';
 import {User} from '../app/User';
 
 // view
@@ -20,7 +19,7 @@ import {View} from './View';
 import {ViewError} from './error/ViewError';
 
 // action
-import {Comments} from '../action/comment/Comments';
+import {CommentSingle} from '../action/comment/CommentSingle';
 
 // data
 import {Result} from '../data/Result';
@@ -42,25 +41,25 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * comments スレッド を表示する
+ * コメント詳細
  */
-export class ViewComments extends View {
+export class ViewCommentSingle extends View {
   /**
-   * コメントスレッド表示（記事詳細）
-   * @param {Number} id 記事ID :article_id
+   * コメント詳細
+   * @param {Number} articleId 記事 ID :article_id
+   * @param {Number} commentId コメント ID
    * @param {Element} element target HTMLElement
-   * @param {string} commentsType all|official|self|normal コメントリスト種類
+   * @param {Element} titleElement 記事タイトルよう
    * @param {Object} [option={}] optional event handler
    */
-  constructor( id:Number, element:Element, commentsType:string, option:Object = {} ) {
-
+  constructor( articleId:Number, commentId:Number, element:Element, titleElement:Element, option:Object = {} ) {
     option = Safety.object( option );
-    console.log( 'commentsType', commentsType );
-
     super( element, option );
-    this._action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
-    this._articleId = id;
-    this._commentsListType = commentsType;
+    this._action = new CommentSingle( articleId, commentId, this.done.bind( this ), this.fail.bind( this ) );
+    this._articleId = articleId;
+    this._commentId = commentId;
+    this._titleElement = titleElement;
+
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
@@ -115,7 +114,7 @@ export class ViewComments extends View {
   start():void {
 
     if ( User.sign && this.user === null ) {
-      throw new Error( `user info have to set before start.${this._articleId}, ${this._commentsListType}` );
+      throw new Error( `user info have to set before start.${this._articleId}` );
     }
     this.action.next();
 
@@ -155,19 +154,6 @@ export class ViewComments extends View {
 
   }
   /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
-    // ToDo: Error 時の表示が決まったら変更する
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-
-  }
-  /**
    * dom を render します
    * @param {Object} response JSON response
    */
@@ -197,13 +183,7 @@ export class ViewComments extends View {
     // 処理開始 関数振り分け いらないんじゃないか疑惑
     this.all( commentsListDae );
 
-  }// render
-
-  /*
-  mine( commentsListDae:CommentsListDae ) {
-
   }
-  */
   /**
    * normal, official, all をレンダリング
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
@@ -337,8 +317,8 @@ export class ViewComments extends View {
               replyList.comments.map( function( replyComment ) {
 
                 /* 親コメントと子コメントのデータ形式が違う
-                   合わせるために object でラップする {comment: replyComment}
-                */
+                 合わせるために object でラップする {comment: replyComment}
+                 */
                 /* independent, open, commentCount 省略 */
                 return (
                   <li key={`${uniqueId}-${replyComment.id}`} className="comment-item">
@@ -401,14 +381,14 @@ export class ViewComments extends View {
           icon = user.profilePicture;
 
           /*
-          if ( !icon ) {
-            icon = Empty.USER_EMPTY;
-          } else if ( !Safety.isImg( icon ) ) {
-            // 画像ファイル名に拡張子がないのがあったので
-            // 拡張子チェックを追加
-            icon = Empty.USER_EMPTY;
-          }
-          */
+           if ( !icon ) {
+           icon = Empty.USER_EMPTY;
+           } else if ( !Safety.isImg( icon ) ) {
+           // 画像ファイル名に拡張子がないのがあったので
+           // 拡張子チェックを追加
+           icon = Empty.USER_EMPTY;
+           }
+           */
 
           // id
           userId = String( user.id );
@@ -497,7 +477,7 @@ export class ViewComments extends View {
         return (
           <div className={'comment-' + commentsListType}>
             <div className="comment-heading">
-              <h2>{CommentsType.title( commentsListType )}</h2>
+              <h2>選択されたコメント</h2>
             </div>
             {
               list.map( function( commentId, index ) {
@@ -566,6 +546,7 @@ export class ViewComments extends View {
    * <p>再読み込みを行うかを決める</p>
    */
   onComplete():void {
+    console.log( 'onComplete' );
     // とにかくreloadが良さそう
     this.reload();
   }

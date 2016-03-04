@@ -118,8 +118,8 @@ export class Url {
 
   }
   /**
-   * step number から hash を取得します
-   * @param {Number} step wizard step number, 現在位置
+   * step Number から hash を取得します
+   * @param {Number} step wizard step Number, 現在位置
    * @return {string} location hash にセットする文字列を返します
    */
   static signupHash( step:Number = 1 ):string {
@@ -143,9 +143,9 @@ export class Url {
   }
 
   /**
-   * location.hash から signup step number を取得します
+   * location.hash から signup step Number を取得します
    * @param {string} [hash=''] location.hash #付き
-   * @return {number} step number
+   * @return {Number} step Number
    */
   static signupStepByHash( hash:string = '' ):Number {
 

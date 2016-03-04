@@ -18,7 +18,7 @@ import {Type} from '../net/types/Type';
 import {Permalink} from '../net/types/Permalink';
 import {Queries} from '../net/types/Queries';
 import {Query} from '../net/types/Query';
-// mport {Loc} from '../util/Loc';
+// import {Loc} from '../util/Loc';
 
 // test mode 時に api アクセス先を 0.0.0.0: + (port +2) へ
 // develop mode
@@ -39,7 +39,16 @@ let apiRoot = () => {
     case Env.DEVELOP :
       return 'http://www.undotsushin.com';
 
+    // online
     case Env.PRODUCTION :
+      return '';
+
+    // online
+    case Env.DEV :
+      return '';
+
+    // online
+    case Env.STG :
       return '';
 
     default :
@@ -95,7 +104,7 @@ let buildPath = () => {
     'home': new Types(
       new Type( `${API_PATH}/articles/home` ),
       new Permalink( [ 'pickup', 'headline' ] ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     'self': new Types(
       new Type( `${API_PATH}/articles/self` ),
@@ -109,7 +118,7 @@ let buildPath = () => {
     'category': new Types(
       new Type( `${API_PATH}/articles/category` ),
       new Permalink( [ 'all', '*' ], true ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // --------------------------------------------
     // 検索
@@ -117,7 +126,7 @@ let buildPath = () => {
     'search': new Types(
       new Type( `${API_PATH}/articles/search` ),
       new Permalink( [ '*' ], true ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // --------------------------------------------
     // 記事詳細
@@ -151,28 +160,28 @@ let buildPath = () => {
     'comment': new Types(
       new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}` ),
       new Permalink( [ '*' ], true ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // 記事への公式コメントを人気順で取得する
     // /api/v1/comments/article/{:article_id}/official
     'comment:official': new Types(
       new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/official` ),
       new Permalink( [ '*' ], true ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // 記事へのみんなのコメントを人気順で取得する
     // /api/v1/comments/article/{:article_id}/normal
     'comment:normal': new Types(
       new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/normal` ),
       new Permalink( [ '*' ], true ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // 自分のコメントを取得する
     // /api/v1/comments/article/{:article_id}/self
     'comment:self': new Types(
       new Type( `${API_PATH}/comments/article/${Path.ARTICLE_ID}/self` ),
       new Permalink( [ '*' ], true ),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // 特定のコメントを取得する
     // /api/v1/comments/article/{:article_id}/{:comment_id}
@@ -293,7 +302,7 @@ let buildPath = () => {
     'users:self:bookmark': new Types(
       new Type( `${API_PATH}/users/self/bookmark` ),
       new Permalink(),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // user_idに該当するユーザーのブックマークを取得する
     // /api/v1/users/{:user_id}/bookmark
@@ -302,7 +311,7 @@ let buildPath = () => {
     'users:id:bookmark': new Types(
       new Type( `${API_PATH}/users/${Path.USER_ID}/bookmark` ),
       new Permalink(),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'Number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     */
     // -----------------
@@ -313,7 +322,7 @@ let buildPath = () => {
     'users:self:activities': new Types(
       new Type( `${API_PATH}/users/self/activities` ),
       new Permalink(),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] )
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] )
     ),
     // -----------------
     // notifications
@@ -323,7 +332,7 @@ let buildPath = () => {
     'users:self:notifications': new Types(
       new Type( `${API_PATH}/users/self/notifications` ),
       new Permalink(),
-      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'number', 10 ) ] ),
+      new Queries( [ new Query( 'offset', 'number', 0 ), new Query( 'length', 'Number', 10 ) ] ),
       true
     ),
     // お知らせ 既読, お知らせウインドウを表示すると呼び出す

@@ -33,14 +33,14 @@ export class Content {
   }
   /**
    * コンテンツ幅
-   * @return {number} コンテンツ幅を返します
+   * @return {Number} コンテンツ幅を返します
    */
   static get WIDTH():Number {
     return 710;
   }
   /**
    * コンテンツ幅 に対応した 16:9 の高さ
-   * @return {number} コンテンツ幅 に対応した 16:9 の高さを返します
+   * @return {Number} コンテンツ幅 に対応した 16:9 の高さを返します
    */
   static get HD_HEIGHT():Number {
     return Math.ceil( Content.WIDTH * 9 / 16 );
