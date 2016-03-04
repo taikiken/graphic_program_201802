@@ -83,4 +83,26 @@ export class App {
     Api.rebuild();
 
   }
+  /**
+   * <p>**Api 接続先** を変更します</p>
+   * 実行モードにします<br>
+   * デフォルトです</p>
+   */
+  static dev():void {
+
+    Env.dev();
+    Api.rebuild();
+
+  }
+  /**
+   * <p>**Api 接続先** を変更します</p>
+   * 実行モードにします<br>
+   * デフォルトです</p>
+   */
+  static stg():void {
+
+    Env.stg();
+    Api.rebuild();
+
+  }
 }

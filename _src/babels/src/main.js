@@ -106,6 +106,10 @@ import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
 import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
+import {ViewCommentSingle} from './view/ViewCommentSingle';
+
+// single
+import {ViewSingleTitle} from './view/single/ViewSingleTitle';
 
 // comment
 import {ViewComments} from './view/ViewComments';
@@ -239,8 +243,12 @@ var UT = {
     ViewTitle: ViewTitle,
     ViewComments: ViewComments,
     ViewSearch: ViewSearch,
+    ViewCommentSingle: ViewCommentSingle,
     comment: {
       ViewCommentForm: ViewCommentForm
+    },
+    single: {
+      ViewSingleTitle: ViewSingleTitle
     },
     header: {
       ViewHeaderUser: ViewHeaderUser,

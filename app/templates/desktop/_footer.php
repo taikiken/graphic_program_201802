@@ -91,7 +91,7 @@ if (
  * それ以外の時は default '/api/...' へアクセスします
  * protocol, hostname それぞれ持たないので http|https どちらでも問題ないかと思います
 */
-if ( $page['apiRoot'] === 'http://www.undotsushin.com' ) :
+if ( $page['apiRoot'] != '' ) :
   // develop mode
   // dev, stg, local から起動の時のみ script tag を有効にします
 ?>

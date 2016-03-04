@@ -30,7 +30,7 @@ export class Comments extends OffsetAuth {
    * query に offset, length があります
    *
    * @param {Symbol} target Factory pattern のために使用
-   * @param {number} id コメントを取得する記事ID
+   * @param {Number} id コメントを取得する記事ID
    * @param {string} [type=''] 取得コメント種類, ''|normal|official|self
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -47,6 +47,9 @@ export class Comments extends OffsetAuth {
     super( User.token, Api.comment( type ), resolve, reject );
     this._id = id;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   // reload 追加
   /**
    * 再読み込み
@@ -74,9 +77,12 @@ export class Comments extends OffsetAuth {
   get url():string {
     return `${Path.article( this._url, this.id )}?offset=${this.offset}&length=${this.length}`;
   }
+  // ---------------------------------------------------
+  //  static METHOD
+  // ---------------------------------------------------
   /**
    * @param {string} type 取得コメント種類
-   * @param {number} id コメントを取得する記事ID
+   * @param {Number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
@@ -106,7 +112,7 @@ export class Comments extends OffsetAuth {
   }
   /**
    * コメント一覧, 自分のコメント
-   * @param {number} id コメントを取得する記事ID
+   * @param {Number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
@@ -116,7 +122,7 @@ export class Comments extends OffsetAuth {
   }
   /**
    * コメント一覧, 通常ユーザーのコメント
-   * @param {number} id コメントを取得する記事ID
+   * @param {Number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
@@ -126,7 +132,7 @@ export class Comments extends OffsetAuth {
   }
   /**
    * コメント一覧,公式ユーザーのコメント
-   * @param {number} id コメントを取得する記事ID
+   * @param {Number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します
@@ -136,7 +142,7 @@ export class Comments extends OffsetAuth {
   }
   /**
    * コメント一覧, 全てのコメント
-   * @param {number} id コメントを取得する記事ID
+   * @param {Number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @return {Comments} Comments instanceを返します

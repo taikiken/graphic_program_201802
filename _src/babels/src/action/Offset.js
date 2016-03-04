@@ -119,7 +119,7 @@ export class Offset extends Action {
   }
   /**
    * 残り数
-   * @return {number} total から 次の offset を」引いた数を返します
+   * @return {Number} total から 次の offset を」引いた数を返します
    */
   rest():Number {
     return this.total - this.offset;

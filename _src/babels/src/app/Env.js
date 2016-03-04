@@ -82,6 +82,23 @@ export class Env {
   static get LOCAL():string {
     return 'local';
   }
+
+  // ---
+  // dev / stg 追加
+  /**
+   * DEV, dev.undotsushin.com
+   * @return {string} 文字列 dev を返します
+   */
+  static get DEV():string {
+    return 'dev';
+  }
+  /**
+   * STG, stg.undotsushin.com
+   * @return {string} 文字列 stg を返します
+   */
+  static get STG():string {
+    return 'stg';
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -116,5 +133,17 @@ export class Env {
 
     _mode = Env.PRODUCTION;
 
+  }
+  /**
+   * dev 環境にします
+   */
+  static dev():void {
+    _mode = Env.DEV;
+  }
+  /**
+   * stg 環境にします
+   */
+  static stg():void {
+    _mode = Env.STG;
   }
 }

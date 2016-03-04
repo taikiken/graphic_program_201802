@@ -112,7 +112,7 @@ export class PopularDae {
     return this.good;
   }
   /**
-   * @return {Number|number} Bad数 を返します
+   * @return {Number|Number} Bad数 を返します
    */
   get bad():Number {
     return this.comment.bad;
