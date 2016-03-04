@@ -42,10 +42,30 @@ $app->model = new ViewModel();
 
 // routes / render
 // ==============================
-$routes = glob( __DIR__.'/routes/*.router.php');
-foreach ($routes as $router) {
-  require $router;
-}
+if ( $app->model->property('is_teaser') ) :
+
+  // teaser期は必要なルーティングだけ読み込み
+  // ------------------------------
+
+  // ティザーページ
+  $app->get('/', function ($request, $response, $args) use ($app) {
+    return $this->renderer->render($response, "../../public/_index.html");
+  });
+
+  // 記事詳細
+  require __DIR__ . '/routes/p.router.php';
+
+  // パスワードリセット
+  require __DIR__ . '/routes/reset_password.router.php';
+
+else :
+
+  $routes = glob( __DIR__.'/routes/*.router.php');
+  foreach ($routes as $router) {
+    require $router;
+  }
+
+endif;
 
 
 
