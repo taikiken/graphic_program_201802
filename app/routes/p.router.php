@@ -32,7 +32,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $args['page'] = $app->model->set(array(
       'title'     => $post['title'],
       'category'  => $post['category'],
-      'template'  => 'p',
+      'template'  => 'comment',
       'path'      => $args,
       'post'      => $post,
       'canonical' => "p/{$post['id']}/",
@@ -52,7 +52,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     $args['page'] = $app->model->set(array(
       'title'     => $post['title'],
       'category'  => $post['category'],
-      'template'  => 'p',
+      'template'  => 'comment',
       'path'      => $args,
       'post'      => $post,
       'canonical' => "p/{$post['id']}/",
