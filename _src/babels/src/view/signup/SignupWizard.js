@@ -75,6 +75,8 @@ export class SignupWizard extends View {
 
     // activate unload
     this._unload = false;
+
+    // this._boundUnload = this.onUnload.bind( this );
   }
   /**
    * Ajax request を開始します
@@ -125,6 +127,7 @@ export class SignupWizard extends View {
             <RootNode
               step={this.props.step}
               categories={this.props.categoriesDae.categories}
+              beforeRedirect={this.beforeRedirect}
             />
           </div>
         );
@@ -145,6 +148,9 @@ export class SignupWizard extends View {
       updateStep: function( step:Number ) {
         // step値を update -> CSS クラス signup-n のナンバリングに使用
         this.setState( { step: step } );
+      },
+      beforeRedirect: function() {
+        _this.deactivateUnload();
       }
     } );
 
@@ -206,9 +212,20 @@ export class SignupWizard extends View {
   activateUnload():void {
     // 開発中はコメントにする, 本番でコメントアウト
     // 入力途中で page を離れようとすると alert を表示する
+    /*
     window.onbeforeunload = function() {
       return Message.UNLOAD;
     };
+    */
+    window.addEventListener( 'beforeunload', SignupWizard.onUnload, false );
+  }
+
+  deactivateUnload():void {
+    window.removeEventListener( 'beforeunload', SignupWizard.onUnload );
+  }
+
+  static onUnload( event ):void {
+    event.returnValue = Message.UNLOAD;
   }
 
   /**

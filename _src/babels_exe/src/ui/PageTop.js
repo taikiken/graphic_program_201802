@@ -72,4 +72,11 @@ export class PageTop {
   onComplete():void {
     this._can = true;
   }
+  /**
+   * PageTop instance を作成し開始する
+   */
+  static start():void {
+    let pageTop = new PageTop();
+    pageTop.init();
+  }
 }

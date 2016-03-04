@@ -36,7 +36,8 @@ let ReactDOM = self.ReactDOM;
 export let RootNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
-    categories: React.PropTypes.array.isRequired
+    categories: React.PropTypes.array.isRequired,
+    beforeRedirect: React.PropTypes.func.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -70,7 +71,11 @@ export let RootNode = React.createClass( {
               <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
                 <LegendStep1Node step={this.props.step} />
                 <LegendStep2Node step={this.props.step + 1} getForm={this.getForm} />
-                <LegendStep3Node step={this.props.step + 2} categories={this.props.categories} getForm={this.getForm} />
+                <LegendStep3Node step={this.props.step + 2}
+                                 categories={this.props.categories}
+                                 getForm={this.getForm}
+                                 beforeRedirect={this.props.beforeRedirect}
+                />
                 <div className="submit-hidden-container"><input type="submit" /></div>
               </form>
           </div>

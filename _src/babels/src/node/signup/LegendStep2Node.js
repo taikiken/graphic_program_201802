@@ -11,15 +11,17 @@
  */
 'use strict';
 
-// event
-import {SignupStatus} from '../../event/SignupStatus';
-
 // app
 import {Url} from '../../app/const/Url';
 import {Empty} from '../../app/const/Empty';
+import {ErrorTxt} from '../../app/const/ErrorTxt';
+
+// event
+import {SignupStatus} from '../../event/SignupStatus';
 
 // util
 import {Loc} from '../../util/Loc';
+import {Validate} from '../../util/Validate';
 
 // ui
 import {Thumbnail} from '../../ui/Thumbnail';
@@ -37,7 +39,10 @@ import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 import {Model} from '../../model/Model';
 import {ModelSignup} from '../../model/signup/ModelSignup';
 
+// react
 let React = self.React;
+
+// Sagen
 let Sagen = self.Sagen;
 
 
@@ -61,7 +66,8 @@ let Step2FormNode = React.createClass( {
     this.model = null;
     this.errors = {
       password: new ErrorMessage(),
-      name: new ErrorMessage()
+      name: new ErrorMessage(),
+      profile_picture: new ErrorMessage()
     };
     this.ie = Sagen.Browser.IE.is();
     this.callback = null;
@@ -136,28 +142,31 @@ let Step2FormNode = React.createClass( {
         {/* profile_picture */}
         <div className={'setting-form-avatar ' + stageClass()}>
           <h2 className="setting-form-avatar-heading">プロフィール写真選択</h2>
-          <div
-            className={'setting-form-avatar-dropArea ' + zoneEntered}
-            onDragOver={this.handleDragOver}
-            onDragEnter={this.handleDragEnter}
-            onDragLeave={this.handleDragLeave}
-            onDrop={this.handleDrop}
-          >
-            <div className={'avatar-stage'}>
-              <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
-              <ChangeAvatarNode
-                show={this.props.avatar !== this.state.avatar}
-                handler={this.avatarChangeHandler}
+          <div className={'form-parts ' + errorClass('profile_picture')}>
+            <div
+              className={'setting-form-avatar-dropArea ' + zoneEntered}
+              onDragOver={this.handleDragOver}
+              onDragEnter={this.handleDragEnter}
+              onDragLeave={this.handleDragLeave}
+              onDrop={this.handleDrop}
+            >
+              <div className={'avatar-stage'}>
+                <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
+                <ChangeAvatarNode
+                  show={this.props.avatar !== this.state.avatar}
+                  handler={this.avatarChangeHandler}
+                />
+              </div>
+              <input
+                type="file"
+                name="profile_picture"
+                accept="image/*"
+                value={this.state.picture}
+                onChange={this.pictureChange}
+                className="setting-form-picture form-input"
               />
             </div>
-            <input
-              type="file"
-              name="profile_picture"
-              accept="image/*"
-              value={this.state.picture}
-              onChange={this.pictureChange}
-              className="setting-form-picture form-input"
-            />
+            <ErrorNode message={message('profile_picture')} />
           </div>
         </div>
 
@@ -316,7 +325,44 @@ let Step2FormNode = React.createClass( {
     this.prepareNext();
 
   },
+  // validate
   prepareNext: function():void {
+    // error 消去
+    this.reset();
+
+    let count = 0;
+    let errors = this.errors;
+
+    // password
+    let password = this.state.password;
+    if ( password === '' ) {
+      errors.password.message = ErrorTxt.PASSWORD_EMPTY;
+      ++count;
+    } else if ( password.length < 8 ) {
+      errors.password.message = ErrorTxt.PASSWORD_SHORT;
+      ++count;
+    } else if ( !Validate.alphaNum( password ) ) {
+      errors.password.message = ErrorTxt.PASSWORD_INVALID;
+      ++count;
+    }
+
+    // name
+    let name = this.state.name;
+    if ( name === '' ) {
+      errors.name.message = ErrorTxt.NAME_EMPTY;
+      ++count;
+    }
+
+    // error がない時だけ
+    if ( count === 0 ) {
+      this.request();
+    } else {
+      this.error();
+    }
+
+  },
+  // request
+  request: function():void {
     console.log( 'from element ', this.props.getForm() );
     let formData = Form.element( this.props.getForm() );
     // not create
@@ -331,8 +377,6 @@ let Step2FormNode = React.createClass( {
       model.data = formData;
     }
 
-    // error 消去
-    this.reset();
     // ajax start
     model.start();
   },
@@ -352,8 +396,8 @@ let Step2FormNode = React.createClass( {
   // ---------------------------------------------------
   error: function() {
     // input error
-    // response error
     // show error
+    this.setState( { error: true } );
   },
   done: function( result:Result ) {
     console.log( 'done ', result );
@@ -385,6 +429,7 @@ let Step2FormNode = React.createClass( {
   reset: function() {
     this.errors.password.reset();
     this.errors.name.reset();
+    this.errors.profile_picture.reset();
     this.setState( { error: false } );
   },
   dispose: function() {

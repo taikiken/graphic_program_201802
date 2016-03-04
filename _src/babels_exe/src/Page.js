@@ -110,19 +110,18 @@ export class Page {
 
     router.route();
 
-    // page top
-    let pageTop = new PageTop();
-    pageTop.init();
-
-    // search from
-    SearchFrom.start();
-
   }
   /**
    * home, index page
    */
   static index():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
+    // index
     Index.start();
+    // nav
     Nav.start( 'home' );
   }
   /**
@@ -133,8 +132,13 @@ export class Page {
 
     let slug = event.slug;
     let type = event.slugType;
-
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
+    // category
     Category.start( slug, type );
+    // nav
     Nav.start( slug );
 
   }
@@ -145,7 +149,11 @@ export class Page {
   static single( event ):void {
 
     let articleId = event.id;
-
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
+    // single
     Single.start( articleId );
 
   }
@@ -157,10 +165,16 @@ export class Page {
    * @param {Object} event Router.SEARCH event object
    */
   static search( event ):void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
 
     Search.start( event.keyword );
 
   }
+  // ----------------------------------------------------
+  // header, footer いらない
   /**
    * signup page
    */
@@ -188,6 +202,7 @@ export class Page {
       logout.start();
     }
   }
+  // ----------------------------------------------------
   /*
   PHP で output
   static password():void {
@@ -203,6 +218,10 @@ export class Page {
    * マイページ, index（ブックマーク一覧）
    */
   static mypage():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
 
     Sidebar.start();
     Header.start();
@@ -218,6 +237,10 @@ export class Page {
    * マイページ / アクティビティーズ一覧
    */
   static activities():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
 
     Sidebar.start();
     Header.start();
@@ -233,6 +256,10 @@ export class Page {
    * マイページ / お知らせ一覧
    */
   static notifications():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
 
     Sidebar.start();
     Header.start();
@@ -249,6 +276,10 @@ export class Page {
    * 設定 基本情報設定
    */
   static settings():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
 
     Sidebar.start();
     Header.start();
@@ -263,6 +294,10 @@ export class Page {
    * 設定 パーソナライズ設定 興味のある競技
    */
   static interest():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
 
     Sidebar.start();
     Header.start();
@@ -291,6 +326,10 @@ export class Page {
    * 退会
    */
   static deactivate():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
 
     Sidebar.start();
     Header.start();
