@@ -11,11 +11,15 @@
  */
 'use strict';
 
+// app
+import {Empty} from '../../app/const/Empty';
+import {ErrorTxt} from '../../app/const/ErrorTxt';
+
 // event
 import {ReplyStatus} from '../../event/ReplyStatus';
 import {CommentStatus} from '../../event/CommentStatus';
 
-import {Empty} from '../../app/const/Empty';
+// data
 import {Form} from '../../data/Form';
 import {Safety} from '../../data/Safety';
 // import {Result} from '../../data/Result';
@@ -251,9 +255,12 @@ let FormElementNode = React.createClass( {
   },
   // ----------------------------------------
   // form
+
+  // コメント本文入力 onChance event handler
   onBodyChange: function( event ) {
     this.setState( {body: event.target.value} );
   },
+  // submit button click event handler
   onSubmit: function( event ) {
     event.preventDefault();
 
@@ -261,7 +268,7 @@ let FormElementNode = React.createClass( {
     this.reset();
 
     if ( body === '' ) {
-      this.error( 'コメントは必須項目です。' );
+      this.error( `${ErrorTxt.BODY_EMPTY}` );
     } else {
       // submit sequence
       this.sending();
@@ -272,6 +279,7 @@ let FormElementNode = React.createClass( {
     this.errors.body.message = message;
     this.setState( { error: true } );
   },
+  // error を非表示にし error state を false にする
   reset: function() {
     this.errors.body.reset();
     this.setState( { error: false } );
@@ -300,16 +308,21 @@ let FormElementNode = React.createClass( {
     comment.on( Model.RESPONSE_ERROR, this.fail );
     comment.start();
   },
+  // コメント送信成功
+  // ReplyStatus.COMPLETE event を発火させます
+  // event を受信し コメント一覧を再読み込みします
   done: function( event ) {
     console.log( 'done', event );
     this.replyStatus.complete( this.props.uniqueId, this.props.commentType );
     this.setState( { body: '' } );
     this.dispose();
   },
+  // コメント送信失敗
+  //
   fail: function( event ) {
     let error = event.args[ 0 ];
     console.log( 'fail', error.message, error.result.status );
-    this.replyStatus.complete( this.props.uniqueId );
+    // this.replyStatus.complete( this.props.uniqueId );
     this.dispose();
   }
 } );
@@ -341,7 +354,6 @@ let OpenerNode = React.createClass( {
     };
   },
   render: function() {
-    // console.log( 'comment-respond-opener independent ', this.state.toggle, this.props.independent );
 
     if ( this.props.independent ) {
       return null;
@@ -415,40 +427,24 @@ let OpenerNode = React.createClass( {
 
     console.log( '************** opener click ****************** ', this.props.uniqueId );
 
-    /*
-    if ( !this.canOpen ) {
-      return;
-    }
-    */
-
     this.willOpen();
     this.replyStatus.open( this.props.uniqueId );
   },
   cancelClick: function( event ) {
     event.preventDefault();
 
-    /*
-    if ( !this.canOpen ) {
-      return;
-    }
-    */
-
     this.willClose();
     this.replyStatus.close( this.props.uniqueId );
   },
   willOpen: function() {
     this.setState( {toggle: 'cancel'} );
-    // this.props.callback( 'open' );
   },
   willClose: function() {
     this.setState( {toggle: 'reply'} );
-    // this.props.callback( 'close' );
   },
   // ----------------------------------------
   checkId: function( event ) {
-
     return this.props.uniqueId === event.id;
-
   },
   // ----------------------------------------
   // listener
@@ -586,21 +582,19 @@ export let CommentFormNode = React.createClass( {
     }// if / else
 
   },
+  /*
   componentDidMount: function() {
 
   },
   componentWillUnmount: function() {
 
   },
+  */
   // ----------------------------------------
   bodyChange: function( event ) {
     // textarea value
     this.setState( { body: event.target.value } );
   },
   openerClick: function( /* status:string */ ) {
-    // console.log( '********** root openerClick ', this.props.uniqueId, status );
-    // open / close が opener から送られてくる
-    // this.setState( { toggle: status } );
-
   }
 } );

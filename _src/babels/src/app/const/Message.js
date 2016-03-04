@@ -28,7 +28,7 @@ export class Message {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Path is static Class. not use new Path().` );
+      throw new Error( `Message is static Class. not use new Message().` );
 
     }
 
@@ -51,6 +51,10 @@ export class Message {
     return 'このコメントを削除しますか？';
   }
 
+  /**
+   * DEACTIVATE
+   * @return {string} 退会を行うと、登録済みの情報は全て閲覧する事が出来なくなります
+   */
   static get DEACTIVATE():string {
     return '退会を行うと、登録済みの情報は全て閲覧する事が出来なくなります。';
   }

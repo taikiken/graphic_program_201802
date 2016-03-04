@@ -11,15 +11,23 @@
  */
 'use strict';
 
+// parent
 import {View} from '../View';
-import {Notice} from '../../action/users/Notice';
 
+// app
 import {Empty} from '../../app/const/Empty';
 import {NoticeAction} from '../../app/const/NoticeAction';
 import {Url} from '../../app/const/Url';
+import {Length} from '../../app/const/Length';
 
+// action
+import {Notice} from '../../action/users/Notice';
+
+// dae
 import {NotificationsDae} from '../../dae/user/NotificationsDae';
+import {NoticeCountDae} from '../../dae/notice/NoticeCountDae';
 
+// data
 import {Safety} from '../../data/Safety';
 import {Result} from '../../data/Result';
 
@@ -27,7 +35,7 @@ import {Result} from '../../data/Result';
 import {Model} from '../../model/Model';
 import {ModelNoticeCount} from '../../model/notice/ModelNoticeCount';
 
-import {NoticeCountDae} from '../../dae/notice/NoticeCountDae';
+// event
 import {NoticeStatus} from '../../event/NoticeStatus';
 
 // React
@@ -285,7 +293,7 @@ export class ViewHeaderMemberNotice extends View {
               <div className="info">
                 <h2 className="info-heading">お知らせ</h2>
                 {/*
-                // 機能 既読にする を drop
+                // 機能 既読にする が drop
                 <ReadAllDom
                   length={notifications.length}
                   callback={this.allRead}
@@ -314,17 +322,17 @@ export class ViewHeaderMemberNotice extends View {
           </nav>
         );
 
-      },
+      }/* ,
       allRead: function( event ) {
         event.preventDefault();
-      }
+      }*/
     } );
 
     // --------------------------------------------------
     // total 件数
 
     // お知らせ件数を表示
-    // 定期的に更新, 1000ms
+    // 定期的に更新, 1000ms * 60
     // 件数が変更されたら NoticeStatus.UPDATE_COUNT event fire
     let NoticeTotalDom = React.createClass( {
       propTypes: {
@@ -349,6 +357,8 @@ export class ViewHeaderMemberNotice extends View {
           return <span className="notice-num">{total}</span>;
         }
       },
+      // ------------------------
+      // delegate
       componentDidMount: function() {
         // after mount, start polling
 
@@ -377,7 +387,9 @@ export class ViewHeaderMemberNotice extends View {
 
         if ( polling === null ) {
 
-          polling = new Gasane.Polling( 1000 );
+          // https://github.com/undotsushin/undotsushin/issues/282
+          // 60秒ごとに未読数取得APIを叩いてお知らせの未読数を取得しバッジに反映する
+          polling = new Gasane.Polling( Length.interval );
           this.polling = polling;
           polling.on( Gasane.Polling.PAST, this.update );
 
@@ -394,10 +406,13 @@ export class ViewHeaderMemberNotice extends View {
       componentWillUnmount: function() {
         this.dispose();
       },
+      // ------------------------
+      // custom
       dispose: function() {
         // unbind event
         this.polling.off( Gasane.Polling.PAST, this.update );
       },
+      // polling をリスタートします
       restart: function() {
         let polling = this.polling;
         if ( polling !== null ) {
@@ -405,15 +420,18 @@ export class ViewHeaderMemberNotice extends View {
           polling.off( Gasane.Polling.PAST, this.update );
           polling.on( Gasane.Polling.PAST, this.update );
 
-          polling.setPolling( 1000 );
+          polling.setPolling( Length.interval );
         }
       },
+      // polling event handel
       update: function() {
         this.polling.off( Gasane.Polling.PAST, this.update );
         this.model.start();
       },
+      // polling 後の request 成功
       done: function( result:NoticeCountDae ) {
         let count = result.count;
+        console.log( 'count done ', count );
         if ( Number.isInteger( count ) ) {
           if ( this.state.total !== count ) {
             this.updateTotal( count );
@@ -422,9 +440,12 @@ export class ViewHeaderMemberNotice extends View {
 
         this.restart();
       },
+      // request 失敗
       fail: function() {
+        // restart する
         this.restart();
       },
+      // total 件数を変える
       updateTotal: function( total ) {
         this.setState( { total: total } );
         this.status.update( total );

@@ -74,7 +74,7 @@ export class Model extends EventDispatcher {
   executeSafely( keyName, ...args ):void {
 
     let option = this.option;
-    console.log( 'executeSafely ', keyName, option.hasOwnProperty( keyName ), option, args );
+    // console.log( 'executeSafely ', keyName, option.hasOwnProperty( keyName ), option, args );
     if ( option.hasOwnProperty( keyName ) && typeof option[ keyName ] === 'function' ) {
 
       // callback 側で通常の引数として取り出せるように apply します

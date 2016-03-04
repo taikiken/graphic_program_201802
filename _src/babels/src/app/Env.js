@@ -42,7 +42,7 @@ export class Env {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * 現在のモード
    * @return {string} 現在のモードを返します
    */
   static get mode():string {
@@ -51,6 +51,7 @@ export class Env {
 
   }
   /**
+   * PRODUCTION
    * @readonly
    * @return {string} 文字列 production を返します
    */
@@ -58,6 +59,7 @@ export class Env {
     return 'production';
   }
   /**
+   * DEVELOP
    * @readonly
    * @return {string} 文字列 production を返します
    */
@@ -65,6 +67,7 @@ export class Env {
     return 'develop';
   }
   /**
+   * TEST
    * @readonly
    * @return {string} 文字列 test を返します
    */
@@ -72,6 +75,7 @@ export class Env {
     return 'test';
   }
   /**
+   * LOCAL
    * @readonly
    * @return {string} 文字列 local を返します
    */
@@ -88,7 +92,8 @@ export class Env {
 
     _mode = Env.LOCAL;
 
-  }  /**
+  }
+  /**
    * ローカルテストモードにします
    */
   static test():void {

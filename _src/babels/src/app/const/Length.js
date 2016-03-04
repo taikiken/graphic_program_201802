@@ -20,6 +20,9 @@ let _video = 5;
 let _archive = 10;
 let _max = 999;
 
+// polling 間隔
+let _interval = 1000 * 60;
+
 /**
  * <h3>offset length default value</h3>
  * 全て static です
@@ -41,6 +44,7 @@ export class Length {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
+  // --- pickup
   /**
    * @return {Number} pickup default 取得数を返します
    */
@@ -57,6 +61,7 @@ export class Length {
       throw new Error( `pickup: integer required. ${value}` );
     }
   }
+  // --- headline
   /**
    * @return {Number} headline default 取得数を返します
    */
@@ -73,6 +78,7 @@ export class Length {
       throw new Error( `headline: integer required. ${value}` );
     }
   }
+  // --- ranking
   /**
    * @return {Number} ranking default 取得数を返します
    */
@@ -90,6 +96,7 @@ export class Length {
       throw new Error( `ranking: integer required. ${value}` );
     }
   }
+  // --- video
   /**
    * @return {Number} video default 取得数を返します
    */
@@ -106,6 +113,7 @@ export class Length {
       throw new Error( `video: integer required. ${value}` );
     }
   }
+  // --- archive
   /**
    * @return {Number} archive default 取得数を返します
    */
@@ -122,11 +130,29 @@ export class Length {
       throw new Error( `archive: integer required. ${value}` );
     }
   }
+  // --- max
   /**
    * 最大値
    * @return {number} length 最大値を返します
    */
   static get max():Number {
     return _max;
+  }
+  // --- interval
+  /**
+   * @return {Number} interval(ms) を返します
+   */
+  static get interval():Number {
+    return _interval;
+  }
+  /**
+   * @param {Number} value interval ms
+   */
+  static set interval( value:Number ):void {
+    if ( Number.isInteger( value ) ) {
+      _interval = value;
+    } else {
+      throw new Error( `interval: integer required. ${value}` );
+    }
   }
 }
