@@ -53,8 +53,23 @@ if ( UT_ENV === 'PRODUCTION' ) :
     return $this->renderer->render($response, "../../public/_index.html");
   });
 
-  // 記事詳細
-  require __DIR__ . '/routes/p.router.php';
+  // 記事詳細 - アプリ向けに
+  $app->get('/p/{article_id:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
+
+    $post = $app->model->get_post($args['article_id']);
+
+    $args['page'] = $app->model->set(array(
+      'title'     => $post['title'],
+      'category'  => $post['category'],
+      'template'  => 'p',
+      'path'      => $args,
+      'post'      => $post,
+      'canonical' => "p/{$post['id']}/",
+    ));
+
+    return $this->renderer->render($response, "app.p.php", $args);
+
+  });
 
   // パスワードリセット
   require __DIR__ . '/routes/reset_password.router.php';
