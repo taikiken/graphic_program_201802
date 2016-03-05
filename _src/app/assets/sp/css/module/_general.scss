@@ -11,117 +11,105 @@
 // 汎用 ニュース一覧
 .board-large {
   @include clearfix;
+  padding-bottom: (40/2)+px;
+  background-color: #eee;
 
   @at-root {
+    // &-column {
+    //   width: 340px;
+
+    //   &.column1 {
+    //     float: left;
+    //   }
+
+    //   &.column2 {
+    //     float: right;
+    //   }
+    // } //.board-large-column
+
     &-column {
-      width: 340px;
-
-      &.column1 {
-        float: left;
-      }
-
-      &.column2 {
-        float: right;
-      }
-    } //.board-column
-
-
-
-    // .btn-bookmark,
-    // .btn-bookmark-disable {
-    //   @include link-decoration(#fff, #fff, none, none);
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   display: inline-block;
-    //   line-height: 1;
-    //   padding: 8px 10px;
-
-    //   span {
-    //     color: #fff;
-    //     font-weight: bold;
-    //     font-size: fz(12);
-
-    //     &:before {
-    //       content: '';
-    //       @extend .sprite-common;
-    //       @include sprite( $common-icon-bookmark, inline-block );
-    //       margin-right: 5px;
-    //       position: relative;
-    //       top: 2px;
-    //     }
-    //   }
-
-    //   &:hover {
-    //     transition: background-color ease-out .4s;
-    //   }
-
-    //   @at-root {
-    //     & {
-    //       background-color: #787878;
-
-    //       &:hover {
-    //         background-color: lighten( #787878, 8% );
-    //       }
-    //     }
-
-    //     &-disable {
-    //       background-color: $highlight-color;
-
-    //       &:hover {
-    //         background-color: lighten( $highlight-color, 8% );
-    //       }
-    //     }
-    //   }
-    // } //.btn-bookmark
+      padding-right: perCalc(20);
+      padding-left: perCalc(20);
+    }
 
 
 
     .feature-user {
       &.comment-item {
-        margin-top: 10px;
+        margin-right: perCalc(20);
+        margin-left: perCalc(20);
         padding-top: 0;
         border-top: none;
         background-color: #f5f5f5;
       }
 
-      .comment-user-job {
-        font-size: fz(12);
+      .comment-user {
+        &-thumb, &-data {
+          display: inline-block;
+        }
+
+        &-link {
+          position: relative;
+        }
+
+        &-thumb {
+          position: absolute;
+          top: -(54/2)+px;
+          left: 0;
+          width: (110/2)+px;
+          height: (110/2)+px;
+          background-size: (110/2)+px;
+        }
+
+        &-data {
+          margin-left: (124/2)+px;
+        }
+
+        &-name {
+          margin-top: (10/2)+px;
+        }
+
+        &-name, &-job, .comment-date {
+          margin-left: 0;
+          font-size: fz(18/2);
+        }
       }
 
       .comment-content {
-        padding-right: 10px;
-        padding-left: 10px;
-        font-size: fz(12);
+        padding-right: (20/2)+px;
+        padding-left: (20/2)+px;
+        font-size: fz(20/2);
       } //.comment-content
 
       .comment-reaction {
-        padding-right: 8px;
-        padding-bottom: 8px;
-        padding-left: 8px;
+        padding-right: (20/2)+px;
+        padding-bottom: (20/2)+px;
+        padding-left: (20/2)+px;
       }
     } //.feature-user
 
 
 
     .commented-user {
-      @include clearfix;
-      margin-top: 10px;
+      margin-left: perCalc(20);
+      padding-left: (114/2)+px;
+      padding-bottom: (4/2)+px;
 
       &-item {
         float: left;
 
         & + & {
-          margin-left: 2px;
+          margin-left: (4/2)+px;
         }
       }
 
       &-thumb {
         @include link-decoration(null, null, none, none);
         display: block;
-        width: 25px;
-        height: 25px;
-        background: url(/assets/images/common/thumb-user.png) 0 0 no-repeat;
+        width: (50/2)+px;
+        height: (50/2)+px;
+        background: url(/assets/sp/images/common/thumb-user.png) 0 0 no-repeat;
+        background-size: (50/2)+px;
 
         &:hover {
           @include hover-opacity;
@@ -135,32 +123,91 @@
       &-andmore {
         line-height: 25px;
         margin-left: 5px;
-        font-size: fz(12);
+        font-size: fz(20/2);
       }
     } //.commented-user
   }
 
   .board-item {
     position: relative;
-    margin-top: 30px;
+    margin: (20/2)+px perCalc(20) 0;
+    padding-bottom: (20/2)+px;
+    background-color: #fff;
 
     .post {
-      &-thumb {
-        &-overlay-movie {}
-      } //post-thumb
+      &-thumb {}
+
+      &-heading {
+        line-height: lh(36, 26);
+        font-size: fz(26/2);
+      }
 
       &-data {
-        margin-top: .75em;
+        padding: (20/2)+px;
+      }
+
+      [ class^="post-label_" ] {}
+
+      &-label_recommend {
+        display: inline-block;
+        line-height: 1em;
+        padding: (6/2)+px (8/2)+px;
+        background-color: $highlight-color;
+        color: #fff;
+        font-weight: bold;
+        font-size: fz(20/2);
+      }
+
+      &-category {
+        display: inline-block;
+      }
+
+      &-date {
+        margin-top: .25em;
+      }
+    } //.board-large .post common
+
+    .post {
+      @include clearfix;
+
+      &-thumb {
+        float: right;
+        width: (210/2)+px;
+      }
+
+      &-heading {
+        min-height: (130/2)+px;
+        padding: perCalc(20);
+        padding-bottom: 0;
+      }
+
+      &-data {
+        clear: both;
       }
 
       &-category {}
-
-      &-heading {
-        font-size: fz(20);
-      }
-
       &-date {}
-    } //.board-large .post
+    }
+
+    .type-movie {
+      .post {
+        &-thumb {
+          float: none;
+          width: 100%;
+        }
+
+        &-heading {
+          min-height: initial;
+          padding: (20/2)+px (20/2)+px 0;
+        }
+
+        &-data {}
+
+        &-category {}
+
+        &-date {}
+      }
+    } //.board-large .post.type-movie
   }
 
 } //.board-large
@@ -173,52 +220,59 @@
 // 汎用 ニュース一覧
 .board-small {
   @include clearfix;
+  // margin-top: 30px;
+  border-top: 1px solid $border-primary-color;
 
-  &.column2 {
-    margin-top: 0;
-    border-top: none;
-
-    .board-item {
-      float: left;
-      width: 340px;
-      border-top: 1px solid $border-primary-color;
-      border-bottom: none;
-
-      &:nth-child(2n) {
-        float: right;
-      }
-
-      .post {
-        &-heading {
-          min-height: 2.6em;
-        }
-      }
-    }
+  .board-item {
+    border-bottom: 1px solid $border-primary-color;
+    padding-right: perCalc(20);
+    padding-left: perCalc(20);
   }
 
+  // &.column2 {
+  //   margin-top: 0;
+  //   border-top: none;
+
+  //   .board-item {
+  //     float: left;
+  //     width: 50%;
+  //     border-top: 1px solid $border-primary-color;
+  //     border-bottom: none;
+
+  //     &:nth-child(2n) {
+  //       float: right;
+  //     }
+
+  //     .post {
+  //       &-heading {
+  //         min-height: 2.6em;
+  //       }
+  //     }
+  //   }
+  // }
+
   .post {
-    padding: 15px 0;
+    padding: (20/2)+px 0;
     overflow: hidden;
-
-    &-thumb {
-      float: left;
-      width: 70px;
-      height: 70px;
-      margin-right: 10px;
-      background: #ccc url(/assets/images/common/thumb-noimage-70x70.png) center center no-repeat;
-    }
-
-    &-data {
-      overflow: hidden;
-    }
-
-    &-category {}
 
     &-heading {
       line-height: lh(18, 14);
     }
 
-    &-date {}
+    &-thumb {
+      float: left;
+      width: (120/2)+px;
+      height: (120/2)+px;
+      margin-right: (20/2)+px;
+      background: #ccc url(/assets/sp/images/common/thumb-noimage-120x120.png) center center no-repeat;
+      background-size: (120/2)+px;
+    }
+
+    &-category {
+      margin-top: .5em;
+    }
+
+    &-data {}
   } //.board-small .post
 
   .btn-bookmark {
@@ -238,37 +292,43 @@
     @include clearfix;
     display: block;
 
+    &.type-movie {
+      .post-thumb-overlay-movie {
+        display: block;
+      }
+    }
+
     &-thumb {
       &-overlay-movie {
         display: none;
         position: absolute;
-
-        &.type-movie {
-          display: block;
-        }
       }
     }
 
     &-data {}
 
-    &-category {
-      color: $highlight-color;
+    &-heading {
+      line-height: lh(36, 24);
       font-weight: bold;
-      font-size: fz(12);
+      font-size: fz(24/2);
     }
 
-    &-heading {
+    &-category {
+      line-height: 1em;
+      color: $highlight-color;
       font-weight: bold;
+      font-size: fz(20/2);
     }
 
     &-date {
       margin-top: .25em;
       color: #666;
-      font-size: fz(10);
+      font-size: fz(20/2);
     }
 
     &-excerpt-text {
-      margin-top: 0.25em;
+      margin-top: .5em;
+      font-size: fz(22/2);
     }
 
     &:hover {
@@ -334,16 +394,18 @@
 // board-btn-viewmore
 // VIEW MORE (もっと見る)ボタン
 .board-btn-viewmore {
-  clear: both;
-  padding-top: 30px;
+  padding-top: (20/2)+px;
 
   &-link {
     display: block;
-    padding: 18px 0;
-    border: 2px solid $highlight-color;
+    margin-right: perCalc(20);
+    margin-left: perCalc(20);
+    padding: (32/2)+px 0;
+    border-radius: 5px;
+    background-color: $highlight-color;
 
     span {
-      @extend .sprite-common;
+      @extend .sp-sprite-common;
       @include sprite( $common-btn-viewmore );
       @include hide-text;
       margin: 0 auto;
@@ -365,16 +427,17 @@
   @at-root {
     &-inner {
       position: relative;
-      width: 1070px;
-      height: 80px;
-      margin: 0 auto;
+      display: table;
+      width: 100%;
     }
 
     &-info {
       @include table-cell;
-      width: 1170px - 30;
-      height: 80px;
+      width: 100%;
+      height: (100/2)+px;
       color: #fff;
+      font-weight: bold;
+      font-size: fz(24/2);
       text-align: center;
 
       cursor: default;
@@ -383,11 +446,11 @@
     &-btn-close {
       position: absolute;
       top: 50%;
-      right: 0;
-      margin-top: -15px;
+      right: (30/2)+px;
+      margin-top: -5px;
 
       a {
-        @extend .sprite-common;
+        @extend .sp-sprite-common;
         @include sprite( $common-btn-notice-close );
         @include hide-text;
       }

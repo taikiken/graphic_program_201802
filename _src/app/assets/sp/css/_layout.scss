@@ -32,6 +32,13 @@ html, body {
   height: 100%;
 }
 
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+
 .whole {
   overflow-x: hidden;
 
@@ -46,13 +53,6 @@ html, body {
 
 a {
   @include link-decoration($highlight-color, $highlight-color, none, none);
-}
-
-input,
-textarea,
-select,
-button {
-  outline: none;
 }
 
 
@@ -152,7 +152,7 @@ button {
         border-radius: 100%;
         color: #fff;
         font-weight: bold;
-        font-size: fz(10);
+        font-size: fz(20/2);
         text-align: center;
       }
     }
@@ -172,40 +172,38 @@ button {
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .gnav-sec {
-  background: #111 url(/assets/images/common/gnav-bg.png) 0 0 repeat-x;
+  width: 100%;
+  height: (100/2)+px;
+  overflow: hidden;
+  background-color: #111;
 
   ul {
-    width: 1070px;
-    margin: 0 auto;
-    letter-spacing: ls( inline-block );
+    width: 100%;
+    height: (110/2)+px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   li {
-    display: inline-block;
-    padding: 0 11px 0 0;
-    background: url(/assets/images/common/gnav-separator.png) right center no-repeat;
+    display: table-cell;
+    padding: 10px 4px;
     text-align: center;
     vertical-align: middle;
-    letter-spacing: normal;
-
-    // &:last-child {
-    //   padding-right: 0;
-    //   background: none;
-    // }
   }
 
   a {
     display: block;
-    max-height: 40px;
-    // line-height: 40px;
-    padding: 10px 8px 12px;
-    @include link-decoration(#ccc, $highlight-color, none, none);
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    @include link-decoration(#999, #999, none, none);
     font-weight: bold;
+    font-size: fz(24/2);
     white-space: nowrap;
+  }
 
-    &:hover {
-      padding-bottom: 10px;
-      border-bottom: 2px solid $highlight-color;
+  .gnav-crazy {
+    a {
       color: $highlight-color;
     }
   }
@@ -214,9 +212,9 @@ button {
     &.#{$arg} {
       .gnav-#{$arg} {
         a {
-          padding-bottom: 10px;
-          border-bottom: 2px solid $highlight-color;
-          color: $highlight-color;
+          border-radius: 15px;
+          background-color: $highlight-color;
+          color: #fff;
         }
       }
     }
@@ -237,79 +235,75 @@ button {
 .foot {
   @at-root {
     &-sec {
-      padding-top: 20px;
-      background-color: #f5f5f5;
+      background-color: #111;
 
-      &-inner {
-        background-color: #000;
-      }
+      &-inner {}
     }
 
     &-pr {
-      background-color: #333;
-
       &-inner {
-        @include clearfix;
-        width: 1070px;
-        margin: 0 auto;
+        display: table;
+        padding: (30/2)+px perCalc(30);
+        background-color: #222;
       }
 
-      figure {
-        float: left;
-        margin-top: 20px;
+      &-logo {
+        display: table-cell;
+        width: perCalc(150, 580);
+        padding-right: (28/2)+px;
+        vertical-align: middle;
       }
 
       .text-block {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      &-heading {
+        margin-top: .25em;
+        color: #fff;
+        font-weight: bold;
+        font-size: fz(24/2);
+      }
+
+      &-list {
+        @include clearfix;
+        margin-top: (20/2)+px;
+      }
+
+      &-item {
         float: left;
-        width: 450px;
-        margin: 35px 0 0 25px;
+        width: perCalc(206, 430);
 
-        p {
-          margin-top: 16px;
-          color: #fff;
-          font-size: fz(12);
-        }
-
-        ul {
-          @include clearfix;
-          margin-top: 16px;
-
-          li {
-            float: left;
-
-            + li {
-              margin-left: 10px;
-            }
-          }
-
-          a:hover {
-            @include hover-opacity;
-          }
+        + li {
+          float: right;
         }
       }
 
       .fb-page-plugin {
-        float: right;
-        width: 400px;
-        margin-top: 30px;
+        margin-top: (20/2)+px;
+        padding-right: perCalc(20);
+        padding-left: perCalc(20);
+      }
+
+      .fb-page {
+        width: 100% !important;
       }
     } // foot-pr
 
     &-sec {
       .pagetop {
+        margin-top: (20/2)+px;
+        border-top: 1px solid #333;
         border-bottom: 1px solid #333;
 
         a {
           display: block;
-          padding: 18px 0;
-
-          &:hover {
-            @include hover-opacity;
-          }
+          padding: (36/2)+px 0;
         }
 
         span {
-          @extend .sprite-footer;
+          @extend .sp-sprite-footer;
           @include sprite( $footer-pagetop );
           @include hide-text;
           margin: 0 auto;
@@ -317,31 +311,22 @@ button {
       } // pagetop
 
       .fnav {
-        width: 1070px;
-        margin: 30px auto 0;
-
         ul {
-          text-align: center;
-          letter-spacing: ls(inline-block);
-
           li {
-            display: inline-block;
-            letter-spacing: normal;
-
-            + li {
-              margin-left: 20px;
-            }
+            border-bottom: 1px solid #333;
           }
 
           a {
-            @include link-decoration(#666, #666, none, underline);
-            font-size: fz(12);
+            @include link-decoration(#999, #999, none, underline);
+            display: block;
+            padding: perCalc(30);
+            font-size: fz(24/2);
           }
         }
       } // fnav
 
       .sns-block {
-        margin-top: 20px;
+        margin-top: (30/2)+px;
 
         ul {
           text-align: center;
@@ -353,17 +338,13 @@ button {
             letter-spacing: normal;
 
             + li {
-              margin-left: 10px;
+              margin-left: (24/2)+px;
             }
           }
 
           a {
-            @extend .sprite-footer;
+            @extend .sp-sprite-footer;
             @include hide-text;
-
-            &:hover {
-              @include hover-opacity;
-            }
           }
 
           .sns-tw a {
@@ -385,9 +366,10 @@ button {
 }
 
 .copyright {
-  padding: 24px 0 28px;
+  padding: (30/2)+px 0;
   color: #666;
-  font-size: fz(10);
+  font-weight: bold;
+  font-size: fz(16/2);
   text-align: center;
 } //.copyright
 
@@ -406,38 +388,34 @@ button {
   position: relative;
   background-color: #fff;
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    background-color: $bg-primary-color;
-  }
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 50%;
+  //   width: 50%;
+  //   height: 100%;
+  //   background-color: $bg-primary-color;
+  // }
 
   @at-root {
     &-inner {
-      @include clearfix;
       position: relative;
-      width: 1070px;
-      margin: 0 auto;
-      background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0;
+      background-color: #fff;
     }
   }
 
   .main-sec {
-    float: left;
-    width: 710px;
+    // width: 710px;
     // padding-top: 30px;
   }
 
   .side-sec {
-    float: right;
-    width: 330px;
-    padding-top: 30px;
-    padding-left: 30px;
-    background-color: #f5f5f5;
+    // float: right;
+    // width: 330px;
+    // padding-top: 30px;
+    // padding-left: 30px;
+    // background-color: #f5f5f5;
   }
 }
 

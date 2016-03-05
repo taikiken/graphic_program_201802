@@ -104,7 +104,7 @@
 
   @at-root {
     &-btn {
-      @extend .sprite-detail;
+      @extend .sp-sprite-detail;
       @include sprite( $detail-btn-comment-menu );
       @include hide-text;
 
@@ -149,7 +149,7 @@
             position: relative;
             top: 2px;
             margin-right: 5px;
-            @extend .sprite-detail;
+            @extend .sp-sprite-detail;
             @include hide-text;
           }
         }
@@ -192,9 +192,10 @@
   }
 
   &-thumb {
-    width: 50px;
-    height: 50px;
-    background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat;
+    width: (80/2)+px;
+    height: (80/2)+px;
+    background: url(/assets/sp/images/common/thumb-user-feature.png) 0 0 no-repeat;
+    background-size: (80/2)+px;
 
     &.user-logged-in {
       background: none;
@@ -202,22 +203,23 @@
   }
 
   &-name, &-job, .comment-date {
-    margin-left: 10px;
+    margin-left: (20/2)+px;
   }
 
   &-name {
     font-weight: bold;
+    font-size: fz(24/2);
   }
 
   &-job {
     color: #666;
-    font-size: fz(10);
+    font-size: fz(20/2);
   }
 
   @at-root {
     .comment-date {
       color: #999;
-      font-size: fz(10);
+      font-size: fz(18/2);
     }
   }
 } //.comment-user
@@ -228,7 +230,8 @@
 
 // comment-content
 .comment-content {
-  padding-top: 10px;
+  padding-top: (20/2)+px;
+  font-size: fz(22/2);
 } //.comment-content
 
 
@@ -237,15 +240,15 @@
 
 // comment-reaction
 .comment-reaction {
-  padding-top: 8px;
+  padding-top: (20/2)+px;
 
   .comment-reaction-btn {
     @include link-decoration(#333, #333, none, underline);
     display: inline-block;
-    font-size: fz(12);
+    font-size: fz(20/2);
 
     & + .comment-reaction-btn {
-      margin-left: 10px;
+      margin-left: (28/2)+px;
     }
 
     &.active {
@@ -254,9 +257,9 @@
   }
 
   i {
-    @extend .sprite-common;
+    @extend .sp-sprite-common;
     @include hide-text;
-    margin-right: 5px;
+    margin-right: (4/2)+px;
     vertical-align: middle;
   }
 

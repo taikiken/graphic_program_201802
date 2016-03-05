@@ -6,200 +6,60 @@
 //
 // Styleguide 2.2.0
 
-// hero-slider
-// トップページ用 メインビジュアルスライダー
-.hero {
-  @at-root {
-    &-sec {
+// hero-sec
+// トップページ メインビジュアル
+.hero-sec {
+  background-color: #111;
+
+  a {
+    display: block;
+  }
+
+  .post {
+    &-overview {
+      @include clearfix;
+      padding: (28/2)+px perCalc(20) (16/2)+px;
     }
 
-    &-slider {
-      position: relative;
-      width: 100%;
-      height: 400px;
-      background-color: #000;
-      overflow: hidden;
+    &-heading {
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(32/2);
+    }
 
-      &-inner {
-        width: 640px;
-        margin: 0 auto;
-        overflow: visible;
+    &-category {
+      margin-top: .5em;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: fz(20/2);
+    }
 
-        ul {
-          @include clearfix;
-          width: 200000px;
-        }
+    &-date,
+    &-comment-num {
+      font-size: fz(20/2);
+    }
 
-        li {
-          float: left;
-          width: 640px;
+    &-date {
+      float: left;
+    }
 
-          a {
-            @include link-decoration(#fff, #fff, none, none);
-            position: relative;
-            display: block;
-            width: 100%;
-            height: 400px;
-
-            &:hover {
-              @include hover-opacity;
-
-              .post-heading {
-                color: $highlight-color;
-              }
-            }
-
-            .overlay {
-              position: absolute;
-              bottom: 0;
-              left: 0;
-            }
-
-            .post {
-              &-overview {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-
-                padding: 0 30px 24px 30px;
-              }
-
-              &-category {
-                color: $highlight-color;
-                font-weight: bold;
-              }
-
-              &-heading {
-                font-weight: bold;
-                font-size: fz(24);
-              }
-
-              &-date,
-              &-comment-num {
-                display: inline-block;
-                font-size: fz(12);
-              }
-
-              &-comment-num {
-                margin-left: 10px;
-                padding-left: 20px;
-                background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat;
-              }
-            }
-          }
-        }
-      } //.hero-slider-inner
-
-      &-control {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        // transform: translateX(-50%);
-        margin-left: -320px;
-
-        .direction {
-          a {
-            position: absolute;
-            display: block;
-            width: 38px;
-            height: 400px;
-            background-position: center center;
-            background-repeat: no-repeat;
-            @include hide-text;
-
-            &:hover {
-              @include hover-opacity;
-            }
-          }
-
-          &-prev {
-            left: -38px;
-            background-image: url(/assets/images/index/btn-slider-prev.png);
-          }
-
-          &-next {
-            left: 640px;
-            background-image: url(/assets/images/index/btn-slider-next.png);
-          }
-        }
-
-        .pager {
-          position: absolute;
-          top: 370px;
-          width: 100%;
-
-          ul {
-            width: 640px;
-            text-align: center;
-            letter-spacing: ls(inline-block);
-          }
-
-          li {
-            display: inline-block;
-            letter-spacing: normal;
-
-            + li {
-              margin-left: 15px;
-            }
-          }
-
-          a {
-            display: block;
-            width: 6px;
-            height: 6px;
-            background-color: #999;
-            border-radius: 100%;
-            @include hide-text;
-
-            &.active,
-            &:hover {
-              background-color: $highlight-color;
-            }
-          }
-        }
-      } //.hero-slider-control
+    &-comment-num {
+      float: right;
+      padding-left: (36/2)+px;
+      color: #fff;
+      background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
+      background-size: (26/2)+px;
     }
   }
 }
 
-// ---------------------------
-// motion slider setting
-// ---------------------------
-@import "motion_slider";
 
 
-// ---------------------------
 
 
 // headline
 // トップページ ヘッドライン
 .headline {
-  margin-top: 30px;
-  border-bottom: 1px solid $border-primary-color;
-
-  @at-root {
-    &-heading {
-      padding-bottom: 20px;
-      border-bottom: 1px solid $border-primary-color;
-
-      &-title, &-ruby {
-        display: inline-block;
-        line-height: 1;
-      }
-
-      &-title img {
-        vertical-align: middle;
-      }
-
-      &-ruby {
-        margin-left: 8px;
-        color: $highlight-color;
-        font-weight: bold;
-        font-size: fz(12);
-      }
-    } //.headline-heading
-  }
-
   .board-small {
     .board-item {
       &:nth-child(1), &:nth-child(2) {
@@ -208,10 +68,9 @@
 
       .post {
         &-thumb {}
-        &-data {}
-        &-category {}
         &-heading {}
-        &-date {}
+        &-category {}
+        &-data {}
 
         &:hover {
           .post-thumb {}
