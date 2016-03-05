@@ -28,21 +28,25 @@
     - [X] ログアウト  
 
 1. パスワード
-    - [-] リセット
+    - [-] リセット  
+    不要 backend
     - [-] 再設定
+    不要 backend
 
 1. マイページ
-    - [-] default ブックマーク一覧
-    - [-] アクティビティ
+    - [X] default ブックマーク一覧
+    - [X] アクティビティ
 
 1. お知らせ
-    - [-]
+    - [X]
 
 1. 設定
-    - [-] プロフィール
-    - [-] 好きな競技
-    - [-] ソーシャル
-    - [-] 退会
+    - [X] プロフィール
+    - [-] 好きな競技  
+    不要 1p. プロフィールに含まれる
+    - [-] ソーシャル  
+    不要 1p. プロフィールに含まれる
+    - [X] 退会
 
 ## Pagination
 
@@ -58,7 +62,7 @@
 
 1. ログイン
     - [X] ログイン判定  
-    ~~API 未設定~~ Cookie 判定
+    cookie token 有無で判定
     - [X] ユーザー情報取得 model
     - [X] ユーザーアイコンを ユーザー情報取得後に取得
     - [X] local から token 含むリクエストが成功しない... -> 2016-02-16 解決
@@ -66,7 +70,7 @@
     - [X] UI drop menu
     - [X] お知らせ
     - [-] お知らせ既読  
-    機能未策定
+    機能未策定 -> 不要 お知らせ一覧表示時に
 
 1. 非ログイン
     - [X] view
@@ -127,8 +131,8 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [-] edit  
     先送り
     - [X] delete
-    - [] delete view  
-    デザインがまだ
+    - [X] delete view  
+    モーダルから OK で削除
     - [-] notice  
     見送り
     - [X] good
@@ -178,8 +182,8 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     
 1. コメント Form
     - [X] open / close
-    - [] cancel button  
-    デザインがまだ
+    - [X] cancel button  
+    デザインなし
     
 1. ranking
     記事カテゴリーから取得する
@@ -246,49 +250,56 @@ ToDo: HTML 書き換えに伴う修正対応 on 2016.02.08
     - [] infinite scroll   
     データ足りないので「次」未テスト
 
+## コメント詳細
+1. コメント詳細
+    - [X] model
+    - [X] view
+    - [] sidebar
 
 # プロフィールページ
     
 ## bookmark
 1. 一覧
-    - [] model
-    - [] view
-    - [] infinite scroll  
+    - [X] model
+    - [X] view
+    - [-] infinite scroll  
+    button click で読み込み
 
 
 ## お知らせ
 [issue:330](https://github.com/undotsushin/undotsushin/issues/330)
 
 1. 一覧
-    - [] model
-    - [] view
-    - [] infinite scroll  
+    - [X] model
+    - [X] view
+    - [X] infinite scroll  
+    button click で読み込み
     
 1. 既読化
-    - [] model
+    - [X] model
    
 
 ## アクティヴィティ
 1. 一覧
-    - [] model
-    - [] view  
+    - [X] model
+    - [X] view  
 
 # アカウント設定
 1. 基本情報
-    - [] model
-    - [] view  
+    - [X] model
+    - [X] view  
 
 1. パーソナライズ
-    - [] model
-    - [] view  
+    - [X] model
+    - [X] view  
     
 1. ソーシャル連携
-    - [] model
-    - [] view  
+    - [X] model
+    - [X] view  
     
 1. 退会
-    - [] model
-    - [] view  
+    - [X] model
+    - [X] view  
 
 # 会員登録
 
