@@ -87,7 +87,9 @@ gulp.task 'babels:dev', (cb) ->
 # babels build
 gulp.task 'babels:build', (cb) ->
   runSequence(
-    'babels:make'
+#    'babels:make'
+    # no eslint
+    'babels:babel'
     'webpack:babels:main:build'
     'bundle:copy'
     cb
@@ -107,7 +109,9 @@ gulp.task 'exe:dev', (cb) ->
 # exe build
 gulp.task 'exe:build', (cb) ->
   runSequence(
-    'exe:make'
+#    'exe:make'
+    # no eslint
+    'exe:babel'
     'webpack:babels:exe:build'
     'bundle:copy'
     cb
