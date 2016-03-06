@@ -75,42 +75,46 @@ if(strlen($name)>0){
 	$ermsg["name"]="名前は必須項目です。";
 }
 
-if(strlen($_POST["facebook_id"])>0){
-	
-	$facebookid=trim($_POST["facebook_id"]);
-	
+$facebookid=trim($_POST["facebook_id"]);
+if(strlen($facebookid)>0){
+		
 	$sql="select id from repo_n where a1='%s' and flag=1";
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
-		$ermsg["facebook_id"]="ログインいただいているFacebookアカウントはすでに登録されています。";
+		$ermsg["facebook_id"]="現在ログインいただいているFacebookアカウントはすでに登録されています。";
 	}else{
 		$sv[$sn[]="a1"]=$facebookid;
 		$sv[$sn[]="a2"]=$_POST["facebook_token"];	
 	}
 }
 
-if(strlen($_POST["twitter_id"])>0){
-	
-	$twitterid=trim($_POST["twitter_id"]);
-	
+$twitterid=trim($_POST["twitter_id"]);
+if(strlen($twitterid)>0){
+
 	$sql="select id from repo_n where a3='%s' and flag=1";
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
-		$ermsg["twitter_id"]="ログインいただいているTwitterアカウントはすでに登録されています。";
+		$ermsg["twitter_id"]="現在ログインいただいているTwitterアカウントはすでに登録されています。";
 	}else{
 		$sv[$sn[]="a3"]=$twitterid;
 		$sv[$sn[]="a4"]=$_POST["twitter_id"];	
 	}
 }
 
+if(strlen($_FILES["profile_picture"]["tmp_name"])>0){
 
-if(strlen($_POST["twitter_id"])>0){
-	$sv[$sn[]="a3"]=$_POST["twitter_id"];
-	$sv[$sn[]="a4"]=$_POST["twitter_token"];
+	$ext=checkFileType($_FILES["profile_picture"]);
+	$filename=sprintf("%s.%s",md5("ut".$email),$ext);
+	if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
+		imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
+		$sv[$sn[]="img1"]=$filename;
+	}else{
+		$ermsg["profile_picture"]="ファイルのアップロードに失敗しました。";
+	}
 }
 
 if(count($ermsg)>0){
@@ -129,18 +133,7 @@ if(count($ermsg)>0){
 			
 		$bio=trim($_POST["bio"]);
 		$sv[$sn[]="t2"]=$bio;
-	
-		if($_FILES){
-			$ext=checkFileType($_FILES["profile_picture"]);
-			$filename=sprintf("%s.%s",md5("ut".$email),$ext);
-			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
-				imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
-				$sv[$sn[]="img1"]=$filename;
-			}else{
-				$ermsg[]="ファイルのアップロードに失敗しました。";
-			}
-		}
-		
+			
 		if(is_string($_POST["interest"])){
 			if(strlen($_POST["interest"])>0){
 				$_POST["interest"]=@explode(",",$_POST["interest"]);
@@ -211,7 +204,7 @@ if(count($ermsg)>0){
 				$s["id"]=$ID;
 				$s["name"]=$name;
 				$s["email"]=$email;
-				$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$filename);
+				$s["profile_picture"]=strlen($filename)>0?sprintf("%s/prg_img/img/%s",$ImgPath,$filename):"";
 				$s["bio"]=$bio;
 				$s["url"]=sprintf("%s/mypage/",$domain,$ID);
 				$s["type"]["id"]=6;

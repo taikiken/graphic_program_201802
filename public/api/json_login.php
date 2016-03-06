@@ -34,7 +34,7 @@ if(strlen($email)>0&&strlen($passwd)>0){
 		
 		$s["id"]=$f["id"];
 		$s["name"]=$f["title"];
-		$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$f["img1"]);
+		$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$ImgPath,$f["img1"]);
 		$s["bio"]=$f["t2"];
 		$s["url"]=sprintf("%s/mypage/",$domain);
 		$s["type"]["id"]=$f["cid"];

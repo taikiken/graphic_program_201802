@@ -36,7 +36,7 @@ for($i=0;$i<count($p);$i++){
 	
 	$s[$i]["user"]["id"]=(int)$p[$i]["userid"];
 	$s[$i]["user"]["name"]=mod_HTML($p[$i]["name"]);
-	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["icon"]):"";
+	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["icon"]):"";
 	$s[$i]["user"]["bio"]==checkstr($p[$i]["profile"]);
 	$s[$i]["user"]["url"]=sprintf("%s/mypage/",$domain);
 	$s[$i]["user"]["type"]["id"]=(int)$p[$i]["typeid"];
@@ -61,7 +61,7 @@ for($i=0;$i<count($p);$i++){
 			
 			$s[$i]["article"]["comments"]["user"]["id"]=(int)$f["userid"];
 			$s[$i]["article"]["comments"]["user"]["name"]=mod_HTML($f["name"]);
-			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 			$s[$i]["article"]["comments"]["user"]["bio"]==checkstr($f["profile"]);
 			$s[$i]["article"]["comments"]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			
@@ -76,7 +76,7 @@ for($i=0;$i<count($p);$i++){
 			
 			$s[$i]["article"]["comments"]["user"]["id"]=(int)$f["userid_"];
 			$s[$i]["article"]["comments"]["user"]["name"]=mod_HTML($f["name_"]);
-			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon_"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon_"]):"";
+			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon_"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon_"]):"";
 			$s[$i]["article"]["comments"]["user"]["bio"]==checkstr($f["profile_"]);
 			$s[$i]["article"]["comments"]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			
@@ -89,7 +89,7 @@ for($i=0;$i<count($p);$i++){
 			
 			$s[$i]["article"]["reply"]["user"]["id"]=(int)$f["userid"];
 			$s[$i]["article"]["reply"]["user"]["name"]=mod_HTML($f["name"]);
-			$s[$i]["article"]["reply"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+			$s[$i]["article"]["reply"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 			$s[$i]["article"]["reply"]["user"]["bio"]==checkstr($f["profile"]);
 			$s[$i]["article"]["reply"]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			

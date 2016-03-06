@@ -3,9 +3,9 @@
 #Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
 #Header always set Access-Control-Allow-Headers "Authorization, authorization"
 
-#Satisfy any
-#order allow,deny
-#allow from all
+Satisfy any
+order allow,deny
+allow from all
 
 Options FollowSymLinks Includes
 RewriteEngine on
@@ -50,7 +50,7 @@ RewriteRule ^v1/articles/home /api/json_articlelist.php?api=home [L,QSA]
 #USER
 RewriteRule ^v1/users/self/settings/account /api/json_useraccount.php [L]
 RewriteRule ^v1/users/self/settings/interest /api/json_usercategory.php [L]
-RewriteRule ^v1/users/self/notifications/read /api/json_userread.php [L]
+RewriteRule ^v1/users/self/notifications/read /api/json_usernotificationread.php [L]
 RewriteRule ^v1/users/self/notifications/count /api/json_usernotificationcount.php [L]
 RewriteRule ^v1/users/self/notifications /api/json_usernotification.php [L]
 RewriteRule ^v1/users/self/activities /api/json_useractivity.php [L]
@@ -58,9 +58,9 @@ RewriteRule ^v1/users/self /api/json_userdetails.php [L]
 RewriteRule ^v1/users/([0-9]+) /api/json_userdetails.php?userid=$1 [L]
 RewriteRule ^v1/users/email /api/json_useremail.php [L]
 RewriteCond %{REQUEST_METHOD} POST
-RewriteRule ^v1/users/ /api/json_userregister.php [L]
+RewriteRule ^v1/users /api/json_userregister.php [L]
 RewriteCond %{REQUEST_METHOD} DELETE
-RewriteRule ^v1/users/ /api/json_userunregister.php [L]
+RewriteRule ^v1/users /api/json_userunregister.php [L]
 
 #CATEGORY
 RewriteRule ^v1/category /api/json_categorylist.php [L]
@@ -69,6 +69,6 @@ RewriteRule ^v1/category /api/json_categorylist.php [L]
 RewriteRule ^v1/initialize /api/json_initialize.php [L]
 
 #LOGIN
-RewriteRule ^v1/sessions/social /api/json_loginsocial.php [L]
-RewriteRule ^v1/sessions/update /api/json_loginsocialupdate.php [L]
-RewriteRule ^v1/sessions/ /api/json_login.php [L]
+RewriteRule ^v1/sessions/social /api/json_login_social.php [L]
+RewriteRule ^v1/sessions/update /api/json_login_socialupdate.php [L]
+RewriteRule ^v1/sessions /api/json_login.php [L]

@@ -9,10 +9,10 @@ $uid=auth();
 $offset=isset($_REQUEST["offset"])?$_REQUEST["offset"]:0;
 $length=isset($_REQUEST["length"])?$_REQUEST["length"]:10;
 
-$sql=sprintf("select * from (select *,(select title from repo_n where id=pageid) as title,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_activity where reuserid=%s and activity<=2 and notice=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by regitime desc limit %s offset %s",
+$sql=sprintf("select * from (select *,(select title from repo_n where id=pageid) as title,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_activity where reuserid=%s and activity<=2) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by regitime desc limit %s offset %s",
 $uid,$length,$offset);
 
-$nsql=sprintf("select count(*) as n from u_activity where reuserid=%s and activity<=2 and notice=1",$uid);
+$nsql=sprintf("select count(*) as n from u_activity where reuserid=%s and activity<=2",$uid);
 
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
@@ -36,7 +36,7 @@ for($i=0;$i<count($p);$i++){
 	
 	$s[$i]["user"]["id"]=(int)$p[$i]["userid"];
 	$s[$i]["user"]["name"]=mod_HTML($p[$i]["name"]);
-	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["icon"]):"";
+	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["icon"]):"";
 	$s[$i]["user"]["bio"]==checkstr($p[$i]["profile"]);
 	$s[$i]["user"]["url"]=sprintf("%s/mypage/",$domain);
 	$s[$i]["user"]["type"]["id"]=(int)$p[$i]["typeid"];
@@ -61,7 +61,7 @@ for($i=0;$i<count($p);$i++){
 			
 			$s[$i]["article"]["comments"]["user"]["id"]=(int)$f["userid"];
 			$s[$i]["article"]["comments"]["user"]["name"]=mod_HTML($f["name"]);
-			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 			$s[$i]["article"]["comments"]["user"]["bio"]==checkstr($f["profile"]);
 			$s[$i]["article"]["comments"]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			
@@ -76,7 +76,7 @@ for($i=0;$i<count($p);$i++){
 			
 			$s[$i]["article"]["comments"]["user"]["id"]=(int)$f["userid_"];
 			$s[$i]["article"]["comments"]["user"]["name"]=mod_HTML($f["name_"]);
-			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon_"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon_"]):"";
+			$s[$i]["article"]["comments"]["user"]["profile_picture"]=strlen($f["icon_"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon_"]):"";
 			$s[$i]["article"]["comments"]["user"]["bio"]==checkstr($f["profile_"]);
 			$s[$i]["article"]["comments"]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			
@@ -89,7 +89,7 @@ for($i=0;$i<count($p);$i++){
 			
 			$s[$i]["article"]["reply"]["user"]["id"]=(int)$f["userid"];
 			$s[$i]["article"]["reply"]["user"]["name"]=mod_HTML($f["name"]);
-			$s[$i]["article"]["reply"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+			$s[$i]["article"]["reply"]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 			$s[$i]["article"]["reply"]["user"]["bio"]==checkstr($f["profile"]);
 			$s[$i]["article"]["reply"]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			

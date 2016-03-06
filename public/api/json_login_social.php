@@ -9,6 +9,13 @@ $id=trim($_POST["id"]);
 $token=trim($_POST["token"]);
 $service=trim($_POST["service"]);
 
+/*
+a1: Facebook ID
+a2: Facebook Token
+a3: Twitter ID
+a4: Twitter Token
+*/
+
 $field="";
 if($service=="facebook"){
 	$field=1;
@@ -47,7 +54,8 @@ if(strlen($field)>0&&strlen($id)>0&&strlen($token)>0){
 		
 		$s["id"]=$f["id"];
 		$s["name"]=$f["title"];
-		$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$domain,$f["img1"]);
+		$s["email"]=$f["t1"];
+		$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$ImgPath,$f["img1"]);
 		$s["bio"]=$f["t2"];
 		$s["url"]=sprintf("%s/mypage/",$domain);
 		$s["type"]["id"]=$f["cid"];

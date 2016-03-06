@@ -17,7 +17,7 @@ $f=$o->fetch_array();
 $s["id"]=(int)$f["uid"];
 $s["name"]=mod_HTML($f["name"]);
 $s["email"]=mod_HTML($f["email"]);
-$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 $s["bio"]=checkstr($f["profile"]);
 $s["url"]=sprintf("%s/mypage/",$domain,$f["uid"]);
 
