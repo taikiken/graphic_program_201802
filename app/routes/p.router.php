@@ -3,6 +3,7 @@
 $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
 
+
   // 記事詳細 - /p/:article_id/
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
@@ -17,6 +18,16 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       'post'      => $post,
       'canonical' => "p/{$post['id']}/",
     ));
+
+
+    // for Releae : AppからのWebViewアクセスなら本文部分のみのテンプレートを利用
+    // ------------------------------
+    // $ua = $_SERVER['HTTP_USER_AGENT'];
+    // if ( $ua == 'undotsushin-ios' || $ua == 'undotsushin-android' ) :
+    //   return $this->renderer->render($response, "app.p.php", $args);
+    // else :
+    //   return $this->renderer->render($response, "default.php", $args);
+    // endif;
 
     return $this->renderer->render($response, "default.php", $args);
 

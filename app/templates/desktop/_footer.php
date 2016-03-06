@@ -1,4 +1,5 @@
 <?php
+
 // footer 表示条件 start
 $template_name = $page['template'];
 
@@ -84,7 +85,7 @@ if (
 <div id="modal-container"></div>
 <?php
 /*
- * php ENV, apiRoot を元に API request 先を決定します
+ * $page['apiRoot'] を元に API request 先を決定します
  * apiRoot が http://www.undotsushin.com の時に
  * UT.app.App.develop(); を行います
  *
@@ -100,33 +101,13 @@ if ( $page['apiRoot'] != '' ) :
 
   'use strict';
 
-  // -------------------------------------------
-  // dev code
-  // ToDo: 本番で削除
-  // -------------------------------------------
-  /*
-
-  # php ENV系各種 - ただし当面apiRootは各環境httpsなしwww => #347
-
-  - ENV      : <?php echo $page['ENV']; ?>
-
-  - hostname : <?php echo $page['hostname']; ?>
-
-  - apiRoot  : <?php echo $page['apiRoot']; ?>
-
-
-  */
-
   var UT = self.UT;
   // API request 先頭に http://www.undotsushin.com を追加します
   UT.app.App.develop();
 
 }() );
 </script>
-<?php
-endif;
-// if $page['apiRoot']
-?>
+<?php endif; ?>
 <script src="/assets/js/bundle/exe.bundle.js"></script>
 <script>
   window.fbAsyncInit = function() {

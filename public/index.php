@@ -11,10 +11,6 @@ include_once "public/ut.php";
 * based on slim/slim-skeleton
 */
 
-
-ini_set( 'display_errors', 1 );
-
-
 date_default_timezone_set('Asia/Tokyo');
 
 if (PHP_SAPI == 'cli-server') {
@@ -25,81 +21,35 @@ if (PHP_SAPI == 'cli-server') {
 }
 
 
-// autoloader
-// ==============================
-require __DIR__ . '/../app/vendor/autoload.php';
+// $_SERVER['SERVER_NAME'] で環境判定します
+// `UT_ENV` に環境を定義しslim上で利用します
+switch( $_SERVER['SERVER_NAME'] ) :
+  case '192.168.33.50' :
+    define('UT_ENV', 'LOCAL');
+    break;
+
+  case 'undotsushin.local' :
+    define('UT_ENV', 'LOCAL');
+    break;
+
+  case 'dev.undotsushin.com' :
+    define('UT_ENV', 'DEVELOP');
+    break;
+
+  case 'stg.undotsushin.com' :
+    define('UT_ENV', 'STAGING');
+    break;
+
+  default :
+    define('UT_ENV', 'PRODUCTION');
+endswitch;
+
+if ( $UT_ENV !== 'PRODUCTION' ) :
+  ini_set( 'display_errors', 1 );
+endif;
 
 
-// initialize
-// ==============================
-$settings = require __DIR__ . '/../app/config/local.php';
-$app = new \Slim\App($settings);
-
-
-// dependencies
-// ==============================
-require __DIR__ . '/../app/src/dependencies.php';
-
-
-// middleware
-// ==============================
-require __DIR__ . '/../app/src/middleware.php';
-
-
-// helper
-// ==============================
-$helpers = glob( __DIR__.'/../app/helpers/*.helper.php');
-foreach ($helpers as $helper) {
-  require $helper;
-}
-
-
-// models
-// ==============================
-$models = glob( __DIR__.'/../app/models/*.model.php');
-foreach ($models as $model) {
-  require $model;
-}
-
-
-$app->model = new ViewModel();
-
-
-// routes / render
-// ==============================
-$routes = glob( __DIR__.'/../app/routes/*.router.php');
-foreach ($routes as $router) {
-  require $router;
-}
-
-
-
-
-// demo
-// ==============================
-$app->get('/demo/{path:.*}', function ($request, $response, $args) use ( $app ) {
-
-    // log
-    $this->logger->info("demo '/demo'", $args);
-
-    $args['args']     = array(
-      'path'  => $args['path'],
-      'page' => $app->model->set(array(
-        'title' => 'demo',
-        'args'  => $args['path'],
-      )),
-    );
-
-    $args['request']  = $request;
-    $args['response'] = $response;
-
-    return $this->renderer->render($response, 'demo.php', $args);
-
-});
-
-
-// Run app
-$app->run();
+require __DIR__ . '/../app/app.php';
 
 
 ?>
