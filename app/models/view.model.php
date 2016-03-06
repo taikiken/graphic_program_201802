@@ -51,7 +51,7 @@ class ViewModel {
     $this->default['ua']              = $this->set_ua();
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
-    if ( UT_ENV === 'PRODUCTION' ) :
+    if ( UT_ENV === 'PRODUCTION' || UT_ENV === 'DEVELOP' ) :
       $this->default['apiRoot'] = '';
     endif;
 
