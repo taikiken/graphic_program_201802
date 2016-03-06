@@ -15,7 +15,7 @@ if(strlen($uid)>0){
 
 	$s["user"]["id"]=(int)$f["uid"];
 	$s["user"]["name"]=mod_HTML($f["name"]);
-	$s["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+	$s["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 	$s["user"]["bio"]=checkstr($f["profile"]);
 	$s["user"]["url"]=sprintf("%s/mypage/",$domain,$f["uid"]);
 	
@@ -78,10 +78,10 @@ sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),
 sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"","")
 );
 if($uid!=""){
-	$sql.=sprintf("(select 2 as h,1 as recommend,st02.*,1 as sort from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select 2 as h,0 as recommend,*,1 as sort from %s) order by recommend desc,relativetime limit 10 offset 0)",
+	$sql.=sprintf("(select 2 as h,1 as recommend,st02.*,1 as sort from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select 2 as h,0 as recommend,*,1 as sort from %s) order by recommend desc,m_time limit 10 offset 0)",
 	$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""));
 }else{
-	$sql.=sprintf("(select 2 as h,0 as recommend,*,1 as sort from %s order by relativetime limit 10 offset 0)",sprintf($articletable,"",""));
+	$sql.=sprintf("(select 2 as h,0 as recommend,*,1 as sort from %s order by m_time limit 10 offset 0)",sprintf($articletable,"",""));
 }
 $sql.=" order by h,sort,recommend desc,relativetime";
 
@@ -125,21 +125,21 @@ for($i=0;$i<count($p);$i++){
 	$s[$hg[$p[$i]["h"]]][$nm]["is_recommend"]=$p[$i]["recommend"]==1?true:false;
 	$s[$hg[$p[$i]["h"]]][$nm]["media_type"]=(strlen($p[$i]["video"])>0||strlen($p[$i]["youtube"])>0)?"video":"image";
 
-	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["thumbnail"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$domain,$p[$i]["img1"]):"";
-	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["medium"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$domain,$p[$i]["img1"]):"";
-	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["large"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["img1"]):"";
-	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["original"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/raw/%s",$domain,$p[$i]["img1"]):"";
+	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["thumbnail"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$ImgPath,$p[$i]["img1"]):"";
+	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["medium"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$ImgPath,$p[$i]["img1"]):"";
+	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["large"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["img1"]):"";
+	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["original"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/raw/%s",$ImgPath,$p[$i]["img1"]):"";
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["images"]["caption"]=checkstr($p[$i]["t1"],1);
 	
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["type"]=get_videotype($p[$i]["video"],$p[$i]["youtube"],$p[$i]["facebook"]);
-	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["url"]=strlen($p[$i]["video"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["video"]):"";
+	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["url"]=strlen($p[$i]["video"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["video"]):"";
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["youtube"]=checkstr($p[$i]["youtube"],1);
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["facebook"]=checkstr($p[$i]["facebook"],1);
 	$s[$hg[$p[$i]["h"]]][$nm]["media"]["video"]["caption"]=checkstr($p[$i]["videocaption"],1);
 	
 	$s[$hg[$p[$i]["h"]]][$nm]["user"]["id"]=(int)$p[$i]["uid"];
 	$s[$hg[$p[$i]["h"]]][$nm]["user"]["name"]=mod_HTML($p[$i]["name"]);
-	$s[$hg[$p[$i]["h"]]][$nm]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["icon"]):"";
+	$s[$hg[$p[$i]["h"]]][$nm]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["icon"]):"";
 	$s[$hg[$p[$i]["h"]]][$nm]["user"]["bio"]==checkstr($p[$i]["profile"]);
 	$s[$hg[$p[$i]["h"]]][$nm]["user"]["url"]=sprintf("%s/mypage/",$domain);
 	
@@ -174,7 +174,7 @@ for($i=0;$i<count($p);$i++){
 
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["id"]=(int)$f["userid"];
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["name"]=mod_HTML($f["name"]);
-			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["bio"]==checkstr($f["profile"]);
 			$s[$hg[$p[$i]["h"]]][$nm]["comments_popular"][$n]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			

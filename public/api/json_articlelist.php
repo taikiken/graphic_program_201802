@@ -21,20 +21,20 @@ if($_REQUEST["api"]=="category"){
 	
 	if(!isset($_REQUEST["type"])){
 
-		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$sql=sprintf("select * from %s order by m_time limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 		
 	}elseif($_REQUEST["type"]=="ranking"){
 		
-		$sql=sprintf("select tt1.*,(case when num is not null then num else 0 end) as num from (select * from %s) as tt1 left join (select pageid,count(pageid) as num from u_view where regitime > now() - interval '3 day' group by pageid) as tt2 on tt1.id=tt2.pageid order by num desc,relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$sql=sprintf("select tt1.*,(case when num is not null then num else 0 end) as num from (select * from %s) as tt1 left join (select pageid,count(pageid) as num from u_view where regitime > now() - interval '3 day' group by pageid) as tt2 on tt1.id=tt2.pageid order by num desc,m_time limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 
 	}elseif($_REQUEST["type"]=="video"){
 
-		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c." and (t8 is not null or youtube is not null or facebook is not null)"),$length,$offset);
+		$sql=sprintf("select * from %s order by m_time limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c." and (t8 is not null or youtube is not null or facebook is not null)"),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and (t8 is not null or youtube is not null or facebook is not null)%s",$c);
 	}
-		
+
 }elseif($_REQUEST["api"]=="search"){
 
 	$q=str_replace(array(" ","　","|","、"),",",trim(strip_tags($_REQUEST["q"])));
@@ -45,7 +45,7 @@ if($_REQUEST["api"]=="category"){
 	$q=implode(" and ",$q);
 	$c="";
 	
-	$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select * from %s) as st02 where st01.id=st02.id order by relativetime limit %s offset %s",$q,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+	$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select * from %s) as st02 where st01.id=st02.id order by m_time limit %s offset %s",$q,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 	$nsql=sprintf("select count(*) as n from (select id from u_index where %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
 
 }elseif($_REQUEST["api"]=="home"||$_REQUEST["api"]=="self"){
@@ -55,12 +55,12 @@ if($_REQUEST["api"]=="category"){
 	if($cx=="home"){
 		
 		if($uid!=""){
-			$sql=sprintf("select st02.*,1 as recommend from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select *,0 as recommend from %s) order by recommend desc,relativetime limit %s offset %s",
+			$sql=sprintf("select st02.*,1 as recommend from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select *,0 as recommend from %s) order by recommend desc,m_time limit %s offset %s",
 			$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
+		
 		}else{
 			$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,"",""),$length,$offset);
 		}
-		echo $sql;
 		$nsql="select count(*) as n from repo_n where cid=1 and flag=1";
 		
 	}elseif($cx=="headline"){
@@ -76,12 +76,12 @@ if($_REQUEST["api"]=="category"){
 	}elseif($cx=="personalized"){
 		
 		$c=$uid!=""?sprintf(" and (m1 in (select categoryid from u_category where userid=%s and flag=1) or m2 in (select categoryid from u_category where userid=%s and flag=1)) and m_time > now() - interval '3 day'",$uid,$uid):"";
-		$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$sql=sprintf("select * from %s order by m_time limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 	}
 }elseif($_REQUEST["api"]=="bookmark"){
 	
-		$sql=sprintf("select * from (select pageid,regitime from u_bookmark where userid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.pageid=rt2.id order by regitime desc limit %s offset %s",$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
+		$sql=sprintf("select * from (select pageid,regitime from u_bookmark where userid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.pageid=rt2.id order by m_time desc limit %s offset %s",$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and id in(select pageid from u_bookmark where userid=%s and flag=1)",$uid);
 }
 
@@ -116,21 +116,21 @@ for($i=0;$i<count($p);$i++){
 	
 	$video=get_videotype($p[$i]["video"],$p[$i]["youtube"],$p[$i]["facebook"]);
 	$s[$i]["media_type"]=(strlen($video)>0)?"video":"image";
-	$s[$i]["media"]["images"]["thumbnail"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$domain,$p[$i]["img1"]):"";
-	$s[$i]["media"]["images"]["medium"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$domain,$p[$i]["img1"]):"";
-	$s[$i]["media"]["images"]["large"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["img1"]):"";
-	$s[$i]["media"]["images"]["original"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/raw/%s",$domain,$p[$i]["img1"]):"";
+	$s[$i]["media"]["images"]["thumbnail"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$ImgPath,$p[$i]["img1"]):"";
+	$s[$i]["media"]["images"]["medium"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$ImgPath,$p[$i]["img1"]):"";
+	$s[$i]["media"]["images"]["large"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["img1"]):"";
+	$s[$i]["media"]["images"]["original"]=strlen($p[$i]["img1"])>0?sprintf("%s/prg_img/raw/%s",$ImgPath,$p[$i]["img1"]):"";
 	$s[$i]["media"]["images"]["caption"]=checkstr($p[$i]["t1"],1);
 	
 	$s[$i]["media"]["video"]["type"]=$video;
-	$s[$i]["media"]["video"]["url"]=strlen($p[$i]["video"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["video"]):"";
+	$s[$i]["media"]["video"]["url"]=strlen($p[$i]["video"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["video"]):"";
 	$s[$i]["media"]["video"]["youtube"]=checkstr($p[$i]["youtube"],1);
 	$s[$i]["media"]["video"]["facebook"]=checkstr($p[$i]["facebook"],1);
 	$s[$i]["media"]["video"]["caption"]=checkstr($p[$i]["videocaption"],1);
 	
 	$s[$i]["user"]["id"]=(int)$p[$i]["uid"];
 	$s[$i]["user"]["name"]=mod_HTML($p[$i]["name"]);
-	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["icon"]):"";
+	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["icon"]):"";
 	$s[$i]["user"]["bio"]==checkstr($p[$i]["profile"]);
 	$s[$i]["user"]["url"]=sprintf("%s/mypage/",$domain);
 	
@@ -166,7 +166,7 @@ for($i=0;$i<count($p);$i++){
 
 			$s[$i]["comments_popular"][$n]["user"]["id"]=(int)$f["userid"];
 			$s[$i]["comments_popular"][$n]["user"]["name"]=mod_HTML($f["name"]);
-			$s[$i]["comments_popular"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+			$s[$i]["comments_popular"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 			$s[$i]["comments_popular"][$n]["user"]["bio"]==checkstr($f["profile"]);
 			$s[$i]["comments_popular"][$n]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			

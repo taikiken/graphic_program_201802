@@ -59,7 +59,7 @@ if(strlen($pageid)>0){
 						$s["url"]=sprintf("%s/%s/%s/comment/%s",$domain,"p",$pageid,$f["id"]);
 						$s["user"]["id"]=(int)$f["userid"];
 						$s["user"]["name"]=mod_HTML($f["name"]);
-						$s["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+						$s["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 						$s["user"]["bio"]==checkstr($f["profile"]);
 						$s["user"]["url"]=sprintf("%s/mypage/",$domain);
 						$s["user"]["type"]["id"]=(int)$f["typeid"];

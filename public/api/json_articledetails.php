@@ -38,21 +38,21 @@ $s["is_bookmarked"]=strlen($f["is_bookmark"])>0?true:false;
 
 $video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 $s["media_type"]=strlen($video)>0?"video":"image";
-$s["media"]["images"]["thumbnail"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$domain,$f["img1"]):"";
-$s["media"]["images"]["medium"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$domain,$f["img1"]):"";
-$s["media"]["images"]["large"]=strlen($f["img1"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["img1"]):"";
-$s["media"]["images"]["original"]=strlen($f["img1"])>0?sprintf("%s/prg_img/raw/%s",$domain,$f["img1"]):"";
+$s["media"]["images"]["thumbnail"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$ImgPath,$f["img1"]):"";
+$s["media"]["images"]["medium"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$ImgPath,$f["img1"]):"";
+$s["media"]["images"]["large"]=strlen($f["img1"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img1"]):"";
+$s["media"]["images"]["original"]=strlen($f["img1"])>0?sprintf("%s/prg_img/raw/%s",$ImgPath,$f["img1"]):"";
 $s["media"]["images"]["caption"]=checkstr($f["t1"],1);
 
 $s["media"]["video"]["player"]=$video;
-$s["media"]["video"]["url"]=strlen($f["video"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["video"]):"";
+$s["media"]["video"]["url"]=strlen($f["video"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["video"]):"";
 $s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 $s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 $s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 
 $s["user"]["id"]=(int)$f["uid"];
 $s["user"]["name"]=mod_HTML($f["name"]);
-$s["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+$s["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 $s["user"]["bio"]==checkstr($f["profile"]);
 $s["user"]["url"]=sprintf("%s/mypage/",$domain);
 
@@ -88,21 +88,21 @@ while($f=$o->fetch_array()){
 	
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$s["related_articles"][$n]["media_type"]=strlen($video)>0?"video":"image";
-	$s["related_articles"][$n]["media"]["images"]["thumbnail"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$domain,$f["img1"]):"";
-	$s["related_articles"][$n]["media"]["images"]["medium"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$domain,$f["img1"]):"";
-	$s["related_articles"][$n]["media"]["images"]["large"]=strlen($f["img1"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["img1"]):"";
-	$s["related_articles"][$n]["media"]["images"]["original"]=strlen($f["img1"])>0?sprintf("%s/prg_img/raw/%s",$domain,$f["img1"]):"";
+	$s["related_articles"][$n]["media"]["images"]["thumbnail"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail2/%s",$ImgPath,$f["img1"]):"";
+	$s["related_articles"][$n]["media"]["images"]["medium"]=strlen($f["img1"])>0?sprintf("%s/prg_img/thumbnail1/%s",$ImgPath,$f["img1"]):"";
+	$s["related_articles"][$n]["media"]["images"]["large"]=strlen($f["img1"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img1"]):"";
+	$s["related_articles"][$n]["media"]["images"]["original"]=strlen($f["img1"])>0?sprintf("%s/prg_img/raw/%s",$ImgPath,$f["img1"]):"";
 	$s["related_articles"][$n]["media"]["images"]["caption"]=checkstr($f["t1"],1);
 	
 	$s["related_articles"][$n]["media"]["video"]["player"]=$video;
-	$s["related_articles"][$n]["media"]["video"]["url"]=strlen($f["video"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["video"]):"";
+	$s["related_articles"][$n]["media"]["video"]["url"]=strlen($f["video"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["video"]):"";
 	$s["related_articles"][$n]["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	$s["related_articles"][$n]["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["related_articles"][$n]["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 
 	$s["related_articles"][$n]["user"]["id"]=(int)$f["uid"];
 	$s["related_articles"][$n]["user"]["name"]=mod_HTML($f["name"]);
-	$s["related_articles"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+	$s["related_articles"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 	$s["related_articles"][$n]["user"]["bio"]==checkstr($f["profile"]);
 	$s["related_articles"][$n]["user"]["url"]=sprintf("%s/mypage/%s",$domain);
 	

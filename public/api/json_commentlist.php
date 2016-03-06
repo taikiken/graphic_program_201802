@@ -85,7 +85,7 @@ for($i=0;$i<count($p);$i++){
 	
 	$s[$i]["user"]["id"]=(int)$p[$i]["userid"];
 	$s[$i]["user"]["name"]=mod_HTML($p[$i]["name"]);
-	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$p[$i]["icon"]):"";
+	$s[$i]["user"]["profile_picture"]=strlen($p[$i]["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["icon"]):"";
 	$s[$i]["user"]["bio"]==checkstr($p[$i]["profile"]);
 	$s[$i]["user"]["url"]=sprintf("%s/mypage/",$domain);
 	
@@ -128,7 +128,7 @@ for($i=0;$i<count($p);$i++){
 			
 			$s[$i]["reply"]["comments"][$n]["user"]["id"]=(int)$f["userid"];
 			$s[$i]["reply"]["comments"][$n]["user"]["name"]=mod_HTML($f["name"]);
-			$s[$i]["reply"]["comments"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$domain,$f["icon"]):"";
+			$s[$i]["reply"]["comments"][$n]["user"]["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["icon"]):"";
 			$s[$i]["reply"]["comments"][$n]["user"]["bio"]==checkstr($f["profile"]);
 			$s[$i]["reply"]["comments"][$n]["user"]["url"]=sprintf("%s/mypage/",$domain);
 			
