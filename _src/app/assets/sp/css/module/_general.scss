@@ -111,10 +111,6 @@
         background: url(/assets/sp/images/common/thumb-user.png) 0 0 no-repeat;
         background-size: (50/2)+px;
 
-        &:hover {
-          @include hover-opacity;
-        }
-
         &.user-logged-in {
           background: none;
         }
@@ -330,16 +326,6 @@
       margin-top: .5em;
       font-size: fz(22/2);
     }
-
-    &:hover {
-      .post-thumb {
-        @include hover-opacity;
-      }
-
-      .post-heading {
-        color: $highlight-color;
-      }
-    }
   } // .post
 }
 
@@ -375,8 +361,7 @@
     }
   }
 
-  a.enable,
-  a:hover {
+  a.enable {
     background-color: $highlight-color;
     color: #fff;
 
@@ -474,12 +459,6 @@
     border: 2px solid $highlight-color;
     font-weight: bold;
     text-align: center;
-
-    &:hover {
-      border: none;
-      background-color: $highlight-color;
-      transition: background-color ease-out .4s;
-    }
   }
 }
 
@@ -500,10 +479,6 @@
     background-color: $highlight-color;
     font-weight: bold;
     text-align: center;
-
-    &:hover {
-      @include hover-opacity;
-    }
   }
 
   a {

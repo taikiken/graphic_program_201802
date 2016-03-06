@@ -27,9 +27,9 @@
   &:before {
     content: '';
     position: absolute;
-    top: -5px;
+    top: 2px;
     right: 13px;
-    @extend .sprite-common;
+    @extend .sp-sprite-common;
     @include sprite( $common-icon-user-menu );
   }
 }
