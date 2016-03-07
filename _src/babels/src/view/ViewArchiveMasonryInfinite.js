@@ -713,7 +713,7 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // dom が表示された後に1度だけ呼び出される delegate
       componentDidMount: function() {
-        console.log( '************ componentDidMount ************', this.props.masonry );
+        // console.log( '************ componentDidMount ************', this.props.masonry );
         // after mount
         _this.executeSafely( View.DID_MOUNT );
         // hasNext を元に More View button の表示非表示を決める
@@ -797,7 +797,7 @@ export class ViewArchiveMasonryInfinite extends View {
     articles.forEach( function( article, i ) {
 
       let dae = new ArticleDae( article );
-      console.log( 'dae ', dae );
+      // console.log( 'dae ', dae );
       dae.index = prevLast + i;
       articlesList.push( dae );
 
