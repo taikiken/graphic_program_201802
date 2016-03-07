@@ -110,14 +110,14 @@ let FormElementNode = React.createClass( {
       // user icon
       let picture = this.props.icon;
       if ( !picture ) {
-        picture = Empty.USER_PICTURE_FEATURE;
+        picture = Empty.USER_EMPTY;
       } else if ( !Safety.isImg( picture ) ) {
         // 画像ファイル名に拡張子がないのがあったので
         // 拡張子チェックを追加
-        picture = Empty.USER_PICTURE_FEATURE;
+        picture = Empty.USER_EMPTY;
       }
 
-      let loggedIn = picture === Empty.USER_PICTURE_FEATURE ? '' : 'user-logged-in';
+      let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
 
       let errorClass = ( keyName:string ) => {
         return this.errors[ keyName ].error ? 'error' : '';
