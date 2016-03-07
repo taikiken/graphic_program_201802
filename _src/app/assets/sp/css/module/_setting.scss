@@ -129,7 +129,7 @@
   @at-root {
     &-mail, &-pw, &-name, &-job, &-submit {
       display: block;
-      margin-top: 20px;
+      margin-top: (30/2)+px;
     }
 
     &-mail, &-pw, &-name, &-job {
@@ -138,19 +138,19 @@
       border-radius: 3px;
 
       input {
-        width: 92%;
-        line-height: 50px;
+        width: 88%;
+        line-height: (80/2)+px;
         vertical-align: middle;
       }
 
       &:before {
         position: relative;
-        top: 7px;
+        top: 5px;
         left: 5px;
         float: left;
         line-height: 0;
         margin-right: 5px;
-        @extend .sprite-setting;
+        @extend .sp-sprite-setting;
       }
 
     }
