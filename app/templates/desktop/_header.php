@@ -43,7 +43,8 @@ if (
   $template_name == 'settings.deactivate' ||
   $template_name == 'mypage' ||
   $template_name == 'mypage.activities' ||
-  $template_name == 'notifications'
+  $template_name == 'notifications' ||
+  $template_name == 'logout'
 ) :
 ?>
   <header class="head-sec">

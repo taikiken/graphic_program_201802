@@ -226,10 +226,20 @@ export class Page {
    * logout
    */
   static logout():void {
-    let logoutElement = Dom.logout();
-    if ( logoutElement !== null ) {
-      let logout = new UT.view.login.ViewLogout( logoutElement );
-      logout.start();
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
+
+    Sidebar.start();
+    Header.start();
+
+    if ( UT.app.User.sign ) {
+      let logoutElement = Dom.logout();
+      if ( logoutElement !== null ) {
+        let logout = new UT.view.login.ViewLogout( logoutElement );
+        logout.start();
+      }
     }
   }
   // ----------------------------------------------------

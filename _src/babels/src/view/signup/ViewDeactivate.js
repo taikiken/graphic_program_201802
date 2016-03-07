@@ -30,7 +30,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * 退会 表示
  */
-export class ViewSignOut extends View {
+export class ViewDeactivate extends View {
   /**
    * 退会 表示
    * @param {Element} element target HTMLElement

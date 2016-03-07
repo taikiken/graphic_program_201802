@@ -46,15 +46,25 @@ export class ViewLogout extends View {
   render():void {
 
     let LogoutDom = React.createClass( {
+      getInitialState: function() {
+        return {
+          loading: ''
+        };
+      },
       render: function() {
         return (
-          <div className="logout-button">
-            <a href="#" onClick={this.clickHandler}>ログアウト</a>
+          <div className="mod-btnB01 mt30 btn-withdraw">
+            <div className={'loading-root ' + this.state.loading}>
+              <a href="#" onClick={this.clickHandler}>ログアウト</a>
+              <div className="loading-spinner"></div>
+            </div>
           </div>
         );
       },
       clickHandler: function( event:Event ) {
         event.preventDefault();
+        this.setState( { loading: 'loading' } );
+
         User.logout();
         Loc.index();
       }

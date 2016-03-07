@@ -17,7 +17,8 @@ if (
   $template_name == 'settings.deactivate' ||
   $template_name == 'mypage' ||
   $template_name == 'mypage.activities' ||
-  $template_name == 'notifications'
+  $template_name == 'notifications' ||
+  $template_name == 'logout'
 ) {
   ?>
   <footer class="foot-sec">
@@ -30,7 +31,7 @@ if (
             <h3><img src="/assets/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></h3>
             <p>話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「運動通信」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
             <ul>
-              <li><a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+              <li><a href="https://itunes.apple.com/us/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
               <li><a href="hoge" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
             </ul>
           </div><!-- /.text-block -->
@@ -45,19 +46,19 @@ if (
 
       <nav class="fnav">
         <ul>
-          <li><a href="hoge">広告掲載について</a></li>
-          <li><a href="hoge">運動通信アプリの紹介</a></li>
-          <li><a href="hoge">個人情報の取り扱いについて</a></li>
-          <li><a href="hoge">利用規約</a></li>
-          <li><a href="hoge">運営会社</a></li>
-          <li><a href="hoge">ヘルプ</a></li>
-          <li><a href="hoge">お問い合せ</a></li>
+          <li><a href="/about/ads/">広告掲載について</a></li>
+          <li><a href="/about/">運動通信アプリの紹介</a></li>
+          <li><a href="/about/privacy/">個人情報の取り扱いについて</a></li>
+          <li><a href="/about/terms/">利用規約</a></li>
+          <li><a href="/about/company/">運営会社</a></li>
+          <li><a href="/about/faq/">ヘルプ</a></li>
+          <li><a href="/about/contact/">お問い合せ</a></li>
         </ul>
       </nav><!-- /.fnav -->
 
       <div class="sns-block">
         <ul>
-          <li class="sns-fb"><a href="hoge" target="_blank">facebook</a></li>
+          <li class="sns-fb"><a href="https://www.facebook.com/undotsushin/" target="_blank">facebook</a></li>
           <li class="sns-tw"><a href="hoge" target="_blank">twitter</a></li>
           <li class="sns-yt"><a href="hoge" target="_blank">youtube</a></li>
         </ul>

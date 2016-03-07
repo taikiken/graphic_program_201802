@@ -13,13 +13,14 @@
 
 import {View} from '../View';
 
+// app
 import {User} from '../../app/User';
+import {ErrorTxt} from '../../app/const/ErrorTxt';
 
 // data
 import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
-// import {Data} from '../../data/Data';
 
 import {ErrorDae} from '../../dae/error/ErrorDae';
 
@@ -155,6 +156,28 @@ export class ViewLogin extends View {
       // submit
       submitHandler: function( event:Event ) {
         event.preventDefault();
+
+        // error 消去
+        this.reset();
+
+        // validate
+        this.validate();
+
+      },
+      validate: function() {
+
+        // empty check
+        let email = this.state.email;
+        let pwd = this.state.password;
+
+        if ( email === '' || pwd === '' ) {
+          this.errors.user.message = ErrorTxt.EMAIL_OR_PWD_EMPTY;
+        } else {
+          this.request();
+        }
+
+      },
+      request: function() {
         let form = ReactDOM.findDOMNode( this.refs.signup );
         let formData = Form.element( form );
 
@@ -166,12 +189,11 @@ export class ViewLogin extends View {
           model.data = formData;
         }
 
-        // error 消去
-        this.reset();
         // ajax start
         model.start();
-
       },
+      // -------------------------------------------------------
+      // after request
       next: function( token:string ) {
         // login
         // token setup

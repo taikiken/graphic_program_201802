@@ -58,7 +58,7 @@ export class Settings {
     let settings = Dom.settings();
     let modal = Dom.modal();
     if ( settings !== null && modal !== null ) {
-      let deactivate = new UT.view.signup.ViewSignOut( settings, modal );
+      let deactivate = new UT.view.signup.ViewDeactivate( settings, modal );
       deactivate.start();
     }
   }
