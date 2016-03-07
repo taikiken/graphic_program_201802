@@ -77,9 +77,12 @@
   a {
     &:link,
     &:visited,
-    &:hover,
     &:active {
       color: #333333;
+    }
+    &:hover {
+      color: #e1438b;
+      text-decoration: none;
     }
   }
 }
