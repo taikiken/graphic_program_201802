@@ -11,7 +11,8 @@ $uid=auth();
 $s=array();
 $y=array();
 $y["status"]["code"]=200;
-$y["status"]["user_message"]="";
+$y["status"]["user_message"]="会員情報を更新しました。";
+$y["status"]["message_type"]="success";
 $y["status"]["developer_message"]="";
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -43,10 +44,23 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$ermsg["name"]="名前は必須項目です。";
 	}
 
+	if(strlen($_FILES["profile_picture"]["tmp_name"])>0){
+	
+		$ext=checkFileType($_FILES["profile_picture"]);
+		$filename=sprintf("%s.%s",md5("ut".$email),$ext);
+		if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
+			imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
+			$sv[$sn[]="img1"]=$filename;
+		}else{
+			$ermsg["profile_picture"]="ファイルのアップロードに失敗しました。";
+		}
+	}
+
 	if(count($ermsg)>0){
 	
 		$y["status"]["code"]=400;
 		$y["status"]["user_message"]="入力内容が間違っています。";
+		$y["status"]["message_type"]="error";
 		$y["status"]["developer_message"]="リクエストデータに不正値がある";
 		
 		while(list($k,$v)=each($ermsg)){
@@ -58,16 +72,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$bio=trim($_POST["bio"]);
 		$sv[$sn[]="t2"]=$bio;
 	
-		if($_FILES){
-			$ext=checkFileType($_FILES["profile_picture"]);
-			$filename=sprintf("%s.%s",md5("ut".$email),$ext);
-			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
-				imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
-				$sv[$sn[]="img1"]=$filename;
-			}else{
-				$ermsg[]="ファイルのアップロードに失敗しました。";
-			}
-		}
 	
 		$q=array();	
 		while(list($k,$v)=each($sv)){
@@ -89,11 +93,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 			if(!$e){
 				$y["status"]["code"]=500;
 				$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				$y["status"]["message_type"]="error";
 			}
 
 		}else{
 			$y["status"]["code"]=400;
 			$y["status"]["user_message"]="変更箇所はありませんでした。";
+			$y["status"]["message_type"]="error";
 		}
 	}
 }

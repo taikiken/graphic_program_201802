@@ -25,7 +25,8 @@ if($service=="facebook"){
 
 $y=array();
 $y["status"]["code"]=200;
-$y["status"]["user_message"]="";
+$y["status"]["user_message"]="ログインしました。";
+$y["status"]["message_type"]="success";
 $y["status"]["developer_message"]="";
 $ermsg="";
 
@@ -77,6 +78,7 @@ if($ermsg==""){
 	$y["response"]=$s;
 }else{
 	$y["status"]["code"]=400;
+	$y["status"]["message_type"]="error";
 	$y["status"]["user_message"]=$ermsg;
 }
 

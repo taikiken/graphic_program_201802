@@ -44,7 +44,8 @@ function mailregister($email,$name){
 
 $y=array();
 $y["status"]["code"]=200;
-$y["status"]["user_message"]="";
+$y["status"]["user_message"]="会員登録が完了しました。";
+$y["status"]["message_type"]="success";
 $y["status"]["developer_message"]="";
 
 $ermsg=array();
@@ -121,6 +122,7 @@ if(count($ermsg)>0){
 
 	$y["status"]["code"]=400;
 	$y["status"]["user_message"]="入力内容が間違っています。";
+	$y["status"]["message_type"]="error";
 	$y["status"]["developer_message"]="リクエストデータに不正値がある";
 	
 	while(list($k,$v)=each($ermsg)){
@@ -218,12 +220,14 @@ if(count($ermsg)>0){
 				$o->query("abort");
 				$y["status"]["code"]=500;
 				$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				$y["status"]["message_type"]="error";
 				$y["status"]["developer_message"]="データベースへの接続に失敗しました。";
 			}
 		}else{
 			$o->query("abort");
 			$y["status"]["code"]=500;
 			$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+			$y["status"]["message_type"]="error";
 			$y["status"]["developer_message"]="データベースへの接続に失敗しました。";
 		}
 	}else{
