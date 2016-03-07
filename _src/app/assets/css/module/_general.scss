@@ -27,56 +27,6 @@
 
 
 
-    // .btn-bookmark,
-    // .btn-bookmark-disable {
-    //   @include link-decoration(#fff, #fff, none, none);
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   display: inline-block;
-    //   line-height: 1;
-    //   padding: 8px 10px;
-
-    //   span {
-    //     color: #fff;
-    //     font-weight: bold;
-    //     font-size: fz(12);
-
-    //     &:before {
-    //       content: '';
-    //       @extend .sprite-common;
-    //       @include sprite( $common-icon-bookmark, inline-block );
-    //       margin-right: 5px;
-    //       position: relative;
-    //       top: 2px;
-    //     }
-    //   }
-
-    //   &:hover {
-    //     transition: background-color ease-out .4s;
-    //   }
-
-    //   @at-root {
-    //     & {
-    //       background-color: #787878;
-
-    //       &:hover {
-    //         background-color: lighten( #787878, 8% );
-    //       }
-    //     }
-
-    //     &-disable {
-    //       background-color: $highlight-color;
-
-    //       &:hover {
-    //         background-color: lighten( $highlight-color, 8% );
-    //       }
-    //     }
-    //   }
-    // } //.btn-bookmark
-
-
-
     .feature-user {
       &.comment-item {
         margin-top: 10px;
@@ -189,6 +139,12 @@
 // 汎用 ニュース一覧
 .board-small {
   @include clearfix;
+  margin-top: 30px;
+  border-top: 1px solid $border-primary-color;
+
+  .board-item {
+    border-bottom: 1px solid $border-primary-color;
+  }
 
   &.column2 {
     margin-top: 0;

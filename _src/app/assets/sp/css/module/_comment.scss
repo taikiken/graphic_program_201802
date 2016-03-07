@@ -6,11 +6,35 @@
 //
 // Styleguide 2.9.0
 
+// comment
+.comment {
+  background-color: #eee;
+}
+
+.comment-yours,
+.comment-official,
+.comment-all {
+  background-color: #fff;
+
+  .comment-heading {
+    margin-top: 0;
+  }
+}
+
+.comment-official,
+.comment-all {
+  padding-top: (20/2)+px;
+}
+
+
+
+
+
 // comment-heading
 .comment-heading {
-  margin-top: 30px;
-  padding: 6px 10px;
-  border-left: 3px solid $highlight-color;
+  margin-top: (20/2)+px;
+  padding: (14/2)+px;
+  border-left: (6/2)+px solid $highlight-color;
   background-color: #333;
 
   @for $i from 1 through 6 {
@@ -28,18 +52,25 @@
 // comment-form
 .comment-form {
   @include clearfix;
-  margin-top: 30px;
+  padding: (20/2)+px perCalc(20);
 
   @at-root {
+    &-inner {
+      @include clearfix;
+      background-color: #fff;
+      padding: (20/2)+px;
+      border-radius: 5px;
+    }
+
     &-user {
       float: left;
-      width: 40px;
-      height: 40px;
+      width: (60/2)+px;
+      height: (60/2)+px;
       margin-right: -50px;
       overflow: hidden;
       border-radius: 100%;
-      background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
-      background-size: 40px;
+      background: url(/assets/sp/images/common/thumb-user-info.png) 0 0 no-repeat;
+      background-size: (60/2)+px;
 
       img {
         width: 100%;
@@ -61,33 +92,33 @@
 
       &-inner {
         // width: 100%;
-        margin-left: 50px;
+        margin-left: (80/2)+px;
 
         textarea {
           appearance: none;
           width: 100%;
-          padding: 8px;
+          // padding: 8px;
           border: none;
-          border-radius: 5px;
-          background-color: #eee;
+          // border-radius: 5px;
+          // background-color: #fff;
           resize: vertical;
         }
       }
     } //.comment-form-comment
 
     &-submit {
-      clear: both;
-      padding-top: 20px;
-      text-align: center;
+      padding-top: (20/2)+px;
 
       input {
         appearance: none;
+        width: 100%;
         padding: 10px 30px;
-        background: none;
-        border: 2px solid $highlight-color;
-        border-radius: 2px;
-        color: $highlight-color;
+        border: none;
+        border-radius: 5px;
+        background: $highlight-color none;
+        color: #fff;
         font-weight: bold;
+        font-size: fz(24/2) !important;
       }
     } //.comment-form-submit
   }
@@ -104,9 +135,10 @@
 
   @at-root {
     &-btn {
-      @extend .sprite-detail;
+      @extend .sp-sprite-detail;
       @include sprite( $detail-btn-comment-menu );
       @include hide-text;
+      margin-right: (12/2)+px;
 
       &.disable  + .dropMenu {
         display: none;
@@ -116,17 +148,17 @@
 
   .dropMenu {
     position: absolute;
-    top: 30px;
+    top: (40/2)+px;
     right: 0;
-    width: 180px;
+    width: (600/2)+px;
 
     @extend %dropMenu;
-    padding-right: 8px;
-    padding-left: 8px;
+    padding-right: (30/2)+px;
+    padding-left: (30/2)+px;
 
     &:before {
       top: -8px;
-      right: 11px;
+      right: 6px;
       @include sprite( $common-icon-user-menu_shadow );
     }
 
@@ -140,16 +172,18 @@
       [ class^="dropMenu-link-" ] {
         @include link-decoration(#333, #333, none, underline);
         display: block;
-        padding: 8px 0;
-        font-size: fz(12);
+        line-height: 1em;
+        padding: (10/2)+px 0 (20/2)+px;
+        font-weight: bold;
+        font-size: fz(24/2);
 
         span {
           &:before {
             content: '';
             position: relative;
-            top: 2px;
-            margin-right: 5px;
-            @extend .sprite-detail;
+            top: 5px;
+            margin-right: (8/2)+px;
+            @extend .sp-sprite-detail;
             @include hide-text;
           }
         }
@@ -158,12 +192,6 @@
       &-link-delete {
         span:before {
           @include sprite( $detail-icon-comment-delete, inline-block );
-        }
-      }
-
-      &-link-report {
-        span:before {
-          @include sprite( $detail-icon-comment-report, inline-block );
         }
       }
     }
@@ -192,9 +220,10 @@
   }
 
   &-thumb {
-    width: 50px;
-    height: 50px;
-    background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat;
+    width: (80/2)+px;
+    height: (80/2)+px;
+    background: url(/assets/sp/images/common/thumb-user-feature.png) 0 0 no-repeat;
+    background-size: (80/2)+px;
 
     &.user-logged-in {
       background: none;
@@ -202,22 +231,23 @@
   }
 
   &-name, &-job, .comment-date {
-    margin-left: 10px;
+    margin-left: (20/2)+px;
   }
 
   &-name {
     font-weight: bold;
+    font-size: fz(24/2);
   }
 
   &-job {
     color: #666;
-    font-size: fz(10);
+    font-size: fz(20/2);
   }
 
   @at-root {
     .comment-date {
       color: #999;
-      font-size: fz(10);
+      font-size: fz(18/2);
     }
   }
 } //.comment-user
@@ -228,7 +258,8 @@
 
 // comment-content
 .comment-content {
-  padding-top: 10px;
+  padding-top: (20/2)+px;
+  font-size: fz(22/2);
 } //.comment-content
 
 
@@ -237,15 +268,15 @@
 
 // comment-reaction
 .comment-reaction {
-  padding-top: 8px;
+  padding-top: (20/2)+px;
 
   .comment-reaction-btn {
     @include link-decoration(#333, #333, none, underline);
     display: inline-block;
-    font-size: fz(12);
+    font-size: fz(20/2);
 
     & + .comment-reaction-btn {
-      margin-left: 10px;
+      margin-left: (28/2)+px;
     }
 
     &.active {
@@ -254,9 +285,9 @@
   }
 
   i {
-    @extend .sprite-common;
+    @extend .sp-sprite-common;
     @include hide-text;
-    margin-right: 5px;
+    margin-right: (4/2)+px;
     vertical-align: middle;
   }
 
@@ -296,12 +327,18 @@
 // comment-list
 .comment-list {
 
+  .comment-item-inner {
+    padding-right: perCalc(20);
+    padding-left: perCalc(20);
+  }
+
+
   .comment-list {
-    padding-left: 60px;
+    padding-left: (80/2)+px;
     border-top: 1px solid $border-primary-color;
 
     .comment-item {
-      padding-bottom: 20px;
+      padding-bottom: (20/2)+px;
     }
   }
 
@@ -315,7 +352,7 @@
     // comment-item
     .comment-item {
       @include clearfix;
-      padding-top: 20px;
+      padding-top: (30/2)+px;
       border-top: 1px solid $border-primary-color;
     } //.comment-item
   }
@@ -329,25 +366,25 @@
 .comment-respond {
   @include clearfix;
   position: relative;
-  padding-bottom: 20px;
+  padding-bottom: (20/2)+px;
 
   @at-root {
     &-opener {
       @include link-decoration(#333, #333, none, underline);
       position: absolute;
-      top: -18px;
-      right: 0;
+      top: -20px;
+      right: perCalc(20);
 
       span {
         font-weight: bold;
-        font-size: fz(12);
+        font-size: fz(20/2);
 
         &:before {
           content: '';
           position: relative;
           top: 2px;
-          margin-right: 5px;
-          @extend .sprite-detail;
+          margin-right: (8/2)+px;
+          @extend .sp-sprite-detail;
           @include sprite( $detail-icon-comment-response, inline-block );
         }
       }
@@ -356,7 +393,9 @@
 
   .comment-form {
     clear: both;
-    padding-top: 30px;
+    margin-top: (20/2)+px;
+    padding-top: (20/2)+px;
+    background-color: #eee;
   }
 } //.comment-respond
 
@@ -365,11 +404,13 @@
 
 // comment-andmore
 .comment-andmore {
-  margin-top: 10px;
-  text-align: center;
+  border-top: 1px solid $border-primary-color;
 
   a {
+    display: block;
+    padding: (40/2)+px 0;
     font-weight: bold;
+    text-align: center;
   }
 } //.comment-andmore
 
