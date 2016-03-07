@@ -489,7 +489,8 @@ export class ViewComments extends View {
         let userId = '0';
         let user = Object.create({});
         if ( this.props.user !== null ) {
-          userId = String(this.props.user.id);
+          userId = Safety.integer( this.props.user.id, 0 );
+          userId = String(userId);
           user = this.props.user;
         }
 

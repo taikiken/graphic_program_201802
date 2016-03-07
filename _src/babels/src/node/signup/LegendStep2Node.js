@@ -461,7 +461,7 @@ export let LegendStep2Node = React.createClass( {
   },
   render: function() {
 
-    console.log( 'render step 2 email ', this.state.email );
+    // console.log( 'render step 2 email ', this.state.email );
     return (
       <div className="fieldset-container fieldset-container-2">
         <span className="setting-form-mail disabled">
@@ -491,8 +491,8 @@ export let LegendStep2Node = React.createClass( {
   },
   // -----------------------------------------------------------
   // form event handler
-  inputChange( event:Event ):void {
-    console.log( 'input event ', event );
+  inputChange( /* event:Event */ ):void {
+    // console.log( 'input event ', event );
   },
   // -----------------------------------------------------------
   // SignupStatus event handler
@@ -506,7 +506,7 @@ export let LegendStep2Node = React.createClass( {
     this.updateEmail( event.email );
   },
   updateEmail: function( email:string ):void {
-    console.log( 'updateEmail ', email );
+    // console.log( 'updateEmail ', email );
     this.setState( { email: email } );
   }
 } );

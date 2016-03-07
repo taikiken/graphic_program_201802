@@ -236,21 +236,17 @@ let FormElementNode = React.createClass( {
   // ----------------------------------------
   // listener
   replyOpen: function( event ) {
-    let uniqueId = this.props.uniqueId;
+    // let uniqueId = this.props.uniqueId;
     if ( this.mounted && !this.state.open && this.checkId( event ) ) {
       console.log( '*** replyOpen *** ', this.props.uniqueId, this.mounted );
-      this.setState( { open: true }, function() {
-        console.log( 'after setState open', uniqueId );
-      } );
+      this.setState( { open: true } );
     }
   },
   replyClose: function( event ) {
-    let uniqueId = this.props.uniqueId;
+    // let uniqueId = this.props.uniqueId;
     if ( this.mounted && this.state.open && this.checkId( event ) ) {
       console.log( '*** replyClose *** ', this.props.uniqueId, this.mounted );
-      this.setState( { open: false }, function() {
-        console.log( 'after setState close ', uniqueId );
-      } );
+      this.setState( { open: false } );
     }
   },
   // ----------------------------------------
@@ -519,11 +515,17 @@ export let CommentFormNode = React.createClass( {
     // ----------------------------
     // dom
 
-    if ( !sign || (!this.props.parent && !this.props.independent) ) {
+    if ( !sign || (!this.props.parent && !this.props.independent ) ) {
+      // console.log( '!sign || (!this.props.parent && !this.props.independent )', this.props.parent, this.props.uniqueId );
       // not parent, not independent
       // 表示しない, 下に空きを作るための空タグのみ
       // return <div className="comment-respond"></div>;
-      return null;
+      if ( !this.props.parent ) {
+        return null;
+      } else {
+        // parent：下に空きをつける
+        return <div className="comment-respond"></div>;
+      }
     }
 
     // -------------------------

@@ -49,7 +49,7 @@ export let RootNode = React.createClass( {
   render: function() {
 
     let stepClassSelector = ( step ) => {
-      console.log( 'stepClassSelector ', step );
+      // console.log( 'stepClassSelector ', step );
       switch (step) {
         case 2:
           return 'basic-setting setting-form';

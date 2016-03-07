@@ -60,7 +60,7 @@ let Step1FormNode = React.createClass( {
       return this.state[ keyName ] ? 'error' : '';
     };
     let message = ( keyName:string ) => {
-      console.log( 'message ', this.errors[ keyName ], ';' );
+      // console.log( 'message ', this.errors[ keyName ], ';' );
       return this.errors[ keyName ].message;
     };
 
@@ -184,14 +184,14 @@ let Step1FormNode = React.createClass( {
   // ajax
   // duplicate email check
   done: function( result:Result ) {
-    console.log( 'done ', result );
+    // console.log( 'done ', result );
     if ( result.status.code === 200 ) {
       // OK
       this.next();
     }
   },
   fail: function( error:Error ) {
-    console.log( 'fail ', error.result.response.errors );
+    // console.log( 'fail ', error.result.response.errors );
     this.errors.errorEmail.message = error.result.response.errors.email;
     this.setState( { errorEmail: true } );
   },

@@ -93,7 +93,7 @@ export class Router extends EventDispatcher {
     let path = Loc.path;
     let pathLength = path.length;
     let found = false;
-    console.log( 'route ', path, pathLength );
+    console.log( 'route path, pathLength ', path, pathLength );
     if ( pathLength !== 1 ) {
 
       for ( var key in rule ) {
@@ -107,7 +107,7 @@ export class Router extends EventDispatcher {
             // not kyeLength 1,
             // 通常 key
             if ( path.substr( 0, keyLength ) === key ) {
-              console.log( 'rote activate ', key );
+              console.log( 'route found keys ', key );
               rule[ key ]();
               found = true;
               break;
@@ -146,7 +146,7 @@ export class Router extends EventDispatcher {
    * @param {string} [where=''] 発火場所
    */
   authorityError( where:string = '' ):void {
-
+    console.warn( 'authority error ', where );
     this.dispatch( { type: Router.AUTHORITY_ERROR, where: where } );
 
   }
@@ -338,6 +338,8 @@ export class Router extends EventDispatcher {
 
     } else {
 
+      this.dispatch( { type: Router.MYPAGE } );
+      /*
       if ( User.sign ) {
 
         this.dispatch( { type: Router.MYPAGE } );
@@ -347,6 +349,7 @@ export class Router extends EventDispatcher {
         this.authorityError( 'mypage' );
 
       }
+      */
 
     }
 
@@ -356,6 +359,8 @@ export class Router extends EventDispatcher {
    */
   activities():void {
 
+    this.dispatch( { type: Router.MYPAGE_ACTIVITIES } );
+    /*
     if ( User.sign ) {
 
       this.dispatch( { type: Router.MYPAGE_ACTIVITIES } );
@@ -365,6 +370,7 @@ export class Router extends EventDispatcher {
       this.authorityError( 'activities' );
 
     }
+    */
 
   }
   /**
@@ -372,6 +378,8 @@ export class Router extends EventDispatcher {
    */
   notifications():void {
 
+    this.dispatch( { type: Router.NOTIFICATIONS } );
+    /*
     if ( User.sign ) {
 
       this.dispatch( { type: Router.NOTIFICATIONS } );
@@ -380,7 +388,7 @@ export class Router extends EventDispatcher {
 
       this.authorityError( 'notifications' );
 
-    }
+    }*/
 
   }
   /**
@@ -389,7 +397,7 @@ export class Router extends EventDispatcher {
   settings():void {
 
     let [ option ] = Loc.path.replace( '/settings/', '' ).split('/');
-
+    console.log( 'settings option ', option );
     switch ( option ) {
 
       case 'interest':
@@ -405,11 +413,14 @@ export class Router extends EventDispatcher {
         break;
 
       default:
+        /*
         if ( User.sign ) {
           this.dispatch( { type: Router.SETTING } );
         } else {
           this.authorityError( 'setting' );
         }
+        */
+        this.dispatch( { type: Router.SETTING } );
         break;
 
     }
@@ -419,31 +430,39 @@ export class Router extends EventDispatcher {
    * settings interest page
    */
   interest():void {
+    this.dispatch( { type: Router.SETTING_INTEREST } );
+    /*
     if ( User.sign ) {
       this.dispatch( { type: Router.SETTING_INTEREST } );
     } else {
       this.authorityError( 'interest' );
-    }
+    }*/
   }
   /**
    * settings social page
    */
   social():void {
+    this.dispatch( { type: Router.SETTING_SOCIAL } );
+    /*
     if ( User.sign ) {
       this.dispatch( { type: Router.SETTING_SOCIAL } );
     } else {
       this.authorityError( 'social' );
-    }
+    }*/
   }
   /**
    * settings deactivate page
    */
   deactivate():void {
+    this.dispatch( { type: Router.SETTING_DEACTIVATE } );
+
+    /*
     if ( User.sign ) {
       this.dispatch( { type: Router.SETTING_DEACTIVATE } );
     } else {
       this.authorityError( 'deactivate' );
     }
+    */
   }
   // ---------------------------------------------------
   //  const

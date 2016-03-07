@@ -156,7 +156,7 @@ let Step3FormNode = React.createClass( {
   },
   next: function( token:string ) {
     // login
-    console.log( '----success--- ', token );
+    // console.log( '----success--- ', token );
     // token setup
     if ( User.login( token ) ) {
       // redirect 通知
@@ -164,13 +164,12 @@ let Step3FormNode = React.createClass( {
       this.props.beforeRedirect();
       // home
       Loc.index();
-    } else {
-      console.log( 'fail login ...', token );
+
     }
 
   },
   done: function( result:Result ) {
-    console.log( 'done ', result );
+    // console.log( 'done ', result );
     if ( result.status.code === 200 ) {
       // OK
       // token 取り出し
@@ -179,8 +178,8 @@ let Step3FormNode = React.createClass( {
       this.next( userDae.accessToken );
     }
   },
-  fail: function( error:Error ) {
-    console.log( 'error step3', error );
+  fail: function( /* error:Error */ ) {
+    // console.log( 'error step3', error );
   },
   reset: function() {
 
