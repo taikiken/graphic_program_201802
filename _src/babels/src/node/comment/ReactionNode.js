@@ -70,7 +70,7 @@ export let ReactionNode = React.createClass( {
     };
   },
   render: function() {
-    console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render ', this.props.uniqueId, this.state.isGood, this.state.isBad, this.state.good, this.state.bad );
+    // console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render ', this.props.uniqueId, this.state.isGood, this.state.isBad, this.state.good, this.state.bad );
 
     let active = ( mine ) => {
       return mine ? ' active' : '';

@@ -8,8 +8,7 @@
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  *
- * @requires React. IE: fetch, es5-promise
- *
+ * @requires React, Sagen.js. IE: fetch, es5-promise
  */
 'use strict';
 
@@ -236,6 +235,15 @@ var UT = {
       UsersSelf: UsersSelf
     }
   },
+  model: {
+    Model: Model,
+    users: {
+      ModelUsersSelf: ModelUsersSelf
+    },
+    categories: {
+      ModelCategories: ModelCategories
+    }
+  },
   view: {
     View: View,
     ViewCategory: ViewCategory,
@@ -283,15 +291,6 @@ var UT = {
     },
     modal: {
       ViewDeleteModal: ViewDeleteModal
-    }
-  },
-  model: {
-    Model: Model,
-    users: {
-      ModelUsersSelf: ModelUsersSelf
-    },
-    categories: {
-      ModelCategories: ModelCategories
     }
   }
 };

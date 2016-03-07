@@ -74,7 +74,7 @@ export let CommentActionNode = React.createClass( {
     };
   },
   render: function() {
-    console.log( '****************** render', this.props.others, this.state.reportLoading );
+    // console.log( '****************** render', this.props.others, this.state.reportLoading );
 
     let replyClass = ( replyId ) => {
       return replyId === '' ? '' : 'item-reply-' + replyId;

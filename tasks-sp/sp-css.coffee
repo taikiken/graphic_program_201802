@@ -57,7 +57,7 @@ files = [
   dir.sp.scss+ '/**/*.scss'
   app + '/**/sp/**/*.{css,scss}'
   # その他 min 済ファイル除外
-  '!' + app + '/**/ui.css'
+#  '!' + app + '/**/ui.css'
   '!' + app + '/**/*.min.{css,scss}'
   '!' + app + '/**/*min.{css,scss}'
   '!' + app + '/**/*pack.{css,scss}'

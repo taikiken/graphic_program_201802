@@ -42,7 +42,7 @@ export class SingleDae extends RelatedDae {
 
       } );
 
-      console.log( 'related_articles ', related );
+      // console.log( 'related_articles ', related );
 
     }
 

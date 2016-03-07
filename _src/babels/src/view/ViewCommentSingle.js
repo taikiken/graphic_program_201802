@@ -13,10 +13,11 @@
 
 // app
 import {User} from '../app/User';
+import {CommentsType} from '../app/const/CommentsType';
 
 // view
 import {View} from './View';
-import {ViewError} from './error/ViewError';
+// import {ViewError} from './error/ViewError';
 
 // action
 import {CommentSingle} from '../action/comment/CommentSingle';
@@ -65,7 +66,7 @@ export class ViewCommentSingle extends View {
 
     this._articleId = articleId;
     this._commentId = commentId;
-
+    this._commentsListType = CommentsType.SINGLE;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
@@ -119,11 +120,10 @@ export class ViewCommentSingle extends View {
    */
   start():void {
 
-    /*
     if ( User.sign && this.user === null ) {
       throw new Error( `user info have to set before start.${this._articleId}` );
     }
-    */
+
     this.action.next();
 
   }
@@ -171,10 +171,15 @@ export class ViewCommentSingle extends View {
 
     // total check
     if ( commentsListDae.total === 0 ) {
-      // デーが無いので処理を止める
-      console.log( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
-      this.executeSafely( View.EMPTY_ERROR );
-      return;
+
+      if ( !this._reload ) {
+        // デーが無いので処理を止める
+        // reload でない時
+        console.warn( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
+        this.executeSafely( View.EMPTY_ERROR );
+        return;
+      }
+
     }
 
     // previous data と新規データを合成
@@ -197,6 +202,8 @@ export class ViewCommentSingle extends View {
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
    */
   all( commentsListDae:CommentsListDae ) {
+
+    this._reload = false;
 
     let commentsList = this._commentsList;
     let commentsBank = this._commentsBank;
@@ -270,7 +277,7 @@ export class ViewCommentSingle extends View {
     // CommentsDom から呼び出す
     let moreButton = ( show, rest, moreElement ) => {
 
-      console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
+      // console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
       show = !!show;
 
       // とにかく render する
@@ -374,7 +381,7 @@ export class ViewCommentSingle extends View {
       render: function() {
 
         let commentObject = this.props.commentObject;
-        console.log( 'CommentsParent commentObject ', commentObject );
+        // console.log( 'CommentsParent commentObject ', commentObject );
 
         let total = Safety.integer( commentObject.reply.total, 0 );
         let sign = User.sign;
@@ -405,7 +412,7 @@ export class ViewCommentSingle extends View {
           }
         }
 
-        console.log( '================================== parent =========================', icon, this.props.user, userId, ', comment:', commentObject.comment.user.id );
+        // console.log( '================================== parent =========================', icon, this.props.user, userId, ', comment:', commentObject.comment.user.id );
         return (
 
           <ul className={'comment-list'}>
@@ -475,13 +482,13 @@ export class ViewCommentSingle extends View {
           user = this.props.user;
         }
 
-
         if ( !Safety.array( list ) || list.length === 0 ) {
           // 描画しない
           console.warn( 'list error ', commentsListType, list );
           return null;
         }
-        console.log( '******************************* start render *******************************', list );
+
+        // console.log( '******************************* start render *******************************', list );
         return (
           <div className={'comment-' + commentsListType}>
             <div className="comment-heading">
@@ -491,7 +498,7 @@ export class ViewCommentSingle extends View {
               list.map( function( commentId, index ) {
                 let commentObject = commentsBank[ commentId ];
                 let key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
-                console.log( 'commentId ' + commentId + ', ' + key );
+                // console.log( 'commentId ' + commentId + ', ' + key );
 
                 return <CommentsParentDom
                   key={key}
@@ -516,7 +523,7 @@ export class ViewCommentSingle extends View {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
         // hasNext を元に More View button の表示非表示を決める
-        console.log( 'more has ', action.hasNext() );
+        // console.log( 'more has ', action.hasNext() );
         moreButton( action.hasNext(), action.rest(), ReactDOM.findDOMNode(this.refs.commentMore) );
       },
       componentDidUpdate: function() {
@@ -542,7 +549,7 @@ export class ViewCommentSingle extends View {
       <CommentsDom
         commentsList={commentsList}
         articleId={String(this._articleId)}
-        commentsListType={'single'}
+        commentsListType={this._commentsListType}
         user={user}
       />,
       element

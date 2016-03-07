@@ -221,7 +221,7 @@ export class ViewHeaderMemberNotice extends View {
 
 
       },
-      readedClick: function( event ) {
+      readedClick: function( /* event */ ) {
         // event.preventDefault();
       }
     } );

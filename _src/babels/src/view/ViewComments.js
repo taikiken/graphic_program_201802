@@ -55,7 +55,7 @@ export class ViewComments extends View {
   constructor( id:Number, element:Element, commentsType:string, option:Object = {} ) {
 
     option = Safety.object( option );
-    console.log( 'commentsType', commentsType );
+    // console.log( 'commentsType', commentsType );
 
     super( element, option );
     this._action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
@@ -177,10 +177,14 @@ export class ViewComments extends View {
 
     // total check
     if ( commentsListDae.total === 0 ) {
-      // デーが無いので処理を止める
-      console.log( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
-      this.executeSafely( View.EMPTY_ERROR );
-      return;
+
+      if ( this._reload ) {
+        // デーが無いので処理を止める + reload 除く
+        // console.log( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
+        this.executeSafely( View.EMPTY_ERROR );
+        return;
+      }
+
     }
 
     // previous data と新規データを合成
@@ -209,6 +213,8 @@ export class ViewComments extends View {
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
    */
   all( commentsListDae:CommentsListDae ) {
+
+    this._reload = false;
 
     let commentsList = this._commentsList;
     let commentsBank = this._commentsBank;
@@ -282,7 +288,7 @@ export class ViewComments extends View {
     // CommentsDom から呼び出す
     let moreButton = ( show, rest, moreElement ) => {
 
-      console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
+      // console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
       show = !!show;
 
       // とにかく render する
@@ -386,7 +392,7 @@ export class ViewComments extends View {
       render: function() {
 
         let commentObject = this.props.commentObject;
-        console.log( 'CommentsParent commentObject ', commentObject );
+        // console.log( 'CommentsParent commentObject ', commentObject );
 
         let total = Safety.integer( commentObject.reply.total, 0 );
         let sign = User.sign;
@@ -417,7 +423,7 @@ export class ViewComments extends View {
           }
         }
 
-        console.log( '================================== parent =========================', icon, this.props.user, userId, ', comment:', commentObject.comment.user.id );
+        // console.log( '================================== parent =========================', icon, this.props.user, userId, ', comment:', commentObject.comment.user.id );
         return (
 
           <ul className={'comment-list'}>
@@ -487,13 +493,12 @@ export class ViewComments extends View {
           user = this.props.user;
         }
 
-
         if ( !Safety.array( list ) || list.length === 0 ) {
           // 描画しない
           console.warn( 'list error ', commentsListType, list );
           return null;
         }
-        console.log( '******************************* start render *******************************', list );
+        // console.log( '******************************* start render *******************************', list );
         return (
           <div className={'comment-' + commentsListType}>
             <div className="comment-heading">
@@ -503,7 +508,7 @@ export class ViewComments extends View {
               list.map( function( commentId, index ) {
                 let commentObject = commentsBank[ commentId ];
                 let key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
-                console.log( 'commentId ' + commentId + ', ' + key );
+                // console.log( 'commentId ' + commentId + ', ' + key );
 
                 return <CommentsParentDom
                   key={key}
@@ -528,7 +533,7 @@ export class ViewComments extends View {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
         // hasNext を元に More View button の表示非表示を決める
-        console.log( 'more has ', action.hasNext() );
+        // console.log( 'more has ', action.hasNext() );
         moreButton( action.hasNext(), action.rest(), ReactDOM.findDOMNode(this.refs.commentMore) );
       },
       componentDidUpdate: function() {

@@ -92,7 +92,7 @@ export class ViewHeaderMember extends View {
     let dae = new UserDae( response );
     let _this = this;
 
-    console.log( '******** ---------- ********** ViewHeaderMember ', dae );
+    // console.log( '******** ---------- ********** ViewHeaderMember ', dae );
     this.executeSafely( View.BEFORE_RENDER, dae );
 
     // --------------------------------------------------

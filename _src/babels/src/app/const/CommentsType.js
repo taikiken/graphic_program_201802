@@ -93,4 +93,10 @@ export class CommentsType {
   static get INDEPENDENT():string {
     return 'independent';
   }
+  /**
+   * @return {string} comment type single コメント詳細
+   */
+  static get SINGLE():string {
+    return 'single';
+  }
 }

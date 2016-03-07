@@ -105,7 +105,7 @@ let FormElementNode = React.createClass( {
 
     }
 
-    if ( this.state.open ) {
+    if ( this.state.open || this.props.independent ) {
 
       // user icon
       let picture = this.props.icon;
@@ -160,7 +160,7 @@ let FormElementNode = React.createClass( {
   componentDidUpdate: function() {
   },
   componentWillUnMount: function() {
-    console.log( '+++++++++++ componentWillUnMount +++++++++++', this.props.uniqueId );
+    // console.log( '+++++++++++ componentWillUnMount +++++++++++', this.props.uniqueId );
 
     this.mounted = false;
     this.dispose();
@@ -168,7 +168,7 @@ let FormElementNode = React.createClass( {
   // ----------------------------------------
   listen: function() {
     let replyStatus = this.replyStatus;
-    console.log( '+++++++++++ listen ', this.props.uniqueId, replyStatus );
+    // console.log( '+++++++++++ listen ', this.props.uniqueId, replyStatus );
 
     if ( replyStatus === null ) {
 
@@ -522,7 +522,8 @@ export let CommentFormNode = React.createClass( {
     if ( !sign || (!this.props.parent && !this.props.independent) ) {
       // not parent, not independent
       // 表示しない, 下に空きを作るための空タグのみ
-      return <div className="comment-respond"></div>;
+      // return <div className="comment-respond"></div>;
+      return null;
     }
 
     // -------------------------
@@ -546,11 +547,18 @@ export let CommentFormNode = React.createClass( {
 
     if ( !sign ) {
       // 非ログイン
-      return (
-        <div className="comment-respond">
-          <p className="comment-respond-opener"><span>{staticMessage}</span></p>
-        </div>
-      );
+      // + 親でも 記事へのコメントでもない（子供）
+
+      if ( staticMessage !== '' ) {
+        return (
+          <div className="comment-respond">
+            <p className="comment-respond-opener"><span>{staticMessage}</span></p>
+          </div>
+        );
+      } else {
+        return null;
+      }
+
     } else {
       // ログイン
       // ログインユーザーのみフォームを表示する

@@ -108,15 +108,19 @@ export class ViewSingleTitle extends View {
   render( response:Object ):void {
     let single = new SingleDae( response );
 
+    // beforeRender call
+    this.executeSafely( View.BEFORE_RENDER, single );
+
     let TitleDom = React.createClass( {
       propTypes: {
         title: React.PropTypes.string.isRequired,
-        id: React.PropTypes.string.isRequired
+        id: React.PropTypes.string.isRequired,
+        url: React.PropTypes.string.isRequired
       },
       render: function() {
         return (
-          <div className={'post-heading post-heading-' + this.props.id}>
-            <h1>{this.props.title}</h1>
+          <div className={'comment-detail-heading post-heading post-heading-' + this.props.id}>
+            <h1><a href={this.props.url}>{this.props.title}</a></h1>
           </div>
         );
       }
@@ -126,6 +130,7 @@ export class ViewSingleTitle extends View {
       <TitleDom
         title={single.title}
         id={String(single.id)}
+        url={single.url}
       />,
       this.element
     );

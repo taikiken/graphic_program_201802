@@ -88,7 +88,6 @@ export class Single {
       single.start();
     }
 
-
   }
   /**
    * header View.BEFORE_RENDER event handler
@@ -96,7 +95,7 @@ export class Single {
    * @param {Object} event event object
    */
   static onHeader( event ):void {
-    _headerUser.on( UT.view.View.BEFORE_RENDER, Single.onHeader );
+    _headerUser.off( UT.view.View.BEFORE_RENDER, Single.onHeader );
     _userDae = event.args[ 0 ];
     Single.comment();
   }

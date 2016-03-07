@@ -76,16 +76,6 @@ export class Ajax {
       cache: 'no-cache'
     };
 
-    // local, develop mode
-    // cross domain set
-    /*
-    if ( Env.mode !== Env.PRODUCTION ) {
-
-      option.mode = 'cors';
-
-    }
-    */
-
     // body へ FormData をセット
     if ( formData !== null && typeof formData !== 'undefined' ) {
 
@@ -94,10 +84,10 @@ export class Ajax {
     }
 
     // headers option
+    // headers が null or undefined の時は 追加しません
     if ( headers !== null && typeof headers !== 'undefined' ) {
 
       option.headers = headers;
-      // option.body = JSON.stringify( headers );
 
     }
 
@@ -119,10 +109,7 @@ export class Ajax {
 
         // bad response, サーバーからのエラーメッセージ
         let error = new Error( `status:${status}, message:${response.statusText}` );
-        /*
-         error.response = result.response;
-         error.number = result.status.code;
-         */
+
         error.result = new ResultClass( response.json() );
         throw error;
 
@@ -145,10 +132,6 @@ export class Ajax {
         // something bad
         let code = result.status.code;
         let error = new Error( `status:${code}, user:${result.status.user_message}, dev:${result.status.developer_message}` );
-        /*
-        error.response = result.response;
-        error.number = result.status.code;
-        */
         error.result = result;
         throw error;
 

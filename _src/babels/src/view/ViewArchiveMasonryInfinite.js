@@ -623,7 +623,7 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       render: function() {
 
-        console.log( '****************************************** render' );
+        // console.log( '****************************************** render' );
         // dom出力する
         return (
           <div ref="boardRout" className="board-large-column">

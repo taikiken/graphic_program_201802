@@ -35,7 +35,7 @@ export class CommentsListDae {
   constructor( response:Object = {} ) {
     response = Safety.object( response );
     this._response = response;
-    console.log( 'CommentsListDae ', response, response.comments );
+    // console.log( 'CommentsListDae ', response, response.comments );
     this._comments = new CommentsDae( response.comments );
   }
   // ---------------------------------------------------

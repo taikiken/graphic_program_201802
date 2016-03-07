@@ -42,6 +42,11 @@ export class Token {
    */
   static token( token:string, option:Object = {} ):Object {
 
+    // token が正しい形式でない時は null を返します
+    if ( token === null || typeof token === 'undefined' || token === '' ) {
+      return null;
+    }
+
     option = Safety.object( option );
     option.Authorization = `OAuth realm=undotsushin.com, oautn_token=${token}`;
     // option.Accept = 'application/json';

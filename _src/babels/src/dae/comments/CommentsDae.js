@@ -32,7 +32,7 @@ export class CommentsDae {
     let list = [];
 
     comments = Safety.array( comments );
-    console.log( 'CommentsDae comments ', comments );
+    // console.log( 'CommentsDae comments ', comments );
 
     for ( var comment of comments ) {
       // reply の前まではこれで処理できているはず...
@@ -50,7 +50,7 @@ export class CommentsDae {
     this._bank = bank;
     this._list = list;
 
-    console.log( 'CommentsDae', this._bank, this._list );
+    // console.log( 'CommentsDae', this._bank, this._list );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

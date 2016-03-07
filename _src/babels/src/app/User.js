@@ -46,9 +46,9 @@ export class User {
    */
   static get sign():boolean {
 
-    //return _sign;
+    // return _sign;
     // 開発フェーズは簡易的に変数管理していたが
-    // cookie token 管理へ変更する
+    // cookie token 管理へ移行する
     return User.token !== null;
 
   }

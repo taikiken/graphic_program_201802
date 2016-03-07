@@ -11,7 +11,11 @@
  */
 'use strict';
 
+import {Sidebar} from './Sidebar';
 import {Dom} from '../dom/Dom';
+
+// ui
+import {Nav} from '../ui/Nav';
 
 let _symbol = Symbol();
 
@@ -34,48 +38,111 @@ export class Comment {
 
     }
   }
+  static user( mode:string, articleId:Number, commentId:Number, replyId:Number = 0 ):void {
+    // header.user
+    let profileElement = Dom.profile();
+    let headerUser;
+    let userDae;
+
+    let onHeader = ( event:Object ):void => {
+      headerUser.off( UT.view.View.BEFORE_RENDER, onHeader );
+      userDae = event.args[ 0 ];
+
+      switch ( mode ) {
+        case 'reply':
+          Comment.reply( userDae, articleId, commentId, replyId );
+          break;
+
+        case 'comment':
+        default:
+          Comment.comment( userDae, articleId, commentId );
+          break;
+
+      }
+
+    };
+
+    if ( profileElement !== null ) {
+      headerUser = new UT.view.header.ViewHeaderUser( profileElement );
+
+      if ( UT.app.User.sign ) {
+        headerUser.on( UT.view.View.BEFORE_RENDER, onHeader );
+      } else {
+        // not sign in
+        switch ( mode ) {
+          case 'reply':
+            Comment.reply( null, articleId, commentId, replyId );
+            break;
+
+          case 'comment':
+          default:
+            Comment.comment( null, articleId, commentId );
+            break;
+
+        }
+      }
+
+      headerUser.start();
+    }
+
+    Comment.single( articleId );
+
+  }
   /**
    * コメント 詳細
+   * @param {UserDae} userDae ユーザー情報 UT.dae.UserDae
    * @param {Number} articleId 記事 ID :article_id
    * @param {Number} commentId コメント ID
    */
-  static comment( articleId:Number, commentId:Number ):void {
+  static comment( userDae, articleId:Number, commentId:Number ):void {
     let commentNormal = Dom.commentNormal();
 
     // comment 詳細
     if ( commentNormal !== null ) {
       let comment = new UT.view.ViewCommentSingle( articleId, commentId, commentNormal );
+      comment.user = userDae;
       comment.start();
     }
-
-    Comment.single( articleId );
   }
   /**
    * コメント返信 詳細
+   * @param {UserDae} userDae ユーザー情報 UT.dae.UserDae
    * @param {Number} articleId 記事 ID :article_id
    * @param {Number} commentId コメント ID
    * @param {Number} replyId コメント返信 ID
    */
-  static reply( articleId:Number, commentId:Number, replyId:Number ):void {
+  static reply( userDae, articleId:Number, commentId:Number, replyId:Number ):void {
     let commentNormal = Dom.commentNormal();
 
     // comment 詳細
     if ( commentNormal !== null ) {
       let comment = new UT.view.ViewCommentSingle( articleId, commentId, commentNormal, replyId );
+      comment.user = userDae;
       comment.start();
     }
-
-    Comment.single( articleId );
   }
-
   /**
    * 記事タイトル
    * @param {Number} articleId 記事 ID
    */
   static single( articleId:Number ):void {
     let headerElement = Dom.singleHeader();
+    let title;
+
+    let beforeRender = ( event ):void => {
+      title.off( UT.view.View.BEFORE_RENDER, beforeRender );
+      let single = event.args[ 0 ];
+      let slug = single.category.slug;
+      // sidebar
+      Sidebar.start( slug );
+
+      // nav current
+      Nav.start( slug );
+    };
+
     if ( headerElement !== null ) {
-      let title = new UT.view.single.ViewSingleTitle( articleId, headerElement );
+      title = new UT.view.single.ViewSingleTitle( articleId, headerElement );
+      title.on( UT.view.View.BEFORE_RENDER, beforeRender );
       title.start();
     }
   }

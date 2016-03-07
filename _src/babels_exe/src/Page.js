@@ -173,12 +173,7 @@ export class Page {
     // search from
     SearchFrom.start();
 
-    // ToDo slug 指定
-    // Sidebar.start();
-    Header.start();
-    Comment.comment( event.article, event.comment );
-
-    // ToDo Nav どうする？
+    Comment.user( 'comment', event.article, event.comment );
 
   }
   /**
@@ -192,11 +187,7 @@ export class Page {
     // search from
     SearchFrom.start();
 
-    // ToDo slug 指定
-    // Sidebar.start();
-    Header.start();
-
-    Comment.reply( event.article, event.comment, event.article );
+    Comment.user( 'reply', event.article, event.comment, event.article );
 
   }
   /**
@@ -347,20 +338,23 @@ export class Page {
     }
 
   }
-  ///**
-  // * 設定 ソーシャル連携
-  // */
-  //static social():void {
-  //  if ( !UT.app.User.sign ) {
-  //    // not login
-  //    return;
-  //  }
-  //
-  //  Sidebar.start();
-  //  Header.start();
-  //
-  //  Settings.social();
-  //}
+  /**
+   * 設定 ソーシャル連携
+   */
+  /*
+  backend で対応
+  static social():void {
+    if ( !UT.app.User.sign ) {
+      // not login
+      return;
+    }
+
+    Sidebar.start();
+    Header.start();
+
+    Settings.social();
+  }
+  */
   /**
    * 退会
    */
