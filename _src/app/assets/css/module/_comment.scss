@@ -238,6 +238,7 @@
 // comment-reaction
 .comment-reaction {
   padding-top: 8px;
+  padding-bottom: 20px;
 
   .comment-reaction-btn {
     @include link-decoration(#333, #333, none, underline);
@@ -301,15 +302,18 @@
     border-top: 1px solid $border-primary-color;
 
     .comment-item {
-      padding-bottom: 20px;
+      &:first-child {
+        border-top: none;
+      }
+      // padding-bottom: 20px;
     }
   }
 
-  > .comment-item {
-    &:first-child {
-      border-top: none;
-    }
-  }
+  // > .comment-item {
+  //   &:first-child {
+  //     border-top: none;
+  //   }
+  // }
 
   @at-root {
     // comment-item
@@ -329,13 +333,13 @@
 .comment-respond {
   @include clearfix;
   position: relative;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
 
   @at-root {
     &-opener {
       @include link-decoration(#333, #333, none, underline);
       position: absolute;
-      top: -18px;
+      top: -(18+20)+px;
       right: 0;
 
       span {
