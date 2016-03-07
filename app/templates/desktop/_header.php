@@ -72,6 +72,10 @@ if (
     </ul>
   </nav><!-- /.gnav-sec -->
 
+  <?php /*
+
+  #205 - backend フラッシュメッセージ対応完までview側の表示コメントアウト
+
   <div id="dialogue-notice" class="dialogue-notice">
     <div class="dialogue-notice-inner">
       <div id="dialogue-notice-info" class="dialogue-notice-info">
@@ -80,6 +84,8 @@ if (
       <div id="dialogue-notice-btn-close" class="dialogue-notice-btn-close"><a href="#dialogue-notice">CLOSE</a></div>
     </div>
   </div><!-- /.dialogue-notice -->
+
+  */?>
 <?php
 endif;
 // header 表示条件 end
