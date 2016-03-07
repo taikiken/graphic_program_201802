@@ -1,6 +1,5 @@
 <?php
 
-$domain="http://www.undotsushin.com";
 $H=getallheaders();
 
 $SIZE=300;
@@ -21,6 +20,7 @@ $articletable="
 	swf as video,
 	youtube,
 	facebook,
+	m_time,
 	t6 as videocaption,
 	(select name from pm_ where id=m1) as category,
 	(select name_e from pm_ where id=m1) as slug,
@@ -44,6 +44,7 @@ $commenttable="
 	id,
 	comment,
 	userid,
+	regitime,
 	(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,
 	to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,
 	extract(epoch from (now()-regitime))/60 as relativetime,
@@ -132,9 +133,17 @@ function get_relativetime($a,$b,$c){
 	return $rt;
 }
 
-function get_action($a){
+function get_action($a,$b){
+	global $o;
 	$s=array("comment","good","bad","bookmark");
-	return $s[$a-1];
+	$y=$s[$a-1];
+	if($a==1){
+		$sql=sprintf("select commentid from u_comment where id=%s",$b);
+		$o->query($sql);
+		$f=$o->fetch_array();
+		if($f["commentid"]!=0)$y="reply";
+	}
+	return $y;
 }
 
 function checkstr($s,$f=0){
@@ -185,6 +194,7 @@ function check_email($email,$conf=0){
 	global $o;
 
 	$err="";
+	$email=trim(htmlspecialchars($email));
 	
 	if(strlen($email)==0){
 		$err="メールアドレスは必須項目です。";
@@ -210,13 +220,14 @@ function check_passwd($passwd){
 	/* 英数字8桁以上 */
 	
 	$err="";
+	$email=trim(htmlspecialchars($passwd));
 	
 	if(strlen($passwd)==0){
 		$err="パスワードは必須項目です。";
 	}elseif(strlen($passwd)<8){
-		$err="パスワードは8桁以上の英数字で入力してください。";
+		$err="パスワードは8文字以上で入力してください。";
 	}elseif(!preg_match("/^[0-9a-zA-Z]+$/",$passwd)){
-		$err="パスワードは英数字で入力してください。";
+		$err="パスワードは半角英数字で入力してください。";
 	}
 	return $err;
 }

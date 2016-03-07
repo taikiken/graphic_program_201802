@@ -20,6 +20,15 @@ $ADPATH="/editdm/";
 $TAGON=1;
 $DEBUGMODE=1;
 
+if(getenv("REMOTE_ADDR")!="127.0.0.1"){
+	$SQLLOGFILE="/var/www/html/api/sql.txt";
+}else{
+	$SQLLOGFILE="d:/log/sql.txt";
+}
+
+$domain="https://www.undotsushin.com";
+$ImgPath="https://www.undotsushin.com";
+
 
 $BILLINGUAL=0;
 $MULTILANG=0;
