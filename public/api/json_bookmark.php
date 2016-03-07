@@ -16,34 +16,24 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 			$sql=sprintf("select id,flag from u_bookmark where pageid=%s and userid=%s",$pageid,$uid);
 			$o->query($sql);
 			$f=$o->fetch_array();
-
+			unset($sql);
+			
 			if($f["flag"]==0||strlen($f["id"])==0){
 				
 				if(strlen($f["id"])==0){
-					$sql =sprintf("insert into u_bookmark(pageid,userid,flag,regitime) values(%s,%s,1,now());",$pageid,$uid);
-					$sql2=sprintf("insert into u_activity(userid,reuserid,pageid,activity,activityid,notice,flag,regitime) select %s,(select d2 from repo_n where id=%s),%s,4,(select id from u_bookmark where pageid=%s and userid=%s order by regitime desc limit 1 offset 0),1,1,now() ;",$uid,$pageid,$pageid,$pageid,$uid);
+					$sql[]=sprintf("insert into u_bookmark(pageid,userid,flag,regitime) values(%s,%s,1,now());",$pageid,$uid);
+					$sql[]=sprintf("insert into u_activity(userid,reuserid,pageid,activity,activityid,notice,flag,regitime) select %s,(select d2 from repo_n where id=%s),%s,4,(select id from u_bookmark where pageid=%s and userid=%s order by regitime desc limit 1 offset 0),1,1,now() ;",$uid,$pageid,$pageid,$pageid,$uid);
 				}else{
-					$sql =sprintf("update u_bookmark set flag=1,regitime=now() where id=%s;",$f["id"]);
-					$sql2=sprintf("update u_activity set flag=1,regitime=now() where activity=4 and activityid=%s;",$f["id"]);
+					$sql[]=sprintf("update u_bookmark set flag=1,regitime=now() where id=%s;",$f["id"]);
+					$sql[]=sprintf("update u_activity set flag=1,regitime=now() where activity=4 and activityid=%s;",$f["id"]);
 				}
 				
-				$o->query("begin");
-				$o->query($sql);
+				$o->query(implode("\n",$sql));
 				$e=$o->affected_rows2();
 				
 				if($e){
-					$o->query($sql2);
-					$e=$o->affected_rows2();
-					if($e){
-						$code=200;
-						$o->query("commit");
-					}else{
-						$o->query("abort");
-						$code=500;
-						$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";						
-					}
+					$code=200;
 				}else{
-					$o->query("abort");
 					$code=500;
 					$ermsg="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
 				}
