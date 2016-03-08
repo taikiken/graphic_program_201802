@@ -160,6 +160,7 @@
           }
         }
 
+        &.current,
         &:hover {
           span:before {
             @include sprite( $common-icon-activity_o, inline-block );
@@ -174,6 +175,7 @@
           }
         }
 
+        &.current,
         &:hover {
           span:before {
             @include sprite( $common-icon-info_o, inline-block );
@@ -302,10 +304,17 @@
       width: 50px;
       height: 50px;
       margin-right: 15px;
+      border-radius: 100%;
+      background: url(/assets/images/common/thumb-user-info.png) 0 0 no-repeat;
+      background-size: 50px;
 
       img {
         width: 50px;
         border-radius: 100%;
+      }
+
+      &.user-logged-in {
+        // background: none;
       }
     }
 
