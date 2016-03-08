@@ -21,31 +21,29 @@ if($service=="facebook"){
 $y=array();
 $y["status"]["code"]=200;
 $y["status"]["user_message"]="";
+$y["status"]["message_type"]="success";
 $y["status"]["developer_message"]="";
 $ermsg="";
 
 if($uid!=""){
-	
 	if(strlen($f["id"])>0){
-		
 		$sql=sprintf("update repo_n set a%s='%s',a%s='%s' where id=%s",$field,$id,($field+1),$token,$uid);
 		$o->query($sql);
-		
 	}else{
-		$code=400;
-		$ermsg="指定されたIDは存在しません。";
-	}
-				
+		$code=404;
+		$ermsg="ユーザが存在しません。";
+	}			
 }else{
-	$code=400;
-	$ermsg="ページIDが指定されておりません。";
+	$code=404;
+	$ermsg="ユーザが存在しません。";
 }
 
 if($ermsg==""){
 	$y["status"]["code"]=200;
 	$y["response"]=(object)array();
 }else{
-	$y["status"]["code"]=400;
+	$y["status"]["code"]=$code;
+	$y["status"]["message_type"]="error";
 	$y["status"]["user_message"]=$ermsg;
 }
 

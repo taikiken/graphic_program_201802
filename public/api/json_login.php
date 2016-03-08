@@ -17,35 +17,37 @@ $ermsg="";
 
 if(strlen($email)>0&&strlen($passwd)>0){
 	
-	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15 from repo_n where t1='%s' and passwd='%s'",$email,md5($MAGIC_STRING.$passwd));
+	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15,passwd from repo_n where t1='%s'",$email);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
-		
-		if(strlen($f["t20"])>0){
-		$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,n from pm_ where cid=20 and flag=1) as t2 where t1.categoryid=t2.id order by n",$f["id"]);
-		$o->query($sql);
-		while($e=$o->fetch_array()){
-			$interestcategory[]=$e["name"];
-		}
+		if($f["passwd"]==md5($MAGIC_STRING.$passwd)){
+			if(strlen($f["t20"])>0){
+				$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,n from pm_ where cid=20 and flag=1) as t2 where t1.categoryid=t2.id order by n",$f["id"]);
+				$o->query($sql);
+				while($e=$o->fetch_array()){
+					$interestcategory[]=$e["name"];
+				}
+			}else{
+				$interestcategory=array();
+			}
+			
+			$s["id"]=$f["id"];
+			$s["name"]=$f["title"];
+			$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$ImgPath,$f["img1"]);
+			$s["bio"]=$f["t2"];
+			$s["url"]=sprintf("%s/mypage/",$domain);
+			$s["type"]["id"]=$f["cid"];
+			$s["type"]["label"]=$f["label"];
+			$s["interest"]["category"]=$interestcategory;
+			$s["access_token"]=$f["a15"];
+			$s["session_token"]="";
 		}else{
-			$interestcategory=array();
+			$ermsg="パスワードが間違っております。";
 		}
-		
-		$s["id"]=$f["id"];
-		$s["name"]=$f["title"];
-		$s["profile_picture"]=sprintf("%s/prg_img/img/%s",$ImgPath,$f["img1"]);
-		$s["bio"]=$f["t2"];
-		$s["url"]=sprintf("%s/mypage/",$domain);
-		$s["type"]["id"]=$f["cid"];
-		$s["type"]["label"]=$f["label"];
-		$s["interest"]["category"]=$interestcategory;
-		$s["access_token"]=$f["a15"];
-		$s["session_token"]="";
-		
 	}else{
-		$ermsg="メールアドレスかパスワードが間違っております。";
+		$ermsg="入力されたメールアドレスでの登録がございません。";
 	}
 				
 }else{

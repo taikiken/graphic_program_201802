@@ -66,18 +66,18 @@ if(strlen($field)>0&&strlen($id)>0&&strlen($token)>0){
 		$s["session_token"]="";
 		
 	}else{
-		$ermsg="指定されたIDは存在しません。";
+		$ermsg="ユーザが存在しません。";
 	}
 				
 }else{
-	$ermsg="ログイン情報が入力されておりません。";
+	$ermsg="ユーザ情報の取得に失敗しました。";
 }
 
 if($ermsg==""){
 	$y["status"]["code"]=200;
 	$y["response"]=$s;
 }else{
-	$y["status"]["code"]=400;
+	$y["status"]["code"]=404;
 	$y["status"]["message_type"]="error";
 	$y["status"]["user_message"]=$ermsg;
 }
