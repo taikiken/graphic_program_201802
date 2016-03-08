@@ -39,6 +39,10 @@ button {
   outline: none;
 }
 
+input::-webkit-input-placeholder {
+  font-size: fz(24/2);
+}
+
 .whole {
   overflow-x: hidden;
 
