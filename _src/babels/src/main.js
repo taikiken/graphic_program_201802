@@ -125,6 +125,7 @@ import {ViewVideos} from './view/sidebar/ViewVideos';
 
 // modal
 import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
+import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
 
 // ----------- users
 // signup
@@ -290,7 +291,8 @@ var UT = {
       ViewSettingsInterest: ViewSettingsInterest
     },
     modal: {
-      ViewDeleteModal: ViewDeleteModal
+      ViewDeleteModal: ViewDeleteModal,
+      ViewLogoutModal: ViewLogoutModal
     }
   }
 };

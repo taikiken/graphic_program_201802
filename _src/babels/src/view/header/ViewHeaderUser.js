@@ -41,10 +41,17 @@ export class ViewHeaderUser extends View {
     // User.sign boolean
     this._sign = User.sign;
 
-    let userSatus = UserStatus.factory();
+    let userStatus = UserStatus.factory();
     let boundSign = this.onSign.bind( this );
-    userSatus.on( UserStatus.LOG_IN, boundSign );
-    userSatus.on( UserStatus.LOG_OUT, boundSign );
+    userStatus.on( UserStatus.LOG_IN, boundSign );
+    userStatus.on( UserStatus.LOG_OUT, boundSign );
+  }
+  /**
+   * ViewHeaderMember instance
+   * @return {null|*} ViewHeaderMember instance を返します
+   */
+  get member():ViewHeaderMember {
+    return this._member;
   }
   /**
    * Ajax request を開始します

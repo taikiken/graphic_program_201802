@@ -83,6 +83,12 @@ export class Comment {
       }
 
       headerUser.start();
+
+      let modalElement = Dom.modal();
+      if ( modalElement !== null ) {
+        let modal = new UT.view.modal.ViewLogoutModal( modalElement );
+        modal.start();
+      }
     }
 
     Comment.single( articleId );
