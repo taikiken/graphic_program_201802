@@ -112,11 +112,11 @@ sp =
 AUTO_PREFIX_BROWSERS = [
   'ie >= 11'
   'ie_mob >= 10'
-  'ff >= 43'
-  'chrome >= 47'
+  'ff >= 44'
+  'chrome >= 48'
   'safari >= 9'
   'opera >= 34'
-  'ios >= 8.4.1'
+  'ios >= 9'
   'android >= 4.2'
   'bb >= 10'
 ]
