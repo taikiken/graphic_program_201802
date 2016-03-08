@@ -22,6 +22,14 @@ import {Url} from '../../app/const/Url';
 import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
+import {User} from '../../app/User';
+
+// util
+import {Loc} from '../../util/Loc';
+
+import {ViewLogoutModal} from '../modal/ViewLogoutModal';
+import {LogoutStatus} from '../../event/LogoutStatus';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -40,6 +48,13 @@ export class ViewHeaderMember extends View {
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
     this._action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
+    this._component = null;
+  }
+  get component() {
+    return this._component;
+  }
+  set modal( modal:ViewLogoutModal ):void {
+    this._modal = modal;
   }
   /**
    * Ajax request を開始します
@@ -104,6 +119,8 @@ export class ViewHeaderMember extends View {
       },
       getInitialState: function() {
         this.timer = 0;
+        this.modal = null;
+        this.status = LogoutStatus.factory();
 
         return {
           open: 'close'
@@ -136,7 +153,7 @@ export class ViewHeaderMember extends View {
                 <ul className="dropMenu">
                   <li className="dropMenu-item"><a className="dropMenu-link" href={Url.mypage()}>ブックマーク<br />アクティビティ</a></li>
                   <li className="dropMenu-item"><a className="dropMenu-link" href={Url.settings()}>設定</a></li>
-                  <li className="dropMenu-item"><a className="dropMenu-link" href={Url.logout()}>ログアウト</a></li>
+                  <li className="dropMenu-item"><a className="dropMenu-link" href="#" onClick={this.logoutHandler}>ログアウト</a></li>
                 </ul>
               </nav>
             </div>
@@ -152,6 +169,16 @@ export class ViewHeaderMember extends View {
         let noticeNode = ReactDOM.findDOMNode(this.refs.notice);
         let notice = new ViewHeaderMemberNotice( noticeNode );
         notice.start();
+
+        // console.log( '*** header member componentDidMount ', this.modal );
+
+        if ( this.modal === null && _this._modal !== null ) {
+          let modal = _this._modal;
+          this.modal = modal;
+          modal.yes = this.callbackOk;
+          modal.no = this.callbackCancel;
+          modal.start();
+        }
 
       },
       componentWillUnmount: function() {
@@ -209,13 +236,36 @@ export class ViewHeaderMember extends View {
         // document.body からclick event handler unbind
         document.body.removeEventListener( 'click', this.bodyClick );
 
+      },
+      // body click 再セット <- modal close の後
+      activate: function() {
+        document.body.addEventListener( 'click', this.bodyClick, false );
+      },
+      // -----------------------------
+      // logout click -> open modal
+      logoutHandler: function( event:Event ):void {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.destroy();
+        this.status.open( this.callbackOk, this.callbackCancel );
+
+      },
+      // yes ->logout
+      callbackOk: function() {
+        User.logout();
+        Loc.index();
+      },
+      // no -> body click を bind する
+      // 何もないところを click した時のため
+      callbackCancel: function() {
+        this.activate();
       }
     } );
 
-
     // --------------------------------------------------
     // user root
-    ReactDOM.render(
+    this._component = ReactDOM.render(
       <SettingDom icon={dae.profilePicture} userName={dae.userName} />,
       this.element
     );
