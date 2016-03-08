@@ -46,13 +46,13 @@ if (
 
       <nav class="fnav">
         <ul>
-          <li><a href="/about/ads/">広告掲載について</a></li>
+          <?php // <li><a href="/about/ads/">広告掲載について</a></li> ?>
           <li><a href="/about/">運動通信アプリの紹介</a></li>
           <li><a href="/about/privacy/">個人情報の取り扱いについて</a></li>
           <li><a href="/about/terms/">利用規約</a></li>
           <li><a href="/about/company/">運営会社</a></li>
-          <li><a href="/about/faq/">FAQ</a></li>
-          <li><a href="/about/contact/">お問い合せ</a></li>
+          <?php // <li><a href="/about/faq/">FAQ</a></li> ?>
+          <?php // <li><a href="/about/contact/">お問い合せ</a></li> ?>
         </ul>
       </nav><!-- /.fnav -->
 
