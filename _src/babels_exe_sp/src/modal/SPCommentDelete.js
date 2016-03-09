@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/29 - 23:08
+ * @date 2016/02/25 - 22:54
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -15,12 +15,13 @@ import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
-let Sagen = self.Sagen;
+// UT
+let UT = self.UT;
 
 /**
- * メインメニューにかテゴリースラッグを追加
+ * コメント削除モーダル
  */
-export class Nav {
+export class SPCommentDelete {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -28,18 +29,18 @@ export class Nav {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Nav is static Class. not use new Nav().` );
+      throw new Error( `SPCommentDelete is static Class. not use new SPCommentDelete().` );
 
     }
   }
   /**
-   * global menu へ slug を css class として挿入
-   * @param {string} slug category slug
+   * comment delete confirm modal 準備
    */
-  static start( slug:string = 'all' ):void {
-    let nav = Dom.nav();
-    if ( nav !== null && slug !== null && typeof slug !== 'undefined' ) {
-      Sagen.Dom.addClass( nav, slug );
+  static start():void {
+    let element = Dom.modal();
+    if ( element !== null ) {
+      let commentDelete = new UT.view.modal.ViewDeleteModal( element );
+      commentDelete.start();
     }
   }
 }

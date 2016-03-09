@@ -11,8 +11,8 @@
  */
 'use strict';
 
-import {Header} from './Header';
-import {Sidebar} from './Sidebar';
+import {SPHeader} from './SPHeader';
+import {SPSidebar} from './SPSidebar';
 import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
@@ -20,7 +20,7 @@ let _symbol = Symbol();
 // UT
 let UT = self.UT;
 
-export class Search {
+export class SPSearch {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -28,7 +28,7 @@ export class Search {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Search is static Class. not use new Search().` );
+      throw new Error( `SPSearch is static Class. not use new SPSearch().` );
 
     }
   }
@@ -39,7 +39,7 @@ export class Search {
   static start( keyword:string ):void {
 
     // header
-    Header.start();
+    SPHeader.start();
 
     // list
     // 検索キーワードで page 取得
@@ -52,7 +52,7 @@ export class Search {
     }
 
     // 検索結果が同じカテゴリーとは限らないので all で表示します
-    Sidebar.start();
+    SPSidebar.start();
 
   }
 }

@@ -49,52 +49,17 @@ htdocs = dir.htdocs
 # --------------------------------------------
 
 # --------------------------------------------
-# pc
-# --------------------------------------------
-
-files = [
-  dir.exe.src + '/**/*.js'
-  '!' + dir.exe.src + '/**/_*.js'
-]
-
-# eslint
-gulp.task 'exe:eslint', ->
-  return gulp.src files
-  .pipe $.eslint useEslintrc: true
-  .pipe $.eslint.format()
-  .pipe $.eslint.failAfterError()
-
-# babel
-gulp.task 'exe:babel', ->
-  return gulp.src files
-  .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime']
-  .pipe $.replaceTask patterns: patterns
-  .pipe gulp.dest dir.exe.compile
-  .pipe $.size title: '*** exe:babel ***'
-
-# dev
-gulp.task 'exe:make', ( cb ) ->
-  runSequence(
-    'exe:eslint'
-    'exe:babel'
-    cb
-  )
-  return
-
-# --------------------------------------------
 # sp
 # --------------------------------------------
 
 ###
   SP 用実行ファイル作成
-  webpack の都合上ここに作ります
 ###
 
 sp_files = [
   dir.sp.exe.src + '/**/*.js'
   '!' + dir.sp.exe.src + '/**/_*.js'
 ]
-
 
 # eslint
 gulp.task 'sp:exe:eslint', ->
@@ -108,7 +73,7 @@ gulp.task 'sp:exe:babel', ->
   return gulp.src sp_files
   .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime']
   .pipe $.replaceTask patterns: patterns
-  .pipe gulp.dest dir.exe.compile
+  .pipe gulp.dest dir.sp.exe.compile
   .pipe $.size title: '*** sp:exe:babel ***'
 
 # dev

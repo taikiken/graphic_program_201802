@@ -58,6 +58,8 @@ files = [
   scss + '/**/*.scss'
   # project root
   app + '/**/*.scss'
+  # bower / modularized
+  dir.bower.exports + '/modularized/**/*.scss'
   # sp 除外
   '!' + dir.sp.css + '/**/*.{css,scss}'
   # その他 min 済ファイル除外
@@ -73,7 +75,11 @@ files = [
 # sourcemap, dest: tmp
 gulp.task 'css:dev', ->
   return gulp.src files
-  .pipe $.sourcemaps.init debug:true
+  .pipe $.sourcemaps.init(
+    debug:true
+    loadMaps: true
+    identityMap: true
+  )
   .pipe $.changed app + '/**', extension: '.css'
   .pipe $.sass(
     precision: 10
@@ -85,9 +91,8 @@ gulp.task 'css:dev', ->
 #  .pipe $.sourcemaps.write './'
   # inline map にする
   .pipe $.sourcemaps.write './', {
-#    addComment: true
-#    loadMaps: true
-#    includeContent: false
+    addComment: true
+    includeContent: true
     sourceRoot: ['../../../app', '../../../scss']
   }
   .pipe gulp.dest tmp

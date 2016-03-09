@@ -60,7 +60,30 @@ htdocs = dir.htdocs
 # * image:build, css:build の前に実行！
 gulp.task 'libs:copy', ->
   return gulp.src [
-    app + '/**/js/libs/**/*'
+    app + '/**/js/libs/html5shiv/*'
+    app + '/**/js/libs/sagen/*'
   ]
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** libs:copy ***'
+
+# synapse dev
+gulp.task 'libs:synapse:dev', ->
+  return gulp.src [
+    app + '/**/js/libs/**/synapse/**/*.js'
+    '!' + app + '/**/js/libs/**/synapse/**/*.min.js'
+    '!' + app + '/**/js/libs/**/synapse/**/jquery*.js'
+  ]
+  .pipe gulp.dest htdocs
+  .pipe $.size title: '*** libs:synapse:dev ***'
+
+
+# synapse build
+gulp.task 'libs:synapse:build', ->
+  return gulp.src [
+    app + '/**/js/libs/**/synapse/**/*.min.js'
+    '!' + app + '/**/js/libs/**/synapse/**/jquery*.js'
+  ]
+  .pipe $.rename (path) ->
+    path.basename = path.basename.replace '.min', ''
+  .pipe gulp.dest htdocs
+  .pipe $.size title: '*** libs:synapse:dev ***'

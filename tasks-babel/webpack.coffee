@@ -47,11 +47,16 @@ htdocs = dir.htdocs
 # task
 # --------------------------------------------
 
+# --------------------------------------------
+# library
+# --------------------------------------------
+
 # webpack
 webpack = $$.webpack
 
 config = setting.webpackConfig
 
+# dev
 gulp.task 'webpack:babels:main:babel:dev', ( cb ) ->
   conf = Object.create config
 
@@ -69,6 +74,7 @@ gulp.task 'webpack:babels:main:babel:dev', ( cb ) ->
     cb()
   return
 
+# deploy
 gulp.task 'webpack:babels:main:babel:build', ( cb ) ->
   conf = Object.create config
 
@@ -86,15 +92,15 @@ gulp.task 'webpack:babels:main:babel:build', ( cb ) ->
     cb()
   return
 
-gulp.task 'webpack:babels:main:license', ->
-  return gulp.src [
-    './_src/license.txt'
-    dir.app + '/js/bundle/main.bundle.js'
-  ]
-  .pipe $.concat 'main.bundle.js'
-  .pipe $.replaceTask patterns: patterns
-  .pipe gulp.dest  dir.app + '/js/bundle/'
-  .pipe $.size title: '*** license:build ***'
+#gulp.task 'webpack:babels:main:license', ->
+#  return gulp.src [
+#    './_src/license.txt'
+#    dir.app + '/js/bundle/main.bundle.js'
+#  ]
+#  .pipe $.concat 'main.bundle.js'
+#  .pipe $.replaceTask patterns: patterns
+#  .pipe gulp.dest  dir.app + '/js/bundle/'
+#  .pipe $.size title: '*** license:build ***'
 
 gulp.task 'webpack:babels:main:dev', ( cb ) ->
   runSequence(
@@ -113,6 +119,7 @@ gulp.task 'webpack:babels:main:build', ( cb ) ->
 # --------------------------------------------
 # exe 実行 file
 # --------------------------------------------
+# dev
 gulp.task 'webpack:babels:exe:babel:dev', ( cb ) ->
   conf = Object.create config
 
@@ -131,6 +138,7 @@ gulp.task 'webpack:babels:exe:babel:dev', ( cb ) ->
     cb()
   return
 
+# deploy
 gulp.task 'webpack:babels:exe:babel:build', ( cb ) ->
   conf = Object.create config
 

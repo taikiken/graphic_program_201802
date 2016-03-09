@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/18 - 15:22
+ * @date 2016/02/15 - 21:39
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -22,7 +22,7 @@ let UT = self.UT;
  * <h3>header user information / signup</h3>
  * 全て static です
  */
-export class SearchFrom {
+export class SPHeader {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -30,19 +30,25 @@ export class SearchFrom {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SearchFrom is static Class. not use new SearchFrom().` );
+      throw new Error( `SPHeader is static Class. not use new SPHeader().` );
 
     }
   }
   /**
-   * search form rendering 開始
+   * header rendering 開始
    */
   static start():void {
     // header.user
-    let searchElement = Dom.search();
-    if ( searchElement !== null ) {
-      let searchFrom = new UT.view.header.ViewHeaderSearch( searchElement );
-      searchFrom.start();
+    let element = Dom.profile();
+    if ( element !== null ) {
+      let headerUser = new UT.view.header.ViewHeaderUser( element );
+      headerUser.start();
+
+      let modalElement = Dom.modal();
+      if ( modalElement !== null ) {
+        let modal = new UT.view.modal.ViewLogoutModal( modalElement );
+        modal.start();
+      }
     }
 
   }
