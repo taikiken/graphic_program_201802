@@ -150,6 +150,13 @@ import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
 // ui
 import {Receiver} from './ui/Receiver';
 
+// -------------------------------------
+// sp
+
+// sp/view
+import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
+import {SPViewNews} from './sp/view/home/SPViewNews';
+
 /**
  * ToDo: 対象外OS alert
  * ToDo: global 不要 class を除外する
@@ -293,6 +300,17 @@ var UT = {
     modal: {
       ViewDeleteModal: ViewDeleteModal,
       ViewLogoutModal: ViewLogoutModal
+    }
+  },
+  sp: {
+    node: {
+
+    },
+    view: {
+      home: {
+        SPViewHeadLine: SPViewHeadLine,
+        SPViewNews: SPViewNews
+      }
     }
   }
 };

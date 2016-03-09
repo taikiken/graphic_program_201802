@@ -145,9 +145,11 @@ export class ViewHeadline extends View {
 
     message = Safety.string( message, '' );
 
+    /*
     // ToDo: Error 時の表示が決まったら変更する
     let error = new ViewError( this.element, this.option, message );
     error.render();
+    */
 
   }
   /**

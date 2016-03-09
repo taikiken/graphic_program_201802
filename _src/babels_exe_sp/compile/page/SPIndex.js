@@ -71,19 +71,22 @@ var SPIndex = exports.SPIndex = function () {
       // header
       _SPHeader.SPHeader.start();
 
+      /*
+      sp pickup なし
       // ---------------------------------------------------------
       // pickup
-      var pickupElement = _Dom.Dom.pickup();
-      if (pickupElement !== null) {
-        var pickup = new UT.view.home.ViewPickup(pickupElement);
+      let pickupElement = Dom.pickup();
+      if ( pickupElement !== null ) {
+        let pickup = new UT.view.home.ViewPickup( pickupElement );
         pickup.start();
       }
+      */
 
       // ---------------------------------------------------------
       // headline
       var headlineElement = _Dom.Dom.headline();
       if (headlineElement !== null) {
-        var headline = new UT.view.home.ViewHeadline(headlineElement);
+        var headline = new UT.sp.view.home.SPViewHeadLine(headlineElement);
         headline.start();
       }
 
@@ -92,7 +95,7 @@ var SPIndex = exports.SPIndex = function () {
       var boardElement = _Dom.Dom.board();
       var moreElement = _Dom.Dom.boardMore();
       if (boardElement !== null && moreElement !== null) {
-        var archive = new UT.view.home.ViewNews(boardElement, moreElement);
+        var archive = new UT.sp.view.home.SPViewNews(boardElement, moreElement);
         archive.start();
       }
 

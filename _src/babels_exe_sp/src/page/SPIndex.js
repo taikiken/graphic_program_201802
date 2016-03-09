@@ -44,6 +44,8 @@ export class SPIndex {
     // header
     SPHeader.start();
 
+    /*
+    sp pickup なし
     // ---------------------------------------------------------
     // pickup
     let pickupElement = Dom.pickup();
@@ -51,12 +53,13 @@ export class SPIndex {
       let pickup = new UT.view.home.ViewPickup( pickupElement );
       pickup.start();
     }
+    */
 
     // ---------------------------------------------------------
     // headline
     let headlineElement = Dom.headline();
     if ( headlineElement !== null ) {
-      let headline = new UT.view.home.ViewHeadline( headlineElement );
+      let headline = new UT.sp.view.home.SPViewHeadLine( headlineElement );
       headline.start();
     }
 
@@ -65,7 +68,7 @@ export class SPIndex {
     let boardElement = Dom.board();
     let moreElement = Dom.boardMore();
     if ( boardElement !== null && moreElement !== null ) {
-      let archive = new UT.view.home.ViewNews( boardElement, moreElement );
+      let archive = new UT.sp.view.home.SPViewNews( boardElement, moreElement );
       archive.start();
     }
 
