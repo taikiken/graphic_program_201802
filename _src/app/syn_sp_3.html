@@ -15,24 +15,62 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/sp/css/ui.css">
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
   <script src="/assets/sp/js/libs/synapse/synapse.js"></script>
   <script src="/assets/sp/js/libs/jquery2/jquery.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+  <script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js"></script>
   <!--<script src="/assets/js/libs/vendor.min.js"></script>-->
   <script src="/assets/js/libs/vendor.react.js"></script>
   <style>
-    /*#side-menu {*/
-      /*position: absolute;*/
-      /*left: 0;*/
-      /*z-index: 999;*/
-      /*overflow: hidden;*/
-      /*min-height: 100%;*/
-    /*}*/
-    /*#side-menu.closed {*/
-      /*width: 0;*/
-      /*max-height: 100%;*/
-    /*}*/
+    #side-menu-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    #side-menu-container.open {
+      width: 100%;
+      height: 100%;
+    }
+    #side-menu-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    #side-menu {
+      position: absolute;
+      left: -100%;
+      z-index: 999;
+      overflow: hidden;
+      width: 0;
+      max-height: 100%;
+      min-height: 100%;
+      background-color: #fff;
+
+      -webkit-transition: left 0.5s;
+      -moz-transition: left 0.5s;
+      -ms-transition: left 0.5s;
+      -o-transition: left 0.5s;
+      transition: left 0.5s;
+    }
+    #side-menu-container.open #side-menu {
+      width: 85%;
+      left: 0;
+    }
+    /* Syn.のロゴを表示 */
+    div.synapse_logo {
+      height: 141px;
+      width: 100%;
+      background-size: auto 50px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      /* URLを変更してデザインにあったSyn.のロゴに変更できます */
+      background-image: url("https://synapse-bitcellar-assets.s3.amazonaws.com/logos/original.png");
+    }
   </style>
 </head>
 <body>
@@ -41,8 +79,8 @@
     <div class="head-sec-inner">
       <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
-      <div class="menu-opener" style="background-color: #f00; width: 100px; height: 100px;">
-        <a href="#"><span></span><span></span><span></span></a>
+      <div id="menu-opener" class="menu-opener" style="background-color: #f00; width: 100px; height: 100px;">
+        <a href="#" id="side-menu-toggle"><span></span><span></span><span></span></a>
       </div>
 
       <aside class="f-right clearfix">
@@ -143,31 +181,37 @@
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 
-  <div id='side-menu' data-role='panel' data-position='left' data-display='push'>
-    <ul data-role="listview" data-inset="false" data-divider-theme="a">
+  <!--
+  #side-menu-container.open
+  で menu を表示します
+  -->
+  <div id="side-menu-container">
+    <div id="side-menu-bg"></div>
+    <div id='side-menu' data-role='panel' data-position='left' data-display='push'>
+      <ul id="side-menu-list">
 
-      <!-- Service Specific Menu -->
-      <li data-role="list-divider">メニュー</li>
-      <li><a href="#">taro さん</a></li>
-      <li><a href="#">フォローフィード</a></li>
-      <li><a href="#">検索</a></li>
+        <!-- Service Specific Menu -->
+        <li data-role="list-divider">メニュー</li>
+        <li><a href="#">taro さん</a></li>
+        <li><a href="#">フォローフィード</a></li>
+        <li><a href="#">検索</a></li>
 
-      <!-- Syn. Service List -->
-      <div id='synapse-service-list-outer-box' style='display: none'>
-        <ul data-role="listview" data-inset="true" id='synapse-service-list'>
-          <li data-role="list-divider">おすすめサービス</li>
-        </ul>
-      </div>
+        <li>
+          <!-- Syn. Service List -->
+          <div id='synapse-service-list-outer-box' style='display: none'>
+            <ul id='synapse-service-list'>
+              <li data-role="list-divider">おすすめサービス</li>
+            </ul>
+          </div>
 
-      <!-- Syn. Logo -->
-      <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
+          <!-- Syn. Logo -->
+          <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
+        </li>
 
-    </ul>
-  </div>
+      </ul>
+    </div><!--/#side-menu-->
+  </div><!--/#side-menu-container-->
 
-  <div style='background-color: transparent; border-color: transparent;' data-role='footer' data-position='fixed'>
-    <a href="#side-menu" id='side-menu-toggle' class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-bottom">Menu</a>
-  </div>
   <script>
     ( function ( window ) {
 
@@ -176,6 +220,7 @@
       var document = window.document;
       var Synapse = window.Synapse;
       var $ = window.jQuery;
+      var Sagen = window.Sagen;
 
       // ログレベルの指定。出荷時は指定しない
       Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
@@ -186,12 +231,13 @@
       // メニューインスタンスの作成
       var menu = new Synapse.Menu('synapse_dev_side_menu');
 
+      var synapseServiceListElement = document.getElementById( 'synapse-service-list' );
       // service_list_load event listener
       function serviceListLoad() {
+        console.log( '******** serviceListLoad ********' );
         menu.serviceList.serviceListItems.forEach(function(item){
-          var listElement = $('<li>');
+          var listElement = document.createElement( 'li' );
           var itemElement = item.toHTMLElement();
-          console.log( 'itemElement ', itemElement );
 
           // inview は、オブジェクトの各辺が描画領域に入ると報告されるが、そのうち最初の1回だけ
           // 受け取れるようにフラグを立てて管理する。
@@ -209,37 +255,63 @@
             }
           });
 
-          listElement.append(itemElement);
-          $('#synapse-service-list').append(listElement);
+          listElement.appendChild(itemElement);
+          synapseServiceListElement.appendChild(listElement);
         });
 
         //メニューがあるときだけメニューエリアとロゴを表示させる
         if (menu.serviceList.serviceListItems != undefined && menu.serviceList.serviceListItems.length > 0) {
-          $('#synapse-service-list-outer-box').css('display', 'block');
-          $('#synapse-logo-box').css('display', 'block');
+          document.getElementById( 'synapse-service-list-outer-box' ).style.cssText = 'display: block;';
+          document.getElementById( 'synapse-logo-box' ).style.cssText = 'display: block;';
         }
       }
 
+      var sideMenuToggleElement = document.getElementById( 'side-menu-toggle' );
+      var toggleDom = new Sagen.Dom( sideMenuToggleElement );
       // service_notification_load event listener
       function serviceNotificationLoad () {
         // 通知が存在する場合としない場合で、通知ボタンのクラスを変える
         if (menu.serviceNotification.serviceNotificationItems.length > 0) {
-          $('#side-menu-toggle').addClass('has-notification');
+          toggleDom.addClass('has-notification');
         } else {
-          $('#side-menu-toggle').removeClass('has-notification');
+          toggleDom.removeClass('has-notification');
         }
       }
 
       menu.addListener( 'service_list_load', serviceListLoad );
       menu.addListener( 'service_notification_load', serviceNotificationLoad );
 
-      // サイドメニューを作成
-      $('#side-menu').panel({
-        // メニューを開いたことをトラッキングする
-        beforeopen : function(){ menu.trackShowEvent() }
-      });
-
       menu.init();
+
+      // button click event
+      var openerElement = document.getElementById( 'menu-opener' );
+      var sideMenuContainer = document.getElementById( 'side-menu-container' );
+      var sideMenuBg = document.getElementById( 'side-menu-bg' );
+      var containerDom = new Sagen.Dom( sideMenuContainer );
+      var menuListDom = new Sagen.Dom( document.getElementById( 'side-menu-list' ) );
+
+      function openerClick( event ) {
+        event.preventDefault();
+
+        if ( containerDom.hasClass( 'open' ) ) {
+          containerDom.removeClass( 'open' );
+          sideMenuContainer.style.cssText = '';
+        } else {
+          containerDom.addClass( 'open' );
+          sideMenuContainer.style.cssText = 'height: 9999px';
+          console.log( 'menuListDom height ', menuListDom.style( 'height' ) );
+          sideMenuContainer.style.cssText = 'height: ' + menuListDom.style( 'height' );
+          // メニューを開いたことをトラッキングする
+          menu.trackShowEvent()
+        }
+      }
+
+      openerElement.addEventListener( 'click', openerClick, false );
+
+      function toClose() {
+        containerDom.removeClass( 'open' );
+      }
+      sideMenuBg.addEventListener( 'click', toClose, false );
 
     }( window ) );
   </script>
