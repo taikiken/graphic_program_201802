@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/29 - 23:08
+ * @date 2016/02/18 - 15:22
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -15,12 +15,14 @@ import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
 
-let Sagen = self.Sagen;
+// UT
+let UT = self.UT;
 
 /**
- * メインメニューにかテゴリースラッグを追加
+ * <h3>header user information / signup</h3>
+ * 全て static です
  */
-export class Nav {
+export class SPSearchFrom {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -28,18 +30,20 @@ export class Nav {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Nav is static Class. not use new Nav().` );
+      throw new Error( `SPSearchFrom is static Class. not use new SPSearchFrom().` );
 
     }
   }
   /**
-   * global menu へ slug を css class として挿入
-   * @param {string} slug category slug
+   * search form rendering 開始
    */
-  static start( slug:string = 'all' ):void {
-    let nav = Dom.nav();
-    if ( nav !== null && slug !== null && typeof slug !== 'undefined' ) {
-      Sagen.Dom.addClass( nav, slug );
+  static start():void {
+    // header.user
+    let searchElement = Dom.search();
+    if ( searchElement !== null ) {
+      let searchFrom = new UT.view.header.ViewHeaderSearch( searchElement );
+      searchFrom.start();
     }
+
   }
 }

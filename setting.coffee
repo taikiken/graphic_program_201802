@@ -104,6 +104,9 @@ sp =
   js: app + '/assets/sp/js'
   css: app + '/assets/sp/css'
   images: app + '/assets/sp/images'
+  exe:
+    src: '_src/babels_exe_sp/src'
+    compile: '_src/babels_exe_sp/compile'
 
 
 # ------------------------------------------------------

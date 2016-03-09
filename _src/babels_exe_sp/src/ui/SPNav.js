@@ -20,7 +20,7 @@ let Sagen = self.Sagen;
 /**
  * メインメニューにかテゴリースラッグを追加
  */
-export class Nav {
+export class SPNav {
   /**
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
@@ -28,7 +28,7 @@ export class Nav {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Nav is static Class. not use new Nav().` );
+      throw new Error( `SPNav is static Class. not use new SPNav().` );
 
     }
   }

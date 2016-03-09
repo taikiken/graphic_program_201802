@@ -118,6 +118,30 @@ gulp.task 'exe:build', (cb) ->
   )
   return
 
+# sp
+# ---------
+# exe dev
+gulp.task 'sp:exe:dev', (cb) ->
+  runSequence(
+    'sp:exe:make'
+    'sp:webpack:babels:exe:dev'
+    'bundle:copy'
+    cb
+  )
+  return
+
+# exe build
+gulp.task 'sp:exe:build', (cb) ->
+  runSequence(
+#    'exe:make'
+# no eslint
+    'sp:exe:babel'
+    'sp:webpack:babels:exe:build'
+    'bundle:copy'
+    cb
+  )
+  return
+
 # --------------------------------------------
 # server
 # --------------------------------------------
@@ -230,6 +254,7 @@ gulp.task 'dev:init', (cb) ->
     'babels:dev'
     'exe:dev'
     'sprite:build'
+    'sp:sprite:build'
     'single:dev'
     'bundle:copy'
     'libs:copy'
@@ -237,6 +262,7 @@ gulp.task 'dev:init', (cb) ->
     'js:dev'
     'image:copy'
     'css:dev'
+    'sp:css:dev'
     cb
   )
   return
@@ -251,6 +277,7 @@ gulp.task 'default', (cb) ->
     'vendor:init'
     'babels:build'
     'sprite:build'
+    'sp:sprite:build'
     'exe:build'
     'single:build'
     'bundle:copy'
@@ -259,6 +286,7 @@ gulp.task 'default', (cb) ->
     'js:build'
     'image:build'
     'css:build'
+    'sp:css:build'
     # 'sc5:make' - デプロイ時css document再生成, 体制に影響無いので外す
     'clean:all'
     'lec:build'
