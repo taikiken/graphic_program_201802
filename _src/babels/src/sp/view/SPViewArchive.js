@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/01 - 22:33
+ * @date 2016/03/09 - 22:46
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -12,59 +12,49 @@
 'use strict';
 
 // app
-import {Empty} from '../app/const/Empty';
-import {User} from '../app/User';
-import {MediaType} from '../app/const/MediaType';
+import {Empty} from '../../app/const/Empty';
+import {User} from '../../app/User';
+import {MediaType} from '../../app/const/MediaType';
 
 // view
-import {View} from './View';
-import {ViewError} from './error/ViewError';
+import {View} from './../../view/View';
+import {ViewError} from './../../view/error/ViewError';
 
 // data
-import {Result} from '../data/Result';
-import {Safety} from '../data/Safety';
+import {Result} from '../../data/Result';
+import {Safety} from '../../data/Safety';
 
 // dae
-import {ArticleDae} from '../dae/ArticleDae';
-
-// ui
-import {Rise} from '../ui/Rise';
+import {ArticleDae} from '../../dae/ArticleDae';
 
 // node(ReactClass)
-import {ReactionNode} from '../node/comment/ReactionNode';
+import {ReactionNode} from '../../node/comment/ReactionNode';
 
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
-// imagesLoaded, isotope
-let imagesLoaded = self.imagesLoaded;
-let Isotope = self.Isotope;
-
 /**
- * archive 一覧を isotope で
+ * archive 一覧標示
  */
-export class ViewArchiveMasonryInfinite extends View {
+export class SPViewArchive extends View {
   /**
-   * <p>archive 一覧標示後 isotope で位置調整します<br>
-   * + infinite scroll を実装します
-   * </p>
+   * <p>archive 一覧標示</p>
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:boolean = true ) {
+  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {} ) {
 
     option = Safety.object( option );
 
     super( element, option );
     /*
-    if ( !Safety.isElement( moreElement ) ) {
-      console.warn( `un accessible more element. ${moreElement}` );
-    }
-    */
+     if ( !Safety.isElement( moreElement ) ) {
+     console.warn( `un accessible more element. ${moreElement}` );
+     }
+     */
 
     if ( typeof ActionClass === 'function' ) {
 
@@ -78,7 +68,6 @@ export class ViewArchiveMasonryInfinite extends View {
      * @private
      */
     this._articles = [];
-    this._useMasonry = !!useMasonry;
     // ArticleDom instance を保持します
     // first render を区別するためにも使用します
     this._articleRendered = null;
@@ -88,7 +77,6 @@ export class ViewArchiveMasonryInfinite extends View {
     this._request = null;
 
     this._home = false;
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -220,8 +208,6 @@ export class ViewArchiveMasonryInfinite extends View {
         };
       },
       getInitialState: function() {
-        // Rise instance を保持する
-        this.rise = null;
 
         return {
           disable: false,
@@ -252,15 +238,6 @@ export class ViewArchiveMasonryInfinite extends View {
 
       },
       componentDidMount: function() {
-
-        if ( this.state.show && this.rise === null ) {
-          // mount 後
-          // button が表示されているなら rise 監視を始める
-          this.rise = new Rise( element );
-          this.rise.on( Rise.RISE, this.onRise );
-          this.rise.start();
-        }
-
       },
       componentWillUnmount: function() {
         // unmount 時に rise 破棄を行う
@@ -270,12 +247,6 @@ export class ViewArchiveMasonryInfinite extends View {
       // button 関連 custom method
       // rise 関連 event を破棄する
       destroy: function() {
-        // rise 監視を破棄する
-        if ( this.rise !== null ) {
-          this.rise.stop();
-          this.rise.off( Rise.RISE, this.onRise );
-          this.rise = null;
-        }
       },
       // 緊急用, button click を残す
       handleClick: function( event:Event ) {
@@ -296,7 +267,7 @@ export class ViewArchiveMasonryInfinite extends View {
           this.updateLoading( false );
         }
 
-        this.setState( { show: show } );
+        this.setState( { show: show, loading: '' } );
 
       },
       // loading 表示 on / off
@@ -304,17 +275,11 @@ export class ViewArchiveMasonryInfinite extends View {
       updateLoading: function( loading:boolean = false ) {
 
         let loadingClass = '';
-        if ( loading && this.rise !== null ) {
+        if ( loading ) {
 
           // loading 中は監視を止める
           loadingClass = ' loading';
-          this.rise.stop();
           this.props.action.next();
-
-        } else {
-
-          // loading が終わると監視開始
-          this.rise.start();
 
         }
 
@@ -341,7 +306,7 @@ export class ViewArchiveMasonryInfinite extends View {
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
       if ( _this._moreRendered === null ) {
-      // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
+        // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
 
         // チェックをパスし実行する
         _this._moreRendered = ReactDOM.render(
@@ -560,8 +525,7 @@ export class ViewArchiveMasonryInfinite extends View {
         thumbnail: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         masonry: React.PropTypes.bool.isRequired,
-        action: React.PropTypes.object.isRequired,
-        recommend: React.PropTypes.bool.isRequired
+        action: React.PropTypes.object.isRequired
       },
       getInitialState: function() {
         return {
@@ -573,18 +537,12 @@ export class ViewArchiveMasonryInfinite extends View {
       render: function() {
         let mediaType = this.props.mediaType;
 
-        let recommend = '';
-        if ( this.props.recommend ) {
-          recommend = <i className="post-label_recommend">おすすめ記事</i>;
-        }
-
         // media type で thumbnail 切替
         if ( mediaType === MediaType.IMAGE ) {
           // type: image
           return (
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img src={this.props.thumbnail} alt={this.props.title}/>
-              {recommend}
             </figure>
           );
         } else if ( mediaType === MediaType.VIDEO ) {
@@ -593,7 +551,6 @@ export class ViewArchiveMasonryInfinite extends View {
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
               <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
-              {recommend}
             </figure>
           );
         } else {
@@ -633,7 +590,7 @@ export class ViewArchiveMasonryInfinite extends View {
         // console.log( '****************************************** render' );
         // dom出力する
         return (
-          <div ref="boardRout" className="board-large-column">
+          <div ref="boardRout" className="board-large-column board-stack">
             {
               // loop start
               this.state.list.map( function( dae, i ) {
@@ -657,6 +614,11 @@ export class ViewArchiveMasonryInfinite extends View {
                   return !label ? '' : <span className="category-label">{label}</span>;
                 };
 
+                let recommend = '';
+                if ( !!dae.isRecommend && _this.home ) {
+                  recommend = <i className="post-label_recommend">おすすめ記事</i>;
+                }
+
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
                   <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
@@ -665,11 +627,11 @@ export class ViewArchiveMasonryInfinite extends View {
                         mediaType={dae.mediaType}
                         thumbnail={thumbnail}
                         title={dae.title}
-                        recommend={!!dae.isRecommend && _this.home}
                       />
+                      <h2 className='post-heading'>{dae.title}</h2>
                       <div className="post-data">
+                        {recommend}
                         <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
-                        <h3 className='post-heading'>{dae.title}</h3>
                         <p className="post-date">{dae.displayDate}</p>
                         <div className="post-excerpt-text">{dae.description}</div>
                       </div>
@@ -691,31 +653,6 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // state 変更し dom が更新された後に呼び出される delegate
       componentDidUpdate: function() {
-        console.log( '+++++++++ componentDidUpdate' );
-
-        // isotope 対象 children
-        let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
-        let childNodes = boardRout.childNodes;
-        let elements = [];
-        // 追加された Element を取得するための start / end point
-        // start は request offset
-        let i = this.state.offset;
-        // end は request offset へ request length を加算したものと
-        // children length の小さい方
-        let limit = Math.min( i + this.state.length, childNodes.length );
-        console.log( 'start - end ', i + '-' + limit );
-
-        // start / end から 対象 children を選別
-        for ( ; i < limit; i++ ) {
-          elements.push( childNodes[ i ] );
-        }
-
-        this.elements = elements;
-
-        let img = imagesLoaded( elements );
-        // 画像読み込む完了 event へ bind します
-        img.on( 'always', this.appendImages );
-        this.img = img;
 
       },
       // dom が表示された後に1度だけ呼び出される delegate
@@ -726,74 +663,31 @@ export class ViewArchiveMasonryInfinite extends View {
         // hasNext を元に More View button の表示非表示を決める
         moreButton( this.props.action.hasNext() );
 
-        // masonry flag が true の時に shouldMasonry を実行します
-        if ( this.props.masonry ) {
-
-          this.shouldMasonry();
-
-        }
-
       },
       // dom が削除される前に呼び出される delegate
       componentWillUnmount: function() {
-        // unmount 時に isotope を破棄します
-        this.isotope.destroy();
       },
       // -----------------------------------------------------
       // 以降 custom
       // isotope 前準備
       shouldMasonry: function() {
 
-        console.log( '************ shouldMasonry ************' );
-        // isotope 前準備を実行します
-        let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
-        let childNodes = boardRout.childNodes;
-
-        // imagesLoaded を使用し画像ロード完了後に isotope を実行します
-        let img = imagesLoaded( childNodes );
-        // img {imagesLoaded} always event handler unbind するためにインスタンスを保存します
-        this.img = img;
-        // 画像読み込む完了 event へ bind します
-        img.on( 'always', this.onImages );
-
       },
       // 画像読み込む完了 event handler, isotope を実行
       onImages: function() {
-
-        // event から event handler を unbind します
-        this.img.off( 'always', this.onImages );
-
-        // isotope を行います
-        let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
-        this.isotope = new Isotope( boardRout, {
-          itemSelector: '.board-item',
-          masonry: {
-            gutter: 30
-          }
-        } );
 
       },
       updateList: function( list, offset, length ) {
         // state を変更し appendChild + isotope を行う
         this.setState( { list: list, offset: offset, length: length } );
+        moreButton( this.props.action.hasNext() );
+
       },
       // didUpdate から呼び出される
       appendImages: function() {
 
-        console.log( '++++++++++++++++++++ appendImages' );
-
-        // event から event handler を unbind します
-        this.img.off( 'always', this.appendImages );
-
-        // 追加とレイアウト
-        this.isotope.appended( this.elements );
-        // reload
-        // http://isotope.metafizzy.co/methods.html#reloaditems
-        this.isotope.reloadItems();
-        // isotope 再度レイアウト
-        this.isotope.layout();
-
         // hasNext を元に More View button の表示非表示を決める
+        this.setState( { loading: '' } );
         moreButton( this.props.action.hasNext() );
 
       }
@@ -831,5 +725,5 @@ export class ViewArchiveMasonryInfinite extends View {
     }
 
   }// render
+}
 
-}// class
