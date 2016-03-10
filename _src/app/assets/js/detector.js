@@ -48,11 +48,11 @@
       Detector.normalize( dataSet, 'android' );
 
       if ( Browser.Mobile.phone() ) {
-        Detector.sp();
+        Detector.sp( dataSet );
       } else if ( Browser.Mobile.tablet() )  {
-        Detector.tablet()
+        Detector.tablet( dataSet );
       } else {
-        Detector.pc()
+        Detector.pc( dataSet );
       }
 
     };
@@ -90,7 +90,7 @@
     Detector.sp = function( dataSet ) {
 
       if ( Browser.iOS.is() ) {
-        Detector.ios( dataset );
+        Detector.ios( dataSet );
       } else if ( Browser.Android.is() ) {
         Detector.android( dataSet );
       } else {
@@ -106,7 +106,7 @@
     Detector.tablet = function( dataSet ) {
 
       if ( Browser.iOS.is() ) {
-        Detector.ios( dataset );
+        Detector.ios( dataSet );
       } else if ( Browser.Android.is() ) {
         Detector.android( dataSet );
       } else {

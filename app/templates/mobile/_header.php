@@ -60,7 +60,7 @@ if (
         <div class="user">
           <div class="preference">
             <a class="preference-opener" href="#">
-              <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
+              <span class="preference-avatar"><img src="/assets/images/dummy/avatar-40x40.jpg" alt=""></span>
             </a>
             <span class="preference-num">88</span>
           </div><!-- /.preference -->

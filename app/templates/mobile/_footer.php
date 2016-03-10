@@ -40,7 +40,7 @@ if (
       </div>
     </div><!-- /.foot-pr -->
 
-    <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+    <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
     <nav class="fnav">
       <ul>

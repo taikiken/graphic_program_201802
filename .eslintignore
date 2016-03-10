@@ -15,3 +15,6 @@
 # raw JS
 ./_src/app/assets/js/*.js
 ./_src/app/assets/sp/js/*.js
+
+# synapse
+./_src/app/_synapse/**/*.js
