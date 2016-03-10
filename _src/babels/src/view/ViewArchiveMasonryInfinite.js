@@ -375,7 +375,7 @@ export class ViewArchiveMasonryInfinite extends View {
           return null;
         } else {
 
-          return <span className="commented-user-andmore">{this.state.total}</span>;
+          return <span className="commented-user-andmore">+{this.state.total}</span>;
         }
 
       }
@@ -399,7 +399,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         if ( !this.props.hasSecond ) {
           // 描画要素がない
-          return null;
+          return <div className="commented-user"></div>;
         }
 
         let seconds = this.state.seconds;

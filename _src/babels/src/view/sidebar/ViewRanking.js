@@ -39,16 +39,18 @@ export class ViewRanking extends View {
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    * @param {string} [slug=all] category slug です
+   * @param {Number|null} [length=null] 読み込む数
    */
-  constructor( element:Element, option:Object = {}, slug:string = 'all' ) {
+  constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = null ) {
 
     option = Safety.object( option );
     slug = Safety.string( slug, 'all' );
 
     super( element, option );
-    this._action = Widget.ranking( slug, this.done.bind( this ), this.fail.bind( this ) );
+    this._action = Widget.ranking( slug, this.done.bind( this ), this.fail.bind( this ), length );
     this._slug = slug;
-
+    // response.request object を保持する
+    this._request = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -97,6 +99,7 @@ export class ViewRanking extends View {
 
     } else {
 
+      this._request = result.request;
       this.render( articles );
 
     }

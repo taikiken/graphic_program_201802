@@ -50,14 +50,16 @@ export class Widget {
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {Number} [length=Length.ranking] 読み込む length
    * @return {Ranking} Ranking instance を返します
    */
-  static ranking( slug:string = 'all', resolve:Function = null, reject:Function = null ):Ranking {
+  static ranking( slug:string = 'all', resolve:Function = null, reject:Function = null, length:Number = Length.ranking ):Ranking {
 
     slug = Safety.string( slug, 'all' );
+    length = Safety.integer( length, Length.ranking );
 
     let rankings = new Ranking( slug, resolve, reject );
-    rankings.length = Length.ranking;
+    rankings.length = length;
     return rankings;
 
   }
@@ -67,14 +69,16 @@ export class Widget {
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {Number} [length=Length.ranking] 読み込む length
    * @return {Videos} Videos instance を返します
    */
-  static video( slug:string = 'all', resolve:Function = null, reject:Function = null ):Videos {
+  static video( slug:string = 'all', resolve:Function = null, reject:Function = null, length:Number = Length.video ):Videos {
 
     slug = Safety.string( slug, 'all' );
+    length = Safety.integer( length, Length.video );
 
     let videos = new Videos( slug, resolve, reject );
-    videos.length = Length.video;
+    videos.length = length;
     return videos;
 
   }

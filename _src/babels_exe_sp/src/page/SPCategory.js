@@ -12,7 +12,6 @@
 'use strict';
 
 import {SPHeader} from './SPHeader';
-import {SPSidebar} from './SPSidebar';
 import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
@@ -46,20 +45,13 @@ export class SPCategory {
     // header
     SPHeader.start();
 
-    let element = Dom.board();
-    let elementMore = Dom.boardMore();
+    let element = Dom.category();
 
-    if ( element !== null && elementMore !== null ) {
+    if ( element !== null ) {
 
       // list
-      let archive = new UT.view.ViewCategory( slug, element, elementMore );
+      let archive = new UT.sp.view.category.SPViewCategoryRoot( slug, element );
       archive.start();
-
-      // sidebar
-      SPSidebar.start( slug );
-
-      // title
-      // console.log( 'type', slug, type );
 
     }
 

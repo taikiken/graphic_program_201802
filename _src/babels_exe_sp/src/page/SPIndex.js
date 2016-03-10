@@ -12,7 +12,6 @@
 'use strict';
 
 import {SPHeader} from './SPHeader';
-import {SPSidebar} from './SPSidebar';
 import {Dom} from '../dom/Dom';
 
 let _symbol = Symbol();
@@ -44,17 +43,6 @@ export class SPIndex {
     // header
     SPHeader.start();
 
-    /*
-    sp pickup なし
-    // ---------------------------------------------------------
-    // pickup
-    let pickupElement = Dom.pickup();
-    if ( pickupElement !== null ) {
-      let pickup = new UT.view.home.ViewPickup( pickupElement );
-      pickup.start();
-    }
-    */
-
     // ---------------------------------------------------------
     // headline
     let headlineElement = Dom.headline();
@@ -71,9 +59,6 @@ export class SPIndex {
       let archive = new UT.sp.view.home.SPViewNews( boardElement, moreElement );
       archive.start();
     }
-
-    // sidebar, slug なし(=all)
-    SPSidebar.start();
 
   }
 }

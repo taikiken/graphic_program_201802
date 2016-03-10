@@ -154,8 +154,13 @@ import {Receiver} from './ui/Receiver';
 // sp
 
 // sp/view
+
+// home
 import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
 import {SPViewNews} from './sp/view/home/SPViewNews';
+
+// category
+import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
 
 /**
  * ToDo: 対象外OS alert
@@ -310,6 +315,9 @@ var UT = {
       home: {
         SPViewHeadLine: SPViewHeadLine,
         SPViewNews: SPViewNews
+      },
+      category: {
+        SPViewCategoryRoot: SPViewCategoryRoot
       }
     }
   }

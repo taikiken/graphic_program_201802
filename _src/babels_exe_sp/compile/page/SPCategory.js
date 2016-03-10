@@ -30,8 +30,6 @@ var _symbol3 = _interopRequireDefault(_symbol2);
 
 var _SPHeader = require('./SPHeader');
 
-var _SPSidebar = require('./SPSidebar');
-
 var _Dom = require('../dom/Dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -74,20 +72,13 @@ var SPCategory = exports.SPCategory = function () {
       // header
       _SPHeader.SPHeader.start();
 
-      var element = _Dom.Dom.board();
-      var elementMore = _Dom.Dom.boardMore();
+      var element = _Dom.Dom.category();
 
-      if (element !== null && elementMore !== null) {
+      if (element !== null) {
 
         // list
-        var archive = new UT.view.ViewCategory(slug, element, elementMore);
+        var archive = new UT.sp.view.category.SPViewCategoryRoot(slug, element);
         archive.start();
-
-        // sidebar
-        _SPSidebar.SPSidebar.start(slug);
-
-        // title
-        // console.log( 'type', slug, type );
       }
     }
   }]);
