@@ -22,10 +22,10 @@ let ReactDOM = self.ReactDOM;
  */
 export class ViewLogoutModal extends View {
   /**
-   * logout
-   * @param element
-   * @param yesCallback
-   * @param noCallback
+   * logout modal 表示
+   * @param {Element} element 親 Element
+   * @param {Function} yesCallback yes / ok click callback
+   * @param {Function} noCallback no / cancel click callback
    */
   constructor( element:Element, yesCallback:Function = null, noCallback:Function = null ) {
     super( element );

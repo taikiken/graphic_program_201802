@@ -19,7 +19,7 @@ import {View} from '../../../view/View';
 
 // app
 import {Empty} from '../../../app/const/Empty';
-import {User} from '../../../app/User';
+// import {User} from '../../../app/User';
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';
@@ -45,7 +45,7 @@ export class SPViewHeadLine extends ViewHeadline {
     let _this = this;
 
     // headline first big size
-    let HeadlineFirst = React.createClass( {
+    let HeadlineFirstDom = React.createClass( {
       propTypes: {
         dae: React.PropTypes.object.isRequired
       },
@@ -144,7 +144,7 @@ export class SPViewHeadLine extends ViewHeadline {
 
           <div className="headline-root">
 
-            <HeadlineFirst
+            <HeadlineFirstDom
               dae={first}
             />
 
