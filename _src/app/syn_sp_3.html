@@ -20,112 +20,63 @@
   <script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js"></script>
   <!--<script src="/assets/js/libs/vendor.min.js"></script>-->
   <script src="/assets/js/libs/vendor.react.js"></script>
-  <style>
-    #side-menu-container {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 0;
-      height: 0;
-      overflow: hidden;
-    }
-    #side-menu-container.open {
-      width: 100%;
-      height: 100%;
-    }
-    #side-menu-bg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-    #side-menu {
-      position: absolute;
-      left: -100%;
-      z-index: 999;
-      overflow: hidden;
-      width: 0;
-      max-height: 100%;
-      min-height: 100%;
-      background-color: #fff;
-
-      -webkit-transition: left 0.5s;
-      -moz-transition: left 0.5s;
-      -ms-transition: left 0.5s;
-      -o-transition: left 0.5s;
-      transition: left 0.5s;
-    }
-    #side-menu-container.open #side-menu {
-      width: 85%;
-      left: 0;
-    }
-    /* Syn.のロゴを表示 */
-    div.synapse_logo {
-      height: 141px;
-      width: 100%;
-      background-size: auto 50px;
-      background-position: center center;
-      background-repeat: no-repeat;
-      /* URLを変更してデザインにあったSyn.のロゴに変更できます */
-      background-image: url("https://synapse-bitcellar-assets.s3.amazonaws.com/logos/original.png");
-    }
-  </style>
-</head>
+ </head>
 <body>
 <div class="whole">
-  <header class="head-sec">
-    <div class="head-sec-inner">
-      <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
-      <div id="menu-opener" class="menu-opener" style="background-color: #f00; width: 100px; height: 100px;">
-        <a href="#" id="side-menu-toggle"><span></span><span></span><span></span></a>
-      </div>
+  <div class="fixed">
+    <header class="head-sec">
+      <div class="head-sec-inner">
+        <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
-      <aside class="f-right clearfix">
-        <div class="head-search">
-          <a class="head-search-btn" href="#">検索する</a>
-        </div><!-- /.head-search -->
+        <div id="menu-opener" class="menu-opener">
+          <a id="side-menu-toggle" class="has-notification" href="#"><span></span><span></span><span></span></a>
+        </div>
 
-        <div class="user">
-          <div class="preference">
-            <a class="preference-opener" href="#">
-              <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
-            </a>
-            <span class="preference-num">88</span>
-          </div><!-- /.preference -->
-        </div><!-- /.user -->
+        <aside class="f-right clearfix">
+          <div class="head-search">
+            <a class="head-search-btn" href="#">検索する</a>
+          </div><!-- /.head-search -->
 
-      </aside>
-    </div><!-- /.head-sec-inner -->
-  </header><!-- /.head-sec -->
+          <div class="user">
+            <div class="preference">
+              <a class="preference-opener" href="#">
+                <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
+              </a>
+              <span class="preference-num">88</span>
+            </div><!-- /.preference -->
+          </div><!-- /.user -->
 
-  <nav class="gnav-sec home">
-    <ul>
-      <li class="gnav-home"><a href="hoge">一面</a></li>
-      <li class="gnav-crazy"><a href="hoge">CRAZY</a></li>
-      <li class="gnav-all"><a href="hoge">すべて</a></li>
-      <li class="gnav-baseball"><a href="hoge">野球</a></li>
-      <li class="gnav-soccer"><a href="hoge">サッカー</a></li>
-      <li class="gnav-basketball"><a href="hoge">バスケットボール</a></li>
-      <li class="gnav-golf"><a href="hoge">ゴルフ</a></li>
-      <li class="gnav-tennis"><a href="hoge">テニス</a></li>
-      <li class="gnav-battle"><a href="hoge">相撲・格闘技</a></li>
-      <li class="gnav-volleyball"><a href="hoge">バレーボール</a></li>
-      <li class="gnav-rugby"><a href="hoge">ラグビー</a></li>
-      <li class="gnav-americanfootball"><a href="hoge">アメフト</a></li>
-      <li class="gnav-athletics"><a href="hoge">陸上競技</a></li>
-      <li class="gnav-swimming"><a href="hoge">水泳</a></li>
-      <li class="gnav-pingpong"><a href="hoge">卓球</a></li>
-      <li class="gnav-motorsports"><a href="hoge">モータースポーツ</a></li>
-      <li class="gnav-extremesports"><a href="hoge">エクストリームスポーツ</a></li>
-      <li class="gnav-wintersports"><a href="hoge">ウィンタースポーツ </a></li>
-      <li class="gnav-disabledsports"><a href="hoge">障害者スポーツ</a></li>
-      <li class="gnav-etc"><a href="hoge">その他競技</a></li>
-      <li class="gnav-business"><a href="hoge">スポーツビジネス</a></li>
-    </ul>
-  </nav><!-- /.gnav-sec -->
+        </aside>
+      </div><!-- /.head-sec-inner -->
+    </header><!-- /.head-sec -->
+
+    <nav class="gnav-sec home">
+      <ul>
+        <li class="gnav-home"><a href="hoge">一面</a></li>
+        <li class="gnav-crazy"><a href="hoge">CRAZY</a></li>
+        <li class="gnav-all"><a href="hoge">すべて</a></li>
+        <li class="gnav-baseball"><a href="hoge">野球</a></li>
+        <li class="gnav-soccer"><a href="hoge">サッカー</a></li>
+        <li class="gnav-basketball"><a href="hoge">バスケットボール</a></li>
+        <li class="gnav-golf"><a href="hoge">ゴルフ</a></li>
+        <li class="gnav-tennis"><a href="hoge">テニス</a></li>
+        <li class="gnav-battle"><a href="hoge">相撲・格闘技</a></li>
+        <li class="gnav-volleyball"><a href="hoge">バレーボール</a></li>
+        <li class="gnav-rugby"><a href="hoge">ラグビー</a></li>
+        <li class="gnav-americanfootball"><a href="hoge">アメフト</a></li>
+        <li class="gnav-athletics"><a href="hoge">陸上競技</a></li>
+        <li class="gnav-swimming"><a href="hoge">水泳</a></li>
+        <li class="gnav-pingpong"><a href="hoge">卓球</a></li>
+        <li class="gnav-motorsports"><a href="hoge">モータースポーツ</a></li>
+        <li class="gnav-extremesports"><a href="hoge">エクストリームスポーツ</a></li>
+        <li class="gnav-wintersports"><a href="hoge">ウィンタースポーツ </a></li>
+        <li class="gnav-disabledsports"><a href="hoge">障害者スポーツ</a></li>
+        <li class="gnav-etc"><a href="hoge">その他競技</a></li>
+        <li class="gnav-business"><a href="hoge">スポーツビジネス</a></li>
+      </ul>
+    </nav><!-- /.gnav-sec -->
+  </div><!-- /.fixed -->
 
   <div class="body-sec">
     <div class="body-sec-inner">
@@ -191,16 +142,18 @@
       <ul id="side-menu-list">
 
         <!-- Service Specific Menu -->
-        <li data-role="list-divider">メニュー</li>
-        <li><a href="#">taro さん</a></li>
-        <li><a href="#">フォローフィード</a></li>
-        <li><a href="#">検索</a></li>
+        <li class="ad"><img src="/assets/sp/images/dummy/side-bnr.jpg" alt=""></li>
+        <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>運動通信トップへ</a></li>
+        <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
+        <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
+        <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
+        <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>運動通信とは</a></li>
 
         <li>
           <!-- Syn. Service List -->
           <div id='synapse-service-list-outer-box' style='display: none'>
             <ul id='synapse-service-list'>
-              <li data-role="list-divider">おすすめサービス</li>
+              <li id="synapse-service-list-title">おすすめサービス</li>
             </ul>
           </div>
 
