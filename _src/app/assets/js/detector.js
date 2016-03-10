@@ -50,9 +50,9 @@
       if ( Browser.Mobile.phone() ) {
         Detector.sp();
       } else if ( Browser.Mobile.tablet() )  {
-        Detector.tablet()
+        Detector.tablet();
       } else {
-        Detector.pc()
+        Detector.pc();
       }
 
     };
@@ -90,7 +90,7 @@
     Detector.sp = function( dataSet ) {
 
       if ( Browser.iOS.is() ) {
-        Detector.ios( dataset );
+        Detector.ios( dataSet );
       } else if ( Browser.Android.is() ) {
         Detector.android( dataSet );
       } else {
@@ -106,7 +106,7 @@
     Detector.tablet = function( dataSet ) {
 
       if ( Browser.iOS.is() ) {
-        Detector.ios( dataset );
+        Detector.ios( dataSet );
       } else if ( Browser.Android.is() ) {
         Detector.android( dataSet );
       } else {
