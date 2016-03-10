@@ -48,11 +48,11 @@
       Detector.normalize( dataSet, 'android' );
 
       if ( Browser.Mobile.phone() ) {
-        Detector.sp();
+        Detector.sp( dataSet );
       } else if ( Browser.Mobile.tablet() )  {
-        Detector.tablet();
+        Detector.tablet( dataSet );
       } else {
-        Detector.pc();
+        Detector.pc( dataSet );
       }
 
     };
