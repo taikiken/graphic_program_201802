@@ -17,7 +17,17 @@ import {Category} from '../../../action/archive/Category';
 import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 import {User} from '../../../app/User';
 
+/**
+ * SP category
+ */
 export class SPViewCategory extends SPViewArchive {
+  /**
+   * SP category 一覧
+   * @param {string} slug category slug
+   * @param {Element} element root element, Ajax result を配置する
+   * @param {Element} moreElement more button root element, 'View More' を配置する
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( slug:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option );
     // Category Action を使う

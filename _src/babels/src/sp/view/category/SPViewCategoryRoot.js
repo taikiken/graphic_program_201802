@@ -16,6 +16,14 @@ import {View} from '../../../view/View';
 
 // view
 import {SPViewCategory} from './SPViewCategory';
+import {SPViewRanking} from '../sidebar/SPViewRanking';
+import {SPViewVideos} from '../sidebar/SPViewVideos';
+
+// node
+import {SPTabNode} from '../../node/SPTabNode';
+
+// data
+import {Safety} from '../../../data/Safety';
 
 // React
 let React = self.React;
@@ -28,13 +36,13 @@ export class SPViewCategoryRoot extends View {
   /**
    * archive 親コンテナ,
    * 新着, 人気, 動画 3リクエストを行う
+   * @param {string} slug category slug
    * @param {Element} element root element archive 親
    * @param {Object} [option={}] optional event handler
-   * @param {string} [slug=all] category slug
    */
-  constructor( element:Element, option:Object = {}, slug:string = 'all' ) {
+  constructor( slug:string, element:Element, option:Object = {} ) {
     super( element, option );
-    this._slug = slug;
+    this._slug = Safety.string( slug, 'all' );
   }
   /**
    * rendering 開始
@@ -51,22 +59,35 @@ export class SPViewCategoryRoot extends View {
       propTypes: {
         slug: React.PropTypes.string.isRequired
       },
+      getInitialState: function() {
+        return {
+          current: 'latest'
+        };
+      },
       render: function() {
 
         return (
-          <div className="archive-container">
-            <div className="archive-latest" ref="latest">
+          <div className={`archive-container ${this.state.current}`}>
+            <div className="archive-latest board-large" ref="latest">
               <div className="archive-latest-container" ref="latestElement"></div>
               <div className="archive-latest-container-more" ref="latestMoreElement"></div>
             </div>
-            <div className="archive-ranking" ref="ranking"></div>
-            <div className="archive-videos" ref="videos"></div>
+            <div className="archive-ranking board-large" ref="ranking">
+              <div className="archive-latest-container" ref="rankingElement"></div>
+              <div className="archive-latest-container-more" ref="rankingMoreElement"></div>
+            </div>
+            <div className="archive-videos board-large" ref="videos">
+              <div className="archive-latest-container" ref="videosElement"></div>
+              <div className="archive-latest-container-more" ref="videosMoreElement"></div>
+            </div>
             <div className="archive-tab" ref="tab"></div>
           </div>
         );
 
       },
       componentDidMount: function() {
+        this.tabNode = null;
+
         // after mount, request API
         this.latest();
         this.ranking();
@@ -81,25 +102,40 @@ export class SPViewCategoryRoot extends View {
         let element = ReactDOM.findDOMNode(this.refs.latestElement);
         let moreElement = ReactDOM.findDOMNode(this.refs.latestMoreElement);
         let callback = {};
-        callback[ View.DID_MOUNT ] = this.latestDidMount;
+        // callback[ View.DID_MOUNT ] = this.latestDidMount;
         let category = new SPViewCategory( this.props.slug, element, moreElement, callback );
         category.start();
       },
       // 人気
       ranking: function():void {
-
+        let element = ReactDOM.findDOMNode(this.refs.rankingElement);
+        let moreElement = ReactDOM.findDOMNode(this.refs.rankingMoreElement);
+        let ranking = new SPViewRanking( element, moreElement, null, this.props.slug );
+        ranking.start();
       },
       // 動画
       videos: function():void {
-
+        let element = ReactDOM.findDOMNode(this.refs.videosElement);
+        let moreElement = ReactDOM.findDOMNode(this.refs.videosMoreElement);
+        let video = new SPViewVideos( element, moreElement, null, this.props.slug );
+        video.start();
       },
       // 切替 tab
       tab: function():void {
-
+        let element = ReactDOM.findDOMNode(this.refs.tab);
+        this.tabNode = ReactDOM.render(
+          <SPTabNode
+            callback={this.tabClick}
+          />,
+          element
+        );
       },
       // 新着記事 component did mount event handler
       latestDidMount: function():void {
         // latest did mount
+      },
+      tabClick( id:string ):void {
+        this.setState( { current: id } );
       }
     } );
 

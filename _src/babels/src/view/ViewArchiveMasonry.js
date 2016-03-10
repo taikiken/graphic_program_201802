@@ -229,7 +229,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           return null;
         } else {
 
-          return <span className="commented-user-andmore">{this.state.total}</span>;
+          return <span className="commented-user-andmore">+{this.state.total}</span>;
         }
 
       }

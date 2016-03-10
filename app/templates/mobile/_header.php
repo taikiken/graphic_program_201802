@@ -44,6 +44,7 @@ if (
   $template_name == 'logout'
 ) :
 ?>
+<div class="fixed">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
@@ -71,19 +72,19 @@ if (
 
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
-      <li class="gnav-home"><a href="/">一面</a></li>
+      <li id="home" class="gnav-home"><a href="/">一面</a></li>
       <?php if (0) : ?>
         <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
       <?php endif;// crazy remove ?>
-      <li class="gnav-all"><a href="/category/all/">すべて</a></li>
+      <li id="all" class="gnav-all"><a href="/category/all/">すべて</a></li>
       <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
-        <li class="gnav-<?php echo $category[ 'slug' ]; ?>">
+        <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
           <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
         </li>
       <?php }//foreach ?>
     </ul>
   </nav><!-- /.gnav-sec -->
-
+</div>
 <?php
 endif;
 // header 表示条件 end

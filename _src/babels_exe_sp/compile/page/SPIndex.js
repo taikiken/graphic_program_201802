@@ -30,8 +30,6 @@ var _symbol3 = _interopRequireDefault(_symbol2);
 
 var _SPHeader = require('./SPHeader');
 
-var _SPSidebar = require('./SPSidebar');
-
 var _Dom = require('../dom/Dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -71,17 +69,6 @@ var SPIndex = exports.SPIndex = function () {
       // header
       _SPHeader.SPHeader.start();
 
-      /*
-      sp pickup なし
-      // ---------------------------------------------------------
-      // pickup
-      let pickupElement = Dom.pickup();
-      if ( pickupElement !== null ) {
-        let pickup = new UT.view.home.ViewPickup( pickupElement );
-        pickup.start();
-      }
-      */
-
       // ---------------------------------------------------------
       // headline
       var headlineElement = _Dom.Dom.headline();
@@ -98,9 +85,6 @@ var SPIndex = exports.SPIndex = function () {
         var archive = new UT.sp.view.home.SPViewNews(boardElement, moreElement);
         archive.start();
       }
-
-      // sidebar, slug なし(=all)
-      _SPSidebar.SPSidebar.start();
     }
   }]);
   return SPIndex;

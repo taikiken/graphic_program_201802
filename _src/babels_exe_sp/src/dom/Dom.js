@@ -104,6 +104,13 @@ export class Dom {
   }
   // archive / category
   /**
+   * category container
+   * @return {Element} category-container を返します
+   */
+  static category():Element {
+    return Dom.get( 'category-container' );
+  }
+  /**
    * archive container
    * @return {Element} board-container を返します
    */

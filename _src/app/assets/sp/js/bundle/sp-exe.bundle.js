@@ -106,9 +106,9 @@
 
 	var _SPIndex = __webpack_require__(40);
 
-	var _SPCategory = __webpack_require__(43);
+	var _SPCategory = __webpack_require__(42);
 
-	var _SPSingle = __webpack_require__(44);
+	var _SPSingle = __webpack_require__(43);
 
 	var _SPSearch = __webpack_require__(45);
 
@@ -116,7 +116,7 @@
 
 	var _SPUserProfile = __webpack_require__(47);
 
-	var _SPSidebar = __webpack_require__(42);
+	var _SPSidebar = __webpack_require__(44);
 
 	var _SPHeader = __webpack_require__(41);
 
@@ -1466,6 +1466,16 @@
 	    }
 	    // archive / category
 	    /**
+	     * category container
+	     * @return {Element} category-container を返します
+	     */
+
+	  }, {
+	    key: 'category',
+	    value: function category() {
+	      return Dom.get('category-container');
+	    }
+	    /**
 	     * archive container
 	     * @return {Element} board-container を返します
 	     */
@@ -1777,8 +1787,6 @@
 
 	var _SPHeader = __webpack_require__(41);
 
-	var _SPSidebar = __webpack_require__(42);
-
 	var _Dom = __webpack_require__(38);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1818,17 +1826,6 @@
 	      // header
 	      _SPHeader.SPHeader.start();
 
-	      /*
-	      sp pickup なし
-	      // ---------------------------------------------------------
-	      // pickup
-	      let pickupElement = Dom.pickup();
-	      if ( pickupElement !== null ) {
-	        let pickup = new UT.view.home.ViewPickup( pickupElement );
-	        pickup.start();
-	      }
-	      */
-
 	      // ---------------------------------------------------------
 	      // headline
 	      var headlineElement = _Dom.Dom.headline();
@@ -1845,9 +1842,6 @@
 	        var archive = new UT.sp.view.home.SPViewNews(boardElement, moreElement);
 	        archive.start();
 	      }
-
-	      // sidebar, slug なし(=all)
-	      _SPSidebar.SPSidebar.start();
 	    }
 	  }]);
 	  return SPIndex;
@@ -1946,96 +1940,6 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016/02/15 - 21:44
-	 *
-	 * Distributed under the terms of the MIT license.
-	 * http://www.opensource.org/licenses/mit-license.html
-	 *
-	 * This notice shall be included in all copies or substantial portions of the Software.
-	 *
-	 */
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.SPSidebar = undefined;
-
-	var _classCallCheck2 = __webpack_require__(2);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(3);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _symbol2 = __webpack_require__(7);
-
-	var _symbol3 = _interopRequireDefault(_symbol2);
-
-	var _Dom = __webpack_require__(38);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _symbol = (0, _symbol3.default)();
-
-	// UT
-	var UT = self.UT;
-
-	/**
-	 * <h3>Sidebar ranking / video 表示</h3>
-	 * 全て static です
-	 */
-
-	var SPSidebar = exports.SPSidebar = function () {
-	  /**
-	   * static class です, instance を作成しません
-	   * @param {Symbol} target Singleton を実現するための private symbol
-	   */
-
-	  function SPSidebar(target) {
-	    (0, _classCallCheck3.default)(this, SPSidebar);
-
-	    if (_symbol !== target) {
-
-	      throw new Error('SPSidebar is static Class. not use new SPSidebar().');
-	    }
-	  }
-	  /**
-	   * sidebar ranking / video rendering 開始
-	   * @param {string} [slug=all] category slug
-	   */
-
-	  (0, _createClass3.default)(SPSidebar, null, [{
-	    key: 'start',
-	    value: function start() {
-	      var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
-
-	      // ranking
-	      var rankingElement = _Dom.Dom.ranking();
-	      if (rankingElement !== null) {
-	        var ranking = new UT.view.sidebar.ViewRanking(rankingElement, null, slug);
-	        ranking.start();
-	      }
-
-	      // video
-	      var videoElement = _Dom.Dom.video();
-	      if (videoElement !== null) {
-	        var videos = new UT.view.sidebar.ViewVideos(videoElement, null, slug);
-	        videos.start();
-	      }
-	    }
-	  }]);
-	  return SPSidebar;
-	}();
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2011-2016 inazumatv.com, inc.
-	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/02/15 - 21:49
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -2064,8 +1968,6 @@
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
 	var _SPHeader = __webpack_require__(41);
-
-	var _SPSidebar = __webpack_require__(42);
 
 	var _Dom = __webpack_require__(38);
 
@@ -2109,20 +2011,13 @@
 	      // header
 	      _SPHeader.SPHeader.start();
 
-	      var element = _Dom.Dom.board();
-	      var elementMore = _Dom.Dom.boardMore();
+	      var element = _Dom.Dom.category();
 
-	      if (element !== null && elementMore !== null) {
+	      if (element !== null) {
 
 	        // list
-	        var archive = new UT.view.ViewCategory(slug, element, elementMore);
+	        var archive = new UT.sp.view.category.SPViewCategoryRoot(slug, element);
 	        archive.start();
-
-	        // sidebar
-	        _SPSidebar.SPSidebar.start(slug);
-
-	        // title
-	        // console.log( 'type', slug, type );
 	      }
 	    }
 	  }]);
@@ -2130,7 +2025,7 @@
 	}();
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2165,7 +2060,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SPSidebar = __webpack_require__(42);
+	var _SPSidebar = __webpack_require__(44);
 
 	var _Dom = __webpack_require__(38);
 
@@ -2367,6 +2262,96 @@
 	}();
 
 /***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/02/15 - 21:44
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SPSidebar = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(7);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _Dom = __webpack_require__(38);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	// UT
+	var UT = self.UT;
+
+	/**
+	 * <h3>Sidebar ranking / video 表示</h3>
+	 * 全て static です
+	 */
+
+	var SPSidebar = exports.SPSidebar = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function SPSidebar(target) {
+	    (0, _classCallCheck3.default)(this, SPSidebar);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('SPSidebar is static Class. not use new SPSidebar().');
+	    }
+	  }
+	  /**
+	   * sidebar ranking / video rendering 開始
+	   * @param {string} [slug=all] category slug
+	   */
+
+	  (0, _createClass3.default)(SPSidebar, null, [{
+	    key: 'start',
+	    value: function start() {
+	      var slug = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
+
+	      // ranking
+	      var rankingElement = _Dom.Dom.ranking();
+	      if (rankingElement !== null) {
+	        var ranking = new UT.view.sidebar.ViewRanking(rankingElement, null, slug);
+	        ranking.start();
+	      }
+
+	      // video
+	      var videoElement = _Dom.Dom.video();
+	      if (videoElement !== null) {
+	        var videos = new UT.view.sidebar.ViewVideos(videoElement, null, slug);
+	        videos.start();
+	      }
+	    }
+	  }]);
+	  return SPSidebar;
+	}();
+
+/***/ },
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2402,7 +2387,7 @@
 
 	var _SPHeader = __webpack_require__(41);
 
-	var _SPSidebar = __webpack_require__(42);
+	var _SPSidebar = __webpack_require__(44);
 
 	var _Dom = __webpack_require__(38);
 
@@ -2988,7 +2973,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SPSidebar = __webpack_require__(42);
+	var _SPSidebar = __webpack_require__(44);
 
 	var _Dom = __webpack_require__(38);
 
