@@ -19,7 +19,7 @@ let React = self.React;
 // tween
 
 
-export let MessageFlushrNode = React.createClass( {
+export let MessageFlushNode = React.createClass( {
   propTypes: {
     type: React.PropTypes.string.isRequired,
     callback: React.PropTypes.func

@@ -39,6 +39,7 @@ export let DeactivateNode = React.createClass( {
     if ( this.state.show ) {
       return (
         <div className="modal-dialogue modal-dialogue_delete" ref="modalContainer" style={this.state.css}>
+          <div className="modal-bg" onClick={this.cancelClick}></div>
           <div className={'modal-dialogue-contents ' + this.props.type}>
             <a href="#" className="modal-dialogue-close" onClick={this.cancelClick}>閉じる</a>
             <p className="lead">{Message.DEACTIVATE}</p>
