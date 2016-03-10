@@ -44,6 +44,23 @@
       Detector.normalize( dataSet, 'firefox' );
       Detector.normalize( dataSet, 'ie' );
       Detector.normalize( dataSet, 'edge' );
+      Detector.normalize( dataSet, 'ios' );
+      Detector.normalize( dataSet, 'android' );
+
+      if ( Browser.Mobile.phone() ) {
+        Detector.sp();
+      } else if ( Browser.Mobile.tablet() )  {
+        Detector.tablet()
+      } else {
+        Detector.pc()
+      }
+
+    };
+    /**
+     * PC check 準備
+     * @param {Object} dataSet dataset object
+     */
+    Detector.pc = function( dataSet ) {
 
       if ( Browser.Chrome.is() ) {
         // chrome
@@ -64,6 +81,39 @@
         // unknown browser
         Detector.ignore();
       }
+
+    };
+    /**
+     * mobile phone check 準備
+     * @param {Object} dataSet dataset object
+     */
+    Detector.sp = function( dataSet ) {
+
+      if ( Browser.iOS.is() ) {
+        Detector.ios( dataset );
+      } else if ( Browser.Android.is() ) {
+        Detector.android( dataSet );
+      } else {
+        // unknown browser
+        Detector.ignore();
+      }
+
+    };
+    /**
+     * tablet check 準備
+     * @param {Object} dataSet dataset object
+     */
+    Detector.tablet = function( dataSet ) {
+
+      if ( Browser.iOS.is() ) {
+        Detector.ios( dataset );
+      } else if ( Browser.Android.is() ) {
+        Detector.android( dataSet );
+      } else {
+        // unknown browser
+        Detector.ignore();
+      }
+
     };
     /**
      * dataset に指定キーが存在するか調べ
@@ -78,6 +128,24 @@
         dataSet[ keyName ] = 99999;
       } else {
         dataSet[ keyName ] = parseFloat( dataSet[ keyName ] );
+      }
+    };
+    /**
+     * ios での判定
+     * @param {Object} dataSet dataset object
+     */
+    Detector.ios = function( dataSet ) {
+      if ( Browser.iOS.version() < dataSet.ios ) {
+        Detector.ignore();
+      }
+    };
+    /**
+     * android での判定
+     * @param {Object} dataSet dataset object
+     */
+    Detector.android = function( dataSet ) {
+      if ( Browser.Android.version() < dataSet.ios ) {
+        Detector.ignore();
       }
     };
     /**
