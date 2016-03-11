@@ -162,6 +162,9 @@ import {SPViewNews} from './sp/view/home/SPViewNews';
 // category
 import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
 
+// Syn.
+import {SPViewSyn} from './sp/view/SPViewSyn';
+
 /**
  * ToDo: 対象外OS alert
  * ToDo: global 不要 class を除外する
@@ -312,6 +315,7 @@ var UT = {
 
     },
     view: {
+      SPViewSyn: SPViewSyn,
       home: {
         SPViewHeadLine: SPViewHeadLine,
         SPViewNews: SPViewNews

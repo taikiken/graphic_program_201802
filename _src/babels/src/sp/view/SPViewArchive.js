@@ -11,10 +11,12 @@
  */
 'use strict';
 
+/*
 // app
 import {Empty} from '../../app/const/Empty';
 import {User} from '../../app/User';
 import {MediaType} from '../../app/const/MediaType';
+*/
 
 // view
 import {View} from '../../view/View';
@@ -34,7 +36,7 @@ import {SPArchiveNode} from '../node/SPArchiveNode';
 import {SPMoreViewNode} from '../node/SPMoreViewNode';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**

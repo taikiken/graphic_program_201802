@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
+  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true" data-orientation="true"></script>
+  <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13" data-ios="8.41" data-android="4.2" data-url="/about/browsers/"></script>
   <title><?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?></title>
   <meta name="description" content="説明文">
   <meta name="keywords" content="キーワード, キーワード, キーワード">
@@ -17,16 +18,12 @@
 
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/sp/css/ui.css">
-  <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/bundle/main.bundle.js"></script>
-</head>
-<body>
-<div class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
-<?php
-// header 表示条件 start
-$template_name = $page['template'];
+  <?php
+  // header 表示条件 設定
+  $template_name = $page['template'];
+  $page_has_header = false;
 
-if (
+  if (
   $template_name == 'index' ||
   $template_name == '404' ||
   $template_name == 'category' ||
@@ -42,15 +39,39 @@ if (
   $template_name == 'mypage.activities' ||
   $template_name == 'notifications' ||
   $template_name == 'logout'
-) :
+  ) {
+    $page_has_header = true;
+  }
+  ?>
+<?php
+if ($page_has_header) :
+# ---------------------------------------------------------------------------
+# Syn. require module
 ?>
-<div class="fixed">
+<script src="/assets/sp/js/libs/synapse/synapse.js"></script>
+<script src="/assets/js/libs/jquery2/jquery.min.js"></script>
+<script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js"></script>
+<?php
+# end of Syn. require module
+# ---------------------------------------------------------------------------
+endif;
+?>
+  <script src="/assets/js/libs/vendor.react.js"></script>
+  <script src="/assets/js/bundle/main.bundle.js"></script>
+</head>
+<body>
+<div id="page" class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
+<?php
+// header 表示条件 start
+if ( $page_has_header ) :
+?>
+<div class="header-sticky">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
-      <div class="menu-opener">
-        <a href="#"><span></span><span></span><span></span></a>
+      <div id="menu-opener" class="menu-opener">
+        <a id="side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
       </div>
 
       <aside class="f-right clearfix">

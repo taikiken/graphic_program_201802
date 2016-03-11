@@ -32,6 +32,8 @@ var _SPPageTop = require('./ui/SPPageTop');
 
 var _SPNav = require('./ui/SPNav');
 
+var _SPSyn = require('./ui/SPSyn');
+
 var _SPIndex = require('./page/SPIndex');
 
 var _SPCategory = require('./page/SPCategory');
@@ -164,6 +166,8 @@ var SPPage = exports.SPPage = function () {
       _SPIndex.SPIndex.start();
       // nav
       _SPNav.SPNav.start('home');
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * category page
@@ -184,6 +188,8 @@ var SPPage = exports.SPPage = function () {
       _SPCategory.SPCategory.start(slug, type);
       // nav
       _SPNav.SPNav.start(slug);
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * single, detail page
@@ -201,6 +207,8 @@ var SPPage = exports.SPPage = function () {
       _SPSearchFrom.SPSearchFrom.start();
       // single
       _SPSingle.SPSingle.start(articleId);
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * コメント詳細
@@ -217,6 +225,8 @@ var SPPage = exports.SPPage = function () {
       _SPSearchFrom.SPSearchFrom.start();
 
       _SPComment.SPComment.user('comment', event.article, event.comment);
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * コメント返信 詳細
@@ -233,6 +243,8 @@ var SPPage = exports.SPPage = function () {
       _SPSearchFrom.SPSearchFrom.start();
 
       _SPComment.SPComment.user('reply', event.article, event.comment, event.article);
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * 検索ページ
@@ -248,6 +260,8 @@ var SPPage = exports.SPPage = function () {
       _SPSearchFrom.SPSearchFrom.start();
 
       _SPSearch.SPSearch.start(event.keyword);
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     // ----------------------------------------------------
     // header, footer いらない
@@ -327,6 +341,8 @@ var SPPage = exports.SPPage = function () {
         _SPUserProfile.SPUserProfile.start();
         _SPBookmarks.SPBookmarks.start();
       }
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * マイページ / アクティビティーズ一覧
@@ -348,6 +364,8 @@ var SPPage = exports.SPPage = function () {
         _SPUserProfile.SPUserProfile.start();
         _SPActivities.SPActivities.start();
       }
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * マイページ / お知らせ一覧
@@ -368,6 +386,8 @@ var SPPage = exports.SPPage = function () {
         _SPUserProfile.SPUserProfile.start();
         _SPNotifications.SPNotifications.start();
       }
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     // ------------------------------
     // settings 設定
@@ -390,6 +410,8 @@ var SPPage = exports.SPPage = function () {
         // login only
         _SPSettings.SPSettings.account();
       }
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * 設定 パーソナライズ設定 興味のある競技
@@ -410,6 +432,8 @@ var SPPage = exports.SPPage = function () {
         // login only
         _SPSettings.SPSettings.interest();
       }
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * 設定 ソーシャル連携
@@ -424,6 +448,8 @@ var SPPage = exports.SPPage = function () {
       _SPSearchFrom.SPSearchFrom.start();
       _SPSidebar.SPSidebar.start();
       _SPHeader.SPHeader.start();
+      // syn.
+      _SPSyn.SPSyn.start();
     }
     /**
      * 退会
@@ -444,6 +470,8 @@ var SPPage = exports.SPPage = function () {
         // login only
         _SPSettings.SPSettings.deactivate();
       }
+      // syn.
+      _SPSyn.SPSyn.start();
     }
   }]);
   return SPPage;
