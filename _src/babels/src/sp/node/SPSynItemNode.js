@@ -16,9 +16,15 @@ import {Url} from '../../app/const/Url';
 // React
 let React = self.React;
 
+/**
+ * side menu login / logout 切り替えメニュー
+ * @type {React.component}
+ */
 export let SPSynItemNode = React.createClass( {
   propTypes: {
+    // sign in ずみ真偽値 true sign in
     sign: React.PropTypes.bool.isRequired,
+    // did mount ご通知する callback method
     callback: React.PropTypes.func.isRequired
   },
   render: function() {

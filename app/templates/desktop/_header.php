@@ -53,7 +53,7 @@ if (
       <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 
       <aside class="f-right clearfix">
-        <div id="head-search-container" class="head-search"></div><!-- /.head-search -->
+        <div id="head-search-container"></div><!-- /.head-search -->
         <div id="user-profile-container"></div><!--/header-user-->
       </aside>
     </div><!-- /.head-sec-inner -->

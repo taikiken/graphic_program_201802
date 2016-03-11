@@ -84,3 +84,15 @@
     }
   }
 }
+
+// search
+#head-search-container {
+  float: left;
+  width: 300px;
+
+  .head-search {
+    &.error {
+      border: #e14343 1px solid;
+    }
+  }
+}

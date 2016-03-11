@@ -64,4 +64,18 @@ export class Message {
   static get LOGOUT():string {
     return 'ログアウトしますか？';
   }
+  /**
+   * BOOKMARK_WILL
+   * @return {string} ブックマークする
+   */
+  static get BOOKMARK_WILL():string {
+    return 'ブックマークする';
+  }
+  /**
+   * BOOKMARK_DID
+   * @return {string} ブックマーク解除
+   */
+  static get BOOKMARK_DID():string {
+    return 'ブックマーク解除';
+  }
 }

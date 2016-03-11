@@ -41,15 +41,8 @@ export class SPHeader {
     // header.user
     let element = Dom.profile();
     if ( element !== null ) {
-      let headerUser = new UT.view.header.ViewHeaderUser( element );
+      let headerUser = new UT.sp.view.header.SPViewHeaderUser( element );
       headerUser.start();
-
-      let modalElement = Dom.modal();
-      if ( modalElement !== null ) {
-        let modal = new UT.view.modal.ViewLogoutModal( modalElement );
-        modal.start();
-      }
     }
-
   }
 }

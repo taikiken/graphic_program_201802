@@ -22,6 +22,7 @@ import {ModelBookmark} from '../../model/users/ModelBookmark';
 
 // app
 import {Empty} from '../../app/const/Empty';
+import {Message} from '../../app/const/Message';
 
 // data
 import {Result} from '../../data/Result';
@@ -279,7 +280,7 @@ export class ViewBookmarks extends View {
           return bookmarked ? 'bookmarked enable' : '';
         };
         let bookmarkMessage = ( bookmarked:boolean ):string => {
-          return bookmarked ? 'ブックマーク済' : 'ブックマークする';
+          return bookmarked ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL;
         };
 
         return (

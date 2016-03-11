@@ -18,6 +18,9 @@ import {View} from '../../view/View';
 import {User} from '../../app/User';
 import {Env} from '../../app/Env';
 
+// util
+import {Scroll} from '../../util/Scroll';
+
 // node
 import {SPSynItemNode} from '../node/SPSynItemNode';
 
@@ -33,11 +36,6 @@ let Synapse = self.Synapse;
 
 // Sagen
 let Sagen = self.Sagen;
-
-// tween
-let greensock = self.com.greensock;
-let TweenLite = greensock.TweenLite;
-let easing = greensock.easing;
 
 let parts = {
   page: 'page',
@@ -64,12 +62,12 @@ class Syn {
     this._sideDom = new Sagen.Dom( side );
     this._menu = null;
     this._motion = false;
+    this._y = 0;
   }
   /**
    * 初期処理, after DOMReady で実行のこと
    */
   init():void {
-    this._sideMenu = document.getElementById( parts.sideMenu );
     this._listDom = new Sagen.Dom( document.getElementById( parts.list ) );
     this._toggleDom = new Sagen.Dom( document.getElementById( parts.toggle ) );
     this._page = document.getElementById( parts.page );
@@ -200,6 +198,13 @@ class Syn {
       _this._motion = false;
     }, 500 );
 
+    // open 時の scroll y position 保存
+    this._y = Scroll.y;
+
+    // scroll 0 位置に移動
+    // menu top を表示するため
+    Scroll.motion( 0, 0.4 );
+
     sideDom.addClass( 'open' );
     // 外側のコンテナをでっかくする
     side.style.cssText = 'height: 59999px';
@@ -208,7 +213,8 @@ class Syn {
     // 高さをセット
     side.style.cssText = `height: ${height}`;
     // 本体の高さを同じにする
-    this._page.style.cssText = `position: fixed: left: 0; top: 0; overflow: hidden; width: 100%; height: ${height}`;
+    // this._page.style.cssText = `position: fixed; left: 0; top: 0; overflow: hidden; width: 100%; height: ${height}`;
+    this._page.style.cssText = `overflow: hidden; width: 100%; height: ${height}`;
 
     // メニューを開いたことをトラッキングする
     this._menu.trackShowEvent();
@@ -224,13 +230,16 @@ class Syn {
 
     sideDom.addClass( 'closing' );
 
+    Scroll.motion( _this._y, 0.41 );
+
     setTimeout( function() {
       _this._motion = false;
       sideDom.removeClass( 'closing' );
       sideDom.removeClass( 'open' );
       side.style.csstext = '';
       _this._page.style.cssText = '';
-    }, 500 );
+      // Scroll.y = _this._y;
+    }, 400 );
 
   }
 }

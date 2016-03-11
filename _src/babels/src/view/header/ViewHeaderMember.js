@@ -14,20 +14,28 @@
 import {View} from '../View';
 import {ViewHeaderMemberNotice} from './ViewHeaderMemberNotice';
 
+// app
 import {Empty} from '../../app/const/Empty';
-import {UserDae} from '../../dae/UserDae';
+import {Url} from '../../app/const/Url';
+import {User} from '../../app/User';
+
+// action
 import {UsersSelf} from '../../action/users/UsersSelf';
 
-import {Url} from '../../app/const/Url';
+// data
 import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
-import {User} from '../../app/User';
+// dae
+import {UserDae} from '../../dae/UserDae';
 
 // util
 import {Loc} from '../../util/Loc';
 
+// model
 import {ViewLogoutModal} from '../modal/ViewLogoutModal';
+
+// event
 import {LogoutStatus} from '../../event/LogoutStatus';
 
 // React
@@ -82,7 +90,7 @@ export class ViewHeaderMember extends View {
 
     } else {
 
-      this.render( response );
+      this.render( new UserDae( response ) );
 
     }
 
@@ -100,11 +108,11 @@ export class ViewHeaderMember extends View {
   }
   /**
    * Dom を生成します
-   * @param {Object} response JSON response object
+   * @param {UserDae} response JSON UserDae instance
    */
-  render( response:Object ):void {
+  render( response:UserDae ):void {
 
-    let dae = new UserDae( response );
+    let dae = response;
     let _this = this;
 
     // console.log( '******** ---------- ********** ViewHeaderMember ', dae );
