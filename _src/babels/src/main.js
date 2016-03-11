@@ -165,6 +165,9 @@ import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
 // Syn.
 import {SPViewSyn} from './sp/view/SPViewSyn';
 
+// header
+import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
+
 /**
  * ToDo: 対象外OS alert
  * ToDo: global 不要 class を除外する
@@ -311,9 +314,6 @@ var UT = {
     }
   },
   sp: {
-    node: {
-
-    },
     view: {
       SPViewSyn: SPViewSyn,
       home: {
@@ -322,6 +322,9 @@ var UT = {
       },
       category: {
         SPViewCategoryRoot: SPViewCategoryRoot
+      },
+      header: {
+        SPViewHeaderUser: SPViewHeaderUser
       }
     }
   }

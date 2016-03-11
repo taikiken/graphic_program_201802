@@ -66,14 +66,8 @@ var SPHeader = exports.SPHeader = function () {
       // header.user
       var element = _Dom.Dom.profile();
       if (element !== null) {
-        var headerUser = new UT.view.header.ViewHeaderUser(element);
+        var headerUser = new UT.sp.view.header.SPViewHeaderUser(element);
         headerUser.start();
-
-        var modalElement = _Dom.Dom.modal();
-        if (modalElement !== null) {
-          var modal = new UT.view.modal.ViewLogoutModal(modalElement);
-          modal.start();
-        }
       }
     }
   }]);

@@ -384,7 +384,6 @@ export class ViewHeaderMemberNotice extends View {
 
         // polling
         let polling = this.polling;
-
         if ( polling === null ) {
 
           // https://github.com/undotsushin/undotsushin/issues/282

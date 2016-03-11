@@ -79,14 +79,7 @@ if ( $page_has_header ) :
           <a class="head-search-btn" href="#">検索する</a>
         </div><!-- /.head-search -->
 
-        <div class="user">
-          <div class="preference">
-            <a class="preference-opener" href="#">
-              <span class="preference-avatar"><img src="/assets/images/dummy/avatar-40x40.jpg" alt=""></span>
-            </a>
-            <span class="preference-num">88</span>
-          </div><!-- /.preference -->
-        </div><!-- /.user -->
+        <div id="user-profile-container"></div><!--/header-user-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
