@@ -57,6 +57,7 @@ export class Dom {
   static pageTop():Element {
     return Dom.get( 'pageTop' );
   }
+  // --------------------------------------
   // header
   /**
    * header user profile
@@ -72,6 +73,31 @@ export class Dom {
   static search():Element {
     return Dom.get( 'head-search-container' );
   }
+  // --------------------------------------
+  // synapse
+  /**
+   * synapse 切り替えメニュー
+   * @return {Element} side-menu-service element を返します
+   */
+  static service():Element {
+    return Dom.get( 'side-menu-service' );
+  }
+  /**
+   * side メニュー
+   * @return {Element} side-menu-container element を返します
+   */
+  static serviceMenu():Element {
+    return Dom.get( 'side-menu-container' );
+  }
+  /**
+   * side メニュー open / close button
+   * @return {Element} menu-opener element を返します
+   */
+  static serviceOpener():Element {
+    return Dom.get( 'menu-opener' );
+  }
+
+  // --------------------------------------
   // sidebar
   /**
    * sidebar ranking
@@ -87,6 +113,8 @@ export class Dom {
   static video():Element {
     return Dom.get( 'widget-recommend-container' );
   }
+  // --------------------------------------
+
   // home
   /**
    * home slide show(pickup)

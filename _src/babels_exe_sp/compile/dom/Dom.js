@@ -85,6 +85,7 @@ var Dom = exports.Dom = function () {
     value: function pageTop() {
       return Dom.get('pageTop');
     }
+    // --------------------------------------
     // header
     /**
      * header user profile
@@ -106,6 +107,40 @@ var Dom = exports.Dom = function () {
     value: function search() {
       return Dom.get('head-search-container');
     }
+    // --------------------------------------
+    // synapse
+    /**
+     * synapse 切り替えメニュー
+     * @return {Element} side-menu-service element を返します
+     */
+
+  }, {
+    key: 'service',
+    value: function service() {
+      return Dom.get('side-menu-service');
+    }
+    /**
+     * side メニュー
+     * @return {Element} side-menu-container element を返します
+     */
+
+  }, {
+    key: 'serviceMenu',
+    value: function serviceMenu() {
+      return Dom.get('side-menu-container');
+    }
+    /**
+     * side メニュー open / close button
+     * @return {Element} menu-opener element を返します
+     */
+
+  }, {
+    key: 'serviceOpener',
+    value: function serviceOpener() {
+      return Dom.get('menu-opener');
+    }
+
+    // --------------------------------------
     // sidebar
     /**
      * sidebar ranking
@@ -127,6 +162,8 @@ var Dom = exports.Dom = function () {
     value: function video() {
       return Dom.get('widget-recommend-container');
     }
+    // --------------------------------------
+
     // home
     /**
      * home slide show(pickup)

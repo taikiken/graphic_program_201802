@@ -183,7 +183,7 @@ gulp.task 'serve:app', ->
     '!' + app + '/**/_babel/*.js'
     '!' + app + '/**/*.bundle.js'
     '!' + app + '/**/*.babel.js'
-  ], [ 'js:hint', reload ]
+  ], [ 'js:dev', reload ]
   gulp.watch [ app + '/**/*.{png,jpg,gif,svg}' ], reload
   gulp.watch [ dir.libs + '/**/*' ], reload
 

@@ -104,35 +104,37 @@
 
 	var _SPNav = __webpack_require__(39);
 
-	var _SPIndex = __webpack_require__(40);
+	var _SPSyn = __webpack_require__(40);
 
-	var _SPCategory = __webpack_require__(42);
+	var _SPIndex = __webpack_require__(41);
 
-	var _SPSingle = __webpack_require__(43);
+	var _SPCategory = __webpack_require__(43);
 
-	var _SPSearch = __webpack_require__(45);
+	var _SPSingle = __webpack_require__(44);
 
-	var _SPSignup = __webpack_require__(46);
+	var _SPSearch = __webpack_require__(46);
 
-	var _SPUserProfile = __webpack_require__(47);
+	var _SPSignup = __webpack_require__(47);
 
-	var _SPSidebar = __webpack_require__(44);
+	var _SPUserProfile = __webpack_require__(48);
 
-	var _SPHeader = __webpack_require__(41);
+	var _SPSidebar = __webpack_require__(45);
 
-	var _SPBookmarks = __webpack_require__(48);
+	var _SPHeader = __webpack_require__(42);
 
-	var _SPActivities = __webpack_require__(49);
+	var _SPBookmarks = __webpack_require__(49);
 
-	var _SPNotifications = __webpack_require__(50);
+	var _SPActivities = __webpack_require__(50);
 
-	var _SPSettings = __webpack_require__(51);
+	var _SPNotifications = __webpack_require__(51);
 
-	var _SPComment = __webpack_require__(52);
+	var _SPSettings = __webpack_require__(52);
 
-	var _SPSearchFrom = __webpack_require__(53);
+	var _SPComment = __webpack_require__(53);
 
-	var _SPCommentDelete = __webpack_require__(54);
+	var _SPSearchFrom = __webpack_require__(54);
+
+	var _SPCommentDelete = __webpack_require__(55);
 
 	var _Dom = __webpack_require__(38);
 
@@ -236,6 +238,8 @@
 	      _SPIndex.SPIndex.start();
 	      // nav
 	      _SPNav.SPNav.start('home');
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * category page
@@ -256,6 +260,8 @@
 	      _SPCategory.SPCategory.start(slug, type);
 	      // nav
 	      _SPNav.SPNav.start(slug);
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * single, detail page
@@ -273,6 +279,8 @@
 	      _SPSearchFrom.SPSearchFrom.start();
 	      // single
 	      _SPSingle.SPSingle.start(articleId);
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * コメント詳細
@@ -289,6 +297,8 @@
 	      _SPSearchFrom.SPSearchFrom.start();
 
 	      _SPComment.SPComment.user('comment', event.article, event.comment);
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * コメント返信 詳細
@@ -305,6 +315,8 @@
 	      _SPSearchFrom.SPSearchFrom.start();
 
 	      _SPComment.SPComment.user('reply', event.article, event.comment, event.article);
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * 検索ページ
@@ -320,6 +332,8 @@
 	      _SPSearchFrom.SPSearchFrom.start();
 
 	      _SPSearch.SPSearch.start(event.keyword);
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    // ----------------------------------------------------
 	    // header, footer いらない
@@ -399,6 +413,8 @@
 	        _SPUserProfile.SPUserProfile.start();
 	        _SPBookmarks.SPBookmarks.start();
 	      }
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * マイページ / アクティビティーズ一覧
@@ -420,6 +436,8 @@
 	        _SPUserProfile.SPUserProfile.start();
 	        _SPActivities.SPActivities.start();
 	      }
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * マイページ / お知らせ一覧
@@ -440,6 +458,8 @@
 	        _SPUserProfile.SPUserProfile.start();
 	        _SPNotifications.SPNotifications.start();
 	      }
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    // ------------------------------
 	    // settings 設定
@@ -462,6 +482,8 @@
 	        // login only
 	        _SPSettings.SPSettings.account();
 	      }
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * 設定 パーソナライズ設定 興味のある競技
@@ -482,6 +504,8 @@
 	        // login only
 	        _SPSettings.SPSettings.interest();
 	      }
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * 設定 ソーシャル連携
@@ -496,6 +520,8 @@
 	      _SPSearchFrom.SPSearchFrom.start();
 	      _SPSidebar.SPSidebar.start();
 	      _SPHeader.SPHeader.start();
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	    /**
 	     * 退会
@@ -516,6 +542,8 @@
 	        // login only
 	        _SPSettings.SPSettings.deactivate();
 	      }
+	      // syn.
+	      _SPSyn.SPSyn.start();
 	    }
 	  }]);
 	  return SPPage;
@@ -1401,6 +1429,7 @@
 	    value: function pageTop() {
 	      return Dom.get('pageTop');
 	    }
+	    // --------------------------------------
 	    // header
 	    /**
 	     * header user profile
@@ -1422,6 +1451,40 @@
 	    value: function search() {
 	      return Dom.get('head-search-container');
 	    }
+	    // --------------------------------------
+	    // synapse
+	    /**
+	     * synapse 切り替えメニュー
+	     * @return {Element} side-menu-service element を返します
+	     */
+
+	  }, {
+	    key: 'service',
+	    value: function service() {
+	      return Dom.get('side-menu-service');
+	    }
+	    /**
+	     * side メニュー
+	     * @return {Element} side-menu-container element を返します
+	     */
+
+	  }, {
+	    key: 'serviceMenu',
+	    value: function serviceMenu() {
+	      return Dom.get('side-menu-container');
+	    }
+	    /**
+	     * side メニュー open / close button
+	     * @return {Element} menu-opener element を返します
+	     */
+
+	  }, {
+	    key: 'serviceOpener',
+	    value: function serviceOpener() {
+	      return Dom.get('menu-opener');
+	    }
+
+	    // --------------------------------------
 	    // sidebar
 	    /**
 	     * sidebar ranking
@@ -1443,6 +1506,8 @@
 	    value: function video() {
 	      return Dom.get('widget-recommend-container');
 	    }
+	    // --------------------------------------
+
 	    // home
 	    /**
 	     * home slide show(pickup)
@@ -1758,6 +1823,85 @@
 	/**
 	 * Copyright (c) 2011-2016 inazumatv.com, inc.
 	 * @author (at)taikiken / http://inazumatv.com
+	 * @date 2016/03/11 - 16:43
+	 *
+	 * Distributed under the terms of the MIT license.
+	 * http://www.opensource.org/licenses/mit-license.html
+	 *
+	 * This notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 */
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SPSyn = undefined;
+
+	var _classCallCheck2 = __webpack_require__(2);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(3);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _symbol2 = __webpack_require__(7);
+
+	var _symbol3 = _interopRequireDefault(_symbol2);
+
+	var _Dom = __webpack_require__(38);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _symbol = (0, _symbol3.default)();
+
+	// UT
+	var UT = self.UT;
+
+	/**
+	 * Syn. menu + open / close UI
+	 */
+
+	var SPSyn = exports.SPSyn = function () {
+	  /**
+	   * static class です, instance を作成しません
+	   * @param {Symbol} target Singleton を実現するための private symbol
+	   */
+
+	  function SPSyn(target) {
+	    (0, _classCallCheck3.default)(this, SPSyn);
+
+	    if (_symbol !== target) {
+
+	      throw new Error('SPSyn is static Class. not use new SPSyn().');
+	    }
+	  }
+	  /**
+	   * side menu + Syn.
+	   */
+
+	  (0, _createClass3.default)(SPSyn, null, [{
+	    key: 'start',
+	    value: function start() {
+	      var element = _Dom.Dom.service();
+	      var button = _Dom.Dom.serviceOpener();
+	      var menu = _Dom.Dom.serviceMenu();
+
+	      var syn = new UT.sp.view.SPViewSyn(element, button, menu);
+	      syn.start();
+	    }
+	  }]);
+	  return SPSyn;
+	}();
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2011-2016 inazumatv.com, inc.
+	 * @author (at)taikiken / http://inazumatv.com
 	 * @date 2016/02/15 - 21:37
 	 *
 	 * Distributed under the terms of the MIT license.
@@ -1785,7 +1929,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SPHeader = __webpack_require__(41);
+	var _SPHeader = __webpack_require__(42);
 
 	var _Dom = __webpack_require__(38);
 
@@ -1848,7 +1992,7 @@
 	}();
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1934,7 +2078,7 @@
 	}();
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1967,7 +2111,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SPHeader = __webpack_require__(41);
+	var _SPHeader = __webpack_require__(42);
 
 	var _Dom = __webpack_require__(38);
 
@@ -2025,7 +2169,7 @@
 	}();
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2060,7 +2204,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SPSidebar = __webpack_require__(44);
+	var _SPSidebar = __webpack_require__(45);
 
 	var _Dom = __webpack_require__(38);
 
@@ -2262,7 +2406,7 @@
 	}();
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2352,7 +2496,7 @@
 	}();
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2385,9 +2529,9 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SPHeader = __webpack_require__(41);
+	var _SPHeader = __webpack_require__(42);
 
-	var _SPSidebar = __webpack_require__(44);
+	var _SPSidebar = __webpack_require__(45);
 
 	var _Dom = __webpack_require__(38);
 
@@ -2442,7 +2586,7 @@
 	}();
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2521,7 +2665,7 @@
 	}();
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2595,7 +2739,7 @@
 	}();
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2675,7 +2819,7 @@
 	}();
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2755,7 +2899,7 @@
 	}();
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2836,7 +2980,7 @@
 	}();
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2940,7 +3084,7 @@
 	}();
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2973,7 +3117,7 @@
 
 	var _symbol3 = _interopRequireDefault(_symbol2);
 
-	var _SPSidebar = __webpack_require__(44);
+	var _SPSidebar = __webpack_require__(45);
 
 	var _Dom = __webpack_require__(38);
 
@@ -3138,7 +3282,7 @@
 	}();
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3218,7 +3362,7 @@
 	}();
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

@@ -262,4 +262,38 @@ export class Url {
     }
 
   }
+
+  static about( path:string = '' ):string {
+    let base = '/about/';
+
+    switch ( path ) {
+
+      case 'company':
+        return `${base}company`;
+
+      case 'privacy':
+        return `${base}privacy`;
+
+      case 'terms':
+        return `${base}terms`;
+
+      case 'faq':
+        return `${base}faq`;
+
+      case 'ads':
+        return `${base}ads`;
+
+      case 'contact':
+        return `${base}contact`;
+
+      case '':
+        return base;
+
+      default:
+        console.warn( `settings illegal value: ${path}, instead use default` );
+        return base;
+    }
+
+  }
+
 }

@@ -119,7 +119,7 @@ AUTO_PREFIX_BROWSERS = [
   'chrome >= 48'
   'safari >= 9'
   'opera >= 34'
-  'ios >= 9'
+  'ios >= 8.4'
   'android >= 4.2'
   'bb >= 10'
 ]

@@ -14,6 +14,7 @@
 
 import {SPPageTop} from './ui/SPPageTop';
 import {SPNav} from './ui/SPNav';
+import {SPSyn} from './ui/SPSyn';
 
 import {SPIndex} from './page/SPIndex';
 import {SPCategory} from './page/SPCategory';
@@ -126,6 +127,8 @@ export class SPPage {
     SPIndex.start();
     // nav
     SPNav.start( 'home' );
+    // syn.
+    SPSyn.start();
   }
   /**
    * category page
@@ -143,7 +146,8 @@ export class SPPage {
     SPCategory.start( slug, type );
     // nav
     SPNav.start( slug );
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * single, detail page
@@ -158,7 +162,8 @@ export class SPPage {
     SPSearchFrom.start();
     // single
     SPSingle.start( articleId );
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * コメント詳細
@@ -172,7 +177,8 @@ export class SPPage {
     SPSearchFrom.start();
 
     SPComment.user( 'comment', event.article, event.comment );
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * コメント返信 詳細
@@ -186,7 +192,8 @@ export class SPPage {
     SPSearchFrom.start();
 
     SPComment.user( 'reply', event.article, event.comment, event.article );
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * 検索ページ
@@ -199,7 +206,8 @@ export class SPPage {
     SPSearchFrom.start();
 
     SPSearch.start( event.keyword );
-
+    // syn.
+    SPSyn.start();
   }
   // ----------------------------------------------------
   // header, footer いらない
@@ -269,7 +277,8 @@ export class SPPage {
       SPUserProfile.start();
       SPBookmarks.start();
     }
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * マイページ / アクティビティーズ一覧
@@ -288,7 +297,8 @@ export class SPPage {
       SPUserProfile.start();
       SPActivities.start();
     }
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * マイページ / お知らせ一覧
@@ -306,7 +316,8 @@ export class SPPage {
       SPUserProfile.start();
       SPNotifications.start();
     }
-
+    // syn.
+    SPSyn.start();
   }
   // ------------------------------
   // settings 設定
@@ -326,7 +337,8 @@ export class SPPage {
       // login only
       SPSettings.account();
     }
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * 設定 パーソナライズ設定 興味のある競技
@@ -344,7 +356,8 @@ export class SPPage {
       // login only
       SPSettings.interest();
     }
-
+    // syn.
+    SPSyn.start();
   }
   /**
    * 設定 ソーシャル連携
@@ -356,6 +369,8 @@ export class SPPage {
     SPSearchFrom.start();
     SPSidebar.start();
     SPHeader.start();
+    // syn.
+    SPSyn.start();
   }
   /**
    * 退会
@@ -373,6 +388,7 @@ export class SPPage {
       // login only
       SPSettings.deactivate();
     }
-
+    // syn.
+    SPSyn.start();
   }
 }

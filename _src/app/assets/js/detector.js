@@ -47,6 +47,14 @@
       Detector.normalize( dataSet, 'ios' );
       Detector.normalize( dataSet, 'android' );
 
+      if ( !dataSet.hasOwnProperty( 'url' ) ) {
+        dataSet.url = '/about/browsers/';
+      }
+
+      if ( !dataSet.hasOwnProperty( 'test' ) ) {
+        dataSet.test = 'false';
+      }
+
       if ( Browser.Mobile.phone() ) {
         Detector.sp( dataSet );
       } else if ( Browser.Mobile.tablet() )  {
@@ -55,6 +63,21 @@
         Detector.pc( dataSet );
       }
 
+    };
+    /**
+     * dataset に指定キーが存在するか調べ
+     * 存在する時は Number 型へ値を変換し
+     * 存在しに時は 99999 にします
+     *
+     * @param {Object} dataSet dataset object
+     * @param {string} keyName chrome|safari|firefox|ie|edge
+     */
+    Detector.normalize = function( dataSet, keyName ) {
+      if ( !dataSet.hasOwnProperty( keyName ) ) {
+        dataSet[ keyName ] = 99999;
+      } else {
+        dataSet[ keyName ] = parseFloat( dataSet[ keyName ] );
+      }
     };
     /**
      * PC check 準備
@@ -79,7 +102,7 @@
         Detector.edge( dataSet );
       } else {
         // unknown browser
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
 
     };
@@ -95,7 +118,7 @@
         Detector.android( dataSet );
       } else {
         // unknown browser
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
 
     };
@@ -111,24 +134,9 @@
         Detector.android( dataSet );
       } else {
         // unknown browser
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
 
-    };
-    /**
-     * dataset に指定キーが存在するか調べ
-     * 存在する時は Number 型へ値を変換し
-     * 存在しに時は 99999 にします
-     *
-     * @param {Object} dataSet dataset object
-     * @param {string} keyName chrome|safari|firefox|ie|edge
-     */
-    Detector.normalize = function( dataSet, keyName ) {
-      if ( !dataSet.hasOwnProperty( keyName ) ) {
-        dataSet[ keyName ] = 99999;
-      } else {
-        dataSet[ keyName ] = parseFloat( dataSet[ keyName ] );
-      }
     };
     /**
      * ios での判定
@@ -136,7 +144,7 @@
      */
     Detector.ios = function( dataSet ) {
       if ( Browser.iOS.version() < dataSet.ios ) {
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
     };
     /**
@@ -144,8 +152,8 @@
      * @param {Object} dataSet dataset object
      */
     Detector.android = function( dataSet ) {
-      if ( Browser.Android.version() < dataSet.ios ) {
-        Detector.ignore();
+      if ( Browser.Android.version() < dataSet.android ) {
+        Detector.ignore( dataSet );
       }
     };
     /**
@@ -154,7 +162,7 @@
      */
     Detector.chrome = function( dataSet ) {
       if ( Browser.Chrome.version() < dataSet.chrome ) {
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
     };
     /**
@@ -163,7 +171,7 @@
      */
     Detector.firefox = function( dataSet ) {
       if ( Browser.Firefox.version() < dataSet.firefox ) {
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
     };
     /**
@@ -172,7 +180,7 @@
      */
     Detector.safari = function( dataSet ) {
       if ( Browser.Safari.version() < dataSet.safari ) {
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
     };
     /**
@@ -181,7 +189,7 @@
      */
     Detector.ie = function( dataSet ) {
       if ( Browser.IE.version() < dataSet.ie ) {
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
     };
     /**
@@ -190,14 +198,17 @@
      */
     Detector.edge = function( dataSet ) {
       if ( Browser.Edge.version() < dataSet.edge ) {
-        Detector.ignore();
+        Detector.ignore( dataSet );
       }
     };
     /**
      * 条件以下のブラウザで閲覧の場合は redirect させます
+     * @param {Object} dataSet dataset object
      */
-    Detector.ignore = function() {
-      location.href = '/about/';
+    Detector.ignore = function( dataSet ) {
+      if ( dataSet.test !== 'true' ) {
+        location.href = dataSet.url;
+      }
     };
 
     return Detector;

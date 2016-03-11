@@ -21,6 +21,39 @@ if (
   $template_name == 'logout'
 ) {
 ?>
+<div id="side-menu-container">
+  <div id="side-menu-bg"></div>
+  <div id='side-menu'>
+    <ul id="side-menu-list">
+      <li class="ad"><img src="/assets/sp/images/dummy/side-bnr.jpg" alt=""></li>
+
+      <li id="side-menu-service">
+        <ul>
+          <!-- Service Specific Menu -->
+          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>運動通信トップへ</a></li>
+          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
+          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
+          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
+          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>運動通信とは</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <!-- Syn. Service List -->
+        <div id='synapse-service-list-outer-box' style='display: none'>
+          <ul id='synapse-service-list'>
+            <li id="synapse-service-list-title">おすすめサービス</li>
+          </ul>
+        </div>
+
+        <!-- Syn. Logo -->
+        <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
+      </li>
+
+    </ul>
+  </div><!--/#side-menu-->
+</div><!--/#side-menu-container-->
+
 <footer class="foot-sec">
   <div class="foot-sec-inner">
     <div class="foot-pr">

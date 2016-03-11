@@ -62,6 +62,7 @@ gulp.task 'libs:copy', ->
   return gulp.src [
     app + '/**/js/libs/html5shiv/*'
     app + '/**/js/libs/sagen/*'
+    app + '/**/js/libs/jquery2/jquery.min.js'
   ]
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** libs:copy ***'
@@ -69,9 +70,8 @@ gulp.task 'libs:copy', ->
 # synapse dev
 gulp.task 'libs:synapse:dev', ->
   return gulp.src [
-    app + '/**/js/libs/**/synapse/**/*.js'
-    '!' + app + '/**/js/libs/**/synapse/**/*.min.js'
-    '!' + app + '/**/js/libs/**/synapse/**/jquery*.js'
+    app + '/**/js/libs/**/synapse/synapse.js'
+    app + '/**/js/libs/**/synapse/extras/jquery.inview.js'
   ]
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** libs:synapse:dev ***'
@@ -80,8 +80,8 @@ gulp.task 'libs:synapse:dev', ->
 # synapse build
 gulp.task 'libs:synapse:build', ->
   return gulp.src [
-    app + '/**/js/libs/**/synapse/**/*.min.js'
-    '!' + app + '/**/js/libs/**/synapse/**/jquery*.js'
+    app + '/**/js/libs/**/synapse/synapse.min.js'
+    app + '/**/js/libs/**/synapse/extras/jquery.inview.min.js'
   ]
   .pipe $.rename (path) ->
     path.basename = path.basename.replace '.min', ''

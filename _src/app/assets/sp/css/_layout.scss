@@ -68,7 +68,21 @@ a {
 
 // 2. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
+// -------------------
+// header を fixed にする
+.header-sticky {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+}
+.body-sec {
+  margin-top: 100px;
+}
 
+// --------------------
 .head-sec {
   @at-root {
     &-inner {
@@ -608,10 +622,32 @@ a {
   width: 0;
   height: 0;
   overflow: hidden;
+  z-index: 999;
 }
-#side-menu-container.open {
-  width: 100%;
-  height: 100%;
+
+#side-menu-container {
+  &.open {
+    width: 100%;
+    height: 100%;
+
+    #side-menu-bg {
+      opacity: 1;
+    }
+    #side-menu {
+      width: 85%;
+      transform: translateX(0);
+     }
+  }
+
+  &.closing {
+    #side-menu-bg {
+      opacity: 0;
+    }
+    #side-menu {
+      transform: translateX(-100%);
+      transition-duration: 0.15s;
+    }
+  }
 }
 #side-menu-bg {
   position: absolute;
@@ -620,35 +656,37 @@ a {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+
 }
 #side-menu {
   position: absolute;
-  left: -100%;
-  z-index: 999;
+  left: 0;
   overflow: hidden;
   width: 0;
+  z-index: 999;
   max-height: 100%;
   min-height: 100%;
   background-color: #fff;
 
-  -webkit-transition: left 0.5s;
-  -moz-transition: left 0.5s;
-  -ms-transition: left 0.5s;
-  -o-transition: left 0.5s;
-  transition: left 0.5s;
+  transform: translateX(-100%);
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
 }
-#side-menu-container.open #side-menu {
-  width: 85%;
-  left: 0;
-}
-/* Syn.のロゴを表示 */
+
+// /* Syn.のロゴを表示 */
 div.synapse_logo {
   height: 141px;
   width: 100%;
   background-size: auto 50px;
   background-position: center center;
   background-repeat: no-repeat;
-  /* URLを変更してデザインにあったSyn.のロゴに変更できます */
+  // /* URLを変更してデザインにあったSyn.のロゴに変更できます */
   background-image: url("https://synapse-bitcellar-assets.s3.amazonaws.com/logos/original.png");
 }
 
