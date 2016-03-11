@@ -84,7 +84,7 @@ var SPSingle = exports.SPSingle = function () {
       var profileElement = _Dom.Dom.profile();
       var headerUser = undefined;
       if (profileElement !== null) {
-        headerUser = new UT.view.header.ViewHeaderUser(profileElement);
+        headerUser = new UT.sp.view.header.SPViewHeaderUser(profileElement);
         if (UT.app.User.sign) {
 
           // login user はコメント投稿可能 -> 表示アイコン必要
@@ -96,12 +96,6 @@ var SPSingle = exports.SPSingle = function () {
           ++_prepared;
         }
         headerUser.start();
-
-        var modalElement = _Dom.Dom.modal();
-        if (modalElement !== null) {
-          var modal = new UT.view.modal.ViewLogoutModal(modalElement);
-          modal.start();
-        }
       }
 
       // single page

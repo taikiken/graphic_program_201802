@@ -56,7 +56,7 @@ export class SPSingle {
     let profileElement = Dom.profile();
     let headerUser;
     if ( profileElement !== null ) {
-      headerUser = new UT.view.header.ViewHeaderUser( profileElement );
+      headerUser = new UT.sp.view.header.SPViewHeaderUser( profileElement );
       if ( UT.app.User.sign ) {
 
         // login user はコメント投稿可能 -> 表示アイコン必要
@@ -70,12 +70,6 @@ export class SPSingle {
 
       }
       headerUser.start();
-
-      let modalElement = Dom.modal();
-      if ( modalElement !== null ) {
-        let modal = new UT.view.modal.ViewLogoutModal( modalElement );
-        modal.start();
-      }
     }
 
     // single page

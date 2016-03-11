@@ -12,6 +12,7 @@
 'use strict';
 
 // view
+import {View} from '../../../view/View';
 import {ViewHeaderMember} from '../../../view/header/ViewHeaderMember';
 
 // app
@@ -39,11 +40,27 @@ let ReactDOM = self.ReactDOM;
 // Sagen
 let Gasane = self.Gasane;
 
+/**
+ * SP header ログイン・メンバー 関連メニュー
+ */
 export class SPViewHeaderMember extends ViewHeaderMember {
+  /**
+   * <p>SP header ログイン・メンバー 関連メニュー<br>
+   * アイコン+drop down menu 表示</p>
+   *
+   * @param {Element} element insert root element
+   * @param {Object} [option={}] optional event handler
+   */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
   }
+  /**
+   * Dom を生成します
+   * @param {UserDae} dae JSON UserDae instance
+   */
   render( dae:UserDae ):void {
+
+    this.executeSafely( View.BEFORE_RENDER, dae );
 
     // ログインユーザー
     let MemberDom = React.createClass( {
