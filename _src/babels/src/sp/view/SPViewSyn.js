@@ -231,13 +231,13 @@ class Syn {
 
     sideDom.addClass( 'closing' );
 
-    Scroll.motion( _this._y, 0.41 );
+    Scroll.motion( _this._y, 0.1, 0.4 );
 
     setTimeout( function() {
       _this._motion = false;
       sideDom.removeClass( 'closing' );
       sideDom.removeClass( 'open' );
-      side.style.csstext = '';
+      side.style.cssText = '';
       _this._page.style.cssText = '';
       // Scroll.y = _this._y;
     }, 400 );
