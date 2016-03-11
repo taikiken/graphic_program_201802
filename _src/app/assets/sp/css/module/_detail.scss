@@ -112,51 +112,54 @@
   .post-sns_upper {
     margin-top: (40/2)+px;
 
+    .post-sns {
+      &-list {
+        display: table;
+        width: 100%;
+      }
+
+      &-item {
+        display: table-cell;
+        width: 25%;
+        text-align: center;
+
+        a {
+          display: inline-block;
+          width: 100%;
+          line-height: 0;
+          padding: (10/2)+px 0;
+          font-size: 0;
+
+          span {
+            @extend .sp-sprite-detail;
+            @include hide-text;
+          }
+        }
+
+        &_fb a {
+          background-color: #3755a5;
+          span { @include sprite( $detail-icon-sns-fb, inline-block ); }
+        }
+
+        &_tw a {
+          background-color: #1b95e0;
+          span { @include sprite( $detail-icon-sns-tw, inline-block ); }
+        }
+
+        &_gt a {
+          background-color: #dc4e41;
+          span { @include sprite( $detail-icon-sns-gt, inline-block ); }
+        }
+
+        &_line a {
+          background-color: #00c300;
+          span { @include sprite( $detail-icon-sns-line, inline-block ); }
+        }
+      }
+    }
+
     @at-root {
       #{ selector-replace(&, '.post-sns_upper', '.post-sns') } {
-        &-list {
-          display: table;
-          width: 100%;
-        }
-
-        &-item {
-          display: table-cell;
-          width: 25%;
-          text-align: center;
-
-          a {
-            display: inline-block;
-            width: 100%;
-            line-height: 0;
-            padding: (10/2)+px 0;
-            font-size: 0;
-
-            span {
-              @extend .sp-sprite-detail;
-              @include hide-text;
-            }
-          }
-
-          &_fb a {
-            background-color: #3755a5;
-            span { @include sprite( $detail-icon-sns-fb, inline-block ); }
-          }
-
-          &_tw a {
-            background-color: #1b95e0;
-            span { @include sprite( $detail-icon-sns-tw, inline-block ); }
-          }
-
-          &_gt a {
-            background-color: #dc4e41;
-            span { @include sprite( $detail-icon-sns-gt, inline-block ); }
-          }
-
-          &_line a {
-            background-color: #00c300;
-            span { @include sprite( $detail-icon-sns-line, inline-block ); }
-          }
-        }
       }
     }
 
@@ -164,45 +167,124 @@
 
   // post-sns_lower
   .post-sns_lower {
-    margin-top: 30px;
-    padding: 29px;
-    border: 1px solid $border-primary-color;
+    margin: #{(40/2)+px} -500% 0;
+    padding: (40/2)+px 500% 0;
+    border-top: 1px solid $border-primary-color;
 
     .post-sns-list {
-      letter-spacing: ls( inline-block );
-      text-align: center;
+      overflow: hidden;
+    }
 
-      [ class^="post-sns-" ] {
-        display: inline-block;
-        margin: 0 5px;
-        letter-spacing: normal;
-        vertical-align: top;
+    .post-sns-fixed {
+      float: left;
+      width: 71px;
+    }
 
-        a:hover {
-          @include hover-opacity;
+    .post-sns-flex {
+      float: right;
+      width: 100%;
+      margin-left: -71px;
+
+      &-inner {
+        margin-left: 71px;
+      }
+
+      &-list {
+        display: table;
+        width: 100%;
+      }
+
+      .post-sns-item {
+        display: table-cell;
+        width: perCalc(105, 450);
+        height: (122/2)+px;
+        padding-left: perCalc(10, 450);
+
+        a {
+          display: block;
+          height: 100%;
+          line-height: 0;
+          border-radius: 4px;
+          text-align: center;
+
+          span {
+            @extend .sp-sprite-detail;
+            @include hide-text;
+            margin-top: (16/2)+px;
+            vertical-align: top;
+          }
+        }
+
+        &_fb {
+          a { background-color: #3755a5;}
+          span { @include sprite( $detail-btn-sns-fb, inline-block ); }
+        }
+
+        &_tw {
+          a { background-color: #1b95e0;}
+          span { @include sprite( $detail-btn-sns-tw, inline-block ); }
+        }
+
+        &_gt {
+          a { background-color: #dc4e41;}
+          span { @include sprite( $detail-btn-sns-gt, inline-block ); }
+        }
+
+        &_line {
+          a { background-color: #00c300;}
+          span { @include sprite( $detail-btn-sns-line, inline-block ); }
         }
       }
     }
-
-    .post-sns-tw {
-      a {
-        @extend .sp-sprite-detail;
-        @include sprite( $detail-icon-sns-tw );
-        @include hide-text;
-      }
-    }
-
-    .post-sns-fbshare {
-      a {
-        @extend .sp-sprite-detail;
-        @include sprite( $detail-icon-sns-fb );
-        @include hide-text;
-      }
-    }
-
-    .post-sns-fbgood {}
-    .post-sns-gt {}
   } //.post-sns_lower
+
+  // post-sns-pr
+  .post-sns-pr {
+    width: 100%;
+    margin-top: (20/2)+px;
+    padding: (18/2)+px;
+    border: 1px solid $border-primary-color;
+    background-color: #f4f5f7;
+
+    &-inner {
+      display: table;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    dt, dd {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    dt {
+      padding-right: (36/2)+px;
+
+      // for iPhone5, 5S
+      @media screen and (max-width: 320px) {
+        padding-right: 0;
+      }
+
+      span {
+        display: block;
+        line-height: 1.2;
+        padding: 4px 0 8px (74/2)+px;
+        background: url(/assets/sp/images/detail/post-sns-lead.png) 0 center no-repeat;
+        background-size: (68/2)+px;
+        font-weight: bold;
+        white-space: nowrap;
+        // font-size: fz(26/2);
+      }
+
+      strong {
+        color: $highlight-color;
+      }
+    }
+
+    dd {
+      width: 71px;
+    }
+  } // .post-sns-pr
 }
 
 // -------------------------------------------------
