@@ -73,9 +73,9 @@ export class Message {
   }
   /**
    * BOOKMARK_DID
-   * @return {string} ブックマーク済
+   * @return {string} ブックマーク解除
    */
   static get BOOKMARK_DID():string {
-    return 'ブックマーク済';
+    return 'ブックマーク解除';
   }
 }

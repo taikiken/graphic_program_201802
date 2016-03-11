@@ -12,7 +12,12 @@
 'use strict';
 
 import {View} from '../View';
+
+// app
 import {Url} from '../../app/const/Url';
+
+// data
+import {ErrorMessage} from '../../data/ErrorMessage';
 
 // React
 let React = self.React;
@@ -46,17 +51,28 @@ export class ViewHeaderSearch extends View {
 
     let SearchDom = React.createClass( {
       getInitialState: function() {
+        this.errors = {
+          keyword: new ErrorMessage()
+        };
+
         return {
-          keyword: ''
+          keyword: '',
+          error: false
         };
       },
       render: function() {
 
+        let errorClass = ( keyName:string ) => {
+          return this.errors[ keyName ].error ? 'error' : '';
+        };
+
         return (
-          <form onSubmit={this.submitHandler}>
-            <input type="text" placeholder="記事を探す" value={this.state.keyword} onChange={this.changeHandler} />
-            <input type="submit"/>
-          </form>
+          <div className={'head-search form-parts ' + errorClass('keyword')}>
+            <form onSubmit={this.submitHandler}>
+              <input type="text" placeholder="記事を探す" value={this.state.keyword} onChange={this.changeHandler} />
+              <input type="submit"/>
+            </form>
+          </div>
         );
       },
       changeHandler: function( event ) {
@@ -64,14 +80,20 @@ export class ViewHeaderSearch extends View {
       },
       submitHandler: function( event ) {
         event.preventDefault();
+        this.reset();
 
         if ( this.state.keyword === '' ) {
-          throw new Error( 'not input keyword' );
+          this.errors.keyword.message = '***';
+          this.setState( { error: true } );
         } else {
 
           location.href = Url.search( this.state.keyword );
 
         }
+      },
+      reset: function() {
+        this.errors.keyword.reset();
+        this.setState( { error: false } );
       }
     } );
 
