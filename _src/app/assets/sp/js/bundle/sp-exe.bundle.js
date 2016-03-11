@@ -2218,6 +2218,7 @@
 	var _userDae = null;
 	var _viewSingle = null;
 	var _headerUser = null;
+	var _articleId = 0;
 
 	/**
 	 * <h3>Single(detail)記事詳細</h3>
@@ -2247,6 +2248,7 @@
 	    key: 'start',
 	    value: function start(articleId) {
 
+	      _articleId = articleId;
 	      // header
 	      // header.user
 	      var profileElement = _Dom.Dom.profile();
@@ -2280,6 +2282,8 @@
 	        _viewSingle = single;
 	        single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
 	        single.start();
+	      } else {
+	        SPSingle.comment();
 	      }
 	    }
 	    /**
@@ -2349,7 +2353,7 @@
 	      }
 
 	      // article id
-	      var articleId = _singleDae.id;
+	      var articleId = _articleId;
 	      var ViewComments = UT.view.ViewComments;
 
 	      // comment form

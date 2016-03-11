@@ -6,27 +6,36 @@
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">
+
+      <div id="single-visual-container"></div>
+
       <div class="post-kv">
         <img src="/assets/images/dummy/kv-710x400.jpg" alt="">
       </div><!-- /.post-kv -->
 
       <div class="post-detail">
 
-        <div class="post-heading">
-          <h1>ダミータイトルダミータイトルダミータイトルダミータイトル</h1>
-        </div><!-- /.post-heading -->
+        <div id="single-header-container"></div>
 
-        <div class="post-data">
-          <div class="f-left">
-            <p class="post-author">運動通信編集部</p>
-            <p class="post-category">海外サッカー オリンピック</p>
-            <p class="post-date">12月18日(金) 22:04</p>
-          </div>
 
-          <div class="f-right">
-            <div class="btn-bookmark"><a class="enable" href="#"><span>ブックマークする</span></a></div>
-          </div>
-        </div><!-- /.post-data -->
+        <?php if (0): ?>
+          <div class="post-heading">
+            <h1>ダミータイトルダミータイトルダミータイトルダミータイトル</h1>
+          </div><!-- /.post-heading -->
+
+          <div class="post-data">
+            <div class="f-left">
+              <p class="post-author">運動通信編集部</p>
+              <p class="post-category">海外サッカー オリンピック</p>
+              <p class="post-date">12月18日(金) 22:04</p>
+            </div>
+
+            <div class="f-right">
+              <div class="btn-bookmark"><a class="enable" href="#"><span>ブックマークする</span></a></div>
+            </div>
+          </div><!-- /.post-data -->
+
+        <?php endif ?>
 
         <div class="post-sns_upper">
           <ul class="post-sns-list">
@@ -54,6 +63,19 @@
           </ul>
         </div><!-- /.post-sns -->
       </div><!-- /.post-detail -->
+
+      <div class="comment">
+
+        <div id="comment-form-container"></div>
+
+        <div id="comment-self-container"></div>
+
+        <div id="comment-official-container"></div>
+
+        <div id="comment-normal-container"></div>
+
+      </div><!-- /.comment -->
+
 
     </section><!-- /.main-sec -->
   </div>

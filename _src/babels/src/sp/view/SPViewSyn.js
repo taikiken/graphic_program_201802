@@ -82,7 +82,8 @@ class Syn {
     }
 
     // メニューインスタンスの作成
-    let menu = new Synapse.Menu('synapse_dev_side_menu');
+    // name: undotsushin_side_menu で作成
+    let menu = new Synapse.Menu('undotsushin_side_menu');
     this._menu = menu;
     menu.addListener( 'service_list_load', this.onLoad.bind( this ) );
     menu.addListener( 'service_notification_load', this.onNotice.bind( this ) );

@@ -28,6 +28,7 @@ let _singleDae = null;
 let _userDae = null;
 let _viewSingle = null;
 let _headerUser = null;
+let _articleId = 0;
 
 /**
  * <h3>Single(detail)記事詳細</h3>
@@ -51,6 +52,7 @@ export class SPSingle {
    */
   static start( articleId:Number ):void {
 
+    _articleId = articleId;
     // header
     // header.user
     let profileElement = Dom.profile();
@@ -86,6 +88,8 @@ export class SPSingle {
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
       single.start();
+    } else {
+      SPSingle.comment();
     }
 
   }
@@ -148,7 +152,7 @@ export class SPSingle {
     }
 
     // article id
-    let articleId = _singleDae.id;
+    let articleId = _articleId;
     let ViewComments = UT.view.ViewComments;
 
     // comment form
