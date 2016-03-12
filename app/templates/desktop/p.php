@@ -46,8 +46,79 @@
       <?php
       /*
       必要ないとのことなので front からの出力をやめる
+      静的HTMLに置きかえる
       <div id="single-related-container"></div>
       */ ?>
+
+      <div class="related-post">
+        <div class="comment-heading">
+          <h2>関連ニュース</h2>
+        </div><!-- /.comment-heading -->
+
+        <ul class="board-small column2">
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">野球</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_2.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">MLB</p>
+                <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_3.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">格闘技</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_4.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">ラグビー</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_5.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">モータースポーツ</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb">&nbsp;</figure>
+              <div class="post-data">
+                <p class="post-category">海外サッカー</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+        </ul>
+
+      </div><!-- /.related-post -->
 
     </section><!-- /.main-sec -->
 

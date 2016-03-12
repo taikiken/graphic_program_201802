@@ -2354,19 +2354,19 @@
 
 	      // article id
 	      var articleId = _articleId;
-	      var ViewComments = UT.view.ViewComments;
+	      var SPViewComments = UT.sp.view.SPViewComments;
 
 	      // comment form
 	      var commentFormElement = _Dom.Dom.commentForm();
 	      if (commentFormElement !== null) {
-	        var commentForm = new UT.view.comment.ViewCommentForm(commentFormElement, articleId, picture);
+	        var commentForm = new UT.sp.view.comment.SPViewCommentForm(commentFormElement, articleId, picture);
 	        commentForm.start();
 	      }
 
 	      // self
 	      var selfElement = _Dom.Dom.commentSelf();
 	      if (selfElement !== null) {
-	        var commentSelf = new ViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
+	        var commentSelf = new SPViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
 	        if (_userDae !== null) {
 	          commentSelf.user = _userDae;
 	        }
@@ -2376,7 +2376,7 @@
 	      // official
 	      var officialElement = _Dom.Dom.commentOfficial();
 	      if (officialElement !== null) {
-	        var official = new ViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
+	        var official = new SPViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
 	        if (_userDae !== null) {
 	          official.user = _userDae;
 	        }
@@ -2386,7 +2386,7 @@
 	      // normal
 	      var normalElement = _Dom.Dom.commentNormal();
 	      if (normalElement !== null) {
-	        var normal = new ViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
+	        var normal = new SPViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
 	        if (_userDae !== null) {
 	          normal.user = _userDae;
 	        }
@@ -3143,6 +3143,13 @@
 	      throw new Error('SPComment is static Class. not use new SPComment().');
 	    }
 	  }
+	  /**
+	   * コメント詳細を表示するために事前にユーザー情報を取得する
+	   * @param {string} mode 記事へのコメントかコメントの返信
+	   * @param {Number} articleId 記事 id
+	   * @param {Number} commentId コメント id
+	   * @param {Number} [replyId=0] 返信 id
+	   */
 
 	  (0, _createClass3.default)(SPComment, null, [{
 	    key: 'user',

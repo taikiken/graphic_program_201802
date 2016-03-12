@@ -12,31 +12,34 @@
 'use strict';
 
 // app
-import {CommentsType} from '../app/const/CommentsType';
-import {User} from '../app/User';
+import {CommentsType} from '../../app/const/CommentsType';
+import {User} from '../../app/User';
 
 // view
-import {View} from './View';
-import {ViewError} from './error/ViewError';
+import {View} from '../../view/View';
+import {ViewComments} from '../../view/ViewComments';
+// import {ViewError} from '../../view/error/ViewError';
 
 // action
-import {Comments} from '../action/comment/Comments';
+// import {Comments} from '../../action/comment/Comments';
 
 // data
-import {Result} from '../data/Result';
-import {Safety} from '../data/Safety';
+// import {Result} from '../../data/Result';
+import {Safety} from '../../data/Safety';
 
 // dae
-import {CommentsListDae} from '../dae/CommentsListDae';
-import {UserDae} from '../dae/UserDae';
+import {CommentsListDae} from '../../dae/CommentsListDae';
+// import {UserDae} from '../../dae/UserDae';
 
 // node
-import {CommentNode} from '../node/comment/CommentNode';
-import {CommentMoreViewNode} from '../node/comment/CommentMoreViewNode';
+import {CommentMoreViewNode} from '../../node/comment/CommentMoreViewNode';
 
 // event
-import {ReplyStatus} from '../event/ReplyStatus';
-import {CommentStatus} from '../event/CommentStatus';
+// import {ReplyStatus} from '../../event/ReplyStatus';
+// import {CommentStatus} from '../../event/CommentStatus';
+
+// sp/node
+import {SPCommentNode} from '../node/comment/SPCommentNode';
 
 // React
 let React = self.React;
@@ -45,7 +48,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * comments スレッド を表示する
  */
-export class ViewComments extends View {
+export class SPViewComments extends ViewComments {
   /**
    * コメントスレッド表示（記事詳細）
    * @param {Number} id 記事ID :article_id
@@ -54,162 +57,8 @@ export class ViewComments extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( id:Number, element:Element, commentsType:string, option:Object = {} ) {
-
-    option = Safety.object( option );
-    // console.log( 'commentsType', commentsType );
-
-    super( element, option );
-    this._action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
-    this._articleId = id;
-    this._commentsListType = commentsType;
-    /**
-     * 取得記事(articles)をArticleDae instance 配列として保存する
-     * @type {Array<ArticleDae>}
-     * @private
-     */
-    this._commentsList = [];
-    this._commentsBank = {};
-
-    // more button instance 用
-    this._moreRendered = null;
-
-    // user 情報
-    this._user = null;
-
-    // コメント投稿後の再読み込み設定
-    let status = ReplyStatus.factory();
-    let boundComplete = this.onComplete.bind( this );
-    status.on( ReplyStatus.COMPLETE, boundComplete );
-    // this._status = status;
-
-    // コメント削除後の再読み込み設定
-    let comment = CommentStatus.factory();
-    comment.on( CommentStatus.COMMENT_DELETE, boundComplete );
-    // this._commentStatus = comment;
-
-    this._reload = false;
+    super( id, element, commentsType, option );
   }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * ログイン user 情報
-   * @return {UserDae} ログイン user 情報を返します
-   */
-  get user():UserDae {
-    return this._user;
-  }
-  /**
-   * ログイン user 情報を設定します<br>
-   * start の前に設定します
-   * @param {UserDae} user ログイン user 情報
-   */
-  set user( user:UserDae ):void {
-    this._user = user;
-  }
-  // ---------------------------------------------------
-  //  Method
-  // ---------------------------------------------------
-  /**
-   * Ajax request を開始します
-   */
-  start():void {
-
-    if ( User.sign && this.user === null ) {
-      throw new Error( `user info have to set before start.${this._articleId}, ${this._commentsListType}` );
-    }
-    this.action.next();
-
-  }
-  /**
-   * Ajax response success
-   * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
-   */
-  done( result:Result ):void {
-
-    let response = result.response;
-    // console.log( 'response ', typeof response === 'undefined', response );
-    if ( typeof response === 'undefined' ) {
-
-      // articles undefined
-      // JSON に問題がある
-      let error = new Error( '[COMMENTS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
-      // this.showError( error.message );
-
-    } else {
-
-      this.render( response );
-
-    }
-
-  }
-  /**
-   * Ajax response error
-   * @param {Error} error Error instance
-   */
-  fail( error:Error ):void {
-
-    this.executeSafely( View.RESPONSE_ERROR, error );
-    // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
-    // this.showError( error.message );
-
-  }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
-    // ToDo: Error 時の表示が決まったら変更する
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-
-  }
-  /**
-   * dom を render します
-   * @param {Object} response JSON response
-   */
-  render( response:Object ):void {
-
-    let commentsListDae = new CommentsListDae( response );
-
-    // total check
-    if ( commentsListDae.total === 0 ) {
-
-      // reload の時はエラーにしない
-      if ( !this._reload ) {
-        // デーが無いので処理を止める + reload 除く
-        // console.log( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
-        this.executeSafely( View.EMPTY_ERROR );
-        return;
-      }
-
-    }
-
-    // previous data と新規データを合成
-    this._commentsList = this._commentsList.concat( commentsListDae.comments.list );
-
-    // _commentsBank へ comment.id をキーにデータをセット
-    let bank = this._commentsBank;
-    commentsListDae.comments.list.forEach( function( commentId ) {
-
-      bank[ commentId ] = commentsListDae.comments.bank[ commentId ];
-
-    } );
-
-    // 処理開始 関数振り分け いらないんじゃないか疑惑
-    this.all( commentsListDae );
-
-  }// render
-
-  /*
-  mine( commentsListDae:CommentsListDae ) {
-
-  }
-  */
   /**
    * normal, official, all をレンダリング
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
@@ -226,67 +75,6 @@ export class ViewComments extends View {
     // offset, length を使用する Action
     let action = this.action;
     let _this = this;
-
-    /*
-    // --------------------------------------------
-    // More button
-    // --------------------------------------------
-    let MoreView = React.createClass( {
-      propTypes: {
-        show: React.PropTypes.bool.isRequired,
-        rest: React.PropTypes.number
-      },
-      getDefaultProps: function() {
-        return {
-          show: false,
-          rest: 0
-        };
-      },
-      getInitialState: function() {
-        return {
-          loading: '',
-          show: this.props.show,
-          rest: this.props.rest
-        };
-      },
-      render: function() {
-
-        // hasNext: true, button を表示する？
-        if ( this.state.show && this.state.rest > 0 ) {
-
-          return (
-            <div id="more" className={'comment-andmore loading-root ' + this.state.loading}>
-              <a href={'#more'} onClick={this.handleClick} >他{this.state.rest}件を表示</a>
-              <span className="loading-spinner">&nbsp;</span>
-            </div>
-          );
-
-        } else {
-
-          // button 表示なし
-          return (
-            <div className="no-more"></div>
-          );
-
-        }
-
-      },
-      // -----------------------------------------
-      // button 関連 custom method
-      handleClick: function( event ) {
-        event.preventDefault();
-        // loading 表示
-        this.setState( { loading: 'loading' } );
-        action.next();
-      },
-      // button 表示・非表示
-      updateShow: function( show:boolean, rest:Number ) {
-
-        this.setState( { show: show, rest: rest } );
-
-      }
-    } );
-    */
 
     // more button 作成関数
     // CommentsDom から呼び出す
@@ -356,7 +144,7 @@ export class ViewComments extends View {
                 /* independent, open, commentCount 省略 */
                 return (
                   <li key={`${uniqueId}-${replyComment.id}`} className="comment-item">
-                    <CommentNode
+                    <SPCommentNode
                       uniqueId={`${uniqueId}-${replyComment.id}`}
                       commentDae={{comment: replyComment}}
                       userId={userId}
@@ -414,16 +202,6 @@ export class ViewComments extends View {
           let user = this.props.user;
           icon = user.profilePicture;
 
-          /*
-          if ( !icon ) {
-            icon = Empty.USER_EMPTY;
-          } else if ( !Safety.isImg( icon ) ) {
-            // 画像ファイル名に拡張子がないのがあったので
-            // 拡張子チェックを追加
-            icon = Empty.USER_EMPTY;
-          }
-          */
-
           // id
           userId = String( user.id );
           if (!userId) {
@@ -437,7 +215,7 @@ export class ViewComments extends View {
           <ul className={'comment-list'}>
             <li className="comment-item">
               {/* independent, open 省略 */}
-              <CommentNode
+              <SPCommentNode
                 uniqueId={`comment-${this.props.uniqueId}`}
                 commentDae={commentObject}
                 icon={icon}

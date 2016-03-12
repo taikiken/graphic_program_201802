@@ -1,26 +1,26 @@
 'use strict';
 
 // app
-import {Empty} from '../../../app/const/Empty';
-import {ErrorTxt} from '../../../app/const/ErrorTxt';
-import {Message} from '../../../app/const/Message';
+import {Empty} from '../../../../app/const/Empty';
+import {ErrorTxt} from '../../../../app/const/ErrorTxt';
+import {Message} from '../../../../app/const/Message';
 
 // data
-import {Form} from '../../../data/Form';
-import {ErrorMessage} from '../../../data/ErrorMessage';
-import {Safety} from '../../../data/Safety';
+import {Form} from '../../../../data/Form';
+import {ErrorMessage} from '../../../../data/ErrorMessage';
+import {Safety} from '../../../../data/Safety';
 
 // event
-import {ReplyStatus} from '../../../event/ReplyStatus';
-import {CommentStatus} from '../../../event/CommentStatus';
+import {ReplyStatus} from '../../../../event/ReplyStatus';
+import {CommentStatus} from '../../../../event/CommentStatus';
 
 // model
-import {ModelComment} from '../../../model/comment/ModelComment';
-import {ModelCommentReply} from '../../../model/comment/ModelCommentReply';
-import {Model} from '../../../model/Model';
+import {ModelComment} from '../../../../model/comment/ModelComment';
+import {ModelCommentReply} from '../../../../model/comment/ModelCommentReply';
+import {Model} from '../../../../model/Model';
 
 // node
-import {ErrorNode} from '../../error/ErrorNode';
+import {ErrorNode} from '../../../../node/error/ErrorNode';
 
 // React
 let React = self.React;
@@ -32,8 +32,8 @@ let ReactDOM = self.ReactDOM;
  * コメント Form Element
  * 入力(textarea)と送信(input:submit)
  *
- * CommentFormNode
- * |- CommentFormElementNode
+ * SPCommentFormNode
+ * |- SPCommentFormElementNode
  * @type {React.component} コメント送信フォーム
  */
 export let SPCommentFormElementNode = React.createClass( {
@@ -120,7 +120,7 @@ export let SPCommentFormElementNode = React.createClass( {
       };
 
       return (
-        <div className={'form-root loading-root ' + this.state.loading}>
+        <div className={'comment-form form-root loading-root ' + this.state.loading}>
           <form onSubmit={this.onSubmit} ref="form">
             <div className="comment-form-inner">
               <i className={'comment-form-user ' + loggedIn}><img src={picture} alt=""/></i>

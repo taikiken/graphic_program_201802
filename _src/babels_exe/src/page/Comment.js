@@ -38,6 +38,13 @@ export class Comment {
 
     }
   }
+  /**
+   * コメント詳細を表示するために事前にユーザー情報を取得する
+   * @param {string} mode 記事へのコメントかコメントの返信
+   * @param {Number} articleId
+   * @param {Number} commentId
+   * @param {Number} [replyId=0]
+   */
   static user( mode:string, articleId:Number, commentId:Number, replyId:Number = 0 ):void {
     // header.user
     let profileElement = Dom.profile();

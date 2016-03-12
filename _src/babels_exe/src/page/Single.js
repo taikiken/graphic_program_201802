@@ -160,7 +160,7 @@ export class Single {
     // comment form
     let commentFormElement = Dom.commentForm();
     if ( commentFormElement !== null ) {
-      let commentForm = new UT.view.comment.ViewCommentForm( commentFormElement, articleId, picture );
+      let commentForm = new UT.sp.view.comment.SPViewCommentForm( commentFormElement, articleId, picture );
       commentForm.start();
     }
 
