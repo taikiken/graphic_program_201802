@@ -70,7 +70,11 @@ files = [
 gulp.task 'sp:css:dev', ->
   return gulp.src files
   .pipe $.plumber()
-  .pipe $.sourcemaps.init debug:true
+  .pipe $.sourcemaps.init(
+    debug:true
+    loadMaps: true
+    identityMap: true
+  )
   .pipe $.changed dir.sp.css + '/**', extension: '.css'
   .pipe $.sass(
     precision: 10
@@ -82,9 +86,8 @@ gulp.task 'sp:css:dev', ->
 #  .pipe $.sourcemaps.write './'
   # inline map にする
   .pipe $.sourcemaps.write './', {
-#    addComment: true
-#    loadMaps: true
-#    includeContent: false
+    addComment: true
+    includeContent: true
     sourceRoot: ['../../../app', '../../../scss']
   }
   .pipe gulp.dest tmp

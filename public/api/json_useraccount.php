@@ -16,91 +16,96 @@ $y["status"]["message_type"]="success";
 $y["status"]["developer_message"]="";
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-
-	$email=trim($_POST["email"]);
-	$emailcheck=check_email($email,1);
-	if($emailcheck==""){
-		$sv[$sn[]="t1"]=$email;
-	}else{
-		$ermsg["email"]=$emailcheck;
-	}
 	
-	$passwd=trim($_POST["password"]);
-	if(strlen($passwd)>0){
-		$passwdcheck=check_passwd($passwd);
-		if($passwdcheck==""){
-			$access_token=md5($email.$passwd);
-			$sv[$sn[]="a15"]=$access_token;
-			$sv[$sn[]="passwd"]=md5($MAGIC_STRING.$passwd);	
+	if(strlen($uid)>0){
+	
+		$email=trim($_POST["email"]);
+		$emailcheck=check_email($email,1);
+		if($emailcheck==""){
+			$sv[$sn[]="t1"]=$email;
 		}else{
-			$ermsg["password"]=$passwdcheck;
+			$ermsg["email"]=$emailcheck;
 		}
-	}
-	
-	$name=trim($_POST["name"]);
-	if(strlen($name)>0){
-		$sv[$sn[]="title"]=$name;
-	}else{
-		$ermsg["name"]="名前は必須項目です。";
-	}
-
-	if(strlen($_FILES["profile_picture"]["tmp_name"])>0){
-	
-		$ext=checkFileType($_FILES["profile_picture"]);
-		$filename=sprintf("%s.%s",md5("ut".$email),$ext);
-		if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
-			imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
-			$sv[$sn[]="img1"]=$filename;
-		}else{
-			$ermsg["profile_picture"]="ファイルのアップロードに失敗しました。";
-		}
-	}
-
-	if(count($ermsg)>0){
-	
-		$y["status"]["code"]=400;
-		$y["status"]["user_message"]="入力内容が間違っています。";
-		$y["status"]["message_type"]="error";
-		$y["status"]["developer_message"]="リクエストデータに不正値がある";
 		
-		while(list($k,$v)=each($ermsg)){
-			$s["errors"][][$k]=$v;
+		$passwd=trim($_POST["password"]);
+		if(strlen($passwd)>0){
+			$passwdcheck=check_passwd($passwd);
+			if($passwdcheck==""){
+				$access_token=md5($email.$passwd);
+				$sv[$sn[]="a15"]=$access_token;
+				$sv[$sn[]="passwd"]=md5($MAGIC_STRING.$passwd);	
+			}else{
+				$ermsg["password"]=$passwdcheck;
+			}
+		}
+		
+		$name=trim($_POST["name"]);
+		if(strlen($name)>0){
+			$sv[$sn[]="title"]=$name;
+		}else{
+			$ermsg["name"]="名前は必須項目です。";
 		}
 	
-	}else{
+		if(strlen($_FILES["profile_picture"]["tmp_name"])>0){
+		
+			$ext=checkFileType($_FILES["profile_picture"]);
+			$filename=sprintf("%s.%s",md5("ut".$email),$ext);
+			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
+				imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
+				$sv[$sn[]="img1"]=$filename;
+			}else{
+				$ermsg["profile_picture"]="ファイルのアップロードに失敗しました。";
+			}
+		}
+	
+		if(count($ermsg)>0){
+		
+			$y["status"]["code"]=400;
+			$y["status"]["user_message"]="入力内容が間違っています。";
+			$y["status"]["message_type"]="error";
+			$y["status"]["developer_message"]="リクエストデータに不正値がある";
+			
+			while(list($k,$v)=each($ermsg)){
+				$s["errors"][][$k]=$v;
+			}
+		
+		}else{
+					
+			$bio=trim($_POST["bio"]);
+			$sv[$sn[]="t2"]=$bio;
+		
+			$q=array();	
+			while(list($k,$v)=each($sv)){
+				$v=stripslashes($v);
+				$v=str_replace("―","-",$v);
+				$v=addslashes($v);
+				$v=str_replace("\'","''",$v);
+				$v=str_replace(array("\r\n","\r"),"\n",$v);
+				$q[]=sprintf("%s='%s'",$k,$v);
+			}
+			
+			if(count($q)>0){
 				
-		$bio=trim($_POST["bio"]);
-		$sv[$sn[]="t2"]=$bio;
-	
-	
-		$q=array();	
-		while(list($k,$v)=each($sv)){
-			$v=stripslashes($v);
-			$v=str_replace("―","-",$v);
-			$v=addslashes($v);
-			$v=str_replace("\'","''",$v);
-			$v=str_replace(array("\r\n","\r"),"\n",$v);
-			$q[]=sprintf("%s='%s'",$k,$v);
-		}
-		
-		if(count($q)>0){
-			
-			$sql=sprintf("update repo_n set %s where id=%s",implode(",",$q),$uid);
-			
-			$o->query($sql);
-			$e=$o->affected_rows2();
-			
-			if(!$e){
-				$y["status"]["code"]=500;
-				$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+				$sql=sprintf("update repo_n set %s where id=%s",implode(",",$q),$uid);
+				
+				$o->query($sql);
+				$e=$o->affected_rows2();
+				
+				if(!$e){
+					$y["status"]["code"]=500;
+					$y["status"]["user_message"]="データベースへの接続に失敗しました。時間をおいてもう一度お試しください。";
+					$y["status"]["message_type"]="error";
+				}
+			}else{
+				$y["status"]["code"]=400;
+				$y["status"]["user_message"]="変更箇所はありませんでした。";
 				$y["status"]["message_type"]="error";
 			}
-
-		}else{
-			$y["status"]["code"]=400;
-			$y["status"]["user_message"]="変更箇所はありませんでした。";
-			$y["status"]["message_type"]="error";
 		}
+	}else{
+		$y["status"]["code"]=400;
+		$y["status"]["user_message"]="ユーザが存在しません。";
+		$y["status"]["message_type"]="error";
 	}
 }
 

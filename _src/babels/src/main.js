@@ -125,6 +125,7 @@ import {ViewVideos} from './view/sidebar/ViewVideos';
 
 // modal
 import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
+import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
 
 // ----------- users
 // signup
@@ -148,6 +149,24 @@ import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
 // -------------------------------------
 // ui
 import {Receiver} from './ui/Receiver';
+
+// -------------------------------------
+// sp
+
+// sp/view
+
+// home
+import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
+import {SPViewNews} from './sp/view/home/SPViewNews';
+
+// category
+import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
+
+// Syn.
+import {SPViewSyn} from './sp/view/SPViewSyn';
+
+// header
+import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
 
 /**
  * ToDo: 対象外OS alert
@@ -290,7 +309,23 @@ var UT = {
       ViewSettingsInterest: ViewSettingsInterest
     },
     modal: {
-      ViewDeleteModal: ViewDeleteModal
+      ViewDeleteModal: ViewDeleteModal,
+      ViewLogoutModal: ViewLogoutModal
+    }
+  },
+  sp: {
+    view: {
+      SPViewSyn: SPViewSyn,
+      home: {
+        SPViewHeadLine: SPViewHeadLine,
+        SPViewNews: SPViewNews
+      },
+      category: {
+        SPViewCategoryRoot: SPViewCategoryRoot
+      },
+      header: {
+        SPViewHeaderUser: SPViewHeaderUser
+      }
     }
   }
 };

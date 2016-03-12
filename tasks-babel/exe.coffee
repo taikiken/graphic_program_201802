@@ -48,6 +48,10 @@ htdocs = dir.htdocs
 # task
 # --------------------------------------------
 
+# --------------------------------------------
+# pc
+# --------------------------------------------
+
 files = [
   dir.exe.src + '/**/*.js'
   '!' + dir.exe.src + '/**/_*.js'
@@ -73,6 +77,45 @@ gulp.task 'exe:make', ( cb ) ->
   runSequence(
     'exe:eslint'
     'exe:babel'
+    cb
+  )
+  return
+
+# --------------------------------------------
+# sp
+# --------------------------------------------
+
+###
+  SP 用実行ファイル作成
+  webpack の都合上ここに作ります
+###
+
+sp_files = [
+  dir.sp.exe.src + '/**/*.js'
+  '!' + dir.sp.exe.src + '/**/_*.js'
+]
+
+
+# eslint
+gulp.task 'sp:exe:eslint', ->
+  return gulp.src sp_files
+  .pipe $.eslint useEslintrc: true
+  .pipe $.eslint.format()
+  .pipe $.eslint.failAfterError()
+
+# babel
+gulp.task 'sp:exe:babel', ->
+  return gulp.src sp_files
+  .pipe $.babel presets: [ 'es2015', 'react', 'stage-0' ], plugins: ['transform-runtime']
+  .pipe $.replaceTask patterns: patterns
+  .pipe gulp.dest dir.exe.compile
+  .pipe $.size title: '*** sp:exe:babel ***'
+
+# dev
+gulp.task 'sp:exe:make', ( cb ) ->
+  runSequence(
+    'sp:exe:eslint'
+    'sp:exe:babel'
     cb
   )
   return

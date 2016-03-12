@@ -13,7 +13,7 @@
 
 import {SearchAuth} from '../action/search/SearchAuth';
 import {Search} from '../action/search/Search';
-import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
+import {ViewArchiveMasonry} from './ViewArchiveMasonry';
 // view
 import {View} from './View';
 // import {ViewError} from './error/ViewError';
@@ -30,7 +30,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * 検索ページ
  */
-export class ViewSearch extends ViewArchiveMasonryInfinite {
+export class ViewSearch extends ViewArchiveMasonry {
   /**
    * 検索ページ 表示
    * @param {string} word 検索キーワード

@@ -28,7 +28,7 @@ if(strlen($uid)>0){
 	
 }else{
 	$y["status"]["code"]=400;
-	$y["status"]["user_message"]="指定したアクセストークンが存在しません。";
+	$y["status"]["user_message"]="ユーザが存在しません";
 	$y["status"]["message_type"]="error";	
 }
 

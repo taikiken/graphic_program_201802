@@ -99,10 +99,17 @@ export class ViewArchiveMasonryInfinite extends View {
   get moreElement():Element {
     return this._moreElement;
   }
-
+  /**
+   * home flag
+   * @return {boolean|*} home flag boolean を返します
+   */
   get home():boolean {
     return this._home;
   }
+  /**
+   * home flag
+   * @param {boolean} home flag
+   */
   set home( home:boolean ):void {
     this._home = home;
   }
@@ -368,7 +375,7 @@ export class ViewArchiveMasonryInfinite extends View {
           return null;
         } else {
 
-          return <span className="commented-user-andmore">{this.state.total}</span>;
+          return <span className="commented-user-andmore">+{this.state.total}</span>;
         }
 
       }
@@ -392,7 +399,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         if ( !this.props.hasSecond ) {
           // 描画要素がない
-          return null;
+          return <div className="commented-user"></div>;
         }
 
         let seconds = this.state.seconds;

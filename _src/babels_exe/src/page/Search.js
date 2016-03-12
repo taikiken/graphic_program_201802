@@ -28,7 +28,7 @@ export class Search {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Category is static Class. not use new Category().` );
+      throw new Error( `Search is static Class. not use new Search().` );
 
     }
   }

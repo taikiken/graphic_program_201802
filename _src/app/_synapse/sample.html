@@ -1,0 +1,264 @@
+<html>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Synapse sample implementation</title>
+    <script type='text/javascript' src='synapse.js'></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script src="extras/jquery.inview.js"></script>
+
+    <!-- サイドメニューで上にスクロールした際にコンテンツごと先頭にスクロールしてしまう問題を回避 -->
+    <script src="extras/jquery.mobile-1.4.3-pr-7674.js"></script>
+
+    <script type='text/javascript'>
+    $(document).ready(function(){
+      // jQuery Mobile の Ajax 実行を無効化する
+      $.mobile.ajaxEnabled = false;
+
+      // ログレベルの指定。出荷時は指定しない
+      Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
+
+      // エンドポイントの指定。出荷時は指定しない
+      Synapse.endpoint = 'https://synapse-api.stg.bitcellar.net';
+
+      // メニューインスタンスの作成
+      var menu = new Synapse.Menu('synapse_dev_side_menu');
+
+      // 「おすすめサービス」の一覧が読み込まれたときに実行するイベント
+      menu.addListener('service_list_load', function(){
+        menu.serviceList.serviceListItems.forEach(function(item){
+          var listElement = $('<li>');
+          var itemElement = item.toHTMLElement();
+
+          // inview は、オブジェクトの各辺が描画領域に入ると報告されるが、そのうち最初の1回だけ
+          // 受け取れるようにフラグを立てて管理する。
+          var firstInView = false;
+
+          // メニューの各アイテムがビューに入ったことをトラッキングする
+          $(itemElement).on('inview', function(event, isInView){
+            if (isInView) {
+              if (!firstInView) {
+                item.trackShowEvent();
+              }
+              firstInView = true;
+            } else {
+              firstInView = false;
+            }
+          });
+
+          listElement.append(itemElement);
+          $('#synapse-service-list').append(listElement);
+        });
+
+        //メニューがあるときだけメニューエリアとロゴを表示させる
+        if (menu.serviceList.serviceListItems != undefined && menu.serviceList.serviceListItems.length > 0) {
+            $('#synapse-service-list-outer-box').css('display', 'block');
+            $('#synapse-logo-box').css('display', 'block');
+        }
+
+      });
+
+      // 通知が読み込まれたときに実行するイベント
+      menu.addListener('service_notification_load', function(){
+        // 通知が存在する場合としない場合で、通知ボタンのクラスを変える
+        if (menu.serviceNotification.serviceNotificationItems.length > 0) {
+          $('#side-menu-toggle').addClass('has-notification');
+        } else {
+          $('#side-menu-toggle').removeClass('has-notification');
+        }
+      });
+
+      // サイドメニューを作成
+      $('#side-menu').panel({
+        // メニューを開いたことをトラッキングする
+        beforeopen : function(){ menu.trackShowEvent() }
+      });
+
+
+      menu.init();
+    });
+    </script>
+    <style type='text/css'>
+      #synapse-ad-unit {
+        padding: 0;
+      }
+
+      .synapse_container {
+        padding: 8px;
+      }
+
+      .synapse_container a {
+        text-decoration: none;
+      }
+
+      .synapse_container img.synapse_icon {
+        width: 24px;
+        height: 24px;
+        padding: 8px;
+        float: left;
+      }
+
+      .synapse_container div.synapse_category {
+        color: rgb(51, 51, 51);
+        font-size: 16px;
+        margin-right: 20px;
+      }
+
+      .synapse_container div.synapse_service_name {
+        color: rgb(120, 120, 120);
+        font-size: 12px;
+        margin-right: 20px;
+      }
+
+      .synapse_container div.synapse_notification_text {
+        color: rgb(51, 51, 51);
+        font-size: 12px;
+        font-weight: normal;
+        margin-right: 20px;
+      }
+
+      .synapse_container div.synapse_notification_count {
+        position: absolute;
+        right: 16px;
+        top: 20px;
+        float: right;
+        border-radius: 50%;
+        color: rgb(255, 255, 255);
+        background-color: rgb(255, 0, 0);
+        font-size: 12px;
+        text-align: center;
+        padding: 0 3px;
+      }
+
+      #side-menu-toggle {
+        left: 4px;
+        -webkit-transform: scale(1.5, 1.5) translate(5px, -1px);
+        display: block;
+      }
+
+      /* 通知がある場合、赤いバッジを出す */
+      #side-menu-toggle.has-notification::before {
+        content: '';
+        border-radius: 50%;
+        background-color: rgb(255, 0, 0);
+        height: 8px;
+        width: 8px;
+        position:absolute;
+        top: 3px;
+        right: 3px;
+      }
+
+      /* Syn.のロゴを表示 */
+      div.synapse_logo {
+          height: 141px;
+          width: 100%;
+          background-size: auto 50px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          /* URLを変更してデザインにあったSyn.のロゴに変更できます */
+          background-image: url("https://synapse-bitcellar-assets.s3.amazonaws.com/logos/original.png");
+      }
+    </style>
+  </head>
+  <body>
+    <div data-role='page'>
+      <div data-role='header' role='banner'>
+        <h1>Synapse Demo</h1>
+      </div>
+
+      <div role='main' class='ui-content'>
+        <p>
+          I am honored to be with you today at your commencement from one of
+          the finest universities in the world. I never graduated from college.
+          Truth be told, this is the closest I've ever gotten to a college
+          graduation. Today I want to tell you three stories from my life.
+          That's it. No big deal. Just three stories.
+        </p>
+        <!--<p>-->
+          <!--The first story is about connecting the dots.-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--I dropped out of Reed College after the first 6 months, but then-->
+          <!--stayed around as a drop-in for another 18 months or so before I really-->
+          <!--quit. So why did I drop out?-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--It started before I was born. My biological mother was a young, unwed-->
+          <!--college graduate student, and she decided to put me up for adoption.-->
+          <!--She felt very strongly that I should be adopted by college graduates,-->
+          <!--so everything was all set for me to be adopted at birth by a lawyer-->
+          <!--and his wife. Except that when I popped out they decided at the last-->
+          <!--minute that they really wanted a girl. So my parents, who were on a-->
+          <!--waiting list, got a call in the middle of the night asking: "We have-->
+          <!--an unexpected baby boy; do you want him?" They said: "Of course." My-->
+          <!--biological mother later found out that my mother had never graduated-->
+          <!--from college and that my father had never graduated from high school.-->
+          <!--She refused to sign the final adoption papers. She only relented a few-->
+          <!--months later when my parents promised that I would someday go to-->
+          <!--college.-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--And 17 years later I did go to college. But I naively chose a college-->
+          <!--that was almost as expensive as Stanford, and all of my working-class-->
+          <!--parents' savings were being spent on my college tuition. After six-->
+          <!--months, I couldn't see the value in it. I had no idea what I wanted to-->
+          <!--do with my life and no idea how college was going to help me figure it-->
+          <!--out. And here I was spending all of the money my parents had saved-->
+          <!--their entire life. So I decided to drop out and trust that it would-->
+          <!--all work out OK. It was pretty scary at the time, but looking back it-->
+          <!--was one of the best decisions I ever made. The minute I dropped out I-->
+          <!--could stop taking the required classes that didn't interest me, and-->
+          <!--begin dropping in on the ones that looked interesting.-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--It wasn't all romantic. I didn't have a dorm room, so I slept on the-->
+          <!--floor in friends' rooms, I returned coke bottles for the 5¢ deposits-->
+          <!--to buy food with, and I would walk the 7 miles across town every-->
+          <!--Sunday night to get one good meal a week at the Hare Krishna temple.-->
+          <!--I loved it. And much of what I stumbled into by following my curiosity-->
+          <!--and intuition turned out to be priceless later on. Let me give you one-->
+          <!--example:-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--Reed College at that time offered perhaps the best calligraphy-->
+          <!--instruction in the country. Throughout the campus every poster, every-->
+          <!--label on every drawer, was beautifully hand calligraphed. Because I-->
+          <!--had dropped out and didn't have to take the normal classes, I decided-->
+          <!--to take a calligraphy class to learn how to do this. I learned about-->
+          <!--serif and san serif typefaces, about varying the amount of space-->
+          <!--between different letter combinations, about what makes great-->
+          <!--typography great. It was beautiful, historical, artistically subtle in-->
+          <!--a way that science can't capture, and I found it fascinating.-->
+        <!--</p>-->
+      </div>
+
+      <div id='side-menu' data-role='panel' data-position='left' data-display='push'>
+        <ul data-role="listview" data-inset="false" data-divider-theme="a">
+
+          <!-- Service Specific Menu -->
+          <li data-role="list-divider">メニュー</li>
+          <li><a href="#">taro さん</a></li>
+          <li><a href="#">フォローフィード</a></li>
+          <li><a href="#">検索</a></li>
+
+          <!-- Syn. Service List -->
+          <div id='synapse-service-list-outer-box' style='display: none'>
+            <ul data-role="listview" data-inset="true" id='synapse-service-list'>
+              <li data-role="list-divider">おすすめサービス</li>
+            </ul>
+          </div>
+
+          <!-- Syn. Logo -->
+          <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
+
+        </ul>
+      </div>
+
+      <div style='background-color: transparent; border-color: transparent;' data-role='footer' data-position='fixed'>
+        <a href="#side-menu" id='side-menu-toggle' class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-bottom">Menu</a>
+      </div>
+    </div>
+  </body>
+</html>

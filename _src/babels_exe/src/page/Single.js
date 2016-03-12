@@ -70,6 +70,12 @@ export class Single {
 
       }
       headerUser.start();
+
+      let modalElement = Dom.modal();
+      if ( modalElement !== null ) {
+        let modal = new UT.view.modal.ViewLogoutModal( modalElement );
+        modal.start();
+      }
     }
 
     // single page

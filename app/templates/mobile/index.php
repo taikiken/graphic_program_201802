@@ -1,3 +1,22 @@
+<?php
+// ------------------------------------------------
+// ホーム / 一面
+// ------------------------------------------------
+?>
+<div class="body-sec">
+  <div class="body-sec-inner">
+    <section class="main-sec">
+      <div id="headline-container"></div><!-- /headline -->
+      <div class="board-large">
+        <div id="board-container"></div><!--/archive-->
+        <div id="board-container-more"></div><!--/archive-more-->
+      </div><!-- /.board-large -->
+    </section><!-- /.main-sec -->
+  </div>
+</div><!-- /.body-sec -->
+
+<?php
+/*
 <h1>
   <?php echo $page['title']; ?>
 </h1>
@@ -111,5 +130,6 @@
   </li>
 </ul>
 
+*/?>
 
-<?php var_dump($page); ?>
+<?php //var_dump($page); ?>

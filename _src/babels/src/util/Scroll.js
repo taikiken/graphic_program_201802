@@ -13,6 +13,11 @@
 
 import {EventDispatcher} from '../event/EventDispatcher';
 
+// tween
+let greensock = self.com.greensock;
+let TweenLite = greensock.TweenLite;
+let easing = greensock.easing;
+
 let _symbol = null;
 let _instance = null;
 let _watch = false;
@@ -89,11 +94,28 @@ export class Scroll extends EventDispatcher {
   static set y( top:Number ):void {
     window.scrollTo( 0, top );
   }
-/*
-  motion( top:Number, duration:Number = 0.5, easing:Function = null ):void {
 
+  /**
+   * scroll animation を行います
+   * @param {Number} top 目標位置
+   * @param {Number} [duration=0.5] motion 時間 sec.
+   * @param {Number} [delay=0] delay 時間 sec.
+   * @param {Function} [easingFunc=Power3.easeOut] easing function
+   */
+  static motion( top:Number, duration:Number = 0.5, delay:Number = 0, easingFunc:Function = easing.Power3.easeOut ):void {
+    TweenLite.to(
+      window,
+      duration,
+      {
+        scrollTo: {
+          y: top
+        },
+        delay: delay,
+        easing: easingFunc
+      }
+    );
   }
-  */
+
   // ---------------------------------------------------
   //  static method
   // ---------------------------------------------------

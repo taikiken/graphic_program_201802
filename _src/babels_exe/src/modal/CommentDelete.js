@@ -18,6 +18,9 @@ let _symbol = Symbol();
 // UT
 let UT = self.UT;
 
+/**
+ * コメント削除モーダル
+ */
 export class CommentDelete {
   /**
    * static class です, instance を作成しません

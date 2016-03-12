@@ -104,6 +104,9 @@ sp =
   js: app + '/assets/sp/js'
   css: app + '/assets/sp/css'
   images: app + '/assets/sp/images'
+  exe:
+    src: '_src/babels_exe_sp/src'
+    compile: '_src/babels_exe_sp/compile'
 
 
 # ------------------------------------------------------
@@ -112,11 +115,11 @@ sp =
 AUTO_PREFIX_BROWSERS = [
   'ie >= 11'
   'ie_mob >= 10'
-  'ff >= 43'
-  'chrome >= 47'
+  'ff >= 44'
+  'chrome >= 48'
   'safari >= 9'
   'opera >= 34'
-  'ios >= 8.4.1'
+  'ios >= 8.4'
   'android >= 4.2'
   'bb >= 10'
 ]

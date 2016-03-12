@@ -12,7 +12,7 @@
 'use strict';
 
 import {EventDispatcher} from '../event/EventDispatcher';
-import {User} from './User';
+// import {User} from './User';
 import {Loc} from '../util/Loc';
 
 let _symbol = Symbol();

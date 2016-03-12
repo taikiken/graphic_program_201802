@@ -1,7 +1,20 @@
 # ignore eslint
+
 # libs files ignore
 ./_src/app/assets/js/libs/**/*.js
+./_src/app/assets/sp/js/libs/**/*.js
+
 # *.babel.js ignore
 ./_src/app/assets/_babel/**/*.babel.js
+./_src/app/assets/sp/_babel/**/*.babel.js
+
 # *.bundle.js ignore
 ./_src/app/assets/js/**/*.bundle.js
+./_src/app/assets/sp/js/**/*.bundle.js
+
+# raw JS
+./_src/app/assets/js/*.js
+./_src/app/assets/sp/js/*.js
+
+# synapse
+./_src/app/_synapse/**/*.js

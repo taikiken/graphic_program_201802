@@ -117,7 +117,7 @@ gulp.task 'vendor:react:dev', ->
 # copy libraries
 exportsPath = exports + '/**'
 libraries = []
-#libraries.push exportsPath + '/jquery2/**/*.js'
+libraries.push exportsPath + '/jquery2/**/*.js'
 libraries.push exportsPath + '/sagen/**/sagen.min.js'
 libraries.push exportsPath + '/html5shiv/**/*'
 #libraries.push exportsPath + '/fancybox/**/*'

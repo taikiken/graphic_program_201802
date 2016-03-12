@@ -24,7 +24,7 @@ import {Path} from '../../app/const/Path';
 export class CommentSingle extends OffsetAuth {
   /**
    * コメント詳細
-   * @param {Number} id コメントを取得する記事 ID
+   * @param {Number} articleId コメントを取得する記事 ID
    * @param {Number} commentId コメント ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

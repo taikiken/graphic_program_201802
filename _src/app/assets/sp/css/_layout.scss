@@ -39,6 +39,10 @@ button {
   outline: none;
 }
 
+input::-webkit-input-placeholder {
+  font-size: fz(24/2);
+}
+
 .whole {
   overflow-x: hidden;
 
@@ -64,7 +68,21 @@ a {
 
 // 2. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
+// -------------------
+// header を fixed にする
+.header-sticky {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+}
+.body-sec {
+  margin-top: 100px;
+}
 
+// --------------------
 .head-sec {
   @at-root {
     &-inner {
@@ -96,6 +114,57 @@ a {
       @extend .sp-sprite-header;
       @include sprite( $header-icon-search, inline-block );
       @include hide-text;
+    }
+  }
+
+
+
+  .menu-opener {
+    position: absolute;
+    width: (100/2)+px;
+    height: (100/2)+px;
+
+    #side-menu-toggle {
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      span {
+        position: absolute;
+        left: (30/2)+px;
+        display: block;
+        width: (46/2)+px;
+        height: (4/2)+px;
+        line-height: 0;
+        background-color: #333;
+        font-size: 0;
+
+        &:nth-child(1) {
+          top: (34/2)+px;
+        }
+
+        &:nth-child(2) {
+          top: (48/2)+px;
+        }
+
+        &:nth-child(3) {
+          top: (62/2)+px;
+        }
+      }
+
+      &.has-notification {
+        &:after {
+          content: '';
+          position: absolute;
+          top: (20/2)+px;
+          left: (60/2)+px;
+          width: (24/2)+px;
+          height: (24/2)+px;
+          border: 2px solid #fff;
+          border-radius: 100%;
+          background-color: #e14343;
+        }
+      }
     }
   }
 
@@ -543,6 +612,182 @@ a {
 }
 
 
+
+
+
+#side-menu-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: 999;
+}
+
+#side-menu-container {
+  &.open {
+    width: 100%;
+    height: 100%;
+
+    #side-menu-bg {
+      opacity: 1;
+    }
+    #side-menu {
+      width: 85%;
+      transform: translateX(0);
+     }
+  }
+
+  &.closing {
+    #side-menu-bg {
+      opacity: 0;
+    }
+    #side-menu {
+      transform: translateX(-100%);
+      transition-duration: 0.15s;
+    }
+  }
+}
+#side-menu-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+
+}
+#side-menu {
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+  z-index: 999;
+  max-height: 100%;
+  min-height: 100%;
+  background-color: #fff;
+
+  transform: translateX(-100%);
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+}
+
+// /* Syn.のロゴを表示 */
+div.synapse_logo {
+  height: 141px;
+  width: 100%;
+  background-size: auto 50px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  // /* URLを変更してデザインにあったSyn.のロゴに変更できます */
+  background-image: url("https://synapse-bitcellar-assets.s3.amazonaws.com/logos/original.png");
+}
+
+
+
+.side-menu-ut-nav {
+  padding: (24/2)+px;
+  background: #111;
+  border-bottom: 1px solid #333;
+}
+
+.side-menu-ut-nav-link {
+  @include link-decoration(#fff, #fff, none, none);
+  position: relative;
+  top: 2px;
+  line-height: (60/2)+px;
+  font-weight: bold;
+  font-size: fz(30/2);
+  vertical-align: top;
+
+  i {
+    @extend .sp-sprite-common;
+    @include hide-text;
+    position: relative;
+    top: -2px;
+    margin-right: (10/2)+px;
+  }
+}
+
+.side-menu-ut-nav-home i { @include sprite( $common-icon-side-home, inline-block ); }
+.side-menu-ut-nav-mypage i { @include sprite( $common-icon-side-mypage, inline-block ); }
+.side-menu-ut-nav-config i { @include sprite( $common-icon-side-config, inline-block ); }
+.side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
+.side-menu-ut-nav-about i { @include sprite( $common-icon-side-about, inline-block ); }
+
+
+#synapse-service-list {
+}
+
+#synapse-service-list-title {
+  padding: (24/2)+px (36/2)+px;
+  background-color: #aaa;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.synapse_container {
+  position: relative;
+  padding: 16px 8px;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.synapse_container a {
+  text-decoration: none;
+}
+
+.synapse_container img.synapse_icon {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  float: left;
+}
+
+.synapse_container div.synapse_category {
+  line-height: 1.2em;
+  margin-right: 20px;
+  color: rgb(51, 51, 51);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.synapse_container div.synapse_service_name {
+  line-height: 1.2em;
+  margin-top: 0.25em;
+  margin-right: 20px;
+  color: rgb(120, 120, 120);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.synapse_container div.synapse_notification_text {
+  margin-right: 20px;
+  color: rgb(51, 51, 51);
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.synapse_container div.synapse_notification_count {
+  position: absolute;
+  right: 16px;
+  top: 20px;
+  float: right;
+  padding: 0 3px;
+  border-radius: 100%;
+  background-color: $highlight-color;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+}
 
 
 

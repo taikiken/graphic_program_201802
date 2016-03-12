@@ -406,14 +406,14 @@ export class ViewPickup extends View {
       // next button click
       onNext: function( event ) {
         event.preventDefault();
-        console.log( 'next click' );
+        // console.log( 'next click' );
         // next action は polling からも使うので関数化し共通化する
         this.updateNext();
       },
       // prev button click
       onPrev: function( event ) {
         event.preventDefault();
-        console.log( 'prev click' );
+        // console.log( 'prev click' );
         // 0 未満になったら last へ戻す
         let n = position - 1;
         if ( n < 0 ) {
@@ -424,7 +424,7 @@ export class ViewPickup extends View {
       },
       // slide を変更
       jump: function( index ) {
-        console.log( 'jump ', index );
+        // console.log( 'jump ', index );
         // polling stop
         polling.stop();
         // --------------
@@ -479,7 +479,7 @@ export class ViewPickup extends View {
       },
       // pager click から呼び出されます
       onPagerClick: function( index ) {
-        console.log( 'onPagerClick ', index );
+        // console.log( 'onPagerClick ', index );
         // 子コンポーネント Pagers -> PickupPager から呼び出される
         // innerHTML 数値を使うので
         // Number 型へ変換する

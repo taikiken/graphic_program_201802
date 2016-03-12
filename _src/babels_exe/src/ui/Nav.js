@@ -32,6 +32,10 @@ export class Nav {
 
     }
   }
+  /**
+   * global menu へ slug を css class として挿入
+   * @param {string} slug category slug
+   */
   static start( slug:string = 'all' ):void {
     let nav = Dom.nav();
     if ( nav !== null && slug !== null && typeof slug !== 'undefined' ) {

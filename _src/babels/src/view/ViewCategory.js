@@ -13,13 +13,13 @@
 
 import {Category} from '../action/archive/Category';
 import {CategoryAuth} from '../action/archive/CategoryAuth';
-import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
+import {ViewArchiveMasonry} from './ViewArchiveMasonry';
 import {User} from '../app/User';
 
 /**
  * category 一覧表示
  */
-export class ViewCategory extends ViewArchiveMasonryInfinite {
+export class ViewCategory extends ViewArchiveMasonry {
   /**
    * category 一覧表示 要 **slug**
    * @param {string} slug category slug, default 'all'
@@ -30,7 +30,7 @@ export class ViewCategory extends ViewArchiveMasonryInfinite {
   constructor( slug:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option, true );
     // Category Action を使う
-    // slug を送り 表示(render)は ViewArchiveMasonryInfinite を使う
+    // slug を送り 表示(render)は ViewArchiveMasonry を使う
     this._action = User.sign ?
       new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
       new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );

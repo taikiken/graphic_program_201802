@@ -1,9 +1,36 @@
+# auth1. 特定のIPを許可
+# logram
+SetEnvIf Remote_Addr "120\.143\.11\.141" allowed_ip_addresses
+# parachute
+SetEnvIf Remote_Addr "183\.76\.75\.12" allowed_ip_addresses
+# axesor
+SetEnvIf Remote_Addr "124\.219\.166\.154" allowed_ip_addresses
+# grandbase - 1
+SetEnvIf Remote_Addr "202\.248\.219\.58" allowed_ip_addresses
+# grandbase - 2
+SetEnvIf Remote_Addr "61\.125\.228\.110" allowed_ip_addresses
+# kiito
+SetEnvIf Remote_Addr "120\.51\.210\.154" allowed_ip_addresses
+# popin - 1
+SetEnvIf Remote_Addr "54\.248\.85\.239" allowed_ip_addresses
+# popin - 2
+SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
+
+Order Deny,Allow
+Deny from All
+Allow from env=allowed_ip_addresses
+
+
+# auth2. 上記以外はベーシック認証
 AuthType Basic
-AuthName "Put user name and password."
 AuthUserFile /var/www/undotsushin.com/stg/.htpasswd
-<Limit GET>
+AuthGroupFile /dev/null
+AuthName "Put user name and password."
 require valid-user
-</Limit>
+
+# auth1, auth2 いずれかOKなら
+Satisfy Any
+
 
 php_flag magic_quotes_gpc off
 php_flag register_global off
@@ -20,6 +47,7 @@ php_value mbstring.language Japanese
 php_value mbstring.internal_encoding UTF-8
 php_value mbstring.http_output UTF-8
 php_value error_reporting 6133
+
 
 # for Slim - /app/Slim
 # ==============================

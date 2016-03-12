@@ -23,6 +23,7 @@ import {SingleDae} from '../../dae/SingleDae';
 
 // app
 import {User} from '../../app/User';
+import {Message} from '../../app/const/Message';
 /*
 import {MediaType} from '../../app/const/MediaType';
 */
@@ -90,7 +91,7 @@ export class ViewSingleHeader extends View {
       },
       render: function() {
         let single = this.state.single;
-        let message = this.state.status ? 'ブックマーク済' : 'ブックマークする';
+        let message = this.state.status ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL;
         let right = '';
 
         if ( this.state.sign ) {

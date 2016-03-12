@@ -88,7 +88,9 @@ _src/.tmp
 # -----------
 _src/app/js/*
 _src/app/assets/js/bundle/
-_src/app/assets/js/libs/
+_src/app/assets/js/libs/html5shiv
+_src/app/assets/js/libs/sagen
+_src/app/assets/js/libs/vendor.react.js
 _src/app/assets/_babel/*.babel.js
 _src/app/assets/_babel/_*.js
 

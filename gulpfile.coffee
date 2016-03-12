@@ -118,6 +118,30 @@ gulp.task 'exe:build', (cb) ->
   )
   return
 
+# sp
+# ---------
+# exe dev
+gulp.task 'sp:exe:dev', (cb) ->
+  runSequence(
+    'sp:exe:make'
+    'sp:webpack:babels:exe:dev'
+    'bundle:copy'
+    cb
+  )
+  return
+
+# exe build
+gulp.task 'sp:exe:build', (cb) ->
+  runSequence(
+#    'exe:make'
+# no eslint
+    'sp:exe:babel'
+    'sp:webpack:babels:exe:build'
+    'bundle:copy'
+    cb
+  )
+  return
+
 # --------------------------------------------
 # server
 # --------------------------------------------
@@ -159,7 +183,7 @@ gulp.task 'serve:app', ->
     '!' + app + '/**/_babel/*.js'
     '!' + app + '/**/*.bundle.js'
     '!' + app + '/**/*.babel.js'
-  ], [ 'js:hint', reload ]
+  ], [ 'js:dev', reload ]
   gulp.watch [ app + '/**/*.{png,jpg,gif,svg}' ], reload
   gulp.watch [ dir.libs + '/**/*' ], reload
 
@@ -229,14 +253,18 @@ gulp.task 'dev:init', (cb) ->
     'vendor:dev'
     'babels:dev'
     'exe:dev'
+    'sp:exe:dev'
     'sprite:build'
+    'sp:sprite:build'
     'single:dev'
     'bundle:copy'
     'libs:copy'
+    'libs:synapse:dev'
 #      'html:build'
     'js:dev'
     'image:copy'
     'css:dev'
+    'sp:css:dev'
     cb
   )
   return
@@ -251,14 +279,18 @@ gulp.task 'default', (cb) ->
     'vendor:init'
     'babels:build'
     'sprite:build'
+    'sp:sprite:build'
     'exe:build'
+    'sp:exe:build'
     'single:build'
     'bundle:copy'
     'libs:copy'
+    'libs:synapse:build'
     #'html:build'
     'js:build'
     'image:build'
     'css:build'
+    'sp:css:build'
     # 'sc5:make' - デプロイ時css document再生成, 体制に影響無いので外す
     'clean:all'
     'lec:build'
