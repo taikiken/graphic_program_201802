@@ -32,6 +32,7 @@ import {UserDae} from '../dae/UserDae';
 
 // node
 import {CommentNode} from '../node/comment/CommentNode';
+import {CommentMoreViewNode} from '../node/comment/CommentMoreViewNode';
 
 // event
 import {ReplyStatus} from '../event/ReplyStatus';
@@ -225,6 +226,7 @@ export class ViewComments extends View {
     let action = this.action;
     let _this = this;
 
+    /*
     // --------------------------------------------
     // More button
     // --------------------------------------------
@@ -283,6 +285,7 @@ export class ViewComments extends View {
 
       }
     } );
+    */
 
     // more button 作成関数
     // CommentsDom から呼び出す
@@ -293,7 +296,11 @@ export class ViewComments extends View {
 
       // とにかく render する
       ReactDOM.render(
-        React.createElement( MoreView, { show: show, rest: rest } ),
+        <CommentMoreViewNode
+          show={show}
+          rest={rest}
+          action={action}
+        />,
         moreElement
       );
 

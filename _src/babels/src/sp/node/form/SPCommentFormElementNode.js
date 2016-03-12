@@ -28,6 +28,7 @@ let ReactDOM = self.ReactDOM;
 
 // comment form
 /**
+ * [SP]
  * コメント Form Element
  * 入力(textarea)と送信(input:submit)
  *
@@ -35,7 +36,7 @@ let ReactDOM = self.ReactDOM;
  * |- CommentFormElementNode
  * @type {React.component} コメント送信フォーム
  */
-export let CommentFormElementNode = React.createClass( {
+export let SPCommentFormElementNode = React.createClass( {
   propTypes: {
     // 識別用 unique Id
     uniqueId: React.PropTypes.string.isRequired,
@@ -121,18 +122,21 @@ export let CommentFormElementNode = React.createClass( {
       return (
         <div className={'form-root loading-root ' + this.state.loading}>
           <form onSubmit={this.onSubmit} ref="form">
-            <i className={'comment-form-user ' + loggedIn}><img src={picture} alt=""/></i>
-            <div className="comment-form-comment-outer">
-              <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
-                <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" autoFocus="true" />
-                <ErrorNode message={message('body')} />
+            <div className="comment-form-inner">
+              <i className={'comment-form-user ' + loggedIn}><img src={picture} alt=""/></i>
+              <div className="comment-form-comment-outer">
+                <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
+                  <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder="コメントを書く" autoFocus="true" />
+                  <ErrorNode message={message('body')} />
+                </div>
               </div>
             </div>
+
             <div className="comment-form-submit">
               <input type="submit" value={Message.COMMENT_SUBMIT}/>
             </div>
           </form>
-          <div ref="commentMessage"></div>
+          {/* <div ref="commentMessage"></div> */}
           <div className="loading-spinner">&nbsp;</div>
         </div>
       );
