@@ -43,7 +43,11 @@
 
       </div><!-- /.comment -->
 
+      <?php
+      /*
+      必要ないとのことなので front からの出力をやめる
       <div id="single-related-container"></div>
+      */ ?>
 
     </section><!-- /.main-sec -->
 

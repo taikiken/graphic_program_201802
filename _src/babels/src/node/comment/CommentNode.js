@@ -15,7 +15,10 @@ import {Safety} from '../../data/Safety';
 // node
 import {ReactionNode} from './ReactionNode';
 import {CommentFormNode} from './CommentFormNode';
-import {CommentActionNode} from './CommentActionNode';
+import {CommentMenuNode} from './CommentMenuNode';
+import {CommentUserNode} from './CommentUserNode';
+import {CommentContentNode} from './CommentContentNode';
+// import {CommentActionNode} from './CommentActionNode';
 
 // node
 
@@ -23,6 +26,7 @@ import {CommentActionNode} from './CommentActionNode';
 // React
 let React = self.React;
 
+/*
 // 通報 drop menu
 let CommentMenuNode = React.createClass( {
   propTypes: {
@@ -196,6 +200,7 @@ let CommentMenuNode = React.createClass( {
 
   }
 } );
+*/
 /**
  * <h3>React class</h3>
  * 記事詳細 > コメント一覧 node を作成します
@@ -276,6 +281,7 @@ export let CommentNode = React.createClass( {
 
     return (
       <div className="comment-root">
+        {/* div.comment-menu */}
         <CommentMenuNode
           key={`${this.props.uniqueId}-menu`}
           uniqueId={`${this.props.uniqueId}-menu`}
@@ -287,6 +293,9 @@ export let CommentNode = React.createClass( {
           replyId={this.props.replyId}
           parent={this.props.parent}
         />
+        {/*
+        単独file にするために分離
+        CommentUserNode
         <figure className="comment-user">
           <span className="comment-user-link">
             <span className={'comment-user-thumb ' + loggedIn}><img src={picture} alt={comment.user.userName}/></span>
@@ -297,7 +306,27 @@ export let CommentNode = React.createClass( {
             </div>
           </span>
         </figure>
+       */}
+        {/* figure.comment-user */}
+        <CommentUserNode
+          loggedIn={loggedIn}
+          picture={picture}
+          userName={comment.user.userName}
+          bio={comment.user.bio || ''}
+          displayDate={comment.displayDate}
+        />
+        {/*
+         単独file にするために分離
+         CommentContentNode
         <div className={`comment-content comment-content-${this.props.commentId}${replyClass(this.props.replyId)}`} dangerouslySetInnerHTML={{__html: comment.body}} />
+         */}
+        {/* div.comment-content */}
+        <CommentContentNode
+          content={comment.body}
+          commentId={this.props.commentId}
+          replyClass={replyClass(this.props.replyId)}
+        />
+        {/* div.comment-reaction, good / bad */}
         <ReactionNode
           uniqueId={this.props.uniqueId}
           articleId={this.props.articleId}
