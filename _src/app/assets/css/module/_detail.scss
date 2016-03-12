@@ -47,8 +47,64 @@
 
   // post-content
   .post-content {
-    p {
+    h1, h2, h3, h4, h5, h6 {
       margin-top: 1.5em;
+      font-weight: bold;
+      font-size: fz(24);
+    }
+
+    ul, ol, dl, p, table {
+      margin-top: 1.5em;
+    }
+
+    li {
+      margin-left: 1em;
+    }
+
+    ul li {
+      list-style: disc;
+    }
+
+    dt {
+      font-weight: bold;
+    }
+
+    i {
+      font-style: italic;
+    }
+
+    em {
+      color: #999;
+    }
+
+    table {
+      border-top: 1px solid $border-primary-color;
+      border-right: 1px solid $border-primary-color;
+    }
+
+    th, td {
+      padding: 8px;
+      border-bottom: 1px solid $border-primary-color;
+      border-left: 1px solid $border-primary-color;
+    }
+
+    th {
+      background-color: #eee;
+    }
+
+    code, pre {
+      padding: 4px;
+      border: 1px solid $border-primary-color;
+      border-radius: 3px;
+    }
+
+    code {
+      background-color: #f7f7f7;
+      color: #666;
+    }
+
+    pre {
+      background-color: #fbfaf8;
     }
   } //.post-content
 
@@ -95,45 +151,86 @@
 
   // post-sns
   .post-sns {
+    display: table;
+    width: 100%;
     margin-top: 30px;
-    padding: 29px;
     border: 1px solid $border-primary-color;
 
     @at-root {
       &-list {
+        display: table-cell;
+        padding:  19px 0 19px 14px;
         letter-spacing: ls( inline-block );
-        text-align: center;
+      }
 
-        [ class^="post-sns-" ] {
-          display: inline-block;
-          margin: 0 5px;
-          letter-spacing: normal;
-          vertical-align: top;
+      &-item {
+        display: inline-block;
+        margin-left: 5px;
+        letter-spacing: normal;
+        vertical-align: middle;
 
-          a:hover {
-            @include hover-opacity;
+        a {
+          @extend .sprite-detail;
+          @include hide-text;
+        }
+
+        a:hover {
+          @include hover-opacity;
+        }
+
+        &_fbgood {
+          width: 71px;
+        }
+
+        &_tw {
+          a {
+            @include sprite( $detail-btn-sns-tw );
+          }
+        }
+
+        &_fb {
+          a {
+            @include sprite( $detail-btn-sns-fb );
+          }
+        }
+
+        &_gt {
+          a {
+            @include sprite( $detail-btn-sns-gt );
+          }
+        }
+
+        &_line {
+          a {
+            @include sprite( $detail-btn-sns-line );
           }
         }
       }
 
-      &-tw {
-        a {
-          @extend .sprite-detail;
-          @include sprite( $detail-icon-sns-tw );
-          @include hide-text;
+      &-pr {
+        display: table-cell;
+        width: 334px;
+        padding: 19px;
+        background-color: #f4f5f7;
+        letter-spacing: ls( inline-block );
+
+        dt, dd {
+          display: inline-block;
+          vertical-align: middle;
+          letter-spacing: normal;
+        }
+
+        dt {
+          // margin-right: 22px;
+        }
+
+        dd {
+          width: 71px;
+          // height: 61px;
+          padding-left: 24px;
+          text-align: right;
         }
       }
-
-      &-fbshare {
-        a {
-          @extend .sprite-detail;
-          @include sprite( $detail-icon-sns-fb );
-          @include hide-text;
-        }
-      }
-
-      &-fbgood {}
-      &-gt {}
     }
   } //.post-sns
 }
