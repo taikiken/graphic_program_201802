@@ -338,13 +338,14 @@
   a {
     @include link-decoration($highlight-color, #fff, none, none);
     display: block;
-    min-width: 10.8em;
-    padding: 6px 9px;
-    border-radius: 4px;
+    // min-width: 10.8em;
+    padding: (18/2)+px;
+    border-radius: 3px;
     border: 1px solid $highlight-color;
     font-weight: bold;
-    font-size: fz(12);
+    font-size: fz(20/2);
     vertical-align: middle;
+    text-align: center;
   }
 
   span {
@@ -352,17 +353,18 @@
 
     &:before {
       position: relative;
-      top: 2px;
+      top: 3px;
       margin-right: 5px;
       content: '';
-      @extend .sprite-common;
+      @extend .sp-sprite-common;
       @include sprite( $common-icon-bookmark_o, inline-block);
       @include hide-text;
     }
   }
 
   a.enable {
-    background-color: $highlight-color;
+    border-color: #bbb;
+    background-color: #bbb;
     color: #fff;
 
     span:before {
