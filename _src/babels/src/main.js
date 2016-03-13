@@ -169,7 +169,10 @@ import {SPViewSyn} from './sp/view/SPViewSyn';
 import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
 
 // single
+import {SPViewSingle} from './sp/view/SPViewSingle';
+import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
 
+// single/comment
 import {SPViewComments} from './sp/view/SPViewComments';
 import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
@@ -323,6 +326,10 @@ var UT = {
     view: {
       SPViewSyn: SPViewSyn,
       SPViewComments: SPViewComments,
+      SPViewSingle: SPViewSingle,
+      single: {
+        SPViewSingleHeader: SPViewSingleHeader
+      },
       comment: {
         SPViewCommentForm: SPViewCommentForm
       },

@@ -1592,6 +1592,16 @@
 	      return Dom.get('single-header-container');
 	    }
 	    /**
+	     * single 本文上, メインビジュアル
+	     * @return {Element} single-visual-container を返します
+	     */
+
+	  }, {
+	    key: 'visual',
+	    value: function visual() {
+	      return Dom.get('single-visual-container');
+	    }
+	    /**
 	     * single comment, 記事へのコメント
 	     * @return {Element} comment-form-container を返します
 	     */
@@ -2270,15 +2280,18 @@
 
 	      // single page
 	      // related いらなくる予定
-	      var elements = {
-	        related: _Dom.Dom.related(),
-	        footer: _Dom.Dom.singleFooter()
+	      /*
+	      let elements = {
+	        related: Dom.related(),
+	        footer: Dom.singleFooter()
 	      };
+	      */
 
 	      var singleHeaderElement = _Dom.Dom.singleHeader();
 
-	      if (singleHeaderElement !== null && elements.footer !== null) {
-	        var single = new UT.view.ViewSingle(articleId, singleHeaderElement, elements);
+	      if (singleHeaderElement !== null) {
+	        console.log('start sp single header');
+	        var single = new UT.sp.view.SPViewSingle(articleId, singleHeaderElement, _Dom.Dom.visual());
 	        _viewSingle = single;
 	        single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
 	        single.start();
@@ -2320,7 +2333,7 @@
 	      // title は backend output
 
 	      // sidebar
-	      _SPSidebar.SPSidebar.start(slug);
+	      // SPSidebar.start( slug );
 
 	      // nav current
 	      _SPNav.SPNav.start(slug);

@@ -23,14 +23,14 @@ import {SingleDae} from '../../dae/SingleDae';
 
 // app
 import {User} from '../../app/User';
-import {Message} from '../../app/const/Message';
+// import {Message} from '../../app/const/Message';
 /*
 import {MediaType} from '../../app/const/MediaType';
 */
 
 // model
-import {Model} from '../../model/Model';
-import {ModelBookmark} from '../../model/users/ModelBookmark';
+// import {Model} from '../../model/Model';
+// import {ModelBookmark} from '../../model/users/ModelBookmark';
 
 // node
 import {MediaNode} from '../../node/single/MediaNode';
@@ -41,8 +41,7 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * <h3>React component<h3>
- * 記事詳細(detail) 上部
+ * <h3>記事詳細(detail) 上部<h3>
  * - bookmark
  * - title
  * - 投稿者

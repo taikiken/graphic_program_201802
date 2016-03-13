@@ -102,15 +102,18 @@ var SPSingle = exports.SPSingle = function () {
 
       // single page
       // related いらなくる予定
-      var elements = {
-        related: _Dom.Dom.related(),
-        footer: _Dom.Dom.singleFooter()
+      /*
+      let elements = {
+        related: Dom.related(),
+        footer: Dom.singleFooter()
       };
+      */
 
       var singleHeaderElement = _Dom.Dom.singleHeader();
 
-      if (singleHeaderElement !== null && elements.footer !== null) {
-        var single = new UT.view.ViewSingle(articleId, singleHeaderElement, elements);
+      if (singleHeaderElement !== null) {
+        console.log('start sp single header');
+        var single = new UT.sp.view.SPViewSingle(articleId, singleHeaderElement, _Dom.Dom.visual());
         _viewSingle = single;
         single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
         single.start();
@@ -152,7 +155,7 @@ var SPSingle = exports.SPSingle = function () {
       // title は backend output
 
       // sidebar
-      _SPSidebar.SPSidebar.start(slug);
+      // SPSidebar.start( slug );
 
       // nav current
       _SPNav.SPNav.start(slug);

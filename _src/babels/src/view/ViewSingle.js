@@ -159,16 +159,19 @@ export class ViewSingle extends View {
     }
 
     // footer
-    if ( this._footer === null ) {
+    if ( Safety.isElement( this._elements.footer ) ) {
+      // footer element が存在する時のみ
+      if ( this._footer === null ) {
 
-      footer = new ViewSingleFooter( this._elements.footer, single );
-      this._footer = footer;
-      footer.start();
+        footer = new ViewSingleFooter( this._elements.footer, single );
+        this._footer = footer;
+        footer.start();
 
-    } else {
+      } else {
 
-      this._footer.render( single );
+        this._footer.render( single );
 
+      }
     }
 
     // 関連記事 もしもあるなら
@@ -193,6 +196,11 @@ export class ViewSingle extends View {
    * @param {Array} related 配列内データ型はRelatedDom
    */
   related( related:Array = [] ):void {
+
+    if ( !Safety.isElement( this._elements.related ) ) {
+      // element が不正の時は処理しない
+      return;
+    }
 
     related = Safety.array( related );
 

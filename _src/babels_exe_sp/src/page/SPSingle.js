@@ -76,15 +76,18 @@ export class SPSingle {
 
     // single page
     // related いらなくる予定
+    /*
     let elements = {
       related: Dom.related(),
       footer: Dom.singleFooter()
     };
+    */
 
     let singleHeaderElement = Dom.singleHeader();
 
-    if ( singleHeaderElement !== null && elements.footer !== null ) {
-      let single = new UT.view.ViewSingle( articleId, singleHeaderElement, elements );
+    if ( singleHeaderElement !== null ) {
+      console.log( 'start sp single header' );
+      let single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual() );
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
       single.start();
@@ -121,7 +124,7 @@ export class SPSingle {
     // title は backend output
 
     // sidebar
-    SPSidebar.start( slug );
+    // SPSidebar.start( slug );
 
     // nav current
     SPNav.start( slug );
