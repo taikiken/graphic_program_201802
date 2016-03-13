@@ -30,6 +30,7 @@
   $template_name == 'p' ||
   $template_name == 'comment' ||
   $template_name == 'search' ||
+  $template_name == 'signup_login' ||
   $template_name == 'settings' ||
   $template_name == 'settings.social' ||
   $template_name == 'settings.account' ||
