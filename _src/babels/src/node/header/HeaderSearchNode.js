@@ -59,7 +59,7 @@ export let HeaderSearchNode = React.createClass( {
       <div className={`head-search form-parts ${errorClass('keyword')} ${this.state.enable}`}>
         <form onSubmit={this.submitHandler}>
           <input type="text" placeholder={Message.PLACEHOLDER_SEARCH} value={this.state.keyword} onChange={this.changeHandler} />
-          <input type="submit"/>
+          <input type="submit" value={Message.SUBMIT_SEARCH}/>
         </form>
       </div>
     );

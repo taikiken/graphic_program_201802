@@ -93,6 +93,20 @@ export class Message {
   static get PLACEHOLDER_SEARCH():string {
     return '記事を探す';
   }
+  /**
+   * SUBMIT_SEARCH
+   * @return {string} 検索
+   */
+  static get SUBMIT_SEARCH():string {
+    return '検索';
+  }
+  /**
+   * OPENER_SEARCH
+   * @return {string} 記事検索
+   */
+  static get OPENER_SEARCH():string {
+    return '記事検索';
+  }
   // login
   /**
    * PLACEHOLDER_EMAIL

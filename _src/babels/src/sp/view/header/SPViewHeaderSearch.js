@@ -14,6 +14,9 @@
 // parent
 import {ViewHeaderSearch} from '../../../view/header/ViewHeaderSearch';
 
+// app
+import {Message} from '../../../app/const/Message';
+
 // event
 import {SearchStatus} from '../../../event/SearchStatus';
 
@@ -55,7 +58,7 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
     let ButtonDom = React.createClass( {
       render: function() {
         return (
-          <a class="head-search-opener" href="#" onClick={this.clickHandler}>記事検索</a>
+          <a className="head-search-opener" href="#" onClick={this.clickHandler}>{Message.OPENER_SEARCH}</a>
         );
       },
       componentDidMount: function() {
