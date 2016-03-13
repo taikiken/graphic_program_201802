@@ -36,6 +36,26 @@ class UserAgent{
     }
     return $this->device;
   }
+
+
+  // アプリからのアクセスかどうかチェックする
+  // iOS : undotsushin-ios
+  // Android : undotsushin-android
+  public function is_app() {
+
+    $ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
+
+    if ( strpos($ua,'undotsushin-ios') !== false ) :
+      return 'iOS';
+
+    elseif ( strpos($ua,'undotsushin-android') !== false ) :
+      return 'Android';
+
+    endif;
+
+  }
+
 }
+
 
 ?>
