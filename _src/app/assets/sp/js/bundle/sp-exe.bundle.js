@@ -1451,6 +1451,16 @@
 	    value: function search() {
 	      return Dom.get('head-search-container');
 	    }
+	    /**
+	     * header search from opener
+	     * @return {Element} search-container-opener element を返します
+	     */
+
+	  }, {
+	    key: 'searchOpener',
+	    value: function searchOpener() {
+	      return Dom.get('search-container-opener');
+	    }
 	    // --------------------------------------
 	    // synapse
 	    /**
@@ -3364,8 +3374,9 @@
 	    value: function start() {
 	      // header.user
 	      var searchElement = _Dom.Dom.search();
-	      if (searchElement !== null) {
-	        var searchFrom = new UT.view.header.ViewHeaderSearch(searchElement);
+	      var opener = _Dom.Dom.searchOpener();
+	      if (searchElement !== null && opener !== null) {
+	        var searchFrom = new UT.sp.view.header.SPViewHeaderSearch(searchElement, opener);
 	        searchFrom.start();
 	      }
 	    }

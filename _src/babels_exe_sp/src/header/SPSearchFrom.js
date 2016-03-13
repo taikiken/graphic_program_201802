@@ -40,8 +40,9 @@ export class SPSearchFrom {
   static start():void {
     // header.user
     let searchElement = Dom.search();
-    if ( searchElement !== null ) {
-      let searchFrom = new UT.view.header.ViewHeaderSearch( searchElement );
+    let opener = Dom.searchOpener();
+    if ( searchElement !== null && opener !== null ) {
+      let searchFrom = new UT.sp.view.header.SPViewHeaderSearch( searchElement, opener );
       searchFrom.start();
     }
 

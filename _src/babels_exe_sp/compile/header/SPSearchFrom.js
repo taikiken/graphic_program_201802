@@ -65,8 +65,9 @@ var SPSearchFrom = exports.SPSearchFrom = function () {
     value: function start() {
       // header.user
       var searchElement = _Dom.Dom.search();
-      if (searchElement !== null) {
-        var searchFrom = new UT.view.header.ViewHeaderSearch(searchElement);
+      var opener = _Dom.Dom.searchOpener();
+      if (searchElement !== null && opener !== null) {
+        var searchFrom = new UT.sp.view.header.SPViewHeaderSearch(searchElement, opener);
         searchFrom.start();
       }
     }

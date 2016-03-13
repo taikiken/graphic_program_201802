@@ -107,6 +107,16 @@ var Dom = exports.Dom = function () {
     value: function search() {
       return Dom.get('head-search-container');
     }
+    /**
+     * header search from opener
+     * @return {Element} search-container-opener element を返します
+     */
+
+  }, {
+    key: 'searchOpener',
+    value: function searchOpener() {
+      return Dom.get('search-container-opener');
+    }
     // --------------------------------------
     // synapse
     /**

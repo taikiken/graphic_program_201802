@@ -16,6 +16,7 @@ import {View} from '../View';
 // app
 import {User} from '../../app/User';
 import {ErrorTxt} from '../../app/const/ErrorTxt';
+import {Message} from '../../app/const/Message';
 
 // data
 import {Result} from '../../data/Result';
@@ -100,7 +101,7 @@ export class ViewLogin extends View {
                   name="email"
                   value={this.state.email}
                   onChange={this.emailChange}
-                  placeholder="メールアドレスを入力"
+                  placeholder={Message.PLACEHOLDER_EMAIL}
                 />
               </span>
               <ErrorNode message={message('email')} />
@@ -109,7 +110,7 @@ export class ViewLogin extends View {
               <span className="setting-form-pw form-input">
                 <input
                   type="password"
-                  placeholder="パスワードを入力"
+                  placeholder={Message.PLACEHOLDER_PWD}
                   name="password"
                   value={this.state.password}
                   onChange={this.passwordChange}
@@ -120,7 +121,7 @@ export class ViewLogin extends View {
             {/* button */}
             <div className={'form-parts form-submit-parts ' + errorClass('user')}>
               <span className="setting-form-submit mod-btnB01">
-                <input type="submit" value="ログイン" />
+                <input type="submit" value={Message.SUBMIT_LOGIN} />
               </span>
               <ErrorNode message={message('user')} />
             </div>
@@ -215,25 +216,6 @@ export class ViewLogin extends View {
         }
       },
       fail: function( error:Error ) {
-        /*
-        API: error の設定方法が signup と違うので 使えない
-        let errors = error.result.response.errors;
-        if ( Array.isArray( errors ) ) {
-
-          for ( var errorObject of errors ) {
-
-            for ( var key in errorObject ) {
-
-              if ( errorObject.hasOwnProperty( key ) ) {
-                this.errors[ key ].message = errorObject[ key ];
-              }
-
-            }// for in
-
-          }// for of
-
-        }// if ( Array.isArray( errors ) )
-        */
         let errorDae = new ErrorDae( error.result );
         if ( errorDae.errors.hasErrors() ) {
           // errors あり

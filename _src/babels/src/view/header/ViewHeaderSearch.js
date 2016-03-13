@@ -12,15 +12,18 @@
 'use strict';
 
 import {View} from '../View';
-
+/*
 // app
 import {Url} from '../../app/const/Url';
 
 // data
 import {ErrorMessage} from '../../data/ErrorMessage';
+*/
+// node
+import {HeaderSearchNode} from '../../node/header/HeaderSearchNode';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -49,6 +52,7 @@ export class ViewHeaderSearch extends View {
    */
   render():void {
 
+    /*
     let SearchDom = React.createClass( {
       getInitialState: function() {
         this.errors = {
@@ -96,9 +100,10 @@ export class ViewHeaderSearch extends View {
         this.setState( { error: false } );
       }
     } );
+    */
 
     ReactDOM.render(
-      <SearchDom />,
+      <HeaderSearchNode />,
       this.element
     );
 

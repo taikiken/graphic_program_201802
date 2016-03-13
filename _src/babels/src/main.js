@@ -167,6 +167,7 @@ import {SPViewSyn} from './sp/view/SPViewSyn';
 
 // header
 import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
+import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
 
 // single
 import {SPViewSingle} from './sp/view/SPViewSingle';
@@ -341,7 +342,8 @@ var UT = {
         SPViewCategoryRoot: SPViewCategoryRoot
       },
       header: {
-        SPViewHeaderUser: SPViewHeaderUser
+        SPViewHeaderUser: SPViewHeaderUser,
+        SPViewHeaderSearch: SPViewHeaderSearch
       }
     }
   }

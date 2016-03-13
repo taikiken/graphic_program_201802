@@ -85,4 +85,34 @@ export class Message {
   static get COMMENT_SUBMIT():string {
     return 'コメントを投稿';
   }
+  // search
+  /**
+   * PLACEHOLDER_SEARCH
+   * @return {string} 記事を探す
+   */
+  static get PLACEHOLDER_SEARCH():string {
+    return '記事を探す';
+  }
+  // login
+  /**
+   * PLACEHOLDER_EMAIL
+   * @return {string} メールアドレスを入力
+   */
+  static get PLACEHOLDER_EMAIL():string {
+    return 'メールアドレスを入力';
+  }
+  /**
+   * PLACEHOLDER_PWD
+   * @return {string} パスワードを入力
+   */
+  static get PLACEHOLDER_PWD():string {
+    return 'パスワードを入力';
+  }
+  /**
+   * SUBMIT_LOGIN
+   * @return {string} ログイン
+   */
+  static get SUBMIT_LOGIN():string {
+    return 'ログイン';
+  }
 }

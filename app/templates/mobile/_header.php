@@ -75,30 +75,30 @@ if ( $page_has_header ) :
       </div>
 
       <aside class="f-right clearfix">
-        <div class="head-search">
-          <a class="head-search-btn" href="#">検索する</a>
-        </div><!-- /.head-search -->
+        <span id="search-container-opener"></span>
 
         <div id="user-profile-container"></div><!--/header-user-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
-
+  <div id="head-search-container"></div>
   <nav id="global-nav-container" class="gnav-sec">
-    <ul>
-      <li id="home" class="gnav-home"><a href="/">一面</a></li>
-      <?php if (0) : ?>
-        <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
-      <?php endif;// crazy remove ?>
-      <li id="all" class="gnav-all"><a href="/category/all/">すべて</a></li>
-      <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
-        <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
-          <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
-        </li>
-      <?php }//foreach ?>
-    </ul>
+    <div class="gnav-sec-inner">
+      <ul>
+        <li id="home" class="gnav-home"><a href="/">一面</a></li>
+        <?php if (0) : ?>
+          <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
+        <?php endif;// crazy remove ?>
+        <li id="all" class="gnav-all"><a href="/category/all/">すべて</a></li>
+        <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
+          <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
+            <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
+          </li>
+        <?php }//foreach ?>
+      </ul>
+    </div><!-- /.gnav-sec-inner -->
   </nav><!-- /.gnav-sec -->
-</div>
+</div><!--/.header-sticky-->
 <?php
 endif;
 // header 表示条件 end

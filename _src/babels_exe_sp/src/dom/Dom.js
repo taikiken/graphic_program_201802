@@ -73,6 +73,13 @@ export class Dom {
   static search():Element {
     return Dom.get( 'head-search-container' );
   }
+  /**
+   * header search from opener
+   * @return {Element} search-container-opener element を返します
+   */
+  static searchOpener():Element {
+    return Dom.get( 'search-container-opener' );
+  }
   // --------------------------------------
   // synapse
   /**
