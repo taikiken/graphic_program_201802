@@ -56,18 +56,23 @@ if ( UT_ENV === 'PRODUCTION' ) :
   // 記事詳細 - アプリ向けに
   $app->get('/p/{article_id:[0-9]+}[/]', function ($request, $response, $args) use ($app) {
 
-    $post = $app->model->get_post($args['article_id']);
+    // アプリからの記事詳細アクセスならWebView向けページを表示
+    if ( $app->model->property('is_app') ) :
 
-    $args['page'] = $app->model->set(array(
-      'title'     => $post['title'],
-      'category'  => $post['category'],
-      'template'  => 'p',
-      'path'      => $args,
-      'post'      => $post,
-      'canonical' => "p/{$post['id']}/",
-    ));
+      $post = $app->model->get_post($args['article_id']);
 
-    return $this->renderer->render($response, "app.p.php", $args);
+      $args['page'] = $app->model->set(array(
+        'title'     => $post['title'],
+        'category'  => $post['category'],
+        'template'  => 'p',
+        'path'      => $args,
+        'post'      => $post,
+        'canonical' => "p/{$post['id']}/",
+      ));
+
+      return $this->renderer->render($response, "app.p.php", $args);
+
+    endif;
 
   });
 

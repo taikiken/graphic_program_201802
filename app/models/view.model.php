@@ -33,6 +33,7 @@ class ViewModel {
 
     // env
     'ua'                 => '',
+    'is_app'             => '',
     'hostname'           => 'www.undotsushin.com',
     'apiRoot'            => 'http://www.undotsushin.com',
 
@@ -49,6 +50,7 @@ class ViewModel {
     $this->default['site_url']        = $this->set_site_url();
     $this->default['site_categories'] = $this->set_site_categories();
     $this->default['ua']              = $this->set_ua();
+    $this->default['is_app']          = $this->get_is_app();
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
     if ( UT_ENV === 'PRODUCTION' || UT_ENV === 'DEVELOP' || UT_ENV === 'STAGING' ) :
@@ -175,6 +177,18 @@ class ViewModel {
       return 'desktop';
 
     endif;
+  }
+
+
+
+  /**
+  * env - アプリWebView判定 - ios | android
+  *
+  * @return string  ios | android
+  */
+  public function get_is_app() {
+    $ua = new UserAgent();
+    return $ua->is_app();
   }
 
 
