@@ -17,7 +17,7 @@ import {Content} from '../../app/const/Content';
 import {Safety} from '../../data/Safety';
 
 // node
-import {VideoNode} from '../media/VideoNode';
+import {HTML5VideoNode} from '../media/HTML5VideoNode';
 
 // React
 let React = self.React;
@@ -69,7 +69,7 @@ export let MediaVideoNode = React.createClass( {
     }
 
     // HTML5 video
-    return <VideoNode
+    return <HTML5VideoNode
       video={video}
       poster={poster}
       caption={caption}
@@ -86,7 +86,7 @@ export let MediaVideoNode = React.createClass( {
     return (
       <div className="post-kv">
         <iframe
-          src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0`}
+          src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
           width={Content.WIDTH}
           height={Content.HD_HEIGHT}
           frameBorder="0"

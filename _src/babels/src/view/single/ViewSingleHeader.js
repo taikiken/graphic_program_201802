@@ -34,6 +34,7 @@ import {ModelBookmark} from '../../model/users/ModelBookmark';
 
 // node
 import {MediaNode} from '../../node/single/MediaNode';
+import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
 
 // React
 let React = self.React;
@@ -91,9 +92,12 @@ export class ViewSingleHeader extends View {
       },
       render: function() {
         let single = this.state.single;
-        let message = this.state.status ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL;
-        let right = '';
 
+        // bookmark on / off 機能を BookmarkNode へ移動
+        // let message = this.state.status ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL;
+        // let right = '';
+
+        /*
         if ( this.state.sign ) {
           // login member のみ bookmark action が使える
           right = <div className="f-right">
@@ -105,6 +109,7 @@ export class ViewSingleHeader extends View {
             </div>
           </div>;
         }
+        */
 
         return (
           <div>
@@ -116,7 +121,12 @@ export class ViewSingleHeader extends View {
                 <p className="post-author">{single.user.userName}</p>
                 <p className="post-date">{single.displayDate}</p>
               </div>
-              {right}
+              {/* div.f-right (bookmark: on / off) */}
+              <BookmarkNode
+                sign={this.state.sign}
+                isBookmarked={this.state.status}
+                articleId={String(single.id)}
+              />
             </div>
             {/* 記事上 画像 or 動画 */}
             {/*
@@ -146,38 +156,6 @@ export class ViewSingleHeader extends View {
         _this.executeSafely( View.DID_MOUNT );
 
         /*
-        // 上部画像
-        // media type check
-        let single = this.state.single;
-        let imageNode = ReactDOM.findDOMNode(this.refs.singleImage);
-        let img;
-
-        // media type で image / video  処理分岐
-        if ( single.mediaType === MediaType.IMAGE ) {
-
-          // image
-          img = new ViewSingleImage( imageNode, single.media.images );
-
-        } else if ( single.mediaType === MediaType.VIDEO ) {
-
-          let mediaDae = single.media;
-          // facebook 追加
-          if ( !mediaDae.video || (!mediaDae.video.url && !mediaDae.video.youtube && !mediaDae.video.facebook ) ) {
-            // not movie data
-            img = new ViewSingleImage( imageNode, single.media.images );
-
-          } else {
-            // found video data
-            img = new ViewSingleVideo( imageNode, mediaDae );
-          }
-
-        }
-
-        if ( typeof img !== 'undefined' ) {
-          img.start();
-        }
-        */
-
         // ---------------------
         // bookmark 処理
         if ( this.state.sign ) {
@@ -187,15 +165,15 @@ export class ViewSingleHeader extends View {
           action.on( Model.UNDEFINED_ERROR, this.fail );
           action.on( Model.RESPONSE_ERROR, this.fail );
         }
-
+        */
       },
       componentWillUnMount: function() {
-        this.dispose();
+        // this.dispose();
       },
       // --------------------------------------------
       // custom method
       dispose: function() {
-
+        /*
         let action = this.action;
         if ( action !== null ) {
           action.off( Model.COMPLETE, this.done );
@@ -203,8 +181,9 @@ export class ViewSingleHeader extends View {
           action.off( Model.RESPONSE_ERROR, this.fail );
           this.action = null;
         }
-
+        */
       },
+      /*
       // --------------------------------------------
       // click -> ajax -> done | fail
       clickBookmark: function( event ) {
@@ -232,6 +211,7 @@ export class ViewSingleHeader extends View {
         this.setState( { loading: '' } );
 
       },
+      */
       // --------------------------------------------
       // update
       updateSingle: function( single, sign ) {
