@@ -119,6 +119,8 @@ if($complete==0){
   </div><!-- /.body-sec -->
 <?php
 }else{
-	include str_replace("public","",$_SERVER["DOCUMENT_ROOT"])."/app/templates/desktop/reset_password.complete.php";
+
+  include_once __DIR__."/reset_password.complete.php";
+
 }
 ?>
