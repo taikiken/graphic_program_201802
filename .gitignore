@@ -97,6 +97,7 @@ _src/app/assets/_babel/_*.js
 # sprite image
 _src/app/assets/images/sprite/
 # sp
+_src/app/assets/sp/js/bundle/
 _src/app/assets/sp/images/sprite/
 
 # _src scss
