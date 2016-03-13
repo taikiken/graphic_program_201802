@@ -7,6 +7,78 @@
 //
 // Styleguide 2.5.0
 
+// user-signup
+.user-signup {
+  margin: (80/2)+px 0;
+  padding: 0 perCalc(50);
+
+  &-lead {
+    font-size: fz(26/2);
+    text-align: center;
+  }
+
+  &-btn-signup {
+    margin-top: (56/2)+px;
+
+    a {
+      display: block !important;
+    }
+  }
+
+  &-or {
+    z-index: 1;
+    position: relative;
+    margin-top: (48/2)+px;
+    color: #666;
+    font-weight: bold;
+    font-size: fz(20/2);
+    text-align: center;
+
+    &::before, &::after {
+      z-index: -1;
+      position: absolute;
+      font-size: 0;
+    }
+
+    &::before {
+      content: '';
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      border-top: 1px solid #999;
+    }
+
+    &::after {
+      content: '';
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: (120/2)+px;
+      height: (30/2)+px;
+      background-color: #fff;
+    }
+  }
+
+  &-note {
+    margin-top: (52/2)+px;
+    font-size: fz(24/2);
+    text-align: center;
+  }
+
+  &-btn-login {
+    margin-top: (28/2)+px;
+
+    a {
+      display: block !important;
+      background-color: #333 !important;
+    }
+  }
+} //.user-signup
+
+
+
+
 // user-btn-setting
 .user-btn-setting {
   @include link-decoration(#666, #666, none, none);
