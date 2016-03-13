@@ -62,9 +62,9 @@
 .headline {
   .board-small {
     .board-item {
-      &:nth-child(1), &:nth-child(2) {
-        border-top: none;
-      }
+      // &:nth-child(1), &:nth-child(2) {
+      //   border-top: none;
+      // }
 
       .post {
         &-thumb {}
