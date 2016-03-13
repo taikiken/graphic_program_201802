@@ -1,0 +1,33 @@
+@import "../../../../../scss_sp/asset";
+// @import "../sprite";
+
+// Result
+//
+// design module result
+//
+// Styleguide 2.10.0
+
+// result-notfound
+.result-notfound {
+  margin: (40/2)+px 0;
+  padding-right: perCalc(20);
+  padding-left: perCalc(20);
+
+  &-heading {
+    font-weight: bold;
+    font-size: fz(32/2);
+  }
+
+  &-lead {
+    margin-top: .25em;
+    font-size: fz(24/2);
+  }
+
+  .mod-btnA01 {
+    margin-top: (40/2)+px;
+
+    a {
+      display: block;
+    }
+  }
+} //.result-notfound
