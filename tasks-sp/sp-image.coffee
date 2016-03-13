@@ -48,8 +48,7 @@ htdocs = dir.htdocs
 # task
 # --------------------------------------------
 files = [
-  app + '/**/*.{png,jpg,svg,gif}'
-  '!' + app + '/**/sp/**/*.{png,jpg,svg,gif}'
+  app + '/**/sp/**/*.{png,jpg,svg,gif}'
 ]
 
 # compress setting
@@ -57,22 +56,22 @@ compression = setting.compression
 
 # copy
 # 圧縮せずコピーします, 開発時に watch task と併用し使用します
-gulp.task 'image:copy', ->
+gulp.task 'sp:image:copy', ->
   return gulp.src files
   .pipe gulp.dest htdocs
-  .pipe $.size title: '*** image:copy ***'
+  .pipe $.size title: '*** sp:image:copy ***'
 
 # dev
 # 随時圧縮します, ファイル数が多くなると非効率になることもあります
-gulp.task 'image:dev', ->
+gulp.task 'sp:image:dev', ->
   return gulp.src files
   .pipe $.cache $.imagemin compression
   .pipe gulp.dest htdocs
-  .pipe $.size title: '*** image:dev ***'
+  .pipe $.size title: '*** sp:image:dev ***'
 
 # build
-gulp.task 'image:build', ->
+gulp.task 'sp:image:build', ->
   return gulp.src files
   .pipe $.imagemin compression
   .pipe gulp.dest htdocs
-  .pipe $.size title: '*** image:build ***'
+  .pipe $.size title: '*** sp:image:build ***'
