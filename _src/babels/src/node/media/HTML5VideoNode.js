@@ -54,7 +54,7 @@ let VideoPlayNode = React.createClass( {
 
     if ( this.props.showPlay ) {
       return (
-        <a href="#" onClick={this.props.callback}>
+        <a href="#" onClick={this.props.callback} className="post-video-start">
           <img className="post-thumb-overlay-movie type-movie" src={this.props.playImage} />
         </a>
       );
@@ -69,9 +69,10 @@ let VideoPlayNode = React.createClass( {
 /**
  * <h3>記事詳細 HTML5 video</h3>
  * <p>記事詳細上部動画</p>
- * @class VideoNode
+ * HTML5VideoNode
+ * @type {React.component}
  */
-export let VideoNode = React.createClass( {
+export let HTML5VideoNode = React.createClass( {
   propTypes: {
     video: React.PropTypes.object.isRequired,
     poster: React.PropTypes.string.isRequired,

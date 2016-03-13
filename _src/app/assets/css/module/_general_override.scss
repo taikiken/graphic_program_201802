@@ -20,6 +20,9 @@
   }
 
   &.loading {
+    min-width: 30px;
+    min-height: 30px;
+
     .loading-spinner {
       height: 100%;
     }

@@ -175,6 +175,13 @@ export class Dom {
     return Dom.get( 'single-header-container' );
   }
   /**
+   * single 本文上, メインビジュアル
+   * @return {Element} single-visual-container を返します
+   */
+  static visual():Element {
+    return Dom.get( 'single-visual-container' );
+  }
+  /**
    * single comment, 記事へのコメント
    * @return {Element} comment-form-container を返します
    */

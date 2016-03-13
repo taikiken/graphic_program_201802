@@ -9,15 +9,18 @@
  */
 'use strict';
 
-import {Empty} from '../../app/const/Empty';
-import {Safety} from '../../data/Safety';
+import {Empty} from '../../../app/const/Empty';
+import {Safety} from '../../../data/Safety';
 
 // node
-import {ReactionNode} from './ReactionNode';
-import {CommentFormNode} from './CommentFormNode';
-import {CommentMenuNode} from './CommentMenuNode';
-import {CommentUserNode} from './CommentUserNode';
-import {CommentContentNode} from './CommentContentNode';
+import {ReactionNode} from '../../../node/comment/ReactionNode';
+// import {CommentFormNode} from '../../../node/comment/CommentFormNode';
+import {CommentMenuNode} from '../../../node/comment/CommentMenuNode';
+import {CommentUserNode} from '../../../node/comment/CommentUserNode';
+import {CommentContentNode} from '../../../node/comment/CommentContentNode';
+
+// sp/node
+import {SPCommentFormNode} from './SPCommentFormNode';
 
 // React
 let React = self.React;
@@ -28,7 +31,7 @@ let React = self.React;
  * @class CommentNode
  * @type {Function}
  */
-export let CommentNode = React.createClass( {
+export let SPCommentNode = React.createClass( {
   propTypes: {
     // unique id（識別のために必要）
     uniqueId: React.PropTypes.string.isRequired,
@@ -139,7 +142,7 @@ export let CommentNode = React.createClass( {
           isGood={comment.isGood}
           isBad={comment.isBad}
         />
-        <CommentFormNode
+        <SPCommentFormNode
           uniqueId={this.props.uniqueId}
           icon={this.props.icon}
           articleId={this.props.articleId}

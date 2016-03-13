@@ -76,15 +76,18 @@ export class SPSingle {
 
     // single page
     // related いらなくる予定
+    /*
     let elements = {
       related: Dom.related(),
       footer: Dom.singleFooter()
     };
+    */
 
     let singleHeaderElement = Dom.singleHeader();
 
-    if ( singleHeaderElement !== null && elements.footer !== null ) {
-      let single = new UT.view.ViewSingle( articleId, singleHeaderElement, elements );
+    if ( singleHeaderElement !== null ) {
+      console.log( 'start sp single header' );
+      let single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual() );
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
       single.start();
@@ -121,7 +124,7 @@ export class SPSingle {
     // title は backend output
 
     // sidebar
-    SPSidebar.start( slug );
+    // SPSidebar.start( slug );
 
     // nav current
     SPNav.start( slug );
@@ -153,19 +156,19 @@ export class SPSingle {
 
     // article id
     let articleId = _articleId;
-    let ViewComments = UT.view.ViewComments;
+    let SPViewComments = UT.sp.view.SPViewComments;
 
     // comment form
     let commentFormElement = Dom.commentForm();
     if ( commentFormElement !== null ) {
-      let commentForm = new UT.view.comment.ViewCommentForm( commentFormElement, articleId, picture );
+      let commentForm = new UT.sp.view.comment.SPViewCommentForm( commentFormElement, articleId, picture );
       commentForm.start();
     }
 
     // self
     let selfElement = Dom.commentSelf();
     if ( selfElement !== null ) {
-      let commentSelf = new ViewComments( articleId, selfElement, UT.app.const.CommentsType.SELF );
+      let commentSelf = new SPViewComments( articleId, selfElement, UT.app.const.CommentsType.SELF );
       if ( _userDae !== null ) {
         commentSelf.user = _userDae;
       }
@@ -175,7 +178,7 @@ export class SPSingle {
     // official
     let officialElement = Dom.commentOfficial();
     if ( officialElement !== null ) {
-      let official = new ViewComments( articleId, officialElement, UT.app.const.CommentsType.OFFICIAL );
+      let official = new SPViewComments( articleId, officialElement, UT.app.const.CommentsType.OFFICIAL );
       if ( _userDae !== null ) {
         official.user = _userDae;
       }
@@ -185,7 +188,7 @@ export class SPSingle {
     // normal
     let normalElement = Dom.commentNormal();
     if ( normalElement !== null ) {
-      let normal = new ViewComments( articleId, normalElement, UT.app.const.CommentsType.NORMAL );
+      let normal = new SPViewComments( articleId, normalElement, UT.app.const.CommentsType.NORMAL );
       if ( _userDae !== null ) {
         normal.user = _userDae;
       }

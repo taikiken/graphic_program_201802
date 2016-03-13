@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/11 - 16:51
+ * @date 2016/03/12 - 23:54
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -10,41 +10,19 @@
  *
  */
 'use strict';
-/*
-// app
-import {Empty} from '../../app/const/Empty';
-import {ErrorTxt} from '../../app/const/ErrorTxt';
-
-// event
-import {ReplyStatus} from '../../event/ReplyStatus';
-import {CommentStatus} from '../../event/CommentStatus';
-
-// data
-import {Form} from '../../data/Form';
-import {Safety} from '../../data/Safety';
-// import {Result} from '../../data/Result';
-import {ErrorMessage} from '../../data/ErrorMessage';
-
-// model
-import {ModelComment} from '../../model/comment/ModelComment';
-import {ModelCommentReply} from '../../model/comment/ModelCommentReply';
-import {Model} from '../../model/Model';
-*/
-// node
-// import {ErrorNode} from '../error/ErrorNode';
-import {CommentFormOpenerNode} from './form/CommentFormOpenerNode';
-import {CommentFormElementNode} from './form/CommentFormElementNode';
+import {CommentFormOpenerNode} from '../../../node/comment/form/CommentFormOpenerNode';
+import {SPCommentFormElementNode} from './form/SPCommentFormElementNode';
 
 // React
 let React = self.React;
 
 // wrapper dom + form
 /**
- * <h3>React component<h3>
- * comment form を表示するための基点 clas
+ * <h3>SP React component<h3>
+ * comment form を表示するための基点 clas`
  * @type {React.component}
  */
-export let CommentFormNode = React.createClass( {
+export let SPCommentFormNode = React.createClass( {
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,
     // open / close, default close
@@ -154,7 +132,7 @@ export let CommentFormNode = React.createClass( {
             actionMessage={actionMessage}
             callback={this.openerClick}
           />
-          <CommentFormElementNode
+          <SPCommentFormElementNode
             uniqueId={this.props.uniqueId}
             toggle={toggle}
             open={toggle === 'open'}
@@ -171,13 +149,13 @@ export let CommentFormNode = React.createClass( {
 
   },
   /*
-  componentDidMount: function() {
+   componentDidMount: function() {
 
-  },
-  componentWillUnmount: function() {
+   },
+   componentWillUnmount: function() {
 
-  },
-  */
+   },
+   */
   // ----------------------------------------
   bodyChange: function( event ) {
     // textarea value

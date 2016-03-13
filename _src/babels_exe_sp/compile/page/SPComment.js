@@ -62,6 +62,13 @@ var SPComment = exports.SPComment = function () {
       throw new Error('SPComment is static Class. not use new SPComment().');
     }
   }
+  /**
+   * コメント詳細を表示するために事前にユーザー情報を取得する
+   * @param {string} mode 記事へのコメントかコメントの返信
+   * @param {Number} articleId 記事 id
+   * @param {Number} commentId コメント id
+   * @param {Number} [replyId=0] 返信 id
+   */
 
   (0, _createClass3.default)(SPComment, null, [{
     key: 'user',

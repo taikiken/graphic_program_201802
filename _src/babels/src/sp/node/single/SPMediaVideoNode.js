@@ -11,18 +11,18 @@
  */
 'use strict';
 
-import {Empty} from '../../app/const/Empty';
-import {VideoType} from '../../app/const/VideoType';
-import {Content} from '../../app/const/Content';
-import {Safety} from '../../data/Safety';
+import {Empty} from '../../../app/const/Empty';
+import {VideoType} from '../../../app/const/VideoType';
+import {Content} from '../../../app/const/Content';
+import {Safety} from '../../../data/Safety';
 
 // node
-import {HTML5VideoNode} from '../media/HTML5VideoNode';
+import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
 
 // React
 let React = self.React;
 
-export let MediaVideoNode = React.createClass( {
+export let SPMediaVideoNode = React.createClass( {
   propTypes: {
     media: React.PropTypes.object.isRequired
   },

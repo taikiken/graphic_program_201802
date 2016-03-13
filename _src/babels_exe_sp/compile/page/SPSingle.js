@@ -102,15 +102,18 @@ var SPSingle = exports.SPSingle = function () {
 
       // single page
       // related いらなくる予定
-      var elements = {
-        related: _Dom.Dom.related(),
-        footer: _Dom.Dom.singleFooter()
+      /*
+      let elements = {
+        related: Dom.related(),
+        footer: Dom.singleFooter()
       };
+      */
 
       var singleHeaderElement = _Dom.Dom.singleHeader();
 
-      if (singleHeaderElement !== null && elements.footer !== null) {
-        var single = new UT.view.ViewSingle(articleId, singleHeaderElement, elements);
+      if (singleHeaderElement !== null) {
+        console.log('start sp single header');
+        var single = new UT.sp.view.SPViewSingle(articleId, singleHeaderElement, _Dom.Dom.visual());
         _viewSingle = single;
         single.on(UT.view.View.BEFORE_RENDER, SPSingle.before);
         single.start();
@@ -152,7 +155,7 @@ var SPSingle = exports.SPSingle = function () {
       // title は backend output
 
       // sidebar
-      _SPSidebar.SPSidebar.start(slug);
+      // SPSidebar.start( slug );
 
       // nav current
       _SPNav.SPNav.start(slug);
@@ -186,19 +189,19 @@ var SPSingle = exports.SPSingle = function () {
 
       // article id
       var articleId = _articleId;
-      var ViewComments = UT.view.ViewComments;
+      var SPViewComments = UT.sp.view.SPViewComments;
 
       // comment form
       var commentFormElement = _Dom.Dom.commentForm();
       if (commentFormElement !== null) {
-        var commentForm = new UT.view.comment.ViewCommentForm(commentFormElement, articleId, picture);
+        var commentForm = new UT.sp.view.comment.SPViewCommentForm(commentFormElement, articleId, picture);
         commentForm.start();
       }
 
       // self
       var selfElement = _Dom.Dom.commentSelf();
       if (selfElement !== null) {
-        var commentSelf = new ViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
+        var commentSelf = new SPViewComments(articleId, selfElement, UT.app.const.CommentsType.SELF);
         if (_userDae !== null) {
           commentSelf.user = _userDae;
         }
@@ -208,7 +211,7 @@ var SPSingle = exports.SPSingle = function () {
       // official
       var officialElement = _Dom.Dom.commentOfficial();
       if (officialElement !== null) {
-        var official = new ViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
+        var official = new SPViewComments(articleId, officialElement, UT.app.const.CommentsType.OFFICIAL);
         if (_userDae !== null) {
           official.user = _userDae;
         }
@@ -218,7 +221,7 @@ var SPSingle = exports.SPSingle = function () {
       // normal
       var normalElement = _Dom.Dom.commentNormal();
       if (normalElement !== null) {
-        var normal = new ViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
+        var normal = new SPViewComments(articleId, normalElement, UT.app.const.CommentsType.NORMAL);
         if (_userDae !== null) {
           normal.user = _userDae;
         }

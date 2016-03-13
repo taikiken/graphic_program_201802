@@ -38,6 +38,13 @@ export class SPComment {
 
     }
   }
+  /**
+   * コメント詳細を表示するために事前にユーザー情報を取得する
+   * @param {string} mode 記事へのコメントかコメントの返信
+   * @param {Number} articleId 記事 id
+   * @param {Number} commentId コメント id
+   * @param {Number} [replyId=0] 返信 id
+   */
   static user( mode:string, articleId:Number, commentId:Number, replyId:Number = 0 ):void {
     // header.user
     let profileElement = Dom.profile();

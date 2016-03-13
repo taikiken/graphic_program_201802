@@ -168,6 +168,15 @@ import {SPViewSyn} from './sp/view/SPViewSyn';
 // header
 import {SPViewHeaderUser} from './sp/view/header/SPViewHeaderUser';
 
+// single
+import {SPViewSingle} from './sp/view/SPViewSingle';
+import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
+
+// single/comment
+import {SPViewComments} from './sp/view/SPViewComments';
+import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
+
+
 /**
  * ToDo: 対象外OS alert
  * ToDo: global 不要 class を除外する
@@ -316,6 +325,14 @@ var UT = {
   sp: {
     view: {
       SPViewSyn: SPViewSyn,
+      SPViewComments: SPViewComments,
+      SPViewSingle: SPViewSingle,
+      single: {
+        SPViewSingleHeader: SPViewSingleHeader
+      },
+      comment: {
+        SPViewCommentForm: SPViewCommentForm
+      },
       home: {
         SPViewHeadLine: SPViewHeadLine,
         SPViewNews: SPViewNews

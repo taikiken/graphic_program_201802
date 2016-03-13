@@ -20,6 +20,11 @@ import {Model} from '../../model/Model';
 // React
 let React = self.React;
 
+/**
+ * comment good / bad
+ * コメントに good / bad を付けたり外したり
+ * @type {React.component}
+ */
 export let ReactionNode = React.createClass( {
   propTypes: {
     // unique id

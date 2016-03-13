@@ -78,4 +78,11 @@ export class Message {
   static get BOOKMARK_DID():string {
     return 'ブックマーク解除';
   }
+  /**
+   * COMMENT_SUBMIT
+   * @return {string} コメントを投稿
+   */
+  static get COMMENT_SUBMIT():string {
+    return 'コメントを投稿';
+  }
 }
