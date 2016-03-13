@@ -216,8 +216,8 @@
 // 汎用 ニュース一覧
 .board-small {
   @include clearfix;
-  // margin-top: 30px;
-  border-top: 1px solid $border-primary-color;
+  // margin-top: (20/2)+px;
+  // border-top: 1px solid $border-primary-color;
 
   .board-item {
     border-bottom: 1px solid $border-primary-color;
@@ -272,9 +272,10 @@
   } //.board-small .post
 
   .btn-bookmark {
-    float: right;
-    margin-top: 20px + 18;
-    margin-left: 10px;
+    // float: right;
+    // margin-top: 20px + 18;
+    // margin-left: 10px;
+    margin-bottom: (20/2)+px;
   }
 }
 
