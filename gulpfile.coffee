@@ -255,7 +255,6 @@ gulp.task 'dev:init', (cb) ->
     'exe:dev'
     'sp:exe:dev'
     'sprite:build'
-    'sp:sprite:build'
     'single:dev'
     'bundle:copy'
     'libs:copy'
@@ -264,7 +263,13 @@ gulp.task 'dev:init', (cb) ->
     'js:dev'
     'image:copy'
     'css:dev'
-    'sp:css:dev'
+    [
+      'sp:sprite:build'
+    ]
+    [
+      'sp:css:dev'
+      'sp:image:copy'
+    ]
     cb
   )
   return
@@ -279,7 +284,7 @@ gulp.task 'default', (cb) ->
     'vendor:init'
     'babels:build'
     'sprite:build'
-    'sp:sprite:build'
+#    'sp:sprite:build'
     'exe:build'
     'sp:exe:build'
     'single:build'
@@ -290,8 +295,15 @@ gulp.task 'default', (cb) ->
     'js:build'
     'image:build'
     'css:build'
-    'sp:css:build'
+#    'sp:css:build'
     # 'sc5:make' - デプロイ時css document再生成, 体制に影響無いので外す
+    [
+      'sp:sprite:build'
+    ]
+    [
+      'sp:css:build'
+      'sp:image:build'
+    ]
     'clean:all'
     'lec:build'
     cb

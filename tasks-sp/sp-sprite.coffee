@@ -79,6 +79,7 @@ gulp.task 'sp:sprite:build', ->
       console.error err
     else
       if files.length > 0
+        console.log '*** sp:sprite:build *** start *** files: ' + files.length
         sprity.src
           src: [ sp.sprite.root + '/**/*.*', '!' + sp.sprite.root + '/css/**/*.*' ]
           style: '_sprite.scss'
@@ -99,5 +100,4 @@ gulp.task 'sp:sprite:build', ->
         .pipe $.size title: '*** sp:sprite:build ***'
       else
         console.warn '*** sp:sprite *** no files and directories'
-
   return;
