@@ -96,7 +96,7 @@ export class ViewLogin extends View {
             <span className={'form-parts ' + errorClass('email')}>
               <span className="setting-form-mail form-input">
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   value={this.state.email}
                   onChange={this.emailChange}

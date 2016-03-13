@@ -72,14 +72,20 @@ export class Router extends EventDispatcher {
       '/p/': _this.single.bind( _this ),
       '/search/': _this.search.bind( _this ),
       '/signup/': _this.signup.bind( _this ),
+      '/signup': _this.signup.bind( _this ),
       '/login/': _this.login.bind( _this ),
+      '/login': _this.login.bind( _this ),
       '/logout/': _this.logout.bind( _this ),
+      '/logout': _this.logout.bind( _this ),
       '/reset_password/': _this.password.bind( _this ),
       // '/reset_password/resetting': _this.passwordResetting,
       '/mypage/': _this.mypage.bind( _this ),
+      '/mypage': _this.mypage.bind( _this ),
       // '/mypage/activities': _this.activities,
       '/notifications/': _this.notifications.bind( _this ),
-      '/settings/': _this.settings.bind( _this )
+      '/notifications': _this.notifications.bind( _this ),
+      '/settings/': _this.settings.bind( _this ),
+      '/settings': _this.settings.bind( _this )
       // '/settings/interest': _this.interest,
       // '/settings/social': _this.social,
       // '/settings/deactivate': _this.deactivate
@@ -107,7 +113,6 @@ export class Router extends EventDispatcher {
             // not kyeLength 1,
             // 通常 key
             if ( path.substr( 0, keyLength ) === key ) {
-              console.log( 'route found keys ', key );
               rule[ key ]();
               found = true;
               break;
@@ -161,7 +166,7 @@ export class Router extends EventDispatcher {
    */
   category():void {
 
-    let [ slug, slugType ] = Loc.path.replace( '/category/', '' ).split('/');
+    let [ slug, slugType ] = Loc.path.replace( /\/category\/|\/category/ig, '' ).split('/');
 
     if ( slug.indexOf( '.html' ) !== -1 ) {
       slug = '';
@@ -239,7 +244,7 @@ export class Router extends EventDispatcher {
    */
   search():void {
 
-    let [ keyword ] = Loc.path.replace( '/search/', '' ).split('/');
+    let [ keyword ] = Loc.path.replace( /\/search\/|\/search/ig, '' ).split('/');
 
     if ( !!keyword ) {
 
@@ -248,7 +253,8 @@ export class Router extends EventDispatcher {
     } else {
 
       // keyword がない
-      this.page404( 'search' );
+      this.dispatch( { type: Router.SEARCH, keyword: '' } );
+      // this.page404( 'search' );
 
     }
 
@@ -304,7 +310,7 @@ export class Router extends EventDispatcher {
    */
   password():void {
 
-    let [ option ] = Loc.path.replace( '/reset_password/', '' ).split('/');
+    let [ option ] = Loc.path.replace( /\/reset_password\/|\/reset_password/ig, '' ).split('/');
 
     if ( option === 'resetting' ) {
 
@@ -330,7 +336,7 @@ export class Router extends EventDispatcher {
    */
   mypage():void {
 
-    let [ activities ] = Loc.path.replace( '/mypage/', '' ).split('/');
+    let [ activities ] = Loc.path.replace( /\/mypage\/|\/mypage/ig, '' ).split('/');
 
     if ( activities === 'activities' ) {
 
@@ -339,17 +345,6 @@ export class Router extends EventDispatcher {
     } else {
 
       this.dispatch( { type: Router.MYPAGE } );
-      /*
-      if ( User.sign ) {
-
-        this.dispatch( { type: Router.MYPAGE } );
-
-      } else {
-
-        this.authorityError( 'mypage' );
-
-      }
-      */
 
     }
 
@@ -396,7 +391,7 @@ export class Router extends EventDispatcher {
    */
   settings():void {
 
-    let [ option ] = Loc.path.replace( '/settings/', '' ).split('/');
+    let [ option ] = Loc.path.replace( /\/settings\/|\/settings/ig, '' ).split('/');
     console.log( 'settings option ', option );
     switch ( option ) {
 
@@ -638,139 +633,139 @@ export class Router extends EventDispatcher {
 
     return _instance;
   }
-  // ---------------------------------------------------
-  //  deprecated, 以下互換のために残します
-  //  ToDo: 問題ないことが確認できたら削除する
-  // ---------------------------------------------------
-  /**
-   * category page かを調べます
-   * @return {boolean} category page なら true を返します
-   */
-  static isCategory():boolean {
-    return Loc.path.substr(1, 9) === 'category/';
-  }
-  /**
-   * single page かを調べます
-   * @return {boolean} single page なら true を返します
-   */
-  static isSingle():boolean {
-    if ( Loc.path.substr(1, 2) === 'p/' ) {
-      let split = Loc.path.replace( '/p/', '' ).split( '/' );
-      if ( Loc.isLocal() ) {
-        split.pop();
-      }
-      return split.length === 1;
-    }
-  }
-  /**
-   * comment page かを調べます
-   * @return {boolean} comment page なら true を返します
-   */
-  static isComment():boolean {
-    if ( Loc.path.substr(1, 2) === 'p/' ) {
-      let split = Loc.path.replace( '/p/', '' ).split( '/' );
-      if ( Loc.isLocal() ) {
-        split.pop();
-      }
-      if ( split.length > 1 && split[ 1 ] === 'comment' ) {
-        return split.length === 3;
-      }
-    }
-  }
-  /**
-   * comment replay page かを調べます
-   * @return {boolean} comment replay page なら true を返します
-   */
-  static isReply():boolean {
-    if ( Loc.path.substr(1, 2) === 'p/' ) {
-      let split = Loc.path.replace( '/p/', '' ).split( '/' );
-      if ( Loc.isLocal() ) {
-        split.pop();
-      }
-      if ( split.length > 1 && split[ 1 ] === 'comment' ) {
-        return split.length === 4;
-      }
-    }
-  }
-  /**
-   * search page かを調べます
-   * @return {boolean} search page なら true を返します
-   */
-  static isSearch():boolean {
-    return Loc.path.substr(1, 7) === 'search/';
-  }
-  /**
-   * signup page かを調べます
-   * @return {boolean} signup page なら true を返します
-   */
-  static isSignup():boolean {
-    return Loc.path.substr(1, 7) === 'signup/';
-  }
-  /**
-   * mypage page かを調べます
-   * @return {boolean} mypage page なら true を返します
-   */
-  static isMypage():boolean {
-    return Loc.path.substr(1, 7) === 'mypage/';
-  }
-  /**
-   * category slug, type を調べます
-   * @return {{slug: string, type: string}} category slug, type を返します
-   */
-  static category():Object {
-    if ( Router.isCategory() ) {
-      let [ slug, type ] = Loc.path.replace( '/category/', '' ).split('/');
-
-      if ( slug.indexOf( '.html' ) !== -1 ) {
-        slug = '';
-      }
-
-      if ( slug === '' ) {
-        slug = 'all';
-      }
-
-      return {
-        slug: slug,
-        type: type
-      };
-    }
-  }
-  /**
-   * search keyword を調べます
-   * @return {string} 検索キーワードを返します
-   */
-  static keyword():string {
-    if ( Router.isSearch() ) {
-      let [ keyword ] = Loc.path.replace( '/search/', '' ).split('/');
-      return keyword;
-    }
-  }
-  /**
-   * article Id を調べます
-   * @return {string} article Id を返します
-   */
-  static articleId():string {
-    if ( Router.isSingle() || Router.isComment() || Router.isReply() ) {
-      return Loc.path.replace( '/p/', '' ).split('/').shift();
-    }
-  }
-  /**
-   * comment Id を調べます
-   * @return {string} comment Id を返します
-   */
-  static commentId():string {
-    if ( Router.isComment() ) {
-      return Loc.path.replace( '/p/', '' ).split('/')[ 2 ];
-    }
-  }
-  /**
-   * reply Id を調べます
-   * @return {string} reply Id を返します
-   */
-  static replyId():string {
-    if ( Router.isReply() ) {
-      return Loc.path.replace( '/p/', '' ).split('/')[ 3 ];
-    }
-  }
+  //// ---------------------------------------------------
+  ////  deprecated, 以下互換のために残します
+  ////  ToDo: 問題ないことが確認できたら削除する
+  //// ---------------------------------------------------
+  ///**
+  // * category page かを調べます
+  // * @return {boolean} category page なら true を返します
+  // */
+  //static isCategory():boolean {
+  //  return Loc.path.substr(1, 9) === 'category/';
+  //}
+  ///**
+  // * single page かを調べます
+  // * @return {boolean} single page なら true を返します
+  // */
+  //static isSingle():boolean {
+  //  if ( Loc.path.substr(1, 2) === 'p/' ) {
+  //    let split = Loc.path.replace( '/p/', '' ).split( '/' );
+  //    if ( Loc.isLocal() ) {
+  //      split.pop();
+  //    }
+  //    return split.length === 1;
+  //  }
+  //}
+  ///**
+  // * comment page かを調べます
+  // * @return {boolean} comment page なら true を返します
+  // */
+  //static isComment():boolean {
+  //  if ( Loc.path.substr(1, 2) === 'p/' ) {
+  //    let split = Loc.path.replace( '/p/', '' ).split( '/' );
+  //    if ( Loc.isLocal() ) {
+  //      split.pop();
+  //    }
+  //    if ( split.length > 1 && split[ 1 ] === 'comment' ) {
+  //      return split.length === 3;
+  //    }
+  //  }
+  //}
+  ///**
+  // * comment replay page かを調べます
+  // * @return {boolean} comment replay page なら true を返します
+  // */
+  //static isReply():boolean {
+  //  if ( Loc.path.substr(1, 2) === 'p/' ) {
+  //    let split = Loc.path.replace( '/p/', '' ).split( '/' );
+  //    if ( Loc.isLocal() ) {
+  //      split.pop();
+  //    }
+  //    if ( split.length > 1 && split[ 1 ] === 'comment' ) {
+  //      return split.length === 4;
+  //    }
+  //  }
+  //}
+  ///**
+  // * search page かを調べます
+  // * @return {boolean} search page なら true を返します
+  // */
+  //static isSearch():boolean {
+  //  return Loc.path.substr(1, 7) === 'search/';
+  //}
+  ///**
+  // * signup page かを調べます
+  // * @return {boolean} signup page なら true を返します
+  // */
+  //static isSignup():boolean {
+  //  return Loc.path.substr(1, 7) === 'signup/';
+  //}
+  ///**
+  // * mypage page かを調べます
+  // * @return {boolean} mypage page なら true を返します
+  // */
+  //static isMypage():boolean {
+  //  return Loc.path.substr(1, 7) === 'mypage/';
+  //}
+  ///**
+  // * category slug, type を調べます
+  // * @return {{slug: string, type: string}} category slug, type を返します
+  // */
+  //static category():Object {
+  //  if ( Router.isCategory() ) {
+  //    let [ slug, type ] = Loc.path.replace( '/category/', '' ).split('/');
+  //
+  //    if ( slug.indexOf( '.html' ) !== -1 ) {
+  //      slug = '';
+  //    }
+  //
+  //    if ( slug === '' ) {
+  //      slug = 'all';
+  //    }
+  //
+  //    return {
+  //      slug: slug,
+  //      type: type
+  //    };
+  //  }
+  //}
+  ///**
+  // * search keyword を調べます
+  // * @return {string} 検索キーワードを返します
+  // */
+  //static keyword():string {
+  //  if ( Router.isSearch() ) {
+  //    let [ keyword ] = Loc.path.replace( /\/search\//, '' ).split('/');
+  //    return keyword;
+  //  }
+  //}
+  ///**
+  // * article Id を調べます
+  // * @return {string} article Id を返します
+  // */
+  //static articleId():string {
+  //  if ( Router.isSingle() || Router.isComment() || Router.isReply() ) {
+  //    return Loc.path.replace( '/p/', '' ).split('/').shift();
+  //  }
+  //}
+  ///**
+  // * comment Id を調べます
+  // * @return {string} comment Id を返します
+  // */
+  //static commentId():string {
+  //  if ( Router.isComment() ) {
+  //    return Loc.path.replace( '/p/', '' ).split('/')[ 2 ];
+  //  }
+  //}
+  ///**
+  // * reply Id を調べます
+  // * @return {string} reply Id を返します
+  // */
+  //static replyId():string {
+  //  if ( Router.isReply() ) {
+  //    return Loc.path.replace( '/p/', '' ).split('/')[ 3 ];
+  //  }
+  //}
 
 }
