@@ -757,7 +757,6 @@ div.synapse_logo {
   line-height: (60/2)+px;
   font-weight: bold;
   font-size: fz(30/2);
-  vertical-align: top;
 
   i {
     @extend .sp-sprite-common;
@@ -765,6 +764,11 @@ div.synapse_logo {
     position: relative;
     top: -2px;
     margin-right: (10/2)+px;
+  }
+
+  span {
+    line-height: (60/2)+px;
+    vertical-align: top;
   }
 }
 
