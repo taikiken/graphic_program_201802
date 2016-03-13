@@ -82,7 +82,13 @@ class ViewModel {
   */
   public function set_site_url() {
 
-    $protocol = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
+    // PRODUCTIONで `$_SERVER["HTTPS"]` が取得できてないようなので強制的にhttps
+    if ( UT_ENV == 'PRODUCTION' ) :
+      $protocol = "https://";
+    else :
+      $protocol = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
+    endif;
+
     $host = $_SERVER['HTTP_HOST'];
     $port = ( $_SERVER['SERVER_PORT'] == 80 ) ? '' : ':'.$_SERVER['SERVER_PORT'];
 
