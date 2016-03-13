@@ -121,10 +121,12 @@
         position: absolute;
         top: 0;
         right: -10px;
-        display: inline-block;
-        width: 10px;
-        height: 30px;
-        background: url(/assets/images/signup/step-bg.png) 0 0 no-repeat;
+        // display: inline-block;
+        // width: 10px;
+        // height: 30px;
+        // background: url(/assets/images/signup/step-bg.png) 0 0 no-repeat;
+        @extend .sprite-setting;
+        @include sprite( $setting-step-bg, inline-block );
         @include hide-text;
       }
 
@@ -138,7 +140,8 @@
         background-color: $highlight-color;
 
         &:after {
-          background-image: url(/assets/images/signup/step-bg_o.png);
+          // background-image: url(/assets/images/signup/step-bg_o.png);
+          @include sprite( $setting-step-bg_o, inline-block );
         }
 
         span {
