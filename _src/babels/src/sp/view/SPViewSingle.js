@@ -22,12 +22,13 @@ import {SingleDae} from '../../dae/SingleDae';
 
 // sp
 import {SPViewSingleHeader} from './single/SPViewSingleHeader';
+import {SPViewSingleVisual} from './single/SPViewSingleVisual';
 
 export class SPViewSingle extends ViewSingle {
   constructor( id:number, element:Element, visualElement:Element, option:Object = {} ) {
     super( id, element, { related: null, footer: null }, option );
     this._visualElement = visualElement;
-
+    this._visual = null;
   }
   /**
    * dom を render します
@@ -40,15 +41,18 @@ export class SPViewSingle extends ViewSingle {
     this.executeSafely( View.BEFORE_RENDER, single );
 
     this.header( single );
+    this.visual( single );
 
   }
-
+  /**
+   * header 部レンダリング
+   * @param {SingleDae} single 記事 SingleDae instance
+   */
   header( single:SingleDae ):void {
-    let viewHeader;
     // header
     if ( this._header === null ) {
 
-      viewHeader = new SPViewSingleHeader( this.element, single );
+      let viewHeader = new SPViewSingleHeader( this.element, single );
       viewHeader.on( View.DID_MOUNT, this._boundMount );
       this._header = viewHeader;
       viewHeader.start();
@@ -59,8 +63,18 @@ export class SPViewSingle extends ViewSingle {
 
     }
   }
-
+  /**
+   * visual 部レンダリング
+   * @param {SingleDae} single 記事 SingleDae instance
+   */
   visual( single:SingleDae ):void {
-
+    // visual
+    if ( this._visual === null ) {
+      let visualNode = new SPViewSingleVisual( this._visualElement, single );
+      this._visual = visualNode;
+      visualNode.start();
+    } else {
+      this._visual.render( single );
+    }
   }
 }

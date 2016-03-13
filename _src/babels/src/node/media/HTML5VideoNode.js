@@ -54,7 +54,7 @@ let VideoPlayNode = React.createClass( {
 
     if ( this.props.showPlay ) {
       return (
-        <a href="#" onClick={this.props.callback}>
+        <a href="#" onClick={this.props.callback} className="post-video-start">
           <img className="post-thumb-overlay-movie type-movie" src={this.props.playImage} />
         </a>
       );

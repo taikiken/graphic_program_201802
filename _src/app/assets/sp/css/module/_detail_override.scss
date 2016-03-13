@@ -28,6 +28,15 @@
     left: 0;
     top: 0;
   }
+
+  video {
+    width: 100%;
+    height: auto;
+  }
+
+  .post-video-start {
+    display: none;
+  }
 }
 
 // bookmark button
