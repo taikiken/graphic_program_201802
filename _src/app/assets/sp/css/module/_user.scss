@@ -305,7 +305,7 @@
       // top: 1px;
       margin-left: 4px;
       @extend .sp-sprite-common;
-      @include sprite( $common-icon-info-arrow, inline-block );
+      @include sprite( $common-icon-arrow1, inline-block );
       @include hide-text;
     }
   }

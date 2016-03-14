@@ -129,7 +129,7 @@
   @at-root {
     &-mail, &-pw, &-name, &-job, &-submit {
       display: block;
-      margin-top: (30/2)+px;
+      margin-top: (20/2)+px;
     }
 
     &-mail, &-pw, &-name, &-job {
@@ -180,24 +180,32 @@
     }
 
     &-avatar {
-      margin-top: 40px;
+      margin-top: (60/2)+px;
 
       &-heading {
-        font-size: fz(16);
+        font-weight: bold;
+        font-size: fz(24/2);
         text-align: center;
       }
 
       &-dropArea {
         cursor: pointer;
-        width: 120px;
-        height: 120px;
-        margin: 20px auto 0;
-        background: url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
+        width: (180/2)+px;
+        height: (180/2)+px;
+        margin: (30/2)+px auto 0;
+        // border: 2px solid $highlight-color;
+        background: url(/assets/sp/images/setting/thumb-avatar.png) center center no-repeat;
+        background-size: (180/2)+px;
       }
     }
 
     &-submit {
       text-align: center;
+
+      input {
+        display: block !important;
+        width: 100%;
+      }
     }
 
     &-btn-withdraw {
@@ -214,10 +222,15 @@
 
 
   .note {
-    margin-top: 30px;
-    font-size: fz(12);
+    line-height: lh(32, 20);
+    margin-top: (30/2)+px;
+    font-size: fz(20/2);
     letter-spacing: normal;
     text-align: center;
+
+    a {
+      @include link-decoration(null, null, underline, underline);
+    }
   }
 
 
@@ -226,18 +239,19 @@
   @at-root {
     &-interest {
       &-list {
-        @include clearfix;
+        // @include clearfix;
       }
 
       &-item {
-        float: left;
-        width: 160px;
-        height: 90px;
-        margin: 0 0 20px 20px;
-        vertical-align: top;
+        // float: left;
+        // width: 160px;
+        // height: 90px;
+        // margin: 0 0 20px 20px;
+        // vertical-align: top;
+        margin-top: (20/2)+px;
 
         &:nth-child(3n+1) {
-          margin-left: 0;
+          // margin-left: 0;
         }
 
         input {
@@ -247,23 +261,21 @@
 
       &-title {
         cursor: pointer;
-        position: relative;
+        // position: relative;
         display: block;
         width: 100%;
-        height: 100%;
+        // height: 100%;
         border-radius: 3px;
         background-color: #eee;
 
         span {
           display: block;
-          padding: 20px 5px 32px;
-          background: url(/assets/images/setting/icon-check.png) center bottom no-repeat;
+          // padding: 20px 5px 32px;
+          padding: (24/2)+px (10/2)+px (24/2)+px (80/2)+px;
+          background: url(/assets/sp/images/setting/icon-check.png) (20/2)+px center no-repeat;
+          background-size: (40/2)+px;
           font-weight: bold;
-          text-align: center;
-        }
-
-        &:hover {
-          background-color: #ffe9f3;
+          // text-align: center;
         }
       }
 
@@ -273,7 +285,7 @@
 
           span {
             color: #fff;
-            background-image: url(/assets/images/setting/icon-check_o.png);
+            background-image: url(/assets/sp/images/setting/icon-check_o.png);
           }
         }
       }
@@ -294,33 +306,38 @@
 
 // linkage-sns
 .linkage-sns {
-  margin-top: 40px;
+  margin-top: (100/2)+px;
 
   @at-root {
     &-item {
       & + & {
-        margin-top: 20px;
+        margin-top: (40/2)+px;
       }
     }
 
     &-link {
       @include link-decoration(#fff, #fff, none, none);
-      display: inline-block;
-      width: 280px;
-      line-height: 50px;
-      padding: 0 18px;
+      display: block;
+      // line-height: (100/2)+px;
+      padding: (30/2)+px;
       border-radius: 3px;
 
       span {
+        position: relative;
+        display: block;
+        width: 100%;
+        line-height: (40/2)+px;
         font-weight: bold;
-        line-height: 24px;
+        font-size: fz(24/2);
+        text-align: center;
 
         &:before {
           content: '';
-          position: relative;
-          top: 5px;
+          position: absolute;
+          left: 0;
+          top: 0;
           margin-right: 20px;
-          @extend .sprite-setting;
+          @extend .sp-sprite-setting;
           @include hide-text;
         }
       }
