@@ -70,7 +70,7 @@ export class SPComment {
     };
 
     if ( profileElement !== null ) {
-      headerUser = new UT.view.header.ViewHeaderUser( profileElement );
+      headerUser = new UT.sp.view.header.SPViewHeaderUser( profileElement );
 
       if ( UT.app.User.sign ) {
         headerUser.on( UT.view.View.BEFORE_RENDER, onHeader );
@@ -91,14 +91,16 @@ export class SPComment {
 
       headerUser.start();
 
+      /*
       let modalElement = Dom.modal();
       if ( modalElement !== null ) {
         let modal = new UT.view.modal.ViewLogoutModal( modalElement );
         modal.start();
       }
+      */
     }
 
-    Comment.single( articleId );
+    SPComment.single( articleId );
 
   }
   /**
