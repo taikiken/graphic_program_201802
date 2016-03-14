@@ -71,6 +71,8 @@ export class Router extends EventDispatcher {
       '/category/': _this.category.bind( _this ),
       '/p/': _this.single.bind( _this ),
       '/search/': _this.search.bind( _this ),
+      '/signup_login/': _this.signupLogin.bind( _this ),
+      '/signup_login': _this.signupLogin.bind( _this ),
       '/signup/': _this.signup.bind( _this ),
       '/signup': _this.signup.bind( _this ),
       '/login/': _this.login.bind( _this ),
@@ -113,6 +115,7 @@ export class Router extends EventDispatcher {
             // not kyeLength 1,
             // 通常 key
             if ( path.substr( 0, keyLength ) === key ) {
+              console.log( 'path substr ', path.substr( 0, keyLength ), key );
               rule[ key ]();
               found = true;
               break;
@@ -292,6 +295,12 @@ export class Router extends EventDispatcher {
 
   }
   /**
+   * signup_login URL
+   */
+  signupLogin():void {
+    this.dispatch( { type: Router.SIGNUP_LOGIN } );
+  }
+  /**
    * login page
    */
   login():void {
@@ -304,7 +313,6 @@ export class Router extends EventDispatcher {
   logout():void {
     this.dispatch( { type: Router.LOGOUT } );
   }
-
   /**
    * reset_password page
    */
@@ -322,7 +330,6 @@ export class Router extends EventDispatcher {
 
     }
   }
-
   /**
    * reset_password resetting page
    */
@@ -517,6 +524,13 @@ export class Router extends EventDispatcher {
    */
   static get SEARCH():string {
     return 'routeSearch';
+  }
+  /**
+   * event type SIGNUP_LOGIN
+   * @return {string} SIGNUP_LOGIN を返します
+   */
+  static get SIGNUP_LOGIN():string {
+    return 'routeSignupLogin';
   }
   /**
    * event type SIGNUP

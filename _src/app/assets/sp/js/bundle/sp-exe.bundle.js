@@ -221,6 +221,9 @@
 	      // settings/deactivate
 	      router.on(Router.SETTING_DEACTIVATE, SPPage.deactivate);
 
+	      // sp only /signup_login
+	      router.on(Router.SIGNUP_LOGIN, SPPage.signupLogin);
+
 	      router.route();
 	    }
 	    /**
@@ -382,6 +385,20 @@
 	          _logout.start();
 	        }
 	      }
+	    }
+	    /**
+	     * signup_login
+	     */
+
+	  }, {
+	    key: 'signupLogin',
+	    value: function signupLogin() {
+	      // page top
+	      _SPPageTop.SPPageTop.start();
+	      // search from
+	      _SPSearchFrom.SPSearchFrom.start();
+	      // header
+	      _SPHeader.SPHeader.start();
 	    }
 	    // ----------------------------------------------------
 	    /*

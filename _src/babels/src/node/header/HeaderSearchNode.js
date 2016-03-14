@@ -23,6 +23,7 @@ import {ErrorMessage} from '../../data/ErrorMessage';
 
 // React
 let React = self.React;
+let ReactDOM = self.ReactDOM;
 
 /**
  * 検索フォーム
@@ -38,6 +39,7 @@ export let HeaderSearchNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    this.input = null;
     this.status = null;
     this.errors = {
       keyword: new ErrorMessage()
@@ -58,7 +60,12 @@ export let HeaderSearchNode = React.createClass( {
     return (
       <div className={`head-search form-parts ${errorClass('keyword')} ${this.state.enable}`}>
         <form onSubmit={this.submitHandler}>
-          <input type="text" placeholder={Message.PLACEHOLDER_SEARCH} value={this.state.keyword} onChange={this.changeHandler} />
+          <input
+            type="text"
+            ref="searchText"
+            placeholder={Message.PLACEHOLDER_SEARCH}
+            value={this.state.keyword} onChange={this.changeHandler}
+          />
           <input type="submit" value={Message.SUBMIT_SEARCH}/>
         </form>
       </div>
@@ -70,6 +77,10 @@ export let HeaderSearchNode = React.createClass( {
       this.status = status;
       status.on( SearchStatus.OPEN, this.open );
       status.on( SearchStatus.CLOSE, this.close );
+    }
+
+    if ( this.input === null ) {
+      this.input = ReactDOM.findDOMNode( this.refs.searchText );
     }
   },
   componentWillUnMount: function() {
@@ -102,8 +113,10 @@ export let HeaderSearchNode = React.createClass( {
   open: function() {
     this.reset();
     this.setState( { enable: 'enable' } );
+    this.input.focus();
   },
   close: function() {
     this.setState( { enable: '' } );
+    this.input.blur();
   }
 } );

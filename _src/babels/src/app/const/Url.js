@@ -183,6 +183,14 @@ export class Url {
   static logout():string {
     return '/logout/';
   }
+  // https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
+  /**
+   * SP 専用
+   * @return {string} signup_login url を返します
+   */
+  static signupLogin():string {
+    return '/signup_login/';
+  }
   /**
    * reset_password url
    * @param {string} [path=''] path option

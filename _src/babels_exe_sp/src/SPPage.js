@@ -112,6 +112,9 @@ export class SPPage {
     // settings/deactivate
     router.on( Router.SETTING_DEACTIVATE, SPPage.deactivate );
 
+    // sp only /signup_login
+    router.on( Router.SIGNUP_LOGIN, SPPage.signupLogin );
+
     router.route();
 
   }
@@ -247,6 +250,17 @@ export class SPPage {
         logout.start();
       }
     }
+  }
+  /**
+   * signup_login
+   */
+  static signupLogin():void {
+    // page top
+    SPPageTop.start();
+    // search from
+    SPSearchFrom.start();
+    // header
+    SPHeader.start();
   }
   // ----------------------------------------------------
   /*

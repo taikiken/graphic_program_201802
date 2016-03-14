@@ -86,7 +86,7 @@ export class SPViewHeaderUser extends View {
         return (
           <div className="user">
             <div className="preference">
-              <a href={Url.login()} className="preference-opener"><span className="preference-avatar">&nbsp;</span></a>
+              <a href={Url.signupLogin()} className="preference-opener"><span className="preference-avatar">&nbsp;</span></a>
             </div>
           </div>
         );
