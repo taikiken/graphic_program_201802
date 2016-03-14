@@ -309,7 +309,7 @@ export class Message {
    * @return {string} ログインはこちら &gt;
    */
   static get HERE_TO_LOGIN():string {
-    return 'ログインはこちら &gt;';
+    return 'ログインはこちら ';
   }
 
   // ユーザー登録 section title

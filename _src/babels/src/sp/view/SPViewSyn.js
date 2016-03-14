@@ -78,7 +78,6 @@ class Syn {
     this._page = document.getElementById( parts.page );
     this._bg = document.getElementById( parts.bg );
 
-    /*
     if ( Env.mode !== Env.PRODUCTION ) {
       // ログレベルの指定。出荷時は指定しない
       Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
@@ -86,7 +85,6 @@ class Syn {
       // エンドポイントの指定。出荷時は指定しない
       Synapse.endpoint = 'https://synapse-api.stg.bitcellar.net';
     }
-    */
 
     // メニューインスタンスの作成
     // name: undotsushin_side_menu で作成

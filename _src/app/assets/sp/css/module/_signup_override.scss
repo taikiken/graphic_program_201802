@@ -73,19 +73,19 @@ fieldset {
 .fieldset-step-1 {
   width: 100%;
 
-  .form-parts {
-    float: left;
-    // ceil( 320/520 )
-    width: 62%;
-  }
-
-  .form-parts.align-right {
-    float: right;
-    width: 37%;
-    .setting-form-submit {
-      width: 100%;
-    }
-  }
+  //.form-parts {
+  //  float: left;
+  //  // ceil( 320/520 )
+  //  width: 62%;
+  //}
+  //
+  //.form-parts.align-right {
+  //  float: right;
+  //  width: 37%;
+  //  .setting-form-submit {
+  //    width: 100%;
+  //  }
+  //}
 }
 .fieldset-step-2 {
   width: 100%;
