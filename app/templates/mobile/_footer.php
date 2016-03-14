@@ -146,6 +146,7 @@ if ( $page['apiRoot'] != '' ) :
 <?php endif; ?>
 <script src="/assets/sp/js/bundle/sp-exe.bundle.js"></script>
 <script>
+  /*
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '842032129256034',
@@ -161,6 +162,8 @@ if ( $page['apiRoot'] != '' ) :
     js.src = "//connect.facebook.net/ja_JP/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+  */
 </script>
+<script src="/assets/js/fb-video.js"></script>
 </body>
 </html>
