@@ -91,8 +91,18 @@ export class SPSingle {
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
       single.start();
+
     } else {
       SPSingle.comment();
+    }
+
+    // read more
+    let post = Dom.post();
+    let readMore = Dom.readMore();
+    console.log( 'post, more', post, readMore );
+    if ( post !== null && readMore !== null ) {
+      let more = new UT.sp.view.single.SPViewReadMore( post, readMore );
+      more.start();
     }
 
   }

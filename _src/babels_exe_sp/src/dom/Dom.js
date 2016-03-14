@@ -159,6 +159,8 @@ export class Dom {
   static boardMore():Element {
     return Dom.get( 'board-container-more' );
   }
+
+  // --------------------------------------
   // single
   /**
    * single 関連記事
@@ -216,7 +218,20 @@ export class Dom {
   static commentNormal():Element {
     return Dom.get( 'comment-normal-container' );
   }
-
+  /**
+   * single 記事 本文
+   * @return {Element} post-content-container を返します
+   */
+  static post():Element {
+    return Dom.get( 'post-content-container' );
+  }
+  /**
+   * single 記事 本文 「続きを読む」
+   * @return {Element} post-content-read-more を返します
+   */
+  static readMore():Element {
+    return Dom.get( 'post-content-read-more' );
+  }
   // --------------------------------------
   /**
    * signup 新規登録
