@@ -11,7 +11,11 @@
  */
 'use strict';
 
+// app
 import {Url} from '../../app/const/Url';
+
+// event
+import {LogoutStatus} from '../../event/LogoutStatus';
 
 // React
 let React = self.React;
@@ -24,8 +28,10 @@ export let SPSynItemNode = React.createClass( {
   propTypes: {
     // sign in ずみ真偽値 true sign in
     sign: React.PropTypes.bool.isRequired,
-    // did mount ご通知する callback method
-    callback: React.PropTypes.func.isRequired
+    // did mount を通知する callback method
+    callback: React.PropTypes.func.isRequired,
+    // LogoutNode instance
+    modal: React.PropTypes.object.isRequired
   },
   render: function() {
     if ( this.props.sign ) {
@@ -36,7 +42,7 @@ export let SPSynItemNode = React.createClass( {
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-home" href={Url.index()}><i>&nbsp;</i>運動通信トップへ</a></li>
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-mypage" href={Url.mypage()}><i>&nbsp;</i>マイページ</a></li>
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-config" href={Url.settings()}><i>&nbsp;</i>設定</a></li>
-          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-logout" href={Url.logout()}><i>&nbsp;</i>ログアウト</a></li>
+          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#" onClick={this.logoutClick}><i>&nbsp;</i>ログアウト</a></li>
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-about" href={Url.about()}><i>&nbsp;</i>運動通信とは</a></li>
         </ul>
       );
@@ -56,5 +62,10 @@ export let SPSynItemNode = React.createClass( {
   },
   componentDidMount: function() {
     this.props.callback();
+    this.status = LogoutStatus.factory();
+  },
+  logoutClick: function( event:Event ):void {
+    event.preventDefault();
+    this.status.open();
   }
 } );

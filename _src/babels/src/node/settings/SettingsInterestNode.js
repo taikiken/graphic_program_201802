@@ -12,7 +12,7 @@
 'use strict';
 
 // app
-// import {Empty} from '../../app/const/Empty';
+import {Message} from '../../app/const/Message';
 
 // data
 import {Result} from '../../data/Result';
@@ -95,7 +95,7 @@ export let SettingsInterestNode = React.createClass( {
           {/* button */}
           <div className="form-parts">
             <span className="setting-form-submit mod-btnB01">
-              <input type="submit" value="保存する" />
+              <input type="submit" value={Message.BUTTON_SAVE} />
             </span>
           </div>
           <div className="loading-spinner"></div>

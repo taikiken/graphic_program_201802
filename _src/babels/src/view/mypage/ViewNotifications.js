@@ -16,6 +16,7 @@ import {Notice} from '../../action/users/Notice';
 
 import {Empty} from '../../app/const/Empty';
 import {NoticeAction} from '../../app/const/NoticeAction';
+import {Message} from '../../app/const/Message';
 
 import {NotificationsDae} from '../../dae/user/NotificationsDae';
 import {NoticeDae} from '../../dae/user/NoticeDae';
@@ -186,7 +187,7 @@ export class ViewNotifications extends View {
 
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>VIEW MORE</span></a>
+              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
               <div className="loading-spinner"></div>
             </div>
           );

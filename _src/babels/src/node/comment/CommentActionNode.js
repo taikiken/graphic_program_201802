@@ -11,6 +11,9 @@
  */
 'use strict';
 
+// app
+import {Message} from '../../app/const/Message';
+
 // event
 import {MessageStatus} from '../../event/MessageStatus';
 import {CommentStatus} from '../../event/CommentStatus';
@@ -97,7 +100,7 @@ export let CommentActionNode = React.createClass( {
         // 自分のは削除機能
         return (
           <li className={`dropMenu-item loading-root item-comment-${this.props.commentId} ${replyClass(this.props.replyId)} ${this.state.deleteLoading}`}>
-            <a href="#" className="dropMenu-link-delete" onClick={this.deleteClick}><span>このコメントを削除する</span></a>
+            <a href="#" className="dropMenu-link-delete" onClick={this.deleteClick}><span>{Message.DELETE_WILL}</span></a>
             <div className="loading-spinner"></div>
           </li>
         );

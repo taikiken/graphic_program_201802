@@ -207,7 +207,7 @@ export class SignupWizard extends View {
 
   }
   /**
-   * onbeforeunload を実装する
+   * onbeforeunload を bind する
    */
   activateUnload():void {
     // 開発中はコメントにする, 本番でコメントアウト
@@ -220,10 +220,17 @@ export class SignupWizard extends View {
     window.addEventListener( 'beforeunload', SignupWizard.onUnload, false );
   }
 
+  /**
+   * onbeforeunload を unbind する
+   */
   deactivateUnload():void {
     window.removeEventListener( 'beforeunload', SignupWizard.onUnload );
   }
 
+  /**
+   * onbeforeunload returnValue へ メッセージを設定する
+   * @param {Event} event onbeforeunload Event instance
+   */
   static onUnload( event ):void {
     event.returnValue = Message.UNLOAD;
   }

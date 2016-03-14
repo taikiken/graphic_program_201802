@@ -11,6 +11,8 @@
  */
 'use strict';
 
+import {Message} from '../../app/const/Message';
+
 let React = self.React;
 
 // ------------------------------------------
@@ -25,7 +27,7 @@ export let ChangeAvatarNode = React.createClass( {
     if ( this.props.show ) {
       return (
         <span className="should-change-avatar">
-          <a href="#" onClick={this.clickHandler}>写真を変更する</a>
+          <a href="#" onClick={this.clickHandler}>{Message.PLACEHOLDER_CHANGE_PICTURE}</a>
         </span>
       );
     } else {

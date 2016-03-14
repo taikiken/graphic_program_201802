@@ -146,8 +146,13 @@ if ( $page['apiRoot'] != '' ) :
 </script>
 <?php endif; ?>
 <script src="/assets/sp/js/bundle/sp-exe.bundle.js"></script>
+<?php
+// 遅延読み込みにするために fb-video.js へ変更する on 2016-03-14
+// 実機で FB Video 生成が空振りする
+// Dom 構築が FB sdk 走査に間に合っていない様子
+//
+/*
 <script>
-  /*
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '842032129256034',
@@ -163,8 +168,9 @@ if ( $page['apiRoot'] != '' ) :
     js.src = "//connect.facebook.net/ja_JP/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-  */
 </script>
+*/
+?>
 <script src="/assets/js/fb-video.js"></script>
 </body>
 </html>

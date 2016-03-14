@@ -14,12 +14,16 @@
 // view
 import {View} from '../View';
 
+// model
 import {Model} from '../../model/Model';
 import {ModelSignOut} from '../../model/signup/ModelSignOut';
 
 import {DeactivateNode} from '../../node/modal/DeactivateNode';
 
+// app
 import {User} from '../../app/User';
+import {Message} from '../../app/const/Message';
+
 // util
 import {Loc} from '../../util/Loc';
 
@@ -79,7 +83,7 @@ export class ViewDeactivate extends View {
         return (
           <div className="mod-btnB01 mt30 btn-withdraw">
             <div className={'loading-root ' + this.state.loading}>
-              <a href="#" onClick={this.clickHandler}>運動通信から退会する</a>
+              <a href="#" onClick={this.clickHandler}>{Message.BUTTON_DEACTIVATE_TEXT}</a>
               <div className="loading-spinner"></div>
             </div>
           </div>
