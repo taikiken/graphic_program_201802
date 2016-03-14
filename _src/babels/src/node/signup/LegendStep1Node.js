@@ -242,8 +242,11 @@ export let LegendStep1Node = React.createClass( {
             step={this.props.step}
           />
           <p className="note">
-            <a href="/about/terms/" target="_blank">利用規約</a>と<a href="/about/privacy/" target="_blank">個人情報の取扱</a>に同意したものとみなします。
+            <span className="note-prefix">利用開始をもって</span><a href="/about/terms/" target="_blank">利用規約</a>と<a href="/about/privacy/" target="_blank">個人情報の取扱</a>に<br/>同意したものとみなします。
           </p>
+        </div>
+        <div className="register-link-home">
+          <a href="/">トップページへ戻る</a>
         </div>
       </div>
     );
