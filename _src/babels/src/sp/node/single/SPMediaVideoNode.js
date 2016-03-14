@@ -84,7 +84,7 @@ export let SPMediaVideoNode = React.createClass( {
     let video = media.video;
 
     return (
-      <div className="post-kv">
+      <div className="post-kv post-video-kv">
         <iframe
           src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
           width={Content.WIDTH}
@@ -98,7 +98,7 @@ export let SPMediaVideoNode = React.createClass( {
     let video = media.video;
 
     return (
-      <div className="post-kv">
+      <div className="post-kv post-video-kv post-video-fb">
         <div className="fb-video"
              data-href={video.facebook}
              data-allowfullscreen="true"
