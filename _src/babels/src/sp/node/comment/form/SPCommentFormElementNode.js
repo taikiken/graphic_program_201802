@@ -119,8 +119,10 @@ export let SPCommentFormElementNode = React.createClass( {
         return this.errors[ keyName ].message;
       };
 
+      let commentForm = this.props.independent ? '' : 'comment-form ';
+
       return (
-        <div className={'comment-form form-root loading-root ' + this.state.loading}>
+        <div className={`${commentForm}form-root loading-root ${this.state.loading}`}>
           <form onSubmit={this.onSubmit} ref="form">
             <div className="comment-form-inner">
               <i className={'comment-form-user ' + loggedIn}><img src={picture} alt=""/></i>
