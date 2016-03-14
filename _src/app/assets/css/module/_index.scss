@@ -168,7 +168,7 @@
 @import "motion_slider";
 
 
-// ---------------------------
+
 
 
 // headline
@@ -221,3 +221,48 @@
     } //.post-list-item
   }
 }
+
+
+
+
+
+// sns-pr
+.sns-pr {
+  margin-top: 30px;
+  padding: 20px 28px;
+  background-color: #3755a5;
+  border-radius: 4px;
+
+  &-inner {
+    display: table;
+    width: 100%;
+  }
+
+  dd, dt {
+    display: table-cell;
+    height: 61px;
+    vertical-align: middle;
+    text-align: right;
+  }
+
+  dt {
+    width: 260px;
+    background: url(/assets/images/index/sns-pr-logo.png) 0 center no-repeat;
+  }
+
+  dd {
+    p {
+      display: inline-block;
+      padding-bottom: 6px;
+      border-bottom: 3px solid #fff;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(16);
+      vertical-align: baseline;
+
+      strong {
+        font-size: fs(22, 16);
+      }
+    }
+  }
+} //.sns-pr

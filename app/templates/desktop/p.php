@@ -30,12 +30,15 @@
             <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" onClick="window.open(encodeURI(decodeURI(this.href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>LINEへ送る</span></a></li>
           </ul>
 
-          <dl class="post-sns-pr">
-            <dt><img src="/assets/images/detail/post-sns-lead.png" alt="運動通信を いいね して最新ニュースをチェック！"></dt>
-            <dd>
-              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-            </dd>
-          </dl><!-- /.post-sns-pr -->
+          <div class="post-sns-pr">
+            <dl class="post-sns-pr-inner">
+              <dt>運動通信を<strong>いいね</strong>して<br />
+              最新ニュースをチェック！</dt>
+              <dd>
+                <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              </dd>
+            </dl><!-- /.post-sns-pr-inner -->
+          </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
       </div><!-- /.post-detail -->
