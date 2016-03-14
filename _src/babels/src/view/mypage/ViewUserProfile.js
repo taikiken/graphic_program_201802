@@ -32,6 +32,9 @@ import {UserDae} from '../../dae/UserDae';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * ユーザー情報 設定画面上
+ */
 export class ViewUserProfile extends View {
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
@@ -152,7 +155,7 @@ export class ViewUserProfile extends View {
         _this.executeSafely( View.DID_MOUNT );
       }
     } );
-    console.log( 'userDae', userDae );
+
     ReactDOM.render(
       <UserProfileDom dae={userDae} />,
       this.element

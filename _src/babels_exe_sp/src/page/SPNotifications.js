@@ -40,6 +40,8 @@ export class SPNotifications {
     let element = Dom.board();
     let elementMore = Dom.boardMore();
 
+
+
     if ( element !== null && elementMore !== null ) {
       // list
       let archive = new UT.view.mypage.ViewNotifications( element, elementMore );

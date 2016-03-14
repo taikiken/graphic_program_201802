@@ -178,6 +178,9 @@ import {SPViewReadMore} from './sp/view/single/SPViewReadMore';
 import {SPViewComments} from './sp/view/SPViewComments';
 import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
+// mypage
+import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
+
 
 /**
  * ToDo: 対象外OS alert
@@ -346,6 +349,9 @@ var UT = {
       header: {
         SPViewHeaderUser: SPViewHeaderUser,
         SPViewHeaderSearch: SPViewHeaderSearch
+      },
+      mypage: {
+        SPViewUserProfile: SPViewUserProfile
       }
     }
   }

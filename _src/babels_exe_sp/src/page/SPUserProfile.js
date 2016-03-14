@@ -36,7 +36,7 @@ export class SPUserProfile {
   static start():void {
     let element = Dom.userProfile();
     if ( element !== null ) {
-      let profile = new UT.view.mypage.ViewUserProfile( element );
+      let profile = new UT.sp.view.mypage.SPViewUserProfile( element );
       profile.start();
     }
   }
