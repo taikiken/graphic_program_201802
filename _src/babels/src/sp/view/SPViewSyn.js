@@ -78,6 +78,7 @@ class Syn {
     this._page = document.getElementById( parts.page );
     this._bg = document.getElementById( parts.bg );
 
+    /*
     if ( Env.mode !== Env.PRODUCTION ) {
       // ログレベルの指定。出荷時は指定しない
       Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
@@ -85,6 +86,7 @@ class Syn {
       // エンドポイントの指定。出荷時は指定しない
       Synapse.endpoint = 'https://synapse-api.stg.bitcellar.net';
     }
+    */
 
     // メニューインスタンスの作成
     // name: undotsushin_side_menu で作成
@@ -109,7 +111,9 @@ class Syn {
     let menu = this._menu;
     let serviceList = document.getElementById( parts.service );
     this._ready = true;
+
     console.log( 'service_list_load ', menu.serviceList.serviceListItems );
+
     menu.serviceList.serviceListItems.forEach( function( item ) {
       var listElement = document.createElement( 'li' );
       var itemElement = item.toHTMLElement();
@@ -223,15 +227,14 @@ class Syn {
     // 外側のコンテナをでっかくする
     side.style.cssText = 'height: 9999px';
     // height 設定
-    this.setHeight( side, sideDom );
+    this.setHeight( side );
   }
 
-  setHeight( side:Element, sideDom:Sagen.Dom ):void {
+  setHeight( side:Element ):void {
     // wrapper ul の高さ px 付き
     let heightPx = this._listDom.style( 'height' );
     let height = parseInt( heightPx, 10 );
     let windowHeight = parseInt( window.innerHeight, 10 );
-    let _this = this;
 
     console.log( 'height ', height, windowHeight );
 
