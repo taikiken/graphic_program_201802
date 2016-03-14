@@ -66,6 +66,8 @@ class Syn {
     this._menu = null;
     this._motion = false;
     this._y = 0;
+    this._interval = 0;
+    this._ready = false;
   }
   /**
    * 初期処理, after DOMReady で実行のこと
@@ -106,7 +108,8 @@ class Syn {
   onLoad():void {
     let menu = this._menu;
     let serviceList = document.getElementById( parts.service );
-
+    this._ready = true;
+    console.log( 'service_list_load ', menu.serviceList.serviceListItems );
     menu.serviceList.serviceListItems.forEach( function( item ) {
       var listElement = document.createElement( 'li' );
       var itemElement = item.toHTMLElement();
@@ -209,19 +212,44 @@ class Syn {
     // menu top を表示するため
     Scroll.motion( 0, 0.4 );
 
+    // メニューを開いたことをトラッキングする
+    this._menu.trackShowEvent();
+
+    // timer clear
+    this.dispose();
+
+    // open
     sideDom.addClass( 'open' );
     // 外側のコンテナをでっかくする
     side.style.cssText = 'height: 9999px';
+    // height 設定
+    this.setHeight( side, sideDom );
+  }
+
+  setHeight( side:Element, sideDom:Sagen.Dom ):void {
     // wrapper ul の高さ px 付き
-    let height = this._listDom.style( 'height' );
+    let heightPx = this._listDom.style( 'height' );
+    let height = parseInt( heightPx, 10 );
+    let windowHeight = parseInt( window.innerHeight, 10 );
+    let _this = this;
+
+    console.log( 'height ', height, windowHeight );
+
+    if ( height < windowHeight || !this._ready ) {
+      // Syn.menu が読み込まれない or menu 高さが window 高さ以下の時は
+      // window 高さ + 100px にする
+      height = windowHeight + 100;
+      heightPx = height + 'px';
+
+      console.log( 'height, heightPx ', height, heightPx );
+
+    }
+
     // 高さをセット
-    side.style.cssText = `height: ${height}`;
+    side.style.cssText = `height: ${heightPx}`;
     // 本体の高さを同じにする
     // this._page.style.cssText = `position: fixed; left: 0; top: 0; overflow: hidden; width: 100%; height: ${height}`;
-    this._page.style.cssText = `overflow: hidden; width: 100%; height: ${height}`;
-
-    // メニューを開いたことをトラッキングする
-    this._menu.trackShowEvent();
+    this._page.style.cssText = `overflow: hidden; width: 100%; height: ${heightPx}`;
   }
   /**
    * side menu を閉じる
@@ -232,9 +260,11 @@ class Syn {
     this._motion = true;
     let _this = this;
 
+    this.dispose();
+
     sideDom.addClass( 'closing' );
 
-    Scroll.motion( _this._y, 0.1, 0.4 );
+    Scroll.motion( _this._y, 0, 0.4 );
 
     setTimeout( function() {
       _this._motion = false;
@@ -242,9 +272,12 @@ class Syn {
       sideDom.removeClass( 'open' );
       side.style.cssText = '';
       _this._page.style.cssText = '';
-      // Scroll.y = _this._y;
     }, 400 );
 
+  }
+
+  dispose():void {
+    clearTimeout( this._interval );
   }
 }
 

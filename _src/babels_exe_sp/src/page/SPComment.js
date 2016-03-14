@@ -149,7 +149,7 @@ export class SPComment {
       let single = event.args[ 0 ];
       let slug = single.category.slug;
       // sidebar
-      SPSidebar.start( slug );
+      // SPSidebar.start( slug );
 
       // nav current
       SPNav.start( slug );
