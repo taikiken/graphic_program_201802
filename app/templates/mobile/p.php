@@ -9,34 +9,9 @@
 
       <div id="single-visual-container"></div>
 
-      <?php if (0): ?>
-        <div class="post-kv">
-          <img src="/assets/images/dummy/kv-710x400.jpg" alt="">
-        </div><!-- /.post-kv -->
-
-      <?php endif ?>
       <div class="post-detail">
 
         <div id="single-header-container"></div>
-
-        <?php if (0): ?>
-          <div class="post-heading">
-            <h1>ダミータイトルダミータイトルダミータイトルダミータイトル</h1>
-          </div><!-- /.post-heading -->
-
-          <div class="post-data">
-            <div class="f-left">
-              <p class="post-author">運動通信編集部</p>
-              <p class="post-category">海外サッカー オリンピック</p>
-              <p class="post-date">12月18日(金) 22:04</p>
-            </div>
-
-            <div class="f-right">
-              <div class="btn-bookmark"><a class="enable" href="#"><span>ブックマークする</span></a></div>
-            </div>
-          </div><!-- /.post-data -->
-
-        <?php endif ?>
 
         <div class="post-sns_upper">
           <ul class="post-sns-list">
@@ -47,9 +22,10 @@
           </ul>
         </div>
 
-        <div class="post-content">
+        <div id="post-content-container" class="post-content excerpt">
           <?php print_r($page['post']['body']); ?>
         </div><!-- /.post-content -->
+        <div id="post-content-read-more"></div>
 
         <div class="sponsor-link">
           <a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-710x78.jpg" alt=""></a>

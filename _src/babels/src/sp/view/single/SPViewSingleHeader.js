@@ -25,7 +25,6 @@ import {SingleDae} from '../../../dae/SingleDae';
 // node
 import {BookmarkNode} from '../../../node/bookmark/BookmarkNode';
 
-
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;

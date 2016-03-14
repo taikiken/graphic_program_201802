@@ -129,4 +129,13 @@ export class Message {
   static get SUBMIT_LOGIN():string {
     return 'ログイン';
   }
+  // ----
+  // single
+  /**
+   * READ_MORE
+   * @return {string} 続きを読む
+   */
+  static get READ_MORE():string {
+    return '続きを読む';
+  }
 }
