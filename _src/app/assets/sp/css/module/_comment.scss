@@ -359,6 +359,15 @@
       @include clearfix;
       padding-top: (30/2)+px;
       border-top: 1px solid $border-primary-color;
+
+      .comment-respond {
+        .comment-form {
+          margin-right: -500%;
+          margin-left: -500%;
+          padding-right: 500%;
+          padding-left: 500%;
+        }
+      }
     } //.comment-item
   }
 } //.comment-list
