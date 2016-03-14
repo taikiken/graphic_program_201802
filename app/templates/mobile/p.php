@@ -34,7 +34,7 @@
         <div class="post-sns_lower">
           <div class="post-sns-list">
             <div class="post-sns-fixed">
-              <div class="post-sns-item_fbgood"><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+              <div class="post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . parse_url($_SERVER["REQUEST_URI"])['path'] ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
             </div>
 
             <div class="post-sns-flex">
