@@ -61,11 +61,11 @@ export let CommentDeleteNode = React.createClass( {
         <div className="modal-dialogue modal-dialogue_delete" ref="modalContainer" style={this.state.css}>
           <div className="modal-bg" onClick={this.cancelClick}></div>
           <div className={'modal-dialogue-contents ' + this.props.type}>
-            <a href="#" className="modal-dialogue-close" onClick={this.cancelClick}>閉じる</a>
+            <a href="#" className="modal-dialogue-close" onClick={this.cancelClick}>{Message.BUTTON_CLOSE}</a>
             <p className="lead">{Message.DELETE}</p>
             <ul className="btn-block">
-              <li className="btn-item"><a href="#" className="btn-link btn-link_cancel" onClick={this.cancelClick}>キャンセル</a></li>
-              <li className="btn-item"><a href="#" className="btn-link btn-link_submit" onClick={this.deleteClick}>削除</a></li>
+              <li className="btn-item"><a href="#" className="btn-link btn-link_cancel" onClick={this.cancelClick}>{Message.BUTTON_CANCEL}</a></li>
+              <li className="btn-item"><a href="#" className="btn-link btn-link_submit" onClick={this.deleteClick}>{Message.BUTTON_DELETE}</a></li>
             </ul>
           </div>
         </div>

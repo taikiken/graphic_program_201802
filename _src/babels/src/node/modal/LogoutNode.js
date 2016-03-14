@@ -11,8 +11,14 @@
  */
 'use strict';
 
+// app
 import {Message} from '../../app/const/Message';
+import {User} from '../../app/User';
 
+// util
+import {Loc} from '../../util/Loc';
+
+// event
 import {LogoutStatus} from '../../event/LogoutStatus';
 
 // React
@@ -35,7 +41,10 @@ export let LogoutNode = React.createClass( {
     cancel: React.PropTypes.func
   },
   getDefaultProps: function() {
-
+    return {
+      ok: null,
+      cancel: null
+    };
   },
   getInitialState: function() {
     this.status = null;
@@ -54,11 +63,11 @@ export let LogoutNode = React.createClass( {
         <div className="modal-dialogue modal-dialogue_delete" ref="modalContainer" style={this.state.css}>
           <div className="modal-bg" onClick={this.cancelClick}></div>
           <div className={'modal-dialogue-contents ' + this.props.type}>
-            <a href="#" className="modal-dialogue-close" onClick={this.cancelClick}>閉じる</a>
+            <a href="#" className="modal-dialogue-close" onClick={this.cancelClick}>{Message.BUTTON_CLOSE}</a>
             <p className="lead">{Message.LOGOUT}</p>
             <ul className="btn-block">
-              <li className="btn-item"><a href="#" className="btn-link btn-link_cancel" onClick={this.cancelClick}>いいえ</a></li>
-              <li className="btn-item"><a href="#" className="btn-link btn-link_submit" onClick={this.okClick}>はい</a></li>
+              <li className="btn-item"><a href="#" className="btn-link btn-link_cancel" onClick={this.cancelClick}>{Message.BUTTON_NO}</a></li>
+              <li className="btn-item"><a href="#" className="btn-link btn-link_submit" onClick={this.okClick}>{Message.BUTTON_YES}</a></li>
             </ul>
           </div>
         </div>
@@ -77,12 +86,25 @@ export let LogoutNode = React.createClass( {
   },
   cancelClick: function( event:Event ) {
     event.preventDefault();
-    this.cancel();
+    if ( typeof this.cancel === 'function' ) {
+      this.cancel();
+    } else if ( typeof this.props.cancel === 'function' ) {
+      this.props.cancel();
+    }
     this.closeModal();
   },
   okClick: function( event:Event ) {
     event.preventDefault();
-    this.ok();
+    if ( typeof this.ok === 'function' ) {
+      this.ok();
+    } else if ( typeof this.props.ok === 'function' ) {
+      this.props.ok();
+    } else {
+      // this.ok, this.props.ok どちらも function でなかったら
+      // logout 処理を行う
+      User.logout();
+      Loc.index();
+    }
     this.closeModal( 0.5 );
   },
   openModal: function() {

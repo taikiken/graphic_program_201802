@@ -14,6 +14,7 @@
 // app
 import {Empty} from '../../app/const/Empty';
 import {ErrorTxt} from '../../app/const/ErrorTxt';
+import {Message} from '../../app/const/Message';
 
 // util
 import {Validate} from '../../util/Validate';
@@ -133,7 +134,7 @@ let SettingInputNode = React.createClass( {
                 name="email"
                 value={this.state.email}
                 onChange={this.emailChange}
-                placeholder="メールアドレスを入力"
+                placeholder={Message.PLACEHOLDER_EMAIL}
               />
             </span>
             <ErrorNode message={message('email')} />
@@ -143,7 +144,7 @@ let SettingInputNode = React.createClass( {
             <span className="setting-form-pw form-input">
               <input
                 type="password"
-                placeholder="パスワードを入力"
+                placeholder={Message.PLACEHOLDER_PWD}
                 name="password"
                 value={this.state.password}
                 onChange={this.passwordChange}
@@ -156,7 +157,7 @@ let SettingInputNode = React.createClass( {
             <span className="setting-form-name form-input">
               <input
                 type="text"
-                placeholder="ユーザー名を入力"
+                placeholder={Message.PLACEHOLDER_NAME}
                 name="name"
                 value={this.state.name}
                 onChange={this.nameChange}
@@ -169,7 +170,7 @@ let SettingInputNode = React.createClass( {
             <span className="setting-form-job form-input">
               <input
                 type="text"
-                placeholder="肩書を入力 (任意)"
+                placeholder={Message.PLACEHOLDER_BIO}
                 name="bio"
                 value={this.state.bio}
                 onChange={this.bioChange}
@@ -179,7 +180,7 @@ let SettingInputNode = React.createClass( {
 
           {/* profile_picture */}
           <div className={'setting-form-avatar ' + stageClass()}>
-            <h2 className="setting-form-avatar-heading">プロフィール写真選択</h2>
+            <h2 className="setting-form-avatar-heading">{Message.PLACEHOLDER_PICTURE}</h2>
             <div className={'form-parts ' + errorClass('profile_picture')}>
               <div
                 className={'setting-form-avatar-dropArea ' + zoneEntered}
@@ -211,7 +212,7 @@ let SettingInputNode = React.createClass( {
         {/* button */}
         <div className="form-parts">
           <span className="setting-form-submit mod-btnB01">
-            <input type="submit" value="保存する" />
+            <input type="submit" value={Message.BUTTON_SAVE} />
           </span>
         </div>
         <div className="loading-spinner"></div>

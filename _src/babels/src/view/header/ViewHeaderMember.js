@@ -58,9 +58,17 @@ export class ViewHeaderMember extends View {
     this._action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
     this._component = null;
   }
+  /**
+   * SettingDom instance
+   * @return {null|*} SettingDom instance を返します
+   */
   get component() {
     return this._component;
   }
+  /**
+   * ViewLogoutModal インスタンスを設定します
+   * @param {ViewLogoutModal} modal ViewLogoutModal instance
+   */
   set modal( modal:ViewLogoutModal ):void {
     this._modal = modal;
   }

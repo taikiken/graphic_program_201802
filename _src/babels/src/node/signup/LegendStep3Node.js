@@ -15,6 +15,7 @@ import {SignupStatus} from '../../event/SignupStatus';
 
 // app
 import {User} from '../../app/User';
+import {Message} from '../../app/const/Message';
 
 // model
 import {Model} from '../../model/Model';
@@ -79,7 +80,7 @@ let Step3FormNode = React.createClass( {
         </div>
         <div className="form-parts">
           <span className="setting-form-submit mod-btnB01">
-            <input type="button" value="登録する" onClick={this.nextHandler}/>
+            <input type="button" value={Message.BUTTON_RESISTER} onClick={this.nextHandler}/>
           </span>
         </div>
       </fieldset>

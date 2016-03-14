@@ -14,6 +14,7 @@
 // app
 import {Url} from '../../app/const/Url';
 import {ErrorTxt} from '../../app/const/ErrorTxt';
+import {Message} from '../../app/const/Message';
 
 // event
 import {SignupStatus} from '../../event/SignupStatus';
@@ -73,14 +74,14 @@ let Step1FormNode = React.createClass( {
               name="email"
               value={this.state.email}
               onChange={this.emailChange}
-              placeholder="メールアドレスを入力"
+              placeholder={Message.PLACEHOLDER_EMAIL}
             />
           </span>
           <ErrorNode message={message('errorEmail')} />
         </span>
         <span className="form-parts align-right">
           <span className="setting-form-submit mod-btnB01">
-            <input type="button" value="アカウント作成 (無料)" onClick={this.nextHandler}/>
+            <input type="button" value={Message.PLEASE_MAKE_ACCOUNT} onClick={this.nextHandler}/>
           </span>
         </span>
       </fieldset>

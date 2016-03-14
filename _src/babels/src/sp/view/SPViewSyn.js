@@ -23,6 +23,7 @@ import {Scroll} from '../../util/Scroll';
 
 // node
 import {SPSynItemNode} from '../node/SPSynItemNode';
+import {LogoutNode} from '../../node/modal/LogoutNode';
 
 // React
 // let React = self.React;
@@ -46,7 +47,9 @@ let parts = {
   bg: 'side-menu-bg',
   list: 'side-menu-list',
   // button
-  toggle: 'side-menu-toggle'
+  toggle: 'side-menu-toggle',
+  // modal
+  modal: 'modal-container'
 };
 
 // inner class
@@ -260,11 +263,13 @@ export class SPViewSyn extends View {
    * @param {Element} element login の有無で切り替える menu の基点
    * @param {Element} button menu opener element, menu-opener
    * @param {Element} menu slide in する menu element, side-menu-container
+   * @param {Element} modal modal 基点 Element, logout modal 表示にしよう
    */
-  constructor( element:Element, button:Element, menu:Element ) {
+  constructor( element:Element, button:Element, menu:Element, modal:Element ) {
     super( element );
     this._button = button;
     this._menu = menu;
+    this._modal = modal;
   }
   /**
    * rendering 開始
@@ -276,9 +281,16 @@ export class SPViewSyn extends View {
    * rendering
    */
   render():void {
+
+    let modal = ReactDOM.render(
+      <LogoutNode />,
+      this._modal
+    );
+
     ReactDOM.render(
       <SPSynItemNode
         sign={User.sign}
+        modal={modal}
         callback={this.synapse.bind(this)}
       />,
       this.element

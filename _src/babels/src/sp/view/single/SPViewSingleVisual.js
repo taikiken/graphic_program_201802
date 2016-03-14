@@ -12,18 +12,18 @@
 'use strict';
 
 // view
-import {View} from '../../../view/View';
+// import {View} from '../../../view/View';
 import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
 
 // app
-import {Url} from '../../../app/const/Url';
-import {User} from '../../../app/User';
+// import {Url} from '../../../app/const/Url';
+// import {User} from '../../../app/User';
 
 // dae
 import {SingleDae} from '../../../dae/SingleDae';
 
 // node
-import {SPMediaNode} from '../../node/single/SPMediaNode';
+// import {SPMediaNode} from '../../node/single/SPMediaNode';
 
 // React
 let ReactDOM = self.ReactDOM;

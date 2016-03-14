@@ -11,7 +11,7 @@
  */
 'use strict';
 
-import {MessageStatus} from '../../event/MessageStatus';
+import {MessageStatus} from '../src/event/MessageStatus';
 
 // React
 let React = self.React;

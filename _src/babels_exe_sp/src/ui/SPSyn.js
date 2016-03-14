@@ -40,8 +40,9 @@ export class SPSyn {
     let element = Dom.service();
     let button = Dom.serviceOpener();
     let menu = Dom.serviceMenu();
+    let modal = Dom.modal();
 
-    let syn = new UT.sp.view.SPViewSyn( element, button, menu );
+    let syn = new UT.sp.view.SPViewSyn( element, button, menu, modal );
     syn.start();
   }
 }

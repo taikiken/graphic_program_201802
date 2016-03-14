@@ -17,6 +17,7 @@ import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
 import {Empty} from '../app/const/Empty';
 import {User} from '../app/User';
 import {MediaType} from '../app/const/MediaType';
+import {Message} from '../app/const/Message';
 
 // view
 import {View} from './View';
@@ -113,7 +114,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>VIEW MORE</span></a>
+              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
               <span className="loading-spinner">&nbsp;</span>
             </div>
           );

@@ -17,7 +17,7 @@ import {ViewError} from '../error/ViewError';
 import {Activities} from '../../action/mypage/Activities';
 
 // app
-// import {Empty} from '../../app/const/Empty';
+import {Message} from '../../app/const/Message';
 
 // data
 import {Result} from '../../data/Result';
@@ -188,7 +188,7 @@ export class ViewActivities extends View {
 
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>VIEW MORE</span></a>
+              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
               <div className="loading-spinner"></div>
             </div>
           );

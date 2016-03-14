@@ -15,6 +15,7 @@
 import {Empty} from '../../app/const/Empty';
 import {User} from '../../app/User';
 import {MediaType} from '../../app/const/MediaType';
+import {Message} from '../../app/const/Message';
 
 // view
 import {View} from '../../view/View';
@@ -336,7 +337,7 @@ export let SPArchiveNode = React.createClass( {
 
             let recommend = '';
             if ( !!dae.isRecommend && home ) {
-              recommend = <i className="post-label_recommend">おすすめ記事</i>;
+              recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
             }
 
             // unique key(React)にarticle id(number)記事Idを使用します

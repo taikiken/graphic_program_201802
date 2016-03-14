@@ -43,10 +43,10 @@ export class LogoutStatus extends EventDispatcher {
 
   /**
    * OPEN event kick
-   * @param {Function} ok ok / yes callback
-   * @param {Function} cancel cancel callback
+   * @param {Function} [ok=null] ok / yes callback
+   * @param {Function} [cancel=null] cancel callback
    */
-  open( ok:Function, cancel:Function ):void {
+  open( ok:Function = null, cancel:Function = null ):void {
     this.dispatch( { type: LogoutStatus.OPEN, ok: ok, cancel: cancel } );
   }
   /**
