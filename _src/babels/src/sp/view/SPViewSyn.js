@@ -211,7 +211,7 @@ class Syn {
 
     sideDom.addClass( 'open' );
     // 外側のコンテナをでっかくする
-    side.style.cssText = 'height: 59999px';
+    side.style.cssText = 'height: 9999px';
     // wrapper ul の高さ px 付き
     let height = this._listDom.style( 'height' );
     // 高さをセット
