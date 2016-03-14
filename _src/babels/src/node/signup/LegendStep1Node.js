@@ -75,6 +75,7 @@ let Step1FormNode = React.createClass( {
               value={this.state.email}
               onChange={this.emailChange}
               placeholder={Message.PLACEHOLDER_EMAIL}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             />
           </span>
           <ErrorNode message={message('errorEmail')} />
