@@ -172,6 +172,7 @@ import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
 // single
 import {SPViewSingle} from './sp/view/SPViewSingle';
 import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
+import {SPViewReadMore} from './sp/view/single/SPViewReadMore';
 
 // single/comment
 import {SPViewComments} from './sp/view/SPViewComments';
@@ -329,7 +330,8 @@ var UT = {
       SPViewComments: SPViewComments,
       SPViewSingle: SPViewSingle,
       single: {
-        SPViewSingleHeader: SPViewSingleHeader
+        SPViewSingleHeader: SPViewSingleHeader,
+        SPViewReadMore: SPViewReadMore
       },
       comment: {
         SPViewCommentForm: SPViewCommentForm
