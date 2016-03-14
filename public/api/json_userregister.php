@@ -62,9 +62,9 @@ if($emailcheck==""){
 $passwd=trim($_POST["password"]);
 $passwdcheck=check_passwd($passwd);
 if($passwdcheck==""){
-	$access_token=md5($email.$passwd);
-	$sv[$sn[]="a15"]=$access_token;
-	$sv[$sn[]="passwd"]=md5($MAGIC_STRING.$passwd);	
+	$sv[$sn[]="a15"]=md5($email);
+	$sv[$sn[]="passwd"]=md5($MAGIC_STRING.$passwd);
+	$access_token=$sv["a15"];
 }else{
 	$ermsg["password"]=$passwdcheck;
 }
@@ -78,31 +78,31 @@ if(strlen($name)>0){
 
 $facebookid=trim($_POST["facebook_id"]);
 if(strlen($facebookid)>0){
-		
-	$sql="select id from repo_n where a1='%s' and flag=1";
+
+	$sql=sprintf("select id from repo_n where qid=2 and flag=1 and b1='%s'",$facebookid);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
 		$ermsg["facebook_id"]="現在ログインいただいているFacebookアカウントはすでに登録されています。";
 	}else{
-		$sv[$sn[]="a1"]=$facebookid;
-		$sv[$sn[]="a2"]=$_POST["facebook_token"];	
+		$sv[$sn[]="b1"]=$facebookid;
+		$sv[$sn[]="b2"]=$_POST["facebook_token"];	
 	}
 }
 
 $twitterid=trim($_POST["twitter_id"]);
 if(strlen($twitterid)>0){
 
-	$sql="select id from repo_n where a3='%s' and flag=1";
+	$sql=sprintf("select id from repo_n where qid=2 and flag=1 and b3='%s'",$twitterid);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
 		$ermsg["twitter_id"]="現在ログインいただいているTwitterアカウントはすでに登録されています。";
 	}else{
-		$sv[$sn[]="a3"]=$twitterid;
-		$sv[$sn[]="a4"]=$_POST["twitter_id"];	
+		$sv[$sn[]="b3"]=$twitterid;
+		$sv[$sn[]="b4"]=$_POST["twitter_id"];	
 	}
 }
 
@@ -110,6 +110,7 @@ if(strlen($_FILES["profile_picture"]["tmp_name"])>0){
 
 	$ext=checkFileType($_FILES["profile_picture"]);
 	$filename=sprintf("%s.%s",md5("ut".$email),$ext);
+	$SERVERPATH=str_replace(array("/dev/","/stg/"),"/www/",$SERVERPATH);
 	if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
 		imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
 		$sv[$sn[]="img1"]=$filename;
@@ -132,10 +133,11 @@ if(count($ermsg)>0){
 }else{
 	
 	if($_POST["create"]!="false"){
-			
+		
 		$bio=trim($_POST["bio"]);
-		$sv[$sn[]="t2"]=$bio;
-			
+		if(strlen($bio)>0){
+			$sv[$sn[]="t2"]=$bio;
+		}
 		if(is_string($_POST["interest"])){
 			if(strlen($_POST["interest"])>0){
 				$_POST["interest"]=@explode(",",$_POST["interest"]);
@@ -172,7 +174,7 @@ if(count($ermsg)>0){
 		
 		if($e){
 			
-			$sql=sprintf("select id from repo_n where t1='%s' and flag=1",$email);
+			$sql=sprintf("select id from repo_n where qid=2 and flag=1 and t1='%s' ",$email);
 			$o->query($sql);
 			$f=$o->fetch_array();
 			$ID=$f["id"];
@@ -183,15 +185,10 @@ if(count($ermsg)>0){
 				}
 				$sl=implode("\n",$sl);
 				$o->query($sl);
-				
 				$e=$o->affected_rows2();
-			
 			}else{
-				
 				$e=1;
-				
 			}
-	
 			if($e){
 				
 				$o->query("commit");
@@ -214,7 +211,6 @@ if(count($ermsg)>0){
 				$s["interest"]["category"]=$interestcategory;
 				$s["access_token"]=$access_token;
 				$s["session_token"]="";
-				
 				
 			}else{
 				$o->query("abort");

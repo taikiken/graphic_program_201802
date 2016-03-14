@@ -6,8 +6,14 @@ $o=new db;
 $o->connect();
 
 function stripmeta($s){
+	$w=array(
+		"\r","\n","\t",
+		"、",","," ","　","＝","…","！","。","／","…","～","|",
+		"(",")","（","）","【","】","＞","＜","「","」","『","』","[","]","〈","〉","“","”","《","》",
+		"▼","▼","△","▽","◆","◇","■","□","●","○","★","☆"
+	);
 	$s=strip_tags($s);
-	$s=preg_replace("/(\r|\n|\t|、| |　|(|)|（|）|◆|＝|,|…|【|】|▼|△|＞|＜|「|」|『|』|！|“|”|◇|■|●|[|]|〈|〉|。)/","",$s);
+	$s=str_replace($w,"",$s);
 	$s=mb_convert_kana($s,"KVa");
 	$s=strtolower($s);
 	return $s;
@@ -15,7 +21,7 @@ function stripmeta($s){
 
 function searchtxt($title,$category,$body,$keyword,$t1){
 	
-	$title=strtolower($title);
+	$title=stripmeta($title);
 	$category=strtolower($category);
 	$body=stripmeta($body);
 	$keyword=stripmeta($keyword);
@@ -42,7 +48,5 @@ while($f=$o->fetch_array()){
 
 $u=implode("\n",$u);
 $o->query($u);
-
-echo $u;
 
 ?>

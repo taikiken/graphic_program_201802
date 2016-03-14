@@ -40,9 +40,9 @@ if(strlen($uid)>0){
 }
 
 if(strlen($uid)==0){
-	$sql="select id,name,name_e from pm_ where cid=20 and flag=1 order by n";
+	$sql="select id,name,name_e,img from pm_ where cid=20 and flag=1 order by n";
 }else{
-	$sql=sprintf("select id,name,name_e,n,1 as m from pm_ where id in (select categoryid from u_category where userid=%s and flag=1) and flag=1 union select id,name,name_e,n,2 as m from pm_ where cid=20 and flag=1 and id not in (select categoryid from u_category where userid=%s and flag=1) order by m,n",$uid,$uid);
+	$sql=sprintf("select id,name,name_e,img,n,1 as m from pm_ where id in (select categoryid from u_category where userid=%s and flag=1) and flag=1 union select id,name,name_e,img,n,2 as m from pm_ where cid=20 and flag=1 and id not in (select categoryid from u_category where userid=%s and flag=1) order by m,n",$uid,$uid);
 }
 
 $o->query($sql);
@@ -52,6 +52,7 @@ for($i=0;$i<count($p);$i++){
 	$s["cateory"][$i]["label"]=$p[$i]["name"];
 	$s["cateory"][$i]["slug"]=$p[$i]["name_e"];
 	$s["cateory"][$i]["url"]=sprintf("%s/category/%s/",$domain,$p[$i]["name_e"]);
+	$s["cateory"][$i]["title_img"]=strlen($p[$i]["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$p[$i]["img"]):"";
 }
 
 
@@ -78,10 +79,10 @@ sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),
 sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"","")
 );
 if($uid!=""){
-	$sql.=sprintf("(select 2 as h,1 as recommend,st02.*,1 as sort from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select 2 as h,0 as recommend,*,1 as sort from %s) order by recommend desc,m_time limit 10 offset 0)",
-	$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""));
+	$sql.=sprintf("(select 2 as h,1 as recommend,st02.*,1 as sort from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select 2 as h,0 as recommend,*,1 as sort from %s) order by recommend desc,m_time desc limit 10 offset 0)",
+	$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):""," and m1!=130"),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):""," and m1!=130"));
 }else{
-	$sql.=sprintf("(select 2 as h,0 as recommend,*,1 as sort from %s order by m_time limit 10 offset 0)",sprintf($articletable,"",""));
+	$sql.=sprintf("(select 2 as h,0 as recommend,*,1 as sort from %s order by m_time desc limit 10 offset 0)",sprintf($articletable,""," and m1!=130"));
 }
 $sql.=" order by h,sort,recommend desc,relativetime";
 

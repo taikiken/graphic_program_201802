@@ -9,9 +9,7 @@ $uid=auth();
 
 
 $sql=sprintf("select id as uid,t1 as email,cid as typeid,(select name from repo where id=repo_n.cid) as type,title as name,t2 as profile,img1 as icon from repo_n where id=%s",!$_REQUEST["userid"]?$uid:$_REQUEST["userid"]);
-
 $o->query($sql);
-
 $f=$o->fetch_array();
 
 $s["id"]=(int)$f["uid"];

@@ -17,27 +17,21 @@ $email=trim($_POST["email"]);
 $emailcheck=check_email($email);
 if($emailcheck==""){
 	
-	$sql=sprintf("select id from repo_n where t1='%s' and flag=1",$email);
+	$sql=sprintf("select id from repo_n where qid=2 and flag=1 and t1='%s'",$email);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	$ID=$f["id"];
 	
 	if(strlen($ID)>0){
-		
 		$ermsg["errors"]["email"]=sprintf("%sはすでに登録されています。",$email);
-	
 	}else{
-
 		$y["status"]["code"]=200;
 		$y["status"]["user_message"]="";
 		$y["status"]["developer_message"]="";
-
 	}
 	
 }else{
-
 	$ermsg["errors"]["email"]=$emailcheck;
-
 }
 
 $y["response"]=(object)$ermsg;

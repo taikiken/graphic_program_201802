@@ -16,11 +16,10 @@ $y["status"]["developer_message"]="";
 $s=array();
 
 if(strlen($uid)>0){
-
-	$sql=sprintf("select * from (select *,(select title from repo_n where id=pageid) as title,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_activity where userid=%s and flag=1) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.userid order by regitime desc limit %s offset %s",
-	$uid,$length,$offset);
 	
-	$nsql=sprintf("select count(*) as n from u_activity where userid=%s and flag=1",$uid);
+	$tmptable=sprintf("select t1.id from (select id,activityid from u_activity where activity=1 and userid=%s and flag=1) as t1,(select id from u_comment where flag=1) as t2 where t1.activityid=t2.id union select t1.id from (select id,activityid from u_activity where activity in(2,3) and userid=%s and flag=1) as t1,(select id from u_reaction where flag=1) as t2 where t1.activityid=t2.id union select t1.id from (select id,activityid from u_activity where activity=4 and userid=%s and flag=1) as t1,(select id from u_bookmark where flag=1) as t2 where t1.activityid=t2.id",$uid,$uid,$uid);
+	$sql=sprintf("select * from (select *,(select title from repo_n where id=pageid) as title,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_activity where id in(%s)) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.userid=t2.userid order by regitime desc limit %s offset %s",$tmptable,$length,$offset);
+	$nsql=sprintf("select count(*) as n from (%s) as t",$tmptable);
 	
 	$o->query($sql);
 	while($f=$o->fetch_array())$p[]=$f;
@@ -56,7 +55,7 @@ if(strlen($uid)>0){
 	
 		if($p[$i]["activity"]!=4){
 			
-			$sql=sprintf("select %s from (select * from (select id,commentid,userid,comment,regitime,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_comment where id=%s) as t1,(select id as pid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.pid) as c1 left join (select * from (select id,commentid,userid,comment,regitime,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime from u_comment) as t1,(select id as pid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2) as t2 where t1.userid=t2.pid) as c2 on c1.commentid=c2.id",$e,
+			$sql=sprintf("select %s from (select * from (select id,commentid,userid,comment,regitime,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime,to_char(regitime,'MM月DD日 HH24時MI分') as date,extract(dow from regitime) as weekday from u_comment where id=%s) as t1,(select id as pid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.userid=t2.pid) as c1 left join (select * from (select id,commentid,userid,comment,regitime,to_char(regitime,'YYYY-MM-DD HH24:MI:SS+09:00') as isotime,extract(epoch from (now()-regitime))/60 as relativetime from u_comment) as t1,(select id as pid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from repo_n where qid=2 and flag=1) as t2 where t1.userid=t2.pid) as c2 on c1.commentid=c2.id",$e,
 			$p[$i]["activity"]==1?$p[$i]["activityid"]:sprintf("(select commentid from u_reaction where id=%s)",$p[$i]["activityid"]));
 			$o->query($sql);
 			$f=$o->fetch_array();

@@ -28,7 +28,7 @@ $articletable="
 	(case when m2 is not null then (select name_e from pm_ where id=m2) else null end) as slug2,
 	extract(epoch from (now()-to_timestamp(a1||'-'||a2||'-'||a3||' '||a4||':'||a5||':00', 'YYYY-MM-DD HH24:MI:SS')))/60 as relativetime,
 	a2||'月'||a3||'日 '||a4||'時'||a5||'分' as date,a1||'-'||a2||'-'||a3||'T'||a4||':'||a5||':'||a6||'+09:00' as isotime,
-	extract(dow from date(a1||'-'||a2||'-'||a3))+1 as weekday 
+	extract(dow from date(a1||'-'||a2||'-'||a3)) as weekday 
 from repo_n where cid=1 and flag=1%s) as t1,
 (select 
 	id as uid,
@@ -63,7 +63,7 @@ u_comment where %s) as t1,
 	title as name,
 	t2 as profile,
 	img1 as icon 
-from repo_n where qid=2%s) as t2";
+from repo_n where qid=2 and flag=1%s) as t2";
 
 $bookmarkfield="(select id from u_bookmark where pageid=repo_n.id and userid=%s) as is_bookmark,";
 
@@ -92,7 +92,7 @@ function auth(){
 	$token=check_token($H);
 
 	if(strlen($token["oautn_token"])>0){
-		$sql=sprintf("select id from repo_n where a15='%s' and flag=1",trim($token["oautn_token"]));
+		$sql=sprintf("select id from repo_n where qid=2 and flag=1 and a15='%s'",trim($token["oautn_token"]));
 		$o->query($sql);
 		$f=$o->fetch_array();
 	}
@@ -107,8 +107,6 @@ function auth(){
 	$log["REQUEST"]["GET"]=$_GET;
 	$log["REQUEST"]["POST"]=$_POST;
 	$log["REQUEST"]["FILES"]=$_FILES;
-	
-	
 	$out=print_r($log,true);
 	$fp=fopen("log.txt","a");
 	fputs($fp,$out);
@@ -202,7 +200,7 @@ function check_email($email,$conf=0){
 		$err="正しいメールアドレスを入力してください。";
 	}else{
 		if($conf==0){
-			$sql=sprintf("select id from repo_n where t1='%s' and flag=1",$email);
+			$sql=sprintf("select id from repo_n where qid=2 and flag=1 and t1='%s'",$email);
 			$o->query($sql);
 			$f=$o->fetch_array();
 			
