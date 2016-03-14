@@ -6,39 +6,9 @@
 //
 // Styleguide 2.6.0
 
-// body-sec-inner override
-.body-sec-inner {
-  &.setting-bg {
-    background-image: url(/assets/images/setting/bg-bodysec.png);
-  }
-}
-
-
-
-
-
-// setting-sec
-.setting {
-  @at-root {
-    &-sec {
-      @include clearfix;
-      min-height: 430px;
-    }
-
-    &-side {
-      float: left;
-      width: 160px;
-      margin-top: 30px;
-      padding-bottom: 30px;
-    }
-
-    &-main {
-      float: right;
-      width: 520px;
-      margin-top: 30px;
-      padding-bottom: 30px;
-    }
-  } //at-root
+// setting-main
+.setting-main {
+  margin: (60/2)+px 0 (40/2)+px;
 }
 
 
@@ -48,69 +18,40 @@
 // setting-side-nav
 .setting-side-nav {
   @at-root {
-    &-list {}
+    &-list {
+      display: table;
+      width: 100%;
+    }
 
     &-item {
-      & + & {
-        margin-top: 15px;
+      display: table-cell;
+      width: 33%;
+
+      &:nth-child(2) {
+        width: 34%;
+        border-right: 1px solid #222;
+        border-left: 1px solid #222;
       }
     }
 
     &-link {
-      @include link-decoration(#333, $highlight-color, none, none);
-
-      span {
-        display: inline-block;
-        font-size: fz(12);
-
-        &:before {
-          content: '';
-          position: relative;
-          top: 2px;
-          margin-right: 4px;
-          @extend .sprite-setting;
-
-        }
-      }
+      @include link-decoration(#fff, #fff, none, none);
+      display: block;
+      line-height: (80/2)+px;
+      background-color: #333;
+      font-weight: bold;
+      font-size: fz(20/2);
+      text-align: center;
+      white-space: nowrap;
 
       &.current {
-        span {
-          color: $highlight-color;
-          font-weight: bold;
-        }
-      }
-    }
-
-    &-basic {
-      span:before {
-        @include sprite( $setting-icon-nav-basic, inline-block );
-      }
-    }
-
-    &-interest {
-      span:before {
-        @include sprite( $setting-icon-nav-interest, inline-block );
-      }
-    }
-
-    &-sns {
-      span:before {
-        @include sprite( $setting-icon-nav-sns, inline-block );
+        background-color: #fff;
+        color: $highlight-color;
+        font-weight: bold;
       }
     }
   } //at-root
 }
-
-
-
-
-// setting-heading
-.setting-heading {
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    font-size: fz(20);
-  }
-} //.setting-heading
 
 
 
@@ -209,12 +150,12 @@
     }
 
     &-btn-withdraw {
-      margin-top: 15px;
+      margin-top: (40/2)+px;
       text-align: center;
 
       a {
         @include link-decoration(#999, #999, none, underline);
-        font-size: fz(12);
+        font-size: fz(20/2);
       }
     }
   } //at-root
@@ -290,11 +231,11 @@
         }
       }
 
-      .interest-item-extremesports {
-        label {
-          font-size: fz(12);
-        }
-      }
+      // .interest-item-extremesports {
+      //   label {
+      //     font-size: fz(12);
+      //   }
+      // }
     }
   } //at-root
   // interest-setting
@@ -307,6 +248,12 @@
 // linkage-sns
 .linkage-sns {
   margin-top: (100/2)+px;
+
+  .setting-main & {
+    margin-bottom: (100/2)+px;
+    padding-right: perCalc(50);
+    padding-left: perCalc(50);
+  }
 
   @at-root {
     &-item {
@@ -342,10 +289,6 @@
         }
       }
 
-      &:hover {
-        @include hover-opacity;
-      }
-
       &.enable {
         background-color: #999;
       }
@@ -370,9 +313,11 @@
     }
 
     &-account {
-      margin-left: 10px;
+      display: block;
+      margin-top: .5em;
       font-weight: bold;
-      font-size: fz(12);
+      font-size: fz(24/2);
+      text-align: center;
     }
 
   } //at-root
@@ -382,13 +327,37 @@
 
 
 
-// btn-withdraw
-.btn-withdraw {
-  a {
-    width: 280px;
-    background-color: #e14343 !important;
-  }
-} //btn-withdraw
+// withdraw
+.withdraw {
+  padding-right: perCalc(50);
+  padding-left: perCalc(50);
+
+  &-lead {
+    line-height: lh(36, 24);
+    margin: (50/2)+px 0;
+    font-weight: bold;
+    font-size: fz(24/2);
+    text-align: center;
+  } //.withdraw-lead
+
+  .btn-withdraw {
+    a {
+      display: block !important;
+      background-color: #e14343 !important;
+    }
+  } //.btn-withdraw
+
+  .btn-back {
+    margin-top: (40/2)+px;
+
+    a {
+      display: block !important;
+      background-color: #333 !important;
+    }
+  } //.btn-back
+}
+
+
 
 // -------------------------------------------------
 // override
