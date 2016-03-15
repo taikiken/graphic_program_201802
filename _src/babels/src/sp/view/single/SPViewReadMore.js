@@ -66,6 +66,9 @@ export class SPViewReadMore extends View {
         }
       },
       componentDidMount: function() {
+        // https://github.com/undotsushin/undotsushin/issues/152#issuecomment-196812397
+        // 記事が短いときは
+        // 記事を表示し READ_MORE 非表示
         let height = parseInt( this.props.dom.style( 'height' ), 10 );
         if ( height > 260 ) {
           this.props.dom.removeClass( 'hidden' );
