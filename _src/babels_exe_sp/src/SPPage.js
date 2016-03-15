@@ -308,7 +308,7 @@ export class SPPage {
 
     if ( UT.app.User.sign ) {
       // login only
-      SPUserProfile.start();
+      SPUserProfile.ext();
       SPActivities.start();
     }
     // syn.
