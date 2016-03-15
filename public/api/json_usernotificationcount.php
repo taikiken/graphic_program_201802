@@ -7,17 +7,15 @@ $o->connect();
 
 $uid=auth();
 
-$sql=sprintf("select count(*) as n from u_activity where reuserid=%s and activity<=2 and notice=1",$uid);
+$sql=sprintf("select count(*) as n from u_activity where reuserid=%s and notice=1",$uid);
 $o->query($sql);
 $f=$o->fetch_array();
 $count=$f["n"];
 
 $y=array();
-
 $y["status"]["code"]=200;
 $y["status"]["user_message"]="";
 $y["status"]["developer_message"]="";
-
 $y["response"]["count"]=(int)$count;
 
 if(preg_match("/debugger\.php/",$_SERVER['HTTP_REFERER'])){

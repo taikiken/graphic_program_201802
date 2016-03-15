@@ -13,9 +13,10 @@ $y["status"]["developer_message"]="";
 
 if(strlen($uid)>0){
 	
-	$sql=sprintf("update repo_n set flag=0 where id=%s",$uid);
+	$sql=sprintf("update repo_n set flag=0,b1=null,b2=null,b3=null,b4=null where id=%s",$uid);
 	$o->query($sql);
 	$e=$o->affected_rows2();
+	
 	if($e){
 		$y["status"]["code"]=200;
 		$y["status"]["user_message"]="退会が完了しました。";

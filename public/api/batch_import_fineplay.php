@@ -20,10 +20,11 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	$s["keyword"]=$data["channel"]["item"][$i]["keyword"];
 	$s["m1"]=126;
-	$s["body"]=$data["channel"]["item"][$i]["description"];
+	$s["body"]=preg_match("(\r|\n)","",$data["channel"]["item"][$i]["description"]);
 	
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
-	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["modified"]));
+	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
+	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["modified"]));
 	if($data["channel"]["item"][$i]["enclosure"]){
 		$s["t30"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["url"];
 		$s["t1"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["caption"];
@@ -36,20 +37,20 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}
 
-	$sql=sprintf("select * from repo_n where t7='%s'",$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["u_time"]!=$f["u_time"]){
+			if($s["a_time"]!=$f["a_time"]){
 				if(strlen($s["t30"])>0){
 					$s["img1"]=outimg($s["t30"]);
 				}else{
 					$s["img1"]="";
 					$s["t1"]="";
 				}
-				splittime($s["m_time"],$s["u_time"]);
+				splittime($s["m_time"],$s["a_time"]);
 				$sqla[]=makesql($s,$f["id"]);
 			}
 		}elseif($data["channel"]["item"][$i]["status"]==9){
@@ -64,21 +65,16 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
-			//$s["id"]="(select max(id)+1 from repo_n)";
 			
 			if(strlen($s["t30"])>0)$s["img1"]=outimg($s["t30"]);
-			splittime($s["m_time"],$s["u_time"]);
+			splittime($s["m_time"],$s["a_time"]);
 			$sqla[]=makesql($s,0);
 		}
 	}
 }
 
-//$sqla[]="select setval('repo_n_id_seq',(select max(id) from repo_n));";
-
 $sqla=implode("\n",$sqla);
 $o->query($sqla);
-
-//var_dump($sqla);
 
 
 ?>

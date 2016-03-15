@@ -5,7 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true" data-orientation="true"></script>
-  <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13" data-ios="8.41" data-android="4.2" data-url="/about/browsers/"></script>
+  <?php
+  # ---------------------------------------------------------------------------
+  // browser 使用条件 URL
+  $about_browser = '/about/browsers/';
+  $current_path = parse_url($_SERVER["REQUEST_URI"])['path'];
+  if ( $about_browser != $current_path ) {
+    // browser 使用条件 URL と同じだったら detector.js 読み込まない
+    ?>
+  <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13" data-ios="8.41" data-android="4.2" data-url="<?php echo $about_browser; ?>"></script>
+  <?php }// browser 使用条件 end
+  # ---------------------------------------------------------------------------
+  ?>
   <title><?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?></title>
   <meta name="description" content="説明文">
   <meta name="keywords" content="キーワード, キーワード, キーワード">
@@ -58,7 +69,7 @@ if ($page_has_header) :
 endif;
 ?>
   <script src="/assets/js/libs/vendor.react.js"></script>
-  <script src="/assets/js/bundle/main.bundle.js"></script>
+  <script src="/assets/js/bundle/main.bundle.js?syn=1"></script>
 </head>
 <body>
 <div id="page" class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
@@ -88,7 +99,7 @@ if ( $page_has_header ) :
       <ul>
         <li id="home" class="gnav-home"><a href="/">一面</a></li>
         <?php if (0) : ?>
-          <li class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
+          <li id="crazy" class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
         <?php endif;// crazy remove ?>
         <li id="all" class="gnav-all"><a href="/category/all/">すべて</a></li>
         <?php foreach( $page[ 'site_categories' ] as $category ) { ?>

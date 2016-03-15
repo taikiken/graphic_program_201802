@@ -1,6 +1,11 @@
 <div class="category-heading">
   <h1>
     <?php echo $page['category']['label']; ?>
+    <?php if ( isset($page['category']['title_img']) && $page['category']['title_img'] ) : ?>
+      <span class="category-heading-image">
+        <img src="<?php echo $page['category']['title_img']; ?>" alt="" />
+      </span>
+    <?php endif; ?>
   </h1>
 </div><!-- /.category-heading -->
 
@@ -24,18 +29,21 @@
         <div class="post-sns">
           <ul class="post-sns-list">
             <li class="post-sns-item post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . parse_url($_SERVER["REQUEST_URI"])['path'] ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
-            <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>ツイート</span></a></li>
+            <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>&via=undotsushin" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>ツイート</span></a></li>
             <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a></li>
             <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a></li>
             <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" onClick="window.open(encodeURI(decodeURI(this.href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>LINEへ送る</span></a></li>
           </ul>
 
-          <dl class="post-sns-pr">
-            <dt><img src="/assets/images/detail/post-sns-lead.png" alt="運動通信を いいね して最新ニュースをチェック！"></dt>
-            <dd>
-              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
-            </dd>
-          </dl><!-- /.post-sns-pr -->
+          <div class="post-sns-pr">
+            <dl class="post-sns-pr-inner">
+              <dt>運動通信を<strong>いいね</strong>して<br />
+              最新ニュースをチェック！</dt>
+              <dd>
+                <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              </dd>
+            </dl><!-- /.post-sns-pr-inner -->
+          </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
       </div><!-- /.post-detail -->

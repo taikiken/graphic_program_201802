@@ -211,7 +211,7 @@
         display: table-cell;
         width: 334px;
         padding: 19px;
-        background-color: #f4f5f7;
+        background-color: #3755a5;
         letter-spacing: ls( inline-block );
 
         dt, dd {
@@ -221,13 +221,20 @@
         }
 
         dt {
-          // margin-right: 22px;
+          padding-left: 40px;
+          background: url(/assets/images/detail/post-sns-logo.png) 0 center no-repeat;
+          color: #fff;
+          font-weight: bold;
+
+          strong {
+            font-size: fs(18, 14);
+          }
         }
 
         dd {
           width: 71px;
           // height: 61px;
-          padding-left: 24px;
+          padding-left: 16px;
           text-align: right;
         }
       }

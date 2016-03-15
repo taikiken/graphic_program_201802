@@ -16,7 +16,7 @@
         <div class="post-sns_upper">
           <ul class="post-sns-list">
             <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" target="_blank"><span>facebook</span></a></li>
-            <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>" target="_blank"><span>ツイート</span></a></li>
+            <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>&via=undotsushin" target="_blank"><span>ツイート</span></a></li>
             <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" target="_blank"><span>Google+</span></a></li>
             <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" target="_blank"><span>LINEへ送る</span></a></li>
           </ul>
@@ -41,7 +41,7 @@
               <div class="post-sns-flex-inner">
                 <ul class="post-sns-flex-list">
                   <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" target="_blank"><span>facebook</span></a></li>
-                  <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>" target="_blank"><span>ツイート</span></a></li>
+                  <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>&via=undotsushin" target="_blank"><span>ツイート</span></a></li>
                   <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" target="_blank"><span>Google+</span></a></li>
                   <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" target="_blank"><span>LINEへ送る</span></a></li>
                 </ul>
@@ -51,7 +51,7 @@
 
           <div class="post-sns-pr">
             <dl class="post-sns-pr-inner">
-              <dt><span>運動通信を<strong>いいね</strong>して<br>最新ニュースをチェック！</span></dt>
+              <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
               <dd>
                 <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
               </dd>

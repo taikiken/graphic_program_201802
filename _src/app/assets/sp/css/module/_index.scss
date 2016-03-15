@@ -65,6 +65,9 @@
       // &:nth-child(1), &:nth-child(2) {
       //   border-top: none;
       // }
+      &:last-child {
+        border-bottom: none;
+      }
 
       .post {
         &-thumb {}
@@ -80,3 +83,24 @@
     } //.post-list-item
   }
 }
+
+
+
+
+
+// sns-pr
+.sns-pr {
+  padding-top: (20/2)+px;
+  padding-right: perCalc(20);
+  padding-left: perCalc(20);
+  background-color: #eee;
+
+  &-outer {
+    @extend .post-sns-pr;
+    margin-top: 0 !important;
+  }
+
+  &-inner {
+    @extend .post-sns-pr-inner;
+  }
+} //.sns-pr

@@ -20,13 +20,18 @@ foreach($userinfo["picture"] as $k=>$v){
 }
 
 $y=array(
+	"service"=>"facebook",
 	"token"=>$accessToken->getValue(),
 	"id"=>$userinfo["id"],
 	"name"=>$userinfo["name"],
 	"email"=>$userinfo["email"],
-	"profile"=>$userinfo["description"],
-	"icon"=>$picture
+	"bio"=>$userinfo["description"],
+	"profile_picture"=>$picture
 );
 
+$_SESSION['fb_access_token'] = (string) $accessToken;
+$_SESSION["usersinfo"]=$y;
+
+header("Location:auth.php");
+
 ?>
-<pre><?php print_r(json_encode($y,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)); ?></pre>

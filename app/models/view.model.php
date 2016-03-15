@@ -47,9 +47,9 @@ class ViewModel {
 
   function __construct() {
 
-    $this->default['site_url']        = $this->set_site_url();
-    $this->default['site_categories'] = $this->set_site_categories();
-    $this->default['ua']              = $this->set_ua();
+    $this->default['site_url']        = $this->get_site_url();
+    $this->default['site_categories'] = $this->get_site_categories();
+    $this->default['ua']              = $this->get_ua();
     $this->default['is_app']          = $this->get_is_app();
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
@@ -82,7 +82,7 @@ class ViewModel {
   *
   * @return string  http|https://[host]:[port]
   */
-  public function set_site_url() {
+  public function get_site_url() {
 
     // PRODUCTIONで `$_SERVER["HTTPS"]` が取得できてないようなので強制的にhttps
     if ( UT_ENV == 'PRODUCTION' ) :
@@ -104,7 +104,7 @@ class ViewModel {
   *
   * @return array  カテゴリー一覧の配列
   */
-  public function set_site_categories() {
+  public function get_site_categories() {
 
     // TODO - これDBからひっぱる必要あり〼 ref. #117
     // カテゴリーを取得する
@@ -123,7 +123,6 @@ class ViewModel {
   }
 
 
-
   /**
   * category - category_slugからカテゴリー情報を取得する
   *
@@ -139,8 +138,9 @@ class ViewModel {
   }
 
 
+
   /**
-  * post - 記事IDから記事情報を取得する
+  * post - 詳細ページで記事IDから記事情報を取得する
   *
   * @param  string  $id 記事IDカテゴリースラッグ
   * @return array   記事データ
@@ -152,6 +152,13 @@ class ViewModel {
 
     if ( $post ) :
       $post = json_decode($post, true);
+
+      // 記事のプライマリーカテゴリーをdefaultに設定しておく
+      $category_primary = $post['response']['categories'][0];
+      if ( isset($category_primary['slug']) ) :
+        $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
+      endif;
+
       return $post['response'];
     endif;
 
@@ -165,7 +172,7 @@ class ViewModel {
   *
   * @return string  mobile | desktop
   */
-  public function set_ua() {
+  public function get_ua() {
 
     $ua = new UserAgent();
 

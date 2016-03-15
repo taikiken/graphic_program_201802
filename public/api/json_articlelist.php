@@ -23,22 +23,22 @@ if($_REQUEST["api"]=="category"){
 		$caa[$f["name_e"]]=$f["id"];
 	}
 
-	$c=$_REQUEST["category"]=="all"?"":sprintf(" and (m1=%s or m2=%s)",$caa[$_REQUEST["category"]],$caa[$_REQUEST["category"]]);
+	$c=$_REQUEST["category"]=="all"?" and m1!=130":sprintf(" and (m1=%s or m2=%s)",$caa[$_REQUEST["category"]],$caa[$_REQUEST["category"]]);
 	
 	if(!isset($_REQUEST["type"])){
 
-		$sql=sprintf("select * from %s order by m_time desc limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 		
 	}elseif($_REQUEST["type"]=="ranking"){
 		
-		$sql=sprintf("select tt1.*,(case when num is not null then num else 0 end) as num from (select * from %s) as tt1 left join (select pageid,count(pageid) as num from u_view where regitime > now() - interval '3 day' group by pageid) as tt2 on tt1.id=tt2.pageid order by num desc,m_time desc limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
-		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
-
+		$sql=sprintf("select tq2.* from (select pageid,count(pageid) as n from u_view group by pageid) as tq1,(select * from %s and m_time > now()-interval '3day') as tq2 where tq1.pageid=tq2.id order by n desc,m_time desc,id limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$nsql=sprintf("select count(*) as n from (select t2.* from (select pageid,count(pageid) as n from u_view group by pageid) as t1,(select id,cid,m1,m2,flag from repo_n where m_time > now()-interval '3day') as t2 where t1.pageid=t2.id) as tt1 where cid=1 and flag=1%s",$c);
+		
 	}elseif($_REQUEST["type"]=="video"){
 
-		$sql=sprintf("select * from %s order by m_time desc limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c." and (t8 is not null or youtube is not null or facebook is not null)"),$length,$offset);
-		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and (t8 is not null or youtube is not null or facebook is not null)%s",$c);
+		$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c." and (swf is not null or youtube is not null or facebook is not null)"),$length,$offset);
+		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and (swf is not null or youtube is not null or facebook is not null)%s",$c);
 	
 	}else{
 		$y["status"]["code"]=400;
@@ -57,7 +57,7 @@ if($_REQUEST["api"]=="category"){
 		$q=implode(" and ",$q);
 		$c="";
 		
-		$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select * from %s) as st02 where st01.id=st02.id order by m_time desc limit %s offset %s",$q,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select * from %s) as st02 where st01.id=st02.id order by m_time desc,id limit %s offset %s",$q,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from (select id from u_index where %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
 	}else{
 		$y["status"]["code"]=400;
@@ -72,13 +72,12 @@ if($_REQUEST["api"]=="category"){
 	if($cx=="home"){
 		
 		if($uid!=""){
-			$sql=sprintf("select st02.*,1 as recommend from (select t2.id,t2.m_time from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1 order by m_time desc limit 3 offset 0) as st01,(select * from %s) as st02 where st01.id=st02.id union (select *,0 as recommend from %s) order by recommend desc,m_time desc limit %s offset %s",
-			$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
-		
+			$ex=sprintf("select id from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1",$uid);
+			$sql=sprintf("select *,1 as recommend from %s union select *,0 as recommend from %s order by recommend desc,m_time desc,id limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",sprintf(" and id in(%s) and m_time > now() - interval '3 day'",$ex)),sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$ex)),$length,$offset);
 		}else{
-			$sql=sprintf("select * from %s order by relativetime limit %s offset %s",sprintf($articletable,"",""),$length,$offset);
+			$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,""," and m1!=130 and m_time > now() - interval '3 day'"),$length,$offset);
 		}
-		$nsql="select count(*) as n from repo_n where cid=1 and flag=1";
+		$nsql="select count(*) as n from repo_n where cid=1 and flag=1 and m1!=130 and m_time > now() - interval '3 day'";
 		
 	}elseif($cx=="headline"){
 
@@ -93,7 +92,7 @@ if($_REQUEST["api"]=="category"){
 	}elseif($cx=="personalized"){
 		
 		$c=$uid!=""?sprintf(" and (m1 in (select categoryid from u_category where userid=%s and flag=1) or m2 in (select categoryid from u_category where userid=%s and flag=1)) and m_time > now() - interval '3 day'",$uid,$uid):"";
-		$sql=sprintf("select * from %s order by m_time desc limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
+		$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",$c),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1%s",$c);
 	}else{
 		$y["status"]["code"]=400;
@@ -103,7 +102,7 @@ if($_REQUEST["api"]=="category"){
 
 }elseif($_REQUEST["api"]=="bookmark"){
 	
-		$sql=sprintf("select * from (select pageid,regitime from u_bookmark where userid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.pageid=rt2.id order by m_time desc limit %s offset %s",$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
+		$sql=sprintf("select * from (select pageid,regitime from u_bookmark where userid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.pageid=rt2.id order by m_time desc,id limit %s offset %s",$uid,sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",""),$length,$offset);
 		$nsql=sprintf("select count(*) as n from repo_n where cid=1 and flag=1 and id in(select pageid from u_bookmark where userid=%s and flag=1)",$uid);
 }else{
 	$y["status"]["code"]=400;
@@ -122,7 +121,6 @@ if($y["status"]["user_message"]==""){
 		$o->query($sql);
 		while($f=$o->fetch_array())$p[]=$f;
 		for($i=0;$i<count($p);$i++){
-		
 			$s[$i]["id"]=(int)$p[$i]["id"];
 			$s[$i]["date"]=$p[$i]["isotime"];
 			$s[$i]["display_date"]=get_relativetime($p[$i]["relativetime"],$p[$i]["date"],$p[$i]["weekday"]);
@@ -178,9 +176,7 @@ if($y["status"]["user_message"]==""){
 		
 				$sql=sprintf("select *,(good+bad+case when reply is null then 0 else reply end) as rank from %s where t1.userid=t2.userid order by rank desc limit 6 offset 0",
 				sprintf($commenttable,$uid!=""?sprintf(",(select reaction from u_reaction where commentid=u_comment.id and userid=%s and flag=1) as isreaction",$uid):"",sprintf("pageid=%s and commentid=0 and flag=1",$p[$i]["id"]),""));
-				
 				$o->query($sql);
-		
 				$n=0;
 		
 				while($f=$o->fetch_array()){
@@ -210,7 +206,6 @@ if($y["status"]["user_message"]==""){
 			}else{
 				$s[$i]["comments_popular"]=array();
 			}
-			
 		}
 	}else{
 		if($_REQUEST["api"]=="search")$y["status"]["user_message"]=sprintf("検索語%sに該当する記事はありませんでした。",$_REQUEST["q"]);

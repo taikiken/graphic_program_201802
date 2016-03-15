@@ -12,7 +12,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'     => $post['title'],
-      'category'  => $post['category'],
       'template'  => 'p',
       'path'      => $args,
       'post'      => $post,
@@ -42,7 +41,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'     => $post['title'],
-      'category'  => $post['category'],
       'template'  => 'comment',
       'path'      => $args,
       'post'      => $post,
@@ -62,7 +60,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'     => $post['title'],
-      'category'  => $post['category'],
       'template'  => 'comment',
       'path'      => $args,
       'post'      => $post,

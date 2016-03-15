@@ -13,6 +13,7 @@ $ermsg="";
 if($_SERVER["REQUEST_METHOD"]=="PUT"){
 	if(strlen($pageid)>0){
 		if(strlen($uid)>0){
+			
 			$sql=sprintf("select id,flag from u_bookmark where pageid=%s and userid=%s",$pageid,$uid);
 			$o->query($sql);
 			$f=$o->fetch_array();
@@ -27,7 +28,6 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
 					$sql[]=sprintf("update u_bookmark set flag=1,regitime=now() where id=%s;",$f["id"]);
 					$sql[]=sprintf("update u_activity set flag=1,regitime=now() where activity=4 and activityid=%s;",$f["id"]);
 				}
-				
 				$o->query(implode("\n",$sql));
 				$e=$o->affected_rows2();
 				

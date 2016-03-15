@@ -31,8 +31,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		if(strlen($passwd)>0){
 			$passwdcheck=check_passwd($passwd);
 			if($passwdcheck==""){
-				$access_token=md5($email.$passwd);
-				$sv[$sn[]="a15"]=$access_token;
 				$sv[$sn[]="passwd"]=md5($MAGIC_STRING.$passwd);	
 			}else{
 				$ermsg["password"]=$passwdcheck;
@@ -50,6 +48,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		
 			$ext=checkFileType($_FILES["profile_picture"]);
 			$filename=sprintf("%s.%s",md5("ut".$email),$ext);
+			$SERVERPATH=str_replace(array("/dev/","/stg/"),"/www/",$SERVERPATH);
 			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$SERVERPATH."/prg_img/raw/".$filename)){
 				imgDresize($SERVERPATH."/prg_img/raw/".$filename,$SERVERPATH."/prg_img/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
 				$sv[$sn[]="img1"]=$filename;

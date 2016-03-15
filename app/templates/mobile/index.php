@@ -7,6 +7,18 @@
   <div class="body-sec-inner">
     <section class="main-sec">
       <div id="headline-container"></div><!-- /headline -->
+
+      <aside class="sns-pr">
+        <div class="sns-pr-outer">
+          <dl class="sns-pr-inner">
+            <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
+            <dd>
+              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </dd>
+          </dl><!-- /.sns-pr-inner -->
+        </div><!-- /.sns-pr-outer -->
+      </aside><!-- /.sns-pr -->
+
       <div class="board-large">
         <div id="board-container"></div><!--/archive-->
         <div id="board-container-more"></div><!--/archive-more-->

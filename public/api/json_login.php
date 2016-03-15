@@ -17,7 +17,7 @@ $ermsg="";
 
 if(strlen($email)>0&&strlen($passwd)>0){
 	
-	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15,passwd from repo_n where t1='%s'",$email);
+	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15,passwd from repo_n where qid=2 and flag=1 and t1='%s'",$email);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	

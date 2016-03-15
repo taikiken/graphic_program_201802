@@ -72,7 +72,7 @@ if(preg_match('/^[0-9]+$/',$id)){
 		}
 		
 		$sql=sprintf("select * from %s order by relativetime limit 4 offset 0",
-		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",sprintf(" and m1=%s and id!=%s",$f["m1"],$f["id"])));
+		sprintf($articletable,$uid!=""?sprintf($bookmarkfield,$uid):"",sprintf(" and (m1=%s or m2=%s) and id!=%s",$f["m1"],$f["m1"],$f["id"])));
 		
 		$o->query($sql);
 		

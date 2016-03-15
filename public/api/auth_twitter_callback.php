@@ -1,37 +1,18 @@
 <?php
 
-session_start();
-
-define('CONSUMER_KEY','6pZoN3NLkEoNae8VDP0j7MHCK');
-define('CONSUMER_SECRET','PiKgV2QDIY3TnfwSXnVaFP3bqWGHnSWT9qSsN5mJtDR6ZHEMLG');
-define('OAUTH_CALLBACK','https://www.undotsushin.com/api/auth_twitter_callback.php');
-
+include "public/twitter.php";
 require_once 'vendor/autoload.php';
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-//login.phpでセットしたセッション
 $request_token = [];  // [] は array() の短縮記法。詳しくは以下の「追々記」参照
 $request_token['oauth_token'] = $_SESSION['oauth_token'];
 $request_token['oauth_token_secret'] = $_SESSION['oauth_token_secret'];
-
-//Twitterから返されたOAuthトークンと、あらかじめlogin.phpで入れておいたセッション上のものと一致するかをチェック
 if (isset($_REQUEST['oauth_token']) && $request_token['oauth_token'] !== $_REQUEST['oauth_token']) {
     die( 'Error!' );
 }
-
-//OAuth トークンも用いて TwitterOAuth をインスタンス化
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $request_token['oauth_token'], $request_token['oauth_token_secret']);
-
-//アプリでは、access_token(配列になっています)をうまく使って、Twitter上のアカウントを操作していきます
 $_SESSION['access_token'] = $connection->oauth("oauth/access_token", array("oauth_verifier" => $_REQUEST['oauth_verifier']));
-/*
-ちなみに、この変数の中に、OAuthトークンとトークンシークレットが配列となって入っています。
-*/
-
-//セッションIDをリジェネレート
 session_regenerate_id();
-
-//マイページへリダイレクト
 header( 'location: auth_twitter_mypage.php' );
 
 ?>

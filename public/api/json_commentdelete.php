@@ -15,7 +15,6 @@ if(strlen($pageid)>0){
 		if(strlen($commentid)>0){			
 			
 			$sql=sprintf("select id,flag from u_comment where id=%s and userid=%s;",strlen($replyid)>0?$replyid:$commentid,$uid);
-			
 			$o->query($sql);
 			$f=$o->fetch_array();
 			

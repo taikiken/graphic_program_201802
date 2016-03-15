@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 require_once 'facebook-php-sdk-v5/autoload.php';
 
 use Facebook\FacebookSession;
