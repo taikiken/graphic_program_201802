@@ -20,6 +20,7 @@ import {Env} from '../../app/Env';
 
 // util
 import {Scroll} from '../../util/Scroll';
+import {Loc} from '../../util/Loc';
 
 // node
 import {SPSynItemNode} from '../node/SPSynItemNode';
@@ -78,7 +79,7 @@ class Syn {
     this._page = document.getElementById( parts.page );
     this._bg = document.getElementById( parts.bg );
 
-    if ( Env.mode !== Env.PRODUCTION ) {
+    if ( Syn.test() ) {
       // ログレベルの指定。出荷時は指定しない
       Synapse.Logger.logLevel = Synapse.Logger.DEBUG;
 
@@ -217,9 +218,6 @@ class Syn {
     // メニューを開いたことをトラッキングする
     this._menu.trackShowEvent();
 
-    // timer clear
-    this.dispose();
-
     // open
     sideDom.addClass( 'open' );
     // 外側のコンテナをでっかくする
@@ -261,8 +259,6 @@ class Syn {
     this._motion = true;
     let _this = this;
 
-    this.dispose();
-
     sideDom.addClass( 'closing' );
 
     Scroll.motion( _this._y, 0, 0.4 );
@@ -277,8 +273,35 @@ class Syn {
 
   }
 
-  dispose():void {
-    clearTimeout( this._interval );
+  /**
+   * 自身の script tag src query syn を探し '1' か否かを調べ真偽値を返します
+   * @return {boolean} syn=1 かの真偽値を返します
+   */
+  static test():boolean {
+    let scripts = document.getElementsByTagName( 'head' )[ 0 ].getElementsByTagName( 'script' );
+    let search;
+
+    for ( let script of scripts ) {
+      if ( !script.src || script.src.indexOf( 'main.bundle.js' ) === -1 ) {
+        continue;
+      }
+
+      let src = script.src;
+      search = src.split('?' ).pop();
+    }
+    // console.log( 'test search ', search );
+    if ( typeof search === 'undefined' || search === '' ) {
+      return false;
+    }
+
+    let queries = Loc.parse( search );
+    // console.log( 'test queries ', queries );
+    if ( !queries.hasOwnProperty( 'syn' ) ) {
+      return false;
+    } else {
+      return queries.syn === '1';
+    }
+
   }
 }
 
