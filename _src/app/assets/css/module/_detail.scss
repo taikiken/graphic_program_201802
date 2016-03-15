@@ -21,8 +21,20 @@
 
   // post-data
   .post-data {
-    @include clearfix;
+    display: table;
+    width: 100%;
     margin-top: 20px;
+
+    .f-left,
+    .f-right {
+      float: none;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .f-right {
+      text-align: right;
+    }
 
     @at-root {
       // post-author
@@ -36,6 +48,7 @@
 
       // btn-bookmark
       .btn-bookmark {
+        display: inline-block;
       } //.btn-bookmark
     }
   } //.post-data
