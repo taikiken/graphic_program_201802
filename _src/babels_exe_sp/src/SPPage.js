@@ -302,7 +302,7 @@ export class SPPage {
     // search from
     SPSearchFrom.start();
 
-    SPSidebar.start();
+    // SPSidebar.start();
     SPHeader.start();
 
     if ( UT.app.User.sign ) {
