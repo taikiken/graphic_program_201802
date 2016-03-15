@@ -335,4 +335,14 @@ export class Message {
   static LABEL_RECOMMEND():string {
     return 'おすすめ記事';
   }
+
+  // -----------------------------------
+  // mypage
+  /**
+   * FAVORITE_SPORTS
+   * @return {string} 好きな競技
+   */
+  static get FAVORITE_SPORTS():string {
+    return '好きな競技';
+  }
 }

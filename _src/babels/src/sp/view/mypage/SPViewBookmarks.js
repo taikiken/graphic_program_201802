@@ -11,39 +11,29 @@
  */
 'use strict';
 
-import {View} from '../View';
-import {ViewError} from '../error/ViewError';
-
-import {Bookmarks} from '../../action/mypage/Bookmarks';
-
-/*
-// model
-import {Model} from '../../model/Model';
-import {ModelBookmark} from '../../model/users/ModelBookmark';
-*/
+import {View} from '../../../view/View';
+import {ViewBookmarks} from '../../../view/mypage/ViewBookmarks';
 
 // app
-import {Empty} from '../../app/const/Empty';
-// import {Message} from '../../app/const/Message';
+import {Empty} from '../../../app/const/Empty';
 
 // data
-import {Result} from '../../data/Result';
-import {Safety} from '../../data/Safety';
+import {Safety} from '../../../data/Safety';
 
 // dae
-import {ArticleDae} from '../../dae/ArticleDae';
+import {ArticleDae} from '../../../dae/ArticleDae';
 
 // node
-import {BookmarkButtonNode} from '../../node/mypage/BookmarkButtonNode';
-import {MoreViewNode} from '../../node/mypage/MoreViewNode';
+import {BookmarkButtonNode} from '../../../node/mypage/BookmarkButtonNode';
+import {MoreViewNode} from '../../../node/mypage/MoreViewNode';
 
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 /**
- * my page bookmark 一覧
+ * SP, my page bookmark 一覧
  */
-export class ViewBookmarks extends View {
+export class SPViewBookmarks extends ViewBookmarks {
   /**
    * my page bookmark 一覧を表示 + infinite scroll
    * @param {Element} element root element, Ajax result を配置する
@@ -51,98 +41,7 @@ export class ViewBookmarks extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
-    super( element, option );
-    this._action = new Bookmarks( this.done.bind( this ), this.fail.bind( this ) );
-    this._moreElement = moreElement;
-
-    /**
-     * 取得記事(articles)をArticleDae instance 配列として保存する
-     * @type {Array<ArticleDae>}
-     * @private
-     */
-    this._articles = [];
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
-    this._articleRendered = null;
-    // more button instance を保持します
-    this._moreRendered = null;
-    // response.request object を保持する
-    this._request = null;
-  }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * @return {Element|*} more button root element を返します
-   */
-  get moreElement():Element {
-    return this._moreElement;
-  }
-  // ---------------------------------------------------
-  //  Method
-  // ---------------------------------------------------
-  /**
-   * Ajax request を開始します
-   */
-  start():void {
-
-    this.action.next();
-
-  }
-  /**
-   * Ajax response success
-   * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
-   */
-  done( result:Result ):void {
-
-    let articles = result.articles;
-    if ( typeof articles === 'undefined' ) {
-
-      // articles undefined
-      // JSON に問題がある
-      let error = new Error( '[BOOKMARKS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( View.UNDEFINED_ERROR, error );
-      // this.showError( error.message );
-
-    } else if ( articles.length === 0 ) {
-
-      // articles empty
-      // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[BOOKMARKS:EMPTY]サーバーレスポンスに問題が発生しました。' );
-      this.executeSafely( View.EMPTY_ERROR, error );
-      // this.showError( error.message );
-
-    } else {
-
-      this._request = result.request;
-      this.render( articles );
-
-    }
-
-  }
-  /**
-   * Ajax response error
-   * @param {Error} error Error instance
-   */
-  fail( error:Error ):void {
-
-    this.executeSafely( View.RESPONSE_ERROR, error );
-    // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
-    // this.showError( error.message );
-
-  }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
-    // ToDo: Error 時の表示が決まったら変更する
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-
+    super( element, moreElement, option );
   }
   /**
    * dom を render します
@@ -233,10 +132,6 @@ export class ViewBookmarks extends View {
 
                   return (
                     <li key={'bookmarks-' + dae.id} className="board-stacks board-item">
-                      <BookmarkButtonNode
-                        articleId={dae.id}
-                        bookmarked={dae.isBookmarked}
-                      />
                       <a href={dae.url} className="post">
                         <figure className="post-thumb">
                           <img src={thumbnail} alt={dae.title}/>
@@ -247,6 +142,10 @@ export class ViewBookmarks extends View {
                           <p className="post-date">{dae.displayDate}</p>
                         </div>
                       </a>
+                      <BookmarkButtonNode
+                        articleId={dae.id}
+                        bookmarked={dae.isBookmarked}
+                      />
                     </li>
                   );
                 } )// map
