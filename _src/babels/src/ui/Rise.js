@@ -11,7 +11,7 @@
 
 import {EventDispatcher} from '../event/EventDispatcher';
 
-import {Dom} from '../util/Dom';
+import {Offset} from '../util/Offset';
 import {Scroll} from '../util/Scroll';
 
 /**
@@ -28,7 +28,7 @@ export class Rise extends EventDispatcher {
 
     this._element = element;
     this._offset = offset;
-    this._dom = new Dom( element );
+    this._dom = new Offset( element );
     this._boundScroll = this.onScroll.bind( this );
     this._scroll = Scroll.factory();
   }

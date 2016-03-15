@@ -95,8 +95,8 @@ if ( $page_has_header ) :
   </header><!-- /.head-sec -->
   <div id="head-search-container"></div>
   <nav id="global-nav-container" class="gnav-sec">
-    <div class="gnav-sec-inner">
-      <ul>
+    <div id="gnav-sec-inner" class="gnav-sec-inner">
+      <ul id="gnav-sec-list">
         <li id="home" class="gnav-home"><a href="/">一面</a></li>
         <?php if (0) : ?>
           <li id="crazy" class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>

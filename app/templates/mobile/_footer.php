@@ -151,9 +151,11 @@ if ( $page['apiRoot'] != '' ) :
 // 実機で FB Video 生成が空振りする
 // Dom 構築が FB sdk 走査に間に合っていない様子
 //
-/*
+/* */
+?>
 <script>
   window.fbAsyncInit = function() {
+    console.log( '******** fbAsyncInit *******' );
     FB.init({
       appId      : '842032129256034',
       xfbml      : true,
@@ -169,8 +171,10 @@ if ( $page['apiRoot'] != '' ) :
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-*/
-?>
+<?php
+/*
 <script src="/assets/js/fb-video.js"></script>
+ */
+?>
 </body>
 </html>
