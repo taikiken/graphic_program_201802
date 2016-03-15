@@ -47,7 +47,7 @@ let ReactDOM = self.ReactDOM;
 let Sagen = self.Sagen;
 
 // ------------------------------------------
-// step 2 入力フォーム
+// 設定 基本情報 表示 / 変更
 // ------------------------------------------
 let SettingInputNode = React.createClass( {
   propTypes: {
@@ -122,12 +122,14 @@ let SettingInputNode = React.createClass( {
       avatar = Empty.USER_EMPTY;
     }
     */
+    let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';
+    console.log( 'SettingInputNode ' );
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
         <fieldset className="fieldset-step-2">
           {/* email */}
-          <span className={'form-parts ' + errorClass('email')}>
+          <span className={`form-parts ${errorClass('email')}`}>
             <span className="setting-form-mail form-input">
               <input
                 type="text"
@@ -167,7 +169,7 @@ let SettingInputNode = React.createClass( {
           </span>
           {/* bio */}
           <span className="form-parts">
-            <span className="setting-form-job form-input">
+            <span className={`setting-form-job form-input`}>
               <input
                 type="text"
                 placeholder={Message.PLACEHOLDER_BIO}
@@ -189,8 +191,8 @@ let SettingInputNode = React.createClass( {
                 onDragLeave={this.handleDragLeave}
                 onDrop={this.handleDrop}
               >
-                <div className={'avatar-stage'}>
-                  <sapn className="avatar-container"><img src={avatar} alt=""/></sapn>
+                <div className={`avatar-stage`}>
+                  <sapn className={`avatar-container ${loggedIn}`}><img src={avatar} alt=""/></sapn>
                   <ChangeAvatarNode
                     show={this.props.avatar !== this.state.avatar}
                     handler={this.avatarChangeHandler}

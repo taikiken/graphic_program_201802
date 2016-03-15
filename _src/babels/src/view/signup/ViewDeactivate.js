@@ -99,10 +99,12 @@ export class ViewDeactivate extends View {
           callback[ Model.RESPONSE_ERROR ] = this.fail;
         }
 
+        // model
         if ( this.model === null ) {
           this.model = new ModelSignOut( callback );
         }
 
+        /*
         if ( this.modal === null ) {
           this.modal = ReactDOM.render(
             <DeactivateNode
@@ -111,14 +113,26 @@ export class ViewDeactivate extends View {
             />,
             modalElement
           );
-        }
+        }*/
       },
       componentWillUnMount: function() {
       },
       clickHandler: function( event ) {
         event.preventDefault();
         let modal = this.modal;
-        if ( modal !== null ) {
+
+        if ( modal === null ) {
+          modal = ReactDOM.render(
+            <DeactivateNode
+              ok={this.okHandler}
+              cancel={this.cancelHandler}
+              show={true}
+            />,
+            modalElement
+          );
+          this.modal = modal;
+
+        } else {
           // open modal
           modal.updateShow( true );
           this.setState( { loading: 'loading' } );
