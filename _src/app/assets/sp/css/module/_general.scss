@@ -452,8 +452,13 @@
 
 // modal-dialogue_logout
 // アラート ログアウト
+.modal-dialogue_delete,
 .modal-dialogue_logout {
   @extend %modal-dialogue;
+
+  .modal-dialogue-close {
+    display: none;
+  }
 
   .modal-dialogue-contents {
     width: perCalc(480, 640);
