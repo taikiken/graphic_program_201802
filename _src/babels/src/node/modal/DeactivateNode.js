@@ -26,11 +26,19 @@ export let DeactivateNode = React.createClass( {
     // ok click callback
     ok: React.PropTypes.func.isRequired,
     // cancel click callback
-    cancel: React.PropTypes.func.isRequired
+    cancel: React.PropTypes.func.isRequired,
+    // show / no
+    show: React.PropTypes.bool
+  },
+  getDefaultProps: function() {
+    return {
+      show: false,
+      type: 'deactivate'
+    };
   },
   getInitialState: function() {
     return {
-      show: false,
+      show: this.props.show,
       css: {opacity: 0}
     };
   },
@@ -56,6 +64,9 @@ export let DeactivateNode = React.createClass( {
     }
   },
   componentDidMount: function() {
+    if ( this.state.show ) {
+      this.openModal();
+    }
   },
   componentWillUnMount: function() {
   },

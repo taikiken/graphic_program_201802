@@ -142,6 +142,10 @@ fieldset {
     border: 3px solid #e1438b;
     background: #fff url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
 
+    &.user-logged-in {
+      background: #fff;
+    }
+
     img {
       width: 100%;
       height: auto;

@@ -322,7 +322,7 @@ export class SPPage {
     // search from
     SPSearchFrom.start();
 
-    SPSidebar.start();
+    // SPSidebar.start();
     SPHeader.start();
     if ( UT.app.User.sign ) {
       // login only
@@ -343,7 +343,7 @@ export class SPPage {
     // search from
     SPSearchFrom.start();
 
-    SPSidebar.start();
+    // SPSidebar.start();
     SPHeader.start();
 
     if ( UT.app.User.sign ) {
@@ -362,7 +362,7 @@ export class SPPage {
     // search from
     SPSearchFrom.start();
 
-    SPSidebar.start();
+    // SPSidebar.start();
     SPHeader.start();
 
     if ( UT.app.User.sign ) {
@@ -380,7 +380,8 @@ export class SPPage {
     SPPageTop.start();
     // search from
     SPSearchFrom.start();
-    SPSidebar.start();
+
+    // SPSidebar.start();
     SPHeader.start();
     // syn.
     SPSyn.start();
@@ -394,7 +395,7 @@ export class SPPage {
     // search from
     SPSearchFrom.start();
 
-    SPSidebar.start();
+    // SPSidebar.start();
     SPHeader.start();
 
     if ( UT.app.User.sign ) {
