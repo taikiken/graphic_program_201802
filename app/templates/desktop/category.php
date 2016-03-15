@@ -1,8 +1,14 @@
 <div class="category-heading">
   <h1>
     <?php echo $page['title']; ?>
+    <?php if ( isset($page['category']['title_img']) && $page['category']['title_img'] ) : ?>
+      <span class="category-heading-image">
+        <img src="<?php echo $page['category']['title_img']; ?>" alt="" />
+      </span>
+    <?php endif; ?>
   </h1>
 </div><!-- /.category-heading -->
+
 
 <div class="body-sec">
   <div class="body-sec-inner">
