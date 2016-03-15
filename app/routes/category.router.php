@@ -35,7 +35,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     endif;
 
     $args['page'] = $app->model->set(array(
-      'title'      => $category['label'].'のニュース',
+      'title'      => $category['label'],
       'template'   => 'category',
       'path'       => $args,
     ));
