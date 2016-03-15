@@ -76,6 +76,12 @@
         background: url(/assets/sp/images/detail/excerpt-mask.png) 0 bottom repeat-x;
         background-size: (40/2)+px;
       }
+
+      &.hidden {
+        max-height: initial;
+        height: auto;
+        opacity: 1;
+      }
     }
 
     &-btn-readMore {
