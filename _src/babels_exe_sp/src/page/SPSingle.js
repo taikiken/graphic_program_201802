@@ -11,10 +11,6 @@
  */
 'use strict';
 
-// import {Header} from './Header';
-import {SPSidebar} from './SPSidebar';
-import {Dom} from '../dom/Dom';
-
 // ui
 import {SPNav} from '../ui/SPNav';
 
@@ -22,6 +18,7 @@ let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 let _prepared = 0;
 let _singleDae = null;

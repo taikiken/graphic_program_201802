@@ -9,13 +9,13 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-import {Dom} from '../dom/Dom';
+'use strict';
 
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 export class Settings {
   /**

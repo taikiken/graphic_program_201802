@@ -13,27 +13,14 @@
 
 // view
 import {View} from '../View';
-/*
-import {ViewSingleImage} from '../single/ViewSingleImage';
-import {ViewSingleVideo} from '../single/ViewSingleVideo';
-*/
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';
 
 // app
 import {User} from '../../app/User';
-// import {Message} from '../../app/const/Message';
-/*
-import {MediaType} from '../../app/const/MediaType';
-*/
-
-// model
-// import {Model} from '../../model/Model';
-// import {ModelBookmark} from '../../model/users/ModelBookmark';
 
 // node
-import {MediaNode} from '../../node/single/MediaNode';
 import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
 
 // React
@@ -92,24 +79,6 @@ export class ViewSingleHeader extends View {
       render: function() {
         let single = this.state.single;
 
-        // bookmark on / off 機能を BookmarkNode へ移動
-        // let message = this.state.status ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL;
-        // let right = '';
-
-        /*
-        if ( this.state.sign ) {
-          // login member のみ bookmark action が使える
-          right = <div className="f-right">
-            <div className={this.state.loading + ' loading-root btn-bookmark'}>
-              <a href="#" className={this.state.bookmarked} onClick={this.clickBookmark} ref='bookmarked'>
-                <span>{message}</span>
-              </a>
-              <div className='loading-spinner'></div>
-            </div>
-          </div>;
-        }
-        */
-
         return (
           <div>
             <div className={'post-heading post-heading-' + single.id}>
@@ -132,11 +101,13 @@ export class ViewSingleHeader extends View {
             React component へ変更
             Facebook Video のレンダリングが間に合わず sdk 描画が空振りすることがあるため
             <div ref="singleImage"></div>
-             */}
+
+             2016-03-15 design が変更になったのでここから分離します
             <MediaNode
               mediaType={this.state.single.mediaType}
               media={this.state.single.media}
             />
+             */}
           </div>
         );
 
@@ -154,17 +125,6 @@ export class ViewSingleHeader extends View {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
 
-        /*
-        // ---------------------
-        // bookmark 処理
-        if ( this.state.sign ) {
-          let action = new ModelBookmark( this.state.single.id );
-          this.action = action;
-          action.on( Model.COMPLETE, this.done );
-          action.on( Model.UNDEFINED_ERROR, this.fail );
-          action.on( Model.RESPONSE_ERROR, this.fail );
-        }
-        */
       },
       componentWillUnMount: function() {
         // this.dispose();
@@ -172,45 +132,7 @@ export class ViewSingleHeader extends View {
       // --------------------------------------------
       // custom method
       dispose: function() {
-        /*
-        let action = this.action;
-        if ( action !== null ) {
-          action.off( Model.COMPLETE, this.done );
-          action.off( Model.UNDEFINED_ERROR, this.fail );
-          action.off( Model.RESPONSE_ERROR, this.fail );
-          this.action = null;
-        }
-        */
       },
-      /*
-      // --------------------------------------------
-      // click -> ajax -> done | fail
-      clickBookmark: function( event ) {
-        event.preventDefault();
-
-        this.setState( { loading: 'loading' } );
-        this.action.start( !this.state.status );
-
-      },
-      done: function() {
-
-        let bookmarked = '';
-        if ( !this.state.status ) {
-          // 現在がbookmark 済み
-          bookmarked = 'bookmarked enable';
-        }
-
-        // loading 解除, 表示更新
-        this.setState( { loading: '', status: !this.state.status, bookmarked: bookmarked } );
-
-      },
-      fail: function() {
-
-        // loading 解除
-        this.setState( { loading: '' } );
-
-      },
-      */
       // --------------------------------------------
       // update
       updateSingle: function( single, sign ) {

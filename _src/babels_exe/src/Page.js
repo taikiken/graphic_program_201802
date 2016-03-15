@@ -32,12 +32,11 @@ import {SearchFrom} from './header/SearchFrom';
 
 import {CommentDelete} from './modal/CommentDelete';
 
-import {Dom} from './dom/Dom';
-
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 /**
  * <h3>ページ振り分け</h3>

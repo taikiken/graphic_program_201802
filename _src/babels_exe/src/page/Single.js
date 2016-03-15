@@ -13,15 +13,14 @@
 
 // import {Header} from './Header';
 import {Sidebar} from './Sidebar';
-import {Dom} from '../dom/Dom';
 
 // ui
 import {Nav} from '../ui/Nav';
-
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 let _prepared = 0;
 let _singleDae = null;
@@ -120,6 +119,14 @@ export class Single {
     let slug = single.category.slug;
     // let label = single.category.label;
 
+    // main visual
+    let element = Dom.visual();
+    if ( element !== null ) {
+      console.log( 'start main visual ', element );
+      let visual = new UT.view.single.ViewSingleVisual( element, single );
+      visual.start();
+    }
+
     // title は backend output
 
     // sidebar
@@ -129,7 +136,6 @@ export class Single {
     Nav.start( slug );
 
     Single.comment();
-
   }
   /**
    * **ログイン**

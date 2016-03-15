@@ -16,6 +16,33 @@
 
         <div id="single-header-container"></div>
 
+        <div class="post-sns">
+          <ul class="post-sns-list">
+            <li class="post-sns-item post-sns-item_fbgood"><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
+            <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=【テキスト】&via=undotsushin" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>ツイート</span></a></li>
+            <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a></li>
+            <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a></li>
+            <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" onClick="window.open(encodeURI(decodeURI(this.href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>LINEへ送る</span></a></li>
+          </ul>
+
+          <div class="post-sns-pr">
+            <dl class="post-sns-pr-inner">
+              <dt>運動通信を<strong>いいね</strong>して<br />
+                最新ニュースをチェック！</dt>
+              <dd>
+                <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              </dd>
+            </dl><!-- /.post-sns-pr-inner -->
+          </div><!-- /.post-sns-pr -->
+        </div><!-- /.post-sns -->
+
+        <div class="sponsor-link">
+          <a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-710x78.jpg" alt=""></a>
+        </div>
+
+        <?php /* div.post-kv */ ?>
+        <div id="single-visual-container"></div>
+
         <div class="post-content">
           <?php print_r($page['post']['body']); ?>
         </div><!-- /.post-content -->

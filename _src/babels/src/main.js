@@ -20,19 +20,21 @@
 // -------------------------------------
 
 // -------------------------------------
-// util
-import {Loc} from './util/Loc';
-import {Router} from './app/Router';
-import {Format} from './util/Format';
-
-// -------------------------------------
 // app
 import {App} from './app/App';
-import {Env} from './app/Env';
-import {Codes} from './app/Codes';
+// import {Env} from './app/Env';
+// import {Codes} from './app/Codes';
 import {User} from './app/User';
 import {CommentsType} from './app/const/CommentsType';
-import {Title} from './app/const/Title';
+// import {Title} from './app/const/Title';
+import {Dom} from './app/Dom';
+import {Router} from './app/Router';
+
+/*
+// -------------------------------------
+// util
+import {Loc} from './util/Loc';
+import {Format} from './util/Format';
 
 // -------------------------------------
 // data
@@ -88,12 +90,20 @@ import {Single} from './action/single/Single';
 // action/user
 import {UsersSelf} from './action/users/UsersSelf';
 
+
+// -------------------------------------
+// ui
+import {Receiver} from './ui/Receiver';
+
+
+*/
 // -------------------------------------
 // model
 import {Model} from './model/Model';
+/*
 import {ModelUsersSelf} from './model/users/ModelUsersSelf';
 import {ModelCategories} from './model/categoires/ModelCategories';
-
+*/
 // -------------------------------------
 // view
 import {View} from './view/View';
@@ -109,6 +119,7 @@ import {ViewCommentSingle} from './view/ViewCommentSingle';
 
 // single
 import {ViewSingleTitle} from './view/single/ViewSingleTitle';
+import {ViewSingleVisual} from './view/single/ViewSingleVisual';
 
 // comment
 import {ViewComments} from './view/ViewComments';
@@ -145,10 +156,6 @@ import {ViewNotifications} from './view/mypage/ViewNotifications';
 // settings
 import {ViewSettingsIndex} from './view/settings/ViewSettingsIndex';
 import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
-
-// -------------------------------------
-// ui
-import {Receiver} from './ui/Receiver';
 
 // -------------------------------------
 // sp
@@ -202,16 +209,17 @@ import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
 var UT = {
   version: '@@version',
   app: {
-    Env: Env,
+    // Env: Env,
     App: App,
-    Codes: Codes,
+    // Codes: Codes,
     User: User,
     Router: Router,
+    Dom: Dom,
     const: {
-      CommentsType: CommentsType,
-      Title: Title
+      CommentsType: CommentsType
     }
   },
+  /*
   ui: {
     Receiver: Receiver
   },
@@ -269,14 +277,15 @@ var UT = {
       UsersSelf: UsersSelf
     }
   },
+  */
   model: {
-    Model: Model,
+    Model: Model/* ,
     users: {
       ModelUsersSelf: ModelUsersSelf
     },
     categories: {
       ModelCategories: ModelCategories
-    }
+    }*/
   },
   view: {
     View: View,
@@ -290,7 +299,8 @@ var UT = {
       ViewCommentForm: ViewCommentForm
     },
     single: {
-      ViewSingleTitle: ViewSingleTitle
+      ViewSingleTitle: ViewSingleTitle,
+      ViewSingleVisual: ViewSingleVisual
     },
     header: {
       ViewHeaderUser: ViewHeaderUser,
