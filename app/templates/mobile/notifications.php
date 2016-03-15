@@ -13,7 +13,7 @@
       <a class="user-btn-mypage" href="/mypage/">マイページ</a>
     </div><!-- /.user-config -->
 
-    <section class="main-sec">
+    <section class="main-sec info-container">
       <div id="board-container"></div><!--/archive-->
 
       <div id="board-container-more"></div><!--/archive-more-->
