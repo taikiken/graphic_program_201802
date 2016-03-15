@@ -41,7 +41,7 @@ export class SPBookmarks {
     let elementMore = Dom.boardMore();
     if ( element !== null && elementMore !== null ) {
       // list
-      let archive = new UT.view.mypage.ViewBookmarks( element, elementMore );
+      let archive = new UT.sp.view.mypage.SPViewBookmarks( element, elementMore );
       archive.start();
     }
   }

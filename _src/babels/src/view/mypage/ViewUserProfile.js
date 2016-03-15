@@ -20,6 +20,7 @@ import {UsersSelf} from '../../action/users/UsersSelf';
 // app
 import {Empty} from '../../app/const/Empty';
 import {Url} from '../../app/const/Url';
+import {Message} from '../../app/const/Message';
 
 // data
 import {Result} from '../../data/Result';
@@ -133,7 +134,7 @@ export class ViewUserProfile extends View {
               <p className="user-profile-name">{dae.userName}</p>
               <p className="user-profile-job">{dae.bio}</p>
               <dl className="user-profile-favorite">
-                <dt className="user-profile-favorite-heading">好きな競技</dt>
+                <dt className="user-profile-favorite-heading">{Message.FAVORITE_SPORTS}</dt>
                 <dd className="user-profile-favorite-list">
                   {
                     categories.map( function( category, i ) {

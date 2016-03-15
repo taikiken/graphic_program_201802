@@ -180,6 +180,7 @@ import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 
 // mypage
 import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
+import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
 
 
 /**
@@ -351,7 +352,8 @@ var UT = {
         SPViewHeaderSearch: SPViewHeaderSearch
       },
       mypage: {
-        SPViewUserProfile: SPViewUserProfile
+        SPViewUserProfile: SPViewUserProfile,
+        SPViewBookmarks: SPViewBookmarks
       }
     }
   }

@@ -279,13 +279,20 @@ export class Dom {
   // --------------------------------------
   // mypage
   /**
-   * mypage ユーザー情報
+   * mypage ユーザー情報, SP お知らせ
    * @return {Element} mypage-profile-container
    */
   static userProfile():Element {
     return Dom.get( 'mypage-profile-container' );
   }
-
+  /**
+   * mypage ユーザー情報, SP mypage
+   * SP はお知らせとmypage系で要件が違うため
+   * @return {Element} mypage-profile-container-extend
+   */
+  static userProfileEx():Element {
+    return Dom.get( 'mypage-profile-container-extend' );
+  }
   // --------------------------------------
   // nav
   /**

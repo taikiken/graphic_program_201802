@@ -40,4 +40,14 @@ export class SPUserProfile {
       profile.start();
     }
   }
+  /**
+   * sp mypage profile start
+   */
+  static ext():void {
+    let element = Dom.userProfileEx();
+    if ( element !== null ) {
+      let profile = new UT.view.mypage.ViewUserProfile( element );
+      profile.start();
+    }
+  }
 }
