@@ -43,7 +43,8 @@ export let LogoutNode = React.createClass( {
   getDefaultProps: function() {
     return {
       ok: null,
-      cancel: null
+      cancel: null,
+      type: 'logout'
     };
   },
   getInitialState: function() {
