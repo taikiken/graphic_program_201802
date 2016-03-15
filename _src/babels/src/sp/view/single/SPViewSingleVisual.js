@@ -23,7 +23,7 @@ import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
 import {SingleDae} from '../../../dae/SingleDae';
 
 // node
-// import {SPMediaNode} from '../../node/single/SPMediaNode';
+import {SPMediaNode} from '../../node/single/SPMediaNode';
 
 // React
 let ReactDOM = self.ReactDOM;
