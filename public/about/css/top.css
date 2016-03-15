@@ -9,6 +9,12 @@ body {
 	background: url(../common/img/txt_crazy.png) no-repeat center -7px;
 }
 
+#contents {
+	padding: 0 15px 70px;
+	background: none;
+	margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
 	body {
 		background-image:
@@ -29,6 +35,10 @@ body {
 		background: url(../common/img/txt_crazy_sp.png) no-repeat center -3px;
 		background-size: 102% auto;
 	}
+	#contents {
+		padding: 0;
+	}
+	
 }
 
 #contents_top .left {
@@ -37,17 +47,8 @@ body {
 }
 #contents_top .app_btn_box {
 	margin-top: 30px;
-	overflow: hidden;
 }
-#contents_top .app_btn_box li {
-	float: left;
-	margin: 0 0 0 10px;
-	width: 122px;
-}
-#contents_top .app_btn_box li:first-child {
-	margin: 0;
-	width: 36px;
-}
+
 #contents_top .left .img_app {
 	margin-top: 30px;
 }
@@ -149,6 +150,7 @@ body {
 	}
 	#contents_top .app_btn_box li:first-child {
 		width: 33px;
+		margin: 0;
 	}
 	#contents_top .img_app {
 		padding: 0 55px;
