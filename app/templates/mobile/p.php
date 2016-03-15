@@ -22,7 +22,7 @@
           </ul>
         </div>
 
-        <div id="post-content-container" class="post-content excerpt">
+        <div id="post-content-container" class="post-content excerpt hidden">
           <?php print_r($page['post']['body']); ?>
         </div><!-- /.post-content -->
         <div id="post-content-read-more"></div>

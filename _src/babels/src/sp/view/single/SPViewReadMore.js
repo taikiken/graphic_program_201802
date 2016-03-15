@@ -53,7 +53,7 @@ export class SPViewReadMore extends View {
       },
       getInitialState: function() {
         return {
-          show: true
+          show: false
         };
       },
       render: function() {
@@ -65,14 +65,19 @@ export class SPViewReadMore extends View {
           return null;
         }
       },
-      /*
       componentDidMount: function() {
+        let height = parseInt( this.props.dom.style( 'height' ), 10 );
+        if ( height > 260 ) {
+          this.props.dom.removeClass( 'hidden' );
+          this.setState( { show: true } );
+        } else {
+          this.props.dom.removeClass( 'hidden' );
+          this.props.dom.removeClass( 'excerpt' );
+        }
+      },
+      componentWillUnMount: function() {
 
       },
-      componentWilUnMount: function() {
-
-      },
-      */
       clickHandler( event:Event ):void {
         event.preventDefault();
         this.props.dom.removeClass( 'excerpt' );
