@@ -12,7 +12,7 @@
 /**
  * HTMLElement 要素にアクセスするヘルパー
  */
-export class Dom {
+export class Offset {
   /**
    * element 要素処理ヘルパー
    * @param {Element} element 処理対象 Element
@@ -28,7 +28,7 @@ export class Dom {
    * @returns {ClientRect} getBoundingClientRect を返します
    */
   offset():ClientRect {
-    return Dom.offset( this._element );
+    return Offset.offset( this._element );
   }
   // ---------------------------------------------------
   //  static METHOD

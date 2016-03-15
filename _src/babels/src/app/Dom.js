@@ -301,7 +301,20 @@ export class Dom {
   static nav():Element {
     return Dom.get( 'global-nav-container' );
   }
-
+  /**
+   * SP nav inner
+   * @return {Element} gnav-sec-inner
+   */
+  static navInner():Element {
+    return Dom.get( 'gnav-sec-inner' );
+  }
+  /**
+   * SP nav > ul#gnav-sec-list
+   * @return {Element} gnav-sec-list
+   */
+  static navList():Element {
+    return Dom.get( 'gnav-sec-list' );
+  }
   // --------------------------------------
   // settings
   /**

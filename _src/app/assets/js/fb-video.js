@@ -23,6 +23,7 @@
     document = window.document;
 
   function delay() {
+    console.log( 'window.fbAsyncInit', window.fbAsyncInit );
     window.fbAsyncInit = function() {
       window.FB.init({
         appId      : '842032129256034',
@@ -41,10 +42,12 @@
   }
 
   function onLoad() {
-    window.removeEventListener( 'load', onLoad );
+    //window.removeEventListener( 'load', onLoad );
     setTimeout( delay, 500 );
+    //delay();
   }
 
-  window.addEventListener( 'load', onLoad, false );
+  //window.addEventListener( 'load', onLoad, false );
+  onLoad();
 
 }( window ) );

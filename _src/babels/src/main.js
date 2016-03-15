@@ -30,6 +30,10 @@ import {CommentsType} from './app/const/CommentsType';
 import {Dom} from './app/Dom';
 import {Router} from './app/Router';
 
+// -------------------------------------
+// util
+import {Offset} from './util/Offset';
+
 /*
 // -------------------------------------
 // util
@@ -229,10 +233,14 @@ var UT = {
     Result: Result,
     Safety: Safety
   },
+  */
   util: {
+    /*
     Loc: Loc,
     Format: Format
-  },
+    */
+    Offset: Offset
+  }, /*
   net: {
     Ajax: Ajax,
     Api: Api,
