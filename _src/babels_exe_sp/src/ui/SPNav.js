@@ -11,10 +11,13 @@
  */
 'use strict';
 
-import {Dom} from '../dom/Dom';
-
 let _symbol = Symbol();
 
+// UT
+let UT = self.UT;
+let Dom = UT.app.Dom;
+
+// Sagen
 let Sagen = self.Sagen;
 
 /**

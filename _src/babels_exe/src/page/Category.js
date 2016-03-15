@@ -13,12 +13,11 @@
 
 import {Header} from './Header';
 import {Sidebar} from './Sidebar';
-import {Dom} from '../dom/Dom';
-
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 /**
  * <h3>category 一覧</h3>

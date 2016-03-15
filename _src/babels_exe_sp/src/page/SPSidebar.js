@@ -11,12 +11,11 @@
  */
 'use strict';
 
-import {Dom} from '../dom/Dom';
-
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 /**
  * <h3>Sidebar ranking / video 表示</h3>

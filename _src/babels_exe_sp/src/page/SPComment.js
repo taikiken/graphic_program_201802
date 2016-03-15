@@ -11,9 +11,6 @@
  */
 'use strict';
 
-import {SPSidebar} from './SPSidebar';
-import {Dom} from '../dom/Dom';
-
 // ui
 import {SPNav} from '../ui/SPNav';
 
@@ -21,6 +18,7 @@ let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 /**
  * <h3>Comment 詳細</h3>

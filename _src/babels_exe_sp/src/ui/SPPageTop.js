@@ -11,7 +11,9 @@
  */
 'use strict';
 
-import {Dom} from '../dom/Dom';
+// UT
+let UT = self.UT;
+let Dom = UT.app.Dom;
 
 let TweenLite = self.TweenLite;
 let easing = self.com.greensock.easing;

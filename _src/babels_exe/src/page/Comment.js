@@ -11,16 +11,15 @@
  */
 'use strict';
 
-import {Sidebar} from './Sidebar';
-import {Dom} from '../dom/Dom';
-
 // ui
 import {Nav} from '../ui/Nav';
 
+import {Sidebar} from './Sidebar';
 let _symbol = Symbol();
 
 // UT
 let UT = self.UT;
+let Dom = UT.app.Dom;
 
 /**
  * <h3>Comment 詳細</h3>
