@@ -337,12 +337,13 @@
 // btn-bookmark
 .btn-bookmark {
   a {
-    @include link-decoration($highlight-color, #fff, none, none);
+    @include link-decoration(null, null, none, none);
     display: block;
     // min-width: 10.8em;
     padding: (18/2)+px;
     border-radius: 3px;
     border: 1px solid $highlight-color;
+    color: $highlight-color;
     font-weight: bold;
     font-size: fz(20/2);
     vertical-align: middle;
