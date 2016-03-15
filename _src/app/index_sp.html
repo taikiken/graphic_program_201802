@@ -505,8 +505,19 @@
   </div><!--/#side-menu-container-->
 
 </div><!-- /.whole -->
-<script src="/assets/js/bundle/main.bundle.js"></script>
-<script src="/assets/js/xxx.bundle.js"></script>
+
+<div class="modal-dialogue modal-dialogue_logout hide">
+  <div class="modal-bg"></div>
+  <div class="modal-dialogue-contents">
+    <p class="lead">ログアウトしますか？</p>
+
+    <ul class="btn-block">
+      <li class="btn-item"><a class="btn-link btn-link_cancel" href="#">いいえ</a></li>
+      <li class="btn-item"><a class="btn-link btn-link_submit" href="#">はい</a></li>
+    </ul><!-- /.btn-block -->
+  </div><!-- /.modal-dialogue-contents -->
+</div><!-- /.modal-dialogue -->
+
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -524,5 +535,8 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<script src="/assets/js/bundle/main.bundle.js"></script>
+<script src="/assets/js/xxx.bundle.js"></script>
 </body>
 </html>

@@ -328,7 +328,7 @@
 
 
 // dialogue-notice
-// 汎用ダイアログボックス
+// フラッシュメッセージ
 .dialogue-notice {
   &.error { background-color: #e14343;}
   &.success { background-color: #43e18a;}
@@ -373,8 +373,9 @@
 
 // mod-btnA01
 .mod-btnA01 {
+  input[ type="submit" ],
+  input[ type="button" ],
   a {
-    @include link-decoration($highlight-color, #fff, none, none);
     display: inline-block;
     min-width: 160px;
     line-height: 50px;
@@ -390,6 +391,10 @@
       transition: background-color ease-out .4s;
     }
   }
+
+  a {
+    @include link-decoration($highlight-color, #fff, none, none);
+  }
 }
 
 
@@ -399,6 +404,7 @@
 // mod-btnB01
 .mod-btnB01 {
   input[ type="submit" ],
+  input[ type="button" ],
   a {
     display: inline-block;
     min-width: 250px;
@@ -419,7 +425,8 @@
     @include link-decoration(#fff, #fff, none, none);
   }
 
-  input[ type="submit" ] {
+  input[ type="submit" ],
+  input[ type="button" ] {
     color: #fff;
   }
 }
