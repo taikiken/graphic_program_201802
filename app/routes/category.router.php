@@ -5,7 +5,7 @@ $categories = $app->model->property('site_categories');
 
 if ( $categories ) :
 
-  // ルーティングのためのスラッグを設定する
+  // ルーティングのためのスラッグを設定する - 存在しないカテゴリーは404を返す
   $category_slug = array_keys( $categories );
 
 else :
@@ -36,6 +36,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     $args['page'] = $app->model->set(array(
       'title'      => $category['label'],
+      'category'   => $category,
       'template'   => 'category',
       'path'       => $args,
     ));
@@ -49,10 +50,11 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
   // ==============================
   $this->get('/{type:ranking}[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->model->get_category_by_slug($args['category_slug']);
+    $category     = $app->model->get_category_by_slug( $args['category_slug'] );
 
     $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'のランキング',
+      'category' => $category,
       'type'     => 'ranking',
       'template' => 'category',
       'path'     => $args,
@@ -67,10 +69,11 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
   // ==============================
   $this->get('/{type:video}[/]', function ($request, $response, $args) use ($app) {
 
-    $category = $app->model->get_category_by_slug($args['category_slug']);
+    $category     = $app->model->get_category_by_slug($args['category_slug']);
 
     $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'の動画',
+      'category' => $category,
       'type'     => 'video',
       'template' => 'category',
       'path'     => $args,
