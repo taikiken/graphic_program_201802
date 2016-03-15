@@ -4,7 +4,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true" data-orientation="true"></script>
-  <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13" data-ios="8.41" data-android="4.2" data-url="/about/browsers/"></script>
+  <?php
+  # ---------------------------------------------------------------------------
+  // browser 使用条件 URL
+  $about_browser = '/about/browsers/';
+  $current_path = parse_url($_SERVER["REQUEST_URI"])['path'];
+  if ( $about_browser != $current_path ) {
+    // browser 使用条件 URL と同じだったら detector.js 読み込まない
+    ?>
+    <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="9" data-firefox="44" data-ie="11" data-edge="13" data-ios="8.41" data-android="4.2" data-url="<?php echo $about_browser; ?>"></script>
+  <?php } else {
+    // browser 使用条件 URL と同じなので html5shiv を読み込む
+    ?>
+    <!--[if lt IE 9]>
+    <script src="/assets/js/libs/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+  <?php }// browser 使用条件 end
+  # ---------------------------------------------------------------------------
+  ?>
   <title><?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?></title>
   <meta name="description" content="説明文">
   <meta name="keywords" content="キーワード, キーワード, キーワード">
