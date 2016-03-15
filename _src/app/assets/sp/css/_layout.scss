@@ -298,7 +298,15 @@ a {
   overflow: hidden;
   background-color: #111;
 
+  &-inner {
+    // width: 100%;
+    // height: (110/2)+px;
+    // overflow-x: auto;
+    // -webkit-overflow-scrolling: touch;
+  }
+
   ul {
+    // display: table;
     width: 100%;
     height: (110/2)+px;
     overflow-x: auto;
@@ -774,6 +782,7 @@ div.synapse_logo {
 }
 
 .side-menu-ut-nav-home i { @include sprite( $common-icon-side-home, inline-block ); }
+.side-menu-ut-nav-login i,
 .side-menu-ut-nav-mypage i { @include sprite( $common-icon-side-mypage, inline-block ); }
 .side-menu-ut-nav-config i { @include sprite( $common-icon-side-config, inline-block ); }
 .side-menu-ut-nav-logout i { @include sprite( $common-icon-side-logout, inline-block ); }
