@@ -6,7 +6,7 @@
 
     <div class="category-heading">
       <h1>マイページ</h1>
-      <a class="user-btn-setting" href="/setting/">設定</a>
+      <a class="user-btn-setting" href="/settings/">設定</a>
     </div><!-- /.category-heading -->
 
     <div class="user-config">
