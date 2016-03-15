@@ -1,0 +1,254 @@
+@charset "utf-8";
+/* common.css */
+
+
+/*再定義
+////////////////////////////////////////////////////*/
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	-webkit-text-size-adjust: 100%;
+	background: #000;
+}
+
+body {
+	color: #fff;
+	font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+	font-size: 1.4rem;
+	min-width: 1100px;
+	line-height: 1.6;
+}
+
+img {
+	vertical-align: top;
+	border: none;
+	max-width: 100%;
+}
+
+.sp_mode {
+	display: none!important;
+}
+.pc_mode {
+	display: block!important;
+}
+
+@media (max-width: 768px) {
+	
+	body {
+		min-width: 320px;
+	}
+	
+	.sp_mode {
+		display: block!important;
+	}
+	.pc_mode {
+		display: none!important;
+	}
+}
+
+/* IEのsvgサイズの対処 */
+img[src$=".svg"] {
+    width: 100%;
+}
+/*.imgChange {
+    visibility: hidden;
+}
+*/
+.clearfix:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+
+/*デフォルトリンクカラー
+////////////////////////////////////////////////////*/
+
+a:link {
+	color: #fff;
+}
+
+a:visited {
+	color: #fff;
+}
+
+a:hover {
+	color: #e1438b;
+}
+
+.current a:link {
+	color: #e1438b;
+}
+
+
+/*レイアウト
+////////////////////////////////////////////////////*/
+
+#contents {
+	width: 1100px;
+	margin: 0 auto;
+	padding: 0 15px 70px;
+}
+@media (max-width: 768px) {
+	#contents {
+		width: 100%;
+		padding: 0;
+	}
+}
+
+
+
+/* ヘッダー
+////////////////////////////////////////////////////*/
+
+
+/* コンテンツ
+////////////////////////////////////////////////////*/
+
+.parent_box {
+	overflow: hidden;
+}
+
+.app_btn_wrap {
+	text-align: center;
+	margin: 70px 0 0;
+	font-size: 0;
+}
+.app_btn_area,
+.app_btn_area dt {
+	margin: 0;
+	display: inline-block;
+}
+.app_btn_area dd,
+.app_btn_area li,
+.app_btn_wrap > p {
+	margin: 0 10px;
+	display: inline-block;
+}
+.app_btn_area li {
+	width: 170px;
+}
+
+.app_btn_wrap > p {
+	margin: 0;
+}
+
+
+@media (max-width: 768px) {
+	
+	.app_btn_wrap {
+		width: 290px;
+		margin: 15px auto 0;
+		text-align: left;
+	}
+	.app_btn_area {
+		overflow: hidden;
+	}
+	.app_btn_area dt {
+		width: 60px;
+		float: left;
+	}
+	.app_btn_area dd {
+		float: right;
+		width: 215px;
+	}
+	.app_btn_area p {
+		font-size: 1.2rem;
+		font-weight: bold;
+		margin: 0 0 10px;
+	}
+	.app_btn_area,
+	.app_btn_area dt,
+	.app_btn_area dd,
+	.app_btn_area li,
+	.app_btn_wrap > p {
+		margin: 0;
+		display: block;
+	}
+	.app_btn_area dd ul {
+	}
+	.app_btn_area dd ul li {
+		float: right;
+		width: 102px;
+	}
+	.app_btn_area dd ul li:first-child {
+		float: left;
+	}
+	.app_btn_wrap > p {
+		margin-top: 15px;
+	}
+	
+}
+
+
+/* フッター
+////////////////////////////////////////////////////*/
+
+
+footer {
+	padding: 30px 0;
+	background: #111;
+}
+footer nav ul {
+	text-align: center;
+}
+footer nav li {
+	display: inline-block;
+	margin: 0 1em;
+	font-weight: bold;
+}
+footer nav li a {
+	text-decoration: none;
+}
+
+footer .sns {
+	text-align: center;
+	margin: 40px 0 0;
+}
+footer .sns li {
+	display: inline-block;
+	margin: 0 5px;
+	width: 40px;
+}
+footer .copyright {
+	text-align: center;
+	font-size: 1rem;
+	color: #666;
+	margin: 15px 0 0;
+}
+
+@media (max-width: 768px) {
+	footer {
+		padding: 0 0 15px;
+		margin: 15px 0 0;
+	}
+	
+	footer nav ul {
+		text-align: left;
+		border-bottom: 1px solid #222;
+	}
+	footer nav li {
+		display: block;
+		margin: 0;
+		font-weight: bold;
+		font-size: 1.2rem;
+		border-top: 1px solid #222;
+	}
+	footer nav li a{
+		display: block;
+		padding: 1em;
+	}
+	
+	footer .sns {
+		margin: 20px 0 0;
+	}
+	footer .sns li {
+		width: 35px;
+	}
+	
+}
+
