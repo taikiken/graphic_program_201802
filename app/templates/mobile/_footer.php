@@ -151,8 +151,7 @@ if ( $page['apiRoot'] != '' ) :
 // 実機で FB Video 生成が空振りする
 // Dom 構築が FB sdk 走査に間に合っていない様子
 //
-/* */
-?>
+/*
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -170,10 +169,11 @@ if ( $page['apiRoot'] != '' ) :
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-<?php
-/*
-<script src="/assets/js/fb-video.js"></script>
  */
+?>
+<script src="/assets/js/fb-video.js"></script>
+<?php
+/* fb delay 実行を有効へ */
 ?>
 </body>
 </html>
