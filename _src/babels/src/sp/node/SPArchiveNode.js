@@ -70,7 +70,11 @@ let CommentsSecondDom = React.createClass( {
 
     if ( !this.props.hasSecond ) {
       // 描画要素がない
-      return null;
+      // 高さを確保するためタグを突っ込む
+      // return null;
+      return (
+        <div className="commented-user"></div>
+      );
     }
 
     let seconds = this.state.seconds;
