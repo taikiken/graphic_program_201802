@@ -46,12 +46,12 @@ export class SPSearch {
     let boardElement = Dom.board();
     let moreElement = Dom.boardMore();
     if ( boardElement !== null && moreElement !== null ) {
-      let search = new UT.view.ViewSearch( keyword, boardElement, moreElement );
+      let search = new UT.sp.view.SPViewSearch( keyword, boardElement, moreElement );
       search.start();
     }
 
     // 検索結果が同じカテゴリーとは限らないので all で表示します
-    SPSidebar.start();
+    // SPSidebar.start();
 
   }
 }
