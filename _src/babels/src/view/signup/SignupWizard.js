@@ -17,6 +17,7 @@ import {View} from '../View';
 // app
 import {Message} from '../../app/const/Message';
 import {Url} from '../../app/const/Url';
+import {User} from '../../app/User';
 
 // util
 import {Loc} from '../../util/Loc';
@@ -24,9 +25,15 @@ import {Loc} from '../../util/Loc';
 // model
 import {Model} from '../../model/Model';
 import {ModelCategories} from '../../model/categoires/ModelCategories';
+import {ModelSocial} from '../../model/sns/ModelSocial';
 
 // dae
 import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
+import {UserDae} from '../../dae/UserDae';
+import {StatusDae} from '../../dae/StatusDae';
+
+// data
+import {Result} from '../../data/Result';
 
 // node
 import {HeadingNode} from '../../node/signup/HeadingNode';
@@ -101,6 +108,11 @@ export class SignupWizard extends View {
     console.log( 'Signup complete', error );
 
   }
+  /**
+   * Dom 作成(rendering)を開始します
+   * @param {CategoriesDae} categoriesDae カテゴリー一覧, 興味のある競技表示に使用します
+   * @param {Number} [stepNumber=1] wizard step No. default 1, どの段階かを表します
+   */
   render( categoriesDae:CategoriesDae, stepNumber:Number = 1 ):void {
 
     // variable
@@ -141,16 +153,22 @@ export class SignupWizard extends View {
         // status event unbind
         this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
       },
+      // ------------
+      // SignupStatus.SIGNUP_STEP event handler
+      // step 値を update します
       stepChange: function( event:Object ):void {
         // SignupStatus.SIGNUP_STEP 発生後 step 値を update する
         this.updateStep( event.step );
       },
+      // step値を update -> CSS クラス signup-n のナンバリングに使用
       updateStep: function( step:Number ) {
-        // step値を update -> CSS クラス signup-n のナンバリングに使用
         this.setState( { step: step } );
       },
+      // 登録が終わり home に遷移する前に呼び出されます
       beforeRedirect: function() {
-        _this.deactivateUnload();
+        // onbeforeunload を unbind し
+        // home へ遷移するのに警告が出ないようにします
+        SignupWizard.deactivateUnload();
       }
     } );
 
@@ -161,6 +179,20 @@ export class SignupWizard extends View {
       />,
       this.element
     );
+
+    // ---------------------------------------------
+    // /api/v1/sessions/social を叩く
+    // https://undo-tsushin.slack.com/archives/api/p1458118693000008
+    /*
+     ちなみにログインなんですが、サーバ側でOauthチェックされるなら成功時は
+     ```cookie名 : auth_token
+     保存期間 : 90日
+     ```
+     にtokenセットしてホームに戻してもらえればよいかもとおもったのですがどうでしょうか。
+     */
+    // なのでいらないかも
+    // code は残す
+    this.social();
 
   }
 
@@ -191,7 +223,7 @@ export class SignupWizard extends View {
     this._step = step;
     if ( !this._unload ) {
       this._unload = true;
-      this.activateUnload();
+      SignupWizard.activateUnload();
     }
 
   }
@@ -209,21 +241,14 @@ export class SignupWizard extends View {
   /**
    * onbeforeunload を bind する
    */
-  activateUnload():void {
-    // 開発中はコメントにする, 本番でコメントアウト
-    // 入力途中で page を離れようとすると alert を表示する
-    /*
-    window.onbeforeunload = function() {
-      return Message.UNLOAD;
-    };
-    */
+  static activateUnload():void {
     window.addEventListener( 'beforeunload', SignupWizard.onUnload, false );
   }
 
   /**
    * onbeforeunload を unbind する
    */
-  deactivateUnload():void {
+  static deactivateUnload():void {
     window.removeEventListener( 'beforeunload', SignupWizard.onUnload );
   }
 
@@ -245,5 +270,103 @@ export class SignupWizard extends View {
     this._status.step( step );
   }
 
+  // ---------------------------------------------
+  // /api/v1/sessions/social を叩く
+  // 2016-03-16 追加
+
+  /**
+   * API request を行うかを query が URL に存在するかで判断します
+   */
+  social():void {
+    // query check
+    /*
+     https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197217112
+
+     リンク先
+     http://dev.undotsushin.com/api/v1/auth/facebook
+     http://dev.undotsushin.com/api/v1/auth/twitter
+
+     リダイレクトURL
+     http://dev.undotsushin.com/signup/?oauth=facebook
+     http://dev.undotsushin.com/signup/?oauth=twitter
+     */
+    let queries = Loc.parse();
+    if ( queries !== null && queries.hasOwnProperty( 'oauth' ) ) {
+
+      let value = queries.oauth;
+      console.log( 'social request ', queries );
+      if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
+        this.socialRequest();
+      }
+
+    }
+  }
+  /**
+   * API `/api/v1/sessions/social` を行います
+   */
+  socialRequest():void {
+    let boundFail = this.socialFail.bind( this );
+    let callback = {};
+    callback[ Model.COMPLETE ] = this.socialDone.bind( this );
+    callback[ Model.UNDEFINED_ERROR ] = boundFail;
+    callback[ Model.RESPONSE_ERROR ] = boundFail;
+
+    let model = new ModelSocial( callback );
+    model.start();
+  }
+
+  /**
+   * API `/api/v1/sessions/social` 成功
+   * @param {Result} result 結果セット
+   */
+  socialDone( result:Result ):void {
+
+    let response = result.response;
+
+    if ( typeof response === 'undefined' ) {
+
+      // articles undefined
+      // JSON に問題がある
+      let error = new Error( '[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      this.executeSafely( View.UNDEFINED_ERROR, error );
+      // this.showError( error.message );
+
+    } else {
+
+      let status = new StatusDae( result.status );
+
+      if ( status.code === 200 ) {
+        this.success( new UserDae( response ) );
+      }
+
+    }
+
+  }
+
+  /**
+   * API `/api/v1/sessions/social` error
+   * @param {Object} error
+   */
+  socialFail( error ):void {
+    console.log( 'Social error ', error );
+  }
+
+  /**
+   * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
+   * @param {UserDae} userDae ユーザー情報, token 含んでいます
+   */
+  success( userDae:UserDae ):void {
+    let token = userDae.accessToken;
+    console.log( 'social success ', token, userDae );
+    // token setup
+    if ( User.login( token ) ) {
+      // redirect 通知
+      // onbeforeunload を解除するため
+      this.deactivateUnload();
+      // home
+      Loc.index();
+
+    }
+  }
 
 }

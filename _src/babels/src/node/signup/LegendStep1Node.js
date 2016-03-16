@@ -36,6 +36,9 @@ import {ModelUserDetect} from '../../model/signup/ModelUserDetect';
 // node
 import {ErrorNode} from '../error/ErrorNode';
 
+// Api
+import {Api} from '../../net/Api';
+
 // React
 let React = self.React;
 
@@ -230,10 +233,11 @@ export let LegendStep1Node = React.createClass( {
         <div className="linkage-sns">
           <ul className="linkage-sns-list">
             <li className="linkage-sns-item">
-              <a href="#" className="linkage-sns-link linkage-sns-tw"><span>twitterでログイン</span></a>
+              {/* https://github.com/undotsushin/undotsushin/issues/334 */}
+              <a href={Api.auth('tw').url} className="linkage-sns-link linkage-sns-tw"><span>twitterで新規登録</span></a>
             </li>
             <li className="linkage-sns-item">
-              <a href="#" className="linkage-sns-link linkage-sns-fb"><span>facebookでログイン</span></a>
+              <a href={Api.auth('fb').url} className="linkage-sns-link linkage-sns-fb"><span>facebookで新規登録</span></a>
             </li>
           </ul>
         </div>

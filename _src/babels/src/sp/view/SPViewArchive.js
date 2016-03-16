@@ -20,7 +20,7 @@ import {MediaType} from '../../app/const/MediaType';
 
 // view
 import {View} from '../../view/View';
-import {ViewError} from '../../view/error/ViewError';
+// import {ViewError} from '../../view/error/ViewError';
 
 // data
 import {Result} from '../../data/Result';

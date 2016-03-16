@@ -97,6 +97,41 @@ export class Api {
   static email():Types {
     return ApiDae.api( 'users:email' );
   }
+
+  // ----------------------------------
+  // OAuth (sns)
+  /**
+   * SNS OAuth 認証のための遷移URL
+   * @param {string} sns twitter or facebook どちらか
+   * @return {Types} SNS OAuth 認証のための遷移URL をTypes instanceで返します
+   */
+  static auth( sns:string ):Types {
+
+    switch ( sns ) {
+
+      case 'fb':
+      case 'facebook':
+        return ApiDae.api( 'auth:fb' );
+
+      case 'tw':
+      case 'twitter':
+        return ApiDae.api( 'auth:tw' );
+
+      default:
+        throw new Error( `notice illegal action: ${sns}.` );
+
+    }
+
+  }
+
+  /**
+   * auth 情報を取得する API
+   * @return {Types} auth 情報を取得する API をTypes instanceで返します
+   */
+  static sns():Types {
+    return ApiDae.api( 'auth:sns' );
+  }
+
   // ----------------------------------
   // カテゴリー一覧
   /**
