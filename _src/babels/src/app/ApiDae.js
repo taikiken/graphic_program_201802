@@ -99,21 +99,30 @@ let buildPath = () => {
     // login by SNS
     // API から auth 情報を取得する
     'auth:sns': new Types(
-      new Type( `${API_PATH}/sessions/social`, 'POST' ),
+      new Type( `${API_PATH}/sessions/social` ),
       new Permalink(),
       new Queries()
     ),
 
+    // https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197198817
     // 登録 by sns - Facebook
     // auth 遷移するURL
     'auth:fb': new Types(
+      new Type( `${API_ROOT}/api/v1/auth/facebook` ),
+      /*
       new Type( `${API_ROOT}/api/auth_facebook.php` ),
+      new Type( `http://www.undotsushin.com/api/auth_facebook.php` ),
+      */
       new Permalink(),
       new Queries()
     ),
     // 登録 by sns - Twitter
     'auth:tw': new Types(
-      new Type( `${API_ROOT}/api/auth_twitter.php` ),
+      new Type( `${API_ROOT}/api/v1/auth/twitter` ),
+      /*
+      new Type( `${API_ROOT}/api/v1/auth/twitter` ),
+      new Type( `http://www.undotsushin.com/api/auth_twitter.php` ),
+      */
       new Permalink(),
       new Queries()
     ),

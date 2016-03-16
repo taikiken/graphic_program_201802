@@ -182,6 +182,16 @@ export class SignupWizard extends View {
 
     // ---------------------------------------------
     // /api/v1/sessions/social を叩く
+    // https://undo-tsushin.slack.com/archives/api/p1458118693000008
+    /*
+     ちなみにログインなんですが、サーバ側でOauthチェックされるなら成功時は
+     ```cookie名 : auth_token
+     保存期間 : 90日
+     ```
+     にtokenセットしてホームに戻してもらえればよいかもとおもったのですがどうでしょうか。
+     */
+    // なのでいらないかも
+    // code は残す
     this.social();
 
   }
@@ -263,7 +273,38 @@ export class SignupWizard extends View {
   // ---------------------------------------------
   // /api/v1/sessions/social を叩く
   // 2016-03-16 追加
+
+  /**
+   * API request を行うかを query が URL に存在するかで判断します
+   */
   social():void {
+    // query check
+    /*
+     https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197217112
+
+     リンク先
+     http://dev.undotsushin.com/api/v1/auth/facebook
+     http://dev.undotsushin.com/api/v1/auth/twitter
+
+     リダイレクトURL
+     http://dev.undotsushin.com/signup/?oauth=facebook
+     http://dev.undotsushin.com/signup/?oauth=twitter
+     */
+    let queries = Loc.parse();
+    if ( queries !== null && queries.hasOwnProperty( 'oauth' ) ) {
+
+      let value = queries.oauth;
+      console.log( 'social request ', queries );
+      if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
+        this.socialRequest();
+      }
+
+    }
+  }
+  /**
+   * API `/api/v1/sessions/social` を行います
+   */
+  socialRequest():void {
     let boundFail = this.socialFail.bind( this );
     let callback = {};
     callback[ Model.COMPLETE ] = this.socialDone.bind( this );
@@ -272,9 +313,12 @@ export class SignupWizard extends View {
 
     let model = new ModelSocial( callback );
     model.start();
-
   }
 
+  /**
+   * API `/api/v1/sessions/social` 成功
+   * @param {Result} result 結果セット
+   */
   socialDone( result:Result ):void {
 
     let response = result.response;
@@ -299,10 +343,18 @@ export class SignupWizard extends View {
 
   }
 
+  /**
+   * API `/api/v1/sessions/social` error
+   * @param {Object} error
+   */
   socialFail( error ):void {
     console.log( 'Social error ', error );
   }
 
+  /**
+   * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
+   * @param {UserDae} userDae ユーザー情報, token 含んでいます
+   */
   success( userDae:UserDae ):void {
     let token = userDae.accessToken;
     console.log( 'social success ', token, userDae );
