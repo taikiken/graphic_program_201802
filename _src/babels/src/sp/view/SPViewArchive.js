@@ -11,8 +11,10 @@
  */
 'use strict';
 
-/*
+
 // app
+import {Message} from '../../app/const/Message';
+/*
 import {Empty} from '../../app/const/Empty';
 import {User} from '../../app/User';
 import {MediaType} from '../../app/const/MediaType';
@@ -36,7 +38,7 @@ import {SPArchiveNode} from '../node/SPArchiveNode';
 import {SPMoreViewNode} from '../node/SPMoreViewNode';
 
 // React
-// let React = self.React;
+let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -106,7 +108,7 @@ export class SPViewArchive extends View {
    * Ajax request を開始します
    */
   start():void {
-
+    console.log( '-------------------------- SPViewArchive start------' );
     this.action.next();
 
   }
@@ -181,6 +183,136 @@ export class SPViewArchive extends View {
     // sequence な index のために必要
     let prevLast = this._articles.length;
 
+    let _this = this;
+
+    // ------------------------------------------------
+    let SPMoreViewDom = React.createClass( {
+      propTypes: {
+        show: React.PropTypes.bool.isRequired,
+        action: React.PropTypes.object.isRequired,
+        loading: React.PropTypes.string
+      },
+      getDefaultProps: function() {
+        return {
+          loading: ''
+        };
+      },
+      getInitialState: function() {
+
+        return {
+          disable: false,
+          show: this.props.show,
+          loading: this.props.loading
+        };
+      },
+      render: function() {
+
+        // hasNext: true, button を表示する？
+        if ( this.state.show ) {
+
+          return (
+            <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
+              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+              <span className="loading-spinner">&nbsp;</span>
+            </div>
+          );
+
+        } else {
+
+          // button 表示なし
+          return (
+            <div className="no-more"></div>
+          );
+
+        }
+
+      },
+      componentDidMount: function() {
+      },
+      componentWillUnmount: function() {
+        // unmount 時に rise 破棄を行う
+        this.destroy();
+      },
+      // -----------------------------------------
+      // button 関連 custom method
+      // rise 関連 event を破棄する
+      destroy: function() {
+      },
+      // 緊急用, button click を残す
+      handleClick: function( event:Event ) {
+        event.preventDefault();
+        // disable
+        // this.setState( { loading: ' loading' } );
+        // action.next();
+        this.onRise();
+      },
+      // button 表示・非表示
+      updateShow: function( show:boolean ) {
+        console.log( '========================== updateShow ', show );
+        /*
+         if ( !show ) {
+         // button を非表示にするので rise 監視を止める
+         this.destroy();
+         } else {
+         // button 表示, loading 表示を止める
+         this.updateLoading( false );
+         }
+         */
+
+        this.setState( { show: show, loading: '' } );
+
+      },
+      // loading 表示 on / off
+      // on: true, off: false
+      updateLoading: function( loading:boolean = false ) {
+
+        let loadingClass = '';
+        if ( loading ) {
+
+          // loading 中は監視を止める
+          loadingClass = ' loading';
+          this.props.action.next();
+
+        }
+
+        // loading 表示のための css class を追加・削除
+        this.setState( {loading: loadingClass} );
+
+      },
+      // Rise.RISE event handler
+      // 次 offset JSON を取得する
+      onRise: function( event ) {
+        console.log( '========================== onRise ', event );
+
+        this.updateLoading( true );
+      }
+    } );
+
+    // ------------------------------------------------
+    let moreButton = ( show:boolean ):void => {
+      show = !!show;
+      console.log( '----------------- moreButton ', show, _this._moreRendered );
+      // _moreRendered が null の時のみ, instance があれば state を update する
+      // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
+      if ( _this._moreRendered === null ) {
+        // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
+
+        // チェックをパスし実行する
+        _this._moreRendered = ReactDOM.render(
+          <SPMoreViewDom
+            show={show}
+            action={_this.action}
+          />,
+          _this.moreElement
+        );
+
+      } else {
+
+        _this._moreRendered.updateShow( show );
+
+      }
+    };
+
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
     articles.forEach( function( article, i ) {
@@ -206,7 +338,7 @@ export class SPViewArchive extends View {
           length={this._request.length}
           action={this.action}
           scope={this}
-          moreButton={this.moreButton.bind( this )}
+          moreButton={moreButton}
           home={this._home}
         />,
         this.element
@@ -225,9 +357,10 @@ export class SPViewArchive extends View {
    * more button 表示・非表示
    * @param {boolean} show more button 表示・非表示 を決定する真偽値
    */
+  /*
   moreButton( show:boolean ):void {
     show = !!show;
-
+    console.log( '----------------- moreButton ', show, this._moreRendered );
     // _moreRendered が null の時のみ, instance があれば state を update する
     // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
     if ( this._moreRendered === null ) {
@@ -248,5 +381,6 @@ export class SPViewArchive extends View {
 
     }
   }
+  */
 }
 

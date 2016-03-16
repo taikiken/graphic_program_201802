@@ -81,7 +81,8 @@ export let SPMoreViewNode = React.createClass( {
   },
   // button 表示・非表示
   updateShow: function( show:boolean ) {
-
+    console.log( '========================== updateShow ', show );
+    /*
     if ( !show ) {
       // button を非表示にするので rise 監視を止める
       this.destroy();
@@ -89,6 +90,7 @@ export let SPMoreViewNode = React.createClass( {
       // button 表示, loading 表示を止める
       this.updateLoading( false );
     }
+    */
 
     this.setState( { show: show, loading: '' } );
 

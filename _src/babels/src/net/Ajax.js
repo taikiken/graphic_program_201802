@@ -73,7 +73,10 @@ export class Ajax {
 
     let option = {
       method: method,
-      cache: 'no-cache'
+      cache: 'no-cache',
+      // https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+      // credentials: 'include'
+      credentials: 'same-origin'
     };
 
     // body へ FormData をセット

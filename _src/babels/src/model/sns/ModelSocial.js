@@ -58,7 +58,7 @@ export class ModelSocial extends Model {
     } else {
 
       // 成功 callback
-      this.executeSafely( Model.COMPLETE, new UserDae( response ) );
+      this.executeSafely( Model.COMPLETE, result );
 
     }
 
