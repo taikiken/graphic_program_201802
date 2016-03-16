@@ -23,6 +23,8 @@ import {SearchStatus} from '../../../event/SearchStatus';
 // node
 import {HeaderSearchNode} from '../../../node/header/HeaderSearchNode';
 
+let Sagen = self.Sagen;
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -56,6 +58,9 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
 
     // search form opener
     let ButtonDom = React.createClass( {
+      propTypes: {
+        body: React.PropTypes.object.isRequired
+      },
       render: function() {
         return (
           <a className="head-search-opener" href="#" onClick={this.clickHandler}>{Message.OPENER_SEARCH}</a>
@@ -72,16 +77,20 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
           // open -> close
           this.open = false;
           this.status.close();
+          this.props.body.removeClass( 'search-form-open' );
         } else {
           // close -> open
           this.open = true;
           this.status.open();
+          this.props.body.addClass( 'search-form-open' );
         }
       }
     } );
 
     ReactDOM.render(
-      <ButtonDom/>,
+      <ButtonDom
+        body={new Sagen.Dom( document.body )}
+      />,
       this._button
     );
   }

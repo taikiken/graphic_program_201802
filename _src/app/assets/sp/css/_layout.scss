@@ -80,8 +80,15 @@ a {
 }
 .body-sec {
   margin-top: 100px;
-}
 
+  //transition-property: margin-top;
+  //transition-duration: 0.05s;
+}
+.search-form-open {
+  .body-sec {
+    margin-top: 160px;
+  }
+}
 // --------------------
 .head-sec {
   @at-root {
