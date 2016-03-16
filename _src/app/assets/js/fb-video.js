@@ -42,12 +42,10 @@
   }
 
   function onLoad() {
-    //window.removeEventListener( 'load', onLoad );
+    window.removeEventListener( 'load', onLoad );
     setTimeout( delay, 500 );
-    //delay();
   }
 
-  //window.addEventListener( 'load', onLoad, false );
-  onLoad();
+  window.addEventListener( 'load', onLoad, false );
 
 }( window ) );

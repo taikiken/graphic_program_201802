@@ -161,7 +161,7 @@ let Step3FormNode = React.createClass( {
     // token setup
     if ( User.login( token ) ) {
       // redirect 通知
-      // beforeunload を解除するため
+      // onbeforeunload を解除するため
       this.props.beforeRedirect();
       // home
       Loc.index();

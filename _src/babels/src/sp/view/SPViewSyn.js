@@ -16,7 +16,7 @@ import {View} from '../../view/View';
 
 // app
 import {User} from '../../app/User';
-import {Env} from '../../app/Env';
+// import {Env} from '../../app/Env';
 
 // util
 import {Scroll} from '../../util/Scroll';

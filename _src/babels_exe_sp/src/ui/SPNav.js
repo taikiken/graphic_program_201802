@@ -69,6 +69,11 @@ export class SPNav {
     let windowWidth = window.innerWidth;
 
     let left = targetOffset.left;
+    if ( left < windowWidth ) {
+      // window 内なので何もしない
+      return;
+    }
+
     let right = ulWidth - left - windowWidth;
 
     if ( right < 0 ) {
@@ -77,7 +82,8 @@ export class SPNav {
     }
 
     console.log( 'target ', ulWidth, left, right, windowWidth );
-    inner.style.cssText = `margin: 0 ${-right}px 0 ${-left}px; padding-left: ${left}px;`;
+    //inner.style.cssText = `position: relative; transform: translateX(${-left}px); overflow: visible;`;
+    inner.style.cssText = `padding-right: ${left}px`;
 
   }
 }

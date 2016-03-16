@@ -63,7 +63,8 @@ let apiRoot = () => {
 let buildPath = () => {
   // 共通パス
   // 先頭 protocol + host 部分を develop / production で変える
-  let API_PATH = apiRoot() + '/api/v1';
+  let API_ROOT = apiRoot();
+  let API_PATH = API_ROOT + '/api/v1';
 
   return {
     // --------------------------------------------
@@ -91,6 +92,32 @@ let buildPath = () => {
       new Permalink(),
       new Queries()
     ),
+
+    // ----------------------------------
+    // OAuth (sns)
+
+    // login by SNS
+    // API から auth 情報を取得する
+    'auth:sns': new Types(
+      new Type( `${API_PATH}/sessions/social`, 'POST' ),
+      new Permalink(),
+      new Queries()
+    ),
+
+    // 登録 by sns - Facebook
+    // auth 遷移するURL
+    'auth:fb': new Types(
+      new Type( `${API_ROOT}/api/auth_facebook.php` ),
+      new Permalink(),
+      new Queries()
+    ),
+    // 登録 by sns - Twitter
+    'auth:tw': new Types(
+      new Type( `${API_ROOT}/api/auth_twitter.php` ),
+      new Permalink(),
+      new Queries()
+    ),
+
     // --------------------------------------------
     // カテゴリー一覧
     'categories': new Types(
