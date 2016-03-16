@@ -173,6 +173,9 @@ import {SPViewNews} from './sp/view/home/SPViewNews';
 // category
 import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
 
+// search
+import {SPViewSearch} from './sp/view/SPViewSearch';
+
 // Syn.
 import {SPViewSyn} from './sp/view/SPViewSyn';
 
@@ -192,12 +195,6 @@ import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 // mypage
 import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
 import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
-
-
-/**
- * ToDo: 対象外OS alert
- * ToDo: global 不要 class を除外する
- */
 
 
 /**
@@ -351,6 +348,7 @@ var UT = {
       SPViewSyn: SPViewSyn,
       SPViewComments: SPViewComments,
       SPViewSingle: SPViewSingle,
+      SPViewSearch: SPViewSearch,
       single: {
         SPViewSingleHeader: SPViewSingleHeader,
         SPViewReadMore: SPViewReadMore

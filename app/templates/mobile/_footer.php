@@ -155,7 +155,6 @@ if ( $page['apiRoot'] != '' ) :
 ?>
 <script>
   window.fbAsyncInit = function() {
-    console.log( '******** fbAsyncInit *******' );
     FB.init({
       appId      : '842032129256034',
       xfbml      : true,
