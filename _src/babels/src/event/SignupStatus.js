@@ -64,6 +64,15 @@ export class SignupStatus extends EventDispatcher {
   form( element:Element ):void {
     this.dispatch( { type: SignupStatus.SIGNUP_SUBMIT, form: element} );
   }
+  /**
+   * SNS 連携後の取得情報を送るための SIGNUP_OAUTH event を発火させます
+   * @param {string} userName 名前
+   * @param {string} profilePicture アバター画像
+   * @param {string} [email=''] email, twitter 連携はない
+   */
+  sns( userName:string, profilePicture:string, email:string = '' ):void {
+    this.dispatch( { type: SignupStatus.SIGNUP_OAUTH, email: email, userName: userName, profilePicture: profilePicture } );
+  }
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------
@@ -94,6 +103,15 @@ export class SignupStatus extends EventDispatcher {
    */
   static get SIGNUP_FORM():string {
     return 'signupForm';
+  }
+
+  /**
+   * SIGNUP_OAUTH
+   * SNS 連携成功後 取得データを通知し step 2 へ移動する
+   * @return {string} signupOAuth
+   */
+  static get SIGNUP_OAUTH():string {
+    return 'signupOAuth';
   }
   // ---------------------------------------------------
   //  static method

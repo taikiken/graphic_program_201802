@@ -352,21 +352,11 @@ export class SignupWizard extends View {
   }
 
   /**
-   * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
-   * @param {UserDae} userDae ユーザー情報, token 含んでいます
+   * API `/api/v1/sessions/social` 成功後 step 2 へ移動します
+   * @param {UserDae} userDae ユーザー情報
    */
   success( userDae:UserDae ):void {
-    let token = userDae.accessToken;
-    console.log( 'social success ', token, userDae );
-    // token setup
-    if ( User.login( token ) ) {
-      // redirect 通知
-      // onbeforeunload を解除するため
-      this.deactivateUnload();
-      // home
-      Loc.index();
-
-    }
+    this._status.sns( userDae.userName, userDae.profilePicture, userDae.email );
   }
 
 }
