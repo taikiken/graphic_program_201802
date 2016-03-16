@@ -334,7 +334,7 @@ export class SignupWizard extends View {
     } else {
 
       let status = new StatusDae( result.status );
-
+      console.log( 'socialDone ', status );
       if ( status.code === 200 ) {
         this.success( new UserDae( response ) );
       }
@@ -345,7 +345,7 @@ export class SignupWizard extends View {
 
   /**
    * API `/api/v1/sessions/social` error
-   * @param {Object} error
+   * @param {Object} error エラーメッセージ
    */
   socialFail( error ):void {
     console.log( 'Social error ', error );

@@ -23,7 +23,6 @@
     document = window.document;
 
   function delay() {
-    console.log( 'window.fbAsyncInit', window.fbAsyncInit );
     window.fbAsyncInit = function() {
       window.FB.init({
         appId      : '842032129256034',

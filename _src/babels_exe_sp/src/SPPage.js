@@ -127,7 +127,6 @@ export class SPPage {
     SPSearchFrom.start();
     // index
     SPIndex.start();
-    SPIndex.start();
     // nav
     SPNav.start( 'home' );
     // syn.

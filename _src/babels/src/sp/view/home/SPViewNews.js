@@ -31,5 +31,7 @@ export class SPViewNews extends SPViewArchive {
       new News( this.done.bind( this ), this.fail.bind( this ) );
     // home flag on
     this.home = true;
+
+    console.log( '**************************** SPViewNews' );
   }
 }
