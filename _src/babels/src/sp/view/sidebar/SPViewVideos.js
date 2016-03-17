@@ -34,8 +34,8 @@ let ReactDOM = self.ReactDOM;
 export class SPViewVideos extends ViewVideos {
   /**
    * SP 動画一覧
-   * @param {Element} element
    * @param {Element} element root element
+   * @param {Element} moreElement more button element
    * @param {Object} [option={}] optional event handler
    * @param {string} [slug=all] category slug です
    */

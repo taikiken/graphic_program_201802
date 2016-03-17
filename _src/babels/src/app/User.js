@@ -12,7 +12,7 @@
 'use strict';
 
 import {Cookie} from '../net/Cookie';
-import {Env} from './Env';
+// import {Env} from './Env';
 import {UserStatus} from '../event/UserStatus';
 import {Safety} from '../data/Safety';
 
@@ -85,14 +85,14 @@ export class User {
     return Cookie.get( Cookie.TARGET );
   }
 
-  ///**
-  // * 開発用 method
-  // * @ToDo 本番環境で削除 or コメント
-  // * @return {string} 開発 token
-  // */
-  //static fake():string {
-  //  return '608c8868d866a46fa3ae6566ce62e0be';
-  //}
+  /*
+   開発用 method
+   @ToDo 本番環境で削除 or コメント
+   @return {string} 開発 token
+  static fake():string {
+    return '608c8868d866a46fa3ae6566ce62e0be';
+  }
+  */
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------

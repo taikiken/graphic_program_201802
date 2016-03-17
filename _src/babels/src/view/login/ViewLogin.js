@@ -341,7 +341,7 @@ export class ViewLogin extends View {
 
   /**
    * API `/api/v1/sessions/social` error
-   * @param {Object} error
+   * @param {Object} error error instance
    */
   socialFail( error ):void {
     console.log( 'Social error ', error );
