@@ -226,52 +226,6 @@ export class ViewHeaderMemberNotice extends View {
       }
     } );
 
-    /*
-    // --------------------------------------------------
-    // read all On / Off
-    let ReadAllDom = React.createClass( {
-      propTypes: {
-        length: React.PropTypes.number.isRequired,
-        callback: React.PropTypes.func
-      },
-      getDefaultProps: function() {
-        return {
-          callback: function() {}
-        };
-      },
-      getInitialState: function() {
-        return {
-          length: this.props.length,
-          loading: ''
-        };
-      },
-      render: function() {
-        if ( this.state.length > 0 ) {
-          return (
-            <div className={'info-btn-readAll loading-root ' + this.state.loading}>
-              <a href="#" onClick={this.readClick}>すべて既読にする</a>
-              <div className="loading-spinner"></div>
-            </div>
-          );
-        } else {
-          return <div className="info-btn-readAll">&nbsp;</div>;
-        }
-      },
-      readClick: function( event ) {
-        event.preventDefault();
-        this.setState( { loading: 'loading' } );
-        this.props.callback();
-        // ToDo: ajax request
-      },
-      done: function() {
-        this.setState( { loading: '' } );
-      },
-      fail: function() {
-        this.setState( { loading: '' } );
-      }
-    } );
-    */
-
     // --------------------------------------------------
     // user notice dropMenu
     let NoticeMenuDom = React.createClass( {
@@ -345,7 +299,12 @@ export class ViewHeaderMemberNotice extends View {
         this.status = null;
 
         return {
-          total: this.props.total
+          // total: this.props.total
+          // https://github.com/undotsushin/undotsushin/issues/278#issuecomment-197729972
+          // API 戻り値が変更になり総件数に変わってしまった
+          // count API の数を表示するようにするため
+          // default 非表示
+          total: 0
         };
       },
       render: function() {
@@ -394,6 +353,9 @@ export class ViewHeaderMemberNotice extends View {
 
           // polling で お知らせ count 数 監視
           polling.start();
+
+          // 一発目のcount取得
+          this.model.start();
 
         } else {
 

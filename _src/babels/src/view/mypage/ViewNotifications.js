@@ -268,27 +268,19 @@ export class ViewNotifications extends View {
       render: function() {
 
         let notice = this.props.dae;
+        let loggedIn = 'user-logged-in';
+
         let icon = notice.user.profilePicture;
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
+          loggedIn = '';
         } else if ( !Safety.isImg( icon ) ) {
           // 画像ファイル名に拡張子がないのがあったので
           // 拡張子チェックを追加
           icon = Empty.USER_EMPTY;
+          loggedIn = '';
         }
 
-        let loggedIn = 'user-logged-in';
-        /*
-        console.log( 'notice comment', notice );
-
-        let who = ( commentUser, me ) => {
-          if ( me.id === commentUser.id ) {
-            return <strong>自分</strong>;
-          } else {
-            return <span><strong>{commentUser.userName}</strong>さん</span>;
-          }
-        };
-        */
         switch ( notice.action ) {
 
           // 本来は reply だった
