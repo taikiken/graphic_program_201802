@@ -18,6 +18,11 @@ let React = self.React;
 
 // lead 文
 // step 1 だけ表示
+/**
+ * lead 文
+ * @private
+ * @type {React.component}
+ */
 let LeadNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired
@@ -48,6 +53,7 @@ let LeadNode = React.createClass( {
  *  <LeadNode step={this.state.step} />
  * </header>
  * ```
+ * @type {React.component}
  */
 export let HeadingNode = React.createClass( {
   propTypes: {

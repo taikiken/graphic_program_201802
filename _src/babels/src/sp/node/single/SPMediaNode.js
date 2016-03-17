@@ -19,6 +19,10 @@ import {SPMediaVideoNode} from './SPMediaVideoNode';
 // React
 let React = self.React;
 
+/**
+ * SP 記事詳細 上部 メインビジュアル（画像・動画）
+ * @type {React.component}
+ */
 export let SPMediaNode = React.createClass( {
   propTypes: {
     mediaType: React.PropTypes.string.isRequired,

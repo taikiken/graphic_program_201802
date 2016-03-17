@@ -32,6 +32,8 @@ let ReactDOM = self.ReactDOM;
  *      <LegendStep2 />
  *      <LegendStep3 />
  * </code>
+ *
+ * @type {React.component}
  * */
 export let RootNode = React.createClass( {
   propTypes: {

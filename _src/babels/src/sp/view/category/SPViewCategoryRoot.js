@@ -86,7 +86,7 @@ export class SPViewCategoryRoot extends View {
 
       },
       componentDidMount: function() {
-        this.tabNode = null;
+        // this.tabNode = null;
 
         // after mount, request API
         this.latest();
@@ -123,17 +123,27 @@ export class SPViewCategoryRoot extends View {
       // 切替 tab
       tab: function():void {
         let element = ReactDOM.findDOMNode(this.refs.tab);
+        /*
         this.tabNode = ReactDOM.render(
           <SPTabNode
             callback={this.tabClick}
           />,
           element
         );
+        */
+        ReactDOM.render(
+          <SPTabNode
+            callback={this.tabClick}
+          />,
+          element
+        );
       },
+      /*
       // 新着記事 component did mount event handler
       latestDidMount: function():void {
         // latest did mount
       },
+      */
       tabClick( id:string ):void {
         this.setState( { current: id } );
       }

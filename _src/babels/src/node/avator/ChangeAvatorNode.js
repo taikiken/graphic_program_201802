@@ -18,6 +18,10 @@ let React = self.React;
 // ------------------------------------------
 // user picture thumbnail 作成
 // ------------------------------------------
+/**
+ * ユーザーアイコン画像選択後の変更リンク
+ * @type {React.component}
+ */
 export let ChangeAvatarNode = React.createClass( {
   propTypes: {
     show: React.PropTypes.bool.isRequired,

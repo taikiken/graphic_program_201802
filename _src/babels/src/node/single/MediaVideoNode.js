@@ -22,6 +22,11 @@ import {HTML5VideoNode} from '../media/HTML5VideoNode';
 // React
 let React = self.React;
 
+/**
+ * 記事詳細 メイン・動画切替
+ * YouTube, Facebook
+ * @type {React.component}
+ */
 export let MediaVideoNode = React.createClass( {
   propTypes: {
     media: React.PropTypes.object.isRequired

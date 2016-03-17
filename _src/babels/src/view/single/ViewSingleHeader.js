@@ -29,14 +29,16 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * <h3>記事詳細(detail) 上部<h3>
- * - bookmark
- * - title
- * - 投稿者
- * - 日付
+ *   <ul>
+ *     <li>bookmark</li>
+ *     <li>title</li>
+ *     <li>投稿者</li>
+ *     <li>日付</li>
+ *   </ul>
  */
 export class ViewSingleHeader extends View {
   /**
-   * detail 上部
+   * 記事詳細 detail 上部
    * @param {Element} element single header root element
    * @param {SingleDae} single 変換済み JSON data
    */

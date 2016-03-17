@@ -40,6 +40,11 @@ export class Loc {
     return self.location.href;
 
   }
+
+  /**
+   * location.href へ href をセット遷移させます
+   * @param {string} href 遷移先パス
+   */
   static set current( href:string ):void {
     self.location.href = href;
   }

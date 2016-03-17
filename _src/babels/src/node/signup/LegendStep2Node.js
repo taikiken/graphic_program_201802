@@ -50,6 +50,11 @@ let Sagen = self.Sagen;
 // ------------------------------------------
 // step 2 入力フォーム
 // ------------------------------------------
+/**
+ * 新規登録 step 2 form parts
+ * @private
+ * @type {React.component}
+ */
 let Step2FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
@@ -378,6 +383,16 @@ let Step2FormNode = React.createClass( {
     let count = 0;
     let errors = this.errors;
 
+    // email
+    let email = this.state.email;
+    if ( email === '' ) {
+      errors.email.message = ErrorTxt.EMAIL_EMPTY;
+      ++count;
+    } else if ( !Validate.email( email ) ) {
+      errors.email.message = ErrorTxt.EMAIL_INVALID;
+      ++count;
+    }
+
     // password
     let password = this.state.password;
     if ( password === '' ) {
@@ -486,6 +501,8 @@ let Step2FormNode = React.createClass( {
  * <h3>React component<h3>
  * **signup step 2**
  * 基本情報設定
+ *
+ * @type {React.component}
  */
 export let LegendStep2Node = React.createClass( {
   propTypes: {

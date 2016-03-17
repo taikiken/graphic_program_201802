@@ -22,6 +22,11 @@ let _instance = null;
  * signup wizard status などで使用します
  */
 export class SignupStatus extends EventDispatcher {
+  /**
+   * signup wizard status **Singleton**
+   * @param {Symbol} target Singleton のための inner Symbol
+   * @return {*} SignupStatus instance を返します
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -159,7 +164,7 @@ export class SignupStatus extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * instance を生成します
-   * @return {UserStatus} UserStatus instance を返します
+   * @return {SignupStatus} SignupStatus instance を返します
    */
   static factory():SignupStatus {
 

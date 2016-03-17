@@ -159,11 +159,14 @@ export class SPViewHeaderMember extends ViewHeaderMember {
           polling.setPolling( Length.interval );
         }
       },
+      // 定期的に更新します
+      // Polling.PAST event handler
       update: function() {
         console.log( 'update polling' );
         this.polling.off( Gasane.Polling.PAST, this.update );
         this.model.start();
       },
+      // update で call された ModelNoticeCount の成功 event handler
       done: function( result ) {
         let count = result.count;
         console.log( '** count done ** ', count );

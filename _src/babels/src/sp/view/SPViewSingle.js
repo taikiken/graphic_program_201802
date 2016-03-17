@@ -24,8 +24,18 @@ import {SingleDae} from '../../dae/SingleDae';
 import {SPViewSingleHeader} from './single/SPViewSingleHeader';
 import {SPViewSingleVisual} from './single/SPViewSingleVisual';
 
+/**
+ * SP 記事詳細
+ */
 export class SPViewSingle extends ViewSingle {
-  constructor( id:number, element:Element, visualElement:Element, option:Object = {} ) {
+  /**
+   * SP 記事詳細
+   * @param {Number} id 記事 id
+   * @param {Element} element 日付とかインサートする element
+   * @param {Element} visualElement メインビジュアルよう element
+   * @param {Object} [option={}] callback をセットした Object
+   */
+  constructor( id:Number, element:Element, visualElement:Element, option:Object = {} ) {
     super( id, element, { related: null, footer: null }, option );
     this._visualElement = visualElement;
     this._visual = null;

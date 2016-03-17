@@ -13,7 +13,16 @@
 
 import {EventDispatcher} from '../event/EventDispatcher';
 
+/**
+ * <h2>ユーザーアイコン</h2>
+ */
 export class Thumbnail extends EventDispatcher {
+  /**
+   * ユーザーアイコン
+   * @param {File} file 名前
+   * @param {Function} load アバター画像
+   * @param {Function} [error=mill] email, twitter 連携はない
+   */
   constructor( file:File, load:Function = null, error:Function = null ) {
     super();
 
@@ -24,13 +33,29 @@ export class Thumbnail extends EventDispatcher {
     this._boundLoad = this.onLoad.bind( this );
     this._boundError = this.onError.bind( this );
   }
+  // ---------------------------------------------------
+  //  Event
+  // ---------------------------------------------------
+  /**
+   * LOAD
+   * @return {string} thumbnailLoad を返します
+   */
   static get LOAD():string {
     return 'thumbnailLoad';
   }
+  /**
+   * ERROR
+   * @return {string} thumbnailError を返します
+   */
   static get ERROR():string {
     return 'thumbnailError';
   }
-
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * サムネイルを作ります
+   */
   make():void {
     if ( !Thumbnail.detect() ) {
       console.warn( 'not support browser' );
@@ -49,7 +74,9 @@ export class Thumbnail extends EventDispatcher {
     reader.readAsDataURL( file );
 
   }
-
+  /**
+   * event handler を unbind します
+   */
   dispose():void {
     let reader = this._reader;
     if ( reader !== null ) {
@@ -57,16 +84,29 @@ export class Thumbnail extends EventDispatcher {
       reader.removeEventListener( 'error', this._boundError );
     }
   }
-
+  /**
+   * load event handler
+   * @param {Event} event load event instance
+   */
   onLoad( event:Event ):void {
     this.dispose();
     this.dispatch( {type: Thumbnail.LOAD, img: event.target.result, nativeEvent: event} );
   }
+  /**
+   * error event handler
+   * @param {Event} event error event instance
+   */
   onError( event:Event ):void {
     this.dispose();
     this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event} );
   }
-
+  // ---------------------------------------------------
+  //  STATIC
+  // ---------------------------------------------------
+  /**
+   * File API が使えるかを調べます
+   * @return {boolean} File API 使用可否真偽値を返します
+   */
   static detect():boolean {
     return window.File && window.FileReader && window.FileList && window.Blob;
   }

@@ -17,6 +17,11 @@ import {Message} from '../../app/const/Message';
 // React
 let React = self.React;
 
+/**
+ * 新規登録 ナビ部分
+ * @private
+ * @type {React.component}
+ */
 let SignupStepNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired
@@ -40,6 +45,10 @@ let SignupStepNode = React.createClass( {
   }
 } );
 
+/**
+ * 新規登録 タイトル部分
+ * @type {React.component}
+ */
 export let SignupHeadingNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired

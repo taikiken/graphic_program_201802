@@ -356,12 +356,8 @@ export class ViewLogin extends View {
     console.log( 'social success ', token, userDae );
     // token setup
     if ( User.login( token ) ) {
-      // redirect 通知
-      // onbeforeunload を解除するため
-      this.deactivateUnload();
       // home
       Loc.index();
-
     }
   }
 }

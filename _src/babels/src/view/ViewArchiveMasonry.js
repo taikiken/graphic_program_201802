@@ -628,8 +628,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         } );
 
       },
+      // state を変更し appendChild + isotope を行う
       updateList: function( list, offset, length ) {
-        // state を変更し appendChild + isotope を行う
         this.setState( { list: list, offset: offset, length: length } );
       },
       // didUpdate から呼び出される

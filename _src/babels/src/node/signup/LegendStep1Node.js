@@ -42,6 +42,11 @@ import {Api} from '../../net/Api';
 // React
 let React = self.React;
 
+/**
+ * 新規登録 step 1 form parts
+ * @private
+ * @type {React.component}
+ */
 let Step1FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
@@ -235,6 +240,8 @@ let Step1FormNode = React.createClass( {
  * <h3>React component<h3>
  * **signup step 1**
  * 「新規会員登録」入力フォームコンテナ
+ *
+ * @type {React.component}
  */
 export let LegendStep1Node = React.createClass( {
   propTypes: {

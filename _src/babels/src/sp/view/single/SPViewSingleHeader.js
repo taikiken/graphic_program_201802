@@ -31,11 +31,13 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * <h3>SP 記事詳細(detail) 上部<h3>
- * - bookmark
- * - title
- * - 投稿者
- * - カテゴリー
- * - 日付
+ *   <ul>
+ *     <li>bookmark</li>
+ *     <li>title</li>
+ *     <li>投稿者</li>
+ *     <li>カテゴリー</li>
+ *     <li>日付</li>
+ *   </ul>
  */
 export class SPViewSingleHeader extends ViewSingleHeader {
   /**

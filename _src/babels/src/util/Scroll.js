@@ -75,6 +75,10 @@ export class Scroll extends EventDispatcher {
   // ---------------------------------------------------
   //  static GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * SCROLL event
+   * @return {string} scrollScroll
+   */
   static get SCROLL():string {
     return 'scrollScroll';
   }

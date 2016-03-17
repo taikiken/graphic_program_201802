@@ -22,6 +22,10 @@ import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
 // React
 let React = self.React;
 
+/**
+ * SP 記事詳細 HTML5 video
+ * @type {React.component}
+ */
 export let SPMediaVideoNode = React.createClass( {
   propTypes: {
     media: React.PropTypes.object.isRequired
