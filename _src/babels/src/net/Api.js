@@ -144,7 +144,6 @@ export class Api {
   // ----------------------------------
   // home / self
   /**
-  /**
    * home API を user が login している / していない により取得します
    * @return {Types} home API(home / self)をTypes instanceで返します
    */

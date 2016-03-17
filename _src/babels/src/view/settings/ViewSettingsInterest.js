@@ -29,7 +29,15 @@ import {SettingsInterestNode} from '../../node/settings/SettingsInterestNode';
 // React
 let ReactDOM = self.ReactDOM;
 
+/**
+ * 設定 好きな競技
+ */
 export class ViewSettingsInterest extends View {
+  /**
+   * 設定 好きな競技
+   * @param {Element} element 基点 element
+   * @param {Object} [option={}] callback methods
+   */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
 

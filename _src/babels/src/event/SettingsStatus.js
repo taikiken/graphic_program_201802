@@ -41,15 +41,31 @@ export class SettingsStatus extends EventDispatcher {
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
+  /**
+   * ACCOUNT_COMPLETE
+   * @return {string} settingsAccountComplete
+   */
   static get ACCOUNT_COMPLETE():string {
     return 'settingsAccountComplete';
   }
+  /**
+   * ACCOUNT_ERROR
+   * @return {string} settingsAccountError
+   */
   static get ACCOUNT_ERROR():string {
     return 'settingsAccountError';
   }
+  /**
+   * INTEREST_COMPLETE
+   * @return {string} settingsInterestComplete
+   */
   static get INTEREST_COMPLETE():string {
     return 'settingsInterestComplete';
   }
+  /**
+   * INTEREST_ERROR
+   * @return {string} settingsInterestError
+   */
   static get INTEREST_ERROR():string {
     return 'settingsInterestError';
   }

@@ -14,6 +14,10 @@
 // React
 let React = self.React;
 
+/**
+ * SP archive ページ 切替タブ
+ * @type {React.component}
+ */
 export let SPTabNode = React.createClass( {
   propTypes: {
     callback: React.PropTypes.func.isRequired

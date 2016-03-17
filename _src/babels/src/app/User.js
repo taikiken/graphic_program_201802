@@ -82,43 +82,17 @@ export class User {
    * @return {string|null} token を返します, 見つからない時はnullを返します
    */
   static get token():string {
-    //
-    // if ( _sign ) {
-    //  /*
-    //  switch ( Env.mode ) {
-    //
-    //    case Env.TEST:
-    //    case Env.DEVELOP:
-    //      // return [ 'fee1a989f120b99cec0f8206d68f6365', '608c8868d866a46fa3ae6566ce62e0be', '7c36cbc887ca4d0035440a3b05005f6f' ][ Math.floor( Math.random() * 3 ) ];
-    //      // profile picture ない 山際武
-    //      // return 'fee1a989f120b99cec0f8206d68f6365';
-    //      return '608c8868d866a46fa3ae6566ce62e0be';
-    //
-    //    case Env.PRODUCTION:
-    //    default:
-    //      return Cookie.get( Cookie.TARGET );
-    //
-    //  }*/
-    //
-    //  return Cookie.get( Cookie.TARGET );
-    //
-    //} else {
-    //  // 非ログインは空文字を返す
-    //  return '';
-    // }
-
     return Cookie.get( Cookie.TARGET );
-
   }
 
-  /**
-   * 開発用 method
-   * @ToDo 本番環境で削除 or コメント
-   * @return {string} 開発 token
-   */
-  static fake():string {
-    return '608c8868d866a46fa3ae6566ce62e0be';
-  }
+  ///**
+  // * 開発用 method
+  // * @ToDo 本番環境で削除 or コメント
+  // * @return {string} 開発 token
+  // */
+  //static fake():string {
+  //  return '608c8868d866a46fa3ae6566ce62e0be';
+  //}
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -130,12 +104,9 @@ export class User {
   static login( token:string ):boolean {
     token = Safety.string( token, '' );
     console.log( 'token ', token );
-    // ToDo: 本番環境でコメント外す
-    /*
-    throw new Error( 'token have to need.', token );
-    */
+
     // 開発中は token が cookie になくても default user でログインさせちゃう
-    // ToDo: 本番環境で削除 or コメント
+    /*
     if ( token === '' ) {
       if ( Env.mode === Env.PRODUCTION ) {
         throw new Error( 'token have to need.', token );
@@ -143,6 +114,15 @@ export class User {
         token = User.fake();
         console.warn( `illegal token instead use fake. ${token}` );
       }
+    }*/
+
+    // token が正常値なのかを調べる
+    // 少なくとも, 文字型で空でない
+    let altToken = Safety.string( token, '' );
+    if ( altToken === '' ) {
+      // token が不正値
+      console.warn( `illegal token. [${token}]` );
+      return false;
     }
 
     let result = Cookie.save( token );
@@ -162,7 +142,7 @@ export class User {
    */
   static init():void {
     let token = User.token;
-    console.log( 'user init token ', token, ';' );
+    console.log( `user init token [${token}]` );
     if ( token === null || typeof token === 'undefined' || token === '' ) {
       User.sign = false;
     } else {

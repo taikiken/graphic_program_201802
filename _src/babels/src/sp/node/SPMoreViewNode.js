@@ -19,6 +19,11 @@ let React = self.React;
 // --------------------------------------------
 // More button
 // --------------------------------------------
+/**
+ * 次を見る MORE VIEW button
+ * @private
+ * @type {React.component}
+ */
 export let SPMoreViewNode = React.createClass( {
   propTypes: {
     show: React.PropTypes.bool.isRequired,

@@ -24,10 +24,12 @@ import {Safety} from '../../data/Safety';
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
-
+/**
+ * SP 検索結果
+ */
 export class SPViewSearch extends SPViewArchive {
   /**
-   * home news, token 付き・無し を切替
+   * SP 検索結果
    * @param {string} word 検索キーワード
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する

@@ -33,6 +33,9 @@ import {ModelNoticeRead} from '../../model/notice/ModelNoticeRead';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * my page お知らせ 一覧
+ */
 export class ViewNotifications extends View {
   /**
    * my page お知らせ 一覧を表示 + infinite scroll

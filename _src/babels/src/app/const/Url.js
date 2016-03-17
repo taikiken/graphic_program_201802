@@ -271,6 +271,11 @@ export class Url {
 
   }
 
+  /**
+   * about url
+   * @param {string} [path=''] path option
+   * @return {*} about url を返します
+   */
   static about( path:string = '' ):string {
     let base = '/about/';
 

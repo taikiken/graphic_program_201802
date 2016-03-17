@@ -50,11 +50,18 @@ let Sagen = self.Sagen;
 // ------------------------------------------
 // step 2 入力フォーム
 // ------------------------------------------
+/**
+ * 新規登録 step 2 form parts
+ * @private
+ * @type {React.component}
+ */
 let Step2FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     avatar: React.PropTypes.string,
-    getForm: React.PropTypes.func.isRequired
+    getForm: React.PropTypes.func.isRequired,
+    changeEmail: React.PropTypes.func.isRequired,
+    email: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -66,6 +73,7 @@ let Step2FormNode = React.createClass( {
     this.thumbnail = null;
     this.model = null;
     this.errors = {
+      email: new ErrorMessage(),
       password: new ErrorMessage(),
       name: new ErrorMessage(),
       profile_picture: new ErrorMessage()
@@ -74,6 +82,7 @@ let Step2FormNode = React.createClass( {
     this.callback = null;
 
     return {
+      email: this.props.email,
       step: this.props.step,
       avatar: this.props.avatar,
       entered: false,
@@ -101,6 +110,19 @@ let Step2FormNode = React.createClass( {
 
     return (
       <fieldset className="fieldset-step-2">
+        {/* email 2 */}
+        <span className={'form-parts ' + errorClass('email')}>
+          <span className="setting-form-mail form-input">
+            <input
+              type="email"
+              value={this.state.email}
+              onChange={this.emailChange}
+              placeholder={Message.PLACEHOLDER_EMAIL}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            />
+          </span>
+          <ErrorNode message={message('email')} />
+        </span>
         {/* password */}
         <span className={'form-parts ' + errorClass('password')}>
           <span className="setting-form-pw form-input">
@@ -196,13 +218,40 @@ let Step2FormNode = React.createClass( {
       callback[ Model.RESPONSE_ERROR ] = this.fail;
     }
 
+    // email1 の変更を watch する
+    this.status.on( SignupStatus.STEP1_EMAIL, this.onEmail1Change );
+
+    // SNS 経由を watch する
+    this.status.on( SignupStatus.SIGNUP_OAUTH, this.onSns );
+
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
     this.dispose();
   },
   // -------------------------------------------------------
+  // watch
+  onSns: function( event:Object ) {
+    this.setState( {
+      email: event.email,
+      name: event.userName,
+      avatar: event.profilePicture,
+      bio: event.bio
+    } );
+  },
+  // step 1 email 入力を watch し
+  // 同期させる
+  onEmail1Change: function( event:Object ):void {
+    this.setState( {email: event.email} );
+  },
+  // -------------------------------------------------------
   // input changes
+  // email
+  emailChange: function( event ) {
+    this.setState( {email: event.target.value} );
+    // email 2 に入力があったことを通知する
+    this.status.email2( event.target.value );
+  },
   // password
   passwordChange: function( event ) {
     this.setState( {password: event.target.value} );
@@ -334,6 +383,16 @@ let Step2FormNode = React.createClass( {
     let count = 0;
     let errors = this.errors;
 
+    // email
+    let email = this.state.email;
+    if ( email === '' ) {
+      errors.email.message = ErrorTxt.EMAIL_EMPTY;
+      ++count;
+    } else if ( !Validate.email( email ) ) {
+      errors.email.message = ErrorTxt.EMAIL_INVALID;
+      ++count;
+    }
+
     // password
     let password = this.state.password;
     if ( password === '' ) {
@@ -442,18 +501,24 @@ let Step2FormNode = React.createClass( {
  * <h3>React component<h3>
  * **signup step 2**
  * 基本情報設定
+ *
+ * @type {React.component}
  */
 export let LegendStep2Node = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
-    getForm: React.PropTypes.func.isRequired
+    getForm: React.PropTypes.func.isRequired,
+    // 親 component へ email change を通知する
+    changeEmail: React.PropTypes.func.isRequired,
+    // 初期 email value
+    email: React.PropTypes.string.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
 
     return {
       step: 1,
-      email: '',
+      email: this.props.email,
       password: '',
       name: '',
       bio: '',
@@ -462,16 +527,14 @@ export let LegendStep2Node = React.createClass( {
   },
   render: function() {
 
-    // console.log( 'render step 2 email ', this.state.email );
+    console.log( 'render step 2 email ', this.state.email );
     return (
       <div className="fieldset-container fieldset-container-2">
-        <span className="setting-form-mail disabled">
-          <input type="text" value={this.state.email}/>
-          <div className="disabled"></div>
-        </span>
         <Step2FormNode
           step={this.props.step}
           getForm={this.props.getForm}
+          changeEmail={this.props.changeEmail}
+          email={this.state.email}
         />
       </div>
     );

@@ -117,13 +117,8 @@ let SettingInputNode = React.createClass( {
     if ( !avatar ) {
       avatar = Empty.USER_EMPTY;
     }
-    /*
-    else if ( !Safety.isImg( avatar ) ) {
-      avatar = Empty.USER_EMPTY;
-    }
-    */
+
     let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';
-    console.log( 'SettingInputNode ' );
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
@@ -225,10 +220,6 @@ let SettingInputNode = React.createClass( {
   // -------------------------------------------------------
   // delegate
   componentDidMount: function() {
-    // this.status.on( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
-
-    // this.status.on( SignupStatus.SIGNUP_FORM, this.formHandler );
-
     if ( this.callback === null ) {
       let callback = {};
       this.callback = callback;
@@ -236,10 +227,8 @@ let SettingInputNode = React.createClass( {
       callback[ Model.UNDEFINED_ERROR ] = this.fail;
       callback[ Model.RESPONSE_ERROR ] = this.fail;
     }
-
   },
   componentWillUnMount: function() {
-    // this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
     this.dispose();
   },
   // -------------------------------------------------------

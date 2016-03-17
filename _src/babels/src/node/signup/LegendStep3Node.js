@@ -34,6 +34,11 @@ import {Loc} from '../../util/Loc';
 // React
 let React = self.React;
 
+/**
+ * 新規登録 step 3 form parts
+ * @private
+ * @type {React.component}
+ */
 let Step3FormNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
@@ -194,6 +199,8 @@ let Step3FormNode = React.createClass( {
  * <h3>React component<h3>
  * **signup step 3**
  * 「興味のある競技」入力フォームコンテナ
+ *
+ * @type {React.component}
  */
 export let LegendStep3Node = React.createClass( {
   propTypes: {

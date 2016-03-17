@@ -21,6 +21,10 @@ let greensock = self.com.greensock;
 let TweenLite = greensock.TweenLite;
 let easing = greensock.easing;
 
+/**
+ * 退会モーダル node
+ * @type {React.component}
+ */
 export let DeactivateNode = React.createClass( {
   propTypes: {
     // ok click callback

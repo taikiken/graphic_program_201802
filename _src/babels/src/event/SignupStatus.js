@@ -13,6 +13,8 @@
 
 import {EventDispatcher} from './EventDispatcher';
 
+import {Safety} from '../data/Safety';
+
 let _symbol = Symbol();
 let _instance = null;
 
@@ -20,6 +22,11 @@ let _instance = null;
  * signup wizard status などで使用します
  */
 export class SignupStatus extends EventDispatcher {
+  /**
+   * signup wizard status **Singleton**
+   * @param {Symbol} target Singleton のための inner Symbol
+   * @return {*} SignupStatus instance を返します
+   */
   constructor( target ) {
     if ( _symbol !== target ) {
 
@@ -64,6 +71,21 @@ export class SignupStatus extends EventDispatcher {
   form( element:Element ):void {
     this.dispatch( { type: SignupStatus.SIGNUP_SUBMIT, form: element} );
   }
+  /**
+   * SNS 連携後の取得情報を送るための SIGNUP_OAUTH event を発火させます
+   * @param {string} userName 名前
+   * @param {string} profilePicture アバター画像
+   * @param {string} [email=''] email, twitter 連携はない
+   * @param {string} [bio=''] email, twitter 連携はない
+   */
+  sns( userName:string, profilePicture:string, email:string = '', bio:string = '' ):void {
+    userName = Safety.string( userName, '' );
+    profilePicture = Safety.string( profilePicture, '' );
+    email = Safety.string( email, '' );
+    bio = Safety.string( bio, '' );
+
+    this.dispatch( { type: SignupStatus.SIGNUP_OAUTH, email: email, userName: userName, profilePicture: profilePicture, bio: bio } );
+  }
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------
@@ -95,12 +117,54 @@ export class SignupStatus extends EventDispatcher {
   static get SIGNUP_FORM():string {
     return 'signupForm';
   }
+  /**
+   * SIGNUP_OAUTH
+   * SNS 連携成功後 取得データを通知し step 2 へ移動する
+   * @return {string} signupOAuth
+   */
+  static get SIGNUP_OAUTH():string {
+    return 'signupOAuth';
+  }
+  // ---------------------------------------------------
+  //  CONST email synchronize step 1 and step 2
+  // ---------------------------------------------------
+  /**
+   * STEP1_EMAIL event を発火させます
+   * @param {string} email step 1 で入力された email
+   */
+  email1( email:string ):void {
+    this.dispatch( { type: SignupStatus.STEP1_EMAIL, email: email} );
+  }
+  /**
+   * STEP2_EMAIL event を発火させます
+   * @param {string} email step 2 で入力された email
+   */
+  email2( email:string ):void {
+    this.dispatch( { type: SignupStatus.STEP2_EMAIL, email: email} );
+  }
+  /**
+   * STEP1_EMAIL
+   * step 1 email が入力されたときの Event
+   * @return {string} signupStep1Email
+   */
+  static get STEP1_EMAIL():string {
+    return 'signupStep1Email';
+  }
+  /**
+   * STEP2_EMAIL
+   * step 2 email が入力されたときの Event
+   * @return {string} signupStep2Email
+   */
+  static get STEP2_EMAIL():string {
+    return 'signupStep2Email';
+  }
+
   // ---------------------------------------------------
   //  static method
   // ---------------------------------------------------
   /**
    * instance を生成します
-   * @return {UserStatus} UserStatus instance を返します
+   * @return {SignupStatus} SignupStatus instance を返します
    */
   static factory():SignupStatus {
 

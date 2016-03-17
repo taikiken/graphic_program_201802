@@ -42,9 +42,16 @@ import {Api} from '../../net/Api';
 // React
 let React = self.React;
 
+/**
+ * 新規登録 step 1 form parts
+ * @private
+ * @type {React.component}
+ */
 let Step1FormNode = React.createClass( {
   propTypes: {
-    step: React.PropTypes.number.isRequired
+    step: React.PropTypes.number.isRequired,
+    changeEmail: React.PropTypes.func.isRequired,
+    email: React.PropTypes.string.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -53,7 +60,7 @@ let Step1FormNode = React.createClass( {
     this.model = null;
 
     return {
-      email: '',
+      email: this.props.email,
       step: 1,
       errorEmail: false
     };
@@ -106,15 +113,35 @@ let Step1FormNode = React.createClass( {
       callback[ Model.UNDEFINED_ERROR ] = this.fail;
       callback[ Model.RESPONSE_ERROR ] = this.fail;
     }
+
+    // email2 の変更を watch する
+    this.status.on( SignupStatus.STEP2_EMAIL, this.onEmail2Change );
+
+    // SNS 経由を watch する
+    this.status.on( SignupStatus.SIGNUP_OAUTH, this.onSns );
   },
   componentWillUnMount: function() {
     this.status.off( SignupStatus.SIGNUP_SUBMIT, this.submitHandler );
     this.dispose();
   },
+  // -------------------------------------------------------
+  // watch
+  onSns: function( event:Object ):void {
+    this.setState( {email: event.email} );
+    // step 2 へ遷移する
+    this.next();
+  },
+  // step 2 email 入力を watch し
+  // 同期させる
+  onEmail2Change: function( event:Object ):void {
+    this.setState( {email: event.email} );
+  },
   // ---------------------------------------------------
   // input onchange
   emailChange: function( event ) {
     this.setState( {email: event.target.value} );
+    // email 1 に入力があったことを通知する
+    this.status.email1( event.target.value );
   },
   // ---------------------------------------------------
   // submit click 通知
@@ -213,11 +240,17 @@ let Step1FormNode = React.createClass( {
  * <h3>React component<h3>
  * **signup step 1**
  * 「新規会員登録」入力フォームコンテナ
+ *
+ * @type {React.component}
  */
 export let LegendStep1Node = React.createClass( {
   propTypes: {
     // 担当 step 1
-    step: React.PropTypes.number.isRequired
+    step: React.PropTypes.number.isRequired,
+    // 親 component へ email change を通知する
+    changeEmail: React.PropTypes.func.isRequired,
+    // 初期 email value
+    email: React.PropTypes.string.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -245,6 +278,8 @@ export let LegendStep1Node = React.createClass( {
         <div className="register-mail setting-form">
           <Step1FormNode
             step={this.props.step}
+            email={this.props.email}
+            changeEmail={this.props.changeEmail}
           />
           <p className="note">
             <span className="note-prefix">利用開始をもって</span><a href="/about/terms/" target="_blank">利用規約</a>と<a href="/about/privacy/" target="_blank">個人情報の取扱</a>に<br/>同意したものとみなします。

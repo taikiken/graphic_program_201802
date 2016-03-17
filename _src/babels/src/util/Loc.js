@@ -40,6 +40,11 @@ export class Loc {
     return self.location.href;
 
   }
+
+  /**
+   * location.href へ href をセット遷移させます
+   * @param {string} href 遷移先パス
+   */
   static set current( href:string ):void {
     self.location.href = href;
   }
@@ -73,6 +78,9 @@ export class Loc {
   static set hash( hash:string ):void {
     self.location.hash = hash;
   }
+  /**
+   * hash を消去します
+   */
   static hashClean():void {
     Loc.hash = '';
     let path = Loc.path;

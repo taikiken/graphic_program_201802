@@ -16,6 +16,10 @@ import {Safety} from '../../data/Safety';
 // React
 let React = self.React;
 
+/**
+ * 記事詳細 メイン・画像
+ * @type {React.component}
+ */
 export let MediaImageNode = React.createClass( {
   propTypes: {
     images: React.PropTypes.object.isRequired

@@ -103,17 +103,6 @@ export class ViewDeactivate extends View {
         if ( this.model === null ) {
           this.model = new ModelSignOut( callback );
         }
-
-        /*
-        if ( this.modal === null ) {
-          this.modal = ReactDOM.render(
-            <DeactivateNode
-              ok={this.okHandler}
-              cancel={this.cancelHandler}
-            />,
-            modalElement
-          );
-        }*/
       },
       componentWillUnMount: function() {
       },

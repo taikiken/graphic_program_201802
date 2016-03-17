@@ -19,6 +19,11 @@ import {MediaVideoNode} from './MediaVideoNode';
 // React
 let React = self.React;
 
+/**
+ * 記事詳細 メインビジュアル
+ * 画像・動画 切替
+ * @type {React.component}
+ */
 export let MediaNode = React.createClass( {
   propTypes: {
     mediaType: React.PropTypes.string.isRequired,
