@@ -54,16 +54,19 @@ export class SPViewUserProfile extends ViewUserProfile {
       render: function() {
         let dae = this.props.dae;
         let icon = dae.profilePicture;
+        let loggedIn = 'user-logged-in';
 
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
+          loggedIn = '';
         } else if ( !Safety.isImg( icon ) ) {
           icon = Empty.USER_EMPTY;
+          loggedIn = '';
         }
 
         return (
           <div className="user-profile">
-            <figure className="user-profile-avatar">
+            <figure className={'user-profile-avatar ' + loggedIn}>
               <img src={icon} alt={dae.userName}/>
             </figure>
             <div className="user-profile-data">
