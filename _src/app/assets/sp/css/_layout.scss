@@ -344,17 +344,25 @@ a {
     }
   }
 
-  @include prc-each(home, crazy, all, baseball, soccer, basketball, golf, tennis, battle, volleyball, rugby, americanfootball, athletics, swimming, pingpong, motorsports, extremesports, wintersports, disabledsports, etc, business) {
-    &.#{$arg} {
-      .gnav-#{$arg} {
-        a {
-          border-radius: 15px;
-          background-color: $highlight-color;
-          color: #fff;
-        }
-      }
+  .current {
+    a {
+      border-radius: 15px;
+      background-color: $highlight-color;
+      color: #fff;
     }
   }
+
+  // @include prc-each(home, crazy, all, baseball, soccer, basketball, golf, tennis, battle, volleyball, rugby, americanfootball, athletics, swimming, pingpong, motorsports, extremesports, wintersports, disabledsports, etc, business) {
+  //   &.#{$arg} {
+  //     .gnav-#{$arg} {
+  //       a {
+  //         border-radius: 15px;
+  //         background-color: $highlight-color;
+  //         color: #fff;
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 
