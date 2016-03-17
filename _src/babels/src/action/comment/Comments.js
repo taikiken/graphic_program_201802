@@ -22,6 +22,7 @@ let _symbol = Symbol();
 
 /**
  * <h3>コメント一覧<h3>
+ * 記事ID, token を使いコメント一覧を取得します
  */
 export class Comments extends OffsetAuth {
   /**

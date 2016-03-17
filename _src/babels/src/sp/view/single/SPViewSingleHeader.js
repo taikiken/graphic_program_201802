@@ -55,6 +55,8 @@ export class SPViewSingleHeader extends ViewSingleHeader {
   render( singleDae:SingleDae ):void {
     let _this = this;
 
+    // {React.component}
+    //
     let SPHeaderDom = React.createClass( {
       propTypes: {
         single: React.PropTypes.object.isRequired,

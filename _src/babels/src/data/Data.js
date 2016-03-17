@@ -12,7 +12,8 @@
 'use strict';
 
 /**
- * FormData へ append する key, value
+ * FormData へ append する key, value を管理します
+ * key === input:name, value === input.value
  */
 export class Data {
   /**

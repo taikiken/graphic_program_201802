@@ -19,7 +19,7 @@ import {Length} from '../../app/const/Length';
 
 /**
  * 記事一覧, カテゴリー別, 全て...
- * <p>+ token</p>
+ * token 付き
  */
 export class CategoryAuth extends OffsetAuth {
   /**

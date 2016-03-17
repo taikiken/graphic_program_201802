@@ -14,8 +14,8 @@
 let _symbol = Symbol();
 
 /**
- * <h3>エラーメッセージ</h3>
- * 全て static です
+ * <h3>エラー文言</h3>
+ * 全て static const で管理しています
  */
 export class ErrorTxt {
   /**

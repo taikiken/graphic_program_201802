@@ -28,7 +28,17 @@ import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 // React
 let ReactDOM = self.ReactDOM;
 
+/**
+ * SP 動画一覧, PC と違いカテゴリと同じく 10件ずつ読み込みます
+ */
 export class SPViewVideos extends ViewVideos {
+  /**
+   * SP 動画一覧
+   * @param {Element} element
+   * @param {Element} element root element
+   * @param {Object} [option={}] optional event handler
+   * @param {string} [slug=all] category slug です
+   */
   constructor( element:Element, moreElement:Element, option:Object = {}, slug:string = 'all' ) {
     super( element, option, slug, Length.archive );
 

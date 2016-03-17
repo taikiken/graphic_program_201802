@@ -16,6 +16,11 @@ import {EventDispatcher} from './EventDispatcher';
 let _symbol = Symbol();
 let _instance = null;
 
+/**
+ * コメント返信フォームの open, close, sending, complete を通知します。
+ * @example
+ * var replyStatus = ReplyStatus.factory();
+ */
 export class SettingsStatus extends EventDispatcher {
   /**
    * コメント返信フォームの open, close, sending, complete を通知します。

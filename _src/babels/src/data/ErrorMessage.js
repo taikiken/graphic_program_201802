@@ -14,7 +14,17 @@
 import {Safety} from './Safety';
 
 /**
- * form error
+ * form error 表示用の 管理クラスです
+ * @example
+ * let email = new ErrorMessage();
+ *
+ * // error set
+ * email.message = 'エラーがありました';
+ *
+ * // 判定
+ * if ( email.error ) {
+ *  // error あり
+ * }
  */
 export class ErrorMessage {
   /**
