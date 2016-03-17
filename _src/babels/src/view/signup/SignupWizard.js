@@ -265,7 +265,9 @@ export class SignupWizard extends View {
    * @param {HashChangeEvent} event HashChangeEvent インsたんcえinstance
    */
   onHash( event:HashChangeEvent ):void {
-    let hash = event.newURL.split( '/' ).pop();
+    // let hash = event.newURL.split( '/' ).pop();
+    let hash = Loc.hash;
+    console.log( 'wizard onHash, ', hash, event );
     let step = Url.signupStepByHash( hash );
     this._status.step( step );
   }
@@ -356,7 +358,7 @@ export class SignupWizard extends View {
    * @param {UserDae} userDae ユーザー情報
    */
   success( userDae:UserDae ):void {
-    this._status.sns( userDae.userName, userDae.profilePicture, userDae.email );
+    this._status.sns( userDae.userName, userDae.profilePicture, userDae.email, userDae.bio );
   }
 
 }

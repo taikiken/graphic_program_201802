@@ -43,7 +43,9 @@ export let RootNode = React.createClass( {
     this.status = SignupStatus.factory();
 
     return {
-      step: this.props.step
+      step: this.props.step,
+      email1: '',
+      email2: ''
     };
   },
   render: function() {
@@ -69,13 +71,25 @@ export let RootNode = React.createClass( {
           <SignupHeadingNode step={this.state.step} />
            <div className={stepClassSelector(this.state.step)}>
               <form ref="signup" encType="multipart/form-data" onSubmit={this.submitHandler}>
-                <LegendStep1Node step={this.props.step} />
-                <LegendStep2Node step={this.props.step + 1} getForm={this.getForm} />
-                <LegendStep3Node step={this.props.step + 2}
-                                 categories={this.props.categories}
-                                 getForm={this.getForm}
-                                 beforeRedirect={this.props.beforeRedirect}
+                <LegendStep1Node
+                  step={this.props.step}
+                  changeEmail={this.email1Change}
+                  email={this.state.email1}
                 />
+                <LegendStep2Node
+                  step={this.props.step + 1}
+                  getForm={this.getForm}
+                  changeEmail={this.email2Change}
+                  email={this.state.email2}
+                />
+                <LegendStep3Node
+                  step={this.props.step + 2}
+                  categories={this.props.categories}
+                  getForm={this.getForm}
+                  beforeRedirect={this.props.beforeRedirect}
+                />
+
+                {/* submit button, 非表示 */}
                 <div className="submit-hidden-container"><input type="submit" /></div>
               </form>
           </div>
@@ -93,17 +107,35 @@ export let RootNode = React.createClass( {
   shouldComponentUpdate: function( nextProps, nextState ) {
     return this.state.step !== nextState.step;
   },
+  // submit / button が押された時の Event handler
+  // SignupHeadingNode の表示状態を切り替えるため
   submitHandler: function( event:Event ):void {
     event.preventDefault();
     this.status.submit( this.state.step );
   },
+  // SIGNUP_STEP event handler
+  // form 表示切り替えるため
   stepChange: function( event:Object ):void {
     this.updateStep( event.step );
   },
+  // state.step を切り替える
   updateStep: function( step:Number ):void {
     this.setState( { step: step } );
   },
-  getForm() {
+  // from node を返します
+  getForm: function():Element {
     return ReactDOM.findDOMNode( this.refs.signup );
+  },
+  // -----------------------------------------------
+  // email を step1 と step2 で同じする
+  email1Change: function( email:string ):void {
+    // email 1 が変更されたので email 2 へ通知する
+    console.log( 'email1Change ', email );
+    this.setState( { email2: email } );
+  },
+  email2Change: function( email:string ):void {
+    // email 2 が変更されたので email 1 へ通知する
+    console.log( 'email2Change ', email );
+    this.setState( { email1: email } );
   }
 } );

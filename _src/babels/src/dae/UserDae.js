@@ -58,31 +58,36 @@ export class UserDae {
    * @return {string} article.user.name ユーザー名を返します
    */
   get userName():string {
-    return this.user.name;
+    // data に null 値が入っていることがあるので念のためチェックする
+    return Safety.string( this.user.name, '');
   }
   /**
    * @return {string} article.user.profile_picture ユーザーのURLを返します
    */
   get profilePicture():string {
-    return this.user.profile_picture;
+    // data に null 値が入っていることがあるので念のためチェックする
+    return Safety.string( this.user.profile_picture, '');
   }
   /**
    * @return {string} article.user.url ユーザーのURLを返します
    */
   get url():string {
-    return this.user.url;
+    // data に null 値が入っていることがあるので念のためチェックする
+    return Safety.string( this.user.url, '');
   }
   /**
    * @return {string} article.user.bio ユーザーの肩書を返します
    */
   get bio():string {
-    return this.user.bio;
+    // data に null 値が入っていることがあるので念のためチェックする
+    return Safety.string( this.user.bio, '');
   }
   /**
    * @return {string} email 情報を返します
    */
   get email():string {
-    return this.user.email;
+    // data に null 値が入っていることがあるので念のためチェックする
+    return Safety.string( this.user.email, '');
   }
   // --------------------------------------------------------------------
   // 以下リクエストによっては undefined になります
@@ -92,14 +97,16 @@ export class UserDae {
    * @return {string} メアド、パスワードから生成されるアクセストークン を返します
    */
   get accessToken():string {
-    return this.user.access_token;
+    // data に null 値が入っていることがあるので念のためチェックする
+    return Safety.string( this.user.access_token, '');
   }
   /**
    * セッションID *用途なさそうだけど一応
    * @return {string} セッションID *用途なさそうだけど一応 返します
    */
   get sessionToken():string {
-    return this.user.session_token;
+    // data に null 値が入っていることがあるので念のためにチェックする
+    return Safety.string( this.user.session_token, '');
   }
   /**
    * 興味がある

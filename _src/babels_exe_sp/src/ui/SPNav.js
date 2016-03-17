@@ -82,8 +82,13 @@ export class SPNav {
     }
 
     console.log( 'target ', ulWidth, left, right, windowWidth );
-    //inner.style.cssText = `position: relative; transform: translateX(${-left}px); overflow: visible;`;
-    inner.style.cssText = `padding-right: ${left}px`;
-
+    // inner.style.cssText = `position: relative; transform: translateX(${-left}px); overflow: visible;`;
+    // inner.style.cssText = `padding-right: ${left}px`;
+    // ul を変更する
+    // ul.style.cssText = `width: auto; position: relative; transform: translateX(${-left}px)`;
+    // ul.style.cssText = `width: auto; position: relative; left: ${-left}px`;
+    // ul.style.cssText = `width: auto; position: relative; left: ${-left}px; margin-left: ${-left}px;`;
+    // ul.style.cssText = `width: auto; margin-left: ${-left}px`;
+    // ul.style.cssText = `width: auto; margin-left: ${-left}px; margin-right: ${-left}px;`;
   }
 }

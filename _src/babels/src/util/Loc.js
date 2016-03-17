@@ -73,6 +73,9 @@ export class Loc {
   static set hash( hash:string ):void {
     self.location.hash = hash;
   }
+  /**
+   * hash を消去します
+   */
   static hashClean():void {
     Loc.hash = '';
     let path = Loc.path;
