@@ -40,18 +40,43 @@ export class SPNav {
    * @param {string} slug category slug
    */
   static start( slug:string = 'all' ):void {
+    /*
     let nav = Dom.nav();
     if ( nav !== null && slug !== null && typeof slug !== 'undefined' ) {
       Sagen.Dom.addClass( nav, slug );
-      // SPNav.position( slug );
+      SPNav.position( slug );
+    }
+    */
+    // li#slug へ .current をつける
+    let target = Dom.get( slug );
+    if ( target !== null ) {
+      Sagen.Dom.addClass( target, 'current' );
+      SPNav.position( target );
     }
   }
+  /**
+   * current 位置をいい感じにする
+   * @param {Element} target li element
+   */
+  static position( target:Element ):void {
+    /*
+    コンテナ状況
 
-  static position( slug:string ):void {
+    div#gnav-sec-inner
+      ul#gnav-sec-list
+        li#slug
+        li#slug
+        li#slug
+        li#slug
+        li#slug
+        li#slug
+        li#slug
+     */
+    // gnav-sec-inner
     let inner = Dom.navInner();
-    let target = Dom.get( slug );
+    // ul#gnav-sec-list
     let ul = Dom.navList();
-    if ( target === null || inner === null || ul === null ) {
+    if ( inner === null || ul === null ) {
       // 不正値なので処理しない
       return;
     }
@@ -59,36 +84,41 @@ export class SPNav {
     // ul -> display: table
     // 正確なwidthを取得するため
     ul.style.cssText = 'display: table;';
+    // offset 取得
     let ulOffset = UT.util.Offset.offset( ul );
     // ul 元に戻す
     ul.style.cssText = '';
 
+    // ul width
     let ulWidth = ulOffset.width;
-
+    // li offset
     let targetOffset = UT.util.Offset.offset( target );
+    // window width
     let windowWidth = window.innerWidth;
 
+    // 移動させる距離
     let left = targetOffset.left;
-    if ( left < windowWidth ) {
+    let rightEnd = targetOffset.right;
+
+    // li全体がwindow 内なら何もしない
+    if ( rightEnd < windowWidth ) {
       // window 内なので何もしない
       return;
     }
 
-    let right = ulWidth - left - windowWidth;
+    // 左端につかないように調整する
+    let altLeft = left - 10;
 
+    let right = ulWidth - altLeft - windowWidth;
+
+    // window 右端から離れ無いように調整する
     if ( right < 0 ) {
-      left = left + right;
+      altLeft = altLeft + right;
       right = 0;
     }
 
     console.log( 'target ', ulWidth, left, right, windowWidth );
-    // inner.style.cssText = `position: relative; transform: translateX(${-left}px); overflow: visible;`;
-    // inner.style.cssText = `padding-right: ${left}px`;
-    // ul を変更する
-    // ul.style.cssText = `width: auto; position: relative; transform: translateX(${-left}px)`;
-    // ul.style.cssText = `width: auto; position: relative; left: ${-left}px`;
-    // ul.style.cssText = `width: auto; position: relative; left: ${-left}px; margin-left: ${-left}px;`;
-    // ul.style.cssText = `width: auto; margin-left: ${-left}px`;
-    // ul.style.cssText = `width: auto; margin-left: ${-left}px; margin-right: ${-left}px;`;
+    // ul scroll 量で移動させる
+    ul.scrollLeft = altLeft;
   }
 }

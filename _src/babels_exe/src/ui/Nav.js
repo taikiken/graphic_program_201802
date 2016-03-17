@@ -39,9 +39,15 @@ export class Nav {
    * @param {string} slug category slug
    */
   static start( slug:string = 'all' ):void {
+    /*
     let nav = Dom.nav();
     if ( nav !== null && slug !== null && typeof slug !== 'undefined' ) {
       Sagen.Dom.addClass( nav, slug );
+    }
+    */
+    let target = Dom.get( slug );
+    if ( target !== null ) {
+      Sagen.Dom.addClass( target, 'current' );
     }
   }
 }
