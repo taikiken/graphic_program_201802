@@ -778,16 +778,17 @@ div.synapse_logo {
   @include link-decoration(#fff, #fff, none, none);
   position: relative;
   top: 2px;
-  line-height: (60/2)+px;
+  // line-height: (60/2)+px;
   font-weight: bold;
   font-size: fz(30/2);
 
   i {
     @extend .sp-sprite-common;
     @include hide-text;
-    position: relative;
-    top: -2px;
+    // position: relative;
+    // top: -2px;
     margin-right: (10/2)+px;
+    vertical-align: middle;
   }
 
   span {
