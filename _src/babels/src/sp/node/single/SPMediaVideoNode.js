@@ -24,7 +24,7 @@ let React = self.React;
 
 /**
  * SP 記事詳細 HTML5 video
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let SPMediaVideoNode = React.createClass( {
   propTypes: {

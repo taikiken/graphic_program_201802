@@ -67,12 +67,32 @@ export class ViewDeactivate extends View {
 
     let modalElement = this.modalElement;
 
+    /**
+     * 退会
+     * @private
+     * @type {*|Function|ReactClass}
+     */
     let DeactivateDom = React.createClass( {
       propTypes: {
       },
       getInitialState: function() {
+        /**
+         * DeactivateNode instance
+         * @private
+         * @type {null|DeactivateNode}
+         */
         this.modal = null;
+        /**
+         * ModelSignOut callback
+         * @private
+         * @type {null|Object}
+         */
         this.callback = null;
+        /**
+         * ModelSignOut instance
+         * @private
+         * @type {null}
+         */
         this.model = null;
 
         return {

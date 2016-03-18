@@ -55,15 +55,18 @@ export class SPViewSingleHeader extends ViewSingleHeader {
   render( singleDae:SingleDae ):void {
     let _this = this;
 
-    // {React.component}
-    //
+    /**
+     * 記事詳細
+     * 投稿者、日付、カテゴリー、ブックマークボタン
+     * @type {ReactClass}
+     * */
     let SPHeaderDom = React.createClass( {
       propTypes: {
         single: React.PropTypes.object.isRequired,
         sign: React.PropTypes.bool.isRequired
       },
       getInitialState: function() {
-        this.action = null;
+        // this.action = null;
 
         return {
           sign: this.props.sign,
@@ -76,7 +79,9 @@ export class SPViewSingleHeader extends ViewSingleHeader {
       render: function() {
         let single = this.state.single;
 
-        let category = ( label, slug ):string => {
+        // category label を返す
+        // label があれば
+        let category = ( label, slug ) => {
           return !label ? '' : <span className="category-label"><a href={Url.category(slug)}>{label}</a></span>;
         };
 
@@ -114,9 +119,6 @@ export class SPViewSingleHeader extends ViewSingleHeader {
         // after mount
         _this.executeSafely( View.DID_MOUNT );
 
-      },
-      componentWillUnMount: function() {
-        // this.dispose();
       },
       // --------------------------------------------
       // update

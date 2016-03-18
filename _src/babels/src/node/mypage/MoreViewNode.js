@@ -23,7 +23,7 @@ let React = self.React;
 /**
  * mypage 系 more button
  * PC, SP 共用化するため 汎用class にします
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let MoreViewNode = React.createClass( {
   propTypes: {

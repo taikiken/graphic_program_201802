@@ -491,7 +491,7 @@ export let SettingsIndexNode = React.createClass( {
     };
   },
   render: function() {
-    console.log( 'SettingsIndexNode render', this.props.email );
+    // console.log( 'SettingsIndexNode render', this.props.email );
     return (
       <div className="basic-setting setting-form">
         <SettingInputNode

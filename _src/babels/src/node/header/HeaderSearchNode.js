@@ -27,7 +27,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * 検索フォーム
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let HeaderSearchNode = React.createClass( {
   propTypes: {

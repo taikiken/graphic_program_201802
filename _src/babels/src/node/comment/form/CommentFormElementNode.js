@@ -33,7 +33,7 @@ let ReactDOM = self.ReactDOM;
  *
  * CommentFormNode
  * |- CommentFormElementNode
- * @type {React.component} コメント送信フォーム
+ * @type {ReactClass} コメント送信フォーム
  */
 export let CommentFormElementNode = React.createClass( {
   propTypes: {

@@ -15,7 +15,7 @@ let React = self.React;
 
 /**
  * コメント本文部分
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let CommentContentNode = React.createClass( {
   propTypes: {

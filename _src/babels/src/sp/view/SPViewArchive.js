@@ -108,7 +108,7 @@ export class SPViewArchive extends View {
    * Ajax request を開始します
    */
   start():void {
-    console.log( '-------------------------- SPViewArchive start------' );
+    // console.log( '-------------------------- SPViewArchive start------' );
     this.action.next();
 
   }
@@ -248,7 +248,7 @@ export class SPViewArchive extends View {
       },
       // button 表示・非表示
       updateShow: function( show:boolean ) {
-        console.log( '========================== updateShow ', show );
+        // console.log( '========================== updateShow ', show );
         /*
          if ( !show ) {
          // button を非表示にするので rise 監視を止める
@@ -281,9 +281,8 @@ export class SPViewArchive extends View {
       },
       // Rise.RISE event handler
       // 次 offset JSON を取得する
-      onRise: function( event ) {
-        console.log( '========================== onRise ', event );
-
+      onRise: function() {
+        // console.log( '========================== onRise ', event );
         this.updateLoading( true );
       }
     } );
@@ -291,7 +290,7 @@ export class SPViewArchive extends View {
     // ------------------------------------------------
     let moreButton = ( show:boolean ):void => {
       show = !!show;
-      console.log( '----------------- moreButton ', show, _this._moreRendered );
+      // console.log( '----------------- moreButton ', show, _this._moreRendered );
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
       if ( _this._moreRendered === null ) {

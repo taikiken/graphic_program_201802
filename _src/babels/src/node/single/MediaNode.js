@@ -22,7 +22,7 @@ let React = self.React;
 /**
  * 記事詳細 メインビジュアル
  * 画像・動画 切替
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let MediaNode = React.createClass( {
   propTypes: {

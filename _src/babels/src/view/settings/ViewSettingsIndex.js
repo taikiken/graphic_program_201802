@@ -81,7 +81,7 @@ export class ViewSettingsIndex extends View {
    */
   render( dae:UserDae ):void {
 
-    console.log( 'ViewSettingsIndex render ', dae, this.element );
+    // console.log( 'ViewSettingsIndex render ', dae, this.element );
 
     ReactDOM.render(
       <SettingsIndexNode

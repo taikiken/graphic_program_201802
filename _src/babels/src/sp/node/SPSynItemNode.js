@@ -22,7 +22,7 @@ let React = self.React;
 
 /**
  * side menu login / logout 切り替えメニュー
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let SPSynItemNode = React.createClass( {
   propTypes: {

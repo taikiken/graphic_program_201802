@@ -68,9 +68,24 @@ export class ViewLogin extends View {
 
     let LoginDom = React.createClass( {
       getInitialState: function() {
+        /**
+         * ModelLogin instance
+         * @private
+         * @type {null|ModelLogin}
+         * */
         this.model = null;
+        /**
+         * ModelLogin callback
+         * @private
+         * @type {null|Object}
+         * */
         this.callback = null;
 
+        /**
+         * form error message 表示用 Object
+         * @private
+         * @type {*}
+         * */
         this.errors = {
           password: new ErrorMessage(),
           email: new ErrorMessage(),
@@ -141,9 +156,11 @@ export class ViewLogin extends View {
           callback[ Model.RESPONSE_ERROR ] = this.fail;
         }
       },
+      /*
       componentWillUnMount: function() {
 
       },
+      */
       // -------------------------------------------------------
       // custom
 

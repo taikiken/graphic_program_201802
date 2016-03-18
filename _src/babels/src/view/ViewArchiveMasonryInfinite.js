@@ -209,6 +209,11 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // More button
     // --------------------------------------------
+    /**
+     * MORE VIEW button
+     * @private
+     * @type {ReactClass}
+     */
     let MoreViewDom = React.createClass( {
       propTypes: {
         show: React.PropTypes.bool.isRequired,
@@ -221,7 +226,11 @@ export class ViewArchiveMasonryInfinite extends View {
         };
       },
       getInitialState: function() {
-        // Rise instance を保持する
+        /**
+         * Rise instance を保持する
+         * @private
+         * @type {null|Rise}
+         * */
         this.rise = null;
 
         return {
@@ -325,9 +334,8 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // Rise.RISE event handler
       // 次 offset JSON を取得する
-      onRise: function( event ) {
-        console.log( '========================== onRise ', event );
-
+      onRise: function():void {
+        // console.log( '========================== onRise ', event );
         this.updateLoading( true );
       }
     } );
@@ -361,6 +369,11 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // COMMENTS Popular second
     // --------------------------------------------
+    /**
+     * コメントユーザーの顔写真小さいの
+     * @private
+     * @type {ReactClass}
+     * */
     let CommentedUsersDom = React.createClass( {
       propType: {
         total: React.PropTypes.number.isRequired
@@ -383,7 +396,11 @@ export class ViewArchiveMasonryInfinite extends View {
 
     } );
 
-
+    /**
+     * コメント欄の二段目
+     * @private
+     * @type {ReactClass}
+     * */
     let CommentsSecondDom = React.createClass( {
       propType: {
         seconds: React.PropTypes.array.isRequired,
@@ -450,7 +467,11 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
 
     // --------------------------------------------
-    // first + second comment container
+    /**
+     * first + second comment container
+     * @private
+     * @type {ReactClass}
+     * */
     let PopularDom = React.createClass( {
       propType: {
         commentsPopular: React.PropTypes.object.isRequired,
@@ -545,16 +566,20 @@ export class ViewArchiveMasonryInfinite extends View {
 
         }
 
-      }, // render
+      }/* , // render
       componentDidMount: function() {
         // mount
-      }
+      }*/
     } );
 
     // ------------------------------------------------
     // 基点 React class
     // ------------------------------------------------
-    // 記事一覧のサムネイル
+    /**
+     * 記事一覧のサムネイル
+     * @private
+     * @type {ReactClass}
+     */
     let ThumbnailDom = React.createClass( {
       propType: {
         mediaType: React.PropTypes.string.isRequired,
@@ -604,8 +629,11 @@ export class ViewArchiveMasonryInfinite extends View {
       }
     } );
 
-    // 個別の 記事Dom
-    // React Class, Archive Dom
+    /**
+     * 個別の 記事Dom
+     * @private
+     * @type {ReactClass}
+     */
     let ArticleDom = React.createClass( {
       propTypes: {
         list: React.PropTypes.array.isRequired,
@@ -618,8 +646,23 @@ export class ViewArchiveMasonryInfinite extends View {
         action: React.PropTypes.object.isRequired
       },
       getInitialState: function() {
+        /**
+         * Isotope instance
+         * @private
+         * @type {null|Isotope}
+         */
         this.isotope = null;
+        /**
+         * imagesLoaded instance
+         * @private
+         * @type {null|imagesLoaded}
+         */
         this.img = null;
+        /**
+         * 読み込んだelementを保持する配列
+         * @private
+         * @type {Array}
+         */
         this.elements = [];
 
         return {
@@ -692,7 +735,7 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // state 変更し dom が更新された後に呼び出される delegate
       componentDidUpdate: function() {
-        console.log( '+++++++++ componentDidUpdate' );
+        // console.log( '+++++++++ componentDidUpdate' );
 
         // isotope 対象 children
         let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
@@ -745,7 +788,7 @@ export class ViewArchiveMasonryInfinite extends View {
       // isotope 前準備
       shouldMasonry: function() {
 
-        console.log( '************ shouldMasonry ************' );
+        // console.log( '************ shouldMasonry ************' );
         // isotope 前準備を実行します
         let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
         let childNodes = boardRout.childNodes;
@@ -781,7 +824,7 @@ export class ViewArchiveMasonryInfinite extends View {
       // didUpdate から呼び出される
       appendImages: function() {
 
-        console.log( '++++++++++++++++++++ appendImages' );
+        // console.log( '++++++++++++++++++++ appendImages' );
 
         // event から event handler を unbind します
         this.img.off( 'always', this.appendImages );

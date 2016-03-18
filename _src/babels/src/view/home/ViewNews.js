@@ -35,6 +35,10 @@ export class ViewNews extends ViewArchiveMasonry {
       new News( this.done.bind( this ), this.fail.bind( this ) );
 
     // home flag on
+    /**
+     * home flag, おすすめ ラベル表示するかしないかに使用
+     * @type {boolean}
+     */
     this.home = true;
   }
 

@@ -20,7 +20,7 @@ let React = self.React;
 /**
  * <h3>SP React component<h3>
  * comment form を表示するための基点 clas`
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let SPCommentFormNode = React.createClass( {
   propTypes: {

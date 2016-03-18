@@ -57,6 +57,11 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
     );
 
     // search form opener
+    /**
+     * 検索コンテナ(form)を open / close
+     * @private
+     * @type {*|Function|ReactClass}
+     */
     let ButtonDom = React.createClass( {
       propTypes: {
         body: React.PropTypes.object.isRequired
@@ -67,7 +72,17 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
         );
       },
       componentDidMount: function() {
+        /**
+         * 開いているか真偽値
+         * @private
+         * @type {boolean}
+         */
         this.open = false;
+        /**
+         * SearchStatus instance
+         * @private
+         * @type {SearchStatus}
+         */
         this.status = SearchStatus.factory();
       },
       clickHandler: function( event:Event ):void {

@@ -20,7 +20,7 @@ let React = self.React;
 /**
  * 新規登録 ナビ部分
  * @private
- * @type {React.component}
+ * @type {ReactClass}
  */
 let SignupStepNode = React.createClass( {
   propTypes: {
@@ -47,7 +47,7 @@ let SignupStepNode = React.createClass( {
 
 /**
  * 新規登録 タイトル部分
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let SignupHeadingNode = React.createClass( {
   propTypes: {

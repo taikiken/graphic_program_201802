@@ -160,6 +160,11 @@ export class ViewActivities extends View {
     // --------------------------------------------
     // More button
     // --------------------------------------------
+    /**
+     * more button
+     * @private
+     * @type {*|Function|ReactClass}
+     */
     let MoreViewDom = React.createClass( {
       propTypes: {
         show: React.PropTypes.bool.isRequired,
@@ -173,6 +178,11 @@ export class ViewActivities extends View {
       },
       getInitialState: function() {
         // Rise instance を保持する
+        /**
+         * Rise instance
+         * @private
+         * @type {null|Rise}
+         */
         this.rise = null;
 
         return {
@@ -203,9 +213,11 @@ export class ViewActivities extends View {
         }
 
       },
+      /*
       componentDidMount: function() {
 
       },
+      */
       componentWillUnmount: function() {
         // unmount 時に rise 破棄を行う
         this.destroy();
@@ -269,13 +281,13 @@ export class ViewActivities extends View {
         let article = dae.article;
         let action = dae.action;
 
-        console.log( 'article comment', action, article );
+        // console.log( 'article comment', action, article );
 
         let who = ( commentUser, me ) => {
           if ( me.id === commentUser.id ) {
             return <strong>自分</strong>;
           } else {
-            console.log( 'commentUser ', commentUser.userName );
+            // console.log( 'commentUser ', commentUser.userName );
             return <span><strong>{commentUser.userName}</strong>さん</span>;
           }
         };
@@ -410,7 +422,7 @@ export class ViewActivities extends View {
 
     // 通知
     this.executeSafely( View.BEFORE_RENDER, articlesList );
-    console.log( 'articlesList ', articlesList );
+    // console.log( 'articlesList ', articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
     if ( this._articleRendered === null ) {

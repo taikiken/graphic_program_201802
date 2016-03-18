@@ -20,7 +20,7 @@ let React = self.React;
 // ------------------------------------------
 /**
  * ユーザーアイコン画像選択後の変更リンク
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let ChangeAvatarNode = React.createClass( {
   propTypes: {

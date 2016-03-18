@@ -31,7 +31,7 @@ let React = self.React;
 /**
  * コメント削除・通報
  * - 通報機能 drop
- * @type {React.component} CommentActionNode
+ * @type {ReactClass} CommentActionNode
  */
 export let CommentActionNode = React.createClass( {
   propTypes: {

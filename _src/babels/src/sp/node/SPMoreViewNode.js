@@ -20,13 +20,14 @@ let React = self.React;
 // More button
 // --------------------------------------------
 /**
- * 次を見る MORE VIEW button
- * @private
- * @type {React.component}
+ * SP 次を見る MORE VIEW button
+ * @type {ReactClass}
  */
 export let SPMoreViewNode = React.createClass( {
   propTypes: {
+    // 表示・非表示, true: 表示
     show: React.PropTypes.bool.isRequired,
+    // button click 後の action
     action: React.PropTypes.object.isRequired,
     loading: React.PropTypes.string
   },

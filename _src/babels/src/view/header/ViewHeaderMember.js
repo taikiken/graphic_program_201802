@@ -128,14 +128,34 @@ export class ViewHeaderMember extends View {
 
     // --------------------------------------------------
     // user setting
+    /**
+     * user setting
+     * @private
+     * @type {ReactClass}
+     */
     let SettingDom = React.createClass( {
       propTypes: {
         userName: React.PropTypes.string.isRequired,
         icon: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
+        /**
+         * time out id
+         * @private
+         * @type {number}
+         */
         this.timer = 0;
+        /**
+         * ViewLogoutModal instance
+         * @private
+         * @type {null|ViewLogoutModal}
+         */
         this.modal = null;
+        /**
+         * LogoutStatus instance
+         * @private
+         * @type {LogoutStatus}
+         */
         this.status = LogoutStatus.factory();
 
         return {

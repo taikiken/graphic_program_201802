@@ -16,7 +16,7 @@ let React = self.React;
 
 /**
  * SP archive ページ 切替タブ
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let SPTabNode = React.createClass( {
   propTypes: {

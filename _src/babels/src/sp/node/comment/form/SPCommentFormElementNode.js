@@ -34,7 +34,7 @@ let ReactDOM = self.ReactDOM;
  *
  * SPCommentFormNode
  * |- SPCommentFormElementNode
- * @type {React.component} コメント送信フォーム
+ * @type {ReactClass} コメント送信フォーム
  */
 export let SPCommentFormElementNode = React.createClass( {
   propTypes: {

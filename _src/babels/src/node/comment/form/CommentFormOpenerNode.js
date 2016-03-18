@@ -23,7 +23,7 @@ let React = self.React;
  * CommentFormNode
  * |- CommentFormOpenerNode
  *
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let CommentFormOpenerNode = React.createClass( {
   propTypes: {

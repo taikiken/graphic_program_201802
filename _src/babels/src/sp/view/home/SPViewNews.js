@@ -17,6 +17,9 @@ import {User} from '../../../app/User';
 import {NewsAuth} from '../../../action/home/NewsAuth';
 import {News} from '../../../action/home/News';
 
+/**
+ * SP home 記事一覧
+ */
 export class SPViewNews extends SPViewArchive {
   /**
    * home news, token 付き・無し を切替
@@ -29,7 +32,11 @@ export class SPViewNews extends SPViewArchive {
     this._action = User.sign ?
       new NewsAuth( this.done.bind( this ), this.fail.bind( this ) ) :
       new News( this.done.bind( this ), this.fail.bind( this ) );
-    // home flag on
+    /**
+     * home flag, home の時のみ true
+     * 「おすすめ」ラベル表示に使用
+     * @type {boolean}
+     */
     this.home = true;
 
     console.log( '**************************** SPViewNews' );

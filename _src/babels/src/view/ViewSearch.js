@@ -52,7 +52,7 @@ export class ViewSearch extends ViewArchiveMasonry {
   done( result:Result ):void {
 
     let articles = result.articles;
-    console.log( 'ViewArchiveMasonry done ', result );
+    // console.log( 'ViewArchiveMasonry done ', result );
     if ( typeof articles === 'undefined' ) {
 
       // articles undefined

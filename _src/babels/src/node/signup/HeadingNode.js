@@ -21,7 +21,7 @@ let React = self.React;
 /**
  * lead 文
  * @private
- * @type {React.component}
+ * @type {ReactClass}
  */
 let LeadNode = React.createClass( {
   propTypes: {
@@ -53,7 +53,7 @@ let LeadNode = React.createClass( {
  *  <LeadNode step={this.state.step} />
  * </header>
  * ```
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let HeadingNode = React.createClass( {
   propTypes: {

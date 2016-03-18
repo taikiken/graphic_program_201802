@@ -15,7 +15,7 @@ let React = self.React;
 
 /**
  * form エラー表示用 node
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let ErrorNode = React.createClass( {
   propTypes: {

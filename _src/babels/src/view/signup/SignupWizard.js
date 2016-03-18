@@ -126,6 +126,11 @@ export class SignupWizard extends View {
         categoriesDae: React.PropTypes.object.isRequired
       },
       getInitialState: function() {
+        /**
+         * SignupStatus instance
+         * @private
+         * @type {SignupStatus}
+         */
         this.status = SignupStatus.factory();
 
         return {

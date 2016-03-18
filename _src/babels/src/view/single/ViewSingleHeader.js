@@ -68,7 +68,7 @@ export class ViewSingleHeader extends View {
         sign: React.PropTypes.bool.isRequired
       },
       getInitialState: function() {
-        this.action = null;
+        // this.action = null;
 
         return {
           sign: this.props.sign,

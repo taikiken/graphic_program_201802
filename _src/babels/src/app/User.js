@@ -103,7 +103,7 @@ export class User {
    */
   static login( token:string ):boolean {
     token = Safety.string( token, '' );
-    console.log( 'token ', token );
+    console.log( `user login [${token !== ''}]` );
 
     // 開発中は token が cookie になくても default user でログインさせちゃう
     /*
@@ -142,7 +142,7 @@ export class User {
    */
   static init():void {
     let token = User.token;
-    console.log( `user init token [${token}]` );
+    console.log( `user init token [${token !== ''}]` );
     if ( token === null || typeof token === 'undefined' || token === '' ) {
       User.sign = false;
     } else {

@@ -30,9 +30,16 @@ import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 let ReactDOM = self.ReactDOM;
 
 /**
- * 人気記事 一覧 5件
+ * 人気記事 一覧
  */
 export class SPViewRanking extends ViewRanking {
+  /**
+   * SP 人気記事 一覧, PC と違い 10 件ずつ表示
+   * @param {Element} element 一覧表示用 element
+   * @param {Element} moreElement VIEW MORE button element
+   * @param {Object} [option={}] callback 関数をセット
+   * @param {string} [slug=all] category slug
+   */
   constructor( element:Element, moreElement:Element, option:Object = {}, slug:string = 'all' ) {
     super( element, option, slug, Length.archive );
 

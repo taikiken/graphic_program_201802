@@ -24,7 +24,7 @@ let React = self.React;
  * |- CommentNode
  *    |- CommentMenuNode
  *       |- CommentActionNode
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let CommentMenuNode = React.createClass( {
   propTypes: {

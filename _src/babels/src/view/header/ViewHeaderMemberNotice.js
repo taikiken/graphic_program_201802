@@ -118,6 +118,11 @@ export class ViewHeaderMemberNotice extends View {
 
     // --------------------------------------------------
     // user notice dropMenu action message
+    /**
+     * user notice dropMenu action message
+     * @private
+     * @type {ReactClass}
+     */
     let NoticeMessageDom = React.createClass( {
       propTypes: {
         notice: React.PropTypes.object.isRequired
@@ -147,6 +152,11 @@ export class ViewHeaderMemberNotice extends View {
 
     // --------------------------------------------------
     // notice one block
+    /**
+     * お知らせ 1行
+     * @private
+     * @type {ReactClass}
+     */
     let NoticeItemDom = React.createClass( {
       propTypes: {
         notice: React.PropTypes.object.isRequired,
@@ -228,6 +238,11 @@ export class ViewHeaderMemberNotice extends View {
 
     // --------------------------------------------------
     // user notice dropMenu
+    /**
+     * user notice dropMenu
+     * @private
+     * @type {ReactClass}
+     * */
     let NoticeMenuDom = React.createClass( {
       propTypes: {
         notifications: React.PropTypes.array.isRequired
@@ -285,17 +300,41 @@ export class ViewHeaderMemberNotice extends View {
     // --------------------------------------------------
     // total 件数
 
-    // お知らせ件数を表示
-    // 定期的に更新, 1000ms * 60
-    // 件数が変更されたら NoticeStatus.UPDATE_COUNT event fire
+    /**
+     * お知らせ件数を表示
+     * 定期的に更新, 1000ms * 60
+     * 件数が変更されたら NoticeStatus.UPDATE_COUNT event fire
+     * @private
+     * @type {*|Function|ReactClass}
+     */
     let NoticeTotalDom = React.createClass( {
       propTypes: {
         total: React.PropTypes.number.isRequired
       },
       getInitialState: function() {
+        /**
+         * Polling instance
+         * @private
+         * @type {null|Polling}
+         */
         this.polling = null;
+        /**
+         * ModelNoticeCount callback をセット
+         * @private
+         * @type {null|Object}
+         */
         this.callback = null;
+        /**
+         * ModelNoticeCount instance
+         * @private
+         * @type {null|ModelNoticeCount}
+         */
         this.model = null;
+        /**
+         * NoticeStatus instance
+         * @private
+         * @type {null|NoticeStatus}
+         */
         this.status = null;
 
         return {
@@ -415,11 +454,21 @@ export class ViewHeaderMemberNotice extends View {
 
     // --------------------------------------------------
     // user notice
+    /**
+     * header お知らせ
+     * @private
+     * @type {*|Function|ReactClass}
+     */
     let NoticeDom = React.createClass( {
       propTypes: {
         response: React.PropTypes.object.isRequired
       },
       getInitialState: function() {
+        /**
+         * timeout id, drop menu open 後に body へ click event handler を遅延して設定するのに使用
+         * @private
+         * @type {number}
+         */
         this.timer = 0;
 
         return {

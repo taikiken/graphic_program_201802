@@ -22,7 +22,7 @@ let React = self.React;
 
 /**
  * Bookmark on / off button
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let BookmarkNode = React.createClass( {
   propTypes: {

@@ -62,16 +62,42 @@ export class SPViewHeaderMember extends ViewHeaderMember {
 
     this.executeSafely( View.BEFORE_RENDER, dae );
 
-    // ログインユーザー
+    /**
+     * ログインユーザー
+     * @private
+     * @type {ReactClass}
+     */
     let MemberDom = React.createClass( {
       propTypes: {
+        // user name
         userName: React.PropTypes.string.isRequired,
+        // profile_picture
         icon: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
+        /**
+         * ModelNoticeCount に対する callback 関数を格納するObject
+         * @private
+         * @type {null|Object}
+         */
         this.callback = null;
+        /**
+         * ModelNoticeCount instance
+         * @private
+         * @type {null|ModelNoticeCount}
+         */
         this.model = null;
+        /**
+         * Polling instance
+         * @private
+         * @type {null|Polling}
+         */
         this.polling = null;
+        /**
+         * NoticeStatus instance
+         * @private
+         * @type {null|NoticeStatus}
+         */
         this.status = null;
 
         return {
@@ -130,7 +156,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         // polling
         let polling = this.polling;
         if ( polling === null ) {
-          console.log( '**** polling start **** ' );
+          // console.log( '**** polling start **** ' );
           // https://github.com/undotsushin/undotsushin/issues/282
           // 60秒ごとに未読数取得APIを叩いてお知らせの未読数を取得しバッジに反映する
           polling = new Gasane.Polling( Length.interval );
@@ -150,7 +176,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
       // polling をリスタートします
       restart: function() {
         let polling = this.polling;
-        console.log( '********* restart ******* ' );
+        // console.log( '********* restart ******* ' );
         if ( polling !== null ) {
           // 念のため一旦 unbind し bind する
           polling.off( Gasane.Polling.PAST, this.update );
@@ -162,7 +188,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
       // 定期的に更新します
       // Polling.PAST event handler
       update: function() {
-        console.log( 'update polling' );
+        // console.log( 'update polling' );
         this.polling.off( Gasane.Polling.PAST, this.update );
         this.model.start();
       },
@@ -178,6 +204,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
 
         this.restart();
       },
+      // model request 失敗, polling 再スタート
       fail: function() {
         // restart する
         this.restart();

@@ -33,7 +33,7 @@ let ReactDOM = self.ReactDOM;
  *      <LegendStep3 />
  * </code>
  *
- * @type {React.component}
+ * @type {ReactClass}
  * */
 export let RootNode = React.createClass( {
   propTypes: {

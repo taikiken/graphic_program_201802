@@ -68,7 +68,7 @@ export class ViewNotifications extends View {
     // event handler
     this._boundNotice = this.onNoticeUpdate.bind( this );
 
-    // 既読にする
+    // 既読にする ModelNoticeRead instance
     this._clear = new ModelNoticeRead();
   }
   // ---------------------------------------------------
@@ -174,8 +174,10 @@ export class ViewNotifications extends View {
         };
       },
       getInitialState: function() {
+        /*
         // Rise instance を保持する
         this.rise = null;
+        */
 
         return {
           disable: false,
@@ -205,19 +207,8 @@ export class ViewNotifications extends View {
         }
 
       },
-      componentDidMount: function() {
-
-      },
-      componentWillUnmount: function() {
-        // unmount 時に rise 破棄を行う
-        this.destroy();
-      },
       // -----------------------------------------
       // button 関連 custom method
-      // rise 関連 event を破棄する
-      destroy: function() {
-
-      },
       // 緊急用, button click を残す
       handleClick: function( event:Event ) {
         event.preventDefault();
@@ -237,7 +228,7 @@ export class ViewNotifications extends View {
     // ArchiveDom から呼び出す
     let moreButton = ( show:boolean, action ) => {
 
-      console.log( 'moreButton ', show, moreElement );
+      // console.log( 'moreButton ', show, moreElement );
       show = !!show;
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
@@ -335,8 +326,10 @@ export class ViewNotifications extends View {
     // --------------------------------------------
     // お知らせ親
     // --------------------------------------------
+    // ReactClass
     let NotificationsDom = React.createClass( {
       propType: {
+        // 表示リスト
         list: React.PropTypes.array.isRequired,
         // request offset
         offset: React.PropTypes.number.isRequired,
@@ -376,15 +369,20 @@ export class ViewNotifications extends View {
         );
 
       },
+      // did mount
+      // hasNext を元に More View button の表示非表示を決める
       componentDidMount: function() {
-        // hasNext を元に More View button の表示非表示を決める
         console.log( 'hasNext ', this.props.action.hasNext() );
         _this.onMount();
         moreButton( this.props.action.hasNext(), this.props.action );
       },
+      /*
       componentWillUnMount: function() {
 
       },
+      */
+      // 外部呼び出し口
+      // instance を使い update します
       updateList: function( list, offset, length ) {
         this.setState( { list: list, offset: offset, length: length } );
         // hasNext を元に More View button の表示非表示を決める

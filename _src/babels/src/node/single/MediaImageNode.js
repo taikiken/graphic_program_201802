@@ -18,7 +18,7 @@ let React = self.React;
 
 /**
  * 記事詳細 メイン・画像
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let MediaImageNode = React.createClass( {
   propTypes: {

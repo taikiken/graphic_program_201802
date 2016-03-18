@@ -19,7 +19,7 @@ let React = self.React;
  * CommentNode
  * |- CommentUserNode
  *
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let CommentUserNode = React.createClass( {
   propTypes: {

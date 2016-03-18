@@ -31,7 +31,7 @@ let easing = greensock.easing;
 
 /**
  * Logout modal
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let LogoutNode = React.createClass( {
   propTypes: {

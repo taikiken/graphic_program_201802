@@ -23,7 +23,7 @@ let React = self.React;
 /**
  * comment good / bad
  * コメントに good / bad を付けたり外したり
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let ReactionNode = React.createClass( {
   propTypes: {

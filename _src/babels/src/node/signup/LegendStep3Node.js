@@ -37,7 +37,7 @@ let React = self.React;
 /**
  * 新規登録 step 3 form parts
  * @private
- * @type {React.component}
+ * @type {ReactClass}
  */
 let Step3FormNode = React.createClass( {
   propTypes: {
@@ -200,7 +200,7 @@ let Step3FormNode = React.createClass( {
  * **signup step 3**
  * 「興味のある競技」入力フォームコンテナ
  *
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let LegendStep3Node = React.createClass( {
   propTypes: {

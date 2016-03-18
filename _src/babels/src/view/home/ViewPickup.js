@@ -58,7 +58,7 @@ export class ViewPickup extends View {
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
     this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
-    this._index = 0;
+    // this._index = 0;
     this._last = 0;
     this._waiting = 1000 * 5;
 
@@ -166,6 +166,11 @@ export class ViewPickup extends View {
     // --------------------------------------------
     // pager
     // --------------------------------------------
+    /**
+     * スライドショー pager
+     * @private
+     * @type {ReactClass}
+     * */
     let PickupPagerDom = React.createClass( {
       propTypes: {
         index: React.PropTypes.number.isRequired,
@@ -189,7 +194,11 @@ export class ViewPickup extends View {
       }
     } );
 
-    // pagers 親コンポーネント
+    /**
+     * スライドショー pagers 親コンポーネント
+     * @private
+     * @type {ReactClass}
+     * */
     let PagersDom = React.createClass( {
       propTypes: {
         offset: React.PropTypes.number.isRequired,
@@ -229,6 +238,11 @@ export class ViewPickup extends View {
     // --------------------------------------------
 
     // pickup slider images
+    /**
+     * スライドショー 画像
+     * @private
+     * @type {ReactClass}
+     * */
     let PickupDom = React.createClass( {
       propTypes: {
         index: React.PropTypes.number.isRequired,
@@ -272,6 +286,11 @@ export class ViewPickup extends View {
     } );
 
     // React Class, pickup dom container
+    /**
+     * スライドショー
+     * @private
+     * @type {ReactClass}
+     * */
     let ArticleDom = React.createClass( {
       // articles 配列を元にDomを作成する
       propTypes: {
@@ -279,6 +298,16 @@ export class ViewPickup extends View {
       },
       // initial state を設定します
       getInitialState: function() {
+        /**
+         * 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
+         * アニメーション無しで移動させた後
+         * リフレッシュのために待機させる 1fps
+         * timeout id
+         * @private
+         * @type {Number}
+         * */
+        this.timer = 0;
+
         return {
           // default 0
           index: position

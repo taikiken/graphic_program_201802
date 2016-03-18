@@ -27,7 +27,7 @@ let React = self.React;
 /**
  * mypage bookmark button
  * PC, SP 共用化するため 汎用class にします
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let BookmarkButtonNode = React.createClass( {
   propType: {

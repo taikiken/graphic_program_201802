@@ -23,7 +23,7 @@ let easing = greensock.easing;
 
 /**
  * 退会モーダル node
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let DeactivateNode = React.createClass( {
   propTypes: {

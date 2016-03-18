@@ -122,7 +122,7 @@ export class Single {
     // main visual
     let element = Dom.visual();
     if ( element !== null ) {
-      console.log( 'start main visual ', element );
+      // console.log( 'start main visual ', element );
       let visual = new UT.view.single.ViewSingleVisual( element, single );
       visual.start();
     }

@@ -41,6 +41,10 @@ export class Scroll extends EventDispatcher {
     if ( _instance === null ) {
       super();
       _instance = this;
+      /**
+       * onScroll 関数 を bind しpublic 変数にします
+       * @type {Function}
+       */
       this.boundScroll = this.onScroll.bind( this );
     }
 
@@ -67,6 +71,7 @@ export class Scroll extends EventDispatcher {
   }
   /**
    * window.onscroll event handler
+   * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
    * @param {Event} event window scroll event
    */
   onScroll( event:Event ):void {

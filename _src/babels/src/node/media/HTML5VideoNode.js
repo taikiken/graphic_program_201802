@@ -70,7 +70,7 @@ let VideoPlayNode = React.createClass( {
  * <h3>記事詳細 HTML5 video</h3>
  * <p>記事詳細上部動画</p>
  * HTML5VideoNode
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let HTML5VideoNode = React.createClass( {
   propTypes: {
@@ -129,16 +129,16 @@ export let HTML5VideoNode = React.createClass( {
   },
   playClick: function( event ) {
     event.preventDefault();
-    console.log( 'playClick' );
+    // console.log( 'playClick' );
     this.video.play();
     this.setState( { showPlay: false } );
   },
-  onEnded: function( event ) {
-    console.log( 'onEnded', event );
+  onEnded: function( /* event */ ) {
+    // console.log( 'onEnded', event );
     this.setState( { showPlay: true } );
   },
-  onPause: function( event ) {
-    console.log( 'onPause', event );
-    this.setState( { showPlay: true } );
+  onPause: function( /* event */ ) {
+    // console.log( 'onPause', event );
+    // this.setState( { showPlay: true } );
   }
 } );

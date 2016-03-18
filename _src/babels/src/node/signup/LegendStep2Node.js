@@ -53,7 +53,7 @@ let Sagen = self.Sagen;
 /**
  * 新規登録 step 2 form parts
  * @private
- * @type {React.component}
+ * @type {ReactClass}
  */
 let Step2FormNode = React.createClass( {
   propTypes: {
@@ -502,7 +502,7 @@ let Step2FormNode = React.createClass( {
  * **signup step 2**
  * 基本情報設定
  *
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let LegendStep2Node = React.createClass( {
   propTypes: {

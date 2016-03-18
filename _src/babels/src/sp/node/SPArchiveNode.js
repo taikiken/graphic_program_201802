@@ -155,7 +155,7 @@ let PopularDom = React.createClass( {
       // 少なくとも1件は存在する
       // 総件数から 1（アイコン描画数） マイナス
       total -= 1;
-      console.log( '少なくとも1件は存在する ', articleId );
+      // console.log( '少なくとも1件は存在する ', articleId );
 
       // 1件目コメントデータを取り出し
       let first = firstDae;
@@ -275,7 +275,7 @@ let ThumbnailDom = React.createClass( {
 // React Class, SPArchiveNode Dom
 /**
  * SP 個別の 記事Dom
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let SPArchiveNode = React.createClass( {
   propTypes: {

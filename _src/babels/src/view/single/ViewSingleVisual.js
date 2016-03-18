@@ -49,7 +49,7 @@ export class ViewSingleVisual extends View {
    */
   render():void {
     let single = this._single;
-    console.log( 'ViewSingleVisual.render ', single );
+    // console.log( 'ViewSingleVisual.render ', single );
     ReactDOM.render(
       <MediaNode
         mediaType={single.mediaType}

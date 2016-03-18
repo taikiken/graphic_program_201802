@@ -18,7 +18,7 @@ let React = self.React;
 // --------------------------------------------
 /**
  * コメント[More View] button + 残件数表示
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let CommentMoreViewNode = React.createClass( {
   propTypes: {

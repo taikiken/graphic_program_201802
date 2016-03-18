@@ -25,7 +25,7 @@ let React = self.React;
 /**
  * 記事詳細 メイン・動画切替
  * YouTube, Facebook
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let MediaVideoNode = React.createClass( {
   propTypes: {

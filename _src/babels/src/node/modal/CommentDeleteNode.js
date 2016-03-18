@@ -25,7 +25,7 @@ let easing = greensock.easing;
 
 /**
  * 削除 モーダル
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let CommentDeleteNode = React.createClass( {
   propTypes: {

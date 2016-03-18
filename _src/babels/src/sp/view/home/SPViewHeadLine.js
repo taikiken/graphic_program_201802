@@ -31,7 +31,15 @@ import {Safety} from '../../../data/Safety';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * SP home headline
+ */
 export class SPViewHeadLine extends ViewHeadline {
+  /**
+   * SP home headline
+   * @param {Element} element コンテンツ基点Element
+   * @param {Object} [option={}] callback 関数をセット
+   */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
   }
@@ -41,12 +49,17 @@ export class SPViewHeadLine extends ViewHeadline {
    * @param {Array} articles JSON responce.articles
    */
   render( articles:Array ):void {
-    let element = this.element;
     let _this = this;
 
-    // headline first big size
+    /**
+     * headline first big size
+     * home headline の最初の1件を大きく表示する
+     * @private
+     * @type {ReactClass}
+     */
     let HeadlineFirstDom = React.createClass( {
       propTypes: {
+        // ArticleDae instance, 記事情報
         dae: React.PropTypes.object.isRequired
       },
       render: function() {
@@ -83,8 +96,12 @@ export class SPViewHeadLine extends ViewHeadline {
       }
     } );
 
-    // headline 1 記事
-    // li
+    /**
+     * headline の各 1記事
+     * li で出力
+     * @private
+     * @type {ReactClass}
+     */
     let HeadlineDom = React.createClass( {
       propTypes: {
         index: React.PropTypes.number.isRequired,
@@ -125,16 +142,15 @@ export class SPViewHeadLine extends ViewHeadline {
     } );
 
     // React Class
+    /**
+     * SP home headline 基点 class
+     * @private
+     * @type {ReactClass}
+     */
     let ArticleDom = React.createClass( {
       propTypes: {
         list: React.PropTypes.array.isRequired
       },
-      // isRequired なので getDefaultProps がいらない
-      // getDefaultProps: function() {
-      //  return {
-      //    list: []
-      //  };
-      // },
       render: function() {
 
         let list = this.props.list;
@@ -143,7 +159,7 @@ export class SPViewHeadLine extends ViewHeadline {
         return (
 
           <div className="headline-root">
-
+            {/* 1件目は大きく表示する */}
             <HeadlineFirstDom
               dae={first}
             />
@@ -200,7 +216,7 @@ export class SPViewHeadLine extends ViewHeadline {
     // dom 生成
     ReactDOM.render(
       React.createElement( ArticleDom, { list: articles } ),
-      element
+      this.element
     );
 
   }// render

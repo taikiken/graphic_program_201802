@@ -21,7 +21,7 @@ let React = self.React;
 
 /**
  * SP 記事詳細 上部 メインビジュアル（画像・動画）
- * @type {React.component}
+ * @type {ReactClass}
  */
 export let SPMediaNode = React.createClass( {
   propTypes: {

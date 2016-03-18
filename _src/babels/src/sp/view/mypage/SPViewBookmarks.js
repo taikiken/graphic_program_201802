@@ -184,7 +184,7 @@ export class SPViewBookmarks extends ViewBookmarks {
 
     // 通知
     this.executeSafely( View.BEFORE_RENDER, articlesList );
-    console.log( 'articlesList ', articlesList );
+    // console.log( 'articlesList ', articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
     if ( this._articleRendered === null ) {

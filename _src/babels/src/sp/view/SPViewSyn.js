@@ -111,7 +111,7 @@ class Syn {
     let serviceList = document.getElementById( parts.service );
     this._ready = true;
 
-    console.log( 'service_list_load ', menu.serviceList.serviceListItems );
+    console.log( 'service_list_load ', menu.serviceList.serviceListItems.length );
 
     menu.serviceList.serviceListItems.forEach( function( item ) {
       var listElement = document.createElement( 'li' );
