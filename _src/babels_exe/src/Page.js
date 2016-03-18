@@ -114,6 +114,14 @@ export class Page {
 
     router.route();
 
+    window.addEventListener( 'load', Page.stick, false );
+  }
+  /**
+   * scroll 位置を top に戻す
+   */
+  static stick():void {
+    window.removeEventListener( 'load', Page.stick );
+    setTimeout( window.scrollTo( 0, 0 ), 0 );
   }
   /**
    * home, index page

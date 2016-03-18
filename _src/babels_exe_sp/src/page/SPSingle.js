@@ -21,7 +21,7 @@ let UT = self.UT;
 let Dom = UT.app.Dom;
 
 let _prepared = 0;
-let _singleDae = null;
+// let _singleDae = null;
 let _userDae = null;
 let _viewSingle = null;
 let _headerUser = null;
@@ -123,7 +123,7 @@ export class SPSingle {
     _viewSingle.off( UT.view.View.BEFORE_RENDER, SPSingle.before );
 
     let single = event.args[ 0 ];
-    _singleDae = single;
+    // _singleDae = single;
 
     let slug = single.category.slug;
     // let label = single.category.label;
