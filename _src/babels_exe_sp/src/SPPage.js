@@ -116,6 +116,14 @@ export class SPPage {
 
     router.route();
 
+    window.addEventListener( 'load', SPPage.stick, false );
+  }
+  /**
+   * scroll 位置を top に戻す
+   */
+  static stick():void {
+    window.removeEventListener( 'load', SPPage.stick );
+    setTimeout( window.scrollTo( 0, 1 ), 0 );
   }
   /**
    * home, index page
