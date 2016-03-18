@@ -28,11 +28,22 @@ export let MediaImageNode = React.createClass( {
 
     let images = this.props.images;
 
-
+    // 約束が違う
+    // 画像がない記事の時にセットされているのは
+    // large と medium と thumbnail らしい
+    // original から順に探していく
     let original = images.original;
 
     if ( !original ) {
+      original = images.large;
+    } else if ( !Safety.isImg( original ) ) {
+      original = '';
+    }
+
+    if ( !original ) {
       original = images.medium;
+    } else if ( !Safety.isImg( original ) ) {
+      original = '';
     }
 
     if ( !original || !Safety.isImg( original ) ) {
