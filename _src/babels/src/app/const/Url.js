@@ -16,13 +16,12 @@ let _symbol = Symbol();
 /**
  * <h3>Page 遷移 URL</h3>
  * 全て static です
- */
+ * <p>a tag href へハードコードされる URL 定義</p>
+ * [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)
+ * */
 export class Url {
-  //
   /**
    * <h4>Page 遷移 URL</h4>
-   * <p>a tag href へハードコードされる URL 定義</p>
-   * [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target:Symbol ) {
@@ -38,12 +37,14 @@ export class Url {
   //  CONST 代わり
   // ---------------------------------------------------
   /**
+   * category slug を置き換えるための定義定数
    * @return {string} category/slug 置き換え文字定数
    */
   static get CATEGORY_SLUG():string {
     return '__SLUG__';
   }
   /**
+   * category slug を使用した url を置き換えるための定義定数
    * @return {string} category url base
    */
   static get CATEGORY():string {
@@ -183,9 +184,9 @@ export class Url {
   static logout():string {
     return '/logout/';
   }
-  // https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
   /**
    * SP 専用
+   * https://github.com/undotsushin/undotsushin/commit/6a99fb16401dd80f5ac1a5c9174b9b93a13408af
    * @return {string} signup_login url を返します
    */
   static signupLogin():string {

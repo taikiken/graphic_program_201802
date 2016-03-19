@@ -17,9 +17,11 @@ import {Safety} from '../data/Safety';
 
 /**
  * article.media
+ * responce.media を images / video にわけます
  */
 export class MediaDae {
   /**
+   * article.media
    * responce.media を images / video にわけます
    * @param {Object} [media={}] article.media
    */
@@ -53,24 +55,28 @@ export class MediaDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * article.media
    * @return {Object|*} article.media
    */
   get media():Object {
     return this._media;
   }
   /**
+   * article.media.images
    * @return {ImagesDae|*} article.media.images 存在しない時はundefined を返します
    */
   get images():ImagesDae {
     return this._images;
   }
   /**
+   * article.media.video
    * @return {VideoDae|*} article.media.video
    */
   get video():VideoDae {
     return this._video;
   }
   /**
+   * 記事詳細 images 配列
    * @return {Array<ImagesDae>} 記事詳細 images 配列を返します, 存在しない時はundefined を返します
    */
   get list():Array<ImagesDae> {

@@ -74,6 +74,7 @@ export class ErrorsDae {
     }
   }
   /**
+   * response.errors
    * @return {*} response.errors
    */
   get errors() {
@@ -94,6 +95,7 @@ export class ErrorsDae {
     return this._bank;
   }
   /**
+   * 引数に基づくエラーメッセージを返します
    * @param {string} errorKey error object の key（多分 input: name 値）
    * @return {string} キー値のエラーメッセージを返します
    */

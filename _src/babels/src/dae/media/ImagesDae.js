@@ -26,6 +26,7 @@ export class ImagesDae {
     this._images = images;
   }
   /**
+   * article.media.images
    * @return {Object|*} article.media.images
    */
   get images():Object {

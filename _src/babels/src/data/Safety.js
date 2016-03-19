@@ -19,6 +19,7 @@ let _symbol = Symbol();
  */
 export class Safety {
   /**
+   * データが安全かを調べます
    * static class です、instance を作成できません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
@@ -61,6 +62,7 @@ export class Safety {
    */
   static array( value:Array = [] ):Array {
     if ( !Array.isArray( value ) ) {
+      // 参照が残らないように返します
       return [].slice(0);
     }
 
@@ -73,6 +75,7 @@ export class Safety {
    */
   static object( value:Object = {} ):Object {
     if ( value === null || typeof value === 'undefined' ) {
+      // 参照が残らないように返します
       value = Object.create( {} );
     }
 

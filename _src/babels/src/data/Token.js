@@ -35,7 +35,7 @@ export class Token {
 
   }
   /**
-   *
+   * Ajax request の時に Fetch.Header にセットする Authorization を作成します
    * @param {string} token auth token
    * @param {Object} [option={}] headers object, ない時は新規に作ります
    * @return {*} headers へセットする Object を返します

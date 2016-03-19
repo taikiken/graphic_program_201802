@@ -29,18 +29,21 @@ export class NoticeCountDae {
     this._status = new StatusDae( result.status );
   }
   /**
+   * JSON.response
    * @return {Object|*} JSON response を返します
    */
   get response():Object {
     return this._response;
   }
   /**
+   * JSON.status
    * @return {StatusDae|*} JSON status を返します
    */
   get status():StatusDae {
     return this._status;
   }
   /**
+   * response.count
    * @return {Number} response.count を返します
    */
   get count():Number {
@@ -48,6 +51,7 @@ export class NoticeCountDae {
   }
   /**
    * alias count
+   * response.count
    * @return {Number} response.count を返します
    */
   get total():Number {

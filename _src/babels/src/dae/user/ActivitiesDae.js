@@ -40,18 +40,21 @@ export class ActivitiesDae {
     this._activities = list;
   }
   /**
+   * JSON response
    * @return {Object|*} JSON response を返します
    */
   get response():Object {
     return this._response;
   }
   /**
+   * response.activities
    * @return {Array<ActivityDae>} JSON response.activities を返します
    */
   get activities():Array<ActivityDae> {
     return this._activities;
   }
   /**
+   * response.count
    * @return {Number} count を返します
    */
   get total():Number {
@@ -59,6 +62,7 @@ export class ActivitiesDae {
   }
   /**
    * alias total
+   * response.count
    * @return {Number} count を返します
    */
   get count():Number {

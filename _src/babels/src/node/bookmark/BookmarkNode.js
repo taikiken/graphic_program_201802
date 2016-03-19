@@ -85,6 +85,8 @@ export let BookmarkNode = React.createClass( {
   },
   // --------------------------------------------
   // custom method
+
+  // Model event handler を unbind
   dispose: function() {
 
     let action = this.action;
@@ -98,6 +100,9 @@ export let BookmarkNode = React.createClass( {
   },
   // --------------------------------------------
   // click -> ajax -> done | fail
+
+  // button click event handler
+  // state.status と逆の action を行う
   clickBookmark: function( event ) {
     event.preventDefault();
 
@@ -105,6 +110,7 @@ export let BookmarkNode = React.createClass( {
     this.action.start( !this.state.status );
 
   },
+  // Ajax 成功
   done: function() {
 
     let bookmarked = '';
@@ -117,6 +123,7 @@ export let BookmarkNode = React.createClass( {
     this.setState( { loading: '', status: !this.state.status, bookmarked: bookmarked } );
 
   },
+  // Ajax 失敗
   fail: function() {
 
     // loading 解除

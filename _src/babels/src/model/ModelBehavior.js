@@ -30,6 +30,7 @@ export class ModelBehavior extends Model {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * FormData
    * @return {FormData|*} 設定された FormData を返します
    */
   get data():FormData {

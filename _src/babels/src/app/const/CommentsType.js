@@ -14,11 +14,13 @@
 let _symbol = Symbol();
 
 /**
- * <h3>コメント種類</h3>
+ * <h3>コメント種類（表示分類）</h3>
  * 全て static です
+ * SELF|NORMAL|OFFICIAL|ALL があります
  */
 export class CommentsType {
   /**
+   * コメント種類（表示分類）
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
@@ -36,6 +38,7 @@ export class CommentsType {
   // ---------------------------------------------------
   /**
    * 見出しタイトル
+   * SELF|NORMAL|OFFICIAL|ALL
    * @param {string} type comment type
    * @return {string} 見出しタイトルを返します
    */
@@ -64,36 +67,42 @@ export class CommentsType {
   //  const
   // ---------------------------------------------------
   /**
+   * 自分のコメント
    * @return {string} comment type 'self' を返します
    */
   static get SELF():string {
     return 'self';
   }
   /**
+   * みんなのコメント
    * @return {string} comment type 'normal' を返します
    */
   static get NORMAL():string {
     return 'normal';
   }
   /**
+   * 公式コメンテーター
    * @return {string} comment type 'official' を返します
    */
   static get OFFICIAL():string {
     return 'official';
   }
   /**
+   * すべてのコメント
    * @return {string} comment type '' を返します
    */
   static get ALL():string {
     return '';
   }
   /**
+   * 記事へのコメント
    * @return {string} comment type independent 記事へのコメントを返します
    */
   static get INDEPENDENT():string {
     return 'independent';
   }
   /**
+   * コメント詳細
    * @return {string} comment type single コメント詳細
    */
   static get SINGLE():string {

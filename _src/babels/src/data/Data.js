@@ -29,14 +29,14 @@ export class Data {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * form:name
    * @return {string|*} form key(name) を返します
    */
   get key():string {
     return this._key;
   }
   /**
-   *
+   * form.value
    * @return {string|*} form value 値 を返します
    */
   get value():string {

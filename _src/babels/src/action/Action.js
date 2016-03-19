@@ -58,6 +58,7 @@ export class Action {
     return this._url;
   }
   /**
+   * GET|POST|DELETE|PUT form method を返します
    * @return {string|*} method, GET|POST|DELETE|PUT... を返します
    */
   get method():string {

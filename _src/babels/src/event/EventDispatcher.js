@@ -14,17 +14,18 @@
 /**
  * <h2>EventDispatcher</h2>
  * Custom Event
- */
+ * **extends** して使います。
+ *
+ * @example
+ * class Example extends EventDispatcher {
+ *  constructor() {
+ *    super();
+ *  }
+ * }
+ * */
 export class EventDispatcher {
   /**
-   * <p>custom event を作成し管理します<br>
-   * **extends** して使います。<p>
-   * @example
-   * class Example extends EventDispatcher {
-   *  constructor() {
-   *    super();
-   *  }
-   * }
+   * custom event を作成し管理します
    */
   constructor() {
     this._listeners = {};

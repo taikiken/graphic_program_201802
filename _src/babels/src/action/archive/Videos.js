@@ -19,7 +19,7 @@ import {Safety} from '../../data/Safety';
  */
 export class Videos extends Category {
   /**
-   * 動画一覧を取得します
+   * おすすめ動画一覧を取得します
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

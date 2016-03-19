@@ -81,7 +81,10 @@ export class ArticleDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * @return {Number|*|Number} index Number を返します, default -1, -1 の時は未設定なので使用してはいけない
+   * index Number
+   * -1 の時は未設定なので使用してはいけない
+   * @default -1
+   * @return {Number|*|Number} index Number を返します
    */
   get index():Number {
     return this._index;
@@ -95,20 +98,22 @@ export class ArticleDae {
     this._index = index;
   }
   /**
+   * 記事単1データ
    * @return {Object|*} article 記事単1データ
    */
   get article():Object {
     return this._article;
   }
   /**
-   *
+   * category 情報
    * @return {CategoryDae|*} article.category
    */
   get category():CategoryDae {
     return this._category;
   }
   /**
-   *
+   * category2 情報
+   * いつの間にか追加になった
    * @return {CategoryDae|*} article.category2
    */
   get category2():CategoryDae {
@@ -116,6 +121,7 @@ export class ArticleDae {
   }
 
   /**
+   * category, category2 をまとめるらしい <- 聞いてない
    * response.categories を CategoriesDae へ
    * @return {CategoriesDae|*} response.categories を CategoriesDaeにし返します
    */
@@ -138,46 +144,51 @@ export class ArticleDae {
     return this._commentsCount;
   }
   /**
+   * article.comments_popular
    * @return {CommentsPopularDae|*} article.comments_popular
    */
   get commentsPopular():CommentsPopularDae {
     return this._popular;
   }
   /**
+   * article.date
    * @return {string} article.date
    */
   get date():string {
     return this.article.date;
   }
   /**
+   * article.date をフォーマット
+   * 多分使わない, 代わりに displayDate を使う
    * @return {string} article.date を日本語日付に変換し返します
    */
   get formatDate():string {
     return this._formatDate;
   }
   /**
-   *
+   * 画面表示日付
    * @return {string} article.display_date
    */
   get displayDate():string {
     return this.article.display_date;
   }
   /**
-   *
+   * article.description
    * @return {string} article.description
    */
   get description():string {
     return this.article.description;
   }
   /**
-   *
+   * article.id
    * @return {string} article.id
    */
   get id():string {
     return this.article.id;
   }
   /**
-   *
+   * article.is_bookmarked
+   * bookmark した / してない
    * @return {boolean} article.is_bookmarked
    */
   get isBookmarked():boolean {
@@ -191,35 +202,36 @@ export class ArticleDae {
     return this.article.is_recommend;
   }
   /**
-   *
+   * article.media
    * @return {MediaDae} article.media
    */
   get media():MediaDae {
     return this._media;
   }
   /**
-   *
+   * article.media_type
+   * video or image のはず
    * @return {string} article.media_type
    */
   get mediaType():string {
     return this.article.media_type;
   }
   /**
-   *
+   * article.title
    * @return {string} article.title
    */
   get title():string {
     return this.article.title;
   }
   /**
-   *
+   * article.url
    * @return {string} article.url
    */
   get url():string {
     return this.article.url;
   }
   /**
-   *
+   * article.user
    * @return {UserDae} article.user
    */
   get user():UserDae {

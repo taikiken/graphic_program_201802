@@ -13,14 +13,16 @@
 
 /**
  * Api query option を key ごとに管理します
- */
+ *
+ * <code>?key=value</code>
+ *
+ * key, value型, default値, 必須情報...
+ *
+ * */
 export class Query {
   /**
    * Api query option 情報を保持します
    *
-   * <code>?key=value</code>
-   *
-   * key, value型, default値, 必須情報...
    *
    * @param {string} key query key
    * @param {string} type query value type
@@ -37,6 +39,7 @@ export class Query {
   }
 
   /**
+   * query key が存在するかを調べ真偽値を返します
    * @param {string} key query key
    * @return {boolean} query key が存在するかを返します
    */
@@ -47,6 +50,7 @@ export class Query {
   }
 
   /**
+   * 引数 key が存在すれば Object を返します
    * @param {string} key query key
    * @return {*} {{key: string, type: string, require: boolean, value: *}}|null を返します
    */

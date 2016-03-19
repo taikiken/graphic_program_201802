@@ -40,18 +40,21 @@ export class NotificationsDae {
 
   }
   /**
+   * JSON response
    * @return {Object|*} JSON response を返します
    */
   get response():Object {
     return this._response;
   }
   /**
+   * response.notifications
    * @return {Array<NoticeDae>} JSON response.notifications を返します
    */
   get notifications():Array<NoticeDae> {
     return this._notifications;
   }
   /**
+   * response.count
    * @return {Number} count を返します
    */
   get total():Number {
@@ -59,6 +62,7 @@ export class NotificationsDae {
   }
   /**
    * alias total
+   * response.count
    * @return {Number} count を返します
    */
   get count():Number {

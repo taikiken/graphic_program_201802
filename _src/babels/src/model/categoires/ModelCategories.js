@@ -17,7 +17,7 @@ import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
 import {Result} from '../../data/Result';
 
 /**
- * カテゴリー一覧
+ * カテゴリー一覧を取得
  */
 export class ModelCategories extends Model {
   /**

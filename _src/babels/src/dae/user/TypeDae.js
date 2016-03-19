@@ -31,6 +31,7 @@ export class TypeDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * article.user.type
    * @return {Object|*} article.user.type
    */
   get type():Object {

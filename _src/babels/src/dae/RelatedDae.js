@@ -56,96 +56,107 @@ export class RelatedDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * JSON.response
    * @return {Object|*} JSON.response を返します
    */
   get response():Object {
     return this._response;
   }
   /**
-   *
+   * response.id
    * @return {Number} 記事 ID を返します
    */
   get id():Number {
     return this.response.id;
   }
   /**
-   *
+   * response.date
    * @return {string} ISO8601 日付
    */
   get date():string {
     return this.response.date;
   }
   /**
+   * response.date をフォーマットした
+   * 使わない, displayDateを使用する
    * @return {string} response.date を日本語日付に変換し返します
    */
   get formatDate():string {
     return this._formatDate;
   }
   /**
-   *
+   * 表示日付
    * @return {string} article.display_date
    */
   get displayDate():string {
     return this.response.display_date;
   }
   /**
-   *
+   * response.title
    * @return {string} 記事タイトル
    */
   get title():string {
     return this.response.title;
   }
   /**
+   * response.description
    * @return {string} 記事概要
    */
   get description():string {
     return this.response.description;
   }
   /**
+   * response.category
    * @return {CategoryDae|*} カテゴリー
    */
   get category():CategoryDae {
     return this._category;
   }
   /**
+   * response.category2
    * @return {CategoryDae|*} カテゴリー2
    */
   get category2():CategoryDae {
     return this._category2;
   }
   /**
+   * response.categories
    * @return {CategoriesDae|*} カテゴリー配列
    */
   get categories():CategoriesDae {
     return this._categories;
   }
   /**
+   * response.url
    * @return {string} 記事URL
    */
   get url():string {
     return this.response.url;
   }
   /**
+   * response.is_bookmarked
    * @return {boolean} response.is_bookmarked
    */
   get isBookmarked():boolean {
     return this.response.is_bookmarked;
   }
   /**
+   * response.media_type
    * @return {string} response.media_type
    */
   get mediaType():string {
     return this.response.media_type;
   }
   /**
-   * @return {MediaDae} article.media
+   * response.media
+   * @return {MediaDae} response.media
    */
   get media():MediaDae {
     return this._media;
   }
   /**
-   * @return {UserDae} article.user
+   * response.user
+   * @return {UserDae} response.user
    */
   get user():UserDae {
     return this._user;

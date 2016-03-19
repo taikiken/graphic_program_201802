@@ -82,6 +82,7 @@ export class SPViewArchive extends View {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * more button root element
    * @return {Element|*} more button root element を返します
    */
   get moreElement():Element {

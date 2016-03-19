@@ -22,7 +22,7 @@ let _instance = null;
 export class SearchStatus extends EventDispatcher {
   /**
    * <h3>Singleton</h3>
-   * <p>Logout modal</p>
+   * <p>検索 form の表示・非表示</p>
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {SearchStatus} SearchStatus instance を返します
    */

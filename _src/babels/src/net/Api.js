@@ -23,6 +23,7 @@ let _symbol = Symbol();
  */
 export class Api {
   /**
+   * サーバーリクエストAPI
    * static class です、instance を作成できません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

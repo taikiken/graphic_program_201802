@@ -14,11 +14,13 @@
 let _symbol = Symbol();
 
 /**
- * <h3>コメント種類</h3>
+ * <h3>コメント種類(action)</h3>
  * 全て static です
+ * ADD|DELETE|GOOD|BAD があります
  */
 export class ActionType {
   /**
+   * コメント種類(action)
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
@@ -37,15 +39,15 @@ export class ActionType {
   // ---------------
   // add / delete
   /**
-   * ADD
-   * @return {string} ADD を返します
+   * ADD, コメント投稿
+   * @return {string} add を返します
    */
   static get ADD():string {
     return 'add';
   }
   /**
-   * DELETE
-   * @return {string} DELETE を返します
+   * DELETE, コメント削除
+   * @return {string} delete を返します
    */
   static get DELETE():string {
     return 'delete';
@@ -53,15 +55,15 @@ export class ActionType {
   // ---------------
   // good / bad
   /**
-   * GOOD
-   * @return {string} GOOD を返します
+   * GOOD, コメント Like
+   * @return {string} good を返します
    */
   static get GOOD():string {
     return 'good';
   }
   /**
-   * BAD
-   * @return {string} BAD を返します
+   * BAD, コメント Bad
+   * @return {string} bad を返します
    */
   static get BAD():string {
     return 'bad';

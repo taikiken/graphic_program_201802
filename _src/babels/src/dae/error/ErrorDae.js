@@ -34,18 +34,21 @@ export class ErrorDae {
 
   }
   /**
+   * Ajax result
    * @return {Result|*} Ajax 取得 JSON
    */
   get result():Result {
     return this._result;
   }
   /**
+   * result.status
    * @return {StatusDae|*} JSON.status
    */
   get status():StatusDae {
     return this._status;
   }
   /**
+   * response.errors
    * @return {ErrorsDae|*} JSON.response.errors
    */
   get errors():ErrorsDae {

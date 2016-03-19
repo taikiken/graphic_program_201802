@@ -18,12 +18,12 @@ let _instance = null;
 
 /**
  * お知らせ更新を通知
- */
+ * @example
+ * var status = NoticeStatus.factory();
+ * */
 export class NoticeStatus extends EventDispatcher {
   /**
    * お知らせ更新 を通知する SingleTon
-   * @example
-   * var status = NoticeStatus.factory();
    *
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {UserStatus} UserStatus インスタンスを返します

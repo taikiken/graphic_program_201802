@@ -53,7 +53,9 @@ export class Comments extends OffsetAuth {
   // ---------------------------------------------------
   // reload 追加
   /**
-   * 再読み込み
+   * **再読み込み**
+   * コメントが送信されたり削除された時に画面を更新するために行います
+   * 先頭(offset=0)から現在読み込まれた位置までを再読み込みします
    */
   reload():void {
     this._reload = true;
@@ -82,7 +84,8 @@ export class Comments extends OffsetAuth {
   //  static METHOD
   // ---------------------------------------------------
   /**
-   * @param {string} type 取得コメント種類
+   * 引数 **type** に合わせ Comments instance を作成します
+   * @param {string} type 取得コメント種類, CommentsType.SELF|CommentsType.NORMAL|CommentsType.OFFICIAL|CommentsType.ALL が指定可能値です
    * @param {Number} id コメントを取得する記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

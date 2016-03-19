@@ -16,18 +16,18 @@ import {Safety} from '../data/Safety';
 
 /**
  * コメント一覧表示
- */
+ * <p>再帰的に処理する必要があったため少々複雑な処理工程を辿ります</p>
+ * <ol>
+ * <li>CommentsListDae</li>
+ * <li>CommentsDae</li>
+ * <li>PopularDae</li>
+ * <li>ReplyDae</li>
+ * <li>CommentsPopularDae</li>
+ * </ol>
+ * */
 export class CommentsListDae {
   /**
    * コメント一覧表示 reply 含む
-   * <p>再帰的に処理する必要があったため少々複雑な処理工程を辿ります</p>
-   * <ol>
-   * <li>CommentsListDae</li>
-   * <li>CommentsDae</li>
-   * <li>PopularDae</li>
-   * <li>ReplyDae</li>
-   * <li>CommentsPopularDae</li>
-   * </ol>
    *
    * ToDo: @example
    * @param {Object} response JSON.response
@@ -42,7 +42,7 @@ export class CommentsListDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * JSON.response
    * @return {Object|*} JSON.response を返します
    */
   get response():Object {
@@ -63,6 +63,7 @@ export class CommentsListDae {
     return this.total;
   }
   /**
+   * response.comments
    * @return {CommentsDae|*} response.comments を CommentsDae instance に内包し返します
    */
   get comments():CommentsDae {

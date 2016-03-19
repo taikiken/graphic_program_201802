@@ -50,12 +50,14 @@ export class CommentsPopularDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * article.comments_popular オリジナル
    * @return {Array|*} article.comments_popular オリジナルを返します
    */
   get original():Array {
     return this._comments;
   }
   /**
+   * rticle.comments_popular
    * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
    */
   get comments():Array<PopularDae> {

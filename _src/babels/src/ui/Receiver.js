@@ -13,20 +13,21 @@
 
 /**
  * View callback の定型
+ *
+ * @example
+ * var receiver = new Receiver();
+ * receiver.didMount = function() {}
+ * receiver.emptyError = function() {}
+ *
+ * var action = new View( element );
+ * action.on( View.DID_MOUNT, receiver.didMount );
+ * action.on( View.EMPTY_ERROR, receiver.emptyError );
+ *
  */
 export class Receiver {
   /**
    * <p>View callback の定型<br>
    * instance を作成し callback をカスタマイズします<p>
-   *
-   * @example
-   * var receiver = new Receiver();
-   * receiver.didMount = function() {}
-   * receiver.emptyError = function() {}
-   *
-   * var action = new View( element );
-   * action.on( View.DID_MOUNT, receiver.didMount );
-   * action.on( View.EMPTY_ERROR, receiver.emptyError );
    *
    */
   constructor() {}

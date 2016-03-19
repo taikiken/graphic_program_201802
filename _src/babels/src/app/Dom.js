@@ -34,7 +34,7 @@ export class Dom {
     }
   }
   /**
-   * element を取得します
+   * 引数 id を使用し document.getElementById を行い element を取得します, 取得できない時は null を返します
    * @param {string} id 取得 element id
    * @return {Element} id から取得した element を返します
    */

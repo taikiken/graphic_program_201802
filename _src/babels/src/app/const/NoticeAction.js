@@ -24,7 +24,7 @@ let _message = {
  */
 export class NoticeAction {
   /**
-   *
+   * お知らせ定型文
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

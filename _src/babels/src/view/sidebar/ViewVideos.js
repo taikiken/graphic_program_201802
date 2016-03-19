@@ -56,7 +56,7 @@ export class ViewVideos extends View {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * category slug
    * @return {string|*} 捜査 slug を返します
    */
   get slug():string {

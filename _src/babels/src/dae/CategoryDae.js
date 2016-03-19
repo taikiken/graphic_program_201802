@@ -29,18 +29,21 @@ export class CategoryDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * article.category
    * @return {Object|*} article.category を返します
    */
   get category():Object {
     return this._category;
   }
   /**
+   * article.category.label
    * @return {string|undefined} article.category.label を返します
    */
   get label():string {
     return this.category.label;
   }
   /**
+   * article.category.slug
    * @return {string|undefined} article.category.slug を返します
    */
   get slug():string {

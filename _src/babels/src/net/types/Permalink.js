@@ -13,17 +13,20 @@
 
 /**
  * Types.url へ追加可能なpathがあるかどうかを管理します
+ *
+ *
+ * @example
+ * new Permalink( [ 'category', '' ] );
+ *
+ * @example
+ * searchのようにどんなワードでも良い場合は "*" を指定する
+ * new Permalink( [ '*' ] );
+ *
+ *
  */
 export class Permalink {
   /**
    * パスオプションを指定、ない時は空配列
-   *
-   * @example
-   * new Permalink( [ 'category', '' ] );
-   *
-   * @example
-   * searchのようにどんなワードでも良い場合は "*" を指定する
-   * new Permalink( [ '*' ] );
    *
    * @param {Array} [paths] 追加 path を配列で設定
    * @param {boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション

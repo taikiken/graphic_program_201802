@@ -33,21 +33,24 @@ export class StatusDae {
     return this._status;
   }
   /**
+   * status.code
    * @return {Number} status.code を返します
    */
   get code():Number {
     return this.status.code;
   }
   /**
+   * status.user_message
    * @return {string} status.user_message を返します
    */
   get userMessage():string {
     return this.status.user_message;
   }
   /**
-   * @return {string} status.developper_message を返します
+   * status.developer_message
+   * @return {string} status.developer_message を返します
    */
   get developerMessage():string {
-    return this.status.developper_message;
+    return this.status.developer_message;
   }
 }

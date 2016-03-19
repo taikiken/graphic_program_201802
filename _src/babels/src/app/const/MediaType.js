@@ -16,9 +16,11 @@ let _symbol = Symbol();
 /**
  * <h3>記事メディアタイプ</h3>
  * 全て static です
+ * IMAGE|VIDEO があります
  */
 export class MediaType {
   /**
+   * 記事メディアタイプ
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

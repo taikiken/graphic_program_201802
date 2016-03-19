@@ -53,28 +53,28 @@ export class SingleDae extends RelatedDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * response.body
    * @return {string} 記事本文
    */
   get body():string {
     return this.response.body;
   }
   /**
-   *
-   * @return {boolean} 関連記事が存在するかの真偽値
+   * 関連記事が存在するかの真偽値
+   * @return {boolean} 関連記事が存在するかの真偽値を返します
    */
   get hasRelated():boolean {
     return this._related.length > 0;
   }
   /**
-   *
+   * 関連記事配列
    * @return {Array|*} 関連記事配列を返します
    */
   get related():Array<RelatedDae> {
     return this._related;
   }
   /**
-   *
+   * キーワード
    * @return {KeywordsDae|*} キーワードを返します
    */
   get keywords():KeywordsDae {

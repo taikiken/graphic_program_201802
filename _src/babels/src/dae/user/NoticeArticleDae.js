@@ -33,37 +33,42 @@ export class NoticeArticleDae {
 
   }
   /**
-   *
+   * response.notifications.article
    * @return {Object|*} お知らせ 記事情報 を返します
    */
   get article():Object {
     return this._article;
   }
   /**
+   * article.title
    * @return {string} 記事タイトル を返します
    */
   get title():string {
     return this.article.title;
   }
   /**
+   * article.url
    * @return {string} 記事 url を返します
    */
   get url():string {
     return this.article.url;
   }
   /**
+   * article.comment
    * @return {PopularDae|*} article.comment を返します
    */
   get comment():PopularDae {
     return this._comment;
   }
   /**
+   * article.comment
    * @return {PopularDae|*} article.comment を返します
    */
   get comments():PopularDae {
     return this._comments;
   }
   /**
+   * article.reply
    * @return {PopularDae|*} article.reply を返します
    */
   get reply():PopularDae {

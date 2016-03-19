@@ -22,6 +22,7 @@ import {Api} from '../../net/Api';
 export class Categories extends Action {
   /**
    * category 一覧を取得します
+   * menu 作成など category 全ての category 一覧が必要な時に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */

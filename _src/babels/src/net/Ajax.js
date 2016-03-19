@@ -32,6 +32,8 @@ export class Ajax {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * リクエストが可能かを返します
+   * W click などで二重送信になるのを防ぎます
    * @return {boolean} 実行可否 flag を返します
    */
   get can():boolean {

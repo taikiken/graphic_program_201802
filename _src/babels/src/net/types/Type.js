@@ -35,6 +35,7 @@ export class Type {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * API request先
    * @return {string} API request先を返します
    */
   get url():string {
@@ -54,6 +55,7 @@ export class Type {
   }
 
   /**
+   * method POST|GET|PUT|DELETE
    * @return {string} POST | GET を返します
    */
   get method():string {

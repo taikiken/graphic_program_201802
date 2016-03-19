@@ -23,7 +23,7 @@ export class Category extends Offset {
   // 引数の順番を失敗した
   // resolve, reject が先だった...
   /**
-   * 記事一覧を取得します
+   * category の **記事一覧** を取得します
    * @param {string} [slug=all] category slug です
    * @param {string} [type=''] request type, '' | 'ranking' | 'video' です
    * @param {Function} [resolve=null] Ajax 成功時の callback
@@ -53,6 +53,7 @@ export class Category extends Offset {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * category slug
    * @return {string|*} category slug を返します
    */
   get slug():string {
@@ -61,6 +62,7 @@ export class Category extends Offset {
 
   }
   /**
+   * category request 種類('', ranking, video)
    * @return {string|*} request type('', ranking, video) を返します
    */
   get type():string {

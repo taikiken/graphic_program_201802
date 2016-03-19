@@ -21,20 +21,22 @@ let _instance = null;
 /**
  * <h3>location.pathnameから現在地を調べます</h3>
  * 全て static です
+ *
+ * @example
+ * var router = Router.factory();
+ *
+ * router.on( Router.INDEX, function() {} );
+ * router.on( Router.SINGLE, function( event ) {
+ *    console.log( event.id );// article id
+ * } );
+ *
+ * router.route();
+ *
  */
 export class Router extends EventDispatcher {
   /**
    * singleton class です。
    * **routing** を管理します
-   * @example
-   * var router = Router.factory();
-   *
-   * router.on( Router.INDEX, function() {} );
-   * router.on( Router.SINGLE, function( event ) {
-   *    console.log( event.id );// article id
-   * } );
-   *
-   * router.route();
    *
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {Router} Router instance を返します

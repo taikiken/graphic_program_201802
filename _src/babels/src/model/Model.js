@@ -35,7 +35,7 @@ export class Model extends EventDispatcher {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * callback handler がセットされたObject
    * @return {Object|*} callback handler がセットされたObjectを返します
    */
   get option():Object {
@@ -50,7 +50,7 @@ export class Model extends EventDispatcher {
     this._option = option;
   }
   /**
-   *
+   * Action instance
    * @return {*} Action instance を返します
    */
   get action() {

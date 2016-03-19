@@ -36,8 +36,8 @@ export class Queries {
     return this._queries.length;
 
   }
-
   /**
+   * 全てのqueries
    * @return {Array.<Query>} 全てのqueriesを返します
    */
   all():Array<Query> {
@@ -45,7 +45,6 @@ export class Queries {
     return this._queries;
 
   }
-
   /**
    * key から query を探します
    * @param {string} key query key name, ?start=0 の start

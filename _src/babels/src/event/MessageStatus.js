@@ -18,11 +18,11 @@ let _instance = null;
 
 /**
  * flush message
+ * <p>完了・注意など一時表示メッセージイベント</p>
  */
 export class MessageStatus extends EventDispatcher {
   /**
    * <h3>flush message</h3>
-   * <p>完了・注意など一時表示メッセージイベント</p>
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {*} MessageStatus instance を返します
    */

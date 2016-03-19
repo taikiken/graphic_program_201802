@@ -32,15 +32,14 @@ export class Loc {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
-   * @return {string} location.hrefを返します
+   * location.href
+   * @return {string} location.href を返します
    */
   static get current():string {
 
     return self.location.href;
 
   }
-
   /**
    * location.href へ href をセット遷移させます
    * @param {string} href 遷移先パス
@@ -64,6 +63,7 @@ export class Loc {
     self.location.pathname = path;
   }
   /**
+   * location.hash
    * @return {string} location.hashを返します
    */
   static get hash():string {
@@ -100,7 +100,7 @@ export class Loc {
 
   }
   /**
-   *
+   * location.host
    * @return {string} host name + port number を返します
    */
   static get host():string {
@@ -108,7 +108,7 @@ export class Loc {
     return self.location.host;
   }
   /**
-   *
+   * location.hostname
    * @return {string} host name だけを返します
    */
   static get hostname():string {
@@ -116,7 +116,7 @@ export class Loc {
     return self.location.hostname;
   }
   /**
-   *
+   * location.port
    * @return {string} port number を返します
    */
   static get port():string {
@@ -127,7 +127,7 @@ export class Loc {
   //  METHOD instance
   // ---------------------------------------------------
   /**
-   *
+   * 文字列を query 型として parse します
    * @param {string} [search=''] key: value にしたい search型 文字列
    * @return {Loc} instance を返します
    */
@@ -138,7 +138,6 @@ export class Loc {
     return this;
 
   }
-
   /**
    * search value を keyから探します
    * @param {string} key search name

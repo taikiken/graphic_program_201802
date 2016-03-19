@@ -32,16 +32,17 @@ import {User} from '../app/User';
 
 /**
  * 記事詳細
+ *
+ * @example
+ * let elements = {}
+ *  related: document.getElementById('related'),
+ *  footer: document.getElementById('footer')
+ * }
+ *
  */
 export class ViewSingle extends View {
   /**
    * 記事ID で 記事詳細JSONを取得し表示します
-   *
-   * @example
-   * let elements = {}
-   *  related: document.getElementById('related'),
-   *  footer: document.getElementById('footer')
-   * }
    *
    * @param {Number} id article id, 記事Id
    * @param {Element} element root element

@@ -24,7 +24,9 @@ let React = self.React;
  */
 export let ChangeAvatarNode = React.createClass( {
   propTypes: {
+    // 表示・非表示
     show: React.PropTypes.bool.isRequired,
+    // click 通知関数
     handler: React.PropTypes.func.isRequired
   },
   render: function() {
@@ -38,6 +40,8 @@ export let ChangeAvatarNode = React.createClass( {
       return null;
     }
   },
+  // ユーザーアイコン画像選択後の変更リンク click event handler
+  // 親コンポーネントへ通知する
   clickHandler: function( event:Event ) {
     event.preventDefault();
     this.props.handler();

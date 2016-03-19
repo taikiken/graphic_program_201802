@@ -54,6 +54,7 @@ export class User {
   }
   /**
    * sign in / out 状態を表します
+   * true: sign in です
    * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
    */
   static set sign( bool:boolean ) {
@@ -78,7 +79,8 @@ export class User {
 
   }
   /**
-   *
+   * cookie より user token を取り出します
+   * 見つからない時は null になります
    * @return {string|null} token を返します, 見つからない時はnullを返します
    */
   static get token():string {
@@ -130,7 +132,8 @@ export class User {
     return result;
   }
   /**
-   * ログアウト設定をします
+   * ログアウト処理を行います
+   * token を cookie から削除します
    */
   static logout():void {
     Cookie.remove( Cookie.TARGET );

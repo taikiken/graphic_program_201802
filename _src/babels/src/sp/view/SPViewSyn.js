@@ -54,6 +54,10 @@ let parts = {
 };
 
 // inner class
+/**
+ * Syn.menu
+ * @private
+ */
 class Syn {
   /**
    * Syn. menu を作成し open / close animation を実装します

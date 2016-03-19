@@ -18,13 +18,14 @@ let _instance = null;
 
 /**
  * ログイン / ログアウト を通知
- */
+ *
+ * @example
+ * var userStatus = UserStatus.factory();
+ *
+ *  */
 export class UserStatus extends EventDispatcher {
   /**
    * ログイン / ログアウト を通知する SingleTon
-   * @example
-   * var userStatus = UserStatus.factory();
-   *
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {UserStatus} UserStatus インスタンスを返します
    */

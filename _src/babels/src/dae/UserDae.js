@@ -17,6 +17,7 @@ import {InterestDae} from './user/InterestDae';
 import {Safety} from '../data/Safety';
 
 /**
+ * ユーザー情報
  * article.user
  */
 export class UserDae {
@@ -37,24 +38,28 @@ export class UserDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * article.user
    * @return {Object|*} article.user
    */
   get user():Object {
     return this._user;
   }
   /**
+   * article.user.type
    * @return {TypeDae|*} article.user.type
    */
   get type():TypeDae {
     return this._type;
   }
   /**
+   * article.user.id
    * @return {Number} article.user.id ユーザーIDを返します
    */
   get id():Number {
     return this.user.id;
   }
   /**
+   * article.user.name
    * @return {string} article.user.name ユーザー名を返します
    */
   get userName():string {
@@ -62,6 +67,7 @@ export class UserDae {
     return Safety.string( this.user.name, '');
   }
   /**
+   * article.user.profile_picture
    * @return {string} article.user.profile_picture ユーザーのURLを返します
    */
   get profilePicture():string {
@@ -69,6 +75,7 @@ export class UserDae {
     return Safety.string( this.user.profile_picture, '');
   }
   /**
+   * article.user.url
    * @return {string} article.user.url ユーザーのURLを返します
    */
   get url():string {
@@ -76,6 +83,7 @@ export class UserDae {
     return Safety.string( this.user.url, '');
   }
   /**
+   * article.user.bio
    * @return {string} article.user.bio ユーザーの肩書を返します
    */
   get bio():string {
@@ -83,6 +91,7 @@ export class UserDae {
     return Safety.string( this.user.bio, '');
   }
   /**
+   * article.user.email
    * @return {string} email 情報を返します
    */
   get email():string {
@@ -94,6 +103,7 @@ export class UserDae {
   // 登録系, ログイン系 などのリクエストの時に情報を持ちます
   /**
    * メアド、パスワードから生成されるアクセストークン
+   * access_token を使い **ログイン** 処理を行います
    * @return {string} メアド、パスワードから生成されるアクセストークン を返します
    */
   get accessToken():string {

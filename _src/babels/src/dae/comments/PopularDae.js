@@ -43,6 +43,7 @@ export class PopularDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * response.comment
    * @return {Object|*} comment Object を返します
    */
   get comment():Object {
@@ -55,25 +56,29 @@ export class PopularDae {
     return this.comment.id;
   }
   /**
+   * comment.date
    * @return {string} ISO8601 日付を返します
    */
   get date():string {
     return this.comment.date;
   }
   /**
+   * comment.date をフォーマット **使用しない**
+   * displayDate を使用します
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {
     return this._formatDate;
   }
   /**
+   * 表示日付
    * @return {string} 相対日付返します
    */
   get displayDate():string {
     return this.comment.display_date;
   }
   /**
-   *
+   * comment.body
    * @return {string} コメント本文を返します
    */
   get body():string {
@@ -87,12 +92,14 @@ export class PopularDae {
     return this.isLike;
   }
   /**
+   * comment.is_like
    * @return {boolean} 自分がGood済みかどうか を返します
    */
   get isLike():boolean {
     return this.comment.is_like;
   }
   /**
+   * comment.is_bad
    * @return {boolean} 自分がBad済みかどうか を返します
    */
   get isBad():boolean {
@@ -112,20 +119,21 @@ export class PopularDae {
     return this.good;
   }
   /**
+   * comment.bad
    * @return {Number|Number} Bad数 を返します
    */
   get bad():Number {
     return this.comment.bad;
   }
   /**
-   *
+   * comment.url
    * @return {string} コメント詳細のURLを返します
    */
   get url():string {
     return this.comment.url;
   }
   /**
-   *
+   * comment.user
    * @return {UserDae|*} comment した user 情報を返します
    */
   get user():UserDae {

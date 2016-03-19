@@ -28,14 +28,14 @@ export class KeywordsDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * response.keywords
    * @return {Array.<string>|*} response.keywords を返します
    */
   get keywords():Array<string> {
     return this._keywords;
   }
   /**
-   *
+   * keyword が存在するかの真偽値
    * @return {boolean} keyword が存在するかの真偽値を返します
    */
   get hasKeyword():boolean {

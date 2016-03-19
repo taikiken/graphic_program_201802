@@ -16,6 +16,7 @@ let _symbol = Symbol();
 /**
  * <h3>エラー文言</h3>
  * 全て static const で管理しています
+ * form validation で使用します
  */
 export class ErrorTxt {
   /**
@@ -37,49 +38,49 @@ export class ErrorTxt {
   //  CONST 代わり
   // ---------------------------------------------------
   /**
-   * BODY_EMPTY コメント本文
+   * BODY_EMPTY, コメントは必須項目です
    * @return {string} コメントは必須項目です
    */
   static get BODY_EMPTY():string {
     return 'コメントは必須項目です。';
   }
   /**
-   * EMAIL_EMPTY
+   * EMAIL_EMPTY, メールアドレスは必須項目です
    * @return {string} メールアドレスは必須項目です
    */
   static get EMAIL_EMPTY():string {
     return 'メールアドレスは必須項目です。';
   }
   /**
-   * EMAIL_INVALID
+   * EMAIL_INVALID, 正しいメールアドレスを入力してください
    * @return {string} 正しいメールアドレスを入力してください。
    */
   static get EMAIL_INVALID():string {
     return '正しいメールアドレスを入力してください。';
   }
   /**
-   * PASSWORD_EMPTY
+   * PASSWORD_EMPTY, パスワードは必須項目です
    * @return {string} パスワードは必須項目です
    */
   static get PASSWORD_EMPTY():string {
     return 'パスワードは必須項目です。';
   }
   /**
-   * PASSWORD_SHORT
+   * PASSWORD_SHORT, パスワードは8文字以上で入力してください
    * @return {string} パスワードは8文字以上で入力してください
    */
   static get PASSWORD_SHORT():string {
     return 'パスワードは8文字以上で入力してください。';
   }
   /**
-   * PASSWORD_INVALID
+   * PASSWORD_INVALID, パスワードは半角英数字で入力してください
    * @return {string} パスワードは半角英数字で入力してください
    */
   static get PASSWORD_INVALID():string {
     return 'パスワードは半角英数字で入力してください。';
   }
   /**
-   * NAME_EMPTY
+   * NAME_EMPTY, 名前は必須項目です
    * @return {string} 名前は必須項目です
    */
   static get NAME_EMPTY():string {
@@ -87,7 +88,7 @@ export class ErrorTxt {
   }
 
   /**
-   * EMAIL_OR_PWD_EMPTY
+   * EMAIL_OR_PWD_EMPTY, メールアドレスかパスワードが入力されておりません
    * @return {string} メールアドレスかパスワードが入力されておりません
    */
   static get EMAIL_OR_PWD_EMPTY():string {

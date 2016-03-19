@@ -37,21 +37,24 @@ export class Message {
   //  CONST 代わり
   // ---------------------------------------------------
   /**
-   * UNLOAD
+   * UNLOAD, 入力内容が取消しされます
+   * onbeforeunload message に使用します
    * @return {string} 入力内容が取消しされます
    */
   static get UNLOAD():string {
     return '入力内容が取消しされます！';
   }
   /**
-   * DELETE
+   * DELETE このコメントを削除しますか
+   * コメント削除モーダルで使用します
    * @return {string} このコメントを削除しますか
    */
   static get DELETE():string {
     return 'このコメントを削除しますか？';
   }
   /**
-   * DELETE_WILL
+   * DELETE_WILL, このコメントを削除する
+   * コメント drop down menu 表示に使用します
    * @return {string} このコメントを削除する
    */
   static get DELETE_WILL():string {
@@ -59,35 +62,40 @@ export class Message {
   }
 
   /**
-   * DEACTIVATE
+   * DEACTIVATE 退会を行うと、登録済みの情報は全て閲覧する事が出来なくなります
+   * 退会form, モーダルで使用します
    * @return {string} 退会を行うと、登録済みの情報は全て閲覧する事が出来なくなります
    */
   static get DEACTIVATE():string {
     return '退会を行うと、登録済みの情報は全て閲覧する事が出来なくなります。';
   }
   /**
-   * LOGOUT
+   * LOGOUT ログアウトしますか
+   * ログアウトモーダルで使用します
    * @return {string} ログアウトしますか？
    */
   static get LOGOUT():string {
     return 'ログアウトしますか？';
   }
   /**
-   * BOOKMARK_WILL
+   * BOOKMARK_WILL ブックマークする
+   * 記事一覧のbookmark button で使用します
    * @return {string} ブックマークする
    */
   static get BOOKMARK_WILL():string {
     return 'ブックマークする';
   }
   /**
-   * BOOKMARK_DID
+   * BOOKMARK_DID ブックマーク解除
+   * 記事一覧のbookmark button で使用します
    * @return {string} ブックマーク解除
    */
   static get BOOKMARK_DID():string {
     return 'ブックマーク解除';
   }
   /**
-   * COMMENT_SUBMIT
+   * COMMENT_SUBMIT コメントを投稿
+   * コメント投稿 submit button value 値
    * @return {string} コメントを投稿
    */
   static get COMMENT_SUBMIT():string {
@@ -95,21 +103,24 @@ export class Message {
   }
   // search
   /**
-   * PLACEHOLDER_SEARCH
+   * PLACEHOLDER_SEARCH 記事を検索
+   * 検索 placeholder
    * @return {string} 記事を検索
    */
   static get PLACEHOLDER_SEARCH():string {
     return '記事を検索';
   }
   /**
-   * SUBMIT_SEARCH
+   * SUBMIT_SEARCH 検索
+   * 検索 submit button value 値
    * @return {string} 検索
    */
   static get SUBMIT_SEARCH():string {
     return '検索';
   }
   /**
-   * OPENER_SEARCH
+   * OPENER_SEARCH 記事検索
+   * SP, 検索 form を表示する button に使用
    * @return {string} 記事検索
    */
   static get OPENER_SEARCH():string {
@@ -117,49 +128,49 @@ export class Message {
   }
   // login
   /**
-   * PLACEHOLDER_EMAIL
+   * PLACEHOLDER_EMAIL, メールアドレスを入力
    * @return {string} メールアドレスを入力
    */
   static get PLACEHOLDER_EMAIL():string {
     return 'メールアドレスを入力';
   }
   /**
-   * PLACEHOLDER_PWD
+   * PLACEHOLDER_PWD, パスワードを入力
    * @return {string} パスワードを入力
    */
   static get PLACEHOLDER_PWD():string {
     return 'パスワードを入力';
   }
   /**
-   * PLACEHOLDER_NAME
+   * PLACEHOLDER_NAME, ユーザー名を入力
    * @return {string} ユーザー名を入力
    */
   static get PLACEHOLDER_NAME():string {
     return 'ユーザー名を入力';
   }
   /**
-   * PLACEHOLDER_BIO
+   * PLACEHOLDER_BIO, 肩書を入力 (任意)
    * @return {string} 肩書を入力 (任意)
    */
   static get PLACEHOLDER_BIO():string {
     return '肩書を入力 (任意)';
   }
   /**
-   * PLACEHOLDER_PICTURE
+   * PLACEHOLDER_PICTURE, プロフィール写真選択
    * @return {string} プロフィール写真選択
    */
   static get PLACEHOLDER_PICTURE():string {
     return 'プロフィール写真選択';
   }
   /**
-   * PLACEHOLDER_CHANGE_PICTURE
+   * PLACEHOLDER_CHANGE_PICTURE, 写真を変更する
    * @return {string} 写真を変更する
    */
   static get PLACEHOLDER_CHANGE_PICTURE():string {
     return '写真を変更する';
   }
   /**
-   * PLACEHOLDER_COMMENT
+   * PLACEHOLDER_COMMENT, コメントを書く
    * @return {string} コメントを書く
    */
   static get PLACEHOLDER_COMMENT():string {
@@ -167,7 +178,7 @@ export class Message {
   }
 
   /**
-   * SUBMIT_LOGIN
+   * SUBMIT_LOGIN, ログイン
    * @return {string} ログイン
    */
   static get SUBMIT_LOGIN():string {
@@ -176,7 +187,7 @@ export class Message {
   // ----
   // single
   /**
-   * READ_MORE
+   * READ_MORE, 続きを読む
    * @return {string} 続きを読む
    */
   static get READ_MORE():string {
@@ -187,21 +198,21 @@ export class Message {
 
   // logout
   /**
-   * button BUTTON_CLOSE
+   * button BUTTON_CLOSE, 閉じる
    * @return {string} 閉じる
    */
   static get BUTTON_CLOSE():string {
     return '閉じる';
   }
   /**
-   * button BUTTON_YES
+   * button BUTTON_YES, はい
    * @return {string} はい
    */
   static get BUTTON_YES():string {
     return 'はい';
   }
   /**
-   * button BUTTON_NO
+   * button BUTTON_NO, いいえ
    * @return {string} いいえ
    */
   static get BUTTON_NO():string {
@@ -210,14 +221,14 @@ export class Message {
 
   // remove account
   /**
-   * button BUTTON_CANCEL
+   * button BUTTON_CANCEL, キャンセル
    * @return {string} キャンセル
    */
   static get BUTTON_CANCEL():string {
     return 'キャンセル';
   }
   /**
-   * button BUTTON_DELETE
+   * button BUTTON_DELETE, 削除
    * @return {string} 削除
    */
   static get BUTTON_DELETE():string {
@@ -226,14 +237,14 @@ export class Message {
 
   // 退会
   /**
-   * button BUTTON_DEACTIVATE
+   * button BUTTON_DEACTIVATE, 退会
    * @return {string} 退会
    */
   static get BUTTON_DEACTIVATE():string {
     return '退会';
   }
   /**
-   * button BUTTON_DEACTIVATE_TEXT
+   * button BUTTON_DEACTIVATE_TEXT, 運動通信から退会する
    * @return {string} 運動通信から退会する
    */
   static get BUTTON_DEACTIVATE_TEXT():string {
@@ -242,28 +253,28 @@ export class Message {
 
   // profile picture
   /**
-   * button BUTTON_SAVE
+   * button BUTTON_SAVE, 保存する
    * @return {string} 保存する
    */
   static get BUTTON_SAVE():string {
     return '保存する';
   }
   /**
-   * button BUTTON_NEXT
+   * button BUTTON_NEXT, 次へ
    * @return {string} 次へ
    */
   static get BUTTON_NEXT():string {
     return '次へ';
   }
   /**
-   * button BUTTON_RESISTER
+   * button BUTTON_RESISTER, 登録する
    * @return {string} 登録する
    */
   static get BUTTON_RESISTER():string {
     return '登録する';
   }
   /**
-   * button BUTTON_VIEW_MORE
+   * button BUTTON_VIEW_MORE, VIEW MORE
    * @return {string} VIEW MORE
    */
   static get BUTTON_VIEW_MORE():string {
@@ -272,7 +283,7 @@ export class Message {
 
   // ----
   /**
-   * PLEASE_MAKE_ACCOUNT
+   * PLEASE_MAKE_ACCOUNT, アカウント作成 (無料)
    * @return {string} アカウント作成 (無料)
    */
   static get PLEASE_MAKE_ACCOUNT():string {
@@ -282,21 +293,21 @@ export class Message {
   // -----------------------------------
   // ユーザー登録 step information
   /**
-   * SIGNUP_STEP_1
+   * SIGNUP_STEP_1, 基本情報設定
    * @return {string} 基本情報設定
    */
   static get SIGNUP_STEP_1():string {
     return '基本情報設定';
   }
   /**
-   * SIGNUP_STEP_2
+   * SIGNUP_STEP_2, 興味のある競技
    * @return {string} 興味のある競技
    */
   static get SIGNUP_STEP_2():string {
     return '興味のある競技';
   }
   /**
-   * SIGNUP_STEP_3
+   * SIGNUP_STEP_3, 完了
    * @return {string} 完了
    */
   static get SIGNUP_STEP_3():string {
@@ -314,14 +325,14 @@ export class Message {
 
   // ユーザー登録 section title
   /**
-   * TITLE_ENTRY_MEMBER
+   * TITLE_ENTRY_MEMBER, 新規会員登録
    * @return {string} 新規会員登録
    */
   static get TITLE_ENTRY_MEMBER():string {
     return '新規会員登録';
   }
   /**
-   * TITLE_INTEREST_SPORTS
+   * TITLE_INTEREST_SPORTS, 興味のある競技を選択
    * @return {string} 興味のある競技を選択
    */
   static get TITLE_INTEREST_SPORTS():string {
@@ -329,7 +340,7 @@ export class Message {
   }
 
   /**
-   * LABEL_RECOMMEND
+   * LABEL_RECOMMEND, おすすめ記事
    * @return {string} おすすめ記事
    */
   static LABEL_RECOMMEND():string {
@@ -339,7 +350,7 @@ export class Message {
   // -----------------------------------
   // mypage
   /**
-   * FAVORITE_SPORTS
+   * FAVORITE_SPORTS, 好きな競技
    * @return {string} 好きな競技
    */
   static get FAVORITE_SPORTS():string {

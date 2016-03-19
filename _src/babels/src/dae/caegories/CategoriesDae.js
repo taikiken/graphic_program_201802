@@ -51,24 +51,28 @@ export class CategoriesDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * JSON.response
    * @return {Object|*} JSON response を返します
    */
   get response():Object {
     return this._response;
   }
   /**
+   * response.categories
    * @return {Array|*} JSON response.categories を返します
    */
   get categories():Array {
     return this._categories;
   }
   /**
+   * response.categories
    * @return {Array<SlugDae>} response.categories を SlugDae instance 配列にし返します
    */
   get all():Array<SlugDae> {
     return this._cats;
   }
   /**
+   * slug をキーにした Object
    * @return {Object} slug をキーにした SlugDae instance 全て
    */
   get bank():Object {
@@ -82,6 +86,7 @@ export class CategoriesDae {
     return this.total;
   }
   /**
+   * response.count
    * @return {Number} JSON response.count を返します
    */
   get total():Number {

@@ -31,30 +31,35 @@ export class SlugDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * 1 カテゴリー 情報
    * @return {Object|*} 1 カテゴリーdata
    */
   get category():Object {
     return this._category;
   }
   /**
+   * category.id
    * @return {Number} category Id を返します
    */
   get id():Number {
     return this.category.id;
   }
   /**
+   * category.label
    * @return {string} category label を返します
    */
   get label():string {
     return this.category.label;
   }
   /**
+   * category.slug
    * @return {string} category slug を返します
    */
   get slug():string {
     return this.category.slug;
   }
   /**
+   * category.url
    * @return {string} category url を返します
    */
   get url():string {

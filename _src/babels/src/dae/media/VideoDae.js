@@ -26,6 +26,7 @@ export class VideoDae {
     this._video = video;
   }
   /**
+   * article.media.video
    * @return {Object|*} article.media.video
    */
   get video():Object {

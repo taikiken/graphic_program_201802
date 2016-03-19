@@ -13,19 +13,19 @@
 
 /**
  * Ajax 結果を成功時に保存します
- */
+ * success event handler で結果(Result instance)を受け取れます<br>
+ *
+ * @example
+ * let success = (result) => {
+ *   // response section 取得
+ *   response.response
+ *   // status section 取得
+ *   response.status
+ * }
+ * */
 export class Result {
   /**
    * Ajax 成功時にdataを保存します<br>
-   * success event handler で結果(Result instance)を受け取れます<br>
-   *
-   * @example
-   * let success = (result) => {
-   *   // response section 取得
-   *   response.response
-   *   // status section 取得
-   *   response.status
-   * }
    *
    * @param {{status: *, response: *}} json json パース後データ
    */

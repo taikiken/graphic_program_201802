@@ -26,6 +26,7 @@ let _interval = 1000 * 60;
 /**
  * <h3>offset length default value</h3>
  * 全て static です
+ * Ajax request 時の query, length の default value です
  */
 export class Length {
   /**
@@ -46,12 +47,15 @@ export class Length {
   // ---------------------------------------------------
   // --- pickup
   /**
+   * home pickup
+   * @default 5
    * @return {Number} pickup default 取得数を返します
    */
   static get pickup():Number {
     return _pickup;
   }
   /**
+   * home pickup, length を設定します
    * @param {Number} value pickup default 取得数
    */
   static set pickup( value:Number ):void {
@@ -63,12 +67,15 @@ export class Length {
   }
   // --- headline
   /**
+   * home headline
+   * @default 5
    * @return {Number} headline default 取得数を返します
    */
   static get headline():Number {
     return _headline;
   }
   /**
+   * home headline, length を設定します
    * @param {Number} value headline default 取得数
    */
   static set headline( value:Number ):void {
@@ -80,13 +87,15 @@ export class Length {
   }
   // --- ranking
   /**
+   * sidebar ranking
+   * @default 5
    * @return {Number} ranking default 取得数を返します
    */
   static get ranking():Number {
     return _ranking;
   }
   /**
-   *
+   * sidebar ranking, length を設定します
    * @param {Number} value ranking default 取得数
    */
   static set ranking( value:Number ):void {
@@ -98,12 +107,15 @@ export class Length {
   }
   // --- video
   /**
+   * sidebar video
+   * @default 5
    * @return {Number} video default 取得数を返します
    */
   static get video():Number {
     return _video;
   }
   /**
+   * sidebar video, length を設定します
    * @param {Number} value video default 取得数
    */
   static set video( value:Number ):void {
@@ -115,12 +127,15 @@ export class Length {
   }
   // --- archive
   /**
+   * 記事一覧
+   * @default 10
    * @return {Number} archive default 取得数を返します
    */
   static get archive():Number {
     return _archive;
   }
   /**
+   * 記事一覧, length を設定します
    * @param {Number} value archive default 取得数
    */
   static set archive( value:Number ):void {
@@ -140,12 +155,15 @@ export class Length {
   }
   // --- interval
   /**
+   * polling 間隔(ms)
+   * @default 1000 * 60
    * @return {Number} interval(ms) を返します
    */
   static get interval():Number {
     return _interval;
   }
   /**
+   * polling 間隔(ms) を設定します
    * @param {Number} value interval ms
    */
   static set interval( value:Number ):void {

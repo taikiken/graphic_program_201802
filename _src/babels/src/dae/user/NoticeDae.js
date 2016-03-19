@@ -45,30 +45,37 @@ export class NoticeDae {
 
   }
   /**
+   * response.notifications
    * @return {Object|*} JSON response.notifications 配列単独データ を返します
    */
   get notice():Object {
     return this._notice;
   }
   /**
+   * notifications.id
    * @return {Number} notifications id を返します
    */
   get id():Number {
     return this.notice.id;
   }
   /**
+   * notifications.date
    * @return {string} ISO8601 日付を返します
    */
   get date():string {
     return this.notice.date;
   }
   /**
+   * notifications.date フォーマット
+   * **使用しません**
+   * displayDate を代わりに使用します
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {
     return this._formatDate;
   }
   /**
+   * 表示日付
    * @return {string} 相対日付返します
    */
   get displayDate():string {
@@ -87,12 +94,14 @@ export class NoticeDae {
     return this.notice.action;
   }
   /**
+   * notifications.user
    * @return {UserDae|*} 誰からの通知かユーザー情報を返します
    */
   get user():UserDae {
     return this._user;
   }
   /**
+   * notifications.article
    * @return {NoticeArticleDae|*} 対象記事情報を返します
    */
   get article():NoticeArticleDae {

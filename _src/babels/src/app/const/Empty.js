@@ -16,9 +16,11 @@ let _symbol = Symbol();
 /**
  * <h3>代替画像パス</h3>
  * 全て static です
+ * 記事画像、ユーザーアイコンなど未設定時の代替画像パス
  */
 export class Empty {
   /**
+   * 代替画像パス
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
@@ -37,7 +39,6 @@ export class Empty {
   /**
    * img thumbnail 代替画像パス<br>
    * [Ex.] headline, sidebar image...
-   * @readonly
    * @return {string} 代替画像パス【小】
    */
   static get IMG_SMALL():string {
@@ -48,7 +49,6 @@ export class Empty {
   /**
    * img middle 代替画像パス<br>
    * [Ex.] 記事一覧<br>
-   * @readonly
    * @return {string} 代替画像パス【記事一覧】
    */
   static get IMG_MIDDLE():string {
@@ -59,7 +59,6 @@ export class Empty {
   /**
    * img large 代替画像パス<br>
    * [Ex.] スライドショー<br>
-   * @readonly
    * @return {string} 代替画像パス【スライドショー】
    */
   static get IMG_LARGE():string {
@@ -69,9 +68,8 @@ export class Empty {
 
   }
   /**
-   * video thumbnail 代替画像パス<br>
+   * video thumbnail 代替画像パス【16 x 9】<br>
    * [Ex.] sidebar video...
-   * @readonly
    * @return {string} 代替画像パス【16 x 9】
    */
   static get VIDEO_THUMBNAIL():string {
@@ -81,10 +79,9 @@ export class Empty {
 
   }
   /**
-   * video play button overlay<br>
+   * video play button overlay【16 x 9】<br>
    * [Ex.] sidebar video...
-   * @readonly
-   * @return {string} 代替画像パス【小】
+   * @return {string} 代替画像パス【小】【16 x 9】
    */
   static get VIDEO_PLAY():string {
 
@@ -92,10 +89,9 @@ export class Empty {
 
   }
   /**
-   * video play button overlay sidebar small<br>
+   * video play button overlay sidebar small【16 x 9】<br>
    * [Ex.] sidebar video...
-   * @readonly
-   * @return {string} 代替画像パス【小】
+   * @return {string} 代替画像パス【小】【16 x 9】
    */
   static get VIDEO_PLAY_SMALL():string {
 
@@ -105,7 +101,6 @@ export class Empty {
   /**
    * **小** ユーザー・プロファイル・アイコン 代替画像パス (25x25)<br>
    * [Ex.] コメントとか
-   * @readonly
    * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
    */
   static get USER_PICTURE():string {
@@ -116,7 +111,6 @@ export class Empty {
   /**
    * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)<br>
    * [Ex.] コメントとか
-   * @readonly
    * @return {string} 代替画像パス ユーザー・プロファイル・アイコン
    */
   static get USER_PICTURE_FEATURE():string {
@@ -127,7 +121,6 @@ export class Empty {
   /**
    * **大** ユーザー・プロファイル・アイコン 代替画像パス(50x50)透明<br>
    * [Ex.] コメントとか
-   * @readonly
    * @return {string} 代替透明画像パス ユーザー・プロファイル・アイコン
    */
   static get USER_EMPTY():string {

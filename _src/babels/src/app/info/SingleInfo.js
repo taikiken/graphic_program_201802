@@ -25,6 +25,7 @@ let _single;
  */
 export class SingleInfo {
   /**
+   * 記事詳細情報
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
@@ -49,6 +50,7 @@ export class SingleInfo {
   }
 
   /**
+   * 現在表示の記事詳細情報 を設定します
    * @param {SingleDae} article 現在表示の記事詳細情報 SingleDae instance
    */
   static set dae( article:SingleDae ):void {

@@ -45,7 +45,7 @@ export class View extends EventDispatcher {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   *
+   * root element
    * @return {Element|*} render root element を返します
    */
   get element():Element {
@@ -60,7 +60,7 @@ export class View extends EventDispatcher {
     this._element = element;
   }
   /**
-   *
+   * callback handler がセットされたObject
    * @return {Object|*} callback handler がセットされたObjectを返します
    */
   get option():Object {
@@ -75,7 +75,7 @@ export class View extends EventDispatcher {
     this._option = option;
   }
   /**
-   *
+   * Action instance
    * @return {*} Action instance を返します
    */
   get action() {

@@ -26,12 +26,14 @@ export class InterestDae {
     this._interest = interest;
   }
   /**
+   * response.interest
    * @return {Array|*} response.interest を返します
    */
   get interest():Array {
     return this._interest;
   }
   /**
+   * response.interest.category
    * @return {Array} response.interest.category を返します
    */
   get category():Array {

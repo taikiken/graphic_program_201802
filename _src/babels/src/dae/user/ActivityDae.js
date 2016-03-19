@@ -40,6 +40,7 @@ export class ActivityDae {
     this._article = new NoticeArticleDae( activity.article );
   }
   /**
+   * response.notifications
    * @return {Object|*} JSON response.notifications 配列単独データ を返します
    */
   get activity():Object {
@@ -47,24 +48,30 @@ export class ActivityDae {
   }
 
   /**
-   * @return {Number} notifications id を返します
+   * activity.id
+   * @return {Number} activity id を返します
    */
   get id():Number {
     return this.activity.id;
   }
   /**
+   * activity.date
    * @return {string} ISO8601 日付を返します
    */
   get date():string {
     return this.activity.date;
   }
   /**
+   * activity.date をフォーマット
+   * **使用しません**
+   * 代わりに displayDate使用
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {
     return this._formatDate;
   }
   /**
+   * 表示日付
    * @return {string} 相対日付返します
    */
   get displayDate():string {
@@ -83,12 +90,14 @@ export class ActivityDae {
     return this.activity.action;
   }
   /**
+   * activity.user
    * @return {UserDae|*} 誰からの通知かユーザー情報を返します
    */
   get user():UserDae {
     return this._user;
   }
   /**
+   * activity.article
    * @return {NoticeArticleDae|*} 対象記事情報を返します
    */
   get article():NoticeArticleDae {

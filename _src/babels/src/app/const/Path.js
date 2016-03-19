@@ -38,6 +38,7 @@ export class Path {
   //  CONST 代わり
   // ---------------------------------------------------
   /**
+   * 記事 id
    * @return {string} ARTICLE_ID を返します
    */
   static get ARTICLE_ID():string {
@@ -51,6 +52,7 @@ export class Path {
     return Path.ARTICLE_ID;
   }
   /**
+   * コメント id
    * @return {string} COMMENT_ID を返します
    */
   static get COMMENT_ID():string {
@@ -64,6 +66,7 @@ export class Path {
     return Path.COMMENT_ID;
   }
   /**
+   * コメント返信 id
    * @return {string} REPLY_ID を返します
    */
   static get REPLY_ID():string {
@@ -77,6 +80,7 @@ export class Path {
     return Path.REPLY_ID;
   }
   /**
+   * ユーザー id
    * @return {string} USER_ID を返します
    */
   static get USER_ID():string {

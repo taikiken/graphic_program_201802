@@ -23,7 +23,7 @@ import {Length} from '../../app/const/Length';
  */
 export class CategoryAuth extends OffsetAuth {
   /**
-   * 記事一覧を取得します + token
+   * **要認証** 記事一覧を取得します + token
    * @param {string} [slug=all] category slug です
    * @param {string} [type=''] request type, '' | 'ranking' | 'video' です
    * @param {Function} [resolve=null] Ajax 成功時の callback
@@ -52,6 +52,7 @@ export class CategoryAuth extends OffsetAuth {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * category slug
    * @return {string|*} category slug を返します
    */
   get slug():string {
@@ -60,6 +61,7 @@ export class CategoryAuth extends OffsetAuth {
 
   }
   /**
+   * category request 種類('', ranking, video)
    * @return {string|*} request type('', ranking, video) を返します
    */
   get type():string {

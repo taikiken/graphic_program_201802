@@ -20,6 +20,7 @@ import {Queries} from './types/Queries';
  */
 export class Types {
   /**
+   * API url, path option, query 情報
    * @param {Type} type Type instance
    * @param {Permalink} permalink Permalink instance
    * @param {Queries} queries Queries instance
@@ -37,6 +38,7 @@ export class Types {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * Type instance
    * @return {Type} Type instance を返します
    */
   get type():Type {
@@ -46,6 +48,7 @@ export class Types {
   }
 
   /**
+   * Ajax request url
    * @return {string} url を返します
    */
   get url():string {
@@ -55,6 +58,8 @@ export class Types {
   }
 
   /**
+   * request method
+   * POST|GET|PUT|DELETE
    * @return {string} method を返します
    */
   get method():string {
@@ -63,6 +68,7 @@ export class Types {
   }
 
   /**
+   * Permalink instance
    * @return {Permalink} Permalink instance を返します
    */
   get permalink():Permalink {
@@ -72,6 +78,7 @@ export class Types {
   }
 
   /**
+   * Queries instance
    * @return {Queries} Queries instance を返します
    */
   get queries():Queries {
@@ -81,6 +88,7 @@ export class Types {
   }
 
   /**
+   * 認証が必要か否
    * @return {boolean} 認証が必要か否かの真偽値を返します。 true: 必要
    */
   get auth() {
