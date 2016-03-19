@@ -83,7 +83,7 @@ gulp.task 'css:dev', ->
   .pipe $.changed app + '/**', extension: '.css'
   .pipe $.sass(
     precision: 10
-    sourceMap: true
+#    sourceMap: true
     sourceComments: true
   ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
@@ -93,7 +93,9 @@ gulp.task 'css:dev', ->
   .pipe $.sourcemaps.write './', {
     addComment: true
     includeContent: true
-    sourceRoot: ['../../../app', '../../../scss']
+    sourceRoot: ''
+#    sourceRoot: ['./_src/app', './_src/scss']
+#    sourceRoot: ['../../../app', '../../../scss']
   }
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
