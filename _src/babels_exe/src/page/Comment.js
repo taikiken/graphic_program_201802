@@ -90,7 +90,7 @@ export class Comment {
 
       headerUser.start();
 
-      let modalElement = Dom.modal();
+      let modalElement = Dom.logoutModal();
       if ( modalElement !== null ) {
         let modal = new UT.view.modal.ViewLogoutModal( modalElement );
         modal.start();

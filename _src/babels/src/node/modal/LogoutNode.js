@@ -79,11 +79,17 @@ export let LogoutNode = React.createClass( {
     }
   },
   componentDidMount: function() {
+    /*
     let status = LogoutStatus.factory();
     status.on( LogoutStatus.OPEN, this.onOpen );
     status.on( LogoutStatus.CLOSE, this.onClose );
+    */
   },
   componentWillUnMount: function() {
+    /*
+    status.off( LogoutStatus.OPEN, this.onOpen );
+    status.off( LogoutStatus.CLOSE, this.onClose );
+    */
   },
   cancelClick: function( event:Event ) {
     event.preventDefault();

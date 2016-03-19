@@ -274,6 +274,20 @@ export class Dom {
   static modal():Element {
     return Dom.get( 'modal-container' );
   }
+  /**
+   * logout modal
+   * @return {Element} logout-modal-container
+   */
+  static logoutModal():Element {
+    return Dom.get( 'logout-modal-container' );
+  }
+  /**
+   * deactivate modal
+   * @return {Element} deactivate-modal-container
+   */
+  static deactivateModal():Element {
+    return Dom.get( 'deactivate-modal-container' );
+  }
 
   // --------------------------------------
   // mypage

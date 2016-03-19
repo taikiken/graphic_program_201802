@@ -14,6 +14,8 @@
 import {View} from '../View';
 import {LogoutNode} from '../../node/modal/LogoutNode';
 
+import {LogoutStatus} from '../../event/LogoutStatus';
+
 // react
 let ReactDOM = self.ReactDOM;
 
@@ -32,6 +34,7 @@ export class ViewLogoutModal extends View {
     this._render = null;
     this._yes = yesCallback;
     this._no = noCallback;
+    this._status = LogoutStatus.factory();
   }
   /**
    * @param {Function} callback ok / yes callback
@@ -66,6 +69,8 @@ export class ViewLogoutModal extends View {
       );
     }
 
+    this._status.on( LogoutStatus.OPEN, this.onOpen.bind( this ) );
+
   }
   /**
    * 開く
@@ -74,5 +79,10 @@ export class ViewLogoutModal extends View {
     if ( this._render !== null ) {
       this._render.updateShow( true );
     }
+  }
+
+  onOpen():void {
+    console.log( 'logout open event handler will open logout modal........' );
+    this.open();
   }
 }

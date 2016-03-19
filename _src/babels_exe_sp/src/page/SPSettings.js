@@ -55,7 +55,7 @@ export class SPSettings {
    */
   static deactivate():void {
     let settings = Dom.settings();
-    let modal = Dom.modal();
+    let modal = Dom.deactivateModal();
     if ( settings !== null && modal !== null ) {
       let deactivate = new UT.view.signup.ViewDeactivate( settings, modal );
       deactivate.start();
