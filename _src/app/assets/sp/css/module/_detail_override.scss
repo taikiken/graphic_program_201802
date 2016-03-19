@@ -36,9 +36,24 @@
     width: 100%;
     height: auto;
   }
-  .yt-video {
-    min-height: calc(100%/16*9);
+
+  // ----------- youtube -------
+  // youtube video
+  &.post-video-kv-yt {
+    position: relative;
   }
+  // empty image(16x9)
+  .yt-video-size {
+    width: 100%;
+    height: auto;
+  }
+  .yt-video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+  }
+  // ----------- youtube -------
 
   .post-video-start {
     display: none;

@@ -88,7 +88,8 @@ export let SPMediaVideoNode = React.createClass( {
     let video = media.video;
 
     return (
-      <div className="post-kv post-video-kv">
+      <div className="post-kv post-video-kv post-video-kv-yt">
+        <img className="yt-video-size" src={Empty.VIDEO_THUMBNAIL} alt=""/>
         <iframe
           className="yt-video"
           src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
