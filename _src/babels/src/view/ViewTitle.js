@@ -18,7 +18,9 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * title 表示
+ * 記事タイトル 表示
+ * **使用しない**
+ * PHP template で出力
  */
 export class ViewTitle extends View {
   /**
@@ -35,6 +37,7 @@ export class ViewTitle extends View {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * title 文字
    * @return {string|*} title 文字を返します
    */
   get label():string {

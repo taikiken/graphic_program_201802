@@ -90,6 +90,7 @@ export class Model extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * event UNDEFINED_ERROR
+   * Ajax は成功, 存在すべき key が無い or 値が null
    * @return {string} modelUndefinedError を返します
    */
   static get UNDEFINED_ERROR():string {
@@ -97,6 +98,7 @@ export class Model extends EventDispatcher {
   }
   /**
    * event EMPTY_ERROR
+   * Ajax は成功, 存在すべき値は配列で存在するが length 0
    * @return {string} modelEmptyError を返します
    */
   static get EMPTY_ERROR():string {
@@ -104,13 +106,16 @@ export class Model extends EventDispatcher {
   }
   /**
    * event RESPONSE_ERROR
+   * Ajax 失敗
    * @return {string} modelResponseError を返します
    */
   static get RESPONSE_ERROR():string {
     return 'modelResponseError';
   }
   /**
-   * event COMPLETE, action 終了後 success 時に使用します
+   * event COMPLETE
+   * Ajax 成功
+   * action 終了後 success 時に使用します
    * @return {string} modelComplete を返します
    */
   static get COMPLETE():string {

@@ -45,7 +45,6 @@ export class ViewDeactivate extends View {
     super( element, option );
     this._modalElement = modalElement;
   }
-
   /**
    * modal root element
    * @return {Element|*} modal root element を返します
@@ -53,7 +52,6 @@ export class ViewDeactivate extends View {
   get modalElement():Element {
     return this._modalElement;
   }
-
   /**
    * alias render
    */
@@ -124,8 +122,10 @@ export class ViewDeactivate extends View {
           this.model = new ModelSignOut( callback );
         }
       },
+      /*
       componentWillUnMount: function() {
       },
+      */
       clickHandler: function( event ) {
         event.preventDefault();
         let modal = this.modal;

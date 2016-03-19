@@ -111,6 +111,11 @@ export class ViewSingleTitle extends View {
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
 
+    /**
+     * 記事詳細タイトル
+     * @private
+     * @type {ReactClass}
+     */
     let TitleDom = React.createClass( {
       propTypes: {
         title: React.PropTypes.string.isRequired,

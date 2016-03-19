@@ -173,6 +173,7 @@ export class EventDispatcher {
 
     let listeners = this._listeners;
 
+    // typeof でなく hasOwnProperty で調べるように変更した
     if ( !listeners.hasOwnProperty( event.type ) ) {
     // if ( typeof listeners[ event.type ] === 'undefined' ) {
       // listener.type が存在しない
@@ -180,7 +181,7 @@ export class EventDispatcher {
       return;
     }
 
-    // ToDo: deploy 時 log 削除
+    // ToDo: production deploy 時 log 削除
     console.log( 'dispatch ', event );
 
     let types = listeners[ event.type ];

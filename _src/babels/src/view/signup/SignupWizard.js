@@ -48,10 +48,11 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * ユーザー新規登録ウィザード
+ * step 1 ~ step 3 画面遷移をコントロールします
  */
 export class SignupWizard extends View {
   /**
-   * action/Headline を使い Ajax request 後 element へ dom を作成します
+   * ユーザー新規登録ウィザード
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    */
@@ -73,8 +74,10 @@ export class SignupWizard extends View {
     // SignupStatus instance
     this._status = SignupStatus.factory();
 
+    // step No., default 1
     this._step = 1;
 
+    // hash change handler
     this._boundHash = null;
 
     // location hash なしにする
@@ -283,6 +286,18 @@ export class SignupWizard extends View {
 
   /**
    * API request を行うかを query が URL に存在するかで判断します
+   * <pre>
+   *   https://github.com/undotsushin/undotsushin/issues/334#issuecomment-197217112
+   *
+   *   リンク先
+   *   http://dev.undotsushin.com/api/v1/auth/facebook
+   *   http://dev.undotsushin.com/api/v1/auth/twitter
+   *
+   *   リダイレクトURL
+   *   http://dev.undotsushin.com/signup/?oauth=facebook
+   *   http://dev.undotsushin.com/signup/?oauth=twitter
+   *
+   * </pre>
    */
   social():void {
     // query check
@@ -302,6 +317,8 @@ export class SignupWizard extends View {
 
       let value = queries.oauth;
       console.log( 'social request ', queries );
+      // query value
+      // facebook が #(hash) ついていたりして言ってることと違うので チェック項目増やす
       if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
         this.socialRequest();
       }
@@ -336,13 +353,13 @@ export class SignupWizard extends View {
       // JSON に問題がある
       let error = new Error( '[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( View.UNDEFINED_ERROR, error );
-      // this.showError( error.message );
 
     } else {
 
       let status = new StatusDae( result.status );
       console.log( 'socialDone ', status );
       if ( status.code === 200 ) {
+        // status.code 200 の時に success method を呼び出します
         this.success( new UserDae( response ) );
       }
 

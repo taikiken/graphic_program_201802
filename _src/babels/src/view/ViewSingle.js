@@ -38,6 +38,8 @@ import {User} from '../app/User';
  *  related: document.getElementById('related'),
  *  footer: document.getElementById('footer')
  * }
+ * let single = new ViewSingle( articleId, element, elements );
+ * single.start();
  *
  */
 export class ViewSingle extends View {

@@ -92,9 +92,9 @@ export class View extends EventDispatcher {
   //  METHOD
   // ---------------------------------------------------
   /**
-   * option Object に kyeName が存在し型が function かを調べ関数を実行する
+   * option Object に kyeName が存在し型が function かを調べ関数を実行します
    * @param {string} keyName 存在チェックを行う関数キー名
-   * @param {*} [args=] 実行関数への引数
+   * @param {*} [args=] 実行関数へ渡す引数, 不特定多数
    */
   executeSafely( keyName, ...args ):void {
 
@@ -106,6 +106,7 @@ export class View extends EventDispatcher {
 
     }
 
+    // listen しているかもしれないので event を発火させる
     this.dispatch( { type: keyName, args: args } );
 
   }
@@ -114,6 +115,7 @@ export class View extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * event BEFORE_RENDER
+   * ReactDOM.render 前
    * @return {string} viewBeforeRender を返します
    */
   static get BEFORE_RENDER():string {
@@ -121,6 +123,7 @@ export class View extends EventDispatcher {
   }
   /**
    * event WILL_MOUNT
+   * ReactClass.componentWillMount 後
    * @return {string} viewWillMount を返します
    */
   static get WILL_MOUNT():string {
@@ -128,6 +131,7 @@ export class View extends EventDispatcher {
   }
   /**
    * event DID_MOUNT
+   * ReactClass.componentDidMount 後
    * @return {string} viewDidMount を返します
    */
   static get DID_MOUNT():string {
@@ -142,6 +146,7 @@ export class View extends EventDispatcher {
   }
   /**
    * event UNDEFINED_ERROR
+   * Ajax は成功したが設定されるべき key 値が undefined or null の時
    * @return {string} viewUndefinedError を返します
    */
   static get UNDEFINED_ERROR():string {
@@ -149,6 +154,7 @@ export class View extends EventDispatcher {
   }
   /**
    * event EMPTY_ERROR
+   * Ajax は成功したが配列であるべき結果が length 0 の時
    * @return {string} viewEmptyError を返します
    */
   static get EMPTY_ERROR():string {
@@ -156,6 +162,7 @@ export class View extends EventDispatcher {
   }
   /**
    * event RESPONSE_ERROR
+   * Ajax 失敗
    * @return {string} viewResponseError を返します
    */
   static get RESPONSE_ERROR():string {

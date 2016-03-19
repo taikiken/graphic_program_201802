@@ -355,7 +355,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
         // チェックをパスし実行する
         _this._moreRendered = ReactDOM.render(
-          React.createElement( MoreViewDom, { show: show, action: this.action } ),
+          React.createElement( MoreViewDom, { show: show, action: _this.action } ),
           moreElement
         );
 

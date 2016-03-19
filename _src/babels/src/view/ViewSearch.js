@@ -89,7 +89,7 @@ export class ViewSearch extends ViewArchiveMasonry {
 
   }
   /**
-   * ViewError でエラーコンテナを作成します
+   * 検索結果が見つかりませんでした コンテナを作成します
    * @param {string} message エラーメッセージ
    */
   showError( message:string = '' ):void {
@@ -97,6 +97,11 @@ export class ViewSearch extends ViewArchiveMasonry {
     message = Safety.string( message, '' );
     console.warn( 'search error ', message );
 
+    /**
+     * 検索結果が見つかりませんでした コンテナ
+     * @private
+     * @type {ReactClass}
+     */
     let ErrorDom = React.createClass( {
       render: function() {
 

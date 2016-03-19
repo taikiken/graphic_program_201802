@@ -128,6 +128,7 @@ export class ViewSingleHeader extends View {
         _this.executeSafely( View.DID_MOUNT );
 
       },
+      /*
       componentWillUnMount: function() {
         // this.dispose();
       },
@@ -135,6 +136,7 @@ export class ViewSingleHeader extends View {
       // custom method
       dispose: function() {
       },
+      */
       // --------------------------------------------
       // update
       updateSingle: function( single, sign ) {

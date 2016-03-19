@@ -97,7 +97,6 @@ export class ViewSingleFooter extends View {
       }
     } );
 
-
     if ( this._rendered === null ) {
 
       this._rendered = ReactDOM.render(
