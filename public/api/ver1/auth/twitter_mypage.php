@@ -14,6 +14,7 @@ $y=array(
 	"token"=>$access_token["oauth_token_secret"],
 	"id"=>$userinfo->id,
 	"name"=>$userinfo->name,
+	"screen_name"=>$userinfo->screen_name,
 	"email"=>"",
 	"bio"=>$userinfo->description,
 	"profile_picture"=>str_replace(array("_normal","http://"),array("","https://"),$userinfo->profile_image_url)

@@ -25,6 +25,7 @@ $y=array(
 	"token"=>$accessToken->getValue(),
 	"id"=>$userinfo["id"],
 	"name"=>$userinfo["name"],
+	"screen_name"=>$userinfo["name"],
 	"email"=>$userinfo["email"],
 	"bio"=>$userinfo["description"],
 	"profile_picture"=>$picture

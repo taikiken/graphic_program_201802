@@ -12,7 +12,8 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
 	$id=bind($_SESSION["usersinfo"]["id"]);
 	$token=bind($_SESSION["usersinfo"]["token"]);
 	$service=bind($_SESSION["usersinfo"]["service"]);
-	$name=$_SESSION["usersinfo"]["name"];
+	$name=bind($_SESSION["usersinfo"]["name"]);
+	$screen_name=bind($_SESSION["usersinfo"]["screen_name"]);
 	$email=$_SESSION["usersinfo"]["email"];
 	$profile_picture=$_SESSION["usersinfo"]["profile_picture"];
 	$bio=$_SESSION["usersinfo"]["bio"];
@@ -28,9 +29,10 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
 
 b1: Facebook ID
 b2: Facebook Token
+a1: Facebook Name
 b3: Twitter ID
 b4: Twitter Token
-
+a3: Twitter ScreenName
 */
 
 $field="";
@@ -44,16 +46,15 @@ set_social($field,$id,$token);
 
 if($y["status"]["code"]===200){
 	
-	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15,b2,b4 from repo_n where qid=2 and flag=1 and b%s='%s' order by id desc limit 1 offset 0",$field,$id);
+	$sql=sprintf("select id,cid,t20,(select name from repo where id=cid) as label,title,t1,t2,img1,a15,b2,b4,a1,a3 from repo_n where qid=2 and flag=1 and b%s='%s' order by id desc limit 1 offset 0",$field,$id);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
-		
-		if($token!=$f["b".($field+1)]){
-			$sql=sprintf("update repo_n set b%s='%s' where id=%s",($field+1),$token,$f["id"]);
-			$o->query($sql);
-		}
+	
+		$sql=sprintf("update repo_n set b%s='%s'%s where id=%s;",($field+1),$token,strlen($screen_name)>0?sprintf(",a%s='%s'",$field,$screen_name):"",$f["id"]);
+		$o->query($sql);
+	
 		if(strlen($f["t20"])>0){
 			$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,n from pm_ where cid=20 and flag=1) as t2 where t1.categoryid=t2.id order by n",$f["id"]);
 			$o->query($sql);
