@@ -36,6 +36,9 @@
     width: 100%;
     height: auto;
   }
+  .yt-video {
+    min-height: calc(100%/16*9);
+  }
 
   .post-video-start {
     display: none;
