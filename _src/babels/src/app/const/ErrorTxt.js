@@ -86,7 +86,6 @@ export class ErrorTxt {
   static get NAME_EMPTY():string {
     return '名前は必須項目です。';
   }
-
   /**
    * EMAIL_OR_PWD_EMPTY, メールアドレスかパスワードが入力されておりません
    * @return {string} メールアドレスかパスワードが入力されておりません

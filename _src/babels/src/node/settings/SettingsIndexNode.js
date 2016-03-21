@@ -473,9 +473,8 @@ let SettingInputNode = React.createClass( {
 } );
 
 /**
- * <h3>React component<h3>
- * **SettingIndexNode**
  * 基本情報設定
+ * @type {ReactClass}
  */
 export let SettingsIndexNode = React.createClass( {
   propTypes: {
@@ -504,19 +503,12 @@ export let SettingsIndexNode = React.createClass( {
       </div>
     );
 
-  },
+  }/* ,
   // -----------------------------------------------------------
   // delegate
   componentDidMount: function() {
-    /*
-    this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );
-    this.status.on( SignupStatus.SIGNUP_EMAIL, this.emailChange );
-    */
   },
   componentWillUnMount: function() {
-    /*
-    this.status.off( SignupStatus.SIGNUP_STEP, this.stepChange );
-    this.status.off( SignupStatus.SIGNUP_EMAIL, this.emailChange );
-    */
   }
+  */
 } );
