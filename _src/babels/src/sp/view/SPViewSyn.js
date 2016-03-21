@@ -21,6 +21,10 @@ import {User} from '../../app/User';
 // util
 import {Scroll} from '../../util/Scroll';
 import {Loc} from '../../util/Loc';
+import {Time} from '../../util/Time';
+
+// net
+import {Cookie} from '../../net/Cookie';
 
 // node
 import {SPSynItemNode} from '../node/SPSynItemNode';
@@ -71,7 +75,7 @@ class Syn {
     this._menu = null;
     this._motion = false;
     this._y = 0;
-    this._interval = 0;
+    // this._interval = 0;
     this._ready = false;
   }
   /**
@@ -150,6 +154,19 @@ class Syn {
       document.getElementById( parts.logo ).style.cssText = 'display: block;';
 
     }
+
+    // 訪問経験があるかを調べる
+    this.visitCheck();
+
+  }
+  /**
+   * 訪問経験があるかを調べ, cookie がなかったら menu を開く
+   */
+  visitCheck() {
+    if ( !Syn.visited() ) {
+      // cookie が無いので menu を open する
+      this.open( this._side, this._sideDom );
+    }
   }
   /**
    * service_notification_load event listener
@@ -208,6 +225,11 @@ class Syn {
     this._motion = true;
     let _this = this;
 
+    // cookie set
+    // menu を開くと cookie expire を延長
+    Syn.visit();
+
+    // 500ms 後に motion flag を false にします
     setTimeout( function() {
       _this._motion = false;
     }, 500 );
@@ -229,7 +251,10 @@ class Syn {
     // height 設定
     this.setHeight( side );
   }
-
+  /**
+   * menu open 時に高さをセットします
+   * @param {Element} side side menu
+   */
   setHeight( side:Element ):void {
     // wrapper ul の高さ px 付き
     let heightPx = this._listDom.style( 'height' );
@@ -276,12 +301,14 @@ class Syn {
     }, 400 );
 
   }
-
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
   /**
    * 自身の script tag src query syn を探し '1' か否かを調べ真偽値を返します
    * @return {boolean} syn=1 かの真偽値を返します
    */
-  static test():boolean {
+  static test():Boolean {
     let scripts = document.getElementsByTagName( 'head' )[ 0 ].getElementsByTagName( 'script' );
     let search;
 
@@ -306,6 +333,21 @@ class Syn {
       return queries.syn === '1';
     }
 
+  }
+  /**
+   * 訪問経験があるかを cookie から調べます
+   * @return {boolean} 訪問経験があるかの真偽値を返します
+   */
+  static visited():Boolean {
+    return parseInt( Cookie.get( Cookie.SYN ), 10 ) === 1;
+  }
+  /**
+   * 訪問 cookie をセットします
+   * @return {Boolean} セット成功可否を返します
+   */
+  static visit():Boolean {
+    // 2 weeks set
+    return Cookie.save( '1', Cookie.SYN, Time.later( 14 ) );
   }
 }
 

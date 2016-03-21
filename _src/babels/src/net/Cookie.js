@@ -38,10 +38,20 @@ export class Cookie {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * TARGET
+   * token cookie name
    * @return {string} cookie key name を返します
    */
   static get TARGET():string {
     return 'auth_token';
+  }
+  /**
+   * SYN
+   * Syn. menu を開いた時にセットする cookie name
+   * @return {string} Syn. menu を開いた時にセットする cookie name を返します
+   */
+  static get SYN():string {
+    return 'visited';
   }
   /**
    * cookie value を取得します
@@ -64,7 +74,7 @@ export class Cookie {
    * @param {boolean} [secure=false] https通信のときのみ、クッキーが送信されます
    * @return {boolean} 保存 成功か否かの真偽値 を返します
    */
-  static save( value:string, keyName:string = Cookie.TARGET, end:Date = new Date( Date.now() + (1000 * 60 * 60 * 24 * 90)), path:string = '/', domain:string = '', secure:boolean = false ):boolean {
+  static save( value:string, keyName:string = Cookie.TARGET, end:Date = new Date( Date.now() + (1000 * 60 * 60 * 24 * 90) ), path:string = '/', domain:string = '', secure:Boolean = false ):Boolean {
 
     value = Safety.string( value, '' );
     keyName = Safety.string( keyName, Cookie.TARGET );

@@ -36,10 +36,9 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * <h3>React component<h3>
- * **SettingsInterestNode**
  * パーソナライズ設定
  * 興味のある競技
+ * @type {ReactClass}
  */
 export let SettingsInterestNode = React.createClass( {
   propTypes: {
