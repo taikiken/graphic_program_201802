@@ -207,15 +207,23 @@ export class ViewHeaderMember extends View {
         notice.start();
 
         // console.log( '*** header member componentDidMount ', this.modal );
+        /*
+        if ( this.modal === null ) {
+          let modal;
 
-        if ( this.modal === null && _this._modal !== null ) {
-          let modal = _this._modal;
+          if ( _this._modal !== null && typeof _this._modal !== 'undefined' ) {
+            modal = _this._modal;
+          } else {
+            _this._modal = {};
+            modal = _this._modal;
+          }
+
           this.modal = modal;
           modal.yes = this.callbackOk;
           modal.no = this.callbackCancel;
           modal.start();
         }
-
+        */
       },
       componentWillUnmount: function() {
         this.destroy();
