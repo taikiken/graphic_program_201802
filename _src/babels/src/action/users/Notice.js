@@ -27,7 +27,7 @@ export class Notice extends OffsetAuth {
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
    */
-  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
+  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.list ) {
     super( User.token, Api.notice( '' ), resolve, reject, offset, length );
   }
   // reload 追加

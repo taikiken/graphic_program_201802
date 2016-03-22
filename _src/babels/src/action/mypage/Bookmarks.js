@@ -28,7 +28,7 @@ export class Bookmarks extends OffsetAuth {
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
    */
-  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
+  constructor( resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.list ) {
     super( User.token, Api.users( 'self:bookmark' ), resolve, reject, offset, length );
   }
 }
