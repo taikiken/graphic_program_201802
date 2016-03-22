@@ -257,7 +257,6 @@ gulp.task 'dev:init', (cb) ->
     'sprite:build'
     'single:dev'
     'bundle:copy'
-    'libs:copy'
     'libs:synapse:dev'
 #      'html:build'
     'js:dev'
@@ -270,6 +269,7 @@ gulp.task 'dev:init', (cb) ->
       'sp:css:dev'
       'sp:image:copy'
     ]
+    'libs:copy'
     cb
   )
   return
@@ -289,7 +289,6 @@ gulp.task 'default', (cb) ->
     'sp:exe:build'
     'single:build'
     'bundle:copy'
-    'libs:copy'
     'libs:synapse:build'
     #'html:build'
     'js:build'
@@ -304,6 +303,7 @@ gulp.task 'default', (cb) ->
       'sp:css:build'
       'sp:image:build'
     ]
+    'libs:copy'
     'clean:all'
     'lec:build'
     cb

@@ -77,7 +77,7 @@ vendors = []
 ###
 gulp.task 'vendor:react:build', ->
   return gulp.src [
-    exports + '/es6-promise/promise.js'
+    exports + '/es6-promise/promise.min.js'
     exports + '/fetch/fetch.js'
     exportsPath + '/react/react.min.js'
     exportsPath + '/react/react-dom.min.js'
@@ -89,6 +89,7 @@ gulp.task 'vendor:react:build', ->
   .pipe $.concat 'vendor.react.js'
   .pipe $.uglify preserveComments: 'license'
   .pipe gulp.dest dir.libs
+  .pipe gulp.dest htdocs + '/assets/js/libs'
   .pipe $.size title: '*** vendor:react:build ***'
 
 ###
@@ -108,6 +109,7 @@ gulp.task 'vendor:react:dev', ->
   ]
   .pipe $.concat 'vendor.react.js'
   .pipe gulp.dest dir.libs
+  .pipe gulp.dest htdocs + '/assets/js/libs'
   .pipe $.size title: '*** vendor:react:dev ***'
 
 ###
@@ -133,9 +135,6 @@ gulp.task 'vendor:copy', ->
 # --------------------------------------------
 # 【開発】
 gulp.task 'vendor:dev', ['vendor:copy', 'vendor:react:dev'], ->
-  runSequence(
-    'libs:copy'
-  )
   return
 
 # --------------------------------------------
