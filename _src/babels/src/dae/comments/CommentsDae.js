@@ -10,7 +10,7 @@
  *
  */
 
-'use strict';
+
 
 import {PopularDae} from './PopularDae';
 // import {CommentsPopularDae} from '../CommentsPopularDae';

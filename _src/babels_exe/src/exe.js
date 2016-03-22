@@ -11,7 +11,7 @@
  * @requires UT
  *
  */
-'use strict';
+
 
 /**
  * UT library を使い実行します

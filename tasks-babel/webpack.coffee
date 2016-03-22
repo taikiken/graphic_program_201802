@@ -144,7 +144,10 @@ gulp.task 'webpack:babels:exe:babel:build', ( cb ) ->
 
   conf.plugins = [
     new webpack.optimize.DedupePlugin()
-    new webpack.optimize.UglifyJsPlugin compress: warnings: false
+    new webpack.optimize.UglifyJsPlugin( {
+        compress: {warnings: false}
+        comments: '@preserve'
+      } )
   ]
   conf.entry = conf.entry + '/_src/babels_exe/compile/exe.js'
   conf.output.filename = 'exe.bundle.js'

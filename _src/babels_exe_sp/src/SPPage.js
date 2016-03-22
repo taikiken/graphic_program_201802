@@ -9,8 +9,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
-
 
 import {SPPageTop} from './ui/SPPageTop';
 import {SPNav} from './ui/SPNav';

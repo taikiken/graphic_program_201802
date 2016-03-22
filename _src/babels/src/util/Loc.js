@@ -10,7 +10,7 @@
  *
  */
 
-'use strict';
+
 
 import {Url} from '../app/const/Url';
 

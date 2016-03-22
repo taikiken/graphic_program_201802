@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 /**
  * Types.url へ追加可能なpathがあるかどうかを管理します

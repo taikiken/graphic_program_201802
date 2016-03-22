@@ -9,13 +9,20 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 import {OffsetAuth} from '../OffsetAuth';
-import {Api} from '../../net/Api';
+
+// app
 import {User} from '../../app/User';
 import {Path} from '../../app/const/Path';
 import {CommentsType} from '../../app/const/CommentsType';
+import {Length} from '../../app/const/Length';
+
+// net
+import {Api} from '../../net/Api';
+
+// data
 import {Safety} from '../../data/Safety';
 
 let _symbol = Symbol();
@@ -35,8 +42,11 @@ export class Comments extends OffsetAuth {
    * @param {string} [type=''] 取得コメント種類, ''|normal|official|self
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
-   */
-  constructor( target:Symbol, id:Number, type:string = '', resolve:Function = null, reject:Function = null ) {
+   * @param {Number} [offset=0] query offset 値
+   * @param {Number} [length=10] query length 値
+   *
+   * */
+  constructor( target:Symbol, id:Number, type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.list ) {
     if ( _symbol !== target ) {
 
       throw new Error( `not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()` );
@@ -45,7 +55,7 @@ export class Comments extends OffsetAuth {
 
     type = Safety.string( type, '' );
 
-    super( User.token, Api.comment( type ), resolve, reject );
+    super( User.token, Api.comment( type ), resolve, reject, offset, length );
     this._id = id;
   }
   // ---------------------------------------------------

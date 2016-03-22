@@ -10,7 +10,7 @@
  *
  */
 
-'use strict';
+
 
 import {Ranking} from '../archive/Ranking';
 import {Videos} from '../archive/Videos';

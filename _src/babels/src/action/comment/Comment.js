@@ -7,7 +7,7 @@
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  */
-'use strict';
+
 
 import {ActionAuthBehavior} from '../ActionAuthBehavior';
 import {Api} from '../../net/Api';

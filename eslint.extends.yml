@@ -71,7 +71,7 @@ rules:
   no-use-before-define: 2
   no-useless-concat: 2
   no-with: 2
-  quotes: [2, "single"]
+  quotes: [2, "single", "avoid-escape"]
   radix: 2
   require-jsdoc: 1
   semi: 2

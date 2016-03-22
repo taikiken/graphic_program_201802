@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 import {TypeDae} from './user/TypeDae';
 import {InterestDae} from './user/InterestDae';

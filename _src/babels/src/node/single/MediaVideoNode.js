@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 import {Empty} from '../../app/const/Empty';
 import {VideoType} from '../../app/const/VideoType';

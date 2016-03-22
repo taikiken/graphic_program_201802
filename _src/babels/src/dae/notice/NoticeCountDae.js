@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 // import {Safety} from '../../data/Safety';
 import {StatusDae} from '../../dae/StatusDae';
