@@ -175,7 +175,12 @@
 }
 
 .lnav {
-  &.fixed {
+  // 2016-03-22
+  // tab を上部へ移動
+  &.fixed-top {
+    position: fixed;
+    left: 0;
+    top: 100px;
     z-index: 100;
   }
   &.latest {

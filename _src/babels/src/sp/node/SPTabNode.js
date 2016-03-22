@@ -25,7 +25,7 @@ export let SPTabNode = React.createClass( {
   getInitialState: function() {
     return {
       current: 'latest',
-      fixed: 'fixed'
+      fixed: 'fixed-top'
     };
   },
   render: function() {

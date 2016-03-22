@@ -49,9 +49,10 @@
     &-link {
       @include link-decoration(#999, #999, none, none);
       display: block;
-      line-height: 1em;
-      padding: (26/2)+px 0;
-      background-color: #111;
+      height: (80/2)+px;
+      line-height: (80/2)+px;
+      // padding: (26/2)+px 0;
+      background-color: #333;
       font-weight: bold;
       font-size: fz(24/2);
       text-align: center;
@@ -75,13 +76,28 @@
       }
 
       &.current {
-        color: #fff;
-        background-color: $highlight-color;
+        color: $highlight-color;
+        background-color: #eee;
+      }
 
+      &_new.current {
         .lnav-icon:before {
-          opacity: 1;
+          @include sprite( $list-icon-new_o, inline-block );
         }
       }
+
+      &_popular.current {
+        .lnav-icon:before {
+          @include sprite( $list-icon-popular_o, inline-block );
+        }
+      }
+
+      &_movie.current {
+        .lnav-icon:before {
+          @include sprite( $list-icon-movie_o, inline-block );
+        }
+      }
+
     }
 
     &-icon {
@@ -92,13 +108,7 @@
         margin-top: -3px;
         margin-right: 5px;
         vertical-align: middle;
-        opacity: .7;
       }
-    }
-
-    &.fixed {
-      position: fixed;
-      bottom: 0;
     }
   }
 }
