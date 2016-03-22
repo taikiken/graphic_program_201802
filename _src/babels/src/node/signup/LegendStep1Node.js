@@ -270,10 +270,10 @@ export let LegendStep1Node = React.createClass( {
           <ul className="linkage-sns-list">
             <li className="linkage-sns-item">
               {/* https://github.com/undotsushin/undotsushin/issues/334 */}
-              <a href={Api.auth('tw').url} className="linkage-sns-link linkage-sns-tw"><span>twitterで新規登録</span></a>
+              <a href={Api.auth('tw').url} className="linkage-sns-link linkage-sns-tw"><span>Twitterで新規登録</span></a>
             </li>
             <li className="linkage-sns-item">
-              <a href={Api.auth('fb').url} className="linkage-sns-link linkage-sns-fb"><span>facebookで新規登録</span></a>
+              <a href={Api.auth('fb').url} className="linkage-sns-link linkage-sns-fb"><span>Facebookで新規登録</span></a>
             </li>
           </ul>
         </div>
