@@ -83,6 +83,9 @@ a {
 
   //transition-property: margin-top;
   //transition-duration: 0.05s;
+  &.category {
+    margin-top: 140px;
+  }
 }
 .search-form-open {
   .body-sec {

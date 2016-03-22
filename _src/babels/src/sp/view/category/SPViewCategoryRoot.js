@@ -67,20 +67,22 @@ export class SPViewCategoryRoot extends View {
       render: function() {
 
         return (
-          <div className={`archive-container ${this.state.current}`}>
-            <div className="archive-latest board-large" ref="latest">
-              <div className="archive-latest-container" ref="latestElement"></div>
-              <div className="archive-latest-container-more" ref="latestMoreElement"></div>
-            </div>
-            <div className="archive-ranking board-large" ref="ranking">
-              <div className="archive-latest-container" ref="rankingElement"></div>
-              <div className="archive-latest-container-more" ref="rankingMoreElement"></div>
-            </div>
-            <div className="archive-videos board-large" ref="videos">
-              <div className="archive-latest-container" ref="videosElement"></div>
-              <div className="archive-latest-container-more" ref="videosMoreElement"></div>
-            </div>
+          <div>
             <div className="archive-tab" ref="tab"></div>
+            <div className={`archive-container ${this.state.current}`}>
+              <div className="archive-latest board-large" ref="latest">
+                <div className="archive-latest-container" ref="latestElement"></div>
+                <div className="archive-latest-container-more" ref="latestMoreElement"></div>
+              </div>
+              <div className="archive-ranking board-large" ref="ranking">
+                <div className="archive-latest-container" ref="rankingElement"></div>
+                <div className="archive-latest-container-more" ref="rankingMoreElement"></div>
+              </div>
+              <div className="archive-videos board-large" ref="videos">
+                <div className="archive-latest-container" ref="videosElement"></div>
+                <div className="archive-latest-container-more" ref="videosMoreElement"></div>
+              </div>
+            </div>
           </div>
         );
 
@@ -123,14 +125,6 @@ export class SPViewCategoryRoot extends View {
       // 切替 tab
       tab: function():void {
         let element = ReactDOM.findDOMNode(this.refs.tab);
-        /*
-        this.tabNode = ReactDOM.render(
-          <SPTabNode
-            callback={this.tabClick}
-          />,
-          element
-        );
-        */
         ReactDOM.render(
           <SPTabNode
             callback={this.tabClick}
