@@ -2,6 +2,7 @@
  * Copyright (c) 2011-@@year inazumatv.com, @@copyright.
  * @author (at)taikiken / http://inazumatv.com
  * @date @@buildTime
+ * @license
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -204,6 +205,7 @@ import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
  */
 var UT = {
   version: '@@version',
+  build: '@@buildTime',
   app: {
     // Env: Env,
     App: App,

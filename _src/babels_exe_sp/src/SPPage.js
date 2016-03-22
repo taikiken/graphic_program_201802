@@ -10,7 +10,6 @@
  *
  */
 
-
 import {SPPageTop} from './ui/SPPageTop';
 import {SPNav} from './ui/SPNav';
 import {SPSyn} from './ui/SPSyn';
