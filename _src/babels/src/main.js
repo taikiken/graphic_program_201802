@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2011-@@year inazumatv.com, @@copyright.
+ * @copyright (c) 2011-@@year inazumatv.com, @@copyright.
  * @author (at)taikiken / http://inazumatv.com
  * @date @@buildTime
  * @license
@@ -11,7 +11,7 @@
  *
  * @requires React, Sagen.js. IE: fetch, es5-promise
  */
-
+'use strict';
 
 // -------------------------------------
 //  main
