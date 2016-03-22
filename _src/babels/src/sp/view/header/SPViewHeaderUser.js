@@ -111,5 +111,31 @@ export class SPViewHeaderUser extends View {
     }
     this.dispatch( event );
 
+    if ( event.type === View.RESPONSE_ERROR || event.type === View.UNDEFINED_ERROR || event.type === View.EMPTY_ERROR ) {
+      // token はあるけどユーザー情報が取得できなかった
+      // 処理を止めて一般ユーザー扱いにする
+      this.dispose();
+      this.render();
+    }
+  }
+  /**
+   * member event handler dispose
+   */
+  dispose():void {
+    let member = this._member;
+
+    if ( member !== null ) {
+
+      let boundCallback = this._boundCallback;
+      member.off( View.BEFORE_RENDER, boundCallback );
+      member.off( View.WILL_MOUNT, boundCallback );
+      member.off( View.DID_MOUNT, boundCallback );
+      member.off( View.ERROR_MOUNT, boundCallback );
+      member.off( View.UNDEFINED_ERROR, boundCallback );
+      member.off( View.EMPTY_ERROR, boundCallback );
+      member.off( View.RESPONSE_ERROR, boundCallback );
+      this._member = null;
+
+    }
   }
 }
