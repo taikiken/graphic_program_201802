@@ -46,12 +46,15 @@ export let HeaderSearchNode = React.createClass( {
     };
 
     return {
+      focus: '',
       keyword: '',
       enable: '',
       error: false
     };
   },
   render: function() {
+
+    let _this = this;
 
     let errorClass = ( keyName:string ) => {
       return this.errors[ keyName ].error ? 'error' : '';
@@ -62,9 +65,13 @@ export let HeaderSearchNode = React.createClass( {
         <form onSubmit={this.submitHandler}>
           <input
             type="text"
-            ref="searchText"
+            ref={function( input ) {
+              _this.input = input;
+            }}
             placeholder={Message.PLACEHOLDER_SEARCH}
-            value={this.state.keyword} onChange={this.changeHandler}
+            value={this.state.keyword}
+            onChange={this.changeHandler}
+            autoFocus="true"
           />
           <input type="submit" value={Message.SUBMIT_SEARCH}/>
         </form>
@@ -79,9 +86,11 @@ export let HeaderSearchNode = React.createClass( {
       status.on( SearchStatus.CLOSE, this.close );
     }
 
+    /*
     if ( this.input === null ) {
       this.input = ReactDOM.findDOMNode( this.refs.searchText );
     }
+    */
   },
   componentWillUnMount: function() {
     if ( this.status !== null ) {
@@ -113,10 +122,19 @@ export let HeaderSearchNode = React.createClass( {
   open: function() {
     this.reset();
     this.setState( { enable: 'enable' } );
-    this.input.focus();
+    // this.input.focus();
+    // ReactDOM.findDOMNode( this.refs.searchText ).focus();
+    /*
+    console.log( 'open input', ReactDOM.findDOMNode( this.refs.searchText ) );
+    this.setState( {focus: 'focus='} );
+    */
+    // ToDo: open event 経由の時の focus
+    if ( this.input !== null ) {
+      this.input.focus();
+    }
   },
   close: function() {
     this.setState( { enable: '' } );
-    this.input.blur();
+    // this.input.blur();
   }
 } );

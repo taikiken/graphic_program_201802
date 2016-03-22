@@ -116,7 +116,7 @@ export class ViewHeaderUser extends View {
    * ViewHeaderMember callback 中継
    * @param {Object} event event object
    */
-  memberCallback( event ):void {
+  memberCallback( event:Object ):void {
 
     let member = this._member;
     let callback = this._boundCallback;
@@ -125,6 +125,12 @@ export class ViewHeaderUser extends View {
     }
     this.dispatch( event );
 
+    if ( event.type === View.RESPONSE_ERROR || event.type === View.UNDEFINED_ERROR || event.type === View.EMPTY_ERROR ) {
+      // token はあるけどユーザー情報が取得できなかった
+      // 処理を止めて一般ユーザー扱いにする
+      this.dispose();
+      this.render();
+    }
   }
   /**
    * member event handler dispose

@@ -2,6 +2,8 @@
   "source": "./src",
   "destination": "./_docs",
   "plugins": [
-    {"name": "esdoc-es7-plugin"}
+    {
+      "name": "esdoc-es7-plugin"
+    }
   ]
 }

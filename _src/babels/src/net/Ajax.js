@@ -15,6 +15,9 @@
 import {Codes} from './../app/Codes';
 import {Result} from '../data/Result';
 
+// dae
+import {StatusDae} from '../dae/StatusDae';
+
 /**
  * 非同期通信でJSONを取得します
  */
@@ -116,6 +119,7 @@ export class Ajax {
         let error = new Error( `status:${status}, message:${response.statusText}` );
 
         error.result = new ResultClass( response.json() );
+        error.status = new StatusDae( status );
         throw error;
 
       }
@@ -138,6 +142,7 @@ export class Ajax {
         let code = result.status.code;
         let error = new Error( `status:${code}, user:${result.status.user_message}, dev:${result.status.developer_message}` );
         error.result = result;
+        error.status = new StatusDae( result.status );
         throw error;
 
       }

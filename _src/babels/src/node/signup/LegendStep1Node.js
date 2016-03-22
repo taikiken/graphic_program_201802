@@ -224,7 +224,10 @@ let Step1FormNode = React.createClass( {
   },
   fail: function( error:Error ) {
     // console.log( 'fail ', error.result.response.errors );
-    this.errors.errorEmail.message = error.result.response.errors.email;
+    // response が null に変わった 2016-03-22
+    // this.errors.errorEmail.message = error.result.response.errors.email;
+    this.errors.errorEmail.message = error.status.userMessage;
+
     this.setState( { errorEmail: true } );
   },
   reset: function() {
