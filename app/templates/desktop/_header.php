@@ -43,11 +43,7 @@
 
   <!-- favicon -->
   <link rel="shortcut icon" href="/assets/images/common/favicon.ico">
-
-  <link rel="stylesheet" href="/assets/css/ui.css">
-  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="/assets/js/libs/vendor.min.js"></script>
-  <script src="/assets/js/libs/vendor.react.js"></script>
+  
   <link rel="stylesheet" href="/assets/css/ui.css">
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
