@@ -21,6 +21,9 @@
   <meta name="description" content="説明文">
   <meta name="keywords" content="キーワード, キーワード, キーワード">
 
+  <!-- app install banner -->
+  <meta name="apple-itunes-app" content="app-id=1086719653">
+
   <!-- sns ogp -->
   <meta property="og:title" content="<?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?>">
   <meta property="og:type" content="<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>">
