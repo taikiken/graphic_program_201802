@@ -10,7 +10,7 @@
  *
  */
 
-'use strict';
+
 
 import {EventDispatcher} from '../event/EventDispatcher';
 import {Safety} from '../data/Safety';

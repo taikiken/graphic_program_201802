@@ -11,7 +11,7 @@
  */
 // comment 取得 [type]
 
-'use strict';
+
 
 import {Query} from './Query';
 

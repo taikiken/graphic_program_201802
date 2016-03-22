@@ -10,7 +10,7 @@
  *
  * @requires React, Sagen.js. IE: fetch, es5-promise
  */
-'use strict';
+
 
 // -------------------------------------
 //  main

@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 // 2016-03-15
 // design 変更により タイトル と メイン画像 を分離出力する必要が出たので作成する

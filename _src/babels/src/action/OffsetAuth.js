@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 import {Offset} from './Offset';
 // import {User} from '../app/User';
@@ -36,12 +36,12 @@ export class OffsetAuth extends Offset {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値
-   * @param {Number} [length=10] query length 値
+   * @param {Number} [length=16] query length 値
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
   constructor( token:string, types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
     /*
-    // ログインか必須かよくわからない
+    // ログイン必須かよくわからない
     if ( !User.sign ) {
       // not login
       throw new Error( `Authorization required.` );

@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 import {MessageStatus} from '../../event/MessageStatus';
 import {Message} from '../../app/const/Message';

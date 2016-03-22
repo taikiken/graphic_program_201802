@@ -1,4 +1,4 @@
-'use strict';
+
 
 // app
 import {Empty} from '../../../../app/const/Empty';

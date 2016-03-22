@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 import {CommentFormOpenerNode} from '../../../node/comment/form/CommentFormOpenerNode';
 import {SPCommentFormElementNode} from './form/SPCommentFormElementNode';
 

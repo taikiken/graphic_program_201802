@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-'use strict';
+
 
 let _symbol = Symbol();
 let _pickup = 5;
@@ -129,7 +129,7 @@ export class Length {
   // --- archive
   /**
    * 記事一覧
-   * @default 10
+   * @default 16
    * @return {Number} archive default 取得数を返します
    */
   static get archive():Number {
