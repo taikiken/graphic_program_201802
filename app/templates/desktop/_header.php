@@ -29,8 +29,8 @@
   <!-- sns ogp -->
   <meta property="og:title" content="<?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?>">
   <meta property="og:type" content="<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>">
-  <meta property="og:image" content="http://undotsushin.com/assets/images/common/og_image.png">
-  <meta property="og:url" content="http://www.undotsushin.com/">
+  <meta property="og:image" content="https://undotsushin.com/assets/images/common/og_image.png">
+  <meta property="og:url" content="https://www.undotsushin.com/">
   <meta property="og:description" content="説明文">
 
   <!-- twitter card -->
