@@ -174,35 +174,6 @@
   overflow: hidden;
 }
 
-.lnav {
-  // 2016-03-22
-  // tab を上部へ移動
-  &.fixed-top {
-    position: fixed;
-    left: 0;
-    top: 100px;
-    z-index: 100;
-  }
-  &.latest {
-    .lnav-link_new {
-      color: #fff;
-      background-color: #e1438b;
-    }
-  }
-  &.ranking {
-    .lnav-link_popular {
-      color: #fff;
-      background-color: #e1438b;
-    }
-  }
-  &.videos {
-    .lnav-link_movie {
-      color: #fff;
-      background-color: #e1438b;
-    }
-  }
-}
-
 // -------------------------------------------------
 // sp info
 .info {

@@ -28,6 +28,13 @@
 .lnav {
   width: 100%;
 
+  &.fixed-top {
+    position: fixed;
+    left: 0;
+    top: 100px;
+    z-index: 100;
+  }
+
   @at-root {
     &-list {
       display: table;
@@ -75,29 +82,6 @@
         }
       }
 
-      &.current {
-        color: $highlight-color;
-        background-color: #eee;
-      }
-
-      &_new.current {
-        .lnav-icon:before {
-          @include sprite( $list-icon-new_o, inline-block );
-        }
-      }
-
-      &_popular.current {
-        .lnav-icon:before {
-          @include sprite( $list-icon-popular_o, inline-block );
-        }
-      }
-
-      &_movie.current {
-        .lnav-icon:before {
-          @include sprite( $list-icon-movie_o, inline-block );
-        }
-      }
-
     }
 
     &-icon {
@@ -108,6 +92,31 @@
         margin-top: -3px;
         margin-right: 5px;
         vertical-align: middle;
+      }
+    }
+
+    &.latest .lnav-link_new,
+    &.ranking .lnav-link_popular,
+    &.videos .lnav-link_movie {
+      color: $highlight-color;
+      background-color: #eee;
+    }
+
+    &.latest .lnav-link_new {
+      .lnav-icon:before {
+        @include sprite( $list-icon-new_o, inline-block );
+      }
+    }
+
+    &.ranking .lnav-link_popular {
+      .lnav-icon:before {
+        @include sprite( $list-icon-popular_o, inline-block );
+      }
+    }
+
+    &.videos .lnav-link_movie {
+      .lnav-icon:before {
+        @include sprite( $list-icon-movie_o, inline-block );
       }
     }
   }
