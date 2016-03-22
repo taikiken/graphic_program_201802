@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>: http://ogp.me/ns/<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>#">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -21,13 +21,26 @@
   <meta name="description" content="説明文">
   <meta name="keywords" content="キーワード, キーワード, キーワード">
 
+  <!-- sns ogp -->
   <meta property="og:title" content="<?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?>">
   <meta property="og:type" content="<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>">
-  <meta property="og:image" content="http://www.undotsushin.com/img/common/sns.png">
+  <meta property="og:image" content="http://undotsushin.com/assets/images/common/og_image.png">
   <meta property="og:url" content="http://www.undotsushin.com/">
   <meta property="og:description" content="説明文">
 
-  <link rel="shortcut icon" href="/favicon.ico">
+  <!-- twitter card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@undotsushin">
+
+  <!-- favicon -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/images/common/favicon.ico">
+
   <link rel="stylesheet" href="/assets/sp/css/ui.css">
   <?php
   // header 表示条件 設定
