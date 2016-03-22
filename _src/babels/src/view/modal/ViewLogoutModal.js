@@ -80,7 +80,10 @@ export class ViewLogoutModal extends View {
       this._render.updateShow( true );
     }
   }
-
+  /**
+   * LogoutStatus.OPEN event handler
+   * event が発生したら this.open を実行します
+   */
   onOpen():void {
     console.log( 'logout open event handler will open logout modal........' );
     this.open();
