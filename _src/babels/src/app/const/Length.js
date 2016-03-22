@@ -17,7 +17,8 @@ let _pickup = 5;
 let _headline = 5;
 let _ranking = 5;
 let _video = 5;
-let _archive = 10;
+let _archive = 16;
+let _list = 10;
 let _max = 999;
 
 // polling 間隔
@@ -141,6 +142,26 @@ export class Length {
   static set archive( value:Number ):void {
     if ( Number.isInteger( value ) ) {
       _archive = value;
+    } else {
+      throw new Error( `archive: integer required. ${value}` );
+    }
+  }
+  // --- list
+  /**
+   * mypage 一覧
+   * @default 10
+   * @return {Number} archive default 取得数を返します
+   */
+  static get list():Number {
+    return _list;
+  }
+  /**
+   * mypage 一覧, length を設定します
+   * @param {Number} value archive default 取得数
+   */
+  static set list( value:Number ):void {
+    if ( Number.isInteger( value ) ) {
+      _list = value;
     } else {
       throw new Error( `archive: integer required. ${value}` );
     }
