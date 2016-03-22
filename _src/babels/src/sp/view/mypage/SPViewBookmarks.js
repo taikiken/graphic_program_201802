@@ -123,7 +123,9 @@ export class SPViewBookmarks extends ViewBookmarks {
                   if ( !thumbnail ) {
                     thumbnail = Empty.IMG_SMALL;
                   } else if ( !Safety.isImg( thumbnail ) ) {
-                    thumbnail = Empty.IMG_SMALL;
+                    if ( !Safety.isGraph( thumbnail ) ) {
+                      thumbnail = Empty.IMG_SMALL;
+                    }
                   }
 
                   let category = ( label ):string => {

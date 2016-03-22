@@ -91,7 +91,9 @@
       必要ないとのことなので front からの出力をやめる
       静的HTMLに置きかえる
       <div id="single-related-container"></div>
-      */ ?>
+
+      pop in 始まったようなのでコメントにする
+      ToDo: 削除可能確認できたらブロックごと削除する
 
       <div class="related-post">
         <div class="comment-heading">
@@ -162,7 +164,7 @@
         </ul>
 
       </div><!-- /.related-post -->
-
+*/ ?>
 
       <!-- #310 popin ebmed code  -->
       <div id="_popIn_recommend"></div>

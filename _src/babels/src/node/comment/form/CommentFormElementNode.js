@@ -116,7 +116,9 @@ export let CommentFormElementNode = React.createClass( {
       } else if ( !Safety.isImg( picture ) ) {
         // 画像ファイル名に拡張子がないのがあったので
         // 拡張子チェックを追加
-        picture = Empty.USER_EMPTY;
+        if ( !Safety.isGraph( picture ) ) {
+          picture = Empty.USER_EMPTY;
+        }
       }
 
       let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';

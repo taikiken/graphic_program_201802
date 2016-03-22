@@ -166,4 +166,12 @@ export class Safety {
     }
     return bool;
   }
+  /**
+   * path に `graph.facebook.com` が含まれているかを調べます
+   * @param {string} path 調査対象パス
+   * @return {boolean} ath に `graph.facebook.com` が含まれているかの真偽値を返します
+   */
+  static isGraph( path:string ):Boolean {
+    return path.indexOf( 'graph.facebook.com' ) !== -1;
+  }
 }

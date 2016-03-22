@@ -114,6 +114,7 @@ export class Page {
 
     router.route();
 
+    // scroll 位置調整
     window.addEventListener( 'load', Page.stick, false );
   }
   /**
@@ -121,7 +122,7 @@ export class Page {
    */
   static stick():void {
     window.removeEventListener( 'load', Page.stick );
-    setTimeout( window.scrollTo( 0, 0 ), 0 );
+    setTimeout( window.scrollTo( 0, 0 ), 200 );
   }
   /**
    * home, index page

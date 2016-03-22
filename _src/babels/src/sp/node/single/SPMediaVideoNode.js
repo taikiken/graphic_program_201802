@@ -69,7 +69,9 @@ export let SPMediaVideoNode = React.createClass( {
     } else if (!Safety.isImg(poster)) {
       // 画像ファイル名に拡張子がないのがあったので
       // 拡張子チェックを追加
-      poster = Empty.VIDEO_THUMBNAIL;
+      if ( !Safety.isGraph( poster ) ) {
+        poster = Empty.VIDEO_THUMBNAIL;
+      }
     }
 
     // HTML5 video

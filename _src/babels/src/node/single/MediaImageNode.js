@@ -37,16 +37,20 @@ export let MediaImageNode = React.createClass( {
     if ( !original ) {
       original = images.large;
     } else if ( !Safety.isImg( original ) ) {
-      original = '';
+      if ( !Safety.isGraph( original ) ) {
+        original = '';
+      }
     }
 
     if ( !original ) {
       original = images.medium;
     } else if ( !Safety.isImg( original ) ) {
-      original = '';
+      if ( !Safety.isGraph( original ) ) {
+        original = '';
+      }
     }
 
-    if ( !original || !Safety.isImg( original ) ) {
+    if ( !original ) {
       // no image or no correct image extension
       return null;
     }

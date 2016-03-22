@@ -60,7 +60,9 @@ export class SPViewUserProfile extends ViewUserProfile {
           icon = Empty.USER_EMPTY;
           loggedIn = '';
         } else if ( !Safety.isImg( icon ) ) {
-          icon = Empty.USER_EMPTY;
+          if ( !Safety.isGraph( icon ) ) {
+            icon = Empty.USER_EMPTY;
+          }
           loggedIn = '';
         }
 

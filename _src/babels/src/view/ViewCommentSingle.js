@@ -395,16 +395,6 @@ export class ViewCommentSingle extends View {
           let user = this.props.user;
           icon = user.profilePicture;
 
-          /*
-           if ( !icon ) {
-           icon = Empty.USER_EMPTY;
-           } else if ( !Safety.isImg( icon ) ) {
-           // 画像ファイル名に拡張子がないのがあったので
-           // 拡張子チェックを追加
-           icon = Empty.USER_EMPTY;
-           }
-           */
-
           // id
           userId = String( user.id );
           if (!userId) {

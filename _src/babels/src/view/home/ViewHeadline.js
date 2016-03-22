@@ -238,7 +238,9 @@ export class ViewHeadline extends View {
                   } else if ( !Safety.isImg( thumbnail ) ) {
                     // 画像ファイル名に拡張子がないのがあったので
                     // 拡張子チェックを追加
-                    thumbnail = Empty.IMG_SMALL;
+                    if ( !Safety.isGraph( thumbnail ) ) {
+                      thumbnail = Empty.IMG_SMALL;
+                    }
                   }
 
                   // HeadlineDom instance を使い render

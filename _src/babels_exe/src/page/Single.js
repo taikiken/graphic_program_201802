@@ -80,7 +80,8 @@ export class Single {
     // single page
     // related いらなくる予定
     let elements = {
-      related: Dom.related(),
+      // related なしへ
+      related: null, // Dom.related(),
       footer: Dom.singleFooter()
     };
 
