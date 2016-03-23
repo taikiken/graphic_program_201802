@@ -141,6 +141,10 @@
     .board-item {
       height: 100px;
       overflow: hidden;
+
+      .post-thumb {
+        background: none;
+      }
     }
   }
 }
