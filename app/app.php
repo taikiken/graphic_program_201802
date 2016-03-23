@@ -38,10 +38,7 @@ foreach ($models as $model) {
 }
 
 
-// set app
-// ==============================
-$app->model        = new ViewModel();
-$app->user_helper  = new UserHelper($app->model);
+$app->model = new ViewModel();
 
 
 // routes / render

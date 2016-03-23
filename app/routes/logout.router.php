@@ -4,10 +4,14 @@
 // ==============================
 $app->get('/logout[/]', function ($request, $response, $args) use ($app) {
 
-  $app->user_helper->delete_cookie();
+  $args['page'] = $app->model->set(array(
+    'title'    => 'ログアウト',
+    'template' => 'logout',
+    'path'     => $args,
+//    'template_classname' => 'signup',
+  ));
 
-  header('Location: /');
-  exit;
+  return $this->renderer->render($response, "default.php", $args);
 
 });
 
