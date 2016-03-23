@@ -13,21 +13,18 @@ include_once __DIR__."/_header.php";
       </div><!-- /.category-heading -->
 
       <section class="main-sec">
-        <div class="user-signup">
-
-        <div class="post-content">
-
-          <p class="user-signup-lead">
-            お探しのページは見つかりません
-          </p>
-
-          <p class="user-signup-note">お探しのページは一時的にアクセスできない状況にあるか、移動もしくは削除された可能性があります</p>
-
-          <div class="user-signup-btn-signup mod-btnB01">
-            <a href="/">TOPに戻る</a>
+        <div class="errorPage-sec">
+          <div class="sponsor-link">
+            ここに広告が入ります
           </div>
 
-        </div><!-- /.user-signup -->
+          <h2 class="mt20 bold">お探しのページは見つかりません</h2>
+          <p class="f12">お探しのページは一時的にアクセスができない状況にあるか、移動もしくは削除された可能性があります。</p>
+
+          <div class="mod-btnA01">
+            <a href="/">TOPに戻る</a>
+          </div><!-- /.mod-btnA01 -->
+        </div><!-- /.errorPage-sec -->
       </section><!-- /.main-sec -->
 
     </div>
