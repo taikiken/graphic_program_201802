@@ -53,21 +53,24 @@
   padding-top: (90/2)+px;
 
   .heading {
-    display: block;
-    width: (300/2)+px;
-    height: (96/2)+px;
-    background: url(/assets/sp/images/signup/logo.png) 0 0 no-repeat;
-    background-size: (300/2)+px;
-    @include hide-text;
-    margin: 0 auto;
+    a {
+      display: block;
+      width: (300/2)+px;
+      height: (96/2)+px;
+      background: url(/assets/sp/images/signup/logo.png) 0 0 no-repeat;
+      background-size: (300/2)+px;
+      @include hide-text;
+      margin: 0 auto;
+    }
   }
 
-  // .lead {
-  //   margin-top: 30px;
-  //   color: #fff;
-  //   font-size: fz(16);
-  //   text-align: center;
-  // }
+  .lead {
+    margin-top: (40/2)+px;
+    margin-bottom: -(20/2)+px;
+    color: #fff;
+    font-size: fz(24/2);
+    text-align: center;
+  }
 }
 
 
