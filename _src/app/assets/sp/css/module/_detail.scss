@@ -79,6 +79,7 @@
 
       &.hidden {
         max-height: initial;
+        max-height: auto;
         height: auto;
         opacity: 1;
       }

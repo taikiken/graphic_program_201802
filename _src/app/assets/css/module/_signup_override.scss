@@ -85,12 +85,15 @@ fieldset {
   .form-parts {
     float: left;
     // ceil( 320/520 )
-    width: 62%;
+    // width: 62%;
+    width: perCalc(320, 520);
   }
 
   .form-parts.align-right {
     float: right;
-    width: 37%;
+    // width: 37%;
+    width: perCalc(190, 520);
+
     .setting-form-submit {
       width: 100%;
     }
