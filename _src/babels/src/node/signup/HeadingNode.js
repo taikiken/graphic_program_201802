@@ -10,8 +10,9 @@
  *
  */
 
-
 import {SignupStatus} from '../../event/SignupStatus';
+
+import {Url} from '../../app/const/Url';
 
 // React
 let React = self.React;
@@ -70,7 +71,7 @@ export let HeadingNode = React.createClass( {
 
     return (
       <header className="signup-header">
-        <h1 className="heading">運動通信</h1>
+        <h1 className="heading"><a href={Url.index()}>運動通信</a></h1>
         <LeadNode step={this.state.step} />
       </header>
     );

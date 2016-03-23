@@ -138,14 +138,24 @@ fieldset {
     display: table-cell;
     width: 90px;
     height: 90px;
-    border-radius: 100%;
-    border: 3px solid #e1438b;
-    background: #fff url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
+    //border-radius: 100%;
+    //border: 3px solid #e1438b;
+    //background: #fff url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
+
+    border-radius: 0;
 
     &.user-logged-in {
       background: #fff;
     }
-
+    .avatar-block {
+      overflow: hidden;
+      display: inline-block;
+      width: 90px;
+      height: 90px;
+      border-radius: 100%;
+      border: 3px solid #e1438b;
+      background: #fff url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
+    }
     img {
       width: 100%;
       height: auto;
@@ -155,9 +165,14 @@ fieldset {
   .should-change-avatar {
     display: table-cell;
     //margin-top: -45px;
-    height: 120px;
-    width: 120px;
+    height: 90px;
+    width: 90px;
     vertical-align: middle;
+
+    a {
+      padding-left: 5px;
+      white-space: nowrap;
+    }
   }
 }
 

@@ -177,7 +177,7 @@ let Step2FormNode = React.createClass( {
               onDrop={this.handleDrop}
             >
               <div className={'avatar-stage'}>
-                <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
+                <sapn className="avatar-container"><span className="avatar-block"><img src={this.state.avatar} alt=""/></span></sapn>
                 <ChangeAvatarNode
                   show={this.props.avatar !== this.state.avatar}
                   handler={this.avatarChangeHandler}
