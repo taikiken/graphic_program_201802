@@ -772,24 +772,26 @@ div.synapse_logo {
 
 
 .side-menu-ut-nav {
-  padding: (24/2)+px;
-  background: #111;
-  border-bottom: 1px solid #333;
 }
 
 .side-menu-ut-nav-link {
   @include link-decoration(#fff, #fff, none, none);
-  position: relative;
-  top: 2px;
-  // line-height: (60/2)+px;
+  // position: relative;
+  // top: 2px;
+  display: block;
+  line-height: 1.5;
+  padding: (28/2)+px 0 (20/2)+px;
+  border-bottom: 1px solid #333;
+  background: #111;
   font-weight: bold;
   font-size: fz(30/2);
+  // vertical-align: top;
 
   i {
     @extend .sp-sprite-common;
     @include hide-text;
-    // position: relative;
-    // top: -2px;
+    position: relative;
+    top: -2px;
     margin-right: (10/2)+px;
     vertical-align: middle;
   }
