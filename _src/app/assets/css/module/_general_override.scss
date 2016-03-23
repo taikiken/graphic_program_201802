@@ -135,6 +135,16 @@
   }
 }
 
+// 関連ニュース
+#_popIn_recommend {
+  .board-small.column2 {
+    .board-item {
+      height: 100px;
+      overflow: hidden;
+    }
+  }
+}
+
 // -------------------------------------------------
 // modal
 .modal-container {
