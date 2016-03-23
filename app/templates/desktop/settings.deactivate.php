@@ -12,7 +12,7 @@
             <ul class="setting-side-nav-list">
               <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-basic" href="/settings/"><span>基本情報設定</span></a></li>
               <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-interest" href="/settings/interest/"><span>パーソナライズ設定</span></a></li>
-              <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-sns" href="/settings/social/"><span>ソーシャル連携</span></a></li>
+              <?php //<li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-sns" href="/settings/social/"><span>ソーシャル連携</span></a></li> ?>
             </ul>
           </nav><!-- /.setting-side-nav -->
         </div><!-- /.setting-side -->
