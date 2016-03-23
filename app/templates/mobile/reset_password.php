@@ -17,7 +17,7 @@ if($complete==0){
 
 ?>
 <header class="signup-header">
-  <h1 class="heading">運動通信</h1>
+  <h1 class="heading"><a href="/">運動通信</a></h1>
 </header><!-- /.signup-header -->
 
 <div class="body-sec">
