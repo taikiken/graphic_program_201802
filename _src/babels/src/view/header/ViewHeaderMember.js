@@ -350,7 +350,7 @@ export class ViewHeaderMember extends View {
         this.element
       );
     } else {
-    is._component.updateUser( dae.profilePicture, dae.userName);
+      this._component.updateUser( dae.profilePicture, dae.userName);
     }
 
   }

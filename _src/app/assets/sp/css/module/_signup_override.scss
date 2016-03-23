@@ -145,7 +145,11 @@ fieldset {
     border-radius: 0;
 
     &.user-logged-in {
-      background: #fff;
+      //background: #fff;
+
+      .avatar-block {
+        background: none;
+      }
     }
     .avatar-block {
       overflow: hidden;
