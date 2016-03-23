@@ -159,6 +159,10 @@ fieldset {
 
     border-radius: 0;
 
+    &.user-logged-in {
+      background: none;
+    }
+
     .avatar-block {
       overflow: hidden;
       display: inline-block;
