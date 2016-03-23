@@ -9,11 +9,24 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+/*
+機能修正
+2016-03-23
+https://docs.google.com/spreadsheets/d/1rmuygL6ZqndMbgtIxiMRgxEb4n3-yIkAQEj9msjoJcs/edit#gid=288230754
+デバッグシート[PC]
+No.2
+Good / Badを外した際にボタンが非アクティブにならない
 
+> - Good するとBad 済みだと Bad 外す
+> - Bad するとGood 済みだと Good 外す
+> - = Good も Bad も両方するのは許さない
+ */
 
 import {ActionType} from '../../app/const/ActionType';
+// event
 import {Good} from '../../event/comment/Good';
 import {Bad} from '../../event/comment/Bad';
+// model
 import {ModelCommentStar} from '../../model/comment/ModelCommentStar';
 import {Model} from '../../model/Model';
 
@@ -136,76 +149,154 @@ export let ReactionNode = React.createClass( {
 
     }
   },
+  loadingStart: function() {
+    this.setState({loading: 'loading'});
+  },
+  loadingStop: function() {
+    this.setState({loading: ''});
+  },
   goodClick: function( event ) {
     event.preventDefault();
-    this.setState({loading: 'loading', good: '...'});
+    // this.setState({loading: 'loading', good: '...'});
 
     // good sequence
     if ( this.state.isGood ) {
       // good済み -> DELETE
+      /*
       this.goodStar.on( Model.COMPLETE, this.goodDeleteDone );
       this.goodStar.start( ActionType.DELETE );
+      */
+      this.goodDelete();
 
     } else {
 
       // no good -> ADD
+      /*
       this.goodStar.on( Model.COMPLETE, this.goodAddDone );
       this.goodStar.start( ActionType.ADD );
-
+      */
+      this.goodAdd();
     }
 
   },
   badClick: function( event ) {
     event.preventDefault();
-    this.setState({loading: 'loading', bad: '...'});
+    // this.setState({loading: 'loading', bad: '...'});
 
     // bad sequence
     if ( this.state.isBad ) {
-
+      /*
       console.log( 'bad -> DELETE' );
       // bad -> DELETE
       this.badStar.on( Model.COMPLETE, this.badDeleteDone );
       this.badStar.start( ActionType.DELETE );
-
+      */
+      this.badDelete();
     } else {
-
+      /*
       console.log( ' no bad -> ADD' );
       // no bad -> ADD
       this.badStar.on( Model.COMPLETE, this.badAddDone );
       this.badStar.start( ActionType.ADD );
-
+      */
+      this.badAdd();
     }
   },
+  // -----------------------------------------------
+  // good action
+  // good済み -> DELETE
+  goodDelete: function() {
+    this.loadingStart();
+    this.goodStar.on( Model.COMPLETE, this.goodDeleteDone );
+    this.goodStar.start( ActionType.DELETE );
+  },
+  // goodしていない -> ADD
+  goodAdd: function() {
+    this.loadingStart();
+    this.goodStar.on( Model.COMPLETE, this.goodAddDone );
+    this.goodStar.start( ActionType.ADD );
+  },
+
+  // bad -> DELETE
+  badDelete: function() {
+    this.loadingStart();
+    this.badStar.on( Model.COMPLETE, this.badDeleteDone );
+    this.badStar.start( ActionType.DELETE );
+  },
+  // no bad -> ADD
+  badAdd: function() {
+    this.loadingStart();
+    this.badStar.on( Model.COMPLETE, this.badAddDone );
+    this.badStar.start( ActionType.ADD );
+  },
+  // -----------------------------------------------
+  // good add complete handler
   goodAddDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodAddDone );
     console.log( '+++++ goodAddDone' );
     let good = ++this.goodCount;
-    this.setState( {good: good, loading: '', isGood: true} );
+
+    this.setState( { good: good, isGood: true } );
+
+    if ( this.state.isBad ) {
+      // bad しているので bad DELETE する
+      this.badDelete();
+    } else {
+      // bad していない時はここまで
+      this.loadingStop();
+      // Good add event fire
+      this.good.add( this.props.commentId );
+    }
   },
+  // bad delete
   goodDeleteDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodDeleteDone );
     console.log( '+++++ goodDeleteDone' );
+    // Good remove event fire
+    this.good.remove( this.props.commentId );
+
     let good = --this.goodCount;
     this.setState( {good: good, loading: '', isGood: false} );
   },
+  // -----------------------------------------------
+  // bad add complete handler
   badAddDone: function() {
     this.badStar.off( Model.COMPLETE, this.badAddDone );
     console.log( '--- badAddDone' );
     let bad = ++this.badCount;
-    this.setState( {bad: bad, loading: '', isBad: true} );
+
+    this.setState( {bad: bad, isBad: true} );
+
+    if ( this.state.isGood ) {
+      // good しているので good DELETE する
+      this.goodDelete();
+    } else {
+      // good していない時はここまで
+      this.loadingStop();
+      // Bad add event fire
+      this.bad.add( this.props.commentId );
+    }
+
   },
+  // bad delete
   badDeleteDone: function() {
     this.badStar.off( Model.COMPLETE, this.badDeleteDone );
     console.log( '--- badDeleteDone' );
+
+    // Bad remove event fire
+    this.bad.remove( this.props.commentId );
+
     let bad = --this.badCount;
     this.setState( {bad: bad, loading: '', isBad: false} );
   },
+  // good error
   goodError: function( error ) {
     console.warn( 'goodError ', error );
-    this.setState({loading: ''});
+    this.loadingStop();
   },
+  // bad error
   badError: function( error ) {
     console.warn( 'badError ', error );
-    this.setState({loading: ''});
+    this.loadingStop();
   }
 } );
