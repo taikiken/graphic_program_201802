@@ -35,17 +35,19 @@ $app->group('/settings', function () use ($app) {
 
   // ソーシャル連携 - /settings/social/
   // ==============================
-  $this->get('/{slug:social}[/]', function ($request, $response, $args) use ($app) {
 
-    $args['page'] = $app->model->set(array(
-      'title'    => 'ソーシャル連携 | 設定',
-      'template' => 'settings.'.$args['slug'],
-      'path'     => $args,
-    ));
+  // #433 - 初回リリース見送りのためコメントアウト
+  // $this->get('/{slug:social}[/]', function ($request, $response, $args) use ($app) {
 
-    return $this->renderer->render($response, "default.php", $args);
+  //   $args['page'] = $app->model->set(array(
+  //     'title'    => 'ソーシャル連携 | 設定',
+  //     'template' => 'settings.'.$args['slug'],
+  //     'path'     => $args,
+  //   ));
 
-  });
+  //   return $this->renderer->render($response, "default.php", $args);
+
+  // });
 
 
   // 退会 - /settings/deactivate/
