@@ -386,7 +386,9 @@ export class SPViewSyn extends View {
   render():void {
 
     let modal = ReactDOM.render(
-      <LogoutNode />,
+      <LogoutNode
+        listen={true}
+      />,
       this._modal
     );
 

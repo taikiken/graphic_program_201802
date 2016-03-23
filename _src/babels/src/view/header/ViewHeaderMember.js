@@ -37,6 +37,7 @@ import {ViewLogoutModal} from '../modal/ViewLogoutModal';
 
 // event
 import {LogoutStatus} from '../../event/LogoutStatus';
+import {CommentStatus} from '../../event/CommentStatus';
 
 // React
 let React = self.React;
@@ -157,6 +158,12 @@ export class ViewHeaderMember extends View {
          * @type {LogoutStatus}
          */
         this.status = LogoutStatus.factory();
+        /**
+         * CommentStatus instance
+         * @private
+         * @type {CommentStatus}
+         */
+        this.commentStatus = CommentStatus.factory();
 
         return {
           open: 'close'
@@ -226,6 +233,8 @@ export class ViewHeaderMember extends View {
           modal.start();
         }
         */
+
+        this.commentStatus.on( CommentStatus.COMMENT_DELETE_MODAL_OPEN, this.otherModalOpen );
       },
       componentWillUnmount: function() {
         this.destroy();
@@ -306,6 +315,14 @@ export class ViewHeaderMember extends View {
       // 何もないところを click した時のため
       callbackCancel: function() {
         this.activate();
+      },
+      // 他のmodalが開いたので閉じる
+      otherModalOpen: function() {
+        if ( this.state.open === 'open' ) {
+          // open -> close
+          this.destroy();
+          this.setState( { open: 'close' } );
+        }
       }
     } );
 

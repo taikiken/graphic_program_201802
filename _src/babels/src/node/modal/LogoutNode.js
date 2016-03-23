@@ -10,7 +10,6 @@
  *
  */
 
-
 // app
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
@@ -38,13 +37,19 @@ export let LogoutNode = React.createClass( {
     // ok click callback
     ok: React.PropTypes.func,
     // cancel click callback
-    cancel: React.PropTypes.func
+    cancel: React.PropTypes.func,
+    // LogoutStatus event handler を bind する
+    listen: React.PropTypes.bool
   },
   getDefaultProps: function() {
     return {
       ok: null,
       cancel: null,
-      type: 'logout'
+      type: 'logout',
+      // PC: 不要(false), SP: 要(true)
+      // 設計が悪く PC, SP で実装方法が変わってしまった
+      // PC true にすると二重にマウントされる...かも
+      listen: false
     };
   },
   getInitialState: function() {
@@ -79,17 +84,20 @@ export let LogoutNode = React.createClass( {
     }
   },
   componentDidMount: function() {
-    /*
-    let status = LogoutStatus.factory();
-    status.on( LogoutStatus.OPEN, this.onOpen );
-    status.on( LogoutStatus.CLOSE, this.onClose );
-    */
+    if ( this.props.listen ) {
+      let status = LogoutStatus.factory();
+      this.status = status;
+      status.on( LogoutStatus.OPEN, this.onOpen );
+      status.on( LogoutStatus.CLOSE, this.onClose );
+    }
   },
   componentWillUnMount: function() {
-    /*
-    status.off( LogoutStatus.OPEN, this.onOpen );
-    status.off( LogoutStatus.CLOSE, this.onClose );
-    */
+    let status = this.status;
+    if ( status !== null ) {
+      status.off( LogoutStatus.OPEN, this.onOpen );
+      status.off( LogoutStatus.CLOSE, this.onClose );
+      this.status = null;
+    }
   },
   cancelClick: function( event:Event ) {
     event.preventDefault();

@@ -10,8 +10,10 @@
  *
  */
 
-
 import {CommentActionNode} from './CommentActionNode';
+
+// event
+import {CommentStatus} from '../../event/CommentStatus';
 
 // React
 let React = self.React;
@@ -24,6 +26,7 @@ let React = self.React;
  * |- CommentNode
  *    |- CommentMenuNode
  *       |- CommentActionNode
+ *
  * @type {ReactClass}
  */
 export let CommentMenuNode = React.createClass( {
@@ -44,6 +47,7 @@ export let CommentMenuNode = React.createClass( {
   },
   getInitialState: function() {
     this.timer = 0;
+    this.status = null;
 
     return {
       open: 'close',
@@ -92,7 +96,7 @@ export let CommentMenuNode = React.createClass( {
 
   },
   componentDidMount: function() {
-
+    this.status = CommentStatus.factory();
   },
   componentWillUnmount: function() {
     // event handler unbind
@@ -174,6 +178,9 @@ export let CommentMenuNode = React.createClass( {
 
     if ( this.state.open === 'close' ) {
       // close -> open
+      // 他の開いている奴らにモーダルが開くことを通知する
+      // ex. header の drop down とか
+      this.status.modal( this.props.commentId );
       // document.body へ click event handler bind
       this.setState( { open: 'open' } );
       console.log( 'open click ', this.props.articleId, this.props.commentId, this.props.replyId );

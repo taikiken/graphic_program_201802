@@ -85,13 +85,19 @@ export class CommentStatus extends EventDispatcher {
   static get NOTICE():string {
     return 'commentNotice';
   }
-
   /**
    * event COMMENT_WILL_DELETE 削除
    * @return {string} commentWillDelete を返します
    */
   static get COMMENT_WILL_DELETE():string {
     return 'commentWillDelete';
+  }
+  /**
+   * event COMMENT_DELETE_MODAL_OPEN, コメント削除モーダルオープン
+   * @return {string} commentDeleteModalOpen を返します
+   */
+  static get COMMENT_DELETE_MODAL_OPEN():string {
+    return 'commentDeleteModalOpen';
   }
   // ---------------------------------------------------
   //  METHOD
@@ -117,6 +123,12 @@ export class CommentStatus extends EventDispatcher {
    */
   notice( commentId:string ):void {
     this.fire( CommentStatus.NOTICE, commentId );
+  }
+  /**
+   * コメント削除モーダルを開くことを通知します
+   */
+  modal( commentId:string ):void {
+    this.fire( CommentStatus.COMMENT_DELETE_MODAL_OPEN, commentId );
   }
   // ---------------------------------------------------
   //  static method
