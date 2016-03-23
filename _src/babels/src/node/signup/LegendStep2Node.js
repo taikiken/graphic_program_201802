@@ -9,7 +9,10 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/*
+ https://cloud.githubusercontent.com/assets/971124/13942558/03c34fe4-f037-11e5-9a20-9da9efc788a5.png
+ 画像がいい感じにならない問題
+ */
 
 // app
 import {Url} from '../../app/const/Url';
@@ -174,7 +177,7 @@ let Step2FormNode = React.createClass( {
               onDrop={this.handleDrop}
             >
               <div className={'avatar-stage'}>
-                <sapn className="avatar-container"><img src={this.state.avatar} alt=""/></sapn>
+                <sapn className="avatar-container"><span className="avatar-block"><img src={this.state.avatar} alt=""/></span></sapn>
                 <ChangeAvatarNode
                   show={this.props.avatar !== this.state.avatar}
                   handler={this.avatarChangeHandler}

@@ -146,14 +146,27 @@ fieldset {
 
   .avatar-container {
     overflow: hidden;
+
     //display: inline-block;
     display: table-cell;
+    //display: block;
+
     width: 120px;
     height: 120px;
-    border-radius: 100%;
-    border: 3px solid #e1438b;
+    //border-radius: 100%;
+    //border: 3px solid #e1438b;
     background: #fff url(/assets/images/setting/thumb-avatar.png) center center no-repeat;
 
+    border-radius: 0;
+
+    .avatar-block {
+      overflow: hidden;
+      display: inline-block;
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      border: 3px solid #e1438b;
+    }
     img {
       width: 100%;
       height: auto;

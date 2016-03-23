@@ -164,7 +164,7 @@ let SettingInputNode = React.createClass( {
           </span>
           {/* bio */}
           <span className="form-parts">
-            <span className={`setting-form-job form-input`}>
+            <span className={'setting-form-job form-input'}>
               <input
                 type="text"
                 placeholder={Message.PLACEHOLDER_BIO}
@@ -186,8 +186,12 @@ let SettingInputNode = React.createClass( {
                 onDragLeave={this.handleDragLeave}
                 onDrop={this.handleDrop}
               >
-                <div className={`avatar-stage`}>
-                  <sapn className={`avatar-container ${loggedIn}`}><img src={avatar} alt=""/></sapn>
+                <div className={'avatar-stage'}>
+                  <sapn className={`avatar-container ${loggedIn}`}>
+                    <span className="avatar-block">
+                      <img src={avatar} alt=""/>
+                    </span>
+                  </sapn>
                   <ChangeAvatarNode
                     show={this.props.avatar !== this.state.avatar}
                     handler={this.avatarChangeHandler}
