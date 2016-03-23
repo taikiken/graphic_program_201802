@@ -147,7 +147,12 @@ export class Safety {
    * @param {string} fileName 調査対象ファイル名
    * @returns {boolean} 'jpg', 'png', 'jpeg', 'gif', 'svg' のいづれかに該当するかの真偽値を返します
    */
-  static isImg( fileName:string ):boolean {
+  static isImg( fileName:string ):Boolean {
+    // base64
+    if ( fileName.indexOf( 'data:image/jpeg;base64' ) !== -1 || fileName.indexOf( 'data:image/png;base64' ) !== -1 ) {
+      return true;
+    }
+    // 拡張子チェック
     return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf( Safety.getExtension( fileName ) ) !== -1;
   }
   /**

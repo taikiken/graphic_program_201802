@@ -26,7 +26,7 @@ import {Thumbnail} from '../../ui/Thumbnail';
 import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
-// import {Safety} from '../../data/Safety';
+import {Safety} from '../../data/Safety';
 
 // node
 import {ErrorNode} from '../error/ErrorNode';
@@ -116,6 +116,10 @@ let SettingInputNode = React.createClass( {
     let avatar = this.state.avatar;
     if ( !avatar ) {
       avatar = Empty.USER_EMPTY;
+    } else if ( !Safety.isImg(avatar) ) {
+      if ( !Safety.isGraph( avatar ) ) {
+        avatar = Empty.USER_EMPTY;
+      }
     }
 
     let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';

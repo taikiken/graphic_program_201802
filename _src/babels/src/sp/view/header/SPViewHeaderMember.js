@@ -62,6 +62,8 @@ export class SPViewHeaderMember extends ViewHeaderMember {
 
     this.executeSafely( View.BEFORE_RENDER, dae );
 
+    let _this = this;
+
     /**
      * ログインユーザー
      * @private
@@ -127,9 +129,14 @@ export class SPViewHeaderMember extends ViewHeaderMember {
           <div className="user">
             <div className="preference">
               <a href={Url.notifications()} className="preference-opener">
-                <span className={'preference-avatar ' + loggedIn}><img src={icon} alt={userName}/></span>
+                {/*
+                 画像を変えてもファイル名が変わらない
+                 キャッシュ問題を回避するためにDate.nowを加える
+                 通常もキャッシュが効かない〜
+                 */}
+                <span className={'preference-avatar ' + loggedIn}><img src={`${icon}?${Date.now()}`} alt={userName} /></span>
               </a>
-              <span className={`preference-num`} style={noticeStyle(this.state.total)}>{this.state.total}</span>
+              <span className={'preference-num'} style={noticeStyle(this.state.total)}>{this.state.total}</span>
             </div>
           </div>
         );
@@ -174,6 +181,8 @@ export class SPViewHeaderMember extends ViewHeaderMember {
           this.restart();
 
         }
+
+        _this.didMount();
       },
       // polling をリスタートします
       restart: function() {
@@ -217,16 +226,26 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         this.setState( { total: total } );
         this.status.update( total );
 
+      },
+      updateUser: function( icon, userName ) {
+        console.log( 'user update state ', icon );
+        this.setState( { icon: icon, userName: userName } );
       }
     } );
 
-    ReactDOM.render(
-      <MemberDom
-        icon={dae.profilePicture}
-        userName={dae.userName}
-      />,
-      this.element
-    );
+    // --------------------------------------------------
+    // user root
+    if ( this._component === null ) {
+      this._component = ReactDOM.render(
+        <MemberDom
+          icon={dae.profilePicture}
+          userName={dae.userName}
+        />,
+        this.element
+      );
+    } else {
+      this._component.updateUser( dae.profilePicture, dae.userName);
+    }
 
   }
 }

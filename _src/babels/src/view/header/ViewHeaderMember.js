@@ -38,6 +38,7 @@ import {ViewLogoutModal} from '../modal/ViewLogoutModal';
 // event
 import {LogoutStatus} from '../../event/LogoutStatus';
 import {CommentStatus} from '../../event/CommentStatus';
+import {SettingsStatus} from '../../event/SettingsStatus';
 
 // React
 let React = self.React;
@@ -58,6 +59,9 @@ export class ViewHeaderMember extends View {
     super( element, option );
     this._action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
     this._component = null;
+    // SettingsStatus complete を listen しリロードする
+    this._settingStatus = null;
+    this._boundComplete = this.onComplete.bind( this );
   }
   /**
    * SettingDom instance
@@ -166,13 +170,15 @@ export class ViewHeaderMember extends View {
         this.commentStatus = CommentStatus.factory();
 
         return {
-          open: 'close'
+          open: 'close',
+          userName: this.props.userName,
+          icon: this.props.icon
         };
       },
       render: function() {
 
-        let icon = this.props.icon;
-        let userName = this.props.userName;
+        let icon = this.state.icon;
+        let userName = this.state.userName;
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
         } else if ( !Safety.isImg( icon ) ) {
@@ -191,7 +197,12 @@ export class ViewHeaderMember extends View {
 
             <div className={'preference ' + this.state.open}>
               <a className="preference-opener" href="#" onClick={this.clickHandler}>
-                <span className={'preference-avatar ' + loggedIn}><img src={icon} alt={userName} /></span>
+                {/*
+                  画像を変えてもファイル名が変わらない
+                  キャッシュ問題を回避するためにDate.nowを加える
+                  通常もキャッシュが効かない〜
+                */}
+                <span className={'preference-avatar ' + loggedIn}><img src={`${icon}?${Date.now()}`} alt={userName} /></span>
               </a>
 
               <nav className="preference-menu">
@@ -209,6 +220,7 @@ export class ViewHeaderMember extends View {
 
         // callback
         _this.executeSafely( View.DID_MOUNT );
+        _this.didMount();
 
         // notice make
         let noticeNode = ReactDOM.findDOMNode(this.refs.notice);
@@ -323,16 +335,45 @@ export class ViewHeaderMember extends View {
           this.destroy();
           this.setState( { open: 'close' } );
         }
+      },
+      updateUser: function( icon, userName ) {
+        console.log( 'user update state ', icon );
+        this.setState( { icon: icon, userName: userName } );
       }
     } );
 
     // --------------------------------------------------
     // user root
-    this._component = ReactDOM.render(
-      <SettingDom icon={dae.profilePicture} userName={dae.userName} />,
-      this.element
-    );
+    if ( this._component === null ) {
+      this._component = ReactDOM.render(
+        <SettingDom icon={dae.profilePicture} userName={dae.userName} />,
+        this.element
+      );
+    } else {
+      this._component.updateUser( dae.profilePicture, dae.userName);
+    }
 
+  }
+  /**
+   * componentDidMount で SettingsStatus event を監視する
+   */
+  didMount():void {
+    let settingStatus = this._settingStatus;
+
+    if ( settingStatus === null ) {
+      settingStatus = SettingsStatus.factory();
+      this._settingStatus = settingStatus;
+      settingStatus.on( SettingsStatus.ACCOUNT_COMPLETE, this._boundComplete );
+    }
+  }
+
+  /**
+   * 設定変更で読み込み直す
+   */
+  onComplete():void {
+    // 再読み込み
+    console.log( 'SettingsStatus.ACCOUNT_COMPLETE reload' );
+    this.start();
   }
 
 }
