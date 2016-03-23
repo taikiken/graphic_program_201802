@@ -128,6 +128,9 @@
 .board-small {
   .post-thumb {
     overflow: hidden;
+    &.post-thumb-fill {
+      background: none;
+    }
     img {
       width: 100%;
       height: auto;

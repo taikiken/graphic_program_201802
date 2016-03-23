@@ -151,6 +151,7 @@ export class ViewRanking extends View {
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
+        empty: React.PropTypes.bool.isRequired,
         total: React.PropTypes.number.isRequired
       },
       getDefaultPropTypes: function() {
@@ -169,7 +170,7 @@ export class ViewRanking extends View {
         return (
           <li className={'board-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
             <a href={p.url} className={'post'}>
-              <figure className="post-thumb"><img src={p.thumbnail} alt={p.title}/></figure>
+              <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`}><img src={p.thumbnail} alt={p.title}/></figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
                 <h4 className='post-heading'>{p.title}</h4>
@@ -216,15 +217,18 @@ export class ViewRanking extends View {
 
                 let dae = new ArticleDae( article );
                 let thumbnail = dae.media.images.thumbnail;
+                let empty = false;
 
                 // thumbnail を check なければ代替画像にする
                 if ( !thumbnail ) {
                   thumbnail = Empty.IMG_SMALL;
+                  empty = true;
                 } else if ( !Safety.isImg( thumbnail ) ) {
                   // 画像ファイル名に拡張子がないのがあったので
                   // 拡張子チェックを追加
                   if ( !Safety.isGraph( thumbnail ) ) {
                     thumbnail = Empty.IMG_SMALL;
+                    empty = true;
                   }
                 }
 
@@ -242,6 +246,7 @@ export class ViewRanking extends View {
                       date={dae.displayDate}
                       title={dae.title}
                       thumbnail={thumbnail}
+                      empty={empty}
                       total={dae.commentsCount}
                     />
                 );
