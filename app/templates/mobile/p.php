@@ -72,7 +72,6 @@
 
       </div><!-- /.comment -->
 
-      <?php /*
       <div class="related-post">
         <div class="comment-heading">
           <h2>関連ニュース</h2>
@@ -142,19 +141,6 @@
         </ul>
 
       </div><!-- /.related-post -->
-
-      */?>
-
-      <!-- #310 popin ebmed code  -->
-      <div id="_popIn_recommend"></div>
-      <script type="text/javascript">
-        (function() {
-          var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-              pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-        })();
-      </script>
-      <!-- //#310 popin ebmed code  -->
 
     </section><!-- /.main-sec -->
   </div>
