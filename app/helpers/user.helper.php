@@ -24,7 +24,8 @@ class UserHelper {
     $this->default['token']        = $this->get_token();
 
     if ( $this->default['token'] ) :
-      $this->default['is_logged_in'] = $this->get_is_logged_in($model->property('apiRoot'));
+      $apiRoot = ( $model->property('apiRoot') ) ? $model->property('apiRoot') : $model->property('site_url');
+      $this->default['is_logged_in'] = $this->get_is_logged_in($apiRoot);
     endif;
 
   }
@@ -51,7 +52,7 @@ class UserHelper {
   *
   * @return bool true : ログイン済み | false : 非ログイン
   */
-  private function get_is_logged_in($apiRoot) {
+  private function get_is_logged_in($apiRoot = '' ) {
 
     $option = array(
       'http'=>array(
