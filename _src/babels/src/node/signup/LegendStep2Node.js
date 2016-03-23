@@ -9,7 +9,10 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/*
+ https://cloud.githubusercontent.com/assets/971124/13942558/03c34fe4-f037-11e5-9a20-9da9efc788a5.png
+ 画像がいい感じにならない問題
+ */
 
 // app
 import {Url} from '../../app/const/Url';
