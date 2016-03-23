@@ -37,6 +37,8 @@ import {CommentMoreViewNode} from '../node/comment/CommentMoreViewNode';
 // event
 import {ReplyStatus} from '../event/ReplyStatus';
 import {CommentStatus} from '../event/CommentStatus';
+import {Good} from '../event/comment/Good';
+import {Bad} from '../event/comment/Bad';
 
 // React
 let React = self.React;
@@ -85,7 +87,15 @@ export class ViewComments extends View {
     // コメント削除後の再読み込み設定
     let comment = CommentStatus.factory();
     comment.on( CommentStatus.COMMENT_DELETE, boundComplete );
-    // this._commentStatus = comment;
+
+    // Good / Bad, add | delete も reload 対象にする
+    let good = Good.factory();
+    good.on( CommentStatus.GOOD_ADD, boundComplete );
+    good.on( CommentStatus.GOOD_DELETE, boundComplete );
+
+    let bad = Bad.factory();
+    bad.on( CommentStatus.BAD_ADD, boundComplete );
+    bad.on( CommentStatus.BAD_DELETE, boundComplete );
 
     this._reload = false;
   }
