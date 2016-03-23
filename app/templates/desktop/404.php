@@ -15,27 +15,16 @@ include_once __DIR__."/_header.php";
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">
-
-      <div class="post-detail">
-
-        <div class="post-heading">
-          <h1>
-            お探しのページは見つかりません
-          </h1>
-        </div>
-
-        <div class="post-content">
-          <p>
-            お探しのページは一時的にアクセスできない状況にあるか、移動もしくは削除された可能性があります
-          </p>
-
-          <p>
-            <a href="/">TOPにもどる</a>
-          </p>
-
-        </div>
-
+      <div class="sponsor-link mt30">
+        <a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-710x78.jpg" alt=""></a>
       </div>
+
+      <h2 class="mt50 bold f20">お探しのページは見つかりません</h2>
+      <p>お探しのページは一時的にアクセスができない状況にあるか、移動もしくは削除された可能性があります。</p>
+
+      <div class="mod-btnA01 mt30">
+        <a href="/">TOPに戻る</a>
+      </div><!-- /.mod-btnA01 -->
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
