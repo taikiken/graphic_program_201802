@@ -69,9 +69,9 @@ class UserHelper {
       if ( $response['status']['code'] == 200 ) :
         return true;
 
-      # cookieもってるのにサーバーにそのユーザー存在しないならcookieけす
+      # cookieもってるのにDBにそのユーザー存在しないならcookieけす
       else :
-        setcookie('auth_token', '', time() - 3600, '/');
+        $this->delete_cookie();
 
       endif;
 
@@ -81,7 +81,8 @@ class UserHelper {
 
 
   /**
-  * public - check_logged_in - ログインしてなかったらログインページに転送
+  * public - ログインしてなかったらログインページに転送する
+  *
   */
   public function check_logged_in() {
 
@@ -89,6 +90,18 @@ class UserHelper {
       header('Location: /login/');
       exit;
     endif;
+
+  }
+
+
+  /**
+  * public - tokenを保持してるcookieを消しちゃう
+  * 用途 : /logout/ を強制ログアウトとして残そう
+  *
+  */
+  public function delete_cookie() {
+
+    setcookie('auth_token', '', time() - 3600, '/');
 
   }
 
