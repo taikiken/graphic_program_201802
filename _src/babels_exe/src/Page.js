@@ -50,7 +50,7 @@ export class Page {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Page is static Class. not use new Page().` );
+      throw new Error( 'Page is static Class. not use new Page().' );
 
     }
   }
@@ -68,6 +68,8 @@ export class Page {
     // router
     let Router = UT.app.Router;
     let router = Router.factory();
+
+    Page.router = router;
 
     // index
     router.on( Router.INDEX, Page.index );
@@ -112,6 +114,9 @@ export class Page {
     // settings/deactivate
     router.on( Router.SETTING_DEACTIVATE, Page.deactivate );
 
+    // 404
+    router.on( Router.NOT_FOUND, Page.notFound );
+
     router.route();
 
     // scroll 位置調整
@@ -125,6 +130,69 @@ export class Page {
     setTimeout( window.scrollTo( 0, 0 ), 200 );
   }
   /**
+   * event unbind
+   */
+  static dispose():void {
+    let Router = UT.app.Router;
+    let router = Page.router;
+
+    // index
+    router.off( Router.INDEX, Page.index );
+    // category
+    router.off( Router.CATEGORY, Page.category );
+    // single(detail|p)
+    router.off( Router.SINGLE, Page.single );
+    // search
+    router.off( Router.SEARCH, Page.search );
+
+    // comment
+    router.off( Router.COMMENT, Page.comment );
+    router.off( Router.COMMENT_REPLY, Page.commentReply );
+
+    // 管理系
+    // signup
+    router.off( Router.SIGNUP, Page.signup );
+    // login
+    router.off( Router.LOGIN, Page.login );
+    // logout
+    router.off( Router.LOGOUT, Page.logout );
+
+    // mypage
+    router.off( Router.MYPAGE, Page.mypage );
+    // mypage/activities
+    router.off( Router.MYPAGE_ACTIVITIES, Page.activities );
+    // notifications
+    router.off( Router.NOTIFICATIONS, Page.notifications );
+    // settings
+    router.off( Router.SETTING, Page.settings );
+    // settings/interest
+    router.off( Router.SETTING_INTEREST, Page.interest );
+
+    // settings/social
+    router.off( Router.SETTING_SOCIAL, Page.social );
+
+    // settings/deactivate
+    router.off( Router.SETTING_DEACTIVATE, Page.deactivate );
+
+    // 404
+    router.off( Router.NOT_FOUND, Page.notFound );
+  }
+  /**
+   * 404 not found
+   */
+  static notFound():void {
+    // page top
+    PageTop.start();
+    // search from
+    SearchFrom.start();
+
+    // Sidebar.start();
+    Header.start();
+
+    // event unbind
+    Page.dispose();
+  }
+  /**
    * home, index page
    */
   static index():void {
@@ -136,6 +204,9 @@ export class Page {
     Index.start();
     // nav
     Nav.start( 'home' );
+
+    // event unbind
+    Page.dispose();
   }
   /**
    * category page
@@ -154,6 +225,8 @@ export class Page {
     // nav
     Nav.start( slug );
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * single, detail page
@@ -169,6 +242,8 @@ export class Page {
     // single
     Single.start( articleId );
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * コメント詳細
@@ -183,6 +258,8 @@ export class Page {
 
     Comment.user( 'comment', event.article, event.comment );
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * コメント返信 詳細
@@ -197,6 +274,8 @@ export class Page {
 
     Comment.user( 'reply', event.article, event.comment, event.article );
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * 検索ページ
@@ -210,6 +289,8 @@ export class Page {
 
     Search.start( event.keyword );
 
+    // event unbind
+    Page.dispose();
   }
   // ----------------------------------------------------
   // header, footer いらない
@@ -228,6 +309,9 @@ export class Page {
       let login = new UT.view.login.ViewLogin( loginElement );
       login.start();
     }
+
+    // event unbind
+    Page.dispose();
   }
 
   /**
@@ -249,6 +333,9 @@ export class Page {
         logout.start();
       }
     }
+
+    // event unbind
+    Page.dispose();
   }
   // ----------------------------------------------------
   /*
@@ -280,6 +367,8 @@ export class Page {
       Bookmarks.start();
     }
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * マイページ / アクティビティーズ一覧
@@ -299,6 +388,8 @@ export class Page {
       Activities.start();
     }
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * マイページ / お知らせ一覧
@@ -317,6 +408,8 @@ export class Page {
       Notifications.start();
     }
 
+    // event unbind
+    Page.dispose();
   }
   // ------------------------------
   // settings 設定
@@ -337,6 +430,8 @@ export class Page {
       Settings.account();
     }
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * 設定 パーソナライズ設定 興味のある競技
@@ -355,6 +450,8 @@ export class Page {
       Settings.interest();
     }
 
+    // event unbind
+    Page.dispose();
   }
   /**
    * 設定 ソーシャル連携
@@ -366,6 +463,9 @@ export class Page {
     SearchFrom.start();
     Sidebar.start();
     Header.start();
+
+    // event unbind
+    Page.dispose();
   }
   /**
    * 退会
@@ -384,5 +484,7 @@ export class Page {
       Settings.deactivate();
     }
 
+    // event unbind
+    Page.dispose();
   }
 }

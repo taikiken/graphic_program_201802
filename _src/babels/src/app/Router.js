@@ -45,7 +45,7 @@ export class Router extends EventDispatcher {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Router is static Class. not use new Router(). instead Router.factory()` );
+      throw new Error( 'Router is static Class. not use new Router(). instead Router.factory()' );
 
     }
 
@@ -63,13 +63,13 @@ export class Router extends EventDispatcher {
   init( target ):void {
 
     if ( _symbol !== target ) {
-      throw new Error( `init is private method.` );
+      throw new Error( 'init is private method.' );
     }
 
     var _this = this;
 
     this._rule = {
-      '/': _this.index,
+      '/': _this.index.bind( _this ),
       '/category/': _this.category.bind( _this ),
       '/p/': _this.single.bind( _this ),
       '/search/': _this.search.bind( _this ),
@@ -103,7 +103,9 @@ export class Router extends EventDispatcher {
     let path = Loc.path;
     let pathLength = path.length;
     let found = false;
+
     console.log( 'route path, pathLength ', path, pathLength );
+
     if ( pathLength !== 1 ) {
 
       for ( var key in rule ) {
@@ -135,10 +137,10 @@ export class Router extends EventDispatcher {
       found = true;
 
     }
-
+    console.log( 'Router found', found, path );
     if ( !found ) {
       // path pattern に該当しない
-      this.page404();
+      this.page404( path );
     }
 
   }
@@ -147,7 +149,7 @@ export class Router extends EventDispatcher {
    * @param {string} [where=''] 発火場所
    */
   page404( where:string = '' ):void {
-
+    console.log( '404 ', where );
     this.dispatch( { type: Router.NOT_FOUND, where: where } );
 
   }
