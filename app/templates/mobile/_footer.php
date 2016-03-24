@@ -26,7 +26,13 @@ if (
   <div id="side-menu-bg"></div>
   <div id='side-menu'>
     <ul id="side-menu-list">
-      <li class="ad"><img src="/assets/sp/images/dummy/side-bnr.jpg" alt=""></li>
+      <li class="ad">
+        <div id="adg_div">
+          <!-- AdGeneration/ -->
+          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=undotsushin_side_menu&targetID=adg_undotsushin_side_menu&displayid=1&tagver=2.0.0"></script>
+          <!-- /AdGeneration -->
+        </div>
+      </li>
 
       <li id="side-menu-service">
         <ul>
