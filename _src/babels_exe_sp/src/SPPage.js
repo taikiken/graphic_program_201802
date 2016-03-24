@@ -46,7 +46,7 @@ export class SPPage {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPPage is static Class. not use new SPPage().` );
+      throw new Error( 'SPPage is static Class. not use new SPPage().' );
 
     }
   }
@@ -65,6 +65,8 @@ export class SPPage {
     // router
     let Router = UT.app.Router;
     let router = Router.factory();
+
+    SPPage.router = router;
 
     // index
     router.on( Router.INDEX, SPPage.index );
@@ -112,6 +114,9 @@ export class SPPage {
     // sp only /signup_login
     router.on( Router.SIGNUP_LOGIN, SPPage.signupLogin );
 
+    // 404
+    router.on( Router.NOT_FOUND, SPPage.notFound );
+
     router.route();
 
     window.addEventListener( 'load', SPPage.stick, false );
@@ -122,6 +127,74 @@ export class SPPage {
   static stick():void {
     window.removeEventListener( 'load', SPPage.stick );
     setTimeout( window.scrollTo( 0, 1 ), 0 );
+  }
+  /**
+   * event unbind
+   */
+  static dispose():void {
+    let Router = UT.app.Router;
+    let router = SPPage.router;
+
+    // index
+    router.off( Router.INDEX, SPPage.index );
+    // category
+    router.off( Router.CATEGORY, SPPage.category );
+    // single(detail|p)
+    router.off( Router.SINGLE, SPPage.single );
+    // search
+    router.off( Router.SEARCH, SPPage.search );
+
+    // comment
+    router.off( Router.COMMENT, SPPage.comment );
+    router.off( Router.COMMENT_REPLY, SPPage.commentReply );
+
+    // 管理系
+    // signup
+    router.off( Router.SIGNUP, SPPage.signup );
+    // login
+    router.off( Router.LOGIN, SPPage.login );
+    // logout
+    router.off( Router.LOGOUT, SPPage.logout );
+
+    // mypage
+    router.off( Router.MYPAGE, SPPage.mypage );
+    // mypage/activities
+    router.off( Router.MYPAGE_ACTIVITIES, SPPage.activities );
+    // notifications
+    router.off( Router.NOTIFICATIONS, SPPage.notifications );
+    // settings
+    router.off( Router.SETTING, SPPage.settings );
+    // settings/interest
+    router.off( Router.SETTING_INTEREST, SPPage.interest );
+
+    // settings/social
+    router.off( Router.SETTING_SOCIAL, SPPage.social );
+
+    // settings/deactivate
+    router.off( Router.SETTING_DEACTIVATE, SPPage.deactivate );
+
+    // sp only /signup_login
+    router.off( Router.SIGNUP_LOGIN, SPPage.signupLogin );
+
+    // 404
+    router.off( Router.NOT_FOUND, SPPage.notFound );
+  }
+  /**
+   * 404 not found
+   */
+  static notFound():void {
+    // page top
+    SPPageTop.start();
+    // search from
+    SPSearchFrom.start();
+
+    SPHeader.start();
+
+    // syn.
+    SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * home, index page
@@ -137,6 +210,9 @@ export class SPPage {
     SPNav.start( 'home' );
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * category page
@@ -156,6 +232,9 @@ export class SPPage {
     SPNav.start( slug );
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * single, detail page
@@ -172,6 +251,9 @@ export class SPPage {
     SPSingle.start( articleId );
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * コメント詳細
@@ -187,6 +269,9 @@ export class SPPage {
     SPComment.user( 'comment', event.article, event.comment );
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * コメント返信 詳細
@@ -202,6 +287,9 @@ export class SPPage {
     SPComment.user( 'reply', event.article, event.comment, event.article );
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * 検索ページ
@@ -216,6 +304,9 @@ export class SPPage {
     SPSearch.start( event.keyword );
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   // ----------------------------------------------------
   // header, footer いらない
@@ -234,6 +325,9 @@ export class SPPage {
       let login = new UT.view.login.ViewLogin( loginElement );
       login.start();
     }
+
+    // event unbind
+    SPPage.dispose();
   }
 
   /**
@@ -255,6 +349,9 @@ export class SPPage {
         logout.start();
       }
     }
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * signup_login
@@ -269,6 +366,9 @@ export class SPPage {
 
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   // ----------------------------------------------------
   /*
@@ -301,6 +401,9 @@ export class SPPage {
     }
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * マイページ / アクティビティーズ一覧
@@ -321,6 +424,9 @@ export class SPPage {
     }
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * マイページ / お知らせ一覧
@@ -340,6 +446,9 @@ export class SPPage {
     }
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   // ------------------------------
   // settings 設定
@@ -361,6 +470,9 @@ export class SPPage {
     }
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * 設定 パーソナライズ設定 興味のある競技
@@ -380,6 +492,9 @@ export class SPPage {
     }
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * 設定 ソーシャル連携
@@ -394,6 +509,9 @@ export class SPPage {
     SPHeader.start();
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
   /**
    * 退会
@@ -413,5 +531,8 @@ export class SPPage {
     }
     // syn.
     SPSyn.start();
+
+    // event unbind
+    SPPage.dispose();
   }
 }
