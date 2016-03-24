@@ -127,9 +127,8 @@ export class Scroll extends EventDispatcher {
         delay: delay,
         easing: easingFunc,
         onComplete: function() {
-          console.log( 'Scroll motion callback onComplete', complete );
-          if ( typeof callback === 'function' ) {
-            complete();
+          if ( typeof complete === 'function' ) {
+            complete.call( this );
           }
         }
       }

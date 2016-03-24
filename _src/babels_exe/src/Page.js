@@ -129,23 +129,27 @@ export class Page {
    */
   static stick():void {
     window.removeEventListener( 'load', Page.stick );
-
-    if ( Sagen.Browser.IE.is() ) {
-      // ie
-      setTimeout( Page.ieStick, 200 );
-    } else {
-      // not ie
-      // setTimeout( window.scrollTo( 0, 0 ), 200 );
-      setTimeout( Page.ieStick, 200 );
-    }
+    //
+    // if ( Sagen.Browser.IE.is() ) {
+    //   // ie
+    //   setTimeout( Page.ieStick, 200 );
+    // } else {
+    //   // not ie
+    //   // setTimeout( window.scrollTo( 0, 0 ), 200 );
+    //   setTimeout( Page.ieStick, 200 );
+    // }
+    // PC browser 全部
+    setTimeout( Page.ieStick, 1 );
   }
 
+  /**
+   * 遷移時に上部張り付くになるようにする
+   */
   static ieStick():void {
     // IE 11 動かないので animation してみる
     let whole = Dom.whole();
     whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
     UT.util.Scroll.motion( 0, 0.1, 0, null, function() {
-      console.log( 'stick complete' );
       whole.style.cssText = '';
     } );
   }
