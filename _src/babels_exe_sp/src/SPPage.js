@@ -266,6 +266,9 @@ export class SPPage {
     SPSearchFrom.start();
     // header
     SPHeader.start();
+
+    // syn.
+    SPSyn.start();
   }
   // ----------------------------------------------------
   /*
