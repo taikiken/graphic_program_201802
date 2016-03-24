@@ -34,6 +34,7 @@ import {Router} from './app/Router';
 // -------------------------------------
 // util
 import {Offset} from './util/Offset';
+import {Scroll} from './util/Scroll';
 
 /*
 // -------------------------------------
@@ -233,7 +234,8 @@ var UT = {
     Loc: Loc,
     Format: Format
     */
-    Offset: Offset
+    Offset: Offset,
+    Scroll: Scroll
   }, /*
   net: {
     Ajax: Ajax,

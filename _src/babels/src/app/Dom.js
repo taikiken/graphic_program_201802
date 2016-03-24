@@ -48,7 +48,13 @@ export class Dom {
 
     return element;
   }
-
+  /**
+   * body > div#whole Element
+   * @return {Element} whole element を返します
+   */
+  static whole():Element {
+    return Dom.get( 'whole' );
+  }
   /**
    * pageTop container
    * @return {Element} pageTop element を返します

@@ -49,7 +49,7 @@
   <script src="/assets/js/bundle/main.bundle.js"></script>
 </head>
 <body>
-<div class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
+<div id="whole" class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
 <?php
 // header 表示条件 start
 $template_name = $page['template'];
