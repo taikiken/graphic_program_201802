@@ -236,17 +236,22 @@ export let ReactionNode = React.createClass( {
     console.log( '+++++ goodAddDone' );
     let good = ++this.goodCount;
 
-    this.setState( { good: good, isGood: true } );
-
     if ( this.state.isBad ) {
       // bad しているので bad DELETE する
-      this.badDelete();
+      let bad = --this.badCount;
+      this.setState( {good: good, isGood: true, bad: bad, loading: '', isBad: false} );
+
+      // API 叩かない
+      // this.badDelete();
     } else {
       // bad していない時はここまで
-      this.loadingStop();
-      // Good add event fire
-      this.good.add( this.props.commentId );
+      this.setState( { good: good, isGood: true, loading: '' } );
     }
+
+    // loading clear
+    // this.loadingStop();
+    // Good add event fire
+    this.good.add( this.props.commentId );
   },
   // bad delete
   goodDeleteDone: function() {
@@ -265,17 +270,22 @@ export let ReactionNode = React.createClass( {
     console.log( '--- badAddDone' );
     let bad = ++this.badCount;
 
-    this.setState( {bad: bad, isBad: true} );
-
     if ( this.state.isGood ) {
       // good しているので good DELETE する
-      this.goodDelete();
+      let good = --this.goodCount;
+      this.setState( {bad: bad, isBad: true, good: good, loading: '', isGood: false} );
+      // API 叩かない
+      // this.goodDelete();
     } else {
       // good していない時はここまで
-      this.loadingStop();
-      // Bad add event fire
-      this.bad.add( this.props.commentId );
+      this.setState( {bad: bad, isBad: true, loading: ''} );
+
     }
+
+    // loading clear
+    // this.loadingStop();
+    // Bad add event fire
+    this.bad.add( this.props.commentId );
 
   },
   // bad delete
