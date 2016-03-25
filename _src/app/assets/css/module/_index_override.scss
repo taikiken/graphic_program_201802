@@ -1,0 +1,30 @@
+@import "../../../../scss/asset";
+@import "../sprite";
+
+// -------------------------------------------------
+// slide show
+// -------------------------------------------------
+// 16x9 にするために高さを 400px -> 360px 変更
+.hero-slider {
+  height: 360px;
+}
+.hero-slider-inner {
+  li {
+    a {
+      overflow: hidden;
+      height: 360px;
+    }
+  }
+}
+.hero-slider-control {
+  .direction {
+    a {
+      height: 360px
+    }
+  }
+
+  .pager {
+    // 370px -> 330px
+    top: 330px;
+  }
+}
