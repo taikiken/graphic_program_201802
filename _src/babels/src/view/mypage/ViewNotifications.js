@@ -259,6 +259,7 @@ export class ViewNotifications extends View {
       render: function() {
 
         let notice = this.props.dae;
+        /*
         let loggedIn = 'user-logged-in';
 
         let icon = notice.user.profilePicture;
@@ -273,6 +274,9 @@ export class ViewNotifications extends View {
           }
           loggedIn = '';
         }
+        */
+        let icon = Safety.image( notice.user.profilePicture, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         switch ( notice.action ) {
 

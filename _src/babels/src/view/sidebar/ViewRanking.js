@@ -229,6 +229,8 @@ export class ViewRanking extends View {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
+
+                /*
                 let thumbnail = dae.media.images.thumbnail;
                 let empty = false;
 
@@ -244,6 +246,9 @@ export class ViewRanking extends View {
                     empty = true;
                   }
                 }
+                */
+                let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
+                let empty = thumbnail === Empty.IMG_SMALL;
 
                 // RankingDom instance を使い render
                 return (

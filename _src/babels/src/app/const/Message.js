@@ -49,6 +49,13 @@ export class Message {
     return 'オススメ動画';
   }
   /**
+   * HEADLINE_TITLE 注目のニュース
+   * @return {string} 注目のニュース
+   */
+  static get HEADLINE_TITLE():string {
+    return '注目のニュース';
+  }
+  /**
    * UNLOAD, 入力内容が取消しされます
    * onbeforeunload message に使用します
    * @return {string} 入力内容が取消しされます

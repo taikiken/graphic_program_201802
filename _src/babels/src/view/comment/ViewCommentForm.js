@@ -40,6 +40,7 @@ export class ViewCommentForm extends View {
 
     this._articleId = String(articleId);
 
+    /*
     if ( !icon ) {
       icon = Empty.USER_EMPTY;
     } else if ( !Safety.isImg( icon ) ) {
@@ -49,8 +50,9 @@ export class ViewCommentForm extends View {
         icon = Empty.USER_EMPTY;
       }
     }
-
     this._icon = icon;
+     */
+    this._icon = Safety.image( icon, Empty.USER_EMPTY );
 
   }
   /**

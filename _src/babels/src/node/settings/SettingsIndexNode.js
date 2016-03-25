@@ -120,6 +120,7 @@ let SettingInputNode = React.createClass( {
     };
 
     // 登録済み avatar
+    /*
     let avatar = this.state.avatar;
     if ( !avatar ) {
       avatar = Empty.USER_EMPTY;
@@ -130,6 +131,9 @@ let SettingInputNode = React.createClass( {
     }
 
     let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';
+    */
+    let avatar = Safety.image( this.state.avatar, Empty.USER_EMPTY );
+    let loggedIn = Safety.same( avatar, Empty.USER_EMPTY );
 
     let imgStyle = {
       'background': `url(${avatar}) no-repeat center center`,

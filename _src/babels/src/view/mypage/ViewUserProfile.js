@@ -117,6 +117,7 @@ export class ViewUserProfile extends View {
       render: function() {
         let dae = this.props.dae;
         let categories = dae.interest.category;
+        /*
         let icon = dae.profilePicture;
         let loggedIn = 'user-logged-in';
 
@@ -129,6 +130,9 @@ export class ViewUserProfile extends View {
           }
           loggedIn = '';
         }
+        */
+        let icon = Safety.image( dae.profilePicture, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         return (
           <div className="user-profile">

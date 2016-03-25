@@ -65,6 +65,8 @@ export class SPViewHeadLine extends ViewHeadline {
       render: function() {
 
         let dae = this.props.dae;
+
+        /*
         let thumbnail = dae.media.images.large;
 
         // thumbnail を check しなければ代替画像にする
@@ -77,6 +79,8 @@ export class SPViewHeadLine extends ViewHeadline {
             thumbnail = Empty.IMG_LARGE;
           }
         }
+        */
+        let thumbnail = Safety.image( dae.media.images.large, Empty.IMG_LARGE );
 
         let category = ( label ):string => {
           return !label ? '' : <span className="category-label">{label}</span>;
@@ -172,6 +176,7 @@ export class SPViewHeadLine extends ViewHeadline {
                   list.map( function( article, i ) {
 
                     let dae = new ArticleDae( article );
+                    /*
                     let thumbnail = dae.media.images.thumbnail;
 
                     // thumbnail を check しなければ代替画像にする
@@ -184,6 +189,8 @@ export class SPViewHeadLine extends ViewHeadline {
                         thumbnail = Empty.IMG_SMALL;
                       }
                     }
+                    */
+                    let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                     // HeadlineDom instance を使い render
                     return <HeadlineDom

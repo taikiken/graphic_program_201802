@@ -53,8 +53,11 @@ export class SPViewUserProfile extends ViewUserProfile {
       },
       render: function() {
         let dae = this.props.dae;
-        let icon = dae.profilePicture;
+
+        /*
         let loggedIn = 'user-logged-in';
+
+        let icon = dae.profilePicture;
 
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
@@ -65,6 +68,9 @@ export class SPViewUserProfile extends ViewUserProfile {
           }
           loggedIn = '';
         }
+        */
+        let icon = Safety.image( dae.profilePicture, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         return (
           <div className="user-profile">

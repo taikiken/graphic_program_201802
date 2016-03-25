@@ -220,6 +220,7 @@ export class ViewBookmarks extends View {
                 // loop start
                 this.state.list.map( function( dae ) {
 
+                  /*
                   let thumbnail = dae.media.images.thumbnail;
                   if ( !thumbnail ) {
                     thumbnail = Empty.IMG_SMALL;
@@ -228,6 +229,8 @@ export class ViewBookmarks extends View {
                       thumbnail = Empty.IMG_SMALL;
                     }
                   }
+                  */
+                  let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                   let category = ( label ):string => {
                     return !label ? '' : <span className="category-label">{label}</span>;

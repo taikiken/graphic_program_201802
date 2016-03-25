@@ -178,8 +178,9 @@ export class ViewHeaderMember extends View {
       },
       render: function() {
 
-        let icon = this.state.icon;
         let userName = this.state.userName;
+        /*
+        let icon = this.state.icon;
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
         } else if ( !Safety.isImg( icon ) ) {
@@ -191,6 +192,9 @@ export class ViewHeaderMember extends View {
         }
 
         let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
+        */
+        let icon = Safety.image( this.state.icon, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         return (
           <div className="user">

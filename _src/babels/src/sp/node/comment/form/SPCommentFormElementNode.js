@@ -100,6 +100,7 @@ export let SPCommentFormElementNode = React.createClass( {
     if ( this.state.open || this.props.independent ) {
 
       // user icon
+      /*
       let picture = this.props.icon;
       if ( !picture ) {
         picture = Empty.USER_EMPTY;
@@ -112,6 +113,9 @@ export let SPCommentFormElementNode = React.createClass( {
       }
 
       let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
+      */
+      let picture = Safety.image( this.props.icon, Empty.USER_EMPTY );
+      let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
       let errorClass = ( keyName:string ) => {
         return this.errors[ keyName ].error ? 'error' : '';

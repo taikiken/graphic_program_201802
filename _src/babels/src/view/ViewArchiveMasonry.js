@@ -281,6 +281,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
                   let userDae = commentDae.user;
                   // let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
+                  /*
                   let picture = userDae.profilePicture;
                   if ( !picture ) {
                     picture = Empty.USER_EMPTY;
@@ -293,6 +294,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                   }
 
                   let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
+                  */
+                  let picture = Safety.image( userDae.profilePicture, Empty.USER_EMPTY );
+                  let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
                   // CommentsSecond unique key は  記事Id + user Id を使用する
                   // 同一ユーザーが複数投稿することがあるため
@@ -546,6 +550,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
                 let commentsPopular = dae.commentsPopular;
                 let commentsTotal = dae.commentsCount;
+                /*
                 let thumbnail;
 
                 thumbnail = dae.media.images.medium;
@@ -560,6 +565,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                     thumbnail = Empty.IMG_MIDDLE;
                   }
                 }
+                */
+                let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
                 let category = ( label ):string => {
                   return !label ? '' : <span className="category-label">{label}</span>;

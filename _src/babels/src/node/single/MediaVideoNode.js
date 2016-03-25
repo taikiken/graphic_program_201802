@@ -62,9 +62,10 @@ export let MediaVideoNode = React.createClass( {
 
     let images = media.images;
     let video = media.video;
-    let poster = images.medium;
     let caption = video.caption || '';
 
+    /*
+    let poster = images.medium;
     if ( !poster ) {
       poster = Empty.VIDEO_THUMBNAIL;
     } else if (!Safety.isImg(poster)) {
@@ -74,6 +75,9 @@ export let MediaVideoNode = React.createClass( {
         poster = Empty.VIDEO_THUMBNAIL;
       }
     }
+    */
+
+    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
 
     // HTML5 video
     return <HTML5VideoNode

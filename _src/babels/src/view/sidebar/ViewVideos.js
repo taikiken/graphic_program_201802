@@ -223,6 +223,7 @@ export class ViewVideos extends View {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
+                /*
                 let thumbnail = dae.media.images.medium;
 
                 // thumbnail(16x9) を check なければ代替画像にする
@@ -235,6 +236,8 @@ export class ViewVideos extends View {
                     thumbnail = Empty.VIDEO_THUMBNAIL;
                   }
                 }
+                */
+                let thumbnail = Safety.image( dae.media.images.medium, Empty.VIDEO_THUMBNAIL );
 
                 // VideosDom instance を使い render
                 return (

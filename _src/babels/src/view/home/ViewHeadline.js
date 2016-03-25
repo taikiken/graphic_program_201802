@@ -223,7 +223,7 @@ export class ViewHeadline extends View {
           <div className="headline">
             <div className="headline-heading">
               <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
-              <span className="headline-heading-ruby">注目のニュース</span>
+              <span className="headline-heading-ruby">{Message.HEADLINE_TITLE}</span>
             </div>
 
             <ul className="board-small column2">
@@ -231,6 +231,7 @@ export class ViewHeadline extends View {
                 list.map( function( article, i ) {
 
                   let dae = new ArticleDae( article );
+                  /*
                   let thumbnail = dae.media.images.thumbnail;
 
                   // thumbnail を check しなければ代替画像にする
@@ -243,6 +244,8 @@ export class ViewHeadline extends View {
                       thumbnail = Empty.IMG_SMALL;
                     }
                   }
+                  */
+                  let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                   // HeadlineDom instance を使い render
                   return <HeadlineDom

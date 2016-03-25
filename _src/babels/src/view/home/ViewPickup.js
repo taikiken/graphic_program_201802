@@ -328,6 +328,7 @@ export class ViewPickup extends View {
         let make = ( article, i ) => {
 
           let dae = new ArticleDae( article );
+          /*
           let large = dae.media.images.large;
 
           if ( !large ) {
@@ -339,6 +340,8 @@ export class ViewPickup extends View {
               large = Empty.IMG_LARGE;
             }
           }
+          */
+          let large = Safety.image( dae.media.images.large, Empty.IMG_LARGE );
 
           // HeadlineDom instance を使い render
           // iteration key は index を使う

@@ -175,6 +175,7 @@ export class ViewHeaderMemberNotice extends View {
         let notice = this.state.notice;
         // let index = this.state.index;
 
+        /*
         let icon = notice.user.profilePicture;
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
@@ -187,6 +188,9 @@ export class ViewHeaderMemberNotice extends View {
         }
 
         let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
+        */
+        let icon = Safety.image( notice.user.profilePicture, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         switch ( notice.action ) {
           case 'comment':
