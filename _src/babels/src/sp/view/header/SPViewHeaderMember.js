@@ -110,9 +110,9 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         let noticeStyle = ( num ) => {
           return num === 0 ? { display: 'none' } : { display: 'block' };
         };
-
-        let icon = this.props.icon;
         let userName = this.props.userName;
+        /*
+        let icon = this.props.icon;
         if ( !icon ) {
           icon = Empty.USER_EMPTY;
         } else if ( !Safety.isImg( icon ) ) {
@@ -124,6 +124,9 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         }
 
         let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
+        */
+        let icon = Safety.image( this.props.icon, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         return (
           <div className="user">

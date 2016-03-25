@@ -14,6 +14,7 @@
 import {View} from '../View';
 
 import {User} from '../../app/User';
+import {Message} from '../../app/const/Message';
 
 // util
 import {Loc} from '../../util/Loc';
@@ -55,7 +56,7 @@ export class ViewLogout extends View {
         return (
           <div className="mod-btnB01 mt30 btn-withdraw">
             <div className={'loading-root ' + this.state.loading}>
-              <a href="#" onClick={this.clickHandler}>ログアウト</a>
+              <a href="#" onClick={this.clickHandler}>{Message.SUBMIT_LOGOUT}</a>
               <div className="loading-spinner"></div>
             </div>
           </div>

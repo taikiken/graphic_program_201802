@@ -48,8 +48,8 @@ export class SPViewSearch extends SPViewArchive {
    */
   showError( message:string = '' ):void {
 
-    message = Safety.string( message, '' );
-    console.warn( 'search error ', message );
+    // message = Safety.string( message, '' );
+    // console.warn( 'search error ', message );
 
     let ErrorDom = React.createClass( {
       render: function() {

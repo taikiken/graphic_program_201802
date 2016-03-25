@@ -69,7 +69,7 @@ export class ViewUserProfile extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[USER_PROFILE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -117,6 +117,7 @@ export class ViewUserProfile extends View {
       render: function() {
         let dae = this.props.dae;
         let categories = dae.interest.category;
+        /*
         let icon = dae.profilePicture;
         let loggedIn = 'user-logged-in';
 
@@ -129,6 +130,9 @@ export class ViewUserProfile extends View {
           }
           loggedIn = '';
         }
+        */
+        let icon = Safety.image( dae.profilePicture, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         return (
           <div className="user-profile">

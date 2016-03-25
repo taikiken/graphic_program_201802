@@ -85,7 +85,8 @@ export let CommentNode = React.createClass( {
     let sign = this.props.sign;
 
     // user icon
-    let picture = comment.user.profilePicture;
+    let picture = Safety.image( comment.user.profilePicture, Empty.USER_EMPTY );
+    /*
     if ( !picture ) {
       picture = Empty.USER_EMPTY;
     } else if ( !Safety.isImg( picture ) ) {
@@ -95,8 +96,9 @@ export let CommentNode = React.createClass( {
         picture = Empty.USER_EMPTY;
       }
     }
-
     let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
+     */
+    let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
     let replyClass = ( replyId ) => {
       return replyId === '' ? '' : ` comment-content-reply-${replyId}`;

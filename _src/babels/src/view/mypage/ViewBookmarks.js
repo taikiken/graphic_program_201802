@@ -24,7 +24,7 @@ import {ModelBookmark} from '../../model/users/ModelBookmark';
 
 // app
 import {Empty} from '../../app/const/Empty';
-// import {Message} from '../../app/const/Message';
+import {Message} from '../../app/const/Message';
 
 // data
 import {Result} from '../../data/Result';
@@ -100,7 +100,7 @@ export class ViewBookmarks extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[BOOKMARKS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[BOOKMARKS:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -108,7 +108,7 @@ export class ViewBookmarks extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[BOOKMARKS:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[BOOKMARKS:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
@@ -220,6 +220,7 @@ export class ViewBookmarks extends View {
                 // loop start
                 this.state.list.map( function( dae ) {
 
+                  /*
                   let thumbnail = dae.media.images.thumbnail;
                   if ( !thumbnail ) {
                     thumbnail = Empty.IMG_SMALL;
@@ -228,6 +229,8 @@ export class ViewBookmarks extends View {
                       thumbnail = Empty.IMG_SMALL;
                     }
                   }
+                  */
+                  let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                   let category = ( label ):string => {
                     return !label ? '' : <span className="category-label">{label}</span>;

@@ -34,7 +34,7 @@ export class SPViewCommentForm extends ViewCommentForm {
    * @param {string} [icon=''] ユーザー画像パス
    */
   constructor( element:Element, articleId:Number, icon:string = '' ) {
-    console.log( 'SPViewCommentForm' );
+    // console.log( 'SPViewCommentForm' );
     super( element, articleId, icon );
   }
   /**
@@ -42,7 +42,7 @@ export class SPViewCommentForm extends ViewCommentForm {
    * @param {string} id 記事Id
    */
   render( id:string ):void {
-    console.log( 'SPViewCommentForm render' );
+    // console.log( 'SPViewCommentForm render' );
     ReactDOM.render(
       <SPCommentFormNode
         uniqueId={'comment-to-' + id}

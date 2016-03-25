@@ -103,7 +103,7 @@ export class ViewNotifications extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[NOTIFICATIONS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[NOTIFICATIONS:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -113,7 +113,7 @@ export class ViewNotifications extends View {
       if ( notificationsDae.notifications.length === 0 ) {
 
         // 配列が空
-        let error = new Error( '[NOTIFICATIONS:EMPTY]サーバーレスポンスに問題が発生しました。' );
+        let error = new Error( Message.empty('[NOTIFICATIONS:EMPTY]') );
         this.executeSafely( View.EMPTY_ERROR, error );
 
       } else {
@@ -259,6 +259,7 @@ export class ViewNotifications extends View {
       render: function() {
 
         let notice = this.props.dae;
+        /*
         let loggedIn = 'user-logged-in';
 
         let icon = notice.user.profilePicture;
@@ -273,6 +274,9 @@ export class ViewNotifications extends View {
           }
           loggedIn = '';
         }
+        */
+        let icon = Safety.image( notice.user.profilePicture, Empty.USER_EMPTY );
+        let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
         switch ( notice.action ) {
 

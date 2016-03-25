@@ -138,7 +138,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[ARCHIVE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[ARCHIVE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -146,7 +146,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[ARCHIVE:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[ARCHIVE:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
@@ -432,6 +432,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
                   let userDae = commentDae.user;
                   // let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
+                  /*
                   let picture = userDae.profilePicture;
                   if ( !picture ) {
                     picture = Empty.USER_EMPTY;
@@ -444,6 +445,9 @@ export class ViewArchiveMasonryInfinite extends View {
                   }
 
                   let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
+                  */
+                  let picture = Safety.image( userDae.profilePicture, Empty.USER_EMPTY );
+                  let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
                   // CommentsSecond unique key は  記事Id + user Id を使用する
                   // 同一ユーザーが複数投稿することがあるため
@@ -687,6 +691,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
                 let commentsPopular = dae.commentsPopular;
                 let commentsTotal = dae.commentsCount;
+                /*
                 let thumbnail;
 
                 thumbnail = dae.media.images.medium;
@@ -701,6 +706,8 @@ export class ViewArchiveMasonryInfinite extends View {
                     thumbnail = Empty.IMG_MIDDLE;
                   }
                 }
+                */
+                let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
                 let category = ( label ):string => {
                   return !label ? '' : <span className="category-label">{label}</span>;

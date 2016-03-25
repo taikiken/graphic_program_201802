@@ -10,7 +10,6 @@
  *
  */
 
-
 import {SPViewArchive} from '../SPViewArchive';
 import {User} from '../../../app/User';
 
@@ -39,6 +38,6 @@ export class SPViewNews extends SPViewArchive {
      */
     this.home = true;
 
-    console.log( '**************************** SPViewNews' );
+    // console.log( '**************************** SPViewNews' );
   }
 }

@@ -93,6 +93,7 @@ export class ViewRelated extends View {
               {
                 list.map( function( dae, i ) {
 
+                  /*
                   let thumbnail = dae.media.images.thumbnail;
                   // thumbnail = !!thumbnail ? thumbnail : Empty.IMG_SMALL;
                   if ( !thumbnail ) {
@@ -104,6 +105,8 @@ export class ViewRelated extends View {
                       thumbnail = Empty.IMG_SMALL;
                     }
                   }
+                  */
+                  let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                   return (
                     <li className="board-item column2" key={'related-' + dae.id}>

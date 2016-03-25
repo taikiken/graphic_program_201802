@@ -9,8 +9,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
 let _symbol = Symbol();
 
 /**
@@ -28,7 +26,7 @@ export class Message {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Message is static Class. not use new Message().` );
+      throw new Error( 'Message is static Class. not use new Message().' );
 
     }
 
@@ -36,6 +34,27 @@ export class Message {
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
+  /**
+   * RANKING_TITLE 人気の記事
+   * @return {string} 人気の記事
+   */
+  static get RANKING_TITLE():string {
+    return '人気の記事';
+  }
+  /**
+   * VIDEOS_TITLE オススメ動画
+   * @return {string} オススメ動画
+   */
+  static get VIDEOS_TITLE():string {
+    return 'オススメ動画';
+  }
+  /**
+   * HEADLINE_TITLE 注目のニュース
+   * @return {string} 注目のニュース
+   */
+  static get HEADLINE_TITLE():string {
+    return '注目のニュース';
+  }
   /**
    * UNLOAD, 入力内容が取消しされます
    * onbeforeunload message に使用します
@@ -176,13 +195,19 @@ export class Message {
   static get PLACEHOLDER_COMMENT():string {
     return 'コメントを書く';
   }
-
   /**
    * SUBMIT_LOGIN, ログイン
    * @return {string} ログイン
    */
   static get SUBMIT_LOGIN():string {
     return 'ログイン';
+  }
+  /**
+   * SUBMIT_LOGOUT, ログアウト
+   * @return {string} ログアウト
+   */
+  static get SUBMIT_LOGOUT():string {
+    return 'ログアウト';
   }
   // ----
   // single
@@ -355,5 +380,37 @@ export class Message {
    */
   static get FAVORITE_SPORTS():string {
     return '好きな競技';
+  }
+  // -----------------------------------
+  // ajx
+  /**
+   * NET_UNDEFINED, サーバーレスポンスに問題が発生しました
+   * @return {string} サーバーレスポンスに問題が発生しました
+   */
+  static get NET_UNDEFINED():string {
+    return 'サーバーレスポンスに問題が発生しました。';
+  }
+  /**
+   * NET_EMPTY, レスポンスが空でした
+   * @return {string} レスポンスが空でした
+   */
+  static get NET_EMPTY():string {
+    return 'レスポンスが空でした。';
+  }
+  /**
+   * undefined error message を作成します
+   * @param {string} prefix メッセージへ加えたい文言
+   * @return {string} prefix+message を返します
+   */
+  static undef( prefix:string = '' ):string {
+    return `${prefix}${Message.NET_UNDEFINED}`;
+  }
+  /**
+   * empty error message を作成します
+   * @param {string} prefix メッセージへ加えたい文言
+   * @return {string} prefix+message を返します
+   */
+  static empty( prefix:string = '' ):string {
+    return `${prefix}${Message.NET_EMPTY}`;
   }
 }

@@ -91,7 +91,7 @@ export class ViewActivities extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[ACTIVITIES:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[ACTIVITIES:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -99,7 +99,7 @@ export class ViewActivities extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[ACTIVITIES:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[ACTIVITIES:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 

@@ -13,6 +13,7 @@
 
 // app
 import {CommentsType} from '../app/const/CommentsType';
+import {Message} from '../app/const/Message';
 import {User} from '../app/User';
 
 // view
@@ -143,7 +144,7 @@ export class ViewComments extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[COMMENTS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[COMMENTS:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 

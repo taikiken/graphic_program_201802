@@ -13,6 +13,7 @@
 
 // app
 import {Empty} from '../../app/const/Empty';
+import {Message} from '../../app/const/Message';
 
 // view
 import {View} from '../View';
@@ -85,7 +86,7 @@ export class ViewRanking extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[RANKING:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[RANKING:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -93,7 +94,7 @@ export class ViewRanking extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[RANKING:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[RANKING:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
@@ -221,13 +222,15 @@ export class ViewRanking extends View {
             {/* title */}
             <div className="widget-ranking-heading">
               <h3 className="widget-ranking-heading-title"><img src="/assets/images/common/side-ranking-heading.png" alt="RANKING" /></h3>
-              <span className="widget-ranking-heading-ruby">人気の記事{categoryTitle}</span>
+              <span className="widget-ranking-heading-ruby">{Message.RANKING_TITLE}{categoryTitle}</span>
             </div>
             <ul className="post-list">
             {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
+
+                /*
                 let thumbnail = dae.media.images.thumbnail;
                 let empty = false;
 
@@ -243,6 +246,9 @@ export class ViewRanking extends View {
                     empty = true;
                   }
                 }
+                */
+                let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
+                let empty = thumbnail === Empty.IMG_SMALL;
 
                 // RankingDom instance を使い render
                 return (

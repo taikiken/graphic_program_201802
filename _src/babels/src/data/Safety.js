@@ -142,6 +142,8 @@ export class Safety {
 
     return split.pop().toLowerCase();
   }
+  // ----------------------------------------------------------
+  // 画像パスが正規かチェックする
   /**
    * 拡張子から画像ファイルかを調べます
    * @param {string} fileName 調査対象ファイル名
@@ -155,6 +157,58 @@ export class Safety {
     // 拡張子チェック
     return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf( Safety.getExtension( fileName ) ) !== -1;
   }
+  /**
+   * path に `graph.facebook.com` が含まれているかを調べます
+   * @param {string} path 調査対象パス
+   * @return {boolean} ath に `graph.facebook.com` が含まれているかの真偽値を返します
+   */
+  static isGraph( path:string ):Boolean {
+    return path.indexOf( 'graph.facebook.com' ) !== -1;
+  }
+
+  /**
+   * 引数 path が画像パスかを調べます
+   * @param {string} path 調査対象画像パス
+   * @param {string} defaultPath 代替画像パス
+   * @return {string} pathを調べ正しいと推測されるパスを返します
+   */
+  static image( path:string, defaultPath:string ):string {
+    // string check
+    path = Safety.string( path, '' );
+
+    if ( path === '' ) {
+      return defaultPath;
+    }
+
+    if ( !Safety.isImg( path ) ) {
+      // 拡張子チェック・アウト
+      if ( !Safety.isGraph( path ) ) {
+        return defaultPath;
+      } else {
+        return path;
+      }
+    }
+
+    return path;
+  }
+  /**
+   * NOT_EMPTY, 登録済みデータある時の className
+   * @return {string} user-logged-in を返します
+   */
+  static get NOT_EMPTY():string {
+    return 'user-logged-in';
+  }
+  /**
+   * path と empty を比較し異なっていれば notSame を返します
+   * @param {string} path 調査対象 1
+   * @param {string} empty 調査対象 2
+   * @param {string} [notSame=Safety.NOT_EMPTY] 異なってる時に返す文字
+   * @return {string} '' か notSame を返します
+   */
+  static same( path:string, empty:string, notSame:string = Safety.NOT_EMPTY ):string {
+    return path === empty ? '' : notSame;
+  }
+  // ----------------------------------------------------------
   /**
    * 引数が正規なものかをチェックします
    * @param {string} target 調査対象
@@ -170,13 +224,5 @@ export class Safety {
       }
     }
     return bool;
-  }
-  /**
-   * path に `graph.facebook.com` が含まれているかを調べます
-   * @param {string} path 調査対象パス
-   * @return {boolean} ath に `graph.facebook.com` が含まれているかの真偽値を返します
-   */
-  static isGraph( path:string ):Boolean {
-    return path.indexOf( 'graph.facebook.com' ) !== -1;
   }
 }
