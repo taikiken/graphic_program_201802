@@ -133,7 +133,7 @@ let SettingInputNode = React.createClass( {
 
     let imgStyle = {
       'background': `url(${avatar}) no-repeat center center`,
-      'background-size': 'cover'
+      'backgroundSize': 'cover'
     };
 
     if ( this.width !== 0 && this.height !== 0 ) {
@@ -157,7 +157,7 @@ let SettingInputNode = React.createClass( {
         bgHeight = size;
       }
 
-      imgStyle[ 'background-size' ] = `${bgWidth}px ${bgHeight}px`;
+      imgStyle.backgroundSize = `${bgWidth}px ${bgHeight}px`;
 
     }
 

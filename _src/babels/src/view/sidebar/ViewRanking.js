@@ -169,7 +169,7 @@ export class ViewRanking extends View {
 
         let imgStyle = {
           'background': `url(${p.thumbnail}) no-repeat center center`,
-          'background-size': 'cover'
+          'backgroundSize': 'cover'
         };
 
         return (

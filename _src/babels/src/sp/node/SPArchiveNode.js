@@ -255,7 +255,7 @@ let ThumbnailDom = React.createClass( {
       // type: image
       let imgStyle = {
         'background': `url(${this.props.thumbnail}) no-repeat center center`,
-        'background-size': 'cover'
+        'backgroundSize': 'cover'
       };
 
       return (
