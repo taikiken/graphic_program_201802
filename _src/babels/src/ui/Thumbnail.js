@@ -32,6 +32,11 @@ export class Thumbnail extends EventDispatcher {
     this._reader = null;
     this._boundLoad = this.onLoad.bind( this );
     this._boundError = this.onError.bind( this );
+
+    this._img = null;
+    this._imgLoad = this.imageLoad.bind( this );
+    this._imgError = this.imageError.bind( this );
+    this._result = '';
   }
   // ---------------------------------------------------
   //  Event
@@ -67,6 +72,7 @@ export class Thumbnail extends EventDispatcher {
       return;
     }
 
+    this._result = '';
     let reader = new FileReader();
     this._reader = reader;
     reader.addEventListener( 'load', this._boundLoad, false );
@@ -83,14 +89,30 @@ export class Thumbnail extends EventDispatcher {
       reader.removeEventListener( 'load', this._boundLoad );
       reader.removeEventListener( 'error', this._boundError );
     }
+
+    let img = this._img;
+    if ( img !== null ) {
+      this._img.removeEventListener( 'load', this._imgLoad );
+      this._img.removeEventListener( 'error', this._imgError );
+    }
   }
   /**
    * load event handler
    * @param {Event} event load event instance
    */
   onLoad( event:Event ):void {
-    this.dispose();
-    this.dispatch( {type: Thumbnail.LOAD, img: event.target.result, nativeEvent: event} );
+    // this.dispose();
+
+    let result = event.target.result;
+    this._result = result;
+    // image size check
+    let img = new Image();
+    this._img = img;
+    img.addEventListener( 'load', this._imgLoad, false );
+    img.addEventListener( 'error', this._imgError, false );
+    img.src = result;
+    // this.dispatch( {type: Thumbnail.LOAD, img: event.target.result, nativeEvent: event} );
+
   }
   /**
    * error event handler
@@ -98,8 +120,19 @@ export class Thumbnail extends EventDispatcher {
    */
   onError( event:Event ):void {
     this.dispose();
-    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event} );
+    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0} );
   }
+
+  imageLoad( event:Event ):void {
+    this.dispose();
+    this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: event.target.width, height: event.target.height} );
+  }
+
+  imageError( event:Event ):void {
+    this.dispose();
+    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0} );
+  }
+
   // ---------------------------------------------------
   //  STATIC
   // ---------------------------------------------------

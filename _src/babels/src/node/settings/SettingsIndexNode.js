@@ -56,12 +56,15 @@ let SettingInputNode = React.createClass( {
     email: React.PropTypes.string.isRequired,
     password: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
-    bio: React.PropTypes.string.isRequired
+    bio: React.PropTypes.string.isRequired,
+    size: React.PropTypes.number,
+    sp: React.PropTypes.number.isRequired
   },
   getDefaultProps: function() {
     return {
       avatar: Empty.SETTING_AVATAR,
-      empty: Empty.SETTING_AVATAR
+      empty: Empty.SETTING_AVATAR,
+      size: 120
     };
   },
   getInitialState: function() {
@@ -79,6 +82,10 @@ let SettingInputNode = React.createClass( {
     this.callback = null;
     this.icon = null;
 
+    // avatar size
+    this.width = 0;
+    this.height = 0;
+
     return {
       entered: false,
       error: false,
@@ -91,7 +98,7 @@ let SettingInputNode = React.createClass( {
       picture: '',
       // 入力済みの profile picture path
       avatar: this.props.avatar,
-
+      size: this.props.sp ? 90 : this.props.size,
       loading: ''
     };
   },
@@ -123,6 +130,36 @@ let SettingInputNode = React.createClass( {
     }
 
     let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';
+
+    let imgStyle = {
+      'background': `url(${avatar}) no-repeat center center`,
+      'background-size': 'cover'
+    };
+
+    if ( this.width !== 0 && this.height !== 0 ) {
+
+      let size = this.state.size;
+      let width = this.width;
+      let height = this.height;
+      let bgWidth, bgHeight;
+
+      if ( width > height ) {
+        // width が大きい
+        bgHeight = size;
+        bgWidth = Math.ceil( bgHeight / height * width );
+      } else if ( width < height ) {
+        // width が小さい
+        bgWidth = size;
+        bgHeight = Math.ceil( bgWidth / width * height );
+      } else {
+        // width, height 等しい
+        bgWidth = size;
+        bgHeight = size;
+      }
+
+      imgStyle[ 'background-size' ] = `${bgWidth}px ${bgHeight}px`;
+
+    }
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
@@ -192,8 +229,12 @@ let SettingInputNode = React.createClass( {
               >
                 <div className={'avatar-stage'}>
                   <sapn className={`avatar-container ${loggedIn}`}>
-                    <span className="avatar-block">
+                    <span className="avatar-block" style={imgStyle}>
+                      <img src={Empty.THUMB_EMPTY} alt=""/>
+                      {/*
+                      横長画像だと下が切れる問題
                       <img src={avatar} alt=""/>
+                      */}
                     </span>
                   </sapn>
                   <ChangeAvatarNode
@@ -261,6 +302,12 @@ let SettingInputNode = React.createClass( {
   pictureChange: function( event ) {
     console.log( 'pictureChange ', event );
     this.setState( {picture: event.target.value} );
+
+    if ( !Thumbnail.detect() ) {
+      // not support FileReader
+      return;
+    }
+
     if ( event.target.value !== '' ) {
 
       let files:FileList = event.target.files;
@@ -271,6 +318,10 @@ let SettingInputNode = React.createClass( {
         this.thumbnail = thumbnail;
         thumbnail.on( Thumbnail.LOAD, this.avatarLoad );
         thumbnail.on( Thumbnail.ERROR, this.avatarError );
+
+        this.width = 0;
+        this.height = 0;
+
         thumbnail.make();
 
       }
@@ -281,6 +332,8 @@ let SettingInputNode = React.createClass( {
   // after picture change
   avatarLoad: function( event ) {
     this.avatarDispose();
+    this.width = event.width;
+    this.height = event.height;
     this.setState( {avatar: event.img} );
   },
   avatarError: function( event ) {
@@ -490,7 +543,8 @@ export let SettingsIndexNode = React.createClass( {
     password: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
     bio: React.PropTypes.string.isRequired,
-    picture: React.PropTypes.string.isRequired
+    picture: React.PropTypes.string.isRequired,
+    sp: React.PropTypes.bool.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -507,6 +561,7 @@ export let SettingsIndexNode = React.createClass( {
           name={this.props.name}
           bio={this.props.bio}
           avatar={this.props.picture}
+          sp={this.props.sp}
         />
       </div>
     );

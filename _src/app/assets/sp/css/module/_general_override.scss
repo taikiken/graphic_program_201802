@@ -203,6 +203,7 @@
   margin-bottom: 10px;
 }
 .info-container {
+  min-height: 300px;
   #board-container-more {
     padding-top: 0;
     margin-bottom: 20px;
@@ -213,6 +214,8 @@
 // -------------------------------------------------
 // sp mypage (bookmark)
 .mypage-bookmark {
+  min-height: 300px;
+
   #board-container-more {
     padding-top: 0;
     margin: 10px 0 20px;
@@ -223,6 +226,8 @@
 // -------------------------------------------------
 // sp mypage/activities
 .activity-container {
+  min-height: 300px;
+
   #board-container-more {
     padding-top: 0;
     margin: 10px 0 20px;

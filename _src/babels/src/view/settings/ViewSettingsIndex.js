@@ -26,6 +26,9 @@ import {SettingsIndexNode} from '../../node/settings/SettingsIndexNode';
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';
 
+// Sagen
+let Sagen = self.Sagen;
+
 // React
 // let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -89,6 +92,7 @@ export class ViewSettingsIndex extends View {
         name={dae.userName}
         bio={dae.bio}
         picture={dae.profilePicture}
+        sp={Sagen.Browser.Mobile.phone()}
       />,
       this.element
     );
