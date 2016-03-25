@@ -71,7 +71,8 @@ export class ViewSettingsInterest extends View {
    * @param {Error} error Error instance
    */
   error( error ):void {
-    console.log( 'Signup complete', error );
+    console.warn( 'setting interest error', error );
+
   }
   /**
    * form 出力

@@ -14,6 +14,7 @@
 // app
 // import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
+import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
 
 // view
@@ -105,7 +106,7 @@ export class ViewPickup extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[PICKUP:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[PICKUP:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -113,7 +114,7 @@ export class ViewPickup extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[PICKUP:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[PICKUP:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 

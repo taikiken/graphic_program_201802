@@ -10,10 +10,13 @@
  *
  */
 
+// parent
+import {ViewArchiveMasonry} from './ViewArchiveMasonry';
 
+// action
 import {SearchAuth} from '../action/search/SearchAuth';
 import {Search} from '../action/search/Search';
-import {ViewArchiveMasonry} from './ViewArchiveMasonry';
+
 // view
 import {View} from './View';
 // import {ViewError} from './error/ViewError';
@@ -21,7 +24,9 @@ import {View} from './View';
 import {Result} from '../data/Result';
 import {Safety} from '../data/Safety';
 
+// app
 import {User} from '../app/User';
+import {Message} from '../app/const/Message';
 
 // React
 let React = self.React;
@@ -57,7 +62,7 @@ export class ViewSearch extends ViewArchiveMasonry {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[SEARCH:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[SEARCH:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       this.showError( error.message );
 
@@ -65,7 +70,7 @@ export class ViewSearch extends ViewArchiveMasonry {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[SEARCH:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[SEARCH:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       this.showError( error.message );
 

@@ -9,9 +9,9 @@
  */
 
 
-
 import {View} from '../View';
 
+// app
 import {User} from '../../app/User';
 import {Empty} from '../../app/const/Empty';
 import {CommentsType} from '../../app/const/CommentsType';

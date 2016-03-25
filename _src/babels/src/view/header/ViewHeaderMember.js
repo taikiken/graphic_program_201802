@@ -18,6 +18,7 @@ import {ViewHeaderMemberNotice} from './ViewHeaderMemberNotice';
 import {Empty} from '../../app/const/Empty';
 import {Url} from '../../app/const/Url';
 import {User} from '../../app/User';
+import {Message} from '../../app/const/Message';
 
 // action
 import {UsersSelf} from '../../action/users/UsersSelf';
@@ -97,7 +98,7 @@ export class ViewHeaderMember extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[MEMBER:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[MEMBER:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 

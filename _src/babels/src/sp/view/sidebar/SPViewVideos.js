@@ -107,9 +107,9 @@ export class SPViewVideos extends ViewVideos {
   }// render
   /**
    * more button 表示・非表示
-   * @param {boolean} show more button 表示・非表示 を決定する真偽値
+   * @param {Boolean} show more button 表示・非表示 を決定する真偽値
    */
-  moreButton( show:boolean ):void {
+  moreButton( show:Boolean ):void {
     show = !!show;
 
     // _moreRendered が null の時のみ, instance があれば state を update する

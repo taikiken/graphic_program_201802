@@ -14,6 +14,7 @@
 // app
 // import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
+import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
 
 // view
@@ -108,7 +109,7 @@ export class ViewHeadline extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[HEADLINE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[HEADLINE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -116,7 +117,7 @@ export class ViewHeadline extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[HEADLINE:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[HEADLINE:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 

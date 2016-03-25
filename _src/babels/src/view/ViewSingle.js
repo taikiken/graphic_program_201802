@@ -28,7 +28,9 @@ import {Safety} from '../data/Safety';
 // dae
 import {SingleDae} from '../dae/SingleDae';
 
+// app
 import {User} from '../app/User';
+import {Message} from '../app/const/Message';
 
 /**
  * 記事詳細
@@ -99,7 +101,7 @@ export class ViewSingle extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[SINGLE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[SINGLE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -130,8 +132,10 @@ export class ViewSingle extends View {
     message = Safety.string( message, '' );
 
     // ToDo: Error 時の表示が決まったら変更する
+    /*
     let error = new ViewError( this.element, this.option, message );
     error.render();
+    */
 
   }
   /**

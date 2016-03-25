@@ -19,6 +19,7 @@ import {Empty} from '../../app/const/Empty';
 import {NoticeAction} from '../../app/const/NoticeAction';
 import {Url} from '../../app/const/Url';
 import {Length} from '../../app/const/Length';
+import {Message} from '../../app/const/Message';
 
 // action
 import {Notice} from '../../action/users/Notice';
@@ -85,7 +86,8 @@ export class ViewHeaderMemberNotice extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[MEMBER:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[MEMBER:NOTICE:UNDEFINED]') );
+
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 

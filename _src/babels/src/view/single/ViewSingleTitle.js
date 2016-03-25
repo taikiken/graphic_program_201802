@@ -10,15 +10,18 @@
  *
  */
 
-
 // コメント詳細上部に表示する 記事タイトル
 
 // view
 import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 
+// app
+import {Message} from '../../app/const/Message';
+
 // action
 import {Single} from '../../action/single/Single';
+
 // data
 import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
@@ -66,7 +69,7 @@ export class ViewSingleTitle extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[COMMENT_BY_SINGLE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[COMMENT_BY_SINGLE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 

@@ -13,6 +13,7 @@
 
 // app
 import {Empty} from '../../app/const/Empty';
+import {Message} from '../../app/const/Message';
 
 // view
 import {View} from '../View';
@@ -85,7 +86,7 @@ export class ViewVideos extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[VIDEOS:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[VIDEOS:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -93,7 +94,7 @@ export class ViewVideos extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[VIDEOS:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[VIDEOS:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
@@ -215,7 +216,7 @@ export class ViewVideos extends View {
             {/* title */}
             <div className="widget-recommend-heading">
               <h3 className="widget-recommend-heading-title"><img src="/assets/images/common/side-recommend-heading.png" alt="RECOMMEND" /></h3>
-              <span className="widget-recommend-heading-ruby">オススメ動画{categoryTitle}</span>
+              <span className="widget-recommend-heading-ruby">{Message.VIDEOS_TITLE}{categoryTitle}</span>
             </div>
             <ul className="board-list">
             {

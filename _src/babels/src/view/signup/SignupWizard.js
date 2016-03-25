@@ -355,13 +355,13 @@ export class SignupWizard extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[SOCIAL:USER_PROFILE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[SOCIAL:USER_PROFILE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
 
     } else {
 
       let status = new StatusDae( result.status );
-      console.log( 'socialDone ', status );
+      // console.log( 'socialDone ', status );
       if ( status.code === 200 ) {
         // status.code 200 の時に success method を呼び出します
         this.success( new UserDae( response ) );
@@ -376,7 +376,7 @@ export class SignupWizard extends View {
    * @param {Object} error エラーメッセージ
    */
   socialFail( error ):void {
-    console.log( 'Social error ', error );
+    // console.log( 'Social error ', error );
   }
 
   /**

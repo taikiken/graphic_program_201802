@@ -138,7 +138,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( '[ARCHIVE:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.undef('[ARCHIVE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
 
@@ -146,7 +146,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
-      let error = new Error( '[ARCHIVE:EMPTY]サーバーレスポンスに問題が発生しました。' );
+      let error = new Error( Message.empty('[ARCHIVE:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
 
