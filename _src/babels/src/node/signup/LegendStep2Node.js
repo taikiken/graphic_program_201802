@@ -69,11 +69,14 @@ let Step2FormNode = React.createClass( {
     avatar: React.PropTypes.string,
     getForm: React.PropTypes.func.isRequired,
     changeEmail: React.PropTypes.func.isRequired,
-    email: React.PropTypes.string.isRequired
+    email: React.PropTypes.string.isRequired,
+    size: React.PropTypes.number,
+    sp: React.PropTypes.bool.isRequired
   },
   getDefaultProps: function() {
     return {
-      avatar: Empty.SETTING_AVATAR
+      avatar: Empty.SETTING_AVATAR,
+      size: 120
     };
   },
   getInitialState: function() {
@@ -89,6 +92,10 @@ let Step2FormNode = React.createClass( {
     this.ie = Sagen.Browser.IE.is();
     this.callback = null;
 
+    // avatar size
+    this.width = 0;
+    this.height = 0;
+
     return {
       email: this.props.email,
       step: this.props.step,
@@ -98,7 +105,8 @@ let Step2FormNode = React.createClass( {
       password: '',
       name: '',
       bio: '',
-      picture: ''
+      picture: '',
+      size: this.props.sp ? 90 : this.props.size
     };
   },
   render: function() {
@@ -115,6 +123,38 @@ let Step2FormNode = React.createClass( {
     let stageClass = () => {
       return this.props.avatar !== this.state.avatar ? 'show-thumbnail' : '';
     };
+
+    let avatar = this.state.avatar;
+
+    let imgStyle = {
+      'background': `url(${avatar}) no-repeat center center`,
+      'background-size': 'cover'
+    };
+
+    if ( this.width !== 0 && this.height !== 0 ) {
+
+      let size = this.state.size;
+      let width = this.width;
+      let height = this.height;
+      let bgWidth, bgHeight;
+
+      if ( width > height ) {
+        // width が大きい
+        bgHeight = size;
+        bgWidth = Math.ceil( bgHeight / height * width );
+      } else if ( width < height ) {
+        // width が小さい
+        bgWidth = size;
+        bgHeight = Math.ceil( bgWidth / width * height );
+      } else {
+        // width, height 等しい
+        bgWidth = size;
+        bgHeight = size;
+      }
+
+      imgStyle[ 'background-size' ] = `${bgWidth}px ${bgHeight}px`;
+
+    }
 
     return (
       <fieldset className="fieldset-step-2">
@@ -182,7 +222,15 @@ let Step2FormNode = React.createClass( {
               onDrop={this.handleDrop}
             >
               <div className={'avatar-stage'}>
-                <sapn className="avatar-container"><span className="avatar-block"><img src={this.state.avatar} alt=""/></span></sapn>
+                <sapn className="avatar-container">
+                    <span className="avatar-block" style={imgStyle}>
+                    <img src={Empty.THUMB_EMPTY} alt=""/>
+                    {/*
+                     横長画像だと下が切れる問題
+                     <img src={this.state.avatar} alt=""/>
+                     */}
+                  </span>
+                </sapn>
                 <ChangeAvatarNode
                   show={this.props.avatar !== this.state.avatar}
                   handler={this.avatarChangeHandler}
@@ -286,6 +334,10 @@ let Step2FormNode = React.createClass( {
         this.thumbnail = thumbnail;
         thumbnail.on( Thumbnail.LOAD, this.avatarLoad );
         thumbnail.on( Thumbnail.ERROR, this.avatarError );
+
+        this.width = 0;
+        this.height = 0;
+
         thumbnail.make();
 
       }
@@ -296,6 +348,8 @@ let Step2FormNode = React.createClass( {
   // after picture change
   avatarLoad: function( event ) {
     this.avatarDispose();
+    this.width = event.width;
+    this.height = event.height;
     this.setState( {avatar: event.img} );
   },
   avatarError: function( event ) {
@@ -519,7 +573,9 @@ export let LegendStep2Node = React.createClass( {
     // 親 component へ email change を通知する
     changeEmail: React.PropTypes.func.isRequired,
     // 初期 email value
-    email: React.PropTypes.string.isRequired
+    email: React.PropTypes.string.isRequired,
+
+    sp: React.PropTypes.bool.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -543,6 +599,7 @@ export let LegendStep2Node = React.createClass( {
           getForm={this.props.getForm}
           changeEmail={this.props.changeEmail}
           email={this.state.email}
+          sp={this.props.sp}
         />
       </div>
     );

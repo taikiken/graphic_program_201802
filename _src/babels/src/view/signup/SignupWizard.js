@@ -42,6 +42,9 @@ import {RootNode} from '../../node/signup/RootNode';
 // event
 import {SignupStatus} from '../../event/SignupStatus';
 
+// Sagen
+let Sagen = self.Sagen;
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -148,6 +151,7 @@ export class SignupWizard extends View {
               step={this.props.step}
               categories={this.props.categoriesDae.categories}
               beforeRedirect={this.beforeRedirect}
+              sp={Sagen.Browser.Mobile.phone()}
             />
           </div>
         );

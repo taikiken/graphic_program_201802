@@ -39,7 +39,8 @@ export let RootNode = React.createClass( {
   propTypes: {
     step: React.PropTypes.number.isRequired,
     categories: React.PropTypes.array.isRequired,
-    beforeRedirect: React.PropTypes.func.isRequired
+    beforeRedirect: React.PropTypes.func.isRequired,
+    sp: React.PropTypes.bool.isRequired
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
@@ -83,6 +84,7 @@ export let RootNode = React.createClass( {
                   getForm={this.getForm}
                   changeEmail={this.email2Change}
                   email={this.state.email2}
+                  sp={this.props.sp}
                 />
                 <LegendStep3Node
                   step={this.props.step + 2}
