@@ -270,9 +270,11 @@ export class ViewPickup extends View {
 
         return (
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
-            <a href={p.url}>
+            <a href={p.url} style={{'background': `url(${p.large}) no-repeat 50% 50% / cover`}}>
               <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
+              {/*
               <img src={p.large} alt={p.title}/>
+               */}
               <div className="post-overview">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category( p.category2)}</p>
                 <h2 className='post-heading'>{p.title}</h2>
