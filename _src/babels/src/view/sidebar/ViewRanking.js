@@ -167,10 +167,22 @@ export class ViewRanking extends View {
           return !label ? '' : <span className="category-label">{label}</span>;
         };
 
+        let imgStyle = {
+          'background': `url(${p.thumbnail}) no-repeat center center`,
+          'background-size': 'cover'
+        };
+
         return (
           <li className={'board-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
             <a href={p.url} className={'post'}>
-              <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`}><img src={p.thumbnail} alt={p.title}/></figure>
+              <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`} style={imgStyle}>
+                <img src={Empty.THUMB_EMPTY} alt=""/>
+                {/*
+                 https://github.com/undotsushin/undotsushin/issues/468
+                  1x1 を厳格に守る
+                <img src={p.thumbnail} alt={p.title}/>
+                 */}
+              </figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
                 <h4 className='post-heading'>{p.title}</h4>

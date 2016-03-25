@@ -28,7 +28,7 @@ export class Empty {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Empty is static Class. not use new Empty().` );
+      throw new Error( 'Empty is static Class. not use new Empty().' );
 
     }
 
@@ -36,6 +36,14 @@ export class Empty {
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
+  /**
+   * img thumbnail 代替画像パス
+   * [Ex.] sidebar ranking
+   * @return {string} 代替画像パス【sidebar ranking】
+   */
+  static get THUMB_EMPTY():string {
+    return '/assets/images/common/thumb-empty-100x100.png';
+  }
   /**
    * img thumbnail 代替画像パス<br>
    * [Ex.] headline, sidebar image...
@@ -63,7 +71,6 @@ export class Empty {
    */
   static get IMG_LARGE():string {
 
-    // ToDo: デザインができたらパスを正しいものに変更する
     return '/assets/images/common/thumb-pickup-empty.png';
 
   }
@@ -74,7 +81,6 @@ export class Empty {
    */
   static get VIDEO_THUMBNAIL():string {
 
-    // ToDo: デザインができたらパスを正しいものに変更する
     return '/assets/images/common/thumb-16x9.png';
 
   }
