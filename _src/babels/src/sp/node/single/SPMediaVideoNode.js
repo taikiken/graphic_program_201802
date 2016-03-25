@@ -83,9 +83,11 @@ export let SPMediaVideoNode = React.createClass( {
     />;
 
   },
+  /*
   brightcove: function() {
     // ToDo: 2016-06-01 ~
   },
+  */
   youtube: function( media ) {
     let video = media.video;
 

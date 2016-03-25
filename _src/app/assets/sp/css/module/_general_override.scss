@@ -68,6 +68,29 @@
   }
 }
 
+// archive: video thumbnail 下 h2.post-heading min-height 解除
+.board-large {
+  .board-item {
+    &.board-item-video {
+      .post-heading {
+        min-height: 0;
+        //margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+// archive: image thumbnail 左に余白追加
+.board-large {
+  .board-item {
+    &.board-item-image {
+      .post-thumb {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
 // movie thumbnail
 .board-item {
   // figure

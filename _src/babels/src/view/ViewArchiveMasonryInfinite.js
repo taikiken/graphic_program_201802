@@ -708,7 +708,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
-                  <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
+                  <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
                     <a className="post" href={dae.url}>
                       <ThumbnailDom
                         mediaType={dae.mediaType}

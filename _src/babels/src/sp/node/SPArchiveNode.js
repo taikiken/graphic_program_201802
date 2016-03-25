@@ -253,9 +253,19 @@ let ThumbnailDom = React.createClass( {
     // media type で thumbnail 切替
     if ( mediaType === MediaType.IMAGE ) {
       // type: image
+      let imgStyle = {
+        'background': `url(${this.props.thumbnail}) no-repeat center center`,
+        'background-size': 'cover'
+      };
+
       return (
-        <figure className={'post-thumb post-thumb-' + mediaType}>
+        <figure className={'post-thumb post-thumb-' + mediaType} style={imgStyle}>
+          <img className="image-hd" src={Empty.VIDEO_THUMBNAIL} alt=""/>
+          {/*
+           https://github.com/undotsushin/undotsushin/issues/468
+           16x9 を厳格に守る
           <img src={this.props.thumbnail} alt={this.props.title}/>
+           */}
         </figure>
       );
     } else if ( mediaType === MediaType.VIDEO ) {
@@ -350,7 +360,7 @@ export let SPArchiveNode = React.createClass( {
 
             // unique key(React)にarticle id(number)記事Idを使用します
             return (
-              <div key={'archive-' + dae.id} className={'board-item board-item-' + i}>
+              <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
                 <a className="post" href={dae.url}>
                   <ThumbnailDom
                     mediaType={dae.mediaType}
