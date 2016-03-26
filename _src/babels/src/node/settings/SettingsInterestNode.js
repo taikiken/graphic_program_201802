@@ -19,11 +19,15 @@ import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 // import {ErrorMessage} from '../../data/ErrorMessage';
 
+// dae
+import {StatusDae} from '../../dae/StatusDae';
+
 // node
 // import {ErrorNode} from '../error/ErrorNode';
 
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';
+import {MessageStatus} from '../../event/MessageStatus';
 
 // model
 import {Model} from '../../model/Model';
@@ -46,6 +50,9 @@ export let SettingsInterestNode = React.createClass( {
   },
   getInitialState: function() {
     this.status = SettingsStatus.factory();
+    // message status instance
+    this.messageStatus = MessageStatus.factory();
+
     this.model = null;
     this.callback = null;
 
@@ -145,6 +152,10 @@ export let SettingsInterestNode = React.createClass( {
     if ( result.status.code === 200 ) {
       // OK -> next step
       this.next();
+
+      // flush message
+      let status = new StatusDae( result.status );
+      this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS );
     }
   },
   fail: function( error:Error ) {
