@@ -32,6 +32,10 @@ if (
           /*
 
           #195 Syn.ad_運動通信社 Syn.ad_運動通信サイドメニュー（web） 39050
+          sslの場合はドメインをhttps://ssl.socdm.com/にしてください
+
+          - http  : http://i.socdm.com
+          - https : https://ssl.socdm.com/
 
           */
           ?>
