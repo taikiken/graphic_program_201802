@@ -109,17 +109,26 @@ export class MessageStatus extends EventDispatcher {
   static get SUCCESS():string {
     return 'success';
   }
+  /**
+   * Flush modal に表示するメッセージを作成します
+   * @param {string} txt 表示テキスト
+   * @return {XML} JSX を返します
+   */
+  static message( txt:string = '' ) {
+    return (
+      <div className="messageText">{txt}</div>
+    );
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
    * flush message event を発火します
-   * @param {string} message 表示文字列
-   * @param {Function} [ok=null] after callback method
-   * @param {string} [type=info] after callback method
+   * @param {XML} message 表示 Element
+   * @param {string} [type=info] flush message 種類
    */
-  flush( message:string, ok:Function = null, type:string = MessageStatus.INFO ):void {
-    this.dispatch( {type: MessageStatus.FLUSH, message: message, ok: ok, kind: type} );
+  flush( message, type:string = MessageStatus.INFO ):void {
+    this.dispatch( {type: MessageStatus.FLUSH, message: message, kind: type} );
   }
   /**
    * confirm window event を発火します

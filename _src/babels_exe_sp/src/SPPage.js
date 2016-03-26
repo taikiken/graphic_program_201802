@@ -31,6 +31,7 @@ import {SPComment} from './page/SPComment';
 import {SPSearchFrom} from './header/SPSearchFrom';
 
 import {SPCommentDelete} from './modal/SPCommentDelete';
+import {SPFlush} from './modal/SPFlush';
 
 let _symbol = Symbol();
 
@@ -61,6 +62,8 @@ export class SPPage {
 
     // modal
     SPCommentDelete.start();
+    // flush
+    SPFlush.start();
 
     // router
     let Router = UT.app.Router;

@@ -287,7 +287,7 @@ export class ViewNotifications extends View {
             return (
               <a href={notice.article.reply.url} className="info-link">
                 <figure className={'info-user-thumb ' + loggedIn}>
-                  <img src={icon} alt=""/>
+                  <img src={`${icon}?${Date.now()}`} alt=""/>
                 </figure>
                 <div className="info-content">
                   {notice.user.userName}さんがあなたの「{notice.article.title}」へのコメントに<strong>{NoticeAction.message( notice.action )}</strong>しました。

@@ -455,7 +455,7 @@ export class ViewArchiveMasonryInfinite extends View {
                   return (
                     <li key={'user-' + articleId + '-' + commentDae.id + '-' + userDae.id + '-' + i} className={'commented-user-item commented-user-item-' + i}>
                       <span className={'commented-user-thumb ' + loggedIn}>
-                        <img src={picture} alt={userDae.userName}/>
+                        <img src={`${picture}?${Date.now()}`} alt={userDae.userName}/>
                       </span>
                     </li>
                   );
@@ -536,7 +536,7 @@ export class ViewArchiveMasonryInfinite extends View {
               <div className="feature-user comment-item">
                 <figure className="comment-user">
                   <span className="comment-user-link">
-                    <span className={'comment-user-thumb ' + loggedIn}><img src={picture} alt={firstUser.userName}/></span>
+                    <span className={'comment-user-thumb ' + loggedIn}><img src={`${picture}?${Date.now()}`} alt={firstUser.userName}/></span>
                     <div className="comment-user-data">
                       <p className="comment-user-name">{firstUser.userName}</p>
                       <p className="comment-user-job">{firstUser.bio}</p>
