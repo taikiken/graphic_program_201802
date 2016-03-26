@@ -221,7 +221,7 @@ export let CommentFormElementNode = React.createClass( {
       comment.off( Model.COMPLETE, this.done );
       comment.off( Model.UNDEFINED_ERROR, this.fail );
       comment.off( Model.RESPONSE_ERROR, this.fail );
-      this.comment = null;
+      // this.comment = null;
     }
 
     let replyStatus = this.replyStatus;
@@ -229,7 +229,7 @@ export let CommentFormElementNode = React.createClass( {
       replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
       replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
       replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
-      this.replyStatus = null;
+      // this.replyStatus = null;
     }
 
     let commentStatus = this.commentStatus;
