@@ -33,6 +33,8 @@
     left: 0;
     top: 100px;
     z-index: 100;
+    // 下が透けて見えるので背景を設定
+    background-color: #fff;
   }
 
   @at-root {

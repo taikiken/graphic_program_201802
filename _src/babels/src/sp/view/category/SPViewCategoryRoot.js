@@ -25,6 +25,9 @@ import {SPTabNode} from '../../node/SPTabNode';
 // data
 import {Safety} from '../../../data/Safety';
 
+// util
+import {Scroll} from '../../../util/Scroll';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -60,6 +63,13 @@ export class SPViewCategoryRoot extends View {
         slug: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
+
+        this.scroll = {
+          latest: 0,
+          ranking: 0,
+          videos: 0
+        };
+
         return {
           current: 'latest'
         };
@@ -139,7 +149,13 @@ export class SPViewCategoryRoot extends View {
       },
       */
       tabClick( id:string ):void {
+        let scroll = this.scroll;
+        scroll[ this.state.current ] = Scroll.y;
         this.setState( { current: id } );
+
+        setTimeout( function() {
+          Scroll.y = scroll[ id ];
+        }, 25 );
       }
     } );
 
