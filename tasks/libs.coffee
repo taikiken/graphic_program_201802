@@ -86,4 +86,4 @@ gulp.task 'libs:synapse:build', ->
   .pipe $.rename (path) ->
     path.basename = path.basename.replace '.min', ''
   .pipe gulp.dest htdocs
-  .pipe $.size title: '*** libs:synapse:dev ***'
+  .pipe $.size title: '*** libs:synapse:build ***'
