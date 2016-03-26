@@ -19,7 +19,7 @@
     //   width: 340px;
 
     //   &.column1 {
-    //     float: left;
+    //     float: left;e
     //   }
 
     //   &.column2 {
@@ -328,6 +328,8 @@
     &-excerpt-text {
       margin-top: .5em;
       font-size: fz(22/2);
+      // break させる
+      word-break: break-all
     }
   } // .post
 }

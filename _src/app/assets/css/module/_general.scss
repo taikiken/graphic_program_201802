@@ -241,6 +241,8 @@
 
     &-excerpt-text {
       margin-top: 0.25em;
+      // break させる
+      word-break: break-all
     }
 
     &:hover {
