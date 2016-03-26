@@ -28,8 +28,15 @@ if (
     <ul id="side-menu-list">
       <li class="ad">
         <div id="adg_div">
+          <?php
+          /*
+
+          #195 Syn.ad_運動通信社 Syn.ad_運動通信サイドメニュー（web） 39050
+
+          */
+          ?>
           <!-- AdGeneration/ -->
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=undotsushin_side_menu&targetID=adg_undotsushin_side_menu&displayid=1&tagver=2.0.0"></script>
+          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
           <!-- /AdGeneration -->
         </div>
       </li>
