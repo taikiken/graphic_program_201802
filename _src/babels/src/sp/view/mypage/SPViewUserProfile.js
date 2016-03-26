@@ -75,7 +75,7 @@ export class SPViewUserProfile extends ViewUserProfile {
         return (
           <div className="user-profile">
             <figure className={'user-profile-avatar ' + loggedIn}>
-              <img src={icon} alt={dae.userName}/>
+              <img src={`${icon}?${Date.now()}`} alt={dae.userName}/>
             </figure>
             <div className="user-profile-data">
               <p className="user-profile-name">{dae.userName}</p>

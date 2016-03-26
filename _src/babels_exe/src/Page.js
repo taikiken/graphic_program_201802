@@ -31,6 +31,7 @@ import {Comment} from './page/Comment';
 import {SearchFrom} from './header/SearchFrom';
 
 import {CommentDelete} from './modal/CommentDelete';
+import {Flush} from './modal/Flush';
 
 let _symbol = Symbol();
 
@@ -65,7 +66,10 @@ export class Page {
     UT.app.User.init();
 
     // modal
+    // delete
     CommentDelete.start();
+    // flush
+    Flush.start();
 
     // router
     let Router = UT.app.Router;

@@ -199,7 +199,7 @@ export class ViewHeaderMemberNotice extends View {
               <li className={'info-item info-item-' + notice.id}>
                 <a href={notice.article.reply.url} className={'info-link info-link-' + notice.id} onClick={this.readedClick}>
                   <figure className={'info-user-thumb ' + loggedIn}>
-                    <img src={icon} alt=""/>
+                    <img src={`${icon}?${Date.now()}`} alt=""/>
                   </figure>
                   <NoticeMessageDom notice={notice} />
                   <p className="info-date">{notice.displayDate}</p>

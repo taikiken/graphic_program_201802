@@ -28,12 +28,16 @@ import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
 import {Safety} from '../../data/Safety';
 
+// dae
+import {StatusDae} from '../../dae/StatusDae';
+
 // node
 import {ErrorNode} from '../error/ErrorNode';
 import {ChangeAvatarNode} from '../avator/ChangeAvatorNode';
 
 // event
 import {SettingsStatus} from '../../event/SettingsStatus';
+import {MessageStatus} from '../../event/MessageStatus';
 
 // model
 import {Model} from '../../model/Model';
@@ -58,7 +62,7 @@ let SettingInputNode = React.createClass( {
     name: React.PropTypes.string.isRequired,
     bio: React.PropTypes.string.isRequired,
     size: React.PropTypes.number,
-    sp: React.PropTypes.number.isRequired
+    sp: React.PropTypes.bool.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -68,7 +72,11 @@ let SettingInputNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    // SettingsStatus
     this.status = SettingsStatus.factory();
+
+    // message status instance
+    this.messageStatus = MessageStatus.factory();
 
     this.thumbnail = null;
     this.model = null;
@@ -85,6 +93,7 @@ let SettingInputNode = React.createClass( {
     // avatar size
     this.width = 0;
     this.height = 0;
+
 
     return {
       entered: false,
@@ -501,6 +510,10 @@ let SettingInputNode = React.createClass( {
     if ( result.status.code === 200 ) {
       // OK -> next step
       this.next();
+
+      // flush message
+      let status = new StatusDae( result.status );
+      this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS );
     }
   },
   fail: function( error:Object ) {

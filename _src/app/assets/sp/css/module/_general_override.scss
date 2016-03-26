@@ -275,3 +275,30 @@
 //    background-color: #fff;
 //  }
 //}
+
+
+// -------------------------------------------------
+// Flush message
+// dialogue-notice
+// -------------------------------------------------
+.dialogue-notice {
+  &.flush-dialogue {
+    // info, error, success override
+    margin-top: 0!important;
+
+    // position vertical middle
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+}
+
+.modal-container {
+  .modal-bg {
+    &.flush-modal-bg {
+      opacity: 0;
+    }
+  }
+}

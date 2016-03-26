@@ -143,6 +143,7 @@ import {ViewVideos} from './view/sidebar/ViewVideos';
 // modal
 import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
 import {ViewLogoutModal} from './view/modal/ViewLogoutModal';
+import {ViewFlushModal} from './view/modal/ViewFlushModal';
 
 // ----------- users
 // signup
@@ -339,7 +340,8 @@ var UT = {
     },
     modal: {
       ViewDeleteModal: ViewDeleteModal,
-      ViewLogoutModal: ViewLogoutModal
+      ViewLogoutModal: ViewLogoutModal,
+      ViewFlushModal: ViewFlushModal
     }
   },
   sp: {

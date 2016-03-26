@@ -86,6 +86,7 @@ if (
 <div id="modal-container"></div>
 <div id="logout-modal-container"></div>
 <div id="deactivate-modal-container"></div>
+<div id="flush-modal-container"></div>
 <?php
 /*
  * $page['apiRoot'] を元に API request 先を決定します

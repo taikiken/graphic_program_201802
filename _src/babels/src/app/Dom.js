@@ -294,6 +294,13 @@ export class Dom {
   static deactivateModal():Element {
     return Dom.get( 'deactivate-modal-container' );
   }
+  /**
+   * deactivate modal
+   * @return {Element} deactivate-modal-container
+   */
+  static flushModal():Element {
+    return Dom.get( 'deactivate-modal-container' );
+  }
 
   // --------------------------------------
   // mypage
