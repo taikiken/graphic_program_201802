@@ -86,7 +86,7 @@ export let SPMoreViewNode = React.createClass( {
     this.onRise();
   },
   // button 表示・非表示
-  updateShow: function( show:boolean ) {
+  updateShow: function( show:Boolean ) {
     console.log( '========================== updateShow ', show );
     /*
     if ( !show ) {
@@ -103,7 +103,7 @@ export let SPMoreViewNode = React.createClass( {
   },
   // loading 表示 on / off
   // on: true, off: false
-  updateLoading: function( loading:boolean = false ) {
+  updateLoading: function( loading:Boolean = false ) {
 
     let loadingClass = '';
     if ( loading ) {

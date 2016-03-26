@@ -70,9 +70,9 @@ export class Codes {
    * <p>status codeからリクエストの成功・失敗を判断します</p>
    * status code が >= 200 < 300 の間が成功です。
    * @param {int} statusCode サーバーからのレスポンスコード int型
-   * @return {boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
+   * @return {Boolean} statusCodeが成功したか(true)失敗(false)を調べ返します
    */
-  static status( statusCode:Number ):boolean {
+  static status( statusCode:Number ):Boolean {
 
     return statusCode >= 200 && statusCode < 300;
 

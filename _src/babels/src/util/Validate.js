@@ -34,18 +34,18 @@ export class Validate {
   /**
    * email 形式かを調べます
    * @param {string} email メールアドレス
-   * @return {boolean} メールアドレス型チェック 真偽値 true: 正しい を返します
+   * @return {Boolean} メールアドレス型チェック 真偽値 true: 正しい を返します
    */
-  static email( email:string ):boolean {
+  static email( email:string ):Boolean {
     return !!email.match(/^[\w!#$%&'*+\/=?\^_@{}\\|~\-]+([\w!#$%&'*+\/=?\^_{}\\|~\.\-]+)*@([\w][\w\-]*\.)+[\w][\w\-]*$/);
   }
 
   /**
    * アルファベット, 数字かを調べます
    * @param {string} string 調査対象文字列
-   * @return {boolean} 合致するか否かの真偽値を返します
+   * @return {Boolean} 合致するか否かの真偽値を返します
    */
-  static alphaNum( string:string ):boolean {
+  static alphaNum( string:string ):Boolean {
     return !!string.match(/^[a-z0-9]+$/i);
   }
 }

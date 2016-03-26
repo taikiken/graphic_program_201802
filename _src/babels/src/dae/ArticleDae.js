@@ -189,16 +189,16 @@ export class ArticleDae {
   /**
    * article.is_bookmarked
    * bookmark した / してない
-   * @return {boolean} article.is_bookmarked
+   * @return {Boolean} article.is_bookmarked
    */
-  get isBookmarked():boolean {
+  get isBookmarked():Boolean {
     return this.article.is_bookmarked;
   }
   /**
    * パーソナライズされたニュースは is_recommend(キー名は仮） をたてて「おすすめ」アイコンを表示する
-   * @return {boolean} パーソナライズされたニュース の真偽値を返します
+   * @return {Boolean} パーソナライズされたニュース の真偽値を返します
    */
-  get isRecommend():boolean {
+  get isRecommend():Boolean {
     return this.article.is_recommend;
   }
   /**

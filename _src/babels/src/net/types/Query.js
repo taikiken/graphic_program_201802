@@ -27,9 +27,9 @@ export class Query {
    * @param {string} key query key
    * @param {string} type query value type
    * @param {string|Number|null} [defaultValue=null] default value, あれば...
-   * @param {boolean} [require=false] 必須フラグ
+   * @param {Boolean} [require=false] 必須フラグ
    */
-  constructor( key:string, type:string, defaultValue = null, require:boolean = false ) {
+  constructor( key:string, type:string, defaultValue = null, require:Boolean = false ) {
 
     this._key = key;
     this._type = type;
@@ -41,9 +41,9 @@ export class Query {
   /**
    * query key が存在するかを調べ真偽値を返します
    * @param {string} key query key
-   * @return {boolean} query key が存在するかを返します
+   * @return {Boolean} query key が存在するかを返します
    */
-  has( key:string ):boolean {
+  has( key:string ):Boolean {
 
     return this._key === key;
 

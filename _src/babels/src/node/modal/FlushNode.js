@@ -11,7 +11,7 @@
  */
 
 import {MessageStatus} from '../../event/MessageStatus';
-import {Message} from '../../app/const/Message';
+// import {Message} from '../../app/const/Message';
 
 // React
 let React = self.React;
@@ -21,6 +21,10 @@ let greensock = self.com.greensock;
 let TweenLite = greensock.TweenLite;
 let easing = greensock.easing;
 
+/**
+ * Flush modal を表示します
+ * @type {*|Function|ReactClass}
+ */
 export let FlushNode = React.createClass( {
   propTypes: {
     show: React.PropTypes.bool,

@@ -70,7 +70,7 @@ export let CommentMoreViewNode = React.createClass( {
     this.props.action.next();
   },
   // button 表示・非表示
-  updateShow: function( show:boolean, rest:Number ) {
+  updateShow: function( show:Boolean, rest:Number ) {
     this.setState( { show: show, rest: rest } );
   }
 } );

@@ -37,9 +37,9 @@ export class ErrorMessage {
 
   /**
    * エラー有無
-   * @return {boolean} エラー有無を返します。 エラーあり: true
+   * @return {Boolean} エラー有無を返します。 エラーあり: true
    */
-  get error():boolean {
+  get error():Boolean {
     return this._message !== '';
   }
   /**

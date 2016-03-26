@@ -44,10 +44,10 @@ export let BookmarkButtonNode = React.createClass( {
     };
   },
   render: function() {
-    let bookmarkClass = ( bookmarked:boolean ):string => {
+    let bookmarkClass = ( bookmarked:Boolean ):string => {
       return bookmarked ? 'bookmarked enable' : '';
     };
-    let bookmarkMessage = ( bookmarked:boolean ):string => {
+    let bookmarkMessage = ( bookmarked:Boolean ):string => {
       return bookmarked ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL;
     };
 

@@ -92,14 +92,14 @@ export class SPViewArchive extends View {
    * home flag
    * @return {boolean|*} home flag boolean を返します
    */
-  get home():boolean {
+  get home():Boolean {
     return this._home;
   }
   /**
    * home flag
-   * @param {boolean} home flag
+   * @param {Boolean} home flag
    */
-  set home( home:boolean ):void {
+  set home( home:Boolean ):void {
     this._home = home;
   }
   // ---------------------------------------------------
@@ -248,7 +248,7 @@ export class SPViewArchive extends View {
         this.onRise();
       },
       // button 表示・非表示
-      updateShow: function( show:boolean ) {
+      updateShow: function( show:Boolean ) {
         // console.log( '========================== updateShow ', show );
         /*
          if ( !show ) {
@@ -265,7 +265,7 @@ export class SPViewArchive extends View {
       },
       // loading 表示 on / off
       // on: true, off: false
-      updateLoading: function( loading:boolean = false ) {
+      updateLoading: function( loading:Boolean = false ) {
 
         let loadingClass = '';
         if ( loading ) {
@@ -289,7 +289,7 @@ export class SPViewArchive extends View {
     } );
 
     // ------------------------------------------------
-    let moreButton = ( show:boolean ):void => {
+    let moreButton = ( show:Boolean ):void => {
       show = !!show;
       // console.log( '----------------- moreButton ', show, _this._moreRendered );
       // _moreRendered が null の時のみ, instance があれば state を update する
@@ -355,10 +355,10 @@ export class SPViewArchive extends View {
   }// render
   /**
    * more button 表示・非表示
-   * @param {boolean} show more button 表示・非表示 を決定する真偽値
+   * @param {Boolean} show more button 表示・非表示 を決定する真偽値
    */
   /*
-  moreButton( show:boolean ):void {
+  moreButton( show:Boolean ):void {
     show = !!show;
     console.log( '----------------- moreButton ', show, this._moreRendered );
     // _moreRendered が null の時のみ, instance があれば state を update する

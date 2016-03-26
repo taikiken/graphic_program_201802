@@ -37,9 +37,9 @@ export class Ajax {
   /**
    * リクエストが可能かを返します
    * W click などで二重送信になるのを防ぎます
-   * @return {boolean} 実行可否 flag を返します
+   * @return {Boolean} 実行可否 flag を返します
    */
-  get can():boolean {
+  get can():Boolean {
 
     return this._can;
 

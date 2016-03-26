@@ -86,23 +86,23 @@ export class PopularDae {
   }
   /**
    * alias isLike
-   * @return {boolean} 自分がGood済みかどうか を返します
+   * @return {Boolean} 自分がGood済みかどうか を返します
    */
-  get isGood():boolean {
+  get isGood():Boolean {
     return this.isLike;
   }
   /**
    * comment.is_like
-   * @return {boolean} 自分がGood済みかどうか を返します
+   * @return {Boolean} 自分がGood済みかどうか を返します
    */
-  get isLike():boolean {
+  get isLike():Boolean {
     return this.comment.is_like;
   }
   /**
    * comment.is_bad
-   * @return {boolean} 自分がBad済みかどうか を返します
+   * @return {Boolean} 自分がBad済みかどうか を返します
    */
-  get isBad():boolean {
+  get isBad():Boolean {
     return this.comment.is_bad;
   }
   /**

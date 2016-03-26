@@ -89,7 +89,7 @@ export let MoreViewNode = React.createClass( {
     this.props.action.next();
   },
   // button 表示・非表示
-  updateShow: function( show:boolean ) {
+  updateShow: function( show:Boolean ) {
 
     this.setState( { show: show, loading: '' } );
 

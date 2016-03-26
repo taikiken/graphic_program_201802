@@ -36,9 +36,9 @@ export class KeywordsDae {
   }
   /**
    * keyword が存在するかの真偽値
-   * @return {boolean} keyword が存在するかの真偽値を返します
+   * @return {Boolean} keyword が存在するかの真偽値を返します
    */
-  get hasKeyword():boolean {
+  get hasKeyword():Boolean {
     return this.keywords.length > 0;
   }
   // ---------------------------------------------------

@@ -29,9 +29,9 @@ export class Permalink {
    * パスオプションを指定、ない時は空配列
    *
    * @param {Array} [paths] 追加 path を配列で設定
-   * @param {boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション
+   * @param {Boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション
    */
-  constructor( paths:Array<string> = [], need:boolean = false ) {
+  constructor( paths:Array<string> = [], need:Boolean = false ) {
 
     this._paths = paths;
     this._need = need;
@@ -42,9 +42,9 @@ export class Permalink {
   // ---------------------------------------------------
   /**
    * オプションパスが必須かのプロパティ
-   * @return {boolean} オプションパスが必須かどうかを返します true: 必須
+   * @return {Boolean} オプションパスが必須かどうかを返します true: 必須
    */
-  get require():boolean {
+  get require():Boolean {
 
     return this._need;
 
@@ -64,9 +64,9 @@ export class Permalink {
 
   /**
    * @param {string} path 調べたいオプションパス
-   * @return {boolean} 指定パスが存在するかの真偽値を返します
+   * @return {Boolean} 指定パスが存在するかの真偽値を返します
    */
-  has( path:string ):boolean {
+  has( path:string ):Boolean {
 
     let paths = this._paths;
     let result = paths.indexOf( path ) !== -1;

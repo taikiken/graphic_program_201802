@@ -126,9 +126,9 @@ export class Offset extends Action {
   }
   /**
    * 次があるかを調べます
-   * @return {boolean} 次があるかの真偽値を返します
+   * @return {Boolean} 次があるかの真偽値を返します
    */
-  hasNext():boolean {
+  hasNext():Boolean {
 
     // _total === -1 の時は常に true
     // total が offset（次の読み込み開始位置）より小さい時に true

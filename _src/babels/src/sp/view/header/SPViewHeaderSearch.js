@@ -75,7 +75,7 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
         /**
          * 開いているか真偽値
          * @private
-         * @type {boolean}
+         * @type {Boolean}
          */
         this.open = false;
         /**

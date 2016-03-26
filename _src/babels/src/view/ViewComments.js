@@ -291,7 +291,7 @@ export class ViewComments extends View {
         action.next();
       },
       // button 表示・非表示
-      updateShow: function( show:boolean, rest:Number ) {
+      updateShow: function( show:Boolean, rest:Number ) {
 
         this.setState( { show: show, rest: rest } );
 

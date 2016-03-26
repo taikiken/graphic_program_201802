@@ -55,9 +55,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {boolean} [useMasonry=true] isotope を行うかの
+   * @param {Boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:boolean = true ) {
+  constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, ActionClass, option, useMasonry );
   }
   /**
@@ -153,7 +153,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         this.onRise();
       },
       // button 表示・非表示
-      updateShow: function( show:boolean ) {
+      updateShow: function( show:Boolean ) {
 
         if ( !show ) {
           // button を非表示にするので rise 監視を止める
@@ -168,7 +168,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       // loading 表示 on / off
       // on: true, off: false
-      updateLoading: function( loading:boolean = false ) {
+      updateLoading: function( loading:Boolean = false ) {
 
         let loadingClass = '';
         if ( loading ) {
@@ -193,7 +193,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
     // more button 作成関数
     // ArchiveDom から呼び出す
-    let moreButton = ( show:boolean ) => {
+    let moreButton = ( show:Boolean ) => {
 
       show = !!show;
       // moreElement 存在チェックを行う

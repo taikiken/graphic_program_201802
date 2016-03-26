@@ -33,9 +33,9 @@ export class CommentType extends Query {
   /**
    * 記事詳細でのコメント一覧表示のリクエスト・オプション
    * @param {string} key dog|cat|food のように | 区切りでオプションをつなげます
-   * @param {boolean} [require=false] 必須真偽値
+   * @param {Boolean} [require=false] 必須真偽値
    */
-  constructor( key:string, require:boolean = false ) {
+  constructor( key:string, require:Boolean = false ) {
 
     super( key, 'string', '', require );
     // 'dog|cat' を分割する
@@ -45,9 +45,9 @@ export class CommentType extends Query {
   /**
    * Query override して使います
    * @param {string} key query key
-   * @return {boolean} query key が存在するかを返します
+   * @return {Boolean} query key が存在するかを返します
    */
-  has( key:string ):boolean {
+  has( key:string ):Boolean {
 
     return this._keys.indexOf( key ) !== -1;
 

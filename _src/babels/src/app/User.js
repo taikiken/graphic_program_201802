@@ -42,9 +42,9 @@ export class User {
   // ---------------------------------------------------
   /**
    * sign in / out 状態を表します
-   * @return {boolean} sign in / out 状態を返します
+   * @return {Boolean} sign in / out 状態を返します
    */
-  static get sign():boolean {
+  static get sign():Boolean {
 
     // return _sign;
     // 開発フェーズは簡易的に変数管理していたが
@@ -55,9 +55,9 @@ export class User {
   /**
    * sign in / out 状態を表します
    * true: sign in です
-   * @param {boolean} bool sign in / out 状態の真偽値, true: sign in
+   * @param {Boolean} bool sign in / out 状態の真偽値, true: sign in
    */
-  static set sign( bool:boolean ) {
+  static set sign( bool:Boolean ) {
 
     /*
      // 開発フェーズは簡易的に変数管理していたが
@@ -101,9 +101,9 @@ export class User {
   /**
    * ログイン設定をします
    * @param {string} token 開発中の引数はオプション扱いです
-   * @return {boolean} login が成功したかを返します
+   * @return {Boolean} login が成功したかを返します
    */
-  static login( token:string ):boolean {
+  static login( token:string ):Boolean {
     token = Safety.string( token, '' );
     console.log( `user login [${token !== ''}]` );
 
