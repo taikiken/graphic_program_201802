@@ -207,7 +207,7 @@ export class ViewHeaderMember extends View {
                   キャッシュ問題を回避するためにDate.nowを加える
                   通常もキャッシュが効かない〜
                 */}
-                <span className={'preference-avatar ' + loggedIn}><img src={`${icon}?${Date.now()}`} alt={userName} /></span>
+                <span className={'preference-avatar ' + loggedIn}><img src={Empty.refresh(icon)} alt={userName} /></span>
               </a>
 
               <nav className="preference-menu">

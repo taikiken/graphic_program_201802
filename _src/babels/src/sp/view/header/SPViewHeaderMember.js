@@ -137,7 +137,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
                  キャッシュ問題を回避するためにDate.nowを加える
                  通常もキャッシュが効かない〜
                  */}
-                <span className={'preference-avatar ' + loggedIn}><img src={`${icon}?${Date.now()}`} alt={userName} /></span>
+                <span className={'preference-avatar ' + loggedIn}><img src={Empty.refresh(icon)} alt={userName} /></span>
               </a>
               <span className={'preference-num'} style={noticeStyle(this.state.total)}>{this.state.total}</span>
             </div>

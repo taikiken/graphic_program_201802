@@ -138,7 +138,7 @@ export let CommentFormElementNode = React.createClass( {
       return (
         <div className={'form-root loading-root ' + this.state.loading}>
           <form onSubmit={this.onSubmit} ref="form">
-            <i className={'comment-form-user ' + loggedIn}><img src={`${picture}?${Date.now()}`} alt=""/></i>
+            <i className={'comment-form-user ' + loggedIn}><img src={Empty.refresh(picture)} alt=""/></i>
             <div className="comment-form-comment-outer">
               <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
                 <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder={Message.PLACEHOLDER_COMMENT} autoFocus="true" />

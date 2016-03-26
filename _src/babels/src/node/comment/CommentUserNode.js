@@ -10,6 +10,7 @@
  *
  */
 
+import {Empty} from '../../app/const/Empty';
 
 let React = self.React;
 
@@ -33,7 +34,7 @@ export let CommentUserNode = React.createClass( {
     return (
       <figure className="comment-user">
         <span className="comment-user-link">
-          <span className={'comment-user-thumb ' + this.props.loggedIn}><img src={`${this.props.picture}?${Date.now()}`} alt={this.props.userName}/></span>
+          <span className={'comment-user-thumb ' + this.props.loggedIn}><img src={Empty.refresh(this.props.picture)} alt={this.props.userName}/></span>
           <div className="comment-user-data">
             <p className="comment-user-name">{this.props.userName}</p>
             <p className="comment-user-job">{this.props.bio}</p>
