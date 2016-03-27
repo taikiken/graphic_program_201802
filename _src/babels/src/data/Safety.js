@@ -150,7 +150,10 @@ export class Safety {
    * @return {boolean} jpeg / png の時に true を返します
    */
   static isBase64( fileName:string ):Boolean {
-    return fileName.indexOf( 'data:image/jpeg;base64' ) !== -1 || fileName.indexOf( 'data:image/png;base64' ) !== -1;
+    return fileName.indexOf( 'data:image/jpeg;base64' ) !== -1 ||
+      fileName.indexOf( 'data:image/png;base64' ) !== -1 ||
+      fileName.indexOf( 'data:image/jpg;base64' ) !== -1 ||
+      fileName.indexOf( 'data:image/gif;base64' ) !== -1;
   }
   /**
    * 拡張子から画像ファイルかを調べます

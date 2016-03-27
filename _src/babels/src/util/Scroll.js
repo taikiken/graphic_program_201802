@@ -10,7 +10,6 @@
  *
  */
 
-
 import {EventDispatcher} from '../event/EventDispatcher';
 
 // tween
