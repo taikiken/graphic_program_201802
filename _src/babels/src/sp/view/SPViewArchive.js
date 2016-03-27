@@ -353,10 +353,10 @@ export class SPViewArchive extends View {
     }
 
   }// render
-  /**
-   * more button 表示・非表示
-   * @param {Boolean} show more button 表示・非表示 を決定する真偽値
-   */
+  // /**
+  //  * more button 表示・非表示
+  //  * @param {Boolean} show more button 表示・非表示 を決定する真偽値
+  //  */
   /*
   moreButton( show:Boolean ):void {
     show = !!show;
