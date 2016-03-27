@@ -79,6 +79,12 @@
         width: 100%;
         height: auto;
       }
+
+      // サムネイル先読みコンテナ
+      // .hide-image > img
+      .hide-image {
+        display: none;
+      }
     }
   }
 }
@@ -139,6 +145,7 @@
 }
 
 // 関連ニュース
+// popIn
 #_popIn_recommend {
   .board-small.column2 {
     .board-item {
@@ -149,6 +156,11 @@
         background: none;
       }
     }
+  }
+
+  // figure 背景なし
+  .board-small .post-thumb {
+    background: none;
   }
 }
 

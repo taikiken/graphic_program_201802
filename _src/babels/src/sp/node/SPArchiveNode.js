@@ -265,6 +265,8 @@ let ThumbnailDom = React.createClass( {
       return (
         <figure className={'post-thumb post-thumb-' + mediaType} style={imgStyle}>
           <img className="image-hd" src={Empty.VIDEO_THUMBNAIL} alt=""/>
+          {/* 切替時前にキャッシュしない対策 */}
+          <div className="hide-image"><img src={this.props.thumbnail} alt={this.props.title}/></div>
           {/*
            https://github.com/undotsushin/undotsushin/issues/468
            16x9 を厳格に守る

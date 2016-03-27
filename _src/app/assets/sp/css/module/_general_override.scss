@@ -86,6 +86,12 @@
     &.board-item-image {
       .post-thumb {
         margin-left: 10px;
+
+        // サムネイル先読みコンテナ
+        // .hide-image > img
+        .hide-image {
+          display: none;
+        }
       }
     }
   }
@@ -300,5 +306,14 @@
     &.flush-modal-bg {
       opacity: 0;
     }
+  }
+}
+
+// 関連ニュース
+// popIn
+#_popIn_recommend {
+  // figure 背景なし
+  .board-small .post-thumb {
+    background: none;
   }
 }
