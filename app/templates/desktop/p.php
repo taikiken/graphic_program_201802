@@ -5,8 +5,6 @@
       <span class="category-heading-image">
         <img src="<?php echo $page['category']['title_img']; ?>" alt="" />
       </span>
-    <?php else : ?>
-      <span>お探しのページは見つかりません</span>
     <?php endif; ?>
   </h1>
 </div><!-- /.category-heading -->
