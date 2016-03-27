@@ -75,7 +75,7 @@ export class ViewSettingsIndex extends View {
    * @param {Error} error Error instance
    */
   error( error ):void {
-    console.warn( 'setting index error ', error );
+    // console.warn( 'setting index error ', error );
   }
 
   /**

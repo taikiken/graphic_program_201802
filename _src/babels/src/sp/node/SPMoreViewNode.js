@@ -87,7 +87,7 @@ export let SPMoreViewNode = React.createClass( {
   },
   // button 表示・非表示
   updateShow: function( show:Boolean ) {
-    console.log( '========================== updateShow ', show );
+    // console.log( '========================== updateShow ', show );
     /*
     if ( !show ) {
       // button を非表示にするので rise 監視を止める
@@ -120,8 +120,8 @@ export let SPMoreViewNode = React.createClass( {
   },
   // Rise.RISE event handler
   // 次 offset JSON を取得する
-  onRise: function( event ) {
-    console.log( '========================== onRise ', event );
+  onRise: function(/* event */) {
+    // console.log( '========================== onRise ', event );
 
     this.updateLoading( true );
   }

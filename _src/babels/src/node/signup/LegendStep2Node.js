@@ -322,7 +322,7 @@ let Step2FormNode = React.createClass( {
   },
   // file
   pictureChange: function( event ) {
-    console.log( 'pictureChange ', event );
+    // console.log( 'pictureChange ', event );
     this.setState( {picture: event.target.value} );
     if ( event.target.value !== '' ) {
 
@@ -354,7 +354,7 @@ let Step2FormNode = React.createClass( {
   },
   avatarError: function( event ) {
     this.avatarDispose();
-    console.log( 'avatar error ', event );
+    // console.log( 'avatar error ', event );
   },
   avatarDispose: function() {
     let thumbnail = this.thumbnail;
@@ -367,7 +367,7 @@ let Step2FormNode = React.createClass( {
   // drag / drop
   handleDragOver: function( event:Event ) {
     event.preventDefault();
-    console.log( 'drag start---------' );
+    // console.log( 'drag start---------' );
   },
   handleDragEnter: function( event ) {
     if ( this.ie ) {
@@ -386,7 +386,7 @@ let Step2FormNode = React.createClass( {
     this.setState( { entered: false } );
   },
   handleDrop: function( event ) {
-    console.log( 'drop ++++++++++++', event );
+    // console.log( 'drop ++++++++++++', event );
     if ( this.ie ) {
       event.preventDefault();
       return;
@@ -485,7 +485,7 @@ let Step2FormNode = React.createClass( {
   },
   // request
   request: function():void {
-    console.log( 'from element ', this.props.getForm() );
+    // console.log( 'from element ', this.props.getForm() );
     let formData = Form.element( this.props.getForm() );
     // not create
     // 入力検証のみ
@@ -504,7 +504,7 @@ let Step2FormNode = React.createClass( {
   },
   next: function() {
     // next step
-    console.log( 'Step2Form ', this.state.step );
+    // console.log( 'Step2Form ', this.state.step );
     // this.status.step( this.state.step + 1 );
     // hash
     Loc.hash = Url.signupHash( this.props.step + 1 );
@@ -522,14 +522,14 @@ let Step2FormNode = React.createClass( {
     this.setState( { error: true } );
   },
   done: function( result:Result ) {
-    console.log( 'done ', result );
+    // console.log( 'done ', result );
     if ( result.status.code === 200 ) {
       // OK -> next step
       this.next();
     }
   },
   fail: function( error:Error ) {
-    console.log( 'fail ', error.result.response.errors );
+    // console.log( 'fail ', error.result.response.errors );
     let errors = error.result.response.errors;
     if ( Array.isArray( errors ) ) {
 
@@ -591,7 +591,7 @@ export let LegendStep2Node = React.createClass( {
   },
   render: function() {
 
-    console.log( 'render step 2 email ', this.state.email );
+    // console.log( 'render step 2 email ', this.state.email );
     return (
       <div className="fieldset-container fieldset-container-2">
         <Step2FormNode

@@ -36,48 +36,48 @@ export class Receiver {
    * @param {Object} event Event object
    */
   beforeRender( event:Object ):void {
-    console.log( 'beforeRender', event );
+    // console.log( 'beforeRender', event );
   }
   /**
    * React.componentWillMount callback
    * @param {Object} event Event object
    */
   willMount( event:Object ):void {
-    console.log( 'willMount', event );
+    // console.log( 'willMount', event );
   }
   /**
    * React.componentDidMount callback
    * @param {Object} event Event object
    */
   didMount( event:Object ):void {
-    console.log( 'didMount', event );
+    // console.log( 'didMount', event );
   }
   /**
    * データが見つからない時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
   undefinedError( error ):void {
-    console.log( 'undefinedError', error );
+    // console.log( 'undefinedError', error );
   }
   /**
    * データが空の時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
   emptyError( error ):void {
-    console.log( 'beforeRender', error );
+    // console.log( 'beforeRender', error );
   }
   /**
    * 処理中にエラーが起きた時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
   responseError( error ):void {
-    console.log( 'responseError', error );
+    // console.log( 'responseError', error );
   }
   /**
    * エラーDOMがマウントされた時に呼び出されます
    * @param {Error} error エラーインスタンス
    */
   errorMount( error ):void {
-    console.log( 'errorMount', error );
+    // console.log( 'errorMount', error );
   }
 }

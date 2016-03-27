@@ -111,7 +111,7 @@ export class SignupWizard extends View {
    */
   error( error ):void {
 
-    console.log( 'Signup complete', error );
+    // console.log( 'Signup complete', error );
 
   }
   /**
@@ -279,7 +279,7 @@ export class SignupWizard extends View {
   onHash( event:HashChangeEvent ):void {
     // let hash = event.newURL.split( '/' ).pop();
     let hash = Loc.hash;
-    console.log( 'wizard onHash, ', hash, event );
+    // console.log( 'wizard onHash, ', hash, event );
     let step = Url.signupStepByHash( hash );
     this._status.step( step );
   }
@@ -320,7 +320,7 @@ export class SignupWizard extends View {
     if ( queries !== null && queries.hasOwnProperty( 'oauth' ) ) {
 
       let value = queries.oauth;
-      console.log( 'social request ', queries );
+      // console.log( 'social request ', queries );
       // query value
       // facebook が #(hash) ついていたりして言ってることと違うので チェック項目増やす
       if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {

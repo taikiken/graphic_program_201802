@@ -233,7 +233,7 @@ export let ReactionNode = React.createClass( {
   // good add complete handler
   goodAddDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodAddDone );
-    console.log( '+++++ goodAddDone' );
+    // console.log( '+++++ goodAddDone' );
     let good = ++this.goodCount;
 
     if ( this.state.isBad ) {
@@ -256,7 +256,7 @@ export let ReactionNode = React.createClass( {
   // bad delete
   goodDeleteDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodDeleteDone );
-    console.log( '+++++ goodDeleteDone' );
+    // console.log( '+++++ goodDeleteDone' );
     // Good remove event fire
     this.good.remove( this.props.commentId );
 
@@ -267,7 +267,7 @@ export let ReactionNode = React.createClass( {
   // bad add complete handler
   badAddDone: function() {
     this.badStar.off( Model.COMPLETE, this.badAddDone );
-    console.log( '--- badAddDone' );
+    // console.log( '--- badAddDone' );
     let bad = ++this.badCount;
 
     if ( this.state.isGood ) {
@@ -291,7 +291,7 @@ export let ReactionNode = React.createClass( {
   // bad delete
   badDeleteDone: function() {
     this.badStar.off( Model.COMPLETE, this.badDeleteDone );
-    console.log( '--- badDeleteDone' );
+    // console.log( '--- badDeleteDone' );
 
     // Bad remove event fire
     this.bad.remove( this.props.commentId );
@@ -300,13 +300,13 @@ export let ReactionNode = React.createClass( {
     this.setState( {bad: bad, loading: '', isBad: false} );
   },
   // good error
-  goodError: function( error ) {
-    console.warn( 'goodError ', error );
+  goodError: function( /* error */ ) {
+    // console.warn( 'goodError ', error );
     this.loadingStop();
   },
   // bad error
-  badError: function( error ) {
-    console.warn( 'badError ', error );
+  badError: function(/* error */) {
+    // console.warn( 'badError ', error );
     this.loadingStop();
   }
 } );

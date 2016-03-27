@@ -554,7 +554,7 @@ export class ViewHeaderMemberNotice extends View {
 
       },
       updateResponse: function( response ) {
-        console.log( '-------------------------------- updateResponse ', response );
+        // console.log( '-------------------------------- updateResponse ', response );
         this.setState( { response: response } );
       }
     } );

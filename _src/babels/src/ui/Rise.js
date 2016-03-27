@@ -44,7 +44,7 @@ export class Rise extends EventDispatcher {
    * 監視を始めます
    */
   start():void {
-    console.log( '************************ Rise.start' );
+    // console.log( '************************ Rise.start' );
 
     this._scroll.on( Scroll.SCROLL, this._boundScroll );
     this._scroll.start();
@@ -53,7 +53,7 @@ export class Rise extends EventDispatcher {
    * 監視を止めます
    */
   stop():void {
-    console.log( '------------------------ Rise.stop' );
+    // console.log( '------------------------ Rise.stop' );
 
     this._scroll.off( Scroll.SCROLL, this._boundScroll );
     this._scroll.stop();

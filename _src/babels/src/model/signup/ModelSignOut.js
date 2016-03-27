@@ -43,7 +43,7 @@ export class ModelSignOut extends Model {
   done( result:Result ):void {
 
     let status = new StatusDae( result.status );
-    console.log( 'ModelSignOut done ', status );
+    // console.log( 'ModelSignOut done ', status );
     if ( status.code !== 200 ) {
 
       // articles undefined

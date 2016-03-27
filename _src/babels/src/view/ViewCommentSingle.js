@@ -176,7 +176,7 @@ export class ViewCommentSingle extends View {
       if ( !this._reload ) {
         // デーが無いので処理を止める
         // reload でない時
-        console.warn( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
+        // console.warn( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
         this.executeSafely( View.EMPTY_ERROR );
         return;
       }
@@ -475,7 +475,7 @@ export class ViewCommentSingle extends View {
 
         if ( !Safety.array( list ) || list.length === 0 ) {
           // 描画しない
-          console.warn( 'list error ', commentsListType, list );
+          // console.warn( 'list error ', commentsListType, list );
           return null;
         }
 
@@ -552,7 +552,7 @@ export class ViewCommentSingle extends View {
    * <p>再読み込みを行うかを決める</p>
    */
   onComplete():void {
-    console.log( 'onComplete' );
+    // console.log( 'onComplete' );
     // とにかくreloadが良さそう
     this.reload();
   }

@@ -189,7 +189,7 @@ export let CommentActionNode = React.createClass( {
     this.message.off( MessageStatus.CANCEL_CLICK, this.onCancel );
   },
   shouldCancel: function() {
-    console.log( 'shouldCancel', this.props.uniqueId );
+    // console.log( 'shouldCancel', this.props.uniqueId );
     this.setState( { deleteLoading: ''} );
     this.props.remove( 'cancel' );
   },

@@ -116,7 +116,7 @@ export let CommentFormOpenerNode = React.createClass( {
   openerClick: function( event ) {
     event.preventDefault();
 
-    console.log( '************** opener click ****************** ', this.props.uniqueId );
+    // console.log( '************** opener click ****************** ', this.props.uniqueId );
 
     this.willOpen();
     this.replyStatus.open( this.props.uniqueId );

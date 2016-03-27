@@ -219,9 +219,9 @@ export class ViewLogin extends View {
         if ( User.login( token ) ) {
           // home
           Loc.index();
-        } else {
+        }/* else {
           console.log( 'fail login ...', token );
-        }
+        }*/
 
       },
       done: function( result:Result ) {
@@ -307,7 +307,7 @@ export class ViewLogin extends View {
     if ( queries !== null && queries.hasOwnProperty( 'oauth' ) ) {
 
       let value = queries.oauth;
-      console.log( 'social request ', queries );
+      // console.log( 'social request ', queries );
       if ( value.indexOf( 'facebook' ) !== -1 || value === 'facebook' || value === 'facebook#' || value === 'twitter' ) {
         this.socialRequest();
       }
@@ -361,7 +361,7 @@ export class ViewLogin extends View {
    * @param {Object} error error instance
    */
   socialFail( error ):void {
-    console.log( 'Social error ', error );
+    // console.log( 'Social error ', error );
   }
 
   /**
@@ -370,7 +370,7 @@ export class ViewLogin extends View {
    */
   success( userDae:UserDae ):void {
     let token = userDae.accessToken;
-    console.log( 'social success ', token, userDae );
+    // console.log( 'social success ', token, userDae );
     // token setup
     if ( User.login( token ) ) {
       // home
