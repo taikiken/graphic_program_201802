@@ -147,7 +147,7 @@ export let SettingsInterestNode = React.createClass( {
     this.status.dispatch( { type: SettingsStatus.INTEREST_COMPLETE } );
   },
   done: function( result:Result ) {
-    // console.log( 'done ', result );
+    // console.log( 'interest ** done ', result );
     this.setState( { loading: '' } );
 
     if ( result.status.code === 200 ) {

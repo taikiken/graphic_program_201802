@@ -293,15 +293,19 @@
     margin-top: 0!important;
 
     // position vertical middle
-    position: absolute;
+    position: fixed;
     left: 0;
-    top: 50%;
+    //top: 50%;
     width: 100%;
-    transform: translateY(-50%);
+    //transform: translateY(-50%);
+
+    // middle だと keyboard 出ている時に潜り込む
+    // sp は js で scroll top にする
+    top: 100px;
   }
 }
 
-.modal-container {
+#flush-modal-container {
   .modal-bg {
     &.flush-modal-bg {
       opacity: 0;

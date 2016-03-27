@@ -57,8 +57,8 @@ export class ViewFlushModal extends View {
    * @param {Object} event MessageStatus.FLUSH event instance
    */
   onModal( event:Object ):void {
-
-    this._render.updateShow( true, event.message );
+    // console.log( 'flush modal event ', event );
+    this._render.updateShow( true, event.message, event.kind, event.sp );
 
   }
 }

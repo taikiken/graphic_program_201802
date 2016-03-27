@@ -126,9 +126,10 @@ export class MessageStatus extends EventDispatcher {
    * flush message event を発火します
    * @param {XML} message 表示 Element
    * @param {string} [type=info] flush message 種類
+   * @param {Boolean} [sp=false] sp or PC | Tablet
    */
-  flush( message, type:string = MessageStatus.INFO ):void {
-    this.dispatch( {type: MessageStatus.FLUSH, message: message, kind: type} );
+  flush( message, type:string = MessageStatus.INFO, sp:Boolean = false ):void {
+    this.dispatch( {type: MessageStatus.FLUSH, message: message, kind: type, sp: sp} );
   }
   /**
    * confirm window event を発火します

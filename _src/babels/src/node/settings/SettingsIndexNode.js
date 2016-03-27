@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
@@ -513,7 +514,7 @@ let SettingInputNode = React.createClass( {
 
       // flush message
       let status = new StatusDae( result.status );
-      this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS );
+      this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS, this.props.sp );
     }
   },
   fail: function( error:Object ) {
