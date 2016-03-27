@@ -73,6 +73,7 @@ export class Router extends EventDispatcher {
       '/category/': _this.category.bind( _this ),
       '/p/': _this.single.bind( _this ),
       '/search/': _this.search.bind( _this ),
+      '/search': _this.search.bind( _this ),
       '/signup_login/': _this.signupLogin.bind( _this ),
       '/signup_login': _this.signupLogin.bind( _this ),
       '/signup/': _this.signup.bind( _this ),
