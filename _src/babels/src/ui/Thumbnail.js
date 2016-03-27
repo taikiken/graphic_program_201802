@@ -12,6 +12,7 @@
 
 
 import {EventDispatcher} from '../event/EventDispatcher';
+import {Safety} from '../data/Safety';
 
 /**
  * <h2>ユーザーアイコン</h2>
@@ -104,6 +105,11 @@ export class Thumbnail extends EventDispatcher {
     // this.dispose();
 
     let result = event.target.result;
+    if ( !Safety.isBase64( result ) ) {
+      this.onError( event );
+      return;
+    }
+
     this._result = result;
     // image size check
     let img = new Image();

@@ -322,7 +322,7 @@ let Step2FormNode = React.createClass( {
   },
   // file
   pictureChange: function( event ) {
-    // console.log( 'pictureChange ', event );
+    console.log( 'pictureChange ', event );
     this.setState( {picture: event.target.value} );
     if ( event.target.value !== '' ) {
 
@@ -404,7 +404,6 @@ let Step2FormNode = React.createClass( {
     if ( files !== null && typeof files !== 'undefined' && typeof files.length !== 'undefined' && files.length > 0 ) {
       // files 有効
       let file = files[ 0 ];
-
       if ( file.type.match( /image.*/ ) ) {
         // image file,
         // input type files の drop へ event を送る
@@ -530,7 +529,13 @@ let Step2FormNode = React.createClass( {
   },
   fail: function( error:Error ) {
     // console.log( 'fail ', error.result.response.errors );
-    let errors = error.result.response.errors;
+    let errors;
+    try {
+      errors = error.result.response.errors;
+    } catch ( e ) {
+      return;
+    }
+
     if ( Array.isArray( errors ) ) {
 
       for ( var errorObject of errors ) {

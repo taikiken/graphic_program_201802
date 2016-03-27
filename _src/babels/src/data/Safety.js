@@ -145,13 +145,21 @@ export class Safety {
   // ----------------------------------------------------------
   // 画像パスが正規かチェックする
   /**
+   * 使用可能なbase64 file かを調べます
+   * @param {string} fileName 調査対象ファイル名
+   * @return {boolean} jpeg / png の時に true を返します
+   */
+  static isBase64( fileName:string ):Boolean {
+    return fileName.indexOf( 'data:image/jpeg;base64' ) !== -1 || fileName.indexOf( 'data:image/png;base64' ) !== -1;
+  }
+  /**
    * 拡張子から画像ファイルかを調べます
    * @param {string} fileName 調査対象ファイル名
    * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif', 'svg' のいづれかに該当するかの真偽値を返します
    */
   static isImg( fileName:string ):Boolean {
     // base64
-    if ( fileName.indexOf( 'data:image/jpeg;base64' ) !== -1 || fileName.indexOf( 'data:image/png;base64' ) !== -1 ) {
+    if ( Safety.isBase64( fileName ) ) {
       return true;
     }
     // 拡張子チェック
