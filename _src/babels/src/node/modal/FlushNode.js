@@ -13,6 +13,12 @@
 import {MessageStatus} from '../../event/MessageStatus';
 // import {Message} from '../../app/const/Message';
 
+// util
+import {Scroll} from '../../util/Scroll';
+//
+// // Sagen
+// let Sagen = self.Sagen;
+
 // React
 let React = self.React;
 
@@ -41,7 +47,9 @@ export let FlushNode = React.createClass( {
     };
   },
   getInitialState: function() {
-    this.status = null;
+    // this.status = null;
+    // this.sp = Sagen.Browser.Mobile.phone();
+    this.top = 0;
 
     return {
       show: this.props.show,
@@ -51,13 +59,21 @@ export let FlushNode = React.createClass( {
     };
   },
   render: function() {
+    let position = () => {
+      if ( this.top !== 0 ) {
+        return { top: `${this.top}px` };
+      } else {
+        return { opacity: 1 };
+      }
+    };
+    // console.log( 'render ', this.state.show, position() );
     if ( !this.state.show ) {
       return null;
     } else {
       return (
-        <div className="modal-dialogue modal-dialogue_delete" ref="modalContainer" style={this.state.css}>
+        <div className="modal-dialogue modal-dialogue_delete" style={this.state.css}>
           <div className="flush-modal-bg modal-bg"></div>
-          <div className={`flush-dialogue dialogue-notice ${this.state.type}`}>
+          <div className={`flush-dialogue dialogue-notice ${this.state.type}`} style={position()}>
             <div className="dialogue-notice-inner">
               <div className="dialogue-notice-info">{this.state.message}</div>
             </div>
@@ -66,11 +82,11 @@ export let FlushNode = React.createClass( {
       );
     }
   },
-  componentDidMount: function() {
-    if ( this.status === null ) {
-      this.status = MessageStatus.factory();
-    }
-  },
+  // componentDidMount: function() {
+  //   if ( this.status === null ) {
+  //     this.status = MessageStatus.factory();
+  //   }
+  // },
   openModal: function() {
     let object = { opacity: 0 };
     let _this = this;
@@ -86,7 +102,7 @@ export let FlushNode = React.createClass( {
         },
         onComplete: function() {
           _this.setState( { css: {opacity: 1} } );
-          _this.closeModal( 0.25 );
+          _this.closeModal( 0.25 * 3 );
         }
       }
     );
@@ -107,11 +123,18 @@ export let FlushNode = React.createClass( {
         },
         onComplete: function() {
           _this.setState( { css: {opacity: 0}, show: false } );
+          _this.top = 0;
         }
       }
     );
   },
-  updateShow: function( show:Boolean, message, type:string = MessageStatus.INFO ) {
+  updateShow: function( show:Boolean, message, type:string = MessageStatus.INFO, sp:Boolean = false ) {
+    // console.log( 'updateShow ', show, message, type, sp );
+    if ( sp ) {
+      this.top = Scroll.y;
+    } else {
+      this.top = 0;
+    }
     this.setState( { show: show, message: message, type: type } );
     if ( show ) {
       this.openModal();

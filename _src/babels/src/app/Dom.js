@@ -299,7 +299,7 @@ export class Dom {
    * @return {Element} deactivate-modal-container
    */
   static flushModal():Element {
-    return Dom.get( 'deactivate-modal-container' );
+    return Dom.get( 'flush-modal-container' );
   }
 
   // --------------------------------------
