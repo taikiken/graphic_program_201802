@@ -47,7 +47,7 @@ export class ModelCommentStar extends Model {
    */
   start( type:string ):void {
 
-    console.log( '=============== ModelCommentStar ', this._actionType, type );
+    // console.log( '=============== ModelCommentStar ', this._actionType, type );
 
     switch ( type ) {
 

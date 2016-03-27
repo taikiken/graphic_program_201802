@@ -106,7 +106,7 @@ export let CommentMenuNode = React.createClass( {
   // -------------------------------------------------------
   // 以降 custom method
   didDelete: function( type:string ) {
-    console.log( 'didDelete', type );
+    // console.log( 'didDelete', type );
 
     switch ( type ) {
       case 'click':
@@ -128,7 +128,7 @@ export let CommentMenuNode = React.createClass( {
 
   },
   didReport: function( type:string ) {
-    console.log( 'didReport', type );
+    // console.log( 'didReport', type );
 
     switch ( type ) {
       case 'click':
@@ -183,7 +183,7 @@ export let CommentMenuNode = React.createClass( {
       this.status.modal( this.props.commentId );
       // document.body へ click event handler bind
       this.setState( { open: 'open' } );
-      console.log( 'open click ', this.props.articleId, this.props.commentId, this.props.replyId );
+      // console.log( 'open click ', this.props.articleId, this.props.commentId, this.props.replyId );
       this.activateBodyClick();
     } else {
       // open -> close

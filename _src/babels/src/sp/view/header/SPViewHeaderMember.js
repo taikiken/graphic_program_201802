@@ -231,7 +231,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
 
       },
       updateUser: function( icon, userName ) {
-        console.log( 'user update state ', icon );
+        // console.log( 'user update state ', icon );
         this.setState( { icon: icon, userName: userName } );
       }
     } );

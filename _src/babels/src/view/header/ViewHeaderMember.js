@@ -342,7 +342,7 @@ export class ViewHeaderMember extends View {
         }
       },
       updateUser: function( icon, userName ) {
-        console.log( 'user update state ', icon );
+        // console.log( 'user update state ', icon );
         this.setState( { icon: icon, userName: userName } );
       }
     } );
@@ -377,7 +377,7 @@ export class ViewHeaderMember extends View {
    */
   onComplete():void {
     // 再読み込み
-    console.log( 'SettingsStatus.ACCOUNT_COMPLETE reload' );
+    // console.log( 'SettingsStatus.ACCOUNT_COMPLETE reload' );
     this.start();
   }
 

@@ -313,7 +313,7 @@ let SettingInputNode = React.createClass( {
   },
   // file
   pictureChange: function( event ) {
-    console.log( 'pictureChange ', event );
+    // console.log( 'pictureChange ', event );
     this.setState( {picture: event.target.value} );
 
     if ( !Thumbnail.detect() ) {
@@ -351,7 +351,7 @@ let SettingInputNode = React.createClass( {
   },
   avatarError: function( event ) {
     this.avatarDispose();
-    console.log( 'avatar error ', event );
+    // console.log( 'avatar error ', event );
   },
   avatarDispose: function() {
     let thumbnail = this.thumbnail;
@@ -364,7 +364,7 @@ let SettingInputNode = React.createClass( {
   // drag / drop
   handleDragOver: function( event:Event ) {
     event.preventDefault();
-    console.log( 'drag start---------' );
+    // console.log( 'drag start---------' );
   },
   handleDragEnter: function( event ) {
     if ( this.ie ) {
@@ -383,7 +383,7 @@ let SettingInputNode = React.createClass( {
     this.setState( { entered: false } );
   },
   handleDrop: function( event ) {
-    console.log( 'drop ++++++++++++', event );
+    // console.log( 'drop ++++++++++++', event );
     if ( this.ie ) {
       event.preventDefault();
       return;
@@ -504,7 +504,7 @@ let SettingInputNode = React.createClass( {
     this.setState( { error: true, loading: '' } );
   },
   done: function( result:Result ) {
-    console.log( 'done ', result );
+    // console.log( 'done ', result );
     this.setState( { loading: '' } );
 
     if ( result.status.code === 200 ) {
@@ -517,7 +517,7 @@ let SettingInputNode = React.createClass( {
     }
   },
   fail: function( error:Object ) {
-    console.log( 'fail ', error.errors, error.result );
+    // console.log( 'fail ', error.errors, error.result );
     this.setState( { loading: '' } );
 
     let errors = error.result.response.errors;

@@ -378,7 +378,7 @@ export class ViewNotifications extends View {
       // did mount
       // hasNext を元に More View button の表示非表示を決める
       componentDidMount: function() {
-        console.log( 'hasNext ', this.props.action.hasNext() );
+        // console.log( 'hasNext ', this.props.action.hasNext() );
         _this.onMount();
         moreButton( this.props.action.hasNext(), this.props.action );
       },

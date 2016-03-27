@@ -85,7 +85,7 @@ export class ViewLogoutModal extends View {
    * event が発生したら this.open を実行します
    */
   onOpen():void {
-    console.log( 'logout open event handler will open logout modal........' );
+    // console.log( 'logout open event handler will open logout modal........' );
     this.open();
   }
 }

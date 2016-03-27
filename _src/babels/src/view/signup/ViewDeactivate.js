@@ -155,7 +155,7 @@ export class ViewDeactivate extends View {
       },
       done: function( event:Object ) {
         // keep cover
-        console.log( 'done event ', event );
+        // console.log( 'done event ', event );
         if ( event.code === 200 ) {
           // sign out
           User.logout();
@@ -164,7 +164,7 @@ export class ViewDeactivate extends View {
 
       },
       fail: function( error ) {
-        console.log( 'error ', error );
+        // console.log( 'error ', error );
         this.setState( { loading: '' } );
       }
     } );

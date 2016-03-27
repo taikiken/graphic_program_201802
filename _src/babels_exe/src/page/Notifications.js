@@ -38,7 +38,7 @@ export class Notifications {
   static start():void {
     let element = Dom.board();
     let elementMore = Dom.boardMore();
-    console.log( 'Notifications rendering ' );
+    // console.log( 'Notifications rendering ' );
     if ( element !== null && elementMore !== null ) {
       // list
       let archive = new UT.view.mypage.ViewNotifications( element, elementMore );

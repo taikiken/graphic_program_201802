@@ -63,7 +63,7 @@ export class Thumbnail extends EventDispatcher {
    */
   make():void {
     if ( !Thumbnail.detect() ) {
-      console.warn( 'not support browser' );
+      // console.warn( 'not support browser' );
       return;
     }
     let file = this._file;

@@ -117,7 +117,7 @@ export class SPNav {
       right = 0;
     }
 
-    console.log( 'target ', ulWidth, left, right, windowWidth );
+    // console.log( 'target ', ulWidth, left, right, windowWidth );
     // ul scroll 量で移動させる
     ul.scrollLeft = altLeft;
   }

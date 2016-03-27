@@ -100,7 +100,7 @@ export class ViewSearch extends ViewArchiveMasonry {
   showError( message:string = '' ):void {
 
     message = Safety.string( message, '' );
-    console.warn( 'search error ', message );
+    // console.warn( 'search error ', message );
 
     /**
      * 検索結果が見つかりませんでした コンテナ

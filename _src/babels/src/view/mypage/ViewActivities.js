@@ -396,7 +396,7 @@ export class ViewActivities extends View {
       componentDidMount: function() {
         // hasNext を元に More View button の表示非表示を決める
         moreButton( this.props.action.hasNext(), this.props.action );
-        console.log( 'hasNext ', this.props.action.hasNext() );
+        // console.log( 'hasNext ', this.props.action.hasNext() );
       },
       componentWillUnMount: function() {
 

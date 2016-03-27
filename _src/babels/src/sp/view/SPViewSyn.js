@@ -119,7 +119,7 @@ class Syn {
     let serviceList = document.getElementById( parts.service );
     this._ready = true;
 
-    console.log( 'service_list_load ', menu.serviceList.serviceListItems.length );
+    // console.log( 'service_list_load ', menu.serviceList.serviceListItems.length );
 
     menu.serviceList.serviceListItems.forEach( function( item ) {
       var listElement = document.createElement( 'li' );
@@ -261,7 +261,7 @@ class Syn {
     let height = parseInt( heightPx, 10 );
     let windowHeight = parseInt( window.innerHeight, 10 );
 
-    console.log( 'height ', height, windowHeight );
+    // console.log( 'height ', height, windowHeight );
 
     if ( height < windowHeight || !this._ready ) {
       // Syn.menu が読み込まれない or menu 高さが window 高さ以下の時は
@@ -269,7 +269,7 @@ class Syn {
       height = windowHeight + 100;
       heightPx = height + 'px';
 
-      console.log( 'height, heightPx ', height, heightPx );
+      // console.log( 'height, heightPx ', height, heightPx );
 
     }
 

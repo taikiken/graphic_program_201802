@@ -118,9 +118,10 @@ export let SettingsInterestNode = React.createClass( {
       callback[ Model.RESPONSE_ERROR ] = this.fail;
     }
   },
+  /*
   componentWillUnMount: function() {
     this.dispose();
-  },
+  },*/
   submitHandler: function( event:Event ) {
     event.preventDefault();
     this.prepareNext();
@@ -146,7 +147,7 @@ export let SettingsInterestNode = React.createClass( {
     this.status.dispatch( { type: SettingsStatus.INTEREST_COMPLETE } );
   },
   done: function( result:Result ) {
-    console.log( 'done ', result );
+    // console.log( 'done ', result );
     this.setState( { loading: '' } );
 
     if ( result.status.code === 200 ) {
@@ -158,14 +159,14 @@ export let SettingsInterestNode = React.createClass( {
       this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS );
     }
   },
-  fail: function( error:Error ) {
-    console.log( 'fail', error );
+  fail: function(/* error:Error */) {
+    // console.log( 'fail', error );
     this.setState( { loading: '' } );
   },
   reset: function() {
     this.setState( { error: false } );
-  },
+  }/* ,
   dispose: function() {
 
-  }
+  }*/
 } );

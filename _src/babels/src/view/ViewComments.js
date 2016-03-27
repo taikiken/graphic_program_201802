@@ -505,7 +505,7 @@ export class ViewComments extends View {
 
         if ( !Safety.array( list ) || list.length === 0 ) {
           // 描画しない
-          console.warn( 'list error ', commentsListType, list );
+          // console.warn( 'list error ', commentsListType, list );
           return null;
         }
         // console.log( '******************************* start render *******************************', list );

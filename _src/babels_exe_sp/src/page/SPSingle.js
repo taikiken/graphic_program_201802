@@ -83,7 +83,7 @@ export class SPSingle {
     let singleHeaderElement = Dom.singleHeader();
 
     if ( singleHeaderElement !== null ) {
-      console.log( 'start sp single header' );
+      // console.log( 'start sp single header' );
       let single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual() );
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
@@ -96,7 +96,7 @@ export class SPSingle {
     // read more
     let post = Dom.post();
     let readMore = Dom.readMore();
-    console.log( 'post, more', post, readMore );
+    // console.log( 'post, more', post, readMore );
     if ( post !== null && readMore !== null ) {
       let more = new UT.sp.view.single.SPViewReadMore( post, readMore );
       more.start();

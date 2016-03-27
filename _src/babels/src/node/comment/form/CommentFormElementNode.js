@@ -246,14 +246,14 @@ export let CommentFormElementNode = React.createClass( {
   replyOpen: function( event ) {
     // let uniqueId = this.props.uniqueId;
     if ( this.mounted && !this.state.open && this.checkId( event ) ) {
-      console.log( '*** replyOpen *** ', this.props.uniqueId, this.mounted );
+      // console.log( '*** replyOpen *** ', this.props.uniqueId, this.mounted );
       this.setState( { open: true } );
     }
   },
   replyClose: function( event ) {
     // let uniqueId = this.props.uniqueId;
     if ( this.mounted && this.state.open && this.checkId( event ) ) {
-      console.log( '*** replyClose *** ', this.props.uniqueId, this.mounted );
+      // console.log( '*** replyClose *** ', this.props.uniqueId, this.mounted );
       this.setState( { open: false } );
     }
   },
@@ -293,7 +293,7 @@ export let CommentFormElementNode = React.createClass( {
     this.setState( {loading: 'loading'} );
     let formNode = ReactDOM.findDOMNode(this.refs.form);
     let formData = Form.element( formNode );
-    console.log( 'sending ===============', this.props.articleId, formNode, formData );
+    // console.log( 'sending ===============', this.props.articleId, formNode, formData );
 
     this.replyStatus.start( this.props.uniqueId );
 
@@ -315,17 +315,17 @@ export let CommentFormElementNode = React.createClass( {
   // コメント送信成功
   // ReplyStatus.COMPLETE event を発火させます
   // event を受信し コメント一覧を再読み込みします
-  done: function( event ) {
-    console.log( 'done', event );
+  done: function(/* event */) {
+    // console.log( 'done', event );
     this.replyStatus.complete( this.props.uniqueId, this.props.commentType );
     this.setState( { body: '' } );
     this.dispose();
   },
   // コメント送信失敗
   //
-  fail: function( event ) {
-    let error = event.args[ 0 ];
-    console.log( 'fail', error.message, error.result.status );
+  fail: function(/* event */) {
+    // let error = event.args[ 0 ];
+    // console.log( 'fail', error.message, error.result.status );
     // this.replyStatus.complete( this.props.uniqueId );
     this.dispose();
   }

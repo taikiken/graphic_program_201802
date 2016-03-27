@@ -134,12 +134,12 @@ export let RootNode = React.createClass( {
   // email を step1 と step2 で同じする
   email1Change: function( email:string ):void {
     // email 1 が変更されたので email 2 へ通知する
-    console.log( 'email1Change ', email );
+    // console.log( 'email1Change ', email );
     this.setState( { email2: email } );
   },
   email2Change: function( email:string ):void {
     // email 2 が変更されたので email 1 へ通知する
-    console.log( 'email2Change ', email );
+    // console.log( 'email2Change ', email );
     this.setState( { email1: email } );
   }
 } );
