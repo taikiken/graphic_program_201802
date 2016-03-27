@@ -521,7 +521,13 @@ let SettingInputNode = React.createClass( {
     // console.log( 'fail ', error.errors, error.result );
     this.setState( { loading: '' } );
 
-    let errors = error.result.response.errors;
+    let errors;
+    try {
+      errors = error.result.response.errors;
+    } catch ( e ) {
+      return;
+    }
+    
     if ( Array.isArray( errors ) ) {
 
       for ( var errorObject of errors ) {
