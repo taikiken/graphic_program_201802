@@ -68,9 +68,9 @@ export class SlugDae {
   /**
    * <p>ユーザー設定画面で興味のある競技を更新する。<br>で使います</p>
    * 自分の興味有無
-   * @return {boolean} true : 興味あり false : 興味なし を返します
+   * @return {Boolean} true : 興味あり false : 興味なし を返します
    */
-  get isInterest():boolean {
+  get isInterest():Boolean {
     return this.category.is_interest;
   }
 }

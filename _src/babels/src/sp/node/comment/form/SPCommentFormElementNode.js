@@ -131,7 +131,7 @@ export let SPCommentFormElementNode = React.createClass( {
         <div className={`${commentForm}form-root loading-root ${this.state.loading}`}>
           <form onSubmit={this.onSubmit} ref="form">
             <div className="comment-form-inner">
-              <i className={'comment-form-user ' + loggedIn}><img src={`${picture}?${Date.now()}`} alt=""/></i>
+              <i className={'comment-form-user ' + loggedIn}><img src={Empty.refresh(picture)} alt=""/></i>
               <div className="comment-form-comment-outer">
                 <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
                   <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder={Message.PLACEHOLDER_COMMENT} autoFocus="true" />
@@ -216,7 +216,7 @@ export let SPCommentFormElementNode = React.createClass( {
       comment.off( Model.COMPLETE, this.done );
       comment.off( Model.UNDEFINED_ERROR, this.fail );
       comment.off( Model.RESPONSE_ERROR, this.fail );
-      this.comment = null;
+      // this.comment = null;
     }
 
     let replyStatus = this.replyStatus;
@@ -224,7 +224,7 @@ export let SPCommentFormElementNode = React.createClass( {
       replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
       replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
       replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
-      this.replyStatus = null;
+      // this.replyStatus = null;
     }
 
     let commentStatus = this.commentStatus;

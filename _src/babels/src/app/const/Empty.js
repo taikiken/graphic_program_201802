@@ -146,4 +146,12 @@ export class Empty {
   static get KV_OVERLAY():string {
     return '/assets/images/index/kv-overlay.png';
   }
+  /**
+   * キャッシュさせないパスを生成します
+   * @param {string} path 元のパス
+   * @returns {string} パスに?Date.now()をつけて返します
+   */
+  static refresh( path:string ):string {
+    return `${path}?${Date.now()}`;
+  }
 }

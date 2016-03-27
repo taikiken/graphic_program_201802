@@ -123,11 +123,21 @@ export class Thumbnail extends EventDispatcher {
     this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0} );
   }
 
+  /**
+   * Image.onload event handler
+   * サムネイルの幅・高さを調べるために Image instance を作成し
+   * load 後に size を測ります
+   * @param {Event} event Image.onload event
+   */
   imageLoad( event:Event ):void {
     this.dispose();
     this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: event.target.width, height: event.target.height} );
   }
 
+  /**
+   * Image.onerror event handlers
+   * @param {Event} event Image.onerror event
+   */
   imageError( event:Event ):void {
     this.dispose();
     this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0} );
@@ -138,9 +148,9 @@ export class Thumbnail extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * File API が使えるかを調べます
-   * @return {boolean} File API 使用可否真偽値を返します
+   * @return {Boolean} File API 使用可否真偽値を返します
    */
-  static detect():boolean {
+  static detect():Boolean {
     return window.File && window.FileReader && window.FileList && window.Blob;
   }
 }

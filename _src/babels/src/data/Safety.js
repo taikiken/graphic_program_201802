@@ -37,9 +37,9 @@ export class Safety {
    * @param {Object} object 調査対象 Object
    * @param {string} keyName 調査対象キー名称
    * @param {string} [type=string] 調査対象型
-   * @return {boolean} 調べた結果を真偽値で返します
+   * @return {Boolean} 調べた結果を真偽値で返します
    */
-  static check( object:Object, keyName:string, type:string = 'string' ):boolean {
+  static check( object:Object, keyName:string, type:string = 'string' ):Boolean {
 
     type = Safety.string( type, 'string' );
     type = type.toLowerCase();
@@ -112,18 +112,18 @@ export class Safety {
   /**
    * Element かどうかを調べます
    * @param {Element} element 調査対象 Element
-   * @returns {boolean} Element かどうかの真偽値を返します
+   * @returns {Boolean} Element かどうかの真偽値を返します
    */
-  static isElement( element:Element ):boolean {
+  static isElement( element:Element ):Boolean {
     return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
   }
 
   /**
    * FormData かどうかを調べます
    * @param {FormData} formData 調査対象 FormData
-   * @returns {boolean} FormData かどうかの真偽値を返します
+   * @returns {Boolean} FormData かどうかの真偽値を返します
    */
-  static isFormData( formData:FormData ):boolean {
+  static isFormData( formData:FormData ):Boolean {
     return formData !== null && typeof formData !== 'undefined' && 'append' in formData;
   }
   /**
@@ -147,7 +147,7 @@ export class Safety {
   /**
    * 拡張子から画像ファイルかを調べます
    * @param {string} fileName 調査対象ファイル名
-   * @returns {boolean} 'jpg', 'png', 'jpeg', 'gif', 'svg' のいづれかに該当するかの真偽値を返します
+   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif', 'svg' のいづれかに該当するかの真偽値を返します
    */
   static isImg( fileName:string ):Boolean {
     // base64
@@ -160,7 +160,7 @@ export class Safety {
   /**
    * path に `graph.facebook.com` が含まれているかを調べます
    * @param {string} path 調査対象パス
-   * @return {boolean} ath に `graph.facebook.com` が含まれているかの真偽値を返します
+   * @return {Boolean} ath に `graph.facebook.com` が含まれているかの真偽値を返します
    */
   static isGraph( path:string ):Boolean {
     return path.indexOf( 'graph.facebook.com' ) !== -1;
@@ -213,9 +213,9 @@ export class Safety {
    * 引数が正規なものかをチェックします
    * @param {string} target 調査対象
    * @param {Array<string>} allowed 正しい対象値
-   * @return {boolean} 引数が正規なものかをチェックし true / false を返します
+   * @return {Boolean} 引数が正規なものかをチェックし true / false を返します
    */
-  static normalize( target:string, allowed:Array<string> ):boolean {
+  static normalize( target:string, allowed:Array<string> ):Boolean {
     var bool = false;
     for ( var value of allowed ) {
       if ( target === value ) {

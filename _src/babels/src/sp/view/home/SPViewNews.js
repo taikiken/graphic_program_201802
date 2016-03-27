@@ -34,7 +34,7 @@ export class SPViewNews extends SPViewArchive {
     /**
      * home flag, home の時のみ true
      * 「おすすめ」ラベル表示に使用
-     * @type {boolean}
+     * @type {Boolean}
      */
     this.home = true;
 

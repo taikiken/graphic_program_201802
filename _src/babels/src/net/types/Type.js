@@ -86,9 +86,9 @@ export class Type {
   // ---------------------------------------------------
   /**
    * @param {string} method method type
-   * @return {boolean} method type を検証し真偽値を返します
+   * @return {Boolean} method type を検証し真偽値を返します
    */
-  static validate( method:string ):boolean {
+  static validate( method:string ):Boolean {
 
     return [ 'GET', 'POST', 'PUT', 'DELETE' ].indexOf( method ) !== -1;
 

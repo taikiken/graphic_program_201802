@@ -71,8 +71,8 @@ export class Cookie {
    * @param {Date} [end] expires date 90days 1000 * 60 * 60 * 24 * 90
    * @param {string} [path='/'] cookie 指定したパスが設定されます
    * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
-   * @param {boolean} [secure=false] https通信のときのみ、クッキーが送信されます
-   * @return {boolean} 保存 成功か否かの真偽値 を返します
+   * @param {Boolean} [secure=false] https通信のときのみ、クッキーが送信されます
+   * @return {Boolean} 保存 成功か否かの真偽値 を返します
    */
   static save( value:string, keyName:string = Cookie.TARGET, end:Date = new Date( Date.now() + (1000 * 60 * 60 * 24 * 90) ), path:string = '/', domain:string = '', secure:Boolean = false ):Boolean {
 
@@ -93,9 +93,9 @@ export class Cookie {
   /**
    * 指定名称の cookie が存在するかを調べます
    * @param {string} keyName 調査対象 cookie 名称
-   * @return {boolean} cookie が存在するかの真偽値 を返します
+   * @return {Boolean} cookie が存在するかの真偽値 を返します
    */
-  static has( keyName:string ):boolean {
+  static has( keyName:string ):Boolean {
     return Cookie.get( keyName ) !== null;
   }
   /**
@@ -103,9 +103,9 @@ export class Cookie {
    * @param {string} keyName cookie 名称
    * @param {string} [path='/'] cookie 指定したパスが設定されます
    * @param {string} [domain=''] ドメイン, 特定するときは example.com or subdomain.example.com と指定します。 default は **現在のドメイン**
-   * @return {boolean} 削除 成功か否かの真偽値 を返します
+   * @return {Boolean} 削除 成功か否かの真偽値 を返します
    */
-  static remove( keyName:string = Cookie.TARGET, path:string = '/', domain:string = '' ):boolean {
+  static remove( keyName:string = Cookie.TARGET, path:string = '/', domain:string = '' ):Boolean {
     if ( Cookie.has( keyName ) ) {
       return Cookie.save( '', keyName, new Date(), path, domain );
     }

@@ -57,7 +57,7 @@ export class CommentsPopularDae {
     return this._comments;
   }
   /**
-   * rticle.comments_popular
+   * article.comments_popular
    * @return {Array<CommentsDae>} article.comments_popular 配列, CommentsDae型を返します
    */
   get comments():Array<PopularDae> {
@@ -79,16 +79,16 @@ export class CommentsPopularDae {
   }
   /**
    * comment 1 件目の存在有無
-   * @return {boolean} article.comments_popular 1件目があるかないかの真偽値を返します
+   * @return {Boolean} article.comments_popular 1件目があるかないかの真偽値を返します
    */
-  get hasFirst():boolean {
+  get hasFirst():Boolean {
     return this.total > 0;
   }
   /**
    * comment 2 件目以降の存在有無
-   * @return {boolean} article.comments_popular 2件目以降があるかないかの真偽値を返します
+   * @return {Boolean} article.comments_popular 2件目以降があるかないかの真偽値を返します
    */
-  get hasSecond():boolean {
+  get hasSecond():Boolean {
     return this.total > 1;
   }
   /**

@@ -49,6 +49,7 @@ export class Offset extends Action {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * 件数
    * @return {Number|*} total件数を返します
    */
   get total():Number {
@@ -62,6 +63,7 @@ export class Offset extends Action {
     this._total = total;
   }
   /**
+   * 取得件数
    * @return {Number|*} lengths 取得件数を返します
    */
   get length():Number {
@@ -75,6 +77,7 @@ export class Offset extends Action {
     this._length = length;
   }
   /**
+   * 取得開始位置
    * @return {Number|*} offset 取得開始位置を返します
    */
   get offset():Number {
@@ -118,7 +121,7 @@ export class Offset extends Action {
 
   }
   /**
-   * 残り数
+   * 残り数, total から 次の offset を」引いた数
    * @return {Number} total から 次の offset を」引いた数を返します
    */
   rest():Number {
@@ -126,9 +129,9 @@ export class Offset extends Action {
   }
   /**
    * 次があるかを調べます
-   * @return {boolean} 次があるかの真偽値を返します
+   * @return {Boolean} 次があるかの真偽値を返します
    */
-  hasNext():boolean {
+  hasNext():Boolean {
 
     // _total === -1 の時は常に true
     // total が offset（次の読み込み開始位置）より小さい時に true

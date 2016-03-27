@@ -168,7 +168,7 @@ export class ViewBookmarks extends View {
 
     // more button 作成関数
     // ArchiveDom から呼び出す
-    let moreButton = ( show:boolean, action ) => {
+    let moreButton = ( show:Boolean, action ) => {
 
       show = !!show;
       // _moreRendered が null の時のみ, instance があれば state を update する

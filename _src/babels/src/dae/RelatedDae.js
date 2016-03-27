@@ -135,9 +135,9 @@ export class RelatedDae {
   }
   /**
    * response.is_bookmarked
-   * @return {boolean} response.is_bookmarked
+   * @return {Boolean} response.is_bookmarked
    */
-  get isBookmarked():boolean {
+  get isBookmarked():Boolean {
     return this.response.is_bookmarked;
   }
   /**

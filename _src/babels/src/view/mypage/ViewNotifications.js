@@ -217,7 +217,7 @@ export class ViewNotifications extends View {
         this.props.action.next();
       },
       // button 表示・非表示
-      updateShow: function( show:boolean ) {
+      updateShow: function( show:Boolean ) {
 
         this.setState( { show: show, loading: '' } );
 
@@ -226,7 +226,7 @@ export class ViewNotifications extends View {
 
     // more button 作成関数
     // ArchiveDom から呼び出す
-    let moreButton = ( show:boolean, action ) => {
+    let moreButton = ( show:Boolean, action ) => {
 
       // console.log( 'moreButton ', show, moreElement );
       show = !!show;
@@ -287,7 +287,7 @@ export class ViewNotifications extends View {
             return (
               <a href={notice.article.reply.url} className="info-link">
                 <figure className={'info-user-thumb ' + loggedIn}>
-                  <img src={`${icon}?${Date.now()}`} alt=""/>
+                  <img src={Empty.refresh(icon)} alt=""/>
                 </figure>
                 <div className="info-content">
                   {notice.user.userName}さんがあなたの「{notice.article.title}」へのコメントに<strong>{NoticeAction.message( notice.action )}</strong>しました。

@@ -26,9 +26,9 @@ export class ViewNews extends ViewArchiveMasonry {
    * @param {Element} element root element, Ajax result を配置する
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Object} [option={}] optional event handler
-   * @param {boolean} [useMasonry=true] isotope を行うかの
+   * @param {Boolean} [useMasonry=true] isotope を行うかの
    */
-  constructor( element:Element, moreElement:Element, option:Object = {}, useMasonry:boolean = true ) {
+  constructor( element:Element, moreElement:Element, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, null, option, useMasonry );
     this._action = User.sign ?
       new NewsAuth( this.done.bind( this ), this.fail.bind( this ) ) :
@@ -37,7 +37,7 @@ export class ViewNews extends ViewArchiveMasonry {
     // home flag on
     /**
      * home flag, おすすめ ラベル表示するかしないかに使用
-     * @type {boolean}
+     * @type {Boolean}
      */
     this.home = true;
   }

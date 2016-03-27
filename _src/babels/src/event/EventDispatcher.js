@@ -143,9 +143,9 @@ export class EventDispatcher {
    * event type にリスナー関数が登録されているかを調べます
    * @param {string} type event type
    * @param {Function} listener リスナー関数
-   * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+   * @return {Boolean} event type にリスナー関数が登録されているかの真偽値を返します
    */
-  has( type:string, listener:Function ):boolean {
+  has( type:string, listener:Function ):Boolean {
 
     if ( listener === null ) {
       // listener が null
@@ -222,9 +222,9 @@ export class EventDispatcher {
    * <p>event type にリスナー関数が登録されているかを調べます</p>
    * @param {string} type event type
    * @param {Function} listener リスナー関数
-   * @return {boolean} event type にリスナー関数が登録されているかの真偽値を返します
+   * @return {Boolean} event type にリスナー関数が登録されているかの真偽値を返します
    */
-  hasEventListener( type:string, listener:Function ):boolean {
+  hasEventListener( type:string, listener:Function ):Boolean {
     return this.has( type, listener );
   }
   /**

@@ -306,7 +306,7 @@ class Syn {
   // ---------------------------------------------------
   /**
    * 自身の script tag src query syn を探し '1' か否かを調べ真偽値を返します
-   * @return {boolean} syn=1 かの真偽値を返します
+   * @return {Boolean} syn=1 かの真偽値を返します
    */
   static test():Boolean {
     let scripts = document.getElementsByTagName( 'head' )[ 0 ].getElementsByTagName( 'script' );
@@ -336,7 +336,7 @@ class Syn {
   }
   /**
    * 訪問経験があるかを cookie から調べます
-   * @return {boolean} 訪問経験があるかの真偽値を返します
+   * @return {Boolean} 訪問経験があるかの真偽値を返します
    */
   static visited():Boolean {
     return parseInt( Cookie.get( Cookie.SYN ), 10 ) === 1;

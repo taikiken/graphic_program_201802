@@ -213,9 +213,9 @@ export class Loc {
   }
   /**
    * host が local かを調べます
-   * @return {boolean} host が local の時に true を返します
+   * @return {Boolean} host が local の時に true を返します
    */
-  static isLocal():boolean {
+  static isLocal():Boolean {
 
     let host = Loc.host;
 

@@ -162,7 +162,7 @@ export let LogoutNode = React.createClass( {
       }
     );
   },
-  updateShow: function( show:boolean ) {
+  updateShow: function( show:Boolean ) {
     this.setState( { show: show } );
     if ( show ) {
       this.openModal();

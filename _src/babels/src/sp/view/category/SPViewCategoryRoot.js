@@ -63,7 +63,11 @@ export class SPViewCategoryRoot extends View {
         slug: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
-
+        /**
+         * 各 tab の scroll 位置を保存します
+         * @private
+         * @type {{latest: number, ranking: number, videos: number}}
+         */
         this.scroll = {
           latest: 0,
           ranking: 0,

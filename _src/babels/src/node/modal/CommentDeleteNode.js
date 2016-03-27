@@ -132,7 +132,7 @@ export let CommentDeleteNode = React.createClass( {
       }
     );
   },
-  updateShow: function( show:boolean, id, ok, cancel, type ) {
+  updateShow: function( show:Boolean, id, ok, cancel, type ) {
     this.setState( { show: show, id: id, ok: ok, cancel: cancel, type: type } );
     if ( show ) {
       this.openModal();

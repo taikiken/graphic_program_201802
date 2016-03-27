@@ -117,9 +117,9 @@ export class ErrorsDae {
   }
   /**
    * errors が設定されているかを調べます
-   * @return {boolean} true errors あり
+   * @return {Boolean} true errors あり
    */
-  hasErrors():boolean {
+  hasErrors():Boolean {
     return this.total > 0;
   }
 }

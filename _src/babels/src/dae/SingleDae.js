@@ -61,9 +61,9 @@ export class SingleDae extends RelatedDae {
   }
   /**
    * 関連記事が存在するかの真偽値
-   * @return {boolean} 関連記事が存在するかの真偽値を返します
+   * @return {Boolean} 関連記事が存在するかの真偽値を返します
    */
-  get hasRelated():boolean {
+  get hasRelated():Boolean {
     return this._related.length > 0;
   }
   /**
