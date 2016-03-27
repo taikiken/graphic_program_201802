@@ -457,7 +457,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
         let recommend = '';
         if ( this.props.recommend ) {
-          recommend = <i className="post-label_recommend">おすすめ記事</i>;
+          // recommend = <i className="post-label_recommend">おすすめ記事</i>;
+          recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
         }
 
         // media type で thumbnail 切替

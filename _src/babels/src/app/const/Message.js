@@ -368,7 +368,7 @@ export class Message {
    * LABEL_RECOMMEND, おすすめ記事
    * @return {string} おすすめ記事
    */
-  static LABEL_RECOMMEND():string {
+  static get LABEL_RECOMMEND():string {
     return 'おすすめ記事';
   }
 
