@@ -96,6 +96,9 @@ export class Thumbnail extends EventDispatcher {
 
     let exif = this._exif;
     exif.on( Exif.EXIF_ORIENTATION, this._exifLoad );
+    exif.orientation( file );
+    console.log( 'Thumb start' );
+
   }
   /**
    * event handler を unbind します
@@ -112,6 +115,8 @@ export class Thumbnail extends EventDispatcher {
       this._img.removeEventListener( 'load', this._imgLoad );
       this._img.removeEventListener( 'error', this._imgError );
     }
+
+    this._exif.off( Exif.EXIF_ORIENTATION, this._exifLoad );
   }
   /**
    * load event handler
@@ -156,9 +161,11 @@ export class Thumbnail extends EventDispatcher {
    */
   imageLoad( event:Event ):void {
     // this.dispose();
-    this._width = event.width;
-    this._height = event.height;
+    this._width = event.target.width;
+    this._height = event.target.height;
     this._event = event;
+    console.log( 'imageLoad', event );
+
     this.done();
     // this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: event.target.width, height: event.target.height} );
   }
@@ -174,6 +181,8 @@ export class Thumbnail extends EventDispatcher {
 
   exifLoad( event:Object ):void {
     this._orientation = event.orientation;
+    console.log( 'exifLoad', event );
+
     this.done();
   }
 
@@ -183,7 +192,7 @@ export class Thumbnail extends EventDispatcher {
       return;
     }
     this.dispose();
-    this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: this._width, height: this._height, orientation: this._orientation} );
+    this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: this._event, width: this._width, height: this._height, orientation: this._orientation} );
   }
 
   // ---------------------------------------------------

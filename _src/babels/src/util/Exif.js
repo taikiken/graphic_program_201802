@@ -61,14 +61,14 @@ export class Exif extends EventDispatcher {
     } else {
       part = file;
     }
-    
+
     reader.readAsArrayBuffer(part);
   }
 
   onLoad( event:Event ):void {
     this.dispose();
     let orientation = Exif.parse( event.target.result );
-    this.dispatch({type:Exif.EXIF_ORIENTATION, orientation: orientation});
+    this.dispatch({type: Exif.EXIF_ORIENTATION, orientation: orientation});
     /*
     -2: not jpeg
     -1: not defined
@@ -77,7 +77,7 @@ export class Exif extends EventDispatcher {
 
   onError():void {
     this.dispose();
-    this.dispatch({type:Exif.EXIF_ORIENTATION, orientation: -1});
+    this.dispatch({type: Exif.EXIF_ORIENTATION, orientation: -1});
   }
 
   dispose():void {
