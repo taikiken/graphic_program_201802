@@ -36,8 +36,13 @@
   <meta name="twitter:site" content="@undotsushin">
 
   <!-- favicon -->
+  <?php
+  /*
+  home screen 登録 しても web app mode だと cookie を引きつけず link click で safari に移動し使いづらい
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  */
+  ?>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
