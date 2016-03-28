@@ -250,7 +250,7 @@
     }
 
     @at-root {
-      #{ selector-replace(&, '.post-sns_upper', '.post-sns') } {
+      #{selector-replace(&, '.post-sns_upper', '.post-sns')} {
       }
     }
 
