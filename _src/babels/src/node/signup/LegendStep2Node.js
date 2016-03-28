@@ -99,6 +99,7 @@ let Step2FormNode = React.createClass( {
     this.height = 0;
     // avatar rotate
     this.rotate = 0;
+    this.timer = 0;
 
     return {
       email: this.props.email,
@@ -333,20 +334,19 @@ let Step2FormNode = React.createClass( {
   },
   // file
   pictureChange: function( event ) {
-    console.log( 'pictureChange ', event );
-
     let inputFile = event.target.value;
     this.errors.profile_picture.reset();
 
-    // this.setState( {picture: event.target.value} );
 
-    if ( Safety.isImg( inputFile ) ) {
-      this.setState( {picture: inputFile} );
-    } else {
+    if ( !Safety.isImg( inputFile ) ) {
+      // this.messageStatus.flush( MessageStatus.message( 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です。' ), MessageStatus.ERROR, this.props.sp );
       this.errors.profile_picture.message = ErrorTxt.INVALID_IMAGE;
       this.setState( {picture: ''} );
       return;
     }
+
+    // this.picture = inputFile;
+    this.setState( {picture: inputFile} );
 
     if ( !Thumbnail.detect() ) {
       // not support FileReader
@@ -364,8 +364,8 @@ let Step2FormNode = React.createClass( {
         thumbnail.on( Thumbnail.LOAD, this.avatarLoad );
         thumbnail.on( Thumbnail.ERROR, this.avatarError );
 
-        this.width = 0;
-        this.height = 0;
+        // this.width = 0;
+        // this.height = 0;
 
         thumbnail.make();
 
@@ -376,11 +376,34 @@ let Step2FormNode = React.createClass( {
   // thumbnail make
   // after picture change
   avatarLoad: function( event ) {
+    // this.avatarDispose();
+    // this.width = event.width;
+    // this.height = event.height;
+    // this.rotate = this.avatarRotate( event.orientation );
+    // this.setState( {avatar: event.img} );
+
     this.avatarDispose();
-    this.width = event.width;
-    this.height = event.height;
-    this.rotate = this.avatarRotate( event.orientation );
-    this.setState( {avatar: event.img} );
+    clearTimeout( this.timer );
+
+    this.avatarClear();
+
+    let _this = this;
+    // iOS 連続撮影すると 2 回目以降の state style が正しくないのに対応
+    // Browser bug ぽい
+    this.timer = setTimeout( function() {
+      _this.width = event.width;
+      _this.height = event.height;
+      _this.rotate = _this.avatarRotate( event.orientation );
+
+      _this.setState( { avatar: event.img } );
+    }, 50 );
+  },
+  avatarClear: function():void {
+    this.width = 0;
+    this.height = 0;
+    this.rotate = 0;
+
+    this.setState( { avatar: Empty.USER_EMPTY } );
   },
   avatarRotate: function( rotate:Number ):Number {
     if ( rotate < 0 ) {

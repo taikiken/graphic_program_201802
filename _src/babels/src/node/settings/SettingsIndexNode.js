@@ -97,6 +97,7 @@ let SettingInputNode = React.createClass( {
     this.height = 0;
     // avatar rotate
     this.rotate = 0;
+    this.timer = 0;
 
     return {
       entered: false,
@@ -183,6 +184,8 @@ let SettingInputNode = React.createClass( {
       imgStyle.transform = `rotate(${this.rotate}deg)`;
 
     }
+
+    // console.log( 'imgStyle ', imgStyle );
 
     return (
       <form ref="settings" className={'loading-root ' + this.state.loading} encType="multipart/form-data" onSubmit={this.submitHandler}>
@@ -327,14 +330,15 @@ let SettingInputNode = React.createClass( {
     let inputFile = event.target.value;
     this.errors.profile_picture.reset();
 
-    if ( Safety.isImg( inputFile ) ) {
-      this.setState( {picture: inputFile} );
-    } else {
+    if ( !Safety.isImg( inputFile ) ) {
       // this.messageStatus.flush( MessageStatus.message( 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です。' ), MessageStatus.ERROR, this.props.sp );
       this.errors.profile_picture.message = ErrorTxt.INVALID_IMAGE;
       this.setState( {picture: ''} );
       return;
     }
+
+    // this.picture = inputFile;
+    this.setState( {picture: inputFile} );
 
     if ( !Thumbnail.detect() ) {
       // not support FileReader
@@ -366,10 +370,33 @@ let SettingInputNode = React.createClass( {
   // after picture change
   avatarLoad: function( event:Object ):void {
     this.avatarDispose();
-    this.width = event.width;
-    this.height = event.height;
-    this.rotate = this.avatarRotate( event.orientation );
-    this.setState( {avatar: event.img} );
+    clearTimeout( this.timer );
+
+    this.avatarClear();
+
+    let _this = this;
+    // iOS 連続撮影すると 2 回目以降の state style が正しくないのに対応
+    // Browser bug ぽい
+    this.timer = setTimeout( function() {
+      _this.width = event.width;
+      _this.height = event.height;
+      _this.rotate = _this.avatarRotate( event.orientation );
+
+      _this.setState( { avatar: event.img } );
+    }, 50 );
+
+    // this.width = event.width;
+    // this.height = event.height;
+    // this.rotate = this.avatarRotate( event.orientation );
+    //
+    // this.setState( { avatar: event.img } );
+  },
+  avatarClear: function():void {
+    this.width = 0;
+    this.height = 0;
+    this.rotate = 0;
+
+    this.setState( { avatar: Empty.USER_EMPTY } );
   },
   avatarRotate: function( rotate:Number ):Number {
     if ( rotate < 0 ) {
