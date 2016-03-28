@@ -13,6 +13,7 @@
 
 import {EventDispatcher} from '../event/EventDispatcher';
 import {Safety} from '../data/Safety';
+import {Exif} from '../util/Exif';
 
 /**
  * <h2>ユーザーアイコン</h2>
@@ -38,6 +39,13 @@ export class Thumbnail extends EventDispatcher {
     this._imgLoad = this.imageLoad.bind( this );
     this._imgError = this.imageError.bind( this );
     this._result = '';
+    this._exif = Exif.factory();
+    this._width = 0;
+    this._height = 0;
+    this._orientation = -1;
+    this._count = 0;
+    this._event = null;
+    this._exifLoad = this.exifLoad.bind( this );
   }
   // ---------------------------------------------------
   //  Event
@@ -74,11 +82,23 @@ export class Thumbnail extends EventDispatcher {
     }
 
     this._result = '';
+    this._count = 0;
+    this._width = 0;
+    this._height = 0;
+    this._orientation = -1;
+    this._event = null;
+
     let reader = new FileReader();
     this._reader = reader;
     reader.addEventListener( 'load', this._boundLoad, false );
     reader.addEventListener( 'error', this._boundError, false );
     reader.readAsDataURL( file );
+
+    // orientation 調べるために exif 調査
+    let exif = this._exif;
+    exif.on( Exif.EXIF_ORIENTATION, this._exifLoad );
+    exif.orientation( file );
+    // console.log( 'Thumb start' );
 
   }
   /**
@@ -96,6 +116,8 @@ export class Thumbnail extends EventDispatcher {
       this._img.removeEventListener( 'load', this._imgLoad );
       this._img.removeEventListener( 'error', this._imgError );
     }
+
+    this._exif.off( Exif.EXIF_ORIENTATION, this._exifLoad );
   }
   /**
    * load event handler
@@ -106,6 +128,7 @@ export class Thumbnail extends EventDispatcher {
 
     let result = event.target.result;
     if ( !Safety.isBase64( result ) ) {
+      // jpg, png, gif でない時はエラーにする
       this.onError( event );
       return;
     }
@@ -117,6 +140,8 @@ export class Thumbnail extends EventDispatcher {
     img.addEventListener( 'load', this._imgLoad, false );
     img.addEventListener( 'error', this._imgError, false );
     img.src = result;
+
+    // with / height を調べるために img instance を作成する
     // this.dispatch( {type: Thumbnail.LOAD, img: event.target.result, nativeEvent: event} );
 
   }
@@ -126,7 +151,7 @@ export class Thumbnail extends EventDispatcher {
    */
   onError( event:Event ):void {
     this.dispose();
-    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0} );
+    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0, orientation: this._orientation} );
   }
 
   /**
@@ -136,8 +161,14 @@ export class Thumbnail extends EventDispatcher {
    * @param {Event} event Image.onload event
    */
   imageLoad( event:Event ):void {
-    this.dispose();
-    this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: event.target.width, height: event.target.height} );
+    // this.dispose();
+    this._width = event.target.width;
+    this._height = event.target.height;
+    this._event = event;
+    // console.log( 'imageLoad', event );
+
+    this.done();
+    // this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: event.target.width, height: event.target.height} );
   }
 
   /**
@@ -146,9 +177,32 @@ export class Thumbnail extends EventDispatcher {
    */
   imageError( event:Event ):void {
     this.dispose();
-    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0} );
+    this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0, orientation: this._orientation} );
   }
 
+  /**
+   * Exif.EXIF_ORIENTATION event  handler
+   * Exif 解析終了
+   * @param {Object} event Exif.EXIF_ORIENTATION event object
+   */
+  exifLoad( event:Object ):void {
+    this._orientation = event.orientation;
+    // console.log( 'exifLoad', event );
+
+    this.done();
+  }
+  /**
+   * image.onload, exif.onload のどちらも完了したら
+   * Thumbnail.LOAD event を発火させる
+   */
+  done():void {
+    ++this._count;
+    if ( this._count < 2 ) {
+      return;
+    }
+    this.dispose();
+    this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: this._event, width: this._width, height: this._height, orientation: this._orientation} );
+  }
   // ---------------------------------------------------
   //  STATIC
   // ---------------------------------------------------

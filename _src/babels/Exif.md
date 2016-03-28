@@ -1,0 +1,2 @@
+## Exif
+(figure.)[./VGsAj.gif]

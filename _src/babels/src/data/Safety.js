@@ -150,12 +150,15 @@ export class Safety {
    * @return {boolean} jpeg / png の時に true を返します
    */
   static isBase64( fileName:string ):Boolean {
-    return fileName.indexOf( 'data:image/jpeg;base64' ) !== -1 || fileName.indexOf( 'data:image/png;base64' ) !== -1;
+    return fileName.indexOf( 'data:image/jpeg;base64' ) !== -1 ||
+      fileName.indexOf( 'data:image/png;base64' ) !== -1 ||
+      fileName.indexOf( 'data:image/jpg;base64' ) !== -1 ||
+      fileName.indexOf( 'data:image/gif;base64' ) !== -1;
   }
   /**
    * 拡張子から画像ファイルかを調べます
    * @param {string} fileName 調査対象ファイル名
-   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif', 'svg' のいづれかに該当するかの真偽値を返します
+   * @returns {Boolean} 'jpg', 'png', 'jpeg', 'gif' のいづれかに該当するかの真偽値を返します
    */
   static isImg( fileName:string ):Boolean {
     // base64
@@ -163,7 +166,8 @@ export class Safety {
       return true;
     }
     // 拡張子チェック
-    return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf( Safety.getExtension( fileName ) ) !== -1;
+    // return ['jpg', 'png', 'jpeg', 'gif', 'svg'].indexOf( Safety.getExtension( fileName ) ) !== -1;
+    return ['jpg', 'png', 'jpeg', 'gif'].indexOf( Safety.getExtension( fileName ) ) !== -1;
   }
   /**
    * path に `graph.facebook.com` が含まれているかを調べます

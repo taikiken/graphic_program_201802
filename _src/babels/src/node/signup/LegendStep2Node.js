@@ -31,6 +31,7 @@ import {SignupStatus} from '../../event/SignupStatus';
 // util
 import {Loc} from '../../util/Loc';
 import {Validate} from '../../util/Validate';
+import {Exif} from '../../util/Exif';
 
 // ui
 import {Thumbnail} from '../../ui/Thumbnail';
@@ -39,6 +40,7 @@ import {Thumbnail} from '../../ui/Thumbnail';
 import {Result} from '../../data/Result';
 import {Form} from '../../data/Form';
 import {ErrorMessage} from '../../data/ErrorMessage';
+import {Safety} from '../../data/Safety';
 
 // node
 import {ErrorNode} from '../error/ErrorNode';
@@ -95,6 +97,8 @@ let Step2FormNode = React.createClass( {
     // avatar size
     this.width = 0;
     this.height = 0;
+    // avatar rotate
+    this.rotate = 0;
 
     return {
       email: this.props.email,
@@ -153,6 +157,13 @@ let Step2FormNode = React.createClass( {
       }
 
       imgStyle.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+
+    }
+
+    // orientation
+    if ( this.rotate !== 0 ) {
+
+      imgStyle.transform = `rotate(${this.rotate}deg)`;
 
     }
 
@@ -323,8 +334,26 @@ let Step2FormNode = React.createClass( {
   // file
   pictureChange: function( event ) {
     console.log( 'pictureChange ', event );
-    this.setState( {picture: event.target.value} );
-    if ( event.target.value !== '' ) {
+
+    let inputFile = event.target.value;
+    this.errors.profile_picture.reset();
+
+    // this.setState( {picture: event.target.value} );
+
+    if ( Safety.isImg( inputFile ) ) {
+      this.setState( {picture: inputFile} );
+    } else {
+      this.errors.profile_picture.message = ErrorTxt.INVALID_IMAGE;
+      this.setState( {picture: ''} );
+      return;
+    }
+
+    if ( !Thumbnail.detect() ) {
+      // not support FileReader
+      return;
+    }
+
+    if ( inputFile !== '' ) {
 
       let files:FileList = event.target.files;
 
@@ -350,7 +379,26 @@ let Step2FormNode = React.createClass( {
     this.avatarDispose();
     this.width = event.width;
     this.height = event.height;
+    this.rotate = this.avatarRotate( event.orientation );
     this.setState( {avatar: event.img} );
+  },
+  avatarRotate: function( rotate:Number ):Number {
+    if ( rotate < 0 ) {
+      return 0;
+    }
+
+    switch ( rotate ) {
+      case Exif.CW:
+        return 0;
+      case Exif.CW_90:
+        return -90;
+      case Exif.CW_180:
+        return -180;
+      case Exif.CW_270:
+        return -270;
+      default:
+        return 0;
+    }
   },
   avatarError: function( event ) {
     this.avatarDispose();
@@ -512,6 +560,9 @@ let Step2FormNode = React.createClass( {
   // avatar change click
   // from ChangeAvatar
   avatarChangeHandler: function() {
+    this.rotate = 0;
+    this.width = 0;
+    this.height = 0;
     this.setState( { picture: '', avatar: this.props.avatar } );
   },
   // ---------------------------------------------------
