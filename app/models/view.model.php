@@ -5,9 +5,12 @@ class ViewModel {
   protected $default = array(
 
     // site
+    // ==============================
+
     'site_name'          => '運動通信',
-    'site_url'           => '',
-    'file_get_url'       => '',
+    'site_url'           => '', // サイトURL - サーバから取得
+    'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
+
     'site_categories'    => '',
 
     // page
@@ -25,7 +28,7 @@ class ViewModel {
     'canonical'          => '',
 
     // post
-    'post'               => '',
+    'post'               => '', //記事詳細の場合は記事データが入る
 
     // layout
     'template'           => '',
@@ -33,10 +36,10 @@ class ViewModel {
     'slug'               => '',
 
     // env
-    'ua'                 => '',
-    'is_app'             => '',
-    'hostname'           => '',
-    'apiRoot'            => '',
+    'ua'                 => '', // UA判定
+    'is_app'             => '', // アプリ判定
+    'hostname'           => '', // debug用 - 利用なし
+    'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
 
     // slim param
     'request'            => '',
