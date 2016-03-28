@@ -54,7 +54,7 @@ class ViewModel {
     $this->default['is_app']          = $this->get_is_app();
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
-    if ( UT_ENV === 'PRODUCTION' || UT_ENV === 'DEVELOP' || UT_ENV === 'STAGING' ) :
+    if ( UT_ENV === 'PRODUCTION' || UT_ENV === 'DEVELOP' || UT_ENV === 'DEVELOP2' || UT_ENV === 'STAGING' ) :
       $this->default['apiRoot'] = '';
     endif;
 
