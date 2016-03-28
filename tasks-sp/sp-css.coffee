@@ -70,26 +70,26 @@ files = [
 gulp.task 'sp:css:dev', ->
   return gulp.src files
   .pipe $.plumber()
-  .pipe $.sourcemaps.init(
-    debug:true
-    loadMaps: true
-    identityMap: true
-  )
+#  .pipe $.sourcemaps.init(
+#    debug:true
+#    loadMaps: true
+#    identityMap: true
+#  )
   .pipe $.changed dir.sp.css + '/**', extension: '.css'
   .pipe $.sass(
     precision: 10
-    sourceMap: true
+#    sourceMap: true
     sourceComments: true
   ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
 #  .pipe $.if '*.css' && compress.css, $.cssnano
 #  .pipe $.sourcemaps.write './'
   # inline map にする
-  .pipe $.sourcemaps.write './', {
-    addComment: true
-    includeContent: true
-    sourceRoot: ['../../../app', '../../../scss']
-  }
+#  .pipe $.sourcemaps.write './', {
+#    addComment: true
+#    includeContent: true
+#    sourceRoot: ['../../../app', '../../../scss']
+#  }
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** sp:css:dev ***'

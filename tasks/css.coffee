@@ -75,11 +75,11 @@ files = [
 # sourcemap, dest: tmp
 gulp.task 'css:dev', ->
   return gulp.src files
-  .pipe $.sourcemaps.init(
-    debug:true
-    loadMaps: true
-    identityMap: true
-  )
+#  .pipe $.sourcemaps.init(
+#    debug:true
+#    loadMaps: true
+#    identityMap: true
+#  )
   .pipe $.changed app + '/**', extension: '.css'
   .pipe $.sass(
     precision: 10
@@ -90,13 +90,13 @@ gulp.task 'css:dev', ->
 #  .pipe $.if '*.css' && compress.css, $.cssnano
 #  .pipe $.sourcemaps.write './'
   # inline map にする
-  .pipe $.sourcemaps.write './', {
-    addComment: true
-    includeContent: true
-    sourceRoot: ''
-#    sourceRoot: ['./_src/app', './_src/scss']
-#    sourceRoot: ['../../../app', '../../../scss']
-  }
+#  .pipe $.sourcemaps.write './', {
+#    addComment: true
+#    includeContent: true
+#    sourceRoot: ''
+##    sourceRoot: ['./_src/app', './_src/scss']
+##    sourceRoot: ['../../../app', '../../../scss']
+#  }
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** css:dev ***'
