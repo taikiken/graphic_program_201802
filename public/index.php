@@ -1,7 +1,6 @@
 <?php
 
 include_once "local.php";
-include_once "public/ut.php";
 
 /**
 *
@@ -23,38 +22,33 @@ if (PHP_SAPI == 'cli-server') {
 
 // $_SERVER['SERVER_NAME'] で環境判定します
 // `UT_ENV` に環境を定義しslim上で利用します
+switch( $_SERVER['SERVER_NAME'] ) :
+  case '192.168.33.50' :
+    define('UT_ENV', 'LOCAL');
+    break;
 
-// 8080ポートからのアクセスならローカル
-if ( $_SERVER['SERVER_PORT'] == '8080' ) :
-  define('UT_ENV', 'LOCAL');
+  case 'undotsushin.local' :
+    define('UT_ENV', 'LOCAL');
+    break;
 
-else :
+  case 'dev.undotsushin.com' :
+    define('UT_ENV', 'DEVELOP');
+    break;
+   
+  case 'dev2.undotsushin.com' :
+    define('UT_ENV', 'DEVELOP');
+    break;
 
-  switch( $_SERVER['SERVER_NAME'] ) :
-    case '192.168.33.50' :
-      define('UT_ENV', 'LOCAL');
-      break;
+  case 'stg.undotsushin.com' :
+    define('UT_ENV', 'STAGING');
+    break;
 
-    case 'undotsushin.local' :
-      define('UT_ENV', 'LOCAL');
-      break;
+  default :
+    define('UT_ENV', 'PRODUCTION');
+endswitch;
 
-    case 'dev.undotsushin.com' :
-      define('UT_ENV', 'DEVELOP');
-      break;
-
-    case 'stg.undotsushin.com' :
-      define('UT_ENV', 'STAGING');
-      break;
-
-    default :
-      define('UT_ENV', 'PRODUCTION');
-  endswitch;
-
-  if ( $UT_ENV !== 'PRODUCTION' ) :
-    ini_set( 'display_errors', 1 );
-  endif;
-
+if ( $UT_ENV !== 'PRODUCTION' ) :
+  ini_set( 'display_errors', 1 );
 endif;
 
 
