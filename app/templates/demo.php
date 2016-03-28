@@ -60,7 +60,7 @@
 
 <ul>
 <?php
-$categories = file_get_contents('/var/www/undotsushin.com/dev/public/api/ver1/static/category.xml');
+$categories = file_get_contents('http://www.undotsushin.com/api/v1/category');
 if ( $categories ) :
   $categories = json_decode($categories, true);
   foreach( $categories['response']['categories'] as $key => $value ) :

@@ -8,6 +8,7 @@ class ViewModel {
     'site_name'          => '運動通信',
     'site_url'           => '',
     'site_categories'    => '',
+    'file_get_url'       => 'https://www.undotsushin.com',
 
     // page
     'title'              => '',
@@ -34,8 +35,8 @@ class ViewModel {
     // env
     'ua'                 => '',
     'is_app'             => '',
-    'hostname'           => 'dev2.undotsushin.com',
-    'apiRoot'            => 'http://dev2.undotsushin.com',
+    'hostname'           => 'www.undotsushin.com',
+    'apiRoot'            => 'https://www.undotsushin.com',
 
     // slim param
     'request'            => '',
@@ -85,10 +86,10 @@ class ViewModel {
   public function get_site_url() {
 
     // PRODUCTIONで `$_SERVER["HTTPS"]` が取得できてないようなので強制的にhttps
-    if ( UT_ENV == 'PRODUCTION' ) :
+    if ( !empty($_SERVER["HTTPS"]) || UT_ENV == 'PRODUCTION' ) :
       $protocol = "https://";
     else :
-      $protocol = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
+      $protocol = "http://";
     endif;
 
     $host = $_SERVER['HTTP_HOST'];
@@ -109,7 +110,7 @@ class ViewModel {
     // TODO - これDBからひっぱる必要あり〼 ref. #117
     // カテゴリーを取得する
     // ひとまず file_get_contentsで取得しておきます
-    $categories = file_get_contents('/var/www/undotsushin.com/dev/public/api/ver1/static/category.xml');
+    $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
 
     if ( $categories ) :
       $categories = json_decode($categories, true);
@@ -148,7 +149,7 @@ class ViewModel {
   public function get_post($id) {
 
     // TODO - ひとまずfile_get_contentsで取得
-    $post = file_get_contents('http://dev2.undotsushin.com/api/v1/articles/'.$id);
+    $post = file_get_contents($this->default['file_get_url'].'/api/v1/articles/'.$id);
 
     if ( $post ) :
       $post = json_decode($post, true);
