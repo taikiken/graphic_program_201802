@@ -19,6 +19,7 @@ import {Message} from '../../app/const/Message';
 
 // util
 import {Validate} from '../../util/Validate';
+import {Exif} from '../../util/Exif';
 
 // ui
 import {Thumbnail} from '../../ui/Thumbnail';
@@ -94,7 +95,8 @@ let SettingInputNode = React.createClass( {
     // avatar size
     this.width = 0;
     this.height = 0;
-
+    // avatar rotate
+    this.rotate = 0;
 
     return {
       entered: false,
@@ -172,6 +174,13 @@ let SettingInputNode = React.createClass( {
       }
 
       imgStyle.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+
+    }
+
+    // orientation
+    if ( this.rotate !== 0 ) {
+
+      imgStyle.transform = `rotate(${this.rotate}deg)`;
 
     }
 
@@ -335,6 +344,7 @@ let SettingInputNode = React.createClass( {
 
         this.width = 0;
         this.height = 0;
+        this.rotate = 0;
 
         thumbnail.make();
 
@@ -344,13 +354,32 @@ let SettingInputNode = React.createClass( {
   // -------------------------------------------------------
   // thumbnail make
   // after picture change
-  avatarLoad: function( event ) {
+  avatarLoad: function( event:Object ):void {
     this.avatarDispose();
     this.width = event.width;
     this.height = event.height;
+    this.rotate = this.avatarRotate( event.orientation );
     this.setState( {avatar: event.img} );
   },
-  avatarError: function( event ) {
+  avatarRotate: function( rotate:Number ):Number {
+    if ( rotate < 0 ) {
+      return 0;
+    }
+
+    switch ( rotate ) {
+      case Exif.CW:
+        return 0;
+      case Exif.CW_90:
+        return -90;
+      case Exif.CW_180:
+        return -180;
+      case Exif.CW_270:
+        return -270;
+      default:
+        return 0;
+    }
+  },
+  avatarError: function(/* event */) {
     this.avatarDispose();
     // console.log( 'avatar error ', event );
   },
@@ -363,10 +392,13 @@ let SettingInputNode = React.createClass( {
   },
   // -------------------------------------------------------
   // drag / drop
+
+  // drag over
   handleDragOver: function( event:Event ) {
     event.preventDefault();
     // console.log( 'drag start---------' );
   },
+  // drag enter
   handleDragEnter: function( event ) {
     if ( this.ie ) {
       event.preventDefault();
@@ -375,6 +407,7 @@ let SettingInputNode = React.createClass( {
 
     this.setState( { entered: true } );
   },
+  // drag leave
   handleDragLeave: function( event ) {
     if ( this.ie ) {
       event.preventDefault();
@@ -383,6 +416,7 @@ let SettingInputNode = React.createClass( {
 
     this.setState( { entered: false } );
   },
+  // drop
   handleDrop: function( event ) {
     // console.log( 'drop ++++++++++++', event );
     if ( this.ie ) {
@@ -467,8 +501,10 @@ let SettingInputNode = React.createClass( {
 
     // error がない時だけ
     if ( count === 0 ) {
+      // error がないのでリクエストする
       this.request();
     } else {
+      // エラー表示
       this.error();
     }
 
@@ -522,6 +558,9 @@ let SettingInputNode = React.createClass( {
     this.setState( { loading: '' } );
 
     let errors;
+    // error,
+    // JSON が壊れていてパーシエラーになっていることがある
+    // null error になることがあるので try 文で実行する
     try {
       errors = error.result.response.errors;
     } catch ( e ) {

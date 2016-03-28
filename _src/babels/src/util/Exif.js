@@ -28,7 +28,7 @@ export class Exif extends EventDispatcher {
   constructor( target:Symbol ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Exif is static Class. not use new Exif(). instead Exif.factory()` );
+      throw new Error( 'Exif is static Class. not use new Exif(). instead Exif.factory()' );
 
     }
 
@@ -42,8 +42,11 @@ export class Exif extends EventDispatcher {
 
     return _instance;
   }
-
-  orientation( file:File ):Number {
+  /**
+   * FileReader.readAsArrayBuffer で 引数(file) load 後に exif orientation を調べる
+   * @param {Blob} file 調査対象ファイル
+   */
+  orientation( file:Blob ):Number {
     let reader = new FileReader();
     this._reader = reader;
     reader.addEventListener( 'load', this._boundLoad, false );
@@ -52,11 +55,14 @@ export class Exif extends EventDispatcher {
     let end = 64 * 1024;
     // Blob.slice
     // https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice
-    if (file.slice) {
+    if (typeof file.slice === 'function') {
+      // normal
       part = file.slice(0, end);
-    } else if (file.webkitSlice) {
+    } else if (typeof file.webkitSlice === 'function') {
+      // webkit
       part = file.webkitSlice(0, end);
-    } else if (file.mozSlice) {
+    } else if (typeof file.mozSlice === 'function') {
+      // moz(firefox)
       part = file.mozSlice(0, end);
     } else {
       part = file;
@@ -65,6 +71,10 @@ export class Exif extends EventDispatcher {
     reader.readAsArrayBuffer(part);
   }
 
+  /**
+   * reader.readAsArrayBuffer onload event handler
+   * @param {Event} event
+   */
   onLoad( event:Event ):void {
     this.dispose();
     let orientation = Exif.parse( event.target.result );
@@ -74,12 +84,17 @@ export class Exif extends EventDispatcher {
     -1: not defined
     */
   }
-
+  /**
+   * reader.readAsArrayBuffer onerror event handler
+   * orientation -1(defined) を返します
+   */
   onError():void {
     this.dispose();
     this.dispatch({type: Exif.EXIF_ORIENTATION, orientation: -1});
   }
-
+  /**
+   * event handler を unbind します
+   */
   dispose():void {
     this._reader.removeEventListener( 'load', this._boundLoad );
     this._reader.removeEventListener( 'error', this._boundError );
@@ -87,12 +102,130 @@ export class Exif extends EventDispatcher {
   // ---------------------------------------------------
   //  CONST
   // ---------------------------------------------------
+  /**
+   * EXIF_ORIENTATION
+   * 解析終了時のイベント
+   * @return {string} exifOrientation を返します
+   */
   static get EXIF_ORIENTATION():string {
     return 'exifOrientation';
   }
+
+  // ---------------------------------------------------
+  // orientation 定数
+  /**
+   * NO_JPG
+   * .jpg / .jpeg ではありません
+   * @return {number} -2 を返します
+   */
+  static get NO_JPG():Number {
+    return -2;
+  }
+  /**
+   * DEFINED
+   * 見つかりませんでした
+   * @return {number} -2 を返します
+   */
+  static get DEFINED():Number {
+    return -1;
+  }
+
+  // ----------------
+  // 正対
+  /**
+   * alias CW_0
+   * CW clockwise 0
+   * ノーマル（正対）
+   * @return {number} 0 を返します
+   */
+  static get CW():Number {
+    return 0;
+  }
+  /**
+   * CW_0 clockwise 0
+   * ノーマル（正対）
+   * @return {number} 0 を返します
+   */
+  static get CW_0():Number {
+    return 0;
+  }
+  /**
+   * CW_90 clockwise 90
+   * 90度回転
+   * @return {number} 8 を返します
+   */
+  static get CW_90():Number {
+    return 8;
+  }
+  /**
+   * CW_180 clockwise 180
+   * 180度回転
+   * @return {number} 8 を返します
+   */
+  static get CW_180():Number {
+    return 3;
+  }
+  /**
+   * CW_270 clockwise 270
+   * 270度回転
+   * @return {number} 8 を返します
+   */
+  static get CW_270():Number {
+    return 6;
+  }
+
+  // ----------------
+  // 反転
+  /**
+   * alias UPSIDE_CW_0
+   * UPSIDE_CW clockwise 0
+   * 反転・ノーマル（正対）
+   * @return {number} 2 を返します
+   */
+  static get UPSIDE_CW():Number {
+    return 2;
+  }
+  /**
+   * UPSIDE_CW_0 clockwise 0
+   * 反転・ノーマル（正対）
+   * @return {number} 2 を返します
+   */
+  static get UPSIDE_CW_0():Number {
+    return 2;
+  }
+  /**
+   * UPSIDE_CW_90 clockwise 90
+   * 反転・90度回転
+   * @return {number} 7 を返します
+   */
+  static get UPSIDE_CW_90():Number {
+    return 7;
+  }
+  /**
+   * UPSIDE_CW_180 clockwise 180
+   * 反転・180度回転
+   * @return {number} 4 を返します
+   */
+  static get UPSIDE_CW_180():Number {
+    return 4;
+  }
+  /**
+   * UPSIDE_CW_270 clockwise 270
+   * 反転・270度回転
+   * @return {number} 5 を返します
+   */
+  static get UPSIDE_CW_270():Number {
+    return 5;
+  }
+
   // ---------------------------------------------------
   //  static method
   // ---------------------------------------------------
+  /**
+   * reader.readAsArrayBuffer の event.target.result を使い exif orientation 解析を始めます
+   * @param {*} result
+   * @return {number} 解析結果を返します
+   */
   static parse( result ):Number {
     let view = new DataView( result );
     if ( view.getUint16(0, false) !== 0xFFD8 ) {
@@ -123,6 +256,7 @@ export class Exif extends EventDispatcher {
             return view.getUint16(offset + (i * 12) + 8, little);
           }
         }// for
+
       } else if ( (marker & 0xFF00) !== 0xFF00 ) {
         break;
       } else {

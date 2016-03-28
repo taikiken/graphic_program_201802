@@ -94,10 +94,11 @@ export class Thumbnail extends EventDispatcher {
     reader.addEventListener( 'error', this._boundError, false );
     reader.readAsDataURL( file );
 
+    // orientation 調べるために exif 調査
     let exif = this._exif;
     exif.on( Exif.EXIF_ORIENTATION, this._exifLoad );
     exif.orientation( file );
-    console.log( 'Thumb start' );
+    // console.log( 'Thumb start' );
 
   }
   /**
@@ -164,7 +165,7 @@ export class Thumbnail extends EventDispatcher {
     this._width = event.target.width;
     this._height = event.target.height;
     this._event = event;
-    console.log( 'imageLoad', event );
+    // console.log( 'imageLoad', event );
 
     this.done();
     // this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: event, width: event.target.width, height: event.target.height} );
@@ -179,13 +180,21 @@ export class Thumbnail extends EventDispatcher {
     this.dispatch( {type: Thumbnail.ERROR, img: null, nativeEvent: event, width: 0, height: 0, orientation: this._orientation} );
   }
 
+  /**
+   * Exif.EXIF_ORIENTATION event  handler
+   * Exif 解析終了
+   * @param {Object} event Exif.EXIF_ORIENTATION event object
+   */
   exifLoad( event:Object ):void {
     this._orientation = event.orientation;
-    console.log( 'exifLoad', event );
+    // console.log( 'exifLoad', event );
 
     this.done();
   }
-
+  /**
+   * image.onload, exif.onload のどちらも完了したら
+   * Thumbnail.LOAD event を発火させる
+   */
   done():void {
     ++this._count;
     if ( this._count < 2 ) {
@@ -194,7 +203,6 @@ export class Thumbnail extends EventDispatcher {
     this.dispose();
     this.dispatch( {type: Thumbnail.LOAD, img: this._result, nativeEvent: this._event, width: this._width, height: this._height, orientation: this._orientation} );
   }
-
   // ---------------------------------------------------
   //  STATIC
   // ---------------------------------------------------
