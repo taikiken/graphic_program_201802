@@ -144,16 +144,15 @@ if (
 <?php
 /*
  * $page['apiRoot'] を元に API request 先を決定します
- * apiRoot が http://www.undotsushin.com の時に
+ * php側で任意の apiRoot が 設定されている時に
  * UT.app.App.develop(); を行います
  *
  * それ以外の時は default '/api/...' へアクセスします
- * protocol, hostname それぞれ持たないので http|https どちらでも問題ないかと思います
 */
 if ( $page['apiRoot'] != '' ) :
   // develop mode
   // dev, stg, local から起動の時のみ script tag を有効にします
-  ?>
+?>
 <script>
 ( function () {
 
