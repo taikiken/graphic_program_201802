@@ -27,6 +27,7 @@ if (
   <div id='side-menu'>
     <ul id="side-menu-list">
       <li class="ad">
+        <img class="ad-bg" src="/assets/sp/images/common/thumb-16x9.png" alt="">
         <div id="adg_div">
           <?php
           /*

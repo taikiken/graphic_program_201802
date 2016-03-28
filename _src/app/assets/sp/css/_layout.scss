@@ -736,6 +736,7 @@ a {
     }
   }
 }
+
 #side-menu-bg {
   position: absolute;
   left: 0;
@@ -748,8 +749,8 @@ a {
   transition-property: opacity;
   transition-duration: 0.3s;
   transition-timing-function: linear;
-
 }
+
 #side-menu {
   position: absolute;
   left: 0;
@@ -764,6 +765,20 @@ a {
   transition-property: transform;
   transition-duration: 0.3s;
   transition-timing-function: linear;
+}
+
+#side-menu {
+  .ad {
+    position: relative;
+    background-color: #000;
+  }
+
+  #adg_div {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 // /* Syn.のロゴを表示 */
