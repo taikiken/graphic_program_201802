@@ -324,14 +324,24 @@ let SettingInputNode = React.createClass( {
   // file
   pictureChange: function( event ) {
     // console.log( 'pictureChange ', event );
-    this.setState( {picture: event.target.value} );
+    let inputFile = event.target.value;
+    this.errors.profile_picture.reset();
+
+    if ( Safety.isImg( inputFile ) ) {
+      this.setState( {picture: inputFile} );
+    } else {
+      // this.messageStatus.flush( MessageStatus.message( 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です。' ), MessageStatus.ERROR, this.props.sp );
+      this.errors.profile_picture.message = ErrorTxt.INVALID_IMAGE;
+      this.setState( {picture: ''} );
+      return;
+    }
 
     if ( !Thumbnail.detect() ) {
       // not support FileReader
       return;
     }
 
-    if ( event.target.value !== '' ) {
+    if ( inputFile !== '' ) {
 
       let files:FileList = event.target.files;
 
@@ -342,9 +352,9 @@ let SettingInputNode = React.createClass( {
         thumbnail.on( Thumbnail.LOAD, this.avatarLoad );
         thumbnail.on( Thumbnail.ERROR, this.avatarError );
 
-        this.width = 0;
-        this.height = 0;
-        this.rotate = 0;
+        // this.width = 0;
+        // this.height = 0;
+        // this.rotate = 0;
 
         thumbnail.make();
 

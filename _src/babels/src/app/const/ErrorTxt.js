@@ -93,4 +93,11 @@ export class ErrorTxt {
   static get EMAIL_OR_PWD_EMPTY():string {
     return 'メールアドレスかパスワードが入力されておりません。';
   }
+  /**
+   * INVALID_IMAGE, プロフィール写真に使用可能な画像は .png, .jpg, .gif です
+   * @return {string} プロフィール写真に使用可能な画像は .png, .jpg, .gif です
+   */
+  static get INVALID_IMAGE():string {
+    return 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です';
+  }
 }
