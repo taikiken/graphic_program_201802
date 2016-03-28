@@ -37,7 +37,7 @@ let apiRoot = () => {
       return `http://www.undotsushin.local`;
 
     case Env.DEVELOP :
-      return 'http://www.undotsushin.com';
+      return 'http://dev2.undotsushin.com';
 
     // online
     case Env.PRODUCTION :
