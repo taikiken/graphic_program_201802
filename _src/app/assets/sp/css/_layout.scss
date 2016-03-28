@@ -90,6 +90,14 @@ a {
 .search-form-open {
   .body-sec {
     margin-top: 160px;
+
+    &.category {
+      margin-top: 200px;
+    }
+  }
+
+  .lnav.fixed-top {
+    top: 160px;
   }
 }
 // --------------------
