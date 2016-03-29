@@ -15,10 +15,26 @@
 
         <div class="post-sns_upper">
           <ul class="post-sns-list">
-            <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" target="_blank"><span>facebook</span></a></li>
-            <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>&via=undotsushin" target="_blank"><span>ツイート</span></a></li>
-            <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" target="_blank"><span>Google+</span></a></li>
-            <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" target="_blank"><span>LINEへ送る</span></a></li>
+            <li class="post-sns-item post-sns-item_fb">
+              <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
+                <span>facebook</span>
+              </a>
+            </li>
+            <li class="post-sns-item post-sns-item_tw">
+              <a href="http://twitter.com/share?&text=<?php echo $page['og_title'] ?>&via=undotsushin" target="_blank">
+                <span>ツイート</span>
+              </a>
+            </li>
+            <li class="post-sns-item post-sns-item_gt">
+              <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" target="_blank">
+                <span>Google+</span>
+              </a>
+            </li>
+            <li class="post-sns-item post-sns-item_line">
+              <a href="http://line.me/R/msg/text/?<?php echo urlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                <span>LINEへ送る</span>
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -54,10 +70,26 @@
             <div class="post-sns-flex">
               <div class="post-sns-flex-inner">
                 <ul class="post-sns-flex-list">
-                  <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" target="_blank"><span>facebook</span></a></li>
-                  <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>&via=undotsushin" target="_blank"><span>ツイート</span></a></li>
-                  <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" target="_blank"><span>Google+</span></a></li>
-                  <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" target="_blank"><span>LINEへ送る</span></a></li>
+                  <li class="post-sns-item post-sns-item_fb">
+                    <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" target="_blank">
+                      <span>facebook</span>
+                    </a>
+                  </li>
+                  <li class="post-sns-item post-sns-item_tw">
+                    <a href="http://twitter.com/share?&text=<?php echo $page['og_title'] ?>&via=undotsushin" target="_blank">
+                      <span>ツイート</span>
+                    </a>
+                  </li>
+                  <li class="post-sns-item post-sns-item_gt">
+                    <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" target="_blank">
+                      <span>Google+</span>
+                    </a>
+                  </li>
+                  <li class="post-sns-item post-sns-item_line">
+                    <a href="http://line.me/R/msg/text/?<?php echo urlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                      <span>LINEへ送る</span>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
