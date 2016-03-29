@@ -145,8 +145,8 @@ let SettingInputNode = React.createClass( {
 
     let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';
     */
-    let avatar = Safety.image( this.state.avatar, Empty.USER_EMPTY );
-    let loggedIn = Safety.same( avatar, Empty.USER_EMPTY );
+    let avatar = Safety.image( this.state.avatar, Empty.SETTING_AVATAR );
+    let loggedIn = Safety.same( avatar, Empty.SETTING_AVATAR );
 
     let imgStyle = {
       'background': `url(${avatar}) no-repeat center center`,
