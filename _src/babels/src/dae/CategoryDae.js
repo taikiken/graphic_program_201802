@@ -40,13 +40,13 @@ export class CategoryDae {
    * @return {string|undefined} article.category.label を返します
    */
   get label():string {
-    return this.category.label;
+    return Safety.string( this.category.label, '' );
   }
   /**
    * article.category.slug
    * @return {string|undefined} article.category.slug を返します
    */
   get slug():string {
-    return this.category.slug;
+    return Safety.string( this.category.slug, '' );
   }
 }
