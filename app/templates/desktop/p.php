@@ -32,10 +32,8 @@
             <li class="post-sns-item post-sns-item_gt">
               <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
             </li>
-            <li class="post-sns-item post-sns-item_line">
-              <a href="http://line.me/R/msg/text/" onClick="window.open(encodeURI(decodeURI(this.href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">
-                <span>LINEへ送る</span>
-              </a>
+            <li class="post-sns-item post-sns-item_line" style="line-height:0;">
+              <div class="line-it-button" style="display: none;" data-type="share-e" data-lang="ja"></div>
             </li>
           </ul>
 
@@ -96,13 +94,10 @@
             <li class="post-sns-item post-sns-item_gt">
               <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
             </li>
-            <li class="post-sns-item post-sns-item_line">
-              <a href="http://line.me/R/msg/text/" onClick="window.open(encodeURI(decodeURI(this.href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">
-                <span>LINEへ送る</span>
-              </a>
+            <li class="post-sns-item post-sns-item_line" style="line-height:0;">
+              <div class="line-it-button" style="display: none;" data-type="share-e" data-lang="ja"></div>
             </li>
           </ul>
-
           <div class="post-sns-pr">
             <dl class="post-sns-pr-inner">
               <dt>運動通信を<strong>いいね</strong>して<br />
