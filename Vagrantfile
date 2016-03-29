@@ -195,4 +195,17 @@ Vagrant.configure(2) do |config|
   end
 
 
+  config.push.define "dev2", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host_web01']}:/var/www/undotsushin.com/dev/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host_web02']}:/var/www/undotsushin.com/dev/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host_web01']}:/var/www/undotsushin.com/dev/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host_web02']}:/var/www/undotsushin.com/dev/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host_web01']}:/var/www/undotsushin.com/dev/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='vendor/' --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host_web02']}:/var/www/undotsushin.com/dev/public/
+    SCRIPT
+  end
+
+
+
 end

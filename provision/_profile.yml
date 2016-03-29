@@ -18,6 +18,20 @@
 #   IdentitiesOnly yes
 #   IdentityFile ~/.ssh/[配布されている鍵].pem
 #   Port 22
+#
+# Host undotsushin.com_web01
+#   Hostname 52.192.238.87
+#   User [配布されているusername]
+#   IdentitiesOnly yes
+#   IdentityFile ~/.ssh/[配布されている鍵].pem
+#   Port 22
+#
+# Host undotsushin.com_web02
+#   Hostname 52.193.228.54
+#   User [配布されているusername]
+#   IdentitiesOnly yes
+#   IdentityFile ~/.ssh/[配布されている鍵].pem
+#   Port 22
 # ```
 #
 #
