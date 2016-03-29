@@ -12,6 +12,8 @@
 # $ vagrant push でサーバにファイルをアップするための設定
 #
 # ```~/.ssh/config 設定例
+# # t2.small - dev.undotushin.com
+# ------------------------------
 # Host undotsushin.com
 #   Hostname 52.69.203.137
 #   User [配布されているusername]
@@ -19,15 +21,8 @@
 #   IdentityFile ~/.ssh/[配布されている鍵].pem
 #   Port 22
 #
-# Host undotsushin.com_web01
-#   Hostname 52.192.238.87
-#   User [配布されているusername]
-#   IdentitiesOnly yes
-#   IdentityFile ~/.ssh/[配布されている鍵].pem
-#   Port 22
-#
-# Host undotsushin.com_web02
-#   Hostname 52.193.228.54
+# Host undotsushin.com_cms
+#   Hostname 52.68.177.134
 #   User [配布されているusername]
 #   IdentitiesOnly yes
 #   IdentityFile ~/.ssh/[配布されている鍵].pem
@@ -41,6 +36,7 @@ ssh_user : username
 # ~/.ssh/config に設定しているHostを変更されている場合は
 # コメントを解除して設定してください
 # ssh_host       : undotsushin.com
+# ssh_host_cms   : undotsushin.com_cms
 # ssh_host_web01 : undotsushin.com_web01
 # ssh_host_web02 : undotsushin.com_web02
 
