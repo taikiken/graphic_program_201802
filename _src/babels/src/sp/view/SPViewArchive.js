@@ -162,8 +162,8 @@ export class SPViewArchive extends View {
    */
   showError( message:string = '' ):void {
 
-    message = Safety.string( message, '' );
-    console.log( '**************** SPViewArchive showError ', message );
+    // message = Safety.string( message, '' );
+    // console.log( '**************** SPViewArchive showError ', message );
     // ToDo: Error 時の表示が決まったら変更する
     /*
     let error = new ViewError( this.element, this.option, message );
@@ -176,7 +176,7 @@ export class SPViewArchive extends View {
    * @param {Array} articles JSON responce.articles
    */
   render( articles:Array ):void {
-    console.log( '**************** SPViewArchive render ', articles );
+    // console.log( '**************** SPViewArchive render ', articles );
     // 既存データ用のglobal配列
     let articlesList = this._articles;
 

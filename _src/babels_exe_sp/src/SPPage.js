@@ -13,6 +13,7 @@
 import {SPPageTop} from './ui/SPPageTop';
 import {SPNav} from './ui/SPNav';
 import {SPSyn} from './ui/SPSyn';
+import {SPFirstVisit} from './ui/SPFirstVisit';
 
 import {SPIndex} from './page/SPIndex';
 import {SPCategory} from './page/SPCategory';
@@ -198,6 +199,9 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
   /**
    * home, index page
@@ -216,6 +220,9 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
   /**
    * category page
@@ -238,6 +245,9 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
   /**
    * single, detail page
@@ -257,6 +267,9 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
   /**
    * コメント詳細
@@ -275,6 +288,9 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
   /**
    * コメント返信 詳細
@@ -293,6 +309,9 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
   /**
    * 検索ページ
@@ -310,6 +329,9 @@ export class SPPage {
 
     // event unbind
     SPPage.dispose();
+
+    // first
+    SPFirstVisit.start();
   }
   // ----------------------------------------------------
   // header, footer いらない

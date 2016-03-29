@@ -29,7 +29,7 @@ export class Cookie {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Cookie is static Class. not use new Cookie().` );
+      throw new Error( 'Cookie is static Class. not use new Cookie().' );
 
     }
 
@@ -54,13 +54,21 @@ export class Cookie {
     return 'visited';
   }
   /**
+   * EVER_BEEN
+   * 初めての訪問 cookie name
+   * @return {string} been 初めての訪問 cookie name を返します
+   */
+  static get EVER_BEEN():string {
+    return 'been';
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
    * cookie value を取得します
    * @param {string} keyName cookie key name
    * @return {string|null} cookie 値を返します、取得できない時は null を返します
    */
-  // ---------------------------------------------------
-  //  METHOD
-  // ---------------------------------------------------
   static get( keyName:string ) {
     return decodeURIComponent( document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') ) || null;
   }
@@ -83,7 +91,7 @@ export class Cookie {
 
     path = path !== '' ? `; path=${path}` : '';
     domain = domain !== '' ? `; domain=${domain}` : '';
-    let secureSetting = secure ? `; secure` : '';
+    let secureSetting = secure ? '; secure' : '';
 
     // cookie へ保存
     document.cookie = `${encodeURIComponent(keyName)}=${encodeURIComponent(value)}; expires=${end.toUTCString()}${domain}${path}${secureSetting}`;
