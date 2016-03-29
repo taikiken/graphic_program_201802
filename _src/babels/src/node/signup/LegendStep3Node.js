@@ -10,9 +10,6 @@
  *
  */
 
-
-import {SignupStatus} from '../../event/SignupStatus';
-
 // app
 import {User} from '../../app/User';
 import {Message} from '../../app/const/Message';
@@ -27,9 +24,14 @@ import {Form} from '../../data/Form';
 
 // dae
 import {UserDae} from '../../dae/UserDae';
+import {StatusDae} from '../../dae/StatusDae';
 
 // util
 import {Loc} from '../../util/Loc';
+
+// event
+import {SignupStatus} from '../../event/SignupStatus';
+import {MessageStatus} from '../../event/MessageStatus';
 
 // React
 let React = self.React;
@@ -48,6 +50,9 @@ let Step3FormNode = React.createClass( {
   },
   getInitialState: function() {
     this.status = SignupStatus.factory();
+    // message status instance
+    this.messageStatus = MessageStatus.factory();
+
     this.model = null;
     this.callback = null;
 
@@ -170,7 +175,6 @@ let Step3FormNode = React.createClass( {
       this.props.beforeRedirect();
       // home
       Loc.index();
-
     }
 
   },
@@ -180,6 +184,11 @@ let Step3FormNode = React.createClass( {
       // OK
       // token 取り出し
       let userDae = new UserDae( result.response );
+
+      // flush message
+      let status = new StatusDae( result.status );
+      this.messageStatus.flush( MessageStatus.message( status.userMessage ), MessageStatus.SUCCESS );
+
       // -> next step
       this.next( userDae.accessToken );
     }

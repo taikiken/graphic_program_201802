@@ -89,7 +89,7 @@ export class ViewSearch extends ViewArchiveMasonry {
   fail( error:Error ):void {
 
     this.executeSafely( View.RESPONSE_ERROR, error );
-    // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
+    // 検索結果ない時は 404 -> fail になる -> showError: not found
     this.showError( error.message );
 
   }
@@ -99,7 +99,7 @@ export class ViewSearch extends ViewArchiveMasonry {
    */
   showError( message:string = '' ):void {
 
-    message = Safety.string( message, '' );
+    // message = Safety.string( message, '' );
     // console.warn( 'search error ', message );
 
     /**

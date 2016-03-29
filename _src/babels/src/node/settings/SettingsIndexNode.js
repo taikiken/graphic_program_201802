@@ -145,8 +145,8 @@ let SettingInputNode = React.createClass( {
 
     let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';
     */
-    let avatar = Safety.image( this.state.avatar, Empty.USER_EMPTY );
-    let loggedIn = Safety.same( avatar, Empty.USER_EMPTY );
+    let avatar = Safety.image( this.state.avatar, Empty.SETTING_AVATAR );
+    let loggedIn = Safety.same( avatar, Empty.SETTING_AVATAR );
 
     let imgStyle = {
       'background': `url(${avatar}) no-repeat center center`,
@@ -329,6 +329,10 @@ let SettingInputNode = React.createClass( {
     // console.log( 'pictureChange ', event );
     let inputFile = event.target.value;
     this.errors.profile_picture.reset();
+
+    if ( inputFile === '' ) {
+      return;
+    }
 
     if ( !Safety.isImg( inputFile ) ) {
       // this.messageStatus.flush( MessageStatus.message( 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です。' ), MessageStatus.ERROR, this.props.sp );

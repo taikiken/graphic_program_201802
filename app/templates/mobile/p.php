@@ -160,6 +160,9 @@
       */?>
 
       <!-- #310 popin ebmed code  -->
+      <?php if ( $page['category']['label'] ) : ?>
+      <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+      <?php endif; ?>
       <div id="_popIn_recommend"></div>
       <script type="text/javascript">
         (function() {

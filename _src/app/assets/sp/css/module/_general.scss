@@ -455,6 +455,57 @@
 
 
 
+// modal-intro
+// 初回起動時のサービス紹介
+.modal-intro {
+  @extend %modal-dialogue;
+  position: absolute;
+
+  .modal-bg {
+    background-color: rgba(0, 0, 0, .8);
+  }
+
+  .modal-intro-contents {
+    position: relative;
+    padding-bottom: (80/2)+px;
+    background: url(/assets/sp/images/intro/bg.png) center 0 no-repeat;
+    background-size: 100%;
+  }
+
+  .modal-intro-tagline,
+  .modal-intro-heading,
+  .modal-intro-copy {
+    img {
+      width: 100%;
+    }
+  }
+
+  .modal-intro-tagline {}
+
+  .modal-intro-heading {
+    margin: (36/2)+px 0 0 perCalc(30);
+    width: perCalc(300);
+  }
+
+  .modal-intro-copy {
+    margin: (40/2)+px 0 0 perCalc(30);
+    width: perCalc(580);
+  }
+
+  .mod-btnB01 {
+    width: perCalc(540);
+    margin: (50/2)+px auto 0;
+
+    a {
+      width: 100%;
+    }
+  }
+}
+
+
+
+
+
 // modal-dialogue_logout
 // アラート ログアウト
 .modal-dialogue_delete,

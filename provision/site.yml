@@ -45,6 +45,18 @@ linked_clone: false
 # profile.ymlで設定する値のデフォルト値
 # 詳細は _profile.yml参照
 #
-ssh_user : username
-ssh_host : undotsushin.com
+ssh_user       : username
 
+ssh_host       : undotsushin.com
+ssh_host_cms   : undotsushin.com_cms
+ssh_host_web01 : undotsushin.com_web01
+ssh_host_web02 : undotsushin.com_web02
+
+# dev
+ssh_ip         : 52.69.203.137
+# cms
+ssh_ip_cms     : 52.68.177.134
+# web01
+ssh_ip_web01   : 52.192.238.87
+# web02
+ssh_ip_web01   : 52.193.228.54

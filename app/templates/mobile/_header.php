@@ -122,7 +122,6 @@ if ( $page_has_header ) :
         <?php if (0) : ?>
           <li id="crazy" class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
         <?php endif;// crazy remove ?>
-        <li id="all" class="gnav-all"><a href="/category/all/">すべて</a></li>
         <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
           <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
             <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>

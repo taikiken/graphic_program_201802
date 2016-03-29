@@ -170,6 +170,8 @@ export class ViewHeaderMember extends View {
          */
         this.commentStatus = CommentStatus.factory();
 
+        this.refreshTimer = 0;
+
         return {
           open: 'close',
           userName: this.props.userName,
@@ -342,11 +344,24 @@ export class ViewHeaderMember extends View {
         }
       },
       updateUser: function( icon, userName ) {
-        // console.log( 'user update state ', icon );
+        // console.log( 'user update state ', userName );
+        // clearTimeout( this.refreshTimer );
+        // this.setState( { icon: Empty.USER_EMPTY, userName: userName } );
+        //
+        // let me = this;
+        //
+        // this.refreshTimer = setTimeout(
+        //   function() {
+        //     console.log( 'user update state refresh -----', userName );
+        //     me.setState( { icon: icon, userName: userName } );
+        //   },
+        //   50
+        // );
+        // console.log( 'icon ', icon );
         this.setState( { icon: icon, userName: userName } );
       }
     } );
-
+    
     // --------------------------------------------------
     // user root
     if ( this._component === null ) {
@@ -355,7 +370,7 @@ export class ViewHeaderMember extends View {
         this.element
       );
     } else {
-      this._component.updateUser( dae.profilePicture, dae.userName);
+      this._component.updateUser( dae.profilePicture, dae.userName );
     }
 
   }

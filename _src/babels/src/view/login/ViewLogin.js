@@ -39,6 +39,8 @@ import {ModelSocial} from '../../model/sns/ModelSocial';
 // util
 import {Loc} from '../../util/Loc';
 
+import {MessageStatus} from '../../event/MessageStatus';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -91,6 +93,8 @@ export class ViewLogin extends View {
           email: new ErrorMessage(),
           user: new ErrorMessage()
         };
+
+        this.messageStatus = MessageStatus.factory();
 
         return {
           error: false,
@@ -218,7 +222,12 @@ export class ViewLogin extends View {
         // token setup
         if ( User.login( token ) ) {
           // home
-          Loc.index();
+          // flush message
+          this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
+          
+          setTimeout( Loc.index, 500 );
+          
+          // Loc.index();
         }/* else {
           console.log( 'fail login ...', token );
         }*/
@@ -355,7 +364,6 @@ export class ViewLogin extends View {
     }
 
   }
-
   /**
    * API `/api/v1/sessions/social` error
    * @param {Object} error error instance
@@ -363,7 +371,6 @@ export class ViewLogin extends View {
   socialFail( error ):void {
     // console.log( 'Social error ', error );
   }
-
   /**
    * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
    * @param {UserDae} userDae ユーザー情報, token 含んでいます
@@ -374,7 +381,11 @@ export class ViewLogin extends View {
     // token setup
     if ( User.login( token ) ) {
       // home
-      Loc.index();
+      // Loc.index();
+      // flush message
+      this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
+
+      setTimeout( Loc.index, 500 );
     }
   }
 }

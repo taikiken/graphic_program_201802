@@ -337,6 +337,9 @@ let Step2FormNode = React.createClass( {
     let inputFile = event.target.value;
     this.errors.profile_picture.reset();
 
+    if ( inputFile === '' ) {
+      return;
+    }
 
     if ( !Safety.isImg( inputFile ) ) {
       // this.messageStatus.flush( MessageStatus.message( 'プロフィール写真に使用可能な画像は .png, .jpg, .gif です。' ), MessageStatus.ERROR, this.props.sp );

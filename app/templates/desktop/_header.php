@@ -43,7 +43,7 @@
 
   <!-- favicon -->
   <link rel="shortcut icon" href="/assets/images/common/favicon.ico">
-  
+
   <link rel="stylesheet" href="/assets/css/ui.css">
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
@@ -89,7 +89,6 @@ if (
 <?php if (0) : ?>
       <li id="crazy" class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
 <?php endif;// crazy remove ?>
-      <li id="all" class="gnav-all"><a href="/category/all/">すべて</a></li>
       <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
         <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
           <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
