@@ -213,7 +213,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
       // update で call された ModelNoticeCount の成功 event handler
       done: function( result ) {
         let count = result.count;
-        console.log( '** count done ** ', count );
+        // console.log( '** count done ** ', count );
         if ( Number.isInteger( count ) ) {
           if ( this.state.total !== count ) {
             this.updateTotal( count );

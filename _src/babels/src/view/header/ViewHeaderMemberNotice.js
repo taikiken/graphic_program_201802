@@ -439,7 +439,7 @@ export class ViewHeaderMemberNotice extends View {
       // polling 後の request 成功
       done: function( result:NoticeCountDae ) {
         let count = result.count;
-        console.log( 'count done ', count );
+        // console.log( 'count done ', count );
         if ( Number.isInteger( count ) ) {
           if ( this.state.total !== count ) {
             this.updateTotal( count );

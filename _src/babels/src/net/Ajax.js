@@ -99,7 +99,7 @@ export class Ajax {
 
     }
 
-    console.log( `ajax.start: ${url}, ${method}`, option );
+    // console.log( `ajax.start: ${url}, ${method}`, option );
 
     // https://github.com/github/fetch
     // request を開始します
