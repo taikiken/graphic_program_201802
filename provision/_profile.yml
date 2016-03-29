@@ -40,7 +40,9 @@ ssh_user : username
 #
 # ~/.ssh/config に設定しているHostを変更されている場合は
 # コメントを解除して設定してください
-# ssh_host : undotsushin.com
+# ssh_host       : undotsushin.com
+# ssh_host_web01 : undotsushin.com_web01
+# ssh_host_web02 : undotsushin.com_web02
 
 
 #
