@@ -177,7 +177,7 @@ class ViewModel {
   /**
   * post - 詳細ページで記事IDから記事情報を取得する
   *
-  * @param  string  $id 記事IDカテゴリースラッグ
+  * @param  string  $id 記事ID
   * @return array   記事データ
   */
   public function get_post($id) {
@@ -188,17 +188,50 @@ class ViewModel {
     if ( $post ) :
       $post = json_decode($post, true);
 
-      // 記事のプライマリーカテゴリーをdefaultに設定しておく
-      $category_primary = $post['response']['categories'][0];
-      if ( isset($category_primary['slug']) ) :
-        $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
+      if ( $post['status']['code'] !== 200 ) :
+        return false;
+      endif;
+
+      if ( $post['response']['categories'] ) :
+        // 記事のプライマリーカテゴリーをdefaultに設定しておく
+        $category_primary = $post['response']['categories'][0];
+        if ( isset($category_primary['slug']) ) :
+          $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
+        endif;
       endif;
 
       return $post['response'];
+
     endif;
 
   }
 
+
+
+  /**
+  * comment - 詳細ページで記事ID x コメントIDから特定のコメントを取得する
+  *
+  * @param  string  $id 記事ID
+  * @param  string  $commentId コメントID
+  * @return array   コメントデータ
+  */
+  public function get_comment( $id, $commentId ) {
+
+    // TODO - ひとまずfile_get_contentsで取得
+    $post = file_get_contents($this->default['file_get_url'].'/api/v1/comments/article/'.$id.'/'.$commentId);
+
+    if ( $post ) :
+      $post = json_decode($post, true);
+
+      if ( $post['status']['code'] !== 200 ) :
+        return false;
+      endif;
+
+      return $post['response'];
+
+    endif;
+
+  }
 
 
 
