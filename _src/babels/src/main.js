@@ -122,6 +122,7 @@ import {ViewSingle} from './view/ViewSingle';
 import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
 import {ViewCommentSingle} from './view/ViewCommentSingle';
+import {ViewFirstVisit} from './view/ViewFirstVisit';
 
 // single
 import {ViewSingleTitle} from './view/single/ViewSingleTitle';
@@ -168,6 +169,7 @@ import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
 // sp
 
 // sp/view
+import {SPViewFirstVisit} from './sp/view/SPViewFirstVisit';
 
 // home
 import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
@@ -300,6 +302,7 @@ var UT = {
     ViewComments: ViewComments,
     ViewSearch: ViewSearch,
     ViewCommentSingle: ViewCommentSingle,
+    ViewFirstVisit: ViewFirstVisit,
     comment: {
       ViewCommentForm: ViewCommentForm
     },
@@ -350,6 +353,7 @@ var UT = {
       SPViewComments: SPViewComments,
       SPViewSingle: SPViewSingle,
       SPViewSearch: SPViewSearch,
+      SPViewFirstVisit: SPViewFirstVisit,
       single: {
         SPViewSingleHeader: SPViewSingleHeader,
         SPViewReadMore: SPViewReadMore

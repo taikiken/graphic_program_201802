@@ -384,7 +384,9 @@
 
   .modal-intro-contents {
     position: absolute;
-    top: 5%;
+    //top: 5%;
+    // 下すぎる
+    top: 160px;
     left: 50%;
     transform: translateX(-50%);
     width: 750px;
@@ -397,6 +399,8 @@
   .modal-intro-copy {
     position: absolute;
     left: 63px;
+    // 幅指定
+    width: 100%;
     @extend .sprite-intro;
     @include hide-text;
   }
