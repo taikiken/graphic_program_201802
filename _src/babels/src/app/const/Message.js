@@ -382,7 +382,7 @@ export class Message {
     return '好きな競技';
   }
   // -----------------------------------
-  // ajx
+  // ajax
   /**
    * NET_UNDEFINED, サーバーレスポンスに問題が発生しました
    * @return {string} サーバーレスポンスに問題が発生しました
@@ -412,5 +412,23 @@ export class Message {
    */
   static empty( prefix:string = '' ):string {
     return `${prefix}${Message.NET_EMPTY}`;
+  }
+  // -----------------------------------
+  // 完了系
+  /**
+   * LOGIN_COMPLETE
+   * ログイン 完了 flush message 使用想定
+   * @return {string} ログインしました
+   */
+  static get LOGIN_COMPLETE():string {
+    return 'ログインしました。';
+  }
+  /**
+   * DEACTIVATE_COMPLETE
+   * 退会 完了 flush message 使用想定
+   * @return {string} 退会しました
+   */
+  static get DEACTIVATE_COMPLETE():string {
+    return '退会しました。';
   }
 }

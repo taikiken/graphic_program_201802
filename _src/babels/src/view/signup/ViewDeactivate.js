@@ -27,6 +27,9 @@ import {Message} from '../../app/const/Message';
 // util
 import {Loc} from '../../util/Loc';
 
+// event
+import {MessageStatus} from '../../event/MessageStatus';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -92,6 +95,8 @@ export class ViewDeactivate extends View {
          * @type {null}
          */
         this.model = null;
+        // message status instance
+        this.messageStatus = MessageStatus.factory();
 
         return {
           loading: ''
@@ -159,11 +164,14 @@ export class ViewDeactivate extends View {
         if ( event.code === 200 ) {
           // sign out
           User.logout();
-          Loc.index();
+          // Loc.index();
+          this.messageStatus.flush( MessageStatus.message( Message.DEACTIVATE_COMPLETE ), MessageStatus.SUCCESS );
+
+          setTimeout( Loc.index, 500 );
         }
 
       },
-      fail: function( error ) {
+      fail: function(/* error */) {
         // console.log( 'error ', error );
         this.setState( { loading: '' } );
       }
