@@ -8,6 +8,8 @@ $app->get('/signup_login[/]', function ($request, $response, $args) use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '新規会員登録 / ログイン',
+      'og_title' => '新規会員登録 / ログイン | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'signup_login/',
       'template' => 'signup_login',
       'ua'       => 'mobile', # スマホ版のみなのでPCでもスマホ版みせちゃうことにする
       'path'     => $args,

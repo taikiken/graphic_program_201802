@@ -12,6 +12,8 @@ $app->group('/search', function () use($app) {
     $args['page'] = $app->model->set(array(
       'title'    => '検索',
       'search'   => '',
+      'og_title' => '検索 | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'search/',
       'template' => 'search',
       'path'     => $args,
     ));
@@ -30,6 +32,8 @@ $app->group('/search', function () use($app) {
     $args['page'] = $app->model->set(array(
       'title'    => "「".$searchWords.'」の検索結果',
       'search'   => $searchWords,
+      'og_title' => "「".$searchWords.'」の検索結果 | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'search/'.$searchWords,
       'template' => 'search',
       'path'     => $args,
     ));

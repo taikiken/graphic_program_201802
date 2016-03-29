@@ -23,6 +23,8 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     $args['page'] = $app->model->set(array(
       'title'      => $category['label'],
+      'og_title'   => $category['label'].' | '.$app->model->property('title'),
+      'og_url'     => $app->model->property('site_url').'category/'.$category['slug'].'/',
       'category'   => $category,
       'template'   => 'category',
       'path'       => $args,
@@ -41,6 +43,8 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'のランキング',
+      'og_title' => $category['label'].'のランキング | '.$app->model->property('title'),
+      'og_url'     => $app->model->property('site_url').'category/'.$category['slug'].'/ranking/',
       'category' => $category,
       'type'     => 'ranking',
       'template' => 'category',
@@ -60,6 +64,8 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     $args['page'] = $app->model->set(array(
       'title'    => $category['label'].'の動画',
+      'og_title' => $category['label'].'の動画 | '.$app->model->property('title'),
+      'og_url'     => $app->model->property('site_url').'category/'.$category['slug'].'/video/',
       'category' => $category,
       'type'     => 'video',
       'template' => 'category',

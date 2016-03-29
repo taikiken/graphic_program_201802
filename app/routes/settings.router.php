@@ -11,6 +11,8 @@ $app->group('/settings', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '基本情報設定 | 設定',
+      'og_title' => '基本情報設定 | 設定 | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'settings/',
       'template' => 'settings',
       'path'     => $args,
     ));
@@ -28,6 +30,8 @@ $app->group('/settings', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'パーソナライズ設定 | 設定',
+      'og_title' => 'パーソナライズ設定 | 設定 | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'settings/interest/',
       'template' => 'settings.'.$args['slug'],
       'path'     => $args,
     ));
@@ -61,7 +65,9 @@ $app->group('/settings', function () use ($app) {
     $app->user_helper->check_logged_in();
 
     $args['page'] = $app->model->set(array(
-      'title'    => '基本情報設定 | 設定',
+      'title'    => '退会 | 設定',
+      'og_title' => '退会 | 設定 | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'settings/deactivate/',
       'template' => 'settings.'.$args['slug'],
       'path'     => $args,
     ));

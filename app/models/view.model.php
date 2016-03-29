@@ -6,31 +6,31 @@ class ViewModel {
 
     // site
     // ==============================
-
-    'site_name'          => '運動通信',
+    'site_name'          => '運動通信 / CRAZY FOR SPORTS.',
     'site_url'           => '', // サイトURL - サーバから取得
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
-    'site_categories'    => '',
+    'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
 
     // page
-    'title'              => '',
-    'description'        => '',
-    'keywords'           => '',
+    'title'              => '運動通信',
+    'keywords'           => 'スポーツ,メディア,運動,運動通信,クレイジー,アスリート,ニュース,動画,sports,media,untsu,運通,crazy',
 
     // og
+    'app_id'             => '842032129256034',
     'og_type'            => 'article',
-    'og_description'     => '',
-    'og_image'           => '',
-    'app_id'             => '',
+    'og_title'           => '',
+    'og_description'     => '運動通信は「スポーツをもっと楽しもう」という想いから生まれたスポーツ総合メディアです。メジャースポーツからマイナースポーツまで幅広いスポーツニュース、コラム、ハイライト動画を中心に、ここでしか見ることが出来ないオリジナル動画特集もスタートします。',
+    'og_image'           => 'https://undotsushin.com/assets/images/common/og_image.png',
 
     // meta
-    'canonical'          => '',
+    'og_url'       => '', // シェアやコメント詳細用の正規化されたURL
 
     // post
     'post'               => '', //記事詳細の場合は記事データが入る
 
     // layout
+    'type'               => '',
     'template'           => '',
     'template_classname' => '',
     'slug'               => '',
@@ -68,6 +68,11 @@ class ViewModel {
 
     # サイト内のグロナビ用カテゴリーを取得
     $this->default['site_categories'] = $this->get_site_categories();
+
+
+    // meta
+    $this->default['og_url']   = $this->default['site_url'];
+
 
     # その他アクセス後から不変な値を設定
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
