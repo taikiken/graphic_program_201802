@@ -274,6 +274,38 @@ gulp.task 'dev:init', (cb) ->
   )
   return
 
+
+# dev:init から css 関連だけを build にしました
+# code comment off
+# server に 未圧縮ファイルをアップする時に使用します
+# vagrant をサーバーにする時に
+# 手っ取り早く確認用ファイルを生成する... ハズ
+gulp.task 'dev:build', (cb) ->
+  runSequence(
+    'vendor:dev'
+    'babels:dev'
+    'exe:dev'
+    'sp:exe:dev'
+    'sprite:build'
+    'single:dev'
+    'bundle:copy'
+    'libs:synapse:dev'
+#      'html:build'
+    'js:dev'
+    'image:copy'
+    'css:build'
+    [
+      'sp:sprite:build'
+    ]
+    [
+      'sp:css:build'
+      'sp:image:copy'
+    ]
+    'libs:copy'
+    cb
+  )
+  return
+
 # --------------------------------------------
 # 【デプロイ】
 

@@ -10,16 +10,21 @@
  *
  */
 
-
 import {SPViewArchive} from './SPViewArchive';
+
+// app
 import {User} from '../../app/User';
+// import {Message} from '../../app/const/Message';
+
+// view
+import {View} from '../../view/View';
 
 // action
 import {SearchAuth} from '../../action/search/SearchAuth';
 import {Search} from '../../action/search/Search';
 
 // data
-import {Safety} from '../../data/Safety';
+// import {Result} from '../../data/Result';
 
 // React
 let React = self.React;
@@ -43,13 +48,25 @@ export class SPViewSearch extends SPViewArchive {
       new Search( word, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
+   * Ajax response error
+   * @param {Error} error Error instance
+   */
+  fail( error:Error ):void {
+
+    // console.warn( '**************** search fail ', error );
+    this.executeSafely( View.RESPONSE_ERROR, error );
+    // 検索結果ない時は 404 -> fail になる -> showError: not found
+    this.showError( error.message );
+
+  }
+  /**
    * ViewError でエラーコンテナを作成します
    * @param {string} message エラーメッセージ
    */
   showError( message:string = '' ):void {
 
     // message = Safety.string( message, '' );
-    // console.warn( 'search error ', message );
+    // console.warn( '**************** search error ', message );
 
     let ErrorDom = React.createClass( {
       render: function() {
