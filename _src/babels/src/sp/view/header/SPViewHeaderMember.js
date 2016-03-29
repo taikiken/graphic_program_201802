@@ -102,8 +102,6 @@ export class SPViewHeaderMember extends ViewHeaderMember {
          */
         this.status = null;
 
-        this.refreshTimer = 0;
-
         return {
           total: 0,
           userName: this.props.userName,
@@ -254,7 +252,13 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         this.setState( { icon: icon, userName: userName } );
       }
     } );
-
+    // --------------------------------------------------
+    // when reload
+    if ( this._reload ) {
+      this._reload = false;
+      clearTimeout( this._timer );
+      this._timer = setTimeout( this._boundReload, 1000 );
+    }
     // --------------------------------------------------
     // user root
     if ( this._component === null ) {

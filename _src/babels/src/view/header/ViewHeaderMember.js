@@ -63,6 +63,10 @@ export class ViewHeaderMember extends View {
     // SettingsStatus complete を listen しリロードする
     this._settingStatus = null;
     this._boundComplete = this.onComplete.bind( this );
+
+    this._reload = false;
+    this._timer = 0;
+    this._boundReload = this.reload.bind( this );
   }
   /**
    * SettingDom instance
@@ -363,6 +367,13 @@ export class ViewHeaderMember extends View {
     } );
     
     // --------------------------------------------------
+    // when reload
+    if ( this._reload ) {
+      this._reload = false;
+      clearTimeout( this._timer );
+      this._timer = setTimeout( this._boundReload, 1000 );
+    }
+    // --------------------------------------------------
     // user root
     if ( this._component === null ) {
       this._component = ReactDOM.render(
@@ -388,11 +399,21 @@ export class ViewHeaderMember extends View {
   }
 
   /**
+   * 画像生成がサーバーで遅延するので 1sec 後にリロードする
+   */
+  reload():void {
+    clearTimeout( this._timer );
+    this.start();
+  }
+
+  /**
    * 設定変更で読み込み直す
    */
   onComplete():void {
     // 再読み込み
     // console.log( 'SettingsStatus.ACCOUNT_COMPLETE reload' );
+    clearTimeout( this._timer );
+    this._reload = true;
     this.start();
   }
 
