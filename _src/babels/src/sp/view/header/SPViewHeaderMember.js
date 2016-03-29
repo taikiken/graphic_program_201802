@@ -102,15 +102,19 @@ export class SPViewHeaderMember extends ViewHeaderMember {
          */
         this.status = null;
 
+        this.refreshTimer = 0;
+
         return {
-          total: 0
+          total: 0,
+          userName: this.props.userName,
+          icon: this.props.icon
         };
       },
       render: function() {
         let noticeStyle = ( num ) => {
           return num === 0 ? { display: 'none' } : { display: 'block' };
         };
-        let userName = this.props.userName;
+        // let userName = this.state.userName;
         /*
         let icon = this.props.icon;
         if ( !icon ) {
@@ -125,8 +129,10 @@ export class SPViewHeaderMember extends ViewHeaderMember {
 
         let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
         */
-        let icon = Safety.image( this.props.icon, Empty.USER_EMPTY );
+        let icon = Safety.image( this.state.icon, Empty.USER_EMPTY );
         let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
+
+        // console.log( 'icon render ', icon );
 
         return (
           <div className="user">
@@ -137,7 +143,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
                  キャッシュ問題を回避するためにDate.nowを加える
                  通常もキャッシュが効かない〜
                  */}
-                <span className={'preference-avatar ' + loggedIn}><img src={Empty.refresh(icon)} alt={userName} /></span>
+                <span className={'preference-avatar ' + loggedIn}><img src={Empty.refresh(icon)} alt={this.state.userName} /></span>
               </a>
               <span className={'preference-num'} style={noticeStyle(this.state.total)}>{this.state.total}</span>
             </div>
@@ -231,7 +237,20 @@ export class SPViewHeaderMember extends ViewHeaderMember {
 
       },
       updateUser: function( icon, userName ) {
-        // console.log( 'user update state ', icon );
+        // console.log( 'user update state ', userName );
+        // clearTimeout( this.refreshTimer );
+        // this.setState( { icon: Empty.USER_EMPTY, userName: userName } );
+        //
+        // let me = this;
+        //
+        // this.refreshTimer = setTimeout(
+        //   function() {
+        //     console.log( 'user update state refresh -----', userName );
+        //     me.setState( { icon: icon, userName: userName } );
+        //   },
+        //   50
+        // );
+        // console.log( 'icon ', icon );
         this.setState( { icon: icon, userName: userName } );
       }
     } );
