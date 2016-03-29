@@ -129,9 +129,22 @@ class ViewModel {
     $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
 
     if ( $categories ) :
+
       $categories = json_decode($categories, true);
+
       foreach( $categories['response']['categories'] as $key => $value ) :
+
+        # 冒頭に「すべて」を追加
+        if ( $key == 0 ) :
+          $categoriesArray['all'] = array(
+            'label' => 'すべて',
+            'slug'  => 'all',
+            'url'   => $this->default['site_url'].'category/all',
+          );
+        endif;
+
         $categoriesArray[$value['slug']] = $value;
+
       endforeach;
 
       return $categoriesArray;
