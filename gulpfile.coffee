@@ -293,12 +293,12 @@ gulp.task 'dev:build', (cb) ->
 #      'html:build'
     'js:dev'
     'image:copy'
-    'css:dev'
+    'css:build'
     [
       'sp:sprite:build'
     ]
     [
-      'sp:css:dev'
+      'sp:css:build'
       'sp:image:copy'
     ]
     'libs:copy'
