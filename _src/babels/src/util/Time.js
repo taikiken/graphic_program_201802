@@ -25,7 +25,7 @@ export class Time {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Time is static Class. not use new Time().` );
+      throw new Error( 'Time is static Class. not use new Time().' );
 
     }
   }

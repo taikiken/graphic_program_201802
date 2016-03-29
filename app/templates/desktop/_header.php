@@ -1,48 +1,11 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>: http://ogp.me/ns/<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true" data-orientation="true"></script>
-  <?php
-  # ---------------------------------------------------------------------------
-  // browser 使用条件 URL
-  $about_browser = '/about/browsers/';
-  $current_path = parse_url($_SERVER["REQUEST_URI"])['path'];
-  if ( $about_browser != $current_path ) {
-    // browser 使用条件 URL と同じだったら detector.js 読み込まない
-    ?>
-    <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="8" data-firefox="44" data-ie="11" data-edge="13" data-ios="8.41" data-android="4.2" data-url="<?php echo $about_browser; ?>"></script>
-  <?php } else {
-    // browser 使用条件 URL と同じなので html5shiv を読み込む
-    ?>
-    <!--[if lt IE 9]>
-    <script src="/assets/js/libs/html5shiv/html5shiv.min.js"></script>
-    <![endif]-->
-  <?php }// browser 使用条件 end
-  # ---------------------------------------------------------------------------
-  ?>
-  <title><?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?></title>
-  <meta name="description" content="説明文">
-  <meta name="keywords" content="キーワード, キーワード, キーワード">
 
-  <!-- sns ogp -->
-  <meta property="og:title" content="<?php echo ( isset($page['title']) ) ? $page['title'].' | 運動通信' : '運動通信'; ?>">
-  <meta property="og:type" content="<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>">
-  <meta property="og:image" content="https://undotsushin.com/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://www.undotsushin.com/">
-  <meta property="og:description" content="説明文">
 
-  <!-- twitter card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@undotsushin">
+<?php include_once __DIR__."/../_head.php"; ?>
 
-  <?php if ( $page['canonical'] ) : ?>
-  <link rel="canonical" href="<?php echo $page['site_url'].$page['canonical']; ?>">
-  <?php endif; ?>
-
-  <!-- favicon -->
-  <link rel="shortcut icon" href="/assets/images/common/favicon.ico">
 
   <link rel="stylesheet" href="/assets/css/ui.css">
   <script src="/assets/js/libs/vendor.react.js"></script>

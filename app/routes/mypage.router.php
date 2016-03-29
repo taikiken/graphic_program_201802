@@ -10,6 +10,8 @@ $app->group('/mypage', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'マイページ',
+      'og_title' => 'マイページ | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'mypage/',
       'template' => 'mypage',
       'path'     => $args,
    ));
@@ -27,6 +29,8 @@ $app->group('/mypage', function () use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => 'アクティビティ | マイページ',
+      'og_title' => 'アクティビティ | マイページ | '.$app->model->property('title'),
+      'og_url'   => $app->model->property('site_url').'mypage/activities/',
       'template' => 'mypage.'.$args['slug'],
       'path'     => $args,
     ));

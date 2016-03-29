@@ -128,5 +128,7 @@ if ( $page['apiRoot'] != '' ) :
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+<script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
 </body>
 </html>

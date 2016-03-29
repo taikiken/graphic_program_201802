@@ -6,31 +6,31 @@ class ViewModel {
 
     // site
     // ==============================
-
-    'site_name'          => '運動通信',
+    'site_name'          => '運動通信 / CRAZY FOR SPORTS.',
     'site_url'           => '', // サイトURL - サーバから取得
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
-    'site_categories'    => '',
+    'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
 
     // page
-    'title'              => '',
-    'description'        => '',
-    'keywords'           => '',
+    'title'              => '運動通信',
+    'keywords'           => 'スポーツ,メディア,運動,運動通信,クレイジー,アスリート,ニュース,動画,sports,media,untsu,運通,crazy',
 
     // og
+    'app_id'             => '842032129256034',
     'og_type'            => 'article',
-    'og_description'     => '',
-    'og_image'           => '',
-    'app_id'             => '',
+    'og_title'           => '',
+    'og_description'     => '運動通信は「スポーツをもっと楽しもう」という想いから生まれたスポーツ総合メディアです。メジャースポーツからマイナースポーツまで幅広いスポーツニュース、コラム、ハイライト動画を中心に、ここでしか見ることが出来ないオリジナル動画特集もスタートします。',
+    'og_image'           => 'https://www.undotsushin.com/assets/images/common/og_image.png',
 
     // meta
-    'canonical'          => '',
+    'og_url'       => '', // シェアやコメント詳細用の正規化されたURL
 
     // post
     'post'               => '', //記事詳細の場合は記事データが入る
 
     // layout
+    'type'               => '',
     'template'           => '',
     'template_classname' => '',
     'slug'               => '',
@@ -68,6 +68,11 @@ class ViewModel {
 
     # サイト内のグロナビ用カテゴリーを取得
     $this->default['site_categories'] = $this->get_site_categories();
+
+
+    // meta
+    $this->default['og_url']   = $this->default['site_url'];
+
 
     # その他アクセス後から不変な値を設定
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
@@ -172,7 +177,7 @@ class ViewModel {
   /**
   * post - 詳細ページで記事IDから記事情報を取得する
   *
-  * @param  string  $id 記事IDカテゴリースラッグ
+  * @param  string  $id 記事ID
   * @return array   記事データ
   */
   public function get_post($id) {
@@ -183,17 +188,50 @@ class ViewModel {
     if ( $post ) :
       $post = json_decode($post, true);
 
-      // 記事のプライマリーカテゴリーをdefaultに設定しておく
-      $category_primary = $post['response']['categories'][0];
-      if ( isset($category_primary['slug']) ) :
-        $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
+      if ( $post['status']['code'] !== 200 ) :
+        return false;
+      endif;
+
+      if ( $post['response']['categories'] ) :
+        // 記事のプライマリーカテゴリーをdefaultに設定しておく
+        $category_primary = $post['response']['categories'][0];
+        if ( isset($category_primary['slug']) ) :
+          $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
+        endif;
       endif;
 
       return $post['response'];
+
     endif;
 
   }
 
+
+
+  /**
+  * comment - 詳細ページで記事ID x コメントIDから特定のコメントを取得する
+  *
+  * @param  string  $id 記事ID
+  * @param  string  $commentId コメントID
+  * @return array   コメントデータ
+  */
+  public function get_comment( $id, $commentId ) {
+
+    // TODO - ひとまずfile_get_contentsで取得
+    $post = file_get_contents($this->default['file_get_url'].'/api/v1/comments/article/'.$id.'/'.$commentId);
+
+    if ( $post ) :
+      $post = json_decode($post, true);
+
+      if ( $post['status']['code'] !== 200 ) :
+        return false;
+      endif;
+
+      return $post['response'];
+
+    endif;
+
+  }
 
 
 

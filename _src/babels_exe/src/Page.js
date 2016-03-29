@@ -13,6 +13,7 @@
 
 import {PageTop} from './ui/PageTop';
 import {Nav} from './ui/Nav';
+import {FirstVisit} from './ui/FirstVisit';
 
 import {Index} from './page/Index';
 import {Category} from './page/Category';
@@ -219,6 +220,9 @@ export class Page {
 
     // event unbind
     Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
   /**
    * home, index page
@@ -235,6 +239,9 @@ export class Page {
 
     // event unbind
     Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
   /**
    * category page
@@ -255,6 +262,9 @@ export class Page {
 
     // event unbind
     Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
   /**
    * single, detail page
@@ -272,6 +282,9 @@ export class Page {
 
     // event unbind
     Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
   /**
    * コメント詳細
@@ -288,6 +301,9 @@ export class Page {
 
     // event unbind
     Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
   /**
    * コメント返信 詳細
@@ -304,6 +320,9 @@ export class Page {
 
     // event unbind
     Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
   /**
    * 検索ページ
@@ -319,6 +338,9 @@ export class Page {
 
     // event unbind
     Page.dispose();
+
+    // first
+    FirstVisit.start();
   }
   // ----------------------------------------------------
   // header, footer いらない
