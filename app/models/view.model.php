@@ -5,10 +5,13 @@ class ViewModel {
   protected $default = array(
 
     // site
+    // ==============================
+
     'site_name'          => '運動通信',
-    'site_url'           => '',
+    'site_url'           => '', // サイトURL - サーバから取得
+    'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
+
     'site_categories'    => '',
-    'file_get_url'       => 'https://www.undotsushin.com',
 
     // page
     'title'              => '',
@@ -25,7 +28,7 @@ class ViewModel {
     'canonical'          => '',
 
     // post
-    'post'               => '',
+    'post'               => '', //記事詳細の場合は記事データが入る
 
     // layout
     'template'           => '',
@@ -33,10 +36,10 @@ class ViewModel {
     'slug'               => '',
 
     // env
-    'ua'                 => '',
-    'is_app'             => '',
-    'hostname'           => 'www.undotsushin.com',
-    'apiRoot'            => 'https://www.undotsushin.com',
+    'ua'                 => '', // UA判定
+    'is_app'             => '', // アプリ判定
+    'hostname'           => '', // debug用 - 利用なし
+    'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
 
     // slim param
     'request'            => '',
@@ -49,14 +52,27 @@ class ViewModel {
   function __construct() {
 
     $this->default['site_url']        = $this->get_site_url();
+
+    if ( UT_ENV === 'LOCAL') :
+
+      # LOCAL(vagrant)ではリモートサーバーにAPI/file_get_contentアクセスする
+      $this->default['file_get_url'] = 'http://dev2.undotsushin.com';
+      $this->default['apiRoot']      = 'http://dev2.undotsushin.com';
+
+    else :
+
+      # LOCAL以外は自サーバから file_get_content する
+      $this->default['file_get_url'] = $this->default['site_url'];
+
+    endif;
+
+    # サイト内のグロナビ用カテゴリーを取得
     $this->default['site_categories'] = $this->get_site_categories();
+
+    # その他アクセス後から不変な値を設定
+    $this->default['hostname']        = $_SERVER['SERVER_NAME'];
     $this->default['ua']              = $this->get_ua();
     $this->default['is_app']          = $this->get_is_app();
-    $this->default['hostname']        = $_SERVER['SERVER_NAME'];
-
-    if ( UT_ENV === 'PRODUCTION' || UT_ENV === 'DEVELOP' || UT_ENV === 'STAGING' ) :
-      $this->default['apiRoot'] = '';
-    endif;
 
   }
 

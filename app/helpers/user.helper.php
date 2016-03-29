@@ -24,8 +24,7 @@ class UserHelper {
     $this->default['token']        = $this->get_token();
 
     if ( $this->default['token'] ) :
-      $apiRoot = ( $model->property('apiRoot') ) ? $model->property('apiRoot') : $model->property('site_url');
-      $this->default['is_logged_in'] = $this->get_is_logged_in($apiRoot);
+      $this->default['is_logged_in'] = $this->get_is_logged_in($model->property('file_get_url'));
     endif;
 
   }
