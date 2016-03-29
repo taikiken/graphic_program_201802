@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>: http://ogp.me/ns/<?php echo ( isset($page['og_type']) ) ? $page['og_type'] : 'article'; ?>#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
 
 
-  <?php include_once __DIR__."/../_head.php"; ?>
+<?php include_once __DIR__."/../_head.php"; ?>
 
 
   <link rel="stylesheet" href="/assets/css/ui.css">
