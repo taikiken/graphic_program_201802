@@ -48,7 +48,7 @@ export let BookmarkNode = React.createClass( {
     };
   },
   render: function() {
-    console.log( 'Bookmark render sign, status', this.state.sign, this.state.status );
+    // console.log( 'Bookmark render sign, status', this.state.sign, this.state.status );
     if ( this.state.sign ) {
       // login member のみ bookmark action が使える
       // let message = this.state.status ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL;
