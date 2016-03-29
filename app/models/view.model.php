@@ -21,7 +21,7 @@ class ViewModel {
     'og_type'            => 'article',
     'og_title'           => '',
     'og_description'     => '運動通信は「スポーツをもっと楽しもう」という想いから生まれたスポーツ総合メディアです。メジャースポーツからマイナースポーツまで幅広いスポーツニュース、コラム、ハイライト動画を中心に、ここでしか見ることが出来ないオリジナル動画特集もスタートします。',
-    'og_image'           => 'https://undotsushin.com/assets/images/common/og_image.png',
+    'og_image'           => 'https://www.undotsushin.com/assets/images/common/og_image.png',
 
     // meta
     'og_url'       => '', // シェアやコメント詳細用の正規化されたURL
