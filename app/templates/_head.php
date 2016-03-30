@@ -23,8 +23,13 @@ if ( $about_browser != $current_path ) {
   <meta name="keywords" content="<?php echo $page['keywords']; ?>">
   <meta name="description" content="<?php echo $page['og_description']; ?>">
 
+  <?php
+  /*
+  #389 - 公開後対応
   <!-- app install banner -->
   <meta name="apple-itunes-app" content="app-id=1086719653">
+  */
+  ?>
 
   <!-- sns ogp -->
   <meta property="fb:app_id" content="<?php echo $page['app_id']; ?>">
