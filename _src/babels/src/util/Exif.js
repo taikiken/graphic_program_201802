@@ -73,7 +73,7 @@ export class Exif extends EventDispatcher {
 
   /**
    * reader.readAsArrayBuffer onload event handler
-   * @param {Event} event
+   * @param {Event} event reader.readAsArrayBuffer onload event
    */
   onLoad( event:Event ):void {
     this.dispose();
@@ -223,7 +223,7 @@ export class Exif extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * reader.readAsArrayBuffer の event.target.result を使い exif orientation 解析を始めます
-   * @param {*} result
+   * @param {*} result reader.readAsArrayBuffer の event.target.result
    * @return {number} 解析結果を返します
    */
   static parse( result ):Number {
@@ -282,6 +282,8 @@ export class Exif extends EventDispatcher {
 }
 
 /*
+http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side
+
 function getOrientation(file, callback) {
   var reader = new FileReader();
   reader.onload = function(e) {
