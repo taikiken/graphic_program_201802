@@ -15,7 +15,7 @@
    対応済み 2016-03-23
 
  - 画像が横向く問題
-    preview(JS) 問題ない
+    preview(JS) exif check
 
  */
 
@@ -111,7 +111,8 @@ let Step2FormNode = React.createClass( {
       name: '',
       bio: '',
       picture: '',
-      size: this.props.sp ? 90 : this.props.size
+      size: this.props.sp ? 90 : this.props.size,
+      sns: false
     };
   },
   render: function() {
@@ -132,6 +133,10 @@ let Step2FormNode = React.createClass( {
     let avatar = this.state.avatar;
 
     let getStyle = () => {
+      if ( this.state.sns ) {
+        return { background: 'none' };
+      }
+
       let imgStyle = {
         'background': `url(${avatar}) no-repeat center center`,
         'backgroundSize': 'cover'
@@ -240,7 +245,7 @@ let Step2FormNode = React.createClass( {
               <div className={'avatar-stage'}>
                 <sapn className="avatar-container">
                     <span className="avatar-block" style={getStyle()}>
-                    <img src={Empty.THUMB_EMPTY} alt=""/>
+                    <img src={this.state.sns ? this.state.avatar : Empty.THUMB_EMPTY} alt=""/>
                     {/*
                      横長画像だと下が切れる問題
                      <img src={this.state.avatar} alt=""/>
@@ -306,22 +311,23 @@ let Step2FormNode = React.createClass( {
   onSns: function( event:Object ) {
     this.avatarClear();
 
-    let _this = this;
-    this.timer = setTimeout( function() {
-      _this.setState( {
-        email: event.email,
-        name: event.userName,
-        avatar: event.profilePicture,
-        bio: event.bio
-      } );
-    }, 50 );
+    // let _this = this;
+    // this.timer = setTimeout( function() {
+    //   _this.setState( {
+    //     email: event.email,
+    //     name: event.userName,
+    //     avatar: event.profilePicture,
+    //     bio: event.bio
+    //   } );
+    // }, 50 );
 
-    // this.setState( {
-    //   email: event.email,
-    //   name: event.userName,
-    //   avatar: event.profilePicture,
-    //   bio: event.bio
-    // } );
+    this.setState( {
+      sns: true,
+      email: event.email,
+      name: event.userName,
+      avatar: event.profilePicture,
+      bio: event.bio
+    } );
   },
   // step 1 email 入力を watch し
   // 同期させる
@@ -414,7 +420,7 @@ let Step2FormNode = React.createClass( {
       _this.height = event.height;
       _this.rotate = _this.avatarRotate( event.orientation );
 
-      _this.setState( { avatar: event.img } );
+      _this.setState( { avatar: event.img, sns: false } );
     }, 50 );
   },
   avatarClear: function():void {
@@ -423,7 +429,7 @@ let Step2FormNode = React.createClass( {
     this.height = 0;
     this.rotate = 0;
 
-    this.setState( { avatar: Empty.USER_EMPTY } );
+    this.setState( { avatar: Empty.USER_EMPTY, sns: false } );
   },
   avatarRotate: function( rotate:Number ):Number {
     if ( rotate < 0 ) {
@@ -606,7 +612,7 @@ let Step2FormNode = React.createClass( {
     this.rotate = 0;
     this.width = 0;
     this.height = 0;
-    this.setState( { picture: '', avatar: this.props.avatar } );
+    this.setState( { picture: '', avatar: this.props.avatar, sns: false } );
   },
   // ---------------------------------------------------
   error: function() {
