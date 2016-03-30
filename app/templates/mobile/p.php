@@ -21,7 +21,7 @@
               </a>
             </li>
             <li class="post-sns-item post-sns-item_tw">
-              <a href="http://twitter.com/share?&text=<?php echo $page['og_title'] ?>&via=undotsushin" target="_blank">
+              <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" target="_blank">
                 <span>ツイート</span>
               </a>
             </li>
@@ -76,7 +76,7 @@
                     </a>
                   </li>
                   <li class="post-sns-item post-sns-item_tw">
-                    <a href="http://twitter.com/share?&text=<?php echo $page['og_title'] ?>&via=undotsushin" target="_blank">
+                    <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" target="_blank">
                       <span>ツイート</span>
                     </a>
                   </li>
