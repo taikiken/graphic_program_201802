@@ -87,7 +87,7 @@ export class CommentStar extends ActionAuthBehavior {
    * @param {string} method request method
    */
   start( method:string = '' ):void {
-    console.error( 'illegal operation, use start. instead add / delete.' + method );
+    // console.error( 'illegal operation, use start. instead add / delete.' + method );
   }
   /**
    * コメント Good / Bad 登録

@@ -40,7 +40,7 @@ export class EventDispatcher {
     if ( listener === null ) {
       // listener が null
       // 処理しない
-      console.warn( `have to need listener, listener is null on ${type}` );
+      // console.warn( `have to need listener, listener is null on ${type}` );
       return;
     }
 
@@ -182,7 +182,7 @@ export class EventDispatcher {
     }
 
     // ToDo: production deploy 時 log 削除
-    console.log( 'dispatch ', event );
+    // console.log( 'dispatch ', event );
 
     let types = listeners[ event.type ];
     event.target = this;

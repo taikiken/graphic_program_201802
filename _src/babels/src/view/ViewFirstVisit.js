@@ -58,6 +58,7 @@ export class ViewFirstVisit extends View {
   start():void {
     if ( Cookie.get( Cookie.EVER_BEEN ) === '1' ) {
       // きたことある
+      // console.log( 'きたことある ', Cookie.get( Cookie.EVER_BEEN ) );
       return;
     }
 

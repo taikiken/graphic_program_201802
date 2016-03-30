@@ -91,7 +91,7 @@ export let SignupHeadingNode = React.createClass( {
         );
 
       default:
-        console.warn( `SignupHeading illegal step. ${this.props.step}` );
+        // console.warn( `SignupHeading illegal step. ${this.props.step}` );
         return null;
 
     }

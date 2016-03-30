@@ -51,7 +51,7 @@ export let SPMediaVideoNode = React.createClass( {
         return this.facebook( media );
 
       default:
-        console.warn(`illegal type and player. type: ${type}`);
+        // console.warn(`illegal type and player. type: ${type}`);
         break;
 
     }

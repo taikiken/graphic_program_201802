@@ -23,11 +23,8 @@
 // -------------------------------------
 // app
 import {App} from './app/App';
-// import {Env} from './app/Env';
-// import {Codes} from './app/Codes';
 import {User} from './app/User';
 import {CommentsType} from './app/const/CommentsType';
-// import {Title} from './app/const/Title';
 import {Dom} from './app/Dom';
 import {Router} from './app/Router';
 
@@ -36,80 +33,14 @@ import {Router} from './app/Router';
 import {Offset} from './util/Offset';
 import {Scroll} from './util/Scroll';
 
-/*
-// -------------------------------------
-// util
-import {Loc} from './util/Loc';
-import {Format} from './util/Format';
-
-// -------------------------------------
-// data
-import {Data} from './data/Data';
-import {Form} from './data/Form';
-import {Result} from './data/Result';
-import {Safety} from './data/Safety';
-
 // -------------------------------------
 // net
-import {Ajax} from './net/Ajax';
-import {Api} from './net/Api';
-import {Types} from './net/Types';
+import {Cookie} from './net/Cookie';
 
-// net/types
-import {Permalink} from './net/types/Permalink';
-import {Query} from './net/types/Query';
-import {Queries} from './net/types/Queries';
-import {Type} from './net/types/Type';
-import {CommentType} from './net/types/CommentType';
-
-// -------------------------------------
-// action
-import {Action} from './action/Action';
-import {Offset} from './action/Offset';
-
-// action/home
-import {Pickup} from './action/home/Pickup';
-import {Headline} from './action/home/Headline';
-import {News} from './action/home/News';
-
-import {PickupAuth} from './action/home/PickupAuth';
-import {HeadlineAuth} from './action/home/HeadlineAuth';
-import {NewsAuth} from './action/home/NewsAuth';
-
-// action/archive
-import {Category} from './action/archive/Category';
-import {Ranking} from './action/archive/Ranking';
-import {Videos} from './action/archive/Videos';
-
-// action/sidebar
-import {Widget} from './action/sidebar/Widget';
-
-// action/bookmark
-import {Bookmark} from './action/bookmark/Bookmark';
-
-// action/search
-import {Search} from './action/search/Search';
-
-// action/single
-import {Single} from './action/single/Single';
-
-// action/user
-import {UsersSelf} from './action/users/UsersSelf';
-
-
-// -------------------------------------
-// ui
-import {Receiver} from './ui/Receiver';
-
-
-*/
 // -------------------------------------
 // model
 import {Model} from './model/Model';
-/*
-import {ModelUsersSelf} from './model/users/ModelUsersSelf';
-import {ModelCategories} from './model/categoires/ModelCategories';
-*/
+
 // -------------------------------------
 // view
 import {View} from './view/View';
@@ -201,13 +132,17 @@ import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
 import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
 
-
 /**
  * 運動通信 ライブラリ
  * @module UT
  * @type {{version: string, app: {App: App, User: User, Router: Router, Dom: Dom, const: {CommentsType: CommentsType}}, util: {Offset: Offset}, model: {Model: Model}, view: {View: View, ViewCategory: ViewCategory, ViewSingle: ViewSingle, ViewTitle: ViewTitle, ViewComments: ViewComments, ViewSearch: ViewSearch, ViewCommentSingle: ViewCommentSingle, comment: {ViewCommentForm: ViewCommentForm}, single: {ViewSingleTitle: ViewSingleTitle, ViewSingleVisual: ViewSingleVisual}, header: {ViewHeaderUser: ViewHeaderUser, ViewHeaderSearch: ViewHeaderSearch}, sidebar: {ViewRanking: ViewRanking, ViewVideos: ViewVideos}, home: {ViewHeadline: ViewHeadline, ViewPickup: ViewPickup, ViewNews: ViewNews}, signup: {SignupWizard: SignupWizard, ViewDeactivate: ViewDeactivate}, login: {ViewLogin: ViewLogin, ViewLogout: ViewLogout}, mypage: {ViewUserProfile: ViewUserProfile, ViewBookmarks: ViewBookmarks, ViewActivities: ViewActivities, ViewNotifications: ViewNotifications}, settings: {ViewSettingsIndex: ViewSettingsIndex, ViewSettingsInterest: ViewSettingsInterest}, modal: {ViewDeleteModal: ViewDeleteModal, ViewLogoutModal: ViewLogoutModal}}, sp: {view: {SPViewSyn: SPViewSyn, SPViewComments: SPViewComments, SPViewSingle: SPViewSingle, SPViewSearch: SPViewSearch, single: {SPViewSingleHeader: SPViewSingleHeader, SPViewReadMore: SPViewReadMore}, comment: {SPViewCommentForm: SPViewCommentForm}, home: {SPViewHeadLine: SPViewHeadLine, SPViewNews: SPViewNews}, category: {SPViewCategoryRoot: SPViewCategoryRoot}, header: {SPViewHeaderUser: SPViewHeaderUser, SPViewHeaderSearch: SPViewHeaderSearch}, mypage: {SPViewUserProfile: SPViewUserProfile, SPViewBookmarks: SPViewBookmarks}}}}}
  */
-var UT = {
+/**
+ * 運動通信 ライブラリ
+ * @module UT
+ * @type {{version: string, build: string, app: {App: App, User: User, Router: Router, Dom: Dom, const: {CommentsType: CommentsType}}, util: {Offset: Offset, Scroll: Scroll}, net: {Cookie: Cookie}, model: {Model: Model}, view: {View: View, ViewCategory: ViewCategory, ViewSingle: ViewSingle, ViewTitle: ViewTitle, ViewComments: ViewComments, ViewSearch: ViewSearch, ViewCommentSingle: ViewCommentSingle, ViewFirstVisit: ViewFirstVisit, comment: {ViewCommentForm: ViewCommentForm}, single: {ViewSingleTitle: ViewSingleTitle, ViewSingleVisual: ViewSingleVisual}, header: {ViewHeaderUser: ViewHeaderUser, ViewHeaderSearch: ViewHeaderSearch}, sidebar: {ViewRanking: ViewRanking, ViewVideos: ViewVideos}, home: {ViewHeadline: ViewHeadline, ViewPickup: ViewPickup, ViewNews: ViewNews}, signup: {SignupWizard: SignupWizard, ViewDeactivate: ViewDeactivate}, login: {ViewLogin: ViewLogin, ViewLogout: ViewLogout}, mypage: {ViewUserProfile: ViewUserProfile, ViewBookmarks: ViewBookmarks, ViewActivities: ViewActivities, ViewNotifications: ViewNotifications}, settings: {ViewSettingsIndex: ViewSettingsIndex, ViewSettingsInterest: ViewSettingsInterest}, modal: {ViewDeleteModal: ViewDeleteModal, ViewLogoutModal: ViewLogoutModal, ViewFlushModal: ViewFlushModal}}, sp: {view: {SPViewSyn: SPViewSyn, SPViewComments: SPViewComments, SPViewSingle: SPViewSingle, SPViewSearch: SPViewSearch, SPViewFirstVisit: SPViewFirstVisit, single: {SPViewSingleHeader: SPViewSingleHeader, SPViewReadMore: SPViewReadMore}, comment: {SPViewCommentForm: SPViewCommentForm}, home: {SPViewHeadLine: SPViewHeadLine, SPViewNews: SPViewNews}, category: {SPViewCategoryRoot: SPViewCategoryRoot}, header: {SPViewHeaderUser: SPViewHeaderUser, SPViewHeaderSearch: SPViewHeaderSearch}, mypage: {SPViewUserProfile: SPViewUserProfile, SPViewBookmarks: SPViewBookmarks}}}}}
+ */
+let UT = {
   version: '@@version',
   build: '@@buildTime',
   app: {
@@ -221,78 +156,15 @@ var UT = {
       CommentsType: CommentsType
     }
   },
-  /*
-  ui: {
-    Receiver: Receiver
-  },
-  data: {
-    Data: Data,
-    Form: Form,
-    Result: Result,
-    Safety: Safety
-  },
-  */
   util: {
-    /*
-    Loc: Loc,
-    Format: Format
-    */
     Offset: Offset,
     Scroll: Scroll
-  }, /*
+  },
   net: {
-    Ajax: Ajax,
-    Api: Api,
-    Types: Types,
-    types: {
-      Permalink: Permalink,
-      Query: Query,
-      Queries: Queries,
-      Type: Type,
-      CommentType: CommentType
-    }
+    Cookie: Cookie
   },
-  action: {
-    Action: Action,
-    Offset: Offset,
-    home: {
-      Pickup: Pickup,
-      Headline: Headline,
-      News: News,
-      PickupAuth: PickupAuth,
-      HeadlineAuth: HeadlineAuth,
-      NewsAuth: NewsAuth
-    },
-    archive: {
-      Category: Category,
-      Ranking: Ranking,
-      Videos: Videos
-    },
-    sidebar: {
-      Widget: Widget
-    },
-    bookmark: {
-      Bookmark: Bookmark
-    },
-    search: {
-      Search: Search
-    },
-    single: {
-      Single: Single
-    },
-    users: {
-      UsersSelf: UsersSelf
-    }
-  },
-  */
   model: {
-    Model: Model/* ,
-    users: {
-      ModelUsersSelf: ModelUsersSelf
-    },
-    categories: {
-      ModelCategories: ModelCategories
-    }*/
+    Model: Model
   },
   view: {
     View: View,

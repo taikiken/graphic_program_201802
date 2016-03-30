@@ -65,7 +65,7 @@ export class Ajax {
     // 実行可否をチェックし, false の時は何もしません
     if ( !this.can ) {
 
-      let error = new Error( `status:999, message:duplicate or busy.` );
+      let error = new Error( 'status:999, message:duplicate or busy.' );
       error.response = {};
       error.number = 999;
       reject( error );
@@ -105,7 +105,6 @@ export class Ajax {
     // request を開始します
     fetch( url, option )
     .then( function( response ) {
-
       // check status (Server)
       let status = response.status;
 
@@ -126,13 +125,10 @@ export class Ajax {
 
     } )
     .then( function( response ) {
-
       // parse JSON
       return response.json();
-
     } )
     .then( function( json:Object ) {
-
       // parsed JSON
       let result = new ResultClass( json );
 

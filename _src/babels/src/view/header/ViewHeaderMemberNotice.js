@@ -232,7 +232,7 @@ export class ViewHeaderMemberNotice extends View {
             );
 
           default:
-            console.warn(`illegal action.${notice.action}`);
+            // console.warn(`illegal action.${notice.action}`);
             return null;
 
         }

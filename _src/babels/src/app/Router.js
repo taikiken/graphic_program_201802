@@ -105,7 +105,7 @@ export class Router extends EventDispatcher {
     let pathLength = path.length;
     let found = false;
 
-    console.log( 'route path, pathLength ', path, pathLength );
+    // console.log( 'route path, pathLength ', path, pathLength );
 
     if ( pathLength !== 1 ) {
 
@@ -120,7 +120,7 @@ export class Router extends EventDispatcher {
             // not kyeLength 1,
             // 通常 key
             if ( path.substr( 0, keyLength ) === key ) {
-              console.log( 'path substr ', path.substr( 0, keyLength ), key );
+              // console.log( 'path substr ', path.substr( 0, keyLength ), key );
               rule[ key ]();
               found = true;
               break;
@@ -138,7 +138,7 @@ export class Router extends EventDispatcher {
       found = true;
 
     }
-    console.log( 'Router found', found, path );
+    // console.log( 'Router found', found, path );
     if ( !found ) {
       // path pattern に該当しない
       this.page404( path );
@@ -150,7 +150,7 @@ export class Router extends EventDispatcher {
    * @param {string} [where=''] 発火場所
    */
   page404( where:string = '' ):void {
-    console.log( '404 ', where );
+    // console.log( '404 ', where );
     this.dispatch( { type: Router.NOT_FOUND, where: where } );
 
   }
@@ -159,7 +159,7 @@ export class Router extends EventDispatcher {
    * @param {string} [where=''] 発火場所
    */
   authorityError( where:string = '' ):void {
-    console.warn( 'authority error ', where );
+    // console.warn( 'authority error ', where );
     this.dispatch( { type: Router.AUTHORITY_ERROR, where: where } );
 
   }
@@ -293,7 +293,7 @@ export class Router extends EventDispatcher {
     }
     */
 
-    console.log( 'signup page in fired' );
+    // console.log( 'signup page in fired' );
     // URL 遷移しない
     // 1 page コンテンツ
     this.dispatch( { type: Router.SIGNUP } );
@@ -404,7 +404,7 @@ export class Router extends EventDispatcher {
   settings():void {
 
     let [ option ] = Loc.path.replace( /\/settings\/|\/settings/ig, '' ).split('/');
-    console.log( 'settings option ', option );
+    // console.log( 'settings option ', option );
     switch ( option ) {
 
       case 'interest':

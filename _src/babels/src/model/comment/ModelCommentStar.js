@@ -60,7 +60,7 @@ export class ModelCommentStar extends Model {
         break;
 
       default:
-        console.warn( `ModelCommentStar illegal type. ${type}` );
+        // console.warn( `ModelCommentStar illegal type. ${type}` );
         break;
 
     }

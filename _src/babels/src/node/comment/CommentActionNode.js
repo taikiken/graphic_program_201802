@@ -159,12 +159,12 @@ export let CommentActionNode = React.createClass( {
     // modal open fire
     this.message.on( MessageStatus.OK_CLICK, this.onOk );
     this.message.on( MessageStatus.CANCEL_CLICK, this.onCancel );
-    console.log( 'modal delete click open ', this.props.articleId, this.props.commentId, this.props.replyId );
+    // console.log( 'modal delete click open ', this.props.articleId, this.props.commentId, this.props.replyId );
     this.message.remove( this.props.uniqueId );
   },
   // confirm ok click
   shouldDelete: function() {
-    console.log( 'comment shouldDelete', this.props.uniqueId, this.props.articleId, this.props.commentId, this.props.replyId );
+    // console.log( 'comment shouldDelete', this.props.uniqueId, this.props.articleId, this.props.commentId, this.props.replyId );
 
     // comment 削除
     if ( this.model.remove !== null ) {

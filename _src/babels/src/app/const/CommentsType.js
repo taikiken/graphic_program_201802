@@ -58,7 +58,7 @@ export class CommentsType {
         return 'すべてのコメント';
 
       default:
-        console.warn( `title illegal action: ${type}, instead use default` );
+        // console.warn( `title illegal action: ${type}, instead use default` );
         return 'すべてのコメント';
 
     }
