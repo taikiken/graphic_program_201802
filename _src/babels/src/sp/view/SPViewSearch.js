@@ -72,11 +72,13 @@ export class SPViewSearch extends SPViewArchive {
       render: function() {
 
         return (
-          <div className="error-container result-notfound">
-            <h2 className="result-notfound-heading">検索結果が見つかりませんでした</h2>
-            <p className="result-notfound-lead">スペルを確認するか、他のキーワードを入力してみてください。</p>
-            <div className="mod-btnA01">
-              <a href="/">TOPに戻る</a>
+          <div className="board-large search-container">
+            <div className="error-container result-notfound">
+              <h2 className="result-notfound-heading">検索結果が見つかりませんでした</h2>
+              <p className="result-notfound-lead">スペルを確認するか、他のキーワードを入力してみてください。</p>
+              <div className="mod-btnA01">
+                <a href="/">TOPに戻る</a>
+              </div>
             </div>
           </div>
         );
