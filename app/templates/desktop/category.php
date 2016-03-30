@@ -29,17 +29,20 @@
 
       <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 データ先読みで、電車でもサクサク記事が読める！"></a></div>
 
-      <div class="widget-ranking">
+      <div id="widget-ranking-container"></div><!--/ranking-->
+      <div class="sponsor-link">
         <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
-      </div><!--/ranking-->
+      </div>
 
-      <div class="widget-recommend">
+      <div id="widget-recommend-container"></div><!--/videos-->
+      <div class="sponsor-link">
         <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
-      </div><!--/videos-->
+      </div>
 
       <div class="sponsor-link nadir">
         <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35117&targetID=adg_35117&displayid=3&adType=PC&width=300&height=600&sdkType=3&async=false&tagver=2.0.0"></script>
       </div>
     </section><!-- /.side-sec -->
+
   </div>
 </div><!-- /.body-sec -->
