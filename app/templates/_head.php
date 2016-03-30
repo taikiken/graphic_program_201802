@@ -8,7 +8,7 @@
 <?php
 # ---------------------------------------------------------------------------
 // browser 使用条件 URL
-$about_browser = '/about/browsers/';
+$about_browser = '/about/requirements/';
 $current_path = parse_url($_SERVER["REQUEST_URI"])['path'];
 if ( $about_browser != $current_path ) {
   // browser 使用条件 URL と同じだったら detector.js 読み込まない
