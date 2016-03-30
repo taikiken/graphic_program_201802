@@ -222,6 +222,16 @@
   }
 }
 
+.headline-outer {
+  position: relative;
+
+  .sponsor-link {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
 
 
 

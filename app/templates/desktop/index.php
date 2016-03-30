@@ -3,12 +3,12 @@
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-        <div id="headline-container"></div><!-- /headline -->
-
-        <!--
-        株式会社運動通信社 運動通信_PC_WEB_デスクトップ - 一面 - ヘッドライン下部 39882
-        -->
-        <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=39882&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
+        <div class="headline-outer">
+          <div id="headline-container"></div><!-- /headline -->
+          <div class="sponsor-link">
+            <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=39882&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
+          </div>
+        </div><!-- /.headline-outer -->
 
         <aside class="sns-pr">
           <dl class="sns-pr-inner">
