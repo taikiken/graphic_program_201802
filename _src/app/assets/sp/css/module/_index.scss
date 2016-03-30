@@ -85,6 +85,34 @@
   }
 }
 
+.headline-outer {
+  .sponsor-link {
+    padding-right: perCalc(20);
+    padding-left: perCalc(20);
+    border-top: 1px solid $border-primary-color;
+
+    .adgLink,
+    .adsWrapper {
+      height: auto !important;
+    }
+
+    .adsImgContainer,
+    .adsBody {
+      vertical-align: top !important;
+    }
+
+    .adsImgContainer {
+      width: 70px !important;
+      height: auto !important;
+      min-height: 60px;
+      padding: 0 !important;
+      padding-right: 10px !important;
+    }
+
+    .adsBody {}
+  }
+}
+
 
 
 

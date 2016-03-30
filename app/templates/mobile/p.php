@@ -57,10 +57,6 @@
         </div><!-- /.post-content -->
         <div id="post-content-read-more"></div>
 
-        <div class="sponsor-link">
-          <a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-710x78.jpg" alt=""></a>
-        </div>
-
         <div class="post-sns_lower">
           <div class="post-sns-list">
             <div class="post-sns-fixed">
@@ -107,6 +103,9 @@
       </div><!-- /.post-detail -->
 
       <div class="comment">
+        <div class="sponsor-link_commentUpper">
+          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+        </div>
 
         <div id="comment-form-container"></div>
 
