@@ -131,42 +131,46 @@ let Step2FormNode = React.createClass( {
 
     let avatar = this.state.avatar;
 
-    let imgStyle = {
-      'background': `url(${avatar}) no-repeat center center`,
-      'backgroundSize': 'cover'
-    };
+    let getStyle = () => {
+      let imgStyle = {
+        'background': `url(${avatar}) no-repeat center center`,
+        'backgroundSize': 'cover'
+      };
 
-    if ( this.width !== 0 && this.height !== 0 ) {
+      if ( this.width !== 0 && this.height !== 0 ) {
 
-      let size = this.state.size;
-      let width = this.width;
-      let height = this.height;
-      let bgWidth, bgHeight;
+        let size = this.state.size;
+        let width = this.width;
+        let height = this.height;
+        let bgWidth, bgHeight;
 
-      if ( width > height ) {
-        // width が大きい
-        bgHeight = size;
-        bgWidth = Math.ceil( bgHeight / height * width );
-      } else if ( width < height ) {
-        // width が小さい
-        bgWidth = size;
-        bgHeight = Math.ceil( bgWidth / width * height );
-      } else {
-        // width, height 等しい
-        bgWidth = size;
-        bgHeight = size;
+        if ( width > height ) {
+          // width が大きい
+          bgHeight = size;
+          bgWidth = Math.ceil( bgHeight / height * width );
+        } else if ( width < height ) {
+          // width が小さい
+          bgWidth = size;
+          bgHeight = Math.ceil( bgWidth / width * height );
+        } else {
+          // width, height 等しい
+          bgWidth = size;
+          bgHeight = size;
+        }
+
+        imgStyle.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+
       }
 
-      imgStyle.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+      // orientation
+      if ( this.rotate !== 0 ) {
 
-    }
+        imgStyle.transform = `rotate(${this.rotate}deg)`;
 
-    // orientation
-    if ( this.rotate !== 0 ) {
-
-      imgStyle.transform = `rotate(${this.rotate}deg)`;
-
-    }
+      }
+      // console.log( 'imgStyle', imgStyle );
+      return imgStyle;
+    };
 
     return (
       <fieldset className="fieldset-step-2">
@@ -235,7 +239,7 @@ let Step2FormNode = React.createClass( {
             >
               <div className={'avatar-stage'}>
                 <sapn className="avatar-container">
-                    <span className="avatar-block" style={imgStyle}>
+                    <span className="avatar-block" style={getStyle()}>
                     <img src={Empty.THUMB_EMPTY} alt=""/>
                     {/*
                      横長画像だと下が切れる問題
@@ -300,12 +304,24 @@ let Step2FormNode = React.createClass( {
   // -------------------------------------------------------
   // watch
   onSns: function( event:Object ) {
-    this.setState( {
-      email: event.email,
-      name: event.userName,
-      avatar: event.profilePicture,
-      bio: event.bio
-    } );
+    this.avatarClear();
+
+    let _this = this;
+    this.timer = setTimeout( function() {
+      _this.setState( {
+        email: event.email,
+        name: event.userName,
+        avatar: event.profilePicture,
+        bio: event.bio
+      } );
+    }, 50 );
+
+    // this.setState( {
+    //   email: event.email,
+    //   name: event.userName,
+    //   avatar: event.profilePicture,
+    //   bio: event.bio
+    // } );
   },
   // step 1 email 入力を watch し
   // 同期させる
@@ -386,8 +402,8 @@ let Step2FormNode = React.createClass( {
     // this.setState( {avatar: event.img} );
 
     this.avatarDispose();
-    clearTimeout( this.timer );
 
+    // avatar clear
     this.avatarClear();
 
     let _this = this;
@@ -402,6 +418,7 @@ let Step2FormNode = React.createClass( {
     }, 50 );
   },
   avatarClear: function():void {
+    clearTimeout(this.timer);
     this.width = 0;
     this.height = 0;
     this.rotate = 0;
