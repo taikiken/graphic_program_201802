@@ -6,7 +6,12 @@
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">
-      <div id="headline-container"></div><!-- /headline -->
+      <div class="headline-outer">
+        <div id="headline-container"></div><!-- /headline -->
+        <div class="sponsor-link">
+          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35255&targetID=adg_35255&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+        </div>
+      </div><!-- /.headline-outer -->
 
       <aside class="sns-pr">
         <div class="sns-pr-outer">

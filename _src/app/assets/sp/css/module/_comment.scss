@@ -416,6 +416,7 @@
 
 
 
+
 // comment-andmore
 .comment-andmore {
   border-top: 1px solid $border-primary-color;
@@ -427,6 +428,32 @@
     text-align: center;
   }
 } //.comment-andmore
+
+
+
+
+
+// sponsor-link
+// sponsor-link_commentUpper
+.sponsor-link_commentUpper {
+  padding: (40/2)+px perCalc(20) 0;
+
+  .adsWrapper {
+    padding: 0 0 (20/2)+px 0 !important;
+  }
+
+  .adsTitle,
+  .adsSponsored,
+  .adsDescription,
+  .adsButton {
+    padding-right: (20/2)+px;
+    padding-left: (20/2)+px;
+  }
+}
+
+
+
+
 
 // -------------------------------------------------
 // override
