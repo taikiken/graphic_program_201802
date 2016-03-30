@@ -210,7 +210,7 @@ export class Api {
    * @return {Types} detail API をTypes instanceで返します
    */
   static detail():Types {
-    console.warn( 'Api.detail deprecated. instead use Api.single.' );
+    // console.warn( 'Api.detail deprecated. instead use Api.single.' );
     return Api.single();
   }
   // ----------------------------------
@@ -289,7 +289,7 @@ export class Api {
         return ApiDae.api( 'comment' );
 
       default:
-        console.warn( `comment illegal action: ${action}, instead use default` );
+        // console.warn( `comment illegal action: ${action}, instead use default` );
         return ApiDae.api( 'comment' );
     }
 
@@ -308,7 +308,7 @@ export class Api {
         return Api.comment( 'reply' );
 
       default:
-        console.warn( `replay illegal action: ${action}, instead use default` );
+        // console.warn( `replay illegal action: ${action}, instead use default` );
         return Api.comment( 'reply' );
     }
   }

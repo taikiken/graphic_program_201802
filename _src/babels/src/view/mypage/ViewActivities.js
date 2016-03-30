@@ -345,7 +345,7 @@ export class ViewActivities extends View {
             );
 
           default:
-            console.warn(`illegal action.${action}`);
+            // console.warn(`illegal action.${action}`);
             return null;
 
         }

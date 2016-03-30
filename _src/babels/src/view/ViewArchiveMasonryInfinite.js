@@ -759,7 +759,7 @@ export class ViewArchiveMasonryInfinite extends View {
         // end は request offset へ request length を加算したものと
         // children length の小さい方
         let limit = Math.min( i + this.state.length, childNodes.length );
-        console.log( 'start - end ', i + '-' + limit );
+        // console.log( 'start - end ', i + '-' + limit );
 
         // start / end から 対象 children を選別
         for ( ; i < limit; i++ ) {

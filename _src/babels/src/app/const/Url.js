@@ -28,7 +28,7 @@ export class Url {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Url is static Class. not use new Url().` );
+      throw new Error( 'Url is static Class. not use new Url().' );
 
     }
 
@@ -112,7 +112,7 @@ export class Url {
         return base;
 
       default:
-        console.warn( `signup illegal value: ${path}, instead use default` );
+        // console.warn( `signup illegal value: ${path}, instead use default` );
         return base;
 
     }
@@ -128,16 +128,16 @@ export class Url {
     switch ( step ) {
 
       case 2:
-        return `account`;
+        return 'account';
 
       case 3:
-        return `interest`;
+        return 'interest';
 
       case 1:
         return '';
 
       default:
-        console.warn( `signup illegal value: ${step}, instead use default` );
+        // console.warn( `signup illegal value: ${step}, instead use default` );
         return '';
 
     }
@@ -163,7 +163,7 @@ export class Url {
         return 1;
 
       default:
-        console.warn( `signup illegal value: ${hash}, instead use default` );
+        // console.warn( `signup illegal value: ${hash}, instead use default` );
         return 1;
 
     }
@@ -209,7 +209,7 @@ export class Url {
         return base;
 
       default:
-        console.warn( `password illegal value: ${path}, instead use default` );
+        // console.warn( `password illegal value: ${path}, instead use default` );
         return base;
     }
   }
@@ -230,7 +230,7 @@ export class Url {
         return base;
 
       default:
-        console.warn( `mypage illegal value: ${path}, instead use default` );
+        // console.warn( `mypage illegal value: ${path}, instead use default` );
         return base;
     }
 
@@ -266,7 +266,7 @@ export class Url {
         return base;
 
       default:
-        console.warn( `settings illegal value: ${path}, instead use default` );
+        // console.warn( `settings illegal value: ${path}, instead use default` );
         return base;
     }
 
@@ -304,7 +304,7 @@ export class Url {
         return base;
 
       default:
-        console.warn( `settings illegal value: ${path}, instead use default` );
+        // console.warn( `settings illegal value: ${path}, instead use default` );
         return base;
     }
 

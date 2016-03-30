@@ -52,7 +52,7 @@ let apiRoot = () => {
       return '';
 
     default :
-      console.warn( `illegal option: ${Env.mode}. instead use production.` );
+      // console.warn( `illegal option: ${Env.mode}. instead use production.` );
       return '';
 
   }

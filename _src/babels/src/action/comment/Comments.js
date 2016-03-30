@@ -118,7 +118,7 @@ export class Comments extends OffsetAuth {
         return Comments.all( id, resolve, reject );
 
       default :
-        console.warn( `Comments type illegal action: ${type}, instead use default` );
+        // console.warn( `Comments type illegal action: ${type}, instead use default` );
         return Comments.all( id, resolve, reject );
 
     }

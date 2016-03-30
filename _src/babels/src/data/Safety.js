@@ -136,7 +136,7 @@ export class Safety {
     var split = fileName.split( '.' );
 
     if ( split.length === 1 || ( split[0] === '' && split.length === 2 ) ) {
-      console.warn( `not correct file name. ${fileName}` );
+      // console.warn( `not correct file name. ${fileName}` );
       return '';
     }
 

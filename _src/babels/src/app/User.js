@@ -105,7 +105,7 @@ export class User {
    */
   static login( token:string ):Boolean {
     token = Safety.string( token, '' );
-    console.log( `user login [${token !== ''}]` );
+    // console.log( `user login [${token !== ''}]` );
 
     // 開発中は token が cookie になくても default user でログインさせちゃう
     /*
@@ -123,7 +123,7 @@ export class User {
     let altToken = Safety.string( token, '' );
     if ( altToken === '' ) {
       // token が不正値
-      console.warn( `illegal token. [${token}]` );
+      // console.warn( `illegal token. [${token}]` );
       return false;
     }
 
@@ -145,7 +145,7 @@ export class User {
    */
   static init():void {
     let token = User.token;
-    console.log( `user init token [${token !== ''}]` );
+    // console.log( `user init token [${token !== ''}]` );
     if ( token === null || typeof token === 'undefined' || token === '' ) {
       User.sign = false;
     } else {
