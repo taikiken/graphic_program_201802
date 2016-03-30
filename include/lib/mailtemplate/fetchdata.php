@@ -1,1 +1,0 @@
-<a href="./preview/?fid=<?=$p[$i]["id"]?>" target="_blank"><img src="/shared/cms/img/icon_browser.gif" alt="<?=mod_HTML($p[$i]["subject"])?>フォームをブラウザでプレビュー" width="16" height="16"></a><a href="../mail_template/?cid=<?=$p[$i]["id"]?>" class="folder"><?=mod_HTML($p[$i]["subject"])?></a>

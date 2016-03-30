@@ -1,1 +1,0 @@
-<li class="ds"><a href="../format/">初期設定に戻す</a></li>
