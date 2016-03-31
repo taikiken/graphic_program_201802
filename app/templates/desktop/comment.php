@@ -16,19 +16,36 @@
 
         <div id="single-header-container"></div>
 
-        <div id="comment-normal-container"></div>
-
         <div class="sponsor-link">
-          <a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-710x78.jpg" alt=""></a>
+          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35118&targetID=adg_35118&displayid=1&adType=PC&width=728&height=90&sdkType=3&async=false&tagver=2.0.0"></script>
         </div>
+
+        <div id="comment-normal-container"></div>
 
         <div class="post-sns">
           <ul class="post-sns-list">
-            <li class="post-sns-item post-sns-item_fbgood"><div class="fb-like" data-href="<?php echo (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . parse_url($_SERVER["REQUEST_URI"])['path'] ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
-            <li class="post-sns-item post-sns-item_tw"><a href="http://twitter.com/share?&text=<?php echo $page['title'] ?>&via=undotsushin" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>ツイート</span></a></li>
-            <li class="post-sns-item post-sns-item_fb"><a href="http://www.facebook.com/share.php" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a></li>
-            <li class="post-sns-item post-sns-item_gt"><a href="https://plus.google.com/share" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a></li>
-            <li class="post-sns-item post-sns-item_line"><a href="http://line.me/R/msg/text/" onClick="window.open(encodeURI(decodeURI(this.href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow"><span>LINEへ送る</span></a></li>
+            <li class="post-sns-item post-sns-item_fbgood">
+              <div class="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </li>
+            <?php
+
+            // PC版はjsで行うのでTwitter textをencodeしない = 「/」対策
+
+            ?>
+            <li class="post-sns-item post-sns-item_tw">
+              <a href="http://twitter.com/share?text=<?php echo $page['og_title']; ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">
+                <span>ツイート</span>
+              </a>
+            </li>
+            <li class="post-sns-item post-sns-item_fb">
+              <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a>
+            </li>
+            <li class="post-sns-item post-sns-item_gt">
+              <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
+            </li>
+            <li class="post-sns-item post-sns-item_line" style="line-height:0;">
+              <div class="line-it-button" style="display: none;" data-type="share-e" data-lang="ja"></div>
+            </li>
           </ul>
 
           <div class="post-sns-pr">
@@ -41,6 +58,17 @@
             </dl><!-- /.post-sns-pr-inner -->
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
+
+        <div class="sponsor-link">
+          <div class="sponsor-link column2">
+            <div class="sponsor-link-item">
+              <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35119&targetID=adg_35119&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+            </div>
+            <div class="sponsor-link-item">
+              <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+            </div>
+          </div>
+        </div>
 
       </div><!-- /.post-detail -->
 
