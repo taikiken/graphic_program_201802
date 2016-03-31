@@ -7,11 +7,29 @@
 //
 // Styleguide 2.10.0
 
+// search-container
+.search-container {
+  padding-bottom: 0;
+
+  .board-item {
+    margin-bottom: 10px !important;
+  }
+
+  #board-container-more {
+    margin-top: 0 !important;
+  }
+
+  .board-btn-viewmore-link {
+    margin-bottom: (40/2)+px;
+  }
+}
+
 // result-notfound
 .result-notfound {
-  margin: (40/2)+px 0;
+  padding: (20/2)+px 0 (40/2)+px;
   padding-right: perCalc(20);
   padding-left: perCalc(20);
+  background-color: #fff;
 
   &-heading {
     font-weight: bold;
@@ -29,5 +47,9 @@
     a {
       display: block;
     }
+  }
+
+  .sponsor-link {
+    border: 1px solid $border-primary-color;
   }
 } //.result-notfound
