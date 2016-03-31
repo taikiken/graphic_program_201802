@@ -37,15 +37,24 @@ export let NewsAdNode = React.createClass( {
     };
   },
   render: function() {
-
-    if ( this.props.enable && ( this.state.third || (this.props.index < 2 && this.props.index === this.props.length) ) ) {
+    let enableAd = () => {
       this.ok = true;
       return (
         <div className={`news-ad news-ad-${this.props.index}`} ref="news_ad"></div>
       );
+    };
+    // console.log( 'NewsAdNode ', this.props.uniqueId, this.props.index, this.props.length, this.props.index + 1 === this.props.length );
+    if ( this.props.enable && this.state.third ) {
+
+      return enableAd();
+
     } else {
 
-      return null;
+      if ( this.props.enable && (this.props.index < 2 && this.props.index + 1 === this.props.length) ) {
+        return enableAd();
+      } else {
+        return null;
+      }
     }
   },
   componentDidMount: function() {
