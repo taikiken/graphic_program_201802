@@ -371,6 +371,7 @@ export let SPArchiveNode = React.createClass( {
             // unique key(React)にarticle id(number)記事Idを使用します
             return (
               <div key={'archive-article-' + dae.id} className="archive-article">
+                <NewsAdNode key={'ad-' + dae.id} index={i} />
                 <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
                   <a className="post" href={dae.url}>
                     <ThumbnailDom
@@ -393,7 +394,6 @@ export let SPArchiveNode = React.createClass( {
                     total={commentsTotal}
                     articleId={String(dae.id)} />
                 </div>
-                <NewsAdNode key={'ad-' + dae.id} index={i} />
               </div>
             );
             // loop end
