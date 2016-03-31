@@ -229,52 +229,8 @@
     position: absolute;
     bottom: 0;
     right: 0;
-  }
 
-  .adgLink {
-    display: block;
-    height: 107px !important;
-    padding: 15px 0;
-    border-top: 1px solid $border-primary-color;
-
-    &:hover {
-      .adsDescription {
-        color: $highlight-color !important;
-      }
-
-      .adsImg {
-        @include hover-opacity;
-      }
-    }
-  }
-
-  .adsWrapper {
-    height: auto !important;
-    overflow: visible !important;
-    background: none !important;
-  }
-
-  .adsImgContainer {
-    width: 80px !important;
-    height: 70px !important;
-    padding: 0 10px 0 0 !important;
-  }
-
-  .adsImg {}
-
-  .adsBody {
-    padding: 0 !important;
-  }
-
-  .adsTitle {
-    font-size: fz(12);
-    text-align: left;
-  }
-
-  .adsDescription {
-    min-height: 2.6em;
-    line-height: lh(18, 14) !important;
-    text-align: left;
+    @extend %board-small-sponsor-link;
   }
 }
 
