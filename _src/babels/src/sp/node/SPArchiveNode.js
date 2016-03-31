@@ -23,7 +23,9 @@ import {View} from '../../view/View';
 // data
 import {Safety} from '../../data/Safety';
 
+// node
 import {ReactionNode} from '../../node/comment/ReactionNode';
+import {NewsAdNode} from '../node/ad/NewsAdNode';
 
 // React
 let React = self.React;
@@ -52,7 +54,6 @@ let CommentedUsersDom = React.createClass( {
   }
 
 } );
-
 
 let CommentsSecondDom = React.createClass( {
   propType: {
@@ -369,27 +370,30 @@ export let SPArchiveNode = React.createClass( {
 
             // unique key(React)にarticle id(number)記事Idを使用します
             return (
-              <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
-                <a className="post" href={dae.url}>
-                  <ThumbnailDom
-                    mediaType={dae.mediaType}
-                    thumbnail={thumbnail}
-                    title={dae.title}
-                  />
-                  <h2 className='post-heading'>{dae.title}</h2>
-                  <div className="post-data">
-                    {recommend}
-                    <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
-                    <p className="post-date">{dae.displayDate}</p>
-                    <div className="post-excerpt-text">{dae.description}</div>
-                  </div>
-                </a>
-                <PopularDom
-                  key={'comment-' + dae.id}
-                  uniqueId={'comment-' + dae.id}
-                  commentsPopular={commentsPopular}
-                  total={commentsTotal}
-                  articleId={String(dae.id)} />
+              <div key={'archive-article-' + dae.id} className="archive-article">
+                <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
+                  <a className="post" href={dae.url}>
+                    <ThumbnailDom
+                      mediaType={dae.mediaType}
+                      thumbnail={thumbnail}
+                      title={dae.title}
+                    />
+                    <h2 className='post-heading'>{dae.title}</h2>
+                    <div className="post-data">
+                      {recommend}
+                      <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
+                      <p className="post-date">{dae.displayDate}</p>
+                      <div className="post-excerpt-text">{dae.description}</div>
+                    </div>
+                  </a>
+                  <PopularDom
+                    key={'comment-' + dae.id}
+                    uniqueId={'comment-' + dae.id}
+                    commentsPopular={commentsPopular}
+                    total={commentsTotal}
+                    articleId={String(dae.id)} />
+                </div>
+                <NewsAdNode key={'ad-' + dae.id} index={i} />
               </div>
             );
             // loop end
