@@ -29,7 +29,7 @@ export class Sidebar {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Sidebar is static Class. not use new Sidebar().` );
+      throw new Error( 'Sidebar is static Class. not use new Sidebar().' );
 
     }
   }
@@ -41,16 +41,36 @@ export class Sidebar {
     // ranking
     let rankingElement = Dom.ranking();
     if ( rankingElement !== null ) {
-      let ranking = new UT.view.sidebar.ViewRanking( rankingElement, null, slug );
+      let option = {};
+      option[ UT.view.View.DID_MOUNT ] = Sidebar.didRanking;
+      let ranking = new UT.view.sidebar.ViewRanking( rankingElement, option, slug );
       ranking.start();
     }
 
     // video
     let videoElement = Dom.video();
     if ( videoElement !== null ) {
-      let videos = new UT.view.sidebar.ViewVideos( videoElement, null, slug );
+      let option = {};
+      option[ UT.view.View.DID_MOUNT ] = Sidebar.didVideo;
+      let videos = new UT.view.sidebar.ViewVideos( videoElement, option, slug );
       videos.start();
     }
 
+  }
+
+  static didRanking():void {
+    let ad = Dom.adRanking();
+    // console.log( 'didRanking', ad );
+    if ( ad !== null ) {
+      ad.style.cssText = 'display: block;';
+    }
+  }
+
+  static didVideo():void {
+    let ad = Dom.adVideo();
+    // console.log( 'didVideo', ad );
+    if ( ad !== null ) {
+      ad.style.cssText = 'display: block;';
+    }
   }
 }
