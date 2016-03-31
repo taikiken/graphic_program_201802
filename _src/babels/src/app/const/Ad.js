@@ -17,7 +17,7 @@ export class Ad {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Ad is static Class. not use new Ad().` );
+      throw new Error( 'Ad is static Class. not use new Ad().' );
 
     }
 
@@ -35,7 +35,7 @@ export class Ad {
    * @returns {string} 一覧 - 記事一覧内(フリー型)
    */
   static get SP_40713():string {
-    return '//i.socdm.com/sdk/js/adg-script-loader.js?id=35244&targetID=adg_35244&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
+    return '//i.socdm.com/sdk/js/adg-script-loader.js?id=35244&targetID=__TARGET_ID__&displayid=2&adType=INFEED&async=true&tagver=2.0.0';
   }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 記事下(フリー型) 40714
@@ -49,14 +49,14 @@ export class Ad {
    * @returns {string} 詳細 - 公式コメンテーター一覧下(フリー型)
    */
   static get SP_40680():string {
-    return '//i.socdm.com/sdk/js/adg-script-loader.js?id=35208&targetID=adg_35208&displayid=3&adType=INFEED&async=false&tagver=2.0.0';
+    return '//i.socdm.com/sdk/js/adg-script-loader.js?id=35208&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
   }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - みんなのコメント一覧下(フリー型) 40681
    * @returns {string} 詳細 - みんなのコメント一覧下(フリー型)
    */
   static get SP_40681():string {
-    return '//i.socdm.com/sdk/js/adg-script-loader.js?id=35209&targetID=adg_35209&displayid=3&adType=INFEED&async=false&tagver=2.0.0';
+    return '//i.socdm.com/sdk/js/adg-script-loader.js?id=35209&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
   }
   // ----------------
   // alias
@@ -90,11 +90,15 @@ export class Ad {
   /**
    * script tag を生成し返します
    * @param {string} path script.src path
+   * @param {string} id target element id
    * @returns {Element} script tag を返します
    */
-  static make( path:string ):Element {
+  static make( path:string, id:string ):Element {
+    let div = document.createElement('div');
     let script = document.createElement( 'script' );
-    script.src = path;
-    return script;
+    script.src = path.split( '__TARGET_ID__' ).join( id );
+    div.appendChild(script);
+    // return script;
+    return div;
   }
 }

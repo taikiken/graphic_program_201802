@@ -34,6 +34,7 @@ import {CommentsListDae} from '../../dae/CommentsListDae';
 
 // node
 import {CommentMoreViewNode} from '../../node/comment/CommentMoreViewNode';
+import {SPCommentAdNode} from '../node/ad/SPCommentAdNode';
 
 // event
 // import {ReplyStatus} from '../../event/ReplyStatus';
@@ -251,48 +252,48 @@ export class SPViewComments extends ViewComments {
     // --------------------------------------------
     // AD
     // --------------------------------------------
-    let AdDom = React.createClass( {
-      propTypes: {
-        commentsListType: React.PropTypes.string.isRequired
-      },
-      getInitialState: function() {
-        return {
-          need: this.props.commentsListType === CommentsType.OFFICIAL || this.props.commentsListType === CommentsType.NORMAL
-        };
-      },
-      render: function() {
-
-        if ( this.state.need ) {
-          return (
-            <div className={`comment-ad comment-${this.props.commentsListType}-ad`} ref="comment_official_ad"></div>
-          );
-        } else {
-          return null;
-        }
-
-      },
-      componentDidMount: function() {
-        if ( !this.state.need ) {
-          return;
-        }
-
-        let script;
-
-        // script insert
-        switch ( this.props.commentsListType ) {
-          case CommentsType.OFFICIAL:
-            script = Ad.make( Ad.SP_OFFICIAL );
-            break;
-
-          case CommentsType.NORMAL:
-          default:
-            script = Ad.make( Ad.SP_NORMAL );
-            break;
-        }
-
-        ReactDOM.findDOMNode( this.refs.comment_official_ad ).appendChild( script );
-      }
-    } );
+    // let AdDom = React.createClass( {
+    //   propTypes: {
+    //     commentsListType: React.PropTypes.string.isRequired
+    //   },
+    //   getInitialState: function() {
+    //     return {
+    //       need: this.props.commentsListType === CommentsType.OFFICIAL || this.props.commentsListType === CommentsType.NORMAL
+    //     };
+    //   },
+    //   render: function() {
+    //
+    //     if ( this.state.need ) {
+    //       return (
+    //         <div className={`comment-ad comment-${this.props.commentsListType}-ad`} ref="comment_official_ad"></div>
+    //       );
+    //     } else {
+    //       return null;
+    //     }
+    //
+    //   },
+    //   componentDidMount: function() {
+    //     if ( !this.state.need ) {
+    //       return;
+    //     }
+    //
+    //     let script;
+    //
+    //     // script insert
+    //     switch ( this.props.commentsListType ) {
+    //       case CommentsType.OFFICIAL:
+    //         script = Ad.make( Ad.SP_OFFICIAL );
+    //         break;
+    //
+    //       case CommentsType.NORMAL:
+    //       default:
+    //         script = Ad.make( Ad.SP_NORMAL );
+    //         break;
+    //     }
+    //
+    //     ReactDOM.findDOMNode( this.refs.comment_official_ad ).appendChild( script );
+    //   }
+    // } );
 
     // --------------------------------------------
     // COMMENT iteration
@@ -356,7 +357,10 @@ export class SPViewComments extends ViewComments {
                 />;
               } )
             }
-            <AdDom commentsListType={commentsListType} />
+            <SPCommentAdNode
+              uniqueId={`ad-${commentsListType}`}
+              commentsListType={commentsListType}
+            />
             <div className="comment-more" ref="commentMore"></div>
           </div>
         );
