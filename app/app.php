@@ -96,29 +96,6 @@ endif;
 
 
 
-// demo
-// ==============================
-$app->get('/demo/{path:.*}', function ($request, $response, $args) use ( $app ) {
-
-    // log
-    $this->logger->info("demo '/demo'", $args);
-
-    $args['args']     = array(
-      'path'  => $args['path'],
-      'page' => $app->model->set(array(
-        'title' => 'demo',
-        'args'  => $args['path'],
-      )),
-    );
-
-    $args['request']  = $request;
-    $args['response'] = $response;
-
-    return $this->renderer->render($response, 'demo.php', $args);
-
-});
-
-
 // Run app
 $app->run();
 
