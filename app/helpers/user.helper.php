@@ -24,7 +24,7 @@ class UserHelper {
     $this->default['token']        = $this->get_token();
 
     if ( $this->default['token'] ) :
-      $this->default['is_logged_in'] = true; //$this->get_is_logged_in($model->property('file_get_url'));
+      $this->default['is_logged_in'] = $this->get_is_logged_in($model->property('file_get_url'));
     endif;
 
   }
@@ -87,8 +87,8 @@ class UserHelper {
   public function check_logged_in() {
 
     if ( !$this->default['is_logged_in'] ) :
-      // header('Location: /login/');
-      // exit;
+      header('Location: /login/');
+      exit;
     endif;
 
   }
