@@ -20,6 +20,11 @@
                 <span>facebook</span>
               </a>
             </li>
+            <?php
+
+            // スマホ版はTwitter textをencodeする
+
+            ?>
             <li class="post-sns-item post-sns-item_tw">
               <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" target="_blank">
                 <span>ツイート</span>
@@ -71,6 +76,11 @@
                       <span>facebook</span>
                     </a>
                   </li>
+                  <?php
+
+                  // スマホ版はTwitter textをencodeする
+
+                  ?>
                   <li class="post-sns-item post-sns-item_tw">
                     <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" target="_blank">
                       <span>ツイート</span>
