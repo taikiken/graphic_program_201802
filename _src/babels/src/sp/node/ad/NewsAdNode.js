@@ -19,28 +19,39 @@ let ReactDOM = self.ReactDOM;
 
 export let NewsAdNode = React.createClass( {
   propTypes: {
-    index: React.PropTypes.number.isRequired
+    index: React.PropTypes.number.isRequired,
+    length: React.PropTypes.number.isRequired,
+    uniqueId: React.PropTypes.string.isRequired,
+    enable: React.PropTypes.bool
+  },
+  getDefaultProps: function() {
+    return {
+      enable: false
+    };
   },
   getInitialState: function() {
+    this.ok = false;
+    // 4番目に表示 => 3番目(index: 2)の後
     return {
-      rest: this.props.index % 3
+      third: this.props.index === 2
     };
   },
   render: function() {
 
-    if ( this.props.index > 0 && this.state.rest === 0 ) {
+    if ( this.props.enable && ( this.state.third || (this.props.index < 2 && this.props.index === this.props.length) ) ) {
+      this.ok = true;
       return (
         <div className={`news-ad news-ad-${this.props.index}`} ref="news_ad"></div>
       );
     } else {
+
       return null;
     }
   },
   componentDidMount: function() {
-    if ( this.props.index > 0 && this.state.rest !== 0 ) {
-      return;
+    if ( this.ok ) {
+      // console.log( 'ok', this.props.uniqueId, this.props.index, this.props.length );
+      ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.make( Ad.SP_NEWS, this.props.uniqueId ) );
     }
-
-    ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.make( Ad.SP_NEWS ) );
   }
 } );

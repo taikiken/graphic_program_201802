@@ -310,7 +310,10 @@ export let SPArchiveNode = React.createClass( {
     // more button
     moreButton: React.PropTypes.func,
     // home or not
-    home: React.PropTypes.bool
+    home: React.PropTypes.bool,
+
+    // 一覧種類 news | video | ranking
+    type: React.PropTypes.string.isRequired
   },
   getDefaultPropTypes: function() {
     return {
@@ -332,6 +335,7 @@ export let SPArchiveNode = React.createClass( {
     // console.log( '****************************************** render', this.state.list );
     let home = this.props.home;
     let length = this.state.length;
+    let type = this.props.type;
 
     // dom出力する
     return (
@@ -371,7 +375,7 @@ export let SPArchiveNode = React.createClass( {
 
             // unique key(React)にarticle id(number)記事Idを使用します
             return (
-              <div key={'archive-article-' + dae.id} className="archive-article">
+              <div key={'archive-article-' + type + '-' + dae.id} className={`archive-article archive-article-${i}`}>
                 <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
                   <a className="post" href={dae.url}>
                     <ThumbnailDom
@@ -388,19 +392,18 @@ export let SPArchiveNode = React.createClass( {
                     </div>
                   </a>
                   <PopularDom
-                    key={'comment-' + dae.id}
+                    key={'comment-' + type + '-' + dae.id}
                     uniqueId={'comment-' + dae.id}
                     commentsPopular={commentsPopular}
                     total={commentsTotal}
                     articleId={String(dae.id)} />
                 </div>
-                {/*
                 <NewsAdNode
-                  key={'ad-' + dae.id}
+                  key={'ad-' + type + '-' + dae.id}
+                  enable={type === Message.NEWS}
                   index={i}
                   length={length}
-                  uniqueId={'ad-' + dae.id} />
-                 */}
+                  uniqueId={'ad-' + type + '-' + dae.id} />
               </div>
             );
             // loop end

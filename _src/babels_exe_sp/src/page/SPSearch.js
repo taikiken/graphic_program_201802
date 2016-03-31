@@ -10,9 +10,8 @@
  *
  */
 
-
 import {SPHeader} from './SPHeader';
-import {SPSidebar} from './SPSidebar';
+// import {SPSidebar} from './SPSidebar';
 let _symbol = Symbol();
 
 // UT
@@ -27,7 +26,7 @@ export class SPSearch {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPSearch is static Class. not use new SPSearch().` );
+      throw new Error( 'SPSearch is static Class. not use new SPSearch().' );
 
     }
   }

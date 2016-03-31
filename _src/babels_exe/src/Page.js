@@ -40,7 +40,7 @@ let _symbol = Symbol();
 let UT = self.UT;
 let Dom = UT.app.Dom;
 
-let Sagen = self.Sagen;
+// let Sagen = self.Sagen;
 
 /**
  * <h3>ページ振り分け</h3>

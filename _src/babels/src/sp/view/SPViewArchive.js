@@ -35,7 +35,7 @@ import {ArticleDae} from '../../dae/ArticleDae';
 // import {ReactionNode} from '../../node/comment/ReactionNode';
 
 import {SPArchiveNode} from '../node/SPArchiveNode';
-import {SPMoreViewNode} from '../node/SPMoreViewNode';
+// import {SPMoreViewNode} from '../node/SPMoreViewNode';
 
 // React
 let React = self.React;
@@ -340,6 +340,7 @@ export class SPViewArchive extends View {
           scope={this}
           moreButton={moreButton}
           home={this._home}
+          type={Message.NEWS}
         />,
         this.element
       );

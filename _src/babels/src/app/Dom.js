@@ -29,7 +29,7 @@ export class Dom {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Dom is static Class. not use new Dom().` );
+      throw new Error( 'Dom is static Class. not use new Dom().' );
 
     }
   }
@@ -56,6 +56,8 @@ export class Dom {
     return Dom.get( 'whole' );
   }
   /**
+   * SP -> #page, PC -> #whole
+   * しくじった...
    * body > div#page Element
    * @return {Element} whole element を返します
    */

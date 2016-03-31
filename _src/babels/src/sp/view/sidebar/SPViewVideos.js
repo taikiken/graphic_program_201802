@@ -15,6 +15,7 @@ import {ViewVideos} from '../../../view/sidebar/ViewVideos';
 
 // app
 import {Length} from '../../../app/const/Length';
+import {Message} from '../../../app/const/Message';
 
 // view
 import {View} from '../../../view/View';
@@ -92,6 +93,7 @@ export class SPViewVideos extends ViewVideos {
           scope={this}
           moreButton={this.moreButton.bind(this)}
           home={this._home}
+          type={Message.VIDEO}
         />,
         this.element
       );
