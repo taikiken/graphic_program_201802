@@ -377,13 +377,20 @@ export class ViewLogin extends View {
    */
   success( userDae:UserDae ):void {
     let token = userDae.accessToken;
-    // console.log( 'social success ', token, userDae );
+    console.log( 'social success ', token, userDae );
     // token setup
     if ( User.login( token ) ) {
       // home
       // Loc.index();
       // flush message
-      this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
+      // console.log( 'success continue index  ' );
+      let messageStatus = this.messageStatus;
+      if ( !messageStatus ) {
+        messageStatus = MessageStatus.factory();
+      }
+      messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
+
+      // this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
 
       setTimeout( Loc.index, 500 );
     }
