@@ -742,7 +742,11 @@ button {
   }
 }
 
-
+// sidebar sponsor-link を非表示に
+.sponsor-link-ranking,
+.sponsor-link-recommend {
+  display: none;
+}
 
 
 

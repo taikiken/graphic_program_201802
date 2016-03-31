@@ -360,5 +360,21 @@ export class Dom {
   static settings():Element {
     return Dom.get( 'setting-form-container' );
   }
+  // --------------------------------------
+  // sidebar ad for PC
+  /**
+   * sidebar ad, ranking
+   * @return {Element} sponsor-link-ranking
+   */
+  static adRanking():Element {
+    return Dom.get( 'sponsor-link-ranking' );
+  }
+  /**
+   * sidebar ad, video
+   * @return {Element} sponsor-link-recommend
+   */
+  static adVideo():Element {
+    return Dom.get( 'sponsor-link-recommend' );
+  }
 }
 // return Dom.get( '' );
