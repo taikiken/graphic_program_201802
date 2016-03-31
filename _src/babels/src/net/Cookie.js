@@ -70,7 +70,6 @@ export class Cookie {
    * @return {string|null} cookie 値を返します、取得できない時は null を返します
    */
   static get( keyName:string ) {
-    console.log( 'get ', document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') );
     return decodeURIComponent( document.cookie.replace( new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent( keyName ).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1') ) || null;
   }
   /**
@@ -95,7 +94,6 @@ export class Cookie {
     let secureSetting = secure ? '; secure' : '';
 
     // cookie へ保存
-    console.log( 'save ', value, keyName, end.toUTCString(), domain, path, secure );
     document.cookie = `${encodeURIComponent(keyName)}=${encodeURIComponent(value)}; expires=${end.toUTCString()}${domain}${path}${secureSetting}`;
     return true;
 
