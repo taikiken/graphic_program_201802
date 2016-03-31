@@ -15,6 +15,7 @@ import {ViewRanking} from '../../../view/sidebar/ViewRanking';
 
 // app
 import {Length} from '../../../app/const/Length';
+import {Message} from '../../../app/const/Message';
 
 // view
 import {View} from '../../../view/View';
@@ -93,6 +94,7 @@ export class SPViewRanking extends ViewRanking {
           scope={this}
           moreButton={this.moreButton.bind(this)}
           home={this._home}
+          type={Message.RANKING}
         />,
         this.element
       );

@@ -431,4 +431,31 @@ export class Message {
   static get DEACTIVATE_COMPLETE():string {
     return '退会しました。';
   }
+  
+  // ----------------------------------
+  // 一覧種類
+  /**
+   * NEWS
+   * 一覧種類 最新記事
+   * @return {string} news
+   */
+  static get NEWS():string {
+    return 'news';
+  }
+  /**
+   * RANKING
+   * 一覧種類 ランキング
+   * @return {string} ranking
+   */
+  static get RANKING():string {
+    return 'ranking';
+  }
+  /**
+   * VIDEO
+   * 一覧種類 オススメ動画
+   * @return {string} video
+   */
+  static get VIDEO():string {
+    return 'video';
+  }
 }

@@ -130,7 +130,12 @@ export class SPPage {
    */
   static stick():void {
     window.removeEventListener( 'load', SPPage.stick );
+    let whole = Dom.page();
+    whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
     setTimeout( window.scrollTo( 0, 1 ), 0 );
+    UT.util.Scroll.motion( 0, 0.5, 0.5, null, function() {
+      whole.style.cssText = '';
+    } );
   }
   /**
    * event unbind
