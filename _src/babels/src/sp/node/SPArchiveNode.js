@@ -334,7 +334,7 @@ export let SPArchiveNode = React.createClass( {
 
     // console.log( '****************************************** render', this.state.list );
     let home = this.props.home;
-    let length = this.state.length;
+    let length = this.state.list.length;
     let type = this.props.type;
 
     // dom出力する
