@@ -14,7 +14,7 @@ import {SPViewArchive} from './SPViewArchive';
 
 // app
 import {User} from '../../app/User';
-// import {Message} from '../../app/const/Message';
+import {Ad} from '../../app/const/Ad';
 
 // view
 import {View} from '../../view/View';
@@ -73,6 +73,8 @@ export class SPViewSearch extends SPViewArchive {
 
         return (
           <div className="board-large result-notfound search-container">
+            <div id="sponsor-link-404" className="sponsor-link sponsor-link-404" ref="ad_root"></div>
+            
             <div className="error-container result-notfound">
               <h2 className="result-notfound-heading">検索結果が見つかりませんでした</h2>
               <p className="result-notfound-lead">スペルを確認するか、他のキーワードを入力してみてください。</p>
@@ -83,6 +85,9 @@ export class SPViewSearch extends SPViewArchive {
           </div>
         );
 
+      },
+      componentDidMount: function() {
+        ReactDOM.findDOMNode( this.refs.ad_root ).appendChild( Ad.make( Ad.SP_NEWS, 'sponsor-link-404' ) );
       }
     } );
 
