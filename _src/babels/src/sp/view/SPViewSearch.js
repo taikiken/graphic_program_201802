@@ -72,7 +72,7 @@ export class SPViewSearch extends SPViewArchive {
       render: function() {
 
         return (
-          <div className="board-large result-notfound search-container">
+          <div className="result-notfound">
             <div id="sponsor-link-404" className="sponsor-link sponsor-link-404" ref="ad_root"></div>
             
             <div className="error-container result-notfound">
