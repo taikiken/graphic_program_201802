@@ -32,7 +32,7 @@ export class User {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `User is static Class. not use new User().` );
+      throw new Error( 'User is static Class. not use new User().' );
 
     }
 
@@ -59,11 +59,6 @@ export class User {
    */
   static set sign( bool:Boolean ) {
 
-    /*
-     // 開発フェーズは簡易的に変数管理していたが
-     // cookie token 管理へ変更する
-    _sign = bool;
-    */
     bool = !!bool;
 
     //
@@ -87,14 +82,6 @@ export class User {
     return Cookie.get( Cookie.TARGET );
   }
 
-  /*
-   開発用 method
-   @ToDo 本番環境で削除 or コメント
-   @return {string} 開発 token
-  static fake():string {
-    return '608c8868d866a46fa3ae6566ce62e0be';
-  }
-  */
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -105,18 +92,6 @@ export class User {
    */
   static login( token:string ):Boolean {
     token = Safety.string( token, '' );
-    // console.log( `user login [${token !== ''}]` );
-
-    // 開発中は token が cookie になくても default user でログインさせちゃう
-    /*
-    if ( token === '' ) {
-      if ( Env.mode === Env.PRODUCTION ) {
-        throw new Error( 'token have to need.', token );
-      } else {
-        token = User.fake();
-        console.warn( `illegal token instead use fake. ${token}` );
-      }
-    }*/
 
     // token が正常値なのかを調べる
     // 少なくとも, 文字型で空でない
@@ -128,7 +103,9 @@ export class User {
     }
 
     let result = Cookie.save( token );
+    // console.log( 'login ', result );
     User.sign = result;
+    
     return result;
   }
   /**
