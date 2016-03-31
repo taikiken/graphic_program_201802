@@ -250,6 +250,7 @@
 
   .adsWrapper {
     height: auto !important;
+    overflow: visible !important;
     background: none !important;
   }
 
@@ -261,6 +262,10 @@
 
   .adsImg {}
 
+  .adsBody {
+    padding: 0 !important;
+  }
+
   .adsTitle {
     font-size: fz(12);
     text-align: left;
@@ -270,7 +275,6 @@
     min-height: 2.6em;
     line-height: lh(18, 14) !important;
     text-align: left;
-    padding-bottom: 1em;
   }
 }
 

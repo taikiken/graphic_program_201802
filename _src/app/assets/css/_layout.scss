@@ -652,6 +652,7 @@ button {
       }
 
       .post {
+        height: auto;
         border-bottom: 1px solid $border-primary-color;
 
         &-thumb {}
@@ -719,6 +720,63 @@ button {
         }
       }
     } //.widget-recommend
+  }
+}
+
+.sponsor-link-ranking,
+.sponsor-link-recommend {
+  .adgLink {
+    display: block;
+    height: auto !important;
+    padding: 15px 0;
+    border-bottom: 1px solid $border-primary-color;
+
+    &:hover {
+      .adsDescription {
+        color: $highlight-color !important;
+      }
+
+      .adsImg {
+        @include hover-opacity;
+      }
+    }
+  }
+
+  .adsWrapper {
+    height: auto !important;
+    overflow: visible !important;
+    background: none !important;
+  }
+
+  .adsImgContainer {
+    width: 80px !important;
+    height: 70px !important;
+    padding: 0 10px 0 0 !important;
+  }
+
+  .adsImg {}
+
+  .adsBody {
+    padding: 0 !important;
+  }
+
+  .adsTitle {
+    font-size: fz(12);
+    text-align: left;
+  }
+
+  .adsDescription {
+    min-height: 2.6em;
+    line-height: lh(18, 14) !important;
+    text-align: left;
+  }
+}
+
+.sponsor-link-recommend {
+  .adsImgContainer {
+    width: 135px !important;
+    height: auto !important;
+    padding: 0 10px 0 0 !important;
   }
 }
 
