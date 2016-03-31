@@ -38,12 +38,12 @@
       <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 データ先読みで、電車でもサクサク記事が読める！"></a></div>
 
       <div id="widget-ranking-container"></div><!--/ranking-->
-      <div class="sponsor-link">
+      <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
         <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
       </div>
 
       <div id="widget-recommend-container"></div><!--/videos-->
-      <div class="sponsor-link">
+      <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
         <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
       </div>
 
