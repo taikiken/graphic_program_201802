@@ -31,7 +31,7 @@ if (
             <h3><img src="/assets/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></h3>
             <p>話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「運動通信」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
             <ul>
-              <li><a href="https://itunes.apple.com/us/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+              <li><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
               <li><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
             </ul>
           </div><!-- /.text-block -->
@@ -47,10 +47,10 @@ if (
       <nav class="fnav">
         <ul>
           <?php // <li><a href="/about/ads/">広告掲載について</a></li> ?>
-          <li><a href="/about/">運動通信アプリの紹介</a></li>
-          <li><a href="/about/privacy/">個人情報の取り扱いについて</a></li>
+          <li><a href="/about/">サービス紹介</a></li>
+          <li><a href="/about/company/">会社概要</a></li>
+          <li><a href="/about/privacy/">プライバシーポリシー</a></li>
           <li><a href="/about/terms/">利用規約</a></li>
-          <li><a href="/about/company/">運営会社</a></li>
           <?php // <li><a href="/about/faq/">FAQ</a></li> ?>
           <?php // <li><a href="/about/contact/">お問い合せ</a></li> ?>
         </ul>

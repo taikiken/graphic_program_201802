@@ -58,7 +58,7 @@ endif;
     テストの時はつけてください
    */
   ?>
-  <script src="/assets/js/bundle/main.bundle.js?syn=1"></script>
+  <script src="/assets/js/bundle/main.bundle.js"></script>
 
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

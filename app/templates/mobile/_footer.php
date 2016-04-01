@@ -41,7 +41,11 @@ if (
           */
           ?>
           <!-- AdGeneration/ -->
-          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
+          <?php if ( UT_ENV == 'PRODUCTION' ) : ?>
+          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
+          <?php else : ?>
+          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
+          <?php endif; ?>
           <!-- /AdGeneration -->
         </div>
       </li>
@@ -81,7 +85,7 @@ if (
         <div class="text-block">
           <h3 class="foot-pr-heading">運動通信アプリをダウンロード</h3>
           <ul class="foot-pr-list">
-            <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/us/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
+            <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
             <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
           </ul>
         </div>
@@ -99,10 +103,10 @@ if (
         <?php if (0): ?>
           <li><a href="/about/ads/">広告掲載について</a></li>
         <?php endif; ?>
-        <li><a href="/about/">運動通信アプリの紹介</a></li>
-        <li><a href="/about/privacy/">個人情報の取り扱いについて</a></li>
+        <li><a href="/about/">サービス紹介</a></li>
+        <li><a href="/about/company/">会社概要</a></li>
+        <li><a href="/about/privacy/">プライバシーポリシー</a></li>
         <li><a href="/about/terms/">利用規約</a></li>
-        <li><a href="/about/company/">運営会社</a></li>
         <?php if (0): ?>
           <li><a href="/about/faq/">FAQ</a></li>
           <li><a href="/about/contact/">お問い合せ</a></li>

@@ -36,7 +36,7 @@
               </a>
             </li>
             <li class="post-sns-item post-sns-item_line">
-              <a href="http://line.me/R/msg/text/?<?php echo urlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+              <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
                 <span>LINEへ送る</span>
               </a>
             </li>
@@ -92,7 +92,7 @@
                     </a>
                   </li>
                   <li class="post-sns-item post-sns-item_line">
-                    <a href="http://line.me/R/msg/text/?<?php echo urlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                    <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
                       <span>LINEへ送る</span>
                     </a>
                   </li>
@@ -114,7 +114,7 @@
 
       <div class="comment">
         <div class="sponsor-link_commentUpper">
-          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
         </div>
 
         <div id="comment-form-container"></div>
