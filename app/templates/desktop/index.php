@@ -53,6 +53,21 @@
         <div class="sponsor-link nadir">
           <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35117&targetID=adg_35117&displayid=3&adType=PC&width=300&height=600&sdkType=3&async=true&tagver=2.0.0"></script>
         </div>
+
+
+        <div class="sponsor-link nadir">
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- 審査用レクタングル -->
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:300px;height:250px"
+               data-ad-client="ca-pub-8613117509675807"
+               data-ad-slot="7705682371"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+
+
       </section><!-- /.side-sec -->
 
     </div>
