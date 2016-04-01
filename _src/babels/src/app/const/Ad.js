@@ -35,28 +35,28 @@ export class Ad {
    * @returns {string} 一覧 - 記事一覧内(フリー型)
    */
   static get SP_40713():string {
-    return 'https://ssl.socdm.com/i.socdm.com/sdk/js/adg-script-loader.js?id=35244&targetID=__TARGET_ID__&displayid=2&adType=INFEED&async=true&tagver=2.0.0';
+    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35244&targetID=__TARGET_ID__&displayid=2&adType=INFEED&async=true&tagver=2.0.0';
   }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 記事下(フリー型) 40714
    * @returns {string} 詳細 - 記事下(フリー型)
    */
   static get SP_40714():string {
-    return 'https://ssl.socdm.com/i.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
+    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
   }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 公式コメンテーター一覧下(フリー型) 40680
    * @returns {string} 詳細 - 公式コメンテーター一覧下(フリー型)
    */
   static get SP_40680():string {
-    return 'https://ssl.socdm.com/i.socdm.com/sdk/js/adg-script-loader.js?id=35208&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
+    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35208&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
   }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - みんなのコメント一覧下(フリー型) 40681
    * @returns {string} 詳細 - みんなのコメント一覧下(フリー型)
    */
   static get SP_40681():string {
-    return 'https://ssl.socdm.com/i.socdm.com/sdk/js/adg-script-loader.js?id=35209&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
+    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35209&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
   }
   // ----------------
   // alias
