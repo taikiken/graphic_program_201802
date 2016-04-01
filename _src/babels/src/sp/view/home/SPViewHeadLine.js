@@ -137,8 +137,8 @@ export class SPViewHeadLine extends ViewHeadline {
             <a className="post" href={p.url}>
               <figure className="post-thumb"><img src={p.thumbnail} alt={p.title}/></figure>
               <div className="post-data">
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
                 <h3 className='post-heading'>{p.title}</h3>
+                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
                 <p className="post-date">{p.date}</p>
               </div>
             </a>
