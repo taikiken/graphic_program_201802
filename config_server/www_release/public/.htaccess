@@ -1,44 +1,8 @@
-# auth1. 特定のIPを許可
-# logram
-SetEnvIf Remote_Addr "120\.143\.11\.141" allowed_ip_addresses
-# parachute
-SetEnvIf Remote_Addr "183\.76\.75\.12" allowed_ip_addresses
-# axesor
-SetEnvIf Remote_Addr "124\.219\.166\.154" allowed_ip_addresses
-# grandbase - 1
-SetEnvIf Remote_Addr "202\.248\.219\.58" allowed_ip_addresses
-# grandbase - 2
-SetEnvIf Remote_Addr "61\.125\.228\.110" allowed_ip_addresses
-# kiito
-SetEnvIf Remote_Addr "120\.51\.210\.154" allowed_ip_addresses
-# popin - 1
-SetEnvIf Remote_Addr "54\.248\.85\.239" allowed_ip_addresses
-# popin - 2
-SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
-# cloudpack - 1
-SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
-# cloudpack - 2
-SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
-
-Order Deny,Allow
-Deny from All
-Allow from env=allowed_ip_addresses
-
-# auth2. 上記以外はベーシック認証
-AuthType Basic
-AuthUserFile /var/www/undotsushin.com/dev/.htpasswd
-AuthGroupFile /dev/null
-AuthName "Put user name and password."
-require valid-user
-
-# auth1, auth2 いずれかOKなら
-Satisfy Any
-
 php_flag magic_quotes_gpc off
 php_flag register_global off
-php_flag display_errors on
+php_flag display_errors off
 php_value upload_max_filesize '20M'
-php_value session.auto_start 1
+php_value session.auto_start 0
 php_value session.use_cookies 1
 php_value session.cookie_lifetime 2592000
 php_value session.gc_maxlifetime 2592000
@@ -51,13 +15,12 @@ php_value mbstring.http_output UTF-8
 php_value error_reporting 6133
 
 
+
 # for Slim - /app/Slim
 # ==============================
 RewriteEngine On
 RewriteBase /
 DirectorySlash On
-#RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
-#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
