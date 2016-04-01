@@ -36,7 +36,7 @@
               </a>
             </li>
             <li class="post-sns-item post-sns-item_line">
-              <a href="http://line.me/R/msg/text/?<?php echo urlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+              <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
                 <span>LINEへ送る</span>
               </a>
             </li>
@@ -92,7 +92,7 @@
                     </a>
                   </li>
                   <li class="post-sns-item post-sns-item_line">
-                    <a href="http://line.me/R/msg/text/?<?php echo urlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
+                    <a href="http://line.me/R/msg/text/?<?php echo rawurlencode($page['og_title'].' '.$page['og_url']); ?>" target="_blank">
                       <span>LINEへ送る</span>
                     </a>
                   </li>
