@@ -246,14 +246,8 @@ class ViewModel {
 
     $ua = new UserAgent();
 
-    if ( $ua->set() === 'mobile' ) :
-      return 'mobile';
+    return $ua->set();
 
-    // tablet or others = desktop
-    else :
-      return 'desktop';
-
-    endif;
   }
 
 
@@ -264,8 +258,11 @@ class ViewModel {
   * @return string  ios | android
   */
   public function get_is_app() {
+
     $ua = new UserAgent();
+
     return $ua->is_app();
+
   }
 
 
