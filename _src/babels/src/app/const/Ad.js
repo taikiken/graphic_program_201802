@@ -10,9 +10,18 @@
  *
  * This notice shall be included in all copies or substantial portions of the Software.
  */
+import {Loc} from '../../util/Loc';
+
 let _symbol = Symbol();
 
+/**
+ * 広告接続先
+ */
 export class Ad {
+  /**
+   * static class です, instance を作成しません
+   * @param {Symbol} target Singleton を実現するための private symbol
+   */
   constructor( target:Symbol ) {
 
     if ( _symbol !== target ) {
@@ -22,41 +31,47 @@ export class Ad {
     }
 
   }
-
   /**
-   * 株式会社運動通信社 運動通信_SPWeb - 一面 - ヘッドライン下部(フリー型) 40724
-   * @returns {string} ヘッドライン下部(フリー型)
+   * ID
+   * @return {string} __TARGET_ID__ を返します
    */
-  static get SP_40724():string {
-    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35255&targetID=adg_35255&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
+  static get ID():string {
+    return '__TARGET_ID__';
   }
+  // /**
+  //  * 株式会社運動通信社 運動通信_SPWeb - 一面 - ヘッドライン下部(フリー型) 40724
+  //  * @returns {string} ヘッドライン下部(フリー型)
+  //  */
+  // static get SP_40724():string {
+  //   return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35255&targetID=adg_35255&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
+  // }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 一覧 - 記事一覧内(フリー型) 40713
    * @returns {string} 一覧 - 記事一覧内(フリー型)
    */
   static get SP_40713():string {
-    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35244&targetID=__TARGET_ID__&displayid=2&adType=INFEED&async=true&tagver=2.0.0';
+    return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35244&targetID=${Ad.ID}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
   }
-  /**
-   * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 記事下(フリー型) 40714
-   * @returns {string} 詳細 - 記事下(フリー型)
-   */
-  static get SP_40714():string {
-    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
-  }
+  // /**
+  //  * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 記事下(フリー型) 40714
+  //  * @returns {string} 詳細 - 記事下(フリー型)
+  //  */
+  // static get SP_40714():string {
+  //   return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
+  // }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - 公式コメンテーター一覧下(フリー型) 40680
    * @returns {string} 詳細 - 公式コメンテーター一覧下(フリー型)
    */
   static get SP_40680():string {
-    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35208&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
+    return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35208&targetID=${Ad.ID}&displayid=3&adType=INFEED&async=true&tagver=2.0.0`;
   }
   /**
    * 株式会社運動通信社 運動通信_SPWeb - 詳細 - みんなのコメント一覧下(フリー型) 40681
    * @returns {string} 詳細 - みんなのコメント一覧下(フリー型)
    */
   static get SP_40681():string {
-    return 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35209&targetID=__TARGET_ID__&displayid=3&adType=INFEED&async=true&tagver=2.0.0';
+    return `${Ad.host()}/sdk/js/adg-script-loader.js?id=35209&targetID=${Ad.ID}&displayid=3&adType=INFEED&async=true&tagver=2.0.0`;
   }
   // ----------------
   // alias
@@ -88,6 +103,19 @@ export class Ad {
   //  STATIC METHOD
   // ---------------------------------------------------
   /**
+   * 接続ホストの プロトコル で socdm の接続先を変えます
+   * @return {string} http / https 接続先を返します
+   */
+  static host():string {
+    switch ( Loc.protocol ) {
+      case 'https':
+        return 'https://ssl.socdm.com';
+      case 'http':
+      default:
+        return 'http://i.socdm.com';
+    }
+  }
+  /**
    * script tag を生成し返します
    * @param {string} path script.src path
    * @param {string} id target element id
@@ -96,7 +124,7 @@ export class Ad {
   static make( path:string, id:string ):Element {
     let div = document.createElement('div');
     let script = document.createElement( 'script' );
-    script.src = path.split( '__TARGET_ID__' ).join( id );
+    script.src = path.split( Ad.ID ).join( id );
     div.appendChild(script);
     // return script;
     return div;

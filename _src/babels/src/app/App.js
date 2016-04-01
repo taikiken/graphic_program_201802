@@ -29,7 +29,7 @@ export class App {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `App is static Class. not use new App().` );
+      throw new Error( 'App is static Class. not use new App().' );
 
     }
 

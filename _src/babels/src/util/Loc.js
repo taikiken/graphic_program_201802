@@ -10,8 +10,6 @@
  *
  */
 
-
-
 import {Url} from '../app/const/Url';
 
 import {Safety} from '../data/Safety';
@@ -122,6 +120,13 @@ export class Loc {
   static get port():string {
     // port number
     return self.location.port;
+  }
+  /**
+   * location.protocol
+   * @return {string} ocation.protocol を返します
+   */
+  static get protocol():string {
+    return location.protocol;
   }
   // ---------------------------------------------------
   //  METHOD instance
