@@ -103,10 +103,10 @@ if (
         <?php if (0): ?>
           <li><a href="/about/ads/">広告掲載について</a></li>
         <?php endif; ?>
-        <li><a href="/about/">運動通信アプリの紹介</a></li>
-        <li><a href="/about/privacy/">個人情報の取り扱いについて</a></li>
+        <li><a href="/about/">サービス紹介</a></li>
+        <li><a href="/about/company/">会社概要</a></li>
+        <li><a href="/about/privacy/">プライバシーポリシー</a></li>
         <li><a href="/about/terms/">利用規約</a></li>
-        <li><a href="/about/company/">運営会社</a></li>
         <?php if (0): ?>
           <li><a href="/about/faq/">FAQ</a></li>
           <li><a href="/about/contact/">お問い合せ</a></li>
