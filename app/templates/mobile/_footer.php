@@ -44,7 +44,7 @@ if (
           <?php if ( UT_ENV == 'PRODUCTION' ) : ?>
           <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
           <?php else : ?>
-          <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
+          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=33700&targetID=adg_33700&displayid=1&adType=FREE&async=false&tagver=2.0.0"></script>
           <?php endif; ?>
           <!-- /AdGeneration -->
         </div>
