@@ -48,6 +48,16 @@ if ($page_has_header) :
 endif;
 ?>
   <script src="/assets/js/libs/vendor.react.js"></script>
+  <?php
+  /*
+   Syn. menu end point 本番環境では
+    ```
+    /assets/js/bundle/main.bundle.js?syn=1
+    ```
+    ?syn=1 を削除してください
+    テストの時はつけてください
+   */
+  ?>
   <script src="/assets/js/bundle/main.bundle.js?syn=1"></script>
 
   <script>
