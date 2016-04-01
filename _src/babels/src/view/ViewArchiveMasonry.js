@@ -365,6 +365,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
+          /*
           let picture = firstUser.profilePicture;
 
           if ( !picture ) {
@@ -376,7 +377,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           }
 
           let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-
+          */
+          let picture = Safety.image( firstUser.profilePicture, Empty.USER_EMPTY );
+          let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
+          
           // login 済かを調べる
           let sign = User.sign;
 
