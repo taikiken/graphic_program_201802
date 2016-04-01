@@ -69,6 +69,7 @@ endif;
    ga('create', 'UA-74679267-1', 'auto');
    ga('require', 'linkid');
    ga('require', 'displayfeatures');
+   ga('set', 'dimension1', navigator.userAgent);
    ga('send', 'pageview');
 
   </script>
