@@ -71,8 +71,8 @@ class UserAgent{
 
       // #540 - iOSアプリ版で `undotsushin-ios` ない場合
       // iPhoneあるがSafariない
-      elseif ( strpos($this->ua,'iphone') !== false && strpos($this->ua,'safari') === false ) :
-        return 'iOS';
+      // elseif ( strpos($this->ua,'iphone') !== false && strpos($this->ua,'safari') === false ) :
+      //   return 'iOS';
 
       endif;
 
