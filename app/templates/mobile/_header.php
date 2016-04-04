@@ -71,6 +71,7 @@ endif;
    ga('require', 'displayfeatures');
    ga('set', 'dimension1', navigator.userAgent);
    ga('send', 'pageview');
+   ga('send', 'event', 'ua', 'view', navigator.userAgent );
 
   </script>
 

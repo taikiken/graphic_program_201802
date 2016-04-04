@@ -2,11 +2,21 @@
 
 # ref. https://w3g.jp/blog/php_ua_sniffing2015
 class UserAgent{
-  private $ua;
-  private $device;
+
+
+  protected $ua;
+  protected $device;
+
+
+  function __construct() {
+
+    $this->ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
+    $this->device = $this->set();
+
+  }
 
   public function set(){
-    $this->ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
+
     if(strpos($this->ua,'iphone') !== false){
       $this->device = 'mobile';
     }elseif(strpos($this->ua,'ipod') !== false){
@@ -34,8 +44,16 @@ class UserAgent{
     }else{
       $this->device = 'others';
     }
+
+
+    if ( $this->device !== 'mobile' ) :
+      $this->device = 'desktop';
+    endif;
+
     return $this->device;
+
   }
+
 
 
   // アプリからのアクセスかどうかチェックする
@@ -43,13 +61,20 @@ class UserAgent{
   // Android : undotsushin-android
   public function is_app() {
 
-    $ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
+    if ( $this->device == 'mobile' ) :
 
-    if ( strpos($ua,'undotsushin-ios') !== false ) :
-      return 'iOS';
+      if ( strpos($this->ua,'undotsushin-ios') !== false ) :
+        return 'iOS';
 
-    elseif ( strpos($ua,'undotsushin-android') !== false ) :
-      return 'Android';
+      elseif ( strpos($this->ua,'undotsushin-android') !== false ) :
+        return 'Android';
+
+      // #540 - iOSアプリ版で `undotsushin-ios` ない場合
+      // iPhoneあるがSafariない
+      // elseif ( strpos($this->ua,'iphone') !== false && strpos($this->ua,'safari') === false ) :
+      //   return 'iOS';
+
+      endif;
 
     endif;
 
