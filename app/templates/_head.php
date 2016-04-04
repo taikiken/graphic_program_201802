@@ -13,7 +13,7 @@ $current_path = parse_url($_SERVER["REQUEST_URI"])['path'];
 if ( $about_browser != $current_path ) {
   // browser 使用条件 URL と同じだったら detector.js 読み込まない
   ?>
-  <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="8" data-firefox="44" data-ie="11" data-edge="13" data-ios="8.41" data-android="4.2" data-url="<?php echo $about_browser; ?>"></script>
+  <script src="/assets/js/detector.js" id="detector" data-chrome="48" data-safari="8" data-firefox="44" data-ie="11" data-edge="13" data-ios="8" data-android="4.2" data-url="<?php echo $about_browser; ?>"></script>
 <?php }// browser 使用条件 end
 # ---------------------------------------------------------------------------
 ?>
