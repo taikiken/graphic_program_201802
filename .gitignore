@@ -84,6 +84,9 @@ public/assets
 # ------------
 _src/.tmp
 
+# JSON
+_src/app/_json
+
 # _src js
 # -----------
 _src/app/js/*

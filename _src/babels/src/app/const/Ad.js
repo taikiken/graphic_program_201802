@@ -108,9 +108,9 @@ export class Ad {
    */
   static host():string {
     switch ( Loc.protocol ) {
-      case 'https':
+      case 'https:':
         return 'https://ssl.socdm.com';
-      case 'http':
+      case 'http:':
       default:
         return 'http://i.socdm.com';
     }
