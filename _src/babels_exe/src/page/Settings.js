@@ -25,7 +25,7 @@ export class Settings {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Settings is static Class. not use new Settings().` );
+      throw new Error( 'Settings is static Class. not use new Settings().' );
 
     }
   }

@@ -28,7 +28,7 @@ export class SPActivities {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPActivities is static Class. not use new SPActivities().` );
+      throw new Error( 'SPActivities is static Class. not use new SPActivities().' );
 
     }
   }

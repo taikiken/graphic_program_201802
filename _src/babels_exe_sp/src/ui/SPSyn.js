@@ -28,7 +28,7 @@ export class SPSyn {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPSyn is static Class. not use new SPSyn().` );
+      throw new Error( 'SPSyn is static Class. not use new SPSyn().' );
 
     }
   }

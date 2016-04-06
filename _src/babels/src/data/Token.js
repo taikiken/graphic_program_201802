@@ -29,7 +29,7 @@ export class Token {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Api is static Class. not use new Api().` );
+      throw new Error( 'Api is static Class. not use new Api().' );
 
     }
 

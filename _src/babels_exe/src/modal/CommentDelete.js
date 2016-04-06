@@ -28,7 +28,7 @@ export class CommentDelete {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `CommentDelete is static Class. not use new CommentDelete().` );
+      throw new Error( 'CommentDelete is static Class. not use new CommentDelete().' );
 
     }
   }

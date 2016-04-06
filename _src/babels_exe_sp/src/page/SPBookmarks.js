@@ -28,7 +28,7 @@ export class SPBookmarks {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPBookmarks is static Class. not use new SPBookmarks().` );
+      throw new Error( 'SPBookmarks is static Class. not use new SPBookmarks().' );
 
     }
   }

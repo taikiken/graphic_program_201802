@@ -29,7 +29,7 @@ export class SPFlush {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPFlush is static Class. not use new SPFlush().` );
+      throw new Error( 'SPFlush is static Class. not use new SPFlush().' );
 
     }
   }

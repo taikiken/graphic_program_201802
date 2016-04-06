@@ -30,7 +30,7 @@ export class SPCategory {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPCategory is static Class. not use new SPCategory().` );
+      throw new Error( 'SPCategory is static Class. not use new SPCategory().' );
 
     }
   }

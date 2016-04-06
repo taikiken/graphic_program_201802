@@ -54,7 +54,7 @@ export class ModelBookmark extends Model {
 
       // articles undefined
       // JSON に問題がある
-      let error = new Error( `[MODEL_BOOKMARK:UNDEFINED]サーバーレスポンスに問題が発生しました。` );
+      let error = new Error( '[MODEL_BOOKMARK:UNDEFINED]サーバーレスポンスに問題が発生しました。' );
       this.executeSafely( Model.UNDEFINED_ERROR, error );
 
     } else {

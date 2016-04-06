@@ -29,7 +29,7 @@ export class Flush {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Flush is static Class. not use new Flush().` );
+      throw new Error( 'Flush is static Class. not use new Flush().' );
 
     }
   }

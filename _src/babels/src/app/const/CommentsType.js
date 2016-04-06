@@ -28,7 +28,7 @@ export class CommentsType {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `CommentsType is static Class. not use new CommentsType().` );
+      throw new Error( 'CommentsType is static Class. not use new CommentsType().' );
 
     }
 

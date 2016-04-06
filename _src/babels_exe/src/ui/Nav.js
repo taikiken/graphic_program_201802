@@ -30,7 +30,7 @@ export class Nav {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Nav is static Class. not use new Nav().` );
+      throw new Error( 'Nav is static Class. not use new Nav().' );
 
     }
   }

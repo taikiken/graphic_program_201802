@@ -34,7 +34,7 @@ export class ArticleInfo {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Article is static Class. not use new Article().` );
+      throw new Error( 'Article is static Class. not use new Article().' );
 
     }
 

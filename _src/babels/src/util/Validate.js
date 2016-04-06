@@ -26,7 +26,7 @@ export class Validate {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Validate is static Class. not use new Validate().` );
+      throw new Error( 'Validate is static Class. not use new Validate().' );
 
     }
 

@@ -18,6 +18,22 @@
         <div id="board-container-more"></div><!--/archive-more-->
 
       </div><!-- /.board-large -->
+
+
+      <div class="sponsor-link mt30">
+        <!-- #314 -->
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- デスクトップ - 記事詳細 - タイトル上部 -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-8613117509675807"
+             data-ad-slot="2392569578"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <!-- //#314 -->
+      </div>
+
     </section><!-- /.main-sec -->
 
     <section class="side-sec">

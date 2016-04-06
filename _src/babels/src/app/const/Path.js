@@ -29,7 +29,7 @@ export class Path {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Path is static Class. not use new Path().` );
+      throw new Error( 'Path is static Class. not use new Path().' );
 
     }
 

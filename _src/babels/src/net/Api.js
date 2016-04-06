@@ -31,7 +31,7 @@ export class Api {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Api is static Class. not use new Api().` );
+      throw new Error( 'Api is static Class. not use new Api().' );
 
     }
 
@@ -378,7 +378,7 @@ export class Api {
         return Api.users( `notice:${action}` );
 
       case '':
-        return Api.users( `notice` );
+        return Api.users( 'notice' );
 
       default:
         throw new Error( `notice illegal action: ${action}.` );

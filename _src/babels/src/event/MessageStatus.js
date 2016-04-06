@@ -29,7 +29,7 @@ export class MessageStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `MessageStatus is static Class. not use new MessageStatus(). instead MessageStatus.factory()` );
+      throw new Error( 'MessageStatus is static Class. not use new MessageStatus(). instead MessageStatus.factory()' );
 
     }
 

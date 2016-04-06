@@ -31,10 +31,10 @@ let apiRoot = () => {
   switch ( Env.mode ) {
 
     case Env.LOCAL :
-      return `http://192.168.33.50`;
+      return 'http://192.168.33.50';
 
     case Env.TEST :
-      return `http://www.undotsushin.local`;
+      return 'http://www.undotsushin.local';
 
     case Env.DEVELOP :
       return 'http://dev2.undotsushin.com';
@@ -469,7 +469,7 @@ export class ApiDae {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `ApiDae is static Class. not use new ApiDae().` );
+      throw new Error( 'ApiDae is static Class. not use new ApiDae().' );
 
     }
 
