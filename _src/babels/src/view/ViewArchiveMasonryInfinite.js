@@ -33,6 +33,7 @@ import {Rise} from '../ui/Rise';
 
 // node(ReactClass)
 import {ReactionNode} from '../node/comment/ReactionNode';
+import {CommentUserPlusCountNode} from '../node/comment/CommentUserPlusCountNode';
 
 // React
 let React = self.React;
@@ -370,32 +371,37 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // COMMENTS Popular second
     // --------------------------------------------
-    /**
-     * コメントユーザーの顔写真小さいの
-     * @private
-     * @type {ReactClass}
-     * */
-    let CommentedUsersDom = React.createClass( {
-      propType: {
-        total: React.PropTypes.number.isRequired
-      },
-      getInitialState: function() {
-        return {
-          total: this.props.total
-        };
-      },
-      render: function() {
-
-        if ( this.state.total === 0 ) {
-          return null;
-        } else {
-
-          return <span className="commented-user-andmore">+{this.state.total}</span>;
-        }
-
-      }
-
-    } );
+    // /**
+    //  * コメントユーザーの顔写真小さいの
+    //  * @private
+    //  * @type {ReactClass}
+    //  * */
+    // let CommentedUsersDom = React.createClass( {
+    //   propType: {
+    //     total: React.PropTypes.number.isRequired
+    //   },
+    //   getInitialState: function() {
+    //     return {
+    //       total: this.props.total
+    //     };
+    //   },
+    //   render: function() {
+    //
+    //     // if ( this.state.total === 0 ) {
+    //     // API 戻り値がおかしいことがあり
+    //     // count 1
+    //     // array length 2
+    //     // total が - になるので 0 以上に変更
+    //     if ( this.state.total > 0 ) {
+    //       return null;
+    //     } else {
+    //
+    //       return <span className="commented-user-andmore">+{this.state.total}</span>;
+    //     }
+    //
+    //   }
+    //
+    // } );
 
     /**
      * コメント欄の二段目
@@ -462,7 +468,7 @@ export class ViewArchiveMasonryInfinite extends View {
                 } )
               }
             </ul>
-            <CommentedUsersDom total={this.props.total} />
+            <CommentUserPlusCountNode total={this.props.total} />
           </div>
         );
 

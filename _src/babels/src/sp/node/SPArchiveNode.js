@@ -27,33 +27,40 @@ import {Safety} from '../../data/Safety';
 import {ReactionNode} from '../../node/comment/ReactionNode';
 import {NewsAdNode} from '../node/ad/NewsAdNode';
 
+import {CommentUserPlusCountNode} from '../../node/comment/CommentUserPlusCountNode';
+
 // React
 let React = self.React;
 
 // --------------------------------------------
 // COMMENTS Popular second
 // --------------------------------------------
-let CommentedUsersDom = React.createClass( {
-  propType: {
-    total: React.PropTypes.number.isRequired
-  },
-  getInitialState: function() {
-    return {
-      total: this.props.total
-    };
-  },
-  render: function() {
-
-    if ( this.state.total === 0 ) {
-      return null;
-    } else {
-
-      return <span className="commented-user-andmore">+{this.state.total}</span>;
-    }
-
-  }
-
-} );
+// let CommentedUsersDom = React.createClass( {
+//   propType: {
+//     total: React.PropTypes.number.isRequired
+//   },
+//   getInitialState: function() {
+//     return {
+//       total: this.props.total
+//     };
+//   },
+//   render: function() {
+//
+//     // if ( this.state.total === 0 ) {
+//     // API 戻り値がおかしいことがあり
+//     // count 1
+//     // array length 2
+//     // total が - になるので 0 以上に変更
+//     if ( this.state.total > 0 ) {
+//       return null;
+//     } else {
+//
+//       return <span className="commented-user-andmore">+{this.state.total}</span>;
+//     }
+//
+//   }
+//
+// } );
 
 let CommentsSecondDom = React.createClass( {
   propType: {
@@ -119,7 +126,7 @@ let CommentsSecondDom = React.createClass( {
             } )
           }
         </ul>
-        <CommentedUsersDom total={this.props.total} />
+        <CommentUserPlusCountNode total={this.props.total} />
       </div>
     );
 
