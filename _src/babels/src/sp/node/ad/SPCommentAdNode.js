@@ -17,9 +17,15 @@ import {Ad} from '../../../app/const/Ad';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * [SP] 記事詳細下 コメント一覧と「続き」の間に広告表示
+ * @type {*|Function|ReactClass}
+ */
 export let SPCommentAdNode = React.createClass( {
   propTypes: {
+    // element id に使用する
     uniqueId: React.PropTypes.string.isRequired,
+    // CommentsType.OFFICIAL || CommentsType.NORMAL の時に表示させる
     commentsListType: React.PropTypes.string.isRequired
   },
   getInitialState: function() {

@@ -35,7 +35,7 @@ export class CommentStar extends ActionAuthBehavior {
   constructor( target:Symbol, commentId:Number, type:string, resolve:Function = null, reject:Function = null ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `CommentStar is static Class. not use new CommentStar(). instead CommentStar.add, CommentStar.remove` );
+      throw new Error( 'CommentStar is static Class. not use new CommentStar(). instead CommentStar.add, CommentStar.remove' );
 
     }
     // 正規化
@@ -87,7 +87,7 @@ export class CommentStar extends ActionAuthBehavior {
    * @param {string} method request method
    */
   start( method:string = '' ):void {
-    // console.error( 'illegal operation, use start. instead add / delete.' + method );
+    console.error( 'illegal operation, use start. instead add / delete.' + method );
   }
   /**
    * コメント Good / Bad 登録

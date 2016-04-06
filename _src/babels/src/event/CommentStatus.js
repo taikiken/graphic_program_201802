@@ -126,6 +126,7 @@ export class CommentStatus extends EventDispatcher {
   }
   /**
    * コメント削除モーダルを開くことを通知します
+   * @param {string} commentId コメント Id
    */
   modal( commentId:string ):void {
     this.fire( CommentStatus.COMMENT_DELETE_MODAL_OPEN, commentId );

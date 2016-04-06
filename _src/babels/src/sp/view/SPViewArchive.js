@@ -156,21 +156,21 @@ export class SPViewArchive extends View {
     // this.showError( error.message );
 
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    // message = Safety.string( message, '' );
-    // console.log( '**************** SPViewArchive showError ', message );
-    // ToDo: Error 時の表示が決まったら変更する
-    /*
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-    */
-
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError( message:string = '' ):void {
+  //
+  //   // message = Safety.string( message, '' );
+  //   // console.log( '**************** SPViewArchive showError ', message );
+  //   // ToDo: Error 時の表示が決まったら変更する
+  //   /*
+  //   let error = new ViewError( this.element, this.option, message );
+  //   error.render();
+  //   */
+  //
+  // }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
@@ -228,8 +228,8 @@ export class SPViewArchive extends View {
         }
 
       },
-      componentDidMount: function() {
-      },
+      // componentDidMount: function() {
+      // },
       componentWillUnmount: function() {
         // unmount 時に rise 破棄を行う
         this.destroy();

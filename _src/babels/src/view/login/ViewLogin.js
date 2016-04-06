@@ -377,7 +377,7 @@ export class ViewLogin extends View {
    */
   success( userDae:UserDae ):void {
     let token = userDae.accessToken;
-    console.log( 'social success ', token, userDae );
+    // console.log( 'social success ', token, userDae );
     // token setup
     if ( User.login( token ) ) {
       // home

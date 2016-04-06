@@ -17,11 +17,20 @@ import {Ad} from '../../../app/const/Ad';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
+/**
+ * SP 記事一覧 4件目表示広告
+ * @type {*|Function|ReactClass}
+ */
 export let NewsAdNode = React.createClass( {
   propTypes: {
+    // index, 何番目
     index: React.PropTypes.number.isRequired,
+    // loop list の length === 総数
     length: React.PropTypes.number.isRequired,
+    // element id に使用する
     uniqueId: React.PropTypes.string.isRequired,
+    // 広告をinsertするか
+    // ranking / video も共通で使うので on, off スイッチを用意する
     enable: React.PropTypes.bool
   },
   getDefaultProps: function() {
@@ -33,23 +42,30 @@ export let NewsAdNode = React.createClass( {
     this.ok = false;
     // 4番目に表示 => 3番目(index: 2)の後
     return {
+      // index が 2 の時に広告をinsert
       third: this.props.index === 2
     };
   },
   render: function() {
+    // ad element を返し
+    // ok property を true にする
     let enableAd = () => {
       this.ok = true;
       return (
         <div className={`news-ad news-ad-${this.props.index}`} ref="news_ad"></div>
       );
     };
-    // console.log( 'NewsAdNode ', this.props.uniqueId, this.props.index, this.props.length, this.props.index + 1 === this.props.length );
+
     if ( this.props.enable && this.state.third ) {
 
       return enableAd();
 
     } else {
 
+      // enable: true
+      // index が 2に到達しない, コンテンツ量が少ない時にも広告を表示させる
+      // index 2 未満 + 総数 と index が同じ
+      // index は 0始まりなので +1 下駄を履かせて比較する
       if ( this.props.enable && (this.props.index < 2 && this.props.index + 1 === this.props.length) ) {
         return enableAd();
       } else {
@@ -59,7 +75,6 @@ export let NewsAdNode = React.createClass( {
   },
   componentDidMount: function() {
     if ( this.ok ) {
-      // console.log( 'ok', this.props.uniqueId, this.props.index, this.props.length );
       ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.make( Ad.SP_NEWS, this.props.uniqueId ) );
     }
   }
