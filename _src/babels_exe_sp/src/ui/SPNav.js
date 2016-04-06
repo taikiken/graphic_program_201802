@@ -31,7 +31,7 @@ export class SPNav {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPNav is static Class. not use new SPNav().` );
+      throw new Error( 'SPNav is static Class. not use new SPNav().' );
 
     }
   }

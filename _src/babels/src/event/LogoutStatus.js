@@ -29,7 +29,7 @@ export class LogoutStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `LogoutStatus is static Class. not use new LogoutStatus(). instead LogoutStatus.factory()` );
+      throw new Error( 'LogoutStatus is static Class. not use new LogoutStatus(). instead LogoutStatus.factory()' );
 
     }
 

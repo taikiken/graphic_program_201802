@@ -29,7 +29,7 @@ export class CommentStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `CommentStatus is static Class. not use new CommentStatus(). instead CommentStatus.factory()` );
+      throw new Error( 'CommentStatus is static Class. not use new CommentStatus(). instead CommentStatus.factory()' );
 
     }
 

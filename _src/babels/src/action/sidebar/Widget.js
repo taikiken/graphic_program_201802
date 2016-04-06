@@ -39,7 +39,7 @@ export class Widget {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Widget is not new Widget().` );
+      throw new Error( 'Widget is not new Widget().' );
 
     }
 

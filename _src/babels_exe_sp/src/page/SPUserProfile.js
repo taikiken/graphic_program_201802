@@ -25,7 +25,7 @@ export class SPUserProfile {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPUserProfile is static Class. not use new SPUserProfile().` );
+      throw new Error( 'SPUserProfile is static Class. not use new SPUserProfile().' );
 
     }
   }

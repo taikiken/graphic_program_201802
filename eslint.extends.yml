@@ -102,3 +102,5 @@ rules:
   no-path-concat: 2
 #  global-strict: [0, "always"]
   handle-callback-err: [2, "err"]
+  constructor-super: 1
+  react/jsx-uses-vars: 1

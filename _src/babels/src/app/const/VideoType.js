@@ -28,7 +28,7 @@ export class VideoType {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `VideoType is static Class. not use new VideoType().` );
+      throw new Error( 'VideoType is static Class. not use new VideoType().' );
 
     }
 

@@ -31,7 +31,7 @@ export class SettingsStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SettingsStatus is static Class. not use new SettingsStatus(). instead SettingsStatus.factory()` );
+      throw new Error( 'SettingsStatus is static Class. not use new SettingsStatus(). instead SettingsStatus.factory()' );
 
     }
 

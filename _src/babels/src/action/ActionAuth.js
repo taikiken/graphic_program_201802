@@ -36,7 +36,7 @@ export class ActionAuth extends Action {
   constructor( token:string, types:Types, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
     if ( !User.sign ) {
       // not login
-      throw new Error( `Authorization required.` );
+      throw new Error( 'Authorization required.' );
     }
     super( types, resolve, reject, ResultClass );
     this._headers = Token.token( token );

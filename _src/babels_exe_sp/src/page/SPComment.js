@@ -32,7 +32,7 @@ export class SPComment {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPComment is static Class. not use new SPComment().` );
+      throw new Error( 'SPComment is static Class. not use new SPComment().' );
 
     }
   }

@@ -29,7 +29,7 @@ export class Signup {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Signup is static Class. not use new Signup().` );
+      throw new Error( 'Signup is static Class. not use new Signup().' );
 
     }
   }

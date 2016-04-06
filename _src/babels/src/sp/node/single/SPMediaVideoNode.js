@@ -52,7 +52,8 @@ export let SPMediaVideoNode = React.createClass( {
 
       default:
         // console.warn(`illegal type and player. type: ${type}`);
-        break;
+        // break;
+        return null;
 
     }
 

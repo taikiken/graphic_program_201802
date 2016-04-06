@@ -61,7 +61,7 @@ export class Codes {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Codes is static Class. not use new Codes().` );
+      throw new Error( 'Codes is static Class. not use new Codes().' );
 
     }
 

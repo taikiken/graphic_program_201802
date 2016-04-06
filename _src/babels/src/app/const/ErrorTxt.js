@@ -29,7 +29,7 @@ export class ErrorTxt {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `ErrorTxt is static Class. not use new ErrorTxt().` );
+      throw new Error( 'ErrorTxt is static Class. not use new ErrorTxt().' );
 
     }
 

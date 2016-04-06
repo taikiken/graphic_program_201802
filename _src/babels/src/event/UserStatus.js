@@ -32,7 +32,7 @@ export class UserStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `UserStatus is static Class. not use new UserStatus().` );
+      throw new Error( 'UserStatus is static Class. not use new UserStatus().' );
 
     }
 

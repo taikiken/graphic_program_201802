@@ -28,7 +28,7 @@ export class Activities {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Activities is static Class. not use new Activities().` );
+      throw new Error( 'Activities is static Class. not use new Activities().' );
 
     }
   }

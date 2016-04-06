@@ -29,7 +29,7 @@ export class SPSidebar {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPSidebar is static Class. not use new SPSidebar().` );
+      throw new Error( 'SPSidebar is static Class. not use new SPSidebar().' );
 
     }
   }

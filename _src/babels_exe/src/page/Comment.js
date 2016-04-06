@@ -33,7 +33,7 @@ export class Comment {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Comment is static Class. not use new Comment().` );
+      throw new Error( 'Comment is static Class. not use new Comment().' );
 
     }
   }

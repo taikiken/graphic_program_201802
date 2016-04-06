@@ -32,7 +32,7 @@ export class NoticeAction {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `NoticeAction is static Class. not use new NoticeAction().` );
+      throw new Error( 'NoticeAction is static Class. not use new NoticeAction().' );
 
     }
 

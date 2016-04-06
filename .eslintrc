@@ -11,5 +11,6 @@
     "forOf": true,
     "jsx": true
   },
+  "plugins": ["react"],
   "extends": "./eslint.extends.yml"
 }

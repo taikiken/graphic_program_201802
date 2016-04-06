@@ -25,7 +25,7 @@ export class UserProfile {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `UserProfile is static Class. not use new UserProfile().` );
+      throw new Error( 'UserProfile is static Class. not use new UserProfile().' );
 
     }
   }

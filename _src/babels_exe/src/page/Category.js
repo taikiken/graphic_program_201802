@@ -31,7 +31,7 @@ export class Category {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Category is static Class. not use new Category().` );
+      throw new Error( 'Category is static Class. not use new Category().' );
 
     }
   }
