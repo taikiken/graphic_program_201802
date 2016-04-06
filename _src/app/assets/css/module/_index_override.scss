@@ -5,26 +5,30 @@
 // slide show
 // -------------------------------------------------
 // 16x9 にするために高さを 400px -> 360px 変更
+// https://github.com/undotsushin/undotsushin/issues/563
+// 640 x 400 へ変更
+$pickup-height: 400px;
 .hero-slider {
-  height: 360px;
+  height: $pickup-height;
 }
 .hero-slider-inner {
   li {
     a {
       overflow: hidden;
-      height: 360px;
+      height: $pickup-height;
     }
   }
 }
 .hero-slider-control {
   .direction {
     a {
-      height: 360px
+      height: $pickup-height;
     }
   }
 
   .pager {
     // 370px -> 330px
-    top: 330px;
+    //top: 330px;
+    top: 370px;
   }
 }
