@@ -38,7 +38,7 @@ export class Length {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Length is static Class. not use new Length().` );
+      throw new Error( 'Length is static Class. not use new Length().' );
 
     }
 

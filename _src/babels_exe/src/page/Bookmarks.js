@@ -28,7 +28,7 @@ export class Bookmarks {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Bookmarks is static Class. not use new Bookmarks().` );
+      throw new Error( 'Bookmarks is static Class. not use new Bookmarks().' );
 
     }
   }

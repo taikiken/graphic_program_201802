@@ -30,7 +30,7 @@ export class SPIndex {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPIndex is static Class. not use new SPIndex().` );
+      throw new Error( 'SPIndex is static Class. not use new SPIndex().' );
 
     }
   }

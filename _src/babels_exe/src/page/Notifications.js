@@ -28,7 +28,7 @@ export class Notifications {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Notifications is static Class. not use new Notifications().` );
+      throw new Error( 'Notifications is static Class. not use new Notifications().' );
 
     }
   }

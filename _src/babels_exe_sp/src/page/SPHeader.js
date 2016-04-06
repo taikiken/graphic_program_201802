@@ -29,7 +29,7 @@ export class SPHeader {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPHeader is static Class. not use new SPHeader().` );
+      throw new Error( 'SPHeader is static Class. not use new SPHeader().' );
 
     }
   }

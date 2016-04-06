@@ -33,7 +33,7 @@ export class Scroll extends EventDispatcher {
   constructor( target:Symbol ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()` );
+      throw new Error( 'Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()' );
 
     }
 

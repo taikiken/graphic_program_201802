@@ -24,7 +24,7 @@ export class SPSettings {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPSettings is static Class. not use new SPSettings().` );
+      throw new Error( 'SPSettings is static Class. not use new SPSettings().' );
 
     }
   }

@@ -28,7 +28,7 @@ export class MediaType {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `MediaType is static Class. not use new MediaType().` );
+      throw new Error( 'MediaType is static Class. not use new MediaType().' );
 
     }
 

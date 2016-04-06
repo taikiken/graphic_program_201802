@@ -28,7 +28,7 @@ export class Format {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Format is static Class. not use new Format().` );
+      throw new Error( 'Format is static Class. not use new Format().' );
 
     }
 

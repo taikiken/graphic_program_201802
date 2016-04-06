@@ -39,7 +39,7 @@ export class SPSingle {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPSingle is static Class. not use new SPSingle().` );
+      throw new Error( 'SPSingle is static Class. not use new SPSingle().' );
 
     }
   }

@@ -29,7 +29,7 @@ export class SPSearchFrom {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPSearchFrom is static Class. not use new SPSearchFrom().` );
+      throw new Error( 'SPSearchFrom is static Class. not use new SPSearchFrom().' );
 
     }
   }

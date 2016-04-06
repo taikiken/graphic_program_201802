@@ -31,7 +31,7 @@ export class NoticeStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `NoticeStatus is static Class. not use new NoticeStatus().` );
+      throw new Error( 'NoticeStatus is static Class. not use new NoticeStatus().' );
 
     }
 

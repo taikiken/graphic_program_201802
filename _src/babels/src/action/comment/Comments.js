@@ -49,7 +49,7 @@ export class Comments extends OffsetAuth {
   constructor( target:Symbol, id:Number, type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.list ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()` );
+      throw new Error( 'not use new Comments(). instead Comments.all() or Comments.normal() or Comments.official() or Comments.mine()' );
 
     }
 

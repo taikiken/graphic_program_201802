@@ -29,7 +29,7 @@ export class SearchStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SearchStatus is static Class. not use new SearchStatus(). instead SearchStatus.factory()` );
+      throw new Error( 'SearchStatus is static Class. not use new SearchStatus(). instead SearchStatus.factory()' );
 
     }
 

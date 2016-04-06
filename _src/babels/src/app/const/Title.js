@@ -33,7 +33,7 @@ export class Title {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Title is static Class. not use new Title().` );
+      throw new Error( 'Title is static Class. not use new Title().' );
 
     }
 

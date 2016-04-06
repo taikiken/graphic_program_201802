@@ -28,7 +28,7 @@ export class SPNotifications {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPNotifications is static Class. not use new SPNotifications().` );
+      throw new Error( 'SPNotifications is static Class. not use new SPNotifications().' );
 
     }
   }

@@ -30,7 +30,7 @@ export class Good extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Good is static Class. not use new Good(). instead Good.factory()` );
+      throw new Error( 'Good is static Class. not use new Good(). instead Good.factory()' );
 
     }
 

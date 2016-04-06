@@ -40,7 +40,7 @@ export class Single {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `Single is static Class. not use new Single().` );
+      throw new Error( 'Single is static Class. not use new Single().' );
 
     }
   }

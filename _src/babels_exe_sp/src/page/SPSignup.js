@@ -29,7 +29,7 @@ export class SPSignup {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPSignup is static Class. not use new SPSignup().` );
+      throw new Error( 'SPSignup is static Class. not use new SPSignup().' );
 
     }
   }

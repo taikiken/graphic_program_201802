@@ -28,7 +28,7 @@ export class SPCommentDelete {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `SPCommentDelete is static Class. not use new SPCommentDelete().` );
+      throw new Error( 'SPCommentDelete is static Class. not use new SPCommentDelete().' );
 
     }
   }

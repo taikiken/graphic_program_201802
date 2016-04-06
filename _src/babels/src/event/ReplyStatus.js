@@ -33,7 +33,7 @@ export class ReplyStatus extends EventDispatcher {
   constructor( target ) {
     if ( _symbol !== target ) {
 
-      throw new Error( `ReplyStatus is static Class. not use new ReplyStatus(). instead ReplyStatus.factory()` );
+      throw new Error( 'ReplyStatus is static Class. not use new ReplyStatus(). instead ReplyStatus.factory()' );
 
     }
 

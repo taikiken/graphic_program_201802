@@ -33,7 +33,7 @@ export class Env {
 
     if ( _symbol !== target ) {
 
-      throw new Error( `Env is static Class. not use new Env().` );
+      throw new Error( 'Env is static Class. not use new Env().' );
 
     }
 
