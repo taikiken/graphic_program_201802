@@ -16,7 +16,7 @@ import {Model} from '../Model';
 // action
 import {Social} from '../../action/sns/Social';
 // dae
-import {UserDae} from '../../dae/UserDae';
+// import {UserDae} from '../../dae/UserDae';
 // data
 import {Result} from '../../data/Result';
 

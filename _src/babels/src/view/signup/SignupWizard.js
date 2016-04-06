@@ -109,7 +109,7 @@ export class SignupWizard extends View {
    * Ajax response error
    * @param {Error} error Error instance
    */
-  error( error ):void {
+  error( error:Error ):void {
 
     // console.log( 'Signup complete', error );
 
@@ -375,7 +375,7 @@ export class SignupWizard extends View {
    * API `/api/v1/sessions/social` error
    * @param {Object} error エラーメッセージ
    */
-  socialFail( error ):void {
+  socialFail( error:Object ):void {
     // console.log( 'Social error ', error );
   }
 

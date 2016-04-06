@@ -17,7 +17,8 @@ import {Message} from '../../app/const/Message';
 
 // view
 import {View} from '../View';
-import {ViewError} from '../error/ViewError';
+// import {ViewError} from '../error/ViewError';
+
 // action
 import {Widget} from '../../action/sidebar/Widget';
 // data
@@ -117,19 +118,19 @@ export class ViewVideos extends View {
     // this.showError( error.message );
 
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    // message = Safety.string( message, '' );
-    //
-    // // ToDo: Error 時の表示が決まったら変更する
-    // let error = new ViewError( this.element, this.option, message );
-    // error.render();
-
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError( message:string = '' ):void {
+  //
+  //   // message = Safety.string( message, '' );
+  //   //
+  //   // // ToDo: Error 時の表示が決まったら変更する
+  //   // let error = new ViewError( this.element, this.option, message );
+  //   // error.render();
+  //
+  // }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles

@@ -13,7 +13,7 @@
 
 // app
 import {CommentsType} from '../../app/const/CommentsType';
-import {Ad} from '../../app/const/Ad';
+// import {Ad} from '../../app/const/Ad';
 import {User} from '../../app/User';
 
 // view

@@ -110,7 +110,7 @@ export class ViewFirstVisit extends View {
         let whole = Dom.whole();
         if ( whole !== null ) {
           this.whole = new Sagen.Dom( whole );
-          this.setHeight();
+          // this.setHeight();
           window.addEventListener('load', this.onLoad, false);
           this.fps.on(Gasane.Fps.ENTER_FRAME, this.update);
           this.fps.start();
@@ -122,12 +122,13 @@ export class ViewFirstVisit extends View {
       setHeight: function() {
         let height = Math.max( parseInt( this.whole.style( 'height' ), 10 ), 950 );
         this.setState( {height: {height: `${height}px`}} );
+        // console.log( 'pc height ', height );
       },
       closeHandle: function( event ) {
         event.preventDefault();
         // window.removeEventListener('resize', this.setHeight);
         this.fps.off(Gasane.Fps.ENTER_FRAME, this.update);
-        this.fps.stop();
+        // this.fps.stop();
 
         this.closeModal();
       },

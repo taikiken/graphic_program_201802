@@ -43,6 +43,9 @@ let Synapse = self.Synapse;
 // Sagen
 let Sagen = self.Sagen;
 
+// Gasane
+let Gasane = self.Gasane;
+
 let parts = {
   page: 'page',
   service: 'synapse-service-list',
@@ -77,6 +80,11 @@ class Syn {
     this._y = 0;
     // this._interval = 0;
     this._ready = false;
+
+    // fps
+    // whole(#page) style が消える???対策
+    this._boundUpdate = this.update.bind( this );
+    this._fps = new Gasane.Fps( 1 );
   }
   /**
    * 初期処理, after DOMReady で実行のこと
@@ -250,6 +258,10 @@ class Syn {
     side.style.cssText = 'height: 9999px';
     // height 設定
     this.setHeight( side );
+
+    // fps start
+    this._fps.on( Gasane.Fps.ENTER_FRAME, this._boundUpdate );
+    this._fps.start();
   }
   /**
    * menu open 時に高さをセットします
@@ -260,23 +272,17 @@ class Syn {
     let heightPx = this._listDom.style( 'height' );
     let height = parseInt( heightPx, 10 );
     let windowHeight = parseInt( window.innerHeight, 10 );
-
-    // console.log( 'height ', height, windowHeight );
-
+    
     if ( height < windowHeight || !this._ready ) {
       // Syn.menu が読み込まれない or menu 高さが window 高さ以下の時は
       // window 高さ + 100px にする
       height = windowHeight + 100;
       heightPx = height + 'px';
-
-      // console.log( 'height, heightPx ', height, heightPx );
-
     }
 
     // 高さをセット
     side.style.cssText = `height: ${heightPx}`;
     // 本体の高さを同じにする
-    // this._page.style.cssText = `position: fixed; left: 0; top: 0; overflow: hidden; width: 100%; height: ${height}`;
     this._page.style.cssText = `overflow: hidden; width: 100%; height: ${heightPx}`;
   }
   /**
@@ -290,7 +296,7 @@ class Syn {
 
     sideDom.addClass( 'closing' );
 
-    Scroll.motion( _this._y, 0, 0.4 );
+    Scroll.motion( _this._y, 0.2, 0.2 );
 
     setTimeout( function() {
       _this._motion = false;
@@ -300,6 +306,16 @@ class Syn {
       _this._page.style.cssText = '';
     }, 400 );
 
+    this._fps.off( Gasane.Fps.ENTER_FRAME, this._boundUpdate );
+
+  }
+
+  /**
+   * Fps.ENTER_FRAME handler
+   * 高さを計算します
+   */
+  update():void {
+    this.setHeight( this._side );
   }
   // ---------------------------------------------------
   //  STATIC METHOD

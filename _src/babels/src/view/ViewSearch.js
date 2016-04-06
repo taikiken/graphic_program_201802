@@ -22,7 +22,7 @@ import {View} from './View';
 // import {ViewError} from './error/ViewError';
 // data
 import {Result} from '../data/Result';
-import {Safety} from '../data/Safety';
+// import {Safety} from '../data/Safety';
 
 // app
 import {User} from '../app/User';

@@ -449,7 +449,7 @@ let Step2FormNode = React.createClass( {
         return 0;
     }
   },
-  avatarError: function( event ) {
+  avatarError: function(/* event */) {
     this.avatarDispose();
     // console.log( 'avatar error ', event );
   },

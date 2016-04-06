@@ -53,11 +53,12 @@ export class SPViewFirstVisit extends ViewFirstVisit {
     let FirstDom = React.createClass( {
       getInitialState: function() {
         this.whole = null;
+        this.menu = null;
         this.fps = new Gasane.Fps( 1 );
 
         return {
           show: true,
-          css: {opacity: 0},
+          css: {opacity: 0, height: '100%'},
           height: {height: '100%'}
         };
       },
@@ -65,19 +66,17 @@ export class SPViewFirstVisit extends ViewFirstVisit {
 
         if ( this.state.show ) {
           return (
-            <div style={this.state.css}>
-              <section className="modal-intro" style={this.state.height}>
-                <div className="modal-bg" onClick={this.closeHandle} style={this.state.height}></div>
-                <div className="modal-intro-contents">
-                  <p className="modal-intro-tagline"><img src="/assets/sp/images/intro/tagline.png" alt="CRAZY FOR SPORTS"/></p>
-                  <h1 className="modal-intro-heading"><img src="/assets/sp/images/intro/logo.png" alt="運動通信"/></h1>
-                  <p className="modal-intro-copy"><img src="/assets/sp/images/intro/copy.png" alt="世界一足の速い人間が、勉強ができなくてもいい。8万人の目の前でPKを決められる人間が、女好きでもいい。傷ついた少年の勇気になるホームランを打てる人間が、借金を抱えていてもいい。自分より強い相手の顎を砕ける人間が、敬語が使えなくてもいい。動かない両足で世界を制覇できる人間が、時間にルーズでもいい。その瞬間に、その奇跡を起こせる人間に、それ以外のことができる必要なんかない。すべてを犠牲にして、立ち向かった人間に、つまらない常識なんかいらない。そのつまらない定規を捨てよ。奴らのくれる感動に、感動せよ。その最高の奇跡を生み出すために生まれてきた人間を祝福せよ。瞬間に生きることを選んだ人間の美しさに熱狂せよ。熱狂のない世界なんか、いらない。"/></p>
-                  <div className="mod-btnB01">
-                    <a className="modal-intro-close" href="#" onClick={this.closeHandle}><i>&nbsp;</i><i>&nbsp;</i><span>閉じる</span></a>
-                  </div>
+            <section className="modal-intro" style={this.state.css}>
+              <div className="modal-bg" onClick={this.closeHandle} style={this.state.height}></div>
+              <div className="modal-intro-contents">
+                <p className="modal-intro-tagline"><img src="/assets/sp/images/intro/tagline.png" alt="CRAZY FOR SPORTS"/></p>
+                <h1 className="modal-intro-heading"><img src="/assets/sp/images/intro/logo.png" alt="運動通信"/></h1>
+                <p className="modal-intro-copy"><img src="/assets/sp/images/intro/copy.png" alt="世界一足の速い人間が、勉強ができなくてもいい。8万人の目の前でPKを決められる人間が、女好きでもいい。傷ついた少年の勇気になるホームランを打てる人間が、借金を抱えていてもいい。自分より強い相手の顎を砕ける人間が、敬語が使えなくてもいい。動かない両足で世界を制覇できる人間が、時間にルーズでもいい。その瞬間に、その奇跡を起こせる人間に、それ以外のことができる必要なんかない。すべてを犠牲にして、立ち向かった人間に、つまらない常識なんかいらない。そのつまらない定規を捨てよ。奴らのくれる感動に、感動せよ。その最高の奇跡を生み出すために生まれてきた人間を祝福せよ。瞬間に生きることを選んだ人間の美しさに熱狂せよ。熱狂のない世界なんか、いらない。"/></p>
+                <div className="mod-btnB01">
+                  <a className="modal-intro-close" href="#" onClick={this.closeHandle}><i>&nbsp;</i><i>&nbsp;</i><span>閉じる</span></a>
                 </div>
-              </section>
-            </div>
+              </div>
+            </section>
           );
         } else {
           return null;
@@ -86,9 +85,23 @@ export class SPViewFirstVisit extends ViewFirstVisit {
       },
       componentDidMount: function() {
         let whole = Dom.page();
-        if ( whole !== null ) {
-          this.whole = new Sagen.Dom( whole );
-          this.setHeight();
+        let menu = Dom.serviceMenu();
+
+        // if ( whole !== null ) {
+        //   this.whole = new Sagen.Dom( whole );
+        //   this.menu = new Sagen.Dom( document.body );
+        //
+        //   this.setHeight();
+        //   window.addEventListener('load', this.onLoad, false);
+        //   this.fps.on(Gasane.Fps.ENTER_FRAME, this.update);
+        //   this.fps.start();
+        // }
+
+        if ( menu !== null && whole !== null ) {
+          this.menu = new Sagen.Dom( menu );
+          this.whole = whole;
+          // this.setHeight();
+
           window.addEventListener('load', this.onLoad, false);
           this.fps.on(Gasane.Fps.ENTER_FRAME, this.update);
           this.fps.start();
@@ -98,14 +111,21 @@ export class SPViewFirstVisit extends ViewFirstVisit {
         this.setHeight();
       },
       setHeight: function() {
-        let height = Math.max( parseInt( this.whole.style( 'height' ), 10 ), 950 );
-        this.setState( {height: {height: `${height}px`}} );
+        // let height = Math.max( parseInt( this.whole.style( 'height' ), 10 ), 950 );
+        // console.log( 'height', this.menu.element(), this.menu.style( 'height' ), );
+        let height = Math.max( parseInt( this.menu.style( 'height' ), 10 ), 950 );
+        let px = `${height}px`;
+        // console.log( 'this.whole', this.whole );
+        if ( this.state.height.height !== px ) {
+          this.setState( {height: {height: px}} );
+        }
+        // this.whole.style.cssText = `overflow: hidden; width: 100%; height: ${px}`;
       },
       closeHandle: function( event ) {
         event.preventDefault();
 
         this.fps.off(Gasane.Fps.ENTER_FRAME, this.update);
-        this.fps.stop();
+        // this.fps.stop();
 
         this.closeModal();
       },

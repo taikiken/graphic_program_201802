@@ -13,7 +13,7 @@
 
 // view
 import {View} from './View';
-import {ViewError} from './error/ViewError';
+// import {ViewError} from './error/ViewError';
 import {ViewRelated} from './single/ViewRelated';
 import {ViewSingleHeader} from './single/ViewSingleHeader';
 import {ViewSingleFooter} from './single/ViewSingleFooter';
