@@ -121,7 +121,8 @@ export class Scroll extends EventDispatcher {
       duration,
       {
         scrollTo: {
-          y: top
+          y: top,
+          autoKill: false
         },
         delay: delay,
         easing: easingFunc,
