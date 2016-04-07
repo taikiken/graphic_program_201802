@@ -124,9 +124,9 @@
 
 <body>
 
-<?php if ( $page['is_app'] ) : ?>
+<?php if ( $page['ua_app'] ) : ?>
   <em class="webview-env">
-    for 運動通信 <?php echo $page['is_app']; ?>
+    for 運動通信 <?php echo $page['ua_app']; ?>
   </em>
 <?php endif; ?>
 
