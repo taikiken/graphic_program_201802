@@ -59,7 +59,7 @@ class UserAgent{
   // アプリからのアクセスかどうかチェックする
   // iOS : undotsushin-ios
   // Android : undotsushin-android
-  public function is_app() {
+  public function get_ua_app() {
 
     if ( $this->device == 'mobile' ) :
 
@@ -78,6 +78,24 @@ class UserAgent{
 
     endif;
 
+  }
+
+
+  // botからのアクセスかどうかチェックする
+  public function is_bot() {
+
+    if (
+      strpos($this->ua,'bot') !== false ||
+      strpos($this->ua,'google') !== false ||
+      strpos($this->ua,'yahoo') !== false ||
+      strpos($this->ua,'spider') !== false ||
+      strpos($this->ua,'crawler') !== false ||
+      strpos($this->ua,'hatena') !== false
+    ) :
+      return true;
+    else :
+      return false;
+    endif;
   }
 
 }

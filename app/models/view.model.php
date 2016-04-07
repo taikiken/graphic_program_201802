@@ -37,7 +37,8 @@ class ViewModel {
 
     // env
     'ua'                 => '', // UA判定
-    'is_app'             => '', // アプリ判定
+    'ua_app'             => '', // アプリ判定
+    'ua_is_bot'          => '', // bot判定
     'hostname'           => '', // debug用 - 利用なし
     'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
 
@@ -47,6 +48,9 @@ class ViewModel {
     'args'               => '',
 
   );
+
+
+  private $ua;
 
 
   function __construct() {
@@ -75,14 +79,15 @@ class ViewModel {
     $this->default['og_image'] = $this->default['site_url'].$this->default['og_image'];
 
 
-
     # その他アクセス後から不変な値を設定
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
+
+    $this->ua = new UserAgent();
     $this->default['ua']              = $this->get_ua();
-    $this->default['is_app']          = $this->get_is_app();
+    $this->default['ua_app']          = $this->get_ua_app();
+    $this->default['ua_is_bot']       = $this->get_ua_is_bot();
 
   }
-
 
 
   /**
@@ -244,9 +249,7 @@ class ViewModel {
   */
   public function get_ua() {
 
-    $ua = new UserAgent();
-
-    return $ua->set();
+    return $this->ua->set();
 
   }
 
@@ -257,11 +260,21 @@ class ViewModel {
   *
   * @return string  ios | android
   */
-  public function get_is_app() {
+  public function get_ua_app() {
 
-    $ua = new UserAgent();
+    return $this->ua->get_ua_app();
 
-    return $ua->is_app();
+  }
+
+
+  /**
+  * env - bot判定
+  *
+  * @return bool
+  */
+  public function get_ua_is_bot() {
+
+    return $this->ua->is_bot();
 
   }
 

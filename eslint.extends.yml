@@ -103,4 +103,5 @@ rules:
 #  global-strict: [0, "always"]
   handle-callback-err: [2, "err"]
   constructor-super: 1
+  # https://github.com/yannickcr/eslint-plugin-react
   react/jsx-uses-vars: 1
