@@ -25,7 +25,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
 
       // アプリからの記事詳細アクセスならWebView向けページを表示
-      if ( $app->model->property('is_app') ) :
+      if ( $app->model->property('ua_app') ) :
 
         return $this->renderer->render($response, "app.p.php", $args);
 
