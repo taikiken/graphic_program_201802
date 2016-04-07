@@ -32,11 +32,11 @@ export let CommentUserPlusCountNode = React.createClass( {
     // count 1
     // array length 2
     // total が - になるので 0 以上に変更
+    // 2016-04-07 条件分岐を間違えていたので修正
     if ( this.state.total > 0 ) {
-      return null;
-    } else {
-
       return <span className="commented-user-andmore">+{this.state.total}</span>;
+    } else {
+      return null;
     }
 
   }
