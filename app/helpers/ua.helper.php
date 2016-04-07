@@ -86,6 +86,7 @@ class UserAgent{
 
     if (
       strpos($this->ua,'bot') !== false ||
+      strpos($this->ua,'google') !== false ||
       strpos($this->ua,'yahoo') !== false ||
       strpos($this->ua,'spider') !== false ||
       strpos($this->ua,'crawler') !== false ||
