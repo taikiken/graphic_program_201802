@@ -28,10 +28,17 @@ function modptag($s){
 	return $s;
 }
 
+$registerd=array();
+$sql="select t7 from repo_n where (now() - interval '1 day')::date=date(m_time) and d2=4;";
+$o->query($sql);
+while($f=$o->fetch_array()){
+	$registerd[]=$f["t7"];
+}
+
 $s=array();
 $csv=sprintf("http://pro-trend-sports.s3.amazonaws.com/csvfiles/fnavi_%s.csv",date("Ymd"));
-
 $fp=fopen($csv,"r");
+
 while($f=fgetcsv($fp,1024)){
 
 	unset($s);
@@ -42,7 +49,8 @@ while($f=fgetcsv($fp,1024)){
 	}
 	
 	if(strlen($w["description"])>0){
-	
+		
+		$s["id"]="nextval('repo_n_id_seq')";
 		$s["m1"]=130;
 		$s["d1"]=3;
 		$s["d2"]=4;
@@ -80,16 +88,17 @@ while($f=fgetcsv($fp,1024)){
 			$s["youtube"]=$w["videoid"];
 		}
 		
-		$sqla[]=makesql($s,0);
-		$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",$body);
-	
-	}
-	
+		if(!in_array($s["t7"],$registerd)){
+			$sqla[]=makesql($s,0);
+			$sqla[]=sprintf("insert into repo_body(id,pid,body) values(nextval('repo_body_id_seq'),currval('repo_n_id_seq'),'%s');",$body);
+		}
+	}	
 }
 
 $sqla=implode("\n",$sqla);
-echo $sqla;
-//$o->query($sqla);
+$o->query($sqla);
+
+
 
 
 ?>

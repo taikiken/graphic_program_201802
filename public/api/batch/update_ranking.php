@@ -24,50 +24,30 @@ insert into u_ranking select nextval('u_ranking_id_seq'),et1.* from (select ot2.
 where t1.commentid=t2.commentid) as ot1,(select id,pageid from u_comment) as ot2 where ot1.commentid=ot2.id) as et1 where not exists (select * from u_ranking where commentid=et1.commentid and pageid=et1.pageid);";
 */
 
-$sql="select id,pageid from u_comment where flag=1 and (select flag from u_member where id=userid)=1";
+$sql="select 
+	id,
+	pageid,
+	flag,
+	userid,
+	(select cid from u_member where id=userid) as cid,
+	(select flag from u_member where id=userid) as userflag,
+	(select count(*) as n from u_comment as t where t.commentid=u_comment.id and flag=1 and (select flag from u_member where id=t.userid)=1) as reply,
+	(select count(commentid) as n from u_reaction where commentid=u_comment.id and flag=1 and reaction=1 and (select flag from u_member where id=u_reaction.userid)=1) as good,
+	(select count(commentid) as n from u_reaction where commentid=u_comment.id and flag=1 and reaction=2 and (select flag from u_member where id=u_reaction.userid)=1) as bad 
+from u_comment where commentid=0";
+
 $o->query($sql);
 while($f=$o->fetch_array()){
-	$s[]=$f;
-}
+	
+	$rank=$f["reply"]+$f["good"]+$f["bad"];
+	$in[]=sprintf("update u_ranking set good=%s,bad=%s,reply=%s,rank=%s,flag=%s,userflag=%s,userid=%s,cid=%s where commentid=%s and (rank!=%s or flag!=%s or userflag!=%s);",
+	$f["good"],$f["bad"],$f["reply"],$rank,$f["flag"],$f["userflag"],$f["userid"],$f["cid"],$f["id"],$rank,$f["flag"],$f["userflag"]);
 
-for($i=0;$i<count($s);$i++){
-
-	$update=array();
-	
-	$sql=sprintf("select id from u_ranking where commentid=%s",$s[$i]["id"]);
-	$o->query($sql);
-	$f=$o->fetch_array();
-	$id=$f["id"];	
-	
-	if($s[$i]["commentid"]==0){
-		$sql=sprintf("select count(commentid) as n from u_reaction where commentid=%s and reaction=1 and flag=1 and (select flag from u_member where id=userid)=1",$s[$i]["id"]);
-		$o->query($sql);
-		$f=$o->fetch_array();
-		$s[$i]["reply"]=$f["n"];
-	}else{
-		$s[$i]["reply"]=0;
-	}
-	
-	$sql=sprintf("select count(commentid) as n from u_reaction where commentid=%s and reaction=1 and flag=1 and (select flag from u_member where id=userid)=1",$s[$i]["id"]);
-	$o->query($sql);
-	$f=$o->fetch_array();
-	$s[$i]["good"]=$f["n"];
-
-	$sql=sprintf("select count(commentid) as n from u_reaction where commentid=%s and reaction=2 and flag=1 and (select flag from u_member where id=userid)=1",$s[$i]["id"]);
-	$o->query($sql);
-	$f=$o->fetch_array();
-	$s[$i]["bad"]=$f["n"];
-	
-	$s[$i]["rank"]=$s[$i]["reply"]+$s[$i]["like"]+$s[$i]["bad"];
-	
-	if(strlen($id)>0){
-		$in[]=sprintf("update u_ranking set good=%s,bad=%s,reply=%s,rank=%s from u_ranking where id=%s and rank!=%s;",$s[$i]["good"],$s[$i]["bad"],$s[$i]["reply"],$s[$i]["rank"],$s[$i]["id"],$s[$i]["rank"]);
-	}else{
-		$in[]=sprintf("insert into u_ranking select nextval('u_ranking_id_seq'),%s,%s,%s,%s,%s,%s;",$s[$i]["pageid"],$s[$i]["id"],$s[$i]["good"],$s[$i]["bad"],$s[$i]["reply"],$s[$i]["rank"]);
-	}	
 }
 
 $in=implode("\n",$in);
 $o->query($in);
+
+echo $in;
 
 ?>

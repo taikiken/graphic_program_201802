@@ -95,6 +95,7 @@ class dbutl extends db{
 			$this->value=implode(",",$this->value);
 			$this->value=$this->empty2null($this->value);
 			$this->sql="insert into ".$this->table."(".$this->columns.") values(".$this->value.")";				
+			//var_dump($this->sql);
 		}
 
 		@$this->db->query($this->sql);

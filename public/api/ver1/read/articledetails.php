@@ -21,11 +21,15 @@ if($y["status"]["code"]===200){
 	$s["keywords"]=array();
 	for($i=10;$i<=14;$i++)if(strlen($f["t".$i])>0)$s["keywords"][]=$f["t".$i];
 	
+	/*
 	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and m1=%s order by m_time desc limit 4 offset 0",$f["m1"])));
 	$o->query($sql);
 	while($f=$o->fetch_array()){
 		$s["related_articles"][]=set_articleinfo($f,1);
 	}
+	*/
+	
+	$s["related_articles"]=unserialize(file_get_contents(sprintf("%s/api/ver1/static/%s.dat",$SERVERPATH,$f["m1"])));
 	
 }else{
 	$s=(object)$s;

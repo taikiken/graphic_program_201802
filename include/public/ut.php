@@ -57,7 +57,9 @@ $articletable2="
 	m_time,
 	t8 as videocaption,
 	(select name from pm_ where id=m1) as category,
-	(case when m2 is not null then (select name from pm_ where id=m2) else null end)  as category2
+	(select name_e from pm_ where id=m1) as slug,
+	(case when m2 is not null then (select name from pm_ where id=m2) else null end)  as category2,
+	(case when m2 is not null then (select name_e from pm_ where id=m2) else null end) as slug2
 	from repo_n where cid=1 and flag=1%s%s%s) as t1,
 (select 
 	id as userid,
@@ -65,8 +67,10 @@ $articletable2="
 	title as name,
 	t2 as profile,
 	img1 as icon 
-from u_member where  cid!=6 and flag=1) as t2 
+from u_member where flag=1) as t2 
 where t1.d2=t2.userid";
+
+$articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_member where  cid!=6 and flag=1) as t2 where t1.d2=t2.userid";
 
 $commentfield="isreaction,id,comment,userid,pageid,regitime,slug,good,bad,reply,typeid,type,name,profile,icon";
 $commenttable="
@@ -166,7 +170,7 @@ function set_categoryinfo($f,$personalized=""){
 function set_articleinfo($f,$type=0){
 	
 	global $ImgPath,$domain;
-	
+
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
 	
@@ -213,7 +217,7 @@ function set_articleinfo($f,$type=0){
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 
 	$s["user"]=set_userinfo($f);
-	
+
 	return $s;
 }
 
@@ -484,11 +488,10 @@ function get_summary($description,$body){
 		$s=preg_replace("/(\n|\r)/","",$s);
 		$s=preg_replace("/(^　)/","",$s);
 	}
+	$s=html_entity_decode($s);
 	if(mb_strlen($s)>90){
 		$s=sprintf("%s…",mb_substr($s,0,90));
-		$s=html_entity_decode($s);
 	}
-	
 	return $s;
 }
 
@@ -573,6 +576,7 @@ function sendmail($to,$subject,$body,$from,$reply){
 
 function print_json($y,$r){
 	if(preg_match("/debugger\.php/",$r)){
+		if($sqldebug)echo $sqldebug;
 		print_r(json_encode($y,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 	}else{
 		header('Content-Type: application/json; charset=utf-8');

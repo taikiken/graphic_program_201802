@@ -355,6 +355,55 @@ function set_category($category,$type){
 	return $category=="all"?" and m1!=130":sprintf(" and (m1=%s or m2=%s)",$caa[$category],$caa[$category]);
 
 }
+function set_category2($category,$type){
+
+	global $o;
+	$requestcategory=trim($category);
+	
+	if(strlen($requestcategory)==0){
+		$status=array(
+			"code"=>400,
+			"message_type"=>"error",
+			"user_message"=>"リクエストに誤りがあります。",
+			"developer_message"=>"リクエスト値が空。"
+		);
+		set_status($status);
+		return;
+	}
+
+	if($category!="all"){
+		$sql=sprintf("select id,name,name_e from pm_ where name_e='%s'",$category);
+		$o->query($sql);
+		$f=$o->fetch_array();
+	
+		if(strlen($f["id"])==0){
+			$status=array(
+				"code"=>400,
+				"message_type"=>"error",
+				"user_message"=>"リクエストに誤りがあります。",
+				"developer_message"=>"該当しないカテゴリーのリクエスト。"
+			);
+			set_status($status);
+			return;		
+		}
+	}else{
+		$f["id"]=0;
+	}
+	
+	$types=array("","ranking","video");
+	if(!in_array($type,$types)){
+		$status=array(
+			"code"=>400,
+			"message_type"=>"error",
+			"user_message"=>"リクエストに誤りがあります。",
+			"developer_message"=>"該当しないタイプのリクエスト。"
+		);
+		set_status($status);
+		return;		
+	}
+	
+	return array($f["id"],$category=="all"?" and m1!=130":sprintf(" and (m1=%s or m2=%s)",$f["id"],$f["id"]));
+}
 
 
 /* ログイン */

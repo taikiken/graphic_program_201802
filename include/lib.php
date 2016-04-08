@@ -138,10 +138,11 @@ if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1){
 	}else{		
 		$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,$orderby,dblm($no,$offset));
 	}
+}elseif($CURRENTDIRECTORY=="repo_n"&&$_GET["rid"]==2){
+	$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,"id",dblm($no,$offset));
 }else{
 		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log")?" desc":"",dblm($no,$offset));
 }
-
 
 $o->query($sql);
 $III=0;

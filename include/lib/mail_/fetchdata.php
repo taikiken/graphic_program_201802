@@ -1,0 +1,1 @@
+<dl class="ml"><dt><?php $sql=sprintf("select name from pm_ where id=%s",$p[$i]["lib"]);$o->query($sql);$f=$o->fetch_array();echo $f["name"]; ?></dt><dd><?=mod_HTML($p[$i]["fname"])?><?php if(strlen($p[$i]["fvalue"])>0){ ?>（<?=mod_HTML($p[$i]["fvalue"])?>）<?php } ?></dd></dl>

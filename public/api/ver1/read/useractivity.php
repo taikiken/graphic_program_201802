@@ -24,13 +24,13 @@ if($y["status"]["code"]===200){
 	$sql=sprintf("
 	select * from (
 	select id as uid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from u_member where id=%s and flag=1) as t2,(
-	select *,(select title from repo_n where id=pageid and flag=1) as title,(select flag from u_member where id=reuserid) as uflag from u_activity where userid=%s and flag=1 and activityid is not null order by id desc limit %s offset %s) as t1
-	where t2.uid=t1.userid order by t1.id desc;",$uid,$uid,$length,$offset);
+	select *,(select title from repo_n where id=pageid and flag=1) as title,(select flag from u_member where id=reuserid) as uflag from u_activity where userid=%s and flag=1 order by regitime desc limit %s offset %s) as t1
+	where t2.uid=t1.userid order by t1.regitime desc;",$uid,$uid,$length,$offset);
 
 	$nsql=sprintf("
 	select count(t1.userid) as n from 
 	(select id as uid from u_member where id=%s and flag=1) as t2,
-	(select userid,(select title from repo_n where id=pageid and flag=1) as title,(select flag from u_member where id=reuserid) as uflag from u_activity where userid=%s and flag=1 and activityid is not null) as t1
+	(select userid,(select title from repo_n where id=pageid and flag=1) as title,(select flag from u_member where id=reuserid) as uflag from u_activity where userid=%s and flag=1) as t1
 	where t2.uid=t1.userid",$uid,$uid);
 
 	$o->query($sql);
