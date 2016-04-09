@@ -123,17 +123,17 @@ export class SPPage {
 
     router.route();
 
-    window.addEventListener( 'load', SPPage.stick, false );
+    window.addEventListener( 'load', SPPage.sticky, false );
   }
   /**
    * scroll 位置を top に戻す
    */
-  static stick():void {
-    window.removeEventListener( 'load', SPPage.stick );
+  static sticky():void {
+    window.removeEventListener( 'load', SPPage.sticky );
     let whole = Dom.page();
     whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
-    setTimeout( window.scrollTo( 0, 1 ), 0 );
-    UT.util.Scroll.motion( 0, 0.5, 0.5, null, function() {
+    // setTimeout( window.scrollTo( 0, 1 ), 0 );
+    UT.util.Scroll.sticky( 0, 0.5, 0.5, null, function() {
       whole.style.cssText = '';
     } );
   }

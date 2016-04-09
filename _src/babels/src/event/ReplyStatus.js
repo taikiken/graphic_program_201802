@@ -17,8 +17,11 @@ let _symbol = Symbol();
 let _instance = null;
 
 /**
- * コメント返信フォーム
- *
+ * コメント返信フォーム custom event
+ * - OPEN
+ * - CLOSE
+ * - START
+ * - COMPLETE
  * @example
  * var replyStatus = ReplyStatus.factory();
  *

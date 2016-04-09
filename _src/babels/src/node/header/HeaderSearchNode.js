@@ -54,20 +54,22 @@ export let HeaderSearchNode = React.createClass( {
   },
   render: function() {
 
-    let _this = this;
+    // let _this = this;
 
     let errorClass = ( keyName:string ) => {
       return this.errors[ keyName ].error ? 'error' : '';
     };
-
+/*
+ ref={function( input ) {
+ _this.input = input;
+ }}
+ */
     return (
       <div className={`head-search form-parts ${errorClass('keyword')} ${this.state.enable}`}>
         <form onSubmit={this.submitHandler}>
           <input
             type="text"
-            ref={function( input ) {
-              _this.input = input;
-            }}
+            ref="searchText"
             placeholder={Message.PLACEHOLDER_SEARCH}
             value={this.state.keyword}
             onChange={this.changeHandler}
@@ -129,9 +131,10 @@ export let HeaderSearchNode = React.createClass( {
     this.setState( {focus: 'focus='} );
     */
     // ToDo: open event 経由の時の focus
-    if ( this.input !== null ) {
-      this.input.focus();
-    }
+    // if ( this.input !== null ) {
+    //   this.input.focus();
+    // }
+    ReactDOM.findDOMNode( this.refs.searchText ).focus();
   },
   close: function() {
     this.setState( { enable: '' } );

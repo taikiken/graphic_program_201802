@@ -17,6 +17,7 @@ import {UserDetect} from '../../action/signup/UserDetect';
 
 /**
  * user が存在するかのチェック
+ * email が登録済みかを調べます
  */
 export class ModelUserDetect extends Model {
   /**

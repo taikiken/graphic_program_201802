@@ -17,12 +17,12 @@ let _symbol = Symbol();
 let _instance = null;
 
 /**
- * Logout modal
+ * Logout modal を open / close するための custom Event
  */
 export class LogoutStatus extends EventDispatcher {
   /**
    * <h3>Singleton</h3>
-   * <p>Logout modal</p>
+   * <p>Logout modal 用 custom Event</p>
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {LogoutStatus} LogoutStatus instance を返します
    */

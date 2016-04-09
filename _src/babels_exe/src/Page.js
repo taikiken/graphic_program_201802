@@ -127,13 +127,13 @@ export class Page {
     router.route();
 
     // scroll 位置調整
-    window.addEventListener( 'load', Page.stick, false );
+    window.addEventListener( 'load', Page.sticky, false );
   }
   /**
    * scroll 位置を top に戻す
    */
-  static stick():void {
-    window.removeEventListener( 'load', Page.stick );
+  static sticky():void {
+    window.removeEventListener( 'load', Page.sticky );
     //
     // if ( Sagen.Browser.IE.is() ) {
     //   // ie
@@ -144,17 +144,17 @@ export class Page {
     //   setTimeout( Page.ieStick, 200 );
     // }
     // PC browser 全部
-    setTimeout( Page.ieStick, 1 );
+    setTimeout( Page.ieSticky, 1 );
   }
 
   /**
    * 遷移時に上部張り付くになるようにする
    */
-  static ieStick():void {
+  static ieSticky():void {
     // IE 11 動かないので animation してみる
     let whole = Dom.whole();
     whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
-    UT.util.Scroll.motion( 0, 0.1, 0, null, function() {
+    UT.util.Scroll.sticky( 0, 0.1, 0, null, function() {
       whole.style.cssText = '';
     } );
   }

@@ -20,6 +20,9 @@ import {StatusDae} from '../dae/StatusDae';
 
 /**
  * 非同期通信でJSONを取得します
+ * Fetch API を使用し通信を行います
+ * Action 系 Class でラップし使用します
+ * 直接実行することはありません
  */
 export class Ajax {
   /**
