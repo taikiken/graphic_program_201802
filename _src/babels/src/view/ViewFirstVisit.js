@@ -76,7 +76,17 @@ export class ViewFirstVisit extends View {
     // 表示させる
     let FirstDom = React.createClass( {
       getInitialState: function() {
+        /**
+         * #whole element
+         * @private
+         * @type {null|Element}
+         */
         this.whole = null;
+        /**
+         * Fps instance
+         * @private
+         * @type {Gasane.Fps}
+         */
         this.fps = new Gasane.Fps( 1 );
 
         return {

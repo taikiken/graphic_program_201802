@@ -93,7 +93,11 @@ export class ViewLogin extends View {
           email: new ErrorMessage(),
           user: new ErrorMessage()
         };
-
+        /**
+         * MessageStatus instance
+         * @private
+         * @type {MessageStatus}
+         * */
         this.messageStatus = MessageStatus.factory();
 
         return {
@@ -224,9 +228,9 @@ export class ViewLogin extends View {
           // home
           // flush message
           this.messageStatus.flush( MessageStatus.message( Message.LOGIN_COMPLETE ), MessageStatus.SUCCESS );
-          
+
           setTimeout( Loc.index, 500 );
-          
+
           // Loc.index();
         }/* else {
           console.log( 'fail login ...', token );
