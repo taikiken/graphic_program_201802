@@ -11,34 +11,40 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	}
 	
 	if(preg_match("/dev2/",$_SERVER["SERVER_NAME"])){
-	
+		
+		$DBNAME="ut_dev2";
 		$SERVERPATH="/var/www/undotsushin.com/dev/public";
 		$USERS="/var/www/undotsushin.com/dev/public/users";
 		
 		$domain="http://dev2.undotsushin.com";
-		$ImgPath="http://52.68.177.134";
-		$UserImgPath="http://dev2.undotsushin.com";
+		$ImgPath="https://www.undotsushin.com";
+		$UserImgPath="https://www.undotsushin.com";
 		
 	}elseif(preg_match("/dev/",$_SERVER["SERVER_NAME"])){
-	
+		
+		$DBNAME="ut_dev";
+		$DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
+		
 		$SERVERPATH="/var/www/undotsushin.com/dev/public";
 		$USERS="/var/www/undotsushin.com/dev/public/users";
 
 		$domain="http://dev.undotsushin.com";
-		$ImgPath="https://www.undotsushin.com";
+		$ImgPath="http://dev.undotsushin.com";
 		$UserImgPath="http://dev.undotsushin.com";
 
 	}elseif(preg_match("/stg/",$_SERVER["SERVER_NAME"])){
-	
+		
+		$DBNAME="ut0";
 		$SERVERPATH="/var/www/undotsushin.com/stg/public";
 		$USERS="/var/www/undotsushin.com/stg/public/users";
 
-		$domain="https://www.undotsushin.com";
+		$domain="http://stg.undotsushin.com";
 		$ImgPath="https://www.undotsushin.com";
-		$UserImgPath="http://stg.undotsushin.com";
+		$UserImgPath="https://www.undotsushin.com";
 		
 	}else{
-	
+		
+		$DBNAME="ut0";
 		$SERVERPATH="/var/www/undotsushin.com/www/public";
 		$USERS="/var/www/undotsushin.com/www/public/users";
 
