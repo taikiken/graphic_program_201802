@@ -23,6 +23,10 @@ import {SearchStatus} from '../../../event/SearchStatus';
 // node
 import {HeaderSearchNode} from '../../../node/header/HeaderSearchNode';
 
+// util
+import {Scroll} from '../../../util/Scroll';
+
+// Sagen
 let Sagen = self.Sagen;
 
 // React
@@ -52,6 +56,7 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
     ReactDOM.render(
       <HeaderSearchNode
         listen={true}
+        show={false}
       />,
       this.element
     );
@@ -84,20 +89,38 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
          * @type {SearchStatus}
          */
         this.status = SearchStatus.factory();
+        /**
+         * scroll top
+         * @default 0
+         * @private
+         * @type {number}
+         */
+        this.y = 0;
       },
       clickHandler: function( event:Event ):void {
         event.preventDefault();
-
+        /*
+        iOS
+        fixed 内の input に focus すると
+        fixed -> absolute に変わる
+        どうも仕様な様子
+        そのため blur 後の scroll 位置が 0 になるのを元に戻すために
+        open 時の scroll 位置を保存し復元する
+        */
         if ( this.open ) {
           // open -> close
           this.open = false;
-          this.status.close();
           this.props.body.removeClass( 'search-form-open' );
+          this.status.close();
+          // scroll 位置を復元する
+          Scroll.motion( this.y, 0.1, 0.025 );
         } else {
           // close -> open
           this.open = true;
-          this.status.open();
+          // scroll 位置を保存する
+          this.y = Scroll.y;
           this.props.body.addClass( 'search-form-open' );
+          this.status.open();
         }
       }
     } );

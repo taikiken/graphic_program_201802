@@ -31,11 +31,13 @@ let ReactDOM = self.ReactDOM;
  */
 export let HeaderSearchNode = React.createClass( {
   propTypes: {
-    listen: React.PropTypes.bool
+    listen: React.PropTypes.bool,
+    show: React.PropTypes.bool
   },
   getDefaultProps: function() {
     return {
-      listen: false
+      listen: false,
+      show: true
     };
   },
   getInitialState: function() {
@@ -49,7 +51,8 @@ export let HeaderSearchNode = React.createClass( {
       focus: '',
       keyword: '',
       enable: '',
-      error: false
+      error: false,
+      show: this.props.show
     };
   },
   render: function() {
@@ -64,21 +67,26 @@ export let HeaderSearchNode = React.createClass( {
  _this.input = input;
  }}
  */
-    return (
-      <div className={`head-search form-parts ${errorClass('keyword')} ${this.state.enable}`}>
-        <form onSubmit={this.submitHandler}>
-          <input
-            type="text"
-            ref="searchText"
-            placeholder={Message.PLACEHOLDER_SEARCH}
-            value={this.state.keyword}
-            onChange={this.changeHandler}
-            autoFocus="true"
-          />
-          <input type="submit" value={Message.SUBMIT_SEARCH}/>
-        </form>
-      </div>
-    );
+    if ( this.state.show ) {
+      return (
+        <div className={`head-search form-parts ${errorClass('keyword')} ${this.state.enable}`}>
+          <form onSubmit={this.submitHandler}>
+            <input
+              type="text"
+              ref="searchText"
+              placeholder={Message.PLACEHOLDER_SEARCH}
+              value={this.state.keyword}
+              onChange={this.changeHandler}
+              autoFocus="true"
+            />
+            <input type="submit" value={Message.SUBMIT_SEARCH}/>
+          </form>
+        </div>
+      );
+    } else {
+      return null;
+    }
+
   },
   componentDidMount: function() {
     if ( this.props.listen && this.status === null ) {
@@ -123,7 +131,7 @@ export let HeaderSearchNode = React.createClass( {
   },
   open: function() {
     this.reset();
-    this.setState( { enable: 'enable' } );
+    this.setState( { enable: 'enable', show: true } );
     // this.input.focus();
     // ReactDOM.findDOMNode( this.refs.searchText ).focus();
     /*
@@ -137,7 +145,7 @@ export let HeaderSearchNode = React.createClass( {
     ReactDOM.findDOMNode( this.refs.searchText ).focus();
   },
   close: function() {
-    this.setState( { enable: '' } );
+    this.setState( { enable: '', show: false } );
     // this.input.blur();
   }
 } );

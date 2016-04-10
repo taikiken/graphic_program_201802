@@ -128,6 +128,8 @@ export class Scroll extends EventDispatcher {
         delay: delay,
         easing: easingFunc,
         onComplete: function() {
+          console.log( 'complete', complete );
+          
           if ( typeof complete === 'function' ) {
             complete.call( this );
           }
@@ -140,12 +142,11 @@ export class Scroll extends EventDispatcher {
    * y 0 にし、ユーザースクロールアクションで動作をキャンセルします
    * @param {Number} [duration=0.5] motion 時間 sec.
    * @param {Number} [delay=0] delay 時間 sec.
-   * @param {Function} [easingFunc=Power3.easeOut] easing function
    * @param {Function} [complete=null] complete callback function
    * @param {Boolean} [autoKill=false] autoKill flag
    */
-  static sticky( duration:Number = 0.5, delay:Number = 0, easingFunc:Function = easing.Power3.easeOut, complete:Function = null, autoKill:Boolean = true ):void {
-    Scroll.motion( 0, duration, delay, easingFunc, complete, autoKill );
+  static sticky( duration:Number = 0.5, delay:Number = 0, complete:Function = null, autoKill:Boolean = true ):void {
+    Scroll.motion( 0, duration, delay, null, complete, autoKill );
   }
 
   // ---------------------------------------------------

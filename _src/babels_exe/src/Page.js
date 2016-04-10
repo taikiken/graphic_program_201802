@@ -153,8 +153,8 @@ export class Page {
   static ieSticky():void {
     // IE 11 動かないので animation してみる
     let whole = Dom.whole();
-    whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
-    UT.util.Scroll.sticky( 0, 0.1, 0, null, function() {
+    whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    UT.util.Scroll.sticky( 0, 0.1, 0, function() {
       whole.style.cssText = '';
     } );
   }
