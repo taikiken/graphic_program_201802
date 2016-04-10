@@ -10,7 +10,6 @@ $MAILFROM="psychsa@gmail.com";
 $MAILTO="psychsa@gmail.com";
 
 $DB="postgre";
-$DBNAME="ut0";
 $DBUSR="ut";
 $DBPWD="ut";
 $DBPORT=5432;
