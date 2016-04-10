@@ -23,7 +23,7 @@ import {ErrorMessage} from '../../data/ErrorMessage';
 
 // React
 let React = self.React;
-let ReactDOM = self.ReactDOM;
+// let ReactDOM = self.ReactDOM;
 
 /**
  * 検索フォーム
