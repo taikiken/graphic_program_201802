@@ -77,7 +77,7 @@ export let HeaderSearchNode = React.createClass( {
               placeholder={Message.PLACEHOLDER_SEARCH}
               value={this.state.keyword}
               onChange={this.changeHandler}
-              autoFocus="true"
+              autoFocus={this.props.listen}
             />
             <input type="submit" value={Message.SUBMIT_SEARCH}/>
           </form>
@@ -142,7 +142,7 @@ export let HeaderSearchNode = React.createClass( {
     // if ( this.input !== null ) {
     //   this.input.focus();
     // }
-    ReactDOM.findDOMNode( this.refs.searchText ).focus();
+    // ReactDOM.findDOMNode( this.refs.searchText ).focus();
   },
   close: function() {
     this.setState( { enable: '', show: false } );

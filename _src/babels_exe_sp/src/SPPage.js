@@ -29,7 +29,7 @@ import {SPNotifications} from './page/SPNotifications';
 import {SPSettings} from './page/SPSettings';
 import {SPComment} from './page/SPComment';
 
-import {SPSearchFrom} from './header/SPSearchFrom';
+import {SPSearchForm} from './header/SPSearchForm';
 
 import {SPCommentDelete} from './modal/SPCommentDelete';
 import {SPFlush} from './modal/SPFlush';
@@ -127,22 +127,26 @@ export class SPPage {
 
     // let whole = Dom.page();
     // whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    document.body.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
   }
   /**
    * scroll 位置を top に戻す
    */
   static sticky():void {
     window.removeEventListener( 'load', SPPage.sticky );
-    let whole = Dom.page();
-    whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
-    setTimeout( function() {
-      // whole.style.cssText = '';
-      // console.log( 'start scroll', whole );
-      UT.util.Scroll.sticky( 0.1, 0.5, function() {
-        whole.style.cssText = '';
-        // console.log( 'end scroll', whole );
-      } );
-    }, 25 );
+    // let whole = Dom.page();
+    // whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
+    // setTimeout( function() {
+    //   // whole.style.cssText = '';
+    //   // console.log( 'start scroll', whole );
+    //   UT.util.Scroll.sticky( 0.1, 0.5, function() {
+    //     whole.style.cssText = '';
+    //     // console.log( 'end scroll', whole );
+    //   } );
+    // }, 25 );
+    UT.util.Scroll.sticky( 0.05, 2, function() {
+      document.body.style.cssText = '';
+    } );
   }
   /**
    * event unbind
@@ -202,7 +206,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPHeader.start();
 
@@ -222,7 +226,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // index
     SPIndex.start();
     // nav
@@ -247,7 +251,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // category
     SPCategory.start( slug, type );
     // nav
@@ -271,7 +275,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // single
     SPSingle.start( articleId );
     // syn.
@@ -292,7 +296,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPComment.user( 'comment', event.article, event.comment );
     // syn.
@@ -313,7 +317,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPComment.user( 'reply', event.article, event.comment, event.article );
     // syn.
@@ -333,7 +337,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPSearch.start( event.keyword );
     // syn.
@@ -374,7 +378,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPSidebar.start();
     SPHeader.start();
@@ -397,7 +401,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // header
     SPHeader.start();
 
@@ -426,7 +430,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -449,7 +453,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -472,7 +476,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -496,7 +500,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -518,7 +522,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -540,7 +544,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -557,7 +561,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();

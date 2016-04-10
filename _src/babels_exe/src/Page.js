@@ -29,7 +29,7 @@ import {Notifications} from './page/Notifications';
 import {Settings} from './page/Settings';
 import {Comment} from './page/Comment';
 
-import {SearchFrom} from './header/SearchFrom';
+import {SearchForm} from './header/SearchForm';
 
 import {CommentDelete} from './modal/CommentDelete';
 import {Flush} from './modal/Flush';
@@ -128,6 +128,13 @@ export class Page {
 
     // scroll 位置調整
     window.addEventListener( 'load', Page.sticky, false );
+
+    // let whole = Dom.whole();
+    // setTimeout( function() {
+    //   window.scrollTo( 0, 0 );
+    // }, 0 );
+    document.body.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    // window.scrollTo( 0, 0 );
   }
   /**
    * scroll 位置を top に戻す
@@ -144,20 +151,52 @@ export class Page {
     //   setTimeout( Page.ieStick, 200 );
     // }
     // PC browser 全部
-    setTimeout( Page.ieSticky, 1 );
-  }
+    // setTimeout( Page.ieSticky, 1 );
+    // let whole = Dom.whole();
+    // document.body.style.cssText = '';
 
-  /**
-   * 遷移時に上部張り付くになるようにする
-   */
-  static ieSticky():void {
-    // IE 11 動かないので animation してみる
-    let whole = Dom.whole();
-    whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
-    UT.util.Scroll.sticky( 0.1, 0.05, function() {
-      whole.style.cssText = '';
+    // setTimeout( function() {
+    //   window.scrollTo( 0, 0 );
+    //   console.log( 'timeout' );
+    //   whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    // }, 0 );
+    // setTimeout( function() {
+    //   window.scrollTo( 0, 0 );
+    // }, 500 );
+    // document.body.style.cssText = '';
+    // UT.util.Scroll.sticky( 0.1, 0.5, function() {
+    //   setTimeout( function() {
+    //     window.scrollTo( 0, 0 );
+    //   }, 10 );
+    // } );
+    // setTimeout( function() {
+    //   window.scrollTo( 0, 0 );
+    //   console.log( 'timeout 1' );
+    //
+    // }, 0 );
+    // setTimeout( function() {
+    //   window.scrollTo( 0, 0 );
+    //   console.log( 'timeout 2' );
+    //
+    // }, 2000 );
+    UT.util.Scroll.sticky( 0.05, 2, function() {
+      document.body.style.cssText = '';
     } );
   }
+  //
+  // /**
+  //  * 遷移時に上部張り付くになるようにする
+  //  */
+  // static ieSticky():void {
+  //   // IE 11 動かないので animation してみる
+  //   let whole = Dom.whole();
+  //   // whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+  //   whole.style.cssText = '';
+  //   // UT.util.Scroll.sticky( 0.1, 0.05, function() {
+  //   //   whole.style.cssText = '';
+  //   // } );
+  //   UT.util.Scroll.sticky( 0.1, 0.5 );
+  // }
   /**
    * event unbind
    */
@@ -213,7 +252,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     // Sidebar.start();
     Header.start();
@@ -231,7 +270,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     // index
     Index.start();
     // nav
@@ -254,7 +293,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     // category
     Category.start( slug, type );
     // nav
@@ -276,7 +315,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     // single
     Single.start( articleId );
 
@@ -295,7 +334,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Comment.user( 'comment', event.article, event.comment );
 
@@ -314,7 +353,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Comment.user( 'reply', event.article, event.comment, event.article );
 
@@ -332,7 +371,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Search.start( event.keyword );
 
@@ -371,7 +410,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -406,7 +445,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -427,7 +466,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -448,7 +487,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -470,7 +509,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -490,7 +529,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -510,7 +549,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     Sidebar.start();
     Header.start();
 
@@ -524,7 +563,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
