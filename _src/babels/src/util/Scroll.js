@@ -128,8 +128,6 @@ export class Scroll extends EventDispatcher {
         delay: delay,
         easing: easingFunc,
         onComplete: function() {
-          console.log( 'complete', complete );
-          
           if ( typeof complete === 'function' ) {
             complete.call( this );
           }

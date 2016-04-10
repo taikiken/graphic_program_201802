@@ -125,8 +125,8 @@ export class SPPage {
 
     window.addEventListener( 'load', SPPage.sticky, false );
 
-    let whole = Dom.page();
-    whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    // let whole = Dom.page();
+    // whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
   }
   /**
    * scroll 位置を top に戻す
@@ -134,15 +134,15 @@ export class SPPage {
   static sticky():void {
     window.removeEventListener( 'load', SPPage.sticky );
     let whole = Dom.page();
-    // whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
+    whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
     setTimeout( function() {
-      console.log( 'start scroll', whole );
-      whole.style.cssText = '';
-      UT.util.Scroll.sticky( 0, 0.1, 1, function() {
-        console.log( 'end scroll', whole );
+      // whole.style.cssText = '';
+      // console.log( 'start scroll', whole );
+      UT.util.Scroll.sticky( 0.1, 0.5, function() {
         whole.style.cssText = '';
+        // console.log( 'end scroll', whole );
       } );
-    }, 1 );
+    }, 25 );
   }
   /**
    * event unbind

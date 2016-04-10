@@ -154,7 +154,7 @@ export class Page {
     // IE 11 動かないので animation してみる
     let whole = Dom.whole();
     whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
-    UT.util.Scroll.sticky( 0, 0.1, 0, function() {
+    UT.util.Scroll.sticky( 0.1, 0.05, function() {
       whole.style.cssText = '';
     } );
   }
