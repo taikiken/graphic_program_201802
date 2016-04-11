@@ -113,7 +113,8 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
           this.props.body.removeClass( 'search-form-open' );
           this.status.close();
           // scroll 位置を復元する
-          Scroll.motion( this.y, 0.1, 0.025 );
+          // Scroll.motion( this.y, 0.1, 0.025 );
+          this.restoreY( this.y );
         } else {
           // close -> open
           this.open = true;
@@ -122,6 +123,15 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
           this.props.body.addClass( 'search-form-open' );
           this.status.open();
         }
+      },
+      restoreY: function( y:Number ):void {
+        // scrollY が 0 でない時は 復元 しない
+        // ユーザーが scroll している可能性がある
+        if ( Scroll.y !== 0 ) {
+          return;
+        }
+
+        Scroll.motion( y, 0.1, 0.025 );
       }
     } );
 
