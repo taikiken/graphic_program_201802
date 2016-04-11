@@ -14,6 +14,7 @@
 import {Safety} from '../../data/Safety';
 
 /**
+ * 記事キーワード
  * response.keywords
  */
 export class KeywordsDae {
@@ -35,7 +36,7 @@ export class KeywordsDae {
     return this._keywords;
   }
   /**
-   * keyword が存在するかの真偽値
+   * keywords が存在するかの真偽値
    * @return {Boolean} keyword が存在するかの真偽値を返します
    */
   get hasKeyword():Boolean {

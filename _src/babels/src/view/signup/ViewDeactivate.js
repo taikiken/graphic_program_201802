@@ -96,6 +96,11 @@ export class ViewDeactivate extends View {
          */
         this.model = null;
         // message status instance
+        /**
+         * MessageStatus instance
+         * @private
+         * @type {MessageStatus}
+         */
         this.messageStatus = MessageStatus.factory();
 
         return {

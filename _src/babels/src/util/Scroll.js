@@ -110,8 +110,9 @@ export class Scroll extends EventDispatcher {
    * @param {Number} [delay=0] delay 時間 sec.
    * @param {Function} [easingFunc=Power3.easeOut] easing function
    * @param {Function} [complete=null] complete callback function
+   * @param {Boolean} [autoKill=false] autoKill flag
    */
-  static motion( top:Number, duration:Number = 0.5, delay:Number = 0, easingFunc:Function = easing.Power3.easeOut, complete:Function = null ):void {
+  static motion( top:Number, duration:Number = 0.5, delay:Number = 0, easingFunc:Function = easing.Power3.easeOut, complete:Function = null, autoKill:Boolean = false ):void {
     if ( easingFunc === null || typeof easingFunc !== 'function' ) {
       easingFunc = easing.Power3.easeOut;
     }
@@ -122,10 +123,42 @@ export class Scroll extends EventDispatcher {
       {
         scrollTo: {
           y: top,
-          autoKill: false
+          autoKill: autoKill
         },
         delay: delay,
         easing: easingFunc,
+        onComplete: function() {
+          if ( typeof complete === 'function' ) {
+            complete.call( this );
+          }
+        }
+      }
+    );
+  }
+
+  /**
+   * y 0 にし、ユーザースクロールアクションで動作をキャンセルします
+   * @param {Number} [duration=0.5] motion 時間 sec.
+   * @param {Number} [delay=0] delay 時間 sec.
+   * @param {Function} [start=null] onStart callback function
+   * @param {Function} [complete=null] onComplete callback function
+   * @param {Boolean} [autoKill=false] autoKill flag
+   */
+  static sticky( duration:Number = 0.5, delay:Number = 0, start:Function = null, complete:Function = null ):void {
+    TweenLite.to(
+      window,
+      duration,
+      {
+        scrollTo: {
+          y: 0
+        },
+        delay: delay,
+        easing: easing.Power3.easeOut,
+        onStart: function() {
+          if ( typeof start === 'function' ) {
+            start.call( this );
+          }
+        },
         onComplete: function() {
           if ( typeof complete === 'function' ) {
             complete.call( this );

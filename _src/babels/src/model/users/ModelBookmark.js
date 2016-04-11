@@ -16,7 +16,7 @@ import {Result} from '../../data/Result';
 import {Bookmark} from '../../action/bookmark/Bookmark';
 
 /**
- * bookmark 登録・解除
+ * bookmark 登録・解除 を行い event を発火します
  */
 export class ModelBookmark extends Model {
   /**

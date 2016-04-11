@@ -64,7 +64,7 @@ export class UserDae {
    */
   get userName():string {
     // data に null 値が入っていることがあるので念のためチェックする
-    return Safety.string( this.user.name, '');
+    return Safety.string( this.user.name, '' );
   }
   /**
    * article.user.profile_picture
@@ -72,7 +72,7 @@ export class UserDae {
    */
   get profilePicture():string {
     // data に null 値が入っていることがあるので念のためチェックする
-    return Safety.string( this.user.profile_picture, '');
+    return Safety.string( this.user.profile_picture, '' );
   }
   /**
    * article.user.url
@@ -80,7 +80,7 @@ export class UserDae {
    */
   get url():string {
     // data に null 値が入っていることがあるので念のためチェックする
-    return Safety.string( this.user.url, '');
+    return Safety.string( this.user.url, '' );
   }
   /**
    * article.user.bio
@@ -88,7 +88,7 @@ export class UserDae {
    */
   get bio():string {
     // data に null 値が入っていることがあるので念のためチェックする
-    return Safety.string( this.user.bio, '');
+    return Safety.string( this.user.bio, '' );
   }
   /**
    * article.user.email
@@ -96,7 +96,7 @@ export class UserDae {
    */
   get email():string {
     // data に null 値が入っていることがあるので念のためチェックする
-    return Safety.string( this.user.email, '');
+    return Safety.string( this.user.email, '' );
   }
   // --------------------------------------------------------------------
   // 以下リクエストによっては undefined になります
@@ -108,7 +108,7 @@ export class UserDae {
    */
   get accessToken():string {
     // data に null 値が入っていることがあるので念のためチェックする
-    return Safety.string( this.user.access_token, '');
+    return Safety.string( this.user.access_token, '' );
   }
   /**
    * セッションID *用途なさそうだけど一応
@@ -116,7 +116,7 @@ export class UserDae {
    */
   get sessionToken():string {
     // data に null 値が入っていることがあるので念のためにチェックする
-    return Safety.string( this.user.session_token, '');
+    return Safety.string( this.user.session_token, '' );
   }
   /**
    * 興味がある

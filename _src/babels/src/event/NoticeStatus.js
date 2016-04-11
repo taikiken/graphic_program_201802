@@ -17,7 +17,7 @@ let _symbol = Symbol();
 let _instance = null;
 
 /**
- * お知らせ更新を通知
+ * お知らせ更新を通知するための custom Event
  * @example
  * var status = NoticeStatus.factory();
  * */

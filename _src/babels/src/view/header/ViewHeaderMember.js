@@ -173,7 +173,11 @@ export class ViewHeaderMember extends View {
          * @type {CommentStatus}
          */
         this.commentStatus = CommentStatus.factory();
-
+        /**
+         * time out id by refresh
+         * @private
+         * @type {number}
+         */
         this.refreshTimer = 0;
 
         return {
@@ -365,7 +369,7 @@ export class ViewHeaderMember extends View {
         this.setState( { icon: icon, userName: userName } );
       }
     } );
-    
+
     // --------------------------------------------------
     // when reload
     if ( this._reload ) {
