@@ -171,7 +171,7 @@ export class SPPage {
       _tween.kill();
       _tween = null;
     }
-    console.log( 'disposeScroll', _tween, document.body.style.cssText );
+    // console.log( 'disposeScroll', _tween, document.body.style.cssText );
 
     // iOS Browser rendering bug で 真っ白になるの対策
     // 強制再描画させてる
@@ -197,7 +197,7 @@ export class SPPage {
    * scroll 関連 event handler
    */
   static onScroll():void {
-    console.log( 'onScroll', arguments );
+    // console.log( 'onScroll', arguments );
     SPPage.disposeScroll();
   }
   /**
@@ -216,7 +216,7 @@ export class SPPage {
    */
   static sticky():void {
     window.removeEventListener( 'load', SPPage.sticky );
-    console.log( 'sticky ', _scrolled );
+    // console.log( 'sticky ', _scrolled );
     // ユーザーがスクロールしたらキャンセルする
     if ( !_scrolled ) {
       _tween = UT.util.Scroll.sticky( 0.1, 1, null, SPPage.disposeScroll, true );
