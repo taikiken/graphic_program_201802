@@ -16,10 +16,11 @@
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
+import {MediaType} from '../../app/const/MediaType';
 
 // view
 import {View} from '../View';
-import {ViewError} from '../error/ViewError';
+// import {ViewError} from '../error/ViewError';
 // action
 import {Pickup} from '../../action/home/Pickup';
 import {PickupAuth} from '../../action/home/PickupAuth';
@@ -136,19 +137,19 @@ export class ViewPickup extends View {
     // this.showError( error.message );
 
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
-    // ToDo: Error 時の表示が決まったら変更する
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError( message:string = '' ):void {
+  //
+  //   message = Safety.string( message, '' );
+  //
+  //   // ToDo: Error 時の表示が決まったら変更する
+  //   let error = new ViewError( this.element, this.option, message );
+  //   error.render();
+  //
+  // }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
@@ -238,6 +239,20 @@ export class ViewPickup extends View {
     // Main Dom
     // --------------------------------------------
 
+    // video play mark
+    let VideoPlayDom = React.createClass( {
+      propTypes: {
+        mediaType: React.PropTypes.string.isRequired
+      },
+      render: function() {
+        if ( this.props.mediaType === MediaType.VIDEO ) {
+          return <img src={Empty.VIDEO_PICKUP_PLAY} alt="" className="overlay" />;
+        } else {
+          return null;
+        }
+      }
+    } );
+
     // pickup slider images
     /**
      * スライドショー 画像
@@ -255,7 +270,8 @@ export class ViewPickup extends View {
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         large: React.PropTypes.string.isRequired,
-        commentsCount: React.PropTypes.number.isRequired
+        commentsCount: React.PropTypes.number.isRequired,
+        mediaType: React.PropTypes.string.isRequired
       },
       getDefaultPropTypes: function() {
         return {
@@ -273,11 +289,12 @@ export class ViewPickup extends View {
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
             <a href={p.url} style={{'background': `url(${p.large}) no-repeat 50% 50% / cover`}}>
               <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
+              <VideoPlayDom mediaType={this.props.mediaType} />
               {/*
               <img src={p.large} alt={p.title}/>
                */}
               <div className="post-overview">
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category( p.category2)}</p>
+                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
                 <h2 className='post-heading'>{p.title}</h2>
                 <p className="post-date">{p.date}</p>
                 <p className="post-comment-num">{p.commentsCount}</p>
@@ -358,6 +375,7 @@ export class ViewPickup extends View {
             title={dae.title}
             large={large}
             commentsCount={dae.commentsCount}
+            mediaType={dae.mediaType}
           />;
 
         };
@@ -409,10 +427,12 @@ export class ViewPickup extends View {
                     onPager={this.onPagerClick}
                   />
                 </div>
+              {/* hero-slider-control */}
               </div>
+            {/* .hero-slider */}
             </div>
+          {/* #hero-sec */}
           </div>
-
         );
 
       },
