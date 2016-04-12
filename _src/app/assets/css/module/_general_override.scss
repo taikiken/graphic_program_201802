@@ -39,6 +39,20 @@
     }
   }
 }
+// -------------------------------------------------
+// headline
+// -------------------------------------------------
+.post-thumb-headline {
+  position: relative;
+
+  .post-thumb-overlay-movie {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+}
 
 // -------------------------------------------------
 // 記事一覧
