@@ -148,6 +148,12 @@
     & + .post-tags {
       margin-top: 20px;
     }
+
+    &.w728 {
+      position: relative;
+      left: -9px;
+      width: 728px;
+    }
   }
 
   // post-tags
