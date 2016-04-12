@@ -142,15 +142,23 @@ export class Scroll extends EventDispatcher {
    * @param {Number} [delay=0] delay 時間 sec.
    * @param {Function} [start=null] onStart callback function
    * @param {Function} [complete=null] onComplete callback function
-   * @param {Boolean} [autoKill=false] autoKill flag
+   * @param {Boolean} [autoKill=true] autoKill flag
+   * @return {TweenLite} TweenLite instance を返します
    */
-  static sticky( duration:Number = 0.5, delay:Number = 0, start:Function = null, complete:Function = null ):void {
-    TweenLite.to(
+  static sticky( duration:Number = 0.5, delay:Number = 0, start:Function = null, complete:Function = null, autoKill:Boolean = true ):TweenLite {
+    return TweenLite.to(
       window,
       duration,
       {
         scrollTo: {
-          y: 0
+          y: 0,
+          autoKill: autoKill,
+          onAutoKill: function() {
+            console.log( 'onAutoKill', complete );
+            if ( typeof complete === 'function' ) {
+              complete.call( this );
+            }
+          }
         },
         delay: delay,
         easing: easing.Power3.easeOut,
