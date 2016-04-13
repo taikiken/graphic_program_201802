@@ -18,6 +18,10 @@ import {Message} from '../../app/const/Message';
 import {Model} from '../../model/Model';
 import {ModelBookmark} from '../../model/users/ModelBookmark';
 
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
+
 let React = self.React;
 
 /**
@@ -108,6 +112,15 @@ export let BookmarkNode = React.createClass( {
 
     this.setState( { loading: 'loading' } );
     this.action.start( !this.state.status );
+
+    // ga tag added
+    if (this.state.status) {
+      // bookmarked -> DELETE
+      Ga.add( new GaData( 'BookmarkNode.clickBookmark', `ArticleDetail_bookmark_noselect_${this.props.articleId}`, 'nobookmark_tap' ) );
+    } else {
+      // not bookmarked => PUT
+      Ga.add( new GaData( 'BookmarkNode.clickBookmark', `ArticleDetail_bookmark_select_${this.props.articleId}`, 'bookmark_tap' ) );
+    }
 
   },
   // Ajax 成功
