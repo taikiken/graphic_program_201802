@@ -53,7 +53,7 @@
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
-        <div class="sponsor-link">
+        <div class="sponsor-link w728">
           <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35118&targetID=adg_35118&displayid=1&adType=PC&width=728&height=90&sdkType=3&async=false&tagver=2.0.0"></script>
         </div>
 
