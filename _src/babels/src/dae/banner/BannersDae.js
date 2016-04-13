@@ -14,8 +14,15 @@ import {BannerDae} from './BannerDae';
 
 import {Safety} from '../../data/Safety';
 
+/**
+ * response.user.banner データ
+ */
 export class BannersDae {
-  constructor( banner:Object ) {
+  /**
+   *
+   * @param {Object} banner response.user.banner
+   */
+  constructor( banner:Object = {} ) {
     banner = Safety.object( banner );
     let pc = Safety.object( banner.pc );
     let sp = Safety.object( banner.sp );
@@ -24,19 +31,24 @@ export class BannersDae {
     this._sp = new BannerDae(sp.text, sp.image, sp.link);
     this._banner = banner;
   }
-
   /**
-   * 
-   * @return {Object|*}
+   * response.user.banner
+   * @return {Object|*} response.user.banner を返します
    */
   get banner():Object {
     return this._banner;
   }
-
+  /**
+   * response.user.banner.pc
+   * @return {BannerDae} response.user.banner.pc を BannerDae instance で返します
+   */
   get pc():BannerDae {
     return this._pc;
   }
-
+  /**
+   * response.user.banner.sp
+   * @return {BannerDae} response.user.banner.sp を BannerDae instance で返します
+   */
   get sp():BannerDae {
     return this._sp;
   }

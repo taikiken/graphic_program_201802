@@ -123,21 +123,21 @@ export class ViewSingle extends View {
     // this.showError( error.message );
 
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
-    // ToDo: Error 時の表示が決まったら変更する
-    /*
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-    */
-
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError( message:string = '' ):void {
+  //
+  //   message = Safety.string( message, '' );
+  //
+  //   // ToDo: Error 時の表示が決まったら変更する
+  //   /*
+  //   let error = new ViewError( this.element, this.option, message );
+  //   error.render();
+  //   */
+  //
+  // }
   /**
    * dom を render します
    * @param {Object} response JSON response
