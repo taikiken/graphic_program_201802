@@ -43,7 +43,7 @@ export class Exif extends EventDispatcher {
     return _instance;
   }
   /**
-   * FileReader.readAsArrayBuffer で 引数(file) load 後に exif orientation を調べる
+   * FileReader.readAsArrayBuffer で 引数(file) load 後に exif orientation を調べます
    * @param {Blob} file 調査対象ファイル
    */
   orientation( file:Blob ):Number {
@@ -86,7 +86,7 @@ export class Exif extends EventDispatcher {
   }
   /**
    * reader.readAsArrayBuffer onerror event handler
-   * orientation -1(defined) を返します
+   * orientation -1(not defined) を返します
    */
   onError():void {
     this.dispose();
@@ -114,19 +114,19 @@ export class Exif extends EventDispatcher {
   // ---------------------------------------------------
   // orientation 定数
   /**
-   * NO_JPG
+   * NOT_JPG
    * .jpg / .jpeg ではありません
    * @return {number} -2 を返します
    */
-  static get NO_JPG():Number {
+  static get NOT_JPG():Number {
     return -2;
   }
   /**
-   * DEFINED
+   * NOT_DEFINED
    * 見つかりませんでした
-   * @return {number} -2 を返します
+   * @return {number} -1 を返します
    */
-  static get DEFINED():Number {
+  static get NOT_DEFINED():Number {
     return -1;
   }
 
@@ -160,7 +160,7 @@ export class Exif extends EventDispatcher {
   /**
    * CW_180 clockwise 180
    * 180度回転
-   * @return {number} 8 を返します
+   * @return {number} 3 を返します
    */
   static get CW_180():Number {
     return 3;
@@ -168,7 +168,7 @@ export class Exif extends EventDispatcher {
   /**
    * CW_270 clockwise 270
    * 270度回転
-   * @return {number} 8 を返します
+   * @return {number} 6 を返します
    */
   static get CW_270():Number {
     return 6;

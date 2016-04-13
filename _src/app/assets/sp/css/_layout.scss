@@ -88,6 +88,11 @@ a {
   }
 }
 .search-form-open {
+  // input:text focus でピョコンとなるバグ対策
+  // scroll できなくなるので不採用
+  //position: fixed;
+  //width: 100%;
+
   .body-sec {
     margin-top: 160px;
 

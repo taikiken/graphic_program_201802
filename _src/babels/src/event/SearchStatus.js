@@ -17,7 +17,7 @@ let _symbol = Symbol();
 let _instance = null;
 
 /**
- * sp search form open / close
+ * sp search form open / close するための custom Event
  */
 export class SearchStatus extends EventDispatcher {
   /**

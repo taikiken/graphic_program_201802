@@ -29,12 +29,16 @@ import {Notifications} from './page/Notifications';
 import {Settings} from './page/Settings';
 import {Comment} from './page/Comment';
 
-import {SearchFrom} from './header/SearchFrom';
+import {SearchForm} from './header/SearchForm';
 
 import {CommentDelete} from './modal/CommentDelete';
 import {Flush} from './modal/Flush';
 
 let _symbol = Symbol();
+
+let _scrolled:Boolean = false;
+
+let _tween = null;
 
 // UT
 let UT = self.UT;
@@ -63,6 +67,10 @@ export class Page {
    */
   static init():void {
 
+    // page 上部に貼り付ける
+    Page.bindScroll();
+    setTimeout( Page.reserveSticky, 25);
+    
     // user login check
     UT.app.User.init();
 
@@ -125,38 +133,85 @@ export class Page {
     router.on( Router.NOT_FOUND, Page.notFound );
 
     router.route();
+  }
+  /**
+   * scroll, wheel を監視し event が発生したら sticky をキャンセルする
+   */
+  static bindScroll():void {
+    // scroll event listen
+    window.addEventListener('scroll', Page.onScroll, false);
+    window.addEventListener('wheel', Page.onScroll, false);
+    window.addEventListener('mousewheel', Page.onScroll, false);
+    window.addEventListener('DOMMouseScroll', Page.onScroll, false);
+    document.body.addEventListener('touchstart', Page.onTouchStart, false);
+    document.body.addEventListener('touchend', Page.onTouchEnd, false);
+  }
+  /**
+   * scroll, wheel 監視をキャンセルし
+   * body style を空にする
+   */
+  static disposeScroll():void {
+    _scrolled = true;
+    // load event unbind
+    window.removeEventListener( 'load', Page.sticky );
+    // scroll event unbind
+    window.removeEventListener('scroll', Page.onScroll);
+    window.removeEventListener('wheel', Page.onScroll);
+    window.removeEventListener('mousewheel', Page.onScroll);
+    window.removeEventListener('DOMMouseScroll', Page.onScroll);
+    document.body.removeEventListener('touchstart', Page.onTouchStart);
+    document.body.removeEventListener('touchmove', Page.onScroll);
+    document.body.removeEventListener('touchend', Page.onTouchEnd);
 
-    // scroll 位置調整
-    window.addEventListener( 'load', Page.stick, false );
+    document.body.style.cssText = '';
+    if ( _tween !== null ) {
+      _tween.kill();
+      _tween = null;
+    }
+
+  }
+  /**
+   * touchstart で touchmove 監視
+   */
+  static onTouchStart():void {
+    // console.log( 'onTouchStart', arguments );
+    document.body.addEventListener('touchmove', Page.onScroll, false);
+  }
+  /**
+   * touchend で touchmove 監視キャンセル
+   */
+  static onTouchEnd():void {
+    // console.log( 'onTouchEnd', arguments );
+    document.body.removeEventListener('touchmove', Page.onScroll);
+  }
+  /**
+   * scroll 関連 event handler
+   */
+  static onScroll():void {
+    Page.disposeScroll();
+  }
+  /**
+   * window.onload での stickyを予約する
+   */
+  static reserveSticky():void {
+    window.addEventListener( 'load', Page.sticky, false );
+
+    if (!_scrolled) {
+      // fixed にして貼り付ける
+      document.body.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    }
   }
   /**
    * scroll 位置を top に戻す
    */
-  static stick():void {
-    window.removeEventListener( 'load', Page.stick );
-    //
-    // if ( Sagen.Browser.IE.is() ) {
-    //   // ie
-    //   setTimeout( Page.ieStick, 200 );
-    // } else {
-    //   // not ie
-    //   // setTimeout( window.scrollTo( 0, 0 ), 200 );
-    //   setTimeout( Page.ieStick, 200 );
-    // }
-    // PC browser 全部
-    setTimeout( Page.ieStick, 1 );
-  }
-
-  /**
-   * 遷移時に上部張り付くになるようにする
-   */
-  static ieStick():void {
-    // IE 11 動かないので animation してみる
-    let whole = Dom.whole();
-    whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
-    UT.util.Scroll.motion( 0, 0.1, 0, null, function() {
-      whole.style.cssText = '';
-    } );
+  static sticky():void {
+    window.removeEventListener( 'load', Page.sticky );
+    // ユーザーがスクロールしたらキャンセルする
+    if ( !_scrolled ) {
+      _tween = UT.util.Scroll.sticky( 0.1, 1, null, Page.disposeScroll, true );
+    } else {
+      Page.disposeScroll();
+    }
   }
   /**
    * event unbind
@@ -213,7 +268,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     // Sidebar.start();
     Header.start();
@@ -231,7 +286,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     // index
     Index.start();
     // nav
@@ -254,7 +309,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     // category
     Category.start( slug, type );
     // nav
@@ -276,7 +331,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     // single
     Single.start( articleId );
 
@@ -295,7 +350,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Comment.user( 'comment', event.article, event.comment );
 
@@ -314,7 +369,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Comment.user( 'reply', event.article, event.comment, event.article );
 
@@ -332,7 +387,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Search.start( event.keyword );
 
@@ -371,7 +426,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -406,7 +461,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -427,7 +482,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -448,7 +503,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -470,7 +525,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -490,7 +545,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();
@@ -510,7 +565,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
     Sidebar.start();
     Header.start();
 
@@ -524,7 +579,7 @@ export class Page {
     // page top
     PageTop.start();
     // search from
-    SearchFrom.start();
+    SearchForm.start();
 
     Sidebar.start();
     Header.start();

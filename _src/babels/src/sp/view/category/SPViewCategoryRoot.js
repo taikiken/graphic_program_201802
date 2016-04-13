@@ -73,6 +73,17 @@ export class SPViewCategoryRoot extends View {
           ranking: 0,
           videos: 0
         };
+        /**
+         * https://github.com/undotsushin/undotsushin/issues/600
+         * 同時にリクエストしないように表示した時に行うための flag
+         * @private
+         * @type {{latest: boolean, ranking: boolean, videos: boolean}}
+         */
+        this.requests = {
+          latest: true,
+          ranking: false,
+          videos: false
+        };
 
         return {
           current: 'latest'
@@ -106,8 +117,8 @@ export class SPViewCategoryRoot extends View {
 
         // after mount, request API
         this.latest();
-        this.ranking();
-        this.videos();
+        // this.ranking();
+        // this.videos();
         this.tab();
       },
       // --------------------------------------
@@ -152,14 +163,36 @@ export class SPViewCategoryRoot extends View {
         // latest did mount
       },
       */
+      // tab click callback from <SPTabNode>
       tabClick( id:string ):void {
+        // let scroll = this.scroll;
+        // scroll[ this.state.current ] = Scroll.y;
+        // this.setState( { current: id } );
+        //
+        // setTimeout( function() {
+        //   Scroll.y = scroll[ id ];
+        // }, 25 );
+        this.scrollPosition( id );
+        this.didRequest( id );
+        this.setState( { current: id } );
+      },
+      // tab が開いた時に scroll 位置を前回の状態に復元する
+      scrollPosition( id:string ): void {
         let scroll = this.scroll;
         scroll[ this.state.current ] = Scroll.y;
-        this.setState( { current: id } );
 
         setTimeout( function() {
           Scroll.y = scroll[ id ];
         }, 25 );
+      },
+      // 最初の Ajax request を行ったかを確認し、リクエストを行うか否かを決める
+      didRequest( id:string ):void {
+        // console.log( 'didRequest', id, this.requests[ id ], this[ id ] );
+        if ( !this.requests[ id ] ) {
+          // not request -> first request
+          this.requests[ id ] = true;
+          this[ id ]();
+        }
       }
     } );
 

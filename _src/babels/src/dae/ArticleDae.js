@@ -62,8 +62,10 @@ export class ArticleDae {
 
     }
     */
+    // 整数へ型変換
     let commentsCount = parseInt( article.comments_count, 10 );
-    commentsCount = Safety.integer( commentsCount, 10 );
+    // 数値を保証
+    commentsCount = Safety.integer( commentsCount, 0 );
 
     this._commentsCount = commentsCount;
 

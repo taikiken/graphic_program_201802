@@ -225,7 +225,8 @@ function makesql($a,$f){
 				$v=str_replace("―","-",$v);
 				$v=str_replace("\'","''",$v);
 				$v=sprintf("'%s'",$v);
-				if(preg_match("/select max/",$v))$v=str_replace("'","",$v);
+				if(preg_match("/(select max)/",$v))$v=str_replace("'","",$v);
+				if(preg_match("/(nextval)/",$v))$v="nextval('repo_n_id_seq')";
 			}else{
 				$v="null";
 			}

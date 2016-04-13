@@ -29,12 +29,16 @@ import {SPNotifications} from './page/SPNotifications';
 import {SPSettings} from './page/SPSettings';
 import {SPComment} from './page/SPComment';
 
-import {SPSearchFrom} from './header/SPSearchFrom';
+import {SPSearchForm} from './header/SPSearchForm';
 
 import {SPCommentDelete} from './modal/SPCommentDelete';
 import {SPFlush} from './modal/SPFlush';
 
 let _symbol = Symbol();
+
+let _scrolled:Boolean = false;
+
+let _tween = null;
 
 // UT
 let UT = self.UT;
@@ -57,6 +61,10 @@ export class SPPage {
    * Page 初期化, UT.app.Router event を listen します
    */
   static init():void {
+
+    // page 上部に貼り付ける
+    SPPage.bindScroll();
+    setTimeout( SPPage.reserveSticky, 25);
 
     // user login check
     UT.app.User.init();
@@ -123,20 +131,122 @@ export class SPPage {
 
     router.route();
 
-    window.addEventListener( 'load', SPPage.stick, false );
+    window.addEventListener( 'load', SPPage.sticky, false );
+
+    // let whole = Dom.page();
+    // whole.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    // document.body.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+  }
+  /**
+   * scroll, wheel を監視し event が発生したら sticky をキャンセルする
+   */
+  static bindScroll():void {
+    // scroll event listen
+    window.addEventListener('scroll', SPPage.onScroll, false);
+    window.addEventListener('wheel', SPPage.onScroll, false);
+    window.addEventListener('mousewheel', SPPage.onScroll, false);
+    window.addEventListener('DOMMouseScroll', SPPage.onScroll, false);
+    document.body.addEventListener('touchstart', SPPage.onTouchStart, false);
+    document.body.addEventListener('touchend', SPPage.onTouchEnd, false);
+  }
+  /**
+   * scroll, wheel 監視をキャンセルし
+   * body style を空にする
+   */
+  static disposeScroll():void {
+    _scrolled = true;
+    // load event unbind
+    window.removeEventListener( 'load', SPPage.sticky );
+    // scroll event unbind
+    window.removeEventListener('scroll', SPPage.onScroll);
+    window.removeEventListener('wheel', SPPage.onScroll);
+    window.removeEventListener('mousewheel', SPPage.onScroll);
+    window.removeEventListener('DOMMouseScroll', SPPage.onScroll);
+    document.body.removeEventListener('touchstart', SPPage.onTouchStart);
+    document.body.removeEventListener('touchmove', SPPage.onScroll);
+    document.body.removeEventListener('touchend', SPPage.onTouchEnd);
+
+    document.body.style.cssText = '';
+    if ( _tween !== null ) {
+      _tween.kill();
+      _tween = null;
+    }
+    // console.log( 'disposeScroll', _tween, document.body.style.cssText );
+
+    // iOS Browser rendering bug で 真っ白になるの対策
+    // 強制再描画させてる
+    setTimeout( function() {
+      window.scrollBy(0, 1);
+    }, 0 );
+  }
+  /**
+   * touchstart で touchmove 監視
+   */
+  static onTouchStart():void {
+    // console.log( 'onTouchStart', arguments );
+    document.body.addEventListener('touchmove', SPPage.onScroll, false);
+  }
+  /**
+   * touchend で touchmove 監視キャンセル
+   */
+  static onTouchEnd():void {
+    // console.log( 'onTouchEnd', arguments );
+    document.body.removeEventListener('touchmove', SPPage.onScroll);
+  }
+  /**
+   * scroll 関連 event handler
+   */
+  static onScroll():void {
+    // console.log( 'onScroll', arguments );
+    SPPage.disposeScroll();
+  }
+  /**
+   * window.onload での stickyを予約する
+   */
+  static reserveSticky():void {
+    window.addEventListener( 'load', SPPage.sticky, false );
+    
+    if (!_scrolled) {
+      // fixed にして貼り付ける
+      document.body.style.cssText = 'position: fixed; left: 0; top: 0; width: 100%;';
+    }
   }
   /**
    * scroll 位置を top に戻す
    */
-  static stick():void {
-    window.removeEventListener( 'load', SPPage.stick );
-    let whole = Dom.page();
-    whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
-    setTimeout( window.scrollTo( 0, 1 ), 0 );
-    UT.util.Scroll.motion( 0, 0.5, 0.5, null, function() {
-      whole.style.cssText = '';
-    } );
+  static sticky():void {
+    window.removeEventListener( 'load', SPPage.sticky );
+    // console.log( 'sticky ', _scrolled );
+    // ユーザーがスクロールしたらキャンセルする
+    if ( !_scrolled ) {
+      _tween = UT.util.Scroll.sticky( 0.1, 1, null, SPPage.disposeScroll, true );
+    } else {
+      SPPage.disposeScroll();
+    }
   }
+  // /**
+  //  * scroll 位置を top に戻す
+  //  */
+  // static sticky():void {
+  //   window.removeEventListener( 'load', SPPage.sticky );
+  //   // let whole = Dom.page();
+  //   // whole.style.cssText = 'position: fixed: left: 0; top: 0; width: 100%;';
+  //   // setTimeout( function() {
+  //   //   // whole.style.cssText = '';
+  //   //   // console.log( 'start scroll', whole );
+  //   //   UT.util.Scroll.sticky( 0.1, 0.5, function() {
+  //   //     whole.style.cssText = '';
+  //   //     // console.log( 'end scroll', whole );
+  //   //   } );
+  //   // }, 25 );
+  //   UT.util.Scroll.sticky( 1.0, 0.6, function() {
+  //     document.body.style.cssText = '';
+  //   }, function() {
+  //     setTimeout( function() {
+  //       window.scrollBy(0, 1);
+  //     }, 0 );
+  //   } );
+  // }
   /**
    * event unbind
    */
@@ -195,7 +305,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPHeader.start();
 
@@ -215,7 +325,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // index
     SPIndex.start();
     // nav
@@ -240,7 +350,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // category
     SPCategory.start( slug, type );
     // nav
@@ -264,7 +374,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // single
     SPSingle.start( articleId );
     // syn.
@@ -285,7 +395,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPComment.user( 'comment', event.article, event.comment );
     // syn.
@@ -306,7 +416,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPComment.user( 'reply', event.article, event.comment, event.article );
     // syn.
@@ -326,7 +436,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPSearch.start( event.keyword );
     // syn.
@@ -367,7 +477,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     SPSidebar.start();
     SPHeader.start();
@@ -390,7 +500,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
     // header
     SPHeader.start();
 
@@ -419,7 +529,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -442,7 +552,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -465,7 +575,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -489,7 +599,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -511,7 +621,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -533,7 +643,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();
@@ -550,7 +660,7 @@ export class SPPage {
     // page top
     SPPageTop.start();
     // search from
-    SPSearchFrom.start();
+    SPSearchForm.start();
 
     // SPSidebar.start();
     SPHeader.start();

@@ -16,12 +16,12 @@ import {Safety} from '../data/Safety';
 let _symbol = Symbol();
 
 /**
- * <h3>cookie を取得します</h3>
+ * cookie を取得・削除・設定します
  * 全て static です
  */
 export class Cookie {
   /**
-   * <p>取得機能だけを実装しました</p>
+   * cookie を取得・削除・設定します
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

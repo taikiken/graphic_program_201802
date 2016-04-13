@@ -16,6 +16,11 @@ let React = self.React;
 // --------------------------------------------
 // COMMENTS Popular second
 // --------------------------------------------
+/**
+ * 記事一覧のコメントしたユーザー数を表示します
+ * @type {ReactClass}
+ * @type {*|Function}
+ */
 export let CommentUserPlusCountNode = React.createClass( {
   propType: {
     total: React.PropTypes.number.isRequired

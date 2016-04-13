@@ -17,13 +17,19 @@ let _symbol = Symbol();
 let _instance = null;
 
 /**
- * コメント返信フォームの open, close, sending, complete を通知します。
+ * 設定
+ * ユーザー情報更新の custom Event
+ * - ACCOUNT_COMPLETE
+ * - ACCOUNT_ERROR
+ * - INTEREST_COMPLETE
+ * - INTEREST_ERROR
  * @example
- * var replyStatus = ReplyStatus.factory();
+ * var settingsStatus = SettingsStatus.factory();
  */
 export class SettingsStatus extends EventDispatcher {
   /**
-   * コメント返信フォームの open, close, sending, complete を通知します。
+   * 設定
+   * ユーザー情報更新の custom Event
    *
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {ReplyStatus} ReplyStatus instance を返します

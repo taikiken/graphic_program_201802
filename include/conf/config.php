@@ -8,7 +8,7 @@ $LOCALDIRECTORY="ut";
 
 $MAILFROM="psychsa@gmail.com";
 $MAILTO="psychsa@gmail.com";
-$DBNAME="ut3";
+
 $DB="postgre";
 $DBUSR="ut";
 $DBPWD="ut";

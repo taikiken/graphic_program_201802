@@ -141,9 +141,6 @@ export let CommentMenuNode = React.createClass( {
         break;
 
       case 'fail':
-        this.activateBodyClick();
-        break;
-
       default:
         this.activateBodyClick();
         break;

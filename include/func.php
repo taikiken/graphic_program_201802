@@ -429,9 +429,9 @@ function mod_HTML($str,$rua=0){
 	$str=stripslashes($str);
 	//$str=addslashes($str);
 	if($rua==0){
-		$str=htmlspecialchars($str);
+		//$str=htmlspecialchars($str);
 	}elseif($rua==1){
-		$str=htmlspecialchars($str);
+		//$str=htmlspecialchars($str);
 		$str=auto_link($str);
 		$str=ereg_replace("\n","<br>",$str);
 		
@@ -443,7 +443,7 @@ function mod_HTML($str,$rua=0){
 		$str=strip_tags($str);
 		$str=ereg_replace("\r\n","\n",$str);
 		$str=ereg_replace("\r","\n",$str);
-		$str=htmlspecialchars($str);
+		//$str=htmlspecialchars($str);
 		//$str=ereg_replace("\n","\\n",$str);
 	}else{
 		
@@ -567,6 +567,7 @@ function data_sql($q="^p_"){
 					//$v=ctx($v,2);
 				}
 				$v=str_replace("'","''",$v);
+				$v=html_entity_decode($v);
 				$v=sprintf("'%s'",$v);
 			}else{
 				$v="null";

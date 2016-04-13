@@ -79,10 +79,11 @@ if($y["status"]["code"]===200){
 			$s=set_userinfo($f,1);
 			
 		}else{
-			$y["status"]["user_message"]="";
+			$y["status"]["code"]=404;
+			$y["status"]["user_message"]=sprintf("%sでのユーザ登録がございません。",ucfirst($service));
 			$s=(object)$s;
 		}
-	}			
+	}
 }else{
 	$s=(object)$s;
 }

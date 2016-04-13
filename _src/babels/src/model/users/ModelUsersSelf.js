@@ -17,7 +17,8 @@ import {UserDae} from '../../dae/UserDae';
 import {Result} from '../../data/Result';
 
 /**
- * 自分の情報
+ * マイページの表示に利用
+ * 自分の情報を取得します
  */
 export class ModelUsersSelf extends Model {
   /**
