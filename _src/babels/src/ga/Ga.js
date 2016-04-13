@@ -40,7 +40,7 @@ export class Ga {
   // ---------------------------------------------------
   /**
    * 送信予約
-   * @param {GaData} data
+   * @param {GaData} data 送信するデータ
    */
   static add( data:GaData ):void {
     _requests.push( data );
