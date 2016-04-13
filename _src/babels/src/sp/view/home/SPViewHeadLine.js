@@ -19,6 +19,7 @@ import {View} from '../../../view/View';
 
 // app
 import {Empty} from '../../../app/const/Empty';
+import {MediaType} from '../../../app/const/MediaType';
 // import {User} from '../../../app/User';
 
 // dae
@@ -86,10 +87,19 @@ export class SPViewHeadLine extends ViewHeadline {
           return !label ? '' : <span className="category-label">{label}</span>;
         };
 
+        let playMark = (mediaType) => {
+          if (mediaType === MediaType.VIDEO) {
+            return <img src={Empty.VIDEO_PICKUP_PLAY} alt="" className="post-thumb-overlay-movie type-movie"/>;
+          } else {
+            // return <img src={Empty.VIDEO_PICKUP_PLAY} alt="" className="post-thumb-overlay-movie type-movie"/>;
+            return null;
+          }
+        };
+
         return (
           <div className="hero-sec">
             <a href={dae.url}>
-              <img src={thumbnail} alt=""/>
+              <figure className="post-thumb-headline"><img src={thumbnail} alt=""/>{playMark(dae.mediaType)}</figure>
               <div className="post-overview">
                 <h2 className="post-heading">{dae.title}</h2>
                 <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
@@ -118,7 +128,8 @@ export class SPViewHeadLine extends ViewHeadline {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
-        thumbnail: React.PropTypes.string.isRequired
+        thumbnail: React.PropTypes.string.isRequired,
+        mediaType: React.PropTypes.string.isRequired
       },
       getDefaultPropTypes: function() {
         return {
@@ -132,10 +143,19 @@ export class SPViewHeadLine extends ViewHeadline {
           return !label ? '' : <span className="category-label">{label}</span>;
         };
 
+        let playMark = (mediaType) => {
+          if (mediaType === MediaType.VIDEO) {
+            return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
+          } else {
+            // return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
+            return null;
+          }
+        };
+
         return (
           <li className={'board-item board-item-' + p.index}>
             <a className="post" href={p.url}>
-              <figure className="post-thumb"><img src={p.thumbnail} alt={p.title}/></figure>
+              <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(p.mediaType)}</figure>
               <div className="post-data">
                 <h3 className='post-heading'>{p.title}</h3>
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
@@ -204,6 +224,7 @@ export class SPViewHeadLine extends ViewHeadline {
                       date={dae.displayDate}
                       title={dae.title}
                       thumbnail={thumbnail}
+                      mediaType={dae.mediaType}
                     />;
 
                   } )

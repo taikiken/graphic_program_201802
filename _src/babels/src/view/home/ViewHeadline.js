@@ -14,6 +14,7 @@
 // app
 // import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
+import {MediaType} from '../../app/const/MediaType';
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
 
@@ -139,21 +140,21 @@ export class ViewHeadline extends View {
     // this.showError( error.message );
 
   }
-  /**
-   * ViewError でエラーコンテナを作成します
-   * @param {string} message エラーメッセージ
-   */
-  showError( message:string = '' ):void {
-
-    message = Safety.string( message, '' );
-
-    /*
-    // ToDo: Error 時の表示が決まったら変更する
-    let error = new ViewError( this.element, this.option, message );
-    error.render();
-    */
-
-  }
+  // /**
+  //  * ViewError でエラーコンテナを作成します
+  //  * @param {string} message エラーメッセージ
+  //  */
+  // showError( message:string = '' ):void {
+  //
+  //   message = Safety.string( message, '' );
+  //
+  //   /*
+  //   // ToDo: Error 時の表示が決まったら変更する
+  //   let error = new ViewError( this.element, this.option, message );
+  //   error.render();
+  //   */
+  //
+  // }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
@@ -174,7 +175,8 @@ export class ViewHeadline extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
-        thumbnail: React.PropTypes.string.isRequired
+        thumbnail: React.PropTypes.string.isRequired,
+        mediaType: React.PropTypes.string.isRequired
       },
       getDefaultPropTypes: function() {
         return {
@@ -188,10 +190,19 @@ export class ViewHeadline extends View {
           return !label ? '' : <span className="category-label">{label}</span>;
         };
 
+        let playMark = (mediaType) => {
+          if (mediaType === MediaType.VIDEO) {
+            return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
+          } else {
+            // return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
+            return null;
+          }
+        };
+
         return (
           <li className={'board-item board-item-' + p.index}>
             <a className="post" href={p.url}>
-              <figure className="post-thumb"><img src={p.thumbnail} alt={p.title}/></figure>
+              <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(this.props.mediaType)}</figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
                 <h3 className='post-heading'>{p.title}</h3>
@@ -259,6 +270,7 @@ export class ViewHeadline extends View {
                     date={dae.displayDate}
                     title={dae.title}
                     thumbnail={thumbnail}
+                    mediaType={dae.mediaType}
                   />;
 
                 } )
