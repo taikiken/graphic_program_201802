@@ -33,12 +33,14 @@ export class SPViewSingle extends ViewSingle {
    * @param {Number} id 記事 id
    * @param {Element} element 日付とかインサートする element
    * @param {Element} visualElement メインビジュアルよう element
+   * @param {Element} bannerElement メインビジュアルよう element
    * @param {Object} [option={}] callback をセットした Object
    */
-  constructor( id:Number, element:Element, visualElement:Element, option:Object = {} ) {
+  constructor( id:Number, element:Element, visualElement:Element, bannerElement:Element, option:Object = {} ) {
     super( id, element, { related: null, footer: null }, option );
     this._visualElement = visualElement;
     this._visual = null;
+    this._bannerElement = bannerElement;
   }
   /**
    * dom を render します
@@ -86,5 +88,13 @@ export class SPViewSingle extends ViewSingle {
     } else {
       this._visual.render( single );
     }
+  }
+
+  /**
+   * banner レンダリング
+   * @param single
+   */
+  banner( single:SingleDae ):void {
+
   }
 }
