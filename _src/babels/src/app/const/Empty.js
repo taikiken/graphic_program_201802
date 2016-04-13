@@ -87,7 +87,7 @@ export class Empty {
   /**
    * video play button overlay【16 x 9】<br>
    * [Ex.] sidebar video...
-   * @return {string} 代替画像パス【小】【16 x 9】
+   * @return {string} Video Play画像パス【16 x 9】
    */
   static get VIDEO_PLAY():string {
 
@@ -95,13 +95,33 @@ export class Empty {
 
   }
   /**
+   * video play button overlay【640 x 400】<br>
+   * [Ex.] pickup video...
+   * @return {string} Video Play画像パス【Pickup】【640 x 400】
+   */
+  static get VIDEO_PICKUP_PLAY():string {
+
+    return '/assets/images/common/thumb-640x400-play.png';
+
+  }
+  /**
    * video play button overlay sidebar small【16 x 9】<br>
    * [Ex.] sidebar video...
-   * @return {string} 代替画像パス【小】【16 x 9】
+   * @return {string} Video Play画像パス【小】【16 x 9】
    */
   static get VIDEO_PLAY_SMALL():string {
 
     return '/assets/images/common/thumb-16x9-play-s.png';
+
+  }
+  /**
+   * video play button overlay sidebar small【1 x 1】<br>
+   * [Ex.] headline video...
+   * @return {string} Video Play画像パス【小】【1x1】
+   */
+  static get VIDEO_PLAY_SMALL_1X1():string {
+
+    return '/assets/images/common/thumb-1x1-play-s.png';
 
   }
   /**
