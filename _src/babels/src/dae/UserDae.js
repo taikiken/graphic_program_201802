@@ -129,4 +129,14 @@ export class UserDae {
   get interest():InterestDae {
     return this._interest;
   }
+
+  // --------------------------------------------------------------------
+  // banner
+  /**
+   * ユーザー・バナー
+   * @return {BannersDae} response.user.banner を返します
+   */
+  get banner():BannersDae {
+    return this._banners;
+  }
 }

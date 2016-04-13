@@ -32,7 +32,7 @@ export let BannerNode = React.createClass( {
   },
   render: function() {
     let banner = this.props.banner;
-
+    // console.log( 'banner ', banner );
     if ( typeof banner.text === 'undefined' || typeof banner.image === 'undefined' || typeof banner.link === 'undefined' ) {
       return null;
     }

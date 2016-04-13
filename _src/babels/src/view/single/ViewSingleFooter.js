@@ -65,12 +65,13 @@ export class ViewSingleFooter extends View {
 
         let single = this.state.single;
         let keywords = single.keywords;
+        let pc = single.user.banner.pc;
 
         if ( keywords.hasKeyword ) {
 
           return (
             <div className="post-footer">
-              <BannerNode banner={this.props.single.user.banner} />
+              <BannerNode banner={pc} />
               {/* TAGS */}
               <div className="post-tags">
                 <h2 className="post-tags-heading">TAGS</h2>
@@ -94,7 +95,11 @@ export class ViewSingleFooter extends View {
 
         } else {
 
-          return null;
+          return (
+            <div className="post-footer">
+              <BannerNode banner={pc} />
+            </div>
+          );
 
         }
 

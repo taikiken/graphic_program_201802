@@ -84,7 +84,7 @@ export class SPSingle {
 
     if ( singleHeaderElement !== null ) {
       // console.log( 'start sp single header' );
-      let single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual() );
+      let single = new UT.sp.view.SPViewSingle( articleId, singleHeaderElement, Dom.visual(), Dom.userBanner() );
       _viewSingle = single;
       single.on( UT.view.View.BEFORE_RENDER, SPSingle.before );
       single.start();
