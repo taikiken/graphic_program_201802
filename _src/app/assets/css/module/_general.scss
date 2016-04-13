@@ -515,6 +515,18 @@
 
 
 
+// sponsor-link
+// 広告の横幅728px問題、暫定対応
+.sponsor-link {
+  &.w728 {
+    position: relative;
+    left: -9px;
+    width: 728px;
+  }
+}
+
+
+
 
 // mod-btnB01
 .mod-btnB01 {
