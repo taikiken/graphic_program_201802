@@ -7,7 +7,8 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$s=$_POST["s"];
+$s=trim($_POST["s"]);
+$s=str_replace(array("＞","＜"),array(">","<"),$s);
 $o->query($s);
 
 while($f=$o->fetch_array()){

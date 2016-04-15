@@ -1,7 +1,9 @@
 <?php
 
 if(getenv("REMOTE_ADDR")!="127.0.0.1"){
-	
+
+	$staticfileimport=0;
+	$servername=$_SERVER["SERVER_NAME"];
 	$filename=$_SERVER['SCRIPT_FILENAME'].$_SERVER['REQUEST_URI'];
 	
 	if(preg_match("/editdm|write|batch|password/",$filename)){
@@ -9,18 +11,18 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	}else{
 		$DBHOST="undo-prod-replica-c1.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
 	}
-	
-	if(preg_match("/dev2/",$_SERVER["SERVER_NAME"])){
+		
+	if(preg_match("/dev2/",$servername)){
 		
 		$DBNAME="ut_dev2";
 		$SERVERPATH="/var/www/undotsushin.com/dev/public";
 		$USERS="/var/www/undotsushin.com/dev/public/users";
-		
+
 		$domain="http://dev2.undotsushin.com";
-		$ImgPath="https://www.undotsushin.com";
-		$UserImgPath="https://www.undotsushin.com";
+		$ImgPath="http://dev2.undotsushin.com";
+		$UserImgPath="http://dev2.undotsushin.com";
 		
-	}elseif(preg_match("/dev/",$_SERVER["SERVER_NAME"])){
+	}elseif(preg_match("/dev/",$servername)){
 		
 		$DBNAME="ut_dev";
 		$DBHOST="undo-dev.czcktm8wufta.ap-northeast-1.rds.amazonaws.com";
@@ -32,7 +34,7 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 		$ImgPath="http://dev.undotsushin.com";
 		$UserImgPath="http://dev.undotsushin.com";
 
-	}elseif(preg_match("/stg/",$_SERVER["SERVER_NAME"])){
+	}elseif(preg_match("/stg/",$servername)){
 		
 		$DBNAME="ut0";
 		$SERVERPATH="/var/www/undotsushin.com/stg/public";
@@ -44,13 +46,15 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 		
 	}else{
 		
+		$staticfileimport=1;
+		
 		$DBNAME="ut0";
 		$SERVERPATH="/var/www/undotsushin.com/www/public";
 		$USERS="/var/www/undotsushin.com/www/public/users";
 
 		$domain="https://www.undotsushin.com";
 		$ImgPath="https://www.undotsushin.com";
-		$UserImgPath=$ImgPath;
+		$UserImgPath="https://www.undotsushin.com";
 	}
 	
 	$SQLLOG="/var/www/data/log/ut_sqllog.txt";
@@ -61,10 +65,13 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 
 }else{
 	
+	$staticfileimport=1;
+	
 	$DBNAME="ut";
 	$DBUSR="ut";
 	$DBPWD="ut";
 	$DBHOST="localhost";
+	$DBPORT=5433;
 	
 	$SERVERPATH="d:/apache/htdocs/tmp/ut";
 	$USERS="d:/apache/htdocs/tmp/ut/users";

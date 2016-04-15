@@ -216,7 +216,7 @@ function set_articleinfo($f,$type=0){
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 
-	$s["user"]=set_userinfo($f);
+	$s["user"]=set_userinfo($f,0);
 
 	return $s;
 }
@@ -255,14 +255,14 @@ function set_commentinfo($f,$type,$reply=0){
 		$s["url"]=sprintf("%s/%s/%s/comment/%s/%s",$domain,"p",$f["pageid"],$reply,$f["id"]);
 	}
 	//$s["url"]=sprintf("%s/%s/%s/comment/%s%s",$domain,"p",$f["pageid"],$reply==""?"":sprintf("/%s",$reply),$f["id"]);
-	$s["user"]=set_userinfo($f);
+	$s["user"]=set_userinfo($f,0);
 	
 	return $s;
 }
 
-function set_userinfo($f,$interestset=0,$appexp=0){
+function set_userinfo($f,$interestset){
 	
-	global $UserImgPath,$domain;
+	global $UserImgPath,$domain,$banner;
 	
 	/* String型 */
 	$s["id"]=$f["userid"];
@@ -292,6 +292,9 @@ function set_userinfo($f,$interestset=0,$appexp=0){
 		$s["access_token"]=$f["token"];
 		$s["session_token"]="";
 	}
+	if($banner){
+		$s["banner"]=$banner;
+	}
 	
 	return $s;
 }
@@ -306,7 +309,7 @@ function set_activity($f){
 	$s["display_date"]=get_relativetime($datetime["relativetime"],$datetime["date"],$datetime["weekday"]);
 	$s["action"]=get_action($f["activity"],$f["activityid"]);
 
-	$s["user"]=set_userinfo($f);
+	$s["user"]=set_userinfo($f,0);
 
 	$s["article"]["id"]=$f["pageid"];
 	$s["article"]["title"]=$f["title"];

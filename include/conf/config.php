@@ -24,10 +24,13 @@ include $INCLUDEPATH."conf/env.php";
 	3:FINEPLAY
 	4:Facebook navi
 	5:SPOZIUM
+	6:HUDDLE web
+	7:TBS「S☆1」
+	
 
 */
-$RELATEDLINK_ALLOWED=array(3);
-
+$RELATEDLINK_ALLOWED=array(3,8);
+$RELATEDBANNER_ALLOWED=array(7);
 
 $ADPATH="/editdm/";
 $TAGON=1;

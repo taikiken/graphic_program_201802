@@ -23,7 +23,7 @@ for($i=0;$i<count($ob);$i++){
 <li>抽出：<select class="exuser">
 <?php
 
-$sql="select id,(select name from repo where id=u_member.cid) as name,title from u_member where qid=2 and cid in(3,4,5) order by cid,n";
+$sql="select id,(select name from repo where id=u_member.cid) as name,title from u_member where cid in(3,4,5) and flag=1 order by cid,n";
 $o->query($sql);
 
 $c=!isset($_COOKIE["exuser"])?"":$_COOKIE["exuser"];
