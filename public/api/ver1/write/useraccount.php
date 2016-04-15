@@ -98,7 +98,7 @@ if(count($s)==0){
 	$o->query($sql);
 	$f=$o->fetch_array();
 
-	$s=set_userinfo($f);
+	$s=set_userinfo($f,0);
 }
 
 $y["response"]=$s;

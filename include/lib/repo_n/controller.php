@@ -76,6 +76,16 @@ if($q->get_dir()===0){
 				$p["t".$f["n"]]=$f["link"];
 				$p["b".$f["n"]]=$f["title"];
 			}
+		}elseif($g->f("rid")==2){
+			$sql=sprintf("select * from u_banner where cid=%s and type=1",$g->f("nid"));
+			$o->query($sql);
+			$f=$o->fetch_array();
+			
+			$p["alt"]=$f["alt"];
+			$p["pcimg"]=$f["pcimg"];
+			$p["pclink"]=$f["pclink"];
+			$p["spimg"]=$f["spimg"];
+			$p["splink"]=$f["splink"];
 		}
 		if($_POST["search"]==1){
 			data_conf();
@@ -136,6 +146,26 @@ if($q->get_dir()===0){
 		$sql=sprintf("select *,(select body from repo_body where pid=%s.id) as body from %s where id=%s",$TABLE,$TABLE,$g->f("nid"));
 		$o->query($sql);
 		$p=$o->fetch_array();
+
+		if($g->f("cid")==1){
+			$sql=sprintf("select title,link,n from u_link where pid=%s order by n",$g->f("nid"));
+			$o->query($sql);
+			while($f=$o->fetch_array()){
+				$p["t".$f["n"]]=$f["link"];
+				$p["b".$f["n"]]=$f["title"];
+			}
+		}elseif($g->f("rid")==2){
+			$sql=sprintf("select * from u_banner where cid=%s and type=1",$g->f("nid"));
+			$o->query($sql);
+			$f=$o->fetch_array();
+			
+			$p["alt"]=$f["alt"];
+			$p["pcimg"]=$f["pcimg"];
+			$p["pclink"]=$f["pclink"];
+			$p["spimg"]=$f["spimg"];
+			$p["splink"]=$f["splink"];
+		}
+
 	}elseif($q->get_file()===1){
 
 		data_conf();
