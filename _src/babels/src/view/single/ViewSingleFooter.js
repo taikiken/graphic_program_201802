@@ -17,6 +17,9 @@ import {SingleDae} from '../../dae/SingleDae';
 
 import {Url} from '../../app/const/Url';
 
+// node
+import {BannerNode} from '../../node/single/BannerNode';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -62,32 +65,41 @@ export class ViewSingleFooter extends View {
 
         let single = this.state.single;
         let keywords = single.keywords;
+        let pc = single.user.banner.pc;
 
         if ( keywords.hasKeyword ) {
 
           return (
-            <div className="post-tags">
-              <h2 className="post-tags-heading">TAGS</h2>
-              <ul className="post-tags-list">
-                {
-                  keywords.keywords.map( function( keyword, i ) {
+            <div className="post-footer">
+              <BannerNode banner={pc} />
+              {/* TAGS */}
+              <div className="post-tags">
+                <h2 className="post-tags-heading">TAGS</h2>
+                <ul className="post-tags-list">
+                  {
+                    keywords.keywords.map( function( keyword, i ) {
 
-                    return (
-                      <li key={'keyword-' + i} className="post-tags-item">
-                        {/* link は 検索パターンにしています */}
-                        <a href={Url.search( keyword )}>{keyword}</a>
-                      </li>
-                    );
+                      return (
+                        <li key={'keyword-' + i} className="post-tags-item">
+                          {/* link は 検索パターンにしています */}
+                          <a href={Url.search( keyword )}>{keyword}</a>
+                        </li>
+                      );
 
-                  } )
-                }
-              </ul>
+                    } )
+                  }
+                </ul>
+              </div>
             </div>
           );
 
         } else {
 
-          return null;
+          return (
+            <div className="post-footer">
+              <BannerNode banner={pc} />
+            </div>
+          );
 
         }
 

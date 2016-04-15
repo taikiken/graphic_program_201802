@@ -61,6 +61,7 @@
           }?>
         </div><!-- /.post-content -->
         <div id="post-content-read-more"></div>
+        <div id="post-content-banner"></div>
 
         <div class="post-sns_lower">
           <div class="post-sns-list">

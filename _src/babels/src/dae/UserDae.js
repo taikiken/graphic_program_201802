@@ -14,6 +14,8 @@
 import {TypeDae} from './user/TypeDae';
 import {InterestDae} from './user/InterestDae';
 
+import {BannersDae} from './banner/BannersDae';
+
 import {Safety} from '../data/Safety';
 
 /**
@@ -32,6 +34,8 @@ export class UserDae {
     this._user = user;
     this._type = new TypeDae( user.type );
     this._interest = new InterestDae( user.interest );
+    // banner 追加
+    this._banners = new BannersDae( user.banner );
 
   }
   // ---------------------------------------------------
@@ -124,5 +128,15 @@ export class UserDae {
    */
   get interest():InterestDae {
     return this._interest;
+  }
+
+  // --------------------------------------------------------------------
+  // banner
+  /**
+   * ユーザー・バナー
+   * @return {BannersDae} response.user.banner を返します
+   */
+  get banner():BannersDae {
+    return this._banners;
   }
 }

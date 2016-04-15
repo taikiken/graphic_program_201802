@@ -14,15 +14,24 @@
 // parent
 import {ViewSingle} from '../../view/ViewSingle';
 
+// data
+import {Safety} from '../../data/Safety';
+
 // view
 import {View} from '../../view/View';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';
 
+// node
+import {BannerNode} from '../../node/single/BannerNode';
+
 // sp
 import {SPViewSingleHeader} from './single/SPViewSingleHeader';
 import {SPViewSingleVisual} from './single/SPViewSingleVisual';
+
+// React
+let ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事詳細
@@ -33,12 +42,14 @@ export class SPViewSingle extends ViewSingle {
    * @param {Number} id 記事 id
    * @param {Element} element 日付とかインサートする element
    * @param {Element} visualElement メインビジュアルよう element
+   * @param {Element} bannerElement メインビジュアルよう element
    * @param {Object} [option={}] callback をセットした Object
    */
-  constructor( id:Number, element:Element, visualElement:Element, option:Object = {} ) {
+  constructor( id:Number, element:Element, visualElement:Element, bannerElement:Element, option:Object = {} ) {
     super( id, element, { related: null, footer: null }, option );
     this._visualElement = visualElement;
     this._visual = null;
+    this._bannerElement = bannerElement;
   }
   /**
    * dom を render します
@@ -52,7 +63,7 @@ export class SPViewSingle extends ViewSingle {
 
     this.header( single );
     this.visual( single );
-
+    this.banner( single );
   }
   /**
    * header 部レンダリング
@@ -86,5 +97,24 @@ export class SPViewSingle extends ViewSingle {
     } else {
       this._visual.render( single );
     }
+  }
+
+  /**
+   * banner レンダリング
+   * @param {SingleDae} single 記事 SingleDae instance
+   */
+  banner( single:SingleDae ):void {
+    // bannerElement をチェックします
+    if (!Safety.isElement(this._bannerElement)) {
+      return;
+    }
+    
+    ReactDOM.render(
+      <BannerNode
+        banner={single.user.banner.sp}
+        pc={false}
+      />,
+      this._bannerElement
+    );
   }
 }

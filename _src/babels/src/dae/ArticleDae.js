@@ -50,18 +50,7 @@ export class ArticleDae {
     this._user = new UserDae( article.user );
     // article.comments_popular
     this._popular = new CommentsPopularDae( article.comments_popular );
-
-    // Safety.check, object に key が存在しタイプがあっているかを調べます
-    // 0 になるのでコメントにします
-    // ToDo: 問題がないことを確認したらコメントブロックを削除する
-    // comments_count check
-    /*
-    if ( !Safety.check( article, 'comments_count', 'Number' ) ) {
-
-      article.comments_count = 0;
-
-    }
-    */
+    
     // 整数へ型変換
     let commentsCount = parseInt( article.comments_count, 10 );
     // 数値を保証
