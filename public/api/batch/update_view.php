@@ -6,37 +6,34 @@ include $INCLUDEPATH."local.php";
 
 if($_GET["p"]){
 
-	$server=array();
-	$server[0]="localhost";
-	$server[1]="52.192.238.87";
-	$server[2]="52.193.228.54";
+	$server=array();	
+	if(preg_match("/cms/",$servername)){
+		$server[]="52.192.238.87";
+		$server[]="52.193.228.54";
+	}elseif(preg_match("/(dev|dev2|stg)/",$servername)){
+		$server[]="52.69.203.137";
+	}else{
+		$server[]="localhost";
+	}
 	
 	$o=new db;
 	$o->connect();
 	
 	$s=array();
-	$fp=fopen(sprintf("http://%s/api/batch/output_log.php",$server[1]),"r");
-	while($f=fgetcsv($fp,1024,"\t")){
-		if(strtotime($f[4])>strtotime('-30 day')){
-			$y=sprintf("%s|%s|%s|%s|%s",$f[0],$f[1],$f[2],$f[3],$f[4]);
-			if($s[$y]){
-				$s[$y]++;
-			}else{
-				$s[$y]=1;
-			}
-		}	
+	
+	for($i=0;$i<count($server);$i++){
+		$fp=fopen(sprintf("http://%s/api/batch/output_log.php",$server[$i]),"r");
+		while($f=fgetcsv($fp,1024,"\t")){
+			if(strtotime($f[4])>strtotime('-30 day')){
+				$y=sprintf("%s|%s|%s|%s|%s",$f[0],$f[1],$f[2],$f[3],$f[4]);
+				if($s[$y]){
+					$s[$y]++;
+				}else{
+					$s[$y]=1;
+				}
+			}	
+		}
 	}
-	$fp=fopen(sprintf("http://%s/api/batch/output_log.php",$server[2]),"r");
-	while($f=fgetcsv($fp,1024,"\t")){
-		if(strtotime($f[4])>strtotime('-30 day')){
-			$y=sprintf("%s|%s|%s|%s|%s",$f[0],$f[1],$f[2],$f[3],$f[4]);
-			if($s[$y]){
-				$s[$y]++;
-			}else{
-				$s[$y]=1;
-			}
-		}	
-	}	
 
 	/*
 		TSVテキストの内容
@@ -54,6 +51,7 @@ if($_GET["p"]){
 	$sqla[]="update u_view set m1=t.m1,m2=t.m2 from (select t2.id,t2.m1,t2.m2 from (select m1,m2,pageid from u_view) as t1,(select m1,m2,id from repo_n) as t2 where t1.pageid=t2.id and (t1.m1!=t2.m1 or t2.m2!=t2.m2)) as t where u_view.pageid=t.id;";
 	$sql=implode("\n",$sql);
 	$o->query($sql);
+
 }
 
 ?>
