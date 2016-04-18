@@ -393,11 +393,7 @@ function get_img($img,$id){
 	
 	for($i=0;$i<count($path);$i++){
 		if(strlen($img)==0){
-			if($i!=3){
 				$s[$type[$i]]=sprintf("%s/prg_img/%s/%s",$ImgPath,$path[$i],$defimg);
-			}else{
-				$s[$type[$i]]="";
-			}
 		}else{
 			if(!preg_match("/http/",$img)){
 				$s[$type[$i]]=sprintf("%s/prg_img/%s/%s",$ImgPath,$path[$i],$img);
