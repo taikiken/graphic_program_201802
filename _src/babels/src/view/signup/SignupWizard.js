@@ -66,12 +66,12 @@ export class SignupWizard extends View {
 
     // get categories by model
     // 処理一貫性のため ModelCategories を使い取得
-    let boundError = this.error.bind( this );
+    // let boundError = this.error.bind( this );
     let callbacks = {};
     this._callbacks = callbacks;
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
-    callbacks[ Model.UNDEFINED_ERROR ] = boundError;
-    callbacks[ Model.RESPONSE_ERROR ] = boundError;
+    // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
+    // callbacks[ Model.RESPONSE_ERROR ] = boundError;
     this._action = new ModelCategories( callbacks );
 
     // SignupStatus instance
@@ -105,15 +105,15 @@ export class SignupWizard extends View {
 
     this.render( result, this._step );
   }
-  /**
-   * Ajax response error
-   * @param {Error} error Error instance
-   */
-  error( error:Error ):void {
-
-    // console.log( 'Signup complete', error );
-
-  }
+  // /**
+  //  * Ajax response error
+  //  * @param {Error} error Error instance
+  //  */
+  // error( error:Error ):void {
+  //
+  //   // console.log( 'Signup complete', error );
+  //
+  // }
   /**
    * Dom 作成(rendering)を開始します
    * @param {CategoriesDae} categoriesDae カテゴリー一覧, 興味のある競技表示に使用します
@@ -272,14 +272,22 @@ export class SignupWizard extends View {
     event.returnValue = Message.UNLOAD;
   }
 
+  // /**
+  //  * HashChangeEvent event handler, hash が変更された後に呼び出されます
+  //  * @param {HashChangeEvent} event HashChangeEvent instance
+  //  */
+  // onHash( event:HashChangeEvent ):void {
+  //   // let hash = event.newURL.split( '/' ).pop();
+  //   let hash = Loc.hash;
+  //   // console.log( 'wizard onHash, ', hash, event );
+  //   let step = Url.signupStepByHash( hash );
+  //   this._status.step( step );
+  // }
   /**
    * HashChangeEvent event handler, hash が変更された後に呼び出されます
-   * @param {HashChangeEvent} event HashChangeEvent インsたんcえinstance
    */
-  onHash( event:HashChangeEvent ):void {
-    // let hash = event.newURL.split( '/' ).pop();
+  onHash():void {
     let hash = Loc.hash;
-    // console.log( 'wizard onHash, ', hash, event );
     let step = Url.signupStepByHash( hash );
     this._status.step( step );
   }
@@ -333,11 +341,11 @@ export class SignupWizard extends View {
    * API `/api/v1/sessions/social` を行います
    */
   socialRequest():void {
-    let boundFail = this.socialFail.bind( this );
+    // let boundFail = this.socialFail.bind( this );
     let callback = {};
     callback[ Model.COMPLETE ] = this.socialDone.bind( this );
-    callback[ Model.UNDEFINED_ERROR ] = boundFail;
-    callback[ Model.RESPONSE_ERROR ] = boundFail;
+    // callback[ Model.UNDEFINED_ERROR ] = boundFail;
+    // callback[ Model.RESPONSE_ERROR ] = boundFail;
 
     let model = new ModelSocial( callback );
     model.start();
@@ -370,15 +378,13 @@ export class SignupWizard extends View {
     }
 
   }
-
-  /**
-   * API `/api/v1/sessions/social` error
-   * @param {Object} error エラーメッセージ
-   */
-  socialFail( error:Object ):void {
-    // console.log( 'Social error ', error );
-  }
-
+  // /**
+  //  * API `/api/v1/sessions/social` error
+  //  * @param {Object} error エラーメッセージ
+  //  */
+  // socialFail( error:Object ):void {
+  //   // console.log( 'Social error ', error );
+  // }
   /**
    * API `/api/v1/sessions/social` 成功後 step 2 へ移動します
    * @param {UserDae} userDae ユーザー情報
