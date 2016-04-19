@@ -54,7 +54,7 @@ function baseball_mapping($f){
 function relatedlink($link,$id=0){
 	
 	$s=array();
-	$n=count($link["li"]);	
+	$n=count($link["li"]);
 	for($i=0;$i<$n;$i++){
 		
 		$title=bind($link["li"][$i]["@attributes"]["url"]);

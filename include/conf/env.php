@@ -58,6 +58,7 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	}
 	
 	$SQLLOG="/var/www/data/log/ut_sqllog.txt";
+	$CMSLOG="/var/www/data/log/ut_cmslog.txt";
 	$LOGTXT="/var/www/data/log/ut_log.txt";
 	$LOGIN="/var/www/data/log/ut_login.txt";
 	$ACLOGTXT="/var/www/data/log/ut_article_access.txt";
@@ -79,6 +80,7 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	$LOGTXT="d:/log/ut/log.txt";
 	$ACLOGTXT="d:/log/ut/ut_article_access.txt";
 	$SQLLOG="d:/log/ut/ut_sqllog.txt";
+	$CMSLOG="d:/log/ut/ut_cmslog.txt";
 
 	$domain="https://www.undotsushin.com";
 	$ImgPath="https://www.undotsushin.com";
