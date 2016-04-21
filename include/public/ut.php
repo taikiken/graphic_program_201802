@@ -579,7 +579,7 @@ function print_json($y,$r){
 		print_r(json_encode($y,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 	}else{
 		header('Content-Type: application/json; charset=utf-8');
-		echo json_encode($y);
+		echo json_encode($y,JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 	}	
 }
 

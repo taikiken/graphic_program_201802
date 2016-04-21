@@ -63,7 +63,8 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	$LOGIN="/var/www/data/log/ut_login.txt";
 	$ACLOGTXT="/var/www/data/log/ut_article_access.txt";
 	$IMGP="/var/www/data/img/";
-
+	$RSS="/var/www/data/rss/";
+	
 }else{
 	
 	$staticfileimport=1;
@@ -72,7 +73,7 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	$DBUSR="ut";
 	$DBPWD="ut";
 	$DBHOST="localhost";
-	$DBPORT=5433;
+	$DBPORT=5432;
 	
 	$SERVERPATH="d:/apache/htdocs/tmp/ut";
 	$USERS="d:/apache/htdocs/tmp/ut/users";
@@ -85,7 +86,8 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	$domain="https://www.undotsushin.com";
 	$ImgPath="https://www.undotsushin.com";
 	$UserImgPath=$ImgPath;
-	$LOGIN="/var/www/data/log/ut_login.txt";
+	$LOGIN="d:/log/ut/ut_login.txt";
+	$RSS="d:/log/ut/rss/";
 }
 
 
