@@ -46,12 +46,12 @@ export class ViewSettingsIndex extends View {
     super( element, option );
 
     // アカウント情報
-    let boundError = this.error.bind( this );
+    // let boundError = this.error.bind( this );
     let callbacks = {};
     this._callbacks = callbacks;
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
-    callbacks[ Model.UNDEFINED_ERROR ] = boundError;
-    callbacks[ Model.RESPONSE_ERROR ] = boundError;
+    // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
+    // callbacks[ Model.RESPONSE_ERROR ] = boundError;
     this._action = new ModelAccount( callbacks );
 
     let status = SettingsStatus.factory();
@@ -70,14 +70,13 @@ export class ViewSettingsIndex extends View {
   complete( result:UserDae ):void {
     this.render( result );
   }
-  /**
-   * Ajax response error
-   * @param {Error} error Error instance
-   */
-  error( error ):void {
-    // console.warn( 'setting index error ', error );
-  }
-
+  // /**
+  //  * Ajax response error
+  //  * @param {Error} error Error instance
+  //  */
+  // error( error ):void {
+  //   // console.warn( 'setting index error ', error );
+  // }
   /**
    * form 出力
    * @param {UserDae} dae アカウント情報

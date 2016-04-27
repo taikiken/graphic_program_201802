@@ -246,6 +246,13 @@ export class Dom {
   static readMore():Element {
     return Dom.get( 'post-content-read-more' );
   }
+  /**
+   * 記事詳細のユーザーバナー
+   * @return {Element} post-content-banner を返します
+   */
+  static userBanner():Element {
+    return Dom.get( 'post-content-banner' );
+  }
   // --------------------------------------
   /**
    * signup 新規登録

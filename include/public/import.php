@@ -22,10 +22,12 @@ $exword[]="バトル";
 $exword[]="くらし・趣味";
 $exword[]="トラベル";
 $exword[]="国際";
+$exword[]="インタビュー";
 $exword[]="ヨーロッパ";
 $exword[]="ロシア";
 $exword[]="試合結果サマリー";
 $exword[]="本紙面（総合ニュース）";
+$exword[]="海外ニュース";
 
 $baseball=array("ヤクルト","巨人","阪神","広島","中日","DeNA","ソフトバンク","日本ハム","ロッテ","西武","オリックス","楽天");
 
@@ -47,6 +49,25 @@ function baseball_mapping($f){
 		$e=array_values($e);
 	}
 	return $e;
+}
+
+function relatedlink($link,$id=0){
+	
+	$s=array();
+	$n=count($link["li"]);
+	for($i=0;$i<$n;$i++){
+		
+		$title=bind($link["li"][$i]["@attributes"]["url"]);
+		$url=bind(str_replace("]>","]",$link["li"][$i]["@attributes"]["title"]));
+		
+		if($id==0){
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
+		}else{	
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s where not exists (select*from u_link where pid=%s and n=%s);",$id,$title,$url,($i+1),$id,($i+1));
+			$s[]=sprintf("update u_link set title='%s',url='%s' where not exists (select * from u_link where title='%s' and url='%s') and cid=%s and n=%s;",$title,$url,$title,$url,$id,($i+1));
+		}
+	}
+	return implode("\n",$s);
 }
 
 function is_tag($a,$b){
@@ -199,12 +220,10 @@ function getfileinfo($i){
 }
 
 function outimg($oimg){
-
-	if(getenv("REMOTE_ADDR")!="127.0.0.1"){
-		$imgp="/var/www/undotsushin.com/www/public/prg_img/";
-	}else{
-		$imgp="D:/Apache/htdocs/tmp/ut/prg_img/";
-	}
+	
+	global $SERVERPATH;
+	$imgp=$SERVERPATH."/prg_img/";
+	
 	$img=file_get_contents($oimg);
 	$fl=getfileinfo($oimg);
 	file_put_contents(sprintf("%sraw/%s",$imgp,$fl[0]),$img);

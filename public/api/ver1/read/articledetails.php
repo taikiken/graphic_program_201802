@@ -13,6 +13,30 @@ $f=set_article($id,$uid);
 
 if($y["status"]["code"]===200){
 	
+	//媒体バナー
+	if(in_array($f["userid"],$RELATEDBANNER_ALLOWED)){
+		
+		$sql=sprintf("select * from u_banner where cid=%s",$f["userid"]);
+		$o->query($sql);
+		$b=$o->fetch_array();
+				
+		if(strlen($b["pcimg"])>0||strlen($b["spimg"])>0){
+			$banner["pc"]["text"]=$b["alt"];
+			$banner["pc"]["image"]=strlen($b["pcimg"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$b["pcimg"]):"";
+			$banner["pc"]["link"]=checkstr($b["pclink"]);
+			$banner["sp"]["text"]=$b["alt"];
+			$banner["sp"]["image"]=strlen($b["spimg"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$b["spimg"]):"";
+			$banner["sp"]["link"]=checkstr($b["splink"]);
+		}
+	}else{
+	  $banner["pc"]["text"]="";
+	  $banner["pc"]["image"]="";
+	  $banner["pc"]["link"]="";
+	  $banner["sp"]["text"]="";
+	  $banner["sp"]["image"]="";
+	  $banner["sp"]["link"]="";	
+	}
+	
 	$s=set_articleinfo($f,1);
 	
 	//ランキングは外部処理にしたい

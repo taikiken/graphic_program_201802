@@ -41,6 +41,4 @@ $s[]=sprintf("update u_latestpost set pageid=%s,num=%s where m1=0;",$id,$num);
 $s=implode("\n",$s);
 $o->query($s);
 
-
-
 ?>

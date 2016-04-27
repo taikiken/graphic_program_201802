@@ -265,7 +265,7 @@ function set_condition($q){
 		return;
 	}
 	
-	$exclusiveword=array("\r","\n","\t","＝","…","！","。","／","…","～","|",":",";","(",")","（","）","【","】","＞","＜","「","」","『","』","[","]","〈","〉","“","”","《","》","^");
+	$exclusiveword=array("\r","\n","\t");
 	$splitword=array(" ","　","|","、");
 	
 	$q=urldecode($q);

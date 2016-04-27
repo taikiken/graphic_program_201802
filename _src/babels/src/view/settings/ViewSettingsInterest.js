@@ -42,12 +42,12 @@ export class ViewSettingsInterest extends View {
     super( element, option );
 
     // アカウント情報
-    let boundError = this.error.bind( this );
+    // let boundError = this.error.bind( this );
     let callbacks = {};
     this._callbacks = callbacks;
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
-    callbacks[ Model.UNDEFINED_ERROR ] = boundError;
-    callbacks[ Model.RESPONSE_ERROR ] = boundError;
+    // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
+    // callbacks[ Model.RESPONSE_ERROR ] = boundError;
     this._action = new ModelInterest( callbacks );
 
     let status = SettingsStatus.factory();
@@ -66,13 +66,13 @@ export class ViewSettingsInterest extends View {
   complete( result:CategoriesDae ):void {
     this.render( result );
   }
-  /**
-   * Ajax response error
-   * @param {Error} error Error instance
-   */
-  error( error ):void {
-    // console.warn( 'setting interest error', error );
-  }
+  // /**
+  //  * Ajax response error
+  //  * @param {Error} error Error instance
+  //  */
+  // error( error ):void {
+  //   // console.warn( 'setting interest error', error );
+  // }
   /**
    * form 出力
    * @param {CategoriesDae} dae 興味のあるカテゴリー

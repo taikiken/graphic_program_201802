@@ -29,7 +29,7 @@ function modptag($s){
 }
 
 $registerd=array();
-$sql="select t7 from repo_n where (now() - interval '1 day')::date=date(m_time) and d2=4;";
+$sql="select t7 from repo_n where d2=4 and m_time::date=(now() - interval '1 day')::date;";
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$registerd[]=$f["t7"];
@@ -65,6 +65,7 @@ while($f=fgetcsv($fp,1024)){
 		
 		$body=modptag($w["description"]);
 		
+		$w["timestamp"]=date("Y-m-d H:i:s",strtotime($w["timestamp"]." + 9hour"));
 		$s["m_time"]=bind($w["timestamp"]);
 		$s["u_time"]=bind($w["timestamp"]);
 		$s["a_time"]=bind($w["timestamp"]);
@@ -89,16 +90,18 @@ while($f=fgetcsv($fp,1024)){
 		}
 		
 		if(!in_array($s["t7"],$registerd)){
+			
+			unset($sqla);
+			
 			$sqla[]=makesql($s,0);
 			$sqla[]=sprintf("insert into repo_body(id,pid,body) values(nextval('repo_body_id_seq'),currval('repo_n_id_seq'),'%s');",$body);
+			
+			$sqla=implode("\n",$sqla);
+			$o->query($sqla);
+
 		}
 	}	
 }
-
-$sqla=implode("\n",$sqla);
-$o->query($sqla);
-
-
 
 
 ?>

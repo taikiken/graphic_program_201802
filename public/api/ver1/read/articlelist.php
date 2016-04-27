@@ -34,7 +34,7 @@ if(strlen($api)>0){
 */
 		}elseif($type==="ranking"){
 			
-			if($offset==0&&$length==5){
+			if($staticfileimport==1&&$offset==0&&$length==5){
 				
 				$file=sprintf("%s/api/ver1/static/%s-%s.json",$SERVERPATH,$category,$type);
 				$y=file_get_contents($file);
@@ -44,7 +44,7 @@ if(strlen($api)>0){
 				
 			}else{
 			
-				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '3 day' order by n desc limit 50 offset 0) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
+				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '3 day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
 				str_replace(" and","",$c[1]),sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '3 day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
 				str_replace(" and","",$c[1]),sprintf($articletable2c,$c[1],"",""),"");
@@ -56,7 +56,7 @@ if(strlen($api)>0){
 */
 		}elseif($type==="video"){
 
-			if($offset==0&&$length==5){
+			if($staticfileimport==1&&$offset==0&&$length==5){
 				
 				$file=sprintf("%s/api/ver1/static/%s-%s.json",$SERVERPATH,$category,$type);
 				$y=file_get_contents($file);
@@ -66,7 +66,7 @@ if(strlen($api)>0){
 				
 			}else{
 
-				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=1 order by n desc limit 50 offset 0) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
+				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=1 order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
 				str_replace(" and","",$c[1]),sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=1) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
 				str_replace(" and","",$c[1]),sprintf($articletable2c,$c[1],"",""),"");

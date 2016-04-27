@@ -147,6 +147,9 @@ let SettingInputNode = React.createClass( {
     */
     let avatar = Safety.image( this.state.avatar, Empty.SETTING_AVATAR );
     let loggedIn = Safety.same( avatar, Empty.SETTING_AVATAR );
+    if ( !Safety.isBase64(avatar) ) {
+      avatar = Empty.refresh(avatar);
+    }
 
     let imgStyle = {
       'background': `url(${avatar}) no-repeat center center`,
@@ -378,15 +381,23 @@ let SettingInputNode = React.createClass( {
 
     this.avatarClear();
 
-    let _this = this;
+    // let _this = this;
     // iOS 連続撮影すると 2 回目以降の state style が正しくないのに対応
     // Browser bug ぽい
-    this.timer = setTimeout( function() {
-      _this.width = event.width;
-      _this.height = event.height;
-      _this.rotate = _this.avatarRotate( event.orientation );
+    // this.timer = setTimeout( function() {
+    //   _this.width = event.width;
+    //   _this.height = event.height;
+    //   _this.rotate = _this.avatarRotate( event.orientation );
+    //
+    //   _this.setState( { avatar: event.img } );
+    // }, 50 );
 
-      _this.setState( { avatar: event.img } );
+    this.timer = setTimeout( () => {
+      this.width = event.width;
+      this.height = event.height;
+      this.rotate = this.avatarRotate( event.orientation );
+
+      this.setState( { avatar: event.img } );
     }, 50 );
 
     // this.width = event.width;

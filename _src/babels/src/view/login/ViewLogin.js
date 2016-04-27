@@ -331,11 +331,11 @@ export class ViewLogin extends View {
    * API `/api/v1/sessions/social` を行います
    */
   socialRequest():void {
-    let boundFail = this.socialFail.bind( this );
+    // let boundFail = this.socialFail.bind( this );
     let callback = {};
     callback[ Model.COMPLETE ] = this.socialDone.bind( this );
-    callback[ Model.UNDEFINED_ERROR ] = boundFail;
-    callback[ Model.RESPONSE_ERROR ] = boundFail;
+    // callback[ Model.UNDEFINED_ERROR ] = boundFail;
+    // callback[ Model.RESPONSE_ERROR ] = boundFail;
 
     let model = new ModelSocial( callback );
     model.start();
@@ -368,13 +368,13 @@ export class ViewLogin extends View {
     }
 
   }
-  /**
-   * API `/api/v1/sessions/social` error
-   * @param {Object} error error instance
-   */
-  socialFail( error ):void {
-    // console.log( 'Social error ', error );
-  }
+  // /**
+  //  * API `/api/v1/sessions/social` error
+  //  * @param {Object} error error instance
+  //  */
+  // socialFail( error ):void {
+  //   // console.log( 'Social error ', error );
+  // }
   /**
    * API `/api/v1/sessions/social` 成功後に token をセットし home へリダイレクトします
    * @param {UserDae} userDae ユーザー情報, token 含んでいます

@@ -1,11 +1,11 @@
-#Header set Access-Control-Allow-Origin *
-#Header set Access-Control-Allow-Credentials true
-#Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
-#Header set Access-Control-Allow-Headers "Authorization, authorization, Origin, X-Requested-With, Content-Type, Accept"
+Header set Access-Control-Allow-Origin *
+Header set Access-Control-Allow-Credentials true
+Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
+Header set Access-Control-Allow-Headers "Authorization, authorization, Origin, X-Requested-With, Content-Type, Accept"
 
-#Satisfy any
-#order allow,deny
-#allow from all
+Satisfy any
+order allow,deny
+allow from all
 
 Options FollowSymLinks Includes
 RewriteEngine on
@@ -60,6 +60,8 @@ RewriteCond %{REQUEST_METHOD} GET
 RewriteRule ^v1/users/self /api/ver1/read/userdetails.php [L]
 RewriteCond %{REQUEST_METHOD} DELETE
 RewriteRule ^v1/users/self /api/ver1/write/userunregister.php [L]
+RewriteCond %{REQUEST_METHOD} DELETE
+RewriteRule ^v1/users/ /api/ver1/write/userunregister.php [L]
 
 RewriteRule ^v1/users/([0-9]+) /api/ver1/read/userdetails.php?userid=$1 [L]
 

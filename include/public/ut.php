@@ -216,7 +216,7 @@ function set_articleinfo($f,$type=0){
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 
-	$s["user"]=set_userinfo($f);
+	$s["user"]=set_userinfo($f,0);
 
 	return $s;
 }
@@ -255,14 +255,14 @@ function set_commentinfo($f,$type,$reply=0){
 		$s["url"]=sprintf("%s/%s/%s/comment/%s/%s",$domain,"p",$f["pageid"],$reply,$f["id"]);
 	}
 	//$s["url"]=sprintf("%s/%s/%s/comment/%s%s",$domain,"p",$f["pageid"],$reply==""?"":sprintf("/%s",$reply),$f["id"]);
-	$s["user"]=set_userinfo($f);
+	$s["user"]=set_userinfo($f,0);
 	
 	return $s;
 }
 
-function set_userinfo($f,$interestset=0,$appexp=0){
+function set_userinfo($f,$interestset){
 	
-	global $UserImgPath,$domain;
+	global $UserImgPath,$domain,$banner;
 	
 	/* String型 */
 	$s["id"]=$f["userid"];
@@ -292,6 +292,9 @@ function set_userinfo($f,$interestset=0,$appexp=0){
 		$s["access_token"]=$f["token"];
 		$s["session_token"]="";
 	}
+	if($banner){
+		$s["banner"]=$banner;
+	}
 	
 	return $s;
 }
@@ -306,7 +309,7 @@ function set_activity($f){
 	$s["display_date"]=get_relativetime($datetime["relativetime"],$datetime["date"],$datetime["weekday"]);
 	$s["action"]=get_action($f["activity"],$f["activityid"]);
 
-	$s["user"]=set_userinfo($f);
+	$s["user"]=set_userinfo($f,0);
 
 	$s["article"]["id"]=$f["pageid"];
 	$s["article"]["title"]=$f["title"];
@@ -390,11 +393,7 @@ function get_img($img,$id){
 	
 	for($i=0;$i<count($path);$i++){
 		if(strlen($img)==0){
-			if($i!=3){
 				$s[$type[$i]]=sprintf("%s/prg_img/%s/%s",$ImgPath,$path[$i],$defimg);
-			}else{
-				$s[$type[$i]]="";
-			}
 		}else{
 			if(!preg_match("/http/",$img)){
 				$s[$type[$i]]=sprintf("%s/prg_img/%s/%s",$ImgPath,$path[$i],$img);
@@ -580,7 +579,7 @@ function print_json($y,$r){
 		print_r(json_encode($y,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 	}else{
 		header('Content-Type: application/json; charset=utf-8');
-		echo json_encode($y);
+		echo json_encode($y,JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 	}	
 }
 

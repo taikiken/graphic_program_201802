@@ -7,11 +7,12 @@ $o->connect();
 
 function stripmeta($s){
 	$w=array(
-		"\r","\n","\t",
+		"\r","\n","\t"
 /*
 		"、",","," ","　","＝","…","！","。","／","…","～","|",":",";","(",")","（","）","【","】","＞","＜","「","」","『","』","[","]","〈","〉","“","”","《","》","^",
-*/
+
 		"▼","▼","△","▽","◆","◇","■","□","●","○","★","☆"
+*/
 	);
 	$s=strip_tags($s);
 	$s=str_replace($w,"",$s);
@@ -20,30 +21,30 @@ function stripmeta($s){
 	return $s;
 }
 
-function searchtxt($title,$category,$body,$keyword,$t1){
+function searchtxt($title,$category,$category2,$body,$keyword,$t1,$media){
 	
 	$title=stripmeta($title);
 	$category=strtolower($category);
+	$category2=strtolower($category2);
 	$body=stripmeta($body);
 	$keyword=stripmeta($keyword);
 	$t1=stripmeta($t1);
+	$media=$media;
 	
-	$txt=$title.$body.$category.$keyword.$t1;
+	$txt=$title.$body.$category.$category2.$keyword.$t1.$media;
 	$txt=pg_escape_string($txt);
 	
 	return $txt;
 }
 
-$sql="select id,title,(select name from pm_ where id=m1) as category,(select body from repo_body where pid=repo_n.id) as body,keyword,(case when t1 is not null then t1 else '' end) as t1,u_time from repo_n where cid=1 and flag=1 and id not in(select id from u_index)";
+$sql="select (case when (select id from u_index where id=repo_n.id) is null then 1 else 0 end) as flag,(select uptime from u_index where id=repo_n.id) as uptime,id,title,(select body from repo_body where pid=repo_n.id) as body,(select name from pm_ where id=m1) as category,(select name from pm_ where id=m2) as category2,(select title from u_member where id=repo_n.d2) as media,keyword,t1,u_time from repo_n where cid=1 and flag=1";
 $o->query($sql);
 while($f=$o->fetch_array()){
-	$u[]=sprintf("insert into u_index(id,txt,uptime) values(%s,'%s',%s);",$f["id"],searchtxt($f["title"],$f["category"],$f["body"],$f["keyword"],$f["t1"]),strlen($f["u_time"])>0?sprintf("'%s'",$f["u_time"]):"NULL");
-}
-
-$sql="select t1.* from (select id,uptime from u_index) as t2,(select id,title,(select name from pm_ where id=m1) as category,body,keyword,(case when t1 is not null then t1 else '' end) as t1,u_time from repo_n where cid=1 and flag=1) as t1 where t2.id=t1.id and t2.uptime!=t1.u_time";
-$o->query($sql);
-while($f=$o->fetch_array()){
-	$u[]=sprintf("update u_index set txt='%s',uptime=%s where id=%s;",searchtxt($f["title"],$f["category"],$f["body"],$f["keyword"],$f["t1"]),strlen($f["u_time"])>0?sprintf("'%s'",$f["u_time"]):"NULL",$f["id"]);
+	if($f["flag"]==1){
+		$u[]=sprintf("insert into u_index(id,txt,uptime) values(%s,'%s','%s');",$f["id"],searchtxt($f["title"],$f["category"],$f["category2"],$f["body"],$f["keyword"],$f["t1"],$f["media"]),$f["u_time"]);
+	}else{
+		if($f["uptime"]!=$f["u_time"])$u[]=sprintf("update u_index set txt='%s',uptime='%s' where id=%s;",searchtxt($f["title"],$f["category"],$f["category2"],$f["body"],$f["keyword"],$f["t1"],$f["media"]),$f["u_time"],$f["id"]);
+	}
 }
 
 $u=implode("\n",$u);

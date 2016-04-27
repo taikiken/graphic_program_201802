@@ -109,5 +109,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 $sqla=implode("\n",$sqla);
 $o->query($sqla);
 
+file_put_contents(sprintf("%sasahi-sokuhou%s.xml",$RSS,date("YmdH")),$xml);
 
 ?>

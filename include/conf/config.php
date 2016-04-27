@@ -24,10 +24,18 @@ include $INCLUDEPATH."conf/env.php";
 	3:FINEPLAY
 	4:Facebook navi
 	5:SPOZIUM
+	6:HUDDLE web
+	7:TBS「S☆1」
+	8:テニスデイリー
+	9:ラグビー共和国
+   10:運動通信編集部
+	
 
 */
-$RELATEDLINK_ALLOWED=array(3);
+$RELATEDLINK_ALLOWED=array(3,8,10);
+$RELATEDBANNER_ALLOWED=array(7);
 
+$CONTENTS_EDITED=array(5);
 
 $ADPATH="/editdm/";
 $TAGON=1;

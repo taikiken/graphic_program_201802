@@ -64,11 +64,12 @@ class dbutl extends db{
 		
 		global $_GET;
 		
+		$a=$b=$c=$d=array();
+		
 		//$id=$this->setid();
 		//$this->value[$this->columns[]="id"]=$id;
-		if($this->table=="repo_n"&&in_array("body",$this->columns)){
-
-			$a=$b=$c=$d=array();
+		if($this->table=="repo_n"&&$_GET["cid"]==1){
+			
 			for($i=0;$i<count($this->columns);++$i){
 				if(preg_match("/^(b|t)[2-6]{1}$/",$this->columns[$i])){
 					$a[$this->columns[$i]]=$this->value[$this->columns[$i]];
@@ -89,23 +90,48 @@ class dbutl extends db{
 			$this->sql.=sprintf("insert into repo_body(pid,body) values((select currval('repo_n_id_seq')),%s);\n",$body);
 			$this->sql.=$this->makelink($a,0);
 			//var_dump($this->sql);
+		
+		}elseif($this->table=="u_member"){
+					
+			$b[$a[]="type"]=1;
+			$b[$a[]="cid"]="currval('u_member_id_seq')";
+			
+			for($i=0;$i<count($this->columns);++$i){
+				if(preg_match("/^(alt|pcimg|pclink|spimg|splink)$/",$this->columns[$i])){
+										
+					$a[]=$this->columns[$i];
+					$b[]=$this->value[$this->columns[$i]];
+				}else{
+					$c[]=$this->columns[$i];
+					$d[]=$this->value[$this->columns[$i]];
+				}
+			}
+			if(strlen($this->value["pcimg"])>10||strlen($this->value["spimg"])>10){
+				$this->sql="insert into ".$this->table."(".implode(",",$c).") values(".implode(",",$d).");\n";
+				$this->sql.="insert into u_banner(".implode(",",$a).") values(".implode(",",$b).");\n";
+			}else{
+				$this->sql="insert into ".$this->table."(".implode(",",$c).") values(".implode(",",$d).");\n";
+			}
 		}else{
 			
 			$this->columns=implode(",",$this->columns);
 			$this->value=implode(",",$this->value);
 			$this->value=$this->empty2null($this->value);
 			$this->sql="insert into ".$this->table."(".$this->columns.") values(".$this->value.")";				
-			//var_dump($this->sql);
+			
 		}
-
+	//var_dump($this->sql);
 		@$this->db->query($this->sql);
 		$e=$this->db->affected_rows2();
 		return $e;
 	}
 
 	function update($t){
-		$a=array();
-		if(in_array("body",$this->columns)){
+
+		$a=$b=array();
+
+		if($this->table=="repo_n"&&$_GET["cid"]==1){
+			
 			for($i=0;$i<count($this->columns);++$i){
 
 				if(preg_match("/^(b|t)[2-6]{1}$/",$this->columns[$i])){
@@ -120,6 +146,26 @@ class dbutl extends db{
 				}
 			}
 			$this->sql.=$this->makelink($a,$t);
+		}elseif($this->table=="u_member"){
+			
+			$b[$a[]="type"]=1;
+			$b[$a[]="cid"]=$t;
+			
+		  for($i=0;$i<count($this->columns);++$i){
+			  if(preg_match("/^(alt|pcimg|pclink|spimg|splink)$/",$this->columns[$i])){				  
+				 $pp2[]=$this->columns[$i]."=".$this->value[$this->columns[$i]];
+				 $a[]=$this->columns[$i];
+				 $b[]=$this->value[$this->columns[$i]];
+			  }else{
+				 $pp[]=$this->columns[$i]."=".$this->value[$this->columns[$i]];
+			  }
+		  }
+		  $pp2=implode(",",$pp2);
+		  $pp2=$this->empty2null($pp2);
+		  $this->sql=sprintf("update u_banner set %s where cid=%s;\n",$pp2,$t);
+		  $this->sql.="insert into u_banner(".implode(",",$a).") select ".implode(",",$b)." where not exists (select * from u_banner where cid=".$t." and type=1);\n";
+
+			
 		}else{
 			$this->sql="";
 			for($i=0;$i<count($this->columns);++$i){
