@@ -379,6 +379,7 @@ export class ViewComments extends View {
                       sign={sign}
                       parent={false}
                       commentsListType={commentsListType}
+                      url={replyComment.url}
                     />
                   </li>
                 );
@@ -432,7 +433,6 @@ export class ViewComments extends View {
           }
         }
 
-        // console.log( '================================== parent =========================', icon, this.props.user, userId, ', comment:', commentObject.comment.user.id );
         return (
 
           <ul className={'comment-list'}>
@@ -450,10 +450,12 @@ export class ViewComments extends View {
                 sign={sign}
                 parent={true}
                 commentsListType={commentsListType}
+                url={commentObject.comment.url}
               />
               {/* comment reply */}
+              {/* unique を確保するため comment type を追加 2016-04-27 */}
               <CommentReplyChildDom
-                uniqueId={`reply-${this.props.uniqueId}`}
+                uniqueId={`reply-${commentsListType}-${this.props.uniqueId}`}
                 total={total}
                 sign={sign}
                 userId={userId}
@@ -461,7 +463,8 @@ export class ViewComments extends View {
                 articleId={articleId}
                 commentId={commentId}
                 commentsListType={commentsListType}
-                reply={commentObject.reply} />
+                reply={commentObject.reply}
+              />
             </li>
           </ul>
 

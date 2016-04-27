@@ -10,22 +10,26 @@
  *
  */
 
+// view
+import {View} from '../View';
 
 // app
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
 
-// view
-import {View} from '../View';
-// import {ViewError} from '../error/ViewError';
 // action
 import {Widget} from '../../action/sidebar/Widget';
+
 // data
 import {Result} from '../../data/Result';
+import {Safety} from '../../data/Safety';
+
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
-import {Safety} from '../../data/Safety';
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
 
 // React
 let React = self.React;
@@ -52,6 +56,12 @@ export class ViewRanking extends View {
     this._slug = slug;
     // response.request object を保持する
     this._request = null;
+    /**
+     * home(index) か否かを表す真偽値, default false
+     * @type {boolean}
+     * @private
+     */
+    this._home = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -62,6 +72,20 @@ export class ViewRanking extends View {
    */
   get slug():string {
     return this._slug;
+  }
+
+  /**
+   * home(index) か否かを表す真偽値
+   * @return {boolean} home(index) か否かを表す真偽値を返します
+   */
+  get home():Boolean {
+    return this._home;
+  }
+  /**
+   * @param {Boolean} bool home(index) か否かを表す真偽値
+   */
+  set home( bool:Boolean ):void {
+    this._home = bool;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -153,7 +177,9 @@ export class ViewRanking extends View {
         title: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
         empty: React.PropTypes.bool.isRequired,
-        total: React.PropTypes.number.isRequired
+        total: React.PropTypes.number.isRequired,
+        home: React.PropTypes.bool.isRequired,
+        thisSlug: React.PropTypes.string.isRequired
       },
       getDefaultPropTypes: function() {
         return {
@@ -175,7 +201,7 @@ export class ViewRanking extends View {
 
         return (
           <li className={'board-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
-            <a href={p.url} className={'post'}>
+            <a href={p.url} className={'post'} onClick={this.gaSend}>
               <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`} style={imgStyle}>
                 <img src={Empty.THUMB_EMPTY} alt=""/>
                 {/*
@@ -192,17 +218,40 @@ export class ViewRanking extends View {
             </a>
           </li>
         );
+      },
+      gaSend: function() {
+        if (this.props.home) {
+          this.gaHome();
+        } else {
+          this.gaCategory();
+        }
+      },
+      gaHome: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'home_ranking', 'click', this.props.url, this.props.id) );
+        // ----------------------------------------------
+      },
+      gaCategory: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', `${this.props.thisSlug}_ranking`, 'click', this.props.url, this.props.id) );
+        // ----------------------------------------------
       }
     } );
 
     // React Class
     let ArticleDom = React.createClass( {
       propTypes: {
-        list: React.PropTypes.array.isRequired
+        list: React.PropTypes.array.isRequired,
+        home: React.PropTypes.bool.isRequired,
+        slug: React.PropTypes.string.isRequired
       },
       render: function() {
 
         let list = this.props.list;
+        let home = this.props.home;
+        let thisSlug = this.props.slug;
         let categoryTitle = '';
 
         let categoryLabel;
@@ -229,24 +278,6 @@ export class ViewRanking extends View {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-
-                /*
-                let thumbnail = dae.media.images.thumbnail;
-                let empty = false;
-
-                // thumbnail を check なければ代替画像にする
-                if ( !thumbnail ) {
-                  thumbnail = Empty.IMG_SMALL;
-                  empty = true;
-                } else if ( !Safety.isImg( thumbnail ) ) {
-                  // 画像ファイル名に拡張子がないのがあったので
-                  // 拡張子チェックを追加
-                  if ( !Safety.isGraph( thumbnail ) ) {
-                    thumbnail = Empty.IMG_SMALL;
-                    empty = true;
-                  }
-                }
-                */
                 let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
                 let empty = thumbnail === Empty.IMG_SMALL;
 
@@ -266,6 +297,8 @@ export class ViewRanking extends View {
                       thumbnail={thumbnail}
                       empty={empty}
                       total={dae.commentsCount}
+                      home={home}
+                      thisSlug={thisSlug}
                     />
                 );
 
@@ -287,7 +320,7 @@ export class ViewRanking extends View {
 
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: articles } ),
+      React.createElement( ArticleDom, { list: articles, home: this.home, slug: this.slug } ),
       element
     );
 

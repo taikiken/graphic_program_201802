@@ -104,7 +104,8 @@ if ( $page['apiRoot'] != '' ) :
   'use strict';
 
   var UT = self.UT;
-  // API request 先頭に http://www.undotsushin.com を追加します
+  // リクエスト先を変更します
+//  UT.app.App.develop( 'http://dev.undotsushin.com' );
   UT.app.App.develop();
 
 }() );

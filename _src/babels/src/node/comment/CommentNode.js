@@ -57,7 +57,9 @@ export let CommentNode = React.createClass( {
     // フォームをopen（表示）するか default false
     open: React.PropTypes.bool,
     // comment type
-    commentsListType: React.PropTypes.string.isRequired
+    commentsListType: React.PropTypes.string.isRequired,
+    // comment 詳細 url
+    url: React.PropTypes.string
   },
   getDefaultProps: function() {
     return {
@@ -68,7 +70,8 @@ export let CommentNode = React.createClass( {
       commentCount: 0,
       parent: false,
       independent: false,
-      open: false
+      open: false,
+      url: ''
     };
   },
   getInitialState: function() {
@@ -85,18 +88,6 @@ export let CommentNode = React.createClass( {
     let sign = this.props.sign;
 
     // user icon
-    /*
-    if ( !picture ) {
-      picture = Empty.USER_EMPTY;
-    } else if ( !Safety.isImg( picture ) ) {
-      // 画像ファイル名に拡張子がないのがあったので
-      // 拡張子チェックを追加
-      if ( !Safety.isGraph( picture ) ) {
-        picture = Empty.USER_EMPTY;
-      }
-    }
-    let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-     */
     let picture = Safety.image( comment.user.profilePicture, Empty.USER_EMPTY );
     let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
@@ -117,6 +108,7 @@ export let CommentNode = React.createClass( {
           commentId={this.props.commentId}
           replyId={this.props.replyId}
           parent={this.props.parent}
+          url={this.props.url}
         />
         {/* figure.comment-user */}
         <CommentUserNode
@@ -142,6 +134,7 @@ export let CommentNode = React.createClass( {
           bad={comment.bad}
           isGood={comment.isGood}
           isBad={comment.isBad}
+          url={this.props.url}
         />
         <CommentFormNode
           uniqueId={this.props.uniqueId}
@@ -153,6 +146,7 @@ export let CommentNode = React.createClass( {
           parent={this.props.parent}
           independent={this.props.independent}
           commentType={this.props.commentsListType}
+          url={this.props.url}
         />
       </div>
     );

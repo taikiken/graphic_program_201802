@@ -35,15 +35,17 @@ export class Sidebar {
   }
   /**
    * sidebar ranking / video rendering 開始
-   * @param {string} [slug=all] category slug
+   * @param {string|null} [slug=all] category slug
+   * @param {Boolean} [home=false] home(index) か否かを表す真偽値
    */
-  static start( slug:string = 'all' ):void {
+  static start( slug:string = 'all', home:Boolean = false ):void {
     // ranking
     let rankingElement = Dom.ranking();
     if ( rankingElement !== null ) {
       let option = {};
       option[ UT.view.View.DID_MOUNT ] = Sidebar.didRanking;
       let ranking = new UT.view.sidebar.ViewRanking( rankingElement, option, slug );
+      ranking.home = home;
       ranking.start();
     }
 
@@ -53,11 +55,15 @@ export class Sidebar {
       let option = {};
       option[ UT.view.View.DID_MOUNT ] = Sidebar.didVideo;
       let videos = new UT.view.sidebar.ViewVideos( videoElement, option, slug );
+      videos.home = home;
       videos.start();
     }
 
   }
 
+  /**
+   * ranking ad を display block にする
+   */
   static didRanking():void {
     let ad = Dom.adRanking();
     // console.log( 'didRanking', ad );
@@ -65,7 +71,9 @@ export class Sidebar {
       ad.style.cssText = 'display: block;';
     }
   }
-
+  /**
+   * videos ad を display block にする
+   */
   static didVideo():void {
     let ad = Dom.adVideo();
     // console.log( 'didVideo', ad );

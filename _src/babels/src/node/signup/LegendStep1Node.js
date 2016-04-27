@@ -39,9 +39,9 @@ import {ErrorNode} from '../error/ErrorNode';
 // Api
 import {Api} from '../../net/Api';
 
-// ga
-import {Ga} from '../../ga/Ga';
-import {GaData} from '../../ga/GaData';
+// // ga
+// import {Ga} from '../../ga/Ga';
+// import {GaData} from '../../ga/GaData';
 
 // React
 let React = self.React;
@@ -202,7 +202,7 @@ let Step1FormNode = React.createClass( {
     model.start();
 
     // ga tracking
-    Ga.add(new GaData('Step1FormNode.request', 'Signup_mail', 'signup_mail_tap', 'signup_mail'));
+    // Ga.add(new GaData('Step1FormNode.request', 'Signup_mail', 'signup_mail_tap', 'signup_mail'));
   },
   // 登録済み email でなかったので次の step へ移動します
   next: function() {
@@ -277,10 +277,10 @@ export let LegendStep1Node = React.createClass( {
           <ul className="linkage-sns-list">
             <li className="linkage-sns-item">
               {/* https://github.com/undotsushin/undotsushin/issues/334 */}
-              <a href={Api.auth('tw').url} onClick={this.gaTw} className="linkage-sns-link linkage-sns-tw"><span>Twitterで新規登録</span></a>
+              <a href={Api.auth('tw').url} className="linkage-sns-link linkage-sns-tw"><span>Twitterで新規登録</span></a>
             </li>
             <li className="linkage-sns-item">
-              <a href={Api.auth('fb').url} onClick={this.gaFb} className="linkage-sns-link linkage-sns-fb"><span>Facebookで新規登録</span></a>
+              <a href={Api.auth('fb').url} className="linkage-sns-link linkage-sns-fb"><span>Facebookで新規登録</span></a>
             </li>
           </ul>
         </div>
@@ -321,13 +321,14 @@ export let LegendStep1Node = React.createClass( {
   },
   updateStep: function( step:Number ):void {
     this.setState( { step: step } );
-  },
-  // ---------------------------------------------------
-  // ga event tracking
-  gaTw: function() {
-    Ga.add( new GaData('LegendStep1Node.gaTw', 'Signup_twitter', 'signup_twitter_tap', 'signup_twitter') );
-  },
-  gaFb: function() {
-    Ga.add( new GaData('LegendStep1Node.gaFb', 'Signup_facebook', 'signup_facebook_tap', 'signup_facebook') );
   }
+  // ,
+  // // ---------------------------------------------------
+  // // ga event tracking
+  // gaTw: function() {
+  //   Ga.add( new GaData('LegendStep1Node.gaTw', 'Signup_twitter', 'signup_twitter_tap', 'signup_twitter') );
+  // },
+  // gaFb: function() {
+  //   Ga.add( new GaData('LegendStep1Node.gaFb', 'Signup_facebook', 'signup_facebook_tap', 'signup_facebook') );
+  // }
 } );

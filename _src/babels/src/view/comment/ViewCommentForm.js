@@ -76,6 +76,7 @@ export class ViewCommentForm extends View {
         independent={true}
         parent={false}
         commentType={CommentsType.INDEPENDENT}
+        url=""
       />,
       this.element
     );

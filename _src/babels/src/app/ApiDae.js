@@ -37,7 +37,9 @@ let apiRoot = () => {
       return 'http://www.undotsushin.local';
 
     case Env.DEVELOP :
-      return 'http://dev2.undotsushin.com';
+      // return 'http://dev2.undotsushin.com';
+      // dev2 から正常値が返らなくなった 2016-04-25
+      return 'http://dev.undotsushin.com';
 
     // online
     case Env.PRODUCTION :
@@ -60,10 +62,10 @@ let apiRoot = () => {
 };
 // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
 // API 一覧より
-let buildPath = () => {
+let buildPath = ( root = '') => {
   // 共通パス
   // 先頭 protocol + host 部分を develop / production で変える
-  let API_ROOT = apiRoot();
+  let API_ROOT = root === '' ? apiRoot() : root;
   let API_PATH = API_ROOT + '/api/v1';
 
   return {
@@ -480,9 +482,11 @@ export class ApiDae {
    * <p>**注意** 変更の必要がある時は
    * <code>App.develop(), App.production()</code>
    * を使用してください</p>
+   *
+   * @param {string} [root=''] リクエスト・ドメイン
    */
-  static rebuild():void {
-    _api = buildPath();
+  static rebuild( root:string = '' ):void {
+    _api = buildPath( root );
   }
   /**
    * api list を取得します

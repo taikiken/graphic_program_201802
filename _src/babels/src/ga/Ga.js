@@ -74,7 +74,7 @@ export class Ga {
     // _requests 内のデータがなくなるまで実行する
     while( _requests.length > 0 ) {
       let data:GaData = _requests.shift();
-      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel );
+      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
     }
   }
   /**
@@ -85,8 +85,8 @@ export class Ga {
     // _requests 内のデータがなくなるまで実行する
     while( _requests.length > 0 ) {
       let data:GaData = _requests.shift();
-      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel );
-      console.log( 'ga send ', data.method, data.eventCategory, data.eventAction, data.eventLabel );
+      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+      console.log( 'ga send ', data.method, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
     }
   }
 }

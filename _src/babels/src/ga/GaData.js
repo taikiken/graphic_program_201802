@@ -21,8 +21,9 @@ export class GaData {
    * @param {string} eventCategory 必須 通常は接点に使用されたオブジェクト（例: Video）
    * @param {string} eventAction 必須 接点の種類（例: play）
    * @param {string} [eventLabel=''] オプション イベントの分類に便利です（例: Fall Campaign）
+   * @param {string} [eventValue=''] オプション イベントの分類に便利です（例: Fall Campaign）
    */
-  constructor( method:string, eventCategory:string, eventAction:string, eventLabel:string = '' ) {
-    Object.assign( this, {method, eventCategory, eventAction, eventLabel} );
+  constructor( method:string, eventCategory:string, eventAction:string, eventLabel:string = '', eventValue:string = '' ) {
+    Object.assign( this, {method, eventCategory, eventAction, eventLabel, eventValue} );
   }
 }

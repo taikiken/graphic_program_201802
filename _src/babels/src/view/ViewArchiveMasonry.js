@@ -21,22 +21,20 @@ import {Message} from '../app/const/Message';
 
 // view
 import {View} from './View';
-/*
-import {ViewError} from './error/ViewError';
 
 // data
-import {Result} from '../data/Result';
- */
 import {Safety} from '../data/Safety';
-
 
 // dae
 import {ArticleDae} from '../dae/ArticleDae';
 
-
 // node(ReactClass)
 import {ReactionNode} from '../node/comment/ReactionNode';
 import {CommentUserPlusCountNode} from '../node/comment/CommentUserPlusCountNode';
+
+// Ga
+import {Ga} from '../ga/Ga';
+import {GaData} from '../ga/GaData';
 
 // React
 let React = self.React;
@@ -60,7 +58,23 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, ActionClass, option, useMasonry );
+
+    this._slug = 'all';
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * category slug
+   * @default all
+   * @return {string} category slug を返します
+   */
+  get slug():string {
+    return this._slug;
+  }
+  // ---------------------------------------------------
+  //  Method
+  // ---------------------------------------------------
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
@@ -97,7 +111,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       propTypes: {
         show: React.PropTypes.bool.isRequired,
         action: React.PropTypes.object.isRequired,
-        loading: React.PropTypes.string
+        loading: React.PropTypes.string,
+        // ga のため追加
+        home: React.PropTypes.bool.isRequired,
+        slug: React.PropTypes.string.isRequired
       },
       getDefaultProps: function() {
         return {
@@ -105,6 +122,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         };
       },
       getInitialState: function() {
+        this.page = 1;
 
         return {
           disable: false,
@@ -134,23 +152,15 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         }
 
       },
-      /*
-      componentDidMount: function() {
-      },
-      componentWillUnmount: function() {
-      },
-      */
       // -----------------------------------------
       // button 関連 custom method
       // rise 関連 event を破棄する
       destroy: function() {
       },
-      // 緊急用, button click を残す
+      // button click
       handleClick: function( event:Event ) {
         event.preventDefault();
-        // disable
-        // this.setState( { loading: ' loading' } );
-        // action.next();
+
         this.onRise();
       },
       // button 表示・非表示
@@ -177,7 +187,11 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           // loading 中は監視を止める
           loadingClass = ' loading';
           this.props.action.next();
-
+          if (this.props.home) {
+            this.gaHome();
+          } else {
+            this.gaCategory();
+          }
         }
 
         // loading 表示のための css class を追加・削除
@@ -187,8 +201,19 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       // Rise.RISE event handler
       // 次 offset JSON を取得する
       onRise: function():void {
-        // console.log( '========================== onRise ', event );
         this.updateLoading( true );
+      },
+      gaHome: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.updateLoading', 'home_articles', 'view - new', String(++this.page)) );
+        // ----------------------------------------------
+      },
+      gaCategory: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.updateLoading', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
+        // ----------------------------------------------
       }
     } );
 
@@ -201,18 +226,16 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-      if ( _this._moreRendered === null ) {
-        // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
-
+      if ( this._moreRendered === null ) {
         // チェックをパスし実行する
-        _this._moreRendered = ReactDOM.render(
-          React.createElement( MoreViewDom, { show: show, action: _this.action } ),
+        this._moreRendered = ReactDOM.render(
+          React.createElement( MoreViewDom, { show: show, action: this.action, home: this.home, slug: this.slug } ),
           moreElement
         );
 
       } else {
 
-        _this._moreRendered.updateShow( show );
+        this._moreRendered.updateShow( show );
 
       }
 
@@ -221,38 +244,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     // --------------------------------------------
     // COMMENTS Popular second
     // --------------------------------------------
-    // /**
-    //  * コメント欄の小さなアイコンを表示します
-    //  * @private
-    //  * @type {ReactClass}
-    //  * */
-    // let CommentedUsersDom = React.createClass( {
-    //   propType: {
-    //     total: React.PropTypes.number.isRequired
-    //   },
-    //   getInitialState: function() {
-    //     return {
-    //       total: this.props.total
-    //     };
-    //   },
-    //   render: function() {
-    //
-    //     // if ( this.state.total === 0 ) {
-    //     // API 戻り値がおかしいことがあり
-    //     // count 1
-    //     // array length 2
-    //     // total が - になるので 0 以上に変更
-    //     if ( this.state.total > 0 ) {
-    //       return null;
-    //     } else {
-    //
-    //       return <span className="commented-user-andmore">+{this.state.total}</span>;
-    //     }
-    //
-    //   }
-    //
-    // } );
-
     /**
      * コメント一覧
      * コメント二段目
@@ -286,21 +277,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                 seconds.map( function( commentDae, i ) {
 
                   let userDae = commentDae.user;
-                  // let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
-                  /*
-                  let picture = userDae.profilePicture;
-                  if ( !picture ) {
-                    picture = Empty.USER_EMPTY;
-                  } else if ( !Safety.isImg( picture ) ) {
-                    // 画像ファイル名に拡張子がないのがあったので
-                    // 拡張子チェックを追加
-                    if ( !Safety.isGraph( picture ) ) {
-                      picture = Empty.USER_EMPTY;
-                    }
-                  }
-
-                  let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-                  */
                   let picture = Safety.image( userDae.profilePicture, Empty.USER_EMPTY );
                   let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
@@ -351,7 +327,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         let hasSecond = commentsPopular.hasSecond;
         let firstDae = commentsPopular.first;
         let secondsDae = commentsPopular.seconds;
-        // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
         if ( hasSecond ) {
           // 2件目以降も存在する
           // 合計数からアイコン描画数を引く
@@ -371,19 +346,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
-          /*
-          let picture = firstUser.profilePicture;
-
-          if ( !picture ) {
-            picture = Empty.USER_EMPTY;
-          } else if ( !Safety.isImg( picture ) ) {
-            // 画像ファイル名に拡張子がないのがあったので
-            // 拡張子チェックを追加
-            picture = Empty.USER_EMPTY;
-          }
-
-          let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-          */
           let picture = Safety.image( firstUser.profilePicture, Empty.USER_EMPTY );
           let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
           
@@ -414,6 +376,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                   isGood={first.isGood}
                   isBad={first.isBad}
                   activate={false}
+                  url={first.url}
                 />
               </div>
               <CommentsSecondDom
@@ -432,10 +395,11 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
         }
 
-      }, // render
-      componentDidMount: function() {
-        // mount
       }
+      // , // render
+      // componentDidMount: function() {
+      //   // mount
+      // }
     } );
 
     // ------------------------------------------------
@@ -518,9 +482,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         offset: React.PropTypes.number.isRequired,
         // request length
         length: React.PropTypes.number.isRequired,
-
         // action instance
-        action: React.PropTypes.object.isRequired
+        action: React.PropTypes.object.isRequired,
+        // home か否かを表す真偽値
+        home: React.PropTypes.bool.isRequired
       },
       getInitialState: function() {
         /**
@@ -551,7 +516,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       render: function() {
 
-        // console.log( '****************************************** render' );
+        const home = this.props.home;
         // dom出力する
         return (
           <div ref="boardRout" className="board-large-column">
@@ -561,22 +526,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
                 let commentsPopular = dae.commentsPopular;
                 let commentsTotal = dae.commentsCount;
-                /*
-                let thumbnail;
-
-                thumbnail = dae.media.images.medium;
-
-                // thumbnail が空の時は代替画像
-                if ( !thumbnail ) {
-                  thumbnail = Empty.IMG_MIDDLE;
-                } else if ( !Safety.isImg( thumbnail ) ) {
-                  // 画像ファイル名に拡張子がないのがあったので
-                  // 拡張子チェックを追加
-                  if ( !Safety.isGraph( thumbnail ) ) {
-                    thumbnail = Empty.IMG_MIDDLE;
-                  }
-                }
-                */
                 let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
                 let category = ( label ):string => {
@@ -586,12 +535,12 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
                   <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
-                    <a className="post" href={dae.url}>
+                    <a className="post" href={dae.url} id={`article-${dae.id}`}>
                       <ThumbnailDom
                         mediaType={dae.mediaType}
                         thumbnail={thumbnail}
                         title={dae.title}
-                        recommend={!!dae.isRecommend && _this.home}
+                        recommend={!!dae.isRecommend && home}
                       />
                       <div className="post-data">
                         <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
@@ -744,7 +693,13 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this._articleRendered = ReactDOM.render(
-        React.createElement( ArticleDom, { list: articlesList, offset: this._request.offset, length: this._request.length, masonry: this._useMasonry, action: this.action } ),
+        React.createElement( ArticleDom, {
+          home: this.home,
+          list: articlesList,
+          offset: this._request.offset,
+          length: this._request.length,
+          masonry: this._useMasonry,
+          action: this.action } ),
         element
       );
 

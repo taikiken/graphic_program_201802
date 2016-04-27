@@ -23,6 +23,10 @@ import {Model} from '../../model/Model';
 import {ModelCommentDelete} from '../../model/comment/ModelCommentDelete';
 import {ModelCommentReplyDelete} from '../../model/comment/ModelCommentReplyDelete';
 
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
+
 // React
 let React = self.React;
 
@@ -58,7 +62,9 @@ export let CommentActionNode = React.createClass( {
     // 親コメント? default false
     // true の時は ModelCommentDelete
     // false の時は ModelCommentReplyDelete
-    parent: React.PropTypes.bool.isRequired
+    parent: React.PropTypes.bool.isRequired,
+    // コメント詳細 URL
+    url: React.PropTypes.string.isRequired
   },
   getInitialState: function() {
     this.message = MessageStatus.factory();
@@ -197,6 +203,11 @@ export let CommentActionNode = React.createClass( {
     // console.log( 'deleteDone', this.props.uniqueId, result );
     this.setState( { deleteLoading: ''} );
     this.props.remove( 'done' );
+
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData( 'CommentActionNode.deleteDone', 'comment', 'delete', this.props.url, this.props.commentId ) );
+    // ----------------------------------------------
 
     // event 通知
     this.comment.remove( this.props.commentId );

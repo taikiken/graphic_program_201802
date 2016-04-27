@@ -64,11 +64,12 @@ export class App {
    * 開発モードにします<br>
    * local から <code>http://undotsushin.com</code> へ API リクエストを行います<br>
    * 開発中はこちらをお使いください</p>
+   * @param {string} [root=''] リクエスト・ドメイン
    */
-  static develop():void {
+  static develop( root:string = '' ):void {
 
     Env.develop();
-    Api.rebuild();
+    Api.rebuild( root );
 
   }
   /**
