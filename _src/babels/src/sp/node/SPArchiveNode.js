@@ -221,6 +221,7 @@ let PopularDom = React.createClass( {
               isGood={first.isGood}
               isBad={first.isBad}
               activate={false}
+              url={first.url}
             />
           </div>
 
@@ -363,7 +364,7 @@ export let SPArchiveNode = React.createClass( {
             if ( !!dae.isRecommend && home ) {
               recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
             }
-            console.log( 'id:', dae.id );
+            // console.log( 'id:', dae.id );
             // unique key(React)にarticle id(number)記事Idを使用します
             return (
               <div key={'archive-article-' + type + '-' + dae.id} className={`archive-article archive-article-${i}`}>
