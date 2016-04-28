@@ -208,13 +208,13 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       gaHome: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.updateLoading', 'home_articles', 'view - new', String(++this.page)) );
+        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.gaHome', 'home_articles', 'view - new', String(++this.page)) );
         // ----------------------------------------------
       },
       gaCategory: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.updateLoading', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
+        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
         // ----------------------------------------------
       }
     } );

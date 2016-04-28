@@ -239,9 +239,9 @@ export class ViewRanking extends View {
           </li>
         );
       },
-      gaSend: function(e) {
-        e.preventDefault();
-      // gaSend: function() {
+      // gaSend: function(e) {
+      //   e.preventDefault();
+      gaSend: function() {
         if (this.props.home) {
           this.gaHome();
         } else if (this.props.detail) {

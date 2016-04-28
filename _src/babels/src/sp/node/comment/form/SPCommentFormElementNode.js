@@ -22,6 +22,13 @@ import {Model} from '../../../../model/Model';
 // node
 import {ErrorNode} from '../../../../node/error/ErrorNode';
 
+// util
+import {Loc} from '../../../../util/Loc';
+
+// Ga
+import {Ga} from '../../../../ga/Ga';
+import {GaData} from '../../../../ga/GaData';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -53,7 +60,9 @@ export let SPCommentFormElementNode = React.createClass( {
     // コメント Id オプション
     commentId: React.PropTypes.string,
     // コメント
-    commentType: React.PropTypes.string.isRequired
+    commentType: React.PropTypes.string.isRequired,
+    // コメント詳細URL for ga
+    url: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -100,20 +109,6 @@ export let SPCommentFormElementNode = React.createClass( {
     if ( this.state.open || this.props.independent ) {
 
       // user icon
-      /*
-      let picture = this.props.icon;
-      if ( !picture ) {
-        picture = Empty.USER_EMPTY;
-      } else if ( !Safety.isImg( picture ) ) {
-        // 画像ファイル名に拡張子がないのがあったので
-        // 拡張子チェックを追加
-        if ( !Safety.isGraph( picture ) ) {
-          picture = Empty.USER_EMPTY;
-        }
-      }
-
-      let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-      */
       let picture = Safety.image( this.props.icon, Empty.USER_EMPTY );
       let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
@@ -160,11 +155,9 @@ export let SPCommentFormElementNode = React.createClass( {
     this.listen();
 
   },
-  componentDidUpdate: function() {
-  },
+  // componentDidUpdate: function() {
+  // },
   componentWillUnMount: function() {
-    // console.log( '+++++++++++ componentWillUnMount +++++++++++', this.props.uniqueId );
-
     this.mounted = false;
     this.dispose();
   },
@@ -314,6 +307,16 @@ export let SPCommentFormElementNode = React.createClass( {
     // console.log( 'done', event );
     this.replyStatus.complete( this.props.uniqueId, this.props.commentType );
     this.setState( { body: '' } );
+    // ----------------------------------------------
+    // GA 計測タグ
+    if (this.props.independent) {
+      // 記事へのコメント
+      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post', Loc.current, this.props.articleId) );
+    } else {
+      // コメントへのコメント
+      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post - reply', this.props.url, this.props.commentId) );
+    }
+    // ----------------------------------------------
     this.dispose();
   },
   // コメント送信失敗

@@ -10,19 +10,11 @@
  *
  */
 
-
+// view
+import {View} from '../../view/View';
 
 // app
 import {Message} from '../../app/const/Message';
-/*
-import {Empty} from '../../app/const/Empty';
-import {User} from '../../app/User';
-import {MediaType} from '../../app/const/MediaType';
-*/
-
-// view
-import {View} from '../../view/View';
-// import {ViewError} from '../../view/error/ViewError';
 
 // data
 import {Result} from '../../data/Result';
@@ -31,11 +23,12 @@ import {Safety} from '../../data/Safety';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
-// node(ReactClass)
-// import {ReactionNode} from '../../node/comment/ReactionNode';
-
+// sp.node
 import {SPArchiveNode} from '../node/SPArchiveNode';
-// import {SPMoreViewNode} from '../node/SPMoreViewNode';
+
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
 
 // React
 let React = self.React;
@@ -77,6 +70,8 @@ export class SPViewArchive extends View {
     this._request = null;
 
     this._home = false;
+
+    this._slug = 'all';
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -101,6 +96,14 @@ export class SPViewArchive extends View {
    */
   set home( home:Boolean ):void {
     this._home = home;
+  }
+  /**
+   * category slug
+   * @default all
+   * @return {string} category slug を返します
+   */
+  get slug():string {
+    return this._slug;
   }
   // ---------------------------------------------------
   //  Method
@@ -184,14 +187,17 @@ export class SPViewArchive extends View {
     // sequence な index のために必要
     let prevLast = this._articles.length;
 
-    let _this = this;
+    // let _this = this;
 
     // ------------------------------------------------
     let SPMoreViewDom = React.createClass( {
       propTypes: {
         show: React.PropTypes.bool.isRequired,
         action: React.PropTypes.object.isRequired,
-        loading: React.PropTypes.string
+        loading: React.PropTypes.string,
+        // ga のため追加
+        home: React.PropTypes.bool.isRequired,
+        slug: React.PropTypes.string.isRequired
       },
       getDefaultProps: function() {
         return {
@@ -199,6 +205,7 @@ export class SPViewArchive extends View {
         };
       },
       getInitialState: function() {
+        this.page = 1;
 
         return {
           disable: false,
@@ -242,26 +249,19 @@ export class SPViewArchive extends View {
       // 緊急用, button click を残す
       handleClick: function( event:Event ) {
         event.preventDefault();
-        // disable
-        // this.setState( { loading: ' loading' } );
-        // action.next();
+
         this.onRise();
       },
       // button 表示・非表示
       updateShow: function( show:Boolean ) {
-        // console.log( '========================== updateShow ', show );
-        /*
-         if ( !show ) {
-         // button を非表示にするので rise 監視を止める
-         this.destroy();
-         } else {
-         // button 表示, loading 表示を止める
-         this.updateLoading( false );
-         }
-         */
 
         this.setState( { show: show, loading: '' } );
 
+      },
+      // Rise.RISE event handler
+      // 次 offset JSON を取得する
+      onRise: function() {
+        this.updateLoading( true );
       },
       // loading 表示 on / off
       // on: true, off: false
@@ -274,41 +274,51 @@ export class SPViewArchive extends View {
           loadingClass = ' loading';
           this.props.action.next();
 
+          // ga
+          if (this.props.home) {
+            this.gaHome();
+          } else {
+            this.gaCategory();
+          }
         }
 
         // loading 表示のための css class を追加・削除
         this.setState( {loading: loadingClass} );
 
       },
-      // Rise.RISE event handler
-      // 次 offset JSON を取得する
-      onRise: function() {
-        // console.log( '========================== onRise ', event );
-        this.updateLoading( true );
+      gaHome: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('SPViewArchive.render.SPMoreViewDom.gaHome', 'home_articles', 'view - new', String(++this.page)) );
+        // ----------------------------------------------
+      },
+      gaCategory: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('SPViewArchive.render.SPMoreViewDom.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
+        // ----------------------------------------------
       }
     } );
 
     // ------------------------------------------------
     let moreButton = ( show:Boolean ):void => {
       show = !!show;
-      // console.log( '----------------- moreButton ', show, _this._moreRendered );
-      // _moreRendered が null の時のみ, instance があれば state を update する
-      // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-      if ( _this._moreRendered === null ) {
-        // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
-
+      // _moreRendered が null の時のみ state を update する
+      if ( this._moreRendered === null ) {
         // チェックをパスし実行する
-        _this._moreRendered = ReactDOM.render(
+        this._moreRendered = ReactDOM.render(
           <SPMoreViewDom
             show={show}
-            action={_this.action}
+            action={this.action}
+            home={this.home}
+            slug={this.slug}
           />,
-          _this.moreElement
+          this.moreElement
         );
 
       } else {
 
-        _this._moreRendered.updateShow( show );
+        this._moreRendered.updateShow( show );
 
       }
     };
@@ -354,34 +364,4 @@ export class SPViewArchive extends View {
     }
 
   }// render
-  // /**
-  //  * more button 表示・非表示
-  //  * @param {Boolean} show more button 表示・非表示 を決定する真偽値
-  //  */
-  /*
-  moreButton( show:Boolean ):void {
-    show = !!show;
-    console.log( '----------------- moreButton ', show, this._moreRendered );
-    // _moreRendered が null の時のみ, instance があれば state を update する
-    // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-    if ( this._moreRendered === null ) {
-      // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
-
-      // チェックをパスし実行する
-      this._moreRendered = ReactDOM.render(
-        <SPMoreViewNode
-          show={show}
-          action={this.action}
-        />,
-        this.moreElement
-      );
-
-    } else {
-
-      this._moreRendered.updateShow( show );
-
-    }
-  }
-  */
 }
-

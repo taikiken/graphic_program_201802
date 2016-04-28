@@ -318,9 +318,8 @@ export let CommentFormElementNode = React.createClass( {
       Ga.add( new GaData('CommentFormElementNode.done', 'comment', 'post', Loc.current, this.props.articleId) );
     } else {
       // コメントへのコメント
-      Ga.add( new GaData('CommentFormElementNode.done', 'post - reply', 'post', this.props.url, this.props.commentId) );
+      Ga.add( new GaData('CommentFormElementNode.done', 'comment', 'post - reply', this.props.url, this.props.commentId) );
     }
-
     // ----------------------------------------------
     this.dispose();
   },

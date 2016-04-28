@@ -307,9 +307,9 @@ export class ViewPickup extends View {
           </li>
         );
       },
-      gaSend: function(e) {
-        e.preventDefault();
-      // gaSend: function() {
+      // gaSend: function(e) {
+      //   e.preventDefault();
+      gaSend: function() {
         // ----------------------------------------------
         // GA 計測タグ
         Ga.add( new GaData('ViewPickup.render.PickupDom.gaSend', 'home_pickup', 'click', this.props.url, this.props.id) );

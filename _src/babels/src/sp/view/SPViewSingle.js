@@ -98,7 +98,6 @@ export class SPViewSingle extends ViewSingle {
       this._visual.render( single );
     }
   }
-
   /**
    * banner レンダリング
    * @param {SingleDae} single 記事 SingleDae instance

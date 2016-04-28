@@ -18,6 +18,8 @@ let _headline = 5;
 let _ranking = 5;
 let _video = 5;
 let _archive = 16;
+// データが少ない時用
+// let _archive = 2;
 let _list = 10;
 let _max = 999;
 

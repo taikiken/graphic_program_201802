@@ -124,6 +124,8 @@ export class SPViewVideos extends ViewVideos {
         <SPMoreViewNode
           show={show}
           action={this.action}
+          slug={this.slug}
+          type="movie"
         />,
         this._moreElement
       );

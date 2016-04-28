@@ -125,6 +125,8 @@ export class SPViewRanking extends ViewRanking {
         <SPMoreViewNode
           show={show}
           action={this.action}
+          slug={this.slug}
+          type="ranking"
         />,
         this._moreElement
       );

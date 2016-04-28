@@ -158,6 +158,7 @@ export class SPViewComments extends ViewComments {
                       sign={sign}
                       parent={false}
                       commentsListType={commentsListType}
+                      url={replyComment.url}
                     />
                   </li>
                 );
@@ -229,10 +230,11 @@ export class SPViewComments extends ViewComments {
                 sign={sign}
                 parent={true}
                 commentsListType={commentsListType}
+                url={commentObject.comment.url}
               />
               {/* comment reply */}
               <CommentReplyChildDom
-                uniqueId={`reply-${this.props.uniqueId}`}
+                uniqueId={`reply-${commentsListType}-${this.props.uniqueId}`}
                 total={total}
                 sign={sign}
                 userId={userId}
@@ -240,7 +242,8 @@ export class SPViewComments extends ViewComments {
                 articleId={articleId}
                 commentId={commentId}
                 commentsListType={commentsListType}
-                reply={commentObject.reply} />
+                reply={commentObject.reply}
+              />
             </li>
           </ul>
 
