@@ -187,6 +187,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           // loading 中は監視を止める
           loadingClass = ' loading';
           this.props.action.next();
+
+          // ga
           if (this.props.home) {
             this.gaHome();
           } else {
@@ -280,7 +282,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                   let picture = Safety.image( userDae.profilePicture, Empty.USER_EMPTY );
                   let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
-                  // CommentsSecond unique key は  記事Id + user Id を使用する
+                  // CommentsSecond unique key は  記事Id + comment Id + user Id + index を使用する
                   // 同一ユーザーが複数投稿することがあるため
                   // render 内で unique なことを保証する必要がある
                   return (

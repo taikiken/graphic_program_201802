@@ -62,6 +62,12 @@ export class ViewRanking extends View {
      * @private
      */
     this._home = false;
+    /**
+     * 記事詳細 か否かを表す真偽値, default false
+     * @type {boolean}
+     * @private
+     */
+    this._detail = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -86,6 +92,19 @@ export class ViewRanking extends View {
    */
   set home( bool:Boolean ):void {
     this._home = bool;
+  }
+  /**
+   * 記事詳細か否かを表す真偽値
+   * @return {boolean} 記事詳細か否かを表す真偽値を返します
+   */
+  get detail():Boolean {
+    return this._detail;
+  }
+  /**
+   * @param {Boolean} bool 記事詳細か否かを表す真偽値
+   */
+  set detail( bool:Boolean ):void {
+    this._detail = bool;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -179,6 +198,7 @@ export class ViewRanking extends View {
         empty: React.PropTypes.bool.isRequired,
         total: React.PropTypes.number.isRequired,
         home: React.PropTypes.bool.isRequired,
+        detail: React.PropTypes.bool.isRequired,
         thisSlug: React.PropTypes.string.isRequired
       },
       getDefaultPropTypes: function() {
@@ -219,9 +239,13 @@ export class ViewRanking extends View {
           </li>
         );
       },
-      gaSend: function() {
+      gaSend: function(e) {
+        e.preventDefault();
+      // gaSend: function() {
         if (this.props.home) {
           this.gaHome();
+        } else if (this.props.detail) {
+          this.gaDetail();
         } else {
           this.gaCategory();
         }
@@ -237,6 +261,12 @@ export class ViewRanking extends View {
         // GA 計測タグ
         Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', `${this.props.thisSlug}_ranking`, 'click', this.props.url, this.props.id) );
         // ----------------------------------------------
+      },
+      gaDetail: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'detail_ranking', 'click', this.props.url, this.props.id) );
+        // ----------------------------------------------
       }
     } );
 
@@ -245,12 +275,14 @@ export class ViewRanking extends View {
       propTypes: {
         list: React.PropTypes.array.isRequired,
         home: React.PropTypes.bool.isRequired,
+        detail: React.PropTypes.bool.isRequired,
         slug: React.PropTypes.string.isRequired
       },
       render: function() {
 
         let list = this.props.list;
         let home = this.props.home;
+        let detail = this.props.detail;
         let thisSlug = this.props.slug;
         let categoryTitle = '';
 
@@ -283,7 +315,6 @@ export class ViewRanking extends View {
 
                 // RankingDom instance を使い render
                 return (
-
                     <RankingDom
                       key={'ranking-' + dae.id}
                       index={i}
@@ -298,6 +329,7 @@ export class ViewRanking extends View {
                       empty={empty}
                       total={dae.commentsCount}
                       home={home}
+                      detail={detail}
                       thisSlug={thisSlug}
                     />
                 );
@@ -320,7 +352,11 @@ export class ViewRanking extends View {
 
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: articles, home: this.home, slug: this.slug } ),
+      React.createElement( ArticleDom, {
+        list: articles,
+        home: this.home,
+        detail: this.detail,
+        slug: this.slug } ),
       element
     );
 

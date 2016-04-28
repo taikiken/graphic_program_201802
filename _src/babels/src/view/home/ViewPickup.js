@@ -10,6 +10,8 @@
  *
  */
 
+// view
+import {View} from '../View';
 
 // app
 // import {App} from '../../app/App';
@@ -18,18 +20,20 @@ import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
 import {MediaType} from '../../app/const/MediaType';
 
-// view
-import {View} from '../View';
-// import {ViewError} from '../error/ViewError';
 // action
 import {Pickup} from '../../action/home/Pickup';
 import {PickupAuth} from '../../action/home/PickupAuth';
+
 // data
 import {Result} from '../../data/Result';
+import {Safety} from '../../data/Safety';
+
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
-import {Safety} from '../../data/Safety';
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
 
 // global object
 // React
@@ -287,7 +291,7 @@ export class ViewPickup extends View {
 
         return (
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
-            <a href={p.url} style={{'background': `url(${p.large}) no-repeat 50% 50% / cover`}}>
+            <a href={p.url} style={{'background': `url(${p.large}) no-repeat 50% 50% / cover`}} onClick={this.gaSend}>
               <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
               <VideoPlayDom mediaType={this.props.mediaType} />
               {/*
@@ -302,6 +306,14 @@ export class ViewPickup extends View {
             </a>
           </li>
         );
+      },
+      gaSend: function(e) {
+        e.preventDefault();
+      // gaSend: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewPickup.render.PickupDom.gaSend', 'home_pickup', 'click', this.props.url, this.props.id) );
+        // ----------------------------------------------
       }
     } );
 
@@ -345,19 +357,6 @@ export class ViewPickup extends View {
         let make = ( article, i ) => {
 
           let dae = new ArticleDae( article );
-          /*
-          let large = dae.media.images.large;
-
-          if ( !large ) {
-            large = Empty.IMG_LARGE;
-          } else if ( !Safety.isImg( large ) ) {
-            // 画像ファイル名に拡張子がないのがあったので
-            // 拡張子チェックを追加
-            if ( !Safety.isGraph( large ) ) {
-              large = Empty.IMG_LARGE;
-            }
-          }
-          */
           let large = Safety.image( dae.media.images.large, Empty.IMG_LARGE );
 
           // HeadlineDom instance を使い render

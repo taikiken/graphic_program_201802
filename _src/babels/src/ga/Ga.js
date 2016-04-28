@@ -86,7 +86,7 @@ export class Ga {
     while( _requests.length > 0 ) {
       let data:GaData = _requests.shift();
       ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
-      console.log( 'ga send ', data.method, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+      console.log( `${data.method}: ga, send, `, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
     }
   }
 }

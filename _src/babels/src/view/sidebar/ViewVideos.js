@@ -62,6 +62,12 @@ export class ViewVideos extends View {
      * @private
      */
     this._home = false;
+    /**
+     * 記事詳細 か否かを表す真偽値, default false
+     * @type {boolean}
+     * @private
+     */
+    this._detail = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -73,7 +79,6 @@ export class ViewVideos extends View {
   get slug():string {
     return this._slug;
   }
-
   /**
    * home(index) か否かを表す真偽値
    * @return {boolean} home(index) か否かを表す真偽値を返します
@@ -86,6 +91,19 @@ export class ViewVideos extends View {
    */
   set home( bool:Boolean ):void {
     this._home = bool;
+  }
+  /**
+   * 記事詳細か否かを表す真偽値
+   * @return {boolean} 記事詳細か否かを表す真偽値を返します
+   */
+  get detail():Boolean {
+    return this._detail;
+  }
+  /**
+   * @param {Boolean} bool 記事詳細か否かを表す真偽値
+   */
+  set detail( bool:Boolean ):void {
+    this._detail = bool;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -177,6 +195,7 @@ export class ViewVideos extends View {
         title: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
         home: React.PropTypes.bool.isRequired,
+        detail: React.PropTypes.bool.isRequired,
         thisSlug: React.PropTypes.string.isRequired
       },
       getDefaultPropTypes: function() {
@@ -207,9 +226,13 @@ export class ViewVideos extends View {
           </li>
         );
       },
-      gaSend: function() {
+      gaSend: function(e) {
+        e.preventDefault();
+      // gaSend: function() {
         if (this.props.home) {
           this.gaHome();
+        } else if (this.props.detail) {
+          this.gaDetail();
         } else {
           this.gaCategory();
         }
@@ -225,6 +248,12 @@ export class ViewVideos extends View {
         // GA 計測タグ
         Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', `${this.props.thisSlug}_movie`, 'click', this.props.url, this.props.id) );
         // ----------------------------------------------
+      },
+      gaDetail: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'detail_movie', 'click', this.props.url, this.props.id) );
+        //
       }
     } );
 
@@ -233,12 +262,14 @@ export class ViewVideos extends View {
       propTypes: {
         list: React.PropTypes.array.isRequired,
         home: React.PropTypes.bool.isRequired,
+        detail: React.PropTypes.bool.isRequired,
         slug: React.PropTypes.string.isRequired
       },
       render: function() {
 
         let list = this.props.list;
         let home = this.props.home;
+        let detail = this.props.detail;
         let thisSlug = this.props.slug;
         let categoryTitle = '';
 
@@ -282,6 +313,7 @@ export class ViewVideos extends View {
                       title={dae.title}
                       thumbnail={thumbnail}
                       home={home}
+                      detail={detail}
                       thisSlug={thisSlug}
                     />
                 );
@@ -304,7 +336,11 @@ export class ViewVideos extends View {
 
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: articles, home: this.home, slug: this.slug } ),
+      React.createElement( ArticleDom, {
+        list: articles,
+        home: this.home,
+        detail: this.detail,
+        slug: this.slug } ),
       element
     );
 

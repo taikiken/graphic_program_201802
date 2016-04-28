@@ -10,27 +10,29 @@
  *
  */
 
+// view
+import {View} from '../View';
 
 // app
-// import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
 import {MediaType} from '../../app/const/MediaType';
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
 
-// view
-import {View} from '../View';
-// import {ViewError} from '../error/ViewError';
-
 // action
 import {Headline} from '../../action/home/Headline';
 import {HeadlineAuth} from '../../action/home/HeadlineAuth';
+
 // data
 import {Result} from '../../data/Result';
+import {Safety} from '../../data/Safety';
+
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
-import {Safety} from '../../data/Safety';
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
 
 // React
 let React = self.React;
@@ -201,7 +203,7 @@ export class ViewHeadline extends View {
 
         return (
           <li className={'board-item board-item-' + p.index}>
-            <a className="post" href={p.url}>
+            <a className="post" href={p.url} onClick={this.gaSend}>
               <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(this.props.mediaType)}</figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
@@ -211,6 +213,14 @@ export class ViewHeadline extends View {
             </a>
           </li>
         );
+      },
+      gaSend: function(e) {
+        e.preventDefault();
+        // gaSend: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewHeadline.render.HeadlineDom.gaSend', 'home_headline', 'click', this.props.url, this.props.id) );
+        // ----------------------------------------------
       }
     } );
 
@@ -219,12 +229,6 @@ export class ViewHeadline extends View {
       propTypes: {
         list: React.PropTypes.array.isRequired
       },
-      // isRequired なので getDefaultProps がいらない
-      // getDefaultProps: function() {
-      //  return {
-      //    list: []
-      //  };
-      // },
       render: function() {
 
         let list = this.props.list;
@@ -242,20 +246,6 @@ export class ViewHeadline extends View {
                 list.map( function( article, i ) {
 
                   let dae = new ArticleDae( article );
-                  /*
-                  let thumbnail = dae.media.images.thumbnail;
-
-                  // thumbnail を check しなければ代替画像にする
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.IMG_SMALL;
-                  } else if ( !Safety.isImg( thumbnail ) ) {
-                    // 画像ファイル名に拡張子がないのがあったので
-                    // 拡張子チェックを追加
-                    if ( !Safety.isGraph( thumbnail ) ) {
-                      thumbnail = Empty.IMG_SMALL;
-                    }
-                  }
-                  */
                   let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                   // HeadlineDom instance を使い render
