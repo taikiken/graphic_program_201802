@@ -12,6 +12,7 @@
 
 
 let _symbol = Symbol();
+let _scroll;
 
 // UT
 let UT = self.UT;
@@ -36,8 +37,9 @@ export class Sidebar {
   /**
    * sidebar ranking / video rendering 開始
    * @param {string} [slug=all] category slug
+   * @param {Boolean} [home=false] home か否かの真偽値
    */
-  static start( slug:string = 'all' ):void {
+  static start( slug:string = 'all', home:Boolean = false ):void {
     // ranking
     let rankingElement = Dom.ranking();
     if ( rankingElement !== null ) {
@@ -56,6 +58,43 @@ export class Sidebar {
       videos.start();
     }
 
+    // sidebar
+    let sidebar = Dom.sidebar();
+    let footer = Dom.footer();
+    if ( sidebar !== null && footer !== null ) {
+      _scroll = UT.util.Scroll.factory();
+      Sidebar.moving( sidebar, footer, home );
+    }
+
+  }
+
+  static moving( sidebar:Element, footer:Element, home:Boolean ):void {
+
+    let header = Dom.header();
+    let nav = Dom.nav();
+    let pickup = null;
+    if ( home ) {
+      pickup = Dom.pickup();
+    }
+    let move = new UT.view.sidebar.Sidebar( sidebar, footer );
+    Sidebar.add( move, header );
+    Sidebar.add( move, nav );
+    Sidebar.add( move, pickup );
+    move.start();
+
+    window.addEventListener( 'load', Sidebar.load, false );
+    _scroll.fire();
+  }
+  
+  static add( sidebar, element ):void {
+    if ( element !== null ) {
+      sidebar.addOffset( element );
+    }
+  }
+
+  static load():void {
+    window.removeEventListener( 'load', Sidebar.load );
+    _scroll.fire();
   }
 
   static didRanking():void {

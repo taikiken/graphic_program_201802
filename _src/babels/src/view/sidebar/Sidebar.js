@@ -17,59 +17,85 @@ const Sagen = self.Sagen;
 const Dom = Sagen.Dom;
 
 export class Sidebar {
-  constructor( sidebar:Element ) {
-    Object.assign( this, { sidebar } );
-    this._offsets = [];
-    this._previous = 0;
+  constructor( sidebar:Element, footer:Element ) {
+    let offsets = [];
+    let previous = 0;
+    let parent = sidebar.parentNode;
+
+    Object.assign( this, { sidebar, footer, offsets, previous, parent } );
   }
   addOffset( element:Element ):void {
-    this._offsets.push(element);
+    this.offsets.push(element);
   }
   start():void {
-    Scroll.factory().on( Scroll.SCROLL, this.scroll.bind( this ) );
+    let scroll = Scroll.factory();
+    scroll.on( Scroll.SCROLL, this.scroll.bind( this ) );
+    scroll.start();
   }
+
   scroll( event:Object ):void {
 
     let y = event.y;
 
-    if ( this._previous < y ) {
+    if ( this.previous < y ) {
       this.down( y );
     } else {
       this.up( y );
     }
 
-    this._previous = y;
+    this.previous = y;
     
   }
 
+  offset():Number {
+    let elements = this.offsets;
+    let offset = 0;
+    for (var element of elements) {
+      offset += parseInt( Dom.getStyle( element, 'height' ), 10 );
+    }
+
+    return offset;
+  }
+
   down( y:Number ):void {
-    let sidebar = this.sidebar;
     let windowHeight = window.innerHeight;
     let windowBottom = y + windowHeight;
-    let rect = Offset.offset( this.sidebar );
-    let height = parseInt(rect.height, 10);
-    let top = parseInt(rect.top, 10);
-    let bottom = top + height;
-    let css = 'position: fixed; bottom: 0;';
-    let current = sidebar.style.cssText;
 
-    if ( bottom >= windowBottom && current !== css ) {
-      sidebar.style.cssText = css;
+    let sidebar = this.sidebar;
+    let rect = Offset.offset( sidebar );
+    let sidebarHeight = parseInt(rect.height, 10);
+    let sidebarTop = parseInt(rect.top, 10);
+    let sidebarBottom = sidebarTop + sidebarHeight;
+
+    let parentRect = Offset.offset( this.parent );
+    let parentTop = parseInt( parentRect.top, 10 );
+
+    let offset = this.offset();
+
+
+    let footerRect = Offset.offset( this.footer );
+    let footerTop = parseInt( footerRect.top, 10 );
+
+    console.log( 'height bottom', sidebarTop, sidebarHeight, sidebarBottom, offset, parentTop, y, windowHeight, windowBottom );
+    if ( sidebarBottom < windowBottom ) {
+      let top = sidebarBottom - windowBottom;
+      // sidebar.style.cssText = `position: absolute; top: ${top}px`;
+      console.log( '****', top );
     }
 
   }
   up( y:Number ):void {
-    let sidebar = this.sidebar;
-    let elements = this._elements;
-    let offset = 0;
-    let current = sidebar.style.cssText;
-
-    for (var element of elements) {
-      offset += parseInt( Dom.style( element, 'height' ), 10 );
-    }
-
-    if ( y <= offset && current !== '' ) {
-      sidebar.style.cssText = '';
-    }
+    // let sidebar = this.sidebar;
+    // let elements = this._offsets;
+    // let offset = 0;
+    // let current = sidebar.style.cssText;
+    //
+    // for (var element of elements) {
+    //   offset += parseInt( Dom.getStyle( element, 'height' ), 10 );
+    // }
+    //
+    // if ( y <= offset && current !== '' ) {
+    //   sidebar.style.cssText = '';
+    // }
   }
 }

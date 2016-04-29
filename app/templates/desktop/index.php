@@ -33,7 +33,7 @@
         </div><!-- /.board-large -->
       </section><!-- /.main-sec -->
 
-      <section class="side-sec">
+      <section class="side-sec" style="position: relative;">
         <div id="sidebar-moving-container">
           <div class="sponsor-link">
             <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34749&targetID=adg_34749&displayid=1&adType=PC&width=300&height=250&sdkType=3&async=true&tagver=2.0.0"></script>

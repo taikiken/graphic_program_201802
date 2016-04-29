@@ -114,7 +114,7 @@ export class SPNav {
     // window 右端から離れ無いように調整する
     if ( right < 0 ) {
       altLeft = altLeft + right;
-      right = 0;
+      // right = 0;
     }
 
     // console.log( 'target ', ulWidth, left, right, windowWidth );

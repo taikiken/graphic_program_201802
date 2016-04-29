@@ -102,6 +102,15 @@ export class Dom {
     return Dom.get( 'search-container-opener' );
   }
   // --------------------------------------
+  // footer
+  /**
+   * hooter
+   * @return {Element} footer-container element を返します
+   */
+  static footer():Element {
+    return Dom.get( 'footer-container' );
+  }
+  // --------------------------------------
   // synapse
   /**
    * synapse 切り替えメニュー
