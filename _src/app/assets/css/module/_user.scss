@@ -263,6 +263,15 @@
   }
 }
 
+.activity-item-line {
+  position: relative;
+  display: block;
+  padding: 20px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
 
 
 // .info
@@ -328,6 +337,10 @@
   }
 }
 
+
+
+
+
 // -------------------------------------------------
 // override
-@import "user_override";
+// @import "user_override";
