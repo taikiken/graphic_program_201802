@@ -74,6 +74,13 @@ export class Dom {
   // --------------------------------------
   // header
   /**
+   * main header コンテンツ上部
+   * @return {Element} header-container element を返します
+   */
+  static header():Element {
+    return Dom.get( 'header-container' );
+  }
+  /**
    * header user profile
    * @return {Element} 'user-profile-container' element を返します
    */
@@ -133,6 +140,13 @@ export class Dom {
    */
   static video():Element {
     return Dom.get( 'widget-recommend-container' );
+  }
+  /**
+   * sidebar scroll 追随させるコンテナ
+   * @return {Element} sidebar-moving-container element を返します
+   */
+  static sidebar():Element {
+    return Dom.get( 'sidebar-moving-container' );
   }
   // --------------------------------------
 
