@@ -37,7 +37,9 @@ let apiRoot = () => {
       return 'http://www.undotsushin.local';
 
     case Env.DEVELOP :
-      return 'http://dev2.undotsushin.com';
+      // return 'http://dev2.undotsushin.com';
+      // dev2 から正常値が返らなくなった 2016-04-25
+      return 'http://dev.undotsushin.com';
 
     // online
     case Env.PRODUCTION :

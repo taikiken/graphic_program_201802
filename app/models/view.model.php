@@ -59,10 +59,14 @@ class ViewModel {
 
     if ( UT_ENV === 'LOCAL') :
 
-      # LOCAL(vagrant)ではリモートサーバーにAPI/file_get_contentアクセスする
-      $this->default['file_get_url'] = 'http://dev2.undotsushin.com';
-      $this->default['apiRoot']      = 'http://dev2.undotsushin.com';
+//      # LOCAL(vagrant)ではリモートサーバーにAPI/file_get_contentアクセスする
+//      $this->default['file_get_url'] = 'http://dev2.undotsushin.com';
+//      $this->default['apiRoot']      = 'http://dev2.undotsushin.com';
 
+      # 2016-04-27
+      # dev2 -> dev へ変更
+      $this->default['file_get_url'] = 'http://dev.undotsushin.com';
+      $this->default['apiRoot']      = 'http://dev.undotsushin.com';
     else :
 
       # LOCAL以外は自サーバから file_get_content する
