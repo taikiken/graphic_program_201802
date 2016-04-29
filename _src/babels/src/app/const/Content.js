@@ -37,7 +37,8 @@ export class Content {
    * @return {Number} コンテンツ幅を返します
    */
   static get WIDTH():Number {
-    return 710;
+    // return 710;
+    return 728;
   }
   /**
    * コンテンツ幅 に対応した 16:9 の高さ
