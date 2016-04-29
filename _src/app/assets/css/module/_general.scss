@@ -340,14 +340,14 @@
   @at-root {
     &-inner {
       position: relative;
-      width: 1070px;
+      width: $global-inner-width;
       height: 80px;
       margin: 0 auto;
     }
 
     &-info {
       @include table-cell;
-      width: 1170px - 30;
+      width: $global-inner-width - 30;
       height: 80px;
       color: #fff;
       text-align: center;
