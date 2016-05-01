@@ -18,9 +18,10 @@ const Dom = Sagen.Dom;
 
 export class Sidebar {
   constructor( sidebar:Element, footer:Element ) {
-    let offsets = [];
-    let previous = 0;
-    let parent = sidebar.parentNode;
+    let offsets:Array = [];
+    let previous:Number = 0;
+    let id:Number = 0;
+    let parent:Element = footer.parentNode;
 
     Object.assign( this, { sidebar, footer, offsets, previous, parent } );
   }
@@ -28,20 +29,30 @@ export class Sidebar {
     this.offsets.push(element);
   }
   start():void {
-    let scroll = Scroll.factory();
-    scroll.on( Scroll.SCROLL, this.scroll.bind( this ) );
-    scroll.start();
+    // let scroll = Scroll.factory();
+    // scroll.on( Scroll.SCROLL, this.scroll.bind( this ) );
+    // scroll.start();
+    this.update();
+  }
+  stop():void {
+    cancelAnimationFrame(this.id);
+  }
+
+  update():void {
+    this.id = requestAnimationFrame(this.update.bind(this));
+    this.scroll( {y: Scroll.y} );
   }
 
   scroll( event:Object ):void {
 
-    let y = event.y;
-
-    if ( this.previous < y ) {
-      this.down( y );
-    } else {
-      this.up( y );
-    }
+    let y:Number = event.y;
+    // let down:Boolean = this.previous < y;
+    // let up:Boolean = this.previous > y;
+    //
+    // if ( down || up ) {
+    //   this.top( y, down );
+    // }
+    this.top( y, this.previous < y );
 
     this.previous = y;
     
@@ -57,45 +68,65 @@ export class Sidebar {
     return offset;
   }
 
-  down( y:Number ):void {
+  top( y:Number, down:Boolean ):void {
+    const margin = 30;
     let windowHeight = window.innerHeight;
     let windowBottom = y + windowHeight;
 
     let sidebar = this.sidebar;
     let rect = Offset.offset( sidebar );
     let sidebarHeight = parseInt(rect.height, 10);
-    let sidebarTop = parseInt(rect.top, 10);
-    let sidebarBottom = sidebarTop + sidebarHeight;
-
-    let parentRect = Offset.offset( this.parent );
-    let parentTop = parseInt( parentRect.top, 10 );
+    // let sidebarTop = parseInt(rect.top, 10);
+    // let sidebarBottom = sidebarTop + sidebarHeight;
 
     let offset = this.offset();
+    let sidebarBottom = offset + sidebarHeight;
+    let css = '';
 
-
-    let footerRect = Offset.offset( this.footer );
-    let footerTop = parseInt( footerRect.top, 10 );
-
-    console.log( 'height bottom', sidebarTop, sidebarHeight, sidebarBottom, offset, parentTop, y, windowHeight, windowBottom );
-    if ( sidebarBottom < windowBottom ) {
-      let top = sidebarBottom - windowBottom;
-      // sidebar.style.cssText = `position: absolute; top: ${top}px`;
-      console.log( '****', top );
+    if ( y > offset + margin ) {
+      if ( sidebarBottom < windowBottom - margin ) {
+        let top = windowBottom - sidebarHeight - offset - margin;
+        // if ( down ) {
+        //   top = this.down( top, sidebarHeight, offset, margin );
+        // } else {
+        //   top = this.up( top, y, offset );
+        // }
+        top = this.down( top, sidebarHeight, offset, margin );
+        // if (!down) {
+        // top = this.up( top, y, offset );
+        // }
+        // sidebar.style.cssText = `position: absolute; top: ${top}px; transition-property: top; transition-duration: 0.025s`;
+        css = `position: absolute; top: ${top}px;`;
+        console.log( '****', top );
+      }
     }
 
+    sidebar.style.cssText = css;
+
   }
-  up( y:Number ):void {
-    // let sidebar = this.sidebar;
-    // let elements = this._offsets;
-    // let offset = 0;
-    // let current = sidebar.style.cssText;
-    //
-    // for (var element of elements) {
-    //   offset += parseInt( Dom.getStyle( element, 'height' ), 10 );
-    // }
-    //
-    // if ( y <= offset && current !== '' ) {
-    //   sidebar.style.cssText = '';
-    // }
+
+  down( top:Number, sidebarHeight:Number, offset:Number, margin:Number ):Number {
+    let parentRect = Offset.offset( this.parent );
+    let parentHeight = parseInt( parentRect.height, 10 );
+
+    let footerRect = Offset.offset( this.footer );
+    let footerHeight = parseInt( footerRect.height, 10 );
+
+    let limitBottom = parentHeight - footerHeight - margin;
+    let altBottom = top + sidebarHeight + offset;
+
+    console.log( 'height bottom', altBottom, top, sidebarHeight, limitBottom, parentHeight, footerHeight );
+    if ( altBottom > limitBottom ) {
+      console.log( 'footerTop', top, limitBottom, altBottom );
+      top += (limitBottom - altBottom);
+    }
+    return top;
   }
+  // up( top:Number, y:Number, offset:Number ):Number {
+  //   if ( y < offset ) {
+  //     top = 0;
+  //   }
+  //
+  //   return top;
+  // }
 }
