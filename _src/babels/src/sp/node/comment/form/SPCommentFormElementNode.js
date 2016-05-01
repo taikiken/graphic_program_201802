@@ -311,10 +311,10 @@ export let SPCommentFormElementNode = React.createClass( {
     // GA 計測タグ
     if (this.props.independent) {
       // 記事へのコメント
-      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post', Loc.current, this.props.articleId) );
+      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post', Loc.current, parseFloat(this.props.articleId)) );
     } else {
       // コメントへのコメント
-      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post - reply', this.props.url, this.props.commentId) );
+      Ga.add( new GaData('SPCommentFormElementNode.done', 'comment', 'post - reply', this.props.url, parseFloat(this.props.commentId)) );
     }
     // ----------------------------------------------
     this.dispose();

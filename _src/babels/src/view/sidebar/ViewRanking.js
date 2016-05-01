@@ -253,19 +253,19 @@ export class ViewRanking extends View {
       gaHome: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'home_ranking', 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'home_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       },
       gaCategory: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', `${this.props.thisSlug}_ranking`, 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', `${this.props.thisSlug}_ranking`, 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       },
       gaDetail: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'detail_ranking', 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'detail_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       }
     } );

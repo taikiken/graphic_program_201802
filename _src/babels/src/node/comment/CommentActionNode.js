@@ -206,7 +206,7 @@ export let CommentActionNode = React.createClass( {
 
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData( 'CommentActionNode.deleteDone', 'comment', 'delete', this.props.url, this.props.commentId ) );
+    Ga.add( new GaData( 'CommentActionNode.deleteDone', 'comment', 'delete', this.props.url, parseFloat(this.props.commentId) ) );
     // ----------------------------------------------
 
     // event 通知

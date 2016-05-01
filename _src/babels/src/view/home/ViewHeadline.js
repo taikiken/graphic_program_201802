@@ -219,7 +219,7 @@ export class ViewHeadline extends View {
       gaSend: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewHeadline.render.HeadlineDom.gaSend', 'home_headline', 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewHeadline.render.HeadlineDom.gaSend', 'home_headline', 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       }
     } );

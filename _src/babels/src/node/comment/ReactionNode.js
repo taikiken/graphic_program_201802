@@ -232,7 +232,7 @@ export let ReactionNode = React.createClass( {
     this.good.add( this.props.commentId );
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - good', this.props.url, this.props.commentId) );
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - good', this.props.url, parseFloat(this.props.commentId)) );
     // ----------------------------------------------
   },
   // bad delete
@@ -245,7 +245,7 @@ export let ReactionNode = React.createClass( {
     this.setState( {good: good, loading: '', isGood: false} );
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - bad', this.props.url, this.props.commentId) );
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - bad', this.props.url, parseFloat(this.props.commentId)) );
     // ----------------------------------------------
   },
   // -----------------------------------------------
@@ -268,7 +268,7 @@ export let ReactionNode = React.createClass( {
     this.bad.add( this.props.commentId );
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - bad', this.props.url, this.props.commentId) );
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - bad', this.props.url, parseFloat(this.props.commentId)) );
     // ----------------------------------------------
   },
   // bad delete
@@ -281,7 +281,7 @@ export let ReactionNode = React.createClass( {
     this.setState( {bad: bad, loading: '', isBad: false} );
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - good', this.props.url, this.props.commentId) );
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - good', this.props.url, parseFloat(this.props.commentId)) );
     // ----------------------------------------------
   },
   // good error

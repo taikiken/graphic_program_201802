@@ -240,19 +240,19 @@ export class ViewVideos extends View {
       gaHome: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'home_movie', 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'home_movie', 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       },
       gaCategory: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', `${this.props.thisSlug}_movie`, 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', `${this.props.thisSlug}_movie`, 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       },
       gaDetail: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'detail_movie', 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'detail_movie', 'click', this.props.url, parseFloat(this.props.id)) );
         //
       }
     } );

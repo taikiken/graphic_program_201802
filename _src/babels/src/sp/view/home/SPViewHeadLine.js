@@ -102,7 +102,7 @@ export class SPViewHeadLine extends ViewHeadline {
       gaSend: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('SPViewHeadLine.render.HeadlineFirstDom.gaSend', 'home_pickup', 'click', this.props.dae.url, this.props.dae.id) );
+        Ga.add( new GaData('SPViewHeadLine.render.HeadlineFirstDom.gaSend', 'home_pickup', 'click', this.props.dae.url, parseFloat(this.props.dae.id)) );
         // ----------------------------------------------
       }
     } );
@@ -165,7 +165,7 @@ export class SPViewHeadLine extends ViewHeadline {
       gaSend: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('SPViewHeadLine.render.HeadlineDom.gaSend', 'home_headline', 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('SPViewHeadLine.render.HeadlineDom.gaSend', 'home_headline', 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       }
     } );

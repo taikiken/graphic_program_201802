@@ -312,7 +312,7 @@ export class ViewPickup extends View {
       gaSend: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewPickup.render.PickupDom.gaSend', 'home_pickup', 'click', this.props.url, this.props.id) );
+        Ga.add( new GaData('ViewPickup.render.PickupDom.gaSend', 'home_pickup', 'click', this.props.url, parseFloat(this.props.id)) );
         // ----------------------------------------------
       }
     } );

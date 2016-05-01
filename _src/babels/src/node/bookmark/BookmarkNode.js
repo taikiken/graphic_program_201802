@@ -120,10 +120,10 @@ export let BookmarkNode = React.createClass( {
     // GA 計測タグ
     if (this.state.status) {
       // bookmarked -> DELETE
-      Ga.add( new GaData( 'BookmarkNode.clickBookmark', 'bookmark', 'cancel', Loc.current, this.props.articleId ) );
+      Ga.add( new GaData( 'BookmarkNode.clickBookmark', 'bookmark', 'cancel', Loc.current, parseFloat(this.props.articleId) ) );
     } else {
       // not bookmarked => PUT
-      Ga.add( new GaData( 'BookmarkNode.clickBookmark', 'bookmark', 'save', Loc.current, this.props.articleId ) );
+      Ga.add( new GaData( 'BookmarkNode.clickBookmark', 'bookmark', 'save', Loc.current, parseFloat(this.props.articleId) ) );
     }
     // ----------------------------------------------
 
