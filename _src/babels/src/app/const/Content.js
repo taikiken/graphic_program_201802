@@ -34,7 +34,7 @@ export class Content {
   }
   /**
    * コンテンツ幅
-   * @return {Number} コンテンツ幅を返します
+   * @return {Number} コンテンツ幅を返します 710
    */
   static get WIDTH():Number {
     return 710;
@@ -45,5 +45,14 @@ export class Content {
    */
   static get HD_HEIGHT():Number {
     return Math.ceil( Content.WIDTH * 9 / 16 );
+  }
+
+  /**
+   * コンテンツ サイドバー幅
+   * @return {number} コンテンツ サイドバー幅を返します 300
+   * @constructor
+   */
+  static get SIDEBAR_WIDTH():Number {
+    return 300;
   }
 }
