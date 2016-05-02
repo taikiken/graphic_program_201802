@@ -40,8 +40,12 @@ export class Sidebar {
     let padding:Number = 30;
     let css:String = `position: absolute; top: ${padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
     let fixedBottom:String = `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
+    let fixed = {
+      top: false,
+      bottom: false
+    };
 
-    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, fixedBottom } );
+    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, fixedBottom, fixed } );
   }
   /**
    * offset 計算対象 element を追加します
@@ -199,11 +203,13 @@ export class Sidebar {
     let offset = this.offset();
     let sidebarBottom = offset + sidebarHeight;
     let css = this.css;
+    let fixed = this.fixed;
 
     // scroll top が offset (header + nav + side-sec: padding-top) より大きかったら
     // sidebar bottom( offset + sidebar height ) が window bottom(scroll top + window height)より小さくなったら
     if ( y > offset && sidebarBottom < windowBottom ) {
       css = `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
+      fixed.bottom = true;
 
       let wholeRect = Offset.offset( this.whole );
       let wholeHeight = parseInt( wholeRect.height, 10 );
@@ -215,6 +221,7 @@ export class Sidebar {
 
       if ( windowBottom > limitBottom ) {
         css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+        fixed.bottom = false;
       }
     }
 
@@ -249,23 +256,29 @@ export class Sidebar {
 
     let css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
     let fixedTop = `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
+    let fixed = this.fixed;
 
     if ( y <= range ) {
 
-      let current = sidebar.style.cssText;
-      if ( current === this.fixedBottom ) {
+      if ( fixed.bottom ) {
         this.style( fixedTop );
-      } else
-      if ( current !== this.css ) {
+        fixed.bottom = false;
+        fixed.top = true;
+      } else /*if ( current !== this.css ) { */{
         this.style( this.css );
+        fixed.bottom = false;
+        fixed.top = false;
       }
 
     } else
     if ( y <= wholeHeight - ( sidebarHeight + footerHeight + this.padding ) ) {
       css = fixedTop;
+      fixed.bottom = false;
+      fixed.top = true;
 
       if ( y <= offset ) {
         css = `position: absolute; top: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+        fixed.top = false;
       }
 
       // if ( y > range ) {
@@ -275,6 +288,8 @@ export class Sidebar {
       this.style( css );
     } else {
       this.style( css );
+      fixed.bottom = false;
+      fixed.top = false;
     }
 
     // sidebar.style.cssText = css;
