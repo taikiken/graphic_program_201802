@@ -15,12 +15,7 @@
       <div class="post-detail">
 
         <div id="single-header-container"></div>
-        <?php
-        /*
-        #314
-        https://github.com/undotsushin/undotsushin/issues/314#issuecomment-211741805
-        一時的に削除
-        ?>
+
         <div class="post-sns">
           <ul class="post-sns-list">
             <li class="post-sns-item post-sns-item_fbgood">
@@ -61,9 +56,6 @@
         <div class="sponsor-link w728">
           <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35118&targetID=adg_35118&displayid=1&adType=PC&width=728&height=90&sdkType=3&async=false&tagver=2.0.0"></script>
         </div>
-        <?php
-        /*
-        ?>
 
         <?php /* div.post-kv */ ?>
         <div id="single-visual-container"></div>

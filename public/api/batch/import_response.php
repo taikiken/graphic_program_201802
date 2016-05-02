@@ -28,7 +28,7 @@ function modKeyword($keywords){
 	return $keyword;
 }
 
-$rssfile="response.xml";
+$rssfile="http://response.jp/feed/article/index.xml";
 $mtype=131;
 
 $o=new db;

@@ -65,6 +65,7 @@ while($f=fgetcsv($fp,1024)){
 		
 		$body=modptag($w["description"]);
 		
+		$w["timestamp"]=date("Y-m-d H:i:s",strtotime($w["timestamp"]." + 9hour"));
 		$s["m_time"]=bind($w["timestamp"]);
 		$s["u_time"]=bind($w["timestamp"]);
 		$s["a_time"]=bind($w["timestamp"]);
