@@ -32,7 +32,7 @@
     "bxslider3": "bxslider#*",
     "bxslider4": "bxslider-4#~4.2.5",
     "fancybox": "~2.1.5",
-    "react": "^15.0.1",
+    "react": "^15.0.2",
     "fetch": "~0.11.0",
     "es6-promise": "~3.2.1",
     "isotope": "^2.2.2",
