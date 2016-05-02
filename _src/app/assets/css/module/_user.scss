@@ -13,7 +13,7 @@
 
   .user-profile {
     @include clearfix;
-    width: 1070px;
+    width: $global-inner-width;
     margin: 0 auto;
     padding-top: 35px;
 
@@ -96,7 +96,7 @@
   @at-root {
     &-control {
       @include clearfix;
-      width: 1070px;
+      width: $global-inner-width;
       margin: 30px auto 0;
     }
 
@@ -263,6 +263,15 @@
   }
 }
 
+.activity-item-line {
+  position: relative;
+  display: block;
+  padding: 20px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
 
 
 // .info
@@ -328,6 +337,10 @@
   }
 }
 
+
+
+
+
 // -------------------------------------------------
 // override
-@import "user_override";
+// @import "user_override";

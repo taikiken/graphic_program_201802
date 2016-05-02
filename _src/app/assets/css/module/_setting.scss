@@ -34,9 +34,21 @@
 
     &-main {
       float: right;
-      width: 520px;
+      width: 538px;
       margin-top: 30px;
       padding-bottom: 30px;
+
+      .basic-setting {
+        width: 100%;
+      }
+
+      .interest-setting {
+        width: 100%;
+
+        .setting-form-interest-item {
+          width: 166px;
+        }
+      }
     }
   } //at-root
 }
@@ -376,6 +388,10 @@
   }
 } //btn-withdraw
 
+
+
+
+
 // -------------------------------------------------
 // override
-@import "setting_override";
+// @import "setting_override";

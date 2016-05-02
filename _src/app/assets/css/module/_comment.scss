@@ -6,6 +6,15 @@
 //
 // Styleguide 2.9.0
 
+// comment
+.comment {
+  padding-bottom: 10px;
+}
+
+
+
+
+
 // comment-heading
 .comment-heading {
   margin-top: 30px;
@@ -18,6 +27,12 @@
       color: #fff;
       font-weight: bold;
     }
+  }
+}
+
+.comment-detail-heading {
+  a {
+    @include link-decoration(#333, #e1438b, underline, none);
   }
 }
 
@@ -95,6 +110,25 @@
 
 
 
+// form control
+.form-open {
+  display: block;
+}
+.form-close {
+  display: none;
+}
+.form-root {
+  clear: both;
+}
+.comment-respond {
+  .form-root {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+
+
 
 
 // comment-menu
@@ -110,6 +144,18 @@
 
       &.disable  + .dropMenu {
         display: none;
+      }
+    }
+  }
+
+  .dropMenu-container {
+    .dropMenu {
+      overflow: hidden;
+
+      .dropMenu-item {
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
       }
     }
   }
@@ -167,6 +213,41 @@
         }
       }
     }
+  } //.dropMenu
+
+  &.close {
+    .dropMenu {
+      height: 0;
+
+      &:before {
+        visibility: hidden;
+      }
+
+      .dropMenu-item {
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+
+        .dropMenu-link-report,
+        .dropMenu-link-delete {
+          overflow: hidden;
+          display: block;
+          height: 0;
+          font-size: 0;
+          line-height: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  &.open {
+    .dropMenu {
+      height: auto;
+      .dropMenu-item {
+        opacity: 1;
+      }
+    }
   }
 } //.comment-menu
 
@@ -194,7 +275,13 @@
   &-thumb {
     width: 50px;
     height: 50px;
+    overflow: hidden;
     background: url(/assets/images/common/thumb-user-feature.png) 0 0 no-repeat;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
 
     &.user-logged-in {
       background: none;
@@ -221,6 +308,20 @@
     }
   }
 } //.comment-user
+
+
+
+
+
+// commented-user
+.commented-user-thumb {
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
 
 
 
@@ -435,4 +536,4 @@
 
 // -------------------------------------------------
 // override
-@import "comment_override";
+// @import "comment_override";
