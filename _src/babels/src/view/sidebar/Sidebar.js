@@ -18,27 +18,49 @@ import {Offset} from '../../util/Offset';
 const Sagen = self.Sagen;
 const Dom = Sagen.Dom;
 
+/**
+ * sidebar をスクロール追随させます
+ */
 export class Sidebar {
+  /**
+   * sidebar をスクロール追随させます
+   * @param {Element} sidebar #sidebar-moving-container
+   * @param {Element} footer #footer-container'
+   */
   constructor( sidebar:Element, footer:Element ) {
     let offsets:Array = [];
     let previous:Number = 0;
     let id:Number = 0;
+    // // .sidebar-root-container
+    // sidebar.parentNode.style.cssText = `width: ${Content.SIDEBAR_WIDTH}px;`;
+    let parent = sidebar.parentNode;
     // .whole
-    sidebar.parentNode.style.cssText = `width: ${Content.SIDEBAR_WIDTH}px;`;
-    let parent = sidebar.parentNode.parentNode;
     let whole:Node = footer.parentNode;
     let boundUpdate = this.update.bind( this );
     let padding:Number = 30;
     let css:String = `position: absolute; top: ${padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+    let fixedBottom:String = `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
 
-    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css } );
+    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, fixedBottom } );
   }
+  /**
+   * offset 計算対象 element を追加します
+   * @param {Element} element offset 計算させる element, header, nav...
+   */
   addOffset( element:Element ):void {
     this.offsets.push(element);
   }
+  /**
+   * sidebar へ style を設定します
+   * @param {String} css 設定する css text
+   */
   style( css:String ):void {
     this.sidebar.style.cssText = css;
   }
+  /**
+   * 開始
+   * instance 作成後に必ず実行します
+   */
   start():void {
     // let scroll = Scroll.factory();
     // scroll.on( Scroll.SCROLL, this.scroll.bind( this ) );
@@ -48,15 +70,24 @@ export class Sidebar {
     this.style( this.css );
     this.update();
   }
+  /**
+   * 監視をやめます
+   */
   stop():void {
     cancelAnimationFrame(this.id);
   }
-
+  /**
+   * loop 関数
+   * start 実行後常時監視します
+   */
   update():void {
     this.id = requestAnimationFrame(this.boundUpdate);
     this.scroll( {y: Scroll.y} );
   }
-
+  /**
+   * 現在の scroll top 位置を元に追随計算します
+   * @param {{y: Number}} event scroll top が含まれた Object
+   */
   scroll( event:Object ):void {
 
     let y:Number = event.y;
@@ -73,7 +104,11 @@ export class Sidebar {
     this.previous = y;
     
   }
-
+  /**
+   * 保存されている offset 計算対象 element の高さの合計を計算します
+   * .side-sec の padding-top も含みます
+   * @return {number} 保存されている offset 計算対象 element の高さの合計を計算し返します
+   */
   offset():Number {
     let elements = this.offsets;
     let offset = 0;
@@ -122,24 +157,24 @@ export class Sidebar {
   //   sidebar.style.cssText = css;
   //
   // }
-
-  down( top:Number, sidebarHeight:Number, offset:Number, margin:Number ):Number {
-    let parentRect = Offset.offset( this.parent );
-    let parentHeight = parseInt( parentRect.height, 10 );
-
-    let footerRect = Offset.offset( this.footer );
-    let footerHeight = parseInt( footerRect.height, 10 );
-
-    let limitBottom = parentHeight - footerHeight - margin;
-    let altBottom = top + sidebarHeight + offset;
-
-    console.log( 'height bottom', altBottom, top, sidebarHeight, limitBottom, parentHeight, footerHeight );
-    if ( altBottom > limitBottom ) {
-      console.log( 'footerTop', top, limitBottom, altBottom );
-      top += (limitBottom - altBottom);
-    }
-    return top;
-  }
+  //
+  // down( top:Number, sidebarHeight:Number, offset:Number, margin:Number ):Number {
+  //   let parentRect = Offset.offset( this.parent );
+  //   let parentHeight = parseInt( parentRect.height, 10 );
+  //
+  //   let footerRect = Offset.offset( this.footer );
+  //   let footerHeight = parseInt( footerRect.height, 10 );
+  //
+  //   let limitBottom = parentHeight - footerHeight - margin;
+  //   let altBottom = top + sidebarHeight + offset;
+  //
+  //   console.log( 'height bottom', altBottom, top, sidebarHeight, limitBottom, parentHeight, footerHeight );
+  //   if ( altBottom > limitBottom ) {
+  //     console.log( 'footerTop', top, limitBottom, altBottom );
+  //     top += (limitBottom - altBottom);
+  //   }
+  //   return top;
+  // }
   // up( top:Number, y:Number, offset:Number ):Number {
   //   if ( y < offset ) {
   //     top = 0;
@@ -147,7 +182,11 @@ export class Sidebar {
   //
   //   return top;
   // }
-  
+
+  /**
+   * scroll down 計算
+   * @param {Number} y scroll top 位置
+   */
   scrollDown( y:Number ):void {
     let sidebar = this.sidebar;
 
@@ -182,6 +221,11 @@ export class Sidebar {
     // sidebar.style.cssText = css;
     this.style( css );
   }
+
+  /**
+   * scroll up 計算
+   * @param {Number} y scroll top 位置
+   */
   scrollUp( y:Number ):void {
     let sidebar = this.sidebar;
 
@@ -204,19 +248,35 @@ export class Sidebar {
     let range = offset + sidebarHeight;
 
     let css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+    let fixedTop = `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
 
+    if ( y <= range ) {
+
+      let current = sidebar.style.cssText;
+      if ( current === this.fixedBottom ) {
+        this.style( fixedTop );
+      } else
+      if ( current !== this.css ) {
+        this.style( this.css );
+      }
+
+    } else
     if ( y <= wholeHeight - ( sidebarHeight + footerHeight + this.padding ) ) {
-      css = `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
+      css = fixedTop;
 
       if ( y <= offset ) {
         css = `position: absolute; top: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
       }
 
-      if ( y > range ) {
-        css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
-      }
+      // if ( y > range ) {
+      //   css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+      // }
+
+      this.style( css );
+    } else {
+      this.style( css );
     }
 
-    sidebar.style.cssText = css;
+    // sidebar.style.cssText = css;
   }
 }

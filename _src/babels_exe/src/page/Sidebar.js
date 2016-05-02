@@ -59,44 +59,68 @@ export class Sidebar {
     }
 
     // sidebar
-    let sidebar = Dom.sidebar();
-    let footer = Dom.footer();
+    // git branch で分岐しすぎていて関数がなくエラーにならないために存在チェックを行います
+    let sidebar = !!Dom.sidebar ? Dom.sidebar() : null;
+    let footer = !!Dom.footer ? Dom.footer() : null;
+    // sidebar element & footer element がどちらも存在する時のみ実行する
     if ( sidebar !== null && footer !== null ) {
       _scroll = UT.util.Scroll.factory();
       Sidebar.moving( sidebar, footer, home );
     }
 
   }
-
+  /**
+   * sidebar をスクロール追随させます
+   * @param {Element} sidebar sidebar element. #sidebar-moving-container
+   * @param {Element} footer footer element. #footer-container'
+   * @param {Boolean} home home(index)かを表す真偽値 true: home
+   */
   static moving( sidebar:Element, footer:Element, home:Boolean ):void {
 
     let header = Dom.header();
     let nav = Dom.nav();
     let pickup = null;
+
+    // home のみ pickup element が存在する
     if ( home ) {
       pickup = Dom.pickup();
     }
+
     let move = new UT.view.sidebar.Sidebar( sidebar, footer );
+    
+    // topから位置計算で必要なoffset対象elementをaddします
     Sidebar.add( move, header );
     Sidebar.add( move, nav );
     Sidebar.add( move, pickup );
     move.start();
 
+    // window.onload 時に再計算させるために event を listener します
     window.addEventListener( 'load', Sidebar.load, false );
+    // 表示時点で位置計算させます
     _scroll.fire();
   }
-  
+  /**
+   * offset element を追加します, null の時は追加しません
+   * @param {UT.view.sidebar.Sidebar} sidebar instance
+   * @param {Element} [element=null] offset に追加する Element
+   */
   static add( sidebar, element ):void {
     if ( element !== null ) {
       sidebar.addOffset( element );
     }
   }
-
+  /**
+   * window.onload event handler
+   * ロード後に位置計算します
+   */
   static load():void {
     window.removeEventListener( 'load', Sidebar.load );
+    //  window.onload で位置計算させます
     _scroll.fire();
   }
-
+  /**
+   * ranking 下広告を表示させます
+   */
   static didRanking():void {
     let ad = Dom.adRanking();
     // console.log( 'didRanking', ad );
@@ -104,7 +128,9 @@ export class Sidebar {
       ad.style.cssText = 'display: block;';
     }
   }
-
+  /**
+   * オススメ動画 下広告を表示させます
+   */
   static didVideo():void {
     let ad = Dom.adVideo();
     // console.log( 'didVideo', ad );
