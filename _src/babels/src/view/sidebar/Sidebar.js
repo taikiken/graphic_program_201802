@@ -13,7 +13,7 @@
 import {Content} from '../../app/const/Content';
 
 import {Scroll} from '../../util/Scroll';
-import {Offset} from '../../util/Offset';
+// import {Offset} from '../../util/Offset';
 
 const Sagen = self.Sagen;
 const Dom = Sagen.Dom;
@@ -31,21 +31,19 @@ export class Sidebar {
     let offsets:Array = [];
     let previous:Number = 0;
     let id:Number = 0;
-    // // .sidebar-root-container
-    // sidebar.parentNode.style.cssText = `width: ${Content.SIDEBAR_WIDTH}px;`;
+    // .side-sec
     let parent = sidebar.parentNode;
     // .whole
     let whole:Node = footer.parentNode;
     let boundUpdate = this.update.bind( this );
     let padding:Number = 30;
     let css:String = `position: absolute; top: ${padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
-    let fixedBottom:String = `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
-    let fixed = {
-      top: false,
+    let sticky = {
+      top: true,
       bottom: false
     };
 
-    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, fixedBottom, fixed } );
+    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, sticky } );
   }
   /**
    * offset 計算対象 element を追加します
@@ -61,6 +59,11 @@ export class Sidebar {
   style( css:String ):void {
     this.sidebar.style.cssText = css;
   }
+  /**
+   * element height を計算します
+   * @param {Element} element 計算対象 Element
+   * @return {Number} element height を返します
+   */
   height( element:Element ):Number {
     return parseInt( Dom.getStyle( element, 'height' ), 10 );
   }
@@ -113,17 +116,22 @@ export class Sidebar {
       //   this.scrollUp( y );
       // }
       if ( down || up ) {
-        this.top( down, y, sidebarHeight, wholeHeight );
+        this.position( down, y, sidebarHeight, wholeHeight );
       }
 
     } else {
-      if ( this.fixed.top || this.fixed.bottom ) {
-        // 何もしなくても大丈夫な default css を与える
-        this.style( this.css );
-        this.fixed.top = false;
-        this.fixed.bottom = false;
-      }
+      this.style( this.css );
     }
+
+    // くっついた後に scroll free にすると矛盾が生じる
+    // else {
+    //   if ( this.fixed.top || this.fixed.bottom ) {
+    //     // 何もしなくても大丈夫な default css を与える
+    //     this.style( this.css );
+    //     this.fixed.top = false;
+    //     this.fixed.bottom = false;
+    //   }
+    // }
     // this.top( y, this.previous < y );
 
     this.previous = y;
@@ -146,182 +154,226 @@ export class Sidebar {
     return offset;
   }
 
-  top( direction:Boolean, y:Number, sidebarHeight:Number, wholeHeight:Number ):void {
+  /**
+   * sticky flag を全て false にします
+   */
+  stickyFree():void {
+    let fixed:Object = this.fixed;
+    fixed.top = false;
+    fixed.bottom = false;
+  }
+
+  /**
+   * sidebar position を制御します
+   * @param {Boolean} direction up / down 方向 true: down (scroll down)
+   * @param {Number} y scroll top 位置
+   * @param {Number} sidebarHeight sidebar container height
+   * @param {Number} wholeHeight .whole container height
+   */
+  position( direction:Boolean, y:Number, sidebarHeight:Number, wholeHeight:Number ):void {
     // let sidebar = this.sidebar;
 
-    let windowHeight = parseInt( window.innerHeight, 10 );
-    let windowBottom = y + windowHeight;
+    let windowHeight:Number = parseInt( window.innerHeight, 10 );
+    let windowBottom:Number = y + windowHeight;
 
-    let offset = this.offset();
+    let offset:Number = this.offset();
+    let footerHeight:Number = this.height( this.footer );
 
     // let sidebarHeight = this.height( sidebar );
-    let sidebarTop = windowBottom - sidebarHeight;
-    let sidebarBottom = offset + sidebarHeight;
-
-    let footerHeight = this.height( this.footer );
+    let sidebarTop:Number = wholeHeight - (footerHeight + sidebarHeight + this.padding);
+    let sidebarBottom:Number = offset + sidebarHeight;
 
     // let wholeHeight = this.height( this.whole );
-    let limitBottom = wholeHeight - footerHeight - this.padding;
+    let limitBottom:Number = wholeHeight - footerHeight - this.padding;
 
     // 可動域
     if ( y <= offset ) {
       //  scroll 位置が上部
       this.style( `position: absolute; top: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;` );
+      this.stickyFree();
+      this.sticky.top = true;
     } else if ( windowBottom > limitBottom ) {
       this.style( `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;` );
+      this.stickyFree();
+      this.sticky.bottom = true;
     } else {
       if ( direction ) {
         // scroll down
         this.down( sidebarBottom, windowBottom, limitBottom );
       } else {
         // scroll up
-        this.up( sidebarBottom, windowBottom, sidebarTop - footerHeight, y );
+        this.up( sidebarBottom, windowBottom, sidebarTop, y );
       }
     }
   }
 
+  /**
+   * scroll down 時の position 制御
+   * @param {Number} sidebarBottom scroll top + sidebar  height + offset height(include padding)
+   * @param {Number} windowBottom scroll top + window innerHeight
+   * @param {Number} limitBottom window bottom が超えたら position absolute; bottom: 0 にする break point
+   */
   down( sidebarBottom:Number, windowBottom:Number, limitBottom:Number ):void {
     if ( sidebarBottom < windowBottom ) {
       if ( windowBottom > limitBottom ) {
         this.style( `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;` );
+        this.stickyFree();
+        this.sticky.bottom = true;
       } else {
         this.style( `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;` );
+        this.stickyFree();
+        this.sticky.bottom = true;
       }
     } else {
       this.style( this.css );
+      this.stickyFree();
+      this.sticky.top = true;
     }
   }
 
+  /**
+   * scroll up 時の position 制御
+   * @param {Number} sidebarBottom scroll top + sidebar  height + offset height(include padding)
+   * @param {Number} windowBottom scroll top + window innerHeight
+   * @param {Number} sidebarTop sidebar の top 位置
+   * @param {Number} y scroll top
+   */
   up( sidebarBottom:Number, windowBottom:Number, sidebarTop:Number, y:Number ):void {
-    if ( sidebarBottom < windowBottom ) {
-      this.style( `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;` );
-    } else if ( sidebarTop <= y ) {
+    if ( sidebarTop >= y ) {
       this.style( `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;` );
+      this.stickyFree();
+      this.sticky.top = true;
+    } else if ( sidebarBottom < windowBottom ) {
+      this.style( `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;` );
+      this.stickyFree();
+      this.sticky.bottom = true;
     } else {
       this.style( this.css );
+      this.stickyFree();
+      this.sticky.top = true;
     }
   }
 
-
-  /**
-   * scroll down 計算
-   * @param {Number} y scroll top 位置
-   */
-  scrollDown( y:Number ):void {
-    let sidebar = this.sidebar;
-
-    let windowHeight = window.innerHeight;
-    let windowBottom = y + windowHeight;
-
-    let rect = Offset.offset( sidebar );
-    let sidebarHeight = parseInt(rect.height, 10);
-
-    let offset = this.offset();
-    let sidebarBottom = offset + sidebarHeight;
-    let css = this.css;
-    let fixed = this.fixed;
-
-    // scroll top が offset (header + nav + side-sec: padding-top) より大きかったら
-    // sidebar bottom( offset + sidebar height ) が window bottom(scroll top + window height)より小さくなったら
-    if ( y > offset && sidebarBottom < windowBottom ) {
-      css = `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
-      fixed.bottom = true;
-
-      let wholeRect = Offset.offset( this.whole );
-      let wholeHeight = parseInt( wholeRect.height, 10 );
-
-      let footerRect = Offset.offset( this.footer );
-      let footerHeight = parseInt( footerRect.height, 10 );
-
-      let limitBottom = wholeHeight - footerHeight - this.padding;
-
-      if ( windowBottom > limitBottom ) {
-        css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
-        fixed.bottom = false;
-      }
-    }
-
-    // sidebar.style.cssText = css;
-    this.style( css );
-  }
-
-  /**
-   * scroll up 計算
-   * @param {Number} y scroll top 位置
-   */
-  scrollUp( y:Number ):void {
-    let sidebar = this.sidebar;
-    let offset = this.offset();
-
-    let windowHeight = window.innerHeight;
-    let windowBottom = y + windowHeight;
-
-    let wholeRect = Offset.offset( this.whole );
-    let wholeHeight = parseInt( wholeRect.height, 10 );
-
-    let rect = Offset.offset( sidebar );
-    let sidebarHeight = parseInt(rect.height, 10);
-    let sidebarTop = windowBottom - sidebarHeight;
-    let sidebarBottom = offset + sidebarHeight;
-
-    let footerRect = Offset.offset( this.footer );
-    let footerHeight = parseInt( footerRect.height, 10 );
-
-    // let sidebarTop = windowBottom - sidebarHeight - 30;
-    // console.log( 'sidebarTop', rect, sidebarTop );
-
-
-    // let range = offset + sidebarHeight;
-    let range = sidebarTop;
-
-    let css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
-    let fixedTop = `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
-    let fixed = this.fixed;
-
-    if ( y > offset && sidebarBottom < windowBottom ) {
-
-      let limitBottom = wholeHeight - footerHeight - this.padding;
-
-      if ( windowBottom > limitBottom ) {
-        css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
-        this.style( css );
-        fixed.bottom = false;
-        fixed.top = false;
-      }
-    } else if ( y <= range ) {
-
-      if ( fixed.bottom ) {
-        this.style( fixedTop );
-        fixed.bottom = false;
-        fixed.top = true;
-      } else /*if ( current !== this.css ) { */{
-        this.style( this.css );
-        fixed.bottom = false;
-        fixed.top = false;
-      }
-
-    } else
-    if ( y <= wholeHeight - ( sidebarHeight + footerHeight + this.padding ) ) {
-      css = fixedTop;
-      fixed.bottom = false;
-      fixed.top = true;
-
-      if ( y <= offset ) {
-        css = `position: absolute; top: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
-        fixed.top = false;
-      }
-
-      // if ( y > range ) {
-      //   css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
-      // }
-
-      this.style( css );
-    } else {
-      this.style( css );
-      fixed.bottom = false;
-      fixed.top = false;
-    }
-
-    // sidebar.style.cssText = css;
-  }
+  //
+  // /**
+  //  * scroll down 計算
+  //  * @param {Number} y scroll top 位置
+  //  */
+  // scrollDown( y:Number ):void {
+  //   let sidebar = this.sidebar;
+  //
+  //   let windowHeight = window.innerHeight;
+  //   let windowBottom = y + windowHeight;
+  //
+  //   let rect = Offset.offset( sidebar );
+  //   let sidebarHeight = parseInt(rect.height, 10);
+  //
+  //   let offset = this.offset();
+  //   let sidebarBottom = offset + sidebarHeight;
+  //   let css = this.css;
+  //   let fixed = this.fixed;
+  //
+  //   // scroll top が offset (header + nav + side-sec: padding-top) より大きかったら
+  //   // sidebar bottom( offset + sidebar height ) が window bottom(scroll top + window height)より小さくなったら
+  //   if ( y > offset && sidebarBottom < windowBottom ) {
+  //     css = `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
+  //     fixed.bottom = true;
+  //
+  //     let wholeRect = Offset.offset( this.whole );
+  //     let wholeHeight = parseInt( wholeRect.height, 10 );
+  //
+  //     let footerRect = Offset.offset( this.footer );
+  //     let footerHeight = parseInt( footerRect.height, 10 );
+  //
+  //     let limitBottom = wholeHeight - footerHeight - this.padding;
+  //
+  //     if ( windowBottom > limitBottom ) {
+  //       css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+  //       fixed.bottom = false;
+  //     }
+  //   }
+  //
+  //   // sidebar.style.cssText = css;
+  //   this.style( css );
+  // }
+  //
+  // /**
+  //  * scroll up 計算
+  //  * @param {Number} y scroll top 位置
+  //  */
+  // scrollUp( y:Number ):void {
+  //   let sidebar = this.sidebar;
+  //   let offset = this.offset();
+  //
+  //   let windowHeight = window.innerHeight;
+  //   let windowBottom = y + windowHeight;
+  //
+  //   let wholeRect = Offset.offset( this.whole );
+  //   let wholeHeight = parseInt( wholeRect.height, 10 );
+  //
+  //   let rect = Offset.offset( sidebar );
+  //   let sidebarHeight = parseInt(rect.height, 10);
+  //   let sidebarTop = windowBottom - sidebarHeight;
+  //   let sidebarBottom = offset + sidebarHeight;
+  //
+  //   let footerRect = Offset.offset( this.footer );
+  //   let footerHeight = parseInt( footerRect.height, 10 );
+  //
+  //   // let sidebarTop = windowBottom - sidebarHeight - 30;
+  //   // console.log( 'sidebarTop', rect, sidebarTop );
+  //
+  //
+  //   // let range = offset + sidebarHeight;
+  //   let range = sidebarTop;
+  //
+  //   let css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+  //   let fixedTop = `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;`;
+  //   let fixed = this.fixed;
+  //
+  //   if ( y > offset && sidebarBottom < windowBottom ) {
+  //
+  //     let limitBottom = wholeHeight - footerHeight - this.padding;
+  //
+  //     if ( windowBottom > limitBottom ) {
+  //       css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+  //       this.style( css );
+  //       fixed.bottom = false;
+  //       fixed.top = false;
+  //     }
+  //   } else if ( y <= range ) {
+  //
+  //     if ( fixed.bottom ) {
+  //       this.style( fixedTop );
+  //       fixed.bottom = false;
+  //       fixed.top = true;
+  //     } else /*if ( current !== this.css ) { */{
+  //       this.style( this.css );
+  //       fixed.bottom = false;
+  //       fixed.top = false;
+  //     }
+  //
+  //   } else
+  //   if ( y <= wholeHeight - ( sidebarHeight + footerHeight + this.padding ) ) {
+  //     css = fixedTop;
+  //     fixed.bottom = false;
+  //     fixed.top = true;
+  //
+  //     if ( y <= offset ) {
+  //       css = `position: absolute; top: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+  //       fixed.top = false;
+  //     }
+  //
+  //     // if ( y > range ) {
+  //     //   css = `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;`;
+  //     // }
+  //
+  //     this.style( css );
+  //   } else {
+  //     this.style( css );
+  //     fixed.bottom = false;
+  //     fixed.top = false;
+  //   }
+  //
+  //   // sidebar.style.cssText = css;
+  // }
 }
