@@ -30,6 +30,7 @@ export class Sidebar {
   constructor( sidebar:Element, footer:Element ) {
     let offsets:Array = [];
     let previous:Number = 0;
+    // animationFrame id, cancel 時に使用します
     let id:Number = 0;
     // .side-sec
     let parent = sidebar.parentNode;
@@ -42,8 +43,9 @@ export class Sidebar {
       top: true,
       bottom: false
     };
+    let wholeHeight:Number = -1;
 
-    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, sticky } );
+    Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, sticky, wholeHeight } );
   }
   /**
    * offset 計算対象 element を追加します
@@ -79,6 +81,7 @@ export class Sidebar {
     // set default style
     this.style( this.css );
     this.update();
+    window.addEventListener( 'resize', this.resize.bind(this), false );
   }
   /**
    * 監視をやめます
@@ -93,6 +96,29 @@ export class Sidebar {
   update():void {
     this.id = requestAnimationFrame(this.boundUpdate);
     this.scroll( {y: Scroll.y} );
+    this.resizeWhole();
+  }
+  /**
+   * window.onresize event handler
+   * window resize 時に resize option を true にし scroll チェックルーチーンを call します
+   */
+  resize():void {
+    this.scroll( {y: Scroll.y, resize: true} );
+  }
+  /**
+   * whole element の resize を監視し height 変更時に resize option を true にし scroll チェックルーチーンを call します
+   */
+  resizeWhole():void {
+    let whole = this.whole;
+    let previousHeight = this.wholeHeight;
+    let wholeHeight = this.height( whole );
+
+    // 初期値を skip します
+    if ( previousHeight > 0 && previousHeight !== wholeHeight ) {
+      this.scroll( {y: Scroll.y, resize: true} );
+    }
+
+    this.wholeHeight = wholeHeight;
   }
   /**
    * 現在の scroll top 位置を元に追随計算します
@@ -110,29 +136,18 @@ export class Sidebar {
       let down:Boolean = this.previous < y;
       let up:Boolean = this.previous > y;
 
-      // if ( down ) {
-      //   this.scrollDown( y );
-      // } else if ( up ) {
-      //   this.scrollUp( y );
-      // }
       if ( down || up ) {
+        // scroll top 変更時に kick します
         this.position( down, y, sidebarHeight, wholeHeight );
+      } else if ( typeof event.resize !== 'undefined' && event.resize ) {
+        // resize option true の時に kick します
+        this.position( true, y, sidebarHeight, wholeHeight );
       }
 
     } else {
+      // default style 設定
       this.style( this.css );
     }
-
-    // くっついた後に scroll free にすると矛盾が生じる
-    // else {
-    //   if ( this.fixed.top || this.fixed.bottom ) {
-    //     // 何もしなくても大丈夫な default css を与える
-    //     this.style( this.css );
-    //     this.fixed.top = false;
-    //     this.fixed.bottom = false;
-    //   }
-    // }
-    // this.top( y, this.previous < y );
 
     this.previous = y;
     
@@ -153,7 +168,6 @@ export class Sidebar {
 
     return offset;
   }
-
   /**
    * sticky flag を全て false にします
    */
@@ -162,7 +176,6 @@ export class Sidebar {
     sticky.top = false;
     sticky.bottom = false;
   }
-
   /**
    * sidebar position を制御します
    * @param {Boolean} direction up / down 方向 true: down (scroll down)
@@ -230,7 +243,6 @@ export class Sidebar {
       this.sticky.top = true;
     }
   }
-
   /**
    * scroll up 時の position 制御
    * @param {Number} sidebarBottom scroll top + sidebar  height + offset height(include padding)
