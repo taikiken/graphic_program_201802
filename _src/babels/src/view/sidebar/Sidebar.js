@@ -158,9 +158,9 @@ export class Sidebar {
    * sticky flag を全て false にします
    */
   stickyFree():void {
-    let fixed:Object = this.fixed;
-    fixed.top = false;
-    fixed.bottom = false;
+    let sticky:Object = this.sticky;
+    sticky.top = false;
+    sticky.bottom = false;
   }
 
   /**
@@ -239,18 +239,35 @@ export class Sidebar {
    * @param {Number} y scroll top
    */
   up( sidebarBottom:Number, windowBottom:Number, sidebarTop:Number, y:Number ):void {
+    let position:String = Dom.getStyle(this.sidebar, 'position');
     if ( sidebarTop >= y ) {
-      this.style( `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;` );
-      this.stickyFree();
-      this.sticky.top = true;
+      // sidebar top が scroll top より大きい
+      if ( sidebarBottom < windowBottom ) {
+        // sidebar bottom が window bottom より小さい
+        // -- window top
+        // === sidebar top
+        // === sidebar bottom
+        // -- window bottom
+        if ( position !== 'fixed' ) {
+          this.style( `position: fixed; top: 0; width: ${Content.SIDEBAR_WIDTH}px;` );
+          // this.style( `position: absolute; top: 0; width: ${Content.SIDEBAR_WIDTH}px;` );
+          this.stickyFree();
+          this.sticky.top = true;
+        }
+      }
     } else if ( sidebarBottom < windowBottom ) {
-      this.style( `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;` );
-      this.stickyFree();
-      this.sticky.bottom = true;
+      // this.style( `position: fixed; bottom: 0; width: ${Content.SIDEBAR_WIDTH}px;` );
+      if ( position !== 'fixed' ) {
+        this.style( `position: absolute; bottom: ${this.padding}px; width: ${Content.SIDEBAR_WIDTH}px;` );
+        this.stickyFree();
+        this.sticky.bottom = true;
+      }
     } else {
-      this.style( this.css );
-      this.stickyFree();
-      this.sticky.top = true;
+      if ( position !== 'fixed' || !this.sticky.bottom ) {
+        this.style( this.css );
+        this.stickyFree();
+        this.sticky.top = true;
+      }
     }
   }
 
