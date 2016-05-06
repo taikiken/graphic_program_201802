@@ -13,6 +13,10 @@
 
 import {Message} from '../../app/const/Message';
 
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
+
 // React
 let React = self.React;
 
@@ -29,7 +33,12 @@ export let SPMoreViewNode = React.createClass( {
     show: React.PropTypes.bool.isRequired,
     // button click 後の action
     action: React.PropTypes.object.isRequired,
-    loading: React.PropTypes.string
+    loading: React.PropTypes.string,
+    // for ga
+    // category slug
+    slug: React.PropTypes.string.isRequired,
+    // ranking | movie
+    type: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -37,6 +46,7 @@ export let SPMoreViewNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    this.page = 1;
 
     return {
       disable: false,
@@ -66,40 +76,32 @@ export let SPMoreViewNode = React.createClass( {
     }
 
   },
-  componentDidMount: function() {
-  },
-  componentWillUnmount: function() {
-    // unmount 時に rise 破棄を行う
-    this.destroy();
-  },
+  // componentDidMount: function() {
+  // },
+  // componentWillUnmount: function() {
+  //   // unmount 時に rise 破棄を行う
+  //   this.destroy();
+  // },
   // -----------------------------------------
-  // button 関連 custom method
-  // rise 関連 event を破棄する
-  destroy: function() {
-  },
-  // 緊急用, button click を残す
+  // // button 関連 custom method
+  // // rise 関連 event を破棄する
+  // destroy: function() {
+  // },
+  // button click
   handleClick: function( event:Event ) {
     event.preventDefault();
-    // disable
-    // this.setState( { loading: ' loading' } );
-    // action.next();
     this.onRise();
   },
   // button 表示・非表示
   updateShow: function( show:Boolean ) {
-    // console.log( '========================== updateShow ', show );
-    /*
-    if ( !show ) {
-      // button を非表示にするので rise 監視を止める
-      this.destroy();
-    } else {
-      // button 表示, loading 表示を止める
-      this.updateLoading( false );
-    }
-    */
 
     this.setState( { show: show, loading: '' } );
 
+  },
+  // Rise.RISE event handler
+  // 次 offset JSON を取得する
+  onRise: function(/* event */) {
+    this.updateLoading( true );
   },
   // loading 表示 on / off
   // on: true, off: false
@@ -111,18 +113,14 @@ export let SPMoreViewNode = React.createClass( {
       // loading 中は監視を止める
       loadingClass = ' loading';
       this.props.action.next();
-
+      // ----------------------------------------------
+      // GA 計測タグ
+      Ga.add( new GaData('SPMoreViewNode.updateLoading', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page)) );
+      // ----------------------------------------------
     }
 
     // loading 表示のための css class を追加・削除
     this.setState( {loading: loadingClass} );
 
-  },
-  // Rise.RISE event handler
-  // 次 offset JSON を取得する
-  onRise: function(/* event */) {
-    // console.log( '========================== onRise ', event );
-
-    this.updateLoading( true );
   }
 } );

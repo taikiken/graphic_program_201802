@@ -34,5 +34,7 @@ export class ViewCategory extends ViewArchiveMasonry {
     this._action = User.sign ?
       new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
       new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
+
+    this._slug = slug;
   }
 }

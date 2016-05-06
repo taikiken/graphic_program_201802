@@ -43,7 +43,9 @@ export let CommentMenuNode = React.createClass( {
     // 親コメント? default false
     parent: React.PropTypes.bool.isRequired,
 
-    sign: React.PropTypes.bool.isRequired
+    sign: React.PropTypes.bool.isRequired,
+    // コメント詳細URL
+    url: React.PropTypes.string.isRequired
   },
   getInitialState: function() {
     this.timer = 0;
@@ -80,6 +82,7 @@ export let CommentMenuNode = React.createClass( {
                 parent={this.props.parent}
                 remove={this.didDelete}
                 report={this.didReport}
+                url={this.props.url}
               />
             </ul>
           </div>

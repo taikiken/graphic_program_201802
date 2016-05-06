@@ -35,15 +35,19 @@ export class Sidebar {
   }
   /**
    * sidebar ranking / video rendering 開始
-   * @param {string} [slug=all] category slug
+   * @param {string|null} [slug=all] category slug
+   * @param {Boolean} [home=false] home(index) か否かを表す真偽値
+   * @param {Boolean} [detail=false] 記事詳細か否かを表す真偽値
    */
-  static start( slug:string = 'all' ):void {
+  static start( slug:string = 'all', home:Boolean = false, detail:Boolean = false ):void {
     // ranking
     let rankingElement = Dom.ranking();
     if ( rankingElement !== null ) {
       let option = {};
       option[ UT.view.View.DID_MOUNT ] = Sidebar.didRanking;
       let ranking = new UT.view.sidebar.ViewRanking( rankingElement, option, slug );
+      ranking.home = home;
+      ranking.detail = detail;
       ranking.start();
     }
 
@@ -53,11 +57,17 @@ export class Sidebar {
       let option = {};
       option[ UT.view.View.DID_MOUNT ] = Sidebar.didVideo;
       let videos = new UT.view.sidebar.ViewVideos( videoElement, option, slug );
+      videos.home = home;
+      videos.detail = detail;
       videos.start();
     }
 
   }
-
+  /**
+   * ranking ad を display block に（表示）する
+   * default 非表示
+   * ranking を表示するときのみ広告枠を出現させます
+   */
   static didRanking():void {
     let ad = Dom.adRanking();
     // console.log( 'didRanking', ad );
@@ -65,7 +75,11 @@ export class Sidebar {
       ad.style.cssText = 'display: block;';
     }
   }
-
+  /**
+   * videos ad を display block に（表示）する
+   * default 非表示
+   * オススメ動画 を表示するときのみ広告枠を出現させます
+   */
   static didVideo():void {
     let ad = Dom.adVideo();
     // console.log( 'didVideo', ad );

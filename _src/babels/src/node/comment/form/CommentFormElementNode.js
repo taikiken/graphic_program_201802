@@ -33,6 +33,13 @@ import {Model} from '../../../model/Model';
 // node
 import {ErrorNode} from '../../error/ErrorNode';
 
+// util
+import {Loc} from '../../../util/Loc';
+
+// Ga
+import {Ga} from '../../../ga/Ga';
+import {GaData} from '../../../ga/GaData';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -63,7 +70,9 @@ export let CommentFormElementNode = React.createClass( {
     // コメント Id オプション
     commentId: React.PropTypes.string,
     // コメント
-    commentType: React.PropTypes.string.isRequired
+    commentType: React.PropTypes.string.isRequired,
+    // コメント詳細 URL
+    url: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -110,27 +119,15 @@ export let CommentFormElementNode = React.createClass( {
     if ( this.state.open || this.props.independent ) {
 
       // user icon
-      /*
-      let picture = this.props.icon;
-      if ( !picture ) {
-        picture = Empty.USER_EMPTY;
-      } else if ( !Safety.isImg( picture ) ) {
-        // 画像ファイル名に拡張子がないのがあったので
-        // 拡張子チェックを追加
-        if ( !Safety.isGraph( picture ) ) {
-          picture = Empty.USER_EMPTY;
-        }
-      }
-
-      let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-      */
       let picture = Safety.image( this.props.icon, Empty.USER_EMPTY );
       let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
+      // inner methods
+      // error 表示する？
       let errorClass = ( keyName:string ) => {
         return this.errors[ keyName ].error ? 'error' : '';
       };
-
+      // error message を表示する？
       let message = ( keyName:string ) => {
         return this.errors[ keyName ].message;
       };
@@ -165,18 +162,15 @@ export let CommentFormElementNode = React.createClass( {
     this.listen();
 
   },
-  componentDidUpdate: function() {
-  },
+  // componentDidUpdate: function() {
+  // },
   componentWillUnMount: function() {
-    // console.log( '+++++++++++ componentWillUnMount +++++++++++', this.props.uniqueId );
-
     this.mounted = false;
     this.dispose();
   },
   // ----------------------------------------
   listen: function() {
     let replyStatus = this.replyStatus;
-    // console.log( '+++++++++++ listen ', this.props.uniqueId, replyStatus );
 
     if ( replyStatus === null ) {
 
@@ -214,6 +208,7 @@ export let CommentFormElementNode = React.createClass( {
   },
   // all event unbind
   dispose: function() {
+    // console.log( 'dispose ', this.props.uniqueId );
     // event unbind
     this.setState( {loading: '', open: false} );
     let comment = this.comment;
@@ -221,7 +216,6 @@ export let CommentFormElementNode = React.createClass( {
       comment.off( Model.COMPLETE, this.done );
       comment.off( Model.UNDEFINED_ERROR, this.fail );
       comment.off( Model.RESPONSE_ERROR, this.fail );
-      // this.comment = null;
     }
 
     let replyStatus = this.replyStatus;
@@ -229,7 +223,6 @@ export let CommentFormElementNode = React.createClass( {
       replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
       replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
       replyStatus.off( ReplyStatus.COMPLETE, this.beforeReload );
-      // this.replyStatus = null;
     }
 
     let commentStatus = this.commentStatus;
@@ -293,7 +286,6 @@ export let CommentFormElementNode = React.createClass( {
     this.setState( {loading: 'loading'} );
     let formNode = ReactDOM.findDOMNode(this.refs.form);
     let formData = Form.element( formNode );
-    // console.log( 'sending ===============', this.props.articleId, formNode, formData );
 
     this.replyStatus.start( this.props.uniqueId );
 
@@ -319,6 +311,16 @@ export let CommentFormElementNode = React.createClass( {
     // console.log( 'done', event );
     this.replyStatus.complete( this.props.uniqueId, this.props.commentType );
     this.setState( { body: '' } );
+    // ----------------------------------------------
+    // GA 計測タグ
+    if (this.props.independent) {
+      // 記事へのコメント
+      Ga.add( new GaData('CommentFormElementNode.done', 'comment', 'post', Loc.current, parseFloat(this.props.articleId)) );
+    } else {
+      // コメントへのコメント
+      Ga.add( new GaData('CommentFormElementNode.done', 'comment', 'post - reply', this.props.url, parseFloat(this.props.commentId)) );
+    }
+    // ----------------------------------------------
     this.dispose();
   },
   // コメント送信失敗
