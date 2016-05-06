@@ -221,6 +221,7 @@ let PopularDom = React.createClass( {
               isGood={first.isGood}
               isBad={first.isBad}
               activate={false}
+              url={first.url}
             />
           </div>
 
@@ -353,22 +354,6 @@ export let SPArchiveNode = React.createClass( {
 
             let commentsPopular = dae.commentsPopular;
             let commentsTotal = dae.commentsCount;
-            /*
-            let thumbnail;
-
-            thumbnail = dae.media.images.medium;
-
-            // thumbnail が空の時は代替画像
-            if ( !thumbnail ) {
-              thumbnail = Empty.IMG_MIDDLE;
-            } else if ( !Safety.isImg( thumbnail ) ) {
-              // 画像ファイル名に拡張子がないのがあったので
-              // 拡張子チェックを追加
-              if ( !Safety.isGraph( thumbnail ) ) {
-                thumbnail = Empty.IMG_MIDDLE;
-              }
-            }
-            */
             let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
             let category = ( label ):string => {
@@ -379,7 +364,7 @@ export let SPArchiveNode = React.createClass( {
             if ( !!dae.isRecommend && home ) {
               recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
             }
-
+            // console.log( 'id:', dae.id );
             // unique key(React)にarticle id(number)記事Idを使用します
             return (
               <div key={'archive-article-' + type + '-' + dae.id} className={`archive-article archive-article-${i}`}>

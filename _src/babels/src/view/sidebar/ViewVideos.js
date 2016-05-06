@@ -10,23 +10,26 @@
  *
  */
 
+// view
+import {View} from '../View';
 
 // app
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
 
-// view
-import {View} from '../View';
-// import {ViewError} from '../error/ViewError';
-
 // action
 import {Widget} from '../../action/sidebar/Widget';
+
 // data
 import {Result} from '../../data/Result';
+import {Safety} from '../../data/Safety';
+
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
-import {Safety} from '../../data/Safety';
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
 
 // React
 let React = self.React;
@@ -53,6 +56,18 @@ export class ViewVideos extends View {
     this._slug = slug;
     // response.request object を保持する
     this._request = null;
+    /**
+     * home(index) か否かを表す真偽値, default false
+     * @type {boolean}
+     * @private
+     */
+    this._home = false;
+    /**
+     * 記事詳細 か否かを表す真偽値, default false
+     * @type {boolean}
+     * @private
+     */
+    this._detail = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -63,6 +78,32 @@ export class ViewVideos extends View {
    */
   get slug():string {
     return this._slug;
+  }
+  /**
+   * home(index) か否かを表す真偽値
+   * @return {boolean} home(index) か否かを表す真偽値を返します
+   */
+  get home():Boolean {
+    return this._home;
+  }
+  /**
+   * @param {Boolean} bool home(index) か否かを表す真偽値
+   */
+  set home( bool:Boolean ):void {
+    this._home = bool;
+  }
+  /**
+   * 記事詳細か否かを表す真偽値
+   * @return {boolean} 記事詳細か否かを表す真偽値を返します
+   */
+  get detail():Boolean {
+    return this._detail;
+  }
+  /**
+   * @param {Boolean} bool 記事詳細か否かを表す真偽値
+   */
+  set detail( bool:Boolean ):void {
+    this._detail = bool;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -152,7 +193,10 @@ export class ViewVideos extends View {
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
-        thumbnail: React.PropTypes.string.isRequired
+        thumbnail: React.PropTypes.string.isRequired,
+        home: React.PropTypes.bool.isRequired,
+        detail: React.PropTypes.bool.isRequired,
+        thisSlug: React.PropTypes.string.isRequired
       },
       getDefaultPropTypes: function() {
         return {
@@ -168,7 +212,7 @@ export class ViewVideos extends View {
 
         return (
           <li className={'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
-            <a href={p.url} className='post'>
+            <a href={p.url} className='post' onClick={this.gaSend}>
               <figure className="post-thumb post-thumb-video">
                 <img className="video-thumbnail" src={p.thumbnail} alt={p.title}/>
                 <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} />
@@ -181,23 +225,52 @@ export class ViewVideos extends View {
             </a>
           </li>
         );
+      },
+      // gaSend: function(e) {
+      //   e.preventDefault();
+      gaSend: function() {
+        if (this.props.home) {
+          this.gaHome();
+        } else if (this.props.detail) {
+          this.gaDetail();
+        } else {
+          this.gaCategory();
+        }
+      },
+      gaHome: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'home_movie', 'click', this.props.url, parseFloat(this.props.id)) );
+        // ----------------------------------------------
+      },
+      gaCategory: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', `${this.props.thisSlug}_movie`, 'click', this.props.url, parseFloat(this.props.id)) );
+        // ----------------------------------------------
+      },
+      gaDetail: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('ViewVideos.render.VideosDom.gaSend', 'detail_movie', 'click', this.props.url, parseFloat(this.props.id)) );
+        //
       }
     } );
 
     // React Class
     let ArticleDom = React.createClass( {
       propTypes: {
-        list: React.PropTypes.array.isRequired
+        list: React.PropTypes.array.isRequired,
+        home: React.PropTypes.bool.isRequired,
+        detail: React.PropTypes.bool.isRequired,
+        slug: React.PropTypes.string.isRequired
       },
-      // isRequired なので getDefaultProps がいらない
-      // getDefaultProps: function() {
-      //  return {
-      //    list: []
-      //  };
-      // },
       render: function() {
 
         let list = this.props.list;
+        let home = this.props.home;
+        let detail = this.props.detail;
+        let thisSlug = this.props.slug;
         let categoryTitle = '';
 
         let categoryLabel;
@@ -224,20 +297,6 @@ export class ViewVideos extends View {
               list.map( function( article, i ) {
 
                 let dae = new ArticleDae( article );
-                /*
-                let thumbnail = dae.media.images.medium;
-
-                // thumbnail(16x9) を check なければ代替画像にする
-                if ( !thumbnail ) {
-                  thumbnail = Empty.VIDEO_THUMBNAIL;
-                } else if ( !Safety.isImg( thumbnail ) ) {
-                  // 画像ファイル名に拡張子がないのがあったので
-                  // 拡張子チェックを追加
-                  if ( !Safety.isGraph( thumbnail ) ) {
-                    thumbnail = Empty.VIDEO_THUMBNAIL;
-                  }
-                }
-                */
                 let thumbnail = Safety.image( dae.media.images.medium, Empty.VIDEO_THUMBNAIL );
 
                 // VideosDom instance を使い render
@@ -253,6 +312,9 @@ export class ViewVideos extends View {
                       date={dae.displayDate}
                       title={dae.title}
                       thumbnail={thumbnail}
+                      home={home}
+                      detail={detail}
+                      thisSlug={thisSlug}
                     />
                 );
 
@@ -274,7 +336,11 @@ export class ViewVideos extends View {
 
     // dom 生成
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: articles } ),
+      React.createElement( ArticleDom, {
+        list: articles,
+        home: this.home,
+        detail: this.detail,
+        slug: this.slug } ),
       element
     );
 

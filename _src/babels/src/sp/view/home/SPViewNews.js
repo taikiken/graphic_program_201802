@@ -37,7 +37,5 @@ export class SPViewNews extends SPViewArchive {
      * @type {Boolean}
      */
     this.home = true;
-
-    // console.log( '**************************** SPViewNews' );
   }
 }

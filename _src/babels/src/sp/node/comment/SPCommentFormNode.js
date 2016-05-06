@@ -42,7 +42,9 @@ export let SPCommentFormNode = React.createClass( {
     // 記事へのコメント送信 default false
     independent: React.PropTypes.bool,
     // コメント種類
-    commentType: React.PropTypes.string.isRequired
+    commentType: React.PropTypes.string.isRequired,
+    // コメント詳細URL for ga
+    url: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -141,6 +143,7 @@ export let SPCommentFormNode = React.createClass( {
             articleId={this.props.articleId}
             commentId={this.props.commentId}
             commentType={this.props.commentType}
+            url={this.props.url}
           />
         </div>
       );

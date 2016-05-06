@@ -10,7 +10,6 @@
  *
  */
 
-
 // parent
 import {ViewHeadline} from '../../../view/home/ViewHeadline';
 
@@ -20,13 +19,16 @@ import {View} from '../../../view/View';
 // app
 import {Empty} from '../../../app/const/Empty';
 import {MediaType} from '../../../app/const/MediaType';
-// import {User} from '../../../app/User';
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';
 
 // data
 import {Safety} from '../../../data/Safety';
+
+// Ga
+import {Ga} from '../../../ga/Ga';
+import {GaData} from '../../../ga/GaData';
 
 // React
 let React = self.React;
@@ -66,21 +68,6 @@ export class SPViewHeadLine extends ViewHeadline {
       render: function() {
 
         let dae = this.props.dae;
-
-        /*
-        let thumbnail = dae.media.images.large;
-
-        // thumbnail を check しなければ代替画像にする
-        if ( !thumbnail ) {
-          thumbnail = Empty.IMG_LARGE;
-        } else if ( !Safety.isImg( thumbnail ) ) {
-          // 画像ファイル名に拡張子がないのがあったので
-          // 拡張子チェックを追加
-          if ( !Safety.isGraph( thumbnail ) ) {
-            thumbnail = Empty.IMG_LARGE;
-          }
-        }
-        */
         let thumbnail = Safety.image( dae.media.images.large, Empty.IMG_LARGE );
 
         let category = ( label ):string => {
@@ -98,7 +85,7 @@ export class SPViewHeadLine extends ViewHeadline {
 
         return (
           <div className="hero-sec">
-            <a href={dae.url}>
+            <a href={dae.url} onClick={this.gaSend}>
               <figure className="post-thumb-headline"><img src={thumbnail} alt=""/>{playMark(dae.mediaType)}</figure>
               <div className="post-overview">
                 <h2 className="post-heading">{dae.title}</h2>
@@ -109,6 +96,14 @@ export class SPViewHeadLine extends ViewHeadline {
             </a>
           </div>
         );
+      },
+      // gaSend: function(e) {
+      //   e.preventDefault();
+      gaSend: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('SPViewHeadLine.render.HeadlineFirstDom.gaSend', 'home_pickup', 'click', this.props.dae.url, parseFloat(this.props.dae.id)) );
+        // ----------------------------------------------
       }
     } );
 
@@ -154,7 +149,7 @@ export class SPViewHeadLine extends ViewHeadline {
 
         return (
           <li className={'board-item board-item-' + p.index}>
-            <a className="post" href={p.url}>
+            <a className="post" href={p.url} onClick={this.gaSend}>
               <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(p.mediaType)}</figure>
               <div className="post-data">
                 <h3 className='post-heading'>{p.title}</h3>
@@ -164,6 +159,14 @@ export class SPViewHeadLine extends ViewHeadline {
             </a>
           </li>
         );
+      },
+      // gaSend: function(e) {
+      //   e.preventDefault();
+      gaSend: function() {
+        // ----------------------------------------------
+        // GA 計測タグ
+        Ga.add( new GaData('SPViewHeadLine.render.HeadlineDom.gaSend', 'home_headline', 'click', this.props.url, parseFloat(this.props.id)) );
+        // ----------------------------------------------
       }
     } );
 
@@ -196,20 +199,6 @@ export class SPViewHeadLine extends ViewHeadline {
                   list.map( function( article, i ) {
 
                     let dae = new ArticleDae( article );
-                    /*
-                    let thumbnail = dae.media.images.thumbnail;
-
-                    // thumbnail を check しなければ代替画像にする
-                    if ( !thumbnail ) {
-                      thumbnail = Empty.IMG_SMALL;
-                    } else if ( !Safety.isImg( thumbnail ) ) {
-                      // 画像ファイル名に拡張子がないのがあったので
-                      // 拡張子チェックを追加
-                      if ( !Safety.isGraph( thumbnail ) ) {
-                        thumbnail = Empty.IMG_SMALL;
-                      }
-                    }
-                    */
                     let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                     // HeadlineDom instance を使い render

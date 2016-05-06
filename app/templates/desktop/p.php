@@ -90,7 +90,7 @@
 
             ?>
             <li class="post-sns-item post-sns-item_tw">
-              <a href="http://twitter.com/share?text=<?php echo $page['og_title']; ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">
+              <a href="http://twitter.com/share?text=<?php echo $page['og_title']; ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" onClick="ga('send', 'event', 'Share_twitter', 'twitter_tap', <?php echo $page['og_url']; ?>); window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">
                 <span>ツイート</span>
               </a>
             </li>
@@ -98,7 +98,7 @@
               <a href="http://www.facebook.com/share.php?u=<?php echo $page['og_url']; ?>&t=<?php echo $page['og_title']; ?>" onclick="window.open(encodeURI(decodeURI(this.href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes'); return false;" rel="nofollow">facebook</a>
             </li>
             <li class="post-sns-item post-sns-item_gt">
-              <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
+              <a href="https://plus.google.com/share?url=<?php echo $page['og_url']; ?>" onClick="ga('send', 'event', 'Share_facebook', 'facebook_tap', <?php echo $page['og_url']; ?>); window.open(encodeURI(decodeURI(this.href)), 'GooglePluswindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" rel="nofollow">Google+</a>
             </li>
             <li class="post-sns-item post-sns-item_line" style="line-height:0;">
               <div class="line-it-button" style="display: none;" data-type="share-e" data-lang="ja"></div>

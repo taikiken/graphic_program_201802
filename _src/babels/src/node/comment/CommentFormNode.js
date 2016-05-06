@@ -10,28 +10,7 @@
  *
  */
 
-/*
-// app
-import {Empty} from '../../app/const/Empty';
-import {ErrorTxt} from '../../app/const/ErrorTxt';
-
-// event
-import {ReplyStatus} from '../../event/ReplyStatus';
-import {CommentStatus} from '../../event/CommentStatus';
-
-// data
-import {Form} from '../../data/Form';
-import {Safety} from '../../data/Safety';
-// import {Result} from '../../data/Result';
-import {ErrorMessage} from '../../data/ErrorMessage';
-
-// model
-import {ModelComment} from '../../model/comment/ModelComment';
-import {ModelCommentReply} from '../../model/comment/ModelCommentReply';
-import {Model} from '../../model/Model';
-*/
 // node
-// import {ErrorNode} from '../error/ErrorNode';
 import {CommentFormOpenerNode} from './form/CommentFormOpenerNode';
 import {CommentFormElementNode} from './form/CommentFormElementNode';
 
@@ -64,7 +43,9 @@ export let CommentFormNode = React.createClass( {
     // 記事へのコメント送信 default false
     independent: React.PropTypes.bool,
     // コメント種類
-    commentType: React.PropTypes.string.isRequired
+    commentType: React.PropTypes.string.isRequired,
+    // コメント詳細 URL
+    url: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -163,6 +144,7 @@ export let CommentFormNode = React.createClass( {
             articleId={this.props.articleId}
             commentId={this.props.commentId}
             commentType={this.props.commentType}
+            url={this.props.url}
           />
         </div>
       );

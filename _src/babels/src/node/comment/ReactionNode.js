@@ -23,12 +23,18 @@ Good / Badを外した際にボタンが非アクティブにならない
  */
 
 import {ActionType} from '../../app/const/ActionType';
+
 // event
 import {Good} from '../../event/comment/Good';
 import {Bad} from '../../event/comment/Bad';
+
 // model
 import {ModelCommentStar} from '../../model/comment/ModelCommentStar';
 import {Model} from '../../model/Model';
+
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
 
 // React
 let React = self.React;
@@ -57,7 +63,9 @@ export let ReactionNode = React.createClass( {
     // 自分がBad済みがどうか
     isBad: React.PropTypes.bool.isRequired,
     // good / bad を行うか default true: click action あり
-    activate: React.PropTypes.bool
+    activate: React.PropTypes.bool,
+    // コメント詳細 URL
+    url: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -88,8 +96,6 @@ export let ReactionNode = React.createClass( {
     };
   },
   render: function() {
-    // console.log( '+++++++++++++++++++++++++++++++++ ReactionNode render ', this.props.uniqueId, this.state.isGood, this.state.isBad, this.state.good, this.state.bad );
-
     let active = ( mine ) => {
       return mine ? ' active' : '';
     };
@@ -157,48 +163,26 @@ export let ReactionNode = React.createClass( {
   },
   goodClick: function( event ) {
     event.preventDefault();
-    // this.setState({loading: 'loading', good: '...'});
 
     // good sequence
     if ( this.state.isGood ) {
       // good済み -> DELETE
-      /*
-      this.goodStar.on( Model.COMPLETE, this.goodDeleteDone );
-      this.goodStar.start( ActionType.DELETE );
-      */
       this.goodDelete();
-
     } else {
-
       // no good -> ADD
-      /*
-      this.goodStar.on( Model.COMPLETE, this.goodAddDone );
-      this.goodStar.start( ActionType.ADD );
-      */
       this.goodAdd();
     }
 
   },
   badClick: function( event ) {
     event.preventDefault();
-    // this.setState({loading: 'loading', bad: '...'});
 
     // bad sequence
     if ( this.state.isBad ) {
-      /*
-      console.log( 'bad -> DELETE' );
       // bad -> DELETE
-      this.badStar.on( Model.COMPLETE, this.badDeleteDone );
-      this.badStar.start( ActionType.DELETE );
-      */
       this.badDelete();
     } else {
-      /*
-      console.log( ' no bad -> ADD' );
       // no bad -> ADD
-      this.badStar.on( Model.COMPLETE, this.badAddDone );
-      this.badStar.start( ActionType.ADD );
-      */
       this.badAdd();
     }
   },
@@ -233,80 +217,79 @@ export let ReactionNode = React.createClass( {
   // good add complete handler
   goodAddDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodAddDone );
-    // console.log( '+++++ goodAddDone' );
     let good = ++this.goodCount;
 
     if ( this.state.isBad ) {
       // bad しているので bad DELETE する
       let bad = --this.badCount;
       this.setState( {good: good, isGood: true, bad: bad, loading: '', isBad: false} );
-
-      // API 叩かない
-      // this.badDelete();
     } else {
       // bad していない時はここまで
       this.setState( { good: good, isGood: true, loading: '' } );
     }
 
-    // loading clear
-    // this.loadingStop();
     // Good add event fire
     this.good.add( this.props.commentId );
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - good', this.props.url, parseFloat(this.props.commentId)) );
+    // ----------------------------------------------
   },
   // bad delete
   goodDeleteDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodDeleteDone );
-    // console.log( '+++++ goodDeleteDone' );
     // Good remove event fire
     this.good.remove( this.props.commentId );
 
     let good = --this.goodCount;
     this.setState( {good: good, loading: '', isGood: false} );
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - bad', this.props.url, parseFloat(this.props.commentId)) );
+    // ----------------------------------------------
   },
   // -----------------------------------------------
   // bad add complete handler
   badAddDone: function() {
     this.badStar.off( Model.COMPLETE, this.badAddDone );
-    // console.log( '--- badAddDone' );
     let bad = ++this.badCount;
 
     if ( this.state.isGood ) {
       // good しているので good DELETE する
       let good = --this.goodCount;
       this.setState( {bad: bad, isBad: true, good: good, loading: '', isGood: false} );
-      // API 叩かない
-      // this.goodDelete();
     } else {
       // good していない時はここまで
       this.setState( {bad: bad, isBad: true, loading: ''} );
 
     }
 
-    // loading clear
-    // this.loadingStop();
     // Bad add event fire
     this.bad.add( this.props.commentId );
-
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - bad', this.props.url, parseFloat(this.props.commentId)) );
+    // ----------------------------------------------
   },
   // bad delete
   badDeleteDone: function() {
     this.badStar.off( Model.COMPLETE, this.badDeleteDone );
-    // console.log( '--- badDeleteDone' );
-
     // Bad remove event fire
     this.bad.remove( this.props.commentId );
 
     let bad = --this.badCount;
     this.setState( {bad: bad, loading: '', isBad: false} );
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - good', this.props.url, parseFloat(this.props.commentId)) );
+    // ----------------------------------------------
   },
   // good error
   goodError: function( /* error */ ) {
-    // console.warn( 'goodError ', error );
     this.loadingStop();
   },
   // bad error
   badError: function(/* error */) {
-    // console.warn( 'badError ', error );
     this.loadingStop();
   }
 } );

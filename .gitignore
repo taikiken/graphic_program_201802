@@ -121,3 +121,10 @@ _src/babels_exe_sp/compile
 # ==============================
 # 作業テストのために作成しました、削除済みです
 crossdomain.xml
+
+
+# bower
+# ==============================
+# 念のために旧ファイルを確保します
+_src/bower_exports/fetch-11.0
+_src/bower_exports/react-14.0.7

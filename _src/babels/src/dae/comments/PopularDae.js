@@ -85,6 +85,15 @@ export class PopularDae {
     return this.comment.body;
   }
   /**
+   * comment.body_escape
+   * なんか増えてた...
+   * タグがない様子
+   * @return {string} エスケープされたコメント本文を返します
+   */
+  get bodyEscape():string {
+    return this.comment.body_escape;
+  }
+  /**
    * alias isLike
    * @return {Boolean} 自分がGood済みかどうか を返します
    */

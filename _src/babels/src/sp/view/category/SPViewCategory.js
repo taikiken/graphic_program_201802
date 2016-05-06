@@ -10,7 +10,6 @@
  *
  */
 
-
 import {SPViewArchive} from './../SPViewArchive';
 
 import {Category} from '../../../action/archive/Category';
@@ -35,5 +34,8 @@ export class SPViewCategory extends SPViewArchive {
     this._action = User.sign ?
       new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
       new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
+
+    // ga に使う
+    this._slug = slug;
   }
 }
