@@ -834,7 +834,9 @@ export class ViewArchiveMasonryInfinite extends View {
         this.isotope = new Isotope( boardRout, {
           itemSelector: '.board-item',
           masonry: {
-            gutter: 30
+            // gutter: 30
+            // 2016-04-29
+            gutter: 28
           }
         } );
 
