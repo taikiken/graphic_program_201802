@@ -56,7 +56,7 @@
           </div>
 
 
-          <div class="sponsor-link nadir" style="background-color: #f00;">
+          <div class="sponsor-link nadir">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- 審査用レクタングル -->
             <ins class="adsbygoogle"
