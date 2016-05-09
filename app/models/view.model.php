@@ -67,6 +67,7 @@ class ViewModel {
       # dev2 -> dev へ変更
       $this->default['file_get_url'] = 'http://dev.undotsushin.com';
       $this->default['apiRoot']      = 'http://dev.undotsushin.com';
+
     else :
 
       # LOCAL以外は自サーバから file_get_content する
