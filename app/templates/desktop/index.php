@@ -6,10 +6,21 @@
         <div class="headline-outer">
           <div id="headline-container"></div><!-- /headline -->
           <div class="sponsor-link">
-            <!--
-            株式会社運動通信社 運動通信_PC_WEB_デスクトップ - 一面 - ヘッドライン下部 39882
-            -->
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+            <?php
+            /*
+            #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
+            Adsense 差し替え
+            */
+            ?>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- デスクトップ - サイドバー - 上 -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-8613117509675807"
+                 data-ad-slot="8203159173"></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
           </div>
         </div><!-- /.headline-outer -->
 
@@ -36,7 +47,21 @@
       <section class="side-sec">
         <div id="sidebar-moving-container">
           <div class="sponsor-link">
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34749&targetID=adg_34749&displayid=1&adType=PC&width=300&height=250&sdkType=3&async=true&tagver=2.0.0"></script>
+            <?php
+            /*
+            #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
+            Adsense 差し替え
+            */
+            ?>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- デスクトップ - サイドバー - 上 -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-8613117509675807"
+                 data-ad-slot="8203159173"></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
           </div>
 
           <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 データ先読みで、電車でもサクサク記事が読める！"></a></div>
@@ -52,21 +77,23 @@
           </div>
 
           <div class="sponsor-link nadir">
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35117&targetID=adg_35117&displayid=3&adType=PC&width=300&height=600&sdkType=3&async=true&tagver=2.0.0"></script>
-          </div>
-
-
-          <div class="sponsor-link nadir">
+            <?php
+            /*
+            #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
+            Adsense 差し替え
+            */
+            ?>
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- 審査用レクタングル -->
+            <!-- デスクトップ - サイドバー - 下 -->
             <ins class="adsbygoogle"
-                 style="display:inline-block;width:300px;height:250px"
+                 style="display:inline-block;width:300px;height:600px"
                  data-ad-client="ca-pub-8613117509675807"
-                 data-ad-slot="7705682371"></ins>
+                 data-ad-slot="5110091971"></ins>
             <script>
               (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
           </div>
+
         </div><!--/#sidebar-moving-->
       </section><!-- /.side-sec -->
 
