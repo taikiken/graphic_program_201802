@@ -45,7 +45,7 @@ export class SPViewCommentForm extends ViewCommentForm {
     // console.log( 'SPViewCommentForm render' );
     ReactDOM.render(
       <SPCommentFormNode
-        uniqueId={'comment-to-' + id}
+        uniqueId={`comment-to-${CommentsType.INDEPENDENT}-${id}`}
         toggle="open"
         icon={this._icon}
         articleId={id}
@@ -53,6 +53,7 @@ export class SPViewCommentForm extends ViewCommentForm {
         independent={true}
         parent={false}
         commentType={CommentsType.INDEPENDENT}
+        url=""
       />,
       this.element
     );

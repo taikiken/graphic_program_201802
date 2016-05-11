@@ -60,7 +60,9 @@ export let SPCommentNode = React.createClass( {
     // フォームをopen（表示）するか default false
     open: React.PropTypes.bool,
     // comment type
-    commentsListType: React.PropTypes.string.isRequired
+    commentsListType: React.PropTypes.string.isRequired,
+    // コメント詳細 URL for ga
+    url: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -88,20 +90,6 @@ export let SPCommentNode = React.createClass( {
     let sign = this.props.sign;
 
     // user icon
-    /*
-    let picture = comment.user.profilePicture;
-    if ( !picture ) {
-      picture = Empty.USER_EMPTY;
-    } else if ( !Safety.isImg( picture ) ) {
-      // 画像ファイル名に拡張子がないのがあったので
-      // 拡張子チェックを追加
-      if ( !Safety.isGraph( picture ) ) {
-        picture = Empty.USER_EMPTY;
-      }
-    }
-
-    let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-    */
     let picture = Safety.image( comment.user.profilePicture, Empty.USER_EMPTY );
     let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
@@ -122,6 +110,7 @@ export let SPCommentNode = React.createClass( {
           commentId={this.props.commentId}
           replyId={this.props.replyId}
           parent={this.props.parent}
+          url={this.props.url}
         />
         {/* figure.comment-user */}
         <CommentUserNode
@@ -147,9 +136,10 @@ export let SPCommentNode = React.createClass( {
           bad={comment.bad}
           isGood={comment.isGood}
           isBad={comment.isBad}
+          url={this.props.url}
         />
         <SPCommentFormNode
-          uniqueId={this.props.uniqueId}
+          uniqueId={`${this.props.uniqueId}-form`}
           icon={this.props.icon}
           articleId={this.props.articleId}
           commentId={this.props.commentId}
@@ -158,14 +148,16 @@ export let SPCommentNode = React.createClass( {
           parent={this.props.parent}
           independent={this.props.independent}
           commentType={this.props.commentsListType}
+          url={this.props.url}
         />
       </div>
     );
-  },
-  componentDidMount: function() {
-
-  },
-  componentWillUnmount: function() {
-
   }
+  // ,
+  // componentDidMount: function() {
+  //
+  // },
+  // componentWillUnmount: function() {
+  //
+  // }
 } );

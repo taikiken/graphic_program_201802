@@ -30,6 +30,10 @@ import {Cookie} from '../../net/Cookie';
 import {SPSynItemNode} from '../node/SPSynItemNode';
 import {LogoutNode} from '../../node/modal/LogoutNode';
 
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
+
 // React
 // let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -209,9 +213,13 @@ class Syn {
     if ( sideDom.hasClass( 'open' ) ) {
       // open -> close
       this.close( side, sideDom );
+      // ga
+      Syn.gaSend('close');
     } else {
       // close -> open
       this.open( side, sideDom );
+      // ga
+      Syn.gaSend('open');
     }
 
   }
@@ -223,6 +231,8 @@ class Syn {
     event.preventDefault();
     // open -> close
     this.close( this._side, this._sideDom );
+    // ga
+    Syn.gaSend('close');
   }
   /**
    * side menu を開く
@@ -364,6 +374,16 @@ class Syn {
   static visit():Boolean {
     // 2 weeks set
     return Cookie.save( '1', Cookie.SYN, Time.later( 14 ) );
+  }
+  /**
+   * GA 計測タグ を送信します
+   * @param {string} mode open | close どちらk
+   */
+  static gaSend( mode:string ):void {
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData('Syn.gaSend', 'sidemenu', mode ) );
+    // ----------------------------------------------
   }
 }
 

@@ -131,7 +131,9 @@ export class Single {
     // title は backend output
 
     // sidebar
-    Sidebar.start( slug );
+    // slug: category, is home, is single
+    // ga tag 送信のために引数追加
+    Sidebar.start( slug, false, true );
 
     // nav current
     Nav.start( slug );

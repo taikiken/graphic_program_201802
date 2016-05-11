@@ -48,10 +48,11 @@ export class Api {
    *
    * // production
    * App.production();
+   * @param {string} [root=''] リクエスト・ドメイン
    */
-  static rebuild():void {
+  static rebuild( root:string = '' ):void {
 
-    ApiDae.rebuild();
+    ApiDae.rebuild( root );
 
   }
   // ----------------------------------

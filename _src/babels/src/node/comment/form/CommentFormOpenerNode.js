@@ -36,11 +36,8 @@ export let CommentFormOpenerNode = React.createClass( {
   getInitialState: function() {
     // ReplyStatus instance
     this.replyStatus = null;
-
-    // this.canOpen = true;
-
+    
     return {
-      // reply / cancel
       toggle: 'reply'
     };
   },
@@ -79,12 +76,6 @@ export let CommentFormOpenerNode = React.createClass( {
       replyStatus = ReplyStatus.factory();
       this.replyStatus = replyStatus;
 
-      /*
-       if ( !this.props.independent ) {
-       replyStatus.on( ReplyStatus.OPEN, this.replyOpen );
-       replyStatus.on( ReplyStatus.CLOSE, this.replyClose );
-       }*/
-
       replyStatus.on( ReplyStatus.START, this.replyStart );
       replyStatus.on( ReplyStatus.COMPLETE, this.replyComplete );
 
@@ -97,13 +88,6 @@ export let CommentFormOpenerNode = React.createClass( {
 
     if ( replyStatus !== null ) {
 
-      /*
-       if ( !this.props.independent ) {
-       replyStatus.off( ReplyStatus.OPEN, this.replyOpen );
-       replyStatus.off( ReplyStatus.CLOSE, this.replyClose );
-       }
-       */
-
       replyStatus.off( ReplyStatus.START, this.replyStart );
       replyStatus.off( ReplyStatus.COMPLETE, this.replyComplete );
       this.replyStatus = null;
@@ -115,8 +99,6 @@ export let CommentFormOpenerNode = React.createClass( {
   // open / cancel click handler
   openerClick: function( event ) {
     event.preventDefault();
-
-    // console.log( '************** opener click ****************** ', this.props.uniqueId );
 
     this.willOpen();
     this.replyStatus.open( this.props.uniqueId );
@@ -139,14 +121,6 @@ export let CommentFormOpenerNode = React.createClass( {
   },
   // ----------------------------------------
   // listener
-  /*
-   replyOpen: function( event ) {
-
-   },
-   replyClose: function( event ) {
-
-   },
-   */
   replyStart: function() {
     this.cancelClick = false;
   },
