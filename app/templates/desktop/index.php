@@ -84,14 +84,9 @@
           </div>
           
           <div id="widget-ranking-container-2"></div><!--/ranking-->
-          <div id="sponsor-link-ranking-2" class="sponsor-link sponsor-link-ranking">
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-          </div>
 
           <div id="widget-recommend-container-2"></div><!--/videos-->
-          <div id="sponsor-link-recommend-2" class="sponsor-link sponsor-link-recommend">
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-          </div>
+
         </div><!--/#sidebar-moving-->
       </section><!-- /.side-sec -->
 
