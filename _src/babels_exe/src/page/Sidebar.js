@@ -45,6 +45,10 @@ export class Sidebar {
     if ( rankingElement !== null ) {
       let option = {};
       option[ UT.view.View.DID_MOUNT ] = Sidebar.didRanking;
+      // home のみ ranking が2つ
+      if ( home ) {
+        option[ UT.view.View.BEFORE_RENDER ] = Sidebar.rankingBeforeRender;
+      }
       let ranking = new UT.view.sidebar.ViewRanking( rankingElement, option, slug );
       ranking.start();
     }
@@ -54,11 +58,26 @@ export class Sidebar {
     if ( videoElement !== null ) {
       let option = {};
       option[ UT.view.View.DID_MOUNT ] = Sidebar.didVideo;
+      // home のみ videos が2つ
+      if ( home ) {
+        option[ UT.view.View.BEFORE_RENDER ] = Sidebar.videosBeforeRender;
+      }
       let videos = new UT.view.sidebar.ViewVideos( videoElement, option, slug );
       videos.start();
     }
 
     // sidebar
+    // とりあえず home のみスクロール追随させる
+    if ( home ) {
+      Sidebar.prepareMoving( home );
+    }
+  }
+
+  /**
+   * sidebar スクロール追随させる準備
+   * @param {Boolean} home home か否かの真偽値
+   */
+  static prepareMoving( home ):void {
     // git branch で分岐しすぎていて関数がなくエラーにならないために存在チェックを行います
     let sidebar = !!Dom.sidebar ? Dom.sidebar() : null;
     let footer = !!Dom.footer ? Dom.footer() : null;
@@ -67,7 +86,6 @@ export class Sidebar {
       _scroll = UT.util.Scroll.factory();
       Sidebar.moving( sidebar, footer, home );
     }
-
   }
   /**
    * sidebar をスクロール追随させます
@@ -133,6 +151,59 @@ export class Sidebar {
    */
   static didVideo():void {
     let ad = Dom.adVideo();
+    // console.log( 'didVideo', ad );
+    if ( ad !== null ) {
+      ad.style.cssText = 'display: block;';
+    }
+  }
+  // -------------------------------------------------------
+  /**
+   * home のみ
+   * ranking clone を作成します
+   * @param {Array<Object>} articles clone 元生成に使用した JSON 配列
+   */
+  static rankingBeforeRender( articles:Array<Object> ):void {
+    // ranking
+    let rankingElement = Dom.ranking2();
+
+    if ( rankingElement !== null ) {
+      let option = {};
+      option[ UT.view.View.DID_MOUNT ] = Sidebar.didRanking2;
+      let ranking = new UT.view.sidebar.ViewRanking( rankingElement, option );
+      ranking.render( articles );
+    }
+  }
+
+  /**
+   * 
+   * @param articles
+   */
+  static videosBeforeRender( articles:Array<Object> ):void {
+    // video
+    let videoElement = Dom.video2();
+
+    if ( videoElement !== null ) {
+      let option = {};
+      option[ UT.view.View.DID_MOUNT ] = Sidebar.didVide2;
+      let videos = new UT.view.sidebar.ViewVideos( videoElement, option );
+      videos.render( articles );
+    }
+  }
+  /**
+   * ranking 下広告を表示させます 2
+   */
+  static didRanking2():void {
+    let ad = Dom.adRanking2();
+    // console.log( 'didRanking', ad );
+    if ( ad !== null ) {
+      ad.style.cssText = 'display: block;';
+    }
+  }
+  /**
+   * オススメ動画 下広告を表示させます 2
+   */
+  static didVideo2():void {
+    let ad = Dom.adVideo2();
     // console.log( 'didVideo', ad );
     if ( ad !== null ) {
       ad.style.cssText = 'display: block;';
