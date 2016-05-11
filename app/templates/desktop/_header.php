@@ -50,7 +50,7 @@ if (
   $template_name == 'logout'
 ) :
 ?>
-  <header class="head-sec">
+  <header id="header-container" class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
 

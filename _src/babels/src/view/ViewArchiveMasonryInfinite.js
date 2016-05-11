@@ -371,38 +371,6 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     // COMMENTS Popular second
     // --------------------------------------------
-    // /**
-    //  * コメントユーザーの顔写真小さいの
-    //  * @private
-    //  * @type {ReactClass}
-    //  * */
-    // let CommentedUsersDom = React.createClass( {
-    //   propType: {
-    //     total: React.PropTypes.number.isRequired
-    //   },
-    //   getInitialState: function() {
-    //     return {
-    //       total: this.props.total
-    //     };
-    //   },
-    //   render: function() {
-    //
-    //     // if ( this.state.total === 0 ) {
-    //     // API 戻り値がおかしいことがあり
-    //     // count 1
-    //     // array length 2
-    //     // total が - になるので 0 以上に変更
-    //     if ( this.state.total > 0 ) {
-    //       return null;
-    //     } else {
-    //
-    //       return <span className="commented-user-andmore">+{this.state.total}</span>;
-    //     }
-    //
-    //   }
-    //
-    // } );
-
     /**
      * コメント欄の二段目
      * @private
@@ -437,21 +405,6 @@ export class ViewArchiveMasonryInfinite extends View {
                 seconds.map( function( commentDae, i ) {
 
                   let userDae = commentDae.user;
-                  // let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
-                  /*
-                  let picture = userDae.profilePicture;
-                  if ( !picture ) {
-                    picture = Empty.USER_EMPTY;
-                  } else if ( !Safety.isImg( picture ) ) {
-                    // 画像ファイル名に拡張子がないのがあったので
-                    // 拡張子チェックを追加
-                    if ( !Safety.isGraph( picture ) ) {
-                      picture = Empty.USER_EMPTY;
-                    }
-                  }
-
-                  let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-                  */
                   let picture = Safety.image( userDae.profilePicture, Empty.USER_EMPTY );
                   let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
@@ -502,7 +455,7 @@ export class ViewArchiveMasonryInfinite extends View {
         let hasSecond = commentsPopular.hasSecond;
         let firstDae = commentsPopular.first;
         let secondsDae = commentsPopular.seconds;
-        // console.log( 'commentsPopular', articleId, total, hasFirst, hasSecond, firstDae, secondsDae );
+
         if ( hasSecond ) {
           // 2件目以降も存在する
           // 合計数からアイコン描画数を引く
@@ -522,19 +475,6 @@ export class ViewArchiveMasonryInfinite extends View {
           // 1件目コメント・ユーザー
           let firstUser = first.user;
           // ユーザーサムネイル
-          /*
-          let picture = firstUser.profilePicture;
-
-          if ( !picture ) {
-            picture = Empty.USER_EMPTY;
-          } else if ( !Safety.isImg( picture ) ) {
-            // 画像ファイル名に拡張子がないのがあったので
-            // 拡張子チェックを追加
-            picture = Empty.USER_EMPTY;
-          }
-
-          let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-          */
           let picture = Safety.image( firstUser.profilePicture, Empty.USER_EMPTY );
           let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
@@ -701,22 +641,6 @@ export class ViewArchiveMasonryInfinite extends View {
 
                 let commentsPopular = dae.commentsPopular;
                 let commentsTotal = dae.commentsCount;
-                /*
-                let thumbnail;
-
-                thumbnail = dae.media.images.medium;
-
-                // thumbnail が空の時は代替画像
-                if ( !thumbnail ) {
-                  thumbnail = Empty.IMG_MIDDLE;
-                } else if ( !Safety.isImg( thumbnail ) ) {
-                  // 画像ファイル名に拡張子がないのがあったので
-                  // 拡張子チェックを追加
-                  if ( !Safety.isGraph( thumbnail ) ) {
-                    thumbnail = Empty.IMG_MIDDLE;
-                  }
-                }
-                */
                 let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
                 let category = ( label ):string => {
@@ -786,7 +710,7 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // dom が表示された後に1度だけ呼び出される delegate
       componentDidMount: function() {
-        // console.log( '************ componentDidMount ************', this.props.masonry );
+
         // after mount
         _this.executeSafely( View.DID_MOUNT );
         // hasNext を元に More View button の表示非表示を決める
@@ -810,7 +734,6 @@ export class ViewArchiveMasonryInfinite extends View {
       // isotope 前準備
       shouldMasonry: function() {
 
-        // console.log( '************ shouldMasonry ************' );
         // isotope 前準備を実行します
         let boardRout = ReactDOM.findDOMNode(this.refs.boardRout);
         let childNodes = boardRout.childNodes;
@@ -847,8 +770,6 @@ export class ViewArchiveMasonryInfinite extends View {
       },
       // didUpdate から呼び出される
       appendImages: function() {
-
-        // console.log( '++++++++++++++++++++ appendImages' );
 
         // event から event handler を unbind します
         this.img.off( 'always', this.appendImages );

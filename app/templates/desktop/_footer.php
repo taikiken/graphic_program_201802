@@ -21,7 +21,7 @@ if (
   $template_name == 'logout'
 ) {
   ?>
-  <footer class="foot-sec">
+  <footer id="footer-container" class="foot-sec">
     <div class="foot-sec-inner">
       <div class="foot-pr">
         <div class="foot-pr-inner">

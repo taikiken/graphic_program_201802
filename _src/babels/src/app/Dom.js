@@ -74,6 +74,13 @@ export class Dom {
   // --------------------------------------
   // header
   /**
+   * main header コンテンツ上部
+   * @return {Element} header-container element を返します
+   */
+  static header():Element {
+    return Dom.get( 'header-container' );
+  }
+  /**
    * header user profile
    * @return {Element} 'user-profile-container' element を返します
    */
@@ -93,6 +100,15 @@ export class Dom {
    */
   static searchOpener():Element {
     return Dom.get( 'search-container-opener' );
+  }
+  // --------------------------------------
+  // footer
+  /**
+   * hooter
+   * @return {Element} footer-container element を返します
+   */
+  static footer():Element {
+    return Dom.get( 'footer-container' );
   }
   // --------------------------------------
   // synapse
@@ -133,6 +149,27 @@ export class Dom {
    */
   static video():Element {
     return Dom.get( 'widget-recommend-container' );
+  }
+  /**
+   * sidebar ranking2
+   * @return {Element} widget-ranking-container-2 element を返します
+   */
+  static ranking2():Element {
+    return Dom.get( 'widget-ranking-container-2' );
+  }
+  /**
+   * sidebar video2
+   * @return {Element} widget-recommend-container-2 element を返します
+   */
+  static video2():Element {
+    return Dom.get( 'widget-recommend-container-2' );
+  }
+  /**
+   * sidebar scroll 追随させるコンテナ
+   * @return {Element} sidebar-moving-container element を返します
+   */
+  static sidebar():Element {
+    return Dom.get( 'sidebar-moving-container' );
   }
   // --------------------------------------
 
@@ -382,6 +419,20 @@ export class Dom {
    */
   static adVideo():Element {
     return Dom.get( 'sponsor-link-recommend' );
+  }
+  /**
+   * sidebar ad, ranking 2
+   * @return {Element} sponsor-link-ranking-2
+   */
+  static adRanking2():Element {
+    return Dom.get( 'sponsor-link-ranking-2' );
+  }
+  /**
+   * sidebar ad, video 2
+   * @return {Element} sponsor-link-recommend-2
+   */
+  static adVideo2():Element {
+    return Dom.get( 'sponsor-link-recommend-2' );
   }
 }
 // return Dom.get( '' );
