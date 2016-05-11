@@ -175,8 +175,9 @@ export class Sidebar {
   }
 
   /**
-   * 
-   * @param articles
+   * home のみ
+   * videos clone を作成します
+   * @param {Array<Object>} articles articles clone 元生成に使用した JSON 配列
    */
   static videosBeforeRender( articles:Array<Object> ):void {
     // video
