@@ -71,6 +71,7 @@ import {ViewNews} from './view/home/ViewNews';
 // sidebar
 import {ViewRanking} from './view/sidebar/ViewRanking';
 import {ViewVideos} from './view/sidebar/ViewVideos';
+import {Sidebar} from './view/sidebar/Sidebar';
 
 // modal
 import {ViewDeleteModal} from './view/modal/ViewDeleteModal';
@@ -188,7 +189,8 @@ let UT = {
     },
     sidebar: {
       ViewRanking: ViewRanking,
-      ViewVideos: ViewVideos
+      ViewVideos: ViewVideos,
+      Sidebar: Sidebar
     },
     home: {
       ViewHeadline: ViewHeadline,

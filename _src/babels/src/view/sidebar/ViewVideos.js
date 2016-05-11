@@ -137,6 +137,8 @@ export class ViewVideos extends View {
    */
   render( articles:Array ):void {
 
+    this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
+
     let element = this.element;
     let categorySlug = this.slug;
     let _this = this;

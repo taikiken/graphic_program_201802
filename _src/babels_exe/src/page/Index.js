@@ -69,7 +69,7 @@ export class Index {
     }
 
     // sidebar, slug なし(=all)
-    Sidebar.start();
+    Sidebar.start('all', true);
 
   }
 }
