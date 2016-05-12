@@ -33,7 +33,7 @@
         <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34749&targetID=adg_34749&displayid=1&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
       </div>
 
-      <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 データ先読みで、電車でもサクサク記事が読める！"></a></div>
+      <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
 
       <div id="widget-ranking-container"></div><!--/ranking-->
       <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">

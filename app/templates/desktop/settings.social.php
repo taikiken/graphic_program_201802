@@ -53,7 +53,7 @@
         </script>
       </div>
 
-      <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 データ先読みで、電車でもサクサク記事が読める！"></a></div>
+      <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
 
       <div id="widget-ranking-container"></div><!--/ranking-->
       <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
