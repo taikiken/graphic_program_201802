@@ -66,7 +66,9 @@ export class ViewFirstVisit extends View {
     Cookie.save( '1', Cookie.EVER_BEEN, Time.later( 365 * 10 ) );
 
     // 表示
-    this.render();
+    // https://github.com/undotsushin/undotsushin/issues/709
+    // render せず非表示にします
+    // this.render();
   }
 
   /**
