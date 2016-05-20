@@ -123,11 +123,31 @@ export class Syn {
      * @private
      */
     this._firstAd = false;
+    /**
+     * $adg.listener.loaded 完了用の flag
+     * @type {boolean}
+     * @private
+     */
+    this._$adgComing = false;
+    /**
+     * $adg.listener event handler
+     * @type {{loaded: *, fail: *}}
+     * @private
+     */
+    this._adg = {
+      loaded: this.adgLoaded.bind( this ),
+      failed: this.adgFailed.bind( this )
+    };
   }
   /**
    * 初期処理, after DOMReady で実行のこと
    */
   init():void {
+    // $adg.listener event handler set
+    this.initAd();
+
+    // -------------------------------------------------------------------------
+    // 以下通常処理
     this._listDom = new Sagen.Dom( document.getElementById( parts.list ) );
     this._toggleDom = new Sagen.Dom( document.getElementById( parts.toggle ) );
     this._page = document.getElementById( parts.page );
@@ -157,6 +177,51 @@ export class Syn {
     // bg
     this._bg.addEventListener( 'click', this.bgClick.bind( this ), false );
   }
+  // ---------------------------------------------------------------------------------
+  /**
+   * $adg.listener event handler を設定する
+   * https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md#%E5%AE%9F%E8%A3%85%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB
+   */
+  initAd():void {
+    const $adg = self.$adg;
+
+    // $adg 存在チェック
+    if ( !$adg || !$adg.listener ) {
+      setTimeout( () => {
+        this.initAd();
+      }, 25 );
+      return;
+    }
+
+    const adg = this._adg;
+    window.addEventListener( $adg.listener.loaded, adg.loaded, false );
+    window.addEventListener( $adg.listener.failed, adg.failed, false );
+  }
+
+  /**
+   * $adg.listener.loaded event handler
+   */
+  adgLoaded():void {
+    this.adgDispose();
+    // flag ON
+    this._$adgComing = true;
+  }
+  /**
+   * $adg.listener.failed event handler
+   */
+  adgFailed():void {
+    this.adgDispose();
+  }
+  /**
+   * $adg.listener event handler を removeEventListener する
+   */
+  adgDispose():void {
+    const $adg = self.$adg;
+    const adg = this._adg;
+    window.removeEventListener( $adg.listener.loaded, adg.loaded );
+    window.removeEventListener( $adg.listener.failed, adg.failed );
+  }
+  // ---------------------------------------------------------------------------------
   /**
    * service_list_load event listener
    */
@@ -310,16 +375,21 @@ export class Syn {
     this._fps.on( Gasane.Fps.ENTER_FRAME, this._boundUpdate );
     this._fps.start();
   }
-
   /**
    * $adg.ads.trackShowEvent を 1回だけ実行
    * https://github.com/bitcellar/synapse-sdk/blob/master/ad/Browser/Readme.md
    * https://github.com/undotsushin/undotsushin/issues/704#issuecomment-219010900
    */
   adTrack():void {
+    // $adg.listener.loaded を待つ
+    if ( !this._$adgComing ) {
+      return;
+    }
+    // 1回だけ
     if( this._firstAd ) {
       return;
     }
+
     const $adg = self.$adg;
 
     if ( !$adg || !$adg.ads || typeof $adg.ads.trackShowEvent !== 'function' ) {
