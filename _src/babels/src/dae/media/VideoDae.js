@@ -10,8 +10,8 @@
  *
  */
 
-
 import {Safety} from '../../data/Safety';
+import {UrlDae} from './UrlDae';
 
 /**
  * article.media.video
@@ -23,7 +23,14 @@ export class VideoDae {
    */
   constructor( video:Object = {} ) {
     video = Safety.object( video );
+    /**
+     * article.media.video object
+     * @type {Object}
+     * @private
+     */
     this._video = video;
+
+    this._url = new UrlDae( video.url );
   }
   /**
    * article.media.video
@@ -40,11 +47,11 @@ export class VideoDae {
     return this.video.caption;
   }
   /**
-   * 動画パス
-   * @return {string} article.media.video.url を返します
+   * 動画パス, article.media.video.url を UrlDae instance へ変換したデータを取得します
+   * @return {UrlDae} article.media.video.url を UrlDae instance へ変換したデータを返します
    */
-  get url():string {
-    return this.video.url;
+  get url():UrlDae {
+    return this._url;
   }
   /**
    * YouTube video id
@@ -73,5 +80,17 @@ export class VideoDae {
    */
   get player():string {
     return this.video.player;
+  }
+  // add 2016-05-20
+  /**
+   * https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=2055838625
+   * 動画タイプが `brightcove` の場合で、動画広告ある場合は表示する動画広告の内容が記載されたVASTのパスが設定されます
+   *
+   *  http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page=
+   *
+   * @return {string} 動画広告用VASTタグのパス
+   */
+  get vast():string {
+    return this.video.vast;
   }
 }

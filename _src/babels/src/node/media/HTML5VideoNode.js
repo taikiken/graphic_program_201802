@@ -13,6 +13,9 @@
 
 import {Content} from '../../app/const/Content';
 
+// Sagen
+const Sagen = self.Sagen;
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -97,12 +100,13 @@ export let HTML5VideoNode = React.createClass( {
     let video = this.props.video;
     let poster = this.props.poster;
     let caption = this.props.caption;
+    let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
 
     return (
       <div className="post-kv post-video-kv">
         <div className="video-container">
           <video poster={poster} width={Content.WIDTH} height={Content.HD_HEIGHT} preload="none" controls ref="video">
-            <source src={video.url} type="video/mp4"/>
+            <source src={url} type="video/mp4"/>
           </video>
           <VideoPlayNode
             playImage={this.props.playImage}
