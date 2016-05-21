@@ -37,13 +37,13 @@ export class UrlDae {
    * @return {string} article.media.video.url.sd を返します
    */
   get sd():string {
-    return this.url.sd;
+    return Safety.string( this.url.sd, '' );
   }
   /**
    * デスクトップ用動画URL - 拡張子は`.m3u8` のHLS動画です *ブラウザ版では再生するための追加のライブラリが必要
    * @return {string} article.media.video.url.hd を返します
    */
   get hd():string {
-    return this.url.hd;
+    return Safety.string( this.url.hd, '' );
   }
 }
