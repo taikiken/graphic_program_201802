@@ -29,7 +29,11 @@ export class VideoDae {
      * @private
      */
     this._video = video;
-
+    /**
+     * article.media.video.url を UrlDae instance で管理します
+     * @type {UrlDae}
+     * @private
+     */
     this._url = new UrlDae( video.url );
   }
   /**
