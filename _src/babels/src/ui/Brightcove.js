@@ -20,25 +20,27 @@ const videojs = self.videojs;
  * Brightcove 動画プレイヤー
  */
 export class Brightcove extends EventDispatcher {
-  constructor( accountId:string, playerId:string, elementId:string, path:string, poster:string, vast:string = '') {
+  constructor( elementId:string, path:string, poster:string, vast:string = '') {
     super();
 
-    this._account = accountId;
-    this._playerId = playerId;
     this._id = elementId;
     this._path = path;
     this._poster = poster;
     this._vast = Safety.string( vast, '' );
-    this._video = null;
+    this._player = null;
   }
 
   static get TYPE():string {
     return 'application/x-mpegURL';
   }
+
+  static get TYPE():string {
+    return 'application/x-mpegURL';
+  }
+
   get id():string {
     return this._id;
   }
-
   get path():string {
     return this._path;
   }
@@ -48,32 +50,79 @@ export class Brightcove extends EventDispatcher {
   get vast():string {
     return this._vast;
   }
-  set video( video ) {
-    this._video = video;
+  set player( player ) {
+    this._player = player;
   }
-  get video() {
-    return this._video;
+  get player() {
+    return this._player;
   }
 
+  init() {
+    const player = videojs( this.id );
+    this.player = player;
 
-  create() {
-    const video = videojs( this.id );
-    const ima3 = {
+    const vast = this.vast;
+
+    let ima3 = {
       adTechOrder: [
         'html5'
       ],
       postrollTimeout: 2000,
       prerollTimeout: 1000,
       requestMode: 'onload',
-      serverUrl: this.vast + Date.now(),
       timeout: 5000
     };
 
-    video.ready( () => {
-      video.src = this.path;
-      video.poster = this.poster;
-      video.ima3 = ima3;
+    if ( vast !== '' ) {
+      ima3.serverUrl = this.vast + Date.now();
+    }
+
+    player.ready( () => {
+      player.src = this.path;
+      player.poster = this.poster;
+      player.ima3 = ima3;
     } );
+
+    player.on( 'adstart', this.adStart.bind( this ) );
+  }
+
+  videoElement():Element {
+    let children = this.player.el();
+    let element;
+
+    for( let i = 0, limit = children.length; i < limit; i++ ) {
+      let child = children[ i ];
+      if ( child.nodeName.toLowerCase() === 'video' ) {
+        element = child;
+        break;
+      }
+    }
+
+    return element;
+  }
+
+  onPlay( event:Object ):void {
+
+  }
+  onEnd( event:Object ):void {
+
+  }
+  onPause( event:Object ):void {
+
+  }
+  adStart( event:Object ):void {
+    const player = this.player;
+
+    player.controls( false );
+    player.on( 'adend', this.adEnd.bind( this ) );
+  }
+  adEnd( event:Object ):void {
+    const player = this.player;
+
+    player.controls( true );
+    player.on( 'play', this.onPlay.bind( this ) );
+    player.on( 'ended', this.onEnd.bind( this ) );
+    player.on( 'pause', this.onPause.bind( this ) );
   }
 
 

@@ -145,6 +145,9 @@
   player.on( 'play', function( e ) {
     console.log( '*** on play', e, this );
   } );
+  player.on( 'pause', function( e ) {
+    console.log( '*** on pause', e, this );
+  } );
 
   player.on( 'adstart', function( e ) {
     console.log( '*** on adstart', e, this );
@@ -155,20 +158,20 @@
     player.controls( true );
   } );
 
-  var full = false;
-  player.on( 'fullscreenchange', function( e ) {
-    console.log( '*** on fullscreenchange', e, this );
-
-    full = !full;
-    if ( full ) {
-      player.width( window.innerWidth, true );
-      player.height( window.innerHeight, true );
-    } else {
-      player.width( 800, true );
-      player.height( 450, true );
-    }
-
-  } );
+//  var full = false;
+//  player.on( 'fullscreenchange', function( e ) {
+//    console.log( '*** on fullscreenchange', e, this );
+//
+//    full = !full;
+//    if ( full ) {
+//      player.width( window.innerWidth, true );
+//      player.height( window.innerHeight, true );
+//    } else {
+//      player.width( 800, true );
+//      player.height( 450, true );
+//    }
+//
+//  } );
 
   // control
 //  player.pause = function( e ) {
