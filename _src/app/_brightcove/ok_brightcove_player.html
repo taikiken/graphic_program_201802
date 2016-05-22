@@ -52,8 +52,6 @@
          data-account="3948005094001"
          data-player="rJL6q0az"
          data-embed="default"
-         data-mouse="true"
-         data-controls="true"
          class="video-js"
          controls
          width="800"
@@ -97,6 +95,7 @@
   player.ready(function() {
     player.src({"type":"application/x-mpegURL", "src":"https://video.undotsushin.com/original/lambda_test/hd/lambda_test.m3u8"});
     player.poster('https://www.undotsushin.com/prg_img/thumbnail1/04.jpg');
+    console.log( 'player.ima3', typeof player.ima3 );
     player.ima3({
       debug: true,
       adTechOrder: [

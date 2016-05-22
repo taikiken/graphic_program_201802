@@ -24,7 +24,43 @@
    ga('send', 'pageview');
 
   </script>
+<?php
+if ( $page['template'] == 'p' && $page['category']['slug'] == 'crazy' ) :
+  // brightcove code をここに
+  // JS で非同期で読み込むと付随コードの読み込みが行われない様子
+?>
+  <style>
+    body.vjs-full-window {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+    .video-js.vjs-fullscreen {
+      position: fixed;
+      overflow: hidden;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .video-js:-webkit-full-screen {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .video-js.vjs-fullscreen.vjs-user-inactive {
+      cursor: none;
+    }
+  </style>
 
+  <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
+  <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
+<?php
+endif;
+?>
 </head>
 <body>
 <div id="whole" class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
