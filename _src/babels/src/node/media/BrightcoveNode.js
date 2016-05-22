@@ -77,8 +77,8 @@ export let BrightcoveNode = React.createClass( {
     //   width: `${Content.WIDTH}px`,
     //   height: `${Content.HD_HEIGHT}px`
     // };
-    let width = this.phone ? Content.SP_WIDTH : Content.WIDTH;
-    let height = this.phone ? Content.SP_HD_HEIGHT : Content.HD_HEIGHT;
+    let width = this.phone ? window.innerWidth : Content.WIDTH;
+    let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
 
     return (
       <div className="post-kv post-video-kv">
@@ -222,10 +222,10 @@ export let BrightcoveNode = React.createClass( {
       adTechOrder: [
         'html5'
       ],
-      postrollTimeout: 2000,
-      prerollTimeout: 1000,
-      requestMode: 'onload',
-      timeout: 5000
+      postrollTimeout: Brightcove.POST_ROLL,
+      prerollTimeout: Brightcove.PRE_ROLL,
+      requestMode: Brightcove.MODE,
+      timeout: Brightcove.TIMEOUT
     };
 
     if ( vast !== '' ) {
@@ -243,6 +243,10 @@ export let BrightcoveNode = React.createClass( {
         player.controls( false );
       }
     } );
+
+    if ( this.phone ) {
+      player.width( '100%', false );
+    }
 
     // player.ready( function() {
     //   player.src( { type: Brightcove.TYPE, src: url } );
