@@ -63,6 +63,7 @@ export let BrightcoveNode = React.createClass( {
     this.player = null;
     // vast
     // this.hasVast = !!this.props.video.vast;
+    this.phone = Sagen.Browser.Mobile.phone();
 
     return {
       showPlay: this.props.showPlay,
@@ -76,6 +77,8 @@ export let BrightcoveNode = React.createClass( {
     //   width: `${Content.WIDTH}px`,
     //   height: `${Content.HD_HEIGHT}px`
     // };
+    let width = this.phone ? Content.SP_WIDTH : Content.WIDTH;
+    let height = this.phone ? Content.SP_HD_HEIGHT : Content.HD_HEIGHT;
 
     return (
       <div className="post-kv post-video-kv">
@@ -86,8 +89,8 @@ export let BrightcoveNode = React.createClass( {
             data-player={this.props.player}
             data-embed={this.props.embed}
             className="video-js"
-            width={`${Content.WIDTH}px`}
-            height={`${Content.HD_HEIGHT}px`}
+            width={`${width}px`}
+            height={`${height}px`}
             controls
             ref="video">
           </video>
@@ -235,7 +238,10 @@ export let BrightcoveNode = React.createClass( {
       player.src( { type: Brightcove.TYPE, src: url } );
       player.poster( poster );
       player.ima3( ima3 );
-      player.controls( false );
+
+      if ( !this.phone ) {
+        player.controls( false );
+      }
     } );
 
     // player.ready( function() {

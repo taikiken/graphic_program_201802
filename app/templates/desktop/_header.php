@@ -25,6 +25,8 @@
 
   </script>
 <?php
+// ---------------------------------------------------------------------------
+// brightcove
 if ( $page['template'] == 'p' && $page['category']['slug'] == 'crazy' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
@@ -60,6 +62,8 @@ if ( $page['template'] == 'p' && $page['category']['slug'] == 'crazy' ) :
   <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
 <?php
 endif;
+// eof brightcove
+// ---------------------------------------------------------------------------
 ?>
 </head>
 <body>
