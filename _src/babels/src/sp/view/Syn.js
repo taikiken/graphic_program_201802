@@ -72,6 +72,12 @@ export class Syn {
      */
     this._side = side;
     /**
+     * side element を jQuery object へ
+     * @type {HTMLElement|jQuery}
+     * @private
+     */
+    this._$side = $( side );
+    /**
      * #side-menu-container element を Sagen.Dom instance へ
      * addClass とか getStyle とかできるから
      * @type {Sagen.Dom}
@@ -205,6 +211,14 @@ export class Syn {
     this.adgDispose();
     // flag ON
     this._$adgComing = true;
+
+    // https://github.com/undotsushin/undotsushin/issues/704#issuecomment-221199981
+    // inview event を追加する
+    this._$side.on( 'inview', ( event, isInView ) => {
+      if (isInView) {
+        this.adTrack();
+      }
+    } );
   }
   /**
    * $adg.listener.failed event handler
@@ -400,6 +414,9 @@ export class Syn {
     // https://github.com/undotsushin/undotsushin/issues/704#issuecomment-219010900
     this._firstAd = true;
     $adg.ads.trackShowEvent();
+
+    // track 送ったので inview event を unbind します
+    this._$side.off( 'inview' );
   }
   /**
    * menu open 時に高さをセットします
