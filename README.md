@@ -34,7 +34,7 @@
 
 #### API確認
 
-- http://www.undotsushin.com/debugger.php
+- http://dev.undotsushin.com/debugger.php
 - ID : ut
 - PASS : ut2016
 
