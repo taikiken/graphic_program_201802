@@ -39,7 +39,14 @@ echo <<<__EOL__
         "link"  : "http://dev.undotsushin.com/?crazy-banner-mobile"
       }
     },
-    "ad"         : {
+    "ad" : {
+      "ios"     : "33504",
+      "android" : "34424",
+      "sp"      : "35244",
+      "pc"      : {
+        "sidebar-top"    : "",
+        "sidebar-bottom" : ""
+      }
     }
   }
 }
