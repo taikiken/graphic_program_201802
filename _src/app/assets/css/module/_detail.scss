@@ -330,6 +330,42 @@
       }
     }
   } //.post-sns
+
+  // provider
+  .provider {
+    display: table;
+    width: 100%;
+    margin-top: 24px;
+    padding: 20px 0;
+    border-top: 1px solid $border-primary-color;
+    border-bottom: 1px solid $border-primary-color;
+
+    &-logo,
+    &-data {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    &-logo {
+      img {
+        height: 40px;
+      }
+    }
+
+    &-data {
+      text-align: right;
+    }
+
+    &-name,
+    &-url {
+      font-size: fs(12, 14);
+    }
+
+    &-name {
+      font-weight: bold;
+    }
+  }//.provider
+
 }
 
 // -------------------------------------------------
