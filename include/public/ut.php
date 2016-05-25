@@ -3,7 +3,7 @@
 $H=getallheaders();
 $SIZE=200;
 
-$articlefield="is_bookmark,id,title,body,b1,img1,type,d2,t1,m1,t10,a1,a2,a3,a4,a5,a6,t11,t12,t13,t14,video,youtube,facebook,m_time,videocaption,category,slug,category2,slug2,userid,typeid,name,profile,icon";
+$articlefield="is_bookmark,id,title,body,b1,img1,type,d2,t1,m1,t10,a1,a2,a3,a4,a5,a6,t11,t12,t13,t14,video,youtube,facebook,m_time,videocaption,d3,category,slug,category2,slug2,userid,url,typeid,name,profile,icon";
 $articletable="
 (select 
 	%s
@@ -14,6 +14,7 @@ $articletable="
 	img1,
 	(select name from repo where id=d1) as type,
 	d2,
+	d3,
 	t1,
 	m1,
 	t10,t11,t12,t13,t14,
@@ -30,6 +31,8 @@ $articletable="
 from repo_n where cid=1 and flag=1%s) as t1,
 (select 
 	id as userid,
+	t1 as url,
+	a15 as dir,
 	cid as typeid,
 	title as name,
 	t2 as profile,
@@ -47,6 +50,7 @@ $articletable2="
 	img1,
 	(select name from repo where id=d1) as type,
 	d2,
+	d3,
 	t1,
 	m1,
 	t10,t11,t12,t13,t14,
@@ -63,6 +67,8 @@ $articletable2="
 	from repo_n where cid=1 and flag=1%s%s%s) as t1,
 (select 
 	id as userid,
+	t1 as url,
+	a15 as dir,
 	cid as typeid,
 	title as name,
 	t2 as profile,
@@ -189,10 +195,12 @@ function set_articleinfo($f,$type=0){
 		$s["body_escape"]=stripbr($f["body"]);
 	}
 	
-	$s["category"]["label"]=$f["category"]; 
-	$s["category"]["slug"]=$f["slug"]; 
-	$s["category2"]["label"]=$f["category2"]; 
-	$s["category2"]["slug"]=$f["slug2"]; 
+	if($type!=2){
+		$s["category"]["label"]=$f["category"]; 
+		$s["category"]["slug"]=$f["slug"]; 
+		$s["category2"]["label"]=$f["category2"]; 
+		$s["category2"]["slug"]=$f["slug2"];
+	}
 	$s["categories"][0]["label"]=$f["category"]; 
 	$s["categories"][0]["slug"]=$f["slug"];
 	if(strlen($f["category2"])>0){
@@ -201,24 +209,94 @@ function set_articleinfo($f,$type=0){
 	}
 
 	$s["url"]=sprintf("%s/%s/%s",$domain,"p",$f["id"]);
-	$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
-	if($type==0){
-		$s["is_recommend"]=$f["recommend"]==1?true:false;
+
+	if($type!=2){
+		$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
+		if($type==0){
+			$s["is_recommend"]=$f["recommend"]==1?true:false;
+		}
 	}
-	
+	$s["is_new"]=$datetime["relativetime"]<(60*24*30)?true:false;
+
 	$s["media_type"]=strlen($video)>0?"video":"image";
 	$s["media"]["images"]=get_img($f["img1"],$f["id"]);
 	$s["media"]["images"]["caption"]=checkstr($f["t1"],1);
 	
 	$s["media"]["video"]["player"]=$video;
-	$s["media"]["video"]["url"]=strlen($f["video"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["video"]):"";
+	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("https://video.undotsushin.com/%s/%s/sd/%s.m3u8",$f["dir"],$f["video"],$f["video"]):"";
+	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("https://video.undotsushin.com/%s/%s/hd/%s.m3u8",$f["dir"],$f["video"],$f["video"]):"";
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
+	$s["media"]["video"]["time"]=s2h($f["d3"]);
 
 	$s["user"]=set_userinfo($f,0);
 
+	// ref. https://github.com/undotsushin/undotsushin/issues/642#issuecomment-221242071
+	// crazyカテゴリならベタにthemeを配置
+	if ( $s['categories'][0]['slug'] == 'crazy' ) :
+		$s['theme'] = array(
+			'base'             => 'black',
+			'background-color' => '#000000',
+			'images'           => array(
+				'pc' => 'https://www.undotsushin.com/img/crazy/crazy-pc-single.png',
+				'sp' => 'https://www.undotsushin.com/img/crazy/crazy-sp-single.png'
+			)
+		);
+	else :
+		$s['theme'] = array(
+			'base'             => '',
+			'background-color' => '',
+			'images'           => array(
+				'pc' => '',
+				'sp' => ''
+			)
+		);
+	endif;
+
 	return $s;
+}
+
+function get_pickup($cid){
+	
+	global $o,$articletable;
+	
+	$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$cid,sprintf($articletable,set_isbookmark(""),""));
+	$nsql=sprintf("select count(id) as n from u_headline where cid=%s and flag=1",$cid);
+	
+	$o->query($nsql);
+	$f=$o->fetch_array();
+	$count=$f["n"];
+	
+	if($count>0){
+		$o->query($sql);
+		while($f=$o->fetch_array())$p[]=$f;
+		for($i=0;$i<count($p);$i++){	
+			$s[$i]=set_articleinfo($p[$i],2);
+			$sql=sprintf("select count(*) as n from u_ranking where pageid=%s and flag=1 and userflag=1",$p[$i]["id"]);
+			$o->query($sql);
+			$f=$o->fetch_array();		
+			$s[$i]["comments_count"]=(int)$f["n"];
+		}
+	}
+	
+	return $s;
+}
+
+function s2h($seconds){
+	
+	if(strlen($seconds)==0)return "";
+	
+	$hours=floor($seconds/3600);
+	$minutes=floor(($seconds/60)%60);
+	$seconds=$seconds%60;
+	
+	if($hours>0){
+		$hms=sprintf("%02d:%02d:%02d",$hours,$minutes,$seconds);
+	}else{
+		$hms=sprintf("%02d:%02d",$minutes,$seconds);
+	}
+	return $hms;
 }
 
 function mod_replyfield($f,$data){
@@ -262,7 +340,7 @@ function set_commentinfo($f,$type,$reply=0){
 
 function set_userinfo($f,$interestset){
 	
-	global $UserImgPath,$domain,$banner;
+	global $UserImgPath,$domain,$banner,$articledetails;
 	
 	/* String型 */
 	$s["id"]=$f["userid"];
@@ -273,7 +351,7 @@ function set_userinfo($f,$interestset){
 	}
 	
 	if(!preg_match("/http/",$f["icon"])){
-		$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/users/img/%s",$UserImgPath,$f["icon"]):"";
+		$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/%s/img/%s",$UserImgPath,$interest==1?"users":"prg_img",$f["icon"]):"";
 	}elseif(strlen($f["icon"])>0){
 		$s["profile_picture"]=$f["icon"];
 	}else{
@@ -292,12 +370,16 @@ function set_userinfo($f,$interestset){
 		$s["access_token"]=$f["token"];
 		$s["session_token"]="";
 	}
+	
 	if($banner){
+		$s["logo"]["img"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$UserImgPath,$f["icon"]):"";
+		$s["logo"]["link"]=strlen($f["url"])>0?$f["url"]:"";
 		$s["banner"]=$banner;
 	}
 	
 	return $s;
 }
+
 
 function set_activity($f){
 	
