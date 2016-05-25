@@ -232,6 +232,28 @@ function set_articleinfo($f,$type=0){
 
 	$s["user"]=set_userinfo($f,0);
 
+	// ref. https://github.com/undotsushin/undotsushin/issues/642#issuecomment-221242071
+	// crazyカテゴリならベタにthemeを配置
+	if ( $s['categories'][0]['slug'] == 'crazy' ) :
+		$s['theme'] = array(
+			'base'             => 'black',
+			'background-color' => '#000000',
+			'images'           => array(
+				'pc' => 'https://www.undotsushin.com/img/crazy/crazy-pc-single.png',
+				'sp' => 'https://www.undotsushin.com/img/crazy/crazy-sp-single.png'
+			)
+		);
+	else :
+		$s['theme'] = array(
+			'base'             => '',
+			'background-color' => '',
+			'images'           => array(
+				'pc' => '',
+				'sp' => ''
+			)
+		);
+	endif;
+
 	return $s;
 }
 
