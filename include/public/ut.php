@@ -253,6 +253,22 @@ function set_articleinfo($f,$type=0){
 			)
 		);
 	endif;
+	
+	// ref. https://github.com/undotsushin/undotsushin/issues/714
+	// 広告設定
+	$s['ad'] = array(
+		'ios'     => '33505',
+		'android' => '34425',
+		'sp'      => '35245',
+		'pc'      => array(
+			'sidebar-top'         => '',
+			'sidebar-bottom'      => '',
+			'single-top'          => '',
+			'single-bottom-left'  => '',
+			'single-bottom-right' => ''
+		)
+	);
+
 
 	return $s;
 }
