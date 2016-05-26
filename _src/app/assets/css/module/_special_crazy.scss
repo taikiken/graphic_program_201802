@@ -1,0 +1,48 @@
+@import "../../../../scss/asset";
+@import "../sprite";
+
+// List
+//
+// design module special : crazy athletes
+//
+// Styleguide 2.10.0
+
+// -------------------------------------------------
+// common
+// -------------------------------------------------
+
+.special_crazy {
+  .body-sec {
+    background-color: #181818;
+
+    &:before {
+      background-color: #000;
+    }
+
+    .body-sec-inner {
+      background: #181818 none;
+
+      .side-sec {
+        background-color: #000;
+      }
+    }
+
+    [ class^="board-" ] {
+      .post {
+        @include link-decoration(#fff, #fff, none, none);
+      }
+
+      .post-date {
+        color: #999;
+      }
+    }
+  }
+
+  .foot-sec {
+    background-color: #000;
+
+    .foot-pr {
+      background-color: #181818;
+    }
+  }
+}//.special_crazy
