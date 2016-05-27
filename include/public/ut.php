@@ -236,7 +236,7 @@ function set_articleinfo($f,$type=0){
 	// crazyカテゴリならベタにthemeを配置
 	if ( $s['categories'][0]['slug'] == 'crazy' ) :
 		$s['theme'] = array(
-			'base'             => 'black',
+			'base'             => 'dark',
 			'background-color' => '#000000',
 			'images'           => array(
 				'pc' => 'https://www.undotsushin.com/img/crazy/crazy-pc-single.png',
