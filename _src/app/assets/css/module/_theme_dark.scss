@@ -1,9 +1,9 @@
 @import "../../../../scss/asset";
 @import "../sprite";
 
-// List
+// Theme Dark
 //
-// design module special : crazy athletes
+// design module Dark theme
 //
 // Styleguide 2.10.0
 
@@ -11,7 +11,7 @@
 // common
 // -------------------------------------------------
 
-.special_crazy {
+.theme_dark {
   .body-sec {
     background-color: #181818;
 
@@ -26,6 +26,16 @@
         background-color: #000;
       }
     }
+  }
+
+  .widget-ranking-heading-title {
+    @include sprite( $common-side-ranking-heading_dark );
+    display: inline-block;
+  }
+
+  .widget-recommend-heading-title {
+    @include sprite( $common-side-recommend-heading_dark );
+    display: inline-block;
   }
 
   .foot-sec {
@@ -82,31 +92,5 @@
     }
   }
 
-} //.special_crazy
+} //.theme_dark
 
-
-
-
-
-// -------------------------------------------------
-// list
-// -------------------------------------------------
-
-.special_crazy {
-  .mainVisual_list {
-    margin: 0 -500em;
-    padding: 0 500em;
-    background: #111 url(/assets/images/crazy/list-mv-bg.jpg) no-repeat center center;
-
-    &-heading,
-    &-copy {
-      display: table-cell;
-      height: 300px;
-      vertical-align: middle;
-    }
-
-    &-heading {
-      padding-right: 52px;
-    }
-  } //.mainVisual_list
-} //.special_crazy
