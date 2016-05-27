@@ -7,34 +7,37 @@
 //
 // Styleguide 2.10.0
 
-// -------------------------------------------------
-// common
-// -------------------------------------------------
+[ class*="theme_dark" ] {
 
-.theme_dark {
   .body-sec {
-    background-color: #181818;
 
     &:before {
       background-color: #000;
     }
 
     .body-sec-inner {
-      background: #181818 none;
+      background-image: url(/assets/images/common/bg-bodysec_dark.png);
+    }
+  }
 
-      .side-sec {
-        background-color: #000;
-      }
+  .widget-ranking,
+  .widget-recommend {
+    &-heading,
+    .post {
+      border-bottom-color: #333;
     }
   }
 
   .widget-ranking-heading-title {
     @include sprite( $common-side-ranking-heading_dark );
-    display: inline-block;
   }
 
   .widget-recommend-heading-title {
     @include sprite( $common-side-recommend-heading_dark );
+  }
+
+  .widget-ranking-heading-title,
+  .widget-recommend-heading-title {
     display: inline-block;
   }
 
@@ -94,3 +97,13 @@
 
 } //.theme_dark
 
+
+.theme_dark_list {
+  .body-sec {
+    background-color: #181818;
+
+    .body-sec-inner {
+      background-image: url(/assets/images/common/bg-bodysec_dark_list.png);
+    }
+  }
+}
