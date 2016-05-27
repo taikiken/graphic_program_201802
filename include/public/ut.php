@@ -229,8 +229,13 @@ function set_articleinfo($f,$type=0){
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
 	$s["media"]["video"]["time"]=s2h($f["d3"]);
+	
+	// ref. https://github.com/undotsushin/undotsushin/issues/613
+	// brightcoveならadvantageのサンプルVASTを設定
+	$s["media"]["video"]["vast"] = strlen( $f["video"] ) > 0 ? 'http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page=' : ''; 
 
 	$s["user"]=set_userinfo($f,0);
+
 
 	// ref. https://github.com/undotsushin/undotsushin/issues/642#issuecomment-221242071
 	// crazyカテゴリならベタにthemeを配置
