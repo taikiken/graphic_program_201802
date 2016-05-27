@@ -70,7 +70,7 @@ RewriteRule ^v1/users /api/ver1/write/userregister.php [L]
 
 #CATEGORY
 # CRAZY - ref. #642
-RewriteRule ^v1/category/crazy$ /api/ver1/read/dummy-crazy.php [L]
+RewriteRule ^v1/category/([a-z]+)$ /api/ver1/read/dummy-category.php?category=$1 [L]
 RewriteRule ^v1/category /api/ver1/read/categorylist.php [L]
 RewriteRule ^v1/category_static /api/ver1/static/category.json [L]
 
