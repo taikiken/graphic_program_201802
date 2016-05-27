@@ -26,16 +26,6 @@
         background-color: #000;
       }
     }
-
-    [ class^="board-" ] {
-      .post {
-        @include link-decoration(#fff, #fff, none, none);
-      }
-
-      .post-date {
-        color: #999;
-      }
-    }
   }
 
   .foot-sec {
@@ -45,4 +35,78 @@
       background-color: #181818;
     }
   }
-}//.special_crazy
+
+  [ class^="board-" ] {
+    .post {
+      @include link-decoration(#fff, #fff, none, none);
+    }
+
+    .post-date {
+      color: #999;
+    }
+  }
+
+  .board-large {
+    .feature-user {
+      &.comment-item {
+        background-color: #222;
+      }
+
+      .comment-user {
+        &-name {
+          color: #fff;
+        }
+
+        &-job {
+          color: #999;
+        }
+      }
+
+      .comment-content {
+        color: #fff;
+      }
+    } //.feature-user
+
+    .commented-user-andmore {
+      color: #999;
+    }
+
+    .comment-reaction {
+      .comment-reaction-btn {
+        color: #fff;
+
+        &.active {
+          color: $highlight-color;
+        }
+      }
+    }
+  }
+
+} //.special_crazy
+
+
+
+
+
+// -------------------------------------------------
+// list
+// -------------------------------------------------
+
+.special_crazy {
+  .mainVisual_list {
+    margin: 0 -500em;
+    padding: 0 500em;
+    background: #111 url(/assets/images/crazy/list-mv-bg.jpg) no-repeat center center;
+
+    &-heading,
+    &-copy {
+      display: table-cell;
+      height: 300px;
+      vertical-align: middle;
+    }
+
+    &-heading {
+      padding-right: 52px;
+    }
+  } //.mainVisual_list
+} //.special_crazy

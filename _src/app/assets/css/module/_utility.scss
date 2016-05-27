@@ -140,3 +140,21 @@
     text-align: left;
   }
 }
+
+
+
+
+
+// font face
+
+// icon like
+@font-face {
+  font-family: 'icon-like';
+  src:url('/assets/fonts/icon-like/icon-like.eot?4bxem9');
+  src:url('/assets/fonts/icon-like/icon-like.eot?4bxem9#iefix') format('embedded-opentype'),
+      url('/assets/fonts/icon-like/icon-like.ttf?4bxem9') format('truetype'),
+      url('/assets/fonts/icon-like/icon-like.woff?4bxem9') format('woff'),
+      url('/assets/fonts/icon-like/icon-like.svg?4bxem9#icon-like') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
