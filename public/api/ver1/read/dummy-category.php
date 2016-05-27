@@ -74,7 +74,7 @@ $json_other = <<<__EOL__
     "description" : "",
     "theme"        : {
       "base"             : "",
-      "background-color" : "#eeeeee",
+      "background-color" : "",
       "images"      : {
         "pc" : "",
         "sp" : ""
