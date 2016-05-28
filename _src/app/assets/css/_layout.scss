@@ -662,7 +662,7 @@ button {
     width: 330px;
     padding-top: 30px;
     padding-left: 30px;
-    background-color: #f5f5f5;
+    // background-color: #f5f5f5;
   }
 }
 
@@ -705,7 +705,9 @@ button {
           line-height: 1;
         }
 
-        &-title img {
+        &-title {
+          @extend .sprite-common;
+          @include hide-text;
           vertical-align: middle;
         }
 
@@ -737,6 +739,11 @@ button {
     } //.widget-ranking, .widget-recommend
 
     .widget-ranking {
+      &-heading-title {
+        @include sprite( $common-side-ranking-heading );
+        display: inline-block;
+      }
+
       .post {
         &-thumb {}
 
@@ -776,6 +783,11 @@ button {
     } //.widget-ranking
 
     .widget-recommend {
+      &-heading-title {
+        @include sprite( $common-side-recommend-heading );
+        display: inline-block;
+      }
+
       .post {
         &-thumb {
           position: relative;
