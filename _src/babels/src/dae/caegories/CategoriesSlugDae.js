@@ -1,0 +1,105 @@
+/**
+ * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * @author (at)taikiken / http://inazumatv.com
+ * @date 2016/05/28 - 16:09
+ *
+ * Distributed under the terms of the MIT license.
+ * http://www.opensource.org/licenses/mit-license.html
+ *
+ * This notice shall be included in all copies or substantial portions of the Software.
+ *
+ */
+
+import {Safety} from '../../data/Safety';
+
+import {ThemeDae} from './theme/ThemeDae';
+import {BannerDae} from './theme/BannerDae';
+import {AdDae} from './theme/AdDae';
+
+/**
+ * 特定のカテゴリー情報を取得する
+ * ※主に企画モノの記事一覧ページを生成するにあたり利用する
+ *
+ * `/api/v1/category/[:category_slug]`
+ */
+export class CategoriesSlugDae {
+  constructor( response:Object = {} ) {
+    response = Safety.object( response );
+    
+    let banner = Safety.object( response.banner );
+
+    this._theme = new ThemeDae( response.theme );
+    this._banner = {
+      pc: new BannerDae( banner.pc ),
+      sp: new BannerDae( banner.sp )
+    };
+    this._ad = new AdDae( response.ad );
+    this._response = response;
+  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * JSON.response
+   * @return {Object|*} JSON response を返します
+   */
+  get response():Object {
+    return this._response;
+  }
+  // from SlugDae
+  /**
+   * category.id
+   * @return {Number} category Id を返します
+   */
+  get id():Number {
+    return this.response.id;
+  }
+  /**
+   * category.label
+   * @return {string} category label を返します
+   */
+  get label():string {
+    return this.response.label;
+  }
+  /**
+   * category.slug
+   * @return {string} category slug を返します
+   */
+  get slug():string {
+    return this.response.slug;
+  }
+  /**
+   * category.url
+   * @return {string} category url を返します
+   */
+  get url():string {
+    return this.response.url;
+  }
+  /**
+   * category.title_img
+   * <pre>
+   * そのカテゴリータイトルに付与する画像
+   * ex. Facebook 話題の投稿の powered by。
+   * - PC版のみ利用あり
+   * </pre>
+   * @return {string} category title_img を返します
+   */
+  get titleImage():string {
+    return this.response.title_img;
+  }
+  get title():string {
+    return this.response.title;
+  }
+  get description():string {
+    return this.response.description;
+  }
+  get theme():ThemeDae {
+    return this._theme;
+  }
+  get banner():BannerDae {
+    return this._banner;
+  }
+  get ad():AdDae {
+    return this._ad;
+  }
+}

@@ -104,10 +104,14 @@ if (
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
       <li id="home" class="gnav-home"><a href="/">一面</a></li>
-<?php if (0) : ?>
-      <li id="crazy" class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
-<?php endif;// crazy remove ?>
-      <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
+<?php /*if (0) :*/ ?>
+      <li id="crazy" class="gnav-crazy"><a href="/category/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
+<?php /*endif;*/ // crazy remove ?>
+      <?php foreach( $page[ 'site_categories' ] as $category ) {
+        if ( $category[ 'slug' ] == 'crazy' ) {
+          continue;
+        }
+        ?>
         <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
           <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
         </li>
