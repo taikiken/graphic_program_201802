@@ -1,0 +1,27 @@
+@import "../../../../../scss_sp/asset";
+@import "../sprite";
+
+// Theme Dark
+//
+// design module Dark theme
+//
+// Styleguide 2.12.0
+
+[ class*="theme_dark" ] {
+  .body-sec-inner {
+    background-color: #000;
+  }
+
+  .main-sec > .sponsor-link {
+    margin: 10px perCalc(20) 0;
+  }
+
+  .board-large {
+    background-color: #000;
+
+    // .board-item {
+    //   background-color: #fff;
+    // }
+  }
+} //.theme_dark
+

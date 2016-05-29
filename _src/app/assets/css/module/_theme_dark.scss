@@ -98,12 +98,33 @@
 } //.theme_dark
 
 
+
+
+
+// theme_dark_list
 .theme_dark_list {
   .body-sec {
     background-color: #181818;
 
     .body-sec-inner {
       background-image: url(/assets/images/common/bg-bodysec_dark_list.png);
+    }
+  }
+} //.theme_dark_list
+
+
+
+
+
+// related-post
+[ class*="theme_dark" ] {
+  .related-post {
+    .post {
+      @include link-decoration(#333, #333, none, none);
+    }
+
+    .post-date {
+      color: #666;
     }
   }
 }
