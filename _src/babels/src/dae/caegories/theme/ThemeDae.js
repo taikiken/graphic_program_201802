@@ -20,8 +20,16 @@ import {ImagesDae} from './ImagesDae';
  * デザイン要素を動的に変更可能なようにAPIに追加されたデータを管理します
  *
  * https://github.com/undotsushin/undotsushin/issues/645
+ *
+ * <pre>
+ * 表示テーマ、記事のプライマリーカテゴリーがら設定さされる
+ * - CRAZYのような特殊表示ではない通常記事の場合はthemeはデフォルト表示として空とする
+ * </pre>
  */
 export class ThemeDae {
+  /**
+   * @param {Object} [theme={}] response.theme
+   */
   constructor( theme:Object = {} ) {
     theme = Safety.object( theme );
 
@@ -58,12 +66,21 @@ export class ThemeDae {
     return this.theme.base;
   }
   /**
+   * response.theme.background_color
+   * <pre>
+   * 背景色、#付きhex値
    *
-   * @return {*}
+   * iOS/Android/SPはこの値をつかって背景色を設定してくさい
+   * </pre>
+   * @return {string} response.theme.background_color を返します
    */
   get backgroundColor():string {
-    return this.theme['background-color'];
+    return this.theme.background_color;
   }
+  /**
+   * response.theme.images
+   * @return {ImagesDae} response.theme.images を ImagesDae instance にし返します
+   */
   get images():ImagesDae {
     return this._images;
   }

@@ -83,6 +83,8 @@ if ( $page['template'] == 'p' ) {
     $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
   }
 }
+
+var_dump($page['category']);
 ?>
 </head>
 <body>

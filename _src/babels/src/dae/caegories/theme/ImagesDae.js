@@ -12,20 +12,45 @@
 
 import {Safety} from '../../../data/Safety';
 
+/**
+ * response.theme.images
+ *
+ *  "images": {
+ *    "pc": string,
+ *    "sp": string
+ *  }
+ *
+ * https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=229180023
+ */
 export class ImagesDae {
+  /**
+   * response.theme.images
+   * @param {Object} [images={}] response.theme.images
+   */
   constructor( images:Object = {} ) {
     images = Safety.object( images );
 
     this._images = images;
   }
-
+  /**
+   * response.theme.images
+   * @return {Object|*} response.theme.images を返します
+   */
   get images():ImagesDae {
     return this._images;
   }
+  /**
+   * response.theme.images.pc
+   * @return {string} response.theme.images.pc を返します
+   */
   get pc():string {
-    this.images.pc;
+    return this.images.pc;
   }
+  /**
+   * response.theme.images.sp
+   * @return {string} response.theme.images.sp を返します
+   */
   get sp():string {
-    this.images.sp;
+    return this.images.sp;
   }
 }
