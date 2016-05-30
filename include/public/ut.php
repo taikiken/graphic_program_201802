@@ -266,11 +266,11 @@ function set_articleinfo($f,$type=0){
 		'android' => '34425',
 		'sp'      => '35245',
 		'pc'      => array(
-			'sidebar-top'         => '',
-			'sidebar-bottom'      => '',
-			'single-top'          => '',
-			'single-bottom-left'  => '',
-			'single-bottom-right' => ''
+			'sidebar_top'         => '',
+			'sidebar_bottom'      => '',
+			'single_top'          => '',
+			'single_bottom_left'  => '',
+			'single_bottom_right' => ''
 		)
 	);
 
