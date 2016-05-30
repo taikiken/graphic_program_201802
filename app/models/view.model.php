@@ -197,7 +197,13 @@ class ViewModel {
         if ( is_array($response) && count($response)) {
           foreach($response as $array) {
             if(is_array($array)) {
-              $category = array_merge($category, $array);
+
+              if ( $slug !== 'crazy' ) :
+                $category = array_merge($array, $category);
+              else :
+                $category = array_merge($category, $array);
+              endif;
+
             }
           }
         }
