@@ -242,7 +242,7 @@ function set_articleinfo($f,$type=0){
 	if ( $s['categories'][0]['slug'] == 'crazy' ) :
 		$s['theme'] = array(
 			'base'             => 'dark',
-			'background_color' => '#000000',
+			'background_color' => '#111111',
 			'images'           => array(
 				'pc' => 'https://www.undotsushin.com/img/crazy/crazy-pc-single.png',
 				'sp' => 'https://www.undotsushin.com/img/crazy/crazy-sp-single.png'
