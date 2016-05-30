@@ -7,9 +7,10 @@
 //
 // Styleguide 2.10.0
 
-[ class*="theme_dark" ] {
+.whole.dark {
 
   .body-sec {
+    background-color: #181818;
 
     &:before {
       background-color: #000;
@@ -102,22 +103,24 @@
 
 
 // theme_dark_list
-.theme_dark_list {
-  .body-sec {
-    background-color: #181818;
+.whole.dark {
+  &.post-single {
+    .body-sec {
+      background-color: #fff;
 
-    .body-sec-inner {
-      background-image: url(/assets/images/common/bg-bodysec_dark_list.png);
+      .body-sec-inner {
+        background-image: url(/assets/images/common/bg-bodysec_dark_detail.png);
+      }
     }
   }
-} //.theme_dark_list
+}
 
 
 
 
 
 // related-post
-[ class*="theme_dark" ] {
+.whole.dark {
   .related-post {
     .post {
       @include link-decoration(#333, #333, none, none);
