@@ -5,6 +5,18 @@
 ?>
 <div class="body-sec">
   <div class="body-sec-inner">
+    <?php
+    // ----------------------------------------------------
+    // 記事詳細: sp
+    // response.theme.images.pc
+    // response.description
+    if ( !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ] ) ) : ?>
+      <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
+        <h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+      </div>
+    <?php endif;
+    // eof: 記事詳細: sp
+    // ---------------------------------------------------- ?>
     <section class="main-sec">
 
       <div id="single-visual-container"></div>
