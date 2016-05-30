@@ -107,11 +107,11 @@ export let BrightcoveNode = React.createClass( {
   componentDidMount: function() {
     this.initBrightcove();
   },
-  componentWillUnMount: function() {
-
-  },
+  // componentWillUnMount: function() {
+  //
+  // },
   // -------------------------------------------
-  // clcik で再生開始
+  // click で再生開始
   playClick: function( event ) {
     event.preventDefault();
 
@@ -122,90 +122,18 @@ export let BrightcoveNode = React.createClass( {
     this.setState( { showPlay: false } );
 
     player.play();
-    // if ( !this.hasVast ) {
-    //   player.controls( true );
-    // }
   },
   // -------------------------------------------
   // brightcove player init
   initBrightcove: function() {
-    // // global object videojs が存在する時は script tag があるはず
-    // if ( !!self.videojs ) {
-    //   // videojs 発見
-    //   this.createPlayer();
-    // } else {
-    //   // script tag を append
-    //   this.appendScript();
-    // }
-
     // 非同期で script を読み込まない
+    // 全ての機能が使えなくなるので...
     this.createPlayer();
   },
-  // // script tag x 3 を head に appendChild します
-  // appendScript: function() {
-  //   // script tag が多分無い
-  //   const host = Brightcove.HOST;
-  //   const index = document.createElement( 'script' );
-  //   // const ima3 = document.createElement( 'script' );
-  //
-  //   index.src = `${host}/${this.props.account}/${this.props.player}_default/index.min.js`;
-  //   // ima3.src = `${host}/videojs-ima3/videojs.ima3.min.js`;
-  //
-  //   document.head.appendChild( index );
-  //   // document.head.appendChild( ima3 );
-  //
-  //   this.appendIma3();
-  // },
-  // appendIma3: function() {
-  //   const videojs = self.videojs;
-  //
-  //   // videojs global object 存在チェック
-  //   // 存在を確認できるまで待機します
-  //   if ( !videojs ) {
-  //     setTimeout( this.appendIma3, 25 );
-  //     return;
-  //   }
-  //   console.log( '****** appendIma3' );
-  //   // script tag が多分無い
-  //   const host = Brightcove.HOST;
-  //   // const index = document.createElement( 'script' );
-  //   const ima3 = document.createElement( 'script' );
-  //
-  //   // index.src = `${host}/${this.props.account}/${this.props.player}_default/index.min.js`;
-  //   ima3.src = `${host}/videojs-ima3/videojs.ima3.min.js`;
-  //
-  //   // document.head.appendChild( index );
-  //   document.head.appendChild( ima3 );
-  //
-  //   ima3.addEventListener( 'load', this.appendHls, false );
-  // },
-  // appendHls: function( event ) {
-  //   event.target.removeEventListener( 'load', this.appendHls );
-  //   const videojs = self.videojs;
-  //   console.log( '****** appendHls' );
-  //   // videojs global object 存在チェック
-  //   // 存在を確認できるまで待機します
-  //   if ( !videojs || !videojs.ima3 ) {
-  //     setTimeout( this.appendHls, 25 );
-  //     return;
-  //   }
-  //
-  //   // script tag が多分無い
-  //   const hls = document.createElement( 'script' );
-  //   hls.src = '/assets/js/libs/hls/videojs-contrib-hls.min.js';
-  //   document.head.appendChild( hls );
-  //
-  //   hls.addEventListener( 'load', this.createWait, false );
-  // },
-  // createWait: function( event ) {
-  //   console.log( '****** createWait' );
-  //   event.target.removeEventListener( 'load', this.createWait );
-  //   setTimeout( this.createPlayer, 500 );
-  // },
   // videojs で player instance を作成します
   createPlayer: function() {
     const videojs = self.videojs;
-    console.log( '****** createPlayer' );
+    // console.log( '****** createPlayer' );
     // videojs global object 存在チェック
     // 存在を確認できるまで待機します
     if ( !videojs || !videojs.ima3 ) {
@@ -228,15 +156,15 @@ export let BrightcoveNode = React.createClass( {
       timeout: Brightcove.TIMEOUT
     };
 
-    // ToDo: test code
+    // AD test code
     // "AdError 1005: The provided ad type: skippablevideo is not supported."
-    vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
+    // vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
     // vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
     // vast = 'http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page=';
     if ( vast !== '' ) {
       ima3.serverUrl = vast + Date.now();
     }
-    console.log( 'vast', vast, ima3 );
+    // console.log( 'vast', vast, ima3 );
     let player = videojs( this.id );
 
     player.ready( () => {
@@ -253,24 +181,6 @@ export let BrightcoveNode = React.createClass( {
       player.width( '100%', false );
       // player.height( 'auto', false );
     }
-
-    // player.ready( function() {
-    //   player.src( { type: Brightcove.TYPE, src: url } );
-    //   player.poster( poster );
-    //   console.log( 'ready ima3', typeof player.ima3 );
-    //   player.ima3( ima3 );
-    //   player.controls( false );
-    // } );
-
-    // player.on('loadedmetadata', function() {
-    //   // no event fire
-    //   player.src( { type: Brightcove.TYPE, src: url } );
-    //   player.poster( poster );
-    //   console.log( 'ready ima3', typeof player.ima3 );
-    //   player.ima3( ima3 );
-    //   player.controls( false );
-    // } );
-
     // http://docs.brightcove.com/en/perform/brightcove-player/guides/events.html
 
     // bind event handler
@@ -295,11 +205,12 @@ export let BrightcoveNode = React.createClass( {
   },
   onPlay: function() {
     this.player.controls( true );
-  },
-  onPause: function() {
-    // this.setState( { showPlay: true } );
-  },
-  onEnd: function() {
-    // this.setState( { showPlay: true } );
   }
+  // ,
+  // onPause: function() {
+  //   // this.setState( { showPlay: true } );
+  // },
+  // onEnd: function() {
+  //   // this.setState( { showPlay: true } );
+  // }
 } );
