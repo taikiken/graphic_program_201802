@@ -42,43 +42,43 @@ export class AdPcDae {
     return this._pc;
   }
   /**
-   * JSON.response.ad.pc['sidebar-top']
+   * JSON.response.ad.pc.sidebar_top
    * サイドバー右上レクタングル
-   * @return {string} JSON.response.ad.pc['sidebar-top'] を返します
+   * @return {string} JSON.response.ad.pc.sidebar_top を返します
    */
   get sidebarTop():string {
-    return this.pc['sidebar-top'];
+    return this.pc.sidebar_top;
   }
   /**
-   * JSON.response.ad.pc['sidebar-bottom']
+   * JSON.response.ad.pc.sidebar_bottom
    * サイドバー右下ハーフ
-   * @return {string} JSON.response.ad.pc['sidebar-bottom'] を返します
+   * @return {string} JSON.response.ad.pc.sidebar_bottom を返します
    */
   get sidebarBottom():string {
-    return this.pc['sidebar-bottom'];
+    return this.pc.sidebar_bottom;
   }
   /**
-   * JSON.response.ad.pc['single-top']
+   * JSON.response.ad.pc.single_top
    * 記事詳細タイトル下
-   * @return {string} JSON.response.ad.pc['single-top'] を返します
+   * @return {string} JSON.response.ad.pc.single_top を返します
    */
   get singleTop():string {
-    return this.pc['single-top'];
+    return this.pc.single_top;
   }
   /**
-   * JSON.response.ad.pc['single-bottom-left']
+   * JSON.response.ad.pc.single_bottom_left
    * 記事詳細下部レクタングル左
-   * @return {string} JSON.response.ad.pc['single-bottom-left'] を返します
+   * @return {string} JSON.response.ad.pc.single_bottom_left を返します
    */
   get singleBottomLeft():string {
-    return this.pc['single-bottom-left'];
+    return this.pc.single_bottom_left;
   }
   /**
-   * JSON.response.ad.pc['single-bottom-right']
+   * JSON.response.ad.pc.single_bottom_right
    * 記事詳細下部レクタングル右
-   * @return {string} JSON.response.ad.pc['single-bottom-right'] を返します
+   * @return {string} JSON.response.ad.pc.single_bottom_right を返します
    */
   get singleBottomRight():string {
-    return this.pc['single-bottom-right'];
+    return this.pc.single_bottom_right;
   }
 }
