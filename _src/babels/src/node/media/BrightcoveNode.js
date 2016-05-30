@@ -57,12 +57,26 @@ export let BrightcoveNode = React.createClass( {
     };
   },
   getInitialState: function() {
-    this.videoElement = null;
+    // this.videoElement = null;
+    /**
+     * videojs が tag を生成させる基点 Element の id<br>
+     * video-player-ARTICLE_ID
+     *
+     * @private
+     * @type {string}
+     */
     this.id = `video-player-${this.props.articleId}`;
-    // videojs return value
+    /**
+     * videojs return value, videojs instance
+     * @private
+     * @type {null|videojs}
+     */
     this.player = null;
-    // vast
-    // this.hasVast = !!this.props.video.vast;
+    /**
+     * スマホかを表す真偽値
+     * @private
+     * @type {Boolean}
+     */
     this.phone = Sagen.Browser.Mobile.phone();
 
     return {
@@ -73,10 +87,6 @@ export let BrightcoveNode = React.createClass( {
   render: function() {
     let video = this.props.video;
     let caption = this.props.caption;
-    // let videoStyle = {
-    //   width: `${Content.WIDTH}px`,
-    //   height: `${Content.HD_HEIGHT}px`
-    // };
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
 
@@ -128,12 +138,13 @@ export let BrightcoveNode = React.createClass( {
   initBrightcove: function() {
     // 非同期で script を読み込まない
     // 全ての機能が使えなくなるので...
+    // テンプレートへ記載します
     this.createPlayer();
   },
   // videojs で player instance を作成します
   createPlayer: function() {
     const videojs = self.videojs;
-    // console.log( '****** createPlayer' );
+
     // videojs global object 存在チェック
     // 存在を確認できるまで待機します
     if ( !videojs || !videojs.ima3 ) {
@@ -150,9 +161,13 @@ export let BrightcoveNode = React.createClass( {
       adTechOrder: [
         'html5'
       ],
+      // 2000
       postrollTimeout: Brightcove.POST_ROLL,
+      // 1000
       prerollTimeout: Brightcove.PRE_ROLL,
+      // onload
       requestMode: Brightcove.MODE,
+      // 5000
       timeout: Brightcove.TIMEOUT
     };
 

@@ -11,6 +11,18 @@
 
 <div class="body-sec">
   <div class="body-sec-inner">
+    <?php
+    // ----------------------------------------------------
+    // 記事詳細: pc
+    // response.theme.images.pc
+    // response.description
+    if ( !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) : ?>
+      <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
+        <h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+      </div>
+    <?php endif;
+    // eof: 記事詳細: pc
+    // ---------------------------------------------------- ?>
     <section class="main-sec">
       <div class="post-detail">
 
