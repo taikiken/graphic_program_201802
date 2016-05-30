@@ -11,7 +11,7 @@
  */
 
 import {Content} from '../../app/const/Content';
-// import {Empty} from '../../app/const/Empty';
+import {Empty} from '../../app/const/Empty';
 import {Brightcove} from '../../app/const/Brightcove';
 
 // node
@@ -80,9 +80,18 @@ export let BrightcoveNode = React.createClass( {
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
 
+    let guide = () => {
+      if ( this.phone ) {
+        return <img className="phone-video-guide" src={Empty.VIDEO_THUMBNAIL} alt=""/>;
+      } else {
+        return null;
+      }
+    };
+
     return (
-      <div className="post-kv post-video-kv">
+      <div className={`post-kv post-video-kv${this.phone ? ' phone-post-kv' : ''}`}>
         <div className="video-container">
+          {guide()}
           <video
             id={this.id}
             data-account={this.props.account}
@@ -179,7 +188,7 @@ export let BrightcoveNode = React.createClass( {
 
     if ( this.phone ) {
       player.width( '100%', false );
-      // player.height( 'auto', false );
+      player.height( 'auto', false );
     }
     // http://docs.brightcove.com/en/perform/brightcove-player/guides/events.html
 
