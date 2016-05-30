@@ -87,18 +87,38 @@ export class CategoriesSlugDae {
   get titleImage():string {
     return this.response.title_img;
   }
+  /**
+   * response.title_img
+   * @return {string} response.title_img を返します
+   */
   get title():string {
     return this.response.title;
   }
+  /**
+   * response.description
+   * @return {string} response.description を返します
+   */
   get description():string {
     return this.response.description;
   }
+  /**
+   * response.theme
+   * @return {ThemeDae} response.theme を ThemeDae instance にし返します
+   */
   get theme():ThemeDae {
     return this._theme;
   }
+  /**
+   * response.banner
+   * @return {{pc: BannerDae, sp: BannerDae}|*} response.banner を object にし返します
+   */
   get banner():BannerDae {
     return this._banner;
   }
+  /**
+   * response.ad
+   * @return {AdDae} response.ad を AdDae instance にして返します
+   */
   get ad():AdDae {
     return this._ad;
   }
