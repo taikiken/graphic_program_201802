@@ -23,6 +23,11 @@ import {AdDae} from './theme/AdDae';
  * `/api/v1/category/[:category_slug]`
  */
 export class CategoriesSlugDae {
+  /**
+   * `/api/v1/category/[:category_slug]`
+   * JSON.response を管理します
+   * @param {Object} response JSON.response
+   */
   constructor( response:Object = {} ) {
     response = Safety.object( response );
     
@@ -41,7 +46,7 @@ export class CategoriesSlugDae {
   // ---------------------------------------------------
   /**
    * JSON.response
-   * @return {Object|*} JSON response を返します
+   * @return {Object} JSON response を返します
    */
   get response():Object {
     return this._response;
@@ -110,7 +115,7 @@ export class CategoriesSlugDae {
   }
   /**
    * response.banner
-   * @return {{pc: BannerDae, sp: BannerDae}|*} response.banner を object にし返します
+   * @return {{pc: BannerDae, sp: BannerDae}} response.banner を object にし返します
    */
   get banner():BannerDae {
     return this._banner;
