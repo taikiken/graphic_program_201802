@@ -171,21 +171,29 @@ gulp.task 'serve:app', ->
   browserSync option
 
   # watch
+  # sprite image
   gulp.watch [ sprite + '/**/*.{png,jpg,gif,svg}' ], [ 'sprite:build' ]
+  # html
   gulp.watch [ app + '/**/*.html', '!' + app + '/**/*tmp*.html', '!' + app + '/**/*test*.html' ], reload
+  # scss, css
   gulp.watch [
     app + '/**/*.{scss,css}'
     scss + '/**/*.scss'
     '!' + dir.sp.css + '/**/*.{scss,css}'
   ], [ 'css:dev', reload ]
+  # js
   gulp.watch [
     app + '/**/*.js'
     '!' + app + '/**/_babel/*.js'
     '!' + app + '/**/*.bundle.js'
     '!' + app + '/**/*.babel.js'
   ], [ 'js:dev', reload ]
+  # image
   gulp.watch [ app + '/**/*.{png,jpg,gif,svg}' ], reload
+  # js libs
   gulp.watch [ dir.libs + '/**/*' ], reload
+  # font
+  gulp.watch [ app + '/**/*.{eot,svg,ttf,woff}' ], reload
 
   # sp watch
   gulp.watch [
@@ -237,6 +245,7 @@ gulp.task 'copy', (cb) ->
 #      'html:build'
       'js:dev'
       'image:copy'
+      'font:copy'
       'css:dev'
     ]
 #    'clean:all'
@@ -261,6 +270,7 @@ gulp.task 'dev:init', (cb) ->
 #      'html:build'
     'js:dev'
     'image:copy'
+    'font:copy'
     'css:dev'
     [
       'sp:sprite:build'
@@ -293,6 +303,7 @@ gulp.task 'dev:build', (cb) ->
 #      'html:build'
     'js:dev'
     'image:copy'
+    'font:copy'
     'css:build'
     [
       'sp:sprite:build'
@@ -326,6 +337,7 @@ gulp.task 'default', (cb) ->
     'js:build'
     'image:build'
     'css:build'
+    'font:copy'
 #    'sp:css:build'
     # 'sc5:make' - デプロイ時css document再生成, 体制に影響無いので外す
     [
@@ -363,16 +375,16 @@ gulp.task 'serve:htdocs', [ 'default' ], ->
   browserSync option
   return
 
-gulp.task 'deploy:test', (cb) ->
-  runSequence(
-    [
-      'bundle:copy'
-      'libs:copy'
-#      'html:build'
-      'js:build'
-      'image:build'
-      'css:build'
-    ]
-    'lec:build'
-  )
-  return
+#gulp.task 'deploy:test', (cb) ->
+#  runSequence(
+#    [
+#      'bundle:copy'
+#      'libs:copy'
+##      'html:build'
+#      'js:build'
+#      'image:build'
+#      'css:build'
+#    ]
+#    'lec:build'
+#  )
+#  return
