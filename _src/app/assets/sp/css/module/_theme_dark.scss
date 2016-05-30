@@ -7,7 +7,7 @@
 //
 // Styleguide 2.12.0
 
-[ class*="theme_dark" ] {
+.whole.dark {
   .body-sec-inner {
     background-color: #000;
   }
@@ -18,10 +18,14 @@
 
   .board-large {
     background-color: #000;
-
-    // .board-item {
-    //   background-color: #fff;
-    // }
   }
-} //.theme_dark
+} //.dark
 
+
+.whole.dark {
+  &.post-single {
+    .body-sec-inner {
+      background-color: #fff;
+    }
+  }
+}
