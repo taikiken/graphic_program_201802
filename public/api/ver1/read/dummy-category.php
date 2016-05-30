@@ -22,7 +22,7 @@ $json_crazy = <<<__EOL__
     "description" : "自らの人生を、その「一瞬」にかけるスポーツアスリート達。多くの犠牲、忍耐と引き換えに彼らが起こす「奇跡」、彼らが我々に提供してくれる「感動」が、人々をスポーツに熱狂させる根源である。",
     "theme"        : {
       "base"             : "dark",
-      "background-color" : "#000000",
+      "background_color" : "#000000",
       "images"      : {
         "pc" : "https://www.undotsushin.com/img/crazy/crazy-pc-index.png",
         "sp" : "https://www.undotsushin.com/img/crazy/crazy-sp-index.png"
@@ -45,8 +45,8 @@ $json_crazy = <<<__EOL__
       "android" : "34424",
       "sp"      : "35244",
       "pc"      : {
-        "sidebar-top"    : "",
-        "sidebar-bottom" : ""
+        "sidebar_top"    : "",
+        "sidebar_bottom" : ""
       }
     }
   }
@@ -74,7 +74,7 @@ $json_other = <<<__EOL__
     "description" : "",
     "theme"        : {
       "base"             : "",
-      "background-color" : "",
+      "background_color" : "",
       "images"      : {
         "pc" : "",
         "sp" : ""
@@ -97,8 +97,8 @@ $json_other = <<<__EOL__
       "android" : "34424",
       "sp"      : "35244",
       "pc"      : {
-        "sidebar-top"    : "",
-        "sidebar-bottom" : ""
+        "sidebar_top"    : "",
+        "sidebar_bottom" : ""
       }
     }
   }
