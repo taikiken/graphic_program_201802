@@ -10,7 +10,7 @@
  *
  */
 
-import {Safety} from '../../../data/Safety';
+import {Safety} from '../../data/Safety';
 import {ImagesDae} from './ImagesDae';
 
 /**

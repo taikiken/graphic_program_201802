@@ -12,9 +12,10 @@
 
 import {Safety} from '../../data/Safety';
 
-import {ThemeDae} from './theme/ThemeDae';
-import {BannerDae} from './theme/BannerDae';
-import {AdDae} from './theme/AdDae';
+import {ThemeDae} from '../theme/ThemeDae';
+import {BannerDae} from '../theme/BannerDae';
+import {AdDae} from '../theme/AdDae';
+import {BannersDae} from '../banner/BannersDae';
 
 /**
  * 特定のカテゴリー情報を取得する
@@ -31,13 +32,13 @@ export class CategoriesSlugDae {
   constructor( response:Object = {} ) {
     response = Safety.object( response );
     
-    let banner = Safety.object( response.banner );
-
     this._theme = new ThemeDae( response.theme );
-    this._banner = {
-      pc: new BannerDae( banner.pc ),
-      sp: new BannerDae( banner.sp )
-    };
+    // let banner = Safety.object( response.banner );
+    // this._banner = {
+    //   pc: new BannerDae( banner.pc ),
+    //   sp: new BannerDae( banner.sp )
+    // };
+    this._banner = new BannersDae( response.banner );
     this._ad = new AdDae( response.ad );
     this._response = response;
   }

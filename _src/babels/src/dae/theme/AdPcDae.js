@@ -10,7 +10,7 @@
  *
  */
 
-import {Safety} from '../../../data/Safety';
+import {Safety} from '../../data/Safety';
 
 /**
  * 仮)PC版右のバナー広告設定

@@ -13,6 +13,7 @@
 
 import {TypeDae} from './user/TypeDae';
 import {InterestDae} from './user/InterestDae';
+import {LogoDae} from './user/LogoDae';
 
 import {BannersDae} from './banner/BannersDae';
 
@@ -36,7 +37,8 @@ export class UserDae {
     this._interest = new InterestDae( user.interest );
     // banner 追加
     this._banners = new BannersDae( user.banner );
-
+    // from 2016-05-31
+    this._logo = new LogoDae( user.logo );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -134,9 +136,17 @@ export class UserDae {
   // banner
   /**
    * ユーザー・バナー
-   * @return {BannersDae} response.user.banner を返します
+   * @return {BannersDae} response.user.banner を BannersDae として返します
    */
   get banner():BannersDae {
     return this._banners;
+  }
+
+  /**
+   * response.user.logo
+   * @return {LogoDae} response.user.logo を LogoDae instance として返します
+   */
+  get logo():LogoDae {
+    return this._logo;
   }
 }

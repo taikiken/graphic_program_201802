@@ -107,10 +107,16 @@ export class SPViewSingle extends ViewSingle {
     if (!Safety.isElement(this._bannerElement)) {
       return;
     }
+
+    let userBanner = single.user.banner.sp;
+    let banner = single.banner.sp;
+    if ( !banner.image && !!userBanner.image ) {
+      banner = userBanner;
+    }
     
     ReactDOM.render(
       <BannerNode
-        banner={single.user.banner.sp}
+        banner={banner}
         pc={false}
       />,
       this._bannerElement
