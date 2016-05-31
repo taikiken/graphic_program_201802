@@ -197,8 +197,8 @@ export let BrightcoveNode = React.createClass( {
     player.on( 'adend', this.adEnd );
 
     player.on( 'play', this.onPlay );
-    player.on( 'pause', this.onPause );
-    player.on( 'ended', this.onEnd );
+    // player.on( 'pause', this.onPause );
+    // player.on( 'ended', this.onEnd );
 
     this.player = player;
   },
