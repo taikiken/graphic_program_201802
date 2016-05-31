@@ -103,6 +103,14 @@
           ?>
         </div><!-- /.post-content -->
 
+        <div class="provider">
+          <i class="provider-logo"><img src="/assets/images/detail/provider-logo-asahi.png" alt=""></i>
+          <div class="provider-data">
+            <p class="provider-name">朝日新聞社</p>
+            <p class="provider-url"><a href="http://www.asahi.com/sports/" target="_blank">http://www.asahi.com/sports/</a></p>
+          </div>
+        </div><!-- /.provider -->
+
         <div id="single-footer-container"></div>
 
         <div class="post-sns">
