@@ -15,7 +15,10 @@ import {Safety} from '../data/Safety';
 import {Types} from '../net/Types';
 
 /**
+ * GET 以外のリクエスト + 認証 token を行います<br>
  * Ajax request, POST / PUT / DELETE
+ *
+ * 必要なクラスで継承します
  */
 export class ActionAuthBehavior extends ActionAuth {
   /**

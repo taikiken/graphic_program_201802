@@ -18,8 +18,36 @@ import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
- * 記事一覧, カテゴリー別, 全て...
- * token 付き
+ * 記事一覧, カテゴリー別, 全て...<br>
+ * token 付き<br>
+ *
+ * <p>認証ユーザー（ログイン済み）は固有の情報を取得可能になります</p>
+ *
+ * <pre>
+ * すべて & カテゴリーごとの記事一覧
+ * - 各カテゴリーごとの記事一覧
+ * - ホームでのすべてのランキング/おすすめ動画もこれで取得
+ * - ランキングはアクセス順で返す
+ * - 動画ランキングもアクセス順で返す
+ * </pre>
+ *
+ *
+ * ```
+ * GET
+ * /api/v1/articles/category/{all|:category_slug}[/type][?[offset=n][&[length=m]]]
+ * ```
+ * <pre>
+ * /api/v1/articles/category/all
+ * - すべての記事の新着順
+ *
+ * /api/v1/articles/category/soccer/ranking
+ * - サッカーのランキング
+ *
+ * /api/v1/articles/category/baseball/video
+ * - 野球の動画
+ * </pre>
+ *
+ * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=2055838625
  */
 export class CategoryAuth extends OffsetAuth {
   /**
@@ -29,24 +57,35 @@ export class CategoryAuth extends OffsetAuth {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値
-   * @param {Number} [length=10] query length 値
+   * @param {Number} [length=10] query length 値, Length.archive を default value に使用します
    * */
   constructor( slug:string = 'all', type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
     slug = Safety.string( slug, 'all' );
     type = Safety.string( type, '' );
 
     super( User.token, Api.category(), resolve, reject, offset, length );
+    /**
+     * リクエスト・クエリに使用する category slug
+     * @type {string}
+     * @protected
+     */
     this._slug = slug;
+    /**
+     * リクエスト・クエリに使用するタイプ値, '' | 'ranking' | 'video' の3種類です
+     * @type {string}
+     * @protected
+     */
+    this._type = '';
 
     if ( Safety.normalize( type, [ '', 'ranking', 'video' ] ) ) {
 
       this._type = type;
 
-    } else {
+    }/* else {
 
       this._type = '';
 
-    }
+    }*/
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

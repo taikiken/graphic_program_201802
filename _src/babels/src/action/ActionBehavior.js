@@ -17,7 +17,9 @@ import {Safety} from '../data/Safety';
 import {Types} from '../net/Types';
 
 /**
- * token なし POST
+ * token なし POST リクエストを行います
+ *
+ * 必要なクラスで継承します
  */
 export class ActionBehavior extends Action {
   /**
