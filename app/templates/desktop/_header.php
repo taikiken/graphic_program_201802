@@ -65,6 +65,9 @@ endif;
 // eof brightcove
 // ---------------------------------------------------------------------------
 
+// header 表示条件 & template_classname に使用する template 名称を $template_name へ
+$template_name = $page['template'];
+
 // .whole へ追加する CSS class を設定します
 $whole_classes = array();
 
@@ -73,7 +76,7 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $page['template'] == 'p' ) {
+if ( $template_name == 'p' ) {
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
 
@@ -83,14 +86,20 @@ if ( $page['template'] == 'p' ) {
     $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
   }
 }
+
+// in category
+if ( $template_name == 'category' ) {
+  // template_classname があれば
+  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
+    $whole_classes[] = $page[ 'template_classname' ];
+  }
+}
 ?>
 </head>
 <body>
 <div id="whole" class="whole <?php echo join( ' ', $whole_classes);?>">
 <?php
-// header 表示条件 start
-$template_name = $page['template'];
-
+// header 表示条件
 if (
   $template_name == 'index' ||
   $template_name == '404' ||

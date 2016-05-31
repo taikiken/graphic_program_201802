@@ -12,6 +12,17 @@
 
 <div class="body-sec">
   <div class="body-sec-inner">
+    <?php
+    // ----------------------------------------------------
+    // 記事一覧: pc
+    if ( !empty($page['category']) && !empty($page['category']['theme']) && !empty($page['category']['theme']['images']) && !empty($page['category']['theme']['images']['pc']) ) :
+    ?>
+    <div class="special-summary" style="<?php echo $page['category']['theme']['background_color'] ? 'background-color: ' . $page[ 'category' ][ 'theme' ][ 'background_color' ] : ''; ?>">
+      <h1 class="special-summary-heading"><img src="<?php echo $page['category']['theme']['images']['pc']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+    </div>
+    <?php
+    endif;
+    ?>
     <section class="main-sec">
       <div class="board-large">
 
