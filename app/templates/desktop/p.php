@@ -103,14 +103,42 @@
           ?>
         </div><!-- /.post-content -->
 
+        <?php
+        // ----------------------------------------------------
+        // 記事詳細: pc 媒体ロゴ
+        if ( !empty( $page['post'] ) && !empty( $page['post']['user'] ) ) :
+        ?>
         <div class="provider">
-          <i class="provider-logo"><img src="/assets/images/detail/provider-logo-asahi.png" alt=""></i>
+          <?php
+          // user.logo.image
+          if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['img'] ) ) :
+          ?>
+            <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
+          <?php endif;
+          //----[image] ?>
           <div class="provider-data">
-            <p class="provider-name">朝日新聞社</p>
-            <p class="provider-url"><a href="http://www.asahi.com/sports/" target="_blank">http://www.asahi.com/sports/</a></p>
+            <?php
+            // user.name
+            if ( !empty($page['post']['user']['name']) ) :
+            ?>
+            <p class="provider-name"><?php echo $page['post']['user']['name']; ?></p>
+            <?php
+            endif;
+            //----[name]
+
+            // user.logo.link
+            if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) :
+            ?>
+            <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><?php echo $page['post']['user']['logo']['link']; ?>/</a></p>
+            <?php
+            endif;
+            //----[link] ?>
           </div>
         </div><!-- /.provider -->
-
+        <?php
+        endif;
+        // eof: 記事詳細: pc 媒体ロゴ
+        // ---------------------------------------------------- ?>
         <div id="single-footer-container"></div>
 
         <div class="post-sns">
