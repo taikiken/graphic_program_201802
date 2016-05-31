@@ -14,7 +14,7 @@
   <div class="body-sec-inner">
     <?php
     // ----------------------------------------------------
-    // 記事一覧: pc
+    // 記事一覧: pc theme.images
     if ( !empty($page['category']) && !empty($page['category']['theme']) && !empty($page['category']['theme']['images']) && !empty($page['category']['theme']['images']['pc']) ) :
     ?>
     <div class="special-summary" style="<?php echo $page['category']['theme']['background_color'] ? 'background-color: ' . $page[ 'category' ][ 'theme' ][ 'background_color' ] : ''; ?>">
@@ -25,6 +25,18 @@
     // eof: 記事一覧: pc
     // ---------------------------------------------------- ?>
     <section class="main-sec">
+      <?php
+      // ----------------------------------------------------
+      // 記事一覧: pc banner
+      if ( !empty($page['category']) && !empty($page['category']['banner']) && !empty($page['category']['banner']['pc']) && !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
+      ?>
+      <div class="sponsor-link mt30">
+        <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>"></a>
+      </div>
+      <?php
+      endif;
+      // eof: 記事一覧: pc banner
+      // ---------------------------------------------------- ?>
       <div class="board-large">
 
         <div id="board-container"></div><!--/archive-->
