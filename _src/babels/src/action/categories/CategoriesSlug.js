@@ -13,14 +13,23 @@
 import {Categories} from './Categories';
 
 /**
- * 引数 slug のカテゴリ情報を取得します
+ * 引数 slug のカテゴリ情報を取得します<br>
+ * from 2016-05-28<br>
  *
- * from 2016-05-28
+ * <pre>
+ * 特定のカテゴリー情報を取得する
+ ※ 主に企画モノの記事一覧ページを生成するにあたり利用する
+ * </pre>
+ *
+ * ```
+ * /api/v1/category/[:category_slug]
+ * ```
+ *
  */
 export class CategoriesSlug extends Categories {
   /**
-   * 引数 slug のカテゴリ情報を取得し
-   * カテゴリ特有のデザイン、レイアウトへ対応します
+   * 引数 slug のカテゴリ情報を取得し<br>
+   * カテゴリ特有のデザイン、レイアウトへ対応します<br>
    *
    * @param {string} slug category slug
    * @param {Function} [resolve=null] Ajax 成功時の callback

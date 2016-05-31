@@ -18,6 +18,7 @@ import {Length} from '../app/const/Length';
 import {Safety} from '../data/Safety';
 
 /**
+ * offset, length がクエリに必要な<br>
  * Ajax 処理を行います<br>
  * Template Pattern として使用します<br>
  * 各 Class で extends して下さい

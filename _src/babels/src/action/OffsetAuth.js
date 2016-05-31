@@ -21,6 +21,7 @@ import {Result} from '../data/Result';
 import {Types} from '../net/Types';
 
 /**
+ * offset, length がクエリに必要でかつ<br>
  * **要認証** Ajax 処理を行います<br>
  * Template Pattern として使用します<br>
  * 各 Class で extends して下さい
