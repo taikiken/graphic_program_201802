@@ -18,6 +18,7 @@ import {Safety} from '../../data/Safety';
 
 // node
 import {HTML5VideoNode} from '../media/HTML5VideoNode';
+import {BrightcoveNode} from '../media/BrightcoveNode';
 
 // React
 let React = self.React;
@@ -29,6 +30,7 @@ let React = self.React;
  */
 export let MediaVideoNode = React.createClass( {
   propTypes: {
+    articleId: React.PropTypes.string.isRequired,
     media: React.PropTypes.object.isRequired
   },
   render: function() {
@@ -43,7 +45,8 @@ export let MediaVideoNode = React.createClass( {
     switch ( type ) {
 
       case VideoType.BRIGHTCOVE:
-        return this.video( media );
+        // return this.video( media );
+        return this.brightcove( media );
 
       case VideoType.YOUTUBE:
         return this.youtube( media );
@@ -64,20 +67,6 @@ export let MediaVideoNode = React.createClass( {
     let images = media.images;
     let video = media.video;
     let caption = video.caption || '';
-
-    /*
-    let poster = images.medium;
-    if ( !poster ) {
-      poster = Empty.VIDEO_THUMBNAIL;
-    } else if (!Safety.isImg(poster)) {
-      // 画像ファイル名に拡張子がないのがあったので
-      // 拡張子チェックを追加
-      if ( !Safety.isGraph( poster ) ) {
-        poster = Empty.VIDEO_THUMBNAIL;
-      }
-    }
-    */
-
     let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
 
     // HTML5 video
@@ -89,8 +78,21 @@ export let MediaVideoNode = React.createClass( {
     />;
 
   },
-  brightcove: function() {
+  brightcove: function( media ) {
     // ToDo: 2016-06-01 ~
+    let images = media.images;
+    let video = media.video;
+    let caption = video.caption || '';
+    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+
+    // HTML5 video
+    return <BrightcoveNode
+      articleId={this.props.articleId}
+      video={video}
+      poster={poster}
+      caption={caption}
+      playImage={Empty.VIDEO_PLAY}
+    />;
   },
   youtube: function( media ) {
     let video = media.video;

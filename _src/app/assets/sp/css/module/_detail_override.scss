@@ -66,6 +66,23 @@
   }
 }
 
+// brightcove
+.post-video-kv {
+  &.phone-post-kv {
+    .video-container {
+      position: relative;
+    }
+
+    .video-js {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}// post-video-kv
+
 // bookmark button
 #single-header-container {
   .post-data {

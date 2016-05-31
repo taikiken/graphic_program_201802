@@ -97,6 +97,7 @@ export class ArticleDae {
   }
   /**
    * category 情報
+   * @deprecated instead use categories
    * @return {CategoryDae|*} article.category
    */
   get category():CategoryDae {
@@ -105,12 +106,12 @@ export class ArticleDae {
   /**
    * category2 情報
    * いつの間にか追加になった
+   * @deprecated instead use categories
    * @return {CategoryDae|*} article.category2
    */
   get category2():CategoryDae {
     return this._category2;
   }
-
   /**
    * category, category2 をまとめるらしい <- 聞いてない
    * response.categories を CategoriesDae へ
@@ -126,7 +127,6 @@ export class ArticleDae {
   get commentsCount():Number {
     return this.commentsTotal;
   }
-
   /**
    * コメント総数を調べます
    * @return {Number|*} コメント総数を返します, article.comments_count
@@ -192,6 +192,17 @@ export class ArticleDae {
   get isRecommend():Boolean {
     return this.article.is_recommend;
   }
+  // -------------------------
+  // 2016-05-21 added
+  /**
+   * New Flag, ※現在は常にFlagがたつように30日に設定
+   * @return {Boolean} New Flag の真偽値を返します
+   */
+  get isNew():Boolean {
+    return this.article.is_new;
+  }
+  // isNew 追加
+  // -------------------------
   /**
    * article.media
    * @return {MediaDae} article.media

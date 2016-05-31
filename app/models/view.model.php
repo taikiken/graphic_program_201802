@@ -179,7 +179,39 @@ class ViewModel {
   public function get_category_by_slug($slug) {
 
     if ( $this->default['site_categories'][$slug] ) :
-      return $this->default['site_categories'][$slug];
+
+      // ref. https://github.com/undotsushin/undotsushin/issues/642
+      // 他カテゴリー情報API未整備のため カテゴリー一覧APIの内容をextendする
+      $category = $this->default['site_categories'][$slug];
+
+      $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
+
+      if ( $response ) :
+        $response = json_decode($response, true);
+      endif;
+
+      if ( isset($response['status']['code']) && $response['status']['code'] !== 200  ) :
+        return false;
+
+      else :
+        if ( is_array($response) && count($response)) {
+          foreach($response as $array) {
+            if(is_array($array)) {
+
+              if ( $slug !== 'crazy' ) :
+                $category = array_merge($array, $category);
+              else :
+                $category = array_merge($category, $array);
+              endif;
+
+            }
+          }
+        }
+
+      endif;
+
+      return $category;
+
     endif;
 
   }
