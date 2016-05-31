@@ -100,7 +100,7 @@
               // user.logo.link
               if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) :
                 ?>
-                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><?php echo $page['post']['user']['logo']['link']; ?>/</a></p>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><?php echo $page['post']['user']['logo']['link']; ?></a></p>
                 <?php
               endif;
               //----[link] ?>
