@@ -11,6 +11,7 @@
   <?php
   // header 表示条件 設定
   $template_name = $page['template'];
+  
   $page_has_header = false;
 
   if (
@@ -139,6 +140,14 @@ if ( $page['template'] == 'p' ) {
   // JSON レスポンスの theme.base を CSS class へ追加します
   if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
     $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
+  }
+}
+
+// in category
+if ( $template_name == 'category' ) {
+  // template_classname があれば
+  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
+    $whole_classes[] = $page[ 'template_classname' ];
   }
 }
 ?>

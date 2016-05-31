@@ -22,7 +22,8 @@
     </div>
     <?php
     endif;
-    ?>
+    // eof: 記事一覧: pc
+    // ---------------------------------------------------- ?>
     <section class="main-sec">
       <div class="board-large">
 
