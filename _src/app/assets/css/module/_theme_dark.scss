@@ -96,6 +96,21 @@
     }
   }
 
+  .sponsor-link-ranking,
+  .sponsor-link-recommend {
+    .adgLink {
+      .adsDescription {
+        color: #fff !important;
+      }
+
+      &:hover {
+        .adsDescription {
+          color: $highlight-color !important;
+        }
+      }
+    }
+  }
+
 } //.theme_dark
 
 
