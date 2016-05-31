@@ -108,7 +108,7 @@
         // 記事詳細: pc 媒体ロゴ
         if ( !empty( $page['post'] ) && !empty( $page['post']['user'] ) ) :
         ?>
-        <div class="provider">
+        <div class="provider mt30">
           <?php
           // user.logo.image
           if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['img'] ) ) :
