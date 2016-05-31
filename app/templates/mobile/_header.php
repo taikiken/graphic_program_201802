@@ -11,6 +11,7 @@
   <?php
   // header 表示条件 設定
   $template_name = $page['template'];
+  
   $page_has_header = false;
 
   if (
@@ -74,10 +75,85 @@ endif;
    ga('send', 'event', 'ua', 'view', navigator.userAgent );
 
   </script>
+<?php
+// ---------------------------------------------------------------------------
+// brightcove
+if ( $page['template'] == 'p' && $page['category']['slug'] == 'crazy' ) :
+  // brightcove code をここに
+  // JS で非同期で読み込むと付随コードの読み込みが行われない様子
+  ?>
+  <style>
+    body.vjs-full-window {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+    .video-js.vjs-fullscreen {
+      position: fixed;
+      overflow: hidden;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .video-js:-webkit-full-screen {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .video-js.vjs-fullscreen.vjs-user-inactive {
+      cursor: none;
+    }
+    .video-js {
+      width: 100%;
+      height: auto;
+    }
+    .video-js video {
+      width: 100%;
+      height: auto;
+    }
+  </style>
 
+  <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
+  <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
+  <?php
+endif;
+// eof brightcove
+// ---------------------------------------------------------------------------
+
+// .whole へ追加する CSS class を設定します
+$whole_classes = array();
+
+// $page['template_classname'] に設定されている CSS class を追加します
+if ( !empty( $page['template_classname'] ) ) {
+  $whole_classes[] = $page['template_classname'];
+}
+// 記事詳細
+if ( $page['template'] == 'p' ) {
+  // 記事詳細へ識別 CSS class 追加
+  $whole_classes[] = 'post-single';
+
+  // theme 設定 class を追加
+  // JSON レスポンスの theme.base を CSS class へ追加します
+  if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
+    $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
+  }
+}
+
+// in category
+if ( $template_name == 'category' ) {
+  // template_classname があれば
+  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
+    $whole_classes[] = $page[ 'template_classname' ];
+  }
+}
+?>
 </head>
 <body>
-<div id="page" class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
+<div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
 <?php
 // header 表示条件 start
 if ( $page_has_header ) :
@@ -103,10 +179,14 @@ if ( $page_has_header ) :
     <div id="gnav-sec-inner" class="gnav-sec-inner">
       <ul id="gnav-sec-list">
         <li id="home" class="gnav-home"><a href="/">一面</a></li>
-        <?php if (0) : ?>
-          <li id="crazy" class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
-        <?php endif;// crazy remove ?>
-        <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
+
+          <li id="crazy" class="gnav-crazy"><a href="/category/crazy/">CRAZY</a></li>
+
+        <?php foreach( $page[ 'site_categories' ] as $category ) {
+          if ( $category[ 'slug' ] == 'crazy' ) {
+            continue;
+          }
+          ?>
           <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
             <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
           </li>

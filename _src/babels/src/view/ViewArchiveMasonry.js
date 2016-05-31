@@ -122,6 +122,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         };
       },
       getInitialState: function() {
+        /**
+         * @private
+         * @type {number}
+         */
         this.page = 1;
 
         return {

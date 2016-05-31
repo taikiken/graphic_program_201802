@@ -61,6 +61,7 @@ files = [
   '!' + app + '/**/_babel/**/*.js'
   '!' + app + '/**/*test*.js'
   '!' + app + '/**/_synapse/**/*.js'
+  '!' + app + '/**/_brightcove/**/*.js'
 ]
 
 # jshint

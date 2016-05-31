@@ -12,7 +12,31 @@
 
 <div class="body-sec">
   <div class="body-sec-inner">
+    <?php
+    // ----------------------------------------------------
+    // 記事一覧: pc theme.images
+    if ( !empty($page['category']) && !empty($page['category']['theme']) && !empty($page['category']['theme']['images']) && !empty($page['category']['theme']['images']['pc']) ) :
+    ?>
+    <div class="special-summary" style="<?php echo $page['category']['theme']['background_color'] ? 'background-color: ' . $page[ 'category' ][ 'theme' ][ 'background_color' ] : ''; ?>">
+      <h1 class="special-summary-heading"><img src="<?php echo $page['category']['theme']['images']['pc']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+    </div>
+    <?php
+    endif;
+    // eof: 記事一覧: pc
+    // ---------------------------------------------------- ?>
     <section class="main-sec">
+      <?php
+      // ----------------------------------------------------
+      // 記事一覧: pc banner
+      if ( !empty($page['category']) && !empty($page['category']['banner']) && !empty($page['category']['banner']['pc']) && !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
+      ?>
+      <div class="sponsor-link mt30">
+        <a href="<?php echo $page['category']['banner']['pc']['link']; ?>" target="_blank"><img src="<?php echo $page['category']['banner']['pc']['image']; ?>" alt="<?php echo $page['category']['banner']['pc']['text'] ? $page['category']['banner']['pc']['text'] : '' ?>"></a>
+      </div>
+      <?php
+      endif;
+      // eof: 記事一覧: pc banner
+      // ---------------------------------------------------- ?>
       <div class="board-large">
 
         <div id="board-container"></div><!--/archive-->

@@ -26,6 +26,7 @@ let React = self.React;
  */
 export let MediaNode = React.createClass( {
   propTypes: {
+    articleId: React.PropTypes.string.isRequired,
     mediaType: React.PropTypes.string.isRequired,
     media: React.PropTypes.object.isRequired
   },
@@ -54,6 +55,7 @@ export let MediaNode = React.createClass( {
         // show video
         return (
           <MediaVideoNode
+            articleId={this.props.articleId}
             media={media}
           />
         );
