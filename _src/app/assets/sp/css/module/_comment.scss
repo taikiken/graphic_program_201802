@@ -287,37 +287,33 @@
   }
 
   i {
-    @extend .sp-sprite-common;
-    @include hide-text;
-    margin-right: (4/2)+px;
-    vertical-align: middle;
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    width: 1em;
+    font-family: 'icon-like' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size: fs(18, 12);
+
+    &:before {
+      content: "\e09b";
+    }
   }
 
   &-like {
-    i {
-      @include sprite( $common-icon-thumbs-up );
-      display: inline-block;
-    }
-
-    &.active {
-      i {
-        @include sprite( $common-icon-thumbs-up_o );
-        display: inline-block;
-      }
-    }
   }
 
   &-dislike {
     i {
-      @include sprite( $common-icon-thumbs-down );
-      display: inline-block;
-    }
-
-    &.active {
-      i {
-        @include sprite( $common-icon-thumbs-down_o );
-        display: inline-block;
-      }
+      top: 3px;
+      transform: scale( 1, -1);
+      filter: flipv();
+      -ms-filter: flipv();
     }
   }
 } //.comment-reaction
