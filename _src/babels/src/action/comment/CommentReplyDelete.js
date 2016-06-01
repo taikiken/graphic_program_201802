@@ -29,7 +29,7 @@ export class CommentReplyDelete extends ActionAuth {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( articleId:string, commentId:string, replyId:string, resolve:Function = null, reject:Function = null ) {
+  constructor( articleId:Number, commentId:Number, replyId:Number, resolve:Function = null, reject:Function = null ) {
     super( User.token, Api.replay( ActionType.DELETE ), resolve, reject );
     /**
      * 記事 ID

@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
 import {ActionAuthBehavior} from '../ActionAuthBehavior';
 import {Api} from '../../net/Api';
@@ -94,7 +94,7 @@ export class Bookmark extends ActionAuthBehavior {
    */
   add():void {
 
-    this.ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
+    this.ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this.resultClass, this.headers );
 
   }
   /**
@@ -102,7 +102,7 @@ export class Bookmark extends ActionAuthBehavior {
    */
   remove():void {
 
-    this.ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
+    this.ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this.resultClass, this.headers );
 
   }
 }

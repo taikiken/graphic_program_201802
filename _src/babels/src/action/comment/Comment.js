@@ -29,7 +29,7 @@ export class Comment extends ActionAuthBehavior {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( articleId:string, formData:FormData, resolve:Function = null, reject:Function = null ) {
+  constructor( articleId:Number, formData:FormData, resolve:Function = null, reject:Function = null ) {
     if ( !Safety.isFormData( formData ) ) {
       throw new Error( 'need correct formData ', formData );
     }
@@ -37,7 +37,7 @@ export class Comment extends ActionAuthBehavior {
 
     /**
      * 記事 ID
-     * @type {Number|string}
+     * @type {Number}
      * @protected
      */
     this._articleId = articleId;

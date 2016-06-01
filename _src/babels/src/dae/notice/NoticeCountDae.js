@@ -24,8 +24,23 @@ export class NoticeCountDae {
    * @param {Object} [result={}] JSON result
    */
   constructor( result:Result ) {
+    /**
+     * JSON result
+     * @type {Result}
+     * @private
+     */
     this._result = result;
+    /**
+     * result.response
+     * @type {Object}
+     * @private
+     */
     this._response = result.response;
+    /**
+     * result.status
+     * @type {StatusDae}
+     * @private
+     */
     this._status = new StatusDae( result.status );
   }
   /**

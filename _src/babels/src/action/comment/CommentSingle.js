@@ -48,9 +48,14 @@ export class CommentSingle extends OffsetAuth {
    * 再読み込み
    */
   reload():void {
-    this._reload = true;
+    // this._reload = true;
+    /**
+     * 再読み込みフラッグ
+     * @type {boolean}
+     */
+    this.reloadFlag = true;
     let url = `${Path.comment( Path.article( this._url, this.id ), this.commentId )}?offset=0&length=${this.offset}`;
-    this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
+    this.ajax.start( url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

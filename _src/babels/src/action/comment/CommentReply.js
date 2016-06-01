@@ -29,7 +29,7 @@ export class CommentReply extends ActionAuthBehavior {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( articleId:string, commentId:string, formData:FormData, resolve:Function = null, reject:Function = null ) {
+  constructor( articleId:Number, commentId:Number, formData:FormData, resolve:Function = null, reject:Function = null ) {
     if ( !Safety.isFormData( formData ) ) {
       throw new Error( 'need correct formData ', formData );
     }

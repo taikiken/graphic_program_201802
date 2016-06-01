@@ -23,6 +23,11 @@ export class ImagesDae {
    */
   constructor( images:Object = {} ) {
     images = Safety.object( images );
+    /**
+     * article.media.images
+     * @type {Object}
+     * @protected
+     */
     this._images = images;
   }
   /**

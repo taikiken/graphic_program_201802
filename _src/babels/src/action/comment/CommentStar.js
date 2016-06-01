@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
 import {ActionAuthBehavior} from '../ActionAuthBehavior';
 import {Api} from '../../net/Api';
@@ -22,6 +22,17 @@ let _symbol = Symbol();
 
 /**
  * <p>コメント GOOD / BAD を行います</p>
+ * `CommentStar.good` or `CommentStar.bad` でインスタンスを作成します<br>
+ * `new CommentStar()` は実行不可です
+ *
+ * @example
+ * let good = CCommentStar.good( 12345 );
+ * good.add();
+ * good.remove();
+ *
+ * let bad  = CCommentStar.bad( 12345 );
+ * bad.add();
+ * bad.remove()
  */
 export class CommentStar extends ActionAuthBehavior {
   /**
@@ -73,6 +84,9 @@ export class CommentStar extends ActionAuthBehavior {
      */
     this._commentId = commentId;
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * コメントId
    * @return {string} コメントIdを返します

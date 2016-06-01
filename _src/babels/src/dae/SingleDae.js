@@ -29,7 +29,11 @@ export class SingleDae extends RelatedDae {
 
     response = Safety.object( response );
     super( response );
-
+    /**
+     * response.keywords
+     * @type {KeywordsDae}
+     * @protected
+     */
     this._keywords = new KeywordsDae( response.keywords );
 
     // related
@@ -45,7 +49,11 @@ export class SingleDae extends RelatedDae {
       // console.log( 'related_articles ', related );
 
     }
-
+    /**
+     * response.related_articles を 1件づつ RelatedDae instance にし格納します
+     * @type {Array<RelatedDae>}
+     * @protected
+     */
     this._related = related;
 
   }

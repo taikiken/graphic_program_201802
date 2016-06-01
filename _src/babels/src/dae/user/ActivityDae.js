@@ -33,10 +33,24 @@ export class ActivityDae {
       this._formatDate = Format.date( activity.date );
 
     }
-
+    /**
+     * アクティビティ一覧 配列 1 data
+     * @type {Object}
+     * @protected
+     */
     this._activity = activity;
+    /**
+     * activity.user
+     * @type {UserDae}
+     * @protected
+     */
     this._user = new UserDae( activity.user );
     // article
+    /**
+     * activity.article
+     * @type {NoticeArticleDae}
+     * @protected
+     */
     this._article = new NoticeArticleDae( activity.article );
   }
   /**

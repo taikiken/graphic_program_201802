@@ -20,11 +20,11 @@ let _message = {
   notice: '通知'
 };
 /**
- * <h3>お知らせ定型文</h3>
+ * <p>お知らせ定型文</p>
  */
 export class NoticeAction {
   /**
-   * お知らせ定型文
+   * お知らせ定型文<br>
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
@@ -41,7 +41,8 @@ export class NoticeAction {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * action に対応するメッセージ
+   * action に対応するメッセージ<br>
+   *
    * - reply : 返信された
    * - good : goodされた
    * - bad : badされた

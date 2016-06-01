@@ -129,20 +129,20 @@ export class Offset extends Action {
   get url():string {
     return `${this._url}?offset=${this.offset}&length=${this.length}`;
   }
-  // /**
-  //  * 再読み込み中かどうかを表す真偽値
-  //  * @return {Boolean|*|boolean} 再読み込み中かどうかを表す真偽値を返します
-  //  */
-  // get reload():Boolean {
-  //   return this._reload;
-  // }
-  // /**
-  //  * 再読み込み中フラッグを設定します
-  //  * @param {Boolean} reload 再読み込み中フラッグ
-  //  */
-  // set reload( reload:Boolean ):void {
-  //   this._reload = reload;
-  // }
+  /**
+   * 再読み込み中かどうかを表す真偽値
+   * @return {Boolean|*|boolean} 再読み込み中かどうかを表す真偽値を返します
+   */
+  get reloadFlag():Boolean {
+    return this._reload;
+  }
+  /**
+   * 再読み込み中フラッグを設定します
+   * @param {Boolean} reload 再読み込み中フラッグ
+   */
+  set reloadFlag( reload:Boolean ):void {
+    this._reload = reload;
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -154,6 +154,19 @@ export class Offset extends Action {
   start( method:string = this.method ):void {
     // リクエストに offset が必要な API の取得開始は意図的に start を使わず next を使用します
     // console.warn( `instead use next, ${this.url}, ${method}` );
+  }
+  /**
+   * 次の読込を開始します<br>
+   * start の代わりに使用します
+   * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
+   */
+  next( method:string = this.method ):void {
+    // next data があるかないかを調べます
+    // next がある時は Ajax を実行します
+    if ( this.hasNext() ) {
+      method = Safety.string( method, this.method );
+      this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass );
+    }
   }
   /**
    * offset 値を加算します
@@ -181,19 +194,6 @@ export class Offset extends Action {
     // total が offset（次の読み込み開始位置）より小さい時に true
     return this._total < 0 ? true : this.offset < this.total;
 
-  }
-  /**
-   * 次の読込を開始します<br>
-   * start の代わりに使用します
-   * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
-   */
-  next( method:string = this.method ):void {
-    // next data があるかないかを調べます
-    // next がある時は Ajax を実行します
-    if ( this.hasNext() ) {
-      method = Safety.string( method, this.method );
-      this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass );
-    }
   }
   /**
    * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します

@@ -26,7 +26,7 @@ export class ModelCategories extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
-    this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

@@ -19,8 +19,8 @@ let _symbol = Symbol();
 let _instance = null;
 
 /**
- * <h3>location.pathnameから現在地を調べます</h3>
- * 全て static です
+ * <p>location.pathnameから現在地を調べます</p>
+ * <p>全て static です</p>
  *
  * @example
  * var router = Router.factory();
@@ -35,8 +35,8 @@ let _instance = null;
  */
 export class Router extends EventDispatcher {
   /**
-   * singleton class です。
-   * **routing** を管理します
+   * <p>singleton class です。<br>
+   * **routing** を管理します</p>
    *
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {Router} Router instance を返します
@@ -67,7 +67,11 @@ export class Router extends EventDispatcher {
     }
 
     var _this = this;
-
+    /**
+     * routing ルール
+     * @type {{/: *, /category/: *, /p/: *, /search/: *, /search: *, /signup_login/: *, /signup_login: *, /signup/: *, /signup: *, /login/: *, /login: *, /logout/: *, /logout: *, /reset_password/: *, /mypage/: *, /mypage: *, /notifications/: *, /notifications: *, /settings/: *, /settings: *}}
+     * @private
+     */
     this._rule = {
       '/': _this.index.bind( _this ),
       '/category/': _this.category.bind( _this ),

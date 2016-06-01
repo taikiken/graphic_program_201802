@@ -27,35 +27,73 @@ export class ArticleDae {
    * archive系で取得した記事配列から 1件取り出し<br>
    * データを管理します
    *
-   * @param {Object} [article={}] articles配列にセットされている article 記事1件データ
+   * @param {Object} [article={}] articles 配列にセットされている article 記事1件データ
    */
   constructor( article:Object = {} ) {
 
     article = Safety.object( article );
 
+    /**
+     * 取得 JSON articles 配列にセットされている article 記事1件データ
+     * @type {Object}
+     * @protected
+     */
     this._article = article;
-    // article.category
+    /**
+     * article.category
+     * @type {CategoryDae}
+     * @protected
+     */
     this._category = new CategoryDae( article.category );
-    // 2016-02-29 category2 追加になった
-    // https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
+    /**
+     * category2 追加になった<br>
+     * article.category
+     *
+     * @see https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
+     * @from 2016-02-29
+     * @type {CategoryDae}
+     * @protected
+     */
     this._category2 = new CategoryDae( article.category2 );
 
-    // category, category2 を配列へ
-    // そのうち使うはず
+    /**
+     * category, category2 を配列へ<br>
+     * article.categories
+     *
+     * @todo そのうち使うはず
+     * @type {CategoriesDae}
+     * @protected
+     */
     this._categories = new CategoriesDae( article );
-
-    // article.media
+    /**
+     * article.media
+     * @type {MediaDae}
+     * @protected
+     */
     this._media = new MediaDae( article.media );
-    // article.user
+    /**
+     * article.user
+     * @type {UserDae}
+     * @protected
+     */
     this._user = new UserDae( article.user );
-    // article.comments_popular
+    /**
+     * article.comments_popular
+     * @type {CommentsPopularDae}
+     * @protected
+     */
     this._popular = new CommentsPopularDae( article.comments_popular );
     
     // 整数へ型変換
     let commentsCount = parseInt( article.comments_count, 10 );
     // 数値を保証
     commentsCount = Safety.integer( commentsCount, 0 );
-
+    /**
+     * <p>コメント数</p>
+     * article.comments_count
+     * @type {Number}
+     * @protected
+     */
     this._commentsCount = commentsCount;
 
     // date check
@@ -64,7 +102,12 @@ export class ArticleDae {
       this._formatDate = Format.date( article.date );
 
     }
-
+    /**
+     * フラッグ<br>
+     * **未使用**
+     * @type {number}
+     * @protected
+     */
     this._index = -1;
 
   }
@@ -72,7 +115,7 @@ export class ArticleDae {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * index Number
+   * index Number<br>
    * -1 の時は未設定なので使用してはいけない
    * @default -1
    * @return {Number|*|Number} index Number を返します
@@ -80,7 +123,6 @@ export class ArticleDae {
   get index():Number {
     return this._index;
   }
-
   /**
    * index Number を設定します
    * @param {Number} index index Number
@@ -104,7 +146,7 @@ export class ArticleDae {
     return this._category;
   }
   /**
-   * category2 情報
+   * category2 情報<br>
    * いつの間にか追加になった
    * @deprecated instead use categories
    * @return {CategoryDae|*} article.category2
@@ -113,7 +155,7 @@ export class ArticleDae {
     return this._category2;
   }
   /**
-   * category, category2 をまとめるらしい <- 聞いてない
+   * category, category2 をまとめるらしい <- 聞いてない<br>
    * response.categories を CategoriesDae へ
    * @return {CategoriesDae|*} response.categories を CategoriesDaeにし返します
    */
@@ -149,7 +191,7 @@ export class ArticleDae {
     return this.article.date;
   }
   /**
-   * article.date をフォーマット
+   * article.date をフォーマット<br>
    * 多分使わない, 代わりに displayDate を使う
    * @return {string} article.date を日本語日付に変換し返します
    */
@@ -178,7 +220,7 @@ export class ArticleDae {
     return this.article.id;
   }
   /**
-   * article.is_bookmarked
+   * article.is_bookmarked<br>
    * bookmark した / してない
    * @return {Boolean} article.is_bookmarked
    */
@@ -211,7 +253,7 @@ export class ArticleDae {
     return this._media;
   }
   /**
-   * article.media_type
+   * article.media_type<br>
    * video or image のはず
    * @return {string} article.media_type
    */

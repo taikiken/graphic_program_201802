@@ -26,13 +26,13 @@ export class VideoDae {
     /**
      * article.media.video object
      * @type {Object}
-     * @private
+     * @protected
      */
     this._video = video;
     /**
      * article.media.video.url を UrlDae instance で管理します
      * @type {UrlDae}
-     * @private
+     * @protected
      */
     this._url = new UrlDae( video.url );
   }

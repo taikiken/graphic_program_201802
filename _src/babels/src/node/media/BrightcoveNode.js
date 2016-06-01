@@ -62,19 +62,19 @@ export let BrightcoveNode = React.createClass( {
      * videojs が tag を生成させる基点 Element の id<br>
      * video-player-ARTICLE_ID
      *
-     * @private
+     * @protected
      * @type {string}
      */
     this.id = `video-player-${this.props.articleId}`;
     /**
      * videojs return value, videojs instance
-     * @private
+     * @protected
      * @type {null|videojs}
      */
     this.player = null;
     /**
      * スマホかを表す真偽値
-     * @private
+     * @protected
      * @type {Boolean}
      */
     this.phone = Sagen.Browser.Mobile.phone();

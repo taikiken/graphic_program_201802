@@ -39,11 +39,10 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * home > headline（注目ニュース）を表示します。
- * <ol>
- *   <li>JSON取得(Ajax)</li>
- *   <li>Dom作成 by React</li>
- * </ol>
+ * <p>home > headline（注目ニュース）を表示します。</p>
+ *
+ * 1. JSON取得(Ajax)
+ * 1. Dom作成 by React
  */
 export class ViewHeadline extends View {
   /**

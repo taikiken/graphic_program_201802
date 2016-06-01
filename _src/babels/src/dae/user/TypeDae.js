@@ -24,6 +24,11 @@ export class TypeDae {
   constructor( type:Object = {} ) {
 
     type = Safety.object( type );
+    /**
+     * article.user.type
+     * @type {Object}
+     * @protected
+     */
     this._type = type;
 
   }
@@ -40,11 +45,12 @@ export class TypeDae {
   /**
    * ユーザータイプID
    *
-   * @example
+   * <pre>
    * 6 : 一般ユーザー
    * 5 : 公式ユーザー
    * 4 : 編集部ユーザ
    * 3 : メディアユーザー(ex. ニッカンスポーツ)
+   * </pre>
    *
    * @return {Number} article.user.type.id ユーザータイプID
    */

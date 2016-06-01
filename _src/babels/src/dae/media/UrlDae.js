@@ -23,6 +23,11 @@ export class UrlDae {
    */
   constructor( url:Object = {} ) {
     url = Safety.object( url );
+    /**
+     * article.media.video.url
+     * @type {Object}
+     * @protected
+     */
     this._url = url;
   }
   /**

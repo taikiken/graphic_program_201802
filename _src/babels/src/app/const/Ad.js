@@ -19,7 +19,7 @@ let _symbol = Symbol();
  */
 export class Ad {
   /**
-   * 広告接続先 を管理します
+   * <p>広告接続先 を管理します</p>
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

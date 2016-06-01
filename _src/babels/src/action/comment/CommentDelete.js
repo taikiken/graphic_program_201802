@@ -27,7 +27,7 @@ export class CommentDelete extends ActionAuth {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( articleId:string, commentId:string, resolve:Function = null, reject:Function = null ) {
+  constructor( articleId:Number, commentId:Number, resolve:Function = null, reject:Function = null ) {
     super( User.token, Api.comment( ActionType.DELETE ), resolve, reject );
     /**
      * 記事 ID

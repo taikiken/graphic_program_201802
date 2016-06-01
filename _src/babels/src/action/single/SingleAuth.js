@@ -32,6 +32,11 @@ export class SingleAuth extends ActionAuth {
    */
   constructor( id:Number, resolve:Function = null, reject:Function = null ) {
     super( User.token, Api.single(), resolve, reject );
+    /**
+     * 記事ID
+     * @type {Number}
+     * @protected
+     */
     this._id = id;
   }
   // ---------------------------------------------------

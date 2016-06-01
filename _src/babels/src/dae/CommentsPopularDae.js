@@ -25,8 +25,17 @@ export class CommentsPopularDae {
   constructor( comments:Array = [] ) {
 
     comments = Safety.array( comments );
+    /**
+     * article.comments_popular
+     * @type {Array}
+     * @protected
+     */
     this._comments = comments;
-
+    /**
+     * article.comments_popular を 1件づつ PopularDae instance にし配列へ格納します
+     * @type {null|Array<PopularDae>}
+     * @protected
+     */
     this._popularComments = null;
     this.init();
   }
