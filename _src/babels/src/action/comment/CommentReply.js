@@ -18,13 +18,13 @@ import {User} from '../../app/User';
 import {Path} from '../../app/const/Path';
 
 /**
- * コメントへのコメント返信
+ * <p>コメントへのコメント返信</p>
  */
 export class CommentReply extends ActionAuthBehavior {
   /**
    * コメントへのコメント返信
-   * @param {string} articleId 記事 id
-   * @param {string} commentId コメント id
+   * @param {Number} articleId 記事 id
+   * @param {Number} commentId コメント id
    * @param {FormData} formData body に送る FormData
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -34,7 +34,17 @@ export class CommentReply extends ActionAuthBehavior {
       throw new Error( 'need correct formData ', formData );
     }
     super( User.token, Api.comment( 'reply' ), formData, resolve, reject );
+    /**
+     * 記事 ID
+     * @type {Number}
+     * @protected
+     */
     this._articleId = articleId;
+    /**
+     * コメント ID
+     * @type {Number}
+     * @protected
+     */
     this._commentId = commentId;
   }
   // ---------------------------------------------------
@@ -45,6 +55,20 @@ export class CommentReply extends ActionAuthBehavior {
    * @return {string} 作成した url を返します
    */
   get url():string {
-    return Path.comment( Path.article( this._url, this._articleId ), this._commentId );
+    return Path.comment( Path.article( this._url, this.articleId ), this.commentId );
+  }
+  /**
+   * 記事 ID
+   * @return {Number} 記事 ID を返します
+   */
+  get articleId():Number {
+    return this._articleId;
+  }
+  /**
+   * コメント ID
+   * @return {Number} コメント ID を返します
+   */
+  get commentId():Number {
+    return this._commentId;
   }
 }

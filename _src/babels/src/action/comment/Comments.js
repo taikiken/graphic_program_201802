@@ -10,7 +10,6 @@
  *
  */
 
-
 import {OffsetAuth} from '../OffsetAuth';
 
 // app
@@ -28,8 +27,8 @@ import {Safety} from '../../data/Safety';
 let _symbol = Symbol();
 
 /**
- * <h3>コメント一覧<h3>
- * 記事ID, token を使いコメント一覧を取得します
+ * <p>コメント一覧<p>
+ * <p>記事ID, token を使いコメント一覧を取得します</p>
  */
 export class Comments extends OffsetAuth {
   /**
@@ -56,6 +55,11 @@ export class Comments extends OffsetAuth {
     type = Safety.string( type, '' );
 
     super( User.token, Api.comment( type ), resolve, reject, offset, length );
+    /**
+     * コメントを取得する記事ID
+     * @type {Number}
+     * @protected
+     */
     this._id = id;
   }
   // ---------------------------------------------------

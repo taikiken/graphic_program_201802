@@ -10,7 +10,6 @@
  *
  */
 
-
 import {OffsetAuth} from '../OffsetAuth';
 import {Api} from '../../net/Api';
 import {Safety} from '../../data/Safety';
@@ -31,11 +30,13 @@ import {Length} from '../../app/const/Length';
  * - 動画ランキングもアクセス順で返す
  * </pre>
  *
+ * <p>リクエストサンプル</p>
  *
- * ```
+ * <code>
  * GET
  * /api/v1/articles/category/{all|:category_slug}[/type][?[offset=n][&[length=m]]]
- * ```
+ * </code>
+ *
  * <pre>
  * /api/v1/articles/category/all
  * - すべての記事の新着順

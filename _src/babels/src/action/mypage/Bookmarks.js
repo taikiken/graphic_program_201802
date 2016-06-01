@@ -18,7 +18,7 @@ import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
- * ユーザーページのブックマーク一覧
+ * <p>ユーザーページのブックマーク一覧</p>
  */
 export class Bookmarks extends OffsetAuth {
   /**

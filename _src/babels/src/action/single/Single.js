@@ -28,6 +28,11 @@ export class Single extends Action {
   constructor( id:Number, resolve:Function = null, reject:Function = null ) {
 
     super( Api.single(), resolve, reject );
+    /**
+     * 記事ID
+     * @type {Number}
+     * @protected
+     */
     this._id = id;
 
   }

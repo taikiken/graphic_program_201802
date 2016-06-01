@@ -28,6 +28,11 @@ export class CommentSingleReply extends CommentSingle {
    */
   constructor( articleId:Number, commentId:Number, replyId:Number, resolve, reject ) {
     super( articleId, commentId, resolve, reject );
+    /**
+     * コメントへの返信 ID
+     * @return {Number}
+     * @protected
+     */
     this._replyId = replyId;
   }
   /**

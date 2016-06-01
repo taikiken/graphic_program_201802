@@ -16,14 +16,15 @@ import {User} from '../../app/User';
 import {Path} from '../../app/const/Path';
 
 /**
- * **コメント送信**
- * FormData を送る token 付き Action
+ * <p>コメント送信</p>
+ * <p>FormData を送る token 付き Action</p>
  */
 export class Comment extends ActionAuthBehavior {
   /**
-   * <h3>コメント送信</h3>
-   * FormData を送る token 付き Action
-   * @param {string} articleId 記事 id
+   * <p>コメント送信<br>
+   * FormData を送る token 付き Action</p>
+   *
+   * @param {Number} articleId 記事 id
    * @param {FormData} formData body に送る FormData
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -33,16 +34,29 @@ export class Comment extends ActionAuthBehavior {
       throw new Error( 'need correct formData ', formData );
     }
     super( User.token, Api.comment( 'send' ), formData, resolve, reject );
+
+    /**
+     * 記事 ID
+     * @type {Number|string}
+     * @protected
+     */
     this._articleId = articleId;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
+   * 記事 ID
+   * @return {Number} 記事 ID を返します
+   */
+  get articleId():Number {
+    return this._articleId;
+  }
+  /**
    * url を作成します
    * @return {string} 作成した url を返します
    */
   get url():string {
-    return Path.article( this._url, this._articleId );
+    return Path.article( this._url, this.articleId );
   }
 }

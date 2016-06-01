@@ -16,8 +16,8 @@ import {Api} from '../../net/Api';
 // import {Path} from '../../app/const/Path';
 
 /**
- * カテゴリー一覧 - 記事のカテゴリー自体の取得<br>
- * category 一覧を取得します<br>
+ * <p>カテゴリー一覧 - 記事のカテゴリー自体の取得<br>
+ * category 一覧を取得します</p>
  *
  * ```
  * GET

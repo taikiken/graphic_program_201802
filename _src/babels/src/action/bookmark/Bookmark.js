@@ -17,13 +17,16 @@ import {Path} from '../../app/const/Path';
 import {User} from '../../app/User';
 
 /**
- * 記事のブックマーク登録 / 解除<br>
+ * <p>記事のブックマーク登録 / 解除<br>
+ * 要認証<br>
+ * リクエストには token が必要です</p>
+ *
  * <code>/api/v1/articles/bookmark/{:article_id}</code>
  */
 export class Bookmark extends ActionAuthBehavior {
   /**
    * 記事のブックマーク登録 / 解除 を行います
-   * @param {Number|string} articleId article id 記事ID
+   * @param {Number} articleId article id 記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
@@ -38,8 +41,23 @@ export class Bookmark extends ActionAuthBehavior {
     super( User.token, add, null, resolve, reject );
 
     // global へ( super の後 )
+    /**
+     * Api.bookmark( 'add' ) 登録リクエストに使用します
+     * @type {Types}
+     * @protected
+     */
     this._add = add;
+    /**
+     * Api.bookmark( 'delete' ) 解除リクエストに使用します
+     * @type {Types}
+     * @protected
+     */
     this._remove = remove;
+    /**
+     * 記事 ID
+     * @type {Number}
+     * @protected
+     */
     this._articleId = articleId;
 
   }
@@ -54,6 +72,13 @@ export class Bookmark extends ActionAuthBehavior {
     // 登録 / 解除 の URL は同じ
     return Path.article( this._url, this._articleId );
   }
+  /**
+   * 記事 ID
+   * @return {Number} 記事 ID を返します
+   */
+  get articleId():Number {
+    return this._articleId;
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -62,14 +87,14 @@ export class Bookmark extends ActionAuthBehavior {
    * @param {string} method request method
    */
   start( method:string = '' ):void {
-    console.error( 'illegal operation, use start. instead add / delete.' + method );
+    // console.warn( 'illegal operation, use start. instead add / delete.' + method );
   }
   /**
    * 記事のブックマーク登録
    */
   add():void {
 
-    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
+    this.ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 
   }
   /**
@@ -77,7 +102,7 @@ export class Bookmark extends ActionAuthBehavior {
    */
   remove():void {
 
-    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
+    this.ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
 
   }
 }

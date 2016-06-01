@@ -21,16 +21,18 @@ import {Result} from '../data/Result';
 import {Types} from '../net/Types';
 
 /**
- * offset, length がクエリに必要でかつ<br>
- * **要認証** Ajax 処理を行います<br>
- * Template Pattern として使用します<br>
- * 各 Class で extends して下さい
+ * <p>Ajax 処理を行います</p>
+ *
+ * <p>offset, length がクエリに必要でかつ<br>
+ * token あり（要認証） Ajax 処理を行います<p>
+ *
+ * <p>Template Pattern として使用します<br>
+ * 各 Class で extends して下さい</p>
  */
 export class OffsetAuth extends Offset {
   /**
    * **要認証** Ajax 処理, queryあり<br>
    * **Next 読込** がある時に使用します
-   * @link Types.js
    *
    * @param {string} token Authorization token
    * @param {Types} types Types instance, Ajax request に使用します
@@ -41,16 +43,29 @@ export class OffsetAuth extends Offset {
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
   constructor( token:string, types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
-    /*
-    // ログイン必須かよくわからない
-    if ( !User.sign ) {
-      // not login
-      throw new Error( `Authorization required.` );
-    }
-    */
     super( types, resolve, reject, offset, length, ResultClass );
+    /**
+     * <p>token ありリクエストに使用する Fetch.Header object</p>
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+     * @type {Object}
+     * @protected
+     */
     this._headers = Token.token( token );
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * <p>token ありリクエストに使用する Fetch.Header object</p>
+   * <p>{@link Token} Class `Token.token` 関数で作成します</p>
+   * @return {Object} headers へセットする Object を返します
+   */
+  get headers():Object {
+    return this._headers;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * 次の読込を開始します<br>
    * start の代わりに使用します

@@ -18,10 +18,15 @@ import {Length} from '../app/const/Length';
 import {Safety} from '../data/Safety';
 
 /**
- * offset, length がクエリに必要な<br>
- * Ajax 処理を行います<br>
- * Template Pattern として使用します<br>
- * 各 Class で extends して下さい
+ * <p>Ajax 処理を行います</p>
+ *
+ * <p>offset, length がクエリに必要な場合に使用します</p>
+ *
+ * <p>Template Pattern として使用し<br>
+ * 各 Class で extends して下さい</p>
+ *
+ * <p>token（認証）が必要な場合は OffsetAuth を使用します</p>
+ * @link {OffsetAuth}
  */
 export class Offset extends Action {
   /**
@@ -35,29 +40,55 @@ export class Offset extends Action {
    * @param {*|Result} [ResultClass=Result] 成功結果をセットする data class
    */
   constructor( types:Types, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive, ResultClass = Result ) {
-
     super( types, resolve, reject );
-
+    /**
+     * <p>query offset 値<br>
+     * リクエスト開始値</p>
+     * @type {Number}
+     * @protected
+     */
     this._offset = offset;
+    /**
+     * <p>query length 値<br>
+     * リクエスト取得件数</p>
+     * @type {Number}
+     * @protected
+     */
     this._length = length;
+    /**
+     * <p>リクエスト全総件数</p>
+     * <p>負の値(デフォルト値: -1)の時は未設定です</p>
+     * @type {number}
+     * @protected
+     * @default -1
+     */
     this._total = -1;
+    /**
+     * Ajax 成功時に処理する Class を保持します
+     * @type {*|Result}
+     * @protected
+     */
     this._resultClass = ResultClass;
-
+    /**
+     * <p>再読み込み中かどうかを表す真偽値<br>
+     * true: 再読み込み中</p>
+     * @type {boolean}
+     * @protected
+     */
     this._reload = false;
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * 件数
-   * @return {Number|*} total件数を返します
+   * 総件数
+   * @return {Number|*} 総件数(total)件数を返します
    */
   get total():Number {
     return this._total;
   }
   /**
-   * total件数を設定します
+   * 総件数(total)件数を設定します
    * @param {Number} total total件数
    */
   set total( total:Number ):void {
@@ -85,7 +116,7 @@ export class Offset extends Action {
     return this._offset;
   }
   /**
-   * length件数を設定します
+   * 取得開始位置を設定します
    * @param {Number} offset offset 取得開始位置
    */
   set offset( offset:Number ):void {
@@ -98,18 +129,31 @@ export class Offset extends Action {
   get url():string {
     return `${this._url}?offset=${this.offset}&length=${this.length}`;
   }
+  // /**
+  //  * 再読み込み中かどうかを表す真偽値
+  //  * @return {Boolean|*|boolean} 再読み込み中かどうかを表す真偽値を返します
+  //  */
+  // get reload():Boolean {
+  //   return this._reload;
+  // }
+  // /**
+  //  * 再読み込み中フラッグを設定します
+  //  * @param {Boolean} reload 再読み込み中フラッグ
+  //  */
+  // set reload( reload:Boolean ):void {
+  //   this._reload = reload;
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
   /**
-   * start を使わずに next を使用します
-   * @override
+   * <p>リクエストに offset が必要な API の取得開始は start を使わず **next** を使用します</p>
+   * @deprecated instead use next
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
   start( method:string = this.method ):void {
-
+    // リクエストに offset が必要な API の取得開始は意図的に start を使わず next を使用します
     // console.warn( `instead use next, ${this.url}, ${method}` );
-
   }
   /**
    * offset 値を加算します
@@ -144,16 +188,12 @@ export class Offset extends Action {
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
   next( method:string = this.method ):void {
-
     // next data があるかないかを調べます
     // next がある時は Ajax を実行します
     if ( this.hasNext() ) {
-
       method = Safety.string( method, this.method );
-      this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass );
-
+      this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass );
     }
-
   }
   /**
    * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します
@@ -161,8 +201,9 @@ export class Offset extends Action {
    */
   success( result:Result ):void {
 
+    // reload フラッグがオフの時は次のリクエストのための offset 値を更新します
     if ( !this._reload ) {
-      this.update( this._length );
+      this.update( this.length );
     } else {
       this._reload = false;
     }

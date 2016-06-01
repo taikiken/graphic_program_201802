@@ -21,7 +21,7 @@ import {ActionType} from '../../app/const/ActionType';
 let _symbol = Symbol();
 
 /**
- * コメント GOOD / BAD を行います
+ * <p>コメント GOOD / BAD を行います</p>
  */
 export class CommentStar extends ActionAuthBehavior {
   /**
@@ -54,8 +54,23 @@ export class CommentStar extends ActionAuthBehavior {
     super( User.token, add, null, resolve, reject );
 
     // global へ( super の後 )
+    /**
+     * コメント GOOD リクエストに使用します
+     * @type {Types}
+     * @protected
+     */
     this._add = add;
+    /**
+     * コメント BAD リクエストに使用します
+     * @type {Types}
+     * @protected
+     */
     this._remove = remove;
+    /**
+     * コメント ID
+     * @type {Number}
+     * @protected
+     */
     this._commentId = commentId;
   }
   /**
@@ -87,14 +102,14 @@ export class CommentStar extends ActionAuthBehavior {
    * @param {string} method request method
    */
   start( method:string = '' ):void {
-    console.error( 'illegal operation, use start. instead add / delete.' + method );
+    // console.warn( 'illegal operation, use start. instead add / delete.' + method );
   }
   /**
    * コメント Good / Bad 登録
    */
   add():void {
 
-    this._ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers );
+    this.ajax.start( this.url, this._add.method, this.success.bind( this ), this.fail.bind( this ), this.resultClass, this.headers );
 
   }
   /**
@@ -102,7 +117,7 @@ export class CommentStar extends ActionAuthBehavior {
    */
   remove():void {
 
-    this._ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this._resultClass, this._headers, this._data );
+    this.ajax.start( this.url, this._remove.method, this.success.bind( this ), this.fail.bind( this ), this.resultClass, this.headers, this.data );
 
   }
   // ---------------------------------------------------

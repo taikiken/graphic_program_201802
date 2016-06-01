@@ -15,8 +15,7 @@ import {Category} from './Category';
 import {Safety} from '../../data/Safety';
 
 /**
- * PC: sidebar<br>
- * 動画一覧
+ * <p>おすすめ動画一覧<p>
  *
  * ```
  * GET

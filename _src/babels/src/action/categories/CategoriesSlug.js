@@ -37,11 +37,20 @@ export class CategoriesSlug extends Categories {
    */
   constructor( slug:string, resolve:Function = null, reject:Function = null ) {
     super( resolve, reject );
-
+    /**
+     * category slug
+     * @type {string}
+     * @protected
+     */
     this._slug = slug;
     // override url property
     // /api/v1/category/[:category_slug]
-    this._url = `${this._types.url}/${slug}`;
+    /**
+     * 親クラス Categories.url へ slug を付与します
+     * @type {string}
+     * @protected
+     */
+    this._url = `${this.types.url}/${slug}`;
   }
   /**
    * category slug を取得します

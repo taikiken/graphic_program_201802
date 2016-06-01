@@ -15,8 +15,7 @@ import {Category} from './Category';
 import {Safety} from '../../data/Safety';
 
 /**
- * PC: sidebar<br>
- * 記事ランキング
+ * <p>記事ランキング</p>
  *
  * ```
  * GET

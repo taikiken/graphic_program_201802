@@ -17,9 +17,15 @@ import {Safety} from '../data/Safety';
 import {Types} from '../net/Types';
 
 /**
- * token なし POST リクエストを行います
+ * <p>Ajax 処理を行います</p>
  *
- * 必要なクラスで継承します
+ * <p>token なし POST リクエストを行います</p>
+ *
+ * <p>Template Pattern として使用します<br>
+ * 各 Class で extends して下さい</p>
+ *
+ * <p>token あり GET 以外のリクエストは ActionAuthBehavior を使用します</p>
+ * @link {ActionAuthBehavior}
  */
 export class ActionBehavior extends Action {
   /**
@@ -32,6 +38,11 @@ export class ActionBehavior extends Action {
    */
   constructor( types:Types, formData:FormData = null, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
     super( types, resolve, reject, ResultClass );
+    /**
+     * 引数 formData を保持します
+     * @type {FormData}
+     * @protected
+     */
     this._data = formData;
   }
   // ---------------------------------------------------
@@ -59,9 +70,7 @@ export class ActionBehavior extends Action {
    * @param {string} [method=this.method] request method POST
    */
   start( method:string = this.method ):void {
-
     method = Safety.string( method, this.method );
-    this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass, null, this._data );
-
+    this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass, null, this.data );
   }
 }

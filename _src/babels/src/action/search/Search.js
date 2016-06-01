@@ -16,7 +16,7 @@ import {Api} from '../../net/Api';
 import {Length} from '../../app/const/Length';
 
 /**
- * 記事検索を行います
+ * <p>記事検索を行います</p>
  */
 export class Search extends Offset {
   /**
@@ -30,6 +30,11 @@ export class Search extends Offset {
    */
   constructor( word:string, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
     super( Api.search(), resolve, reject, offset, length );
+    /**
+     * 検索キーワード
+     * @type {string}
+     * @protected
+     */
     this._word = word;
   }
   // ---------------------------------------------------
@@ -42,7 +47,6 @@ export class Search extends Offset {
   get word():string {
     return this._word;
   }
-
   /**
    * 検索キーワードを設定します
    * @param {string} word 検索キーワード

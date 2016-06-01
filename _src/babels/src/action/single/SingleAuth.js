@@ -17,12 +17,14 @@ import {User} from '../../app/User';
 import {Path} from '../../app/const/Path';
 
 /**
- * 記事詳細を取得します
- * **ログインユーザー**
+ * <p>記事詳細を取得します<br>
+ * **ログインユーザー**</p>
+ *
+ * <p>ログインユーザーには「おすすめ」などユーザー情報に紐付いたデータが送信され表示に使用することがあります</p>
  */
 export class SingleAuth extends ActionAuth {
   /**
-   * 記事詳細を記事IDから取得します
+   * 記事詳細を記事IDから取得します<br>
    * **ログインユーザー**
    * @param {Number} id 記事ID
    * @param {Function} [resolve=null] Ajax 成功時の callback
