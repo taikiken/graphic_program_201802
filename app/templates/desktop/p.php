@@ -66,21 +66,26 @@
         </div><!-- /.post-sns -->
 
         <div class="sponsor-link w728">
+
           <?php
           /*
-          #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
-          Adsense 差し替え
+          # pc_single_top
           */
           ?>
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- デスクトップ - 記事詳細 - タイトル下部 -->
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:728px;height:90px"
-               data-ad-client="ca-pub-8613117509675807"
-               data-ad-slot="2392569578"></ins>
-          <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
+          <script type='text/javascript'>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-1465216183214-0').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.enableServices();
+            });
           </script>
+          <div id='div-gpt-ad-1465216183214-0' style='height:90px; width:728px;'>
+          <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1465216183214-0'); });
+          </script>
+          </div>
+
         </div>
 
         <?php /* div.post-kv */ ?>
