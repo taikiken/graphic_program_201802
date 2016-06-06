@@ -54,23 +54,50 @@ export class SPViewArchive extends View {
     if ( typeof ActionClass === 'function' ) {
       this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     }
+    /**
+     * more button root element
+     * @type {Element}
+     * @protected
+     */
     this._moreElement = moreElement;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
-     * @private
+     * @protected
      */
     this._articles = [];
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
+    /**
+     * ArticleDom instance を保持します
+     * first render を区別するためにも使用します
+     * @type {null|ReactClass}
+     * @protected
+     */
     this._articleRendered = null;
-    // more button instance を保持します
+    /**
+     * more button instance (SPMoreViewDom) を保持します
+     * @type {null|ReactClass}
+     * @protected
+     */
     this._moreRendered = null;
-    // response.request object を保持する
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @protected
+     */
     this._request = null;
-
+    /**
+     * index(home)コンテンツか否かのフラッグ
+     * @type {boolean}
+     * @protected
+     * @default false
+     */
     this._home = false;
-
+    /**
+     * category slug, ga に使う
+     * @type {string}
+     * @protected
+     * @default all
+     */
     this._slug = 'all';
   }
   // ---------------------------------------------------
@@ -138,7 +165,7 @@ export class SPViewArchive extends View {
       // request, JSON 取得に問題は無かったが data が取得できなかった
       let error = new Error( Message.empty('[SP:ARCHIVE:EMPTY:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
-      this.showError( error.message );
+      // this.showError( error.message );
 
     } else {
 
@@ -174,6 +201,10 @@ export class SPViewArchive extends View {
   //   */
   //
   // }
+
+  prepareRender():void {
+
+  }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
