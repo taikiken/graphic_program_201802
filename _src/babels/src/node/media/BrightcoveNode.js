@@ -194,7 +194,7 @@ export let BrightcoveNode = React.createClass( {
     if ( vast !== '' ) {
       ima3.serverUrl = vast + Date.now();
     }
-    // console.log( 'vast', vast, ima3 );
+    // console.log( 'UT: vast', this.id, vast, ima3 );
     let player = videojs( this.id );
 
     player.ready( () => {
