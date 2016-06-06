@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/* eslint constructor-super: 0 */
 
 import {EventDispatcher} from '../EventDispatcher';
 import {CommentStatus} from '../CommentStatus';

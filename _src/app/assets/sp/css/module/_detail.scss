@@ -10,6 +10,10 @@
 
 // post-kv
 .post-kv {
+  .caption {
+    margin-top: .25em;
+    font-size: fz(20/2);
+  }
 } //.post-kv
 
 
@@ -166,6 +170,35 @@
       margin-top: 20px;
     }
   }
+
+  // provider
+  .provider {
+    width: 100%;
+    margin-top: (40/2)+px;
+    padding-top: (30/2)+px;
+    border-top: 1px solid $border-primary-color;
+    text-align: right;
+
+    &-logo {
+      img {
+        width: auto;
+        height: (60/2)+px;
+      }
+    }
+
+    &-data {
+      margin-top: (10/2)+px;
+    }
+
+    &-name,
+    &-url {
+      font-size: fz(20/2);
+    }
+
+    &-name {
+      font-weight: bold;
+    }
+  }//.provider
 
   // post-tags
   // .post-tags {

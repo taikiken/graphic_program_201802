@@ -64,14 +64,42 @@ if ( $page['template'] == 'p' && $page['category']['slug'] == 'crazy' ) :
 endif;
 // eof brightcove
 // ---------------------------------------------------------------------------
+
+// header 表示条件 & template_classname に使用する template 名称を $template_name へ
+$template_name = $page['template'];
+
+// .whole へ追加する CSS class を設定します
+$whole_classes = array();
+
+// $page['template_classname'] に設定されている CSS class を追加します
+if ( !empty( $page['template_classname'] ) ) {
+  $whole_classes[] = $page['template_classname'];
+}
+// 記事詳細
+if ( $template_name == 'p' ) {
+  // 記事詳細へ識別 CSS class 追加
+  $whole_classes[] = 'post-single';
+
+  // theme 設定 class を追加
+  // JSON レスポンスの theme.base を CSS class へ追加します
+  if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
+    $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
+  }
+}
+
+// in category
+if ( $template_name == 'category' ) {
+  // template_classname があれば
+  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
+    $whole_classes[] = $page[ 'template_classname' ];
+  }
+}
 ?>
 </head>
 <body>
-<div id="whole" class="whole <?php echo ($page['template_classname']) ? $page['template_classname'] : '';?>">
+<div id="whole" class="whole <?php echo join( ' ', $whole_classes);?>">
 <?php
-// header 表示条件 start
-$template_name = $page['template'];
-
+// header 表示条件
 if (
   $template_name == 'index' ||
   $template_name == '404' ||
@@ -104,10 +132,14 @@ if (
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
       <li id="home" class="gnav-home"><a href="/">一面</a></li>
-<?php if (0) : ?>
-      <li id="crazy" class="gnav-crazy"><a href="/crazy/"><img src="/assets/images/common/gnav-crazy.png" alt="CRAZY"></a></li>
-<?php endif;// crazy remove ?>
-      <?php foreach( $page[ 'site_categories' ] as $category ) { ?>
+
+      <li id="crazy" class="gnav-crazy"><a href="/category/crazy/">CRAZY</a></li>
+
+      <?php foreach( $page[ 'site_categories' ] as $category ) {
+        if ( $category[ 'slug' ] == 'crazy' ) {
+          continue;
+        }
+        ?>
         <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
           <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
         </li>

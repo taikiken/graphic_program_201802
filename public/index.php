@@ -24,7 +24,7 @@ else :
 
     # vagrant - local IP
     case '192.168.33.50' :
-      define('UT_ENV', 'LOCAL');
+      define('UT_ENV', 'LOCAL_DB');
       break;
 
     # vagrant - hostname

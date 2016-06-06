@@ -23,7 +23,10 @@ import {Safety} from '../data/Safety';
 /**
  * Ajax 処理を行います<br>
  * Template Pattern として使用します<br>
- * 各 Class で extends します
+ * 各 Class で extends します<br>
+ *
+ * リクエストに offset, length が必要な時は Offset Class を継承し Class を作成します<br>
+ *
  */
 export class Action {
   /**

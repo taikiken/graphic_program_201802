@@ -42,7 +42,7 @@ export let BannerNode = React.createClass( {
       return null;
     }
 
-    if ( banner.link === '' || banner.image === null ) {
+    if ( banner.link === '' || banner.link === null ) {
       // illegal link
       return null;
     }
