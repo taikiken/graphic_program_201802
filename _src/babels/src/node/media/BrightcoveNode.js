@@ -200,7 +200,9 @@ export let BrightcoveNode = React.createClass( {
     player.ready( () => {
       player.src( { type: Brightcove.TYPE, src: url } );
       player.poster( poster );
-      player.ima3( ima3 );
+      if ( vast !== '' ) {
+        player.ima3( ima3 );
+      }
 
       if ( !this.phone ) {
         player.controls( false );
