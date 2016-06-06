@@ -339,6 +339,27 @@ class ViewModel {
 
   }
 
+
+  /**
+  * DBからデータ取得のテストコード
+  *
+  * @param  integer  $postID 取得する投稿ID
+  * @return array    取得データ
+  */
+  public function get_post_for_view2($postID) {
+
+    $o=new db;
+    $o->connect();
+
+    $sql=sprintf("select id,title,(select body from repo_body where pid=repo_n.id) as body from repo_n where id=%s",$postID);
+
+    $o->query($sql);
+    $f=$o->fetch_array();
+    return $f;
+
+  }
+
+
 }
 
 ?>
