@@ -31,10 +31,20 @@ export class ViewCategory extends ViewArchiveMasonry {
     super( element, moreElement, null, option, true );
     // Category Action を使う
     // slug を送り 表示(render)は ViewArchiveMasonry を使う
+    /**
+     * Category Action を使う<br>
+     * slug を送り 表示(render)は SPViewArchive を使う
+     * @type {CategoryAuth|Category}
+     * @protected
+     */
     this._action = User.sign ?
       new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
       new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
-
+    /**
+     * category slug, ga に使う
+     * @type {string}
+     * @protected
+     */
     this._slug = slug;
   }
 }
