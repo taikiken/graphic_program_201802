@@ -10,10 +10,9 @@ $uid=auth();
 $id=bind($_REQUEST["id"]);
 $f=set_article($id,$uid);
 
-
 if($y["status"]["code"]===200){
-	
-	//媒体バナー
+
+	//媒体バナー - 後で消す
 	if(in_array($f["userid"],$RELATEDBANNER_ALLOWED)){
 		
 		$sql=sprintf("select * from u_banner where cid=%s",$f["userid"]);
@@ -36,7 +35,8 @@ if($y["status"]["code"]===200){
 	  $banner["sp"]["image"]="";
 	  $banner["sp"]["link"]="";	
 	}
-	
+
+	$ad=get_advertise($f["m1"],$f["userid"],$f["id"]);
 	$s=set_articleinfo($f,1);
 	
 	//ランキングは外部処理にしたい
@@ -53,7 +53,12 @@ if($y["status"]["code"]===200){
 	}
 	*/
 	
-	$s["related_articles"]=unserialize(file_get_contents(sprintf("%s/api/ver1/static/%s.dat",$SERVERPATH,$f["m1"])));
+	$ad_put=set_advertise($ad,"detail");
+	$s=$s+$ad_put;
+	unset($s["vast"]);
+	
+	$relatedposts=unserialize(file_get_contents(sprintf("%s/api/ver1/static/%s.dat",$SERVERPATH,$f["m1"])));
+	$s["related_articles"]=!$relatedposts?array():$relatedposts;
 	
 }else{
 	$s=(object)$s;

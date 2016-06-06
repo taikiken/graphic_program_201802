@@ -18,7 +18,7 @@ $mtype=131;
 $o=new db;
 $o->connect();
 
-$sql=sprintf("select id,name,name_e,yobi from pm_ where cid=20 and flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
+$sql=sprintf("select id,name,name_e,yobi from u_categories where flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$sw=strlen($f["yobi"])>0?@explode(",",$f["yobi"]):array();
@@ -60,7 +60,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}
-
+	
+	unset($sqla);
+	
 	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
@@ -100,9 +102,10 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			//$sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"]);
 		}
 	}
+	if($sqla){
+		$sqla=implode("\n",$sqla);
+		$o->query($sqla);
+	}
 }
-
-$sqla=implode("\n",$sqla);
-$o->query($sqla);
 
 ?>
