@@ -13,14 +13,15 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     if ( $post ) :
 
       $args['page'] = $app->model->set(array(
-        'title'          => $post['title'],
-        'og_title'       => $post['title'].' | '.$app->model->property('title'),
-        'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/',
-        'og_image'       => $post['media']['images']['original'],
-        'og_description' => $post['description'],
-        'template'       => 'p',
-        'path'           => $args,
-        'post'           => $post,
+        'title'              => $post['title'],
+        'og_title'           => $post['title'].' | '.$app->model->property('title'),
+        'og_url'             => $app->model->property('site_url').'p/'.$post['id'].'/',
+        'og_image'           => $post['media']['images']['original'],
+        'og_description'     => $post['description'],
+        'template'           => 'p',
+        'path'               => $args,
+        'post'               => $post,
+        'get_post_for_view2' => $app->model->get_post_for_view2($args['article_id']),
       ));
 
 
