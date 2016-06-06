@@ -57,12 +57,26 @@ export let BrightcoveNode = React.createClass( {
     };
   },
   getInitialState: function() {
-    this.videoElement = null;
+    // this.videoElement = null;
+    /**
+     * videojs が tag を生成させる基点 Element の id<br>
+     * video-player-ARTICLE_ID
+     *
+     * @protected
+     * @type {string}
+     */
     this.id = `video-player-${this.props.articleId}`;
-    // videojs return value
+    /**
+     * videojs return value, videojs instance
+     * @protected
+     * @type {null|videojs}
+     */
     this.player = null;
-    // vast
-    // this.hasVast = !!this.props.video.vast;
+    /**
+     * スマホかを表す真偽値
+     * @protected
+     * @type {Boolean}
+     */
     this.phone = Sagen.Browser.Mobile.phone();
 
     return {
@@ -137,12 +151,13 @@ export let BrightcoveNode = React.createClass( {
   initBrightcove: function() {
     // 非同期で script を読み込まない
     // 全ての機能が使えなくなるので...
+    // テンプレートへ記載します
     this.createPlayer();
   },
   // videojs で player instance を作成します
   createPlayer: function() {
     const videojs = self.videojs;
-    // console.log( '****** createPlayer' );
+
     // videojs global object 存在チェック
     // 存在を確認できるまで待機します
     if ( !videojs || !videojs.ima3 ) {
@@ -159,9 +174,13 @@ export let BrightcoveNode = React.createClass( {
       adTechOrder: [
         'html5'
       ],
+      // 2000
       postrollTimeout: Brightcove.POST_ROLL,
+      // 1000
       prerollTimeout: Brightcove.PRE_ROLL,
+      // onload
       requestMode: Brightcove.MODE,
+      // 5000
       timeout: Brightcove.TIMEOUT
     };
 
@@ -170,6 +189,8 @@ export let BrightcoveNode = React.createClass( {
     // vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
     // vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
     // vast = 'http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page=';
+    ima3.serverUrl = '';
+
     if ( vast !== '' ) {
       ima3.serverUrl = vast + Date.now();
     }
