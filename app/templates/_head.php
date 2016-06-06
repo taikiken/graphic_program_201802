@@ -68,4 +68,16 @@ endif;
   <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
 
-
+<?php
+/*
+広告 / PC版画像バナー広告をDFP管理下にする
+https://github.com/undotsushin/undotsushin/issues/720
+*/
+?>
+<script>
+(function() {
+  var useSSL = 'https:' == document.location.protocol;
+  var src = (useSSL ?  'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+  document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+})();
+</script>

@@ -25,6 +25,7 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
+ * <p>記事詳細</p>
  * detail 下部(tag)
  */
 export class ViewSingleFooter extends View {
@@ -65,8 +66,11 @@ export class ViewSingleFooter extends View {
 
         let single = this.state.single;
         let keywords = single.keywords;
+        // banner key の位置が変更になったのでどちらにも対応できるようにしておく
+        // 優先は変更後の response.banner
         let userBanner = single.user.banner.pc;
         let banner = single.banner.pc;
+
         if ( !banner.image && !!userBanner.image ) {
           banner = userBanner;
         }
@@ -101,7 +105,7 @@ export class ViewSingleFooter extends View {
 
           return (
             <div className="post-footer">
-              <BannerNode banner={userBanner} />
+              <BannerNode banner={banner} />
             </div>
           );
 
