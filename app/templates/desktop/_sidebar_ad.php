@@ -8,15 +8,15 @@
             ?>
             <script type='text/javascript'>
               googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/pc_sidebar_top', [300, 250], 'div-gpt-ad-1465213169715-0').addService(googletag.pubads());
+                googletag.defineSlot('/531683568/pc_sidebar_top', [300, 250], 'div-gpt-ad-pc_sidebar_top').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.pubads().collapseEmptyDivs();
                 googletag.enableServices();
               });
             </script>
-            <div id='div-gpt-ad-1465213169715-0' style='height:250px; width:300px;'>
+            <div id='div-gpt-ad-pc_sidebar_top' style='height:250px; width:300px;'>
             <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1465213169715-0'); });
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_sidebar_top'); });
             </script>
             </div>
 
@@ -45,16 +45,16 @@
             ?>
             <script type='text/javascript'>
               googletag.cmd.push(function() {
-                googletag.defineSlot('/531683568/pc_sidebar_bottom', [300, 600], 'div-gpt-ad-1465215703330-0').addService(googletag.pubads());
+                googletag.defineSlot('/531683568/pc_sidebar_bottom', [300, 600], 'div-gpt-ad-pc_sidebar_bottom').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.pubads().collapseEmptyDivs();
                 googletag.enableServices();
               });
             </script>
             <!-- /531683568/pc_sidebar_bottom -->
-            <div id='div-gpt-ad-1465215703330-0' style='height:600px; width:300px;'>
+            <div id='div-gpt-ad-pc_sidebar_bottom' style='height:600px; width:300px;'>
             <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1465215703330-0'); });
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_sidebar_bottom'); });
             </script>
             </div>
 

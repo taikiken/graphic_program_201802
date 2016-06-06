@@ -74,15 +74,15 @@
           ?>
           <script type='text/javascript'>
             googletag.cmd.push(function() {
-              googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-1465216183214-0').addService(googletag.pubads());
+              googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.pubads().collapseEmptyDivs();
               googletag.enableServices();
             });
           </script>
-          <div id='div-gpt-ad-1465216183214-0' style='height:90px; width:728px;'>
+          <div id='div-gpt-ad-pc_single_top' style='height:90px; width:728px;'>
           <script type='text/javascript'>
-          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1465216183214-0'); });
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_top'); });
           </script>
           </div>
 
