@@ -21,7 +21,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'template'           => 'p',
         'path'               => $args,
         'post'               => $post,
-        'get_post_for_view2' => $app->model->get_post_for_view2($args['article_id']),
       ));
 
 
