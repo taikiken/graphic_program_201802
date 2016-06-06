@@ -48,6 +48,7 @@ export class SPViewSingleVisual extends ViewSingleHeader {
 
     ReactDOM.render(
       <SPMediaNode
+        articleId={String(singleDae.id)}
         mediaType={singleDae.mediaType}
         media={singleDae.media}
       />,

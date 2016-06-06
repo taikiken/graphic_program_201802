@@ -51,9 +51,23 @@ export class Content {
   /**
    * コンテンツ サイドバー幅
    * @return {number} コンテンツ サイドバー幅を返します 300
-   * @constructor
    */
   static get SIDEBAR_WIDTH():Number {
     return 300;
+  }
+
+  /**
+   * SP コンテンツ幅
+   * @return {number} SP コンテンツ幅 を返します
+   */
+  static get SP_WIDTH():Number {
+    return 320;
+  }
+  /**
+   * SP コンテンツ幅 に対応した 16:9 の高さ
+   * @return {number} SP コンテンツ幅 に対応した 16:9 の高さを返します
+   */
+  static get SP_HD_HEIGHT():Number {
+    return Math.ceil( Content.SP_WIDTH * 9 / 16 );
   }
 }

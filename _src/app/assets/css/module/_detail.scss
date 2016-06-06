@@ -104,6 +104,11 @@
       max-width: 100%;
       height: auto;
     }
+
+    // caption
+    .caption {
+      margin-top: .25em;
+    }
   } //.post-kv
 
   // post-video-kv
@@ -358,7 +363,7 @@
 
     &-name,
     &-url {
-      font-size: fz(12, 14);
+      font-size: fs(12, 14);
     }
 
     &-name {
@@ -367,6 +372,19 @@
   }//.provider
 
 }
+
+
+
+
+// Brightcove Player
+.vjs-remaining-time-display {
+  line-height: 30px;
+}
+
+.video-js .vjs-play-progress:before {
+  line-height: 1;
+}
+
 
 // -------------------------------------------------
 // override

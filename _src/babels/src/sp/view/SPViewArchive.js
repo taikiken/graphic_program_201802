@@ -205,6 +205,10 @@ export class SPViewArchive extends View {
         };
       },
       getInitialState: function() {
+        /**
+         * @private
+         * @type {number}
+         */
         this.page = 1;
 
         return {

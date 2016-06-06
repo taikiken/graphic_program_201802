@@ -5,6 +5,18 @@
 ?>
 <div class="body-sec">
   <div class="body-sec-inner">
+    <?php
+    // ----------------------------------------------------
+    // 記事詳細: sp
+    // response.theme.images.pc
+    // response.description
+    if ( !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ] ) ) : ?>
+      <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
+        <h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+      </div>
+    <?php endif;
+    // eof: 記事詳細: sp
+    // ---------------------------------------------------- ?>
     <section class="main-sec">
 
       <div id="single-visual-container"></div>
@@ -62,13 +74,42 @@
         </div><!-- /.post-content -->
         <div id="post-content-read-more"></div>
 
-        <div class="provider">
-          <i class="provider-logo"><img src="/assets/images/detail/provider-logo-asahi.png" alt=""></i>
-          <div class="provider-data">
-            <p class="provider-name">朝日新聞社</p>
-            <p class="provider-url"><a href="http://www.asahi.com/sports/" target="_blank">http://www.asahi.com/sports/</a></p>
-          </div>
-        </div><!-- /.provider -->
+        <?php
+        // ----------------------------------------------------
+        // 記事詳細: pc 媒体ロゴ
+        if ( !empty( $page['post'] ) && !empty( $page['post']['user'] ) ) :
+          ?>
+          <div class="provider">
+            <?php
+            // user.logo.image
+            if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['img'] ) ) :
+              ?>
+              <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
+            <?php endif;
+            //----[image] ?>
+            <div class="provider-data">
+              <?php
+              // user.name
+              if ( !empty($page['post']['user']['name']) ) :
+                ?>
+                <p class="provider-name"><?php echo $page['post']['user']['name']; ?></p>
+                <?php
+              endif;
+              //----[name]
+
+              // user.logo.link
+              if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) :
+                ?>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><?php echo $page['post']['user']['logo']['link']; ?></a></p>
+                <?php
+              endif;
+              //----[link] ?>
+            </div>
+          </div><!-- /.provider -->
+          <?php
+        endif;
+        // eof: 記事詳細: pc 媒体ロゴ
+        // ---------------------------------------------------- ?>
 
         <div id="post-content-banner"></div>
 
