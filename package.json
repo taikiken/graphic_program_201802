@@ -77,6 +77,7 @@
     "bower:install": "cd ./_src/tools && bower install && cd ../ && gulp bower:exports",
     "start": "gulp serve:app",
     "gulp": "gulp",
-    "deploy": "npm install && npm run gulp"
+    "deploy": "npm install && npm run gulp",
+    "esdoc": "cd ./_src/babels && esdoc -c esdoc.json"
   }
 }

@@ -70,7 +70,7 @@ export class Sidebar {
     return parseInt( Dom.getStyle( element, 'height' ), 10 );
   }
   /**
-   * 開始
+   * 開始<br>
    * instance 作成後に必ず実行します
    */
   start():void {
@@ -90,16 +90,24 @@ export class Sidebar {
     cancelAnimationFrame(this.id);
   }
   /**
-   * loop 関数
+   * loop 関数<br>
    * start 実行後常時監視します
    */
   update():void {
+    /**
+     * requestAnimationFrame id<br>
+     * cancel 時に使用します
+     *
+     *    cancelAnimationFrame(this.id);
+     *
+     * @type {Number}
+     */
     this.id = requestAnimationFrame(this.boundUpdate);
     this.scroll( {y: Scroll.y} );
     this.resizeWhole();
   }
   /**
-   * window.onresize event handler
+   * window.onresize event handler<br>
    * window resize 時に resize option を true にし scroll チェックルーチーンを call します
    */
   resize():void {
@@ -117,11 +125,14 @@ export class Sidebar {
     if ( previousHeight > 0 && previousHeight !== wholeHeight ) {
       this.scroll( {y: Scroll.y, resize: true} );
     }
-
+    /**
+     * .whole の高さ
+     * @type {Number}
+     */
     this.wholeHeight = wholeHeight;
   }
   /**
-   * 現在の scroll top 位置を元に追随計算します
+   * 現在の scroll top 位置を元に追随計算します<br>
    * update から call されます
    * @param {{y: Number}} event scroll top が含まれた Object
    */
@@ -148,12 +159,15 @@ export class Sidebar {
       // default style 設定
       this.style( this.css );
     }
-
+    /**
+     * スクロール位置
+     * @type {Number}
+     */
     this.previous = y;
     
   }
   /**
-   * 保存されている offset 計算対象 element の高さの合計を計算します
+   * 保存されている offset 計算対象 element の高さの合計を計算します<br>
    * .side-sec の padding-top も含みます
    * @return {number} 保存されている offset 計算対象 element の高さの合計を計算し返します
    */
