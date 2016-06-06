@@ -12,9 +12,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     if ( $post ) :
 
-      $db       = new dbForTemplate();
-      $get_post = $db->get_post($args['article_id']);
-
       $args['page'] = $app->model->set(array(
         'title'              => $post['title'],
         'og_title'           => $post['title'].' | '.$app->model->property('title'),
@@ -24,7 +21,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'template'           => 'p',
         'path'               => $args,
         'post'               => $post,
-        'get_post_for_view2' => $get_post,
       ));
 
 
