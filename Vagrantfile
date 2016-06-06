@@ -189,6 +189,14 @@ Vagrant.configure(2) do |config|
 
   # push
   # ------------------------------
+  # $ vagrant push db_import
+  config.push.define "db_import", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      vagrant ssh -c "cd /vagrant && sudo -u postgres dropdb ut && sudo -u postgres createdb ut && sudo -u postgres psql -h localhost -U ut -d ut < ut.dump;"
+    SCRIPT
+  end
+
+
   # $ vagrant push dev - t2.small の dev.undotushin.com
   config.push.define "dev", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT
