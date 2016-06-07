@@ -198,7 +198,7 @@ class dbForTemplate extends db {
 			t2 as profile,
 			img1 as icon 
 		from u_member where flag=1) as st2
-		where st1.userid=st2.uid",$commentId,$this->uid,$id);
+		where st1.userid=st2.uid",$commentId,set_isreaction($this->uid),$id);
 	$nsql=sprintf("select count(*) as n from u_ranking where flag=1 and userflag=1 and commentid=(select case when commentid=0 then id else commentid end from u_comment where id=%s)",$commentId);
 	
 	$this->query($nsql);
