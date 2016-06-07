@@ -194,19 +194,7 @@ class ViewModel {
         return false;
 
       else :
-        if ( is_array($response) && count($response)) {
-          foreach($response as $array) {
-            if(is_array($array)) {
-
-              if ( $slug !== 'crazy' ) :
-                $category = array_merge($array, $category);
-              else :
-                $category = array_merge($category, $array);
-              endif;
-
-            }
-          }
-        }
+        $category = $response['response'];
 
       endif;
 

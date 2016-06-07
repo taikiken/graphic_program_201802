@@ -16,21 +16,29 @@ include_once __DIR__."/_header.php";
   <div class="body-sec-inner">
     <section class="main-sec">
       <div class="sponsor-link mt30 w728">
+
+
         <?php
         /*
-        #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
-        Adsense 差し替え
+        # pc_404_top
         */
         ?>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- デスクトップ - 404ページ上部 -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:728px;height:90px"
-             data-ad-client="ca-pub-8613117509675807"
-             data-ad-slot="5249692776"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
+        <script type='text/javascript'>
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/531683568/pc_404_top', [728, 90], 'div-gpt-ad-pc_404_top').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().collapseEmptyDivs();
+            googletag.enableServices();
+          });
         </script>
+        <!-- /531683568/pc_404_top -->
+        <div id='div-gpt-ad-pc_404_top' style='height:90px; width:728px;'>
+        <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_404_top'); });
+        </script>
+        </div>
+
+
       </div>
 
       <h2 class="mt50 bold f20">お探しのページは見つかりません</h2>

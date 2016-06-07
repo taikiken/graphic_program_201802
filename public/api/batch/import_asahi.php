@@ -16,7 +16,7 @@ if($_GET["p"]==1){
 $o=new db;
 $o->connect();
 
-$sql=sprintf("select id,name,name_e,yobi from pm_ where cid=20 and flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
+$sql=sprintf("select id,name,name_e,yobi from u_categories where flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$sw=strlen($f["yobi"])>0?@explode(",",$f["yobi"]):array();
@@ -72,6 +72,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
+	unset($sqla);
+		
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if($s["a_time"]!=$f["a_time"]){
@@ -104,10 +106,13 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",$modbody);
 		}
 	}
-}
 
-$sqla=implode("\n",$sqla);
-$o->query($sqla);
+	if($sqla){
+		$sqla=implode("\n",$sqla);
+		$o->query($sqla);
+	}
+
+}
 
 file_put_contents(sprintf("%sasahi-sokuhou%s.xml",$RSS,date("YmdH")),$xml);
 

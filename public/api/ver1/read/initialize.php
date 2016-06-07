@@ -9,13 +9,14 @@ $o->connect();
 $uid=auth();
 
 if(strlen($uid)>0){
+
 	$sql=sprintf("select id as userid,cid as typeid,(select name from repo where id=u_member.cid) as type,title as name,t2 as profile,img1 as icon from u_member where id=%s",$uid);
 	$o->query($sql);
 	$f=$o->fetch_array();
 
 	$category=array();
 	$n=0;
-	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from pm_ where cid=20) as t2 where t1.categoryid=t2.id order by id",$uid);
+	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from u_categories) as t2 where t1.categoryid=t2.id order by id",$uid);
 	$o->query($sql);
 	
 	while($p=$o->fetch_array()){
@@ -32,9 +33,9 @@ if(strlen($uid)>0){
 }
 
 if(strlen($uid)==0){
-	$sql="select id,name,name_e,img from pm_ where cid=20 and flag=1 order by n";
+	$sql="select id,name,name_e,img from u_categories where flag=1 order by n";
 }else{
-	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from pm_ where cid=20) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
+	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
 }
 
 $o->query($sql);
@@ -100,13 +101,13 @@ if($uid!=""){
 	if(count($category)>0){
 		$categories=implode(",",$categories);
 		$sql=sprintf("select 2 as h,*,1 as recommend from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id in(%s)",$categories)));
-		$sql.=sprintf(" union all select 2 as h,*,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$categories)),sprintf(" limit %s offset %s",10,0));
+		$sql.=sprintf(" union all select 2 as h,*,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$categories)),sprintf(" limit %s offset %s",100,0));
 	}else{
-		$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),10,0);
+		$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),100,0);
 	}
 	
 }else{
-	$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),10,0);
+	$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),100,0);
 }
 
 /*
