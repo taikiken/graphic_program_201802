@@ -4,46 +4,23 @@ include "local.php";
 include "public/check.php";
 include __DIR__."/../../app/helpers/db.helper.php";
 
-
-$o   = new dbForTemplate();
+//初期化＋DB接続
+$o=new dbForTemplate;
 $o->connect();
 
+//例）
 
-echo '<h1>get_user_id</h1>';
-echo '<pre style="font-family:monospace; background:#eee;">';
-print_r( $o->get_user_id() );
-echo '</pre>';
-echo '<hr />';
+echo "\n\nカテゴリー一覧\n";
+var_dump($o->get_site_categories());
 
+echo "\n\nカテゴリー情報\n";
+var_dump($o->get_category_by_slug("crazy"));
 
-echo '<h1>get_is_logged_in</h1>';
-echo '<pre style="font-family:monospace; background:#eee;">';
-print_r( $o->get_is_logged_in() );
-echo '</pre>';
-echo '<hr />';
+echo "\n\n投稿データ\n";
+var_dump($o->get_post(12321));
 
-
-echo '<pre style="font-family:monospace; background:#eee;">';
-print_r( $o->get_site_categories(false) );
-echo '</pre>';
-echo '<hr />';
-
-
-echo '<h1>get_category_by_slug</h1>';
-echo '<pre style="font-family:monospace; background:#eee;">';
-print_r( $o->get_category_by_slug('soccer') );
-echo '</pre>';
-echo '<hr />';
-
-
-echo '<h1>get_post</h1>';
-echo '<pre style="font-family:monospace; background:#eee;">';
-print_r( $o->get_post(26168) );
-echo '</pre>';
-echo '<hr />';
-
-
-$o->disconnect();
+echo "\n\nコメント\n";
+var_dump($o->get_comment(12321,89));
 
 
 ?>

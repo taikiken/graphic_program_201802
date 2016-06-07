@@ -323,7 +323,7 @@ function set_category($category,$type){
 	}
 
 	$categorys[]="all";
-	$sql="select id,name,name_e from pm_ where cid=20 and flag=1 order by n";
+	$sql="select id,name,name_e from u_categories where flag=1 order by n";
 	$o->query($sql);
 	while($f=$o->fetch_array()){
 		$caa[$f["name_e"]]=$f["id"];
@@ -372,7 +372,7 @@ function set_category2($category,$type){
 	}
 
 	if($category!="all"){
-		$sql=sprintf("select id,name,name_e from pm_ where name_e='%s'",$category);
+		$sql=sprintf("select id,name,name_e from u_categories where name_e='%s'",$category);
 		$o->query($sql);
 		$f=$o->fetch_array();
 	
@@ -455,7 +455,7 @@ function set_user($uid,$userid){
 	
 	global $o;
 	$userid=bind($userid);
-	
+
 	if(strlen($uid)==0&&strlen($userid)==0){
 		$status=array(
 			"code"=>400,
@@ -466,7 +466,7 @@ function set_user($uid,$userid){
 		set_status($status);
 		return;
 	}
-	
+
 	if(strlen($userid)>0)$uid=$userid;
 	check_user($uid);
 

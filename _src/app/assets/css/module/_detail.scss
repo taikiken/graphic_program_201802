@@ -189,6 +189,21 @@
       max-width: 100%;
       height: auto;
     }
+
+    .cms_widget {
+      margin-top: 1.5em;
+      overflow: hidden;
+
+      iframe,
+      video {
+        // width: 100%;
+        // height: auto;
+      }
+    }
+
+    .cms_img {
+      margin-top: 1.5em;
+    }
   } //.post-content
 
   // sponsor-link
@@ -389,8 +404,3 @@
 .video-js .vjs-play-progress:before {
   line-height: 1;
 }
-
-
-// -------------------------------------------------
-// override
-// @import "detail_override";

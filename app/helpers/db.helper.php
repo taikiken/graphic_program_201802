@@ -1,5 +1,4 @@
 <?php
-
 /*
 
 
@@ -11,15 +10,18 @@ ref. #326
 
 */
 
+include_once "local.php";
+
 class dbForTemplate extends db {
 
+
+  var $uid;
 
   protected $default = array(
 
     'token' => '',
 
   );
-
 
   function __construct() {
 
@@ -30,6 +32,8 @@ class dbForTemplate extends db {
     if ( isset($_COOKIE["auth_token"]) ){
       $this->default['token'] = $_COOKIE["auth_token"];
     }
+
+    $this->uid=$this->get_user_id();
 
   }
 
@@ -87,14 +91,14 @@ class dbForTemplate extends db {
     $s = array();
 
     // ユーザーIDを取得
-    $uid = $this->get_user_id();
+    //$uid = $this->get_user_id();
 
     // 並び替えする
-    if( !preg_match("/^[0-9]+$/",$uid) || $is_sort == false ) :
+    if( !preg_match("/^[0-9]+$/",$this->uid) || $is_sort == false ) :
       $sql="select id,name,name_e,img from pm_ where cid=20 and flag=1 order by n";
 
     else :
-      $sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from pm_ where cid=20) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
+      $sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from pm_ where cid=20) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$this->uid);
 
     endif;
 
@@ -118,7 +122,12 @@ class dbForTemplate extends db {
   */
   public function get_category_by_slug( $slug ) {
 
-    // TODO : APIと同等の内容を返す
+    $sql=sprintf("select id,name,title,img,description,name_e from u_categories where name_e='%s'",$slug);
+    $this->query($sql);
+    $f=$this->fetch_array();
+    $s=set_categoriesinfo($f);
+
+    return $s;
 
   }
 
@@ -131,17 +140,35 @@ class dbForTemplate extends db {
   */
   public function get_post( $id ) {
 
-    // TODO : APIと同等の内容 + カノニカル + 元記事URLを返す
+    /*
+
+    (boolean) canonical["is_canonical"];
+    (string)  canonical["url"];
+
+    で出力しています。
+
+    */
 
     //$this->connect();
+    global $articletable,$SERVERPATH;
 
-    $sql=sprintf("select id,title,(select body from repo_body where pid=repo_n.id) as body from repo_n where id=%s",$id);
+    $sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($this->uid),sprintf(" and id=%s",$id)));
     $this->query($sql);
     $f=$this->fetch_array();
 
+    $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
+    $v=unserialize(file_get_contents($file));
+    $f["canonical"]=$v["canonical"];
+
+    $ad=get_advertise($f["m1"],$f["userid"],$f["id"]);
+    $s=set_articleinfo($f,1,1);
+    $ad_put=set_advertise($ad,"detail");
+    $s=$s+$ad_put;
+    unset($s["vast"]);
+
     //$this->disconnect();
 
-    return $f;
+    return $s;
 
   }
 
@@ -156,11 +183,63 @@ class dbForTemplate extends db {
   */
   public function get_comment( $id, $commentId ) {
 
-    // TODO : APIと同等の内容を返す
+    $sql=sprintf("select * from
+      (select t2.*,t1.good,t1.bad,t1.rank from
+        (select commentid,good,bad,reply,rank from u_ranking where flag=1 and userflag=1 and commentid=(select case when commentid=0 then id else commentid end from u_comment where id=%s)) as t1,
+        (select %sid,comment,userid,pageid,regitime from u_comment where pageid=%s) as t2
+      where t1.commentid=t2.id) as st1,
+      (select
+        id as uid,
+        cid as typeid,
+        (select name from repo where id=cid) as type,
+        title as name,
+        t2 as profile,
+        img1 as icon
+      from u_member where flag=1) as st2
+      where st1.userid=st2.uid",$commentId,set_isreaction($this->uid),$id);
+
+    $nsql=sprintf("select count(*) as n from u_ranking where flag=1 and userflag=1 and commentid=(select case when commentid=0 then id else commentid end from u_comment where id=%s)",$commentId);
+
+    $this->query($nsql);
+    $f=$this->fetch_array();
+    $count=$f["n"];
+
+    if($count>0){
+
+      $this->query($sql);
+      while($f=$this->fetch_array())$p[]=$f;
+
+      for($i=0;$i<count($p);$i++){
+
+        $s[$i]=set_commentinfo($p[$i],2);
+
+        $sql=sprintf("select count(*) as n from u_comment where pageid=%s and commentid=%s and flag=1 and exists (select * from u_member where id=u_comment.userid and flag=1);",$id,$p[$i]["id"]);
+        $this->query($sql);
+        $f=$this->fetch_array();
+        $s[$i]["reply"]["count"]=$f["n"];
+
+        if($f["n"]>0){
+
+          $sql=sprintf("select * from
+            (select %sid,comment,pageid,userid,regitime,(select count(reaction) from u_reaction where commentid=u_comment.id and flag=1 and reaction=1) as good,(select count(reaction) from u_reaction where commentid=u_comment.id and flag=1 and reaction=2) as bad from u_comment where pageid=%s and commentid=%s and flag=1%s) as t1,
+            (select id as uid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from u_member where flag=1) as t2
+            where t1.userid=t2.uid order by regitime",
+          set_isreaction($this->uid),$id,$p[$i]["id"],"");
+
+          $this->query($sql);
+          while($f=$this->fetch_array()){
+
+            $s[$i]["reply"]["comments"][]=set_commentinfo($f,2,$p[$i]["id"]);
+          }
+        }else{
+          $s[$i]["reply"]=array();
+        }
+      }
+    }
+
+    return $s;
 
   }
-
-
 
 }
 
