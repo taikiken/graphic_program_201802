@@ -7,6 +7,7 @@
 $pc_sidebar_top = '';
 $pc_sidebar_bottom = '';
 if ( $page['template'] == 'p' ) {
+  // 記事詳細
   $pc_sidebar_top = $page['post']['ad']['pc']['sidebar_top'];
   $pc_sidebar_bottom = $page['post']['ad']['pc']['sidebar_bottom'];
 } else {
@@ -14,7 +15,10 @@ if ( $page['template'] == 'p' ) {
   $pc_sidebar_bottom = $page['category']['ad']['pc']['sidebar_bottom'];
 }
 
+
+// index は必ず表示
 $pc_in_home = $page['template'] == 'index';
+
 // ------------------------------------
 // sidebar top
 if ( !empty($pc_sidebar_top) || $pc_in_home ) :
