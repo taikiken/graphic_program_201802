@@ -51,6 +51,7 @@ export class SPViewSingleVisual extends ViewSingleHeader {
         articleId={String(singleDae.id)}
         mediaType={singleDae.mediaType}
         media={singleDae.media}
+        isShowImage={singleDae.isShowImage}
       />,
       this.element
     );
