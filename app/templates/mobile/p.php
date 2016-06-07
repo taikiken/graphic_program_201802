@@ -10,9 +10,9 @@
     // 記事詳細: sp
     // response.theme.images.pc
     // response.description
-    if ( isset( $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ] ) ) : ?>
+    if ( !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ] ) ) : ?>
       <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
       </div>
     <?php endif;
     // eof: 記事詳細: sp

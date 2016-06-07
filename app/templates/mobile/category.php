@@ -8,7 +8,7 @@
     <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
-    if ( isset($page['category']['theme']['images']['sp']) ) :
+    if ( !empty($page['category']['theme']['images']['sp']) ) :
       ?>
       <div class="special-summary" style="<?php echo $page['category']['theme']['background_color'] ? 'background-color: ' . $page[ 'category' ][ 'theme' ][ 'background_color' ] : ''; ?>">
         <h1 class="special-summary-heading"><img src="<?php echo $page['category']['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
@@ -21,7 +21,7 @@
       <?php
       // ----------------------------------------------------
       // 記事一覧: sp banner
-      if ( isset($page['category']['banner']['sp']['image']) && isset($page['category']['banner']['sp']['link']) ) :
+      if ( !empty($page['category']['banner']['sp']['image']) && !empty($page['category']['banner']['sp']['link']) ) :
         ?>
         <div class="sponsor-link">
           <a href="<?php echo $page['category']['banner']['sp']['link']; ?>" target="_blank"><img src="<?php echo $page['category']['banner']['sp']['image']; ?>" alt="<?php echo $page['category']['banner']['sp']['text'] ? $page['category']['banner']['sp']['text'] : '' ?>"></a>
