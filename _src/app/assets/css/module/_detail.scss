@@ -193,7 +193,7 @@
 
   // sponsor-link
   .sponsor-link {
-    margin-top: 20px;
+    margin: 20px 0;
 
     &.column2 {
       margin-top: 30px;
@@ -389,8 +389,3 @@
 .video-js .vjs-play-progress:before {
   line-height: 1;
 }
-
-
-// -------------------------------------------------
-// override
-// @import "detail_override";

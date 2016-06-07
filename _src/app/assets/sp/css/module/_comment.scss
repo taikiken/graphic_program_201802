@@ -461,6 +461,24 @@
 
 
 
+// title
+.comment-detail-heading {
+
+  // link color
+  a {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: #333333;
+    }
+  }
+}
+
+
+
+
+
 // -------------------------------------------------
 // override
 @import "comment_override";
