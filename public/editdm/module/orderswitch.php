@@ -10,7 +10,7 @@ if($TABLE=="repo_edit")$TABLE="editor";
 else if($TABLE=="repo_s")$TABLE="repo";
 $WHERE=$_POST["where"];
 
-$sql=sprintf("select id,%s from %s%sn in(%s,%s) order by n",$TITLEFIELDNAME,$TABLE,(strlen($WHERE)>0)?$WHERE." and ":" where ",$S,($T==0)?$S+1:$S-1);
+$sql=sprintf("select id from %s%sn in(%s,%s) order by n",$TABLE,(strlen($WHERE)>0)?$WHERE." and ":" where ",$S,($T==0)?$S+1:$S-1);
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$IDSN[]=$f;
@@ -22,10 +22,19 @@ if($T==1){
 	$sqls[]=sprintf("update %s set n=%s where id=%s;",$TABLE,($S+1),$IDSN[0]["id"]);
 	$sqls[]=sprintf("update %s set n=%s where id=%s;",$TABLE,($S),$IDSN[1]["id"]);
 }
+
 $sqls=implode("\n",$sqls);
 $o->query($sqls);
 
 $e=$o->affected_rows2();
+
+if($_POST["table"]=="repo_e"){
+	$sql=sprintf("select nid from repo_e where id=%s;",$IDSN[1]["id"]);
+	$o->query($sql);
+	$f=$o->fetch_array();
+	make_contents($f["nid"],1);
+}
+
 echo $e;
 
 /*
@@ -72,7 +81,7 @@ if($CURRENTDIRECTORY=="repo_e"&&strlen($RIREKITITLE)==0){
 		$RIREKITITLE=mb_substr($f["body"],0,25);
 	}
 }
-logIns(sprintf("%s %s [ID : %s ] %s ¤ò°ì¤Ä%s(%sÈÖ)¤ËÊÂ¤ÙÂØ¤¨¤Þ¤·¤¿¡£",$PARENT,$THIS,$RIREKITITLEID,$RIREKITITLE,($T==1)?"¾å":"²¼",($T==1)?($S-1):($S+1)),getSorC("usr"),$e,$sqls);
+logIns(sprintf("%s %s [ID : %s ] %s ¤ò°EÄ%s(%sÈÖ)¤ËÊÂ¤ÙÂØ¤¨¤Þ¤·¤¿¡£",$PARENT,$THIS,$RIREKITITLEID,$RIREKITITLE,($T==1)?"¾E:"²¼",($T==1)?($S-1):($S+1)),getSorC("usr"),$e,$sqls);
 
 echo $o->affected_rows2();
 */

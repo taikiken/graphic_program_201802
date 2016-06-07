@@ -14,6 +14,12 @@ function sprintf(format){
 		return ary[idx++];
 	});
 }
+function in_array(v,ar){
+	for(var i=0;i<ar.length;i++){
+		if(v==ar[i])return true;
+	}
+	return false;
+}
 
 function i(n,f,d){
 	document.getElementById(f).style.display=(n)?"block":"none";
@@ -203,7 +209,9 @@ function deleteWrap(){
 }
 
 $(function(){
-
+	
+	$("[type='checkbox'],[type='radio'],label").css({"cursor":"pointer"});
+	
 	$(".listTable tr").each(function(){
 		if($(this).parents("table").attr("class")=="listTable"){
 			$(this).addClass("bottomborder");
@@ -234,7 +242,7 @@ $(function(){
 	}
 	$(".selectmenu").change(function(){
 		var n=$(":selected",this).index();
-		$.cookie("lasttouch",n);
+		$.cookie("lasttouch",n,{"path":"/editdm"});
 		menuchange(n);
 	});
 	if($.cookie("lasttouch")){
@@ -371,38 +379,12 @@ $(function(){
 	$('.lbbg').mouseover(function(){deleteWrap();});
 	$('#overwrap').click(function(){deleteWrap();$(q).parent().click();});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
 	var d1d2flag=1;
-
 
 	$(".q1").click(function(){
 		
 		if(d1d2flag===0)return;
+		if(cid===1&&dir==1&&fil==0)return;
 		
 		var n=$(this).attr("name");
 		var y=$(this).offset().top+$(this).height()+14;
@@ -452,15 +434,6 @@ $(function(){
 					$(".optionsel li").click(function(){
 						$("input[name='"+n+"']").val($(this).html()!="選択をクリアする"?$(this).html():"");
 						
-						/*
-						
-						運動通信：
-						
-						メディアによって項目を変更する。
-						function: selectedmedia(param:メディアID)
-						
-						*/
-						
 						if(cid===1&&$("[name='p_d1']").val().match(/3|4|5/)){
 							selectedmedia(parseInt($(this).html()));
 						}
@@ -487,209 +460,6 @@ $(function(){
 				$(".optionsel,.optionselbg").hide();
 			});	
 		}
-	});
-
-	function relatedlink(f){
-		if(f===1){
-			$(".inputHeader").each(function(){
-				if($(this).html()=="関連リンク"){
-					$(this).parents("tr").show();
-					$(".t2,.t3,.t4,.t5,.t6,.b2,.b3,.b4,.b5,.b6").show();
-				}
-			});
-		}else{
-			$(".inputHeader").each(function(){
-				if($(this).html()=="関連リンク"){
-					$(this).parents("tr").hide();
-					$(".t2,.t3,.t4,.t5,.t6,.b2,.b3,.b4,.b5,.b6").hide();
-				}
-			});
-		}
-	}
-	function genre(f){
-		if(f===1){
-			$(".inputTitle").each(function(){
-				if($(this).html()=="記事種別"){
-					$(this).parents("tr").show();
-				}
-			});
-		}else{
-			$(".inputTitle").each(function(){
-				if($(this).html()=="記事種別"){
-					$(this).parents("tr").hide();
-				}
-			});
-		}
-	}
-
-	function toggle_options(t,f){
-		t.css({"display":f===1?"block":"none"});
-	}
-
-	function selectedmedia(id){
-		
-		$(".inputCap,.facebook,.t16,.youtube,.t30,.swf,.t8,.a7a8a9a10a11a12").show();
-		
-		/*
-			 	1 : 朝日
-				2 : 日刊スポーツ
-				3 : FINEPLAY
-				4 : FacebookNavi
-				5 : SPOZIUM
-		*/
-		
-		//関連リンク
-		if(id==3||id==8){
-			relatedlink(1);
-		}else{
-			relatedlink(0);
-		}
-		//記事種別
-		if(id==1||id==2){
-			genre(1);
-		}else{
-			genre(0);
-		}
-		
-		//個別
-		if(id==3){
-			toggle_options($(".t30,.swf,.t8,.a7a8a9a10a11a12"),0);
-			$("[name='p_t9']").change(function(){
-				var u=$(this).val().match(/\/([0-9]+)/);
-				$("[name='p_t7']").val(u[1]);
-			});
-		}else if(id==2||id==4||id==8){
-			toggle_options($(".t30,.swf,.inputCap,.t8,.facebook,.t16,.youtube"),0);
-		}
-		
-	}
-
-	function ut_init(){
-		
-		if(cid===1&&(dir==0||dir==1)&&cd=="repo_n"){
-			var ni=$("[name='p_d2']").val();
-			if(ni&&!ni.match(/^[0-9]+$/)){
-				var s=ni.match(/^([0-9]+):/);
-				ni=s[1]-0;
-			}
-			if(dir===0&&fil===0){
-				settime("a1a2a3a4a5a6");
-				settime("a7a8a9a10a11a12");
-				
-				var c=$.cookie("exusername");
-				if(c){
-					$("[name='p_d2']").val(c);
-					$("[name='p_d1']").val($.cookie("exusercategory"));
-					ni=c.match(/^([0-9]+):/)[1]-0;
-				}
-			}
-			if(dir===1&&fil===0){
-				d1d2flag=0;
-				$(".d1d2 td:eq(1)").append("<span class=\"nonedit\"> ※編集できません。</span>");
-				$("[name='p_d1'],[name='p_d2']").css({
-					"backgroundImage":"none",
-					"backgroundColor":"#efefef",
-					"cursor":"default"
-				});
-			}
-			selectedmedia(ni);
-		}
-		
-		if(rid==7){
-			$(".newEntry").hide();
-		}
-		
-		//ヘッドラインならタイトルをDBに読みに行く
-		if(rid==7&&dir==1&&fil===0){
-			if($("[name='p_d2']").val().match(/^[0-9]+$/)){
-				
-				var url="/editdm/repo_n/edit/?nid="+$("[name='p_d2']").val()+"&cid=1";
-				
-				var prevtitle;
-				$("[name='p_d1']").change(function(){
-					$("[name='p_d2']").val("");
-				});
-		
-				$.ajax({
-					type: "POST",
-					url: "/editdm/module/gettitle.php",
-					data: "id="+$("[name='p_d2']").val(),
-					success: function(m){
-						prevtitle=m;
-						$("[name='p_d2']").val(prevtitle);
-						url="/editdm/repo_n/edit/?nid="+$("[name='p_d2']").val().match(/^([0-9]+)$/)[1]+"&cid=1";
-					}
-				});
-			}
-			$(".title .inputFields").append("<span class=\"copytitle\">タイトルをコピー</span><span class=\"editimage\">画像編集</span>");
-			$(".editimage").click(function(){
-				window.open(url);
-			});
-			$(".copytitle").click(function(){
-				var t=$("[name='p_d2']").val().replace(/[0-9]+:\[[0-9: -]+\] /,"");
-				t=t.replace(/\([^)]+\)$/,"");
-				$("[name='p_title']").val(t);
-			});
-		}
-		
-		if(cid==20&&cd=="pm_"){
-			$("#topicPath li:eq(1),.controllMenu").hide();
-		}
-		
-		if(window.location.href.match(/(\/repo_n\/\?cid=1|\/repo_n\/\?cid=([0-9]+)&rid=2)/)){
-			$(".t_numbering,.numbering").hide();
-			$(".t_display,.display").css({"borderLeft":"3px solid #ccc"});
-			$(".display").css({"padding":"5px 0 5px 5px"});
-		}
-		
-		$(".combtn").click(function(){
-			var n=$(this).attr("id").match(/c([0-9]+)/)[1];
-			var f=$(this).attr("src").match(/dis/)?1:0;
-			$.ajax({
-				type:"POST",
-				url:"/editdm/module/commentflagswitch.php",
-				data:"id="+n+"&flag="+f,
-				success:function(m){
-					if(m){
-						$("#c"+n).attr("src",f==1?"/shared/cms/img/cmd_active.gif":"/shared/cms/img/cmd_disactive.gif");
-					}
-				}
-			});
-		});
-	}
-	ut_init();
-
-
-
-	$("[name='p_d2']").change(function(){
-		alert($(this).val())
-	});	
-	$(".orderby,.exuser,.excategory").change(function(){
-		var s=$(this).val();		
-		$.cookie($(this).attr("class").replace(".",""),s,{ path:"/"});
-		location.reload();
-	});
-	function settime(field){
-		field=field.match(/(a[0-9]+)(a[0-9]+)(a[0-9]+)(a[0-9]+)(a[0-9]+)(a[0-9]+)/);
-		var now = new Date();
-		var u=[];
-		u[0]=now.getFullYear();
-		u[1]=now.getMonth()+1;
-		u[2]=now.getDate();
-		u[3]=now.getHours();
-		u[4]=now.getMinutes();
-		u[5]=now.getSeconds();
-		for(var i=0;i<u.length;i++){
-			if(i!=0)if(u[i]<=9)u[i]="0"+u[i];	
-			$("[name='p_"+field[(i+1)]+"']").val(u[i]);
-			
-		}
-	}
-	$(".btncurrenttime").click(function(){
-		settime($(this).parents("tr").attr("class"));
-	});	
-	$(".btnpreview").click(function(){
-		window.open("https://www.undotsushin.com/p/"+$("[name='p_d2']").val().match(/^([0-9]+):/)[1]);
 	});
 	
 });

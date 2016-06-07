@@ -65,48 +65,29 @@
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
-<?php
-/*
-https://github.com/undotsushin/undotsushin/issues/714
-広告がAPI管理下になることによりコメントにしました
-@from 2016-06-06
-
         <div class="sponsor-link w728">
+
           <?php
-
-          # #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
-          # Adsense 差し替え
-
+          /*
+          # pc_single_top
+          */
           ?>
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- デスクトップ - 記事詳細 - タイトル下部 -->
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:728px;height:90px"
-               data-ad-client="ca-pub-8613117509675807"
-               data-ad-slot="2392569578"></ins>
-          <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
+          <script type='text/javascript'>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.enableServices();
+            });
           </script>
+          <div id='div-gpt-ad-pc_single_top' style='height:90px; width:728px;'>
+          <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_top'); });
+          </script>
+          </div>
+
         </div>
 
-*/
-?>
-
-<?php
-// 広告 hash
-$response_ad = $page['post']['ad']['pc'];
-
-// 記事上部
-if ( !empty($response_ad) && !empty($response_ad['single_top']) ) :
-?>
-<div id="div-gpt-ad-<?php echo $response_ad['single_top'] ?>" class="sponsor-link w728">
-<script type='text/javascript'>
-  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1464094621428-0'); });
-</script>
-</div>
-<?php
-endif;
-?>
         <?php /* div.post-kv */ ?>
         <div id="single-visual-container"></div>
 
@@ -225,6 +206,86 @@ endif;
 
       </div><!-- /.comment -->
 
+      <?php
+      /*
+      必要ないとのことなので front からの出力をやめる
+      静的HTMLに置きかえる
+      <div id="single-related-container"></div>
+
+      pop in 始まったようなのでコメントにする
+      ToDo: 削除可能確認できたらブロックごと削除する
+
+      <div class="related-post">
+        <div class="comment-heading">
+          <h2>関連ニュース</h2>
+        </div><!-- /.comment-heading -->
+
+        <ul class="board-small column2">
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">野球</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_2.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">MLB</p>
+                <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_3.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">格闘技</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_4.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">ラグビー</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_5.jpg" alt=""></figure>
+              <div class="post-data">
+                <p class="post-category">モータースポーツ</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+          <li class="board-item">
+            <a class="post" href="hoge">
+              <figure class="post-thumb">&nbsp;</figure>
+              <div class="post-data">
+                <p class="post-category">海外サッカー</p>
+                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
+                <p class="post-date">12月18日(金) 22:04</p>
+              </div><!-- /.post-data -->
+            </a>
+          </li>
+        </ul>
+
+      </div><!-- /.related-post -->
+*/ ?>
+
       <!-- #310 popin ebmed code  -->
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
@@ -241,70 +302,9 @@ endif;
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
-<?php
-/*
-https://github.com/undotsushin/undotsushin/issues/714
-広告がAPI管理下になることによりコメントにしました
-@from 2016-06-06
 
-            <div class="sponsor-link">
-              <?php
+      <?php include_once __DIR__."/_sidebar_ad.php"; ?>
 
-              # #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
-              # Adsense 差し替え
-
-        ?>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- デスクトップ - サイドバー - 上 -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:300px;height:250px"
-             data-ad-client="ca-pub-8613117509675807"
-             data-ad-slot="8203159173"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-*/
-?>
-      <div id="sidebar-sponsor-top-container"></div>
-
-      <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
-
-      <div id="widget-ranking-container"></div><!--/ranking-->
-      <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
-        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
-      </div>
-
-      <div id="widget-recommend-container"></div><!--/videos-->
-      <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
-        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
-      </div>
-
-<?php
-/*
-https://github.com/undotsushin/undotsushin/issues/714
-広告がAPI管理下になることによりコメントにしました
-@from 2016-06-06
-            <div class="sponsor-link nadir">
-              <?php
-
-              # #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
-              # Adsense 差し替え
-
-        ?>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- デスクトップ - サイドバー - 下 -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:300px;height:600px"
-             data-ad-client="ca-pub-8613117509675807"
-             data-ad-slot="5110091971"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-*/
-?>
-      <div id="sidebar-sponsor-bottom-container"></div>
     </section><!-- /.side-sec -->
 
   </div>

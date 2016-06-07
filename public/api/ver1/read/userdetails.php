@@ -12,7 +12,7 @@ $f=set_user($uid,$_REQUEST["userid"]);
 if($y["status"]["code"]===200){
 	
 	$category=array();
-	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from pm_ where cid=20) as t2 where t1.categoryid=t2.id order by id",$f["userid"]);
+	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from u_categories) as t2 where t1.categoryid=t2.id order by id",$f["userid"]);
 	$o->query($sql);
 	
 	$n=0;
@@ -26,7 +26,28 @@ if($y["status"]["code"]===200){
 	$s=set_userinfo($f,1);
 
 }else{
-	$s=(object)$s;
+	
+	if(preg_match("/com\.limret\.undotsushin/",$_SERVER['HTTP_USER_AGENT'])){
+	
+		$y["status"]["code"]=200;
+		$y["status"]["message_type"]="error";
+		$y["status"]["user_message"]="ユーザが指定されておりません。";
+		$y["status"]["developer_message"]="ユーザIDが取得できない。";
+		
+		$empty["id"]="";
+		$empty["name"]="";
+		$empty["email"]="";
+		$empty["profile_picture"]="http://dev.undotsushin.com/users/img/icon_noimg.png";
+		$empty["bio"]="";
+		$empty["url"]="";
+		$empty["type"]=(object)array();
+		$empty["interest"]=array();
+	
+		$s=$empty;
+		
+	}else{
+		$s=(object)$s;
+	}
 }
 
 $y["response"]=$s;

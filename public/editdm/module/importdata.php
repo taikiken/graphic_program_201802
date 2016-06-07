@@ -12,7 +12,7 @@ $s=str_replace(array("＞","＜"),array(">","<"),$s);
 $o->query($s);
 
 while($f=$o->fetch_array()){
-	$p[]=sprintf("<li>%s:%s</li>",$f["id"],$f["title"]);
+	$p[]=sprintf("<li>%s:%s</li>",$f["id"],preg_replace("/(\r|\n)/","",$f["title"]));
 }
 
 header("Content-Type:text/html;charset=utf-8");

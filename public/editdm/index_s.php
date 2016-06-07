@@ -22,6 +22,8 @@ include $INCLUDEPATH."local.php";
 <script type="text/javascript">
 var dir=5;
 var fil=5;
+var cid=5;
+var rid=5;
 </script>
 <title><?php printf("%s WEB サイト管理画面",$SITE); ?></title>
 </head>
@@ -66,40 +68,28 @@ var fil=5;
 <tr>
 <td class="menuChild"><a href="./authentic/" class="folder">投稿者管理</a></td>
 </tr>
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
-</tr>
 <?php } ?>
 <?php if(getSorC("categoryadmin")=="1"){ ?>
 <tr>
-<td class="menuChild"><a href="./repo/" class="folder">セクション管理</a></td>
+<td class="menuChild"><a href="./toolhead/" class="folder">管理パーツ</a></td>
 </tr>
 <tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
+<td class="menuChild"><a href="./repo/" class="folder">セクション管理</a></td>
 </tr>
 <?php } ?>
 <?php if(getSorC("master")=="1"){ ?>
 <tr>
 <td class="menuChild"><a href="./pm/" class="folder">マスタ管理</a></td>
 </tr>
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
-</tr>
 <?php } ?>
 <?php if(getSorC("environment")=="1"){ ?>
 <tr>
 <td class="menuChild"><a href="./confs/edit/" class="folder">システム環境設定</a></td>
 </tr>
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
-</tr>
 <?php } ?>
 <?php if(getSorC("formtemplate")=="1"){ ?>
 <tr>
 <td class="menuChild"><a href="./mailtemplate/" class="folder">フォームテンプレート</a></td>
-</tr>
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
 </tr>
 <?php } ?>
 <?php } ?>
@@ -111,9 +101,6 @@ var fil=5;
 <tr>
 <td class="menuChild"><a href="/tests" target="_blank"><img src="/shared/cms/img/icon_browser.gif" alt="インデックスページをブラウザでプレビューする" width="16" height="16" ></a><a href="/rss/" target="_blank"><img src="/shared/editor/rss.gif" alt="Web サイト全体のの RSS をプレビュー" width="16" height="16" border="0"></a><a href="#" onclick="logswitcher(0,0)"><img src="/shared/cms/img/icon_log.gif" alt="<?=str_replace($a[$i],'',$f["name"])?>アクセス状況を見る" width="16" height="16" ></a><a>トップページ情報管理</a></td>
 <td class="" scope="col" width="40"><a<?php if(getSorC("edit")==1){ ?> href="./edit/?<?=$EDITDELETEINITIAL?>id=<?=$p[$i]["id"]?>&<?=$g->g_url()?><?php if($CURRENTDIRECTORY=="repo_e"){ ?>&types=<?=$p[$i]["types"]?><?php } ?>"<?php } ?> class="edit<?php if(getSorC("edit")!=1){ ?>_disabled<?php } ?>">編集</a></td>
-</tr>
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
 </tr>
 -->
 <?php
@@ -135,9 +122,6 @@ for($i=0;$i<count($p);$i++){
 <?php if(strlen($p[$i]["directory4"])>0){ ?><a href="<?=rewrite($p[$i]["directory4"],$p[$i])?>" target="_blank"><img src="/shared/cms/img/icon_browser.gif" alt="<?=str_replace($a[$i],'',$p[$i]["name"])?>インデックスページをブラウザでプレビューする" width="16" height="16" ></a><?php } ?><a href="repo_<?=(!$p[$i]["c_flag"])?"n":"s"?>/?<?=(!$p[$i]["c_flag"])?"c":"r"?>id=<?=$p[$i]["id"]?>" class="folder"><?=str_replace($a[$i],'',$p[$i]["name"])?>情報管理</a>
 </td>
 </tr>
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
-</tr>
 <?php } ?>
 <?php } ?>
 
@@ -152,9 +136,6 @@ for($i=0;$i<count($p);$i++){
 </tr>
 
 
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
-</tr>
 -->
 <!--
 <tr>
@@ -166,13 +147,7 @@ for($i=0;$i<count($p);$i++){
 </tr>
 
 <tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
-</tr>
-<tr>
 <td class="menuChild"><a href="./trackback/">トラックバック管理</a></td>
-</tr>
-<tr>
-<td class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" ></td>
 </tr>
 <tr>
 <td class="menuChild"><a href="./clickenquete/">クリックアンケート管理</a></td>
