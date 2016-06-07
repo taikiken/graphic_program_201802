@@ -7,17 +7,16 @@ $is_pc_sidebar_top = false;
 $is_pc_sidebar_bottom = false;
 if ( $page['template'] == 'p' ) {
   // 記事詳細
-  $is_pc_sidebar_top = !empty($page['post']['ad']['pc']['sidebar_top']) && $page['post']['ad']['pc']['sidebar_top'] == 'is_pc_sidebar_top';
-  $is_pc_sidebar_bottom = !empty($page['post']['ad']['pc']['sidebar_bottom']) && $page['post']['ad']['pc']['sidebar_bottom'] == 'is_pc_sidebar_bottom';
+  $is_pc_sidebar_top = !empty($page['post']['ad']['pc']['sidebar_top']) && $page['post']['ad']['pc']['sidebar_top'] == 'pc_sidebar_top';
+  $is_pc_sidebar_bottom = !empty($page['post']['ad']['pc']['sidebar_bottom']) && $page['post']['ad']['pc']['sidebar_bottom'] == 'pc_sidebar_bottom';
 } else {
   // 詳細以外
-  $is_pc_sidebar_top = !empty($page['category']['ad']['pc']['sidebar_top']) && $page['category']['ad']['pc']['sidebar_top'] == 'is_pc_sidebar_top';
-  $is_pc_sidebar_bottom = !empty($page['category']['ad']['pc']['sidebar_bottom']) && $page['category']['ad']['pc']['sidebar_bottom'] == 'is_pc_sidebar_bottom';
+  $is_pc_sidebar_top = !empty($page['category']['ad']['pc']['sidebar_top']) && $page['category']['ad']['pc']['sidebar_top'] == 'pc_sidebar_top';
+  $is_pc_sidebar_bottom = !empty($page['category']['ad']['pc']['sidebar_bottom']) && $page['category']['ad']['pc']['sidebar_bottom'] == 'pc_sidebar_bottom';
 }
 
 // index は必ず表示
 $in_pc_home = $page['template'] == 'index';
-
 // ------------------------------------
 // sidebar top
 if ( $is_pc_sidebar_top || $in_pc_home ) :
