@@ -32,12 +32,10 @@ export let SPTabNode = React.createClass( {
   render: function() {
     let css = {};
 
-    // if ( this.state.display ) {
-    //   css.display = 'block';
-    // } else {
-    //   css.display = 'none';
-    // }
-
+    if ( !this.state.display ) {
+      css.display = 'none';
+    }
+    // console.log( 'css', this.state.display, css );
     return (
       <nav className={`lnav ${this.state.fixed} ${this.state.current}`}>
         <ul className="lnav-list">
@@ -60,19 +58,19 @@ export let SPTabNode = React.createClass( {
       </nav>
     );
   },
-  componentDidMount: function() {
-
-  },
-  componentWillUnMount: function() {
-
-  },
+  // componentDidMount: function() {
+  //
+  // },
+  // componentWillUnMount: function() {
+  //
+  // },
   latestClick( event:Event ):void {
     event.preventDefault();
 
-    // // 他のタブが非表示なので何もしない
-    // if ( !this.state.display ) {
-    //   return;
-    // }
+    // 他のタブが非表示なので何もしない
+    if ( !this.state.display ) {
+      return;
+    }
 
     this.props.callback( 'latest' );
     this.setState( { current: 'latest' } );
@@ -87,7 +85,8 @@ export let SPTabNode = React.createClass( {
     this.props.callback( 'videos' );
     this.setState( { current: 'videos' } );
   },
-  activateTab():void {
-    this.setState( { display: true } );
+  activateTab( filter:Boolean ):void {
+    // console.log( 'activateTab', filter );
+    this.setState( { display: !!filter } );
   }
 } );

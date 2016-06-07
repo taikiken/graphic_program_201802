@@ -127,12 +127,13 @@ export class SPViewCategoryRoot extends View {
       componentDidMount: function() {
         this.tab();
         // after mount, request API
-        this.latestInfo = this.latest();
+        this.latest();
         // this.ranking();
         // this.videos();
       },
       slugDone: function( result:CategoriesSlugDae ) {
-        this.tabNode.updateInfo( result );
+        // console.log( 'slugDone', result );
+        this.tabNode.activateTab( result.isShowFilter );
       },
       // --------------------------------------
       // custom
@@ -142,6 +143,7 @@ export class SPViewCategoryRoot extends View {
         let element = ReactDOM.findDOMNode(this.refs.latestElement);
         let moreElement = ReactDOM.findDOMNode(this.refs.latestMoreElement);
         let callback = {};
+        callback[ SPViewCategoryWithSlug.CATEGORY_INFO ] = this.slugDone;
         // let category = new SPViewCategory( this.props.slug, element, moreElement, callback );
         let category = new SPViewCategoryWithSlug( this.props.slug, element, moreElement, callback );
         category.start();
