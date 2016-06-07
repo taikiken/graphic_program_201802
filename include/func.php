@@ -94,7 +94,7 @@ function make_contentsblock($type,$title,$media,$link){
 			$l=sprintf("<div class=\"cms_img\"><img src=\"/prg_img/img/%s\">%s</div>",$media,(strlen($title)>0)?sprintf("<div class=\"caption\"><span>%s</span></div>",$title):"");
 		}
 	}elseif($type==3){
-		$l=sprintf("<div class=\"cms_video\"><div class=\"youtube\"><iframe width=\"640\" height=\"375\" src=\"http://www.youtube.com/embed/%s?rel=0&showinfo=0\" frameborder=\"0\" allowfullscreen></iframe></div>%s</div>",$media,(strlen($title)>0)?sprintf("<div class=\"caption\"><span>%s</span></div>",$title):"");
+		$l=sprintf("<div class=\"cms_video\"><div class=\"youtube\"><iframe width=\"728\" height=\"410\" src=\"http://www.youtube.com/embed/%s?rel=0&showinfo=0\" frameborder=\"0\" allowfullscreen></iframe></div>%s</div>",$media,(strlen($title)>0)?sprintf("<div class=\"caption\"><span>%s</span></div>",$title):"");
 	}elseif($type==4){
 		$l=sprintf("<div class=\"cms_table\">%s</div>",modDispText($title,$media));
 	}elseif($type==5){
