@@ -43,16 +43,38 @@ export class SPViewRanking extends ViewRanking {
    */
   constructor( element:Element, moreElement:Element, option:Object = {}, slug:string = 'all' ) {
     super( element, option, slug, Length.archive );
-
+    /**
+     * JSON 取得毎に追加します<br>
+     * React は append 機能がないので表示データをすべて配列で保持します
+     * @type {Array}
+     * @protected
+     */
     this._articles = [];
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
+    /**
+     * SPArchiveNode instance を保持します<br>
+     * first render を区別するためにも使用します
+     * @type {null|SPArchiveNode}
+     * @protected
+     */
     this._articleRendered = null;
-    // more button instance を保持します
+    /**
+     * SPMoreViewNode instance を保持します
+     * @type {null|SPMoreViewNode}
+     * @protected
+     */
     this._moreRendered = null;
-
+    /**
+     * more button element
+     * @type {Element}
+     * @protected
+     */
     this._moreElement = moreElement;
-
+    /**
+     * home(index)か否かのフラッグ（真偽値）
+     * @type {boolean}
+     * @protected
+     * @default false
+     */
     this._home = false;
   }
   /**
@@ -127,6 +149,7 @@ export class SPViewRanking extends ViewRanking {
           action={this.action}
           slug={this.slug}
           type="ranking"
+          home={this._home}
         />,
         this._moreElement
       );

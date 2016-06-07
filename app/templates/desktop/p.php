@@ -77,6 +77,15 @@ endif;
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
+<?php
+/*
+ * https://github.com/undotsushin/undotsushin/issues/720
+ * 広告 / PC版画像バナー広告をDFP管理下にする
+ */
+if( !empty($page['post']['ad']['pc']['single_top']) && $page['post']['ad']['pc']['single_top'] == 'pc_single_top' ) :
+// ------------------------------------
+// single top
+?>
         <div class="sponsor-link w728">
 
           <?php
@@ -99,7 +108,10 @@ endif;
           </div>
 
         </div>
-
+<?php
+endif;
+// eof: single top
+// ------------------------------------ ?>
         <?php /* div.post-kv */ ?>
         <div id="single-visual-container"></div>
 
@@ -197,18 +209,57 @@ endif;
             </dl><!-- /.post-sns-pr-inner -->
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
-
+<?php
+/*
+ * https://github.com/undotsushin/undotsushin/issues/720
+ * 広告 / PC版画像バナー広告をDFP管理下にする
+ */
+$single_bottom_left = $page['post']['ad']['pc']['single_bottom_left'];
+$single_bottom_right = $page['post']['ad']['pc']['single_bottom_right'];
+// ------------------------------------
+// single bottom
+if ( !empty( $single_bottom_left ) || !empty($single_bottom_right) ) :
+?>
         <div class="sponsor-link">
           <div class="sponsor-link column2">
+            <?php
+            // left
+            if ( !empty( $single_bottom_left ) ) :
+            ?>
             <div class="sponsor-link-item">
+              <?php
+              /*
+              # 保険のために original を残します
+              # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35119&targetID=adg_35119&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+              */ ?>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $single_bottom_left; ?>&targetID=adg_<?php echo $single_bottom_left; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
             </div>
+            <?php
+            endif;
+            // ------------------------------------
+
+            // right
+            if ( !empty( $single_bottom_right ) ) :
+            ?>
             <div class="sponsor-link-item">
+              <?php
+              /*
+              # 保険のために original を残します
+              # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-            </div>
+              */ ?>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $single_bottom_right; ?>&targetID=adg_<?php echo $single_bottom_right; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+              </div>
+              <?php
+            endif;
+            // ------------------------------------ ?>
           </div>
         </div>
-
+<?php
+endif;
+// eof: single bottom
+// ------------------------------------ ?>
       </div><!-- /.post-detail -->
       <div class="comment">
 
