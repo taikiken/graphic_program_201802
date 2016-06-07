@@ -1,3 +1,9 @@
+<?php
+// ----------------------------------------------------
+// PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
+// https://github.com/undotsushin/undotsushin/issues/645#issuecomment-223527274
+if ( empty( $page[ 'category' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) :
+?>
 <div class="category-heading">
   <h1>
     <?php echo $page['category']['label']; ?>
@@ -8,6 +14,10 @@
     <?php endif; ?>
   </h1>
 </div><!-- /.category-heading -->
+<?php
+endif;
+// eof: PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
+// ---------------------------------------------------- ?>
 
 <div class="body-sec">
   <div class="body-sec-inner">
@@ -16,9 +26,11 @@
     // 記事詳細: pc
     // response.theme.images.pc
     // response.description
-    if ( !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) : ?>
+    if ( !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) :
+    // 記事詳細で冒頭バナーにリンク設定
+    // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616 ?>
       <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
       </div>
     <?php endif;
     // eof: 記事詳細: pc
@@ -112,36 +124,40 @@
         // ----------------------------------------------------
         // 記事詳細: pc 媒体ロゴ
         if ( !empty( $page['post'] ) && !empty( $page['post']['user'] ) ) :
-        ?>
-        <div class="provider mt30">
-          <?php
-          // user.logo.image
-          if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['img'] ) ) :
-          ?>
-            <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
-          <?php endif;
-          //----[image] ?>
-          <div class="provider-data">
-            <?php
-            // user.name
-            if ( !empty($page['post']['user']['name']) ) :
-            ?>
-            <p class="provider-name"><?php echo $page['post']['user']['name']; ?></p>
-            <?php
-            endif;
-            //----[name]
 
-            // user.logo.link
-            if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) :
-            ?>
-            <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><?php echo $page['post']['user']['logo']['link']; ?></a></p>
+          $is_post_usr_logo = !empty( $page['post']['user']['logo'] );
+
+          $post_user_logo_link = '';
+          if ( $is_post_usr_logo && !empty( $page['post']['user']['logo']['link'] ) ) {
+            $post_user_logo_link = $page['post']['user']['logo']['link'];
+          }
+          ?>
+          <div class="provider mt30">
             <?php
-            endif;
-            //----[link] ?>
-          </div>
-        </div><!-- /.provider -->
-        <?php
-        endif;
+            // user.logo.image
+            if ( $is_post_usr_logo && !empty( $page['post']['user']['logo']['img'] ) ) :
+              if ( empty($post_user_logo_link) ) :
+                // link が存在しないので画像だけ表示します ?>
+                <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
+              <?php else: // link + image を表示 ?>
+                <a href="<?php echo $post_user_logo_link; ?>" target="_blank"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
+              <?php endif; ?>
+            <?php endif; //----[image] ?>
+            <div class="provider-data">
+              <?php
+              // user.name
+              if ( !empty($page['post']['user']['name']) ) : ?>
+                <p class="provider-name"><?php echo $page['post']['user']['name']; ?></p>
+              <?php endif; //----[name]
+
+              // user.logo.link
+              // link が存在する時のみ表示します
+              if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><?php echo $page['post']['user']['logo']['link']; ?></a></p>
+              <?php endif; //----[link] ?>
+            </div>
+          </div><!-- /.provider -->
+        <?php endif;
         // eof: 記事詳細: pc 媒体ロゴ
         // ---------------------------------------------------- ?>
         <div id="single-footer-container"></div>
@@ -205,86 +221,6 @@
         <div id="comment-normal-container"></div>
 
       </div><!-- /.comment -->
-
-      <?php
-      /*
-      必要ないとのことなので front からの出力をやめる
-      静的HTMLに置きかえる
-      <div id="single-related-container"></div>
-
-      pop in 始まったようなのでコメントにする
-      ToDo: 削除可能確認できたらブロックごと削除する
-
-      <div class="related-post">
-        <div class="comment-heading">
-          <h2>関連ニュース</h2>
-        </div><!-- /.comment-heading -->
-
-        <ul class="board-small column2">
-          <li class="board-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_1.jpg" alt=""></figure>
-              <div class="post-data">
-                <p class="post-category">野球</p>
-                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
-                <p class="post-date">12月18日(金) 22:04</p>
-              </div><!-- /.post-data -->
-            </a>
-          </li>
-          <li class="board-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_2.jpg" alt=""></figure>
-              <div class="post-data">
-                <p class="post-category">MLB</p>
-                <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
-                <p class="post-date">12月18日(金) 22:04</p>
-              </div><!-- /.post-data -->
-            </a>
-          </li>
-          <li class="board-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_3.jpg" alt=""></figure>
-              <div class="post-data">
-                <p class="post-category">格闘技</p>
-                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
-                <p class="post-date">12月18日(金) 22:04</p>
-              </div><!-- /.post-data -->
-            </a>
-          </li>
-          <li class="board-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_4.jpg" alt=""></figure>
-              <div class="post-data">
-                <p class="post-category">ラグビー</p>
-                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
-                <p class="post-date">12月18日(金) 22:04</p>
-              </div><!-- /.post-data -->
-            </a>
-          </li>
-          <li class="board-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb"><img src="/assets/images/dummy/thumb-70x70_5.jpg" alt=""></figure>
-              <div class="post-data">
-                <p class="post-category">モータースポーツ</p>
-                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
-                <p class="post-date">12月18日(金) 22:04</p>
-              </div><!-- /.post-data -->
-            </a>
-          </li>
-          <li class="board-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">&nbsp;</figure>
-              <div class="post-data">
-                <p class="post-category">海外サッカー</p>
-                <h3 class="post-heading">全角３６文字タイトルが入りますタイトルが入りますタイトルが入りますタイ…</h3>
-                <p class="post-date">12月18日(金) 22:04</p>
-              </div><!-- /.post-data -->
-            </a>
-          </li>
-        </ul>
-
-      </div><!-- /.related-post -->
-*/ ?>
 
       <!-- #310 popin ebmed code  -->
       <?php if ( $page['category']['label'] ) : ?>

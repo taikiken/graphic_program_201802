@@ -138,7 +138,7 @@ if ( $page['template'] == 'p' ) {
 
   // theme 設定 class を追加
   // JSON レスポンスの theme.base を CSS class へ追加します
-  if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
+  if ( !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
     $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
   }
 }
@@ -180,12 +180,9 @@ if ( $page_has_header ) :
       <ul id="gnav-sec-list">
         <li id="home" class="gnav-home"><a href="/">一面</a></li>
 
-          <li id="crazy" class="gnav-crazy"><a href="/category/crazy/">CRAZY</a></li>
-
         <?php foreach( $page[ 'site_categories' ] as $category ) {
-          if ( $category[ 'slug' ] == 'crazy' ) {
-            continue;
-          }
+          // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
+          // タブの表示順はAPI通りにする
           ?>
           <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
             <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>

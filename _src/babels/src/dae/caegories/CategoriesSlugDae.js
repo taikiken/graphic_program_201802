@@ -18,28 +18,47 @@ import {AdDae} from '../theme/AdDae';
 import {BannersDae} from '../banner/BannersDae';
 
 /**
- * 特定のカテゴリー情報を取得する
- * ※主に企画モノの記事一覧ページを生成するにあたり利用する
+ * <p>特定のカテゴリー情報を取得する<br>
+ * ※主に企画モノの記事一覧ページを生成するにあたり利用する</p>
  *
  * `/api/v1/category/[:category_slug]`
  */
 export class CategoriesSlugDae {
   /**
    * `/api/v1/category/[:category_slug]`
-   * JSON.response を管理します
+   * <p>JSON.response を管理します</p>
    * @param {Object} response JSON.response
    */
   constructor( response:Object = {} ) {
     response = Safety.object( response );
-    
+    /**
+     * response.theme
+     * @type {ThemeDae}
+     * @protected
+     */
     this._theme = new ThemeDae( response.theme );
     // let banner = Safety.object( response.banner );
     // this._banner = {
     //   pc: new BannerDae( banner.pc ),
     //   sp: new BannerDae( banner.sp )
     // };
+    /**
+     * response.banner
+     * @type {BannersDae}
+     * @protected
+     */
     this._banner = new BannersDae( response.banner );
+    /**
+     * response.ad
+     * @type {AdDae}
+     * @protected
+     */
     this._ad = new AdDae( response.ad );
+    /**
+     * JSON.response
+     * @type {Object}
+     * @protected
+     */
     this._response = response;
   }
   // ---------------------------------------------------
@@ -127,5 +146,18 @@ export class CategoriesSlugDae {
    */
   get ad():AdDae {
     return this._ad;
+  }
+  /**
+   * response.is_show_filter
+   * <pre>
+   * iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ
+   * - true  : 表示する
+   * - false : 表示しない
+   * </pre>
+   * @from 2016-06-06
+   * @return {Boolean} iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ（真偽値）を返します
+   */
+  get isShowFilter():Boolean {
+    return this.response.is_show_filter;
   }
 }

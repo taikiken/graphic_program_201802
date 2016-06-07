@@ -17,7 +17,21 @@ import {Safety} from '../../data/Safety';
 let React = self.React;
 
 /**
- * 記事詳細 user banner
+ * <p>記事詳細 user banner<p>
+ * 記事本文とタグの間
+ * @example
+ * <div data-reactroot="" class="post-footer">
+ *  <div class="sponsor-link editor-bnr">
+ *    <a href=""><img src=""></a>
+ *  </div>
+ *  <div class="post-tags">
+ *    <h2 class="post-tags-heading">TAGS</h2>
+ *    <ul class="post-tags-list">
+ *      <li class="post-tags-item"><a href="/search/アマ野球">アマ野球</a></li>
+ *    </ul>
+ *  </div>
+ * </div>
+ *
  * @type {*|Function|ReactClass}
  */
 export let BannerNode = React.createClass( {
