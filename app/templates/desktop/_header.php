@@ -87,7 +87,7 @@ $template_name = $page['template'];
 $whole_classes = array();
 
 // $page['template_classname'] に設定されている CSS class を追加します
-if ( !empty( $page['template_classname'] ) ) {
+if ( isset( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
@@ -97,7 +97,7 @@ if ( $template_name == 'p' ) {
 
   // theme 設定 class を追加
   // JSON レスポンスの theme.base を CSS class へ追加します
-  if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
+  if ( isset( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
     $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
   }
 }
@@ -105,7 +105,7 @@ if ( $template_name == 'p' ) {
 // in category
 if ( $template_name == 'category' ) {
   // template_classname があれば
-  if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
+  if ( isset($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
     $whole_classes[] = $page[ 'template_classname' ];
   }
 }
