@@ -83,6 +83,13 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
      */
     this.waiting = 0;
   }
+  /**
+   * CATEGORY_INFO, ModelCategoriesSlug success event
+   * @return {string} spViewCategoryWidthSlugCategoryInfo event type
+   */
+  static get CATEGORY_INFO():string {
+    return 'spViewCategoryWidthSlugCategoryInfo';
+  }
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
@@ -163,7 +170,9 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
       this.wait();
     }
 
-    this._categoryInfo = new CategoriesSlugDae( response );
+    let categoryInfo = new CategoriesSlugDae( response );
+    this._categoryInfo = categoryInfo;
+    this.executeSafely( SPViewCategoryWithSlug.CATEGORY_INFO, categoryInfo );
     this.wait();
   }
 
