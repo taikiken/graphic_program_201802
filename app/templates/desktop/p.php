@@ -1,3 +1,9 @@
+<?php
+// ----------------------------------------------------
+// PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
+// https://github.com/undotsushin/undotsushin/issues/645#issuecomment-223527274
+if ( empty( $page[ 'category' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) :
+?>
 <div class="category-heading">
   <h1>
     <?php echo $page['category']['label']; ?>
@@ -8,6 +14,10 @@
     <?php endif; ?>
   </h1>
 </div><!-- /.category-heading -->
+<?php
+endif;
+// eof: PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
+// ---------------------------------------------------- ?>
 
 <div class="body-sec">
   <div class="body-sec-inner">
@@ -16,9 +26,11 @@
     // 記事詳細: pc
     // response.theme.images.pc
     // response.description
-    if ( !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ] ) && !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) : ?>
+    if ( !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) :
+    // 記事詳細で冒頭バナーにリンク設定
+    // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616 ?>
       <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
       </div>
     <?php endif;
     // eof: 記事詳細: pc

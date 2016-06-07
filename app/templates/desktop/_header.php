@@ -97,7 +97,7 @@ if ( $template_name == 'p' ) {
 
   // theme 設定 class を追加
   // JSON レスポンスの theme.base を CSS class へ追加します
-  if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
+  if ( !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
     $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
   }
 }
