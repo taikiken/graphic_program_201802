@@ -27,10 +27,7 @@ $articletable="
 	facebook,
 	m_time,
 	t8 as videocaption,
-<<<<<<< HEAD
-=======
 	t9,
->>>>>>> master
 	(select name from u_categories where id=m1) as category,
 	(select name_e from u_categories where id=m1) as slug,
 	(case when m2 is not null then (select name from u_categories where id=m2) else null end)  as category2,
@@ -66,10 +63,7 @@ $articletable2="
 	facebook,
 	m_time,
 	t8 as videocaption,
-<<<<<<< HEAD
-=======
 	t9,
->>>>>>> master
 	(select name from u_categories where id=m1) as category,
 	(select name_e from u_categories where id=m1) as slug,
 	(case when m2 is not null then (select name from u_categories where id=m2) else null end)  as category2,
@@ -290,11 +284,6 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 	return $s;
 }
 
-<<<<<<< HEAD
-
-function set_articleinfo($f,$type=0){
-	
-=======
 function set_categoriesinfo($f){
 	
 	global $ImgPath,$domain;
@@ -316,7 +305,6 @@ function set_categoriesinfo($f){
 
 function set_articleinfo($f,$type=0,$canonical){
 	
->>>>>>> master
 	/*
 		$type:0 記事一覧　$type:1 記事詳細
 	*/
@@ -340,14 +328,11 @@ function set_articleinfo($f,$type=0,$canonical){
 		$s["body"]=$body;
 		$s["body_escape"]=stripbr($f["body"]);
 	}
-<<<<<<< HEAD
-=======
 
 	if($canonical==1){
 		$s["canonical"]["is_canonical"]=$f["canonical"]?true:false;
 		$s["canonical"]["url"]=$f["t9"];
 	}
->>>>>>> master
 	
 	$s["category"]["label"]=$f["category"]; 
 	$s["category"]["slug"]=$f["slug"]; 
