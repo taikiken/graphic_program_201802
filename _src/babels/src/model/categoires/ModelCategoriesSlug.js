@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/09 - 14:45
+ * @date 2016/06/07 - 18:31
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,26 +11,29 @@
  */
 
 import {Model} from '../Model';
-import {Categories} from '../../action/categories/Categories';
-import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
+import {CategoriesSlug} from '../../action/categories/CategoriesSlug';
+import {CategoriesSlugDae} from '../../dae/caegories/CategoriesSlugDae';
 import {Result} from '../../data/Result';
 
 /**
- * カテゴリー一覧を取得
+ * 記事カテゴリー情報を取得します
+ *
+ * @from 2016-05-28
  */
-export class ModelCategories extends Model {
+export class ModelCategoriesSlug extends Model {
   /**
-   * カテゴリー一覧を取得し callback を発火します
-   * @param {Object} [option={}] optional event handler
+   * Action class CategoriesSlug を使用し記事カテゴリー情報を取得します
+   * @param {string} [slug=all] 取得対象 category slug
+   * @param {Object} [option] callback handler
    */
-  constructor( option:Object = {} ) {
+  constructor( slug:string, option:Object = {} ) {
     super( option );
     /**
-     * Action class (Categories) instance を保持します
-     * @type {Categories}
+     * Action class (CategoriesSlug) instance を保持します
+     * @type {CategoriesSlug}
      * @protected
      */
-    this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
+    this._action = new CategoriesSlug( slug, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します
@@ -58,7 +61,7 @@ export class ModelCategories extends Model {
     } else {
 
       // 成功 callback
-      this.executeSafely( Model.COMPLETE, new CategoriesDae( response ) );
+      this.executeSafely( Model.COMPLETE, new CategoriesSlugDae( response ) );
 
     }
 

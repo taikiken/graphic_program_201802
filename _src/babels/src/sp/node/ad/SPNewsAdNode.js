@@ -31,7 +31,9 @@ export let SPNewsAdNode = React.createClass( {
     uniqueId: React.PropTypes.string.isRequired,
     // 広告をinsertするか
     // ranking / video も共通で使うので on, off スイッチを用意する
-    enable: React.PropTypes.bool
+    enable: React.PropTypes.bool,
+    // ストリーム広告
+    adSp: React.PropTypes.string.isRequired
   },
   getDefaultProps: function() {
     return {
@@ -52,6 +54,12 @@ export let SPNewsAdNode = React.createClass( {
     };
   },
   render: function() {
+    // ストリーム広告
+    // ID 設定がなかったら出力しない
+    if ( this.props.adSp === '' ) {
+      return null;
+    }
+
     // ad element を返し
     // ok property を true にする
     let enableAd = () => {
@@ -80,7 +88,8 @@ export let SPNewsAdNode = React.createClass( {
   },
   componentDidMount: function() {
     if ( this.ok ) {
-      ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.make( Ad.SP_NEWS, this.props.uniqueId ) );
+      // ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.make( Ad.SP_NEWS, this.props.uniqueId ) );
+      ReactDOM.findDOMNode( this.refs.news_ad ).appendChild( Ad.makeStream( this.props.uniqueId, this.props.adSp ) );
     }
   }
 } );

@@ -79,7 +79,6 @@ export let MediaVideoNode = React.createClass( {
 
   },
   brightcove: function( media ) {
-    // ToDo: 2016-06-01 ~
     let images = media.images;
     let video = media.video;
     let caption = video.caption || '';
@@ -100,7 +99,7 @@ export let MediaVideoNode = React.createClass( {
     return (
       <div className="post-kv">
         <iframe
-          src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
+            src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
           width={Content.WIDTH}
           height={Content.HD_HEIGHT}
           frameBorder="0"

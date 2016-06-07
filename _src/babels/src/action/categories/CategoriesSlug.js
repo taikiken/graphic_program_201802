@@ -11,27 +11,40 @@
  */
 
 import {Categories} from './Categories';
+import {Safety} from '../../data/Safety';
 
 /**
- * 引数 slug のカテゴリ情報を取得します
+ * <p>引数 slug のカテゴリ情報を取得します</p>
  *
- * from 2016-05-28
+ * `/api/v1/category/[:category_slug]`
+ *
+ * @from 2016-05-28
  */
 export class CategoriesSlug extends Categories {
   /**
-   * 引数 slug のカテゴリ情報を取得し
+   * 引数 slug のカテゴリ情報を取得し<br>
    * カテゴリ特有のデザイン、レイアウトへ対応します
    *
-   * @param {string} slug category slug
+   * @param {string} [slug=all] category slug
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
   constructor( slug:string, resolve:Function = null, reject:Function = null ) {
+    slug = Safety.string( slug, 'all' );
     super( resolve, reject );
-
+    /**
+     * category slug
+     * @type {string}
+     * @protected
+     */
     this._slug = slug;
     // override url property
     // /api/v1/category/[:category_slug]
+    /**
+     * API path
+     * @type {string}
+     * @protected
+     */
     this._url = `${this._types.url}/${slug}`;
   }
   /**

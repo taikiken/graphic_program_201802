@@ -25,10 +25,19 @@ export let SPTabNode = React.createClass( {
   getInitialState: function() {
     return {
       current: 'latest',
-      fixed: 'fixed-top'
+      fixed: 'fixed-top',
+      display: false
     };
   },
   render: function() {
+    let css = {};
+
+    // if ( this.state.display ) {
+    //   css.display = 'block';
+    // } else {
+    //   css.display = 'none';
+    // }
+
     return (
       <nav className={`lnav ${this.state.fixed} ${this.state.current}`}>
         <ul className="lnav-list">
@@ -37,12 +46,12 @@ export let SPTabNode = React.createClass( {
               <span className="lnav-icon">新着</span>
             </a>
           </li>
-          <li className="lnav-item">
+          <li className="lnav-item" style={css}>
             <a href="#ranking" className="lnav-link lnav-link_popular" onClick={this.rankingClick}>
               <span className="lnav-icon">人気</span>
             </a>
           </li>
-          <li className="lnav-item">
+          <li className="lnav-item" style={css}>
             <a href="#videos" className="lnav-link lnav-link_movie" onClick={this.videosClick}>
               <span className="lnav-icon">動画</span>
             </a>
@@ -59,6 +68,12 @@ export let SPTabNode = React.createClass( {
   },
   latestClick( event:Event ):void {
     event.preventDefault();
+
+    // // 他のタブが非表示なので何もしない
+    // if ( !this.state.display ) {
+    //   return;
+    // }
+
     this.props.callback( 'latest' );
     this.setState( { current: 'latest' } );
   },
@@ -71,5 +86,8 @@ export let SPTabNode = React.createClass( {
     event.preventDefault();
     this.props.callback( 'videos' );
     this.setState( { current: 'videos' } );
+  },
+  activateTab():void {
+    this.setState( { display: true } );
   }
 } );

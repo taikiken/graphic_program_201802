@@ -13,9 +13,10 @@
 import {Safety} from '../../data/Safety';
 
 import {ThemeDae} from '../theme/ThemeDae';
-import {BannerDae} from '../theme/BannerDae';
 import {AdDae} from '../theme/AdDae';
 import {BannersDae} from '../banner/BannersDae';
+import {BannerDae} from '../banner/BannerDae';
+
 
 /**
  * <p>特定のカテゴリー情報を取得する<br>

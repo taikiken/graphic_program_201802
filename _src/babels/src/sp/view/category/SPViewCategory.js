@@ -17,7 +17,8 @@ import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 import {User} from '../../../app/User';
 
 /**
- * SP category
+ * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>
+ * SPViewCategoryRoot > CategoryRootDom から call されます
  */
 export class SPViewCategory extends SPViewArchive {
   /**
