@@ -434,5 +434,17 @@ export class Dom {
   static adVideo2():Element {
     return Dom.get( 'sponsor-link-recommend-2' );
   }
+  // // --------------------------------------
+  // // 広告
+  // // 記事詳細
+  // static adSingleTop():Element {
+  //   return Dom.get( 'single-top-sponsor-container' );
+  // }
+  // static adSidebarTop():Element {
+  //   return Dom.get( 'sidebar-sponsor-top-container' );
+  // }
+  // static adSidebarBottom():Element {
+  //   return Dom.get( 'sidebar-sponsor-bottom-container' );
+  // }
 }
 // return Dom.get( '' );

@@ -18,10 +18,10 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * SP 記事一覧 4件目表示広告
+ * SP 記事一覧 4件目に表示する広告
  * @type {*|Function|ReactClass}
  */
-export let NewsAdNode = React.createClass( {
+export let SPNewsAdNode = React.createClass( {
   propTypes: {
     // index, 何番目
     index: React.PropTypes.number.isRequired,
@@ -39,6 +39,11 @@ export let NewsAdNode = React.createClass( {
     };
   },
   getInitialState: function() {
+    /**
+     * 広告フラッグ（挿入済み）
+     * @private
+     * @type {boolean}
+     */
     this.ok = false;
     // 4番目に表示 => 3番目(index: 2)の後
     return {

@@ -25,7 +25,7 @@ import {Safety} from '../../data/Safety';
 
 // node
 import {ReactionNode} from '../../node/comment/ReactionNode';
-import {NewsAdNode} from '../node/ad/NewsAdNode';
+import {SPNewsAdNode} from '../node/ad/SPNewsAdNode';
 
 import {CommentUserPlusCountNode} from '../../node/comment/CommentUserPlusCountNode';
 
@@ -390,12 +390,13 @@ export let SPArchiveNode = React.createClass( {
                     total={commentsTotal}
                     articleId={String(dae.id)} />
                 </div>
-                <NewsAdNode
+                <SPNewsAdNode
                   key={'ad-' + type + '-' + dae.id}
                   enable={type === Message.NEWS}
                   index={i}
                   length={length}
-                  uniqueId={'ad-' + type + '-' + dae.id} />
+                  uniqueId={'ad-' + type + '-' + dae.id}
+                />
               </div>
             );
             // loop end
