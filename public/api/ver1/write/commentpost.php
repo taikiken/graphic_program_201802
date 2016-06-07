@@ -26,7 +26,7 @@ if($y["status"]["code"]===200){
 	
 	if($e){
 		
-		$sql=sprintf("select * from (select id,comment,userid,pageid,(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,regitime from u_comment where pageid=%s and userid=%s and commentid=%s order by regitime desc limit 1 offset 0) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from u_member where qid=2 and flag=1) as t2 where t1.userid=t2.userid",
+		$sql=sprintf("select * from (select id,comment,userid,pageid,(select name_e from u_categories where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,regitime from u_comment where pageid=%s and userid=%s and commentid=%s order by regitime desc limit 1 offset 0) as t1,(select id as userid,cid as typeid,(select name from repo where id=cid) as type,title as name,t2 as profile,img1 as icon from u_member where qid=2 and flag=1) as t2 where t1.userid=t2.userid",
 		$pageid,$uid,$commentid);
 		$o->query($sql);
 		

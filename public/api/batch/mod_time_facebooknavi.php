@@ -6,7 +6,7 @@ include $INCLUDEPATH."public/import.php";
 $o=new db;
 $o->connect();
 
-$sql="select id,m_time,(m_time + interval '9 hour') as timestamp from repo_n where id>=12434 and d2=4 order by id;";
+$sql="select id,m_time,(m_time + interval '9 hour') as timestamp from repo_n where id>=14999 and d2=4 order by id;";
 $o->query($sql);
 
 while($w=$o->fetch_array()){
