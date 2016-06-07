@@ -303,7 +303,7 @@ function set_categoriesinfo($f){
 	return $s;
 }
 
-function set_articleinfo($f,$type=0,$canonical){
+function set_articleinfo($f,$type=0,$canonical,$readmore){
 	
 	/*
 		$type:0 記事一覧　$type:1 記事詳細
@@ -332,6 +332,11 @@ function set_articleinfo($f,$type=0,$canonical){
 	if($canonical==1){
 		$s["canonical"]["is_canonical"]=$f["canonical"]?true:false;
 		$s["canonical"]["url"]=$f["t9"];
+	}
+
+	if($readmore==1){
+		$s["readmore"]["is_readmore"]=$f["readmore"]?true:false;
+		$s["readmore"]["url"]=$f["t9"];
 	}
 	
 	$s["category"]["label"]=$f["category"]; 
