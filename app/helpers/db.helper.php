@@ -258,7 +258,6 @@ $o->connect();
 
 //例）
 
-/*
 echo "\n\nカテゴリー一覧\n";
 var_dump($o->get_site_categories());
 
@@ -270,9 +269,5 @@ var_dump($o->get_post(12321));
 
 echo "\n\nコメント\n";
 var_dump($o->get_comment(12321,89));
-*/
-
-var_dump($o->get_post(12321));
-
 
 ?>
