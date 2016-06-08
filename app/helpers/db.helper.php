@@ -21,15 +21,20 @@ class dbForTemplate extends db {
 
     parent::__construct();
 
-    // ログイン判定 & ソート済みカテゴリー一覧取得用にcookieからtokenを取得しておく
-    if ( isset($_COOKIE["auth_token"]) ){
-      $this->token = $_COOKIE["auth_token"];
-    }
-
-    $this->uid = $this->get_user_id();
+    $this->token = $this->get_token();
+    $this->uid   = $this->get_user_id();
 
   }
 
+
+  // ログイン判定 & ソート済みカテゴリー一覧取得用にcookieからtokenを取得しておく
+  public function get_token() {
+
+    if ( isset($_COOKIE["auth_token"]) ){
+      return $_COOKIE["auth_token"];
+    }
+
+  }
 
 
   /**

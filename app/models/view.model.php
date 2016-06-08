@@ -65,6 +65,9 @@ class ViewModel {
     'hostname'           => '', // debug用 - 利用なし
     'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
 
+    // user
+    'is_logged_in'    => false, // ユーザーログイン判定
+
     // slim param
     'request'            => '',
     'response'           => '',
@@ -80,6 +83,7 @@ class ViewModel {
     $this->db = $db;
 
 
+    // site
     $this->default['site_url']        = $this->get_site_url();
 
     if ( UT_ENV === 'LOCAL') :
@@ -95,18 +99,22 @@ class ViewModel {
 
     endif;
 
-    # meta
+    // og / meta
     $this->default['og_url']   = $this->default['site_url'];
     $this->default['og_image'] = $this->default['site_url'].$this->default['og_image'];
 
 
-    # その他アクセス後から不変な値を設定
+    // env
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
     $this->ua = new UserAgent();
-    $this->default['ua']              = $this->get_ua();
-    $this->default['ua_app']          = $this->get_ua_app();
-    $this->default['ua_is_bot']       = $this->get_ua_is_bot();
+    $this->default['ua']              = $this->ua->set();
+    $this->default['ua_app']          = $this->ua->get_ua_app();
+    $this->default['ua_is_bot']       = $this->ua->is_bot();
+
+
+    // user
+    $this->default['is_logged_in']    = $this->get_is_logged_in();
 
 
     # サイト内のグロナビ用カテゴリーを取得
@@ -323,38 +331,75 @@ class ViewModel {
 
 
   /**
-  * env - UA判定 - mobile or desktop
+  * private - get_is_logged_in - tokenをもとにユーザー存在チェックも行った上でログイン判定
   *
-  * @return string  mobile | desktop
+  * @return bool true : ログイン済み | false : 非ログイン
   */
-  public function get_ua() {
+  private function get_is_logged_in() {
 
-    return $this->ua->set();
+    if ( UT_ENV == 'LOCAL' ) :
+
+      $token = $this->db->get_token();
+
+      $option = array(
+        'http'=>array(
+          'method'=>"GET",
+          'header'=>"Authorization: OAuth realm=undotsushin.com, oautn_token={$token}"
+        )
+      );
+
+      $response = file_get_contents($this->default['apiRoot']."/api/v1/users/self", false, stream_context_create($option));
+
+      if ( $response ) :
+
+        $response = json_decode($response, true);
+
+        if ( $response['status']['code'] == 200 ) :
+          return true;
+        endif;
+
+      endif;
+
+    else :
+
+      $response = $this->db->get_is_logged_in();
+
+      if ( $response ) :
+        return true;
+      else :
+        $this->delete_cookie();
+        return false;
+      endif;
+
+    endif;
+
+  }
+
+
+  /**
+  * public - user - ログイン判定 - ログインしてないならログインページにリダイレクトする
+  * 用途 : マイページへの非ログインアクセスのリダイレクト
+  * @return
+  */
+  public function check_logged_in() {
+
+    if ( !$this->default['is_logged_in'] ) :
+      header('Location: /login/');
+      exit;
+    endif;
 
   }
 
 
 
   /**
-  * env - アプリWebView判定 - ios | android
+  * public - tokenを保持してるcookieを消しちゃう
+  * 用途 : ログアウト処理
   *
-  * @return string  ios | android
   */
-  public function get_ua_app() {
+  public function delete_cookie() {
 
-    return $this->ua->get_ua_app();
-
-  }
-
-
-  /**
-  * env - bot判定
-  *
-  * @return bool
-  */
-  public function get_ua_is_bot() {
-
-    return $this->ua->is_bot();
+    setcookie('auth_token', '', time() - 3600, '/');
 
   }
 
