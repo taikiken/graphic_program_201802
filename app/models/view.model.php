@@ -219,6 +219,12 @@ class ViewModel {
       else :
         $category = $response['response'];
 
+        // すべての場合はlabel/titleが空なのですべてをセット
+        if ( !$category['label'] ) :
+          $category['label'] = 'すべて';
+          $category['title'] = 'すべて';
+        endif;
+
       endif;
 
       return $category;
