@@ -3,7 +3,7 @@
 // SP カテゴリー
 // ------------------------------------------------
 ?>
-<div class="body-sec category">
+<div id="body-section" class="body-sec">
   <div class="body-sec-inner">
     <?php
     // ----------------------------------------------------

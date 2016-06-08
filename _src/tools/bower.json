@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "sagen.js": "~0.4.12",
+    "sagen.js": "~0.4.14",
     "html5shiv": "~3.7.3",
     "foundation": "~5.5.3",
     "jquery1": "jquery#^1",

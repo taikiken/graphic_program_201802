@@ -446,5 +446,16 @@ export class Dom {
   // static adSidebarBottom():Element {
   //   return Dom.get( 'sidebar-sponsor-bottom-container' );
   // }
+  // --------------------------------------
+  // SP category
+  // tab 表示・非表示で class（category）を与えるために...
+  /**
+   * div.body-sec<br>
+   * SP: tab 表示・非表示で class（category）を与えるために...
+   * @return {Element} div.body-sec
+   */
+  static bodySection():Element {
+    return Dom.get( 'body-section' );
+  }
 }
 // return Dom.get( '' );
