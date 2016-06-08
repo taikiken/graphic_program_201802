@@ -108,9 +108,9 @@ class ViewModel {
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
     $this->ua = new UserAgent();
-    $this->default['ua']              = $this->get_ua();
-    $this->default['ua_app']          = $this->get_ua_app();
-    $this->default['ua_is_bot']       = $this->get_ua_is_bot();
+    $this->default['ua']              = $this->ua->set();
+    $this->default['ua_app']          = $this->ua->get_ua_app();
+    $this->default['ua_is_bot']       = $this->ua->is_bot();
 
 
     // user
@@ -325,44 +325,6 @@ class ViewModel {
     endif;
 
     return $post['response'];
-
-  }
-
-
-
-  /**
-  * private - env - UA判定 - mobile or desktop
-  *
-  * @return string  mobile | desktop
-  */
-  private function get_ua() {
-
-    return $this->ua->set();
-
-  }
-
-
-
-  /**
-  * private - env - アプリWebView判定 - ios | android
-  *
-  * @return string  ios | android
-  */
-  private function get_ua_app() {
-
-    return $this->ua->get_ua_app();
-
-  }
-
-
-  /**
-  * private - env - bot判定
-  *
-  * @return bool
-  */
-  private function get_ua_is_bot() {
-
-    return $this->ua->is_bot();
 
   }
 
