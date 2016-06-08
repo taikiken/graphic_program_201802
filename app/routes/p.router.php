@@ -13,14 +13,18 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
     if ( $post ) :
 
       $args['page'] = $app->model->set(array(
-        'title'              => $post['title'],
-        'og_title'           => $post['title'].' | '.$app->model->property('title'),
-        'og_url'             => $app->model->property('site_url').'p/'.$post['id'].'/',
-        'og_image'           => $post['media']['images']['original'],
-        'og_description'     => $post['description'],
-        'template'           => 'p',
-        'path'               => $args,
-        'post'               => $post,
+        'title'          => $post['title'],
+        'og_title'       => $post['title'].' | '.$app->model->property('title'),
+        'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/',
+        'og_image'       => $post['media']['images']['original'],
+        'og_description' => $post['description'],
+
+        'ad'             => $post['ad'],
+        'theme'          => $post['theme'],
+
+        'template'       => 'p',
+        'path'           => $args,
+        'post'           => $post,
       ));
 
 
@@ -84,6 +88,10 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/comment/'.$args['commend_id'].'/',
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $comment_body_escaped,
+
+        'ad'             => $post['ad'],
+        'theme'          => $post['theme'],
+
         'template'       => 'comment',
         'path'           => $args,
         'post'           => $post,
@@ -126,8 +134,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     if ( $comment['comments'] ) :
 
-      print_r($comment['comments']);
-
       $comment_user = $comment['comments'][0]['user']['name'];
       $comment_body = str_replace(array("\r\n","\n","\r"), '', $comment['comments'][0]['body_escape']);
       $comment_body_escaped = mb_substr($comment_body, 0, 60, 'UTF-8');
@@ -143,6 +149,10 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/comment/'.$args['commend_id'].'/'.$args['reply_id'].'/',
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $comment_body_escaped,
+
+        'ad'             => $post['ad'],
+        'theme'          => $post['theme'],
+
         'template'       => 'comment',
         'path'           => $args,
         'post'           => $post,

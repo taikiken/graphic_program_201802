@@ -32,6 +32,7 @@
 
         </div><!-- /.setting-main -->
 
+      </div>
     </section><!-- /.main-sec -->
 
     <section class="side-sec">

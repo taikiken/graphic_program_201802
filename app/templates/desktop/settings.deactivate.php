@@ -5,8 +5,8 @@
 <div class="body-sec">
   <div class="body-sec-inner setting-bg">
     <section class="main-sec">
-
       <div class="setting-sec">
+
         <div class="setting-side">
           <nav class="setting-side-nav">
             <ul class="setting-side-nav-list">
@@ -27,6 +27,7 @@
 
         </div><!-- /.setting-main -->
 
+      </div>
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
