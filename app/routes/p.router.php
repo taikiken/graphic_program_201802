@@ -134,8 +134,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     if ( $comment['comments'] ) :
 
-      print_r($comment['comments']);
-
       $comment_user = $comment['comments'][0]['user']['name'];
       $comment_body = str_replace(array("\r\n","\n","\r"), '', $comment['comments'][0]['body_escape']);
       $comment_body_escaped = mb_substr($comment_body, 0, 60, 'UTF-8');

@@ -5,18 +5,20 @@
 ?>
 <div class="body-sec">
   <div class="body-sec-inner">
+
     <?php
     // ----------------------------------------------------
     // 記事詳細: sp
     // response.theme.images.pc
     // response.description
-    if ( !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ] ) ) : ?>
-      <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
-        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'sp' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
+    if ( $page['theme']['images']['sp'] ) : ?>
+      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
       </div>
     <?php endif;
     // eof: 記事詳細: sp
     // ---------------------------------------------------- ?>
+
     <section class="main-sec">
 
       <div id="single-visual-container"></div>
@@ -168,15 +170,15 @@
       </div><!-- /.post-detail -->
 
       <div class="comment">
-<?php
-/*
- * https://github.com/undotsushin/undotsushin/issues/720
- * 広告 / PC版画像バナー広告をDFP管理下にする
- */
-// ------------------------------------
-$ad_sp = $page['post']['ad']['sp'];
-if ( !empty($ad_sp) ) :
-?>
+
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        // ------------------------------------
+        if ( $page['ad']['sp'] ) :
+        ?>
         <div class="sponsor-link_commentUpper">
           <?php
           /*
@@ -184,11 +186,11 @@ if ( !empty($ad_sp) ) :
            # ToDo: いつか削除
           <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
           */ ?>
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $ad_sp; ?>&targetID=adg_<?php echo $ad_sp; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
         </div>
-<?php
-endif;
-// ------------------------------------ ?>
+        <?php endif; ?>
+
+
         <div id="comment-form-container"></div>
 
         <div id="comment-self-container"></div>
