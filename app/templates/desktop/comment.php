@@ -1,3 +1,4 @@
+<?Php if ( !$page['theme']['images']['pc'] ) : ?>
 <div class="category-heading">
   <h1>
     <?php echo $page['category']['label']; ?>
@@ -8,14 +9,40 @@
     <?php endif; ?>
   </h1>
 </div><!-- /.category-heading -->
+<?php endif; ?>
 
 <div class="body-sec">
   <div class="body-sec-inner">
+
+    <?php
+    // ----------------------------------------------------
+    // 記事詳細: pc
+    // response.theme.images.pc
+    // response.description
+    if ( $page['theme']['images']['pc'] ) :
+    // 記事詳細で冒頭バナーにリンク設定
+    // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616 ?>
+      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['pc']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
+      </div>
+    <?php endif;
+    // eof: 記事詳細: pc
+    // ---------------------------------------------------- ?>
+
     <section class="main-sec">
       <div class="post-detail">
 
         <div id="single-header-container"></div>
 
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        if ( $page['ad']['pc']['single_top'] ) :
+        // ------------------------------------
+        // single top
+        ?>
         <div class="sponsor-link w728">
 
           <?php
@@ -25,7 +52,7 @@
           ?>
           <script type='text/javascript'>
             googletag.cmd.push(function() {
-              googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
+              googletag.defineSlot('/531683568/<?php echo $page['ad']['pc']['single_top']; ?>', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.pubads().collapseEmptyDivs();
               googletag.enableServices();
@@ -38,6 +65,8 @@
           </div>
 
         </div>
+        <?php endif; ?>
+
 
         <div id="comment-normal-container"></div>
 
@@ -78,16 +107,50 @@
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        // ------------------------------------
+        // single bottom
+        if ( $page['ad']['pc']['single_bottom_left'] || $page['ad']['pc']['single_bottom_right'] ) : ?>
         <div class="sponsor-link">
           <div class="sponsor-link column2">
+
+            <?php if ( $page['ad']['pc']['single_bottom_left'] ) : ?>
             <div class="sponsor-link-item">
+              <?php
+              /*
+              # 保険のために original を残します
+              # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35119&targetID=adg_35119&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+              */ ?>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_left']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_left']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
             </div>
+            <?php endif; ?>
+
+
+            <?php if ( $page['ad']['pc']['single_bottom_right'] ) : ?>
             <div class="sponsor-link-item">
+              <?php
+              /*
+              # 保険のために original を残します
+              # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+              */ ?>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_right']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_right']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
             </div>
+            <?php endif; ?>
+
           </div>
         </div>
+        <?php
+        endif;
+        // eof: single bottom
+        // ------------------------------------ ?>
+
+        <br /><br />
 
       </div><!-- /.post-detail -->
 

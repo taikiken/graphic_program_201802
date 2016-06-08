@@ -91,7 +91,8 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $template_name == 'p' ) {
+if ( $template_name == 'p' || $template_name == 'comment' ) {
+
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
 
