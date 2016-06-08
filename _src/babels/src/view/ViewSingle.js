@@ -27,6 +27,8 @@ import {Safety} from '../data/Safety';
 
 // dae
 import {SingleDae} from '../dae/SingleDae';
+import {CategoriesDae} from '../dae/caegories/CategoriesDae';
+import {SlugDae} from '../dae/caegories/SlugDae';
 
 // app
 import {User} from '../app/User';
@@ -66,7 +68,12 @@ export class ViewSingle extends View {
     let ActionClass = User.sign ? SingleAuth : Single;
 
     this.action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
-    this.elements = elements;
+    /**
+     * footer, related 挿入位置 Element を設定した Object
+     * @type {Object} {related: Element, footer: Element}
+     * @protected
+     */
+    this._elements = elements;
     //
     // /**
     //  * 記事Id
@@ -83,7 +90,6 @@ export class ViewSingle extends View {
     this._header = null;
     // footer instance
     this._footer = null;
-
   }
   // // ---------------------------------------------------
   // //  GETTER / SETTER
@@ -264,7 +270,7 @@ export class ViewSingle extends View {
    * イベントアクション：view
    * イベントラベル：[response.categories.label] ex. 海外サッカー
    * </pre>
-   * 
+   *
    * @from 2016-06-08
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
    */
@@ -272,19 +278,16 @@ export class ViewSingle extends View {
     let category = 'provider';
     const action = 'view';
     const label = single.user.userName;
+    const method = 'ViewSingle.ga';
 
-    Ga.add( new GaData( category, action, label ) );
+    Ga.add( new GaData( method, category, action, label ) );
 
     // category label 送信
-    const categories = single.categories;
-    // categories 配列チェック
-    if ( !Array.isArray( categories ) ) {
-      return;
-    }
+    const categories:CategoriesDae = single.categories;
 
     category = 'category';
-    categories.map( (value:string) => {
-      Ga.add( new GaData( category, action, value ) );
+    categories.all.map( (value:SlugDae) => {
+      Ga.add( new GaData( method, category, action, value.label ) );
     } );
   }
 }
