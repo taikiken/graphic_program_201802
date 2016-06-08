@@ -10,8 +10,8 @@
     </div><!-- /.category-heading -->
 
     <section class="main-sec">
-
       <div class="setting-sec">
+
         <nav class="setting-side-nav">
           <ul class="setting-side-nav-list">
             <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-basic current" href="/settings/"><span>基本情報設定</span></a></li>
@@ -28,6 +28,7 @@
 
         </div><!-- /.setting-main -->
 
+      </div>
     </section><!-- /.main-sec -->
 
   </div>

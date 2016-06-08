@@ -8,10 +8,10 @@
     <?php
     // ----------------------------------------------------
     // 記事一覧: sp theme.images
-    if ( !empty($page['category']['theme']['images']['sp']) ) :
+    if ( $page['theme']['images']['sp'] ) :
       ?>
-      <div class="special-summary" style="<?php echo $page['category']['theme']['background_color'] ? 'background-color: ' . $page[ 'category' ][ 'theme' ][ 'background_color' ] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page['category']['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
+      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['category']['theme']['background_color'] : ''; ?>">
+        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
       </div>
       <?php
     endif;

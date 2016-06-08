@@ -24,10 +24,33 @@ class ViewModel {
     'og_image'           => 'assets/images/common/og_image.png',
 
     // meta
-    'og_url'       => '', // シェアやコメント詳細用の正規化されたURL
+    'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
+
+
+    // theme
+    'theme' => array(
+      'base'             => 'normal',
+      'background_color' => '',
+      'images'           => array(
+        'pc' => '',
+        'sp' => '',
+      ),
+    ),
+
+    // ad
+    'ad' => array(
+      'sp' => '35244',
+      'pc' => array(
+        'sidebar_top'         => 'pc_sidebar_top',
+        'sidebar_bottom'      => 'pc_sidebar_bottom',
+        'single_top'          => 'pc_single_top',
+        'single_bottom_left'  => '35119',
+        'single_bottom_right' => '35120',
+      ),
+    ),
 
     // post
-    'post'               => '', //記事詳細の場合は記事データが入る
+    'post'               => array(),
 
     // layout
     'type'               => '',
@@ -196,6 +219,12 @@ class ViewModel {
       else :
         $category = $response['response'];
 
+        // すべての場合はlabel/titleが空なのですべてをセット
+        if ( !$category['label'] ) :
+          $category['label'] = 'すべて';
+          $category['title'] = 'すべて';
+        endif;
+
       endif;
 
       return $category;
@@ -308,22 +337,49 @@ class ViewModel {
   * $default を上書きしてmodelを返す
   *
   * @param  array  $options
-  * @return array  $.extend( $default, $options)
+  * @return array  = $.extend($default, $options)
   */
-  public function set() {
+  public function set($options = null) {
 
-    $options  = func_get_args();
-    $extended = $this->default;
+    if ( $options ) :
+      $this->default = $this->array_extend( $this->default, $options );
+    endif;
 
-    if(is_array($options) && count($options)) {
-      foreach($options as $array) {
-        if(is_array($array)) {
-          $extended = array_merge($extended, $array);
+    return $this->default;
+
+  }
+
+
+  /**
+  * 配列のdeep extendを行う
+  *
+  */
+  private function array_extend(&$result) {
+
+    if (!is_array($result)) {
+      $result = array();
+    }
+
+    $args = func_get_args();
+
+    for ($i = 1; $i < count($args); $i++) {
+
+      if (!is_array($args[$i])) continue;
+
+      foreach ($args[$i] as $k => $v) {
+        if (!isset($result[$k])) {
+          $result[$k] = $v;
+        } else {
+          if (is_array($result[$k]) && is_array($v)) {
+            $this->array_extend($result[$k], $v);
+          } else {
+            $result[$k] = $v;
+          }
         }
       }
     }
 
-    return $extended;
+    return $result;
 
   }
 

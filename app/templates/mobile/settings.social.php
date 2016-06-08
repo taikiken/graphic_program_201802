@@ -6,6 +6,7 @@
 
     <section class="main-sec">
       <div class="setting-sec">
+
         <nav class="setting-side-nav">
           <ul class="setting-side-nav-list">
             <li class="setting-side-nav-item"><a class="setting-side-nav-link setting-side-nav-basic" href="hoge"><span>基本情報設定</span></a></li>
@@ -22,8 +23,8 @@
             </ul>
           </div><!-- /.linkage-sns -->
         </div><!-- /.setting-main -->
-      </div><!-- /.setting-sec -->
 
+      </div><!-- /.setting-sec -->
     </section><!-- /.main-sec -->
 
   </div>

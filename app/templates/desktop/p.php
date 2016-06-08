@@ -2,7 +2,7 @@
 // ----------------------------------------------------
 // PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
 // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-223527274
-if ( empty( $page[ 'category' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) :
+if ( !$page['theme']['images']['pc'] ) :
 ?>
 <div class="category-heading">
   <h1>
@@ -26,11 +26,11 @@ endif;
     // 記事詳細: pc
     // response.theme.images.pc
     // response.description
-    if ( !empty( $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ] ) ) :
+    if ( $page['theme']['images']['pc'] ) :
     // 記事詳細で冒頭バナーにリンク設定
     // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616 ?>
-      <div class="special-summary" style="<?php echo $page[ 'post' ][ 'theme' ][ 'background_color' ] ? 'background-color: ' . $page[ 'post' ][ 'theme' ][ 'background_color' ] : ''; ?>">
-        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page[ 'post' ][ 'theme' ][ 'images' ][ 'pc' ]; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
+      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['pc']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
       </div>
     <?php endif;
     // eof: 記事詳細: pc
@@ -77,15 +77,16 @@ endif;
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
-<?php
-/*
- * https://github.com/undotsushin/undotsushin/issues/720
- * 広告 / PC版画像バナー広告をDFP管理下にする
- */
-if( !empty($page['post']['ad']['pc']['single_top']) && $page['post']['ad']['pc']['single_top'] == 'pc_single_top' ) :
-// ------------------------------------
-// single top
-?>
+
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        if ( $page['ad']['pc']['single_top'] ) :
+        // ------------------------------------
+        // single top
+        ?>
         <div class="sponsor-link w728">
 
           <?php
@@ -95,7 +96,7 @@ if( !empty($page['post']['ad']['pc']['single_top']) && $page['post']['ad']['pc']
           ?>
           <script type='text/javascript'>
             googletag.cmd.push(function() {
-              googletag.defineSlot('/531683568/pc_single_top', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
+              googletag.defineSlot('/531683568/<?php echo $page['ad']['pc']['single_top']; ?>', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.pubads().collapseEmptyDivs();
               googletag.enableServices();
@@ -108,10 +109,9 @@ if( !empty($page['post']['ad']['pc']['single_top']) && $page['post']['ad']['pc']
           </div>
 
         </div>
-<?php
-endif;
-// eof: single top
-// ------------------------------------ ?>
+        <?php endif; ?>
+
+
         <?php /* div.post-kv */ ?>
         <div id="single-visual-container"></div>
 
@@ -209,23 +209,20 @@ endif;
             </dl><!-- /.post-sns-pr-inner -->
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
-<?php
-/*
- * https://github.com/undotsushin/undotsushin/issues/720
- * 広告 / PC版画像バナー広告をDFP管理下にする
- */
-$single_bottom_left = $page['post']['ad']['pc']['single_bottom_left'];
-$single_bottom_right = $page['post']['ad']['pc']['single_bottom_right'];
-// ------------------------------------
-// single bottom
-if ( !empty( $single_bottom_left ) || !empty($single_bottom_right) ) :
-?>
+
+
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        // ------------------------------------
+        // single bottom
+        if ( $page['ad']['pc']['single_bottom_left'] || $page['ad']['pc']['single_bottom_right'] ) : ?>
         <div class="sponsor-link">
           <div class="sponsor-link column2">
-            <?php
-            // left
-            if ( !empty( $single_bottom_left ) ) :
-            ?>
+
+            <?php if ( $page['ad']['pc']['single_bottom_left'] ) : ?>
             <div class="sponsor-link-item">
               <?php
               /*
@@ -233,15 +230,12 @@ if ( !empty( $single_bottom_left ) || !empty($single_bottom_right) ) :
               # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35119&targetID=adg_35119&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
               */ ?>
-              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $single_bottom_left; ?>&targetID=adg_<?php echo $single_bottom_left; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_left']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_left']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
             </div>
-            <?php
-            endif;
-            // ------------------------------------
+            <?php endif; ?>
 
-            // right
-            if ( !empty( $single_bottom_right ) ) :
-            ?>
+
+            <?php if ( $page['ad']['pc']['single_bottom_right'] ) : ?>
             <div class="sponsor-link-item">
               <?php
               /*
@@ -249,17 +243,17 @@ if ( !empty( $single_bottom_left ) || !empty($single_bottom_right) ) :
               # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
               */ ?>
-              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $single_bottom_right; ?>&targetID=adg_<?php echo $single_bottom_right; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
-              </div>
-              <?php
-            endif;
-            // ------------------------------------ ?>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_right']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_right']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+            </div>
+            <?php endif; ?>
+
           </div>
         </div>
-<?php
-endif;
-// eof: single bottom
-// ------------------------------------ ?>
+        <?php
+        endif;
+        // eof: single bottom
+        // ------------------------------------ ?>
+
       </div><!-- /.post-detail -->
       <div class="comment">
 
