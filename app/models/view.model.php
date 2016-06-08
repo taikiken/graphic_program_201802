@@ -27,7 +27,49 @@ class ViewModel {
     'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
 
     // post
-    'post'               => '', //記事詳細の場合は記事データが入る
+    'post'               => array(
+      // themeのデフォルト値
+      'theme' => array(
+        'base'             => 'normal',
+        'background_color' => '',
+        'images'           => array(
+          'pc' => '',
+          'sp' => '',
+        ),
+      ),
+      // adのデフォルト値
+      'ad' => array(
+        'sp' => '35244',
+        'pc' => array(
+          'sidebar_top'         => 'pc_sidebar_top',
+          'sidebar_bottom'      => 'pc_sidebar_bottom',
+          'single_top'          => 'pc_single_top',
+          'single_bottom_left'  => '35119',
+          'single_bottom_right' => '35120',
+        ),
+      ),
+    ),
+
+    // category
+    'category' => array(
+      // themeのデフォルト値
+      'theme' => array(
+        'base'             => 'normal',
+        'background_color' => '',
+        'images'           => array(
+          'pc' => '',
+          'sp' => '',
+        ),
+      ),
+      // adのデフォルト値
+      'ad' => array(
+        'sp' => '35245',
+        'pc' => array(
+          'sidebar_top'    => 'pc_sidebar_top',
+          'sidebar_bottom' => 'pc_sidebar_bottom',
+        ),
+      ),
+    ),
 
     // layout
     'type'               => '',
