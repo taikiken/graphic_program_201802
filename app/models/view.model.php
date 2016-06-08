@@ -50,11 +50,7 @@ class ViewModel {
     ),
 
     // post
-    'post'               => array(
-      'ad' => array(
-        'sp' => '35245',
-      ),
-    ),
+    'post'               => array(),
 
     // layout
     'type'               => '',
