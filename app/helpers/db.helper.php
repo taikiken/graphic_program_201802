@@ -14,26 +14,19 @@ include_once "local.php";
 
 class dbForTemplate extends db {
 
-
   var $uid;
-
-  protected $default = array(
-
-    'token' => '',
-
-  );
+  var $token = '';
 
   function __construct() {
 
     parent::__construct();
 
-
     // ログイン判定 & ソート済みカテゴリー一覧取得用にcookieからtokenを取得しておく
     if ( isset($_COOKIE["auth_token"]) ){
-      $this->default['token'] = $_COOKIE["auth_token"];
+      $this->token = $_COOKIE["auth_token"];
     }
 
-    $this->uid=$this->get_user_id();
+    $this->uid = $this->get_user_id();
 
   }
 
@@ -46,9 +39,9 @@ class dbForTemplate extends db {
   */
   public function get_user_id() {
 
-    if( strlen( $this->default['token'] ) > 0 ) :
+    if( strlen( $this->token ) > 0 ) :
 
-      $sql = sprintf("select id from u_member where flag=1 and a15='%s'",trim($this->default['token']) );
+      $sql = sprintf("select id from u_member where flag=1 and a15='%s'",trim($this->token) );
 
       //$this->connect();
       $this->query($sql);
@@ -57,7 +50,7 @@ class dbForTemplate extends db {
 
     endif;
 
-    debug($this->default['token'],$f["id"]);
+    debug($this->token,$f["id"]);
 
     return isset($f["id"])?$f["id"]:"";
 
