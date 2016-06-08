@@ -88,10 +88,10 @@ class dbForTemplate extends db {
 
     // 並び替えする
     if( !preg_match("/^[0-9]+$/",$this->uid) || $is_sort == false ) :
-      $sql="select id,name,name_e,img from pm_ where cid=20 and flag=1 order by n";
+      $sql="select id,name,name_e,img from u_categories where flag=1 order by n";
 
     else :
-      $sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from pm_ where cid=20) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$this->uid);
+      $sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$this->uid);
 
     endif;
 
