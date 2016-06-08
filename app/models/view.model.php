@@ -320,7 +320,7 @@ class ViewModel {
 
     else :
 
-      $post = $this->db->get_comment( $id, $commentId );
+      $post['comments'] = $this->db->get_comment( $id, $commentId );
 
     endif;
 

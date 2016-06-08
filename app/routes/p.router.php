@@ -144,7 +144,6 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'],
-        'title'          => $post['title'],
         'og_title'       => '『'.$post['title'].'』への '.$comment_user.' さんの返信 | '.$app->model->property('title'),
         'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/comment/'.$args['commend_id'].'/'.$args['reply_id'].'/',
         'og_image'       => $post['media']['images']['original'],

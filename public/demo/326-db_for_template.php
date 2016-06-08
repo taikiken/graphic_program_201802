@@ -20,7 +20,7 @@ echo "\n\n投稿データ\n";
 var_dump($o->get_post(12321));
 
 echo "\n\nコメント\n";
-var_dump($o->get_comment(12321,89));
+var_dump($o->get_comment(16123,114));
 
 
 ?>
