@@ -135,6 +135,10 @@
       margin-top: 1.5em;
     }
 
+    ul, ol {
+      margin-left: 1em;
+    }
+
     li {
       margin-left: 1em;
     }
@@ -203,6 +207,10 @@
 
     .cms_img {
       margin-top: 1.5em;
+
+      .caption {
+        margin-top: .25em;
+      }
     }
   } //.post-content
 
