@@ -72,20 +72,17 @@ class ViewModel {
 
   );
 
+  var $db;
 
-  private $ua;
+  function __construct($db) {
 
+    // DB
+    $this->db = $db;
 
-  function __construct() {
 
     $this->default['site_url']        = $this->get_site_url();
 
     if ( UT_ENV === 'LOCAL') :
-
-//      # LOCAL(vagrant)ではリモートサーバーにAPI/file_get_contentアクセスする
-//      $this->default['file_get_url'] = 'http://dev2.undotsushin.com';
-//      $this->default['apiRoot']      = 'http://dev2.undotsushin.com';
-
       # 2016-04-27
       # dev2 -> dev へ変更
       $this->default['file_get_url'] = 'http://dev.undotsushin.com';
@@ -98,11 +95,7 @@ class ViewModel {
 
     endif;
 
-    # サイト内のグロナビ用カテゴリーを取得
-    $this->default['site_categories'] = $this->get_site_categories();
-
-
-    // meta
+    # meta
     $this->default['og_url']   = $this->default['site_url'];
     $this->default['og_image'] = $this->default['site_url'].$this->default['og_image'];
 
@@ -114,6 +107,11 @@ class ViewModel {
     $this->default['ua']              = $this->get_ua();
     $this->default['ua_app']          = $this->get_ua_app();
     $this->default['ua_is_bot']       = $this->get_ua_is_bot();
+
+
+    # サイト内のグロナビ用カテゴリーを取得
+    $this->default['site_categories'] = $this->get_site_categories();
+
 
   }
 
@@ -163,23 +161,37 @@ class ViewModel {
   */
   public function get_site_categories() {
 
-    // TODO - これDBからひっぱる必要あり〼 ref. #117
-    // カテゴリーを取得する
-    // ひとまず file_get_contentsで取得しておきます
-    $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
 
-    if ( $categories ) :
+    if ( UT_ENV == 'LOCAL' ) :
 
-      $categories = json_decode($categories, true);
+      $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
 
-      foreach( $categories['response']['categories'] as $key => $value ) :
+      if ( $categories ) :
+        $categories = json_decode($categories, true)['response']['categories'];
+      else :
+        return false;
+      endif;
+
+    else :
+
+      if ( $this->default['ua'] == 'desktop' ) :
+        $categories = $this->db->get_site_categories(false);
+      else :
+        $categories = $this->db->get_site_categories(true);
+      endif;
+
+    endif;
+
+    if ( is_array($categories) ) :
+      foreach( $categories as $key => $value ) :
 
         # 冒頭に「すべて」を追加
         if ( $key == 0 ) :
           $categoriesArray['all'] = array(
-            'label' => 'すべて',
-            'slug'  => 'all',
-            'url'   => $this->default['site_url'].'category/all',
+            'label'     => 'すべて',
+            'slug'      => 'all',
+            'url'       => $this->default['site_url'].'category/all',
+            'title_img' => '',
           );
         endif;
 
@@ -190,6 +202,7 @@ class ViewModel {
       return $categoriesArray;
 
     endif;
+
   }
 
 
@@ -203,28 +216,28 @@ class ViewModel {
 
     if ( $this->default['site_categories'][$slug] ) :
 
-      // ref. https://github.com/undotsushin/undotsushin/issues/642
-      // 他カテゴリー情報API未整備のため カテゴリー一覧APIの内容をextendする
-      $category = $this->default['site_categories'][$slug];
 
-      $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
+      if ( UT_ENV == 'LOCAL' ) :
 
-      if ( $response ) :
-        $response = json_decode($response, true);
-      endif;
+        $category = $this->default['site_categories'][$slug];
+        $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
 
-      if ( isset($response['status']['code']) && $response['status']['code'] !== 200  ) :
-        return false;
-
-      else :
-        $category = $response['response'];
-
-        // すべての場合はlabel/titleが空なのですべてをセット
-        if ( !$category['label'] ) :
-          $category['label'] = 'すべて';
-          $category['title'] = 'すべて';
+        if ( $response ) :
+          $category = json_decode($response, true)['response'];
+        else :
+          return false;
         endif;
 
+      else :
+
+        $category = $this->db->get_category_by_slug($slug);
+
+      endif;
+
+      // すべての場合はlabel/titleが空なのですべてをセット
+      if ( !$category['label'] ) :
+        $category['label'] = 'すべて';
+        $category['title'] = 'すべて';
       endif;
 
       return $category;
@@ -243,25 +256,34 @@ class ViewModel {
   */
   public function get_post($id) {
 
-    // TODO - ひとまずfile_get_contentsで取得
-    $post = file_get_contents($this->default['file_get_url'].'/api/v1/articles/'.$id);
 
-    if ( $post ) :
-      $post = json_decode($post, true);
+    if ( UT_ENV == 'LOCAL' ) :
 
-      if ( $post['status']['code'] !== 200 ) :
+      $response = file_get_contents($this->default['file_get_url'].'/api/v1/articles/'.$id);
+
+      if ( $response ) :
+        $post = json_decode($response, true)['response'];
+      else :
         return false;
       endif;
 
-      if ( $post['response']['categories'] ) :
+    else :
+
+      $post = $this->db->get_post($id);
+
+    endif;
+
+    if ( $post ) :
+
+      if ( $post['categories'] ) :
         // 記事のプライマリーカテゴリーをdefaultに設定しておく
-        $category_primary = $post['response']['categories'][0];
+        $category_primary = $post['categories'][0];
         if ( isset($category_primary['slug']) ) :
           $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
         endif;
       endif;
 
-      return $post['response'];
+      return $post;
 
     endif;
 
@@ -278,19 +300,23 @@ class ViewModel {
   */
   public function get_comment( $id, $commentId ) {
 
-    // TODO - ひとまずfile_get_contentsで取得
-    $post = file_get_contents($this->default['file_get_url'].'/api/v1/comments/article/'.$id.'/'.$commentId);
+    if ( UT_ENV == 'LOCAL' ) :
 
-    if ( $post ) :
-      $post = json_decode($post, true);
+      $response = file_get_contents($this->default['file_get_url'].'/api/v1/comments/article/'.$id.'/'.$commentId);
 
-      if ( $post['status']['code'] !== 200 ) :
+      if ( $response ) :
+        $post = json_decode($response, true)['response'];
+      else :
         return false;
       endif;
 
-      return $post['response'];
+    else :
+
+      $post = $this->db->get_comment( $id, $commentId );
 
     endif;
+
+    return $post['response'];
 
   }
 
@@ -382,27 +408,6 @@ class ViewModel {
     return $result;
 
   }
-
-
-  /**
-  * DBからデータ取得のテストコード
-  *
-  * @param  integer  $postID 取得する投稿ID
-  * @return array    取得データ
-  */
-  public function get_post_for_view2($postID) {
-
-    $o=new db;
-    $o->connect();
-
-    $sql=sprintf("select id,title,(select body from repo_body where pid=repo_n.id) as body from repo_n where id=%s",$postID);
-
-    $o->query($sql);
-    $f=$o->fetch_array();
-    return $f;
-
-  }
-
 
 }
 

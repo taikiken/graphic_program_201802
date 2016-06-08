@@ -14,26 +14,19 @@ include_once "local.php";
 
 class dbForTemplate extends db {
 
-
   var $uid;
-
-  protected $default = array(
-
-    'token' => '',
-
-  );
+  var $token = '';
 
   function __construct() {
 
     parent::__construct();
 
-
     // ログイン判定 & ソート済みカテゴリー一覧取得用にcookieからtokenを取得しておく
     if ( isset($_COOKIE["auth_token"]) ){
-      $this->default['token'] = $_COOKIE["auth_token"];
+      $this->token = $_COOKIE["auth_token"];
     }
 
-    $this->uid=$this->get_user_id();
+    $this->uid = $this->get_user_id();
 
   }
 
@@ -46,9 +39,9 @@ class dbForTemplate extends db {
   */
   public function get_user_id() {
 
-    if( strlen( $this->default['token'] ) > 0 ) :
+    if( strlen( $this->token ) > 0 ) :
 
-      $sql = sprintf("select id from u_member where flag=1 and a15='%s'",trim($this->default['token']) );
+      $sql = sprintf("select id from u_member where flag=1 and a15='%s'",trim($this->token) );
 
       //$this->connect();
       $this->query($sql);
@@ -57,7 +50,7 @@ class dbForTemplate extends db {
 
     endif;
 
-    debug($this->default['token'],$f["id"]);
+    debug($this->token,$f["id"]);
 
     return isset($f["id"])?$f["id"]:"";
 
@@ -95,10 +88,10 @@ class dbForTemplate extends db {
 
     // 並び替えする
     if( !preg_match("/^[0-9]+$/",$this->uid) || $is_sort == false ) :
-      $sql="select id,name,name_e,img from pm_ where cid=20 and flag=1 order by n";
+      $sql="select id,name,name_e,img from u_categories where flag=1 order by n";
 
     else :
-      $sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from pm_ where cid=20) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$this->uid);
+      $sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$this->uid);
 
     endif;
 
