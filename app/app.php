@@ -50,7 +50,6 @@ $o->connect();
 // set app
 // ==============================
 $app->model        = new ViewModel($o);
-$app->user_helper  = new UserHelper($app->model);
 
 
 // routes / render
