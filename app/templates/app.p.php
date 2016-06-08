@@ -9,12 +9,6 @@
   <link rel="stylesheet" href="/assets/sp/css/ui.css">
 
   <style>
-
-    #single-header-container {
-      margin-bottom:2em;
-      font-size:1.2em;
-    }
-
     .webview-env {
       display:block;
       text-align:right;
@@ -44,10 +38,6 @@
 
     .webview-media-image > div {
       text-align:center;
-      padding:20px;
-      border:1px solid #ccc;
-      -webkit-border-radius: 10px;
-              border-radius: 10px;
     }
 
     .webview-media-image img {
@@ -55,6 +45,15 @@
       max-width:100%;
       height:auto;
       margin:0 auto;
+    }
+
+    #single-header-container {
+      margin-bottom:2em;
+      font-size:1.2em;
+    }
+
+    .post-content {
+      padding-bottom:2em;
     }
 
 
