@@ -58,21 +58,9 @@
         </div>
 
         <div id="post-content-container" class="post-content excerpt hidden">
-          <?php if ( empty($page['post']['body']) ) {
-          // empty の時に 404表示
-          ?>
-            <div class="errorPage-sec">
-              <h2 class="mt20 bold">お探しのページは見つかりません</h2>
-              <p class="f12">お探しのページは一時的にアクセスができない状況にあるか、移動もしくは削除された可能性があります。</p>
-
-              <div class="mod-btnA01">
-                <a href="/">TOPに戻る</a>
-              </div><!-- /.mod-btnA01 -->
-            </div>
           <?php
-          } else {
             print_r($page['post']['body']);
-          }?>
+          ?>
         </div><!-- /.post-content -->
         <div id="post-content-read-more"></div>
 

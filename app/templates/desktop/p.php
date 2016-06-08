@@ -116,19 +116,8 @@ endif;
         <div id="single-visual-container"></div>
 
         <div class="post-content">
-          <?php if ( empty($page['post']['body']) ) {
-            // empty の時に 404表示
-            ?>
-            <h2 class="mt50 bold f20">お探しのページは見つかりません</h2>
-            <p>お探しのページは一時的にアクセスができない状況にあるか、移動もしくは削除された可能性があります。</p>
-
-            <div class="mod-btnA01 mt30">
-              <a href="/">TOPに戻る</a>
-            </div><!-- /.mod-btnA01 -->
           <?php
-          } else {
             print_r($page['post']['body']);
-          }
           ?>
         </div><!-- /.post-content -->
 
