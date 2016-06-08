@@ -1,5 +1,121 @@
 <?php
 
+function modInputData($s){
+	$l="";
+	if(strlen($s)>0){
+		$s=explode("\n",$s);
+		for($i=0;$i<count($s);$i++){
+			$l.="<div class=\"pms clearfix\">";
+			$r=trim($s[$i]);
+			$r=explode("\t",$r);
+			for($j=0;$j<count($r);$j++){
+				$l.=sprintf("<textarea style=\"width:%s\" name=\"zzz_%s%s\" class=\"in tt%s\" rows=\"1\">%s</textarea>",floor(88/count($r))."%",$i,$j,$j,$r[$j]);
+			}
+			$l.="</div>";
+		}
+	}
+	return $l;
+}
+
+function modDispText($t,$h){
+
+	$table="<table>";
+	if(strlen($h)>0){
+		$table.=sprintf("<caption>%s</caption>",$h);
+	}
+	$t=explode("\n",$t);
+	for($i=0;$i<count($t);$i++){
+		$s=explode("\t",$t[$i]);
+		$table.="<tr>";
+		for($j=0;$j<count($s);$j++){
+			$y=trim($s[$j]);
+			$y=strlen($y)>0?$y:"&nbsp;";
+			if(preg_match("/^(\+|＋){1}/",$s[$j])){
+				$table.=sprintf("<th>%s</th>",preg_replace("/^(\+|＋){1}/","",($y!="+"&&$y!="＋")?$y:"&nbsp;"));
+			}else{
+				$table.=sprintf("<td>%s</td>",preg_replace("/^(\+|＋){1}/","",$y));
+			}
+		}
+		$table.="</tr>";
+	}
+	$table.="</table>";
+	return $table;
+
+}
+
+function make_contents($id,$type=0){
+
+	global $o;
+	$sql=sprintf("select * from repo_e where nid=%s and flag=1 order by n",$id);
+	$o->query($sql);
+	$l=array();
+
+	while($f=$o->fetch_array()){
+		$l[]=make_contentsblock($f["types"],$f["title"],$f["media"],$f["link"]);
+	}
+	$l=implode("\n",$l);
+	
+	if($type==0){
+		return $l;
+	}else{
+		$s=pg_escape_string($l);
+		$sql=sprintf("update repo_body set body='%s' where pid=%s;\n",$s,$id);
+		$sql.=sprintf("update repo_n set u_time=now() where id=%s;",$id);
+		$o->query($sql);
+	}
+}
+
+function youtubeURL($u){
+	$par=array("rel","showinfo");
+	preg_match('/src="([^"]+)"/',$u,$r);
+	$originalurl=$r[1];
+	if(preg_match('\?',$originalurl)){
+		$u0=explode("?",$originalurl);
+		$base=$u0[0];
+	}else{
+		$base=$originalurl;
+	}
+	$rewriteurl=sprintf("%s?rel=0&showinfo=0",$base);
+	return str_replace($originalurl,$rewriteurl,$u);
+}
+
+function make_contentsblock($type,$title,$media,$link){
+	
+	$title=str_replace("''","'",$title);
+	$l="";
+	if($type==0){
+		$l=sprintf("<div class=\"cms_text\">%s</div>",$title);
+	}elseif($type==1){
+		$l=sprintf("<div class=\"cms_heading\"><h%s>%s</h%s></div>",($media-132),$title,($media-132));
+	}elseif($type==2){
+		if(strlen($link)>0){
+			$l=sprintf("<div class=\"cms_img\"><a href=\"%s\" target=\"_blank\"><img src=\"/prg_img/img/%s\"></a>%s</div>",$link,$media,(strlen($title)>0)?sprintf("<div class=\"caption\"><span>%s</span></div>",$title):"");
+		}else{
+			$l=sprintf("<div class=\"cms_img\"><img src=\"/prg_img/img/%s\">%s</div>",$media,(strlen($title)>0)?sprintf("<div class=\"caption\"><span>%s</span></div>",$title):"");
+		}
+	}elseif($type==3){
+		$l=sprintf("<div class=\"cms_video\"><div class=\"youtube\"><iframe width=\"728\" height=\"410\" src=\"http://www.youtube.com/embed/%s?rel=0&showinfo=0\" frameborder=\"0\" allowfullscreen></iframe></div>%s</div>",$media,(strlen($title)>0)?sprintf("<div class=\"caption\"><span>%s</span></div>",$title):"");
+	}elseif($type==4){
+		$l=sprintf("<div class=\"cms_table\">%s</div>",modDispText($title,$media));
+	}elseif($type==5){
+		if(preg_match("/youtube/",$title)){
+			
+			$css=" ratio16_9";
+			$container="<div class=\"ratio16_9-inner\">%s</div>";
+			$title=youtubeURL($title);
+			
+		}else{
+			$css="";
+			$container="%s";
+		}
+		$l=sprintf("<div class=\"cms_widget%s\">%s</div>",$css,sprintf($container,$title));
+	}elseif($type==6){
+		//$l=sprintf("<div class=\"cms_pdf\"><a href=\"/prg_img/pdf/%s\" target=\"_blank\">%s</a></div>",$media,$title);
+	}
+	return $l;
+}
+
+
 function timemapping($t){
 	preg_match("/([0-9]{4}-[0-9]{2}-[0-9]{2})/",$t,$r);
 	return str_replace("-","/",$r[1]);
@@ -280,22 +396,16 @@ function dateOffset($offset,$y,$m,$d){
 
 function logIns($message,$usr,$error="",$sqls=""){
 	
-	global $o;
-	$sql="select max(n) as n from rireki";
-	$o->query($sql);
-	$f=$o->fetch_array();
-	$NNN=$f["n"]+1;
-	
-	$sql=sprintf("insert into rireki(usr,message,m_time,n,flag,error,sql) values('%s','%s',now(),%s,%s,%s,'%s')",$usr,addslashes($message),$NNN,(strlen($error)>0)?0:1,(strlen($error)>0)?sprintf("'%s'",addslashes($error)):"null",addslashes($sqls));
-	$o->query($sql);
-	
-	echo $sql;
-	
-	$fp=@fopen("d:/log/errlog.txt","a");
-	@fputs($fp,sprintf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",date("Y-m-d H:i:s"),$usr,$message,$NNN,(strlen($error)>0)?0:1,$error,preg_replace('/(\n|\t)/',"",$sqls)));
+	global $CMSLOG,$_COOKIE;
+		
+	$fp=@fopen($CMSLOG,"a");
+	@fputs($fp,sprintf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",date("Y-m-d H:i:s"),$_COOKIE["usr"],$message,(strlen($error)>0)?0:1,$error,preg_replace('/(\n|\t)/',"",$sqls)));
 	@fclose($fp);
 }
-
+function sessionregister($s){
+	global $_SESSION;
+	for($i=0;$i<count($s);$i++)$_SERVER[$s[$i]]="";
+}
 function setSorC($name,$value){
 	global $SORC;
 	if($SORC==0){

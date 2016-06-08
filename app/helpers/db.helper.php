@@ -142,8 +142,13 @@ class dbForTemplate extends db {
 
     /*
 
+    //canonical
     (boolean) canonical["is_canonical"];
     (string)  canonical["url"];
+
+    //続きを読む
+    (boolean) readmore["is_readmore"];
+    (string)  readmore["url"];
 
     で出力しています。
 
@@ -158,10 +163,12 @@ class dbForTemplate extends db {
 
     $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
     $v=unserialize(file_get_contents($file));
+
     $f["canonical"]=$v["canonical"];
+    $f["readmore"]=$v["readmore"];
 
     $ad=get_advertise($f["m1"],$f["userid"],$f["id"]);
-    $s=set_articleinfo($f,1,1);
+    $s=set_articleinfo($f,1,1,1);
     $ad_put=set_advertise($ad,"detail");
     $s=$s+$ad_put;
     unset($s["vast"]);
