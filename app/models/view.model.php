@@ -324,7 +324,7 @@ class ViewModel {
 
     endif;
 
-    return $post['response'];
+    return $post;
 
   }
 
