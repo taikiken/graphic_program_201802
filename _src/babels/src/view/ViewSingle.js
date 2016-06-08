@@ -32,6 +32,10 @@ import {SingleDae} from '../dae/SingleDae';
 import {User} from '../app/User';
 import {Message} from '../app/const/Message';
 
+// ga
+import {GaData} from '../ga/GaData';
+import {Ga} from '../ga/Ga';
+
 /**
  * 記事詳細
  *
@@ -58,19 +62,19 @@ export class ViewSingle extends View {
     option = Safety.object( option );
 
     super( element, option );
+
     let ActionClass = User.sign ? SingleAuth : Single;
-    this._action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
 
-    /*
-    if ( !Safety.isElement( elements.related ) ) {
-      console.warn( `un accessible elements.related . ${elements.related }` );
-    }
-    if ( !Safety.isElement( elements.footer ) ) {
-      console.warn( `un accessible elements.footer . ${elements.footer }` );
-    }
-    */
+    this.action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
+    this.elements = elements;
+    //
+    // /**
+    //  * 記事Id
+    //  * @type {number}
+    //  * @protected
+    //  */
+    // this._articleId = id;
 
-    this._elements = elements;
     // mount event handler
     this._boundMount = this.headerMount.bind( this );
     // related instance
@@ -81,6 +85,15 @@ export class ViewSingle extends View {
     this._footer = null;
 
   }
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // get articleId():number {
+  //   return this._articleId;
+  // }
+  // ---------------------------------------------------
+  //  METHODS
+  // ---------------------------------------------------
   /**
    * Ajax request を開始します
    */
@@ -188,6 +201,9 @@ export class ViewSingle extends View {
 
     }
 
+    // ga from 2016-06-08
+    ViewSingle.ga( single );
+
   }// render
   /**
    * header View.DID_MOUNT event handler
@@ -227,5 +243,48 @@ export class ViewSingle extends View {
     }
 
   }// related
+  // ---------------------------------------------------
+  //  STATIC METHODS
+  // ---------------------------------------------------
+  /**
+   * <p>記事詳細での提供元&カテゴリートラッキング</p>
+   * https://github.com/undotsushin/undotsushin/issues/744
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : provider
+   * イベントアクション：view
+   * イベントラベル：[response.user.name]
+   *  APIの response.user.name ex. 運動通信編集部 を設定
+   * </pre>
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : category
+   * イベントアクション：view
+   * イベントラベル：[response.categories.label] ex. 海外サッカー
+   * </pre>
+   * 
+   * @from 2016-06-08
+   * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+   */
+  static ga( single:SingleDae ):void {
+    let category = 'provider';
+    const action = 'view';
+    const label = single.user.userName;
 
+    Ga.add( new GaData( category, action, label ) );
+
+    // category label 送信
+    const categories = single.categories;
+    // categories 配列チェック
+    if ( !Array.isArray( categories ) ) {
+      return;
+    }
+
+    category = 'category';
+    categories.map( (value:string) => {
+      Ga.add( new GaData( category, action, value ) );
+    } );
+  }
 }

@@ -70,7 +70,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
     if ( typeof ActionClass === 'function' ) {
 
-      this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+      this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
 
     }
     this._moreElement = moreElement;
@@ -88,9 +88,27 @@ export class ViewArchiveMasonryInfinite extends View {
     this._moreRendered = null;
     // response.request object を保持する
     this._request = null;
-
+    /**
+     * 表示されているページが home(index) かを識別する flag
+     * @type {boolean}
+     * @protected
+     * @default false
+     */
     this._home = false;
-
+    /**
+     * category slug
+     * @type {string}
+     * @protected
+     * @default all
+     */
+    this._slug = 'all';
+    /**
+     * Ga トラッキングタグを送信済みかを表す真偽値
+     * @type {boolean}
+     * @protected
+     * @default false
+     */
+    this._gaSend = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -115,6 +133,44 @@ export class ViewArchiveMasonryInfinite extends View {
    */
   set home( home:Boolean ):void {
     this._home = home;
+  }
+  /**
+   * category slug
+   * @default all
+   * @return {string} category slug を返します
+   */
+  get slug():string {
+    return this._slug;
+  }
+  /**
+   * category slug を設定します
+   * @param {string} categorySlug 設定する category slug
+   */
+  set slug( categorySlug:string ):void {
+    this._slug = categorySlug;
+  }
+  /**
+   * API 取得 JSON.response を ArticleDae instance にし保持する配列
+   * @return {Array.<ArticleDae>} API 取得 JSON.response を ArticleDae instance にし保持する配列を返します
+   */
+  get articlesList():Array<ArticleDae> {
+    return this._articles;
+  }
+
+  /**
+   * Ga トラッキングタグを送信済みかを表す真偽値
+   * @return {boolean} Ga トラッキングタグを送信済みかを表す真偽値を返します
+   */
+  get gaSend():Boolean {
+    return this._gaSend;
+  }
+
+  /**
+   * Ga トラッキングタグを送信済みかを表す真偽値を設定します
+   * @param {Boolean} flag Ga トラッキングタグを送信済みかを表す真偽値
+   */
+  set gaSend( flag:Boolean ):void {
+    this._gaSend = flag;
   }
   // ---------------------------------------------------
   //  Method
@@ -819,6 +875,13 @@ export class ViewArchiveMasonryInfinite extends View {
 
     }
 
+    // // from 2016-06-08
+    // this.postRender();
   }// render
+  // /**
+  //  * render 実施後呼び出されます
+  //  * @from 2016-06-08
+  //  */
+  // postRender():void {}
 
 }// class
