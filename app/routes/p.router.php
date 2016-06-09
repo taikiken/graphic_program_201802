@@ -12,6 +12,13 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     if ( $post ) :
 
+      // 続きを読む設定フラグの判定を行っておく
+      if ( isset($post['readmore']) && $post['readmore']['is_readmore'] && $post['readmore']['url'] ) :
+        $post['is_readmore'] = true;
+      else :
+        $post['is_readmore'] = false;
+      endif;
+
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'],
         'og_title'       => $post['title'].' | '.$app->model->property('title'),
@@ -31,7 +38,11 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       // アプリからの記事詳細アクセスならWebView向けページを表示
       if ( $app->model->property('ua_app') ) :
 
-        return $this->renderer->render($response, "app.p.php", $args);
+        if ( $post['is_readmore'] ) :
+          return $this->renderer->render($response, "app.p.redirect.php", $args);
+        else :
+          return $this->renderer->render($response, "app.p.php", $args);
+        endif;
 
       // アプリ以外のデスクトップ/スマホなら通常
       else :
