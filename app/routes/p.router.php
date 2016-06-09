@@ -19,12 +19,20 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         $post['is_readmore'] = false;
       endif;
 
+      // #782 カノニカル判定
+      if ( isset($post['canonical']) && $post['canonical']['is_canonical'] && $post['canonical']['url'] ) :
+        $canonical = $post['canonical']['url'];
+      else :
+        $canonical = '';
+      endif;
+
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'],
         'og_title'       => $post['title'].' | '.$app->model->property('title'),
         'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/',
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $post['description'],
+        'canonical'      => $canonical,
 
         'ad'             => $post['ad'],
         'theme'          => $post['theme'],
