@@ -33,6 +33,10 @@ import {Dom} from '../app/Dom';
 import {User} from '../app/User';
 import {Message} from '../app/const/Message';
 
+// ga
+import {Ga} from '../ga/Ga';
+import {GaData} from '../ga/GaData';
+
 /**
  * 記事詳細
  *
@@ -180,6 +184,9 @@ export class ViewSingle extends View {
 
     }
 
+    // from 2016-06-10
+    ViewSingle.moreExternal();
+
   }// render
   /**
    * header View.DID_MOUNT event handler
@@ -219,15 +226,19 @@ export class ViewSingle extends View {
     }
 
   }// related
-  
-  moreExternal():void {
+  /**
+   * <p>a#readMore-external の存在チェックを行い<br>
+   * 存在すれば click で<br>
+   * ga タグを送信します</p>
+   */
+  static moreExternal():void {
     const external = Dom.moreExternal();
     if ( external === null ) {
       return;
     }
 
     // ga 準備
-    external.addEventListener( 'click', this.onExternal.bind( this ), false );
+    external.addEventListener( 'click', ViewSingle.onExternal, false );
   }
 
   /**
@@ -243,11 +254,14 @@ export class ViewSingle extends View {
    * 'eventLabel': 'http://〜'
    * });
    * </code>
-   * @param event
+   * @param {Event} event a#readMore-external click event object
    */
-  onExternal( event:Event ):void {
-    const target = event.target;
+  static onExternal( event:Event ):void {
+    const category = 'external_link';
+    const action = 'click';
+    const label = Safety.string(event.target.src, '');
+    const method = 'ViewSingle.onExternal';
 
-
+    Ga.add( new GaData( method, category, action, label ) );
   }
 }
