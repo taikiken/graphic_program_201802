@@ -120,5 +120,5 @@ rules:
   react/wrap-multilines: 1
   react/self-closing-comp: 1
   react/jsx-closing-bracket-location: 1
-  # require-render-return: 1
+  # react/require-render-return: 1
   react/no-is-mounted: 1

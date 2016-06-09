@@ -57,7 +57,7 @@ export class ViewHeaderMemberNotice extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
-    this._action = new Notice( this.done.bind( this ), this.fail.bind( this ), 0, 5 );
+    this.action = new Notice( this.done.bind( this ), this.fail.bind( this ), 0, 5 );
 
     // React instance, NoticeDom
     this._menu = null;

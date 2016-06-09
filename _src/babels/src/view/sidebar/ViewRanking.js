@@ -52,7 +52,7 @@ export class ViewRanking extends View {
     slug = Safety.string( slug, 'all' );
 
     super( element, option );
-    this._action = Widget.ranking( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    this.action = Widget.ranking( slug, this.done.bind( this ), this.fail.bind( this ), length );
     this._slug = slug;
     // response.request object を保持する
     this._request = null;

@@ -88,7 +88,7 @@ export class ViewHeadline extends View {
 
     super( element, option );
     let ActionClass = User.sign ? HeadlineAuth : Headline;
-    this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
 
   }
   /**

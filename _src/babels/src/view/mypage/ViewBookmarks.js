@@ -52,7 +52,7 @@ export class ViewBookmarks extends View {
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
     super( element, option );
-    this._action = new Bookmarks( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Bookmarks( this.done.bind( this ), this.fail.bind( this ) );
     this._moreElement = moreElement;
 
     /**

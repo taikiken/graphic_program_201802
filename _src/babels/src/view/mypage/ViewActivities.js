@@ -42,7 +42,7 @@ export class ViewActivities extends View {
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
     super( element, option );
-    this._action = new Activities( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Activities( this.done.bind( this ), this.fail.bind( this ) );
     this._moreElement = moreElement;
 
     /**

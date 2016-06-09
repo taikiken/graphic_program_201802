@@ -72,7 +72,7 @@ export class SignupWizard extends View {
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     // callbacks[ Model.RESPONSE_ERROR ] = boundError;
-    this._action = new ModelCategories( callbacks );
+    this.action = new ModelCategories( callbacks );
 
     // SignupStatus instance
     this._status = SignupStatus.factory();

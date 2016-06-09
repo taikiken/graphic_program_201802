@@ -62,7 +62,7 @@ export class ViewPickup extends View {
 
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
-    this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     // this._index = 0;
     this._last = 0;
     this._waiting = 1000 * 5;
