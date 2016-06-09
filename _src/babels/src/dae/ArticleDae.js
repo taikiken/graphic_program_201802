@@ -27,12 +27,11 @@ export class ArticleDae {
    * archive系で取得した記事配列から 1件取り出し<br>
    * データを管理します
    *
-   * @param {Object} [article={}] articles 配列にセットされている article 記事1件データ
+   * @param {Object} [article={}] articles配列にセットされている article 記事1件データ
    */
   constructor( article:Object = {} ) {
 
     article = Safety.object( article );
-
     /**
      * 取得 JSON articles 配列にセットされている article 記事1件データ
      * @type {Object}
@@ -55,7 +54,6 @@ export class ArticleDae {
      * @protected
      */
     this._category2 = new CategoryDae( article.category2 );
-
     /**
      * category, category2 を配列へ<br>
      * article.categories
@@ -123,6 +121,7 @@ export class ArticleDae {
   get index():Number {
     return this._index;
   }
+
   /**
    * index Number を設定します
    * @param {Number} index index Number
@@ -157,7 +156,7 @@ export class ArticleDae {
   /**
    * category, category2 をまとめるらしい <- 聞いてない<br>
    * response.categories を CategoriesDae へ
-   * @return {CategoriesDae|*} response.categories を CategoriesDaeにし返します
+   * @return {CategoriesDae|*} response.categories を CategoriesDae instance にし返します
    */
   get categories():CategoriesDae {
     return this._categories;
@@ -238,6 +237,7 @@ export class ArticleDae {
   // 2016-05-21 added
   /**
    * New Flag, ※現在は常にFlagがたつように30日に設定
+   * @from 2016-05-21
    * @return {Boolean} New Flag の真偽値を返します
    */
   get isNew():Boolean {

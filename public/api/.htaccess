@@ -1,11 +1,11 @@
-Header set Access-Control-Allow-Origin *
-Header set Access-Control-Allow-Credentials true
-Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
-Header set Access-Control-Allow-Headers "Authorization, authorization, Origin, X-Requested-With, Content-Type, Accept"
+#Header set Access-Control-Allow-Origin *
+#Header set Access-Control-Allow-Credentials true
+#Header set Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD, OPTIONS"
+#Header set Access-Control-Allow-Headers "Authorization, authorization, Origin, X-Requested-With, Content-Type, Accept"
 
-Satisfy any
-order allow,deny
-allow from all
+#Satisfy any
+#order allow,deny
+#allow from all
 
 Options FollowSymLinks Includes
 RewriteEngine on
@@ -69,8 +69,7 @@ RewriteRule ^v1/users/email /api/ver1/read/useremail.php [L]
 RewriteRule ^v1/users /api/ver1/write/userregister.php [L]
 
 #CATEGORY
-# CRAZY - ref. #642
-RewriteRule ^v1/category/([a-z]+)$ /api/ver1/read/dummy-category.php?category=$1 [L]
+RewriteRule ^v1/category/([a-z0-9]+) /api/ver1/read/category.php?category=$1 [L]
 RewriteRule ^v1/category /api/ver1/read/categorylist.php [L]
 RewriteRule ^v1/category_static /api/ver1/static/category.json [L]
 

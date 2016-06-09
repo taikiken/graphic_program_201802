@@ -14,7 +14,87 @@
     margin-top: .25em;
     font-size: fz(20/2);
   }
+
+  .post-single-figure {
+    text-align: center;
+
+    .caption {
+      text-align: left;
+      margin-top: 8px;
+      // spのみ左右に余白
+      padding: 0 3.125%;
+
+      font-size: fz(20/2);
+    }
+  }
 } //.post-kv
+
+
+
+// video
+.post-video-kv {
+  .video-container {
+    position: relative;
+  }
+  .post-thumb-overlay-movie {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  iframe,
+  video {
+    width: 100%;
+    height: auto;
+  }
+
+  // ----------- youtube -------
+  // youtube video
+  &.post-video-kv-yt {
+    position: relative;
+  }
+  // empty image(16x9)
+  .yt-video-size {
+    width: 100%;
+    height: auto;
+  }
+  .yt-video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+  }
+  // ----------- youtube -------
+
+  .post-video-start {
+    display: none;
+  }
+  &.post-video-fb {
+    min-height: 211px;
+    background-color: #000000;
+  }
+}
+
+
+
+// brightcove
+.post-video-kv {
+  &.phone-post-kv {
+    .video-container {
+      position: relative;
+    }
+
+    .video-js {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}// post-video-kv
+
+
 
 
 
@@ -22,6 +102,44 @@
 .post-detail {
   padding-right: perCalc(20);
   padding-left: perCalc(20);
+
+  // bookmark button
+  #single-header-container {
+    .post-data {
+      // div
+      .loading-root,
+      .btn-bookmark {
+        position: relative;
+
+        // bookmark する click 後一時的に click 無効にするため + animation 表示
+        .loading-spinner {
+          width: 0;
+          height: 0;
+          opacity: 0;
+
+          transition-property: opacity;
+          transition-duration: 0.3s;
+          transition-timing-function: linear;
+        }
+
+        &.loading {
+          .loading-spinner {
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+          }
+        }
+      }//.btn-bookmark
+    }//.post-data
+  }
+
+  // sp single header
+  .sp-single-header {
+    .f-right,
+    .f-left {
+      float: none;
+    }
+  }
 
   // post-heading
   .post-heading {
@@ -111,6 +229,10 @@
       margin-top: 1.5em;
     }
 
+    ul, ol {
+      margin-left: 1em;
+    }
+
     li {
       margin-left: 1em;
     }
@@ -159,6 +281,30 @@
 
     pre {
       background-color: #fbfaf8;
+    }
+
+    img {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    .cms_widget {
+      margin-top: 1.5em;
+      overflow: hidden;
+
+      iframe,
+      video {
+        width: 100%;
+        // height: auto;
+      }
+    }
+
+    .cms_img {
+      margin-top: 1.5em;
+
+      .caption {
+        margin-top: .25em;
+      }
     }
   } //.post-content
 
@@ -413,7 +559,3 @@
     } // .post-sns-pr
   } // at-root
 }
-
-// -------------------------------------------------
-// override
-@import "detail_override";

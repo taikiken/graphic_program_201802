@@ -3,65 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="robots" content="noindex,nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css">
+
   <style>
-
-    body {
-      padding:30px;
-      font-size:3.5vw;
-    }
-
-    h1 {
-      font-size:1.7em;
-    }
-
-    hr {
-      margin:2em 0;
-    }
-
-    p {
-      margin:1.5em 0;
-      font-size:1.1em;
-      line-height:1.8;
-    }
-
-    figure {
-      padding:0;
-      margin-left:0;
-      margin-right:0;
-    }
-
-    figcaption {
-      margin-top:10px;
-      color:#666;
-      text-align:left;
-    }
-
     .webview-env {
       display:block;
       text-align:right;
       font-size:12px;
-      color:#999;
-    }
-
-    .webview-categories {
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-
-    .webview-categories li {
-      display:inline;
-      font-weight:bold;
-      padding-right:5px;
-      color:#e1438b;
-    }
-
-    .webview-meta {
-    }
-
-    .webview-meta time {
       color:#999;
     }
 
@@ -85,15 +36,8 @@
       left:0;
     }
 
-    .webview-media-image {
-    }
-
     .webview-media-image > div {
       text-align:center;
-      padding:20px;
-      border:1px solid #ccc;
-      -webkit-border-radius: 10px;
-              border-radius: 10px;
     }
 
     .webview-media-image img {
@@ -103,8 +47,55 @@
       margin:0 auto;
     }
 
+    #single-header-container {
+      margin-bottom:2em;
+      font-size:1.2em;
+    }
+
+    .post-content {
+      padding-bottom:2em;
+    }
+
 
   </style>
+
+<?php
+// ---------------------------------------------------------------------------
+// brightcove
+if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
+  // brightcove code をここに
+  // JS で非同期で読み込むと付随コードの読み込みが行われない様子
+?>
+  <style>
+    body.vjs-full-window {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+    .video-js.vjs-fullscreen {
+      position: fixed;
+      overflow: hidden;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .video-js:-webkit-full-screen {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .video-js.vjs-fullscreen.vjs-user-inactive {
+      cursor: none;
+    }
+  </style>
+
+  <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
+  <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
+<?php endif; ?>
 
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -122,55 +113,60 @@
 
 </head>
 
-<body>
+<body class="post-detail">
 
-<?php if ( $page['ua_app'] ) : ?>
-  <em class="webview-env">
-    for 運動通信 <?php echo $page['ua_app']; ?>
-  </em>
-<?php endif; ?>
-
-  <h1>
-    <?php echo $page['title']; ?>
-  </h1>
-
-  <div class="webview-meta">
-    <?php echo $page['post']['user']['name']; ?><br />
-
-    <?php if ( $page['post']['categories'] ) : ?>
-    <ul class="webview-categories">
-      <?php foreach( $page['post']['categories'] as $key => $value ) : ?>
-      <li>
-        <?php echo $value['label']; ?>
-      </li>
-      <?php endforeach; ?>
-    </ul>
-    <?php endif; ?>
-
-    <time><?php echo $page['post']['display_date']; ?></time>
+  <div id="single-header-container">
+    <div class="sp-single-header">
+      <div class="post-heading">
+        <h1>
+          <?php echo $page['title']; ?>
+        </h1>
+      </div>
+      <div class="post-data">
+        <div class="f-left">
+          <p class="post-author">
+            <?php echo $page['post']['user']['name']; ?>
+          </p>
+          <p class="post-category">
+            <?php if ( $page['post']['categories'] ) : ?>
+              <?php foreach( $page['post']['categories'] as $key => $value ) : ?>
+              <span class="category-label">
+                <?php echo $value['label']; ?>
+              </span>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </p>
+          <p class="post-date">
+            <?php echo $page['post']['display_date']; ?>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <hr />
-
 
   <div class="webview-media">
 
-  <!-- video -->
   <?php if ( $page['post']['media_type'] === 'video' ) : ?>
 
     <figure class="webview-media-video">
 
-      <?php if ( $page['post']['media']['video']['facebook'] ) : ?>
+      <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) : ?>
         <div class="fb-video" data-href="<?php echo $page['post']['media']['video']['facebook']; ?>" data-allowfullscreen="true" data-width="500"></div>
 
-      <?php elseif ( $page['post']['media']['video']['youtube'] ) : ?>
+      <?php elseif ( $page['post']['media']['video']['player'] == 'youtube' ) : ?>
         <iframe width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 
-      <?php elseif ( $page['post']['media']['video']['url'] ) : ?>
-        <video width="710" height="400" preload="none" controls="">
-          <source src="<?php echo $page['post']['media']['video']['url']; ?>" type="video/mp4">
+      <?php elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) : ?>
+        <video
+          id="webview-brightcove"
+          data-account="3948005094001"
+          data-player="rJL6q0az"
+          data-embed="default"
+          class="video-js"
+          preload="auto"
+          controls
+          >
         </video>
-
       <?php endif; ?>
 
       <?php if ( $page['post']['media']['video']['caption'] ) : ?>
@@ -178,11 +174,12 @@
         <small><?php echo $page['post']['media']['video']['caption']; ?></small>
       </figcaption>
       <?php endif; ?>
+
     </figure>
-  <!-- //video -->
 
   <?php else : ?>
-    <?php if ( $page['post']['media']['images']['original'] ) : ?>
+
+    <?php if ( $page['post']['media']['images']['original'] && $page['post']['is_show_image']) : ?>
 
     <figure class="webview-media-image">
       <div>
@@ -196,13 +193,18 @@
     </figure>
 
     <?php endif; ?>
+
   <?php endif; ?>
+
   </div>
 
 
-  <?php echo $page['post']['body']; ?>
+  <div class="post-content">
+    <?php echo $page['post']['body']; ?>
+  </div>
 
 
+<?php if ( $page['post']['media']['video']['player'] == 'facebook' ) : ?>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -220,6 +222,41 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+<?php endif; ?>
+
+<?php if ( $page['post']['media']['video']['player'] == 'brightcove' ) : ?>
+<script>
+(function () {
+
+  var myPlayer;
+  videojs('webview-brightcove').ready(function() {
+    myPlayer = this;
+
+    myPlayer.src(
+      {"type":"application/x-mpegURL",
+      "src":"<?php echo $page['post']['media']['video']['url']['sd']; ?>"}
+    );
+
+    myPlayer.poster('<?php echo $page['post']['media']['images']['medium']; ?>');
+
+    <?php if ( $page['post']['media']['video']['vast'] ) : ?>
+    myPlayer.ima3({
+      debug: false,
+      adTechOrder: [
+        'html5'
+      ],
+      postrollTimeout: 2000,
+      prerollTimeout: 1000,
+      requestMode: 'onload',
+      serverUrl: '<?php echo $page['post']['media']['video']['vast']; ?>' + Date.now(),
+      timeout: 5000
+    });
+    <?php endif; ?>
+
+  });
+}());
+</script>
+<?php endif; ?>
 
 </body>
 </html>

@@ -5,7 +5,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$sql=sprintf("select t1,title,img1,t2 from repo_n where a15='%s'",$_POST["token"]);
+$sql=sprintf("select t1,title,img1,t2 from u_member where a15='%s'",$_POST["token"]);
 $o->query($sql);
 
 $f=$o->fetch_array();

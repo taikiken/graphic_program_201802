@@ -10,7 +10,6 @@
     </div><!-- /.category-heading -->
 
     <section class="main-sec">
-
       <div class="setting-sec">
 
         <div class="setting-main">
@@ -27,6 +26,7 @@
           </div><!-- /.withdraw -->
         </div><!-- /.setting-main -->
 
+      </div>
     </section><!-- /.main-sec -->
 
   </div>

@@ -87,6 +87,10 @@ export let BrightcoveNode = React.createClass( {
   render: function() {
     let video = this.props.video;
     let caption = this.props.caption;
+    // let videoStyle = {
+    //   width: `${Content.WIDTH}px`,
+    //   height: `${Content.HD_HEIGHT}px`
+    // };
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
 
@@ -185,16 +189,20 @@ export let BrightcoveNode = React.createClass( {
     // vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
     // vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
     // vast = 'http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page=';
+    ima3.serverUrl = '';
+
     if ( vast !== '' ) {
       ima3.serverUrl = vast + Date.now();
     }
-    // console.log( 'vast', vast, ima3 );
+    // console.log( 'UT: vast', this.id, vast, ima3 );
     let player = videojs( this.id );
 
     player.ready( () => {
       player.src( { type: Brightcove.TYPE, src: url } );
       player.poster( poster );
-      player.ima3( ima3 );
+      if ( vast !== '' ) {
+        player.ima3( ima3 );
+      }
 
       if ( !this.phone ) {
         player.controls( false );

@@ -36,8 +36,24 @@ export class View extends EventDispatcher {
     option = Safety.object( option );
 
     super();
+    /**
+     * root element, insert 基点タグ
+     * @type {Element}
+     * @protected
+     */
     this._element = element;
+    /**
+     * event handler をセットした Object
+     * @type {Object}
+     * @protected
+     */
     this._option = option;
+    /**
+     * Action instance
+     * @type {*}
+     * @private
+     * @protected null
+     */
     this._action = null;
 
   }

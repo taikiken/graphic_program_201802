@@ -30,7 +30,7 @@ export class SingleDae extends RelatedDae {
     response = Safety.object( response );
     super( response );
     /**
-     * response.keywords
+     * response.keywords を KeywordsDae instance にします
      * @type {KeywordsDae}
      * @protected
      */
@@ -46,11 +46,9 @@ export class SingleDae extends RelatedDae {
 
       } );
 
-      // console.log( 'related_articles ', related );
-
     }
     /**
-     * response.related_articles を 1件づつ RelatedDae instance にし格納します
+     * 関連記事 response.related
      * @type {Array<RelatedDae>}
      * @protected
      */
@@ -76,7 +74,7 @@ export class SingleDae extends RelatedDae {
   }
   /**
    * 関連記事配列
-   * @return {Array|*} 関連記事配列を返します
+   * @return {Array<RelatedDae>} 関連記事配列を返します
    */
   get related():Array<RelatedDae> {
     return this._related;
@@ -87,5 +85,23 @@ export class SingleDae extends RelatedDae {
    */
   get keywords():KeywordsDae {
     return this._keywords;
+  }
+  /**
+   * response.is_show_image<br>
+   *
+   * 記事詳細 / 任意の記事詳細での画像非表示( e-player埋め込み対応 )<br>
+   * https://github.com/undotsushin/undotsushin/issues/721
+   * <pre>
+   * 記事詳細で画像を表示するかどうか
+   * - true  : 表示する
+   * - false : 表示しない
+   * * Web版ではtrueの場合記事詳細ページで画像を表示しない
+   * * アプリ版では記事詳細冒頭に必ず画像を表示するので参照する必要なし
+   * </pre>
+   * @from 2016-06-06
+   * @return {Boolean} 記事詳細で画像を表示するかどうかの真偽値を返します
+   */
+  get isShowImage():Boolean {
+    return this.response.is_show_image;
   }
 }

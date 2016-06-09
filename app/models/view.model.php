@@ -24,10 +24,33 @@ class ViewModel {
     'og_image'           => 'assets/images/common/og_image.png',
 
     // meta
-    'og_url'       => '', // シェアやコメント詳細用の正規化されたURL
+    'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
+
+
+    // theme
+    'theme' => array(
+      'base'             => 'normal',
+      'background_color' => '',
+      'images'           => array(
+        'pc' => '',
+        'sp' => '',
+      ),
+    ),
+
+    // ad
+    'ad' => array(
+      'sp' => '35244',
+      'pc' => array(
+        'sidebar_top'         => 'pc_sidebar_top',
+        'sidebar_bottom'      => 'pc_sidebar_bottom',
+        'single_top'          => 'pc_single_top',
+        'single_bottom_left'  => '35119',
+        'single_bottom_right' => '35120',
+      ),
+    ),
 
     // post
-    'post'               => '', //記事詳細の場合は記事データが入る
+    'post'               => array(),
 
     // layout
     'type'               => '',
@@ -42,6 +65,9 @@ class ViewModel {
     'hostname'           => '', // debug用 - 利用なし
     'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
 
+    // user
+    'is_logged_in'    => false, // ユーザーログイン判定
+
     // slim param
     'request'            => '',
     'response'           => '',
@@ -49,20 +75,18 @@ class ViewModel {
 
   );
 
+  var $db;
 
-  private $ua;
+  function __construct($db) {
+
+    // DB
+    $this->db = $db;
 
 
-  function __construct() {
-
+    // site
     $this->default['site_url']        = $this->get_site_url();
 
     if ( UT_ENV === 'LOCAL') :
-
-//      # LOCAL(vagrant)ではリモートサーバーにAPI/file_get_contentアクセスする
-//      $this->default['file_get_url'] = 'http://dev2.undotsushin.com';
-//      $this->default['apiRoot']      = 'http://dev2.undotsushin.com';
-
       # 2016-04-27
       # dev2 -> dev へ変更
       $this->default['file_get_url'] = 'http://dev.undotsushin.com';
@@ -75,22 +99,27 @@ class ViewModel {
 
     endif;
 
-    # サイト内のグロナビ用カテゴリーを取得
-    $this->default['site_categories'] = $this->get_site_categories();
-
-
-    // meta
+    // og / meta
     $this->default['og_url']   = $this->default['site_url'];
     $this->default['og_image'] = $this->default['site_url'].$this->default['og_image'];
 
 
-    # その他アクセス後から不変な値を設定
+    // env
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
     $this->ua = new UserAgent();
-    $this->default['ua']              = $this->get_ua();
-    $this->default['ua_app']          = $this->get_ua_app();
-    $this->default['ua_is_bot']       = $this->get_ua_is_bot();
+    $this->default['ua']              = $this->ua->set();
+    $this->default['ua_app']          = $this->ua->get_ua_app();
+    $this->default['ua_is_bot']       = $this->ua->is_bot();
+
+
+    // user
+    $this->default['is_logged_in']    = $this->get_is_logged_in();
+
+
+    # サイト内のグロナビ用カテゴリーを取得
+    $this->default['site_categories'] = $this->get_site_categories();
+
 
   }
 
@@ -140,23 +169,37 @@ class ViewModel {
   */
   public function get_site_categories() {
 
-    // TODO - これDBからひっぱる必要あり〼 ref. #117
-    // カテゴリーを取得する
-    // ひとまず file_get_contentsで取得しておきます
-    $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
 
-    if ( $categories ) :
+    if ( UT_ENV == 'LOCAL' ) :
 
-      $categories = json_decode($categories, true);
+      $categories = file_get_contents($this->default['file_get_url'].'/api/v1/category');
 
-      foreach( $categories['response']['categories'] as $key => $value ) :
+      if ( $categories ) :
+        $categories = json_decode($categories, true)['response']['categories'];
+      else :
+        return false;
+      endif;
+
+    else :
+
+      if ( $this->default['ua'] == 'desktop' ) :
+        $categories = $this->db->get_site_categories(false);
+      else :
+        $categories = $this->db->get_site_categories(true);
+      endif;
+
+    endif;
+
+    if ( is_array($categories) ) :
+      foreach( $categories as $key => $value ) :
 
         # 冒頭に「すべて」を追加
         if ( $key == 0 ) :
           $categoriesArray['all'] = array(
-            'label' => 'すべて',
-            'slug'  => 'all',
-            'url'   => $this->default['site_url'].'category/all',
+            'label'     => 'すべて',
+            'slug'      => 'all',
+            'url'       => $this->default['site_url'].'category/all',
+            'title_img' => '',
           );
         endif;
 
@@ -167,6 +210,7 @@ class ViewModel {
       return $categoriesArray;
 
     endif;
+
   }
 
 
@@ -180,34 +224,28 @@ class ViewModel {
 
     if ( $this->default['site_categories'][$slug] ) :
 
-      // ref. https://github.com/undotsushin/undotsushin/issues/642
-      // 他カテゴリー情報API未整備のため カテゴリー一覧APIの内容をextendする
-      $category = $this->default['site_categories'][$slug];
 
-      $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
+      if ( UT_ENV == 'LOCAL' ) :
 
-      if ( $response ) :
-        $response = json_decode($response, true);
-      endif;
+        $category = $this->default['site_categories'][$slug];
+        $response = file_get_contents($this->default['file_get_url'].'/api/v1/category/'.$slug);
 
-      if ( isset($response['status']['code']) && $response['status']['code'] !== 200  ) :
-        return false;
+        if ( $response ) :
+          $category = json_decode($response, true)['response'];
+        else :
+          return false;
+        endif;
 
       else :
-        if ( is_array($response) && count($response)) {
-          foreach($response as $array) {
-            if(is_array($array)) {
 
-              if ( $slug !== 'crazy' ) :
-                $category = array_merge($array, $category);
-              else :
-                $category = array_merge($category, $array);
-              endif;
+        $category = $this->db->get_category_by_slug($slug);
 
-            }
-          }
-        }
+      endif;
 
+      // すべての場合はlabel/titleが空なのですべてをセット
+      if ( !$category['label'] ) :
+        $category['label'] = 'すべて';
+        $category['title'] = 'すべて';
       endif;
 
       return $category;
@@ -226,25 +264,34 @@ class ViewModel {
   */
   public function get_post($id) {
 
-    // TODO - ひとまずfile_get_contentsで取得
-    $post = file_get_contents($this->default['file_get_url'].'/api/v1/articles/'.$id);
 
-    if ( $post ) :
-      $post = json_decode($post, true);
+    if ( UT_ENV == 'LOCAL' ) :
 
-      if ( $post['status']['code'] !== 200 ) :
+      $response = file_get_contents($this->default['file_get_url'].'/api/v1/articles/'.$id);
+
+      if ( $response ) :
+        $post = json_decode($response, true)['response'];
+      else :
         return false;
       endif;
 
-      if ( $post['response']['categories'] ) :
+    else :
+
+      $post = $this->db->get_post($id);
+
+    endif;
+
+    if ( $post ) :
+
+      if ( $post['categories'] ) :
         // 記事のプライマリーカテゴリーをdefaultに設定しておく
-        $category_primary = $post['response']['categories'][0];
+        $category_primary = $post['categories'][0];
         if ( isset($category_primary['slug']) ) :
           $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
         endif;
       endif;
 
-      return $post['response'];
+      return $post;
 
     endif;
 
@@ -261,18 +308,84 @@ class ViewModel {
   */
   public function get_comment( $id, $commentId ) {
 
-    // TODO - ひとまずfile_get_contentsで取得
-    $post = file_get_contents($this->default['file_get_url'].'/api/v1/comments/article/'.$id.'/'.$commentId);
+    if ( UT_ENV == 'LOCAL' ) :
 
-    if ( $post ) :
-      $post = json_decode($post, true);
+      $response = file_get_contents($this->default['file_get_url'].'/api/v1/comments/article/'.$id.'/'.$commentId);
 
-      if ( $post['status']['code'] !== 200 ) :
+      if ( $response ) :
+        $post = json_decode($response, true)['response'];
+      else :
         return false;
       endif;
 
-      return $post['response'];
+    else :
 
+      $post['comments'] = $this->db->get_comment( $id, $commentId );
+
+    endif;
+
+    return $post;
+
+  }
+
+
+
+  /**
+  * private - get_is_logged_in - tokenをもとにユーザー存在チェックも行った上でログイン判定
+  *
+  * @return bool true : ログイン済み | false : 非ログイン
+  */
+  private function get_is_logged_in() {
+
+    if ( UT_ENV == 'LOCAL' ) :
+
+      $token = $this->db->get_token();
+
+      $option = array(
+        'http'=>array(
+          'method'=>"GET",
+          'header'=>"Authorization: OAuth realm=undotsushin.com, oautn_token={$token}"
+        )
+      );
+
+      $response = file_get_contents($this->default['apiRoot']."/api/v1/users/self", false, stream_context_create($option));
+
+      if ( $response ) :
+
+        $response = json_decode($response, true);
+
+        if ( $response['status']['code'] == 200 ) :
+          return true;
+        endif;
+
+      endif;
+
+    else :
+
+      $response = $this->db->get_is_logged_in();
+
+      if ( $response ) :
+        return true;
+      else :
+        $this->delete_cookie();
+        return false;
+      endif;
+
+    endif;
+
+  }
+
+
+  /**
+  * public - user - ログイン判定 - ログインしてないならログインページにリダイレクトする
+  * 用途 : マイページへの非ログインアクセスのリダイレクト
+  * @return
+  */
+  public function check_logged_in() {
+
+    if ( !$this->default['is_logged_in'] ) :
+      header('Location: /login/');
+      exit;
     endif;
 
   }
@@ -280,38 +393,13 @@ class ViewModel {
 
 
   /**
-  * env - UA判定 - mobile or desktop
+  * public - tokenを保持してるcookieを消しちゃう
+  * 用途 : ログアウト処理
   *
-  * @return string  mobile | desktop
   */
-  public function get_ua() {
+  public function delete_cookie() {
 
-    return $this->ua->set();
-
-  }
-
-
-
-  /**
-  * env - アプリWebView判定 - ios | android
-  *
-  * @return string  ios | android
-  */
-  public function get_ua_app() {
-
-    return $this->ua->get_ua_app();
-
-  }
-
-
-  /**
-  * env - bot判定
-  *
-  * @return bool
-  */
-  public function get_ua_is_bot() {
-
-    return $this->ua->is_bot();
+    setcookie('auth_token', '', time() - 3600, '/');
 
   }
 
@@ -320,22 +408,49 @@ class ViewModel {
   * $default を上書きしてmodelを返す
   *
   * @param  array  $options
-  * @return array  $.extend( $default, $options)
+  * @return array  = $.extend($default, $options)
   */
-  public function set() {
+  public function set($options = null) {
 
-    $options  = func_get_args();
-    $extended = $this->default;
+    if ( $options ) :
+      $this->default = $this->array_extend( $this->default, $options );
+    endif;
 
-    if(is_array($options) && count($options)) {
-      foreach($options as $array) {
-        if(is_array($array)) {
-          $extended = array_merge($extended, $array);
+    return $this->default;
+
+  }
+
+
+  /**
+  * 配列のdeep extendを行う
+  *
+  */
+  private function array_extend(&$result) {
+
+    if (!is_array($result)) {
+      $result = array();
+    }
+
+    $args = func_get_args();
+
+    for ($i = 1; $i < count($args); $i++) {
+
+      if (!is_array($args[$i])) continue;
+
+      foreach ($args[$i] as $k => $v) {
+        if (!isset($result[$k])) {
+          $result[$k] = $v;
+        } else {
+          if (is_array($result[$k]) && is_array($v)) {
+            $this->array_extend($result[$k], $v);
+          } else {
+            $result[$k] = $v;
+          }
         }
       }
     }
 
-    return $extended;
+    return $result;
 
   }
 

@@ -43,6 +43,11 @@ button {
   outline: none;
 }
 
+input,
+textarea {
+  color: #333;
+}
+
 .whole {
   overflow: hidden;
   min-width: $global-width;
@@ -685,6 +690,10 @@ button {
 
   .app-bnr {
     margin-top: 30px;
+  }
+
+  > .app-bnr:first-child {
+    margin-top: 0;
   }
 
   @at-root {

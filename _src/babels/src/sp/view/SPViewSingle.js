@@ -64,6 +64,9 @@ export class SPViewSingle extends ViewSingle {
     this.header( single );
     this.visual( single );
     this.banner( single );
+
+    // from 2016-06-10
+    ViewSingle.moreExternal();
   }
   /**
    * header 部レンダリング

@@ -11,6 +11,21 @@
   <script src="/assets/js/libs/vendor.react.js"></script>
   <script src="/assets/js/bundle/main.bundle.js"></script>
 
+  <script type='text/javascript'>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  </script>
+
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -27,7 +42,7 @@
 <?php
 // ---------------------------------------------------------------------------
 // brightcove
-if ( $page['template'] == 'p' && $page['category']['slug'] == 'crazy' ) :
+if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
 ?>
@@ -76,14 +91,15 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $template_name == 'p' ) {
+if ( $template_name == 'p' || $template_name == 'comment' ) {
+
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
 
   // theme 設定 class を追加
   // JSON レスポンスの theme.base を CSS class へ追加します
-  if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
-    $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
+  if ( $page['theme']['base'] ) {
+    $whole_classes[] = $page['theme']['base'];
   }
 }
 
@@ -91,7 +107,7 @@ if ( $template_name == 'p' ) {
 if ( $template_name == 'category' ) {
   // template_classname があれば
   if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
-    $whole_classes[] = $page[ 'template_classname' ];
+    $whole_classes[] = $page['template_classname'];
   }
 }
 ?>
@@ -133,15 +149,12 @@ if (
     <ul>
       <li id="home" class="gnav-home"><a href="/">一面</a></li>
 
-      <li id="crazy" class="gnav-crazy"><a href="/category/crazy/">CRAZY</a></li>
-
-      <?php foreach( $page[ 'site_categories' ] as $category ) {
-        if ( $category[ 'slug' ] == 'crazy' ) {
-          continue;
-        }
+      <?php foreach( $page['site_categories'] as $category ) {
+        // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
+        // タブの表示順はAPI通りにする
         ?>
-        <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
-          <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
+        <li id="<?php echo $category['slug']; ?>" class="gnav-<?php echo $category['slug']; ?>">
+          <a href="/category/<?php echo $category['slug']; ?>/"><?php echo $category['label']; ?></a>
         </li>
       <?php }//foreach ?>
     </ul>

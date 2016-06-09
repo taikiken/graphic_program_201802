@@ -15,12 +15,16 @@
 import {View} from '../../../view/View';
 
 // view
-import {SPViewCategory} from './SPViewCategory';
+// import {SPViewCategory} from './SPViewCategory';
+import {SPViewCategoryWithSlug} from './SPViewCategoryWithSlug';
 import {SPViewRanking} from '../sidebar/SPViewRanking';
 import {SPViewVideos} from '../sidebar/SPViewVideos';
 
 // node
 import {SPTabNode} from '../../node/SPTabNode';
+
+// dae
+import {CategoriesSlugDae} from '../../../dae/caegories/CategoriesSlugDae';
 
 // data
 import {Safety} from '../../../data/Safety';
@@ -37,7 +41,7 @@ let ReactDOM = self.ReactDOM;
  */
 export class SPViewCategoryRoot extends View {
   /**
-   * archive 親コンテナ,
+   * archive 親コンテナ,<br>
    * 新着, 人気, 動画 3リクエストを行う
    * @param {string} slug category slug
    * @param {Element} element root element archive 親
@@ -63,6 +67,14 @@ export class SPViewCategoryRoot extends View {
         slug: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
+        /**
+         * SPViewCategoryWithSlug instance を保持します
+         * @type {null|SPViewCategoryWithSlug}
+         * @private
+         */
+        this.latestInfo = null;
+
+        this.tabNode = null;
         /**
          * 各 tab の scroll 位置を保存します
          * @private
@@ -113,25 +125,29 @@ export class SPViewCategoryRoot extends View {
 
       },
       componentDidMount: function() {
-        // this.tabNode = null;
-
+        this.tab();
         // after mount, request API
         this.latest();
         // this.ranking();
         // this.videos();
-        this.tab();
+      },
+      slugDone: function( result:CategoriesSlugDae ) {
+        // console.log( 'slugDone', result );
+        this.tabNode.activateTab( result.isShowFilter );
       },
       // --------------------------------------
       // custom
 
       // 新着記事
-      latest: function():void {
+      latest: function():SPViewCategoryWithSlug {
         let element = ReactDOM.findDOMNode(this.refs.latestElement);
         let moreElement = ReactDOM.findDOMNode(this.refs.latestMoreElement);
         let callback = {};
-        // callback[ View.DID_MOUNT ] = this.latestDidMount;
-        let category = new SPViewCategory( this.props.slug, element, moreElement, callback );
+        callback[ SPViewCategoryWithSlug.CATEGORY_INFO ] = this.slugDone;
+        // let category = new SPViewCategory( this.props.slug, element, moreElement, callback );
+        let category = new SPViewCategoryWithSlug( this.props.slug, element, moreElement, callback );
         category.start();
+        return category;
       },
       // 人気
       ranking: function():void {
@@ -150,7 +166,7 @@ export class SPViewCategoryRoot extends View {
       // 切替 tab
       tab: function():void {
         let element = ReactDOM.findDOMNode(this.refs.tab);
-        ReactDOM.render(
+        this.tabNode = ReactDOM.render(
           <SPTabNode
             callback={this.tabClick}
           />,

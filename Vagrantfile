@@ -54,6 +54,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = _conf['hostname']
   config.vm.network :private_network, ip: _conf['ip']
   config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: 8888
 
   # sync
   # ------------------------------
@@ -142,6 +143,23 @@ Vagrant.configure(2) do |config|
         }
       },
       :postgresql => {
+        :version  => '9.4',
+        :enable_pgdg_yum => true,
+        :dir => '/var/lib/pgsql/9.4/data',
+        :config => {
+          :data_directory => '/var/lib/pgsql/9.4/data'
+        },
+        :client => {
+          :packages => ["postgresql94", "postgresql94-devel"]
+        },
+        :server => {
+          :packages => ["postgresql94-server"],
+          :service_name => 'postgresql-9.4'
+        },
+        :contrib => {
+          :packages => ["postgresql94-contrib"]
+        },
+        :setup_script => 'postgresql94-setup',
         :password => 'postgres',
         :pg_hba => [
           {:type => 'local', :db => 'all', :user => 'postgres', :addr => nil, :method => 'ident'},
@@ -154,6 +172,7 @@ Vagrant.configure(2) do |config|
         :compiletime => true
       }
     }
+
 
     chef.add_recipe 'undotsushin'
 
@@ -170,6 +189,14 @@ Vagrant.configure(2) do |config|
 
   # push
   # ------------------------------
+  # $ vagrant push db_import
+  config.push.define "db_import", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      vagrant ssh -c "cd /vagrant && sudo -u postgres dropdb ut && sudo -u postgres createdb ut && sudo -u postgres psql -h localhost -U ut -d ut < ut.dump;"
+    SCRIPT
+  end
+
+
   # $ vagrant push dev - t2.small の dev.undotushin.com
   config.push.define "dev", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT

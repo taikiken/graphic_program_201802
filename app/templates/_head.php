@@ -67,5 +67,3 @@ endif;
   <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
-
-

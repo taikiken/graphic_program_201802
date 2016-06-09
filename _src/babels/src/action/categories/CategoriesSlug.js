@@ -11,31 +11,26 @@
  */
 
 import {Categories} from './Categories';
+import {Safety} from '../../data/Safety';
 
 /**
- * 引数 slug のカテゴリ情報を取得します<br>
- * from 2016-05-28<br>
+ * <p>引数 slug のカテゴリ情報を取得します</p>
  *
- * <pre>
- * 特定のカテゴリー情報を取得する
- ※ 主に企画モノの記事一覧ページを生成するにあたり利用する
- * </pre>
+ * `/api/v1/category/[:category_slug]`
  *
- * ```
- * /api/v1/category/[:category_slug]
- * ```
- *
+ * @from 2016-05-28
  */
 export class CategoriesSlug extends Categories {
   /**
    * 引数 slug のカテゴリ情報を取得し<br>
-   * カテゴリ特有のデザイン、レイアウトへ対応します<br>
+   * カテゴリ特有のデザイン、レイアウトへ対応します
    *
-   * @param {string} slug category slug
+   * @param {string} [slug=all] category slug
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */
   constructor( slug:string, resolve:Function = null, reject:Function = null ) {
+    slug = Safety.string( slug, 'all' );
     super( resolve, reject );
     /**
      * category slug
@@ -46,11 +41,11 @@ export class CategoriesSlug extends Categories {
     // override url property
     // /api/v1/category/[:category_slug]
     /**
-     * 親クラス Categories.url へ slug を付与します
+     * API path
      * @type {string}
      * @protected
      */
-    this._url = `${this.types.url}/${slug}`;
+    this._url = `${this._types.url}/${slug}`;
   }
   /**
    * category slug を取得します

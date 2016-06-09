@@ -13,9 +13,10 @@
 import {Safety} from '../../data/Safety';
 
 import {ThemeDae} from '../theme/ThemeDae';
-import {BannerDae} from '../theme/BannerDae';
 import {AdDae} from '../theme/AdDae';
 import {BannersDae} from '../banner/BannersDae';
+import {BannerDae} from '../banner/BannerDae';
+
 
 /**
  * <p>特定のカテゴリー情報を取得する<br>
@@ -31,7 +32,6 @@ export class CategoriesSlugDae {
    */
   constructor( response:Object = {} ) {
     response = Safety.object( response );
-
     /**
      * response.theme
      * @type {ThemeDae}
@@ -147,5 +147,18 @@ export class CategoriesSlugDae {
    */
   get ad():AdDae {
     return this._ad;
+  }
+  /**
+   * response.is_show_filter
+   * <pre>
+   * iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ
+   * - true  : 表示する
+   * - false : 表示しない
+   * </pre>
+   * @from 2016-06-06
+   * @return {Boolean} iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ（真偽値）を返します
+   */
+  get isShowFilter():Boolean {
+    return this.response.is_show_filter;
   }
 }

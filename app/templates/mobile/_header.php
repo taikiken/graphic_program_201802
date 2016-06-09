@@ -11,7 +11,7 @@
   <?php
   // header 表示条件 設定
   $template_name = $page['template'];
-  
+
   $page_has_header = false;
 
   if (
@@ -78,7 +78,7 @@ endif;
 <?php
 // ---------------------------------------------------------------------------
 // brightcove
-if ( $page['template'] == 'p' && $page['category']['slug'] == 'crazy' ) :
+if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
   ?>
@@ -132,14 +132,14 @@ if ( !empty( $page['template_classname'] ) ) {
   $whole_classes[] = $page['template_classname'];
 }
 // 記事詳細
-if ( $page['template'] == 'p' ) {
+if ( $page['template'] == 'p' || $page['template'] == 'comment') {
   // 記事詳細へ識別 CSS class 追加
   $whole_classes[] = 'post-single';
 
   // theme 設定 class を追加
   // JSON レスポンスの theme.base を CSS class へ追加します
-  if (  !empty( $page[ 'post' ] ) && !empty( $page[ 'post' ][ 'theme' ] )  && !empty( $page[ 'post' ][ 'theme' ][ 'base' ] ) ) {
-    $whole_classes[] = $page[ 'post' ][ 'theme' ][ 'base' ];
+  if ( $page['theme' ]['base'] ) {
+    $whole_classes[] = ['theme']['base'];
   }
 }
 
@@ -147,7 +147,7 @@ if ( $page['template'] == 'p' ) {
 if ( $template_name == 'category' ) {
   // template_classname があれば
   if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
-    $whole_classes[] = $page[ 'template_classname' ];
+    $whole_classes[] = $page['template_classname'];
   }
 }
 ?>
@@ -180,15 +180,12 @@ if ( $page_has_header ) :
       <ul id="gnav-sec-list">
         <li id="home" class="gnav-home"><a href="/">一面</a></li>
 
-          <li id="crazy" class="gnav-crazy"><a href="/category/crazy/">CRAZY</a></li>
-
-        <?php foreach( $page[ 'site_categories' ] as $category ) {
-          if ( $category[ 'slug' ] == 'crazy' ) {
-            continue;
-          }
+        <?php foreach( $page['site_categories'] as $category ) {
+          // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616
+          // タブの表示順はAPI通りにする
           ?>
-          <li id="<?php echo $category[ 'slug' ]; ?>" class="gnav-<?php echo $category[ 'slug' ]; ?>">
-            <a href="/category/<?php echo $category[ 'slug' ]; ?>/"><?php echo $category[ 'label' ]; ?></a>
+          <li id="<?php echo $category['slug']; ?>" class="gnav-<?php echo $category['slug']; ?>">
+            <a href="/category/<?php echo $category['slug']; ?>/"><?php echo $category['label']; ?></a>
           </li>
         <?php }//foreach ?>
       </ul>
