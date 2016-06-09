@@ -123,7 +123,7 @@ endif;
           </p>
 
           <p>
-            <a href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank" class="post-content-btn-readMore" style="text-align:center; font-weight:bold; font-size:1.1em;">続きを読む(外部サイトへ)</a>
+            <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank" style="text-align:center; font-weight:bold; font-size:1.1em;">続きを読む(外部サイトへ)</a>
           </p>
 
         <?php
