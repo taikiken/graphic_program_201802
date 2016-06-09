@@ -457,5 +457,15 @@ export class Dom {
   static bodySection():Element {
     return Dom.get( 'body-section' );
   }
+  // --------------------------------------
+  // 記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738
+  /**
+   * <p>記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738</p>
+   * で ga するために a#readMore-external へのクリックで送信します
+   * @return {Element} a#readMore-external
+   */
+  static moreExternal():Element {
+    return Dom.get( 'readMore-external' );
+  }
 }
 // return Dom.get( '' );

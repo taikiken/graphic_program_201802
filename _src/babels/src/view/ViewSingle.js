@@ -29,8 +29,13 @@ import {Safety} from '../data/Safety';
 import {SingleDae} from '../dae/SingleDae';
 
 // app
+import {Dom} from '../app/Dom';
 import {User} from '../app/User';
 import {Message} from '../app/const/Message';
+
+// ga
+import {Ga} from '../ga/Ga';
+import {GaData} from '../ga/GaData';
 
 /**
  * 記事詳細
@@ -179,6 +184,9 @@ export class ViewSingle extends View {
 
     }
 
+    // from 2016-06-10
+    ViewSingle.moreExternal();
+
   }// render
   /**
    * header View.DID_MOUNT event handler
@@ -218,5 +226,46 @@ export class ViewSingle extends View {
     }
 
   }// related
+  /**
+   * <p>a#readMore-external の存在チェックを行い<br>
+   * 存在すれば click で<br>
+   * ga タグを送信します</p>
+   *
+   * @from 2016-06-10
+   */
+  static moreExternal():void {
+    const external = Dom.moreExternal();
+    if ( external === null ) {
+      return;
+    }
 
+    // ga 準備
+    external.addEventListener( 'click', ViewSingle.onExternal, false );
+  }
+  /**
+   * <p>a#readMore-external click event handler<br>
+   * ga タグを送信します</p>
+   *
+   * https://github.com/undotsushin/undotsushin/issues/738#issuecomment-224794530
+   *
+   * <code>
+   * ga('send', {
+   * 'hitType': 'event',
+   * 'eventCategory': 'external_link',
+   * 'eventAction': 'click',
+   * 'eventLabel': 'http://〜'
+   * });
+   * </code>
+   *
+   * @from 2016-06-10
+   * @param {Event} event a#readMore-external click event object
+   */
+  static onExternal( event:Event ):void {
+    const category = 'external_link';
+    const action = 'click';
+    const label = Safety.string(event.target.href, '');
+    const method = 'ViewSingle.onExternal';
+
+    Ga.add( new GaData( method, category, action, label ) );
+  }
 }
