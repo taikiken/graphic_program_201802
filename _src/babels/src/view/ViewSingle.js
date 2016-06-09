@@ -230,6 +230,8 @@ export class ViewSingle extends View {
    * <p>a#readMore-external の存在チェックを行い<br>
    * 存在すれば click で<br>
    * ga タグを送信します</p>
+   *
+   * @from 2016-06-10
    */
   static moreExternal():void {
     const external = Dom.moreExternal();
@@ -240,12 +242,12 @@ export class ViewSingle extends View {
     // ga 準備
     external.addEventListener( 'click', ViewSingle.onExternal, false );
   }
-
   /**
    * <p>a#readMore-external click event handler<br>
    * ga タグを送信します</p>
    *
    * https://github.com/undotsushin/undotsushin/issues/738#issuecomment-224794530
+   *
    * <code>
    * ga('send', {
    * 'hitType': 'event',
@@ -254,12 +256,14 @@ export class ViewSingle extends View {
    * 'eventLabel': 'http://〜'
    * });
    * </code>
+   *
+   * @from 2016-06-10
    * @param {Event} event a#readMore-external click event object
    */
   static onExternal( event:Event ):void {
     const category = 'external_link';
     const action = 'click';
-    const label = Safety.string(event.target.src, '');
+    const label = Safety.string(event.target.href, '');
     const method = 'ViewSingle.onExternal';
 
     Ga.add( new GaData( method, category, action, label ) );
