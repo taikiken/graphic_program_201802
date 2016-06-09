@@ -299,7 +299,7 @@ export class ViewPickup extends View {
                */}
               <div className="post-overview">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-                <h2 className='post-heading'>{p.title}</h2>
+                <h2 className="post-heading">{p.title}</h2>
                 <p className="post-date">{p.date}</p>
                 <p className="post-comment-num">{p.commentsCount}</p>
               </div>

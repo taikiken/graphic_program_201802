@@ -112,12 +112,13 @@ rules:
   react/jsx-pascal-case: 1
   jsx-quotes: [1, "prefer-double"]
   react/jsx-curly-spacing: 1
-  react/jsx-boolean-value: 1
+  # true は明示した方が良い気がします
+  #  react/jsx-boolean-value: 1
   jsx-a11y/img-has-alt: 1
   jsx-a11y/aria-role: 1
   jsx-a11y/no-access-key: 1
   react/wrap-multilines: 1
   react/self-closing-comp: 1
   react/jsx-closing-bracket-location: 1
-#  react/require-render-return: 1
+  # require-render-return: 1
   react/no-is-mounted: 1
