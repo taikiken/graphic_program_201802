@@ -17,7 +17,7 @@ if(!preg_match("/^[0-9]+$/",$uid)){
 
 $o->query($sql);
 while($f=$o->fetch_array()){
-	$s[]=set_categoryinfo($f);
+	$s[]=set_categoryinfo($f,"",0);
 }
 
 $y=array();
