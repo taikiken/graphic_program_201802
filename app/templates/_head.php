@@ -50,7 +50,9 @@ endif;
   <meta name="twitter:description" content="<?php echo $page['og_description']; ?>">
 
 
-<?php if ( $page['og_url'] ) : ?>
+<?php if ( $page['canonical'] ) : ?>
+  <link rel="canonical" href="<?php echo $page['canonical']; ?>">
+<?php elseif ( $page['og_url'] ) : ?>
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 <?php endif; ?>
 

@@ -25,7 +25,7 @@ class ViewModel {
 
     // meta
     'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
-
+    'canonical'          => '',
 
     // theme
     'theme' => array(
