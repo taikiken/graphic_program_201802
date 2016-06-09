@@ -20,6 +20,7 @@ $articletable="
 	d3,
 	t1,
 	m1,
+	m2,
 	t10,t11,t12,t13,t14,
 	a1,a2,a3,a4,a5,a6,
 	swf as video,
@@ -27,20 +28,30 @@ $articletable="
 	facebook,
 	m_time,
 	t8 as videocaption,
-	t9,
-	(select name from u_categories where id=m1) as category,
-	(select name_e from u_categories where id=m1) as slug,
-	(case when m2 is not null then (select name from u_categories where id=m2) else null end)  as category2,
-	(case when m2 is not null then (select name_e from u_categories where id=m2) else null end) as slug2
-from repo_n where cid=1 and flag=1%s) as t1,
-(select 
+	t9
+from repo_n where flag=1%s) as t1
+
+left join (select 
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
 	img1 as icon 
-from u_media where flag=1) as t2 
-where t1.d2=t2.userid";
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select 
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select 
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
 
 $articletable2="
 (select 
@@ -56,6 +67,7 @@ $articletable2="
 	d3,
 	t1,
 	m1,
+	m2,
 	t10,t11,t12,t13,t14,
 	a1,a2,a3,a4,a5,a6,
 	swf as video,
@@ -63,20 +75,30 @@ $articletable2="
 	facebook,
 	m_time,
 	t8 as videocaption,
-	t9,
-	(select name from u_categories where id=m1) as category,
-	(select name_e from u_categories where id=m1) as slug,
-	(case when m2 is not null then (select name from u_categories where id=m2) else null end)  as category2,
-	(case when m2 is not null then (select name_e from u_categories where id=m2) else null end) as slug2
-	from repo_n where cid=1 and flag=1%s%s%s) as t1,
-(select 
+	t9
+from repo_n where flag=1%s%s%s) as t1
+
+left join (select 
 	id as userid,
 	t1 as url,
 	cid as typeid,
 	title as name,
 	img1 as icon 
-from u_media where flag=1) as t2 
-where t1.d2=t2.userid";
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select 
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select 
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
 
 $articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_member where  cid!=6 and flag=1) as t2 where t1.d2=t2.userid";
 
@@ -104,6 +126,9 @@ u_comment where %s) as t1,
 	img1 as icon 
 from u_member where flag=1%s) as t2";
 
+function switch_category_title($label,$title){
+	return strlen($title)>0?$title:$label;
+}
 
 function set_orderby($s=0){
 	return $s==0?" order by m_time desc,id":sprintf(" order by %s.m_time desc,%s.id");
@@ -159,20 +184,6 @@ function mailregister($email,$name){
 	$reply="info@undotsushin.com";
 
 	return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
-}
-
-function set_categoryinfo($f,$personalized=""){
-	
-	global $ImgPath,$domain;
-	
-	$s["id"]=(int)$f["id"];
-	$s["label"]=$f["name"];
-	$s["slug"]=$f["name_e"];
-	$s["url"]=sprintf("%s/category/%s/",$domain,$f["name_e"]);
-	if($personalized!=="")$s["is_interest"]=$personalized;
-	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
-	
-	return $s;
 }
 
 function set_advertise($ad,$type){
@@ -289,7 +300,7 @@ function set_categoriesinfo($f){
 	global $ImgPath,$domain;
 	
 	$s["id"]=$f["id"];
-	$s["label"]=mod_HTML($f["name"]);
+	$s["label"]=switch_category_title($f["name"],$f["title"]);
 	$s["slug"]=mod_HTML($f["name_e"]);
 	$s["url"]=sprintf("%s/%s/",$domain,$f["name_e"]);
 	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
@@ -300,6 +311,20 @@ function set_categoriesinfo($f){
 	$ad_put=set_advertise($ad,"list");
 	
 	$s=$s+$ad_put;
+	return $s;
+}
+
+function set_categoryinfo($f,$personalized="",$longtitle=1){
+	
+	global $ImgPath,$domain;
+	
+	$s["id"]=(int)$f["id"];
+	$s["label"]=$longtitle==1?switch_category_title($f["name"],$f["title"]):$f["name"];
+	$s["slug"]=$f["name_e"];
+	$s["url"]=sprintf("%s/category/%s/",$domain,$f["name_e"]);
+	if($personalized!=="")$s["is_interest"]=$personalized;
+	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
+	
 	return $s;
 }
 
@@ -338,16 +363,18 @@ function set_articleinfo($f,$type=0,$canonical,$readmore){
 		$s["readmore"]["is_readmore"]=$f["readmore"]?true:false;
 		$s["readmore"]["url"]=$f["t9"];
 	}
-	
-	$s["category"]["label"]=$f["category"]; 
+
+	//カテゴリー期を見て配列のみに変更する
+	$cat1=switch_category_title($f["category"],$f["categorylabel"]);
+	$cat2=switch_category_title($f["category2"],$f["categorylabel2"]);
+	$s["category"]["label"]=$cat1;
 	$s["category"]["slug"]=$f["slug"]; 
-	$s["category2"]["label"]=$f["category2"]; 
+	$s["category2"]["label"]=$cat2; 
 	$s["category2"]["slug"]=$f["slug2"];
-	
-	$s["categories"][0]["label"]=$f["category"]; 
+	$s["categories"][0]["label"]=$cat1; 
 	$s["categories"][0]["slug"]=$f["slug"];
 	if(strlen($f["category2"])>0){
-		$s["categories"][1]["label"]=$f["category2"];
+		$s["categories"][1]["label"]=$cat2;
 		$s["categories"][1]["slug"]=$f["slug2"]; 
 	}
 

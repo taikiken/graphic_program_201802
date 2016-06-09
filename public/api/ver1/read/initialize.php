@@ -40,7 +40,7 @@ if(strlen($uid)==0){
 
 $o->query($sql);
 while($f=$o->fetch_array()){
-	$s["cateories"][]=set_categoryinfo($f);
+	$s["cateories"][]=set_categoryinfo($f,"",0);
 }
 
 if(strlen($uid)>0){
