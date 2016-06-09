@@ -234,7 +234,7 @@ export class ViewRanking extends View {
               </figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-                <h4 className='post-heading'>{p.title}</h4>
+                <h4 className="post-heading">{p.title}</h4>
                 <p className="post-date">{p.date}</p>
               </div>
             </a>

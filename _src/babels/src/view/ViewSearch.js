@@ -47,7 +47,7 @@ export class ViewSearch extends ViewArchiveMasonry {
   constructor( word:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option, true );
     // keyword 検索
-    this._action = User.sign ?
+    this.action = User.sign ?
       new SearchAuth( word, this.done.bind( this ), this.fail.bind( this ) ) :
       new Search( word, this.done.bind( this ), this.fail.bind( this ) );
   }

@@ -206,7 +206,7 @@ export class ViewHeadline extends View {
               <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(this.props.mediaType)}</figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-                <h3 className='post-heading'>{p.title}</h3>
+                <h3 className="post-heading">{p.title}</h3>
                 <p className="post-date">{p.date}</p>
               </div>
             </a>
@@ -248,19 +248,21 @@ export class ViewHeadline extends View {
                   let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                   // HeadlineDom instance を使い render
-                  return <HeadlineDom
-                    key={'headline-' + dae.id}
-                    index={i}
-                    id={String( dae.id )}
-                    slug={dae.category.slug}
-                    category={dae.category.label}
-                    category2={dae.category2.label}
-                    url={dae.url}
-                    date={dae.displayDate}
-                    title={dae.title}
-                    thumbnail={thumbnail}
-                    mediaType={dae.mediaType}
-                  />;
+                  return (
+                    <HeadlineDom
+                      key={'headline-' + dae.id}
+                      index={i}
+                      id={String( dae.id )}
+                      slug={dae.category.slug}
+                      category={dae.category.label}
+                      category2={dae.category2.label}
+                      url={dae.url}
+                      date={dae.displayDate}
+                      title={dae.title}
+                      thumbnail={thumbnail}
+                      mediaType={dae.mediaType}
+                    />
+                  );
 
                 } )
               }

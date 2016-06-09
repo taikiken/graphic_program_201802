@@ -50,7 +50,7 @@ import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';
 
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
-import {ViewTitle} from './view/ViewTitle';
+// import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
 import {ViewCommentSingle} from './view/ViewCommentSingle';
 import {ViewFirstVisit} from './view/ViewFirstVisit';
@@ -166,7 +166,7 @@ let UT = {
     View: View,
     ViewCategory: ViewCategory,
     ViewSingle: ViewSingle,
-    ViewTitle: ViewTitle,
+    // ViewTitle: ViewTitle,
     ViewComments: ViewComments,
     ViewSearch: ViewSearch,
     ViewCommentSingle: ViewCommentSingle,

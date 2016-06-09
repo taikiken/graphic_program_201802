@@ -145,7 +145,7 @@ export class SignupWizard extends View {
       },
       render: function() {
         return (
-          <div className={'signup-' + this.state.step }>
+          <div className={'signup-' + this.state.step}>
             <HeadingNode step={this.props.step} />
             <RootNode
               step={this.props.step}

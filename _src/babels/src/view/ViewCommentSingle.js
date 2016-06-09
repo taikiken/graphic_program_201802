@@ -61,7 +61,7 @@ export class ViewCommentSingle extends View {
 
     replyId = Safety.integer( replyId, 0 );
 
-    this._action = replyId !== 0 ?
+    this.action = replyId !== 0 ?
       new CommentSingle( articleId, commentId, this.done.bind( this ), this.fail.bind( this ) ) :
       new CommentSingleReply( articleId, commentId, replyId, this.done.bind( this ), this.fail.bind( this ) );
 
@@ -432,7 +432,8 @@ export class ViewCommentSingle extends View {
                 articleId={articleId}
                 commentId={commentId}
                 commentsListType={commentsListType}
-                reply={commentObject.reply} />
+                reply={commentObject.reply}
+              />
             </li>
           </ul>
 
@@ -489,18 +490,18 @@ export class ViewCommentSingle extends View {
               list.map( function( commentId, index ) {
                 let commentObject = commentsBank[ commentId ];
                 let key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
-                // console.log( 'commentId ' + commentId + ', ' + key );
-
-                return <CommentsParentDom
-                  key={key}
-                  uniqueId={key}
-                  index={index}
-                  articleId={articleId}
-                  commentObject={commentObject}
-                  commentsListType={commentsListType}
-                  total={commentsListDae.total}
-                  user={user}
-                />;
+                return (
+                  <CommentsParentDom
+                    key={key}
+                    uniqueId={key}
+                    index={index}
+                    articleId={articleId}
+                    commentObject={commentObject}
+                    commentsListType={commentsListType}
+                    total={commentsListDae.total}
+                    user={user}
+                  />
+                );
               } )
             }
             <div className="comment-more" ref="commentMore"></div>

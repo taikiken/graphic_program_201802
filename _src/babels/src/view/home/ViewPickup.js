@@ -188,8 +188,7 @@ export class ViewPickup extends View {
 
         return (
           <li className={'pager-item pager-' + (p.index - p.length)}>
-            <a href={'#pickup-' + p.index} className="pager-link"
-              onClick={this.handleClick} >{p.index - p.length}</a>
+            <a href={'#pickup-' + p.index} className="pager-link" onClick={this.handleClick} >{p.index - p.length}</a>
           </li>
         );
       },
@@ -217,19 +216,21 @@ export class ViewPickup extends View {
         let onPager = this.props.onPager;
 
         return (
-          <ul className='pager-list'>
+          <ul className="pager-list">
             {
               list.map( function( article ) {
 
                 let dae = new ArticleDae( article );
 
-                return <PickupPagerDom
-                  key={'pager-' + dae.id}
-                  id={String(dae.id)}
-                  index={offset++}
-                  length={length}
-                  onPager={onPager}
-                />;
+                return (
+                  <PickupPagerDom
+                    key={'pager-' + dae.id}
+                    id={String(dae.id)}
+                    index={offset++}
+                    length={length}
+                    onPager={onPager}
+                  />
+                );
 
               } )
             }
@@ -361,20 +362,22 @@ export class ViewPickup extends View {
           // HeadlineDom instance を使い render
           // iteration key は index を使う
           // コンテナを 前後に clone するため article.id が使えない
-          return <PickupDom
-            key={'pickup-' + i}
-            index={i}
-            id={String( dae.id )}
-            slug={dae.category.slug}
-            category={dae.category.label}
-            category2={dae.category2.label}
-            url={dae.url}
-            date={dae.displayDate}
-            title={dae.title}
-            large={large}
-            commentsCount={dae.commentsCount}
-            mediaType={dae.mediaType}
-          />;
+          return (
+            <PickupDom
+              key={'pickup-' + i}
+              index={i}
+              id={String( dae.id )}
+              slug={dae.category.slug}
+              category={dae.category.label}
+              category2={dae.category2.label}
+              url={dae.url}
+              date={dae.displayDate}
+              title={dae.title}
+              large={large}
+              commentsCount={dae.commentsCount}
+              mediaType={dae.mediaType}
+            />
+          );
 
         };
 

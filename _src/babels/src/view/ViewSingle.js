@@ -64,7 +64,7 @@ export class ViewSingle extends View {
 
     super( element, option );
     let ActionClass = User.sign ? SingleAuth : Single;
-    this._action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
 
     this._elements = elements;
     // mount event handler

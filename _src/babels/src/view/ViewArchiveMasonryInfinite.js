@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
 // app
 import {Empty} from '../app/const/Empty';
@@ -70,7 +70,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
     if ( typeof ActionClass === 'function' ) {
 
-      this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+      this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
 
     }
     this._moreElement = moreElement;
@@ -248,7 +248,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+              <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
               <span className="loading-spinner">&nbsp;</span>
             </div>
           );
@@ -575,7 +575,7 @@ export class ViewArchiveMasonryInfinite extends View {
           return (
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
-              <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+              <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} alt="" />
               {recommend}
             </figure>
           );
@@ -659,7 +659,7 @@ export class ViewArchiveMasonryInfinite extends View {
                       />
                       <div className="post-data">
                         <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
-                        <h3 className='post-heading'>{dae.title}</h3>
+                        <h3 className="post-heading">{dae.title}</h3>
                         <p className="post-date">{dae.displayDate}</p>
                         <div className="post-excerpt-text">{dae.description}</div>
                       </div>
@@ -669,7 +669,8 @@ export class ViewArchiveMasonryInfinite extends View {
                       uniqueId={'comment-' + dae.id}
                       commentsPopular={commentsPopular}
                       total={commentsTotal}
-                      articleId={String(dae.id)} />
+                      articleId={String(dae.id)}
+                    />
                   </div>
                 );
                 // loop end
