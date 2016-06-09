@@ -57,12 +57,30 @@
           </ul>
         </div>
 
-        <div id="post-content-container" class="post-content excerpt hidden">
-          <?php
-            print_r($page['post']['body']);
-          ?>
-        </div><!-- /.post-content -->
-        <div id="post-content-read-more"></div>
+
+        <?php if ( isset($page['post']['readmore']) && $page['post']['readmore']['is_readmore'] && $page['post']['readmore']['url'] ) : ?>
+
+          <div id="post-content-container" class="post-content">
+
+            <p>
+              <?php echo $page['post']['description']; ?>
+            </p>
+
+            <p>
+              <a class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank">続きを読む(外部サイトへ)
+              </a>
+            </p>
+
+          </div>
+
+        <?php else : ?>
+
+          <div id="post-content-container" class="post-content excerpt hidden">
+            <?php print_r($page['post']['body']); ?>
+          </div><!-- /.post-content -->
+          <div id="post-content-read-more"></div>
+
+        <?php endif; ?>
 
         <?php
         // ----------------------------------------------------

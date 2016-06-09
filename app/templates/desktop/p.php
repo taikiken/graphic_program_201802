@@ -116,9 +116,24 @@ endif;
         <div id="single-visual-container"></div>
 
         <div class="post-content">
-          <?php
-            print_r($page['post']['body']);
-          ?>
+        <?php if ( isset($page['post']['readmore']) && $page['post']['readmore']['is_readmore'] && $page['post']['readmore']['url'] ) : ?>
+
+          <p>
+            <?php echo $page['post']['description']; ?>
+          </p>
+
+          <p>
+            <a href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank" style="text-align:center; font-weight:bold; font-size:1.1em;">
+              続きを読む(外部サイトへ)
+            </a>
+          </p>
+
+        <?php
+        else :
+          print_r($page['post']['body']);
+        endif;
+        ?>
+
         </div><!-- /.post-content -->
 
         <?php
