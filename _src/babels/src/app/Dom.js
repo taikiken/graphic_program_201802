@@ -462,9 +462,9 @@ export class Dom {
   /**
    * <p>記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738</p>
    * で ga するために a#readMore-external へのクリックで送信します
-   * @return {Element}
+   * @return {Element} a#readMore-external
    */
-  static get moreExternal():Element {
+  static moreExternal():Element {
     return Dom.get( 'readMore-external' );
   }
 }

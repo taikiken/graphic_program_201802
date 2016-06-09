@@ -29,6 +29,7 @@ import {Safety} from '../data/Safety';
 import {SingleDae} from '../dae/SingleDae';
 
 // app
+import {Dom} from '../app/Dom';
 import {User} from '../app/User';
 import {Message} from '../app/const/Message';
 
@@ -218,5 +219,35 @@ export class ViewSingle extends View {
     }
 
   }// related
+  
+  moreExternal():void {
+    const external = Dom.moreExternal();
+    if ( external === null ) {
+      return;
+    }
 
+    // ga 準備
+    external.addEventListener( 'click', this.onExternal.bind( this ), false );
+  }
+
+  /**
+   * <p>a#readMore-external click event handler<br>
+   * ga タグを送信します</p>
+   *
+   * https://github.com/undotsushin/undotsushin/issues/738#issuecomment-224794530
+   * <code>
+   * ga('send', {
+   * 'hitType': 'event',
+   * 'eventCategory': 'external_link',
+   * 'eventAction': 'click',
+   * 'eventLabel': 'http://〜'
+   * });
+   * </code>
+   * @param event
+   */
+  onExternal( event:Event ):void {
+    const target = event.target;
+
+
+  }
 }
