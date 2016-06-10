@@ -37,10 +37,19 @@ foreach ($models as $model) {
 }
 
 
+// # DB
+// ==============================
+include_once "local.php";
+include_once "public/check.php";
+
+// 初期化＋DB接続
+$o = new dbForTemplate;
+$o->connect();
+
+
 // set app
 // ==============================
-$app->model        = new ViewModel();
-$app->user_helper  = new UserHelper($app->model);
+$app->model        = new ViewModel($o);
 
 
 // routes / render

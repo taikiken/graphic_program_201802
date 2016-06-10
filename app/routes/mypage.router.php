@@ -6,7 +6,7 @@ $app->group('/mypage', function () use ($app) {
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ( $app ) {
 
-    $app->user_helper->check_logged_in();
+    $app->model->check_logged_in();
 
     $args['page'] = $app->model->set(array(
       'title'    => 'マイページ',
@@ -25,7 +25,7 @@ $app->group('/mypage', function () use ($app) {
   // ==============================
   $this->get('/{slug:activities}[/]', function ($request, $response, $args) use ( $app ) {
 
-    $app->user_helper->check_logged_in();
+    $app->model->check_logged_in();
 
     $args['page'] = $app->model->set(array(
       'title'    => 'アクティビティ | マイページ',

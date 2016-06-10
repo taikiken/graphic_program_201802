@@ -6,10 +6,10 @@ include "public/check.php";
 $o=new db;
 $o->connect();
 
-$sql="select id,name,name_e,img from pm_ where cid=20 and flag=1 order by n";
+$sql="select id,name,name_e,img,p1 from u_categories where flag=1 order by n";
 $o->query($sql);
 
-$categorylist[]=array("id"=>"0","name_e"=>"すべて","name_e"=>"all");
+$categorylist[]=array("id"=>"0","name_e"=>"すべて","name_e"=>"all","p1"=>"3");
 while($f=$o->fetch_array()){
 	$categorylist[]=$f;
 }
@@ -20,8 +20,9 @@ $offset=0;
 $length=5;
 $limit=sprintf(" limit %s offset %s",$length,$offset);
 
-for($i=0;$i<count($categorylist);$i++){
 
+
+for($i=0;$i<count($categorylist);$i++){
 
 	/*
 	
@@ -30,8 +31,10 @@ for($i=0;$i<count($categorylist);$i++){
 	*/
 	unset($s);	
 	$c=set_category2($categorylist[$i]["name_e"],"ranking");
-	$sql=sprintf("select st1.n,st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '3 day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s order by n desc %s",
-	str_replace(" and","",$c[1]),sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+	$sql=sprintf("select st1.n,st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s order by n desc %s",
+	str_replace(" and","",$c[1]),$categorylist[$i]["p1"],sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+
+	echo $sql;
 
 	$j=0;
 	$o->query($sql);
@@ -57,6 +60,7 @@ for($i=0;$i<count($categorylist);$i++){
 	レコメンド動画出力
 	
 	*/
+
 	unset($s);	
 	$c=set_category2($categorylist[$i]["name_e"],"video");
 	$sql=sprintf("select st1.n,st2.* from (select pageid,n from u_view where %s and video=1 order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s order by n desc  %s",

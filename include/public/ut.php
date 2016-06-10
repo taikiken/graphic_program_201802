@@ -3,7 +3,9 @@
 $H=getallheaders();
 $SIZE=200;
 
-$articlefield="is_bookmark,id,title,body,b1,img1,type,d2,t1,m1,t10,a1,a2,a3,a4,a5,a6,t11,t12,t13,t14,video,youtube,facebook,m_time,videocaption,category,slug,category2,slug2,userid,typeid,name,profile,icon";
+//$articlefield="is_bookmark,id,title,body,b1,img1,type,d2,t1,m1,t10,a1,a2,a3,a4,a5,a6,t11,t12,t13,t14,video,youtube,facebook,m_time,videocaption,d3,category,slug,category2,slug2,userid,url,typeid,name,profile,icon";
+$articlefield="*";
+
 $articletable="
 (select 
 	%s
@@ -12,10 +14,13 @@ $articletable="
 	(select body from repo_body where pid=repo_n.id) as body,
 	t16 as b1,
 	img1,
+	imgflag,
 	(select name from repo where id=d1) as type,
 	d2,
+	d3,
 	t1,
 	m1,
+	m2,
 	t10,t11,t12,t13,t14,
 	a1,a2,a3,a4,a5,a6,
 	swf as video,
@@ -23,19 +28,30 @@ $articletable="
 	facebook,
 	m_time,
 	t8 as videocaption,
-	(select name from pm_ where id=m1) as category,
-	(select name_e from pm_ where id=m1) as slug,
-	(case when m2 is not null then (select name from pm_ where id=m2) else null end)  as category2,
-	(case when m2 is not null then (select name_e from pm_ where id=m2) else null end) as slug2
-from repo_n where cid=1 and flag=1%s) as t1,
-(select 
+	t9
+from repo_n where flag=1%s) as t1
+
+left join (select 
 	id as userid,
+	t1 as url,
 	cid as typeid,
 	title as name,
-	t2 as profile,
 	img1 as icon 
-from u_member where cid!=6 and flag=1) as t2 
-where t1.d2=t2.userid";
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select 
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select 
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
 
 $articletable2="
 (select 
@@ -45,10 +61,13 @@ $articletable2="
 	(select body from repo_body where pid=repo_n.id) as body,
 	t16 as b1,
 	img1,
+	imgflag,
 	(select name from repo where id=d1) as type,
 	d2,
+	d3,
 	t1,
 	m1,
+	m2,
 	t10,t11,t12,t13,t14,
 	a1,a2,a3,a4,a5,a6,
 	swf as video,
@@ -56,19 +75,30 @@ $articletable2="
 	facebook,
 	m_time,
 	t8 as videocaption,
-	(select name from pm_ where id=m1) as category,
-	(select name_e from pm_ where id=m1) as slug,
-	(case when m2 is not null then (select name from pm_ where id=m2) else null end)  as category2,
-	(case when m2 is not null then (select name_e from pm_ where id=m2) else null end) as slug2
-	from repo_n where cid=1 and flag=1%s%s%s) as t1,
-(select 
+	t9
+from repo_n where flag=1%s%s%s) as t1
+
+left join (select 
 	id as userid,
+	t1 as url,
 	cid as typeid,
 	title as name,
-	t2 as profile,
 	img1 as icon 
-from u_member where flag=1) as t2 
-where t1.d2=t2.userid";
+from u_media) as t2 on t1.d2=t2.userid
+
+left join (select 
+	id as categoryid,
+	name as category,
+	title as categorylabel,
+	name_e as slug
+from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
+
+left join (select 
+	id as categoryid2,
+	name as category2,
+	title as categorylabel2,
+	name_e as slug2
+from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
 
 $articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_member where  cid!=6 and flag=1) as t2 where t1.d2=t2.userid";
 
@@ -81,7 +111,7 @@ $commenttable="
 	userid,
 	pageid,
 	regitime,
-	(select name_e from pm_ where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,
+	(select name_e from u_categories where id=(select m1 from repo_n where id=u_comment.pageid)) as slug,
 	(select count(reaction) from u_reaction where commentid=u_comment.id and reaction=1 and flag=1) as good,
 	(select count(reaction) from u_reaction where commentid=u_comment.id and reaction=2 and flag=1) as bad,
 	(select n from (select commentid,count(commentid) as n from u_comment where commentid!=0 and flag=1 group by commentid) as t where t.commentid=u_comment.id) as reply
@@ -96,6 +126,9 @@ u_comment where %s) as t1,
 	img1 as icon 
 from u_member where flag=1%s) as t2";
 
+function switch_category_title($label,$title){
+	return strlen($title)>0?$title:$label;
+}
 
 function set_orderby($s=0){
 	return $s==0?" order by m_time desc,id":sprintf(" order by %s.m_time desc,%s.id");
@@ -153,12 +186,140 @@ function mailregister($email,$name){
 	return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
 }
 
-function set_categoryinfo($f,$personalized=""){
+function set_advertise($ad,$type){
+	
+	global $ImgPath;
+	
+	$s["vast"]=$ad["vast"];
+
+	$s["theme"]["base"]=strlen($ad["base"])>0?$ad["base"]:"normal";
+	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
+	$s["theme"]["images"]["pc"]=strlen($ad["pc_headerimg".$type])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$ad["pc_headerimg".$type]):"";
+	$s["theme"]["images"]["sp"]=strlen($ad["sp_headerimg".$type])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$ad["sp_headerimg".$type]):"";
+	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
+	
+	if(strlen($ad["bannertext"])>0){
+		$s["banner"]["pc"]["text"]=mod_HTML($ad["bannertext"]);
+		$s["banner"]["pc"]["image"]=sprintf("%s/prg_img/img/%s",$ImgPath,$ad["pc_bannerimg"]);
+		$s["banner"]["pc"]["link"]=$ad["pc_bannerlink"];
+		$s["banner"]["sp"]["text"]=mod_HTML($ad["bannertext"]);
+		$s["banner"]["sp"]["image"]=sprintf("%s/prg_img/img/%s",$ImgPath,$ad["sp_bannerimg"]);
+		$s["banner"]["sp"]["link"]=$ad["sp_bannerlink"];
+	}else{
+		$s["banner"]["pc"]["text"]="";
+		$s["banner"]["pc"]["image"]="";
+		$s["banner"]["pc"]["link"]="";
+		$s["banner"]["sp"]["text"]="";
+		$s["banner"]["sp"]["image"]="";
+		$s["banner"]["sp"]["link"]="";
+	}
+	$s["ad"]["ios"]=$ad["ios_".$type];
+	$s["ad"]["android"]=$ad["android_".$type];
+	$s["ad"]["sp"]=$ad["sp_".$type];
+	
+	$s["ad"]["pc"]["sidebar_top"]=$ad["sidebar_top"];
+	$s["ad"]["pc"]["sidebar_bottom"]=$ad["sidebar_bottom"];
+	if($type=="detail"){
+		$s["ad"]["pc"]["single_top"]=$ad["single_top"];
+		$s["ad"]["pc"]["single_bottom_left"]=$ad["single_bottom_left"];
+		$s["ad"]["pc"]["single_bottom_right"]=$ad["single_bottom_right"];
+	}
+	
+	return $s;
+}
+
+function get_advertise($categoryid="",$userid="",$pageid=""){
+	
+	global $SERVERPATH;
+	
+	$ad[]=unserialize(file_get_contents(sprintf("%s/api/ver1/static/ad/0-0.dat",$SERVERPATH)));
+	if($categoryid!=""){
+		$file=sprintf("%s/api/ver1/static/ad/10-%s.dat",$SERVERPATH,$categoryid);
+		if(file_exists($file))$ad[]=unserialize(file_get_contents($file));
+	}
+	if($pageid!=""){
+		$file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$userid);
+		if(file_exists($file))$ad[]=unserialize(file_get_contents($file));
+		$file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$pageid);
+		if(file_exists($file))$ad[]=unserialize(file_get_contents($file));
+	}
+	$_adpc=array("sidebar_top","sidebar_bottom","single_top","single_bottom_left","single_bottom_right");
+	$_adsp=array("sp_list","sp_detail","ios_list","ios_detail","android_list","android_detail");
+	$_banner=array("bannertext","pc_bannerimg","pc_bannerlink","sp_bannerimg","sp_bannerlink");
+	$_theme=array("base","bgcolor","pc_headerimglist","sp_headerimglist","pc_headerimgdetail","sp_headerimgdetail","sp_showfilter");
+	$s=array();
+	
+	for($i=0;$i<count($ad);$i++){
+		
+		if($i==0){
+			$s["vast"]=$ad[$i]["ad_videoid"];
+		}else{
+			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_videoid"])>0)$s["vast"]=$ad[$i]["ad_videoid"];
+			elseif($ad[$i]["ad_videoflag"]==2)$s["vast"]="";
+		}
+
+		if($i==1){
+			for($j=0;$j<count($_theme);$j++){
+				$s[$_theme[$j]]=$ad[$i][$_theme[$j]];
+			}
+		}
+		
+		for($j=0;$j<count($_adpc);$j++){
+			$id=$_adpc[$j];
+			$flag=sprintf("%sflag",$_adpc[$j]);
+			if($i==0){
+				$s[$_adpc[$j]]=$ad[$i][$id];
+			}else{
+				if($ad[$i][$flag]==1&&strlen($ad[$i][$id])>0)$s[$_adpc[$j]]=$ad[$i][$id];
+				elseif($ad[$i][$flag]==2)$s[$_adpc[$j]]="";
+			}
+		}
+		for($j=0;$j<count($_adsp);$j++){
+			$id=sprintf("ad_%sid",$_adsp[$j]);
+			$flag=sprintf("ad_%sflag",$_adsp[$j]);
+			if($i==0){
+				$s[$_adsp[$j]]=$ad[$i][$id];
+			}else{
+				if($ad[$i][$flag]==1&&strlen($ad[$i][$id])>0)$s[$_adsp[$j]]=$ad[$i][$id];
+				elseif($ad[$i][$flag]==2)$s[$_adsp[$j]]="";
+			}
+		}
+		for($j=0;$j<count($_banner);$j++){
+			if($i!=0){
+				if($ad[$i]["bannerflag"]==1&&strlen($ad[$i][$_banner[$j]])>0)$s[$_banner[$j]]=$ad[$i][$_banner[$j]];
+				elseif($ad[$i]["bannerflag"]==2)$s[$_banner[$j]]="";
+			}
+		}
+	}	
+	//var_dump($s);
+	return $s;
+}
+
+function set_categoriesinfo($f){
+	
+	global $ImgPath,$domain;
+	
+	$s["id"]=$f["id"];
+	$s["label"]=switch_category_title($f["name"],$f["title"]);
+	$s["slug"]=mod_HTML($f["name_e"]);
+	$s["url"]=sprintf("%s/%s/",$domain,$f["name_e"]);
+	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
+	$s["title"]=mod_HTML($f["title"]);
+	$s["description"]=mod_HTML($f["description"]);
+	
+	$ad=get_advertise($s["id"]);
+	$ad_put=set_advertise($ad,"list");
+	
+	$s=$s+$ad_put;
+	return $s;
+}
+
+function set_categoryinfo($f,$personalized="",$longtitle=1){
 	
 	global $ImgPath,$domain;
 	
 	$s["id"]=(int)$f["id"];
-	$s["label"]=$f["name"];
+	$s["label"]=$longtitle==1?switch_category_title($f["name"],$f["title"]):$f["name"];
 	$s["slug"]=$f["name_e"];
 	$s["url"]=sprintf("%s/category/%s/",$domain,$f["name_e"]);
 	if($personalized!=="")$s["is_interest"]=$personalized;
@@ -167,9 +328,13 @@ function set_categoryinfo($f,$personalized=""){
 	return $s;
 }
 
-function set_articleinfo($f,$type=0){
+function set_articleinfo($f,$type=0,$canonical,$readmore){
 	
-	global $ImgPath,$domain;
+	/*
+		$type:0 記事一覧　$type:1 記事詳細
+	*/
+	
+	global $ImgPath,$domain,$ad,$mediaoption;
 
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
@@ -188,37 +353,100 @@ function set_articleinfo($f,$type=0){
 		$s["body"]=$body;
 		$s["body_escape"]=stripbr($f["body"]);
 	}
-	
-	$s["category"]["label"]=$f["category"]; 
+
+	if($canonical==1){
+		$s["canonical"]["is_canonical"]=$f["canonical"]?true:false;
+		$s["canonical"]["url"]=$f["t9"];
+	}
+
+	if($readmore==1){
+		$s["readmore"]["is_readmore"]=$f["readmore"]?true:false;
+		$s["readmore"]["url"]=$f["t9"];
+	}
+
+	//カテゴリー期を見て配列のみに変更する
+	$cat1=switch_category_title($f["category"],$f["categorylabel"]);
+	$cat2=switch_category_title($f["category2"],$f["categorylabel2"]);
+	$s["category"]["label"]=$cat1;
 	$s["category"]["slug"]=$f["slug"]; 
-	$s["category2"]["label"]=$f["category2"]; 
-	$s["category2"]["slug"]=$f["slug2"]; 
-	$s["categories"][0]["label"]=$f["category"]; 
+	$s["category2"]["label"]=$cat2; 
+	$s["category2"]["slug"]=$f["slug2"];
+	$s["categories"][0]["label"]=$cat1; 
 	$s["categories"][0]["slug"]=$f["slug"];
 	if(strlen($f["category2"])>0){
-		$s["categories"][1]["label"]=$f["category2"];
+		$s["categories"][1]["label"]=$cat2;
 		$s["categories"][1]["slug"]=$f["slug2"]; 
 	}
 
 	$s["url"]=sprintf("%s/%s/%s",$domain,"p",$f["id"]);
+
 	$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
-	if($type==0){
-		$s["is_recommend"]=$f["recommend"]==1?true:false;
-	}
-	
+	if($type==0)$s["is_recommend"]=$f["recommend"]==1?true:false;
+	$s["is_new"]=$datetime["relativetime"]<(60*24*30)?true:false;
+	if($type==1)$s["is_show_image"]=$f["imgflag"]==168?false:true;
+
 	$s["media_type"]=strlen($video)>0?"video":"image";
 	$s["media"]["images"]=get_img($f["img1"],$f["id"]);
 	$s["media"]["images"]["caption"]=checkstr($f["t1"],1);
 	
 	$s["media"]["video"]["player"]=$video;
-	$s["media"]["video"]["url"]=strlen($f["video"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["video"]):"";
+	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("https://video%s.undotsushin.com/%s/%s/sd/%s.m3u8",$mediaoption[$f["d2"]]["geoblock"]==0?"":"-jp",$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
+	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("https://video%s.undotsushin.com/%s/%s/hd/%s.m3u8",$mediaoption[$f["d2"]]["geoblock"]==0?"":"-jp",$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
-
+	//$s["media"]["video"]["time"]=s2h($f["d3"]);
+	if($type==1){
+		$s["media"]["video"]["vast"]=$ad["vast"];
+	}
+	
 	$s["user"]=set_userinfo($f,0);
 
 	return $s;
+}
+
+/*
+function get_pickup($cid){
+	
+	global $o,$articletable;
+	
+	$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$cid,sprintf($articletable,set_isbookmark(""),""));
+	$nsql=sprintf("select count(id) as n from u_headline where cid=%s and flag=1",$cid);
+	
+	$o->query($nsql);
+	$f=$o->fetch_array();
+	$count=$f["n"];
+	
+	if($count>0){
+		$o->query($sql);
+		while($f=$o->fetch_array())$p[]=$f;
+		for($i=0;$i<count($p);$i++){	
+			$s[$i]=set_articleinfo($p[$i],2);
+			$sql=sprintf("select count(*) as n from u_ranking where pageid=%s and flag=1 and userflag=1",$p[$i]["id"]);
+			$o->query($sql);
+			$f=$o->fetch_array();		
+			$s[$i]["comments_count"]=(int)$f["n"];
+		}
+	}
+	
+	return $s;
+}
+*/
+
+function s2h($seconds){
+	
+	if(strlen($seconds)==0)return "";
+	
+	$hours=floor($seconds/3600);
+	$minutes=floor(($seconds/60)%60);
+	$seconds=$seconds%60;
+	
+	if($hours>0){
+		$hms=sprintf("%02d:%02d:%02d",$hours,$minutes,$seconds);
+	}else{
+		$hms=sprintf("%02d:%02d",$minutes,$seconds);
+	}
+	return $hms;
 }
 
 function mod_replyfield($f,$data){
@@ -262,7 +490,7 @@ function set_commentinfo($f,$type,$reply=0){
 
 function set_userinfo($f,$interestset){
 	
-	global $UserImgPath,$domain,$banner;
+	global $UserImgPath,$domain,$banner,$articledetails;
 	
 	/* String型 */
 	$s["id"]=$f["userid"];
@@ -273,7 +501,7 @@ function set_userinfo($f,$interestset){
 	}
 	
 	if(!preg_match("/http/",$f["icon"])){
-		$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/users/img/%s",$UserImgPath,$f["icon"]):"";
+		$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/%s/img/%s",$UserImgPath,$interest==1?"users":"prg_img",$f["icon"]):"";
 	}elseif(strlen($f["icon"])>0){
 		$s["profile_picture"]=$f["icon"];
 	}else{
@@ -291,13 +519,19 @@ function set_userinfo($f,$interestset){
 	if(strlen($f["token"])>0){
 		$s["access_token"]=$f["token"];
 		$s["session_token"]="";
+	}else{
+		$s["logo"]["img"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$UserImgPath,$f["icon"]):"";
+		$s["logo"]["link"]=strlen($f["icon"])>0&&strlen($f["url"])>0?$f["url"]:"";
 	}
+	
+	// 後で消す
 	if($banner){
 		$s["banner"]=$banner;
 	}
 	
 	return $s;
 }
+
 
 function set_activity($f){
 	

@@ -37,7 +37,7 @@ function searchtxt($title,$category,$category2,$body,$keyword,$t1,$media){
 	return $txt;
 }
 
-$sql="select (case when (select id from u_index where id=repo_n.id) is null then 1 else 0 end) as flag,(select uptime from u_index where id=repo_n.id) as uptime,id,title,(select body from repo_body where pid=repo_n.id) as body,(select name from pm_ where id=m1) as category,(select name from pm_ where id=m2) as category2,(select title from u_member where id=repo_n.d2) as media,keyword,t1,u_time from repo_n where cid=1 and flag=1";
+$sql="select (case when (select id from u_index where id=repo_n.id) is null then 1 else 0 end) as flag,(select uptime from u_index where id=repo_n.id) as uptime,id,title,(select body from repo_body where pid=repo_n.id) as body,(select name from u_categories where id=m1) as category,(select name from u_categories where id=m2) as category2,(select title from u_media where id=repo_n.d2) as media,keyword,t1,u_time from repo_n where cid=1 and flag=1";
 $o->query($sql);
 while($f=$o->fetch_array()){
 	if($f["flag"]==1){

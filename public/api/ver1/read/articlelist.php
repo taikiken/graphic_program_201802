@@ -28,7 +28,11 @@ if(strlen($api)>0){
 			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$orderby,$limit),$orderby);
 			$nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
 
-/*
+/*						
+			if($category=="crazy"){
+				$pickup=get_pickup(11);
+			}
+
 			$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid),$c),$length,$offset);
 			$nsql=sprintf("select count(id) as n from repo_n where cid=1 and flag=1%s",$c);
 */
@@ -83,8 +87,8 @@ if(strlen($api)>0){
 		
 		if(strlen($q)>0){
 			
-			$sql=sprintf("select st2.* from (select id from u_index where uptime > now() - interval '30 day' and %s order by uptime desc%s) as st1,(select * from %s) as st2 where st1.id=st2.id%s",$q,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""),"");
-			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where uptime > now() - interval '30 day' and %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
+			$sql=sprintf("select st2.* from (select id from u_index where uptime > now() - interval '90 day' and %s order by uptime desc%s) as st1,(select * from %s) as st2 where st1.id=st2.id%s",$q,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""),"");
+			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where uptime > now() - interval '90 day' and %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
 /*
 			$sql=sprintf("select st02.%s from (select id from u_index where %s) as st01,(select %s from %s) as st02 where st01.id=st02.id order by m_time desc,id limit %s offset %s",str_replace(",",",st02.",$articlefield),$q,$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
 			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
@@ -161,6 +165,8 @@ if(strlen($api)>0){
 	}
 }
 
+//echo $sql;
+
 if($y["status"]["code"]===200){
 
 	$o->query($nsql);
@@ -216,6 +222,10 @@ if($y["status"]["code"]===200){
 
 $y["response"]["count"]=(int)$count;
 $y["response"]["articles"]=$s;
+
+if($pickup){
+	$y["response"]["pickup"]=$pickup;
+}
 
 if(strlen($_REQUEST["length"])>0)$y["request"]["length"]=(int)$_REQUEST["length"];
 if(strlen($_REQUEST["offset"])>0)$y["request"]["offset"]=(int)$_REQUEST["offset"];

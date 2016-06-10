@@ -191,7 +191,7 @@ if(count($ermsg)>0){
 					set_status(array("user_message"=>"会員登録は完了しましたがメールが送信できませんでした。メールアドレスをご確認ください。"));
 				}
 				
-				$sql=sprintf("select name from pm_ where id in (%s) and flag=1 order by n",implode(",",$interest));
+				$sql=sprintf("select name from u_categories where id in (%s) and flag=1 order by n",implode(",",$interest));
 				$o->query($sql);
 				while($f=$o->fetch_array()){
 					$interestcategory[]=$f["name"];

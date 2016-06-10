@@ -41,15 +41,15 @@ $(function(){
 		});
 	});
 	function setuser(name,email,bio,profile_picture){
-		$("form input:eq(0)").val(email);
-		$("form input:eq(2)").val(name);
-		$("form textarea").val(bio);
+		$(".api22 input:eq(0)").val(email);
+		$(".api22 input:eq(2)").val(name);
+		$(".api22 textarea").val(bio);
 		if(profile_picture){
-			$(".img").show();
-			$(".img img").attr("src",sprintf("/prg_img/img/"+profile_picture));
+			$(".api22 .img").show();
+			$(".api22 .img img").attr("src",sprintf("/prg_img/img/"+profile_picture));
 		}else{
-			$(".img img").attr("src","");
-			$(".img").hide();
+			$(".api22 .img img").attr("src","");
+			$(".api22 .img").hide();
 		}
 	}
 
@@ -112,7 +112,7 @@ $(function(){
 				alert("検索語を入力してください");
 				return;
 			}
-			vl[0]=sprintf("/%s",vl[0]);
+			vl[0]=sprintf("/%s",encodeURIComponent(vl[0]));
 			vl[1]=vl[1]==""?0:trim(vl[1]);
 			vl[2]=vl[2]==""?10:trim(vl[2]);
 			uu=u+sprintf("%s?offset=%s&length=%s",vl[0],vl[1],vl[2]);
@@ -126,17 +126,11 @@ $(function(){
 			uu=u+sprintf("%s%s?offset=%s&length=%s",vl[0],vl[1],vl[2],vl[3]);
 		}else if(n==9){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			uu=u+sprintf("%s/bookmark",vl[0]);
 		}else if(n==10){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			uu=u+sprintf("%s/bookmark",vl[0]);
 		}else if(n==11){
 			var uv=$("#commentbody").val();
@@ -149,10 +143,7 @@ $(function(){
 
 		}else if(n==12){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			if(vl[1]==""){
 				alert("コメントを選択してください");
 				return;
@@ -166,77 +157,53 @@ $(function(){
 
 		}else if(n==13){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
-			ud=$("#articlecomment3 option:selected").attr("class")=="rc1"?"good":"bad";	
+
+			ud=$("#articlecomment3 option:selected").attr("class")=="rc1"?"like":"bad";	
 			uu=u+sprintf("%s/%s",ud,vl[0]);
 
 		}else if(n==14){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			ud=vl[0].split(":");
 			uu=u;
 			uu+=(ud.length==2)?sprintf("/%s/%s",ud[0],ud[1]):sprintf("/%s/%s/%s",ud[0],ud[1],ud[2]);
 		}else if(n==15||n==17){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			uu=u;
 			
 		}else if(n==16){
 			
 			uu=u+sprintf("/%s",vl[0]);
 		}else if(n==18){
+
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
-			var e=[];
-			$("#categorys option").each(function(){
-				if($(this).prop("selected")){
-					e[e.length]=$(this).val();
-				}
-			});
+
+			
+			data=new FormData($(".account")[0]);
 			uu=u;
-			data=sprintf("interest=%s",e.join(","));
+			
 
 		}else if(n==19||n==20){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			vl[0]=vl[0]==""?0:trim(vl[0]);
 			vl[1]=vl[1]==""?10:trim(vl[1]);
 			uu=u+sprintf("?offset=%s&length=%s",vl[0],vl[1]);
 
 		}else if(n==8||n==21){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			uu=u;
 		}else if(n==22){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
-			data=new FormData($("form")[0]);
+
+			data=new FormData($("form")[1]);
 			uu=u;
 
 		}else if(n==24){
 			
-			data=new FormData($("form")[1]);
+			data=new FormData($("form")[2]);
 			uu=u;
 
 		}else if(n==25){			
@@ -248,12 +215,22 @@ $(function(){
 
 		}else if(n==26||n==27||n==28){
 			ud=$(".sapi2 option:selected").val();
-			if(ud==""){
-				alert("ログインユーザを選択してください");
-				return;
-			}
+
 			uu=u;
 
+		}else if(n==29){
+			vl[0]=trim(vl[0]);
+
+			data=sprintf("email=%s",vl[0]);
+			uu=u;
+		}else if(n==30){			
+			vl[0]=trim(vl[0]);
+			vl[1]=trim(vl[1]);
+			vl[2]=trim(vl[2]);
+			data=sprintf("service=%s&id=%s&token=%s",vl[0],vl[1],vl[2]);
+			uu=u;
+		}else if(n==31){
+			uu=u+sprintf("/%s",vl[0]);
 		}else if(n==1||n==23){
 			uu=u;
 		}else{
@@ -266,17 +243,21 @@ $(function(){
 			type:g,
 			data:data,
 			url:dmn+uu,
-			contentType:(n==22||n==24)?false:"application/x-www-form-urlencoded",
+			contentType:(n==18||n==22||n==24)?false:"application/x-www-form-urlencoded",
 			processData:false,
 			beforeSend:function(m){
-				m.setRequestHeader("Authorization","OAuth realm=undotsushin.com, oautn_token="+$("option:selected",".sapi2").val());
+				m.setRequestHeader("Authorization","OAuth realm=www.undotsushin.com, oautn_token="+$("option:selected",".sapi2").val());
 			},
 			success:function(m){
 				$("pre").html(m);
 				if(n==22){
 					var s=$(".api22 .img img").attr("src")+"?s="+Math.random()*10000000;
 					$(".api22 .img img").attr("src",s);
+				}else if(n==3){
+					var m=JSON.parse(m);
+					//alert(m.response.articles.length)
 				}
+				
 			}
 		});
 	});

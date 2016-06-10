@@ -17,7 +17,8 @@ import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 import {User} from '../../../app/User';
 
 /**
- * SP category
+ * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>
+ * SPViewCategoryRoot > CategoryRootDom から call されます
  */
 export class SPViewCategory extends SPViewArchive {
   /**
@@ -29,13 +30,22 @@ export class SPViewCategory extends SPViewArchive {
    */
   constructor( slug:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option );
-    // Category Action を使う
-    // slug を送り 表示(render)は SPViewArchive を使う
+
+    /**
+     * Category Action を使う<br>
+     * slug を送り 表示(render)は SPViewArchive を使う
+     * @type {CategoryAuth|Category}
+     * @protected
+     */
     this._action = User.sign ?
       new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
       new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
 
-    // ga に使う
+    /**
+     * category slug, ga に使う
+     * @type {string}
+     * @protected
+     */
     this._slug = slug;
   }
 }

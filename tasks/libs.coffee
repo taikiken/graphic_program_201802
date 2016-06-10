@@ -63,6 +63,7 @@ gulp.task 'libs:copy', ->
     app + '/**/js/libs/html5shiv/*'
     app + '/**/js/libs/sagen/*'
     app + '/**/js/libs/jquery2/jquery.min.js'
+    app + '/**/js/libs/hls/videojs-contrib-hls.min.js'
   ]
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** libs:copy ***'

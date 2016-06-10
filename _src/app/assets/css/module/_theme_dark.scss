@@ -1,0 +1,148 @@
+@import "../../../../scss/asset";
+@import "../sprite";
+
+// Theme Dark
+//
+// design module Dark theme
+//
+// Styleguide 2.10.0
+
+.whole.dark {
+
+  .body-sec {
+    background-color: #181818;
+
+    &:before {
+      background-color: #000;
+    }
+
+    .body-sec-inner {
+      background-image: url(/assets/images/common/bg-bodysec_dark.png);
+    }
+  }
+
+  .widget-ranking,
+  .widget-recommend {
+    &-heading,
+    .post {
+      border-bottom-color: #333;
+    }
+  }
+
+  .widget-ranking-heading-title {
+    @include sprite( $common-side-ranking-heading_dark );
+  }
+
+  .widget-recommend-heading-title {
+    @include sprite( $common-side-recommend-heading_dark );
+  }
+
+  .widget-ranking-heading-title,
+  .widget-recommend-heading-title {
+    display: inline-block;
+  }
+
+  .foot-sec {
+    background-color: #000;
+
+    .foot-pr {
+      background-color: #181818;
+    }
+  }
+
+  [ class^="board-" ] {
+    .post {
+      @include link-decoration(#fff, #fff, none, none);
+    }
+
+    .post-date {
+      color: #999;
+    }
+  }
+
+  .board-large {
+    .feature-user {
+      &.comment-item {
+        background-color: #222;
+      }
+
+      .comment-user {
+        &-name {
+          color: #fff;
+        }
+
+        &-job {
+          color: #999;
+        }
+      }
+
+      .comment-content {
+        color: #fff;
+      }
+    } //.feature-user
+
+    .commented-user-andmore {
+      color: #999;
+    }
+
+    .comment-reaction {
+      .comment-reaction-btn {
+        color: #fff;
+
+        &.active {
+          color: $highlight-color;
+        }
+      }
+    }
+  }
+
+  .sponsor-link-ranking,
+  .sponsor-link-recommend {
+    .adgLink {
+      .adsDescription {
+        color: #fff !important;
+      }
+
+      &:hover {
+        .adsDescription {
+          color: $highlight-color !important;
+        }
+      }
+    }
+  }
+
+} //.theme_dark
+
+
+
+
+
+// theme_dark_list
+.whole.dark {
+  &.post-single {
+    .body-sec {
+      background-color: #fff;
+
+      .body-sec-inner {
+        background-image: url(/assets/images/common/bg-bodysec_dark_detail.png);
+      }
+    }
+  }
+}
+
+
+
+
+
+// related-post
+.whole.dark {
+  .related-post {
+    .post {
+      @include link-decoration(#333, #333, none, none);
+    }
+
+    .post-date {
+      color: #666;
+    }
+  }
+}

@@ -34,7 +34,7 @@ $mtype=131;
 $o=new db;
 $o->connect();
 
-$sql=sprintf("select id,name,name_e,yobi from pm_ where cid=20 and flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
+$sql=sprintf("select id,name,name_e,yobi from u_categories where flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$sw=strlen($f["yobi"])>0?@explode(",",$f["yobi"]):array();
@@ -50,6 +50,8 @@ $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
 for($i=0;$i<count($data["entry"]);$i++){
+	
+	$TMPD[]=sprintf("%s\t%s\t%s\t%s",date("Y-m-d H:i:s",strtotime($data["entry"][$i]["published"])),$data["entry"][$i]["category"]["@attributes"]["label"],$data["entry"][$i]["title"],$data["entry"][$i]["link"]["@attributes"]["href"]);
 	
 	if(!preg_match("/モータースポーツ/",$data["entry"][$i]["category"]["@attributes"]["label"]))continue;
 	
@@ -120,8 +122,11 @@ for($i=0;$i<count($data["entry"]);$i++){
 }
 
 $sqla=implode("\n",$sqla);
-//$o->query($sqla);
 
-echo $sqla;
+echo implode("\n",$TMPD);
+
+
+//$o->query($sqla);
+//echo $sqla;
 
 ?>

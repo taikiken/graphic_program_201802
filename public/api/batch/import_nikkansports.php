@@ -6,7 +6,7 @@ include $INCLUDEPATH."public/import.php";
 $o=new db;
 $o->connect();
 
-$sql=sprintf("select id,name,name_e,yobi from pm_ where cid=20 and flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
+$sql=sprintf("select id,name,name_e,yobi from u_categories where flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
 $o->query($sql);
 while($f=$o->fetch_array()){
 	$sw=strlen($f["yobi"])>0?@explode(",",$f["yobi"]):array();
@@ -101,6 +101,8 @@ for($i=0;$i<count($data);$i++){
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
+	unset($sqla);
+	
 	if(strlen($f["id"])>0){
 
 		if($s["a_time"]!=$f["a_time"]){
@@ -129,10 +131,14 @@ for($i=0;$i<count($data);$i++){
 		$sqla[]=makesql($s,0);
 		$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",$modbody);
 		
-	}		
+	}	
+	
+	if($sqla){
+		$sqla=implode("\n",$sqla);
+		$o->query($sqla);
+	}
 }
 
-$sqla=implode("\n",$sqla);
-$o->query($sqla);
+
 
 ?>

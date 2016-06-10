@@ -7,7 +7,7 @@ include $INCLUDEPATH."local.php";
 $o=new db;
 $o->connect();
 
-$sql="select id from pm_ where cid=20";
+$sql="select id from u_categories";
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
 	
@@ -37,6 +37,7 @@ $f=$o->fetch_array();
 $id=$f["id"];
 
 $s[]=sprintf("update u_latestpost set pageid=%s,num=%s where m1=0;",$id,$num);
+
 
 $s=implode("\n",$s);
 $o->query($s);
