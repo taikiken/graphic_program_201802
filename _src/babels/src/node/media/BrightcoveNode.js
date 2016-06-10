@@ -169,11 +169,16 @@ export let BrightcoveNode = React.createClass( {
     let poster = this.props.poster;
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
     let vast = video.vast;
-    
+
+    // http://docs.brightcove.com/en/perform/brightcove-player/guides/ima-plugin.html
     let ima3 = {
       adTechOrder: [
         'html5'
       ],
+      // https://github.com/googleads/videojs-ima#additional-settings
+      // showControlsForJSAds: true,
+      // showCountdown: true,
+      
       // 2000
       postrollTimeout: Brightcove.POST_ROLL,
       // 1000
@@ -207,6 +212,8 @@ export let BrightcoveNode = React.createClass( {
       if ( !this.phone ) {
         player.controls( false );
       }
+
+      console.log( 'player.ima3.adDisplayContainer', player.ima3.adDisplayContainer );
     } );
 
     if ( this.phone ) {
