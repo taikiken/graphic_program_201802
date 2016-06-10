@@ -199,8 +199,13 @@ export let BrightcoveNode = React.createClass( {
     if ( vast !== '' ) {
       ima3.serverUrl = vast + Date.now();
     }
+
+    let options = {hls: {
+      withCredentials: true
+    }};
+
     // console.log( 'UT: vast', this.id, vast, ima3 );
-    let player = videojs( this.id );
+    let player = videojs( this.id, {html5: options} );
 
     player.ready( () => {
       player.src( { type: Brightcove.TYPE, src: url } );
