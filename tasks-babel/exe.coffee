@@ -75,6 +75,15 @@ gulp.task 'exe:babel', ->
 # dev
 gulp.task 'exe:make', ( cb ) ->
   runSequence(
+#    'exe:eslint'
+    'exe:babel'
+    cb
+  )
+  return
+
+# dev
+gulp.task 'exe:make:lint', ( cb ) ->
+  runSequence(
     'exe:eslint'
     'exe:babel'
     cb
@@ -113,6 +122,15 @@ gulp.task 'sp:exe:babel', ->
 
 # dev
 gulp.task 'sp:exe:make', ( cb ) ->
+  runSequence(
+#    'sp:exe:eslint'
+    'sp:exe:babel'
+    cb
+  )
+  return
+
+# dev
+gulp.task 'sp:exe:make:lint', ( cb ) ->
   runSequence(
     'sp:exe:eslint'
     'sp:exe:babel'

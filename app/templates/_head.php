@@ -50,7 +50,9 @@ endif;
   <meta name="twitter:description" content="<?php echo $page['og_description']; ?>">
 
 
-<?php if ( $page['og_url'] ) : ?>
+<?php if ( $page['canonical'] ) : ?>
+  <link rel="canonical" href="<?php echo $page['canonical']; ?>">
+<?php elseif ( $page['og_url'] ) : ?>
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 <?php endif; ?>
 
@@ -67,5 +69,3 @@ endif;
   <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
-
-

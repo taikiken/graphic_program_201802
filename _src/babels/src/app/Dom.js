@@ -434,5 +434,38 @@ export class Dom {
   static adVideo2():Element {
     return Dom.get( 'sponsor-link-recommend-2' );
   }
+  // // --------------------------------------
+  // // 広告
+  // // 記事詳細
+  // static adSingleTop():Element {
+  //   return Dom.get( 'single-top-sponsor-container' );
+  // }
+  // static adSidebarTop():Element {
+  //   return Dom.get( 'sidebar-sponsor-top-container' );
+  // }
+  // static adSidebarBottom():Element {
+  //   return Dom.get( 'sidebar-sponsor-bottom-container' );
+  // }
+  // --------------------------------------
+  // SP category
+  // tab 表示・非表示で class（category）を与えるために...
+  /**
+   * div.body-sec<br>
+   * SP: tab 表示・非表示で class（category）を与えるために...
+   * @return {Element} div.body-sec
+   */
+  static bodySection():Element {
+    return Dom.get( 'body-section' );
+  }
+  // --------------------------------------
+  // 記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738
+  /**
+   * <p>記事詳細 / 「続きを読む」のリンク先に外部サイトも指定できるようにする #738</p>
+   * で ga するために a#readMore-external へのクリックで送信します
+   * @return {Element} a#readMore-external
+   */
+  static moreExternal():Element {
+    return Dom.get( 'readMore-external' );
+  }
 }
 // return Dom.get( '' );

@@ -94,7 +94,10 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 
 // setting for Vagrant
 // ==============================
-if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' ) :
+// - 192.168.33.50 - vagrant local ip
+// - undotsushin.local - vagrant local host
+// - :8888 - vagrant local network port
+if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'undotsushin.local' || $_SERVER['SERVER_PORT'] == '8080' || $_SERVER['SERVER_PORT'] == '8888' ) :
 
   $staticfileimport=0;
 
@@ -107,7 +110,12 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' ) :
   $SERVERPATH="/vagrant/public";
   $USERS="/vagrant/public/users";
 
-  $domain="http://192.168.33.50";
+  if ( $_SERVER['SERVER_PORT'] !== '80' ) :
+    $domain="http://".$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'];
+  else :
+    $domain="http://".$_SERVER['SERVER_NAME'];
+  endif;
+
   $ImgPath="http://dev.undotsushin.com";
   $UserImgPath="http://dev.undotsushin.com";
 

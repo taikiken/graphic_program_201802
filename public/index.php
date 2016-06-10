@@ -18,6 +18,9 @@ if (PHP_SAPI == 'cli-server') {
 if ( $_SERVER['SERVER_PORT'] == '8080' ) :
   define('UT_ENV', 'LOCAL');
 
+elseif ( $_SERVER['SERVER_PORT'] == '8888' ) :
+  define('UT_ENV', 'LOCAL_DB');
+
 else :
 
   switch( $_SERVER['SERVER_NAME'] ) :
@@ -60,20 +63,6 @@ else :
 
 
 endif;
-
-
-
-// # for CMS関連のファイルロード
-// ==============================
-// #219 - ローカルでは現状API動かないのでサーバでのみinclude
-// view側で以下つかっているのは 2016-03-28 (月) 今のところ パスワードリマインダのみ
-if ( UT_ENV !== 'LOCAL' ) :
-  include_once "local.php";
-  // if ( UT_ENV !== 'DEVELOP2' || UT_ENV !== 'PRODUCTION' ) :
-  //   include_once "public/ut.php";
-  // endif;
-endif;
-
 
 
 // # Slim

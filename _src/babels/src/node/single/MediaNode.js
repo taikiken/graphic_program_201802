@@ -26,13 +26,22 @@ let React = self.React;
  */
 export let MediaNode = React.createClass( {
   propTypes: {
+    articleId: React.PropTypes.string.isRequired,
     mediaType: React.PropTypes.string.isRequired,
-    media: React.PropTypes.object.isRequired
+    media: React.PropTypes.object.isRequired,
+    // 2016-06-06 記事詳細で画像を表示するかどうか
+    isShowImage: React.PropTypes.bool.isRequired
   },
   render: function() {
 
     let mediaType = this.props.mediaType;
     let media = this.props.media;
+
+    // 2016-06-06
+    // 記事詳細で画像を表示しない
+    if ( !this.props.isShowImage ) {
+      return null;
+    }
 
     if ( mediaType === MediaType.IMAGE ) {
       // image type
@@ -54,6 +63,7 @@ export let MediaNode = React.createClass( {
         // show video
         return (
           <MediaVideoNode
+            articleId={this.props.articleId}
             media={media}
           />
         );

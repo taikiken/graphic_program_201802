@@ -36,6 +36,11 @@ export class ViewSingleVisual extends View {
    */
   constructor( element:Element, single:SingleDae ) {
     super( element );
+    /**
+     * 記事詳細 API 取得 JSON を SingleDae instance とし保存し利用します
+     * @type {SingleDae}
+     * @protected
+     */
     this._single = single;
   }
   /**
@@ -49,11 +54,13 @@ export class ViewSingleVisual extends View {
    */
   render():void {
     let single = this._single;
-    // console.log( 'ViewSingleVisual.render ', single );
+    // console.log( 'ViewSingleVisual.render ', single.isShowImage );
     ReactDOM.render(
       <MediaNode
+        articleId={String(single.id)}
         mediaType={single.mediaType}
         media={single.media}
+        isShowImage={single.isShowImage}
       />,
       this.element
     );
