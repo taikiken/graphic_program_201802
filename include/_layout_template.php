@@ -1,5 +1,7 @@
 <?php
 
+header("X-XSS-Protection:0;");
+
 $CURRENTDIRECTORY=$q->pdir;
 include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/dx.php";
 if($q->get_dir()==3){
@@ -29,15 +31,16 @@ if($q->get_dir()==3){
 <?php if($BILLINGUAL==0){ ?>
 <link rel="stylesheet" href="/shared/cms/css/j.css" >
 <?php } ?>
-<script src="/shared/cms/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="/shared/cms/js/jquery-1.11.0.min.js"></script>
 <script src="/shared/cms/js/jquery.cookie.js" type="text/javascript"></script>
 <script src="/shared/cms/js/lightbox_cms.js" type="text/javascript"></script>
 <script src="/shared/cms/js/swfobject.js" type="text/javascript"></script>
 <script src="/shared/cms/js/base.js"></script>
 <script src="/shared/cms/ckeditor/ckeditor.js" type="text/javascript"></script>
-<script src="/shared/cms/ckeditor/load.js" type="text/javascript"></script>
 <?php if($q->get_file()==0||$q->get_file()==1){ ?>
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script src="/shared/cms/js/<?=$CMSJS?>.php" type="text/javascript"></script>
+<script src="/shared/cms/js/<?=$CMSJS?>.js" type="text/javascript"></script>
 <?php } ?>
 <script type="text/javascript">
 var dir=<?=$q->get_dir()?>;
@@ -85,7 +88,7 @@ var ct="<?=date("Y/m/d H:i:s")?>";
 <li><a href="<?=$ADPATH?>log/">操作履歴</a></li>
 </ul>
 </div>
-<form name="f" enctype="multipart/form-data" action="" method="post">
+<form name="f" enctype="multipart/form-data" action='' method="post">
 <div id="headerArea">
 <div id="expBox" class="br">
 
@@ -109,7 +112,7 @@ var ct="<?=date("Y/m/d H:i:s")?>";
 <div id="helpExp">
 <p><img src="/shared/cms/img/cmd_up.gif" alt="一つ上へ" width="13" height="13" >は並び順を一つ上に、<img src="/shared/cms/img/cmd_down.gif" alt="一つ下へ" width="13" height="13" >は一つ下に入れ替えます。<img src="/shared/cms/img/cmd_active.gif" alt="表示" width="13" height="13" >は公開に、<img src="/shared/cms/img/cmd_disactive.gif" alt="非表示" width="13" height="13" >は非公開に設定されていることを表し、それぞれクリックで切り替えます。</p>
 </div><!-- End helpExp -->
-<?php }else{ ?>
+<?php }elseif($q->get_dir()==1){ ?>
 <div id="loadingDiv"><p class="swtxt">画像をリサイズしています.....</p></div>
 <?php } ?>
 
@@ -170,7 +173,6 @@ var ct="<?=date("Y/m/d H:i:s")?>";
 <div class="lenz"><img src="/shared/cms/img/large.png" alt="大きいサイズの画像を編集" title="大きいサイズの画像を編集" width="50" height="50" ></div>
 <?php } ?>
 <div class="optionselbg"></div>
-
 <script type="text/javascript">
 var fieldname="<?=$TITLEFIELDNAME?>";
 var where="<?=$WHERE?>";

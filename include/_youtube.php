@@ -1,7 +1,7 @@
 <?php if(($q->get_dir()==0||$q->get_dir()==1)&&$q->get_file()==0){ ?>
 <?php
 
-$defsize=array(660,401);
+$defsize=array(660,400);
 
 $p["n1"]=strlen($p["n1"]>0)?$p["n1"]:$defsize[0];
 
@@ -15,13 +15,13 @@ $(function(){
 	function zth(str){
 		return str.replace("．",".").replace(/[Ａ-Ｚａ-ｚ０-９]/g,function(s){return String.fromCharCode(s.charCodeAt(0)-0xFEE0);}).replace(/,/g,"");
 	}
-	var yu=$("[name='p_youtube']").val();
+	var yu=$("[name='p_media']").val();
 	function sml(n,m){
 		if(yu==m)return;
 		
 		if(m.length!=11){
 			yu=m.match(/\?v=([^&]+)/)[1];
-			$("[name='p_youtube']").val(yu);
+			$("[name='p_media']").val(yu);
 			m=yu;
 		}
 		
@@ -30,10 +30,10 @@ $(function(){
 		$(".eyoutube").show();
 		$(".eyoutube iframe").prop("src",src+m);
 	}
-	$("[name='p_youtube']").on('change blur',function(){
+	$("[name='p_media']").on('change blur',function(){
 		sml($(this).attr("name"),$(this).val());
 	});
-	$("[name='p_youtube']").on('keydown',function(e){
+	$("[name='p_media']").on('keydown',function(e){
 		if((e.which&&e.which===13)||(e.keyCode&&e.keyCode===13)){
 			sml($(this).attr("name"),$(this).val());
 			return false;
