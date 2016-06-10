@@ -205,7 +205,8 @@ export let BrightcoveNode = React.createClass( {
     }};
 
     // console.log( 'UT: vast', this.id, vast, ima3 );
-    let player = videojs( this.id, {html5: options} );
+    // let player = videojs( this.id, {html5: options} );
+    let player = videojs( this.id );
 
     player.ready( () => {
       player.src( { type: Brightcove.TYPE, src: url } );
@@ -218,7 +219,7 @@ export let BrightcoveNode = React.createClass( {
         player.controls( false );
       }
 
-      console.log( 'player.ima3.adDisplayContainer', player.ima3.adDisplayContainer );
+      console.log( 'player', player );
     } );
 
     if ( this.phone ) {
