@@ -1,3 +1,15 @@
+<?php
+/*
+
+# AndroidのWebViewでJSでlocation書き換えれない問題
+
+*/
+
+// 以下phpでリダイレクトするパターン - 空のページが残ってしまう
+if ( $page['ua_app'] == 'Android' ) :
+  header("Location: {$page['post']['readmore']['url']}");
+endif;
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,7 +17,13 @@
   <meta name="robots" content="noindex,nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
-  <script>
+  <link rel="stylesheet" href="/assets/sp/css/ui.css">
+  <style>
+    body {
+      padding:20px;
+    }
+  </style>
+  <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -41,7 +59,12 @@
       'pageview', {
       'page': '<?php echo $page['post']['url']; ?>',
       'hitCallback': function() {
-        window.location.href = '<?php echo $page['post']['readmore']['url']; ?>';
+        <?php if ( $page['ua_app'] == 'Android' ) : ?>
+        location.replace('<?php echo $page['post']['readmore']['url']; ?>');
+        <?php else : ?>
+        location.replace('<?php echo $page['post']['readmore']['url']; ?>');
+        location.href = '<?php echo $page['post']['readmore']['url']; ?>';
+        <?php endif; ?>
       }
     });
 
@@ -49,5 +72,16 @@
 
 </head>
 <body>
+<?php if ( $page['ua_app'] == 'Android' ) : ?>
+
+<p>
+  この記事の詳細は下記提供元ウェブサイトにてご覧いただけます
+</p>
+
+<a href="<?php echo $page['post']['readmore']['url']; ?>" style="word-break:break-all;"><?php echo $page['post']['readmore']['url']; ?></a>
+
+<?php endif; ?>
 </body>
 </html>
+
+<?php exit; ?>
