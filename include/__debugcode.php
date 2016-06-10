@@ -1,7 +1,5 @@
 <?php
 
-/*
-
 if($q->get_file()==2){
 
 	if($CURRENTDIRECTORY!="repo_e"){
@@ -47,7 +45,5 @@ if($q->get_file()==2){
 		printf("<input type=\"hidden\" name=\"p_%s\" value=\"%s\" >",$TITLEFIELDNAME,$_POST[$TITLEFIELDNAME]);
 	}
 }
-
-*/
 
 ?>

@@ -27,7 +27,7 @@ if(isset($_POST["p_usr"])){
 		if($SORC==1){
 			//session_cache_limiter("nocache");
 			//session_cache_expire(180);
-			sessionregister(array("mid","alv","usr","repo","form","new","edit","delete","order","draft","categoryadmin","suadmin","formedit","download","formtemplate","master","environment","stylesheet","trackback","poll","updateping"));
+			session_register("mid","alv","usr","repo","form","new","edit","delete","order","draft","categoryadmin","suadmin","formedit","download","formtemplate","master","environment","stylesheet","trackback","poll","updateping");
 		}
 
 		setSorC("mid",$f["id"]);

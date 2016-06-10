@@ -18,12 +18,7 @@ class m{
 	}
 	function mt(){
 		$III=0;
-		
-		if($this->id!=20){
-			$sql="select id,name from pm_ where flag=1 and cid=".$this->id." order by n";
-		}else{
-			$sql="select id,name from u_categories where flag=1 order by n";
-		}
+		$sql="select id,name from pm_ where flag=1 and cid=".$this->id." order by n";
 		$this->o->query($sql);
 		while($f=$this->o->fetch_array($III)){
 			$p[]=$f;
@@ -32,26 +27,15 @@ class m{
 		return $p;
 	}
 	function mn($e=""){
-		if($e==""){
-			$sql="select name from pm where id=".$this->id;
-		}else{
-			if($this->id!=20){
-				$sql="select name from pm_ where id=".$e;
-			}else{
-				$sql="select name from u_categories where id=".$e;
-			}
-		}
+		if($e=="")$sql="select name from pm where id=".$this->id;
+		else $sql="select name from pm_ where id=".$e;
 		$this->o->query($sql);
 		$f=$this->o->fetch_array();
 		return (strlen($f["name"])>0)?$f["name"]:"入力なし";
 	}
 	function ms($e){
 		if($e){
-			if($this->id!=20){
-				$sql="select name from pm_ where id=".$e;
-			}else{
-				$sql="select name from u_categories where id=".$e;
-			}
+			$sql="select name from pm_ where id=".$e;
 			$this->o->query($sql);
 			$f=$this->o->fetch_array();
 			return (strlen($f["name"])>0)?$f["name"]:"入力なし";

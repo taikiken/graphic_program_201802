@@ -1,5 +1,5 @@
 <?php
-if($q->get_file()===2&&$e){
+if($q->get_file()===2&&!$e){
 	//if($DEBUGMODE==0)
 	echo sprintf("<script type=\"text/javascript\">document.location.href='%s%s/?%s';</script>",$ADPATH,$CURRENTDIRECTORY,$g->g_url("types,".$EDITDELETEINITIAL."id,c,search"));
 }
@@ -116,7 +116,7 @@ if($div>1){
 			$dar[]=sprintf("<li><a href=\".?%s&no=%s\">%s</a></li>",$g->g_url("no"),$i*$offset,$i+1);
         }
 	}
-	echo implode("",$dar);
+	echo implode("",array_reverse($dar));
 }
 ?>
 </ul>

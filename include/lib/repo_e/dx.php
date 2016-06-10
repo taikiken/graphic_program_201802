@@ -57,21 +57,20 @@ if(count($l)==3){
 	$l[]=sprintf("<li><a href=\"%srepo_n/?cid=%s\">%s</a></li>",$ADPATH,$_GET["cid"],mod_HTML($f["name"]));
 }
 
-$sql=sprintf("select id,%s,cid,t1 from repo_n where id=%s",multiLangTitleField("title"),$g->f("nid"));
+$sql=sprintf("select id,%s,cid,qid,t1 from repo_n where id=%s",multiLangTitleField("title"),$g->f("nid"));
 $o->query($sql);
 $f=$o->fetch_array();
-
 $PAGEINFO=$f;
 $PARENT=strlen($PAGEINFO["title"])>0?$PAGEINFO["title"]:mod_HTML($PAGEINFO[multiLangTitle("title")]);
 if($q->get_dir()==3){
 	$l[]=sprintf("<li>%s</li>",$PARENT);
 }else{
 	if(count($l)==4){
-		$l[]=sprintf("<li><a href=\"%srepo_e/?nid=%s&qid=%s&rid=%s&cid=%s%s\">%s</a></li>",$ADPATH,$_GET["nid"],$_GET["qid"],$_GET["rid"],$_GET["cid"],$_GET["ad"]==1?"&ad=1":"",$PARENT);
+		$l[]=sprintf("<li><a href=\"%srepo_e/?nid=%s&qid=%s&rid=%s&cid=%s\">%s</a></li>",$ADPATH,$_GET["nid"],$_GET["qid"],$_GET["rid"],$_GET["cid"],$PARENT);
 	}elseif(count($l)==3){
-		$l[]=sprintf("<li><a href=\"%srepo_e/?nid=%s&rid=%s&cid=%s%s\">%s</a></li>",$ADPATH,$_GET["nid"],$_GET["rid"],$_GET["cid"],$_GET["ad"]==1?"&ad=1":"",$PARENT);
+		$l[]=sprintf("<li><a href=\"%srepo_e/?nid=%s&rid=%s&cid=%s\">%s</a></li>",$ADPATH,$_GET["nid"],$_GET["rid"],$_GET["cid"],$PARENT);
 	}else{
-		$l[]=sprintf("<li><a href=\"%srepo_e/?nid=%s&cid=%s%s\">%s</a></li>",$ADPATH,$_GET["nid"],$_GET["cid"],$_GET["ad"]==1?"&ad=1":"",$PARENT);
+		$l[]=sprintf("<li><a href=\"%srepo_e/?nid=%s&cid=%s\">%s</a></li>",$ADPATH,$_GET["nid"],$_GET["cid"],$PARENT);
 	}
 }
 

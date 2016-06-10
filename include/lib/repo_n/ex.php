@@ -63,7 +63,6 @@ if($q->get_dir()!=4){
 	}
 }
 
-
 include $INCLUDEPATH."print_write.php";
 
 if($q->get_dir()==4){

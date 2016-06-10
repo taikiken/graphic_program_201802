@@ -1,17 +1,11 @@
 <?php
 
-if($_GET["cid"]==6){
+if($_GET["rid"]==2&&$_GET["cid"]){
 	$TABLE="u_member";
-	$NUMBERINGOFF=1;
-}elseif($_GET["rid"]==2){
-	$TABLE="u_media";
 }elseif($_GET["rid"]==7&&$_GET["cid"]){
 	$TABLE="u_headline";
-}elseif($_GET["cid"]==10){
-	$TABLE="u_categories";
 }else{
 	$TABLE="repo_n";
-	$NUMBERINGOFF=1;
 }
 
 if($q->get_dir()===0){
@@ -29,12 +23,12 @@ if($q->get_dir()===0){
 		
 		if(count($sn)>0){
 						
-			if($TABLE!="repo_n"&&$TABLE!="u_member"&&$_POST["POSITION"]!=1){
+			if($g->f("cid")!=1&&$g->f("rid")!=2&&$_POST["POSITION"]!=1){
 				$sql="update ".$TABLE." set n=(n+1) where cid=".$g->f("cid");
 				$o->query($sql);
 				$sv[$sn[]="n"]=1;
 			}else{
-				$sv[$sn[]="n"]=sprintf("(select max(n)+1 as n from %s where cid=%s)",$TABLE,$g->f("cid"));
+				$sv[$sn[]="n"]=sprintf("(select max(id)+1 as n from %s where cid=%s)",$TABLE,$g->f("cid"));
 			}
 			
 			if(isset($_GET["qid"]))$sv[$sn[]="rid"]=$g->f("qid");
@@ -54,7 +48,7 @@ if($q->get_dir()===0){
 			$e=$o->insert();
 			
 			/* 運動通信会員カテゴリー */
-			if($TABLE=="u_member"){
+			if($g->f("rid")==2){
 				$id=$e;
 				$category=@explode(",",str_replace("'","",$sv["t20"]));			
 				if(count($category)>0){
@@ -64,9 +58,6 @@ if($q->get_dir()===0){
 					$s=implode("\n",$s);
 					$o->query($s);
 				}
-			}elseif($TABLE=="u_categories"){
-				$sql=sprintf("insert into u_latestpost(m1,pageid) select currval('%s_id_seq'),0;",$TABLE);
-				$o->query($sql);
 			}
 		}
 		
@@ -75,18 +66,17 @@ if($q->get_dir()===0){
 	if($q->get_file()===0){
 
 		$sql=sprintf("select *,(select body from repo_body where pid=%s.id) as body from %s where id=%s",$TABLE,$TABLE,$g->f("nid"));
-		
 		$o->query($sql);
 		$p=$o->fetch_array();
 
-		if($TABLE=="repo_n"){
+		if($g->f("cid")==1){
 			$sql=sprintf("select title,link,n from u_link where pid=%s order by n",$g->f("nid"));
 			$o->query($sql);
 			while($f=$o->fetch_array()){
 				$p["t".$f["n"]]=$f["link"];
 				$p["b".$f["n"]]=$f["title"];
 			}
-		}elseif($TABLE=="u_media"){
+		}elseif($g->f("rid")==2){
 			$sql=sprintf("select * from u_banner where cid=%s and type=1",$g->f("nid"));
 			$o->query($sql);
 			$f=$o->fetch_array();
@@ -117,7 +107,7 @@ if($q->get_dir()===0){
 		$o=new dbutl($TABLE,$sn,$sv);
 		$e=$o->update($g->f("nid"));
 		
-		if($g->f("cid")!=1||$g->f("cid")!=6){
+		if($g->f("cid")!=1||$g->f("rid")!=2){
 			if(strlen($_POST["POSITION"])>0){
 				$sql=sprintf("update %s set n=n-1 where cid=%s and n>(select n from %s where id=%s)",$TABLE,$TABLE,$g->f("cid"),$g->f("nid"));
 				$o->query($sql);
@@ -129,7 +119,7 @@ if($q->get_dir()===0){
 		}
 		
 		/* 運動通信会員カテゴリー */
-		if($TABLE=="u_member"){
+		if($g->f("rid")==2){
 			
 			$id=$g->f("nid");
 			
@@ -157,14 +147,14 @@ if($q->get_dir()===0){
 		$o->query($sql);
 		$p=$o->fetch_array();
 
-		if($TABLE=="repo_n"){
+		if($g->f("cid")==1){
 			$sql=sprintf("select title,link,n from u_link where pid=%s order by n",$g->f("nid"));
 			$o->query($sql);
 			while($f=$o->fetch_array()){
 				$p["t".$f["n"]]=$f["link"];
 				$p["b".$f["n"]]=$f["title"];
 			}
-		}elseif($TABLE=="u_media"){
+		}elseif($g->f("rid")==2){
 			$sql=sprintf("select * from u_banner where cid=%s and type=1",$g->f("nid"));
 			$o->query($sql);
 			$f=$o->fetch_array();
