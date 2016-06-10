@@ -216,7 +216,8 @@ function outputImg($res,$filename,$type){
 function getfileinfo($i){
 	$s=pathinfo($i);
 	preg_match("/.([0-9]+) /",microtime(),$m);
-	return array(sprintf("%s%s.%s",date("YmdHis"),$m[1],$s["extension"]),$s["extension"]);
+	$ext=strtolower($s["extension"]);
+	return array(sprintf("%s%s.%s",date("YmdHis"),$m[1],$ext),$ext);
 }
 
 function outimg($oimg){

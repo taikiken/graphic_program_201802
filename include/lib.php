@@ -90,7 +90,7 @@ if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1){
 	if(strlen($_COOKIE["exuser"])>0){
 		$exuser=$_COOKIE["exuser"]!=0?sprintf(" and d2=%s",$_COOKIE["exuser"]):"";
 		
-		$sql=sprintf("select cid,(select name from repo where id=u_member.cid) as name,title from u_member where id=%s",$_COOKIE["exuser"]);
+		$sql=sprintf("select cid,(select name from repo where id=u_media.cid) as name,title from u_media where id=%s",$_COOKIE["exuser"]);
 		$o->query($sql);
 		$f=$o->fetch_array();
 		setcookie("exusername",sprintf("%s:%s",$_COOKIE["exuser"],$f["title"]));
@@ -131,14 +131,14 @@ if($CURRENTDIRECTORY!="repo_e"){
 }
 $div=ceil($N/$offset);
 
-if($CURRENTDIRECTORY=="repo_n"&&$_GET["cid"]==1){
+if($TABLE=="repo_n"){
 	if(!$_COOKIE["orderby"]&&!$_COOKIE["exuser"]&&!$_COOKIE["excategory"]){
 		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE," desc",dblm($no,$offset));
 		setcookie("orderby","",time()-3600,"/");
 	}else{		
 		$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,$orderby,dblm($no,$offset));
 	}
-}elseif($CURRENTDIRECTORY=="repo_n"&&$_GET["rid"]==2){
+}elseif($TABLE=="u_member"){
 	$sql=sprintf("select %s from %s%s%s%s order by %s %s",$FIELD,$TABLE,$WHERE,$exuser,$excategory,"id",dblm($no,$offset));
 }else{
 		$sql=sprintf("select %s from %s%s order by n%s %s",$FIELD,$TABLE,$WHERE,($CURRENTDIRECTORY=="log")?" desc":"",dblm($no,$offset));
