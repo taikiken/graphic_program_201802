@@ -17,7 +17,7 @@ endif;
   <meta name="robots" content="noindex,nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
-  <link rel="stylesheet" href="/assets/sp/css/ui.css">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=20160610">
   <style>
     body {
       padding:20px;
