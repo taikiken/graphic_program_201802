@@ -84,6 +84,16 @@ gulp.task 'babels:dev', (cb) ->
   )
   return
 
+# babels dev
+gulp.task 'babels:dev:lint', (cb) ->
+  runSequence(
+    'babels:make:lint'
+    'webpack:babels:main:dev'
+    'bundle:copy'
+    cb
+  )
+  return
+
 # babels build
 gulp.task 'babels:build', (cb) ->
   runSequence(
@@ -106,6 +116,16 @@ gulp.task 'exe:dev', (cb) ->
   )
   return
 
+# exe dev
+gulp.task 'exe:dev:lint', (cb) ->
+  runSequence(
+    'exe:make:lint'
+    'webpack:babels:exe:dev'
+    'bundle:copy'
+    cb
+  )
+  return
+
 # exe build
 gulp.task 'exe:build', (cb) ->
   runSequence(
@@ -120,10 +140,21 @@ gulp.task 'exe:build', (cb) ->
 
 # sp
 # ---------
+
 # exe dev
 gulp.task 'sp:exe:dev', (cb) ->
   runSequence(
     'sp:exe:make'
+    'sp:webpack:babels:exe:dev'
+    'bundle:copy'
+    cb
+  )
+  return
+
+# exe dev
+gulp.task 'sp:exe:dev:lint', (cb) ->
+  runSequence(
+    'sp:exe:make:lint'
     'sp:webpack:babels:exe:dev'
     'bundle:copy'
     cb
@@ -257,6 +288,7 @@ gulp.task 'copy', (cb) ->
 # alias copy
 # vagrant をサーバーにする時に
 # 手っ取り早く確認用ファイルを生成する... ハズ
+# eslint を除きました
 gulp.task 'dev:init', (cb) ->
   runSequence(
     'vendor:dev'
@@ -388,3 +420,33 @@ gulp.task 'serve:htdocs', [ 'default' ], ->
 #    'lec:build'
 #  )
 #  return
+
+# ------------------------------------------------------------
+
+# dev:init へ eslint を追加しました
+gulp.task 'dev:init:lint', (cb) ->
+  runSequence(
+    'vendor:dev'
+    'babels:dev:lint'
+    'exe:dev:lint'
+    'sp:exe:dev:lint'
+    'sprite:build'
+    'single:dev'
+    'bundle:copy'
+    'libs:synapse:dev'
+#      'html:build'
+    'js:dev'
+    'image:copy'
+    'font:copy'
+    'css:dev'
+    [
+      'sp:sprite:build'
+    ]
+    [
+      'sp:css:dev'
+      'sp:image:copy'
+    ]
+    'libs:copy'
+    cb
+  )
+  return
