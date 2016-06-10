@@ -15,24 +15,29 @@ $DBPWD="ut";
 $DBPORT=5432;
 
 include $INCLUDEPATH."conf/env.php";
-$file=sprintf("%s/api/ver1/static/cms.dat",$SERVERPATH);
-$s=unserialize(file_get_contents($file));
-$CONTENTSTYPE_ALLOWED=$s[0];
-$RELATEDLINK_ALLOWED=$s[1];
-$SUMMARY_ALLOWED=$s[2];
-$ORIGINALURL_ALLOWED=$s[3];
-$MOVIE_ALLOWED=$s[4];
-$YOUTUBE_ALLOWED=$s[5];
-$FACEBOOK_ALLOWED=$s[6];
-$MCAPTION_ALLOWED=$s[7];
-$CONTENTS_ALLOWED=$s[8];
-unset($s);
 
-$file=sprintf("%s/api/ver1/static/media.dat",$SERVERPATH);
-$mediaoption=unserialize(file_get_contents($file));
+// 関連リンクを許可する媒体
+/*
+
+	1:朝日
+	2:日刊 
+	3:FINEPLAY
+	4:Facebook navi
+	5:SPOZIUM
+	6:HUDDLE web
+	7:TBS「S☆1」
+	8:テニスデイリー
+	9:ラグビー共和国
+   10:運動通信編集部
+	
+
+*/
+$RELATEDLINK_ALLOWED=array(3,8,10);
+$RELATEDBANNER_ALLOWED=array(7);
+
+$CONTENTS_EDITED=array(5);
 
 $ADPATH="/editdm/";
-$CMSJS="ut";
 $TAGON=1;
 $DEBUGMODE=1;
 

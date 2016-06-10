@@ -1,11 +1,11 @@
 <?php if($q->get_dir()==0){ ?>
 	<?php if($q->get_file()==0){ ?>
 
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td rowspan="2" class="inputTitle"><?=$d_name?></td>
 		<td class="inputFields"><input type="password" name="p_<?=$f_name?>" value="" size="<?=$SIZE?>" class="in" ></td>
 		</tr>
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td class="inputCap"><?php if(strlen($_COMMENT)>0){ ?><?=mod_HTML($_COMMENT,1)?><?php }else{ ?><?=$d_name?>を入力してください。<?php } ?></td>
 		</tr>
 
@@ -21,7 +21,7 @@
 			}
 
 		?>
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td class="confTitle"><?=$d_name?></td>
 		<td class="confFields"><?php if(strlen($length)>0){ ?><?php for($i=0;$i<$length;$i++)echo "*";echo "(アスタリスクで表示されます)"; ?><?php }else{ ?>入力なし<?php } ?></td>
 		</tr>
@@ -32,11 +32,11 @@
 <?php if($q->get_dir()==1){ ?>
 	<?php if($q->get_file()==0){ ?>
 
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td rowspan="2" class="inputTitle"><?=$d_name?></td>
 		<td class="inputFields"><input type="password" name="p_<?=$f_name?>" value="" size="<?=$SIZE?>" class="in" ></td>
 		</tr>
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td class="inputCap"><?php if(strlen($_COMMENT)>0){ ?><?=mod_HTML($_COMMENT,1)?><?php }else{ ?><?=$d_name?>を入力してください。<?php } ?></td>
 		</tr>
 
@@ -52,7 +52,7 @@
 			}
 		
 		?>
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td class="confTitle"><?=$d_name?></td>
 		<td class="confFields"><?php if(strlen($length)>0){ ?><?php for($i=0;$i<$length;$i++)echo "*";echo "(アスタリスクで表示されます)"; ?><?php }else{ ?>入力なし<?php } ?></td>
 		</tr>
@@ -63,7 +63,7 @@
 <?php if($q->get_dir()==2){ ?>
 	<?php if($q->get_file()==0){ ?>
 
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td class="confTitle"><?=$d_name?></td>
 		<td class="confFields">******** (アスタリスクで表示されます)</td>
 		</tr>
@@ -71,7 +71,7 @@
 	<?php } ?>
 	<?php if($q->get_file()==1){ ?>
 	
-		<tr class="<?=$f_name?>">
+		<tr>
 		<td class="confTitle"><?=$d_name?></td>
 		<td class="confFields">******** (アスタリスクで表示されます)</td>
 		</tr>	

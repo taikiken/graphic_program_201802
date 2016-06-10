@@ -4,6 +4,11 @@ $POSITIONS=array("日本語版のみ","多言語版対応");
 $d_name="バイリンガル";
 
 ?>
+<?php if($III!=0&&$q->get_file()!==2&&$HEADERFLAG!=1){ ?>
+<tr>
+<td colspan="2" class="separator"><img src="/shared/cms/img/spacer.gif" height="1" width="1" alt="#" ></td>
+</tr>
+<?php } ?>
 <?php $HEADERFLAG=0; ?>
 <?php if($q->get_dir()==0){ ?>
 <?php if($q->get_file()==0){ ?>

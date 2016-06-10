@@ -13,7 +13,7 @@ $f=set_article($id,$uid);
 if($y["status"]["code"]===200){
 
 	//媒体バナー - 後で消す
-	if($f["userid"]==7||$f["userid"]==12){
+	if(in_array($f["userid"],$RELATEDBANNER_ALLOWED)){
 		
 		$sql=sprintf("select * from u_banner where cid=%s",$f["userid"]);
 		$o->query($sql);

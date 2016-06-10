@@ -1,6 +1,7 @@
 <?php
 
 $CURRENTPATH=$_SERVER["SCRIPT_FILENAME"];
+
 if(strpos($CURRENTPATH,$ADPATH)){
 	
 	include $INCLUDEPATH."dbutl.php";
