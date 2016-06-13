@@ -7,7 +7,7 @@
 <?php include_once __DIR__."/../_head.php"; ?>
 
 
-  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=20160610">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=20160613">
   <?php
   // header 表示条件 設定
   $template_name = $page['template'];
@@ -40,15 +40,15 @@ if ($page_has_header) :
 # ---------------------------------------------------------------------------
 # Syn. require module
 ?>
-<script src="/assets/sp/js/libs/synapse/synapse.js?v=20160610"></script>
-<script src="/assets/js/libs/jquery2/jquery.min.js?v=20160610"></script>
-<script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=20160610"></script>
+<script src="/assets/sp/js/libs/synapse/synapse.js?v=20160613"></script>
+<script src="/assets/js/libs/jquery2/jquery.min.js?v=20160613"></script>
+<script src="/assets/sp/js/libs/synapse/extras/jquery.inview.js?v=20160613"></script>
 <?php
 # end of Syn. require module
 # ---------------------------------------------------------------------------
 endif;
 ?>
-  <script src="/assets/js/libs/vendor.react.js?v=20160610"></script>
+  <script src="/assets/js/libs/vendor.react.js?v=20160613"></script>
   <?php
   /*
    Syn. menu end point 本番環境では
@@ -59,7 +59,7 @@ endif;
     テストの時はつけてください
    */
   ?>
-  <script src="/assets/js/bundle/main.bundle.js?v=20160610"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=20160613"></script>
 
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -118,7 +118,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=20160610"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=20160613"></script>
   <?php
 endif;
 // eof brightcove
