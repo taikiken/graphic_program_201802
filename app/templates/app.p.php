@@ -2,11 +2,10 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="robots" content="noindex,nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
-  <link rel="stylesheet" href="/assets/sp/css/ui.css">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=20160610">
 
   <style>
     .webview-env {
@@ -94,21 +93,37 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=20160610"></script>
 <?php endif; ?>
 
   <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-   ga('create', 'UA-74679267-1', 'auto');
-   ga('require', 'linkid');
-   ga('require', 'displayfeatures');
-   ga('set', 'dimension1', navigator.userAgent);
-   ga('send', 'pageview');
-   ga('send', 'event', 'ua', 'view', navigator.userAgent );
+    ga('create', 'UA-74679267-1', 'auto');
+    ga('require', 'linkid');
+    ga('require', 'displayfeatures');
+    ga('set', 'dimension1', navigator.userAgent);
+    ga('send', 'event', 'ua', 'view', navigator.userAgent );
+
+    // provider
+    ga('send', 'event', 'provider', 'view', '<?php echo $page['post']['user']['name']; ?>' );
+
+    // category
+<?php
+    if ( $page['post']['categories'] && is_array($page['post']['categories']) ) :
+      foreach ( $page['post']['categories'] as $key => $value ) :
+?>
+    ga('send', 'event', 'category', 'view', '<?php echo $value['label']; ?>' );
+<?php
+      endforeach;
+    endif;
+?>
+
+    // pageview
+    ga('send', 'pageview');
   </script>
 
 </head>
@@ -204,59 +219,59 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   </div>
 
 
-<?php if ( $page['post']['media']['video']['player'] == 'facebook' ) : ?>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '842032129256034',
-      xfbml      : true,
-      version    : 'v2.5'
+  <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) : ?>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '842032129256034',
+        xfbml      : true,
+        version    : 'v2.5'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/ja_JP/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <?php endif; ?>
+
+  <?php if ( $page['post']['media']['video']['player'] == 'brightcove' ) : ?>
+  <script>
+  (function () {
+
+    var myPlayer;
+    videojs('webview-brightcove').ready(function() {
+      myPlayer = this;
+
+      myPlayer.src(
+        {"type":"application/x-mpegURL",
+        "src":"<?php echo $page['post']['media']['video']['url']['sd']; ?>"}
+      );
+
+      myPlayer.poster('<?php echo $page['post']['media']['images']['medium']; ?>');
+
+      <?php if ( $page['post']['media']['video']['vast'] ) : ?>
+      myPlayer.ima3({
+        debug: false,
+        adTechOrder: [
+          'html5'
+        ],
+        postrollTimeout: 2000,
+        prerollTimeout: 1000,
+        requestMode: 'onload',
+        serverUrl: '<?php echo $page['post']['media']['video']['vast']; ?>' + Date.now(),
+        timeout: 5000
+      });
+      <?php endif; ?>
+
     });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/ja_JP/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<?php endif; ?>
-
-<?php if ( $page['post']['media']['video']['player'] == 'brightcove' ) : ?>
-<script>
-(function () {
-
-  var myPlayer;
-  videojs('webview-brightcove').ready(function() {
-    myPlayer = this;
-
-    myPlayer.src(
-      {"type":"application/x-mpegURL",
-      "src":"<?php echo $page['post']['media']['video']['url']['sd']; ?>"}
-    );
-
-    myPlayer.poster('<?php echo $page['post']['media']['images']['medium']; ?>');
-
-    <?php if ( $page['post']['media']['video']['vast'] ) : ?>
-    myPlayer.ima3({
-      debug: false,
-      adTechOrder: [
-        'html5'
-      ],
-      postrollTimeout: 2000,
-      prerollTimeout: 1000,
-      requestMode: 'onload',
-      serverUrl: '<?php echo $page['post']['media']['video']['vast']; ?>' + Date.now(),
-      timeout: 5000
-    });
-    <?php endif; ?>
-
-  });
-}());
-</script>
-<?php endif; ?>
+  }());
+  </script>
+  <?php endif; ?>
 
 </body>
 </html>

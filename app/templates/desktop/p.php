@@ -116,14 +116,14 @@ endif;
         <div id="single-visual-container"></div>
 
         <div class="post-content">
-        <?php if ( isset($page['post']['readmore']) && $page['post']['readmore']['is_readmore'] && $page['post']['readmore']['url'] ) : ?>
+        <?php if ( $page['post']['is_readmore'] ) : ?>
 
           <p>
             <?php echo $page['post']['description']; ?>
           </p>
 
           <p>
-            <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank"<?php /* style="text-align:center; font-weight:bold; font-size:1.1em;"*/?>>続きを読む(外部サイトへ)</a>
+            <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank">続きを読む(外部サイトへ)</a>
           </p>
 
         <?php

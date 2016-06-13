@@ -19,6 +19,8 @@ SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
 SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
 # cloudpack - 2
 SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
+# limret
+SetEnvIf Remote_Addr "153\.156\.72\.223" allowed_ip_addresses
 
 Order Deny,Allow
 Deny from All
@@ -40,7 +42,7 @@ php_flag magic_quotes_gpc off
 php_flag register_global off
 php_flag display_errors on
 php_value upload_max_filesize '20M'
-php_value session.auto_start 0
+php_value session.auto_start 1
 php_value session.use_cookies 1
 php_value session.cookie_lifetime 2592000
 php_value session.gc_maxlifetime 2592000

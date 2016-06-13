@@ -132,19 +132,6 @@ let SettingInputNode = React.createClass( {
       return '';
     };
 
-    // 登録済み avatar
-    /*
-    let avatar = this.state.avatar;
-    if ( !avatar ) {
-      avatar = Empty.USER_EMPTY;
-    } else if ( !Safety.isImg(avatar) ) {
-      if ( !Safety.isGraph( avatar ) ) {
-        avatar = Empty.USER_EMPTY;
-      }
-    }
-
-    let loggedIn = avatar === Empty.USER_EMPTY ? '' : 'user-logged-in';
-    */
     let avatar = Safety.image( this.state.avatar, Empty.SETTING_AVATAR );
     let loggedIn = Safety.same( avatar, Empty.SETTING_AVATAR );
     if ( !Safety.isBase64(avatar) ) {
@@ -152,7 +139,10 @@ let SettingInputNode = React.createClass( {
     }
 
     let imgStyle = {
-      'background': `url(${avatar}) no-repeat center center`,
+      // 'background': `url(${avatar}) no-repeat center center`,
+      'backgroundImage': `url(${avatar})`,
+      'backgroundRepeat': 'no-repeat',
+      'backgroundPosition': 'center center',
       'backgroundSize': 'cover'
     };
 
