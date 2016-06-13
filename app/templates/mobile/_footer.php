@@ -169,7 +169,7 @@ if ( $page['apiRoot'] != '' ) :
 }() );
 </script>
 <?php endif; ?>
-<script src="/assets/sp/js/bundle/sp-exe.bundle.js"></script>
+<script src="/assets/sp/js/bundle/sp-exe.bundle.js?v=20160613"></script>
 <?php
 // 遅延読み込みにするために fb-video.js へ変更する on 2016-03-14
 // 実機で FB Video 生成が空振りする
@@ -195,7 +195,7 @@ if ( $page['apiRoot'] != '' ) :
 </script>
  */
 ?>
-<script src="/assets/js/fb-video.js"></script>
+<script src="/assets/js/fb-video.js?v=20160613"></script>
 <?php
 /* fb delay 実行を有効へ */
 ?>
