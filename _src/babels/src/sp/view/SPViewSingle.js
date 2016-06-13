@@ -65,6 +65,8 @@ export class SPViewSingle extends ViewSingle {
     this.visual( single );
     this.banner( single );
 
+    // ga from 2016-06-08
+    ViewSingle.ga( single );
     // from 2016-06-10
     ViewSingle.moreExternal();
   }

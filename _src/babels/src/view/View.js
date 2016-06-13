@@ -28,31 +28,25 @@ export class View extends EventDispatcher {
    */
   constructor( element:Element, option:Object = {} ) {
 
-    /*
-    if ( !Safety.isElement( element ) ) {
-      console.warn( `un accessible element. ${element}` );
-    }
-    */
     option = Safety.object( option );
 
     super();
     /**
-     * root element, insert 基点タグ
+     * react JSX を挿入する root element
      * @type {Element}
      * @protected
      */
     this._element = element;
     /**
-     * event handler をセットした Object
+     * event 名称をキーにしセットした event handler(callback) Object
      * @type {Object}
      * @protected
      */
     this._option = option;
     /**
-     * Action instance
-     * @type {*}
-     * @private
-     * @protected null
+     * Action Class instance
+     * @type {null|*}
+     * @protected
      */
     this._action = null;
 
@@ -130,7 +124,7 @@ export class View extends EventDispatcher {
   //  CONST
   // ---------------------------------------------------
   /**
-   * event BEFORE_RENDER
+   * event BEFORE_RENDER<br>
    * ReactDOM.render 前
    * @return {string} viewBeforeRender を返します
    */
@@ -138,7 +132,7 @@ export class View extends EventDispatcher {
     return 'viewBeforeRender';
   }
   /**
-   * event WILL_MOUNT
+   * event WILL_MOUNT<br>
    * ReactClass.componentWillMount 後
    * @return {string} viewWillMount を返します
    */
@@ -146,7 +140,7 @@ export class View extends EventDispatcher {
     return 'viewWillMount';
   }
   /**
-   * event DID_MOUNT
+   * event DID_MOUNT<br>
    * ReactClass.componentDidMount 後
    * @return {string} viewDidMount を返します
    */
@@ -161,7 +155,7 @@ export class View extends EventDispatcher {
     return 'viewErrorMount';
   }
   /**
-   * event UNDEFINED_ERROR
+   * event UNDEFINED_ERROR<br>
    * Ajax は成功したが設定されるべき key 値が undefined or null の時
    * @return {string} viewUndefinedError を返します
    */
@@ -169,7 +163,7 @@ export class View extends EventDispatcher {
     return 'viewUndefinedError';
   }
   /**
-   * event EMPTY_ERROR
+   * event EMPTY_ERROR<br>
    * Ajax は成功したが配列であるべき結果が length 0 の時
    * @return {string} viewEmptyError を返します
    */
@@ -177,7 +171,7 @@ export class View extends EventDispatcher {
     return 'viewEmptyError';
   }
   /**
-   * event RESPONSE_ERROR
+   * event RESPONSE_ERROR<br>
    * Ajax 失敗
    * @return {string} viewResponseError を返します
    */
