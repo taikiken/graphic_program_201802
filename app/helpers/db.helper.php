@@ -153,7 +153,7 @@ class dbForTemplate extends db {
     */
 
     //$this->connect();
-    global $articletable,$SERVERPATH;
+    global $articletable,$SERVERPATH,$RELATEDLINK_ALLOWED;
 
     $sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($this->uid),sprintf(" and id=%s",$id)));
     $this->query($sql);
@@ -164,6 +164,21 @@ class dbForTemplate extends db {
 
     $f["canonical"]=$v["canonical"];
     $f["readmore"]=$v["readmore"];
+
+	$l="";
+	if(in_array($f["d2"],$RELATEDLINK_ALLOWED)){
+		$sql=sprintf("select title,link from u_link where pid=%s order by n",$f["id"]);
+		$this->query($sql);
+		while($ee=$this->fetch_array())$p[]=$ee;
+		if(count($p)>0){
+			$l="<p>関連リンク<br>";
+			for($i=0;$i<count($p);$i++){
+				if(strlen($p[$i]["title"])>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\">%s</a><br>",$p[$i]["title"],$p[$i]["link"]);
+			}
+			$l.="</p>";
+		}
+		$f["relatedpost"]=$l;
+	}
 
     $ad=get_advertise($f["m1"],$f["userid"],$f["id"]);
     $s=set_articleinfo($f,1,1,1);
@@ -247,6 +262,5 @@ class dbForTemplate extends db {
   }
 
 }
-
 
 ?>

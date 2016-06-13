@@ -27,6 +27,8 @@ import {Safety} from '../data/Safety';
 
 // dae
 import {SingleDae} from '../dae/SingleDae';
+import {CategoriesDae} from '../dae/caegories/CategoriesDae';
+import {SlugDae} from '../dae/caegories/SlugDae';
 
 // app
 import {Dom} from '../app/Dom';
@@ -34,8 +36,8 @@ import {User} from '../app/User';
 import {Message} from '../app/const/Message';
 
 // ga
-import {Ga} from '../ga/Ga';
 import {GaData} from '../ga/GaData';
+import {Ga} from '../ga/Ga';
 
 /**
  * 記事詳細
@@ -63,10 +65,24 @@ export class ViewSingle extends View {
     option = Safety.object( option );
 
     super( element, option );
-    let ActionClass = User.sign ? SingleAuth : Single;
-    this.action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
 
+    let ActionClass = User.sign ? SingleAuth : Single;
+
+    this.action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * footer, related 挿入位置 Element を設定した Object
+     * @type {Object} {related: Element, footer: Element}
+     * @protected
+     */
     this._elements = elements;
+    //
+    // /**
+    //  * 記事Id
+    //  * @type {number}
+    //  * @protected
+    //  */
+    // this._articleId = id;
+
     // mount event handler
     this._boundMount = this.headerMount.bind( this );
     // related instance
@@ -75,8 +91,16 @@ export class ViewSingle extends View {
     this._header = null;
     // footer instance
     this._footer = null;
-
   }
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // get articleId():number {
+  //   return this._articleId;
+  // }
+  // ---------------------------------------------------
+  //  METHODS
+  // ---------------------------------------------------
   /**
    * Ajax request を開始します
    */
@@ -183,10 +207,11 @@ export class ViewSingle extends View {
       this.related( single.related );
 
     }
+    // ga from 2016-06-08
+    ViewSingle.ga( single );
 
     // from 2016-06-10
     ViewSingle.moreExternal();
-
   }// render
   /**
    * header View.DID_MOUNT event handler
@@ -226,6 +251,7 @@ export class ViewSingle extends View {
     }
 
   }// related
+
   /**
    * <p>a#readMore-external の存在チェックを行い<br>
    * 存在すれば click で<br>
@@ -267,5 +293,46 @@ export class ViewSingle extends View {
     const method = 'ViewSingle.onExternal';
 
     Ga.add( new GaData( method, category, action, label ) );
+  }
+  // ---------------------------------------------------
+  //  STATIC METHODS
+  // ---------------------------------------------------
+  /**
+   * <p>記事詳細での提供元&カテゴリートラッキング</p>
+   * https://github.com/undotsushin/undotsushin/issues/744
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : provider
+   * イベントアクション：view
+   * イベントラベル：[response.user.name]
+   *  APIの response.user.name ex. 運動通信編集部 を設定
+   * </pre>
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : category
+   * イベントアクション：view
+   * イベントラベル：[response.categories.label] ex. 海外サッカー
+   * </pre>
+   *
+   * @from 2016-06-08
+   * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+   */
+  static ga( single:SingleDae ):void {
+    let category = 'provider';
+    const action = 'view';
+    const label = single.user.userName;
+    const method = 'ViewSingle.ga';
+
+    Ga.add( new GaData( method, category, action, label ) );
+
+    // category label 送信
+    const categories:CategoriesDae = single.categories;
+
+    category = 'category';
+    categories.all.map( (value:SlugDae) => {
+      Ga.add( new GaData( method, category, action, value.label ) );
+    } );
   }
 }

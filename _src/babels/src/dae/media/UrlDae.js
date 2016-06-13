@@ -19,15 +19,22 @@ import {Safety} from '../../data/Safety';
 export class UrlDae {
   /**
    * article.media.video.url object
-   * @param {Object} [url={}] article.media.video.url
+   * @param {Object|string} [url={}] article.media.video.url
    */
   constructor( url:Object = {} ) {
-    url = Safety.object( url );
-    /**
-     * article.media.video.url
-     * @type {Object}
-     * @protected
-     */
+    // 2016-06-10
+    // url:string, url:object どちらにも耐えられるように設計します
+    // url:string で表示データが設定されることはないです
+    // for brightcove
+    if ( typeof url === 'undefined' || url === null ) {
+      url = '';
+    } else if ( typeof url === 'object' ) {
+      // Object
+      url = Safety.object( url );
+    } else {
+      url = String( url );
+    }
+
     this._url = url;
   }
   /**

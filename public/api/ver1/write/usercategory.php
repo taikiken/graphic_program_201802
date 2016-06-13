@@ -45,7 +45,7 @@ if($y["status"]["code"]===200){
 		}
 	}
 	
-	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as f from (select id,name,name_e,img,n from u_categories) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by n",$uid);
+	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as f from (select id,name,title,name_e,img,n from u_categories) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by n",$uid);
 	$o->query($sql);
 	while($f=$o->fetch_array()){
 		$s[]=set_categoryinfo($f,$f["f"]==1?true:false);

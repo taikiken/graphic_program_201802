@@ -45,7 +45,7 @@ let imagesLoaded = self.imagesLoaded;
 let Isotope = self.Isotope;
 
 /**
- * 無限スクロール をしない
+ * 無限スクロール をしない記事一覧
  */
 export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
   /**
@@ -58,20 +58,26 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, ActionClass, option, useMasonry );
-
-    this._slug = 'all';
+    this.slug = 'all';
   }
-  // ---------------------------------------------------
-  //  GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * category slug
-   * @default all
-   * @return {string} category slug を返します
-   */
-  get slug():string {
-    return this._slug;
-  }
+  // // ---------------------------------------------------
+  // //  GETTER / SETTER
+  // // ---------------------------------------------------
+  // /**
+  //  * category slug
+  //  * @default all
+  //  * @return {string} category slug を返します
+  //  */
+  // get slug():string {
+  //   return this._slug;
+  // }
+  // /**
+  //  * category slug を設定します
+  //  * @param {string} categorySlug 設定する category slug
+  //  */
+  // set slug( categorySlug:string ):void {
+  //   this._slug = categorySlug;
+  // }
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
@@ -720,6 +726,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
     }
 
+    // // from 2016-06-08
+    // this.postRender();
   }// render
 }
 

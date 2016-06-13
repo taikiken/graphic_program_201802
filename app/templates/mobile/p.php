@@ -58,7 +58,7 @@
         </div>
 
 
-        <?php if ( isset($page['post']['readmore']) && $page['post']['readmore']['is_readmore'] && $page['post']['readmore']['url'] ) : ?>
+        <?php if ( $page['post']['is_readmore'] ) : ?>
 
           <div id="post-content-container" class="post-content">
 

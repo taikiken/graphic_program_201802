@@ -19,6 +19,8 @@ SetEnvIf Remote_Addr "175\.41\.247\.44" allowed_ip_addresses
 SetEnvIf Remote_Addr "210\.227\.234\.114" allowed_ip_addresses
 # cloudpack - 2
 SetEnvIf Remote_Addr "54\.64\.137\.251" allowed_ip_addresses
+# limret
+SetEnvIf Remote_Addr "153\.156\.72\.223" allowed_ip_addresses
 
 Order Deny,Allow
 Deny from All

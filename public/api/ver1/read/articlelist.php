@@ -165,6 +165,8 @@ if(strlen($api)>0){
 	}
 }
 
+//echo $sql;
+
 if($y["status"]["code"]===200){
 
 	$o->query($nsql);

@@ -166,6 +166,16 @@ gulp.task 'single:webpack:build', () ->
 # dev
 gulp.task 'single:dev', ( cb ) ->
   runSequence(
+#    'single:eslint'
+    'single:compile'
+    'single:webpack:dev'
+    cb
+  )
+  return
+
+# dev
+gulp.task 'single:dev:lint', ( cb ) ->
+  runSequence(
     'single:eslint'
     'single:compile'
     'single:webpack:dev'
