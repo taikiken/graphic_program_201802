@@ -57,16 +57,19 @@ class UserAgent{
 
 
   // アプリからのアクセスかどうかチェックする
+  // モバイルかつUserAgent or ?ua= の値で判断
   // iOS : undotsushin-ios
   // Android : undotsushin-android
   public function get_ua_app() {
 
+    $query_ua = ( isset($_GET['ua']) ) ? $_GET['ua'] : '';
+
     if ( $this->device == 'mobile' ) :
 
-      if ( strpos($this->ua,'undotsushin-ios') !== false ) :
+      if ( strpos($this->ua,'undotsushin-ios') !== false || $query_ua == 'undotsushin-ios' ) :
         return 'iOS';
 
-      elseif ( strpos($this->ua,'undotsushin-android') !== false ) :
+      elseif ( strpos($this->ua,'undotsushin-android') !== false || $query_ua == 'undotsushin-android' ) :
         return 'Android';
 
       // #540 - iOSアプリ版で `undotsushin-ios` ない場合

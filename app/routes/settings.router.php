@@ -7,7 +7,7 @@ $app->group('/settings', function () use ($app) {
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
 
-    $app->user_helper->check_logged_in();
+    $app->model->check_logged_in();
 
     $args['page'] = $app->model->set(array(
       'title'    => '基本情報設定 | 設定',
@@ -26,7 +26,7 @@ $app->group('/settings', function () use ($app) {
   // ==============================
   $this->get('/{slug:interest}[/]', function ($request, $response, $args) use ($app) {
 
-    $app->user_helper->check_logged_in();
+    $app->model->check_logged_in();
 
     $args['page'] = $app->model->set(array(
       'title'    => 'パーソナライズ設定 | 設定',
@@ -62,7 +62,7 @@ $app->group('/settings', function () use ($app) {
   // ==============================
   $this->get('/{slug:deactivate}[/]', function ($request, $response, $args) use ($app) {
 
-    $app->user_helper->check_logged_in();
+    $app->model->check_logged_in();
 
     $args['page'] = $app->model->set(array(
       'title'    => '退会 | 設定',

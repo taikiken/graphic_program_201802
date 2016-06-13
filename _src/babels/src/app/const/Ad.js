@@ -130,4 +130,22 @@ export class Ad {
     // return script;
     return div;
   }
+
+  /**
+   * ストリーム広告をscript tag を生成し返します
+   * @from 2016-06-06
+   * @param {string} id target element id
+   * @param {string} ad ストリーム広告 ID
+   * @return {Element} div でラップし script tag を返します
+   */
+  static makeStream( id:string, ad:string ):Element {
+    let div = document.createElement('div');
+    let script = document.createElement( 'script' );
+    // console.log( 'makeStream', ad );
+    // console.log( 'makeStream path', `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0` );
+    script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
+    div.appendChild(script);
+    // return script;
+    return div;
+  }
 }

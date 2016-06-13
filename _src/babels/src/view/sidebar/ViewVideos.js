@@ -291,7 +291,7 @@ export class ViewVideos extends View {
           <div className="board-small widget-recommend">
             {/* title */}
             <div className="widget-recommend-heading">
-              <h3 className="widget-recommend-heading-title"><img src="/assets/images/common/side-recommend-heading.png" alt="RECOMMEND" /></h3>
+              <h3 className="widget-recommend-heading-title">RECOMMEND</h3>
               <span className="widget-recommend-heading-ruby">{Message.VIDEOS_TITLE}{categoryTitle}</span>
             </div>
             <ul className="board-list">

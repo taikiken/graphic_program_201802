@@ -64,6 +64,9 @@ export class SPViewSingle extends ViewSingle {
     this.header( single );
     this.visual( single );
     this.banner( single );
+
+    // from 2016-06-10
+    ViewSingle.moreExternal();
   }
   /**
    * header 部レンダリング
@@ -107,10 +110,16 @@ export class SPViewSingle extends ViewSingle {
     if (!Safety.isElement(this._bannerElement)) {
       return;
     }
+
+    let userBanner = single.user.banner.sp;
+    let banner = single.banner.sp;
+    if ( !banner.image && !!userBanner.image ) {
+      banner = userBanner;
+    }
     
     ReactDOM.render(
       <BannerNode
-        banner={single.user.banner.sp}
+        banner={banner}
         pc={false}
       />,
       this._bannerElement

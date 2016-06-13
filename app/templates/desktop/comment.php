@@ -1,3 +1,4 @@
+<?Php if ( !$page['theme']['images']['pc'] ) : ?>
 <div class="category-heading">
   <h1>
     <?php echo $page['category']['label']; ?>
@@ -8,17 +9,64 @@
     <?php endif; ?>
   </h1>
 </div><!-- /.category-heading -->
+<?php endif; ?>
 
 <div class="body-sec">
   <div class="body-sec-inner">
+
+    <?php
+    // ----------------------------------------------------
+    // 記事詳細: pc
+    // response.theme.images.pc
+    // response.description
+    if ( $page['theme']['images']['pc'] ) :
+    // 記事詳細で冒頭バナーにリンク設定
+    // https://github.com/undotsushin/undotsushin/issues/645#issuecomment-224162616 ?>
+      <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
+        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['pc']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1></a>
+      </div>
+    <?php endif;
+    // eof: 記事詳細: pc
+    // ---------------------------------------------------- ?>
+
     <section class="main-sec">
       <div class="post-detail">
 
         <div id="single-header-container"></div>
 
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        if ( $page['ad']['pc']['single_top'] ) :
+        // ------------------------------------
+        // single top
+        ?>
         <div class="sponsor-link w728">
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35118&targetID=adg_35118&displayid=1&adType=PC&width=728&height=90&sdkType=3&async=false&tagver=2.0.0"></script>
+
+          <?php
+          /*
+          # pc_single_top
+          */
+          ?>
+          <script type='text/javascript'>
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/531683568/<?php echo $page['ad']['pc']['single_top']; ?>', [728, 90], 'div-gpt-ad-pc_single_top').addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.enableServices();
+            });
+          </script>
+          <div id='div-gpt-ad-pc_single_top' style='height:90px; width:728px;'>
+          <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-pc_single_top'); });
+          </script>
+          </div>
+
         </div>
+        <?php endif; ?>
+
 
         <div id="comment-normal-container"></div>
 
@@ -59,69 +107,59 @@
           </div><!-- /.post-sns-pr -->
         </div><!-- /.post-sns -->
 
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        // ------------------------------------
+        // single bottom
+        if ( $page['ad']['pc']['single_bottom_left'] || $page['ad']['pc']['single_bottom_right'] ) : ?>
         <div class="sponsor-link">
           <div class="sponsor-link column2">
+
+            <?php if ( $page['ad']['pc']['single_bottom_left'] ) : ?>
             <div class="sponsor-link-item">
+              <?php
+              /*
+              # 保険のために original を残します
+              # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35119&targetID=adg_35119&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+              */ ?>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_left']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_left']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
             </div>
+            <?php endif; ?>
+
+
+            <?php if ( $page['ad']['pc']['single_bottom_right'] ) : ?>
             <div class="sponsor-link-item">
+              <?php
+              /*
+              # 保険のために original を残します
+              # ToDo: いつか削除
               <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35120&targetID=adg_35120&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+              */ ?>
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['pc']['single_bottom_right']; ?>&targetID=adg_<?php echo $page['ad']['pc']['single_bottom_right']; ?>&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
             </div>
+            <?php endif; ?>
+
           </div>
         </div>
+        <?php
+        endif;
+        // eof: single bottom
+        // ------------------------------------ ?>
+
+        <br /><br />
 
       </div><!-- /.post-detail -->
 
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
-      <div class="sponsor-link">
-        <?php
-        /*
-        #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
-        Adsense 差し替え
-        */
-        ?>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- デスクトップ - サイドバー - 上 -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:300px;height:250px"
-             data-ad-client="ca-pub-8613117509675807"
-             data-ad-slot="8203159173"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
 
-      <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
+      <?php include_once __DIR__."/_sidebar_ad.php"; ?>
 
-      <div id="widget-ranking-container"></div><!--/ranking-->
-      <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
-        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
-      </div>
-
-      <div id="widget-recommend-container"></div><!--/videos-->
-      <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
-        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
-      </div>
-
-      <div class="sponsor-link nadir">
-        <?php
-        /*
-        #680 https://github.com/undotsushin/undotsushin/issues/680#issuecomment-217601849
-        Adsense 差し替え
-        */
-        ?>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- デスクトップ - サイドバー - 下 -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:300px;height:600px"
-             data-ad-client="ca-pub-8613117509675807"
-             data-ad-slot="5110091971"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
     </section><!-- /.side-sec -->
 
   </div>

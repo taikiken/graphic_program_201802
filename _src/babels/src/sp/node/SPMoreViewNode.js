@@ -35,17 +35,26 @@ export let SPMoreViewNode = React.createClass( {
     action: React.PropTypes.object.isRequired,
     loading: React.PropTypes.string,
     // for ga
+    // home flag
+    home: React.PropTypes.bool.isRequired,
     // category slug
     slug: React.PropTypes.string.isRequired,
     // ranking | movie
-    type: React.PropTypes.string.isRequired
+    type: React.PropTypes.string
   },
   getDefaultProps: function() {
     return {
-      loading: ''
+      loading: '',
+      type: ''
     };
   },
   getInitialState: function() {
+    /**
+     * 現在のページナンバー<br>
+     * 計測タグへ次の（表示する）ページナンバーを送信するために使用します
+     * @type {number}
+     * @private
+     */
     this.page = 1;
 
     return {
@@ -78,10 +87,10 @@ export let SPMoreViewNode = React.createClass( {
   },
   // componentDidMount: function() {
   // },
-  // componentWillUnmount: function() {
-  //   // unmount 時に rise 破棄を行う
-  //   this.destroy();
-  // },
+  componentWillUnmount: function() {
+    // unmount 時に rise 破棄を行う
+    this.destroy();
+  },
   // -----------------------------------------
   // // button 関連 custom method
   // // rise 関連 event を破棄する
@@ -115,12 +124,33 @@ export let SPMoreViewNode = React.createClass( {
       this.props.action.next();
       // ----------------------------------------------
       // GA 計測タグ
-      Ga.add( new GaData('SPMoreViewNode.updateLoading', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page)) );
+      if ( this.props.type !== '' ) {
+        Ga.add( new GaData('SPMoreViewNode.updateLoading', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page)) );
+      } else {
+        // ga
+        if (this.props.home) {
+          this.gaHome();
+        } else {
+          this.gaCategory();
+        }
+      }
       // ----------------------------------------------
     }
 
     // loading 表示のための css class を追加・削除
     this.setState( {loading: loadingClass} );
 
+  },
+  gaHome: function() {
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData('SPMoreViewNode.gaHome', 'home_articles', 'view - new', String(++this.page)) );
+    // ----------------------------------------------
+  },
+  gaCategory: function() {
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData('SPMoreViewNode.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
+    // ----------------------------------------------
   }
 } );

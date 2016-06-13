@@ -25,7 +25,7 @@ import {Safety} from '../../data/Safety';
 
 // node
 import {ReactionNode} from '../../node/comment/ReactionNode';
-import {NewsAdNode} from '../node/ad/NewsAdNode';
+import {SPNewsAdNode} from '../node/ad/SPNewsAdNode';
 
 import {CommentUserPlusCountNode} from '../../node/comment/CommentUserPlusCountNode';
 
@@ -319,9 +319,10 @@ export let SPArchiveNode = React.createClass( {
     moreButton: React.PropTypes.func,
     // home or not
     home: React.PropTypes.bool,
-
     // 一覧種類 news | video | ranking
-    type: React.PropTypes.string.isRequired
+    type: React.PropTypes.string.isRequired,
+    // ストリーム広告
+    adSp: React.PropTypes.string.isRequired
   },
   getDefaultPropTypes: function() {
     return {
@@ -344,6 +345,7 @@ export let SPArchiveNode = React.createClass( {
     let home = this.props.home;
     let length = this.state.list.length;
     let type = this.props.type;
+    let adSp = this.props.adSp;
 
     // dom出力する
     return (
@@ -390,12 +392,14 @@ export let SPArchiveNode = React.createClass( {
                     total={commentsTotal}
                     articleId={String(dae.id)} />
                 </div>
-                <NewsAdNode
+                <SPNewsAdNode
                   key={'ad-' + type + '-' + dae.id}
                   enable={type === Message.NEWS}
                   index={i}
                   length={length}
-                  uniqueId={'ad-' + type + '-' + dae.id} />
+                  uniqueId={'ad-' + type + '-' + dae.id}
+                  adSp={adSp}
+                />
               </div>
             );
             // loop end

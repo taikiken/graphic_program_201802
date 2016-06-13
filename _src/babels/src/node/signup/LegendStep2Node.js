@@ -142,7 +142,10 @@ let Step2FormNode = React.createClass( {
       // }
 
       let imgStyle = {
-        'background': `url(${avatar}) no-repeat center center`,
+        // 'background': `url(${avatar}) no-repeat center center`,
+        'backgroundImage': `url(${avatar})`,
+        'backgroundRepeat': 'no-repeat',
+        'backgroundPosition': 'center center',
         'backgroundSize': 'cover'
       };
 

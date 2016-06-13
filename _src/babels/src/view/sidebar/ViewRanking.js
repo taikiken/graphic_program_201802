@@ -304,7 +304,7 @@ export class ViewRanking extends View {
           <div className="board-small widget-ranking">
             {/* title */}
             <div className="widget-ranking-heading">
-              <h3 className="widget-ranking-heading-title"><img src="/assets/images/common/side-ranking-heading.png" alt="RANKING" /></h3>
+              <h3 className="widget-ranking-heading-title">RANKING</h3>
               <span className="widget-ranking-heading-ruby">{Message.RANKING_TITLE}{categoryTitle}</span>
             </div>
             <ul className="post-list">

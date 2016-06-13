@@ -15,11 +15,15 @@
 
 import {Safety} from '../data/Safety';
 import {Format} from '../util/Format';
+
 // dae
 import {CategoryDae} from './CategoryDae';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
 import {CategoriesDae} from './caegories/CategoriesDae';
+import {ThemeDae} from './theme/ThemeDae';
+import {AdDae} from './theme/AdDae';
+import {BannersDae} from './banner/BannersDae';
 
 /**
  * 記事詳細 関連記事 JSON
@@ -47,10 +51,13 @@ export class RelatedDae {
 
     // date check
     if ( Safety.check( response, 'date' ) ) {
-
       this._formatDate = Format.date( response.date );
-
     }
+
+    // 以下仕様追加 from 2016-05-31
+    this._theme = new ThemeDae( response.theme );
+    this._banner = new BannersDae( response.banner );
+    this._ad = new AdDae( response.ad );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -71,7 +78,7 @@ export class RelatedDae {
   }
   /**
    * response.date
-   * @return {string} ISO8601 日付
+   * @return {string} ISO8601 日付を返します
    */
   get date():string {
     return this.response.date;
@@ -86,79 +93,101 @@ export class RelatedDae {
   }
   /**
    * 表示日付
-   * @return {string} article.display_date
+   * @return {string} article.display_date を返します
    */
   get displayDate():string {
     return this.response.display_date;
   }
   /**
    * response.title
-   * @return {string} 記事タイトル
+   * @return {string} 記事タイトル response.description を返します
    */
   get title():string {
     return this.response.title;
   }
   /**
    * response.description
-   * @return {string} 記事概要
+   * @return {string} 記事概要 response.description を
    */
   get description():string {
     return this.response.description;
   }
   /**
    * response.category
-   * @return {CategoryDae|*} カテゴリー
+   * @return {CategoryDae|*} カテゴリー response.category CategoryDae として返します
    */
   get category():CategoryDae {
     return this._category;
   }
   /**
    * response.category2
-   * @return {CategoryDae|*} カテゴリー2
+   * @return {CategoryDae} カテゴリー2 response.category2 CategoryDae として返します
    */
   get category2():CategoryDae {
     return this._category2;
   }
   /**
    * response.categories
-   * @return {CategoriesDae|*} カテゴリー配列
+   * @return {CategoriesDae} カテゴリー配列 response.categories を CategoriesDae として返します
    */
   get categories():CategoriesDae {
     return this._categories;
   }
   /**
    * response.url
-   * @return {string} 記事URL
+   * @return {string} 記事URL response.url を返します
    */
   get url():string {
     return this.response.url;
   }
   /**
    * response.is_bookmarked
-   * @return {Boolean} response.is_bookmarked
+   * @return {Boolean} response.is_bookmarked を返します
    */
   get isBookmarked():Boolean {
     return this.response.is_bookmarked;
   }
   /**
    * response.media_type
-   * @return {string} response.media_type
+   * @return {string} response.media_type を返します
    */
   get mediaType():string {
     return this.response.media_type;
   }
   /**
    * response.media
-   * @return {MediaDae} response.media
+   * @return {MediaDae} response.media を MediaDae として返します
    */
   get media():MediaDae {
     return this._media;
   }
   /**
    * response.user
-   * @return {UserDae} response.user
+   * @return {UserDae} response.user を UserDae として返します
    */
   get user():UserDae {
     return this._user;
+  }
+  // ----------------------------------------------
+  /**
+   * response.theme
+   * @return {ThemeDae} response.theme を ThemeDae として返します
+   */
+  get theme():ThemeDae {
+    return this._theme;
+  }
+  /**
+   * response.banner
+   * @return {BannersDae} response.banner を BannersDae として返します
+   */
+  get banner():BannersDae {
+    return this._banner;
+  }
+  /**
+   * response.ad
+   * @return {AdDae} response.ad を ThemeDae として返します
+   */
+  get ad():AdDae {
+    return this._ad;
   }
 }
