@@ -114,7 +114,7 @@
               // user.logo.link
               // link が存在する時のみ表示します
               if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
-                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank"><?php echo $page['post']['user']['logo']['link']; ?></a></p>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank">ウェブサイト</a></p>
               <?php endif; //----[link] ?>
             </div>
           </div><!-- /.provider -->
