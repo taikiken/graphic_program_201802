@@ -52,15 +52,15 @@ if($C!="menu"){
 }
 //フィールド名
 if($C=="menu"){
-	$a[]=array("p_menu","メニュータイプ","f_name","select _value,_key from tool","and cid=3");
-	$a[]=array("p_menu","フィールド","f_option6","select _value,_key from tool","and cid=2");
+	$a[]=array("p_menu","メニュータイプ","f_name","select _value,_key from tool","and cid=3 and flag=1");
+	$a[]=array("p_menu","フィールド","f_option6","select _value,_key from tool","and cid=2 and flag=1");
 	//$a[]=array("checkbox","フィールドネーム","f_option2","8",sprintf("select _key,_value from tool where cid=%s order by n",($g->f("directory")=="nid")?2:5));
 //}elseif($C=="textfield"||$C=="date"||$C=="p_menu"||$C=="startendDate"||$C=="_inputmenu"){
 //	$a[]=array("checkbox","フィールドネーム","f_name","10",sprintf("select _key,_value from tool where cid=%s order by n",($g->f("directory")=="nid")?2:5));
 }elseif($C=="head"){
 
 }else{
-	$a[]=array("checkbox","フィールドネーム","f_name","8",sprintf("select _key,_value from tool where cid=%s order by n",($g->f("directory")=="nid")?2:5));
+	$a[]=array("checkbox","フィールドネーム","f_name","8",sprintf("select _key,_value from tool where cid=%s and flag=1 order by n",($g->f("directory")=="nid")?2:5));
 //	$a[]=array("p_menu","フィールドネーム","f_name","select _value,_key from tool",sprintf("and cid=%s",($g->f("directory")=="nid")?2:5));
 }
 //サイズ

@@ -44,8 +44,8 @@ function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 	$ls="";
 	if(strlen($a)>0){
 		$fn=(float)microtime();
-		$ls.="<ul class=\"imglist\">";
-		for($i=1;$i<=count($h);$i++){
+		$ls.="<ul class=\"imglist clearfix\">";
+		for($i=0;$i<=count($h);$i++){
 			$Tgyh=explode("-",$h[($i-1)]);
 			$ls.=sprintf("<li><a href=\"/prg_img/img/%s?m=%s\" class=\"lightbox\" rel=\"lightbox[img]\">%s</a><br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
 			$b,$fn,swforimg($c[$i],$b,"",$e.$i),$d,$i,$Tgyh[0],(strlen($Tgyh[0])>0&&strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e.$i,$c[$i],$Tgyh[5]);
@@ -56,8 +56,8 @@ function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 		$imgNo++;
 	}else{
 		$Tgyh=$g;
-		$ls.=swforimg($c[0],$b,"",$e);
-		$ls.=sprintf("<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a>",
+		$ls.=sprintf("<ul class=\"imglist clearfix\"><li>%s",swforimg($c[0],$b,"",$e));
+		$ls.=sprintf("<br><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li></ul>",
 		$b,0,$Tgyh[0],(strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e,$c[0],$Tgyh[5]);
 	}
 	if($r==1)$ls.=sprintf("<input type=\"hidden\" name=\"%s\" value=\"%s\" ><br>",$e,$b);
@@ -126,6 +126,7 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 			}elseif(preg_match('/^select id,/',$OPv)){
 				unset($sa);
 				if(!preg_match("/{p_[0-9a-z]+}/",$OPv)){
+					
 					$o->query(str_replace("{LANG}",$h,$OPv));
 					while($f=$o->fetch_array()){
 						$sa[]=sprintf("<li>%s:%s</li>",$f["id"],$f["title"]);
@@ -136,7 +137,8 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 				}else{
 					$sa=array();
 					if(preg_match("/^\d+$/",$p[$f_name[$U].$pv])){
-						$sql=str_replace("cid={p_d1} order by n",sprintf("id=%s",$p[$f_name[$U].$pv]),$OPv);
+						preg_match("/(select .*) where/",$OPv,$basic);
+						$sql=$basic[1].sprintf(" where id=%s",$p[$f_name[$U].$pv]);
 						$o->query($sql);
 						$f=$o->fetch_array();
 						echo sprintf("<script type='text/javascript'>$(function(){\$('[name=\"p_%s%s\"]').val('%s:%s');})</script>",$f_name[$U],$pv,$f["id"],addslashes($f["title"]));
@@ -179,20 +181,29 @@ function makeTextfieldCell($a,$b,$c,$d,$e){
 			echo makeTextfieldAddOption($c[0],$c[1],$c[2],$c[3],$c[4],$c[5],$c[6],$LANG[$i],$c[7]);
 		}
 	}
-	if(preg_match("/youtube/",$a))include "_youtube.php";
+	if(preg_match("/youtube/i",$b))include "_youtube.php";
 	if(preg_match("/\.php/",$d))include $d;
 	echo "</td></tr>";
-	if(strlen($d)>0&&!preg_match("/\.php/",$d))echo sprintf("<tr><td class=\"inputCap\">%s</td></tr>",$d);
+	if(strlen($d)>0&&!preg_match("/\.php/",$d))echo sprintf("<tr class=\"%s\"><td class=\"inputCap\">%s</td></tr>",$a,$d);
 }
 
 function getPulldownValue($table,$id,$lang=""){
-	global $o;
+	global $o,$TABLE;
 	$f=!preg_match("/^repo$/",$table)?"title":"name";
 	if($lang!=""){
 		$sql=sprintf("select id,%s%s as title from %s where id=%s",$f,$lang,$table,$id);
 	}else{
-		$sql=sprintf("select id,%s%s as title from %s where id=%s",$f,"en",$table,$id);
+		$sql=sprintf("select id,%s%s as title from %s where id=%s",$f,"",$table,$id);
 	}
+	$o->query($sql);
+	$f=$o->fetch_array();
+	return sprintf("%s:%s",$f["id"],$f["title"]);
+}
+
+function setTextfieldMenuTitle($sql,$id){
+	global $o;
+	preg_match("/(select.*where)/",$sql,$t);
+	$sql=sprintf("%s id=%s;",$t[0],$id);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	return sprintf("%s:%s",$f["id"],$f["title"]);
@@ -200,8 +211,8 @@ function getPulldownValue($table,$id,$lang=""){
 
 function makeTextfieldConf($a,$b,$c,$d,$e,$f,$g,$h,$yz){
 
-	global $_POST,$q,$LANG;
-	
+	global $_POST,$q,$LANG,$_OP01,$_OP02,$_OP03;
+
 	if($b==""){
 		$f_name=array($a);
 		$_OPTION=preg_match("/,/",$b)?explode(",",$b):array($b);
@@ -212,14 +223,18 @@ function makeTextfieldConf($a,$b,$c,$d,$e,$f,$g,$h,$yz){
 		$SIZE=explode(",",$c);
 	}
 	
+	$SQLS=array($_OP01,$_OP02,$_OP03);
+	
 	echo sprintf("<tr class=\"%s\"><td class=\"confTitle\">%s</td><td class=\"confFields\">",$f,$g);
 	if($h==0){
-		if(preg_match("/fn0fn1/",$f))include "_map.php";
+		
+		//if(preg_match("/fn0fn1/",$f))include "_map.php";
 		for($U=0;$U<count($f_name);$U++){
 			$s=$e[$d.$f_name[$U]];
 			$v=(!preg_match("/^(m|d)/",$a))?intfloat($f_name[$U],$s):$s;
 			if(strlen($v)>0&&$q->dr==2&&preg_match("/^(d|m)/",$a)){
-				$v=getPulldownValue($q->pdir,$v);
+				$v=setTextfieldMenuTitle($SQLS[$U],$v);
+				//$v=getPulldownValue($q->pdir,$v);
 			}			
 			echo sprintf("%s%s",$_OPTION[$U],strlen($v)>0?mod_HTML($v):"-");
 		}
@@ -239,14 +254,14 @@ function makeTextfieldConf($a,$b,$c,$d,$e,$f,$g,$h,$yz){
 			echo "</div></div>";
 		}
 	}
-	if(preg_match("/youtube/",$f))include "_youtube.php";
+	if(preg_match("/youtube/i",$g))include "_youtube.php";
 	if(preg_match("/\.php/",$yz))include $yz;
 	echo "</td></tr>";
 }
 
 function makeTextAreaCell($a,$b,$c,$d,$e,$f){
-	global $q,$p,$f_name;
-	echo sprintf("<tr class=\"%s\"><td%s class=\"inputTitle\">%s</td><td class=\"inputFields\">",$b,strlen($e)>0?" rowspan=\"2\"":"",$a);
+	global $q,$p,$f_name,$CONTENTS_EDITED,$_GET;
+	echo sprintf("<tr class=\"%s\"><td%s class=\"inputTitle\">%s</td><td class=\"inputFields\"><div class=\"ckbox\">",$b,strlen($e)>0?" rowspan=\"2\"":"",$a);
 	if($f==0){
 		echo sprintf("<textarea name=\"p_%s\" id=\"p_%s\" rows=\"%s\"%s>%s</textarea>",$b,$b,$c,$d==82?" class=\"ckeditor\"":"",stripslashes($p[$b]));
 	}else{
@@ -255,7 +270,7 @@ function makeTextAreaCell($a,$b,$c,$d,$e,$f){
 			echo sprintf("<div class=\"clearfix %s langs\">%s<div class=\"wmod2\"><textarea name=\"p_%s%s\" id=\"p_%s%s\" rows=\"%s\"%s>%s</textarea></div></div>",$LANG[$i],strlen($LANG[$i])>0?sprintf("<span class=\"sp00e\">%s</span>",strtoupper($LANG[$i])):"",$b,$LANG[$i],$b,$LANG[$i],$c,$d==82?" class=\"ckeditor\"":"",stripslashes($p[$b.$LANG[$i]]));
 		}
 	}
-	echo sprintf("</td></tr>%s",strlen($e)>0?sprintf("<tr><td class=\"inputCap\">%s</td></tr>",$e):"");
+	echo sprintf("</div></td></tr>%s",strlen($e)>0?sprintf("<tr><td class=\"inputCap\">%s</td></tr>",$e):"");
 }
 
 function makeTextAreaConf($a,$b,$c,$d,$e){
