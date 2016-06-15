@@ -67,6 +67,9 @@ export class Page {
    */
   static init():void {
 
+    // 右クリック禁止
+    Page.ignoreContext();
+
     // page 上部に貼り付ける
     Page.bindScroll();
     setTimeout( Page.reserveSticky, 25);
@@ -261,6 +264,14 @@ export class Page {
     // 404
     router.off( Router.NOT_FOUND, Page.notFound );
   }
+  static ignoreContext():void {
+    document.body.addEventListener( 'contextmenu', Page.rightClick, false );
+  }
+  static rightClick( event:Event ):void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   /**
    * 404 not found
    */
