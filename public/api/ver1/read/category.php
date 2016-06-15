@@ -6,7 +6,7 @@ include "public/check.php";
 $o=new db;
 $o->connect();
 
-$sql=sprintf("select id,name,title,img,description,name_e from u_categories where name_e='%s'",$_REQUEST["category"]);
+$sql=sprintf("select id,name,title,img,description,name_e from u_categories where name_e='%s' and flag=1",$_REQUEST["category"]);
 $o->query($sql);
 $f=$o->fetch_array();
 
