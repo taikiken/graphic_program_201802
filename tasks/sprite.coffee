@@ -161,15 +161,16 @@ gulp.task 'sprite:css:concat', ->
 # 相対, ルート相対で記述
 # 今回は 「ルート相対」
 cssPath = dir.sprite.img.replace app, ''
+#gulp.task 'sprite:build', ->
 gulp.task 'sprite:build', ->
   # sprite directory が空の時走るとエラーになるので
   # fs 一度ファイルがあるのか見る
   fs.readdir sprite, (err, files) ->
     if err
-      console.error err
+      return console.error err
     else
       if files.length > 0
-        sprity.src
+        return sprity.src
           src: [ sprite + '/**/*.*', '!' + sprite + '/css/**/*.*' ]
           style: '_sprite.scss'
           name:'sprite'
@@ -180,9 +181,81 @@ gulp.task 'sprite:build', ->
           orientation: setting.sprite.option
           margin: 0
           split: true
+        # node 6.2.1 拡張子切り替えができない
+        # $.if 拡張子切り替えができないので全て img/sprite へ書き出す
         .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( dir.sprite.css ) )
         .pipe $.size title: '*** sprite:build ***'
       else
-        console.warn '*** sprite *** no files and directories'
+        return console.warn '*** sprite *** no files and directories'
 
-  return;
+# ------------------------------------------------------------------------------
+# node 6.2.1
+# sprity 出力 css / img 拡張子切り替えができない
+# 出力後別タスクでコピーと削除を行う
+
+# css file から画像ファイルまでの path
+# 相対, ルート相対で記述
+# 今回は 「ルート相対」
+cssPath = dir.sprite.img.replace app, ''
+#gulp.task 'sprite:build', ->
+gulp.task 'sprite:build:shell', ->
+# sprite directory が空の時走るとエラーになるので
+# fs 一度ファイルがあるのか見る
+  fs.readdir sprite, (err, files) ->
+    if err
+      return console.error err
+    else
+      if files.length > 0
+        return sprity.src
+          src: [ sprite + '/**/*.*', '!' + sprite + '/css/**/*.*' ]
+          style: '_sprite.scss'
+          name:'sprite'
+          cssPath: cssPath
+          processor: 'sprity-sass'
+          prefix: 'sprite'
+#          orientation: 'binary-tree'
+          orientation: setting.sprite.option
+          margin: 0
+          split: true
+        # node 6.2.1 拡張子切り替えができない
+        # $.if 拡張子切り替えができないので全て img/sprite へ書き出す
+        .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( dir.sprite.css ) )
+        .pipe $.size title: '*** sprite:build:shell ***'
+        # runSequence では sprity を同期的にタスクを実行できない
+        # 終わった後で走らせる
+        .pipe $.shell 'gulp sprite:post:clean'
+      else
+        return console.warn '*** sprite *** no files and directories'
+
+# img/sprite の *.scss を css へコピー
+gulp.task 'sprite:move:scss', ->
+  return gulp.src dir.sprite.img + '/*.scss'
+  .pipe gulp.dest dir.sprite.css
+
+# img/sprite の *.scss を削除
+gulp.task 'sprite:del:scss', ->
+  return del(
+    [
+      dir.sprite.img + '/*.scss'
+    ]
+    {
+      base: process.cwd()
+      dot: true
+      force: true
+    }
+  )
+  .then(
+    ( paths ) ->
+      console.log '*** sprite:del:scss: ' + paths.length
+      if paths.length
+        console.log paths.join '\n'
+  )
+
+# コピー + 削除 sequence 実行
+gulp.task 'sprite:post:clean', (cb) ->
+  runSequence(
+    'sprite:move:scss'
+    'sprite:del:scss'
+    cb
+  )
+  return
