@@ -100,7 +100,7 @@ left join (select
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
 
-$articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_member where  cid!=6 and flag=1) as t2 where t1.d2=t2.userid";
+$articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_media where flag=1) as t2 where t1.d2=t2.userid";
 
 $commentfield="isreaction,id,comment,userid,pageid,regitime,slug,good,bad,reply,typeid,type,name,profile,icon";
 $commenttable="
