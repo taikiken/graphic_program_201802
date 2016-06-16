@@ -205,6 +205,9 @@
         <div id="comment-normal-container"></div>
 
       </div><!-- /.comment -->
+
+      <div id="widget-ranking-container"></div><!--/ranking-->
+
       <!-- #310 popin ebmed code  -->
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>

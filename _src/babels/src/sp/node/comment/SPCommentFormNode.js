@@ -25,26 +25,27 @@ let React = self.React;
 export let SPCommentFormNode = React.createClass( {
   propTypes: {
     uniqueId: React.PropTypes.string.isRequired,
+    // 記事 id
+    articleId: React.PropTypes.string.isRequired,
+    // ログインの有無
+    sign: React.PropTypes.bool.isRequired,
+    // コメント種類
+    commentType: React.PropTypes.string.isRequired,
+    // コメント詳細URL for ga
+    url: React.PropTypes.string.isRequired,
+    
     // open / close, default close
     toggle: React.PropTypes.string,
     // コメント送信者（自分の）profile picture
     icon: React.PropTypes.string,
-    // 記事 id
-    articleId: React.PropTypes.string.isRequired,
     // コメント id（オプション）
     commentId: React.PropTypes.string,
     // コメント数 default 0
     commentCount: React.PropTypes.number,
-    // ログインの有無
-    sign: React.PropTypes.bool.isRequired,
     // 親コメント? default false
     parent: React.PropTypes.bool,
     // 記事へのコメント送信 default false
-    independent: React.PropTypes.bool,
-    // コメント種類
-    commentType: React.PropTypes.string.isRequired,
-    // コメント詳細URL for ga
-    url: React.PropTypes.string.isRequired
+    independent: React.PropTypes.bool
   },
   getDefaultProps: function() {
     return {
