@@ -41,14 +41,17 @@ function multiLangTitleField($f){
 
 function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 	global $imgNo;
+	array_unshift($h,implode("-",$g));
 	$ls="";
 	if(strlen($a)>0){
 		$fn=(float)microtime();
-		$ls.="<ul class=\"imglist clearfix\">";
-		for($i=0;$i<=count($h);$i++){
-			$Tgyh=explode("-",$h[($i-1)]);
-			$ls.=sprintf("<li><a href=\"/prg_img/img/%s?m=%s\" class=\"lightbox\" rel=\"lightbox[img]\">%s</a><br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
-			$b,$fn,swforimg($c[$i],$b,"",$e.$i),$d,$i,$Tgyh[0],(strlen($Tgyh[0])>0&&strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e.$i,$c[$i],$Tgyh[5]);
+		$ls.="<ul class=\"imglist\">";
+		for($i=0;$i<count($h);$i++){
+			if(strlen($h[$i])>0){
+				$Tgyh=explode("-",$h[$i]);
+				$ls.=sprintf("<li>%s<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li>",
+				swforimg($c[$i],$b,"",$e.$i),$d,$i,$Tgyh[0],(strlen($Tgyh[0])>0&&strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e.$i,$c[$i],$Tgyh[5]);
+			}
 		}
 		$ls.="</ul>";
 		$Tgyh=$g;
@@ -56,8 +59,8 @@ function rtimg($a,$b,$c,$d,$e,$f,$g,$h,$r=1){
 		$imgNo++;
 	}else{
 		$Tgyh=$g;
-		$ls.=sprintf("<ul class=\"imglist clearfix\"><li>%s",swforimg($c[0],$b,"",$e));
-		$ls.=sprintf("<br><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a></li></ul>",
+		$ls.=swforimg($c[0],$b,"",$e);
+		$ls.=sprintf("<br ><a href=\"javascript:editImages('%s',%s,%s,%s,'%s',%s,%s,%s,'%s','%s',%s)\"><img src=\"/shared/cms/img/btn_thumnail.png\" alt=\"サムネイル画像を編集する\" width=\"90\" height=\"25\" class=\"pthum rollover\"></a>",
 		$b,0,$Tgyh[0],(strlen($Tgyh[1])>0)?$Tgyh[1]:$Tgyh[0]*0.75,$f,$Tgyh[2],$Tgyh[3],$Tgyh[4],$e,$c[0],$Tgyh[5]);
 	}
 	if($r==1)$ls.=sprintf("<input type=\"hidden\" name=\"%s\" value=\"%s\" ><br>",$e,$b);
