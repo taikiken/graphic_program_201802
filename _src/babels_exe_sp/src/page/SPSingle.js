@@ -71,15 +71,6 @@ export class SPSingle {
       headerUser.start();
     }
 
-    // single page
-    // related いらなくる予定
-    /*
-    let elements = {
-      related: Dom.related(),
-      footer: Dom.singleFooter()
-    };
-    */
-
     let singleHeaderElement = Dom.singleHeader();
 
     if ( singleHeaderElement !== null ) {
@@ -137,7 +128,22 @@ export class SPSingle {
     SPNav.start( slug );
 
     SPSingle.comment();
+    
+    // 記事詳細・人気記事x
+    SPSingle.singleRanking( slug );
+  }
+  /**
+   * 記事詳細下部・人気記事
+   * @from 2016-06-16
+   * @param {string} slug category slug
+   */
+  static singleRanking( slug:string ):void {
+    let rankingElement = Dom.ranking();
 
+    if ( rankingElement !== null ) {
+      let ranking = new UT.p.view.single.SPViewSingleRanking( rankingElement, null, slug );
+      ranking.start();
+    }
   }
   /**
    * **ログイン**

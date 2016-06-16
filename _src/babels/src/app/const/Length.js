@@ -108,6 +108,17 @@ export class Length {
       throw new Error( `ranking: integer required. ${value}` );
     }
   }
+
+  // sp single ranking
+  /**
+   * SP, 記事詳細「人気記事」表示件数<br>
+   * default: 10
+   * @from 2016-06-16
+   * @return {number} SP, 記事詳細「人気記事」表示件数を返します
+   */
+  static get spRanking():Number {
+    return 10;
+  }
   // --- video
   /**
    * sidebar video
