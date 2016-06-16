@@ -31,6 +31,8 @@ export class Context {
    */
   static disable():void {
     document.body.addEventListener( 'contextmenu', Context.onContext, false );
+    document.body.addEventListener( 'mousedown', Context.onContext, false );
+    document.body.addEventListener( 'selectstart', Context.onContext, false );
   }
   /**
    * <p>document.body contextmenu event handler</p>
