@@ -78,7 +78,11 @@
     "bower:install": "cd ./_src/tools && bower install && cd ../ && gulp bower:exports",
     "start": "gulp serve:app",
     "gulp": "gulp",
-    "deploy": "npm install && npm run gulp",
+    "update_version" : "git rev-parse --short HEAD > public/assets/.version",
+    "build": "npm run update_version && npm run gulp",
+    "deploy_dev": "npm run build && vagrant push dev",
+    "deploy_dev2": "npm run build && vagrant push cms_dev",
+    "deploy_stg": "npm run build && vagrant push stg",
     "esdoc": "cd ./_src/babels && esdoc -c esdoc.json"
   }
 }
