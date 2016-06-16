@@ -36,7 +36,6 @@ export class SPViewCommentForm extends ViewCommentForm {
    * @param {string} [icon=''] ユーザー画像パス
    */
   constructor( element:Element, articleId:Number, icon:string = '' ) {
-    console.log( 'SPViewCommentForm' );
     super( element, articleId, icon );
   }
   /**

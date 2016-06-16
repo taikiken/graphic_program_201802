@@ -327,7 +327,7 @@ export class ViewRanking extends View {
                       // slug={dae.category.slug}
                       // category={dae.category.label}
                       // category2={dae.category2.label}
-                      categories={dae.categories}
+                      categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}
                       title={dae.title}

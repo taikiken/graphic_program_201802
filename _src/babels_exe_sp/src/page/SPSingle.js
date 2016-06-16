@@ -141,7 +141,7 @@ export class SPSingle {
     let rankingElement = Dom.ranking();
 
     if ( rankingElement !== null ) {
-      let ranking = new UT.p.view.single.SPViewSingleRanking( rankingElement, null, slug );
+      let ranking = new UT.sp.view.single.SPViewSingleRanking( rankingElement, null, slug );
       ranking.start();
     }
   }

@@ -25,17 +25,26 @@ let React = self.React;
 // let ReactDOM = self.ReactDOM;
 
 /**
- * categor, category2 から categories を使用する
+ * category, category2 から categories を使用する
+ * @from 2016-06-16
  * @type {Function|ReactClass}
  */
 let CategoryListNode = React.createClass( {
   propTypes: {
+    index: React.PropTypes.number.isRequired,
+    id: React.PropTypes.string.isRequired,
     categories: React.PropTypes.array.isRequired
   },
   render: function() {
-    this.props.categories.map( ( category:Object ) => {
-      return <span className="category-label">{category.label}</span>;
-    } );
+    return (
+      <span className="category-label-wrapper">
+        {
+          this.props.categories.map( ( category:Object, i:Number ) => {
+            return <span key={`ranking-${this.props.id}-${this.props.index}-${i}`} className="category-label">{category.label}</span>;
+          } )
+        }
+      </span>
+    );
   }
 } );
 
@@ -70,17 +79,13 @@ export const RankingNode = React.createClass( {
   },
   render: function() {
     let p = this.props;
-    let n = p.index + 1;
-    //
-    // let category = ( label ):string => {
-    //   return !label ? '' : <span className="category-label">{label}</span>;
-    // };
-
+    let standing = p.index + 1;
     let imgStyle = {
       'background': `url(${p.thumbnail}) no-repeat center center`,
       'backgroundSize': 'cover'
     };
 
+    // categories 配列の label をつなげる
     let slugAll = ( categories:Array ):string => {
       let cats = '';
       categories.map( ( category:Object, index:Number ) => {
@@ -90,20 +95,24 @@ export const RankingNode = React.createClass( {
       return cats;
     };
 
+    /*
+     https://github.com/undotsushin/undotsushin/issues/468
+     1x1 を厳格に守る
+     <img src={p.thumbnail} alt={p.title}/>
+     */
     return (
-      <li className={'board-item rank' + n + ' ranking-' + (slugAll( p.categories ))}>
+      <li className={'board-item rank' + standing + ' ranking-' + (slugAll( p.categories ))}>
         <a href={p.url} className={'post'} onClick={this.gaSend}>
           <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`} style={imgStyle}>
             <img src={Empty.THUMB_EMPTY} alt=""/>
-            {/*
-             https://github.com/undotsushin/undotsushin/issues/468
-             1x1 を厳格に守る
-             <img src={p.thumbnail} alt={p.title}/>
-             */}
           </figure>
           <div className="post-data">
-            <p className={'post-category post-category-' + p.slug}>
-              <CategoryListNode categories={p.categories} />
+            <p className={'post-category post-category-' + slugAll( p.categories )}>
+              <CategoryListNode
+                categories={p.categories}
+                id={p.id}
+                index={p.index}
+              />
             </p>
             <h4 className='post-heading'>{p.title}</h4>
             <p className="post-date">{p.date}</p>

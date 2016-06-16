@@ -45,7 +45,6 @@ export class SPViewSingleRanking extends ViewRanking {
    */
   constructor( element:Element, option:Object = {}, slug:string = 'all', length:Number = Length.spRanking ) {
     length = Safety.integer( length, Length.ranking );
-    console.log( 'SPViewSingleRanking', length );
     super( element, option, slug, length );
   }
   /**
@@ -99,7 +98,7 @@ export class SPViewSingleRanking extends ViewRanking {
                       // slug={dae.category.slug}
                       // category={dae.category.label}
                       // category2={dae.category2.label}
-                      categories={dae.categories}
+                      categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}
                       title={dae.title}
