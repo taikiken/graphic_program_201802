@@ -73,6 +73,9 @@ class ViewModel {
     'response'           => '',
     'args'               => '',
 
+    // version - #789 静的ファイルのバージョン
+    'version'            => ''
+
   );
 
   var $db;
@@ -117,9 +120,31 @@ class ViewModel {
     $this->default['is_logged_in']    = $this->get_is_logged_in();
 
 
-    # サイト内のグロナビ用カテゴリーを取得
+    // サイト内のグロナビ用カテゴリーを取得
     $this->default['site_categories'] = $this->get_site_categories();
 
+
+    // version
+    $this->default['version']         = $this->get_version();
+
+
+  }
+
+
+  /**
+  * version - 静的ファイルキャッシュ対策用 gitのhashから生成した.versionファイルを読み込む
+  * @return include public/assets/.version
+  */
+  private function get_version() {
+
+    // public/index.php からのバージョンファイルのパスを指定
+    $path = './assets/.version';
+
+    if ( file_exists($path) ) :
+      return trim(file_get_contents($path, false));
+    else :
+      return time();
+    endif;
 
   }
 
