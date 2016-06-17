@@ -173,7 +173,7 @@ compression =
 # ------------------------------------------------------
 compress =
   html: false
-  css: false
+  css: true
 
 # ------------------------------------------------------
 # sprite orientation
