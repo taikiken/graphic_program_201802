@@ -17,6 +17,7 @@ import {ViewCommentForm} from '../../../view/comment/ViewCommentForm';
 import {User} from '../../../app/User';
 import {CommentsType} from '../../../app/const/CommentsType';
 import {Message} from '../../../app/const/Message';
+import {Url} from '../../../app/const/Url';
 
 // sp
 import {SPCommentFormNode} from '../../node/comment/SPCommentFormNode';
@@ -89,8 +90,14 @@ export class SPViewCommentForm extends ViewCommentForm {
             );
           }
         } else {
-          // 非ログインユーザーはコメントが投稿できない
-          return null;
+          // // 非ログインユーザーはコメントが投稿できない
+          // return null;
+          // 非ログインユーザーはログイン画面へ
+          return (
+            <div className="comment-form-opener">
+              <a className="comment-form-opener-trigger" href={Url.login()}>{Message.COMMENT_SUBMIT}</a>
+            </div>
+          );
         }
       },
       openerClick: function( event:Event ) {
