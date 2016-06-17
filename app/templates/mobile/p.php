@@ -176,26 +176,6 @@
 
       <div class="comment">
 
-        <?php
-        /*
-         * https://github.com/undotsushin/undotsushin/issues/720
-         * 広告 / PC版画像バナー広告をDFP管理下にする
-         */
-        // ------------------------------------
-        if ( $page['ad']['sp'] ) :
-        ?>
-        <div class="sponsor-link_commentUpper">
-          <?php
-          /*
-           # 保険のために original を残します
-           # ToDo: いつか削除
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-          */ ?>
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-        </div>
-        <?php endif; ?>
-
-
         <div id="comment-form-container"></div>
 
         <div id="comment-self-container"></div>
@@ -203,6 +183,26 @@
         <div id="comment-official-container"></div>
 
         <div id="comment-normal-container"></div>
+
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        // ------------------------------------
+        if ( $page['ad']['sp'] ) :
+          ?>
+          <div class="sponsor-link_commentUpper">
+            <?php
+            /*
+             # 保険のために original を残します
+             # ToDo: いつか削除
+            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+            */ ?>
+            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+          </div>
+        <?php endif; ?>
+
 
       </div><!-- /.comment -->
 
