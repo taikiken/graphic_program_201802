@@ -4,12 +4,14 @@
 	<li class="ds"><a href="./search/?<?=$g->g_url()?>">絞り込み検索</a></li>
     <?php } ?>
 	<?php if($_GET["cid"]==1){ ?>
-<li class="ds"><a href="./search/?<?=$g->g_url()?>">検索</a></li>
-<li>　｜　並び替え：<select class="orderby">
+<!--
+<li class="ds"><a href="./search/?<?=$g->g_url()?>">検索</a>　｜　</li>
+-->
+<li>並び替え：<select class="orderby">
 <?php
 
-$ob=array(array("","　登録順　"),array("snew","　公開日新しい順　"),array("sold","　公開日古い順　"));
-$c=!isset($_COOKIE["orderby"])?"":$_COOKIE["orderby"];
+$ob=array(array("snew","　公開日新しい順　"),array("sold","　公開日古い順　"),array("","　登録順　"));
+$c=!isset($_COOKIE["orderby"])?"snew":$_COOKIE["orderby"];
 
 for($i=0;$i<count($ob);$i++){
 
@@ -20,10 +22,10 @@ for($i=0;$i<count($ob);$i++){
 　｜
 </li>
 
-<li>抽出：<select class="exuser">
+<li>抽出：<select class="exuser" style="width:350px;">
 <?php
 
-$sql="select id,(select name from repo where id=u_member.cid) as name,title from u_member where cid in(3,4,5) and flag=1 order by cid,n";
+$sql="select id,(select name from repo where id=u_media.cid) as name,title from u_media where flag=1 order by cid,id";
 $o->query($sql);
 
 $c=!isset($_COOKIE["exuser"])?"":$_COOKIE["exuser"];
@@ -47,7 +49,7 @@ $c=!isset($_COOKIE["excategory"])?0:$_COOKIE["excategory"];
 
 <?php
 
-$sql="select id,name,case when num is null then 0 else num end from (select id,name,n from pm_ where cid=20 and flag=1) as t1 left join (select m1,count(m1) as num from repo_n where cid=1 group by m1) as t2 on t1.id=t2.m1 order by n";
+$sql="select id,name,case when num is null then 0 else num end from (select id,name,n from u_categories where flag=1) as t1 left join (select m1,count(m1) as num from repo_n where cid=1 group by m1) as t2 on t1.id=t2.m1 order by n";
 $o->query($sql);
 
 echo sprintf("<option value=\"\"%s>　すべてのカテゴリー</option>",$c==0?" selected=\"selected\"":"");
@@ -81,6 +83,7 @@ while($f=$o->fetch_array()){
 	<?php if($N>0){ ?>
 	<li class="ds"><a href="<?=str_replace("{lang}",$_COOKIE["lang"]."/",$PREVIEW)?>" target="_blank">ページブロック全体のプレビュー</a></li>
 	<?php }else{ ?>
+    <!--
     <li>
     <select name="usrselection" onchange="chg_form(this.value)">
 	<option value="">他のページをテンプレートとしてブロックを作成する</option>
@@ -96,6 +99,7 @@ while($f=$o->fetch_array()){
     <?php } ?>
     </select><script language="javascript">function chg_form(c){if(c!="")document.location.href=".?<?=$g->g_url()?>&template="+c;}</script>
     </li>
+    -->
 	<?php } ?>
 <!--	<li class="ds"><a href="./editall/?<?=$g->g_url()?>" target="_blank">一括編集</a></li>-->
 <?php }elseif($CURRENTDIRECTORY=="mail_"){ ?>
@@ -103,7 +107,7 @@ while($f=$o->fetch_array()){
 	<li class="ds"><a href="../mail/preview/?fid=<?=$g->f("cid")?>" target="_blank">フォームブロック全体のプレビュー</a></li>
 	<?php } ?>
 <?php }elseif($CURRENTDIRECTORY=="pm_"){ ?>
-	<li class="ds"><a href="./import/?<?=$g->g_url()?>">一括インポート</a></li>
+	<!--<li class="ds"><a href="./import/?<?=$g->g_url()?>">一括インポート</a></li>-->
 <?php }elseif($CURRENTDIRECTORY=="repo_edit"){ ?>
 <?php echo $LOCALLIST; ?>
 <?php }elseif($CURRENTDIRECTORY=="log"){ ?>

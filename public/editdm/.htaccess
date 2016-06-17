@@ -8,3 +8,8 @@ php_value session.bug_compat_warn 0
 php_value upload_max_filesize '32M'
 php_value memory_limit '256M'
 php_value post_max_size '32M'
+
+Options FollowSymLinks Includes
+RewriteEngine on
+RewriteBase /
+
