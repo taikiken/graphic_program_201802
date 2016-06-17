@@ -165,6 +165,11 @@ class dbForTemplate extends db {
     $f["canonical"]=$v["canonical"];
     $f["readmore"]=$v["readmore"];
 
+    $file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$id);
+    if(file_exists($file)){
+       $v=unserialize(file_get_contents($file));
+       $f["readmore"]=$v["readmore"];
+    }
 	$l="";
 	if(in_array($f["d2"],$RELATEDLINK_ALLOWED)){
 		$sql=sprintf("select title,link from u_link where pid=%s order by n",$f["id"]);

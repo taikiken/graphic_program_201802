@@ -2,10 +2,14 @@
 
 $TABLE="advertise";
 
+if($_GET["cid"]==1){
+	$a[]=array("head","システム設定");
+	$a[]=array("inputradio","続きを読むリンク先","readmore",array("運動通信Web View","媒体指定URL"),"","","","");
+}
 if($_GET["rid"]==2){
 	$a[]=array("head","システム設定");
 	$a[]=array("inputcheckbox","CMS管理項目オプション","cmdtypes",array("速報・紙面記事形式","関連リンク","サマリー","元記事URL","MP4動画","Youtube","Facebook","動画キャプション","コンテンツ仕様選択"),"","","","");
-	$a[]=array("inputradio","SP続きを読むリンク先","readmore",array("運動通信Web View","媒体指定URL"),"","","","");
+	$a[]=array("inputradio","続きを読むリンク先","readmore",array("運動通信Web View","媒体指定URL"),"","","","");
 	$a[]=array("inputradio","Canonical","canonical",array("運動通信URL","媒体指定URL"),"","","","");
 	$a[]=array("textfield","出力バケット名","bucket","20","","","");
 	$a[]=array("inputradio","海外からのアクセス","geoblock",array("許可する","許可しない"),"","","","");
@@ -29,6 +33,7 @@ if($_GET["cid"]!=0){
 	$a[]=array("img","スマホバナー","sp_bannerimg","640-200-0-0-0-0","","",$BILLINGUAL);
 	$a[]=array("textfield","スマホリンク先","sp_bannerlink","90","","","");
 }
+
 $a[]=array("head","動画広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
 if($_GET["cid"]!=0)$a[]=array("inputradio","広告表示","ad_videoflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
 $a[]=array("textarea","VAST","ad_videoid","2","","","");
