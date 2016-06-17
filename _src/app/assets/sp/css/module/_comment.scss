@@ -104,13 +104,13 @@
       input {
         appearance: none;
         width: 100%;
-        padding: 10px 30px;
+        padding: 15px 30px;
         border: none;
         border-radius: 5px;
         background: $highlight-color none;
         color: #fff;
         font-weight: bold;
-        font-size: fz(24/2) !important;
+        font-size: fz(26/2) !important;
       }
     } //.comment-form-submit
   }
@@ -125,12 +125,12 @@
 
     appearance: none;
     width: 100%;
-    padding: 10px 0;
+    padding: 15px 0;
     border: none;
     border-radius: 5px;
     background: $highlight-color none;
     font-weight: bold;
-    font-size: fz(24/2) !important;
+    font-size: fz(26/2) !important;
     text-align: center;
   }
 }
@@ -459,6 +459,10 @@
 
 
 // sponsor-link_commentLower
+#comment-form-container ~ .sponsor-link_commentLower {
+  padding-top: 0;
+}
+
 .sponsor-link_commentLower {
   padding: (20/2)+px perCalc(20);
 
