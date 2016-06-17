@@ -458,6 +458,25 @@
 
 
 
+// sponsor-link_commentLower
+.sponsor-link_commentLower {
+  padding: (20/2)+px perCalc(20);
+
+  .adsWrapper {
+    padding: 0 0 (20/2)+px 0 !important;
+  }
+
+  .adsTitle,
+  .adsSponsored,
+  .adsDescription,
+  .adsButton {
+    padding-right: (20/2)+px;
+    padding-left: (20/2)+px;
+  }
+}
+
+
+
 
 // comment-ad
 .comment-ad {

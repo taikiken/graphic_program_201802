@@ -192,7 +192,7 @@
         // ------------------------------------
         if ( $page['ad']['sp'] ) :
           ?>
-          <div class="sponsor-link_commentUpper">
+          <div class="sponsor-link_commentLower">
             <?php
             /*
              # 保険のために original を残します
