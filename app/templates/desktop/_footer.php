@@ -111,7 +111,7 @@ if ( $page['apiRoot'] != '' ) :
 }() );
 </script>
 <?php endif; ?>
-<script src="/assets/js/bundle/exe.bundle.js?v=20160613"></script>
+<script src="/assets/js/bundle/exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script>
   window.fbAsyncInit = function() {
     FB.init({

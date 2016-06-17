@@ -7,9 +7,9 @@
 <?php include_once __DIR__."/../_head.php"; ?>
 
 
-  <link rel="stylesheet" href="/assets/css/ui.css?v=20160613">
-  <script src="/assets/js/libs/vendor.react.js?v=20160613"></script>
-  <script src="/assets/js/bundle/main.bundle.js?v=20160613"></script>
+  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -74,7 +74,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=20160613"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
 <?php
 endif;
 // eof brightcove

@@ -386,6 +386,41 @@ gulp.task 'default', (cb) ->
   )
   return
 
+# @from 2016-06-13 sprite 作成不能になったので sprite を外した build task を作る
+# build only(default)
+# 【デプロイ】 build
+gulp.task 'deploy', (cb) ->
+  runSequence(
+    'vendor:init'
+    'babels:build'
+#    'sprite:build'
+#    'sp:sprite:build'
+    'exe:build'
+    'sp:exe:build'
+    'single:build'
+    'bundle:copy'
+    'libs:synapse:build'
+    #'html:build'
+    'js:build'
+    'image:build'
+    'css:build'
+    'font:copy'
+#    'sp:css:build'
+    # 'sc5:make' - デプロイ時css document再生成, 体制に影響無いので外す
+#    [
+#      'sp:sprite:build'
+#    ]
+    [
+      'sp:css:build'
+      'sp:image:build'
+    ]
+    'libs:copy'
+    'clean:all'
+    'lec:build'
+    cb
+  )
+  return
+
 # build htdocs by browserSync
 # 【デプロイ】build + browserSync
 gulp.task 'serve:htdocs', [ 'default' ], ->
@@ -422,6 +457,7 @@ gulp.task 'serve:htdocs', [ 'default' ], ->
 #  return
 
 # ------------------------------------------------------------
+#
 
 # dev:init へ eslint を追加しました
 gulp.task 'dev:init:lint', (cb) ->
@@ -430,7 +466,8 @@ gulp.task 'dev:init:lint', (cb) ->
     'babels:dev:lint'
     'exe:dev:lint'
     'sp:exe:dev:lint'
-    'sprite:build'
+#    'sprite:build'
+    'sprite:build:shell'
     'single:dev'
     'bundle:copy'
     'libs:synapse:dev'
@@ -439,14 +476,46 @@ gulp.task 'dev:init:lint', (cb) ->
     'image:copy'
     'font:copy'
     'css:dev'
-    [
-      'sp:sprite:build'
-    ]
-    [
-      'sp:css:dev'
-      'sp:image:copy'
-    ]
+#      'sp:sprite:build'
+    'sp:sprite:build:shell'
+    'sp:css:dev'
+    'sp:image:copy'
     'libs:copy'
+    cb
+  )
+  return
+
+# --------------------------------------------
+# 【デプロイ】
+
+# build only(default)
+# 【デプロイ】 build
+gulp.task 'build:shell', (cb) ->
+  runSequence(
+    'vendor:init'
+    'babels:build'
+#    'sprite:build'
+    'sprite:build:shell'
+#    'sp:sprite:build'
+    'exe:build'
+    'sp:exe:build'
+    'single:build'
+    'bundle:copy'
+    'libs:synapse:build'
+    #'html:build'
+    'js:build'
+    'image:build'
+    'css:build'
+    'font:copy'
+    #    'sp:css:build'
+    # 'sc5:make' - デプロイ時css document再生成, 体制に影響無いので外す
+#      'sp:sprite:build'
+    'sp:sprite:build:shell'
+    'sp:css:build'
+    'sp:image:build'
+    'libs:copy'
+    'clean:all'
+    'lec:build'
     cb
   )
   return

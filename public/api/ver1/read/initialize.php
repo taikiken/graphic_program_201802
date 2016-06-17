@@ -16,7 +16,7 @@ if(strlen($uid)>0){
 
 	$category=array();
 	$n=0;
-	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from u_categories) as t2 where t1.categoryid=t2.id order by id",$uid);
+	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from u_categories where flag=1) as t2 where t1.categoryid=t2.id order by id",$uid);
 	$o->query($sql);
 	
 	while($p=$o->fetch_array()){

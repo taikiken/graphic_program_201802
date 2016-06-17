@@ -196,13 +196,12 @@ function makeDefaultImg($filename,$type){
 	}	
 }
 function outputImg($res,$filename,$type){
-	$compress=100;
 	if($type=="jpg"){
-		$e=imagejpeg($res,$filename,$compress);
+		$e=imagejpeg($res,$filename,100);
 	}elseif($type=="gif"){
-		$e=imagegif($res,$filename,$compress);
+		$e=imagegif($res,$filename);
 	}elseif($type=="png"){
-		$e=imagepng($res,$filename,$compress);
+		$e=imagepng($res,$filename,0);
 	}
 	if($e){
 		imagedestroy($res);
@@ -225,12 +224,17 @@ function outimg($oimg){
 	global $SERVERPATH;
 	$imgp=$SERVERPATH."/prg_img/";
 	
-	$img=file_get_contents($oimg);
 	$fl=getfileinfo($oimg);
+	
+	$ch=curl_init();
+	curl_setopt($ch,CURLOPT_URL,$oimg);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+	$img=curl_exec($ch);
 	file_put_contents(sprintf("%sraw/%s",$imgp,$fl[0]),$img);
-	imgDresize($oimg,sprintf("%simg/%s",$imgp,$fl[0]),array(640,400),$fl[1]);
-	imgDresize($oimg,sprintf("%sthumbnail1/%s",$imgp,$fl[0]),array(320,180),$fl[1]);
-	imgDresize($oimg,sprintf("%sthumbnail2/%s",$imgp,$fl[0]),array(150,150),$fl[1]);
+
+	imgDresize(sprintf("%sraw/%s",$imgp,$fl[0]),sprintf("%simg/%s",$imgp,$fl[0]),array(640,400),$fl[1]);
+	imgDresize(sprintf("%sraw/%s",$imgp,$fl[0]),sprintf("%sthumbnail1/%s",$imgp,$fl[0]),array(320,180),$fl[1]);
+	imgDresize(sprintf("%sraw/%s",$imgp,$fl[0]),sprintf("%sthumbnail2/%s",$imgp,$fl[0]),array(150,150),$fl[1]);
 	
 	return $fl[0];
 }

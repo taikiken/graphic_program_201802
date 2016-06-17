@@ -16,7 +16,7 @@ if(($q->get_dir()==0||$q->get_dir()==1)&&$q->get_file()==0){
 		//echo sprintf("<div class=\"imgDelete\"><input name=\"d_%s\" type=\"checkbox\" id=\"d_%s\" value=\"1\" ><label for=\"d_%s\">登録されている画像を削除する場合はチェックしてください</label></div>",$f_name,$f_name,$f_name);
 	}
 	if($_POST[$f_name]!=$p[$f_name]&&strlen($_POST[$f_name])>0)echo rtimg($_OPTION,$_POST[$f_name],$IMG,$_POST[$f_name],$f_name,$p[$f_name."copy"],$SizeOption,$tugh);
-	echo sprintf("<table><tr><td><input name=\"%s\" type=\"file\" size=\"40\" class=\"ins files\" ><input type=\"hidden\" name=\"o%s\" value=\"%s\">%s</td><td>%s</td></tr></table></td></tr>",$f_name,$f_name,$p[$f_name],strlen($p[$f_name])>0?"　|":"",strlen($p[$f_name])>0?sprintf("<div class=\"imgDelete\"><input name=\"d_%s\" type=\"checkbox\" id=\"d_%s\" value=\"1\" ><label for=\"d_%s\">登録されている画像を削除する場合はチェックしてください</label></div>",$f_name,$f_name,$f_name):"");
+	echo sprintf("<div style=\"clear:both;\"><table><tr><td><input name=\"%s\" type=\"file\" size=\"40\" class=\"ins files\" ><input type=\"hidden\" name=\"o%s\" value=\"%s\">%s</td><td>%s</td></tr></table></div></td></tr>",$f_name,$f_name,$p[$f_name],strlen($p[$f_name])>0?"　|":"",strlen($p[$f_name])>0?sprintf("<div class=\"imgDelete\"><input name=\"d_%s\" type=\"checkbox\" id=\"d_%s\" value=\"1\" ><label for=\"d_%s\">登録されている画像を削除する場合はチェックしてください</label></div>",$f_name,$f_name,$f_name):"");
 	echo sprintf("<tr class=\"%s\"><td class=\"inputCap\">%s</td></tr>",$f_name,makeComment($SIZE,$MAXFILESIZE,$COMMENT));
 	
 }elseif(($q->get_dir()==0||$q->get_dir()==1)&&$q->get_file()==2){
