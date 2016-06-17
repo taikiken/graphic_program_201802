@@ -14,6 +14,7 @@
 import {PageTop} from './ui/PageTop';
 import {Nav} from './ui/Nav';
 import {FirstVisit} from './ui/FirstVisit';
+import {Context} from './ui/Context';
 
 import {Index} from './page/Index';
 import {Category} from './page/Category';
@@ -66,6 +67,9 @@ export class Page {
    * Page 初期化, UT.app.Router event を listen します
    */
   static init():void {
+
+    // 右クリック禁止
+    Context.disable();
 
     // page 上部に貼り付ける
     Page.bindScroll();
