@@ -474,6 +474,65 @@ textarea {
       }
     }
 
+    &-breadCrumb {
+      width: $global-inner-width;
+      margin: 0 auto;
+      padding: 15px;
+
+      ol {
+        list-style: none;
+        line-height: 18px;
+
+        li {
+          display: inline-block;
+          letter-spacing: ls(inline-block);
+
+          a {
+            display: inline-block;
+            @include link-decoration(#666, #fff, none, none);
+            font-size: fz(12);
+            letter-spacing: normal;
+
+            &:after {
+              content: '';
+              @extend .sprite-common;
+              @include sprite( $common-breadcrumb-arrow );
+              display: inline-block;
+              margin-right: 5px;
+              margin-left: 8px;
+              font-size: 0;
+              vertical-align: middle;
+            }
+          }
+        }
+
+        li:first-child a {
+          position: relative;
+          padding-left: 20px;
+
+          &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            @extend .sprite-common;
+            @include sprite( $common-breadcrumb-home );
+            line-height: 18px;
+            margin-right: 5px;
+            font-size: 0;
+          }
+        }
+
+        li:last-child a {
+          color: #fff;
+
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+
     &-pr {
       background-color: #1b1b1b;
 
