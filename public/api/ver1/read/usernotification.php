@@ -12,7 +12,6 @@ $length=isset($_REQUEST["length"])?$_REQUEST["length"]:10;
 
 if($y["status"]["code"]===200){
 
-
 	$sql=sprintf("
 	select * from 
 	(select *,(select title from repo_n where id=pageid and flag=1) as title,(select flag from u_member where id=userid) as uflag from u_activity where reuserid=%s and flag=1 and activity in(1,2,3) order by regitime desc limit %s offset %s) as t1,

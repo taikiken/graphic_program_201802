@@ -47,11 +47,20 @@ if(strlen($api)>0){
 				exit;
 				
 			}else{
-			
-				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '3 day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
-				str_replace(" and","",$c[1]),sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
-				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '3 day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
-				str_replace(" and","",$c[1]),sprintf($articletable2c,$c[1],"",""),"");
+				
+				if($category=="all"){
+					$day=3;
+				}else{
+					$sql=sprintf("select p1 from u_categories where name_e='%s'",$category);
+					$o->query($sql);
+					$f=$o->fetch_array();
+					$day=$f["p1"];
+				}
+				
+				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
+				str_replace(" and","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
+				str_replace(" and","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
 			}
 /*
 

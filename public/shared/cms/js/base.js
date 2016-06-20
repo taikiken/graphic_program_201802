@@ -407,14 +407,13 @@ $(function(){
 			}else{
 				u=u.replace("{X}",2);
 			}
-			
+						
 			$.ajax({
 				type: "POST",
 				url: "/editdm/module/importdata.php",
 				data: "s="+u,
 				success: function(m){
-					
-					var m=eval("("+m+")");
+					//var m=eval("("+m+")");
 					$(".optionsel").html("<ul>"+m.d+"<li>選択をクリアする</li></ul>");
 					var l=m.n-0;
 					

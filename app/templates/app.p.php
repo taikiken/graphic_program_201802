@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
-  <link rel="stylesheet" href="/assets/sp/css/ui.css">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 
   <style>
     .webview-env {
@@ -93,7 +93,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
 <?php endif; ?>
 
   <script>

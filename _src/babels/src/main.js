@@ -124,6 +124,7 @@ import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
 import {SPViewSingle} from './sp/view/SPViewSingle';
 import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
 import {SPViewReadMore} from './sp/view/single/SPViewReadMore';
+import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
 
 // single/comment
 import {SPViewComments} from './sp/view/SPViewComments';
@@ -133,11 +134,6 @@ import {SPViewCommentForm} from './sp/view/comment/SPViewCommentForm';
 import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
 import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
 
-/**
- * 運動通信 ライブラリ
- * @module UT
- * @type {{version: string, app: {App: App, User: User, Router: Router, Dom: Dom, const: {CommentsType: CommentsType}}, util: {Offset: Offset}, model: {Model: Model}, view: {View: View, ViewCategory: ViewCategory, ViewSingle: ViewSingle, ViewTitle: ViewTitle, ViewComments: ViewComments, ViewSearch: ViewSearch, ViewCommentSingle: ViewCommentSingle, comment: {ViewCommentForm: ViewCommentForm}, single: {ViewSingleTitle: ViewSingleTitle, ViewSingleVisual: ViewSingleVisual}, header: {ViewHeaderUser: ViewHeaderUser, ViewHeaderSearch: ViewHeaderSearch}, sidebar: {ViewRanking: ViewRanking, ViewVideos: ViewVideos}, home: {ViewHeadline: ViewHeadline, ViewPickup: ViewPickup, ViewNews: ViewNews}, signup: {SignupWizard: SignupWizard, ViewDeactivate: ViewDeactivate}, login: {ViewLogin: ViewLogin, ViewLogout: ViewLogout}, mypage: {ViewUserProfile: ViewUserProfile, ViewBookmarks: ViewBookmarks, ViewActivities: ViewActivities, ViewNotifications: ViewNotifications}, settings: {ViewSettingsIndex: ViewSettingsIndex, ViewSettingsInterest: ViewSettingsInterest}, modal: {ViewDeleteModal: ViewDeleteModal, ViewLogoutModal: ViewLogoutModal}}, sp: {view: {SPViewSyn: SPViewSyn, SPViewComments: SPViewComments, SPViewSingle: SPViewSingle, SPViewSearch: SPViewSearch, single: {SPViewSingleHeader: SPViewSingleHeader, SPViewReadMore: SPViewReadMore}, comment: {SPViewCommentForm: SPViewCommentForm}, home: {SPViewHeadLine: SPViewHeadLine, SPViewNews: SPViewNews}, category: {SPViewCategoryRoot: SPViewCategoryRoot}, header: {SPViewHeaderUser: SPViewHeaderUser, SPViewHeaderSearch: SPViewHeaderSearch}, mypage: {SPViewUserProfile: SPViewUserProfile, SPViewBookmarks: SPViewBookmarks}}}}}
- */
 /**
  * 運動通信 ライブラリ
  * @module UT
@@ -230,7 +226,8 @@ let UT = {
       SPViewFirstVisit: SPViewFirstVisit,
       single: {
         SPViewSingleHeader: SPViewSingleHeader,
-        SPViewReadMore: SPViewReadMore
+        SPViewReadMore: SPViewReadMore,
+        SPViewSingleRanking: SPViewSingleRanking
       },
       comment: {
         SPViewCommentForm: SPViewCommentForm
