@@ -168,7 +168,13 @@ export let BrightcoveNode = React.createClass( {
     let video = this.props.video;
     let poster = this.props.poster;
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
-    let vast = video.vast;
+
+    // let vast = video.vast;
+
+    // 動画プレイヤー / VASTをPC/SP&APPで分ける #822
+    // https://github.com/undotsushin/undotsushin/issues/822
+    // @from 2016-06-20
+    let vast = this.iphone ? video.adUrl.sp : video.adUrl.pc;
     
     let ima3 = {
       adTechOrder: [
@@ -194,12 +200,14 @@ export let BrightcoveNode = React.createClass( {
     if ( vast !== '' ) {
       ima3.serverUrl = vast + Date.now();
     }
-    // console.log( 'UT: vast', this.id, vast, ima3 );
+
     let player = videojs( this.id );
 
     player.ready( () => {
       player.src( { type: Brightcove.TYPE, src: url } );
       player.poster( poster );
+
+      // vast が存在する時のみ ima3 を追加する
       if ( vast !== '' ) {
         player.ima3( ima3 );
       }
@@ -214,7 +222,6 @@ export let BrightcoveNode = React.createClass( {
       player.height( 'auto', false );
     }
     // http://docs.brightcove.com/en/perform/brightcove-player/guides/events.html
-
     // bind event handler
     player.on( 'adstart', this.adStart );
     player.on( 'adend', this.adEnd );
