@@ -229,7 +229,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
           ?>
           <div id="post-content-container" class="post-content">
             <p><?php echo $page['post']['description']; ?></p>
-            <p><a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank">続きを読む(外部サイトへ)</a></p>
+            <p><a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>">続きを読む(外部サイトへ)</a></p>
           </div>
         <?php else : ?>
           <div id="post-content-container" class="post-content">
@@ -258,7 +258,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
                 // link が存在しないので画像だけ表示します ?>
                 <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
               <?php else: // link + image を表示 ?>
-                <a href="<?php echo $post_user_logo_link; ?>" target="_blank"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
+                <a href="<?php echo $post_user_logo_link; ?>"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
               <?php endif; ?>
             <?php endif; //----[image] ?>
             <div class="provider-data">
@@ -271,7 +271,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
               // user.logo.link
               // link が存在する時のみ表示します
               if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
-                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank">ウェブサイト</a></p>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>">ウェブサイト</a></p>
               <?php endif; //----[link] ?>
             </div>
           </div><!-- /.provider -->
