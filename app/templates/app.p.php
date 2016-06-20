@@ -4,59 +4,59 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
-  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
-
+  <link rel="stylesheet" href="https://www.undotsushin.com/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+<?php /*
   <style>
-    /*.webview-env {*/
-      /*display:block;*/
-      /*text-align:right;*/
-      /*font-size:12px;*/
-      /*color:#999;*/
-    /*}*/
+    .webview-env {
+      display:block;
+      text-align:right;
+      font-size:12px;
+      color:#999;
+    }
 
-    /*.webview-media-video  {*/
-      /*position: relative;*/
-      /*width:100%;*/
-      /*padding-top:56.25%;*/
-      /*height:0;*/
-    /*}*/
+    .webview-media-video  {
+      position: relative;
+      width:100%;
+      padding-top:56.25%;
+      height:0;
+    }
 
-    /*.webview-media-video > *,*/
-    /*.webview-media-video > * > span,*/
-    /*.webview-media-video > * > span > iframe {*/
-      /*display:block !important;*/
-      /*position:absolute !important;*/
-      /*width:100% !important;*/
-      /*height:100% !important;*/
-      /*top:0;*/
-      /*right:0;*/
-      /*bottom:0;*/
-      /*left:0;*/
-    /*}*/
+    .webview-media-video > *,
+    .webview-media-video > * > span,
+    .webview-media-video > * > span > iframe {
+      display:block !important;
+      position:absolute !important;
+      width:100% !important;
+      height:100% !important;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+    }
 
-    /*.webview-media-image > div {*/
-      /*text-align:center;*/
-    /*}*/
+    .webview-media-image > div {
+      text-align:center;
+    }
 
-    /*.webview-media-image img {*/
-      /*display:block;*/
-      /*max-width:100%;*/
-      /*height:auto;*/
-      /*margin:0 auto;*/
-    /*}*/
+    .webview-media-image img {
+      display:block;
+      max-width:100%;
+      height:auto;
+      margin:0 auto;
+    }
 
-    /*#single-header-container {*/
-      /*margin-bottom:2em;*/
-      /*font-size:1.2em;*/
-    /*}*/
+    #single-header-container {
+      margin-bottom:2em;
+      font-size:1.2em;
+    }
 
-    /*.post-content {*/
-      /*padding-bottom:2em;*/
-    /*}*/
+    .post-content {
+      padding-bottom:2em;
+    }
 
 
   </style>
-
+*/ ?>
 <?php
 // ---------------------------------------------------------------------------
 // brightcove
@@ -92,7 +92,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="https://www.undotsushin.com/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
 <?php endif; ?>
 
   <script>
