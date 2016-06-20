@@ -137,7 +137,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     // response.description
     if ( $page['theme']['images']['sp'] ) : ?>
       <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
-        <a href="/category/<?php echo $page['category']['slug']; ?>"><h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>" width="100%"></h1></a>
+        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>" width="100%"></h1>
       </div>
     <?php endif;
     // eof: 記事詳細: sp
@@ -145,7 +145,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     <div class="main-sec">
       <div class="post-kv">
         <?php if ( $page['post']['media_type'] === 'video' ) :
-          // -------------------------- [メインんビジュアル] --------------------------
+          // -------------------------- [メインビジュアル] --------------------------
           // ========= video ?>
           <img class="phone-video-guide" src="https://www.undotsushin.com/assets/images/common/thumb-16x9.png" width="100%" alt="">
           <figure>
@@ -195,7 +195,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
             </figure>
           <?php endif; ?>
         <?php
-        // -------------------------- [/メインんビジュアル] --------------------------
+        // -------------------------- [/メインビジュアル] --------------------------
         endif; ?>
 
       </div>
