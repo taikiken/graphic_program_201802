@@ -100,7 +100,7 @@ left join (select
 	name_e as slug2
 from u_categories where flag=1) as t4 on t1.m2=t4.categoryid2";
 
-$articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_member where  cid!=6 and flag=1) as t2 where t1.d2=t2.userid";
+$articletable2c="(select id,d2 from repo_n where cid=1 and flag=1%s%s%s) as t1,(select id as userid from u_media where flag=1) as t2 where t1.d2=t2.userid";
 
 $commentfield="isreaction,id,comment,userid,pageid,regitime,slug,good,bad,reply,typeid,type,name,profile,icon";
 $commenttable="
@@ -328,7 +328,7 @@ function set_categoryinfo($f,$personalized="",$longtitle=1){
 	return $s;
 }
 
-function set_articleinfo($f,$type=0,$canonical,$readmore){
+function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	
 	/*
 		$type:0 記事一覧　$type:1 記事詳細
@@ -348,8 +348,8 @@ function set_articleinfo($f,$type=0,$canonical,$readmore){
 
 	$s["description"]=get_summary($f["b1"],$f["body"]);
 	
-	if($type==1){
-		if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
+	if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
+	if($type==1){	
 		$s["body"]=$body;
 		$s["body_escape"]=stripbr($f["body"]);
 	}
@@ -390,8 +390,11 @@ function set_articleinfo($f,$type=0,$canonical,$readmore){
 	$s["media"]["images"]["caption"]=checkstr($f["t1"],1);
 	
 	$s["media"]["video"]["player"]=$video;
+	
+	//$s["media"]["video"]["url"]="";
 	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("https://video%s.undotsushin.com/%s/%s/sd/%s.m3u8",$mediaoption[$f["d2"]]["geoblock"]==0?"":"-jp",$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("https://video%s.undotsushin.com/%s/%s/hd/%s.m3u8",$mediaoption[$f["d2"]]["geoblock"]==0?"":"-jp",$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
+	
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
 	$s["media"]["video"]["caption"]=checkstr($f["videocaption"],1);
@@ -501,7 +504,7 @@ function set_userinfo($f,$interestset){
 	}
 	
 	if(!preg_match("/http/",$f["icon"])){
-		$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/%s/img/%s",$UserImgPath,$interest==1?"users":"prg_img",$f["icon"]):"";
+		$s["profile_picture"]=strlen($f["icon"])>0?sprintf("%s/users/img/%s",$UserImgPath,$f["icon"]):"";
 	}elseif(strlen($f["icon"])>0){
 		$s["profile_picture"]=$f["icon"];
 	}else{

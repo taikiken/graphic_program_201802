@@ -1,7 +1,7 @@
 <?php if(($q->get_dir()==0||$q->get_dir()==1)&&$q->get_file()==0){ ?>
 <?php
 
-$defsize=array(660,401);
+$defsize=array(660,400);
 
 $p["n1"]=strlen($p["n1"]>0)?$p["n1"]:$defsize[0];
 
@@ -15,25 +15,35 @@ $(function(){
 	function zth(str){
 		return str.replace("．",".").replace(/[Ａ-Ｚａ-ｚ０-９]/g,function(s){return String.fromCharCode(s.charCodeAt(0)-0xFEE0);}).replace(/,/g,"");
 	}
-	var yu=$("[name='p_youtube']").val();
+	var yu=$("[name='p_<?=$a?>']").val();
 	function sml(n,m){
+		
 		if(yu==m)return;
 		
 		if(m.length!=11){
-			yu=m.match(/\?v=([^&]+)/)[1];
-			$("[name='p_youtube']").val(yu);
-			m=yu;
+			
+			var t="";
+			if(m.match(/v=([0-9a-zA-Z-_]{11})/))t=m.match(/v=([0-9a-zA-Z-_]{11})/)[1];
+			else if(m.match(/youtube.com\/embed\/([0-9a-zA-Z-_]{11})/))t=m.match(/youtube.com\/embed\/([0-9a-zA-Z-_]{11})/)[1];
+			else if(m.match(/youtu.be\/([0-9a-zA-Z-_]{11})/))t=m.match(/youtu.be\/([0-9a-zA-Z-_]{11})/)[1];
+			
+			if(t!=""){
+				$("[name='p_<?=$a?>']").val(t);
+				m=t;
+				yu=m;
+				var src="https://www.youtube.com/embed/";
+				$(".eyoutube").show();
+				$(".eyoutube iframe").prop("src",src+m);
+
+			}else{
+				alert("URLから動画IDを読み込みませんでした。11桁のIDを入力してください。");
+			}
 		}
-		
-		yu=m;
-		var src="https://www.youtube.com/embed/";
-		$(".eyoutube").show();
-		$(".eyoutube iframe").prop("src",src+m);
 	}
-	$("[name='p_youtube']").on('change blur',function(){
+	$("[name='p_<?=$a?>']").on('change blur',function(){
 		sml($(this).attr("name"),$(this).val());
 	});
-	$("[name='p_youtube']").on('keydown',function(e){
+	$("[name='p_<?=$a?>']").on('keydown',function(e){
 		if((e.which&&e.which===13)||(e.keyCode&&e.keyCode===13)){
 			sml($(this).attr("name"),$(this).val());
 			return false;
@@ -42,9 +52,7 @@ $(function(){
 	$(".chbtn").click(function(){
 		
 		var w=$("[name='p_n1']").val();
-		
 		var r=0.5625;
-		
 		if(w!=""){
 			h=Math.round(w*r)+30;
 		}else{

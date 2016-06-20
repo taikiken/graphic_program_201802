@@ -27,9 +27,12 @@ import {Safety} from '../../data/Safety';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
+// node
+import {RankingNode} from '../../node/sidebar/RankingNode';
+
 // Ga
-import {Ga} from '../../ga/Ga';
-import {GaData} from '../../ga/GaData';
+// import {Ga} from '../../ga/Ga';
+// import {GaData} from '../../ga/GaData';
 
 // React
 let React = self.React;
@@ -186,91 +189,91 @@ export class ViewRanking extends View {
     let _this = this;
 
     // tag block
-    let RankingDom = React.createClass( {
-      propTypes: {
-        index: React.PropTypes.number.isRequired,
-        id: React.PropTypes.string.isRequired,
-        slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        category2: React.PropTypes.string,
-        url: React.PropTypes.string.isRequired,
-        date: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string.isRequired,
-        thumbnail: React.PropTypes.string.isRequired,
-        empty: React.PropTypes.bool.isRequired,
-        total: React.PropTypes.number.isRequired,
-        home: React.PropTypes.bool.isRequired,
-        detail: React.PropTypes.bool.isRequired,
-        thisSlug: React.PropTypes.string.isRequired
-      },
-      getDefaultPropTypes: function() {
-        return {
-          category2: ''
-        };
-      },
-      render: function() {
-        let p = this.props;
-        let n = p.index + 1;
-
-        let category = ( label ):string => {
-          return !label ? '' : <span className="category-label">{label}</span>;
-        };
-
-        let imgStyle = {
-          'background': `url(${p.thumbnail}) no-repeat center center`,
-          'backgroundSize': 'cover'
-        };
-
-        return (
-          <li className={'board-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
-            <a href={p.url} className={'post'} onClick={this.gaSend}>
-              <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`} style={imgStyle}>
-                <img src={Empty.THUMB_EMPTY} alt=""/>
-                {/*
-                 https://github.com/undotsushin/undotsushin/issues/468
-                  1x1 を厳格に守る
-                <img src={p.thumbnail} alt={p.title}/>
-                 */}
-              </figure>
-              <div className="post-data">
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-                <h4 className="post-heading">{p.title}</h4>
-                <p className="post-date">{p.date}</p>
-              </div>
-            </a>
-          </li>
-        );
-      },
-      // gaSend: function(e) {
-      //   e.preventDefault();
-      gaSend: function() {
-        if (this.props.home) {
-          this.gaHome();
-        } else if (this.props.detail) {
-          this.gaDetail();
-        } else {
-          this.gaCategory();
-        }
-      },
-      gaHome: function() {
-        // ----------------------------------------------
-        // GA 計測タグ
-        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'home_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
-        // ----------------------------------------------
-      },
-      gaCategory: function() {
-        // ----------------------------------------------
-        // GA 計測タグ
-        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', `${this.props.thisSlug}_ranking`, 'click', this.props.url, parseFloat(this.props.id)) );
-        // ----------------------------------------------
-      },
-      gaDetail: function() {
-        // ----------------------------------------------
-        // GA 計測タグ
-        Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'detail_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
-        // ----------------------------------------------
-      }
-    } );
+    // let RankingDom = React.createClass( {
+    //   propTypes: {
+    //     index: React.PropTypes.number.isRequired,
+    //     id: React.PropTypes.string.isRequired,
+    //     slug: React.PropTypes.string.isRequired,
+    //     category: React.PropTypes.string.isRequired,
+    //     category2: React.PropTypes.string,
+    //     url: React.PropTypes.string.isRequired,
+    //     date: React.PropTypes.string.isRequired,
+    //     title: React.PropTypes.string.isRequired,
+    //     thumbnail: React.PropTypes.string.isRequired,
+    //     empty: React.PropTypes.bool.isRequired,
+    //     total: React.PropTypes.number.isRequired,
+    //     home: React.PropTypes.bool.isRequired,
+    //     detail: React.PropTypes.bool.isRequired,
+    //     thisSlug: React.PropTypes.string.isRequired
+    //   },
+    //   getDefaultPropTypes: function() {
+    //     return {
+    //       category2: ''
+    //     };
+    //   },
+    //   render: function() {
+    //     let p = this.props;
+    //     let n = p.index + 1;
+    //
+    //     let category = ( label ):string => {
+    //       return !label ? '' : <span className="category-label">{label}</span>;
+    //     };
+    //
+    //     let imgStyle = {
+    //       'background': `url(${p.thumbnail}) no-repeat center center`,
+    //       'backgroundSize': 'cover'
+    //     };
+    //
+    //     return (
+    //       <li className={'board-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
+    //         <a href={p.url} className={'post'} onClick={this.gaSend}>
+    //           <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`} style={imgStyle}>
+    //             <img src={Empty.THUMB_EMPTY} alt=""/>
+    //             {/*
+    //              https://github.com/undotsushin/undotsushin/issues/468
+    //               1x1 を厳格に守る
+    //             <img src={p.thumbnail} alt={p.title}/>
+    //              */}
+    //           </figure>
+    //           <div className="post-data">
+    //             <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
+    //             <h4 className='post-heading'>{p.title}</h4>
+    //             <p className="post-date">{p.date}</p>
+    //           </div>
+    //         </a>
+    //       </li>
+    //     );
+    //   },
+    //   // gaSend: function(e) {
+    //   //   e.preventDefault();
+    //   gaSend: function() {
+    //     if (this.props.home) {
+    //       this.gaHome();
+    //     } else if (this.props.detail) {
+    //       this.gaDetail();
+    //     } else {
+    //       this.gaCategory();
+    //     }
+    //   },
+    //   gaHome: function() {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'home_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
+    //     // ----------------------------------------------
+    //   },
+    //   gaCategory: function() {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', `${this.props.thisSlug}_ranking`, 'click', this.props.url, parseFloat(this.props.id)) );
+    //     // ----------------------------------------------
+    //   },
+    //   gaDetail: function() {
+    //     // ----------------------------------------------
+    //     // GA 計測タグ
+    //     Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'detail_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
+    //     // ----------------------------------------------
+    //   }
+    // } );
 
     // React Class
     let ArticleDom = React.createClass( {
@@ -317,13 +320,14 @@ export class ViewRanking extends View {
 
                 // RankingDom instance を使い render
                 return (
-                    <RankingDom
+                    <RankingNode
                       key={'ranking-' + dae.id}
                       index={i}
                       id={String( dae.id )}
-                      slug={dae.category.slug}
-                      category={dae.category.label}
-                      category2={dae.category2.label}
+                      // slug={dae.category.slug}
+                      // category={dae.category.label}
+                      // category2={dae.category2.label}
+                      categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}
                       title={dae.title}
@@ -333,6 +337,7 @@ export class ViewRanking extends View {
                       home={home}
                       detail={detail}
                       thisSlug={thisSlug}
+                      categorySlug={categorySlug}
                     />
                 );
 
@@ -361,7 +366,6 @@ export class ViewRanking extends View {
         slug: this.slug } ),
       element
     );
-
-
+    
   }// render
 }

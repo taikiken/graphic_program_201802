@@ -16,7 +16,7 @@ if(strlen($uid)>0){
 
 	$category=array();
 	$n=0;
-	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from u_categories) as t2 where t1.categoryid=t2.id order by id",$uid);
+	$sql=sprintf("select t2.* from (select categoryid from u_category where userid=%s and flag=1) as t1,(select id,name,name_e from u_categories where flag=1) as t2 where t1.categoryid=t2.id order by id",$uid);
 	$o->query($sql);
 	
 	while($p=$o->fetch_array()){
@@ -35,7 +35,7 @@ if(strlen($uid)>0){
 if(strlen($uid)==0){
 	$sql="select id,name,name_e,img from u_categories where flag=1 order by n";
 }else{
-	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
+	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories where flag=1) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
 }
 
 $o->query($sql);

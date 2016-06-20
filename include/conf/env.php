@@ -14,7 +14,7 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 
 	if(preg_match("/dev2/",$servername)){
 
-		$DBNAME="ut_dev2";
+		$DBNAME="ut_dev2new";
 		$SERVERPATH="/var/www/undotsushin.com/dev/public";
 		$USERS="/var/www/undotsushin.com/dev/public/users";
 
@@ -91,34 +91,27 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 }
 
 
-
 // setting for Vagrant
 // ==============================
 // - 192.168.33.50 - vagrant local ip
 // - undotsushin.local - vagrant local host
 // - :8888 - vagrant local network port
 if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'undotsushin.local' || $_SERVER['SERVER_PORT'] == '8080' || $_SERVER['SERVER_PORT'] == '8888' ) :
-
   $staticfileimport=0;
-
   $DBNAME="ut";
   $DBUSR="ut";
   $DBPWD="ut";
   $DBHOST="localhost";
   $DBPORT=5432;
-
   $SERVERPATH="/vagrant/public";
   $USERS="/vagrant/public/users";
-
   if ( $_SERVER['SERVER_PORT'] !== '80' ) :
     $domain="http://".$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'];
   else :
     $domain="http://".$_SERVER['SERVER_NAME'];
   endif;
-
   $ImgPath="http://dev.undotsushin.com";
   $UserImgPath="http://dev.undotsushin.com";
-
   $SQLLOG="/vagrant/.tmp/log/ut_sqllog.txt";
   $CMSLOG="/vagrant/.tmp/log/ut_cmslog.txt";
   $LOGTXT="/vagrant/.tmp/log/ut_log.txt";
@@ -126,9 +119,7 @@ if ( $_SERVER['SERVER_NAME'] == '192.168.33.50' || $_SERVER['SERVER_NAME'] == 'u
   $ACLOGTXT="/vagrant/.tmp/log/ut_article_access.txt";
   $IMGP="/vagrant/.tmp/img/";
   $RSS="/vagrant/.tmp/rss/";
-
 endif;
-
 
 
 ?>

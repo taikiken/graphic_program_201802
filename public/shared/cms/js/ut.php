@@ -1,4 +1,9 @@
-<?php include "local.php";  ?>
+<?php
+
+include "local.php";
+header("Content-type:text/javascript");
+
+?>
 var CONTENTSTYPE_ALLOWED=[<?=implode(",",$CONTENTSTYPE_ALLOWED)?>];
 var RELATEDLINK_ALLOWED=[<?=implode(",",$RELATEDLINK_ALLOWED)?>];
 var SUMMARY_ALLOWED=[<?=implode(",",$SUMMARY_ALLOWED)?>];

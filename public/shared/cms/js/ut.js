@@ -264,12 +264,16 @@ function ut_init(){
 	}else if(cd=="repo_e"){
 		if(location.href.match(/types=5/)){
 			$(".title .inputFields").append("<div class=\"containerbox\"></div>");
-			$("textarea").on("change",function(){
-				$(".containerbox").html($(this).val()).show();
-			});
-			if($("textarea").val()){
-				$(".containerbox").html($("textarea").val()).show();
+			function whresize(){
+				var t=$("textarea").val();
+				t=t.replace(/width="[0-9]+"/,"width=\"728\"").replace(/height="[0-9]+"/,"height=\"410\"").replace(/max-width:[0-9]+px/,"max-width:728px");
+				$("textarea").val(t);
+				$(".containerbox").html("").append(t).show();
 			}
+			$("textarea").on("change",function(){
+				whresize();
+			});
+			if($("textarea").val())whresize();
 		}
 	}
 	

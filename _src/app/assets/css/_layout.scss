@@ -475,7 +475,7 @@ textarea {
     }
 
     &-pr {
-      background-color: #333;
+      background-color: #1b1b1b;
 
       &-inner {
         @include clearfix;
@@ -491,7 +491,7 @@ textarea {
       .text-block {
         float: left;
         width: 450px;
-        margin: 35px 0 0 25px;
+        margin: 28px 0 0 25px;
 
         p {
           margin-top: 16px;
