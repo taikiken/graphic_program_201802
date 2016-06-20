@@ -123,7 +123,9 @@ export class Offset extends Action {
     this._offset = offset;
   }
   /**
-   * url を作成します
+   * url を作成します<br>
+   * offset, length クエリが追加になるので override します
+   * @override
    * @return {string} 作成した url を返します
    */
   get url():string {
