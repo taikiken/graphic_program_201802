@@ -614,6 +614,25 @@
 
 
 
+
+// mod-headingA01
+.mod-headingA01 {
+  padding: (14/2)+px;
+  border-left: (6/2)+px solid $highlight-color;
+  background-color: #333;
+
+  @for $i from 1 through 6 {
+    h#{$i} {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}
+
+
+
+
+
 // -------------------------------------------------
 // override
 @import "./general_override";

@@ -9,7 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
+/* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
 // app
 import {Empty} from '../app/const/Empty';

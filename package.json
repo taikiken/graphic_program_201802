@@ -81,6 +81,7 @@
     "gulp": "gulp",
     "update_version" : "git rev-parse --short HEAD > public/assets/.version",
     "build": "npm run update_version && npm run gulp",
+    "build:shell": "npm run update_version && npm run gulp build:shell",
     "esdoc": "cd ./_src/babels && esdoc -c esdoc.json"
   }
 }
