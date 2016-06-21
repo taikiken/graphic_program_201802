@@ -354,7 +354,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   <script>
   (function () {
 
-    var myPlayer;
+    var myPlayer, poster;
     videojs('webview-brightcove').ready(function() {
       myPlayer = this;
 
@@ -363,7 +363,8 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
       } );
 
-      <?php if ( $page['post']['media']['video']['vast'] ) : ?>
+      <?php if ($page['post']['media']['video']['add_url']['sp']) :
+      // 動画プレイヤー / VASTをPC/SP&APPで分ける #822 ?>
       myPlayer.ima3({
         debug: false,
         adTechOrder: [
@@ -372,19 +373,22 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         postrollTimeout: 2000,
         prerollTimeout: 1000,
         requestMode: 'onload',
-        serverUrl: '<?php echo $page['post']['media']['video']['vast']; ?>' + Date.now(),
+        serverUrl: '<?php echo $page['post']['media']['video']['add_url']['sp']; ?>' + '?' + Date.now(),
         timeout: 5000
       });
       <?php endif; ?>
 
-      var poster = "<?php
-        echo $page['post']['media']['images']['medium'] ? $page['post']['media']['images']['medium'] :
-          $page['post']['media']['images']['thumbnail'] ? $page['post']['media']['images']['thumbnail'] : ''; ?>";
+      <?php if ($page['post']['media']['images']['medium']) : ?>
+      poster = '<?php echo $page['post']['media']['images']['medium']; ?>';
+      <?php elseif ($page['post']['media']['images']['thumbnail']) : ?>
+      poster = '<?php echo $page['post']['media']['images']['thumbnail']; ?>';
+      <?php endif; ?>
+
       if ( !!poster ) {
         myPlayer.poster(poster);
       }
-//      myPlayer.width( '100%', false );
-//      myPlayer.height( 'auto', false );
+      myPlayer.width( '100%', false );
+      myPlayer.height( 'auto', false );
     });
   }());
   </script>
