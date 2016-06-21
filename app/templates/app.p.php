@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
-  <link rel="stylesheet" href="https://www.undotsushin.com/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 <?php /*
   <style>
     .webview-env {
@@ -92,7 +92,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="https://www.undotsushin.com/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
 <?php endif; ?>
 
   <script>
@@ -126,9 +126,9 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   </script>
 
 </head>
-
 <body>
-<dib class="body-sec">
+<div id="page" class="whole post-single ">
+<div class="body-sec" style="margin: 0;">
   <div class="body-sec-inner">
     <?php
     // ----------------------------------------------------
@@ -143,22 +143,38 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     // eof: 記事詳細: sp
     // ---------------------------------------------------- ?>
     <div class="main-sec">
-      <div class="post-kv">
+      <?php
+      $post_kv_class = '';
+      if ( $page['post']['media_type'] === 'video' ) {
+        $post_kv_class .= ' post-video-kv';
+
+        if ( $page['post']['media']['video']['player'] == 'facebook' ) {
+          $post_kv_class .= ' post-video-fb';
+        } elseif ( $page['post']['media']['video']['player'] == 'youtube' ) {
+          $post_kv_class .= ' post-video-yt';
+        } elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) {
+          $post_kv_class .= ' phone-post-kv';
+        }
+      }
+      ?>
+      <div class="post-kv<?php echo $post_kv_class; ?>">
         <?php if ( $page['post']['media_type'] === 'video' ) :
           // -------------------------- [メインビジュアル] --------------------------
           // ========= video ?>
-          <img class="phone-video-guide" src="https://www.undotsushin.com/assets/images/common/thumb-16x9.png" width="100%" alt="">
-          <figure>
-            <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) :
-              // ---------- {facebook} ?>
+          <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) :
+            // ---------- {facebook} ?>
+            <div className="post-kv post-video-kv post-video-fb">
               <div class="fb-video" data-href="<?php echo $page['post']['media']['video']['facebook']; ?>" data-allowfullscreen="true" data-width="500"></div>
+            </div>
+          <?php elseif ( $page['post']['media']['video']['player'] == 'youtube' ) :
+            // ---------- {youtube} ?>
+            <img class="yt-video-size" src="/assets/images/common/thumb-16x9.png" alt="">
+            <iframe class="yt-video" width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 
-            <?php elseif ( $page['post']['media']['video']['player'] == 'youtube' ) :
-              // ---------- {youtube} ?>
-              <iframe width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-
-            <?php elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) :
-              // ---------- {brightcove} ?>
+          <?php elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) :
+            // ---------- {brightcove} ?>
+            <div class="video-container">
+              <img class="phone-video-guide" src="/assets/images/common/thumb-16x9.png" alt="">
               <video
                 id="webview-brightcove"
                 data-account="3948005094001"
@@ -169,36 +185,50 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
                 controls
               >
               </video>
-            <?php endif; ?>
+            </div>
+          <?php endif; ?>
 
-            <?php if ( $page['post']['media']['video']['caption'] ) : ?>
-              <figcaption class="caption">
-                <?php echo $page['post']['media']['video']['caption']; ?>
-              </figcaption>
-            <?php endif; ?>
-
-          </figure>
+          <?php if ( $page['post']['media']['video']['caption'] ) : ?>
+            <figcaption class="caption">
+              <?php echo $page['post']['media']['video']['caption']; ?>
+            </figcaption>
+          <?php endif; ?>
 
         <?php else :
         // ========= not video ?>
-          <?php if ( $page['post']['media']['images']['original'] && $page['post']['is_show_image']) :
-          // ========= image ?>
-            <figure>
-              <div>
-                <img src="<?php echo $page['post']['media']['images']['original']; ?>" />
-              </div>
-              <?php if ( $page['post']['media']['images']['caption'] ) : ?>
-                <figcaption class="caption">
-                  <?php echo $page['post']['media']['images']['caption']; ?>
-                </figcaption>
-              <?php endif; ?>
-            </figure>
-          <?php endif; ?>
+          <?php
+          if ($page['post']['is_show_image']) :
+            $post_kv_img = '';
+            // original から large と medium と順に探していく
+            if ($page['post']['media']['images']['original']) {
+
+              $post_kv_img = $page['post']['media']['images']['original'];
+
+            } elseif ($page['post']['media']['images']['large']) {
+
+              $post_kv_img = $page['post']['media']['images']['large'];
+
+            } elseif ($page['post']['media']['images']['medium']) {
+
+              $post_kv_img = $page['post']['media']['images']['medium'];
+            }
+          ?>
+            <?php if ($post_kv_img) :
+            // ========= image ?>
+              <figure class="post-single-figure">
+                <img src="<?php echo $post_kv_img; ?>" class="post-single-image" />
+                <?php if ( $page['post']['media']['images']['caption'] ) : ?>
+                  <figcaption class="caption">
+                    <?php echo $page['post']['media']['images']['caption']; ?>
+                  </figcaption>
+                <?php endif; ?>
+              </figure>
+            <?php endif; ?>
         <?php
+          endif;// $page['post']['is_show_image']
         // -------------------------- [/メインビジュアル] --------------------------
         endif; ?>
-
-      </div>
+      </div><?php //.post-kv ?>
       <div class="post-detail">
         <div class="post-heading">
           <h1>
@@ -279,6 +309,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         // eof: 記事詳細: pc 媒体ロゴ
         // ---------------------------------------------------- ?>
       </div><?php //.post-detail ?>
+
       <div class="comment">
         <?php
         /*
@@ -286,24 +317,19 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
          * 広告 / PC版画像バナー広告をDFP管理下にする
          */
         // ------------------------------------
-        if ( $page['ad']['sp'] ) :
-          ?>
-          <div class="sponsor-link_commentLower">
-            <?php
-            /*
-             # 保険のために original を残します
-             # ToDo: いつか削除
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-            */ ?>
+        if ( $page['ad']['sp'] ) : ?>
+            <div class="sponsor-link_commentLower">
             <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-          </div>
+            </div><?php //.sponsor-link_commentLower ?>
         <?php endif; ?>
       </div><?php //.comment ?>
     </div><?php //.main-sec ?>
   </div><?php //.body-sec-inner ?>
-</dib><?php //.body-sec ?>
+</div><?php //.body-sec ?>
+</div><?php //#page ?>
 
-  <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) : ?>
+  <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) :
+  // facebook ?>
   <script>
     window.fbAsyncInit = function() {
       FB.init({
@@ -323,7 +349,8 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   </script>
   <?php endif; ?>
 
-  <?php if ( $page['post']['media']['video']['player'] == 'brightcove' ) : ?>
+  <?php if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
+  // brightcove ?>
   <script>
   (function () {
 
@@ -331,12 +358,10 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     videojs('webview-brightcove').ready(function() {
       myPlayer = this;
 
-      myPlayer.src(
-        {"type":"application/x-mpegURL",
-        "src":"<?php echo $page['post']['media']['video']['url']['sd']; ?>"}
-      );
-
-      myPlayer.poster('<?php echo $page['post']['media']['images']['medium']; ?>');
+      myPlayer.src( {
+        'type': 'application/x-mpegURL',
+        'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
+      } );
 
       <?php if ( $page['post']['media']['video']['vast'] ) : ?>
       myPlayer.ima3({
@@ -352,6 +377,14 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
       });
       <?php endif; ?>
 
+      var poster = "<?php
+        echo $page['post']['media']['images']['medium'] ? $page['post']['media']['images']['medium'] :
+          $page['post']['media']['images']['thumbnail'] ? $page['post']['media']['images']['thumbnail'] : ''; ?>";
+      if ( !!poster ) {
+        myPlayer.poster(poster);
+      }
+//      myPlayer.width( '100%', false );
+//      myPlayer.height( 'auto', false );
     });
   }());
   </script>

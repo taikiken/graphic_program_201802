@@ -31,27 +31,8 @@ export let MediaImageNode = React.createClass( {
     // 約束が違う
     // 画像がない記事の時にセットされているのは
     // large と medium と thumbnail らしい
-    // original から順に探していく
-    /*
-    let original = images.original;
-
-    if ( !original ) {
-      original = images.large;
-    } else if ( !Safety.isImg( original ) ) {
-      if ( !Safety.isGraph( original ) ) {
-        original = '';
-      }
-    }
-
-    if ( !original ) {
-      original = images.medium;
-    } else if ( !Safety.isImg( original ) ) {
-      if ( !Safety.isGraph( original ) ) {
-        original = '';
-      }
-    }
-    */
-
+    // original から large と medium と順に探していく
+    
     // 1. original
     let original = Safety.image( images.original, '' );
 
