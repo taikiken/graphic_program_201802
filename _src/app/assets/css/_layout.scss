@@ -475,12 +475,14 @@ textarea {
     }
 
     &-breadCrumb {
-      width: $global-inner-width;
-      margin: 0 auto;
-      padding: 15px;
+      background-color: #1b1b1b;
+      border-bottom: 1px solid #333;
 
       ol {
         list-style: none;
+        width: $global-inner-width;
+        margin: 0 auto;
+        padding: 15px;
         line-height: 18px;
 
         li {
