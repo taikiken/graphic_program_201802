@@ -79,6 +79,9 @@ if (
 
 <footer class="foot-sec">
   <div class="foot-sec-inner">
+    <?php
+    // SEO対策 / パンくずリストを設置する #776
+    include_once __DIR__."/../_breadcrumb.php"; ?>
     <div class="foot-pr">
       <div class="foot-pr-inner">
         <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></figure>
