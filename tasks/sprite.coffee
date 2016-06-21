@@ -227,6 +227,33 @@ gulp.task 'sprite:build:shell', ->
       else
         return console.warn '*** sprite *** no files and directories'
 
+# sprite:build:shell から shel をとる
+gulp.task 'sprite:build:only', ->
+# sprite directory が空の時走るとエラーになるので
+# fs 一度ファイルがあるのか見る
+  fs.readdir sprite, (err, files) ->
+    if err
+      return console.error err
+    else
+      if files.length > 0
+        return sprity.src
+          src: [ sprite + '/**/*.*', '!' + sprite + '/css/**/*.*' ]
+          style: '_sprite.scss'
+          name:'sprite'
+          cssPath: cssPath
+          processor: 'sprity-sass'
+          prefix: 'sprite'
+#          orientation: 'binary-tree'
+          orientation: setting.sprite.option
+          margin: 0
+          split: true
+          # node 6.2.1 拡張子切り替えができない
+          # $.if 拡張子切り替えができないので全て img/sprite へ書き出す
+        .pipe $.if( '*.png', gulp.dest( dir.sprite.img ), gulp.dest( dir.sprite.css ) )
+        .pipe $.size title: '*** sprite:build:only ***'
+      else
+        return console.warn '*** sprite *** no files and directories'
+
 # img/sprite の *.scss を css へコピー
 gulp.task 'sprite:move:scss', ->
   return gulp.src dir.sprite.img + '/*.scss'

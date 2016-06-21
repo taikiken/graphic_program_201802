@@ -397,7 +397,7 @@ gulp.task 'deploy', (cb) ->
 #    'sp:sprite:build'
     'exe:build'
     'sp:exe:build'
-    'single:build'
+#    'single:build'
     'bundle:copy'
     'libs:synapse:build'
     #'html:build'
@@ -468,7 +468,7 @@ gulp.task 'dev:init:lint', (cb) ->
     'sp:exe:dev:lint'
 #    'sprite:build'
     'sprite:build:shell'
-    'single:dev'
+#    'single:dev'
     'bundle:copy'
     'libs:synapse:dev'
 #      'html:build'
@@ -519,3 +519,48 @@ gulp.task 'build:shell', (cb) ->
     cb
   )
   return
+
+
+# --------------------------------------------
+# @from 2016-06-21
+# Gulp task を整理する #850
+
+# 【開発】
+###
+  一部タスクは package.json に記述されている
+  直接呼び出すのではなく npm run ... で使用します
+###
+gulp.task 'develop', (cb) ->
+  runSequence(
+    'vendor:dev'
+    'bundle:copy'
+    'libs:synapse:dev'
+    'js:dev'
+    'image:copy'
+    'font:copy'
+    'sp:image:copy'
+    'libs:copy'
+    cb
+  )
+  return
+
+# 【デプロイ】
+###
+  一部タスクは package.json に記述されている
+  直接呼び出すのではなく npm run ... で使用します
+###
+gulp.task 'deploy', (cb) ->
+  runSequence(
+    'vendor:init'
+    'bundle:copy'
+    'libs:synapse:build'
+    'js:build'
+    'image:build'
+    'font:copy'
+    'sp:image:build'
+    'libs:copy'
+    'clean:all'
+    'lec:build'
+    cb
+  )
+return
