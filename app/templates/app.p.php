@@ -5,58 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title><?php echo $page['title']; ?></title>
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
-<?php /*
-  <style>
-    .webview-env {
-      display:block;
-      text-align:right;
-      font-size:12px;
-      color:#999;
-    }
-
-    .webview-media-video  {
-      position: relative;
-      width:100%;
-      padding-top:56.25%;
-      height:0;
-    }
-
-    .webview-media-video > *,
-    .webview-media-video > * > span,
-    .webview-media-video > * > span > iframe {
-      display:block !important;
-      position:absolute !important;
-      width:100% !important;
-      height:100% !important;
-      top:0;
-      right:0;
-      bottom:0;
-      left:0;
-    }
-
-    .webview-media-image > div {
-      text-align:center;
-    }
-
-    .webview-media-image img {
-      display:block;
-      max-width:100%;
-      height:auto;
-      margin:0 auto;
-    }
-
-    #single-header-container {
-      margin-bottom:2em;
-      font-size:1.2em;
-    }
-
-    .post-content {
-      padding-bottom:2em;
-    }
-
-
-  </style>
-*/ ?>
 <?php
 // ---------------------------------------------------------------------------
 // brightcove
@@ -137,7 +85,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     // response.description
     if ( $page['theme']['images']['sp'] ) : ?>
       <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page['theme']['background_color'] : ''; ?>">
-        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>" width="100%"></h1>
+        <h1 class="special-summary-heading"><img src="<?php echo $page['theme']['images']['sp']; ?>" alt="<?php echo $page['og_description'] ? $page['og_description'] : ''; ?>"></h1>
       </div>
     <?php endif;
     // eof: 記事詳細: sp
