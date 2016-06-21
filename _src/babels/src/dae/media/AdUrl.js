@@ -37,27 +37,27 @@ export class AdUrl {
      * @type {Object}
      * @private
      */
-    this._adURl = Safety.object( adUrl );
+    this._adUrl = Safety.object( adUrl );
   }
   /**
    * JSON.response.media.video.add_url
    * @return {*} JSON.response.media.video.add_url を
    */
-  static get adUrl():Object {
+  get adUrl():Object {
     return this._adUrl;
   }
   /**
    * JSON.response.media.video.add_url.pc
    * @return {string} JSON.response.media.video.add_url.pc を返します
    */
-  static get pc():string {
+  get pc():string {
     return Safety.string( this.adUrl.pc, '' );
   }
   /**
    * JSON.response.media.video.add_url.sp
    * @return {string} JSON.response.media.video.add_url.sp を返します
    */
-  static get sp():string {
+  get sp():string {
     return Safety.string( this.adUrl.sp, '' );
   }
 }
