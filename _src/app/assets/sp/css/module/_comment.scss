@@ -34,16 +34,7 @@
 // comment-heading
 .comment-heading {
   margin-top: (20/2)+px;
-  padding: (14/2)+px;
-  border-left: (6/2)+px solid $highlight-color;
-  background-color: #333;
-
-  @for $i from 1 through 6 {
-    h#{$i} {
-      color: #fff;
-      font-weight: bold;
-    }
-  }
+  @extend .mod-headingA01;
 }
 
 
@@ -113,18 +104,36 @@
       input {
         appearance: none;
         width: 100%;
-        padding: 10px 30px;
+        padding: 15px 30px;
         border: none;
         border-radius: 5px;
         background: $highlight-color none;
         color: #fff;
         font-weight: bold;
-        font-size: fz(24/2) !important;
+        font-size: fz(26/2) !important;
       }
     } //.comment-form-submit
   }
 } //.comment-form
 
+.comment-form-opener {
+  padding: (20/2)+px perCalc(20);
+
+  &-trigger {
+    @include link-decoration(#fff, #fff, none, none);
+    display: block;
+
+    appearance: none;
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-radius: 5px;
+    background: $highlight-color none;
+    font-weight: bold;
+    font-size: fz(26/2) !important;
+    text-align: center;
+  }
+}
 
 
 
@@ -433,6 +442,29 @@
 // sponsor-link_commentUpper
 .sponsor-link_commentUpper {
   padding: (40/2)+px perCalc(20) 0;
+
+  .adsWrapper {
+    padding: 0 0 (20/2)+px 0 !important;
+  }
+
+  .adsTitle,
+  .adsSponsored,
+  .adsDescription,
+  .adsButton {
+    padding-right: (20/2)+px;
+    padding-left: (20/2)+px;
+  }
+}
+
+
+
+// sponsor-link_commentLower
+#comment-form-container ~ .sponsor-link_commentLower {
+  padding-top: 0;
+}
+
+.sponsor-link_commentLower {
+  padding: (20/2)+px perCalc(20);
 
   .adsWrapper {
     padding: 0 0 (20/2)+px 0 !important;
