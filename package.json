@@ -81,7 +81,15 @@
     "gulp": "gulp",
     "update_version" : "git rev-parse --short HEAD > public/assets/.version",
     "build": "npm run update_version && npm run gulp",
-    "build:shell": "npm run update_version && npm run gulp build:shell",
+    "build:v2": "npm run update_version && npm run deploy",
+    "build:shell": "npm run update_version && gulp build:shell",
+    "babels:dev": "gulp babels:dev && gulp exe:dev && gulp sp:exe:dev",
+    "babels:build": "gulp babels:build && gulp exe:build && gulp sp:exe:build",
+    "sprite:build": "gulp sprite:build && gulp sp:sprite:build && gulp sprite:post:clean && gulp sp:sprite:post:clean",
+    "css:dev": "npm run sprite:build && gulp css:dev && gulp sp:css:dev",
+    "css:build": "npm run sprite:build && gulp css:build && gulp sp:css:build",
+    "deploy": "npm run babels:build && npm run css:build && gulp deploy",
+    "develop": "npm run babels:dev && npm run css:dev && gulp develop",
     "esdoc": "cd ./_src/babels && esdoc -c esdoc.json"
   }
 }
