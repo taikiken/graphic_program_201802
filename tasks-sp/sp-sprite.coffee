@@ -141,37 +141,37 @@ gulp.task 'sp:sprite:build:shell', ->
         console.warn '*** sp:sprite *** no files and directories'
   return;
 
-# sp:sprite:build:shell から shell を除く
-gulp.task 'sp:sprite:build:only', ->
-# sprite directory が空の時走るとエラーになるので
-# fs 一度ファイルがあるのか見る
-  fs.readdir sprite, (err, files) ->
-    if err
-      console.error err
-    else
-      if files.length > 0
-        console.log '*** sp:sprite:build *** start *** files: ' + files.length
-        sprity.src
-          src: [ sp.sprite.root + '/**/*.*', '!' + sp.sprite.root + '/css/**/*.*' ]
-          style: '_sprite.scss'
-          name:'sp-sprite'
-          cssPath: sp.sprite.path
-          processor: 'sprity-sass'
-          prefix: 'sp-sprite'
-          # sprity の margin bug 捨て画像のため horizontal 変更, 使えなかった
-          #orientation: 'horizontal'
-          orientation: setting.sprite.option
-          margin: 0
-          split: true
-          'dimension': [
-            {ratio: 1, dpi: 72}
-            {ratio: 2, dpi: 192}
-          ]
-        .pipe $.if( '*.png', gulp.dest( sp.sprite.img ), gulp.dest( sp.sprite.css ) )
-        .pipe $.size title: '*** sp:sprite:build:only ***'
-      else
-        console.warn '*** sp:sprite *** no files and directories'
-  return;
+## sp:sprite:build:shell から shell を除く
+#gulp.task 'sp:sprite:build:only', ->
+## sprite directory が空の時走るとエラーになるので
+## fs 一度ファイルがあるのか見る
+#  fs.readdir sprite, (err, files) ->
+#    if err
+#      console.error err
+#    else
+#      if files.length > 0
+#        console.log '*** sp:sprite:build *** start *** files: ' + files.length
+#        sprity.src
+#          src: [ sp.sprite.root + '/**/*.*', '!' + sp.sprite.root + '/css/**/*.*' ]
+#          style: '_sprite.scss'
+#          name:'sp-sprite'
+#          cssPath: sp.sprite.path
+#          processor: 'sprity-sass'
+#          prefix: 'sp-sprite'
+#          # sprity の margin bug 捨て画像のため horizontal 変更, 使えなかった
+#          #orientation: 'horizontal'
+#          orientation: setting.sprite.option
+#          margin: 0
+#          split: true
+#          'dimension': [
+#            {ratio: 1, dpi: 72}
+#            {ratio: 2, dpi: 192}
+#          ]
+#        .pipe $.if( '*.png', gulp.dest( sp.sprite.img ), gulp.dest( sp.sprite.css ) )
+#        .pipe $.size title: '*** sp:sprite:build:only ***'
+#      else
+#        console.warn '*** sp:sprite *** no files and directories'
+#  return;
 
 # img/sprite の *.scss を css へコピー
 gulp.task 'sp:sprite:move:scss', ->
