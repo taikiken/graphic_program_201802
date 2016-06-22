@@ -9,8 +9,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->add(function (Request $request, Response $response, callable $next) {
     $uri = $request->getUri();
     $path = $uri->getPath();
-    if ($path != '/' && substr($path, -1) !== '/') {
-        $uri = $uri->withPath( $path.'/' );
+    if ($path != '/' && substr($path, -1) == '/') {
+        $uri = $uri->withPath(substr($path, 0, -1));
         return $response->withRedirect((string)$uri, 301);
     }
 
