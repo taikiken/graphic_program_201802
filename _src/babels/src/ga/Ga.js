@@ -81,7 +81,7 @@ export class Ga {
    * 開発（ログあり）
    * @param {Function} ga ga関数
    */
-  static develop( ga ):void {
+  static develop( ga:Function ):void {
     // _requests 内のデータがなくなるまで実行する
     while( _requests.length > 0 ) {
       let data:GaData = _requests.shift();
