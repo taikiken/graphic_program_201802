@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//players.brightcove.net/3948005094001/HkfUPcduf_default/index.min.js"></script>
+  <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
+  <script src="videojs-contrib-hls.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>brightcove player</h1>
+
+
+<video id="myPlayerID"
+      data-account="3948005094001"
+      data-player="HkfUPcduf"
+      data-embed="default"
+      class="video-js"
+      controls
+      style="width:800px; height:450px;">
+</video>
+
+<ul>
+  <li><a href="#" id="play">play</a></li>
+  <li><a href="#" id="pause">pause</a></li>
+</ul>
+
+<script type="text/javascript">
+var myPlayer;
+
+(function () {
+
+  videojs('myPlayerID').ready(function() {
+    myPlayer = this;
+    myPlayer.src({"type":"application/x-mpegURL", "src":"https://video.undotsushin.com/original/lambda_test/hd/lambda_test.m3u8"});
+    myPlayer.poster('https://www.undotsushin.com/prg_img/thumbnail1/04.jpg');
+    myPlayer.ima3({
+      debug: true,
+      adTechOrder: [
+        'flash',
+        'html5'
+      ],
+      postrollTimeout: 2000,
+      prerollTimeout: 1000,
+      requestMode: 'onload',
+      serverUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=' + Date.now() + '[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1',
+      timeout: 5000
+    });
+  });
+
+  $('#play').on('click', function() {
+    myPlayer.play();
+    return false;
+  });
+
+  $('#pause').on('click', function() {
+    myPlayer.pause();
+    return false;
+  });
+
+}());
+
+</script>
+
+</body>
+</html>
