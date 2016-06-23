@@ -55,7 +55,7 @@ export class Brightcove {
     return 'default';
   }
   /**
-   * videojs instance 作成に使用します
+   * videojs instance 作成に使用します<br>
    * src.type 値です
    * @return {string} src.type 値を返します
    * @default application/x-mpegURL
@@ -64,16 +64,20 @@ export class Brightcove {
     return 'application/x-mpegURL';
   }
   /**
-   * videojs instance 作成に使用します
-   * requestMode 値です
+   * <p>videojs instance 作成に使用します<br>
+   * requestMode 値です</p>
+   *
+   * <p>Brightcove プレイヤー（Web）の広告タグリクエストタイミング調整 #856</p>
+   * onload -> onplay 変更
    * @return {string} requestMode 値を返します
-   * @default onload
+   * @default onplay
    */
   static get MODE():string {
-    return 'onload';
+    // return 'onload';
+    return 'onplay';
   }
   /**
-   * videojs instance 作成に使用します
+   * videojs instance 作成に使用します<br>
    * postrollTimeout 値です
    * @return {number} postrollTimeout 値を返します
    * @default 2000
@@ -82,7 +86,7 @@ export class Brightcove {
     return 2000;
   }
   /**
-   * videojs instance 作成に使用します
+   * videojs instance 作成に使用します<br>
    * prerollTimeout 値です
    * @return {number} prerollTimeout 値を返します
    * @default 1000
@@ -91,7 +95,7 @@ export class Brightcove {
     return 1000;
   }
   /**
-   * videojs instance 作成に使用します
+   * videojs instance 作成に使用します<br>
    * timeout 値です
    * @return {number} timeout 値を返します
    * @default 5000
