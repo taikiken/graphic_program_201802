@@ -17,7 +17,7 @@ import {Result} from '../../data/Result';
 import {Api} from '../../net/Api';
 
 /**
- * login action
+ * <p>login action</p>
  */
 export class Login extends ActionBehavior {
   /**

@@ -115,8 +115,8 @@ export let BrightcoveNode = React.createClass( {
             width={`${width}px`}
             height={`${height}px`}
             controls
-            ref="video">
-          </video>
+            ref="video"
+          />
           <VideoPlayNode
             playImage={this.props.playImage}
             callback={this.playClick}

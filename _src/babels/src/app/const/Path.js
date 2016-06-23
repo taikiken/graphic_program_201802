@@ -14,15 +14,15 @@
 let _symbol = Symbol();
 
 /**
- * <h3>API URL を正規化します</h3>
+ * <p>API URL を正規化します</p>
  * 全て static です
  */
 export class Path {
   /**
-   * <h4>API Path 定数</h4>
+   * <p>API Path 定数</p>
    * <p>API Path 内で使われる Const 名称を定義します</p>
    * <p>URLを正規化します</p>
-   * <p>static class です, instance を作成しません</P>
+   * <p>static class です, instance を作成しません</p>
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target:Symbol ) {

@@ -32,8 +32,17 @@ export class ThemeDae {
    */
   constructor( theme:Object = {} ) {
     theme = Safety.object( theme );
-
+    /**
+     * response.theme
+     * @type {Object}
+     * @protected
+     */
     this._theme = theme;
+    /**
+     * response.theme.images
+     * @type {ImagesDae}
+     * @protected
+     */
     this._images = new ImagesDae( theme.images );
   }
   // ---------------------------------------------------

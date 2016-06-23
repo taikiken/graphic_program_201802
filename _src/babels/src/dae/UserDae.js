@@ -31,13 +31,39 @@ export class UserDae {
   constructor( user:Object = {} ) {
 
     user = Safety.object( user );
-
+    /**
+     * article.user
+     * @type {Object}
+     * @protected
+     */
     this._user = user;
+    /**
+     * user.type
+     * @type {TypeDae}
+     * @protected
+     */
     this._type = new TypeDae( user.type );
+    /**
+     * user.interest
+     * @type {InterestDae}
+     * @protected
+     */
     this._interest = new InterestDae( user.interest );
     // banner 追加
+    /**
+     * user.banner<br>
+     * 廃止予定！？
+     * @type {BannersDae}
+     * @protected
+     */
     this._banners = new BannersDae( user.banner );
     // from 2016-05-31
+    /**
+     * user.logo
+     * @from 2016-05-31
+     * @type {LogoDae}
+     * @protected
+     */
     this._logo = new LogoDae( user.logo );
   }
   // ---------------------------------------------------

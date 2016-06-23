@@ -17,7 +17,7 @@ let _symbol = Symbol();
  */
 export class Brightcove {
   /**
-   * brightcove videojs 設定初期値
+   * <p>brightcove videojs 設定初期値</p>
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

@@ -30,7 +30,7 @@ export class ModelSocial extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
-    this._action = new Social( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Social( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

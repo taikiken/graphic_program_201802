@@ -44,11 +44,10 @@ let ReactDOM = self.ReactDOM;
 let Polling = self.Gasane.Polling;
 
 /**
- * home > pickup（スライダー）を表示します。
- * <ol>
- *   <li>JSON取得(Ajax)</li>
- *   <li>Dom作成 by React</li>
- * </ol>
+ * <p>home > pickup（スライダー）を表示します。</p>
+ *
+ * 1. JSON取得(Ajax)
+ * 1. Dom作成 by React
  */
 export class ViewPickup extends View {
   /**
@@ -63,7 +62,7 @@ export class ViewPickup extends View {
 
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
-    this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     // this._index = 0;
     this._last = 0;
     this._waiting = 1000 * 5;
@@ -189,8 +188,7 @@ export class ViewPickup extends View {
 
         return (
           <li className={'pager-item pager-' + (p.index - p.length)}>
-            <a href={'#pickup-' + p.index} className="pager-link"
-              onClick={this.handleClick} >{p.index - p.length}</a>
+            <a href={'#pickup-' + p.index} className="pager-link" onClick={this.handleClick} >{p.index - p.length}</a>
           </li>
         );
       },
@@ -218,19 +216,21 @@ export class ViewPickup extends View {
         let onPager = this.props.onPager;
 
         return (
-          <ul className='pager-list'>
+          <ul className="pager-list">
             {
               list.map( function( article ) {
 
                 let dae = new ArticleDae( article );
 
-                return <PickupPagerDom
-                  key={'pager-' + dae.id}
-                  id={String(dae.id)}
-                  index={offset++}
-                  length={length}
-                  onPager={onPager}
-                />;
+                return (
+                  <PickupPagerDom
+                    key={'pager-' + dae.id}
+                    id={String(dae.id)}
+                    index={offset++}
+                    length={length}
+                    onPager={onPager}
+                  />
+                );
 
               } )
             }
@@ -299,7 +299,7 @@ export class ViewPickup extends View {
                */}
               <div className="post-overview">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-                <h2 className='post-heading'>{p.title}</h2>
+                <h2 className="post-heading">{p.title}</h2>
                 <p className="post-date">{p.date}</p>
                 <p className="post-comment-num">{p.commentsCount}</p>
               </div>
@@ -362,20 +362,22 @@ export class ViewPickup extends View {
           // HeadlineDom instance を使い render
           // iteration key は index を使う
           // コンテナを 前後に clone するため article.id が使えない
-          return <PickupDom
-            key={'pickup-' + i}
-            index={i}
-            id={String( dae.id )}
-            slug={dae.category.slug}
-            category={dae.category.label}
-            category2={dae.category2.label}
-            url={dae.url}
-            date={dae.displayDate}
-            title={dae.title}
-            large={large}
-            commentsCount={dae.commentsCount}
-            mediaType={dae.mediaType}
-          />;
+          return (
+            <PickupDom
+              key={'pickup-' + i}
+              index={i}
+              id={String( dae.id )}
+              slug={dae.category.slug}
+              category={dae.category.label}
+              category2={dae.category2.label}
+              url={dae.url}
+              date={dae.displayDate}
+              title={dae.title}
+              large={large}
+              commentsCount={dae.commentsCount}
+              mediaType={dae.mediaType}
+            />
+          );
 
         };
 

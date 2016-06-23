@@ -147,7 +147,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+              <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
               <span className="loading-spinner">&nbsp;</span>
             </div>
           );
@@ -471,7 +471,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           return (
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
-              <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+              <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} alt="" />
               {recommend}
             </figure>
           );
@@ -556,7 +556,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                       />
                       <div className="post-data">
                         <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
-                        <h3 className='post-heading'>{dae.title}</h3>
+                        <h3 className="post-heading">{dae.title}</h3>
                         <p className="post-date">{dae.displayDate}</p>
                         <div className="post-excerpt-text">{dae.description}</div>
                       </div>
@@ -566,7 +566,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                       uniqueId={'comment-' + dae.id}
                       commentsPopular={commentsPopular}
                       total={commentsTotal}
-                      articleId={String(dae.id)} />
+                      articleId={String(dae.id)}
+                    />
                   </div>
                 );
                 // loop end

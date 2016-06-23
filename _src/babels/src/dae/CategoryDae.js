@@ -23,6 +23,11 @@ export class CategoryDae {
    */
   constructor( category:Object = {} ) {
     category = Safety.object( category );
+    /**
+     * article.category
+     * @type {Object}
+     * @protected
+     */
     this._category = category;
   }
   // ---------------------------------------------------

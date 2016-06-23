@@ -23,6 +23,11 @@ export class InterestDae {
    */
   constructor( interest:Object = {} ) {
     interest = Safety.object( interest );
+    /**
+     * response.interest
+     * @type {Object}
+     * @protected
+     */
     this._interest = interest;
   }
   /**

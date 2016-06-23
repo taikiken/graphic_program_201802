@@ -10,7 +10,11 @@
  *
  */
 
-
+/**
+ * Ajax コードステータス: English
+ * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
+ * @private
+ */
 let _en = {
   200: 'OK',
   201: 'Created',
@@ -28,7 +32,11 @@ let _en = {
   500: 'Internal Server Error',
   502: 'Service Unavailable'
 };
-
+/**
+ * Ajax コードステータス: Japanese
+ * @type {{200: string, 201: string, 202: string, 204: string, 400: string, 401: string, 403: string, 404: string, 405: string, 409: string, 415: string, 429: string, 500: string, 502: string}}
+ * @private
+ */
 let _jp = {
   200: '成功',
   201: '新しいリソースを作成した',

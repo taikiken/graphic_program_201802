@@ -348,16 +348,18 @@ export class SPViewComments extends ViewComments {
                 let key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
                 // console.log( 'commentId ' + commentId + ', ' + key );
 
-                return <CommentsParentDom
-                  key={key}
-                  uniqueId={key}
-                  index={index}
-                  articleId={articleId}
-                  commentObject={commentObject}
-                  commentsListType={commentsListType}
-                  total={commentsListDae.total}
-                  user={user}
-                />;
+                return (
+                  <CommentsParentDom
+                    key={key}
+                    uniqueId={key}
+                    index={index}
+                    articleId={articleId}
+                    commentObject={commentObject}
+                    commentsListType={commentsListType}
+                    total={commentsListDae.total}
+                    user={user}
+                  />
+                );
               } )
             }
             <SPCommentAdNode

@@ -152,7 +152,7 @@ export class SPViewHeadLine extends ViewHeadline {
             <a className="post" href={p.url} onClick={this.gaSend}>
               <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(p.mediaType)}</figure>
               <div className="post-data">
-                <h3 className='post-heading'>{p.title}</h3>
+                <h3 className="post-heading">{p.title}</h3>
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
                 <p className="post-date">{p.date}</p>
               </div>
@@ -202,19 +202,21 @@ export class SPViewHeadLine extends ViewHeadline {
                     let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                     // HeadlineDom instance を使い render
-                    return <HeadlineDom
-                      key={'headline-' + dae.id}
-                      index={i}
-                      id={String( dae.id )}
-                      slug={dae.category.slug}
-                      category={dae.category.label}
-                      category2={dae.category2.label}
-                      url={dae.url}
-                      date={dae.displayDate}
-                      title={dae.title}
-                      thumbnail={thumbnail}
-                      mediaType={dae.mediaType}
-                    />;
+                    return (
+                      <HeadlineDom
+                        key={'headline-' + dae.id}
+                        index={i}
+                        id={String( dae.id )}
+                        slug={dae.category.slug}
+                        category={dae.category.label}
+                        category2={dae.category2.label}
+                        url={dae.url}
+                        date={dae.displayDate}
+                        title={dae.title}
+                        thumbnail={thumbnail}
+                        mediaType={dae.mediaType}
+                      />
+                    );
 
                   } )
                 }

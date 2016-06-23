@@ -14,12 +14,12 @@
 let _symbol = Symbol();
 
 /**
- * <h3>コンテンツ属性(attribute)</h3>
+ * <p>コンテンツ属性(attribute)</p>
  * 全て static です
  */
 export class Content {
   /**
-   * コンテンツ属性
+   * <p>コンテンツ属性</p>
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

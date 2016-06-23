@@ -23,6 +23,11 @@ export class StatusDae {
    */
   constructor( status:Object = {} ) {
     status = Safety.object( status );
+    /**
+     * JSON.status
+     * @type {Object}
+     * @protected
+     */
     this._status = status;
   }
   /**

@@ -14,7 +14,7 @@
 let _symbol = Symbol();
 
 /**
- * <h3>Page 遷移 URL</h3>
+ * <p>Page 遷移 URL</p>
  * 全て static です
  * <p>a tag href へハードコードされる URL 定義</p>
  * [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)

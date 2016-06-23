@@ -52,7 +52,7 @@ export class ViewVideos extends View {
     slug = Safety.string( slug, 'all' );
 
     super( element, option );
-    this._action = Widget.video( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    this.action = Widget.video( slug, this.done.bind( this ), this.fail.bind( this ), length );
     this._slug = slug;
     // response.request object を保持する
     this._request = null;
@@ -214,14 +214,14 @@ export class ViewVideos extends View {
 
         return (
           <li className={'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
-            <a href={p.url} className='post' onClick={this.gaSend}>
+            <a href={p.url} className="post" onClick={this.gaSend}>
               <figure className="post-thumb post-thumb-video">
                 <img className="video-thumbnail" src={p.thumbnail} alt={p.title}/>
-                <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} />
+                <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} alt="" />
               </figure>
               <div className="post-data">
                 <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-                <h4 className='post-heading'>{p.title}</h4>
+                <h4 className="post-heading">{p.title}</h4>
                 <p className="post-date">{p.date}</p>
               </div>
             </a>

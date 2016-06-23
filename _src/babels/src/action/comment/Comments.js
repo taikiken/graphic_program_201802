@@ -10,7 +10,6 @@
  *
  */
 
-
 import {OffsetAuth} from '../OffsetAuth';
 
 // app
@@ -28,8 +27,8 @@ import {Safety} from '../../data/Safety';
 let _symbol = Symbol();
 
 /**
- * <h3>コメント一覧<h3>
- * 記事ID, token を使いコメント一覧を取得します
+ * <p>コメント一覧<p>
+ * <p>記事ID, token を使いコメント一覧を取得します</p>
  */
 export class Comments extends OffsetAuth {
   /**
@@ -44,7 +43,6 @@ export class Comments extends OffsetAuth {
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値
    * @param {Number} [length=10] query length 値
-   *
    * */
   constructor( target:Symbol, id:Number, type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.list ) {
     if ( _symbol !== target ) {
@@ -56,6 +54,11 @@ export class Comments extends OffsetAuth {
     type = Safety.string( type, '' );
 
     super( User.token, Api.comment( type ), resolve, reject, offset, length );
+    /**
+     * コメントを取得する記事ID
+     * @type {Number}
+     * @protected
+     */
     this._id = id;
   }
   // ---------------------------------------------------
@@ -64,13 +67,20 @@ export class Comments extends OffsetAuth {
   // reload 追加
   /**
    * **再読み込み**
-   * コメントが送信されたり削除された時に画面を更新するために行います
-   * 先頭(offset=0)から現在読み込まれた位置までを再読み込みします
+   * <p>コメントが送信されたり削除された時に画面を更新するために行います<br>
+   * 先頭(offset=0)から現在読み込まれた位置までを再読み込みします</p>
+   *
+   * <p>読み込み開始時に「再読み込みフラッグ」(this.reloadFlag, this._reload)を true にします</p>
    */
   reload():void {
-    this._reload = true;
+    // this._reload = true;
+    /**
+     * 再読み込みフラッグ
+     * @type {boolean}
+     */
+    this.reloadFlag = true;
     let url = `${Path.article( this._url, this.id )}?offset=0&length=${this.offset}`;
-    this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
+    this.ajax.start( url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
 
   }
   // ---------------------------------------------------

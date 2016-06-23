@@ -16,7 +16,7 @@ import {Api} from '../../net/Api';
 import {Length} from '../../app/const/Length';
 
 /**
- * home 通常記事一覧
+ * <p>home 通常記事一覧</p>
  */
 export class News extends Offset {
   /**
