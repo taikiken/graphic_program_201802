@@ -11,6 +11,7 @@ if(($q->get_dir()==0||$q->get_dir()==1)&&$q->get_file()==0){
 		if(strlen($_POST["o".$f_name])>0){
 			echo rtimg($_OPTION,$_POST["o".$f_name],$IMG,$_POST["o".$f_name],$f_name,$p[$f_name."copy"],$SizeOption,$tugh,0);
 		}elseif(strlen($p[$f_name])>0){
+			echo sprintf("<p style='padding:5px 0;'><a href='/prg_img/raw/%s' target=\"_blank\">オリジナル画像を別ウインドウで表示する</a></p>",$p[$f_name]);
 			echo rtimg($_OPTION,$p[$f_name],$IMG,$p[$f_name],$f_name,$p[$f_name."copy"],$SizeOption,$tugh,0);
 		}
 		//echo sprintf("<div class=\"imgDelete\"><input name=\"d_%s\" type=\"checkbox\" id=\"d_%s\" value=\"1\" ><label for=\"d_%s\">登録されている画像を削除する場合はチェックしてください</label></div>",$f_name,$f_name,$f_name);

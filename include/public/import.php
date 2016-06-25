@@ -144,7 +144,12 @@ function splittime($a,$b){
 	}
 }
 
+function eximg($img1,$img2){
+	return (binary)file_get_contents($img1,FILE_BINARY)===(binary)file_get_contents($img2,FILE_BINARY)?true:false;
+}
+
 function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
+	
 	$size=getimagesize($img_name);
 	if($re_size[0]<$size[0]&&$re_size[1]<$size[1]){
 		$ptage_w=$re_size[0]/$size[0];
@@ -152,7 +157,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 		if($size[0]*$ptage_h<$re_size[0]){
 			$ptg=$ptage_w;
 			$x=0;
-			$y=ceil(($size[1]*$ptg-$re_size[1])/2.5);
+			$y=20;
 		}else{
 			$ptg=$ptage_h;
 			$x=ceil(($size[0]*$ptg-$re_size[0])/2);
@@ -160,22 +165,25 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 		}
 		$sp=array(0,0);
 		$resize=array($size[0]*$ptg+1,$size[1]*$ptg+1);
+		
 	}elseif($re_size[0]>$size[0]&&$re_size[1]>$size[1]){
 		$sp[0]=ceil(($re_size[0]-$size[0])/2);
 		$sp[1]=ceil(($re_size[1]-$size[1])/2);
 		$x=$y=0;
 		$resize=array($size[0],$size[1]);
+
 	}elseif($re_size[0]<=$size[0]){
 		$sp[0]=0;
 		$sp[1]=ceil(($re_size[1]-$size[1])/2);
 		$x=ceil(($size[0]-$re_size[0])/2);
 		$y=0;
 		$resize=array($size[0],$size[1]);
+
 	}else{
 		$sp[0]=ceil(($re_size[0]-$size[0])/2);
 		$sp[1]=0;
 		$x=0;
-		$y=ceil(($size[1]-$re_size[1])/2);
+		$y=20;
 		$resize=array($size[0],$size[1]);
 	}
 	
@@ -186,6 +194,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 	//imagecopymergegray($newImg,$newImg,0,0,0,0,320,370,0);
 	outputImg($newImg,$n_Img,$p);
 }
+
 function makeDefaultImg($filename,$type){
 	if($type=="jpg"){
 		return imagecreatefromjpeg($filename);
@@ -216,7 +225,7 @@ function getfileinfo($i){
 	$s=pathinfo($i);
 	preg_match("/.([0-9]+) /",microtime(),$m);
 	$ext=strtolower($s["extension"]);
-	return array(sprintf("%s%s.%s",date("YmdHis"),$m[1],$ext),$ext);
+	return array(sprintf("%s%s",date("YmdHis"),$m[1]),$ext);
 }
 
 function outimg($oimg){
@@ -228,15 +237,28 @@ function outimg($oimg){
 	
 	$ch=curl_init();
 	curl_setopt($ch,CURLOPT_URL,$oimg);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+	if(preg_match("/https/",$oimg)){
+		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+		curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
+	}
 	$img=curl_exec($ch);
-	file_put_contents(sprintf("%sraw/%s",$imgp,$fl[0]),$img);
-
-	imgDresize(sprintf("%sraw/%s",$imgp,$fl[0]),sprintf("%simg/%s",$imgp,$fl[0]),array(640,400),$fl[1]);
-	imgDresize(sprintf("%sraw/%s",$imgp,$fl[0]),sprintf("%sthumbnail1/%s",$imgp,$fl[0]),array(320,180),$fl[1]);
-	imgDresize(sprintf("%sraw/%s",$imgp,$fl[0]),sprintf("%sthumbnail2/%s",$imgp,$fl[0]),array(150,150),$fl[1]);
+	if(curl_errno($ch))return;
 	
-	return $fl[0];
+	$file=sprintf("%stmp/%s.%s",$imgp,$fl[0],$fl[1]);
+	file_put_contents($file,$img);
+	
+	$size=getimagesize($file);
+	if(preg_match("/jpe?g/",$size["mime"]))$p="jpg";
+	elseif(preg_match("/gif/",$size["mime"]))$p="gif";
+	elseif(preg_match("/png/",$size["mime"]))$p="png";	
+	
+	copy($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p));
+	imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
+	imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
+	imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
+	
+	return sprintf("%s.%s",$fl[0],$p);
 }
 
 function makesql($a,$f){
@@ -269,5 +291,6 @@ function makesql($a,$f){
 		return sprintf("update repo_n set %s where id=%s;",implode(",",$sv),$f);
 	}
 }
+
 
 ?>

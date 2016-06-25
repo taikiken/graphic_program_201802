@@ -191,6 +191,8 @@ function set_advertise($ad,$type){
 	global $ImgPath;
 	
 	$s["vast"]=$ad["vast"];
+	$s["ad_urlpc"]=$ad["ad_urlpc"];
+	$s["ad_urlsp"]=$ad["ad_urlsp"];
 
 	$s["theme"]["base"]=strlen($ad["base"])>0?$ad["base"]:"normal";
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
@@ -253,9 +255,17 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 		
 		if($i==0){
 			$s["vast"]=$ad[$i]["ad_videoid"];
+			$s["ad_urlpc"]=$ad[$i]["ad_pc_videotag"];
+			$s["ad_urlsp"]=$ad[$i]["ad_sp_videotag"];
 		}else{
 			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_videoid"])>0)$s["vast"]=$ad[$i]["ad_videoid"];
 			elseif($ad[$i]["ad_videoflag"]==2)$s["vast"]="";
+			
+			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_pc_videotag"])>0)$s["ad_urlpc"]=$ad[$i]["ad_pc_videotag"];
+			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlpc"]="";
+			
+			if($ad[$i]["ad_videoflag"]==1&&strlen($ad[$i]["ad_sp_videotag"])>0)$s["ad_urlsp"]=$ad[$i]["ad_sp_videotag"];
+			elseif($ad[$i]["ad_videoflag"]==2)$s["ad_urlsp"]="";
 		}
 
 		if($i==1){
@@ -378,7 +388,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["categories"][1]["slug"]=$f["slug2"]; 
 	}
 
-	$s["url"]=sprintf("%s/%s/%s",$domain,"p",$f["id"]);
+	$s["url"]=sprintf("%s/%s/%s/",$domain,"p",$f["id"]);
 
 	$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
 	if($type==0)$s["is_recommend"]=$f["recommend"]==1?true:false;
@@ -401,6 +411,8 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	//$s["media"]["video"]["time"]=s2h($f["d3"]);
 	if($type==1){
 		$s["media"]["video"]["vast"]=$ad["vast"];
+		$s["media"]["video"]["ad_url"]["pc"]=$ad["ad_urlpc"];
+		$s["media"]["video"]["ad_url"]["sp"]=$ad["ad_urlsp"];
 	}
 	
 	$s["user"]=set_userinfo($f,0);
@@ -481,9 +493,9 @@ function set_commentinfo($f,$type,$reply=0){
 		$s["bad"]=(int)$f["bad"];
 		}
 	if($reply===0){
-		$s["url"]=sprintf("%s/%s/%s/comment/%s",$domain,"p",$f["pageid"],$f["id"]);
+		$s["url"]=sprintf("%s/%s/%s/comment/%s/",$domain,"p",$f["pageid"],$f["id"]);
 	}else{
-		$s["url"]=sprintf("%s/%s/%s/comment/%s/%s",$domain,"p",$f["pageid"],$reply,$f["id"]);
+		$s["url"]=sprintf("%s/%s/%s/comment/%s/%s/",$domain,"p",$f["pageid"],$reply,$f["id"]);
 	}
 	//$s["url"]=sprintf("%s/%s/%s/comment/%s%s",$domain,"p",$f["pageid"],$reply==""?"":sprintf("/%s",$reply),$f["id"]);
 	$s["user"]=set_userinfo($f,0);
@@ -550,7 +562,7 @@ function set_activity($f){
 
 	$s["article"]["id"]=$f["pageid"];
 	$s["article"]["title"]=$f["title"];
-	$s["article"]["url"]=sprintf("%s/%s/%s",$domain,"p",$f["pageid"]);
+	$s["article"]["url"]=sprintf("%s/%s/%s/",$domain,"p",$f["pageid"]);
 	
 	return $s;
 }
@@ -820,21 +832,21 @@ function print_json($y,$r){
 	}	
 }
 
-function get_post_for_view($postID){
-	
-	global $articletable;
-	
-	$o=new db;
-	$o->connect();
-	
-	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark(""),sprintf(" and id=%s",$postID)));
-	$o->query($sql);
-	$f=$o->fetch_array();
+function get_contents($url){
+	$ch=curl_init($url);
+	curl_setopt( $ch,CURLOPT_RETURNTRANSFER,TRUE );
+	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+	$response=curl_exec($ch);
+	curl_close($ch);
+	return $response;
+}
 
-	$s=set_articleinfo($f,1);
-	
-	return $s;	
-
+function split_utime($a){
+	global $sv,$sn;
+	$ss=explode(",",str_replace(array(" ","-",":","."),",",$a));
+	for($i=7;$i<=12;$i++){
+		$sv[$sn[]="a".$i]=$ss[$i-7];
+	}
 }
 
 ?>

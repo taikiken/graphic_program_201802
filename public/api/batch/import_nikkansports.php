@@ -107,11 +107,12 @@ for($i=0;$i<count($data);$i++){
 
 		if($s["a_time"]!=$f["a_time"]){
 			if(strlen($s["t30"])>0){
-				$s["img1"]=outimg($s["t30"]);
+				if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 			}else{
 				$s["img1"]="";
 				$s["t1"]="";
 			}
+			unset($s["m1"]);
 			splittime($s["m_time"],$s["a_time"]);
 			$sqla[]=makesql($s,$f["id"]);
 			$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
