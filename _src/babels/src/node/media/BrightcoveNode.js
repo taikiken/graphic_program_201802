@@ -191,8 +191,8 @@ export let BrightcoveNode = React.createClass( {
     // 動画プレイヤー / VASTをPC/SP&APPで分ける #822
     // https://github.com/undotsushin/undotsushin/issues/822
     // @from 2016-06-20
-    let vast = this.iphone ? video.adUrl.sp : video.adUrl.pc;
-    
+    let vast = this.phone ? video.adUrl.sp : video.adUrl.pc;
+
     let ima3 = {
       adTechOrder: [
         'html5'
