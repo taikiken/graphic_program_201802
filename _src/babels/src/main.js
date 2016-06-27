@@ -50,7 +50,7 @@ import {ViewHeaderSearch} from './view/header/ViewHeaderSearch';
 
 import {ViewCategory} from './view/ViewCategory';
 import {ViewSingle} from './view/ViewSingle';
-import {ViewTitle} from './view/ViewTitle';
+// import {ViewTitle} from './view/ViewTitle';
 import {ViewSearch} from './view/ViewSearch';
 import {ViewCommentSingle} from './view/ViewCommentSingle';
 import {ViewFirstVisit} from './view/ViewFirstVisit';
@@ -97,6 +97,9 @@ import {ViewNotifications} from './view/mypage/ViewNotifications';
 import {ViewSettingsIndex} from './view/settings/ViewSettingsIndex';
 import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
 
+// ----------- ga
+import {Ga} from './ga/Ga';
+
 // -------------------------------------
 // sp
 
@@ -124,6 +127,7 @@ import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
 import {SPViewSingle} from './sp/view/SPViewSingle';
 import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
 import {SPViewReadMore} from './sp/view/single/SPViewReadMore';
+import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
 
 // single/comment
 import {SPViewComments} from './sp/view/SPViewComments';
@@ -166,7 +170,7 @@ let UT = {
     View: View,
     ViewCategory: ViewCategory,
     ViewSingle: ViewSingle,
-    ViewTitle: ViewTitle,
+    // ViewTitle: ViewTitle,
     ViewComments: ViewComments,
     ViewSearch: ViewSearch,
     ViewCommentSingle: ViewCommentSingle,
@@ -225,7 +229,8 @@ let UT = {
       SPViewFirstVisit: SPViewFirstVisit,
       single: {
         SPViewSingleHeader: SPViewSingleHeader,
-        SPViewReadMore: SPViewReadMore
+        SPViewReadMore: SPViewReadMore,
+        SPViewSingleRanking: SPViewSingleRanking
       },
       comment: {
         SPViewCommentForm: SPViewCommentForm
@@ -246,7 +251,8 @@ let UT = {
         SPViewBookmarks: SPViewBookmarks
       }
     }
-  }
+  },
+  Ga: Ga
 };
 
 self.UT = UT;

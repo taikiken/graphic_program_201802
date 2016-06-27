@@ -16,12 +16,17 @@ import {Api} from '../../net/Api';
 // import {Path} from '../../app/const/Path';
 
 /**
- * **category 一覧を取得**
- * <p>category action</p>
+ * <p>カテゴリー一覧 - 記事のカテゴリー自体の取得<br>
+ * category 一覧を取得します</p>
+ *
+ * ```
+ * GET
+ * /api/v1/category
+ * ```
  */
 export class Categories extends Action {
   /**
-   * category 一覧を取得します
+   * category 一覧を取得します<br>
    * menu 作成など category 全ての category 一覧が必要な時に使用します
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

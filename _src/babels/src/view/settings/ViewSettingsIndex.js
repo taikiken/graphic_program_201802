@@ -52,7 +52,7 @@ export class ViewSettingsIndex extends View {
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     // callbacks[ Model.RESPONSE_ERROR ] = boundError;
-    this._action = new ModelAccount( callbacks );
+    this.action = new ModelAccount( callbacks );
 
     let status = SettingsStatus.factory();
     status.on( SettingsStatus.ACCOUNT_COMPLETE, this.reload.bind( this ) );

@@ -28,6 +28,9 @@ $MCAPTION_ALLOWED=$s[7];
 $CONTENTS_ALLOWED=$s[8];
 unset($s);
 
+//ウィジェット系ビデオかどうか判定
+$VIDEOTAG[]="eplayer.js";
+
 $file=sprintf("%s/api/ver1/static/media.dat",$SERVERPATH);
 $mediaoption=unserialize(file_get_contents($file));
 

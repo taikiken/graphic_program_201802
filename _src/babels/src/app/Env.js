@@ -15,13 +15,13 @@ let _symbol = Symbol();
 let _mode = 'production';
 
 /**
- * <h3>local test / develop / production を管理します</h3>
- * 全て static<br>
- * 動作モードを設定します<br>
+ * <p>local test / develop / production を管理します</p>
+ * <p>全て static<br>
+ * 動作モードを設定します</p>
  * <pre>
- *    production: 実行モード
- *    develop: 開発モード（ローカルからのテスト）
- *    test: ローカルテストモード
+ * production: 実行モード
+ * develop: 開発モード（ローカルからのテスト）
+ * test: ローカルテストモード
  * </pre>
  */
 export class Env {

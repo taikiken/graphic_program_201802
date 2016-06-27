@@ -47,7 +47,7 @@ export class ViewSingleTitle extends View {
     option = Safety.object( option );
 
     super( element, option );
-    this._action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

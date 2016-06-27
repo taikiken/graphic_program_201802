@@ -19,13 +19,13 @@ import {Result} from '../../data/Result';
 export class ModelComment extends Model {
   /**
    * コメント送信
-   * @param {string} articleId 記事 id
+   * @param {Number} articleId 記事 id
    * @param {FormData} formData comment form FormData
    * @param {Object} [option={}] optional event handler
    */
-  constructor( articleId:string, formData:FormData, option:Object = {} ) {
+  constructor( articleId:Number, formData:FormData, option:Object = {} ) {
     super( option );
-    this._action = new Comment( articleId, formData, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Comment( articleId, formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

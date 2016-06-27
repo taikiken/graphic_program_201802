@@ -15,20 +15,34 @@ import {BannerDae} from './BannerDae';
 import {Safety} from '../../data/Safety';
 
 /**
- * response.user.banner データ
+ * response.user.banner データ<br>
+ * あるいは response.banner
  */
 export class BannersDae {
   /**
-   *
-   * @param {Object} banner response.user.banner
+   * @param {Object} banner response.user.banner あるいは response.banner
    */
   constructor( banner:Object = {} ) {
     banner = Safety.object( banner );
     let pc = Safety.object( banner.pc );
     let sp = Safety.object( banner.sp );
-
+    /**
+     * banner.pc
+     * @type {BannerDae}
+     * @protected
+     */
     this._pc = new BannerDae(pc.text, pc.image, pc.link);
+    /**
+     * banner.sp
+     * @type {BannerDae}
+     * @protected
+     */
     this._sp = new BannerDae(sp.text, sp.image, sp.link);
+    /**
+     * response.user.banner あるいは response.banner
+     * @type {Object}
+     * @protected
+     */
     this._banner = banner;
   }
   /**

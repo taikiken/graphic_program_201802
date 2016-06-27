@@ -1,6 +1,9 @@
 {
   "source": "./src",
   "destination": "./_docs",
+  "access": ["public", "protected", "private"],
+  "autoPrivate": true,
+  "styles": ["./_docs/extension/esdoc_extension.css"],
   "plugins": [
     {
       "name": "esdoc-es7-plugin"

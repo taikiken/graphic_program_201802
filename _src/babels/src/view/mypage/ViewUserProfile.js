@@ -44,7 +44,7 @@ export class ViewUserProfile extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
-    this._action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
   }
   // ---------------------------------------------------
   //  Method

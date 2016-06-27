@@ -410,10 +410,75 @@ img {
       &-inner {}
     }
 
+    &-breadCrumb {
+      width: 100%;
+      height: (80/2)+px;
+      overflow: hidden;
+      background-color: #111;
+
+      ol {
+        list-style: none;
+        width: 100%;
+        height: (80/2)+px;
+        padding-left: perCalc(20);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      li {
+        display: table-cell;
+        height: (80/2)+px;
+        vertical-align: middle;
+
+        a {
+          display: inline-block;
+          @include link-decoration(#666, #666, none, none);
+          font-size: fz(20/2);
+          white-space: nowrap;
+
+          &:after {
+            content: '';
+            @extend .sp-sprite-common;
+            @include sprite( $common-breadcrumb-arrow );
+            display: inline-block;
+            margin-right: (20/2)+px;
+            margin-left: (20/2)+px;
+            font-size: 0;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      li:first-child a {
+
+        &:before {
+          content: '';
+          position: relative;
+          top: -1px;
+          @extend .sp-sprite-common;
+          @include sprite( $common-breadcrumb-home );
+          display: inline-block;
+          margin-right: (10/2)+px;
+          font-size: 0;
+          vertical-align: middle;
+        }
+      }
+
+      li:last-child a {
+        color: #fff;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
     &-pr {
       &-inner {
         display: table;
         padding: (30/2)+px perCalc(30);
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
         background-color: #222;
       }
 
@@ -578,6 +643,7 @@ img {
   .main-sec {
     // width: 710px;
     // padding-top: 30px;
+    word-break: break-all;
   }
 
   .side-sec {
@@ -599,118 +665,118 @@ img {
 // 6. side contents
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
-.side-sec {
-  .sponsor-link {
-    &.nadir {
-      margin-top: 30px;
-    }
-  }
+// .side-sec {
+//   .sponsor-link {
+//     &.nadir {
+//       margin-top: 30px;
+//     }
+//   }
 
-  .app-bnr {
-    margin-top: 30px;
-  }
+//   .app-bnr {
+//     margin-top: 30px;
+//   }
 
-  @at-root {
-    .widget-ranking,
-    .widget-recommend {
-      margin-top: 30px;
+//   @at-root {
+//     .widget-ranking,
+//     .widget-recommend {
+//       margin-top: 30px;
 
-      &.board-small {
-        border-top: none;
-      }
+//       &.board-small {
+//         border-top: none;
+//       }
 
-      &-heading {
-        padding-bottom: 10px;
-        border-bottom: 1px solid $border-primary-color;
+//       &-heading {
+//         padding-bottom: 10px;
+//         border-bottom: 1px solid $border-primary-color;
 
-        &-title, &-ruby {
-          display: inline-block;
-          line-height: 1;
-        }
+//         &-title, &-ruby {
+//           display: inline-block;
+//           line-height: 1;
+//         }
 
-        &-title img {
-          vertical-align: middle;
-        }
+//         &-title img {
+//           vertical-align: middle;
+//         }
 
-        &-ruby {
-          margin-left: 8px;
-          color: $highlight-color;
-          font-weight: bold;
-          font-size: fz(10);
-        }
-      } // .widget-ranking-heading
+//         &-ruby {
+//           margin-left: 8px;
+//           color: $highlight-color;
+//           font-weight: bold;
+//           font-size: fz(10);
+//         }
+//       } // .widget-ranking-heading
 
-      .board-item {
-        border-bottom: none;
-      }
+//       .board-item {
+//         border-bottom: none;
+//       }
 
-      .post {
-        border-bottom: 1px solid $border-primary-color;
+//       .post {
+//         border-bottom: 1px solid $border-primary-color;
 
-        &-thumb {}
-        &-data {}
-        &-category {}
-        &-heading {}
-        &-date {}
-      } //.post
-    } //.widget-ranking, .widget-recommend
+//         &-thumb {}
+//         &-data {}
+//         &-category {}
+//         &-heading {}
+//         &-date {}
+//       } //.post
+//     } //.widget-ranking, .widget-recommend
 
-    .widget-ranking {
-      .post {
-        &-thumb {}
+//     .widget-ranking {
+//       .post {
+//         &-thumb {}
 
-        &-data {
-          float: right;
-          width: 220px;
-          overflow: visible;
-        }
+//         &-data {
+//           float: right;
+//           width: 220px;
+//           overflow: visible;
+//         }
 
-        &-category {
-          position: relative;
-          line-height: 1;
-          margin-bottom: .25em;
+//         &-category {
+//           position: relative;
+//           line-height: 1;
+//           margin-bottom: .25em;
 
-          &:before {
-            content: '';
-            z-index: 999;
-            position: absolute;
-            top: -4px;
-            left: -25px;
-            width: 23px;
-            height: 20px;
-            line-height: 0;
-            background-repeat: no-repeat;
-            background-position: 0 0;
-          }
-        }
-      }
+//           &:before {
+//             content: '';
+//             z-index: 999;
+//             position: absolute;
+//             top: -4px;
+//             left: -25px;
+//             width: 23px;
+//             height: 20px;
+//             line-height: 0;
+//             background-repeat: no-repeat;
+//             background-position: 0 0;
+//           }
+//         }
+//       }
 
-      @for $i from 1 through 5 {
-        .rank#{$i} {
-          .post-category:before {
-            background-image: url(/assets/images/common/side-ranking-icon-num#{$i}.png);
-          }
-        }
-      }
-    } //.widget-ranking
+//       @for $i from 1 through 5 {
+//         .rank#{$i} {
+//           .post-category:before {
+//             background-image: url(/assets/images/common/side-ranking-icon-num#{$i}.png);
+//           }
+//         }
+//       }
+//     } //.widget-ranking
 
-    .widget-recommend {
-      .post {
-        &-thumb {
-          position: relative;
-          width: 125px;
-          height: 70px;
-          background-image: url(/assets/images/common/thumb-noimage-340x150.png);
-          background-size: 125px;
+//     .widget-recommend {
+//       .post {
+//         &-thumb {
+//           position: relative;
+//           width: 125px;
+//           height: 70px;
+//           background-image: url(/assets/images/common/thumb-noimage-340x150.png);
+//           background-size: 125px;
 
-          img {
-            width: 100%;
-          }
-        }
-      }
-    } //.widget-recommend
-  }
-}
+//           img {
+//             width: 100%;
+//           }
+//         }
+//       }
+//     } //.widget-recommend
+//   }
+// }
 
 
 

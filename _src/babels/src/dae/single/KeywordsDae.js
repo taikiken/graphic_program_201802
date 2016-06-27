@@ -23,6 +23,11 @@ export class KeywordsDae {
    * @param {Array} [keywords=[]] keywords 配列
    */
   constructor( keywords:Array<string> = [] ) {
+    /**
+     * 記事キーワード
+     * @type {Array}
+     * @private
+     */
     this._keywords = Safety.array( keywords );
   }
   // ---------------------------------------------------

@@ -19,13 +19,12 @@ let _category = {
 };
 
 /**
- * 各ページのタイトル
+ * <p>各ページのタイトル<br>template PHPでタイトルを出力するので使用しません</p>
  * **未使用**
- * template PHPでタイトルを出力するので使用しません
  */
 export class Title {
   /**
-   * 各ページのタイトル
+   * 各ページのタイトル<br>
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */

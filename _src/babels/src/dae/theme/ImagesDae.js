@@ -29,14 +29,18 @@ export class ImagesDae {
    */
   constructor( images:Object = {} ) {
     images = Safety.object( images );
-
+    /**
+     * response.theme.images
+     * @type {Object}
+     * @protected
+     */
     this._images = images;
   }
   /**
    * response.theme.images
    * @return {Object|*} response.theme.images を返します
    */
-  get images():ImagesDae {
+  get images():Object {
     return this._images;
   }
   /**

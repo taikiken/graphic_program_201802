@@ -15,7 +15,13 @@ import {Safety} from '../data/Safety';
 import {Types} from '../net/Types';
 
 /**
- * Ajax request, POST / PUT / DELETE
+ * <p>Ajax 処理を行います</p>
+ *
+ * <p>GET 以外のリクエスト + 認証 token を行います<br>
+ * Ajax request, POST / PUT / DELETE</p>
+ *
+ * <p>Template Pattern として使用します<br>
+ * 各 Class で extends して下さい</p>
  */
 export class ActionAuthBehavior extends ActionAuth {
   /**
@@ -29,6 +35,11 @@ export class ActionAuthBehavior extends ActionAuth {
    */
   constructor( token:string, types:Types, formData:FormData = null, resolve:Function = null, reject:Function = null, ResultClass = Result ) {
     super( token, types, resolve, reject, ResultClass );
+    /**
+     * 引数 formData を保持します
+     * @type {FormData}
+     * @protected
+     */
     this._data = formData;
   }
   // ---------------------------------------------------
@@ -58,7 +69,7 @@ export class ActionAuthBehavior extends ActionAuth {
   start( method:string = this.method ):void {
 
     method = Safety.string( method, this.method );
-    this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass, this._headers, this._data );
+    this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass, this.headers, this.data );
 
   }
 }

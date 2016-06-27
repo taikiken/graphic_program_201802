@@ -14,9 +14,9 @@
 let _symbol = Symbol();
 
 /**
- * <h3>コメント種類(action)</h3>
- * 全て static です
- * ADD|DELETE|GOOD|BAD があります
+ * <p>コメント種類(action)<br>
+ * ADD|DELETE|GOOD|BAD があります</p>
+ * <p>全て static </p>
  */
 export class ActionType {
   /**

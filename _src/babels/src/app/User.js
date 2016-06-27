@@ -20,8 +20,8 @@ let _symbol = Symbol();
 // let _sign = false;
 
 /**
- * <h3>ユーザー情報を管理します</h3>
- * 全てstaticです
+ * <p>ユーザー情報を管理します</p>
+ * <p>全てstaticです</p>
  */
 export class User {
   /**
@@ -53,7 +53,7 @@ export class User {
 
   }
   /**
-   * sign in / out 状態を表します
+   * sign in / out 状態を表します<br>
    * true: sign in です
    * @param {Boolean} bool sign in / out 状態の真偽値, true: sign in
    */
@@ -74,7 +74,7 @@ export class User {
 
   }
   /**
-   * cookie より user token を取り出します
+   * cookie より user token を取り出します<br>
    * 見つからない時は null になります
    * @return {string|null} token を返します, 見つからない時はnullを返します
    */
@@ -109,7 +109,7 @@ export class User {
     return result;
   }
   /**
-   * ログアウト処理を行います
+   * ログアウト処理を行います<br>
    * token を cookie から削除します
    */
   static logout():void {

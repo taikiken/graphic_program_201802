@@ -28,16 +28,16 @@ export class CommentSingleReply extends CommentSingle {
    */
   constructor( articleId:Number, commentId:Number, replyId:Number, resolve, reject ) {
     super( articleId, commentId, resolve, reject );
+    /**
+     * コメントへの返信 ID
+     * @return {Number}
+     * @protected
+     */
     this._replyId = replyId;
   }
-  /**
-   * 再読み込み
-   */
-  reload():void {
-    this._reload = true;
-    let url = `${Path.reply( Path.comment( Path.article( this._url, this.id ), this.commentId ), this.replyId )}?offset=0&length=${this.offset}`;
-    this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
-  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * コメントへの返信 ID
    * @return {Number|*} コメントへの返信 IDを返します
@@ -51,5 +51,20 @@ export class CommentSingleReply extends CommentSingle {
    */
   get url():string {
     return `${Path.reply( Path.comment( Path.article( this._url, this.id ), this.commentId ), this.replyId )}?offset=${this.offset}&length=${this.length}`;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * 再読み込み
+   */
+  reload():void {
+    /**
+     * 再読み込みフラッグ
+     * @type {boolean}
+     */
+    this.reloadFlag = true;
+    let url = `${Path.reply( Path.comment( Path.article( this._url, this.id ), this.commentId ), this.replyId )}?offset=0&length=${this.offset}`;
+    this._ajax.start( url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
   }
 }

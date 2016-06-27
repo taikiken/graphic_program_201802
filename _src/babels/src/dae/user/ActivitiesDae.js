@@ -35,8 +35,17 @@ export class ActivitiesDae {
       list.push( new ActivityDae( activity ) );
 
     } );
-
+    /**
+     * JSON response
+     * @type {Object}
+     * @protected
+     */
     this._response = response;
+    /**
+     * response.activities を 1件づつ ActivityDae instance にし格納します
+     * @type {Array<ActivityDae>}
+     * @protected
+     */
     this._activities = list;
   }
   /**

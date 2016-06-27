@@ -20,9 +20,12 @@ import {Api} from '../../net/Api';
 export class Social extends Action {
   /**
    * <p>ソーシャル経由のログイン</p>
+   *
+   * <pre>
    * ソーシャルのID、アクセストークンで会員登録の有無を判断。
    * 会員登録されていれば通常のログインと同じユーザ情報を返し、登録されていなければアプリは空で、ウェブはSNSで取得できた情報（name, email, profile_picture, bioのみ）を返す。
-   ※ 以前登録されていたソーシャルのアクセストークンが変わっていれば更新する
+   * ※ 以前登録されていたソーシャルのアクセストークンが変わっていれば更新する
+   * </pre>
    *
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

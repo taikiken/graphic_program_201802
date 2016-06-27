@@ -16,8 +16,8 @@ import {Api} from '../net/Api';
 let _symbol = Symbol();
 
 /**
- * <h3>application 共通項目を管理します</h3>
- * 全て static です
+ * <p>Application 共通項目を管理します</p>
+ * <p>全て static です</p>
  */
 export class App {
   /**
