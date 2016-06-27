@@ -19,7 +19,7 @@ import {Path} from '../../app/const/Path';
 // import {Safety} from '../../data/Safety';
 
 /**
- * コメント詳細
+ * <p>コメント詳細</p>
  */
 export class CommentSingle extends OffsetAuth {
   /**
@@ -31,16 +31,31 @@ export class CommentSingle extends OffsetAuth {
    */
   constructor( articleId:Number, commentId:Number, resolve, reject ) {
     super( User.token, Api.comment( 'single' ), resolve, reject );
+    /**
+     * コメントを取得する記事ID
+     * @type {Number}
+     * @protected
+     */
     this._id = articleId;
+    /**
+     * コメント ID
+     * @type {Number}
+     * @protected
+     */
     this._commentId = commentId;
   }
   /**
    * 再読み込み
    */
   reload():void {
-    this._reload = true;
+    // this._reload = true;
+    /**
+     * 再読み込みフラッグ
+     * @type {boolean}
+     */
+    this.reloadFlag = true;
     let url = `${Path.comment( Path.article( this._url, this.id ), this.commentId )}?offset=0&length=${this.offset}`;
-    this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
+    this.ajax.start( url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

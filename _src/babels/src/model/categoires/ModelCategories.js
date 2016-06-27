@@ -25,12 +25,12 @@ export class ModelCategories extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
-    /**
-     * Action class (Categories) instance を保持します
-     * @type {Categories}
-     * @protected
-     */
-    this._action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
+    // /**
+    //  * Action class (Categories) instance を保持します
+    //  * @type {Categories}
+    //  * @protected
+    //  */
+    this.action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

@@ -28,7 +28,18 @@ export class ReplyDae {
 
     let total = parseInt( reply.count, 10 );
     total = Safety.integer( total, 0 );
+    /**
+     * <p>返信件数</p>
+     * reply.count
+     * @type {Number}
+     * @protected
+     */
     this._total = total;
+    /**
+     * reply.comments
+     * @type {CommentsPopularDae}
+     * @protected
+     */
     this._comments = new CommentsPopularDae( reply.comments );
   }
   // ---------------------------------------------------

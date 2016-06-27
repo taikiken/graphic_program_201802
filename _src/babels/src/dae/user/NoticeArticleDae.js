@@ -25,10 +25,29 @@ export class NoticeArticleDae {
   constructor( article:Object = {} ) {
 
     article = Safety.object( article );
-
+    /**
+     * response.notifications.article
+     * @type {Object}
+     * @protected
+     */
     this._article = article;
+    /**
+     * response.notifications.article.comment
+     * @type {PopularDae}
+     * @protected
+     */
     this._comment = new PopularDae( article.comment );
+    /**
+     * response.notifications.article.comments
+     * @type {PopularDae}
+     * @protected
+     */
     this._comments = new PopularDae( article.comments );
+    /**
+     * response.notifications.article.reply
+     * @type {PopularDae}
+     * @protected
+     */
     this._reply = new PopularDae( article.reply );
 
   }

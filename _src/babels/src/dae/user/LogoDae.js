@@ -25,6 +25,11 @@ export class LogoDae {
    */
   constructor( logo:Object = {} ) {
     logo = Safety.object( logo );
+    /**
+     * response.user.logo
+     * @type {Object}
+     * @protected
+     */
     this._logo = logo;
   }
   /**

@@ -24,6 +24,14 @@ import {Query} from '../net/types/Query';
 // develop mode
 // - IP: 52.69.203.137
 // - HOST: undotsushin.com
+/**
+ * <p>API リクエストの ホストをどこにするかを {@link Env}.mode を元に決定します</p>
+ * <p>本番サーバーでは ホスト名は不要になります</p>
+ *
+ * @return {string} API リクエストの ホストをプロトコル付で返します
+ * @private
+ * @static
+ */
 let apiRoot = () => {
 
   // let n = parseInt( port, 10 );
@@ -62,7 +70,13 @@ let apiRoot = () => {
 };
 // https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
 // API 一覧より
-let buildPath = ( root = '') => {
+/**
+ * API リクエスト先を一元管理します
+ * @param {string} [root=''] '/api/v1' 前につけるプロトコル+ホスト名
+ * @return {Types} {users:add: Types, users:login: Types, users:logout: Types, users:email: Types, auth:sns: Types, auth:fb: Types, auth:tw: Types, categories: Types, home: Types, self: Types, category: Types, search: Types, single: Types, bookmark:add: Types, bookmark:delete: Types, comment: Types, comment:official: Types, comment:normal: Types, comment:self: Types, comment:single: Types, comment:send: Types, comment:reply: Types, comment:reply:reply: Types, comment:send:delete: Types, comment:reply:delete: Types, comment:good:add: Types, comment:good:delete: Types, comment:bad:add: Types, comment:bad:delete: Types, users:self: Types, users:id: Types, users:self:bookmark: Types, users:self:activities: Types, users:self:notifications: Types, users:self:notifications:read: Types, users:self:notifications:count: Types, users:settings:account: Types, users:settings:account:edit: Types, users:settings:interest: Types, users:settings:interest:edit: Types, users:delete: Types} Types instance を返します
+ * @private
+ */
+let buildPath = ( root = '' ) => {
   // 共通パス
   // 先頭 protocol + host 部分を develop / production で変える
   let API_ROOT = root === '' ? apiRoot() : root;
@@ -452,15 +466,24 @@ let buildPath = ( root = '') => {
 };
 
 let _symbol = Symbol();
+/**
+ * API リクエスト先
+ * @type {{users:add, users:login, users:logout, users:email, auth:sns, auth:fb, auth:tw, categories, home, self, category, search, single, bookmark:add, bookmark:delete, comment, comment:official, comment:normal, comment:self, comment:single, comment:send, comment:reply, comment:reply:reply, comment:send:delete, comment:reply:delete, comment:good:add, comment:good:delete, comment:bad:add, comment:bad:delete, users:self, users:id, users:self:bookmark, users:self:activities, users:self:notifications, users:self:notifications:read, users:self:notifications:count, users:settings:account, users:settings:account:edit, users:settings:interest, users:settings:interest:edit, users:delete}|{users: add, : Types, users: add, : Types, users: add, : Types, users: add, : Types, auth: sns, : Types, auth: sns, : Types, auth: sns, : Types, categories: Types, home: Types, self: Types, category: Types, search: Types, single: Types, bookmark: add, : Types, bookmark: add, : Types, comment: Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, comment: Types, : Types, : Types, users: add, : Types, users: add, : Types, users: add, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types, : Types, users: add, : Types, : Types, : Types, users: add, : Types}}
+ * @private
+ */
 let _api = buildPath();
 
 /**
- * <h3>Api 詳細情報</h3>
- * 全てstaticです
- * <hr>
- *  <code>/net/Api</code> が呼び出します。<br>
- *  直接呼び出し使うことは想定されていません。
- *  <p><code>ApiDae.someMethod</code> を実行しなくてはいけない時は関数設計を見直した方が良いでしょう</p>
+ * <p>Api 詳細情報</p>
+ *
+ * <p>全てstaticです</p>
+ *
+ * <p>{@link Api} が呼び出します。<br>
+ * 直接呼び出し使うことは想定されていません。</p>
+ *
+ * <p><code>ApiDae.someMethod</code> を実行しなくてはいけない時は関数設計を見直した方が良いでしょう</p>
+ *
+ * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=986840481
  */
 export class ApiDae {
   /**
@@ -479,9 +502,13 @@ export class ApiDae {
   /**
    * <p>/api/ 前 domain を再生成します<br>
    * develop, production 切り替えに使用します</p>
-   * <p>**注意** 変更の必要がある時は
-   * <code>App.develop(), App.production()</code>
-   * を使用してください</p>
+   * <p>**注意** 変更の必要がある時は {@link App} 関数を使用してください</p>
+   *
+   * 開発環境<br>
+   * <code>App.develop()</code>
+   *
+   * 本番環境<br>
+   * <code>App.production()</code>
    *
    * @param {string} [root=''] リクエスト・ドメイン
    */

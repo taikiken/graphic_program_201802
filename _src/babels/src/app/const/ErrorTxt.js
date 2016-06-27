@@ -14,13 +14,13 @@
 let _symbol = Symbol();
 
 /**
- * <h3>エラー文言</h3>
- * 全て static const で管理しています
- * form validation で使用します
+ * <p>エラー文言<br>
+ * form validation で使用します</p>
+ * <p>全て static const で管理しています</p>
  */
 export class ErrorTxt {
   /**
-   * <h4>エラーメッセージ</h4>
+   * <p>エラーメッセージ</p>
    * <p>エラーメッセージを定義します</p>
    * <p>static class です, instance を作成しません</P>
    * @param {Symbol} target Singleton を実現するための private symbol

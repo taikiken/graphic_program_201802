@@ -62,7 +62,7 @@ export class ViewComments extends View {
     // console.log( 'commentsType', commentsType );
 
     super( element, option );
-    this._action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
     this._articleId = id;
     this._commentsListType = commentsType;
     /**
@@ -523,16 +523,18 @@ export class ViewComments extends View {
                 let key = `${index}-${commentsListType}-${articleId}-${commentId}-${userId}`;
                 // console.log( 'commentId ' + commentId + ', ' + key );
 
-                return <CommentsParentDom
-                  key={key}
-                  uniqueId={key}
-                  index={index}
-                  articleId={articleId}
-                  commentObject={commentObject}
-                  commentsListType={commentsListType}
-                  total={commentsListDae.total}
-                  user={user}
-                />;
+                return (
+                  <CommentsParentDom
+                    key={key}
+                    uniqueId={key}
+                    index={index}
+                    articleId={articleId}
+                    commentObject={commentObject}
+                    commentsListType={commentsListType}
+                    total={commentsListDae.total}
+                    user={user}
+                  />
+                );
               } )
             }
             <div className="comment-more" ref="commentMore"></div>

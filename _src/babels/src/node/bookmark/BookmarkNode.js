@@ -63,10 +63,10 @@ export let BookmarkNode = React.createClass( {
       return (
         <div className="f-right">
           <div className={this.state.loading + ' loading-root btn-bookmark'}>
-            <a href="#" className={this.state.bookmarked} onClick={this.clickBookmark} ref='bookmarked'>
+            <a href="#" className={this.state.bookmarked} onClick={this.clickBookmark} ref="bookmarked">
               <span>{this.state.status ? Message.BOOKMARK_DID : Message.BOOKMARK_WILL}</span>
             </a>
-            <div className='loading-spinner'></div>
+            <div className="loading-spinner"></div>
           </div>
         </div>
       );

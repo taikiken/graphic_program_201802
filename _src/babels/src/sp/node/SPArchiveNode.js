@@ -288,7 +288,7 @@ let ThumbnailDom = React.createClass( {
       return (
         <figure className={'post-thumb post-thumb-' + mediaType}>
           <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
-          <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+          <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} alt="" />
         </figure>
       );
     } else {
@@ -377,7 +377,7 @@ export let SPArchiveNode = React.createClass( {
                       thumbnail={thumbnail}
                       title={dae.title}
                     />
-                    <h2 className='post-heading'>{dae.title}</h2>
+                    <h2 className="post-heading">{dae.title}</h2>
                     <div className="post-data">
                       {recommend}
                       <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
@@ -390,7 +390,8 @@ export let SPArchiveNode = React.createClass( {
                     uniqueId={'comment-' + dae.id}
                     commentsPopular={commentsPopular}
                     total={commentsTotal}
-                    articleId={String(dae.id)} />
+                    articleId={String(dae.id)}
+                  />
                 </div>
                 <SPNewsAdNode
                   key={'ad-' + type + '-' + dae.id}

@@ -32,10 +32,17 @@ export class PopularDae {
       this._formatDate = Format.date( comment.date );
 
     }
-
-    // comments_popular.user
+    /**
+     * comments_popular.user
+     * @type {UserDae}
+     * @protected
+     */
     this._user = new UserDae( comment.user );
-    // property
+    /**
+     * response.comment
+     * @type {Object}
+     * @protected
+     */
     this._comment = comment;
 
   }

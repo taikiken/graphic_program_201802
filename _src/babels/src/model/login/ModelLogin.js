@@ -27,7 +27,7 @@ export class ModelLogin extends ModelBehavior {
    */
   constructor( formData:FormData, option:Object = {} ) {
     super( formData, option );
-    this._action = new Login( formData, this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Login( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

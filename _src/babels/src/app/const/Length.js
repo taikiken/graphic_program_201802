@@ -27,9 +27,9 @@ let _max = 999;
 let _interval = 1000 * 60;
 
 /**
- * <h3>offset length default value</h3>
- * 全て static です
- * Ajax request 時の query, length の default value です
+ * <p>offset length default value<br>
+ * Ajax request 時の query, length の default value です</p>
+ * <p>全て static です</p>
  */
 export class Length {
   /**
@@ -107,6 +107,17 @@ export class Length {
     } else {
       throw new Error( `ranking: integer required. ${value}` );
     }
+  }
+
+  // sp single ranking
+  /**
+   * SP, 記事詳細「人気記事」表示件数<br>
+   * default: 10
+   * @from 2016-06-16
+   * @return {number} SP, 記事詳細「人気記事」表示件数を返します
+   */
+  static get spRanking():Number {
+    return 10;
   }
   // --- video
   /**

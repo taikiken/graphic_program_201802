@@ -41,9 +41,29 @@ export class CategoriesDae {
 
     } );
 
+    /**
+     * JSON response
+     * @type {Object}
+     * @protected
+     */
     this._response = response;
+    /**
+     * response.categories
+     * @type {Array<SlugDae>}
+     * @protected
+     */
     this._categories = categories;
+    /**
+     * response.categories を 1件づつ SlugDae instance にし格納します
+     * @type {Array<SlugDae>}
+     * @protected
+     */
     this._cats = cats;
+    /**
+     * category slug をキーに SlugDae instance を格納します
+     * @type {Object}
+     * @protected
+     */
     this._bank = bank;
 
   }

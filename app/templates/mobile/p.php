@@ -101,7 +101,7 @@
                 // link が存在しないので画像だけ表示します ?>
                 <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
               <?php else: // link + image を表示 ?>
-                <a href="<?php echo $post_user_logo_link; ?>" target="_blank"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
+                <a href="<?php echo $post_user_logo_link; ?>" target="_blank" onclick="UT.Ga.click('provider-logo', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>');"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
               <?php endif; ?>
             <?php endif; //----[image] ?>
             <div class="provider-data">
@@ -114,7 +114,7 @@
               // user.logo.link
               // link が存在する時のみ表示します
               if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
-                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank">ウェブサイト</a></p>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank" onclick="UT.Ga.click('provider-logo', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>');">ウェブサイト</a></p>
               <?php endif; //----[link] ?>
             </div>
           </div><!-- /.provider -->
@@ -176,26 +176,6 @@
 
       <div class="comment">
 
-        <?php
-        /*
-         * https://github.com/undotsushin/undotsushin/issues/720
-         * 広告 / PC版画像バナー広告をDFP管理下にする
-         */
-        // ------------------------------------
-        if ( $page['ad']['sp'] ) :
-        ?>
-        <div class="sponsor-link_commentUpper">
-          <?php
-          /*
-           # 保険のために original を残します
-           # ToDo: いつか削除
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-          */ ?>
-          <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
-        </div>
-        <?php endif; ?>
-
-
         <div id="comment-form-container"></div>
 
         <div id="comment-self-container"></div>
@@ -204,7 +184,30 @@
 
         <div id="comment-normal-container"></div>
 
+        <?php
+        /*
+         * https://github.com/undotsushin/undotsushin/issues/720
+         * 広告 / PC版画像バナー広告をDFP管理下にする
+         */
+        // ------------------------------------
+        if ( $page['ad']['sp'] ) :
+          ?>
+          <div class="sponsor-link_commentLower">
+            <?php
+            /*
+             # 保険のために original を残します
+             # ToDo: いつか削除
+            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35245&targetID=adg_35245&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+            */ ?>
+            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
+          </div>
+        <?php endif; ?>
+
+
       </div><!-- /.comment -->
+
+      <div id="widget-ranking-container"></div><!--/ranking-->
+
       <!-- #310 popin ebmed code  -->
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
