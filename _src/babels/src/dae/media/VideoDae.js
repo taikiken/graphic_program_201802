@@ -12,6 +12,7 @@
 
 import {Safety} from '../../data/Safety';
 import {UrlDae} from './UrlDae';
+import {AdUrl} from './AdUrl';
 
 /**
  * article.media.video
@@ -35,6 +36,13 @@ export class VideoDae {
      * @protected
      */
     this._url = new UrlDae( video.url );
+    /**
+     * article.media.video.add_url
+     * @type {AdUrl}
+     * @private
+     * @from 2016-06-20
+     */
+    this._adUrl = new AdUrl( video.ad_url );
   }
   /**
    * article.media.video
@@ -88,16 +96,24 @@ export class VideoDae {
   // add 2016-05-20
   /**
    * https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=2055838625
-   * 動画タイプが `brightcove` の場合で、動画広告ある場合は表示する動画広告の内容が記載されたVASTのパスが設定されます
-   * 空の場合は広告なしということです。
+   * <p>動画タイプが `brightcove` の場合で、動画広告ある場合は表示する動画広告の内容が記載されたVASTのパスが設定されます<br>
+   * 空の場合は広告なしということです。</p>
    *
-   *  http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page=
+   * http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page=
    *
-   * 記事詳細のみ、vastが存在します。
+   * <p>記事詳細のみ、vastが存在します。</p>
    *
    * @return {string} 動画広告用VASTタグのパス
    */
   get vast():string {
     return Safety.string( this.video.vast, '' );
+  }
+  /**
+   * article.media.video.add_url
+   * @from 2016-06-20
+   * @return {AdUrl} article.media.video.add_url を AdUrl instance にし返します
+   */
+  get adUrl():AdUrl {
+    return this._adUrl;
   }
 }

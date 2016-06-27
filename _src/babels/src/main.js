@@ -97,6 +97,9 @@ import {ViewNotifications} from './view/mypage/ViewNotifications';
 import {ViewSettingsIndex} from './view/settings/ViewSettingsIndex';
 import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
 
+// ----------- ga
+import {Ga} from './ga/Ga';
+
 // -------------------------------------
 // sp
 
@@ -248,7 +251,8 @@ let UT = {
         SPViewBookmarks: SPViewBookmarks
       }
     }
-  }
+  },
+  Ga: Ga
 };
 
 self.UT = UT;

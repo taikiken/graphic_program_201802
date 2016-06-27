@@ -45,7 +45,6 @@ export class SPViewSingleVisual extends ViewSingleHeader {
    * @param {SingleDae} singleDae JSON 変換済みデータ
    */
   render( singleDae:SingleDae ):void {
-
     ReactDOM.render(
       <SPMediaNode
         articleId={String(singleDae.id)}
