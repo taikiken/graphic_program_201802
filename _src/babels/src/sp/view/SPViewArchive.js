@@ -36,7 +36,7 @@ import {SPMoreViewNode} from '../node/SPMoreViewNode';
 let ReactDOM = self.ReactDOM;
 
 /**
- * archive 一覧標示
+ * <p><strong>SP</strong>: archive 一覧標示</p>
  */
 export class SPViewArchive extends View {
   /**
@@ -53,7 +53,12 @@ export class SPViewArchive extends View {
     super( element, option );
 
     if ( typeof ActionClass === 'function' ) {
-      this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+      /**
+       * Action instance を設定します
+       * @override
+       * @type {*}
+       */
+      this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     }
     /**
      * more button root element
@@ -134,9 +139,17 @@ export class SPViewArchive extends View {
     return this._slug;
   }
 
+  /**
+   * 取得記事(articles)をArticleDae instance を格納した配列を取得します
+   * @return {Array.<ArticleDae>|Array.<Object>|*} 取得記事(articles)をArticleDae instance を格納した配列を返します
+   */
   get articles():Array<Object> {
     return this._articles;
   }
+  /**
+   * 取得記事(articles)をArticleDae instance を格納した配列を設定します
+   * @param {Array<Object>} responseArticles 取得記事(articles)をArticleDae instance を格納した配列
+   */
   set articles( responseArticles:Array<Object> ):void {
     this._articles = responseArticles;
   }
@@ -222,125 +235,6 @@ export class SPViewArchive extends View {
     // sequence な index のために必要
     let prevLast = this._articles.length;
 
-    // let _this = this;
-
-    // SPMoreViewNode と機能が重複していたので統合します
-    // ToDo: 問題ないと確認できれば削除します
-    // // ------------------------------------------------
-    // let SPMoreViewDom = React.createClass( {
-    //   propTypes: {
-    //     show: React.PropTypes.bool.isRequired,
-    //     action: React.PropTypes.object.isRequired,
-    //     loading: React.PropTypes.string,
-    //     // ga のため追加
-    //     home: React.PropTypes.bool.isRequired,
-    //     slug: React.PropTypes.string.isRequired
-    //   },
-    //   getDefaultProps: function() {
-    //     return {
-    //       loading: ''
-    //     };
-    //   },
-    //   getInitialState: function() {
-    //     /**
-    //      * @private
-    //      * @type {number}
-    //      */
-    //     this.page = 1;
-    //
-    //     return {
-    //       disable: false,
-    //       show: this.props.show,
-    //       loading: this.props.loading
-    //     };
-    //   },
-    //   render: function() {
-    //
-    //     // hasNext: true, button を表示する？
-    //     if ( this.state.show ) {
-    //
-    //       return (
-    //         <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-    //           <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
-    //           <span className="loading-spinner">&nbsp;</span>
-    //         </div>
-    //       );
-    //
-    //     } else {
-    //
-    //       // button 表示なし
-    //       return (
-    //         <div className="no-more"></div>
-    //       );
-    //
-    //     }
-    //
-    //   },
-    //   // componentDidMount: function() {
-    //   // },
-    //   componentWillUnmount: function() {
-    //     // unmount 時に rise 破棄を行う
-    //     this.destroy();
-    //   },
-    //   // -----------------------------------------
-    //   // button 関連 custom method
-    //   // rise 関連 event を破棄する
-    //   destroy: function() {
-    //   },
-    //   // 緊急用, button click を残す
-    //   handleClick: function( event:Event ) {
-    //     event.preventDefault();
-    //
-    //     this.onRise();
-    //   },
-    //   // button 表示・非表示
-    //   updateShow: function( show:Boolean ) {
-    //
-    //     this.setState( { show: show, loading: '' } );
-    //
-    //   },
-    //   // Rise.RISE event handler
-    //   // 次 offset JSON を取得する
-    //   onRise: function() {
-    //     this.updateLoading( true );
-    //   },
-    //   // loading 表示 on / off
-    //   // on: true, off: false
-    //   updateLoading: function( loading:Boolean = false ) {
-    //
-    //     let loadingClass = '';
-    //     if ( loading ) {
-    //
-    //       // loading 中は監視を止める
-    //       loadingClass = ' loading';
-    //       this.props.action.next();
-    //
-    //       // ga
-    //       if (this.props.home) {
-    //         this.gaHome();
-    //       } else {
-    //         this.gaCategory();
-    //       }
-    //     }
-    //
-    //     // loading 表示のための css class を追加・削除
-    //     this.setState( {loading: loadingClass} );
-    //
-    //   },
-    //   gaHome: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('SPViewArchive.render.SPMoreViewDom.gaHome', 'home_articles', 'view - new', String(++this.page)) );
-    //     // ----------------------------------------------
-    //   },
-    //   gaCategory: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('SPViewArchive.render.SPMoreViewDom.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
-    //     // ----------------------------------------------
-    //   }
-    // } );
-
     // ------------------------------------------------
     let moreButton = ( show:Boolean ):void => {
       show = !!show;
@@ -348,12 +242,6 @@ export class SPViewArchive extends View {
       if ( this._moreRendered === null ) {
         // チェックをパスし実行する
         this._moreRendered = ReactDOM.render(
-          // <SPMoreViewDom
-          //   show={show}
-          //   action={this.action}
-          //   home={this.home}
-          //   slug={this.slug}
-          // />,
           <SPMoreViewNode
             show={show}
             action={this.action}

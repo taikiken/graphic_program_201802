@@ -12,16 +12,17 @@
 
 
 /**
- * Ajax 結果を成功時に保存します
- * success event handler で結果(Result instance)を受け取れます<br>
+ * <p>Ajax 結果を成功時に保存します<br>
+ * success event handler で結果(Result instance)を受け取れます</p>
  *
- * @example
+ * ```
  * let success = (result) => {
  *   // response section 取得
  *   response.response
  *   // status section 取得
  *   response.status
  * }
+ * ```
  * */
 export class Result {
   /**
@@ -30,37 +31,35 @@ export class Result {
    * @param {{status: *, response: *}} json json パース後データ
    */
   constructor( json ) {
-
+    /**
+     * json パース後データ
+     * @type {{status: *, response: *}}
+     * @protected
+     */
     this._json = json;
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
    * parsed JSON プロパティ
-   * @return {*} パース済みJSON(Object)を返します
+   * @return {Object} パース済み JSON(Object) を返します
    */
   get data():Object {
-
     return this._json;
-
   }
   /**
    * 取得 JSON response section
    * @return {Object|undefined} 取得 JSON response section を返します、見つからない時は undefined を返します
    */
   get response():Object {
-
     return this.data.response;
-
   }
   /**
    * 取得 JSON response.articles
    * @return {Array|undefined} 取得 JSON response.articles を返します、見つからない時は undefined を返します
    */
   get articles():Array {
-
     let response = this.response;
     let articles;
     // response.articles を調べる
@@ -68,31 +67,24 @@ export class Result {
     // 2. response に articles key が存在する
     // 3. response.articles が配列
     if ( !!response && response.hasOwnProperty( 'articles' ) && Array.isArray( response.articles ) ) {
-
       articles = response.articles;
-
     }
 
     return articles;
-
   }
   /**
    * 取得 JSON response.count
    * @return {Number|undefined} 取得 JSON response.articles を返します、見つからない時は undefined を返します
    */
   get total():Number {
-
     let response = this.response;
     let total;
 
     if ( !!response && response.hasOwnProperty( 'count' ) ) {
-
       total = parseInt( response.count, 10 );
-
     }
 
     return total;
-
   }
   /**
    * alias total, 取得 JSON response.count
@@ -106,17 +98,13 @@ export class Result {
    * @return {{code: Number, user_massage: string,developer_message: string}|undefined} response.status を返します、見つからない時は undefined を返します
    */
   get status():Object {
-
     return this.data.status;
-
   }
   /**
    * request offset, length を返します
    * @return {{offset: Number, length: Number}|undefined} 取得 JSON request section を返します、見つからない時は undefined を返します
    */
   get request():Object {
-
     return this.data.request;
-
   }
 }

@@ -13,7 +13,6 @@
 
 // view
 import {View} from './View';
-// import {ViewError} from './error/ViewError';
 import {ViewRelated} from './single/ViewRelated';
 import {ViewSingleHeader} from './single/ViewSingleHeader';
 import {ViewSingleFooter} from './single/ViewSingleFooter';
@@ -24,32 +23,30 @@ import {SingleAuth} from '../action/single/SingleAuth';
 // data
 import {Result} from '../data/Result';
 import {Safety} from '../data/Safety';
-
 // dae
 import {SingleDae} from '../dae/SingleDae';
 import {CategoriesDae} from '../dae/caegories/CategoriesDae';
 import {SlugDae} from '../dae/caegories/SlugDae';
-
 // app
 import {Dom} from '../app/Dom';
 import {User} from '../app/User';
 import {Message} from '../app/const/Message';
-
 // ga
 import {GaData} from '../ga/GaData';
 import {Ga} from '../ga/Ga';
 
 /**
- * 記事詳細
+ * <p>記事詳細</p>
+ * 記事ID で 記事詳細JSONを取得し表示します
  *
- * @example
+ * ```
  * let elements = {}
  *  related: document.getElementById('related'),
  *  footer: document.getElementById('footer')
  * }
  * let single = new ViewSingle( articleId, element, elements );
  * single.start();
- *
+ * ```
  */
 export class ViewSingle extends View {
   /**
@@ -67,7 +64,11 @@ export class ViewSingle extends View {
     super( element, option );
 
     let ActionClass = User.sign ? SingleAuth : Single;
-
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {SingleAuth|Single}
+     */
     this.action = new ActionClass( id, this.done.bind( this ), this.fail.bind( this ) );
     /**
      * footer, related 挿入位置 Element を設定した Object
@@ -75,29 +76,32 @@ export class ViewSingle extends View {
      * @protected
      */
     this._elements = elements;
-    //
-    // /**
-    //  * 記事Id
-    //  * @type {number}
-    //  * @protected
-    //  */
-    // this._articleId = id;
-
-    // mount event handler
+    /**
+     * <p>mount event handler</p>
+     * <p>bind 済み this.headerMount</p>
+     * @type {Function}
+     * @protected
+     */
     this._boundMount = this.headerMount.bind( this );
-    // related instance
+    /**
+     * related instance
+     * @type {null|Object}
+     * @protected
+     */
     this._viewRelated = null;
-    // header instance
+    /**
+     * header instance
+     * @type {null|Object}
+     * @protected
+     */
     this._header = null;
-    // footer instance
+    /**
+     * footer instance
+     * @type {null|Object}
+     * @protected
+     */
     this._footer = null;
   }
-  // // ---------------------------------------------------
-  // //  GETTER / SETTER
-  // // ---------------------------------------------------
-  // get articleId():number {
-  //   return this._articleId;
-  // }
   // ---------------------------------------------------
   //  METHODS
   // ---------------------------------------------------

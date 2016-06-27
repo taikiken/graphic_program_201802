@@ -25,11 +25,35 @@ export class Rise extends EventDispatcher {
    */
   constructor( element:Element, offset:Number = 0 ) {
     super();
-
+    /**
+     * 対象 element
+     * @type {Element}
+     * @private
+     */
     this._element = element;
+    /**
+     * 減産数値
+     * @type {Number}
+     * @private
+     */
     this._offset = offset;
+    /**
+     * getBoundingClientRect を取得するために 引数 element から Offset instance を作成します
+     * @type {Offset}
+     * @private
+     */
     this._dom = new Offset( element );
+    /**
+     * bind 済み this.onScroll
+     * @type {Function}
+     * @private
+     */
     this._boundScroll = this.onScroll.bind( this );
+    /**
+     * Scroll instance
+     * @type {Scroll}
+     * @private
+     */
     this._scroll = Scroll.factory();
   }
 

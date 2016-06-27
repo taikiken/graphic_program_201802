@@ -27,23 +27,14 @@ export class ModelUserDetect extends ModelBehavior {
    * @param {Object} [option={}] optional event handler
    */
   constructor( formData:FormData = null, option:Object = {} ) {
-    // super( option );
     super( formData, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {UserDetect}
+     */
     this.action = new UserDetect( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
-  // /**
-  //  * @return {FormData|*} 設定された FormData を返します
-  //  */
-  // get data():FormData {
-  //   return this._action.data;
-  // }
-  // /**
-  //  * FormData を設定します
-  //  * @param {FormData} formData 設定する FormData
-  //  */
-  // set data( formData:FormData ):void {
-  //   this._action.data = formData;
-  // }
   /**
    * Ajax request を開始します
    */

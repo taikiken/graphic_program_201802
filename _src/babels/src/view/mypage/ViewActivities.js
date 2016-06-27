@@ -42,7 +42,17 @@ export class ViewActivities extends View {
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Activities}
+     */
     this.action = new Activities( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * more button root element, 'View More'
+     * @type {Element}
+     * @private
+     */
     this._moreElement = moreElement;
 
     /**
@@ -51,12 +61,24 @@ export class ViewActivities extends View {
      * @private
      */
     this._articles = [];
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
+    /**
+     * <p>ArticleDom instance を保持します</p>
+     * <p>first render を区別するためにも使用します</p>
+     * @type {null|Object}
+     * @private
+     */
     this._articleRendered = null;
-    // more button instance を保持します
+    /**
+     * more button instance を保持します
+     * @type {null|Object}
+     * @private
+     */
     this._moreRendered = null;
-    // response.request object を保持する
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @private
+     */
     this._request = null;
   }
   // ---------------------------------------------------

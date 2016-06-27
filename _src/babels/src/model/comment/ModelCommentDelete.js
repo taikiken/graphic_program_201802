@@ -27,6 +27,11 @@ export class ModelCommentDelete extends Model {
    */
   constructor( articleId:Number, commentId:Number, option:Object = {} ) {
     super( option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {CommentDelete}
+     */
     this.action = new CommentDelete( articleId, commentId, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

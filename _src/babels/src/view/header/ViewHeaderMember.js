@@ -58,22 +58,73 @@ export class ViewHeaderMember extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {UsersSelf}
+     */
     this.action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * SettingDom instance
+     * @type {null|Object}
+     * @private
+     */
     this._component = null;
     // SettingsStatus complete を listen しリロードする
+    /**
+     * SettingsStatus instance
+     * @type {null}
+     * @private
+     */
     this._settingStatus = null;
+    /**
+     * bind 済み this.onComplete
+     * @type {Function}
+     * @private
+     */
     this._boundComplete = this.onComplete.bind( this );
-
-    this._reload = false;
+    /**
+     * リロードフラッグ
+     * @type {Boolean}
+     * @protected
+     */
+    this._reloadFlag = false;
+    /**
+     * timeout ID
+     * @type {number}
+     * @private
+     */
     this._timer = 0;
+    /**
+     * bind 済み this.reload
+     * @type {Function}
+     * @private
+     */
     this._boundReload = this.reload.bind( this );
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * SettingDom instance
-   * @return {null|*} SettingDom instance を返します
+   * @return {null|Object} SettingDom instance を返します
    */
-  get component() {
+  get component():Object {
     return this._component;
+  }
+  /**
+   * SettingDom instance を設定します
+   * @param {Object} component SettingDom instance
+   */
+  set component( component:Object ):void {
+    this._component = component;
+  }
+  /**
+   * ViewLogoutModal インスタンスを取得します
+   * @return {ViewLogoutModal|*} ViewLogoutModal インスタンスを返します
+   */
+  get model():ViewLogoutModal {
+    return this._modal;
   }
   /**
    * ViewLogoutModal インスタンスを設定します
@@ -82,6 +133,23 @@ export class ViewHeaderMember extends View {
   set modal( modal:ViewLogoutModal ):void {
     this._modal = modal;
   }
+  /**
+   * リロードフラッグ を取得します
+   * @return {Boolean} リロードフラッグを返します
+   */
+  get reloadFlag():Boolean {
+    return this._reloadFlag;
+  }
+  /**
+   * リロードフラッグを設定します
+   * @param {Boolean} flag リロードフラッグ
+   */
+  set reloadFlag( flag:Boolean ):void {
+    this._reloadFlag = flag;
+  }
+  // ---------------------------------------------------
+  //  Method
+  // ---------------------------------------------------
   /**
    * Ajax request を開始します
    */
@@ -189,20 +257,6 @@ export class ViewHeaderMember extends View {
       render: function() {
 
         let userName = this.state.userName;
-        /*
-        let icon = this.state.icon;
-        if ( !icon ) {
-          icon = Empty.USER_EMPTY;
-        } else if ( !Safety.isImg( icon ) ) {
-          // 画像ファイル名に拡張子がないのがあったので
-          // 拡張子チェックを追加
-          if ( !Safety.isGraph( icon ) ) {
-            icon = Empty.USER_EMPTY;
-          }
-        }
-
-        let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
-        */
         let icon = Safety.image( this.state.icon, Empty.USER_EMPTY );
         let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
@@ -241,25 +295,6 @@ export class ViewHeaderMember extends View {
         let noticeNode = ReactDOM.findDOMNode(this.refs.notice);
         let notice = new ViewHeaderMemberNotice( noticeNode );
         notice.start();
-
-        // console.log( '*** header member componentDidMount ', this.modal );
-        /*
-        if ( this.modal === null ) {
-          let modal;
-
-          if ( _this._modal !== null && typeof _this._modal !== 'undefined' ) {
-            modal = _this._modal;
-          } else {
-            _this._modal = {};
-            modal = _this._modal;
-          }
-
-          this.modal = modal;
-          modal.yes = this.callbackOk;
-          modal.no = this.callbackCancel;
-          modal.start();
-        }
-        */
 
         this.commentStatus.on( CommentStatus.COMMENT_DELETE_MODAL_OPEN, this.otherModalOpen );
       },
@@ -372,20 +407,20 @@ export class ViewHeaderMember extends View {
 
     // --------------------------------------------------
     // when reload
-    if ( this._reload ) {
-      this._reload = false;
+    if ( this.reloadFlag ) {
+      this.reloadFlag = false;
       clearTimeout( this._timer );
       this._timer = setTimeout( this._boundReload, 1000 );
     }
     // --------------------------------------------------
     // user root
-    if ( this._component === null ) {
-      this._component = ReactDOM.render(
+    if ( this.component === null ) {
+      this.component = ReactDOM.render(
         <SettingDom icon={dae.profilePicture} userName={dae.userName} />,
         this.element
       );
     } else {
-      this._component.updateUser( dae.profilePicture, dae.userName );
+      this.component.updateUser( dae.profilePicture, dae.userName );
     }
 
   }
@@ -417,7 +452,7 @@ export class ViewHeaderMember extends View {
     // 再読み込み
     // console.log( 'SettingsStatus.ACCOUNT_COMPLETE reload' );
     clearTimeout( this._timer );
-    this._reload = true;
+    this.reloadFlag = true;
     this.start();
   }
 

@@ -52,9 +52,24 @@ export class ViewVideos extends View {
     slug = Safety.string( slug, 'all' );
 
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Videos}
+     */
     this.action = Widget.video( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    /**
+     * category slug
+     * @type {string}
+     * @private
+     * @default all
+     */
     this._slug = slug;
-    // response.request object を保持する
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @private
+     */
     this._request = null;
     /**
      * home(index) か否かを表す真偽値, default false

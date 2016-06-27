@@ -13,6 +13,7 @@
 
 import {View} from '../View';
 
+// app
 import {User} from '../../app/User';
 import {Message} from '../../app/const/Message';
 

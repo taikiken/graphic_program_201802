@@ -14,7 +14,7 @@
 import {Safety} from '../../data/Safety';
 
 /**
- * method / url 2つのpropertyを持ちます
+ * <p>method / url 2つのpropertyを持ちます</p>
  * method: POST | GET
  * utl: API request先
  */
@@ -27,8 +27,18 @@ export class Type {
   constructor( url:string, method:string = 'GET' ) {
 
     method = Safety.string( method, 'GET' );
-    this.url = url;
-    this.method = method.toUpperCase();
+    /**
+     * API request先
+     * @type {string}
+     * @protected
+     */
+    this._url = url;
+    /**
+     * Ajax request method, 'GET', 'POST', 'PUT', 'DELETE'... **全て大文字** に変換し保存します
+     * @type {string}
+     * @private
+     */
+    this._method = method.toUpperCase();
 
   }
   // ---------------------------------------------------

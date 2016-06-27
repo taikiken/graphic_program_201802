@@ -10,9 +10,14 @@
  *
  */
 
+// model
 import {Model} from '../Model';
+
+// action
 import {Categories} from '../../action/categories/Categories';
+// dae
 import {CategoriesDae} from '../../dae/caegories/CategoriesDae';
+// data
 import {Result} from '../../data/Result';
 
 /**
@@ -25,11 +30,11 @@ export class ModelCategories extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
-    // /**
-    //  * Action class (Categories) instance を保持します
-    //  * @type {Categories}
-    //  * @protected
-    //  */
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Categories}
+     */
     this.action = new Categories( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

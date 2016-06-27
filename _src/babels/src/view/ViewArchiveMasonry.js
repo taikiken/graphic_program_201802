@@ -58,26 +58,14 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, ActionClass, option, useMasonry );
+    /**
+     * category slug
+     * @override
+     * @type {string}
+     * @default all
+     */
     this.slug = 'all';
   }
-  // // ---------------------------------------------------
-  // //  GETTER / SETTER
-  // // ---------------------------------------------------
-  // /**
-  //  * category slug
-  //  * @default all
-  //  * @return {string} category slug を返します
-  //  */
-  // get slug():string {
-  //   return this._slug;
-  // }
-  // /**
-  //  * category slug を設定します
-  //  * @param {string} categorySlug 設定する category slug
-  //  */
-  // set slug( categorySlug:string ):void {
-  //   this._slug = categorySlug;
-  // }
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
@@ -91,11 +79,11 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     // let useMasonry = this._useMasonry;
 
     // 既存データ用のglobal配列
-    let articlesList = this._articles;
+    let articlesList = this.articles;
 
     // 前回までの配列length
     // sequence な index のために必要
-    let prevLast = this._articles.length;
+    let prevLast = this.articles.length;
 
     // 記事挿入 root element
     let element = this.element;
@@ -669,9 +657,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       // didUpdate から呼び出される
       appendImages: function() {
-
-        // console.log( '++++++++++++++++++++ appendImages' );
-
+        
         // event から event handler を unbind します
         this.img.off( 'always', this.appendImages );
 
@@ -704,10 +690,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
+    if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this._articleRendered = ReactDOM.render(
+      this.articleRendered = ReactDOM.render(
         React.createElement( ArticleDom, {
           home: this.home,
           list: articlesList,
@@ -722,12 +708,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
+      this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
 
     }
-
-    // // from 2016-06-08
-    // this.postRender();
   }// render
 }
 

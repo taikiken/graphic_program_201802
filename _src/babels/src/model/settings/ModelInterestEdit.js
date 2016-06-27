@@ -27,6 +27,11 @@ export class ModelInterestEdit extends ModelBehavior {
    */
   constructor( formData:FormData, option:Object = {} ) {
     super( formData, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {SettingsInterestEdit}
+     */
     this.action = new SettingsInterestEdit( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

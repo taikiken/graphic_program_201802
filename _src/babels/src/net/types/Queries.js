@@ -22,7 +22,11 @@ export class Queries {
    * @param {Array<Query>} [queries=[]] Query{key: value} 配列
    */
   constructor( queries:Array<Query> = [] ) {
-
+    /**
+     * Query{key: value} 配列
+     * @type {Array.<Query>}
+     * @private
+     */
     this._queries = queries;
 
   }

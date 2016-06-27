@@ -62,31 +62,51 @@ export class ViewArchiveMasonryInfinite extends View {
     option = Safety.object( option );
 
     super( element, option );
-    /*
-    if ( !Safety.isElement( moreElement ) ) {
-      console.warn( `un accessible more element. ${moreElement}` );
-    }
-    */
 
     if ( typeof ActionClass === 'function' ) {
-
+      /**
+       * Action instance を設定します
+       * @override
+       * @type {*}
+       */
       this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
 
     }
+    /**
+     * more button root element, 'View More'
+     * @type {Element}
+     * @protected
+     */
     this._moreElement = moreElement;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
-     * @private
+     * @protected
      */
     this._articles = [];
+    /**
+     * isotope を行う真偽値
+     * @type {boolean}
+     * @protected
+     */
     this._useMasonry = !!useMasonry;
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
+    /**
+     * <p>ArticleDom instance を保持します</p>
+     * <p>first render を区別するためにも使用します</p>
+     * @type {null|Object}
+     * @protected
+     */
     this._articleRendered = null;
-    // more button instance を保持します
+    /**
+     * more button instance を設定します
+     * @param {null|Object} more button instance
+     */
     this._moreRendered = null;
-    // response.request object を保持する
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @protected
+     */
     this._request = null;
     /**
      * 表示されているページが home(index) かを識別する flag
@@ -156,7 +176,6 @@ export class ViewArchiveMasonryInfinite extends View {
   get articlesList():Array<ArticleDae> {
     return this._articles;
   }
-
   /**
    * Ga トラッキングタグを送信済みかを表す真偽値
    * @return {boolean} Ga トラッキングタグを送信済みかを表す真偽値を返します
@@ -164,13 +183,76 @@ export class ViewArchiveMasonryInfinite extends View {
   get gaSend():Boolean {
     return this._gaSend;
   }
-
   /**
    * Ga トラッキングタグを送信済みかを表す真偽値を設定します
    * @param {Boolean} flag Ga トラッキングタグを送信済みかを表す真偽値
    */
   set gaSend( flag:Boolean ):void {
     this._gaSend = flag;
+  }
+  // -- @from 2016-06-27
+  /**
+   * isotope を行う真偽値を取得します
+   * @return {boolean} isotope を行う真偽値を返します
+   */
+  get useMasonry():Boolean {
+    return this._useMasonry;
+  }
+  /**
+   * ArticleDom instance を取得します
+   * @return {Object|null} ArticleDom instance を返します
+   */
+  get articleRendered():Object {
+    return this._articleRendered;
+  }
+  /**
+   * ArticleDom instance を設定します
+   * @param {Object|null} rendered ArticleDom instance
+   */
+  set articleRendered( rendered:Object ):void {
+    this._articleRendered = rendered;
+  }
+  /**
+   * more button instance
+   * @return {null|Object} more button instance を返します
+   */
+  get moreRendered():Object {
+    return this._moreRendered;
+  }
+  /**
+   * more button instance を設定します
+   * @param {null|Object} more button instance
+   */
+  set moreRendered( more:Object ):void {
+    this._moreRendered = more;
+  }
+  /**
+   * response.request object を取得します
+   * @return {null|Object|Object|*} response.request object を返します
+   */
+  get request():Object {
+    return this._request;
+  }
+  /**
+   * response.request object を設定します
+   * @param {Object|null} requestObject response.request object
+   */
+  set request( requestObject:Object ):void {
+    this._request = requestObject;
+  }
+  /**
+   * 取得記事(articles)をArticleDae instance 配列として 取得します
+   * @return {Array.<ArticleDae>} 取得記事(articles)をArticleDae instance 配列として返します
+   */
+  get articles():Array<ArticleDae> {
+    return this._articles;
+  }
+  /**
+   * 取得記事(articles)をArticleDae instance 配列を設定します
+   * @param {Array} articles 取得記事(articles)をArticleDae instance 配列
+   */
+  set articles( articles:Array<ArticleDae> ):void {
+    this._articles = articles;
   }
   // ---------------------------------------------------
   //  Method
@@ -209,7 +291,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
     } else {
 
-      this._request = result.request;
+      this.request = result.request;
       this.render( articles );
 
     }
@@ -249,11 +331,11 @@ export class ViewArchiveMasonryInfinite extends View {
     // let useMasonry = this._useMasonry;
 
     // 既存データ用のglobal配列
-    let articlesList = this._articles;
+    let articlesList = this.articles;
 
     // 前回までの配列length
     // sequence な index のために必要
-    let prevLast = this._articles.length;
+    let prevLast = this.articles.length;
 
     // 記事挿入 root element
     let element = this.element;
@@ -269,7 +351,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     /**
      * MORE VIEW button
-     * @private
+     * @protected
      * @type {ReactClass}
      */
     let MoreViewDom = React.createClass( {
@@ -286,7 +368,7 @@ export class ViewArchiveMasonryInfinite extends View {
       getInitialState: function() {
         /**
          * Rise instance を保持する
-         * @private
+         * @protected
          * @type {null|Rise}
          * */
         this.rise = null;
@@ -429,7 +511,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     /**
      * コメント欄の二段目
-     * @private
+     * @protected
      * @type {ReactClass}
      * */
     let CommentsSecondDom = React.createClass( {
@@ -491,7 +573,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // --------------------------------------------
     /**
      * first + second comment container
-     * @private
+     * @protected
      * @type {ReactClass}
      * */
     let PopularDom = React.createClass( {
@@ -590,7 +672,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // ------------------------------------------------
     /**
      * 記事一覧のサムネイル
-     * @private
+     * @protected
      * @type {ReactClass}
      */
     let ThumbnailDom = React.createClass( {
@@ -644,7 +726,7 @@ export class ViewArchiveMasonryInfinite extends View {
 
     /**
      * 個別の 記事Dom
-     * @private
+     * @protected
      * @type {ReactClass}
      */
     let ArticleDom = React.createClass( {
@@ -661,19 +743,19 @@ export class ViewArchiveMasonryInfinite extends View {
       getInitialState: function() {
         /**
          * Isotope instance
-         * @private
+         * @protected
          * @type {null|Isotope}
          */
         this.isotope = null;
         /**
          * imagesLoaded instance
-         * @private
+         * @protected
          * @type {null|imagesLoaded}
          */
         this.img = null;
         /**
          * 読み込んだelementを保持する配列
-         * @private
+         * @protected
          * @type {Array}
          */
         this.elements = [];
@@ -860,11 +942,11 @@ export class ViewArchiveMasonryInfinite extends View {
     this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
+    if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this._articleRendered = ReactDOM.render(
-        React.createElement( ArticleDom, { list: articlesList, offset: this._request.offset, length: this._request.length, masonry: this._useMasonry, action: this.action } ),
+      this.articleRendered = ReactDOM.render(
+        React.createElement( ArticleDom, { list: articlesList, offset: this.request.offset, length: this.request.length, masonry: this.useMasonry, action: this.action } ),
         element
       );
 
@@ -872,17 +954,9 @@ export class ViewArchiveMasonryInfinite extends View {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
+      this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
 
     }
-
-    // // from 2016-06-08
-    // this.postRender();
   }// render
-  // /**
-  //  * render 実施後呼び出されます
-  //  * @from 2016-06-08
-  //  */
-  // postRender():void {}
 
 }// class

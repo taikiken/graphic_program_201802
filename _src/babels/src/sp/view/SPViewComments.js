@@ -13,32 +13,21 @@
 
 // app
 import {CommentsType} from '../../app/const/CommentsType';
-// import {Ad} from '../../app/const/Ad';
 import {User} from '../../app/User';
 
 // view
 import {View} from '../../view/View';
 import {ViewComments} from '../../view/ViewComments';
-// import {ViewError} from '../../view/error/ViewError';
-
-// action
-// import {Comments} from '../../action/comment/Comments';
 
 // data
-// import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // dae
 import {CommentsListDae} from '../../dae/CommentsListDae';
-// import {UserDae} from '../../dae/UserDae';
 
 // node
 import {CommentMoreViewNode} from '../../node/comment/CommentMoreViewNode';
 import {SPCommentAdNode} from '../node/ad/SPCommentAdNode';
-
-// event
-// import {ReplyStatus} from '../../event/ReplyStatus';
-// import {CommentStatus} from '../../event/CommentStatus';
 
 // sp/node
 import {SPCommentNode} from '../node/comment/SPCommentNode';
@@ -66,7 +55,6 @@ export class SPViewComments extends ViewComments {
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
    */
   all( commentsListDae:CommentsListDae ) {
-
     this._reload = false;
 
     let commentsList = this._commentsList;

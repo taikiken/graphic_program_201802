@@ -47,6 +47,11 @@ export class ViewSingleTitle extends View {
     option = Safety.object( option );
 
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Single}
+     */
     this.action = new Single( id, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

@@ -14,7 +14,6 @@
 import {View} from '../View';
 
 // app
-// import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
@@ -62,9 +61,25 @@ export class ViewPickup extends View {
 
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {PickupAuth|Pickup}
+     */
     this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
-    // this._index = 0;
+    /**
+     * 最後のナンバー
+     * @ToDo 不要なら削除する
+     * @type {number}
+     * @private
+     */
     this._last = 0;
+    /**
+     * interval 間隔
+     * @type {number}
+     * @private
+     * @default 500
+     */
     this._waiting = 1000 * 5;
 
   }

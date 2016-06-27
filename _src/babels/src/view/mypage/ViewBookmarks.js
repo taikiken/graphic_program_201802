@@ -10,17 +10,11 @@
  *
  */
 
-
+// view
 import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 
 import {Bookmarks} from '../../action/mypage/Bookmarks';
-
-/*
-// model
-import {Model} from '../../model/Model';
-import {ModelBookmark} from '../../model/users/ModelBookmark';
-*/
 
 // app
 import {Empty} from '../../app/const/Empty';
@@ -52,21 +46,41 @@ export class ViewBookmarks extends View {
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Bookmarks}
+     */
     this.action = new Bookmarks( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * more button root element, 'View More'
+     * @type {Element}
+     * @private
+     */
     this._moreElement = moreElement;
-
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
      * @private
      */
     this._articles = [];
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
+    /**
+     * <p>ArticleDom instance を保持します</p>
+     * <p>first render を区別するためにも使用します</p>
+     * @type {null|Object}
+     * @protected
+     */
     this._articleRendered = null;
-    // more button instance を保持します
+    /**
+     * more button instance を設定します
+     * @param {null|Object} more button instance
+     */
     this._moreRendered = null;
-    // response.request object を保持する
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @protected
+     */
     this._request = null;
   }
   // ---------------------------------------------------

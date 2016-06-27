@@ -59,24 +59,50 @@ export class ViewComments extends View {
   constructor( id:Number, element:Element, commentsType:string, option:Object = {} ) {
 
     option = Safety.object( option );
-    // console.log( 'commentsType', commentsType );
 
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Comments}
+     */
     this.action = Comments.type( commentsType, id, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * 記事ID
+     * @type {Number}
+     * @protected
+     */
     this._articleId = id;
+    /**
+     * コメントタイプ, all|official|self|normal
+     * @type {string}
+     * @protected
+     */
     this._commentsListType = commentsType;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
-     * @private
+     * @protected
      */
     this._commentsList = [];
+    /**
+     * コメントIDをキーにコメント Object を保存します
+     * @type {{}}
+     * @protected
+     */
     this._commentsBank = {};
-
-    // more button instance 用
+    /**
+     * more button instance 用
+     * @type {null|Object}
+     * @protected
+     */
     this._moreRendered = null;
 
-    // user 情報
+    /**
+     * user 情報
+     * @type {null}
+     * @protected
+     */
     this._user = null;
 
     // コメント投稿後の再読み込み設定
@@ -98,7 +124,12 @@ export class ViewComments extends View {
     bad.on( CommentStatus.BAD_ADD, boundComplete );
     bad.on( CommentStatus.BAD_DELETE, boundComplete );
 
-    this._reload = false;
+    /**
+     * リロードフラッグ
+     * @type {Boolean}
+     * @protected
+     */
+    this._reloadFlag = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -117,6 +148,76 @@ export class ViewComments extends View {
    */
   set user( user:UserDae ):void {
     this._user = user;
+  }
+  /**
+   * 記事IDを取得します
+   * @return {Number|*} 記事IDを返します
+   */
+  get articleId():Number {
+    return this._articleId;
+  }
+  /**
+   * 記事IDを設定します
+   * @param {Number} id 記事ID
+   */
+  set articleId( id:Number ):void {
+    this._articleId = id;
+  }
+  /**
+   * コメントタイプ, all|official|self|normal を取得します
+   * @return {string|*} コメントタイプ, all|official|self|normal を返します
+   */
+  get commentListType():string {
+    return this._commentsListType;
+  }
+  /**
+   * コメントタイプ, all|official|self|normal を設定します
+   * @param {string} type コメントタイプ, all|official|self|normal
+   */
+  set commentListType( type:string ):void {
+    this._commentsListType = type;
+  }
+  /**
+   * コメントIDをキーにコメント Object を取得します
+   * @return {Object} コメントIDをキーにコメント Object を返します
+   */
+  get commentsBank():Object {
+    return this._commentsBank;
+  }
+  /**
+   * コメントIDをキーにコメント Object を設定します
+   * @param {Object} bank コメントIDをキーにコメント Object
+   */
+  set commentsBank( bank:Object ):void {
+    this._commentsBank = bank;
+  }
+  /**
+   * more button instance
+   * @return {null|Object} more button instance を返します
+   */
+  get moreRendered():Object {
+    return this._moreRendered;
+  }
+  /**
+   * more button instance を設定します
+   * @param {null|Object} more button instance
+   */
+  set moreRendered( more:Object ):void {
+    this._moreRendered = more;
+  }
+  /**
+   * リロードフラッグ を取得します
+   * @return {Boolean} リロードフラッグを返します
+   */
+  get reloadFlag():Boolean {
+    return this._reloadFlag;
+  }
+  /**
+   * リロードフラッグを設定します
+   * @param {Boolean} flag リロードフラッグ
+   */
+  set reloadFlag( flag:Boolean ):void {
+    this._reloadFlag = flag;
   }
   // ---------------------------------------------------
   //  Method
@@ -186,12 +287,13 @@ export class ViewComments extends View {
   render( response:Object ):void {
 
     let commentsListDae = new CommentsListDae( response );
+    let commentList = this._commentsList;
 
     // total check
     if ( commentsListDae.total === 0 ) {
 
       // reload の時はエラーにしない
-      if ( !this._reload ) {
+      if ( !this.reloadFlag ) {
         // デーが無いので処理を止める + reload 除く
         // console.log( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
         this.executeSafely( View.EMPTY_ERROR );
@@ -201,10 +303,10 @@ export class ViewComments extends View {
     }
 
     // previous data と新規データを合成
-    this._commentsList = this._commentsList.concat( commentsListDae.comments.list );
+    this.commentsList = commentList.concat( commentsListDae.comments.list );
 
     // _commentsBank へ comment.id をキーにデータをセット
-    let bank = this._commentsBank;
+    let bank = this.commentsBank;
     commentsListDae.comments.list.forEach( function( commentId ) {
 
       bank[ commentId ] = commentsListDae.comments.bank[ commentId ];
@@ -215,22 +317,16 @@ export class ViewComments extends View {
     this.all( commentsListDae );
 
   }// render
-
-  /*
-  mine( commentsListDae:CommentsListDae ) {
-
-  }
-  */
   /**
    * normal, official, all をレンダリング
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
    */
   all( commentsListDae:CommentsListDae ) {
 
-    this._reload = false;
+    this.reloadFlag = false;
 
-    let commentsList = this._commentsList;
-    let commentsBank = this._commentsBank;
+    let commentsList = this.commentsList;
+    let commentsBank = this.commentsBank;
 
     // コメント挿入 root element
     let element = this.element;
@@ -238,72 +334,10 @@ export class ViewComments extends View {
     let action = this.action;
     let _this = this;
 
-    /*
-    // --------------------------------------------
-    // More button
-    // --------------------------------------------
-    let MoreView = React.createClass( {
-      propTypes: {
-        show: React.PropTypes.bool.isRequired,
-        rest: React.PropTypes.number
-      },
-      getDefaultProps: function() {
-        return {
-          show: false,
-          rest: 0
-        };
-      },
-      getInitialState: function() {
-        return {
-          loading: '',
-          show: this.props.show,
-          rest: this.props.rest
-        };
-      },
-      render: function() {
-
-        // hasNext: true, button を表示する？
-        if ( this.state.show && this.state.rest > 0 ) {
-
-          return (
-            <div id="more" className={'comment-andmore loading-root ' + this.state.loading}>
-              <a href={'#more'} onClick={this.handleClick} >他{this.state.rest}件を表示</a>
-              <span className="loading-spinner">&nbsp;</span>
-            </div>
-          );
-
-        } else {
-
-          // button 表示なし
-          return (
-            <div className="no-more"></div>
-          );
-
-        }
-
-      },
-      // -----------------------------------------
-      // button 関連 custom method
-      handleClick: function( event ) {
-        event.preventDefault();
-        // loading 表示
-        this.setState( { loading: 'loading' } );
-        action.next();
-      },
-      // button 表示・非表示
-      updateShow: function( show:Boolean, rest:Number ) {
-
-        this.setState( { show: show, rest: rest } );
-
-      }
-    } );
-    */
-
     // more button 作成関数
     // CommentsDom から呼び出す
     let moreButton = ( show, rest, moreElement ) => {
 
-      // console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
       show = !!show;
 
       // とにかく render する
@@ -573,8 +607,8 @@ export class ViewComments extends View {
     ReactDOM.render(
       <CommentsDom
         commentsList={commentsList}
-        articleId={String(this._articleId)}
-        commentsListType={this._commentsListType}
+        articleId={String(this.articleId)}
+        commentsListType={this.commentsListType}
         user={user}
       />,
       element
@@ -596,8 +630,8 @@ export class ViewComments extends View {
     // 既存リストを空にする
     this._commentsList = [];
     // reload flag on
-    this._reload = true;
+    this.reloadFlag = true;
     // ajax start
-    this._action.reload();
+    this.action.reload();
   }
 }

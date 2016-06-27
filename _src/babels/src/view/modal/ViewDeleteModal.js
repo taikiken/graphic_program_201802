@@ -30,6 +30,11 @@ export class ViewDeleteModal extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * modal instance
+     * @type {null|Object}
+     * @private
+     */
     this._render = null;
   }
   /**

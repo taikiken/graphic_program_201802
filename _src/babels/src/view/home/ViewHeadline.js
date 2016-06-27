@@ -43,41 +43,42 @@ let ReactDOM = self.ReactDOM;
  *
  * 1. JSON取得(Ajax)
  * 1. Dom作成 by React
+ *
+ * ```
+ * let headline;
+ *
+ * function didMount() {
+ *    console.log( 'dom mount' );
+ *  }
+ * function errorMount( error ) {
+ *    console.log( 'dom errorMount', error );
+ *  }
+ * function undefinedError( error ) {
+ *    console.log( 'undefinedError', error );
+ *  }
+ * function emptyError( error ) {
+ *    console.log( 'emptyError', error );
+ *  }
+ * function responseError( error ) {
+ *    console.log( 'responseError', error );
+ *
+ *    headline.showError( 'error message ' + error.name + ', ' + error.message );
+ * }
+ * let option = {
+ *    didMount: didMount,
+ *    errorMount: errorMount,
+ *    undefinedError: undefinedError,
+ *    emptyError: emptyError,
+ *    responseError: responseError
+ *  };
+ *
+ * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), option );
+ * headline.start();
+ * ```
  */
 export class ViewHeadline extends View {
   /**
    * action/Headline を使い Ajax request 後 element へ dom を作成します
-   *
-   * @example
-   * let headline;
-   *
-   * function didMount() {
-   *    console.log( 'dom mount' );
-   *  }
-   * function errorMount( error ) {
-   *    console.log( 'dom errorMount', error );
-   *  }
-   * function undefinedError( error ) {
-   *    console.log( 'undefinedError', error );
-   *  }
-   * function emptyError( error ) {
-   *    console.log( 'emptyError', error );
-   *  }
-   * function responseError( error ) {
-   *    console.log( 'responseError', error );
-   *
-   *    headline.showError( 'error message ' + error.name + ', ' + error.message );
-   * }
-   * let option = {
-   *    didMount: didMount,
-   *    errorMount: errorMount,
-   *    undefinedError: undefinedError,
-   *    emptyError: emptyError,
-   *    responseError: responseError
-   *  };
-   *
-   * headline = new UT.view.home.ViewHeadline( document.getElementById('someId'), option );
-   * headline.start();
    *
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
@@ -88,6 +89,11 @@ export class ViewHeadline extends View {
 
     super( element, option );
     let ActionClass = User.sign ? HeadlineAuth : Headline;
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {HeadlineAuth|Headline}
+     */
     this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
 
   }
