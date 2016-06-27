@@ -2,10 +2,14 @@
 
 include $INCLUDEPATH."local.php";
 
-$id=$_GET["id"];
-$time=$_GET["time"];
-$media=$_GET["media"];
+$o=new db;
+$o->connect();
 
-file_put_contents(sprintf("%s/api/ver1/static/complete.txt",$SERVERPATH),sprintf("%s\t%s\t%s\t%s\n",date("Y-m-d H:i:s"),$media,$id,$time));
+$id=bind($_GET["id"]);
+$time=bind($_GET["time"]);
+$media=bind($_GET["media"]);
+
+$sql=sprintf("insert into u_encoded(filename,bucket,playtime,flag,u_time,m_time) values('%s','%s',%s,1,now(),now());",$id,$media,$time);
+$o->query($sql);
 
 ?>

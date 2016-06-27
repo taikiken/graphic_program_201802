@@ -10,7 +10,7 @@ $container="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://w
 $u="";
 $u.="<url>\n"; 
 $u.=sprintf("<loc>%s/</loc>\n",$domain);
-$u.=sprintf("<lastmod>%s</lastmod>\n",date("r"));
+$u.=sprintf("<lastmod>%s</lastmod>\n",date("Y-m-d"));
 $u.="<changefreq>always</changefreq>\n";
 $u.="<priority>1</priority>\n";
 $u.="</url>\n";
@@ -26,8 +26,8 @@ for($i=0;$i<count($p);$i++){
 	$u1="";
 	$u1.="<url>\n"; 
 	$u1.=sprintf("<loc>%s/%s/</loc>\n",$domain,$p[$i]["name_e"]);
-	$u1.=sprintf("<lastmod>%s</lastmod>\n",date("r",strtotime($p[$i]["u_time"])));
-	$u1.="<changefreq>hiourly</changefreq>\n";
+	$u1.=sprintf("<lastmod>%s</lastmod>\n",date("Y-m-d",strtotime($p[$i]["u_time"])));
+	$u1.="<changefreq>hourly</changefreq>\n";
 	$u1.="<priority>0.7</priority>\n";
 	$u1.="</url>\n";
 	
@@ -35,8 +35,8 @@ for($i=0;$i<count($p);$i++){
 	$o->query($sql);
 	while($f=$o->fetch_array()){
 		$u1.="<url>\n"; 
-		$u1.=sprintf("<loc>%s/p/%s</loc>\n",$domain,$f["id"]);
-		$u1.=sprintf("<lastmod>%s</lastmod>\n",date("r",strtotime($f["u_time"])));
+		$u1.=sprintf("<loc>%s/p/%s/</loc>\n",$domain,$f["id"]);
+		$u1.=sprintf("<lastmod>%s</lastmod>\n",date("Y-m-d",strtotime($f["u_time"])));
 		if(!preg_match("/^http/",$f["img1"])&&strlen($f["img1"])>0)$u1.=sprintf("<image:image><image:loc>%s/prg_img/raw/%s</image:loc><image:caption>%s</image:caption></image:image>",$domain,$f["img1"],htmlspecialchars($f["t1"]));
 		$u1.="</url>\n";
 	}
@@ -45,7 +45,7 @@ for($i=0;$i<count($p);$i++){
 	
 	$u.="<url>\n"; 
 	$u.=sprintf("<loc>%s/api/ver1/static/sitemap/%s.xml</loc>\n",$domain,$p[$i]["name_e"]);
-	$u.=sprintf("<lastmod>%s</lastmod>\n",date("r",strtotime($p[$i]["u_time"])));
+	$u.=sprintf("<lastmod>%s</lastmod>\n",date("Y-m-d",strtotime($p[$i]["u_time"])));
 	$u.="</url>\n";
 }
 
