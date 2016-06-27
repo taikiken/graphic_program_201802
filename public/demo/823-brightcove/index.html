@@ -42,13 +42,15 @@ var myPlayer;
     myPlayer.ima3({
       debug: true,
       adTechOrder: [
-        'flash',
-        'html5'
+        'html5',
+        'flash'
       ],
       postrollTimeout: 2000,
       prerollTimeout: 1000,
-      requestMode: 'onload',
-      serverUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=' + Date.now() + '[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1',
+      requestMode: 'onplay',
+      loadingSpinner: true,
+      serverUrl: 'http://dev.undotsushin.com/demo/823-brightcove/adrule_midroll.xml',
+      //serverUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=' + Date.now() + '[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1',
       timeout: 5000
     });
   });
