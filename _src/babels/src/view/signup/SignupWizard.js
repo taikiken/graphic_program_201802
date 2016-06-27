@@ -72,7 +72,7 @@ export class SignupWizard extends View {
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     // callbacks[ Model.RESPONSE_ERROR ] = boundError;
-    this._action = new ModelCategories( callbacks );
+    this.action = new ModelCategories( callbacks );
 
     // SignupStatus instance
     this._status = SignupStatus.factory();
@@ -145,7 +145,7 @@ export class SignupWizard extends View {
       },
       render: function() {
         return (
-          <div className={'signup-' + this.state.step }>
+          <div className={'signup-' + this.state.step}>
             <HeadingNode step={this.props.step} />
             <RootNode
               step={this.props.step}

@@ -16,11 +16,10 @@ let _symbol = Symbol();
 let _single;
 
 /**
- * <h3>記事詳細情報</h3>
+ * <p>記事詳細情報</p>
  * 全てstaticです<br>
- * **Singleton**
  * <p>
- * SingleDae を保持します。
+ * {@link SingleDae} を保持します。
  * </p>
  */
 export class SingleInfo {

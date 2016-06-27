@@ -18,6 +18,10 @@ import {Brightcove} from '../../app/const/Brightcove';
 import {VideoPlayNode} from './VideoPlayNode';
 import {VideoCaptionNode} from './VideoCaptionNode';
 
+// ga
+import {GaData} from '../../ga/GaData';
+import {Ga} from '../../ga/Ga';
+
 // Sagen
 const Sagen = self.Sagen;
 
@@ -78,6 +82,18 @@ export let BrightcoveNode = React.createClass( {
      * @type {Boolean}
      */
     this.phone = Sagen.Browser.Mobile.phone();
+    /**
+     * 動画再生中かを表す真偽値
+     * @protected
+     * @type {boolean}
+     */
+    this.playing = false;
+    /**
+     * 動画パス
+     * @protected
+     * @type {string}
+     */
+    this.url = '';
 
     return {
       showPlay: this.props.showPlay,
@@ -115,8 +131,8 @@ export let BrightcoveNode = React.createClass( {
             width={`${width}px`}
             height={`${height}px`}
             controls
-            ref="video">
-          </video>
+            ref="video"
+          />
           <VideoPlayNode
             playImage={this.props.playImage}
             callback={this.playClick}
@@ -168,7 +184,14 @@ export let BrightcoveNode = React.createClass( {
     let video = this.props.video;
     let poster = this.props.poster;
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
-    let vast = video.vast;
+    this.url = url;
+
+    // let vast = video.vast;
+
+    // 動画プレイヤー / VASTをPC/SP&APPで分ける #822
+    // https://github.com/undotsushin/undotsushin/issues/822
+    // @from 2016-06-20
+    let vast = this.iphone ? video.adUrl.sp : video.adUrl.pc;
     
     let ima3 = {
       adTechOrder: [
@@ -194,12 +217,14 @@ export let BrightcoveNode = React.createClass( {
     if ( vast !== '' ) {
       ima3.serverUrl = vast + Date.now();
     }
-    // console.log( 'UT: vast', this.id, vast, ima3 );
+
     let player = videojs( this.id );
 
     player.ready( () => {
       player.src( { type: Brightcove.TYPE, src: url } );
       player.poster( poster );
+
+      // vast が存在する時のみ ima3 を追加する
       if ( vast !== '' ) {
         player.ima3( ima3 );
       }
@@ -214,14 +239,16 @@ export let BrightcoveNode = React.createClass( {
       player.height( 'auto', false );
     }
     // http://docs.brightcove.com/en/perform/brightcove-player/guides/events.html
-
     // bind event handler
     player.on( 'adstart', this.adStart );
     player.on( 'adend', this.adEnd );
 
     player.on( 'play', this.onPlay );
-    // player.on( 'pause', this.onPause );
-    // player.on( 'ended', this.onEnd );
+    // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
+    // 再生・終了でトラッキングする必要が出たので有効にします
+    // @from 2016-06-22
+    player.on( 'pause', this.onPause );
+    player.on( 'ended', this.onEnd );
 
     this.player = player;
   },
@@ -230,19 +257,37 @@ export let BrightcoveNode = React.createClass( {
   adStart: function() {
     // 広告再生スタート controls 非表示
     this.player.controls( false );
+    // console.log( 'adStart' );
   },
   adEnd: function() {
     // 広告再生終了 controls 表示
     this.player.controls( true );
+    // console.log( 'adEnd' );
   },
   onPlay: function() {
     this.player.controls( true );
+    if ( !this.playing ) {
+      this.playing = true;
+      this.tracking( 'begin' );
+    }
+    // console.log( 'onPlay' );
+  },
+  onPause: function() {
+    // this.setState( { showPlay: true } );
+    // console.log( 'onPause' );
+  },
+  onEnd: function() {
+    // this.setState( { showPlay: true } );
+    // console.log( 'onEnd' );
+    if ( this.playing ) {
+      this.playing = false;
+      this.tracking( 'complete' );
+    }
+  },
+  // @from 2016-06-22
+  // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
+  tracking: function( action:string ) {
+    let gaData = new GaData( 'BrightcoveNode.tracking', 'video', action, this.url );
+    Ga.add( gaData );
   }
-  // ,
-  // onPause: function() {
-  //   // this.setState( { showPlay: true } );
-  // },
-  // onEnd: function() {
-  //   // this.setState( { showPlay: true } );
-  // }
 } );

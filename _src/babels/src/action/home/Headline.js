@@ -16,7 +16,7 @@ import {Api} from '../../net/Api';
 import {Length} from '../../app/const/Length';
 
 /**
- * Home headline（注目ニュース）
+ * <p>Home headline（注目ニュース）</p>
  */
 export class Headline extends Action {
   /**

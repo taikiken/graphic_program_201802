@@ -16,7 +16,7 @@ import {Api} from '../../net/Api';
 import {Length} from '../../app/const/Length';
 
 /**
- * Home pickup(slider)
+ * <p>Home pickup(slider): スライドショー<p>
  */
 export class Pickup extends Action {
   /**
@@ -25,17 +25,17 @@ export class Pickup extends Action {
    *
    * @example
    * function done( result ) {
-   *    console.log( 'success', result.response );
-   *    console.log( 'success', result.status );
-   *    console.log( 'success', result.request );
-   *  }
+   *  console.log( 'success', result.response );
+   *  console.log( 'success', result.status );
+   *  console.log( 'success', result.request );
+   * }
    *
    * function fail( error ) {
-   *    console.log( 'error', error );
-   *  }
+   *  console.log( 'error', error );
+   * }
    *
-   * var headline = new Headline( done, fail );
-   * headline.start();
+   * var pickup = new Pickup( done, fail );
+   * pickup.start();
    *
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback

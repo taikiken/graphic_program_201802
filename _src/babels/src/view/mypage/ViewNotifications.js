@@ -46,7 +46,7 @@ export class ViewNotifications extends View {
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
 
     super( element, option );
-    this._action = new Notice( this.done.bind( this ), this.fail.bind( this ) );
+    this.action = new Notice( this.done.bind( this ), this.fail.bind( this ) );
     this._moreElement = moreElement;
 
     /**
@@ -192,7 +192,7 @@ export class ViewNotifications extends View {
 
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+              <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
               <div className="loading-spinner"></div>
             </div>
           );

@@ -77,7 +77,7 @@ gulp.task 'babels:make', ( cb ) ->
   )
   return
 
-# dev
+# dev with lint
 gulp.task 'babels:make:lint', ( cb ) ->
   runSequence(
     'babels:eslint'

@@ -13,6 +13,9 @@
 // data
 import {Safety} from '../../data/Safety';
 
+// ga
+import {Ga} from '../../ga/Ga';
+
 // React
 let React = self.React;
 
@@ -40,6 +43,14 @@ export let BannerNode = React.createClass( {
     pc: React.PropTypes.bool
   },
   getDefaultProps: function() {
+    /**
+     * banner link
+     * @from 2016-06-22
+     * @protected
+     * @type {string}
+     */
+    this.link = '';
+
     return {
       pc: true
     };
@@ -56,16 +67,28 @@ export let BannerNode = React.createClass( {
       return null;
     }
 
-    if ( banner.link === '' || banner.link === null ) {
-      // illegal link
+    // if ( banner.link === '' || banner.link === null ) {
+    //   // illegal link
+    //   return null;
+    // }
+
+    let link = Safety.string( banner.link, '' );
+    if ( link === '' ) {
       return null;
     }
+
+    this.link = link;
     // pc の時のみ w728
     return (
       <div className={`sponsor-link editor-bnr${this.props.pc ? ' w728' : ''}`}>
-        <a href={banner.link} target="_blank"><img src={banner.image} alt={banner.text}/></a>
+        <a href={link} target="_blank" onClick={this.bannerClick}><img src={banner.image} alt={banner.text}/></a>
       </div>
     );
 
+  },
+  // @from 2016-06-22
+  // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
+  bannerClick: function() {
+    Ga.click( 'BannerNode.bannerClick', 'banner_link', 'click', this.link );
   }
 } );

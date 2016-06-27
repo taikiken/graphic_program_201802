@@ -30,7 +30,7 @@ export class ViewNews extends ViewArchiveMasonry {
    */
   constructor( element:Element, moreElement:Element, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, null, option, useMasonry );
-    this._action = User.sign ?
+    this.action = User.sign ?
       new NewsAuth( this.done.bind( this ), this.fail.bind( this ) ) :
       new News( this.done.bind( this ), this.fail.bind( this ) );
 

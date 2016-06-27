@@ -17,7 +17,35 @@ import {Safety} from '../../data/Safety';
 import {Length} from '../../app/const/Length';
 
 /**
- * 記事一覧, カテゴリー別, 全て...
+ * 記事一覧, カテゴリー別, 全て...<br>
+ *
+ * <pre>
+ * すべて & カテゴリーごとの記事一覧
+ * - 各カテゴリーごとの記事一覧
+ * - ホームでのすべてのランキング/おすすめ動画もこれで取得
+ * - ランキングはアクセス順で返す
+ * - 動画ランキングもアクセス順で返す
+ * </pre>
+ *
+ * <p>リクエストサンプル</p>
+ *
+ * <code>
+ * GET
+ * /api/v1/articles/category/{all|:category_slug}[/type][?[offset=n][&[length=m]]]
+ * </code>
+ *
+ * <pre>
+ * /api/v1/articles/category/all
+ * - すべての記事の新着順
+ *
+ * /api/v1/articles/category/soccer/ranking
+ * - サッカーのランキング
+ *
+ * /api/v1/articles/category/baseball/video
+ * - 野球の動画
+ * </pre>
+ *
+ * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=2055838625
  */
 export class Category extends Offset {
   // 引数の順番を失敗した
@@ -37,17 +65,29 @@ export class Category extends Offset {
     type = Safety.string( type, '' );
 
     super( Api.category(), resolve, reject, offset, length );
+    /**
+     * category slug
+     * @type {string}
+     * @protected
+     */
     this._slug = slug;
+    /**
+     * <p>Ajax リクエストオプションの type 値<br>
+     * ''（空）, ranking, video の 3種類です</p>
+     * @type {string}
+     * @protected
+     */
+    this._type = '';
 
     if ( Safety.normalize( type, [ '', 'ranking', 'video' ] ) ) {
 
       this._type = type;
 
-    } else {
+    }/* else {
 
       this._type = '';
 
-    }
+    }*/
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

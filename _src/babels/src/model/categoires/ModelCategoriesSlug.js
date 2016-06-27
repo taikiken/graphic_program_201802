@@ -28,12 +28,12 @@ export class ModelCategoriesSlug extends Model {
    */
   constructor( slug:string, option:Object = {} ) {
     super( option );
-    /**
-     * Action class (CategoriesSlug) instance を保持します
-     * @type {CategoriesSlug}
-     * @protected
-     */
-    this._action = new CategoriesSlug( slug, this.done.bind( this ), this.fail.bind( this ) );
+    // /**
+    //  * Action class (CategoriesSlug) instance を保持します
+    //  * @type {CategoriesSlug}
+    //  * @protected
+    //  */
+    this.action = new CategoriesSlug( slug, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

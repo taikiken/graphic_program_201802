@@ -26,8 +26,17 @@ export class AdDae {
    */
   constructor( ad:Object = {} ) {
     ad = Safety.object( ad );
-
+    /**
+     * response.ad.pc
+     * @type {AdPcDae}
+     * @protected
+     */
     this._pc = new AdPcDae( ad.pc );
+    /**
+     * response.ad
+     * @type {Object}
+     * @protected
+     */
     this._ad = ad;
   }
   // ---------------------------------------------------

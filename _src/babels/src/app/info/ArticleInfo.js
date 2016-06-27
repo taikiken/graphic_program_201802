@@ -17,11 +17,10 @@ let _symbol = Symbol();
 let _article;
 
 /**
- * <h3>articles の個別記事詳細情報</h3>
- * 全てstaticです<br>
- * **Singleton**
+ * <p>articles の個別記事詳細情報</p>
+ * 全てstaticです
  * <p>
- * ArticleDae を保持します。
+ * {@link ArticleDae} を保持します。
  * </p>
  */
 export class ArticleInfo {

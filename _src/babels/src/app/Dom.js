@@ -16,14 +16,14 @@ import {Safety} from '../data/Safety';
 let _symbol = Symbol();
 
 /**
- * <h3>React Dom を insert する element</h3>
- * <p>document.getElementById で取得する element</p>
- * 全て static です
+ * <p>React Dom を insert する element</p>
+ * <p>document.getElementById で element を取得します</p>
+ * <p>全て static です<p>
  */
 export class Dom {
   /**
-   * PC / SP 共通です
-   * static class です, instance を作成しません
+   * <p>PC / SP 共通です<br>
+   * static class です, instance を作成しません</p>
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target ) {
@@ -49,6 +49,9 @@ export class Dom {
     return element;
   }
   /**
+   * <p>**PC**<br>
+   * body > .whole を取得します</p>
+   *
    * body > div#whole Element
    * @return {Element} whole element を返します
    */
@@ -56,8 +59,12 @@ export class Dom {
     return Dom.get( 'whole' );
   }
   /**
-   * SP -> #page, PC -> #whole
-   * しくじった...
+   * <p>**SP**<br>
+   * body > .whole を取得します</p>
+   *
+   * SP -> #page<br>
+   * PC -> #whole<br>
+   *
    * body > div#page Element
    * @return {Element} whole element を返します
    */

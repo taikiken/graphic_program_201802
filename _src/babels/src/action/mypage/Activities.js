@@ -18,7 +18,7 @@ import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
- * マイページの自分のアクティビティ一覧
+ * <p>マイページの自分のアクティビティ一覧</p>
  */
 export class Activities extends OffsetAuth {
   /**

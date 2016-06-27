@@ -114,7 +114,7 @@ export const RankingNode = React.createClass( {
                 index={p.index}
               />
             </p>
-            <h4 className='post-heading'>{p.title}</h4>
+            <h4 className="post-heading">{p.title}</h4>
             <p className="post-date">{p.date}</p>
           </div>
         </a>

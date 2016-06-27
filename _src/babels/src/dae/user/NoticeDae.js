@@ -34,13 +34,23 @@ export class NoticeDae {
       this._formatDate = Format.date( notice.date );
 
     }
-
+    /**
+     * response.notifications.notice.user
+     * @type {Object}
+     * @protected
+     */
     this._notice = notice;
-
-    // user
+    /**
+     * response.notifications.notice.user
+     * @type {UserDae}
+     * @protected
+     */
     this._user = new UserDae( notice.user );
-
-    // article
+    /**
+     * response.notifications.notice.article
+     * @type {NoticeArticleDae}
+     * @protected
+     */
     this._article = new NoticeArticleDae( notice.article );
 
   }

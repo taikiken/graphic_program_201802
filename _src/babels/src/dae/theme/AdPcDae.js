@@ -25,6 +25,11 @@ export class AdPcDae {
    */
   constructor( pc:Object = {} ) {
     pc = Safety.object( pc );
+    /**
+     * response.ad.pc
+     * @type {Object}
+     * @private
+     */
     this._pc = pc;
   }
   // ---------------------------------------------------

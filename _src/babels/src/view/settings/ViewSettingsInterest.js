@@ -48,7 +48,7 @@ export class ViewSettingsInterest extends View {
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     // callbacks[ Model.RESPONSE_ERROR ] = boundError;
-    this._action = new ModelInterest( callbacks );
+    this.action = new ModelInterest( callbacks );
 
     let status = SettingsStatus.factory();
     status.on( SettingsStatus.INTEREST_COMPLETE, this.reload.bind( this ) );

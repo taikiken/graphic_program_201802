@@ -27,9 +27,9 @@ let _max = 999;
 let _interval = 1000 * 60;
 
 /**
- * <h3>offset length default value</h3>
- * 全て static です
- * Ajax request 時の query, length の default value です
+ * <p>offset length default value<br>
+ * Ajax request 時の query, length の default value です</p>
+ * <p>全て static です</p>
  */
 export class Length {
   /**

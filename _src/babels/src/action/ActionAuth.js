@@ -20,9 +20,12 @@ import {Result} from '../data/Result';
 import {Types} from '../net/Types';
 
 /**
- * **要認証** Ajax 処理を行います<br>
- * Template Pattern として使用します<br>
- * 各 Class で extends して下さい
+ * <p>Ajax 処理を行います</p>
+ *
+ * <p>token あり（要認証） Ajax 処理を行います</p>
+ *
+ * <p>Template Pattern として使用します<br>
+ * 各 Class で extends して下さい</p>
  */
 export class ActionAuth extends Action {
   /**
@@ -39,7 +42,24 @@ export class ActionAuth extends Action {
       throw new Error( 'Authorization required.' );
     }
     super( types, resolve, reject, ResultClass );
+    /**
+     * <p>token ありリクエストに使用する Fetch.Header object</p>
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+     * @type {Object}
+     * @protected
+     */
     this._headers = Token.token( token );
+  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * <p>token ありリクエストに使用する Fetch.Header object</p>
+   * <p>{@link Token} Class `Token.token` 関数で作成します</p>
+   * @return {Object} headers へセットする Object を返します
+   */
+  get headers():Object {
+    return this._headers;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -49,9 +69,7 @@ export class ActionAuth extends Action {
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
   start( method:string = this.method ):void {
-
     method = Safety.string( method, this.method );
-    this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
-
+    this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
   }
 }

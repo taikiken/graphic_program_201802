@@ -17,7 +17,7 @@ import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
- * token + search
+ * <p>token つき記事検索を行います</p>
  */
 export class SearchAuth extends OffsetAuth {
   /**
@@ -31,6 +31,11 @@ export class SearchAuth extends OffsetAuth {
    */
   constructor( word:string, resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
     super( User.token, Api.search(), resolve, reject, offset, length );
+    /**
+     * 検索キーワード
+     * @type {string}
+     * @protected
+     */
     this._word = word;
   }
   // ---------------------------------------------------
@@ -43,7 +48,6 @@ export class SearchAuth extends OffsetAuth {
   get word():string {
     return this._word;
   }
-
   /**
    * 検索キーワードを設定します
    * @param {string} word 検索キーワード

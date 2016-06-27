@@ -82,9 +82,11 @@ export class ViewError extends View {
 
     let ErrorDom = React.createClass( {
       render: function() {
-        return <div className="error error-container">
-          <div className="error error-message">{message}</div>
-        </div>;
+        return (
+          <div className="error error-container">
+            <div className="error error-message">{message}</div>
+          </div>
+        );
       },
       componentDidMount: function() {
 

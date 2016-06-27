@@ -1,0 +1,234 @@
+@charset "utf-8";
+/*/////////////////////////////////////////////////////////////////////////
+gorin.jp 2016 - embed_player
+/////////////////////////////////////////////////////////////////////////*/
+#_gorinjp_embedContainer * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+#_gorinjp_embedContainer *:not(.vjs-control-bar){margin:0; padding:0;}
+#_gorinjp_embedContainer footer,#_gorinjp_embedContainer header,
+#_gorinjp_embedContainer nav,#_gorinjp_embedContainer section { display:block;}
+#_gorinjp_embedContainer video { display:inline-block;}
+#_gorinjp_embedContainer a,#_gorinjp_embedContainer embed,#_gorinjp_embedContainer object { outline:none;}
+#_gorinjp_embedContainer img { border:none; box-sizing:content-box; -webkit-box-sizing:content-box; -moz-box-sizing:content-box;}
+#_gorinjp_embedContainer hr { display:none;}
+#_gorinjp_embedContainer li { list-style:none;}
+#_gorinjp_embedContainer a { background-color:transparent; -webkit-text-decoration-skip:objects;}
+
+/*@common
+/////////////////////////////////////////////////////////////////////*/
+#_gorinjp_embedContainer {
+  font-size:100%; line-height:1; color:#262626; text-align:center; background:#fff;
+  font-family:"Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; position:relative;
+}
+#_gorinjp_embedContainer a { color:#262626; text-decoration:none; -webkit-transition:all 0.18s; -moz-transition:all 0.18s; transition:all 0.18s;}
+._gorinjp_inner { width:100%; text-align:left; position:relative;}
+
+/*header*/
+#_gorinjp_embedContainer header ._gorinjp_inner { padding:5px 25px 2px; position:relative;}
+  #_gorinjp_embedContainer header h1 {
+    width:140px; height:61px;
+    text-indent:100%; white-space:nowrap; overflow:hidden;
+    background:url(http://gorin.superster.jp/embed_player/img/logo.svg) no-repeat;
+    background-size:contain; position:relative; z-index:10;
+  }
+  #_gorinjp_embedContainer header ._gorinjp_inner:before {
+    content:''; display:block; width:0; height:0;
+    border:60px transparent solid;
+    border-bottom-width:0; border-top-color:#f2f2f2;
+    position:absolute; top:0; left:32px; z-index:1;
+  }
+/*program*/
+#_gorinjp_program ._gorinjp_inner { display:table; table-layout:fixed;}
+  #_gorinjp_program > h2 { display:none;}
+  #_gorinjp_program ._gorinjp_inner > div {
+    width:50%; height:26px; display:table-cell;
+    vertical-align:top; position:relative; overflow:hidden;
+  }
+  #_gorinjp_program ._gorinjp_inner ._gorinjp_now { background:#47bf2f url(http://gorin.superster.jp/embed_player/img/bg1.jpg) no-repeat; border-right:1px solid #fff;}
+  #_gorinjp_program ._gorinjp_inner ._gorinjp_next { background:#47bf2f url(http://gorin.superster.jp/embed_player/img/bg2.jpg) no-repeat; border-left:1px solid #fff;}
+  #_gorinjp_program ._gorinjp_inner > div h3,
+  #_gorinjp_program ._gorinjp_inner > div p {
+    display:block; font-size:13px; color:#fff; line-height:1.2;
+    white-space:nowrap; overflow:hidden;
+    position:absolute; top:6px;
+  }
+  #_gorinjp_program ._gorinjp_inner > div p ._gorinjp_tv { color:#fff600;}
+  #_gorinjp_program ._gorinjp_inner ._gorinjp_now h3 { width:57px; left:18px;}
+  #_gorinjp_program ._gorinjp_inner ._gorinjp_next h3 { width:70px; left:14px;}
+  #_gorinjp_program ._gorinjp_inner ._gorinjp_now p { left:75px;}
+  #_gorinjp_program ._gorinjp_inner ._gorinjp_next p { left:84px;}
+/*video*/
+#_gorinjp_video ._gorinjp_inner { padding:6px 0;}
+  #_gorinjp_video > h2 { display:none;}
+  #_gorinjp_video ._gorinjp_player { width:100%; position:relative; z-index:10; overflow:hidden;}
+  #_gorinjp_video ._gorinjp_playerIn { width:560px; position:relative; z-index:10;opacity:0;}
+  #_gorinjp_video ._gorinjp_player p { font-size:18px; font-weight:bold; line-height:1.5; padding:10px 16px;min-height:2.6em;opacity:0;}
+  #_gorinjp_video .bc-player-HyrfyibX_default .vjs-big-play-button { margin:-1em 0 0 -1em;}
+  #_gorinjp_video .vjs-dock-text { padding:1.2em 25% 2em 1.2em;}
+  #_gorinjp_video .vjs-dock-text .vjs-dock-title { margin-bottom:0.5em;}
+  #_gorinjp_video .vjs-dock-text .vjs-dock-description { font-size:0.9em; opacity:0.6;}
+  /*list*/
+  #_gorinjp_video ._gorinjp_player ol {
+    width:100%; height:315px; position:absolute; top:0; left:0; z-index:1;
+    font-size:12px; min-width:0; padding:12px 12px 0 572px;
+  }
+  #_gorinjp_video ._gorinjp_player ol .vjs-playlist-item { outline:none; margin-bottom:12px;}
+  #_gorinjp_video ._gorinjp_player ol cite {
+    height:55px; line-height:1.5; white-space:normal;
+    overflow:hidden; text-overflow:ellipsis; margin-top:5px;
+    display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3;
+  }
+  #_gorinjp_video ._gorinjp_player ol time { font-size:11px; padding:3px 6px;}
+  #_gorinjp_video ._gorinjp_player ol .vjs-playlist-description { display:none;}
+  #_gorinjp_video ._gorinjp_player ol .vjs-playlist-thumbnail { margin-right:8px;}
+  #_gorinjp_video ._gorinjp_player ol .vjs-playlist-thumbnail img { display:block;}
+/*menu*/
+#_gorinjp_menu ._gorinjp_inner {
+  height:45px; text-align:center; padding-top:11px;
+  background:#fe0 url(http://gorin.superster.jp/embed_player/img/bg3.jpg) no-repeat;
+  }
+  #_gorinjp_menu ._gorinjp_inner h2 {
+    display:inline-block; font-size:18px; color:#fff;
+    font-family:"Verdana", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    padding-right:20px; position:relative;
+  }
+  #_gorinjp_menu ._gorinjp_selectbox { display:inline-block; width:140px; position:relative;margin:0 2px;}
+  #_gorinjp_menu ._gorinjp_selectbox select {
+    width:100%; height:24px; font-size:12px; background:#fff;
+    border:1px solid #333; border-radius:0; outline:0;
+    padding:0 0.5em; cursor:pointer;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+  }
+  #_gorinjp_menu ._gorinjp_selectbox select::-ms-expand { display:none;}
+  #_gorinjp_menu ._gorinjp_selectbox:before {
+    content:""; display:block; width:25px; height:22px;
+    background:#fff; pointer-events:none;
+    position:absolute; top:1px; right:1px;
+  }
+  #_gorinjp_menu ._gorinjp_selectbox:after {
+    content:''; display:block; width:0; height:0;
+    border:6px transparent solid;
+    border-bottom-width:0; border-top-color:#333;
+    position:absolute; top:9.5px; right:6.5px;
+    pointer-events:none;
+  }
+/*footer*/
+#_gorinjp_embedContainer footer ._gorinjp_inner { height:89px; text-align:center; background:#dfdfdf; padding:11px;}
+  #_gorinjp_embedContainer footer ._gorinjp_inner a {
+    display:inline-block; width:563px; height:67px;
+    text-indent:100%; white-space:nowrap; overflow:hidden;
+    background:url(http://gorin.superster.jp/embed_player/img/banner.png) no-repeat;
+    background-size:contain;
+  }
+  #_gorinjp_embedContainer ._gorinjp_arr:after {
+    content:""; display:block; width:10px; height:12px;
+    background:url(http://gorin.superster.jp/embed_player/img/arr.png) no-repeat;
+    background-size:contain;
+    position:absolute;
+  }
+  #_gorinjp_program ._gorinjp_inner > div h3:after { top:1px; right:4px;}
+  #_gorinjp_menu ._gorinjp_inner h2:after { top:5px; right:4px;}
+
+/*@max-width:799px
+/////////////////////////////////////////////////////////////////////*/
+/*@media screen and (max-width:799px) {*/
+
+/*header*/
+#_gorinjp_embedContainer._sp header ._gorinjp_inner { padding:5px 16px 2px;}
+  #_gorinjp_embedContainer._sp header h1 { width:92px; height:40px;}
+  #_gorinjp_embedContainer._sp header ._gorinjp_inner:before {
+    border:40px transparent solid;
+    border-bottom-width:0; border-top-color:#f2f2f2;
+    left:20px;
+  }
+/*program*/
+._sp #_gorinjp_program ._gorinjp_inner { display:block;}
+  ._sp #_gorinjp_program ._gorinjp_inner > div { width:100%; display:block; border:none !important; margin-bottom:2px;}
+  ._sp #_gorinjp_program ._gorinjp_inner ._gorinjp_now,
+  ._sp #_gorinjp_program ._gorinjp_inner ._gorinjp_next { background-size:180% 100%;}
+  ._sp #_gorinjp_program ._gorinjp_inner > div h3,
+  ._sp #_gorinjp_program ._gorinjp_inner > div p {
+    display:block; font-size:13px; color:#fff; line-height:1.2;
+    white-space:nowrap; overflow:hidden;
+    position:absolute; top:6px;
+  }
+  ._sp #_gorinjp_program ._gorinjp_inner ._gorinjp_now h3,
+  ._sp #_gorinjp_program ._gorinjp_inner ._gorinjp_next h3 { width:70px; left:14px;}
+  ._sp #_gorinjp_program ._gorinjp_inner ._gorinjp_now p,
+  ._sp #_gorinjp_program ._gorinjp_inner ._gorinjp_next p { left:84px;}
+/*video*/
+._sp #_gorinjp_video ._gorinjp_inner { padding-top:4px;}
+  ._sp #_gorinjp_video ._gorinjp_playerIn { width:100%;}
+  ._sp #_gorinjp_video ._gorinjp_player p { font-size:14px; font-weight:bold; line-height:1.5; padding:10px 14px 5px;}
+  ._sp #_gorinjp_video .vjs-dock-text { padding:1em 25% 2em 1em;}
+  ._sp #_gorinjp_video .vjs-dock-text .vjs-dock-title { margin-bottom:0.3em;}
+  /*list*/
+  ._sp #_gorinjp_video ._gorinjp_player ol {
+    width:100%; height:250px; position:relative; top:0; right:0; z-index:1;
+    font-size:12px; min-width:0; padding:12px 12px 0;
+  }
+  ._sp #_gorinjp_video ._gorinjp_player ol .vjs-playlist-thumbnail { margin-right:8px;}
+/*menu*/
+._sp #_gorinjp_menu ._gorinjp_inner {
+  height:auto; padding:8px 0;
+  background-size:120% 100%;
+  }
+  ._sp #_gorinjp_menu ._gorinjp_inner h2 { display:block; margin-bottom:5px;}
+  ._sp #_gorinjp_menu ._gorinjp_inner h2:after { display:none;}
+  ._sp #_gorinjp_menu ._gorinjp_selectbox { width:43%; margin:4px 2px;}
+  ._sp #_gorinjp_menu ._gorinjp_selectbox select { height:28px;}
+  ._sp #_gorinjp_menu ._gorinjp_selectbox:after { top:11px;}
+/*footer*/
+#_gorinjp_embedContainer._sp footer ._gorinjp_inner { height:auto; padding:12px 16px;}
+  #_gorinjp_embedContainer._sp footer ._gorinjp_inner a {
+    display:inline-block; width:100%; height:0; padding-top:15.98%;
+    background:url(http://gorin.superster.jp/embed_player/img/banner_sp.png) no-repeat;
+    background-size:contain;
+  }
+
+/*}*/
+
+/*＠loading
+/////////////////////////////////////////////////////////////////////*/
+.loading {
+  position:absolute; top:200px; left:47.5%;
+  font-size:10px; text-indent:-9999em;
+  border-top:0.5em solid rgba(170, 170, 170, 0.3);
+  border-right:0.5em solid rgba(170, 170, 170, 0.3);
+  border-bottom:0.5em solid rgba(170, 170, 170, 0.3);
+  border-left:0.5em solid #aaa;
+  -webkit-transform:translateZ(0);
+  -ms-transform:translateZ(0);
+  transform:translateZ(0);
+  -webkit-animation:thumbload 1.1s infinite linear;
+  animation:thumbload 1.1s infinite linear;
+  /*display:none;*/
+}
+.loading,
+.loading:after { border-radius:50%; width:5em; height:5em;}
+._sp .loading { top:150px; left:45%;}
+
+@-webkit-keyframes thumbload {
+  0% {
+    -webkit-transform:rotate(0deg);
+    transform:rotate(0deg);
+  }
+  100% {
+    -webkit-transform:rotate(360deg);
+    transform:rotate(360deg);
+  }
+}
+@keyframes thumbload {
+  0% {
+    -webkit-transform:rotate(0deg);
+    transform:rotate(0deg);
+  }
+  100% {
+    -webkit-transform:rotate(360deg);
+    transform:rotate(360deg);
+  }
+}
+
+.vjs-dock-text{display:none;}
