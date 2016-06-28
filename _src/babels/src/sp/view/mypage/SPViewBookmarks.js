@@ -50,20 +50,20 @@ export class SPViewBookmarks extends ViewBookmarks {
   render( articles:Array ):void {
 
     // 既存データ用のglobal配列
-    let articlesList = this._articles;
+    let articlesList = this.articles;
 
     // 前回までの配列length
     // sequence な index のために必要
-    let prevLast = this._articles.length;
+    let prevLast = this.articles.length;
 
     // 記事挿入 root element
     let element = this.element;
     // 'View More' button root element
     let moreElement = this.moreElement;
-    // offset, length を使用する Action
-    // let action = this.action;
-    // 参照を保持
-    let _this = this;
+    // // offset, length を使用する Actions
+    // // let action = this.action;
+    // // 参照を保持
+    // let _this = this;
 
     // more button 作成関数
     // ArchiveDom から呼び出す
@@ -71,19 +71,22 @@ export class SPViewBookmarks extends ViewBookmarks {
 
       show = !!show;
       // _moreRendered が null の時のみ, instance があれば state を update する
-      // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-      if ( _this._moreRendered === null ) {
-        // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
+      if ( this.moreRendered === null ) {
 
         // チェックをパスし実行する
-        _this._moreRendered = ReactDOM.render(
+        /**
+         * MoreViewNode instance
+         * @override
+         * @type {Object|MoreViewNode}
+         * */
+        this.moreRendered = ReactDOM.render(
           React.createElement( MoreViewNode, { show: show, action: action } ),
           moreElement
         );
 
       } else {
 
-        _this._moreRendered.updateShow( show );
+        this.moreRendered.updateShow( show );
 
       }
 
@@ -192,11 +195,16 @@ export class SPViewBookmarks extends ViewBookmarks {
     // console.log( 'articlesList ', articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
+    if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this._articleRendered = ReactDOM.render(
-        React.createElement( BookmarksDom, { list: articlesList, offset: this._request.offset, length: this._request.length, action: this.action } ),
+      /**
+       * BookmarksDom instance
+       * @override
+       * @type {Object|BookmarksDom}
+       */
+      this.articleRendered = ReactDOM.render(
+        React.createElement( BookmarksDom, { list: articlesList, offset: this.request.offset, length: this._request.length, action: this.action } ),
         element
       );
 
@@ -204,7 +212,7 @@ export class SPViewBookmarks extends ViewBookmarks {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
+      this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
 
     }
 

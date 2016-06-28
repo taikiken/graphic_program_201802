@@ -55,10 +55,15 @@ export class SPViewComments extends ViewComments {
    * @param {CommentsListDae} commentsListDae コメント一覧 CommentsListDae instance
    */
   all( commentsListDae:CommentsListDae ) {
-    this._reload = false;
+    /**
+     * reload flag
+     * @override
+     * @type {boolean}
+     * */
+    this.reloadFlag = false;
 
-    let commentsList = this._commentsList;
-    let commentsBank = this._commentsBank;
+    let commentsList = this.commentsList;
+    let commentsBank = this.commentsBank;
 
     // コメント挿入 root element
     let element = this.element;
@@ -70,7 +75,6 @@ export class SPViewComments extends ViewComments {
     // CommentsDom から呼び出す
     let moreButton = ( show, rest, moreElement ) => {
 
-      // console.log( '========================= more button ', _this._commentsListType, action.hasNext(), action );
       show = !!show;
 
       // とにかく render する
@@ -324,7 +328,7 @@ export class SPViewComments extends ViewComments {
           // console.warn( 'list error ', commentsListType, list );
           return null;
         }
-        // console.log( '******************************* start render *******************************', list );
+
         return (
           <div className={'comment-' + commentsListType}>
             <div className="comment-heading">
@@ -390,8 +394,8 @@ export class SPViewComments extends ViewComments {
     ReactDOM.render(
       <CommentsDom
         commentsList={commentsList}
-        articleId={String(this._articleId)}
-        commentsListType={this._commentsListType}
+        articleId={String(this.articleId)}
+        commentsListType={this.commentsListType}
         user={user}
       />,
       element
@@ -410,11 +414,15 @@ export class SPViewComments extends ViewComments {
    * 再読み込み
    */
   reload():void {
-    // 既存リストを空にする
-    this._commentsList = [];
+    /**
+     * 既存リストを空にする
+     * @override
+     * @type {Array}
+     */
+    this.commentsList = [];
     // reload flag on
-    this._reload = true;
+    this.reloadFlag = true;
     // ajax start
-    this._action.reload();
+    this.action.reload();
   }
 }

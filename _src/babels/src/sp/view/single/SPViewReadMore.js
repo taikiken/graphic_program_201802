@@ -30,10 +30,15 @@ export class SPViewReadMore extends View {
   /**
    * SP 記事詳細 「続きを読む」 ボタン制御
    * @param {Element} element single header root element
-   * @param {Element} button single header root element
+   * @param {Element} button single header #post-content-read-more element
    */
   constructor( element:Element, button:Element ) {
     super( element );
+    /**
+     * single header #post-content-read-more element
+     * @type {Element}
+     * @private
+     */
     this._button = button;
   }
   /**

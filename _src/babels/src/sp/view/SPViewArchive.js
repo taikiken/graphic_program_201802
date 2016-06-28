@@ -131,14 +131,20 @@ export class SPViewArchive extends View {
     this._home = home;
   }
   /**
-   * category slug
+   * category slug を取得します
    * @default all
    * @return {string} category slug を返します
    */
   get slug():string {
     return this._slug;
   }
-
+  /**
+   * category slug を設定します
+   * @param {string} slug category slug
+   */
+  set slug( slug:string ):void {
+    this._slug = slug;
+  }
   /**
    * 取得記事(articles)をArticleDae instance を格納した配列を取得します
    * @return {Array.<ArticleDae>|Array.<Object>|*} 取得記事(articles)をArticleDae instance を格納した配列を返します
@@ -152,6 +158,48 @@ export class SPViewArchive extends View {
    */
   set articles( responseArticles:Array<Object> ):void {
     this._articles = responseArticles;
+  }
+  /**
+   * SPArchiveNode instance を取得します
+   * @return {null|ReactClass|Object} SPArchiveNode instance を返します
+   */
+  get articleRendered():Object {
+    return this._articleRendered;
+  }
+  /**
+   * SPArchiveNode instance を設定します
+   * @param {Object} article SPArchiveNode instance
+   */
+  set articleRendered( article:Object ):void {
+    this._articleRendered = article;
+  }
+  /**
+   * response.request object を取得します
+   * @return {null|Object} response.request object を返します
+   */
+  get request():Object {
+    return this._request;
+  }
+  /**
+   * response.request object を設定します
+   * @param {Object} request response.request object
+   */
+  set request( request:Object ):void {
+    this._request = request;
+  }
+  /**
+   * more button instance (SPMoreViewDom) を取得します
+   * @return {Object|null|ReactClass} more button instance (SPMoreViewDom) を返します
+   */
+  get moreRendered():Object {
+    return this._moreRendered;
+  }
+  /**
+   * more button instance (SPMoreViewDom) を設定します
+   * @param {Object} moreRendered more button instance (SPMoreViewDom)
+   */
+  set moreRendered( moreRendered:Object ):void {
+    this._moreRendered = moreRendered;
   }
   // ---------------------------------------------------
   //  Method
@@ -273,10 +321,10 @@ export class SPViewArchive extends View {
     this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
+    if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this._articleRendered = ReactDOM.render(
+      this.articleRendered = ReactDOM.render(
         <SPArchiveNode
           list={articlesList}
           offset={this._request.offset}
@@ -294,7 +342,7 @@ export class SPViewArchive extends View {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
+      this.articleRendered.updateList( articlesList, this._request.offset, this._request.length );
 
     }
 

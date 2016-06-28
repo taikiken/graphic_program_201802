@@ -30,6 +30,7 @@ import {Safety} from '../data/Safety';
 // dae
 import {CommentsListDae} from '../dae/CommentsListDae';
 import {UserDae} from '../dae/UserDae';
+// import {ArticleDae} from '../dae/ArticleDae';
 
 // node
 import {CommentNode} from '../node/comment/CommentNode';
@@ -97,10 +98,9 @@ export class ViewComments extends View {
      * @protected
      */
     this._moreRendered = null;
-
     /**
      * user 情報
-     * @type {null}
+     * @type {null|UserDae}
      * @protected
      */
     this._user = null;
@@ -109,7 +109,6 @@ export class ViewComments extends View {
     let status = ReplyStatus.factory();
     let boundComplete = this.onComplete.bind( this );
     status.on( ReplyStatus.COMPLETE, boundComplete );
-    // this._status = status;
 
     // コメント削除後の再読み込み設定
     let comment = CommentStatus.factory();
@@ -167,14 +166,14 @@ export class ViewComments extends View {
    * コメントタイプ, all|official|self|normal を取得します
    * @return {string|*} コメントタイプ, all|official|self|normal を返します
    */
-  get commentListType():string {
+  get commentsListType():string {
     return this._commentsListType;
   }
   /**
    * コメントタイプ, all|official|self|normal を設定します
    * @param {string} type コメントタイプ, all|official|self|normal
    */
-  set commentListType( type:string ):void {
+  set commentsListType( type:string ):void {
     this._commentsListType = type;
   }
   /**
@@ -219,6 +218,20 @@ export class ViewComments extends View {
   set reloadFlag( flag:Boolean ):void {
     this._reloadFlag = flag;
   }
+  /**
+   * 取得記事(articles)をArticleDae instance 配列として取得する
+   * @return {Array.<ArticleDae>|Array} 取得記事(articles)をArticleDae instance 配列を返します
+   */
+  get commentsList():Array {
+    return this._commentsList;
+  }
+  /**
+   * 取得記事(articles)をArticleDae instance 配列として設定する
+   * @param {Array} list Array<ArticleDae>
+   */
+  set commentsList( list:Array ):void {
+    this._commentsList = list;
+  }
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------
@@ -228,7 +241,7 @@ export class ViewComments extends View {
   start():void {
 
     if ( User.sign && this.user === null ) {
-      throw new Error( `user info have to set before start.${this._articleId}, ${this._commentsListType}` );
+      throw new Error( `user info have to set before start.${this.articleId}, ${this.commentsListType}` );
     }
     this.action.next();
 
@@ -287,7 +300,7 @@ export class ViewComments extends View {
   render( response:Object ):void {
 
     let commentsListDae = new CommentsListDae( response );
-    let commentList = this._commentsList;
+    let commentList = this.commentsList;
 
     // total check
     if ( commentsListDae.total === 0 ) {
@@ -295,14 +308,12 @@ export class ViewComments extends View {
       // reload の時はエラーにしない
       if ( !this.reloadFlag ) {
         // デーが無いので処理を止める + reload 除く
-        // console.log( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
         this.executeSafely( View.EMPTY_ERROR );
         return;
       }
 
     }
 
-    // previous data と新規データを合成
     this.commentsList = commentList.concat( commentsListDae.comments.list );
 
     // _commentsBank へ comment.id をキーにデータをセット
@@ -602,7 +613,7 @@ export class ViewComments extends View {
     if ( user === null ) {
       user = Object.create( {} );
     }
-
+    // console.log( 'CommentsDom commentsListType', this._commentsListType, this.commentsListType );
     // とにかくそのまま
     ReactDOM.render(
       <CommentsDom
@@ -628,7 +639,7 @@ export class ViewComments extends View {
    */
   reload():void {
     // 既存リストを空にする
-    this._commentsList = [];
+    this.commentsList = [];
     // reload flag on
     this.reloadFlag = true;
     // ajax start

@@ -67,20 +67,20 @@ export class ViewHeaderMember extends View {
     /**
      * SettingDom instance
      * @type {null|Object}
-     * @private
+     * @protected
      */
     this._component = null;
     // SettingsStatus complete を listen しリロードする
     /**
      * SettingsStatus instance
      * @type {null}
-     * @private
+     * @protected
      */
     this._settingStatus = null;
     /**
      * bind 済み this.onComplete
      * @type {Function}
-     * @private
+     * @protected
      */
     this._boundComplete = this.onComplete.bind( this );
     /**
@@ -92,15 +92,21 @@ export class ViewHeaderMember extends View {
     /**
      * timeout ID
      * @type {number}
-     * @private
+     * @protected
      */
     this._timer = 0;
     /**
      * bind 済み this.reload
      * @type {Function}
-     * @private
+     * @protected
      */
     this._boundReload = this.reload.bind( this );
+    /**
+     * ViewLogoutModal インスタンス
+     * @type {null|Object|ViewLogoutModal}
+     * @protected
+     */
+    this._modal = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -146,6 +152,27 @@ export class ViewHeaderMember extends View {
    */
   set reloadFlag( flag:Boolean ):void {
     this._reloadFlag = flag;
+  }
+  /**
+   * timeout ID を取得します
+   * @return {number|Number} timeout ID を返します
+   */
+  get timer():Number {
+    return this._timer;
+  }
+  /**
+   * timeout ID を設定します
+   * @param {Number} timer timeout ID
+   */
+  set timer( timer:Number ):void {
+    this._timer = timer;
+  }
+  /**
+   * bind 済み this.reload 取得します
+   * @return {Function} bind 済み this.reload を返します
+   */
+  get boundReload():Function {
+    return this._boundReload;
   }
   // ---------------------------------------------------
   //  Method

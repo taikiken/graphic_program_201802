@@ -67,7 +67,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     this.slug = 'all';
   }
   // ---------------------------------------------------
-  //  Method
+  //  METHOD
   // ---------------------------------------------------
   /**
    * dom を render します
@@ -117,8 +117,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       getInitialState: function() {
         /**
+         * page number
          * @private
          * @type {number}
+         * @default 1
          */
         this.page = 1;
 
@@ -226,16 +228,21 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-      if ( this._moreRendered === null ) {
+      if ( this.moreRendered === null ) {
         // チェックをパスし実行する
-        this._moreRendered = ReactDOM.render(
+        /**
+         * MoreViewDom instance を設定します
+         * @override
+         * @type {ReactClass|MoreViewDom}
+         */
+        this.moreRendered = ReactDOM.render(
           React.createElement( MoreViewDom, { show: show, action: this.action, home: this.home, slug: this.slug } ),
           moreElement
         );
 
       } else {
 
-        this._moreRendered.updateShow( show );
+        this.moreRendered.updateShow( show );
 
       }
 
@@ -396,10 +403,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         }
 
       }
-      // , // render
-      // componentDidMount: function() {
-      //   // mount
-      // }
     } );
 
     // ------------------------------------------------
@@ -428,10 +431,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       render: function() {
         let mediaType = this.props.mediaType;
-
         let recommend = '';
+        
         if ( this.props.recommend ) {
-          // recommend = <i className="post-label_recommend">おすすめ記事</i>;
           recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
         }
 
@@ -693,13 +695,18 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+      /**
+       * ArticleDom instance を設定します
+       * @override
+       * @type {ReactClass|ArticleDom}
+       */
       this.articleRendered = ReactDOM.render(
         React.createElement( ArticleDom, {
           home: this.home,
           list: articlesList,
-          offset: this._request.offset,
-          length: this._request.length,
-          masonry: this._useMasonry,
+          offset: this.request.offset,
+          length: this.request.length,
+          masonry: this.useMasonry,
           action: this.action } ),
         element
       );

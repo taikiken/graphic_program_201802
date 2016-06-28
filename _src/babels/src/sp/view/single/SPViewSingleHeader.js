@@ -127,16 +127,20 @@ export class SPViewSingleHeader extends ViewSingleHeader {
       }
     } );
 
-    if ( this._rendered === null ) {
-
-      this._rendered = ReactDOM.render(
+    if ( this.rendered === null ) {
+      /**
+       * SPHeaderDom instance
+       * @override
+       * @type {Object|ReactClass}
+       */
+      this.rendered = ReactDOM.render(
         React.createElement( SPHeaderDom, { single: singleDae, sign: User.sign } ),
         this.element
       );
 
     } else {
 
-      this._rendered.updateSingle( singleDae, User.sign );
+      this.rendered.updateSingle( singleDae, User.sign );
 
     }
   }

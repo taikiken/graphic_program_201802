@@ -36,10 +36,17 @@ export class SPViewHeaderUser extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
-
+    /**
+     * bind 済み this.memberCallback
+     * @type {Function}
+     * @private
+     */
     this._boundCallback = this.memberCallback.bind( this );
-
-    // login user view instance
+    /**
+     * login user view instance(SPViewHeaderMember)
+     * @type {null|Object|SPViewHeaderMember}
+     * @private
+     */
     this._member = null;
   }
   /**

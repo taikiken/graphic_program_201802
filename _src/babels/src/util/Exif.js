@@ -17,13 +17,15 @@ import {EventDispatcher} from '../event/EventDispatcher';
 let _symbol = Symbol();
 let _instance = null;
 /**
- * Exif orientation check
- * (stackoverflow)[http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side]
+ * <p>Exif orientation check</p>
+ * <p>iOS カメラロール画像からユーザーアイコンを取得すると横向きになるために exif orientation 値を取得し向きを正規化します</p>
+ *
+ * [stackoverflow])http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side)
  */
 export class Exif extends EventDispatcher {
   /**
-   * <h3>Singleton</h3>
    * <p>Exif orientation check</p>
+   * @static
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {LogoutStatus} LogoutStatus instance を返します
    */
@@ -37,8 +39,23 @@ export class Exif extends EventDispatcher {
     if ( _instance === null ) {
       super();
       _instance = this;
+      /**
+       * FileReader instance
+       * @type {null|FileReader}
+       * @private
+       */
       this._reader = null;
+      /**
+       * bind 済み this.onLoad event handler
+       * @type {Function}
+       * @private
+       */
       this._boundLoad = this.onLoad.bind( this );
+      /**
+       * bind 済み this.onError event handler
+       * @type {Function}
+       * @private
+       */
       this._boundError = this.onError.bind( this );
     }
 

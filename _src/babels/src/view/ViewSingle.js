@@ -37,7 +37,7 @@ import {Ga} from '../ga/Ga';
 
 /**
  * <p>記事詳細</p>
- * 記事ID で 記事詳細JSONを取得し表示します
+ * <p>記事ID で 記事詳細JSONを取得し表示します</p>
  *
  * ```
  * let elements = {}
@@ -101,6 +101,30 @@ export class ViewSingle extends View {
      * @protected
      */
     this._footer = null;
+  }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * header instance
+   * @return {Object|ViewSingleHeader|null} header instance を返します
+   */
+  get header():Object {
+    return this._header;
+  }
+  /**
+   * header instance を設定します
+   * @param {Object|ViewSingleHeader} header header instance
+   */
+  set header( header:Object ):void {
+    this._header = header;
+  }
+  /**
+   * bind 済み this.headerMount 取得します
+   * @return {Function} bind 済み this.headerMount を返します
+   */
+  get boundMount():Function {
+    return this._boundMount;
   }
   // ---------------------------------------------------
   //  METHODS

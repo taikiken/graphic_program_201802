@@ -92,6 +92,55 @@ export class ViewBookmarks extends View {
   get moreElement():Element {
     return this._moreElement;
   }
+  /**
+   * 取得記事(articles)をArticleDae instance 配列を取得します
+   * @return {Array.<ArticleDae>} 取得記事(articles)をArticleDae instance 配列を返します
+   */
+  get articles():Array {
+    return this._articles;
+  }
+  /**
+   * ArticleDom instance を取得します
+   * @return {null|Object} ArticleDom instance を返します
+   */
+  get articleRendered():Object {
+    return this._articleRendered;
+  }
+  /**
+   * ArticleDom instance を設定します
+   * @param {Object} rendered ArticleDom instance
+   */
+  set articleRendered( rendered:Object ):void {
+    this._articleRendered = rendered;
+  }
+  /**
+   * response.request object を取得します
+   * @return {null|Object} response.request object を返します
+   */
+  get request():Object {
+    return this._request;
+  }
+  /**
+   * response.request object を設定します
+   * @param {Object} request response.request object
+   */
+  set request( request:Object ):void {
+    this._request = request;
+  }
+  /**
+   * more button instance を取得します
+   * @return {null|Object} more button instance を返します
+   */
+  get moreRendered():Object {
+    return this._moreRendered;
+  }
+  /**
+   * more button instance を設定します
+   * @param {Object} rendered more button instance
+   */
+  set moreRendered( rendered:Object ):void {
+    this._moreRendered = rendered;
+  }
   // ---------------------------------------------------
   //  Method
   // ---------------------------------------------------

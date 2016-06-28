@@ -28,7 +28,12 @@ export class SPViewNews extends SPViewArchive {
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option );
-    this._action = User.sign ?
+    /**
+     * Action instance
+     * @override
+     * @type {NewsAuth|News}
+     */
+    this.action = User.sign ?
       new NewsAuth( this.done.bind( this ), this.fail.bind( this ) ) :
       new News( this.done.bind( this ), this.fail.bind( this ) );
     /**

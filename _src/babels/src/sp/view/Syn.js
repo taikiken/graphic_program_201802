@@ -60,7 +60,7 @@ export class Syn {
    */
   constructor( button:Element, side:Element ) {
     /**
-     * #menu-opener element, menu を開くボタン
+     * element#menu-opener, menu を開くボタン
      * @type {Element}
      * @private
      */
@@ -114,6 +114,8 @@ export class Syn {
     // whole(#page) style が消える???対策
     /**
      * update event handler を bind this し this 参照をキープします
+     * @type {Function}
+     * @private
      */
     this._boundUpdate = this.update.bind( this );
     /**
@@ -144,6 +146,30 @@ export class Syn {
       loaded: this.adgLoaded.bind( this ),
       failed: this.adgFailed.bind( this )
     };
+    /**
+     * element#side-menu-list を Sagen.dom instance にします
+     * @type {null|Sagen.Dom}
+     * @private
+     */
+    this._listDom = null;
+    /**
+     * element#side-menu-toggle を Sagen.dom instance にします
+     * @type {null|Sagen.Dom}
+     * @private
+     */
+    this._toggleDom = null;
+    /**
+     * element#page を Sagen.dom instance にします
+     * @type {null|Sagen.Dom}
+     * @private
+     */
+    this._page = null;
+    /**
+     * element#side-menu-bg を Sagen.dom instance にします
+     * @type {null|Sagen.Dom}
+     * @private
+     */
+    this._bg = null;
   }
   /**
    * 初期処理, after DOMReady で実行のこと
