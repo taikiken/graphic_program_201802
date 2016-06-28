@@ -13,10 +13,10 @@ endif;
 
 // デバイスカテゴリー
 // ------------------------------
-$cat = 'undo.SP';
+$cat = 'undo.SP.ALL';
 if ( isset($_GET['cat']) ) :
   if ( $_GET['cat'] == 'PC' ) :
-    $cat = 'undo.PC';
+    $cat = 'undo.PC.ALL';
   endif;
 endif;
 
