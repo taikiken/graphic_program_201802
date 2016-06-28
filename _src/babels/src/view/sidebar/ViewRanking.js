@@ -339,9 +339,6 @@ export class ViewRanking extends View {
                       key={'ranking-' + dae.id}
                       index={i}
                       id={String( dae.id )}
-                      // slug={dae.category.slug}
-                      // category={dae.category.label}
-                      // category2={dae.category2.label}
                       categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}

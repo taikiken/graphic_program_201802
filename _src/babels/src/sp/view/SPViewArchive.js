@@ -334,6 +334,7 @@ export class SPViewArchive extends View {
           moreButton={moreButton}
           home={this._home}
           type={Message.NEWS}
+          adSp=""
         />,
         this.element
       );

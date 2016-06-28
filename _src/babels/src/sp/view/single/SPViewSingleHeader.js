@@ -16,7 +16,7 @@ import {View} from '../../../view/View';
 import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
 
 // app
-import {Url} from '../../../app/const/Url';
+// import {Url} from '../../../app/const/Url';
 import {User} from '../../../app/User';
 
 // dae
@@ -24,6 +24,8 @@ import {SingleDae} from '../../../dae/SingleDae';
 
 // node
 import {BookmarkNode} from '../../../node/bookmark/BookmarkNode';
+// import {CategoryLabelNode} from '../../../node/category/CategoryLabelNode';
+import {CategoryLabelNodeLink} from '../../../node/category/CategoryLabelNodeLink';
 
 // React
 let React = self.React;
@@ -79,11 +81,11 @@ export class SPViewSingleHeader extends ViewSingleHeader {
       render: function() {
         let single = this.state.single;
 
-        // category label を返す
-        // label があれば
-        let category = ( label, slug ) => {
-          return !label ? '' : <span className="category-label"><a href={Url.category(slug)}>{label}</a></span>;
-        };
+        // // category label を返す
+        // // label があれば
+        // let category = ( label, slug ) => {
+        //   return !label ? '' : <span className="category-label"><a href={Url.category(slug)}>{label}</a></span>;
+        // };
 
         return (
           <div className="sp-single-header">
@@ -93,7 +95,13 @@ export class SPViewSingleHeader extends ViewSingleHeader {
             <div className="post-data">
               <div className="f-left">
                 <p className="post-author">{single.user.userName}</p>
-                <p className="post-category">{category(single.category.label, single.category.slug)}{category(single.category2.label, single.category2.slug)}</p>
+                <p className="post-category">
+                  <CategoryLabelNodeLink
+                    categories={single.categories.all}
+                    id={`single-label-${single.id}`}
+                    index={1}
+                  />
+                </p>
                 <p className="post-date">{single.displayDate}</p>
               </div>
               {/* div.f-right (bookmark: on / off) */}

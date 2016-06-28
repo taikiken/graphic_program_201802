@@ -27,6 +27,9 @@ import {Safety} from '../../data/Safety';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
+// node
+import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
+
 // Ga
 import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
@@ -205,8 +208,9 @@ export class ViewVideos extends View {
         index: React.PropTypes.number.isRequired,
         id: React.PropTypes.string.isRequired,
         slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        category2: React.PropTypes.string,
+        // category: React.PropTypes.string.isRequired,
+        // category2: React.PropTypes.string,
+        categories: React.PropTypes.array.isRequired,
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
@@ -215,17 +219,17 @@ export class ViewVideos extends View {
         detail: React.PropTypes.bool.isRequired,
         thisSlug: React.PropTypes.string.isRequired
       },
-      getDefaultPropTypes: function() {
-        return {
-          category2: ''
-        };
-      },
+      // getDefaultPropTypes: function() {
+      //   return {
+      //     category2: ''
+      //   };
+      // },
       render: function() {
         let p = this.props;
 
-        let category = ( label ):string => {
-          return !label ? '' : <span className="category-label">{label}</span>;
-        };
+        // let category = ( label ):string => {
+        //   return !label ? '' : <span className="category-label">{label}</span>;
+        // };
 
         return (
           <li className={'board-item videos-' + p.index + ' videos-' + (p.slug || categorySlug)}>
@@ -235,7 +239,13 @@ export class ViewVideos extends View {
                 <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY_SMALL} alt="" />
               </figure>
               <div className="post-data">
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
+                <p className={'post-category post-category-' + p.slug}>
+                  <CategoryLabelNode
+                    categories={p.categories}
+                    id={`videos-label-${p.id}`}
+                    index={p.index}
+                  />
+                </p>
                 <h4 className="post-heading">{p.title}</h4>
                 <p className="post-date">{p.date}</p>
               </div>
@@ -322,9 +332,8 @@ export class ViewVideos extends View {
                       key={'ranking-' + dae.id}
                       index={i}
                       id={String( dae.id )}
-                      slug={dae.category.slug}
-                      category={dae.category.label}
-                      category2={dae.category2.label}
+                      slug={dae.categories.all[0].slug}
+                      categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}
                       title={dae.title}

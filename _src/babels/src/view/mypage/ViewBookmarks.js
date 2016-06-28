@@ -30,6 +30,7 @@ import {ArticleDae} from '../../dae/ArticleDae';
 // node
 import {BookmarkButtonNode} from '../../node/mypage/BookmarkButtonNode';
 import {MoreViewNode} from '../../node/mypage/MoreViewNode';
+import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
 
 // React
 let React = self.React;
@@ -224,10 +225,10 @@ export class ViewBookmarks extends View {
     let element = this.element;
     // 'View More' button root element
     let moreElement = this.moreElement;
-    // offset, length を使用する Action
-    // let action = this.action;
-    // 参照を保持
-    let _this = this;
+    // // offset, length を使用する Action
+    // // let action = this.action;
+    // // 参照を保持
+    // let _this = this;
 
     // more button 作成関数
     // ArchiveDom から呼び出す
@@ -236,18 +237,18 @@ export class ViewBookmarks extends View {
       show = !!show;
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-      if ( _this._moreRendered === null ) {
+      if ( this._moreRendered === null ) {
         // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
 
         // チェックをパスし実行する
-        _this._moreRendered = ReactDOM.render(
+        this.moreRendered = ReactDOM.render(
           React.createElement( MoreViewNode, { show: show, action: action } ),
           moreElement
         );
 
       } else {
 
-        _this._moreRendered.updateShow( show );
+        this._moreRendered.updateShow( show );
 
       }
 
@@ -281,23 +282,13 @@ export class ViewBookmarks extends View {
             <ul className="board-small">
               {
                 // loop start
-                this.state.list.map( function( dae ) {
+                this.state.list.map( function( dae, idx ) {
 
-                  /*
-                  let thumbnail = dae.media.images.thumbnail;
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.IMG_SMALL;
-                  } else if ( !Safety.isImg( thumbnail ) ) {
-                    if ( !Safety.isGraph( thumbnail ) ) {
-                      thumbnail = Empty.IMG_SMALL;
-                    }
-                  }
-                  */
                   let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
-
-                  let category = ( label ):string => {
-                    return !label ? '' : <span className="category-label">{label}</span>;
-                  };
+                  //
+                  // let category = ( label ):string => {
+                  //   return !label ? '' : <span className="category-label">{label}</span>;
+                  // };
 
                   return (
                     <li key={'bookmarks-' + dae.id} className="board-stacks board-item">
@@ -310,7 +301,13 @@ export class ViewBookmarks extends View {
                           <img src={thumbnail} alt={dae.title}/>
                         </figure>
                         <div className="post-data">
-                          <p className="post-category">{category(dae.category.label)}{category(dae.category2.label)}</p>
+                          <p className="post-category">
+                            <CategoryLabelNode
+                              categories={dae.categories.all}
+                              id={`bookmarks-label-${dae.id}`}
+                              index={idx}
+                            />
+                          </p>
                           <h2 className="post-heading">{dae.title}</h2>
                           <p className="post-date">{dae.displayDate}</p>
                         </div>

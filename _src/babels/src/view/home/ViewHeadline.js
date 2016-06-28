@@ -30,6 +30,9 @@ import {Safety} from '../../data/Safety';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
+// node
+import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
+
 // Ga
 import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
@@ -177,25 +180,27 @@ export class ViewHeadline extends View {
         index: React.PropTypes.number.isRequired,
         id: React.PropTypes.string.isRequired,
         slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        category2: React.PropTypes.string,
+        // @from 2016-06-27 categories へ切替
+        // category: React.PropTypes.string.isRequired,
+        // category2: React.PropTypes.string,
+        categories: React.PropTypes.array.isRequired,
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
         mediaType: React.PropTypes.string.isRequired
       },
-      getDefaultPropTypes: function() {
-        return {
-          category2: ''
-        };
-      },
+      // getDefaultPropTypes: function() {
+      //   return {
+      //     category2: ''
+      //   };
+      // },
       render: function() {
         let p = this.props;
 
-        let category = ( label ):string => {
-          return !label ? '' : <span className="category-label">{label}</span>;
-        };
+        // let category = ( label ):string => {
+        //   return !label ? '' : <span className="category-label">{label}</span>;
+        // };
 
         let playMark = (mediaType) => {
           if (mediaType === MediaType.VIDEO) {
@@ -211,7 +216,13 @@ export class ViewHeadline extends View {
             <a className="post" href={p.url} onClick={this.gaSend}>
               <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(this.props.mediaType)}</figure>
               <div className="post-data">
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
+                <p className={'post-category post-category-' + p.slug}>
+                  <CategoryLabelNode
+                    categories={this.props.categories}
+                    id={`headline-label-${this.props.id}`}
+                    index={this.props.index}
+                  />
+                </p>
                 <h3 className="post-heading">{p.title}</h3>
                 <p className="post-date">{p.date}</p>
               </div>
@@ -259,9 +270,8 @@ export class ViewHeadline extends View {
                       key={'headline-' + dae.id}
                       index={i}
                       id={String( dae.id )}
-                      slug={dae.category.slug}
-                      category={dae.category.label}
-                      category2={dae.category2.label}
+                      slug={dae.categories.all[ 0 ].slug}
+                      categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}
                       title={dae.title}

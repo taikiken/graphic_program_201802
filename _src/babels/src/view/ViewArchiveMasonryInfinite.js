@@ -34,6 +34,7 @@ import {Rise} from '../ui/Rise';
 // node(ReactClass)
 import {ReactionNode} from '../node/comment/ReactionNode';
 import {CommentUserPlusCountNode} from '../node/comment/CommentUserPlusCountNode';
+import {CategoryLabelNode} from '../node/category/CategoryLabelNode';
 
 // React
 let React = self.React;
@@ -781,9 +782,9 @@ export class ViewArchiveMasonryInfinite extends View {
                 let commentsTotal = dae.commentsCount;
                 let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
-                let category = ( label ):string => {
-                  return !label ? '' : <span className="category-label">{label}</span>;
-                };
+                // let category = ( label ):string => {
+                //   return !label ? '' : <span className="category-label">{label}</span>;
+                // };
 
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
@@ -796,7 +797,13 @@ export class ViewArchiveMasonryInfinite extends View {
                         recommend={!!dae.isRecommend && _this.home}
                       />
                       <div className="post-data">
-                        <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
+                        <p className={'post-category post-category-' + dae.categories.all[ 0 ].slug}>
+                          <CategoryLabelNode
+                            categories={dae.categories.all}
+                            id={`post-archive-${dae.id}`}
+                            index={i}
+                          />
+                        </p>
                         <h3 className="post-heading">{dae.title}</h3>
                         <p className="post-date">{dae.displayDate}</p>
                         <div className="post-excerpt-text">{dae.description}</div>

@@ -26,6 +26,7 @@ import {ArticleDae} from '../../../dae/ArticleDae';
 // node
 import {BookmarkButtonNode} from '../../../node/mypage/BookmarkButtonNode';
 import {MoreViewNode} from '../../../node/mypage/MoreViewNode';
+import {CategoryLabelNode} from '../../../node/category/CategoryLabelNode';
 
 // React
 let React = self.React;
@@ -120,23 +121,13 @@ export class SPViewBookmarks extends ViewBookmarks {
             <ul className="board-small">
               {
                 // loop start
-                this.state.list.map( function( dae ) {
+                this.state.list.map( function( dae, idx ) {
 
-                  /*
-                  let thumbnail = dae.media.images.thumbnail;
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.IMG_SMALL;
-                  } else if ( !Safety.isImg( thumbnail ) ) {
-                    if ( !Safety.isGraph( thumbnail ) ) {
-                      thumbnail = Empty.IMG_SMALL;
-                    }
-                  }
-                  */
                   let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
-                  let category = ( label ):string => {
-                    return !label ? '' : <span className="category-label">{label}</span>;
-                  };
+                  // let category = ( label ):string => {
+                  //   return !label ? '' : <span className="category-label">{label}</span>;
+                  // };
 
                   return (
                     <li key={'bookmarks-' + dae.id} className="board-stacks board-item">
@@ -145,7 +136,13 @@ export class SPViewBookmarks extends ViewBookmarks {
                           <img src={thumbnail} alt={dae.title}/>
                         </figure>
                         <div className="post-data">
-                          <p className="post-category">{category(dae.category.label)}{category(dae.category2.label)}</p>
+                          <p className="post-category">
+                            <CategoryLabelNode
+                              categories={dae.categories.all}
+                              id={`bookmarks-label-${dae.id}`}
+                              index={idx}
+                            />
+                          </p>
                           <h2 className="post-heading">{dae.title}</h2>
                           <p className="post-date">{dae.displayDate}</p>
                         </div>

@@ -24,6 +24,7 @@ import {View} from '../../view/View';
 import {Safety} from '../../data/Safety';
 
 // node
+import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
 import {ReactionNode} from '../../node/comment/ReactionNode';
 import {SPNewsAdNode} from '../node/ad/SPNewsAdNode';
 
@@ -371,9 +372,9 @@ export let SPArchiveNode = React.createClass( {
             let commentsTotal = dae.commentsCount;
             let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
-            let category = ( label ):string => {
-              return !label ? '' : <span className="category-label">{label}</span>;
-            };
+            // let category = ( label ):string => {
+            //   return !label ? '' : <span className="category-label">{label}</span>;
+            // };
 
             let recommend = '';
             if ( !!dae.isRecommend && home ) {
@@ -393,7 +394,13 @@ export let SPArchiveNode = React.createClass( {
                     <h2 className="post-heading">{dae.title}</h2>
                     <div className="post-data">
                       {recommend}
-                      <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
+                      <p className={'post-category post-category-' + dae.categories.all[0].slug}>
+                        <CategoryLabelNode
+                          categories={dae.categories.all}
+                          id={`archive-label-${dae.id}`}
+                          index={i}
+                        />
+                      </p>
                       <p className="post-date">{dae.displayDate}</p>
                       <div className="post-excerpt-text">{dae.description}</div>
                     </div>
