@@ -24,7 +24,7 @@ let React = self.React;
 // More button
 // --------------------------------------------
 /**
- * SP 次を見る MORE VIEW button
+ * SP 次を見る VIEW MORE button
  * @type {ReactClass}
  */
 export let SPMoreViewNode = React.createClass( {

@@ -26,7 +26,6 @@ import {SPCommentFormNode} from './SPCommentFormNode';
 let React = self.React;
 
 /**
- * <h3>React class</h3>
  * 記事詳細 > コメント一覧 node を作成します
  * @class CommentNode
  * @type {Function}

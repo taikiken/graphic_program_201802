@@ -61,7 +61,17 @@ let React = self.React;
 //   }
 //
 // } );
-
+/**
+ * <p>個別記事コメント部分の表示</p>
+ *
+ * ```
+ * div.commented-user
+ *  ul.comments-second
+ *    li.commented-user-item
+ * ```
+ * @type {ReactClass}
+ * @private
+ * */
 let CommentsSecondDom = React.createClass( {
   propType: {
     seconds: React.PropTypes.array.isRequired,
@@ -95,21 +105,6 @@ let CommentsSecondDom = React.createClass( {
             seconds.map( function( commentDae, i ) {
 
               let userDae = commentDae.user;
-              // let picture = userDae.profilePicture ? userDae.profilePicture : Empty.USER_EMPTY;
-              /*
-              let picture = userDae.profilePicture;
-              if ( !picture ) {
-                picture = Empty.USER_EMPTY;
-              } else if ( !Safety.isImg( picture ) ) {
-                // 画像ファイル名に拡張子がないのがあったので
-                // 拡張子チェックを追加
-                if ( !Safety.isGraph( picture ) ) {
-                  picture = Empty.USER_EMPTY;
-                }
-              }
-
-              let loggedIn = picture === Empty.USER_EMPTY ? '' : 'user-logged-in';
-              */
               let picture = Safety.image( userDae.profilePicture, Empty.USER_EMPTY );
               let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
 
@@ -139,6 +134,20 @@ let CommentsSecondDom = React.createClass( {
 
 // --------------------------------------------
 // first + second comment container
+/**
+ * <p>個別記事コメント部分の表示</p>
+ *
+ * ```
+ * div.comments-popular
+ *  <CommentsSecondDom />
+ *  div.feature-user
+ *    figure.comment-user
+ *    div.comment-content
+ *    <ReactionNode />
+ * ```
+ * @type {*|Function|ReactClass}
+ * @private
+ */
 let PopularDom = React.createClass( {
   propType: {
     commentsPopular: React.PropTypes.object.isRequired,
@@ -201,13 +210,13 @@ let PopularDom = React.createClass( {
           />
           <div className="feature-user comment-item">
             <figure className="comment-user">
-                  <span className="comment-user-link">
-                    <span className={'comment-user-thumb ' + loggedIn}><img src={Empty.refresh(picture)} alt={firstUser.userName}/></span>
-                    <div className="comment-user-data">
-                      <p className="comment-user-name">{firstUser.userName}</p>
-                      <p className="comment-user-job">{firstUser.bio}</p>
-                    </div>
-                  </span>
+              <span className="comment-user-link">
+                <span className={'comment-user-thumb ' + loggedIn}><img src={Empty.refresh(picture)} alt={firstUser.userName}/></span>
+                <div className="comment-user-data">
+                  <p className="comment-user-name">{firstUser.userName}</p>
+                  <p className="comment-user-job">{firstUser.bio}</p>
+                </div>
+              </span>
             </figure>
             {/* insert html tag into .comment-content innerHTML */}
             <div className="comment-content" dangerouslySetInnerHTML={{__html: first.body}} />
@@ -245,6 +254,11 @@ let PopularDom = React.createClass( {
 // 基点 React class
 // ------------------------------------------------
 // 記事一覧のサムネイル
+/**
+ * 記事一覧のサムネイル
+ * @type {*|Function|ReactClass}
+ * @private
+ */
 let ThumbnailDom = React.createClass( {
   propType: {
     mediaType: React.PropTypes.string.isRequired,
@@ -341,7 +355,6 @@ export let SPArchiveNode = React.createClass( {
   },
   render: function() {
 
-    // console.log( '****************************************** render', this.state.list );
     let home = this.props.home;
     let length = this.state.list.length;
     let type = this.props.type;
@@ -412,16 +425,13 @@ export let SPArchiveNode = React.createClass( {
   },
   // state 変更し dom が更新された後に呼び出される delegate
   componentDidUpdate: function() {
-
   },
   // dom が表示された後に1度だけ呼び出される delegate
   componentDidMount: function() {
-    // console.log( '************ componentDidMount ************', this.props.masonry );
     // after mount
     this.props.scope.executeSafely( View.DID_MOUNT );
     // hasNext を元に More View button の表示非表示を決める
     this.props.moreButton( this.props.action.hasNext() );
-
   },
   // dom が削除される前に呼び出される delegate
   componentWillUnmount: function() {
@@ -430,24 +440,19 @@ export let SPArchiveNode = React.createClass( {
   // 以降 custom
   // isotope 前準備
   shouldMasonry: function() {
-
   },
   // 画像読み込む完了 event handler, isotope を実行
   onImages: function() {
-
   },
   updateList: function( list, offset, length ) {
     // state を変更し appendChild + isotope を行う
     this.setState( { list: list, offset: offset, length: length } );
     this.props.moreButton( this.props.action.hasNext() );
-
   },
   // didUpdate から呼び出される
   appendImages: function() {
-
     // hasNext を元に More View button の表示非表示を決める
     this.setState( { loading: '' } );
     this.props.moreButton( this.props.action.hasNext() );
-
   }
 } );// SPArticleDom
