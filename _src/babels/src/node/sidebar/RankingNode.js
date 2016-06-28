@@ -78,11 +78,11 @@ export const RankingNode = React.createClass( {
     thisSlug: React.PropTypes.string.isRequired,
     categorySlug: React.PropTypes.string.isRequired
   },
-  getDefaultPropTypes: function() {
-    return {
-      category2: ''
-    };
-  },
+  // getDefaultPropTypes: function() {
+  //   return {
+  //     category2: ''
+  //   };
+  // },
   render: function() {
     let p = this.props;
     let standing = p.index + 1;
