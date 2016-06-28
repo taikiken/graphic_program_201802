@@ -40,8 +40,8 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * パーソナライズ設定
- * 興味のある競技
+ * <p>パーソナライズ設定<br>
+ * 興味のある競技</p>
  * @type {ReactClass}
  */
 export let SettingsInterestNode = React.createClass( {

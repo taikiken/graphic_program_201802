@@ -25,9 +25,11 @@ let React = self.React;
 // let ReactDOM = self.ReactDOM;
 
 /**
- * category, category2 から categories を使用する
+ * <p>category, category2 から categories を使用する<br>
+ * .category-label-wrapper カテゴリー表示</p>
  * @from 2016-06-16
  * @type {Function|ReactClass}
+ * @private
  */
 let CategoryListNode = React.createClass( {
   propTypes: {
@@ -49,7 +51,8 @@ let CategoryListNode = React.createClass( {
 } );
 
 /**
- * SPに人気記事一覧を記事詳細に追加することになったので共通で使用できるように独立させました
+ * <p>人気記事一覧</p>
+ * <p>SPに人気記事一覧を記事詳細に追加することになったので共通で使用できるように独立させました</p>
  * @from 2016-06-16
  * @type {Function|ReactClass}
  */
