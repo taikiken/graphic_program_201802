@@ -390,7 +390,7 @@ function set_category2($category,$type){
 		$f["id"]=0;
 	}
 	
-	$types=array("","ranking","video");
+	$types=array("","ranking","video","recommend");
 	if(!in_array($type,$types)){
 		$status=array(
 			"code"=>400,

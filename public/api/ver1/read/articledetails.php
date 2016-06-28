@@ -56,10 +56,32 @@ if($y["status"]["code"]===200){
 	$ad_put=set_advertise($ad,"detail");
 	$s=$s+$ad_put;
 	unset($s["vast"]);
+	unset($s["ad_urlpc"]);
+	unset($s["ad_urlsp"]);
+
 	
 	$relatedposts=unserialize(file_get_contents(sprintf("%s/api/ver1/static/%s.dat",$SERVERPATH,$f["m1"])));
 	$s["related_articles"]=!$relatedposts?array():$relatedposts;
 	
+
+	// #860 - ダミー
+	if ( $s['categories'][0]['slug'] == 'crazy' ) :
+		
+		// とりあえずheadlineの内容返す
+		$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=8 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),5,0);
+		$o->query($sql);
+		while($f=$o->fetch_array()){
+			$s["recommend_articles"][]=set_articleinfo($f,1);
+		}
+
+	else :
+		
+		// crazy以外は空配列
+		$s["recommend_articles"] = array();
+
+	endif;
+
+
 }else{
 	$s=(object)$s;
 }
