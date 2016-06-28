@@ -15,6 +15,20 @@ import {Url} from '../../app/const/Url';
 // React
 let React = self.React;
 
+/**
+ * <p>記事が所属するカテゴリー名称を表示します</p>
+ * <p>category, category2 から categories を使用する<br>
+ * .category-label-wrapper カテゴリー表示</p>
+ * <p>CategoryLabelNode にリンクを追加</p>
+ *
+ * ```
+ * <span class="category-label-wrapper">
+ *  <span class="category-label"><a href="/category/tennis/">テニス</a></span>
+ * </span>
+ * ```
+ * @from 2016-06-16
+ * @type {*|Function|ReactClass}
+ */
 export const CategoryLabelNodeLink = React.createClass( {
   propType: {
     index: React.PropTypes.number.isRequired,
