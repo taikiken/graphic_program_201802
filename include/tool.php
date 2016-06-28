@@ -759,8 +759,7 @@ function imgResize($o_img,$n_img,$re_size,$p="jpg",$copytype,$copy,$iconNo,$icon
 	outputImg($newImg,$n_img,$p);
 }
 
-function imageflips($image, $mode)
-{
+function imageflips($image, $mode){
     $dst_w = imagesx($image);
     $dst_h = imagesy($image);
     $src_x = 0;
@@ -794,9 +793,8 @@ function imageflips($image, $mode)
     return $image;
 }
 
-function imageRotation($file_name,$orientation)
-{
-	
+function imageRotation($file_name,$orientation){
+
     $im = imagecreatefromjpeg($file_name);
 
     $degrees = 0;
@@ -898,6 +896,10 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg",$copytype,$copy,$iconNo,$
 		}
 		
 		$newImg=imagecreatetruecolor($re_size[0],$re_size[1]);
+		if($p=="png"){
+			imagealphablending($newImg,false);
+			imagesavealpha($newImg,true);
+		}
 		imagefill($newImg,0,0,imagecolorclosest($newImg,0,0,0));
 		$defImg=makeDefaultImg($img_name,$p);
 		imagecopyresampled($newImg,$defImg,$sp[0],$sp[1],$x,$y,$resize[0],$resize[1],$size[0],$size[1]);

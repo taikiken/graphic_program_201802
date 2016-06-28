@@ -56,6 +56,9 @@ if($y["status"]["code"]===200){
 	$ad_put=set_advertise($ad,"detail");
 	$s=$s+$ad_put;
 	unset($s["vast"]);
+	unset($s["ad_urlpc"]);
+	unset($s["ad_urlsp"]);
+
 	
 	$relatedposts=unserialize(file_get_contents(sprintf("%s/api/ver1/static/%s.dat",$SERVERPATH,$f["m1"])));
 	$s["related_articles"]=!$relatedposts?array():$relatedposts;
