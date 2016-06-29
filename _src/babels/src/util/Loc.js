@@ -22,7 +22,11 @@ export class Loc {
    * search を調べたい時に instance を作成します
    */
   constructor() {
-
+    /**
+     * url の query 文字列
+     * @type {null|string}
+     * @private
+     */
     this._search = null;
 
   }

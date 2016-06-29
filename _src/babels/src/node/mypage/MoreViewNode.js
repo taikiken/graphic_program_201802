@@ -21,8 +21,8 @@ let React = self.React;
 // More button
 // --------------------------------------------
 /**
- * mypage 系 more button
- * PC, SP 共用化するため 汎用class にします
+ * <p>mypage 系 more button
+ * PC, SP 共用化するため 汎用化します</p>
  * @type {ReactClass}
  */
 export let MoreViewNode = React.createClass( {

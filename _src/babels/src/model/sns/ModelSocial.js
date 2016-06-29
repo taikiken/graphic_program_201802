@@ -30,6 +30,11 @@ export class ModelSocial extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Social}
+     */
     this.action = new Social( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

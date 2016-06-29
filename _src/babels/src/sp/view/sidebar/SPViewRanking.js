@@ -116,6 +116,7 @@ export class SPViewRanking extends ViewRanking {
           moreButton={this.moreButton.bind(this)}
           home={this._home}
           type={Message.RANKING}
+          adSp=""
         />,
         this.element
       );

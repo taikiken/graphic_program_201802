@@ -95,9 +95,7 @@ export class SPViewSingleRanking extends ViewRanking {
                       key={'ranking-' + dae.id}
                       index={i}
                       id={String( dae.id )}
-                      // slug={dae.category.slug}
-                      // category={dae.category.label}
-                      // category2={dae.category2.label}
+                      slug={dae.categories.all[0].slug}
                       categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}

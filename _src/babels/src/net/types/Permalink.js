@@ -12,30 +12,38 @@
 
 
 /**
- * Types.url へ追加可能なpathがあるかどうかを管理します
+ * <p>Types.url へ追加可能なpathがあるかどうかを管理します</p>
  *
- *
- * @example
+ * ```
  * new Permalink( [ 'category', '' ] );
+ * ```
  *
- * @example
- * searchのようにどんなワードでも良い場合は "*" を指定する
- * new Permalink( [ '*' ] );
+ * <p>searchのようにどんなワードでも良い場合は "*" を指定します</p>
  *
- *
+ * ```
+ *new Permalink( [ '*' ] );
+ * ```
  */
 export class Permalink {
   /**
    * パスオプションを指定、ない時は空配列
    *
    * @param {Array} [paths] 追加 path を配列で設定
-   * @param {Boolean} [need=false] 追加 path が必須かを設定。true: 必須, false: オプション
+   * @param {Boolean} [need=false] 追加 path が必須かを設定します。 true: 必須, false: オプション
    */
   constructor( paths:Array<string> = [], need:Boolean = false ) {
-
+    /**
+     * 追加 path を配列で設定
+     * @type {Array.<string>}
+     * @protected
+     */
     this._paths = paths;
+    /**
+     * 追加 path が必須かを設定します
+     * @type {Boolean}
+     * @private
+     */
     this._need = need;
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

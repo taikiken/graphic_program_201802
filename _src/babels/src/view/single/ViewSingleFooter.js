@@ -36,7 +36,17 @@ export class ViewSingleFooter extends View {
    */
   constructor( element:Element, single:SingleDae ) {
     super( element );
+    /**
+     * 変換済み JSON data
+     * @type {SingleDae}
+     * @private
+     */
     this._single = single;
+    /**
+     * FooterDom instance
+     * @type {null|Object}
+     * @private
+     */
     this._rendered = null;
   }
   /**

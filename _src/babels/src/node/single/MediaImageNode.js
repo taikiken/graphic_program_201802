@@ -17,7 +17,9 @@ import {Safety} from '../../data/Safety';
 let React = self.React;
 
 /**
- * 記事詳細 メイン・画像
+ * <p>記事詳細 メイン・画像</p>
+ * <p>original から large と medium と順に探していく</p>
+ *
  * @type {ReactClass}
  */
 export let MediaImageNode = React.createClass( {

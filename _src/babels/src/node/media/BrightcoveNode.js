@@ -29,12 +29,14 @@ const Sagen = self.Sagen;
 let React = self.React;
 // let ReactDOM = self.ReactDOM;
 /**
- * video コンテナを作成し Brightcove videojs で再生可能にします
+ * <p>video コンテナを作成し Brightcove videojs で再生可能にします<p>
  *
+ * <pre>
  *    ViewSingleVisual.render
  *      MediaNode
  *        MediaVideoNode
  *          BrightcoveNode
+ * </pre>
  *
  * @type {*|Function|ReactClass}
  */

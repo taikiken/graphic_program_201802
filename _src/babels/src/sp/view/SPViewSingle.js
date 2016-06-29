@@ -41,14 +41,29 @@ export class SPViewSingle extends ViewSingle {
    * SP 記事詳細
    * @param {Number} id 記事 id
    * @param {Element} element 日付とかインサートする element
-   * @param {Element} visualElement メインビジュアルよう element
-   * @param {Element} bannerElement メインビジュアルよう element
+   * @param {Element} visualElement メインビジュアル用 element
+   * @param {Element} bannerElement バナー用 element
    * @param {Object} [option={}] callback をセットした Object
    */
   constructor( id:Number, element:Element, visualElement:Element, bannerElement:Element, option:Object = {} ) {
     super( id, element, { related: null, footer: null }, option );
+    /**
+     * メインビジュアル用 element
+     * @type {Element}
+     * @private
+     */
     this._visualElement = visualElement;
+    /**
+     * SPViewSingleVisual instance
+     * @type {null|SPViewSingleVisual}
+     * @private
+     */
     this._visual = null;
+    /**
+     * バナー用 element
+     * @type {Element}
+     * @private
+     */
     this._bannerElement = bannerElement;
   }
   /**
@@ -61,9 +76,9 @@ export class SPViewSingle extends ViewSingle {
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
 
-    this.header( single );
-    this.visual( single );
-    this.banner( single );
+    this.renderHeader( single );
+    this.renderVisual( single );
+    this.renderBanner( single );
 
     // ga from 2016-06-08
     ViewSingle.ga( single );
@@ -74,18 +89,23 @@ export class SPViewSingle extends ViewSingle {
    * header 部レンダリング
    * @param {SingleDae} single 記事 SingleDae instance
    */
-  header( single:SingleDae ):void {
+  renderHeader( single:SingleDae ):void {
     // header
-    if ( this._header === null ) {
+    if ( this.header === null ) {
 
       let viewHeader = new SPViewSingleHeader( this.element, single );
-      viewHeader.on( View.DID_MOUNT, this._boundMount );
-      this._header = viewHeader;
+      viewHeader.on( View.DID_MOUNT, this.boundMount );
+      /**
+       * SPViewSingleHeader instance
+       * @override
+       * @type {SPViewSingleHeader}
+       */
+      this.header = viewHeader;
       viewHeader.start();
 
     } else {
 
-      this._header.render( single );
+      this.header.render( single );
 
     }
   }
@@ -93,7 +113,7 @@ export class SPViewSingle extends ViewSingle {
    * visual 部レンダリング
    * @param {SingleDae} single 記事 SingleDae instance
    */
-  visual( single:SingleDae ):void {
+  renderVisual( single:SingleDae ):void {
     // visual
     if ( this._visual === null ) {
       let visualNode = new SPViewSingleVisual( this._visualElement, single );
@@ -107,7 +127,7 @@ export class SPViewSingle extends ViewSingle {
    * banner レンダリング
    * @param {SingleDae} single 記事 SingleDae instance
    */
-  banner( single:SingleDae ):void {
+  renderBanner( single:SingleDae ):void {
     // bannerElement をチェックします
     if (!Safety.isElement(this._bannerElement)) {
       return;

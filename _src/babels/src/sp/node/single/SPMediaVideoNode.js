@@ -80,7 +80,6 @@ export let SPMediaVideoNode = React.createClass( {
 
   },
   brightcove: function( media ) {
-    // ToDo: 2016-06-01 ~
     let images = media.images;
     let video = media.video;
     let caption = video.caption || '';

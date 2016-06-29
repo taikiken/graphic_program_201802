@@ -20,7 +20,8 @@ let React = self.React;
 // lead 文
 // step 1 だけ表示
 /**
- * lead 文
+ * <p>ユーザー登録ウイザード</p>
+ * <p>lead 文,  step 1 だけ表示</p>
  * @private
  * @type {ReactClass}
  */
@@ -46,14 +47,17 @@ let LeadNode = React.createClass( {
   }
 } );
 /**
- * signup page 内 title
- * .signup-header
+ * <p>ユーザー登録ウイザード</p>
+ * <p>signup page 内 title<br>
+ * .signup-header</p>
+ *
  * ```
  * <header className="signup-header">
  *  <h1 className="heading">運動通信</h1>
  *  <LeadNode step={this.state.step} />
  * </header>
  * ```
+ *
  * @type {ReactClass}
  */
 export let HeadingNode = React.createClass( {

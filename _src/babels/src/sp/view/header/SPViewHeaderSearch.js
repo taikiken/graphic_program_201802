@@ -45,6 +45,11 @@ export class SPViewHeaderSearch extends ViewHeaderSearch {
    */
   constructor( element:Element, buttonElement:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * opener button
+     * @type {Element}
+     * @private
+     */
     this._button = buttonElement;
   }
   /**

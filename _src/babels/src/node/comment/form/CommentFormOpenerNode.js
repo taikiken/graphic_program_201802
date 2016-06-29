@@ -18,10 +18,12 @@ let React = self.React;
 
 // open / close anchor tag
 /**
- * コメント入力欄の 表示 / 非表示 するボタン
+ * <p>コメント入力欄の 表示 / 非表示 するボタン</p>
  *
+ * <pre>
  * CommentFormNode
  * |- CommentFormOpenerNode
+ * </pre>
  *
  * @type {ReactClass}
  */

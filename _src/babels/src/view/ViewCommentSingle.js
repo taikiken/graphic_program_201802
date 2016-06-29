@@ -60,13 +60,31 @@ export class ViewCommentSingle extends View {
     super( element, option );
 
     replyId = Safety.integer( replyId, 0 );
-
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {CommentSingle|CommentSingleReply}
+     */
     this.action = replyId !== 0 ?
       new CommentSingle( articleId, commentId, this.done.bind( this ), this.fail.bind( this ) ) :
       new CommentSingleReply( articleId, commentId, replyId, this.done.bind( this ), this.fail.bind( this ) );
-
+    /**
+     * 記事ID
+     * @type {Number}
+     * @protected
+     */
     this._articleId = articleId;
+    /**
+     * コメントID
+     * @type {Number}
+     * @protected
+     */
     this._commentId = commentId;
+    /**
+     * コメントタイプ, all|official|self|normal
+     * @type {string}
+     * @protected
+     */
     this._commentsListType = CommentsType.SINGLE;
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
@@ -74,26 +92,40 @@ export class ViewCommentSingle extends View {
      * @private
      */
     this._commentsList = [];
+    /**
+     * コメントIDをキーにコメント Object を保存します
+     * @type {{}}
+     * @protected
+     */
     this._commentsBank = {};
-
-    // more button instance 用
+    /**
+     * more button instance 用
+     * @type {null|Object}
+     * @protected
+     */
     this._moreRendered = null;
-
-    // user 情報
+    /**
+     * user 情報
+     * @type {null}
+     * @protected
+     */
     this._user = null;
 
     // コメント投稿後の再読み込み設定
     let status = ReplyStatus.factory();
     let boundComplete = this.onComplete.bind( this );
     status.on( ReplyStatus.COMPLETE, boundComplete );
-    // this._status = status;
 
     // コメント削除後の再読み込み設定
     let comment = CommentStatus.factory();
     comment.on( CommentStatus.COMMENT_DELETE, boundComplete );
-    // this._commentStatus = comment;
 
-    this._reload = false;
+    /**
+     * リロードフラッグ
+     * @type {Boolean}
+     * @protected
+     */
+    this._reloadFlag = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -112,6 +144,90 @@ export class ViewCommentSingle extends View {
    */
   set user( user:UserDae ):void {
     this._user = user;
+  }
+  /**
+   * 記事IDを取得します
+   * @return {Number|*} 記事IDを返します
+   */
+  get articleId():Number {
+    return this._articleId;
+  }
+  /**
+   * 記事IDを設定します
+   * @param {Number} id 記事ID
+   */
+  set articleId( id:Number ):void {
+    this._articleId = id;
+  }
+  /**
+   * コメントタイプ, all|official|self|normal を取得します
+   * @return {string|*} コメントタイプ, all|official|self|normal を返します
+   */
+  get commentListType():string {
+    return this._commentsListType;
+  }
+  /**
+   * コメントタイプ, all|official|self|normal を設定します
+   * @param {string} type コメントタイプ, all|official|self|normal
+   */
+  set commentListType( type:string ):void {
+    this._commentsListType = type;
+  }
+  /**
+   * コメントIDをキーにコメント Object を取得します
+   * @return {Object} コメントIDをキーにコメント Object を返します
+   */
+  get commentsBank():Object {
+    return this._commentsBank;
+  }
+  /**
+   * コメントIDをキーにコメント Object を設定します
+   * @param {Object} bank コメントIDをキーにコメント Object
+   */
+  set commentsBank( bank:Object ):void {
+    this._commentsBank = bank;
+  }
+  /**
+   * more button instance
+   * @return {null|Object} more button instance を返します
+   */
+  get moreRendered():Object {
+    return this._moreRendered;
+  }
+  /**
+   * more button instance を設定します
+   * @param {null|Object} more button instance
+   */
+  set moreRendered( more:Object ):void {
+    this._moreRendered = more;
+  }
+  /**
+   * リロードフラッグ を取得します
+   * @return {Boolean} リロードフラッグを返します
+   */
+  get reloadFlag():Boolean {
+    return this._reloadFlag;
+  }
+  /**
+   * リロードフラッグを設定します
+   * @param {Boolean} flag リロードフラッグ
+   */
+  set reloadFlag( flag:Boolean ):void {
+    this._reloadFlag = flag;
+  }
+  /**
+   * コメントIDを取得します
+   * @return {Number|*} 記事IDを返します
+   */
+  get commentId():Number {
+    return this._commentId;
+  }
+  /**
+   * コメントIDを設定します
+   * @param {Number} id コメントID
+   */
+  set commentId( id:Number ):void {
+    this._commentId = id;
   }
   // ---------------------------------------------------
   //  Method
@@ -173,7 +289,7 @@ export class ViewCommentSingle extends View {
     // total check
     if ( commentsListDae.total === 0 ) {
 
-      if ( !this._reload ) {
+      if ( !this.reloadFlag ) {
         // デーが無いので処理を止める
         // reload でない時
         // console.warn( `(${this._articleId}, ${this._commentsListType}) stop rendering.` );
@@ -204,7 +320,7 @@ export class ViewCommentSingle extends View {
    */
   all( commentsListDae:CommentsListDae ) {
 
-    this._reload = false;
+    this.reloadFlag = false;
 
     let commentsList = this._commentsList;
     let commentsBank = this._commentsBank;
@@ -564,7 +680,7 @@ export class ViewCommentSingle extends View {
     // 既存リストを空にする
     this._commentsList = [];
     // reload flag on
-    this._reload = true;
+    this.reloadFlag = true;
     // ajax start
     this._action.reload();
   }

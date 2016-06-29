@@ -25,6 +25,11 @@ export class ModelComment extends Model {
    */
   constructor( articleId:Number, formData:FormData, option:Object = {} ) {
     super( option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Comment}
+     */
     this.action = new Comment( articleId, formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

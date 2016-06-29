@@ -20,8 +20,17 @@ import {MediaVideoNode} from './MediaVideoNode';
 let React = self.React;
 
 /**
- * 記事詳細 メインビジュアル
- * 画像・動画 切替
+ * <p>記事詳細 メインビジュアル<br>
+ * 画像・動画 切替て表示します</p>
+ *
+ * <p>media_type で切り替えます</p>
+ *
+ * ```
+ * <MediaNode/>
+ *  <MediaImageNode />
+ *  or
+ *  <MediaVideoNode />
+ * ```
  * @type {ReactClass}
  */
 export let MediaNode = React.createClass( {

@@ -12,8 +12,9 @@
 
 
 import {View} from '../View';
+// node
 import {LogoutNode} from '../../node/modal/LogoutNode';
-
+// event
 import {LogoutStatus} from '../../event/LogoutStatus';
 
 // react
@@ -31,9 +32,29 @@ export class ViewLogoutModal extends View {
    */
   constructor( element:Element, yesCallback:Function = null, noCallback:Function = null ) {
     super( element );
+    /**
+     * modal instance
+     * @type {null|Object}
+     * @private
+     */
     this._render = null;
+    /**
+     * yes / ok click callback
+     * @type {Function}
+     * @private
+     */
     this._yes = yesCallback;
+    /**
+     * no / cancel click callback
+     * @type {Function}
+     * @private
+     */
     this._no = noCallback;
+    /**
+     * LogoutStatus instance
+     * @type {LogoutStatus}
+     * @private
+     */
     this._status = LogoutStatus.factory();
   }
   /**
