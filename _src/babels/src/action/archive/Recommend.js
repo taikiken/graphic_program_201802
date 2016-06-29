@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/01/13 - 14:50
+ * @date 2016/06/29 - 16:02
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -25,7 +25,7 @@ import {ArchiveType} from '../../app/const/ArchiveType';
  * ```
  *
  */
-export class Videos extends Category {
+export class Recommend extends Category {
   /**
    * おすすめ動画一覧を取得します
    * @param {string} [slug=all] category slug です
@@ -36,7 +36,7 @@ export class Videos extends Category {
 
     slug = Safety.string( slug, 'all' );
     // video
-    super( slug, ArchiveType.VIDEO, resolve, reject );
+    super( slug, ArchiveType.RECOMMEND, resolve, reject );
 
   }
 
