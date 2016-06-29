@@ -134,7 +134,7 @@ export class SPSingle {
     SPSingle.singleRanking( slug );
 
     // 記事詳細・オススメ記事
-    // SPSingle.singleRecommend( slug );
+    SPSingle.singleRecommend( slug );
   }
   /**
    * 記事詳細下部・人気記事
@@ -162,7 +162,7 @@ export class SPSingle {
   static singleRecommend( slug:string ):void {
     let recommendElement = Dom.recommend();
     if ( recommendElement !== null ) {
-      let recommend = new UT.view.single.SPViewSingleRecommend( recommendElement, null, slug );
+      let recommend = new UT.sp.view.single.SPViewSingleRecommend( recommendElement, null, slug );
       recommend.start();
     }
   }

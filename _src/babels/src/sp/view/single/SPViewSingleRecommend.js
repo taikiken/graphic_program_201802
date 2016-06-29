@@ -16,24 +16,24 @@ import {View} from '../../../view/View';
 // app
 import {Length} from '../../../app/const/Length';
 import {Message} from '../../../app/const/Message';
-import {Empty} from '../../../app/const/Empty';
+// import {Empty} from '../../../app/const/Empty';
 
 // data
 import {Safety} from '../../../data/Safety';
 
 // dae
-import {ArticleDae} from '../../../dae/ArticleDae';
+// import {ArticleDae} from '../../../dae/ArticleDae';
 
 // node
-import {RankingNode} from '../../../node/sidebar/RankingNode';
+import {SPRankingNode} from '../../node/single/SPRankingNode';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事詳細, オススメ記事 一覧
- * @from 2016-06-16
+ * @from 2016-06-29
  */
 export class SPViewSingleRecommend extends ViewRecommend {
   /**
@@ -55,86 +55,16 @@ export class SPViewSingleRecommend extends ViewRecommend {
 
     this.executeSafely( View.BEFORE_RENDER, articles, this.slug );
 
-    // let element = this.element;
-    // let categorySlug = this.slug;
-    // let _this = this;
-    //
-    // // React Class
-    // let ArticleDom = React.createClass( {
-    //   propTypes: {
-    //     list: React.PropTypes.array.isRequired,
-    //     home: React.PropTypes.bool.isRequired,
-    //     detail: React.PropTypes.bool.isRequired,
-    //     slug: React.PropTypes.string.isRequired
-    //   },
-    //   render: function() {
-    //
-    //     let list = this.props.list;
-    //     let home = this.props.home;
-    //     let detail = this.props.detail;
-    //     let thisSlug = this.props.slug;
-    //
-    //     return (
-    //
-    //       <div className="widget-ranking">
-    //         {/* title */}
-    //         <div className="mod-headingA01">
-    //           <h2>{Message.RECOMMEND_TITLE}</h2>
-    //         </div>
-    //         <ul className="board-small">
-    //           {
-    //             list.map( function( article, i ) {
-    //
-    //               let dae = new ArticleDae( article );
-    //               let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
-    //               let empty = thumbnail === Empty.IMG_SMALL;
-    //
-    //               // RankingDom instance を使い render
-    //               return (
-    //                 <RankingNode
-    //                   key={'ranking-' + dae.id}
-    //                   index={i}
-    //                   id={String( dae.id )}
-    //                   slug={dae.categories.all[0].slug}
-    //                   categories={dae.categories.all}
-    //                   url={dae.url}
-    //                   date={dae.displayDate}
-    //                   title={dae.title}
-    //                   thumbnail={thumbnail}
-    //                   empty={empty}
-    //                   total={dae.commentsCount}
-    //                   home={home}
-    //                   detail={detail}
-    //                   thisSlug={thisSlug}
-    //                   categorySlug={categorySlug}
-    //                 />
-    //               );
-    //
-    //             } )
-    //           }
-    //         </ul>
-    //       </div>
-    //
-    //     );
-    //
-    //   },
-    //   componentDidMount: function() {
-    //
-    //     // after mount
-    //     _this.executeSafely( View.DID_MOUNT );
-    //
-    //   }
-    // } );
-    //
-    // // dom 生成
-    // ReactDOM.render(
-    //   React.createElement( ArticleDom, {
-    //     list: articles,
-    //     home: this.home,
-    //     detail: this.detail,
-    //     slug: this.slug
-    //   } ),
-    //   element
-    // );
+    ReactDOM.render(
+      <SPRankingNode
+        list={articles}
+        home={this.home}
+        detail={this.detail}
+        slug={this.slug}
+        title={Message.RECOMMEND_TITLE}
+        scope={this}
+      />,
+      this.element
+    );
   }
 }

@@ -41,8 +41,7 @@ export let SPRankingNode = React.createClass( {
     let home = this.props.home;
     let detail = this.props.detail;
     let thisSlug = this.props.slug;
-
-    console.log( 'SPRankingNode', list );
+    
     // return null;
     return (
 
