@@ -117,7 +117,8 @@ export class Single {
     let single = event.args[ 0 ];
     _singleDae = single;
 
-    let slug = single.category.slug;
+    // let slug = single.category.slug;
+    let slug = single.categories.all[0].slug;
     // let label = single.category.label;
 
     // main visual
@@ -131,9 +132,8 @@ export class Single {
     // title は backend output
 
     // sidebar
-    // slug: category, is home, is single
-    // ga tag 送信のために引数追加
-    Sidebar.start( slug, false, true );
+    // slug: category, is home
+    Sidebar.start( slug, false );
 
     // nav current
     Nav.start( slug );

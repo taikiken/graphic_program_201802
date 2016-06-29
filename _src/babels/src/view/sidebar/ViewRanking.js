@@ -218,12 +218,11 @@ export class ViewRanking extends View {
         let detail = this.props.detail;
         let thisSlug = this.props.slug;
         let categoryTitle = '';
-
         let categoryLabel;
         // category api slug が `all` 以外の時に category.label をタイトルに含める
         if ( categorySlug !== 'all' ) {
           // categoryLabel = list[ 0 ].category.label;
-          categoryLabel = list[0].categories.all[0].label;
+          categoryLabel = list[0].categories[0].label;
 
           if ( categoryLabel !== '' ) {
             // category.label が空でなかったら '/' と一緒に加える

@@ -35,7 +35,7 @@ export class SingleDae extends RelatedDae {
      * @protected
      */
     this._keywords = new KeywordsDae( response.keywords );
-
+    // console.log( 'SingleDae _keywords' );
     // related
     let related = [];
     if ( Safety.check( response, 'related_articles', 'array' ) ) {
@@ -45,7 +45,6 @@ export class SingleDae extends RelatedDae {
         related.push( new RelatedDae( article ) );
 
       } );
-
     }
     /**
      * 関連記事 response.related
@@ -53,6 +52,7 @@ export class SingleDae extends RelatedDae {
      * @protected
      */
     this._related = related;
+    // console.log( 'SingleDae related_articles', related );
 
   }
   // ---------------------------------------------------

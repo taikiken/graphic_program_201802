@@ -299,31 +299,14 @@ export class ViewVideos extends View {
         let home = this.props.home;
         let detail = this.props.detail;
         let thisSlug = this.props.slug;
-        // let categoryTitle = '';
-        //
-        // let categoryLabel;
-        // // category api slug が `all` 以外の時に category.label をタイトルに含める
-        // if ( categorySlug !== 'all' ) {
-        //   categoryLabel = list[ 0 ].category.label;
-        //
-        //   if ( categoryLabel !== '' ) {
-        //     // category.label が空でなかったら '/' と一緒に加える
-        //     categoryTitle = ' / ' + categoryLabel;
-        //   }
-        // }
 
         return (
 
           <div className="board-small widget-recommend">
-            {/* title
-            <div className="widget-recommend-heading">
-              <h3 className="widget-recommend-heading-title">RECOMMEND</h3>
-              <span className="widget-recommend-heading-ruby">{Message.VIDEOS_TITLE}{categoryTitle}</span>
-            </div>
-             */}
+            {/* title */}
             <RecommendTitleNode
-              id={categorySlug}
-              label={list[0].categories.all[0].label}
+              slug={categorySlug}
+              label={list[0].categories[0].label}
               title={Message.VIDEOS_TITLE}
             />
             <ul className="board-list">
@@ -333,7 +316,7 @@ export class ViewVideos extends View {
                 let dae = new ArticleDae( article );
                 let thumbnail = Safety.image( dae.media.images.medium, Empty.VIDEO_THUMBNAIL );
 
-                // VideosDom instance を使い render
+                // RankingNode instance を使い render
                 return (
                     <VideosDom
                       key={'ranking-' + dae.id}

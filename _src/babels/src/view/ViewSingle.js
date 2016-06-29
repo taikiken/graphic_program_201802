@@ -191,14 +191,14 @@ export class ViewSingle extends View {
    * @param {Object} response JSON response
    */
   render( response:Object ):void {
-
+    // console.log( 'ViewSingle response', response );
     let single = new SingleDae( response );
-
+    // console.log( 'ViewSingle beforeRender', single );
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
 
     let header, footer;
-
+    // console.log( 'ViewSingle', single );
     // header
     if ( this._header === null ) {
 

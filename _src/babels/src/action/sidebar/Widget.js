@@ -11,10 +11,13 @@
  */
 
 
-
+// action
 import {Ranking} from '../archive/Ranking';
 import {Videos} from '../archive/Videos';
+import {Recommend} from '../archive/Recommend';
+// app
 import {Length} from '../../app/const/Length';
+// data
 import {Safety} from '../../data/Safety';
 
 let _symbol = Symbol();
@@ -79,5 +82,14 @@ export class Widget {
     videos.length = length;
     return videos;
 
+  }
+
+  static recpmmend( slug:string = 'all', resolve:Function = null, reject:Function = null, length:Number = Length.video ):Recommend {
+    slug = Safety.string( slug, 'all' );
+    length = Safety.integer( length, Length.video );
+
+    let recommend = new Recommend( slug, resolve, reject );
+    recommend.length = length;
+    return recommend;
   }
 }

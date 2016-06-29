@@ -65,6 +65,14 @@ export class Sidebar {
       let videos = new UT.view.sidebar.ViewVideos( videoElement, option, slug );
       videos.start();
     }
+    
+    // recommend
+    let recommendElement = Dom.recommend();
+    if ( recommendElement !== null ) {
+      let option = {};
+      let recommend = new UT.view.sidebar.ViewRecommend( recommendElement, option, slug );
+      recommend.start();
+    }
 
     // sidebar
     // とりあえず home のみスクロール追随させる

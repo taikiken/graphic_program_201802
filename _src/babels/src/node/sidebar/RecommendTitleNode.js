@@ -22,7 +22,7 @@ let React = self.React;
  */
 export const RecommendTitleNode = React.createClass( {
   propTypes: {
-    slug: React.PropTypes.string.isRequired,
+    slug: React.PropTypes.string,
     // category label
     label: React.PropTypes.string,
     // 大見出し
@@ -30,6 +30,7 @@ export const RecommendTitleNode = React.createClass( {
   },
   getDefaultProps: function() {
     return {
+      slug: 'all',
       label: '',
       title: Message.VIDEOS_TITLE
     };
@@ -37,7 +38,7 @@ export const RecommendTitleNode = React.createClass( {
   render: function() {
     let categoryTitle = '';
     let categoryLabel = this.props.label;
-    
+
     // category api slug が `all` 以外の時に category.label をタイトルに含める
     if ( this.props.slug !== 'all' ) {
       if ( categoryLabel !== '' ) {
@@ -45,7 +46,7 @@ export const RecommendTitleNode = React.createClass( {
         categoryTitle = ' / ' + categoryLabel;
       }
     }
-    
+
     // RECOMMEND title
     return (
       <div className="widget-recommend-heading">
