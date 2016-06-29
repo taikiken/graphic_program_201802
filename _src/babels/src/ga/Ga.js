@@ -41,7 +41,7 @@ export class Ga {
   /**
    * <p>外部からトラッキングコード送信ができるようにします</p>
    * <p>GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842</p>
-   * @from 2016-06-22
+   * @since 2016-06-22
    * @param {string} method 発生場所（関数名）
    * @param {string} category 必須 通常は接点に使用されたオブジェクト（例: Video）
    * @param {string} action 必須 接点の種類（例: play）

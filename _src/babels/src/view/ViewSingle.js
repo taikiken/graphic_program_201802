@@ -285,7 +285,7 @@ export class ViewSingle extends View {
    * 存在すれば click で<br>
    * ga タグを送信します</p>
    *
-   * @from 2016-06-10
+   * @since 2016-06-10
    */
   static moreExternal():void {
     const external = Dom.moreExternal();
@@ -311,7 +311,7 @@ export class ViewSingle extends View {
    * });
    * </code>
    *
-   * @from 2016-06-10
+   * @since 2016-06-10
    * @param {Event} event a#readMore-external click event object
    */
   static onExternal( event:Event ):void {
@@ -344,7 +344,7 @@ export class ViewSingle extends View {
    * イベントラベル：[response.categories.label] ex. 海外サッカー
    * </pre>
    *
-   * @from 2016-06-08
+   * @since 2016-06-08
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
    */
   static ga( single:SingleDae ):void {

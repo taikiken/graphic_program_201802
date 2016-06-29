@@ -22,7 +22,7 @@ let React = self.React;
  *  <span class="category-label">テニス</span>
  * </span>
  * ```
- * @from 2016-06-16
+ * @since 2016-06-16
  * @type {*|Function|ReactClass}
  */
 export const CategoryLabelNode = React.createClass( {

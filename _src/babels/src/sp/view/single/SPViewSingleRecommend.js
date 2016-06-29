@@ -33,7 +33,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事詳細, オススメ記事 一覧
- * @from 2016-06-29
+ * @since 2016-06-29
  */
 export class SPViewSingleRecommend extends ViewRecommend {
   /**

@@ -53,7 +53,7 @@ export class RelatedDae {
     // /**
     //  * response.category2
     //  * @deprecated instead use categories
-    //  * @from 2016-03-13
+    //  * @since 2016-03-13
     //  * @type {CategoryDae}
     //  * @protected
     //  */
@@ -61,7 +61,7 @@ export class RelatedDae {
     // // docs には書いてないけど配列も増やしとく, 2016-03-13
     /**
      * response.categories
-     * @from 2016-03-13
+     * @since 2016-03-13
      * @type {CategoriesDae}
      * @protected
      */
@@ -95,21 +95,21 @@ export class RelatedDae {
     // 以下仕様追加 from 2016-05-31
     /**
      * response.theme
-     * @from 2016-05-31
+     * @since 2016-05-31
      * @type {ThemeDae}
      * @protected
      */
     this._theme = new ThemeDae( response.theme );
     /**
      * response.banner
-     * @from 2016-05-31
+     * @since 2016-05-31
      * @type {BannersDae}
      * @protected
      */
     this._banner = new BannersDae( response.banner );
     /**
      * response.ad
-     * @from 2016-05-31
+     * @since 2016-05-31
      * @type {AdDae}
      * @protected
      */

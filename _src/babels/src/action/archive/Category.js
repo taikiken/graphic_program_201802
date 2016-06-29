@@ -23,40 +23,39 @@ import {ArchiveType} from '../../app/const/ArchiveType';
 /**
  * 記事一覧, カテゴリー別, 全て...<br>
  *
- * <pre>
- * すべて & カテゴリーごとの記事一覧
+ * ***すべて & カテゴリーごとの記事一覧***
+ *
  * - 各カテゴリーごとの記事一覧
  * - ホームでのすべてのランキング/おすすめ動画もこれで取得
  * - ランキングはアクセス順で返す
  * - 動画ランキングもアクセス順で返す
- * </pre>
  *
- * <p>リクエストサンプル</p>
- *
- * <code>
- * GET
- * /api/v1/articles/category/{all|:category_slug}[/type][?[offset=n][&[length=m]]]
- * </code>
+ * <p><strong>リクエストサンプル</strong></p>
  *
  * <pre>
- * /api/v1/articles/category/all
+ * GET
+ * /api/v1/articles/category/{all|:category_slug}[/type][?[offset=n][&[length=m]]]
+ * </pre>
+ *
+ * ```/api/v1/articles/category/all```
+ *
  * - すべての記事の新着順
  *
- * /api/v1/articles/category/soccer/ranking
+ * ```/api/v1/articles/category/soccer/ranking```
+ *
  * - サッカーのランキング
  *
- * /api/v1/articles/category/baseball/video
+ * ```/api/v1/articles/category/baseball/video```
+ *
  * - 野球の動画
- * </pre>
  *
  * <p>from 2016-06-29<br>
  * recommend 追加</p>
- * ```
+ *
  * - なし : 新着順
- - ranking : 人気順
- - video : 動画の人気順 = おすすめ動画
- - recommend : おすすめ記事
- * ```
+ * - ranking : 人気順
+ * - video : 動画の人気順 = おすすめ動画
+ * - recommend : おすすめ記事
  *
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=2055838625
  */
@@ -90,7 +89,7 @@ export class Category extends Offset {
     //  */
     // this._type = '';
 
-    // @from 2016-06-29
+    // @since 2016-06-29
     // recommend 追加
     if ( !Safety.normalize( type, [ ArchiveType.DEFAULT, ArchiveType.RANKING, ArchiveType.VIDEO, ArchiveType.RECOMMEND ] ) ) {
 
@@ -100,6 +99,7 @@ export class Category extends Offset {
     /**
      * <p>Ajax リクエストオプションの type 値<br>
      * ''（空）, ranking, video の 3種類です</p>
+     * <p>2016-06-29 recommend が追加になりました</p>
      * @type {string}
      * @protected
      */

@@ -98,7 +98,7 @@ export class SingleDae extends RelatedDae {
    * * Web版ではtrueの場合記事詳細ページで画像を表示しない
    * * アプリ版では記事詳細冒頭に必ず画像を表示するので参照する必要なし
    * </pre>
-   * @from 2016-06-06
+   * @since 2016-06-06
    * @return {Boolean} 記事詳細で画像を表示するかどうかの真偽値を返します
    */
   get isShowImage():Boolean {

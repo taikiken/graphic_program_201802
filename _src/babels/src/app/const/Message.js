@@ -50,7 +50,7 @@ export class Message {
   }
   /**
    * RECOMMEND_TITLE オススメ記事
-   * @from 2016-06-29
+   * @since 2016-06-29
    * @return {string} オススメ記事
    */
   static get RECOMMEND_TITLE():string {

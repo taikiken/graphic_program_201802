@@ -156,7 +156,7 @@ export class SPSingle {
    * </pre>
    *
    * @see https://github.com/undotsushin/undotsushin/issues/862
-   * @from 2016-06-16
+   * @since 2016-06-16
    * @param {string} slug category slug
    */
   static singleRecommend( slug:string ):void {

@@ -180,7 +180,7 @@ export class Dom {
   }
   /**
    * sidebar recommend
-   * @from 2016-06-29
+   * @since 2016-06-29
    * @return {Element} widget-recommend-list-container element を返します
    */
   static recommend():Element {

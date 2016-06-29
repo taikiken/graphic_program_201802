@@ -25,7 +25,7 @@ let React = self.React;
  *  <span class="category-label"><a href="/category/tennis/">テニス</a></span>
  * </span>
  * ```
- * @from 2016-06-16
+ * @since 2016-06-16
  * @type {*|Function|ReactClass}
  */
 export const CategoryLabelNodeLink = React.createClass( {

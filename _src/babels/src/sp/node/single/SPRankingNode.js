@@ -25,6 +25,10 @@ import {RankingNode} from '../../../node/sidebar/RankingNode';
 // React
 let React = self.React;
 
+/**
+ * div.widget-ranking タグを作成します
+ * @type {*|Function|ReactClass}
+ */
 export let SPRankingNode = React.createClass( {
   propTypes: {
     list: React.PropTypes.array.isRequired,

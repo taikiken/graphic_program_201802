@@ -24,7 +24,7 @@ import {ArchiveType} from '../../app/const/ArchiveType';
  * /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video/recommend]
  * ```
  *
- * @from 2016-06-29
+ * @since 2016-06-29
  */
 export class Recommend extends Category {
   /**

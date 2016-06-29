@@ -66,7 +66,7 @@ export class Widget {
 
   }
   /**
-   * Videos instance を作成し length を 5にセットします
+   * Videos instance を作成し length を 5 にセットします
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
@@ -83,8 +83,16 @@ export class Widget {
     return videos;
 
   }
-
-  static recpmmend( slug:string = 'all', resolve:Function = null, reject:Function = null, length:Number = Length.video ):Recommend {
+  /**
+   * Recommend instance を作成し length を 5 にセットします
+   * @since 2016-06-29
+   * @param {string} [slug=all] category slug です
+   * @param {Function} [resolve=null] Ajax 成功時の callback
+   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {Number} [length=Length.ranking] 読み込む length
+   * @return {Recommend} Recommend instance を返します
+   */
+  static recommend( slug:string = 'all', resolve:Function = null, reject:Function = null, length:Number = Length.video ):Recommend {
     slug = Safety.string( slug, 'all' );
     length = Safety.integer( length, Length.video );
 

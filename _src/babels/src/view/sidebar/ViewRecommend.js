@@ -58,7 +58,7 @@ export class ViewRecommend extends ViewRanking {
      * @override
      * @type {Ranking}
      */
-    this.action = Widget.recpmmend( slug, this.done.bind( this ), this.fail.bind( this ), length );
+    this.action = Widget.recommend( slug, this.done.bind( this ), this.fail.bind( this ), length );
   }
   /**
    * dom を render します

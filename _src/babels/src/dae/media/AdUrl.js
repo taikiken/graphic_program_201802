@@ -24,7 +24,7 @@ import {Safety} from '../../data/Safety';
  *  "sp" : "http://web-jp.ad-v.jp/adam/inline?CE=0&cat=RAN.CBC.PC&format=cm&page="
  * }
  * ```
- * @from 2016-06-20
+ * @since 2016-06-20
  * */
 export class AdUrl {
   /**

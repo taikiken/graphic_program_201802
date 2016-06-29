@@ -55,7 +55,7 @@ export class ArticleDae {
     //  * https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
     //  *
     //  * @deprecated instead use categories
-    //  * @from 2016-02-29
+    //  * @since 2016-02-29
     //  * @type {CategoryDae}
     //  * @protected
     //  */
@@ -249,7 +249,7 @@ export class ArticleDae {
   // 2016-05-21 added
   /**
    * New Flag, ※現在は常にFlagがたつように30日に設定
-   * @from 2016-05-21
+   * @since 2016-05-21
    * @return {Boolean} New Flag の真偽値を返します
    */
   get isNew():Boolean {

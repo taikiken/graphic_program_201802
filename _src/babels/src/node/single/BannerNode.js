@@ -47,7 +47,7 @@ export let BannerNode = React.createClass( {
   getDefaultProps: function() {
     /**
      * banner link
-     * @from 2016-06-22
+     * @since 2016-06-22
      * @protected
      * @type {string}
      */
@@ -88,7 +88,7 @@ export let BannerNode = React.createClass( {
     );
 
   },
-  // @from 2016-06-22
+  // @since 2016-06-22
   // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
   bannerClick: function() {
     Ga.click( 'BannerNode.bannerClick', 'banner_link', 'click', this.link );

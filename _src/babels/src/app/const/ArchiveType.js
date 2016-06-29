@@ -16,7 +16,7 @@ let _symbol = Symbol();
  * <p>カテゴリーごとの記事一覧</p>
  * 一覧種類を定義します
  *
- * @from 2016-06-29
+ * @since 2016-06-29
  */
 export class ArchiveType {
   /**
@@ -39,7 +39,7 @@ export class ArchiveType {
   /**
    * カテゴリーごとの記事一覧, 新着順
    *
-   * @from 2016-06-29
+   * @since 2016-06-29
    * @return {string} カテゴリーごとの記事一覧, 新着順 '' を返します
    */
   static get DEFAULT():string {
@@ -48,7 +48,7 @@ export class ArchiveType {
   /**
    * カテゴリーごとの記事一覧, 人気順
    *
-   * @from 2016-06-29
+   * @since 2016-06-29
    * @return {string} カテゴリーごとの記事一覧, 人気順 'ranking' を返します
    */
   static get RANKING():string {
@@ -57,7 +57,7 @@ export class ArchiveType {
   /**
    * カテゴリーごとの記事一覧, 動画の人気順 = おすすめ動画
    *
-   * @from 2016-06-29
+   * @since 2016-06-29
    * @return {string} カテゴリーごとの記事一覧, 動画の人気順 = おすすめ動画 'video' を返します
    */
   static get VIDEO():string {
@@ -66,7 +66,7 @@ export class ArchiveType {
   /**
    * カテゴリーごとの記事一覧, おすすめ記事
    *
-   * @from 2016-06-29
+   * @since 2016-06-29
    * @return {string} カテゴリーごとの記事一覧, おすすめ記事 'recommend' を返します
    */
   static get RECOMMEND():string {

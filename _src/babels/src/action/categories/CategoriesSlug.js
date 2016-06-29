@@ -18,7 +18,7 @@ import {Safety} from '../../data/Safety';
  *
  * `/api/v1/category/[:category_slug]`
  *
- * @from 2016-05-28
+ * @since 2016-05-28
  */
 export class CategoriesSlug extends Categories {
   /**

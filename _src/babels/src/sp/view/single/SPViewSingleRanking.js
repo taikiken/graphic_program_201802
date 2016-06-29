@@ -34,7 +34,7 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * SP 記事詳細, 人気記事 一覧
- * @from 2016-06-16
+ * @since 2016-06-16
  */
 export class SPViewSingleRanking extends ViewRanking {
   /**

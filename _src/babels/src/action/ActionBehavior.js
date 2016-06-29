@@ -24,8 +24,7 @@ import {Types} from '../net/Types';
  * <p>Template Pattern として使用します<br>
  * 各 Class で extends して下さい</p>
  *
- * <p>token あり GET 以外のリクエストは ActionAuthBehavior を使用します</p>
- * @link {ActionAuthBehavior}
+ * <p>token あり GET 以外のリクエストは {@link ActionAuthBehavior} を使用します</p>
  */
 export class ActionBehavior extends Action {
   /**
