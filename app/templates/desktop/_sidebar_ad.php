@@ -27,6 +27,13 @@
 
           <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
 
+          <?php if (
+            $page['template'] == 'category' ||
+            $page['template'] == 'search' ||
+            $page['template'] == 'p'
+          ) : ?>
+          <div id="widget-recommend-container"></div><!--/recommend-->
+          <?php endif; ?>
           <div id="widget-ranking-container"></div><!--/ranking-->
           <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
             <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>

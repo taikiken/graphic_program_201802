@@ -178,6 +178,14 @@ export class Dom {
   static sidebar():Element {
     return Dom.get( 'sidebar-moving-container' );
   }
+  /**
+   * sidebar recommend
+   * @from 2016-06-29
+   * @return {Element} widget-recommend-container element を返します
+   */
+  static recommend():Element {
+    return Dom.get( 'widget-recommend-container' );
+  }
   // --------------------------------------
 
   // home

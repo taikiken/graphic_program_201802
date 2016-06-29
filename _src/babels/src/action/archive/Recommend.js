@@ -17,17 +17,18 @@ import {Safety} from '../../data/Safety';
 import {ArchiveType} from '../../app/const/ArchiveType';
 
 /**
- * <p>おすすめ動画一覧<p>
+ * <p>おすすめ記事一覧<p>
  *
  * ```
  * GET
- * /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video]
+ * /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video/recommend]
  * ```
  *
+ * @from 2016-06-29
  */
 export class Recommend extends Category {
   /**
-   * おすすめ動画一覧を取得します
+   * おすすめ記事一覧を取得します
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
