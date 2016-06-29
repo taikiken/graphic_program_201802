@@ -81,7 +81,7 @@
     "start": "gulp serve:app",
     "gulp": "gulp",
     "update_version" : "git rev-parse --short HEAD > public/assets/.version",
-    "build": "npm run update_version && npm run gulp",
+    "build": "npm run update_version && npm run deploy",
     "build:v2": "npm run update_version && npm run deploy",
     "build:shell": "npm run update_version && gulp build:shell",
     "babels:dev": "gulp babels:dev && gulp exe:dev && gulp sp:exe:dev",
