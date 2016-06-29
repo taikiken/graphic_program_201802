@@ -181,10 +181,10 @@ export class Dom {
   /**
    * sidebar recommend
    * @from 2016-06-29
-   * @return {Element} widget-recommend-container element を返します
+   * @return {Element} widget-recommend-list-container element を返します
    */
   static recommend():Element {
-    return Dom.get( 'widget-recommend-container' );
+    return Dom.get( 'widget-recommend-list-container' );
   }
   // --------------------------------------
 

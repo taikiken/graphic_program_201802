@@ -27,12 +27,15 @@
 
           <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
 
-          <?php if (
+          <?php
+          // ------------------------------------
+          // sidebar recommend
+          if (
             $page['template'] == 'category' ||
             $page['template'] == 'search' ||
             $page['template'] == 'p'
           ) : ?>
-          <div id="widget-recommend-container"></div><!--/recommend-->
+            <div id="widget-recommend-list-container"></div><!--/recommend-->
           <?php endif; ?>
           <div id="widget-ranking-container"></div><!--/ranking-->
           <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
