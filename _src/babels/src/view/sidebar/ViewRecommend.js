@@ -41,10 +41,12 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 /**
  * sidebar オススメ記事 5件を表示します
+ * @since 2016-06-29
  */
 export class ViewRecommend extends ViewRanking {
   /**
    * sidebar オススメ記事 5件 を表示します
+   * @since 2016-06-29
    * @param {Element} element root element
    * @param {Object} [option={}] optional event handler
    * @param {string} [slug=all] category slug です

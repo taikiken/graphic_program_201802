@@ -29,6 +29,7 @@ import {ArchiveType} from '../../app/const/ArchiveType';
 export class Recommend extends Category {
   /**
    * おすすめ記事一覧を取得します
+   * @since 2016-06-29
    * @param {string} [slug=all] category slug です
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
