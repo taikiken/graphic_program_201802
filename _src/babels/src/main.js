@@ -129,6 +129,7 @@ import {SPViewSingle} from './sp/view/SPViewSingle';
 import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
 import {SPViewReadMore} from './sp/view/single/SPViewReadMore';
 import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
+import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
 
 // single/comment
 import {SPViewComments} from './sp/view/SPViewComments';
@@ -232,7 +233,8 @@ let UT = {
       single: {
         SPViewSingleHeader: SPViewSingleHeader,
         SPViewReadMore: SPViewReadMore,
-        SPViewSingleRanking: SPViewSingleRanking
+        SPViewSingleRanking: SPViewSingleRanking,
+        SPViewSingleRecommend: SPViewSingleRecommend
       },
       comment: {
         SPViewCommentForm: SPViewCommentForm

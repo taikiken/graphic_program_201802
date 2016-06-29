@@ -130,12 +130,14 @@ export class SPSingle {
 
     SPSingle.comment();
     
-    // 記事詳細・人気記事x
+    // 記事詳細・人気記事
     SPSingle.singleRanking( slug );
+
+    // 記事詳細・オススメ記事
+    // SPSingle.singleRecommend( slug );
   }
   /**
    * 記事詳細下部・人気記事
-   * @from 2016-06-16
    * @param {string} slug category slug
    */
   static singleRanking( slug:string ):void {
@@ -144,6 +146,24 @@ export class SPSingle {
     if ( rankingElement !== null ) {
       let ranking = new UT.sp.view.single.SPViewSingleRanking( rankingElement, null, slug );
       ranking.start();
+    }
+  }
+
+  /**
+   * 記事詳細・オススメ記事
+   * <pre>
+   * Mobileでは関連記事上
+   * </pre>
+   *
+   * @see https://github.com/undotsushin/undotsushin/issues/862
+   * @from 2016-06-16
+   * @param {string} slug category slug
+   */
+  static singleRecommend( slug:string ):void {
+    let recommendElement = Dom.recommend();
+    if ( recommendElement !== null ) {
+      let recommend = new UT.view.single.SPViewSingleRecommend( recommendElement, null, slug );
+      recommend.start();
     }
   }
   /**
