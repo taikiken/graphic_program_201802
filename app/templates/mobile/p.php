@@ -207,6 +207,7 @@
       </div><!-- /.comment -->
 
       <div id="widget-ranking-container"></div><!--/ranking-->
+      <div id="widget-recommend-list-container"></div><!--/recommend-->
 
       <!-- #310 popin ebmed code  -->
       <?php if ( $page['category']['label'] ) : ?>
