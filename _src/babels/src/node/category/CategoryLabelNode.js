@@ -15,8 +15,7 @@ let React = self.React;
 
 /**
  * <p>記事が所属するカテゴリー名称を表示します</p>
- * <p>category, category2 から categories を使用する<br>
- * .category-label-wrapper カテゴリー表示</p>
+ * <p>.category-label-wrapper カテゴリー表示</p>
  *
  * ```
  * <span class="category-label-wrapper">
