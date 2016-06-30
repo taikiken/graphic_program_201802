@@ -19,7 +19,7 @@ let UT = self.UT;
 let Dom = UT.app.Dom;
 
 /**
- * <h3>Sidebar ranking / video 表示</h3>
+ * <p>Sidebar ranking / video 表示</p>
  * 全て static です
  */
 export class Sidebar {
