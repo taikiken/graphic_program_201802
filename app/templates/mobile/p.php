@@ -203,7 +203,6 @@
           </div>
         <?php endif; ?>
 
-
       </div><!-- /.comment -->
 
       <div id="widget-ranking-container"></div><!--/ranking-->
