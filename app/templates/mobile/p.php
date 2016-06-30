@@ -209,7 +209,7 @@
       <div id="widget-ranking-container"></div><!--/ranking-->
       <div id="widget-recommend-list-container"></div><!--/recommend-->
 
-      <!-- #310 popin ebmed code  -->
+      <!-- #310 popin embed code  -->
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
       <?php endif; ?>
