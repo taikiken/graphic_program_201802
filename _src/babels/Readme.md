@@ -6,115 +6,122 @@ global object
 
 出力クラスリスト
 
-    let UT = {
-      version: '@@version',
-      build: '@@buildTime',
-      app: {
-        App: App,
-        User: User,
-        Router: Router,
-        Dom: Dom,
-        const: {
-          CommentsType: CommentsType
-        }
+```
+let UT = {
+  version: '@@version',
+  build: '@@buildTime',
+  app: {
+    // Env: Env,
+    App: App,
+    // Codes: Codes,
+    User: User,
+    Router: Router,
+    Dom: Dom,
+    const: {
+      CommentsType: CommentsType
+    }
+  },
+  util: {
+    Offset: Offset,
+    Scroll: Scroll
+  },
+  net: {
+    Cookie: Cookie
+  },
+  model: {
+    Model: Model
+  },
+  view: {
+    View: View,
+    ViewCategory: ViewCategory,
+    ViewSingle: ViewSingle,
+    // ViewTitle: ViewTitle,
+    ViewComments: ViewComments,
+    ViewSearch: ViewSearch,
+    ViewCommentSingle: ViewCommentSingle,
+    ViewFirstVisit: ViewFirstVisit,
+    comment: {
+      ViewCommentForm: ViewCommentForm
+    },
+    single: {
+      ViewSingleTitle: ViewSingleTitle,
+      ViewSingleVisual: ViewSingleVisual
+    },
+    header: {
+      ViewHeaderUser: ViewHeaderUser,
+      ViewHeaderSearch: ViewHeaderSearch
+    },
+    sidebar: {
+      ViewRanking: ViewRanking,
+      ViewVideos: ViewVideos,
+      ViewRecommend: ViewRecommend,
+      Sidebar: Sidebar
+    },
+    home: {
+      ViewHeadline: ViewHeadline,
+      ViewPickup: ViewPickup,
+      ViewNews: ViewNews
+    },
+    signup: {
+      SignupWizard: SignupWizard,
+      ViewDeactivate: ViewDeactivate
+    },
+    login: {
+      ViewLogin: ViewLogin,
+      ViewLogout: ViewLogout
+    },
+    mypage: {
+      ViewUserProfile: ViewUserProfile,
+      ViewBookmarks: ViewBookmarks,
+      ViewActivities: ViewActivities,
+      ViewNotifications: ViewNotifications
+    },
+    settings: {
+      ViewSettingsIndex: ViewSettingsIndex,
+      ViewSettingsInterest: ViewSettingsInterest
+    },
+    modal: {
+      ViewDeleteModal: ViewDeleteModal,
+      ViewLogoutModal: ViewLogoutModal,
+      ViewFlushModal: ViewFlushModal
+    }
+  },
+  sp: {
+    view: {
+      SPViewSyn: SPViewSyn,
+      SPViewComments: SPViewComments,
+      SPViewSingle: SPViewSingle,
+      SPViewSearch: SPViewSearch,
+      SPViewFirstVisit: SPViewFirstVisit,
+      single: {
+        SPViewSingleHeader: SPViewSingleHeader,
+        SPViewReadMore: SPViewReadMore,
+        SPViewSingleRanking: SPViewSingleRanking,
+        SPViewSingleRecommend: SPViewSingleRecommend
       },
-      util: {
-        Offset: Offset,
-        Scroll: Scroll
+      comment: {
+        SPViewCommentForm: SPViewCommentForm
       },
-      net: {
-        Cookie: Cookie
+      home: {
+        SPViewHeadLine: SPViewHeadLine,
+        SPViewNews: SPViewNews
       },
-      model: {
-        Model: Model
+      category: {
+        SPViewCategoryRoot: SPViewCategoryRoot
       },
-      view: {
-        View: View,
-        ViewCategory: ViewCategory,
-        ViewSingle: ViewSingle,
-        ViewTitle: ViewTitle,
-        ViewComments: ViewComments,
-        ViewSearch: ViewSearch,
-        ViewCommentSingle: ViewCommentSingle,
-        ViewFirstVisit: ViewFirstVisit,
-        comment: {
-          ViewCommentForm: ViewCommentForm
-        },
-        single: {
-          ViewSingleTitle: ViewSingleTitle,
-          ViewSingleVisual: ViewSingleVisual
-        },
-        header: {
-          ViewHeaderUser: ViewHeaderUser,
-          ViewHeaderSearch: ViewHeaderSearch
-        },
-        sidebar: {
-          ViewRanking: ViewRanking,
-          ViewVideos: ViewVideos,
-          Sidebar: Sidebar
-        },
-        home: {
-          ViewHeadline: ViewHeadline,
-          ViewPickup: ViewPickup,
-          ViewNews: ViewNews
-        },
-        signup: {
-          SignupWizard: SignupWizard,
-          ViewDeactivate: ViewDeactivate
-        },
-        login: {
-          ViewLogin: ViewLogin,
-          ViewLogout: ViewLogout
-        },
-        mypage: {
-          ViewUserProfile: ViewUserProfile,
-          ViewBookmarks: ViewBookmarks,
-          ViewActivities: ViewActivities,
-          ViewNotifications: ViewNotifications
-        },
-        settings: {
-          ViewSettingsIndex: ViewSettingsIndex,
-          ViewSettingsInterest: ViewSettingsInterest
-        },
-        modal: {
-          ViewDeleteModal: ViewDeleteModal,
-          ViewLogoutModal: ViewLogoutModal,
-          ViewFlushModal: ViewFlushModal
-        }
+      header: {
+        SPViewHeaderUser: SPViewHeaderUser,
+        SPViewHeaderSearch: SPViewHeaderSearch
       },
-      sp: {
-        view: {
-          SPViewSyn: SPViewSyn,
-          SPViewComments: SPViewComments,
-          SPViewSingle: SPViewSingle,
-          SPViewSearch: SPViewSearch,
-          SPViewFirstVisit: SPViewFirstVisit,
-          single: {
-            SPViewSingleHeader: SPViewSingleHeader,
-            SPViewReadMore: SPViewReadMore
-          },
-          comment: {
-            SPViewCommentForm: SPViewCommentForm
-          },
-          home: {
-            SPViewHeadLine: SPViewHeadLine,
-            SPViewNews: SPViewNews
-          },
-          category: {
-            SPViewCategoryRoot: SPViewCategoryRoot
-          },
-          header: {
-            SPViewHeaderUser: SPViewHeaderUser,
-            SPViewHeaderSearch: SPViewHeaderSearch
-          },
-          mypage: {
-            SPViewUserProfile: SPViewUserProfile,
-            SPViewBookmarks: SPViewBookmarks
-          }
-        }
+      mypage: {
+        SPViewUserProfile: SPViewUserProfile,
+        SPViewBookmarks: SPViewBookmarks
       }
-    };
-
+    }
+  },
+  Ga: Ga
+};
+```
 
 ## ES2015, JSX Harmony
 
