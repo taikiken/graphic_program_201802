@@ -281,7 +281,7 @@ endif;
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
         })();
       </script>
-      <!-- //#310 popin ebmed code  -->
+      <!-- //#310 popin embed code  -->
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
