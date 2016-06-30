@@ -47,7 +47,7 @@
           // sidebar videos, オススメ動画
           // crazy 表示しない
           // https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
-          if ( $page['template'] != 'crazy' ) :
+          if ( $page['category']['slug'] !== 'crazy' ) :
           ?>
           <div id="widget-recommend-container"></div><!--/videos-->
           <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
