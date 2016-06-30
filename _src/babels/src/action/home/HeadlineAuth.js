@@ -17,8 +17,8 @@ import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
- * **認証**（ログイン）<br>
- * Home headline（注目ニュース）
+ * <p>token つき 認証（ログイン）<br>
+ * Home headline（注目ニュース）</p>
  */
 export class HeadlineAuth extends ActionAuth {
   /**

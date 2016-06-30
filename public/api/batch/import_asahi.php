@@ -51,7 +51,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 
 	$keyword=key_merge($data["channel"]["item"][$i]["keyword"]);
 	$s["keyword"]=$keyword;
-	
+
 	$body=explode("</p>",str_replace("<p>","",str_replace("<p></p>","",$body)));
 	$s["m1"]=category_mapping($r,array($keyword,$s["title"],$s["t1"],$body[0],$body[1]));
 	$tag=categorymatching($exword,$keyword);
@@ -78,11 +78,12 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if($s["a_time"]!=$f["a_time"]){
 				if(strlen($s["t30"])>0){
-					$s["img1"]=outimg($s["t30"]);
+					if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 				}else{
 					$s["img1"]="";
 					$s["t1"]="";
 				}
+				unset($s["m1"]);
 				splittime($s["m_time"],$s["a_time"]);
 				$sqla[]=makesql($s,$f["id"]);
 				$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);

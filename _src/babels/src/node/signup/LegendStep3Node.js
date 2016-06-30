@@ -71,7 +71,7 @@ let Step3FormNode = React.createClass( {
             {
               this.state.categories.map( function( category, i ) {
                 return (
-                  <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug }>
+                  <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug}>
                     <input
                       className={'interest-item interest-item-' + i}
                       type="checkbox"
@@ -205,9 +205,10 @@ let Step3FormNode = React.createClass( {
 } );
 
 /**
- * <h3>React component<h3>
+ * <p>「新規会員登録」入力フォームコンテナ<br>
+ * 「興味のある競技」</p>
+ *
  * **signup step 3**
- * 「興味のある競技」入力フォームコンテナ
  *
  * @type {ReactClass}
  */

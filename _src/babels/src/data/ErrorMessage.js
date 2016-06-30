@@ -15,7 +15,8 @@ import {Safety} from './Safety';
 
 /**
  * form error 表示用の 管理クラスです
- * @example
+ *
+ * ```
  * let email = new ErrorMessage();
  *
  * // error set
@@ -25,18 +26,23 @@ import {Safety} from './Safety';
  * if ( email.error ) {
  *  // error あり
  * }
+ * ```
  */
 export class ErrorMessage {
   /**
-   * form error
-   * @param {string} message 初期設定エラーメッセージ
+   * form error 表示
+   * @param {string} [message=''] 初期設定エラーメッセージ
    */
   constructor( message:string = '' ) {
+    /**
+     * エラーメッセージ
+     * @type {string}
+     * @protected
+     */
     this._message = message;
   }
-
   /**
-   * エラー有無
+   * エラー有無を取得します
    * @return {Boolean} エラー有無を返します。 エラーあり: true
    */
   get error():Boolean {

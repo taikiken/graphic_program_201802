@@ -44,11 +44,21 @@ export class ViewSettingsInterest extends View {
     // アカウント情報
     // let boundError = this.error.bind( this );
     let callbacks = {};
+    /**
+     * コールバック関数を設定する Object
+     * @type {{}}
+     * @private
+     */
     this._callbacks = callbacks;
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     // callbacks[ Model.RESPONSE_ERROR ] = boundError;
-    this._action = new ModelInterest( callbacks );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {ModelInterest}
+     */
+    this.action = new ModelInterest( callbacks );
 
     let status = SettingsStatus.factory();
     status.on( SettingsStatus.INTEREST_COMPLETE, this.reload.bind( this ) );

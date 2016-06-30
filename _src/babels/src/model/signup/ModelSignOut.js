@@ -26,7 +26,12 @@ export class ModelSignOut extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
-    this._action = new SignOut( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {SignOut}
+     */
+    this.action = new SignOut( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

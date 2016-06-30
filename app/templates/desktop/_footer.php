@@ -23,6 +23,9 @@ if (
   ?>
   <footer id="footer-container" class="foot-sec">
     <div class="foot-sec-inner">
+      <?php
+      // SEO対策 / パンくずリストを設置する #776
+      include_once __DIR__."/../_breadcrumb.php"; ?>
       <div class="foot-pr">
         <div class="foot-pr-inner">
           <figure><img src="/assets/images/common/footer-overview-figure.png" alt=""></figure>
@@ -68,7 +71,7 @@ if (
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 <?php
-} else if (
+} elseif (
   $template_name == 'signup' ||
   $template_name == 'login' ||
   $template_name == 'logout' ||

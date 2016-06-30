@@ -27,7 +27,12 @@ export class ModelAccountEdit extends ModelBehavior {
    */
   constructor( formData:FormData, option:Object = {} ) {
     super( formData, option );
-    this._action = new SettingsAccountEdit( formData, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {SettingsAccountEdit}
+     */
+    this.action = new SettingsAccountEdit( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

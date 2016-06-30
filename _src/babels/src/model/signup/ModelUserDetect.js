@@ -10,8 +10,8 @@
  *
  */
 
-
 import {Model} from '../Model';
+import {ModelBehavior} from '../ModelBehavior';
 import {Result} from '../../data/Result';
 import {UserDetect} from '../../action/signup/UserDetect';
 
@@ -19,7 +19,7 @@ import {UserDetect} from '../../action/signup/UserDetect';
  * user が存在するかのチェック
  * email が登録済みかを調べます
  */
-export class ModelUserDetect extends Model {
+export class ModelUserDetect extends ModelBehavior {
   /**
    * <h3>user が存在するかのチェック</h3>
    * email が登録済みかを調べる
@@ -27,21 +27,13 @@ export class ModelUserDetect extends Model {
    * @param {Object} [option={}] optional event handler
    */
   constructor( formData:FormData = null, option:Object = {} ) {
-    super( option );
-    this._action = new UserDetect( formData, this.done.bind( this ), this.fail.bind( this ) );
-  }
-  /**
-   * @return {FormData|*} 設定された FormData を返します
-   */
-  get data():FormData {
-    return this._action.data;
-  }
-  /**
-   * FormData を設定します
-   * @param {FormData} formData 設定する FormData
-   */
-  set data( formData:FormData ):void {
-    this._action.data = formData;
+    super( formData, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {UserDetect}
+     */
+    this.action = new UserDetect( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

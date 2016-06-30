@@ -17,14 +17,14 @@ import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
- * **認証**（ログイン）<br>
- * home 通常記事一覧
+ * <p>**認証**（ログイン）<br>
+ * home 通常記事一覧</p>
  */
 export class NewsAuth extends OffsetAuth {
   /**
    * <p>home 通常記事一覧を取得します<br>
    * length は取得件数です。</p>
-   * ** default: 10 ** を必要なら変更します
+   * <p>** default: 10 ** を必要なら変更します</p>
    *
    * **認証**（ログイン）
    *

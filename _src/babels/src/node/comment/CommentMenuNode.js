@@ -20,12 +20,14 @@ let React = self.React;
 
 // 通報 drop menu
 /**
- * コメント欄の drop menu button
+ * <p>コメント欄の drop menu button</p>
  *
+ * <pre>
  * ViewComments
  * |- CommentNode
  *    |- CommentMenuNode
  *       |- CommentActionNode
+ * </pre>
  *
  * @type {ReactClass}
  */

@@ -20,7 +20,7 @@ import {Search} from '../action/search/Search';
 
 // view
 import {View} from './View';
-// import {ViewError} from './error/ViewError';
+
 // data
 import {Result} from '../data/Result';
 // import {Safety} from '../data/Safety';
@@ -34,7 +34,7 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * 検索ページ
+ * 検索ページ, keyword 検索
  */
 export class ViewSearch extends ViewArchiveMasonry {
   /**
@@ -46,8 +46,13 @@ export class ViewSearch extends ViewArchiveMasonry {
    */
   constructor( word:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option, true );
-    // keyword 検索
-    this._action = User.sign ?
+
+    /**
+     * Action instance を設定します, keyword 検索
+     * @override
+     * @type {SearchAuth|Search}
+     */
+    this.action = User.sign ?
       new SearchAuth( word, this.done.bind( this ), this.fail.bind( this ) ) :
       new Search( word, this.done.bind( this ), this.fail.bind( this ) );
   }
@@ -58,7 +63,7 @@ export class ViewSearch extends ViewArchiveMasonry {
   done( result:Result ):void {
 
     let articles = result.articles;
-    // console.log( 'ViewArchiveMasonry done ', result );
+
     if ( typeof articles === 'undefined' ) {
 
       // articles undefined
@@ -76,8 +81,12 @@ export class ViewSearch extends ViewArchiveMasonry {
       this.showError( error.message );
 
     } else {
-
-      this._request = result.request;
+      /**
+       * response.request object
+       * @override
+       * @type {Object}
+       */
+      this.request = result.request;
       this.render( articles );
 
     }
@@ -99,9 +108,6 @@ export class ViewSearch extends ViewArchiveMasonry {
    * @param {string} message エラーメッセージ
    */
   showError( message:string = '' ):void {
-
-    // message = Safety.string( message, '' );
-    // console.warn( 'search error ', message );
 
     /**
      * 検索結果が見つかりませんでした コンテナ

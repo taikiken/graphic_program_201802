@@ -13,22 +13,36 @@
 
 /**
  * <h2>EventDispatcher</h2>
- * Custom Event
- * **extends** して使います。
+ * Custom Event の作成は本クラスを **extends** します。
  *
- * @example
+ * ```
  * class Example extends EventDispatcher {
  *  constructor() {
  *    super();
  *  }
  * }
+ * ```
  * */
 export class EventDispatcher {
   /**
    * custom event を作成し管理します
    */
   constructor() {
+    /**
+     * <p>event listener を設定します</p>
+     * <p>Event.TYPE をキーに listener 関数を配列で設定します</p>
+     * @type {{}}
+     * @protected
+     */
     this._listeners = {};
+  }
+
+  /**
+   * event listener リストを取得します
+   * @return {{}} event listener リストを返します
+   */
+  get listeners():Object {
+    return this._listeners;
   }
   /**
    * event type に リスナー関数を bind します
@@ -180,9 +194,6 @@ export class EventDispatcher {
       // 処理しない
       return;
     }
-
-    // ToDo: production deploy 時 log 削除
-    // console.log( 'dispatch ', event );
 
     let types = listeners[ event.type ];
     event.target = this;

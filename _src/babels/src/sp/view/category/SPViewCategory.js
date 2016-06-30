@@ -32,20 +32,19 @@ export class SPViewCategory extends SPViewArchive {
     super( element, moreElement, null, option );
 
     /**
-     * Category Action を使う<br>
-     * slug を送り 表示(render)は SPViewArchive を使う
+     * Action instance を設定します
+     * @override
      * @type {CategoryAuth|Category}
-     * @protected
      */
-    this._action = User.sign ?
+    this.action = User.sign ?
       new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
       new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
 
     /**
      * category slug, ga に使う
-     * @type {string}
-     * @protected
+     * @override
+     * @type {CategoryAuth|Category}
      */
-    this._slug = slug;
+    this.slug = slug;
   }
 }

@@ -16,7 +16,19 @@ import {EventDispatcher} from '../event/EventDispatcher';
 import {Safety} from '../data/Safety';
 
 /**
- * View がない Api request
+ * <p>View がない Api request<p>
+ * <p>action Class を実行し option に設定された callback を実行します</p>
+ *
+ * @example
+ * let option = {
+ *  Model.UNDEFINED_ERROR: () => {},
+ *  Model.EMPTY_ERROR: () => {},
+ *  Model.RESPONSE_ERROR: () => {},
+ *  Model.COMPLETE: () => {}
+ * };
+ *
+ * let model = new Model( option );
+ * model.start();
  */
 export class Model extends EventDispatcher {
   /**
@@ -27,8 +39,27 @@ export class Model extends EventDispatcher {
   constructor( option:Object = {} ) {
     option = Safety.object( option );
     super();
-
+    /**
+     * callback をセットした Object
+     *
+     * @example
+     * let option = {
+     *  Model.UNDEFINED_ERROR: () => {},
+     *  Model.EMPTY_ERROR: () => {},
+     *  Model.RESPONSE_ERROR: () => {},
+     *  Model.COMPLETE: () => {}
+     * };
+     *
+     * @type {Object}
+     * @protected
+     */
     this._option = option;
+    /**
+     * action Class が設定されます
+     * @type {*}
+     * @protected
+     * @default null
+     */
     this._action = null;
   }
   // ---------------------------------------------------
@@ -89,7 +120,7 @@ export class Model extends EventDispatcher {
   //  CONST
   // ---------------------------------------------------
   /**
-   * event UNDEFINED_ERROR
+   * event UNDEFINED_ERROR<br>
    * Ajax は成功, 存在すべき key が無い or 値が null
    * @return {string} modelUndefinedError を返します
    */
@@ -97,7 +128,7 @@ export class Model extends EventDispatcher {
     return 'modelUndefinedError';
   }
   /**
-   * event EMPTY_ERROR
+   * event EMPTY_ERROR<br>
    * Ajax は成功, 存在すべき値は配列で存在するが length 0
    * @return {string} modelEmptyError を返します
    */
@@ -105,7 +136,7 @@ export class Model extends EventDispatcher {
     return 'modelEmptyError';
   }
   /**
-   * event RESPONSE_ERROR
+   * event RESPONSE_ERROR<br>
    * Ajax 失敗
    * @return {string} modelResponseError を返します
    */
@@ -113,7 +144,7 @@ export class Model extends EventDispatcher {
     return 'modelResponseError';
   }
   /**
-   * event COMPLETE
+   * event COMPLETE<br>
    * Ajax 成功
    * action 終了後 success 時に使用します
    * @return {string} modelComplete を返します

@@ -45,14 +45,22 @@ export class ViewSettingsIndex extends View {
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
 
-    // アカウント情報
-    // let boundError = this.error.bind( this );
     let callbacks = {};
+    /**
+     * コールバック関数を設定する Object
+     * @type {{}}
+     * @private
+     */
     this._callbacks = callbacks;
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     // callbacks[ Model.RESPONSE_ERROR ] = boundError;
-    this._action = new ModelAccount( callbacks );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {ModelAccount}
+     */
+    this.action = new ModelAccount( callbacks );
 
     let status = SettingsStatus.factory();
     status.on( SettingsStatus.ACCOUNT_COMPLETE, this.reload.bind( this ) );

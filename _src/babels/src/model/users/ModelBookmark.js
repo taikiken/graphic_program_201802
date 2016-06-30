@@ -26,8 +26,25 @@ export class ModelBookmark extends Model {
    */
   constructor( articleId:Number, option:Object = {} ) {
     super( option );
-    this._action = new Bookmark( articleId, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Bookmark}
+     */
+    this.action = new Bookmark( articleId, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * 記事ID
+     * @type {Number}
+     * @protected
+     */
     this._articleId = articleId;
+  }
+  /**
+   * 記事ID
+   * @return {Number} 記事ID を返します
+   */
+  get articleId():Number {
+    return this._articleId;
   }
   /**
    * Ajax request を開始します

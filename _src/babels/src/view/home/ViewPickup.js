@@ -14,7 +14,6 @@
 import {View} from '../View';
 
 // app
-// import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
@@ -31,6 +30,9 @@ import {Safety} from '../../data/Safety';
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
 
+// node
+import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
+
 // Ga
 import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
@@ -44,11 +46,10 @@ let ReactDOM = self.ReactDOM;
 let Polling = self.Gasane.Polling;
 
 /**
- * home > pickup（スライダー）を表示します。
- * <ol>
- *   <li>JSON取得(Ajax)</li>
- *   <li>Dom作成 by React</li>
- * </ol>
+ * <p>home > pickup（スライダー）を表示します。</p>
+ *
+ * 1. JSON取得(Ajax)
+ * 1. Dom作成 by React
  */
 export class ViewPickup extends View {
   /**
@@ -63,9 +64,25 @@ export class ViewPickup extends View {
 
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
-    this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
-    // this._index = 0;
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {PickupAuth|Pickup}
+     */
+    this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * 最後のナンバー
+     * @ToDo 不要なら削除する
+     * @type {number}
+     * @private
+     */
     this._last = 0;
+    /**
+     * interval 間隔
+     * @type {number}
+     * @private
+     * @default 500
+     */
     this._waiting = 1000 * 5;
 
   }
@@ -189,8 +206,7 @@ export class ViewPickup extends View {
 
         return (
           <li className={'pager-item pager-' + (p.index - p.length)}>
-            <a href={'#pickup-' + p.index} className="pager-link"
-              onClick={this.handleClick} >{p.index - p.length}</a>
+            <a href={'#pickup-' + p.index} className="pager-link" onClick={this.handleClick} >{p.index - p.length}</a>
           </li>
         );
       },
@@ -218,19 +234,21 @@ export class ViewPickup extends View {
         let onPager = this.props.onPager;
 
         return (
-          <ul className='pager-list'>
+          <ul className="pager-list">
             {
               list.map( function( article ) {
 
                 let dae = new ArticleDae( article );
 
-                return <PickupPagerDom
-                  key={'pager-' + dae.id}
-                  id={String(dae.id)}
-                  index={offset++}
-                  length={length}
-                  onPager={onPager}
-                />;
+                return (
+                  <PickupPagerDom
+                    key={'pager-' + dae.id}
+                    id={String(dae.id)}
+                    index={offset++}
+                    length={length}
+                    onPager={onPager}
+                  />
+                );
 
               } )
             }
@@ -268,8 +286,9 @@ export class ViewPickup extends View {
         index: React.PropTypes.number.isRequired,
         id: React.PropTypes.string.isRequired,
         slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        category2: React.PropTypes.string,
+        // category: React.PropTypes.string.isRequired,
+        // category2: React.PropTypes.string,
+        categories: React.PropTypes.array.isRequired,
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
@@ -277,17 +296,17 @@ export class ViewPickup extends View {
         commentsCount: React.PropTypes.number.isRequired,
         mediaType: React.PropTypes.string.isRequired
       },
-      getDefaultPropTypes: function() {
-        return {
-          category2: ''
-        };
-      },
+      // getDefaultPropTypes: function() {
+      //   return {
+      //     category2: ''
+      //   };
+      // },
       render: function() {
         let p = this.props;
 
-        let category = ( label ):string => {
-          return !label ? '' : <span className="category-label">{label}</span>;
-        };
+        // let category = ( label ):string => {
+        //   return !label ? '' : <span className="category-label">{label}</span>;
+        // };
 
         return (
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
@@ -298,8 +317,14 @@ export class ViewPickup extends View {
               <img src={p.large} alt={p.title}/>
                */}
               <div className="post-overview">
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-                <h2 className='post-heading'>{p.title}</h2>
+                <p className={'post-category post-category-' + p.slug}>
+                  <CategoryLabelNode
+                    categories={p.categories}
+                    id={`pickup-label-${p.id}`}
+                    index={p.index}
+                  />
+                </p>
+                <h2 className="post-heading">{p.title}</h2>
                 <p className="post-date">{p.date}</p>
                 <p className="post-comment-num">{p.commentsCount}</p>
               </div>
@@ -362,20 +387,21 @@ export class ViewPickup extends View {
           // HeadlineDom instance を使い render
           // iteration key は index を使う
           // コンテナを 前後に clone するため article.id が使えない
-          return <PickupDom
-            key={'pickup-' + i}
-            index={i}
-            id={String( dae.id )}
-            slug={dae.category.slug}
-            category={dae.category.label}
-            category2={dae.category2.label}
-            url={dae.url}
-            date={dae.displayDate}
-            title={dae.title}
-            large={large}
-            commentsCount={dae.commentsCount}
-            mediaType={dae.mediaType}
-          />;
+          return (
+            <PickupDom
+              key={'pickup-' + i}
+              index={i}
+              id={String( dae.id )}
+              slug={dae.categories.all[0].slug}
+              categories={dae.categories.all}
+              url={dae.url}
+              date={dae.displayDate}
+              title={dae.title}
+              large={large}
+              commentsCount={dae.commentsCount}
+              mediaType={dae.mediaType}
+            />
+          );
 
         };
 

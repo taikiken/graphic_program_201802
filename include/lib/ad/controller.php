@@ -36,7 +36,9 @@ if($_GET["cid"]!=0){
 
 $a[]=array("head","動画広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
 if($_GET["cid"]!=0)$a[]=array("inputradio","広告表示","ad_videoflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
-$a[]=array("textarea","VAST","ad_videoid","2","","","");
+$a[]=array("textarea","VAST(廃止予定)","ad_videoid","2","","","");
+$a[]=array("textarea","PC広告動画タグ","ad_pc_videotag","2","","","");
+$a[]=array("textarea","スマホ広告動画タグ","ad_sp_videotag","2","","","");
 
 $a[]=array("head","PC広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
 if($_GET["cid"]!=0)$a[]=array("inputradio","サイド右上レクタングル広告表示","sidebar_topflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));

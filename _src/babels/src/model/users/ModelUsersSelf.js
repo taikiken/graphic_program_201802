@@ -17,8 +17,8 @@ import {UserDae} from '../../dae/UserDae';
 import {Result} from '../../data/Result';
 
 /**
- * マイページの表示に利用
- * 自分の情報を取得します
+ * <p>マイページの表示に利用<br>
+ * 自分の情報を取得します</p>
  */
 export class ModelUsersSelf extends Model {
   /**
@@ -27,7 +27,12 @@ export class ModelUsersSelf extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
-    this._action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {UsersSelf}
+     */
+    this.action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

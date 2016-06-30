@@ -17,6 +17,7 @@ npm-debug.log
 # ==============================
 .idea
 *.iml
+/sftp-config.json
 
 # global ignore directory
 # ==============================

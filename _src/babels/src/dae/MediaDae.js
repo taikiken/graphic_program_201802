@@ -10,18 +10,19 @@
  *
  */
 
-
+// dae
 import {ImagesDae} from './media/ImagesDae';
 import {VideoDae} from './media/VideoDae';
+// data
 import {Safety} from '../data/Safety';
 
 /**
- * article.media
- * responce.media を images / video にわけます
+ * <p>article.media<br>
+ * responce.media を images / video にわけます</p>
  */
 export class MediaDae {
   /**
-   * article.media
+   * article.media<br>
    * responce.media を images / video にわけます
    * @param {Object} [media={}] article.media
    */
@@ -29,7 +30,17 @@ export class MediaDae {
 
     media = Safety.object( media );
 
+    /**
+     * article.media
+     * @type {Object}
+     * @protected
+     */
     this._media = media;
+    /**
+     * article.media.images の 1件づつ {@link ImagesDae} へ変換し格納します
+     * @type {Array}
+     * @protected
+     */
     this._list = [];
 
     // 記事詳細は media.images が最大5件になる
@@ -37,6 +48,11 @@ export class MediaDae {
     // JSON に配列が残っているので処理は残す
     if ( !Array.isArray( media.images ) ) {
       // 1件, 配列では無い
+      /**
+       * media.images, 配列では無いことがあったので...
+       * @type {ImagesDae}
+       * @protected
+       */
       this._images = new ImagesDae( media.images );
       this._list.push( this._images );
 
@@ -48,6 +64,11 @@ export class MediaDae {
 
     }
 
+    /**
+     * media.video
+     * @type {VideoDae}
+     * @protected
+     */
     this._video = new VideoDae( media.video );
 
   }
@@ -56,7 +77,7 @@ export class MediaDae {
   // ---------------------------------------------------
   /**
    * article.media
-   * @return {Object|*} article.media
+   * @return {Object|*} article.media を返します
    */
   get media():Object {
     return this._media;
@@ -70,7 +91,7 @@ export class MediaDae {
   }
   /**
    * article.media.video
-   * @return {VideoDae|*} article.media.video
+   * @return {VideoDae|*} article.media.video を返します
    */
   get video():VideoDae {
     return this._video;

@@ -17,8 +17,8 @@ import {User} from '../../app/User';
 import {Length} from '../../app/const/Length';
 
 /**
- * **認証**（ログイン）<br>
- * Home pickup(slider)
+ * <p>**認証**（ログイン）<br>
+ * Home pickup(slider)</p>
  */
 export class PickupAuth extends ActionAuth {
   /**

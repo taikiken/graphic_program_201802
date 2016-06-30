@@ -58,17 +58,11 @@ export class ViewFirstVisit extends View {
   start():void {
     if ( Cookie.get( Cookie.EVER_BEEN ) === '1' ) {
       // きたことある
-      // console.log( 'きたことある ', Cookie.get( Cookie.EVER_BEEN ) );
       return;
     }
 
     // cookie set 10 years
     Cookie.save( '1', Cookie.EVER_BEEN, Time.later( 365 * 10 ) );
-
-    // 表示
-    // https://github.com/undotsushin/undotsushin/issues/709
-    // render せず非表示にします
-    // this.render();
   }
 
   /**

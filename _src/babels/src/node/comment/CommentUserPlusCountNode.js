@@ -19,7 +19,6 @@ let React = self.React;
 /**
  * 記事一覧のコメントしたユーザー数を表示します
  * @type {ReactClass}
- * @type {*|Function}
  */
 export let CommentUserPlusCountNode = React.createClass( {
   propType: {

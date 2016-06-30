@@ -410,10 +410,75 @@ img {
       &-inner {}
     }
 
+    &-breadCrumb {
+      width: 100%;
+      height: (80/2)+px;
+      overflow: hidden;
+      background-color: #111;
+
+      ol {
+        list-style: none;
+        width: 100%;
+        height: (80/2)+px;
+        padding-left: perCalc(20);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      li {
+        display: table-cell;
+        height: (80/2)+px;
+        vertical-align: middle;
+
+        a {
+          display: inline-block;
+          @include link-decoration(#666, #666, none, none);
+          font-size: fz(20/2);
+          white-space: nowrap;
+
+          &:after {
+            content: '';
+            @extend .sp-sprite-common;
+            @include sprite( $common-breadcrumb-arrow );
+            display: inline-block;
+            margin-right: (20/2)+px;
+            margin-left: (20/2)+px;
+            font-size: 0;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      li:first-child a {
+
+        &:before {
+          content: '';
+          position: relative;
+          top: -1px;
+          @extend .sp-sprite-common;
+          @include sprite( $common-breadcrumb-home );
+          display: inline-block;
+          margin-right: (10/2)+px;
+          font-size: 0;
+          vertical-align: middle;
+        }
+      }
+
+      li:last-child a {
+        color: #fff;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
     &-pr {
       &-inner {
         display: table;
         padding: (30/2)+px perCalc(30);
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
         background-color: #222;
       }
 

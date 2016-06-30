@@ -36,27 +36,83 @@ export class RelatedDae {
   constructor( response:Object = {} ) {
 
     response = Safety.object( response );
-
+    /**
+     * JSON.response
+     * @type {Object}
+     * @protected
+     */
     this._response = response;
-    // response.category
+    /**
+     * response.category
+     * @deprecated instead use categories
+     * @type {CategoryDae}
+     * @protected
+     */
     this._category = new CategoryDae( response.category );
     // docs には書いてないけど category2 も増やす, 2016-03-13
+    /**
+     * response.category2
+     * @deprecated instead use categories
+     * @from 2016-03-13
+     * @type {CategoryDae}
+     * @protected
+     */
     this._category2 = new CategoryDae( response.category2 );
     // docs には書いてないけど配列も増やしとく, 2016-03-13
+    /**
+     * response.categories
+     * @from 2016-03-13
+     * @type {CategoriesDae}
+     * @protected
+     */
     this._categories = new CategoriesDae( response );
-    // response.media
+    /**
+     * response.media
+     * @type {MediaDae}
+     * @protected
+     */
     this._media = new MediaDae( response.media );
-    // response.user
+    /**
+     * response.user
+     * @type {UserDae}
+     * @protected
+     */
     this._user = new UserDae( response.user );
+    
+    let formatDate;
 
     // date check
     if ( Safety.check( response, 'date' ) ) {
-      this._formatDate = Format.date( response.date );
+      formatDate = Format.date( response.date );
     }
+    /**
+     * response.date
+     * @type {string|undefined}
+     * @protected
+     */
+    this._formatDate = formatDate;
 
     // 以下仕様追加 from 2016-05-31
+    /**
+     * response.theme
+     * @from 2016-05-31
+     * @type {ThemeDae}
+     * @protected
+     */
     this._theme = new ThemeDae( response.theme );
+    /**
+     * response.banner
+     * @from 2016-05-31
+     * @type {BannersDae}
+     * @protected
+     */
     this._banner = new BannersDae( response.banner );
+    /**
+     * response.ad
+     * @from 2016-05-31
+     * @type {AdDae}
+     * @protected
+     */
     this._ad = new AdDae( response.ad );
   }
   // ---------------------------------------------------
@@ -114,6 +170,7 @@ export class RelatedDae {
   }
   /**
    * response.category
+   * @deprecated instead use categories
    * @return {CategoryDae|*} カテゴリー response.category CategoryDae として返します
    */
   get category():CategoryDae {
@@ -121,6 +178,7 @@ export class RelatedDae {
   }
   /**
    * response.category2
+   * @deprecated instead use categories
    * @return {CategoryDae} カテゴリー2 response.category2 CategoryDae として返します
    */
   get category2():CategoryDae {

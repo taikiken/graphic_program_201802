@@ -15,27 +15,36 @@ import {CommentsDae} from './comments/CommentsDae';
 import {Safety} from '../data/Safety';
 
 /**
- * コメント一覧表示
+ * <p>コメント一覧表示</p>
  * <p>再帰的に処理する必要があったため少々複雑な処理工程を辿ります</p>
- * <ol>
- * <li>CommentsListDae</li>
- * <li>CommentsDae</li>
- * <li>PopularDae</li>
- * <li>ReplyDae</li>
- * <li>CommentsPopularDae</li>
- * </ol>
+ *
+ * 1. CommentsListDae
+ * 1. CommentsDae
+ * 1. PopularDae
+ * 1. ReplyDae
+ * 1. CommentsPopularDae
+ *
+ * @todo example
  * */
 export class CommentsListDae {
   /**
    * コメント一覧表示 reply 含む
-   *
-   * ToDo: @example
    * @param {Object} response JSON.response
    */
   constructor( response:Object = {} ) {
     response = Safety.object( response );
+    /**
+     * JSON.response
+     * @type {Object}
+     * @protected
+     */
     this._response = response;
     // console.log( 'CommentsListDae ', response, response.comments );
+    /**
+     * response.comments
+     * @type {CommentsDae}
+     * @protected
+     */
     this._comments = new CommentsDae( response.comments );
   }
   // ---------------------------------------------------

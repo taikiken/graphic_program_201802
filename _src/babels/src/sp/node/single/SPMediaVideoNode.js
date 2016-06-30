@@ -69,29 +69,32 @@ export let SPMediaVideoNode = React.createClass( {
     let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
 
     // HTML5 video
-    return <HTML5VideoNode
-      video={video}
-      poster={poster}
-      caption={caption}
-      playImage={Empty.VIDEO_PLAY}
-    />;
+    return (
+      <HTML5VideoNode
+        video={video}
+        poster={poster}
+        caption={caption}
+        playImage={Empty.VIDEO_PLAY}
+      />
+    );
 
   },
   brightcove: function( media ) {
-    // ToDo: 2016-06-01 ~
     let images = media.images;
     let video = media.video;
     let caption = video.caption || '';
     let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
 
     // HTML5 video
-    return <BrightcoveNode
-      articleId={this.props.articleId}
-      video={video}
-      poster={poster}
-      caption={caption}
-      playImage={Empty.VIDEO_PLAY}
-    />;
+    return (
+      <BrightcoveNode
+        articleId={this.props.articleId}
+        video={video}
+        poster={poster}
+        caption={caption}
+        playImage={Empty.VIDEO_PLAY}
+      />
+    );
   },
   youtube: function( media ) {
     let video = media.video;
@@ -105,7 +108,9 @@ export let SPMediaVideoNode = React.createClass( {
           width={Content.WIDTH}
           height={Content.HD_HEIGHT}
           frameBorder="0"
-          allowFullScreen></iframe>
+          allowFullScreen
+        >
+        </iframe>
       </div>
     );
   },
@@ -117,7 +122,8 @@ export let SPMediaVideoNode = React.createClass( {
         <div className="fb-video"
              data-href={video.facebook}
              data-allowfullscreen="true"
-             data-width={Content.WIDTH}>
+             data-width={Content.WIDTH}
+        >
         </div>
       </div>
     );

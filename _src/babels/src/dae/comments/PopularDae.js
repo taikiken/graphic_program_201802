@@ -10,9 +10,11 @@
  *
  */
 
-
+// data
 import {Safety} from '../../data/Safety';
+// util
 import {Format} from '../../util/Format';
+// dae
 import {UserDae} from '../UserDae';
 
 /**
@@ -28,14 +30,26 @@ export class PopularDae {
     comment = Safety.object( comment );
 
     if ( Safety.check( comment, 'date' ) ) {
-
+      /**
+       * comment.date
+       * @deprecated instead use article.display_date
+       * @type {string}
+       * @protected
+       */
       this._formatDate = Format.date( comment.date );
 
     }
-
-    // comments_popular.user
+    /**
+     * comments_popular.user
+     * @type {UserDae}
+     * @protected
+     */
     this._user = new UserDae( comment.user );
-    // property
+    /**
+     * response.comment
+     * @type {Object}
+     * @protected
+     */
     this._comment = comment;
 
   }
@@ -63,8 +77,9 @@ export class PopularDae {
     return this.comment.date;
   }
   /**
-   * comment.date をフォーマット **使用しない**
+   * comment.date をフォーマット **使用しない** <br>
    * displayDate を使用します
+   * @deprecated instead use displayDate
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {

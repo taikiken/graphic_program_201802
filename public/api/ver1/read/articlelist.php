@@ -88,7 +88,19 @@ if(strlen($api)>0){
 			$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid),$c." and (swf is not null or youtube is not null or facebook is not null)"),$length,$offset);
 			$nsql=sprintf("select count(id) as n from repo_n where cid=1 and flag=1 and (swf is not null or youtube is not null or facebook is not null)%s",$c);
 */
+
+
+		// #860 - ダミーレスポンス
+		}elseif($type === "recommend"){
+
+			if ( $category === 'crazy' ) :
+				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=8 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
+				$nsql="select count(id) as n from u_headline where cid=8 and flag=1";
+			endif;
+
 		}
+
+
 	
 	}elseif($api==="search"){
 
@@ -177,7 +189,7 @@ if(strlen($api)>0){
 //echo $sql;
 
 if($y["status"]["code"]===200){
-
+	
 	$o->query($nsql);
 	$f=$o->fetch_array();
 	$count=$f["n"];

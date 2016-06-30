@@ -57,13 +57,29 @@ export class ViewHeaderMemberNotice extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
-    this._action = new Notice( this.done.bind( this ), this.fail.bind( this ), 0, 5 );
-
-    // React instance, NoticeDom
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Notice}
+     */
+    this.action = new Notice( this.done.bind( this ), this.fail.bind( this ), 0, 5 );
+    /**
+     * React instance, NoticeDom
+     * @type {null|Object}
+     * @private
+     */
     this._menu = null;
-    // NoticeStatus instance
+    /**
+     * NoticeStatus instance
+     * @type {null|Object}
+     * @private
+     */
     this._status = null;
-    // event handler
+    /**
+     * bind 済み this.onNoticeUpdate event handler
+     * @type {Function}
+     * @private
+     */
     this._boundNotice = this.onNoticeUpdate.bind( this );
   }
   /**
@@ -173,22 +189,6 @@ export class ViewHeaderMemberNotice extends View {
       render: function() {
 
         let notice = this.state.notice;
-        // let index = this.state.index;
-
-        /*
-        let icon = notice.user.profilePicture;
-        if ( !icon ) {
-          icon = Empty.USER_EMPTY;
-        } else if ( !Safety.isImg( icon ) ) {
-          // 画像ファイル名に拡張子がないのがあったので
-          // 拡張子チェックを追加
-          if ( !Safety.isGraph( icon ) ) {
-            icon = Empty.USER_EMPTY;
-          }
-        }
-
-        let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
-        */
         let icon = Safety.image( notice.user.profilePicture, Empty.USER_EMPTY );
         let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 
@@ -299,10 +299,7 @@ export class ViewHeaderMemberNotice extends View {
           </nav>
         );
 
-      }/* ,
-      allRead: function( event ) {
-        event.preventDefault();
-      }*/
+      }
     } );
 
     // --------------------------------------------------

@@ -14,13 +14,14 @@
 let _symbol = Symbol();
 
 /**
- * <h3>コメント種類（表示分類）</h3>
- * 全て static です
- * SELF|NORMAL|OFFICIAL|ALL があります
+ * <p>コメント種類（表示分類）<br>
+ * SELF|NORMAL|OFFICIAL|ALL があります</p>
+ * <p>全て static です</p>
+ *
  */
 export class CommentsType {
   /**
-   * コメント種類（表示分類）
+   * <p>コメント種類（表示分類）</p>
    * static class です, instance を作成しません
    * @param {Symbol} target Singleton を実現するための private symbol
    */
@@ -37,7 +38,7 @@ export class CommentsType {
   //  METHOD
   // ---------------------------------------------------
   /**
-   * 見出しタイトル
+   * 見出しタイトル<br>
    * SELF|NORMAL|OFFICIAL|ALL
    * @param {string} type comment type
    * @return {string} 見出しタイトルを返します

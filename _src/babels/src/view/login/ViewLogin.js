@@ -39,6 +39,7 @@ import {ModelSocial} from '../../model/sns/ModelSocial';
 // util
 import {Loc} from '../../util/Loc';
 
+// event
 import {MessageStatus} from '../../event/MessageStatus';
 
 // React

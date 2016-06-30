@@ -22,16 +22,16 @@ import {LegendStep3Node} from './LegendStep3Node';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 /**
- * @description
- * signup main HTML
- * <code>
+ * <p>「新規会員登録」 main HTML</p>
+ *
+ * <pre>
  *  <RootNode />
  *    <SignupHeadingNode />
  *    <form />
  *      <LegendStep1 />
  *      <LegendStep2 />
  *      <LegendStep3 />
- * </code>
+ * </pre>
  *
  * @type {ReactClass}
  * */

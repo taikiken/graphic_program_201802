@@ -10,19 +10,22 @@
  *
  */
 
-
 // import {Env} from '../app/Env';
 import {Codes} from './../app/Codes';
+// data
 import {Result} from '../data/Result';
-
 // dae
 import {StatusDae} from '../dae/StatusDae';
 
 /**
- * 非同期通信でJSONを取得します
- * Fetch API を使用し通信を行います
- * Action 系 Class でラップし使用します
- * 直接実行することはありません
+ * <p>非同期通信でJSONを取得します<br>
+ * Fetch API を使用し通信を行います</p>
+ *
+ * <p>Action 系 Class で extends し使用します</p>
+ * **直接実行することはありません**
+ *
+ * @see https://github.com/github/fetch
+ * @see https://developers.google.com/web/updates/2015/03/introduction-to-fetch
  */
 export class Ajax {
   /**
@@ -30,7 +33,15 @@ export class Ajax {
    */
   constructor() {
 
-    // 実行可否判断 flag は trueです
+    /**
+     * <p>Ajax request 実行可否判断 flag<br>
+     * 二重送信を防止するために使用します</p>
+     *
+     * - true: 実行可能
+     * - false: 実行不可
+     * @type {boolean}
+     * @private
+     */
     this._can = true;
 
   }
@@ -38,8 +49,8 @@ export class Ajax {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * リクエストが可能かを返します
-   * W click などで二重送信になるのを防ぎます
+   * <p>リクエストが可能かを取得します<br>
+   * W click などで二重送信になるのを防ぎます</p>
    * @return {Boolean} 実行可否 flag を返します
    */
   get can():Boolean {

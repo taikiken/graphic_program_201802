@@ -31,6 +31,7 @@ import {ArticleDae} from '../dae/ArticleDae';
 // node(ReactClass)
 import {ReactionNode} from '../node/comment/ReactionNode';
 import {CommentUserPlusCountNode} from '../node/comment/CommentUserPlusCountNode';
+import {CategoryLabelNode} from '../node/category/CategoryLabelNode';
 
 // Ga
 import {Ga} from '../ga/Ga';
@@ -58,28 +59,16 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, ActionClass, option, useMasonry );
+    /**
+     * category slug
+     * @override
+     * @type {string}
+     * @default all
+     */
     this.slug = 'all';
   }
-  // // ---------------------------------------------------
-  // //  GETTER / SETTER
-  // // ---------------------------------------------------
-  // /**
-  //  * category slug
-  //  * @default all
-  //  * @return {string} category slug を返します
-  //  */
-  // get slug():string {
-  //   return this._slug;
-  // }
-  // /**
-  //  * category slug を設定します
-  //  * @param {string} categorySlug 設定する category slug
-  //  */
-  // set slug( categorySlug:string ):void {
-  //   this._slug = categorySlug;
-  // }
   // ---------------------------------------------------
-  //  Method
+  //  METHOD
   // ---------------------------------------------------
   /**
    * dom を render します
@@ -91,11 +80,11 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     // let useMasonry = this._useMasonry;
 
     // 既存データ用のglobal配列
-    let articlesList = this._articles;
+    let articlesList = this.articles;
 
     // 前回までの配列length
     // sequence な index のために必要
-    let prevLast = this._articles.length;
+    let prevLast = this.articles.length;
 
     // 記事挿入 root element
     let element = this.element;
@@ -129,8 +118,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       getInitialState: function() {
         /**
+         * page number
          * @private
          * @type {number}
+         * @default 1
          */
         this.page = 1;
 
@@ -147,7 +138,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-              <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+              <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
               <span className="loading-spinner">&nbsp;</span>
             </div>
           );
@@ -238,16 +229,21 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       // Element 型を保証する
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-      if ( this._moreRendered === null ) {
+      if ( this.moreRendered === null ) {
         // チェックをパスし実行する
-        this._moreRendered = ReactDOM.render(
+        /**
+         * MoreViewDom instance を設定します
+         * @override
+         * @type {ReactClass|MoreViewDom}
+         */
+        this.moreRendered = ReactDOM.render(
           React.createElement( MoreViewDom, { show: show, action: this.action, home: this.home, slug: this.slug } ),
           moreElement
         );
 
       } else {
 
-        this._moreRendered.updateShow( show );
+        this.moreRendered.updateShow( show );
 
       }
 
@@ -408,10 +404,6 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         }
 
       }
-      // , // render
-      // componentDidMount: function() {
-      //   // mount
-      // }
     } );
 
     // ------------------------------------------------
@@ -440,10 +432,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       render: function() {
         let mediaType = this.props.mediaType;
-
         let recommend = '';
+        
         if ( this.props.recommend ) {
-          // recommend = <i className="post-label_recommend">おすすめ記事</i>;
           recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
         }
 
@@ -471,7 +462,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           return (
             <figure className={'post-thumb post-thumb-' + mediaType}>
               <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
-              <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} />
+              <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} alt="" />
               {recommend}
             </figure>
           );
@@ -540,10 +531,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                 let commentsTotal = dae.commentsCount;
                 let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
 
-                let category = ( label ):string => {
-                  return !label ? '' : <span className="category-label">{label}</span>;
-                };
-
+                // let category = ( label ):string => {
+                //   return !label ? '' : <span className="category-label">{label}</span>;
+                // };
+                
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
                   <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
@@ -555,8 +546,14 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                         recommend={!!dae.isRecommend && home}
                       />
                       <div className="post-data">
-                        <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
-                        <h3 className='post-heading'>{dae.title}</h3>
+                        <p className={'post-category post-category-' + dae.categories.all[ 0 ].slug}>
+                          <CategoryLabelNode
+                            categories={dae.categories.all}
+                            id={`post-archive-${dae.id}`}
+                            index={i}
+                          />
+                        </p>
+                        <h3 className="post-heading">{dae.title}</h3>
                         <p className="post-date">{dae.displayDate}</p>
                         <div className="post-excerpt-text">{dae.description}</div>
                       </div>
@@ -566,7 +563,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                       uniqueId={'comment-' + dae.id}
                       commentsPopular={commentsPopular}
                       total={commentsTotal}
-                      articleId={String(dae.id)} />
+                      articleId={String(dae.id)}
+                    />
                   </div>
                 );
                 // loop end
@@ -668,9 +666,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       // didUpdate から呼び出される
       appendImages: function() {
-
-        // console.log( '++++++++++++++++++++ appendImages' );
-
+        
         // event から event handler を unbind します
         this.img.off( 'always', this.appendImages );
 
@@ -703,16 +699,21 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
+    if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this._articleRendered = ReactDOM.render(
+      /**
+       * ArticleDom instance を設定します
+       * @override
+       * @type {ReactClass|ArticleDom}
+       */
+      this.articleRendered = ReactDOM.render(
         React.createElement( ArticleDom, {
           home: this.home,
           list: articlesList,
-          offset: this._request.offset,
-          length: this._request.length,
-          masonry: this._useMasonry,
+          offset: this.request.offset,
+          length: this.request.length,
+          masonry: this.useMasonry,
           action: this.action } ),
         element
       );
@@ -721,12 +722,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
+      this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
 
     }
-
-    // // from 2016-06-08
-    // this.postRender();
   }// render
 }
 

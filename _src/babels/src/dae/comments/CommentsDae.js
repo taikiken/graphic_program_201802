@@ -47,7 +47,26 @@ export class CommentsDae {
       list.push( dae.id );
     }
 
+    /**
+     * comment.id をキーにコメントデータを格納します
+     *
+     * @example
+     * {
+     *  123456: {
+     *    comment: PopularDae,
+     *    replay:  ReplyDae
+     *  }
+     * }
+     * @type {Object}
+     * @protected
+     */
     this._bank = bank;
+    /**
+     * comment.id を配列に格納します<br>
+     * 表示順に使用できます
+     * @type {Array<Number>}
+     * @protected
+     */
     this._list = list;
 
     // console.log( 'CommentsDae', this._bank, this._list );

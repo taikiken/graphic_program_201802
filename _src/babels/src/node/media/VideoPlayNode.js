@@ -15,8 +15,8 @@ let React = self.React;
 
 // play button
 /**
- * HTML5 video play button
- * click で動画を再生し button 非表示にします
+ * <p>HTML5 video play button<br>
+ * click で動画を再生し button 非表示にします</p>
  * @type {*|Function|ReactClass}
  */
 export let VideoPlayNode = React.createClass( {
@@ -35,7 +35,7 @@ export let VideoPlayNode = React.createClass( {
     if ( this.props.showPlay ) {
       return (
         <a href="#" onClick={this.props.callback} className="post-video-start">
-          <img className="post-thumb-overlay-movie type-movie" src={this.props.playImage} />
+          <img className="post-thumb-overlay-movie type-movie" src={this.props.playImage} alt="" />
         </a>
       );
     } else {

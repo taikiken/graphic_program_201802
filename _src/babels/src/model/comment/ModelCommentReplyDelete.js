@@ -21,14 +21,19 @@ import {Result} from '../../data/Result';
 export class ModelCommentReplyDelete extends Model {
   /**
    * コメントへのコメント削除を行います
-   * @param {string} articleId 記事 id
-   * @param {string} commentId コメント id
-   * @param {string} replyId reply comment id
+   * @param {Number} articleId 記事 id
+   * @param {Number} commentId コメント id
+   * @param {Number} replyId reply comment id
    * @param {Object} [option={}] optional event handler
    */
-  constructor( articleId:string, commentId:string, replyId:string, option:Object = {} ) {
+  constructor( articleId:Number, commentId:Number, replyId:Number, option:Object = {} ) {
     super( option );
-    this._action = new CommentReplyDelete( articleId, commentId, replyId, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {CommentReplyDelete}
+     */
+    this.action = new CommentReplyDelete( articleId, commentId, replyId, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

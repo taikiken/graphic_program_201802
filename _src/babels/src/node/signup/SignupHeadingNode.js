@@ -18,7 +18,7 @@ import {Message} from '../../app/const/Message';
 let React = self.React;
 
 /**
- * 新規登録 ナビ部分
+ * <p>新規登録 ナビ部分</p>
  * @private
  * @type {ReactClass}
  */
@@ -46,7 +46,8 @@ let SignupStepNode = React.createClass( {
 } );
 
 /**
- * 新規登録 タイトル部分
+ * <p>新規登録 タイトル部分</p>
+ * <p>step 状態により表示を切り替えます</p>
  * @type {ReactClass}
  */
 export let SignupHeadingNode = React.createClass( {

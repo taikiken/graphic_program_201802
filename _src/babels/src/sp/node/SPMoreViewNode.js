@@ -24,7 +24,7 @@ let React = self.React;
 // More button
 // --------------------------------------------
 /**
- * SP 次を見る MORE VIEW button
+ * SP 次を見る VIEW MORE button
  * @type {ReactClass}
  */
 export let SPMoreViewNode = React.createClass( {
@@ -70,7 +70,7 @@ export let SPMoreViewNode = React.createClass( {
 
       return (
         <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-          <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
+          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
           <span className="loading-spinner">&nbsp;</span>
         </div>
       );

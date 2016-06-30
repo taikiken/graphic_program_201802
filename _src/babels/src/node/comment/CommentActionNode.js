@@ -33,8 +33,10 @@ let React = self.React;
 // コメント削除・通報 削除は自分のだけ, 他人のコメントは通報
 // 機能満載になったので{CommentNode}から分離しました
 /**
- * コメント削除・通報
- * - 通報機能 drop
+ * <p>コメント削除・通報</p>
+ * <p>コメント削除・通報 削除は自分のだけ, 他人のコメントは通報だけ可能</p>
+ *
+ * **通報機能は削除になりました**
  * @type {ReactClass} CommentActionNode
  */
 export let CommentActionNode = React.createClass( {

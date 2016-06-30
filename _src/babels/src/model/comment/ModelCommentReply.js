@@ -21,14 +21,19 @@ import {CommentReply} from '../../action/comment/CommentReply';
 export class ModelCommentReply extends Model {
   /**
    * コメントへのコメント送信
-   * @param {string} articleId 記事 id
-   * @param {string|Number} commentId コメント ID
+   * @param {Number} articleId 記事 id
+   * @param {Number} commentId コメント ID
    * @param {FormData} formData comment form FormData
    * @param {Object} [option={}] optional event handler
    */
-  constructor( articleId:string, commentId:string, formData:FormData, option:Object = {} ) {
+  constructor( articleId:Number, commentId:Number, formData:FormData, option:Object = {} ) {
     super( option );
-    this._action = new CommentReply( articleId, commentId, formData, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {CommentReply}
+     */
+    this.action = new CommentReply( articleId, commentId, formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

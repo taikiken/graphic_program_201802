@@ -36,7 +36,17 @@ export class ViewRelated extends View {
    */
   constructor( element:Element, related:Array<RelatedDae> = [] ) {
     super( element );
+    /**
+     * response.related_articles 配列
+     * @type {Array}
+     * @private
+     */
     this._related = Safety.array( related );
+    /**
+     * 関連記事 dom 生成 instance
+     * @type {null|Object}
+     * @private
+     */
     this._rendered = null;
   }
   /**
@@ -116,7 +126,7 @@ export class ViewRelated extends View {
                         </figure>
                         <div className="post-data">
                           <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
-                          <h3 className='post-heading'>{dae.title}</h3>
+                          <h3 className="post-heading">{dae.title}</h3>
                           <p className="post-date">{dae.displayDate}</p>
                         </div>
                       </a>

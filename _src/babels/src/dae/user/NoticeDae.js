@@ -30,17 +30,32 @@ export class NoticeDae {
 
     // date check
     if ( Safety.check( notice, 'date' ) ) {
-
+      /**
+       * notice.date
+       * @deprecated instead use notice.display_date
+       * @type {string}
+       * @protected
+       */
       this._formatDate = Format.date( notice.date );
 
     }
-
+    /**
+     * response.notifications.notice.user
+     * @type {Object}
+     * @protected
+     */
     this._notice = notice;
-
-    // user
+    /**
+     * response.notifications.notice.user
+     * @type {UserDae}
+     * @protected
+     */
     this._user = new UserDae( notice.user );
-
-    // article
+    /**
+     * response.notifications.notice.article
+     * @type {NoticeArticleDae}
+     * @protected
+     */
     this._article = new NoticeArticleDae( notice.article );
 
   }
@@ -66,9 +81,10 @@ export class NoticeDae {
     return this.notice.date;
   }
   /**
-   * notifications.date フォーマット
-   * **使用しません**
+   * <p>notifications.date フォーマット</p>
+   * **使用しません** <br>
    * displayDate を代わりに使用します
+   * @deprecated instead use displayDate
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {

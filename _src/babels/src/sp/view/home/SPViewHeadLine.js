@@ -26,6 +26,9 @@ import {ArticleDae} from '../../../dae/ArticleDae';
 // data
 import {Safety} from '../../../data/Safety';
 
+// node
+import {CategoryLabelNode} from '../../../node/category/CategoryLabelNode';
+
 // Ga
 import {Ga} from '../../../ga/Ga';
 import {GaData} from '../../../ga/GaData';
@@ -70,9 +73,9 @@ export class SPViewHeadLine extends ViewHeadline {
         let dae = this.props.dae;
         let thumbnail = Safety.image( dae.media.images.large, Empty.IMG_LARGE );
 
-        let category = ( label ):string => {
-          return !label ? '' : <span className="category-label">{label}</span>;
-        };
+        // let category = ( label ):string => {
+        //   return !label ? '' : <span className="category-label">{label}</span>;
+        // };
 
         let playMark = (mediaType) => {
           if (mediaType === MediaType.VIDEO) {
@@ -89,7 +92,13 @@ export class SPViewHeadLine extends ViewHeadline {
               <figure className="post-thumb-headline"><img src={thumbnail} alt=""/>{playMark(dae.mediaType)}</figure>
               <div className="post-overview">
                 <h2 className="post-heading">{dae.title}</h2>
-                <p className={'post-category post-category-' + dae.category.slug}>{category(dae.category.label)}{category(dae.category2.label)}</p>
+                <p className={'post-category post-category-' + dae.categories.all[0].slug}>
+                  <CategoryLabelNode
+                    categories={dae.categories.all}
+                    id={`headline-label-${dae.id}`}
+                    index={1}
+                  />
+                </p>
                 <p className="post-date">{dae.displayDate}</p>
                 <p className="post-comment-num">{dae.commentsCount}</p>
               </div>
@@ -118,25 +127,26 @@ export class SPViewHeadLine extends ViewHeadline {
         index: React.PropTypes.number.isRequired,
         id: React.PropTypes.string.isRequired,
         slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        category2: React.PropTypes.string,
+        // category: React.PropTypes.string.isRequired,
+        // category2: React.PropTypes.string,
+        categories: React.PropTypes.array.isRequired,
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         thumbnail: React.PropTypes.string.isRequired,
         mediaType: React.PropTypes.string.isRequired
       },
-      getDefaultPropTypes: function() {
-        return {
-          category2: ''
-        };
-      },
+      // getDefaultPropTypes: function() {
+      //   return {
+      //     category2: ''
+      //   };
+      // },
       render: function() {
         let p = this.props;
 
-        let category = ( label ):string => {
-          return !label ? '' : <span className="category-label">{label}</span>;
-        };
+        // let category = ( label ):string => {
+        //   return !label ? '' : <span className="category-label">{label}</span>;
+        // };
 
         let playMark = (mediaType) => {
           if (mediaType === MediaType.VIDEO) {
@@ -152,8 +162,14 @@ export class SPViewHeadLine extends ViewHeadline {
             <a className="post" href={p.url} onClick={this.gaSend}>
               <figure className="post-thumb post-thumb-headline"><img src={p.thumbnail} alt={p.title}/>{playMark(p.mediaType)}</figure>
               <div className="post-data">
-                <h3 className='post-heading'>{p.title}</h3>
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
+                <h3 className="post-heading">{p.title}</h3>
+                <p className={'post-category post-category-' + p.slug}>
+                  <CategoryLabelNode
+                    categories={p.categories}
+                    id={`archive-label-${p.id}`}
+                    index={p.index}
+                  />
+                </p>
                 <p className="post-date">{p.date}</p>
               </div>
             </a>
@@ -202,19 +218,20 @@ export class SPViewHeadLine extends ViewHeadline {
                     let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
 
                     // HeadlineDom instance を使い render
-                    return <HeadlineDom
-                      key={'headline-' + dae.id}
-                      index={i}
-                      id={String( dae.id )}
-                      slug={dae.category.slug}
-                      category={dae.category.label}
-                      category2={dae.category2.label}
-                      url={dae.url}
-                      date={dae.displayDate}
-                      title={dae.title}
-                      thumbnail={thumbnail}
-                      mediaType={dae.mediaType}
-                    />;
+                    return (
+                      <HeadlineDom
+                        key={'headline-' + dae.id}
+                        index={i}
+                        id={String( dae.id )}
+                        slug={dae.categories.all[0].slug}
+                        categories={dae.categories.all}
+                        url={dae.url}
+                        date={dae.displayDate}
+                        title={dae.title}
+                        thumbnail={thumbnail}
+                        mediaType={dae.mediaType}
+                      />
+                    );
 
                   } )
                 }

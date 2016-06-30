@@ -35,12 +35,14 @@ let ReactDOM = self.ReactDOM;
 
 // comment form
 /**
- * [SP]
- * コメント Form Element
- * 入力(textarea)と送信(input:submit)
+ * <p>[SP]<br>
+ * コメント Form Element<br>
+ * 入力(textarea)と送信(input:submit)</p>
  *
+ * <pre>
  * SPCommentFormNode
  * |- SPCommentFormElementNode
+ * </pre>
  * @type {ReactClass} コメント送信フォーム
  */
 export let SPCommentFormElementNode = React.createClass( {

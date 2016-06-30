@@ -31,7 +31,7 @@ import {Search} from '../../action/search/Search';
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 /**
- * SP 検索結果
+ * SP 検索結果, keyword 検索
  */
 export class SPViewSearch extends SPViewArchive {
   /**
@@ -43,8 +43,12 @@ export class SPViewSearch extends SPViewArchive {
    */
   constructor( word:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option );
-    // keyword 検索
-    this._action = User.sign ?
+    /**
+     * Action instance を設定します, keyword 検索
+     * @override
+     * @type {SearchAuth|Search}
+     */
+    this.action = User.sign ?
       new SearchAuth( word, this.done.bind( this ), this.fail.bind( this ) ) :
       new Search( word, this.done.bind( this ), this.fail.bind( this ) );
   }

@@ -26,10 +26,25 @@ export class ErrorDae {
    * @param {Result} result Ajax 取得 JSON Result instance
    */
   constructor( result:Result ) {
+    /**
+     * result, status code が 200 以外の時の error 情報
+     * @type {Result}
+     * @protected
+     */
     this._result = result;
+    /**
+     * result.status
+     * @type {StatusDae}
+     * @protected
+     */
     this._status = new StatusDae( result.status );
 
     let response = Safety.object( result.response );
+    /**
+     * response.errors
+     * @type {ErrorsDae}
+     * @protected
+     */
     this._errors = new ErrorsDae( response.errors );
 
   }

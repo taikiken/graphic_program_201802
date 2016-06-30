@@ -180,9 +180,7 @@ class ViewModel {
     endif;
 
     $host = $_SERVER['HTTP_HOST'];
-    $port = ( $_SERVER['SERVER_PORT'] == 80 ) ? '' : ':'.$_SERVER['SERVER_PORT'];
-
-    return $protocol.$host.$port.'/';
+    return $protocol.$host.'/';
   }
 
 

@@ -12,8 +12,8 @@
 
 
 /**
- * FormData へ append する key, value を管理します
- * key === input:name, value === input.value
+ * <p>FormData へ append する key, value を管理します</p>
+ * key === input.name, value === input.value
  */
 export class Data {
   /**
@@ -22,7 +22,17 @@ export class Data {
    * @param {string} value form value 値
    */
   constructor( key:string, value:string ) {
+    /**
+     * input 名称, input.name
+     * @type {string}
+     * @protected
+     */
     this._key = key;
+    /**
+     * input 値, input value
+     * @type {string}
+     * @protected
+     */
     this._value = value;
   }
   // ---------------------------------------------------

@@ -37,8 +37,13 @@ export class Notice extends OffsetAuth {
    * アプリケーションは「お知らせ数取得間隔（60s）」で発火する通知イベントを listen し reload させます
    */
   reload():void {
-    this._reload = true;
+    /**
+     * 再読み込みフラッグ
+     * @override
+     * @type {boolean}
+     */
+    this.reloadFlag = true;
     let url = `${this._url}?offset=0&length=${this.offset}`;
-    this._ajax.start( url, this.method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
+    this.ajax.start( url, this.method, this.boundSuccess, this.boundFail, this.resultClass, this.headers );
   }
 }

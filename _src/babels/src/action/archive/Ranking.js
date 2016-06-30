@@ -15,7 +15,12 @@ import {Category} from './Category';
 import {Safety} from '../../data/Safety';
 
 /**
- * 記事ランキング
+ * <p>記事ランキング</p>
+ *
+ * ```
+ * GET
+ * /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video]
+ * ```
  */
 export class Ranking extends Category {
   /**

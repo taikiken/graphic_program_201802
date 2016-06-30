@@ -23,8 +23,23 @@ export class ErrorsDae {
    * @param {*} errors API によって Array / Object と異なります（困る・・・）
    */
   constructor( errors ) {
+    /**
+     * response.errors
+     * @type {*}
+     * @protected
+     */
     this._errors = errors;
+    /**
+     * error key をキーに error Object を保管します
+     * @type {{}}
+     * @protected
+     */
     this._bank = {};
+    /**
+     * error key を保管します
+     * @type {Array}
+     * @protected
+     */
     this._list = [];
 
     if ( errors !== null && typeof errors !== 'undefined' ) {
@@ -89,7 +104,7 @@ export class ErrorsDae {
   }
   /**
    * key: エラーのキー, value: Data のObject
-   * @return {Object} エラーのキーをキー値としたObject
+   * @return {Object} エラーのキーをキー値とした Object を返します
    */
   get bank():Object {
     return this._bank;

@@ -64,12 +64,14 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	$ACLOGTXT="/var/www/data/log/ut_article_access.txt";
 	$IMGP="/var/www/data/img/";
 	$RSS="/var/www/data/rss/";
+	
+	$MEDIADATA="http://input.undotsushin.com/api";
 
 }else{
 
 	$staticfileimport=1;
 
-	$DBNAME="ut";
+	$DBNAME="ut11";
 	$DBUSR="ut";
 	$DBPWD="ut";
 	$DBHOST="localhost";
@@ -88,6 +90,8 @@ if(getenv("REMOTE_ADDR")!="127.0.0.1"){
 	$UserImgPath=$ImgPath;
 	$LOGIN="d:/log/ut/ut_login.txt";
 	$RSS="d:/log/ut/rss/";
+	
+	$MEDIADATA="http://utinput/api";
 }
 
 

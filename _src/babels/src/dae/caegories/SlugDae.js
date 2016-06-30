@@ -24,6 +24,11 @@ export class SlugDae {
   constructor( category:Object = {} ) {
 
     category = Safety.object( category );
+    /**
+     * カテゴリー一覧
+     * @type {Object}
+     * @protected
+     */
     this._category = category;
 
   }

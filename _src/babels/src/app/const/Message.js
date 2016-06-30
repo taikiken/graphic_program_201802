@@ -12,12 +12,12 @@
 let _symbol = Symbol();
 
 /**
- * <h3>表示文章定義</h3>
+ * <p>表示文章定義</p>
  * 全て static です
  */
 export class Message {
   /**
-   * <h4>表示文章定義</h4>
+   * <p>表示文章定義</p>
    * <p>error, 注意などの文章を定義します</p>
    * <p>static class です, instance を作成しません</P>
    * @param {Symbol} target Singleton を実現するための private symbol

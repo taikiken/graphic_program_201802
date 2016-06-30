@@ -40,8 +40,8 @@ let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * パーソナライズ設定
- * 興味のある競技
+ * <p>パーソナライズ設定<br>
+ * 興味のある競技</p>
  * @type {ReactClass}
  */
 export let SettingsInterestNode = React.createClass( {
@@ -79,7 +79,7 @@ export let SettingsInterestNode = React.createClass( {
                 {
                   categories.map( function( category:SlugDae, i ) {
                     return (
-                      <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug }>
+                      <li key={category.slug} className={'setting-form-interest-item interest-item-' + category.slug}>
                         <input
                           className={'interest-item interest-item-' + i}
                           type="checkbox"

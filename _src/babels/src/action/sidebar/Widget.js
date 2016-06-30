@@ -20,9 +20,9 @@ import {Safety} from '../../data/Safety';
 let _symbol = Symbol();
 
 /**
- * <h3>Sidebar, ranking / video 一覧表示</h3>
- * 全て static
- * <p><code>Ranking</code>, <code>Videos</code>インスタンスを作成します</p>
+ * <p>Sidebar, ranking / video 一覧表示</p>
+ * <p>全て static</p>
+ * <p>{@link Ranking}, {@link Videos} インスタンスを作成します</p>
  *
  * @example
  * // ranking instance
@@ -44,7 +44,6 @@ export class Widget {
     }
 
   }
-
   /**
    * Ranking instance を作成し length を 5にセットします
    * @param {string} [slug=all] category slug です
@@ -63,7 +62,6 @@ export class Widget {
     return rankings;
 
   }
-
   /**
    * Videos instance を作成し length を 5にセットします
    * @param {string} [slug=all] category slug です

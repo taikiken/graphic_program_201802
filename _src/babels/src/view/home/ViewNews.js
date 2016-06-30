@@ -18,7 +18,7 @@ import {NewsAuth} from '../../action/home/NewsAuth';
 import {News} from '../../action/home/News';
 
 /**
- * home news
+ * home news 一覧表示
  */
 export class ViewNews extends ViewArchiveMasonry {
   /**
@@ -30,7 +30,12 @@ export class ViewNews extends ViewArchiveMasonry {
    */
   constructor( element:Element, moreElement:Element, option:Object = {}, useMasonry:Boolean = true ) {
     super( element, moreElement, null, option, useMasonry );
-    this._action = User.sign ?
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {NewsAuth|News}
+     */
+    this.action = User.sign ?
       new NewsAuth( this.done.bind( this ), this.fail.bind( this ) ) :
       new News( this.done.bind( this ), this.fail.bind( this ) );
 

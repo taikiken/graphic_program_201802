@@ -15,7 +15,13 @@ import {Category} from './Category';
 import {Safety} from '../../data/Safety';
 
 /**
- * 動画一覧
+ * <p>おすすめ動画一覧<p>
+ *
+ * ```
+ * GET
+ * /api/v1/articles/category/{all|:category_slug}[/|/ranking|/video]
+ * ```
+ *
  */
 export class Videos extends Category {
   /**

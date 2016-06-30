@@ -52,6 +52,11 @@ export class ViewError extends View {
     message = Safety.string( message, '' );
 
     super( element, option );
+    /**
+     * エラーメッセージ
+     * @type {string}
+     * @private
+     */
     this._message = message;
 
   }
@@ -82,9 +87,11 @@ export class ViewError extends View {
 
     let ErrorDom = React.createClass( {
       render: function() {
-        return <div className="error error-container">
-          <div className="error error-message">{message}</div>
-        </div>;
+        return (
+          <div className="error error-container">
+            <div className="error error-message">{message}</div>
+          </div>
+        );
       },
       componentDidMount: function() {
 

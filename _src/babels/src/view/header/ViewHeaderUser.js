@@ -33,12 +33,24 @@ export class ViewHeaderUser extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * bind 済み this.memberCallback
+     * @type {Function}
+     * @private
+     */
     this._boundCallback = this.memberCallback.bind( this );
-
-    // login user view instance
+    /**
+     * login user view instance
+     * @type {null|Object}
+     * @private
+     */
     this._member = null;
-
     // User.sign boolean
+    /**
+     * User.sign boolean, ログイン済みかの真偽値
+     * @type {Boolean}
+     * @private
+     */
     this._sign = User.sign;
 
     let userStatus = UserStatus.factory();

@@ -11,12 +11,10 @@
  */
 // comment 取得 [type]
 
-
-
 import {Query} from './Query';
 
 /**
- * 記事詳細でのコメント一覧表示のリクエスト・オプションです
+ * <p>記事詳細でのコメント一覧表示のリクエスト・オプションです<p>
  *
  * <code>/api/1/comments/article/{:article_id}[/type]</code>
  * <pre>
@@ -36,11 +34,14 @@ export class CommentType extends Query {
    * @param {Boolean} [require=false] 必須真偽値
    */
   constructor( key:string, require:Boolean = false ) {
-
     super( key, 'string', '', require );
     // 'dog|cat' を分割する
+    /**
+     * key(dog|cat|food...)を '|' で分割します
+     * @type {Array.<string>}
+     * @private
+     */
     this._keys = key.split('|');
-
   }
   /**
    * Query override して使います

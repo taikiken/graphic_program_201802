@@ -12,12 +12,7 @@
 
 
 // view
-// import {View} from '../../../view/View';
 import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
-
-// app
-// import {Url} from '../../../app/const/Url';
-// import {User} from '../../../app/User';
 
 // dae
 import {SingleDae} from '../../../dae/SingleDae';
@@ -45,7 +40,6 @@ export class SPViewSingleVisual extends ViewSingleHeader {
    * @param {SingleDae} singleDae JSON 変換済みデータ
    */
   render( singleDae:SingleDae ):void {
-
     ReactDOM.render(
       <SPMediaNode
         articleId={String(singleDae.id)}

@@ -27,8 +27,12 @@ export class ModelSignup extends ModelBehavior {
    */
   constructor( formData:FormData = null, option:Object = {} ) {
     super( formData, option );
-    this._data = formData;
-    this._action = new Signup( formData, this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Signup}
+     */
+    this.action = new Signup( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**
    * Ajax request を開始します

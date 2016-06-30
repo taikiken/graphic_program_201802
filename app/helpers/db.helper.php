@@ -190,6 +190,8 @@ class dbForTemplate extends db {
     $ad_put=set_advertise($ad,"detail");
     $s=$s+$ad_put;
     unset($s["vast"]);
+	unset($s["ad_urlpc"]);
+	unset($s["ad_urlsp"]);
 
     //$this->disconnect();
 

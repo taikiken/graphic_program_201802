@@ -34,8 +34,17 @@ export class NotificationsDae {
       list.push( new NoticeDae( notice ) );
 
     } );
-
+    /**
+     * JSON response
+     * @type {Object}
+     * @protected
+     */
     this._response = response;
+    /**
+     * response.notifications を 1件づつ NoticeDae instance とし格納します
+     * @type {Array<NoticeDae>}
+     * @protected
+     */
     this._notifications = list;
 
   }

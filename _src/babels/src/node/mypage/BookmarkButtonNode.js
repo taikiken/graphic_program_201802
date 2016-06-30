@@ -25,8 +25,8 @@ let React = self.React;
 // bookmark button
 // --------------------------------------------
 /**
- * mypage bookmark button
- * PC, SP 共用化するため 汎用class にします
+ * <p>mypage bookmark button<br>
+ * PC, SP 共用化するため 汎用化します</p>
  * @type {ReactClass}
  */
 export let BookmarkButtonNode = React.createClass( {
@@ -56,7 +56,7 @@ export let BookmarkButtonNode = React.createClass( {
         <a href="#" className={bookmarkClass(this.state.bookmarked)} onClick={this.clickHandler}>
           <span>{bookmarkMessage(this.state.bookmarked)}</span>
         </a>
-        <div className='loading-spinner'></div>
+        <div className="loading-spinner"></div>
       </div>
     );
   },

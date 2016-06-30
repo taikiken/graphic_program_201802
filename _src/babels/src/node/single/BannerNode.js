@@ -13,13 +13,17 @@
 // data
 import {Safety} from '../../data/Safety';
 
+// ga
+import {Ga} from '../../ga/Ga';
+
 // React
 let React = self.React;
 
 /**
- * <p>記事詳細 user banner<p>
- * 記事本文とタグの間
- * @example
+ * <p>記事詳細 user banner<br>
+ * 記事本文とタグの間</p>
+ *
+ * ```
  * <div data-reactroot="" class="post-footer">
  *  <div class="sponsor-link editor-bnr">
  *    <a href=""><img src=""></a>
@@ -31,6 +35,7 @@ let React = self.React;
  *    </ul>
  *  </div>
  * </div>
+ * ```
  *
  * @type {*|Function|ReactClass}
  */
@@ -40,6 +45,14 @@ export let BannerNode = React.createClass( {
     pc: React.PropTypes.bool
   },
   getDefaultProps: function() {
+    /**
+     * banner link
+     * @from 2016-06-22
+     * @protected
+     * @type {string}
+     */
+    this.link = '';
+
     return {
       pc: true
     };
@@ -56,16 +69,28 @@ export let BannerNode = React.createClass( {
       return null;
     }
 
-    if ( banner.link === '' || banner.link === null ) {
-      // illegal link
+    // if ( banner.link === '' || banner.link === null ) {
+    //   // illegal link
+    //   return null;
+    // }
+
+    let link = Safety.string( banner.link, '' );
+    if ( link === '' ) {
       return null;
     }
+
+    this.link = link;
     // pc の時のみ w728
     return (
       <div className={`sponsor-link editor-bnr${this.props.pc ? ' w728' : ''}`}>
-        <a href={banner.link} target="_blank"><img src={banner.image} alt={banner.text}/></a>
+        <a href={link} target="_blank" onClick={this.bannerClick}><img src={banner.image} alt={banner.text}/></a>
       </div>
     );
 
+  },
+  // @from 2016-06-22
+  // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
+  bannerClick: function() {
+    Ga.click( 'BannerNode.bannerClick', 'banner_link', 'click', this.link );
   }
 } );

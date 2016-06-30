@@ -55,6 +55,11 @@ let Sagen = self.Sagen;
 // ------------------------------------------
 // 設定 基本情報 表示 / 変更
 // ------------------------------------------
+/**
+ * 設定 基本情報 form element
+ * @type {*|Function|ReactClass}
+ * @private
+ */
 let SettingInputNode = React.createClass( {
   propTypes: {
     empty: React.PropTypes.string,
@@ -639,7 +644,13 @@ let SettingInputNode = React.createClass( {
 } );
 
 /**
- * 基本情報設定
+ * <p>基本情報設定 基底 React Component</p>
+ *
+ * <pre>
+ *   SettingsIndexNode
+ *      SettingInputNode
+ * </pre>
+ *
  * @type {ReactClass}
  */
 export let SettingsIndexNode = React.createClass( {
