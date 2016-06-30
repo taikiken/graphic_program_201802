@@ -21,7 +21,7 @@ let UT = self.UT;
 let Dom = UT.app.Dom;
 
 /**
- * <h3>Comment 詳細</h3>
+ * <p>Comment 詳細</p>
  * 全て static です
  */
 export class SPComment {

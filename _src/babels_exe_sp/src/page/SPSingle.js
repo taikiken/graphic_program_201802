@@ -28,7 +28,7 @@ let _headerUser = null;
 let _articleId = 0;
 
 /**
- * <h3>Single(detail)記事詳細</h3>
+ * <p>Single(detail)記事詳細</p>
  * 全て static です
  */
 export class SPSingle {

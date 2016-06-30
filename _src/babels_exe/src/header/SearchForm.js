@@ -18,7 +18,7 @@ let UT = self.UT;
 let Dom = UT.app.Dom;
 
 /**
- * <h3>header user information / signup</h3>
+ * <p>header user information / signup 検索フォーム</p>
  * 全て static です
  */
 export class SearchForm {

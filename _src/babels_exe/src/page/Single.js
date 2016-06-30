@@ -29,7 +29,7 @@ let _viewSingle = null;
 let _headerUser = null;
 
 /**
- * <h3>Single(detail)記事詳細</h3>
+ * <p>Single(detail)記事詳細</p>
  * 全て static です
  */
 export class Single {

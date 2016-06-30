@@ -21,7 +21,8 @@ let Dom = UT.app.Dom;
 let Sagen = self.Sagen;
 
 /**
- * メインメニューにかテゴリースラッグを追加
+ * <p>メインメニューにカテゴリースラッグを CSS class として追加します</p>
+ * <p>メニューのカレント表示に使用しますs</p>
  */
 export class SPNav {
   /**
