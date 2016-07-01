@@ -160,9 +160,12 @@ export let BrightcoveNode = React.createClass( {
     if ( !player ) {
       return;
     }
+
     this.setState( { showPlay: false } );
 
     player.play();
+    // 再生開始でコントロール表示
+    player.controls( true );
   },
   // -------------------------------------------
   // brightcove player init
@@ -233,9 +236,11 @@ export let BrightcoveNode = React.createClass( {
 
       // コントロールを常に表示する
       // https://github.com/undotsushin/undotsushin/issues/616#issuecomment-229638787
-      // if ( !this.phone ) {
-      //   player.controls( false );
-      // }
+      // 初めは非表示
+      // https://github.com/undotsushin/undotsushin/issues/616#issuecomment-229847018
+      if ( !this.phone ) {
+        player.controls( false );
+      }
     } );
 
     if ( this.phone ) {
