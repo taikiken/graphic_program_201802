@@ -311,7 +311,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
       } );
 
-      <?php if ($page['post']['media']['video']['add_url']['sp']) :
+      <?php if ($page['post']['media']['video']['ad_url']['sp']) :
       // 動画プレイヤー / VASTをPC/SP&APPで分ける #822 ?>
       myPlayer.ima3({
         debug: false,
