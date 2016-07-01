@@ -188,10 +188,24 @@ class dbForTemplate extends db {
     $ad=get_advertise($f["m1"],$f["userid"],$f["id"]);
     $s=set_articleinfo($f,1,1,1);
     $ad_put=set_advertise($ad,"detail");
+
+    // media.video.ad_urlの設定
+    if ( $ad_put['vast'] ) :
+      $s['media']['video']['vast'] = $ad_put['vast'];
+    endif;
+    unset($ad_put['vast']);
+
+    if ( $ad_put['ad_urlpc'] ) :
+      $s['media']['video']['ad_url']['pc'] = $ad_put['ad_urlpc'];
+    endif;
+    unset($ad_put['ad_urlpc']);
+
+    if ( $ad_put['ad_urlsp'] ) :
+      $s['media']['video']['ad_url']['sp'] = $ad_put['ad_urlsp'];
+    endif;
+    unset($ad_put['ad_urlsp']);
+
     $s=$s+$ad_put;
-    unset($s["vast"]);
-	unset($s["ad_urlpc"]);
-	unset($s["ad_urlsp"]);
 
     //$this->disconnect();
 
