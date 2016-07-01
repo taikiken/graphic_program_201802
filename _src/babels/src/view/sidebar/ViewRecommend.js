@@ -94,7 +94,7 @@ export class ViewRecommend extends ViewRanking {
             {/* title */}
             <RecommendTitleNode
               slug={categorySlug}
-              label={list[0].categories[0].label}
+              label=""
               title={Message.RECOMMEND_TITLE}
             />
             <ul className="post-list">
