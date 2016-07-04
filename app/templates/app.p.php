@@ -320,7 +320,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         ],
         postrollTimeout: 2000,
         prerollTimeout: 1000,
-        requestMode: 'onload',
+        requestMode: 'onplay',
         serverUrl: '<?php echo $page['post']['media']['video']['ad_url']['sp']; ?>' + '?' + Date.now(),
         timeout: 5000
       });
