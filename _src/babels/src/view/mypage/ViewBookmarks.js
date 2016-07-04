@@ -10,17 +10,11 @@
  *
  */
 
-
+// view
 import {View} from '../View';
 import {ViewError} from '../error/ViewError';
 
 import {Bookmarks} from '../../action/mypage/Bookmarks';
-
-/*
-// model
-import {Model} from '../../model/Model';
-import {ModelBookmark} from '../../model/users/ModelBookmark';
-*/
 
 // app
 import {Empty} from '../../app/const/Empty';
@@ -36,6 +30,7 @@ import {ArticleDae} from '../../dae/ArticleDae';
 // node
 import {BookmarkButtonNode} from '../../node/mypage/BookmarkButtonNode';
 import {MoreViewNode} from '../../node/mypage/MoreViewNode';
+import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
 
 // React
 let React = self.React;
@@ -52,21 +47,41 @@ export class ViewBookmarks extends View {
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Bookmarks}
+     */
     this.action = new Bookmarks( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * more button root element, 'View More'
+     * @type {Element}
+     * @private
+     */
     this._moreElement = moreElement;
-
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
      * @private
      */
     this._articles = [];
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
+    /**
+     * <p>ArticleDom instance を保持します</p>
+     * <p>first render を区別するためにも使用します</p>
+     * @type {null|Object}
+     * @protected
+     */
     this._articleRendered = null;
-    // more button instance を保持します
+    /**
+     * more button instance を設定します
+     * @param {null|Object} more button instance
+     */
     this._moreRendered = null;
-    // response.request object を保持する
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @protected
+     */
     this._request = null;
   }
   // ---------------------------------------------------
@@ -77,6 +92,55 @@ export class ViewBookmarks extends View {
    */
   get moreElement():Element {
     return this._moreElement;
+  }
+  /**
+   * 取得記事(articles)をArticleDae instance 配列を取得します
+   * @return {Array.<ArticleDae>} 取得記事(articles)をArticleDae instance 配列を返します
+   */
+  get articles():Array {
+    return this._articles;
+  }
+  /**
+   * ArticleDom instance を取得します
+   * @return {null|Object} ArticleDom instance を返します
+   */
+  get articleRendered():Object {
+    return this._articleRendered;
+  }
+  /**
+   * ArticleDom instance を設定します
+   * @param {Object} rendered ArticleDom instance
+   */
+  set articleRendered( rendered:Object ):void {
+    this._articleRendered = rendered;
+  }
+  /**
+   * response.request object を取得します
+   * @return {null|Object} response.request object を返します
+   */
+  get request():Object {
+    return this._request;
+  }
+  /**
+   * response.request object を設定します
+   * @param {Object} request response.request object
+   */
+  set request( request:Object ):void {
+    this._request = request;
+  }
+  /**
+   * more button instance を取得します
+   * @return {null|Object} more button instance を返します
+   */
+  get moreRendered():Object {
+    return this._moreRendered;
+  }
+  /**
+   * more button instance を設定します
+   * @param {Object} rendered more button instance
+   */
+  set moreRendered( rendered:Object ):void {
+    this._moreRendered = rendered;
   }
   // ---------------------------------------------------
   //  Method
@@ -161,10 +225,10 @@ export class ViewBookmarks extends View {
     let element = this.element;
     // 'View More' button root element
     let moreElement = this.moreElement;
-    // offset, length を使用する Action
-    // let action = this.action;
-    // 参照を保持
-    let _this = this;
+    // // offset, length を使用する Action
+    // // let action = this.action;
+    // // 参照を保持
+    // let _this = this;
 
     // more button 作成関数
     // ArchiveDom から呼び出す
@@ -173,18 +237,18 @@ export class ViewBookmarks extends View {
       show = !!show;
       // _moreRendered が null の時のみ, instance があれば state を update する
       // if ( Safety.isElement( moreElement ) && _this._moreRendered === null ) {
-      if ( _this._moreRendered === null ) {
+      if ( this._moreRendered === null ) {
         // if ( moreElement !== null && typeof moreElement !== 'undefined' && 'appendChild' in moreElement ) {
 
         // チェックをパスし実行する
-        _this._moreRendered = ReactDOM.render(
+        this.moreRendered = ReactDOM.render(
           React.createElement( MoreViewNode, { show: show, action: action } ),
           moreElement
         );
 
       } else {
 
-        _this._moreRendered.updateShow( show );
+        this._moreRendered.updateShow( show );
 
       }
 
@@ -218,23 +282,13 @@ export class ViewBookmarks extends View {
             <ul className="board-small">
               {
                 // loop start
-                this.state.list.map( function( dae ) {
+                this.state.list.map( function( dae, idx ) {
 
-                  /*
-                  let thumbnail = dae.media.images.thumbnail;
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.IMG_SMALL;
-                  } else if ( !Safety.isImg( thumbnail ) ) {
-                    if ( !Safety.isGraph( thumbnail ) ) {
-                      thumbnail = Empty.IMG_SMALL;
-                    }
-                  }
-                  */
                   let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
-
-                  let category = ( label ):string => {
-                    return !label ? '' : <span className="category-label">{label}</span>;
-                  };
+                  //
+                  // let category = ( label ):string => {
+                  //   return !label ? '' : <span className="category-label">{label}</span>;
+                  // };
 
                   return (
                     <li key={'bookmarks-' + dae.id} className="board-stacks board-item">
@@ -247,7 +301,13 @@ export class ViewBookmarks extends View {
                           <img src={thumbnail} alt={dae.title}/>
                         </figure>
                         <div className="post-data">
-                          <p className="post-category">{category(dae.category.label)}{category(dae.category2.label)}</p>
+                          <p className="post-category">
+                            <CategoryLabelNode
+                              categories={dae.categories.all}
+                              id={`bookmarks-label-${dae.id}`}
+                              index={idx}
+                            />
+                          </p>
                           <h2 className="post-heading">{dae.title}</h2>
                           <p className="post-date">{dae.displayDate}</p>
                         </div>

@@ -64,6 +64,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
+			if($cnt==6)break;
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}

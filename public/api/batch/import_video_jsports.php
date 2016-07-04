@@ -8,16 +8,17 @@ $o->connect();
 
 $bucket="jsports";
 $mediaid=17;
+$categoryid=137;
 $imgpath="https://video-jp.undotsushin.com";
 
-$dev=array("title","m1","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","img1","t1","t2");
-$cms=array("title","m1","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","img1","swf","t1");
+$dev=array("title","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","m1","img1","t1","t2");
+$cms=array("title","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","m2","img1","swf","t1");
 
 $data=unserialize(file_get_contents(sprintf("%s/out_data.php?media=%s",$MEDIADATA,$bucket)));
 
 while(list($k,$v)=each($data)){
 	
-	$sql=sprintf("select *,(select body from repo_body where pid=repo_n.id) as body from repo_n where swf='%s'",$v["t1"]);
+	$sql=sprintf("select *,(select body from repo_body where pid=repo_n.id) as body from repo_n where swf='%s' and d2=%s",$v["t1"],$mediaid);
 	$o->query($sql);
 	$dbdata=$o->fetch_array();
 
@@ -28,7 +29,8 @@ while(list($k,$v)=each($data)){
 	$sv[$sn[]="title"]=$v["title"];
 	$sv[$sn[]="swf"]=$v["t1"];
 	$sv[$sn[]="t1"]=$v["t2"];
-	$sv[$sn[]="m1"]=$v["m1"];
+	$sv[$sn[]="m1"]=$categoryid;
+	$sv[$sn[]="m2"]=$v["m1"];
 	$sv[$sn[]="a1"]=$v["a1"];
 	$sv[$sn[]="a2"]=sprintf('%02d',$v["a2"]);
 	$sv[$sn[]="a3"]=sprintf('%02d',$v["a3"]);
@@ -40,7 +42,7 @@ while(list($k,$v)=each($data)){
 	$sv[$sn[]="u_time"]=$v["u_time"];
 	$sv[$sn[]="a_time"]=$v["u_time"];
 	
-	$body=sprintf("<p>%s</p>",bind(preg_replace("/\n/","<br>",$v["body"])));
+	$body=pg_escape_string($v["body"]);
 	$videoad=$v["m2"]==171?0:2;
 	if(strlen($v["img1"])>0){
 		$sv[$sn[]="img1"]=$v["img1"];
@@ -51,7 +53,7 @@ while(list($k,$v)=each($data)){
 		}
 	}
 		
-	if(!isset($dbdata["id"])){
+	if(!isset($dbdata["id"])&&$v["uid"]==0){
 		
 		//devデータ未登録＆encode完了テーブルデータあり
 		if($encoded["flag"]==1){
@@ -67,18 +69,19 @@ while(list($k,$v)=each($data)){
 			$qq[]=sprintf("'%s'",bind($vv));
 		}
 		$sv[$sn[]="body"]=$v["body"];
-		$sqls[]=sprintf("insert into repo_n(id,cid,n,d1,d2,%s) select nextval('repo_n_id_seq'),1,(select max(n)+1 from repo_n),3,%s,%s;",$c,$mediaid,implode(",",$qq));
-		$sqls[]=sprintf("insert into repo_body select nextval('repo_body_id_seq'),currval('repo_n_id_seq'),'%s';",$body);
+		$sqls[]=sprintf("insert into repo_n(id,cid,n,d1,d2,%s) select nextval('repo_n_id_seq'),1,(select max(n)+1 from repo_n),3,%s,%s where not exists (select*from repo_n where swf='%s' and d2=%s);",$c,$mediaid,implode(",",$qq),$v["t1"],$mediaid);
+		$sqls[]=sprintf("insert into repo_body select nextval('repo_body_id_seq'),currval('repo_n_id_seq'),'%s';",$body,$v["t1"],$mediaid);
 		$imgflag=1;
 		
 	}else{
-		
+
+		$id=$dbdata["id"];
+		if($v["uid"]!=0)$id=$v["uid"];
+
 		if(strtotime($v["u_time"])>strtotime($dbdata["u_time"])){
 			
-			$id=$dbdata["id"];
-						
-			for($i=0;$i<count($dev);$i++){
-				if($dbdata[$cms[$i]]!=$sv[$dev[$i]])$qq[]=sprintf("%s='%s'",$cms[$i],bind($sv[$dev[$i]]));
+			while(list($kk,$vv)=each($sv)){
+				if($dbdata[$kk]!=$vv)$qq[]=sprintf("%s='%s'",$kk,bind($vv));
 			}
 			
 			if($v["flag"]!=1){
@@ -89,8 +92,7 @@ while(list($k,$v)=each($data)){
 					$announce=1;
 					$sqls[]=sprintf("update u_encoded set flag=0,u_time=now() where id=%s;",$encoded["id"]);
 					$qq[]="flag=1";
-				}
-				if($dbdata["flag"]!=1){
+				}else if($dbdata["flag"]!=1){
 					$qq[]="flag=1";
 				}
 			}
@@ -98,8 +100,8 @@ while(list($k,$v)=each($data)){
 			if(count($qq)>0){
 				$sqls[]=sprintf("update repo_n set %s where id=%s;",implode(",",$qq),$id);
 			}
-			if($body!=$dbdata["body"]){
-				$sqls[]=sprintf("update repo_body set body='%s' where pid=%s;",implode(",",$qq),$id);
+			if($v["body"]!=$dbdata["body"]){
+				$sqls[]=sprintf("update repo_body set body='%s' where pid=%s;",$body,$id);
 			}
 			if($img!=$dbdata["img1"]){
 				$imgflag=1;
@@ -108,7 +110,9 @@ while(list($k,$v)=each($data)){
 		  //devデータ登録あり＋更新なし＆encode完了テーブルデータあり
 		  if($v["flag"]==1&&$encoded["flag"]==1){
 			$announce=1;
+			if(strlen($img)==0)$img1=sprintf(",img1='%s'",outimg(sprintf("%s/%s/%s/%s.jpg",$imgpath,$bucket,$v["t1"],$v["t1"])));
 			$sqls[]=sprintf("update u_encoded set flag=0,u_time=now() where id=%s;",$encoded["id"]);
+			$sqls[]=sprintf("update repo_n set flag=1%s where id=%s;",$img1,$id);
 		  }
 		}
 	}

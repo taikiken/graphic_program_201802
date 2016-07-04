@@ -76,7 +76,6 @@ export class View extends EventDispatcher {
   get option():Object {
     return this._option;
   }
-
   /**
    * callback handler をセットします
    * @param {Object} option callback handler がセットされた Object

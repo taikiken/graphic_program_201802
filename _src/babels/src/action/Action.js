@@ -161,6 +161,13 @@ export class Action {
   get ajax():Ajax {
     return this._ajax;
   }
+  // /**
+  //  * Ajax instance を設定します
+  //  * @param {Ajax} ajax
+  //  */
+  // set ajax( ajax:Ajax ):void {
+  //   this._ajax = ajax;
+  // }
   /**
    * <p>このクラスの Ajax 成功時のコールバック関数</p>
    * <p>Ajax Class から成功時に call されます</p>

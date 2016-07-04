@@ -31,10 +31,15 @@ for($i=0;$i<count($categorylist);$i++){
 	*/
 	unset($s);	
 	$c=set_category2($categorylist[$i]["name_e"],"ranking");
+
+	//ビデオ排他処理せず
+	$sql=sprintf("select st1.n,st2.* from (select pageid,n from u_view where %s and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s order by n desc %s",
+	str_replace(" and","",$c[1]),$categorylist[$i]["p1"],sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+	
+	/*
 	$sql=sprintf("select st1.n,st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s order by n desc %s",
 	str_replace(" and","",$c[1]),$categorylist[$i]["p1"],sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
-
-	echo $sql;
+	*/
 
 	$j=0;
 	$o->query($sql);

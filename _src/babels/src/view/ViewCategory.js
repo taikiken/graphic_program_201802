@@ -18,12 +18,6 @@ import {ViewArchiveMasonry} from './ViewArchiveMasonry';
 // app
 import {User} from '../app/User';
 
-// // dae
-// import {ArticleDae} from '../dae/ArticleDae';
-//
-// // ga
-// import {GaData} from '../ga/GaData';
-// import {Ga} from '../ga/Ga';
 
 /**
  * category 一覧表示
@@ -40,50 +34,20 @@ export class ViewCategory extends ViewArchiveMasonry {
     super( element, moreElement, null, option, true );
     // Category Action を使う
     // slug を送り 表示(render)は ViewArchiveMasonry を使う
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {CategoryAuth|Category}
+     */
     this.action = User.sign ?
       new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
       new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
-
+    /**
+     * category slug
+     * @override
+     * @type {string}
+     * @default all
+     */
     this.slug = slug;
   }
-
-  // /**
-  //  * <p>render 実施後呼び出されます</p>
-  //  * Ga するために使用します
-  //  * <p>記事詳細での提供元&カテゴリートラッキング</p>
-  //  * https://github.com/undotsushin/undotsushin/issues/744
-  //  *
-  //  * <pre>
-  //  * 対象スクリーン：/p/ [ 記事ID ]
-  //  * イベントカテゴリ : category
-  //  * イベントアクション：view
-  //  * イベントラベル：[response.categories.label] ex. 海外サッカー
-  //  * </pre>
-  //  */
-  // postRender():void {
-  //   // 送信済みフラッグチェック
-  //   if ( this.gaSend ) {
-  //     return;
-  //   }
-  //   // 送信済みフラッグオン
-  //   this.gaSend = true;
-  //
-  //   const articles:Array<ArticleDae> = this.articlesList;
-  //   const article:ArticleDae = articles[ 0 ];
-  //   const categories = article.categories;
-  //
-  //   // categories 配列チェック
-  //   if ( !Array.isArray( categories ) ) {
-  //     return;
-  //   }
-  //
-  //   const category = 'category';
-  //   const action = 'view';
-  //
-  //   categories.map( (value:string) => {
-  //     const gaData = new GaData( category, action, value );
-  //     Ga.add( gaData );
-  //   } );
-  //
-  // }
 }

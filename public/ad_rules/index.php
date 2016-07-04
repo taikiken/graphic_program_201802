@@ -11,18 +11,12 @@ else :
 endif;
 
 
-// デバイスカテゴリー
-// ------------------------------
-$cat = 'undo.SP';
-if ( isset($_GET['cat']) ) :
-  if ( $_GET['cat'] == 'PC' ) :
-    $cat = 'undo.PC';
-  endif;
-endif;
-
 // フォーマット設定
 // ------------------------------
-if ( isset($_GET['format']) ) :
+if ( isset($_GET['format']) && isset($_GET['cat']) ) :
+
+  // デバイスカテゴリー
+  $cat = htmlentities($_GET['cat'], ENT_QUOTES, "utf-8");
 
   // pre-roll
   if ( $_GET['format'] == 'pre-roll' ) :
@@ -43,9 +37,16 @@ __EOL__;
   // mid-roll
   if ( $_GET['format'] == 'mid-roll' ) :
 
+    if ( isset($_GET['timeOffset']) && is_numeric($_GET['timeOffset']) ) :
+      $timeOffset = sprintf('%02d', intval($_GET['timeOffset']));
+    else :
+      $timeOffset = 10;
+    endif;
+
+
     $ad_rule = <<<__EOL__
 
-      <vmap:AdBreak timeOffset="00:00:10.000" breakType="linear" breakId="mid-roll">
+      <vmap:AdBreak timeOffset="00:00:{$timeOffset}.000" breakType="linear" breakId="mid-roll">
         <vmap:AdSource id="midr-oll" allowMultipleAds="false" followRedirects="true">
           <vmap:AdTagURI templateType="vast3">
             <![CDATA[https://web-jp.ad-v.jp/adam/inline?CE=0&cat={$cat}&format=mid-roll-1&page={$timestamp}]]>

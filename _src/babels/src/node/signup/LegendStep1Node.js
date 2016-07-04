@@ -47,7 +47,7 @@ import {Api} from '../../net/Api';
 let React = self.React;
 
 /**
- * 新規登録 step 1 form parts
+ * <p>新規登録 step 1 form parts</p>
  * @private
  * @type {ReactClass}
  */
@@ -244,9 +244,9 @@ let Step1FormNode = React.createClass( {
 } );
 
 /**
- * <h3>React component<h3>
+ * <p>「新規会員登録」入力フォームコンテナ</p>
+ *
  * **signup step 1**
- * 「新規会員登録」入力フォームコンテナ
  *
  * @type {ReactClass}
  */

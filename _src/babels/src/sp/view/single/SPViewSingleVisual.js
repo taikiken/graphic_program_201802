@@ -12,12 +12,7 @@
 
 
 // view
-// import {View} from '../../../view/View';
 import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
-
-// app
-// import {Url} from '../../../app/const/Url';
-// import {User} from '../../../app/User';
 
 // dae
 import {SingleDae} from '../../../dae/SingleDae';

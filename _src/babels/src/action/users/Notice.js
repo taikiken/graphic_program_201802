@@ -37,9 +37,9 @@ export class Notice extends OffsetAuth {
    * アプリケーションは「お知らせ数取得間隔（60s）」で発火する通知イベントを listen し reload させます
    */
   reload():void {
-    // this._reload = true;
     /**
      * 再読み込みフラッグ
+     * @override
      * @type {boolean}
      */
     this.reloadFlag = true;

@@ -52,6 +52,11 @@ export class ViewError extends View {
     message = Safety.string( message, '' );
 
     super( element, option );
+    /**
+     * エラーメッセージ
+     * @type {string}
+     * @private
+     */
     this._message = message;
 
   }

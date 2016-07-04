@@ -61,7 +61,7 @@ let Sagen = self.Sagen;
 // step 2 入力フォーム
 // ------------------------------------------
 /**
- * 新規登録 step 2 form parts
+ * <p>新規登録 step 2 form parts</p>
  * @private
  * @type {ReactClass}
  */
@@ -679,9 +679,10 @@ let Step2FormNode = React.createClass( {
 } );
 
 /**
- * <h3>React component<h3>
+ * <p>「新規会員登録」入力フォームコンテナ<br>
+ * 基本情報設定</p>
+ *
  * **signup step 2**
- * 基本情報設定
  *
  * @type {ReactClass}
  */

@@ -27,6 +27,11 @@ export class ModelUsersSelf extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {UsersSelf}
+     */
     this.action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

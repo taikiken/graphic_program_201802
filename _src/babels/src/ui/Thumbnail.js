@@ -27,24 +27,111 @@ export class Thumbnail extends EventDispatcher {
    */
   constructor( file:File, load:Function = null, error:Function = null ) {
     super();
-
+    /**
+     * file 名前
+     * @type {File}
+     * @private
+     */
     this._file = file;
+    /**
+     * load アバター画像
+     * @type {Function}
+     * @private
+     */
     this._load = load;
+    /**
+     * email, twitter 連携はない
+     * @type {Function}
+     * @private
+     */
     this._error = error;
+    /**
+     *
+     * @type {null}
+     * @private
+     */
     this._reader = null;
+    /**
+     * bind 済み this.onLoad
+     * @type {Function}
+     * @private
+     */
     this._boundLoad = this.onLoad.bind( this );
+    /**
+     * bind 済み this.onError
+     * @type {Function}
+     * @private
+     */
     this._boundError = this.onError.bind( this );
 
+    /**
+     * Image instance
+     * @type {null|Image}
+     * @private
+     */
     this._img = null;
+    /**
+     * bind 済み this.imageLoad
+     * @type {Function}
+     * @private
+     */
     this._imgLoad = this.imageLoad.bind( this );
+    /**
+     * bind 済み this.imageError
+     * @type {Function}
+     * @private
+     */
     this._imgError = this.imageError.bind( this );
+    /**
+     * 画像サムネイルを作るための event.target.result
+     * @type {string}
+     * @private
+     */
     this._result = '';
+    /**
+     * exif を見て回転させるために使用する exif
+     * @type {Exif}
+     * @private
+     */
     this._exif = Exif.factory();
+    /**
+     * 画像幅
+     * @type {number}
+     * @private
+     * @default 0
+     */
     this._width = 0;
+    /**
+     * 画像高
+     * @type {number}
+     * @private
+     * @default 0
+     */
     this._height = 0;
+    /**
+     * 回転
+     * @type {number}
+     * @private
+     * @default -1
+     */
     this._orientation = -1;
+    /**
+     * 非同期処理の完了フラッグ
+     * @type {number}
+     * @private
+     */
     this._count = 0;
+    /**
+     * Image.onload Event
+     * @type {null|Event}
+     * @private
+     */
     this._event = null;
+    /**
+     * bind 済み this.exifLoad
+     * @type {Function}
+     * @private
+     */
     this._exifLoad = this.exifLoad.bind( this );
   }
   // ---------------------------------------------------

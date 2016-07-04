@@ -112,26 +112,10 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         let noticeStyle = ( num ) => {
           return num === 0 ? { display: 'none' } : { display: 'block' };
         };
-        // let userName = this.state.userName;
-        /*
-        let icon = this.props.icon;
-        if ( !icon ) {
-          icon = Empty.USER_EMPTY;
-        } else if ( !Safety.isImg( icon ) ) {
-          // 画像ファイル名に拡張子がないのがあったので
-          // 拡張子チェックを追加
-          if ( !Safety.isGraph( icon ) ) {
-            icon = Empty.USER_EMPTY;
-          }
-        }
 
-        let loggedIn = icon === Empty.USER_EMPTY ? '' : 'user-logged-in';
-        */
         let icon = Safety.image( this.state.icon, Empty.USER_EMPTY );
         let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
-
-        // console.log( 'icon render ', icon );
-
+        
         return (
           <div className="user">
             <div className="preference">
@@ -254,15 +238,30 @@ export class SPViewHeaderMember extends ViewHeaderMember {
     } );
     // --------------------------------------------------
     // when reload
-    if ( this._reload ) {
-      this._reload = false;
-      clearTimeout( this._timer );
-      this._timer = setTimeout( this._boundReload, 1000 );
+    if ( this.reloadFlag ) {
+      /**
+       * reload flag
+       * @override
+       * @type {boolean}
+       */
+      this.reloadFlag = false;
+      clearTimeout( this.timer );
+      /**
+       * reload 通知を 100ms delay する時の time out ID
+       * @override
+       * @type {number}
+       */
+      this.timer = setTimeout( this.boundReload, 1000 );
     }
     // --------------------------------------------------
     // user root
-    if ( this._component === null ) {
-      this._component = ReactDOM.render(
+    if ( this.component === null ) {
+      /**
+       * MemberDom instance
+       * @override
+       * @type {Object|ReactClass|MemberDom}
+       */
+      this.component = ReactDOM.render(
         <MemberDom
           icon={dae.profilePicture}
           userName={dae.userName}
@@ -270,7 +269,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         this.element
       );
     } else {
-      this._component.updateUser( dae.profilePicture, dae.userName);
+      this.component.updateUser( dae.profilePicture, dae.userName);
     }
 
   }

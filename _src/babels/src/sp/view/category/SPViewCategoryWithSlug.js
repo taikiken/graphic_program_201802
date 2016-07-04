@@ -85,6 +85,7 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
   }
   /**
    * CATEGORY_INFO, ModelCategoriesSlug success event
+   * @event CATEGORY_INFO
    * @return {string} spViewCategoryWidthSlugCategoryInfo event type
    */
   static get CATEGORY_INFO():string {
@@ -131,8 +132,12 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
       }
 
     } else {
-
-      this._request = result.request;
+      /**
+       * JSON response, Result.request
+       * @override
+       * @type {Object}
+       */
+      this.request = result.request;
 
       if ( this.waiting >= 2 ) {
         // 2 回目以降は
@@ -223,9 +228,14 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
     let moreButton = ( show:Boolean ):void => {
       show = !!show;
       // _moreRendered が null の時のみ state を update する
-      if ( this._moreRendered === null ) {
+      if ( this.moreRendered === null ) {
         // チェックをパスし実行する
-        this._moreRendered = ReactDOM.render(
+        /**
+         * SPMoreViewNode instance
+         * @override
+         * @type {ReactClass|Object}
+         */
+        this.moreRendered = ReactDOM.render(
           // <SPMoreViewDom
           //   show={show}
           //   action={this.action}
@@ -243,7 +253,7 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
 
       } else {
 
-        this._moreRendered.updateShow( show );
+        this.moreRendered.updateShow( show );
 
       }
     };
@@ -263,18 +273,23 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
     this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
+    if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this._articleRendered = ReactDOM.render(
+      /**
+       * SPArchiveNode instance
+       * @override
+       * @type {ReactClass|Object}
+       */
+      this.articleRendered = ReactDOM.render(
         <SPArchiveNode
           list={articlesList}
-          offset={this._request.offset}
-          length={this._request.length}
+          offset={this.request.offset}
+          length={this.request.length}
           action={this.action}
           scope={this}
           moreButton={moreButton}
-          home={this._home}
+          home={this.home}
           type={Message.NEWS}
           adSp={adSp}
         />,
@@ -285,7 +300,7 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
+      this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
 
     }
   }

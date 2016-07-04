@@ -25,9 +25,7 @@ let ReactDOM = self.ReactDOM;
 
 // main video tag
 /**
- * <h3>記事詳細 HTML5 video</h3>
- * <p>記事詳細上部動画</p>
- * HTML5VideoNode
+ * <p>記事詳細上部動画 HTML5 video</p>
  * @type {ReactClass}
  */
 export let HTML5VideoNode = React.createClass( {

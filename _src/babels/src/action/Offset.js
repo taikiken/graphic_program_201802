@@ -75,7 +75,7 @@ export class Offset extends Action {
      * @type {boolean}
      * @protected
      */
-    this._reload = false;
+    this._reloadFlag = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -136,14 +136,14 @@ export class Offset extends Action {
    * @return {Boolean|*|boolean} 再読み込み中かどうかを表す真偽値を返します
    */
   get reloadFlag():Boolean {
-    return this._reload;
+    return this._reloadFlag;
   }
   /**
    * 再読み込み中フラッグを設定します
    * @param {Boolean} reload 再読み込み中フラッグ
    */
   set reloadFlag( reload:Boolean ):void {
-    this._reload = reload;
+    this._reloadFlag = reload;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -204,10 +204,10 @@ export class Offset extends Action {
   success( result:Result ):void {
 
     // reload フラッグがオフの時は次のリクエストのための offset 値を更新します
-    if ( !this._reload ) {
+    if ( !this.reloadFlag ) {
       this.update( this.length );
     } else {
-      this._reload = false;
+      this.reloadFlag = false;
     }
 
     // 合計数をupdate

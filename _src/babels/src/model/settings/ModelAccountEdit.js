@@ -27,6 +27,11 @@ export class ModelAccountEdit extends ModelBehavior {
    */
   constructor( formData:FormData, option:Object = {} ) {
     super( formData, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {SettingsAccountEdit}
+     */
     this.action = new SettingsAccountEdit( formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

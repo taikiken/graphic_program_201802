@@ -29,12 +29,14 @@ const Sagen = self.Sagen;
 let React = self.React;
 // let ReactDOM = self.ReactDOM;
 /**
- * video コンテナを作成し Brightcove videojs で再生可能にします
+ * <p>video コンテナを作成し Brightcove videojs で再生可能にします<p>
  *
+ * <pre>
  *    ViewSingleVisual.render
  *      MediaNode
  *        MediaVideoNode
  *          BrightcoveNode
+ * </pre>
  *
  * @type {*|Function|ReactClass}
  */
@@ -158,9 +160,12 @@ export let BrightcoveNode = React.createClass( {
     if ( !player ) {
       return;
     }
+
     this.setState( { showPlay: false } );
 
     player.play();
+    // 再生開始でコントロール表示
+    player.controls( true );
   },
   // -------------------------------------------
   // brightcove player init
@@ -229,6 +234,10 @@ export let BrightcoveNode = React.createClass( {
         player.ima3( ima3 );
       }
 
+      // コントロールを常に表示する
+      // https://github.com/undotsushin/undotsushin/issues/616#issuecomment-229638787
+      // 初めは非表示
+      // https://github.com/undotsushin/undotsushin/issues/616#issuecomment-229847018
       if ( !this.phone ) {
         player.controls( false );
       }
@@ -255,17 +264,17 @@ export let BrightcoveNode = React.createClass( {
   // -------------------------------------------
   // brightcove player event handlers
   adStart: function() {
-    // 広告再生スタート controls 非表示
-    this.player.controls( false );
+    // // 広告再生スタート controls 非表示
+    // this.player.controls( false );
     // console.log( 'adStart' );
   },
   adEnd: function() {
-    // 広告再生終了 controls 表示
-    this.player.controls( true );
+    // // 広告再生終了 controls 表示
+    // this.player.controls( true );
     // console.log( 'adEnd' );
   },
   onPlay: function() {
-    this.player.controls( true );
+    // this.player.controls( true );
     if ( !this.playing ) {
       this.playing = true;
       this.tracking( 'begin' );

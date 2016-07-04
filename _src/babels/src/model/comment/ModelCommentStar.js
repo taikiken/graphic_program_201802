@@ -34,7 +34,11 @@ export class ModelCommentStar extends Model {
     }
 
     super( option );
-
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {CommentStar}
+     */
     this.action = type === ActionType.GOOD ?
       CommentStar.good( commentId, this.done.bind( this ), this.fail.bind( this ) ) :
       CommentStar.bad( commentId, this.done.bind( this ), this.fail.bind( this ) );

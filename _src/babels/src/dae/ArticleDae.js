@@ -10,9 +10,11 @@
  *
  */
 
-
+// data
 import {Safety} from '../data/Safety';
+// util
 import {Format} from '../util/Format';
+// dae
 import {CategoryDae} from './CategoryDae';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
@@ -40,6 +42,8 @@ export class ArticleDae {
     this._article = article;
     /**
      * article.category
+     *
+     * @deprecated instead use categories
      * @type {CategoryDae}
      * @protected
      */
@@ -48,7 +52,9 @@ export class ArticleDae {
      * category2 追加になった<br>
      * article.category
      *
-     * @see https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
+     * https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
+     *
+     * @deprecated instead use categories
      * @from 2016-02-29
      * @type {CategoryDae}
      * @protected
@@ -58,7 +64,7 @@ export class ArticleDae {
      * category, category2 を配列へ<br>
      * article.categories
      *
-     * @todo そのうち使うはず
+     * @todo category, category2 を置き換える
      * @type {CategoriesDae}
      * @protected
      */
@@ -82,7 +88,7 @@ export class ArticleDae {
      */
     this._popular = new CommentsPopularDae( article.comments_popular );
     
-    // 整数へ型変換
+    // 整数へ型変換, Safety.integer が Number型のみ受け付けるため
     let commentsCount = parseInt( article.comments_count, 10 );
     // 数値を保証
     commentsCount = Safety.integer( commentsCount, 0 );
@@ -97,6 +103,13 @@ export class ArticleDae {
     // date check
     if ( Safety.check( article, 'date' ) ) {
 
+      /**
+       * <p>出力形式日付</p>
+       * article.date
+       * @deprecated instead use article.display_date
+       * @type {string}
+       * @protected
+       */
       this._formatDate = Format.date( article.date );
 
     }
@@ -131,15 +144,15 @@ export class ArticleDae {
   }
   /**
    * 記事単1データ
-   * @return {Object|*} article 記事単1データ
+   * @return {Object|*} article 記事単1データ を返します
    */
   get article():Object {
     return this._article;
   }
   /**
-   * category 情報
+   * <p>category 情報</p>
    * @deprecated instead use categories
-   * @return {CategoryDae|*} article.category
+   * @return {CategoryDae|*} article.category を返します
    */
   get category():CategoryDae {
     return this._category;
@@ -148,13 +161,12 @@ export class ArticleDae {
    * category2 情報<br>
    * いつの間にか追加になった
    * @deprecated instead use categories
-   * @return {CategoryDae|*} article.category2
+   * @return {CategoryDae|*} article.category2 を返します
    */
   get category2():CategoryDae {
     return this._category2;
   }
   /**
-   * category, category2 をまとめるらしい <- 聞いてない<br>
    * response.categories を CategoriesDae へ
    * @return {CategoriesDae|*} response.categories を CategoriesDae instance にし返します
    */
@@ -163,21 +175,21 @@ export class ArticleDae {
   }
   /**
    * alias commentsTotal
-   * @return {Number} article.comments_count
+   * @return {Number} article.comments_count を返します
    */
   get commentsCount():Number {
     return this.commentsTotal;
   }
   /**
    * コメント総数を調べます
-   * @return {Number|*} コメント総数を返します, article.comments_count
+   * @return {Number|*} コメント総数を返します, article.comments_count を返します
    */
   get commentsTotal():Number {
     return this._commentsCount;
   }
   /**
    * article.comments_popular
-   * @return {CommentsPopularDae|*} article.comments_popular
+   * @return {CommentsPopularDae|*} article.comments_popular を返します
    */
   get commentsPopular():CommentsPopularDae {
     return this._popular;
@@ -192,6 +204,8 @@ export class ArticleDae {
   /**
    * article.date をフォーマット<br>
    * 多分使わない, 代わりに displayDate を使う
+   *
+   * @deprecated instead use displayDate
    * @return {string} article.date を日本語日付に変換し返します
    */
   get formatDate():string {
@@ -199,21 +213,21 @@ export class ArticleDae {
   }
   /**
    * 画面表示日付
-   * @return {string} article.display_date
+   * @return {string} article.display_date を返します
    */
   get displayDate():string {
     return this.article.display_date;
   }
   /**
    * article.description
-   * @return {string} article.description
+   * @return {string} article.description を返します
    */
   get description():string {
     return this.article.description;
   }
   /**
    * article.id
-   * @return {string} article.id
+   * @return {string} article.id を返します
    */
   get id():string {
     return this.article.id;
@@ -221,7 +235,7 @@ export class ArticleDae {
   /**
    * article.is_bookmarked<br>
    * bookmark した / してない
-   * @return {Boolean} article.is_bookmarked
+   * @return {Boolean} article.is_bookmarked を返します
    */
   get isBookmarked():Boolean {
     return this.article.is_bookmarked;
@@ -247,7 +261,7 @@ export class ArticleDae {
   // -------------------------
   /**
    * article.media
-   * @return {MediaDae} article.media
+   * @return {MediaDae} article.media を返します
    */
   get media():MediaDae {
     return this._media;
@@ -255,28 +269,28 @@ export class ArticleDae {
   /**
    * article.media_type<br>
    * video or image のはず
-   * @return {string} article.media_type
+   * @return {string} article.media_type を返します
    */
   get mediaType():string {
     return this.article.media_type;
   }
   /**
    * article.title
-   * @return {string} article.title
+   * @return {string} article.title を返します
    */
   get title():string {
     return this.article.title;
   }
   /**
    * article.url
-   * @return {string} article.url
+   * @return {string} article.url を返します
    */
   get url():string {
     return this.article.url;
   }
   /**
    * article.user
-   * @return {UserDae} article.user
+   * @return {UserDae} article.user を返します
    */
   get user():UserDae {
     return this._user;

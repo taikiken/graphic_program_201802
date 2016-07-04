@@ -20,36 +20,42 @@ import {Empty} from '../../app/const/Empty';
 import {Ga} from '../../ga/Ga';
 import {GaData} from '../../ga/GaData';
 
+// node
+import {CategoryLabelNode} from '../category/CategoryLabelNode';
+
 // React
 let React = self.React;
 // let ReactDOM = self.ReactDOM;
 
-/**
- * category, category2 から categories を使用する
- * @from 2016-06-16
- * @type {Function|ReactClass}
- */
-let CategoryListNode = React.createClass( {
-  propTypes: {
-    index: React.PropTypes.number.isRequired,
-    id: React.PropTypes.string.isRequired,
-    categories: React.PropTypes.array.isRequired
-  },
-  render: function() {
-    return (
-      <span className="category-label-wrapper">
-        {
-          this.props.categories.map( ( category:Object, i:Number ) => {
-            return <span key={`ranking-${this.props.id}-${this.props.index}-${i}`} className="category-label">{category.label}</span>;
-          } )
-        }
-      </span>
-    );
-  }
-} );
+// /**
+//  * <p>category, category2 から categories を使用する<br>
+//  * .category-label-wrapper カテゴリー表示</p>
+//  * @from 2016-06-16
+//  * @type {Function|ReactClass}
+//  * @private
+//  */
+// let CategoryListNode = React.createClass( {
+//   propTypes: {
+//     index: React.PropTypes.number.isRequired,
+//     id: React.PropTypes.string.isRequired,
+//     categories: React.PropTypes.array.isRequired
+//   },
+//   render: function() {
+//     return (
+//       <span className="category-label-wrapper">
+//         {
+//           this.props.categories.map( ( category:Object, i:Number ) => {
+//             return <span key={`ranking-${this.props.id}-${this.props.index}-${i}`} className="category-label">{category.label}</span>;
+//           } )
+//         }
+//       </span>
+//     );
+//   }
+// } );
 
 /**
- * SPに人気記事一覧を記事詳細に追加することになったので共通で使用できるように独立させました
+ * <p>人気記事一覧</p>
+ * <p>SPに人気記事一覧を記事詳細に追加することになったので共通で使用できるように独立させました</p>
  * @from 2016-06-16
  * @type {Function|ReactClass}
  */
@@ -57,7 +63,7 @@ export const RankingNode = React.createClass( {
   propTypes: {
     index: React.PropTypes.number.isRequired,
     id: React.PropTypes.string.isRequired,
-    // slug: React.PropTypes.string.isRequired,
+    slug: React.PropTypes.string,
     // category: React.PropTypes.string.isRequired,
     // category2: React.PropTypes.string,
     categories: React.PropTypes.array.isRequired,
@@ -72,11 +78,11 @@ export const RankingNode = React.createClass( {
     thisSlug: React.PropTypes.string.isRequired,
     categorySlug: React.PropTypes.string.isRequired
   },
-  getDefaultPropTypes: function() {
-    return {
-      category2: ''
-    };
-  },
+  // getDefaultPropTypes: function() {
+  //   return {
+  //     category2: ''
+  //   };
+  // },
   render: function() {
     let p = this.props;
     let standing = p.index + 1;
@@ -108,7 +114,7 @@ export const RankingNode = React.createClass( {
           </figure>
           <div className="post-data">
             <p className={'post-category post-category-' + slugAll( p.categories )}>
-              <CategoryListNode
+              <CategoryLabelNode
                 categories={p.categories}
                 id={p.id}
                 index={p.index}

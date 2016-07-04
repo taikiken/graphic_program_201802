@@ -14,7 +14,6 @@
 import {View} from '../View';
 
 // app
-// import {App} from '../../app/App';
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
@@ -30,6 +29,9 @@ import {Safety} from '../../data/Safety';
 
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
+
+// node
+import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
 
 // Ga
 import {Ga} from '../../ga/Ga';
@@ -62,9 +64,25 @@ export class ViewPickup extends View {
 
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {PickupAuth|Pickup}
+     */
     this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
-    // this._index = 0;
+    /**
+     * 最後のナンバー
+     * @ToDo 不要なら削除する
+     * @type {number}
+     * @private
+     */
     this._last = 0;
+    /**
+     * interval 間隔
+     * @type {number}
+     * @private
+     * @default 500
+     */
     this._waiting = 1000 * 5;
 
   }
@@ -268,8 +286,9 @@ export class ViewPickup extends View {
         index: React.PropTypes.number.isRequired,
         id: React.PropTypes.string.isRequired,
         slug: React.PropTypes.string.isRequired,
-        category: React.PropTypes.string.isRequired,
-        category2: React.PropTypes.string,
+        // category: React.PropTypes.string.isRequired,
+        // category2: React.PropTypes.string,
+        categories: React.PropTypes.array.isRequired,
         url: React.PropTypes.string.isRequired,
         date: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
@@ -277,17 +296,17 @@ export class ViewPickup extends View {
         commentsCount: React.PropTypes.number.isRequired,
         mediaType: React.PropTypes.string.isRequired
       },
-      getDefaultPropTypes: function() {
-        return {
-          category2: ''
-        };
-      },
+      // getDefaultPropTypes: function() {
+      //   return {
+      //     category2: ''
+      //   };
+      // },
       render: function() {
         let p = this.props;
 
-        let category = ( label ):string => {
-          return !label ? '' : <span className="category-label">{label}</span>;
-        };
+        // let category = ( label ):string => {
+        //   return !label ? '' : <span className="category-label">{label}</span>;
+        // };
 
         return (
           <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
@@ -298,7 +317,13 @@ export class ViewPickup extends View {
               <img src={p.large} alt={p.title}/>
                */}
               <div className="post-overview">
-                <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
+                <p className={'post-category post-category-' + p.slug}>
+                  <CategoryLabelNode
+                    categories={p.categories}
+                    id={`pickup-label-${p.id}`}
+                    index={p.index}
+                  />
+                </p>
                 <h2 className="post-heading">{p.title}</h2>
                 <p className="post-date">{p.date}</p>
                 <p className="post-comment-num">{p.commentsCount}</p>
@@ -367,9 +392,8 @@ export class ViewPickup extends View {
               key={'pickup-' + i}
               index={i}
               id={String( dae.id )}
-              slug={dae.category.slug}
-              category={dae.category.label}
-              category2={dae.category2.label}
+              slug={dae.categories.all[0].slug}
+              categories={dae.categories.all}
               url={dae.url}
               date={dae.displayDate}
               title={dae.title}

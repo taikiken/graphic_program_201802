@@ -26,6 +26,11 @@ export class ModelInterest extends Model {
    */
   constructor( option:Object = {} ) {
     super( option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {SettingsInterest}
+     */
     this.action = new SettingsInterest( this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

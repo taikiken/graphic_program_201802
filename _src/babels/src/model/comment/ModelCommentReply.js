@@ -28,6 +28,11 @@ export class ModelCommentReply extends Model {
    */
   constructor( articleId:Number, commentId:Number, formData:FormData, option:Object = {} ) {
     super( option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {CommentReply}
+     */
     this.action = new CommentReply( articleId, commentId, formData, this.done.bind( this ), this.fail.bind( this ) );
   }
   /**

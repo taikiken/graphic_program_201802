@@ -34,7 +34,11 @@ export class UrlDae {
     } else {
       url = String( url );
     }
-
+    /**
+     * article.media.video.url
+     * @type {Object}
+     * @protected
+     */
     this._url = url;
   }
   /**

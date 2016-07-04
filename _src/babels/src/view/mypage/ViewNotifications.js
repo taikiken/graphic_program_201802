@@ -10,22 +10,22 @@
  *
  */
 
-
+// view
 import {View} from '../View';
+// action
 import {Notice} from '../../action/users/Notice';
-
+// app
 import {Empty} from '../../app/const/Empty';
 import {NoticeAction} from '../../app/const/NoticeAction';
 import {Message} from '../../app/const/Message';
-
+// dae
 import {NotificationsDae} from '../../dae/user/NotificationsDae';
 import {NoticeDae} from '../../dae/user/NoticeDae';
-
+// data
 import {Safety} from '../../data/Safety';
 import {Result} from '../../data/Result';
-
+// event
 import {NoticeStatus} from '../../event/NoticeStatus';
-
 // model
 import {ModelNoticeRead} from '../../model/notice/ModelNoticeRead';
 
@@ -46,29 +46,60 @@ export class ViewNotifications extends View {
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
 
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {Notice}
+     */
     this.action = new Notice( this.done.bind( this ), this.fail.bind( this ) );
+    /**
+     * more button root element, 'View More'
+     * @type {Element}
+     * @protected
+     */
     this._moreElement = moreElement;
-
     /**
      * 取得記事(articles)をArticleDae instance 配列として保存する
      * @type {Array<ArticleDae>}
      * @private
      */
     this._articles = [];
-    // ArticleDom instance を保持します
-    // first render を区別するためにも使用します
+    /**
+     * <p>ArticleDom instance を保持します</p>
+     * <p>first render を区別するためにも使用します</p>
+     * @type {null|Object}
+     * @protected
+     */
     this._articleRendered = null;
-    // more button instance を保持します
+    /**
+     * more button instance を設定します
+     * @param {null|Object} more button instance
+     */
     this._moreRendered = null;
-    // response.request object を保持する
+    /**
+     * response.request object を保持する
+     * @type {null|Object}
+     * @protected
+     */
     this._request = null;
-
-    // NoticeStatus instance
+    /**
+     * NoticeStatus instance
+     * @type {null|Object}
+     * @private
+     */
     this._status = null;
-    // event handler
+    /**
+     * bind 済み this.onNoticeUpdate event handler
+     * @type {Function}
+     * @private
+     */
     this._boundNotice = this.onNoticeUpdate.bind( this );
-
-    // 既読にする ModelNoticeRead instance
+    /**
+     * <p>既読にする</p>
+     * ModelNoticeRead instance
+     * @type {ModelNoticeRead}
+     * @private
+     */
     this._clear = new ModelNoticeRead();
   }
   // ---------------------------------------------------
