@@ -105,7 +105,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         }
       }
       ?>
-      <div class="post-kv<?php echo $post_kv_class; ?>">
+      <div class="post-kv<?php echo $post_kv_class; ?>" style="position:relative;">
         <?php if ( $page['post']['media_type'] === 'video' ) :
           // -------------------------- [メインビジュアル] --------------------------
           // ========= video ?>
@@ -117,7 +117,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
           <?php elseif ( $page['post']['media']['video']['player'] == 'youtube' ) :
             // ---------- {youtube} ?>
             <img class="yt-video-size" src="/assets/images/common/thumb-16x9.png" alt="">
-            <iframe class="yt-video" width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+            <iframe class="yt-video" width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen style="width:100%;"></iframe>
 
           <?php elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) :
             // ---------- {brightcove} ?>
@@ -311,7 +311,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
       } );
 
-      <?php if ($page['post']['media']['video']['add_url']['sp']) :
+      <?php if ($page['post']['media']['video']['ad_url']['sp']) :
       // 動画プレイヤー / VASTをPC/SP&APPで分ける #822 ?>
       myPlayer.ima3({
         debug: false,
@@ -321,7 +321,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         postrollTimeout: 2000,
         prerollTimeout: 1000,
         requestMode: 'onload',
-        serverUrl: '<?php echo $page['post']['media']['video']['add_url']['sp']; ?>' + '?' + Date.now(),
+        serverUrl: '<?php echo $page['post']['media']['video']['ad_url']['sp']; ?>' + '?' + Date.now(),
         timeout: 5000
       });
       <?php endif; ?>
