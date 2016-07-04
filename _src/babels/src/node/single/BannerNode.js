@@ -20,9 +20,10 @@ import {Ga} from '../../ga/Ga';
 let React = self.React;
 
 /**
- * <p>記事詳細 user banner<p>
- * 記事本文とタグの間
- * @example
+ * <p>記事詳細 user banner<br>
+ * 記事本文とタグの間</p>
+ *
+ * ```
  * <div data-reactroot="" class="post-footer">
  *  <div class="sponsor-link editor-bnr">
  *    <a href=""><img src=""></a>
@@ -34,6 +35,7 @@ let React = self.React;
  *    </ul>
  *  </div>
  * </div>
+ * ```
  *
  * @type {*|Function|ReactClass}
  */

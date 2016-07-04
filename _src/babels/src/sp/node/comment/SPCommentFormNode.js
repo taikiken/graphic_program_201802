@@ -18,8 +18,7 @@ let React = self.React;
 
 // wrapper dom + form
 /**
- * <h3>SP React component<h3>
- * comment form を表示するための基点 clas`
+ * comment form を表示するための基点 class
  * @type {ReactClass}
  */
 export let SPCommentFormNode = React.createClass( {

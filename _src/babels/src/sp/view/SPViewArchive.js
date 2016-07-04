@@ -36,7 +36,7 @@ import {SPMoreViewNode} from '../node/SPMoreViewNode';
 let ReactDOM = self.ReactDOM;
 
 /**
- * archive 一覧標示
+ * <p><strong>SP</strong>: archive 一覧標示</p>
  */
 export class SPViewArchive extends View {
   /**
@@ -53,7 +53,12 @@ export class SPViewArchive extends View {
     super( element, option );
 
     if ( typeof ActionClass === 'function' ) {
-      this._action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
+      /**
+       * Action instance を設定します
+       * @override
+       * @type {*}
+       */
+      this.action = new ActionClass( this.done.bind( this ), this.fail.bind( this ) );
     }
     /**
      * more button root element
@@ -126,19 +131,75 @@ export class SPViewArchive extends View {
     this._home = home;
   }
   /**
-   * category slug
+   * category slug を取得します
    * @default all
    * @return {string} category slug を返します
    */
   get slug():string {
     return this._slug;
   }
-
+  /**
+   * category slug を設定します
+   * @param {string} slug category slug
+   */
+  set slug( slug:string ):void {
+    this._slug = slug;
+  }
+  /**
+   * 取得記事(articles)をArticleDae instance を格納した配列を取得します
+   * @return {Array.<ArticleDae>|Array.<Object>|*} 取得記事(articles)をArticleDae instance を格納した配列を返します
+   */
   get articles():Array<Object> {
     return this._articles;
   }
+  /**
+   * 取得記事(articles)をArticleDae instance を格納した配列を設定します
+   * @param {Array<Object>} responseArticles 取得記事(articles)をArticleDae instance を格納した配列
+   */
   set articles( responseArticles:Array<Object> ):void {
     this._articles = responseArticles;
+  }
+  /**
+   * SPArchiveNode instance を取得します
+   * @return {null|ReactClass|Object} SPArchiveNode instance を返します
+   */
+  get articleRendered():Object {
+    return this._articleRendered;
+  }
+  /**
+   * SPArchiveNode instance を設定します
+   * @param {Object} article SPArchiveNode instance
+   */
+  set articleRendered( article:Object ):void {
+    this._articleRendered = article;
+  }
+  /**
+   * response.request object を取得します
+   * @return {null|Object} response.request object を返します
+   */
+  get request():Object {
+    return this._request;
+  }
+  /**
+   * response.request object を設定します
+   * @param {Object} request response.request object
+   */
+  set request( request:Object ):void {
+    this._request = request;
+  }
+  /**
+   * more button instance (SPMoreViewDom) を取得します
+   * @return {Object|null|ReactClass} more button instance (SPMoreViewDom) を返します
+   */
+  get moreRendered():Object {
+    return this._moreRendered;
+  }
+  /**
+   * more button instance (SPMoreViewDom) を設定します
+   * @param {Object} moreRendered more button instance (SPMoreViewDom)
+   */
+  set moreRendered( moreRendered:Object ):void {
+    this._moreRendered = moreRendered;
   }
   // ---------------------------------------------------
   //  Method
@@ -222,125 +283,6 @@ export class SPViewArchive extends View {
     // sequence な index のために必要
     let prevLast = this._articles.length;
 
-    // let _this = this;
-
-    // SPMoreViewNode と機能が重複していたので統合します
-    // ToDo: 問題ないと確認できれば削除します
-    // // ------------------------------------------------
-    // let SPMoreViewDom = React.createClass( {
-    //   propTypes: {
-    //     show: React.PropTypes.bool.isRequired,
-    //     action: React.PropTypes.object.isRequired,
-    //     loading: React.PropTypes.string,
-    //     // ga のため追加
-    //     home: React.PropTypes.bool.isRequired,
-    //     slug: React.PropTypes.string.isRequired
-    //   },
-    //   getDefaultProps: function() {
-    //     return {
-    //       loading: ''
-    //     };
-    //   },
-    //   getInitialState: function() {
-    //     /**
-    //      * @private
-    //      * @type {number}
-    //      */
-    //     this.page = 1;
-    //
-    //     return {
-    //       disable: false,
-    //       show: this.props.show,
-    //       loading: this.props.loading
-    //     };
-    //   },
-    //   render: function() {
-    //
-    //     // hasNext: true, button を表示する？
-    //     if ( this.state.show ) {
-    //
-    //       return (
-    //         <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
-    //           <a className='board-btn-viewmore-link' href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
-    //           <span className="loading-spinner">&nbsp;</span>
-    //         </div>
-    //       );
-    //
-    //     } else {
-    //
-    //       // button 表示なし
-    //       return (
-    //         <div className="no-more"></div>
-    //       );
-    //
-    //     }
-    //
-    //   },
-    //   // componentDidMount: function() {
-    //   // },
-    //   componentWillUnmount: function() {
-    //     // unmount 時に rise 破棄を行う
-    //     this.destroy();
-    //   },
-    //   // -----------------------------------------
-    //   // button 関連 custom method
-    //   // rise 関連 event を破棄する
-    //   destroy: function() {
-    //   },
-    //   // 緊急用, button click を残す
-    //   handleClick: function( event:Event ) {
-    //     event.preventDefault();
-    //
-    //     this.onRise();
-    //   },
-    //   // button 表示・非表示
-    //   updateShow: function( show:Boolean ) {
-    //
-    //     this.setState( { show: show, loading: '' } );
-    //
-    //   },
-    //   // Rise.RISE event handler
-    //   // 次 offset JSON を取得する
-    //   onRise: function() {
-    //     this.updateLoading( true );
-    //   },
-    //   // loading 表示 on / off
-    //   // on: true, off: false
-    //   updateLoading: function( loading:Boolean = false ) {
-    //
-    //     let loadingClass = '';
-    //     if ( loading ) {
-    //
-    //       // loading 中は監視を止める
-    //       loadingClass = ' loading';
-    //       this.props.action.next();
-    //
-    //       // ga
-    //       if (this.props.home) {
-    //         this.gaHome();
-    //       } else {
-    //         this.gaCategory();
-    //       }
-    //     }
-    //
-    //     // loading 表示のための css class を追加・削除
-    //     this.setState( {loading: loadingClass} );
-    //
-    //   },
-    //   gaHome: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('SPViewArchive.render.SPMoreViewDom.gaHome', 'home_articles', 'view - new', String(++this.page)) );
-    //     // ----------------------------------------------
-    //   },
-    //   gaCategory: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('SPViewArchive.render.SPMoreViewDom.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
-    //     // ----------------------------------------------
-    //   }
-    // } );
-
     // ------------------------------------------------
     let moreButton = ( show:Boolean ):void => {
       show = !!show;
@@ -348,12 +290,6 @@ export class SPViewArchive extends View {
       if ( this._moreRendered === null ) {
         // チェックをパスし実行する
         this._moreRendered = ReactDOM.render(
-          // <SPMoreViewDom
-          //   show={show}
-          //   action={this.action}
-          //   home={this.home}
-          //   slug={this.slug}
-          // />,
           <SPMoreViewNode
             show={show}
             action={this.action}
@@ -385,10 +321,10 @@ export class SPViewArchive extends View {
     this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
+    if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      this._articleRendered = ReactDOM.render(
+      this.articleRendered = ReactDOM.render(
         <SPArchiveNode
           list={articlesList}
           offset={this._request.offset}
@@ -398,6 +334,7 @@ export class SPViewArchive extends View {
           moreButton={moreButton}
           home={this._home}
           type={Message.NEWS}
+          adSp=""
         />,
         this.element
       );
@@ -406,7 +343,7 @@ export class SPViewArchive extends View {
 
       // instance が存在するので
       // state update でコンテナを追加する
-      this._articleRendered.updateList( articlesList, this._request.offset, this._request.length );
+      this.articleRendered.updateList( articlesList, this._request.offset, this._request.length );
 
     }
 

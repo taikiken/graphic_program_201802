@@ -15,7 +15,6 @@
 import {View} from '../../../view/View';
 
 // view
-// import {SPViewCategory} from './SPViewCategory';
 import {SPViewCategoryWithSlug} from './SPViewCategoryWithSlug';
 import {SPViewRanking} from '../sidebar/SPViewRanking';
 import {SPViewVideos} from '../sidebar/SPViewVideos';
@@ -49,6 +48,11 @@ export class SPViewCategoryRoot extends View {
    */
   constructor( slug:string, element:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * category slug
+     * @type {string}
+     * @private
+     */
     this._slug = Safety.string( slug, 'all' );
   }
   /**
@@ -67,13 +71,17 @@ export class SPViewCategoryRoot extends View {
         slug: React.PropTypes.string.isRequired
       },
       getInitialState: function() {
+        // /**
+        //  * SPViewCategoryWithSlug instance を保持します
+        //  * @type {null|SPViewCategoryWithSlug}
+        //  * @private
+        //  */
+        // this.latestInfo = null;
         /**
-         * SPViewCategoryWithSlug instance を保持します
-         * @type {null|SPViewCategoryWithSlug}
+         * SPTabNode instance を保持します
+         * @type {null|ReactClass}
          * @private
          */
-        this.latestInfo = null;
-
         this.tabNode = null;
         /**
          * 各 tab の scroll 位置を保存します

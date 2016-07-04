@@ -48,9 +48,9 @@ export class CommentSingle extends OffsetAuth {
    * 再読み込み
    */
   reload():void {
-    // this._reload = true;
     /**
      * 再読み込みフラッグ
+     * @override
      * @type {boolean}
      */
     this.reloadFlag = true;

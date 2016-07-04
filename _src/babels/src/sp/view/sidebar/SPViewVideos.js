@@ -118,6 +118,7 @@ export class SPViewVideos extends ViewVideos {
           moreButton={this.moreButton.bind(this)}
           home={this._home}
           type={Message.VIDEO}
+          adSp=""
         />,
         this.element
       );

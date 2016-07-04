@@ -24,8 +24,19 @@ import {BrightcoveNode} from '../media/BrightcoveNode';
 let React = self.React;
 
 /**
- * 記事詳細 メイン・動画切替
- * YouTube, Facebook
+ * <p>記事詳細 メイン・動画切替<br>
+ * YouTube, Facebook</p>
+ *
+ * ```
+ * <HTML5VideoNode />
+ * or
+ * <BrightcoveNode />
+ * or
+ * <iframe youtube/>
+ * or
+ * <div class="fb-video"/>
+ * ```
+ *
  * @type {ReactClass}
  */
 export let MediaVideoNode = React.createClass( {

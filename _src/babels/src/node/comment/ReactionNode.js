@@ -40,8 +40,14 @@ import {GaData} from '../../ga/GaData';
 let React = self.React;
 
 /**
- * comment good / bad
- * コメントに good / bad を付けたり外したり
+ * <p>comment good / bad>br>
+ * コメントに good / bad を付けたり外したり</p>
+ *
+ * <p>Good / Bad は ON / OFF スイッチの様に片方だけ +1 される</p>
+ *
+ * - Good すると Good +1 Bad -1
+ * - Bad すると Good -1 Bad +1
+ *
  * @type {ReactClass}
  */
 export let ReactionNode = React.createClass( {

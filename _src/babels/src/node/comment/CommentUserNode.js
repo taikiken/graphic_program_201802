@@ -15,10 +15,12 @@ import {Empty} from '../../app/const/Empty';
 let React = self.React;
 
 /**
- * コメントのユーザー情報部分
+ * <p>コメントのユーザー情報部分</p>
  *
+ * <pre>
  * CommentNode
  * |- CommentUserNode
+ * </pre>
  *
  * @type {ReactClass}
  */

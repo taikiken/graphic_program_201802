@@ -34,13 +34,6 @@ export let SPTabNode = React.createClass( {
     };
   },
   render: function() {
-    // let css = {};
-
-    // default 非表示
-    // if ( !this.state.display ) {
-    //   css.display = 'none';
-    // }
-
     // default 非表示
     if ( this.state.display ) {
       return (
@@ -69,12 +62,6 @@ export let SPTabNode = React.createClass( {
     }
 
   },
-  // componentDidMount: function() {
-  //
-  // },
-  // componentWillUnMount: function() {
-  //
-  // },
   latestClick( event:Event ):void {
     event.preventDefault();
     // 全タブ 表示・非表示の条件になったのでコメントにします

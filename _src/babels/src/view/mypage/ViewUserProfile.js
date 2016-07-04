@@ -44,6 +44,11 @@ export class ViewUserProfile extends View {
    */
   constructor( element:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {UsersSelf}
+     */
     this.action = new UsersSelf( this.done.bind( this ), this.fail.bind( this ) );
   }
   // ---------------------------------------------------

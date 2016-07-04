@@ -44,6 +44,7 @@ export class RelatedDae {
     this._response = response;
     /**
      * response.category
+     * @deprecated instead use categories
      * @type {CategoryDae}
      * @protected
      */
@@ -51,6 +52,7 @@ export class RelatedDae {
     // docs には書いてないけど category2 も増やす, 2016-03-13
     /**
      * response.category2
+     * @deprecated instead use categories
      * @from 2016-03-13
      * @type {CategoryDae}
      * @protected
@@ -168,6 +170,7 @@ export class RelatedDae {
   }
   /**
    * response.category
+   * @deprecated instead use categories
    * @return {CategoryDae|*} カテゴリー response.category CategoryDae として返します
    */
   get category():CategoryDae {
@@ -175,6 +178,7 @@ export class RelatedDae {
   }
   /**
    * response.category2
+   * @deprecated instead use categories
    * @return {CategoryDae} カテゴリー2 response.category2 CategoryDae として返します
    */
   get category2():CategoryDae {

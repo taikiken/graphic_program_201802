@@ -17,7 +17,6 @@ import {View} from '../View';
 // app
 import {Message} from '../../app/const/Message';
 import {Url} from '../../app/const/Url';
-// import {User} from '../../app/User';
 
 // util
 import {Loc} from '../../util/Loc';
@@ -68,28 +67,51 @@ export class SignupWizard extends View {
     // 処理一貫性のため ModelCategories を使い取得
     // let boundError = this.error.bind( this );
     let callbacks = {};
+    /**
+     * コールバック関数を設定する Object
+     * @type {{}}
+     * @private
+     */
     this._callbacks = callbacks;
     callbacks[ Model.COMPLETE ] = this.complete.bind( this );
     // callbacks[ Model.UNDEFINED_ERROR ] = boundError;
     // callbacks[ Model.RESPONSE_ERROR ] = boundError;
+    /**
+     * Action instance を設定します
+     * @override
+     * @type {ModelCategories}
+     */
     this.action = new ModelCategories( callbacks );
 
-    // SignupStatus instance
+    /**
+     * SignupStatus instance
+     * @type {SignupStatus}
+     * @private
+     */
     this._status = SignupStatus.factory();
-
-    // step No., default 1
+    /**
+     * step No., default 1
+     * @type {number}
+     * @private
+     * @default 1
+     */
     this._step = 1;
-
-    // hash change handler
+    /**
+     * hash change handler
+     * @type {null|function}
+     * @private
+     */
     this._boundHash = null;
 
     // location hash なしにする
     Loc.hash = '';
-
-    // activate unload
+    /**
+     * unload 監視を行うかの真偽値
+     * @type {boolean}
+     * @private
+     * @default false
+     */
     this._unload = false;
-
-    // this._boundUnload = this.onUnload.bind( this );
   }
   /**
    * Ajax request を開始します

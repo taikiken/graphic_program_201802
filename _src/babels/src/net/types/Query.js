@@ -12,17 +12,16 @@
 
 
 /**
- * Api query option を key ごとに管理します
+ * <p>Api query option を key ごとに管理します</p>
  *
  * <code>?key=value</code>
  *
- * key, value型, default値, 必須情報...
+ * <p>key, value型, default値, 必須情報...</p>
  *
  * */
 export class Query {
   /**
    * Api query option 情報を保持します
-   *
    *
    * @param {string} key query key
    * @param {string} type query value type
@@ -30,10 +29,31 @@ export class Query {
    * @param {Boolean} [require=false] 必須フラグ
    */
   constructor( key:string, type:string, defaultValue = null, require:Boolean = false ) {
-
+    /**
+     * query key
+     * @type {string}
+     * @protected
+     */
     this._key = key;
+    /**
+     * query value type
+     * @type {string}
+     * @protected
+     */
     this._type = type;
+    /**
+     * 必須フラグ
+     * @type {Boolean}
+     * @private
+     * @protected false
+     */
     this._require = require;
+    /**
+     * default value あれば...
+     * @type {string|Number|null}
+     * @private
+     * @protected null
+     */
     this._value = defaultValue;
 
   }

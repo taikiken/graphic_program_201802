@@ -73,9 +73,10 @@ export class Comments extends OffsetAuth {
    * <p>読み込み開始時に「再読み込みフラッグ」(this.reloadFlag, this._reload)を true にします</p>
    */
   reload():void {
-    // this._reload = true;
+
     /**
      * 再読み込みフラッグ
+     * @override
      * @type {boolean}
      */
     this.reloadFlag = true;

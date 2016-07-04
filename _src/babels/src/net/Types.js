@@ -21,16 +21,35 @@ import {Queries} from './types/Queries';
 export class Types {
   /**
    * API url, path option, query 情報
-   * @param {Type} type Type instance
-   * @param {Permalink} permalink Permalink instance
-   * @param {Queries} queries Queries instance
+   * @param {Type} type Type instance, url, method を 保持します
+   * @param {Permalink} permalink Permalink instance, Types.url へ追加可能なpathがあるかどうかを管理します
+   * @param {Queries} queries Queries instance, Query{key: value} を配列で管理します
    * @param {Boolean} [auth=false] 認証が必要か否かの真偽値
    */
   constructor( type:Type, permalink:Permalink, queries:Queries, auth:Boolean = false ) {
-
+    /**
+     * url, method を 保持する Type instance
+     * @type {Type}
+     * @protected
+     */
     this._type = type;
+    /**
+     * Permalink instance, Types.url へ追加可能なpathがあるかどうかを管理します
+     * @type {Permalink}
+     * @protected
+     */
     this._permalink = permalink;
+    /**
+     * Queries instance, Query{key: value} を配列で管理します
+     * @type {Queries}
+     * @protected
+     */
     this._queries = queries;
+    /**
+     * 認証が必要か否かの真偽値
+     * @type {Boolean}
+     * @private
+     */
     this._auth = auth;
 
   }

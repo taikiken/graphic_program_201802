@@ -29,7 +29,12 @@ export class ActivityDae {
 
     // date check
     if ( Safety.check( activity, 'date' ) ) {
-
+      /**
+       * activity.date
+       * @deprecated instead use article.display_date
+       * @type {string}
+       * @protected
+       */
       this._formatDate = Format.date( activity.date );
 
     }
@@ -76,9 +81,10 @@ export class ActivityDae {
     return this.activity.date;
   }
   /**
-   * activity.date をフォーマット
-   * **使用しません**
+   * <p>activity.date をフォーマット</p>
+   * **使用しません** <br>
    * 代わりに displayDate使用
+   * @deprecated instead use displayDate使用
    * @return {string} ISO8601 を日本語形式日付にし返します
    */
   get formatDate():string {
@@ -93,6 +99,7 @@ export class ActivityDae {
   }
   /**
    * アクティビティの種類
+   *
    * - reply : 返信された
    * - good : goodされた
    * - bad : badされた

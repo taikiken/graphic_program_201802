@@ -29,12 +29,12 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * <h3>記事詳細(detail) 上部<h3>
- *   <ul>
- *     <li>bookmark</li>
- *     <li>title</li>
- *     <li>投稿者</li>
- *     <li>日付</li>
- *   </ul>
+ * <ul>
+ *   <li>bookmark</li>
+ *   <li>title</li>
+ *   <li>投稿者</li>
+ *   <li>日付</li>
+ * </ul>
  */
 export class ViewSingleHeader extends View {
   /**
@@ -44,9 +44,39 @@ export class ViewSingleHeader extends View {
    */
   constructor( element:Element, single:SingleDae ) {
     super( element );
+    /**
+     * 変換済み JSON data
+     * @type {SingleDae}
+     * @private
+     */
     this._single = single;
+    /**
+     * HeaderDom instance
+     * @type {null|Object}
+     * @private
+     */
     this._rendered = null;
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * HeaderDom instance を取得します
+   * @return {null|Object|ReactClass} HeaderDom instance を返します
+   */
+  get rendered():Object {
+    return this._rendered;
+  }
+  /**
+   * HeaderDom instance を設定します
+   * @param {Object} rendered HeaderDom instance
+   */
+  set rendered( rendered:Object ):void {
+    this._rendered = rendered;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * render 処理を開始します
    */
@@ -128,15 +158,6 @@ export class ViewSingleHeader extends View {
         _this.executeSafely( View.DID_MOUNT );
 
       },
-      /*
-      componentWillUnMount: function() {
-        // this.dispose();
-      },
-      // --------------------------------------------
-      // custom method
-      dispose: function() {
-      },
-      */
       // --------------------------------------------
       // update
       updateSingle: function( single, sign ) {

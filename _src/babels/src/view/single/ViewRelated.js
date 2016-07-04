@@ -36,7 +36,17 @@ export class ViewRelated extends View {
    */
   constructor( element:Element, related:Array<RelatedDae> = [] ) {
     super( element );
+    /**
+     * response.related_articles 配列
+     * @type {Array}
+     * @private
+     */
     this._related = Safety.array( related );
+    /**
+     * 関連記事 dom 生成 instance
+     * @type {null|Object}
+     * @private
+     */
     this._rendered = null;
   }
   /**

@@ -14,7 +14,7 @@
 let React = self.React;
 
 /**
- * コメント本文部分
+ * コメント本文部分を表示
  * @type {ReactClass}
  */
 export let CommentContentNode = React.createClass( {

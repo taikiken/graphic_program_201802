@@ -18,6 +18,11 @@ export class Offset {
    * @param {Element} element 処理対象 Element
    */
   constructor( element:Element ) {
+    /**
+     * element 処理対象 Element
+     * @type {Element}
+     * @private
+     */
     this._element = element;
   }
   // ---------------------------------------------------
@@ -35,8 +40,12 @@ export class Offset {
   // ---------------------------------------------------
   /**
    * getBoundingClientRect を計算します
-   * ```https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect```
+   *
+   * ```
    * {{top: Number, right: Number, left: Number, bottom: Number, width: Number, height: Number}}
+   * ```
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
    * @param {Element} element 処理対象 Element
    * @returns {ClientRect} getBoundingClientRect を返します
    */

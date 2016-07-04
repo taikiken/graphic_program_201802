@@ -37,20 +37,16 @@ export class ViewCommentForm extends View {
   constructor( element:Element, articleId:Number, icon:string = '' ) {
 
     super( element );
-
+    /**
+     * 記事ID
+     * @type {string}
+     * @private
+     */
     this._articleId = String(articleId);
-
-    /*
-    if ( !icon ) {
-      icon = Empty.USER_EMPTY;
-    } else if ( !Safety.isImg( icon ) ) {
-      // 画像ファイル名に拡張子がないのがあったので
-      // 拡張子チェックを追加
-      if ( !Safety.isGraph( icon ) ) {
-        icon = Empty.USER_EMPTY;
-      }
-    }
-    this._icon = icon;
+    /**
+     * ユーザー画像パス
+     * @type {string}
+     * @private
      */
     this._icon = Safety.image( icon, Empty.USER_EMPTY );
 

@@ -18,6 +18,7 @@ import {View} from '../View';
 import {Model} from '../../model/Model';
 import {ModelSignOut} from '../../model/signup/ModelSignOut';
 
+// node
 import {DeactivateNode} from '../../node/modal/DeactivateNode';
 
 // app
@@ -46,6 +47,11 @@ export class ViewDeactivate extends View {
    */
   constructor( element:Element, modalElement:Element, option:Object = {} ) {
     super( element, option );
+    /**
+     * modal root element
+     * @type {Element}
+     * @private
+     */
     this._modalElement = modalElement;
   }
   /**
