@@ -6,13 +6,13 @@ include "public/import.php";
 $o=new db;
 $o->connect();
 
-$bucket="jsports";
-$mediaid=17;
-$categoryid=137;
+$bucket="golfnetwork";
+$mediaid=18;
+$categoryid=135;
 $imgpath="https://video-jp.undotsushin.com";
 
-$dev=array("title","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","m1","img1","t1","t2");
-$cms=array("title","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","m2","img1","swf","t1");
+$dev=array("title","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","img1","t1","t2");
+$cms=array("title","a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","u_time","img1","swf","t1");
 
 $data=unserialize(file_get_contents(sprintf("%s/out_data.php?media=%s",$MEDIADATA,$bucket)));
 
@@ -30,7 +30,7 @@ while(list($k,$v)=each($data)){
 	$sv[$sn[]="swf"]=$v["t1"];
 	$sv[$sn[]="t1"]=$v["t2"];
 	$sv[$sn[]="m1"]=$categoryid;
-	$sv[$sn[]="m2"]=$v["m1"];
+	$sv[$sn[]="m2"]=116;
 	$sv[$sn[]="a1"]=$v["a1"];
 	$sv[$sn[]="a2"]=sprintf('%02d',$v["a2"]);
 	$sv[$sn[]="a3"]=sprintf('%02d',$v["a3"]);

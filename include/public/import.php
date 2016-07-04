@@ -149,7 +149,7 @@ function eximg($img1,$img2){
 }
 
 function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
-	
+
 	$size=getimagesize($img_name);
 	if($re_size[0]<$size[0]&&$re_size[1]<$size[1]){
 		$ptage_w=$re_size[0]/$size[0];
@@ -190,6 +190,10 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 	$newImg=imagecreatetruecolor($re_size[0],$re_size[1]);
 	imagefill($newImg,0,0,imagecolorclosest($newImg,0,0,0));
 	$defImg=makeDefaultImg($img_name,$p);
+	if($p=="png"){
+		imagealphablending($newImg,false);
+		imagesavealpha($newImg,true);
+	}
 	imagecopyresampled($newImg,$defImg,$sp[0],$sp[1],$x,$y,$resize[0],$resize[1],$size[0],$size[1]);
 	//imagecopymergegray($newImg,$newImg,0,0,0,0,320,370,0);
 	outputImg($newImg,$n_Img,$p);

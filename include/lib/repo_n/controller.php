@@ -45,7 +45,7 @@ if($q->get_dir()===0){
 			
 			
 			if($MULTILANG==0){
-				$sv[$sn[]="flag"]=2;
+				$sv[$sn[]="flag"]=0;
 			}else{
 				for($i=0;$i<count($LANG);$i++)$sv[$sn[]="flag".$LANG[$i]]=0;
 			}
