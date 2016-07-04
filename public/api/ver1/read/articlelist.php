@@ -57,7 +57,7 @@ if(strlen($api)>0){
 					$day=$f["p1"];
 				}
 				
-				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
+				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
 				str_replace(" and","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
 				str_replace(" and","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
