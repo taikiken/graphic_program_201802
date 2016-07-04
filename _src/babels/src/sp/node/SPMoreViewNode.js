@@ -122,10 +122,13 @@ export let SPMoreViewNode = React.createClass( {
       // loading 中は監視を止める
       loadingClass = ' loading';
       this.props.action.next();
-      // ----------------------------------------------
-      // GA 計測タグ
+
       if ( this.props.type !== '' ) {
-        Ga.add( new GaData('SPMoreViewNode.updateLoading', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page)) );
+        // ----------------------------------------------
+        // GA 計測タグ
+        // PC/スマホカテゴリー一覧の新着記事, movie, ranking
+        Ga.add( new GaData('SPMoreViewNode.updateLoading', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page), 0, true) );
+        // ----------------------------------------------
       } else {
         // ga
         if (this.props.home) {
@@ -144,13 +147,15 @@ export let SPMoreViewNode = React.createClass( {
   gaHome: function() {
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData('SPMoreViewNode.gaHome', 'home_articles', 'view - new', String(++this.page)) );
+    // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+    Ga.add( new GaData('SPMoreViewNode.gaHome', 'home_articles', 'view - new', String(++this.page), true) );
     // ----------------------------------------------
   },
   gaCategory: function() {
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData('SPMoreViewNode.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
+    // PC/スマホカテゴリー一覧の新着記事
+    Ga.add( new GaData('SPMoreViewNode.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
 } );

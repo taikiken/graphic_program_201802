@@ -91,6 +91,10 @@ export let BannerNode = React.createClass( {
   // @from 2016-06-22
   // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
   bannerClick: function() {
-    Ga.click( 'BannerNode.bannerClick', 'banner_link', 'click', this.link );
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事一覧のバナーリンク
+    Ga.click( 'BannerNode.bannerClick', 'banner_link', 'click', this.link, true );
+    // ----------------------------------------------
   }
 } );

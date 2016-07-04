@@ -56,14 +56,14 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     ga('send', 'event', 'ua', 'view', navigator.userAgent );
 
     // provider
-    ga('send', 'event', 'provider', 'view', '<?php echo $page['post']['user']['name']; ?>' );
+    ga('send', 'event', 'provider', 'view', '<?php echo $page['post']['user']['name']; ?>', 0, {nonInteraction: true} );
 
     // category
 <?php
     if ( $page['post']['categories'] && is_array($page['post']['categories']) ) :
       foreach ( $page['post']['categories'] as $key => $value ) :
 ?>
-    ga('send', 'event', 'category', 'view', '<?php echo $value['label']; ?>' );
+    ga('send', 'event', 'category', 'view', '<?php echo $value['label']; ?>', 0, {nonInteraction: true} );
 <?php
       endforeach;
     endif;

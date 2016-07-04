@@ -209,13 +209,15 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       gaHome: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.gaHome', 'home_articles', 'view - new', String(++this.page)) );
+        // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.gaHome', 'home_articles', 'view - new', String(++this.page), 0, true) );
         // ----------------------------------------------
       },
       gaCategory: function() {
         // ----------------------------------------------
         // GA 計測タグ
-        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page)) );
+        // PC/スマホカテゴリー一覧の新着記事
+        Ga.add( new GaData('ViewArchiveMasonry.render.MoreViewDom.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
         // ----------------------------------------------
       }
     } );
