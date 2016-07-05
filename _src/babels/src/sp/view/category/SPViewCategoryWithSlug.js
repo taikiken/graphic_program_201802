@@ -28,6 +28,10 @@ import {View} from '../../../view/View';
 // model
 import {Model} from '../../../model/Model';
 
+// Ga
+import {Ga} from '../../../ga/Ga';
+import {GaData} from '../../../ga/GaData';
+
 // sp:model
 import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug';
 
@@ -295,6 +299,21 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
         />,
         this.element
       );
+
+      if ( this.home ) {
+        // ----------------------------------------------
+        // GA 計測タグ
+        // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+        Ga.add( new GaData('SPViewArchive.render', 'home_articles', 'view - new', String(1), 0, true) );
+        // ----------------------------------------------
+      } else {
+        // ----------------------------------------------
+        // GA 計測タグ
+        // PC/スマホカテゴリー一覧の新着記事
+        Ga.add( new GaData('SPViewArchive.render', `${this.slug}_articles`, 'view - new', String(1), 0, true) );
+        // ----------------------------------------------
+      }
+
 
     } else {
 
