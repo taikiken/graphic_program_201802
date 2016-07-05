@@ -29,9 +29,9 @@ export class GaData {
   }
   /**
    * nonInteraction フィールドを true に指定した Object を取得します
-   * @return {{noInteraction: boolean}} nonInteraction フィールドを true に指定した Object を返します
+   * @return {{nonInteraction: boolean}} nonInteraction フィールドを true に指定した Object を返します
    */
-  static noInteraction():Object {
-    return { noInteraction: true };
+  static nonInteraction():Object {
+    return { nonInteraction: true };
   }
 }

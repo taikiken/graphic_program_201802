@@ -111,7 +111,7 @@ export class Ga {
    */
   static tracking( ga:Function, data:GaData ):void {
     if ( data.eventInteraction ) {
-      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, GaData.noInteraction() );
+      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, GaData.nonInteraction() );
     } else {
       ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
     }
