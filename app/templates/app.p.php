@@ -52,8 +52,6 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     ga('create', 'UA-74679267-1', 'auto');
     ga('require', 'linkid');
     ga('require', 'displayfeatures');
-    ga('set', 'dimension1', navigator.userAgent);
-    ga('send', 'event', 'ua', 'view', navigator.userAgent );
 
     // provider
     ga('send', 'event', 'provider', 'view', '<?php echo $page['post']['user']['name']; ?>', 0, {nonInteraction: true} );
