@@ -553,7 +553,8 @@ export class Syn {
   static gaSend( mode:string ):void {
     // ----------------------------------------------
     // GA 計測タグ
-    Ga.add( new GaData('Syn.gaSend', 'sidemenu', mode ) );
+    // Syn.menu表示 / Syn.menuクローズ
+    Ga.add( new GaData('Syn.gaSend', 'sidemenu', mode, '', 0, true ) );
     // ----------------------------------------------
   }
 }

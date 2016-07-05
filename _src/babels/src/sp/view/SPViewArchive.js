@@ -27,9 +27,9 @@ import {ArticleDae} from '../../dae/ArticleDae';
 import {SPArchiveNode} from '../node/SPArchiveNode';
 import {SPMoreViewNode} from '../node/SPMoreViewNode';
 
-// // Ga
-// import {Ga} from '../../ga/Ga';
-// import {GaData} from '../../ga/GaData';
+// Ga
+import {Ga} from '../../ga/Ga';
+import {GaData} from '../../ga/GaData';
 
 // React
 // let React = self.React;
@@ -327,17 +327,31 @@ export class SPViewArchive extends View {
       this.articleRendered = ReactDOM.render(
         <SPArchiveNode
           list={articlesList}
-          offset={this._request.offset}
-          length={this._request.length}
+          offset={this.request.offset}
+          length={this.request.length}
           action={this.action}
           scope={this}
           moreButton={moreButton}
-          home={this._home}
+          home={this.home}
           type={Message.NEWS}
           adSp=""
         />,
         this.element
       );
+
+      if ( this.home ) {
+        // ----------------------------------------------
+        // GA 計測タグ
+        // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+        Ga.add( new GaData('SPViewArchive.render', 'home_articles', 'view - new', String(1), 0, true) );
+        // ----------------------------------------------
+      } else {
+        // ----------------------------------------------
+        // GA 計測タグ
+        // PC/スマホカテゴリー一覧の新着記事
+        Ga.add( new GaData('SPViewArchive.render', `${this.slug}_articles`, 'view - new', String(1), 0, true) );
+        // ----------------------------------------------
+      }
 
     } else {
 
