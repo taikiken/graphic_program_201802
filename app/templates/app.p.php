@@ -340,7 +340,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
       myPlayer.on('play', function() {
         if ( isPlay === false ) {
           isPlay = true;
-          ga('send', 'event', 'video', 'play', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
+          ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
         }
       });
 
