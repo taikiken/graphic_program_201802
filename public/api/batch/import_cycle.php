@@ -3,6 +3,9 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$o=new db;
+$o->connect();
+
 function modhtmltag($s){
 	$s=str_replace("\n","<br>",$s);
 	$s=strip_tags($s,"<br>");
@@ -18,19 +21,51 @@ function modRelatedLink($links){
 	return $link;
 }
 function modKeyword($keywords){
+	
+	global $exword;
+	
 	$keyword=array();
 	for($i=0;$i<count($keywords);$i++){
 		$k=$keywords[$i]["@attributes"]["name"];
-		if(preg_match("/(注目の記事|★明日のイベント予定)/",$k))continue;
+		
+		if(preg_match("/(注目の記事|★明日のイベント予定|【注目】)/",$k))continue;
+		$v=str_replace(array("【","】"),"",$k);
+		if(in_array($v,$exword))continue;
+		
 		$keyword[]=$k;
 	}
 	return $keyword;
 }
 
-$rssfile="http://response.jp/feed/article/index.xml";
+function cycle_categorymatch($tag,$title,$summary){
+	
+	global $rx;
+	
+	$k="";
+	$e=129;
+	
+	for($i=0;$i<count($tag);$i++){
+		$k.=$tag[$i]["@attributes"]["name"];
+	}
+	if($k=="")return $e;
+	$e=categorysearch($rx,$k);
+	if($e==129)$e=categorysearch($rx,$title);
+	if($e==129)$e=categorysearch($rx,$summary);
+	
+	return $e;
+}
 
-$o=new db;
-$o->connect();
+$sql=sprintf("select id,name,name_e,yobi from u_categories where flag=1 and id not in(%s) order by n desc",implode(",",$excategory));
+$o->query($sql);
+while($f=$o->fetch_array()){
+	$sw=strlen($f["yobi"])>0?@explode(",",$f["yobi"]):array();
+	$sw[]=$f["name"];
+	$rx[]=array($f["id"],$sw);
+	$exword[]=$f["name"];
+	if(strlen($f["title"])>0)$exword[]=$f["title"];
+}
+
+$rssfile="http://cyclestyle.net/feed/article/index.xml";
 
 $xml=file_get_contents($rssfile);
 $xml=str_replace("iid:", "", $xml);
@@ -38,8 +73,6 @@ $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
 for($i=0;$i<count($data["entry"]);$i++){
-	
-	if(!preg_match("/モータースポーツ/",$data["entry"][$i]["category"]["@attributes"]["label"]))continue;
 	
 	$s["title"]=$data["entry"][$i]["title"];
 	$s["t9"]=$data["entry"][$i]["link"]["@attributes"]["href"];
@@ -56,6 +89,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 	
 	$s["t30"]=$data["entry"][$i]["img"][0]["@attributes"]["url"];
 	$s["t1"]=$data["entry"][$i]["img"][0]["@attributes"]["alt"].$data["entry"][$i]["img"][0]["@attributes"]["copyright"];
+	
 	
 	$keyword=modKeyword($data["entry"][$i]["gigaindex"]);
 	$s["keyword"]=implode(",",$keyword);
@@ -92,8 +126,8 @@ for($i=0;$i<count($data["entry"]);$i++){
 	}else{
 
 	  $s["d1"]=3;
-	  $s["d2"]=16; // Response
-	  $s["m1"]=125; // モータースポーツ
+	  $s["d2"]=15; // Response
+	  $s["m1"]=cycle_categorymatch($data["entry"][$i]["gigaindex"],$data["entry"][$i]["title"],$data["entry"][$i]["summary"]);
 	  $s["flag"]=1;
 	  $s["cid"]=1;
 	  $s["n"]="(select max(n)+1 from repo_n where cid=1)";
@@ -118,6 +152,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 		$o->query($sqla);
 	}
 	unset($s,$sqla);
+	
 }
 
 ?>

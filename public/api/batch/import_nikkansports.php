@@ -64,7 +64,7 @@ for($i=0;$i<count($data);$i++){
 	if(strlen($data[$i]["topic"])>0)$k[]=$data[$i]["topic"];
 	$keyword=implode(",",$k);
 	$s["keyword"]=$keyword;
-	$body=sprintf("<p>%s</p>",implode("</p><p>",$data[$i]["content"]["p"]));
+	$body=sprintf("<p>%s</p>",count($data[$i]["content"]["p"])>1?implode("</p><p>",$data[$i]["content"]["p"]):$data[$i]["content"]["p"]);
 	
 	$modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body));
 	
@@ -93,6 +93,7 @@ for($i=0;$i<count($data);$i++){
 	}
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
+			if($cnt==6)break;
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}

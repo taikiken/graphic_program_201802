@@ -29,7 +29,7 @@ function searchtxt($title,$category,$category2,$body,$keyword,$t1,$media){
 	$body=stripmeta($body);
 	$keyword=stripmeta($keyword);
 	$t1=stripmeta($t1);
-	$media=$media;
+	$media=strtolower($media);
 	
 	$txt=$title.$body.$category.$category2.$keyword.$t1.$media;
 	$txt=pg_escape_string($txt);
@@ -47,7 +47,9 @@ while($f=$o->fetch_array()){
 	}
 }
 
-$u=implode("\n",$u);
-$o->query($u);
+for($i=0;$i<count($u);$i++){
+	$o->query($u[$i]);
+}
+
 
 ?>
