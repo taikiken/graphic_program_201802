@@ -200,7 +200,7 @@ function set_advertise($ad,$type){
 	$s["theme"]["images"]["sp"]=strlen($ad["sp_headerimg".$type])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$ad["sp_headerimg".$type]):"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
 	
-	if(strlen($ad["bannertext"])>0){
+	if(strlen($ad["pc_bannerlink"])>0&&strlen($ad["sp_bannerlink"])>0){
 		$s["banner"]["pc"]["text"]=mod_HTML($ad["bannertext"]);
 		$s["banner"]["pc"]["image"]=sprintf("%s/prg_img/img/%s",$ImgPath,$ad["pc_bannerimg"]);
 		$s["banner"]["pc"]["link"]=$ad["pc_bannerlink"];

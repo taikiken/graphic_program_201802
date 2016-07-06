@@ -1,6 +1,7 @@
 <li class="pl0"><a href="/editdm/">管理メニューTOP</a></li>
 <li><a href="/editdm/ad/?cid=0&nid=0">広告デフォルト設定</a></li>
 <li><a href="/editdm/repo_n/?cid=8&rid=7">ヘッドライン</a></li>
+<li><a href="/editdm/repo_n/?cid=11&rid=7">CRAZYオススメ</a></li>
 <li><a href="/editdm/repo_n/?cid=1">記事一覧</a></li>
 <li><a href="/editdm/repo_n/?cid=10">カテゴリー一覧</a></li>
 <li><a href="/editdm/repo_s/?rid=2">メディア一覧</a></li>
