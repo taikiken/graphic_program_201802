@@ -205,8 +205,8 @@
 
       </div><!-- /.comment -->
 
-      <div id="widget-ranking-container"></div><!--/ranking-->
       <div id="widget-recommend-list-container"></div><!--/recommend-->
+      <div id="widget-ranking-container"></div><!--/ranking-->
 
       <!-- #310 popin embed code  -->
       <?php if ( $page['category']['label'] ) : ?>
