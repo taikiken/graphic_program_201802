@@ -271,12 +271,14 @@ export let BrightcoveNode = React.createClass( {
   // brightcove player event handlers
   adStart: function() {
     // // 広告再生スタート controls 非表示
-    // this.player.controls( false );
+    if ( this.phone ) {
+      this.player.controls( false );
+    }
     console.log( 'adStart' );
   },
   adEnd: function() {
     // // 広告再生終了 controls 表示
-    // this.player.controls( true );
+    this.player.controls( true );
     console.log( 'adEnd' );
   },
   onPlay: function() {
