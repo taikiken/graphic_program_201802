@@ -52,18 +52,16 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     ga('create', 'UA-74679267-1', 'auto');
     ga('require', 'linkid');
     ga('require', 'displayfeatures');
-    ga('set', 'dimension1', navigator.userAgent);
-    ga('send', 'event', 'ua', 'view', navigator.userAgent );
 
     // provider
-    ga('send', 'event', 'provider', 'view', '<?php echo $page['post']['user']['name']; ?>' );
+    ga('send', 'event', 'provider', 'view', '<?php echo $page['post']['user']['name']; ?>', 0, {nonInteraction: true} );
 
     // category
 <?php
     if ( $page['post']['categories'] && is_array($page['post']['categories']) ) :
       foreach ( $page['post']['categories'] as $key => $value ) :
 ?>
-    ga('send', 'event', 'category', 'view', '<?php echo $value['label']; ?>' );
+    ga('send', 'event', 'category', 'view', '<?php echo $value['label']; ?>', 0, {nonInteraction: true} );
 <?php
       endforeach;
     endif;
@@ -105,7 +103,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         }
       }
       ?>
-      <div class="post-kv<?php echo $post_kv_class; ?>">
+      <div class="post-kv<?php echo $post_kv_class; ?>" style="position:relative;">
         <?php if ( $page['post']['media_type'] === 'video' ) :
           // -------------------------- [メインビジュアル] --------------------------
           // ========= video ?>
@@ -117,7 +115,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
           <?php elseif ( $page['post']['media']['video']['player'] == 'youtube' ) :
             // ---------- {youtube} ?>
             <img class="yt-video-size" src="/assets/images/common/thumb-16x9.png" alt="">
-            <iframe class="yt-video" width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+            <iframe class="yt-video" width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen style="width:100%;"></iframe>
 
           <?php elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) :
             // ---------- {brightcove} ?>
@@ -207,7 +205,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
           ?>
           <div id="post-content-container" class="post-content">
             <p><?php echo $page['post']['description']; ?></p>
-            <p><a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>">続きを読む(外部サイトへ)</a></p>
+            <p><a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="ga('send', 'event', 'external_link', 'click', '<?php echo $page['post']['readmore']['url']; ?>', 0, {nonInteraction: true});">続きを読む(外部サイトへ)</a></p>
           </div>
         <?php else : ?>
           <div id="post-content-container" class="post-content">
@@ -236,7 +234,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
                 // link が存在しないので画像だけ表示します ?>
                 <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
               <?php else: // link + image を表示 ?>
-                <a href="<?php echo $post_user_logo_link; ?>"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
+                <a href="<?php echo $post_user_logo_link; ?>" onclick="ga('send', 'event', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>', 0, {nonInteraction: true});"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
               <?php endif; ?>
             <?php endif; //----[image] ?>
             <div class="provider-data">
@@ -249,7 +247,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
               // user.logo.link
               // link が存在する時のみ表示します
               if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
-                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>">ウェブサイト</a></p>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" onclick="ga('send', 'event', 'provider_link', 'click', '<?php echo $page['post']['user']['logo']['link']; ?>', 0, {nonInteraction: true});">ウェブサイト</a></p>
               <?php endif; //----[link] ?>
             </div>
           </div><!-- /.provider -->
@@ -302,7 +300,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   <script>
   (function () {
 
-    var myPlayer, poster;
+    var myPlayer, poster, isPlay = false, isComplete = false;
     videojs('webview-brightcove').ready(function() {
       myPlayer = this;
 
@@ -311,7 +309,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
       } );
 
-      <?php if ($page['post']['media']['video']['add_url']['sp']) :
+      <?php if ($page['post']['media']['video']['ad_url']['sp']) :
       // 動画プレイヤー / VASTをPC/SP&APPで分ける #822 ?>
       myPlayer.ima3({
         debug: false,
@@ -320,8 +318,8 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
         ],
         postrollTimeout: 2000,
         prerollTimeout: 1000,
-        requestMode: 'onload',
-        serverUrl: '<?php echo $page['post']['media']['video']['add_url']['sp']; ?>' + '?' + Date.now(),
+        requestMode: 'onplay',
+        serverUrl: '<?php echo $page['post']['media']['video']['ad_url']['sp']; ?>' + '?' + Date.now(),
         timeout: 5000
       });
       <?php endif; ?>
@@ -337,6 +335,22 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
       }
       myPlayer.width( '100%', false );
       myPlayer.height( 'auto', false );
+
+      // playerのgaイベント
+      myPlayer.on('play', function() {
+        if ( isPlay === false ) {
+          isPlay = true;
+          ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
+        }
+      });
+
+      myPlayer.on('ended', function() {
+        if ( isComplete === false ) {
+          isComplete = true;
+          ga('send', 'event', 'video', 'complete', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
+        }
+      });
+
     });
   }());
   </script>

@@ -320,7 +320,11 @@ export class ViewSingle extends View {
     const label = Safety.string(event.target.href, '');
     const method = 'ViewSingle.onExternal';
 
-    Ga.add( new GaData( method, category, action, label ) );
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事詳細で続きを読むのリンク先トラッキング
+    Ga.add( new GaData( method, category, action, label, 0, true ) );
+    // ----------------------------------------------
   }
   // ---------------------------------------------------
   //  STATIC METHODS
@@ -353,14 +357,22 @@ export class ViewSingle extends View {
     const label = single.user.userName;
     const method = 'ViewSingle.ga';
 
-    Ga.add( new GaData( method, category, action, label ) );
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事詳細の提供元のアクセス数を測定する
+    Ga.add( new GaData( method, category, action, label, 0, true ) );
+    // ----------------------------------------------
 
     // category label 送信
     const categories:CategoriesDae = single.categories;
 
     category = 'category';
     categories.all.map( (value:SlugDae) => {
-      Ga.add( new GaData( method, category, action, value.label ) );
+      // ----------------------------------------------
+      // GA 計測タグ
+      // 記事カテゴリーのアクセス数を測定する
+      Ga.add( new GaData( method, category, action, value.label, 0, true ) );
+      // ----------------------------------------------
     } );
   }
 }

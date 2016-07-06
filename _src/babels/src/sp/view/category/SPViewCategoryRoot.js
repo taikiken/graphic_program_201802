@@ -31,6 +31,10 @@ import {Safety} from '../../../data/Safety';
 // util
 import {Scroll} from '../../../util/Scroll';
 
+// Ga
+import {Ga} from '../../../ga/Ga';
+import {GaData} from '../../../ga/GaData';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -181,21 +185,9 @@ export class SPViewCategoryRoot extends View {
           element
         );
       },
-      /*
-      // 新着記事 component did mount event handler
-      latestDidMount: function():void {
-        // latest did mount
-      },
-      */
+
       // tab click callback from <SPTabNode>
       tabClick( id:string ):void {
-        // let scroll = this.scroll;
-        // scroll[ this.state.current ] = Scroll.y;
-        // this.setState( { current: id } );
-        //
-        // setTimeout( function() {
-        //   Scroll.y = scroll[ id ];
-        // }, 25 );
         this.scrollPosition( id );
         this.didRequest( id );
         this.setState( { current: id } );
@@ -211,11 +203,17 @@ export class SPViewCategoryRoot extends View {
       },
       // 最初の Ajax request を行ったかを確認し、リクエストを行うか否かを決める
       didRequest( id:string ):void {
-        // console.log( 'didRequest', id, this.requests[ id ], this[ id ] );
         if ( !this.requests[ id ] ) {
           // not request -> first request
           this.requests[ id ] = true;
           this[ id ]();
+
+          let tag = id === 'videos' ? 'movie' : id;
+          // ----------------------------------------------
+          // GA 計測タグ
+          // PC/スマホカテゴリー一覧の新着記事
+          Ga.add( new GaData('SPViewCategoryRoot.render.CategoryRootDom.didRequest', `${this.props.slug}_articles`, `view - ${tag}`, String(1), 0, true) );
+          // ----------------------------------------------
         }
       }
     } );

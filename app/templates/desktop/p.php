@@ -154,7 +154,7 @@ endif;
                 // link が存在しないので画像だけ表示します ?>
                 <i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i>
               <?php else: // link + image を表示 ?>
-                <a href="<?php echo $post_user_logo_link; ?>" target="_blank" onclick="UT.Ga.click('provider-logo', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>');"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
+                <a href="<?php echo $post_user_logo_link; ?>" target="_blank" onclick="UT.Ga.click('provider-logo', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>', true);"><i class="provider-logo"><img src="<?php echo $page['post']['user']['logo']['img']; ?>" alt=""></i></a>
               <?php endif; ?>
             <?php endif; //----[image] ?>
             <div class="provider-data">
@@ -167,7 +167,7 @@ endif;
               // user.logo.link
               // link が存在する時のみ表示します
               if ( !empty( $page['post']['user']['logo'] ) && !empty( $page['post']['user']['logo']['link'] ) ) : ?>
-                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank" onclick="UT.Ga.click('provider-url', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>');">ウェブサイト</a></p>
+                <p class="provider-url"><a href="<?php echo $page['post']['user']['logo']['link']; ?>" target="_blank" onclick="UT.Ga.click('provider-url', 'provider_link', 'click', '<?php echo $post_user_logo_link; ?>', true);">ウェブサイト</a></p>
               <?php endif; //----[link] ?>
             </div>
           </div><!-- /.provider -->

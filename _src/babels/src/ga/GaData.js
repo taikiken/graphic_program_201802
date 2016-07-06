@@ -22,8 +22,16 @@ export class GaData {
    * @param {string} eventAction 必須 接点の種類（例: play）
    * @param {string} [eventLabel=''] オプション イベントの分類に便利です（例: Fall Campaign）
    * @param {Number} [eventValue=0] オプション イベントの分類に便利です（例: Fall Campaign）
+   * @param {Boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
    */
-  constructor( method:string, eventCategory:string, eventAction:string, eventLabel:string = '', eventValue:Number = 0 ) {
-    Object.assign( this, {method, eventCategory, eventAction, eventLabel, eventValue} );
+  constructor( method:string, eventCategory:string, eventAction:string, eventLabel:string = '', eventValue:Number = 0, eventInteraction:Boolean = false ) {
+    Object.assign( this, {method, eventCategory, eventAction, eventLabel, eventValue, eventInteraction} );
+  }
+  /**
+   * nonInteraction フィールドを true に指定した Object を取得します
+   * @return {{nonInteraction: boolean}} nonInteraction フィールドを true に指定した Object を返します
+   */
+  static nonInteraction():Object {
+    return { nonInteraction: true };
   }
 }

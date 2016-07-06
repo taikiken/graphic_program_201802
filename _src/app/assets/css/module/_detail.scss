@@ -10,6 +10,10 @@
 // post-detail
 .post-detail {
   margin-top: 30px;
+  // 記事詳細本文部分 サイドバーに突き抜ける問題に対応するために設定
+  // Safari で 問題があるので限定的に使用する
+  // https://github.com/undotsushin/undotsushin/issues/867#issuecomment-228676809
+  word-break: break-all;
 
   // post-heading
   .post-heading {

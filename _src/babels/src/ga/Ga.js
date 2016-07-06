@@ -27,13 +27,9 @@ export class Ga {
    * @param {Symbol} target Singleton を実現するための private symbol
    */
   constructor( target:Symbol ) {
-
     if ( _symbol !== target ) {
-
       throw new Error( 'Ga is static Class. not use new Ga().' );
-
     }
-
   }
   // ---------------------------------------------------
   //  STATIC METHOD
@@ -46,10 +42,13 @@ export class Ga {
    * @param {string} category 必須 通常は接点に使用されたオブジェクト（例: Video）
    * @param {string} action 必須 接点の種類（例: play）
    * @param {string} label イベントの分類に便利です（例: Fall Campaign）
+   * @param {Boolean} [eventInteraction=false] オプション イベントをインタラクション以外のイベントとして送信できます。その場合、nonInteraction フィールドを true に指定します（send コマンドの fieldsObject を使用）
    */
-  static click( method:string, category:string, action:string, label:string ):void {
-    let gaData:GaData = new GaData( method, category, action, label );
-    Ga.add( gaData );
+  static click( method:string, category:string, action:string, label:string, eventInteraction:Boolean = false ):void {
+    // ----------------------------------------------
+    // GA 計測タグ
+    Ga.add( new GaData( method, category, action, label, 0, eventInteraction ) );
+    // ----------------------------------------------
   }
   /**
    * 送信予約
@@ -87,7 +86,8 @@ export class Ga {
     // _requests 内のデータがなくなるまで実行する
     while( _requests.length > 0 ) {
       let data:GaData = _requests.shift();
-      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+      // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+      Ga.tracking( ga, data );
     }
   }
   /**
@@ -98,8 +98,22 @@ export class Ga {
     // _requests 内のデータがなくなるまで実行する
     while( _requests.length > 0 ) {
       let data:GaData = _requests.shift();
+      // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+      Ga.tracking( ga, data );
+      console.log( `${data.method}: ga, send, `, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, data.eventInteraction );
+    }
+  }
+  /**
+   * ga 関数を実行し tracking を行います
+   * @since 2016-07-04
+   * @param {Function} ga Google.ga
+   * @param {GaData} data 送信する GaData Object
+   */
+  static tracking( ga:Function, data:GaData ):void {
+    if ( data.eventInteraction ) {
+      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, GaData.nonInteraction() );
+    } else {
       ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
-      console.log( `${data.method}: ga, send, `, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
     }
   }
 }
