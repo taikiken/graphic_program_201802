@@ -251,6 +251,8 @@ export let BrightcoveNode = React.createClass( {
     if ( this.phone ) {
       player.width( '100%', false );
       player.height( 'auto', false );
+      // https://github.com/undotsushin/undotsushin/issues/885#issuecomment-230741785
+      // 出力エラーは無視する
       player.enableTouchActivity();
     }
     // http://docs.brightcove.com/en/perform/brightcove-player/guides/events.html
@@ -274,15 +276,15 @@ export let BrightcoveNode = React.createClass( {
     if ( this.phone ) {
       this.player.controls( false );
     }
-    console.log( 'adStart' );
+    // console.log( 'adStart' );
   },
   adEnd: function() {
     // // 広告再生終了 controls 表示
     this.player.controls( true );
-    console.log( 'adEnd' );
+    // console.log( 'adEnd' );
   },
   onPlay: function() {
-    console.log( 'onPlay' );
+    // console.log( 'onPlay' );
     if ( !this.playing ) {
       this.playing = true;
       this.tracking( 'begin' );
@@ -291,11 +293,11 @@ export let BrightcoveNode = React.createClass( {
   },
   onPause: function() {
     // this.setState( { showPlay: true } );
-    console.log( 'onPause' );
+    // console.log( 'onPause' );
   },
   onEnd: function() {
     // this.setState( { showPlay: true } );
-    console.log( 'onEnd' );
+    // console.log( 'onEnd' );
     if ( this.playing ) {
       this.playing = false;
       this.tracking( 'complete' );
