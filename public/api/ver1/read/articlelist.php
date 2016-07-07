@@ -59,7 +59,7 @@ if(strlen($api)>0){
 				
 				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
 				str_replace(" and","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
-				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=0 and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
+				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
 				str_replace(" and","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
 			}
 /*
@@ -89,18 +89,17 @@ if(strlen($api)>0){
 			$nsql=sprintf("select count(id) as n from repo_n where cid=1 and flag=1 and (swf is not null or youtube is not null or facebook is not null)%s",$c);
 */
 
-
 		// #860 - ダミーレスポンス
 		}elseif($type === "recommend"){
 
-			if ( $category === 'crazy' ) :
-				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=8 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
+			if ( $category === 'crazy' ){
+				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
 				$nsql="select count(id) as n from u_headline where cid=8 and flag=1";
-			endif;
+			}else{
+				
+			}
 
 		}
-
-
 	
 	}elseif($api==="search"){
 
