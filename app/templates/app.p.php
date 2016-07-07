@@ -39,6 +39,9 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     .video-js .vjs-remaining-time-display {
       line-height:3em;
     }
+    .video-js .vjs-ima3-ad-container iframe {
+      pointer-events: auto;
+    }
   </style>
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
