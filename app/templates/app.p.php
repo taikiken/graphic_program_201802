@@ -36,6 +36,9 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     .video-js.vjs-fullscreen.vjs-user-inactive {
       cursor: none;
     }
+    .video-js .vjs-remaining-time-display {
+      line-height:3em;
+    }
   </style>
 
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
