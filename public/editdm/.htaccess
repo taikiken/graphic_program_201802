@@ -13,3 +13,5 @@ Options FollowSymLinks Includes
 RewriteEngine on
 RewriteBase /
 
+#RewriteRule ^[^/]+/(new|edit|delete)/(index|conf|exe).php /editdm/template.php [L,QSA]
+#RewriteRule ^[^/]+/index.php /editdm/template.php [L,QSA]

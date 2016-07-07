@@ -188,13 +188,16 @@ function ut_init(){
 
 	}else if(cd=="u_headline"){
 		
+		/*
+		//たとえば選択できる競技を野球のみに絞る
 		if(cid==11){
 			$(".m_d2").html("select id,'['||a1||'-'||a2||'-'||a3||' '||a4||':'||a5||'] ' ||title||'('||(select title from u_media as e where e.id=repo_n.d2)||')' as title from repo_n where cid=1 and flag=1 and m1={p_d1} order by m_time desc");
 			$(".m_d1").height(22);
 			$(".m_d1 li:gt(0)").remove();
 			$(".title").hide();
 		}
-		if(dir==1&&fil===0){
+		*/
+		if((dir==0||dir==1)&&fil===0){
 			if($("[name='p_d2']").val().match(/^[0-9]+$/)){
 				
 				var url="/editdm/repo_n/edit/?nid="+$("[name='p_d2']").val()+"&cid=1";
@@ -238,7 +241,10 @@ function ut_init(){
 			var name1=sprintf("[for='%s1']",key.replace(/^p_/,""));
 			var name2=sprintf("[for='%s2']",key.replace(/^p_/,""));
 			var key=key.replace(/^p_/,"");
-			if(key.match(/^ad/)){
+			
+			if(key.match(/^ad_video/)){
+				key=".ad_videoid,.ad_pc_videotag,.ad_sp_videotag";
+			}else if(key.match(/^ad/)){
 				key="."+key.replace(/flag/,"id");
 			}else if(key.match(/^(sidebar|single)_/)){
 				key="."+key.replace(/flag/,"");
@@ -280,7 +286,7 @@ function ut_init(){
 	if(location.href.match(/repo_s\/\?rid=2/)){
 		$(".newEntry").hide();
 	}
-	if(rid==7)$(".newEntry").hide();
+	if(cid==8)$(".newEntry").hide();
 	
 }
 function settime(field){
