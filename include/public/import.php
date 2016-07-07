@@ -28,6 +28,12 @@ $exword[]="ロシア";
 $exword[]="試合結果サマリー";
 $exword[]="本紙面（総合ニュース）";
 $exword[]="海外ニュース";
+$exword[]="アスリート";
+$exword[]="女性";
+$exword[]="こころ";
+$exword[]="体";
+$exword[]="悩み";
+$exword[]="生きかた";
 
 $baseball=array("ヤクルト","巨人","阪神","広島","中日","DeNA","ソフトバンク","日本ハム","ロッテ","西武","オリックス","楽天");
 
@@ -232,10 +238,14 @@ function getfileinfo($i){
 	return array(sprintf("%s%s",date("YmdHis"),$m[1]),$ext);
 }
 
-function outimg($oimg){
+function outimg($oimg,$tumb=1){
 	
 	global $SERVERPATH;
 	$imgp=$SERVERPATH."/prg_img/";
+	
+	$oimg=str_replace(" ","%20",$oimg);
+	$u=parse_url($oimg);
+	$oimg=sprintf("%s://%s%s",$u["scheme"],$u["host"],$u["path"]);
 	
 	$fl=getfileinfo($oimg);
 	
@@ -258,10 +268,11 @@ function outimg($oimg){
 	elseif(preg_match("/png/",$size["mime"]))$p="png";	
 	
 	copy($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p));
-	imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
-	imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
-	imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
-	
+	if($tumb==1){
+		imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
+		imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
+		imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
+	}
 	return sprintf("%s.%s",$fl[0],$p);
 }
 

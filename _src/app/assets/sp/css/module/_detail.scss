@@ -42,10 +42,16 @@
     top: 0;
   }
 
-  iframe,
+  // https://github.com/undotsushin/undotsushin/issues/885
+  // 広告動画左下の Ad秒数 の位置調整
+  //iframe,
   video {
     width: 100%;
     height: auto;
+  }
+
+  .phone-video-guide {
+    max-width: none;
   }
 
   // ----------- youtube -------
