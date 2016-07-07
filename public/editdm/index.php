@@ -1,6 +1,5 @@
 <?php
 
-
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."login.php";
 
