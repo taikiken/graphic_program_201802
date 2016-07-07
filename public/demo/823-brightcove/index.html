@@ -49,10 +49,31 @@ var myPlayer;
       prerollTimeout: 1000,
       requestMode: 'onplay',
       loadingSpinner: true,
-      serverUrl: 'http://dev.undotsushin.com/demo/823-brightcove/adrule_midroll.xml',
-      //serverUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=' + Date.now() + '[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1',
+      //serverUrl: 'http://dev.undotsushin.com/demo/823-brightcove/adrule_midroll.xml',
+      serverUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=' + Date.now() + '[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1',
       timeout: 5000
     });
+
+    myPlayer.on( 'adstart', function() {
+      console.log('adstart');
+    });
+
+    myPlayer.on( 'adend', function() {
+      console.log('adend');
+    });
+
+    myPlayer.on( 'play', function() {
+      console.log('play');
+    });
+
+    myPlayer.on( 'pause', function() {
+      console.log('pause');
+    });
+
+    myPlayer.on( 'ended', function() {
+      console.log('ended');
+    });
+
   });
 
   $('#play').on('click', function() {
@@ -64,6 +85,7 @@ var myPlayer;
     myPlayer.pause();
     return false;
   });
+
 
 }());
 
