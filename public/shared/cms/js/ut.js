@@ -103,8 +103,8 @@ function summary(f){
 	else $(".t16").hide();
 }
 function originalurl(f){
-	if(f===1)$(".t9").show();
-	else $(".t9").hide();
+	if(f===1)$(".t9,.t7").show();
+	else $(".t9,.t7").hide();
 }
 function contents(f){
 	if(f===1)$(".bodyflag").show();
@@ -197,6 +197,11 @@ function ut_init(){
 			$(".title").hide();
 		}
 		*/
+		
+		if(dir==3){
+			$(".delete").parent("a").attr({"href":"javascript://"}).fadeTo(1,0.5);
+		}
+		
 		if((dir==0||dir==1)&&fil===0){
 			if($("[name='p_d2']").val().match(/^[0-9]+$/)){
 				
