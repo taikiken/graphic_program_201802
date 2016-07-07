@@ -38,9 +38,12 @@
             <div id="widget-recommend-list-container"></div><!--/recommend-->
           <?php endif; ?>
           <div id="widget-ranking-container"></div><!--/ranking-->
+
+          <?php if ( $page['category']['slug'] !== 'crazy' ) : ?>
           <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
             <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
           </div>
+          <?php endif; ?>
 
           <?php
           // ------------------------------------
