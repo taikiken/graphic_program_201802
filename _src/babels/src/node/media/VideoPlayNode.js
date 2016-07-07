@@ -23,7 +23,8 @@ export let VideoPlayNode = React.createClass( {
   propTypes: {
     playImage: React.PropTypes.string.isRequired,
     callback: React.PropTypes.func.isRequired,
-    showPlay: React.PropTypes.bool.isRequired
+    showPlay: React.PropTypes.bool.isRequired,
+    phone: React.PropTypes.bool.isRequired
   },
   getInitialState: function() {
     return {
@@ -31,7 +32,12 @@ export let VideoPlayNode = React.createClass( {
     };
   },
   render: function() {
+    // SP 表示しない
+    if ( this.props.phone ) {
+      return null;
+    }
 
+    // SP 以外 showPlay property check
     if ( this.props.showPlay ) {
       return (
         <a href="#" onClick={this.props.callback} className="post-video-start">
