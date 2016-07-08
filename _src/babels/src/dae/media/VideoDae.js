@@ -40,7 +40,7 @@ export class VideoDae {
      * article.media.video.add_url
      * @type {AdUrl}
      * @private
-     * @from 2016-06-20
+     * @since 2016-06-20
      */
     this._adUrl = new AdUrl( video.ad_url );
   }
@@ -110,7 +110,7 @@ export class VideoDae {
   }
   /**
    * article.media.video.add_url
-   * @from 2016-06-20
+   * @since 2016-06-20
    * @return {AdUrl} article.media.video.add_url を AdUrl instance にし返します
    */
   get adUrl():AdUrl {

@@ -18,7 +18,7 @@ import {Result} from '../../data/Result';
 /**
  * 記事カテゴリー情報を取得します
  *
- * @from 2016-05-28
+ * @since 2016-05-28
  */
 export class ModelCategoriesSlug extends Model {
   /**

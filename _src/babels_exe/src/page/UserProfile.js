@@ -17,6 +17,9 @@ let _symbol = Symbol();
 let UT = self.UT;
 let Dom = UT.app.Dom;
 
+/**
+ * ユーザー情報 設定画面上
+ */
 export class UserProfile {
   /**
    * static class です, instance を作成しません

@@ -45,6 +45,17 @@ export class Sidebar {
     };
     let wholeHeight:Number = -1;
 
+    /**
+     * requestAnimationFrame id<br>
+     * cancel 時に使用します
+     *
+     *    this.id = requestAnimationFrame( METHOD );
+     *    cancelAnimationFrame(this.id);
+     *
+     * @type {Number}
+     */
+    this.id = 0;
+
     Object.assign( this, { sidebar, footer, offsets, previous, parent, whole, id, boundUpdate, padding, css, sticky, wholeHeight } );
   }
   /**
@@ -94,14 +105,6 @@ export class Sidebar {
    * start 実行後常時監視します
    */
   update():void {
-    /**
-     * requestAnimationFrame id<br>
-     * cancel 時に使用します
-     *
-     *    cancelAnimationFrame(this.id);
-     *
-     * @type {Number}
-     */
     this.id = requestAnimationFrame(this.boundUpdate);
     this.scroll( {y: Scroll.y} );
     this.resizeWhole();

@@ -197,7 +197,7 @@ export let BrightcoveNode = React.createClass( {
 
     // 動画プレイヤー / VASTをPC/SP&APPで分ける #822
     // https://github.com/undotsushin/undotsushin/issues/822
-    // @from 2016-06-20
+    // @since 2016-06-20
     let vast = this.phone ? video.adUrl.sp : video.adUrl.pc;
 
     let ima3 = {
@@ -307,7 +307,7 @@ export let BrightcoveNode = React.createClass( {
       this.tracking( 'complete' );
     }
   },
-  // @from 2016-06-22
+  // @since 2016-06-22
   // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
   tracking: function( action:string ) {
     let gaData = new GaData( 'BrightcoveNode.tracking', 'video', action, this.url );

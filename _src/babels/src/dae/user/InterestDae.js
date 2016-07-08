@@ -25,7 +25,7 @@ export class InterestDae {
     interest = Safety.object( interest );
     /**
      * response.interest
-     * @type {Object}
+     * @type {Object|Array}
      * @protected
      */
     this._interest = interest;
@@ -47,7 +47,7 @@ export class InterestDae {
     // interest: [{id:int, slug:text, label:text},{}]
     let category = this.interest;
     if ( !Array.isArray( category ) ) {
-      category = [];
+      category = [ this.interest ];
     }
     return category;
   }

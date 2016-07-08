@@ -106,17 +106,18 @@ export class View extends EventDispatcher {
    * @param {*} [args=] 実行関数へ渡す引数, 不特定多数
    */
   executeSafely( keyName, ...args ):void {
-
     let option = this.option;
+    // console.log( 'executeSafely ', keyName, args, option, option.hasOwnProperty( keyName ), typeof option[ keyName] );
     if ( option.hasOwnProperty( keyName ) && typeof option[ keyName] === 'function' ) {
 
       // callback 側で通常の引数として取り出せるように apply します
       option[ keyName ].apply( this, args );
 
     }
-
+    // console.log( 'executeSafely after if' );
     // listen しているかもしれないので event を発火させる
     this.dispatch( { type: keyName, args: args } );
+    // console.log( 'executeSafely after dispatch' );
 
   }
   // ---------------------------------------------------

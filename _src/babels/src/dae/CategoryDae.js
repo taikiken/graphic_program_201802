@@ -14,11 +14,11 @@
 import {Safety} from '../data/Safety';
 
 /**
- * article.category を管理します
+ * article.categories 1 data を管理します
  */
 export class CategoryDae {
   /**
-   * article.category を管理します
+   * article.categories 1 data
    * @param {Object} [category={}] article.category
    */
   constructor( category:Object = {} ) {

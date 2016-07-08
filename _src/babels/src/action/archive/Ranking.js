@@ -12,7 +12,10 @@
 
 
 import {Category} from './Category';
+// data
 import {Safety} from '../../data/Safety';
+// app
+import {ArchiveType} from '../../app/const/ArchiveType';
 
 /**
  * <p>記事ランキング</p>
@@ -32,7 +35,8 @@ export class Ranking extends Category {
   constructor( slug:string = 'all', resolve:Function = null, reject:Function = null ) {
 
     slug = Safety.string( slug, 'all' );
-    super( slug, 'ranking', resolve, reject );
+    // ranking
+    super( slug, ArchiveType.RANKING, resolve, reject );
 
   }
 

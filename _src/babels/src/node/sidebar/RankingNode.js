@@ -30,7 +30,7 @@ let React = self.React;
 // /**
 //  * <p>category, category2 から categories を使用する<br>
 //  * .category-label-wrapper カテゴリー表示</p>
-//  * @from 2016-06-16
+//  * @since 2016-06-16
 //  * @type {Function|ReactClass}
 //  * @private
 //  */
@@ -56,7 +56,7 @@ let React = self.React;
 /**
  * <p>人気記事一覧</p>
  * <p>SPに人気記事一覧を記事詳細に追加することになったので共通で使用できるように独立させました</p>
- * @from 2016-06-16
+ * @since 2016-06-16
  * @type {Function|ReactClass}
  */
 export const RankingNode = React.createClass( {

@@ -18,6 +18,9 @@ let _symbol = Symbol();
 let UT = self.UT;
 let Dom = UT.app.Dom;
 
+/**
+ * 検索ページ
+ */
 export class SPSearch {
   /**
    * static class です, instance を作成しません
