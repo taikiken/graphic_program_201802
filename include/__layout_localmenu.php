@@ -81,7 +81,7 @@ while($f=$o->fetch_array()){
 <?php }elseif($CURRENTDIRECTORY=="repo_e"){ ?>
 
 	<?php if($N>0){ ?>
-	<li class="ds"><a href="<?=str_replace("{lang}",$_COOKIE["lang"]."/",$PREVIEW)?>" target="_blank">ページブロック全体のプレビュー</a></li>
+	<li class="ds"><a href="https://www.undotsushin.com<?=str_replace("{lang}",$_COOKIE["lang"]."/",$PREVIEW)?>" target="_blank">ページブロック全体のプレビュー</a></li>
 	<?php }else{ ?>
     <!--
     <li>
