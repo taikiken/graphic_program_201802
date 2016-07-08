@@ -18,7 +18,7 @@ let UT = self.UT;
 let Dom = UT.app.Dom;
 
 /**
- * <h3>signup wizard</h3>
+ * <p>signup wizard</p>
  * 全て static です
  */
 export class SPSignup {

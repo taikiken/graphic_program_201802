@@ -40,12 +40,12 @@ if($TABLE=="repo_n"){
 		$sid=$p[$i]["d2"];
 	}
 	
-	$sql=sprintf("select '['||a1||'-'||a2||'-'||a3||' '||a4||':'||a5||'] ' ||(select name from pm_ where id=m1)||'：'||title||'('||(select title from u_media as e where e.id=repo_n.d2)||')' as title from %s where id=%s","repo_n",$sid);
+	$sql=sprintf("select a1,a2,a3,a4,a5,title,(select name from u_categories where id=m1) as category,(select title from u_media as e where e.id=repo_n.d2) as media from repo_n where id=%s",$sid);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
-	$title=$f["title"];
-
+	$title=strlen($p[$i]["title"])>0?sprintf("[%s-%s-%s %s:%s] %s：%s(%s)",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["category"],strlen($p[$i]["title"])>0?$p[$i]["title"]:$f["title"],$f["media"]):"-";
+	
 }else{
 
 	$title=mod_HTML($p[$i]["title"],1);

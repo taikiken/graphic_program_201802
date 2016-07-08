@@ -22,7 +22,7 @@ class m{
 		if($this->id!=20){
 			$sql="select id,name from pm_ where flag=1 and cid=".$this->id." order by n";
 		}else{
-			$sql="select id,name from u_categories where flag=1 order by n";
+			$sql="select id,name from u_categories order by n";
 		}
 		$this->o->query($sql);
 		while($f=$this->o->fetch_array($III)){

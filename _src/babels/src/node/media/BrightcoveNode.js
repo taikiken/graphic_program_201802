@@ -197,7 +197,7 @@ export let BrightcoveNode = React.createClass( {
 
     // 動画プレイヤー / VASTをPC/SP&APPで分ける #822
     // https://github.com/undotsushin/undotsushin/issues/822
-    // @from 2016-06-20
+    // @since 2016-06-20
     let vast = this.phone ? video.adUrl.sp : video.adUrl.pc;
 
     let ima3 = {
@@ -246,6 +246,21 @@ export let BrightcoveNode = React.createClass( {
       if ( !this.phone ) {
         player.controls( false );
       }
+
+      // http://docs.brightcove.com/en/perform/brightcove-player/guides/events.html
+
+      // #903 - ready内でbindする
+      // bind event handler
+      player.on( 'adstart', this.adStart );
+      player.on( 'adend', this.adEnd );
+
+      player.on( 'play', this.onPlay );
+      // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
+      // 再生・終了でトラッキングする必要が出たので有効にします
+      // @from 2016-06-22
+      player.on( 'pause', this.onPause );
+      player.on( 'ended', this.onEnd );
+
     } );
 
     if ( this.phone ) {
@@ -255,17 +270,6 @@ export let BrightcoveNode = React.createClass( {
       // 出力エラーは無視する
       player.enableTouchActivity();
     }
-    // http://docs.brightcove.com/en/perform/brightcove-player/guides/events.html
-    // bind event handler
-    player.on( 'adstart', this.adStart );
-    player.on( 'adend', this.adEnd );
-
-    player.on( 'play', this.onPlay );
-    // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
-    // 再生・終了でトラッキングする必要が出たので有効にします
-    // @from 2016-06-22
-    player.on( 'pause', this.onPause );
-    player.on( 'ended', this.onEnd );
 
     this.player = player;
   },
@@ -303,7 +307,7 @@ export let BrightcoveNode = React.createClass( {
       this.tracking( 'complete' );
     }
   },
-  // @from 2016-06-22
+  // @since 2016-06-22
   // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
   tracking: function( action:string ) {
     let gaData = new GaData( 'BrightcoveNode.tracking', 'video', action, this.url );

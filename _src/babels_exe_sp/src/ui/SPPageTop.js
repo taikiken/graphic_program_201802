@@ -26,7 +26,18 @@ export class SPPageTop {
    * page top に戻る motion
    */
   constructor() {
+    /**
+     * <p>bind 済み this.onComplete<br>ページトップへ戻るアニメーション完了を listener します</p>
+     * @type {Function}
+     * @private
+     */
     this._boundComplete = this.onComplete.bind( this );
+    /**
+     * click 不可管理フラッグ
+     * @type {boolean}
+     * @private
+     * @default true;
+     */
     this._can = true;
   }
   /**
@@ -39,8 +50,8 @@ export class SPPageTop {
     }
   }
   /**
-   * element click event handler
-   * @param {Event} event native event, click event
+   * <p>element click event handler</p>
+   * <p>click 管理フラッグが true ならフラッグを false にし<br>ページの上部(offsetY: 0)へ戻すアニメーションを開始します</p>   * @param {Event} event native event, click event
    */
   onClick( event:Event ):void {
     event.preventDefault();
@@ -69,13 +80,14 @@ export class SPPageTop {
     );
   }
   /**
-   * page top motion complete
-   */
+   * <p>page top motion complete<br>
+   * click 管理フラッグを true にします</p>
+   * */
   onComplete():void {
     this._can = true;
   }
   /**
-   * PageTop instance を作成し開始する
+   * PageTop instance を作成し init 関数をコールします
    */
   static start():void {
     let pageTop = new SPPageTop();

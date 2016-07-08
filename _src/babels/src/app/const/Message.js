@@ -49,6 +49,14 @@ export class Message {
     return 'オススメ動画';
   }
   /**
+   * RECOMMEND_TITLE オススメ記事
+   * @since 2016-06-29
+   * @return {string} オススメ記事
+   */
+  static get RECOMMEND_TITLE():string {
+    return 'オススメ記事';
+  }
+  /**
    * HEADLINE_TITLE 注目のニュース
    * @return {string} 注目のニュース
    */

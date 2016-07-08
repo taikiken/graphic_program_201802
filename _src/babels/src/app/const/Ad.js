@@ -133,7 +133,7 @@ export class Ad {
 
   /**
    * ストリーム広告をscript tag を生成し返します
-   * @from 2016-06-06
+   * @since 2016-06-06
    * @param {string} id target element id
    * @param {string} ad ストリーム広告 ID
    * @return {Element} div でラップし script tag を返します

@@ -17,7 +17,7 @@ import {Safety} from '../data/Safety';
 import {Format} from '../util/Format';
 
 // dae
-import {CategoryDae} from './CategoryDae';
+// import {CategoryDae} from './CategoryDae';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
 import {CategoriesDae} from './caegories/CategoriesDae';
@@ -42,26 +42,26 @@ export class RelatedDae {
      * @protected
      */
     this._response = response;
-    /**
-     * response.category
-     * @deprecated instead use categories
-     * @type {CategoryDae}
-     * @protected
-     */
-    this._category = new CategoryDae( response.category );
-    // docs には書いてないけど category2 も増やす, 2016-03-13
-    /**
-     * response.category2
-     * @deprecated instead use categories
-     * @from 2016-03-13
-     * @type {CategoryDae}
-     * @protected
-     */
-    this._category2 = new CategoryDae( response.category2 );
-    // docs には書いてないけど配列も増やしとく, 2016-03-13
+    // /**
+    //  * response.category
+    //  * @deprecated instead use categories
+    //  * @type {CategoryDae}
+    //  * @protected
+    //  */
+    // this._category = new CategoryDae( response.category );
+    // // docs には書いてないけど category2 も増やす, 2016-03-13
+    // /**
+    //  * response.category2
+    //  * @deprecated instead use categories
+    //  * @since 2016-03-13
+    //  * @type {CategoryDae}
+    //  * @protected
+    //  */
+    // this._category2 = new CategoryDae( response.category2 );
+    // // docs には書いてないけど配列も増やしとく, 2016-03-13
     /**
      * response.categories
-     * @from 2016-03-13
+     * @since 2016-03-13
      * @type {CategoriesDae}
      * @protected
      */
@@ -95,21 +95,21 @@ export class RelatedDae {
     // 以下仕様追加 from 2016-05-31
     /**
      * response.theme
-     * @from 2016-05-31
+     * @since 2016-05-31
      * @type {ThemeDae}
      * @protected
      */
     this._theme = new ThemeDae( response.theme );
     /**
      * response.banner
-     * @from 2016-05-31
+     * @since 2016-05-31
      * @type {BannersDae}
      * @protected
      */
     this._banner = new BannersDae( response.banner );
     /**
      * response.ad
-     * @from 2016-05-31
+     * @since 2016-05-31
      * @type {AdDae}
      * @protected
      */
@@ -168,22 +168,22 @@ export class RelatedDae {
   get description():string {
     return this.response.description;
   }
-  /**
-   * response.category
-   * @deprecated instead use categories
-   * @return {CategoryDae|*} カテゴリー response.category CategoryDae として返します
-   */
-  get category():CategoryDae {
-    return this._category;
-  }
-  /**
-   * response.category2
-   * @deprecated instead use categories
-   * @return {CategoryDae} カテゴリー2 response.category2 CategoryDae として返します
-   */
-  get category2():CategoryDae {
-    return this._category2;
-  }
+  // /**
+  //  * response.category
+  //  * @deprecated instead use categories
+  //  * @return {CategoryDae|*} カテゴリー response.category CategoryDae として返します
+  //  */
+  // get category():CategoryDae {
+  //   return this._category;
+  // }
+  // /**
+  //  * response.category2
+  //  * @deprecated instead use categories
+  //  * @return {CategoryDae} カテゴリー2 response.category2 CategoryDae として返します
+  //  */
+  // get category2():CategoryDae {
+  //   return this._category2;
+  // }
   /**
    * response.categories
    * @return {CategoriesDae} カテゴリー配列 response.categories を CategoriesDae として返します

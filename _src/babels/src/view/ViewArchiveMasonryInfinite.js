@@ -191,7 +191,7 @@ export class ViewArchiveMasonryInfinite extends View {
   set gaSend( flag:Boolean ):void {
     this._gaSend = flag;
   }
-  // -- @from 2016-06-27
+  // -- @since 2016-06-27
   /**
    * isotope を行う真偽値を取得します
    * @return {boolean} isotope を行う真偽値を返します

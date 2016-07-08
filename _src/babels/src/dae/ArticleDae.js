@@ -15,7 +15,7 @@ import {Safety} from '../data/Safety';
 // util
 import {Format} from '../util/Format';
 // dae
-import {CategoryDae} from './CategoryDae';
+// import {CategoryDae} from './CategoryDae';
 import {MediaDae} from './MediaDae';
 import {UserDae} from './UserDae';
 import {CommentsPopularDae} from './CommentsPopularDae';
@@ -40,31 +40,29 @@ export class ArticleDae {
      * @protected
      */
     this._article = article;
+    // /**
+    //  * article.category
+    //  *
+    //  * @deprecated instead use categories
+    //  * @type {CategoryDae}
+    //  * @protected
+    //  */
+    // this._category = new CategoryDae( article.category );
+    // /**
+    //  * category2 追加になった<br>
+    //  * article.category
+    //  *
+    //  * https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
+    //  *
+    //  * @deprecated instead use categories
+    //  * @since 2016-02-29
+    //  * @type {CategoryDae}
+    //  * @protected
+    //  */
+    // this._category2 = new CategoryDae( article.category2 );
     /**
-     * article.category
-     *
-     * @deprecated instead use categories
-     * @type {CategoryDae}
-     * @protected
-     */
-    this._category = new CategoryDae( article.category );
-    /**
-     * category2 追加になった<br>
-     * article.category
-     *
-     * https://github.com/undotsushin/undotsushin/issues/140#issuecomment-186715283
-     *
-     * @deprecated instead use categories
-     * @from 2016-02-29
-     * @type {CategoryDae}
-     * @protected
-     */
-    this._category2 = new CategoryDae( article.category2 );
-    /**
-     * category, category2 を配列へ<br>
      * article.categories
      *
-     * @todo category, category2 を置き換える
      * @type {CategoriesDae}
      * @protected
      */
@@ -149,23 +147,23 @@ export class ArticleDae {
   get article():Object {
     return this._article;
   }
-  /**
-   * <p>category 情報</p>
-   * @deprecated instead use categories
-   * @return {CategoryDae|*} article.category を返します
-   */
-  get category():CategoryDae {
-    return this._category;
-  }
-  /**
-   * category2 情報<br>
-   * いつの間にか追加になった
-   * @deprecated instead use categories
-   * @return {CategoryDae|*} article.category2 を返します
-   */
-  get category2():CategoryDae {
-    return this._category2;
-  }
+  // /**
+  //  * <p>category 情報</p>
+  //  * @deprecated instead use categories
+  //  * @return {CategoryDae|*} article.category を返します
+  //  */
+  // get category():CategoryDae {
+  //   return this._category;
+  // }
+  // /**
+  //  * category2 情報<br>
+  //  * いつの間にか追加になった
+  //  * @deprecated instead use categories
+  //  * @return {CategoryDae|*} article.category2 を返します
+  //  */
+  // get category2():CategoryDae {
+  //   return this._category2;
+  // }
   /**
    * response.categories を CategoriesDae へ
    * @return {CategoriesDae|*} response.categories を CategoriesDae instance にし返します
@@ -251,7 +249,7 @@ export class ArticleDae {
   // 2016-05-21 added
   /**
    * New Flag, ※現在は常にFlagがたつように30日に設定
-   * @from 2016-05-21
+   * @since 2016-05-21
    * @return {Boolean} New Flag の真偽値を返します
    */
   get isNew():Boolean {
