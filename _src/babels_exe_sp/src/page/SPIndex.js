@@ -19,7 +19,7 @@ let UT = self.UT;
 let Dom = UT.app.Dom;
 
 /**
- * <h3>Home(index)</h3>
+ * <p>Home(index)</p>
  * 全て static です
  */
 export class SPIndex {

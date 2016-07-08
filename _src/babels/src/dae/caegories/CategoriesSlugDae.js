@@ -155,7 +155,7 @@ export class CategoriesSlugDae {
    * - true  : 表示する
    * - false : 表示しない
    * </pre>
-   * @from 2016-06-06
+   * @since 2016-06-06
    * @return {Boolean} iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ（真偽値）を返します
    */
   get isShowFilter():Boolean {

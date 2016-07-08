@@ -25,8 +25,7 @@ import {Safety} from '../data/Safety';
  * <p>Template Pattern として使用し<br>
  * 各 Class で extends して下さい</p>
  *
- * <p>token（認証）が必要な場合は OffsetAuth を使用します</p>
- * @link {OffsetAuth}
+ * <p>token（認証）が必要な場合は {@link OffsetAuth} を使用します</p>
  */
 export class Offset extends Action {
   /**

@@ -203,93 +203,6 @@ export class ViewRanking extends View {
     let categorySlug = this.slug;
     let _this = this;
 
-    // tag block
-    // let RankingDom = React.createClass( {
-    //   propTypes: {
-    //     index: React.PropTypes.number.isRequired,
-    //     id: React.PropTypes.string.isRequired,
-    //     slug: React.PropTypes.string.isRequired,
-    //     category: React.PropTypes.string.isRequired,
-    //     category2: React.PropTypes.string,
-    //     url: React.PropTypes.string.isRequired,
-    //     date: React.PropTypes.string.isRequired,
-    //     title: React.PropTypes.string.isRequired,
-    //     thumbnail: React.PropTypes.string.isRequired,
-    //     empty: React.PropTypes.bool.isRequired,
-    //     total: React.PropTypes.number.isRequired,
-    //     home: React.PropTypes.bool.isRequired,
-    //     detail: React.PropTypes.bool.isRequired,
-    //     thisSlug: React.PropTypes.string.isRequired
-    //   },
-    //   getDefaultPropTypes: function() {
-    //     return {
-    //       category2: ''
-    //     };
-    //   },
-    //   render: function() {
-    //     let p = this.props;
-    //     let n = p.index + 1;
-    //
-    //     let category = ( label ):string => {
-    //       return !label ? '' : <span className="category-label">{label}</span>;
-    //     };
-    //
-    //     let imgStyle = {
-    //       'background': `url(${p.thumbnail}) no-repeat center center`,
-    //       'backgroundSize': 'cover'
-    //     };
-    //
-    //     return (
-    //       <li className={'board-item rank' + n + ' ranking-' + (p.slug || categorySlug)}>
-    //         <a href={p.url} className={'post'} onClick={this.gaSend}>
-    //           <figure className={`post-thumb${ this.props.empty ? '' : ' post-thumb-fill' }`} style={imgStyle}>
-    //             <img src={Empty.THUMB_EMPTY} alt=""/>
-    //             {/*
-    //              https://github.com/undotsushin/undotsushin/issues/468
-    //               1x1 を厳格に守る
-    //             <img src={p.thumbnail} alt={p.title}/>
-    //              */}
-    //           </figure>
-    //           <div className="post-data">
-    //             <p className={'post-category post-category-' + p.slug}>{category(p.category)}{category(p.category2)}</p>
-    //             <h4 className='post-heading'>{p.title}</h4>
-    //             <p className="post-date">{p.date}</p>
-    //           </div>
-    //         </a>
-    //       </li>
-    //     );
-    //   },
-    //   // gaSend: function(e) {
-    //   //   e.preventDefault();
-    //   gaSend: function() {
-    //     if (this.props.home) {
-    //       this.gaHome();
-    //     } else if (this.props.detail) {
-    //       this.gaDetail();
-    //     } else {
-    //       this.gaCategory();
-    //     }
-    //   },
-    //   gaHome: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'home_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
-    //     // ----------------------------------------------
-    //   },
-    //   gaCategory: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', `${this.props.thisSlug}_ranking`, 'click', this.props.url, parseFloat(this.props.id)) );
-    //     // ----------------------------------------------
-    //   },
-    //   gaDetail: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('ViewRanking.render.RankingDom.gaSend', 'detail_ranking', 'click', this.props.url, parseFloat(this.props.id)) );
-    //     // ----------------------------------------------
-    //   }
-    // } );
-
     // React Class
     let ArticleDom = React.createClass( {
       propTypes: {
@@ -305,11 +218,11 @@ export class ViewRanking extends View {
         let detail = this.props.detail;
         let thisSlug = this.props.slug;
         let categoryTitle = '';
-
         let categoryLabel;
         // category api slug が `all` 以外の時に category.label をタイトルに含める
         if ( categorySlug !== 'all' ) {
-          categoryLabel = list[ 0 ].category.label;
+          // categoryLabel = list[ 0 ].category.label;
+          categoryLabel = list[0].categories[0].label;
 
           if ( categoryLabel !== '' ) {
             // category.label が空でなかったら '/' と一緒に加える

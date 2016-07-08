@@ -18,7 +18,9 @@ let _symbol = Symbol();
 // UT
 let UT = self.UT;
 let Dom = UT.app.Dom;
-
+/**
+ * 検索ページ
+ */
 export class Search {
   /**
    * static class です, instance を作成しません

@@ -60,7 +60,7 @@ export class UserDae {
     // from 2016-05-31
     /**
      * user.logo
-     * @from 2016-05-31
+     * @since 2016-05-31
      * @type {LogoDae}
      * @protected
      */

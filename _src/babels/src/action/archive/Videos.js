@@ -10,9 +10,11 @@
  *
  */
 
-
 import {Category} from './Category';
+// data
 import {Safety} from '../../data/Safety';
+// app
+import {ArchiveType} from '../../app/const/ArchiveType';
 
 /**
  * <p>おすすめ動画一覧<p>
@@ -33,7 +35,8 @@ export class Videos extends Category {
   constructor( slug:string = 'all', resolve:Function = null, reject:Function = null ) {
 
     slug = Safety.string( slug, 'all' );
-    super( slug, 'video', resolve, reject );
+    // video
+    super( slug, ArchiveType.VIDEO, resolve, reject );
 
   }
 

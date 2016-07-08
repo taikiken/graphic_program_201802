@@ -19,7 +19,7 @@ let UT = self.UT;
 let Dom = UT.app.Dom;
 
 /**
- * <h3>category 一覧</h3>
+ * <p>category 一覧</p>
  * 全て static です
  */
 export class SPCategory {

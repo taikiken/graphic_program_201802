@@ -45,7 +45,7 @@ let ReactDOM = self.ReactDOM;
  * SP category 一覧を表示します<br>
  * 広告をAPIでコントロール可能にします
  *
- * @from 2016-06-06
+ * @since 2016-06-06
  */
 export class SPViewCategoryWithSlug extends SPViewCategory {
   /**

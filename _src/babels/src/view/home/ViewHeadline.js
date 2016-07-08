@@ -180,7 +180,7 @@ export class ViewHeadline extends View {
         index: React.PropTypes.number.isRequired,
         id: React.PropTypes.string.isRequired,
         slug: React.PropTypes.string.isRequired,
-        // @from 2016-06-27 categories へ切替
+        // @since 2016-06-27 categories へ切替
         // category: React.PropTypes.string.isRequired,
         // category2: React.PropTypes.string,
         categories: React.PropTypes.array.isRequired,

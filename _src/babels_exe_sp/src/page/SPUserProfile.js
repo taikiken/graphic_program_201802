@@ -17,6 +17,9 @@ let _symbol = Symbol();
 let UT = self.UT;
 let Dom = UT.app.Dom;
 
+/**
+ * マイページ
+ */
 export class SPUserProfile {
   /**
    * static class です, instance を作成しません

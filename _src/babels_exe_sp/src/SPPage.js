@@ -44,6 +44,12 @@ let _tween = null;
 let UT = self.UT;
 let Dom = UT.app.Dom;
 
+/**
+ * <p>ページ振り分けを行います</p>
+ * <p>UT.app.Router instance を作成し routing を監視します<br>
+ * url に沿ったページ作成 Class をコールします</p>
+ * 全て static です
+ */
 export class SPPage {
   /**
    * static class です, instance を作成しません
