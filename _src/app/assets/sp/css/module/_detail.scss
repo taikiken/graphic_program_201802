@@ -571,9 +571,22 @@
       }
     } // .post-sns-pr
   } // at-root
+}// post-detail
+
+// category-label
+// https://github.com/undotsushin/undotsushin/issues/913
+// SP版に限り、カテゴリー複数指定あり記事のカテゴリー表示に余白つける
+.post-category {
+  .category-label-wrapper {
+    .category-label {
+      margin-left: 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
 }
-
-
 
 
 
