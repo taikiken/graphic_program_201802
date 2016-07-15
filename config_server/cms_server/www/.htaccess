@@ -15,6 +15,12 @@ php_value mbstring.http_output UTF-8
 php_value error_reporting 6133
 
 
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin https://imasdk.googleapis.com
+    Header set Access-Control-Allow-Credentials true
+</IfModule>
+
+
 # for Slim - /app/Slim
 # ==============================
 #RewriteEngine On
