@@ -1,0 +1,39 @@
+php_flag magic_quotes_gpc off
+php_flag register_global off
+php_flag display_errors off
+php_value upload_max_filesize '20M'
+php_value session.auto_start 1
+php_value session.use_cookies 1
+php_value session.cookie_lifetime 2592000
+php_value session.gc_maxlifetime 2592000
+php_value session.save_path '/tmp'
+php_value include_path '/var/www/undotsushin.com/www/include'
+php_value auto_prepend_file 'prependfile/inc.php'
+php_value mbstring.language Japanese
+php_value mbstring.internal_encoding UTF-8
+php_value mbstring.http_output UTF-8
+php_value error_reporting 6133
+
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin https://imasdk.googleapis.com
+    Header set Access-Control-Allow-Credentials true
+</IfModule>
+
+
+# for Slim - /app/Slim
+# ==============================
+#RewriteEngine On
+#RewriteBase /
+#DirectorySlash On
+
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC,OR]
+#RewriteCond %{HTTP_HOST} ^undotsushin.com$
+#RewriteRule ^(.*)$ https://www.undotsushin.com/$1 [R,L]
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^ index.php [QSA,L]
