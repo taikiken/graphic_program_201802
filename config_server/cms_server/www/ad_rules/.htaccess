@@ -1,4 +1,3 @@
-# http  => http://imasdk.googleapis.com
-# https => https://imasdk.googleapis.com
-Header set Access-Control-Allow-Origin https://imasdk.googleapis.com
+# imasdk.googleapis.com へのアクセスを許可する http / https両方を許可したいので `*` で指定
+Header set Access-Control-Allow-Origin *
 Header set Access-Control-Allow-Credentials true

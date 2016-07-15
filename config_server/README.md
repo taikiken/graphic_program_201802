@@ -11,22 +11,10 @@
 
 ## /public/ad_rules/.htaccess
 
-動画広告でミッド / ポストの再生には imasdk.googleapis.com への接続が必要になります。環境にあわせて以下の `.htaccess` の内容にしてください。
-
-### http環境の場合
+動画広告でミッド / ポストの再生には imasdk.googleapis.com への接続が必要になります。
 
 ```
-# http  => http://imasdk.googleapis.com
-# https => https://imasdk.googleapis.com
-Header set Access-Control-Allow-Origin https://imasdk.googleapis.com
-Header set Access-Control-Allow-Credentials true
-```
-
-### https環境の場合
-
-```
-# http  => http://imasdk.googleapis.com
-# https => https://imasdk.googleapis.com
-Header set Access-Control-Allow-Origin http://imasdk.googleapis.com
+# imasdk.googleapis.com へのアクセスを許可する http / https両方を許可したいので `*` で指定
+Header set Access-Control-Allow-Origin *
 Header set Access-Control-Allow-Credentials true
 ```
