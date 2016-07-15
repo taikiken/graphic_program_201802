@@ -1,0 +1,4 @@
+# http  => http://imasdk.googleapis.com
+# https => https://imasdk.googleapis.com
+Header set Access-Control-Allow-Origin https://imasdk.googleapis.com
+Header set Access-Control-Allow-Credentials true
