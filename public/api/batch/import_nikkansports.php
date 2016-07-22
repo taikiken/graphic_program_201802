@@ -98,6 +98,11 @@ for($i=0;$i<count($data);$i++){
 		}
 	}
 	
+	//リオ五輪期間のみ
+	if((preg_match("/五輪・/",$keyword)&&!preg_match("/一般ニュース/",$keyword))||preg_match("/五輪コラム/",$keyword)){
+		$s["m2"]=141;
+	}
+	
 	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data[$i]["id"]);
 	$o->query($sql);
 	$f=$o->fetch_array();

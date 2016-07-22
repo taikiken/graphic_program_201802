@@ -68,6 +68,11 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}
+	
+	//リオ五輪期間のみ
+	if(preg_match("/リオ五輪/",$data["channel"]["item"][$i]["keyword"])){
+		$s["m2"]=141;
+	}
 
 	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
