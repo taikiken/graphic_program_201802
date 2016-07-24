@@ -23,7 +23,17 @@ rules:
   no-alert: 1
   no-array-constructor: 2
   no-caller: 2
-  no-console: 0
+#  no-console: 0
+  # -------------------------------------------------------------
+  # @modify 2016-07-24
+  # -------------------------------------------------------------
+  # http://eslint.org/docs/rules/no-console
+  # console.warn, console.error は許可
+  no-console:
+    - 1
+    - allow:
+      - warn
+      - error
   no-delete-var: 2
   # no-empty-label removed, replace no-labels. http://eslint.org/docs/rules/no-empty-label
   # no-empty-label: 2
