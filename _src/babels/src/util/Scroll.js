@@ -162,7 +162,7 @@ export class Scroll extends EventDispatcher {
           y: 0,
           autoKill: autoKill,
           onAutoKill: function() {
-            console.log( 'onAutoKill', complete );
+            // console.log( 'onAutoKill', complete );
             if ( typeof complete === 'function' ) {
               complete.call( this );
             }

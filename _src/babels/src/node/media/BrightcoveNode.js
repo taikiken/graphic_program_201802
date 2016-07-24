@@ -223,7 +223,7 @@ export let BrightcoveNode = React.createClass( {
     ima3.serverUrl = vast !== '' ? vast + Date.now() : '';
     // ima3.serverUrl = 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=' + Date.now() + '[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1';
 
-    console.log( 'vast', ima3.serverUrl );
+    // console.log( 'vast', ima3.serverUrl );
     // if ( vast !== '' ) {
     //   ima3.serverUrl = vast + Date.now();
     // }
