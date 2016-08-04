@@ -9,7 +9,7 @@ if(preg_match("/cms/",$servername)){
 	$server[]="52.192.238.87";
 	$server[]="52.193.228.54";
 }elseif(preg_match("/(dev|dev2|stg)/",$servername)){
-	$server[]="52.69.203.137";
+	$server[]="dev.undotsushin.com";
 }else{
 	$server[]="localhost";
 }

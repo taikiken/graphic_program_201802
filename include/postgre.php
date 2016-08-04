@@ -29,11 +29,12 @@ class db{
 
 	function query($s){
 		
-		global $SQLLOG;		
-
+		/*
+		global $SQLLOG;
 		$fp=fopen($SQLLOG,"a");
 		fputs($fp,date("Y-m-d H:i:s")."\n".preg_replace("/(\r|\n|\t)/"," ",$s)."\n");
 		fclose($fp);
+		*/
 		
 		return $this->rsc=pg_exec($s);
 	}

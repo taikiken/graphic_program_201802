@@ -279,7 +279,7 @@ function makeTextAreaCell($a,$b,$c,$d,$e,$f){
 function makeTextAreaConf($a,$b,$c,$d,$e){
 	
 	global $LANG;
-	echo sprintf("<tr class=\"%s\"><td class=\"confTitle\">%s</td><td class=\"confFields\">",$b,$a);
+	echo sprintf("<tr class=\"%s\"><td class=\"confTitle\"><div class=\"cms_widget\">%s</div></td><td class=\"confFields\">",$b,$a);
 	if($e==0){
 		$f=$d[$c.$b];
 		if(strlen($f)>0){

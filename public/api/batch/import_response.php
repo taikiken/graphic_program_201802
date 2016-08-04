@@ -3,6 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=16;
+
 function modhtmltag($s){
 	$s=str_replace("\n","<br>",$s);
 	$s=strip_tags($s,"<br>");
@@ -67,7 +69,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 		}
 	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$s["t7"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -92,7 +94,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 	}else{
 
 	  $s["d1"]=3;
-	  $s["d2"]=16; // Response
+	  $s["d2"]=$MEDIAID;
 	  $s["m1"]=125; // モータースポーツ
 	  $s["flag"]=1;
 	  $s["cid"]=1;

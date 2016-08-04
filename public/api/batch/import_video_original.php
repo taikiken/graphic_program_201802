@@ -16,7 +16,7 @@ while($f=$o->fetch_array()){
 
 	$img=strlen($f["img1"])==0?sprintf(",img1='%s'",outimg(sprintf("%s/%s/%s/%s.jpg",$imgpath,$bucket,$f["filename"],$f["filename"]))):"";
 
-	$s[]=sprintf("update repo_n set flag=1,u_time=now()%s where id=%s;",$img,$f["uid"]);
+	$s[]=sprintf("update repo_n set u_time=now()%s where id=%s;",$img,$f["uid"]);
 	$s[]=sprintf("update u_encoded set flag=0,u_time=now() where id=%s;",$f["id"]);
 }
 

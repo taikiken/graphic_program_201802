@@ -94,7 +94,7 @@ if(strlen($api)>0){
 
 			if ( $category === 'crazy' ){
 				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
-				$nsql="select count(id) as n from u_headline where cid=8 and flag=1";
+				$nsql="select count(id) as n from u_headline where cid=11 and flag=1";
 			}else{
 				
 			}

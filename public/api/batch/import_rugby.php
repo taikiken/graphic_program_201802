@@ -3,6 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=9;
+
 function modhtmltag($s){
 	
 	$caption="";
@@ -87,7 +89,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	unset($sqla);
 	
-	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -111,7 +113,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		if($data["channel"]["item"][$i]["status"]==1){
 			
 			$s["d1"]=3;
-			$s["d2"]=9; // ラグビー共和国
+			$s["d2"]=$MEDIAID;
 			$s["m1"]=120; // ラグビー
 			$s["m4"]=$mtype;
 			$s["flag"]=1;

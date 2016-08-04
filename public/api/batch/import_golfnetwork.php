@@ -3,6 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=18;
+
 $o=new db;
 $o->connect();
 
@@ -56,7 +58,7 @@ while(list($k,$v)=each($data)){
 			$s["t30"]=$d[$i]["enclosure"]["@attributes"]["url"];
 		}
 
-		$sql=sprintf("select * from repo_n where t7='%s'",$s["t7"]);
+		$sql=sprintf("select * from repo_n where d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 		$o->query($sql);
 		$f=$o->fetch_array();
 		
@@ -76,7 +78,7 @@ while(list($k,$v)=each($data)){
 			}
 		}else{	
 			$s["d1"]=3;
-			$s["d2"]=18;
+			$s["d2"]=$MEDIAID;
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";
