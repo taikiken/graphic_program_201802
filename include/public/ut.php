@@ -344,12 +344,13 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$type:0 記事一覧　$type:1 記事詳細
 	*/
 	
-	global $ImgPath,$domain,$ad,$mediaoption;
+	global $ImgPath,$domain,$ad,$mediaoption,$videopath;
 
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
 	
-	$body=preg_replace("/\n/","",$f["body"]);
+	//$body=preg_replace("/\n/","",$f["body"]);
+	$body=$f["body"];
 	
 	$s["id"]=(int)$f["id"];
 	$s["date"]=$datetime["isotime"];
@@ -402,8 +403,8 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["media"]["video"]["player"]=$video;
 	
 	//$s["media"]["video"]["url"]="";
-	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("https://video%s.undotsushin.com/%s/%s/sd/%s.m3u8",$mediaoption[$f["d2"]]["geoblock"]==0?"":"-jp",$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
-	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("https://video%s.undotsushin.com/%s/%s/hd/%s.m3u8",$mediaoption[$f["d2"]]["geoblock"]==0?"":"-jp",$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
+	$s["media"]["video"]["url"]["sd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/sd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
+	$s["media"]["video"]["url"]["hd"]=strlen($f["video"])>0?sprintf("%s/%s/%s/hd/%s.m3u8",str_replace("video",$mediaoption[$f["d2"]]["geoblock"]==0?"video":"video-jp",$videopath),$mediaoption[$f["d2"]]["bucket"],$f["video"],$f["video"]):"";
 	
 	$s["media"]["video"]["youtube"]=checkstr($f["youtube"],1);
 	$s["media"]["video"]["facebook"]=checkstr($f["facebook"],1);
@@ -627,7 +628,7 @@ function auth(){
 		$o->query($sql);
 		$f=$o->fetch_array();
 	}
-	debug($token["oautn_token"],$f["id"]);
+	//debug($token["oautn_token"],$f["id"]);
 	return isset($f["id"])?$f["id"]:"";
 }
 
@@ -729,6 +730,10 @@ function bind($v){
 }
 function get_summary($description,$body){
 	$s="";
+	
+	$description=strip_tags($description);
+	$body=strip_tags($body);
+	
 	if(strlen($description)>0){
 		$s=$description;
 	}else{

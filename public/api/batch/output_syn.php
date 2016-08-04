@@ -43,7 +43,7 @@ select
 	flag
 from repo_n
 	where
-d2=1 and u_time > now() - interval '1 day' order by u_time desc
+d2=1 and (m1=141 or m1=136 or m2=141 or m2=136) and u_time > now() - interval '1 day' order by u_time desc
 ";
 $o->query($sql);
 
@@ -68,7 +68,7 @@ $f["m1"]!=141?sprintf("<category id=\"%s\" title=\"%s\" />",$f["m1"],$f["categor
 $f["d2"],$f["media"],
 preg_replace("(\r|\n)","",$f["body"]),
 maketag(array($f["t10"],$f["t11"],$f["t12"],$f["t13"],$f["t14"],$f["t15"])),
-strlen($f["img1"])?sprintf("\n<enclosure url=\"https://www.undotsushin.com/prg_img/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$f["img1"],mod_HTML($f["t1"])):"",
+strlen($f["img1"])?sprintf("\n<enclosure url=\"https://www.undotsushin.com/prg_img/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$f["img1"],mod_HTML($f["t1"])):sprintf("\n<enclosure url=\"https://www.undotsushin.com/prg_img/raw/%s\" type=\"image/jpeg\" caption=\"運動通信\" />",sprintf("0%s.jpg",$f["id"]%7+1)),
 $f["flag"],
 date(DATE_RFC822,strtotime($f["m_time"])),
 date(DATE_RFC822,strtotime($f["u_time"]))

@@ -3,6 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=4;
+
 $o=new db;
 $o->connect();
 
@@ -53,7 +55,7 @@ while($f=fgetcsv($fp,1024)){
 		$s["id"]="nextval('repo_n_id_seq')";
 		$s["m1"]=130;
 		$s["d1"]=3;
-		$s["d2"]=4;
+		$s["d2"]=$MEDIAID;
 		$s["m4"]=131;
 		$s["flag"]=1;
 		$s["cid"]=1;

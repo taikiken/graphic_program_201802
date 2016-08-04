@@ -3,8 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
-$MEDIAID=20;
-$rssfile="http://full-count.jp/fineplay-feed/";
+$MEDIAID=24;
+$rssfile="http://timely-web.jp/feed/undo.xml";
 
 $o=new db;
 $o->connect();
@@ -34,7 +34,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 
 	$keyword=key_merge($data["channel"]["item"][$i]["keyword"]);
 	$s["keyword"]=$keyword;
-
+	
 	$tag=categorymatching($exword,$keyword);
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
@@ -61,7 +61,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 				unset($s["m1"]);
 				splittime($s["m_time"],$s["a_time"]);
 				$sqla[]=makesql($s,$f["id"]);
-				$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
+				$sqla[]=sprintf("update repo_body set body='<p>%s</p>' where pid=%s;",$modbody,$f["id"]);
 				$sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"],$f["id"]);
 			}
 		}elseif($data["channel"]["item"][$i]["status"]==0){
@@ -72,7 +72,10 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
-			$s["m1"]=!preg_match("/高校野球/")?113:136;
+			$s["m1"]=113;
+			if(preg_match("/高校野球/",$s["keyword"]))$s["m2"]=136;
+			elseif(preg_match("/高校野球/",$s["title"]))$s["m2"]=136;
+			elseif(preg_match("/センバツ/",$s["title"]))$s["m2"]=136;
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";

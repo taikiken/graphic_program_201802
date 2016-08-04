@@ -3,6 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=2;
+
 $o=new db;
 $o->connect();
 
@@ -100,10 +102,10 @@ for($i=0;$i<count($data);$i++){
 	
 	//リオ五輪期間のみ
 	if((preg_match("/五輪・/",$keyword)&&!preg_match("/一般ニュース/",$keyword))||preg_match("/五輪コラム/",$keyword)){
-		$s["m2"]=141;
+		if($s["m1"]!=141)$s["m2"]=141;
 	}
 	
-	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data[$i]["id"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data[$i]["id"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -127,7 +129,7 @@ for($i=0;$i<count($data);$i++){
 	}else{
 			
 		$s["d1"]=3;
-		$s["d2"]=2; /* 日刊スポーツ */
+		$s["d2"]=$MEDIAID;
 		$s["m4"]=$data[$i]["media"]=="flash"?131:132; /* 速報 */
 		$s["flag"]=1;
 		$s["cid"]=1;
