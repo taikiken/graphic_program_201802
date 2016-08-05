@@ -25,7 +25,7 @@
 <script src="/assets/vk_brightcove/js/Player.js"></script>
 <script type="text/javascript">
   videojs('ABCplayer').PlayerControl({
-    "videoId" : "<?php echo $page['post']['media_vk_refid']; ?>_hls",
+    "videoId" : "<?php echo $page['post']['media_vk_refid']; ?>",
     //"videoId" : "koya98_homerun1_hls",
     "stillImageUrl" : "<?php echo $page['post']['media']['images']['large']; ?>",
     //"stillImageUrl" : "",
