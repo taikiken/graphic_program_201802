@@ -268,16 +268,21 @@ export let BrightcoveNode = React.createClass( {
       player.on( 'play', this.onPlay );
       // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
       // 再生・終了でトラッキングする必要が出たので有効にします
-      // @from 2016-06-22
+      // @since 2016-06-22
       player.on( 'pause', this.onPause );
       player.on( 'ended', this.onEnd );
 
+      // auto start すると Chrome で error が出力される
+      // undefined:1 Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause().
+      // https://github.com/google/blockly/issues/299
+      // Chrome 特有の bug らしい
+
       // @since PC 2016-08-05 PC 自動再生
       if ( !isPhone ) {
-        // play video
-        player.play();
-        // play button 非表示
-        this.setState( { showPlay: false } );
+        // 一瞬 brightcove オリジナルのプレイボタンが表示されたり、本編再生が始まったりするので遅延させてみた
+        // 何も変わらないので元に戻します
+        // setTimeout( () => this.autoStart( player ), 25);
+        this.autoStart( player );
       }
 
     } );
@@ -291,6 +296,15 @@ export let BrightcoveNode = React.createClass( {
     }
 
     this.player = player;
+  },
+  // -------------------------------------------
+  autoStart: function( player ) {
+    // play video
+    player.play();
+    // play button 非表示
+    this.setState( { showPlay: false } );
+    // 再生開始でコントロール表示
+    player.controls( true );
   },
   // -------------------------------------------
   // brightcove player event handlers
