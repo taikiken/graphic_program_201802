@@ -20,13 +20,15 @@
 </div>
 
 <script src="//players.brightcove.net/4802324450001/rJIcYM98_default/index.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/assets/vk_brightcove/js/bc-mapi.js"></script>
 <script src="/assets/vk_brightcove/js/Player.js"></script>
 <script type="text/javascript">
   videojs('ABCplayer').PlayerControl({
-    "videoId" : "<?php echo $page['post']['media_vk_refid']; ?>",
-    // ex. "videoId" : "koya98_dance_15s_hls",
+    "videoId" : "<?php echo $page['post']['media_vk_refid']; ?>_hls",
+    //"videoId" : "koya98_homerun1_hls",
     "stillImageUrl" : "<?php echo $page['post']['media']['images']['large']; ?>",
+    //"stillImageUrl" : "",
     "autoPlay" : true,
     "showRelatedVideos" : true,
     "relatedVideosTags": ['koya98_other'],
