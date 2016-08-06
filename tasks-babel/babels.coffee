@@ -59,6 +59,7 @@ gulp.task 'babels:eslint', ->
   .pipe $.eslint useEslintrc: true
   .pipe $.eslint.format()
   .pipe $.eslint.failAfterError()
+  .pipe $.size title: '*** babels:eslint ***'
 
 # babel
 gulp.task 'babels:babel', ->
