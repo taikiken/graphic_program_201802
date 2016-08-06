@@ -95,92 +95,99 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     // eof: 記事詳細: sp
     // ---------------------------------------------------- ?>
     <div class="main-sec">
+
       <?php
-      $post_kv_class = '';
-      if ( $page['post']['media_type'] === 'video' ) {
-        $post_kv_class .= ' post-video-kv';
+      // #985 - バーチャル高校野球動画記事の場合
+      if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
+        include_once __DIR__."/specific/_vk_brightcove.php";
+      else :
+        $post_kv_class = '';
+        if ( $page['post']['media_type'] === 'video' ) {
+          $post_kv_class .= ' post-video-kv';
 
-        if ( $page['post']['media']['video']['player'] == 'facebook' ) {
-          $post_kv_class .= ' post-video-fb';
-        } elseif ( $page['post']['media']['video']['player'] == 'youtube' ) {
-          $post_kv_class .= ' post-video-yt';
-        } elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) {
-          $post_kv_class .= ' phone-post-kv';
+          if ( $page['post']['media']['video']['player'] == 'facebook' ) {
+            $post_kv_class .= ' post-video-fb';
+          } elseif ( $page['post']['media']['video']['player'] == 'youtube' ) {
+            $post_kv_class .= ' post-video-yt';
+          } elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) {
+            $post_kv_class .= ' phone-post-kv';
+          }
         }
-      }
-      ?>
-      <div class="post-kv<?php echo $post_kv_class; ?>" style="position:relative;">
-        <?php if ( $page['post']['media_type'] === 'video' ) :
-          // -------------------------- [メインビジュアル] --------------------------
-          // ========= video ?>
-          <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) :
-            // ---------- {facebook} ?>
-            <div className="post-kv post-video-kv post-video-fb">
-              <div class="fb-video" data-href="<?php echo $page['post']['media']['video']['facebook']; ?>" data-allowfullscreen="true" data-width="500"></div>
-            </div>
-          <?php elseif ( $page['post']['media']['video']['player'] == 'youtube' ) :
-            // ---------- {youtube} ?>
-            <img class="yt-video-size" src="/assets/images/common/thumb-16x9.png" alt="">
-            <iframe class="yt-video" width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen style="width:100%;"></iframe>
+        ?>
+        <div class="post-kv<?php echo $post_kv_class; ?>" style="position:relative;">
+          <?php if ( $page['post']['media_type'] === 'video' ) :
+            // -------------------------- [メインビジュアル] --------------------------
+            // ========= video ?>
+            <?php if ( $page['post']['media']['video']['player'] == 'facebook' ) :
+              // ---------- {facebook} ?>
+              <div className="post-kv post-video-kv post-video-fb">
+                <div class="fb-video" data-href="<?php echo $page['post']['media']['video']['facebook']; ?>" data-allowfullscreen="true" data-width="500"></div>
+              </div>
+            <?php elseif ( $page['post']['media']['video']['player'] == 'youtube' ) :
+              // ---------- {youtube} ?>
+              <img class="yt-video-size" src="/assets/images/common/thumb-16x9.png" alt="">
+              <iframe class="yt-video" width="640" height="360" src="https://www.youtube.com/embed/<?php echo $page['post']['media']['video']['youtube']; ?>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen style="width:100%;"></iframe>
 
-          <?php elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) :
-            // ---------- {brightcove} ?>
-            <div class="video-container">
-              <img class="phone-video-guide" src="/assets/images/common/thumb-16x9.png" alt="">
-              <video
-                id="webview-brightcove"
-                data-account="3948005094001"
-                data-player="rJL6q0az"
-                data-embed="default"
-                class="video-js"
-                preload="auto"
-                controls
-              >
-              </video>
-            </div>
-          <?php endif; ?>
-
-          <?php if ( $page['post']['media']['video']['caption'] ) : ?>
-            <figcaption class="caption">
-              <?php echo $page['post']['media']['video']['caption']; ?>
-            </figcaption>
-          <?php endif; ?>
-
-        <?php else :
-        // ========= not video ?>
-          <?php
-          if ($page['post']['is_show_image']) :
-            $post_kv_img = '';
-            // original から large と medium と順に探していく
-            if ($page['post']['media']['images']['original']) {
-
-              $post_kv_img = $page['post']['media']['images']['original'];
-
-            } elseif ($page['post']['media']['images']['large']) {
-
-              $post_kv_img = $page['post']['media']['images']['large'];
-
-            } elseif ($page['post']['media']['images']['medium']) {
-
-              $post_kv_img = $page['post']['media']['images']['medium'];
-            }
-          ?>
-            <?php if ($post_kv_img) :
-            // ========= image ?>
-              <figure class="post-single-figure">
-                <img src="<?php echo $post_kv_img; ?>" class="post-single-image" />
-                <?php if ( $page['post']['media']['images']['caption'] ) : ?>
-                  <figcaption class="caption">
-                    <?php echo $page['post']['media']['images']['caption']; ?>
-                  </figcaption>
-                <?php endif; ?>
-              </figure>
+            <?php elseif ( $page['post']['media']['video']['player'] == 'brightcove' ) :
+              // ---------- {brightcove} ?>
+              <div class="video-container">
+                <img class="phone-video-guide" src="/assets/images/common/thumb-16x9.png" alt="">
+                <video
+                  id="webview-brightcove"
+                  data-account="3948005094001"
+                  data-player="rJL6q0az"
+                  data-embed="default"
+                  class="video-js"
+                  preload="auto"
+                  controls
+                >
+                </video>
+              </div>
             <?php endif; ?>
-        <?php
-          endif;// $page['post']['is_show_image']
-        // -------------------------- [/メインビジュアル] --------------------------
-        endif; ?>
-      </div><?php //.post-kv ?>
+
+            <?php if ( $page['post']['media']['video']['caption'] ) : ?>
+              <figcaption class="caption">
+                <?php echo $page['post']['media']['video']['caption']; ?>
+              </figcaption>
+            <?php endif; ?>
+
+          <?php else :
+          // ========= not video ?>
+            <?php
+            if ($page['post']['is_show_image']) :
+              $post_kv_img = '';
+              // original から large と medium と順に探していく
+              if ($page['post']['media']['images']['original']) {
+
+                $post_kv_img = $page['post']['media']['images']['original'];
+
+              } elseif ($page['post']['media']['images']['large']) {
+
+                $post_kv_img = $page['post']['media']['images']['large'];
+
+              } elseif ($page['post']['media']['images']['medium']) {
+
+                $post_kv_img = $page['post']['media']['images']['medium'];
+              }
+            ?>
+              <?php if ($post_kv_img) :
+              // ========= image ?>
+                <figure class="post-single-figure">
+                  <img src="<?php echo $post_kv_img; ?>" class="post-single-image" />
+                  <?php if ( $page['post']['media']['images']['caption'] ) : ?>
+                    <figcaption class="caption">
+                      <?php echo $page['post']['media']['images']['caption']; ?>
+                    </figcaption>
+                  <?php endif; ?>
+                </figure>
+              <?php endif; ?>
+          <?php
+            endif;// $page['post']['is_show_image']
+          // -------------------------- [/メインビジュアル] --------------------------
+          endif; ?>
+        </div><?php //.post-kv ?>
+      <?php endif; ?>
+
       <div class="post-detail">
         <div class="post-heading">
           <h1>

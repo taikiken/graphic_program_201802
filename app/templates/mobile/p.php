@@ -21,7 +21,13 @@
 
     <section class="main-sec">
 
-      <div id="single-visual-container"></div>
+        <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
+          // #985 - バーチャル高校野球動画記事の場合
+          include_once __DIR__."/../specific/_vk_brightcove.php";
+        else :
+          // 通常画像 or 動画 ?>
+          <div id="single-visual-container"></div>
+        <?php endif; ?>
 
       <div class="post-detail">
 
