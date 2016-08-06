@@ -113,8 +113,10 @@ export let BrightcoveNode = React.createClass( {
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
 
+    const phone = this.phone;
+
     let guide = () => {
-      if ( this.phone ) {
+      if ( phone ) {
         return <img className="phone-video-guide" src={Empty.VIDEO_THUMBNAIL} alt=""/>;
       } else {
         return null;
@@ -135,6 +137,7 @@ export let BrightcoveNode = React.createClass( {
             height={`${height}px`}
             controls
             ref="video"
+            autoplay
           />
           <VideoPlayNode
             playImage={this.props.playImage}
@@ -193,12 +196,14 @@ export let BrightcoveNode = React.createClass( {
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
     this.url = url;
 
+    const isPhone = this.phone;
+
     // let vast = video.vast;
 
     // 動画プレイヤー / VASTをPC/SP&APPで分ける #822
     // https://github.com/undotsushin/undotsushin/issues/822
     // @since 2016-06-20
-    let vast = this.phone ? video.adUrl.sp : video.adUrl.pc;
+    let vast = isPhone ? video.adUrl.sp : video.adUrl.pc;
 
     let ima3 = {
       adTechOrder: [
@@ -215,6 +220,12 @@ export let BrightcoveNode = React.createClass( {
       timeout: Brightcove.TIMEOUT
     };
 
+    // @since PC 2016-08-05 PC 自動再生
+    // https://support.brightcove.com/ja/video-cloud/サポートドキュメント/プレーヤーの構成パラメーター
+    // https://support.brightcove.com/ja/video-cloud/サポートドキュメント/既知の問題
+    // HTML5 モードでは autoStart 設定パラメーターは無効になる。HTML5 モードのプレーヤーでは、autoStart 設定パラメーターは無視されます（BC-25554）。
+    // vast = `${vast}&autoStart=true`;
+
     // AD test code
     // "AdError 1005: The provided ad type: skippablevideo is not supported."
     // vast = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
@@ -223,7 +234,7 @@ export let BrightcoveNode = React.createClass( {
     ima3.serverUrl = vast !== '' ? vast + Date.now() : '';
     // ima3.serverUrl = 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=' + Date.now() + '[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1';
 
-    console.log( 'vast', ima3.serverUrl );
+    // console.log( 'vast', ima3.serverUrl );
     // if ( vast !== '' ) {
     //   ima3.serverUrl = vast + Date.now();
     // }
@@ -243,7 +254,7 @@ export let BrightcoveNode = React.createClass( {
       // https://github.com/undotsushin/undotsushin/issues/616#issuecomment-229638787
       // 初めは非表示
       // https://github.com/undotsushin/undotsushin/issues/616#issuecomment-229847018
-      if ( !this.phone ) {
+      if ( !isPhone ) {
         player.controls( false );
       }
 
@@ -257,13 +268,26 @@ export let BrightcoveNode = React.createClass( {
       player.on( 'play', this.onPlay );
       // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
       // 再生・終了でトラッキングする必要が出たので有効にします
-      // @from 2016-06-22
+      // @since 2016-06-22
       player.on( 'pause', this.onPause );
       player.on( 'ended', this.onEnd );
 
+      // auto start すると Chrome で error が出力される
+      // undefined:1 Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause().
+      // https://github.com/google/blockly/issues/299
+      // Chrome 特有の bug らしい
+
+      // @since PC 2016-08-05 PC 自動再生
+      if ( !isPhone ) {
+        // 一瞬 brightcove オリジナルのプレイボタンが表示されたり、本編再生が始まったりするので遅延させてみた
+        // 何も変わらないので元に戻します
+        // setTimeout( () => this.autoStart( player ), 25);
+        this.autoStart( player );
+      }
+
     } );
 
-    if ( this.phone ) {
+    if ( isPhone ) {
       player.width( '100%', false );
       player.height( 'auto', false );
       // https://github.com/undotsushin/undotsushin/issues/885#issuecomment-230741785
@@ -272,6 +296,15 @@ export let BrightcoveNode = React.createClass( {
     }
 
     this.player = player;
+  },
+  // -------------------------------------------
+  autoStart: function( player ) {
+    // play video
+    player.play();
+    // play button 非表示
+    this.setState( { showPlay: false } );
+    // 再生開始でコントロール表示
+    player.controls( true );
   },
   // -------------------------------------------
   // brightcove player event handlers
