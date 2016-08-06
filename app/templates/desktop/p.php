@@ -111,9 +111,22 @@ endif;
         </div>
         <?php endif; ?>
 
+        <?php // #985 - バーチャル高校野球動画記事の場合 ?>
+        <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) : ?>
 
-        <?php /* div.post-kv */ ?>
+        <div class="post-content">
+          <div class="cms_widget">
+            <?php include_once __DIR__."/../specific/_vk_brightcove.php"; ?>
+          </div>
+        </div>
+
+        <?php else : ?>
+
+        <?php /* 通常画像 or 動画 div.post-kv */ ?>
         <div id="single-visual-container"></div>
+
+        <?php endif; ?>
+
 
         <div class="post-content">
         <?php if ( $page['post']['is_readmore'] ) : ?>

@@ -77,9 +77,14 @@ sc5-guide
 # ------------
 *.css.map
 
-# public assets all
+# public assets gulp build files
 # ------------
-public/assets
+public/assets/.version
+public/assets/css/
+public/assets/fonts/
+public/assets/images/
+public/assets/js/
+public/assets/sp/
 
 # 開発 css 出力 directory
 # ------------
