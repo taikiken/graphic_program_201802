@@ -9,6 +9,7 @@ $container['notFoundHandler'] = function ($c) use ($app) {
 
     $args['page'] = $app->model->set(array(
       'title'    => '404 Not Found',
+      'og_title' => '404 Not Found | 運動通信',
       'template' => 404,
     ));
 
