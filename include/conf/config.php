@@ -30,6 +30,7 @@ unset($s);
 
 //ウィジェット系ビデオかどうか判定
 $VIDEOTAG[]="eplayer.js";
+$VIDEOTAG[]="brightcove";
 
 $file=sprintf("%s/api/ver1/static/media.dat",$SERVERPATH);
 $mediaoption=unserialize(file_get_contents($file));

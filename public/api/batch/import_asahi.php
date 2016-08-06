@@ -3,6 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=1;
+
 /* 131:速報, 132:朝刊 */
 
 if($_GET["p"]==1){
@@ -68,8 +70,13 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}
+	
+	//リオ五輪期間のみ
+	if(preg_match("/リオ五輪/",$data["channel"]["item"][$i]["keyword"])){
+		if($s["m1"]!=141)$s["m2"]=141;
+	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -96,7 +103,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		if($data["channel"]["item"][$i]["status"]==1){
 			
 			$s["d1"]=3;
-			$s["d2"]=1; /* 朝日新聞 */
+			$s["d2"]=$MEDIAID;
 			$s["m4"]=$mtype;
 			$s["flag"]=1;
 			$s["cid"]=1;

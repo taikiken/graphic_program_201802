@@ -154,6 +154,29 @@ function eximg($img1,$img2){
 	return (binary)file_get_contents($img1,FILE_BINARY)===(binary)file_get_contents($img2,FILE_BINARY)?true:false;
 }
 
+function imgResize($img_name,$n_img,$re_size,$p="jpg"){
+
+	$ww=$re_size;
+	$size=getimagesize($img_name);
+	
+	if($ww>$size[0]){
+		return copy($img_name,$n_img);
+	}else{
+		$s=$ww/$size[0];
+		$ptage_w=round($size[0]*$s);
+		$ptage_h=round($size[1]*$s);
+		$resize=array($ptage_w,$ptage_h);
+		$newImg=imagecreatetruecolor($resize[0],$resize[1]);
+		$defImg=makeDefaultImg($img_name,$p);
+		if($p=="png"){
+			imagealphablending($newImg,false);
+			imagesavealpha($newImg,true);
+		}
+		imagecopyresampled($newImg,$defImg,0,0,0,0,$resize[0]+1,$resize[1]+1,$size[0],$size[1]);
+		outputImg($newImg,$n_img,$p);
+	}
+}
+
 function imgDresize($img_name,$n_Img,$re_size,$p="jpg"){
 
 	$size=getimagesize($img_name);
@@ -267,16 +290,20 @@ function outimg($oimg,$tumb=1){
 	elseif(preg_match("/gif/",$size["mime"]))$p="gif";
 	elseif(preg_match("/png/",$size["mime"]))$p="png";	
 	
-	copy($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p));
+	imgResize($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p),980,$p);
 	if($tumb==1){
 		imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
 		imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
 		imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
 	}
+	unlink($file);
 	return sprintf("%s.%s",$fl[0],$p);
 }
 
-function makesql($a,$f){
+function makesql($a,$f,$mediaid){
+	
+	global $MEDIAID;
+	
 	if($f==0){
 		while(list($k,$v)=each($a)){
 			if(strlen($v)>0){
@@ -293,7 +320,7 @@ function makesql($a,$f){
 			}
 			$sv[$sn[]=$k]=$v;
 		}
-		return sprintf("insert into repo_n(%s) select %s where not exists (select * from repo_n where t7=%s);",implode(",",$sn),implode(",",$sv),$sv["t7"]);
+		return sprintf("insert into repo_n(%s) select %s where not exists (select * from repo_n where d2=%s and t7=%s);",implode(",",$sn),implode(",",$sv),$MEDIAID,$sv["t7"]);
 	}else{
 		while(list($k,$v)=each($a)){
 			$v=stripslashes($v);

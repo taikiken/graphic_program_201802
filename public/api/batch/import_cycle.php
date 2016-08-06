@@ -3,6 +3,8 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=15;
+
 $o=new db;
 $o->connect();
 
@@ -101,7 +103,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 		}
 	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$s["t7"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$s["t7"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -126,7 +128,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 	}else{
 
 	  $s["d1"]=3;
-	  $s["d2"]=15; // Response
+	  $s["d2"]=$MEDIAID;
 	  $s["m1"]=cycle_categorymatch($data["entry"][$i]["gigaindex"],$data["entry"][$i]["title"],$data["entry"][$i]["summary"]);
 	  $s["flag"]=1;
 	  $s["cid"]=1;

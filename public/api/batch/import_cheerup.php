@@ -3,6 +3,7 @@
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
+$MEDIAID=21;
 $rssfile="http://www.cheerup-sports.jp/news/rss.xml";
 
 $o=new db;
@@ -42,7 +43,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -65,7 +66,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}else{
 	
 		$s["d1"]=3;
-		$s["d2"]=21;
+		$s["d2"]=$MEDIAID;
 		$s["m1"]=138;
 		$s["flag"]=1;
 		$s["cid"]=1;

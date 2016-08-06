@@ -49,7 +49,7 @@ $c=!isset($_COOKIE["excategory"])?0:$_COOKIE["excategory"];
 
 <?php
 
-$sql="select id,name,case when num is null then 0 else num end from (select id,name,n from u_categories where flag=1) as t1 left join (select m1,count(m1) as num from repo_n where cid=1 group by m1) as t2 on t1.id=t2.m1 order by n";
+$sql="select id,name,n,(case when num1 is not null then num1 else 0 end)+(case when num2 is not null then num2 else 0 end) as num from (select id,name,n from u_categories order by n) as t0 left join (select m1,count(m1) as num1 from repo_n where cid=1 and m1 is not null group by m1) as t1 on t0.id=t1.m1 left join (select m2,count(m2) as num2 from repo_n where cid=1 and m2 is not null group by m2) as t2 on t0.id=t2.m2 order by n;";
 $o->query($sql);
 
 echo sprintf("<option value=\"\"%s>　すべてのカテゴリー</option>",$c==0?" selected=\"selected\"":"");

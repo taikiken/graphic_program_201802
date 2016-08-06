@@ -12,6 +12,7 @@ function modhtmltag($s){
 	return $s;
 }
 
+$MEDIAID=6;
 $rssfile="https://huddlemagazine.jp/rss_for_undo/";
 $mtype=131;
 
@@ -63,7 +64,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	unset($sqla);
 	
-	$sql=sprintf("select * from repo_n where cid=1 and t7='%s'",$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -88,7 +89,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		if($data["channel"]["item"][$i]["status"]==1){
 			
 			$s["d1"]=3;
-			$s["d2"]=6; // Huddle Web Magazine
+			$s["d2"]=$MEDIAID;
 			$s["m1"]=121; // アメフト
 			$s["m4"]=$mtype;
 			$s["flag"]=1;
