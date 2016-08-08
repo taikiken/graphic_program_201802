@@ -20,7 +20,7 @@
 </div>
 
 <script src="//players.brightcove.net/4802324450001/rJIcYM98_default/index.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/assets/vk_brightcove/js/bc-mapi.js"></script>
 <script src="/assets/vk_brightcove/js/Player.js"></script>
 <script type="text/javascript">
