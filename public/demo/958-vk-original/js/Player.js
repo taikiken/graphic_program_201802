@@ -3,9 +3,9 @@ videojs.plugin('PlayerControl', function (settings) {
 
   //console.log("plugin loaded!");
 
-  var PLAY_IMG_URL = "/assets/vk_brightcove/img/btn_play.png";
-  var ADTAG_XML_URL = "//98-live-koshien.s3.amazonaws.com/98/adtag.xml";
-  var DEFAULT_STILL_IMAGE_URL = "/assets/vk_brightcove/img/default_image.jpg";
+  var PLAY_IMG_URL = "http://www.asahicom.jp/sp/koshien/virtualbaseball/images/btn_play.png";
+  var ADTAG_XML_URL = "http://98-live-koshien.s3.amazonaws.com/98/adtag.xml";
+  var DEFAULT_STILL_IMAGE_URL = "http://www.asahicom.jp/koshien/virtualbaseball/images/98/player/default_image.jpg";
 
   var myMediaInfo = null;　
   var infoIsAd = false;　
@@ -63,7 +63,7 @@ videojs.plugin('PlayerControl', function (settings) {
         if(isAutoPlay || isPlayedRelatedVideo){
           player.play();
         }
-      } 
+      }
     });
   }
 
@@ -135,7 +135,7 @@ videojs.plugin('PlayerControl', function (settings) {
         player.one('ended', function(event) {
           player.currentTime(0);
           player.pause();
-          //console.log("The currentTime was moved to 0 because the browser is iOS_Web.");    
+          //console.log("The currentTime was moved to 0 because the browser is iOS_Web.");
         });
       }
       player.ima3.adrequest(adUrl_postroll);
@@ -144,35 +144,37 @@ videojs.plugin('PlayerControl', function (settings) {
     else {
       if(relatedVideosLoaded){
         //関連動画リストを読み込み済みの場合は表示を行う
-        showRelatedVideos();  
+        showRelatedVideos();
       }
     }
   }
 
   function _handleMediaProgress(event){
-    if(!isBeaconSent && prerollPlayed){
-      //console.log("[MediaProgress] currentTime = " + player.currentTime());
-      if(player.currentTime() > beaconTrackPoint){
-        //ABC Beaconログ計測
-        var eve = document.createElement("img");
-        eve.setAttribute("src", beaconUrl);
-        eve.setAttribute("width", 0);
-        eve.setAttribute("height", 0);
-        eve.style.display = "none";
-        document.getElementsByTagName('body')[0].appendChild(eve);
-        console.log("Track ABC BeaconUrl =" + beaconUrl);
+    if(!isBeaconSent){
+      if(prerollPlayed || adUrl_preroll == ""){
+        //console.log("[MediaProgress] currentTime = " + player.currentTime());
+        if(player.currentTime() > beaconTrackPoint){
+          //ABC Beaconログ計測
+          var eve = document.createElement("img");
+          eve.setAttribute("src", beaconUrl);
+          eve.setAttribute("width", 0);
+          eve.setAttribute("height", 0);
+          eve.style.display = "none";
+          document.getElementsByTagName('body')[0].appendChild(eve);
+          console.log("Track ABC BeaconUrl =" + beaconUrl);
 
-        //VideoStart Tracking for AdobeAnalytics
-        var videoType = "";
-        if(infoIsLive){
-          videoType = "LIVE";
-        }else{
-          videoType = "VOD";
+          //VideoStart Tracking for AdobeAnalytics
+          var videoType = "";
+          if(infoIsLive){
+            videoType = "LIVE";
+          }else{
+            videoType = "VOD";
+          }
+          //視聴ページ側のJSメソッドを実行
+          videoStartTracking(videoType);
+
+          isBeaconSent = true;
         }
-        //視聴ページ側のJSメソッドを実行
-        videoStartTracking(videoType);
-
-        isBeaconSent = true;
       }
     }
   }
@@ -185,7 +187,7 @@ videojs.plugin('PlayerControl', function (settings) {
     }
     else{
       player.ima3.adsManager.pause();
-    }    
+    }
     //[AndroidWebのみ]広告再生をリジュームするためのボタンを表示
     if(deviceType == "android_mweb"){
       overlayAdPlayBtn();
@@ -218,7 +220,7 @@ videojs.plugin('PlayerControl', function (settings) {
       //Postrollの終了
       if(relatedVideosLoaded){
         //関連動画リストを読み込み済みの場合は表示を行う
-        showRelatedVideos();  
+        showRelatedVideos();
       }
     }else{
       //Prerollの再生終了
@@ -345,7 +347,7 @@ videojs.plugin('PlayerControl', function (settings) {
   // Utilities
   function getCurrentTime(){
     var date = new Date();
-    var currentTime = ""; 
+    var currentTime = "";
     var yy = (date.getFullYear() + '').slice(-2);
     var mm = ("0" + (date.getMonth() + 1)).slice(-2);
     var dd = ("0" + date.getDate()).slice(-2);
@@ -427,15 +429,15 @@ videojs.plugin('PlayerControl', function (settings) {
     }
 
     //デバイス判定・ABC再生開始ビーコンURL設定
-    beaconUrl = 'https://submit.asahi.co.jp/bplayer/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
+    beaconUrl = 'http://koshien-l1.asahi.co.jp/bplayer/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
     deviceType = "pc";
     if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 ){
       //iOS
-      beaconUrl = 'https://submit.asahi.co.jp/bplayer/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
+      beaconUrl = 'http://koshien-l4.asahi.co.jp/bplayer/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
       deviceType = "ios_mweb";
     }else if( agent.search(/Android/) != -1){
       //Android
-      beaconUrl = 'https://submit.asahi.co.jp/bplayer/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
+      beaconUrl = 'http://koshien-l5.asahi.co.jp/bplayer/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
       deviceType = "android_mweb";
     }
 
@@ -452,12 +454,12 @@ videojs.plugin('PlayerControl', function (settings) {
       overlayStillImage();
     }else if(infoIsAd){
       //PC再生で広告有り＆自動再生の場合は黒画像を表示
-      overlayBlackImage();   
+      overlayBlackImage();
     }
 
     if(infoIsAd){
       //広告ONの場合は、AdTagXMLより広告タグ情報取得
-      initializeAdTag();  
+      initializeAdTag();
     }else{
       //広告OFFの場合 or 関連動画からの再生の場合は本編再生開始
       if(isAutoPlay || isPlayedRelatedVideo){
@@ -478,7 +480,7 @@ videojs.plugin('PlayerControl', function (settings) {
     relatedVideosLoaded = false;
     if(isShowRelatedVideos && deviceType == "pc"){
       //PCデバイス(IE10以外) & 関連動画表示ONの場合のみ関連動画リストを取得
-      getRelatedVideos();  
+      getRelatedVideos();
     }
   });
 
@@ -488,13 +490,13 @@ videojs.plugin('PlayerControl', function (settings) {
     //ブラウザ判定
     browserType = "";
     if(agent.match(/MSIE/)) {
-      browserType = "ie10";    
+      browserType = "ie10";
     }else if(agent.match(/Trident/)){
       browserType = "ie11";
     }else{
       browserType = "non-ie";
     }
-    console.log("Browser Type= " + browserType + ", userAgent= " + agent); 
+    console.log("Browser Type= " + browserType + ", userAgent= " + agent);
     var ima_setting = "";
     if(browserType == "non-ie" ){
       //non-ie用のIMA設定（HTML5優先）
@@ -523,10 +525,10 @@ videojs.plugin('PlayerControl', function (settings) {
           "html5"
         ],
         "serverUrl": ""
-      };     
+      };
     }
     player.ima3(ima_setting);
-    
+
     var _videoRefId = "ref:" + videoRefId;
     player.catalog.getVideo(_videoRefId, function(error, video) {
       player.catalog.load(video);
@@ -543,7 +545,7 @@ videojs.plugin('PlayerControl', function (settings) {
   var MEDIA_API_TOKEN = 'QYRAY7Cd2_j4nqf-N0qI_jTDYPS2_R6Z47yOH4FLzTobg-8Jn8GmoQ..';
   // 変数
   var overlayRelatedVideos;
-  
+
   /**
    * 関連動画の取得
    */
@@ -552,13 +554,13 @@ videojs.plugin('PlayerControl', function (settings) {
     var params = {};
     params.reference_id = player.mediainfo.reference_id;
     params.video_fields = 'referenceId,name,customFields,tags';
-    
+
     // 検索実行
     BCMAPI.token = MEDIA_API_TOKEN;
     BCMAPI.callback = '__bcplayer.onFindRelatedVideosCompleted';
     BCMAPI.find('find_related_videos', params);
   }
-  
+
   /**
    * 関連動画の更新処理
    */
@@ -568,18 +570,18 @@ videojs.plugin('PlayerControl', function (settings) {
     if (settings.relatedVideosTags instanceof Array) {
       tags = settings.relatedVideosTags;
     }
-    
+
     // 0件の場合、全部を対象とする
     if (tags.length == 0) {
       return response.items.slice(0, MAX_RELATED_VIDEOS_COUNT);
     }
-    
+
     // 設定されたタグを含むアイテムだけをまとめる
     var count = 0;
     var videos = [];
     for (var i = 0; i < response.items.length && count < MAX_RELATED_VIDEOS_COUNT; i++) {
       var video = response.items[i];
-      
+
       var found = false;
       for (var j = 0; j < tags.length; j++) {
         for (var k = 0; k < video.tags.length; k++) {
@@ -588,21 +590,21 @@ videojs.plugin('PlayerControl', function (settings) {
             break;
           }
         }
-        
+
         if (found) {
           break;
         }
       }
-      
+
       if (found) {
         videos.push(video);
         count++;
       }
     }
-    
+
     return videos;
   }
-  
+
   /**
    * 関連動画の表示
    */
@@ -611,7 +613,7 @@ videojs.plugin('PlayerControl', function (settings) {
       player.el().appendChild(overlayRelatedVideos);
     }
   }
-  
+
   /**
    * 関連動画の削除
    */
@@ -623,14 +625,14 @@ videojs.plugin('PlayerControl', function (settings) {
       overlayRelatedVideos = null;
     }
   }
-  
+
   /**
    * HTMLのエスケープ処理
    */
   function escapeHtml(content) {
     if (typeof content !== 'string') {
       return '';
-    } 
+    }
     var ESCAPE_MAP = {
       '&': '&amp;',
       '\'': '&#39;',
@@ -642,15 +644,15 @@ videojs.plugin('PlayerControl', function (settings) {
       return ESCAPE_MAP.hasOwnProperty(char) ? ESCAPE_MAP[char] : char;
     });
   }
-  
+
   /**
    * 関連動画の更新処理
    */
   __bcplayer.onFindRelatedVideosCompleted = function (response) {
-  
+
     // 既存の要素を削除
     hideRelatedVideos();
-    
+
     // タグでフィルタリング
     var videos = filterRelatedVideoByTags(response);
     if (videos.length == 0) {
@@ -672,13 +674,13 @@ videojs.plugin('PlayerControl', function (settings) {
 
     for (var i = 0; i < videos.length; i++) {
       var video = videos[i];
-      
+
       // スチル画像URLをカスタムフィールドから取得。なければデフォルトを使用
       var _stillImageUrl = DEFAULT_STILL_IMAGE_URL;
       if (video.customFields != null && video.customFields.still_image_url != null) {
           _stillImageUrl = video.customFields.still_image_url;
       }
-      
+
       html += '<li class="related-video">';
       html += '<div class="related-video-thumbnail">';
       html += '<img src="' + _stillImageUrl + '" onclick="__bcplayer.loadRelatedVideo(\'' + video.referenceId + '\');"/>';
@@ -698,9 +700,9 @@ videojs.plugin('PlayerControl', function (settings) {
 
     //関連動画読み込み完了フラグをセット
     relatedVideosLoaded = true;
-    //console.log("relatedVideos will be loaded, relatedVideosLoaded is " + relatedVideosLoaded);    
+    //console.log("relatedVideos will be loaded, relatedVideosLoaded is " + relatedVideosLoaded);
   };
-  
+
   /**
    * 関連動画読み込み
    */
@@ -712,9 +714,9 @@ videojs.plugin('PlayerControl', function (settings) {
     player.off('ads-click', _handleAdClick);
     player.off('ads-ad-started',   _handleAdstart);
     player.off('ads-ad-ended',   _handleAdend);
-    player.off('ima3-ad-error', _handleAderror);    
+    player.off('ima3-ad-error', _handleAderror);
     player.off('timeupdate', _handleMediaProgress);
-    
+
     // 動画読み込み
     videoRefId = referenceId;
     player.catalog.getVideo('ref:'+referenceId, function(error, video) {
