@@ -3,9 +3,9 @@ videojs.plugin('PlayerControl', function (settings) {
 
   //console.log("plugin loaded!");
 
-  var PLAY_IMG_URL = "http://www.asahicom.jp/sp/koshien/virtualbaseball/images/btn_play.png";
-  var ADTAG_XML_URL = "http://98-live-koshien.s3.amazonaws.com/98/adtag.xml";
-  var DEFAULT_STILL_IMAGE_URL = "http://www.asahicom.jp/koshien/virtualbaseball/images/98/player/default_image.jpg";
+  var PLAY_IMG_URL = "/assets/vk_brightcove/img/btn_play.png";
+  var ADTAG_XML_URL = "//98-live-koshien.s3.amazonaws.com/98/adtag.xml";
+  var DEFAULT_STILL_IMAGE_URL = "/assets/vk_brightcove/img/default_image.jpg";
 
   var myMediaInfo = null;　
   var infoIsAd = false;　
@@ -150,31 +150,29 @@ videojs.plugin('PlayerControl', function (settings) {
   }
 
   function _handleMediaProgress(event){
-    if(!isBeaconSent){
-      if(prerollPlayed || adUrl_preroll == ""){
-        //console.log("[MediaProgress] currentTime = " + player.currentTime());
-        if(player.currentTime() > beaconTrackPoint){
-          //ABC Beaconログ計測
-          var eve = document.createElement("img");
-          eve.setAttribute("src", beaconUrl);
-          eve.setAttribute("width", 0);
-          eve.setAttribute("height", 0);
-          eve.style.display = "none";
-          document.getElementsByTagName('body')[0].appendChild(eve);
-          console.log("Track ABC BeaconUrl =" + beaconUrl);
+    if(!isBeaconSent && prerollPlayed){
+      //console.log("[MediaProgress] currentTime = " + player.currentTime());
+      if(player.currentTime() > beaconTrackPoint){
+        //ABC Beaconログ計測
+        var eve = document.createElement("img");
+        eve.setAttribute("src", beaconUrl);
+        eve.setAttribute("width", 0);
+        eve.setAttribute("height", 0);
+        eve.style.display = "none";
+        document.getElementsByTagName('body')[0].appendChild(eve);
+        console.log("Track ABC BeaconUrl =" + beaconUrl);
 
-          //VideoStart Tracking for AdobeAnalytics
-          var videoType = "";
-          if(infoIsLive){
-            videoType = "LIVE";
-          }else{
-            videoType = "VOD";
-          }
-          //視聴ページ側のJSメソッドを実行
-          videoStartTracking(videoType);
-
-          isBeaconSent = true;
+        //VideoStart Tracking for AdobeAnalytics
+        var videoType = "";
+        if(infoIsLive){
+          videoType = "LIVE";
+        }else{
+          videoType = "VOD";
         }
+        //視聴ページ側のJSメソッドを実行
+        videoStartTracking(videoType);
+
+        isBeaconSent = true;
       }
     }
   }
@@ -429,15 +427,15 @@ videojs.plugin('PlayerControl', function (settings) {
     }
 
     //デバイス判定・ABC再生開始ビーコンURL設定
-    beaconUrl = 'http://koshien-l1.asahi.co.jp/bplayer/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
+    beaconUrl = 'https://submit.asahi.co.jp/bplayer/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
     deviceType = "pc";
     if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 ){
       //iOS
-      beaconUrl = 'http://koshien-l4.asahi.co.jp/bplayer/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
+      beaconUrl = 'https://submit.asahi.co.jp/bplayer/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
       deviceType = "ios_mweb";
     }else if( agent.search(/Android/) != -1){
       //Android
-      beaconUrl = 'http://koshien-l5.asahi.co.jp/bplayer/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
+      beaconUrl = 'https://submit.asahi.co.jp/bplayer/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
       deviceType = "android_mweb";
     }
 
