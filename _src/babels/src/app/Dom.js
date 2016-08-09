@@ -492,4 +492,16 @@ export class Dom {
   static jsExe():Element {
     return Dom.get('js-exe');
   }
+  /**
+   * script tag #js-exe の data-label 値を取得します
+   * @return {string} script tag #js-exe の data-label 値を返します
+   */
+  static categoryLabel():string {
+    const script = Dom.jsExe();
+    if (script === null) {
+      return '';
+    }
+
+    return script.dataset.label;
+  }
 }

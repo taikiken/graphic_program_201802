@@ -114,7 +114,7 @@ if ( $page['apiRoot'] != '' ) :
 }() );
 </script>
 <?php endif; ?>
-<script id="js-exe" data-label="<?php echo !empty($page['category']['label']) ? $page['category']['label'] : ''; ?>" src="/assets/js/bundle/exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script id="js-exe"<?php echo !empty($page['category']['label']) ? ' data-label="' . $page['category']['label'] . '" ' : ''; ?>src="/assets/js/bundle/exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
