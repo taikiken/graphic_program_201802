@@ -482,5 +482,14 @@ export class Dom {
   static moreExternal():Element {
     return Dom.get( 'readMore-external' );
   }
+
+  // --------------------------------------
+  // exe JS ID
+  /**
+   * exe 系 script tag の ID
+   * @return {Element} script tag #js-exe を返します
+   */
+  static jsExe():Element {
+    return Dom.get('js-exe');
+  }
 }
-// return Dom.get( '' );
