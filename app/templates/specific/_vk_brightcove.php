@@ -31,7 +31,7 @@
     //"stillImageUrl" : "",
     "autoPlay" : true,
     "showRelatedVideos" : true,
-    "relatedVideosTags": ['koya98_other'],
+    "relatedVideosTags": ['ut'],
   });
 
   //AdobeAnalyics再生開始計測メソッド
