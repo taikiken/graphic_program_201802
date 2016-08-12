@@ -46,10 +46,19 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       // アプリからの記事詳細アクセスならWebView向けページを表示
       if ( $app->model->property('ua_app') ) :
 
+        // #1014 $_GET['get']を取得する
+        $webview_type = ( isset($_GET['get']) && $_GET['get'] ) ? $_GET['get'] : '';
+
         if ( $post['is_readmore'] ) :
           return $this->renderer->render($response, "app.p.redirect.php", $args);
         else :
-          return $this->renderer->render($response, "app.p.php", $args);
+
+          if ( $webview_type === 'body' ) :
+            return $this->renderer->render($response, "app.p.body.php", $args);
+          else :
+            return $this->renderer->render($response, "app.p.php", $args);
+          endif;
+
         endif;
 
       // アプリ以外のデスクトップ/スマホなら通常
