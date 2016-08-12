@@ -150,29 +150,31 @@ videojs.plugin('PlayerControl', function (settings) {
   }
 
   function _handleMediaProgress(event){
-    if(!isBeaconSent && prerollPlayed){
-      //console.log("[MediaProgress] currentTime = " + player.currentTime());
-      if(player.currentTime() > beaconTrackPoint){
-        //ABC Beaconログ計測
-        var eve = document.createElement("img");
-        eve.setAttribute("src", beaconUrl);
-        eve.setAttribute("width", 0);
-        eve.setAttribute("height", 0);
-        eve.style.display = "none";
-        document.getElementsByTagName('body')[0].appendChild(eve);
-        console.log("Track ABC BeaconUrl =" + beaconUrl);
+    if(!isBeaconSent){
+      if(prerollPlayed || adUrl_preroll == ""){
+        //console.log("[MediaProgress] currentTime = " + player.currentTime());
+        if(player.currentTime() > beaconTrackPoint){
+          //ABC Beaconログ計測
+          var eve = document.createElement("img");
+          eve.setAttribute("src", beaconUrl);
+          eve.setAttribute("width", 0);
+          eve.setAttribute("height", 0);
+          eve.style.display = "none";
+          document.getElementsByTagName('body')[0].appendChild(eve);
+          console.log("Track ABC BeaconUrl =" + beaconUrl);
 
-        //VideoStart Tracking for AdobeAnalytics
-        var videoType = "";
-        if(infoIsLive){
-          videoType = "LIVE";
-        }else{
-          videoType = "VOD";
+          //VideoStart Tracking for AdobeAnalytics
+          var videoType = "";
+          if(infoIsLive){
+            videoType = "LIVE";
+          }else{
+            videoType = "VOD";
+          }
+          //視聴ページ側のJSメソッドを実行
+          videoStartTracking(videoType);
+
+          isBeaconSent = true;
         }
-        //視聴ページ側のJSメソッドを実行
-        videoStartTracking(videoType);
-
-        isBeaconSent = true;
       }
     }
   }
