@@ -46,8 +46,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       // アプリからの記事詳細アクセスならWebView向けページを表示
       if ( $app->model->property('ua_app') ) :
 
-        // #1014 $_GET['type']を取得する
-        $webview_type = ( isset($_GET['type']) && $_GET['type'] ) ? $_GET['type'] : '';
+        // #1014 $_GET['get']を取得する
+        $webview_type = ( isset($_GET['get']) && $_GET['get'] ) ? $_GET['get'] : '';
 
         if ( $post['is_readmore'] ) :
           return $this->renderer->render($response, "app.p.redirect.php", $args);
