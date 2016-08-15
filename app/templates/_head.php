@@ -33,7 +33,7 @@ endif;
 
   <!-- sns ogp -->
   <meta property="fb:app_id" content="<?php echo $page['app_id']; ?>">
-  <meta property="og:site_name" content="<?php echo $page['site_name']; ?>" />
+  <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
   <meta property="og:type" content="<?php echo $page['og_type']; ?>">
   <meta property="og:title" content="<?php echo $page['og_title']; ?>">
   <meta property="og:image" content="<?php echo $page['og_image']; ?>">
@@ -56,6 +56,9 @@ endif;
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 <?php endif; ?>
 
+<?php if ( $page['template'] === 'p' ) : ?>
+  <meta name="synextbot" content="<?php echo $page['syn_extension']; ?>">
+<?php endif; ?>
 
   <!-- favicon -->
 <?php

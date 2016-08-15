@@ -26,6 +26,7 @@ class ViewModel {
     // meta
     'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
     'canonical'          => '',
+    'syn_extension'      => '',
 
     // theme
     'theme' => array(
@@ -50,6 +51,7 @@ class ViewModel {
     ),
 
     // post
+    'category'           => array(),
     'post'               => array(),
 
     // layout
@@ -66,7 +68,7 @@ class ViewModel {
     'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
 
     // user
-    'is_logged_in'    => false, // ユーザーログイン判定
+    'is_logged_in'       => false, // ユーザーログイン判定
 
     // slim param
     'request'            => '',
@@ -305,14 +307,6 @@ class ViewModel {
     endif;
 
     if ( $post ) :
-
-      if ( $post['categories'] ) :
-        // 記事のプライマリーカテゴリーをdefaultに設定しておく
-        $category_primary = $post['categories'][0];
-        if ( isset($category_primary['slug']) ) :
-          $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
-        endif;
-      endif;
 
       return $post;
 

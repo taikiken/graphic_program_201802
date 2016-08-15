@@ -12,6 +12,15 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     if ( $post ) :
 
+      // 記事のプライマリーカテゴリーを取得
+      $category = array();
+      if ( $post['categories'] ) :
+        $category_primary = $post['categories'][0];
+        if ( isset($category_primary['slug']) ) :
+          $category = $app->model->get_category_by_slug($category_primary['slug']);
+        endif;
+      endif;
+
       // 続きを読む設定フラグの判定を行っておく
       if ( isset($post['readmore']) && $post['readmore']['is_readmore'] && $post['readmore']['url'] ) :
         $post['is_readmore'] = true;
@@ -26,6 +35,38 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         $canonical = '';
       endif;
 
+      // #1021 Syn.extension 判定
+      // ------------------------------
+      $is_syn_extension = false;
+
+      // check.1 カテゴリーがcrazy
+      if ( $post['categories'] ) :
+        foreach( $post['categories'] as $key => $value ) :
+          if ( $value['slug'] === 'crazy' ) :
+            $is_syn_extension = true;
+            break;
+          endif;
+        endforeach;
+      endif;
+
+      // check.2 投稿者がSPOZIUM
+      if ( $is_syn_extension === false ) :
+        if ( $post['user']['name'] === 'SPOZIUM' ) :
+          $is_syn_extension = true;
+        endif;
+      endif;
+
+      // syn.extension クロール対象かどうか
+      // - index    : 自社枠・他社枠ともに掲載可能
+      // - selfonly : 他社枠への掲載が不可
+      // - noindex  : 自社枠・他社枠ともに掲載不可
+      if ( $is_syn_extension ) :
+        $syn_extension = 'index';
+      else :
+        $syn_extension = 'selfonly';
+      endif;
+
+
       $args['page'] = $app->model->set(array(
         'title'          => $post['title'],
         'og_title'       => $post['title'].' | '.$app->model->property('title'),
@@ -34,11 +75,15 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'og_description' => $post['description'],
         'canonical'      => $canonical,
 
+        'syn_extension'  => $syn_extension,
+
         'ad'             => $post['ad'],
         'theme'          => $post['theme'],
 
         'template'       => 'p',
         'path'           => $args,
+
+        'category'       => $category,
         'post'           => $post,
       ));
 
