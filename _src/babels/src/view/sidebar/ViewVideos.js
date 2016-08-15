@@ -16,6 +16,7 @@ import {View} from '../View';
 // app
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
+import {Dom} from '../../app/Dom';
 
 // action
 import {Widget} from '../../action/sidebar/Widget';
@@ -306,7 +307,7 @@ export class ViewVideos extends View {
             {/* title */}
             <RecommendTitleNode
               slug={categorySlug}
-              label={list[0].categories[0].label}
+              label={/* list[0].categories[0].label @since 2016-08-09 */Dom.categoryLabel()}
               title={Message.VIDEOS_TITLE}
             />
             <ul className="board-list">
