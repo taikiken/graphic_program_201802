@@ -12,6 +12,15 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     if ( $post ) :
 
+      // 記事のプライマリーカテゴリーを取得
+      $category = array();
+      if ( $post['categories'] ) :
+        $category_primary = $post['categories'][0];
+        if ( isset($category_primary['slug']) ) :
+          $category = $app->model->get_category_by_slug($category_primary['slug']);
+        endif;
+      endif;
+
       // 続きを読む設定フラグの判定を行っておく
       if ( isset($post['readmore']) && $post['readmore']['is_readmore'] && $post['readmore']['url'] ) :
         $post['is_readmore'] = true;
@@ -39,6 +48,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
         'template'       => 'p',
         'path'           => $args,
+
+        'category'       => $category,
         'post'           => $post,
       ));
 

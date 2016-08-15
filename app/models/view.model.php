@@ -50,6 +50,7 @@ class ViewModel {
     ),
 
     // post
+    'category'           => array(),
     'post'               => array(),
 
     // layout
@@ -305,14 +306,6 @@ class ViewModel {
     endif;
 
     if ( $post ) :
-
-      if ( $post['categories'] ) :
-        // 記事のプライマリーカテゴリーをdefaultに設定しておく
-        $category_primary = $post['categories'][0];
-        if ( isset($category_primary['slug']) ) :
-          $this->default['category'] = $this->get_category_by_slug($category_primary['slug']);
-        endif;
-      endif;
 
       return $post;
 
