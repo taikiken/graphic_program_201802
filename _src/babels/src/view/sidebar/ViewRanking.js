@@ -16,6 +16,7 @@ import {View} from '../View';
 // app
 import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
+import {Dom} from '../../app/Dom';
 
 // action
 import {Widget} from '../../action/sidebar/Widget';
@@ -221,9 +222,16 @@ export class ViewRanking extends View {
         let categoryLabel;
         // category api slug が `all` 以外の時に category.label をタイトルに含める
         if ( categorySlug !== 'all' ) {
-          // categoryLabel = list[ 0 ].category.label;
-          categoryLabel = list[0].categories[0].label;
-
+          // // categoryLabel = list[ 0 ].category.label;
+          // categoryLabel = list[0].categories[0].label;
+          //
+          // if ( categoryLabel !== '' ) {
+          //   // category.label が空でなかったら '/' と一緒に加える
+          //   categoryTitle = ' / ' + categoryLabel;
+          // }
+          // @since 2016-08-09 category label は script#js-exe data-label の値を使用する
+          // https://github.com/undotsushin/undotsushin/issues/914
+          categoryLabel = Dom.categoryLabel();
           if ( categoryLabel !== '' ) {
             // category.label が空でなかったら '/' と一緒に加える
             categoryTitle = ' / ' + categoryLabel;
