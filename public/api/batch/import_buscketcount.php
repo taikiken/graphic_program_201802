@@ -10,7 +10,7 @@ function modifyhtml($s){
 	
 	global $domain;
 	
-	$s=strip_tags($s,"<h2><h3><h4><p><div><a><table><caption><tbody><tr><td><strong><img><iframe><script><blockquote>");
+	$s=strip_tags($s,"<h2><h3><h4><br><p><div><a><table><caption><tbody><tr><td><strong><img><iframe><script><blockquote>");
 	$s=str_replace("<p><iframe","<iframe",$s);
 	$s=str_replace("</iframe></p>","</iframe>",$s);
 	

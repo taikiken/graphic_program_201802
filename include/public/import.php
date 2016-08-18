@@ -61,16 +61,57 @@ function relatedlink($link,$id=0){
 	
 	$s=array();
 	$n=count($link["li"]);
+	
+	if($n==1){
+		$se=$link["li"];
+		unlink($link);
+		$link["li"][0]=$se;
+	}
+	
 	for($i=0;$i<$n;$i++){
 		
 		$title=bind($link["li"][$i]["@attributes"]["url"]);
 		$url=bind(str_replace("]>","]",$link["li"][$i]["@attributes"]["title"]));
+		
+		//var_dump(array($title,$url));
 		
 		if($id==0){
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
 		}else{	
 			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s where not exists (select*from u_link where pid=%s and n=%s);",$id,$title,$url,($i+1),$id,($i+1));
 			$s[]=sprintf("update u_link set title='%s',url='%s' where not exists (select * from u_link where title='%s' and url='%s') and cid=%s and n=%s;",$title,$url,$title,$url,$id,($i+1));
+		}
+	}
+	return implode("\n",$s);
+}
+
+function removeimg($img){
+	global $IMGP;
+	echo $IMGP;
+	$path=array();
+	$e=array("raw","img","thumbnail1","thumbnail2");
+	for($i=0;$i<count($e);$i++){
+		unlink(sprintf(str_replace("tmp",$e[$i],$IMGP),$img));
+	}
+}
+
+function relatedlink2($link,$id=0){
+	
+	$s=array();
+	$n=count($link);
+	
+	for($i=0;$i<$n;$i++){
+		
+		$title=bind($link[$i]["@attributes"]["url"]);
+		$url=bind($link[$i]["@attributes"]["title"]);
+		
+		//var_dump(array($title,$url));
+		
+		if($id==0){
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
+		}else{	
+			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
 		}
 	}
 	return implode("\n",$s);
@@ -272,7 +313,7 @@ function outimg($oimg,$tumb=1){
 	
 	$fl=getfileinfo($oimg);
 	
-	$ch=curl_init();
+	$ch=curl_init();	
 	curl_setopt($ch,CURLOPT_URL,$oimg);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	if(preg_match("/https/",$oimg)){
@@ -280,12 +321,14 @@ function outimg($oimg,$tumb=1){
 		curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
 	}
 	$img=curl_exec($ch);
-	if(curl_errno($ch))return;
+	if(curl_errno($ch))return "";
 	
 	$file=sprintf("%stmp/%s.%s",$imgp,$fl[0],$fl[1]);
 	file_put_contents($file,$img);
 	
 	$size=getimagesize($file);
+	if(!$size)return "";
+	
 	if(preg_match("/jpe?g/",$size["mime"]))$p="jpg";
 	elseif(preg_match("/gif/",$size["mime"]))$p="gif";
 	elseif(preg_match("/png/",$size["mime"]))$p="png";	

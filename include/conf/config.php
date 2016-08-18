@@ -17,6 +17,7 @@ $DBPORT=5432;
 include $INCLUDEPATH."conf/env.php";
 $file=sprintf("%s/api/ver1/static/cms.dat",$SERVERPATH);
 $s=unserialize(file_get_contents($file));
+
 $CONTENTSTYPE_ALLOWED=$s[0];
 $RELATEDLINK_ALLOWED=$s[1];
 $SUMMARY_ALLOWED=$s[2];
@@ -26,11 +27,13 @@ $YOUTUBE_ALLOWED=$s[5];
 $FACEBOOK_ALLOWED=$s[6];
 $MCAPTION_ALLOWED=$s[7];
 $CONTENTS_ALLOWED=$s[8];
+$EXBRIGHTCOVE_ALLOWED=$s[9];
 unset($s);
 
 //ウィジェット系ビデオかどうか判定
 $VIDEOTAG[]="eplayer.js";
 $VIDEOTAG[]="brightcove";
+$VIDEOTAG[]="thumb-16x9-play";
 
 $file=sprintf("%s/api/ver1/static/media.dat",$SERVERPATH);
 $mediaoption=unserialize(file_get_contents($file));

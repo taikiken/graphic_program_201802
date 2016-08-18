@@ -91,14 +91,13 @@ if(strlen($api)>0){
 
 		// #860 - ダミーレスポンス
 		}elseif($type === "recommend"){
-
+			
 			if ( $category === 'crazy' ){
 				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
 				$nsql="select count(id) as n from u_headline where cid=11 and flag=1";
 			}else{
 				
 			}
-
 		}
 	
 	}elseif($api==="search"){
@@ -106,13 +105,13 @@ if(strlen($api)>0){
 		$q=set_condition($_REQUEST["q"]);
 		
 		if(strlen($q)>0){
-			
+/*			
 			$sql=sprintf("select st2.* from (select id from u_index where uptime > now() - interval '90 day' and %s order by uptime desc%s) as st1,(select * from %s) as st2 where st1.id=st2.id%s",$q,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""),"");
 			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where uptime > now() - interval '90 day' and %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
-/*
-			$sql=sprintf("select st02.%s from (select id from u_index where %s) as st01,(select %s from %s) as st02 where st01.id=st02.id order by m_time desc,id limit %s offset %s",str_replace(",",",st02.",$articlefield),$q,$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
-			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
 */
+			$sql=sprintf("select st02.* from (select id from u_index where %s and uptime > now() - interval '90 day') as st01,(select * from %s) as st02 where st01.id=st02.id order by m_time desc,id limit %s offset %s",$q,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
+			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where %s and uptime > now() - interval '90 day') as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
+
 		}
 		
 	}elseif($api=="home"||$api=="self"){
@@ -185,7 +184,7 @@ if(strlen($api)>0){
 	}
 }
 
-//echo $sql;
+echo $sql;
 
 if($y["status"]["code"]===200){
 	

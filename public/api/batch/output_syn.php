@@ -43,8 +43,10 @@ select
 	flag
 from repo_n
 	where
-d2=1 and (m1=141 or m1=136 or m2=141 or m2=136) and u_time > now() - interval '1 day' order by u_time desc
+d2=1 and (m1=141 or m1=136 or m2=141 or m2=136) order by u_time desc
 ";
+// and u_time > now() - interval '1 day'
+
 $o->query($sql);
 
 while($f=$o->fetch_array()){
@@ -64,7 +66,7 @@ $item[]=sprintf('<item>
 mod_HTML($f["title"]),
 $f["id"],
 $f["id"],
-$f["m1"]!=141?sprintf("<category id=\"%s\" title=\"%s\" />",$f["m1"],$f["category1"]):sprintf("<category id=\"%s\" title=\"%s\" />\n<category id=\"141\" title=\"リオ五輪\" />",$f["m1"],$f["category1"]),
+($f["m1"]==136||$f["m2"]==136)?"<category id=\"136\" title=\"高校野球\" />":"<category id=\"141\" title=\"リオ五輪\" />",
 $f["d2"],$f["media"],
 preg_replace("(\r|\n)","",$f["body"]),
 maketag(array($f["t10"],$f["t11"],$f["t12"],$f["t13"],$f["t14"],$f["t15"])),
@@ -84,8 +86,7 @@ function maketag($s){
 	return implode(",",$a);
 }
 
-header('Content-Type: application/xml');
-echo sprintf($container,implode("\n",$item));
+file_put_contents(sprintf("%s/feed/syn./pickup.xml",$SERVERPATH),sprintf($container,implode("\n",$item)));
 
 /*
 

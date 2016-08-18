@@ -8,6 +8,7 @@ if($_GET["cid"]==1){
 	$contentsEditorTypes[3]="動画(Youtube)";
 	$contentsEditorTypes[4]="表";
 	$contentsEditorTypes[5]="ウィジェット系";
+	//$contentsEditorTypes[6]="バ―チャル高校野球動画";
 	
 	$contentsEditorPatterns[0][]=array("textarea","本文","title","20",82,"",$MULTILANG);
 	
@@ -25,6 +26,8 @@ if($_GET["cid"]==1){
 	$contentsEditorPatterns[4][]=array("inputmenu","表データ","title","2","","",$MULTILANG);
 
 	$contentsEditorPatterns[5][]=array("textarea","script, iframe等","title","5",81,"",$MULTILANG);
+	
+	//$contentsEditorPatterns[6][]=array("textfield","Brightcove RefID","media","40","","",0);
 }
 
 ?>
