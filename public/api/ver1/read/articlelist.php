@@ -92,12 +92,34 @@ if(strlen($api)>0){
 		// #860 - ダミーレスポンス
 		}elseif($type === "recommend"){
 			
+			/*
 			if ( $category === 'crazy' ){
 				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
 				$nsql="select count(id) as n from u_headline where cid=11 and flag=1";
 			}else{
 				
 			}
+			*/
+			
+			/*
+			
+			#970   https://github.com/undotsushin/undotsushin/issues/970
+			カテゴリーだけではなく、一覧にも適用
+			
+			*/
+			
+			$sql=sprintf("select id from repo where t1='%s'",$category);
+			$o->query($sql);
+			$f=$o->fetch_array();
+			
+			if(strlen($f["id"])>0){
+				$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$f["id"],sprintf($articletable,set_isbookmark($uid),""));
+				$nsql=sprintf("select count(id) as n from u_headline where cid=11 and flag=1",$c["id"]);
+			}else{
+				
+			}
+			
+			
 		}
 	
 	}elseif($api==="search"){
@@ -184,8 +206,6 @@ if(strlen($api)>0){
 	}
 }
 
-echo $sql;
-
 if($y["status"]["code"]===200){
 	
 	$o->query($nsql);
@@ -196,44 +216,10 @@ if($y["status"]["code"]===200){
 	
 		$o->query($sql);
 		while($f=$o->fetch_array())$p[]=$f;
-		for($i=0;$i<count($p);$i++){
-			
-			$s[$i]=set_articleinfo($p[$i]);
-			
-			$sql=sprintf("select count(*) as n from u_ranking where pageid=%s and flag=1 and userflag=1",$p[$i]["id"]);
-			$o->query($sql);
-			$f=$o->fetch_array();
-			
-			$s[$i]["comments_count"]=(int)$f["n"];
-			
-			if($f["n"]>0){
-				
-				$sql=sprintf("select * from 
-					(select t2.*,t1.good,t1.bad,t1.rank from 
-						(select commentid,good,bad,reply,rank from u_ranking where pageid=%s and flag=1 and userflag=1 order by rank desc limit %s offset %s) as t1,
-						(select %sid,comment,userid,pageid,regitime from u_comment where pageid=%s) as t2 
-					where t1.commentid=t2.id) as st1,
-					(select 
-						id as uid,
-						cid as typeid,
-						(select name from repo where id=cid) as type,
-						title as name,
-						t2 as profile,
-						img1 as icon 
-					from u_member where flag=1) as st2
-					where st1.userid=st2.uid order by rank desc",$p[$i]["id"],6,0,set_isreaction($uid),$p[$i]["id"]);
-
-				$o->query($sql);
-				$n=0;
-
-				while($f=$o->fetch_array()){
-					$s[$i]["comments_popular"][$n]=set_commentinfo($f,1);
-					$n++;
-				}
-			}else{
-				$s[$i]["comments_popular"]=array();
-			}
-		}
+		
+		//カテゴリー一覧でも使うのでファイルに出す
+		include "public/articlecomments.php";
+		
 	}else{
 		if($api==="search")set_status(array("code"=>404,"user_message"=>sprintf("検索語%sに該当する記事はありませんでした。",$_REQUEST["q"]),"developer_message"=>""));
 	}
