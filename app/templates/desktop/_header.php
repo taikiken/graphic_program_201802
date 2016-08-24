@@ -74,6 +74,11 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
   <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/ima_plugin/css/IMAstyle.css">
+  <link href="/assets/ima_plugin/css/video-js-cdn.css" rel="stylesheet">
+  <script src="/assets/ima_plugin/js/video.js"></script>
+  <script src="/assets/ima_plugin/js/videojs-contrib-hls.js"></script>
+  <script type="text/javascript" src="http://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 <?php
 endif;
 // eof brightcove

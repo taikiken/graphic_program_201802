@@ -133,6 +133,17 @@ if ( $page['apiRoot'] != '' ) :
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
-
+<script>
+window.onload = function () {
+  addJsLink("/assets/ima_plugin/js/ads.js");
+  videoContent = document.getElementById('contentElement_html5_api');
+}
+function addJsLink(url) {
+  var headTag = document.getElementsByTagName("HEAD")[0];
+  var jscript  = document.createElement('script');
+      jscript.src = url;
+      headTag.appendChild(jscript);
+}
+</script>
 </body>
 </html>
