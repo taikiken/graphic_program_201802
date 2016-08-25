@@ -59,11 +59,10 @@ export let ImaplayerNode = React.createClass( {
     return (
       <div id="mainContainer">
         <div id="content">
-          <video poster={poster} width={Content.WIDTH} height={Content.HD_HEIGHT} preload="none" className="video-js vjs-default-skin" controls ref="video" data-setup="{}" id="contentElement">
+          <video poster={poster} width={Content.WIDTH} height={Content.HD_HEIGHT} preload="none" className="video-js vjs-default-skin" controls ref="video" data-setup="{}" id="content_video">
             <source src={url} type="application/x-mpegURL"/>
           </video>
         </div>
-        <div id="adContainer"></div>
       </div>
     );
   }

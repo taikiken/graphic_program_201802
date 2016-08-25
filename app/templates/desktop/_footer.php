@@ -133,17 +133,68 @@ if ( $page['apiRoot'] != '' ) :
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<?php
+// ---------------------------------------------------------------------------
+// brightcove
+if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
+  // brightcove code をここに
+  // JS で非同期で読み込むと付随コードの読み込みが行われない様子
+?>
 <script>
-window.onload = function () {
-  addJsLink("/assets/ima_plugin/js/ads.js");
-  videoContent = document.getElementById('contentElement_html5_api');
-}
-function addJsLink(url) {
-  var headTag = document.getElementsByTagName("HEAD")[0];
-  var jscript  = document.createElement('script');
-      jscript.src = url;
-      headTag.appendChild(jscript);
-}
+var flgRun = true;
+
+$(document).on('DOMNodeInserted', function(e) {
+    if ($(".vjs-control-bar")[0] != null && flgRun) {
+       //element with #someID was inserted.
+       flgRun = false;
+       var player = videojs('content_video');
+
+       var options = {
+       id: 'content_video',
+       /*adTagUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&' +
+       'iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&' +
+       'impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&' +
+       'cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&' +
+       'vid=short_onecue&correlator='
+       */
+       adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?' +
+      'sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&' +
+      'impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&' +
+      'cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator='
+      };
+
+       player.ima(options);
+
+       // Remove controls from the player on iPad to stop native controls from stealing
+       // our click
+       var contentPlayer =  document.getElementById('content_video_html5_api');
+       if ((navigator.userAgent.match(/iPad/i) ||
+       navigator.userAgent.match(/Android/i)) &&
+       contentPlayer.hasAttribute('controls')) {
+       contentPlayer.removeAttribute('controls');
+       }
+
+       // Initialize the ad container when the video player is clicked, but only the
+       // first time it's clicked.
+       var startEvent = 'click';
+       if (navigator.userAgent.match(/iPhone/i) ||
+       navigator.userAgent.match(/iPad/i) ||
+       navigator.userAgent.match(/Android/i)) {
+       startEvent = 'touchend';
+       }
+
+       player.one(startEvent, function() {
+       player.ima.initializeAdDisplayContainer();
+       player.ima.requestAds();
+       player.play();
+       });
+       //$(".vjs-big-play-button")[0].style.display = "none";
+       contentPlayer.click();
+    }
+});
 </script>
+<?php
+endif;
+?>
 </body>
 </html>

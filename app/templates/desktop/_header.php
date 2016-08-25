@@ -71,14 +71,17 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     }
   </style>
 
-  <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
-  <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
-  <link rel="stylesheet" type="text/css" href="/assets/ima_plugin/css/IMAstyle.css">
-  <link href="/assets/ima_plugin/css/video-js-cdn.css" rel="stylesheet">
-  <script src="/assets/ima_plugin/js/video.js"></script>
-  <script src="/assets/ima_plugin/js/videojs-contrib-hls.js"></script>
-  <script type="text/javascript" src="http://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <link rel="stylesheet" href="/assets/ima_plugin/css/video-js.min.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="/assets/ima_plugin/js/video.min.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
+  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
 <?php
 endif;
 // eof brightcove
