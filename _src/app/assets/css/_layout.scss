@@ -65,25 +65,26 @@ textarea {
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .head-sec {
-  @at-root {
-    &-inner {
-      @include clearfix;
-      width: $global-inner-width;
-      margin: 0 auto;
+  &-inner {
+    @include clearfix;
+    position: relative;
+    width: $global-inner-width;
+    height: 50px;
+    margin: 0 auto;
 
-      h1 {
-        float: left;
-        margin: 10px 0;
+    h1 {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
 
-        a {
-          @extend .sprite-header;
-          @include sprite( $header-logo );
-          @include hide-text;
-        }
+      a {
+        @extend .sprite-header;
+        @include sprite( $header-logo );
+        @include hide-text;
       }
     }
   }
-
 
   #head-search-container {
     float: left;
@@ -94,10 +95,10 @@ textarea {
     @include clearfix;
     // float: left;
     // width: 300px;
-    margin-top: 14px;
+    margin-top: 10px;
     padding: 0 14px;
     background-color: #eee;
-    border-radius: 17px;
+    border-radius: 15px;
 
     input {
       border: none;
@@ -108,8 +109,10 @@ textarea {
     input[type="text"] {
       float: left;
       width: 250px;
-      padding: 8px 0;
+      padding: 5px 0;
       vertical-align: middle;
+      font-weight: bold;
+      font-size: fz(12);
     }
 
     input[type="submit"] {
@@ -134,15 +137,23 @@ textarea {
   .user {
     @include clearfix;
     float: left;
-    margin-top: 14px;
-    margin-left: 15px;
+    margin-top: 8px;
 
     .btn-signup {
       @include link-decoration($highlight-color, $highlight-color, none, none);
       display: table-cell;
       height: 35px;
       font-weight: bold;
+      font-size: fz(12);
       vertical-align: middle;
+
+      &:before {
+        content: '';
+        @extend .sprite-header;
+        @include sprite( $header-icon-signup, inline-block );
+        @include hide-text;
+        vertical-align: middle;
+      }
     }
   }
 
@@ -150,6 +161,7 @@ textarea {
 
   .notice-container {
     float: left;
+    margin-top: 6px;
   }
 
   .notice {
@@ -168,7 +180,7 @@ textarea {
     &-num {
       position: absolute;
       top: -5px;
-      right: -5px;
+      right: -10px;
       display: block;
       width: 20px;
       height: 20px;
@@ -186,8 +198,8 @@ textarea {
       z-index: 9999;
       display: block;
       position: absolute;
-      top: 57px;
-      left: -325px;
+      top: 51px;
+      left: -331px;
 
       .dropMenu {
         width: 360px;
@@ -270,7 +282,7 @@ textarea {
   .preference {
     position: relative;
     float: left;
-    margin-left: 15px;
+    margin-left: 20px;
 
     @at-root {
       &-opener {
@@ -420,22 +432,23 @@ textarea {
     max-height: 40px;
     // line-height: 40px;
     padding: 10px 8px 12px;
-    @include link-decoration(#ccc, $highlight-color, none, none);
+    @include link-decoration(#ccc, $highlight-secondary-color, none, none);
     font-weight: bold;
+    font-size: fz(11);
     white-space: nowrap;
 
     &:hover {
       padding-bottom: 10px;
-      border-bottom: 2px solid $highlight-color;
-      color: $highlight-color;
+      border-bottom: 2px solid $highlight-secondary-color;
+      color: $highlight-secondary-color;
     }
   }
 
   .current {
     a {
       padding-bottom: 10px;
-      border-bottom: 2px solid $highlight-color;
-      color: $highlight-color;
+      border-bottom: 2px solid $highlight-secondary-color;
+      color: $highlight-secondary-color;
     }
   }
 
