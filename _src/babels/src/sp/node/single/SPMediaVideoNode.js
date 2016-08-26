@@ -19,6 +19,7 @@ import {Safety} from '../../../data/Safety';
 // node
 import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
 import {BrightcoveNode} from '../../../node/media/BrightcoveNode';
+import {ImaplayerNode} from '../../../node/media/ImaplayerNode';
 
 // React
 let React = self.React;
@@ -45,7 +46,10 @@ export let SPMediaVideoNode = React.createClass( {
 
       case VideoType.BRIGHTCOVE:
         // return this.video( media );
-        return this.brightcove( media );
+        return this.imaplayer( media );
+
+      case VideoType.IMAPLAYER:
+        return this.imaplayer( media );
 
       case VideoType.YOUTUBE:
         return this.youtube( media );
@@ -88,6 +92,22 @@ export let SPMediaVideoNode = React.createClass( {
     // HTML5 video
     return (
       <BrightcoveNode
+        articleId={this.props.articleId}
+        video={video}
+        poster={poster}
+        caption={caption}
+        playImage={Empty.VIDEO_PLAY}
+      />
+    );
+  },
+  imaplayer: function( media ) {
+    let images = media.images;
+    let video = media.video;
+    let caption = video.caption || '';
+    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
+
+    return (
+      <ImaplayerNode
         articleId={this.props.articleId}
         video={video}
         poster={poster}

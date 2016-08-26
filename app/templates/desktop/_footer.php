@@ -174,22 +174,10 @@ $(document).on('DOMNodeInserted', function(e) {
        contentPlayer.removeAttribute('controls');
        }
 
-       // Initialize the ad container when the video player is clicked, but only the
-       // first time it's clicked.
-       var startEvent = 'click';
-       if (navigator.userAgent.match(/iPhone/i) ||
-       navigator.userAgent.match(/iPad/i) ||
-       navigator.userAgent.match(/Android/i)) {
-       startEvent = 'touchend';
-       }
-
-       player.one(startEvent, function() {
        player.ima.initializeAdDisplayContainer();
        player.ima.requestAds();
        player.play();
-       });
-       //$(".vjs-big-play-button")[0].style.display = "none";
-       contentPlayer.click();
+       $(".vjs-big-play-button")[0].style.display = "none";
     }
 });
 </script>

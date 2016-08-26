@@ -44,6 +44,12 @@ export let ImaplayerNode = React.createClass( {
   },
   getInitialState: function() {
     this.videoElement = null;
+    /**
+     * スマホかを表す真偽値
+     * @protected
+     * @type {Boolean}
+     */
+    this.phone = Sagen.Browser.Mobile.phone();
 
     return {
       showPlay: this.props.showPlay,
@@ -55,11 +61,13 @@ export let ImaplayerNode = React.createClass( {
     let poster = this.props.poster;
     let caption = this.props.caption;
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
+    let width = this.phone ? window.innerWidth : Content.WIDTH;
+    let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
 
     return (
       <div id="mainContainer">
         <div id="content">
-          <video poster={poster} width={Content.WIDTH} height={Content.HD_HEIGHT} preload="none" className="video-js vjs-default-skin" controls ref="video" data-setup="{}" id="content_video">
+          <video poster={poster} width={`${width}px`} height={`${height}px`} preload="none" className="video-js vjs-default-skin" controls ref="video" data-setup="{}" autoplay id="content_video">
             <source src={url} type="application/x-mpegURL"/>
           </video>
         </div>
