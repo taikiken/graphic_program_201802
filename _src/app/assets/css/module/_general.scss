@@ -696,6 +696,18 @@
   input[ type="button" ],
   a {
     min-width: 250px;
+    line-height: 50px - 2*2;
+    border: 2px solid $highlight-secondary-color;
+    border-radius: 3px;
+    background-color: $highlight-secondary-color;
+
+    &:hover {
+      border: 2px solid $highlight-secondary-color;
+    }
+  }
+
+  a:hover {
+    color: $highlight-secondary-color;
   }
 
   // input[ type="submit" ],
@@ -720,10 +732,15 @@
   //   @include link-decoration(#fff, #fff, none, none);
   // }
 
-  // input[ type="submit" ],
-  // input[ type="button" ] {
-  //   color: #fff;
-  // }
+  input[ type="submit" ],
+  input[ type="button" ] {
+    color: #fff;
+  }
+
+  input[ type="submit" ]:hover,
+  input[ type="button" ]:hover {
+    color: $highlight-secondary-color;
+  }
 }
 
 

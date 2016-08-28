@@ -78,17 +78,17 @@
         &:before {
           content: '';
           position: relative;
-          top: 2px;
+          top: -1px;
           margin-right: 4px;
           @extend .sprite-setting;
-
+          vertical-align: middle;
         }
       }
 
       &.current {
         span {
           color: $highlight-color;
-          font-weight: bold;
+          // font-weight: bold;
         }
       }
     }
@@ -97,17 +97,35 @@
       span:before {
         @include sprite( $setting-icon-nav-basic, inline-block );
       }
+
+      &.current {
+        span:before {
+          @include sprite( $setting-icon-nav-basic_o, inline-block );
+        }
+      }
     }
 
     &-interest {
       span:before {
         @include sprite( $setting-icon-nav-interest, inline-block );
       }
+
+      &.current {
+        span:before {
+          @include sprite( $setting-icon-nav-interest_o, inline-block );
+        }
+      }
     }
 
     &-sns {
       span:before {
         @include sprite( $setting-icon-nav-sns, inline-block );
+      }
+
+      &.current {
+        span:before {
+          // @include sprite( $setting-icon-nav-sns_o, inline-block );
+        }
       }
     }
   } //at-root
@@ -119,7 +137,7 @@
 // setting-heading
 .setting-heading {
   h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+    // font-weight: bold;
     font-size: fz(20);
   }
 } //.setting-heading
@@ -277,7 +295,7 @@
         }
 
         &:hover {
-          background-color: #ffe9f3;
+          background-color: lighten( $highlight-color, 65% );
         }
       }
 
@@ -375,15 +393,3 @@
 
   } //at-root
 } //.linkage-sns
-
-
-
-
-
-// btn-withdraw
-.btn-withdraw {
-  a {
-    width: 280px;
-    background-color: #e14343 !important;
-  }
-} //btn-withdraw
