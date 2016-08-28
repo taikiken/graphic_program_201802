@@ -25,7 +25,7 @@
   <script src="/assets/js/libs/vendor.react.js"></script>
 </head>
 <body>
-<div class="whole">
+<div class="whole home">
   <header class="head-sec">
     <div class="head-sec-inner">
       <aside class="f-left clearfix">
@@ -302,15 +302,15 @@
         <aside class="sns-pr">
           <dl class="sns-pr-inner">
             <dt>
-              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              <p><img src="/assets/images/index/sns-pr-logo.png" alt="SPORTS BULL"><span>を<strong>いいね</strong>して最新ニュースをチェック！</span></p>
             </dt>
             <dd>
-              <p>運動通信を<strong>いいね</strong>して最新ニュースをチェック！</p>
+              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
             </dd>
           </dl><!-- /.sns-pr-inner -->
         </aside><!-- /.sns-pr -->
 
-        <div class="board-large">
+        <div class="board-large debug-visible">
           <div id="board-container">
             <div class="column1 board-large-column">
               <div class="board-item">
@@ -371,7 +371,7 @@
       <section class="side-sec">
         <div class="sponsor-link"><a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-sponsor_1.jpg" alt=""></a></div>
 
-        <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
+        <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="SPORTS BULLアプリ版(iPhone/Android対応) アプリでサクサク楽しむ！"></a></div>
 
         <div class="board-small widget-ranking">
           <div class="widget-ranking-heading">
@@ -447,9 +447,9 @@
           <ul class="board-list">
             <li class="board-item">
               <a class="post" href="hoge">
-                <figure class="post-thumb">
-                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                <figure class="post-thumb post-thumb-video">
+                  <img class="video-thumbnail" src="/assets/images/dummy/thumb-16x9-s_1.jpg" alt="">
+                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-16x9-play-s.png" alt="">
                 </figure>
 
                 <div class="post-data">
@@ -461,9 +461,9 @@
             </li>
             <li class="board-item">
               <a class="post" href="hoge">
-                <figure class="post-thumb">
-                  <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                <figure class="post-thumb post-thumb-video">
+                  <img class="video-thumbnail" src="/assets/images/dummy/thumb-16x9-s_2.jpg" alt="">
+                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-16x9-play-s.png" alt="">
                 </figure>
 
                 <div class="post-data">
@@ -475,9 +475,9 @@
             </li>
             <li class="board-item">
               <a class="post" href="hoge">
-                <figure class="post-thumb">
-                  <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                <figure class="post-thumb post-thumb-video">
+                  <img class="video-thumbnail" src="/assets/images/dummy/thumb-16x9-s_3.jpg" alt="">
+                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-16x9-play-s.png" alt="">
                 </figure>
 
                 <div class="post-data">
@@ -489,7 +489,10 @@
             </li>
             <li class="board-item">
               <a class="post" href="hoge">
-                <figure class="post-thumb">&nbsp;</figure>
+                <figure class="post-thumb post-thumb-video">
+                  <img class="video-thumbnail" src="/assets/images/dummy/thumb-16x9-s_4.jpg" alt="">
+                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-16x9-play-s.png" alt="">
+                </figure>
 
                 <div class="post-data">
                   <p class="post-category">バレー</p>
@@ -500,9 +503,9 @@
             </li>
             <li class="board-item">
               <a class="post" href="hoge">
-                <figure class="post-thumb">
-                  <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-overlay-movie-340x150.png" alt="">
-                  <img src="/assets/images/dummy/thumb-340x150_1.jpg" alt="">
+                <figure class="post-thumb post-thumb-video">
+                  <img class="video-thumbnail" src="/assets/images/dummy/thumb-16x9-s_5.jpg" alt="">
+                  <img class="post-thumb-overlay-movie type-movie" src="/assets/images/common/thumb-16x9-play-s.png" alt="">
                 </figure>
 
                 <div class="post-data">
@@ -522,17 +525,25 @@
 
   <footer class="foot-sec">
     <div class="foot-sec-inner">
+      <nav class="foot-breadCrumb">
+        <ol itemscope itemtype="http://schema.org/breadCrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="category.php"><span itemprop="name">海外サッカー</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="p.php"><span itemprop="name">パナソニックのオリンピック・アクティベーション 「Active Learning Camp」の可能性</span><meta itemprop="position" content="3" /></a></li>
+        </ol>
+      </nav><!-- /.foot-breadCrumb -->
+
       <div class="foot-pr">
         <div class="foot-pr-inner">
           <figure><img src="/assets/images/common/footer-overview-figure.png" alt=""></figure>
 
           <div class="text-block">
-            <h3><img src="/assets/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></h3>
-            <p>話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「運動通信」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
-            <ul>
+            <h3 class="foot-pr-logo"><img src="/assets/images/common/footer-overview-logo.png" alt="SPORTS BULL アプリ版(iPhone/Android)"></h3>
+            <ul class="foot-pr-btn">
               <li><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
               <li><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
             </ul>
+            <p class="foot-pr-text">話題のスポーツニュースがサクサク読める、無料のニュースまとめアプリ「スポーツ・ブル」。高品質なスポーツのニュース、動画をいつでもお楽しみ頂けます。スマートフォンアプリをダウンロードして今日のニュースをチェックしましょう。</p>
           </div><!-- /.text-block -->
 
           <div class="fb-page-plugin">
@@ -543,27 +554,27 @@
 
       <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
-      <nav class="fnav">
-        <ul>
-          <li><a href="/about/ads/">広告掲載について</a></li>
-          <li><a href="/about/">運動通信アプリの紹介</a></li>
-          <li><a href="/about/privacy/">個人情報の取り扱いについて</a></li>
-          <li><a href="/about/terms/">利用規約</a></li>
-          <li><a href="/about/company/">運営会社</a></li>
-          <li><a href="/about/faq/">FAQ</a></li>
-          <li><a href="/about/contact/">お問い合せ</a></li>
-        </ul>
-      </nav><!-- /.fnav -->
+      <div class="fnav-block">
+        <nav class="fnav">
+          <h3 class="fnav-logo"><img src="/assets/images/common/footer-fnav-logo.png" alt="SPORTS BULL"></h3>
+          <ul>
+            <li><a href="/about/">サービス紹介</a></li>
+            <li><a href="/about/company/">会社概要</a></li>
+            <li><a href="/about/privacy/">プライバシーポリシー</a></li>
+            <li><a href="/about/terms/">利用規約</a></li>
+          </ul>
+        </nav><!-- /.fnav -->
 
-      <div class="sns-block">
-        <ul>
-          <li class="sns-fb"><a href="https://www.facebook.com/undotsushin/" target="_blank">facebook</a></li>
-          <li class="sns-tw"><a href="https://twitter.com/undotsushin" target="_blank">twitter</a></li>
-          <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
-        </ul>
-      </div><!-- /.sns-block -->
+        <div class="sns-block">
+          <ul>
+            <li class="sns-fb"><a href="https://www.facebook.com/undotsushin/" target="_blank">facebook</a></li>
+            <li class="sns-tw"><a href="https://twitter.com/undotsushin" target="_blank">twitter</a></li>
+            <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+          </ul>
+        </div><!-- /.sns-block -->
 
-      <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
+        <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
+      </div><!-- /.fnav-block -->
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 </div><!-- /.whole -->
