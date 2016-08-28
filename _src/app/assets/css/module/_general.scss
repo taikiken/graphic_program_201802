@@ -663,69 +663,67 @@
   a {
     display: inline-block;
     min-width: 160px;
-    line-height: 50px;
+    line-height: 42px - 2*2;
     padding-right: 4px;
     padding-left: 4px;
     border: 2px solid $highlight-color;
+    border-radius: 6px;
+    background-color: $highlight-color;
     font-weight: bold;
     text-align: center;
 
     &:hover {
-      border: none;
-      background-color: $highlight-color;
+      border: 2px solid $highlight-color;
+      background-color: #fff;
       transition: background-color ease-out .4s;
     }
   }
 
   a {
-    @include link-decoration($highlight-color, #fff, none, none);
+    @include link-decoration(#fff, $highlight-color, none, none);
   }
 }
 
 
 
 
-// sponsor-link
-// 広告の横幅728px問題、暫定対応
-// .sponsor-link {
-//   &.w728 {
-//     position: relative;
-//     left: -9px;
-//     width: 728px;
-//   }
-// }
-
-
-
 
 // mod-btnB01
 .mod-btnB01 {
+  @extend .mod-btnA01;
+
   input[ type="submit" ],
   input[ type="button" ],
   a {
-    display: inline-block;
     min-width: 250px;
-    line-height: 50px;
-    padding-right: 4px;
-    padding-left: 4px;
-    border-radius: 3px;
-    background-color: $highlight-color;
-    font-weight: bold;
-    text-align: center;
-
-    &:hover {
-      @include hover-opacity;
-    }
   }
 
-  a {
-    @include link-decoration(#fff, #fff, none, none);
-  }
+  // input[ type="submit" ],
+  // input[ type="button" ],
+  // a {
+  //   display: inline-block;
+  //   min-width: 250px;
+  //   line-height: 50px;
+  //   padding-right: 4px;
+  //   padding-left: 4px;
+  //   border-radius: 3px;
+  //   background-color: $highlight-color;
+  //   font-weight: bold;
+  //   text-align: center;
 
-  input[ type="submit" ],
-  input[ type="button" ] {
-    color: #fff;
-  }
+  //   &:hover {
+  //     @include hover-opacity;
+  //   }
+  // }
+
+  // a {
+  //   @include link-decoration(#fff, #fff, none, none);
+  // }
+
+  // input[ type="submit" ],
+  // input[ type="button" ] {
+  //   color: #fff;
+  // }
 }
 
 
@@ -781,6 +779,10 @@
     background-color: #fff;
   }
 }
+
+
+
+
 
 // -------------------------------------------------
 // category が 2個になった
