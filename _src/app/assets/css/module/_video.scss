@@ -6,3 +6,12 @@
 // design module video
 //
 // Styleguide 2.10.0
+
+// https://github.com/undotsushin/undotsushin/issues/997
+// https://github.com/undotsushin/undotsushin/pull/1049
+// Safari + Brightcove で right bottom にボーダーが表示される
+.safari {
+  .video-js {
+    background-color: transparent;
+  }
+}
