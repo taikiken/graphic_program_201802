@@ -125,9 +125,9 @@ img {
 
       h1 {
         position: absolute;
-        top: (24/2)+px;
+        top: (36/2)+px;
         left: 50%;
-        margin-left: -(82/2)+px;
+        margin-left: -(132/2)+px;
 
         a {
           @extend .sp-sprite-header;
@@ -166,9 +166,9 @@ img {
         left: (30/2)+px;
         display: block;
         width: (46/2)+px;
-        height: (4/2)+px;
+        height: (6/2)+px;
         line-height: 0;
-        background-color: #333;
+        background-color: $highlight-color;
         font-size: 0;
 
         &:nth-child(1) {
@@ -201,11 +201,91 @@ img {
   }
 
 
+  @at-root {
+    #user-profile-container {
+      float: left;
 
-  .user {
-    float: left;
-    margin: (20/2)+px (26/2)+px 0 0;
+      .user {
+        float: left;
+        margin: (20/2)+px (26/2)+px 0 0;
+
+        // notice
+        .notice-container {
+          float: left;
+        }
+
+        // notice
+        .notice-menu {
+          display: block;
+        }
+        // 非表示
+        .close {
+          .notice-menu {
+            overflow: hidden;
+            height: 0;
+            width: 0;
+          }
+        }
+        // 表示
+        .open {
+          .notice-menu {
+            overflow: visible;
+            width: 360px;
+            height: auto;
+          }
+        }
+
+        // setting
+        .preference-menu {
+          display: block;
+        }
+        .dropMenu {
+          opacity: 0;
+
+          transition-property: opacity;
+          transition-duration: 0.3s;
+          transition-timing-function: linear;
+        }
+
+        // 非表示
+        .close {
+          .preference-menu {
+            overflow: hidden;
+            height: 0;
+            width: 0;
+
+            transition-property: width, height;
+            transition-duration: 0.001s;
+            transition-delay: 0.05s;
+          }
+        }
+
+        // 表示
+        .open {
+          .preference-menu {
+            overflow: visible;
+            width: 160px;
+            height: 162px;
+          }
+        }
+
+        // ----------------------------------------------
+        // motion
+        .close {
+          .dropMenu {
+            opacity: 0;
+            transition-duration: 0.05s;
+          }
+        }
+        .open {
+          .dropMenu {
+            opacity: 1;
+          }
+        }
+      }
+    }
   }
+
 
 
 
@@ -373,7 +453,7 @@ img {
   .current {
     a {
       border-radius: 15px;
-      background-color: $highlight-color;
+      background-color: $highlight-secondary-color;
       color: #fff;
     }
   }
@@ -405,7 +485,9 @@ img {
 .foot {
   @at-root {
     &-sec {
-      background-color: #111;
+      padding-bottom: (204/2)+px;
+      background: #030b1a url(/assets/sp/images/common/footer-bg.png) center bottom no-repeat;
+      background-size: (332/2)+px;
 
       &-inner {}
     }
@@ -414,7 +496,6 @@ img {
       width: 100%;
       height: (80/2)+px;
       overflow: hidden;
-      background-color: #111;
 
       ol {
         list-style: none;
@@ -477,9 +558,6 @@ img {
       &-inner {
         display: table;
         padding: (30/2)+px perCalc(30);
-        border-top: 1px solid #333;
-        border-bottom: 1px solid #333;
-        background-color: #222;
       }
 
       &-logo {
@@ -546,22 +624,45 @@ img {
       } // pagetop
 
       .fnav {
+        margin-top: (30/2)+px;
+
         ul {
+          @include clearfix;
+
           li {
-            border-bottom: 1px solid #333;
+            float: left;
+            width: 50%;
+            margin-bottom: (4/2)+px;
+
+            &:nth-child(2n) {
+              border-left: 2px solid #030b1a;
+            }
           }
 
           a {
-            @include link-decoration(#999, #999, none, underline);
+            @include link-decoration(#fff, #fff, none, underline);
+            position: relative;
             display: block;
-            padding: perCalc(30);
-            font-size: fz(24/2);
+            padding: (40/2)+px (20/2)+px;
+            background-color: #061533;
+            font-weight: bold;
+            font-size: fz(20/2);
+
+            &:before {
+              content: '';
+              @extend .sp-sprite-footer;
+              @include sprite( $footer-icon-arrow, inline-block );
+              @include hide-text;
+              position: relative;
+              top: 2px;
+              margin-right: (20/2)+px;
+            }
           }
         }
       } // fnav
 
       .sns-block {
-        margin-top: (30/2)+px;
+        margin-top: (50/2)+px;
 
         ul {
           text-align: center;
@@ -601,7 +702,7 @@ img {
 }
 
 .copyright {
-  padding: (30/2)+px 0;
+  padding-top: (30/2)+px;
   color: #666;
   font-weight: bold;
   font-size: fz(16/2);
@@ -878,14 +979,14 @@ div.synapse_logo {
 }
 
 .side-menu-ut-nav-link {
-  @include link-decoration(#fff, #fff, none, none);
+  @include link-decoration($highlight-color, $highlight-color, none, none);
   // position: relative;
   // top: 2px;
   display: block;
   line-height: 1.5;
   padding: (28/2)+px 0 (20/2)+px;
-  border-bottom: 1px solid #333;
-  background: #111;
+  border-bottom: 1px solid #eee;
+  background: #fff;
   font-weight: bold;
   font-size: fz(30/2);
   // vertical-align: top;
@@ -978,9 +1079,3 @@ div.synapse_logo {
   font-size: 10px;
   text-align: center;
 }
-
-
-
-// ---------------------------------------------------------
-// override
-@import "./layout_override";
