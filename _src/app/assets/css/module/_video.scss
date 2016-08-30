@@ -14,4 +14,10 @@
   .video-js {
     background-color: transparent;
   }
+
+  // https://github.com/undotsushin/undotsushin/issues/997#issuecomment-243293246
+  // video tag
+  video.vjs-tech {
+    object-fit: fill;
+  }
 }
