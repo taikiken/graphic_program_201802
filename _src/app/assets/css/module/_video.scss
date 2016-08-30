@@ -21,3 +21,12 @@
     object-fit: fill;
   }
 }
+
+// @since 2016-08-30
+// video 再生前の poster 上に border が表示される
+.body-sec {
+  .vjs-poster {
+    background-color: #fff;
+    object-fit: fill;
+  }
+}
