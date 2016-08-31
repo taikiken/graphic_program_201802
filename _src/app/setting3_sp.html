@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>[pagetitle] | 運動通信</title>
+  <title>[pagetitle] | SPORTS BULL</title>
   <meta name="description" content="説明文">
   <meta name="keywords" content="キーワード, キーワード, キーワード">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,10 +21,10 @@
 </head>
 <body>
 <div class="whole">
-  <div class="fixed">
+  <div class="header-sticky">
     <header class="head-sec">
       <div class="head-sec-inner">
-        <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
+        <h1><a href="/">SPORTS BULL</a></h1>
 
         <div id="menu-opener" class="menu-opener">
           <a id="side-menu-toggle" class="has-notification" href="#"><span></span><span></span><span></span></a>
@@ -33,29 +33,31 @@
         <aside class="f-right clearfix">
           <a class="head-search-opener" href="#">記事検索</a>
 
-          <div class="user">
-            <div class="preference">
-              <a class="preference-opener" href="#">
-                <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
-              </a>
-              <span class="preference-num">88</span>
-            </div><!-- /.preference -->
-          </div><!-- /.user -->
+          <div id="user-profile-container">
+            <div class="user">
+              <div class="preference">
+                <a class="preference-opener" href="#">
+                  <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
+                </a>
+                <span class="preference-num">88</span>
+              </div><!-- /.preference -->
+            </div><!-- /.user -->
+          </div><!--/header-user-->
         </aside>
       </div><!-- /.head-sec-inner -->
     </header><!-- /.head-sec -->
 
-    <div class="head-search">
+    <div class="head-search enable">
       <form action="">
         <input id="head-search" nama="head-search" type="text" placeholder="記事を検索">
         <input type="submit" value="検索">
       </form>
     </div><!-- /.head-search -->
 
-    <nav class="gnav-sec home">
+    <nav class="gnav-sec">
       <div class="gnav-sec-inner">
         <ul class="gnav">
-          <li class="gnav-home"><a href="hoge">一面</a></li>
+          <li class="gnav-home current"><a href="hoge">一面</a></li>
           <li class="gnav-crazy"><a href="hoge">CRAZY</a></li>
           <li class="gnav-all"><a href="hoge">すべて</a></li>
           <li class="gnav-baseball"><a href="hoge">野球</a></li>
@@ -79,7 +81,16 @@
         </ul><!-- /.gnav -->
       </div><!-- /.gnav-sec-inner -->
     </nav><!-- /.gnav-sec -->
-  </div><!-- /.fixed -->
+
+    <div class="dialogue-notice error">
+      <div class="dialogue-notice-inner">
+        <div class="dialogue-notice-info">
+          <p>パスワードが違います</p>
+        </div>
+        <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
+      </div>
+    </div><!-- /.dialogue-notice -->
+  </div><!-- /.header-sticky -->
 
   <div class="body-sec">
     <div class="body-sec-inner setting-bg">
@@ -114,11 +125,19 @@
 
   <footer class="foot-sec">
     <div class="foot-sec-inner">
+      <nav class="foot-breadCrumb">
+        <ol itemscope itemtype="http://schema.org/breadCrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="category.php"><span itemprop="name">海外サッカー</span><meta itemprop="position" content="2" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="p.php"><span itemprop="name">パナソニックのオリンピック・アクティベーション 「Active Learning Camp」の可能性</span><meta itemprop="position" content="3" /></a></li>
+        </ol>
+      </nav><!-- /.foot-breadCrumb -->
+
       <div class="foot-pr">
         <div class="foot-pr-inner">
-          <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></figure>
+          <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
           <div class="text-block">
-            <h3 class="foot-pr-heading">運動通信をアプリでサクサク楽しむ！</h3>
+            <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
             <ul class="foot-pr-list">
               <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
               <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
@@ -129,19 +148,18 @@
         <div class="fb-page-plugin">
           <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">運動通信（undotsushin）</a></blockquote></div></div>
         </div>
+
+        <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
       </div><!-- /.foot-pr -->
 
       <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
       <nav class="fnav">
         <ul>
-          <li><a href="/about/ads/">広告掲載について</a></li>
-          <li><a href="/about/">運動通信アプリの紹介</a></li>
-          <li><a href="/about/privacy/">個人情報の取り扱いについて</a></li>
+          <li><a href="/about/">サービス紹介</a></li>
+          <li><a href="/about/privacy/">プライバシーポリシー</a></li>
+          <li><a href="/about/company/">会社概要</a></li>
           <li><a href="/about/terms/">利用規約</a></li>
-          <li><a href="/about/company/">運営会社</a></li>
-          <li><a href="/about/faq/">FAQ</a></li>
-          <li><a href="/about/contact/">お問い合せ</a></li>
         </ul>
       </nav><!-- /.fnav -->
 
@@ -153,7 +171,7 @@
         </ul>
       </div><!-- /.sns-block -->
 
-      <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
+      <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
 
