@@ -63,7 +63,6 @@ export let ImaplayerNode = React.createClass( {
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
-
     return (
       <div id="mainContainer">
         <div id="content">
@@ -73,5 +72,50 @@ export let ImaplayerNode = React.createClass( {
         </div>
       </div>
     );
+  },
+  componentDidMount: function() {
+    let videoElement = ReactDOM.findDOMNode( this.refs.video );
+    this.videoElement = videoElement;
+    videoElement.addEventListener( 'ended', this.onEnded, false );
+    videoElement.addEventListener( 'pause', this.onPause, false );
+    var player = videojs('content_video');
+    let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
+    let adUrl = vast !== '' ? vast + Date.now() : '';
+    let option = {
+      id: 'content_video',
+      adTagUrl: adUrl
+    };
+    player.ima(option);
+    player.ima.initializeAdDisplayContainer();
+    player.ima.requestAds();
+    if(!Sagen.Browser.Mobile.is()){
+      player.play();
+    }
+  },
+  componentWillUnMount: function() {
+    let videoElement = this.videoElement;
+    videoElement.removeEventListener( 'ended', this.onEnded );
+    videoElement.removeEventListener( 'pause', this.onPause );
+    var player = videojs('content_video');
+    let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
+    let adUrl = vast !== '' ? vast + Date.now() : '';
+    let option = {
+      id: 'content_video',
+      adTagUrl: adUrl
+    };
+    player.ima(option);
+    player.ima.initializeAdDisplayContainer();
+    player.ima.requestAds();
+    if(!Sagen.Browser.Mobile.is()){
+      player.play();
+    }
+  },
+  onEnded: function( /* event */ ) {
+    // console.log( 'onEnded', event );
+    this.setState( { showPlay: true } );
+  },
+  onPause: function( /* event */ ) {
+    // console.log( 'onPause', event );
+    // this.setState( { showPlay: true } );
   }
 } );
