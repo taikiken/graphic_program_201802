@@ -37,7 +37,7 @@ if($complete==0){
                 </span>
               </span>
               <span className="form-parts align-right">
-                <span class="setting-form-submit mod-btnB01">
+                <span class="setting-form-submit mod-btnB02">
                   <input type="submit" value="送信">
                 </span>
               </span>
