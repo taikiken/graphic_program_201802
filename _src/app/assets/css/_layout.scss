@@ -630,6 +630,12 @@ textarea {
         right: 30px;
         bottom: 30px;
       }
+
+      // @since 2016-09-01
+      // 非表示にするためのクラス
+      &.blind {
+        display: none;
+      }
     } // pagetop
 
     .fnav-block {
