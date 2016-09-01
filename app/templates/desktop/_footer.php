@@ -45,7 +45,7 @@ if (
         </div><!-- /.foot-pr-inner -->
       </div><!-- /.foot-pr -->
 
-      <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+      <div id="pageTop" class="pagetop fixed blind"><a href="#"><span>このページの先頭へ<img src="/assets/images/sprite/sprite-footer.png" role="presentation"></span></a></div>
 
       <div class="fnav-block">
         <nav class="fnav">

@@ -37,6 +37,9 @@ import {CategoryLabelNode} from '../node/category/CategoryLabelNode';
 import {Ga} from '../ga/Ga';
 import {GaData} from '../ga/GaData';
 
+// util
+import { Scroll } from '../util/Scroll';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -66,6 +69,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
      * @default all
      */
     this.slug = 'all';
+
+    // @since @2016-09-01
+    this.scroll = Scroll.factory();
   }
   // ---------------------------------------------------
   //  METHOD
@@ -94,6 +100,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     // let action = this.action;
     // 参照を保持
     let _this = this;
+
+    const scroll = this.scroll;
 
     // --------------------------------------------
     // More button
@@ -683,6 +691,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         // hasNext を元に More View button の表示非表示を決める
         moreButton( this.props.action.hasNext() );
 
+        // @since 2016-09-01
+        // コンテナ高さが変わるので通知する
+        scroll.fire();
       }
     } );// ArticleDom
 
