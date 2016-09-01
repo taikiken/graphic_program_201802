@@ -1,0 +1,32 @@
+@import "../../../../scss/asset";
+// @import "../sprite";
+
+// video
+//
+// design module video
+//
+// Styleguide 2.12.0
+
+// https://github.com/undotsushin/undotsushin/issues/997
+// https://github.com/undotsushin/undotsushin/pull/1049
+// Safari + Brightcove で right bottom にボーダーが表示される
+.safari {
+  .video-js {
+    background-color: transparent;
+  }
+
+  // https://github.com/undotsushin/undotsushin/issues/997#issuecomment-243293246
+  // video tag
+  video.vjs-tech {
+    object-fit: fill;
+  }
+}
+
+// @since 2016-08-30
+// video 再生前の poster 上に border が表示される
+.body-sec {
+  .vjs-poster {
+    background-color: #fff;
+    object-fit: fill;
+  }
+}

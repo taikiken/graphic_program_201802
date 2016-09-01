@@ -524,6 +524,12 @@ img {
       .fb-page {
         width: 100% !important;
       }
+
+      &-bnr {
+        margin-top: (20/2)+px;
+        padding-right: perCalc(20);
+        padding-left: perCalc(20);
+      }
     } // foot-pr
 
     &-sec {
