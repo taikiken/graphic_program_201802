@@ -84,9 +84,9 @@ if (
     include_once __DIR__."/../_breadcrumb.php"; ?>
     <div class="foot-pr">
       <div class="foot-pr-inner">
-        <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></figure>
+        <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
         <div class="text-block">
-          <h3 class="foot-pr-heading">運動通信をアプリでサクサク楽しむ！</h3>
+          <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
           <ul class="foot-pr-list">
             <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
             <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
@@ -125,7 +125,7 @@ if (
       </ul>
     </div><!-- /.sns-block -->
 
-    <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
+    <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
   </div><!-- /.foot-sec-inner -->
 </footer><!-- /.foot-sec -->
   <?php
@@ -137,7 +137,7 @@ if (
   $template_name == 'reset_password.resetting'
 ) {
 ?>
-  <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
+  <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
 <?php
 }// end if
 // footer 表示条件 end
