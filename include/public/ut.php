@@ -316,6 +316,11 @@ function set_categoriesinfo($f){
 	$s["label"]=switch_category_title($f["name"],$f["title"]);
 	$s["slug"]=mod_HTML($f["name_e"]);
 	$s["url"]=sprintf("%s/%s/",$domain,$f["name_e"]);
+	
+	//https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
+	//タイトル画像のリンク追加
+	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
+	
 	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
 	$s["title"]=mod_HTML($f["title"]);
 	$s["description"]=mod_HTML($f["description"]);

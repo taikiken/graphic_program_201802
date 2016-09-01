@@ -61,6 +61,7 @@ AdHock版ダウンロード
 - 要点スケジュール : [Github Milestone](https://github.com/undotsushin/undotsushin/milestones)
 - 詳細スケジュール : [運動通信 / 進行管理 - Google スプレッドシート](https://docs.google.com/spreadsheets/d/1m5knqkvZKsB2WEkGCWdRTAMD17JipsK1KejTNgQsO10/edit#gid=407766018)
 
+[新 Google](https://docs.google.com/spreadsheets/d/1jA_-Ud7mTDfvb8U07fmMbvxIZaKQ7L86-JYWL8Y5JCE/edit#gid=1424394789)
 
 ### チームメンバー
 
