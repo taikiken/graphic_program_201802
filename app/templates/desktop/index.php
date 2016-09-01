@@ -16,10 +16,10 @@
         <aside class="sns-pr">
           <dl class="sns-pr-inner">
             <dt>
-              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            <p><img src="/assets/images/index/sns-pr-logo.png" alt="SPORTS BULL"><span>を<strong>いいね</strong>して最新ニュースをチェック！</span></p>
             </dt>
             <dd>
-              <p>運動通信を<strong>いいね</strong>して最新ニュースをチェック！</p>
+              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
             </dd>
           </dl><!-- /.sns-pr-inner -->
         </aside><!-- /.sns-pr -->
