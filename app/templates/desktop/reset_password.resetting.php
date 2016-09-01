@@ -32,7 +32,7 @@ if($complete==0){
               </span>
             </span>
             <div class="form-parts form-submit-parts">
-              <span class="setting-form-submit mod-btnB01">
+              <span class="setting-form-submit mod-btnB02">
                 <input type="submit" value="保存する">
               </span>
             </div>

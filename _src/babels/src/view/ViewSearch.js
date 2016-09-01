@@ -119,7 +119,7 @@ export class ViewSearch extends ViewArchiveMasonry {
 
         return (
           <div className="error-container">
-            <h2 className="mt80 f20 bold">検索結果が見つかりませんでした</h2>
+            <h2 className="search-heading mt60">検索結果が見つかりませんでした</h2>
             <p className="mt04">スペルを確認するか、他のキーワードを入力してみてください。</p>
             <div className="mod-btnA01 mt40">
               <a href="/">TOPに戻る</a>
