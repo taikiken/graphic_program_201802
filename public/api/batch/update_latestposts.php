@@ -37,7 +37,6 @@ $f=$o->fetch_array();
 $id=$f["id"];
 
 $s[]=sprintf("update u_latestpost set pageid=%s,num=%s where m1=0;",$id,$num);
-$s[]="update repo_n set m1=136 where  keyword like '%高校野球%' or keyword like '%地区大会%'";
 
 $s=implode("\n",$s);
 $o->query($s);

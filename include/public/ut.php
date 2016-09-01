@@ -12,6 +12,7 @@ $articletable="
 	id,
 	title,
 	(select body from repo_body where pid=repo_n.id) as body,
+	(select video from u_view where pageid=repo_n.id) as videoflag,
 	t16 as b1,
 	img1,
 	imgflag,
@@ -21,11 +22,12 @@ $articletable="
 	t1,
 	m1,
 	m2,
-	t10,t11,t12,t13,t14,
+	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
 	swf as video,
 	youtube,
 	facebook,
+	brightcove,
 	m_time,
 	t8 as videocaption,
 	t9
@@ -59,6 +61,7 @@ $articletable2="
 	id,
 	title,
 	(select body from repo_body where pid=repo_n.id) as body,
+	(select video from u_view where pageid=repo_n.id) as videoflag,
 	t16 as b1,
 	img1,
 	imgflag,
@@ -68,11 +71,12 @@ $articletable2="
 	t1,
 	m1,
 	m2,
-	t10,t11,t12,t13,t14,
+	t10,t11,t12,t13,t14,t15,
 	a1,a2,a3,a4,a5,a6,
 	swf as video,
 	youtube,
 	facebook,
+	brightcove,
 	m_time,
 	t8 as videocaption,
 	t9
@@ -300,8 +304,7 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 				elseif($ad[$i]["bannerflag"]==2)$s[$_banner[$j]]="";
 			}
 		}
-	}	
-	//var_dump($s);
+	}
 	return $s;
 }
 
@@ -313,6 +316,11 @@ function set_categoriesinfo($f){
 	$s["label"]=switch_category_title($f["name"],$f["title"]);
 	$s["slug"]=mod_HTML($f["name_e"]);
 	$s["url"]=sprintf("%s/%s/",$domain,$f["name_e"]);
+	
+	//https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
+	//タイトル画像のリンク追加
+	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
+	
 	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
 	$s["title"]=mod_HTML($f["title"]);
 	$s["description"]=mod_HTML($f["description"]);
@@ -344,12 +352,11 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$type:0 記事一覧　$type:1 記事詳細
 	*/
 	
-	global $ImgPath,$domain,$ad,$mediaoption,$videopath;
+	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$SERVERPATH;
 
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
 	
-	//$body=preg_replace("/\n/","",$f["body"]);
 	$body=$f["body"];
 	
 	$s["id"]=(int)$f["id"];
@@ -363,18 +370,49 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	if($type==1){	
 		$s["body"]=$body;
 		$s["body_escape"]=stripbr($f["body"]);
+		if($apidetails!=1)$s["media_vk_refid"]=strlen($f["brightcove"])>0?$f["brightcove"]:"";
 	}
 
+
+	#1013 続きを読む
+	/*
 	if($canonical==1){
 		$s["canonical"]["is_canonical"]=$f["canonical"]?true:false;
 		$s["canonical"]["url"]=$f["t9"];
 	}
-
 	if($readmore==1){
 		$s["readmore"]["is_readmore"]=$f["readmore"]?true:false;
 		$s["readmore"]["url"]=$f["t9"];
 	}
+	*/
+    $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
+    $v=unserialize(file_get_contents($file));
+    $readmoreflag=$v["readmore"];
+	$canonicalflag=$v["canonical"];
+	
+    $file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$f["id"]);
+    if(file_exists($file)){
+       $v=unserialize(file_get_contents($file));
+       $readmoreflag=$v["readmore"];
+    }
+	if($readmoreflag){
+		$s["readmore"]["is_readmore"]=true;
+		$s["readmore"]["url"]=$f["t9"];
+	}else{
+		$s["readmore"]["is_readmore"]=false;
+		$s["readmore"]["url"]="";
+	}
 
+	if($canonicalflag){
+		$s["canonical"]["is_canonical"]=true;
+		$s["canonical"]["url"]=$f["t9"];
+	}else{
+		$s["canonical"]["is_canonical"]=false;
+		$s["canonical"]["url"]="";
+	}
+	#1013 続きを読む ここまで
+	$s["url"]=sprintf("%s/%s/%s/",$domain,"p",$f["id"]);
+	
 	//カテゴリー期を見て配列のみに変更する
 	$cat1=switch_category_title($f["category"],$f["categorylabel"]);
 	$cat2=switch_category_title($f["category2"],$f["categorylabel2"]);
@@ -389,14 +427,21 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["categories"][1]["slug"]=$f["slug2"]; 
 	}
 
-	$s["url"]=sprintf("%s/%s/%s/",$domain,"p",$f["id"]);
-
 	$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
 	if($type==0)$s["is_recommend"]=$f["recommend"]==1?true:false;
 	$s["is_new"]=$datetime["relativetime"]<(60*24*30)?true:false;
 	if($type==1)$s["is_show_image"]=$f["imgflag"]==168?false:true;
 
 	$s["media_type"]=strlen($video)>0?"video":"image";
+	
+	#996 動画記事の判定ロジックを変更する
+	if($type==0){
+		if($s["media_type"]=="image"&&$f["videoflag"]==1){
+			$s["media_type"]="video";
+		}
+	}
+	#996 ここまで
+	
 	$s["media"]["images"]=get_img($f["img1"],$f["id"]);
 	$s["media"]["images"]["caption"]=checkstr($f["t1"],1);
 	
@@ -729,11 +774,18 @@ function bind($v){
 	return $v;
 }
 function get_summary($description,$body){
+
 	$s="";
+	
+	$description=preg_replace("#<script.*?</script>#ims","",$description);
+	$body=preg_replace("#<script.*?</script>#ims","",$body);
 	
 	$description=strip_tags($description);
 	$body=strip_tags($body);
-	
+
+	$description=preg_replace('/\s+/',' ',$description);
+	$body=preg_replace('/\s+/',' ',$body);
+
 	if(strlen($description)>0){
 		$s=$description;
 	}else{
@@ -741,6 +793,10 @@ function get_summary($description,$body){
 		$s=preg_replace("/(\n|\r)/","",$s);
 		$s=preg_replace("/(^　)/","",$s);
 	}
+	
+	//gorin.jp 強引に動画扱いにしたことで一覧に画像キャプションが出てしまうので削除
+	$s=str_replace("写真提供：Getty Images","",$s);
+	
 	$s=html_entity_decode($s);
 	if(mb_strlen($s)>90){
 		$s=sprintf("%s…",mb_substr($s,0,90));

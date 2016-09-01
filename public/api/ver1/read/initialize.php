@@ -158,6 +158,7 @@ for($i=0;$i<count($p);$i++){
 						img1 as icon 
 					from u_member where flag=1) as st2
 					where st1.userid=st2.uid order by rank desc",$p[$i]["id"],6,0,set_isreaction($uid),$p[$i]["id"]);
+					
 /*
 		$sql=sprintf("select * from 
 		(select t2.*,t1.good,t1.bad,t1.rank from 
