@@ -104,10 +104,20 @@ if ( $template_name == 'p' || $template_name == 'comment' ) {
 
 // in category
 if ( $template_name == 'category' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'layout-list';
+  // ---[end 2016-09-01]---
+
   // template_classname があれば
   if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
     $whole_classes[] = $page['template_classname'];
   }
+} elseif ( $template_name == 'index' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'home';
+  // ---[end 2016-09-01]---
 }
 ?>
 </head>
