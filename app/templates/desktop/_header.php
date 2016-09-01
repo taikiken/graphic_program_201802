@@ -135,10 +135,13 @@ if (
 ?>
   <header id="header-container" class="head-sec">
     <div class="head-sec-inner">
-      <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
+      <aside class="f-left clearfix">
+        <div id="head-search-container"></div><!-- /.head-search -->
+      </aside>
+
+      <h1><a href="/">SPORTS BULL</a></h1>
 
       <aside class="f-right clearfix">
-        <div id="head-search-container"></div><!-- /.head-search -->
         <div id="user-profile-container"></div><!--/header-user-->
       </aside>
     </div><!-- /.head-sec-inner -->
