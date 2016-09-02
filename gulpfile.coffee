@@ -273,7 +273,7 @@ gulp.task 'copy', (cb) ->
     [
       'bundle:copy'
       'libs:copy'
-#      'html:build'
+      'html:build'
       'js:dev'
       'image:copy'
       'font:copy'
@@ -299,7 +299,7 @@ gulp.task 'dev:init', (cb) ->
     'single:dev'
     'bundle:copy'
     'libs:synapse:dev'
-#      'html:build'
+    'html:build'
     'js:dev'
     'image:copy'
     'font:copy'
