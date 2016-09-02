@@ -30,3 +30,11 @@
     object-fit: fill;
   }
 }
+
+// @since 2016-09-02
+// safari + no retina display, ボーダーが消えない
+// https://github.com/undotsushin/undotsushin/issues/1063
+// https://github.com/undotsushin/undotsushin/issues/997#issuecomment-244279237
+.post-detail .post-video-kv .video-container {
+  overflow: hidden;
+}
