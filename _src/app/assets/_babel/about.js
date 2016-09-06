@@ -54,10 +54,10 @@ class Nav {
     const button = this.button;
 
     if (button.hasClass('active')) {
-      return this.close();
+      return this.beClose();
     }
 
-    return this.open();
+    return this.beOpen();
   }
   /**
    * div#js-header__btn--close click event handler
@@ -67,13 +67,13 @@ class Nav {
   onClose(event:Event) {
     event.preventDefault();
 
-    return this.close();
+    return this.beClose();
   }
   /**
    * メニューを閉じます
    * @return {boolean} 閉じると true を返します
    */
-  close():boolean {
+  beClose():boolean {
     const button = this.button;
     const target = this.target;
 
@@ -90,7 +90,7 @@ class Nav {
    * メニューを開きます
    * @return {boolean} 開くと true を返します
    */
-  open():boolean {
+  beOpen():boolean {
     const button = this.button;
     const target = this.target;
 
@@ -118,7 +118,12 @@ class Nav {
       return;
     }
 
-    const nav = new Nav(new Dom(button), new Dom(target));
+    const close = document.getElementById('js-header__btn--close');
+    if (!close) {
+      return;
+    }
+
+    const nav = new Nav(new Dom(button), new Dom(target), new Dom(close));
     nav.init();
   }
 }
