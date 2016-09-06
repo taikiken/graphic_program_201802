@@ -78,16 +78,52 @@ img {
 
 // 2. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
+
+// アプリダウンロードバナー
+.header-appbnr {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000px;
+  background-color: #000;
+  text-align: center;
+
+  &-link {
+    img {
+      width: auto;
+      height: (170/2)+px;
+    }
+  }
+
+  &-btn-close {
+    position: absolute;
+    top: (76/2)+px;
+    right: (10/2)+px;
+
+    @extend .sp-sprite-common;
+    @include sprite( $common-btn-notice-close );
+    @include hide-text;
+  }
+}
+
 // -------------------
 // header を fixed にする
 .header-sticky {
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   z-index: 100;
   background-color: #fff;
+
+  &.disable {
+    position: relative;
+    top: (170/2)+px;
+    left: auto;
+  }
 }
+
 .body-sec {
   margin-top: 100px;
 
@@ -97,6 +133,7 @@ img {
     margin-top: 140px;
   }
 }
+
 .search-form-open {
   // input:text focus でピョコンとなるバグ対策
   // scroll できなくなるので不採用
