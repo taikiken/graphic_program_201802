@@ -167,6 +167,10 @@ html, body {
         }
       }
 
+      &.active {
+        position: fixed;
+      }
+
       span {
         position: absolute;
         left: (30/2)+px;
@@ -285,9 +289,22 @@ html, body {
 
       transition: opacity .2s;
 
+      &__inner {
+        padding-bottom: (40/2)+px;
+      }
+
       &.active {
+        position: fixed;
+        top: 0;
+        left: 0;
         display: block;
         opacity: 1;
+
+        .header__nav__inner {
+          height: 100%;
+          overflow: scroll;
+          -webkit-overflow-scrolling: touch;
+        }
       }
 
       &__list {
@@ -325,7 +342,6 @@ html, body {
     &__btn--close {
       width: perCalc(560, 640);
       margin: (40/2)+px auto 0;
-      padding-bottom: (40/2)+px;
 
       a {
         @include link-decoration($highlight-color, $highlight-color, none, none);
