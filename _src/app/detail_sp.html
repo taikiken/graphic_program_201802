@@ -190,7 +190,9 @@
 </pre>
             </p>
           </div><!-- /.post-content -->
-          <a class="post-content-btn-readMore" href="#">続きを読む</a>
+          <div class="post-content-read-more">
+            <a class="post-content-btn-readMore" href="#">続きを読む</a>
+          </div>
 
           <div class="provider">
             <i class="provider-logo"><img src="/assets/images/detail/provider-logo-asahi.png" alt=""></i>
@@ -224,7 +226,7 @@
 
             <div class="post-sns-pr">
               <dl class="post-sns-pr-inner">
-                <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
+                <dt><span>いいねして最新ニュースをチェック！</span></dt>
                 <dd>
                   <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
                 </dd>
@@ -234,24 +236,6 @@
         </div><!-- /.post-detail -->
 
         <div class="comment">
-          <div class="comment-form-opener"><a class="comment-form-opener-trigger" href="#">コメントを投稿</a></div>
-          <div class="comment-form">
-            <form action="">
-              <div class="comment-form-inner">
-                <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
-                <div class="comment-form-comment-outer">
-                  <div class="comment-form-comment-inner">
-                    <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="5" placeholder="コメントを書く"></textarea>
-                  </div>
-                </div>
-              </div><!-- /.comment-form-inner -->
-
-              <div class="comment-form-submit">
-                <input type="submit" value="コメントを投稿">
-              </div>
-            </form>
-          </div><!-- /.comment-form -->
-
           <div class="comment-yours">
             <div class="comment-heading">
               <h2>自分のコメント</h2>
@@ -299,7 +283,7 @@
                         </div><!-- /.comment-form-inner -->
 
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -353,7 +337,7 @@
                           </div>
                         </div>
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -398,7 +382,7 @@
                           </div>
                         </div>
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -502,7 +486,7 @@
                           </div>
                         </div>
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -519,6 +503,24 @@
               <h2>みんなのコメント</h2>
             </div><!-- /.comment-heading -->
           </div><!-- /.comment-all -->
+
+          <div class="comment-form-opener"><a class="comment-form-opener-trigger" href="#">コメントを投稿</a></div>
+          <div class="comment-form">
+            <form action="">
+              <div class="comment-form-inner">
+                <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
+                <div class="comment-form-comment-outer">
+                  <div class="comment-form-comment-inner">
+                    <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="5" placeholder="コメントを書く"></textarea>
+                  </div>
+                </div>
+              </div><!-- /.comment-form-inner -->
+
+              <div class="comment-form-submit">
+                <button type="submit" value="send">コメントを投稿</button>
+              </div>
+            </form>
+          </div><!-- /.comment-form -->
         </div><!-- /.comment -->
 
         <div class="widget-ranking">

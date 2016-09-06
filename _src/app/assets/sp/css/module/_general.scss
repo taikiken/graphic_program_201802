@@ -370,8 +370,8 @@
   }
 
   a.enable {
-    border-color: #bbb;
-    background-color: #bbb;
+    border-color: $highlight-color;
+    background-color: $highlight-color;
     color: #fff;
 
     span:before {

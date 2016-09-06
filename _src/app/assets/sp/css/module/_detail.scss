@@ -220,9 +220,16 @@
       }
     }
 
+    &-read-more {
+      text-align: center;
+    }
+
     &-btn-readMore {
-      @include link-decoration(null, null, underline, underline);
-      display: block;
+      @include link-decoration(#fff, #fff, none, none);
+      display: inline-block;
+      padding: (28/2)+px (36/2)+px;
+      background-color: $highlight-color;
+      border-radius: (6/2)+px;
       font-weight: bold;
       // font-size: fz(28/2);
       text-align: center;
@@ -480,7 +487,7 @@
       .post-sns-item {
         display: table-cell;
         width: perCalc(105, 450);
-        height: (122/2)+px;
+        height: (80/2)+px;
         padding-left: perCalc(10, 450);
 
         a {

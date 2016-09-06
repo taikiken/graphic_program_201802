@@ -24,12 +24,18 @@
   }
 }
 
+// over ride
+.body-sec.result {
+  .main-sec {
+    background-color: #eee;
+  }
+}
+
 // result-notfound
 .result-notfound {
-  padding: (20/2)+px 0 (40/2)+px;
+  padding: (80/2)+px 0 (40/2)+px;
   padding-right: perCalc(20);
   padding-left: perCalc(20);
-  background-color: #fff;
 
   &-heading {
     font-weight: bold;
@@ -46,6 +52,7 @@
 
     a {
       display: block;
+      background-color: #fff;
     }
   }
 
