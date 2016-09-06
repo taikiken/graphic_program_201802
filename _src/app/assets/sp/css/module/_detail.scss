@@ -526,9 +526,10 @@
     .post-sns-pr {
       width: 100%;
       margin-top: (20/2)+px;
-      padding: (20/2)+px;
-      border-radius: 4px;
-      background-color: #3755a5;
+      padding: (26/2)+px (36/2)+px;
+      border: (6/2)+px solid $highlight-color;
+      border-radius: 6px;
+      background-color: #fff;
 
       &-inner {
         display: table;
@@ -542,7 +543,7 @@
       }
 
       dt {
-        padding-right: (36/2)+px;
+        padding-right: (24/2)+px;
 
         // for iPhone5, 5S
         @media screen and (max-width: 320px) {
@@ -552,18 +553,14 @@
         span {
           display: block;
           line-height: 1em;
-          padding: 4px 0 8px (74/2)+px;
-          background: url(/assets/sp/images/detail/post-sns-logo.png) 0 center no-repeat;
-          background-size: (68/2)+px;
-          color: #fff;
+          margin-top: (6/2)+px;
+          padding: (48/2)+px 0 0 0;
+          background: url(/assets/sp/images/detail/post-sns-logo.png) 0 0 no-repeat;
+          background-size: (356/2)+px;
           font-weight: bold;
+          font-size: fz(22/2);
           white-space: nowrap;
-          // font-size: fz(26/2);
         }
-
-        // strong {
-        //   color: $highlight-color;
-        // }
       }
 
       dd {

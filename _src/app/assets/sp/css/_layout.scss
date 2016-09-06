@@ -613,8 +613,8 @@ img {
     &-sec {
       .pagetop {
         margin-top: (20/2)+px;
-        border-top: 1px solid #333;
-        border-bottom: 1px solid #333;
+        border-bottom: 2px solid #030b1a;
+        background-color: #061533;
 
         a {
           display: block;
@@ -630,8 +630,6 @@ img {
       } // pagetop
 
       .fnav {
-        margin-top: (30/2)+px;
-
         ul {
           @include clearfix;
 

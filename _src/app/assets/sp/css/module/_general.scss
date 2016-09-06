@@ -146,13 +146,10 @@
       [ class^="post-label_" ] {}
 
       &-label_recommend {
-        display: inline-block;
-        line-height: 1em;
-        padding: (6/2)+px (8/2)+px;
-        background-color: $highlight-color;
-        color: #fff;
-        font-weight: bold;
-        font-size: fz(20/2);
+        @extend .sp-sprite-common;
+        @include sprite( $common-icon-recommend, inline-block );
+        @include hide-text;
+        vertical-align: middle;
       }
 
       &-category {
