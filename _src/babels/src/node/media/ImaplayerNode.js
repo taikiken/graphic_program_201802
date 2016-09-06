@@ -61,6 +61,8 @@ export let ImaplayerNode = React.createClass( {
     let poster = this.props.poster;
     let caption = this.props.caption;
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
+    console.log('render');
+    console.log(video.url);
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
     return (
@@ -81,6 +83,7 @@ export let ImaplayerNode = React.createClass( {
     var player = videojs('content_video');
     let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
     let adUrl = vast !== '' ? vast + Date.now() : '';
+    console.log('componentDidMount'+adUrl);
     let option = {
       id: 'content_video',
       adTagUrl: adUrl
@@ -88,6 +91,19 @@ export let ImaplayerNode = React.createClass( {
     player.ima(option);
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
+
+    var startEvent = 'click';
+      if(Sagen.Browser.Mobile.is()){
+        startEvent = 'touchend';
+      }
+
+    player.one(startEvent, function() {
+      alert('');
+      // player.ima.initializeAdDisplayContainer();
+      // player.ima.requestAds();
+      player.play();
+    });
+
     if(!Sagen.Browser.Mobile.is()){
       player.play();
     }
@@ -97,7 +113,8 @@ export let ImaplayerNode = React.createClass( {
     videoElement.removeEventListener( 'ended', this.onEnded );
     videoElement.removeEventListener( 'pause', this.onPause );
     var player = videojs('content_video');
-    let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
+    let vast = Sagen.owser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
+
     let adUrl = vast !== '' ? vast + Date.now() : '';
     let option = {
       id: 'content_video',
@@ -106,6 +123,13 @@ export let ImaplayerNode = React.createClass( {
     player.ima(option);
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
+
+    player.one(startEvent, function() {
+      //player.ima.initializeAdDisplayContainer();
+      //player.ima.requestAds();
+      player.play();
+    });
+
     if(!Sagen.Browser.Mobile.is()){
       player.play();
     }

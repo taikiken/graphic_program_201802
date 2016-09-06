@@ -264,7 +264,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove ?>
   <script>
   (function () {
-
+p
     var myPlayer, poster, isPlay = false, isComplete = false;
     videojs('webview-brightcove').ready(function() {
       myPlayer = this;
