@@ -194,7 +194,7 @@ img {
           height: (24/2)+px;
           border: 2px solid #fff;
           border-radius: 100%;
-          background-color: #e14343;
+          background-color: $highlight-secondary-color;
         }
       }
     }
@@ -329,7 +329,7 @@ img {
         height: (40/2)+px;
         padding-top: 6px;
         line-height: 1;
-        background-color: #e14343;
+        background-color: $highlight-secondary-color;
         border-radius: 100%;
         color: #fff;
         font-weight: bold;
