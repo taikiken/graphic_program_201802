@@ -31,22 +31,3 @@
     vertical-align: middle;
   }
 }
-
-
-// 検索結果 アイコン付きタイトル
-.search-heading {
-  color: $highlight-secondary-color;
-  font-weight: bold;
-  font-size: fz(20);
-
-  &:before {
-    content: '';
-    position: relative;
-    top: -1px;
-    @extend .sprite-common;
-    @include sprite( $common-icon-search-heading, inline-block );
-    @include hide-text;
-    margin-right: 5px;
-    vertical-align: middle;
-  }
-}

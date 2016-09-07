@@ -21,24 +21,26 @@
     &-list {
       display: table;
       width: 100%;
+      border-top: 1px solid #eee;
     }
 
     &-item {
       display: table-cell;
-      width: 33%;
+      // width: 33%;
+      width: 50%;
 
       &:nth-child(2) {
-        width: 34%;
-        border-right: 1px solid #222;
-        border-left: 1px solid #222;
+        // width: 34%;
+        // border-right: 1px solid #222;
+        // border-left: 1px solid #222;
       }
     }
 
     &-link {
-      @include link-decoration(#fff, #fff, none, none);
+      @include link-decoration(#999, #999, none, none);
       display: block;
       line-height: (80/2)+px;
-      background-color: #333;
+      background-color: #ddd;
       font-weight: bold;
       font-size: fz(20/2);
       text-align: center;
@@ -48,6 +50,39 @@
         background-color: #fff;
         color: $highlight-color;
         font-weight: bold;
+      }
+
+      span:before {
+        content: '';
+        position: relative;
+        top: -1px;
+        @extend .sp-sprite-setting;
+        @include hide-text;
+        vertical-align: middle;
+      }
+    }
+
+    &-basic {
+      span:before {
+        @include sprite( $setting-icon-nav-basic, inline-block );
+      }
+
+      &.current {
+        span:before {
+          @include sprite( $setting-icon-nav-basic_o, inline-block );
+        }
+      }
+    }
+
+    &-interest {
+      span:before {
+        @include sprite( $setting-icon-nav-interest, inline-block );
+      }
+
+      &.current {
+        span:before {
+          @include sprite( $setting-icon-nav-interest_o, inline-block );
+        }
       }
     }
   } //at-root
@@ -345,7 +380,6 @@
   .btn-withdraw {
     a {
       display: block !important;
-      background-color: #e14343 !important;
     }
   } //.btn-withdraw
 
@@ -354,13 +388,6 @@
 
     a {
       display: block !important;
-      background-color: #333 !important;
     }
   } //.btn-back
 }
-
-
-
-// -------------------------------------------------
-// override
-@import "setting_override";
