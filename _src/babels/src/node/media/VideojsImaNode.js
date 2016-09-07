@@ -28,7 +28,7 @@ let ReactDOM = self.ReactDOM;
  * <p>記事詳細上部動画 HTML5 video</p>
  * @type {ReactClass}
  */
-export let ImaplayerNode = React.createClass( {
+export let VideojsImaNode = React.createClass( {
   propTypes: {
     // VideoDae
     video: React.PropTypes.object.isRequired,
@@ -61,17 +61,13 @@ export let ImaplayerNode = React.createClass( {
     let poster = this.props.poster;
     let caption = this.props.caption;
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
-    console.log('render');
-    console.log(video.url);
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
     return (
       <div id="mainContainer">
-        <div id="content">
-          <video poster={poster} width={`${width}px`} height={`${height}px`} preload="none" className="video-js vjs-default-skin" controls ref="video" data-setup="{}" autoplay id="content_video">
-            <source src={url} type="application/x-mpegURL"/>
+          <video id="content_video" className="video-js vjs-default-skin" poster={poster} controls preload="auto" width={`${width}px`} height={`${height}px`} ref="video" autoplay>
+            <source src={url} type="application/x-mpegURL"></source>
           </video>
-        </div>
       </div>
     );
   },
@@ -80,59 +76,42 @@ export let ImaplayerNode = React.createClass( {
     this.videoElement = videoElement;
     videoElement.addEventListener( 'ended', this.onEnded, false );
     videoElement.addEventListener( 'pause', this.onPause, false );
-    var player = videojs('content_video');
     let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
     let adUrl = vast !== '' ? vast + Date.now() : '';
-    console.log('componentDidMount'+adUrl);
+    let player = videojs('content_video');
     let option = {
       id: 'content_video',
       adTagUrl: adUrl
     };
     player.ima(option);
-    player.ima.initializeAdDisplayContainer();
-    player.ima.requestAds();
+    // Remove controls from the player on iPad to stop native controls from stealing
+    // our click
+    var contentPlayer =  document.getElementById('content_video_html5_api');
+    if ((navigator.userAgent.match(/iPad/i) ||
+          navigator.userAgent.match(/Android/i)) &&
+        contentPlayer.hasAttribute('controls')) {
+      contentPlayer.removeAttribute('controls');
+    }
 
+    // Initialize the ad container when the video player is clicked, but only the
+    // first time it's clicked.
     var startEvent = 'click';
-      if(Sagen.Browser.Mobile.is()){
-        startEvent = 'touchend';
-      }
+    if (navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/Android/i)) {
+      startEvent = 'touchend';
+    }
 
     player.one(startEvent, function() {
-      alert('');
-      // player.ima.initializeAdDisplayContainer();
-      // player.ima.requestAds();
-      player.play();
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
     });
-
-    if(!Sagen.Browser.Mobile.is()){
-      player.play();
-    }
   },
   componentWillUnMount: function() {
     let videoElement = this.videoElement;
     videoElement.removeEventListener( 'ended', this.onEnded );
     videoElement.removeEventListener( 'pause', this.onPause );
-    var player = videojs('content_video');
-    let vast = Sagen.owser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
-
-    let adUrl = vast !== '' ? vast + Date.now() : '';
-    let option = {
-      id: 'content_video',
-      adTagUrl: adUrl
-    };
-    player.ima(option);
-    player.ima.initializeAdDisplayContainer();
-    player.ima.requestAds();
-
-    player.one(startEvent, function() {
-      //player.ima.initializeAdDisplayContainer();
-      //player.ima.requestAds();
-      player.play();
-    });
-
-    if(!Sagen.Browser.Mobile.is()){
-      player.play();
-    }
   },
   onEnded: function( /* event */ ) {
     // console.log( 'onEnded', event );

@@ -71,15 +71,15 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     }
   </style>
 
-  <link rel="stylesheet" href="/assets/ima_plugin/css/video-js.min.css" />
+  <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
   <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="/assets/ima_plugin/js/video.min.js"></script>
-  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
+  <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
   <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+
+  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
 <?php

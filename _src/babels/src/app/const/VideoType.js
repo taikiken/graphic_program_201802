@@ -44,10 +44,10 @@ export class VideoType {
   }
   /**
    * BRIGHTCOVE, mp4ファイル
-   * @return {string} imaplayer を返します
+   * @return {string} videojsima を返します
    */
-  static get IMAPLAYER():string {
-    return 'imaplayer';
+  static get VIDEOJSIMA():string {
+    return 'videojsima';
   }
   /**
    * YOUTUBE, Youtube ID
