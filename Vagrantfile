@@ -207,22 +207,22 @@ Vagrant.configure(2) do |config|
   end
 
 
+  # $ vagrant push dev_sportsbull - t2.small の dev.sportsbull.jp
+  config.push.define "dev_sportsbull", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/public/
+    SCRIPT
+  end
+
+
   # $ vagrant push stg - t2.small の stg.undotushin.com
   config.push.define "stg", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
-    SCRIPT
-  end
-
-
-  # $ vagrant push production - t2.small の www.undotushin.com
-  config.push.define "production", strategy: "local-exec" do |push|
-    push.inline = <<-SCRIPT
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/www/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/www/public/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/www/public/
     SCRIPT
   end
 
