@@ -587,3 +587,161 @@ html, body {
 }
 
 
+
+// .body__contents
+// 汎用コンテンツ
+@include screen('large') {
+  .body__contents {
+    &__part {
+      width: 1080px;
+      margin-top: 40px;
+      margin-right: auto;
+      margin-left: auto;
+      padding-top: 40px;
+      border-top: 1px solid #eee;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      h1, h2, h3, h4, h5, h6,
+      p,
+      ul, ol, dl {
+        margin-top: 1em;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      div, p, li {
+        word-break: break-all;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+
+      h1, {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      h3 {
+        font-size: 16px;
+      }
+
+      p, li {
+        line-height: lh(24, 14);
+      }
+
+      ul, ol {
+        padding-left: 1.5em;
+      }
+
+      ul {
+        list-style-type: disc;
+      }
+
+      // ol > li + li {
+      //   margin-top: 1em;
+      // }
+
+      // ol ol > li + li {
+      //   margin-top: .5em;
+      // }
+
+      strong {
+        font-weight: bold;
+      }
+
+      i, em {
+        font-style: italic;
+      }
+
+      a {
+        @include link-decoration($highlight-color, $highlight-color, underline, none);
+      }
+    }
+  }
+}
+
+@include screen('small') {
+  .body__contents {
+    &__part {
+      margin-top: (50/2)+px;
+      padding: 0 perCalc(40, 640) (50/2)+px;
+      border-bottom: 1px solid #eee;
+
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      h1, h2, h3, h4, h5, h6,
+      p,
+      ul, ol, dl {
+        margin-top: 1em;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      div, p, li {
+        word-break: break-all;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+
+      h1, {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      h3 {
+        font-size: 16px;
+      }
+
+      p, li {
+        line-height: lh(24, 14);
+      }
+
+      ul, ol {
+        padding-left: 1.5em;
+      }
+
+      ul {
+        list-style-type: disc;
+      }
+
+      // ol > li + li {
+      //   margin-top: 1em;
+      // }
+
+      // ol ol > li + li {
+      //   margin-top: .5em;
+      // }
+
+      strong {
+        font-weight: bold;
+      }
+
+      i, em {
+        font-style: italic;
+      }
+
+      a {
+        @include link-decoration($highlight-color, $highlight-color, underline, underline);
+      }
+    }
+  }
+}
