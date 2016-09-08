@@ -81,9 +81,11 @@ img {
 
 // アプリダウンロードバナー
 .header-appbnr {
+  z-index: -1;
   position: fixed;
   top: 0;
   left: 0;
+  display: none;
   width: 100%;
   height: 1000px;
   background-color: #000;
@@ -107,6 +109,40 @@ img {
   }
 }
 
+// アプリダウンロードバナー 表示/非表示
+// bodyに .appbnr-enable or .appbnr-disable
+.appbnr-enable {
+  .header-appbnr {
+    display: block;
+  }
+
+  .header-sticky {
+    position: relative;
+    top: (170/2)+px;
+    left: auto;
+  }
+
+  .body-sec {
+    margin-top: (170/2)+px;
+  }
+}
+
+.appbnr-disable {
+  .header-appbnr {
+    display: none;
+  }
+
+  .header-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .body-sec {
+    margin-top: 100px;
+  }
+}
+
 // -------------------
 // header を fixed にする
 .header-sticky {
@@ -116,12 +152,6 @@ img {
   width: 100%;
   z-index: 100;
   background-color: #fff;
-
-  &.disable {
-    position: relative;
-    top: (170/2)+px;
-    left: auto;
-  }
 }
 
 .body-sec {
