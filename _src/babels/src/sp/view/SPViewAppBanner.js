@@ -36,20 +36,19 @@ export class SPViewAppBanner extends React.Component {
    */
   constructor(props) {
     super(props);
-    console.log('SPViewAppBanner', props);
     /**
      * default property
      * @property
      * @type {{show: boolean}}
      */
     this.state = { show: props.show };
-    // /**
-    //  * bind ずみ onClose event handler<br>
-    //  * div.header-appbnr-btn-close click に使用します
-    //  * @property
-    //  * @type {Function}
-    //  */
-    // this.boundClose = this.onClose.bind(this);
+    /**
+     * bind ずみ onClose event handler<br>
+     * div.header-appbnr-btn-close click に使用します
+     * @property
+     * @type {Function}
+     */
+    this.boundClose = this.onClose.bind(this);
   }
   /**
    * div.header-appbnr-btn-close click event handler
@@ -57,7 +56,6 @@ export class SPViewAppBanner extends React.Component {
    */
   onClose(event) {
     event.preventDefault();
-    console.log('onClose', event);
     this.updateShow(false);
   }
   /**
@@ -68,8 +66,8 @@ export class SPViewAppBanner extends React.Component {
     if (!show) {
       // 1 week cookie save
       // ***開発時コメントにします**
-      // Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() * (1000 * 60 * 60 * 24 * 7)));
-      Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+      Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)));
+      SPViewAppBanner.free();
     }
     // state update
     this.setState({ show });
@@ -79,14 +77,13 @@ export class SPViewAppBanner extends React.Component {
    * @return {?*} render 結果を返します。非表示時には null を返します
    */
   render() {
-    console.log('render', this.state.show);
     if (!this.state.show) {
       return null;
     }
 
     return (
       <div className="header-appbnr">
-        <div className="header-appbnr-btn-close" onClick={this.onClose.bind(this)}><span>閉じる</span></div>
+        <div className="header-appbnr-btn-close" onClick={this.boundClose}><span>閉じる</span></div>
         <a className="header-appbnr-link" href={Url.appBanner()} target="_blank">
           <img src="/assets/sp/images/common/header-app-bnr.png" alt="運動通信をアプリでサクサク楽しむ！アプリ版ダウンロード"/>
         </a>
@@ -97,6 +94,18 @@ export class SPViewAppBanner extends React.Component {
   //  STATIC METHOD
   // ---------------------------------------------------
   /**
+   * document.body へ `.appbnr-enable` を追加します
+   */
+  static activate() {
+    Sagen.Dom.addClass(document.body, 'appbnr-enable');
+  }
+  /**
+   * document.body から `.appbnr-enable` を削除します
+   */
+  static free() {
+    Sagen.Dom.removeClass(document.body, 'appbnr-enable');
+  }
+  /**
    * Cookie.APP_BANNER が無い時 SPViewAppBanner を render しマウントします
    * @param {Element} element render root Element
    * @param {boolean} [visible=false] render root Element
@@ -105,10 +114,12 @@ export class SPViewAppBanner extends React.Component {
   static init(element, visible = false):boolean {
     const has = Cookie.has(Cookie.APP_BANNER);
     if (!has) {
+      SPViewAppBanner.activate();
       ReactDOM.render(<SPViewAppBanner show={visible} />, element);
       return true;
     }
 
+    SPViewAppBanner.free();
     return false;
   }
 }

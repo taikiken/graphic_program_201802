@@ -124,6 +124,14 @@ img {
 
   .body-sec {
     margin-top: (170/2)+px;
+
+    &.category {
+      margin-top: 85px + 40px;
+    }
+
+    .lnav.fixed-top {
+      top: 100px + 85px;
+    }
   }
 }
 
@@ -188,15 +196,15 @@ img {
 
   &.appbnr-enable {
     .body-sec {
-      margin-top: 160px - 85px;
+      margin-top: 160px - 75px;
 
       &.category {
-        margin-top: 200px - 85px;
+        margin-top: 200px - 75px;
       }
     }
 
     .lnav.fixed-top {
-      top: 160px - 85px;
+      top: 100px + 85px + 60px;
     }
   }
 }

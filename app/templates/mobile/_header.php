@@ -156,7 +156,7 @@ if ( $template_name == 'category' ) {
 }
 ?>
 </head>
-<body class="appbnr-enable">
+<body>
 <div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
 <?php
 // header 表示条件 start
