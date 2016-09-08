@@ -115,10 +115,10 @@ export let VideojsImaNode = React.createClass( {
       document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:none !important');
     });
     player.on('pause', function() {
-      document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', '');
+      document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:block !important');
     });
     player.one(startEvent, function() {
-      //document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:none !important');
+      document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:none !important');
       player.play();
     });
 

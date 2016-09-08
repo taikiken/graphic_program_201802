@@ -119,15 +119,29 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     video::-webkit-media-controls {
         display:none !important;
     }
-  .vjs-big-play-button{
-    display: block !important;
-  }
-  #content_video_ima-ad-container{
-    z-index: 99999 !important;
-  }
-  #content_video_ima-ad-container>div{
-    display: none;
-  }
+    .vjs-big-play-button{
+      display: block !important;
+      z-index: 99 !important;
+      color: #e1438b !important;
+      font-size: 4em !important;
+      line-height: 1.5em !important;
+      height: 1.5em !important;
+      width: 1.5em !important;
+      border: .06666em solid #e1438b !important;
+      border-radius: 50% !important;
+    }
+    .vjs-big-play-button {
+      top: 50% !important;
+      left: 50% !important;
+      margin-top: -1em !important;
+      margin-left: -0.75em !important;
+    }
+    #content_video_ima-ad-container{
+      z-index: 98!important;
+    }
+    #content_video_ima-ad-container>div{
+      display: none;
+    }
   </style>
   <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
