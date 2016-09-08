@@ -133,7 +133,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     .vjs-big-play-button {
       top: 50% !important;
       left: 50% !important;
-      margin-top: -1em !important;
+      margin-top: -0.75em !important;
       margin-left: -0.75em !important;
     }
     #content_video_ima-ad-container{
