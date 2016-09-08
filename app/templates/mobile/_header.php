@@ -116,6 +116,12 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     .video-js .vjs-ima3-ad-container iframe {
       pointer-events: auto;
     }
+    video::-webkit-media-controls {
+        display:none !important;
+    }
+  .vjs-big-play-button{
+    /*display: block !important;*/
+  }
   </style>
   <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />

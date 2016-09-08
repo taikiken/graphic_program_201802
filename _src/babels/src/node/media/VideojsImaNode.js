@@ -65,7 +65,7 @@ export let VideojsImaNode = React.createClass( {
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
     return (
       <div id="mainContainer">
-          <video id="content_video" className="video-js vjs-default-skin" poster={poster} controls preload="auto" width={`${width}px`} height={`${height}px`} ref="video" autoplay>
+          <video id="content_video" className="video-js vjs-default-skin" poster={poster}  preload="auto" width={`${width}px`} height={`${height}px`} ref="video" controls>
             <source src={url} type="application/x-mpegURL"></source>
           </video>
       </div>
@@ -78,20 +78,28 @@ export let VideojsImaNode = React.createClass( {
     videoElement.addEventListener( 'pause', this.onPause, false );
     let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
     let adUrl = vast !== '' ? vast + Date.now() : '';
-    let player = videojs('content_video');
+
+
+    let player = videojs('content_video',{
+      nativeControlsForTouch:false
+    });
+    //player.setControls(true);
+
     let option = {
       id: 'content_video',
-      adTagUrl: adUrl
+      adTagUrl: adUrl,
+      nativeControlsForTouch: false
     };
     player.ima(option);
     // Remove controls from the player on iPad to stop native controls from stealing
     // our click
     var contentPlayer =  document.getElementById('content_video_html5_api');
-    if ((navigator.userAgent.match(/iPad/i) ||
+    /*if ((navigator.userAgent.match(/iPad/i) ||
           navigator.userAgent.match(/Android/i)) &&
         contentPlayer.hasAttribute('controls')) {
       contentPlayer.removeAttribute('controls');
-    }
+    }*/
+
 
     // Initialize the ad container when the video player is clicked, but only the
     // first time it's clicked.
@@ -102,11 +110,17 @@ export let VideojsImaNode = React.createClass( {
       startEvent = 'touchend';
     }
 
+    player.ima.initializeAdDisplayContainer();
+    player.ima.requestAds();
+
+
     player.one(startEvent, function() {
-        player.ima.initializeAdDisplayContainer();
-        player.ima.requestAds();
-        player.play();
+      player.play();
     });
+
+    if(!Sagen.Browser.Mobile.is()){
+      player.play();
+    }
   },
   componentWillUnMount: function() {
     let videoElement = this.videoElement;
