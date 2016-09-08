@@ -132,7 +132,7 @@
   @at-root {
     &-list {
       letter-spacing: ls( inline-block );
-      background-color: #ccc;
+      background-color: #f5f5f5;
       border-radius: 3px;
     }
 
@@ -175,7 +175,7 @@
 
     &-step1,
     &-step2 {
-      background-color: #bbb;
+      background-color: #e5e5e5;
     }
 
     &-step1 {
@@ -389,6 +389,7 @@
     font-size: fz(22/2);
   }
 
+  .mod-btnA01,
   .mod-btnB01 {
     a, input {
       width: 100%;
