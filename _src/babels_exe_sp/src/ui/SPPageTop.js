@@ -51,7 +51,9 @@ export class SPPageTop {
   }
   /**
    * <p>element click event handler</p>
-   * <p>click 管理フラッグが true ならフラッグを false にし<br>ページの上部(offsetY: 0)へ戻すアニメーションを開始します</p>   * @param {Event} event native event, click event
+   * <p>click 管理フラッグが true ならフラッグを false にし<br>ページの上部(offsetY: 0)へ戻すアニメーションを開始します</p>
+   *
+   * @param {Event} event native event, click event
    */
   onClick( event:Event ):void {
     event.preventDefault();

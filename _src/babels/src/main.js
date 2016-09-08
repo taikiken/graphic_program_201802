@@ -105,7 +105,8 @@ import {Ga} from './ga/Ga';
 // sp
 
 // sp/view
-import {SPViewFirstVisit} from './sp/view/SPViewFirstVisit';
+import { SPViewFirstVisit } from './sp/view/SPViewFirstVisit';
+import { SPViewAppBanner } from './sp/view/SPViewAppBanner';
 
 // home
 import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
@@ -152,111 +153,111 @@ let UT = {
     App: App,
     // Codes: Codes,
     User: User,
-    Router: Router,
-    Dom: Dom,
+    Router,
+    Dom,
     const: {
-      CommentsType: CommentsType
+      CommentsType
     }
   },
   util: {
-    Offset: Offset,
-    Scroll: Scroll
+    Offset,
+    Scroll
   },
   net: {
-    Cookie: Cookie
+    Cookie
   },
   model: {
-    Model: Model
+    Model
   },
   view: {
-    View: View,
-    ViewCategory: ViewCategory,
-    ViewSingle: ViewSingle,
-    // ViewTitle: ViewTitle,
-    ViewComments: ViewComments,
-    ViewSearch: ViewSearch,
-    ViewCommentSingle: ViewCommentSingle,
-    ViewFirstVisit: ViewFirstVisit,
+    View,
+    ViewCategory,
+    ViewSingle,
+    ViewComments,
+    ViewSearch,
+    ViewCommentSingle,
+    ViewFirstVisit,
     comment: {
-      ViewCommentForm: ViewCommentForm
+      ViewCommentForm
     },
     single: {
-      ViewSingleTitle: ViewSingleTitle,
-      ViewSingleVisual: ViewSingleVisual
+      ViewSingleTitle,
+      ViewSingleVisual
     },
     header: {
-      ViewHeaderUser: ViewHeaderUser,
-      ViewHeaderSearch: ViewHeaderSearch
+      ViewHeaderUser,
+      ViewHeaderSearch
     },
     sidebar: {
-      ViewRanking: ViewRanking,
-      ViewVideos: ViewVideos,
-      ViewRecommend: ViewRecommend,
-      Sidebar: Sidebar
+      ViewRanking,
+      ViewVideos,
+      ViewRecommend,
+      Sidebar
     },
     home: {
-      ViewHeadline: ViewHeadline,
-      ViewPickup: ViewPickup,
-      ViewNews: ViewNews
+      ViewHeadline,
+      ViewPickup,
+      ViewNews
     },
     signup: {
-      SignupWizard: SignupWizard,
-      ViewDeactivate: ViewDeactivate
+      SignupWizard,
+      ViewDeactivate
     },
     login: {
-      ViewLogin: ViewLogin,
-      ViewLogout: ViewLogout
+      ViewLogin,
+      ViewLogout
     },
     mypage: {
-      ViewUserProfile: ViewUserProfile,
-      ViewBookmarks: ViewBookmarks,
-      ViewActivities: ViewActivities,
-      ViewNotifications: ViewNotifications
+      ViewUserProfile,
+      ViewBookmarks,
+      ViewActivities,
+      ViewNotifications
     },
     settings: {
-      ViewSettingsIndex: ViewSettingsIndex,
-      ViewSettingsInterest: ViewSettingsInterest
+      ViewSettingsIndex,
+      ViewSettingsInterest
     },
     modal: {
-      ViewDeleteModal: ViewDeleteModal,
-      ViewLogoutModal: ViewLogoutModal,
-      ViewFlushModal: ViewFlushModal
+      ViewDeleteModal,
+      ViewLogoutModal,
+      ViewFlushModal
     }
   },
   sp: {
     view: {
-      SPViewSyn: SPViewSyn,
-      SPViewComments: SPViewComments,
-      SPViewSingle: SPViewSingle,
-      SPViewSearch: SPViewSearch,
-      SPViewFirstVisit: SPViewFirstVisit,
+      SPViewSyn,
+      SPViewComments,
+      SPViewSingle,
+      SPViewSearch,
+      SPViewFirstVisit,
+      SPViewAppBanner,
       single: {
-        SPViewSingleHeader: SPViewSingleHeader,
-        SPViewReadMore: SPViewReadMore,
-        SPViewSingleRanking: SPViewSingleRanking,
-        SPViewSingleRecommend: SPViewSingleRecommend
+        SPViewSingleHeader,
+        SPViewReadMore,
+        SPViewSingleRanking,
+        SPViewSingleRecommend
       },
       comment: {
-        SPViewCommentForm: SPViewCommentForm
+        SPViewCommentForm
       },
       home: {
-        SPViewHeadLine: SPViewHeadLine,
-        SPViewNews: SPViewNews
+        SPViewHeadLine,
+        SPViewNews
       },
       category: {
-        SPViewCategoryRoot: SPViewCategoryRoot
+        SPViewCategoryRoot
       },
       header: {
-        SPViewHeaderUser: SPViewHeaderUser,
-        SPViewHeaderSearch: SPViewHeaderSearch
+        SPViewHeaderUser,
+        SPViewHeaderSearch
       },
       mypage: {
-        SPViewUserProfile: SPViewUserProfile,
-        SPViewBookmarks: SPViewBookmarks
+        SPViewUserProfile,
+        SPViewBookmarks
       }
     }
   },
-  Ga: Ga
+  Ga
 };
 
 self.UT = UT;

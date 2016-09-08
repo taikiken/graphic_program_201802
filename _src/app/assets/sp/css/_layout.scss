@@ -81,7 +81,7 @@ img {
 
 // アプリダウンロードバナー
 .header-appbnr {
-  z-index: -1;
+  //z-index: -1;
   position: fixed;
   top: 0;
   left: 0;
@@ -127,21 +127,25 @@ img {
   }
 }
 
-.appbnr-disable {
-  .header-appbnr {
-    display: none;
-  }
-
-  .header-sticky {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-
-  .body-sec {
-    margin-top: 100px;
-  }
+.header-appbnr {
+  display: none;
 }
+
+//.appbnr-disable {
+//  .header-appbnr {
+//    display: none;
+//  }
+//
+//  .header-sticky {
+//    position: fixed;
+//    top: 0;
+//    left: 0;
+//  }
+//
+//  .body-sec {
+//    margin-top: 100px;
+//  }
+//}
 
 // -------------------
 // header を fixed にする
@@ -180,6 +184,20 @@ img {
 
   .lnav.fixed-top {
     top: 160px;
+  }
+
+  &.appbnr-enable {
+    .body-sec {
+      margin-top: 160px - 85px;
+
+      &.category {
+        margin-top: 200px - 85px;
+      }
+    }
+
+    .lnav.fixed-top {
+      top: 160px - 85px;
+    }
   }
 }
 // --------------------
