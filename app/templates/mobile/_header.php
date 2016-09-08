@@ -121,7 +121,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     }
     .vjs-big-play-button{
       display: block !important;
-      z-index: 99999 !important;
+      z-index: 20 !important;
       color: #e1438b !important;
       font-size: 4em !important;
       line-height: 1.5em !important;
@@ -137,7 +137,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
       margin-left: -0.75em !important;
     }
     #content_video_ima-ad-container{
-      z-index: 999 !important;
+      z-index: 10 !important;
     }
     #content_video_ima-ad-container>div{
       display: none;
