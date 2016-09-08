@@ -65,7 +65,7 @@ export let VideojsImaNode = React.createClass( {
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
     return (
       <div id="mainContainer">
-          <video id="content_video" className="video-js vjs-default-skin" poster={poster}  preload="auto" width={`${width}px`} height={`${height}px`} ref="video" controls>
+          <video id="content_video" className="video-js vjs-default-skin" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
             <source src={url} type="application/x-mpegURL"></source>
           </video>
       </div>
@@ -104,11 +104,11 @@ export let VideojsImaNode = React.createClass( {
     // Initialize the ad container when the video player is clicked, but only the
     // first time it's clicked.
     var startEvent = 'click';
-    if (navigator.userAgent.match(/iPhone/i) ||
+    /*if (navigator.userAgent.match(/iPhone/i) ||
         navigator.userAgent.match(/iPad/i) ||
         navigator.userAgent.match(/Android/i)) {
       startEvent = 'touchend';
-    }
+    }*/
 
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
