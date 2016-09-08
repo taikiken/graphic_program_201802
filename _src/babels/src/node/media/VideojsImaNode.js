@@ -65,7 +65,7 @@ export let VideojsImaNode = React.createClass( {
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
     return (
       <div id="mainContainer">
-          <video id="content_video" className="video-js vjs-default-skin" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+          <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
             <source src={url} type="application/x-mpegURL"></source>
           </video>
       </div>
@@ -79,18 +79,16 @@ export let VideojsImaNode = React.createClass( {
     let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
     let adUrl = vast !== '' ? vast + Date.now() : '';
 
-
     let player = videojs('content_video',{
       nativeControlsForTouch:false
     });
-    //player.setControls(true);
 
     let option = {
       id: 'content_video',
-      adTagUrl: adUrl,
-      nativeControlsForTouch: false
+      adTagUrl: adUrl
     };
     player.ima(option);
+
     // Remove controls from the player on iPad to stop native controls from stealing
     // our click
     var contentPlayer =  document.getElementById('content_video_html5_api');
@@ -100,21 +98,27 @@ export let VideojsImaNode = React.createClass( {
       contentPlayer.removeAttribute('controls');
     }*/
 
-
     // Initialize the ad container when the video player is clicked, but only the
     // first time it's clicked.
     var startEvent = 'click';
-    /*if (navigator.userAgent.match(/iPhone/i) ||
+    if (navigator.userAgent.match(/iPhone/i) ||
         navigator.userAgent.match(/iPad/i) ||
         navigator.userAgent.match(/Android/i)) {
       startEvent = 'touchend';
-    }*/
+    }
 
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
 
 
+    player.on('play', function() {
+      document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:none !important');
+    });
+    player.on('pause', function() {
+      document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', '');
+    });
     player.one(startEvent, function() {
+      //document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:none !important');
       player.play();
     });
 
@@ -134,5 +138,6 @@ export let VideojsImaNode = React.createClass( {
   onPause: function( /* event */ ) {
     // console.log( 'onPause', event );
     // this.setState( { showPlay: true } );
+    document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', '');
   }
 } );
