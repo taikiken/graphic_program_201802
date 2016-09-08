@@ -69,6 +69,9 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     .video-js.vjs-fullscreen.vjs-user-inactive {
       cursor: none;
     }
+    .vjs-big-play-button{
+       display: none !important;
+     }
   </style>
 
   <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
