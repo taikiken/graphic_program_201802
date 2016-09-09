@@ -39,22 +39,22 @@
   <section class="header">
     <div class="header__inner">
       <h1 class="header__heading"><a href="/"><img src="/assets/images/about/common/header-logo.png" alt="SPORTS BULL"></a></h1>
-      <div class="header__btn--toggle show-for-small">
+      <div id="js-header__btn--toggle" class="header__btn--toggle show-for-small">
         <div class="header__btn--toggle__trigger"><span></span><span></span><span></span></div>
       </div><!-- .header__btn--toggle -->
 
-      <nav class="header__nav">
+      <nav id="js-header__nav" class="header__nav">
         <div class="header__nav__inner">
           <ul class="header__nav__list">
             <li class="header__nav__item header__nav__item1"><a class="header__nav__link" href="/"><span>スポーツブルTOP</span></a></li>
-            <li class="header__nav__item header__nav__item2"><a class="header__nav__link current" href="/about/"><span>サービス紹介</span></a></li>
-            <li class="header__nav__item header__nav__item3"><a class="header__nav__link" href="/about/company/"><span>会社概要</span></a></li>
+            <li class="header__nav__item header__nav__item2"><a class="header__nav__link" href="/about/"><span>サービス紹介</span></a></li>
+            <li class="header__nav__item header__nav__item3"><a class="header__nav__link current" href="/about/company/"><span>会社概要</span></a></li>
             <li class="header__nav__item header__nav__item4"><a class="header__nav__link" href="/about/privacy/"><span>プライバシーポリシー</span></a></li>
             <li class="header__nav__item header__nav__item5"><a class="header__nav__link" href="/about/terms/"><span>利用規約</span></a></li>
           </ul>
 
-          <div class="header__btn--close show-for-small">
-            <a href="#"><span>メニューをとじる</span></a>
+          <div id="js-header__btn--close" class="header__btn--close show-for-small">
+            <span class="header__btn--close__link"><span>メニューをとじる</span></span>
           </div><!-- /.header__btn--close -->
         </div><!-- /.header__nav__inner -->
       </nav><!-- /.header__nav -->
@@ -157,5 +157,6 @@
     </div><!-- /.footer__inner -->
   </section><!-- /.footer -->
 </div><!-- /.whole -->
+<script src="/assets/js/about.bundle.js"></script>
 </body>
 </html>
