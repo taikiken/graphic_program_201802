@@ -145,7 +145,7 @@ export class ViewLogin extends View {
             </span>
             {/* button */}
             <div className={'form-parts form-submit-parts ' + errorClass('user')}>
-              <span className="setting-form-submit mod-btnB01">
+              <span className="setting-form-submit mod-btnA02">
                 <input type="submit" value={Message.SUBMIT_LOGIN} />
               </span>
               <ErrorNode message={message('user')} />

@@ -138,12 +138,12 @@ export let CommentFormElementNode = React.createClass( {
       // https://github.com/undotsushin/undotsushin/issues/1053
       // タグ構造見直し
       return (
-        <div className={'form-root loading-root ' + this.state.loading}>
+        <div className={`comment-form form-root loading-root ${this.state.loading}`}>
           <form onSubmit={this.onSubmit} ref="form">
             <div className="comment-form-comment-outer1">
               <i className={'comment-form-user ' + loggedIn}><img src={Empty.refresh(picture)} alt=""/></i>
               <div className="comment-form-comment-outer2">
-                <div className={'comment-form-comment-inner ' + errorClass( 'body' )}>
+                <div className={'comment-form-comment-inner ' + errorClass('body')}>
                   <textarea value={this.state.body} onChange={this.onBodyChange} name="body" cols="30" rows="6" className="comment-form-comment" placeholder={Message.PLACEHOLDER_COMMENT} autoFocus="true" />
                   <ErrorNode message={message('body')} />
                 </div>
