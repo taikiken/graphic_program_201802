@@ -168,7 +168,7 @@ if ( $page_has_header ) :
 <!--    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="運動通信をアプリでサクサク楽しむ！アプリ版ダウンロード"></a>-->
 <!--  </div>-->
 </div>
-<div class="header-sticky disable">
+<div class="header-sticky">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>

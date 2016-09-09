@@ -16,6 +16,9 @@ import { Url } from '../../app/const/Url';
 // net
 import { Cookie } from '../../net/Cookie';
 
+// util
+import { Scroll } from '../../util/Scroll';
+
 // Sagen
 const Sagen = self.Sagen;
 
@@ -49,6 +52,30 @@ export class SPViewAppBanner extends React.Component {
      * @type {Function}
      */
     this.boundClose = this.onClose.bind(this);
+
+    // -----------------------------------------
+    this.previous = 0;
+    this.moving = 0;
+
+    const boundScroll = this.onScroll.bind(this);
+
+    const scroll = Scroll.factory();
+    scroll.on(Scroll.SCROLL, boundScroll);
+    scroll.start();
+
+    /**
+     * bind ずみ Scroll.SCROLL event handler<br>
+     * scroll を監視し header-sticky を fixed にするか relative にするかを決めます
+     * @property
+     * @type {Function}
+     */
+    this.boundScroll = boundScroll;
+    /**
+     * Scroll instance
+     * @property
+     * @type {Scroll}
+     */
+    this.scroll = scroll;
   }
   /**
    * div.header-appbnr-btn-close click event handler
@@ -73,6 +100,23 @@ export class SPViewAppBanner extends React.Component {
     this.setState({ show });
   }
   /**
+   * Scroll.SCROLL event handler
+   * @param {Object} event croll.SCROLL event Object
+   */
+  onScroll(event) {
+    if (event.y >= 85) {
+      SPViewAppBanner.visible(false);
+    } else {
+      SPViewAppBanner.visible(true);
+    }
+  }
+  /**
+   * unmount 時に dispose します
+   */
+  componentWillUnmount() {
+    this.scroll.off(Scroll.SCROLL, this.boundScroll);
+  }
+  /**
    * JSX を render します
    * @return {?*} render 結果を返します。非表示時には null を返します
    */
@@ -93,6 +137,14 @@ export class SPViewAppBanner extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  static visible(view:boolean = false) {
+    console.log('visible', view);
+    if (view) {
+      Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
+    } else {
+      Sagen.Dom.addClass(document.body, 'appbnr-invisible');
+    }
+  }
   /**
    * document.body へ `.appbnr-enable` を追加します
    */

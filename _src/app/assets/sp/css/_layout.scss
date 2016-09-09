@@ -116,10 +116,22 @@ img {
     display: block;
   }
 
+  // バナー高さ分表示の間は relative
   .header-sticky {
     position: relative;
     top: (170/2)+px;
-    left: auto;
+    //left: auto;
+  }
+
+  &.appbnr-invisible {
+    .header-sticky {
+      position: fixed;
+      top: 0;
+    }
+
+    .body-sec {
+      margin-top: 100px + 85px;
+    }
   }
 
   .body-sec {
@@ -138,22 +150,6 @@ img {
 .header-appbnr {
   display: none;
 }
-
-//.appbnr-disable {
-//  .header-appbnr {
-//    display: none;
-//  }
-//
-//  .header-sticky {
-//    position: fixed;
-//    top: 0;
-//    left: 0;
-//  }
-//
-//  .body-sec {
-//    margin-top: 100px;
-//  }
-//}
 
 // -------------------
 // header を fixed にする
