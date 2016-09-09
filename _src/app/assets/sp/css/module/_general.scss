@@ -454,7 +454,7 @@
 
       a {
         @extend .sp-sprite-common;
-        @include sprite( $common-btn-notice-close );
+        @include sprite( $common-btn-notice-close1 );
         @include hide-text;
       }
     }

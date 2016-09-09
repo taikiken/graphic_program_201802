@@ -366,70 +366,107 @@
 
 
 
+// -------------------------------------------------
+// sp mypage (bookmark)
+.mypage-bookmark {
+  min-height: 300px;
+
+  #board-container-more {
+    margin-top: 10px;
+    padding-top: 0;
+    padding-bottom: 20px;
+  }
+}
+
+
+// -------------------------------------------------
+// sp mypage/activities
+.activity-container {
+  min-height: 300px;
+
+  #board-container-more {
+    margin-top: 10px;
+    padding-top: 0;
+    padding-bottom: 20px;
+  }
+}
+
+
+
 // .info
 .info {
-  @at-root {
-    // &-btn-readAll {
-    //   min-height: 1em;
-    //   margin-bottom: 20px;
-    //   text-align: right;
+  margin-bottom: 10px;
 
-    //   a {
-    //     font-weight: bold;
-    //   }
-    // }
+  // &-btn-readAll {
+  //   min-height: 1em;
+  //   margin-bottom: 20px;
+  //   text-align: right;
 
-    &-link {
-      padding-left: (90/2)+px;
+  //   a {
+  //     font-weight: bold;
+  //   }
+  // }
 
-      &,
-      &.unread {
-        background-color: $bg-primary-color;
-      }
+  //.info-container
+  &-container {
+    min-height: 300px;
 
-      &.read {
-        background-color: #fff;
-      }
+    #board-container-more {
+      padding-top: 0;
+      padding-bottom: 20px;
+    }
+  }
 
-      &:hover,
-      &.unread:hover,
-      &.read:hover {
-        // background-color: #ffe9f3;
-      }
+  &-link {
+    padding-left: (90/2)+px;
+
+    &,
+    &.unread {
+      background-color: $bg-primary-color;
     }
 
-    &-user-thumb {
-      position: absolute;
-      top: (20/2)+px;
-      left: (20/2)+px;
+    &.read {
+      background-color: #fff;
+    }
+
+    &:hover,
+    &.unread:hover,
+    &.read:hover {
+      // background-color: #ffe9f3;
+    }
+  }
+
+  &-user-thumb {
+    position: absolute;
+    top: (20/2)+px;
+    left: (20/2)+px;
+    width: (50/2)+px;
+    height: (50/2)+px;
+    margin-right: (20/2)+px;
+    border-radius: 100%;
+    background: url(/assets/sp/images/common/thumb-user-info.png) 0 0 no-repeat;
+    background-size: (50/2)+px;
+
+    img {
       width: (50/2)+px;
-      height: (50/2)+px;
-      margin-right: (20/2)+px;
       border-radius: 100%;
-      background: url(/assets/sp/images/common/thumb-user-info.png) 0 0 no-repeat;
-      background-size: (50/2)+px;
-
-      img {
-        width: (50/2)+px;
-        border-radius: 100%;
-      }
-
-      &.user-logged-in {
-        background: none;
-      }
     }
 
-    &-content {
-      overflow: hidden;
-
-      strong {
-        // color: $highlight-color;
-      }
+    &.user-logged-in {
+      background: none;
     }
+  }
 
-    &-date {
-      overflow: hidden;
+  &-content {
+    overflow: hidden;
+
+    strong {
+      // color: $highlight-color;
     }
+  }
+
+  &-date {
+    overflow: hidden;
   }
 }
 
