@@ -152,6 +152,7 @@ textarea {
         @extend .sprite-header;
         @include sprite( $header-icon-signup, inline-block );
         @include hide-text;
+        margin-right: 5px;
         vertical-align: middle;
       }
     }
