@@ -9,7 +9,7 @@
   <div class="body-sec-inner">
     <div class="signup-heading">
       <h1>ログイン</h1>
-      <p class="btn"><a href="/signup/">新規会員登録はこちら &gt;</a></p>
+      <p class="btn"><a href="/signup/">新規会員登録はこちら</a></p>
     </div><!-- /.signup-heading -->
 
     <div class="register">

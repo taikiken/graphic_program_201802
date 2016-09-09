@@ -19,33 +19,33 @@ let React = self.React;
 
 // lead 文
 // step 1 だけ表示
-/**
- * <p>ユーザー登録ウイザード</p>
- * <p>lead 文,  step 1 だけ表示</p>
- * @private
- * @type {ReactClass}
- */
-let LeadNode = React.createClass( {
-  propTypes: {
-    step: React.PropTypes.number.isRequired
-  },
-  render: function() {
-
-    if ( this.props.step === 1 ) {
-      return (
-        <p className="lead">
-          会員登録は無料です。<br />
-          あなたの興味のあるニュースをお届けします。
-        </p>
-      );
-    } else {
-
-      return null;
-
-    }
-
-  }
-} );
+// /**
+//  * <p>ユーザー登録ウイザード</p>
+//  * <p>lead 文,  step 1 だけ表示</p>
+//  * @private
+//  * @type {ReactClass}
+//  */
+// let LeadNode = React.createClass( {
+//   propTypes: {
+//     step: React.PropTypes.number.isRequired
+//   },
+//   render: function() {
+//
+//     if ( this.props.step === 1 ) {
+//       return (
+//         <p className="lead">
+//           会員登録は無料です。<br />
+//           あなたの興味のあるニュースをお届けします。
+//         </p>
+//       );
+//     } else {
+//
+//       return null;
+//
+//     }
+//
+//   }
+// } );
 /**
  * <p>ユーザー登録ウイザード</p>
  * <p>signup page 内 title<br>
@@ -73,10 +73,18 @@ export let HeadingNode = React.createClass( {
   },
   render: function() {
 
+    // return (
+    //   <header className="signup-header">
+    //     <h1 className="heading"><a href={Url.index()}>運動通信</a></h1>
+    //     <LeadNode step={this.state.step} />
+    //   </header>
+    // );
+    // .signup-header 内の p.lead はトルツメ
+    // https://paper.dropbox.com/doc/SPORTS-BULL-DRIEolzKHNECwXGwZDYM2
+    // @since 2016-09-09
     return (
       <header className="signup-header">
         <h1 className="heading"><a href={Url.index()}>運動通信</a></h1>
-        <LeadNode step={this.state.step} />
       </header>
     );
   },
