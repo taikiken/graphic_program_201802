@@ -103,6 +103,7 @@ export let VideojsImaNode = React.createClass( {
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
 
+
     if(!Sagen.Browser.Mobile.is()){ //for PC: autoplay on load
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
