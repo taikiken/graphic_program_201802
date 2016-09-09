@@ -80,29 +80,13 @@ export let VideojsImaNode = React.createClass( {
     let adUrl = vast !== '' ? vast + Date.now() : '';
 
     /* Player initialized. */
-    let player = videojs('content_video',{
-      nativeControlsForTouch:false
-    });
+    let player = videojs('content_video');
 
     let option = {
       id: 'content_video',
-      adTagUrl: adUrl,
-      nativeControlsForTouch:false
+      adTagUrl: adUrl
     };
     player.ima(option);
-
-    /*if (navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i)) {
-      document.querySelector(".ima-ad-container>div").setAttribute('style', 'display: none; position: absolute;');
-    }*/
-
-    /*player.on("play", function(){  //function to play the video again//
-      document.querySelector(".ima-ad-container>div").setAttribute('style', 'position: absolute;');
-    });*/
-
-    player.ima.initializeAdDisplayContainer();
-    player.ima.requestAds();
-
 
     if(!Sagen.Browser.Mobile.is()){ //for PC: autoplay on load
       player.ima.initializeAdDisplayContainer();

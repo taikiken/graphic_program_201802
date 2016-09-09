@@ -81,61 +81,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
   ?>
 <style>
-    body.vjs-full-window {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-    }
-    .video-js.vjs-fullscreen {
-      position: fixed;
-      overflow: hidden;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .video-js:-webkit-full-screen {
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .video-js.vjs-fullscreen.vjs-user-inactive {
-      cursor: none;
-    }
-    .video-js {
-      width: 100%;
-    }
-    .video-js video {
-      width: 100%;
-    }
-    .video-js .vjs-remaining-time-display {
-      line-height:3em;
-    }
-    .video-js .vjs-ima3-ad-container iframe {
-      pointer-events: auto;
-    }
-  .ima-ad-container{
-    z-index: 0 !important;
-  }
-  .ima-ad-container>div{
-    /*display: none;*/
-  }
-    video::-webkit-media-controls {
-      display:none !important;
-    }
-    .vjs-big-play-button{
-      display: block !important;
-      z-index: 99 !important;
-      color: #e1438b !important;
-      font-size: 4em !important;
-      line-height: 1.5em !important;
-      height: 1.5em !important;
-      width: 1.5em !important;
-      border: .06666em solid #e1438b !important;
-      border-radius: 50% !important;
-    }
+
   </style>
   <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
