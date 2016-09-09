@@ -1,0 +1,390 @@
+@import "../../../../scss/asset";
+
+// index
+//
+// design module index
+
+.index {
+
+  // .index__mainvisual
+  &__main_visual {
+    // margin-right: -500%;
+    // margin-left: -500%;
+
+    // padding-right: 500%;
+    // padding-left: 500%;
+
+    // img {
+    //   width: 100%;
+    //   height: auto;
+
+    //   position: absolute;
+    //   left: 50%;
+    //   transform: translateX(-50%);
+    // }
+
+    img {
+      @include fluid-img(100%);
+    }
+  }
+
+  // .index__overview
+  &__overview {
+    @include screen('large') {
+      @extend %centerring_contents;
+
+      margin-top: 80px;
+      overflow: hidden;
+
+      &__figure {
+        float: left;
+        margin-left: 40px;
+      }
+
+      &__text {
+        float: right;
+        width: 600px;
+
+        h2 {
+          line-height: lh(42, 34);
+          color: #272727;
+          font-weight: bold;
+          font-size: 34px;
+          white-space: nowrap;
+        }
+
+        p {
+          line-height: lh(35, 16);
+          margin-top: 30px;
+          color: #272727;
+          font-weight: bold;
+          font-size: 16px;
+        }
+      }
+    }
+
+    @include screen('small') {
+      margin-top: (80/2)+px;
+
+      &__figure {
+        text-align: center;
+
+        img {
+          width: (252/2)+px;
+        }
+      }
+
+      &__text {
+        padding-right: perCalc(40, 640);
+        padding-left: perCalc(40, 640);
+
+        h2 {
+          line-height: lh(30, 34);
+          margin-top: (64/2)+px;
+          color: #272727;
+          font-weight: bold;
+          font-size: (30/2)+px;
+          text-align: center;
+        }
+
+        p {
+          line-height: lh(42, 28);
+          margin-top: (30/2)+px;
+          color: #272727;
+          font-size: (28/2)+px;
+        }
+      }
+    }
+  }
+
+
+
+
+
+  // .index__app_banner
+  &__app_banner {
+    @include screen('large') {
+      margin-top: 80px;
+
+      &__inner {
+        letter-spacing: ls(inline-block);
+        text-align: center;
+      }
+
+      &__figure {
+        display: inline-block;
+
+        img {
+          height: 50px;
+        }
+      }
+
+      &__item {
+        display: inline-block;
+      }
+
+      &__item {
+        margin-left: 10px;
+
+        img {
+          height: 50px;
+        }
+
+        a:hover {
+          @include over-opacity;
+        }
+      }
+
+      &__item3 {
+
+        a {
+          display: inline-block;
+          width: 220px;
+          height: 50px;
+          border: 2px solid $highlight-color;
+          border-radius: 8px;
+          vertical-align: bottom;
+        }
+
+        span {
+          display: table-cell;
+          width: 220px - 2*2;
+          height: 50px - 2*2;
+          line-height: 0;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        img {
+          height: 12px;
+        }
+      }
+    }
+
+    @include screen('small') {
+      margin-top: (68/2)+px;
+      padding-top: (68/2)+px;
+      border-top: 1px solid #eee;
+
+      &__inner {
+        width: (560/2)+px;
+        margin-right: auto;
+        margin-left: auto;
+        letter-spacing: ls(inline-block);
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      &__figure {
+        display: inline-block;
+
+        img {
+          height: (70/2)+px;
+        }
+      }
+
+      &__item {
+        display: inline-block;
+      }
+
+      &__item {
+        margin-left: (10/2)+px;
+
+        img {
+          height: (70/2)+px;
+        }
+
+        a:hover {
+          @include over-opacity;
+        }
+      }
+
+      &__item3 {
+        display: block;
+        margin-top: (30/2)+px;
+        margin-left: 0;
+
+        a {
+          display: block;
+          width: (560/2)+px;
+          height: (90/2)+px;
+          border: 2px solid $highlight-color;
+          border-radius: (8/2)+px;
+        }
+
+        span {
+          display: block;
+          line-height: 0;
+          padding-top: (30/2)+px;
+          text-align: center;
+        }
+
+        img {
+          height: (24/2)+px;
+        }
+      }
+    }
+  }
+
+
+
+
+
+  // .index__feature
+  &__feature {
+    @include screen('large') {
+      margin-top: 100px;
+      padding: 80px 0;
+      background-color: #0f3580;
+
+      &__inner {
+        width: 1080px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      h2 {
+        color: #fff;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      &__item {
+        float: left;
+        width: 240px;
+        margin-top: 48px;
+
+        & + & {
+          margin-left: 40px;
+        }
+
+        figure {
+          img {
+            height: 210px;
+          }
+        }
+
+        h3, p {
+          color: #fff;
+        }
+
+        h3 {
+          margin-top: 16px;
+          font-weight: bold;
+          font-size: 14px;
+        }
+
+        p {
+          line-height: lh(24, 14);
+          margin-top: 12px;
+          font-size: 14px;
+        }
+      }
+    }
+
+    @include screen('small') {
+      margin-top: (80/2)+px;
+      padding: (80/2)+px 0;
+      background-color: #0f3580;
+
+      h2 {
+        color: #fff;
+        font-weight: bold;
+        font-size: (36/2)+px;
+        text-align: center;
+      }
+
+      &__item {
+        width: perCalc(560, 640);
+        margin: (56/2)+px auto 0;
+
+        figure {
+          img {
+            width: 100%;
+          }
+        }
+
+        h3, p {
+          color: #fff;
+        }
+
+        h3 {
+          margin-top: (40/2)+px;
+          font-weight: bold;
+          font-size: (28/2)+px;
+          text-align: center;
+        }
+
+        p {
+          line-height: lh(42, 28);
+          margin-top: (24/2)+px;
+          font-size: (28/2)+px;
+        }
+      }
+    }
+  }
+
+
+
+
+
+  // .index__partner
+  &__partner {
+    @include screen('large') {
+      margin-top: 80px;
+
+      h2 {
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      ul {
+        width: 1070px;
+        margin: (56-30)+px auto 0;
+        overflow: hidden;
+      }
+
+      li {
+        float: left;
+        margin-top: 30px;
+        margin-left: 30px;
+
+        &:nth-child(5n+1) {
+          margin-left: 0;
+        }
+      }
+
+      a:hover {
+        @include over-opacity;
+      }
+    }
+
+    @include screen('small') {
+      margin-top: (80/2)+px;
+
+      h2 {
+        font-weight: bold;
+        font-size: (36/2)+px;
+        text-align: center;
+      }
+
+      ul {
+        margin-top: ((48-30)/2)+px;
+        letter-spacing: ls(inline-block);
+        text-align: center;
+      }
+
+      li {
+        display: inline-block;
+        margin: (30/2)+px 6px 0;
+
+        img {
+          height: (50/2)+px;
+        }
+      }
+    }
+  }
+
+}
