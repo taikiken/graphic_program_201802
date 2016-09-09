@@ -30,8 +30,13 @@
   <script src="/assets/js/libs/vendor.min.js"></script>
   <script src="/assets/js/libs/vendor.react.js"></script>
 </head>
-<body>
+<body class="appbnr-enable">
 <div class="whole">
+  <div class="header-appbnr">
+    <div class="header-appbnr-btn-close"><span>閉じる</span></div>
+    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="運動通信をアプリでサクサク楽しむ！アプリ版ダウンロード"></a>
+  </div><!-- /.header-over -->
+
   <div class="header-sticky">
     <header class="head-sec">
       <div class="head-sec-inner">
@@ -58,7 +63,7 @@
       </div><!-- /.head-sec-inner -->
     </header><!-- /.head-sec -->
 
-    <div class="head-search enable">
+    <div class="head-search disable">
       <form action="">
         <input id="head-search" nama="head-search" type="text" placeholder="記事を検索">
         <input type="submit" value="検索">
@@ -93,7 +98,7 @@
       </div><!-- /.gnav-sec-inner -->
     </nav><!-- /.gnav-sec -->
 
-    <div class="dialogue-notice error">
+    <div class="dialogue-notice error hide">
       <div class="dialogue-notice-inner">
         <div class="dialogue-notice-info">
           <p>パスワードが違います</p>

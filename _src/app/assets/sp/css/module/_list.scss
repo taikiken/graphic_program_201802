@@ -25,15 +25,17 @@
 // lnav
 .lnav {
   width: 100%;
-
-  &.fixed-top {
-    position: fixed;
-    left: 0;
-    top: 100px;
-    z-index: 100;
-    // 下が透けて見えるので背景を設定
-    background-color: #fff;
-  }
+  // 下が透けて見えるので背景を設定
+  background-color: #fff;
+  // わかりにくいので layout.scss に移動
+  //&.fixed-top {
+  //  position: fixed;
+  //  left: 0;
+  //  top: 100px;
+  //  z-index: 100;
+  //  // 下が透けて見えるので背景を設定
+  //  background-color: #fff;
+  //}
 
   @at-root {
     &-list {
