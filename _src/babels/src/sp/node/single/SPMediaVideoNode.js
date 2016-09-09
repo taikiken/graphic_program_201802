@@ -18,7 +18,6 @@ import {Safety} from '../../../data/Safety';
 
 // node
 import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
-import {BrightcoveNode} from '../../../node/media/BrightcoveNode';
 import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
 
 // React
@@ -82,23 +81,6 @@ export let SPMediaVideoNode = React.createClass( {
       />
     );
 
-  },
-  brightcove: function( media ) {
-    let images = media.images;
-    let video = media.video;
-    let caption = video.caption || '';
-    let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
-
-    // HTML5 video
-    return (
-      <BrightcoveNode
-        articleId={this.props.articleId}
-        video={video}
-        poster={poster}
-        caption={caption}
-        playImage={Empty.VIDEO_PLAY}
-      />
-    );
   },
   videojsima: function( media ) {
     let images = media.images;
