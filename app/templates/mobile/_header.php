@@ -190,7 +190,7 @@ if ( $page_has_header ) :
       <aside class="f-right clearfix">
         <span id="search-container-opener"></span>
 
-        <div id="user-profile-container"></div><!--/header-user-->
+        <div id="user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->

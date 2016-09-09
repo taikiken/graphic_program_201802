@@ -157,7 +157,7 @@ if (
       <h1><a href="/">SPORTS BULL</a></h1>
 
       <aside class="f-right clearfix">
-        <div id="user-profile-container"></div><!--/header-user-->
+        <div id="user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
