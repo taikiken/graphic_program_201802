@@ -52,30 +52,21 @@ export class SPViewAppBanner extends React.Component {
      * @type {Function}
      */
     this.boundClose = this.onClose.bind(this);
-
-    // -----------------------------------------
-    this.previous = 0;
-    this.moving = 0;
-
-    const boundScroll = this.onScroll.bind(this);
-
-    const scroll = Scroll.factory();
-    scroll.on(Scroll.SCROLL, boundScroll);
-    scroll.start();
-
     /**
      * bind ずみ Scroll.SCROLL event handler<br>
      * scroll を監視し header-sticky を fixed にするか relative にするかを決めます
      * @property
      * @type {Function}
      */
-    this.boundScroll = boundScroll;
+    this.boundScroll = this.onScroll.bind(this);
     /**
      * Scroll instance
      * @property
      * @type {Scroll}
      */
-    this.scroll = scroll;
+    this.scroll = Scroll.factory();
+    // scroll 監視開始
+    this.activate();
   }
   /**
    * div.header-appbnr-btn-close click event handler
@@ -84,17 +75,26 @@ export class SPViewAppBanner extends React.Component {
   onClose(event) {
     event.preventDefault();
     this.updateShow(false);
+    this.dispose();
   }
   /**
    * state.show を変更します
    * @param {boolean} show show state value
    */
   updateShow(show) {
+    // state が同じだったら処理しない
+    if (this.state.show === show) {
+      return;
+    }
+
     if (!show) {
       // 1 week cookie save
       // ***開発時コメントにします**
-      // Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)));
+      Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)));
       SPViewAppBanner.free();
+    } else {
+      // 表示されたらスクロール監視を始める
+      this.activate();
     }
     // state update
     this.setState({ show });
@@ -111,10 +111,26 @@ export class SPViewAppBanner extends React.Component {
     }
   }
   /**
+   * Scroll.SCROLL 監視を開始します
+   */
+  activate() {
+    this.dispose();
+
+    const scroll = this.scroll;
+    scroll.on(Scroll.SCROLL, this.boundScroll);
+    scroll.start();
+  }
+  /**
+   * Scroll.SCROLL 監視を止めます
+   */
+  dispose() {
+    this.scroll.off(Scroll.SCROLL, this.boundScroll);
+  }
+  /**
    * unmount 時に dispose します
    */
   componentWillUnmount() {
-    this.scroll.off(Scroll.SCROLL, this.boundScroll);
+    this.dispose();
   }
   /**
    * JSX を render します
@@ -138,7 +154,6 @@ export class SPViewAppBanner extends React.Component {
   //  STATIC METHOD
   // ---------------------------------------------------
   static visible(view:boolean = false) {
-    console.log('visible', view);
     if (view) {
       Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
     } else {
@@ -148,7 +163,7 @@ export class SPViewAppBanner extends React.Component {
   /**
    * document.body へ `.appbnr-enable` を追加します
    */
-  static activate() {
+  static enable() {
     Sagen.Dom.addClass(document.body, 'appbnr-enable');
   }
   /**
@@ -166,7 +181,7 @@ export class SPViewAppBanner extends React.Component {
   static init(element, visible = false):boolean {
     const has = Cookie.has(Cookie.APP_BANNER);
     if (!has) {
-      SPViewAppBanner.activate();
+      SPViewAppBanner.enable();
       ReactDOM.render(<SPViewAppBanner show={visible} />, element);
       return true;
     }
