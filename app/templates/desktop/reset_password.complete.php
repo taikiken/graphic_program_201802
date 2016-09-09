@@ -15,7 +15,7 @@
 
       <div class="pw-reset setting-form">
         <p class="mt40">ご入力いただいたメールアドレスにパスワード再発行の手順を送信しました。</p>
-        <div class="mod-btnB02 mt40 t-center"><a href="/">ホーム</a></div>
+        <div class="mod-btnA02 mt40 t-center"><a href="/">ホーム</a></div>
       </div><!-- /.pw-reset -->
     </div>
   </div><!-- /.body-sec -->

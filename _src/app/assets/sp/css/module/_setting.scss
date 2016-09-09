@@ -377,17 +377,11 @@
     text-align: center;
   } //.withdraw-lead
 
-  .btn-withdraw {
+  [ class^="mod-btn" ] {
+    input[ type="submit" ],
+    input[ type="button" ],
     a {
       display: block !important;
     }
-  } //.btn-withdraw
-
-  .btn-back {
-    margin-top: (40/2)+px;
-
-    a {
-      display: block !important;
-    }
-  } //.btn-back
+  }
 }

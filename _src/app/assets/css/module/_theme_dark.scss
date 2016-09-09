@@ -147,8 +147,15 @@ $key-color: #e1438b;
 
       &:hover {
         .adsDescription {
-          color: $highlight-color !important;
+          color: $key-color !important;
         }
+      }
+    }
+
+    .adsTitle {
+      &,
+      .adsSponsored {
+        color: $key-color !important;
       }
     }
   }

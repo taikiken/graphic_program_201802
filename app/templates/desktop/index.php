@@ -3,15 +3,17 @@
   <div class="body-sec">
     <div class="body-sec-inner">
       <section class="main-sec">
-        <div class="headline-outer">
-          <div id="headline-container"></div><!-- /headline -->
-          <div class="sponsor-link">
-            <!--
-            株式会社運動通信社 運動通信_PC_WEB_デスクトップ - 一面 - ヘッドライン下部 39882
-            -->
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-          </div>
-        </div><!-- /.headline-outer -->
+        <div class="headline">
+          <div class="headline-outer">
+            <div id="headline-container"></div><!-- /headline -->
+            <div class="sponsor-link">
+              <!--
+              株式会社運動通信社 運動通信_PC_WEB_デスクトップ - 一面 - ヘッドライン下部 39882
+              -->
+              <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+            </div>
+          </div><!-- /.headline-outer -->
+        </div><!-- /.headline -->
 
         <aside class="sns-pr">
           <dl class="sns-pr-inner">

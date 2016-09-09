@@ -15,7 +15,7 @@
 
     <div class="pw-reset setting-form">
       <p class="lead">新しいパスワードを設定しました。</p>
-      <div class="mod-btnB01 mt30"><a href="/">ホーム</a></div>
+      <div class="mod-btnA01 mt30"><a href="/">ホーム</a></div>
     </div><!-- /.pw-reset -->
   </div>
 </div><!-- /.body-sec -->

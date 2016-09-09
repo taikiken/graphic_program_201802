@@ -113,6 +113,11 @@ if ( $template_name == 'category' ) {
   if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
     $whole_classes[] = $page['template_classname'];
   }
+} elseif ( $template_name == 'search' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'layout-list';
+  // ---[end 2016-09-01]---
 } elseif ( $template_name == 'index' ) {
   // @since 2016-09-01
   // https://github.com/undotsushin/undotsushin/issues/1053

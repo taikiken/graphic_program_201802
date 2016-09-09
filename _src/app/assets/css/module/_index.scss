@@ -71,8 +71,9 @@
             &:hover {
               @include hover-opacity;
 
+              .category-label,
               .post-heading {
-                color: $highlight-color;
+                // color: $highlight-secondary-color;
               }
             }
 
