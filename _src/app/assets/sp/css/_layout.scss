@@ -79,6 +79,16 @@ img {
 // 2. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
+// category link
+.lnav.fixed-top {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  z-index: 100;
+  //// 下が透けて見えるので背景を設定
+  //background-color: #fff;
+}
+
 // アプリダウンロードバナー
 .header-appbnr {
   //z-index: -1;
@@ -109,13 +119,15 @@ img {
   }
 }
 
-// アプリダウンロードバナー 表示/非表示
-// bodyに .appbnr-enable or .appbnr-disable
+// アプリダウンロードバナー 表示
+// bodyに .appbnr-enable
 .appbnr-enable {
   .header-appbnr {
     display: block;
   }
 
+  // ------------------------------------
+  // [fixed -> relative / static]
   // バナー高さ分表示の間は relative
   .header-sticky {
     position: relative;
@@ -123,16 +135,13 @@ img {
     //left: auto;
   }
 
-  &.appbnr-invisible {
-    .header-sticky {
-      position: fixed;
-      top: 0;
-    }
-
-    .body-sec {
-      margin-top: 100px + 85px;
-    }
+  .lnav.fixed-top {
+    position: absolute;
+    // 自分の高さ分上にずれる
+    top: -40px;
   }
+  // -----------[/end]-------------------------
+
 
   .body-sec {
     margin-top: (170/2)+px;
@@ -140,9 +149,23 @@ img {
     &.category {
       margin-top: 85px + 40px;
     }
+  }
+
+  // ------------------------------------
+  // banner は表示されているけれど下に隠れている状態
+  &.appbnr-invisible {
+    .header-sticky {
+      position: fixed;
+      top: 0;
+    }
 
     .lnav.fixed-top {
-      top: 100px + 85px;
+      position: fixed;
+      top: 100px;
+    }
+
+    .body-sec {
+      margin-top: 100px + 85px + 40px;
     }
   }
 }
@@ -190,6 +213,8 @@ img {
     top: 160px;
   }
 
+  // ------------------------------------
+  // banner 表示
   &.appbnr-enable {
     .body-sec {
       margin-top: 160px - 75px;
@@ -200,10 +225,18 @@ img {
     }
 
     .lnav.fixed-top {
-      top: 100px + 85px + 60px;
+      top: -40px;
+    }
+  }
+  // -------------------------------------
+  // banner 非表示
+  &.appbnr-invisible {
+    .lnav.fixed-top {
+      top: 100px + 60px;
     }
   }
 }
+
 // --------------------
 .head-sec {
   @at-root {

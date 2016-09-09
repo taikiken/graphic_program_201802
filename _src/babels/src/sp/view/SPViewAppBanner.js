@@ -93,7 +93,7 @@ export class SPViewAppBanner extends React.Component {
     if (!show) {
       // 1 week cookie save
       // ***開発時コメントにします**
-      Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)));
+      // Cookie.save('1', Cookie.APP_BANNER, new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)));
       SPViewAppBanner.free();
     }
     // state update
