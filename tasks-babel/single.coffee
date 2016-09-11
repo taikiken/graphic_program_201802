@@ -143,7 +143,7 @@ gulp.task 'single:webpack:build', () ->
       conf =
         entry: entry
         output: {
-          path: '_src/app/js'
+          path: '_src/app/assets/js'
           publicPath: 'js'
           filename: '[name].bundle.js'
           chunkFilename: '[chunkhash].bundle.js'
