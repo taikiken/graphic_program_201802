@@ -53,7 +53,7 @@ let React = self.React;
  *
  * ```
  * <header className="signup-header">
- *  <h1 className="heading">運動通信</h1>
+ *  <h1 className="heading">SPORTS BULL</h1>
  *  <LeadNode step={this.state.step} />
  * </header>
  * ```
@@ -75,7 +75,7 @@ export let HeadingNode = React.createClass( {
 
     // return (
     //   <header className="signup-header">
-    //     <h1 className="heading"><a href={Url.index()}>運動通信</a></h1>
+    //     <h1 className="heading"><a href={Url.index()}>SPORTS BULL</a></h1>
     //     <LeadNode step={this.state.step} />
     //   </header>
     // );
@@ -84,7 +84,7 @@ export let HeadingNode = React.createClass( {
     // @since 2016-09-09
     return (
       <header className="signup-header">
-        <h1 className="heading"><a href={Url.index()}>運動通信</a></h1>
+        <h1 className="heading"><a href={Url.index()}>SPORTS BULL</a></h1>
       </header>
     );
   },
