@@ -81,22 +81,15 @@ Ads.prototype.adsManagerLoadedCallback = function() {
 };
 
 Ads.prototype.onAdEvent = function(event) {
-  //alert(event.type)
   if(event.type == google.ima.AdEvent.Type.LOADED){
     var adContainer = document.getElementById('content_video_ima-ad-container');
     adContainer.setAttribute('style', 'z-index: 1111; position: absolute;');
   }
   if(event.type == google.ima.AdEvent.Type.ALL_ADS_COMPLETED){
-    //var adContainer = document.getElementById('content_video_ima-ad-container');
-    //adContainer.setAttribute('style', 'z-index: 1111; position: absolute;');
     if(this.player.ima.currentAd.getAdPodInfo().getPodIndex() == -1) {
       var videoElement = $("#content_video_html5_api")[0];
-      videoElement.webkitExitFullScreen();
       this.player.ima.onContentResumeRequested_();
       this.player.src(this.videoUrl);
-      //this.player.currentTime(0);
-      //this.player.play();
-      //this.player.pause();
     }
   }
 };
