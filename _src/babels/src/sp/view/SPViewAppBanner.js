@@ -145,7 +145,7 @@ export class SPViewAppBanner extends React.Component {
       <div className="header-appbnr">
         <div className="header-appbnr-btn-close" onClick={this.boundClose}><span>閉じる</span></div>
         <a className="header-appbnr-link" href={Url.appBanner()} target="_blank">
-          <img src="/assets/sp/images/common/header-app-bnr.png" alt="運動通信をアプリでサクサク楽しむ！アプリ版ダウンロード"/>
+          <img src="/assets/sp/images/common/header-app-bnr.png" alt="話題のスポーツコンテンツが満載！スポーツブルアプリをダウンロード"/>
         </a>
       </div>
     );

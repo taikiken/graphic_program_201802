@@ -175,7 +175,7 @@ if ( $page_has_header ) :
 <div id="js-header-appbnr-container">
 <!--  <div class="header-appbnr">-->
 <!--    <div class="header-appbnr-btn-close"><span>閉じる</span></div>-->
-<!--    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="運動通信をアプリでサクサク楽しむ！アプリ版ダウンロード"></a>-->
+<!--    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="話題のスポーツコンテンツが満載！スポーツブルアプリをダウンロード"></a>-->
 <!--  </div>-->
 </div>
 <div class="header-sticky">

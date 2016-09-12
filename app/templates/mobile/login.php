@@ -1,8 +1,5 @@
 <header class="signup-header">
-  <h1 class="heading"><a href="/">運動通信</a></h1>
-
-  <p class="lead">毎日新鮮なニュースをお届け！<br />
-    ログインしてみんなと語り合おう。</p>
+  <h1 class="heading"><a href="/">SPORTS BULL</a></h1>
 </header><!-- /.signup-header -->
 
 <div class="body-sec">
