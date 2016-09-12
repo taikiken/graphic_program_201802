@@ -40,7 +40,7 @@
   </script>
 <?php
 // ---------------------------------------------------------------------------
-// brightcove
+
 if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子

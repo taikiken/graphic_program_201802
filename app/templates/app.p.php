@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 <?php
 // ---------------------------------------------------------------------------
-// brightcove
+// VideojsImaNode
 if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
@@ -264,7 +264,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove ?>
   <script>
   (function () {
-p
+
     var myPlayer, poster, isPlay = false, isComplete = false;
     videojs('webview-brightcove').ready(function() {
       myPlayer = this;

@@ -14,7 +14,7 @@
 let _symbol = Symbol();
 
 /**
- * <p>動画タイプ<br>BRIGHTCOVE|YOUTUBE|FACEBOOK</p>
+ * <p>動画タイプ<br>YOUTUBE|FACEBOOK</p>
  * 全て static です
  */
 export class VideoType {
@@ -43,7 +43,7 @@ export class VideoType {
     return 'brightcove';
   }
   /**
-   * BRIGHTCOVE, mp4ファイル
+   * VIDEOJSIMA, mp4ファイル
    * @return {string} videojsima を返します
    */
   static get VIDEOJSIMA():string {

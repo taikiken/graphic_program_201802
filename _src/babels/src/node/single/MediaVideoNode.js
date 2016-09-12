@@ -30,7 +30,7 @@ let React = self.React;
  * ```
  * <HTML5VideoNode />
  * or
- * <BrightcoveNode />
+ * <VideojsImaNode />
  * or
  * <iframe youtube/>
  * or
