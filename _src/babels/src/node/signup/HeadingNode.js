@@ -37,7 +37,7 @@ let LeadNode = React.createClass( {
   render: function() {
     // sp なし
     // @since 2016-09-12
-    if (this.props.step === 1 || !Sagen.Browser.Mobile.phone()) {
+    if (this.props.step === 1 && !Sagen.Browser.Mobile.phone()) {
       return (
         <p className="lead">
           会員登録は無料です。<br />
