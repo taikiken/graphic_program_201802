@@ -1,9 +1,11 @@
 /*! videojs-contrib-hls - v1.3.9 - 2016-02-22
+* Copyright (c) 2016 Brightcove; Licensed  */
 /*! videojs-contrib-media-sources - v2.4.5 - 2016-02-11
- */
+* Copyright (c) 2016 Brightcove; Licensed  */
 /**
  * mux.js
  *
+ * Copyright (c) 2014 Brightcove
  * All rights reserved.
  *
  * A lightweight readable stream implemention that handles event dispatching.
@@ -786,6 +788,7 @@ muxjs.codecs.NalByteStream = NalByteStream;
 /**
  * mux.js
  *
+ * Copyright (c) 2015 Brightcove
  * All rights reserved.
  *
  * A stream-based mp2t to mp4 converter. This utility can be used to
@@ -1841,6 +1844,7 @@ muxjs.flv.FlvTag = FlvTag;
 /**
  * mux.js
  *
+ * Copyright (c) 2015 Brightcove
  * All rights reserved.
  *
  * Reads in-band caption information from a video elementary
