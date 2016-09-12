@@ -63,41 +63,54 @@ export let VideojsImaNode = React.createClass( {
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
-    return (
-      <div id="mainContainer">
-          <video id="content_video" className="video-js vjs-default-skin" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
-            <source src={url} type="application/x-mpegURL"></source>
-          </video>
-      </div>
-    );
+    if (navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i)) {
+          return (
+                <div id="ima-sample-videoplayer">
+                  <div id="ima-sample-placeholder"></div>
+                </div>
+              );
+    } else {
+          return(
+            <div id="mainContainer">
+                <video id="content_video" className="video-js vjs-default-skin" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+                  <source src={url} type="application/x-mpegURL"></source>
+                </video>
+            </div>
+          );
+    }
   },
   componentDidMount: function() {
-    let videoElement = ReactDOM.findDOMNode( this.refs.video );
-    this.videoElement = videoElement;
-    videoElement.addEventListener( 'ended', this.onEnded, false );
-    videoElement.addEventListener( 'pause', this.onPause, false );
     let vast = Sagen.Browser.Mobile.is() ? this.props.video.adUrl.sp : this.props.video.adUrl.pc;
     let adUrl = vast !== '' ? vast + Date.now() : '';
 
     /* Player initialized. */
-    let player = videojs('content_video');
+    if (navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i)) {
+      var ads = new Ads(adUrl, this.props.video.url.sd, window.innerWidth, Math.ceil( window.innerWidth / 16 * 9 ),this.props.poster);
+    } else {
+      let videoElement = ReactDOM.findDOMNode( this.refs.video );
+      this.videoElement = videoElement;
+      videoElement.addEventListener( 'ended', this.onEnded, false );
+      videoElement.addEventListener( 'pause', this.onPause, false );
+      let player = videojs('content_video');
+      let option = {
+        id: 'content_video',
+        adTagUrl: adUrl
+      };
+      player.ima(option);
 
-    let option = {
-      id: 'content_video',
-      adTagUrl: adUrl
-    };
-    player.ima(option);
-
-    if(!Sagen.Browser.Mobile.is()){ //for PC: autoplay on load
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
-      player.play();
-    } else { //for Mobile: click to play
-      player.one('click', function() {
+      if(!Sagen.Browser.Mobile.is()){ //for PC: autoplay on load
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-      });
+      } else { //for Mobile: click to play
+        player.one('click', function() {
+          player.ima.initializeAdDisplayContainer();
+          player.ima.requestAds();
+          player.play();
+        });
+      }
     }
   },
   componentWillUnMount: function() {

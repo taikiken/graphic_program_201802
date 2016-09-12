@@ -80,9 +80,6 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
   ?>
-<style>
-
-  </style>
   <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
@@ -94,6 +91,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
+  <script src="/assets/ima_plugin/js/ads.js"></script>
 
   <?php
 endif;
