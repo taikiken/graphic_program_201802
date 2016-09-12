@@ -88,6 +88,8 @@ export let VideojsImaNode = React.createClass( {
     if (navigator.userAgent.match(/iPhone/i) ||
         navigator.userAgent.match(/iPad/i)) {
       var ads = new Ads(adUrl, this.props.video.url.sd, window.innerWidth, Math.ceil( window.innerWidth / 16 * 9 ),this.props.poster);
+      ads.init();
+      document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
     } else {
       let videoElement = ReactDOM.findDOMNode( this.refs.video );
       this.videoElement = videoElement;
@@ -99,6 +101,13 @@ export let VideojsImaNode = React.createClass( {
         adTagUrl: adUrl
       };
       player.ima(option);
+
+      player.on('play', function() {
+        document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
+      });
+      /*player.on('pause', function() {
+        document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:block !important');
+      });*/
 
       if(!Sagen.Browser.Mobile.is()){ //for PC: autoplay on load
         player.ima.initializeAdDisplayContainer();

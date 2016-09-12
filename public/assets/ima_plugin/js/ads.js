@@ -21,8 +21,8 @@ var Ads = function(adsUrl,videoUrl,widthVal,heightVal,poster) {
   this.widthVal = widthVal;
   this.heightVal = heightVal;
   this.poster = poster;
-  this.placeholder.addEventListener('click', this.bind(this, this.init));
-  this.placeholder.setAttribute('style', 'background-image: url('+poster+');background-repeat:no-repeat;background-size:cover; width: '+widthVal+'px; height: '+heightVal+'px;');
+  //this.placeholder.addEventListener('click', this.bind(this, this.init));
+  //this.placeholder.setAttribute('style', 'background-image: url('+poster+');background-repeat:no-repeat;background-size:cover; width: '+widthVal+'px; height: '+heightVal+'px;');
   this.events = [
    google.ima.AdEvent.Type.ALL_ADS_COMPLETED,
    google.ima.AdEvent.Type.CLICK,
@@ -62,6 +62,7 @@ Ads.prototype.createPlayer = function() {
   dumbPlayer.className = 'video-js vjs-default-skin';
   dumbPlayer.setAttribute('width', this.widthVal);
   dumbPlayer.setAttribute('height', this.heightVal);
+  dumbPlayer.setAttribute('poster', this.poster);
   var contentSrc = document.createElement('source');
   contentSrc.setAttribute('src', this.videoUrl);
   contentSrc.setAttribute('type', 'application/x-mpegURL');

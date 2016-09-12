@@ -125,6 +125,14 @@ if ( $template_name == 'category' ) {
   }
 }
 ?>
+  <style type="text/css">
+    .vjs-big-play-button{
+      display: block !important;
+    }
+    /*video::-webkit-media-controls {
+      display:none !important;
+    }*/
+  </style>
 </head>
 <body>
 <div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
