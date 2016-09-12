@@ -190,6 +190,10 @@
         dd {
           overflow: hidden;
         }
+
+        a {
+          @include link-decoration(#fff, #fff, none, underline);
+        }
       }
     }
 
