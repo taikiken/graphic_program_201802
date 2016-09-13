@@ -534,6 +534,7 @@ img {
 .foot {
   @at-root {
     &-sec {
+      position: relative;
       background-color: #111;
 
       &-inner {}
