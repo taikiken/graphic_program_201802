@@ -77,7 +77,6 @@ export class Scroll extends EventDispatcher {
   onScroll( event:Event ):void {
     this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
   }
-
   /**
    * 強制的に scroll event を発生させます
    */

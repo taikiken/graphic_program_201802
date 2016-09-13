@@ -162,6 +162,12 @@ if ( $template_name == 'category' ) {
 // header 表示条件 start
 if ( $page_has_header ) :
 ?>
+<div id="js-header-appbnr-container">
+<!--  <div class="header-appbnr">-->
+<!--    <div class="header-appbnr-btn-close"><span>閉じる</span></div>-->
+<!--    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="運動通信をアプリでサクサク楽しむ！アプリ版ダウンロード"></a>-->
+<!--  </div>-->
+</div>
 <div class="header-sticky">
   <header class="head-sec">
     <div class="head-sec-inner">
