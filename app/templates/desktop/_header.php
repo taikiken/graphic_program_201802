@@ -85,6 +85,28 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
+
+  <style type="text/css">
+    #mainContainer{
+      border: 1px #fff solid;
+      box-sizing: border-box;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      padding-top: 30px;
+      position: relative;
+      width:100%;
+    }
+    #single-visual-container{
+      box-sizing: border-box;
+    }
+    .vjs-poster{
+      display: none !important;
+    }
+    .video-js{
+      background-color: #fff !important;
+    }
+  </style>
 <?php
 endif;
 // eof brightcove
