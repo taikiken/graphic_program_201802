@@ -78,16 +78,112 @@ img {
 
 // 2. head section
 // ----------------------------------------------------------------------------------------------------------------------------------------
+
+// category link
+.lnav.fixed-top {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  z-index: 100;
+  //// 下が透けて見えるので背景を設定
+  //background-color: #fff;
+}
+// アプリダウンロードバナー
+.header-appbnr {
+  // default 非表示
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000px;
+  background-color: #000;
+  text-align: center;
+
+  &-link {
+    img {
+      width: auto;
+      height: (170/2)+px;
+    }
+  }
+
+  &-btn-close {
+    position: absolute;
+    top: (76/2)+px;
+    right: (10/2)+px;
+
+    @extend .sp-sprite-common;
+    @include sprite( $common-btn-notice-close );
+    @include hide-text;
+  }
+}
+
+// アプリダウンロードバナー 表示
+// bodyに .appbnr-enable
+.appbnr-enable {
+  // body.appbnr-enable > .header-appbnr で表示
+  .header-appbnr {
+    display: block;
+  }
+
+  // ------------------------------------
+  // [fixed -> relative / static]
+  // バナー高さ分表示の間は relative
+  .header-sticky {
+    position: relative;
+    top: (170/2)+px;
+    //left: auto;
+  }
+
+  .lnav.fixed-top {
+    position: absolute;
+    // 自分の高さ分上にずれる
+    top: -40px;
+  }
+  // -----------[/end]-------------------------
+
+
+  .body-sec {
+    margin-top: (170/2)+px;
+
+    &.category {
+      margin-top: 85px + 40px;
+    }
+  }
+
+  // ------------------------------------
+  // banner は表示されているけれど下に隠れている状態
+  &.appbnr-invisible {
+    .header-sticky {
+      position: fixed;
+      top: 0;
+    }
+
+    .lnav.fixed-top {
+      position: fixed;
+      top: 100px;
+    }
+
+    .body-sec {
+      margin-top: 100px + 85px;
+    }
+    .body-sec.category {
+      margin-top: 100px + 85px + 40px;
+    }
+  }
+}
+
 // -------------------
 // header を fixed にする
 .header-sticky {
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   z-index: 100;
   background-color: #fff;
 }
+
 .body-sec {
   margin-top: 100px;
 
@@ -97,6 +193,7 @@ img {
     margin-top: 140px;
   }
 }
+
 .search-form-open {
   // input:text focus でピョコンとなるバグ対策
   // scroll できなくなるので不採用
@@ -114,7 +211,39 @@ img {
   .lnav.fixed-top {
     top: 160px;
   }
+
+  // ------------------------------------
+  // banner 表示
+  &.appbnr-enable {
+    .body-sec {
+      margin-top: 160px - 75px;
+
+      &.category {
+        margin-top: 200px - 75px;
+      }
+    }
+
+    .lnav.fixed-top {
+      top: -40px;
+    }
+  }
+  // -------------------------------------
+  // banner 非表示
+  &.appbnr-invisible {
+    .body-sec {
+      margin-top: 160px + 85px;
+
+      &.category {
+        margin-top: 200px + 85px;
+      }
+    }
+
+    .lnav.fixed-top {
+      top: 100px + 60px;
+    }
+  }
 }
+
 // --------------------
 .head-sec {
   @at-root {
@@ -405,6 +534,7 @@ img {
 .foot {
   @at-root {
     &-sec {
+      position: relative;
       background-color: #111;
 
       &-inner {}

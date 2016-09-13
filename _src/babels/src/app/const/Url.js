@@ -11,7 +11,9 @@
  */
 
 
-let _symbol = Symbol();
+const Browser = self.Sagen.Browser;
+
+// let _symbol = Symbol();
 
 /**
  * <p>Page 遷移 URL</p>
@@ -20,19 +22,19 @@ let _symbol = Symbol();
  * [参照](https://docs.google.com/spreadsheets/d/1raMO0x5aeG-bk45PK528ib9HUU-Q4DbHq56oxDQ1h7c/)
  * */
 export class Url {
-  /**
-   * <h4>Page 遷移 URL</h4>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target:Symbol ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Url is static Class. not use new Url().' );
-
-    }
-
-  }
+  // /**
+  //  * <h4>Page 遷移 URL</h4>
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Url is static Class. not use new Url().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
@@ -271,7 +273,6 @@ export class Url {
     }
 
   }
-
   /**
    * about url
    * @param {string} [path=''] path option
@@ -307,7 +308,25 @@ export class Url {
         // console.warn( `settings illegal value: ${path}, instead use default` );
         return base;
     }
+  }
+  /**
+   * アプリダウンロード URL を取得します
+   * <pre>
+   *   ダウンロード先URLは
+   *   iOS : https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8
+   *   Android : https://play.google.com/store/apps/details?id=com.undotsushin
+   * </pre>
+   * @see https://github.com/undotsushin/undotsushin/issues/1009
+   * @return {?string} app banner URL
+   */
+  static appBanner():string {
+    if (Browser.iOS.is()) {
+      return 'https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8';
+    } else if (Browser.Android.is()) {
+      return 'https://play.google.com/store/apps/details?id=com.undotsushin';
+    }
 
+    return null;
   }
 
 }

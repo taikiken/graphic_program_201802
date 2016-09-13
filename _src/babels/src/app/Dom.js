@@ -504,4 +504,14 @@ export class Dom {
 
     return script.dataset.label;
   }
+
+  // --------------------------------------
+  // アプリバナー
+  /**
+   * アプリバナー格納 Element を取得します
+   * @return {Element} div#js-header-appbnr-container
+   */
+  static appBanner():Element {
+    return Dom.get('js-header-appbnr-container');
+  }
 }
