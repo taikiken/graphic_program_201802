@@ -32,6 +32,12 @@ const Polling = self.Gasane.Polling;
 const React = self.React;
 const ReactDOM = self.ReactDOM;
 
+/**
+ * .pickup-NN Element を作成します
+ * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
+ * @param {number} index react key に使用するユニークな index 数値
+ * @return {XML} カルーセル1記事コンテナを返します
+ */
 const makeArticle = (dae, index) => {
   const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
 
