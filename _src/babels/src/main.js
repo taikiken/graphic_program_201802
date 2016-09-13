@@ -33,6 +33,8 @@ import {Router} from './app/Router';
 import {Offset} from './util/Offset';
 import {Scroll} from './util/Scroll';
 
+
+
 // -------------------------------------
 // net
 import {Cookie} from './net/Cookie';
@@ -141,7 +143,7 @@ import {SPViewUserProfile} from './sp/view/mypage/SPViewUserProfile';
 import {SPViewBookmarks} from './sp/view/mypage/SPViewBookmarks';
 
 /**
- * 運動通信 ライブラリ
+ * スポーツブル ライブラリ
  * @module UT
  * @type {{version: string, build: string, app: {App: App, User: User, Router: Router, Dom: Dom, const: {CommentsType: CommentsType}}, util: {Offset: Offset, Scroll: Scroll}, net: {Cookie: Cookie}, model: {Model: Model}, view: {View: View, ViewCategory: ViewCategory, ViewSingle: ViewSingle, ViewTitle: ViewTitle, ViewComments: ViewComments, ViewSearch: ViewSearch, ViewCommentSingle: ViewCommentSingle, ViewFirstVisit: ViewFirstVisit, comment: {ViewCommentForm: ViewCommentForm}, single: {ViewSingleTitle: ViewSingleTitle, ViewSingleVisual: ViewSingleVisual}, header: {ViewHeaderUser: ViewHeaderUser, ViewHeaderSearch: ViewHeaderSearch}, sidebar: {ViewRanking: ViewRanking, ViewVideos: ViewVideos}, home: {ViewHeadline: ViewHeadline, ViewPickup: ViewPickup, ViewNews: ViewNews}, signup: {SignupWizard: SignupWizard, ViewDeactivate: ViewDeactivate}, login: {ViewLogin: ViewLogin, ViewLogout: ViewLogout}, mypage: {ViewUserProfile: ViewUserProfile, ViewBookmarks: ViewBookmarks, ViewActivities: ViewActivities, ViewNotifications: ViewNotifications}, settings: {ViewSettingsIndex: ViewSettingsIndex, ViewSettingsInterest: ViewSettingsInterest}, modal: {ViewDeleteModal: ViewDeleteModal, ViewLogoutModal: ViewLogoutModal, ViewFlushModal: ViewFlushModal}}, sp: {view: {SPViewSyn: SPViewSyn, SPViewComments: SPViewComments, SPViewSingle: SPViewSingle, SPViewSearch: SPViewSearch, SPViewFirstVisit: SPViewFirstVisit, single: {SPViewSingleHeader: SPViewSingleHeader, SPViewReadMore: SPViewReadMore}, comment: {SPViewCommentForm: SPViewCommentForm}, home: {SPViewHeadLine: SPViewHeadLine, SPViewNews: SPViewNews}, category: {SPViewCategoryRoot: SPViewCategoryRoot}, header: {SPViewHeaderUser: SPViewHeaderUser, SPViewHeaderSearch: SPViewHeaderSearch}, mypage: {SPViewUserProfile: SPViewUserProfile, SPViewBookmarks: SPViewBookmarks}}}}}
  */

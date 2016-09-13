@@ -98,13 +98,12 @@
 
           <div class="post-sns-pr">
             <dl class="post-sns-pr-inner">
-              <dt>運動通信を<strong>いいね</strong>して<br />
-                最新ニュースをチェック！</dt>
+              <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLSPORTS BULLをいいねして最新ニュースをチェック！"></dt>
               <dd>
                 <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
               </dd>
             </dl><!-- /.post-sns-pr-inner -->
-          </div><!-- /.post-sns-pr -->
+          </div>
         </div><!-- /.post-sns -->
 
         <?php

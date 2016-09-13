@@ -149,10 +149,20 @@ if ( $page['template'] == 'p' || $page['template'] == 'comment') {
 
 // in category
 if ( $template_name == 'category' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'layout-list';
+  // ---[end 2016-09-01]---
+
   // template_classname があれば
   if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
     $whole_classes[] = $page['template_classname'];
   }
+} elseif ( $template_name == 'index' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'home';
+  // ---[end 2016-09-01]---
 }
 ?>
 </head>
@@ -165,13 +175,13 @@ if ( $page_has_header ) :
 <div id="js-header-appbnr-container">
 <!--  <div class="header-appbnr">-->
 <!--    <div class="header-appbnr-btn-close"><span>閉じる</span></div>-->
-<!--    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="運動通信をアプリでサクサク楽しむ！アプリ版ダウンロード"></a>-->
+<!--    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="話題のスポーツコンテンツが満載！スポーツブルアプリをダウンロード"></a>-->
 <!--  </div>-->
 </div>
 <div class="header-sticky">
   <header class="head-sec">
     <div class="head-sec-inner">
-      <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
+      <h1><a href="/">SPORTS BULL</a></h1>
 
       <div id="menu-opener" class="menu-opener">
         <a id="side-menu-toggle" href="#side-menu-container"><span></span><span></span><span></span></a>
@@ -180,7 +190,7 @@ if ( $page_has_header ) :
       <aside class="f-right clearfix">
         <span id="search-container-opener"></span>
 
-        <div id="user-profile-container"></div><!--/header-user-->
+        <div id="user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->

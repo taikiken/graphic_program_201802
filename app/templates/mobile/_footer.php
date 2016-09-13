@@ -53,11 +53,11 @@ if (
       <li id="side-menu-service">
         <ul>
           <!-- Service Specific Menu -->
-          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>運動通信トップへ</a></li>
+          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
           <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
           <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
           <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
-          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>運動通信とは</a></li>
+          <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>スポーツブルとは</a></li>
         </ul>
       </li>
 
@@ -84,9 +84,9 @@ if (
     include_once __DIR__."/../_breadcrumb.php"; ?>
     <div class="foot-pr">
       <div class="foot-pr-inner">
-        <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="運動通信 CRAZY FOR SPORTS"></figure>
+        <figure class="foot-pr-logo"><img src="/assets/sp/images/common/footer-overview-logo.png" alt="SPORTS BULL"></figure>
         <div class="text-block">
-          <h3 class="foot-pr-heading">運動通信をアプリでサクサク楽しむ！</h3>
+          <h3 class="foot-pr-heading">スポーツブルアプリをダウンロード</h3>
           <ul class="foot-pr-list">
             <li class="foot-pr-item"><a class="foot-pr-link" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-applestore.png" alt="App Store" /></a></li>
             <li class="foot-pr-item"><a class="foot-pr-link" href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/common/footer-overview-btn-googleplay.png" alt="Google play"></a></li>
@@ -95,7 +95,7 @@ if (
       </div><!-- /.foot-pr-inner -->
 
       <div class="fb-page-plugin">
-        <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">運動通信（undotsushin）</a></blockquote></div></div>
+        <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
       </div>
 
       <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
@@ -127,7 +127,7 @@ if (
       </ul>
     </div><!-- /.sns-block -->
 
-    <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
+    <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
   </div><!-- /.foot-sec-inner -->
 </footer><!-- /.foot-sec -->
   <?php
@@ -139,7 +139,7 @@ if (
   $template_name == 'reset_password.resetting'
 ) {
 ?>
-  <p class="copyright">Copyright &copy; UNDO TSUSHIN inc. All rights reserved.</p>
+  <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
 <?php
 }// end if
 // footer 表示条件 end

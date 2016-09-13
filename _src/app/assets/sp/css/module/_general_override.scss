@@ -17,7 +17,7 @@
     height: 0;
 
     //background: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.9) url("/assets/sp/images/common/preloader.gif") no-repeat center center;
+    background: #000 url("/assets/sp/images/common/preloader.gif") no-repeat center center;
     background-size: (60/2)+px;
     opacity: 0;
   }
@@ -153,11 +153,6 @@
   }
 }
 
-// recommend 右に空き
-.board-large .board-item .post-label_recommend {
-  margin-right: 8px;
-}
-
 // -------------------------------------------------
 // more button
 #board-container-more {
@@ -217,43 +212,6 @@
 
 .archive-tab {
   overflow: hidden;
-}
-
-// -------------------------------------------------
-// sp info
-.info {
-  margin-bottom: 10px;
-}
-.info-container {
-  min-height: 300px;
-  #board-container-more {
-    padding-top: 0;
-    margin-bottom: 20px;
-  }
-}
-
-
-// -------------------------------------------------
-// sp mypage (bookmark)
-.mypage-bookmark {
-  min-height: 300px;
-
-  #board-container-more {
-    padding-top: 0;
-    margin: 10px 0 20px;
-  }
-}
-
-
-// -------------------------------------------------
-// sp mypage/activities
-.activity-container {
-  min-height: 300px;
-
-  #board-container-more {
-    padding-top: 0;
-    margin: 10px 0 20px;
-  }
 }
 
 // -------------------------------------------------
