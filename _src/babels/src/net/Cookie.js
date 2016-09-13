@@ -38,28 +38,36 @@ export class Cookie {
   //  GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * TARGET
    * token cookie name
+   * @const TARGET
    * @return {string} cookie key name を返します
    */
   static get TARGET():string {
     return 'auth_token';
   }
   /**
-   * SYN
    * Syn. menu を開いた時にセットする cookie name
+   * @const SYN
    * @return {string} Syn. menu を開いた時にセットする cookie name を返します
    */
   static get SYN():string {
     return 'visited';
   }
   /**
-   * EVER_BEEN
    * 初めての訪問 cookie name
+   * @const EVER_BEEN
    * @return {string} been 初めての訪問 cookie name を返します
    */
   static get EVER_BEEN():string {
     return 'been';
+  }
+
+  /**
+   * @const APP_BANNER
+   * @return {string} app_banner アプリバーアナー cookie name を返します
+   */
+  static get APP_BANNER():string {
+    return 'app_banner';
   }
   // ---------------------------------------------------
   //  METHOD

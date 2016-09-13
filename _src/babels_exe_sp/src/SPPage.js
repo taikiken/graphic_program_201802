@@ -14,6 +14,7 @@ import {SPPageTop} from './ui/SPPageTop';
 import {SPNav} from './ui/SPNav';
 import {SPSyn} from './ui/SPSyn';
 import {SPFirstVisit} from './ui/SPFirstVisit';
+import { SPAppBanner } from './ui/SPAppBanner';
 
 import {SPIndex} from './page/SPIndex';
 import {SPCategory} from './page/SPCategory';
@@ -79,6 +80,8 @@ export class SPPage {
     SPCommentDelete.start();
     // flush
     SPFlush.start();
+    // app banner
+    SPAppBanner.start();
 
     // router
     let Router = UT.app.Router;
