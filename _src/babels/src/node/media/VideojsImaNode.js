@@ -63,8 +63,7 @@ export let VideojsImaNode = React.createClass( {
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
-    if (navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i)) {
+    if (navigator.userAgent.match(/iPhone/i)) {
           return (
                 <div id="ima-sample-videoplayer">
                   <div id="ima-sample-placeholder"></div>
@@ -85,8 +84,7 @@ export let VideojsImaNode = React.createClass( {
     let adUrl = vast !== '' ? vast + Date.now() : '';
 
     /* Player initialized. */
-    if (navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i)) {
+    if (navigator.userAgent.match(/iPhone/i)) {
       var ads = new Ads(adUrl, this.props.video.url.sd, window.innerWidth, Math.ceil( window.innerWidth / 16 * 9 ),this.props.poster);
       ads.init();
       document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
@@ -108,8 +106,8 @@ export let VideojsImaNode = React.createClass( {
       /*player.on('pause', function() {
         document.getElementsByClassName("vjs-big-play-button")[0].setAttribute('style', 'display:block !important');
       });*/
-
       if(!Sagen.Browser.Mobile.is()){ //for PC: autoplay on load
+        document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important;');
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
