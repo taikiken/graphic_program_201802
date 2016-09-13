@@ -102,7 +102,8 @@ gulp.task 'sp:css:build', ->
   .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
   .pipe $.replaceTask patterns: patterns
-  .pipe $.if '*.css' && compress.css, $.cssnano()
+  # http://cssnano.co/optimisations/zindex
+  .pipe $.if '*.css' && compress.css, $.cssnano zindex: false
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** sp:css:build ***'
