@@ -191,8 +191,23 @@
 
 } //.board-large
 
+// @override line 150
+// @since 2016-08-30
+// issue: https://github.com/undotsushin/undotsushin/issues/997#issuecomment-243310794
+.board-large .board-item .post-thumb img {
+  &.video-thumbnail {
+    height: 100%;
+  }
+}
 
-
+// @override line 146
+// @since 2016-08-30
+// https://github.com/undotsushin/undotsushin/issues/997#issuecomment-243310794
+.dark {
+  .board-large .board-item .post-thumb {
+    background-color: #181818;
+  }
+}
 
 
 // board-small
