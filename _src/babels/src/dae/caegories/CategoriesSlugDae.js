@@ -64,9 +64,9 @@ export class CategoriesSlugDae {
      */
     this._response = response;
 
-    // @since 2016-09-13
     /**
      * JSON.response.pickup
+     * @since 2016-09-13
      * @type {PickupDae}
      * @protected
      */
