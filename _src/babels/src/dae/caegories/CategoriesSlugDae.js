@@ -17,6 +17,8 @@ import {AdDae} from '../theme/AdDae';
 import {BannersDae} from '../banner/BannersDae';
 import {BannerDae} from '../banner/BannerDae';
 
+import { PickupDae } from './PickupDae';
+
 
 /**
  * <p>特定のカテゴリー情報を取得する<br>
@@ -61,6 +63,14 @@ export class CategoriesSlugDae {
      * @protected
      */
     this._response = response;
+
+    // @since 2016-09-13
+    /**
+     * JSON.response.pickup
+     * @type {PickupDae}
+     * @protected
+     */
+    this._pickup = new PickupDae(response.pickup);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -160,5 +170,26 @@ export class CategoriesSlugDae {
    */
   get isShowFilter():Boolean {
     return this.response.is_show_filter;
+  }
+  // --------------------
+  /**
+   * 「記事カテゴリー情報」 response.pickup
+   * <pre>
+   * カテゴリー一覧のピックアップスライド
+   * - 表示レイアウト・内容は一面のピックアップと同じ
+   * - PC版はスライド
+   * - スマホ/アプリは冒頭1件を固定表示(スライドしない)
+   * </pre>
+   *
+   * ```
+   * pickup {
+   *  articles: []<Object>
+   * }
+   * ```
+   * @since 2016-09-13
+   * @return {PickupDae} response.pickup PickupDae instance にして返します
+   */
+  get pickup():PickupDae {
+    return this._pickup;
   }
 }
