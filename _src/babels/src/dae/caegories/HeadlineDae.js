@@ -17,8 +17,10 @@ import { RelatedDae } from '../RelatedDae';
 import { HeadlineAdDae } from './HeadlineAdDae';
 
 /**
+ * response.headline を処理します<br>
  * カテゴリー一覧のヘッドライン<br>
  * - 表示レイアウト・内容は一面のヘッドラインと同じ
+ * @since 2016-09-13
  */
 export class HeadlineDae {
   /**
@@ -42,7 +44,7 @@ export class HeadlineDae {
      * response.headline.articles
      * <pre>
      * - 最大5件
-     * pickup.articles が存在しない場合は、ピックアップエリアを表示しない
+     * headline.articles が存在しない場合は、ピックアップエリアを表示しない
      * </pre>
      * @type {Array}
      * @private

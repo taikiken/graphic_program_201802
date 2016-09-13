@@ -15,6 +15,7 @@ import { AdDae } from '../theme/AdDae';
 /**
  * headline.ad, ヘッドライン下部(6件目)の広告, アドジェネID<br>
  * pc は アドジェネID が一つです
+ * @since 2016-09-13
  */
 export class HeadlineAdDae extends AdDae {
   /**
