@@ -437,6 +437,10 @@
      * @private
      */
    var onAdLoaded_ = function(adEvent) {
+      if (navigator.userAgent.match(/iPad/i)) {
+         var adContainer = document.getElementById('content_video_ima-ad-container');
+         adContainer.setAttribute('style', 'z-index: 99; position: absolute;');
+      }
       if (!adEvent.getAd().isLinear()) {
         this.player.play();
       }
