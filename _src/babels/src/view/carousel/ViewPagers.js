@@ -9,3 +9,64 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+// dae
+import { ArticleDae } from '../../dae/ArticleDae';
+
+// React
+const React = self.React;
+
+/**
+ * カルーセル・ページャーを作成します<br>
+ * プロパティ `list` から必要な数だけのページャー {@link ViewPager} を作成します
+ */
+export class ViewPagers extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link ViewPagers.propTypes}
+   */
+  constructor(props) {
+    super(props);
+  }
+  /**
+   * カルーセル・ページャーコンテナを作成します
+   * @return {XML} カルーセル・ページャーコンテナを返します
+   */
+  render() {
+    const list = this.props.list;
+    const length = list.length;
+    let offset = this.props.offset;
+    const onPager = this.poprs.onPager;
+
+    return (
+      <ul className="pager-list">
+        {
+          list.map((article) => {
+            const dae = new ArticleDae(article);
+
+            return (
+              <ViewPager
+                key={`pager-${dae.id}`}
+                id={String(dae.id)}
+                index={offset++}
+                length={length}
+                onPager={onPager}
+              />
+            );
+          })
+        }
+      </ul>
+    );
+  }
+}
+
+/**
+ * プロパティ
+ * @static
+ * @type {{offset: number, list: []<Object>, onPager: function}}
+ */
+ViewPagers.propTypes = {
+  offset: React.PropTypes.number.isRequired,
+  list: React.PropTypes.array.isRequired,
+  onPager: React.PropTypes.func.isRequired
+};

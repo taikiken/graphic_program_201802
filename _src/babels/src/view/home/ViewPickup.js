@@ -299,7 +299,7 @@ export class ViewPickup extends View {
       // getDefaultPropTypes: function() {
       //   return {
       //     category2: ''
-      //   };
+      //   };f
       // },
       render: function() {
         let p = this.props;
