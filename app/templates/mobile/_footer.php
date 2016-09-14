@@ -202,7 +202,17 @@ if ( $page['apiRoot'] != '' ) :
 ?>
 <script src="/assets/js/fb-video.js?v=<?php echo $page['version']; ?>"></script>
 <?php
-/* fb delay 実行を有効へ */
+if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
+?>
+<script>
+  $(window).on('resize',function(){
+    var player = videojs.getPlayers().content_video;
+    player.width(window.innerWidth);
+    player.height(Math.ceil( window.innerWidth / 16 * 9 ));
+  });
+</script>
+<?php
+endif;
 ?>
 </body>
 </html>
