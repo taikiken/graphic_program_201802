@@ -32,7 +32,6 @@ const React = self.React;
  * @return {XML} `img` タグを返します
  */
 const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PICKUP_PLAY} alt="" className="overlay" /> : null;
-
 /**
  * カルーセルスライドショー一記事を作成します<br>
  * 記事クリックで GA 計測タグを送信します
@@ -44,6 +43,10 @@ export class ViewCarouselArticle extends React.Component {
    */
   constructor(props) {
     super(props);
+    /**
+     * bind済み gaSend
+     * @type {function}
+     */
     this.boundGa = this.gaSend.bind(this);
   }
   /**
