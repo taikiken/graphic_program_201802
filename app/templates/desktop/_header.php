@@ -103,6 +103,9 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     .video-js{
       background-color: #fff !important;
     }
+    .vjs-big-play-button{
+      z-index: 9999;
+    }
   </style>
 <?php
 endif;

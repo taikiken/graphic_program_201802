@@ -112,15 +112,19 @@ export let VideojsImaNode = React.createClass( {
         player.ima.requestAds();
         player.play();
       } else { //for Mobile: click to play
-        player.one('click', function() {
+
+
+        if (navigator.userAgent.match(/iPad/i)) {
           player.ima.initializeAdDisplayContainer();
           player.ima.requestAds();
-          if (navigator.userAgent.match(/iPad/i)) {
-            var adContainer = document.getElementById('content_video_ima-ad-container');
-            adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
-          }
-          player.play();
-        });
+        }else {
+          player.one('click', function() {
+
+            player.ima.initializeAdDisplayContainer();
+            player.ima.requestAds();
+            player.play();
+          });
+        }
       }
     }
   },
