@@ -16,7 +16,7 @@
   <meta property="og:description" content="説明文">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@undotsushin">
+  <meta name="twitter:site" content="@sportsbull">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -30,8 +30,13 @@
   <script src="/assets/js/libs/vendor.min.js"></script>
   <script src="/assets/js/libs/vendor.react.js"></script>
 </head>
-<body>
+<body class="appbnr-enable">
 <div class="whole">
+  <div class="header-appbnr">
+    <div class="header-appbnr-btn-close"><span>閉じる</span></div>
+    <a class="header-appbnr-link" href="#" target="_blank"><img src="/assets/sp/images/common/header-app-bnr.png" alt="話題のスポーツコンテンツが満載！スポーツブルアプリをダウンロード"></a>
+  </div><!-- /.header-over -->
+
   <div class="header-sticky">
     <header class="head-sec">
       <div class="head-sec-inner">
@@ -53,12 +58,12 @@
                 <span class="preference-num">88</span>
               </div><!-- /.preference -->
             </div><!-- /.user -->
-          </div><!--/header-user-->
+          </div><!--/.user-profile-container-->
         </aside>
       </div><!-- /.head-sec-inner -->
     </header><!-- /.head-sec -->
 
-    <div class="head-search enable">
+    <div class="head-search disable">
       <form action="">
         <input id="head-search" nama="head-search" type="text" placeholder="記事を検索">
         <input type="submit" value="検索">
@@ -93,7 +98,7 @@
       </div><!-- /.gnav-sec-inner -->
     </nav><!-- /.gnav-sec -->
 
-    <div class="dialogue-notice error">
+    <div class="dialogue-notice error hide">
       <div class="dialogue-notice-inner">
         <div class="dialogue-notice-info">
           <p>パスワードが違います</p>
@@ -183,7 +188,7 @@
         <aside class="sns-pr">
           <div class="sns-pr-outer">
             <dl class="sns-pr-inner">
-              <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
+              <dt><span>いいねして最新ニュースをチェック！</span></dt>
               <dd>
                 <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
               </dd>
@@ -462,7 +467,7 @@
         </div><!-- /.foot-pr-inner -->
 
         <div class="fb-page-plugin">
-          <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">運動通信（undotsushin）</a></blockquote></div></div>
+          <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
         </div>
 
         <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
@@ -537,18 +542,6 @@
     </ul><!-- /.btn-block -->
   </div><!-- /.modal-dialogue-contents -->
 </div><!-- /.modal-dialogue -->
-
-<section class="modal-intro hide">
-  <div class="modal-bg"></div>
-  <div class="modal-intro-contents">
-    <p class="modal-intro-tagline"><img src="/assets/sp/images/intro/tagline.png" alt="CRAZY FOR SPORTS"></p>
-    <h1 class="modal-intro-heading"><img src="/assets/sp/images/intro/logo.png" alt="運動通信"></h1>
-    <p class="modal-intro-copy"><img src="/assets/sp/images/intro/copy.png" alt="世界一足の速い人間が、勉強ができなくてもいい。8万人の目の前でPKを決められる人間が、女好きでもいい。傷ついた少年の勇気になるホームランを打てる人間が、借金を抱えていてもいい。自分より強い相手の顎を砕ける人間が、敬語が使えなくてもいい。動かない両足で世界を制覇できる人間が、時間にルーズでもいい。その瞬間に、その奇跡を起こせる人間に、それ以外のことができる必要なんかない。すべてを犠牲にして、立ち向かった人間に、つまらない常識なんかいらない。そのつまらない定規を捨てよ。奴らのくれる感動に、感動せよ。その最高の奇跡を生み出すために生まれてきた人間を祝福せよ。瞬間に生きることを選んだ人間の美しさに熱狂せよ。熱狂のない世界なんか、いらない。"></p>
-    <div class="mod-btnB01">
-      <a class="modal-intro-close" href="#"><i></i><i></i><span>閉じる</span></a>
-    </div>
-  </div><!-- /.modal-intro-contents -->
-</section><!-- /.modal-intro -->
 
 <script>
   window.fbAsyncInit = function() {

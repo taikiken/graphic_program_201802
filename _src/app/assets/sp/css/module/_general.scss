@@ -146,13 +146,10 @@
       [ class^="post-label_" ] {}
 
       &-label_recommend {
-        display: inline-block;
-        line-height: 1em;
-        padding: (6/2)+px (8/2)+px;
-        background-color: $highlight-color;
-        color: #fff;
-        font-weight: bold;
-        font-size: fz(20/2);
+        @extend .sp-sprite-common;
+        @include sprite( $common-icon-recommend, inline-block );
+        @include hide-text;
+        vertical-align: middle;
       }
 
       &-category {
@@ -373,13 +370,22 @@
   }
 
   a.enable {
-    border-color: #bbb;
-    background-color: #bbb;
-    color: #fff;
+    // border-color: $highlight-color;
+    // background-color: $highlight-color;
+    // color: #fff;
+
+    // span:before {
+    //   @include sprite( $common-icon-bookmark, inline-block);
+    //   @include hide-text;
+    // }
+
+    border-color: #ddd;
+    background-color: #ddd;
+    color: #999;
 
     span:before {
-      @include sprite( $common-icon-bookmark, inline-block);
-      @include hide-text;
+      @extend .sp-sprite-setting;
+      @include sprite( $setting-icon-bookmark, inline-block);
     }
   }
 } //.btn-bookmark
@@ -448,7 +454,7 @@
 
       a {
         @extend .sp-sprite-common;
-        @include sprite( $common-btn-notice-close );
+        @include sprite( $common-btn-notice-close1 );
         @include hide-text;
       }
     }
@@ -533,7 +539,7 @@
       }
 
       &-item {
-        @extend .mod-btnB01;
+        @extend .mod-btnA01;
         float: right;
         width: perCalc(200, 420);
 
@@ -549,7 +555,8 @@
         font-size: fz(24/2);
 
         &.btn-link_submit {
-          background-color: #666;
+          border-color: $highlight-secondary-color;
+          background-color: $highlight-secondary-color;
         }
       }
     }
@@ -572,30 +579,6 @@
     // padding-left: 4px;
     border-radius: 4px;
     border: 2px solid $highlight-color;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  a {
-    @include link-decoration($highlight-color, #fff, none, none);
-  }
-}
-
-
-
-
-
-// mod-btnB01
-.mod-btnB01 {
-  input[ type="submit" ],
-  input[ type="button" ],
-  a {
-    display: inline-block;
-    // min-width: 250px;
-    line-height: (100/2)+px;
-    // padding-right: 4px;
-    // padding-left: 4px;
-    border-radius: 4px;
     background-color: $highlight-color;
     font-weight: bold;
     text-align: center;
@@ -608,6 +591,19 @@
   input[ type="submit" ],
   input[ type="button" ] {
     color: #fff;
+    font-size: (28/2)+px;
+  }
+}
+
+// mod-btnB01
+.mod-btnB01 {
+  @extend .mod-btnA01;
+
+  input[ type="submit" ],
+  input[ type="button" ],
+  a {
+    border-color: $highlight-secondary-color;
+    background-color: $highlight-secondary-color;
   }
 }
 

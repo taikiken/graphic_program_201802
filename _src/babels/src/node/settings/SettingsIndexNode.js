@@ -281,7 +281,7 @@ let SettingInputNode = React.createClass( {
         </fieldset>
         {/* button */}
         <div className="form-parts">
-          <span className="setting-form-submit mod-btnB02">
+          <span className="setting-form-submit mod-btnB01">
             <input type="submit" value={Message.BUTTON_SAVE} />
           </span>
         </div>

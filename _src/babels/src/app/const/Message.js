@@ -277,11 +277,11 @@ export class Message {
     return '退会';
   }
   /**
-   * button BUTTON_DEACTIVATE_TEXT, 運動通信から退会する
-   * @return {string} 運動通信から退会する
+   * button BUTTON_DEACTIVATE_TEXT, スポーツブルから退会する
+   * @return {string} スポーツブルから退会する
    */
   static get BUTTON_DEACTIVATE_TEXT():string {
-    return '運動通信から退会する';
+    return 'スポーツブルから退会する';
   }
 
   // profile picture
@@ -353,7 +353,7 @@ export class Message {
    * @return {string} ログインはこちら &gt;
    */
   static get HERE_TO_LOGIN():string {
-    return 'ログインはこちら ';
+    return 'ログインはこちら';
   }
 
   // ユーザー登録 section title
@@ -439,7 +439,7 @@ export class Message {
   static get DEACTIVATE_COMPLETE():string {
     return '退会しました。';
   }
-  
+
   // ----------------------------------
   // 一覧種類
   /**

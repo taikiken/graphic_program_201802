@@ -15,7 +15,7 @@
   <meta property="og:description" content="説明文">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@undotsushin">
+  <meta name="twitter:site" content="@sportsbull">
   <!-- favicon -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -52,7 +52,7 @@
                 <span class="preference-num">88</span>
               </div><!-- /.preference -->
             </div><!-- /.user -->
-          </div><!--/header-user-->
+          </div><!--/.user-profile-container-->
         </aside>
       </div><!-- /.head-sec-inner -->
     </header><!-- /.head-sec -->
@@ -102,103 +102,130 @@
     </div><!-- /.dialogue-notice -->
   </div><!-- /.header-sticky -->
 
-  <div class="body-sec">
+  <div class="body-sec category">
     <div class="body-sec-inner">
       <section class="main-sec">
-
-        <div class="board-large">
-          <div class="board-item">
-            <a class="post" href="hoge">
-              <figure class="post-thumb">
-                <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-16x9-play.png" alt="">
-                <img src="/assets/images/dummy/thumb-340x191_1.jpg" alt="">
-              </figure>
-              <h2 class="post-heading">全角３９文字タイトルが入りますタイトルが入りますタイトルが入りますタイトルが…</h2>
-              <div class="post-data">
-                <p class="post-category">海外サッカー</p>
-                <p class="post-date">12月18日(金) 22:04</p>
-                <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
-              </div>
-            </a>
-
-            <div class="commented-user">
-              <ul class="commented-user-list">
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+        <div class="category-container">
+          <div class="archive-tab">
+            <nav data-reactroot="" class="lnav fixed-top latest">
+              <ul class="lnav-list">
+                <li class="lnav-item"><a href="#latest" class="lnav-link lnav-link_new"><span class="lnav-icon">新着</span></a></li>
+                <li class="lnav-item"><a href="#ranking" class="lnav-link lnav-link_popular"><span class="lnav-icon">人気</span></a></li>
+                <li class="lnav-item"><a href="#videos" class="lnav-link lnav-link_movie"><span class="lnav-icon">動画</span></a></li>
               </ul>
-              <span class="commented-user-andmore">+9999</span>
-            </div>
+            </nav>
+          </div><!-- /.archive-tab -->
 
-            <div class="feature-user comment-item">
-              <figure class="comment-user">
-                <a class="comment-user-link" href="foo">
-                  <span class="comment-user-thumb">&nbsp;</span>
-                  <figcaption class="comment-user-data">
-                    <p class="comment-user-name">山田 太郎</p>
-                    <p class="comment-user-job">スポーツライター</p>
-                  </figcaption>
-                </a>
-              </figure>
+          <div class="archive-container latest">
+            <div class="archive-latest board-large">
+              <div class="archive-latest-container">
+                <div class="board-stack">
+                  <div class="archive-article">
+                    <div class="board-item">
+                      <a class="post" href="hoge">
+                        <figure class="post-thumb">
+                          <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-16x9-play.png" alt="">
+                          <img src="/assets/images/dummy/thumb-340x191_1.jpg" alt="">
+                        </figure>
+                        <h2 class="post-heading">全角３９文字タイトルが入りますタイトルが入りますタイトルが入りますタイトルが…</h2>
+                        <div class="post-data">
+                          <p class="post-category">海外サッカー</p>
+                          <p class="post-date">12月18日(金) 22:04</p>
+                          <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
+                        </div>
+                      </a>
 
-              <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+                      <div class="commented-user">
+                        <ul class="commented-user-list">
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                        </ul>
+                        <span class="commented-user-andmore">+9999</span>
+                      </div>
 
-              <div class="comment-reaction">
-                <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
-                <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
-              </div>
-            </div><!-- /.feature-user -->
-          </div><!-- /.board-item -->
+                      <div class="feature-user comment-item">
+                        <figure class="comment-user">
+                          <a class="comment-user-link" href="foo">
+                            <span class="comment-user-thumb">&nbsp;</span>
+                            <figcaption class="comment-user-data">
+                              <p class="comment-user-name">山田 太郎</p>
+                              <p class="comment-user-job">スポーツライター</p>
+                            </figcaption>
+                          </a>
+                        </figure>
 
-          <div class="board-item">
-            <a class="post type-movie" href="hoge">
-              <figure class="post-thumb">
-                <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-16x9-play.png" alt="">
-                <img src="/assets/images/dummy/thumb-340x191_2.jpg" alt="">
-              </figure>
-              <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
-              <div class="post-data">
-                <p class="post-category">海外サッカー</p>
-                <p class="post-date">12月18日(金) 22:04</p>
-                <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
-              </div>
-            </a>
+                        <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
 
-            <div class="commented-user">
-              <ul class="commented-user-list">
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-              </ul>
-              <span class="commented-user-andmore">+9999</span>
-            </div>
+                        <div class="comment-reaction">
+                          <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                          <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                        </div>
+                      </div><!-- /.feature-user -->
+                    </div><!-- /.board-item -->
+                  </div><!-- /.archive-article -->
 
-            <div class="feature-user comment-item">
-              <figure class="comment-user">
-                <a class="comment-user-link" href="foo">
-                  <span class="comment-user-thumb">&nbsp;</span>
-                  <figcaption class="comment-user-data">
-                    <p class="comment-user-name">山田 太郎</p>
-                    <p class="comment-user-job">スポーツライター</p>
-                  </figcaption>
-                </a>
-              </figure>
+                  <div class="archive-article">
+                    <div class="board-item">
+                      <a class="post type-movie" href="hoge">
+                        <figure class="post-thumb">
+                          <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-16x9-play.png" alt="">
+                          <img src="/assets/images/dummy/thumb-340x191_2.jpg" alt="">
+                        </figure>
+                        <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
+                        <div class="post-data">
+                          <p class="post-category">海外サッカー</p>
+                          <p class="post-date">12月18日(金) 22:04</p>
+                          <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
+                        </div>
+                      </a>
 
-              <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+                      <div class="commented-user">
+                        <ul class="commented-user-list">
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
+                        </ul>
+                        <span class="commented-user-andmore">+9999</span>
+                      </div>
 
-              <div class="comment-reaction">
-                <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
-                <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
-              </div>
-            </div><!-- /.feature-user -->
-          </div><!-- /.board-item -->
+                      <div class="feature-user comment-item">
+                        <figure class="comment-user">
+                          <a class="comment-user-link" href="foo">
+                            <span class="comment-user-thumb">&nbsp;</span>
+                            <figcaption class="comment-user-data">
+                              <p class="comment-user-name">山田 太郎</p>
+                              <p class="comment-user-job">スポーツライター</p>
+                            </figcaption>
+                          </a>
+                        </figure>
 
-          <div class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></div>
-        </div><!-- /.board-large -->
+                        <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
+
+                        <div class="comment-reaction">
+                          <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
+                          <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
+                        </div>
+                      </div><!-- /.feature-user -->
+                    </div><!-- /.board-item -->
+                  </div><!-- /.archive-article -->
+                </div><!-- /.board-stack -->
+              </div><!-- /.archive-latest-container -->
+
+              <div class="archive-latest-container-more">
+                <div class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></div>
+              </div><!-- /.archive-latest-container-more -->
+            </div><!-- /.archive-latest -->
+
+          </div><!-- /.archive-container -->
+
+
+        </div><!-- /.category-container -->
+
 
       </section><!-- /.main-sec -->
 
@@ -228,7 +255,7 @@
         </div><!-- /.foot-pr-inner -->
 
         <div class="fb-page-plugin">
-          <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">運動通信（undotsushin）</a></blockquote></div></div>
+          <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
         </div>
 
         <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
@@ -266,11 +293,11 @@
         <li id="side-menu-service">
           <ul>
             <!-- Service Specific Menu -->
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>運動通信トップへ</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
             <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
             <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
             <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>運動通信とは</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>スポーツブルとは</a></li>
           </ul>
         </li>
 

@@ -15,7 +15,7 @@
   <meta property="og:description" content="説明文">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@undotsushin">
+  <meta name="twitter:site" content="@sportsbull">
   <!-- favicon -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -52,12 +52,12 @@
                 <span class="preference-num">88</span>
               </div><!-- /.preference -->
             </div><!-- /.user -->
-          </div><!--/header-user-->
+          </div><!--/.user-profile-container-->
         </aside>
       </div><!-- /.head-sec-inner -->
     </header><!-- /.head-sec -->
 
-    <div class="head-search enable">
+    <div class="head-search disable">
       <form action="">
         <input id="head-search" nama="head-search" type="text" placeholder="記事を検索">
         <input type="submit" value="検索">
@@ -92,7 +92,7 @@
       </div><!-- /.gnav-sec-inner -->
     </nav><!-- /.gnav-sec -->
 
-    <div class="dialogue-notice error">
+    <div class="dialogue-notice error hide">
       <div class="dialogue-notice-inner">
         <div class="dialogue-notice-info">
           <p>パスワードが違います</p>
@@ -190,7 +190,9 @@
 </pre>
             </p>
           </div><!-- /.post-content -->
-          <a class="post-content-btn-readMore" href="#">続きを読む</a>
+          <div class="post-content-read-more">
+            <a class="post-content-btn-readMore" href="#">続きを読む</a>
+          </div>
 
           <div class="provider">
             <i class="provider-logo"><img src="/assets/images/detail/provider-logo-asahi.png" alt=""></i>
@@ -224,7 +226,7 @@
 
             <div class="post-sns-pr">
               <dl class="post-sns-pr-inner">
-                <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
+                <dt><span>いいねして最新ニュースをチェック！</span></dt>
                 <dd>
                   <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
                 </dd>
@@ -234,24 +236,6 @@
         </div><!-- /.post-detail -->
 
         <div class="comment">
-          <div class="comment-form-opener"><a class="comment-form-opener-trigger" href="#">コメントを投稿</a></div>
-          <div class="comment-form">
-            <form action="">
-              <div class="comment-form-inner">
-                <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
-                <div class="comment-form-comment-outer">
-                  <div class="comment-form-comment-inner">
-                    <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="5" placeholder="コメントを書く"></textarea>
-                  </div>
-                </div>
-              </div><!-- /.comment-form-inner -->
-
-              <div class="comment-form-submit">
-                <input type="submit" value="コメントを投稿">
-              </div>
-            </form>
-          </div><!-- /.comment-form -->
-
           <div class="comment-yours">
             <div class="comment-heading">
               <h2>自分のコメント</h2>
@@ -299,7 +283,7 @@
                         </div><!-- /.comment-form-inner -->
 
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -353,7 +337,7 @@
                           </div>
                         </div>
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -398,7 +382,7 @@
                           </div>
                         </div>
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -502,7 +486,7 @@
                           </div>
                         </div>
                         <div class="comment-form-submit">
-                          <input type="submit" value="コメントを投稿">
+                          <button type="submit" value="send">コメントを投稿</button>
                         </div>
                       </form>
                     </div><!-- /.comment-form -->
@@ -519,6 +503,24 @@
               <h2>みんなのコメント</h2>
             </div><!-- /.comment-heading -->
           </div><!-- /.comment-all -->
+
+          <div class="comment-form-opener"><a class="comment-form-opener-trigger" href="#">コメントを投稿</a></div>
+          <div class="comment-form">
+            <form action="">
+              <div class="comment-form-inner">
+                <i class="comment-form-user"><img src="/assets/images/dummy/avatar-80x80.jpg" alt=""></i>
+                <div class="comment-form-comment-outer">
+                  <div class="comment-form-comment-inner">
+                    <textarea name="comment-form-comment" id="comment-form-comment" class="comment-form-comment" cols="30" rows="5" placeholder="コメントを書く"></textarea>
+                  </div>
+                </div>
+              </div><!-- /.comment-form-inner -->
+
+              <div class="comment-form-submit">
+                <button type="submit" value="send">コメントを投稿</button>
+              </div>
+            </form>
+          </div><!-- /.comment-form -->
         </div><!-- /.comment -->
 
         <div class="widget-ranking">
@@ -686,7 +688,7 @@
         </div><!-- /.foot-pr-inner -->
 
         <div class="fb-page-plugin">
-          <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">運動通信（undotsushin）</a></blockquote></div></div>
+          <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
         </div>
 
         <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
@@ -724,11 +726,11 @@
         <li id="side-menu-service">
           <ul>
             <!-- Service Specific Menu -->
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>運動通信トップへ</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
             <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
             <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
             <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>運動通信とは</a></li>
+            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>スポーツブルとは</a></li>
           </ul>
         </li>
 

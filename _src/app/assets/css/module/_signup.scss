@@ -137,8 +137,22 @@
     position: absolute;
     bottom: 22px;
     width: 100%;
-    font-weight: bold;
     text-align: center;
+
+    a {
+      display: inline-block;
+      font-weight: bold;
+
+      &:after {
+        content: '';
+        // position: relative;
+        // top: 1px;
+        margin-left: 4px;
+        @extend .sprite-common;
+        @include sprite( $common-icon-arrow2, inline-block );
+        @include hide-text;
+      }
+    }
   }
 } //.signup-heading
 
@@ -523,7 +537,7 @@
       width: 120px;
       height: 120px;
       border-radius: 100%;
-      border: 3px solid #e1438b;
+      border: 3px solid $highlight-color;
       background-size: cover;
     }
     img {
