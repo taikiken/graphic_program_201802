@@ -117,15 +117,15 @@ export let VideojsImaNode = React.createClass( {
         if (navigator.userAgent.match(/iPad/i)) {
           player.ima.initializeAdDisplayContainer();
           player.ima.requestAds();
+          var adContainer = document.getElementById('content_video_ima-ad-container');
+          adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
           player.one('click', function() {
-
             player.ima.initializeAdDisplayContainer();
             player.ima.requestAds();
             player.play();
           });
         }else {
           player.one('click', function() {
-
             player.ima.initializeAdDisplayContainer();
             player.ima.requestAds();
             player.play();
