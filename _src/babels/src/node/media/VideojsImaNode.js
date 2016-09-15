@@ -16,6 +16,10 @@ import {Content} from '../../app/const/Content';
 import {VideoPlayNode} from './VideoPlayNode';
 import {VideoCaptionNode} from './VideoCaptionNode';
 
+// ga
+import {GaData} from '../../ga/GaData';
+import {Ga} from '../../ga/Ga';
+
 // Sagen
 const Sagen = self.Sagen;
 
@@ -86,20 +90,35 @@ export let VideojsImaNode = React.createClass( {
     /* Player initialized. */
     if (navigator.userAgent.match(/iPhone/i)) {
       var ads = new Ads(adUrl, this.props.video.url.sd, window.innerWidth, Math.ceil( window.innerWidth / 16 * 9 ),this.props.poster);
+
       ads.init();
       document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
+
+      ads.addEventListener( 'play', this.onPlay );
+      ads.addEventListener( 'ended', this.onEnded );
+      ads.addEventListener( 'pause', this.onPause );
+
+      /*let videoElement = ReactDOM.findDOMNode( this.refs.video );
+      this.videoElement = videoElement;
+      videoElement.addEventListener( 'play', this.onPlay );
+      videoElement.addEventListener( 'ended', this.onEnded );
+      videoElement.addEventListener( 'pause', this.onPause );*/
+
     } else {
+
       let videoElement = ReactDOM.findDOMNode( this.refs.video );
       this.videoElement = videoElement;
-      videoElement.addEventListener( 'ended', this.onEnded, false );
-      videoElement.addEventListener( 'pause', this.onPause, false );
+      videoElement.addEventListener( 'play', this.onPlay );
+      videoElement.addEventListener( 'ended', this.onEnded );
+      videoElement.addEventListener( 'pause', this.onPause );
+
       let player = videojs('content_video');
       let option = {
         id: 'content_video',
         adTagUrl: adUrl
       };
-      player.ima(option);
 
+      player.ima(option);
       player.on('play', function() {
         document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
       });
@@ -139,12 +158,31 @@ export let VideojsImaNode = React.createClass( {
     videoElement.removeEventListener( 'ended', this.onEnded );
     videoElement.removeEventListener( 'pause', this.onPause );
   },
+  onPlay: function( /* event */ ) {
+    console.log( 'onPlay' );
+    if ( !this.playing ) {
+      this.playing = true;
+      this.tracking( 'begin' );
+    }
+  },
   onEnded: function( /* event */ ) {
-    // console.log( 'onEnded', event );
+    console.log( 'onEnded' );
+    if ( this.playing ) {
+      this.playing = false;
+      this.tracking( 'complete' );
+    }
     this.setState( { showPlay: true } );
   },
   onPause: function( /* event */ ) {
     // console.log( 'onPause', event );
     // this.setState( { showPlay: true } );
+  },
+  // @since 2016-06-22
+  // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
+  tracking: function( action ) {
+    let video = this.props.video;
+    let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
+    let gaData = new GaData( 'VideojsImaNode.tracking', 'video', action, url );
+    Ga.add( gaData );
   }
 } );
