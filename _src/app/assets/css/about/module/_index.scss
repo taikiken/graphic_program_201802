@@ -79,7 +79,8 @@
         padding-left: perCalc(40, 640);
 
         h2 {
-          line-height: lh(30, 34);
+          // line-height: lh(30, 34);
+          line-height: 1.5;
           margin-top: (64/2)+px;
           color: #272727;
           font-weight: bold;
