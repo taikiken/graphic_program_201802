@@ -94,15 +94,12 @@ export let VideojsImaNode = React.createClass( {
       ads.init();
       document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
 
-      ads.addEventListener( 'play', this.onPlay );
-      ads.addEventListener( 'ended', this.onEnded );
-      ads.addEventListener( 'pause', this.onPause );
 
-      /*let videoElement = ReactDOM.findDOMNode( this.refs.video );
+      let videoElement = document.querySelector('#content_video_html5_api');
       this.videoElement = videoElement;
       videoElement.addEventListener( 'play', this.onPlay );
       videoElement.addEventListener( 'ended', this.onEnded );
-      videoElement.addEventListener( 'pause', this.onPause );*/
+      videoElement.addEventListener( 'pause', this.onPause );
 
     } else {
 
@@ -134,6 +131,12 @@ export let VideojsImaNode = React.createClass( {
 
 
         if (navigator.userAgent.match(/iPad/i)) {
+          let videoElement = document.querySelector('#content_video_html5_api');
+          this.videoElement = videoElement;
+          videoElement.addEventListener( 'play', this.onPlay );
+          videoElement.addEventListener( 'ended', this.onEnded );
+          videoElement.addEventListener( 'pause', this.onPause );
+
           player.ima.initializeAdDisplayContainer();
           player.ima.requestAds();
           var adContainer = document.getElementById('content_video_ima-ad-container');
@@ -177,8 +180,6 @@ export let VideojsImaNode = React.createClass( {
     // console.log( 'onPause', event );
     // this.setState( { showPlay: true } );
   },
-  // @since 2016-06-22
-  // GA / CRAZY系コンテンツ用トラッキングを追加 - バナー & 動画 / Web版 #842
   tracking: function( action ) {
     let video = this.props.video;
     let url = Sagen.Browser.Mobile.is() ? video.url.sd : video.url.hd;
