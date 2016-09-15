@@ -15,6 +15,7 @@ const React = self.React;
 
 /**
  * カルーセル・ページャーの1つのコンテナを作成します
+ * @since 2016-09-15
  */
 export class ViewPager extends React.Component {
   /**

@@ -14,9 +14,9 @@
 import {View} from '../View';
 
 // app
-import {Empty} from '../../app/const/Empty';
 import {Message} from '../../app/const/Message';
 import {User} from '../../app/User';
+import {Empty} from '../../app/const/Empty';
 import {MediaType} from '../../app/const/MediaType';
 
 // action
@@ -26,6 +26,9 @@ import {PickupAuth} from '../../action/home/PickupAuth';
 // data
 import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
+
+// carousel
+import { ViewCarousel } from '../carousel/ViewCarousel';
 
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
@@ -176,7 +179,6 @@ export class ViewPickup extends View {
    * @param {Array} articles JSON responce.articles
    */
   render( articles:Array ):void {
-
     let element = this.element;
     let last = articles.length - 1;
 
@@ -569,10 +571,25 @@ export class ViewPickup extends View {
       }
     } );
 
-    // dom 生成
+    // // dom 生成
+    // ReactDOM.render(
+    //   React.createElement( ArticleDom, { list: articles } ),
+    //   element
+    // );
+
+    const list = [];
+    articles.forEach((article) => {
+      list.push(new ArticleDae(article));
+    });
+
     ReactDOM.render(
-      React.createElement( ArticleDom, { list: articles } ),
-      element
+      <ViewCarousel
+        list={list}
+        callback={this.executeSafely.bind(this)}
+        polling={new Polling(this.waiting)}
+        index={0}
+      />,
+      this.element
     );
 
   }// render

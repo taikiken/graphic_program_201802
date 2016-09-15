@@ -20,8 +20,8 @@ import { View } from '../View';
 // app
 import { Empty } from '../../app/const/Empty';
 
-// dae
-import { ArticleDae } from '../../dae/ArticleDae';
+// // dae
+// import { ArticleDae } from '../../dae/ArticleDae';
 
 // data
 import { Safety } from '../../data/Safety';
@@ -50,7 +50,7 @@ const React = self.React;
  */
 const makeArticle = (dae, index) => {
   const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
-
+  // console.log('makeArticle', dae, dae.date, typeof dae.date);
   // HeadlineDom instance を使い render
   // iteration key は index を使う
   // コンテナを 前後に clone するため article.id が使えない
@@ -59,7 +59,7 @@ const makeArticle = (dae, index) => {
       key={`pickup-${index}`}
       index={index}
       id={String(dae.id)}
-      slug={dae.categories.all[0].slug}
+      slug={dae.categories.slugs}
       categories={dae.categories.all}
       url={dae.url}
       date={dae.displayDate}
@@ -79,31 +79,29 @@ const makeArticle = (dae, index) => {
  *    <ViewPagers/>
  *      <ViewPager/>
  * ```
+ * @since 2016-09-15
  */
 export class ViewCarousel extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー<br>
    *  {{list: Array<Element>, callback: Function}} を保持します {@link ViewCarousel.propTypes}
-   * @param {Polling} polling animation するための Polling instance
-   * @param {number} [index=0] スライド開始位置
    */
-  constructor(props, polling, index = 0) {
+  constructor(props) {
     super(props);
-
     /**
      * state option
      * @override
      * @type {{index: number}}
      */
     this.state = {
-      index
+      index: props.index
     };
     /**
      * animation するための Polling instance
      * @type {Polling}
      */
-    this.polling = polling;
+    this.polling = props.polling;
     /**
      * 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために<br>
      * アニメーション無しで移動させた後<br>
@@ -116,7 +114,7 @@ export class ViewCarousel extends React.Component {
      * bind 済み updateNext
      * @type {function}
      */
-    this.boundUpdate = this.updateNext.bind(this);
+    this.boundUpdate = this.update.bind(this);
     /**
      * bind 済み onNext
      * @type {function}
@@ -141,7 +139,7 @@ export class ViewCarousel extends React.Component {
      * スライドの現在ナンバー
      * @type {number}
      */
-    this.position = index;
+    this.position = props.index;
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
@@ -150,7 +148,7 @@ export class ViewCarousel extends React.Component {
   render() {
     const list = this.props.list;
     let count = 0;
-
+    // return null;
     if (list.length > 0) {
       // JSX
       return (
@@ -161,15 +159,15 @@ export class ViewCarousel extends React.Component {
               <ul className="pickup-slider">
                 {
                   // 1.first
-                  list.map((article) => makeArticle(new ArticleDae(article), count++))
+                  list.map((article) => makeArticle(article, count++))
                 }
                 {
                   // 2.second clone
-                  list.map((article) => makeArticle(new ArticleDae(article), count++))
+                  list.map((article) => makeArticle(article, count++))
                 }
                 {
                   // 3.third clone
-                  list.map((article) => makeArticle(new ArticleDae(article), count++))
+                  list.map((article) => makeArticle(article, count++))
                 }
               </ul>
             </div>
@@ -207,8 +205,9 @@ export class ViewCarousel extends React.Component {
    * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始しします
    */
   componentDidMount() {
+    console.log('ViewCarousel.componentDidMount', this.props);
     this.props.callback(View.DID_MOUNT);
-
+    //
     this.play();
   }
   // --------------------------------------------
@@ -345,13 +344,29 @@ export class ViewCarousel extends React.Component {
 
 // property
 /**
- * this.props type を設定します
+ * this.props type を設定します, React の PropTypes をプロパティに設定します
  * @static
- * @type {{list: Array<Object>, callback: Function}} React の PropTypes をプロパティに設定します
+ * @type {{
+ *  list: Array<ArticleDae>,
+ *  callback: Function,
+ *  polling: Polling,
+ *  index: number
+ * }}
  */
 ViewCarousel.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
-  callback: React.PropTypes.func.isRequired
+  callback: React.PropTypes.func.isRequired,
+  polling: React.PropTypes.object.isRequired,
+  index: React.PropTypes.number
 };
 
+
+/**
+ * デフォルト・プロパティ, home を false 設定します
+ * @static
+ * @type {{index: number}}
+ */
+ViewCarouselArticle.defaultProps = {
+  index: 0
+};

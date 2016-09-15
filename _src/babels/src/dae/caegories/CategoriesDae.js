@@ -38,7 +38,6 @@ export class CategoriesDae {
       let slugDae = new SlugDae( category );
       cats.push( slugDae );
       bank[ slugDae.slug ] = slugDae;
-
     } );
 
     /**
@@ -66,6 +65,13 @@ export class CategoriesDae {
      */
     this._bank = bank;
 
+    // @since 2016-09-15
+    /**
+     * category.slug を ', ' で連結した文字列
+     * @type {string}
+     * @protected
+     */
+    this._slugs = cats.join(', ');
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -111,6 +117,14 @@ export class CategoriesDae {
    */
   get total():Number {
     return this.response.count;
+  }
+  /**
+   * category.slug を ', ' で連結した文字列
+   * @since 2016-09-15
+   * @return {string} category.slug を ', ' で連結した文字列を返します
+   */
+  get slugs():string {
+    return this._slugs;
   }
   // ---------------------------------------------------
   //  METHOD

@@ -10,8 +10,8 @@
  *
  */
 
-// dae
-import { ArticleDae } from '../../dae/ArticleDae';
+// carousel
+import { ViewPager } from './ViewPager';
 
 // React
 const React = self.React;
@@ -19,6 +19,7 @@ const React = self.React;
 /**
  * カルーセル・ページャーを作成します<br>
  * プロパティ `list` から必要な数だけのページャー {@link ViewPager} を作成します
+ * @since 2016-09-15
  */
 export class ViewPagers extends React.Component {
   /**
@@ -33,21 +34,20 @@ export class ViewPagers extends React.Component {
    * @return {XML} カルーセル・ページャーコンテナを返します
    */
   render() {
-    const list = this.props.list;
+    const props = this.props;
+    const list = props.list;
     const length = list.length;
-    let offset = this.props.offset;
-    const onPager = this.poprs.onPager;
+    let offset = props.offset;
+    const onPager = props.onPager;
 
     return (
       <ul className="pager-list">
         {
           list.map((article) => {
-            const dae = new ArticleDae(article);
-
             return (
               <ViewPager
-                key={`pager-${dae.id}`}
-                id={String(dae.id)}
+                key={`pager-${article.id}`}
+                id={String(article.id)}
                 index={offset++}
                 length={length}
                 onPager={onPager}
@@ -63,7 +63,7 @@ export class ViewPagers extends React.Component {
 /**
  * プロパティ
  * @static
- * @type {{offset: number, list: []<Object>, onPager: function}}
+ * @type {{offset: number, list: []<ArticleDae>, onPager: function}}
  */
 ViewPagers.propTypes = {
   offset: React.PropTypes.number.isRequired,

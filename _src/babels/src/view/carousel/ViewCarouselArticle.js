@@ -35,6 +35,7 @@ const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PIC
 /**
  * カルーセルスライドショー一記事を作成します<br>
  * 記事クリックで GA 計測タグを送信します
+ * @since 2016-09-15
  */
 export class ViewCarouselArticle extends React.Component {
   /**
@@ -43,6 +44,7 @@ export class ViewCarouselArticle extends React.Component {
    */
   constructor(props) {
     super(props);
+    // console.log('ViewCarouselArticle.props', props);
     /**
      * bind済み gaSend
      * @type {function}
