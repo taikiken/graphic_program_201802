@@ -29,7 +29,7 @@ import { Safety } from '../../data/Safety';
 // --------------------------------------------
 // library
 // // Sagen
-// const Sagen = self.Sagen;
+const Sagen = self.Sagen;
 
 // Gasane
 const Polling = self.Gasane.Polling;
@@ -46,29 +46,34 @@ const React = self.React;
  * @static
  * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
  * @param {number} index react key に使用するユニークな index 数値
+ * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
  * @return {XML} カルーセル1記事コンテナを返します
  */
-const makeArticle = (dae, index) => {
+const makeArticle = (dae, index, clone) => {
   const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
   // console.log('makeArticle', dae, dae.date, typeof dae.date);
   // HeadlineDom instance を使い render
   // iteration key は index を使う
   // コンテナを 前後に clone するため article.id が使えない
-  return (
-    <ViewCarouselArticle
-      key={`pickup-${index}`}
-      index={index}
-      id={String(dae.id)}
-      slug={dae.categories.slugs}
-      categories={dae.categories.all}
-      url={dae.url}
-      date={dae.displayDate}
-      title={dae.title}
-      large={large}
-      commentsCount={dae.commentsCount}
-      mediaType={dae.mediaType}
-    />
-  );
+  if (clone) {
+    return (
+      <ViewCarouselArticle
+        key={`pickup-${index}`}
+        index={index}
+        id={String(dae.id)}
+        slug={dae.categories.slugs}
+        categories={dae.categories.all}
+        url={dae.url}
+        date={dae.displayDate}
+        title={dae.title}
+        large={large}
+        commentsCount={dae.commentsCount}
+        mediaType={dae.mediaType}
+      />
+    );
+  } else {
+    return null;
+  }
 };
 
 /**
@@ -89,6 +94,7 @@ export class ViewCarousel extends React.Component {
    */
   constructor(props) {
     super(props);
+    console.log('ViewCarousel.props', props);
     /**
      * state option
      * @override
@@ -147,6 +153,7 @@ export class ViewCarousel extends React.Component {
    */
   render() {
     const list = this.props.list;
+    const needClone = list.length > 1;
     let count = 0;
     // return null;
     if (list.length > 0) {
@@ -159,15 +166,15 @@ export class ViewCarousel extends React.Component {
               <ul className="pickup-slider">
                 {
                   // 1.first
-                  list.map((article) => makeArticle(article, count++))
+                  list.map((article) => makeArticle(article, count++, true))
                 }
                 {
                   // 2.second clone
-                  list.map((article) => makeArticle(article, count++))
+                  list.map((article) => makeArticle(article, count++, needClone))
                 }
                 {
                   // 3.third clone
-                  list.map((article) => makeArticle(article, count++))
+                  list.map((article) => makeArticle(article, count++, needClone))
                 }
               </ul>
             </div>
@@ -183,6 +190,7 @@ export class ViewCarousel extends React.Component {
                   list={list}
                   offset={list.length}
                   onPager={this.boundPager}
+                  sp={this.props.sp}
                 />
               </div>
               {/* hero-slider-control */}
@@ -207,8 +215,10 @@ export class ViewCarousel extends React.Component {
   componentDidMount() {
     console.log('ViewCarousel.componentDidMount', this.props);
     this.props.callback(View.DID_MOUNT);
-    //
-    this.play();
+    // length が 1 以上なら play
+    if (this.props.list.length > 1) {
+      this.play();
+    }
   }
   // --------------------------------------------
   // carousel
@@ -358,7 +368,8 @@ ViewCarousel.propTypes = {
   list: React.PropTypes.array.isRequired,
   callback: React.PropTypes.func.isRequired,
   polling: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number
+  index: React.PropTypes.number,
+  sp: React.PropTypes.bool
 };
 
 
@@ -367,6 +378,7 @@ ViewCarousel.propTypes = {
  * @static
  * @type {{index: number}}
  */
-ViewCarouselArticle.defaultProps = {
-  index: 0
+ViewCarousel.defaultProps = {
+  index: 0,
+  sp: Sagen.Browser.Mobile.phone()
 };

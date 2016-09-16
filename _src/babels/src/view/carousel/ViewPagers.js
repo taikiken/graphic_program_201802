@@ -40,23 +40,27 @@ export class ViewPagers extends React.Component {
     let offset = props.offset;
     const onPager = props.onPager;
 
-    return (
-      <ul className="pager-list">
-        {
-          list.map((article) => {
-            return (
-              <ViewPager
-                key={`pager-${article.id}`}
-                id={String(article.id)}
-                index={offset++}
-                length={length}
-                onPager={onPager}
-              />
-            );
-          })
-        }
-      </ul>
-    );
+    if (!props.sp) {
+      return (
+        <ul className="pager-list">
+          {
+            list.map((article) => {
+              return (
+                <ViewPager
+                  key={`pager-${article.id}`}
+                  id={String(article.id)}
+                  index={offset++}
+                  length={length}
+                  onPager={onPager}
+                />
+              );
+            })
+          }
+        </ul>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
@@ -68,5 +72,6 @@ export class ViewPagers extends React.Component {
 ViewPagers.propTypes = {
   offset: React.PropTypes.number.isRequired,
   list: React.PropTypes.array.isRequired,
-  onPager: React.PropTypes.func.isRequired
+  onPager: React.PropTypes.func.isRequired,
+  sp: React.PropTypes.bool.isRequired
 };
