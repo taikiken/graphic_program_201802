@@ -226,10 +226,10 @@ export class ViewArticlesMasonryInfinite extends React.Component {
     } );
   }
   /**
-   * 次の読み込みで表示を更新します
-   * @param {Array} list
-   * @param {number} offset
-   * @param {number} length
+   * 次の読み込みから表示を更新します
+   * @param {Array} list 表示リスト
+   * @param {number} offset 読み込み開始位置
+   * @param {number} length 読み込み数
    */
   updateList(list, offset, length) {
     // state を変更し appendChild + isotope を行う

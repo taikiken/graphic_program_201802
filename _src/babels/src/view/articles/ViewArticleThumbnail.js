@@ -54,9 +54,16 @@ export class ViewArticleThumbnail extends React.Component {
     // media type で thumbnail 切替
     if (mediaType === MediaType.IMAGE) {
       // type: image
+
+      // https://github.com/undotsushin/undotsushin/issues/468
+      const imgStyle = {
+        'background': `url(${this.props.thumbnail}) no-repeat center center`,
+        'backgroundSize': 'cover'
+      };
+
       return (
-        <figure className={`post-thumb post-thumb-${mediaType}`}>
-          <img src={this.props.thumbnail} alt={this.props.title}/>
+        <figure className={`post-thumb post-thumb-${mediaType}`} style={imgStyle}>
+          <img className="image-hd" src={Empty.VIDEO_THUMBNAIL} alt=""/>
           {recommend}
         </figure>
       );
