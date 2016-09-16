@@ -61,7 +61,6 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
     <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
     <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
     <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
-<!--    <script src="/assets/ima_plugin/js/ads.js"></script>-->
 
 <?php endif; ?>
 
@@ -313,10 +312,18 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
 
+      player.on('play', function(){
+          ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
+      });
+      player.on('ended', function () {
+          ga('send', 'event', 'video', 'complete', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
+      });
+
       var adContainer = document.getElementById('webview-brightcove_ima-ad-container');
       adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
       player.one('click', function() { alert('play');
           player.play();
+
       });
 
 
