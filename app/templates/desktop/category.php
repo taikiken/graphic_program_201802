@@ -18,6 +18,12 @@ if ( !$page['theme']['images']['pc'] ) :
 endif;
 // eof: PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
 // ---------------------------------------------------- ?>
+<div id="pickup-container"></div><!-- /pickup -->
+<?php
+// 下部バナーエリア
+// @since 2016-09-15 #1010, #1095
+
+?>
 
 <div class="body-sec">
   <div class="body-sec-inner">
