@@ -1,9 +1,5 @@
 <div id="pickup-container"></div><!-- /pickup -->
-<?php
-// 下部バナーエリア
-// @since 2016-09-15 #1010, #1095
 
-?>
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">
