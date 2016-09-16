@@ -8,49 +8,125 @@
 
 // hero-sec
 // トップページ メインビジュアル
-.hero-sec {
-  background-color: #061533;
+.hero {
+  $pickup-height: 250px;
 
-  a {
-    display: block;
+  &-sec {
+    background-color: #000;
   }
 
-  .post {
-    &-overview {
-      @include clearfix;
-      padding: (28/2)+px perCalc(20) (16/2)+px;
-    }
+  &-slider {
+    position: relative;
+    width: 100%;
+    height: $pickup-height;
+    overflow: hidden;
 
-    &-heading {
-      color: #fff;
-      font-weight: bold;
-      font-size: fz(32/2);
-    }
+    &-inner {
+      width: (560/2)+px;
+      margin: 0 auto;
+      overflow: visible;
 
-    &-category {
-      margin-top: .5em;
-      color: #999;
-      font-weight: bold;
-      font-size: fz(20/2);
-    }
+      ul {
+        @include clearfix;
+        width: 200000px;
+      }
 
-    &-date,
-    &-comment-num {
-      font-size: fz(20/2);
-    }
+      li {
+        float: left;
+        width: (560/2)+px;
+        border-right: 5px solid #000;
+        border-left: 5px solid #000;
 
-    &-date {
-      float: left;
-      color: #999;
-    }
+        a {
+          position: relative;
+          display: block;
+          background-color: #061533;
+        }
 
-    &-comment-num {
-      float: right;
-      padding-left: (36/2)+px;
-      color: #fff;
-      background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
-      background-size: (26/2)+px;
-    }
+        .overlay,
+        .post-comment-num {
+          display: none;
+        }
+
+        .post {
+          $posY: 20/2;
+
+          &-overview {
+            position: relative;
+            padding: (28/2)+px perCalc(20) ($posY+18)+px;
+          }
+
+          &-heading {
+            height: 40px;
+            overflow: hidden;
+            color: #fff;
+            font-size: fz(26/2);
+          }
+
+          &-category {
+            position: absolute;
+            bottom: $posY+px;
+            color: #fff;
+            font-size: fz(20/2);
+          }
+
+          &-date,
+          &-comment-num {
+            font-size: fz(20/2);
+          }
+
+          &-date {
+            // float: left;
+            position: absolute;
+            right: perCalc(20);
+            bottom: $posY+px;
+            color: #999;
+          }
+
+          &-comment-num {
+            // float: right;
+            padding-left: (36/2)+px;
+            color: #fff;
+            background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
+            background-size: (26/2)+px;
+          }
+        }
+      }
+    } //.hero-slider-inner
+
+    &-control {
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      .direction {
+        a {
+          position: absolute;
+          display: block;
+          width: (80/2)+px;
+          height: (80/2)+px;
+          margin-top: ($pickup-height/2) - 20;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: (80/2)+px;
+          @include hide-text;
+        }
+
+        &-prev {
+          left: 20px;
+          background-image: url(/assets/sp/images/index/btn-slider-prev.png);
+        }
+
+        &-next {
+          right: 20px;
+          background-image: url(/assets/sp/images/index/btn-slider-next.png);
+        }
+      }
+
+      .pager {
+        display: none;
+      }
+    } //.hero-slider-control
   }
 }
 
