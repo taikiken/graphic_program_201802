@@ -36,7 +36,6 @@ const Polling = self.Gasane.Polling;
 
 // React
 const React = self.React;
-// const ReactDOM = self.ReactDOM;
 
 // --------------------------------------------
 // private
@@ -94,7 +93,7 @@ export class ViewCarousel extends React.Component {
    */
   constructor(props) {
     super(props);
-    console.log('ViewCarousel.props', props);
+    // console.log('ViewCarousel.props', props);
     /**
      * state option
      * @override

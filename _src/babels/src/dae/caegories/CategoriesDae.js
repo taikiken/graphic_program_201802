@@ -126,6 +126,14 @@ export class CategoriesDae {
   get slugs():string {
     return this._slugs;
   }
+  /**
+   * category.slug を '-' で連結した CSS class フレンドリーな文字列
+   * @since 2016-09-16
+   * @return {string} category.slug を '-' で連結した文字列を返します
+   */
+  get slugsClasses():string {
+    return this.all.join('-');
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
