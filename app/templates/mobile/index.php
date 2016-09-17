@@ -7,10 +7,12 @@
 // spにも pickup
 // @since 2016-09-15 #1010, #1095
 ?>
-<div id="pickup-container"></div><!-- /pickup -->
 
 <div class="body-sec">
   <div class="body-sec-inner">
+
+    <div id="pickup-container"></div><!-- /pickup -->
+
     <section class="main-sec">
       <div class="headline-outer">
         <div id="headline-container"></div><!-- /headline -->
