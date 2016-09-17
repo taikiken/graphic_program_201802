@@ -1019,9 +1019,12 @@ export class ViewArchiveMasonryInfinite extends View {
       this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
     }
   }// render
-
+  /**
+   * more button の表示・非表示を行います
+   * @since 2016-09-16
+   * @param {boolean} show true の時にボタンを表示させ機能させます
+   */
   moreButton(show) {
-    console.log('inifite moreButton.show', show);
     // 'View More' button root element
     const moreElement = this.moreElement;
     // moreElement 存在チェックを行う
@@ -1034,6 +1037,8 @@ export class ViewArchiveMasonryInfinite extends View {
           show={show}
           action={this.action}
           element={moreElement}
+          home={this.home}
+          slug={this.slug}
         />,
         moreElement
       );

@@ -16,6 +16,10 @@ import {Message} from '../../app/const/Message';
 // ui
 import { Rise } from '../../ui/Rise';
 
+// Ga
+import { Ga } from '../../ga/Ga';
+import { GaData } from '../../ga/GaData';
+
 // React
 const React = self.React;
 
@@ -57,6 +61,11 @@ export class ViewMoreButton extends React.Component {
      * @type {function}
      */
     this.boundClick = this.onClick.bind(this);
+    /**
+     * page No. Ga に使用します
+     * @type {number}
+     */
+    this.page = 0;
   }
   /**
    * div.board-btn-viewmore を出力します
@@ -173,6 +182,32 @@ export class ViewMoreButton extends React.Component {
    */
   onRise() {
     this.updateLoading(true);
+    // Ga
+    if (this.props.home) {
+      this.gaHome();
+    } else {
+      this.gaCategory();
+    }
+  }
+  /**
+   * GA 計測タグ, home 用
+   */
+  gaHome() {
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+    Ga.add( new GaData('ViewMoreButton.gaHome', 'home_articles', 'view - new', String(++this.page), 0, true) );
+    // ----------------------------------------------
+  }
+  /**
+   * GA 計測タグ, category 用
+   */
+  gaCategory() {
+    // ----------------------------------------------
+    // GA 計測タグ
+    // PC/スマホカテゴリー一覧の新着記事
+    Ga.add( new GaData('ViewMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
+    // ----------------------------------------------
   }
 }
 /**
@@ -185,10 +220,13 @@ export class ViewMoreButton extends React.Component {
  * }}
  */
 ViewMoreButton.propTypes = {
+  home: React.PropTypes.bool.isRequired,
   show: React.PropTypes.bool.isRequired,
   action: React.PropTypes.object.isRequired,
   // 監視コンテナ
   element: React.PropTypes.object.isRequired,
+  slug: React.PropTypes.string.isRequired,
+  // option, default ''
   loading: React.PropTypes.string
 };
 /**
