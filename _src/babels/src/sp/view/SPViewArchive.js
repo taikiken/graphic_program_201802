@@ -91,13 +91,13 @@ export class SPViewArchive extends View {
      * @protected
      */
     this._request = null;
-    /**
-     * index(home)コンテンツか否かのフラッグ
-     * @type {boolean}
-     * @protected
-     * @default false
-     */
-    this._home = false;
+    // /**
+    //  * index(home)コンテンツか否かのフラッグ
+    //  * @type {boolean}
+    //  * @protected
+    //  * @default false
+    //  */
+    // this._home = false;
     /**
      * category slug, ga に使う
      * @type {string}
@@ -116,20 +116,20 @@ export class SPViewArchive extends View {
   get moreElement():Element {
     return this._moreElement;
   }
-  /**
-   * home flag
-   * @return {boolean|*} home flag boolean を返します
-   */
-  get home():Boolean {
-    return this._home;
-  }
-  /**
-   * home flag
-   * @param {Boolean} home flag
-   */
-  set home( home:Boolean ):void {
-    this._home = home;
-  }
+  // /**
+  //  * home flag
+  //  * @return {boolean|*} home flag boolean を返します
+  //  */
+  // get home():Boolean {
+  //   return this._home;
+  // }
+  // /**
+  //  * home flag
+  //  * @param {Boolean} home flag
+  //  */
+  // set home( home:Boolean ):void {
+  //   this._home = home;
+  // }
   /**
    * category slug を取得します
    * @default all

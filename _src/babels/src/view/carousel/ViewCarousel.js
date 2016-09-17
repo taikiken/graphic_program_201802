@@ -214,7 +214,7 @@ export class ViewCarousel extends React.Component {
    * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始します
    */
   componentDidMount() {
-    console.log('ViewCarousel.componentDidMount', this.props);
+    // console.log('ViewCarousel.componentDidMount', this.props);
     this.props.callback(View.DID_MOUNT);
     // length が 1 以上なら play
     if (this.props.list.length > 1) {

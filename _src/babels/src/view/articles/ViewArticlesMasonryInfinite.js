@@ -32,14 +32,13 @@ const ReactDOM = self.ReactDOM;
 let imagesLoaded = self.imagesLoaded;
 let Isotope = self.Isotope;
 
-// ----------------------------
-// private
-const moreButton = (hasNext) => {
-};
-
 /**
  * 記事一覧 + 無限スクロール + isotope
  * @since 2016-09-15
+ *
+ * <pre>
+ *   <ViewArticlesMasonryInfinite/>
+ * <pre>
  */
 export class ViewArticlesMasonryInfinite extends React.Component {
   constructor(props) {
@@ -98,7 +97,7 @@ export class ViewArticlesMasonryInfinite extends React.Component {
 
     const img = imagesLoaded(elements);
     // 画像読み込む完了 event へ bind します
-    img.on('always', this.appendImages);
+    img.on('always', this.boundAppend);
     this.img = img;
   }
   /**
@@ -107,7 +106,7 @@ export class ViewArticlesMasonryInfinite extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
     // hasNext を元に More View button の表示非表示を決める
-    moreButton(this.props.action.hasNext());
+    this.props.boundMore(this.props.action.hasNext());
 
     // masonry flag が true の時に shouldMasonry を実行します
     if (this.props.masonry) {
@@ -142,6 +141,8 @@ export class ViewArticlesMasonryInfinite extends React.Component {
                     mediaType={dae.mediaType}
                     thumbnail={thumbnail}
                     title={dae.title}
+                    masonry={this.props.masonry}
+                    action={this.props.action}
                     recommend={!!dae.isRecommend && this.props.home}
                   />
                   <div className="post-data">
@@ -205,7 +206,7 @@ export class ViewArticlesMasonryInfinite extends React.Component {
     this.isotope.layout();
 
     // hasNext を元に More View button の表示非表示を決める
-    moreButton(this.props.action.hasNext());
+    this.props.boundMore(this.props.action.hasNext());
   }
   /**
    * 画像読み込む完了 event handler, isotope を実行
@@ -239,7 +240,14 @@ export class ViewArticlesMasonryInfinite extends React.Component {
 
 /**
  * デフォルトプロパティ
- * @type {{list: Array, home: boolean, offset: number, length: number, action: *object}}
+ * @type {{
+ *  list: Array,
+ *  home: boolean,
+ *  offset: number,
+ *  length: number,
+ *  action: object,
+ *  masonry: boolean
+ * }}
  */
 ViewArticlesMasonryInfinite.propTypes = {
   list: React.PropTypes.array.isRequired,
@@ -252,7 +260,12 @@ ViewArticlesMasonryInfinite.propTypes = {
   // action instance
   action: React.PropTypes.object.isRequired,
   // executeSafely
-  callback: React.PropTypes.func.isRequired
+  callback: React.PropTypes.func.isRequired,
+
+  // more button createElement callback
+  boundMore: React.PropTypes.func.isRequired,
+  // need masonry flag
+  masonry: React.PropTypes.bool.isRequired
 };
 
 

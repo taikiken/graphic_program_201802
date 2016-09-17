@@ -12,6 +12,7 @@
 
 
 import {ViewArchiveMasonry} from '../ViewArchiveMasonry';
+import { ViewArchiveMasonryInfinite } from '../ViewArchiveMasonryInfinite';
 import {User} from '../../app/User';
 
 import {NewsAuth} from '../../action/home/NewsAuth';
@@ -20,7 +21,8 @@ import {News} from '../../action/home/News';
 /**
  * home news 一覧表示
  */
-export class ViewNews extends ViewArchiveMasonry {
+// export class ViewNews extends ViewArchiveMasonry {
+export class ViewNews extends ViewArchiveMasonryInfinite {
   /**
    * home news, token 付き・無し を切替
    * @param {Element} element root element, Ajax result を配置する

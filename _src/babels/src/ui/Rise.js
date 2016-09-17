@@ -68,7 +68,7 @@ export class Rise extends EventDispatcher {
    * 監視を始めます
    */
   start():void {
-    // console.log( '************************ Rise.start' );
+    console.log( '************************ Rise.start' );
 
     this._scroll.on( Scroll.SCROLL, this._boundScroll );
     this._scroll.start();
@@ -77,7 +77,7 @@ export class Rise extends EventDispatcher {
    * 監視を止めます
    */
   stop():void {
-    // console.log( '------------------------ Rise.stop' );
+    console.log( '------------------------ Rise.stop' );
 
     this._scroll.off( Scroll.SCROLL, this._boundScroll );
     this._scroll.stop();
@@ -95,7 +95,7 @@ export class Rise extends EventDispatcher {
     // element property
     let offsetRect = this._dom.offset();
     let elementBottom = y + offsetRect.top + offsetRect.height;
-
+    console.log('onScroll', windowBottom, elementBottom);
     // element.bottom が contain しているかを調べます
     if ( windowBottom > elementBottom ) {
       this.dispatch( { type: Rise.RISE, window: windowBottom, element: elementBottom } );

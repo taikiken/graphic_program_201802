@@ -85,7 +85,14 @@ export class ViewArticleThumbnail extends React.Component {
 
 /**
  * プロパティー
- * @type {{mediaType: string, thumbnail: string, title: string, masonry: boolean, action: Object, recommend: boolean}}
+ * @type {{
+ *  mediaType: string,
+ *  thumbnail: string,
+ *  title: string,
+ *  masonry: boolean,
+ *  action: Object,
+ *  recommend: boolean
+ * }}
  */
 ViewArticleThumbnail.propTypes = {
   mediaType: React.PropTypes.string.isRequired,
