@@ -62,10 +62,12 @@ export class ViewMoreButton extends React.Component {
      */
     this.boundClick = this.onClick.bind(this);
     /**
-     * page No. Ga に使用します
+     * page No. Ga に使用します<br>
+     * 初期表示がないかもしれないので page 1 は親で処理します
      * @type {number}
+     * @default 1
      */
-    this.page = 0;
+    this.page = 1;
   }
   /**
    * div.board-btn-viewmore を出力します

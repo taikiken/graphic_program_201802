@@ -12,9 +12,9 @@
 /* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
 // app
-import {Empty} from '../app/const/Empty';
-import {User} from '../app/User';
-import {MediaType} from '../app/const/MediaType';
+// import {Empty} from '../app/const/Empty';
+// import {User} from '../app/User';
+// import {MediaType} from '../app/const/MediaType';
 import {Message} from '../app/const/Message';
 
 // view
@@ -28,24 +28,29 @@ import {Safety} from '../data/Safety';
 // dae
 import {ArticleDae} from '../dae/ArticleDae';
 
-// ui
-import {Rise} from '../ui/Rise';
+// // ui
+// import {Rise} from '../ui/Rise';
+//
+// // node(ReactClass)
+// import {ReactionNode} from '../node/comment/ReactionNode';
+// import {CommentUserPlusCountNode} from '../node/comment/CommentUserPlusCountNode';
+// import {CategoryLabelNode} from '../node/category/CategoryLabelNode';
 
-// node(ReactClass)
-import {ReactionNode} from '../node/comment/ReactionNode';
-import {CommentUserPlusCountNode} from '../node/comment/CommentUserPlusCountNode';
-import {CategoryLabelNode} from '../node/category/CategoryLabelNode';
-
+// view/articles
 import { ViewArticlesMasonryInfinite } from './articles/ViewArticlesMasonryInfinite';
 import { ViewMoreButton } from './articles/ViewMoreButton';
 
+// Ga
+import { Ga } from '../ga/Ga';
+import { GaData } from '../ga/GaData';
+
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
-// imagesLoaded, isotope
-let imagesLoaded = self.imagesLoaded;
-let Isotope = self.Isotope;
+// // imagesLoaded, isotope
+// let imagesLoaded = self.imagesLoaded;
+// let Isotope = self.Isotope;
 
 /**
  * archive 一覧を isotope で
@@ -1013,6 +1018,20 @@ export class ViewArchiveMasonryInfinite extends View {
         />,
         element
       );
+
+      if ( this.home ) {
+        // ----------------------------------------------
+        // GA 計測タグ
+        // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
+        Ga.add( new GaData('ViewArchiveMasonryInfinite.render', 'home_articles', 'view - new', String(1), 0, true) );
+        // ----------------------------------------------
+      } else {
+        // ----------------------------------------------
+        // GA 計測タグ
+        // PC/スマホカテゴリー一覧の新着記事
+        Ga.add( new GaData('ViewArchiveMasonryInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true) );
+        // ----------------------------------------------
+      }
     } else {
       // instance が存在するので
       // state update でコンテナを追加する
