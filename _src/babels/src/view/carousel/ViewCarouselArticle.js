@@ -15,11 +15,11 @@ import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
 // app
 import { Empty } from '../../app/const/Empty';
-import {MediaType} from '../../app/const/MediaType';
+import { MediaType } from '../../app/const/MediaType';
 
 // Ga
-import {Ga} from '../../ga/Ga';
-import {GaData} from '../../ga/GaData';
+import { Ga } from '../../ga/Ga';
+import { GaData } from '../../ga/GaData';
 
 // React
 const React = self.React;
@@ -44,7 +44,6 @@ export class ViewCarouselArticle extends React.Component {
    */
   constructor(props) {
     super(props);
-    // console.log('ViewCarouselArticle.props', props);
     /**
      * bind済み gaSend
      * @type {function}
@@ -120,14 +119,14 @@ ViewCarouselArticle.propTypes = {
   commentsCount: React.PropTypes.number.isRequired,
   mediaType: React.PropTypes.string.isRequired,
   // home であるかを表す
-  home: React.PropTypes.bool
+  home: React.PropTypes.bool.isRequired
 };
-
-/**
- * デフォルト・プロパティ, home を false 設定します
- * @static
- * @type {{home: boolean}}
- */
-ViewCarouselArticle.defaultProps = {
-  home: false
-};
+//
+// /**
+//  * デフォルト・プロパティ, home を false 設定します
+//  * @static
+//  * @type {{home: boolean}}
+//  */
+// ViewCarouselArticle.defaultProps = {
+//   home: false
+// };

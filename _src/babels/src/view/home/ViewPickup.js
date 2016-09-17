@@ -588,6 +588,7 @@ export class ViewPickup extends View {
         callback={this.executeSafely.bind(this)}
         polling={new Polling(this.waiting)}
         index={0}
+        home={this.home}
       />,
       this.element
     );

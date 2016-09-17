@@ -66,12 +66,22 @@ export class CategoriesDae {
     this._bank = bank;
 
     // @since 2016-09-15
+    const slugs = [];
+    cats.forEach((slugDae) => {
+      slugs.push(slugDae.slug);
+    });
     /**
      * category.slug を ', ' で連結した文字列
      * @type {string}
      * @protected
      */
-    this._slugs = cats.join(', ');
+    this._slugs = slugs.join(', ');
+    /**
+     * category.slug を '-' で連結した文字列
+     * @type {string}
+     * @protected
+     */
+    this._slugsClasses = slugs.join('-');
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -132,7 +142,14 @@ export class CategoriesDae {
    * @return {string} category.slug を '-' で連結した文字列を返します
    */
   get slugsClasses():string {
-    return this.all.join('-');
+    return this._slugsClasses;
+  }
+  /**
+   * category 配列の先頭 slug
+   * @return {string} category 配列の先頭 slug を返します
+   */
+  get slug():string {
+    return this.all[0].slug;
   }
   // ---------------------------------------------------
   //  METHOD

@@ -109,13 +109,15 @@ export class ViewArchiveMasonryInfinite extends View {
      * @protected
      */
     this._request = null;
-    /**
-     * 表示されているページが home(index) かを識別する flag
-     * @type {boolean}
-     * @protected
-     * @default false
-     */
-    this._home = false;
+    // View へ移動
+    // @since 2016-09-16
+    // /**
+    //  * 表示されているページが home(index) かを識別する flag
+    //  * @type {boolean}
+    //  * @protected
+    //  * @default false
+    //  */
+    // this._home = false;
     /**
      * category slug
      * @type {string}
@@ -141,20 +143,22 @@ export class ViewArchiveMasonryInfinite extends View {
   get moreElement():Element {
     return this._moreElement;
   }
-  /**
-   * home flag
-   * @return {boolean|*} home flag boolean を返します
-   */
-  get home():Boolean {
-    return this._home;
-  }
-  /**
-   * home flag
-   * @param {Boolean} home flag
-   */
-  set home( home:Boolean ):void {
-    this._home = home;
-  }
+  // View へ移動
+  // @since 2016-09-16
+  // /**
+  //  * home flag
+  //  * @return {boolean|*} home flag boolean を返します
+  //  */
+  // get home():Boolean {
+  //   return this._home;
+  // }
+  // /**
+  //  * home flag
+  //  * @param {Boolean} home flag
+  //  */
+  // set home( home:Boolean ):void {
+  //   this._home = home;
+  // }
   /**
    * category slug
    * @default all

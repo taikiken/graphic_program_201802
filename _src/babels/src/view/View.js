@@ -49,7 +49,14 @@ export class View extends EventDispatcher {
      * @protected
      */
     this._action = null;
-
+    /**
+     * 表示されているページが home(index) かを識別する flag
+     * @since 2016-09-16
+     * @type {boolean}
+     * @protected
+     * @default false
+     */
+    this._home = false;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -96,6 +103,22 @@ export class View extends EventDispatcher {
    */
   set action( action ):void {
     this._action = action;
+  }
+  /**
+   * home flag
+   * @since 2016-09-16
+   * @return {boolean|*} home flag boolean を返します
+   */
+  get home():Boolean {
+    return this._home;
+  }
+  /**
+   * home flag
+   * @since 2016-09-16
+   * @param {Boolean} home flag
+   */
+  set home( home:Boolean ):void {
+    this._home = home;
   }
   // ---------------------------------------------------
   //  METHOD

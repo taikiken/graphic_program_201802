@@ -46,9 +46,10 @@ const React = self.React;
  * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
  * @param {number} index react key に使用するユニークな index 数値
  * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
+ * @param {boolean} home home（一面）か否かの真偽値
  * @return {XML} カルーセル1記事コンテナを返します
  */
-const makeArticle = (dae, index, clone) => {
+const makeArticle = (dae, index, clone, home) => {
   const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
   // console.log('makeArticle', dae, dae.date, typeof dae.date);
   // HeadlineDom instance を使い render
@@ -60,7 +61,7 @@ const makeArticle = (dae, index, clone) => {
         key={`pickup-${index}`}
         index={index}
         id={String(dae.id)}
-        slug={dae.categories.slugs}
+        slug={dae.categories.slug}
         categories={dae.categories.all}
         url={dae.url}
         date={dae.displayDate}
@@ -68,6 +69,7 @@ const makeArticle = (dae, index, clone) => {
         large={large}
         commentsCount={dae.commentsCount}
         mediaType={dae.mediaType}
+        home={home}
       />
     );
   } else {
@@ -165,15 +167,15 @@ export class ViewCarousel extends React.Component {
               <ul className="pickup-slider">
                 {
                   // 1.first
-                  list.map((article) => makeArticle(article, count++, true))
+                  list.map((article) => makeArticle(article, count++, true, this.props.home))
                 }
                 {
                   // 2.second clone
-                  list.map((article) => makeArticle(article, count++, needClone))
+                  list.map((article) => makeArticle(article, count++, needClone, this.props.home))
                 }
                 {
                   // 3.third clone
-                  list.map((article) => makeArticle(article, count++, needClone))
+                  list.map((article) => makeArticle(article, count++, needClone, this.props.home))
                 }
               </ul>
             </div>
@@ -209,7 +211,7 @@ export class ViewCarousel extends React.Component {
   /**
    * delegate method, マウントした時にコールされます
    *
-   * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始しします
+   * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始します
    */
   componentDidMount() {
     console.log('ViewCarousel.componentDidMount', this.props);
@@ -368,9 +370,9 @@ ViewCarousel.propTypes = {
   callback: React.PropTypes.func.isRequired,
   polling: React.PropTypes.object.isRequired,
   index: React.PropTypes.number,
-  sp: React.PropTypes.bool
+  sp: React.PropTypes.bool,
+  home: React.PropTypes.bool
 };
-
 
 /**
  * デフォルト・プロパティ, home を false 設定します
@@ -379,5 +381,6 @@ ViewCarousel.propTypes = {
  */
 ViewCarousel.defaultProps = {
   index: 0,
-  sp: Sagen.Browser.Mobile.phone()
+  sp: Sagen.Browser.Mobile.phone(),
+  home: false
 };

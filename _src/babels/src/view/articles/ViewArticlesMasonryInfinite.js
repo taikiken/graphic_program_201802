@@ -22,7 +22,7 @@ import { ViewArticlePopular } from './ViewArticlePopular';
 import { Safety } from '../../data/Safety';
 
 // node(ReactClass)
-import {CategoryLabelNode} from '../../node/category/CategoryLabelNode';
+import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
 // React
 const React = self.React;

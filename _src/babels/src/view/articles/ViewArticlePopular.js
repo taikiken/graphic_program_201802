@@ -14,7 +14,7 @@
 import { ViewCommentsSecond } from './ViewCommentsSecond';
 
 // node(ReactClass)
-import {ReactionNode} from '../../node/comment/ReactionNode';
+import { ReactionNode } from '../../node/comment/ReactionNode';
 
 // app
 import { User } from '../../app/User';

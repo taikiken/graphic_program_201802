@@ -11,7 +11,7 @@
  */
 
 // node
-import {CommentUserPlusCountNode} from '../../node/comment/CommentUserPlusCountNode';
+import { CommentUserPlusCountNode } from '../../node/comment/CommentUserPlusCountNode';
 
 // app
 import { Empty } from '../../app/const/Empty';
