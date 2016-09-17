@@ -41,6 +41,8 @@
           position: relative;
           display: block;
           background-color: #061533;
+          // @since 2016-09-16
+          height: $pickup-height;
         }
 
         .overlay,
@@ -130,6 +132,10 @@
   }
 }
 
+// ---------------------------
+// motion slider setting
+// ---------------------------
+@import "motion_slider";
 
 
 

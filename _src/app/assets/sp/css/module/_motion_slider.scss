@@ -8,7 +8,7 @@
 // hero-slider
 // トップページ用 メインビジュアルスライダー
 #pickup-container {
-  $slider-width: 640px;
+  $slider-width: 280px;
 
   .hero-slider {
 
@@ -62,16 +62,16 @@
           }
         }
       }
-      .hero-slider-control {
-        .pager {
-          .pager-0 {
-            a {
-              background-color: $highlight-secondary-color;
-              transition-duration: 0.25s;
-            }
-          }
-        }
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-0 {
+      //      a {
+      //        background-color: $highlight-secondary-color;
+      //        transition-duration: 0.25s;
+      //      }
+      //    }
+      //  }
+      //}
     }
     &.slide-1 {
       .pickup-slider {
@@ -84,15 +84,15 @@
           }
         }
       }
-      .hero-slider-control {
-        .pager {
-          .pager-1 {
-            a {
-              background-color: $highlight-secondary-color;
-            }
-          }
-        }
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-1 {
+      //      a {
+      //        background-color: $highlight-secondary-color;
+      //      }
+      //    }
+      //  }
+      //}
     }
     &.slide-2 {
       .pickup-slider {
@@ -105,15 +105,15 @@
           }
         }
       }
-      .hero-slider-control {
-        .pager {
-          .pager-2 {
-            a {
-              background-color: $highlight-secondary-color;
-            }
-          }
-        }
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-2 {
+      //      a {
+      //        background-color: $highlight-secondary-color;
+      //      }
+      //    }
+      //  }
+      //}
     }
     &.slide-3 {
       .pickup-slider {
@@ -126,15 +126,15 @@
           }
         }
       }
-      .hero-slider-control {
-        .pager {
-          .pager-3 {
-            a {
-              background-color: $highlight-secondary-color;
-            }
-          }
-        }
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-3 {
+      //      a {
+      //        background-color: $highlight-secondary-color;
+      //      }
+      //    }
+      //  }
+      //}
     }
     &.slide-4 {
       .pickup-slider {
@@ -149,16 +149,16 @@
           }
         }
       }
-      .hero-slider-control {
-        .pager {
-          .pager-4 {
-            a {
-              background-color: $highlight-secondary-color;
-              transition-duration: 0.25s;
-            }
-          }
-        }
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-4 {
+      //      a {
+      //        background-color: $highlight-secondary-color;
+      //        transition-duration: 0.25s;
+      //      }
+      //    }
+      //  }
+      //}
     }
     // --------------------------------------------------
     // 循環アニメーションのために
