@@ -24,7 +24,10 @@ import {ArticleDae} from '../../../dae/ArticleDae';
 
 // node
 import {SPArchiveNode} from '../../node/SPArchiveNode';
-import {SPMoreViewNode} from '../../node/SPMoreViewNode';
+// import {SPMoreViewNode} from '../../node/SPMoreViewNode';
+
+// sp/view
+import { SPViewMoreButton } from '../articles/SPViewMoreButton';
 
 // React
 let ReactDOM = self.ReactDOM;
@@ -103,30 +106,26 @@ export class SPViewRanking extends ViewRanking {
     this.executeSafely( View.BEFORE_RENDER, articlesList );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if ( this._articleRendered === null ) {
-
+    if (this._articleRendered === null) {
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this._articleRendered = ReactDOM.render(
         <SPArchiveNode
           list={articlesList}
-          offset={this._request.offset}
-          length={this._request.length}
+          offset={this.request.offset}
+          length={this.request.length}
           action={this.action}
           scope={this}
           moreButton={this.moreButton.bind(this)}
-          home={this._home}
+          home={this.home}
           type={Message.RANKING}
           adSp=""
         />,
         this.element
       );
-
     } else {
-
       // instance が存在するので
       // state update でコンテナを追加する
       this._articleRendered.updateList( articlesList, 0, 5 );
-
     }
 
   }// render
@@ -144,12 +143,21 @@ export class SPViewRanking extends ViewRanking {
 
       // チェックをパスし実行する
       this._moreRendered = ReactDOM.render(
-        <SPMoreViewNode
+        // <SPMoreViewNode
+        //   show={show}
+        //   action={this.action}
+        //   slug={this.slug}
+        //   type="ranking"
+        //   home={this._home}
+        // />,
+        // @since 2016-09-16, more button changed
+        <SPViewMoreButton
           show={show}
           action={this.action}
+          element={this._moreElement}
+          home={this._home}
           slug={this.slug}
           type="ranking"
-          home={this._home}
         />,
         this._moreElement
       );

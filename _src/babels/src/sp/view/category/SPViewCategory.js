@@ -10,17 +10,24 @@
  *
  */
 
+// sp/view
 import {SPViewArchive} from './../SPViewArchive';
+import { SPViewArchiveInfinite } from './../SPViewArchiveInfinite';
 
+// action
 import {Category} from '../../../action/archive/Category';
 import {CategoryAuth} from '../../../action/archive/CategoryAuth';
+
+// app
 import {User} from '../../../app/User';
 
 /**
  * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>
  * SPViewCategoryRoot > CategoryRootDom から call されます
  */
-export class SPViewCategory extends SPViewArchive {
+// export class SPViewCategory extends SPViewArchive {
+// @since 2016-09-16 parent class changed
+export class SPViewCategory extends SPViewArchiveInfinite {
   /**
    * SP category 一覧
    * @param {string} slug category slug

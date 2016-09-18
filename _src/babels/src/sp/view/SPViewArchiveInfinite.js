@@ -27,11 +27,9 @@ import { ArticleDae } from '../../dae/ArticleDae';
 import { Ga } from '../../ga/Ga';
 import { GaData } from '../../ga/GaData';
 
-// view/articles
-import { ViewMoreButton } from '../../view/articles/ViewMoreButton';
-
 // sp/view
 import { SPViewArchive } from './SPViewArchive';
+import { SPViewMoreButton } from './articles/SPViewMoreButton';
 
 // sp/node
 import {SPArchiveNode} from '../node/SPArchiveNode';
@@ -99,7 +97,6 @@ export class SPViewArchiveInfinite extends SPViewArchive {
         Ga.add(new GaData('SPViewArchiveInfinite.render', `${this.slug}_articles`, 'view - new', String(1), 0, true));
         // ----------------------------------------------
       }
-
     } else {
       // instance が存在するので
       // state update でコンテナを追加する
@@ -119,7 +116,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
     // instance があれば state を update する
     if (this.moreRendered === null) {
       this.moreRendered = ReactDOM.render(
-        <ViewMoreButton
+        <SPViewMoreButton
           show={show}
           action={this.action}
           element={moreElement}

@@ -14,7 +14,8 @@
 import {Category} from '../action/archive/Category';
 import {CategoryAuth} from '../action/archive/CategoryAuth';
 // view
-import {ViewArchiveMasonry} from './ViewArchiveMasonry';
+// import {ViewArchiveMasonry} from './ViewArchiveMasonry';
+import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
 // app
 import {User} from '../app/User';
 
@@ -22,7 +23,8 @@ import {User} from '../app/User';
 /**
  * category 一覧表示
  */
-export class ViewCategory extends ViewArchiveMasonry {
+// export class ViewCategory extends ViewArchiveMasonry {
+export class ViewCategory extends ViewArchiveMasonryInfinite {
   /**
    * category 一覧表示 要 **slug**
    * @param {string} slug category slug, default 'all'

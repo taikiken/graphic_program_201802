@@ -37,7 +37,10 @@ import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug
 
 // sp:node
 import {SPArchiveNode} from '../../node/SPArchiveNode';
-import {SPMoreViewNode} from '../../node/SPMoreViewNode';
+// import {SPMoreViewNode} from '../../node/SPMoreViewNode';
+
+// sp/view
+import { SPViewMoreButton } from '../articles/SPViewMoreButton';
 
 // react
 let ReactDOM = self.ReactDOM;
@@ -240,25 +243,24 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
          * @type {ReactClass|Object}
          */
         this.moreRendered = ReactDOM.render(
-          // <SPMoreViewDom
+          // <SPMoreViewNode
           //   show={show}
           //   action={this.action}
           //   home={this.home}
           //   slug={this.slug}
           // />,
-          <SPMoreViewNode
+          // @since 2016-09-16, more button changed
+          <SPViewMoreButton
             show={show}
             action={this.action}
+            element={this.moreElement}
             home={this.home}
             slug={this.slug}
           />,
           this.moreElement
         );
-
       } else {
-
-        this.moreRendered.updateShow( show );
-
+        this.moreRendered.updateShow(show);
       }
     };
 
@@ -313,14 +315,10 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
         Ga.add( new GaData('SPViewArchive.render', `${this.slug}_articles`, 'view - new', String(1), 0, true) );
         // ----------------------------------------------
       }
-
-
     } else {
-
       // instance が存在するので
       // state update でコンテナを追加する
       this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
-
     }
   }
 
