@@ -26,6 +26,12 @@ import { Empty } from '../../app/const/Empty';
 // data
 import { Safety } from '../../data/Safety';
 
+// ui
+import { Touching } from '../../ui/Touching';
+
+// util
+import { Elements } from '../../util/Elements';
+
 // --------------------------------------------
 // library
 // // Sagen
@@ -147,6 +153,12 @@ export class ViewCarousel extends React.Component {
      * @type {number}
      */
     this.position = props.index;
+
+    this.touching = null;
+    this.boundMove = this.touchMove.bind(this);
+    this.boundEnd = this.touchEnd.bind(this);
+    this.boundCancel = this.touchCancel.bind(this);
+    this.pickupSlider = null;
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
@@ -164,7 +176,7 @@ export class ViewCarousel extends React.Component {
           <div className={'hero-slider pickup-container slide-' + this.state.index}>
             {/* slider */}
             <div className="hero-slider-inner">
-              <ul className="pickup-slider">
+              <ul className="pickup-slider" ref="pickupSlider">
                 {
                   // 1.first
                   list.map((article) => makeArticle(article, count++, true, this.props.home))
@@ -214,10 +226,15 @@ export class ViewCarousel extends React.Component {
    * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始します
    */
   componentDidMount() {
-    // console.log('ViewCarousel.componentDidMount', this.props);
     this.props.callback(View.DID_MOUNT);
-    // length が 1 以上なら play
+    // length が 1 以上なら
     if (this.props.list.length > 1) {
+      // sp 端末のみスワイプ準備
+      if (Sagen.Browser.Mobile.phone()) {
+        this.prepareSwipe();
+      }
+
+      // animation start
       this.play();
     }
   }
@@ -246,6 +263,25 @@ export class ViewCarousel extends React.Component {
    * カルーセルスライドを次のスライドに切替ます
    */
   update() {
+    this.next();
+  }
+  /**
+   * next button click event handler, `this.update` を呼び出します
+   * @param {Event} event next button click event
+   */
+  onNext(event) {
+    event.preventDefault();
+    this.next();
+  }
+  /**
+   * prev button click event handler, 前のスライドに移動します
+   * @param {Event} event prev button click event
+   */
+  onPrev(event) {
+    event.preventDefault();
+    this.prev();
+  }
+  next() {
     // count up します
     let index = this.position + 1;
     // last を超えたら 0 に戻す
@@ -255,20 +291,7 @@ export class ViewCarousel extends React.Component {
     // change slide
     this.jump(index);
   }
-  /**
-   * next button click event handler, `this.update` を呼び出します
-   * @param {Event} event next button click event
-   */
-  onNext(event) {
-    event.preventDefault();
-    this.update();
-  }
-  /**
-   * prev button click event handler, 前のスライドに移動します
-   * @param {Event} event prev button click event
-   */
-  onPrev(event) {
-    event.preventDefault();
+  prev() {
     // count down
     let index = this.position - 1;
     // 0 未満になったら last へ戻す
@@ -350,6 +373,79 @@ export class ViewCarousel extends React.Component {
   onPagerClick(index) {
     // 文字列が返される(innerHTML)かもなので数値に型変換します
     this.jump(parseInt(index, 10));
+  }
+  // --------------------------------------------
+  // swipe
+  prepareSwipe() {
+    console.log('ViewCarousel.prepareSwipe');
+    const refsPickup = this.refs.pickupSlider;
+    this.pickupSlider = new Elements(refsPickup);
+
+    // touchmove 中の `preventDefault` を Touching で行わない
+    const touching = new Touching(refsPickup, false);
+    this.touching = touching;
+    touching.on(Touching.MOVE, this.boundMove);
+    touching.on(Touching.END, this.boundEnd);
+    touching.on(Touching.CANCEL, this.boundCancel);
+    touching.init();
+  }
+  touchMove(events) {
+    console.log('ViewCarousel.touchMove', events);
+    // @type {Vectors}
+    const between = events.between;
+    const absX = Math.abs(between.x);
+    if (!events.moving || absX < 10) {
+      return;
+    }
+
+    // touch event をキャンセルし drag 準備に入ります
+    events.originalEvent.preventDefault();
+    this.pause();
+    this.drag(between.x);
+  }
+  touchEnd(events) {
+    console.log('ViewCarousel.touchEnd', events);
+
+    const between = events.between;
+    const absX = Math.abs(between.x);
+    if (!events.moving || absX < 10) {
+      return;
+    }
+
+    // touch event をキャンセルし drag 準備に入ります
+    events.originalEvent.preventDefault();
+    this.pause();
+
+    if (absX < 50) {
+      // 元に戻す
+      this.reset();
+    } else {
+      // next / prev 判定後に動かす
+      this.move(between.x);
+    }
+  }
+  touchCancel() {
+    this.reset();
+  }
+  drag(x) {
+    console.log('ViewCarousel.drag', x);
+
+    const style = this.pickupSlider.style;
+    style.restore();
+    style.set(`left: ${x}px;`);
+  }
+  reset() {
+    this.pickupSlider.style.restore();
+    this.play();
+  }
+  move(x) {
+    if (x > 0) {
+      this.next();
+    } else if (x < 0) {
+      this.prev();
+    } else {
+      this.reset();
+    }
   }
 }
 

@@ -111,6 +111,14 @@ export class Touching extends EventDispatcher {
     return 'touchingEnd';
   }
   /**
+   * touchend event type
+   * @event CANCEL
+   * @return {string} touchingCancel を返します
+   */
+  static get CANCEL() {
+    return 'touchingCancel';
+  }
+  /**
    * touchmove event type
    * @event MOVE
    * @return {string} touchingMove を返します
@@ -256,7 +264,7 @@ export class Touching extends EventDispatcher {
     const moving = Touching.moving(position, previous, this.threshold);
     position.moving = moving;
 
-    if (moving) {
+    if (this.movingCancel && moving) {
       event.preventDefault();
     }
 
@@ -284,18 +292,28 @@ export class Touching extends EventDispatcher {
   /**
    * touchcancel event handler<br>
    * 処理をキャンセルします
+   * @param {Event} event touchend event
    */
-  onCancel() {
+  onCancel(event) {
     this.dispose();
     this.reset();
+    this.dispatch({
+      type: Touching.CANCEL,
+      originalEVent: event
+    });
   }
   /**
    * window.blur event handler<br>
    * 処理をキャンセルします
+   * @param {Event} event touchend event
    */
-  onBlur() {
+  onBlur(event) {
     this.dispose();
     this.reset();
+    this.dispatch({
+      type: Touching.CANCEL,
+      originalEVent: event
+    });
   }
   /**
    * bind した event を unbind します

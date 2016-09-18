@@ -47,7 +47,6 @@ export class SPViewArchive extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {} ) {
-    console.log('SPViewArchive.constructor element', element);
     option = Safety.object( option );
 
     super( element, option );

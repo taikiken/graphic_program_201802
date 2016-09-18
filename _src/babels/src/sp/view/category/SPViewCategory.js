@@ -11,7 +11,7 @@
  */
 
 // sp/view
-import {SPViewArchive} from './../SPViewArchive';
+// import {SPViewArchive} from './../SPViewArchive';
 import { SPViewArchiveInfinite } from './../SPViewArchiveInfinite';
 
 // action
