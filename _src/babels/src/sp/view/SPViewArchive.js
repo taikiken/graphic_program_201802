@@ -47,7 +47,7 @@ export class SPViewArchive extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {} ) {
-
+    console.log('SPViewArchive.constructor element', element);
     option = Safety.object( option );
 
     super( element, option );
@@ -91,6 +91,8 @@ export class SPViewArchive extends View {
      * @protected
      */
     this._request = null;
+    // View へ移動
+    // @since 2016-09-15
     // /**
     //  * index(home)コンテンツか否かのフラッグ
     //  * @type {boolean}
@@ -116,6 +118,8 @@ export class SPViewArchive extends View {
   get moreElement():Element {
     return this._moreElement;
   }
+  // View へ移動
+  // @since 2016-09-15
   // /**
   //  * home flag
   //  * @return {boolean|*} home flag boolean を返します

@@ -1050,7 +1050,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // Element 型を保証する
     // moreRendered が null の時のみ instance を作成し
     // instance があれば state を update する
-    if (this.moreRendered === null && !!moreElement && 'appendChild' in moreElement) {
+    if (this.moreRendered === null) {
       this.moreRendered = ReactDOM.render(
         <ViewMoreButton
           show={show}

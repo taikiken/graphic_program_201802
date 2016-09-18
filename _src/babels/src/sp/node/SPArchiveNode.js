@@ -346,7 +346,6 @@ export let SPArchiveNode = React.createClass( {
     };
   },
   getInitialState: function() {
-
     return {
       arranged: 'prepare',
       list: this.props.list,
@@ -355,7 +354,6 @@ export let SPArchiveNode = React.createClass( {
     };
   },
   render: function() {
-
     let home = this.props.home;
     let length = this.state.list.length;
     let type = this.props.type;
@@ -430,9 +428,9 @@ export let SPArchiveNode = React.createClass( {
     );
 
   },
-  // state 変更し dom が更新された後に呼び出される delegate
-  componentDidUpdate: function() {
-  },
+  // // state 変更し dom が更新された後に呼び出される delegate
+  // componentDidUpdate: function() {
+  // },
   // dom が表示された後に1度だけ呼び出される delegate
   componentDidMount: function() {
     // after mount
@@ -440,26 +438,27 @@ export let SPArchiveNode = React.createClass( {
     // hasNext を元に More View button の表示非表示を決める
     this.props.moreButton( this.props.action.hasNext() );
   },
-  // dom が削除される前に呼び出される delegate
-  componentWillUnmount: function() {
-  },
+  // // dom が削除される前に呼び出される delegate
+  // componentWillUnmount: function() {
+  // },
   // -----------------------------------------------------
-  // 以降 custom
-  // isotope 前準備
-  shouldMasonry: function() {
-  },
-  // 画像読み込む完了 event handler, isotope を実行
-  onImages: function() {
-  },
+  // // 以降 custom
+  // // isotope 前準備
+  // shouldMasonry: function() {
+  // },
+  // // 画像読み込む完了 event handler, isotope を実行
+  // onImages: function() {
+  // },
   updateList: function( list, offset, length ) {
     // state を変更し appendChild + isotope を行う
     this.setState( { list: list, offset: offset, length: length } );
     this.props.moreButton( this.props.action.hasNext() );
-  },
-  // didUpdate から呼び出される
-  appendImages: function() {
-    // hasNext を元に More View button の表示非表示を決める
-    this.setState( { loading: '' } );
-    this.props.moreButton( this.props.action.hasNext() );
   }
+  // ,
+  // // didUpdate から呼び出される
+  // appendImages: function() {
+  //   // hasNext を元に More View button の表示非表示を決める
+  //   this.setState( { loading: '' } );
+  //   this.props.moreButton( this.props.action.hasNext() );
+  // }
 } );// SPArticleDom

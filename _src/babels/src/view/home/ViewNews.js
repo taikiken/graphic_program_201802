@@ -10,11 +10,14 @@
  *
  */
 
-
-import {ViewArchiveMasonry} from '../ViewArchiveMasonry';
+// view
+// import {ViewArchiveMasonry} from '../ViewArchiveMasonry';
 import { ViewArchiveMasonryInfinite } from '../ViewArchiveMasonryInfinite';
+
+// app
 import {User} from '../../app/User';
 
+// action
 import {NewsAuth} from '../../action/home/NewsAuth';
 import {News} from '../../action/home/News';
 

@@ -14,28 +14,28 @@
 import {ViewHeadline} from '../../../view/home/ViewHeadline';
 
 // view
-import {View} from '../../../view/View';
+// import {View} from '../../../view/View';
 import { SPViewHeadlines } from '../headline/SPViewHeadlines';
 
-// app
-import {Empty} from '../../../app/const/Empty';
-import {MediaType} from '../../../app/const/MediaType';
+// // app
+// import {Empty} from '../../../app/const/Empty';
+// import {MediaType} from '../../../app/const/MediaType';
 
 // dae
 import {ArticleDae} from '../../../dae/ArticleDae';
 
-// data
-import {Safety} from '../../../data/Safety';
+// // data
+// import {Safety} from '../../../data/Safety';
 
-// node
-import {CategoryLabelNode} from '../../../node/category/CategoryLabelNode';
+// // node
+// import {CategoryLabelNode} from '../../../node/category/CategoryLabelNode';
 
-// Ga
-import {Ga} from '../../../ga/Ga';
-import {GaData} from '../../../ga/GaData';
+// // Ga
+// import {Ga} from '../../../ga/Ga';
+// import {GaData} from '../../../ga/GaData';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -258,6 +258,8 @@ export class SPViewHeadLine extends ViewHeadline {
     //   this.element
     // );
 
+    // @since 2016-09-16
+    // headline output changed
     const list = [];
     articles.forEach((article) => list.push(new ArticleDae(article)));
 
