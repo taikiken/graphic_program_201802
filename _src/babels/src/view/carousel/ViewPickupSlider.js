@@ -34,6 +34,7 @@ const React = self.React;
 // private
 /**
  * .pickup-NN Element を作成します
+ * @since 2016-09-19
  * @private
  * @static
  * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
@@ -70,28 +71,69 @@ const makeArticle = (dae, index, clone, home) => {
   }
 };
 
+/**
+ * div.pickup-slider コンテナを作成し<br>
+ * カルーセルコンテンツを表示します
+ *
+ * sp はスワイプが可能です
+ */
 export class ViewPickupSlider extends React.Component {
+  /**
+   * React property を設定します
+   *
+   * スワイプ関連イベントハンドラなど変数を初期化します
+   * @param {Object} props React props プロパティー {@link ViewPickupSlider.propTypes}
+   */
   constructor(props) {
-    console.log('ViewPickupSlider', props);
     super(props);
     /**
      * state option
      * @override
-     * @type {{index: number}}
+     * @type {{style: {}}}
      */
     this.state = {
       style: {}
     };
 
+    /**
+     * drag 移動量(px)
+     * @type {number}
+     */
     this.dragging = 0;
-
+    /**
+     * スライドを next / prev 移動時に drag で設定した style を遅延し削除するための timeOut ID
+     * @type {number}
+     */
+    this.timer = 0;
+    /**
+     * bind 済み touchStart
+     * @type {function}
+     */
     this.boundStart = this.touchStart.bind(this);
+    /**
+     * bind 済み touchMove
+     * @type {function}
+     */
     this.boundMove = this.touchMove.bind(this);
+    /**
+     * bind 済み touchEnd
+     * @type {function}
+     */
     this.boundEnd = this.touchEnd.bind(this);
+    /**
+     * bind 済み touchCancel
+     * @type {function}
+     */
     this.boundCancel = this.touchCancel.bind(this);
+
+    this.touching = null;
   }
+  /**
+   * ul.pickup-slider を作成します<br>
+   * 循環スライドのためにクローンコンテナを作成します
+   * @return {XML} カルーセル・コンテナを返します
+   */
   render() {
-    console.log('ViewPickupSlider.render', this.state);
     const list = this.props.list;
     const needClone = list.length > 1;
     let count = 0;
@@ -115,6 +157,9 @@ export class ViewPickupSlider extends React.Component {
   }
   // --------------------------------------------
   // delegate
+  /**
+   * マウント後にスライドが1枚以上ならスワイプできるように準備します
+   */
   componentDidMount() {
     // length が 1 以上なら
     if (this.props.list.length > 1) {
@@ -122,28 +167,40 @@ export class ViewPickupSlider extends React.Component {
       if (this.props.sp) {
         this.prepareSwipe();
       }
-      //
-      // // animation start
-      // this.props.scope.play();
     }
   }
   // --------------------------------------------
   // swipe
+  /**
+   * スワイプ関連のイベントを bind し
+   */
   prepareSwipe() {
     const refsPickup = this.refs.pickupSlider;
 
-    // this.elements = new Elements(refsPickup);
-
     // touchmove 中の `preventDefault` を Touching で行わない
-    const touching = new Touching(refsPickup, false);
+    const touching = new Touching(refsPickup, false, 1);
+    touching.on(Touching.START, this.boundStart);
+    this.touching = touching;
+    touching.init();
+  }
 
+  /**
+   * Touching.START event handler<br>
+   * スワイプ用変数を初期化し move, end, cancel event を bind します
+   *
+   * - Touching.MOVE
+   * - Touching.END
+   * - Touching.CANCEL
+   */
+  touchStart() {
+    this.dragging = 0;
+    this.setState({ style: {} });
+    clearTimeout(this.timer);
+
+    const touching = this.touching;
     touching.on(Touching.MOVE, this.boundMove);
     touching.on(Touching.END, this.boundEnd);
     touching.on(Touching.CANCEL, this.boundCancel);
-    touching.init();
-  }
-  touchStart() {
-    this.dragging = 0;
   }
   /**
    * Touching.MOVE event handler
@@ -152,18 +209,22 @@ export class ViewPickupSlider extends React.Component {
    *
    * between.x から drag 処理を行うかを決定します
    * @param {TouchingEvents} events Touching.MOVE event object
+   * @return {boolean} touchmove で scroll を行うときは true を返します
    */
   touchMove(events) {
+    // scroll している判定
     if (events.scrolling) {
-      return;
+      return true;
     }
-    console.log('ViewCarousel.touchMove', events.scrolling, events.between.x);
 
     // touch event をキャンセルし drag 準備に入ります
     events.origin.preventDefault();
-    this.props.scope.pause();
+    this.props.pause();
+
     this.dragging += events.between.x;
     this.drag(this.dragging);
+
+    return false;
   }
   /**
    * Touching.END event handler
@@ -172,64 +233,115 @@ export class ViewPickupSlider extends React.Component {
    *
    * between.x から drag 処理を行うかを決定します
    * @param {TouchingEvents} events Touching.END event object
+   * @return {boolean} touchmove で scroll を行うときは true を返します
    */
   touchEnd(events) {
-    console.log('ViewCarousel.touchEnd', events);
-    if (events.scrolling) {
-      return;
+    const absX = Math.abs(this.dragging);
+    const movable = !!absX;
+    this.dispose();
+
+    if (!movable) {
+      this.reset();
+      return true;
     }
 
     // touch event をキャンセルし drag 準備に入ります
     events.origin.preventDefault();
-    this.props.scope.pause();
+    this.props.pause();
 
-    const absX = Math.abs(events.between.x);
     // x 方向閾値 50 未満の時は元の位置に戻す
     if (absX < 50) {
       // 元に戻す
       this.reset();
     } else {
       // x の方向から next / prev 判定後にスライドを動かす
-      this.move(events.between.x);
+      this.move(this.dragging);
     }
+
+    return false;
   }
+
+  /**
+   * Touching.CANCEL event handler
+   *
+   * スワイプ変数を初期化するため reset を実行します
+   */
   touchCancel() {
     this.reset();
   }
+  /**
+   * ドラッグ処理を行います<br>
+   * setStyle を実行し inline style を更新します
+   * @param {number} x ドラッグする x(px)値
+   */
   drag(x) {
-    console.log('ViewCarousel.drag', x);
-
-    // const style = this.elements.style;
-    // style.restore();
-    // style.set(`left: ${x}px;`);
+    // カルーセルアニメーションは translateX で動かしています
+    // 計算を簡略化するためドラッグは left を使用します
     const style = { left: `${x}px` };
     this.setState({ style });
   }
-  reset() {
-    // this.elements.style.restore();
-    this.setState({ style: {} });
-    this.props.scope.play();
-  }
+  /**
+   * Touching.END の後スライドをどちらに動かすかを判定します
+   *
+   * - 正: prev
+   * - 負: next
+   *
+   * @param {number} x 正・負 で prev / next を判定します
+   */
   move(x) {
-    console.log('move', x);
+    this.dragging = 0;
+    this.timer = setTimeout(() => {
+      this.setState({ style: {} });
+    }, 100);
+
     if (x > 0) {
-      this.props.scope.next();
+      // <- drag: prev
+      this.props.prev();
     } else if (x < 0) {
-      this.props.scope.prev();
-    } else {
-      this.reset();
+      // -> drag: next
+      this.props.next();
     }
+  }
+  /**
+   * スワイプ用変数を初期化します<br>
+   * `this.dispose` を実行します
+   */
+  reset() {
+    this.dispose();
+    this.props.play();
+    this.setState({ style: {} });
+    this.dragging = 0;
+  }
+  /**
+   * bind した event handler, move, end cancel を unbind します
+   */
+  dispose() {
+    const touching = this.touching;
+    touching.off(Touching.MOVE, this.boundMove);
+    touching.off(Touching.END, this.boundEnd);
+    touching.off(Touching.CANCEL, this.boundCancel);
   }
 }
 
 /**
  * React の PropTypes をプロパティに設定します
- * @type {{list: Array<ArticleDae>}}
+ * @type {{
+ *  list: Array<ArticleDae>,
+ *  sp: boolean,
+ *  home: boolean,
+ *  next: Function,
+ *  prev: Function,
+ *  play: Function,
+ *  pause: Function
+ * }}
  */
 ViewPickupSlider.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
   sp: React.PropTypes.bool.isRequired,
   home: React.PropTypes.bool.isRequired,
-  scope: React.PropTypes.object.isRequired
+  next: React.PropTypes.func.isRequired,
+  prev: React.PropTypes.func.isRequired,
+  play: React.PropTypes.func.isRequired,
+  pause: React.PropTypes.func.isRequired
 };
