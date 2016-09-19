@@ -15,7 +15,7 @@
  *
  * @since 2-16-09-15
  */
-export default class Vectors {
+export class Vectors {
   /**
    * 座標と現在時間を元にインスタンスを作成します
    * @param {number} [x=0] 座標 x
@@ -39,10 +39,10 @@ export default class Vectors {
      */
     this.time = time;
     /**
-     * 移動中かのフラッグ, true: 移動中
+     * スクロール中かのフラッグ, true: スクロール中
      * @type {boolean}
      */
-    this.moving = false;
+    this.scrolling = false;
   }
   /**
    * x, y, time プロパティを全て `0` にします
@@ -93,7 +93,9 @@ export default class Vectors {
    * @return {Vectors} 複製を返します
    */
   clone() {
-    return new Vectors(this.x, this.y, this.time);
+    const clone = new Vectors(this.x, this.y, this.time);
+    clone.scrolling = this.scrolling;
+    return clone;
   }
   /**
    * ベクトルの大きさの２乗の平方根を計算します

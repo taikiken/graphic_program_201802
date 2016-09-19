@@ -13,6 +13,7 @@
 // carousel
 import { ViewCarouselArticle } from './ViewCarouselArticle';
 import { ViewPagers } from './ViewPagers';
+import { ViewPickupSlider } from './ViewPickupSlider';
 
 // view
 import { View } from '../View';
@@ -29,12 +30,12 @@ import { Safety } from '../../data/Safety';
 // ui
 import { Touching } from '../../ui/Touching';
 
-// util
-import { Elements } from '../../util/Elements';
+// // util
+// import { Elements } from '../../util/Elements';
 
 // --------------------------------------------
 // library
-// // Sagen
+// Sagen
 const Sagen = self.Sagen;
 
 // Gasane
@@ -43,45 +44,45 @@ const Polling = self.Gasane.Polling;
 // React
 const React = self.React;
 
-// --------------------------------------------
-// private
-/**
- * .pickup-NN Element を作成します
- * @private
- * @static
- * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
- * @param {number} index react key に使用するユニークな index 数値
- * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
- * @param {boolean} home home（一面）か否かの真偽値
- * @return {XML} カルーセル1記事コンテナを返します
- */
-const makeArticle = (dae, index, clone, home) => {
-  const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
-  // console.log('makeArticle', dae, dae.date, typeof dae.date);
-  // HeadlineDom instance を使い render
-  // iteration key は index を使う
-  // コンテナを 前後に clone するため article.id が使えない
-  if (clone) {
-    return (
-      <ViewCarouselArticle
-        key={`pickup-${index}`}
-        index={index}
-        id={String(dae.id)}
-        slug={dae.categories.slug}
-        categories={dae.categories.all}
-        url={dae.url}
-        date={dae.displayDate}
-        title={dae.title}
-        large={large}
-        commentsCount={dae.commentsCount}
-        mediaType={dae.mediaType}
-        home={home}
-      />
-    );
-  } else {
-    return null;
-  }
-};
+// // --------------------------------------------
+// // private
+// /**
+//  * .pickup-NN Element を作成します
+//  * @private
+//  * @static
+//  * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
+//  * @param {number} index react key に使用するユニークな index 数値
+//  * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
+//  * @param {boolean} home home（一面）か否かの真偽値
+//  * @return {XML} カルーセル1記事コンテナを返します
+//  */
+// const makeArticle = (dae, index, clone, home) => {
+//   const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
+//   // console.log('makeArticle', dae, dae.date, typeof dae.date);
+//   // HeadlineDom instance を使い render
+//   // iteration key は index を使う
+//   // コンテナを 前後に clone するため article.id が使えない
+//   if (clone) {
+//     return (
+//       <ViewCarouselArticle
+//         key={`pickup-${index}`}
+//         index={index}
+//         id={String(dae.id)}
+//         slug={dae.categories.slug}
+//         categories={dae.categories.all}
+//         url={dae.url}
+//         date={dae.displayDate}
+//         title={dae.title}
+//         large={large}
+//         commentsCount={dae.commentsCount}
+//         mediaType={dae.mediaType}
+//         home={home}
+//       />
+//     );
+//   } else {
+//     return null;
+//   }
+// };
 
 /**
  * pickup コンテナ「カルーセル」スライドショーを実装します
@@ -108,7 +109,8 @@ export class ViewCarousel extends React.Component {
      * @type {{index: number}}
      */
     this.state = {
-      index: props.index
+      index: props.index,
+      style: {}
     };
     /**
      * animation するための Polling instance
@@ -154,11 +156,11 @@ export class ViewCarousel extends React.Component {
      */
     this.position = props.index;
 
-    this.touching = null;
-    this.boundMove = this.touchMove.bind(this);
-    this.boundEnd = this.touchEnd.bind(this);
-    this.boundCancel = this.touchCancel.bind(this);
-    this.pickupSlider = null;
+    // this.touching = null;
+    // this.boundMove = this.touchMove.bind(this);
+    // this.boundEnd = this.touchEnd.bind(this);
+    // this.boundCancel = this.touchCancel.bind(this);
+    // this.elements = null;
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
@@ -166,17 +168,19 @@ export class ViewCarousel extends React.Component {
    */
   render() {
     const list = this.props.list;
-    const needClone = list.length > 1;
-    let count = 0;
+    // const needClone = list.length > 1;
+    // let count = 0;
+
     // return null;
     if (list.length > 0) {
       // JSX
       return (
         <div className="hero-sec">
-          <div className={'hero-slider pickup-container slide-' + this.state.index}>
+          <div className={`hero-slider pickup-container slide-${this.state.index}`}>
             {/* slider */}
             <div className="hero-slider-inner">
-              <ul className="pickup-slider" ref="pickupSlider">
+              {/*
+              <ul className="pickup-slider" ref="pickupSlider" style={this.state.style}>
                 {
                   // 1.first
                   list.map((article) => makeArticle(article, count++, true, this.props.home))
@@ -190,6 +194,13 @@ export class ViewCarousel extends React.Component {
                   list.map((article) => makeArticle(article, count++, needClone, this.props.home))
                 }
               </ul>
+             */}
+              <ViewPickupSlider
+                list={list}
+                sp={this.props.sp}
+                home={this.props.home}
+                scope={this}
+              />
             </div>
             <div className="hero-slider-control">
               {/* prev / next */}
@@ -230,9 +241,9 @@ export class ViewCarousel extends React.Component {
     // length が 1 以上なら
     if (this.props.list.length > 1) {
       // sp 端末のみスワイプ準備
-      if (Sagen.Browser.Mobile.phone()) {
-        this.prepareSwipe();
-      }
+      // if (Sagen.Browser.Mobile.phone()) {
+      //   this.prepareSwipe();
+      // }
 
       // animation start
       this.play();
@@ -374,79 +385,96 @@ export class ViewCarousel extends React.Component {
     // 文字列が返される(innerHTML)かもなので数値に型変換します
     this.jump(parseInt(index, 10));
   }
-  // --------------------------------------------
-  // swipe
-  prepareSwipe() {
-    console.log('ViewCarousel.prepareSwipe');
-    const refsPickup = this.refs.pickupSlider;
-    this.pickupSlider = new Elements(refsPickup);
-
-    // touchmove 中の `preventDefault` を Touching で行わない
-    const touching = new Touching(refsPickup, false);
-    this.touching = touching;
-    touching.on(Touching.MOVE, this.boundMove);
-    touching.on(Touching.END, this.boundEnd);
-    touching.on(Touching.CANCEL, this.boundCancel);
-    touching.init();
-  }
-  touchMove(events) {
-    console.log('ViewCarousel.touchMove', events);
-    // @type {Vectors}
-    const between = events.between;
-    const absX = Math.abs(between.x);
-    if (!events.moving || absX < 10) {
-      return;
-    }
-
-    // touch event をキャンセルし drag 準備に入ります
-    events.originalEvent.preventDefault();
-    this.pause();
-    this.drag(between.x);
-  }
-  touchEnd(events) {
-    console.log('ViewCarousel.touchEnd', events);
-
-    const between = events.between;
-    const absX = Math.abs(between.x);
-    if (!events.moving || absX < 10) {
-      return;
-    }
-
-    // touch event をキャンセルし drag 準備に入ります
-    events.originalEvent.preventDefault();
-    this.pause();
-
-    if (absX < 50) {
-      // 元に戻す
-      this.reset();
-    } else {
-      // next / prev 判定後に動かす
-      this.move(between.x);
-    }
-  }
-  touchCancel() {
-    this.reset();
-  }
-  drag(x) {
-    console.log('ViewCarousel.drag', x);
-
-    const style = this.pickupSlider.style;
-    style.restore();
-    style.set(`left: ${x}px;`);
-  }
-  reset() {
-    this.pickupSlider.style.restore();
-    this.play();
-  }
-  move(x) {
-    if (x > 0) {
-      this.next();
-    } else if (x < 0) {
-      this.prev();
-    } else {
-      this.reset();
-    }
-  }
+  // // --------------------------------------------
+  // // swipe
+  // prepareSwipe() {
+  //   const refsPickup = this.refs.pickupSlider;
+  //
+  //   // this.elements = new Elements(refsPickup);
+  //
+  //   // touchmove 中の `preventDefault` を Touching で行わない
+  //   const touching = new Touching(refsPickup, false);
+  //
+  //   touching.on(Touching.MOVE, this.boundMove);
+  //   touching.on(Touching.END, this.boundEnd);
+  //   touching.on(Touching.CANCEL, this.boundCancel);
+  //   touching.init();
+  // }
+  // /**
+  //  * Touching.MOVE event handler
+  //  *
+  //  * scrolling プロパティから scroll 処理をするかを決定します
+  //  *
+  //  * between.x から drag 処理を行うかを決定します
+  //  * @param {TouchingEvents} events Touching.MOVE event object
+  //  */
+  // touchMove(events) {
+  //   if (events.scrolling) {
+  //     return;
+  //   }
+  //   console.log('ViewCarousel.touchMove', events.scrolling, events.between.x);
+  //
+  //   // touch event をキャンセルし drag 準備に入ります
+  //   events.origin.preventDefault();
+  //   console.log('ViewCarousel.touchMove.preventDefault', events.scrolling, events.between.x);
+  //   this.pause();
+  //   console.log('ViewCarousel.touchMove.pause', events.scrolling, events.between.x);
+  //   this.drag(events.between.x);
+  // }
+  // /**
+  //  * Touching.END event handler
+  //  *
+  //  * scrolling プロパティから scroll 処理をするかを決定します
+  //  *
+  //  * between.x から drag 処理を行うかを決定します
+  //  * @param {TouchingEvents} events Touching.END event object
+  //  */
+  // touchEnd(events) {
+  //   console.log('ViewCarousel.touchEnd', events);
+  //   if (events.scrolling) {
+  //     return;
+  //   }
+  //
+  //   // touch event をキャンセルし drag 準備に入ります
+  //   events.origin.preventDefault();
+  //   this.pause();
+  //
+  //   const absX = Math.abs(events.between.x);
+  //   // x 方向閾値 50 未満の時は元の位置に戻す
+  //   if (absX < 50) {
+  //     // 元に戻す
+  //     this.reset();
+  //   } else {
+  //     // x の方向から next / prev 判定後にスライドを動かす
+  //     this.move(events.between.x);
+  //   }
+  // }
+  // touchCancel() {
+  //   this.reset();
+  // }
+  // drag(x) {
+  //   console.log('ViewCarousel.drag', x);
+  //
+  //   // const style = this.elements.style;
+  //   // style.restore();
+  //   // style.set(`left: ${x}px;`);
+  //   const style = { left: `${x}px` };
+  //   this.setState({ style });
+  // }
+  // reset() {
+  //   // this.elements.style.restore();
+  //   this.setState({ style: {} });
+  //   this.play();
+  // }
+  // move(x) {
+  //   if (x > 0) {
+  //     this.next();
+  //   } else if (x < 0) {
+  //     this.prev();
+  //   } else {
+  //     this.reset();
+  //   }
+  // }
 }
 
 // property
@@ -473,7 +501,7 @@ ViewCarousel.propTypes = {
 /**
  * デフォルト・プロパティ, home を false 設定します
  * @static
- * @type {{index: number}}
+ * @type {{index: number, sp: boolean, home: boolean}}
  */
 ViewCarousel.defaultProps = {
   index: 0,

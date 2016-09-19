@@ -23,7 +23,7 @@ const cssSymbol = Symbol();
 /**
  * Element の style を操作します
  */
-export default class Style {
+export class Style {
   /**
    * 引数 element の初期 style 設定を保存し復元できるようにします
    * @param {?Element} element 操作対象 Element
@@ -71,6 +71,7 @@ export default class Style {
     }
     // 存在チェック
     const element = this.element;
+    console.log('Style.set element', element, css, update);
     if (!!element) {
       return update;
     }

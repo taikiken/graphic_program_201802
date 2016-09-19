@@ -19,6 +19,9 @@ import { Safety } from '../data/Safety';
 // util
 import { Vectors } from '../util/Vectors';
 
+// ui
+import { TouchingEvents } from './TouchingEvents';
+
 // private
 const boundStart = Symbol();
 const boundMove = Symbol();
@@ -33,10 +36,10 @@ export class Touching extends EventDispatcher {
   /**
    * 処理対象 element などを保存します
    * @param {Element} element 処理対象 Element
-   * @param {boolean} [movingCancel=false] touchmove 中に `preventDefault` を行う
+   * @param {boolean} [canceling=false] touchmove 中に `preventDefault` を行う
    * @param {number} [threshold=10] y 方向閾値
    */
-  constructor(element, movingCancel = false, threshold = 10) {
+  constructor(element, canceling = false, threshold = 10) {
     super();
 
     /**
@@ -49,7 +52,7 @@ export class Touching extends EventDispatcher {
      * @type {boolean}
      * @default false
      */
-    this.movingCancel = movingCancel;
+    this.canceling = canceling;
     /**
      * y 方向閾値, default: 10px
      * @type {number}
@@ -181,6 +184,7 @@ export class Touching extends EventDispatcher {
    * window.blur event をそれぞれ bind します
    */
   init() {
+    // console.log('Touching.init', this.element, this.boundStart);
     this.element.addEventListener('touchstart', this.boundStart, false);
     window.addEventListener('blur', this.boundBlur, false);
   }
@@ -193,7 +197,7 @@ export class Touching extends EventDispatcher {
     this.dispose();
     // vectors を初期化
     this.reset();
-
+    console.log('Touching.onStart', event);
     // 現在 position を保存
     const vectors = this.vectors;
     const point = Touching.point(event);
@@ -218,6 +222,7 @@ export class Touching extends EventDispatcher {
    * @param {Event} event touchmove event
    */
   onMove(event) {
+    // console.log('Touching.onMove', event);
     const vectors = this.vectors;
     const movingArray = vectors.moving;
 
@@ -226,13 +231,18 @@ export class Touching extends EventDispatcher {
     const position = new Vectors(point.x, point.y, Date.now());
 
     // 前回 position <- moving 配列最後
-    const previous = movingArray[movingArray.length - 1];
-    const moving = Touching.moving(position, previous, this.threshold);
-    position.moving = moving;
+    const previous = movingArray.pop();
+    // 戻す
+    movingArray.push(previous);
+
+    // scroll checked
+    const scrolling = Touching.scrolling(position, previous, this.threshold);
+    position.scrolling = scrolling;
+    // 現在 position を配列後ろにセット
     movingArray.push(position);
 
     // global cancel と 閾値チェックで `preventDefault` を実行し scroll を止める
-    if (this.movingCancel && moving) {
+    if (this.canceling && !scrolling) {
       event.preventDefault();
     }
 
@@ -240,31 +250,33 @@ export class Touching extends EventDispatcher {
     const between = position.between(previous);
 
     // Touching.MOVE 発火
-    this.dispatch({
+    this.dispatch(new TouchingEvents(
+      Touching.MOVE,
+      event,
       position,
-      moving,
       between,
-      type: Touching.MOVE,
-      originalEVent: event
-    });
+      scrolling
+    ));
   }
   /**
    * touchend event handler
    * @param {Event} event touchend event
    */
   onEnd(event) {
+    // console.log('Touching.onEnd', event);
     const vectors = this.vectors;
 
     // 現在 position
     const point = Touching.point(event);
     const position = new Vectors(point.x, point.y, Date.now());
 
-    // 前回 position <- start
+    // 前回 position を touchstart 位置としチェックします
     const previous = vectors.start;
-    const moving = Touching.moving(position, previous, this.threshold);
-    position.moving = moving;
+    const scrolling = Touching.scrolling(position, previous, this.threshold);
+    position.scrolling = scrolling;
 
-    if (this.movingCancel && moving) {
+    // global cancel と 閾値チェックで `preventDefault` を実行し scroll を止める
+    if (this.canceling && !scrolling) {
       event.preventDefault();
     }
 
@@ -272,22 +284,22 @@ export class Touching extends EventDispatcher {
     const between = position.between(previous);
 
     // Touching.END 発火
-    this.dispatch({
+    this.dispatch(new TouchingEvents(
+      Touching.END,
+      event,
       position,
-      moving,
       between,
-      type: Touching.END,
-      originalEVent: event
-    });
+      scrolling
+    ));
 
     // Touching.Touch 発火
-    this.dispatch({
+    this.dispatch(new TouchingEvents(
+      Touching.TOUCH,
+      event,
       position,
-      moving,
       between,
-      type: Touching.TOUCH,
-      originalEVent: event
-    });
+      scrolling
+    ));
   }
   /**
    * touchcancel event handler<br>
@@ -346,11 +358,12 @@ export class Touching extends EventDispatcher {
    * @param {Vectors} pointA スタートポイント(Vectors)
    * @param {Vectors} pointB エンドポイント(Vectors)
    * @param {number} threshold 閾値
-   * @return {boolean} true の時は閾値以内なので `preventDefault` 実行が可能です
+   * @return {boolean} true の時は閾値以上なのでスクロール判定になります
    */
-  static moving(pointA, pointB, threshold) {
+  static scrolling(pointA, pointB, threshold) {
     const y = pointA.betweenY(pointB);
-    return Math.abs(y) <= threshold;
+    // 正数値にし閾値と比較
+    return Math.abs(y) >= threshold;
   }
   /**
    * MouseEvent|TouchEvent から pageX / pageY 座標を取得します
