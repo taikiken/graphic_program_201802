@@ -192,7 +192,6 @@ export class CategoriesSlugDae {
   get pickup():PickupDae {
     return this._pickup;
   }
-
   /**
    * "title_img"のリンク先
    * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
