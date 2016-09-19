@@ -146,6 +146,7 @@ export class CategoriesDae {
   }
   /**
    * category 配列の先頭 slug
+   * @since 2016-09-16
    * @return {string} category 配列の先頭 slug を返します
    */
   get slug():string {

@@ -192,4 +192,15 @@ export class CategoriesSlugDae {
   get pickup():PickupDae {
     return this._pickup;
   }
+
+  /**
+   * "title_img"のリンク先
+   * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
+   * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
+   * @since 2016-09-17
+   * @return {string} "title_img"のリンク先 を返します
+   */
+  get titleImgLink():string {
+    return this.response.title_img_link;
+  }
 }
