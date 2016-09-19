@@ -61,5 +61,12 @@ export class PickupDae {
   get articles():Array<RelatedDae> {
     return this._articles;
   }
+  /**
+   * pickup.article がデータを持っているかを取得します
+   * @return {boolean} pickup.article が存在するときは true を返します
+   */
+  has():boolean {
+    return this.articles.length > 0;
+  }
 }
 

@@ -10,14 +10,18 @@
  *
  */
 
+// data
 import {Safety} from '../../data/Safety';
 
+// dae/theme
 import {ThemeDae} from '../theme/ThemeDae';
 import {AdDae} from '../theme/AdDae';
 import {BannersDae} from '../banner/BannersDae';
 import {BannerDae} from '../banner/BannerDae';
 
+// dae/categories
 import { PickupDae } from './PickupDae';
+import { HeadlineDae } from './HeadlineDae';
 
 
 /**
@@ -71,6 +75,13 @@ export class CategoriesSlugDae {
      * @protected
      */
     this._pickup = new PickupDae(response.pickup);
+    /**
+     * JSON.response.headline
+     * @since 2016-09-17
+     * @type {HeadlineDae}
+     * @protected
+     */
+    this._headline = new HeadlineDae(response.headline);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -191,6 +202,14 @@ export class CategoriesSlugDae {
    */
   get pickup():PickupDae {
     return this._pickup;
+  }
+  /**
+   * 「記事カテゴリー情報」response.headline
+   * @since 2016-09-17
+   * @return {HeadlineDae} response.headline を HeadlineDae instance にして返します
+   */
+  get headline():HeadlineDae {
+    return this._headline;
   }
   /**
    * "title_img"のリンク先

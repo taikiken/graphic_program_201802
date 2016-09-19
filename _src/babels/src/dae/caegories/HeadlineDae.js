@@ -78,4 +78,11 @@ export class HeadlineDae {
   get ad():Object {
     return this._ad;
   }
+  /**
+   * headline.article がデータを持っているかを取得します
+   * @return {boolean} headline.article が存在するときは true を返します
+   */
+  has():boolean {
+    return this.articles.length > 0;
+  }
 }

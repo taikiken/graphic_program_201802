@@ -151,6 +151,16 @@ let buildPath = ( root = '' ) => {
       new Queries()
     ),
     // --------------------------------------------
+    // 記事カテゴリー一覧
+    // /api/v1/category/[:category_slug]
+    // @since 2016-09-16
+    // 追加したけど要らなかったかも, `categories` を代用の様子
+    'category:slug': new Types(
+      new Type(`${API_PATH}/category`),
+      new Permalink(),
+      new Queries()
+    ),
+    // --------------------------------------------
     // home / self
     // /api/v1/articles/home[/|/pickup|/headline]
     'home': new Types(
