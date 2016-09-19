@@ -3,6 +3,69 @@
 
 // Error
 //
-// design module error
+// design module error/maintenance
 //
 // Styleguide 2.11.0
+
+// maintenance
+// bodyの背景に画像
+.maintenance {
+  width: 100%;
+  min-height: 100%;
+  background: #000 url(/assets/images/signup/bg.jpg) center top no-repeat;
+  // background-size: cover;
+}
+
+// body-sec
+// .body-secをオーバーライド
+.maintenance {
+  .body-sec {
+    margin-top: 300px;
+    margin-bottom: 50px;
+    background: none;
+
+    &:before {
+      background: none;
+    }
+
+    @at-root {
+      &-inner {
+        display: table;
+        width: auto;
+        margin-right: auto;
+        margin-left: auto;
+        background: none;
+      }
+    }
+  }
+}
+
+.maintenance {
+  &-logo,
+  &-text {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  //.maintenance-logo
+  &-logo {
+    padding-right: 40px;
+  }
+
+  //.maintenance-heading
+  &-heading {
+    color: $highlight-color;
+    font-weight: bold;
+    font-size: fz(24);
+  }
+
+  //.maintenance-message
+  &-message {
+    p {
+      line-height: lh(28, 16);
+      margin-top: 1em;
+      color: #fff;
+      font-size: fz(16);
+    }
+  }
+}
