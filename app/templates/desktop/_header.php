@@ -71,7 +71,7 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     }
   </style>
 
-  <link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
+  <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
   <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
   <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
@@ -79,9 +79,6 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
   <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 
-
-<!--      <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.5.3/videojs-contrib-hls.min.js"></script>-->
-<!--  <script src="/assets/ima_plugin/js/videojs-hlsjs.js"></script>-->
   <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
   <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
