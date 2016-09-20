@@ -431,7 +431,8 @@ textarea {
     display: block;
     max-height: 40px;
     // line-height: 40px;
-    padding: 10px 8px 12px;
+    padding: 10px 0 12px;
+    // padding: 10px 8px 12px;
     @include link-decoration(#ccc, $highlight-secondary-color, none, none);
     font-weight: bold;
     font-size: fz(11);

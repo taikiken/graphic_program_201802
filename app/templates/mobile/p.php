@@ -83,7 +83,7 @@
           <div id="post-content-container" class="post-content excerpt hidden">
             <?php print_r($page['post']['body']); ?>
           </div><!-- /.post-content -->
-          <div id="post-content-read-more"></div>
+          <div id="post-content-read-more" class="post-content-read-more"></div>
 
         <?php endif; ?>
 

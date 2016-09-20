@@ -480,6 +480,7 @@
     display: block;
     padding: 20px 0;
     background-color: $highlight-color;
+    border-radius: 6px;
 
     span {
       @extend .sprite-common;
