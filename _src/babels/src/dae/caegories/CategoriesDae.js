@@ -36,10 +36,13 @@ export class CategoriesDae {
     // cats: 配列にそのまま保持
     // bank: slug をキーにそ保持
     categories.forEach( function( category ) {
-
-      let slugDae = new SlugDae( category );
-      cats.push( slugDae );
-      bank[ slugDae.slug ] = slugDae;
+      const slugDae = new SlugDae( category );
+      // slug, label に null があるようなので null は skip する
+      // @since 2016-09-20
+      if (!!slugDae.slug && !!slugDae.label) {
+        cats.push(slugDae);
+        bank[slugDae.slug] = slugDae;
+      }
     } );
 
     /**
