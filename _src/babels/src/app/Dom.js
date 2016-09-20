@@ -203,6 +203,13 @@ export class Dom {
   static headline():Element {
     return Dom.get( 'headline-container' );
   }
+  /**
+   * category headline 「注目の記事」
+   * @return {Element} div#js-headline を返します
+   */
+  static headlineParent():Element {
+    return Dom.get('js-headline');
+  }
   // archive / category
   /**
    * category container

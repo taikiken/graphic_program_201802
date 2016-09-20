@@ -39,12 +39,13 @@ export class SingleDae extends RelatedDae {
     // related
     let related = [];
     if ( Safety.check( response, 'related_articles', 'array' ) ) {
-
-      response.related_articles.forEach( function( article ) {
-
-        related.push( new RelatedDae( article ) );
-
-      } );
+      //
+      // response.related_articles.forEach( function( article ) {
+      //
+      //   related.push( new RelatedDae( article ) );
+      //
+      // } );
+      related = response.related_articles.map((article) => new RelatedDae(article));
     }
     /**
      * 関連記事 response.related

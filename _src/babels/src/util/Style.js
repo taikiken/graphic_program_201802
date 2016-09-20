@@ -71,8 +71,7 @@ export class Style {
     }
     // 存在チェック
     const element = this.element;
-    console.log('Style.set element', element, css, update);
-    if (!!element) {
+    if (!element) {
       return update;
     }
     // 存在する時のみ処理を行います

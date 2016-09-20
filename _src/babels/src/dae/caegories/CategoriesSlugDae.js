@@ -25,10 +25,14 @@ import { HeadlineDae } from './HeadlineDae';
 
 
 /**
+ * 記事カテゴリー情報
+ *
  * <p>特定のカテゴリー情報を取得する<br>
  * ※主に企画モノの記事一覧ページを生成するにあたり利用する</p>
  *
  * `/api/v1/category/[:category_slug]`
+ *
+ * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
  */
 export class CategoriesSlugDae {
   /**

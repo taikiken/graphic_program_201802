@@ -32,8 +32,7 @@ export class HeadlineDae {
     const headlineObject = Safety.object(headline);
     // response.pickup.articles
     const articlesArray = Safety.array(headlineObject.articles);
-    const articles = [];
-    articlesArray.forEach((article) => articles.push(new RelatedDae(article)));
+    const articles = articlesArray.map((article) => new RelatedDae(article));
     /**
      * response.headline
      * @type {Object}

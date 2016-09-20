@@ -260,8 +260,7 @@ export class SPViewHeadLine extends ViewHeadline {
 
     // @since 2016-09-16
     // headline output changed
-    const list = [];
-    articles.forEach((article) => list.push(new ArticleDae(article)));
+    const list = articles.map((article) => new ArticleDae(article));
 
     ReactDOM.render(
       <SPViewHeadlines

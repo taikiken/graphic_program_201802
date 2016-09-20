@@ -28,8 +28,7 @@ export class PickupDae {
     const pickupObject = Safety.object(pickup);
     // response.pickup.articles
     const articlesArray = Safety.array(pickupObject.articles);
-    const articles = [];
-    articlesArray.forEach((article) => articles.push(new RelatedDae(article)));
+    const articles = articlesArray.map((article) => new RelatedDae(article));
     /**
      * response.pickup
      * @type {Object}

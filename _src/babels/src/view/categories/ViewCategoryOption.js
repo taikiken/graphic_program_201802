@@ -15,8 +15,10 @@ import { Dom } from '../../app/Dom';
 
 // view
 import { View } from '../View';
+// view/carousel
 import { ViewCarousel } from '../carousel/ViewCarousel';
-import { ViewHeadlines } from '../headlines/ViewHeadlines';
+// view/categories
+import { ViewHeadlineOption } from './ViewHeadlineOption';
 
 // model
 import { Model } from '../../model/Model';
@@ -79,6 +81,8 @@ export class ViewCategoryOption extends View {
     }
 
     const category = new CategoriesSlugDae(response);
+    console.log('ViewCategoryOption.done', category);
+
     if (category.pickup.has()) {
       this.pickup(category);
     }
@@ -92,6 +96,10 @@ export class ViewCategoryOption extends View {
   fail():void {
     return;
   }
+  /**
+   * 記事一覧に pickup を表示します
+   * @param {CategoriesSlugDae} category JSON
+   */
   pickup(category:CategoriesSlugDae):void {
     const element = Dom.pickup();
     if (element === null) {
@@ -110,17 +118,24 @@ export class ViewCategoryOption extends View {
       element
     );
   }
+  /**
+   * 記事一覧に headline を表示します
+   * @param {CategoriesSlugDae} category JSON
+   */
   headline(category:CategoriesSlugDae):void {
-    const element = Dom.headline();
+    const element = Dom.headlineParent();
     if (element === null) {
       return;
     }
 
+    const browser = Sagen.Browser.Mobile.phone() ? 'sp' : 'pc';
     ReactDOM.render(
-      <ViewHeadlines
+      <ViewHeadlineOption
         list={category.headline.articles}
         callback={this.boundSafety}
         home={false}
+        ad={category.headline.ad}
+        browser={browser}
       />,
       element
     );

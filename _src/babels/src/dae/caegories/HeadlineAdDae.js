@@ -25,7 +25,8 @@ export class HeadlineAdDae extends AdDae {
   constructor(ad) {
     super(ad);
     /**
-     * response.headline.ad.pc
+     * response.headline.ad.pc<br>
+     * `AdDae` -> AdPcDae
      * @type {string}
      * @override
      * @protected

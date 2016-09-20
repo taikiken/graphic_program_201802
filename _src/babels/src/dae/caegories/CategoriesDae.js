@@ -10,8 +10,10 @@
  *
  */
 
-
+// data
 import {Safety} from '../../data/Safety';
+
+// dae/categories
 import {SlugDae} from './SlugDae';
 
 /**
@@ -66,10 +68,10 @@ export class CategoriesDae {
     this._bank = bank;
 
     // @since 2016-09-15
-    const slugs = [];
-    cats.forEach((slugDae) => {
-      slugs.push(slugDae.slug);
-    });
+    const slugs = cats.map((slugDae) => slugDae.slug);
+    // cats.forEach((slugDae) => {
+    //   slugs.push(slugDae.slug);
+    // });
     /**
      * category.slug を ', ' で連結した文字列
      * @type {string}
