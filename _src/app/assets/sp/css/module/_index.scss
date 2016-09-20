@@ -9,7 +9,7 @@
 // hero-sec
 // トップページ メインビジュアル
 .hero {
-  $pickup-height: 250px;
+  $pickup-height: 275px;
 
   &-sec {
     background-color: #000;
@@ -40,9 +40,8 @@
         a {
           position: relative;
           display: block;
-          background-color: #061533;
-          // @since 2016-09-16
-          height: $pickup-height;
+          height: (360/2)+px;
+          // background-color: #061533;
         }
 
         .overlay,
@@ -54,8 +53,11 @@
           $posY: 20/2;
 
           &-overview {
-            position: relative;
+            position: absolute;
+            bottom: -(190/2)+px;
+            height: (190/2)+px;
             padding: (28/2)+px perCalc(20) ($posY+18)+px;
+            background-color: #061533;
           }
 
           &-heading {
