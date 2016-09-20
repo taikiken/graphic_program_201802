@@ -55,6 +55,7 @@
           &-overview {
             position: absolute;
             bottom: -(190/2)+px;
+            width: 100%;
             height: (190/2)+px;
             padding: (28/2)+px perCalc(20) ($posY+18)+px;
             background-color: #061533;
