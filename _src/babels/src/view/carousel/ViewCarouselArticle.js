@@ -85,7 +85,7 @@ export class ViewCarouselArticle extends React.Component {
     // ----------------------------------------------
     // GA 計測タグ
     const tag = this.props.home ? 'home_pickup' : `${this.props.slug}_pickup`;
-    Ga.add( new GaData('ViewCarouselArticle.render.gaSend', tag, 'click', this.props.url, parseFloat(this.props.id)) );
+    Ga.add( new GaData('ViewCarouselArticle.gaSend', tag, 'click', this.props.url, parseFloat(this.props.id)) );
     // ----------------------------------------------
   }
 }

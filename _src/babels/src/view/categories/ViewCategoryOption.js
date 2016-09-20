@@ -14,7 +14,9 @@
 import { Dom } from '../../app/Dom';
 
 // view
+import { View } from '../View';
 import { ViewCarousel } from '../carousel/ViewCarousel';
+import { ViewHeadlines } from '../headlines/ViewHeadlines';
 
 // model
 import { Model } from '../../model/Model';
@@ -43,12 +45,14 @@ const ReactDOM = self.ReactDOM;
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @since 2016-09-17
  */
-export class ViewCategoryOption {
+export class ViewCategoryOption extends View {
   /**
    * category slug を使用し API request を開始します
    * @param {string} [slug=all] category.slug
    */
   constructor(slug:string = 'all') {
+    super(null, null);
+
     const boundFail = this.fail.bind(this);
     const callback = {};
     callback[Model.COMPLETE] = this.done.bind(this);
@@ -56,6 +60,7 @@ export class ViewCategoryOption {
     callback[Model.RESPONSE_ERROR] = boundFail;
 
     this.action = new ModelCategoriesSlug(slug, callback);
+    this.boundSafety = this.executeSafely.bind(this);
   }
   /**
    * request を開始します
@@ -96,7 +101,7 @@ export class ViewCategoryOption {
     ReactDOM.render(
       <ViewCarousel
         list={category.pickup.articles}
-        callback={this.safety.bind(this)}
+        callback={this.boundSafety}
         polling={new Polling(1000 * 5)}
         index={0}
         sp={Sagen.Browser.Mobile.phone()}
@@ -112,12 +117,9 @@ export class ViewCategoryOption {
     }
 
     ReactDOM.render(
-      <ViewCarousel
-        list={category.pickup.articles}
-        callback={this.safety.bind(this)}
-        polling={new Polling(1000 * 5)}
-        index={0}
-        sp={Sagen.Browser.Mobile.phone()}
+      <ViewHeadlines
+        list={category.headline.articles}
+        callback={this.boundSafety}
         home={false}
       />,
       element

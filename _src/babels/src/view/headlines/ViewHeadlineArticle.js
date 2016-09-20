@@ -24,6 +24,13 @@ import { GaData } from '../../ga/GaData';
 // React
 const React = self.React;
 
+// ----------------------------------------
+
+/**
+ * mediaType で play button を表示するかを判断しタグを返します
+ * @param {string} mediaType media type, video / image...
+ * @return {?XML} play button を表示する時は img tag をそうでない時は null を返します
+ */
 const playMark = (mediaType) => {
   if (mediaType === MediaType.VIDEO) {
     return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
@@ -32,12 +39,28 @@ const playMark = (mediaType) => {
   return null;
 };
 
+/**
+ * headline の 1記事
+ * @since 2016-09-17
+ */
 export class ViewHeadlineArticle extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link ViewHeadlineArticle.propTypes}
+   */
   constructor(props) {
     super(props);
-
+    /**
+     * bind済み gaSend
+     * @type {function}
+     */
     this.boundGa = this.gaSend.bind(this);
   }
+
+  /**
+   * headline 1記事を作成します
+   * @return {XML} headline 1記事を返します
+   */
   render() {
     const props = this.props;
     return (
@@ -62,6 +85,9 @@ export class ViewHeadlineArticle extends React.Component {
       </li>
     );
   }
+  /**
+   * GA 計測タグを送信します {@link Ga.add}, {@link GaData}
+   */
   gaSend() {
     // ----------------------------------------------
     // GA 計測タグ
@@ -71,6 +97,21 @@ export class ViewHeadlineArticle extends React.Component {
   }
 }
 
+/**
+ *
+ * @type {{
+ *  index: number,
+ *  id: string,
+ *  slug: string,
+ *  categories: array,
+ *  url: string,
+ *  date: string,
+ *  title: string,
+ *  thumbnail: string,
+ *  mediaType: string,
+ *  home: bool
+ * }}
+ */
 ViewHeadlineArticle.propTypes = {
   index: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired,

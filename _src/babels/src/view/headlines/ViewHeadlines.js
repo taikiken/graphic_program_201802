@@ -26,11 +26,29 @@ import { Safety } from '../../data/Safety';
 // React
 const React = self.React;
 
+/**
+ * div.headline を出力します
+ * @since 2016-09-17
+ */
 export class ViewHeadlines extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link ViewHeadlines.propTypes}
+   */
   constructor(props) {
     super(props);
   }
+  /**
+   * div.headline を出力します<br>
+   * this.props.list.length が `0` の時は null を返します
+   * @return {?XML} div.headline を返します
+   */
   render() {
+    // length check
+    if (this.props.list.length === 0) {
+      return null;
+    }
+
     const home = this.props.home;
 
     return (
@@ -64,11 +82,22 @@ export class ViewHeadlines extends React.Component {
       </div>
     );
   }
+  /**
+   * マウント時に call され、View.DID_MOUNT を通知します
+   */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
   }
 }
 
+/**
+ * プロパティ
+ * @type {{
+ *  list: Array<ArticleDae>,
+ *  callback: Function,
+ *  home: boolean
+ * }}
+ */
 ViewHeadlines.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
@@ -76,6 +105,12 @@ ViewHeadlines.propTypes = {
   home: React.PropTypes.bool
 };
 
+/**
+ * デフォルトプロパティ
+ * @type {{
+ *  home: boolean
+ * }}
+ */
 ViewHeadlines.defaultProps = {
   home: false
 };
