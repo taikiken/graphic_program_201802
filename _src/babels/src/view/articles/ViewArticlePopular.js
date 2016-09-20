@@ -99,6 +99,7 @@ export class ViewArticlePopular extends React.Component {
               isGood={first.isGood}
               isBad={first.isBad}
               activate={false}
+              url={first.url}
             />
           </div>
           <ViewCommentsSecond
