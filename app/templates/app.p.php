@@ -148,9 +148,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
               <div class="video-container">
                 <img class="phone-video-guide" src="/assets/images/common/thumb-16x9.png" alt="">
                 <video
-                  id="webview-brightcove"
-                  data-account="3948005094001"
-                  data-player="rJL6q0az"
+                  id="video_content"
                   data-embed="default"
                   class="video-js"
                   preload="auto"
@@ -280,13 +278,12 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   <script>
   (function () {
       var poster;
-      var player = videojs('webview-brightcove');
-      document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important;');
+      var player = videojs('video_content');
       player.src( {
           'type': 'application/x-mpegURL',
           'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
       } );
-      
+
       <?php if ($page['post']['media']['images']['medium']) : ?>
       poster = '<?php echo $page['post']['media']['images']['medium']; ?>';
       <?php elseif ($page['post']['media']['images']['thumbnail']) : ?>
@@ -298,34 +295,40 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
       }
       player.width( '100%', false );
       player.height( 'auto', false );
-      
-      
+
+
       var option = {
-          id: 'webview-brightcove',
+          id: 'video_content',
           adTagUrl: '<?php echo $page['post']['media']['video']['ad_url']['sp']; ?>' + '?' + Date.now()
       };
-
       player.ima(option);
-      player.on('play', function() {
-          document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
-      });
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
-
       player.on('play', function(){
           ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
       });
       player.on('ended', function () {
-          player.ima.onContentResumeRequested_();
-          player.src('<?php echo $page['post']['media']['video']['url']['sd']; ?>');
+          if (navigator.userAgent.match(/iPhone/i)) {
+            player.ima.onContentResumeRequested_();
+            player.src('<?php echo $page['post']['media']['video']['url']['sd']; ?>');
+          }
           ga('send', 'event', 'video', 'complete', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
       });
+      if (navigator.userAgent.match(/iPhone/i)) {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        var adContainer = document.getElementById('video_content_ima-ad-container');
+        player.on( 'adstart', function(){
+          adContainer.setAttribute('style', 'z-index: 99; position: absolute;');
+        });
+        player.on( 'adend', function(){
+          adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+        });
+        adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+      }
 
-      var adContainer = document.getElementById('webview-brightcove_ima-ad-container');
-      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
       player.one('click', function() {
-          player.play();
-
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
       });
 
   }());
