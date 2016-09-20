@@ -316,71 +316,18 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
           ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
       });
       player.on('ended', function () {
+          player.ima.onContentResumeRequested_();
+          player.src('<?php echo $page['post']['media']['video']['url']['sd']; ?>');
           ga('send', 'event', 'video', 'complete', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
       });
 
       var adContainer = document.getElementById('webview-brightcove_ima-ad-container');
       adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
-      player.one('click', function() { alert('play');
+      player.one('click', function() {
           player.play();
 
       });
 
-
-
-    /*var myPlayer, poster, isPlay = false, isComplete = false;
-    videojs('webview-brightcove').ready(function() {
-      myPlayer = this;
-
-      myPlayer.src( {
-        'type': 'application/x-mpegURL',
-        'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
-      } );
-
-      <?php if ($page['post']['media']['video']['ad_url']['sp']) :
-      // 動画プレイヤー / VASTをPC/SP&APPで分ける #822 ?>
-      myPlayer.ima3({
-        debug: false,
-        adTechOrder: [
-          'html5'
-        ],
-        postrollTimeout: 2000,
-        prerollTimeout: 1000,
-        requestMode: 'onplay',
-        serverUrl: '<?php echo $page['post']['media']['video']['ad_url']['sp']; ?>' + '?' + Date.now(),
-        timeout: 5000
-      });
-
-      <?php endif; ?>
-
-      <?php if ($page['post']['media']['images']['medium']) : ?>
-      poster = '<?php echo $page['post']['media']['images']['medium']; ?>';
-      <?php elseif ($page['post']['media']['images']['thumbnail']) : ?>
-      poster = '<?php echo $page['post']['media']['images']['thumbnail']; ?>';
-      <?php endif; ?>
-
-      if ( !!poster ) {
-        myPlayer.poster(poster);
-      }
-      myPlayer.width( '100%', false );
-      myPlayer.height( 'auto', false );
-
-      // playerのgaイベント
-      myPlayer.on('play', function() {
-        if ( isPlay === false ) {
-          isPlay = true;
-          ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
-        }
-      });
-
-      myPlayer.on('ended', function() {
-        if ( isComplete === false ) {
-          isComplete = true;
-          ga('send', 'event', 'video', 'complete', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
-        }
-      });
-
-    });*/
   }());
   </script>
   <?php endif; ?>
