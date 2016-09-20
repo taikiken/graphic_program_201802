@@ -12,7 +12,8 @@
 
 import { Safety } from '../../data/Safety';
 
-import { RelatedDae } from '../RelatedDae';
+// dae
+import { ArticleDae } from '../ArticleDae';
 
 /**
  * 「記事カテゴリー情報」 response.pickup[.articles] を管理します
@@ -28,7 +29,7 @@ export class PickupDae {
     const pickupObject = Safety.object(pickup);
     // response.pickup.articles
     const articlesArray = Safety.array(pickupObject.articles);
-    const articles = articlesArray.map((article) => new RelatedDae(article));
+    const articles = articlesArray.map((article) => new ArticleDae(article));
     /**
      * response.pickup
      * @type {Object}
@@ -55,9 +56,9 @@ export class PickupDae {
   }
   /**
    * response.pickup.articles
-   * @return {Array<RelatedDae>} response.pickup.articles 配列を返します
+   * @return {Array<ArticleDae>} response.pickup.articles 配列を返します
    */
-  get articles():Array<RelatedDae> {
+  get articles():Array<ArticleDae> {
     return this._articles;
   }
   /**

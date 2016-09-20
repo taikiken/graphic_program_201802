@@ -81,7 +81,7 @@ export class ViewCategoryOption extends View {
     }
 
     const category = new CategoriesSlugDae(response);
-    console.log('ViewCategoryOption.done', category);
+    console.log('ViewCategoryOption.done', category.pickup, category.headline);
 
     if (category.pickup.has()) {
       this.pickup(category);
