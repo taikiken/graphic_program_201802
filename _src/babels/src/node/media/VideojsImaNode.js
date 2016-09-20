@@ -162,14 +162,12 @@ export let VideojsImaNode = React.createClass( {
     videoElement.removeEventListener( 'pause', this.onPause );
   },
   onPlay: function( /* event */ ) {
-    console.log( 'onPlay' );
     if ( !this.playing ) {
       this.playing = true;
       this.tracking( 'begin' );
     }
   },
   onEnded: function( /* event */ ) {
-    console.log( 'onEnded' );
     if ( this.playing ) {
       this.playing = false;
       this.tracking( 'complete' );
