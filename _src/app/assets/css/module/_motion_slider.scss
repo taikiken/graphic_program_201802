@@ -1,6 +1,176 @@
 @import "../../../../scss/asset";
 
 // ---------------------------------------------------------------------
+// PICKUP
+// index.scss から移動
+// ---------------------------------------------------------------------
+
+// pickup
+//
+// design module pickup
+//
+// Styleguide 2.13.0
+
+// hero-slider
+// トップページ用 メインビジュアルスライダー
+.hero {
+  &-sec {
+  }
+  $pickup-height: 400px;
+
+  &-slider {
+    position: relative;
+    width: 100%;
+    height: $pickup-height;
+    background-color: #000;
+    overflow: hidden;
+
+    &-inner {
+      width: 640px;
+      margin: 0 auto;
+      overflow: visible;
+
+      ul {
+        @include clearfix;
+        width: 200000px;
+      }
+
+      li {
+        // なぜ消した?
+        float: left;
+        width: 640px;
+
+        a {
+          @include link-decoration(#fff, #fff, none, none);
+          position: relative;
+          display: block;
+          width: 100%;
+          height: $pickup-height;
+          overflow: hidden;
+
+          &:hover {
+            @include hover-opacity;
+
+            .category-label,
+            .post-heading {
+              // color: $highlight-secondary-color;
+            }
+          }
+
+          .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+          }
+
+          .post {
+            &-overview {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+
+              padding: 0 30px 24px 30px;
+            }
+
+            &-category {
+              color: $highlight-color;
+              font-weight: bold;
+            }
+
+            &-heading {
+              font-weight: bold;
+              font-size: fz(24);
+            }
+
+            &-date,
+            &-comment-num {
+              display: inline-block;
+              font-size: fz(12);
+            }
+
+            &-comment-num {
+              margin-left: 10px;
+              padding-left: 20px;
+              background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat;
+            }
+          }
+        }
+      }
+    } //.hero-slider-inner
+
+    &-control {
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      .direction {
+        a {
+          position: absolute;
+          display: block;
+          width: 40px;
+          height: 40px;
+          margin-top: ($pickup-height/2) - 20;
+          background-position: center center;
+          background-repeat: no-repeat;
+          @include hide-text;
+
+          &:hover {
+            @include hover-opacity;
+          }
+        }
+
+        &-prev {
+          left: 20px;
+          background-image: url(/assets/images/index/btn-slider-prev.png);
+        }
+
+        &-next {
+          right: 20px;
+          background-image: url(/assets/images/index/btn-slider-next.png);
+        }
+      }
+
+      .pager {
+        position: absolute;
+        top: 370px;
+        left: 50%;
+        width: 100%;
+        margin-left: -320px;
+
+        ul {
+          width: 640px;
+          text-align: center;
+          letter-spacing: ls(inline-block);
+        }
+
+        li {
+          display: inline-block;
+          letter-spacing: normal;
+
+          + li {
+            margin-left: 15px;
+          }
+        }
+
+        a {
+          display: block;
+          width: 6px;
+          height: 6px;
+          background-color: #999;
+          border-radius: 100%;
+          @include hide-text;
+
+          &.active,
+          &:hover {
+            background-color: $highlight-secondary-color;
+          }
+        }
+      }
+    } //.hero-slider-control
+  }
+}
+
+// ---------------------------------------------------------------------
 // slider home motion
 // API: pickup
 // ---------------------------------------------------------------------
