@@ -21,9 +21,26 @@ import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 // app
 import {User} from '../../../app/User';
 
+// @since 2016-09-20
+import { SPViewCategoryOption } from '../categories/SPViewCategoryOption';
+
 /**
  * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>
  * SPViewCategoryRoot > CategoryRootDom から call されます
+ * **update: 2016-0912**
+ *
+ * - タブが廃止
+ * - 新着記事のみ
+ * - PICKUP, HEADLINE 追加
+ *
+ * 次のように変更します
+ *
+ * - exe から直接実行
+ * - headline, pickup 取得機能実装
+ *
+ * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
+ * @see https://github.com/undotsushin/undotsushin/issues/1010
+ * @see https://github.com/undotsushin/undotsushin/issues/1095
  */
 // export class SPViewCategory extends SPViewArchive {
 // @since 2016-09-16 parent class changed
@@ -53,5 +70,10 @@ export class SPViewCategory extends SPViewArchiveInfinite {
      * @type {CategoryAuth|Category}
      */
     this.slug = slug;
+
+    // @since 2016-09-20
+    // 記事一覧に pickup, headline を表示させる
+    const categoryOption = new SPViewCategoryOption(slug);
+    categoryOption.start();
   }
 }

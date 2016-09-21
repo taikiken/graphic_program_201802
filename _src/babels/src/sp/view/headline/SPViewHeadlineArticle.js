@@ -47,10 +47,10 @@ const playMark = (mediaType) => {
  * sp headline 出力を汎用化
  * @since 2016-09-16
  */
-export class SPViewHeadline extends React.Component {
+export class SPViewHeadlineArticle extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link SPViewHeadline.propTypes}
+   * @param {Object} props React props プロパティー {@link SPViewHeadlineArticle.propTypes}
    */
   constructor(props) {
     super(props);
@@ -118,7 +118,7 @@ export class SPViewHeadline extends React.Component {
  *  home: boolean
  * }}
  */
-SPViewHeadline.propTypes = {
+SPViewHeadlineArticle.propTypes = {
   index: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string.isRequired,

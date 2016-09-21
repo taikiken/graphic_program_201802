@@ -32,7 +32,9 @@
       endif;
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
+      <div id="js-headline"></div>
       <div id="category-container"></div>
+      <div id="board-container-more"></div>
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->

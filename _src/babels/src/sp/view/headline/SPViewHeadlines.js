@@ -12,16 +12,37 @@
 
 // view
 import { View } from '../../../view/View';
-import { SPViewHeadline } from './SPViewHeadline';
+import { SPViewHeadlineArticle } from './SPViewHeadlineArticle';
 
 // app
 import { Empty } from '../../../app/const/Empty';
+import { Message } from '../../../app/const/Message';
 
 // data
 import { Safety } from '../../../data/Safety';
 
 // React
 const React = self.React;
+
+/**
+ * home 以外はタイトルを表示
+ * @param {boolean} home home か否かの真偽値
+ * @return {?XML} home 以外はタイトルを返します
+ * @private
+ * @static
+ */
+const headlineTitle = (home) => {
+  if (home) {
+    return null;
+  }
+
+  return (
+    <div className="headline-heading">
+      <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
+      <span className="headline-heading-ruby">{Message.HEADLINE_TITLE}</span>
+    </div>
+  );
+};
 
 /**
  * SP: headline 記事一覧を出力します
@@ -55,12 +76,13 @@ export class SPViewHeadlines extends React.Component {
     return (
       <div className="headline-root">
         <div className="headline">
+          {headlineTitle(this.props.home)}
           <ul className="board-small">
             {
               list.map((dae, i) => {
                 const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
                 return (
-                  <SPViewHeadline
+                  <SPViewHeadlineArticle
                     key={`headline-${dae.id}`}
                     index={i}
                     id={String( dae.id )}

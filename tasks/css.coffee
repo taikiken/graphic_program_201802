@@ -97,6 +97,7 @@ gulp.task 'css:dev', ->
 ##    sourceRoot: ['./_src/app', './_src/scss']
 ##    sourceRoot: ['../../../app', '../../../scss']
 #  }
+  .pipe $.replaceTask patterns: patterns
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** css:dev ***'

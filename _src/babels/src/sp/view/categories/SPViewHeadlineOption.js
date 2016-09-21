@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/09/20 - 15:37
+ * @date 2016/09/21 - 19:34
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,25 +11,25 @@
  */
 
 // view
-import { View } from '../View';
-
-// view/headlines
-import { ViewHeadlines } from '../headlines/ViewHeadlines';
+import { View } from '../../../view/View';
 
 // view/categories
-import { ViewHeadlineAd } from './ViewHeadlineAd';
+import { ViewHeadlineAd } from '../../../view/categories/ViewHeadlineAd';
+
+// sp/view/headline
+import { SPViewHeadlines } from '../headline/SPViewHeadlines';
 
 // React
 const React = self.React;
 
 /**
- * 記事一覧 headline を表示するための基本コンテナを作成します
+ * SP: 記事一覧 headline を表示するための基本コンテナを作成します
  * @since 2016-09-20
  */
-export class ViewHeadlineOption extends React.Component {
+export class SPViewHeadlineOption extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewHeadlineOption.propTypes}
+   * @param {Object} props プロパティ {@link SPViewHeadlineOption.propTypes}
    */
   constructor(props) {
     super(props);
@@ -48,7 +48,7 @@ export class ViewHeadlineOption extends React.Component {
       <div className="headline-section">
         <div className="headline-outer">
           <div id="headline-container">
-            <ViewHeadlines
+            <SPViewHeadlines
               list={list}
               callback={this.props.callback}
               home={this.props.home}
@@ -80,7 +80,7 @@ export class ViewHeadlineOption extends React.Component {
  *  browser: string
  * }}
  */
-ViewHeadlineOption.propTypes = {
+SPViewHeadlineOption.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
   callback: React.PropTypes.func.isRequired,

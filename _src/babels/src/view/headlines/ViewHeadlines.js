@@ -63,7 +63,7 @@ export class ViewHeadlines extends React.Component {
               const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
               return (
                 <ViewHeadlineArticle
-                  key={`headline-${ dae.id}`}
+                  key={`headline-${dae.id}`}
                   index={i}
                   id={String(dae.id)}
                   slug={dae.categories.slug}

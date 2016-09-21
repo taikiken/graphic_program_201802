@@ -115,7 +115,10 @@ import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
 import {SPViewNews} from './sp/view/home/SPViewNews';
 
 // category
-import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
+// @since 2016-09-20 remove
+// import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
+// @since 2016-0920
+import { SPViewCategory } from './sp/view/category/SPViewCategory';
 
 // search
 import {SPViewSearch} from './sp/view/SPViewSearch';
@@ -247,7 +250,7 @@ let UT = {
         SPViewNews
       },
       category: {
-        SPViewCategoryRoot
+        SPViewCategory
       },
       header: {
         SPViewHeaderUser,
