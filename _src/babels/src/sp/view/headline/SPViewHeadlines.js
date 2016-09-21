@@ -86,7 +86,7 @@ export class SPViewHeadlines extends React.Component {
                     key={`headline-${dae.id}`}
                     index={i}
                     id={String( dae.id )}
-                    slug={dae.categories.all[0].slug}
+                    slug={dae.categories.slug}
                     categories={dae.categories.all}
                     url={dae.url}
                     date={dae.displayDate}

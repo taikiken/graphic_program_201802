@@ -34,6 +34,7 @@ export class SPViewNews extends SPViewArchiveInfinite {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
+    console.log('SPViewNews', element, moreElement);
     super( element, moreElement, null, option );
     /**
      * Action instance

@@ -87,6 +87,8 @@ export class CategoriesDae {
      * @protected
      */
     this._slugsClasses = slugs.join('-');
+
+    this._slug = cats.length > 0 ? cats[0].slug : '';
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -155,7 +157,7 @@ export class CategoriesDae {
    * @return {string} category 配列の先頭 slug を返します
    */
   get slug():string {
-    return this.all[0].slug;
+    return this._slug;
   }
   // ---------------------------------------------------
   //  METHOD

@@ -354,25 +354,29 @@ export let SPArchiveNode = React.createClass( {
     };
   },
   render: function() {
+    console.log('SPArchiveNode.render', this.props);
     let home = this.props.home;
     let length = this.state.list.length;
     let type = this.props.type;
     let adSp = this.props.adSp;
 
+    /**
+     * @TODO: 「新着記事タイトル」
+     */
+
     // dom出力する
     return (
       <div ref="boardRout" className="board-stack board-large">
         {
+          // -------------------------------------------
+          // @TODO: 「新着記事タイトル」
+          // -------------------------------------------
           // loop start
           this.state.list.map( function( dae, i ) {
 
             let commentsPopular = dae.commentsPopular;
             let commentsTotal = dae.commentsCount;
             let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
-
-            // let category = ( label ):string => {
-            //   return !label ? '' : <span className="category-label">{label}</span>;
-            // };
 
             let recommend = '';
             if ( !!dae.isRecommend && home ) {
@@ -383,7 +387,7 @@ export let SPArchiveNode = React.createClass( {
             return (
               <div key={'archive-article-' + type + '-' + dae.id} className={`archive-article archive-article-${i}`}>
                 <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
-                  <a className="post" href={dae.url}>
+                   <a className="post" href={dae.url}>
                     <ThumbnailDom
                       mediaType={dae.mediaType}
                       thumbnail={thumbnail}
@@ -392,7 +396,7 @@ export let SPArchiveNode = React.createClass( {
                     <h2 className="post-heading">{dae.title}</h2>
                     <div className="post-data">
                       {recommend}
-                      <p className={'post-category post-category-' + dae.categories.all[0].slug}>
+                      <p className="post-category">
                         <CategoryLabelNode
                           categories={dae.categories.all}
                           id={`archive-label-${dae.id}`}
@@ -402,6 +406,7 @@ export let SPArchiveNode = React.createClass( {
                       <p className="post-date">{dae.displayDate}</p>
                       <div className="post-excerpt-text">{dae.description}</div>
                     </div>
+
                   </a>
                   <PopularDom
                     key={'comment-' + type + '-' + dae.id}
