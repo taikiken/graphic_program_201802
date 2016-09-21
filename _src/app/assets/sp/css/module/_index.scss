@@ -136,68 +136,65 @@
 //  }
 //}
 
-//// ---------------------------
-//// motion slider setting
-//// ---------------------------
-//@import "motion_slider";
 
 
 
 
+// _general.scss へ汎用化のため移動
 // headline
 // トップページ ヘッドライン
-.headline {
-  .board-small {
-    .board-item {
-      // &:nth-child(1), &:nth-child(2) {
-      //   border-top: none;
-      // }
-      &:last-child {
-        border-bottom: none;
-      }
+// .headline {
+//   .board-small {
+//     .board-item {
+//       // &:nth-child(1), &:nth-child(2) {
+//       //   border-top: none;
+//       // }
+//       &:last-child {
+//         border-bottom: none;
+//       }
 
-      .post {
-        &-thumb {}
-        &-heading {}
-        &-category {}
-        &-data {}
+//       .post {
+//         &-thumb {}
+//         &-heading {}
+//         &-category {}
+//         &-data {}
 
-        &:hover {
-          .post-thumb {}
-          .post-heading {}
-        }
-      }
-    } //.post-list-item
-  }
-}
+//         &:hover {
+//           .post-thumb {}
+//           .post-heading {}
+//         }
+//       }
+//     } //.post-list-item
+//   }
+// }
 
-.headline-outer {
-  .sponsor-link {
-    padding-right: perCalc(20);
-    padding-left: perCalc(20);
-    border-top: 1px solid $border-primary-color;
+// .headline-outer {
+//   .sponsor-link {
+//     padding-right: perCalc(20);
+//     padding-left: perCalc(20);
+//     border-top: 1px solid $border-primary-color;
 
-    .adgLink,
-    .adsWrapper {
-      height: auto !important;
-    }
+//     .adgLink,
+//     .adsWrapper {
+//       height: auto !important;
+//     }
 
-    .adsImgContainer,
-    .adsBody {
-      vertical-align: top !important;
-    }
+//     .adsImgContainer,
+//     .adsBody {
+//       vertical-align: top !important;
+//     }
 
-    .adsImgContainer {
-      width: 70px !important;
-      height: auto !important;
-      min-height: 60px;
-      padding: 0 !important;
-      padding-right: 10px !important;
-    }
+//     .adsImgContainer {
+//       width: 70px !important;
+//       height: auto !important;
+//       min-height: 60px;
+//       padding: 0 !important;
+//       padding-right: 10px !important;
+//     }
 
-    .adsBody {}
-  }
-}
+//     .adsBody {}
+//   }
+// }
 
 
 
@@ -205,9 +202,7 @@
 
 // sns-pr
 .sns-pr {
-  padding-top: (20/2)+px;
-  padding-right: perCalc(20);
-  padding-left: perCalc(20);
+  padding: (20/2)+px perCalc(20);
   background-color: #eee;
 
   &-outer {
