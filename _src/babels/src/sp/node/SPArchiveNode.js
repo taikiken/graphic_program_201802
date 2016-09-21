@@ -361,7 +361,7 @@ export let SPArchiveNode = React.createClass( {
 
     // dom出力する
     return (
-      <div ref="boardRout" className="board-stack">
+      <div ref="boardRout" className="board-stack board-large">
         {
           // loop start
           this.state.list.map( function( dae, i ) {
