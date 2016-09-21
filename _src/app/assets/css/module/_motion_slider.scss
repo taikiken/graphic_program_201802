@@ -195,9 +195,49 @@
       }
     }
 
+    // @since 2016-09-20
+    // swipe 実装のために ul.pickup-slider left: 0 にする
+    // wrapper div.pickup-slider-wrapper を作成しこちらで移動させる
+    .pickup-slider-wrapper {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    // slider の数で位置を調整する
+    // .hero-slider.pickup-slider-length-NN
+    // @type {number} NN slider の数, 1 ~ 5
+    &.pickup-slider-length-1 {
+      .pickup-slider-wrapper {
+        left: -$slider-width * 1
+      }
+    }
+    &.pickup-slider-length-2 {
+      .pickup-slider-wrapper {
+        left: -$slider-width * 2
+      }
+    }
+    &.pickup-slider-length-3 {
+      .pickup-slider-wrapper {
+        left: -$slider-width * 3
+      }
+    }
+    &.pickup-slider-length-4 {
+      .pickup-slider-wrapper {
+        left: -$slider-width * 4
+      }
+    }
+    &.pickup-slider-length-5 {
+      .pickup-slider-wrapper {
+        left: -$slider-width * 5
+      }
+    }
+
     .pickup-slider {
       position: absolute;
-      left: -$slider-width * 5;
+      //left: -$slider-width * 5;
+      // @since 2016-09-20
+      left: 0;
       top: 0;
 
       // default position

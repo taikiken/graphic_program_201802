@@ -120,18 +120,20 @@ export class ViewCarousel extends React.Component {
       // JSX
       return (
         <div className="hero-sec">
-          <div className={`hero-slider pickup-container slide-${this.state.index}`}>
+          <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${this.state.index}`}>
             {/* slider */}
             <div className="hero-slider-inner">
-              <ViewPickupSlider
-                list={list}
-                sp={this.props.sp}
-                home={this.props.home}
-                next={this.bindNext}
-                prev={this.bindPrev}
-                play={this.bindPlay}
-                pause={this.bindPause}
-              />
+              <div className="pickup-slider-wrapper">
+                <ViewPickupSlider
+                  list={list}
+                  sp={this.props.sp}
+                  home={this.props.home}
+                  next={this.bindNext}
+                  prev={this.bindPrev}
+                  play={this.bindPlay}
+                  pause={this.bindPause}
+                />
+              </div>
             </div>
             <div className="hero-slider-control">
               {/* prev / next */}
@@ -155,10 +157,10 @@ export class ViewCarousel extends React.Component {
           {/* #hero-sec */}
         </div>
       );
-    } else {
-      // データがない時は表示しない
-      return null;
     }
+
+    // データがない時は表示しない
+    return null;
   }
   // --------------------------------------------
   // delegate
