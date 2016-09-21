@@ -292,7 +292,7 @@ export class ViewPickupSlider extends React.Component {
   drag(x) {
     // カルーセルアニメーションは translateX で動かしています
     // 計算を簡略化するためドラッグは left を使用します
-    const style = { left: `${x}px` };
+    const style = { left: `${x}px`, transitionDuration: '0s' };
     this.setState({ style });
   }
   /**
@@ -305,9 +305,10 @@ export class ViewPickupSlider extends React.Component {
    */
   move(x) {
     this.dragging = 0;
-    this.timer = setTimeout(() => {
-      this.setState({ style: {} });
-    }, 100);
+    // this.timer = setTimeout(() => {
+    //   this.setState({ style: {} });
+    // }, 100);
+    this.setState({ style: {} });
 
     if (x > 0) {
       // <- drag: prev

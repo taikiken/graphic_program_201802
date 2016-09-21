@@ -36,7 +36,7 @@ export class ViewPager extends React.Component {
    */
   render() {
     const props = this.props;
-    const no = props.index - props.length;
+    const no = props.index;
     return (
       <li className={`pager-item pager-${no}`}>
         <a href={`#pickup-${props.index}`} className="pager-link" onClick={this.boundClick} >{no}</a>

@@ -243,7 +243,7 @@
       // default position
       transform: translateX(0);
 
-      transition-property: transform;
+      transition-property: transform, left;
       transition-duration: 0.5s;
     }
 

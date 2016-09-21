@@ -165,7 +165,6 @@ export class ViewCarousel extends React.Component {
               <div className="pager">
                 <ViewPagers
                   list={list}
-                  offset={list.length}
                   onPager={this.boundPager}
                   sp={this.props.sp}
                 />
@@ -203,7 +202,7 @@ export class ViewCarousel extends React.Component {
    * slider 数を確定させます<br>
    * list の中に重複データが入っていることがあり `list.length` が使用できないために<br>
    * `ViewPickupSlider` マウント後通知を受けます
-   * @param length
+   * @param {number} length slider 数
    */
   updateLength(length) {
     this.setState({ length });

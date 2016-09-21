@@ -37,7 +37,8 @@ export class ViewPagers extends React.Component {
     const props = this.props;
     const list = props.list;
     const length = list.length;
-    let offset = props.offset;
+    // @type {number} - 開始位置
+    let index = 0;
     const onPager = props.onPager;
 
     if (!props.sp) {
@@ -47,9 +48,9 @@ export class ViewPagers extends React.Component {
             list.map((article) => {
               return (
                 <ViewPager
-                  key={`pager-${article.id}`}
+                  key={`pager-${index}`}
                   id={String(article.id)}
-                  index={offset++}
+                  index={index++}
                   length={length}
                   onPager={onPager}
                 />
@@ -67,10 +68,9 @@ export class ViewPagers extends React.Component {
 /**
  * プロパティ
  * @static
- * @type {{offset: number, list: []<ArticleDae>, onPager: function}}
+ * @type {{list: []<ArticleDae>, onPager: function}}
  */
 ViewPagers.propTypes = {
-  offset: React.PropTypes.number.isRequired,
   list: React.PropTypes.array.isRequired,
   onPager: React.PropTypes.func.isRequired,
   sp: React.PropTypes.bool.isRequired
