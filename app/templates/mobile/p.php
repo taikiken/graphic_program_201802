@@ -230,7 +230,7 @@
       ?>
       <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
       <!-- #1023 Syn.extension  -->
-      <div id="logly-lift-4227758"></div>
+      <div id="logly-lift-4227758" class="recommend_articles"></div>
       <script charset="UTF-8">
         (function(){
           var _lgy_lw = document.createElement("script");
@@ -251,7 +251,7 @@
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
       <?php endif; ?>
-      <div id="_popIn_recommend"></div>
+      <div id="_popIn_recommend" class="recommend_articles"></div>
       <script type="text/javascript">
         (function() {
           var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
