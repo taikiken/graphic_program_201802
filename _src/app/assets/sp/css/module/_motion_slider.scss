@@ -13,7 +13,9 @@
 // hero-sec
 // トップページ メインビジュアル
 .hero {
-  $pickup-height: 275px;
+  $pickup-height: 204px;
+  $pickup-anchor-heigt: 152px;
+  $pickup-overview-heigt: 52px;
 
   &-sec {
     background-color: #000;
@@ -44,7 +46,7 @@
         a {
           position: relative;
           display: block;
-          height: (360/2)+px;
+          height: $pickup-anchor-heigt;
           // background-color: #061533;
         }
 
@@ -58,15 +60,15 @@
 
           &-overview {
             position: absolute;
-            bottom: -(190/2)+px;
+            bottom: -($pickup-overview-heigt);
             width: 100%;
-            height: (190/2)+px;
-            padding: (28/2)+px perCalc(20) ($posY+18)+px;
+            height: $pickup-overview-heigt;
+            padding: 0.5em perCalc(20) ($posY+18)+px;
             background-color: #061533;
           }
 
           &-heading {
-            height: 40px;
+            height: 1.5em;
             overflow: hidden;
             color: #fff;
             font-size: fz(26/2);
