@@ -68,8 +68,6 @@ export class SPViewArchiveInfinite extends SPViewArchive {
 
     // this._articleRendered が null の時だけ ReactDOM.render する
     if (this.articleRendered === null) {
-      console.log('SPViewArchiveInfinite articleRendered', this.articleRendered);
-
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this.articleRendered = ReactDOM.render(
         <SPArchiveNode
@@ -85,7 +83,6 @@ export class SPViewArchiveInfinite extends SPViewArchive {
         />,
         this.element
       );
-      console.log('SPViewArchiveInfinite home', this.home);
 
       if (this.home) {
         // ----------------------------------------------

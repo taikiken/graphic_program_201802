@@ -122,7 +122,10 @@ export class ViewCarousel extends React.Component {
      * @type {Function}
      */
     this.bindPause = this.pause.bind(this);
-
+    /**
+     * bind 済み updateLength, スライド数の通知を受けます
+     * @type {Function}
+     */
     this.bindLength = this.updateLength.bind(this);
   }
   /**
@@ -248,6 +251,9 @@ export class ViewCarousel extends React.Component {
     event.preventDefault();
     this.prev();
   }
+  /**
+   * 次のスライドへ移動します
+   */
   next() {
     // count up します
     let index = this.position + 1;
@@ -258,6 +264,9 @@ export class ViewCarousel extends React.Component {
     // change slide
     this.jump(index);
   }
+  /**
+   * 前のスライドへ移動します
+   */
   prev() {
     // count down
     let index = this.position - 1;
@@ -268,26 +277,26 @@ export class ViewCarousel extends React.Component {
     // change slide
     this.jump( index );
   }
-  nextNext() {
-    // count up します
-    let index = this.position + 2;
-    // last を超えたら 0 に戻す
-    if (index > this.last) {
-      index = this.last - index - 1;
-    }
-    // change slide
-    this.jump( index );
-  }
-  prevPrev() {
-    // count down
-    let index = this.position - 2;
-    // 0 未満になったら last へ戻す
-    if (index < 0) {
-      index = this.last + index + 1;
-    }
-    // change slide
-    this.jump( index );
-  }
+  // nextNext() {
+  //   // count up します
+  //   let index = this.position + 2;
+  //   // last を超えたら 0 に戻す
+  //   if (index > this.last) {
+  //     index = this.last - index - 1;
+  //   }
+  //   // change slide
+  //   this.jump( index );
+  // }
+  // prevPrev() {
+  //   // count down
+  //   let index = this.position - 2;
+  //   // 0 未満になったら last へ戻す
+  //   if (index < 0) {
+  //     index = this.last + index + 1;
+  //   }
+  //   // change slide
+  //   this.jump( index );
+  // }
   /**
    * 指定 index スライドに移動します<br>
    * `this.pause()` し一時停止します<br>

@@ -57,8 +57,7 @@ export class ViewArticleThumbnail extends React.Component {
 
       // https://github.com/undotsushin/undotsushin/issues/468
       const imgStyle = {
-        'background': `url(${this.props.thumbnail}) no-repeat center center`,
-        'backgroundSize': 'cover'
+        'background': `url(${this.props.thumbnail}) center center / cover no-repeat`
       };
 
       return (
