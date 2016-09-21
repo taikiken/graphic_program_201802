@@ -168,6 +168,21 @@ export class ViewPickupSlider extends React.Component {
         this.prepareSwipe();
       }
     }
+
+    // 親コンテナに slider 数の正確な値を通知します
+    this.dispatchLength();
+  }
+  /**
+   * pickupSlider > li length を親コンテナに通知します
+   */
+  dispatchLength() {
+    const items = this.refs.pickupSlider.getElementsByTagName('li');
+    if (items.length === 1) {
+      // 親コンテナに slider 数の正確な値を
+      this.props.length(1);
+    } else {
+      this.props.length(items.length / 3);
+    }
   }
   // --------------------------------------------
   // swipe
@@ -343,5 +358,6 @@ ViewPickupSlider.propTypes = {
   next: React.PropTypes.func.isRequired,
   prev: React.PropTypes.func.isRequired,
   play: React.PropTypes.func.isRequired,
-  pause: React.PropTypes.func.isRequired
+  pause: React.PropTypes.func.isRequired,
+  length: React.PropTypes.func.isRequired
 };

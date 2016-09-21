@@ -55,7 +55,8 @@ export class ViewCarousel extends React.Component {
      */
     this.state = {
       index: props.index,
-      style: {}
+      style: {},
+      length: props.list.length
     };
     /**
      * animation するための Polling instance
@@ -101,10 +102,28 @@ export class ViewCarousel extends React.Component {
      */
     this.position = props.index;
 
+    /**
+     * bind 済み next
+     * @type {Function}
+     */
     this.bindNext = this.next.bind(this);
+    /**
+     * bind 済み prev
+     * @type {Function}
+     */
     this.bindPrev = this.prev.bind(this);
+    /**
+     * bind 済み play
+     * @type {Function}
+     */
     this.bindPlay = this.play.bind(this);
+    /**
+     * bind 済み pause
+     * @type {Function}
+     */
     this.bindPause = this.pause.bind(this);
+
+    this.bindLength = this.updateLength.bind(this);
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
@@ -120,7 +139,7 @@ export class ViewCarousel extends React.Component {
       // JSX
       return (
         <div className="hero-sec">
-          <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${this.state.index}`}>
+          <div className={`hero-slider pickup-container pickup-slider-length-${this.state.length} slide-${this.state.index}`}>
             {/* slider */}
             <div className="hero-slider-inner">
               <div className="pickup-slider-wrapper">
@@ -132,6 +151,7 @@ export class ViewCarousel extends React.Component {
                   prev={this.bindPrev}
                   play={this.bindPlay}
                   pause={this.bindPause}
+                  length={this.bindLength}
                 />
               </div>
             </div>
@@ -179,6 +199,15 @@ export class ViewCarousel extends React.Component {
   }
   // --------------------------------------------
   // carousel
+  /**
+   * slider 数を確定させます<br>
+   * list の中に重複データが入っていることがあり `list.length` が使用できないために<br>
+   * `ViewPickupSlider` マウント後通知を受けます
+   * @param length
+   */
+  updateLength(length) {
+    this.setState({ length });
+  }
   /**
    * Polling.PAST event を bind しアニメーションを開始します
    */
