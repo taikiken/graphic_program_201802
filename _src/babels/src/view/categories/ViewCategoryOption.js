@@ -55,11 +55,11 @@ export class ViewCategoryOption extends View {
   constructor(slug:string = 'all') {
     super(null, null);
 
-    const boundFail = this.fail.bind(this);
+    // const boundFail = this.fail.bind(this);
     const callback = {};
     callback[Model.COMPLETE] = this.done.bind(this);
-    callback[Model.UNDEFINED_ERROR] = boundFail;
-    callback[Model.RESPONSE_ERROR] = boundFail;
+    // callback[Model.UNDEFINED_ERROR] = boundFail;
+    // callback[Model.RESPONSE_ERROR] = boundFail;
 
     this.action = new ModelCategoriesSlug(slug, callback);
     this.boundSafety = this.executeSafely.bind(this);
@@ -81,7 +81,7 @@ export class ViewCategoryOption extends View {
     }
 
     const category = new CategoriesSlugDae(response);
-    console.log('ViewCategoryOption.done', category.pickup, category.headline);
+    // console.log('ViewCategoryOption.done', category.pickup, category.headline);
 
     if (category.pickup.has()) {
       this.pickup(category);
@@ -90,12 +90,12 @@ export class ViewCategoryOption extends View {
       this.headline(category);
     }
   }
-  /**
-   * API 失敗 callback
-   */
-  fail():void {
-    return;
-  }
+  // /**
+  //  * API 失敗 callback
+  //  */
+  // fail():void {
+  //   return;
+  // }
   /**
    * 記事一覧に pickup を表示します
    * @param {CategoriesSlugDae} category JSON
