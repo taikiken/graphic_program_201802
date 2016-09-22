@@ -116,6 +116,8 @@ export class SPViewArticles extends React.Component {
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
+    // hasNext を元に More View button の表示非表示を決める
+    this.props.boundMore(this.props.action.hasNext());
   }
   /**
    * 次の読み込みから表示を更新します
@@ -126,6 +128,7 @@ export class SPViewArticles extends React.Component {
   updateList(list, offset, length) {
     // state を変更し appendChild + isotope を行う
     this.setState({ list, offset, length });
+    this.props.boundMore(this.props.action.hasNext());
   }
 }
 /**
