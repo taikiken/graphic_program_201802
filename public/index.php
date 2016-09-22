@@ -32,11 +32,13 @@ else :
 
     # vagrant - hostname
     case 'undotsushin.local' :
+    case 'sportsbull.local'  :
       define('UT_ENV', 'LOCAL');
       break;
 
     # dev - t2.small
     case 'dev.undotsushin.com' :
+    case 'dev.sportsbull.jp'   :
       define('UT_ENV', 'DEVELOP');
       break;
 
@@ -47,6 +49,7 @@ else :
 
     # stg - t2.small
     case 'stg.undotsushin.com' :
+    case 'stg.sportsbull.jp'   :
       define('UT_ENV', 'STAGING');
       break;
 
