@@ -17,6 +17,8 @@ import { MediaType } from '../../../app/const/MediaType';
 // node
 import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
+// view
+import { ViewArticleThumbnail } from '../../../view/articles/ViewArticleThumbnail';
 
 // Ga
 import { Ga } from '../../../ga/Ga';
@@ -28,20 +30,20 @@ const React = self.React;
 // --------------------------------------------
 // private
 
-/**
- * media type が `MediaType.VIDEO` かを判定し<br>
- * img tag か null を返します
- * @since 2016-09-16
- * @param {string} mediaType 比較対象 media_type
- * @return {?XML} img.post-thumb-overlay-movie tag か null を返します
- */
-const playMark = (mediaType) => {
-  if (mediaType === MediaType.VIDEO) {
-    return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
-  } else {
-    return null;
-  }
-};
+// /**
+//  * media type が `MediaType.VIDEO` かを判定し<br>
+//  * img tag か null を返します
+//  * @since 2016-09-16
+//  * @param {string} mediaType 比較対象 media_type
+//  * @return {?XML} img.post-thumb-overlay-movie tag か null を返します
+//  */
+// const playMark = (mediaType) => {
+//   if (mediaType === MediaType.VIDEO) {
+//     return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
+//   } else {
+//     return null;
+//   }
+// };
 
 /**
  * sp headline 出力を汎用化
@@ -70,12 +72,15 @@ export class SPViewHeadlineArticle extends React.Component {
     return (
       <li className={`board-item board-item-${props.index}`}>
         <a className="post" href={props.url} onClick={this.boundGa}>
-          <figure className="post-thumb post-thumb-headline">
-            <img src={props.thumbnail} alt={props.title}/>{playMark(props.mediaType)}
-          </figure>
+          <ViewArticleThumbnail
+            mediaType={props.mediaType}
+            thumbnail={props.thumbnail}
+            title={props.title}
+            recommend={false}
+          />
           <div className="post-data">
             <h3 className="post-heading">{props.title}</h3>
-            <p className={`post-category post-category-${props.slug}`}>
+            <p className={`post-category post-category-${props.slug || 'x'}`}>
               <CategoryLabelNode
                 categories={props.categories}
                 id={`archive-label-${props.id}`}

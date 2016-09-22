@@ -14,7 +14,7 @@
 import { View } from '../../view/View';
 
 // app
-import { Message } from '../../app/const/Message';
+// import { Message } from '../../app/const/Message';
 
 // // data
 // import { Result } from '../../data/Result';
@@ -32,7 +32,9 @@ import { SPViewArchive } from './SPViewArchive';
 import { SPViewMoreButton } from './articles/SPViewMoreButton';
 
 // sp/node
-import {SPArchiveNode} from '../node/SPArchiveNode';
+// import {SPArchiveNode} from '../node/SPArchiveNode';
+
+import { SPViewArticles } from './articles/SPViewArticles';
 
 // React
 // let React = self.React;
@@ -70,15 +72,26 @@ export class SPViewArchiveInfinite extends SPViewArchive {
     if (this.articleRendered === null) {
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this.articleRendered = ReactDOM.render(
-        <SPArchiveNode
+        // <SPArchiveNode
+        //   list={articlesList}
+        //   offset={this.request.offset}
+        //   length={this.request.length}
+        //   action={this.action}
+        //   scope={this}
+        //   moreButton={this.moreButton.bind(this)}
+        //   home={this.home}
+        //   type={Message.NEWS}
+        //   adSp=""
+        // />,
+        // @since 2016-09-21 changed
+        <SPViewArticles
           list={articlesList}
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
-          scope={this}
-          moreButton={this.moreButton.bind(this)}
+          callback={this.executeSafely.bind(this)}
+          boundMore={this.moreButton.bind(this)}
           home={this.home}
-          type={Message.NEWS}
           adSp=""
         />,
         this.element

@@ -97,7 +97,7 @@ ViewArticleThumbnail.propTypes = {
   mediaType: React.PropTypes.string.isRequired,
   thumbnail: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,
-  masonry: React.PropTypes.bool.isRequired,
-  action: React.PropTypes.object.isRequired,
-  recommend: React.PropTypes.bool.isRequired
+  recommend: React.PropTypes.bool.isRequired,
+  masonry: React.PropTypes.bool,
+  action: React.PropTypes.object
 };

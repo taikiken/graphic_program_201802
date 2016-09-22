@@ -56,12 +56,28 @@ export class Message {
   static get RECOMMEND_TITLE():string {
     return 'オススメ記事';
   }
+  // /**
+  //  * HEADLINE_TITLE 注目のニュース
+  //  * @return {string} 注目のニュース
+  //  */
+  // static get HEADLINE_TITLE():string {
+  //   return '注目のニュース';
+  // }
   /**
-   * HEADLINE_TITLE 注目のニュース
-   * @return {string} 注目のニュース
+   * HEADLINE_TITLE ヘッドラインニュース
+   * @since 2016-09-21 `注目のニュース` -> `ヘッドラインニュース`
+   * @return {string} ヘッドラインニュース
    */
   static get HEADLINE_TITLE():string {
-    return '注目のニュース';
+    return 'ヘッドラインニュース';
+  }
+  /**
+   * LATEST_TITLE 新着記事
+   * @since 2016-09-21
+   * @return {string} 新着記事
+   */
+  static get LATEST_TITLE():string {
+    return '新着記事';
   }
   /**
    * UNLOAD, 入力内容が取消しされます

@@ -41,9 +41,22 @@ let Isotope = self.Isotope;
  * <pre>
  */
 export class ViewArticlesMasonryInfinite extends React.Component {
+  /**
+   * プロパティと初期変数を設定します
+   * @param {Object} props React.props {@link ViewArticlesMasonryInfinite.propTypes}
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * state option
+     * @type {{
+     *  arranged: string,
+     *  list: array<ArticleDae>,
+     *  offset: number,
+     *  length: number
+     * }}
+     */
     this.state = {
       arranged: 'prepare',
       list: this.props.list,
@@ -70,7 +83,20 @@ export class ViewArticlesMasonryInfinite extends React.Component {
      */
     this.elements = [];
 
+    /**
+     * bind 済み appendImages<br>
+     * `componentDidUpdate` で event を bind します
+     * `imagesLoaded.always` event handler<br>
+     * 画像の読み込み完了を待って `isotope` レイアウトを行うために使用します
+     * @type {function}
+     */
     this.boundAppend = this.appendImages.bind(this);
+    /**
+     * bind 済み onImages<br>
+     * `imagesLoaded.always` event handler<br>
+     * 画像の読み込み完了を待って `isotope` レイアウトを行うために使用します
+     * @type {function}
+     */
     this.boundImages = this.onImages.bind(this);
   }
   /**
@@ -97,6 +123,7 @@ export class ViewArticlesMasonryInfinite extends React.Component {
 
     const img = imagesLoaded(elements);
     // 画像読み込む完了 event へ bind します
+    img.off('always', this.boundAppend);
     img.on('always', this.boundAppend);
     this.img = img;
   }

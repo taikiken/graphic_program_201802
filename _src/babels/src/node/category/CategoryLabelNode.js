@@ -32,11 +32,20 @@ export const CategoryLabelNode = React.createClass( {
     categories: React.PropTypes.array.isRequired
   },
   render: function() {
+    if (!this.props.categories.length) {
+      return null;
+    }
+    const id = this.props.id;
+    const index = this.props.index;
     return (
       <span className="category-label-wrapper">
         {
-          this.props.categories.map( ( category:Object, i:Number ) => {
-            return <span key={`ranking-${this.props.id}-${this.props.index}-${i}`} className="category-label">{category.label}</span>;
+          this.props.categories.map((category:Object, i:Number) => {
+            if (!category.label) {
+              return null;
+            }
+
+            return <span key={`ranking-${id}-${index}-${i}`} className="category-label">{category.label}</span>;
           } )
         }
       </span>

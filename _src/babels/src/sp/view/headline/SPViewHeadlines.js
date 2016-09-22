@@ -24,25 +24,25 @@ import { Safety } from '../../../data/Safety';
 // React
 const React = self.React;
 
-/**
- * home 以外はタイトルを表示
- * @param {boolean} home home か否かの真偽値
- * @return {?XML} home 以外はタイトルを返します
- * @private
- * @static
- */
-const headlineTitle = (home) => {
-  if (home) {
-    return null;
-  }
-
-  return (
-    <div className="headline-heading">
-      <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
-      <span className="headline-heading-ruby">{Message.HEADLINE_TITLE}</span>
-    </div>
-  );
-};
+// /**
+//  * home 以外はタイトルを表示
+//  * @param {boolean} home home か否かの真偽値
+//  * @return {?XML} home 以外はタイトルを返します
+//  * @private
+//  * @static
+//  */
+// const headlineTitle = (home) => {
+//   if (home) {
+//     return null;
+//   }
+//
+//   return (
+//     <div className="headline-heading">
+//       <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
+//       <span className="headline-heading-ruby">{Message.HEADLINE_TITLE}</span>
+//     </div>
+//   );
+// };
 
 /**
  * SP: headline 記事一覧を出力します
@@ -76,11 +76,15 @@ export class SPViewHeadlines extends React.Component {
     return (
       <div className="headline-root">
         <div className="headline">
-          {headlineTitle(this.props.home)}
-          <ul className="board-small">
+          {/* @since 2016-09-2 title 必須になりました */}
+          <div className="headline-heading">
+            <h2 className="headline-heading-title">{Message.HEADLINE_TITLE}ヘッドラインニュース</h2>
+          </div>
+          <ul className="board">
             {
+              /* @since 2016-09-20 16x9 thumbnail changed */
               list.map((dae, i) => {
-                const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
+                const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
                 return (
                   <SPViewHeadlineArticle
                     key={`headline-${dae.id}`}

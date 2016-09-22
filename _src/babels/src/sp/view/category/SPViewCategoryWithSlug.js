@@ -36,11 +36,12 @@ import {GaData} from '../../../ga/GaData';
 import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug';
 
 // sp:node
-import {SPArchiveNode} from '../../node/SPArchiveNode';
+// import {SPArchiveNode} from '../../node/SPArchiveNode';
 // import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 
 // sp/view
 import { SPViewMoreButton } from '../articles/SPViewMoreButton';
+import { SPViewArticles } from '../articles/SPViewArticles';
 
 // react
 let ReactDOM = self.ReactDOM;
@@ -89,6 +90,20 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
      * @type {number}
      */
     this.waiting = 0;
+
+    /**
+     * SPMoreViewNode instance
+     * @override
+     * @type {?ReactClass}
+     */
+    this.moreRendered = null;
+
+    /**
+     * SPArchiveNode instance
+     * @override
+     * @type {?ReactClass}
+     */
+    this.articleRendered = null;
   }
   /**
    * CATEGORY_INFO, ModelCategoriesSlug success event
@@ -231,38 +246,33 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
     // sequence な index のために必要
     let prevLast = this.articles.length;
 
-    // ------------------------------------------------
-    let moreButton = ( show:Boolean ):void => {
-      show = !!show;
-      // _moreRendered が null の時のみ state を update する
-      if ( this.moreRendered === null ) {
-        // チェックをパスし実行する
-        /**
-         * SPMoreViewNode instance
-         * @override
-         * @type {ReactClass|Object}
-         */
-        this.moreRendered = ReactDOM.render(
-          // <SPMoreViewNode
-          //   show={show}
-          //   action={this.action}
-          //   home={this.home}
-          //   slug={this.slug}
-          // />,
-          // @since 2016-09-16, more button changed
-          <SPViewMoreButton
-            show={show}
-            action={this.action}
-            element={this.moreElement}
-            home={this.home}
-            slug={this.slug}
-          />,
-          this.moreElement
-        );
-      } else {
-        this.moreRendered.updateShow(show);
-      }
-    };
+    // // ------------------------------------------------
+    // let moreButton = ( show:Boolean ):void => {
+    //   show = !!show;
+    //   // _moreRendered が null の時のみ state を update する
+    //   if ( this.moreRendered === null ) {
+    //     // チェックをパスし実行する
+    //     this.moreRendered = ReactDOM.render(
+    //       // <SPMoreViewNode
+    //       //   show={show}
+    //       //   action={this.action}
+    //       //   home={this.home}
+    //       //   slug={this.slug}
+    //       // />,
+    //       // @since 2016-09-16, more button changed
+    //       <SPViewMoreButton
+    //         show={show}
+    //         action={this.action}
+    //         element={this.moreElement}
+    //         home={this.home}
+    //         slug={this.slug}
+    //       />,
+    //       this.moreElement
+    //     );
+    //   } else {
+    //     this.moreRendered.updateShow(show);
+    //   }
+    // };
 
     // ------------------------------------------------
     // 既存配列に新規JSON取得データから作成した ArticleDae instance を追加する
@@ -282,21 +292,27 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
     if ( this.articleRendered === null ) {
 
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
-      /**
-       * SPArchiveNode instance
-       * @override
-       * @type {ReactClass|Object}
-       */
       this.articleRendered = ReactDOM.render(
-        <SPArchiveNode
+        // <SPArchiveNode
+        //   list={articlesList}
+        //   offset={this.request.offset}
+        //   length={this.request.length}
+        //   action={this.action}
+        //   scope={this}
+        //   moreButton={moreButton}
+        //   home={this.home}
+        //   type={Message.NEWS}
+        //   adSp={adSp}
+        // />,
+        // @since 2016-09-21 changed
+        <SPViewArticles
           list={articlesList}
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
-          scope={this}
-          moreButton={moreButton}
+          callback={this.executeSafely.bind(this)}
+          boundMore={this.moreButton.bind(this)}
           home={this.home}
-          type={Message.NEWS}
           adSp={adSp}
         />,
         this.element

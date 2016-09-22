@@ -51,7 +51,7 @@ export class SPCategory {
       // list
       // let archive = new UT.sp.view.category.SPViewCategoryRoot( slug, element );
       // @since 2016-09-20
-      let archive = new UT.sp.view.category.SPViewCategory(slug, element, button);
+      let archive = new UT.sp.view.category.SPViewCategoryWithSlug(slug, element, button);
       archive.start();
     }
   }

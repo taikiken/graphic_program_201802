@@ -119,6 +119,8 @@ import {SPViewNews} from './sp/view/home/SPViewNews';
 // import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
 // @since 2016-0920
 import { SPViewCategory } from './sp/view/category/SPViewCategory';
+// SPViewCategoryWithSlug が多分正解
+import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlug';
 
 // search
 import {SPViewSearch} from './sp/view/SPViewSearch';
@@ -250,7 +252,8 @@ let UT = {
         SPViewNews
       },
       category: {
-        SPViewCategory
+        SPViewCategory,
+        SPViewCategoryWithSlug
       },
       header: {
         SPViewHeaderUser,

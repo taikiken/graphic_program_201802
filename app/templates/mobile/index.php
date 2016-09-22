@@ -14,8 +14,8 @@
     <div id="pickup-container"></div><!-- /pickup -->
 
     <section class="main-sec">
-      <div class="headline-outer">
-        <div id="headline-container"></div><!-- /headline -->
+      <div class="headline-section">
+        <div id="headline-container"></div>
         <div class="sponsor-link">
           <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35255&targetID=adg_35255&displayid=2&adType=INFEED&async=true&tagver=2.0.0"></script>
         </div>
@@ -32,11 +32,11 @@
         </div><!-- /.sns-pr-outer -->
       </aside><!-- /.sns-pr -->
 
-      <div class="board-large">
-        <div id="board-container"></div><!--/archive-->
-        <div id="board-container-more"></div><!--/archive-more-->
-      </div><!-- /.board-large -->
-    </section><!-- /.main-sec -->
+      <div class="latest-section">
+        <div id="board-container"></div>
+        <div id="board-container-more"></div>
+      </div>
+    </section>
   </div>
 </div><!-- /.body-sec -->
 
