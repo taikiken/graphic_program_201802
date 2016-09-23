@@ -126,6 +126,11 @@ export class ViewPickupSlider extends React.Component {
      */
     this.boundCancel = this.touchCancel.bind(this);
 
+    /**
+     * Touching instance, swipe 実装に使用します<br>
+     * scroll を可能にしつつ side swipe(drag) を実現します
+     * @type {?Touching}
+     */
     this.touching = null;
   }
   /**
@@ -136,6 +141,7 @@ export class ViewPickupSlider extends React.Component {
   render() {
     const list = this.props.list;
     const needClone = list.length > 1;
+    const needFourth = list.length === 2;
     let count = 0;
 
     return (
@@ -151,6 +157,10 @@ export class ViewPickupSlider extends React.Component {
         {
           // 3.third clone
           list.map((article) => makeArticle(article, count++, needClone, this.props.home))
+        }
+        {
+          // 4.fourth clone
+          list.map((article) => makeArticle(article, count++, needFourth, this.props.home))
         }
       </ul>
     );
@@ -176,13 +186,13 @@ export class ViewPickupSlider extends React.Component {
    * pickupSlider > li length を親コンテナに通知します
    */
   dispatchLength() {
-    const items = this.refs.pickupSlider.getElementsByTagName('li');
-    if (items.length === 1) {
-      // 親コンテナに slider 数の正確な値を
-      this.props.length(1);
-    } else {
-      this.props.length(items.length / 3);
-    }
+    // const items = this.refs.pickupSlider.getElementsByTagName('li');
+    // if (items.length === 1) {
+    //   // 親コンテナに slider 数の正確な値を
+    //   this.props.length(1);
+    // } else {
+    //   this.props.length(items.length / 3);
+    // }
   }
   // --------------------------------------------
   // swipe

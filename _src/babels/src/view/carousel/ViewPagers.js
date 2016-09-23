@@ -36,6 +36,11 @@ export class ViewPagers extends React.Component {
   render() {
     const props = this.props;
     const list = props.list;
+    if (list.length < 2) {
+      // slide 数が 2未満の時は表示しない
+      return null;
+    }
+
     const length = list.length;
     // @type {number} - 開始位置
     let index = 0;
@@ -43,21 +48,23 @@ export class ViewPagers extends React.Component {
 
     if (!props.sp) {
       return (
-        <ul className="pager-list">
-          {
-            list.map((article) => {
-              return (
-                <ViewPager
-                  key={`pager-${index}`}
-                  id={String(article.id)}
-                  index={index++}
-                  length={length}
-                  onPager={onPager}
-                />
-              );
-            })
-          }
-        </ul>
+        <div className="pager">
+          <ul className="pager-list">
+            {
+              list.map((article) => {
+                return (
+                  <ViewPager
+                    key={`pager-${index}`}
+                    id={String(article.id)}
+                    index={index++}
+                    length={length}
+                    onPager={onPager}
+                  />
+                );
+              })
+            }
+          </ul>
+        </div>
       );
     } else {
       return null;

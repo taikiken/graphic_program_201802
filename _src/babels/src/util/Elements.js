@@ -26,7 +26,7 @@ export class Elements extends Offset {
    * @param {Element} element 処理対象 Element
    */
   constructor(element:Element) {
-    console.log('Elements', element);
+    // console.log('Elements', element);
     super(element);
     /**
      * 引数 `element` を Sagen.Dom instance にし addClass, removeClass を行います

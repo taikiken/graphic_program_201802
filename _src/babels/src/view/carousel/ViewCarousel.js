@@ -28,6 +28,21 @@ const Polling = self.Gasane.Polling;
 // React
 const React = self.React;
 
+// --------------------------------------------
+// private
+const direction = (length, boundPrev, boundNext) => {
+  if (length < 2) {
+    return null;
+  }
+
+  return (
+    <div className="direction">
+      <a id="prev" className="direction-prev" href="#prev" onClick={boundPrev}>Prev</a>
+      <a id="next" className="direction-next" href="#next" onClick={boundNext}>Next</a>
+    </div>
+  );
+};
+
 /**
  * pickup コンテナ「カルーセル」スライドショーを実装します
  * ```
@@ -47,7 +62,14 @@ export class ViewCarousel extends React.Component {
    */
   constructor(props) {
     super(props);
-
+    // ----------------------------------------
+    // test code
+    props.list.shift();
+    props.list.shift();
+    props.list.shift();
+    // props.list.shift();
+    console.log('ViewCarousel.test', props.list.length);
+    // ----------------------------------------
     /**
      * state option
      * @override
@@ -134,55 +156,45 @@ export class ViewCarousel extends React.Component {
    */
   render() {
     const list = this.props.list;
-    // const needClone = list.length > 1;
-    // let count = 0;
-
-    // return null;
-    if (list.length > 0) {
-      // JSX
-      return (
-        <div className="hero-sec">
-          <div className={`hero-slider pickup-container pickup-slider-length-${this.state.length} slide-${this.state.index}`}>
-            {/* slider */}
-            <div className="hero-slider-inner">
-              <div className="pickup-slider-wrapper">
-                <ViewPickupSlider
-                  list={list}
-                  sp={this.props.sp}
-                  home={this.props.home}
-                  next={this.bindNext}
-                  prev={this.bindPrev}
-                  play={this.bindPlay}
-                  pause={this.bindPause}
-                  length={this.bindLength}
-                />
-              </div>
-            </div>
-            <div className="hero-slider-control">
-              {/* prev / next */}
-              <div className="direction">
-                <a id="prev" className="direction-prev" href="#prev" onClick={this.boundPrev}>Prev</a>
-                <a id="next" className="direction-next" href="#next" onClick={this.boundNext}>Next</a>
-              </div>
-              {/* pagers */}
-              <div className="pager">
-                <ViewPagers
-                  list={list}
-                  onPager={this.boundPager}
-                  sp={this.props.sp}
-                />
-              </div>
-              {/* hero-slider-control */}
-            </div>
-            {/* .hero-slider */}
-          </div>
-          {/* #hero-sec */}
-        </div>
-      );
+    if (list.length === 0) {
+      // データがない時は表示しない
+      return null;
     }
-
-    // データがない時は表示しない
-    return null;
+    // JSX
+    return (
+      <div className="hero-sec">
+        <div className={`hero-slider pickup-container pickup-slider-length-${this.state.length} slide-${this.state.index}`}>
+          {/* slider */}
+          <div className="hero-slider-inner">
+            <div className="pickup-slider-wrapper">
+              <ViewPickupSlider
+                list={list}
+                sp={this.props.sp}
+                home={this.props.home}
+                next={this.bindNext}
+                prev={this.bindPrev}
+                play={this.bindPlay}
+                pause={this.bindPause}
+                length={this.bindLength}
+              />
+            </div>
+          </div>
+          <div className="hero-slider-control">
+            {/* prev / next */}
+            {direction(list.length, this.boundPrev, this.boundNext)}
+            {/* pagers */}
+            <ViewPagers
+              list={list}
+              onPager={this.boundPager}
+              sp={this.props.sp}
+            />
+            {/* hero-slider-control */}
+          </div>
+          {/* .hero-slider */}
+        </div>
+        {/* #hero-sec */}
+      </div>
+    );
   }
   // --------------------------------------------
   // delegate
@@ -317,6 +329,7 @@ export class ViewCarousel extends React.Component {
       // 先頭に戻る
       if (position === last) {
         // 現在がラストだったらアニメーションなしで移動させる
+        // console.log('ViewCarousel last to 999');
         this.setState({ index: 999 });
         this.delay(index);
       } else {
@@ -327,6 +340,7 @@ export class ViewCarousel extends React.Component {
       // 最終に戻る
       if (position === 0) {
         // 現在が先頭だったらアニメーションなしで移動させる
+        // console.log('ViewCarousel 0 to 1999');
         this.setState({ index: 1999 });
         this.delay(index);
       } else {

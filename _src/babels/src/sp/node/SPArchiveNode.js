@@ -354,7 +354,7 @@ export let SPArchiveNode = React.createClass( {
     };
   },
   render: function() {
-    console.log('SPArchiveNode.render', this.props);
+    // console.log('SPArchiveNode.render', this.props);
     let home = this.props.home;
     let length = this.state.list.length;
     let type = this.props.type;
