@@ -40,7 +40,7 @@ import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug
 // import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 
 // sp/view
-import { SPViewMoreButton } from '../articles/SPViewMoreButton';
+// import { SPViewMoreButton } from '../articles/SPViewMoreButton';
 import { SPViewArticles } from '../articles/SPViewArticles';
 
 // react
@@ -217,12 +217,12 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
    * ModelCategoriesSlug, Category 両方の取得を待ちます
    */
   wait():void {
-    // console.log( 'wait', this.waiting );
     if ( ++this.waiting < 2 ) {
       return;
     }
 
     let resultArticles = this._resultArticles;
+
     if ( !!resultArticles ) {
       this.render( resultArticles );
     }
@@ -234,11 +234,16 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
    */
   render( articles:Array ):void {
     // ストリーム広告 ID
-    let categoryInfo = this._categoryInfo;
-    let adSp = categoryInfo.ad.sp;
-    if ( !adSp ) {
-      adSp = '';
+    // @since 2016-09-20, categoryInfo null の時があるので変更
+    const categoryInfo = this._categoryInfo;
+    let adSp = '';
+    if (!!categoryInfo && !!categoryInfo.ad) {
+      adSp = categoryInfo.ad.sp;
     }
+    // let adSp = categoryInfo.ad.sp;
+    // if ( !adSp ) {
+    //   adSp = '';
+    // }
     // console.log( '**** categoryInfo ', categoryInfo );
     // 既存データ用のglobal配列
     let articlesList = this.articles;
