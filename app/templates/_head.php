@@ -55,13 +55,14 @@ endif;
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 <?php endif; ?>
 
-<?php if ( $page['image_src'] ) : ?>
-  <link rel="image_src" href="<?php echo $page['image_src']; ?>">
-<?php endif; ?>
-
+  <!-- syndot -->
 <?php if ( $page['template'] === 'p' ) : ?>
   <meta name="synextbot" content="<?php echo $page['syn_extension']; ?>">
+<?php if ( $page['syn_thumbnail'] ) : ?>
+  <meta property="syndot:thumbnail" content="<?php echo $page['syn_thumbnail']; ?>">
 <?php endif; ?>
+<?php endif; ?>
+  <!-- //syndot -->
 
   <!-- favicon -->
 <?php
