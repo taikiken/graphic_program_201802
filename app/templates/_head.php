@@ -49,11 +49,14 @@ endif;
   <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
   <meta name="twitter:description" content="<?php echo $page['og_description']; ?>">
 
-
 <?php if ( $page['canonical'] ) : ?>
   <link rel="canonical" href="<?php echo $page['canonical']; ?>">
 <?php elseif ( $page['og_url'] ) : ?>
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
+<?php endif; ?>
+
+<?php if ( $page['image_src'] ) : ?>
+  <link rel="image_src" href="<?php echo $page['image_src']; ?>">
 <?php endif; ?>
 
 <?php if ( $page['template'] === 'p' ) : ?>

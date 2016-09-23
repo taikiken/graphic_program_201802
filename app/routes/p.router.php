@@ -76,6 +76,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'canonical'      => $canonical,
 
         'syn_extension'  => $syn_extension,
+        'image_src'      => $post['media']['images']['thumbnail'],
 
         'ad'             => $post['ad'],
         'theme'          => $post['theme'],
@@ -162,6 +163,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $comment_body_escaped,
 
+        'image_src'      => $post['media']['images']['thumbnail'],
+
         'ad'             => $post['ad'],
         'theme'          => $post['theme'],
 
@@ -221,6 +224,8 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'og_url'         => $app->model->property('site_url').'p/'.$post['id'].'/comment/'.$args['commend_id'].'/'.$args['reply_id'].'/',
         'og_image'       => $post['media']['images']['original'],
         'og_description' => $comment_body_escaped,
+
+        'image_src'      => $post['media']['images']['thumbnail'],
 
         'ad'             => $post['ad'],
         'theme'          => $post['theme'],
