@@ -353,8 +353,14 @@
         display: inline-block;
         margin: 30px 15px 0;
 
+        &:nth-child(1),
         &:nth-child(2) {
-          width: 250px;
+          width: 380px;
+        }
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          text-align: right;
         }
       }
 
@@ -391,9 +397,7 @@
 
         &:nth-child(1),
         &:nth-child(2) {
-          img {
-            height: (58/2)+px;
-          }
+          width: (294/2)+px;
         }
       }
     }
