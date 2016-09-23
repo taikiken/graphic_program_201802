@@ -275,7 +275,7 @@ export class ViewPickupSlider extends React.Component {
     this.props.pause();
 
     // x 方向閾値 50 未満の時は元の位置に戻す
-    if (absX < 50) {
+    if (absX < 10) {
       // 元に戻す
       this.reset();
     } else {
