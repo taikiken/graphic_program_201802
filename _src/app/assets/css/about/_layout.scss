@@ -345,8 +345,10 @@ html, body {
       width: perCalc(560, 640);
       margin: (40/2)+px auto 0;
 
-      a {
+      // .header__btn--close__link
+      &__link {
         @include link-decoration($highlight-color, $highlight-color, none, none);
+        cursor: pointer;
         display: block;
         padding: (30/2)+px;
         border-radius: 10px;
@@ -417,6 +419,7 @@ html, body {
 @include screen('large') {
   .footer {
     margin-top: 80px;
+    padding-bottom: 100px;
 
     // .footer__logo
     &__logo {
