@@ -64,11 +64,11 @@ export class ViewCarousel extends React.Component {
     super(props);
     // ----------------------------------------
     // test code
-    props.list.shift();
-    props.list.shift();
-    props.list.shift();
     // props.list.shift();
-    console.log('ViewCarousel.test', props.list.length);
+    // props.list.shift();
+    // props.list.shift();
+    // props.list.shift();
+    // console.log('ViewCarousel.test', props.list.length);
     // ----------------------------------------
 
     let length = props.list.length;
@@ -155,7 +155,6 @@ export class ViewCarousel extends React.Component {
      * @type {Function}
      */
     this.bindLength = this.updateLength.bind(this);
-    console.log('ViewCarousel.length', length, this.last);
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
