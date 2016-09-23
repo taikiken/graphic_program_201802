@@ -70,6 +70,12 @@ export class ViewCarousel extends React.Component {
     // props.list.shift();
     console.log('ViewCarousel.test', props.list.length);
     // ----------------------------------------
+
+    let length = props.list.length;
+    if (length === 2) {
+      // 2 件の時は3件に見立ててみる
+      length = 3;
+    }
     /**
      * state option
      * @override
@@ -78,7 +84,7 @@ export class ViewCarousel extends React.Component {
     this.state = {
       index: props.index,
       style: {},
-      length: props.list.length
+      length: length
     };
     /**
      * animation するための Polling instance
@@ -117,7 +123,7 @@ export class ViewCarousel extends React.Component {
      * スライドの最終ナンバー
      * @type {number}
      */
-    this.last = props.list.length - 1;
+    this.last = length - 1;
     /**
      * スライドの現在ナンバー
      * @type {number}
@@ -149,6 +155,7 @@ export class ViewCarousel extends React.Component {
      * @type {Function}
      */
     this.bindLength = this.updateLength.bind(this);
+    console.log('ViewCarousel.length', length, this.last);
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
@@ -163,7 +170,7 @@ export class ViewCarousel extends React.Component {
     // JSX
     return (
       <div className="hero-sec">
-        <div className={`hero-slider pickup-container pickup-slider-length-${this.state.length} slide-${this.state.index}`}>
+        <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${this.state.index}`}>
           {/* slider */}
           <div className="hero-slider-inner">
             <div className="pickup-slider-wrapper">
@@ -289,26 +296,6 @@ export class ViewCarousel extends React.Component {
     // change slide
     this.jump( index );
   }
-  // nextNext() {
-  //   // count up します
-  //   let index = this.position + 2;
-  //   // last を超えたら 0 に戻す
-  //   if (index > this.last) {
-  //     index = this.last - index - 1;
-  //   }
-  //   // change slide
-  //   this.jump( index );
-  // }
-  // prevPrev() {
-  //   // count down
-  //   let index = this.position - 2;
-  //   // 0 未満になったら last へ戻す
-  //   if (index < 0) {
-  //     index = this.last + index + 1;
-  //   }
-  //   // change slide
-  //   this.jump( index );
-  // }
   /**
    * 指定 index スライドに移動します<br>
    * `this.pause()` し一時停止します<br>

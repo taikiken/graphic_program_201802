@@ -413,6 +413,7 @@
     }
     // --------------------------------------------------
     // slide が 2枚の時の設定
+    // 循環アニメションのために擬似的に 3まいとして処理する
     // --------------------------------------------------
     // @since 2016-09-23
     &.pickup-slider-length-2 {
@@ -466,6 +467,28 @@
           }
         }
       }
+      &.slide-2 {
+        .pickup-slider {
+          transform: translateX(-$slider-width * 2);
+
+          .pickup-4 {
+            .overlay,
+            .post-overview {
+              opacity: 1;
+            }
+          }
+        }
+        .hero-slider-control {
+          .pager {
+            .pager-0 {
+              a {
+                background-color: $highlight-secondary-color;
+                transition-duration: 0.25s;
+              }
+            }
+          }
+        }
+      }
 
       // --------------------------------------------------
       // 循環アニメーションのために
@@ -482,7 +505,7 @@
       // index 0 -> 1
       &.slide-1999 {
         .pickup-slider {
-          transform: translateX(-$slider-width * 2);
+          transform: translateX(-$slider-width * 3);
           transition-duration: 0s;
         }
       }
