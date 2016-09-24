@@ -25,7 +25,7 @@ import {RelatedDae} from '../../dae/RelatedDae';
 
 
 // component
-import { ComponentRelated } from '../../component/singles/ComponentRelated';
+import { ComponentSingleRelated } from '../../component/singles/ComponentSingleRelated';
 
 
 // React
@@ -166,7 +166,7 @@ export class ViewRelated extends View {
       //   element
       // );
       this._rendered = ReactDOM.render(
-        <ComponentRelated
+        <ComponentSingleRelated
           list={related}
         />,
         element

@@ -88,6 +88,14 @@ export class Message {
     return '関連ニュース';
   }
   /**
+   * TAGS_TITLE TAGS
+   * @since 2016-09-27
+   * @return {string} TAGS
+   */
+  static get TAGS_TITLE():string {
+    return 'TAGS';
+  }
+  /**
    * UNLOAD, 入力内容が取消しされます
    * onbeforeunload message に使用します
    * @return {string} 入力内容が取消しされます

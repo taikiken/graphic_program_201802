@@ -23,7 +23,7 @@ import {User} from '../../app/User';
 // node
 // import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
 
-import { ComponentHeader } from '../../component/singles/ComponentHeader';
+import { ComponentSingleHeader } from '../../component/singles/ComponentSingleHeader';
 
 // React
 // let React = self.React;
@@ -54,7 +54,7 @@ export class ViewSingleHeader extends View {
     this._single = single;
     /**
      * HeaderDom instance
-     * @type {?ComponentHeader|*}
+     * @type {?ComponentSingleHeader|*}
      * @private
      */
     this._rendered = null;
@@ -64,16 +64,16 @@ export class ViewSingleHeader extends View {
   // ---------------------------------------------------
   /**
    * HeaderDom instance を取得します
-   * @return {?ComponentHeader} HeaderDom instance を返します
+   * @return {?ComponentSingleHeader} HeaderDom instance を返します
    */
-  get rendered():ComponentHeader {
+  get rendered():ComponentSingleHeader {
     return this._rendered;
   }
   /**
    * HeaderDom instance を設定します
-   * @param {?ComponentHeader} rendered HeaderDom instance
+   * @param {?ComponentSingleHeader} rendered HeaderDom instance
    */
-  set rendered( rendered:ComponentHeader ):void {
+  set rendered( rendered:ComponentSingleHeader ):void {
     this._rendered = rendered;
   }
   // ---------------------------------------------------
@@ -175,7 +175,7 @@ export class ViewSingleHeader extends View {
       // );
       // @since 2016-09-24 changed
       this._rendered = ReactDOM.render(
-        <ComponentHeader
+        <ComponentSingleHeader
           single={singleDae}
           sign={User.sign}
           callback={this.executeSafely.bind(this)}

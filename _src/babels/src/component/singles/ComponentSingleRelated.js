@@ -38,10 +38,10 @@ const React = self.React;
  * </pre>
  * @since 2016-09-24
  */
-export class ComponentRelated extends React.Component {
+export class ComponentSingleRelated extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentRelated.propTypes}
+   * @param {Object} props プロパティ {@link ComponentSingleRelated.propTypes}
    */
   constructor(props) {
     super(props);
@@ -123,6 +123,6 @@ export class ComponentRelated extends React.Component {
  * プロパティ
  * @type {{list: array<RelatedDae>}}
  */
-ComponentRelated.propTypes = {
+ComponentSingleRelated.propTypes = {
   list: React.PropTypes.array.isRequired
 };

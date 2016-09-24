@@ -24,10 +24,10 @@ const React = self.React;
  * 汎用化のために `ViewSingleHeader` {@link ViewSingleHeader} から分離します
  * @since 2016-09-24
  */
-export class ComponentHeader extends React.Component {
+export class ComponentSingleHeader extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentHeader.propTypes}
+   * @param {Object} props プロパティ {@link ComponentSingleHeader.propTypes}
    */
   constructor(props) {
     super(props);
@@ -102,7 +102,7 @@ export class ComponentHeader extends React.Component {
  * プロパティ
  * @type {{single: SingleDae, sign: boolean, callback: function}}
  */
-ComponentHeader.propTypes = {
+ComponentSingleHeader.propTypes = {
   single: React.PropTypes.object.isRequired,
   sign: React.PropTypes.bool.isRequired,
   callback: React.PropTypes.func.isRequired
