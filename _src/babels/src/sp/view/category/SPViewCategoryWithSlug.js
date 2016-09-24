@@ -237,7 +237,7 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
     // @since 2016-09-20, categoryInfo null の時があるので変更
     const categoryInfo = this._categoryInfo;
     let adSp = '';
-    if (!!categoryInfo && !!categoryInfo.ad) {
+    if (!!categoryInfo && !!categoryInfo.ad && !!categoryInfo.ad.sp) {
       adSp = categoryInfo.ad.sp;
     }
     // let adSp = categoryInfo.ad.sp;
