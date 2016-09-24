@@ -29,12 +29,12 @@ import { GaData } from '../../ga/GaData';
 
 // sp/view
 import { SPViewArchive } from './SPViewArchive';
-import { SPViewMoreButton } from './articles/SPViewMoreButton';
+import { SPComponentViewMoreButton } from '../component/articles/SPComponentViewMoreButton';
 
 // sp/node
 // import {SPArchiveNode} from '../node/SPArchiveNode';
 
-import { SPViewArticles } from './articles/SPViewArticles';
+import { SPViewArticles } from '../component/articles/SPComponentArticles';
 
 // React
 // let React = self.React;
@@ -129,7 +129,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
     // instance があれば state を update する
     if (this.moreRendered === null) {
       this.moreRendered = ReactDOM.render(
-        <SPViewMoreButton
+        <SPComponentViewMoreButton
           show={show}
           action={this.action}
           element={moreElement}

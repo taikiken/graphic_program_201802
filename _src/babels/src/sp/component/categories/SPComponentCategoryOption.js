@@ -17,13 +17,13 @@ import { Dom } from '../../../app/Dom';
 import { ViewCategoryOption } from '../../../view/categories/ViewCategoryOption';
 
 // sp/view/categories
-import { SPViewHeadlineOption } from '../categories/SPViewHeadlineOption';
+import { SPComponentHeadlineOption } from './SPComponentHeadlineOption';
 
 // --------------------------------------------
 // React
 const ReactDOM = self.ReactDOM;
 
-export class SPViewCategoryOption extends ViewCategoryOption {
+export class SPComponentCategoryOption extends ViewCategoryOption {
   /**
    * category slug を使用し API request を開始します
    * @param {string} [slug=all] category.slug
@@ -42,7 +42,7 @@ export class SPViewCategoryOption extends ViewCategoryOption {
     }
 
     ReactDOM.render(
-      <SPViewHeadlineOption
+      <SPComponentHeadlineOption
         list={category.headline.articles}
         callback={this.boundSafety}
         home={false}

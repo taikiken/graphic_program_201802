@@ -25,7 +25,7 @@ import { ViewArticleThumbnail } from '../../../view/articles/ViewArticleThumbnai
 import { Safety } from '../../../data/Safety';
 
 // sp/view/articles
-import { SPViewArticleAd } from './SPViewArticleAd';
+import { SPComponentArticleAd } from './SPComponentArticleAd';
 
 // Ga
 // import { Ga } from '../../../ga/Ga';
@@ -35,12 +35,12 @@ import { SPViewArticleAd } from './SPViewArticleAd';
 const React = self.React;
 
 /**
- * 新着記事 in sportsbull
+ * 新着記事 in SPORTS BULL
  *
  * design 変更に伴う構造変更 旧: {@link SPArchiveNode}
  * @since 2016-09-21
  */
-export class SPViewArticles extends React.Component {
+export class SPComponentArticles extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -95,7 +95,7 @@ export class SPViewArticles extends React.Component {
                       </div>
                     </a>
                   </div>
-                  <SPViewArticleAd
+                  <SPComponentArticleAd
                     index={i}
                     length={length}
                     uniqueId={`ad-${dae.mediaType}-${dae.id}`}
@@ -144,7 +144,7 @@ export class SPViewArticles extends React.Component {
  *  adSp: string
  * }}
  */
-SPViewArticles.propTypes = {
+SPComponentArticles.propTypes = {
   list: React.PropTypes.array.isRequired,
   // request offset
   offset: React.PropTypes.number.isRequired,

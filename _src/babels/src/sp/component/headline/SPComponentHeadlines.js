@@ -12,7 +12,7 @@
 
 // view
 import { View } from '../../../view/View';
-import { SPViewHeadlineArticle } from './SPViewHeadlineArticle';
+import { SPComponentHeadlineArticle } from './SPComponentHeadlineArticle';
 
 // app
 import { Empty } from '../../../app/const/Empty';
@@ -49,12 +49,12 @@ const React = self.React;
  * @since 2016-09-16
  *
  * <pre>
- *   <SPViewHeadlines/>
+ *   <SPComponentHeadlines/>
  *      <SPViewHeadline/>
  *        <CategoryLabelNode/>
  * </pre>
  */
-export class SPViewHeadlines extends React.Component {
+export class SPComponentHeadlines extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link SPViewHeadline.propTypes}
@@ -86,7 +86,7 @@ export class SPViewHeadlines extends React.Component {
               list.map((dae, i) => {
                 const thumbnail = Safety.image(dae.media.images.medium, Empty.IMG_MIDDLE);
                 return (
-                  <SPViewHeadlineArticle
+                  <SPComponentHeadlineArticle
                     key={`headline-${dae.id}`}
                     index={i}
                     id={String( dae.id )}
@@ -122,7 +122,7 @@ export class SPViewHeadlines extends React.Component {
  * プロパティ
  * @type {{list: Array.<ArticleDae>, callback: Function}}
  */
-SPViewHeadlines.propTypes = {
+SPComponentHeadlines.propTypes = {
   // Array.<ArticleDae>
   list: React.PropTypes.array.isRequired,
   // executeSafely.bind
@@ -135,6 +135,6 @@ SPViewHeadlines.propTypes = {
  * @static
  * @type {{index: number}}
  */
-SPViewHeadlines.defaultProps = {
+SPComponentHeadlines.defaultProps = {
   home: false
 };

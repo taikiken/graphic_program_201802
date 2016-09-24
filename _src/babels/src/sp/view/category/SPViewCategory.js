@@ -22,7 +22,7 @@ import {CategoryAuth} from '../../../action/archive/CategoryAuth';
 import {User} from '../../../app/User';
 
 // @since 2016-09-20
-import { SPViewCategoryOption } from '../categories/SPViewCategoryOption';
+import { SPComponentCategoryOption } from '../../component/categories/SPComponentCategoryOption';
 
 /**
  * <p>SP 記事一覧・カテゴリータブデータをリクエストし取得します</p>
@@ -73,7 +73,7 @@ export class SPViewCategory extends SPViewArchiveInfinite {
 
     // @since 2016-09-20
     // 記事一覧に pickup, headline を表示させる
-    const categoryOption = new SPViewCategoryOption(slug);
+    const categoryOption = new SPComponentCategoryOption(slug);
     categoryOption.start();
   }
 }

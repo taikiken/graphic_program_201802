@@ -20,7 +20,7 @@ const React = self.React;
  * 広告タグ {@link SPNewsAdNode}
  * @since 2016-09-21
  */
-export class SPViewArticleAd extends React.Component {
+export class SPComponentArticleAd extends React.Component {
   /**
    * プロパティと初期変数を設定します
    * @param {Object} props React.props {@link SPViewArticleAd.propTypes}
@@ -98,7 +98,7 @@ export class SPViewArticleAd extends React.Component {
  *  adSp: string
  * }}
  */
-SPViewArticleAd.propTypes = {
+SPComponentArticleAd.propTypes = {
   // index, 何番目
   index: React.PropTypes.number.isRequired,
   // loop list の length === 総数

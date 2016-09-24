@@ -15,7 +15,7 @@ import {ViewHeadline} from '../../../view/home/ViewHeadline';
 
 // view
 // import {View} from '../../../view/View';
-import { SPViewHeadlines } from '../headline/SPViewHeadlines';
+import { SPComponentHeadlines } from '../../component/headline/SPComponentHeadlines';
 
 // // app
 // import {Empty} from '../../../app/const/Empty';
@@ -263,7 +263,7 @@ export class SPViewHeadLine extends ViewHeadline {
     const list = articles.map((article) => new ArticleDae(article));
 
     ReactDOM.render(
-      <SPViewHeadlines
+      <SPComponentHeadlines
         list={list}
         callback={this.executeSafely.bind(this)}
       />,

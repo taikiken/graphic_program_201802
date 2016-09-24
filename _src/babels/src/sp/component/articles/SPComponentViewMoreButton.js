@@ -28,10 +28,10 @@ const React = self.React;
  * window.bottom が button を超えたら次の読み込みを開始します
  * @since 2016-09-16
  */
-export class SPViewMoreButton extends React.Component {
+export class SPComponentViewMoreButton extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link SPViewMoreButton.propTypes}
+   * @param {Object} props React props プロパティー {@link SPComponentViewMoreButton.propTypes}
    */
   constructor(props) {
     super(props);
@@ -187,7 +187,7 @@ export class SPViewMoreButton extends React.Component {
       // ----------------------------------------------
       // GA 計測タグ
       // PC/スマホカテゴリー一覧の新着記事, movie, ranking
-      Ga.add( new GaData('SPViewMoreButton.onRise', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page), 0, true) );
+      Ga.add( new GaData('SPComponentViewMoreButton.onRise', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page), 0, true) );
       // ----------------------------------------------
     } else {
       if (this.props.home) {
@@ -204,7 +204,7 @@ export class SPViewMoreButton extends React.Component {
     // ----------------------------------------------
     // GA 計測タグ
     // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
-    Ga.add( new GaData('SPViewMoreButton.gaHome', 'home_articles', 'view - new', String(++this.page), 0, true) );
+    Ga.add( new GaData('SPComponentViewMoreButton.gaHome', 'home_articles', 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
   /**
@@ -214,7 +214,7 @@ export class SPViewMoreButton extends React.Component {
     // ----------------------------------------------
     // GA 計測タグ
     // PC/スマホカテゴリー一覧の新着記事
-    Ga.add( new GaData('SPViewMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
+    Ga.add( new GaData('SPComponentViewMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
 }
@@ -231,7 +231,7 @@ export class SPViewMoreButton extends React.Component {
  *  type: string
  * }}
  */
-SPViewMoreButton.propTypes = {
+SPComponentViewMoreButton.propTypes = {
   show: React.PropTypes.bool.isRequired,
   action: React.PropTypes.object.isRequired,
   // 監視コンテナ
@@ -251,7 +251,7 @@ SPViewMoreButton.propTypes = {
  *  type: string
  * }}
  */
-SPViewMoreButton.defaultProps = {
+SPComponentViewMoreButton.defaultProps = {
   loading: '',
   type: ''
 };

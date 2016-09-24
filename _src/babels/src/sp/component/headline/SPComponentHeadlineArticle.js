@@ -49,10 +49,10 @@ const React = self.React;
  * sp headline 出力を汎用化
  * @since 2016-09-16
  */
-export class SPViewHeadlineArticle extends React.Component {
+export class SPComponentHeadlineArticle extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link SPViewHeadlineArticle.propTypes}
+   * @param {Object} props React props プロパティー {@link SPComponentHeadlineArticle.propTypes}
    */
   constructor(props) {
     super(props);
@@ -123,7 +123,7 @@ export class SPViewHeadlineArticle extends React.Component {
  *  home: boolean
  * }}
  */
-SPViewHeadlineArticle.propTypes = {
+SPComponentHeadlineArticle.propTypes = {
   index: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string.isRequired,

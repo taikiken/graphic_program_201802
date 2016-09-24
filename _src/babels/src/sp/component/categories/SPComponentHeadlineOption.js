@@ -17,7 +17,7 @@ import { View } from '../../../view/View';
 import { ViewHeadlineAd } from '../../../view/categories/ViewHeadlineAd';
 
 // sp/view/headline
-import { SPViewHeadlines } from '../headline/SPViewHeadlines';
+import { SPComponentHeadlines } from '../headline/SPComponentHeadlines';
 
 // React
 const React = self.React;
@@ -26,10 +26,10 @@ const React = self.React;
  * SP: 記事一覧 headline を表示するための基本コンテナを作成します
  * @since 2016-09-20
  */
-export class SPViewHeadlineOption extends React.Component {
+export class SPComponentHeadlineOption extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link SPViewHeadlineOption.propTypes}
+   * @param {Object} props プロパティ {@link SPComponentHeadlineOption.propTypes}
    */
   constructor(props) {
     super(props);
@@ -48,7 +48,7 @@ export class SPViewHeadlineOption extends React.Component {
       <div className="headline-section">
         <div className="headline-outer">
           <div id="headline-container">
-            <SPViewHeadlines
+            <SPComponentHeadlines
               list={list}
               callback={this.props.callback}
               home={this.props.home}
@@ -80,7 +80,7 @@ export class SPViewHeadlineOption extends React.Component {
  *  browser: string
  * }}
  */
-SPViewHeadlineOption.propTypes = {
+SPComponentHeadlineOption.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
   callback: React.PropTypes.func.isRequired,
