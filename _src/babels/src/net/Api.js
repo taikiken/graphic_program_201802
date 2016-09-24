@@ -215,6 +215,16 @@ export class Api {
     return Api.single();
   }
   // ----------------------------------
+  // 次の記事詳細
+  /**
+   * 次の記事詳細を取得します
+   * @since 2016-09-24
+   * @return {Types} articles/{:article_id}/next API をTypes instanceで返します
+   */
+  static singles():Types {
+    return ApiDae.api('singles');
+  }
+  // ----------------------------------
   // bookmark
   /**
    * bookmark API を取得します

@@ -12,28 +12,32 @@
 
 
 // view
-import {View} from './View';
-import {ViewRelated} from './single/ViewRelated';
-import {ViewSingleHeader} from './single/ViewSingleHeader';
-import {ViewSingleFooter} from './single/ViewSingleFooter';
+import { View } from './View';
+import { ViewRelated } from './single/ViewRelated';
+import { ViewSingleHeader } from './single/ViewSingleHeader';
+import { ViewSingleFooter } from './single/ViewSingleFooter';
 
 // action
-import {Single} from '../action/single/Single';
-import {SingleAuth} from '../action/single/SingleAuth';
+import { Single } from '../action/single/Single';
+import { SingleAuth } from '../action/single/SingleAuth';
+
 // data
-import {Result} from '../data/Result';
-import {Safety} from '../data/Safety';
+import { Result } from '../data/Result';
+import { Safety } from '../data/Safety';
+import { SingleDae } from '../dae/SingleDae';
+
 // dae
-import {SingleDae} from '../dae/SingleDae';
-import {CategoriesDae} from '../dae/caegories/CategoriesDae';
-import {SlugDae} from '../dae/caegories/SlugDae';
+import { CategoriesDae } from '../dae/caegories/CategoriesDae';
+import { SlugDae } from '../dae/caegories/SlugDae';
+
 // app
-import {Dom} from '../app/Dom';
-import {User} from '../app/User';
-import {Message} from '../app/const/Message';
+import { Dom } from '../app/Dom';
+import { User } from '../app/User';
+import { Message } from '../app/const/Message';
+
 // ga
-import {GaData} from '../ga/GaData';
-import {Ga} from '../ga/Ga';
+import { GaData } from '../ga/GaData';
+import { Ga } from '../ga/Ga';
 
 /**
  * <p>記事詳細</p>

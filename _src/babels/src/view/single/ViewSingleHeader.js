@@ -62,7 +62,7 @@ export class ViewSingleHeader extends View {
   // ---------------------------------------------------
   /**
    * HeaderDom instance を取得します
-   * @return {null|Object|ReactClass} HeaderDom instance を返します
+   * @return {?ReactClass} HeaderDom instance を返します
    */
   get rendered():Object {
     return this._rendered;
