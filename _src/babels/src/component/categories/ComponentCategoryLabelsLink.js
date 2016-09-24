@@ -17,13 +17,14 @@ import { Url } from '../../app/const/Url';
 const React = self.React;
 /**
  * p.post-category を出力<br>
- * category 未設定に対応するように `CategoryLabelNode` を置換えます {@link CategoryLabelNode}
+ * category 未設定に対応するように `CategoryLabelNode` を置換えます {@link CategoryLabelNode}<br>
+ * `ComponentCategoryLabels` {@link ComponentCategoryLabels} の category に link を追加しました
  * @since 2016-09-24
  * */
-export class ComponentCategoryLabels extends React.Component {
+export class ComponentCategoryLabelsLink extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentCategoryLabels.propTypes}
+   * @param {Object} props プロパティ {@link ComponentCategoryLabelsLink.propTypes}
    */
   constructor(props) {
     super(props);
@@ -51,7 +52,7 @@ export class ComponentCategoryLabels extends React.Component {
           categories.map((dae, i) => {
             return (
               <span key={`labels-${id}-${index}-${i}`} className="category-label">
-                {dae.label}
+                <a href={Url.category(dae.slug)}>{dae.label}</a>
               </span>
             );
           })
@@ -70,7 +71,7 @@ export class ComponentCategoryLabels extends React.Component {
  *  slug: string
  * }}
  */
-ComponentCategoryLabels.propTypes = {
+ComponentCategoryLabelsLink.propTypes = {
   index: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired,
   categories: React.PropTypes.array.isRequired,
@@ -81,6 +82,6 @@ ComponentCategoryLabels.propTypes = {
  * default プロパティ
  * @type {{slug: string}}
  */
-ComponentCategoryLabels.defaultProps = {
+ComponentCategoryLabelsLink.defaultProps = {
   slug: ''
 };

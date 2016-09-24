@@ -17,6 +17,9 @@ import { Message } from '../../app/const/Message';
 // node
 import { BannerNode } from '../../node/single/BannerNode';
 
+// view
+import { Banner } from '../../view/Banner';
+
 // React
 const React = self.React;
 
@@ -55,20 +58,23 @@ export class ComponentSingleFooter extends React.Component {
   render() {
     const single = this.state.single;
     const keywords = single.keywords;
-    const userBanner = single.user.banner.pc;
-    let banner = single.banner.pc;
-    // banner データを決定します
-    if (!banner.image && !!userBanner.image) {
-      banner = userBanner;
-    }
+    // const userBanner = single.user.banner.pc;
+    // let banner = single.banner.pc;
+    // // banner データを決定します
+    // if (!banner.image && !!userBanner.image) {
+    //   banner = userBanner;
+    // }
+    const component = Banner.pc(single);
 
     // keywords がない時は banner だけを出力します
     if (!keywords.hasKeyword) {
+      if (component === null) {
+        return null;
+      }
+
       return (
         <div className="post-footer">
-          <BannerNode
-            banner={banner}
-          />
+          {component}
         </div>
       );
     }
@@ -76,9 +82,7 @@ export class ComponentSingleFooter extends React.Component {
     // keywords + banner を出力します
     return (
       <div className="post-footer">
-        <BannerNode
-          banner={banner}
-        />
+        {component}
         {/* TAGS */}
         <div className="post-tags">
           <h2 className="post-tags-heading">{Message.TAGS_TITLE}</h2>

@@ -14,7 +14,7 @@
 import { View } from '../../../view/View';
 
 // component
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // node
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
@@ -96,7 +96,7 @@ export class SPComponentSingleHeader extends React.Component {
               />
             </p>
            */}
-            <ComponentCategoryLabels
+            <ComponentCategoryLabelsLink
               index={1}
               id={`single-label-${single.id}`}
               categories={single.categories.all}

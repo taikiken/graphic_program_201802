@@ -14,7 +14,7 @@
 import {View} from '../../../view/View';
 
 // app
-import {Message} from '../../../app/const/Message';
+// import {Message} from '../../../app/const/Message';
 
 // component
 // @since 2016-09-24
@@ -24,7 +24,7 @@ import { SPComponentContinueRead } from '../../component/singles/SPComponentCont
 let Sagen = self.Sagen;
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
