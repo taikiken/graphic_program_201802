@@ -12,7 +12,7 @@
 
 // view
 import {View} from '../View';
-import { ViewHeadlines } from '../headlines/ViewHeadlines';
+import { ComponentHeadlines } from '../../component/headlines/ComponentHeadlines';
 
 // app
 // import {Empty} from '../../app/const/Empty';
@@ -307,7 +307,7 @@ export class ViewHeadline extends View {
     // @since 2016-09-17
     const list = articles.map((article) => new ArticleDae(article));
     ReactDOM.render(
-      <ViewHeadlines
+      <ComponentHeadlines
         list={list}
         callback={this.executeSafely.bind(this)}
         home={true}

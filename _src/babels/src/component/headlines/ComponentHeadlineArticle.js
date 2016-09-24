@@ -43,10 +43,10 @@ const playMark = (mediaType) => {
  * headline の 1記事
  * @since 2016-09-17
  */
-export class ViewHeadlineArticle extends React.Component {
+export class ComponentHeadlineArticle extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewHeadlineArticle.propTypes}
+   * @param {Object} props プロパティ {@link ComponentHeadlineArticle.propTypes}
    */
   constructor(props) {
     super(props);
@@ -92,7 +92,7 @@ export class ViewHeadlineArticle extends React.Component {
     // ----------------------------------------------
     // GA 計測タグ
     const tag = this.props.home ? 'home' : this.props.slug;
-    Ga.add(new GaData('ViewHeadlineArticle.gaSend', `${tag}_headline`, 'click', this.props.url, parseFloat(this.props.id)));
+    Ga.add(new GaData('ComponentHeadlineArticle.gaSend', `${tag}_headline`, 'click', this.props.url, parseFloat(this.props.id)));
     // ----------------------------------------------
   }
 }
@@ -112,7 +112,7 @@ export class ViewHeadlineArticle extends React.Component {
  *  home: bool
  * }}
  */
-ViewHeadlineArticle.propTypes = {
+ComponentHeadlineArticle.propTypes = {
   index: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string.isRequired,

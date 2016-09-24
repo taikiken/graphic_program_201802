@@ -11,11 +11,11 @@
  */
 
 // carousel
-import { ViewPagers } from './ViewPagers';
-import { ViewPickupSlider } from './ViewPickupSlider';
+import { ComponentPagers } from './ComponentPagers';
+import { ComponentPickupSlider } from './ComponentPickupSlider';
 
 // view
-import { View } from '../View';
+import { View } from '../../view/View';
 
 // --------------------------------------------
 // library
@@ -46,19 +46,19 @@ const direction = (length, boundPrev, boundNext) => {
 /**
  * pickup コンテナ「カルーセル」スライドショーを実装します
  * ```
- * <ViewCarousel/>
- *    <ViewPickupSlider/>
- *      <ViewCarouselArticle/>
- *    <ViewPagers/>
- *      <ViewPager/>
+ * <ComponentCarousel/>
+ *    <ComponentPickupSlider/>
+ *      <ComponentCarouselArticle/>
+ *    <ComponentPagers/>
+ *      <ComponentPager/>
  * ```
  * @since 2016-09-15
  */
-export class ViewCarousel extends React.Component {
+export class ComponentCarousel extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー<br>
-   *  {{list: Array<Element>, callback: Function}} を保持します {@link ViewCarousel.propTypes}
+   *  {{list: Array<Element>, callback: Function}} を保持します {@link ComponentCarousel.propTypes}
    */
   constructor(props) {
     super(props);
@@ -68,7 +68,7 @@ export class ViewCarousel extends React.Component {
     // props.list.shift();
     // props.list.shift();
     // props.list.shift();
-    // console.log('ViewCarousel.test', props.list.length);
+    // console.log('ComponentCarousel.test', props.list.length);
     // ----------------------------------------
 
     let length = props.list.length;
@@ -173,7 +173,7 @@ export class ViewCarousel extends React.Component {
           {/* slider */}
           <div className="hero-slider-inner">
             <div className="pickup-slider-wrapper">
-              <ViewPickupSlider
+              <ComponentPickupSlider
                 list={list}
                 sp={this.props.sp}
                 home={this.props.home}
@@ -189,7 +189,7 @@ export class ViewCarousel extends React.Component {
             {/* prev / next */}
             {direction(list.length, this.boundPrev, this.boundNext)}
             {/* pagers */}
-            <ViewPagers
+            <ComponentPagers
               list={list}
               onPager={this.boundPager}
               sp={this.props.sp}
@@ -222,7 +222,7 @@ export class ViewCarousel extends React.Component {
   /**
    * slider 数を確定させます<br>
    * list の中に重複データが入っていることがあり `list.length` が使用できないために<br>
-   * `ViewPickupSlider` マウント後通知を受けます
+   * `ComponentPickupSlider` マウント後通知を受けます
    * @param {number} length slider 数
    */
   updateLength(length) {
@@ -315,7 +315,7 @@ export class ViewCarousel extends React.Component {
       // 先頭に戻る
       if (position === last) {
         // 現在がラストだったらアニメーションなしで移動させる
-        // console.log('ViewCarousel last to 999');
+        // console.log('ComponentCarousel last to 999');
         this.setState({ index: 999 });
         this.delay(index);
       } else {
@@ -326,7 +326,7 @@ export class ViewCarousel extends React.Component {
       // 最終に戻る
       if (position === 0) {
         // 現在が先頭だったらアニメーションなしで移動させる
-        // console.log('ViewCarousel 0 to 1999');
+        // console.log('ComponentCarousel 0 to 1999');
         this.setState({ index: 1999 });
         this.delay(index);
       } else {
@@ -363,7 +363,7 @@ export class ViewCarousel extends React.Component {
   }
   /**
    * ページャークリック・コールバックハンドラです<br>
-   * 子コンポーネント ViewPagers > ViewPager からコールバックです
+   * 子コンポーネント ComponentPagers > ComponentPager からコールバックです
    * @param {string|number} index ページャーより通知された移動すべきスライドナンバー
    */
   onPagerClick(index) {
@@ -383,7 +383,7 @@ export class ViewCarousel extends React.Component {
  *  index: number
  * }}
  */
-ViewCarousel.propTypes = {
+ComponentCarousel.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
   callback: React.PropTypes.func.isRequired,
@@ -398,7 +398,7 @@ ViewCarousel.propTypes = {
  * @static
  * @type {{index: number, sp: boolean, home: boolean}}
  */
-ViewCarousel.defaultProps = {
+ComponentCarousel.defaultProps = {
   index: 0,
   sp: Sagen.Browser.Mobile.phone(),
   home: false

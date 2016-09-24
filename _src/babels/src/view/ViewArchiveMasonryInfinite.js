@@ -37,8 +37,8 @@ import {ArticleDae} from '../dae/ArticleDae';
 // import {CategoryLabelNode} from '../node/category/CategoryLabelNode';
 
 // view/articles
-import { ViewArticlesMasonryInfinite } from './articles/ViewArticlesMasonryInfinite';
-import { ViewMoreButton } from './articles/ViewMoreButton';
+import { ComponentArticlesMasonryInfinite } from '../component/articles/ComponentArticlesMasonryInfinite';
+import { ComponentMoreButton } from '../component/articles/ComponentMoreButton';
 
 // Ga
 import { Ga } from '../ga/Ga';
@@ -1006,7 +1006,7 @@ export class ViewArchiveMasonryInfinite extends View {
     if (this.articleRendered === null ) {
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
       this.articleRendered = ReactDOM.render(
-        <ViewArticlesMasonryInfinite
+        <ComponentArticlesMasonryInfinite
           list={articlesList}
           home={this.home}
           offset={this.request.offset}
@@ -1052,7 +1052,7 @@ export class ViewArchiveMasonryInfinite extends View {
     // instance があれば state を update する
     if (this.moreRendered === null) {
       this.moreRendered = ReactDOM.render(
-        <ViewMoreButton
+        <ComponentMoreButton
           show={show}
           action={this.action}
           element={moreElement}

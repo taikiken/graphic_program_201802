@@ -28,7 +28,7 @@ include_once __DIR__.'/_category-heading.php';
       // 3. ヘッドラインが設定できる
       // @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
       // @since 2016-09-20
-      // {@link ViewCategory.js}, {@link ViewCategoryOption.js}
+      // {@link ViewCategory.js}, {@link ComponentCategoryOption.js}
       ?>
       <div id="js-headline"></div>
       <?php

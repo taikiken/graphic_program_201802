@@ -27,7 +27,7 @@ import {SPArchiveNode} from '../../node/SPArchiveNode';
 // import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 
 // sp/view
-import { SPComponentViewMoreButton } from '../../component/articles/SPComponentViewMoreButton';
+import { SPComponentMoreButton } from '../../component/articles/SPComponentMoreButton';
 
 // React
 let ReactDOM = self.ReactDOM;
@@ -151,7 +151,7 @@ export class SPViewRanking extends ViewRanking {
         //   home={this._home}
         // />,
         // @since 2016-09-16, more button changed
-        <SPComponentViewMoreButton
+        <SPComponentMoreButton
           show={show}
           action={this.action}
           element={this._moreElement}

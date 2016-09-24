@@ -19,7 +19,7 @@ import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
 // view
 import { View } from '../../../view/View';
-import { ViewArticleThumbnail } from '../../../view/articles/ViewArticleThumbnail';
+import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 
 // dara
 import { Safety } from '../../../data/Safety';
@@ -75,7 +75,7 @@ export class SPComponentArticles extends React.Component {
                 <div key={`latest-${dae.id}`} className="latest-line">
                   <div key={`latest-${dae.id}`} className="board-item">
                     <a href={dae.url} className="post">
-                      <ViewArticleThumbnail
+                      <ComponentArticleThumbnail
                         mediaType={dae.mediaType}
                         thumbnail={thumbnail}
                         title={dae.title}

@@ -11,13 +11,13 @@
  */
 
 // view
-import { View } from '../View';
+import { View } from '../../view/View';
 
 // view/headlines
-import { ViewHeadlines } from '../headlines/ViewHeadlines';
+import { ComponentHeadlines } from '../headlines/ComponentHeadlines';
 
 // view/categories
-import { ViewHeadlineAd } from './ViewHeadlineAd';
+import { ComponentHeadlineAd } from './ComponentHeadlineAd';
 
 // React
 const React = self.React;
@@ -26,10 +26,10 @@ const React = self.React;
  * 記事一覧 headline を表示するための基本コンテナを作成します
  * @since 2016-09-20
  */
-export class ViewHeadlineOption extends React.Component {
+export class ComponentHeadlineOption extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewHeadlineOption.propTypes}
+   * @param {Object} props プロパティ {@link ComponentHeadlineOption.propTypes}
    */
   constructor(props) {
     super(props);
@@ -48,13 +48,13 @@ export class ViewHeadlineOption extends React.Component {
       <div className="headline-section">
         <div className="headline-outer">
           <div id="headline-container">
-            <ViewHeadlines
+            <ComponentHeadlines
               list={list}
               callback={this.props.callback}
               home={this.props.home}
             />
           </div>
-          <ViewHeadlineAd
+          <ComponentHeadlineAd
             browser={this.props.browser}
             ad={this.props.ad}
           />
@@ -80,7 +80,7 @@ export class ViewHeadlineOption extends React.Component {
  *  browser: string
  * }}
  */
-ViewHeadlineOption.propTypes = {
+ComponentHeadlineOption.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
   callback: React.PropTypes.func.isRequired,

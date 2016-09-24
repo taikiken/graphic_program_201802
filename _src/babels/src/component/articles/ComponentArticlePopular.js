@@ -11,7 +11,7 @@
  */
 
 // view
-import { ViewCommentsSecond } from './ViewCommentsSecond';
+import { ComponentCommentsSecond } from './ComponentCommentsSecond';
 
 // node(ReactClass)
 import { ReactionNode } from '../../node/comment/ReactionNode';
@@ -30,10 +30,10 @@ const React = self.React;
  * 記事一覧・コメント・一段目
  * @since 2016-09-16
  */
-export class ViewArticlePopular extends React.Component {
+export class ComponentArticlePopular extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ViewArticlePopular.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentArticlePopular.propTypes}
    */
   constructor(props) {
     super(props);
@@ -102,7 +102,7 @@ export class ViewArticlePopular extends React.Component {
               url={first.url}
             />
           </div>
-          <ViewCommentsSecond
+          <ComponentCommentsSecond
             seconds={secondsDae}
             articleId={articleId}
             total={total}
@@ -121,7 +121,7 @@ export class ViewArticlePopular extends React.Component {
  * デフォルトプロパティ
  * @type {{commentsPopular: Object, total: number, articleId: string, uniqueId: string}}
  */
-ViewArticlePopular.propTypes = {
+ComponentArticlePopular.propTypes = {
   commentsPopular: React.PropTypes.object.isRequired,
   total: React.PropTypes.number.isRequired,
   articleId: React.PropTypes.string.isRequired,

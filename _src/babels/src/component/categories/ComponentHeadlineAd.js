@@ -23,10 +23,10 @@ const React = self.React;
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
  * */
-export class ViewHeadlineAd extends React.Component {
+export class ComponentHeadlineAd extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewHeadlineAd.propTypes}
+   * @param {Object} props プロパティ {@link ComponentHeadlineAd.propTypes}
    */
   constructor(props) {
     super(props);
@@ -114,7 +114,7 @@ export class ViewHeadlineAd extends React.Component {
  * @static
  * @type {{browser: string, sp: string, pc: string}}
  */
-ViewHeadlineAd.propTypes = {
+ComponentHeadlineAd.propTypes = {
   browser: React.PropTypes.string.isRequired,
   ad: React.PropTypes.object.isRequired
 };

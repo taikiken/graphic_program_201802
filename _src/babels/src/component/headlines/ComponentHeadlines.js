@@ -11,10 +11,10 @@
  */
 
 // view
-import { View } from '../View';
+import { View } from '../../view/View';
 
 // view/headlines
-import { ViewHeadlineArticle } from './ViewHeadlineArticle';
+import { ComponentHeadlineArticle } from './ComponentHeadlineArticle';
 
 // app
 import { Empty } from '../../app/const/Empty';
@@ -30,10 +30,10 @@ const React = self.React;
  * div.headline を出力します
  * @since 2016-09-17
  */
-export class ViewHeadlines extends React.Component {
+export class ComponentHeadlines extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewHeadlines.propTypes}
+   * @param {Object} props プロパティ {@link ComponentHeadlines.propTypes}
    */
   constructor(props) {
     super(props);
@@ -62,7 +62,7 @@ export class ViewHeadlines extends React.Component {
             this.props.list.map((dae, i) => {
               const thumbnail = Safety.image(dae.media.images.thumbnail, Empty.IMG_SMALL);
               return (
-                <ViewHeadlineArticle
+                <ComponentHeadlineArticle
                   key={`headline-${dae.id}`}
                   index={i}
                   id={String(dae.id)}
@@ -98,7 +98,7 @@ export class ViewHeadlines extends React.Component {
  *  home: boolean
  * }}
  */
-ViewHeadlines.propTypes = {
+ComponentHeadlines.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
   callback: React.PropTypes.func.isRequired,
@@ -111,6 +111,6 @@ ViewHeadlines.propTypes = {
  *  home: boolean
  * }}
  */
-ViewHeadlines.defaultProps = {
+ComponentHeadlines.defaultProps = {
   home: false
 };

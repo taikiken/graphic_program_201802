@@ -14,7 +14,7 @@
 import { Dom } from '../../../app/Dom';
 
 // view
-import { ViewCategoryOption } from '../../../view/categories/ViewCategoryOption';
+import { ComponentCategoryOption } from '../../../component/categories/ComponentCategoryOption';
 
 // sp/view/categories
 import { SPComponentHeadlineOption } from './SPComponentHeadlineOption';
@@ -23,7 +23,7 @@ import { SPComponentHeadlineOption } from './SPComponentHeadlineOption';
 // React
 const ReactDOM = self.ReactDOM;
 
-export class SPComponentCategoryOption extends ViewCategoryOption {
+export class SPComponentCategoryOption extends ComponentCategoryOption {
   /**
    * category slug を使用し API request を開始します
    * @param {string} [slug=all] category.slug

@@ -26,10 +26,10 @@ const React = self.React;
  * 記事一覧・コメント・二段目
  * @since 2016-09-15
  */
-export class ViewCommentsSecond extends React.Component {
+export class ComponentCommentsSecond extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ViewCommentsSecond.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentCommentsSecond.propTypes}
    */
   constructor(props) {
     super(props);
@@ -86,7 +86,7 @@ export class ViewCommentsSecond extends React.Component {
  * デフォルトプロパティ
  * @type {{seconds: Array<PopularDae>, articleId: string, total: number, hasSecond: boolean}}
  */
-ViewCommentsSecond.propTypes = {
+ComponentCommentsSecond.propTypes = {
   // Array<PopularDae>
   seconds: React.PropTypes.array.isRequired,
   articleId: React.PropTypes.string.isRequired,

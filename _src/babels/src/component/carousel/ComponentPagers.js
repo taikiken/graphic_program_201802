@@ -11,20 +11,20 @@
  */
 
 // carousel
-import { ViewPager } from './ViewPager';
+import { ComponentPager } from './ComponentPager';
 
 // React
 const React = self.React;
 
 /**
  * カルーセル・ページャーを作成します<br>
- * プロパティ `list` から必要な数だけのページャー {@link ViewPager} を作成します
+ * プロパティ `list` から必要な数だけのページャー {@link ComponentPager} を作成します
  * @since 2016-09-15
  */
-export class ViewPagers extends React.Component {
+export class ComponentPagers extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewPagers.propTypes}
+   * @param {Object} props プロパティ {@link ComponentPagers.propTypes}
    */
   constructor(props) {
     super(props);
@@ -53,7 +53,7 @@ export class ViewPagers extends React.Component {
             {
               list.map((article) => {
                 return (
-                  <ViewPager
+                  <ComponentPager
                     key={`pager-${index}`}
                     id={String(article.id)}
                     index={index++}
@@ -77,7 +77,7 @@ export class ViewPagers extends React.Component {
  * @static
  * @type {{list: []<ArticleDae>, onPager: function}}
  */
-ViewPagers.propTypes = {
+ComponentPagers.propTypes = {
   list: React.PropTypes.array.isRequired,
   onPager: React.PropTypes.func.isRequired,
   sp: React.PropTypes.bool.isRequired

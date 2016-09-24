@@ -22,10 +22,10 @@ const React = self.React;
  * 記事一覧・サムネイル
  * @since 2016-09-16
  */
-export class ViewArticleThumbnail extends React.Component {
+export class ComponentArticleThumbnail extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ViewArticleThumbnail.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentArticleThumbnail.propTypes}
    */
   constructor(props) {
     super(props);
@@ -93,7 +93,7 @@ export class ViewArticleThumbnail extends React.Component {
  *  recommend: boolean
  * }}
  */
-ViewArticleThumbnail.propTypes = {
+ComponentArticleThumbnail.propTypes = {
   mediaType: React.PropTypes.string.isRequired,
   thumbnail: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,

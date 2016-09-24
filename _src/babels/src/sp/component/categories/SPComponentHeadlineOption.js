@@ -14,7 +14,7 @@
 import { View } from '../../../view/View';
 
 // view/categories
-import { ViewHeadlineAd } from '../../../view/categories/ViewHeadlineAd';
+import { ComponentHeadlineAd } from '../../../component/categories/ComponentHeadlineAd';
 
 // sp/view/headline
 import { SPComponentHeadlines } from '../headline/SPComponentHeadlines';
@@ -54,7 +54,7 @@ export class SPComponentHeadlineOption extends React.Component {
               home={this.props.home}
             />
           </div>
-          <ViewHeadlineAd
+          <ComponentHeadlineAd
             browser={this.props.browser}
             ad={this.props.ad}
           />

@@ -37,10 +37,10 @@ const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PIC
  * 記事クリックで GA 計測タグを送信します
  * @since 2016-09-15
  */
-export class ViewCarouselArticle extends React.Component {
+export class ComponentCarouselArticle extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewCarouselArticle.propTypes}
+   * @param {Object} props プロパティ {@link ComponentCarouselArticle.propTypes}
    */
   constructor(props) {
     super(props);
@@ -85,7 +85,7 @@ export class ViewCarouselArticle extends React.Component {
     // ----------------------------------------------
     // GA 計測タグ
     const tag = this.props.home ? 'home_pickup' : `${this.props.slug}_pickup`;
-    Ga.add( new GaData('ViewCarouselArticle.gaSend', tag, 'click', this.props.url, parseFloat(this.props.id)) );
+    Ga.add( new GaData('ComponentCarouselArticle.gaSend', tag, 'click', this.props.url, parseFloat(this.props.id)) );
     // ----------------------------------------------
   }
 }
@@ -107,7 +107,7 @@ export class ViewCarouselArticle extends React.Component {
  *  home: boolean
  * }}
  */
-ViewCarouselArticle.propTypes = {
+ComponentCarouselArticle.propTypes = {
   index: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string.isRequired,
@@ -127,6 +127,6 @@ ViewCarouselArticle.propTypes = {
 //  * @static
 //  * @type {{home: boolean}}
 //  */
-// ViewCarouselArticle.defaultProps = {
+// ComponentCarouselArticle.defaultProps = {
 //   home: false
 // };

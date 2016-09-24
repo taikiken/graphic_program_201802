@@ -28,7 +28,7 @@ import {Result} from '../../data/Result';
 import {Safety} from '../../data/Safety';
 
 // carousel
-import { ViewCarousel } from '../carousel/ViewCarousel';
+import { ComponentCarousel } from '../../component/carousel/ComponentCarousel';
 
 // dae
 import {ArticleDae} from '../../dae/ArticleDae';
@@ -580,7 +580,7 @@ export class ViewPickup extends View {
     const list = articles.map((article) => new ArticleDae(article));
 
     ReactDOM.render(
-      <ViewCarousel
+      <ComponentCarousel
         list={list}
         callback={this.executeSafely.bind(this)}
         polling={new Polling(this.waiting)}

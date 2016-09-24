@@ -14,9 +14,9 @@
 import { Empty } from '../../app/const/Empty';
 
 // view
-import { View } from '../View';
-import { ViewArticleThumbnail } from './ViewArticleThumbnail';
-import { ViewArticlePopular } from './ViewArticlePopular';
+import { View } from '../../view/View';
+import { ComponentArticleThumbnail } from './ComponentArticleThumbnail';
+import { ComponentArticlePopular } from './ComponentArticlePopular';
 
 // data
 import { Safety } from '../../data/Safety';
@@ -37,13 +37,13 @@ let Isotope = self.Isotope;
  * @since 2016-09-15
  *
  * <pre>
- *   <ViewArticlesMasonryInfinite/>
+ *   <ComponentArticlesMasonryInfinite/>
  * <pre>
  */
-export class ViewArticlesMasonryInfinite extends React.Component {
+export class ComponentArticlesMasonryInfinite extends React.Component {
   /**
    * プロパティと初期変数を設定します
-   * @param {Object} props React.props {@link ViewArticlesMasonryInfinite.propTypes}
+   * @param {Object} props React.props {@link ComponentArticlesMasonryInfinite.propTypes}
    */
   constructor(props) {
     super(props);
@@ -164,7 +164,7 @@ export class ViewArticlesMasonryInfinite extends React.Component {
             return(
               <div key={`archive-${dae.id}`} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
                 <a className="post" href={dae.url}>
-                  <ViewArticleThumbnail
+                  <ComponentArticleThumbnail
                     mediaType={dae.mediaType}
                     thumbnail={thumbnail}
                     title={dae.title}
@@ -185,7 +185,7 @@ export class ViewArticlesMasonryInfinite extends React.Component {
                     <div className="post-excerpt-text">{dae.description}</div>
                   </div>
                 </a>
-                <ViewArticlePopular
+                <ComponentArticlePopular
                   key={`comment-${dae.id}`}
                   uniqueId={`comment-${dae.id}`}
                   commentsPopular={commentsPopular}
@@ -276,7 +276,7 @@ export class ViewArticlesMasonryInfinite extends React.Component {
  *  masonry: boolean
  * }}
  */
-ViewArticlesMasonryInfinite.propTypes = {
+ComponentArticlesMasonryInfinite.propTypes = {
   list: React.PropTypes.array.isRequired,
   // home container かのフラッグ
   home: React.PropTypes.bool.isRequired,

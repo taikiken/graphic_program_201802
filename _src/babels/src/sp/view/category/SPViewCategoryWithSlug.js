@@ -40,8 +40,8 @@ import {ModelCategoriesSlug} from '../../../model/categoires/ModelCategoriesSlug
 // import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 
 // sp/view
-// import { SPComponentViewMoreButton } from '../articles/SPComponentViewMoreButton';
-import { SPViewArticles } from '../../component/articles/SPComponentArticles';
+// import { SPComponentMoreButton } from '../articles/SPComponentMoreButton';
+import { SPComponentArticles } from '../../component/articles/SPComponentArticles';
 
 // react
 let ReactDOM = self.ReactDOM;
@@ -265,7 +265,7 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
     //       //   slug={this.slug}
     //       // />,
     //       // @since 2016-09-16, more button changed
-    //       <SPComponentViewMoreButton
+    //       <SPComponentMoreButton
     //         show={show}
     //         action={this.action}
     //         element={this.moreElement}
@@ -310,7 +310,7 @@ export class SPViewCategoryWithSlug extends SPViewCategory {
         //   adSp={adSp}
         // />,
         // @since 2016-09-21 changed
-        <SPViewArticles
+        <SPComponentArticles
           list={articlesList}
           offset={this.request.offset}
           length={this.request.length}

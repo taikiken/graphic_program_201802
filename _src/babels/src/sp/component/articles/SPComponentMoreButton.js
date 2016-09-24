@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/09/17 - 22:06
+ * @date 2016/09/18 - 15:25
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,27 +11,27 @@
  */
 
 // app
-import {Message} from '../../app/const/Message';
+import {Message} from '../../../app/const/Message';
 
 // ui
-import { Rise } from '../../ui/Rise';
+import { Rise } from '../../../ui/Rise';
 
 // Ga
-import { Ga } from '../../ga/Ga';
-import { GaData } from '../../ga/GaData';
+import { Ga } from '../../../ga/Ga';
+import { GaData } from '../../../ga/GaData';
 
 // React
 const React = self.React;
 
 /**
- * view more button<br>
+ * SP: view more button<br>
  * window.bottom が button を超えたら次の読み込みを開始します
  * @since 2016-09-16
  */
-export class ViewMoreButton extends React.Component {
+export class SPComponentMoreButton extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ViewMoreButton.propTypes}
+   * @param {Object} props React props プロパティー {@link SPComponentMoreButton.propTypes}
    */
   constructor(props) {
     super(props);
@@ -62,8 +62,8 @@ export class ViewMoreButton extends React.Component {
      */
     this.boundClick = this.onClick.bind(this);
     /**
-     * page No. Ga に使用します<br>
-     * 初期表示がないかもしれないので page 1 は親で処理します
+     * 現在のページナンバー<br>
+     * 計測タグへ次の（表示する）ページナンバーを送信するために使用します
      * @type {number}
      * @default 1
      */
@@ -75,12 +75,10 @@ export class ViewMoreButton extends React.Component {
    */
   render() {
     // hasNext: true, button を表示する？
-    if (this.state.show) {
+    if ( this.state.show ) {
       return (
         <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
-          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.boundClick} >
-            <span>{Message.BUTTON_VIEW_MORE}</span>
-          </a>
+          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
           <span className="loading-spinner">&nbsp;</span>
         </div>
       );
@@ -160,7 +158,7 @@ export class ViewMoreButton extends React.Component {
     }
 
     // loading 表示のための css class を追加・削除
-    this.setState( {loading: loadingClass} );
+    this.setState({ loading: loadingClass });
   }
 
   /**
@@ -185,10 +183,18 @@ export class ViewMoreButton extends React.Component {
   onRise() {
     this.updateLoading(true);
     // Ga
-    if (this.props.home) {
-      this.gaHome();
+    if (this.props.type !== '') {
+      // ----------------------------------------------
+      // GA 計測タグ
+      // PC/スマホカテゴリー一覧の新着記事, movie, ranking
+      Ga.add( new GaData('SPComponentMoreButton.onRise', `${this.props.slug}_articles`, `view - ${this.props.type}`, String(++this.page), 0, true) );
+      // ----------------------------------------------
     } else {
-      this.gaCategory();
+      if (this.props.home) {
+        this.gaHome();
+      } else {
+        this.gaCategory();
+      }
     }
   }
   /**
@@ -198,7 +204,7 @@ export class ViewMoreButton extends React.Component {
     // ----------------------------------------------
     // GA 計測タグ
     // 記事一覧表示 / view more 部分 ※ 初期読み込み成功後に eventLabel:1として送信
-    Ga.add( new GaData('ViewMoreButton.gaHome', 'home_articles', 'view - new', String(++this.page), 0, true) );
+    Ga.add( new GaData('SPComponentMoreButton.gaHome', 'home_articles', 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
   /**
@@ -208,33 +214,44 @@ export class ViewMoreButton extends React.Component {
     // ----------------------------------------------
     // GA 計測タグ
     // PC/スマホカテゴリー一覧の新着記事
-    Ga.add( new GaData('ViewMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
+    Ga.add( new GaData('SPComponentMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
 }
+
 /**
  * プロパティ
  * @type {{
+ *  home: boolean,
  *  show: boolean,
- *  action: Object,
+ *  action: object,
  *  element: Element,
- *  loading: string
+ *  slug: string,
+ *  loading: string,
+ *  type: string
  * }}
  */
-ViewMoreButton.propTypes = {
-  home: React.PropTypes.bool.isRequired,
+SPComponentMoreButton.propTypes = {
   show: React.PropTypes.bool.isRequired,
   action: React.PropTypes.object.isRequired,
   // 監視コンテナ
   element: React.PropTypes.object.isRequired,
+  home: React.PropTypes.bool.isRequired,
   slug: React.PropTypes.string.isRequired,
   // option, default ''
-  loading: React.PropTypes.string
+  loading: React.PropTypes.string,
+  // ranking | movie
+  type: React.PropTypes.string
 };
+
 /**
  * デフォルトプロパティ
- * @type {{loading: string}}
+ * @type {{
+ *  loading: string,
+ *  type: string
+ * }}
  */
-ViewMoreButton.defaultProps = {
-  loading: ''
+SPComponentMoreButton.defaultProps = {
+  loading: '',
+  type: ''
 };

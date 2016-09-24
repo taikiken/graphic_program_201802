@@ -18,7 +18,7 @@
 import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
 // view
-import { ViewArticleThumbnail } from '../../../view/articles/ViewArticleThumbnail';
+import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 
 // Ga
 import { Ga } from '../../../ga/Ga';
@@ -72,7 +72,7 @@ export class SPComponentHeadlineArticle extends React.Component {
     return (
       <li className={`board-item board-item-${props.index}`}>
         <a className="post" href={props.url} onClick={this.boundGa}>
-          <ViewArticleThumbnail
+          <ComponentArticleThumbnail
             mediaType={props.mediaType}
             thumbnail={props.thumbnail}
             title={props.title}

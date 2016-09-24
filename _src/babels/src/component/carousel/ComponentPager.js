@@ -17,10 +17,10 @@ const React = self.React;
  * カルーセル・ページャーの1つのコンテナを作成します
  * @since 2016-09-15
  */
-export class ViewPager extends React.Component {
+export class ComponentPager extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ViewPager.propTypes}
+   * @param {Object} props プロパティ {@link ComponentPager.propTypes}
    */
   constructor(props) {
     super(props);
@@ -60,7 +60,7 @@ export class ViewPager extends React.Component {
  * @static
  * @type {{index: number, id: string, length: number, onPager: function}}
  */
-ViewPager.propTypes = {
+ComponentPager.propTypes = {
   index: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired,
   length: React.PropTypes.number.isRequired,

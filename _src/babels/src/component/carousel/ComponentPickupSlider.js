@@ -11,7 +11,7 @@
  */
 
 // carousel
-import { ViewCarouselArticle } from './ViewCarouselArticle';
+import { ComponentCarouselArticle } from './ComponentCarouselArticle';
 
 // app
 import { Empty } from '../../app/const/Empty';
@@ -51,7 +51,7 @@ const makeArticle = (dae, index, clone, home) => {
   // コンテナを 前後に clone するため article.id が使えない
   if (clone) {
     return (
-      <ViewCarouselArticle
+      <ComponentCarouselArticle
         key={`pickup-${index}`}
         index={index}
         id={String(dae.id)}
@@ -77,12 +77,12 @@ const makeArticle = (dae, index, clone, home) => {
  *
  * sp はスワイプが可能です
  */
-export class ViewPickupSlider extends React.Component {
+export class ComponentPickupSlider extends React.Component {
   /**
    * React property を設定します
    *
    * スワイプ関連イベントハンドラなど変数を初期化します
-   * @param {Object} props React props プロパティー {@link ViewPickupSlider.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentPickupSlider.propTypes}
    */
   constructor(props) {
     super(props);
@@ -361,7 +361,7 @@ export class ViewPickupSlider extends React.Component {
  *  pause: Function
  * }}
  */
-ViewPickupSlider.propTypes = {
+ComponentPickupSlider.propTypes = {
   // articles 配列を元にDomを作成する
   list: React.PropTypes.array.isRequired,
   sp: React.PropTypes.bool.isRequired,

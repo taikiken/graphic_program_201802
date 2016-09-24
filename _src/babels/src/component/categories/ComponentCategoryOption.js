@@ -14,11 +14,11 @@
 import { Dom } from '../../app/Dom';
 
 // view
-import { View } from '../View';
+import { View } from '../../view/View';
 // view/carousel
-import { ViewCarousel } from '../carousel/ViewCarousel';
+import { ComponentCarousel } from '../carousel/ComponentCarousel';
 // view/categories
-import { ViewHeadlineOption } from './ViewHeadlineOption';
+import { ComponentHeadlineOption } from './ComponentHeadlineOption';
 
 // model
 import { Model } from '../../model/Model';
@@ -47,7 +47,7 @@ const ReactDOM = self.ReactDOM;
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @since 2016-09-17
  */
-export class ViewCategoryOption extends View {
+export class ComponentCategoryOption extends View {
   /**
    * category slug を使用し API request を開始します
    * @param {string} [slug=all] category.slug
@@ -81,7 +81,7 @@ export class ViewCategoryOption extends View {
     }
 
     const category = new CategoriesSlugDae(response);
-    // console.log('ViewCategoryOption.done', category.pickup, category.headline);
+    // console.log('ComponentCategoryOption.done', category.pickup, category.headline);
 
     if (category.pickup.has()) {
       this.pickup(category);
@@ -107,7 +107,7 @@ export class ViewCategoryOption extends View {
     }
 
     ReactDOM.render(
-      <ViewCarousel
+      <ComponentCarousel
         list={category.pickup.articles}
         callback={this.boundSafety}
         polling={new Polling(1000 * 5)}
@@ -130,7 +130,7 @@ export class ViewCategoryOption extends View {
 
     const browser = Sagen.Browser.Mobile.phone() ? 'sp' : 'pc';
     ReactDOM.render(
-      <ViewHeadlineOption
+      <ComponentHeadlineOption
         list={category.headline.articles}
         callback={this.boundSafety}
         home={false}
