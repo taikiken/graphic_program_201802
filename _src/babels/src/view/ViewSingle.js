@@ -256,10 +256,13 @@ export class ViewSingle extends View {
   }
   /**
    * 関連記事（記事詳細の）
+   * <pre>
+   * desktop/p.php
+   * `_popIn_recommend` に JS で出力
+   * </pre>
    * @param {Array} related 配列内データ型はRelatedDom
    */
   related( related:Array = [] ):void {
-
     if ( !Safety.isElement( this._elements.related ) ) {
       // element が不正の時は処理しない
       return;

@@ -14,6 +14,7 @@
 let React = self.React;
 
 /**
+ * @deprecated 2016-09-24 instead use ComponentCategoryLabels
  * <p>記事が所属するカテゴリー名称を表示します</p>
  * <p>.category-label-wrapper カテゴリー表示</p>
  *

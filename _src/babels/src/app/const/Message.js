@@ -80,6 +80,14 @@ export class Message {
     return '新着記事';
   }
   /**
+   * RELATED_TITLE 関連ニュース
+   * @since 2016-09-27
+   * @return {string} 関連ニュース
+   */
+  static get RELATED_TITLE():string {
+    return '関連ニュース';
+  }
+  /**
    * UNLOAD, 入力内容が取消しされます
    * onbeforeunload message に使用します
    * @return {string} 入力内容が取消しされます
