@@ -10,6 +10,9 @@
  *
  */
 
+// app
+import { Url } from '../../app/const/Url';
+
 // React
 const React = self.React;
 /**
@@ -39,15 +42,16 @@ export class ComponentCategoryLabels extends React.Component {
 
     const id = props.id;
     const index = props.index;
+    const slug = props.slug || 'x';
 
     return (
-      <p className={`post-category post-category-${props.slug}`}>
+      <p className={`post-category post-category-${slug}`}>
         {
           /* Array<SlugDae> */
           categories.map((dae, i) => {
             return (
               <span key={`labels-${id}-${index}-${i}`} className="category-label">
-                {dae.label}
+                <a href={Url.category(dae.slug)}>{dae.label}</a>
               </span>
             );
           })
