@@ -135,7 +135,7 @@ import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
 // single
 import {SPViewSingle} from './sp/view/SPViewSingle';
 import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
-import {SPViewReadMore} from './sp/view/single/SPViewReadMore';
+import {SPViewContinueRead} from './sp/view/single/SPViewContinueRead';
 import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
 import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
 
@@ -240,7 +240,7 @@ let UT = {
       SPViewAppBanner,
       single: {
         SPViewSingleHeader,
-        SPViewReadMore,
+        SPViewContinueRead,
         SPViewSingleRanking,
         SPViewSingleRecommend
       },

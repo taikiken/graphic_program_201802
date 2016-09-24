@@ -12,7 +12,7 @@
 
 
 // view
-import {View} from '../../../view/View';
+// import {View} from '../../../view/View';
 import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
 
 // app
@@ -23,16 +23,16 @@ import {User} from '../../../app/User';
 import {SingleDae} from '../../../dae/SingleDae';
 
 // node
-import {BookmarkNode} from '../../../node/bookmark/BookmarkNode';
+// import {BookmarkNode} from '../../../node/bookmark/BookmarkNode';
 // import {CategoryLabelNode} from '../../../node/category/CategoryLabelNode';
-import {CategoryLabelNodeLink} from '../../../node/category/CategoryLabelNodeLink';
+// import {CategoryLabelNodeLink} from '../../../node/category/CategoryLabelNodeLink';
 
 // component
 // @since 2016-09-24
 import { SPComponentSingleHeader } from '../../component/singles/SPComponentSingleHeader';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -149,6 +149,7 @@ export class SPViewSingleHeader extends ViewSingleHeader {
       //   React.createElement( SPHeaderDom, { single: singleDae, sign: User.sign } ),
       //   this.element
       // );
+      // @since 2016-09-24 changed
       this.rendered = ReactDOM.render(
         <SPComponentSingleHeader
           single={singleDae}
