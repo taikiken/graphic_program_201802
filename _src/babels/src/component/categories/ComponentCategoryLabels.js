@@ -11,7 +11,7 @@
  */
 
 // app
-import { Url } from '../../app/const/Url';
+// import { Url } from '../../app/const/Url';
 
 // React
 const React = self.React;

@@ -24,7 +24,7 @@ export class Banner {
   /**
    * pc banner を生成します
    * @param {SingleDae} single 記事詳細 JSON data
-   * @return {?ReactClass} `div.sponsor-link` or null を返します
+   * @return {?BannerNode} `div.sponsor-link` or null を返します
    */
   static pc(single) {
     const userBanner = single.user.banner.pc;
@@ -47,7 +47,7 @@ export class Banner {
    * sp banner を生成します
    * @param {SingleDae} single 記事詳細 JSON data
    * @param {Element} element マウントする親エレメント
-   * @return {?ReactClass} `div.sponsor-link` or null を返します
+   * @return {?BannerNode} `div.sponsor-link` or null を返します
    */
   static sp(single, element) {
     if (!Safety.isElement(element)) {
