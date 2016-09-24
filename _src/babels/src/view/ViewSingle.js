@@ -249,7 +249,7 @@ export class ViewSingle extends View {
    * header View.DID_MOUNT event handler
    */
   headerMount():void {
-
+    // console.log('ViewSingle.headerMount');
     this._header.off( View.DID_MOUNT, this._boundMount );
     this.executeSafely( View.DID_MOUNT );
 

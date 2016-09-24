@@ -21,10 +21,12 @@ import {SingleDae} from '../../dae/SingleDae';
 import {User} from '../../app/User';
 
 // node
-import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
+// import {BookmarkNode} from '../../node/bookmark/BookmarkNode';
+
+import { ComponentHeader } from '../../component/singles/ComponentHeader';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -52,7 +54,7 @@ export class ViewSingleHeader extends View {
     this._single = single;
     /**
      * HeaderDom instance
-     * @type {null|Object}
+     * @type {?ComponentHeader|*}
      * @private
      */
     this._rendered = null;
@@ -62,16 +64,16 @@ export class ViewSingleHeader extends View {
   // ---------------------------------------------------
   /**
    * HeaderDom instance を取得します
-   * @return {?ReactClass} HeaderDom instance を返します
+   * @return {?ComponentHeader} HeaderDom instance を返します
    */
-  get rendered():Object {
+  get rendered():ComponentHeader {
     return this._rendered;
   }
   /**
    * HeaderDom instance を設定します
-   * @param {Object} rendered HeaderDom instance
+   * @param {?ComponentHeader} rendered HeaderDom instance
    */
-  set rendered( rendered:Object ):void {
+  set rendered( rendered:ComponentHeader ):void {
     this._rendered = rendered;
   }
   // ---------------------------------------------------
@@ -90,85 +92,94 @@ export class ViewSingleHeader extends View {
   render( singleDae:SingleDae ):void {
 
     let element = this.element;
-    let _this = this;
-
-    let HeaderDom = React.createClass( {
-      propTypes: {
-        single: React.PropTypes.object.isRequired,
-        sign: React.PropTypes.bool.isRequired
-      },
-      getInitialState: function() {
-        // this.action = null;
-
-        return {
-          sign: this.props.sign,
-          single: this.props.single,
-          status: this.props.single.isBookmarked,
-          bookmarked: this.props.single.isBookmarked ? 'bookmarked enable' : '',
-          loading: ''
-        };
-      },
-      render: function() {
-        let single = this.state.single;
-
-        return (
-          <div>
-            <div className={'post-heading post-heading-' + single.id}>
-              <h1>{single.title}</h1>
-            </div>
-            <div className="post-data">
-              <div className="f-left">
-                <p className="post-author">{single.user.userName}</p>
-                <p className="post-date">{single.displayDate}</p>
-              </div>
-              {/* div.f-right (bookmark: on / off) */}
-              <BookmarkNode
-                sign={this.state.sign}
-                isBookmarked={this.state.status}
-                articleId={String(single.id)}
-              />
-            </div>
-            {/* 記事上 画像 or 動画 */}
-            {/*
-            React component へ変更
-            Facebook Video のレンダリングが間に合わず sdk 描画が空振りすることがあるため
-            <div ref="singleImage"></div>
-
-             2016-03-15 design が変更になったのでここから分離します
-            <MediaNode
-              mediaType={this.state.single.mediaType}
-              media={this.state.single.media}
-            />
-             */}
-          </div>
-        );
-
-      },
-      // --------------------------------------------
-      // delegate
-      componentWillMount: function() {
-
-        // will mount
-        _this.executeSafely( View.WILL_MOUNT );
-
-      },
-      componentDidMount: function() {
-
-        // after mount
-        _this.executeSafely( View.DID_MOUNT );
-
-      },
-      // --------------------------------------------
-      // update
-      updateSingle: function( single, sign ) {
-        this.setState( { single: single, sign: sign } );
-      }
-    } );
+    // let _this = this;
+    //
+    // let HeaderDom = React.createClass( {
+    //   propTypes: {
+    //     single: React.PropTypes.object.isRequired,
+    //     sign: React.PropTypes.bool.isRequired
+    //   },
+    //   getInitialState: function() {
+    //     // this.action = null;
+    //
+    //     return {
+    //       sign: this.props.sign,
+    //       single: this.props.single,
+    //       status: this.props.single.isBookmarked,
+    //       bookmarked: this.props.single.isBookmarked ? 'bookmarked enable' : '',
+    //       loading: ''
+    //     };
+    //   },
+    //   render: function() {
+    //     let single = this.state.single;
+    //
+    //     return (
+    //       <div>
+    //         <div className={'post-heading post-heading-' + single.id}>
+    //           <h1>{single.title}</h1>
+    //         </div>
+    //         <div className="post-data">
+    //           <div className="f-left">
+    //             <p className="post-author">{single.user.userName}</p>
+    //             <p className="post-date">{single.displayDate}</p>
+    //           </div>
+    //           {/* div.f-right (bookmark: on / off) */}
+    //           <BookmarkNode
+    //             sign={this.state.sign}
+    //             isBookmarked={this.state.status}
+    //             articleId={String(single.id)}
+    //           />
+    //         </div>
+    //         {/* 記事上 画像 or 動画 */}
+    //         {/*
+    //         React component へ変更
+    //         Facebook Video のレンダリングが間に合わず sdk 描画が空振りすることがあるため
+    //         <div ref="singleImage"></div>
+    //
+    //          2016-03-15 design が変更になったのでここから分離します
+    //         <MediaNode
+    //           mediaType={this.state.single.mediaType}
+    //           media={this.state.single.media}
+    //         />
+    //          */}
+    //       </div>
+    //     );
+    //
+    //   },
+    //   // --------------------------------------------
+    //   // delegate
+    //   componentWillMount: function() {
+    //
+    //     // will mount
+    //     _this.executeSafely( View.WILL_MOUNT );
+    //
+    //   },
+    //   componentDidMount: function() {
+    //
+    //     // after mount
+    //     _this.executeSafely( View.DID_MOUNT );
+    //
+    //   },
+    //   // --------------------------------------------
+    //   // update
+    //   updateSingle: function( single, sign ) {
+    //     this.setState( { single: single, sign: sign } );
+    //   }
+    // } );
 
     if ( this._rendered === null ) {
 
+      // this._rendered = ReactDOM.render(
+      //   React.createElement( HeaderDom, { single: singleDae, sign: User.sign } ),
+      //   element
+      // );
+      // @since 2016-09-24 changed
       this._rendered = ReactDOM.render(
-        React.createElement( HeaderDom, { single: singleDae, sign: User.sign } ),
+        <ComponentHeader
+          single={singleDae}
+          sign={User.sign}
+          callback={this.executeSafely.bind(this)}
+        />,
         element
       );
 

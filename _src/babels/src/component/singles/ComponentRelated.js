@@ -46,10 +46,19 @@ export class ComponentRelated extends React.Component {
   constructor(props) {
     super(props);
 
+    /**
+     * React state
+     * @type {{list: Array<RelatedDae>}}
+     * */
     this.state = {
       list: props.list
     };
   }
+  /**
+   * state.list を元に `div.related-post` を出力します<br>
+   * list.length が `0` の時には null を返します
+   * @return {?XML} ist.length が `0` の時には null を返します
+   * */
   render() {
     const list = this.state.list;
     // ない時は表示しない
@@ -82,7 +91,7 @@ export class ComponentRelated extends React.Component {
                       recommend={false}
                     />
                     <div className="post-data">
-                      {/*<p className={`post-category post-category-${dae.category.slug}`}>{dae.category.label}</p>*/}
+                      {/* <p className={`post-category post-category-${dae.category.slug}`}>{dae.category.label}</p> */}
                       <ComponentCategoryLabels
                         index={i}
                         id={`related-${dae.id}`}
