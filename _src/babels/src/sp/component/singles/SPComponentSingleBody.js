@@ -11,22 +11,22 @@
  */
 
 // app
-import { Message } from '../../app/const/Message';
+import { Message } from '../../../app/const/Message';
 
 // view
-import { View } from '../../view/View';
+import { View } from '../../../view/View';
 
 // React
 const React = self.React;
 
 /**
- * 記事詳細本文および省略分を表示します
+ * SP: 記事詳細本文および省略分を表示します
  * @since 2016-09-25
  */
-export class ComponentSingleBody extends React.Component {
+export class SPComponentSingleBody extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentSingleBody.propTypes}
+   * @param {Object} props React props プロパティー {@link SPComponentSingleBody.propTypes}
    */
   constructor(props) {
     super(props);
@@ -58,9 +58,9 @@ export class ComponentSingleBody extends React.Component {
     }
 
     if (single.readmore.isReadmore) {
-      return ComponentSingleBody.excerpt(single);
+      return SPComponentSingleBody.excerpt(single);
     } else {
-      return ComponentSingleBody.body(body);
+      return SPComponentSingleBody.body(body);
     }
   }
   /**
@@ -86,7 +86,7 @@ export class ComponentSingleBody extends React.Component {
     }
 
     return (
-      <div className="post-content">
+      <div id="post-content-container" className="post-content">
         <p>{description}</p>
         <p>
           <a href={single.readmore.url} target="_blank">{Message.READ_MORE_EXTERNAL}</a>
@@ -101,7 +101,10 @@ export class ComponentSingleBody extends React.Component {
    */
   static body(body) {
     return (
-      <div className="post-content" dangerouslySetInnerHTML={{__html: body}}></div>
+      <div className="sp_post-content">
+        <div id="post-content-container" className="post-content excerpt hidden" dangerouslySetInnerHTML={{__html: body}}></div>
+        <div id="post-content-read-more" className="post-content-read-more"></div>
+      </div>
     );
   }
 }
@@ -109,7 +112,7 @@ export class ComponentSingleBody extends React.Component {
  * プロパティ
  * @type {{single: SingleDae, callback: Function}}
  */
-ComponentSingleBody.propTypes = {
+SPComponentSingleBody.propTypes = {
   single: React.PropTypes.object.isRequired,
   callback: React.PropTypes.func.isRequired
 };
