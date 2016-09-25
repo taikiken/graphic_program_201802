@@ -10,6 +10,8 @@
  *
  */
 
+import { View } from '../../view/View';
+
 // React
 const React = self.React;
 
@@ -21,8 +23,22 @@ export class ComponentSingleBody extends React.Component {
       single: props.single
     };
   }
-  componentDidMount() {}
-  render() {}
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+  }
+  render() {
+    const body = this.state.body;
+    if (!body) {
+      return null;
+    }
+
+
+  }
+  body(body) {
+    return (
+      <div className="post-content"></div>
+    );
+  }
   updateBody(single) {
     this.setState({ single });
   }
