@@ -258,6 +258,13 @@ export class Message {
   static get READ_MORE():string {
     return '続きを読む';
   }
+  /**
+   * READ_MORE_EXTERNAL 続きを読む(外部サイトへ)
+   * @return {string} 続きを読む(外部サイトへ) を返します
+   */
+  static get READ_MORE_EXTERNAL():string {
+    return '続きを読む(外部サイトへ)';
+  }
   // ----
   // button
 

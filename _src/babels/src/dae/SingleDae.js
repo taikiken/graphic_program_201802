@@ -18,6 +18,7 @@ import {KeywordsDae} from './single/KeywordsDae';
 import {RelatedDae} from './RelatedDae';
 // @since 2016-09-25
 import { CanonicalDae } from './single/CanonicalDae';
+import { ReadmoreDae } from './single/ReadmoreDae';
 import { PickupDae } from './caegories/PickupDae';
 
 /**
@@ -73,6 +74,13 @@ export class SingleDae extends RelatedDae {
      * @private
      */
     this._recommendArticles = new PickupDae(response.recommend_articles);
+    /**
+     * response.readmore を ReadmoreDae instance として管理します
+     * @since 2016-09-25
+     * @type {PickupDae}
+     * @private
+     */
+    this._readmore = ReadmoreDae(response.readmore);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -175,5 +183,12 @@ export class SingleDae extends RelatedDae {
    */
   get recommendArticles():PickupDae {
     return this._recommendArticles;
+  }
+  /**
+   * 「続きを読む」フラッグ ReadmoreDae instance を取得します
+   * @return {ReadmoreDae} 「続きを読む」フラッグ ReadmoreDae instance を返します
+   */
+  get readmore():ReadmoreDae {
+    return this._readmore;
   }
 }
