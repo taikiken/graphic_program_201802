@@ -3,17 +3,6 @@
 //  記事詳細
 // --------------------------------------------------------
 ?>
-<style type="text/css">
-  #ima-ad-container{
-    /*z-index:-99;*/
-  }
-  #content_video{
-    position: relative;
-  }
-  #content_video_html5_api_html5_api{
-    /*display: none;*/
-  }
-</style>
 <div class="body-sec">
   <div class="body-sec-inner">
 
@@ -257,9 +246,7 @@
           var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
               pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-        })();render
-
-        $('')
+        })();
       </script>
       <!-- //#310 popin ebmed code  -->
 
