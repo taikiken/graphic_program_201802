@@ -20,13 +20,13 @@ import { MessageSNS } from '../../app/const/MessageSNS';
 const React = self.React;
 
 /**
- * 記事詳細上部 SNS ブロック
+ * SP: 記事詳細上部 SNS ブロック
  * @since 2016-09-25
  */
-export class ComponentSingleSNSAbove extends React.Component {
+export class SPComponentSingleSNSAbove extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentSingleSNSAbove.propTypes}
+   * @param {Object} props React props プロパティー {@link SPComponentSingleSNSAbove.propTypes}
    */
   constructor(props) {
     super(props);
@@ -38,10 +38,6 @@ export class ComponentSingleSNSAbove extends React.Component {
     this.state = {
       single: props.single
     };
-    //
-    // this.boundFB = this.openFacebook.bind(this);
-    // this.boundTW = this.openTwitter.bind(this);
-    // this.boundLine = this.openLine.bind(this);
   }
   /**
    * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
@@ -62,40 +58,29 @@ export class ComponentSingleSNSAbove extends React.Component {
 
     const title = single.title;
     return (
-      <div className="post-sns">
+      <div className="post-sns_upper">
         <ul className="post-sns-list">
-          {/* facebook like */}
-          <li className="post-sns-item post-sns-item_fbgood">
-            <div
-              className="fb-like"
-              data-href={url}
-              data-layout="box_count"
-              data-action="like"
-              data-show-faces="false"
-              data-share="false">
-            </div>
-          </li>
           {/* facebook share */}
           <li className="post-sns-item post-sns-item_fb">
-            <a href={`http://www.facebook.com/share.php?u=${url}&t=${title}`} rel="nofollow" onClick={ComponentSingleSNSAbove.openFacebook}>
-              {MessageSNS.FACEBOOK}
+            <a href={`http://www.facebook.com/share.php?u=${url}&t=${title}`} rel="nofollow" target="_blank">
+              <span>{MessageSNS.FACEBOOK}</span>
             </a>
           </li>
-          {/* Twitter */}
+          {/* Twitter スマホ版はTwitter textをencodeする */}
           <li className="post-sns-item post-sns-item_tw">
-            <a href={`http://twitter.com/share?text=${title}&url=${url}&via=${MessageSNS.VIA}`} rel="nofollow" onClick={ComponentSingleSNSAbove.openTwitter}>
+            <a href={`http://twitter.com/share?text=${encodeURIComponent(title)}&url=${url}&via=${MessageSNS.VIA}`} rel="nofollow" target="_blank">
               <span>{MessageSNS.TWEET}</span>
             </a>
           </li>
           {/* Google+ */}
           <li className="post-sns-item post-sns-item_gt">
-            <a href={`https://plus.google.com/share?url=${url}`} rel="nofollow" onClick={ComponentSingleSNSAbove.openLine}>
+            <a href={`https://plus.google.com/share?url=${url}`} rel="nofollow" target="_blank">
               {MessageSNS.GOOGLE_PLUS}
             </a>
           </li>
           {/* LINE */}
           <li className="post-sns-item post-sns-item_line">
-            <a href="http://line.me/R/msg/text/" rel="nofollow">
+            <a href={`http://line.me/R/msg/text/?${encodeURIComponent(title)} ${url}`} rel="nofollow" target="_blank">
               <span>{MessageSNS.SEND_LINE}</span>
             </a>
           </li>
@@ -126,60 +111,12 @@ export class ComponentSingleSNSAbove extends React.Component {
   updateSingle(single) {
     this.setState({ single });
   }
-  /**
-   * 別ウインドウを開き Facebook share します
-   * @param {Event} event click event
-   * @return {boolean} false を返します
-   */
-  static openFacebook(event) {
-    event.preventDefault();
-    const target = event.target;
-    const href = target.href;
-    if (!href) {
-      return false;
-    }
-
-    window.open(encodeURI(decodeURI(href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes');
-    return false;
-  }
-  /**
-   * 別ウインドウを開き Tweet します
-   * @param {Event} event click event
-   * @return {boolean} false を返します
-   */
-  static openTwitter(event) {
-    event.preventDefault();
-    const target = event.target;
-    const href = target.href;
-    if (!href) {
-      return false;
-    }
-
-    window.open(encodeURI(decodeURI(href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
-    return false;
-  }
-  /**
-   * 別ウインドウを開き LINEへ送る します
-   * @param {Event} event click event
-   * @return {boolean} false を返します
-   */
-  static openLine(event) {
-    event.preventDefault();
-    const target = event.target;
-    const href = target.href;
-    if (!href) {
-      return false;
-    }
-
-    window.open(encodeURI(decodeURI(href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
-    return false;
-  }
 }
 /**
  * プロパティ
  * @type {{single: SingleDae, callback: Function}}
  */
-ComponentSingleSNSAbove.propTypes = {
+SPComponentSingleSNSAbove.propTypes = {
   single: React.PropTypes.object.isRequired,
   callback: React.PropTypes.func.isRequired
 };
