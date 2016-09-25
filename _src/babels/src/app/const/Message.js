@@ -9,28 +9,28 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
  * <p>表示文章定義</p>
  * 全て static です
  */
 export class Message {
-  /**
-   * <p>表示文章定義</p>
-   * <p>error, 注意などの文章を定義します</p>
-   * <p>static class です, instance を作成しません</P>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target:Symbol ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Message is static Class. not use new Message().' );
-
-    }
-
-  }
+  // /**
+  //  * <p>表示文章定義</p>
+  //  * <p>error, 注意などの文章を定義します</p>
+  //  * <p>static class です, instance を作成しません</P>
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Message is static Class. not use new Message().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------

@@ -38,14 +38,12 @@ export class SPComponentSingleBody extends React.Component {
       single: props.single
     };
   }
-
   /**
    * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
   }
-
   /**
    * `div.post-content` を出力します
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
