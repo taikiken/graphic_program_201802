@@ -347,28 +347,56 @@ export class ComponentPickupSlider extends React.Component {
     touching.off(Touching.END, this.boundEnd);
     touching.off(Touching.CANCEL, this.boundCancel);
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  list: Array<ArticleDae>,
+   *  sp: boolean,
+   *  home: boolean,
+   *  next: Function,
+   *  prev: Function,
+   *  play: Function,
+   *  pause: Function
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      // articles 配列を元にDomを作成する
+      list: React.PropTypes.array.isRequired,
+      sp: React.PropTypes.bool.isRequired,
+      home: React.PropTypes.bool.isRequired,
+      next: React.PropTypes.func.isRequired,
+      prev: React.PropTypes.func.isRequired,
+      play: React.PropTypes.func.isRequired,
+      pause: React.PropTypes.func.isRequired,
+      length: React.PropTypes.func.isRequired
+    };
+  }
 }
-
-/**
- * React の PropTypes をプロパティに設定します
- * @type {{
- *  list: Array<ArticleDae>,
- *  sp: boolean,
- *  home: boolean,
- *  next: Function,
- *  prev: Function,
- *  play: Function,
- *  pause: Function
- * }}
- */
-ComponentPickupSlider.propTypes = {
-  // articles 配列を元にDomを作成する
-  list: React.PropTypes.array.isRequired,
-  sp: React.PropTypes.bool.isRequired,
-  home: React.PropTypes.bool.isRequired,
-  next: React.PropTypes.func.isRequired,
-  prev: React.PropTypes.func.isRequired,
-  play: React.PropTypes.func.isRequired,
-  pause: React.PropTypes.func.isRequired,
-  length: React.PropTypes.func.isRequired
-};
+//
+// /**
+//  * React の PropTypes をプロパティに設定します
+//  * @type {{
+//  *  list: Array<ArticleDae>,
+//  *  sp: boolean,
+//  *  home: boolean,
+//  *  next: Function,
+//  *  prev: Function,
+//  *  play: Function,
+//  *  pause: Function
+//  * }}
+//  */
+// ComponentPickupSlider.propTypes = {
+//   // articles 配列を元にDomを作成する
+//   list: React.PropTypes.array.isRequired,
+//   sp: React.PropTypes.bool.isRequired,
+//   home: React.PropTypes.bool.isRequired,
+//   next: React.PropTypes.func.isRequired,
+//   prev: React.PropTypes.func.isRequired,
+//   play: React.PropTypes.func.isRequired,
+//   pause: React.PropTypes.func.isRequired,
+//   length: React.PropTypes.func.isRequired
+// };

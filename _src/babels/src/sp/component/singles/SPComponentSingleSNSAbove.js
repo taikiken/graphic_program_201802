@@ -96,7 +96,8 @@ export class SPComponentSingleSNSAbove extends React.Component {
                 data-layout="box_count"
                 data-action="like"
                 data-show-faces="false"
-                data-share="false">
+                data-share="false"
+              >
               </div>
             </dd>
           </dl>
@@ -111,12 +112,25 @@ export class SPComponentSingleSNSAbove extends React.Component {
   updateSingle(single) {
     this.setState({ single });
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, callback: Function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{single: SingleDae, callback: Function}}
- */
-SPComponentSingleSNSAbove.propTypes = {
-  single: React.PropTypes.object.isRequired,
-  callback: React.PropTypes.func.isRequired
-};
+// /**
+//  * プロパティ
+//  * @type {{single: SingleDae, callback: Function}}
+//  */
+// SPComponentSingleSNSAbove.propTypes = {
+//   single: React.PropTypes.object.isRequired,
+//   callback: React.PropTypes.func.isRequired
+// };

@@ -95,35 +95,70 @@ export class ComponentHeadlineArticle extends React.Component {
     Ga.add(new GaData('ComponentHeadlineArticle.gaSend', `${tag}_headline`, 'click', this.props.url, parseFloat(this.props.id)));
     // ----------------------------------------------
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  index: number,
+   *  id: string,
+   *  slug: string,
+   *  categories: array,
+   *  url: string,
+   *  date: string,
+   *  title: string,
+   *  thumbnail: string,
+   *  mediaType: string,
+   *  home: bool
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      index: React.PropTypes.number.isRequired,
+      id: React.PropTypes.string.isRequired,
+      slug: React.PropTypes.string.isRequired,
+      // @since 2016-06-27 categories へ切替
+      // category: React.PropTypes.string.isRequired,
+      // category2: React.PropTypes.string,
+      categories: React.PropTypes.array.isRequired,
+      url: React.PropTypes.string.isRequired,
+      date: React.PropTypes.string.isRequired,
+      title: React.PropTypes.string.isRequired,
+      thumbnail: React.PropTypes.string.isRequired,
+      mediaType: React.PropTypes.string.isRequired,
+      home: React.PropTypes.bool.isRequired
+    };
+  }
 }
-
-/**
- *
- * @type {{
- *  index: number,
- *  id: string,
- *  slug: string,
- *  categories: array,
- *  url: string,
- *  date: string,
- *  title: string,
- *  thumbnail: string,
- *  mediaType: string,
- *  home: bool
- * }}
- */
-ComponentHeadlineArticle.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  // @since 2016-06-27 categories へ切替
-  // category: React.PropTypes.string.isRequired,
-  // category2: React.PropTypes.string,
-  categories: React.PropTypes.array.isRequired,
-  url: React.PropTypes.string.isRequired,
-  date: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  thumbnail: React.PropTypes.string.isRequired,
-  mediaType: React.PropTypes.string.isRequired,
-  home: React.PropTypes.bool.isRequired
-};
+//
+// /**
+//  *
+//  * @type {{
+//  *  index: number,
+//  *  id: string,
+//  *  slug: string,
+//  *  categories: array,
+//  *  url: string,
+//  *  date: string,
+//  *  title: string,
+//  *  thumbnail: string,
+//  *  mediaType: string,
+//  *  home: bool
+//  * }}
+//  */
+// ComponentHeadlineArticle.propTypes = {
+//   index: React.PropTypes.number.isRequired,
+//   id: React.PropTypes.string.isRequired,
+//   slug: React.PropTypes.string.isRequired,
+//   // @since 2016-06-27 categories へ切替
+//   // category: React.PropTypes.string.isRequired,
+//   // category2: React.PropTypes.string,
+//   categories: React.PropTypes.array.isRequired,
+//   url: React.PropTypes.string.isRequired,
+//   date: React.PropTypes.string.isRequired,
+//   title: React.PropTypes.string.isRequired,
+//   thumbnail: React.PropTypes.string.isRequired,
+//   mediaType: React.PropTypes.string.isRequired,
+//   home: React.PropTypes.bool.isRequired
+// };

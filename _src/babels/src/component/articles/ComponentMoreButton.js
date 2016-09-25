@@ -211,30 +211,64 @@ export class ComponentMoreButton extends React.Component {
     Ga.add( new GaData('ComponentMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  show: boolean,
+   *  action: Object,
+   *  element: Element,
+   *  loading: string
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      home: React.PropTypes.bool.isRequired,
+      show: React.PropTypes.bool.isRequired,
+      action: React.PropTypes.object.isRequired,
+      // 監視コンテナ
+      element: React.PropTypes.object.isRequired,
+      slug: React.PropTypes.string.isRequired,
+      // option, default ''
+      loading: React.PropTypes.string
+    };
+  }
+
+  /**
+   * defaultProps
+   * @return {{loading: string}} React props
+   */
+  static get defaultProps() {
+    return {
+      loading: ''
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{
- *  show: boolean,
- *  action: Object,
- *  element: Element,
- *  loading: string
- * }}
- */
-ComponentMoreButton.propTypes = {
-  home: React.PropTypes.bool.isRequired,
-  show: React.PropTypes.bool.isRequired,
-  action: React.PropTypes.object.isRequired,
-  // 監視コンテナ
-  element: React.PropTypes.object.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  // option, default ''
-  loading: React.PropTypes.string
-};
-/**
- * デフォルトプロパティ
- * @type {{loading: string}}
- */
-ComponentMoreButton.defaultProps = {
-  loading: ''
-};
+// /**
+//  * プロパティ
+//  * @type {{
+//  *  show: boolean,
+//  *  action: Object,
+//  *  element: Element,
+//  *  loading: string
+//  * }}
+//  */
+// ComponentMoreButton.propTypes = {
+//   home: React.PropTypes.bool.isRequired,
+//   show: React.PropTypes.bool.isRequired,
+//   action: React.PropTypes.object.isRequired,
+//   // 監視コンテナ
+//   element: React.PropTypes.object.isRequired,
+//   slug: React.PropTypes.string.isRequired,
+//   // option, default ''
+//   loading: React.PropTypes.string
+// };
+// /**
+//  * デフォルトプロパティ
+//  * @type {{loading: string}}
+//  */
+// ComponentMoreButton.defaultProps = {
+//   loading: ''
+// };

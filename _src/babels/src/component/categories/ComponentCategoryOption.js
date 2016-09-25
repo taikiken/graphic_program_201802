@@ -61,7 +61,15 @@ export class ComponentCategoryOption extends View {
     // callback[Model.UNDEFINED_ERROR] = boundFail;
     // callback[Model.RESPONSE_ERROR] = boundFail;
 
+    /**
+     * JSON 取得 action instance
+     * @type {ModelCategoriesSlug}
+     */
     this.action = new ModelCategoriesSlug(slug, callback);
+    /**
+     * bind 済み executeSafely
+     * @type {Function}
+     */
     this.boundSafety = this.executeSafely.bind(this);
   }
   /**
@@ -140,5 +148,5 @@ export class ComponentCategoryOption extends View {
       element
     );
   }
-  safety() {}
+  // safety() {}
 }

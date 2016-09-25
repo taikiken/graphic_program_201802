@@ -53,16 +53,31 @@ export class ComponentPager extends React.Component {
     // pager html 内数字をコールバックに通知します
     this.props.onPager(event.target.innerHTML);
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{index: number, id: string, length: number, onPager: function}} React props
+   */
+  static get propTypes() {
+    return {
+      index: React.PropTypes.number.isRequired,
+      id: React.PropTypes.string.isRequired,
+      length: React.PropTypes.number.isRequired,
+      onPager: React.PropTypes.func.isRequired
+    };
+  }
 }
-
-/**
- * プロパティ
- * @static
- * @type {{index: number, id: string, length: number, onPager: function}}
- */
-ComponentPager.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired,
-  length: React.PropTypes.number.isRequired,
-  onPager: React.PropTypes.func.isRequired
-};
+//
+// /**
+//  * プロパティ
+//  * @static
+//  * @type {{index: number, id: string, length: number, onPager: function}}
+//  */
+// ComponentPager.propTypes = {
+//   index: React.PropTypes.number.isRequired,
+//   id: React.PropTypes.string.isRequired,
+//   length: React.PropTypes.number.isRequired,
+//   onPager: React.PropTypes.func.isRequired
+// };

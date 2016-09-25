@@ -80,7 +80,7 @@ export class SingleDae extends RelatedDae {
      * @type {PickupDae}
      * @private
      */
-    this._readmore = ReadmoreDae(response.readmore);
+    this._readmore = new ReadmoreDae(response.readmore);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

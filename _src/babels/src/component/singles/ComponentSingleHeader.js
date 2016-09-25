@@ -96,14 +96,28 @@ export class ComponentSingleHeader extends React.Component {
       </div>
     );
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, sign: boolean, callback: function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      sign: React.PropTypes.bool.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
 }
 
-/**
- * プロパティ
- * @type {{single: SingleDae, sign: boolean, callback: function}}
- */
-ComponentSingleHeader.propTypes = {
-  single: React.PropTypes.object.isRequired,
-  sign: React.PropTypes.bool.isRequired,
-  callback: React.PropTypes.func.isRequired
-};
+// /**
+//  * プロパティ
+//  * @type {{single: SingleDae, sign: boolean, callback: function}}
+//  */
+// ComponentSingleHeader.propTypes = {
+//   single: React.PropTypes.object.isRequired,
+//   sign: React.PropTypes.bool.isRequired,
+//   callback: React.PropTypes.func.isRequired
+// };

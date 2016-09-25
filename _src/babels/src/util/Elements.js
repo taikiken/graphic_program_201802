@@ -33,6 +33,10 @@ export class Elements extends Offset {
      * @type {Sagen.Dom}
      */
     this[domSymbol] = new Sagen.Dom(element);
+    /**
+     * 引数 `element` の style 関連管理を行います
+     * @type {Style}
+     */
     this[styleSymbol] = new Style(element);
   }
   // ---------------------------------------------------

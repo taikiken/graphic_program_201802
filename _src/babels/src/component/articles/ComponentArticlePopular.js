@@ -115,15 +115,30 @@ export class ComponentArticlePopular extends React.Component {
       </div>
     );
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{commentsPopular: PopularDae, total: number, articleId: string, uniqueId: string}} React props
+   */
+  static get propTypes() {
+    return {
+      commentsPopular: React.PropTypes.object.isRequired,
+      total: React.PropTypes.number.isRequired,
+      articleId: React.PropTypes.string.isRequired,
+      uniqueId: React.PropTypes.string.isRequired
+    };
+  }
 }
-
-/**
- * デフォルトプロパティ
- * @type {{commentsPopular: Object, total: number, articleId: string, uniqueId: string}}
- */
-ComponentArticlePopular.propTypes = {
-  commentsPopular: React.PropTypes.object.isRequired,
-  total: React.PropTypes.number.isRequired,
-  articleId: React.PropTypes.string.isRequired,
-  uniqueId: React.PropTypes.string.isRequired
-};
+//
+// /**
+//  * デフォルトプロパティ
+//  * @type {{commentsPopular: Object, total: number, articleId: string, uniqueId: string}}
+//  */
+// ComponentArticlePopular.propTypes = {
+//   commentsPopular: React.PropTypes.object.isRequired,
+//   total: React.PropTypes.number.isRequired,
+//   articleId: React.PropTypes.string.isRequired,
+//   uniqueId: React.PropTypes.string.isRequired
+// };

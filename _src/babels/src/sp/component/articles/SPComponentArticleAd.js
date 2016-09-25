@@ -28,6 +28,10 @@ export class SPComponentArticleAd extends React.Component {
   constructor(props) {
     super(props);
 
+    /**
+     * React state
+     * @type {{third: boolean}}
+     */
     this.state = {
       // index が 2 の時に広告をinsert
       third: props.index === 2
@@ -88,23 +92,42 @@ export class SPComponentArticleAd extends React.Component {
       this.refs.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
     }
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{index: number, length: number, uniqueId: string, adSp: string}} React props
+   */
+  static get propTypes() {
+    return {
+      // index, 何番目
+      index: React.PropTypes.number.isRequired,
+      // loop list の length === 総数
+      length: React.PropTypes.number.isRequired,
+      // element id に使用する
+      uniqueId: React.PropTypes.string.isRequired,
+      // ストリーム広告
+      adSp: React.PropTypes.string.isRequired
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{
- *  index: number,
- *  length: number,
- *  uniqueId: string,
- *  adSp: string
- * }}
- */
-SPComponentArticleAd.propTypes = {
-  // index, 何番目
-  index: React.PropTypes.number.isRequired,
-  // loop list の length === 総数
-  length: React.PropTypes.number.isRequired,
-  // element id に使用する
-  uniqueId: React.PropTypes.string.isRequired,
-  // ストリーム広告
-  adSp: React.PropTypes.string.isRequired
-};
+// /**
+//  * プロパティ
+//  * @type {{
+//  *  index: number,
+//  *  length: number,
+//  *  uniqueId: string,
+//  *  adSp: string
+//  * }}
+//  */
+// SPComponentArticleAd.propTypes = {
+//   // index, 何番目
+//   index: React.PropTypes.number.isRequired,
+//   // loop list の length === 総数
+//   length: React.PropTypes.number.isRequired,
+//   // element id に使用する
+//   uniqueId: React.PropTypes.string.isRequired,
+//   // ストリーム広告
+//   adSp: React.PropTypes.string.isRequired
+// };

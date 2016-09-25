@@ -80,16 +80,32 @@ export class ComponentCommentsSecond extends React.Component {
       </div>
     );
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{seconds: Array<PopularDae>, articleId: string, total: number, hasSecond: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      // Array<PopularDae>
+      seconds: React.PropTypes.array.isRequired,
+      articleId: React.PropTypes.string.isRequired,
+      total: React.PropTypes.number.isRequired,
+      hasSecond: React.PropTypes.bool.isRequired
+    };
+  }
 }
-
-/**
- * デフォルトプロパティ
- * @type {{seconds: Array<PopularDae>, articleId: string, total: number, hasSecond: boolean}}
- */
-ComponentCommentsSecond.propTypes = {
-  // Array<PopularDae>
-  seconds: React.PropTypes.array.isRequired,
-  articleId: React.PropTypes.string.isRequired,
-  total: React.PropTypes.number.isRequired,
-  hasSecond: React.PropTypes.bool.isRequired
-};
+//
+// /**
+//  * デフォルトプロパティ
+//  * @type {{seconds: Array<PopularDae>, articleId: string, total: number, hasSecond: boolean}}
+//  */
+// ComponentCommentsSecond.propTypes = {
+//   // Array<PopularDae>
+//   seconds: React.PropTypes.array.isRequired,
+//   articleId: React.PropTypes.string.isRequired,
+//   total: React.PropTypes.number.isRequired,
+//   hasSecond: React.PropTypes.bool.isRequired
+// };

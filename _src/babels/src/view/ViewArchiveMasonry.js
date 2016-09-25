@@ -71,6 +71,10 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     this.slug = 'all';
 
     // @since @2016-09-01
+    /**
+     * Scroll instance, コンテナ高さが変わった時にイベントを発火させるために使用します
+     * @type {Scroll}
+     */
     this.scroll = Scroll.factory();
   }
   // ---------------------------------------------------

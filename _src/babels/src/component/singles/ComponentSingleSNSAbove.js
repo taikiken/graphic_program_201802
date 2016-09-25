@@ -66,7 +66,8 @@ export class ComponentSingleSNSAbove extends React.Component {
               data-layout="box_count"
               data-action="like"
               data-show-faces="false"
-              data-share="false">
+              data-share="false"
+            >
             </div>
           </li>
           {/* facebook share */}
@@ -105,7 +106,8 @@ export class ComponentSingleSNSAbove extends React.Component {
                 data-layout="box_count"
                 data-action="like"
                 data-show-faces="false"
-                data-share="false">
+                data-share="false"
+              >
               </div>
             </dd>
           </dl>
@@ -126,6 +128,9 @@ export class ComponentSingleSNSAbove extends React.Component {
   updateSingle(single) {
     this.setState({ single });
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
   /**
    * 別ウインドウを開き Facebook share します
    * @param {Event} event click event
@@ -174,12 +179,22 @@ export class ComponentSingleSNSAbove extends React.Component {
     window.open(encodeURI(decodeURI(href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
     return false;
   }
+  /**
+   * propTypes
+   * @return {{single: SingleDae, callback: Function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{single: SingleDae, callback: Function}}
- */
-ComponentSingleSNSAbove.propTypes = {
-  single: React.PropTypes.object.isRequired,
-  callback: React.PropTypes.func.isRequired
-};
+// /**
+//  * プロパティ
+//  * @type {{single: SingleDae, callback: Function}}
+//  */
+// ComponentSingleSNSAbove.propTypes = {
+//   single: React.PropTypes.object.isRequired,
+//   callback: React.PropTypes.func.isRequired
+// };

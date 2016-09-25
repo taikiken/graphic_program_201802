@@ -41,6 +41,10 @@ const React = self.React;
  * @since 2016-09-21
  */
 export class SPComponentArticles extends React.Component {
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link SPComponentArticles.propTypes}
+   */
   constructor(props) {
     super(props);
   }
@@ -130,34 +134,60 @@ export class SPComponentArticles extends React.Component {
     this.setState({ list, offset, length });
     this.props.boundMore(this.props.action.hasNext());
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<ArticleDae>, offset: number, length: number, action: Object, callback: Function, boundMore: Function, home: boolean, adSp: string}} React props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired,
+      // request offset
+      offset: React.PropTypes.number.isRequired,
+      // request length
+      length: React.PropTypes.number.isRequired,
+      // action instance
+      action: React.PropTypes.object.isRequired,
+      // executeSafely
+      callback: React.PropTypes.func.isRequired,
+      // more button
+      boundMore: React.PropTypes.func.isRequired,
+      // home or not
+      home: React.PropTypes.bool.isRequired,
+      // ストリーム広告
+      adSp: React.PropTypes.string.isRequired
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{
- *  list: array<ArticleDae>,
- *  offset: number,
- *  length: number,
- *  action: Object,
- *  callback: Function,
- *  boundMore: Function,
- *  home: boolean,
- *  adSp: string
- * }}
- */
-SPComponentArticles.propTypes = {
-  list: React.PropTypes.array.isRequired,
-  // request offset
-  offset: React.PropTypes.number.isRequired,
-  // request length
-  length: React.PropTypes.number.isRequired,
-  // action instance
-  action: React.PropTypes.object.isRequired,
-  // executeSafely
-  callback: React.PropTypes.func.isRequired,
-  // more button
-  boundMore: React.PropTypes.func.isRequired,
-  // home or not
-  home: React.PropTypes.bool.isRequired,
-  // ストリーム広告
-  adSp: React.PropTypes.string.isRequired
-};
+// /**
+//  * プロパティ
+//  * @type {{
+//  *  list: array<ArticleDae>,
+//  *  offset: number,
+//  *  length: number,
+//  *  action: Object,
+//  *  callback: Function,
+//  *  boundMore: Function,
+//  *  home: boolean,
+//  *  adSp: string
+//  * }}
+//  */
+// SPComponentArticles.propTypes = {
+//   list: React.PropTypes.array.isRequired,
+//   // request offset
+//   offset: React.PropTypes.number.isRequired,
+//   // request length
+//   length: React.PropTypes.number.isRequired,
+//   // action instance
+//   action: React.PropTypes.object.isRequired,
+//   // executeSafely
+//   callback: React.PropTypes.func.isRequired,
+//   // more button
+//   boundMore: React.PropTypes.func.isRequired,
+//   // home or not
+//   home: React.PropTypes.bool.isRequired,
+//   // ストリーム広告
+//   adSp: React.PropTypes.string.isRequired
+// };

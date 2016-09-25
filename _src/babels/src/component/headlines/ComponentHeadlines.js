@@ -88,29 +88,53 @@ export class ComponentHeadlines extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<ArticleDae>, callback: Function, home: boolean }} React props
+   */
+  static get propTypes() {
+    return {
+      // articles 配列を元にDomを作成する
+      list: React.PropTypes.array.isRequired,
+      callback: React.PropTypes.func.isRequired,
+      home: React.PropTypes.bool
+    };
+  }
+  /**
+   * defaultProps
+   * @return {{home: boolean}} React props
+   */
+  static get defaultProps() {
+    return {
+      home: false
+    };
+  }
 }
-
-/**
- * プロパティ
- * @type {{
- *  list: Array<ArticleDae>,
- *  callback: Function,
- *  home: boolean
- * }}
- */
-ComponentHeadlines.propTypes = {
-  // articles 配列を元にDomを作成する
-  list: React.PropTypes.array.isRequired,
-  callback: React.PropTypes.func.isRequired,
-  home: React.PropTypes.bool
-};
-
-/**
- * デフォルトプロパティ
- * @type {{
- *  home: boolean
- * }}
- */
-ComponentHeadlines.defaultProps = {
-  home: false
-};
+//
+// /**
+//  * プロパティ
+//  * @type {{
+//  *  list: Array<ArticleDae>,
+//  *  callback: Function,
+//  *  home: boolean
+//  * }}
+//  */
+// ComponentHeadlines.propTypes = {
+//   // articles 配列を元にDomを作成する
+//   list: React.PropTypes.array.isRequired,
+//   callback: React.PropTypes.func.isRequired,
+//   home: React.PropTypes.bool
+// };
+//
+// /**
+//  * デフォルトプロパティ
+//  * @type {{
+//  *  home: boolean
+//  * }}
+//  */
+// ComponentHeadlines.defaultProps = {
+//   home: false
+// };

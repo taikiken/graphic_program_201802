@@ -197,7 +197,6 @@ export class Api {
   // ----------------------------------
   // 記事詳細
   /**
-  /**
    * detail API （単一記事）を取得します
    * @return {Types} detail API をTypes instanceで返します
    */

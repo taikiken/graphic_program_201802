@@ -117,24 +117,49 @@ export class SPComponentHeadlines extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array.<ArticleDae>, callback: Function, home: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      // Array.<ArticleDae>
+      list: React.PropTypes.array.isRequired,
+      // executeSafely.bind
+      callback: React.PropTypes.func.isRequired,
+      home: React.PropTypes.bool
+    };
+  }
+  /**
+   * defaultProps, home を false 設定します
+   * @return {{home: boolean}} React props
+   */
+  static get defaultProps() {
+    return {
+      home: false
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{list: Array.<ArticleDae>, callback: Function}}
- */
-SPComponentHeadlines.propTypes = {
-  // Array.<ArticleDae>
-  list: React.PropTypes.array.isRequired,
-  // executeSafely.bind
-  callback: React.PropTypes.func.isRequired,
-  home: React.PropTypes.bool
-};
-
-/**
- * デフォルト・プロパティ, home を false 設定します
- * @static
- * @type {{index: number}}
- */
-SPComponentHeadlines.defaultProps = {
-  home: false
-};
+// /**
+//  * プロパティ
+//  * @type {{list: Array.<ArticleDae>, callback: Function}}
+//  */
+// SPComponentHeadlines.propTypes = {
+//   // Array.<ArticleDae>
+//   list: React.PropTypes.array.isRequired,
+//   // executeSafely.bind
+//   callback: React.PropTypes.func.isRequired,
+//   home: React.PropTypes.bool
+// };
+//
+// /**
+//  * デフォルト・プロパティ, home を false 設定します
+//  * @static
+//  * @type {{index: number}}
+//  */
+// SPComponentHeadlines.defaultProps = {
+//   home: false
+// };

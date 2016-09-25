@@ -263,36 +263,63 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     // state を変更し appendChild + isotope を行う
     this.setState({ list, offset, length });
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<ArticleDae>, home: boolean, offset: number, length: number, action: Object, callback: Function, boundMore: Function, masonry: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired,
+      // home container かのフラッグ
+      home: React.PropTypes.bool.isRequired,
+      // request offset
+      offset: React.PropTypes.number.isRequired,
+      // request length
+      length: React.PropTypes.number.isRequired,
+      // action instance
+      action: React.PropTypes.object.isRequired,
+      // executeSafely
+      callback: React.PropTypes.func.isRequired,
+
+      // more button createElement callback
+      boundMore: React.PropTypes.func.isRequired,
+      // need masonry flag
+      masonry: React.PropTypes.bool.isRequired
+    };
+  }
 }
 
-/**
- * デフォルトプロパティ
- * @type {{
- *  list: Array,
- *  home: boolean,
- *  offset: number,
- *  length: number,
- *  action: object,
- *  masonry: boolean
- * }}
- */
-ComponentArticlesMasonryInfinite.propTypes = {
-  list: React.PropTypes.array.isRequired,
-  // home container かのフラッグ
-  home: React.PropTypes.bool.isRequired,
-  // request offset
-  offset: React.PropTypes.number.isRequired,
-  // request length
-  length: React.PropTypes.number.isRequired,
-  // action instance
-  action: React.PropTypes.object.isRequired,
-  // executeSafely
-  callback: React.PropTypes.func.isRequired,
-
-  // more button createElement callback
-  boundMore: React.PropTypes.func.isRequired,
-  // need masonry flag
-  masonry: React.PropTypes.bool.isRequired
-};
+// /**
+//  * デフォルトプロパティ
+//  * @type {{
+//  *  list: Array,
+//  *  home: boolean,
+//  *  offset: number,
+//  *  length: number,
+//  *  action: object,
+//  *  masonry: boolean
+//  * }}
+//  */
+// ComponentArticlesMasonryInfinite.propTypes = {
+//   list: React.PropTypes.array.isRequired,
+//   // home container かのフラッグ
+//   home: React.PropTypes.bool.isRequired,
+//   // request offset
+//   offset: React.PropTypes.number.isRequired,
+//   // request length
+//   length: React.PropTypes.number.isRequired,
+//   // action instance
+//   action: React.PropTypes.object.isRequired,
+//   // executeSafely
+//   callback: React.PropTypes.func.isRequired,
+//
+//   // more button createElement callback
+//   boundMore: React.PropTypes.func.isRequired,
+//   // need masonry flag
+//   masonry: React.PropTypes.bool.isRequired
+// };
 
 

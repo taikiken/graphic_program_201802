@@ -105,12 +105,25 @@ export class SPComponentSingleBody extends React.Component {
       </div>
     );
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, callback: Function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{single: SingleDae, callback: Function}}
- */
-SPComponentSingleBody.propTypes = {
-  single: React.PropTypes.object.isRequired,
-  callback: React.PropTypes.func.isRequired
-};
+// /**
+//  * プロパティ
+//  * @type {{single: SingleDae, callback: Function}}
+//  */
+// SPComponentSingleBody.propTypes = {
+//   single: React.PropTypes.object.isRequired,
+//   callback: React.PropTypes.func.isRequired
+// };
