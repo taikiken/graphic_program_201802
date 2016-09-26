@@ -39,6 +39,7 @@ import { Message } from '../app/const/Message';
 import { GaData } from '../ga/GaData';
 import { Ga } from '../ga/Ga';
 
+
 /**
  * <p>記事詳細</p>
  * <p>記事ID で 記事詳細JSONを取得し表示します</p>
@@ -158,9 +159,10 @@ export class ViewSingle extends View {
       // this.showError( error.message );
 
     } else {
-
-      this.render( response );
-
+      // @since 2016-09-27, SingleDae instance にし render へ渡すに変更
+      const single = new SingleDae(response);
+      this.render(single);
+      this.singles(single);
     }
 
   }
@@ -173,6 +175,9 @@ export class ViewSingle extends View {
     this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
+
+  }
+  singles(single) {
 
   }
   // /**
@@ -191,12 +196,13 @@ export class ViewSingle extends View {
   //
   // }
   /**
-   * dom を render します
-   * @param {Object} response JSON response
+   * dom を render します<br>
+   * @param {SingleDae} single JSON response
+   * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
-  render( response:Object ):void {
+  render(single):void {
     // console.log( 'ViewSingle response', response );
-    let single = new SingleDae( response );
+    // let single = new SingleDae( response );
     // console.log( 'ViewSingle beforeRender', single );
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
@@ -252,7 +258,6 @@ export class ViewSingle extends View {
     // console.log('ViewSingle.headerMount');
     this._header.off( View.DID_MOUNT, this._boundMount );
     this.executeSafely( View.DID_MOUNT );
-
   }
   /**
    * 関連記事（記事詳細の）

@@ -264,7 +264,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     this.setState({ list, offset, length });
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

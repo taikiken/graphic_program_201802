@@ -77,7 +77,7 @@ export class SPComponentSingleBody extends React.Component {
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
    */
   static excerpt(single) {
-    const description = single.bodyEscape;
+    const description = single.description;
     // data 不正
     if (!description) {
       return null;
