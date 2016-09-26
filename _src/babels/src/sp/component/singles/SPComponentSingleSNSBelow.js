@@ -54,8 +54,8 @@ export class SPComponentSingleSNSBelow extends React.Component {
     this.setState({ single });
   }
   /**
-   * `div.post-sns` を出力します, SNS block 記事下です
-   * @return {?XML} `div.post-sns` を返します、出力すべきものがない時は null を返します
+   * `div.post-sns_lower` を出力します, SNS block 記事下です
+   * @return {?XML} `div.post-sns_lower` を返します、出力すべきものがない時は null を返します
    */
   render() {
     const single = this.state.single;
