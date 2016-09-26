@@ -265,6 +265,14 @@ export class Message {
   static get READ_MORE_EXTERNAL():string {
     return '続きを読む(外部サイトへ)';
   }
+  /**
+   * WEBSITE ウェブサイト
+   * @since 2-16-09-27
+   * @return {string} ウェブサイト を返します
+   */
+  static get WEBSITE():string {
+    return 'ウェブサイト';
+  }
   // ----
   // button
 
@@ -478,7 +486,6 @@ export class Message {
   static get DEACTIVATE_COMPLETE():string {
     return '退会しました。';
   }
-
   // ----------------------------------
   // 一覧種類
   /**
