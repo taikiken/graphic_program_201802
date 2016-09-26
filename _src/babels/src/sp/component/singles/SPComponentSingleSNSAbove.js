@@ -40,14 +40,8 @@ export class SPComponentSingleSNSAbove extends React.Component {
     };
   }
   /**
-   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-  }
-  /**
-   * `div.post-sns` を出力します, SNS block 記事上です
-   * @return {?XML} `div.post-sns` を返します、出力すべきものがない時は null を返します
+   * `div.post-sns_upper` を出力します, SNS block 記事上です
+   * @return {?XML} `div.post-sns_upper` を返します、出力すべきものがない時は null を返します
    */
   render() {
     const single = this.state.single;
@@ -104,6 +98,12 @@ export class SPComponentSingleSNSAbove extends React.Component {
         </div>
       </div>
     );
+  }
+  /**
+   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
   }
   /**
    * 記事詳細SNSを更新します

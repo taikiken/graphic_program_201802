@@ -20,13 +20,14 @@ import { MessageSNS } from '../../app/const/MessageSNS';
 const React = self.React;
 
 /**
- * 記事詳細上部 SNS ブロック
+ * 記事詳細上部 SNS ブロック<br>
+ * PC版は、上部・下部とも同じなので兼用して使います
  * @since 2016-09-25
  */
-export class ComponentSingleSNSAbove extends React.Component {
+export class ComponentSingleSNS extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentSingleSNSAbove.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentSingleSNS.propTypes}
    */
   constructor(props) {
     super(props);
@@ -72,19 +73,19 @@ export class ComponentSingleSNSAbove extends React.Component {
           </li>
           {/* facebook share */}
           <li className="post-sns-item post-sns-item_fb">
-            <a href={`http://www.facebook.com/share.php?u=${url}&t=${title}`} rel="nofollow" onClick={ComponentSingleSNSAbove.openFacebook}>
+            <a href={`http://www.facebook.com/share.php?u=${url}&t=${title}`} rel="nofollow" onClick={ComponentSingleSNS.openFacebook}>
               {MessageSNS.FACEBOOK}
             </a>
           </li>
           {/* Twitter */}
           <li className="post-sns-item post-sns-item_tw">
-            <a href={`http://twitter.com/share?text=${title}&url=${url}&via=${MessageSNS.VIA}`} rel="nofollow" onClick={ComponentSingleSNSAbove.openTwitter}>
+            <a href={`http://twitter.com/share?text=${title}&url=${url}&via=${MessageSNS.VIA}`} rel="nofollow" onClick={ComponentSingleSNS.openTwitter}>
               <span>{MessageSNS.TWEET}</span>
             </a>
           </li>
           {/* Google+ */}
           <li className="post-sns-item post-sns-item_gt">
-            <a href={`https://plus.google.com/share?url=${url}`} rel="nofollow" onClick={ComponentSingleSNSAbove.openLine}>
+            <a href={`https://plus.google.com/share?url=${url}`} rel="nofollow" onClick={ComponentSingleSNS.openLine}>
               {MessageSNS.GOOGLE_PLUS}
             </a>
           </li>
@@ -194,7 +195,7 @@ export class ComponentSingleSNSAbove extends React.Component {
 //  * プロパティ
 //  * @type {{single: SingleDae, callback: Function}}
 //  */
-// ComponentSingleSNSAbove.propTypes = {
+// ComponentSingleSNS.propTypes = {
 //   single: React.PropTypes.object.isRequired,
 //   callback: React.PropTypes.func.isRequired
 // };
