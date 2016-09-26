@@ -80,49 +80,19 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
   ?>
-  <style>
-    body.vjs-full-window {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-    }
-    .video-js.vjs-fullscreen {
-      position: fixed;
-      overflow: hidden;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .video-js:-webkit-full-screen {
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .video-js.vjs-fullscreen.vjs-user-inactive {
-      cursor: none;
-    }
-    .video-js {
-      width: 100%;
-      height: auto;
-    }
-    .video-js video {
-      width: 100%;
-      height: auto;
-    }
-    .video-js .vjs-remaining-time-display {
-      line-height:3em;
-    }
-    .video-js .vjs-ima3-ad-container iframe {
-      pointer-events: auto;
-    }
-  </style>
+  <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
 
-  <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
-  <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
+  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+
+  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
+  <script src="/assets/ima_plugin/js/ads.js"></script>
+
   <?php
 endif;
 // eof brightcove
@@ -155,6 +125,14 @@ if ( $template_name == 'category' ) {
   }
 }
 ?>
+  <style type="text/css">
+    .vjs-big-play-button{
+      display: block !important;
+    }
+    /*video::-webkit-media-controls {
+      display:none !important;
+    }*/
+  </style>
 </head>
 <body>
 <div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">

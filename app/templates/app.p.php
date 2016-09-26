@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 <?php
 // ---------------------------------------------------------------------------
-// brightcove
+// VideojsImaNode
 if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
@@ -43,10 +43,25 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
       pointer-events: auto;
     }
   </style>
-
+<!--
   <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
   <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php /*echo $page['version']; */?>"></script>-->
+
+
+
+    <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
+    <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
+    <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
+
+    <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
+    <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+
+    <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
+    <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
+    <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
+
 <?php endif; ?>
 
   <script>
@@ -133,9 +148,7 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
               <div class="video-container">
                 <img class="phone-video-guide" src="/assets/images/common/thumb-16x9.png" alt="">
                 <video
-                  id="webview-brightcove"
-                  data-account="3948005094001"
-                  data-player="rJL6q0az"
+                  id="video_content"
                   data-embed="default"
                   class="video-js"
                   preload="auto"
@@ -264,30 +277,12 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove ?>
   <script>
   (function () {
-
-    var myPlayer, poster, isPlay = false, isComplete = false;
-    videojs('webview-brightcove').ready(function() {
-      myPlayer = this;
-
-      myPlayer.src( {
-        'type': 'application/x-mpegURL',
-        'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
+      var poster;
+      var player = videojs('video_content');
+      player.src( {
+          'type': 'application/x-mpegURL',
+          'src': "<?php echo $page['post']['media']['video']['url']['sd']; ?>"
       } );
-
-      <?php if ($page['post']['media']['video']['ad_url']['sp']) :
-      // 動画プレイヤー / VASTをPC/SP&APPで分ける #822 ?>
-      myPlayer.ima3({
-        debug: false,
-        adTechOrder: [
-          'html5'
-        ],
-        postrollTimeout: 2000,
-        prerollTimeout: 1000,
-        requestMode: 'onplay',
-        serverUrl: '<?php echo $page['post']['media']['video']['ad_url']['sp']; ?>' + '?' + Date.now(),
-        timeout: 5000
-      });
-      <?php endif; ?>
 
       <?php if ($page['post']['media']['images']['medium']) : ?>
       poster = '<?php echo $page['post']['media']['images']['medium']; ?>';
@@ -296,27 +291,46 @@ if ( $page['post']['media']['video']['player'] == 'brightcove' ) :
       <?php endif; ?>
 
       if ( !!poster ) {
-        myPlayer.poster(poster);
+          player.poster(poster);
       }
-      myPlayer.width( '100%', false );
-      myPlayer.height( 'auto', false );
+      player.width( '100%', false );
+      player.height( 'auto', false );
 
-      // playerのgaイベント
-      myPlayer.on('play', function() {
-        if ( isPlay === false ) {
-          isPlay = true;
-          ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
-        }
+
+      var option = {
+          id: 'video_content',
+          adTagUrl: '<?php echo $page['post']['media']['video']['ad_url']['sp']; ?>' + '?' + Date.now()
+      };
+      player.ima(option);
+      player.on('play', function(){
+          ga('send', 'event', 'video', 'begin', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
+      });
+      player.on('ended', function () {
+          if (navigator.userAgent.match(/iPhone/i)) {
+            player.ima.onContentResumeRequested_();
+            player.src('<?php echo $page['post']['media']['video']['url']['sd']; ?>');
+          }
+          ga('send', 'event', 'video', 'complete', '<?php echo $page['post']['media']['video']['url']['sd']; ?>',0);
+      });
+      if (navigator.userAgent.match(/iPhone/i)) {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        var adContainer = document.getElementById('video_content_ima-ad-container');
+        player.on( 'adstart', function(){
+          adContainer.setAttribute('style', 'z-index: 99; position: absolute;');
+        });
+        player.on( 'adend', function(){
+          adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+        });
+        adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+      }
+
+      player.one('click', function() {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
       });
 
-      myPlayer.on('ended', function() {
-        if ( isComplete === false ) {
-          isComplete = true;
-          ga('send', 'event', 'video', 'complete', '<?php echo $page['post']['media']['video']['url']['sd']; ?>', 0);
-        }
-      });
-
-    });
   }());
   </script>
   <?php endif; ?>
