@@ -55,9 +55,10 @@ export class ComponentArticlePopular extends React.Component {
     let total = this.props.total;
     const articleId = this.props.articleId;
     const hasSecond = commentsPopular.hasSecond;
+    // @type {Array<PopularDae>}
     const firstDae = commentsPopular.first;
+    // @type {Array<PopularDae>}
     const secondsDae = commentsPopular.seconds;
-
     if ( hasSecond ) {
       // 2件目以降も存在する
       // 合計数からアイコン描画数を引く
@@ -120,7 +121,7 @@ export class ComponentArticlePopular extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{commentsPopular: PopularDae, total: number, articleId: string, uniqueId: string}} React props
+   * @return {{commentsPopular: CommentsPopularDae, total: number, articleId: string, uniqueId: string}} React props
    */
   static get propTypes() {
     return {

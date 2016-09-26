@@ -23,7 +23,8 @@ import { Ga } from '../../ga/Ga';
 const React = self.React;
 
 /**
- * 媒体ロゴ
+ * 媒体ロゴ<br>
+ * PC, SP 兼用です
  * @since 2016-09-25
  */
 export class ComponentSingleMediaLogo extends React.Component {
