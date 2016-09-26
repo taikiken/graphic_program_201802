@@ -40,7 +40,7 @@
   </script>
 <?php
 // ---------------------------------------------------------------------------
-// brightcove
+
 if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
@@ -71,9 +71,43 @@ if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'b
     }
   </style>
 
-  <script src="//players.brightcove.net/3948005094001/rJL6q0az_default/index.min.js"></script>
-  <script src="//players.brightcove.net/videojs-ima3/videojs.ima3.min.js"></script>
-  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js?v=<?php echo $page['version']; ?>"></script>
+  <link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
+  <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
+
+  <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
+  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+
+  <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
+  <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
+
+  <style type="text/css">
+    #mainContainer{
+      border: 1px #fff solid;
+      box-sizing: border-box;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      padding-top: 30px;
+      position: relative;
+      width:100%;
+    }
+    #single-visual-container{
+      box-sizing: border-box;
+    }
+    .vjs-poster{
+      display: none !important;
+    }
+    .video-js{
+      background-color: #fff !important;
+    }
+    .vjs-big-play-button{
+      z-index: 9999;
+    }
+  </style>
 <?php
 endif;
 // eof brightcove

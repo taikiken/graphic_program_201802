@@ -49,16 +49,20 @@ endif;
   <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
   <meta name="twitter:description" content="<?php echo $page['og_description']; ?>">
 
-
 <?php if ( $page['canonical'] ) : ?>
   <link rel="canonical" href="<?php echo $page['canonical']; ?>">
 <?php elseif ( $page['og_url'] ) : ?>
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 <?php endif; ?>
 
+  <!-- syndot -->
 <?php if ( $page['template'] === 'p' ) : ?>
   <meta name="synextbot" content="<?php echo $page['syn_extension']; ?>">
+<?php if ( $page['syn_thumbnail'] ) : ?>
+  <meta property="syndot:thumbnail" content="<?php echo $page['syn_thumbnail']; ?>">
 <?php endif; ?>
+<?php endif; ?>
+  <!-- //syndot -->
 
   <!-- favicon -->
 <?php

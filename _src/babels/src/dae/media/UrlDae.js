@@ -25,7 +25,6 @@ export class UrlDae {
     // 2016-06-10
     // url:string, url:object どちらにも耐えられるように設計します
     // url:string で表示データが設定されることはないです
-    // for brightcove
     if ( typeof url === 'undefined' || url === null ) {
       url = '';
     } else if ( typeof url === 'object' ) {
