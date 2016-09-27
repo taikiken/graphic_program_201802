@@ -313,6 +313,22 @@ export class Dom {
     return Dom.get( 'post-content-banner' );
   }
   // --------------------------------------
+  // single/next
+  /**
+   * 記事詳細 > next container
+   * @return {Element} js-singles-container を返します
+   */
+  static singlesNext():Element {
+    return Dom.get('js-singles-container');
+  }
+  /**
+   * 記事詳細 > next + more container
+   * @return {Element} js-singles-more を返します
+   */
+  static singlesMore():Element {
+    return Dom.get('js-singles-more');
+  }
+  // --------------------------------------
   /**
    * signup 新規登録
    * @return {Element} signup-container を返します

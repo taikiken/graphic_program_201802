@@ -33,9 +33,8 @@ export class ComponentSingles extends React.Component {
   // ---------------------------------------------------
   static get propTypes() {
     return {
+      // Array<SingleDae>
       list: React.PropTypes.array.isRequired,
-      // home container かのフラッグ
-      home: React.PropTypes.bool.isRequired,
       // request offset
       offset: React.PropTypes.number.isRequired,
       // request length
@@ -47,7 +46,15 @@ export class ComponentSingles extends React.Component {
       // more button createElement callback
       boundMore: React.PropTypes.func.isRequired,
       // SingleDae - 記事詳細データ recommend_articles 抽出
-      single: React.PropTypes.object.isRequired
+      single: React.PropTypes.object.isRequired,
+      // home container かのフラッグ
+      home: React.PropTypes.bool.isRequired
+    };
+  }
+  static get defaultProps() {
+    // absolutely, not home
+    return {
+      home: false
     };
   }
 }

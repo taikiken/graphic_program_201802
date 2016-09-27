@@ -17,6 +17,9 @@ import { ViewRelated } from './single/ViewRelated';
 import { ViewSingleHeader } from './single/ViewSingleHeader';
 import { ViewSingleFooter } from './single/ViewSingleFooter';
 
+// view/singles
+import { ViewSingles } from './singles/ViewSingles';
+
 // action
 import { Single } from '../action/single/Single';
 import { SingleAuth } from '../action/single/SingleAuth';
@@ -106,6 +109,8 @@ export class ViewSingle extends View {
      * @protected
      */
     this._footer = null;
+
+    this._singles = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -178,7 +183,17 @@ export class ViewSingle extends View {
 
   }
   singles(single) {
-
+    if (this._singles === null) {
+      const element = Dom.singlesNext();
+      const moreElement = Dom.singlesMore();
+      if (element !== null && moreElement !== null) {
+        const singles = new ViewSingles(this.id, element, moreElement, {}, single);
+        this._singles = singles;
+        singles.start();
+      }
+    } else {
+      this._singles.update();
+    }
   }
   // /**
   //  * ViewError でエラーコンテナを作成します

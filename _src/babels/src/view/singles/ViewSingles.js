@@ -67,7 +67,7 @@ let ReactDOM = self.ReactDOM;
  * - 人気記事は 3件ごとに `Component` を挿入しそこで Ajax request を行い記事挿入します
  * @since 2016-09-26
  */
-export class ViewSinglesNext extends ViewArchiveMasonryInfinite {
+export class ViewSingles extends ViewArchiveMasonryInfinite {
   /**
    * 記事詳細の次の記事ブロック表示を行います
    * @param {number} id 記事 ID
@@ -158,6 +158,16 @@ export class ViewSinglesNext extends ViewArchiveMasonryInfinite {
       // instance が存在するので
       // state update でコンテナを追加する
       this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
+    }
+  }
+  /**
+   * 外部クラスから呼び出されます、既存のリストを使い再描画を行います
+   * */
+  update() {
+    if (this.articleRendered !== null ) {
+      // instance が存在するので
+      // state update でコンテナを追加する
+      this.articleRendered.updateList(this.articles, this.request.offset, this.request.length);
     }
   }
 }
