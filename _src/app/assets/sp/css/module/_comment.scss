@@ -34,6 +34,7 @@
 // comment-heading
 .comment-heading {
   margin-top: (20/2)+px;
+  border-top: 1px solid $border-primary-color;
   @extend .mod-headingA01;
 }
 
@@ -386,6 +387,10 @@
       @include clearfix;
       padding-top: (30/2)+px;
       border-top: 1px solid $border-primary-color;
+
+      &:first-child {
+        border-top: none;
+      }
 
       .comment-respond {
         .comment-form {

@@ -777,14 +777,15 @@
 
 // mod-headingA01
 .mod-headingA01 {
-  padding: (14/2)+px;
-  border-left: (6/2)+px solid $highlight-color;
-  background-color: #333;
+  padding: (20/2)+px perCalc(20) 0;
+  // border-left: (6/2)+px solid $highlight-color;
+  // background-color: #ddd;
 
   @for $i from 1 through 6 {
     h#{$i} {
-      color: #fff;
+      color: #333;
       font-weight: bold;
+      font-size: (24/2)+px;
     }
   }
 }

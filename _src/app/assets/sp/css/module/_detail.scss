@@ -594,9 +594,21 @@
 
 
 
-// related-post
-.related-post {
-  .comment-heading {
-    margin-top: 0;
+// widget-postList
+.widget-postList {
+  background-color: #eee;
+  // padding-bottom: (40/2)+px;
+
+  .board {
+    .board-item {
+      border-bottom: none;
+    }
   }
-} //.related-post
+} //.widget-postList
+
+
+// loaded-post
+.loaded-post {
+  border-top: (40/2)+px solid #eee;
+  padding-bottom: (40/2)+px;
+} //.loaded-post
