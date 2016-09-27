@@ -504,6 +504,14 @@
     padding-right: (20/2)+px;
     padding-left: (20/2)+px;
   }
+
+  .adsSponsored {
+    color: $highlight-color !important;
+  }
+
+  .adsButtonText {
+    background-color: $highlight-color !important;
+  }
 }
 
 
