@@ -182,18 +182,24 @@ export class ViewSingle extends View {
     // this.showError( error.message );
 
   }
+
+  /**
+   * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
+   * @param {SingleDae} single
+   * @since 2016-09-28
+   */
   singles(single) {
-    // if (this._singles === null) {
-    //   const element = Dom.singlesNext();
-    //   const moreElement = Dom.singlesMore();
-    //   if (element !== null && moreElement !== null) {
-    //     const singles = new ViewSingles(this.id, element, moreElement, {}, single);
-    //     this._singles = singles;
-    //     singles.start();
-    //   }
-    // } else {
-    //   this._singles.update();
-    // }
+    if (this._singles === null) {
+      const element = Dom.singlesNext();
+      const moreElement = Dom.singlesMore();
+      if (element !== null && moreElement !== null) {
+        const singles = new ViewSingles(this.id, element, moreElement, {}, single);
+        this._singles = singles;
+        singles.start();
+      }
+    } else {
+      this._singles.update();
+    }
   }
   // /**
   //  * ViewError でエラーコンテナを作成します

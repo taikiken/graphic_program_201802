@@ -265,6 +265,18 @@ include_once __DIR__.'/_category-heading.php';
 
       </div><!-- /.comment -->
 
+      <?php
+      /*
+      @since 2016-09-28
+      記事詳細の次の記事
+      div#js-singles-container 内に「記事一覧」「オススメ記事」「人気記事」「関連記事」を記入
+       */
+      ?>
+      <div class="singles-next">
+        <div id="js-singles-container"></div>
+        <div id="js-singles-more"></div>
+      </div>
+
       <!-- #310 popin ebmed code  -->
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
