@@ -115,7 +115,7 @@ export class ViewDeactivate extends View {
       },
       render: function() {
         return (
-          <div className="mod-btnB01 mt30">
+          <div className="mod-btnB01 mt30 btn-withdraw">
             <div className={'loading-root ' + this.state.loading}>
               <a href="#" onClick={this.clickHandler}>{Message.BUTTON_DEACTIVATE_TEXT}</a>
               <div className="loading-spinner"></div>

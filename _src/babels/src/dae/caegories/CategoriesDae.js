@@ -10,10 +10,8 @@
  *
  */
 
-// data
-import {Safety} from '../../data/Safety';
 
-// dae/categories
+import {Safety} from '../../data/Safety';
 import {SlugDae} from './SlugDae';
 
 /**
@@ -36,13 +34,11 @@ export class CategoriesDae {
     // cats: 配列にそのまま保持
     // bank: slug をキーにそ保持
     categories.forEach( function( category ) {
-      const slugDae = new SlugDae( category );
-      // slug, label に null があるようなので null は skip する
-      // @since 2016-09-20
-      if (!!slugDae.slug && !!slugDae.label) {
-        cats.push(slugDae);
-        bank[slugDae.slug] = slugDae;
-      }
+
+      let slugDae = new SlugDae( category );
+      cats.push( slugDae );
+      bank[ slugDae.slug ] = slugDae;
+
     } );
 
     /**
@@ -70,30 +66,6 @@ export class CategoriesDae {
      */
     this._bank = bank;
 
-    // @since 2016-09-15
-    const slugs = cats.map((slugDae) => slugDae.slug);
-    // cats.forEach((slugDae) => {
-    //   slugs.push(slugDae.slug);
-    // });
-    /**
-     * category.slug を ', ' で連結した文字列
-     * @type {string}
-     * @protected
-     */
-    this._slugs = slugs.join(', ');
-    /**
-     * category.slug を '-' で連結した文字列
-     * @type {string}
-     * @protected
-     */
-    this._slugsClasses = slugs.join('-');
-    /**
-     * categories が空の時があるのが発覚, 文字列を担保します
-     * @since 2016-09-20
-     * @type {string}
-     * @protected
-     */
-    this._slug = cats.length > 0 ? cats[0].slug : '';
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -139,30 +111,6 @@ export class CategoriesDae {
    */
   get total():Number {
     return this.response.count;
-  }
-  /**
-   * category.slug を ', ' で連結した文字列
-   * @since 2016-09-15
-   * @return {string} category.slug を ', ' で連結した文字列を返します
-   */
-  get slugs():string {
-    return this._slugs;
-  }
-  /**
-   * category.slug を '-' で連結した CSS class フレンドリーな文字列
-   * @since 2016-09-16
-   * @return {string} category.slug を '-' で連結した文字列を返します
-   */
-  get slugsClasses():string {
-    return this._slugsClasses;
-  }
-  /**
-   * category 配列の先頭 slug
-   * @since 2016-09-16
-   * @return {string} category 配列の先頭 slug を返します
-   */
-  get slug():string {
-    return this._slug;
   }
   // ---------------------------------------------------
   //  METHOD

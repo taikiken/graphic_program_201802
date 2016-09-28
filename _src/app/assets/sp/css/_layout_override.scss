@@ -1,0 +1,97 @@
+@import "../../../../scss_sp/asset";
+
+// -------------------------------------------------
+// head section
+// -------------------------------------------------
+#user-profile-container {
+  float: left;
+}
+
+#user-profile-container {
+  .user {
+    // notice
+    .notice-container {
+      float: left;
+    }
+
+    // notice
+    .notice-menu {
+      display: block;
+    }
+    // 非表示
+    .close {
+      .notice-menu {
+        overflow: hidden;
+        height: 0;
+        width: 0;
+      }
+    }
+    // 表示
+    .open {
+      .notice-menu {
+        overflow: visible;
+        width: 360px;
+        height: auto;
+      }
+    }
+
+    // setting
+    .preference-menu {
+      display: block;
+    }
+    .dropMenu {
+      opacity: 0;
+
+      transition-property: opacity;
+      transition-duration: 0.3s;
+      transition-timing-function: linear;
+    }
+
+    // 非表示
+    .close {
+      .preference-menu {
+        overflow: hidden;
+        height: 0;
+        width: 0;
+
+        transition-property: width, height;
+        transition-duration: 0.001s;
+        transition-delay: 0.05s;
+      }
+    }
+
+    // 表示
+    .open {
+      .preference-menu {
+        overflow: visible;
+        width: 160px;
+        height: 162px;
+      }
+    }
+
+    // ----------------------------------------------
+    // motion
+    .close {
+      .dropMenu {
+        opacity: 0;
+        transition-duration: 0.05s;
+      }
+    }
+    .open {
+      .dropMenu {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// -------------------------------------------------
+// main menu
+// -------------------------------------------------
+//#gnav-sec-inner {
+//  position: relative;
+//}
+//.gnav-sec {
+//  overflow-x: auto;
+//  -webkit-overflow-scrolling: touch;
+//}

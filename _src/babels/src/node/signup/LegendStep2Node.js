@@ -279,7 +279,7 @@ let Step2FormNode = React.createClass( {
 
         {/* button */}
         <div className="form-parts">
-          <span className="setting-form-submit mod-btnA01">
+          <span className="setting-form-submit mod-btnB01">
             <input type="button" value={Message.BUTTON_NEXT} onClick={this.nextHandler} />
           </span>
         </div>

@@ -43,15 +43,6 @@ export class SPIndex {
     SPHeader.start();
 
     // ---------------------------------------------------------
-    // pickup
-    // @since 2016-09-15
-    const pickupElement = Dom.pickup();
-    if (pickupElement !== null) {
-      let pickup = new UT.view.home.ViewPickup(pickupElement);
-      pickup.start();
-    }
-
-    // ---------------------------------------------------------
     // headline
     let headlineElement = Dom.headline();
     if ( headlineElement !== null ) {

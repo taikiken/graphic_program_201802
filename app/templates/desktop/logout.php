@@ -29,10 +29,26 @@
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
+      <div class="sponsor-link">
+        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34749&targetID=adg_34749&displayid=1&adType=PC&width=300&height=250&sdkType=3&async=false&tagver=2.0.0"></script>
+      </div>
 
-          <?php include_once __DIR__."/_sidebar_ad.php"; ?>
+      <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="運動通信アプリ版 運動通信をアプリでサクサク楽しむ！"></a></div>
 
-        </section><!-- /.side-sec -->
+      <div id="widget-ranking-container"></div><!--/ranking-->
+      <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
+        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
+      </div>
+
+      <div id="widget-recommend-container"></div><!--/videos-->
+      <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
+        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=false&tagver=2.0.0"></script>
+      </div>
+
+      <div class="sponsor-link nadir">
+        <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35117&targetID=adg_35117&displayid=3&adType=PC&width=300&height=600&sdkType=3&async=false&tagver=2.0.0"></script>
+      </div>
+    </section><!-- /.side-sec -->
 
   </div>
 </div><!-- /.body-sec -->

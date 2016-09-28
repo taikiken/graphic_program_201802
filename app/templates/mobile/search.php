@@ -3,7 +3,7 @@
  * SP 検索結果
  */
 ?>
-<div class="body-sec result">
+<div class="body-sec">
   <div class="body-sec-inner">
 
     <div class="category-heading">

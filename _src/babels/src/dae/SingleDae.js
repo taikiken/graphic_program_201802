@@ -10,16 +10,11 @@
  *
  */
 
-// data
-import {Safety} from '../data/Safety';
 
-// dae
+import {Safety} from '../data/Safety';
 import {KeywordsDae} from './single/KeywordsDae';
+
 import {RelatedDae} from './RelatedDae';
-// @since 2016-09-25
-import { CanonicalDae } from './single/CanonicalDae';
-import { ReadmoreDae } from './single/ReadmoreDae';
-import { PickupDae } from './caegories/PickupDae';
 
 /**
  * 記事詳細の JSON.response
@@ -44,13 +39,12 @@ export class SingleDae extends RelatedDae {
     // related
     let related = [];
     if ( Safety.check( response, 'related_articles', 'array' ) ) {
-      //
-      // response.related_articles.forEach( function( article ) {
-      //
-      //   related.push( new RelatedDae( article ) );
-      //
-      // } );
-      related = response.related_articles.map((article) => new RelatedDae(article));
+
+      response.related_articles.forEach( function( article ) {
+
+        related.push( new RelatedDae( article ) );
+
+      } );
     }
     /**
      * 関連記事 response.related
@@ -58,29 +52,8 @@ export class SingleDae extends RelatedDae {
      * @protected
      */
     this._related = related;
-    // --------------------------------
-    // @since 2016-09-25
-    /**
-     * カノニカル, response.canonical を CanonicalDae instance として管理します
-     * @since 2016-09-25
-     * @type {CanonicalDae}
-     * @private
-     */
-    this._canonical = new CanonicalDae(response.canonical);
-    /**
-     * response.recommend_articles を PickupDae instance として管理します
-     * @since 2016-09-25
-     * @type {PickupDae}
-     * @private
-     */
-    this._recommendArticles = new PickupDae(response.recommend_articles);
-    /**
-     * response.readmore を ReadmoreDae instance として管理します
-     * @since 2016-09-25
-     * @type {PickupDae}
-     * @private
-     */
-    this._readmore = new ReadmoreDae(response.readmore);
+    // console.log( 'SingleDae related_articles', related );
+
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -91,15 +64,6 @@ export class SingleDae extends RelatedDae {
    */
   get body():string {
     return this.response.body;
-  }
-  /**
-   * response.body_escape<br>
-   * 記事本文(htmlなし）
-   * @since 2016-09-25
-   * @return {string} response.body_escape 記事本文(htmlなし）を返します
-   */
-  get bodyEscape():string {
-    return Safety.string(this.response.body_escape, '');
   }
   /**
    * 関連記事が存在するかの真偽値
@@ -139,56 +103,5 @@ export class SingleDae extends RelatedDae {
    */
   get isShowImage():Boolean {
     return this.response.is_show_image;
-  }
-  /**
-   * カノニカル
-   * @since 2016-09-25
-   * @return {CanonicalDae} response.canonical を CanonicalDae instance として返します
-   */
-  get canonical():CanonicalDae {
-    return this._canonical;
-  }
-  /**
-   * バーチャル高校野球brightcove動画用refID
-   * <pre>
-   * # バーチャル高校野球brightcove動画用refID
-   * - APIにはふくめずdb.helperからWebのみで取得できる
-   * - この値があればWebではバーチャル甲子園埋め込みコードをつかって記事冒頭に動画をレンダリングする（この時記事冒頭に画像は表示しない）
-   * </pre>
-   *
-   * `koya98_homerun1_hls`
-   * @return {string} バーチャル高校野球brightcove動画用refID を返します
-   * @since 2016-09-25
-   */
-  get mediaVkRefid():string {
-    return this.response.media_vk_refid;
-  }
-
-  /**
-   * この記事のオススメ記事
-   * <pre>
-   * この記事のオススメ記事 *アプリ版のみ利用
-   * ※ このカテゴリーのオススメ記事、という扱いになりますが、アプリではリクエスト数削減のため関連記事同様、記事のレスポンスに含めてしまいます。
-   * </pre>
-   *
-   * @example
-   * const recommendArticles = pickupDae.recommendArticles;
-   * // @type {Array<ArticleDae>}
-   * const articles = recommendArticles.articles;
-   * // @type {ArticleDae}
-   * const article = articles.article;
-   * console.log(article.date);// 2016-09-25
-   *
-   * @return {PickupDae} この記事のオススメ記事 を返します
-   */
-  get recommendArticles():PickupDae {
-    return this._recommendArticles;
-  }
-  /**
-   * 「続きを読む」フラッグ ReadmoreDae instance を取得します
-   * @return {ReadmoreDae} 「続きを読む」フラッグ ReadmoreDae instance を返します
-   */
-  get readmore():ReadmoreDae {
-    return this._readmore;
   }
 }

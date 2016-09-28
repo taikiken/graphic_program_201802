@@ -10,29 +10,19 @@
  *
  */
 
-// data
 import {Safety} from '../../data/Safety';
 
-// dae/theme
 import {ThemeDae} from '../theme/ThemeDae';
 import {AdDae} from '../theme/AdDae';
 import {BannersDae} from '../banner/BannersDae';
 import {BannerDae} from '../banner/BannerDae';
 
-// dae/categories
-import { PickupDae } from './PickupDae';
-import { HeadlineDae } from './HeadlineDae';
-
 
 /**
- * 記事カテゴリー情報
- *
  * <p>特定のカテゴリー情報を取得する<br>
  * ※主に企画モノの記事一覧ページを生成するにあたり利用する</p>
  *
  * `/api/v1/category/[:category_slug]`
- *
- * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
  */
 export class CategoriesSlugDae {
   /**
@@ -71,21 +61,6 @@ export class CategoriesSlugDae {
      * @protected
      */
     this._response = response;
-
-    /**
-     * JSON.response.pickup
-     * @since 2016-09-13
-     * @type {PickupDae}
-     * @protected
-     */
-    this._pickup = new PickupDae(response.pickup);
-    /**
-     * JSON.response.headline
-     * @since 2016-09-17
-     * @type {HeadlineDae}
-     * @protected
-     */
-    this._headline = new HeadlineDae(response.headline);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -185,44 +160,5 @@ export class CategoriesSlugDae {
    */
   get isShowFilter():Boolean {
     return this.response.is_show_filter;
-  }
-  // --------------------
-  /**
-   * 「記事カテゴリー情報」 response.pickup
-   * <pre>
-   * カテゴリー一覧のピックアップスライド
-   * - 表示レイアウト・内容は一面のピックアップと同じ
-   * - PC版はスライド
-   * - スマホ/アプリは冒頭1件を固定表示(スライドしない)
-   * </pre>
-   *
-   * ```
-   * pickup {
-   *  articles: []<Object>
-   * }
-   * ```
-   * @since 2016-09-13
-   * @return {PickupDae} response.pickup PickupDae instance にして返します
-   */
-  get pickup():PickupDae {
-    return this._pickup;
-  }
-  /**
-   * 「記事カテゴリー情報」response.headline
-   * @since 2016-09-17
-   * @return {HeadlineDae} response.headline を HeadlineDae instance にして返します
-   */
-  get headline():HeadlineDae {
-    return this._headline;
-  }
-  /**
-   * "title_img"のリンク先
-   * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
-   * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
-   * @since 2016-09-17
-   * @return {string} "title_img"のリンク先 を返します
-   */
-  get titleImgLink():string {
-    return this.response.title_img_link;
   }
 }

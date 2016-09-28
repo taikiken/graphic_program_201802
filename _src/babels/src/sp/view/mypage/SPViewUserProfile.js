@@ -54,6 +54,21 @@ export class SPViewUserProfile extends ViewUserProfile {
       render: function() {
         let dae = this.props.dae;
 
+        /*
+        let loggedIn = 'user-logged-in';
+
+        let icon = dae.profilePicture;
+
+        if ( !icon ) {
+          icon = Empty.USER_EMPTY;
+          loggedIn = '';
+        } else if ( !Safety.isImg( icon ) ) {
+          if ( !Safety.isGraph( icon ) ) {
+            icon = Empty.USER_EMPTY;
+          }
+          loggedIn = '';
+        }
+        */
         let icon = Safety.image( dae.profilePicture, Empty.USER_EMPTY );
         let loggedIn = Safety.same( icon, Empty.USER_EMPTY );
 

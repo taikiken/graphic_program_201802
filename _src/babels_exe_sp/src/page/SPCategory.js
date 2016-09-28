@@ -40,20 +40,21 @@ export class SPCategory {
    * @param {string} [type=''] ranking | video \ '' の 3つ
    */
   static start( slug:string, type:string = '' ):void {
+
     // header
     SPHeader.start();
 
-    const element = Dom.category();
-    // @since 2016-09-20
-    const button = Dom.boardMore();
+    let element = Dom.category();
 
-    if ( element !== null && button !== null ) {
+    if ( element !== null ) {
+
       // list
-      // let archive = new UT.sp.view.category.SPViewCategoryRoot( slug, element );
-      // @since 2016-09-20
-      let archive = new UT.sp.view.category.SPViewCategoryWithSlug(slug, element, button);
+      let archive = new UT.sp.view.category.SPViewCategoryRoot( slug, element );
       archive.start();
+
     }
+
+
   }
 
 }

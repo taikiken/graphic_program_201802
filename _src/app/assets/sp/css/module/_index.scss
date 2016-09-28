@@ -6,195 +6,112 @@
 //
 // Styleguide 2.2.0
 
-// _motion_slider.scss へ汎用化のため移動
-//// hero-sec
-//// トップページ メインビジュアル
-//.hero {
-//  $pickup-height: 275px;
-//
-//  &-sec {
-//    background-color: #000;
-//  }
-//
-//  &-slider {
-//    position: relative;
-//    width: 100%;
-//    height: $pickup-height;
-//    overflow: hidden;
-//
-//    &-inner {
-//      width: (560/2)+px;
-//      margin: 0 auto;
-//      overflow: visible;
-//
-//      ul {
-//        @include clearfix;
-//        width: 200000px;
-//      }
-//
-//      li {
-//        float: left;
-//        width: (560/2)+px;
-//        border-right: 5px solid #000;
-//        border-left: 5px solid #000;
-//
-//        a {
-//          position: relative;
-//          display: block;
-//          height: (360/2)+px;
-//          // background-color: #061533;
-//        }
-//
-//        .overlay,
-//        .post-comment-num {
-//          display: none;
-//        }
-//
-//        .post {
-//          $posY: 20/2;
-//
-//          &-overview {
-//            position: absolute;
-//            bottom: -(190/2)+px;
-//            width: 100%;
-//            height: (190/2)+px;
-//            padding: (28/2)+px perCalc(20) ($posY+18)+px;
-//            background-color: #061533;
-//          }
-//
-//          &-heading {
-//            height: 40px;
-//            overflow: hidden;
-//            color: #fff;
-//            font-size: fz(26/2);
-//          }
-//
-//          &-category {
-//            position: absolute;
-//            bottom: $posY+px;
-//            color: #fff;
-//            font-size: fz(20/2);
-//          }
-//
-//          &-date,
-//          &-comment-num {
-//            font-size: fz(20/2);
-//          }
-//
-//          &-date {
-//            // float: left;
-//            position: absolute;
-//            right: perCalc(20);
-//            bottom: $posY+px;
-//            color: #999;
-//          }
-//
-//          &-comment-num {
-//            // float: right;
-//            padding-left: (36/2)+px;
-//            color: #fff;
-//            background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
-//            background-size: (26/2)+px;
-//          }
-//        }
-//      }
-//    } //.hero-slider-inner
-//
-//    &-control {
-//      position: absolute;
-//      top: 0;
-//      width: 100%;
-//
-//      .direction {
-//        a {
-//          position: absolute;
-//          display: block;
-//          width: (80/2)+px;
-//          height: (80/2)+px;
-//          margin-top: ($pickup-height/2) - 20;
-//          background-position: center center;
-//          background-repeat: no-repeat;
-//          background-size: (80/2)+px;
-//          @include hide-text;
-//        }
-//
-//        &-prev {
-//          left: 20px;
-//          background-image: url(/assets/sp/images/index/btn-slider-prev.png);
-//        }
-//
-//        &-next {
-//          right: 20px;
-//          background-image: url(/assets/sp/images/index/btn-slider-next.png);
-//        }
-//      }
-//
-//      .pager {
-//        display: none;
-//      }
-//    } //.hero-slider-control
-//  }
-//}
+// hero-sec
+// トップページ メインビジュアル
+.hero-sec {
+  background-color: #111;
+
+  a {
+    display: block;
+  }
+
+  .post {
+    &-overview {
+      @include clearfix;
+      padding: (28/2)+px perCalc(20) (16/2)+px;
+    }
+
+    &-heading {
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(32/2);
+    }
+
+    &-category {
+      margin-top: .5em;
+      color: $highlight-color;
+      font-weight: bold;
+      font-size: fz(20/2);
+    }
+
+    &-date,
+    &-comment-num {
+      font-size: fz(20/2);
+    }
+
+    &-date {
+      float: left;
+      color: #999;
+    }
+
+    &-comment-num {
+      float: right;
+      padding-left: (36/2)+px;
+      color: #fff;
+      background: url(/assets/sp/images/index/icon-hero-comment.png) 0 center no-repeat;
+      background-size: (26/2)+px;
+    }
+  }
+}
 
 
 
 
 
-// _general.scss へ汎用化のため移動
 // headline
 // トップページ ヘッドライン
-// .headline {
-//   .board-small {
-//     .board-item {
-//       // &:nth-child(1), &:nth-child(2) {
-//       //   border-top: none;
-//       // }
-//       &:last-child {
-//         border-bottom: none;
-//       }
+.headline {
+  .board-small {
+    .board-item {
+      // &:nth-child(1), &:nth-child(2) {
+      //   border-top: none;
+      // }
+      &:last-child {
+        border-bottom: none;
+      }
 
-//       .post {
-//         &-thumb {}
-//         &-heading {}
-//         &-category {}
-//         &-data {}
+      .post {
+        &-thumb {}
+        &-heading {}
+        &-category {}
+        &-data {}
 
-//         &:hover {
-//           .post-thumb {}
-//           .post-heading {}
-//         }
-//       }
-//     } //.post-list-item
-//   }
-// }
+        &:hover {
+          .post-thumb {}
+          .post-heading {}
+        }
+      }
+    } //.post-list-item
+  }
+}
 
-// .headline-outer {
-//   .sponsor-link {
-//     padding-right: perCalc(20);
-//     padding-left: perCalc(20);
-//     border-top: 1px solid $border-primary-color;
+.headline-outer {
+  .sponsor-link {
+    padding-right: perCalc(20);
+    padding-left: perCalc(20);
+    border-top: 1px solid $border-primary-color;
 
-//     .adgLink,
-//     .adsWrapper {
-//       height: auto !important;
-//     }
+    .adgLink,
+    .adsWrapper {
+      height: auto !important;
+    }
 
-//     .adsImgContainer,
-//     .adsBody {
-//       vertical-align: top !important;
-//     }
+    .adsImgContainer,
+    .adsBody {
+      vertical-align: top !important;
+    }
 
-//     .adsImgContainer {
-//       width: 70px !important;
-//       height: auto !important;
-//       min-height: 60px;
-//       padding: 0 !important;
-//       padding-right: 10px !important;
-//     }
+    .adsImgContainer {
+      width: 70px !important;
+      height: auto !important;
+      min-height: 60px;
+      padding: 0 !important;
+      padding-right: 10px !important;
+    }
 
-//     .adsBody {}
-//   }
-// }
+    .adsBody {}
+  }
+}
 
 
 
@@ -202,7 +119,9 @@
 
 // sns-pr
 .sns-pr {
-  padding: (20/2)+px perCalc(20);
+  padding-top: (20/2)+px;
+  padding-right: perCalc(20);
+  padding-left: perCalc(20);
   background-color: #eee;
 
   &-outer {

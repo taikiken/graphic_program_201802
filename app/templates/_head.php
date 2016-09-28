@@ -43,7 +43,7 @@ endif;
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@sportsbull">
+  <meta name="twitter:site" content="@undotsushin">
   <meta name="twitter:title" content="<?php echo $page['og_title']; ?>">
   <meta name="twitter:image" content="<?php echo $page['og_image']; ?>">
   <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
@@ -74,5 +74,5 @@ endif;
 ?>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/assets/images/common/favicon.ico">
+  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">

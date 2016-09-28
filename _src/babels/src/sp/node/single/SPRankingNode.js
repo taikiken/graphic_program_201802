@@ -54,7 +54,7 @@ export let SPRankingNode = React.createClass( {
         <div className="mod-headingA01">
           <h2>{this.props.title}</h2>
         </div>
-        <ul className="board">
+        <ul className="board-small">
           {
             list.map( function( article, i ) {
 
@@ -68,7 +68,7 @@ export let SPRankingNode = React.createClass( {
                   key={'ranking-' + dae.id}
                   index={i}
                   id={String( dae.id )}
-                  slug={dae.categories.slug}
+                  slug={dae.categories.all[0].slug}
                   categories={dae.categories.all}
                   url={dae.url}
                   date={dae.displayDate}

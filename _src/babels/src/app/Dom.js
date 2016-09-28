@@ -203,13 +203,6 @@ export class Dom {
   static headline():Element {
     return Dom.get( 'headline-container' );
   }
-  /**
-   * category headline 「注目の記事」
-   * @return {Element} div#js-headline を返します
-   */
-  static headlineParent():Element {
-    return Dom.get('js-headline');
-  }
   // archive / category
   /**
    * category container
@@ -311,22 +304,6 @@ export class Dom {
    */
   static userBanner():Element {
     return Dom.get( 'post-content-banner' );
-  }
-  // --------------------------------------
-  // single/next
-  /**
-   * 記事詳細 > next container
-   * @return {Element} js-singles-container を返します
-   */
-  static singlesNext():Element {
-    return Dom.get('js-singles-container');
-  }
-  /**
-   * 記事詳細 > next + more container
-   * @return {Element} js-singles-more を返します
-   */
-  static singlesMore():Element {
-    return Dom.get('js-singles-more');
   }
   // --------------------------------------
   /**

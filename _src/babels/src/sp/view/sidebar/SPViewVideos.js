@@ -24,10 +24,7 @@ import {View} from '../../../view/View';
 import {ArticleDae} from '../../../dae/ArticleDae';
 
 import {SPArchiveNode} from '../../node/SPArchiveNode';
-// import {SPMoreViewNode} from '../../node/SPMoreViewNode';
-
-// sp/view
-import { SPComponentMoreButton } from '../../component/articles/SPComponentMoreButton';
+import {SPMoreViewNode} from '../../node/SPMoreViewNode';
 
 // React
 let ReactDOM = self.ReactDOM;
@@ -149,21 +146,12 @@ export class SPViewVideos extends ViewVideos {
 
       // チェックをパスし実行する
       this._moreRendered = ReactDOM.render(
-        // <SPMoreViewNode
-        //   show={show}
-        //   action={this.action}
-        //   slug={this.slug}
-        //   type="movie"
-        //   home={this._home}
-        // />,
-        // @since 2016-09-16 button changed
-        <SPComponentMoreButton
+        <SPMoreViewNode
           show={show}
           action={this.action}
-          element={this._moreElement}
-          home={this._home}
           slug={this.slug}
           type="movie"
+          home={this._home}
         />,
         this._moreElement
       );

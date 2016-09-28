@@ -9,8 +9,8 @@
 
 // user-signup
 .user-signup {
-  padding: (80/2)+px perCalc(50);
-  background-color: #f5f5f5;
+  margin: (80/2)+px 0;
+  padding: 0 perCalc(50);
 
   &-lead {
     font-size: fz(26/2);
@@ -56,7 +56,7 @@
       transform: translateX(-50%);
       width: (120/2)+px;
       height: (30/2)+px;
-      background-color: #f5f5f5;
+      background-color: #fff;
     }
   }
 
@@ -71,6 +71,7 @@
 
     a {
       display: block !important;
+      background-color: #333 !important;
     }
   }
 } //.user-signup
@@ -91,7 +92,7 @@
   &:before {
     content: '';
     position: relative;
-    top: 2px;
+    top: 1px;
     margin-right: 4px;
     @extend .sp-sprite-common;
     @include sprite( $common-icon-config, inline-block );
@@ -105,7 +106,7 @@
 
 // user-config
 .user-config {
-  background-color: $highlight-color;
+  background-color: #000;
 
   .user-profile {
     padding-top: (24/2)+px;
@@ -152,7 +153,7 @@
       &-favorite {
         margin-top: (40/2)+px;
         padding: (30/2)+px perCalc(20);
-        background-color: #0b2b66;
+        background-color: #222;
         // letter-spacing: ls( inline-block );
         font-size: fz(12);
 
@@ -163,7 +164,7 @@
           }
 
           &-heading {
-            color: #fff;
+            color: #999;
             font-weight: bold;
             font-size: fz(24/2);
             text-align: center;
@@ -187,7 +188,7 @@
             }
 
             a {
-              @include link-decoration(#fff, #fff, none, none);
+              @include link-decoration($highlight-color, $highlight-color, none, none);
               // white-space: nowrap;
             }
           }
@@ -205,14 +206,14 @@
       width: 100%;
 
       a {
-        @include link-decoration(#999, $highlight-color, none, none);
+        @include link-decoration(#fff, $highlight-color, none, none);
         float: left;
         display: block;
         width: 50%;
         // min-height: 44px;
         // line-height: 1;
         padding: (24/2)+px 0;
-        background-color: #eee;
+        background-color: #555;
         text-align: center;
 
         &.current {
@@ -228,7 +229,7 @@
 
           &:before {
             content: '';
-            // @extend .sp-sprite-common;
+            @extend .sp-sprite-common;
             margin-right: 4px;
             position: relative;
             top: 2px;
@@ -239,14 +240,12 @@
       &-bookmark {
         span {
           &:before {
-            @extend .sp-sprite-setting;
-            @include sprite( $setting-icon-bookmark, inline-block );
+            @include sprite( $common-icon-bookmark, inline-block );
           }
         }
 
         &.current {
           span:before {
-            @extend .sp-sprite-common;
             @include sprite( $common-icon-bookmark_o, inline-block );
           }
         }
@@ -256,14 +255,12 @@
         span {
           &:before {
             top: 3px !important;
-            @extend .sp-sprite-common;
             @include sprite( $common-icon-activity, inline-block );
           }
         }
 
         &.current {
           span:before {
-            @extend .sp-sprite-common;
             @include sprite( $common-icon-activity_o, inline-block );
           }
         }
@@ -296,12 +293,10 @@
   }
 
   .user-btn-mypage {
-    @include link-decoration(#fff, #fff, none, none);
     position: absolute;
     right: perCalc(20);
     top: 50%;
     transform: translateY(-50%);
-    font-weight: bold;
 
     &:after {
       content: '';
@@ -366,107 +361,70 @@
 
 
 
-// -------------------------------------------------
-// sp mypage (bookmark)
-.mypage-bookmark {
-  min-height: 300px;
-
-  #board-container-more {
-    margin-top: 10px;
-    padding-top: 0;
-    padding-bottom: 20px;
-  }
-}
-
-
-// -------------------------------------------------
-// sp mypage/activities
-.activity-container {
-  min-height: 300px;
-
-  #board-container-more {
-    margin-top: 10px;
-    padding-top: 0;
-    padding-bottom: 20px;
-  }
-}
-
-
-
 // .info
 .info {
-  margin-bottom: 10px;
+  @at-root {
+    // &-btn-readAll {
+    //   min-height: 1em;
+    //   margin-bottom: 20px;
+    //   text-align: right;
 
-  // &-btn-readAll {
-  //   min-height: 1em;
-  //   margin-bottom: 20px;
-  //   text-align: right;
+    //   a {
+    //     font-weight: bold;
+    //   }
+    // }
 
-  //   a {
-  //     font-weight: bold;
-  //   }
-  // }
+    &-link {
+      padding-left: (90/2)+px;
 
-  //.info-container
-  &-container {
-    min-height: 300px;
+      &,
+      &.unread {
+        background-color: $bg-primary-color;
+      }
 
-    #board-container-more {
-      padding-top: 0;
-      padding-bottom: 20px;
-    }
-  }
+      &.read {
+        background-color: #fff;
+      }
 
-  &-link {
-    padding-left: (90/2)+px;
-
-    &,
-    &.unread {
-      background-color: $bg-primary-color;
-    }
-
-    &.read {
-      background-color: #fff;
+      &:hover,
+      &.unread:hover,
+      &.read:hover {
+        // background-color: #ffe9f3;
+      }
     }
 
-    &:hover,
-    &.unread:hover,
-    &.read:hover {
-      // background-color: #ffe9f3;
-    }
-  }
-
-  &-user-thumb {
-    position: absolute;
-    top: (20/2)+px;
-    left: (20/2)+px;
-    width: (50/2)+px;
-    height: (50/2)+px;
-    margin-right: (20/2)+px;
-    border-radius: 100%;
-    background: url(/assets/sp/images/common/thumb-user-info.png) 0 0 no-repeat;
-    background-size: (50/2)+px;
-
-    img {
+    &-user-thumb {
+      position: absolute;
+      top: (20/2)+px;
+      left: (20/2)+px;
       width: (50/2)+px;
+      height: (50/2)+px;
+      margin-right: (20/2)+px;
       border-radius: 100%;
+      background: url(/assets/sp/images/common/thumb-user-info.png) 0 0 no-repeat;
+      background-size: (50/2)+px;
+
+      img {
+        width: (50/2)+px;
+        border-radius: 100%;
+      }
+
+      &.user-logged-in {
+        background: none;
+      }
     }
 
-    &.user-logged-in {
-      background: none;
+    &-content {
+      overflow: hidden;
+
+      strong {
+        color: $highlight-color;
+      }
     }
-  }
 
-  &-content {
-    overflow: hidden;
-
-    strong {
-      // color: $highlight-color;
+    &-date {
+      overflow: hidden;
     }
-  }
-
-  &-date {
-    overflow: hidden;
   }
 }
 

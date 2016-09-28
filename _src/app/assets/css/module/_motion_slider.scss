@@ -1,176 +1,6 @@
 @import "../../../../scss/asset";
 
 // ---------------------------------------------------------------------
-// PICKUP
-// index.scss から移動
-// ---------------------------------------------------------------------
-
-// pickup
-//
-// design module pickup
-//
-// Styleguide 2.13.0
-
-// hero-slider
-// トップページ用 メインビジュアルスライダー
-.hero {
-  &-sec {
-  }
-  $pickup-height: 400px;
-
-  &-slider {
-    position: relative;
-    width: 100%;
-    height: $pickup-height;
-    background-color: #000;
-    overflow: hidden;
-
-    &-inner {
-      width: 640px;
-      margin: 0 auto;
-      overflow: visible;
-
-      ul {
-        @include clearfix;
-        width: 200000px;
-      }
-
-      li {
-        // なぜ消した?
-        float: left;
-        width: 640px;
-
-        a {
-          @include link-decoration(#fff, #fff, none, none);
-          position: relative;
-          display: block;
-          width: 100%;
-          height: $pickup-height;
-          overflow: hidden;
-
-          &:hover {
-            @include hover-opacity;
-
-            .category-label,
-            .post-heading {
-              // color: $highlight-secondary-color;
-            }
-          }
-
-          .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-          }
-
-          .post {
-            &-overview {
-              position: absolute;
-              bottom: 0;
-              left: 0;
-
-              padding: 0 30px 24px 30px;
-            }
-
-            &-category {
-              color: $highlight-color;
-              font-weight: bold;
-            }
-
-            &-heading {
-              font-weight: bold;
-              font-size: fz(24);
-            }
-
-            &-date,
-            &-comment-num {
-              display: inline-block;
-              font-size: fz(12);
-            }
-
-            &-comment-num {
-              margin-left: 10px;
-              padding-left: 20px;
-              background: url(/assets/images/index/icon-slider-comment.png) 0 center no-repeat;
-            }
-          }
-        }
-      }
-    } //.hero-slider-inner
-
-    &-control {
-      position: absolute;
-      top: 0;
-      width: 100%;
-
-      .direction {
-        a {
-          position: absolute;
-          display: block;
-          width: 40px;
-          height: 40px;
-          margin-top: ($pickup-height/2) - 20;
-          background-position: center center;
-          background-repeat: no-repeat;
-          @include hide-text;
-
-          &:hover {
-            @include hover-opacity;
-          }
-        }
-
-        &-prev {
-          left: 20px;
-          background-image: url(/assets/images/index/btn-slider-prev.png);
-        }
-
-        &-next {
-          right: 20px;
-          background-image: url(/assets/images/index/btn-slider-next.png);
-        }
-      }
-
-      .pager {
-        position: absolute;
-        top: 370px;
-        left: 50%;
-        width: 100%;
-        margin-left: -320px;
-
-        ul {
-          width: 640px;
-          text-align: center;
-          letter-spacing: ls(inline-block);
-        }
-
-        li {
-          display: inline-block;
-          letter-spacing: normal;
-
-          + li {
-            margin-left: 15px;
-          }
-        }
-
-        a {
-          display: block;
-          width: 6px;
-          height: 6px;
-          background-color: #999;
-          border-radius: 100%;
-          @include hide-text;
-
-          &.active,
-          &:hover {
-            background-color: $highlight-secondary-color;
-          }
-        }
-      }
-    } //.hero-slider-control
-  }
-}
-
-// ---------------------------------------------------------------------
 // slider home motion
 // API: pickup
 // ---------------------------------------------------------------------
@@ -195,68 +25,15 @@
       }
     }
 
-    // @since 2016-09-20
-    // swipe 実装のために ul.pickup-slider left: 0 にする
-    // wrapper div.pickup-slider-wrapper を作成しこちらで移動させる
-    .pickup-slider-wrapper {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    // slider の数で位置を調整する
-    // .hero-slider.pickup-slider-length-NN
-    // @type {number} NN slider の数, 1 ~ 5
-    &.pickup-slider-length-0 {
-      .pickup-slider-wrapper {
-        left: 0;
-      }
-    }
-    &.pickup-slider-length-1 {
-      .pickup-slider-wrapper {
-        left: -$slider-width * 0;
-      }
-      // 1 件しかない時の表示
-      .pickup-0 {
-        .overlay,
-        .post-overview {
-          opacity: 1;
-          transition-duration: 0s;
-        }
-      }
-    }
-    &.pickup-slider-length-2 {
-      .pickup-slider-wrapper {
-        left: -$slider-width * 2;
-      }
-    }
-    &.pickup-slider-length-3 {
-      .pickup-slider-wrapper {
-        left: -$slider-width * 3;
-      }
-    }
-    &.pickup-slider-length-4 {
-      .pickup-slider-wrapper {
-        left: -$slider-width * 4;
-      }
-    }
-    &.pickup-slider-length-5 {
-      .pickup-slider-wrapper {
-        left: -$slider-width * 5;
-      }
-    }
-
     .pickup-slider {
       position: absolute;
-      //left: -$slider-width * 5;
-      // @since 2016-09-20
-      left: 0;
+      left: -$slider-width * 5;
       top: 0;
 
       // default position
-      transform: translateX(0);
+      transform: translateX( 0 );
 
-      transition-property: transform, left;
+      transition-property: transform;
       transition-duration: 0.5s;
     }
 
@@ -289,7 +66,7 @@
         .pager {
           .pager-0 {
             a {
-              background-color: $highlight-secondary-color;
+              background-color: #e1438b;
               transition-duration: 0.25s;
             }
           }
@@ -311,7 +88,7 @@
         .pager {
           .pager-1 {
             a {
-              background-color: $highlight-secondary-color;
+              background-color: #e1438b;
             }
           }
         }
@@ -332,7 +109,7 @@
         .pager {
           .pager-2 {
             a {
-              background-color: $highlight-secondary-color;
+              background-color: #e1438b;
             }
           }
         }
@@ -353,7 +130,7 @@
         .pager {
           .pager-3 {
             a {
-              background-color: $highlight-secondary-color;
+              background-color: #e1438b;
             }
           }
         }
@@ -376,7 +153,7 @@
         .pager {
           .pager-4 {
             a {
-              background-color: $highlight-secondary-color;
+              background-color: #e1438b;
               transition-duration: 0.25s;
             }
           }
@@ -392,7 +169,26 @@
       .pickup-slider {
         transform: translateX($slider-width);
         transition-duration: 0s;
+        //transition-property: none;
+
+        //.pickup-9 {
+        //  .overlay,
+        //  .post-overview {
+        //    opacity: 1;
+        //    transition-duration: 0.5s;
+        //  }
+        //}
       }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-4 {
+      //      a {
+      //        background-color: #e1438b;
+      //        transition-duration: 0.5s;
+      //      }
+      //    }
+      //  }
+      //}
     }
 
     // index 0 -> 4
@@ -400,343 +196,25 @@
       .pickup-slider {
         transform: translateX(-$slider-width * 5);
         transition-duration: 0s;
-      }
-    }
-    // --------------------------------------------------
-    // slide が 1枚の時の設定
-    // --------------------------------------------------
-    // @since 2016-09-23
-    &.pickup-slider-length-2 {
-      .pickup-slider {
-        width: $slider-width;
-      }
-    }
-    // --------------------------------------------------
-    // slide が 2枚の時の設定
-    // 循環アニメションのために擬似的に 3まいとして処理する
-    // --------------------------------------------------
-    // @since 2016-09-23
-    &.pickup-slider-length-2 {
-      .pickup-slider {
-        width: $slider-width * 2 * 4;
-      }
-      // --------------------------------------------------
-      // 親コンテナ class に対する 位置
-      &.slide-0 {
-        .pickup-slider {
-          transform: translateX(0);
-          transition-duration: 0.5s;
 
-          .pickup-2 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-              transition-duration: 0.25s;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-0 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
+        //.pickup-5 {
+        //  .overlay,
+        //  .post-overview {
+        //    opacity: 1;
+        //    transition-duration: 0.5s;
+        //  }
+        //}
       }
-      &.slide-1 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 1);
-
-          .pickup-3 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-1 {
-              a {
-                background-color: $highlight-secondary-color;
-              }
-            }
-          }
-        }
-      }
-      &.slide-2 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 2);
-
-          .pickup-4 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-0 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-
-      // --------------------------------------------------
-      // 循環アニメーションのために
-      // アニメーションなしで移動させるための設定
-      // --------------------------------------------------
-      // index 1 -> 0
-      &.slide-999 {
-        .pickup-slider {
-          transform: translateX($slider-width);
-          transition-duration: 0s;
-        }
-      }
-
-      // index 0 -> 1
-      &.slide-1999 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 3);
-          transition-duration: 0s;
-        }
-      }
-    }
-    // --------------------------------------------------
-    // slide が 3枚の時の設定
-    // --------------------------------------------------
-    // @since 2016-09-23
-    &.pickup-slider-length-3 {
-      .pickup-slider {
-        width: $slider-width * 3 * 3;
-      }
-      // --------------------------------------------------
-      // 親コンテナ class に対する 位置
-      &.slide-0 {
-        .pickup-slider {
-          transform: translateX(0);
-          transition-duration: 0.5s;
-
-          .pickup-3 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-              transition-duration: 0.25s;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-0 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-      &.slide-1 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 1);
-
-          .pickup-4 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-1 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-      &.slide-2 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 2);
-
-          .pickup-5 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-2 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-      // --------------------------------------------------
-      // 循環アニメーションのために
-      // アニメーションなしで移動させるための設定
-      // --------------------------------------------------
-      // index 4 -> 0
-      &.slide-999 {
-        .pickup-slider {
-          transform: translateX($slider-width);
-          transition-duration: 0s;
-        }
-      }
-
-      // index 0 -> 4
-      &.slide-1999 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 3);
-          transition-duration: 0s;
-        }
-      }
-    }
-    // --------------------------------------------------
-    // slide が 4枚の時の設定
-    // --------------------------------------------------
-    // @since 2016-09-23
-    &.pickup-slider-length-4 {
-      .pickup-slider {
-        width: $slider-width * 4 * 3;
-      }
-      // --------------------------------------------------
-      // 親コンテナ class に対する 位置
-      &.slide-0 {
-        .pickup-slider {
-          transform: translateX(0);
-          transition-duration: 0.5s;
-
-          .pickup-4 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-              transition-duration: 0.25s;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-0 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-      &.slide-1 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 1);
-
-          .pickup-5 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-1 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-      &.slide-2 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 2);
-
-          .pickup-6 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-2 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-      &.slide-3 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 3);
-
-          .pickup-7 {
-            .overlay,
-            .post-overview {
-              opacity: 1;
-            }
-          }
-        }
-        .hero-slider-control {
-          .pager {
-            .pager-3 {
-              a {
-                background-color: $highlight-secondary-color;
-                transition-duration: 0.25s;
-              }
-            }
-          }
-        }
-      }
-      // --------------------------------------------------
-      // 循環アニメーションのために
-      // アニメーションなしで移動させるための設定
-      // --------------------------------------------------
-      // index 4 -> 0
-      &.slide-999 {
-        .pickup-slider {
-          transform: translateX($slider-width);
-          transition-duration: 0s;
-        }
-      }
-
-      // index 0 -> 4
-      &.slide-1999 {
-        .pickup-slider {
-          transform: translateX(-$slider-width * 4);
-          transition-duration: 0s;
-        }
-      }
-    }
-
-    // --------------------------------------------------
-    // slide が 5枚の時の設定
-    // --------------------------------------------------
-    // @since 2016-09-23
-    &.pickup-slider-length-5 {
-      .pickup-slider {
-        width: $slider-width * 5 * 3;
-      }
+      //.hero-slider-control {
+      //  .pager {
+      //    .pager-0 {
+      //      a {
+      //        background-color: #e1438b;
+      //        transition-duration: 0.5s;
+      //      }
+      //    }
+      //  }
+      //}
     }
   }// .hero-slider
 }

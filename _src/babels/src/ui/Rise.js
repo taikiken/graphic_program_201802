@@ -69,6 +69,7 @@ export class Rise extends EventDispatcher {
    */
   start():void {
     // console.log( '************************ Rise.start' );
+
     this._scroll.on( Scroll.SCROLL, this._boundScroll );
     this._scroll.start();
   }
@@ -77,10 +78,9 @@ export class Rise extends EventDispatcher {
    */
   stop():void {
     // console.log( '------------------------ Rise.stop' );
+
     this._scroll.off( Scroll.SCROLL, this._boundScroll );
-    // @since 2016-09-16
-    // 全ての監視を止めてしまう, 破壊的なので止める
-    // this._scroll.stop();
+    this._scroll.stop();
   }
   /**
    * Scroll.SCROLL event handler
@@ -89,12 +89,12 @@ export class Rise extends EventDispatcher {
   onScroll( event:Object ):void {
     // window property
     // scrollTop
-    const y = event.y;
-    const windowHeight = window.innerHeight;
-    const windowBottom = y + windowHeight - this._offset;
+    let y = event.y;
+    let windowHeight = window.innerHeight;
+    let windowBottom = y + windowHeight - this._offset;
     // element property
-    const offsetRect = this._dom.offset();
-    const elementBottom = y + offsetRect.top + offsetRect.height;
+    let offsetRect = this._dom.offset();
+    let elementBottom = y + offsetRect.top + offsetRect.height;
 
     // element.bottom が contain しているかを調べます
     if ( windowBottom > elementBottom ) {

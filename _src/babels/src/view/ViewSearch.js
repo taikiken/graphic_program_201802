@@ -13,7 +13,6 @@
 
 // parent
 import {ViewArchiveMasonry} from './ViewArchiveMasonry';
-import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
 
 // action
 import {SearchAuth} from '../action/search/SearchAuth';
@@ -36,11 +35,8 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * 検索ページ, keyword 検索
- *
- * @since 2016-09-16
  */
-// export class ViewSearch extends ViewArchiveMasonry {
-export class ViewSearch extends ViewArchiveMasonryInfinite {
+export class ViewSearch extends ViewArchiveMasonry {
   /**
    * 検索ページ 表示
    * @param {string} word 検索キーワード
@@ -123,7 +119,7 @@ export class ViewSearch extends ViewArchiveMasonryInfinite {
 
         return (
           <div className="error-container">
-            <h2 className="search-heading mt60">検索結果が見つかりませんでした</h2>
+            <h2 className="mt80 f20 bold">検索結果が見つかりませんでした</h2>
             <p className="mt04">スペルを確認するか、他のキーワードを入力してみてください。</p>
             <div className="mod-btnA01 mt40">
               <a href="/">TOPに戻る</a>
