@@ -785,6 +785,24 @@ textarea {
   }
 }
 
+.layout-detail .body-sec {
+  background-color: #f5f5f5;
+
+  &-inner {
+    background: none;
+  }
+
+  .main-sec {
+    width: 788px;
+    margin-left: -30px;
+  }
+
+  .side-sec {
+    width: 300px;
+    padding-left: 0;
+  }
+}
+
 
 
 

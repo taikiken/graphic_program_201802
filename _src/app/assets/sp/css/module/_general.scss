@@ -275,11 +275,13 @@
       overflow: hidden;
     }
 
+    // .post-label_recommend
     &-label_recommend {
       @extend .sp-sprite-common;
       @include sprite( $common-icon-recommend, inline-block );
       @include hide-text;
       vertical-align: middle;
+      margin-right: 5px;
     }
 
     &-category {
