@@ -6,8 +6,8 @@
 if ( !$page['theme']['images']['sp'] ) :
 ?>
 <div class="category-heading">
-  <h1>
-    <?php echo $page['category']['label']; ?>
+  <div>
+    <?php //echo $page['category']['label']; ?>
     <?php if ( isset($page['category']['title_img']) && $page['category']['title_img'] ) : ?>
       <span class="category-heading-image">
         <?php
@@ -26,7 +26,7 @@ if ( !$page['theme']['images']['sp'] ) :
         <?php endif; ?>
       </span>
     <?php endif; ?>
-  </h1>
+  </div>
 </div><!-- /.category-heading -->
 <?php
 endif;
