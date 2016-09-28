@@ -19,6 +19,12 @@
     // ---------------------------------------------------- ?>
     <div id="pickup-container"></div><!-- /pickup -->
 
+    <?php
+    // @since 2016-09-28
+    include_once __DIR__.'/_category-heading.php';
+
+    ?>
+
     <section class="main-sec">
       <?php
       // ----------------------------------------------------

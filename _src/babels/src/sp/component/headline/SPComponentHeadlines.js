@@ -78,7 +78,7 @@ export class SPComponentHeadlines extends React.Component {
         <div className="headline">
           {/* @since 2016-09-2 title 必須になりました */}
           <div className="headline-heading">
-            <h2 className="headline-heading-title">{Message.HEADLINE_TITLE}ヘッドラインニュース</h2>
+            <h2 className="headline-heading-title">{Message.HEADLINE_TITLE}</h2>
           </div>
           <ul className="board">
             {

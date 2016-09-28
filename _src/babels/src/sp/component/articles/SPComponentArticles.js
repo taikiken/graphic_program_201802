@@ -62,9 +62,9 @@ export class SPComponentArticles extends React.Component {
     }
 
     return(
-      <div className="headline">
-        <div className="headline-heading">
-          <h2 className="headline-heading-title">{Message.LATEST_TITLE}</h2>
+      <div className="latest">
+        <div className="latest-heading">
+          <h2 className="latest-heading-title">{Message.LATEST_TITLE}</h2>
         </div>
         <div className="board">
           {
