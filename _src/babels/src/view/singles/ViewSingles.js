@@ -81,9 +81,9 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
 
     const boundDone = this.done.bind(this);
     const boundFail = this.fail.bind(this);
-
+    console.log('ViewSingles id, ', id);
     /**
-     * Ajax request action instance
+     * Ajax request action instance<br>
      * @type {SinglesAuth|Singles}
      * @override
      */
@@ -96,6 +96,12 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
      * @type {SingleDae}
      */
     this.single = single;
+
+    /**
+     * 記事 ID
+     * @type {number}
+     */
+    this.id = id;
   }
   /**
    * Ajax response success
@@ -148,8 +154,8 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
-          callback={this.executeSafely.bind(this)}
-          boundMore={this.moreButton.bind(this)}
+          callback={this.boundSafely}
+          boundMore={this.boundMore}
           single={this.single}
         />,
         this.element

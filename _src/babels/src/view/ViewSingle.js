@@ -109,8 +109,19 @@ export class ViewSingle extends View {
      * @protected
      */
     this._footer = null;
-
+    /**
+     * SPViewSingle | ViewSingle instance
+     * @type {?SPViewSingle|?ViewSingle}
+     * @protected
+     */
     this._singles = null;
+
+    /**
+     * 記事 ID
+     * @type {number}
+     * @since 2016-09-26
+     */
+    this.id = id;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -182,7 +193,6 @@ export class ViewSingle extends View {
     // this.showError( error.message );
 
   }
-
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
    * @param {SingleDae} single JSON.response を SingleDae instance に変換しました

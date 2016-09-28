@@ -140,6 +140,13 @@ export class ViewArchiveMasonryInfinite extends View {
      * @default false
      */
     this._gaSend = false;
+
+    /**
+     * bind 済み moreButton
+     * @type {function}
+     * @since 2016-09-28
+     */
+    this.boundMore = this.moreButton.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

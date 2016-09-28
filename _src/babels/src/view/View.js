@@ -57,6 +57,13 @@ export class View extends EventDispatcher {
      * @default false
      */
     this._home = false;
+
+    /**
+     * bind 済み executeSafely
+     * @type {function}
+     * @since 2016-09-28
+     */
+    this.boundSafely = this.executeSafely.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER

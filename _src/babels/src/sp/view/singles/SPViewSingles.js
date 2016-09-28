@@ -16,6 +16,8 @@ import { ViewSingles } from '../../../view/singles/ViewSingles';
 // dae
 import { SingleDae } from '../../../dae/SingleDae';
 
+// sp/component/singles
+import { SPComponentSingles } from '../../component/singles/SPComponentSingles';
 
 // React
 const ReactDOM = self.ReactDOM;
@@ -37,14 +39,14 @@ export class SPViewSingles extends ViewSingles {
    * @param {Object} [option={}] callback を設定した Object
    */
   constructor(id, element, moreElement, single, option = {}) {
-    // element, moreElement, ActionClass, option, isotope
-    super(element, moreElement, null, option, false);
+    super(id, element, moreElement, single, option);
   }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
   render(articles:Array):void {
+    console.log('SPViewSingles.render articles', articles);
     // 既存データ用のglobal配列
     const articlesList = this.articles;
 
@@ -61,20 +63,24 @@ export class SPViewSingles extends ViewSingles {
     } );
 
     // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null ) {
+    if (this.articleRendered === null) {
+      const request = this.action.request;
+      console.log('SPViewSingles articleRendered', this.articleRendered, this.element, request, this.action);
+
       this.articleRendered = ReactDOM.render(
-        <ComponentSingles
+        <SPComponentSingles
           list={articlesList}
           home={false}
-          offset={this.request.offset}
-          length={this.request.length}
+          offset={request.offset}
+          length={request.length}
           action={this.action}
-          callback={this.executeSafely.bind(this)}
-          boundMore={this.moreButton.bind(this)}
+          callback={this.boundSafely}
+          boundMore={this.boundMore}
           single={this.single}
         />,
         this.element
       );
+      console.log('SPViewSingles articleRendered after ---', this.articleRendered);
     } else {
       // instance が存在するので
       // state update でコンテナを追加する
