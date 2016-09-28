@@ -10,6 +10,9 @@
  *
  */
 
+// view
+import { View } from '../../view/View';
+
 // app
 import { Url } from '../../app/const/Url';
 import { Message } from '../../app/const/Message';
@@ -102,12 +105,31 @@ export class ComponentSingleFooter extends React.Component {
       </div>
     );
   }
+  /**
+   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+  }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, callback: Function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
 }
-
-/**
- * プロパティ
- * @type {{single: SingleDae}}
- */
-ComponentSingleFooter.propTypes = {
-  single: React.PropTypes.object.isRequired
-};
+//
+// /**
+//  * プロパティ
+//  * @type {{single: SingleDae}}
+//  */
+// ComponentSingleFooter.propTypes = {
+//   single: React.PropTypes.object.isRequired
+// };

@@ -22,6 +22,21 @@ export class BannerDae {
    * @param {string} link リンク先
    */
   constructor( text:string, image:string, link:string ) {
-    Object.assign( this, {text, image, link} );
+    // Object.assign( this, {text, image, link} );
+    /**
+     * 画像のALT
+     * @type {string}
+     */
+    this.text = text;
+    /**
+     * バナーのURL
+     * @type {string}
+     */
+    this.image = image;
+    /**
+     * リンク先
+     * @type {string}
+     */
+    this.link = link;
   }
 }

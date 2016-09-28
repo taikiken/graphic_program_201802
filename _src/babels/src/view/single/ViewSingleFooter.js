@@ -66,7 +66,7 @@ export class ViewSingleFooter extends View {
    */
   render( singleDae:SingleDae ):void {
 
-    let element = this.element;
+    // let element = this.element;
 
     // let FooterDom = React.createClass( {
     //   propTypes: {
@@ -142,8 +142,9 @@ export class ViewSingleFooter extends View {
       this._rendered = ReactDOM.render(
         <ComponentSingleFooter
           single={singleDae}
+          callback={this.executeSafely.bind(this)}
         />,
-        element
+        this.element
       );
 
     } else {

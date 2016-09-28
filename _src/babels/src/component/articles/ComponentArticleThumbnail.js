@@ -80,24 +80,48 @@ export class ComponentArticleThumbnail extends React.Component {
       return null;
     }
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  mediaType: string,
+   *  thumbnail: string,
+   *  title: string,
+   *  masonry: boolean,
+   *  action: Object,
+   *  recommend: boolean
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      mediaType: React.PropTypes.string.isRequired,
+      thumbnail: React.PropTypes.string.isRequired,
+      title: React.PropTypes.string.isRequired,
+      recommend: React.PropTypes.bool.isRequired,
+      masonry: React.PropTypes.bool,
+      action: React.PropTypes.object
+    };
+  }
 }
-
-/**
- * プロパティー
- * @type {{
- *  mediaType: string,
- *  thumbnail: string,
- *  title: string,
- *  masonry: boolean,
- *  action: Object,
- *  recommend: boolean
- * }}
- */
-ComponentArticleThumbnail.propTypes = {
-  mediaType: React.PropTypes.string.isRequired,
-  thumbnail: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  recommend: React.PropTypes.bool.isRequired,
-  masonry: React.PropTypes.bool,
-  action: React.PropTypes.object
-};
+//
+// /**
+//  * プロパティー
+//  * @type {{
+//  *  mediaType: string,
+//  *  thumbnail: string,
+//  *  title: string,
+//  *  masonry: boolean,
+//  *  action: Object,
+//  *  recommend: boolean
+//  * }}
+//  */
+// ComponentArticleThumbnail.propTypes = {
+//   mediaType: React.PropTypes.string.isRequired,
+//   thumbnail: React.PropTypes.string.isRequired,
+//   title: React.PropTypes.string.isRequired,
+//   recommend: React.PropTypes.bool.isRequired,
+//   masonry: React.PropTypes.bool,
+//   action: React.PropTypes.object
+// };

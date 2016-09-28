@@ -71,6 +71,10 @@ export class SPViewArchiveInfinite extends SPViewArchive {
     // this._articleRendered が null の時だけ ReactDOM.render する
     if (this.articleRendered === null) {
       // dom 生成後 instance property '_articleRendered' へ ArticleDom instance を保存する
+      /**
+       * SPComponentArticles instance
+       * @type {SPComponentArticles}
+       */
       this.articleRendered = ReactDOM.render(
         // <SPArchiveNode
         //   list={articlesList}
@@ -128,6 +132,10 @@ export class SPViewArchiveInfinite extends SPViewArchive {
     // moreRendered が null の時のみ instance を作成し
     // instance があれば state を update する
     if (this.moreRendered === null) {
+      /**
+       * スクロールしJSON取得トリガーになる[VIEW MORE]button
+       * @type {SPComponentMoreButton}
+       */
       this.moreRendered = ReactDOM.render(
         <SPComponentMoreButton
           show={show}

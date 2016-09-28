@@ -106,35 +106,56 @@ export class SPComponentHeadlineArticle extends React.Component {
     Ga.add( new GaData('SPViewHeadline.gaSend', `${prefix}_headline`, 'click', this.props.url, parseFloat(this.props.id)) );
     // ----------------------------------------------
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{index: number, id: string, slug: string, categories: Array<CategoriesDae>, url: string, date: string, title: string, thumbnail: string, mediaType: string, home: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      index: React.PropTypes.number.isRequired,
+      id: React.PropTypes.string.isRequired,
+      slug: React.PropTypes.string.isRequired,
+      categories: React.PropTypes.array.isRequired,
+      url: React.PropTypes.string.isRequired,
+      date: React.PropTypes.string.isRequired,
+      title: React.PropTypes.string.isRequired,
+      thumbnail: React.PropTypes.string.isRequired,
+      mediaType: React.PropTypes.string.isRequired,
+      home: React.PropTypes.bool.isRequired
+    };
+  }
 }
 
-/**
- * プロパティタイプ
- * @type {{
- *  index: number,
- *  id: string,
- *  slug: string,
- *  categories: Array,
- *  url: string,
- *  date: string,
- *  title: string,
- *  thumbnail: string,
- *  mediaType: string,
- *  home: boolean
- * }}
- */
-SPComponentHeadlineArticle.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  categories: React.PropTypes.array.isRequired,
-  url: React.PropTypes.string.isRequired,
-  date: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  thumbnail: React.PropTypes.string.isRequired,
-  mediaType: React.PropTypes.string.isRequired,
-  home: React.PropTypes.bool.isRequired
-};
+// /**
+//  * プロパティタイプ
+//  * @type {{
+//  *  index: number,
+//  *  id: string,
+//  *  slug: string,
+//  *  categories: Array,
+//  *  url: string,
+//  *  date: string,
+//  *  title: string,
+//  *  thumbnail: string,
+//  *  mediaType: string,
+//  *  home: boolean
+//  * }}
+//  */
+// SPComponentHeadlineArticle.propTypes = {
+//   index: React.PropTypes.number.isRequired,
+//   id: React.PropTypes.string.isRequired,
+//   slug: React.PropTypes.string.isRequired,
+//   categories: React.PropTypes.array.isRequired,
+//   url: React.PropTypes.string.isRequired,
+//   date: React.PropTypes.string.isRequired,
+//   title: React.PropTypes.string.isRequired,
+//   thumbnail: React.PropTypes.string.isRequired,
+//   mediaType: React.PropTypes.string.isRequired,
+//   home: React.PropTypes.bool.isRequired
+// };
 // /**
 //  * デフォルトプロパティ定義
 //  * @type {{home: boolean}}

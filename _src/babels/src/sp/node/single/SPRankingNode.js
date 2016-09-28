@@ -54,7 +54,7 @@ export let SPRankingNode = React.createClass( {
         <div className="mod-headingA01">
           <h2>{this.props.title}</h2>
         </div>
-        <ul className="board-small">
+        <ul className="board">
           {
             list.map( function( article, i ) {
 

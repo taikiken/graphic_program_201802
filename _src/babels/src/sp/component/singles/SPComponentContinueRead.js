@@ -88,11 +88,23 @@ export class SPComponentContinueRead extends React.Component {
       </a>
     );
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{dom: Sagen.Dom}} React props
+   */
+  static get propTypes() {
+    return {
+      dom: React.PropTypes.object.isRequired
+    };
+  }
 }
-/**
- * プロパティ
- * @type {{dom: Sagen.Dom}}
- */
-SPComponentContinueRead.propTypes = {
-  dom: React.PropTypes.object.isRequired
-};
+// /**
+//  * プロパティ
+//  * @type {{dom: Sagen.Dom}}
+//  */
+// SPComponentContinueRead.propTypes = {
+//   dom: React.PropTypes.object.isRequired
+// };

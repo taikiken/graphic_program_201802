@@ -60,28 +60,57 @@ export class ComponentCategoryLabelsLink extends React.Component {
       </p>
     );
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  index: number,
+   *  id: string,
+   *  categories: Array<SlugDae>,
+   *  slug: string
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      index: React.PropTypes.number.isRequired,
+      id: React.PropTypes.string.isRequired,
+      categories: React.PropTypes.array.isRequired,
+      slug: React.PropTypes.string
+    };
+  }
+  /**
+   * defaultProps
+   * @return {{slug: string}} React props
+   */
+  static get defaultProps() {
+    return {
+      slug: ''
+    };
+  }
 }
-
-/**
- * プロパティ
- * @type {{
- *  index: number,
- *  id: string,
- *  categories: Array<SlugDae>,
- *  slug: string
- * }}
- */
-ComponentCategoryLabelsLink.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired,
-  categories: React.PropTypes.array.isRequired,
-  slug: React.PropTypes.string
-};
-
-/**
- * default プロパティ
- * @type {{slug: string}}
- */
-ComponentCategoryLabelsLink.defaultProps = {
-  slug: ''
-};
+//
+// /**
+//  * プロパティ
+//  * @type {{
+//  *  index: number,
+//  *  id: string,
+//  *  categories: Array<SlugDae>,
+//  *  slug: string
+//  * }}
+//  */
+// ComponentCategoryLabelsLink.propTypes = {
+//   index: React.PropTypes.number.isRequired,
+//   id: React.PropTypes.string.isRequired,
+//   categories: React.PropTypes.array.isRequired,
+//   slug: React.PropTypes.string
+// };
+//
+// /**
+//  * default プロパティ
+//  * @type {{slug: string}}
+//  */
+// ComponentCategoryLabelsLink.defaultProps = {
+//   slug: ''
+// };

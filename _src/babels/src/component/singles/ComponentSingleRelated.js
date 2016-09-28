@@ -117,12 +117,24 @@ export class ComponentSingleRelated extends React.Component {
   updateList(list) {
     this.setState({ list });
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: array<RelatedDae>}} React props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired
+    };
+  }
 }
-
-/**
- * プロパティ
- * @type {{list: array<RelatedDae>}}
- */
-ComponentSingleRelated.propTypes = {
-  list: React.PropTypes.array.isRequired
-};
+//
+// /**
+//  * プロパティ
+//  * @type {{list: array<RelatedDae>}}
+//  */
+// ComponentSingleRelated.propTypes = {
+//   list: React.PropTypes.array.isRequired
+// };

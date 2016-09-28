@@ -88,39 +88,75 @@ export class ComponentCarouselArticle extends React.Component {
     Ga.add( new GaData('ComponentCarouselArticle.gaSend', tag, 'click', this.props.url, parseFloat(this.props.id)) );
     // ----------------------------------------------
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  index: number,
+   *  id: string,
+   *  slug: string,
+   *  categories: Array<SlugDae>,
+   *  url: string,
+   *  date: string,
+   *  title: string,
+   *  large: string,
+   *  commentsCount: number,
+   *  mediaType: string,
+   *  home: boolean
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      index: React.PropTypes.number.isRequired,
+      id: React.PropTypes.string.isRequired,
+      slug: React.PropTypes.string.isRequired,
+      categories: React.PropTypes.array.isRequired,
+      url: React.PropTypes.string.isRequired,
+      date: React.PropTypes.string.isRequired,
+      title: React.PropTypes.string.isRequired,
+      large: React.PropTypes.string.isRequired,
+      commentsCount: React.PropTypes.number.isRequired,
+      mediaType: React.PropTypes.string.isRequired,
+      // home であるかを表す
+      home: React.PropTypes.bool.isRequired
+    };
+  }
 }
-
-/**
- * ViewCarouselArticle React プロパティー
- * @static
- * @type {{
- *  index: number,
- *  id: string,
- *  slug: string,
- *  categories: [string],
- *  url: string,
- *  date: string,
- *  title: string,
- *  large: string,
- *  commentsCount: number,
- *  mediaType: string,
- *  home: boolean
- * }}
- */
-ComponentCarouselArticle.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  categories: React.PropTypes.array.isRequired,
-  url: React.PropTypes.string.isRequired,
-  date: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  large: React.PropTypes.string.isRequired,
-  commentsCount: React.PropTypes.number.isRequired,
-  mediaType: React.PropTypes.string.isRequired,
-  // home であるかを表す
-  home: React.PropTypes.bool.isRequired
-};
+//
+// /**
+//  * ViewCarouselArticle React プロパティー
+//  * @static
+//  * @type
+//  * {{
+//  *  index: number,
+//  *  id: string,
+//  *  slug: string,
+//  *  categories: [string],
+//  *  url: string,
+//  *  date: string,
+//  *  title: string,
+//  *  large: string,
+//  *  commentsCount: number,
+//  *  mediaType: string,
+//  *  home: boolean
+//  * }}
+//  */
+// ComponentCarouselArticle.propTypes = {
+//   index: React.PropTypes.number.isRequired,
+//   id: React.PropTypes.string.isRequired,
+//   slug: React.PropTypes.string.isRequired,
+//   categories: React.PropTypes.array.isRequired,
+//   url: React.PropTypes.string.isRequired,
+//   date: React.PropTypes.string.isRequired,
+//   title: React.PropTypes.string.isRequired,
+//   large: React.PropTypes.string.isRequired,
+//   commentsCount: React.PropTypes.number.isRequired,
+//   mediaType: React.PropTypes.string.isRequired,
+//   // home であるかを表す
+//   home: React.PropTypes.bool.isRequired
+// };
 //
 // /**
 //  * デフォルト・プロパティ, home を false 設定します

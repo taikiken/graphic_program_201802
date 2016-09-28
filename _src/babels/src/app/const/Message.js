@@ -9,28 +9,28 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-let _symbol = Symbol();
+// let _symbol = Symbol();
 
 /**
  * <p>表示文章定義</p>
  * 全て static です
  */
 export class Message {
-  /**
-   * <p>表示文章定義</p>
-   * <p>error, 注意などの文章を定義します</p>
-   * <p>static class です, instance を作成しません</P>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target:Symbol ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Message is static Class. not use new Message().' );
-
-    }
-
-  }
+  // /**
+  //  * <p>表示文章定義</p>
+  //  * <p>error, 注意などの文章を定義します</p>
+  //  * <p>static class です, instance を作成しません</P>
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'Message is static Class. not use new Message().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  CONST 代わり
   // ---------------------------------------------------
@@ -258,6 +258,21 @@ export class Message {
   static get READ_MORE():string {
     return '続きを読む';
   }
+  /**
+   * READ_MORE_EXTERNAL 続きを読む(外部サイトへ)
+   * @return {string} 続きを読む(外部サイトへ) を返します
+   */
+  static get READ_MORE_EXTERNAL():string {
+    return '続きを読む(外部サイトへ)';
+  }
+  /**
+   * WEBSITE ウェブサイト
+   * @since 2-16-09-27
+   * @return {string} ウェブサイト を返します
+   */
+  static get WEBSITE():string {
+    return 'ウェブサイト';
+  }
   // ----
   // button
 
@@ -471,7 +486,6 @@ export class Message {
   static get DEACTIVATE_COMPLETE():string {
     return '退会しました。';
   }
-
   // ----------------------------------
   // 一覧種類
   /**

@@ -70,15 +70,29 @@ export class ComponentPagers extends React.Component {
       return null;
     }
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<ArticleDae>, onPager: function}} react props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired,
+      onPager: React.PropTypes.func.isRequired,
+      sp: React.PropTypes.bool.isRequired
+    };
+  }
 }
-
-/**
- * プロパティ
- * @static
- * @type {{list: []<ArticleDae>, onPager: function}}
- */
-ComponentPagers.propTypes = {
-  list: React.PropTypes.array.isRequired,
-  onPager: React.PropTypes.func.isRequired,
-  sp: React.PropTypes.bool.isRequired
-};
+//
+// /**
+//  * プロパティ
+//  * @static
+//  * @type {{list: []<ArticleDae>, onPager: function}}
+//  */
+// ComponentPagers.propTypes = {
+//   list: React.PropTypes.array.isRequired,
+//   onPager: React.PropTypes.func.isRequired,
+//   sp: React.PropTypes.bool.isRequired
+// };

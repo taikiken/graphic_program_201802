@@ -23,6 +23,12 @@ import { SPComponentHeadlineOption } from './SPComponentHeadlineOption';
 // React
 const ReactDOM = self.ReactDOM;
 
+/**
+ * カテゴリ記事一覧に「PICKUP」「HEADLINE」を表示オプション追加します
+ *
+ * {@link SPComponentHeadlineOption}
+ * @since 2016-09-24
+ */
 export class SPComponentCategoryOption extends ComponentCategoryOption {
   /**
    * category slug を使用し API request を開始します

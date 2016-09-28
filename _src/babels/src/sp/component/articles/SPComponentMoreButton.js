@@ -217,41 +217,75 @@ export class SPComponentMoreButton extends React.Component {
     Ga.add( new GaData('SPComponentMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{show: boolean, action: Object, element: Element, home: boolean, slug: string, loading: string, type: string}} React props
+   */
+  static get propTypes() {
+    return {
+      show: React.PropTypes.bool.isRequired,
+      action: React.PropTypes.object.isRequired,
+      // 監視コンテナ
+      element: React.PropTypes.object.isRequired,
+      home: React.PropTypes.bool.isRequired,
+      slug: React.PropTypes.string.isRequired,
+      // option, default ''
+      loading: React.PropTypes.string,
+      // ranking | movie
+      type: React.PropTypes.string
+    };
+  }
+  /**
+   * defaultProps
+   *
+   * - [loading='']
+   * - [type='']
+   * @return {{loading: string, type: string}} React props
+   */
+  static get defaultProps() {
+    return {
+      loading: '',
+      type: ''
+    };
+  }
 }
-
-/**
- * プロパティ
- * @type {{
- *  home: boolean,
- *  show: boolean,
- *  action: object,
- *  element: Element,
- *  slug: string,
- *  loading: string,
- *  type: string
- * }}
- */
-SPComponentMoreButton.propTypes = {
-  show: React.PropTypes.bool.isRequired,
-  action: React.PropTypes.object.isRequired,
-  // 監視コンテナ
-  element: React.PropTypes.object.isRequired,
-  home: React.PropTypes.bool.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  // option, default ''
-  loading: React.PropTypes.string,
-  // ranking | movie
-  type: React.PropTypes.string
-};
-
-/**
- * デフォルトプロパティ
- * @type {{
- *  loading: string,
- *  type: string
- * }}
- */
-SPComponentMoreButton.defaultProps = {
-  loading: '',
-  type: ''
-};
+//
+// /**
+//  * プロパティ
+//  * @type {{
+//  *  home: boolean,
+//  *  show: boolean,
+//  *  action: object,
+//  *  element: Element,
+//  *  slug: string,
+//  *  loading: string,
+//  *  type: string
+//  * }}
+//  */
+// SPComponentMoreButton.propTypes = {
+//   show: React.PropTypes.bool.isRequired,
+//   action: React.PropTypes.object.isRequired,
+//   // 監視コンテナ
+//   element: React.PropTypes.object.isRequired,
+//   home: React.PropTypes.bool.isRequired,
+//   slug: React.PropTypes.string.isRequired,
+//   // option, default ''
+//   loading: React.PropTypes.string,
+//   // ranking | movie
+//   type: React.PropTypes.string
+// };
+//
+// /**
+//  * デフォルトプロパティ
+//  * @type {{
+//  *  loading: string,
+//  *  type: string
+//  * }}
+//  */
+// SPComponentMoreButton.defaultProps = {
+//   loading: '',
+//   type: ''
+// };

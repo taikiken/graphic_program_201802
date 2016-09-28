@@ -370,36 +370,70 @@ export class ComponentCarousel extends React.Component {
     // 文字列が返される(innerHTML)かもなので数値に型変換します
     this.jump(parseInt(index, 10));
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  list: Array<ArticleDae>,
+   *  callback: Function,
+   *  polling: Polling,
+   *  index: number
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      // articles 配列を元にDomを作成する
+      list: React.PropTypes.array.isRequired,
+      callback: React.PropTypes.func.isRequired,
+      polling: React.PropTypes.object.isRequired,
+      index: React.PropTypes.number,
+      sp: React.PropTypes.bool,
+      home: React.PropTypes.bool
+    };
+  }
+  /**
+   * defaultProps
+   * @return {{index: number, sp: boolean, home: boolean}} React props
+   */
+  static get defaultProps() {
+    return {
+      index: 0,
+      sp: Sagen.Browser.Mobile.phone(),
+      home: false
+    };
+  }
 }
 
-// property
-/**
- * this.props type を設定します, React の PropTypes をプロパティに設定します
- * @static
- * @type {{
- *  list: Array<ArticleDae>,
- *  callback: Function,
- *  polling: Polling,
- *  index: number
- * }}
- */
-ComponentCarousel.propTypes = {
-  // articles 配列を元にDomを作成する
-  list: React.PropTypes.array.isRequired,
-  callback: React.PropTypes.func.isRequired,
-  polling: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number,
-  sp: React.PropTypes.bool,
-  home: React.PropTypes.bool
-};
-
-/**
- * デフォルト・プロパティ, home を false 設定します
- * @static
- * @type {{index: number, sp: boolean, home: boolean}}
- */
-ComponentCarousel.defaultProps = {
-  index: 0,
-  sp: Sagen.Browser.Mobile.phone(),
-  home: false
-};
+// // property
+// /**
+//  * this.props type を設定します, React の PropTypes をプロパティに設定します
+//  * @static
+//  * @type {{
+//  *  list: Array<ArticleDae>,
+//  *  callback: Function,
+//  *  polling: Polling,
+//  *  index: number
+//  * }}
+//  */
+// ComponentCarousel.propTypes = {
+//   // articles 配列を元にDomを作成する
+//   list: React.PropTypes.array.isRequired,
+//   callback: React.PropTypes.func.isRequired,
+//   polling: React.PropTypes.object.isRequired,
+//   index: React.PropTypes.number,
+//   sp: React.PropTypes.bool,
+//   home: React.PropTypes.bool
+// };
+//
+// /**
+//  * デフォルト・プロパティ, home を false 設定します
+//  * @static
+//  * @type {{index: number, sp: boolean, home: boolean}}
+//  */
+// ComponentCarousel.defaultProps = {
+//   index: 0,
+//   sp: Sagen.Browser.Mobile.phone(),
+//   home: false
+// };

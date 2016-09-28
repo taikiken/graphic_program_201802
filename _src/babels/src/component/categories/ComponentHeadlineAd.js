@@ -15,18 +15,22 @@ const React = self.React;
 
 /**
  * 一面以外の headline ad
- * @since 2016-09-20
+ *
  * <pre>
  * ヘッドライン最下部に広告が設定できる
  * response.headline.ad の該当製品の値でアドジェネ広告を差し込む、この値がなければ広告は表示しない
  * </pre>
  * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
  * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
+ *
+ * @since 2016-09-20
+ *
  * */
 export class ComponentHeadlineAd extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentHeadlineAd.propTypes}
+   * @param {{browser: string, ad: HeadlineAdDae}} props プロパティ
+   * {@link ComponentHeadlineAd.propTypes}
    */
   constructor(props) {
     super(props);
@@ -107,14 +111,30 @@ export class ComponentHeadlineAd extends React.Component {
 
     this.script(`https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{browser: string, ad: HeadlineAdDae}} React props
+   */
+  static get propTypes() {
+    return {
+      browser: React.PropTypes.string.isRequired,
+      ad: React.PropTypes.object.isRequired
+    };
+  }
 }
-
-/**
- * プロパティ
- * @static
- * @type {{browser: string, sp: string, pc: string}}
- */
-ComponentHeadlineAd.propTypes = {
-  browser: React.PropTypes.string.isRequired,
-  ad: React.PropTypes.object.isRequired
-};
+//
+// /**
+//  * プロパティ
+//  * @typedef {Object} propTypes
+//  * @property {string} browser browser 種類 'sp' or 'pc'
+//  * @property {HeadlineAdDae} ad アドジェネ広告 JSON data
+//  * @static
+//  * @type {{browser: string, ad: HeadlineAdDae}}
+//  */
+// ComponentHeadlineAd.propTypes = {
+//   browser: React.PropTypes.string.isRequired,
+//   ad: React.PropTypes.object.isRequired
+// };
