@@ -215,7 +215,6 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     this.img = img;
     // 画像読み込む完了 event へ bind します
     img.on('always', this.boundImages);
-
   }
   /**
    * didUpdate から呼び出される

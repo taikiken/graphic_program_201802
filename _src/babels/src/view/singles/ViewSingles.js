@@ -30,8 +30,7 @@ import { SingleDae } from '../../dae/SingleDae';
 import { ComponentSingles } from '../../component/singles/ComponentSingles';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+const ReactDOM = self.ReactDOM;
 
 /**
  * 記事詳細・次の記事一覧を出力します
@@ -73,11 +72,12 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
    * @param {number} id 記事 ID
    * @param {Element} element component 挿入 Element
    * @param {Element} moreElement more button 挿入 Element
-   * @param {Object} [option={}] callback を設定した Object
    * @param {SingleDae} single 記事詳細取得 JSON を SingleDae instance にしています
+   * @param {Object} [option={}] callback を設定した Object
    */
-  constructor(id, element, moreElement, option = {}, single) {
-    super(element, moreElement, null, option, true);
+  constructor(id, element, moreElement, single, option = {}) {
+    // element, moreElement, ActionClass, option, isotope
+    super(element, moreElement, null, option, false);
 
     const boundDone = this.done.bind(this);
     const boundFail = this.fail.bind(this);

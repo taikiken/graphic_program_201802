@@ -185,7 +185,7 @@ export class ViewSingle extends View {
 
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
-   * @param {SingleDae} single
+   * @param {SingleDae} single JSON.response を SingleDae instance に変換しました
    * @since 2016-09-28
    */
   singles(single) {
@@ -193,7 +193,7 @@ export class ViewSingle extends View {
       const element = Dom.singlesNext();
       const moreElement = Dom.singlesMore();
       if (element !== null && moreElement !== null) {
-        const singles = new ViewSingles(this.id, element, moreElement, {}, single);
+        const singles = new ViewSingles(this.id, element, moreElement, single);
         this._singles = singles;
         singles.start();
       }

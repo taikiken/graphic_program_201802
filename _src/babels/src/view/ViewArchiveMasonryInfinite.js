@@ -64,7 +64,7 @@ export class ViewArchiveMasonryInfinite extends View {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {Boolean} [useMasonry=true] isotope を行うかの
+   * @param {Boolean} [useMasonry=true] isotope を行うかの真偽値
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
 

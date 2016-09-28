@@ -95,7 +95,7 @@ export class SPComponentArticles extends React.Component {
                             index={i}
                           />
                         </p>
-                        <p className="post-date">{props.date}</p>
+                        <p className="post-date">{dae.date}</p>
                       </div>
                     </a>
                   </div>

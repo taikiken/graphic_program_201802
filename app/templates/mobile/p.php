@@ -211,6 +211,24 @@
 
       </div><!-- /.comment -->
 
+      <?php
+      /*
+      @since 2016-09-28
+      記事詳細の次の記事
+      div#js-singles-container 内に「記事一覧」「オススメ記事」「人気記事」「関連記事」を記入
+       */
+      ?>
+      <div class="singles-next">
+        <div id="js-singles-container"></div>
+        <div id="js-singles-more"></div>
+      </div>
+
+      <?php
+      /*
+       @since 2016-09-28 記事詳細の次の記事のために以下削除します
+      */
+      if (0):
+      ?>
       <div id="widget-recommend-list-container"></div><!--/recommend-->
       <div id="widget-ranking-container"></div><!--/ranking-->
 
@@ -227,7 +245,10 @@
         })();
       </script>
       <!-- //#310 popin ebmed code  -->
-
+      <?php
+      endif;
+      // 削除 eof
+      ?>
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
