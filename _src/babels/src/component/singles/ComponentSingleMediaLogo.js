@@ -172,7 +172,7 @@ export class ComponentSingleMediaLogo extends React.Component {
     Ga.click('provider-url', 'provider_link', 'click', this.state.single.user.logo.link, true);
   }
   // ---------------------------------------------------
-  //  GETTER / SETTER
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

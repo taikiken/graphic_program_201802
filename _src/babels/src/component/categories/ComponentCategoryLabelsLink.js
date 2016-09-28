@@ -61,7 +61,7 @@ export class ComponentCategoryLabelsLink extends React.Component {
     );
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

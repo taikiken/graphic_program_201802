@@ -106,7 +106,7 @@ export class SPComponentSingleBody extends React.Component {
     );
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

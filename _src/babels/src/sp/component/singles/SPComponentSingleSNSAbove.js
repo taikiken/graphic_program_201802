@@ -113,7 +113,7 @@ export class SPComponentSingleSNSAbove extends React.Component {
     this.setState({ single });
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

@@ -371,7 +371,7 @@ export class ComponentCarousel extends React.Component {
     this.jump(parseInt(index, 10));
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

@@ -29,7 +29,7 @@ export class ComponentSingles extends React.Component {
     this.setState({ list, offset, length });
   }
   // ---------------------------------------------------
-  //  GETTER / SETTER
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   static get propTypes() {
     return {

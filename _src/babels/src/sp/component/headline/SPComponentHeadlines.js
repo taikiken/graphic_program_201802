@@ -118,7 +118,7 @@ export class SPComponentHeadlines extends React.Component {
     this.props.callback(View.DID_MOUNT);
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

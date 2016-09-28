@@ -114,7 +114,7 @@ export class SPComponentSingleHeader extends React.Component {
     );
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

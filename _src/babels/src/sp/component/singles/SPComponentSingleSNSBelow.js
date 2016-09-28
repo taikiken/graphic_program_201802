@@ -122,7 +122,7 @@ export class SPComponentSingleSNSBelow extends React.Component {
     );
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

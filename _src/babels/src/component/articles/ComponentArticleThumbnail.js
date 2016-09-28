@@ -81,7 +81,7 @@ export class ComponentArticleThumbnail extends React.Component {
     }
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

@@ -180,6 +180,9 @@ export class ComponentSingleSNS extends React.Component {
     window.open(encodeURI(decodeURI(href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
     return false;
   }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * propTypes
    * @return {{single: SingleDae, callback: Function}} React props

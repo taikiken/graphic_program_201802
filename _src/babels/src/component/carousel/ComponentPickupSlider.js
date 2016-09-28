@@ -348,7 +348,7 @@ export class ComponentPickupSlider extends React.Component {
     touching.off(Touching.CANCEL, this.boundCancel);
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

@@ -54,7 +54,7 @@ export class ComponentPager extends React.Component {
     this.props.onPager(event.target.innerHTML);
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

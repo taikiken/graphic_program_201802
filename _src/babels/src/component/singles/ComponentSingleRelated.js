@@ -118,7 +118,7 @@ export class ComponentSingleRelated extends React.Component {
     this.setState({ list });
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

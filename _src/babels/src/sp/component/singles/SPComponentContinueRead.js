@@ -89,7 +89,7 @@ export class SPComponentContinueRead extends React.Component {
     );
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes

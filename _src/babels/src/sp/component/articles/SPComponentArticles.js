@@ -135,7 +135,7 @@ export class SPComponentArticles extends React.Component {
     this.props.boundMore(this.props.action.hasNext());
   }
   // ---------------------------------------------------
-  //  STATIC METHOD
+  //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes
