@@ -13,6 +13,9 @@
 // parent
 import { ViewSingles } from '../../../view/singles/ViewSingles';
 
+// app
+import { User } from '../../../app/User';
+
 // dae
 import { SingleDae } from '../../../dae/SingleDae';
 
@@ -46,7 +49,6 @@ export class SPViewSingles extends ViewSingles {
    * @param {Array} articles JSON responce.articles
    */
   render(articles:Array):void {
-    console.log('SPViewSingles.render articles', articles);
     // 既存データ用のglobal配列
     const articlesList = this.articles;
 
@@ -65,7 +67,6 @@ export class SPViewSingles extends ViewSingles {
     // this._articleRendered が null の時だけ ReactDOM.render する
     if (this.articleRendered === null) {
       const request = this.action.request;
-      console.log('SPViewSingles articleRendered', this.articleRendered, this.element, request, this.action);
 
       this.articleRendered = ReactDOM.render(
         <SPComponentSingles
@@ -77,10 +78,10 @@ export class SPViewSingles extends ViewSingles {
           callback={this.boundSafely}
           boundMore={this.boundMore}
           single={this.single}
+          sign={User.sign}
         />,
         this.element
       );
-      console.log('SPViewSingles articleRendered after ---', this.articleRendered);
     } else {
       // instance が存在するので
       // state update でコンテナを追加する

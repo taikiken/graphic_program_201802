@@ -32,25 +32,50 @@ const React = self.React;
  *   <SPComponentSinglesArticle>
  *   <SPComponentSinglesWidget>
  * ```
+ *
+ * <pre>
+ * SPViewSingle -> SPViewSingles -> SPComponentSingles
+ * の順で呼び出されます
+ * 使用 Action class は
+ * Singles or SinglesAuth になります
+ * </pre>
+ *
+ * {@link SPViewSingle}
+ * {@link SPViewSingles}
+ * {@link Singles}
+ * {@link SinglesAuth}
  * @since 2016-09-28
  */
 export class SPComponentSingles extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link SPComponentSingles.propTypes}
+   */
   constructor(props) {
     super(props);
-    console.log('SPComponentSingles', props);
+
+    /**
+     * React state
+     * @type {{list: Array<SingleDae>, offset: number, length: number}}
+     */
     this.state = {
       list: props.list,
       offset: props.offset,
       length: props.length
     };
   }
+  /**
+   * div.singles-root > SPComponentSinglesArticle を出力します
+   * @return {XML} div.singles-root > SPComponentSinglesArticle を返します
+   */
   render() {
     const props = this.props;
     const state = this.state;
     const list = state.list;
     const length = list.length;
-    console.log('SPComponentSingles.list', list);
+
     // @ToDO 条件簡略化可能か調べる
+    // @ToDO 各件数のテスト
     if (length === 0) {
       // 続きの記事 0 件
       // オススメ・関連・人気
@@ -69,6 +94,7 @@ export class SPComponentSingles extends React.Component {
                 <SPComponentSinglesArticle
                   key={`singles-article-${single.id}`}
                   single={single}
+                  sign={props.sign}
                   index={index}
                 />
               );
@@ -87,6 +113,7 @@ export class SPComponentSingles extends React.Component {
                 <SPComponentSinglesArticle
                   key={`singles-article-${single.id}`}
                   single={single}
+                  sign={props.sign}
                   index={index}
                 />
               );
@@ -94,11 +121,11 @@ export class SPComponentSingles extends React.Component {
           }
           {
             // 関連記事一覧
-            this.widget(WidgetType.RELATED, length)
+            this.widget(WidgetType.RELATED, length, true)
           }
           {
             // 人気記事一覧
-            this.widget(WidgetType.POPULAR, length + 1)
+            this.widget(WidgetType.POPULAR, length + 1, true)
           }
         </div>
       );
@@ -113,6 +140,7 @@ export class SPComponentSingles extends React.Component {
                   <SPComponentSinglesArticle
                     key={`singles-article-${single.id}`}
                     single={single}
+                    sign={props.sign}
                     index={index}
                   />
                   <SPComponentSinglesWidgetOption
@@ -126,23 +154,23 @@ export class SPComponentSingles extends React.Component {
           }
           {
             // 人気記事一覧
-            this.widget(WidgetType.POPULAR, length)
+            this.widget(WidgetType.POPULAR, length, true)
           }
         </div>
       );
     }
+
     // 9 件以上
     return (
       <div className="singles-root">
         {
           list.map((single, index) => {
-            console.log('single', index, single.id, single);
             return (
               <div key={`single-root-${single.id}`} className="singles-root-article">
-
                 <SPComponentSinglesArticle
                   key={`singles-article-${single.id}`}
                   single={single}
+                  sign={props.sign}
                   index={index}
                 />
                 <SPComponentSinglesWidgetOption
@@ -150,7 +178,6 @@ export class SPComponentSingles extends React.Component {
                   index={index}
                   single={props.single}
                 />
-
               </div>
             );
           })
@@ -158,7 +185,12 @@ export class SPComponentSingles extends React.Component {
       </div>
     );
   }
+  /**
+   * delegate, mount 後に呼び出されます<nr>
+   * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
+   */
   componentDidMount() {
+    console.log('SPComponentSingles.componentDidMount', this.props.action.hasNext());
     this.props.callback(View.DID_MOUNT);
     // hasNext を元に More View button の表示非表示を決める
     this.props.boundMore(this.props.action.hasNext());
@@ -177,6 +209,7 @@ export class SPComponentSingles extends React.Component {
   // 3件以下
   underThree(index) {
     const single = this.props.single;
+    const strong = true;
 
     return (
       <div className="singles-root-under3">
@@ -184,28 +217,39 @@ export class SPComponentSingles extends React.Component {
           index={index}
           single={single}
           type={WidgetType.RECOMMEND}
+          strong={strong}
         />
         <SPComponentSinglesWidget
           index={index + 1}
           single={single}
           type={WidgetType.RELATED}
+          strong={strong}
         />
         <SPComponentSinglesWidget
           index={index + 2}
           single={single}
           type={WidgetType.POPULAR}
+          strong={strong}
         />
       </div>
     );
   }
   // ---------------------------------------------------
   // widget
-  widget(type, index) {
+  /**
+   * オススメ・関連・人気の記事を出力します
+   * @param {string} type オススメ・関連・人気の記事タイプ {@link WidgetType}
+   * @param {number} index 記事出力順番
+   * @param {boolean} [strong=false] 記事出力順番に関係なく出力するかのフラッグ
+   * @return {XML}
+   */
+  widget(type, index, strong = false) {
     return (
       <SPComponentSinglesWidget
         index={index}
         single={this.props.single}
         type={type}
+        strong={strong}
       />
     );
   }
@@ -229,7 +273,9 @@ export class SPComponentSingles extends React.Component {
       // SingleDae - 記事詳細データ recommend_articles 抽出
       single: React.PropTypes.object.isRequired,
       // home container かのフラッグ
-      home: React.PropTypes.bool.isRequired
+      home: React.PropTypes.bool.isRequired,
+      // login 済みかのフラッグ
+      sign: React.PropTypes.bool.isRequired
     };
   }
   static get defaultProps() {

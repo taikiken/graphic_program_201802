@@ -81,7 +81,7 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
 
     const boundDone = this.done.bind(this);
     const boundFail = this.fail.bind(this);
-    console.log('ViewSingles id, ', id);
+
     /**
      * Ajax request action instance<br>
      * @type {SinglesAuth|Singles}
