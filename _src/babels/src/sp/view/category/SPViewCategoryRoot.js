@@ -44,13 +44,8 @@ let ReactDOM = self.ReactDOM;
  */
 export class SPViewCategoryRoot extends View {
   /**
-   * <p>archive 親コンテナ,<br>
-   * 新着, 人気, 動画 3リクエストを行う</p>
-   * <p>@since 2016-09-20<br>
-   * 新着記事のみ表時に変更</p>
-   * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
-   * @see https://github.com/undotsushin/undotsushin/issues/1010
-   * @see https://github.com/undotsushin/undotsushin/issues/1095
+   * archive 親コンテナ,<br>
+   * 新着, 人気, 動画 3リクエストを行う
    * @param {string} slug category slug
    * @param {Element} element root element archive 親
    * @param {Object} [option={}] optional event handler
@@ -88,7 +83,7 @@ export class SPViewCategoryRoot extends View {
         // this.latestInfo = null;
         /**
          * SPTabNode instance を保持します
-         * @type {?ReactClass}
+         * @type {null|ReactClass}
          * @private
          */
         this.tabNode = null;

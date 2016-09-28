@@ -197,6 +197,7 @@ export class Api {
   // ----------------------------------
   // 記事詳細
   /**
+  /**
    * detail API （単一記事）を取得します
    * @return {Types} detail API をTypes instanceで返します
    */
@@ -212,16 +213,6 @@ export class Api {
   static detail():Types {
     // console.warn( 'Api.detail deprecated. instead use Api.single.' );
     return Api.single();
-  }
-  // ----------------------------------
-  // 次の記事詳細
-  /**
-   * 次の記事詳細を取得します
-   * @since 2016-09-24
-   * @return {Types} articles/{:article_id}/next API をTypes instanceで返します
-   */
-  static singles():Types {
-    return ApiDae.api('singles');
   }
   // ----------------------------------
   // bookmark

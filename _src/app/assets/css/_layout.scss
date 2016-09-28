@@ -65,26 +65,25 @@ textarea {
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .head-sec {
-  &-inner {
-    @include clearfix;
-    position: relative;
-    width: $global-inner-width;
-    height: 50px;
-    margin: 0 auto;
+  @at-root {
+    &-inner {
+      @include clearfix;
+      width: $global-inner-width;
+      margin: 0 auto;
 
-    h1 {
-      position: absolute;
-      top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      h1 {
+        float: left;
+        margin: 10px 0;
 
-      a {
-        @extend .sprite-header;
-        @include sprite( $header-logo );
-        @include hide-text;
+        a {
+          @extend .sprite-header;
+          @include sprite( $header-logo );
+          @include hide-text;
+        }
       }
     }
   }
+
 
   #head-search-container {
     float: left;
@@ -95,10 +94,10 @@ textarea {
     @include clearfix;
     // float: left;
     // width: 300px;
-    margin-top: 10px;
+    margin-top: 14px;
     padding: 0 14px;
     background-color: #eee;
-    border-radius: 15px;
+    border-radius: 17px;
 
     input {
       border: none;
@@ -109,10 +108,8 @@ textarea {
     input[type="text"] {
       float: left;
       width: 250px;
-      padding: 5px 0;
+      padding: 8px 0;
       vertical-align: middle;
-      font-weight: bold;
-      font-size: fz(12);
     }
 
     input[type="submit"] {
@@ -137,24 +134,15 @@ textarea {
   .user {
     @include clearfix;
     float: left;
-    margin-top: 8px;
+    margin-top: 14px;
+    margin-left: 15px;
 
     .btn-signup {
       @include link-decoration($highlight-color, $highlight-color, none, none);
       display: table-cell;
       height: 35px;
       font-weight: bold;
-      font-size: fz(12);
       vertical-align: middle;
-
-      &:before {
-        content: '';
-        @extend .sprite-header;
-        @include sprite( $header-icon-signup, inline-block );
-        @include hide-text;
-        margin-right: 5px;
-        vertical-align: middle;
-      }
     }
   }
 
@@ -162,7 +150,6 @@ textarea {
 
   .notice-container {
     float: left;
-    margin-top: 6px;
   }
 
   .notice {
@@ -181,13 +168,13 @@ textarea {
     &-num {
       position: absolute;
       top: -5px;
-      right: -10px;
+      right: -5px;
       display: block;
       width: 20px;
       height: 20px;
       padding-top: 4px;
       line-height: 1;
-      background-color: $highlight-secondary-color;
+      background-color: #e14343;
       border-radius: 100%;
       color: #fff;
       font-weight: bold;
@@ -199,8 +186,8 @@ textarea {
       z-index: 9999;
       display: block;
       position: absolute;
-      top: 51px;
-      left: -331px;
+      top: 57px;
+      left: -325px;
 
       .dropMenu {
         width: 360px;
@@ -283,7 +270,7 @@ textarea {
   .preference {
     position: relative;
     float: left;
-    margin-left: 20px;
+    margin-left: 15px;
 
     @at-root {
       &-opener {
@@ -416,7 +403,8 @@ textarea {
 
   li {
     display: inline-block;
-    padding: 0 10px 0 0;
+    padding: 0 11px 0 0;
+    background: url(/assets/images/common/gnav-separator.png) right center no-repeat;
     text-align: center;
     vertical-align: middle;
     letter-spacing: normal;
@@ -431,25 +419,23 @@ textarea {
     display: block;
     max-height: 40px;
     // line-height: 40px;
-    padding: 10px 0 12px;
-    // padding: 10px 8px 12px;
-    @include link-decoration(#ccc, $highlight-secondary-color, none, none);
+    padding: 10px 8px 12px;
+    @include link-decoration(#ccc, $highlight-color, none, none);
     font-weight: bold;
-    font-size: fz(12);
     white-space: nowrap;
 
     &:hover {
       padding-bottom: 10px;
-      border-bottom: 2px solid $highlight-secondary-color;
-      color: $highlight-secondary-color;
+      border-bottom: 2px solid $highlight-color;
+      color: $highlight-color;
     }
   }
 
   .current {
     a {
       padding-bottom: 10px;
-      border-bottom: 2px solid $highlight-secondary-color;
-      color: $highlight-secondary-color;
+      border-bottom: 2px solid $highlight-color;
+      color: $highlight-color;
     }
   }
 
@@ -478,253 +464,221 @@ textarea {
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 .foot {
-  &-sec {
-    position: relative;
-    padding-top: 20px;
-    background-color: #f5f5f5;
+  @at-root {
+    &-sec {
+      padding-top: 20px;
+      background-color: #f5f5f5;
 
-    &-inner {
-      background: #061533 url(/assets/images/common/footer-bg.png) no-repeat center bottom;
+      &-inner {
+        background-color: #000;
+      }
     }
-  }
 
-  &-breadCrumb {
-    background-color: #030b1a;
-    // border-bottom: 1px solid #333;
+    &-breadCrumb {
+      background-color: #1b1b1b;
+      border-bottom: 1px solid #333;
 
-    ol {
-      list-style: none;
-      width: $global-inner-width;
-      margin: 0 auto;
-      padding: 20px 0;
-      line-height: 18px;
+      ol {
+        list-style: none;
+        width: $global-inner-width;
+        margin: 0 auto;
+        padding: 15px;
+        line-height: 18px;
 
-      li {
-        display: inline-block;
-        letter-spacing: ls(inline-block);
-
-        a {
+        li {
           display: inline-block;
-          @include link-decoration(#666, #fff, none, none);
-          font-size: fz(12);
-          letter-spacing: normal;
+          letter-spacing: ls(inline-block);
+
+          a {
+            display: inline-block;
+            @include link-decoration(#666, #fff, none, none);
+            font-size: fz(12);
+            letter-spacing: normal;
+
+            &:after {
+              content: '';
+              @extend .sprite-common;
+              @include sprite( $common-breadcrumb-arrow );
+              display: inline-block;
+              margin-right: 5px;
+              margin-left: 8px;
+              font-size: 0;
+              vertical-align: middle;
+            }
+          }
+        }
+
+        li:first-child a {
+          position: relative;
+          padding-left: 20px;
+
+          &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            @extend .sprite-common;
+            @include sprite( $common-breadcrumb-home );
+            line-height: 18px;
+            margin-right: 5px;
+            font-size: 0;
+          }
+        }
+
+        li:last-child a {
+          color: #fff;
 
           &:after {
-            content: '';
-            @extend .sprite-common;
-            @include sprite( $common-breadcrumb-arrow );
-            display: inline-block;
-            margin-right: 5px;
-            margin-left: 8px;
-            font-size: 0;
-            vertical-align: middle;
+            display: none;
           }
         }
       }
-
-      li:first-child a {
-        position: relative;
-        padding-left: 25px;
-
-        &:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          @extend .sprite-common;
-          @include sprite( $common-breadcrumb-home );
-          line-height: 18px;
-          font-size: 0;
-        }
-      }
-
-      li:last-child a {
-        color: #fff;
-
-        &:after {
-          display: none;
-        }
-      }
-    }
-  }
-
-  &-pr {
-    background-color: #030b1a;
-
-    &-inner {
-      @include clearfix;
-      width: $global-inner-width;
-      margin: 0 auto;
-      padding-bottom: 32px;
     }
 
-    figure {
-      float: left;
-    }
+    &-pr {
+      background-color: #1b1b1b;
 
-    .text-block {
-      @include clearfix;
-      float: left;
-      width: 470px;
-      margin-left: 17px;
-    }
-
-    &-logo {
-      float: left;
-    }
-
-    &-btn {
-      @include clearfix;
-      float: left;
-      margin: 13px 0 0 14px;
-
-      li {
-        float: left;
-
-        + li {
-          margin-left: 10px;
-        }
-      }
-
-      a:hover {
-        @include hover-opacity;
-      }
-    }
-
-    &-text {
-      clear: both;
-      line-height: lh(22,14);
-      padding-top: 20px;
-      color: #fff;
-    }
-
-    .fb-page-plugin {
-      float: right;
-      width: 400px;
-    }
-  } // foot-pr
-
-  &-sec {
-    .pagetop {
-      position: absolute;
-      right: 30px;
-      top: -60px;
-
-      a {
-        display: block;
-
-        &:hover {
-          @include hover-opacity;
-        }
-      }
-
-      span {
-        @extend .sprite-footer;
-        @include sprite( $footer-pagetop );
-        @include hide-text;
+      &-inner {
+        @include clearfix;
+        width: $global-inner-width;
         margin: 0 auto;
       }
 
-      &.fixed {
-        position: fixed;
-        top: auto;
-        right: 30px;
-        bottom: 30px;
+      figure {
+        float: left;
+        margin-top: 20px;
       }
 
-      // @since 2016-09-01
-      // 非表示にするためのクラス
-      &.blind {
-        display: none;
-      }
-    } // pagetop
+      .text-block {
+        float: left;
+        width: 450px;
+        margin: 28px 0 0 25px;
 
-    .fnav-block {
-      @include clearfix;
-      width: $global-inner-width;
-      height: 134px;
-      margin: 0 auto;
-    }
-
-    .fnav {
-      float: left;
-      margin-top: 30px;
-
-      &-logo {
-        line-height: 0;
-      }
-
-      ul {
-        margin-top: 16px;
-        letter-spacing: ls(inline-block);
-
-        li {
-          display: inline-block;
-          letter-spacing: normal;
-
-          + li {
-            margin-left: 24px;
-          }
-        }
-
-        a {
-          @include link-decoration(#fff, #666, none, underline);
-          font-weight: bold;
+        p {
+          margin-top: 16px;
+          color: #fff;
           font-size: fz(12);
         }
-      }
-    } // fnav
 
-    .sns-block {
-      float: right;
-      margin: 50px 100px 0 0;
+        ul {
+          @include clearfix;
+          margin-top: 16px;
 
-      ul {
-        text-align: center;
-        letter-spacing: ls(inline-block);
+          li {
+            float: left;
 
-        li {
-          display: inline-block;
-          vertical-align: middle;
-          letter-spacing: normal;
+            + li {
+              margin-left: 10px;
+            }
+          }
 
-          + li {
-            margin-left: 10px;
+          a:hover {
+            @include hover-opacity;
           }
         }
+      }
+
+      .fb-page-plugin {
+        float: right;
+        width: 400px;
+        margin-top: 30px;
+      }
+    } // foot-pr
+
+    &-sec {
+      .pagetop {
+        border-bottom: 1px solid #333;
 
         a {
-          @extend .sprite-footer;
-          @include hide-text;
+          display: block;
+          padding: 18px 0;
 
           &:hover {
             @include hover-opacity;
           }
         }
 
-        .sns-tw a {
-          @include sprite( $footer-icon-sns-tw );
+        span {
+          @extend .sprite-footer;
+          @include sprite( $footer-pagetop );
+          @include hide-text;
+          margin: 0 auto;
         }
+      } // pagetop
 
-        .sns-fb a {
-          @include sprite( $footer-icon-sns-fb );
+      .fnav {
+        width: $global-inner-width;
+        margin: 30px auto 0;
+
+        ul {
+          text-align: center;
+          letter-spacing: ls(inline-block);
+
+          li {
+            display: inline-block;
+            letter-spacing: normal;
+
+            + li {
+              margin-left: 20px;
+            }
+          }
+
+          a {
+            @include link-decoration(#666, #666, none, underline);
+            font-size: fz(12);
+          }
         }
+      } // fnav
 
-        .sns-yt a {
-          @include sprite( $footer-icon-sns-yt );
+      .sns-block {
+        margin-top: 20px;
+
+        ul {
+          text-align: center;
+          letter-spacing: ls(inline-block);
+
+          li {
+            display: inline-block;
+            vertical-align: middle;
+            letter-spacing: normal;
+
+            + li {
+              margin-left: 10px;
+            }
+          }
+
+          a {
+            @extend .sprite-footer;
+            @include hide-text;
+
+            &:hover {
+              @include hover-opacity;
+            }
+          }
+
+          .sns-tw a {
+            @include sprite( $footer-icon-sns-tw );
+          }
+
+          .sns-fb a {
+            @include sprite( $footer-icon-sns-fb );
+          }
+
+          .sns-yt a {
+            @include sprite( $footer-icon-sns-yt );
+          }
+
         }
-
-      }
-    } //.sns-block
+      } //.sns-block
+    }
   }
 }
 
 .copyright {
-  clear: both;
-  padding-top: 16px;
-  color: #ccc;
-  font-weight: bold;
+  padding: 24px 0 28px;
+  color: #666;
   font-size: fz(10);
+  text-align: center;
 } //.copyright
 
 
@@ -752,12 +706,14 @@ textarea {
     background-color: $bg-primary-color;
   }
 
-  &-inner {
-    @include clearfix;
-    position: relative;
-    width: $global-inner-width;
-    margin: 0 auto;
-    background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0;
+  @at-root {
+    &-inner {
+      @include clearfix;
+      position: relative;
+      width: $global-inner-width;
+      margin: 0 auto;
+      background: #fff url(/assets/images/common/bg-bodysec.png) repeat-y center 0;
+    }
   }
 
   .main-sec {
@@ -773,15 +729,6 @@ textarea {
     padding-top: 30px;
     padding-left: 30px;
     // background-color: #f5f5f5;
-  }
-}
-
-.home .body-sec,
-.layout-list .body-sec {
-  background-color: #f5f5f5;
-
-  &-inner {
-    background: none;
   }
 }
 
@@ -820,8 +767,8 @@ textarea {
       }
 
       &-heading {
-        padding-bottom: 5px;
-        border-bottom: 3px solid #0e357f;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $border-primary-color;
 
         &-title, &-ruby {
           display: inline-block;
@@ -835,21 +782,20 @@ textarea {
         }
 
         &-ruby {
-          margin-left: 5px;
-          color: #333;
+          margin-left: 8px;
+          color: $highlight-color;
           font-weight: bold;
-          font-size: fz(11);
+          font-size: fz(10);
         }
       } // .widget-ranking-heading
 
       .board-item {
-        margin-top: 20px;
         border-bottom: none;
       }
 
       .post {
         height: auto;
-        padding: 0;
+        border-bottom: 1px solid $border-primary-color;
 
         &-thumb {}
         &-data {}
@@ -868,30 +814,6 @@ textarea {
         display: inline-block;
       }
 
-      .board-item {
-        position: relative;
-
-        &:before {
-          content: '';
-          z-index: 999;
-          position: absolute;
-          top: -3px;
-          left: -3px;
-          width: 24px;
-          height: 24px;
-          line-height: 24px;
-          background-color: $highlight-secondary-color;
-          border-radius: 100%;
-          color: #fff;
-          font-weight: bold;
-          font-size: fz(10);
-          text-align: center;
-          // background-repeat: no-repeat;
-          // background-position: 0 0;
-        }
-
-      }
-
       .post {
         &-thumb {}
 
@@ -902,29 +824,30 @@ textarea {
         }
 
         &-category {
-          // position: relative;
+          position: relative;
           line-height: 1;
           margin-bottom: .25em;
 
-          // &:before {
-          //   content: '';
-          //   z-index: 999;
-          //   position: absolute;
-          //   top: -4px;
-          //   left: -82px;
-          //   width: 23px;
-          //   height: 20px;
-          //   line-height: 0;
-          //   background-repeat: no-repeat;
-          //   background-position: 0 0;
-          // }
+          &:before {
+            content: '';
+            z-index: 999;
+            position: absolute;
+            top: -4px;
+            left: -25px;
+            width: 23px;
+            height: 20px;
+            line-height: 0;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+          }
         }
       }
 
       @for $i from 1 through 5 {
-        .rank#{$i}:before {
-          content: '#{$i}';
-          // background-image: url(/assets/images/common/side-ranking-icon-num#{$i}.png);
+        .rank#{$i} {
+          .post-category:before {
+            background-image: url(/assets/images/common/side-ranking-icon-num#{$i}.png);
+          }
         }
       }
     } //.widget-ranking
@@ -940,7 +863,7 @@ textarea {
           position: relative;
           width: 125px;
           height: 70px;
-          background-image: url(/assets/images/common/thumb-noimage-16x9-s.png);
+          background-image: url(/assets/images/common/thumb-noimage-340x150.png);
           background-size: 125px;
 
           img {
@@ -958,8 +881,8 @@ textarea {
 
   .adgLink {
     height: auto !important;
-    margin-top: 20px;
     border-top: none;
+    border-bottom: 1px solid $border-primary-color;
   }
 }
 

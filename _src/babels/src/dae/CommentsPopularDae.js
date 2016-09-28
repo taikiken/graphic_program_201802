@@ -110,14 +110,14 @@ export class CommentsPopularDae {
   }
   /**
    * 先頭以外の配列
-   * @return {Array.<PopularDae>} 2件目以降の配列を返します
+   * @return {Array.<CommentsDae>} 2件目以降の配列を返します
    */
   get exceptFirst():Array<PopularDae> {
-    // hasSecond false でも配列を担保します
-    let clone = [].slice(0);
+
+    let clone;
 
     if ( this.hasSecond ) {
-      clone = this.comments.slice(0);
+      clone = this.comments.splice( 0 );
       clone.shift();
     }
     return clone;
@@ -125,7 +125,7 @@ export class CommentsPopularDae {
   }
   /**
    * 先頭以外の配列, alias this.exceptFirst
-   * @return {Array.<PopularDae>} 2件目以降の配列を返します
+   * @return {Array.<CommentsDae>} 2件目以降の配列を返します
    */
   get seconds():Array<PopularDae> {
     return this.exceptFirst;

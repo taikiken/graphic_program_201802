@@ -120,7 +120,7 @@ class dbForTemplate extends db {
   */
   public function get_category_by_slug( $slug ) {
 
-    $sql=sprintf("select id,name,title,img,url,description,name_e from u_categories where name_e='%s'",$slug);
+    $sql=sprintf("select id,name,title,img,description,name_e from u_categories where name_e='%s'",$slug);
     $this->query($sql);
     $f=$this->fetch_array();
     $s=set_categoriesinfo($f);

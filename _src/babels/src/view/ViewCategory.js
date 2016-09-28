@@ -13,40 +13,16 @@
 // action
 import {Category} from '../action/archive/Category';
 import {CategoryAuth} from '../action/archive/CategoryAuth';
-
 // view
-// import {ViewArchiveMasonry} from './ViewArchiveMasonry';
-import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
-
-// view/categories
-import { ComponentCategoryOption } from '../component/categories/ComponentCategoryOption';
-
+import {ViewArchiveMasonry} from './ViewArchiveMasonry';
 // app
 import {User} from '../app/User';
-
-// data
-import { Safety } from '../data/Safety';
 
 
 /**
  * category 一覧表示
- *
- * `/api/v1/articles/category/{all|:category_slug}[/type][?[offset=n][&[length=m]]]`
- * <pre>
- * /api/v1/articles/category/all
- * - すべての記事の新着順
- *
- * /api/v1/articles/category/soccer/ranking
- * - サッカーのランキング
- *
- * /api/v1/articles/category/baseball/video
- * - 野球の動画
- * </pre>
- * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=2055838625
  */
-// export class ViewCategory extends ViewArchiveMasonry {
-// @since 2016-09-16 parent class changed
-export class ViewCategory extends ViewArchiveMasonryInfinite {
+export class ViewCategory extends ViewArchiveMasonry {
   /**
    * category 一覧表示 要 **slug**
    * @param {string} slug category slug, default 'all'
@@ -56,10 +32,6 @@ export class ViewCategory extends ViewArchiveMasonryInfinite {
    */
   constructor( slug:string, element:Element, moreElement:Element, option:Object = {} ) {
     super( element, moreElement, null, option, true );
-    // @since 2016-09-17
-    // default を all にするために追加
-    const argsSlug = Safety.string(slug, 'all');
-
     // Category Action を使う
     // slug を送り 表示(render)は ViewArchiveMasonry を使う
     /**
@@ -68,19 +40,14 @@ export class ViewCategory extends ViewArchiveMasonryInfinite {
      * @type {CategoryAuth|Category}
      */
     this.action = User.sign ?
-      new CategoryAuth( argsSlug, '', this.done.bind( this ), this.fail.bind( this ) ) :
-      new Category( argsSlug, '', this.done.bind( this ), this.fail.bind( this ) );
+      new CategoryAuth( slug, '', this.done.bind( this ), this.fail.bind( this ) ) :
+      new Category( slug, '', this.done.bind( this ), this.fail.bind( this ) );
     /**
      * category slug
      * @override
      * @type {string}
      * @default all
      */
-    this.slug = argsSlug;
-
-    // @since 2016-09-20
-    // 記事一覧に pickup, headline を表示させる
-    const categoryOption = new ComponentCategoryOption(slug);
-    categoryOption.start();
+    this.slug = slug;
   }
 }

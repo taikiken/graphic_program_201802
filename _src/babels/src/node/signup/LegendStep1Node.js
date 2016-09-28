@@ -95,7 +95,7 @@ let Step1FormNode = React.createClass( {
           <ErrorNode message={message('errorEmail')} />
         </span>
         <span className="form-parts align-right">
-          <span className="setting-form-submit mod-btnA01">
+          <span className="setting-form-submit mod-btnB01">
             <input type="button" value={Message.PLEASE_MAKE_ACCOUNT} onClick={this.nextHandler}/>
           </span>
         </span>

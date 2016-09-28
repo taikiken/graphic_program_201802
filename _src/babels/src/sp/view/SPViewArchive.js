@@ -47,6 +47,7 @@ export class SPViewArchive extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {} ) {
+
     option = Safety.object( option );
 
     super( element, option );
@@ -90,15 +91,13 @@ export class SPViewArchive extends View {
      * @protected
      */
     this._request = null;
-    // View へ移動
-    // @since 2016-09-15
-    // /**
-    //  * index(home)コンテンツか否かのフラッグ
-    //  * @type {boolean}
-    //  * @protected
-    //  * @default false
-    //  */
-    // this._home = false;
+    /**
+     * index(home)コンテンツか否かのフラッグ
+     * @type {boolean}
+     * @protected
+     * @default false
+     */
+    this._home = false;
     /**
      * category slug, ga に使う
      * @type {string}
@@ -117,22 +116,20 @@ export class SPViewArchive extends View {
   get moreElement():Element {
     return this._moreElement;
   }
-  // View へ移動
-  // @since 2016-09-15
-  // /**
-  //  * home flag
-  //  * @return {boolean|*} home flag boolean を返します
-  //  */
-  // get home():Boolean {
-  //   return this._home;
-  // }
-  // /**
-  //  * home flag
-  //  * @param {Boolean} home flag
-  //  */
-  // set home( home:Boolean ):void {
-  //   this._home = home;
-  // }
+  /**
+   * home flag
+   * @return {boolean|*} home flag boolean を返します
+   */
+  get home():Boolean {
+    return this._home;
+  }
+  /**
+   * home flag
+   * @param {Boolean} home flag
+   */
+  set home( home:Boolean ):void {
+    this._home = home;
+  }
   /**
    * category slug を取得します
    * @default all

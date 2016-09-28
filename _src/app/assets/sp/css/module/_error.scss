@@ -9,8 +9,9 @@
 
 // errorPage-sec
 .errorPage-sec {
-  padding: (60/2)+px perCalc(50) (40/2)+px;
-  background-color: #f5f5f5;
+  margin: (60/2)+px 0 (40/2)+px;
+  padding-right: perCalc(50);
+  padding-left: perCalc(50);
 
   .mod-btnA01 {
     margin-top: (40/2)+px;

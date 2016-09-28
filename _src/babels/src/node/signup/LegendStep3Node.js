@@ -89,7 +89,7 @@ let Step3FormNode = React.createClass( {
           </ul>
         </div>
         <div className="form-parts">
-          <span className="setting-form-submit mod-btnA01">
+          <span className="setting-form-submit mod-btnB01">
             <input type="button" value={Message.BUTTON_RESISTER} onClick={this.nextHandler}/>
           </span>
         </div>

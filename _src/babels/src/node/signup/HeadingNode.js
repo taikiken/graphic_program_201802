@@ -10,17 +10,12 @@
  *
  */
 
-// event
 import {SignupStatus} from '../../event/SignupStatus';
 
-// app
 import {Url} from '../../app/const/Url';
 
 // React
-const React = self.React;
-
-// Sagen
-const Sagen = self.Sagen;
+let React = self.React;
 
 // lead 文
 // step 1 だけ表示
@@ -35,9 +30,8 @@ let LeadNode = React.createClass( {
     step: React.PropTypes.number.isRequired
   },
   render: function() {
-    // sp なし
-    // @since 2016-09-12
-    if (this.props.step === 1 && !Sagen.Browser.Mobile.phone()) {
+
+    if ( this.props.step === 1 ) {
       return (
         <p className="lead">
           会員登録は無料です。<br />
@@ -45,9 +39,11 @@ let LeadNode = React.createClass( {
         </p>
       );
     } else {
-      // それ以外は空にする
+
       return null;
+
     }
+
   }
 } );
 /**
@@ -57,7 +53,7 @@ let LeadNode = React.createClass( {
  *
  * ```
  * <header className="signup-header">
- *  <h1 className="heading">SPORTS BULL</h1>
+ *  <h1 className="heading">運動通信</h1>
  *  <LeadNode step={this.state.step} />
  * </header>
  * ```
@@ -79,20 +75,10 @@ export let HeadingNode = React.createClass( {
 
     return (
       <header className="signup-header">
-        <h1 className="heading"><a href={Url.index()}>SPORTS BULL</a></h1>
+        <h1 className="heading"><a href={Url.index()}>運動通信</a></h1>
         <LeadNode step={this.state.step} />
       </header>
     );
-    // @since 2016-09-12
-    // トルツメをキャンセル
-    // // .signup-header 内の p.lead はトルツメ
-    // // https://paper.dropbox.com/doc/SPORTS-BULL-DRIEolzKHNECwXGwZDYM2
-    // // @since 2016-09-09
-    // return (
-    //   <header className="signup-header">
-    //     <h1 className="heading"><a href={Url.index()}>SPORTS BULL</a></h1>
-    //   </header>
-    // );
   },
   componentDidMount: function() {
     this.status.on( SignupStatus.SIGNUP_STEP, this.stepChange );

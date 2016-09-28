@@ -64,7 +64,7 @@ export let SignupHeadingNode = React.createClass( {
           <div className="signup-heading-container">
             <div className="signup-heading">
               <h1>{Message.TITLE_ENTRY_MEMBER}</h1>
-              <p className="btn"><a href={Url.login()}>{Message.HERE_TO_LOGIN}</a></p>
+              <p className="btn"><a href={Url.login()}>{Message.HERE_TO_LOGIN}&gt;</a></p>
             </div>
           </div>
         );

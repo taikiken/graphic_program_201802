@@ -83,7 +83,7 @@
           <div id="post-content-container" class="post-content excerpt hidden">
             <?php print_r($page['post']['body']); ?>
           </div><!-- /.post-content -->
-          <div id="post-content-read-more" class="post-content-read-more"></div>
+          <div id="post-content-read-more"></div>
 
         <?php endif; ?>
 
@@ -171,7 +171,7 @@
 
           <div class="post-sns-pr">
             <dl class="post-sns-pr-inner">
-              <dt><span>いいねして最新ニュースをチェック！</span></dt>
+              <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
               <dd>
                 <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
               </dd>
@@ -181,6 +181,8 @@
       </div><!-- /.post-detail -->
 
       <div class="comment">
+
+        <div id="comment-form-container"></div>
 
         <div id="comment-self-container"></div>
 
@@ -206,8 +208,6 @@
             <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=<?php echo $page['ad']['sp']; ?>&targetID=adg_<?php echo $page['ad']['sp']; ?>&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
           </div>
         <?php endif; ?>
-
-        <div id="comment-form-container"></div>
 
       </div><!-- /.comment -->
 

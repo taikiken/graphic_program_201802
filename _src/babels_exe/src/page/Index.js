@@ -45,29 +45,26 @@ export class Index {
 
     // ---------------------------------------------------------
     // pickup
-    const pickupElement = Dom.pickup();
-    if (pickupElement !== null) {
-      const pickup = new UT.view.home.ViewPickup(pickupElement);
-      pickup.home = true;
+    let pickupElement = Dom.pickup();
+    if ( pickupElement !== null ) {
+      let pickup = new UT.view.home.ViewPickup( pickupElement );
       pickup.start();
     }
 
     // ---------------------------------------------------------
     // headline
-    const headlineElement = Dom.headline();
-    if (headlineElement !== null) {
-      const headline = new UT.view.home.ViewHeadline(headlineElement);
-      headline.home = true;
+    let headlineElement = Dom.headline();
+    if ( headlineElement !== null ) {
+      let headline = new UT.view.home.ViewHeadline( headlineElement );
       headline.start();
     }
 
     // ---------------------------------------------------------
     // news
-    const boardElement = Dom.board();
-    const moreElement = Dom.boardMore();
-    if (boardElement !== null && moreElement !== null) {
-      const archive = new UT.view.home.ViewNews(boardElement, moreElement);
-      archive.home = true;
+    let boardElement = Dom.board();
+    let moreElement = Dom.boardMore();
+    if ( boardElement !== null && moreElement !== null ) {
+      let archive = new UT.view.home.ViewNews( boardElement, moreElement );
       archive.start();
     }
 

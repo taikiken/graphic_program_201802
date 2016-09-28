@@ -10,23 +10,16 @@
  *
  */
 
-// sp/view
-// import {SPViewArchive} from '../SPViewArchive';
-import { SPViewArchiveInfinite } from '../SPViewArchiveInfinite';
-
-// app
+import {SPViewArchive} from '../SPViewArchive';
 import {User} from '../../../app/User';
 
-// action
 import {NewsAuth} from '../../../action/home/NewsAuth';
 import {News} from '../../../action/home/News';
 
 /**
  * SP home 記事一覧
  */
-// export class SPViewNews extends SPViewArchive {
-// @since 2016-09-16 parent class changed
-export class SPViewNews extends SPViewArchiveInfinite {
+export class SPViewNews extends SPViewArchive {
   /**
    * home news, token 付き・無し を切替
    * @param {Element} element root element, Ajax result を配置する
@@ -34,7 +27,6 @@ export class SPViewNews extends SPViewArchiveInfinite {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, moreElement:Element, option:Object = {} ) {
-    // console.log('SPViewNews', element, moreElement);
     super( element, moreElement, null, option );
     /**
      * Action instance

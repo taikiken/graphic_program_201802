@@ -1,12 +1,15 @@
 <header class="signup-header">
-  <h1 class="heading"><a href="/">SPORTS BULL</a></h1>
+  <h1 class="heading"><a href="/">運動通信</a></h1>
+
+  <p class="lead">毎日新鮮なニュースをお届け！<br />
+    ログインしてみんなと語り合おう。</p>
 </header><!-- /.signup-header -->
 
 <div class="body-sec">
   <div class="body-sec-inner">
     <div class="signup-heading">
       <h1>ログイン</h1>
-      <p class="btn"><a href="/signup/">新規会員登録はこちら</a></p>
+      <p class="btn"><a href="/signup/">新規会員登録はこちら &gt;</a></p>
     </div><!-- /.signup-heading -->
 
     <div class="register">

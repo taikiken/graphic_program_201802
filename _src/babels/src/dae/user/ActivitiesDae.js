@@ -29,14 +29,12 @@ export class ActivitiesDae {
     let activities = response.activities;
     activities = Safety.array( activities );
 
-    // let list = [];
-    // activities.forEach( function( activity ) {
-    //
-    //   list.push( new ActivityDae( activity ) );
-    //
-    // } );
-    // @since 2016-09-20
-    const list = activities.map((activity) => new ActivityDae(activity));
+    let list = [];
+    activities.forEach( function( activity ) {
+
+      list.push( new ActivityDae( activity ) );
+
+    } );
     /**
      * JSON response
      * @type {Object}

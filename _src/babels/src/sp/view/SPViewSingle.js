@@ -15,18 +15,16 @@
 import {ViewSingle} from '../../view/ViewSingle';
 
 // data
-// import {Safety} from '../../data/Safety';
+import {Safety} from '../../data/Safety';
 
 // view
 import {View} from '../../view/View';
-// @since 2016-09-34
-import { Banner } from '../../view/Banner';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';
 
 // node
-// import {BannerNode} from '../../node/single/BannerNode';
+import {BannerNode} from '../../node/single/BannerNode';
 
 // sp
 import {SPViewSingleHeader} from './single/SPViewSingleHeader';
@@ -130,32 +128,23 @@ export class SPViewSingle extends ViewSingle {
    * @param {SingleDae} single 記事 SingleDae instance
    */
   renderBanner( single:SingleDae ):void {
-    // // bannerElement をチェックします
-    // if (!Safety.isElement(this._bannerElement)) {
-    //   return;
-    // }
-    //
-    // let userBanner = single.user.banner.sp;
-    // let banner = single.banner.sp;
-    // if ( !banner.image && !!userBanner.image ) {
-    //   banner = userBanner;
-    // }
-    //
-    // ReactDOM.render(
-    //   <BannerNode
-    //     banner={banner}
-    //     pc={false}
-    //   />,
-    //   this._bannerElement
-    // );
-
-    // @since 2016-09-24
-    const element = this._bannerElement;
-    const component = Banner.sp(single, element);
-    if (component === null) {
+    // bannerElement をチェックします
+    if (!Safety.isElement(this._bannerElement)) {
       return;
     }
 
-    ReactDOM.render(component, element);
+    let userBanner = single.user.banner.sp;
+    let banner = single.banner.sp;
+    if ( !banner.image && !!userBanner.image ) {
+      banner = userBanner;
+    }
+    
+    ReactDOM.render(
+      <BannerNode
+        banner={banner}
+        pc={false}
+      />,
+      this._bannerElement
+    );
   }
 }

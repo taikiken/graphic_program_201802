@@ -9,17 +9,15 @@
 // category-heading
 .category-heading {
   padding: 30px 0;
-  border-bottom: 30px solid #f5f5f5;
+  background-color: #000;
 
   h1 {
     width: $global-inner-width;
     margin: 0 auto;
-    font-size: fz(28);
+    color: #fff;
+    font-weight: bold;
+    font-size: fz(24);
   }
-}
-
-.layout-list .category-heading {
-  border-bottom: none;
 }
 
 

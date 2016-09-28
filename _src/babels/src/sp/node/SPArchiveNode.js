@@ -346,6 +346,7 @@ export let SPArchiveNode = React.createClass( {
     };
   },
   getInitialState: function() {
+
     return {
       arranged: 'prepare',
       list: this.props.list,
@@ -354,29 +355,26 @@ export let SPArchiveNode = React.createClass( {
     };
   },
   render: function() {
-    // console.log('SPArchiveNode.render', this.props);
+
     let home = this.props.home;
     let length = this.state.list.length;
     let type = this.props.type;
     let adSp = this.props.adSp;
 
-    /**
-     * @TODO: 「新着記事タイトル」
-     */
-
     // dom出力する
     return (
-      <div ref="boardRout" className="board-stack board-large">
+      <div ref="boardRout" className="board-stack">
         {
-          // -------------------------------------------
-          // @TODO: 「新着記事タイトル」
-          // -------------------------------------------
           // loop start
           this.state.list.map( function( dae, i ) {
 
             let commentsPopular = dae.commentsPopular;
             let commentsTotal = dae.commentsCount;
             let thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
+
+            // let category = ( label ):string => {
+            //   return !label ? '' : <span className="category-label">{label}</span>;
+            // };
 
             let recommend = '';
             if ( !!dae.isRecommend && home ) {
@@ -387,7 +385,7 @@ export let SPArchiveNode = React.createClass( {
             return (
               <div key={'archive-article-' + type + '-' + dae.id} className={`archive-article archive-article-${i}`}>
                 <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
-                   <a className="post" href={dae.url}>
+                  <a className="post" href={dae.url}>
                     <ThumbnailDom
                       mediaType={dae.mediaType}
                       thumbnail={thumbnail}
@@ -396,7 +394,7 @@ export let SPArchiveNode = React.createClass( {
                     <h2 className="post-heading">{dae.title}</h2>
                     <div className="post-data">
                       {recommend}
-                      <p className="post-category">
+                      <p className={'post-category post-category-' + dae.categories.all[0].slug}>
                         <CategoryLabelNode
                           categories={dae.categories.all}
                           id={`archive-label-${dae.id}`}
@@ -406,7 +404,6 @@ export let SPArchiveNode = React.createClass( {
                       <p className="post-date">{dae.displayDate}</p>
                       <div className="post-excerpt-text">{dae.description}</div>
                     </div>
-
                   </a>
                   <PopularDom
                     key={'comment-' + type + '-' + dae.id}
@@ -433,9 +430,9 @@ export let SPArchiveNode = React.createClass( {
     );
 
   },
-  // // state 変更し dom が更新された後に呼び出される delegate
-  // componentDidUpdate: function() {
-  // },
+  // state 変更し dom が更新された後に呼び出される delegate
+  componentDidUpdate: function() {
+  },
   // dom が表示された後に1度だけ呼び出される delegate
   componentDidMount: function() {
     // after mount
@@ -443,27 +440,26 @@ export let SPArchiveNode = React.createClass( {
     // hasNext を元に More View button の表示非表示を決める
     this.props.moreButton( this.props.action.hasNext() );
   },
-  // // dom が削除される前に呼び出される delegate
-  // componentWillUnmount: function() {
-  // },
+  // dom が削除される前に呼び出される delegate
+  componentWillUnmount: function() {
+  },
   // -----------------------------------------------------
-  // // 以降 custom
-  // // isotope 前準備
-  // shouldMasonry: function() {
-  // },
-  // // 画像読み込む完了 event handler, isotope を実行
-  // onImages: function() {
-  // },
+  // 以降 custom
+  // isotope 前準備
+  shouldMasonry: function() {
+  },
+  // 画像読み込む完了 event handler, isotope を実行
+  onImages: function() {
+  },
   updateList: function( list, offset, length ) {
     // state を変更し appendChild + isotope を行う
     this.setState( { list: list, offset: offset, length: length } );
     this.props.moreButton( this.props.action.hasNext() );
+  },
+  // didUpdate から呼び出される
+  appendImages: function() {
+    // hasNext を元に More View button の表示非表示を決める
+    this.setState( { loading: '' } );
+    this.props.moreButton( this.props.action.hasNext() );
   }
-  // ,
-  // // didUpdate から呼び出される
-  // appendImages: function() {
-  //   // hasNext を元に More View button の表示非表示を決める
-  //   this.setState( { loading: '' } );
-  //   this.props.moreButton( this.props.action.hasNext() );
-  // }
 } );// SPArticleDom
