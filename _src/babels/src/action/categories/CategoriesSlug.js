@@ -25,7 +25,7 @@ export class CategoriesSlug extends Categories {
    * 引数 slug のカテゴリ情報を取得し<br>
    * カテゴリ特有のデザイン、レイアウトへ対応します
    *
-   * @param {string} [slug=all] category slug
+   * @param {string} [slug] category slug
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    */

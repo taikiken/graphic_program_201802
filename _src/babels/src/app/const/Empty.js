@@ -61,9 +61,10 @@ export class Empty {
    * @return {string} 代替画像パス【記事一覧】
    */
   static get IMG_MIDDLE():string {
-
-    return '/assets/images/common/thumb-noimage-340x150.png';
-
+    // return '/assets/images/common/thumb-noimage-340x150.png';
+    // @since 2016-09-01
+    // https://github.com/undotsushin/undotsushin/issues/1053
+    return '/assets/images/common/thumb-noimage-16x9-s.png';
   }
   /**
    * img large 代替画像パス<br>
@@ -92,7 +93,7 @@ export class Empty {
    */
   static get VIDEO_PLAY():string {
 
-    return '/assets/images/common/thumb-16x9-play.png';
+    return '/assets/images/common/thumb-16x9-play-s.png';
 
   }
   /**

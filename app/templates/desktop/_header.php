@@ -138,10 +138,25 @@ if ( $template_name == 'p' || $template_name == 'comment' ) {
 
 // in category
 if ( $template_name == 'category' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'layout-list';
+  // ---[end 2016-09-01]---
+
   // template_classname があれば
   if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
     $whole_classes[] = $page['template_classname'];
   }
+} elseif ( $template_name == 'search' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'layout-list';
+  // ---[end 2016-09-01]---
+} elseif ( $template_name == 'index' ) {
+  // @since 2016-09-01
+  // https://github.com/undotsushin/undotsushin/issues/1053
+  $whole_classes[] = 'home';
+  // ---[end 2016-09-01]---
 }
 ?>
 </head>
@@ -169,11 +184,14 @@ if (
 ?>
   <header id="header-container" class="head-sec">
     <div class="head-sec-inner">
-      <h1><a href="/">運動通信 CRAZY FOR SPORTS</a></h1>
+      <aside class="f-left clearfix">
+        <div id="head-search-container"></div><!-- /.head-search -->
+      </aside>
+
+      <h1><a href="/">SPORTS BULL</a></h1>
 
       <aside class="f-right clearfix">
-        <div id="head-search-container"></div><!-- /.head-search -->
-        <div id="user-profile-container"></div><!--/header-user-->
+        <div id="user-profile-container"></div><!--/.user-profile-container-->
       </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->

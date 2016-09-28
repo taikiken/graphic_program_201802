@@ -9,11 +9,11 @@
 
 .whole.dark {
   .body-sec-inner {
-    background-color: #000;
+    // background-color: #000;
   }
 
   .main-sec > .sponsor-link {
-    margin: 10px perCalc(20) 0;
+    margin: 10px perCalc(20);
   }
 
   .board-large {
@@ -26,6 +26,15 @@
   &.post-single {
     .body-sec-inner {
       background-color: #fff;
+    }
+  }
+}
+
+
+.whole.dark {
+  .loading-root {
+    .loading-spinner {
+      background-color: #000;
     }
   }
 }

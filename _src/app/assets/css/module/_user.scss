@@ -50,7 +50,7 @@
       }
 
       &-job {
-        color: #999;
+        color: #fff;
         font-weight: bold;
       }
 
@@ -66,26 +66,26 @@
 
           &-heading {
             margin-right: 20px;
-            color: #999;
+            color: #fff;
           }
 
           &-list {
           }
 
           &-item {
-            &:after {
-              content: '/';
-              margin: 0 5px;
-              // color: $highlight-color;
-              color: #999;
-            }
+            margin-right: 5px;
+            // &:after {
+            //   content: '/';
+            //   margin: 0 5px;
+            //   color: #fff;
+            // }
 
             &:last-child:after {
               display: none;
             }
 
             a {
-              @include link-decoration($highlight-color, $highlight-color, none, underline);
+              @include link-decoration(#fff, #fff, none, underline);
             }
           }
         }
@@ -104,15 +104,15 @@
       float: left;
 
       a {
-        @include link-decoration(#fff, $highlight-color, none, none);
+        @include link-decoration(#555, $highlight-color, none, none);
         float: left;
         display: block;
         width: 200px;
-        min-height: 44px;
+        min-height: 36px;
         line-height: 1;
         margin-right: 1px;
-        padding: 12px 0;
-        background-color: #555;
+        padding: 8px 0;
+        background-color: #ddd;
         text-align: center;
 
         &.current,
@@ -125,12 +125,11 @@
         span {
           position: relative;
           display: inline-block;
-          font-weight: bold;
           font-size: fz(12);
 
           &:before {
             content: '';
-            @extend .sprite-common;
+            // @extend .sprite-common;
             margin-right: 5px;
             position: relative;
             top: 2px;
@@ -139,15 +138,19 @@
       }
 
       &-bookmark {
+        border-radius: 3px 0 0 0;
+
         span {
           &:before {
-            @include sprite( $common-icon-bookmark, inline-block );
+            @extend .sprite-setting;
+            @include sprite( $setting-icon-bookmark, inline-block );
           }
         }
 
         &.current,
         &:hover {
           span:before {
+            @extend .sprite-common;
             @include sprite( $common-icon-bookmark_o, inline-block );
           }
         }
@@ -156,6 +159,7 @@
       &-activity {
         span {
           &:before {
+            @extend .sprite-common;
             @include sprite( $common-icon-activity, inline-block );
           }
         }
@@ -163,14 +167,18 @@
         &.current,
         &:hover {
           span:before {
+            @extend .sprite-common;
             @include sprite( $common-icon-activity_o, inline-block );
           }
         }
       }
 
       &-info {
+        border-radius: 0 3px 0 0;
+
         span {
           &:before {
+            @extend .sprite-common;
             @include sprite( $common-icon-info, inline-block );
           }
         }
@@ -178,6 +186,7 @@
         &.current,
         &:hover {
           span:before {
+            @extend .sprite-common;
             @include sprite( $common-icon-info_o, inline-block );
           }
         }
@@ -185,7 +194,7 @@
     } //.user-config-nav
 
     &-btn-setting {
-      @include link-decoration(#999, $highlight-color, none, underline);
+      @include link-decoration(#fff, #fff, none, underline);
       float: right;
       margin-top: .5em;
       display: inline-block;
@@ -230,13 +239,13 @@
       // &:after {
       //   content: '';
       //   @extend .sprite-common;
-      //   @include sprite( $common-icon-activity-arrow );
+      //   @include sprite( $common-icon-arrow1 );
       //   @include pos-middle;
       //   right: 8px;
       // }
 
       &:hover {
-        background-color: #ffe9f3;
+        background-color: #f5f5f5;
       }
     }
 
@@ -290,19 +299,19 @@
     &-link {
       padding-left: 75px;
 
-      &,
-      &.unread {
-        background-color: $bg-primary-color;
-      }
+      // &,
+      // &.unread {
+      //   background-color: $bg-primary-color;
+      // }
 
-      &.read {
-        background-color: #fff;
-      }
+      // &.read {
+      //   background-color: #fff;
+      // }
 
       &:hover,
       &.unread:hover,
       &.read:hover {
-        background-color: #ffe9f3;
+        background-color: $bg-primary-color;
       }
     }
 

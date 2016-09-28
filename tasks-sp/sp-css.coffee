@@ -82,6 +82,7 @@ gulp.task 'sp:css:dev', ->
     sourceComments: true
   ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
+  .pipe $.replaceTask patterns: patterns
 #  .pipe $.if '*.css' && compress.css, $.cssnano
 #  .pipe $.sourcemaps.write './'
   # inline map にする

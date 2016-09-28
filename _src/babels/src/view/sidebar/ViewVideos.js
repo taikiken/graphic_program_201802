@@ -316,14 +316,13 @@ export class ViewVideos extends View {
 
                 let dae = new ArticleDae( article );
                 let thumbnail = Safety.image( dae.media.images.medium, Empty.VIDEO_THUMBNAIL );
-
                 // RankingNode instance を使い render
                 return (
                     <VideosDom
-                      key={'ranking-' + dae.id}
+                      key={`ranking-${dae.id}`}
                       index={i}
-                      id={String( dae.id )}
-                      slug={dae.categories.all[0].slug}
+                      id={String(dae.id)}
+                      slug={dae.categories.slug}
                       categories={dae.categories.all}
                       url={dae.url}
                       date={dae.displayDate}
