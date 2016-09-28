@@ -145,7 +145,9 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
    */
   componentWillUnmount() {
     // unmount 時に isotope を破棄します
-    this.isotope.destroy();
+    if (this.isotope !== null) {
+      this.isotope.destroy();
+    }
   }
   /**
    * div.board-large-column を出力します
@@ -215,7 +217,6 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     this.img = img;
     // 画像読み込む完了 event へ bind します
     img.on('always', this.boundImages);
-
   }
   /**
    * didUpdate から呼び出される
