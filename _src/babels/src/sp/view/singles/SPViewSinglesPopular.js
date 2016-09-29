@@ -29,7 +29,18 @@ import { SPComponentSinglesWidgetPopularList } from '../../component/singles/SPC
 // React
 const ReactDOM = self.ReactDOM;
 
+/**
+ * SP: 記事詳細「次の記事一覧」人気記事を出力するためのデータを取得し描画します
+ * @since 2016-09-28
+ */
 export class SPViewSinglesPopular extends SPViewArchive {
+  /**
+   * 必要なデータを保持します
+   * @param {Element} element 出力親コンテナ
+   * @param {boolean} sign ログイン済みフラッグ
+   * @param {number} [offset=0] 呼び出し開始位置
+   * @param {number} [length=6] 取得件数
+   */
   constructor(element, sign = User.sign, offset = 0, length = 6) {
     // element, moreElement: null, actionClass: undefined, option: {}
     super(element, null);
@@ -39,18 +50,59 @@ export class SPViewSinglesPopular extends SPViewArchive {
     const resolve = this.done.bind(this);
     const reject = this.fail.bind(this);
 
+    /**
+     * `all` すべての記事の新着順
+     * @type {string}
+     * @default all
+     */
     this.slug = slug;
+    /**
+     * request type
+     * @type {string}
+     * @default ``(empty)
+     */
     this.type = type;
+    /**
+     * 成功 callback
+     * @type {Function}
+     */
     this.resolve = resolve;
+    /**
+     * 失敗 callback
+     * @type {Function}
+     */
     this.reject = reject;
+    /**
+     * 呼び出し開始位置
+     * @type {number}
+     * @default 0
+     */
     this.offset = offset;
+    /**
+     * 取得件数
+     * @type {number}
+     * @default 6
+     */
     this.length = length;
+    /**
+     * {{length: number, offset: number}} な Ajax リクエスト
+     * @type {?Object}
+     */
     this.request = null;
 
+    /**
+     * データ取得 Action calss instance
+     * @type {CategoryAuth|Category}
+     */
     this.action = sign ?
       new CategoryAuth(slug, type, resolve, reject, offset, length) :
       new Category(slug, type, resolve, reject, offset, length);
   }
+
+  /**
+   * 成功後に `SPComponentSinglesWidgetPopularList` を render します
+   * @param {Array} articles JSON response.articles
+   */
   render(articles) {
     const list = articles.map((article) => new ArticleDae(article));
     this.articles = list;
@@ -67,6 +119,10 @@ export class SPViewSinglesPopular extends SPViewArchive {
       this.articleRendered.updateList(list, this.request.offset, this.request.length);
     }
   }
+  /**
+   * 表示更新を行います
+   * @return {boolean} 更新実行時に true を返します
+   */
   reload() {
     const component = this.articleRendered;
     if (component === null) {

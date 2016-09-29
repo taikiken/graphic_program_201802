@@ -10,30 +10,49 @@
  *
  */
 
-// view
-import { View } from '../../../view/View';
-
 // app
 import { Message } from '../../../app/const/Message';
+import { Empty } from '../../../app/const/Empty';
 
-// sp/node
-import { SPMediaNode } from '../../node/single/SPMediaNode';
+// data
+import { Safety } from '../../../data/Safety';
 
-// sp/component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+// component
+import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;
 
+/**
+ * SP: 記事詳細・次の記事一覧 > 人気記事一覧<br>
+ * `SPComponentSinglesWidgetPopular` mount 後<br>
+ * `SPViewSinglesPopular` で AJAX request を行いレスポンス取得後出力を開始します
+ * {@link SPComponentSinglesWidgetPopular}
+ * {@link SPViewSinglesPopular}
+ * @since 2016-09-28
+ */
 export class SPComponentSinglesWidgetPopularList extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link SPComponentSinglesWidgetPopularList.propTypes}
+   */
   constructor(props) {
     super(props);
-
+    /**
+     * React state
+     * @type {{list: Array<SingleDae>}}
+     */
     this.state = {
       list: props.list
     };
   }
+  /**
+   * 人気記事一覧, `div.widget-postList_popular` を出力します
+   * @return {XML} div.widget-postList_popular を返します
+   */
   render() {
+    // @type {Array<SingleDae>}
     const articles = this.state.list;
 
     return (
@@ -45,20 +64,21 @@ export class SPComponentSinglesWidgetPopularList extends React.Component {
         <div className="board">
           {
             articles.map((single, index) => {
-              console.log('SPComponentSinglesWidgetPopularList.render single', single);
+              const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
+
               return (
                 <div key={`singles-popular-${single.id}`} className="board-item">
                   <a href={single.url} className="post">
-                    <SPMediaNode
-                      articleId={String(single.id)}
+                    <ComponentArticleThumbnail
                       mediaType={single.mediaType}
-                      media={single.media}
-                      isShowImage={single.isShowImage}
+                      thumbnail={thumbnail}
+                      title={single.title}
+                      recommend={false}
                     />
                     {/* コンテンツ情報 */}
                     <div className="post-data">
                       <h3 className="post-heading">{single.title}</h3>
-                      <ComponentCategoryLabelsLink
+                      <ComponentCategoryLabels
                         index={index}
                         id={`single-popular-label-${single.id}`}
                         categories={single.categories.all}
@@ -74,14 +94,6 @@ export class SPComponentSinglesWidgetPopularList extends React.Component {
       </div>
     );
   }
-  // /**
-  //  * delegate method, マウントした時にコールされます
-  //  *
-  //  * `View.DID_MOUNT` をコールバックに通知します
-  //  */
-  // componentDidMount() {
-  //   this.props.callback(View.DID_MOUNT);
-  // }
   /**
    * 次の読み込みから表示を更新します
    * @param {Array} list 表示リスト
@@ -90,12 +102,20 @@ export class SPComponentSinglesWidgetPopularList extends React.Component {
     // state を変更し appendChild を行う
     this.setState({ list });
   }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
   reload() {
     this.updateList(this.state.list);
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{list: Array<SingleDae>}} React props
+   */
   static get propTypes() {
     return {
       list: React.PropTypes.array.isRequired

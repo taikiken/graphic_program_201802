@@ -67,14 +67,14 @@ export class SPComponentSinglesWidget extends React.Component {
     // return null;
   }
   popular() {
-    // return (
-    //   <SPComponentSinglesWidgetPopular
-    //     index={this.state.index}
-    //     strong={this.state.strong}
-    //     sign={this.state.sign}
-    //   />
-    // );
-    return null;
+    return (
+      <SPComponentSinglesWidgetPopular
+        index={this.state.index}
+        strong={this.state.strong}
+        sign={this.state.sign}
+      />
+    );
+    // return null;
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER

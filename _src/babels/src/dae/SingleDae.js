@@ -19,7 +19,6 @@ import {RelatedDae} from './RelatedDae';
 // @since 2016-09-25
 import { CanonicalDae } from './single/CanonicalDae';
 import { ReadmoreDae } from './single/ReadmoreDae';
-import { PickupDae } from './caegories/PickupDae';
 
 /**
  * 記事詳細の JSON.response

@@ -16,12 +16,27 @@ import { SPViewSinglesPopular } from '../../view/singles/SPViewSinglesPopular';
 // React
 const React = self.React;
 
+/**
+ * SP: 記事詳細「次の記事一覧」人気記事を出力します
+ * @since 2016-09-28
+ */
 export class SPComponentSinglesWidgetPopular extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link SPComponentSinglesWidgetPopular.propTypes}
+   */
   constructor(props) {
     super(props);
-
+    /**
+     * SPViewSinglesPopular instance を保持します
+     * @type {?SPViewSinglesPopular}
+     */
     this.view = null;
   }
+  /**
+   * 9 以上の 3 の倍数で `div.singles-popular-containers` 親コンテナ出力します
+   * @return {?XML} `div.singles-popular-containers` or null を返します
+   */
   render() {
     const props = this.props;
 
@@ -68,6 +83,10 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
       view.start();
     }
   }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
   reload() {
     if (!!this.view && !!this.view.reload) {
       this.view.reload();
@@ -76,6 +95,10 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * `div.singles-popular-containers` 親コンテナ出力
+   * @return {XML} div.singles-popular-containers を返します
+   */
   static build() {
     // AJAX 取得データ出力コンテナを用意
     return (
@@ -85,6 +108,10 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{index: number, strong: boolean, sign: boolean}} React props
+   */
   static get propTypes() {
     return {
       // 記事表示順序

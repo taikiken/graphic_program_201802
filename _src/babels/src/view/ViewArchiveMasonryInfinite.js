@@ -300,6 +300,8 @@ export class ViewArchiveMasonryInfinite extends View {
       let error = new Error( Message.undef('[ARCHIVE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
+      // @since 2016-09-28, error で button を非表示へ
+      this.moreButton(false);
 
     } else if ( articles.length === 0 ) {
 
@@ -308,6 +310,8 @@ export class ViewArchiveMasonryInfinite extends View {
       let error = new Error( Message.empty('[ARCHIVE:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
+      // @since 2016-09-28, error で button を非表示へ
+      this.moreButton(false);
 
     } else {
 
@@ -324,6 +328,8 @@ export class ViewArchiveMasonryInfinite extends View {
   fail( error:Error ):void {
 
     this.executeSafely( View.RESPONSE_ERROR, error );
+    // @since 2016-09-28, error で button を非表示へ
+    this.moreButton(false);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
 

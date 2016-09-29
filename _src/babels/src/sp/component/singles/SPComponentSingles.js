@@ -303,6 +303,10 @@ export class SPComponentSingles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{list: Array<SingleDae>, offset: number, length: number, action: Object, callback: Function, boundMore: Function, single: SingleDae, home: boolean, sign: boolean}} React props
+   */
   static get propTypes() {
     return {
       // Array<SingleDae>
@@ -325,6 +329,10 @@ export class SPComponentSingles extends React.Component {
       sign: React.PropTypes.bool.isRequired
     };
   }
+  /**
+   * React defaultProperty
+   * @return {{home: boolean}} React defaultProperty
+   */
   static get defaultProps() {
     // absolutely, not home
     return {
