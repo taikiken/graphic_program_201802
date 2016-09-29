@@ -58,13 +58,13 @@ export class SPComponentSinglesWidget extends React.Component {
     );
   }
   related() {
-    // return (
-    //   <SPComponentSinglesWidgetRelated
-    //     index={this.state.index}
-    //     strong={this.state.strong}
-    //   />
-    // );
-    return null;
+    return (
+      <SPComponentSinglesWidgetRelated
+        index={this.state.index}
+        strong={this.state.strong}
+      />
+    );
+    // return null;
   }
   popular() {
     // return (

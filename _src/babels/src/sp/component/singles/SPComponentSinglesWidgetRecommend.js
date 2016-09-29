@@ -24,18 +24,35 @@ import { ComponentArticleThumbnail } from '../../../component/articles/Component
 // React
 const React = self.React;
 
+/**
+ * SP: 記事詳細・次の記事一覧 > オススメ記事一覧<br>
+ * 記事詳細 JSON.response.recommend_articles から出力します
+ * @since 2016-09-28
+ */
 export class SPComponentSinglesWidgetRecommend extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link SPComponentSingles.propTypes}
+   */
   constructor(props) {
     super(props);
-    console.log('SPComponentSinglesWidgetRecommend', props);
+    /**
+     * React state
+     * @type {{single: SingleDae, index: number}}
+     * */
     this.state = {
       single: props.single,
       index: props.index
     };
   }
+  /**
+   * state.index が 3 の時に出力します あるいは strong: true の時に<br>
+   * オススメ記事一覧 `div.widget-postList` を出力します
+   * @return {?XML} `div.widget-postList` を返します
+   * */
   render() {
     const props = this.props;
-    console.log('SPComponentSinglesWidgetRecommend.render', props, status);
+
     if (props.strong) {
       return this.build();
     }
@@ -45,7 +62,7 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
     // `x % 3 === 0` するために
     const index = this.state.index + 1;
 
-    if (index % 3 !== 0) {
+    if (index !== 3) {
       return null;
     }
 
@@ -57,10 +74,14 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
 
     return this.build();
   }
+  /**
+   * オススメ記事一覧 `div.widget-postList` を出力します
+   * @return {XML} `div.widget-postList` を返します
+   * */
   build() {
     // @type {Array<SingleDae>}
     const articles = this.state.single.recommendArticles;
-    console.log('SPComponentSinglesWidgetRecommend.build', articles);
+
     return (
       <div className="widget-postList widget-postList_recommend">
         <div className="mod-headingA01">
@@ -100,15 +121,27 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
       </div>
     );
   }
+  /**
+   * state.single 情報を更新し再描画します
+   * @param {SingleDae} single state.single 情報
+   */
   updateSingle(single) {
     this.setState({ single });
   }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
   reload() {
     this.updateSingle(this.state.single);
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{index: number, single: SingleDae, strong: boolean, sign: boolean}} React props
+   */
   static get propTypes() {
     return {
       // 記事表示順序

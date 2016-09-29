@@ -292,6 +292,10 @@ export class SPComponentSingles extends React.Component {
     // state を変更し appendChild + isotope を行う
     this.setState({ list, offset, length });
   }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
   reload() {
     const state = this.state;
     this.updateList(state.list, state.offset, state.length);

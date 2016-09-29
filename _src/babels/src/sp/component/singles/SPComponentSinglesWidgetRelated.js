@@ -16,14 +16,27 @@ import { Url } from '../../../app/const/Url';
 // React
 const React = self.React;
 
+/**
+ * SP: 記事詳細・次の記事一覧 > 関連記事一覧<br>
+ * Syn.extension.js を使用し出力します
+ * @since 2016-09-28
+ */
 export class SPComponentSinglesWidgetRelated extends React.Component {
   constructor(props) {
     super(props);
-
+    /**
+     * React state
+     * @type {{index: number}}
+     */
     this.state = {
       index: props.index
     };
   }
+  /**
+   * state.index が 6 あるいは strong: true の時に<br>
+   * 関連記事一覧 `div.singles-recommend-containers` を出力します
+   * @return {?XML} `div.singles-recommend-containers` or null を返します
+   */
   render() {
     const props = this.props;
 
@@ -47,20 +60,31 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
    * */
   componentDidMount() {
     if (!!this.refs.recommend) {
-      return;
+      SPComponentSinglesWidgetRelated.insert(this.refs.recommend);
     }
-
-    SPComponentSinglesWidgetRelated.insert(this.refs.recommend);
   }
+
+  /**
+   * state.index 情報を更新し再描画します
+   * @param {number} index state.index
+   */
   updateIndex(index) {
     this.setState({ index });
   }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
   reload() {
     this.updateIndex(this.state.index);
   }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * 関連記事一覧 `div.singles-recommend-containers` を出力します
+   * @return {XML} 関連記事一覧 `div.singles-recommend-containers`
+   */
   static build() {
     // AJAX 取得データ出力コンテナを用意
     return (
@@ -70,6 +94,10 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
       </div>
     );
   }
+  /**
+   * React dom へ script tag を appendChild します
+   * @param {Element} element appendChild する親 Element
+   */
   static insert(element) {
     element.innerHTML = '';
 
@@ -86,6 +114,10 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * プロパティ
+   * @return {{index: number, strong: boolean}} React.props
+   */
   static get propTypes() {
     return {
       // 記事表示順序
