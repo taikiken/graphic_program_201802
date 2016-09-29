@@ -42,6 +42,7 @@ export class SPViewSinglesPopular extends SPViewArchive {
    * @param {number} [length=6] 取得件数
    */
   constructor(element, sign = User.sign, offset = 0, length = 6) {
+    console.log('SPViewSinglesPopular -------------------', offset, length);
     // element, moreElement: null, actionClass: undefined, option: {}
     super(element, null);
 

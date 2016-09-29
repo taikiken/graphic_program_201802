@@ -102,6 +102,15 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
      * @type {number}
      */
     this.id = id;
+
+    /**
+     * Ajax response.request
+     * @type {{offset: number, length: number}}
+     */
+    this.request = {
+      offset: 0,
+      length: 0
+    };
   }
   /**
    * Ajax response success

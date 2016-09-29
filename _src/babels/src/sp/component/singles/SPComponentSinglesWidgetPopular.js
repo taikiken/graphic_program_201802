@@ -78,6 +78,7 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
         offset = 0;
       }
 
+      console.log('SPComponentSinglesWidgetPopular.componentDidMount', index, offset);
       const view = new SPViewSinglesPopular(this.refs.popular, this.props.sign, offset);
       this.view = view;
       view.start();

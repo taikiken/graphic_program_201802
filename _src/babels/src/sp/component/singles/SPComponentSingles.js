@@ -291,6 +291,7 @@ export class SPComponentSingles extends React.Component {
   updateList(list, offset, length) {
     // state を変更し appendChild + isotope を行う
     this.setState({ list, offset, length });
+    this.props.boundMore(this.props.action.hasNext());
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
