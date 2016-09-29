@@ -66,7 +66,7 @@ export class SPViewSingles extends ViewSingles {
 
     // this._articleRendered が null の時だけ ReactDOM.render する
     if (this.articleRendered === null) {
-      const request = this.action.request;
+      const request = this.request;
 
       this.articleRendered = ReactDOM.render(
         <SPComponentSingles

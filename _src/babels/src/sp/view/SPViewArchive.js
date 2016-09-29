@@ -241,7 +241,7 @@ export class SPViewArchive extends View {
 
     } else {
 
-      this._request = result.request;
+      this.request = result.request;
       this.render( articles );
 
     }
@@ -292,7 +292,7 @@ export class SPViewArchive extends View {
       // _moreRendered が null の時のみ state を update する
       if ( this._moreRendered === null ) {
         // チェックをパスし実行する
-        this._moreRendered = ReactDOM.render(
+        this.moreRendered = ReactDOM.render(
           <SPMoreViewNode
             show={show}
             action={this.action}
@@ -304,7 +304,7 @@ export class SPViewArchive extends View {
 
       } else {
 
-        this._moreRendered.updateShow( show );
+        this.moreRendered.updateShow( show );
 
       }
     };

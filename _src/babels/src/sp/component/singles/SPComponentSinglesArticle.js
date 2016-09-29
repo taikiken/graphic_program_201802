@@ -29,7 +29,7 @@ const React = self.React;
 export class SPComponentSinglesArticle extends React.Component {
   constructor(props) {
     super(props);
-    console.log('SPComponentSinglesArticle', props);
+
     this.state = {
       single: props.single,
       sign: props.sign
@@ -92,6 +92,9 @@ export class SPComponentSinglesArticle extends React.Component {
   }
   updateSign(sign) {
     this.setState({ sign });
+  }
+  reload() {
+    this.updateSingle(this.state.single);
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER

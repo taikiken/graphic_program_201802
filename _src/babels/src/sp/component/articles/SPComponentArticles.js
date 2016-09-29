@@ -19,6 +19,8 @@ import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
 // view
 import { View } from '../../../view/View';
+
+// component
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 
 // dara
@@ -26,10 +28,6 @@ import { Safety } from '../../../data/Safety';
 
 // sp/view/articles
 import { SPComponentArticleAd } from './SPComponentArticleAd';
-
-// Ga
-// import { Ga } from '../../../ga/Ga';
-// import { GaData } from '../../../ga/GaData';
 
 // React
 const React = self.React;
@@ -47,6 +45,16 @@ export class SPComponentArticles extends React.Component {
    */
   constructor(props) {
     super(props);
+
+    /**
+     * React state
+     * @type {{list: Array<ArticleDae>, offset: number, length: number}}
+     */
+    this.state = {
+      list: props.list,
+      offset: props.offset,
+      length: props.length
+    };
   }
   /**
    * `headline` コンテンツを出力します
@@ -54,7 +62,8 @@ export class SPComponentArticles extends React.Component {
    */
   render() {
     const props = this.props;
-    const list = props.list;
+    const state = this.state;
+    const list = state.list;
     const length = list.length;
 
     if (length === 0) {

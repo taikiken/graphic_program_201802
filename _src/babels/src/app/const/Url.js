@@ -328,5 +328,23 @@ export class Url {
 
     return null;
   }
+  /**
+   * #1023 Syn.extension, SP「関連記事」script tag<br>
+   * React に script を埋め込むのが困難なため外部スクリプト化しインサートします
+   * @return {string} Syn.extension JS path を返します
+   * @since 2016-09-28
+   */
+  static synExtension():string {
+    return '/assets/js/syn.extension-recommend_articles.js';
+  }
 
+  /**
+   * #1023 Syn.extension, SP「関連記事」script tag<br>
+   * `script` tag 下 `so_dmp.js` ロードパス
+   * @return {string} script` tag 下 `so_dmp.js` パスを返します
+   * @since 2016-09-28
+   */
+  static soDmp():string {
+    return '//i.socdm.com/s/so_dmp.js?service_id=un_sports';
+  }
 }

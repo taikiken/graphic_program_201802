@@ -43,9 +43,10 @@ export class ComponentCategoryLabels extends React.Component {
     const id = props.id;
     const index = props.index;
     const slug = props.slug || 'x';
+    const className = this.props.className;
 
     return (
-      <p className={`post-category post-category-${slug}`}>
+      <p className={`${className} ${className}-${slug}`}>
         {
           /* Array<SlugDae> */
           categories.map((dae, i) => {
@@ -68,7 +69,8 @@ export class ComponentCategoryLabels extends React.Component {
    *  index: number,
    *  id: string,
    *  categories: Array<SlugDae>,
-   *  slug: string
+   *  slug: string,
+   *  className: string
    * }} React props
    */
   static get propTypes() {
@@ -76,16 +78,18 @@ export class ComponentCategoryLabels extends React.Component {
       index: React.PropTypes.number.isRequired,
       id: React.PropTypes.string.isRequired,
       categories: React.PropTypes.array.isRequired,
-      slug: React.PropTypes.string
+      slug: React.PropTypes.string,
+      className: React.PropTypes.string
     };
   }
   /**
    * defaultProps
-   * @return {{slug: string}} React props
+   * @return {{slug: string, className: string}} React props
    */
   static get defaultProps() {
     return {
-      slug: ''
+      slug: '',
+      className: 'post-category'
     };
   }
 }

@@ -75,16 +75,16 @@ export class Offset extends Action {
      * @protected
      */
     this._reloadFlag = false;
-
-    /**
-     * JSON.request, 記事詳細, next が request を持っていないので保持する
-     * @type {{offset: Number, length: Number}}
-     * @since 2016-09-28
-     */
-    this.request = {
-      offset,
-      length
-    };
+    //
+    // /**
+    //  * JSON.request, 記事詳細, next が request を持っていないので保持する
+    //  * @type {{offset: Number, length: Number}}
+    //  * @since 2016-09-28
+    //  */
+    // this.request = {
+    //   offset,
+    //   length
+    // };
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -177,12 +177,12 @@ export class Offset extends Action {
     if ( this.hasNext() ) {
       method = Safety.string( method, this.method );
       this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass );
-
-      // @since 2016-09-28
-      this.request = {
-        offset: this.offset,
-        length: this.length
-      };
+      //
+      // // @since 2016-09-28
+      // this.request = {
+      //   offset: this.offset,
+      //   length: this.length
+      // };
     }
   }
   /**

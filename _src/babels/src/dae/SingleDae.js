@@ -67,17 +67,19 @@ export class SingleDae extends RelatedDae {
      * @private
      */
     this._canonical = new CanonicalDae(response.canonical);
+
+    const recommendArticles = Safety.array(response.recommend_articles);
     /**
      * response.recommend_articles を PickupDae instance として管理します
-     * @since 2016-09-25
-     * @type {PickupDae}
+     * @since 2016-09-28
+     * @type {Array<SingleDae>}
      * @private
      */
-    this._recommendArticles = new PickupDae(response.recommend_articles);
+    this._recommendArticles = recommendArticles.map((article) => new SingleDae(article));
     /**
      * response.readmore を ReadmoreDae instance として管理します
      * @since 2016-09-25
-     * @type {PickupDae}
+     * @type {ReadmoreDae}
      * @private
      */
     this._readmore = new ReadmoreDae(response.readmore);
@@ -179,9 +181,9 @@ export class SingleDae extends RelatedDae {
    * const article = articles.article;
    * console.log(article.date);// 2016-09-25
    *
-   * @return {PickupDae} この記事のオススメ記事 を返します
+   * @return {Array<SingleDae>} この記事のオススメ記事 を返します
    */
-  get recommendArticles():PickupDae {
+  get recommendArticles():Array<SingleDae> {
     return this._recommendArticles;
   }
   /**
