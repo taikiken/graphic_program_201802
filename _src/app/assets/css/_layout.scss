@@ -435,7 +435,7 @@ textarea {
     // padding: 10px 8px 12px;
     @include link-decoration(#ccc, $highlight-secondary-color, none, none);
     font-weight: bold;
-    font-size: fz(12);
+    // font-size: fz(12);
     white-space: nowrap;
 
     &:hover {
