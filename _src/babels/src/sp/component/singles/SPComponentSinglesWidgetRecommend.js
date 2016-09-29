@@ -12,12 +12,14 @@
 
 // app
 import { Message } from '../../../app/const/Message';
+import { Empty } from '../../../app/const/Empty';
 
-// sp/node
-import { SPMediaNode } from '../../node/single/SPMediaNode';
+// data
+import { Safety } from '../../../data/Safety';
 
-// sp/component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+// component
+import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
+import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;
@@ -68,19 +70,21 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
         <div className="board">
           {
             articles.map((single, i) => {
+              const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
+
               return (
                 <div key={`singles-recommend-${single.id}`} className="board-item">
                   <a href={single.url} className="post">
-                    <SPMediaNode
-                      articleId={String(single.id)}
+                    <ComponentArticleThumbnail
                       mediaType={single.mediaType}
-                      media={single.media}
-                      isShowImage={single.isShowImage}
+                      thumbnail={thumbnail}
+                      title={single.title}
+                      recommend={false}
                     />
                     {/* コンテンツ情報 */}
                     <div className="post-data">
                       <h3 className="post-heading">{single.title}</h3>
-                      <ComponentCategoryLabelsLink
+                      <ComponentCategoryLabels
                         index={i}
                         id={`single-recommend-label-${single.id}`}
                         categories={single.categories.all}

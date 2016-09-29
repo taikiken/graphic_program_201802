@@ -10,6 +10,7 @@
  */
 /* eslint wrap-iife: [0, "outside"] */
 (function() {
+  'use strict';
   var _lgyLw = document.createElement('script');
   _lgyLw.type = 'text/javascript';
   _lgyLw.charset = 'UTF-8';

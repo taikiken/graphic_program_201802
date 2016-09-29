@@ -128,7 +128,7 @@ export class SPComponentSingles extends React.Component {
           {
             list.map((single, index) => {
               return (
-                <div className="singles-root-article singles-root-article-under6">
+                <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under6">
                   <SPComponentSinglesArticle
                     key={`singles-article-${single.id}`}
                     single={single}
@@ -162,7 +162,7 @@ export class SPComponentSingles extends React.Component {
           {
             list.map((single, index) => {
               return (
-                <div className="singles-root-article singles-root-article-under9">
+                <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under9">
                   <SPComponentSinglesArticle
                     key={`singles-article-${single.id}`}
                     single={single}
