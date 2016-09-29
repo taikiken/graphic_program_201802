@@ -17,6 +17,22 @@ class UserAgent{
 
   public function set(){
 
+    # Amazon CloudFront経由の場合は HTTP_CLOUDFRONT_ で判定
+    # ここでのtrue / falseはstring型です
+    if ( strpos($this->ua,'amazon cloudfront') !== false ) {
+
+      if ( $_SERVER['HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER'] === 'true' ) :
+        return $this->device = 'desktop';
+      elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'] === 'true' ) :
+        return $this->device = 'mobile';
+      elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_SMARTTV_VIEWER'] === 'true' ) :
+        return $this->device = 'desktop';
+      elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_TABLET_VIEWER'] === 'true' ) :
+        return $this->device = 'desktop';
+      endif;
+
+    }
+
     if(strpos($this->ua,'iphone') !== false){
       $this->device = 'mobile';
     }elseif(strpos($this->ua,'ipod') !== false){
