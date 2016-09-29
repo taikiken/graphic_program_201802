@@ -43,6 +43,11 @@ export class SPViewSingles extends ViewSingles {
    */
   constructor(id, element, moreElement, single, option = {}) {
     super(id, element, moreElement, single, option);
+    /**
+     * `ReactDOM.render(<SPComponentSingles>)` を保持します
+     * @type {?Object}
+     */
+    this.articleRendered = null;
   }
   /**
    * dom を render します

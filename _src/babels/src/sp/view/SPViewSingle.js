@@ -64,15 +64,22 @@ export class SPViewSingle extends ViewSingle {
     /**
      * SPViewSingleVisual instance
      * @type {null|SPViewSingleVisual}
-     * @private
+     * @protected
      */
     this._visual = null;
     /**
      * バナー用 element
      * @type {Element}
-     * @private
+     * @protected
      */
     this._bannerElement = bannerElement;
+    /**
+     * SPViewSingles instance
+     * @type {?SPViewSingles}
+     * @protected
+     * @since 2016-09-28
+     */
+    this._singles = null;
   }
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします

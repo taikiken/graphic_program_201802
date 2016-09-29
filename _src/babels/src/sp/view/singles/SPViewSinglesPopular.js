@@ -97,6 +97,17 @@ export class SPViewSinglesPopular extends SPViewArchive {
     this.action = sign ?
       new CategoryAuth(slug, type, resolve, reject, offset, length) :
       new Category(slug, type, resolve, reject, offset, length);
+
+    /**
+     * `ReactDOM.render(SPComponentSinglesWidgetPopularList)` を保持します
+     * @type {?Object}
+     */
+    this.articleRendered = null;
+    /**
+     * JSON response.articles を ArticleDae instance へ変換し保持します
+     * @type {Array<ArticleDae>}
+     */
+    this.articles = [];
   }
 
   /**

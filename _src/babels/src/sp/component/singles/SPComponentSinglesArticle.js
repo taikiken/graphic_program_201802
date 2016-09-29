@@ -26,15 +26,31 @@ import { ComponentCategoryLabelsLink } from '../../../component/categories/Compo
 // React
 const React = self.React;
 
+/**
+ * 記事詳細「次の記事」一覧を出力します
+ * @since 2016-09-28
+ */
 export class SPComponentSinglesArticle extends React.Component {
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link SPComponentSinglesArticle.propTypes}
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * React state
+     * @type {{single: SingleDae, sign: boolean}}
+     * */
     this.state = {
       single: props.single,
       sign: props.sign
     };
   }
+  /**
+   * `div.loaded-post` を出力します
+   * @return {?XML} `div.loaded-post` or null を返します
+   * */
   render() {
     const single = this.state.single;
 
@@ -87,12 +103,24 @@ export class SPComponentSinglesArticle extends React.Component {
       </div>
     );
   }
+  /**
+   * state.single 情報を更新し再描画します
+   * @param {SingleDae} single state.single
+   */
   updateSingle(single) {
     this.setState({ single });
   }
+  /**
+   * state.sign 情報を更新し再描画します
+   * @param {boolean} sign state.sign
+   */
   updateSign(sign) {
     this.setState({ sign });
   }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
   reload() {
     this.updateSingle(this.state.single);
   }
@@ -101,7 +129,7 @@ export class SPComponentSinglesArticle extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{dom: Sagen.Dom}} React props
+   * @return {{single: SingleDae, sign: boolean, index: number}} React props
    */
   static get propTypes() {
     return {

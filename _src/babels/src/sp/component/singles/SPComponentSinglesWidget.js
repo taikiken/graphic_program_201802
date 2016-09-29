@@ -21,10 +21,23 @@ import { SPComponentSinglesWidgetRelated } from './SPComponentSinglesWidgetRelat
 // React
 const React = self.React;
 
+/**
+ * 記事詳細 > オススメ記事・関連記事・人気記事<br>
+ * 出力 Component を state.type を元に判断します
+ * @since 2016-09-28
+ */
 export class SPComponentSinglesWidget extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link SPComponentSinglesWidget.propTypes}
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * React state
+     * @type {{index: number, single: SingleDae, type: string, strong: boolean, sign: boolean}}
+     */
     this.state = {
       index: props.index,
       single: props.single,
@@ -33,6 +46,10 @@ export class SPComponentSinglesWidget extends React.Component {
       sign: props.sign
     };
   }
+  /**
+   * オススメ記事・関連記事・人気記事 を出力します
+   * @return {XML} SPComponentSinglesWidgetRecommend|SPComponentSinglesWidgetRelated|SPComponentSinglesWidgetRelated
+   */
   render() {
     switch (this.state.type) {
       case WidgetType.RECOMMEND: {
@@ -47,6 +64,10 @@ export class SPComponentSinglesWidget extends React.Component {
       }
     }
   }
+  /**
+   * オススメ記事
+   * @return {XML} SPComponentSinglesWidgetRecommend {@link SPComponentSinglesWidgetRecommend}
+   */
   recommend() {
     return (
       <SPComponentSinglesWidgetRecommend
@@ -57,6 +78,10 @@ export class SPComponentSinglesWidget extends React.Component {
       />
     );
   }
+  /**
+   * 関連記事
+   * @return {XML} SPComponentSinglesWidgetRelated {@link SPComponentSinglesWidgetRelated}
+   */
   related() {
     return (
       <SPComponentSinglesWidgetRelated
@@ -64,8 +89,11 @@ export class SPComponentSinglesWidget extends React.Component {
         strong={this.state.strong}
       />
     );
-    // return null;
   }
+  /**
+   * 人気記事
+   * @return {XML} SPComponentSinglesWidgetPopular {@link SPComponentSinglesWidgetPopular}
+   */
   popular() {
     return (
       <SPComponentSinglesWidgetPopular
@@ -74,11 +102,14 @@ export class SPComponentSinglesWidget extends React.Component {
         sign={this.state.sign}
       />
     );
-    // return null;
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{index: number, single: SingleDae, type: string, strong: boolean, sign: boolean}} React props
+   */
   static get propTypes() {
     return {
       // 記事表示順序

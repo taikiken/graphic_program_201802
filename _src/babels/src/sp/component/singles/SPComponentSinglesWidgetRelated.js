@@ -22,6 +22,10 @@ const React = self.React;
  * @since 2016-09-28
  */
 export class SPComponentSinglesWidgetRelated extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link SPComponentSinglesWidgetRelated.propTypes}
+   */
   constructor(props) {
     super(props);
     /**
