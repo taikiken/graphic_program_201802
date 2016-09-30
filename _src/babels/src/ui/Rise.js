@@ -29,35 +29,37 @@ export class Rise extends EventDispatcher {
     /**
      * 対象 element
      * @type {Element}
-     * @private
+     * @protected
      */
     this._element = element;
     /**
      * 減産数値
      * @type {Number}
-     * @private
+     * @protected
      */
     this._offset = offset;
     /**
      * getBoundingClientRect を取得するために 引数 element から Offset instance を作成します
      * @type {Offset}
-     * @private
+     * @protected
      */
     this._dom = new Offset( element );
     /**
      * bind 済み this.onScroll
      * @type {Function}
-     * @private
+     * @protected
      */
     this._boundScroll = this.onScroll.bind( this );
     /**
      * Scroll instance
      * @type {Scroll}
-     * @private
+     * @protected
      */
     this._scroll = Scroll.factory();
   }
-
+  // ---------------------------------------------------
+  //  EVENT
+  // ---------------------------------------------------
   /**
    * RISE event type
    * @returns {string} RISE event type を返します
@@ -65,6 +67,52 @@ export class Rise extends EventDispatcher {
   static get RISE():string {
     return 'rise';
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * 処理対象 element
+   * @return {Element} 処理対象 element を返します
+   * @since 2-16-09-30
+   */
+  get element() {
+    return this._element;
+  }
+  /**
+   * 減産数値
+   * @return {Number} 減産数値を返します
+   * @since 2-16-09-30
+   */
+  offset() {
+    return this._offset;
+  }
+  /**
+   * 処理対象 element を Offset instance 変換
+   * @return {Offset} 処理対象 element を Offset instance を返します
+   * @since 2-16-09-30
+   */
+  get dom() {
+    return this._dom;
+  }
+  /**
+   * bind 済み `this.onScroll`
+   * @return {Function} bind 済み `this.onScroll` を返します
+   * @since 2-16-09-30
+   */
+  get boundScroll() {
+    return this._boundScroll;
+  }
+  /**
+   * Scroll instance
+   * @return {Scroll} Scroll instance を返します
+   * @since 2-16-09-30
+   */
+  get scroll() {
+    return this._scroll;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * 監視を始めます
    */
@@ -86,13 +134,14 @@ export class Rise extends EventDispatcher {
   }
   /**
    * Scroll.SCROLL event handler
-   * @param {Object} event Scroll.SCROLL event object
+   * @param {Object} events Scroll.SCROLL event object
    */
-  onScroll( event:Object ):void {
+  onScroll( events:Object ):void {
     // window property
     // scrollTop
-    const y = event.y;
-    const windowHeight = window.innerHeight;
+    const y = events.y;
+    // const windowHeight = window.innerHeight;
+    const windowHeight = events.height;
     const windowBottom = y + windowHeight - this._offset;
     // element property
     const offsetRect = this._dom.offset();

@@ -66,6 +66,8 @@ export class Scroll extends EventDispatcher {
      */
     this.boundScroll = this.onScroll.bind( this );
 
+    this.previous = -1;
+
     return _instance;
   }
   // ---------------------------------------------------
@@ -91,18 +93,40 @@ export class Scroll extends EventDispatcher {
     window.removeEventListener( 'scroll', this.boundScroll );
   }
   /**
-   * window.onscroll event handler
-   * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
-   * @param {Event} event window scroll event
+   * window.onscroll event handler<br>
+   * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します<br>
+   * {{type: string, originalEvent: Event, y: number, height: number, moving: number, changed: boolean}} event object
+   * @param {Event} originalEvent window scroll event
    */
-  onScroll( event:Event ):void {
-    this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
+  onScroll( originalEvent:Event ):void {
+    // this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
+    // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
+    const previous = this.previous;
+    const type = Scroll.SCROLL;
+    const y = Scroll.y;
+    const height = window.innerHeight;
+    // @type {number} - 正の時: scroll down
+    const moving = previous - y;
+    const changed = moving !== 0;
+
+    this.previous = y;
+    this.dispatch({ type, originalEvent, y, height, moving, changed });
   }
   /**
    * 強制的に scroll event を発生させます
    */
   fire():void {
-    this.dispatch( { type: Scroll.SCROLL, originalEvent: null, y: Scroll.y } );
+    // this.dispatch( { type: Scroll.SCROLL, originalEvent: null, y: Scroll.y } );
+    // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
+    const previous = this.previous;
+    const type = Scroll.SCROLL;
+    const y = Scroll.y;
+    const height = window.innerHeight;
+    // @type {number} - 正の時: scroll down
+    const moving = previous - y;
+
+    // this.previous = y;
+    this.dispatch({ type, y, height, moving, originalEvent: null, changed: true });
   }
   // ---------------------------------------------------
   //  static GETTER / SETTER

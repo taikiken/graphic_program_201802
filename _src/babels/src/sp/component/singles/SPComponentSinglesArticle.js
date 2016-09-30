@@ -22,6 +22,11 @@ import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 // component
 import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
 
+// ui
+import { Hit } from '../../../ui/Hit';
+
+// view
+import { ViewSingle } from '../../../view/ViewSingle';
 
 // React
 const React = self.React;
@@ -46,6 +51,10 @@ export class SPComponentSinglesArticle extends React.Component {
       single: props.single,
       sign: props.sign
     };
+
+    this.hit = null;
+    this.boundHit = this.onHit.bind(this);
+    this.sended = false;
   }
   /**
    * `div.loaded-post` を出力します
@@ -107,7 +116,12 @@ export class SPComponentSinglesArticle extends React.Component {
    * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
    * */
   componentDidMount() {
-
+    if (this.hit === null && !!this.refs.singlesArticle) {
+      const hit = new Hit(this.refs.singlesArticle);
+      this.hit = hit;
+      hit.on(Hit.COLLISION, this.boundHit);
+      hit.start();
+    }
   }
   /**
    * state.single 情報を更新し再描画します
@@ -129,6 +143,27 @@ export class SPComponentSinglesArticle extends React.Component {
    */
   reload() {
     this.updateSingle(this.state.single);
+  }
+  // --------------------------------------------------
+  onHit(events) {
+    if (this.sended) {
+      return;
+    }
+
+    const rect = events.rect;
+    const top = rect.top;
+
+    if (Math.abs(top) <= 50) {
+      this.sended = true;
+      ViewSingle.ga(this.state.single);
+      this.dispose();
+    }
+  }
+  dispose() {
+    const hit = this.hit;
+    if (hit !== null) {
+      hit.off(Hit.COLLISION, this.boundHit);
+    }
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
