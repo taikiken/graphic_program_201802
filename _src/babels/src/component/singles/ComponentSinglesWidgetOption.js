@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/09/28 - 16:45
+ * @date 2016/09/30 - 16:07
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,23 +11,23 @@
  */
 
 // app
-import { WidgetType } from '../../../app/const/WidgetType';
+import { WidgetType } from '../../app/const/WidgetType';
 
 // component
-import { SPComponentSinglesWidget } from './SPComponentSinglesWidget';
+import { ComponentSinglesWidget } from './ComponentSinglesWidget';
 
 // React
 const React = self.React;
 
 /**
- * SP: 記事詳細「次の記事一覧」 > オススメ記事・関連記事・人気記事<br>
+ * PC: 記事詳細「次の記事一覧」 > オススメ記事・関連記事・人気記事<br>
  * 出力 Component を「記事詳細」index を元に判断します
- * @since 2016-09-28
+ * @since 2016-09-30
  */
-export class SPComponentSinglesWidgetOption extends React.Component {
+export class ComponentSinglesWidgetOption extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link SPComponentSinglesWidgetOption.propTypes}
+   * @param {Object} props プロパティ {@link ComponentSinglesWidgetOption.propTypes}
    */
   constructor(props) {
     super(props);
@@ -42,12 +42,12 @@ export class SPComponentSinglesWidgetOption extends React.Component {
     };
   }
   /**
-   * state.index が 3 の倍数の時に `SPComponentSinglesWidget` {@link SPComponentSinglesWidget} を使用します
+   * state.index が 3 の倍数の時に `ComponentSinglesWidget` {@link ComponentSinglesWidget} を使用します
    *
    *  - 3: オススメ記事
    *  - 6: 関連記事
    *  - 9以上の 3 の倍数: 人気記事
-   * @return {?XML} null or SPComponentSinglesWidget を返します
+   * @return {?XML} null or ComponentSinglesWidget を返します
    */
   render() {
     // 0 始まり index を
@@ -72,7 +72,7 @@ export class SPComponentSinglesWidgetOption extends React.Component {
     const single = this.state.single;
 
     return (
-      <SPComponentSinglesWidget
+      <ComponentSinglesWidget
         index={index - 1}
         single={single}
         sign={this.state.sign}
@@ -113,3 +113,4 @@ export class SPComponentSinglesWidgetOption extends React.Component {
     };
   }
 }
+

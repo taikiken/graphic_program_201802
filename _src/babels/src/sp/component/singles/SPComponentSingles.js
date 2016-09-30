@@ -25,7 +25,7 @@ import { SPComponentSinglesArticle } from './SPComponentSinglesArticle';
 const React = self.React;
 
 /**
- * SP: 記事詳細「次の記事一覧」親コポネント
+ * SP: 記事詳細「次の記事一覧」親コンポーネント
  * <pre>
  * SPViewSingle -> SPViewSingles -> SPComponentSingles
  * の順で呼び出されます
@@ -218,7 +218,7 @@ export class SPComponentSingles extends React.Component {
    * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
    */
   componentDidMount() {
-    console.log('SPComponentSingles.componentDidMount', this.props.action.hasNext());
+    // console.log('SPComponentSingles.componentDidMount', this.props.action.hasNext());
     this.props.callback(View.DID_MOUNT);
     // hasNext を元に More View button の表示非表示を決める
     this.props.boundMore(this.props.action.hasNext());
@@ -330,14 +330,14 @@ export class SPComponentSingles extends React.Component {
       sign: React.PropTypes.bool.isRequired
     };
   }
-  /**
-   * React defaultProperty
-   * @return {{home: boolean}} React defaultProperty
-   */
-  static get defaultProps() {
-    // absolutely, not home
-    return {
-      home: false
-    };
-  }
+  // /**
+  //  * React defaultProperty
+  //  * @return {{home: boolean}} React defaultProperty
+  //  */
+  // static get defaultProps() {
+  //   // absolutely, not home
+  //   return {
+  //     home: false
+  //   };
+  // }
 }

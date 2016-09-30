@@ -89,9 +89,9 @@ export class CategoriesDae {
     this._slugsClasses = slugs.join('-');
     /**
      * categories が空の時があるのが発覚, 文字列を担保します
-     * @since 2016-09-20
      * @type {string}
      * @protected
+     * @since 2016-09-20
      */
     this._slug = cats.length > 0 ? cats[0].slug : '';
   }

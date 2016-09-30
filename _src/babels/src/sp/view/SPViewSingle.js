@@ -88,15 +88,16 @@ export class SPViewSingle extends ViewSingle {
    */
   singles(single) {
     if (this._singles === null) {
+      // one time, _singles が null の時のみ SPViewSingles instance を作成します
       const element = Dom.singlesNext();
       const moreElement = Dom.singlesMore();
       if (element !== null && moreElement !== null) {
-        console.log('SPViewSingle.singles', this.id);
         const singles = new SPViewSingles(this.id, element, moreElement, single);
         this._singles = singles;
         singles.start();
       }
     } else {
+      // instance がある時は update を実行します
       this._singles.update();
     }
   }

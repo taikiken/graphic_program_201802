@@ -200,6 +200,7 @@ export class ViewSingle extends View {
    */
   singles(single) {
     if (this._singles === null) {
+      // one time, _singles が null の時のみ ViewSingles instance を作成します
       const element = Dom.singlesNext();
       const moreElement = Dom.singlesMore();
       if (element !== null && moreElement !== null) {
@@ -208,6 +209,7 @@ export class ViewSingle extends View {
         singles.start();
       }
     } else {
+      // instance がある時は update を実行します
       this._singles.update();
     }
   }
@@ -231,7 +233,7 @@ export class ViewSingle extends View {
    * @param {SingleDae} single JSON response
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
-  render(single):void {
+  render(single:SingleDae):void {
     // console.log( 'ViewSingle response', response );
     // let single = new SingleDae( response );
     // console.log( 'ViewSingle beforeRender', single );

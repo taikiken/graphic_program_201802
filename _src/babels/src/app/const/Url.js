@@ -337,7 +337,6 @@ export class Url {
   static synExtension():string {
     return '/assets/js/syn.extension-recommend_articles.js';
   }
-
   /**
    * #1023 Syn.extension, SP「関連記事」script tag<br>
    * `script` tag 下 `so_dmp.js` ロードパス
@@ -346,5 +345,14 @@ export class Url {
    */
   static soDmp():string {
     return '//i.socdm.com/s/so_dmp.js?service_id=un_sports';
+  }
+  /**
+   * desktop/p.php line.288 ~ 299, JS で出力のために外部JS file へ<br>
+   * React に script を埋め込むのが困難なため外部スクリプト化しインサートします
+   * @return {string} `/assets/js/pc_popin-recommend.js` を返します
+   * @since 2016-09-30
+   */
+  static popin():string {
+    return '/assets/js/pc_popin-recommend.js';
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/09/29 - 12:26
+ * @date 2016/09/30 - 16:10
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,28 +11,28 @@
  */
 
 // app
-import { Message } from '../../../app/const/Message';
-import { Empty } from '../../../app/const/Empty';
+import { Message } from '../../app/const/Message';
+import { Empty } from '../../app/const/Empty';
 
 // data
-import { Safety } from '../../../data/Safety';
+import { Safety } from '../../data/Safety';
 
 // component
-import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
-import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
+import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
+import { ComponentArticleThumbnail } from '../../component/articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;
 
 /**
- * SP: 記事詳細・次の記事一覧 > オススメ記事一覧<br>
+ * PC: 記事詳細・次の記事一覧 > オススメ記事一覧<br>
  * 記事詳細 JSON.response.recommend_articles から出力します
- * @since 2016-09-28
+ * @since 2016-09-30
  */
-export class SPComponentSinglesWidgetRecommend extends React.Component {
+export class ComponentSinglesWidgetRecommend extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link SPComponentSinglesWidgetRecommend.propTypes}
+   * @param {Object} props プロパティ {@link ComponentSinglesWidgetRecommend.propTypes}
    */
   constructor(props) {
     super(props);
@@ -53,7 +53,7 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
   render() {
     // @type {Array<SingleDae>}
     const articles = this.state.single.recommendArticles;
-    console.log('SPComponentSinglesWidgetRecommend.render ', articles);
+    console.log('ComponentSinglesWidgetRecommend.render ', articles);
     if (articles.length === 0) {
       return null;
     }
@@ -84,17 +84,17 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
 
     return (
       <div className="widget-postList widget-postList_recommend">
-        <div className="mod-headingA01">
+        <div className="widget-postList-heading">
           <h2>{Message.RECOMMEND_TITLE}</h2>
         </div>
         {/* オススメ記事一覧 */}
-        <div className="board">
+        <ul className="board-small column2">
           {
             articles.map((single, i) => {
               const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
 
               return (
-                <div key={`singles-recommend-${single.id}`} className="board-item">
+                <li key={`singles-recommend-${single.id}`} className="board-item">
                   <a href={single.url} className="post">
                     <ComponentArticleThumbnail
                       mediaType={single.mediaType}
@@ -104,20 +104,20 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
                     />
                     {/* コンテンツ情報 */}
                     <div className="post-data">
-                      <h3 className="post-heading">{single.title}</h3>
                       <ComponentCategoryLabels
                         index={i}
                         id={`single-recommend-label-${single.id}`}
                         categories={single.categories.all}
                       />
+                      <h3 className="post-heading">{single.title}</h3>
                       <p className="post-date">{single.displayDate}</p>
                     </div>
                   </a>
-                </div>
+                </li>
               );
             })
           }
-        </div>
+        </ul>
       </div>
     );
   }

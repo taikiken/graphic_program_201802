@@ -159,13 +159,14 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       this.articleRendered = ReactDOM.render(
         <ComponentSingles
           list={articlesList}
-          home={false}
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
           callback={this.boundSafely}
           boundMore={this.boundMore}
           single={this.single}
+          home={false}
+          sign={User.sign}
         />,
         this.element
       );

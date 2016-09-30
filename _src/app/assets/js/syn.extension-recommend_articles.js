@@ -9,6 +9,7 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 /* eslint wrap-iife: [0, "outside"] */
+// @since 2016-09-28 mobile/p.php 関連記事
 (function() {
   'use strict';
   var _lgyLw = document.createElement('script');

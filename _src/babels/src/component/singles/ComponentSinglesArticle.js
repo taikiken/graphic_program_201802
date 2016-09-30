@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/09/28 - 16:33
+ * @date 2016/09/30 - 17:10
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,34 +11,32 @@
  */
 
 // app
-import { Message } from '../../../app/const/Message';
-
-// sp/node
-import { SPMediaNode } from '../../node/single/SPMediaNode';
+import { Message } from '../../app/const/Message';
 
 // node
-import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
+import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
+import { MediaNode } from '../../node/single/MediaNode';
 
 // component
-import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
 
 // ui
-import { Hit } from '../../../ui/Hit';
+import { Hit } from '../../ui/Hit';
 
 // view
-import { ViewSingle } from '../../../view/ViewSingle';
+import { ViewSingle } from '../../view/ViewSingle';
 
 // React
 const React = self.React;
 
 /**
- * SP: 記事詳細「次の記事」一覧を出力します
- * @since 2016-09-28
+ * PC: 記事詳細「次の記事」一覧を出力します
+ * @since 2016-09-30
  */
-export class SPComponentSinglesArticle extends React.Component {
+export class ComponentSinglesArticle extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link SPComponentSinglesArticle.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentSinglesArticle.propTypes}
    */
   constructor(props) {
     super(props);
@@ -52,14 +50,23 @@ export class SPComponentSinglesArticle extends React.Component {
       sign: props.sign
     };
 
+    /**
+     * Hit instance, コンテナがブラウザウインドウ内に表示されているかを調べます<br>
+     * ウインドウ内で top が +- 50px 以内だと Ga tag 送信します
+     * @type {?Hit}
+     */
     this.hit = null;
+    /**
+     * bind 済み onHit
+     * @type {Function}
+     */
     this.boundHit = this.onHit.bind(this);
+    /**
+     * Ga tag 送信済みフラッグ
+     * @type {boolean}
+     */
     this.sended = false;
   }
-  /**
-   * `div.loaded-post` を出力します
-   * @return {?XML} `div.loaded-post` or null を返します
-   * */
   render() {
     const single = this.state.single;
 
@@ -69,44 +76,47 @@ export class SPComponentSinglesArticle extends React.Component {
 
     return (
       <div className="loaded-post" ref="singlesArticle">
-        {/* div.post-kv */}
-        <div className="single-visual-container" ref="visualElement">
-          <SPMediaNode
-            articleId={String(single.id)}
-            mediaType={single.mediaType}
-            media={single.media}
-            isShowImage={single.isShowImage}
-          />
-        </div>
         <div className="post-detail">
-          {/* title */}
-          <div className={`post-heading post-heading-${single.id}`}>
-            <h1>{single.title}</h1>
-          </div>
-          {/* コンテンツ情報 */}
-          <div className="post-data">
-            <p className="post-author">{single.user.userName}</p>
+          {/* header */}
+          <div className="single-header-root">
+            <div className={`post-heading post-heading-${single.id}`}>
+              <h1>{single.title}</h1>
+            </div>
 
             <ComponentCategoryLabelsLink
               index={this.props.index}
               id={`single-label-${single.id}`}
               categories={single.categories.all}
+              className="category-heading"
             />
 
-            <p className="post-date">{single.displayDate}</p>
-            <BookmarkNode
-              sign={this.state.sign}
-              isBookmarked={single.isBookmarked}
-              articleId={String(single.id)}
-            />
+            <div className="post-data">
+              <div className="f-left">
+                <p className="post-author">{single.user.userName}</p>
+                <p className="post-date">{single.displayDate}</p>
+              </div>
+              {/* div.f-right (bookmark: on / off) */}
+              <BookmarkNode
+                sign={this.state.sign}
+                isBookmarked={single.isBookmarked}
+                articleId={String(single.id)}
+              />
+            </div>
           </div>
+          {/* media */}
+          <MediaNode
+            articleId={String(single.id)}
+            mediaType={single.mediaType}
+            media={single.media}
+            isShowImage={single.isShowImage}
+          />
           {/* 本文 */}
           <div className="post-content">
             <p>{single.description}</p>
           </div>
           {/* link */}
-          <div className="post-content-read-more">
-            <a href={single.url} className="post-content-btn-readMore">{Message.READ_MORE}</a>
+          <div className="btn-readmore">
+            <a href={single.url} className="btn-readmore-label">{Message.READ_MORE}</a>
           </div>
         </div>
       </div>
@@ -116,6 +126,7 @@ export class SPComponentSinglesArticle extends React.Component {
    * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
    * */
   componentDidMount() {
+    // Hit instance を作成し監視を開始します
     if (this.hit === null && !!this.refs.singlesArticle) {
       const hit = new Hit(this.refs.singlesArticle);
       this.hit = hit;
@@ -145,6 +156,13 @@ export class SPComponentSinglesArticle extends React.Component {
     this.updateSingle(this.state.single);
   }
   // --------------------------------------------------
+  // hit
+  /**
+   * Hit.COLLISION event handler<br>
+   * ウインドウ内にコンテナが表示された時に通知されます<br>
+   * コンテナ top が +- 50px 以内だと Ga tag 送信します
+   * @param {{type: string, originalEvent: events, y: number, height: number, moving: number, changed: boolean}} events Hit events
+   */
   onHit(events) {
     if (this.sended) {
       return;
@@ -159,6 +177,9 @@ export class SPComponentSinglesArticle extends React.Component {
       this.dispose();
     }
   }
+  /**
+   * Hit.COLLISION event handler を unbind します
+   */
   dispose() {
     const hit = this.hit;
     if (hit !== null) {

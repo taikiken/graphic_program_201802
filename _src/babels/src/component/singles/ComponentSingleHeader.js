@@ -54,13 +54,19 @@ export class ComponentSingleHeader extends React.Component {
    * delegate, マウント前に呼び出され、 `View.WILL_MOUNT` を発火します
    * */
   componentWillMount() {
-    this.props.callback(View.WILL_MOUNT);
+    const safety = this.props.callback;
+    if (!!safety) {
+      safety(View.WILL_MOUNT);
+    }
   }
   /**
    * delegate, マウント後に呼び出され、 `View.DID_MOUNT` を発火します
    * */
   componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
+    const safety = this.props.callback;
+    if (!!safety) {
+      safety(View.DID_MOUNT);
+    }
   }
   /**
    * React state, single と sign を更新します
@@ -107,7 +113,7 @@ export class ComponentSingleHeader extends React.Component {
     return {
       single: React.PropTypes.object.isRequired,
       sign: React.PropTypes.bool.isRequired,
-      callback: React.PropTypes.func.isRequired
+      callback: React.PropTypes.func
     };
   }
 }
