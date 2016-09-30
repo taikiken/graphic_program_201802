@@ -106,6 +106,19 @@ export class ComponentArticleThumbnail extends React.Component {
       small: React.PropTypes.bool
     };
   }
+
+  /**
+   * React props defaultProps
+   *
+   * ```
+   * return {
+   *   masonry: false,
+   *   action: () => {},
+   *   small: false
+   * };
+   * ```
+   * @return {{masonry: boolean, action: (function()), small: boolean}} defaultProps React props
+   */
   static get defaultProps() {
     return {
       masonry: false,

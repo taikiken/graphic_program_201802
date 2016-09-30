@@ -111,6 +111,11 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       offset: 0,
       length: 0
     };
+    /**
+     * React.dom(<ComponentSingles>) を保持します
+     * @type {?Object}
+     */
+    this.articleRendered = null;
   }
   /**
    * Ajax response success

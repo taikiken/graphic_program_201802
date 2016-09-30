@@ -58,6 +58,10 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
       list: props.list
     };
   }
+  /**
+   * 記事詳細・人気の記事一覧を出力します
+   * @return {XML} div.widget-postList.widget-postList_popular を返します
+   * */
   render() {
     // @type {Array<SingleDae>}
     const articles = this.state.list;

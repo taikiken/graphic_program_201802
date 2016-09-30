@@ -66,6 +66,11 @@ export class Scroll extends EventDispatcher {
      */
     this.boundScroll = this.onScroll.bind( this );
 
+    /**
+     * 前回{y}値
+     * @type {number}
+     * @default -1
+     */
     this.previous = -1;
 
     return _instance;
@@ -154,7 +159,6 @@ export class Scroll extends EventDispatcher {
   static set y( top:Number ):void {
     window.scrollTo( 0, top );
   }
-
   /**
    * scroll animation を行います
    * @param {Number} top 目標位置

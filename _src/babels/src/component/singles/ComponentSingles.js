@@ -46,6 +46,10 @@ export class ComponentSingles extends React.Component {
       length: props.length
     };
   }
+  /**
+   * desktop: 記事詳細「次の記事一覧」を出力します
+   * @return {XML} div.singles-root を返します
+   */
   render() {
     const props = this.props;
     const state = this.state;

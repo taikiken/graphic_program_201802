@@ -52,8 +52,21 @@ export class SPComponentSinglesArticle extends React.Component {
       sign: props.sign
     };
 
+    /**
+     * Hit instance
+     * @type {?Hit}
+     */
     this.hit = null;
+    /**
+     * bind 済み onHit, Hit.COLLISION event handler
+     * @type {function}
+     */
     this.boundHit = this.onHit.bind(this);
+    /**
+     * Ga tag 送信済みフラッグ
+     * @type {boolean}
+     * @default false
+     */
     this.sended = false;
   }
   /**
@@ -145,6 +158,10 @@ export class SPComponentSinglesArticle extends React.Component {
     this.updateSingle(this.state.single);
   }
   // --------------------------------------------------
+  /**
+   * Hit.COLLISION event handler
+   * @param {Object} events Hit.COLLISION event object
+   */
   onHit(events) {
     if (this.sended) {
       return;
@@ -159,6 +176,9 @@ export class SPComponentSinglesArticle extends React.Component {
       this.dispose();
     }
   }
+  /**
+   * Hit.COLLISION event handler を unbind します
+   */
   dispose() {
     const hit = this.hit;
     if (hit !== null) {

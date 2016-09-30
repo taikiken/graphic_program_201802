@@ -68,6 +68,10 @@ export class ComponentSinglesArticle extends React.Component {
      */
     this.sended = false;
   }
+  /**
+   * 記事詳細・次の記事一覧 > 記事を出力します
+   * @return {?XML} div.loaded-post or null を返します
+   * */
   render() {
     const single = this.state.single;
 
