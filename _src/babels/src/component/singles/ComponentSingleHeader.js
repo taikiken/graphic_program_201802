@@ -16,6 +16,9 @@ import { View } from '../../view/View';
 // node
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 
+// component
+import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+
 // React
 const React = self.React;
 
@@ -87,6 +90,12 @@ export class ComponentSingleHeader extends React.Component {
         <div className={`post-heading post-heading-${single.id}`}>
           <h1>{single.title}</h1>
         </div>
+        <ComponentCategoryLabelsLink
+          index={0}
+          id={`single-label-${single.id}`}
+          categories={single.categories.all}
+          className="category-heading"
+        />
         <div className="post-data">
           <div className="f-left">
             <p className="post-author">{single.user.userName}</p>

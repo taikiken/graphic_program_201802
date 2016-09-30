@@ -1,6 +1,7 @@
 <?php
 
-include_once __DIR__.'/_category-heading.php';
+// @since 2016-09-30 省略された
+//include_once __DIR__.'/_category-heading.php';
 
 ?>
 

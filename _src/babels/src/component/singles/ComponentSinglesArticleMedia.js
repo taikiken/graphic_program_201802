@@ -23,14 +23,31 @@ import { Safety } from '../../data/Safety';
 // React
 const React = self.React;
 
+/**
+ * 記事詳細・次の記事一覧のメインビジュアル<br>
+ * 動画が次々再生されてウザイので img 置き換えた
+ * @since 2016-09-30
+ */
 export class ComponentSinglesArticleMedia extends React.Component {
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link ComponentSinglesArticle.propTypes}
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * React state
+     * @type {{single: SingleDae}}
+     */
     this.state = {
       single: props.single
     };
   }
+  /**
+   * メインビジュアルを出力します
+   * @return {?XML} video / image を返します
+   */
   render() {
     const single = this.state.single;
     if (!single) {
@@ -45,6 +62,11 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
     return ComponentSinglesArticleMedia.image(single);
   }
+  /**
+   * media_type: `video` の出力
+   * @param {SingleDae} single 記事データ
+   * @return {XML} div.post-kv を返します
+   */
   static video(single) {
     const images = single.media.images;
     const poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
@@ -65,6 +87,11 @@ export class ComponentSinglesArticleMedia extends React.Component {
       </div>
     );
   }
+  /**
+   * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}
+   * @param {SingleDae} single 記事データ
+   * @return {XML} MediaImageNode を返します
+   */
   static image(single) {
     return (
       <MediaImageNode
