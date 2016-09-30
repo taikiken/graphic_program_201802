@@ -93,6 +93,7 @@ export class SPComponentArticles extends React.Component {
                         thumbnail={thumbnail}
                         title={dae.title}
                         recommend={false}
+                        small={true}
                       />
                       <div className="post-data">
                         <h3 className="post-heading">{dae.title}</h3>

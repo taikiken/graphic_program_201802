@@ -69,7 +69,10 @@ export class ComponentSinglesArticleMedia extends React.Component {
    */
   static video(single) {
     const images = single.media.images;
-    const poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
+    let poster = Safety.image(images.original, '');
+    if (poster === '') {
+      poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
+    }
     const caption = single.media.video.caption || '';
     let figCaption = '';
     if (caption !== '') {
@@ -79,10 +82,12 @@ export class ComponentSinglesArticleMedia extends React.Component {
     return (
       <div className="post-kv post-video-kv">
         <figure className="post-single-figure video-container">
-          <img src={Empty.VIDEO_THUMBNAIL} alt=""/>
-          <img src={poster} alt="" className="post-single-image video-image"/>
+          <div className="video-thumbnail-container">
+            <img src={Empty.VIDEO_THUMBNAIL} alt=""/>
+            <img src={poster} alt="" className="post-single-image video-image"/>
+            <span className="video-play-btn"><a href={single.url}><img src={Empty.VIDEO_THUMBNAIL} alt=""/></a></span>
+          </div>
           {figCaption}
-          <span className="video-play-btn"><img src={Empty.VIDEO_THUMBNAIL} alt=""/></span>
         </figure>
       </div>
     );

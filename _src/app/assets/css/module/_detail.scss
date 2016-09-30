@@ -227,6 +227,11 @@
     }
 
     // @since 2016-09-30
+    .video-thumbnail-container {
+      position: relative;
+      min-height: 410px;
+      overflow: hidden;
+    }
     .video-image {
       position: absolute;
       left: 50%;
@@ -235,7 +240,6 @@
       width: auto;
       height: 100%;
     }
-
     .video-play-btn {
       display: block;
       position: absolute;
