@@ -529,13 +529,13 @@
 
 
 
-// .related-post
-.related-post {
+// .widget-postList
+.widget-postList {
   margin-top: 30px;
   padding: 30px 30px 0;
   background-color: #fff;
 
-  // .related-post-heading
+  // .widget-postList-heading
   &-heading {
     @extend .comment-heading;
     margin-top: 0 !important;
@@ -546,4 +546,4 @@
     border-top: none !important;
   }
 }
-// .related-post
+// .widget-postList
