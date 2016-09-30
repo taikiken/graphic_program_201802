@@ -146,14 +146,6 @@
     }//.post-data
   }
 
-  // sp single header
-  .sp-single-header {
-    .f-right,
-    .f-left {
-      float: none;
-    }
-  }
-
   // post-heading
   .post-heading {
     margin-top: (30/2)+px;
@@ -168,6 +160,11 @@
   .post-data {
     @include clearfix;
     margin-top: (24/2)+px;
+
+    .f-left,
+    .f-right {
+      float: none;
+    }
 
     // post-author
     .post-author {
@@ -611,4 +608,22 @@
 .loaded-post {
   border-top: (40/2)+px solid #eee;
   padding-bottom: (40/2)+px;
+
+  .post-content {
+    &-read-more {
+      text-align: center;
+    }
+
+    &-btn-readMore {
+      @include link-decoration($highlight-color, $highlight-color, none, none);
+      display: inline-block;
+      margin: (28/2)+px 0;
+      padding: 0;
+      background-color: transparent;
+      border-radius: (6/2)+px;
+      font-weight: normal;
+      // font-size: fz(28/2);
+      text-align: center;
+    }
+  }
 } //.loaded-post
