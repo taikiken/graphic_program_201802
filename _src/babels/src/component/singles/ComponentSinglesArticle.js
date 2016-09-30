@@ -15,10 +15,11 @@ import { Message } from '../../app/const/Message';
 
 // node
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
-import { MediaNode } from '../../node/single/MediaNode';
+// import { MediaNode } from '../../node/single/MediaNode';
 
 // component
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
 
 // ui
 import { Hit } from '../../ui/Hit';
@@ -104,11 +105,16 @@ export class ComponentSinglesArticle extends React.Component {
             </div>
           </div>
           {/* media */}
+          {/*
           <MediaNode
             articleId={String(single.id)}
             mediaType={single.mediaType}
             media={single.media}
             isShowImage={single.isShowImage}
+          />
+           */}
+          <ComponentSinglesArticleMedia
+            single={single}
           />
           {/* 本文 */}
           <div className="post-content">
