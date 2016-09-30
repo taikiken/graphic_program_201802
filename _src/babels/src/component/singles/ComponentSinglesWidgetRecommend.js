@@ -13,16 +13,32 @@
 // app
 import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
+import { MediaType } from '../../app/const/MediaType';
 
 // data
 import { Safety } from '../../data/Safety';
 
 // component
 import { ComponentCategoryLabels } from '../../component/categories/ComponentCategoryLabels';
-import { ComponentArticleThumbnail } from '../../component/articles/ComponentArticleThumbnail';
+// import { ComponentArticleThumbnail } from '../../component/articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;
+
+// ----------------------------------------
+
+/**
+ * mediaType で play button を表示するかを判断しタグを返します
+ * @param {string} mediaType media type, video / image...
+ * @return {?XML} play button を表示する時は img tag をそうでない時は null を返します
+ */
+const playMark = (mediaType) => {
+  if (mediaType === MediaType.VIDEO) {
+    return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
+  }
+
+  return null;
+};
 
 /**
  * PC: 記事詳細・次の記事一覧 > オススメ記事一覧<br>
@@ -87,21 +103,31 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
         <div className="widget-postList-heading">
           <h2>{Message.RECOMMEND_TITLE}</h2>
         </div>
-        {/* オススメ記事一覧 */}
+        {/* オススメ記事一覧
+        @since 2016-09-30 thumbnail 出力方法を変更
+         const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
+        */}
         <ul className="board-small column2">
           {
             articles.map((single, i) => {
-              const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
-
+              const thumbnail = Safety.image(single.media.images.thumbnail, Empty.IMG_SMALL);
               return (
                 <li key={`singles-recommend-${single.id}`} className="board-item">
                   <a href={single.url} className="post">
+                    {/*
+                    video thumbnail がおかしいので使わない
+                    headline と同じ出力にする
                     <ComponentArticleThumbnail
                       mediaType={single.mediaType}
                       thumbnail={thumbnail}
                       title={single.title}
                       recommend={false}
                     />
+                     */}
+                    <figure className="post-thumb post-thumb-headline">
+                      <img src={thumbnail} alt={single.title}/>
+                      {playMark(single.mediaType)}
+                    </figure>
                     {/* コンテンツ情報 */}
                     <div className="post-data">
                       <ComponentCategoryLabels

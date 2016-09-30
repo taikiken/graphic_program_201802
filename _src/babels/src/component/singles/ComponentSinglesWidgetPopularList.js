@@ -13,18 +13,41 @@
 // app
 import { Message } from '../../app/const/Message';
 import { Empty } from '../../app/const/Empty';
+import { MediaType } from '../../app/const/MediaType';
 
 // data
 import { Safety } from '../../data/Safety';
 
 // component
 import { ComponentCategoryLabels } from '../categories/ComponentCategoryLabels';
-import { ComponentArticleThumbnail } from '../articles/ComponentArticleThumbnail';
+// import { ComponentArticleThumbnail } from '../articles/ComponentArticleThumbnail';
 
 // React
 const React = self.React;
+// ----------------------------------------
 
+/**
+ * mediaType で play button を表示するかを判断しタグを返します
+ * @param {string} mediaType media type, video / image...
+ * @return {?XML} play button を表示する時は img tag をそうでない時は null を返します
+ */
+const playMark = (mediaType) => {
+  if (mediaType === MediaType.VIDEO) {
+    return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
+  }
+
+  return null;
+};
+
+/**
+ * PC: 記事詳細・人気の記事一覧を出力します
+ * @since 2016-09-30
+ */
 export class ComponentSinglesWidgetPopularList extends React.Component {
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link ComponentSinglesWidgetPopularList.propTypes}
+   */
   constructor(props) {
     super(props);
     /**
@@ -44,21 +67,30 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
         <div className="widget-postList-heading">
           <h2>{Message.RANKING_TITLE}</h2>
         </div>
-        {/* 人気記事一覧 */}
+        {/* 人気記事一覧
+         @since 2016-09-30 thumbnail 出力方法を変更
+         const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
+        */}
         <ul className="board-small column2">
           {
             articles.map((single, index) => {
-              const thumbnail = Safety.image(single.media.images.medium, Empty.IMG_MIDDLE);
+              const thumbnail = Safety.image(single.media.images.thumbnail, Empty.IMG_SMALL);
 
               return (
                 <li key={`singles-popular-${single.id}`} className="board-item">
                   <a href={single.url} className="post">
+                    {/*
                     <ComponentArticleThumbnail
                       mediaType={single.mediaType}
                       thumbnail={thumbnail}
                       title={single.title}
                       recommend={false}
                     />
+                     */}
+                    <figure className="post-thumb post-thumb-headline">
+                      <img src={thumbnail} alt={single.title}/>
+                      {playMark(single.mediaType)}
+                    </figure>
                     {/* コンテンツ情報 */}
                     <div className="post-data">
                       <h3 className="post-heading">{single.title}</h3>
