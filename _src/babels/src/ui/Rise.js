@@ -8,9 +8,10 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
-
+// event
 import {EventDispatcher} from '../event/EventDispatcher';
 
+// util
 import {Offset} from '../util/Offset';
 import {Scroll} from '../util/Scroll';
 
@@ -69,6 +70,7 @@ export class Rise extends EventDispatcher {
    */
   start():void {
     // console.log( '************************ Rise.start' );
+    this.stop();
     this._scroll.on( Scroll.SCROLL, this._boundScroll );
     this._scroll.start();
   }

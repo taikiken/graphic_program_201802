@@ -59,7 +59,7 @@ export class SPComponentSinglesArticle extends React.Component {
     }
 
     return (
-      <div className="loaded-post">
+      <div className="loaded-post" ref="singlesArticle">
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
           <SPMediaNode
@@ -92,7 +92,7 @@ export class SPComponentSinglesArticle extends React.Component {
             />
           </div>
           {/* 本文 */}
-          <div className="post-content excerpt">
+          <div className="post-content">
             <p>{single.description}</p>
           </div>
           {/* link */}
@@ -102,6 +102,12 @@ export class SPComponentSinglesArticle extends React.Component {
         </div>
       </div>
     );
+  }
+  /**
+   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
+   * */
+  componentDidMount() {
+
   }
   /**
    * state.single 情報を更新し再描画します
