@@ -92,7 +92,7 @@ export class ComponentSinglesWidgetPopular extends React.Component {
       const request = this.manager.request;
       const offset = request.offset;
 
-      console.log('ComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
+      // console.log('ComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
       const view = new ViewSinglesPopular(this.refs.popular, this.props.sign, offset, request.length);
       this.view = view;
       view.start();

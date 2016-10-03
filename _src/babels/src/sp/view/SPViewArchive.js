@@ -371,9 +371,9 @@ export class SPViewArchive extends View {
     }
 
   }// render
-  /**
-   * more button の表示・非表示を行います
-   * @param {boolean} show true の時にボタンを表示させ機能させます
-   */
-  moreButton(show) {}
+  // /**
+  //  * more button の表示・非表示を行います
+  //  * @param {boolean} show true の時にボタンを表示させ機能させます
+  //  */
+  // moreButton(show) {}
 }

@@ -42,7 +42,7 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
    * @param {number} [length=6] 取得件数
    */
   constructor(element, sign = User.sign, offset = 0, length = 6) {
-    console.log('ViewSinglesPopular -------------------', offset, length);
+    // console.log('ViewSinglesPopular -------------------', offset, length);
     // element, moreElement: null, actionClass: undefined, option: {}
     super(element, null);
 

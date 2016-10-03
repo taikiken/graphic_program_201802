@@ -989,7 +989,7 @@ export class ViewArchiveMasonryInfinite extends View {
     //   this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
     //
     // }
-    console.log('---------------------- infinite');
+    // console.log('---------------------- infinite');
     // ------------------------------------------------
     // @since 2016-09-15
     // 既存データ用のglobal配列
@@ -1057,7 +1057,7 @@ export class ViewArchiveMasonryInfinite extends View {
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
   moreButton(show) {
-    console.log('====== moreButton ======', show);
+    // console.log('====== moreButton ======', show);
     // 'View More' button root element
     const moreElement = this.moreElement;
     // moreElement 存在チェックを行う

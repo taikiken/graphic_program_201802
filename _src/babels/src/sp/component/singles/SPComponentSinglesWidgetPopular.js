@@ -18,7 +18,7 @@ import { SinglesManager } from '../../../ui/SinglesManager';
 
 // React
 const React = self.React;
-const ReactDOM = self.ReactDOM;
+// const ReactDOM = self.ReactDOM;
 
 /**
  * SP: 記事詳細「次の記事一覧」人気記事を出力します
@@ -52,7 +52,7 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
    * `SPViewSinglesPopular` instance を作成し `start` を実行します {@link SPViewSinglesPopular}
    * */
   componentDidMount() {
-    console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.view, this.refs.popular);
+    // console.log('*************** SPComponentSinglesWidgetPopular.componentDidMount', this.view, this.refs.popular);
     if (this.view === null && !!this.refs.popular) {
       // // 人気記事は「次の記事」 9 件以降で 3件毎に登場する
       // const index = this.props.index + 1;
@@ -68,7 +68,7 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
       const request = this.manager.request;
       const offset = request.offset;
 
-      console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
+      // console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
       const view = new SPViewSinglesPopular(this.refs.popular, this.props.sign, offset);
       this.view = view;
       view.start();
@@ -83,7 +83,6 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
    */
   render() {
     const props = this.props;
-    console.log('SPComponentSinglesWidgetPopular.render', props.strong, props.index);
     // 強制出力フラッグ ON
     if (props.strong) {
       return this.build();
@@ -123,41 +122,40 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
       this.view.reload();
     }
   }
-  getPopular() {
-    if (this.view !== null) {
-      return;
-    }
-    const popular = document.getElementById(this.id);
-    console.log('getPopular', this.view, popular);
-
-    if (!popular) {
-      setTimeout(() => this.getPopular(), 25);
-      return;
-    }
-
-    this.popular = popular;
-    // @since 2016-10-03
-    // @type {{offset: number, length: number}}
-    const request = this.manager.request;
-    const offset = request.offset;
-
-    console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
-    const view = new SPViewSinglesPopular(popular, this.props.sign, offset);
-    this.view = view;
-    view.start();
-
-    // request.offset を更新する
-    this.manager.up();
-  }
+  // getPopular() {
+  //   if (this.view !== null) {
+  //     return;
+  //   }
+  //   const popular = document.getElementById(this.id);
+  //
+  //   if (!popular) {
+  //     setTimeout(() => this.getPopular(), 25);
+  //     return;
+  //   }
+  //
+  //   this.popular = popular;
+  //   // @since 2016-10-03
+  //   // @type {{offset: number, length: number}}
+  //   const request = this.manager.request;
+  //   const offset = request.offset;
+  //
+  //   console.log('SPComponentSinglesWidgetPopular.getPopular', this.props.index, offset, popular);
+  //   const view = new SPViewSinglesPopular(popular, this.props.sign, offset);
+  //   this.view = view;
+  //   view.start();
+  //
+  //   // request.offset を更新する
+  //   this.manager.up();
+  // }
   /**
    * `div.singles-popular-containers` 親コンテナ出力
    * @return {XML} div.singles-popular-containers を返します
    */
   build() {
-    console.log('SPComponentSinglesWidgetPopular.build');
     const id = `singles-popular-containers-${this.props.index}`;
     this.id = id;
-    this.getPopular();
+    // console.log('SPComponentSinglesWidgetPopular.build', this.props.index, this.props.strong, id);
+    // this.getPopular();
     // AJAX 取得データ出力コンテナを用意
     return (
       <div id={id} className="singles-popular-containers" ref="popular"></div>

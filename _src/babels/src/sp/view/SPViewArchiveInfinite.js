@@ -130,7 +130,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
   moreButton(show:boolean):void {
-    console.log('SPViewArchiveInfinite.moreButton', show);
+    // console.log('SPViewArchiveInfinite.moreButton', show);
     // 'View More' button root element
     const moreElement = this.moreElement;
     // moreElement 存在チェックを行う

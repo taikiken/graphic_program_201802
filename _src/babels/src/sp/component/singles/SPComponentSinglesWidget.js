@@ -95,7 +95,7 @@ export class SPComponentSinglesWidget extends React.Component {
    * @return {XML} SPComponentSinglesWidgetPopular {@link SPComponentSinglesWidgetPopular}
    */
   popular() {
-    console.log('SPComponentSinglesWidget.popular', this.state);
+    // console.log('SPComponentSinglesWidget.popular', this.state);
     return (
       <SPComponentSinglesWidgetPopular
         index={this.state.index}

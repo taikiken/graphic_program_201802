@@ -69,7 +69,7 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
   render() {
     // @type {Array<SingleDae>}
     const articles = this.state.single.recommendArticles;
-    console.log('ComponentSinglesWidgetRecommend.render ', articles);
+    // console.log('ComponentSinglesWidgetRecommend.render ', articles);
     if (articles.length === 0) {
       return null;
     }

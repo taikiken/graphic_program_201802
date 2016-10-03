@@ -126,7 +126,9 @@ export class ComponentSinglesArticle extends React.Component {
           </div>
           {/* link */}
           <div className="btn-readmore">
-            <a href={single.url} className="btn-readmore-label">{Message.READ_MORE}</a>
+            <a href={single.url} className="btn-readmore-link">
+              <span className="btn-readmore-label">{Message.READ_MORE}</span>
+            </a>
           </div>
         </div>
       </div>

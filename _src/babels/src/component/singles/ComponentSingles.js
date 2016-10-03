@@ -279,8 +279,7 @@ export class ComponentSingles extends React.Component {
     const sign = this.props.sign;
     const type = this.manager.next();
 
-    console.log('ComponentSingles.next', index, strong, type);
-
+    // console.log('ComponentSingles.next', index, strong, type);
 
     switch (type) {
       case WidgetType.RECOMMEND: {

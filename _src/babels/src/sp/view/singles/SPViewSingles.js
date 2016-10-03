@@ -154,7 +154,7 @@ export class SPViewSingles extends SPViewArchiveInfinite {
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
     // @since 2016-09-28, error で button を非表示へ
-    console.log('SPViewSingles.fail', error);
+    console.warn('SPViewSingles.fail', error);
     this.moreButton(false);
   }
   /**
@@ -196,7 +196,7 @@ export class SPViewSingles extends SPViewArchiveInfinite {
         />,
         this.element
       );
-      console.log('******************************');
+      // console.log('******************************');
     } else {
       // instance が存在するので
       // state update でコンテナを追加する
