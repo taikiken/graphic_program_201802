@@ -21,7 +21,9 @@
 
     <?php
     // @since 2016-09-28
-    include_once __DIR__.'/_category-heading.php';
+    // @since 2016-09-28 やっぱりいらないことになりました
+    // https://github.com/undotsushin/undotsushin/issues/1010#issuecomment-250127419
+    //include_once __DIR__.'/_category-heading.php';
 
     ?>
 

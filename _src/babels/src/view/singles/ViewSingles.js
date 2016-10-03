@@ -30,8 +30,7 @@ import { SingleDae } from '../../dae/SingleDae';
 import { ComponentSingles } from '../../component/singles/ComponentSingles';
 
 // React
-// let React = self.React;
-let ReactDOM = self.ReactDOM;
+const ReactDOM = self.ReactDOM;
 
 /**
  * 記事詳細・次の記事一覧を出力します
@@ -73,17 +72,18 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
    * @param {number} id 記事 ID
    * @param {Element} element component 挿入 Element
    * @param {Element} moreElement more button 挿入 Element
-   * @param {Object} [option={}] callback を設定した Object
    * @param {SingleDae} single 記事詳細取得 JSON を SingleDae instance にしています
+   * @param {Object} [option={}] callback を設定した Object
    */
-  constructor(id, element, moreElement, option = {}, single) {
-    super(element, moreElement, null, option, true);
+  constructor(id, element, moreElement, single, option = {}) {
+    // element, moreElement, ActionClass, option, isotope
+    super(element, moreElement, null, option, false);
 
     const boundDone = this.done.bind(this);
     const boundFail = this.fail.bind(this);
 
     /**
-     * Ajax request action instance
+     * Ajax request action instance<br>
      * @type {SinglesAuth|Singles}
      * @override
      */
@@ -96,6 +96,26 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
      * @type {SingleDae}
      */
     this.single = single;
+
+    /**
+     * 記事 ID
+     * @type {number}
+     */
+    this.id = id;
+
+    /**
+     * Ajax response.request
+     * @type {{offset: number, length: number}}
+     */
+    this.request = {
+      offset: 0,
+      length: 0
+    };
+    /**
+     * React.dom(<ComponentSingles>) を保持します
+     * @type {?Object}
+     */
+    this.articleRendered = null;
   }
   /**
    * Ajax response success
@@ -115,7 +135,11 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       this.executeSafely(View.EMPTY_ERROR, error);
     } else {
       // data 取得成功
-      this.request = result.request;
+      const request = result.request;
+      if (!request.length) {
+        request.length = this.action.length;
+      }
+      this.request = request;
       this.render(articles);
     }
   }
@@ -144,13 +168,14 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       this.articleRendered = ReactDOM.render(
         <ComponentSingles
           list={articlesList}
-          home={false}
           offset={this.request.offset}
           length={this.request.length}
           action={this.action}
-          callback={this.executeSafely.bind(this)}
-          boundMore={this.moreButton.bind(this)}
+          callback={this.boundSafely}
+          boundMore={this.boundMore}
           single={this.single}
+          home={false}
+          sign={User.sign}
         />,
         this.element
       );

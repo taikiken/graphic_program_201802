@@ -230,6 +230,8 @@ export class SPViewArchive extends View {
       let error = new Error( Message.undef('[SP:ARCHIVE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
+      // @since 2016-09-28, error で button を非表示へ
+      this.moreButton(false);
 
     } else if ( articles.length === 0 ) {
 
@@ -238,10 +240,12 @@ export class SPViewArchive extends View {
       let error = new Error( Message.empty('[SP:ARCHIVE:EMPTY:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
+      // @since 2016-09-28, error で button を非表示へ
+      this.moreButton(false);
 
     } else {
 
-      this._request = result.request;
+      this.request = result.request;
       this.render( articles );
 
     }
@@ -256,6 +260,8 @@ export class SPViewArchive extends View {
     this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
+    // @since 2016-09-28, error で button を非表示へ
+    this.moreButton(false);
 
   }
   // /**
@@ -292,7 +298,7 @@ export class SPViewArchive extends View {
       // _moreRendered が null の時のみ state を update する
       if ( this._moreRendered === null ) {
         // チェックをパスし実行する
-        this._moreRendered = ReactDOM.render(
+        this.moreRendered = ReactDOM.render(
           <SPMoreViewNode
             show={show}
             action={this.action}
@@ -304,7 +310,7 @@ export class SPViewArchive extends View {
 
       } else {
 
-        this._moreRendered.updateShow( show );
+        this.moreRendered.updateShow( show );
 
       }
     };
@@ -365,4 +371,9 @@ export class SPViewArchive extends View {
     }
 
   }// render
+  // /**
+  //  * more button の表示・非表示を行います
+  //  * @param {boolean} show true の時にボタンを表示させ機能させます
+  //  */
+  // moreButton(show) {}
 }

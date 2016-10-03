@@ -93,7 +93,7 @@ export class Empty {
    */
   static get VIDEO_PLAY():string {
 
-    return '/assets/images/common/thumb-16x9-play-s.png';
+    return '/assets/images/common/thumb-16x9-play.png';
 
   }
   /**

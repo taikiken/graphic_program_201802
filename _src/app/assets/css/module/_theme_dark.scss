@@ -170,10 +170,10 @@ $key-color: #e1438b;
 .whole.dark {
   &.post-single {
     .body-sec {
-      background-color: #fff;
+      background-color: #000;
 
       .body-sec-inner {
-        background-image: url(/assets/images/common/bg-bodysec_dark_detail.png);
+        background-image: none;
       }
     }
   }

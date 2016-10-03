@@ -46,6 +46,22 @@ let ReactDOM = self.ReactDOM;
  */
 export class SPViewArchiveInfinite extends SPViewArchive {
   /**
+   * SP 記事一覧 + 無限スクロール 設定を行います
+   * @param {Element} element root element, Ajax result を配置する
+   * @param {Element} moreElement more button root element, 'View More' を配置する
+   * @param {Function} [ActionClass=null] Request 対象の Action Class
+   * @param {Object} [option={}] optional event handler
+   */
+  constructor(element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}) {
+    super(element, moreElement, ActionClass, option);
+
+    /**
+     * bind 済み moreButton 関数
+     * @type {Function}
+     */
+    this.boundMore = this.moreButton.bind(this);
+  }
+  /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
    */
@@ -125,6 +141,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
   moreButton(show:boolean):void {
+    // console.log('SPViewArchiveInfinite.moreButton', show);
     // 'View More' button root element
     const moreElement = this.moreElement;
     // moreElement 存在チェックを行う

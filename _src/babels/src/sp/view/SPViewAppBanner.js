@@ -50,12 +50,12 @@ export class SPViewAppBanner extends React.Component {
      * @type {Function}
      */
     this.boundClose = this.onClose.bind(this);
-    /**
-     * bind ずみ Scroll.SCROLL event handler<br>
-     * scroll を監視し header-sticky を fixed にするか relative にするかを決めます
-     * @type {Function}
-     */
-    this.boundScroll = this.onScroll.bind(this);
+    // /**
+    //  * bind ずみ Scroll.SCROLL event handler<br>
+    //  * scroll を監視し header-sticky を fixed にするか relative にするかを決めます
+    //  * @type {Function}
+    //  */
+    // this.boundScroll = this.onScroll.bind(this);
     /**
      * Scroll instance
      * @type {Scroll}
@@ -96,31 +96,20 @@ export class SPViewAppBanner extends React.Component {
     this.setState({ show });
   }
   /**
-   * Scroll.SCROLL event handler
-   * @param {Object} event croll.SCROLL event Object
-   */
-  onScroll(event) {
-    if (event.y >= 85) {
-      SPViewAppBanner.visible(false);
-    } else {
-      SPViewAppBanner.visible(true);
-    }
-  }
-  /**
    * Scroll.SCROLL 監視を開始します
    */
   activate() {
     this.dispose();
 
     const scroll = this.scroll;
-    scroll.on(Scroll.SCROLL, this.boundScroll);
+    scroll.on(Scroll.SCROLL, SPViewAppBanner.onScroll);
     scroll.start();
   }
   /**
    * Scroll.SCROLL 監視を止めます
    */
   dispose() {
-    this.scroll.off(Scroll.SCROLL, this.boundScroll);
+    this.scroll.off(Scroll.SCROLL, SPViewAppBanner.onScroll);
   }
   /**
    * unmount 時に dispose します
@@ -149,6 +138,18 @@ export class SPViewAppBanner extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * Scroll.SCROLL event handler
+   * @param {Object} events Scroll.SCROLL event Object
+   * @since 2-16-09-30 static へ変更
+   */
+  static onScroll(events) {
+    if (events.y >= 85) {
+      SPViewAppBanner.visible(false);
+    } else {
+      SPViewAppBanner.visible(true);
+    }
+  }
   /**
    * document.body に `.appbnr-invisible` を追加・削除します
    * @param {boolean} view true の時に `.appbnr-invisible` を削除します

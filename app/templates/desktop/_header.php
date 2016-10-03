@@ -157,6 +157,9 @@ if ( $template_name == 'category' ) {
   // https://github.com/undotsushin/undotsushin/issues/1053
   $whole_classes[] = 'home';
   // ---[end 2016-09-01]---
+} elseif ( $template_name == 'p' ) {
+  // @since 2016-09-30
+  $whole_classes[] = 'layout-detail';
 }
 ?>
 </head>

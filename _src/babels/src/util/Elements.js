@@ -17,9 +17,22 @@ import { Style } from './Style';
 // @since 2016-09-16
 const Sagen = self.Sagen;
 
+/**
+ * Sagen.Dom instance を保持するための private Symbol
+ * @private
+ * @type {Symbol}
+ */
 const domSymbol = Symbol();
+/**
+ * Style instance を保持するための private Symbol
+ * @private
+ * @type {Symbol}
+ */
 const styleSymbol = Symbol();
 
+/**
+ * 要素(HTMLElement)の ClientReact, style を管理します
+ */
 export class Elements extends Offset {
   /**
    * element 要素処理ヘルパー

@@ -80,12 +80,12 @@ export class Message {
     return '新着記事';
   }
   /**
-   * RELATED_TITLE 関連ニュース
+   * RELATED_TITLE 関連記事
    * @since 2016-09-27
-   * @return {string} 関連ニュース
+   * @return {string} 関連記事
    */
   static get RELATED_TITLE():string {
-    return '関連ニュース';
+    return '関連記事';
   }
   /**
    * TAGS_TITLE TAGS

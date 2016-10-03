@@ -19,6 +19,10 @@ import { Safety } from '../../data/Safety';
  * @since 2016-09-25
  */
 export class ReadmoreDae {
+  /**
+   * 記事詳細 readmore 「続きを読む」 JSON data を管理します
+   * @param {Object} readmore JSON dara
+   */
   constructor(readmore) {
     readmore = Safety.object(readmore);
     /**
@@ -31,6 +35,10 @@ export class ReadmoreDae {
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * 「続きを読む」 JSON data
+   * @return {Object} 「続きを読む」 JSON data を返します
+   */
   get readmore():Object {
     return this._readmore;
   }

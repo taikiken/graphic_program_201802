@@ -68,10 +68,11 @@ export class ComponentArticleThumbnail extends React.Component {
       );
     } else if (mediaType === MediaType.VIDEO) {
       // type: video
+      const icon = this.props.small ? Empty.VIDEO_PLAY_SMALL : Empty.VIDEO_PLAY;
       return (
         <figure className={`post-thumb post-thumb-${mediaType}`}>
           <img className="video-thumbnail" src={this.props.thumbnail} alt={this.props.title}/>
-          <img className="post-thumb-overlay-movie type-movie" src={Empty.VIDEO_PLAY} alt="" />
+          <img className="post-thumb-overlay-movie type-movie" src={icon} alt="" />
           {recommend}
         </figure>
       );
@@ -101,7 +102,28 @@ export class ComponentArticleThumbnail extends React.Component {
       title: React.PropTypes.string.isRequired,
       recommend: React.PropTypes.bool.isRequired,
       masonry: React.PropTypes.bool,
-      action: React.PropTypes.object
+      action: React.PropTypes.object,
+      small: React.PropTypes.bool
+    };
+  }
+
+  /**
+   * React props defaultProps
+   *
+   * ```
+   * return {
+   *   masonry: false,
+   *   action: () => {},
+   *   small: false
+   * };
+   * ```
+   * @return {{masonry: boolean, action: (function()), small: boolean}} defaultProps React props
+   */
+  static get defaultProps() {
+    return {
+      masonry: false,
+      action: {},
+      small: false
     };
   }
 }

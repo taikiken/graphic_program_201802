@@ -10,7 +10,6 @@
  *
  */
 
-
 import {ViewArchiveMasonryInfinite} from './ViewArchiveMasonryInfinite';
 
 // app
@@ -73,7 +72,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     /**
      * Scroll instance, コンテナ高さが変わった時にイベントを発火させるために使用します
      * @type {Scroll}
-     * @since @2016-09-01
+     * @since 2016-09-01
      */
     this.scroll = Scroll.factory();
   }

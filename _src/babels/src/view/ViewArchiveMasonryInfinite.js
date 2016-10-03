@@ -64,7 +64,7 @@ export class ViewArchiveMasonryInfinite extends View {
    * @param {Element} moreElement more button root element, 'View More' を配置する
    * @param {Function} [ActionClass=null] Request 対象の Action Class
    * @param {Object} [option={}] optional event handler
-   * @param {Boolean} [useMasonry=true] isotope を行うかの
+   * @param {Boolean} [useMasonry=true] isotope を行うかの真偽値
    */
   constructor( element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}, useMasonry:Boolean = true ) {
 
@@ -140,6 +140,13 @@ export class ViewArchiveMasonryInfinite extends View {
      * @default false
      */
     this._gaSend = false;
+
+    /**
+     * bind 済み moreButton
+     * @type {function}
+     * @since 2016-09-28
+     */
+    this.boundMore = this.moreButton.bind(this);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -293,6 +300,8 @@ export class ViewArchiveMasonryInfinite extends View {
       let error = new Error( Message.undef('[ARCHIVE:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
+      // @since 2016-09-28, error で button を非表示へ
+      this.moreButton(false);
 
     } else if ( articles.length === 0 ) {
 
@@ -301,6 +310,8 @@ export class ViewArchiveMasonryInfinite extends View {
       let error = new Error( Message.empty('[ARCHIVE:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
+      // @since 2016-09-28, error で button を非表示へ
+      this.moreButton(false);
 
     } else {
 
@@ -317,6 +328,8 @@ export class ViewArchiveMasonryInfinite extends View {
   fail( error:Error ):void {
 
     this.executeSafely( View.RESPONSE_ERROR, error );
+    // @since 2016-09-28, error で button を非表示へ
+    this.moreButton(false);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
 
@@ -976,7 +989,7 @@ export class ViewArchiveMasonryInfinite extends View {
     //   this.articleRendered.updateList( articlesList, this.request.offset, this.request.length );
     //
     // }
-    console.log('---------------------- infinite');
+    // console.log('---------------------- infinite');
     // ------------------------------------------------
     // @since 2016-09-15
     // 既存データ用のglobal配列
@@ -1044,6 +1057,7 @@ export class ViewArchiveMasonryInfinite extends View {
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
   moreButton(show) {
+    // console.log('====== moreButton ======', show);
     // 'View More' button root element
     const moreElement = this.moreElement;
     // moreElement 存在チェックを行う

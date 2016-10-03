@@ -109,8 +109,19 @@ export class ViewSingle extends View {
      * @protected
      */
     this._footer = null;
-
+    /**
+     * SPViewSingle | ViewSingle instance
+     * @type {?SPViewSingle|?ViewSingle}
+     * @protected
+     */
     this._singles = null;
+
+    /**
+     * 記事 ID
+     * @type {number}
+     * @since 2016-09-26
+     */
+    this.id = id;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -182,18 +193,25 @@ export class ViewSingle extends View {
     // this.showError( error.message );
 
   }
+  /**
+   * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
+   * @param {SingleDae} single JSON.response を SingleDae instance に変換しました
+   * @since 2016-09-28
+   */
   singles(single) {
-    // if (this._singles === null) {
-    //   const element = Dom.singlesNext();
-    //   const moreElement = Dom.singlesMore();
-    //   if (element !== null && moreElement !== null) {
-    //     const singles = new ViewSingles(this.id, element, moreElement, {}, single);
-    //     this._singles = singles;
-    //     singles.start();
-    //   }
-    // } else {
-    //   this._singles.update();
-    // }
+    if (this._singles === null) {
+      // one time, _singles が null の時のみ ViewSingles instance を作成します
+      const element = Dom.singlesNext();
+      const moreElement = Dom.singlesMore();
+      if (element !== null && moreElement !== null) {
+        const singles = new ViewSingles(this.id, element, moreElement, single);
+        this._singles = singles;
+        singles.start();
+      }
+    } else {
+      // instance がある時は update を実行します
+      this._singles.update();
+    }
   }
   // /**
   //  * ViewError でエラーコンテナを作成します
@@ -215,7 +233,7 @@ export class ViewSingle extends View {
    * @param {SingleDae} single JSON response
    * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
-  render(single):void {
+  render(single:SingleDae):void {
     // console.log( 'ViewSingle response', response );
     // let single = new SingleDae( response );
     // console.log( 'ViewSingle beforeRender', single );
