@@ -26,7 +26,8 @@ class ViewModel {
     // meta
     'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
     'canonical'          => '',
-    'syn_extension'      => '',
+    'syn_extension'      => '', // syn_extension対象記事かどうか
+    'syn_thumbnail'      => '', // syn_extension用サムネール
 
     // theme
     'theme' => array(
