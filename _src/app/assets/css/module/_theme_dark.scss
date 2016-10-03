@@ -57,25 +57,25 @@ $key-color: #e1438b;
     }
   }
 
-  [ class^="board-" ] {
-    .post {
-      @include link-decoration(#fff, #fff, none, none);
+  // [ class^="board-" ] {
+  //   .post {
+  //     @include link-decoration(#fff, #fff, none, none);
 
-      .post-category {
-        color: $key-color;
-      }
+  //     .post-category {
+  //       color: $key-color;
+  //     }
 
-      &:hover {
-        .post-heading {
-          color: $key-color !important;
-        }
-      }
-    }
+  //     &:hover {
+  //       .post-heading {
+  //         color: $key-color !important;
+  //       }
+  //     }
+  //   }
 
-    .post-date {
-      color: #999;
-    }
-  }
+  //   .post-date {
+  //     color: #999;
+  //   }
+  // }
 
   .related-post {
     .post {
