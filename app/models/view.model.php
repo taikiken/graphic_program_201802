@@ -41,7 +41,7 @@ class ViewModel {
 
     // ad
     'ad' => array(
-      'sp' => '35244',
+      'sp' => '42708',
       'pc' => array(
         'sidebar_top'         => 'pc_sidebar_top',
         'sidebar_bottom'      => 'pc_sidebar_bottom',
