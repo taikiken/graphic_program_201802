@@ -102,6 +102,9 @@ export class SPComponentHeadlines extends React.Component {
                 );
               })
             }
+            <li className="board-item sponsor-link" ref="sponsorLink">
+              <span style={{display: 'none'}}>&nbsp;</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -116,6 +119,24 @@ export class SPComponentHeadlines extends React.Component {
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
+    this.ad();
+  }
+  /**
+   * headline 6 件目の広告<br>
+   * `app/template/mobile/index.php`#line.27
+   * @since 2016-10-03
+   */
+  ad() {
+    const element = this.refs.sponsorLink;
+    if (!element) {
+      return;
+    }
+
+    const div = document.createElement('div');
+    let script = document.createElement( 'script' );
+    script.src = 'http://i.socdm.com/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
+    div.appendChild(script);
+    element.appendChild(div);
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER

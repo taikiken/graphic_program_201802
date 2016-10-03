@@ -55,7 +55,10 @@ files = [
 
 # eslint
 gulp.task 'babels:eslint', ->
-  return gulp.src files
+  lintFiles = files.slice 0
+  lintFiles.push '!' + dir.babels.src + '/**/VideojsImaNode.js'
+
+  return gulp.src lintFiles
   .pipe $.eslint useEslintrc: true
   .pipe $.eslint.format()
   .pipe $.eslint.failAfterError()

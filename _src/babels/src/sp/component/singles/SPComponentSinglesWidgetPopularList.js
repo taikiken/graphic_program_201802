@@ -74,6 +74,7 @@ export class SPComponentSinglesWidgetPopularList extends React.Component {
                       thumbnail={thumbnail}
                       title={single.title}
                       recommend={false}
+                      small={true}
                     />
                     {/* コンテンツ情報 */}
                     <div className="post-data">

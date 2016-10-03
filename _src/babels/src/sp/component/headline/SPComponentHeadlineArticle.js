@@ -77,6 +77,7 @@ export class SPComponentHeadlineArticle extends React.Component {
             thumbnail={props.thumbnail}
             title={props.title}
             recommend={false}
+            small={true}
           />
           <div className="post-data">
             <h3 className="post-heading">{props.title}</h3>
