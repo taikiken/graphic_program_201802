@@ -12,7 +12,7 @@
 
 
 // view
-import {View} from '../../../view/View';
+// import {View} from '../../../view/View';
 import {ViewSingleHeader} from '../../../view/single/ViewSingleHeader';
 
 // app
@@ -23,12 +23,16 @@ import {User} from '../../../app/User';
 import {SingleDae} from '../../../dae/SingleDae';
 
 // node
-import {BookmarkNode} from '../../../node/bookmark/BookmarkNode';
+// import {BookmarkNode} from '../../../node/bookmark/BookmarkNode';
 // import {CategoryLabelNode} from '../../../node/category/CategoryLabelNode';
-import {CategoryLabelNodeLink} from '../../../node/category/CategoryLabelNodeLink';
+// import {CategoryLabelNodeLink} from '../../../node/category/CategoryLabelNodeLink';
+
+// component
+// @since 2016-09-24
+import { SPComponentSingleHeader } from '../../component/singles/SPComponentSingleHeader';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -55,94 +59,103 @@ export class SPViewSingleHeader extends ViewSingleHeader {
    * @param {SingleDae} singleDae JSON 変換済みデータ
    */
   render( singleDae:SingleDae ):void {
-    let _this = this;
-
-    /**
-     * 記事詳細
-     * 投稿者、日付、カテゴリー、ブックマークボタン
-     * @type {ReactClass}
-     * */
-    let SPHeaderDom = React.createClass( {
-      propTypes: {
-        single: React.PropTypes.object.isRequired,
-        sign: React.PropTypes.bool.isRequired
-      },
-      getInitialState: function() {
-        // this.action = null;
-
-        return {
-          sign: this.props.sign,
-          single: this.props.single,
-          status: this.props.single.isBookmarked,
-          bookmarked: this.props.single.isBookmarked ? 'bookmarked enable' : '',
-          loading: ''
-        };
-      },
-      render: function() {
-        let single = this.state.single;
-
-        // // category label を返す
-        // // label があれば
-        // let category = ( label, slug ) => {
-        //   return !label ? '' : <span className="category-label"><a href={Url.category(slug)}>{label}</a></span>;
-        // };
-
-        return (
-          <div className="sp-single-header">
-            <div className={'post-heading post-heading-' + single.id}>
-              <h1>{single.title}</h1>
-            </div>
-            <div className="post-data">
-              <div className="f-left">
-                <p className="post-author">{single.user.userName}</p>
-                <p className="post-category">
-                  <CategoryLabelNodeLink
-                    categories={single.categories.all}
-                    id={`single-label-${single.id}`}
-                    index={1}
-                  />
-                </p>
-                <p className="post-date">{single.displayDate}</p>
-              </div>
-              {/* div.f-right (bookmark: on / off) */}
-              <BookmarkNode
-                sign={this.state.sign}
-                isBookmarked={this.state.status}
-                articleId={String(single.id)}
-              />
-            </div>
-          </div>
-        );
-      },
-      // --------------------------------------------
-      // delegate
-      componentWillMount: function() {
-
-        // will mount
-        _this.executeSafely( View.WILL_MOUNT );
-
-      },
-      componentDidMount: function() {
-
-        // after mount
-        _this.executeSafely( View.DID_MOUNT );
-
-      },
-      // --------------------------------------------
-      // update
-      updateSingle: function( single, sign ) {
-        this.setState( { single: single, sign: sign } );
-      }
-    } );
+    // let _this = this;
+    //
+    // /**
+    //  * 記事詳細
+    //  * 投稿者、日付、カテゴリー、ブックマークボタン
+    //  * @type {ReactClass}
+    //  * */
+    // let SPHeaderDom = React.createClass( {
+    //   propTypes: {
+    //     single: React.PropTypes.object.isRequired,
+    //     sign: React.PropTypes.bool.isRequired
+    //   },
+    //   getInitialState: function() {
+    //     // this.action = null;
+    //
+    //     return {
+    //       sign: this.props.sign,
+    //       single: this.props.single,
+    //       status: this.props.single.isBookmarked,
+    //       bookmarked: this.props.single.isBookmarked ? 'bookmarked enable' : '',
+    //       loading: ''
+    //     };
+    //   },
+    //   render: function() {
+    //     let single = this.state.single;
+    //
+    //     // // category label を返す
+    //     // // label があれば
+    //     // let category = ( label, slug ) => {
+    //     //   return !label ? '' : <span className="category-label"><a href={Url.category(slug)}>{label}</a></span>;
+    //     // };
+    //
+    //     return (
+    //       <div className="sp-single-header">
+    //         <div className={'post-heading post-heading-' + single.id}>
+    //           <h1>{single.title}</h1>
+    //         </div>
+    //         <div className="post-data">
+    //           <div className="f-left">
+    //             <p className="post-author">{single.user.userName}</p>
+    //             <p className="post-category">
+    //               <CategoryLabelNodeLink
+    //                 categories={single.categories.all}
+    //                 id={`single-label-${single.id}`}
+    //                 index={1}
+    //               />
+    //             </p>
+    //             <p className="post-date">{single.displayDate}</p>
+    //           </div>
+    //           {/* div.f-right (bookmark: on / off) */}
+    //           <BookmarkNode
+    //             sign={this.state.sign}
+    //             isBookmarked={this.state.status}
+    //             articleId={String(single.id)}
+    //           />
+    //         </div>
+    //       </div>
+    //     );
+    //   },
+    //   // --------------------------------------------
+    //   // delegate
+    //   componentWillMount: function() {
+    //
+    //     // will mount
+    //     _this.executeSafely( View.WILL_MOUNT );
+    //
+    //   },
+    //   componentDidMount: function() {
+    //
+    //     // after mount
+    //     _this.executeSafely( View.DID_MOUNT );
+    //
+    //   },
+    //   // --------------------------------------------
+    //   // update
+    //   updateSingle: function( single, sign ) {
+    //     this.setState( { single: single, sign: sign } );
+    //   }
+    // } );
 
     if ( this.rendered === null ) {
       /**
        * SPHeaderDom instance
        * @override
-       * @type {Object|ReactClass}
+       * @type {*}
        */
+      // this.rendered = ReactDOM.render(
+      //   React.createElement( SPHeaderDom, { single: singleDae, sign: User.sign } ),
+      //   this.element
+      // );
+      // @since 2016-09-24 changed
       this.rendered = ReactDOM.render(
-        React.createElement( SPHeaderDom, { single: singleDae, sign: User.sign } ),
+        <SPComponentSingleHeader
+          single={singleDae}
+          sign={User.sign}
+          callback={this.executeSafely.bind(this)}
+        />,
         this.element
       );
 

@@ -8,7 +8,7 @@
 
 // comment
 .comment {
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 }
 
 
@@ -19,12 +19,11 @@
 .comment-heading {
   margin-top: 30px;
   padding: 6px 10px;
-  border-left: 3px solid $highlight-color;
-  background-color: #333;
+  // border-left: 3px solid $highlight-color;
+  background-color: #ddd;
 
   @for $i from 1 through 6 {
     h#{$i} {
-      color: #fff;
       font-weight: bold;
     }
   }
@@ -44,6 +43,9 @@
 .comment-form {
   @include clearfix;
   margin-top: 30px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
 
   @at-root {
     &-user {
@@ -69,7 +71,14 @@
 
     &-comment {
 
-      &-outer {
+      &-outer1 {
+        @include clearfix;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+
+      &-outer2 {
         float: right;
         width: 100%;
       }
@@ -83,26 +92,41 @@
           width: 100%;
           padding: 8px;
           border: none;
-          border-radius: 5px;
-          background-color: #eee;
+          // border-radius: 5px;
+          // background-color: #eee;
           resize: vertical;
         }
       }
     } //.comment-form-comment
 
     &-submit {
-      clear: both;
-      padding-top: 20px;
+      margin-top: 20px;
       text-align: center;
 
-      input {
+      button {
         appearance: none;
         padding: 10px 30px;
         background: none;
-        border: 2px solid $highlight-color;
-        border-radius: 2px;
-        color: $highlight-color;
+        border: none;
+        border-radius: 5px;
+        background-color: $highlight-color;
+        color: #fff;
         font-weight: bold;
+
+        &:before {
+          content: '';
+          position: relative;
+          top: -2px;
+          @extend .sprite-common;
+          @include sprite( $common-icon-comment, inline-block );
+          @include hide-text;
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+
+        &:hover {
+          @include hover-opacity;
+        }
       }
     } //.comment-form-submit
   }
@@ -339,7 +363,7 @@
 // comment-reaction
 .comment-reaction {
   padding-top: 8px;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
 
   .comment-reaction-btn {
     @include link-decoration(#333, #333, none, underline);
@@ -351,7 +375,7 @@
     }
 
     &.active {
-      color: $highlight-color;
+      color: $highlight-secondary-color;
     }
   }
 
@@ -395,10 +419,12 @@
 
   .comment-list {
     padding-left: 60px;
+    margin-top: 20px;
     border-top: 1px solid $border-primary-color;
 
     .comment-item {
       &:first-child {
+        margin-top: 0;
         border-top: none;
       }
       // padding-bottom: 20px;
@@ -415,6 +441,7 @@
     // comment-item
     .comment-item {
       @include clearfix;
+      margin-top: 20px;
       padding-top: 20px;
       border-top: 1px solid $border-primary-color;
     } //.comment-item
@@ -435,7 +462,7 @@
     &-opener {
       @include link-decoration(#333, #333, none, underline);
       position: absolute;
-      top: -(18+20)+px;
+      top: -(18)+px;
       right: 0;
 
       span {
@@ -456,7 +483,6 @@
 
   .comment-form {
     clear: both;
-    padding-top: 30px;
   }
 } //.comment-respond
 
@@ -465,7 +491,7 @@
 
 // comment-andmore
 .comment-andmore {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
 
   a {
@@ -506,7 +532,7 @@
         line-height: 1em;
         padding: 8px 2px;
         border-radius: 3px;
-        background-color: #666;
+        background-color: $highlight-secondary-color;
         font-weight: bold;
         font-size: fz(12);
         text-align: center;

@@ -37,6 +37,9 @@ import {CategoryLabelNode} from '../node/category/CategoryLabelNode';
 import {Ga} from '../ga/Ga';
 import {GaData} from '../ga/GaData';
 
+// util
+import { Scroll } from '../util/Scroll';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
@@ -66,6 +69,13 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
      * @default all
      */
     this.slug = 'all';
+
+    /**
+     * Scroll instance, コンテナ高さが変わった時にイベントを発火させるために使用します
+     * @type {Scroll}
+     * @since @2016-09-01
+     */
+    this.scroll = Scroll.factory();
   }
   // ---------------------------------------------------
   //  METHOD
@@ -94,6 +104,8 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
     // let action = this.action;
     // 参照を保持
     let _this = this;
+
+    const scroll = this.scroll;
 
     // --------------------------------------------
     // More button
@@ -358,7 +370,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
           // ユーザーサムネイル
           let picture = Safety.image( firstUser.profilePicture, Empty.USER_EMPTY );
           let loggedIn = Safety.same( picture, Empty.USER_EMPTY );
-          
+
           // login 済かを調べる
           let sign = User.sign;
 
@@ -435,7 +447,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       render: function() {
         let mediaType = this.props.mediaType;
         let recommend = '';
-        
+
         if ( this.props.recommend ) {
           recommend = <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
         }
@@ -536,7 +548,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
                 // let category = ( label ):string => {
                 //   return !label ? '' : <span className="category-label">{label}</span>;
                 // };
-                
+
                 // unique key(React)にarticle id(number)記事Idを使用します
                 return (
                   <div key={'archive-' + dae.id} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
@@ -668,7 +680,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
       },
       // didUpdate から呼び出される
       appendImages: function() {
-        
+
         // event から event handler を unbind します
         this.img.off( 'always', this.appendImages );
 
@@ -683,6 +695,9 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
         // hasNext を元に More View button の表示非表示を決める
         moreButton( this.props.action.hasNext() );
 
+        // @since 2016-09-01
+        // コンテナ高さが変わるので通知する
+        scroll.fire();
       }
     } );// ArticleDom
 

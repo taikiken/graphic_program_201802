@@ -14,12 +14,30 @@
 import {EventDispatcher} from '../event/EventDispatcher';
 
 // tween
-let greensock = self.com.greensock;
-let TweenLite = greensock.TweenLite;
-let easing = greensock.easing;
+const greensock = self.com.greensock;
+const TweenLite = greensock.TweenLite;
+const easing = greensock.easing;
 
-let _symbol = null;
+/**
+ * Singleton を保証するために constructor 引数にする Symbol
+ * @type {Symbol}
+ * @private
+ */
+const _symbol = Symbol();
+
+/**
+ * Scroll instance
+ * @type {?Scroll}
+ * @static
+ * @private
+ */
 let _instance = null;
+/**
+ * window.onscroll 監視を始めたかの真偽値
+ * @type {boolean}
+ * @static
+ * @private
+ */
 let _watch = false;
 
 /**
@@ -31,22 +49,22 @@ export class Scroll extends EventDispatcher {
    * @param {Symbol} target Singleton を実現するための private symbol
    * @returns {Scroll} Scroll instance を返します
    */
-  constructor( target:Symbol ) {
-    if ( _symbol !== target ) {
-
+  constructor(target:Symbol) {
+    if (_symbol !== target) {
       throw new Error( 'Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()' );
-
     }
 
-    if ( _instance === null ) {
-      super();
-      _instance = this;
-      /**
-       * onScroll 関数 を bind しpublic 変数にします
-       * @type {Function}
-       */
-      this.boundScroll = this.onScroll.bind( this );
+    if(_instance !== null) {
+      return _instance;
     }
+
+    super();
+    _instance = this;
+    /**
+     * onScroll 関数 を bind しpublic 変数にします
+     * @type {Function}
+     */
+    this.boundScroll = this.onScroll.bind( this );
 
     return _instance;
   }
@@ -66,6 +84,9 @@ export class Scroll extends EventDispatcher {
    * window scroll 監視を止めます
    */
   stop():void {
+    // @TODO
+    // 2016-09-16
+    // listener がいなかったら止める
     _watch = false;
     window.removeEventListener( 'scroll', this.boundScroll );
   }
@@ -191,13 +212,9 @@ export class Scroll extends EventDispatcher {
    * @return {Scroll} Scroll instance を返します
    */
   static factory():Scroll {
-
-    if ( _instance === null ) {
-
-      _instance = new Scroll( _symbol );
-
+    if (_instance === null) {
+      _instance = new Scroll(_symbol);
     }
-
     return _instance;
   }
 }

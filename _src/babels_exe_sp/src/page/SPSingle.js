@@ -87,9 +87,8 @@ export class SPSingle {
     // read more
     let post = Dom.post();
     let readMore = Dom.readMore();
-    // console.log( 'post, more', post, readMore );
     if ( post !== null && readMore !== null ) {
-      let more = new UT.sp.view.single.SPViewReadMore( post, readMore );
+      let more = new UT.sp.view.single.SPViewContinueRead( post, readMore );
       more.start();
     }
 

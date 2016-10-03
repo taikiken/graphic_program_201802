@@ -17,8 +17,6 @@
 
   // post-heading
   .post-heading {
-    padding-bottom: 24px;
-    border-bottom: 1px solid $border-primary-color;
 
     h1, h2, h3, h4, h5, h6 {
       font-weight: bold;
@@ -30,7 +28,7 @@
   .post-data {
     display: table;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 24px;
 
     .f-left,
     .f-right {
@@ -44,13 +42,36 @@
     }
 
     @at-root {
+      .post-author,
+      .post-date {
+        display: table-cell;
+        padding-right: 10px;
+        color: #999;
+        vertical-align: middle;
+
+        &:before {
+          position: relative;
+          top: -1px;
+          content: '';
+          @extend .sprite-detail;
+          @include hide-text;
+          margin-right: 4px;
+          vertical-align: middle;
+        }
+      }
+
       // post-author
       .post-author {
+        &:before {
+          @include sprite( $detail-icon-post-author, inline-block );
+        }
       } //.post-author
 
       // post-date
       .post-date {
-        color: #999;
+        &:before {
+          @include sprite( $detail-icon-post-date, inline-block );
+        }
       } //.post-date
 
       // btn-bookmark
@@ -231,8 +252,6 @@
 
     &.column2 {
       margin-top: 30px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid $border-primary-color;
       text-align: center;
       letter-spacing: ls( inline-block );
       vertical-align: top;
@@ -253,27 +272,34 @@
 
   // post-tags
   .post-tags {
+    display: table;
     margin-top: 40px;
 
     @at-root {
+      &-heading,
+      &-list {
+        display: table-cell;
+        vertical-align: top;
+      }
+
       &-heading {
-        width: 41px;
-        height: 14px;
-        background: url(/assets/images/common/heading-tags.png) 0 0 no-repeat;
+        @extend .sprite-detail;
+        @include sprite( $detail-heading-tag );
         @include hide-text;
       }
 
       &-list {
-        margin-top: 10px;
+        padding-left: 10px;
         letter-spacing: ls( inline-block );
       }
 
       &-item {
         display: inline-block;
         letter-spacing: normal;
+        font-size: fz(12);
 
         & + .post-tags-item {
-          margin-left: 20px;
+          margin-left: 10px;
         }
 
         a {
@@ -287,19 +313,20 @@
   .post-sns {
     display: table;
     width: 100%;
-    margin-top: 30px;
-    border: 1px solid $border-primary-color;
+    height: 88px;
+    margin-top: 20px;
+    background: url(/assets/images/detail/post-sns-bg.png) 0 0 no-repeat;
 
     @at-root {
       &-list {
         display: table-cell;
-        padding:  19px 0 19px 20px;
+        padding:  22px 0 0 28px;
         letter-spacing: ls( inline-block );
       }
 
       &-item {
         display: inline-block;
-        margin-left: 5px;
+        margin-left: 10px;
         letter-spacing: normal;
         vertical-align: middle;
 
@@ -343,9 +370,9 @@
 
       &-pr {
         display: table-cell;
-        width: 344px;
-        padding: 19px 24px;
-        background-color: #3755a5;
+        width: 384px;
+        padding-top: 20px;
+        border-left: 1px solid $highlight-color;
         letter-spacing: ls( inline-block );
 
         dt, dd {
@@ -355,14 +382,7 @@
         }
 
         dt {
-          padding-left: 40px;
-          background: url(/assets/images/detail/post-sns-logo.png) 0 center no-repeat;
-          color: #fff;
-          font-weight: bold;
-
-          strong {
-            font-size: fs(18, 14);
-          }
+          padding-left: 32px;
         }
 
         dd {

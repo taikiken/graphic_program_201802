@@ -58,9 +58,7 @@ htdocs = dir.htdocs
 # example.tmp.html : build by JSON
 gulp.task 'html:build', ->
   return gulp.src [
-    app + '/**/*.html'
-    '!' + app + '/**/*test*.html'
-    '!' + app + '/_test/*'
+    app + '/**/about/**/*.html'
   ]
   .pipe $.replaceTask patterns: patterns
   .pipe $.if compress.html, $.htmlmin collapseWhitespace: true

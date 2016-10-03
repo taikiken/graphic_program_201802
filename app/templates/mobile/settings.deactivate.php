@@ -19,7 +19,7 @@
 
             <div id="setting-form-container"></div>
 
-            <div class="mod-btnB01 btn-back">
+            <div class="mod-btnA01 mt20">
               <a href="/settings/">戻る</a>
             </div><!-- /.mod-btnA01 -->
 

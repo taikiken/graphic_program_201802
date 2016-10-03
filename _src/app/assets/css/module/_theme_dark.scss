@@ -7,17 +7,20 @@
 //
 // Styleguide 2.13.0
 
+$key-color: #e1438b;
+
 .whole.dark {
 
   .body-sec {
-    background-color: #181818;
+    background-color: #000;
 
     &:before {
       background-color: #000;
     }
 
     .body-sec-inner {
-      background-image: url(/assets/images/common/bg-bodysec_dark.png);
+      background-image: none;
+      background-color: #000;
     }
   }
 
@@ -26,6 +29,10 @@
     &-heading,
     .post {
       border-bottom-color: #333;
+    }
+
+    .board-item:before {
+      background-color: $key-color;
     }
   }
 
@@ -53,6 +60,16 @@
   [ class^="board-" ] {
     .post {
       @include link-decoration(#fff, #fff, none, none);
+
+      .post-category {
+        color: $key-color;
+      }
+
+      &:hover {
+        .post-heading {
+          color: $key-color !important;
+        }
+      }
     }
 
     .post-date {
@@ -60,7 +77,32 @@
     }
   }
 
+  .related-post {
+    .post {
+      .post-category {
+        color: $highlight-color;
+      }
+
+      &:hover {
+        .post-heading {
+          color: $highlight-color !important;
+        }
+      }
+    }
+  }
+
   .board-large {
+    .board-item {
+      border-bottom-color: #1b1b1b;
+      background-color: #000;
+    }
+
+    .post-data {
+      .post-excerpt-text {
+        color: #ccc;
+      }
+    }
+
     .feature-user {
       &.comment-item {
         background-color: #222;
@@ -77,7 +119,7 @@
       }
 
       .comment-content {
-        color: #fff;
+        color: #ccc;
       }
     } //.feature-user
 
@@ -90,7 +132,7 @@
         color: #fff;
 
         &.active {
-          color: $highlight-color;
+          color: $key-color;
         }
       }
     }
@@ -105,8 +147,15 @@
 
       &:hover {
         .adsDescription {
-          color: $highlight-color !important;
+          color: $key-color !important;
         }
+      }
+    }
+
+    .adsTitle {
+      &,
+      .adsSponsored {
+        color: $key-color !important;
       }
     }
   }

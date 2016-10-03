@@ -39,11 +39,11 @@ export let SPSynItemNode = React.createClass( {
       // login
       return (
         <ul>
-          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-home" href={Url.index()}><i>&nbsp;</i>運動通信トップへ</a></li>
+          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-home" href={Url.index()}><i>&nbsp;</i>スポーツブルトップへ</a></li>
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-mypage" href={Url.mypage()}><i>&nbsp;</i>マイページ</a></li>
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-config" href={Url.settings()}><i>&nbsp;</i>設定</a></li>
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#" onClick={this.logoutClick}><i>&nbsp;</i>ログアウト</a></li>
-          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-about" href={Url.about()}><i>&nbsp;</i>運動通信とは</a></li>
+          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-about" href={Url.about()}><i>&nbsp;</i>スポーツブルとは</a></li>
         </ul>
       );
 
@@ -52,9 +52,9 @@ export let SPSynItemNode = React.createClass( {
       // not login
       return (
         <ul>
-          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-home" href={Url.index()}><i>&nbsp;</i>運動通信トップへ</a></li>
+          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-home" href={Url.index()}><i>&nbsp;</i>スポーツブルトップへ</a></li>
           <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-login" href={Url.signupLogin()}><i>&nbsp;</i>無料登録・ログイン</a></li>
-          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-about" href={Url.about()}><i>&nbsp;</i>運動通信とは</a></li>
+          <li className="side-menu-ut-nav"><a className="side-menu-ut-nav-link side-menu-ut-nav-about" href={Url.about()}><i>&nbsp;</i>スポーツブルとは</a></li>
         </ul>
       );
 

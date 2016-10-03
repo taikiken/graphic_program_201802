@@ -12,28 +12,36 @@
 
 
 // view
-import {View} from './View';
-import {ViewRelated} from './single/ViewRelated';
-import {ViewSingleHeader} from './single/ViewSingleHeader';
-import {ViewSingleFooter} from './single/ViewSingleFooter';
+import { View } from './View';
+import { ViewRelated } from './single/ViewRelated';
+import { ViewSingleHeader } from './single/ViewSingleHeader';
+import { ViewSingleFooter } from './single/ViewSingleFooter';
+
+// view/singles
+import { ViewSingles } from './singles/ViewSingles';
 
 // action
-import {Single} from '../action/single/Single';
-import {SingleAuth} from '../action/single/SingleAuth';
+import { Single } from '../action/single/Single';
+import { SingleAuth } from '../action/single/SingleAuth';
+
 // data
-import {Result} from '../data/Result';
-import {Safety} from '../data/Safety';
+import { Result } from '../data/Result';
+import { Safety } from '../data/Safety';
+import { SingleDae } from '../dae/SingleDae';
+
 // dae
-import {SingleDae} from '../dae/SingleDae';
-import {CategoriesDae} from '../dae/caegories/CategoriesDae';
-import {SlugDae} from '../dae/caegories/SlugDae';
+import { CategoriesDae } from '../dae/caegories/CategoriesDae';
+import { SlugDae } from '../dae/caegories/SlugDae';
+
 // app
-import {Dom} from '../app/Dom';
-import {User} from '../app/User';
-import {Message} from '../app/const/Message';
+import { Dom } from '../app/Dom';
+import { User } from '../app/User';
+import { Message } from '../app/const/Message';
+
 // ga
-import {GaData} from '../ga/GaData';
-import {Ga} from '../ga/Ga';
+import { GaData } from '../ga/GaData';
+import { Ga } from '../ga/Ga';
+
 
 /**
  * <p>記事詳細</p>
@@ -101,6 +109,8 @@ export class ViewSingle extends View {
      * @protected
      */
     this._footer = null;
+
+    this._singles = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -154,9 +164,10 @@ export class ViewSingle extends View {
       // this.showError( error.message );
 
     } else {
-
-      this.render( response );
-
+      // @since 2016-09-27, SingleDae instance にし render へ渡すに変更
+      const single = new SingleDae(response);
+      this.render(single);
+      this.singles(single);
     }
 
   }
@@ -170,6 +181,19 @@ export class ViewSingle extends View {
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
 
+  }
+  singles(single) {
+    // if (this._singles === null) {
+    //   const element = Dom.singlesNext();
+    //   const moreElement = Dom.singlesMore();
+    //   if (element !== null && moreElement !== null) {
+    //     const singles = new ViewSingles(this.id, element, moreElement, {}, single);
+    //     this._singles = singles;
+    //     singles.start();
+    //   }
+    // } else {
+    //   this._singles.update();
+    // }
   }
   // /**
   //  * ViewError でエラーコンテナを作成します
@@ -187,12 +211,13 @@ export class ViewSingle extends View {
   //
   // }
   /**
-   * dom を render します
-   * @param {Object} response JSON response
+   * dom を render します<br>
+   * @param {SingleDae} single JSON response
+   * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
-  render( response:Object ):void {
+  render(single):void {
     // console.log( 'ViewSingle response', response );
-    let single = new SingleDae( response );
+    // let single = new SingleDae( response );
     // console.log( 'ViewSingle beforeRender', single );
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
@@ -245,17 +270,19 @@ export class ViewSingle extends View {
    * header View.DID_MOUNT event handler
    */
   headerMount():void {
-
+    // console.log('ViewSingle.headerMount');
     this._header.off( View.DID_MOUNT, this._boundMount );
     this.executeSafely( View.DID_MOUNT );
-
   }
   /**
    * 関連記事（記事詳細の）
+   * <pre>
+   * desktop/p.php
+   * `_popIn_recommend` に JS で出力
+   * </pre>
    * @param {Array} related 配列内データ型はRelatedDom
    */
   related( related:Array = [] ):void {
-
     if ( !Safety.isElement( this._elements.related ) ) {
       // element が不正の時は処理しない
       return;

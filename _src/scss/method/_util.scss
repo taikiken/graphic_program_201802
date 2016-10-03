@@ -24,7 +24,7 @@
 
 
 // Converts "px" to "%" using the ($)size-base
-@function perCalc($target-value, $base-value: $small-screen) {
+@function perCalc($target-value, $base-value: $screen-small) {
   $value: strip-unit($target-value) / strip-unit($base-value) * 100%;
   @return $value;
 }

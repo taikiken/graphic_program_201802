@@ -1,15 +1,8 @@
-<?Php if ( !$page['theme']['images']['pc'] ) : ?>
-<div class="category-heading">
-  <h1>
-    <?php echo $page['category']['label']; ?>
-    <?php if ( isset($page['category']['title_img']) && $page['category']['title_img'] ) : ?>
-      <span class="category-heading-image">
-        <img src="<?php echo $page['category']['title_img']; ?>" alt="" />
-      </span>
-    <?php endif; ?>
-  </h1>
-</div><!-- /.category-heading -->
-<?php endif; ?>
+<?php
+
+include_once __DIR__.'/_category-heading.php';
+
+?>
 
 <div class="body-sec">
   <div class="body-sec-inner">
@@ -98,13 +91,12 @@
 
           <div class="post-sns-pr">
             <dl class="post-sns-pr-inner">
-              <dt>運動通信を<strong>いいね</strong>して<br />
-                最新ニュースをチェック！</dt>
+              <dt><img src="/assets/images/detail/post-sns-lead.png" alt="SPORTS BULLSPORTS BULLをいいねして最新ニュースをチェック！"></dt>
               <dd>
                 <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
               </dd>
             </dl><!-- /.post-sns-pr-inner -->
-          </div><!-- /.post-sns-pr -->
+          </div>
         </div><!-- /.post-sns -->
 
         <?php

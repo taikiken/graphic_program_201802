@@ -15,13 +15,18 @@
 import {View} from '../View';
 import {SingleDae} from '../../dae/SingleDae';
 
-import {Url} from '../../app/const/Url';
+// // app
+// import {Url} from '../../app/const/Url';
 
-// node
-import {BannerNode} from '../../node/single/BannerNode';
+// // node
+// import {BannerNode} from '../../node/single/BannerNode';
+
+// component
+// @since 2016-09-24
+import { ComponentSingleFooter } from '../../component/singles/ComponentSingleFooter';
 
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
@@ -43,8 +48,8 @@ export class ViewSingleFooter extends View {
      */
     this._single = single;
     /**
-     * FooterDom instance
-     * @type {null|Object}
+     * ComponentSingleFooter instance
+     * @type {?ComponentSingleFooter}
      * @private
      */
     this._rendered = null;
@@ -61,77 +66,85 @@ export class ViewSingleFooter extends View {
    */
   render( singleDae:SingleDae ):void {
 
-    let element = this.element;
+    // let element = this.element;
 
-    let FooterDom = React.createClass( {
-      propTypes: {
-        single: React.PropTypes.object.isRequired
-      },
-      getInitialState: function() {
-        return {
-          single: this.props.single
-        };
-      },
-      render: function() {
-
-        let single = this.state.single;
-        let keywords = single.keywords;
-        // banner key の位置が変更になったのでどちらにも対応できるようにしておく
-        // 優先は変更後の response.banner
-        let userBanner = single.user.banner.pc;
-        let banner = single.banner.pc;
-
-        if ( !banner.image && !!userBanner.image ) {
-          banner = userBanner;
-        }
-
-        if ( keywords.hasKeyword ) {
-
-          return (
-            <div className="post-footer">
-              <BannerNode banner={banner} />
-              {/* TAGS */}
-              <div className="post-tags">
-                <h2 className="post-tags-heading">TAGS</h2>
-                <ul className="post-tags-list">
-                  {
-                    keywords.keywords.map( function( keyword, i ) {
-
-                      return (
-                        <li key={'keyword-' + i} className="post-tags-item">
-                          {/* link は 検索パターンにしています */}
-                          <a href={Url.search( keyword )}>{keyword}</a>
-                        </li>
-                      );
-
-                    } )
-                  }
-                </ul>
-              </div>
-            </div>
-          );
-
-        } else {
-
-          return (
-            <div className="post-footer">
-              <BannerNode banner={banner} />
-            </div>
-          );
-
-        }
-
-      },
-      updateSingle: function( single ) {
-        this.setState( { single: single } );
-      }
-    } );
+    // let FooterDom = React.createClass( {
+    //   propTypes: {
+    //     single: React.PropTypes.object.isRequired
+    //   },
+    //   getInitialState: function() {
+    //     return {
+    //       single: this.props.single
+    //     };
+    //   },
+    //   render: function() {
+    //
+    //     let single = this.state.single;
+    //     let keywords = single.keywords;
+    //     // banner key の位置が変更になったのでどちらにも対応できるようにしておく
+    //     // 優先は変更後の response.banner
+    //     let userBanner = single.user.banner.pc;
+    //     let banner = single.banner.pc;
+    //
+    //     if ( !banner.image && !!userBanner.image ) {
+    //       banner = userBanner;
+    //     }
+    //
+    //     if ( keywords.hasKeyword ) {
+    //
+    //       return (
+    //         <div className="post-footer">
+    //           <BannerNode banner={banner} />
+    //           {/* TAGS */}
+    //           <div className="post-tags">
+    //             <h2 className="post-tags-heading">TAGS</h2>
+    //             <ul className="post-tags-list">
+    //               {
+    //                 keywords.keywords.map( function( keyword, i ) {
+    //
+    //                   return (
+    //                     <li key={'keyword-' + i} className="post-tags-item">
+    //                       {/* link は 検索パターンにしています */}
+    //                       <a href={Url.search( keyword )}>{keyword}</a>
+    //                     </li>
+    //                   );
+    //
+    //                 } )
+    //               }
+    //             </ul>
+    //           </div>
+    //         </div>
+    //       );
+    //
+    //     } else {
+    //
+    //       return (
+    //         <div className="post-footer">
+    //           <BannerNode banner={banner} />
+    //         </div>
+    //       );
+    //
+    //     }
+    //
+    //   },
+    //   updateSingle: function( single ) {
+    //     this.setState( { single: single } );
+    //   }
+    // } );
 
     if ( this._rendered === null ) {
 
+      // this._rendered = ReactDOM.render(
+      //   React.createElement( FooterDom, { single: singleDae } ),
+      //   element
+      // );
+      // @since 2016-09-24 changed
       this._rendered = ReactDOM.render(
-        React.createElement( FooterDom, { single: singleDae } ),
-        element
+        <ComponentSingleFooter
+          single={singleDae}
+          callback={this.executeSafely.bind(this)}
+        />,
+        this.element
       );
 
     } else {
