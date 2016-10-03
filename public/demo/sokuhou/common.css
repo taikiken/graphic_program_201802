@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+@import url('https://dev.sportsbull.jp/assets/css/ui.css') all and (min-width: 641px);
+@import url('https://dev.sportsbull.jp/assets/sp/css/ui.css') all and (max-width: 640px);
+
+.is-show-pc {
+  display:block;
+}
+
+.is-show-sp {
+  display:none;
+}
+
+@media screen and (max-width: 640px) {
+
+  .is-show-pc {
+    display:none;
+  }
+
+  .is-show-sp {
+    display:block;
+  }
+
+}
+
