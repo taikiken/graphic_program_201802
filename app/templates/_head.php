@@ -28,9 +28,13 @@ endif;
 
   <meta name="keywords" content="<?php echo $page['keywords']; ?>">
   <meta name="description" content="<?php echo $page['og_description']; ?>">
-
+<?php
+  /*
+   * OS オリジナルのバナーが表示されるので削除します
+   * @since 2016-10-03
   <meta name="apple-itunes-app" content="app-id=1086719653">
-
+  */
+?>
   <!-- sns ogp -->
   <meta property="fb:app_id" content="<?php echo $page['app_id']; ?>">
   <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
