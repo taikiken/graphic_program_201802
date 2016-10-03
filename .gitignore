@@ -85,6 +85,8 @@ public/assets/fonts/
 public/assets/images/
 public/assets/js/
 public/assets/sp/
+# 2016-09-06 added
+public/about/*
 
 # 開発 css 出力 directory
 # ------------
@@ -102,6 +104,8 @@ _src/app/assets/js/libs/sagen
 _src/app/assets/js/libs/vendor.react.js
 _src/app/assets/_babel/*.babel.js
 _src/app/assets/_babel/_*.js
+# 2016-09-06 added
+_src/app/assets/**/*.bundle.js
 
 # sprite image
 _src/app/assets/images/sprite/

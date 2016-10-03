@@ -29,7 +29,8 @@ $font-smoothing: on; // on or off
 //$bg-color: #fff !default;
 ////$bg-color: transparent !default;
 
-$highlight-color: #e1438b;
+$highlight-color: #0e357f;
+$highlight-secondary-color: #cc141d;
 $border-primary-color: #ddd;
 $bg-primary-color: #f5f5f5;
 
@@ -39,14 +40,18 @@ $global-inner-width: 1088px;
 
 //
 //// Media Queries
-//$screen-small: 768px !default;
+$screen-small: 768px !default;
 //$screen-medium: 1280px !default;
 //$screen-large: 1440px !default;
+
 //
 //// max-width
-//$media-screen: "only screen";
-//$media-small: "only screen and (max-width: #{$screen-small})"; // less than 768
+$media-screen: "only screen";
+$media-small: "only screen and (max-width: #{$screen-small})"; // less than 768
 //$media-medium: "only screen and (max-width: #{$screen-medium})"; // 768 - 1280
-//$media-large: "only screen and (max-width: #{$screen-large})"; // 1280-1440
+// $media-large: "only screen and (max-width: #{$screen-large})"; // 1280-1440
 //$media-landscape: "only screen and (orientation: landscape)";
 //$media-portrait: "only screen and (orientation: portrait)";
+
+//// min-width
+$media-large: "only screen and (min-width: #{$screen-small})"; // more than 768

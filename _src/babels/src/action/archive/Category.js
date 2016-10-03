@@ -67,7 +67,7 @@ export class Category extends Offset {
    * @param {Function} [resolve=null] Ajax 成功時の callback
    * @param {Function} [reject=null] Ajax 失敗時の callback
    * @param {Number} [offset=0] query offset 値
-   * @param {Number} [length=10] query length 値
+   * @param {Number} [length=Length.archive] query length 値 (16)
    * */
   constructor( slug:string = 'all', type:string = '', resolve:Function = null, reject:Function = null, offset:Number = 0, length:Number = Length.archive ) {
 

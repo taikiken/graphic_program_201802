@@ -8,8 +8,8 @@
 // Styleguide 2.1.0
 
 // hover-opacity
-// hover ã§ é€éç‡ 0.75 ã«ã—ã¾ã™ (CSSã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ä»˜)
-// $opacity=.75 - hoveræ™‚ã®é€éç‡
+// hover ¤Ç Í¸ß^ÂÊ 0.75 ¤Ë¤·¤Ş¤¹ (CSS¥¢¥Ë¥á©`¥·¥ç¥ó¸¶)
+// $opacity=.75 - hover•r¤ÎÍ¸ß^ÂÊ
 @mixin hover-opacity($opacity:.75) {
   opacity: $opacity;
   transition: opacity ease-out .4s;
@@ -93,9 +93,9 @@
 %board-small-sponsor-link {
   .adgLink {
     display: block;
-    height: 107px !important;
-    padding: 15px 0;
-    border-top: 1px solid $border-primary-color;
+    height: 75px !important;
+    // padding: 15px 0;
+    // border-top: 1px solid $border-primary-color;
 
     &:hover {
       .adsDescription {
@@ -105,6 +105,14 @@
       .adsImg {
         @include hover-opacity;
       }
+    }
+  }
+
+  .headline & .adgLink {
+    width: 350px !important;
+
+    .adsWrapper {
+      width: 100% !important;
     }
   }
 
@@ -123,6 +131,7 @@
   .adsImg {
     width: 100%;
     height: auto;
+    border-radius: 3px;
   }
 
   .adsBody {
@@ -132,6 +141,11 @@
   .adsTitle {
     font-size: fz(12);
     text-align: left;
+
+    &,
+    .adsSponsored {
+      color: $highlight-color !important;
+    }
   }
 
   .adsDescription {
