@@ -54,7 +54,7 @@ export class ComponentSinglesWidgetRelated extends React.Component {
     // `x % 3 === 0` するために
     const index = props.index + 1;
 
-    if (index !== 6) {
+    if (index % 3 !== 0) {
       return null;
     }
 

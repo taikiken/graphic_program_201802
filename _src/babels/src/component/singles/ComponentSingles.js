@@ -49,6 +49,10 @@ export class ComponentSingles extends React.Component {
       length: props.length
     };
 
+    /**
+     * SinglesManager instance
+     * @type {SinglesManager}
+     */
     this.manager = SinglesManager.factory(props.single);
   }
   /**
@@ -60,7 +64,7 @@ export class ComponentSingles extends React.Component {
     const state = this.state;
     const list = state.list;
     const length = list.length;
-    console.log('ComponentSingles.render', length);
+    // console.log('ComponentSingles.render', length);
     // @ToDO 条件簡略化可能か調べる
     // @ToDO 各件数のテスト
     if (length === 0) {
@@ -251,6 +255,12 @@ export class ComponentSingles extends React.Component {
   }
   // ---------------------------------------------------
   // widget
+  /**
+   * ComponentSinglesWidget を出力します
+   * @param {number} index 記事 index
+   * @param {boolean} [strong=false] 強制出力フラッグ
+   * @return {?XML} ComponentSinglesWidget {@Link ComponentSinglesWidget} を返します
+   */
   next(index, strong = false) {
     if (!strong) {
       // 0 始まり index を

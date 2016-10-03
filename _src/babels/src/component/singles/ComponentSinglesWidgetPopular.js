@@ -13,6 +13,7 @@
 // view
 import { ViewSinglesPopular } from '../../view/singles/ViewSinglesPopular';
 
+// ui
 import { SinglesManager } from '../../ui/SinglesManager';
 
 // React
@@ -35,6 +36,10 @@ export class ComponentSinglesWidgetPopular extends React.Component {
      */
     this.view = null;
 
+    /**
+     * SinglesManager instance
+     * @type {SinglesManager}
+     */
     this.manager = SinglesManager.factory();
   }
   /**

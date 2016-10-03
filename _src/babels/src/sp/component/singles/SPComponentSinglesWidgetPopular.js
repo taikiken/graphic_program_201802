@@ -13,6 +13,9 @@
 // view
 import { SPViewSinglesPopular } from '../../view/singles/SPViewSinglesPopular';
 
+// ui
+import { SinglesManager } from '../../../ui/SinglesManager';
+
 // React
 const React = self.React;
 
@@ -32,6 +35,12 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
      * @type {?SPViewSinglesPopular}
      */
     this.view = null;
+
+    /**
+     * SinglesManager instance
+     * @type {SinglesManager}
+     */
+    this.manager = SinglesManager.factory();
   }
   /**
    * 9 以上の 3 の倍数で `div.singles-popular-containers` 親コンテナ出力します
@@ -55,10 +64,10 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
       return null;
     }
 
-    // 9未満では出力しない
-    if (index < 9) {
-      return null;
-    }
+    // // 9未満では出力しない
+    // if (index < 9) {
+    //   return null;
+    // }
 
     return SPComponentSinglesWidgetPopular.build();
   }
@@ -69,19 +78,27 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
   componentDidMount() {
     // this.props.callback(View.DID_MOUNT);
     if (this.view === null && !!this.refs.popular) {
-      // 人気記事は「次の記事」 9 件以降で 3件毎に登場する
-      const index = this.props.index + 1;
-      // 人気記事は 6件表示する
-      let offset = (index - 9) / 3 * 6;
-      // 負の数値の時は 0 にする
-      if (offset < 0) {
-        offset = 0;
-      }
+      // // 人気記事は「次の記事」 9 件以降で 3件毎に登場する
+      // const index = this.props.index + 1;
+      // // 人気記事は 6件表示する
+      // let offset = (index - 9) / 3 * 6;
+      // // 負の数値の時は 0 にする
+      // if (offset < 0) {
+      //   offset = 0;
+      // }
 
-      console.log('SPComponentSinglesWidgetPopular.componentDidMount', index, offset);
+      // @since 2016-10-03
+      // @type {{offset: number, length: number}}
+      const request = this.manager.request;
+      const offset = request.offset;
+
+      console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
       const view = new SPViewSinglesPopular(this.refs.popular, this.props.sign, offset);
       this.view = view;
       view.start();
+
+      // request.offset を更新する
+      this.manager.up();
     }
   }
   /**
