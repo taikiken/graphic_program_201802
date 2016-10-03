@@ -89,6 +89,7 @@ export class SPComponentArticleAd extends React.Component {
    */
   componentDidMount() {
     if (this.ok && !!this.refs.newsAd) {
+      console.log('SPComponentArticleAd.componentDidMount', this.props.adSp);
       this.refs.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
     }
   }

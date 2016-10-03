@@ -10,7 +10,14 @@
             <!--
             株式会社運動通信社 運動通信_PC_WEB_デスクトップ - 一面 - ヘッドライン下部 39882
             -->
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+            <?php
+            /*
+             * @since 2016-10-03 差替え
+             * @see https://github.com/undotsushin/undotsushin/issues/1125#issuecomment-251032265
+             <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+             */
+            ?>
+            <script src="http://i.socdm.com/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&tagver=2.0.0"></script>
           </div>
         </div><!-- /.headline-outer -->
       </div><!-- /.headline -->

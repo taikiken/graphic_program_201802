@@ -122,7 +122,7 @@ export class ComponentArticleThumbnail extends React.Component {
   static get defaultProps() {
     return {
       masonry: false,
-      action: () => {},
+      action: {},
       small: false
     };
   }

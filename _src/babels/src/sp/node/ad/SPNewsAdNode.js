@@ -54,12 +54,11 @@ export let SPNewsAdNode = React.createClass( {
     };
   },
   render: function() {
-    // ストリーム広告
-    // ID 設定がなかったら出力しない
-    if ( this.props.adSp === '' ) {
-      return null;
-    }
-
+    // // ストリーム広告
+    // // ID 設定がなかったら出力しない
+    // if ( this.props.adSp === '' ) {
+    //   return null;
+    // }
     // ad element を返し
     // ok property を true にする
     let enableAd = () => {
