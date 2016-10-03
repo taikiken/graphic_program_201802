@@ -43,8 +43,17 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
      */
     this.manager = SinglesManager.factory();
 
+    /**
+     * element id, componentDidMount 発火しない問題が解決したのでいらなくなったけど... 残しておく
+     * @type {string}
+     */
     this.id = '';
 
+    /**
+     * script tag をインサートする `this.refs.popular` Element<br>
+     * componentDidMount 発火しない問題が解決したのでいらなくなったけど... 残しておく
+     * @type {?Element}
+     */
     this.popular = null;
   }
   /**

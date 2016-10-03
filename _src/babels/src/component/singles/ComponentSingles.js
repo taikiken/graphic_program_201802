@@ -207,7 +207,7 @@ export class ComponentSingles extends React.Component {
     );
   }
   /**
-   * delegate, mount 後に呼び出されます<nr>
+   * delegate, mount 後に呼び出されます<r>
    * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
    */
   componentDidMount() {
@@ -256,7 +256,9 @@ export class ComponentSingles extends React.Component {
   // ---------------------------------------------------
   // widget
   /**
-   * ComponentSinglesWidget を出力します
+   * ComponentSinglesWidget を出力します<br>
+   * 3 の倍数チェック or 強制出力フラッグで出力タイプを判断します<br>
+   * `SinglesManager.next` {@link SinglesManager} からタイプを取得します
    * @param {number} index 記事 index
    * @param {boolean} [strong=false] 強制出力フラッグ
    * @return {?XML} ComponentSinglesWidget {@Link ComponentSinglesWidget} を返します

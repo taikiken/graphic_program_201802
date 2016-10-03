@@ -98,6 +98,11 @@ export class SinglesManager {
 
     this[popularSymbol] = true;
 
+    /**
+     * オススメ記事・関連記事・人気記事 を払い出すとカウントアップします<br>
+     * 3 未満だと全て出力していないと判断可能です
+     * @type {number}
+     */
     this.count = 0;
 
     _instance = this;
