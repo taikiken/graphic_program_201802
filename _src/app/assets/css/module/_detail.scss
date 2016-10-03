@@ -571,3 +571,30 @@
   }
 }
 // .widget-postList
+
+
+
+
+
+// .video-js override
+.vjs-volume-level {
+  line-height: 10px;
+}
+
+.vjs-slider-bar {
+  &:before {
+    line-height: 12px;
+  }
+
+  &::after {
+    white-space: nowrap !important;
+  }
+}
+
+.vjs-mouse-display {
+  white-space: nowrap !important;
+}
+
+.vjs-remaining-time-display {
+  line-height: 30px;
+}
