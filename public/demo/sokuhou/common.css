@@ -21,5 +21,13 @@
     display:block;
   }
 
+  .fb-page fb_iframe_widget span {
+    width:100% !important;
+  }
+
+  .fb-page fb_iframe_widget span iframe {
+    width:100% !important;
+  }
+
 }
 
