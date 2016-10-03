@@ -46,14 +46,17 @@
 
 // .btn-readmore
 .btn-readmore {
-  cursor: pointer;
   margin: 30px -30px 0;
-  padding: 24px 30px;
-  border-top: 1px solid #eee;
-  text-align: center;
 
-  &:hover {
-    @include over-opacity;
+  &-link {
+    display: block;
+    padding: 24px 30px;
+    border-top: 1px solid #eee;
+    text-align: center;
+
+    &:hover {
+      @include over-opacity;
+    }
   }
 
   // .btn-readmore-label
