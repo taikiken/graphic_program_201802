@@ -12,22 +12,34 @@
 
 
 // app
-import {Empty} from '../../app/const/Empty';
+// import {Empty} from '../../app/const/Empty';
 
 // view
 import {View} from '../View';
 
+// data
 import {Safety} from '../../data/Safety';
 
+// dae
 import {RelatedDae} from '../../dae/RelatedDae';
 
+
+// component
+import { ComponentSingleRelated } from '../../component/singles/ComponentSingleRelated';
+
+
 // React
-let React = self.React;
+// let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 /**
- * 関連記事表示
- */
+ * 関連記事表示<br>
+ * desktop では使用しない
+ * <pre>
+ * desktop/p.php
+ * `_popIn_recommend` に JS で出力
+ * </pre>
+ * */
 export class ViewRelated extends View {
   /**
    * 関連記事, ViewSingle から呼び出されます
@@ -78,79 +90,85 @@ export class ViewRelated extends View {
 
     let element = this.element;
 
-    // React Class
-    let ArticleDom = React.createClass( {
-      propTypes: {
-        list: React.PropTypes.array.isRequired
-      },
-      getInitialState: function() {
-        return {
-          list: this.props.list
-        };
-      },
-      render: function() {
-
-        let list = this.state.list;
-
-        return (
-
-          <div className="related-post">
-            <div className="comment-heading">
-              <h2>関連ニュース</h2>
-            </div>
-
-            <ul className="board-small column2">
-              {
-                list.map( function( dae, i ) {
-
-                  /*
-                  let thumbnail = dae.media.images.thumbnail;
-                  // thumbnail = !!thumbnail ? thumbnail : Empty.IMG_SMALL;
-                  if ( !thumbnail ) {
-                    thumbnail = Empty.IMG_SMALL;
-                  } else if ( !Safety.isImg( thumbnail ) ) {
-                    // 画像ファイル名に拡張子がないのがあったので
-                    // 拡張子チェックを追加
-                    if ( !Safety.isGraph( thumbnail ) ) {
-                      thumbnail = Empty.IMG_SMALL;
-                    }
-                  }
-                  */
-                  let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
-
-                  return (
-                    <li className="board-item column2" key={'related-' + dae.id}>
-                      <a href={dae.url} id={'related-' + dae.id} className={'post post-' + i}>
-                        <figure className="post-thumb">
-                          <img src={thumbnail} alt={dae.title}/>
-                        </figure>
-                        <div className="post-data">
-                          <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
-                          <h3 className="post-heading">{dae.title}</h3>
-                          <p className="post-date">{dae.displayDate}</p>
-                        </div>
-                      </a>
-                    </li>
-                  );
-
-                } )
-              }
-            </ul>
-          </div>
-
-        );
-
-      },
-      updateList: function( list ) {
-        this.setState( { list: list } );
-      }
-    } );
+    // // React Class
+    // let ArticleDom = React.createClass( {
+    //   propTypes: {
+    //     list: React.PropTypes.array.isRequired
+    //   },
+    //   getInitialState: function() {
+    //     return {
+    //       list: this.props.list
+    //     };
+    //   },
+    //   render: function() {
+    //
+    //     let list = this.state.list;
+    //
+    //     return (
+    //
+    //       <div className="related-post">
+    //         <div className="comment-heading">
+    //           <h2>関連ニュース</h2>
+    //         </div>
+    //
+    //         <ul className="board-small column2">
+    //           {
+    //             list.map( function( dae, i ) {
+    //
+    //               /*
+    //               let thumbnail = dae.media.images.thumbnail;
+    //               // thumbnail = !!thumbnail ? thumbnail : Empty.IMG_SMALL;
+    //               if ( !thumbnail ) {
+    //                 thumbnail = Empty.IMG_SMALL;
+    //               } else if ( !Safety.isImg( thumbnail ) ) {
+    //                 // 画像ファイル名に拡張子がないのがあったので
+    //                 // 拡張子チェックを追加
+    //                 if ( !Safety.isGraph( thumbnail ) ) {
+    //                   thumbnail = Empty.IMG_SMALL;
+    //                 }
+    //               }
+    //               */
+    //               let thumbnail = Safety.image( dae.media.images.thumbnail, Empty.IMG_SMALL );
+    //
+    //               return (
+    //                 <li className="board-item column2" key={'related-' + dae.id}>
+    //                   <a href={dae.url} id={'related-' + dae.id} className={'post post-' + i}>
+    //                     <figure className="post-thumb">
+    //                       <img src={thumbnail} alt={dae.title}/>
+    //                     </figure>
+    //                     <div className="post-data">
+    //                       <p className={'post-category post-category-' + dae.category.slug}>{dae.category.label}</p>
+    //                       <h3 className="post-heading">{dae.title}</h3>
+    //                       <p className="post-date">{dae.displayDate}</p>
+    //                     </div>
+    //                   </a>
+    //                 </li>
+    //               );
+    //
+    //             } )
+    //           }
+    //         </ul>
+    //       </div>
+    //
+    //     );
+    //
+    //   },
+    //   updateList: function( list ) {
+    //     this.setState( { list: list } );
+    //   }
+    // } );
 
     // 関連記事 dom 生成
     if ( this._rendered === null ) {
 
+      // this._rendered = ReactDOM.render(
+      //   React.createElement( ArticleDom, { list: related } ),
+      //   element
+      // );
       this._rendered = ReactDOM.render(
-        React.createElement( ArticleDom, { list: related } ),
+        <ComponentSingleRelated
+          list={related}
+        />,
         element
       );
 

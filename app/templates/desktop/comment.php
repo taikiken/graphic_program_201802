@@ -1,15 +1,8 @@
-<?Php if ( !$page['theme']['images']['pc'] ) : ?>
-<div class="category-heading">
-  <h1>
-    <?php echo $page['category']['label']; ?>
-    <?php if ( isset($page['category']['title_img']) && $page['category']['title_img'] ) : ?>
-      <span class="category-heading-image">
-        <img src="<?php echo $page['category']['title_img']; ?>" alt="" />
-      </span>
-    <?php endif; ?>
-  </h1>
-</div><!-- /.category-heading -->
-<?php endif; ?>
+<?php
+
+include_once __DIR__.'/_category-heading.php';
+
+?>
 
 <div class="body-sec">
   <div class="body-sec-inner">

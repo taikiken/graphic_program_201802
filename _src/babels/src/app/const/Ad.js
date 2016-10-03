@@ -141,9 +141,10 @@ export class Ad {
   static makeStream( id:string, ad:string ):Element {
     let div = document.createElement('div');
     let script = document.createElement( 'script' );
-    // console.log( 'makeStream', ad );
-    // console.log( 'makeStream path', `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0` );
     script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=${ad}&targetID=${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`;
+    // @since 2016-10-03 changed
+    // @see https://github.com/undotsushin/undotsushin/issues/1125#issuecomment-251032265
+    // script.src = 'http://i.socdm.com/sdk/js/adg-script-loader.js?id=42708&targetID=adg_42708&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
     div.appendChild(script);
     // return script;
     return div;

@@ -75,6 +75,16 @@ export class Offset extends Action {
      * @protected
      */
     this._reloadFlag = false;
+    //
+    // /**
+    //  * JSON.request, 記事詳細, next が request を持っていないので保持する
+    //  * @type {{offset: Number, length: Number}}
+    //  * @since 2016-09-28
+    //  */
+    // this.request = {
+    //   offset,
+    //   length
+    // };
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -167,6 +177,12 @@ export class Offset extends Action {
     if ( this.hasNext() ) {
       method = Safety.string( method, this.method );
       this.ajax.start( this.url, method, this.boundSuccess, this.boundFail, this.resultClass );
+      //
+      // // @since 2016-09-28
+      // this.request = {
+      //   offset: this.offset,
+      //   length: this.length
+      // };
     }
   }
   /**
@@ -190,11 +206,10 @@ export class Offset extends Action {
    * @return {Boolean} 次があるかの真偽値を返します
    */
   hasNext():Boolean {
-
+    // console.log('hasNext', this.total, this.offset, this.url);
     // _total === -1 の時は常に true
     // total が offset（次の読み込み開始位置）より小さい時に true
-    return this._total < 0 ? true : this.offset < this.total;
-
+    return this.total < 0 ? true : this.offset < this.total;
   }
   /**
    * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します

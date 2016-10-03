@@ -151,6 +151,16 @@ let buildPath = ( root = '' ) => {
       new Queries()
     ),
     // --------------------------------------------
+    // 記事カテゴリー一覧
+    // /api/v1/category/[:category_slug]
+    // @since 2016-09-16
+    // 追加したけど要らなかったかも, `categories` を代用の様子
+    'category:slug': new Types(
+      new Type(`${API_PATH}/category`),
+      new Permalink(),
+      new Queries()
+    ),
+    // --------------------------------------------
     // home / self
     // /api/v1/articles/home[/|/pickup|/headline]
     'home': new Types(
@@ -187,6 +197,15 @@ let buildPath = ( root = '' ) => {
       new Type( `${API_PATH}/articles/${Path.ARTICLE_ID}` ),
       new Permalink( [ '*' ], true ),
       new Queries()
+    ),
+    // --------------------------------------------
+    // 次の記事詳細
+    // /api/v1/articles/{:article_id}/next?offset=NN&length=10
+    // @since 2016-09-24
+    'singles': new Types(
+      new Type(`${API_PATH}/articles/${Path.ARTICLE_ID}/next`),
+      new Permalink(['*'], true),
+      new Queries([new Query('offset', 'number', 0), new Query('length', 'Number', 10)])
     ),
     // --------------------------------------------
     // ブックマーク 登録

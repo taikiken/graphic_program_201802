@@ -72,15 +72,11 @@ export class OffsetAuth extends Offset {
    * @param {string} [method=this.method] request method GET|POST|DELETE|PUT...
    */
   next( method:string = this.method ):void {
-
     // next data があるかないかを調べます
     // next がある時は Ajax を実行します
-    if ( this.hasNext() ) {
-
+    if (this.hasNext()) {
       method = Safety.string( method, this.method );
-      this._ajax.start( this.url, method, this._boundSuccess, this._boundFail, this._resultClass, this._headers );
-
+      this.ajax.start(this.url, method, this.boundSuccess, this.boundFail, this.resultClass, this.headers);
     }
-
   }
 }

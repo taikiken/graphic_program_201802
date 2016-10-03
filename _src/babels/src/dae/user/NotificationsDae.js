@@ -28,12 +28,14 @@ export class NotificationsDae {
 
     let notifications = response.notifications;
     notifications = Safety.array( notifications );
-    let list = [];
-    notifications.forEach( function( notice ) {
-
-      list.push( new NoticeDae( notice ) );
-
-    } );
+    // let list = [];
+    // notifications.forEach( function( notice ) {
+    //
+    //   list.push( new NoticeDae( notice ) );
+    //
+    // } );
+    // @since 2016-09-20
+    const list = notifications.map((notice) => new NoticeDae(notice));
     /**
      * JSON response
      * @type {Object}

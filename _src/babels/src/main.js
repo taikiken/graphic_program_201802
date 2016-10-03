@@ -115,7 +115,12 @@ import {SPViewHeadLine} from './sp/view/home/SPViewHeadLine';
 import {SPViewNews} from './sp/view/home/SPViewNews';
 
 // category
-import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
+// @since 2016-09-20 remove
+// import {SPViewCategoryRoot} from './sp/view/category/SPViewCategoryRoot';
+// @since 2016-0920
+import { SPViewCategory } from './sp/view/category/SPViewCategory';
+// SPViewCategoryWithSlug が多分正解
+import { SPViewCategoryWithSlug } from './sp/view/category/SPViewCategoryWithSlug';
 
 // search
 import {SPViewSearch} from './sp/view/SPViewSearch';
@@ -130,7 +135,7 @@ import {SPViewHeaderSearch} from './sp/view/header/SPViewHeaderSearch';
 // single
 import {SPViewSingle} from './sp/view/SPViewSingle';
 import {SPViewSingleHeader} from './sp/view/single/SPViewSingleHeader';
-import {SPViewReadMore} from './sp/view/single/SPViewReadMore';
+import {SPViewContinueRead} from './sp/view/single/SPViewContinueRead';
 import {SPViewSingleRanking} from './sp/view/single/SPViewSingleRanking';
 import {SPViewSingleRecommend} from './sp/view/single/SPViewSingleRecommend';
 
@@ -235,7 +240,7 @@ let UT = {
       SPViewAppBanner,
       single: {
         SPViewSingleHeader,
-        SPViewReadMore,
+        SPViewContinueRead,
         SPViewSingleRanking,
         SPViewSingleRecommend
       },
@@ -247,7 +252,8 @@ let UT = {
         SPViewNews
       },
       category: {
-        SPViewCategoryRoot
+        SPViewCategory,
+        SPViewCategoryWithSlug
       },
       header: {
         SPViewHeaderUser,

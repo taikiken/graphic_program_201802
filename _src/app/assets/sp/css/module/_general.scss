@@ -9,207 +9,208 @@
 
 // board-large
 // 汎用 ニュース一覧
-.board-large {
-  @include clearfix;
-  padding-bottom: (40/2)+px;
-  background-color: #eee;
+// github issue#1010 で廃止
+// .board-large {
+//   @include clearfix;
+//   padding-bottom: (40/2)+px;
+//   background-color: #eee;
 
-  @at-root {
-    // &-column {
-    //   width: 340px;
+//   @at-root {
+//     // &-column {
+//     //   width: 340px;
 
-    //   &.column1 {
-    //     float: left;e
-    //   }
+//     //   &.column1 {
+//     //     float: left;e
+//     //   }
 
-    //   &.column2 {
-    //     float: right;
-    //   }
-    // } //.board-large-column
+//     //   &.column2 {
+//     //     float: right;
+//     //   }
+//     // } //.board-large-column
 
-    &-column {
-      padding-right: perCalc(20);
-      padding-left: perCalc(20);
-    }
-
-
-
-    .feature-user {
-      &.comment-item {
-        margin-right: perCalc(20);
-        margin-left: perCalc(20);
-        padding-top: 0;
-        border-top: none;
-        background-color: #f5f5f5;
-      }
-
-      .comment-user {
-        &-thumb, &-data {
-          display: inline-block;
-        }
-
-        &-link {
-          position: relative;
-        }
-
-        &-thumb {
-          position: absolute;
-          top: -(54/2)+px;
-          left: 0;
-          width: (110/2)+px;
-          height: (110/2)+px;
-          background-size: (110/2)+px;
-        }
-
-        &-data {
-          margin-left: (124/2)+px;
-        }
-
-        &-name {
-          margin-top: (10/2)+px;
-        }
-
-        &-name, &-job, .comment-date {
-          margin-left: 0;
-          font-size: fz(18/2);
-        }
-      }
-
-      .comment-content {
-        padding-right: (20/2)+px;
-        padding-left: (20/2)+px;
-        font-size: fz(20/2);
-      } //.comment-content
-
-      .comment-reaction {
-        padding-right: (20/2)+px;
-        padding-bottom: (20/2)+px;
-        padding-left: (20/2)+px;
-      }
-    } //.feature-user
+//     &-column {
+//       padding-right: perCalc(20);
+//       padding-left: perCalc(20);
+//     }
 
 
 
-    .commented-user {
-      margin-left: perCalc(20);
-      padding-left: (114/2)+px;
-      padding-bottom: (4/2)+px;
-      min-height: (50/2)+px;
+//     .feature-user {
+//       &.comment-item {
+//         margin-right: perCalc(20);
+//         margin-left: perCalc(20);
+//         padding-top: 0;
+//         border-top: none;
+//         background-color: #f5f5f5;
+//       }
 
-      &-item {
-        float: left;
+//       .comment-user {
+//         &-thumb, &-data {
+//           display: inline-block;
+//         }
 
-        & + & {
-          margin-left: (4/2)+px;
-        }
-      }
+//         &-link {
+//           position: relative;
+//         }
 
-      &-thumb {
-        @include link-decoration(null, null, none, none);
-        display: block;
-        width: (50/2)+px;
-        height: (50/2)+px;
-        background: url(/assets/sp/images/common/thumb-user.png) 0 0 no-repeat;
-        background-size: (50/2)+px;
+//         &-thumb {
+//           position: absolute;
+//           top: -(54/2)+px;
+//           left: 0;
+//           width: (110/2)+px;
+//           height: (110/2)+px;
+//           background-size: (110/2)+px;
+//         }
 
-        &.user-logged-in {
-          background: none;
-        }
-      }
+//         &-data {
+//           margin-left: (124/2)+px;
+//         }
 
-      &-andmore {
-        line-height: 25px;
-        margin-left: 5px;
-        font-size: fz(20/2);
-      }
-    } //.commented-user
-  }
+//         &-name {
+//           margin-top: (10/2)+px;
+//         }
 
-  .board-item {
-    position: relative;
-    margin: (20/2)+px perCalc(20) 0;
-    padding-bottom: (20/2)+px;
-    background-color: #fff;
+//         &-name, &-job, .comment-date {
+//           margin-left: 0;
+//           font-size: fz(18/2);
+//         }
+//       }
 
-    .post {
-      &-thumb {}
+//       .comment-content {
+//         padding-right: (20/2)+px;
+//         padding-left: (20/2)+px;
+//         font-size: fz(20/2);
+//       } //.comment-content
 
-      &-heading {
-        line-height: lh(36, 26);
-        font-size: fz(26/2);
-      }
+//       .comment-reaction {
+//         padding-right: (20/2)+px;
+//         padding-bottom: (20/2)+px;
+//         padding-left: (20/2)+px;
+//       }
+//     } //.feature-user
 
-      &-data {
-        padding: (20/2)+px;
-      }
 
-      [ class^="post-label_" ] {}
 
-      &-label_recommend {
-        @extend .sp-sprite-common;
-        @include sprite( $common-icon-recommend, inline-block );
-        @include hide-text;
-        vertical-align: middle;
-      }
+//     .commented-user {
+//       margin-left: perCalc(20);
+//       padding-left: (114/2)+px;
+//       padding-bottom: (4/2)+px;
+//       min-height: (50/2)+px;
 
-      &-category {
-        display: inline-block;
-      }
+//       &-item {
+//         float: left;
 
-      &-date {
-        margin-top: .25em;
-      }
-    } //.board-large .post common
+//         & + & {
+//           margin-left: (4/2)+px;
+//         }
+//       }
 
-    .post {
-      @include clearfix;
+//       &-thumb {
+//         @include link-decoration(null, null, none, none);
+//         display: block;
+//         width: (50/2)+px;
+//         height: (50/2)+px;
+//         background: url(/assets/sp/images/common/thumb-user.png) 0 0 no-repeat;
+//         background-size: (50/2)+px;
 
-      &-thumb {
-        float: right;
-        width: (210/2)+px;
-      }
+//         &.user-logged-in {
+//           background: none;
+//         }
+//       }
 
-      &-heading {
-        min-height: (130/2)+px;
-        padding: perCalc(20);
-        padding-bottom: 0;
-      }
+//       &-andmore {
+//         line-height: 25px;
+//         margin-left: 5px;
+//         font-size: fz(20/2);
+//       }
+//     } //.commented-user
+//   }
 
-      &-data {
-        clear: both;
-      }
+//   .board-item {
+//     position: relative;
+//     margin: (20/2)+px perCalc(20) 0;
+//     padding-bottom: (20/2)+px;
+//     background-color: #fff;
 
-      &-category {}
-      &-date {}
-    }
+//     .post {
+//       &-thumb {}
 
-    .type-movie {
-      .post {
-        &-thumb {
-          float: none;
-          width: 100%;
-        }
+//       &-heading {
+//         line-height: lh(36, 26);
+//         font-size: fz(26/2);
+//       }
 
-        &-heading {
-          min-height: initial;
-          min-height: auto;
-          padding: (20/2)+px (20/2)+px 0;
-        }
+//       &-data {
+//         padding: (20/2)+px;
+//       }
 
-        &-data {}
+//       [ class^="post-label_" ] {}
 
-        &-category {}
+//       &-label_recommend {
+//         @extend .sp-sprite-common;
+//         @include sprite( $common-icon-recommend, inline-block );
+//         @include hide-text;
+//         vertical-align: middle;
+//       }
 
-        &-date {}
-      }
-    } //.board-large .post.type-movie
-  } //.board-item
+//       &-category {
+//         display: inline-block;
+//       }
 
-  .news-ad {
-    margin: (20/2)+px perCalc(20) 0;
-  }
+//       &-date {
+//         margin-top: .25em;
+//       }
+//     } //.board-large .post common
 
-} //.board-large
+//     .post {
+//       @include clearfix;
+
+//       &-thumb {
+//         float: right;
+//         width: (210/2)+px;
+//       }
+
+//       &-heading {
+//         min-height: (130/2)+px;
+//         padding: perCalc(20);
+//         padding-bottom: 0;
+//       }
+
+//       &-data {
+//         clear: both;
+//       }
+
+//       &-category {}
+//       &-date {}
+//     }
+
+//     .type-movie {
+//       .post {
+//         &-thumb {
+//           float: none;
+//           width: 100%;
+//         }
+
+//         &-heading {
+//           min-height: initial;
+//           min-height: auto;
+//           padding: (20/2)+px (20/2)+px 0;
+//         }
+
+//         &-data {}
+
+//         &-category {}
+
+//         &-date {}
+//       }
+//     } //.board-large .post.type-movie
+//   } //.board-item
+
+//   .news-ad {
+//     margin: (20/2)+px perCalc(20) 0;
+//   }
+
+// } //.board-large
 
 
 
@@ -217,7 +218,9 @@
 
 // board-small
 // 汎用 ニュース一覧
-.board-small {
+// github issue#1010 で廃止
+// .board-small {
+.board {
   @include clearfix;
   // margin-top: (20/2)+px;
   // border-top: 1px solid $border-primary-color;
@@ -260,19 +263,36 @@
 
     &-thumb {
       float: left;
-      width: (120/2)+px;
-      height: (120/2)+px;
+      width: (280/2)+px;
+      height: (158/2)+px;
       margin-right: (20/2)+px;
-      background: #ccc url(/assets/sp/images/common/thumb-noimage-120x120.png) center center no-repeat;
-      background-size: (120/2)+px;
+      background: #ccc url(/assets/sp/images/common/thumb-noimage-16x9-s.png) center center no-repeat;
+      background-size: 100%;
+      border-radius: (6/2)+px;
+    }
+
+    &-data {
+      overflow: hidden;
+    }
+
+    // .post-label_recommend
+    &-label_recommend {
+      @extend .sp-sprite-common;
+      @include sprite( $common-icon-recommend, inline-block );
+      @include hide-text;
+      vertical-align: middle;
+      margin-right: 5px;
     }
 
     &-category {
-      margin-top: .5em;
+      display: inline-block;
+      // margin-top: 0.25em;
     }
 
-    &-data {}
-  } //.board-small .post
+    &-date {
+      margin-top: 0.25em;
+    }
+  } //.board .post
 
   .btn-bookmark {
     // float: right;
@@ -286,11 +306,20 @@
 
 
 
-[ class^="board-" ] {
+// [ class^="board-" ] {
+.board {
+  &-item {
+    border-bottom: 1px solid $border-primary-color;
+    padding-right: perCalc(20);
+    padding-left: perCalc(20);
+  }
+
   .post {
     @include link-decoration(#333, #333, none, none);
     @include clearfix;
     display: block;
+    padding: (20/2)+px 0;
+    overflow: hidden;
 
     &.type-movie {
       .post-thumb-overlay-movie {
@@ -299,9 +328,16 @@
     }
 
     &-thumb {
+      position: relative;
+      overflow: hidden;
+
       &-overlay-movie {
-        display: none;
+        display: block;
         position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
       }
     }
 
@@ -310,7 +346,7 @@
     &-heading {
       line-height: lh(36, 24);
       font-weight: bold;
-      font-size: fz(24/2);
+      font-size: fz(26/2);
     }
 
     &-category {
@@ -333,6 +369,97 @@
       word-break: break-all
     }
   } // .post
+}
+
+
+
+
+
+// headline/latest
+// ヘッドライン/新着記事
+.headline,
+.latest {
+  .board-small {
+    .board-item {
+      // &:nth-child(1), &:nth-child(2) {
+      //   border-top: none;
+      // }
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .post {
+        &-thumb {}
+        &-heading {}
+        &-category {}
+        &-data {}
+
+        &:hover {
+          .post-thumb {}
+          .post-heading {}
+        }
+      }
+    } //.post-list-item
+  }
+
+  //.headline-heading
+  &-heading {
+    background-color: $highlight-secondary-color;
+    text-align: center;
+
+    //.headline-heading-title
+    &-title {
+      display: inline-block;
+      line-height: (60/2)+px;
+      color: #fff;
+      font-weight: bold;
+      font-size: fz(24/2);
+
+      &:before {
+        content: '';
+        @extend .sp-sprite-list;
+        @include sprite( $list-icon-heading, inline-block );
+        @include hide-text;
+        margin-right: (12/2)+px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.latest {
+  //.headline-heading
+  &-heading {
+    background-color: $highlight-color;
+  }
+}
+
+.headline-outer {
+  .sponsor-link {
+    padding-right: perCalc(20);
+    padding-left: perCalc(20);
+    border-top: 1px solid $border-primary-color;
+
+    .adgLink,
+    .adsWrapper {
+      height: auto !important;
+    }
+
+    .adsImgContainer,
+    .adsBody {
+      vertical-align: top !important;
+    }
+
+    .adsImgContainer {
+      width: 70px !important;
+      height: auto !important;
+      min-height: 60px;
+      padding: 0 !important;
+      padding-right: 10px !important;
+    }
+
+    .adsBody {}
+  }
 }
 
 
@@ -396,6 +523,12 @@
 
 // board-btn-viewmore
 // VIEW MORE (もっと見る)ボタン
+#board-container-more {
+  .loading-root {
+    padding-top: 0;
+  }
+}
+
 .board-btn-viewmore {
   padding-top: (20/2)+px;
 
@@ -405,16 +538,49 @@
     margin-left: perCalc(20);
     padding: (32/2)+px 0;
     border-radius: 5px;
-    background-color: $highlight-color;
+    // background-color: $highlight-color;
 
     span {
-      @extend .sp-sprite-common;
-      @include sprite( $common-btn-viewmore );
       @include hide-text;
-      margin: 0 auto;
     }
   }
 } //.board-btn-viewmore
+
+.loading-root {
+  position: relative;
+
+  .loading-spinner {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0;
+
+    //background: rgba(255, 255, 255, 0.7);
+    background: url("/assets/sp/images/common/preloader.gif") no-repeat center center;
+    background-size: (60/2)+px;
+    opacity: 0;
+  }
+
+  &.loading {
+    min-width: 30px;
+    min-height: 30px;
+    .loading-spinner {
+      height: 100%;
+      opacity: 1;
+    }
+  }
+
+  &.disable {
+    .loading-spinner {
+      height: 100%;
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
 
 
 
@@ -613,14 +779,15 @@
 
 // mod-headingA01
 .mod-headingA01 {
-  padding: (14/2)+px;
-  border-left: (6/2)+px solid $highlight-color;
-  background-color: #333;
+  padding: (20/2)+px perCalc(20) 0;
+  // border-left: (6/2)+px solid $highlight-color;
+  // background-color: #ddd;
 
   @for $i from 1 through 6 {
     h#{$i} {
-      color: #fff;
+      color: #333;
       font-weight: bold;
+      font-size: (24/2)+px;
     }
   }
 }

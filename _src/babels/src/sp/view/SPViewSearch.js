@@ -12,6 +12,7 @@
 /* eslint no-unused-vars: [0, {"args": "after-used"}] */
 
 import {SPViewArchive} from './SPViewArchive';
+import { SPViewArchiveInfinite } from './SPViewArchiveInfinite';
 
 // app
 import {User} from '../../app/User';
@@ -33,7 +34,9 @@ let ReactDOM = self.ReactDOM;
 /**
  * SP 検索結果, keyword 検索
  */
-export class SPViewSearch extends SPViewArchive {
+// export class SPViewSearch extends SPViewArchive {
+// @since 2016-09-16 parent class changed
+export class SPViewSearch extends SPViewArchiveInfinite {
   /**
    * SP 検索結果
    * @param {string} word 検索キーワード

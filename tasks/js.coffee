@@ -94,6 +94,15 @@ gulp.task 'js:copy', ->
 # dev
 gulp.task 'js:dev', ( cb ) ->
   runSequence(
+#    'js:hint'
+    'js:copy'
+    cb
+  )
+  return
+
+# dev
+gulp.task 'js:dev:hint', ( cb ) ->
+  runSequence(
     'js:hint'
     'js:copy'
     cb
@@ -103,7 +112,7 @@ gulp.task 'js:dev', ( cb ) ->
 # build
 gulp.task 'js:build', ( cb ) ->
   runSequence(
-    'js:hint'
+#    'js:hint'
     'js:min'
     cb
   )

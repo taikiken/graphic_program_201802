@@ -13,6 +13,7 @@
 
 // parent
 import {ViewArchiveMasonry} from './ViewArchiveMasonry';
+import { ViewArchiveMasonryInfinite } from './ViewArchiveMasonryInfinite';
 
 // action
 import {SearchAuth} from '../action/search/SearchAuth';
@@ -35,8 +36,11 @@ let ReactDOM = self.ReactDOM;
 
 /**
  * 検索ページ, keyword 検索
+ *
+ * @since 2016-09-16
  */
-export class ViewSearch extends ViewArchiveMasonry {
+// export class ViewSearch extends ViewArchiveMasonry {
+export class ViewSearch extends ViewArchiveMasonryInfinite {
   /**
    * 検索ページ 表示
    * @param {string} word 検索キーワード

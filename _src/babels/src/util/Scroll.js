@@ -14,12 +14,30 @@
 import {EventDispatcher} from '../event/EventDispatcher';
 
 // tween
-let greensock = self.com.greensock;
-let TweenLite = greensock.TweenLite;
-let easing = greensock.easing;
+const greensock = self.com.greensock;
+const TweenLite = greensock.TweenLite;
+const easing = greensock.easing;
 
-let _symbol = null;
+/**
+ * Singleton を保証するために constructor 引数にする Symbol
+ * @type {Symbol}
+ * @private
+ */
+const _symbol = Symbol();
+
+/**
+ * Scroll instance
+ * @type {?Scroll}
+ * @static
+ * @private
+ */
 let _instance = null;
+/**
+ * window.onscroll 監視を始めたかの真偽値
+ * @type {boolean}
+ * @static
+ * @private
+ */
 let _watch = false;
 
 /**
@@ -31,22 +49,29 @@ export class Scroll extends EventDispatcher {
    * @param {Symbol} target Singleton を実現するための private symbol
    * @returns {Scroll} Scroll instance を返します
    */
-  constructor( target:Symbol ) {
-    if ( _symbol !== target ) {
-
+  constructor(target:Symbol) {
+    if (_symbol !== target) {
       throw new Error( 'Scroll is singleton Class. not use new Scroll(). instead Scroll.factory()' );
-
     }
 
-    if ( _instance === null ) {
-      super();
-      _instance = this;
-      /**
-       * onScroll 関数 を bind しpublic 変数にします
-       * @type {Function}
-       */
-      this.boundScroll = this.onScroll.bind( this );
+    if(_instance !== null) {
+      return _instance;
     }
+
+    super();
+    _instance = this;
+    /**
+     * onScroll 関数 を bind しpublic 変数にします
+     * @type {Function}
+     */
+    this.boundScroll = this.onScroll.bind( this );
+
+    /**
+     * 前回{y}値
+     * @type {number}
+     * @default -1
+     */
+    this.previous = -1;
 
     return _instance;
   }
@@ -66,22 +91,47 @@ export class Scroll extends EventDispatcher {
    * window scroll 監視を止めます
    */
   stop():void {
+    // @TODO
+    // 2016-09-16
+    // listener がいなかったら止める
     _watch = false;
     window.removeEventListener( 'scroll', this.boundScroll );
   }
   /**
-   * window.onscroll event handler
-   * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します
-   * @param {Event} event window scroll event
+   * window.onscroll event handler<br>
+   * window scroll event 発生後に scroll top 位置をもたせた Scroll.SCROLL custom event を発火します<br>
+   * {{type: string, originalEvent: Event, y: number, height: number, moving: number, changed: boolean}} event object
+   * @param {Event} originalEvent window scroll event
    */
-  onScroll( event:Event ):void {
-    this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
+  onScroll( originalEvent:Event ):void {
+    // this.dispatch( { type: Scroll.SCROLL, originalEvent: event, y: Scroll.y } );
+    // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
+    const previous = this.previous;
+    const type = Scroll.SCROLL;
+    const y = Scroll.y;
+    const height = window.innerHeight;
+    // @type {number} - 正の時: scroll down
+    const moving = previous - y;
+    const changed = moving !== 0;
+
+    this.previous = y;
+    this.dispatch({ type, originalEvent, y, height, moving, changed });
   }
   /**
    * 強制的に scroll event を発生させます
    */
   fire():void {
-    this.dispatch( { type: Scroll.SCROLL, originalEvent: null, y: Scroll.y } );
+    // this.dispatch( { type: Scroll.SCROLL, originalEvent: null, y: Scroll.y } );
+    // @since 2016-09-30, 戻り値に window.innerHeight, moving, changed 追加
+    const previous = this.previous;
+    const type = Scroll.SCROLL;
+    const y = Scroll.y;
+    const height = window.innerHeight;
+    // @type {number} - 正の時: scroll down
+    const moving = previous - y;
+
+    // this.previous = y;
+    this.dispatch({ type, y, height, moving, originalEvent: null, changed: true });
   }
   // ---------------------------------------------------
   //  static GETTER / SETTER
@@ -109,7 +159,6 @@ export class Scroll extends EventDispatcher {
   static set y( top:Number ):void {
     window.scrollTo( 0, top );
   }
-
   /**
    * scroll animation を行います
    * @param {Number} top 目標位置
@@ -191,13 +240,9 @@ export class Scroll extends EventDispatcher {
    * @return {Scroll} Scroll instance を返します
    */
   static factory():Scroll {
-
-    if ( _instance === null ) {
-
-      _instance = new Scroll( _symbol );
-
+    if (_instance === null) {
+      _instance = new Scroll(_symbol);
     }
-
     return _instance;
   }
 }

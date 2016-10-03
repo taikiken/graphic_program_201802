@@ -77,14 +77,17 @@ export class Result {
    * @return {Number|undefined} 取得 JSON response.articles を返します、見つからない時は undefined を返します
    */
   get total():Number {
-    let response = this.response;
-    let total;
+    const response = this.response;
+    // let total;
 
-    if ( !!response && response.hasOwnProperty( 'count' ) ) {
-      total = parseInt( response.count, 10 );
+    // if ( !!response && response.hasOwnProperty( 'count' ) ) {
+    //   total = parseInt( response.count, 10 );
+    // }
+    if (!response || !response.count) {
+      return 0;
     }
 
-    return total;
+    return parseInt(response.count, 10);
   }
   /**
    * alias total, 取得 JSON response.count

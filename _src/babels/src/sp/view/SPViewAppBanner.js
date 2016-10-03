@@ -41,27 +41,23 @@ export class SPViewAppBanner extends React.Component {
     super(props);
     /**
      * default property
-     * @property
      * @type {{show: boolean}}
      */
     this.state = { show: props.show };
     /**
      * bind ずみ onClose event handler<br>
      * div.header-appbnr-btn-close click に使用します
-     * @property
      * @type {Function}
      */
     this.boundClose = this.onClose.bind(this);
-    /**
-     * bind ずみ Scroll.SCROLL event handler<br>
-     * scroll を監視し header-sticky を fixed にするか relative にするかを決めます
-     * @property
-     * @type {Function}
-     */
-    this.boundScroll = this.onScroll.bind(this);
+    // /**
+    //  * bind ずみ Scroll.SCROLL event handler<br>
+    //  * scroll を監視し header-sticky を fixed にするか relative にするかを決めます
+    //  * @type {Function}
+    //  */
+    // this.boundScroll = this.onScroll.bind(this);
     /**
      * Scroll instance
-     * @property
      * @type {Scroll}
      */
     this.scroll = Scroll.factory();
@@ -100,31 +96,20 @@ export class SPViewAppBanner extends React.Component {
     this.setState({ show });
   }
   /**
-   * Scroll.SCROLL event handler
-   * @param {Object} event croll.SCROLL event Object
-   */
-  onScroll(event) {
-    if (event.y >= 85) {
-      SPViewAppBanner.visible(false);
-    } else {
-      SPViewAppBanner.visible(true);
-    }
-  }
-  /**
    * Scroll.SCROLL 監視を開始します
    */
   activate() {
     this.dispose();
 
     const scroll = this.scroll;
-    scroll.on(Scroll.SCROLL, this.boundScroll);
+    scroll.on(Scroll.SCROLL, SPViewAppBanner.onScroll);
     scroll.start();
   }
   /**
    * Scroll.SCROLL 監視を止めます
    */
   dispose() {
-    this.scroll.off(Scroll.SCROLL, this.boundScroll);
+    this.scroll.off(Scroll.SCROLL, SPViewAppBanner.onScroll);
   }
   /**
    * unmount 時に dispose します
@@ -134,7 +119,7 @@ export class SPViewAppBanner extends React.Component {
   }
   /**
    * JSX を render します
-   * @return {?*} render 結果を返します。非表示時には null を返します
+   * @return {?XML} render 結果を返します。非表示時には null を返します
    */
   render() {
     if (!this.state.show) {
@@ -153,6 +138,22 @@ export class SPViewAppBanner extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * Scroll.SCROLL event handler
+   * @param {Object} events Scroll.SCROLL event Object
+   * @since 2-16-09-30 static へ変更
+   */
+  static onScroll(events) {
+    if (events.y >= 85) {
+      SPViewAppBanner.visible(false);
+    } else {
+      SPViewAppBanner.visible(true);
+    }
+  }
+  /**
+   * document.body に `.appbnr-invisible` を追加・削除します
+   * @param {boolean} view true の時に `.appbnr-invisible` を削除します
+   */
   static visible(view:boolean = false) {
     if (view) {
       Sagen.Dom.removeClass(document.body, 'appbnr-invisible');
@@ -176,9 +177,9 @@ export class SPViewAppBanner extends React.Component {
    * Cookie.APP_BANNER が無い時 SPViewAppBanner を render しマウントします
    * @param {Element} element render root Element
    * @param {boolean} [visible=false] render root Element
-   * @return {boolean} mount すると true を返します
+   * @return {Boolean} mount すると true を返します
    */
-  static init(element, visible = false):boolean {
+  static init(element, visible = false):Boolean {
     const has = Cookie.has(Cookie.APP_BANNER);
     if (!has) {
       SPViewAppBanner.enable();
@@ -192,10 +193,21 @@ export class SPViewAppBanner extends React.Component {
 }
 
 // property
+/**
+ * プロパティ
+ * @static
+ * @type {{show: boolean}}
+ */
 SPViewAppBanner.propTypes = {
   show: React.PropTypes.bool
 };
+
 // default property
+/**
+ * デフォルトプロパティ
+ * @static
+ * @type {{show: boolean}}
+ */
 SPViewAppBanner.defaultProps = {
   show: false
 };

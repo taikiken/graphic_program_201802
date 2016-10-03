@@ -57,7 +57,7 @@
       </div><!-- /.head-sec-inner -->
     </header><!-- /.head-sec -->
 
-    <div class="head-search enable">
+    <div class="head-search disable">
       <form action="">
         <input id="head-search" nama="head-search" type="text" placeholder="記事を検索">
         <input type="submit" value="検索">
@@ -92,7 +92,7 @@
       </div><!-- /.gnav-sec-inner -->
     </nav><!-- /.gnav-sec -->
 
-    <div class="dialogue-notice error">
+    <div class="dialogue-notice error hide">
       <div class="dialogue-notice-inner">
         <div class="dialogue-notice-info">
           <p>パスワードが違います</p>
@@ -106,127 +106,148 @@
     <div class="body-sec-inner">
       <section class="main-sec">
         <div class="category-container">
-          <div class="archive-tab">
-            <nav data-reactroot="" class="lnav fixed-top latest">
-              <ul class="lnav-list">
-                <li class="lnav-item"><a href="#latest" class="lnav-link lnav-link_new"><span class="lnav-icon">新着</span></a></li>
-                <li class="lnav-item"><a href="#ranking" class="lnav-link lnav-link_popular"><span class="lnav-icon">人気</span></a></li>
-                <li class="lnav-item"><a href="#videos" class="lnav-link lnav-link_movie"><span class="lnav-icon">動画</span></a></li>
-              </ul>
-            </nav>
-          </div><!-- /.archive-tab -->
+          <div class="headline">
+            <div class="headline-heading">
+              <h2 class="headline-heading-title">ヘッドラインニュース</h2>
+            </div>
 
-          <div class="archive-container latest">
-            <div class="archive-latest board-large">
-              <div class="archive-latest-container">
-                <div class="board-stack">
-                  <div class="archive-article">
-                    <div class="board-item">
-                      <a class="post" href="hoge">
-                        <figure class="post-thumb">
-                          <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-16x9-play.png" alt="">
-                          <img src="/assets/images/dummy/thumb-340x191_1.jpg" alt="">
-                        </figure>
-                        <h2 class="post-heading">全角３９文字タイトルが入りますタイトルが入りますタイトルが入りますタイトルが…</h2>
-                        <div class="post-data">
-                          <p class="post-category">海外サッカー</p>
-                          <p class="post-date">12月18日(金) 22:04</p>
-                          <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
-                        </div>
-                      </a>
+            <div class="board">
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_1.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    <img src="/assets/sp/images/common/thumb-16x9-play-s.png" alt="" class="post-thumb-overlay-movie">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <p class="post-category">野球</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_2.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
+                    <p class="post-category">格闘技 オリンピック</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <p class="post-category">エクストリームスポーツ</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_3.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <p class="post-category">ラグビー</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_4.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <p class="post-category">モータースポーツ</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+            </div><!-- /.board -->
+          </div><!-- /.headline -->
 
-                      <div class="commented-user">
-                        <ul class="commented-user-list">
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                        </ul>
-                        <span class="commented-user-andmore">+9999</span>
-                      </div>
+          <div class="latest">
+            <div class="latest-heading">
+              <h2 class="latest-heading-title">新着記事</h2>
+            </div>
 
-                      <div class="feature-user comment-item">
-                        <figure class="comment-user">
-                          <a class="comment-user-link" href="foo">
-                            <span class="comment-user-thumb">&nbsp;</span>
-                            <figcaption class="comment-user-data">
-                              <p class="comment-user-name">山田 太郎</p>
-                              <p class="comment-user-job">スポーツライター</p>
-                            </figcaption>
-                          </a>
-                        </figure>
-
-                        <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
-
-                        <div class="comment-reaction">
-                          <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
-                          <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
-                        </div>
-                      </div><!-- /.feature-user -->
-                    </div><!-- /.board-item -->
-                  </div><!-- /.archive-article -->
-
-                  <div class="archive-article">
-                    <div class="board-item">
-                      <a class="post type-movie" href="hoge">
-                        <figure class="post-thumb">
-                          <img class="post-thumb-overlay-movie" src="/assets/images/common/thumb-16x9-play.png" alt="">
-                          <img src="/assets/images/dummy/thumb-340x191_2.jpg" alt="">
-                        </figure>
-                        <h2 class="post-heading">全角３２文字タイトルが入りますタイトルが入りますタイトルが入り…</h2>
-                        <div class="post-data">
-                          <p class="post-category">海外サッカー</p>
-                          <p class="post-date">12月18日(金) 22:04</p>
-                          <p class="post-excerpt-text">複数のクラブからコンタクトがあったアンチェロッティは、今シーズン限りでのペップ退任が濃厚となったバイエルンと3年契約と結ぶ見込。</p>
-                        </div>
-                      </a>
-
-                      <div class="commented-user">
-                        <ul class="commented-user-list">
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                          <li class="commented-user-item"><a class="commented-user-thumb" href="hoge">&nbsp;</a></li>
-                        </ul>
-                        <span class="commented-user-andmore">+9999</span>
-                      </div>
-
-                      <div class="feature-user comment-item">
-                        <figure class="comment-user">
-                          <a class="comment-user-link" href="foo">
-                            <span class="comment-user-thumb">&nbsp;</span>
-                            <figcaption class="comment-user-data">
-                              <p class="comment-user-name">山田 太郎</p>
-                              <p class="comment-user-job">スポーツライター</p>
-                            </figcaption>
-                          </a>
-                        </figure>
-
-                        <p class="comment-content">全角５２文字コメントが入りますコメントが入りますコメントが入りますコメントが入りコメントが入りますコメ…</p>
-
-                        <div class="comment-reaction">
-                          <a class="comment-reaction-btn comment-reaction-like active" href="#"><i></i>99999</a>
-                          <a class="comment-reaction-btn comment-reaction-dislike" href="#"><i></i>99999</a>
-                        </div>
-                      </div><!-- /.feature-user -->
-                    </div><!-- /.board-item -->
-                  </div><!-- /.archive-article -->
-                </div><!-- /.board-stack -->
-              </div><!-- /.archive-latest-container -->
-
-              <div class="archive-latest-container-more">
-                <div class="board-btn-viewmore"><a class="board-btn-viewmore-link" href="hoge"><span>VIEW MORE</span></a></div>
-              </div><!-- /.archive-latest-container-more -->
-            </div><!-- /.archive-latest -->
-
-          </div><!-- /.archive-container -->
-
-
+            <div class="board">
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_1.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                    <img src="/assets/sp/images/common/thumb-16x9-play-s.png" alt="" class="post-thumb-overlay-movie">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <i class="post-label_recommend">おすすめ記事</i>
+                    <p class="post-category">野球</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_2.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
+                    <i class="post-label_recommend">おすすめ記事</i>
+                    <p class="post-category">格闘技 オリンピック</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <p class="post-category">エクストリームスポーツ</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_3.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <p class="post-category">ラグビー</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+              <div class="board-item">
+                <a class="post" href="hoge">
+                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_4.jpg') center center / cover no-repeat;">
+                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
+                  </figure>
+                  <div class="post-data">
+                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
+                    <p class="post-category">モータースポーツ</p>
+                    <p class="post-date">12月18日(金) 22:04</p>
+                  </div><!-- /.post-data -->
+                </a>
+              </div>
+            </div><!-- /.board -->
+          </div><!-- /.latest -->
         </div><!-- /.category-container -->
-
-
       </section><!-- /.main-sec -->
 
     </div>

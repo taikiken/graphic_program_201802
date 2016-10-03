@@ -125,6 +125,23 @@ export class ViewRanking extends View {
   set detail( bool:Boolean ):void {
     this._detail = bool;
   }
+  // @since 2016-09-16
+  /**
+   * response.request object
+   * @since 2016-09-16
+   * @return {?Object} response.request objectを返します
+   */
+  get request():Object {
+    return this._request;
+  }
+  /**
+   * response.request object を設定します
+   * @since 2016-09-16
+   * @param {Boolean} request response.request object
+   */
+  set request(request:Object):void {
+    this._request = request;
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------

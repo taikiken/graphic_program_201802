@@ -97,6 +97,7 @@ gulp.task 'css:dev', ->
 ##    sourceRoot: ['./_src/app', './_src/scss']
 ##    sourceRoot: ['../../../app', '../../../scss']
 #  }
+  .pipe $.replaceTask patterns: patterns
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** css:dev ***'
@@ -109,7 +110,8 @@ gulp.task 'css:build', ->
   .pipe $.sass( precision: 10 ).on 'error', $.sass.logError
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
   .pipe $.replaceTask patterns: patterns
-  .pipe $.if '*.css' && compress.css, $.cssnano()
+  # http://cssnano.co/optimisations/zindex
+  .pipe $.if '*.css' && compress.css, $.cssnano zindex: false
   .pipe gulp.dest tmp
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** css:build ***'
