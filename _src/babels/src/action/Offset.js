@@ -206,11 +206,10 @@ export class Offset extends Action {
    * @return {Boolean} 次があるかの真偽値を返します
    */
   hasNext():Boolean {
-
+    console.log('hasNext', this.total, this.offset, this.url);
     // _total === -1 の時は常に true
     // total が offset（次の読み込み開始位置）より小さい時に true
-    return this._total < 0 ? true : this.offset < this.total;
-
+    return this.total < 0 ? true : this.offset < this.total;
   }
   /**
    * Ajax success callback, update()を実行し offset 値をカウントアップし callback method があれば実行します

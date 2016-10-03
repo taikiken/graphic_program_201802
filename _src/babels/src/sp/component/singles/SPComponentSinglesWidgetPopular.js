@@ -18,6 +18,7 @@ import { SinglesManager } from '../../../ui/SinglesManager';
 
 // React
 const React = self.React;
+const ReactDOM = self.ReactDOM;
 
 /**
  * SP: 記事詳細「次の記事一覧」人気記事を出力します
@@ -41,42 +42,17 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
      * @type {SinglesManager}
      */
     this.manager = SinglesManager.factory();
-  }
-  /**
-   * 9 以上の 3 の倍数で `div.singles-popular-containers` 親コンテナ出力します
-   * @return {?XML} `div.singles-popular-containers` or null を返します
-   */
-  render() {
-    const props = this.props;
 
-    // 強制出力フラッグ ON
-    if (props.strong) {
-      return SPComponentSinglesWidgetPopular.build();
-    }
+    this.id = '';
 
-    // 0 始まり index を
-    // 3 の倍数チェックのために 1 足します
-    // `x % 3 === 0` するために
-    const index = props.index + 1;
-
-    // 3 の倍数必須
-    if (index % 3 !== 0) {
-      return null;
-    }
-
-    // // 9未満では出力しない
-    // if (index < 9) {
-    //   return null;
-    // }
-
-    return SPComponentSinglesWidgetPopular.build();
+    this.popular = null;
   }
   /**
    * delegate, マウント後に呼び出されます<br>
    * `SPViewSinglesPopular` instance を作成し `start` を実行します {@link SPViewSinglesPopular}
    * */
   componentDidMount() {
-    // this.props.callback(View.DID_MOUNT);
+    console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.view, this.refs.popular);
     if (this.view === null && !!this.refs.popular) {
       // // 人気記事は「次の記事」 9 件以降で 3件毎に登場する
       // const index = this.props.index + 1;
@@ -102,6 +78,43 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
     }
   }
   /**
+   * 9 以上の 3 の倍数で `div.singles-popular-containers` 親コンテナ出力します
+   * @return {?XML} `div.singles-popular-containers` or null を返します
+   */
+  render() {
+    const props = this.props;
+    console.log('SPComponentSinglesWidgetPopular.render', props.strong, props.index);
+    // 強制出力フラッグ ON
+    if (props.strong) {
+      return this.build();
+    }
+
+    // 0 始まり index を
+    // 3 の倍数チェックのために 1 足します
+    // `x % 3 === 0` するために
+    const index = props.index + 1;
+
+    // 3 の倍数必須
+    if (index % 3 !== 0) {
+      return null;
+    }
+
+    // // 9未満では出力しない
+    // if (index < 9) {
+    //   return null;
+    // }
+    return this.build();
+    //
+    // if (!props.strong && (props.index + 1) % 3 !== 0) {
+    //   return null;
+    // }
+    //
+    // this.getPopular();
+    // return (
+    //   <div className="singles-popular-containers" ref="popular"></div>
+    // );
+  }
+  /**
    * 表示の元になる情報を更新せず表示系を更新します
    * @ToDo 不要かも
    */
@@ -110,17 +123,44 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
       this.view.reload();
     }
   }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
+  getPopular() {
+    if (this.view !== null) {
+      return;
+    }
+    const popular = document.getElementById(this.id);
+    console.log('getPopular', this.view, popular);
+
+    if (!popular) {
+      setTimeout(() => this.getPopular(), 25);
+      return;
+    }
+
+    this.popular = popular;
+    // @since 2016-10-03
+    // @type {{offset: number, length: number}}
+    const request = this.manager.request;
+    const offset = request.offset;
+
+    console.log('SPComponentSinglesWidgetPopular.componentDidMount', this.props.index, offset);
+    const view = new SPViewSinglesPopular(popular, this.props.sign, offset);
+    this.view = view;
+    view.start();
+
+    // request.offset を更新する
+    this.manager.up();
+  }
   /**
    * `div.singles-popular-containers` 親コンテナ出力
    * @return {XML} div.singles-popular-containers を返します
    */
-  static build() {
+  build() {
+    console.log('SPComponentSinglesWidgetPopular.build');
+    const id = `singles-popular-containers-${this.props.index}`;
+    this.id = id;
+    this.getPopular();
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div className="singles-popular-containers" ref="popular"></div>
+      <div id={id} className="singles-popular-containers" ref="popular"></div>
     );
   }
   // ---------------------------------------------------

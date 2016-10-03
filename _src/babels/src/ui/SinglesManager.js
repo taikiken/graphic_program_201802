@@ -98,6 +98,8 @@ export class SinglesManager {
 
     this[popularSymbol] = true;
 
+    this.count = 0;
+
     _instance = this;
     return _instance;
   }
@@ -180,6 +182,7 @@ export class SinglesManager {
     const behaviors = this.behaviors;
     // @type {string} - behaviors 配列からデータを取り出します
     let behavior = behaviors.shift();
+    ++this.count;
 
     if (behavior === WidgetType.RECOMMEND) {
       // オススメ記事
@@ -188,6 +191,7 @@ export class SinglesManager {
       if (!single || single.recommendArticles.length === 0) {
         // 配列.length === 0 はデータがないので次の処理を取り出します
         behavior = behaviors.shift();
+        ++this.count;
       }
     } else if (behavior === WidgetType.POPULAR) {
       // 人気記事

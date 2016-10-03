@@ -75,7 +75,7 @@ export class SPComponentSingles extends React.Component {
    */
   constructor(props) {
     super(props);
-
+    console.log('SPComponentSingles');
     /**
      * React state
      * @type {{list: Array<SingleDae>, offset: number, length: number}}
@@ -169,7 +169,7 @@ export class SPComponentSingles extends React.Component {
             // 人気記事一覧
             // this.widget(WidgetType.POPULAR, length + 1, true)
             // オススメ記事がある時だけ3番目がある
-            this.next(length + 1, this.manager.hasRecommend())
+            this.next(length + 1, this.manager.count < 3)
           }
         </div>
       );
@@ -206,7 +206,7 @@ export class SPComponentSingles extends React.Component {
             // 人気記事一覧
             // this.widget(WidgetType.POPULAR, length, true)
             // オススメ記事がある時だけ3番目がある
-            this.next(length, this.manager.hasRecommend())
+            this.next(length, this.manager.count < 3)
           }
         </div>
       );
@@ -251,6 +251,7 @@ export class SPComponentSingles extends React.Component {
     // console.log('SPComponentSingles.componentDidMount', this.props.action.hasNext());
     this.props.callback(View.DID_MOUNT);
     // hasNext を元に More View button の表示非表示を決める
+    console.log('SPComponentSingles.componentDidMount', this.props.action);
     this.props.boundMore(this.props.action.hasNext());
   }
   // ---------------------------------------------------
@@ -317,13 +318,13 @@ export class SPComponentSingles extends React.Component {
     const sign = this.props.sign;
     const type = this.manager.next();
 
-    console.log('ComponentSingles.next', index, strong, type);
+    console.log('SPComponentSingles.next', index, strong, type);
 
 
     switch (type) {
       case WidgetType.RECOMMEND: {
         return (
-          <ComponentSinglesWidget
+          <SPComponentSinglesWidget
             index={index}
             single={single}
             type={WidgetType.RECOMMEND}
@@ -334,7 +335,7 @@ export class SPComponentSingles extends React.Component {
       }
       case WidgetType.RELATED: {
         return (
-          <ComponentSinglesWidget
+          <SPComponentSinglesWidget
             index={index}
             single={single}
             type={WidgetType.RELATED}
@@ -345,7 +346,7 @@ export class SPComponentSingles extends React.Component {
       }
       case WidgetType.POPULAR: {
         return (
-          <ComponentSinglesWidget
+          <SPComponentSinglesWidget
             index={index}
             single={single}
             type={WidgetType.POPULAR}

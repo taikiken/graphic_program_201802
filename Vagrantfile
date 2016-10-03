@@ -226,6 +226,15 @@ Vagrant.configure(2) do |config|
     SCRIPT
   end
 
+  # $ vagrant push stg_sportsbull - t2.small の stg.sportsbull.jp
+  config.push.define "stg_sportsbull", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/public/
+    SCRIPT
+  end
+
 
   # $ vagrant push cms_dev - cms.undotushin.com の dev/
   # cmsのファイルr内容は web01/web02 に自動的に同期される

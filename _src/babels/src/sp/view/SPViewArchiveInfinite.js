@@ -45,6 +45,11 @@ let ReactDOM = self.ReactDOM;
  * @since 2016-09-16
  */
 export class SPViewArchiveInfinite extends SPViewArchive {
+  constructor(element:Element, moreElement:Element, ActionClass:Function = null, option:Object = {}) {
+    super(element, moreElement, ActionClass, option);
+
+    this.boundMore = this.moreButton.bind(this);
+  }
   /**
    * dom を render します
    * @param {Array} articles JSON responce.articles
@@ -125,6 +130,7 @@ export class SPViewArchiveInfinite extends SPViewArchive {
    * @param {boolean} show true の時にボタンを表示させ機能させます
    */
   moreButton(show:boolean):void {
+    console.log('SPViewArchiveInfinite.moreButton', show);
     // 'View More' button root element
     const moreElement = this.moreElement;
     // moreElement 存在チェックを行う

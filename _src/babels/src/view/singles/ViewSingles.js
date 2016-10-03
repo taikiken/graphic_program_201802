@@ -135,7 +135,11 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       this.executeSafely(View.EMPTY_ERROR, error);
     } else {
       // data 取得成功
-      this.request = result.request;
+      const request = result.request;
+      if (!request.length) {
+        request.length = this.action.length;
+      }
+      this.request = request;
       this.render(articles);
     }
   }

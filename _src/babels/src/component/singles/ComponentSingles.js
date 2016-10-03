@@ -132,7 +132,7 @@ export class ComponentSingles extends React.Component {
             // 人気記事一覧
             // this.widget(WidgetType.POPULAR, length + 1, true)
             // オススメ記事がある時だけ3番目がある
-            this.next(length + 1, this.manager.hasRecommend())
+            this.next(length + 1, this.manager.count < 3)
           }
         </div>
       );
@@ -169,7 +169,7 @@ export class ComponentSingles extends React.Component {
             // 人気記事一覧
             // this.widget(WidgetType.POPULAR, length, true)
             // オススメ記事がある時だけ3番目がある
-            this.next(length, this.manager.hasRecommend())
+            this.next(length, this.manager.count < 3)
           }
         </div>
       );
