@@ -6,27 +6,28 @@ class ViewModel {
 
     // site
     // ==============================
-    'site_name'          => 'スポーツブル / SPORTS BULL',
+    'site_name'          => '運動通信 / CRAZY FOR SPORTS',
     'site_url'           => '', // サイトURL - サーバから取得
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
     'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
 
     // page
-    'title'              => 'スポーツブル / SPORTS BULL',
-    'keywords'           => 'スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
+    'title'              => '運動通信 / CRAZY FOR SPORTS',
+    'keywords'           => 'スポーツ,メディア,運動,運動通信,クレイジー,アスリート,ニュース,動画,sports,media,untsu,運通,crazy',
 
     // og
     'app_id'             => '842032129256034',
     'og_type'            => 'article',
     'og_title'           => '',
-    'og_description'     => 'スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
+    'og_description'     => '話題のスポーツコンテンツが満載！ 国内外のスポーツに特化したニュースや動画をお届けします。スマホから、タブレットから、PCから、いつでもどこでも好きなときにお楽しみください。',
     'og_image'           => 'assets/images/common/og_image.png',
 
     // meta
     'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
     'canonical'          => '',
-    'syn_extension'      => '',
+    'syn_extension'      => '', // syn_extension対象記事かどうか
+    'syn_thumbnail'      => '', // syn_extension用サムネール
 
     // theme
     'theme' => array(

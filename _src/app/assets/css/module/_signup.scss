@@ -9,16 +9,10 @@
 // signup
 // bodyの背景に画像
 .signup {
-  position: relative;
   width: 100%;
   min-height: 100%;
-  background: #000 url(/assets/images/signup/bg.png) center -90px repeat;
+  background: #000 url(/assets/images/signup/bg.jpg) center top no-repeat;
   // background-size: cover;
-}
-
-.signup .body-sec-inner {
-
-
 }
 
 
@@ -29,8 +23,6 @@
 // .body-secをオーバーライド
 .signup {
   .body-sec {
-    z-index: 10;
-    position: relative;
     margin-top: 40px;
     margin-bottom: 56px;
     background: none;
@@ -39,54 +31,15 @@
       background: none;
     }
 
-    &-inner {
-      width: 600px;
-      padding-bottom: 40px;
-      border-radius: 5px;
-      border: 3px solid $highlight-color;
-      background: none;
-      background-color: #fff;
-
-      &:before,
-      &:after {
-        position: absolute;
-        content: '';
-        @include hide-text;
-      }
-
-      &:before {
-        z-index: -1;
-        top: -85px;
-        left: 50%;
-        margin-left: -375px;
-        width: 750px;
-        height: 322px;
-        background: url(/assets/images/signup/bull-bg.png) 0 0 no-repeat;
-      }
-
-      &:after {
-        top: 110px;
-        left: -12px;
-        width: 30px;
-        height: 25px;
-        background: url(/assets/images/signup/bull-hand.png) 0 0 no-repeat;
+    @at-root {
+      &-inner {
+        width: 600px;
+        padding-bottom: 40px;
+        border-radius: 3px;
+        background: none;
+        background-color: #fff;
       }
     }
-  }
-}
-
-
-
-
-
-// copyright
-// .copyright
-.signup {
-  .copyright {
-    padding-top: 0;
-    padding-bottom: 56px;
-    color: #777;
-    text-align: center;
   }
 }
 
@@ -96,15 +49,15 @@
 
 // signup-header
 .signup-header {
-  padding-top: 100px;
+  padding-top: 80px;
   width: 600px;
   margin: 0 auto;
 
   .heading {
     a {
       display: block;
-      width: 360px;
-      height: 39px;
+      width: 170px;
+      height: 54px;
       background: url(/assets/images/signup/logo.png) 0 0 no-repeat;
       @include hide-text;
       margin: 0 auto;
@@ -113,6 +66,7 @@
 
   .lead {
     margin-top: 30px;
+    color: #fff;
     font-size: fz(16);
     text-align: center;
   }
@@ -138,21 +92,6 @@
     bottom: 22px;
     width: 100%;
     text-align: center;
-
-    a {
-      display: inline-block;
-      font-weight: bold;
-
-      &:after {
-        content: '';
-        // position: relative;
-        // top: 1px;
-        margin-left: 4px;
-        @extend .sprite-common;
-        @include sprite( $common-icon-arrow2, inline-block );
-        @include hide-text;
-      }
-    }
   }
 } //.signup-heading
 
@@ -169,7 +108,7 @@
   @at-root {
     &-list {
       letter-spacing: ls( inline-block );
-      background-color: #f5f5f5;
+      background-color: #ccc;
       border-radius: 3px;
     }
 
@@ -216,7 +155,7 @@
 
     &-step1,
     &-step2 {
-      background-color: #e5e5e5;
+      background-color: #bbb;
     }
 
     &-step1 {
@@ -251,6 +190,7 @@
     &-or {
       margin-top: 30px;
       background: url(/assets/images/signup/bg-or.png) center center no-repeat;
+      font-weight: bold;
       text-align: center;
     } //.register-or
 
@@ -537,7 +477,7 @@
       width: 120px;
       height: 120px;
       border-radius: 100%;
-      border: 3px solid $highlight-color;
+      border: 3px solid #e1438b;
       background-size: cover;
     }
     img {

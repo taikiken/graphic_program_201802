@@ -12,7 +12,7 @@
           </div>
           <p class="user-signup-or">または</p>
           <p class="user-signup-note">アカウントをお持ちの方はこちら</p>
-          <div class="user-signup-btn-login mod-btnA01">
+          <div class="user-signup-btn-login mod-btnB01">
             <a href="/login/">ログイン</a>
           </div>
         </div><!-- /.user-signup -->

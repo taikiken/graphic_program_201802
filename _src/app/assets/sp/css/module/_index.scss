@@ -9,7 +9,7 @@
 // hero-sec
 // トップページ メインビジュアル
 .hero-sec {
-  background-color: #061533;
+  background-color: #111;
 
   a {
     display: block;
@@ -29,7 +29,7 @@
 
     &-category {
       margin-top: .5em;
-      color: #999;
+      color: $highlight-color;
       font-weight: bold;
       font-size: fz(20/2);
     }

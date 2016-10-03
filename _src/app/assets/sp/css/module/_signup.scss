@@ -11,8 +11,8 @@
 .signup {
   width: 100%;
   min-height: 100%;
-  background: #f5f5f5 url(/assets/sp/images/signup/bg.png) left top repeat;
-  background-size: (550/2)+px;
+  background: #000 url(/assets/sp/images/signup/bg.jpg) center top no-repeat;
+  background-size: 100%;
 }
 
 
@@ -20,40 +20,27 @@
 
 
 // body-sec
-// .body-sec .copyrightをオーバーライド
+// .body-secをオーバーライド
 .signup {
   .body-sec {
-    position: relative;
-    margin-top: (130/2)+px;
-    // margin-bottom: (30/2)+px;
+    margin-top: (90/2)+px;
+    margin-bottom: (60/2)+px;
     background: none;
 
     &:before {
-      content: '';
-      position: absolute;
-      top: -(100/2)+px;
-      left: 50%;
-      width: (130/2)+px;
-      height: (100/2)+px;
-      margin-left: -(130/2/2)+px;
-      background: url(/assets/sp/images/signup/bull-bg.png) 0 0 no-repeat;
-      background-size: (130/2)+px;
-      @include hide-text;
-    }
-
-    &-inner {
-      margin-right: perCalc(20);
-      margin-left: perCalc(20);
-      padding-bottom: (30/2)+px;
-      border: (6/2)+px solid $highlight-color;
-      border-radius: 6px;
       background: none;
-      background-color: #fff;
     }
-  }
 
-  .copyright {
-    padding-bottom: 15px;
+    @at-root {
+      &-inner {
+        margin-right: perCalc(20);
+        margin-left: perCalc(20);
+        padding-bottom: (30/2)+px;
+        border-radius: 3px;
+        background: none;
+        background-color: #fff;
+      }
+    }
   }
 }
 
@@ -63,15 +50,15 @@
 
 // signup-header
 .signup-header {
-  padding-top: (110/2)+px;
+  padding-top: (90/2)+px;
 
   .heading {
     a {
       display: block;
-      width: (360/2)+px;
-      height: (40/2)+px;
+      width: (300/2)+px;
+      height: (96/2)+px;
       background: url(/assets/sp/images/signup/logo.png) 0 0 no-repeat;
-      background-size: (360/2)+px;
+      background-size: (300/2)+px;
       @include hide-text;
       margin: 0 auto;
     }
@@ -106,7 +93,6 @@
 
     a {
       display: inline-block;
-      font-weight: bold;
 
       &:after {
         content: '';
@@ -114,7 +100,7 @@
         // top: 1px;
         margin-left: 4px;
         @extend .sp-sprite-common;
-        @include sprite( $common-icon-arrow2, inline-block );
+        @include sprite( $common-icon-arrow1, inline-block );
         @include hide-text;
       }
     }
@@ -132,7 +118,7 @@
   @at-root {
     &-list {
       letter-spacing: ls( inline-block );
-      background-color: #f5f5f5;
+      background-color: #ccc;
       border-radius: 3px;
     }
 
@@ -175,7 +161,7 @@
 
     &-step1,
     &-step2 {
-      background-color: #e5e5e5;
+      background-color: #bbb;
     }
 
     &-step1 {
@@ -389,7 +375,6 @@
     font-size: fz(22/2);
   }
 
-  .mod-btnA01,
   .mod-btnB01 {
     a, input {
       width: 100%;

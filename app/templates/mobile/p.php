@@ -171,7 +171,7 @@
 
           <div class="post-sns-pr">
             <dl class="post-sns-pr-inner">
-              <dt><span>いいねして最新ニュースをチェック！</span></dt>
+              <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
               <dd>
                 <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
               </dd>
@@ -181,6 +181,8 @@
       </div><!-- /.post-detail -->
 
       <div class="comment">
+
+        <div id="comment-form-container"></div>
 
         <div id="comment-self-container"></div>
 
@@ -207,18 +209,38 @@
           </div>
         <?php endif; ?>
 
-        <div id="comment-form-container"></div>
-
       </div><!-- /.comment -->
 
       <div id="widget-recommend-list-container"></div><!--/recommend-->
       <div id="widget-ranking-container"></div><!--/ranking-->
 
+      <?php
+      #1023 - このコードのままproductionだしてもヨイように検証完了まで分岐かいとく
+      ?>
+      <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
+      <!-- #1023 Syn.extension  -->
+      <div id="logly-lift-4227758" class="recommend_articles"></div>
+      <script charset="UTF-8">
+        (function(){
+          var _lgy_lw = document.createElement("script");
+          _lgy_lw.type = "text/javascript";
+          _lgy_lw.charset = "UTF-8";
+          _lgy_lw.async = true;
+          _lgy_lw.src= (("https:" == document.location.protocol) ? "https://" : "http://")+"l.logly.co.jp/lift_widget.js?adspot_id=4227758";
+          var _lgy_lw_0 = document.getElementsByTagName("script")[0];
+          _lgy_lw_0.parentNode.insertBefore(_lgy_lw, _lgy_lw_0);
+        })();
+      </script>
+      <script type="text/javascript" src="//i.socdm.com/s/so_dmp.js?service_id=un_sports"></script>
+      <!-- //#1023 Syn.extension  -->
+
+      <?php else : ?>
+
       <!-- #310 popin embed code  -->
       <?php if ( $page['category']['label'] ) : ?>
       <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
       <?php endif; ?>
-      <div id="_popIn_recommend"></div>
+      <div id="_popIn_recommend" class="recommend_articles"></div>
       <script type="text/javascript">
         (function() {
           var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
@@ -227,6 +249,8 @@
         })();
       </script>
       <!-- //#310 popin ebmed code  -->
+
+      <?php endif; ?>
 
     </section><!-- /.main-sec -->
   </div>

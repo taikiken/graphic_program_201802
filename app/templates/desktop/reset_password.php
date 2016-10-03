@@ -17,7 +17,7 @@ if($complete==0){
 
 ?>
   <header class="signup-header">
-    <h1 class="heading"><a href="/">SPORTS BULL</a></h1>
+    <h1 class="heading"><a href="/">運動通信</a></h1>
   </header><!-- /.signup-header -->
 
   <div class="body-sec">
@@ -37,7 +37,7 @@ if($complete==0){
                 </span>
               </span>
               <span className="form-parts align-right">
-                <span class="setting-form-submit mod-btnB02">
+                <span class="setting-form-submit mod-btnB01">
                   <input type="submit" value="送信">
                 </span>
               </span>

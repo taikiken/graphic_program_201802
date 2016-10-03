@@ -43,12 +43,11 @@ endif;
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@sportsbull">
+  <meta name="twitter:site" content="@undotsushin">
   <meta name="twitter:title" content="<?php echo $page['og_title']; ?>">
   <meta name="twitter:image" content="<?php echo $page['og_image']; ?>">
   <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
   <meta name="twitter:description" content="<?php echo $page['og_description']; ?>">
-
 
 <?php if ( $page['canonical'] ) : ?>
   <link rel="canonical" href="<?php echo $page['canonical']; ?>">
@@ -56,9 +55,14 @@ endif;
   <link rel="canonical" href="<?php echo $page['og_url']; ?>">
 <?php endif; ?>
 
+  <!-- syndot -->
 <?php if ( $page['template'] === 'p' ) : ?>
   <meta name="synextbot" content="<?php echo $page['syn_extension']; ?>">
+<?php if ( $page['syn_thumbnail'] ) : ?>
+  <meta property="syndot:thumbnail" content="<?php echo $page['syn_thumbnail']; ?>">
 <?php endif; ?>
+<?php endif; ?>
+  <!-- //syndot -->
 
   <!-- favicon -->
 <?php
@@ -70,5 +74,5 @@ endif;
 ?>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/assets/images/common/favicon.ico">
+  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">

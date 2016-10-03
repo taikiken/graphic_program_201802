@@ -76,6 +76,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
         'canonical'      => $canonical,
 
         'syn_extension'  => $syn_extension,
+        'syn_thumbnail'  => $post['media']['images']['thumbnail'],
 
         'ad'             => $post['ad'],
         'theme'          => $post['theme'],

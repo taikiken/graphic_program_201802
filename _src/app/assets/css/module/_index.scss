@@ -6,30 +6,6 @@
 //
 // Styleguide 2.2.0
 
-// background override
-// ブルくんの背景
-.home .body-sec {
-  background-repeat: no-repeat;
-  background-position: center 325px;
-  background-image: url(/assets/images/index/bull-bg.png);
-}
-
-.home .board-large {
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 195px;
-    left: -30px;
-    width: 49px;
-    height: 41px;
-    background: url(/assets/images/index/bull-hand.png) 0 0 no-repeat;
-    @include hide-text;
-  }
-}
-
-
 // hero-slider
 // トップページ用 メインビジュアルスライダー
 .hero {
@@ -71,9 +47,8 @@
             &:hover {
               @include hover-opacity;
 
-              .category-label,
               .post-heading {
-                // color: $highlight-secondary-color;
+                color: $highlight-color;
               }
             }
 
@@ -121,15 +96,16 @@
       &-control {
         position: absolute;
         top: 0;
-        width: 100%;
+        left: 50%;
+        // transform: translateX(-50%);
+        margin-left: -320px;
 
         .direction {
           a {
             position: absolute;
             display: block;
-            width: 40px;
-            height: 40px;
-            margin-top: ($pickup-height/2) - 20;
+            width: 38px;
+            height: $pickup-height;
             background-position: center center;
             background-repeat: no-repeat;
             @include hide-text;
@@ -140,12 +116,12 @@
           }
 
           &-prev {
-            left: 20px;
+            left: -38px;
             background-image: url(/assets/images/index/btn-slider-prev.png);
           }
 
           &-next {
-            right: 20px;
+            left: 640px;
             background-image: url(/assets/images/index/btn-slider-next.png);
           }
         }
@@ -153,9 +129,7 @@
         .pager {
           position: absolute;
           top: 370px;
-          left: 50%;
           width: 100%;
-          margin-left: -320px;
 
           ul {
             width: 640px;
@@ -182,7 +156,7 @@
 
             &.active,
             &:hover {
-              background-color: $highlight-secondary-color;
+              background-color: $highlight-color;
             }
           }
         }
@@ -204,11 +178,12 @@
 // トップページ ヘッドライン
 .headline {
   margin-top: 30px;
+  border-bottom: 1px solid $border-primary-color;
 
   @at-root {
     &-heading {
-      padding-bottom: 10px;
-      border-bottom: 3px solid #0e357f;
+      padding-bottom: 20px;
+      border-bottom: 1px solid $border-primary-color;
 
       &-title, &-ruby {
         display: inline-block;
@@ -221,23 +196,20 @@
 
       &-ruby {
         margin-left: 8px;
-        color: #333;
+        color: $highlight-color;
         font-weight: bold;
         font-size: fz(12);
       }
     } //.headline-heading
   }
 
-  .board-small.column2 {
+  .board-small {
     .board-item {
-      border-top: none;
-      margin-top: 16px;
-      // &:nth-child(1), &:nth-child(2) {}
+      &:nth-child(1), &:nth-child(2) {
+        border-top: none;
+      }
 
       .post {
-        height: 105px - 30;
-        padding: 0;
-
         &-thumb {}
         &-data {}
         &-category {}
@@ -271,10 +243,10 @@
 
 // sns-pr
 .sns-pr {
-  height: 88px;
   margin-top: 30px;
-  padding: 20px 26px 0 33px;
-  background: url(/assets/images/index/sns-pr-bg.png) no-repeat 0 0;
+  padding: 20px 28px;
+  background-color: #3755a5;
+  border-radius: 4px;
 
   &-inner {
     display: table;
@@ -283,33 +255,29 @@
 
   dd, dt {
     display: table-cell;
-    height: 40px;
+    height: 61px;
     vertical-align: middle;
+    text-align: right;
   }
 
   dt {
-    width: 596px;
+    width: 260px;
+    background: url(/assets/images/index/sns-pr-logo.png) 0 center no-repeat;
+  }
 
-    img {
-      vertical-align: middle;
-    }
-
-    span {
-      margin-left: 8px;
-      vertical-align: middle;
-    }
-
+  dd {
     p {
-      color: #333;
+      display: inline-block;
+      padding-bottom: 6px;
+      border-bottom: 3px solid #fff;
+      color: #fff;
       font-weight: bold;
       font-size: fz(16);
+      vertical-align: baseline;
 
       strong {
         font-size: fs(22, 16);
       }
     }
-  }
-
-  dd {
   }
 } //.sns-pr
