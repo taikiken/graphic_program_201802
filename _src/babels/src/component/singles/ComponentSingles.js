@@ -17,9 +17,12 @@ import { View } from '../../view/View';
 import { WidgetType } from '../../app/const/WidgetType';
 
 // component
-import { ComponentSinglesWidgetOption } from './ComponentSinglesWidgetOption';
+// import { ComponentSinglesWidgetOption } from './ComponentSinglesWidgetOption';
 import { ComponentSinglesWidget } from './ComponentSinglesWidget';
 import { ComponentSinglesArticle } from './ComponentSinglesArticle';
+
+// ui
+import { SinglesManager } from '../../ui/SinglesManager';
 
 // React
 const React = self.React;
@@ -45,6 +48,8 @@ export class ComponentSingles extends React.Component {
       offset: props.offset,
       length: props.length
     };
+
+    this.manager = SinglesManager.factory(props.single);
   }
   /**
    * desktop: 記事詳細「次の記事一覧」を出力します
@@ -55,7 +60,7 @@ export class ComponentSingles extends React.Component {
     const state = this.state;
     const list = state.list;
     const length = list.length;
-
+    console.log('ComponentSingles.render', length);
     // @ToDO 条件簡略化可能か調べる
     // @ToDO 各件数のテスト
     if (length === 0) {
@@ -99,23 +104,31 @@ export class ComponentSingles extends React.Component {
                     sign={props.sign}
                     index={index}
                   />
+                  {/*
                   <ComponentSinglesWidgetOption
                     key={`singles-widget-${single.id}`}
                     single={props.single}
                     sign={props.sign}
                     index={index}
                   />
+                   */}
+                  {
+                    this.next(index)
+                  }
                 </div>
               );
             })
           }
           {
             // 関連記事一覧
-            this.widget(WidgetType.RELATED, length, true)
+            // this.widget(WidgetType.RELATED, length, true)
+            this.next(length, true)
           }
           {
             // 人気記事一覧
-            this.widget(WidgetType.POPULAR, length + 1, true)
+            // this.widget(WidgetType.POPULAR, length + 1, true)
+            // オススメ記事がある時だけ3番目がある
+            this.next(length + 1, this.manager.hasRecommend())
           }
         </div>
       );
@@ -133,19 +146,26 @@ export class ComponentSingles extends React.Component {
                     sign={props.sign}
                     index={index}
                   />
+                  {/*
                   <ComponentSinglesWidgetOption
                     key={`singles-widget-${single.id}`}
                     single={props.single}
                     sign={props.sign}
                     index={index}
                   />
+                  */}
+                  {
+                    this.next(index)
+                  }
                 </div>
               );
             })
           }
           {
             // 人気記事一覧
-            this.widget(WidgetType.POPULAR, length, true)
+            // this.widget(WidgetType.POPULAR, length, true)
+            // オススメ記事がある時だけ3番目がある
+            this.next(length, this.manager.hasRecommend())
           }
         </div>
       );
@@ -164,12 +184,17 @@ export class ComponentSingles extends React.Component {
                   sign={props.sign}
                   index={index}
                 />
+                {/*
                 <ComponentSinglesWidgetOption
                   key={`singles-widget-${single.id}`}
                   single={props.single}
                   sign={props.sign}
                   index={index}
                 />
+                */}
+                {
+                  this.next(index)
+                }
               </div>
             );
           })
@@ -226,6 +251,67 @@ export class ComponentSingles extends React.Component {
   }
   // ---------------------------------------------------
   // widget
+  next(index, strong = false) {
+    if (!strong) {
+      // 0 始まり index を
+      // 3 の倍数チェックのために 1 足します
+      // `x % 3 === 0` するために
+      const count = index + 1;
+
+      // 3 の倍数必須
+      if (count % 3 !== 0) {
+        return null;
+      }
+    }
+
+    const single = this.props.single;
+    // const strong = false;
+    const sign = this.props.sign;
+    const type = this.manager.next();
+
+    console.log('ComponentSingles.next', index, strong, type);
+
+
+    switch (type) {
+      case WidgetType.RECOMMEND: {
+        return (
+          <ComponentSinglesWidget
+            index={index}
+            single={single}
+            type={WidgetType.RECOMMEND}
+            strong={strong}
+            sign={sign}
+          />
+        );
+      }
+      case WidgetType.RELATED: {
+        return (
+          <ComponentSinglesWidget
+            index={index}
+            single={single}
+            type={WidgetType.RELATED}
+            strong={strong}
+            sign={sign}
+          />
+        );
+      }
+      case WidgetType.POPULAR: {
+        return (
+          <ComponentSinglesWidget
+            index={index}
+            single={single}
+            type={WidgetType.POPULAR}
+            strong={strong}
+            sign={sign}
+          />
+        );
+      }
+      default: {
+        return null;
+      }
+    }
+  }
+
   /**
    * オススメ・関連・人気の記事を出力します
    * @param {string} type オススメ・関連・人気の記事タイプ {@link WidgetType}
@@ -235,7 +321,7 @@ export class ComponentSingles extends React.Component {
    */
   widget(type, index, strong = false) {
     return (
-      <SPComponentSinglesWidget
+      <ComponentSinglesWidget
         index={index}
         single={this.props.single}
         type={type}
