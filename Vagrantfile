@@ -236,17 +236,6 @@ Vagrant.configure(2) do |config|
   end
 
 
-  # $ vagrant push cms_dev - cms.undotushin.com の dev/
-  # cmsのファイルr内容は web01/web02 に自動的に同期される
-  config.push.define "cms_dev", strategy: "local-exec" do |push|
-    push.inline = <<-SCRIPT
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/dev/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/dev/public/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/dev/public/
-    SCRIPT
-  end
-
-
   # $ vagrant push cms_www - cms.undotushin.com の www/
   # cmsのファイルr内容は web01/web02 に自動的に同期される
   config.push.define "cms_www", strategy: "local-exec" do |push|
