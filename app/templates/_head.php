@@ -47,7 +47,7 @@ endif;
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@sportsbull">
+  <meta name="twitter:site" content="@<?php echo $page['sns']['twitter']; ?>">
   <meta name="twitter:title" content="<?php echo $page['og_title']; ?>">
   <meta name="twitter:image" content="<?php echo $page['og_image']; ?>">
   <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
