@@ -80,10 +80,20 @@
 
         <?php else : ?>
 
+          <?php
+          /*
+          // https://github.com/undotsushin/undotsushin/issues/1115#issuecomment-251271866
+          // `記事詳細での「続きを読む」を廃止` の対応でお願いします！
+          // @since 2016-10-04
           <div id="post-content-container" class="post-content excerpt hidden">
             <?php print_r($page['post']['body']); ?>
           </div><!-- /.post-content -->
           <div id="post-content-read-more" class="post-content-read-more"></div>
+          */
+          ?>
+          <div id="post-content-container" class="post-content">
+            <?php print_r($page['post']['body']); ?>
+          </div><!-- /.post-content -->
 
         <?php endif; ?>
 
