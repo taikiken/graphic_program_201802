@@ -1,12 +1,12 @@
         <?php if ( $page['post']['is_readmore'] ) :
           // -------------------------- [記事本文] --------------------------
           ?>
-          <div id="post-content-container" class="post-content">
+          <div id="post-content-container" class="post-content post-content_app">
             <p><?php echo $page['post']['description']; ?></p>
             <p><a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" onclick="ga('send', 'event', 'external_link', 'click', '<?php echo $page['post']['readmore']['url']; ?>', 0, {nonInteraction: true});">続きを読む(外部サイトへ)</a></p>
           </div>
         <?php else : ?>
-          <div id="post-content-container" class="post-content">
+          <div id="post-content-container" class="post-content post-content_app">
             <?php print_r($page['post']['body']); ?>
           </div><!-- /.post-content -->
         <?php
