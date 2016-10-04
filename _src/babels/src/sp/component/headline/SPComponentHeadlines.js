@@ -135,7 +135,7 @@ export class SPComponentHeadlines extends React.Component {
 
     const div = document.createElement('div');
     let script = document.createElement( 'script' );
-    script.src = `${Ad.ssl()}/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&tagver=2.0.0`;
+    script.src = `${Ad.ssl()}/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&async=true&tagver=2.0.0`;
     div.appendChild(script);
     element.appendChild(div);
   }
