@@ -100,7 +100,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     this.boundImages = this.onImages.bind(this);
   }
   /**
-   * dom が表示された後に1度だけ呼び出される delegate
+   * dom が更新されると呼び出される delegate
    */
   componentDidUpdate() {
     // isotope 対象 children
@@ -128,7 +128,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     this.img = img;
   }
   /**
-   * dom が削除される前に呼び出される delegate
+   * dom が表示された後に1度だけ呼び出される delegate
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);

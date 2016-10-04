@@ -40,6 +40,9 @@ import {ArticleDae} from '../dae/ArticleDae';
 import { ComponentArticlesMasonryInfinite } from '../component/articles/ComponentArticlesMasonryInfinite';
 import { ComponentMoreButton } from '../component/articles/ComponentMoreButton';
 
+// util
+import { Scroll } from '../util/Scroll';
+
 // Ga
 import { Ga } from '../ga/Ga';
 import { GaData } from '../ga/GaData';
@@ -147,6 +150,29 @@ export class ViewArchiveMasonryInfinite extends View {
      * @since 2016-09-28
      */
     this.boundMore = this.moreButton.bind(this);
+    /**
+     * 初回無限スクロールにしないパターン, クリック後に開始します
+     * <pre>
+     * 対応は PC版ホームに限り
+     * 初回ロード時はVIEW MORE表示
+     * VIEW MOREクリックで今の無限スクロールの形（VIEW MORE押す必要なくなる）
+     * </pre>
+     *
+     * @see https://github.com/undotsushin/undotsushin/issues/1141
+     * @type {boolean}
+     * @since 2016-10-04
+     */
+    this.afterClick = false;
+    /**
+     * Scroll instance を保持し<br>
+     * [VIEW MORE] button が表示されたら Scroll.SCROLL event を強制発火させます<br>
+     * [page top] button の位置を制御するために
+     *
+     * 読み込み完了時にコンテナ高さが変わりボタンが消えることがあります<br>
+     * 高さは変わっても Scroll event が発生しないためです
+     * @type {Scroll}
+     */
+    this.scroll = Scroll.factory();
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -1072,11 +1098,14 @@ export class ViewArchiveMasonryInfinite extends View {
           element={moreElement}
           home={this.home}
           slug={this.slug}
+          afterClick={this.afterClick}
         />,
         moreElement
       );
     } else {
       this.moreRendered.updateShow(show);
     }
+
+    this.scroll.fire();
   }
 }// class
