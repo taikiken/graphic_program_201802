@@ -111,7 +111,7 @@ if ( $page['apiRoot'] != '' ) :
 
   var UT = self.UT;
   // リクエスト先を変更します
-//  UT.app.App.develop( 'http://dev.undotsushin.com' );
+//  UT.app.App.develop( 'https://dev.sportsbull.jp' );
   UT.app.App.develop();
 
 }() );
