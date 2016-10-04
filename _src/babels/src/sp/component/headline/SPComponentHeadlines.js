@@ -103,8 +103,8 @@ export class SPComponentHeadlines extends React.Component {
                 );
               })
             }
-            <li className="board-item">
-              <div className="sponsor-link" ref="sponsorLink"></div>
+            <li className="board-item sponsor-link">
+              <div ref="sponsorLink"></div>
             </li>
           </ul>
         </div>
