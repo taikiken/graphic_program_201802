@@ -16,7 +16,7 @@
   _lgyLw.type = 'text/javascript';
   _lgyLw.charset = 'UTF-8';
   _lgyLw.async = true;
-  _lgyLw.src = ((document.location.protocol === 'https:') ? 'https://' : 'http://') + 'l.logly.co.jp/lift_widget.js?adspot_id=4227758';
+  _lgyLw.src = ((document.location.protocol === 'https:') ? 'https://' : 'http://') + 'l.logly.co.jp/lift_widget.js?adspot_id=4247222';
   var _lgyLw0 = document.getElementsByTagName('script')[0];
   _lgyLw0.parentNode.insertBefore(_lgyLw, _lgyLw0);
 })();

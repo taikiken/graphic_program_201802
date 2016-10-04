@@ -76,7 +76,7 @@ export class ComponentSinglesWidgetRelated extends React.Component {
   build() {
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div className="singles-related-containers">
+      <div className="widget-postList widget-postList_related singles-related-containers">
         <div id="_popIn_category" style={{display: 'none'}}>{this.state.single.categories.slug}</div>
         <div id="_popIn_recommend"></div>
         <div className="singles-related-scripts" ref="related"></div>

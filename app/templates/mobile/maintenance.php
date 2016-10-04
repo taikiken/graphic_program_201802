@@ -13,7 +13,7 @@
     <div class="body-sec-inner">
       <figure class="maintenance-logo"><img src="/assets/sp/images/maintenance/logo.png" alt="運動通信 / CRAZY FOR SPORTS"></figure>
       <div class="maintenance-text">
-        <h1 class="maintenance-heading">ただいまメンテナンス中です</h1>
+        <h1 class="maintenance-heading" style="color:#e1438b;">ただいまメンテナンス中です</h1>
         <div class="maintenance-message">
           <p>
             ご迷惑をお掛けしますが、<br />

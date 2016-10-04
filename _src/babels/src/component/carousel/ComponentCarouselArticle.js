@@ -31,7 +31,7 @@ const React = self.React;
  * @param {string} type JSON response media type
  * @return {XML} `img` タグを返します
  */
-const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PICKUP_PLAY} alt="" className="overlay" /> : null;
+const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PICKUP_PLAY} alt="" className="overlay overlay-play" /> : null;
 /**
  * カルーセルスライドショー一記事を作成します<br>
  * 記事クリックで GA 計測タグを送信します
@@ -72,7 +72,10 @@ export class ComponentCarouselArticle extends React.Component {
             </p>
             <h2 className="post-heading">{props.title}</h2>
             <p className="post-date">{props.date}</p>
+            {/*
+            // @since 2016-10-01 remove comment count
             <p className="post-comment-num">{props.commentsCount}</p>
+            */}
           </div>
         </a>
       </li>

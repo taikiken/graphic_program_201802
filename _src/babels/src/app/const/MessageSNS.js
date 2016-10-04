@@ -45,10 +45,10 @@ export class MessageSNS {
   }
   /**
    * VIA, twitter url `&via=` に使用します
-   * @return {string} sportsbull を返します
+   * @return {string} sportsbull_jp を返します
    */
   static get VIA():string {
-    return 'sportsbull';
+    return 'sportsbull_jp';
   }
   /**
    * FB_IMG_ALT, like image alt tag value

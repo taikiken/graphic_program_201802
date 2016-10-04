@@ -114,13 +114,14 @@ img {
     }
   }
 
+  // .header-appbnr-btn-close
   &-btn-close {
     position: absolute;
-    top: (76/2)+px;
-    right: (20/2)+px;
+    top: (60/2)+px;
+    right: 0;
 
     @extend .sp-sprite-common;
-    @include sprite( $common-btn-notice-close2 );
+    @include sprite( $common-btn-notice-close-app-bnr );
     @include hide-text;
   }
 }

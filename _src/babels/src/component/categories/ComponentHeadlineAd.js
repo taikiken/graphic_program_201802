@@ -10,6 +10,9 @@
  *
  */
 
+// app
+import { Ad } from '../../app/const/Ad';
+
 // React
 const React = self.React;
 
@@ -98,7 +101,7 @@ export class ComponentHeadlineAd extends React.Component {
       return;
     }
 
-    this.script(`https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`);
+    this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`);
   }
   /**
    * pc: アドジェネ広告を差し込む、この値がなければ広告は表示しない
@@ -109,7 +112,7 @@ export class ComponentHeadlineAd extends React.Component {
       return;
     }
 
-    this.script(`https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
+    this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER

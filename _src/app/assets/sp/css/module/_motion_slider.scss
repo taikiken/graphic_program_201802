@@ -53,6 +53,10 @@
         .overlay,
         .post-comment-num {
           display: none;
+
+          &.overlay-play {
+            display: block;
+          }
         }
 
         .post {
@@ -126,11 +130,21 @@
         &-prev {
           left: 20px;
           background-image: url(/assets/sp/images/index/btn-slider-prev.png);
+
+          // for less than 320px display device (iPhone5)
+          @media only screen and (device-width: 320px) {
+            left: 0;
+          }
         }
 
         &-next {
           right: 20px;
           background-image: url(/assets/sp/images/index/btn-slider-next.png);
+
+          // for less than 320px display device (iPhone5)
+          @media only screen and (device-width: 320px) {
+            right: 0;
+          }
         }
       }
 
