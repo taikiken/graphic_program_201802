@@ -68,6 +68,8 @@ export class ComponentMoreButton extends React.Component {
      * @default 1
      */
     this.page = 1;
+
+    this.timer = 0;
   }
   /**
    * div.board-btn-viewmore を出力します
@@ -109,7 +111,9 @@ export class ComponentMoreButton extends React.Component {
       // https://github.com/undotsushin/undotsushin/issues/1141
       // 初回無限スクロールにしないパターンあり
       if (!this.props.afterClick) {
-        rise.start();
+        // 初回に限り delay させる
+        this.timer = setTimeout(() => rise.start(), 500);
+        // rise.start();
       }
     }
   }
@@ -188,6 +192,7 @@ export class ComponentMoreButton extends React.Component {
    * 次 offset JSON を取得する
    */
   onRise() {
+    clearTimeout(this.timer);
     this.updateLoading(true);
     // Ga
     if (this.props.home) {
