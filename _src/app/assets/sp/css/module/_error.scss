@@ -36,8 +36,8 @@
   width: 100%;
   height: 100%;
   min-height: 100%;
-  background: #000 url(/assets/sp/images/signup/bg.jpg) center top no-repeat;
-  background-size: 100%;
+  background: #000 url(/assets/sp/images/signup/bg.png) center top repeat;
+  background-size: (550/2)+px;
 }
 
 // body-sec
@@ -47,7 +47,6 @@
     display: table-cell;
     width: 100%;
     height: 100%;
-    padding-bottom: 50px;
     background: none;
     vertical-align: middle;
 
@@ -68,8 +67,18 @@
 }
 
 .maintenance {
-  &-logo,
+  &-mascot {
+    text-align: center;
+
+    img {
+      // width: (248/2)+px !important;
+      width: perCalc(248, 540) !important;
+    }
+  }
+
+  //.maintenance-text
   &-text {
+    margin-top: (60/2)+px;
   }
 
   //.maintenance-logo
@@ -78,7 +87,7 @@
 
   //.maintenance-heading
   &-heading {
-    margin-top: (100/2)+px;
+    margin-top: (40/2)+px;
     color: $highlight-color;
     font-weight: bold;
     font-size: fz(40/2);
@@ -90,7 +99,6 @@
     p {
       line-height: lh(44, 28);
       margin-top: 1em;
-      color: #fff;
       font-size: fz(28/2);
       text-align: center;
 
@@ -102,7 +110,8 @@
 
   .copyright {
     position: absolute;
-    bottom: 0;
+    bottom: (50/2)+px;
     width: 100%;
+    color: #777;
   }
 }
