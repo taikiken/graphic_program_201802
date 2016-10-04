@@ -31,7 +31,7 @@ foreach ($helpers as $helper) {
 
 // #1006 - maintenance
 // ==============================
-if ( isset($_GET['maintenance']) ) :
+if ( $is_maintenance ) :
 
   $ua = new UserAgent();
   $ua = $ua->set();
