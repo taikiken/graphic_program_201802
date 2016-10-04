@@ -91,8 +91,19 @@ export class PageTop {
      */
     this._scroll = Scroll.factory();
 
+    /**
+     * Dom.whole() を Offset instance として保存します
+     * @type {?Offset}
+     * @private
+     */
     this._wholeOffset = null;
 
+    /**
+     * fade animation 中フラッグ
+     * @type {boolean}
+     * @private
+     * @default false
+     */
     this._inFade = false;
   }
   /**
