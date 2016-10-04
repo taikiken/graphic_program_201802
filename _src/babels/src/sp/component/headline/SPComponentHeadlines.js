@@ -17,6 +17,7 @@ import { SPComponentHeadlineArticle } from './SPComponentHeadlineArticle';
 // app
 import { Empty } from '../../../app/const/Empty';
 import { Message } from '../../../app/const/Message';
+import { Ad } from '../../../app/const/Ad';
 
 // data
 import { Safety } from '../../../data/Safety';
@@ -102,8 +103,8 @@ export class SPComponentHeadlines extends React.Component {
                 );
               })
             }
-            <li className="board-item sponsor-link" ref="sponsorLink">
-              <span style={{display: 'none'}}>&nbsp;</span>
+            <li className="board-item sponsor-link">
+              <div ref="sponsorLink"></div>
             </li>
           </ul>
         </div>
@@ -134,7 +135,7 @@ export class SPComponentHeadlines extends React.Component {
 
     const div = document.createElement('div');
     let script = document.createElement( 'script' );
-    script.src = 'http://i.socdm.com/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&tagver=2.0.0';
+    script.src = `${Ad.host()}/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&tagver=2.0.0`;
     div.appendChild(script);
     element.appendChild(div);
   }
