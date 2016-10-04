@@ -95,7 +95,7 @@ if (
       </div><!-- /.foot-pr-inner -->
 
       <div class="fb-page-plugin">
-        <div class="fb-page" data-href="https://www.facebook.com/undotsushin/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/undotsushin/"><a href="https://www.facebook.com/undotsushin/">スポーツブル（SPORTS BULL）</a></blockquote></div></div>
+        <div class="fb-page" data-href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><?php echo $page['site_name']; ?></a></blockquote></div></div>
       </div>
 
       <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
@@ -121,9 +121,9 @@ if (
 
     <div class="sns-block">
       <ul>
-        <li class="sns-fb"><a href="https://www.facebook.com/undotsushin/" target="_blank">facebook</a></li>
-        <li class="sns-tw"><a href="https://twitter.com/undotsushin" target="_blank">twitter</a></li>
-        <li class="sns-yt"><a href="https://www.youtube.com/channel/UCKwqba9IWuSKIk3DIpryOHw" target="_blank">youtube</a></li>
+        <li class="sns-fb"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" target="_blank">facebook</a></li>
+        <li class="sns-tw"><a href="https://twitter.com/<?php echo $page['sns']['facebook']; ?>" target="_blank">twitter</a></li>
+        <li class="sns-yt"><a href="https://www.youtube.com/channel/<?php echo $page['sns']['youtube']; ?>" target="_blank">youtube</a></li>
       </ul>
     </div><!-- /.sns-block -->
 
