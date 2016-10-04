@@ -354,6 +354,9 @@
       color: $highlight-color;
       font-weight: bold;
       font-size: fz(20/2);
+      &:empty {
+        display: none;
+      }
     }
 
     &-date {
