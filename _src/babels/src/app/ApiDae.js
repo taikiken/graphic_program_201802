@@ -47,7 +47,7 @@ let apiRoot = () => {
     case Env.DEVELOP :
       // return 'http://dev2.undotsushin.com';
       // dev2 から正常値が返らなくなった 2016-04-25
-      return 'http://dev.undotsushin.com';
+      return 'https://dev.sportsbull.jp';
 
     // online
     case Env.PRODUCTION :

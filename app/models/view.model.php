@@ -23,6 +23,13 @@ class ViewModel {
     'og_description'     => 'スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
     'og_image'           => 'assets/images/common/og_image.png',
 
+    // sns
+    'sns'                => array(
+      'twitter'  => 'sportsbull_jp',
+      'facebook' => 'undotsushin',
+      'youtube'  => 'UCKwqba9IWuSKIk3DIpryOHw',
+    ),
+
     // meta
     'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
     'canonical'          => '',
@@ -95,8 +102,8 @@ class ViewModel {
     if ( UT_ENV === 'LOCAL') :
       # 2016-04-27
       # dev2 -> dev へ変更
-      $this->default['file_get_url'] = 'http://dev.undotsushin.com';
-      $this->default['apiRoot']      = 'http://dev.undotsushin.com';
+      $this->default['file_get_url'] = 'https://dev.sportsbull.jp';
+      $this->default['apiRoot']      = 'https://dev.sportsbull.jp';
 
     else :
 
