@@ -88,12 +88,30 @@ export class CategoriesDae {
      */
     this._slugsClasses = slugs.join('-');
     /**
+     * 代表的な slug<br>
      * categories が空の時があるのが発覚, 文字列を担保します
      * @type {string}
      * @protected
      * @since 2016-09-20
      */
     this._slug = cats.length > 0 ? cats[0].slug : '';
+
+    const labels = cats.map((slugDae) => slugDae.label);
+    /**
+     * 設定ラベルを ' ' で連結します
+     * @type {string}
+     * @protected
+     * @since 2016-10-04
+     */
+    this._labels = labels.join(' ');
+    /**
+     * 代表的な label<br>
+     * categories が空の時があるのが発覚, 文字列を担保します
+     * @type {string}
+     * @protected
+     * @since 2016-10-04
+     */
+    this._label = cats.length > 0 ? cats[0].label : '';
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -163,6 +181,22 @@ export class CategoriesDae {
    */
   get slug():string {
     return this._slug;
+  }
+  /**
+   * 設定されているカテゴリ・ラベルを半角スペースで連結
+   * @return {string} 設定されているカテゴリ・ラベルを半角スペースで連結し返します
+   * @since 2016-10-04
+   */
+  get labels():string {
+    return this._labels;
+  }
+  /**
+   * 先頭に設定されているカテゴリ・ラベル
+   * @return {string} 先頭に設定されているカテゴリ・ラベルを返します
+   * @since 2016-10-04
+   */
+  get label():string {
+    return this._label;
   }
   // ---------------------------------------------------
   //  METHOD

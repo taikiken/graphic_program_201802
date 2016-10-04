@@ -105,7 +105,12 @@ export class ComponentMoreButton extends React.Component {
       rise = new Rise(this.props.element);
       this.rise = rise;
       rise.on(Rise.RISE, this.boundRise);
-      rise.start();
+      // @since 2016-10-04
+      // https://github.com/undotsushin/undotsushin/issues/1141
+      // 初回無限スクロールにしないパターンあり
+      if (!this.props.afterClick) {
+        rise.start();
+      }
     }
   }
   /**
@@ -220,7 +225,8 @@ export class ComponentMoreButton extends React.Component {
    *  show: boolean,
    *  action: Object,
    *  element: Element,
-   *  loading: string
+   *  loading: string,
+   *  afterClick: boolean
    * }} React props
    */
   static get propTypes() {
@@ -232,17 +238,27 @@ export class ComponentMoreButton extends React.Component {
       element: React.PropTypes.object.isRequired,
       slug: React.PropTypes.string.isRequired,
       // option, default ''
-      loading: React.PropTypes.string
+      loading: React.PropTypes.string,
+      afterClick: React.PropTypes.bool
     };
   }
-
   /**
    * defaultProps
-   * @return {{loading: string}} React props
+   *
+   * ```
+   * {
+   *    loading: '',
+   *    afterClick: false
+   *  };
+   * ```
+   *
+   * afterClick: true の時は `click` 後に無限スクロールを始める
+   * @return {{loading: string, afterClick: boolean}} React props
    */
   static get defaultProps() {
     return {
-      loading: ''
+      loading: '',
+      afterClick: false
     };
   }
 }
