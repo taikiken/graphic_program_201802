@@ -92,7 +92,7 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
     // AJAX 取得データ出力コンテナを用意
     return (
       <div className="singles-recommend-containers">
-        <div id="logly-lift-4227758" className="recommend_articles"></div>
+        <div id="logly-lift-4247222" className="recommend_articles"></div>
         <div className="singles-related-scripts" ref="related"></div>
       </div>
     );
