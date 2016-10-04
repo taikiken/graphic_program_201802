@@ -110,11 +110,18 @@ export class Ad {
   static host():string {
     switch ( Loc.protocol ) {
       case 'https:':
-        return 'https://ssl.socdm.com';
+        return Ad.ssl();
       case 'http:':
       default:
         return 'http://i.socdm.com';
     }
+  }
+  /**
+   * `socdm` ssl 接続先を取得します
+   * @return {string} `socdm` ssl 接続先 `https://ssl.socdm.com` を返します
+   */
+  static ssl():string {
+    return 'https://ssl.socdm.com';
   }
   /**
    * script tag を生成し返します

@@ -63,9 +63,9 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
    * delegate, マウント後に呼び出され script tag をインサートします
    * */
   componentDidMount() {
-    // if (!!this.refs.related) {
-    //   SPComponentSinglesWidgetRelated.insert(this.refs.recommend);
-    // }
+    if (!!this.refs.related) {
+      SPComponentSinglesWidgetRelated.insert(this.refs.related);
+    }
   }
   /**
    * state.index 情報を更新し再描画します
