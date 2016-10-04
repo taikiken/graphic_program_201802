@@ -122,7 +122,7 @@ if (
     <div class="sns-block">
       <ul>
         <li class="sns-fb"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" target="_blank">facebook</a></li>
-        <li class="sns-tw"><a href="https://twitter.com/<?php echo $page['sns']['facebook']; ?>" target="_blank">twitter</a></li>
+        <li class="sns-tw"><a href="https://twitter.com/<?php echo $page['sns']['twitter']; ?>" target="_blank">twitter</a></li>
         <li class="sns-yt"><a href="https://www.youtube.com/channel/<?php echo $page['sns']['youtube']; ?>" target="_blank">youtube</a></li>
       </ul>
     </div><!-- /.sns-block -->
