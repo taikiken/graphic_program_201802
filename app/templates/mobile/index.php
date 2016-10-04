@@ -33,7 +33,7 @@
           <dl class="sns-pr-inner">
             <dt><span>いいねして最新ニュースをチェック！</span></dt>
             <dd>
-              <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
             </dd>
           </dl><!-- /.sns-pr-inner -->
         </div><!-- /.sns-pr-outer -->
