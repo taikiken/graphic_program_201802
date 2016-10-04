@@ -237,6 +237,10 @@
         dd {
           margin-top: (20/2)+px;
         }
+
+        a {
+          @include link-decoration(#fff, #fff, none, none);
+        }
       }
     }
   }
