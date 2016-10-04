@@ -169,6 +169,36 @@ $key-color: #e1438b;
     }
   }
 
+  .widget-postList {
+    .post {
+      @include link-decoration(#333, #333, none, none);
+
+      &-heading {
+        color: #333;
+      }
+
+      &-date {
+        color: #666;
+      }
+
+      &-category {
+        color: $highlight-color;
+      }
+
+      &:hover {
+        .post-heading {
+          color: $highlight-color !important;
+        }
+      }
+    }
+  }
+
+  .loading-root {
+    .loading-spinner {
+      background-color: #000;
+    }
+  }
+
 } //.theme_dark
 
 
