@@ -17,6 +17,7 @@ import { SPComponentHeadlineArticle } from './SPComponentHeadlineArticle';
 // app
 import { Empty } from '../../../app/const/Empty';
 import { Message } from '../../../app/const/Message';
+import { Ad } from '../../../app/const/Ad';
 
 // data
 import { Safety } from '../../../data/Safety';
@@ -102,6 +103,9 @@ export class SPComponentHeadlines extends React.Component {
                 );
               })
             }
+            <li className="board-item sponsor-link">
+              <div ref="sponsorLink"></div>
+            </li>
           </ul>
         </div>
       </div>
@@ -116,6 +120,24 @@ export class SPComponentHeadlines extends React.Component {
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
+    this.ad();
+  }
+  /**
+   * headline 6 件目の広告<br>
+   * `app/template/mobile/index.php`#line.27
+   * @since 2016-10-03
+   */
+  ad() {
+    const element = this.refs.sponsorLink;
+    if (!element) {
+      return;
+    }
+
+    const div = document.createElement('div');
+    let script = document.createElement( 'script' );
+    script.src = `${Ad.ssl()}/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&async=true&tagver=2.0.0`;
+    div.appendChild(script);
+    element.appendChild(div);
   }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER

@@ -36,6 +36,11 @@ $key-color: #e1438b;
     }
   }
 
+  .widget-ranking-heading-ruby,
+  .widget-recommend-heading-ruby {
+    color: $key-color;
+  }
+
   .widget-ranking-heading-title {
     @include sprite( $common-side-ranking-heading_dark );
   }
@@ -53,15 +58,37 @@ $key-color: #e1438b;
     background-color: #000;
 
     .foot-pr {
-      background-color: #181818;
+      // background-color: #181818;
     }
   }
+
+  // .related-post {
+  //   .post {
+  //     .post-category {
+  //       color: $key-color;
+  //     }
+
+  //     &:hover {
+  //       .post-heading {
+  //         color: $key-color !important;
+  //       }
+  //     }
+  //   }
+  // }
 
   [ class^="board-" ] {
     .post {
       @include link-decoration(#fff, #fff, none, none);
 
-      .post-category {
+      &-date {
+        color: #999;
+      }
+
+      &-heading {
+        color: #fff;
+      }
+
+      &-category {
         color: $key-color;
       }
 
@@ -71,30 +98,12 @@ $key-color: #e1438b;
         }
       }
     }
-
-    .post-date {
-      color: #999;
-    }
-  }
-
-  .related-post {
-    .post {
-      .post-category {
-        color: $highlight-color;
-      }
-
-      &:hover {
-        .post-heading {
-          color: $highlight-color !important;
-        }
-      }
-    }
   }
 
   .board-large {
     .board-item {
       border-bottom-color: #1b1b1b;
-      background-color: #000;
+      background-color: #111;
     }
 
     .post-data {
