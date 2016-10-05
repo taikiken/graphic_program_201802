@@ -281,7 +281,7 @@ export class ViewSingle extends View {
     // ga from 2016-06-08
     // ViewSingle.ga( single );
     // @since 2016-10-05
-    Ga.single(single);
+    Ga.single(single, 'ViewSingle.render');
 
     // from 2016-06-10
     ViewSingle.moreExternal();

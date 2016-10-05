@@ -176,7 +176,7 @@ export class SPComponentSinglesArticle extends React.Component {
       this.sended = true;
       // ViewSingle.ga(this.state.single);
       // @since 2016-10-05
-      Ga.single(this.state.single);
+      Ga.single(this.state.single, 'SPComponentSinglesArticle.onHit');
       this.dispose();
     }
   }

@@ -29,6 +29,7 @@ import { Hit } from '../../ui/Hit';
 
 // Ga
 import { Ga } from '../../ga/Ga';
+import { GaData } from '../../ga/GaData';
 
 // React
 const React = self.React;
@@ -190,7 +191,12 @@ export class ComponentSinglesArticle extends React.Component {
       this.sended = true;
       // ViewSingle.ga(this.state.single);
       // @since 2016-10-05
-      Ga.single(this.state.single);
+      const single = this.state.single;
+      Ga.single(single, 'ComponentSinglesArticle.onHit');
+      // ---------------------
+      // https://github.com/undotsushin/undotsushin/issues/1151
+      Ga.addPage(single.id, 'ComponentSinglesArticle.onHit');
+      // ---------------------
       this.dispose();
     }
   }

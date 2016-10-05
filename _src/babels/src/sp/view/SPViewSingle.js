@@ -121,7 +121,7 @@ export class SPViewSingle extends ViewSingle {
 
     // ga from 2016-06-08
     // ViewSingle.ga( single );
-    Ga.single(single);
+    Ga.single(single, 'SPViewSingle.render');
     // from 2016-06-10
     ViewSingle.moreExternal();
   }
