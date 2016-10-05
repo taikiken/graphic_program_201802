@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/09/30 - 19:58
+ * @date 2016/10/05 - 18:05
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,27 +11,29 @@
  */
 
 // app
-import { MediaType } from '../../app/const/MediaType';
-import { Empty } from '../../app/const/Empty';
+import { MediaType } from '../../../app/const/MediaType';
+import { Empty } from '../../../app/const/Empty';
 
 // node
-import { MediaImageNode } from '../../node/single/MediaImageNode';
+import { MediaImageNode } from '../../../node/single/MediaImageNode';
 
 // data
-import { Safety } from '../../data/Safety';
+import { Safety } from '../../../data/Safety';
 
 // React
 const React = self.React;
 
 /**
  * 記事詳細・次の記事一覧のメインビジュアル<br>
- * 動画が次々再生されてウザイので img 置き換えた
- * @since 2016-09-30
+ * 動画が表示されない(VideojsImaNode {@link VideojsImaNode})ので画像サムネイルに置換えます
+ *
+ * @see https://github.com/undotsushin/undotsushin/issues/1158
+ * @since 2016-10-05
  */
-export class ComponentSinglesArticleMedia extends React.Component {
+export class SPComponentSinglesArticleMedia extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentSinglesArticle.propTypes}
+   * @param {Object} props React props プロパティー {@link SPComponentSinglesArticleMedia.propTypes}
    */
   constructor(props) {
     super(props);
@@ -57,10 +59,10 @@ export class ComponentSinglesArticleMedia extends React.Component {
     const mediaType = single.mediaType;
 
     if (mediaType === MediaType.VIDEO) {
-      return ComponentSinglesArticleMedia.video(single);
+      return SPComponentSinglesArticleMedia.video(single);
     }
 
-    return ComponentSinglesArticleMedia.image(single);
+    return SPComponentSinglesArticleMedia.image(single);
   }
   /**
    * state.sign 情報を更新し再描画します
@@ -134,3 +136,4 @@ export class ComponentSinglesArticleMedia extends React.Component {
     };
   }
 }
+
