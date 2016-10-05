@@ -217,11 +217,11 @@
       }
     }
 
-    &-read-more {
+    &-readMore {
       text-align: center;
     }
 
-    &-btn-readMore {
+    &-readMore-btn {
       @include link-decoration(#fff, #fff, none, none);
       display: inline-block;
       padding: (28/2)+px (36/2)+px;
