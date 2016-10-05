@@ -26,7 +26,9 @@ import { ComponentCategoryLabelsLink } from '../../../component/categories/Compo
 import { Hit } from '../../../ui/Hit';
 
 // view
-import { ViewSingle } from '../../../view/ViewSingle';
+// import { ViewSingle } from '../../../view/ViewSingle';
+
+import { Ga } from '../../../ga/Ga';
 
 // React
 const React = self.React;
@@ -172,7 +174,14 @@ export class SPComponentSinglesArticle extends React.Component {
 
     if (Math.abs(top) <= 50) {
       this.sended = true;
-      ViewSingle.ga(this.state.single);
+      // ViewSingle.ga(this.state.single);
+      // @since 2016-10-05
+      const single = this.state.single;
+      Ga.single(single, 'SPComponentSinglesArticle.onHit');
+      // ---------------------
+      // https://github.com/undotsushin/undotsushin/issues/1151
+      Ga.addPage(single.id, 'SPComponentSinglesArticle.onHit');
+      // ---------------------
       this.dispose();
     }
   }

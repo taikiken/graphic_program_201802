@@ -13,25 +13,41 @@
 import {Env} from '../app/Env';
 import {GaData} from './GaData';
 
-let _symbol = Symbol();
-
+/**
+ * 送信データをストックします<br>
+ * `ga` 存在が確認できたら順に送信を開始します
+ * @type {Array<GaData>}
+ * @private
+ */
 let _requests:Array<GaData> = [];
 
 /**
  * ga: イベント トラッキング
  *
  * @see https://docs.google.com/spreadsheets/d/19TcKHx0FFE7iN2JQ9R7a5GVK9HxCTfhPP2ij_NywZ7w/edit#gid=1062313071
+ * @see https://developers.google.com/analytics/devguides/collection/analyticsjs/events?hl=ja#implementation
  */
 export class Ga {
+  // /**
+  //  * ga: イベント トラッキング
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //   if ( _symbol !== target ) {
+  //     throw new Error( 'Ga is static Class. not use new Ga().' );
+  //   }
+  // }
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
   /**
-   * ga: イベント トラッキング
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
+   * 記事詳細・次の記事一覧 インビューイベント hitType
+   * @const PAGEVIEW
+   * @return {string} 'pageview' を返します
    */
-  constructor( target:Symbol ) {
-    if ( _symbol !== target ) {
-      throw new Error( 'Ga is static Class. not use new Ga().' );
-    }
+  static get PAGEVIEW():string {
+    return 'pageview';
   }
   // ---------------------------------------------------
   //  STATIC METHOD
@@ -59,6 +75,18 @@ export class Ga {
   static add( data:GaData ):void {
     _requests.push( data );
     Ga.send();
+  }
+
+  /**
+   * 記事詳細・次の記事一覧・インビュー 送信予約
+   * @param {number} id 記事 ID
+   * @param {string} method 発生場所(関数)
+   */
+  static addPage(id, method):void {
+    const data = new GaData(method);
+    data.hitType = Ga.PAGEVIEW;
+    data.setPage(id);
+    Ga.add(data);
   }
   /**
    * 送信実行
@@ -102,7 +130,7 @@ export class Ga {
       let data:GaData = _requests.shift();
       // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
       Ga.tracking( ga, data );
-      console.log( `${data.method}: ga, send, `, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, data.eventInteraction );
+      console.log( `${data.method}: ga, send, `, data);
     }
   }
   /**
@@ -110,12 +138,77 @@ export class Ga {
    * @since 2016-07-04
    * @param {Function} ga Google.ga
    * @param {GaData} data 送信する GaData Object
+   * @return {*} ga 戻り値を返します
    */
   static tracking( ga:Function, data:GaData ):void {
-    if ( data.eventInteraction ) {
-      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, GaData.nonInteraction() );
-    } else {
-      ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+    if (data.page !== null) {
+      return Ga.page(ga, data);
     }
+    if ( data.eventInteraction ) {
+      return ga( 'send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue, GaData.nonInteraction() );
+    }
+
+    return ga( 'send', data.hitType, data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+  }
+  /**
+   * Web版記事詳細無限スクロールに `hitType: 'pageview'` 追加送信
+   *
+   * @see https://github.com/undotsushin/undotsushin/issues/1151
+   * @param {Function} ga Google.ga
+   * @param {GaData} data 送信する GaData Object
+   * @return {*} ga 戻り値を返します
+   * @since 2016-10-05
+   */
+  static page(ga:Function, data:GaData) {
+    return ga('send', { hitType: data.hitType, page: data.page });
+  }
+  /**
+   * <p>記事詳細での提供元&カテゴリートラッキング</p>
+   * https://github.com/undotsushin/undotsushin/issues/744
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : provider
+   * イベントアクション：view
+   * イベントラベル：[response.user.name]
+   *  APIの response.user.name ex. 運動通信編集部 を設定
+   * </pre>
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : category
+   * イベントアクション：view
+   * イベントラベル：[response.categories.label] ex. 海外サッカー
+   * </pre>
+   *
+   * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+   * @param {string} method 発生場所関数名
+   * @since 2016-10-05 ViewSingle から移動
+   */
+  static single(single, method = 'Ga.single'):void {
+    let category = 'provider';
+    const action = 'view';
+    const label = single.user.userName;
+    // const method = 'Ga.single';
+
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事詳細の提供元のアクセス数を測定する
+    Ga.add(new GaData(method, category, action, label, 0, true));
+    // ----------------------------------------------
+
+    // category label 送信
+    // @type {CategoriesDae}
+    const categories = single.categories;
+
+    category = 'category';
+    categories.all.map((value) => {
+      // @type {SlugDae} - value
+      // ----------------------------------------------
+      // GA 計測タグ
+      // 記事カテゴリーのアクセス数を測定する
+      Ga.add(new GaData(method, category, action, value.label, 0, true));
+      // ----------------------------------------------
+    });
   }
 }
