@@ -14,21 +14,29 @@
 // parent
 import {ViewSingle} from '../../view/ViewSingle';
 
+// app
+import { Dom } from '../../app/Dom';
+
 // data
-import {Safety} from '../../data/Safety';
+// import {Safety} from '../../data/Safety';
 
 // view
 import {View} from '../../view/View';
+// @since 2016-09-34
+import { Banner } from '../../view/Banner';
 
 // dae
 import {SingleDae} from '../../dae/SingleDae';
 
 // node
-import {BannerNode} from '../../node/single/BannerNode';
+// import {BannerNode} from '../../node/single/BannerNode';
 
 // sp
 import {SPViewSingleHeader} from './single/SPViewSingleHeader';
 import {SPViewSingleVisual} from './single/SPViewSingleVisual';
+
+// sp/view/singles
+import { SPViewSingles } from './singles/SPViewSingles';
 
 // React
 let ReactDOM = self.ReactDOM;
@@ -56,22 +64,50 @@ export class SPViewSingle extends ViewSingle {
     /**
      * SPViewSingleVisual instance
      * @type {null|SPViewSingleVisual}
-     * @private
+     * @protected
      */
     this._visual = null;
     /**
      * バナー用 element
      * @type {Element}
-     * @private
+     * @protected
      */
     this._bannerElement = bannerElement;
+    /**
+     * SPViewSingles instance
+     * @type {?SPViewSingles}
+     * @protected
+     * @since 2016-09-28
+     */
+    this._singles = null;
+  }
+  /**
+   * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
+   * @param {SingleDae} single JSON.response を SingleDae instance に変換しました
+   * @since 2016-09-28
+   */
+  singles(single) {
+    if (this._singles === null) {
+      // one time, _singles が null の時のみ SPViewSingles instance を作成します
+      const element = Dom.singlesNext();
+      const moreElement = Dom.singlesMore();
+      if (element !== null && moreElement !== null) {
+        const singles = new SPViewSingles(this.id, element, moreElement, single);
+        this._singles = singles;
+        singles.start();
+      }
+    } else {
+      // instance がある時は update を実行します
+      this._singles.update();
+    }
   }
   /**
    * dom を render します
-   * @param {Object} response JSON response
+   * @param {SingleDae} single JSON response
+   * @since 2016-09-26 引数型が `SingleDae` に変わりました
    */
-  render( response:Object ):void {
-    let single = new SingleDae( response );
+  render( single:SingleDae ):void {
+    // let single = new SingleDae( response );
 
     // beforeRender call
     this.executeSafely( View.BEFORE_RENDER, single );
@@ -128,23 +164,32 @@ export class SPViewSingle extends ViewSingle {
    * @param {SingleDae} single 記事 SingleDae instance
    */
   renderBanner( single:SingleDae ):void {
-    // bannerElement をチェックします
-    if (!Safety.isElement(this._bannerElement)) {
+    // // bannerElement をチェックします
+    // if (!Safety.isElement(this._bannerElement)) {
+    //   return;
+    // }
+    //
+    // let userBanner = single.user.banner.sp;
+    // let banner = single.banner.sp;
+    // if ( !banner.image && !!userBanner.image ) {
+    //   banner = userBanner;
+    // }
+    //
+    // ReactDOM.render(
+    //   <BannerNode
+    //     banner={banner}
+    //     pc={false}
+    //   />,
+    //   this._bannerElement
+    // );
+
+    // @since 2016-09-24
+    const element = this._bannerElement;
+    const component = Banner.sp(single, element);
+    if (component === null) {
       return;
     }
 
-    let userBanner = single.user.banner.sp;
-    let banner = single.banner.sp;
-    if ( !banner.image && !!userBanner.image ) {
-      banner = userBanner;
-    }
-    
-    ReactDOM.render(
-      <BannerNode
-        banner={banner}
-        pc={false}
-      />,
-      this._bannerElement
-    );
+    ReactDOM.render(component, element);
   }
 }

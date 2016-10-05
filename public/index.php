@@ -8,6 +8,16 @@ if (PHP_SAPI == 'cli-server') {
   }
 }
 
+// # IS_MAINTENANCE
+// true : メンテ中 - アプリ内すべてのページでメンテ表示
+// ==============================
+$is_maintenance = false;
+
+// メンテ表示のdebug用
+if ( isset($_GET['maintenance']) ) :
+  $is_maintenance = true;
+endif;
+
 
 // # UT_ENV
 // $_SERVER['SERVER_NAME'] で環境判定します

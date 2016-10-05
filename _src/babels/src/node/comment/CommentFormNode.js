@@ -123,7 +123,8 @@ export let CommentFormNode = React.createClass( {
       // ログイン
       // ログインユーザーのみフォームを表示する
 
-      let commentClass = this.props.independent ? 'comment-form' : 'comment-respond';
+      // let commentClass = this.props.independent ? 'comment-form' : 'comment-respond';
+      const commentClass = 'comment-respond';
 
       return (
         <div className={commentClass + ' comment-root'}>

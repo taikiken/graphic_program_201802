@@ -46,7 +46,7 @@
 
             ?>
             <li class="post-sns-item post-sns-item_tw">
-              <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" target="_blank">
+              <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
                 <span>ツイート</span>
               </a>
             </li>
@@ -80,10 +80,20 @@
 
         <?php else : ?>
 
+          <?php
+          /*
+          // https://github.com/undotsushin/undotsushin/issues/1115#issuecomment-251271866
+          // `記事詳細での「続きを読む」を廃止` の対応でお願いします！
+          // @since 2016-10-04
           <div id="post-content-container" class="post-content excerpt hidden">
             <?php print_r($page['post']['body']); ?>
           </div><!-- /.post-content -->
-          <div id="post-content-read-more"></div>
+          <div id="post-content-read-more" class="post-content-read-more"></div>
+          */
+          ?>
+          <div id="post-content-container" class="post-content">
+            <?php print_r($page['post']['body']); ?>
+          </div><!-- /.post-content -->
 
         <?php endif; ?>
 
@@ -150,7 +160,7 @@
 
                   ?>
                   <li class="post-sns-item post-sns-item_tw">
-                    <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=undotsushin" target="_blank">
+                    <a href="http://twitter.com/share?text=<?php echo urlencode($page['og_title']); ?>&url=<?php echo $page['og_url']; ?>&via=<?php echo $page['sns']['twitter']; ?>" target="_blank">
                       <span>ツイート</span>
                     </a>
                   </li>
@@ -171,9 +181,9 @@
 
           <div class="post-sns-pr">
             <dl class="post-sns-pr-inner">
-              <dt><span>運動通信をいいねして<br>最新ニュースをチェック！</span></dt>
+              <dt><span>いいねして最新ニュースをチェック！</span></dt>
               <dd>
-                <div class="fb-like" data-href="https://facebook.com/undotsushin/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+                <div class="fb-like" data-href="https://facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
               </dd>
             </dl><!-- /.post-sns-pr-inner -->
           </div><!-- /.post-sns-pr -->
@@ -181,8 +191,6 @@
       </div><!-- /.post-detail -->
 
       <div class="comment">
-
-        <div id="comment-form-container"></div>
 
         <div id="comment-self-container"></div>
 
@@ -209,48 +217,73 @@
           </div>
         <?php endif; ?>
 
+        <div id="comment-form-container"></div>
+
       </div><!-- /.comment -->
 
-      <div id="widget-recommend-list-container"></div><!--/recommend-->
-      <div id="widget-ranking-container"></div><!--/ranking-->
+      <?php
+      /*
+      @since 2016-09-28
+      記事詳細の次の記事
+      div#js-singles-container 内に「記事一覧」「オススメ記事」「人気記事」「関連記事」を記入
+       */
+      ?>
+      <div class="singles-next">
+        <div id="js-singles-container"></div>
+        <div id="js-singles-more"></div>
+      </div>
 
       <?php
-      #1023 - このコードのままproductionだしてもヨイように検証完了まで分岐かいとく
+      /*
+       @since 2016-09-28 記事詳細の次の記事のために以下削除します
+      */
+      if (0):
       ?>
-      <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
-      <!-- #1023 Syn.extension  -->
-      <div id="logly-lift-4227758" class="recommend_articles"></div>
-      <script charset="UTF-8">
-        (function(){
-          var _lgy_lw = document.createElement("script");
-          _lgy_lw.type = "text/javascript";
-          _lgy_lw.charset = "UTF-8";
-          _lgy_lw.async = true;
-          _lgy_lw.src= (("https:" == document.location.protocol) ? "https://" : "http://")+"l.logly.co.jp/lift_widget.js?adspot_id=4227758";
-          var _lgy_lw_0 = document.getElementsByTagName("script")[0];
-          _lgy_lw_0.parentNode.insertBefore(_lgy_lw, _lgy_lw_0);
-        })();
-      </script>
-      <script type="text/javascript" src="//i.socdm.com/s/so_dmp.js?service_id=un_sports"></script>
-      <!-- //#1023 Syn.extension  -->
+        <div id="widget-recommend-list-container"></div><!--/recommend-->
+        <div id="widget-ranking-container"></div><!--/ranking-->
 
-      <?php else : ?>
+        <?php
+        #1023 - このコードのままproductionだしてもヨイように検証完了まで分岐かいとく
+        ?>
+        <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
+        <!-- #1023 Syn.extension  -->
+        <div id="logly-lift-4227758" class="recommend_articles"></div>
+        <script charset="UTF-8">
+          (function(){
+            var _lgy_lw = document.createElement("script");
+            _lgy_lw.type = "text/javascript";
+            _lgy_lw.charset = "UTF-8";
+            _lgy_lw.async = true;
+            _lgy_lw.src= (("https:" == document.location.protocol) ? "https://" : "http://")+"l.logly.co.jp/lift_widget.js?adspot_id=4227758";
+            var _lgy_lw_0 = document.getElementsByTagName("script")[0];
+            _lgy_lw_0.parentNode.insertBefore(_lgy_lw, _lgy_lw_0);
+          })();
+        </script>
+        <script type="text/javascript" src="//i.socdm.com/s/so_dmp.js?service_id=un_sports"></script>
+        <!-- //#1023 Syn.extension  -->
 
-      <!-- #310 popin embed code  -->
-      <?php if ( $page['category']['label'] ) : ?>
-      <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
-      <?php endif; ?>
-      <div id="_popIn_recommend" class="recommend_articles"></div>
-      <script type="text/javascript">
-        (function() {
-          var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-              pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-        })();
-      </script>
-      <!-- //#310 popin ebmed code  -->
+        <?php else : ?>
 
-      <?php endif; ?>
+        <!-- #310 popin embed code  -->
+        <?php if ( $page['category']['label'] ) : ?>
+        <div id="_popIn_category" style="display:none;"><?php echo $page['category']['label']; ?></div>
+        <?php endif; ?>
+        <div id="_popIn_recommend" class="recommend_articles"></div>
+        <script type="text/javascript">
+          (function() {
+            var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
+                pa.src = window.location.protocol + "//api.popin.cc/searchbox/undotsushin.js";
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+          })();
+        </script>
+        <!-- //#310 popin ebmed code  -->
+
+        <?php endif; ?>
+
+      <?php
+      endif;
+      // 削除 eof
+      ?>
 
     </section><!-- /.main-sec -->
   </div>

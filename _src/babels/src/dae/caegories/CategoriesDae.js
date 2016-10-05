@@ -10,8 +10,10 @@
  *
  */
 
-
+// data
 import {Safety} from '../../data/Safety';
+
+// dae/categories
 import {SlugDae} from './SlugDae';
 
 /**
@@ -34,11 +36,13 @@ export class CategoriesDae {
     // cats: 配列にそのまま保持
     // bank: slug をキーにそ保持
     categories.forEach( function( category ) {
-
-      let slugDae = new SlugDae( category );
-      cats.push( slugDae );
-      bank[ slugDae.slug ] = slugDae;
-
+      const slugDae = new SlugDae( category );
+      // slug, label に null があるようなので null は skip する
+      // @since 2016-09-20
+      if (!!slugDae.slug && !!slugDae.label) {
+        cats.push(slugDae);
+        bank[slugDae.slug] = slugDae;
+      }
     } );
 
     /**
@@ -66,6 +70,48 @@ export class CategoriesDae {
      */
     this._bank = bank;
 
+    // @since 2016-09-15
+    const slugs = cats.map((slugDae) => slugDae.slug);
+    // cats.forEach((slugDae) => {
+    //   slugs.push(slugDae.slug);
+    // });
+    /**
+     * category.slug を ', ' で連結した文字列
+     * @type {string}
+     * @protected
+     */
+    this._slugs = slugs.join(', ');
+    /**
+     * category.slug を '-' で連結した文字列
+     * @type {string}
+     * @protected
+     */
+    this._slugsClasses = slugs.join('-');
+    /**
+     * 代表的な slug<br>
+     * categories が空の時があるのが発覚, 文字列を担保します
+     * @type {string}
+     * @protected
+     * @since 2016-09-20
+     */
+    this._slug = cats.length > 0 ? cats[0].slug : '';
+
+    const labels = cats.map((slugDae) => slugDae.label);
+    /**
+     * 設定ラベルを ' ' で連結します
+     * @type {string}
+     * @protected
+     * @since 2016-10-04
+     */
+    this._labels = labels.join(' ');
+    /**
+     * 代表的な label<br>
+     * categories が空の時があるのが発覚, 文字列を担保します
+     * @type {string}
+     * @protected
+     * @since 2016-10-04
+     */
+    this._label = cats.length > 0 ? cats[0].label : '';
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -111,6 +157,46 @@ export class CategoriesDae {
    */
   get total():Number {
     return this.response.count;
+  }
+  /**
+   * category.slug を ', ' で連結した文字列
+   * @since 2016-09-15
+   * @return {string} category.slug を ', ' で連結した文字列を返します
+   */
+  get slugs():string {
+    return this._slugs;
+  }
+  /**
+   * category.slug を '-' で連結した CSS class フレンドリーな文字列
+   * @since 2016-09-16
+   * @return {string} category.slug を '-' で連結した文字列を返します
+   */
+  get slugsClasses():string {
+    return this._slugsClasses;
+  }
+  /**
+   * category 配列の先頭 slug
+   * @since 2016-09-16
+   * @return {string} category 配列の先頭 slug を返します
+   */
+  get slug():string {
+    return this._slug;
+  }
+  /**
+   * 設定されているカテゴリ・ラベルを半角スペースで連結
+   * @return {string} 設定されているカテゴリ・ラベルを半角スペースで連結し返します
+   * @since 2016-10-04
+   */
+  get labels():string {
+    return this._labels;
+  }
+  /**
+   * 先頭に設定されているカテゴリ・ラベル
+   * @return {string} 先頭に設定されているカテゴリ・ラベルを返します
+   * @since 2016-10-04
+   */
+  get label():string {
+    return this._label;
   }
   // ---------------------------------------------------
   //  METHOD

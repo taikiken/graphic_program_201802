@@ -34,6 +34,7 @@
 // comment-heading
 .comment-heading {
   margin-top: (20/2)+px;
+  border-top: 1px solid $border-primary-color;
   @extend .mod-headingA01;
 }
 
@@ -101,7 +102,7 @@
     &-submit {
       padding-top: (20/2)+px;
 
-      input {
+      button {
         appearance: none;
         width: 100%;
         padding: 15px 30px;
@@ -111,6 +112,17 @@
         color: #fff;
         font-weight: bold;
         font-size: fz(26/2) !important;
+
+        &:before {
+          content: '';
+          position: relative;
+          top: -2px;
+          margin-right: 4px;
+          @extend .sp-sprite-common;
+          @include sprite( $common-icon-comment, inline-block );
+          @include hide-text;
+          vertical-align: middle;
+        }
       }
     } //.comment-form-submit
   }
@@ -132,6 +144,17 @@
     font-weight: bold;
     font-size: fz(26/2) !important;
     text-align: center;
+
+    &:before {
+      content: '';
+      position: relative;
+      top: -2px;
+      margin-right: 4px;
+      @extend .sp-sprite-common;
+      @include sprite( $common-icon-comment, inline-block );
+      @include hide-text;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -365,6 +388,10 @@
       padding-top: (30/2)+px;
       border-top: 1px solid $border-primary-color;
 
+      &:first-child {
+        border-top: none;
+      }
+
       .comment-respond {
         .comment-form {
           margin-right: -500%;
@@ -476,6 +503,14 @@
   .adsButton {
     padding-right: (20/2)+px;
     padding-left: (20/2)+px;
+  }
+
+  .adsSponsored {
+    color: $highlight-color !important;
+  }
+
+  .adsButtonText {
+    background-color: $highlight-color !important;
   }
 }
 

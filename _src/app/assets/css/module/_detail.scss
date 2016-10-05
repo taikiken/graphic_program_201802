@@ -7,9 +7,83 @@
 //
 // Styleguide 2.4.0
 
+// .current-post
+.current-post {
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  background-color: #fff;
+}
+// .current-post
+
+// .loaded-post
+.loaded-post {
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  background-color: #fff;
+
+  .post-content {
+    position: relative;
+    // height: 120px;
+    // overflow: hidden;
+
+    // &:after {
+    //   content: '';
+    //   position: absolute;
+    //   bottom: 0;
+    //   width: 100%;
+    //   height: 100px;
+    //   background: url(/assets/images/detail/excerpt-mask.png) 0 bottom repeat-y;
+    // }
+  }
+}
+// .loaded-post
+
+
+
+// .btn-readmore
+.btn-readmore {
+  margin: 30px -30px 0;
+
+  &-link {
+    display: block;
+    padding: 24px 30px;
+    border-top: 1px solid #eee;
+    text-align: center;
+
+    &:hover {
+      @include over-opacity;
+    }
+  }
+
+  // .btn-readmore-label
+  &-label {
+    display: inline-block;
+    line-height: 1;
+    color: $highlight-color;
+    font-weight: bold;
+    // font-size: fz(15);
+
+    &:before {
+      content: '';
+      @extend .sprite-detail;
+      @include sprite( $detail-btn-readmore, inline-block );
+      @include hide-text;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+}
+// .btn-readmore
+
+
+
 // post-detail
 .post-detail {
-  margin-top: 30px;
+  // margin-top: 30px;
   // 記事詳細本文部分 サイドバーに突き抜ける問題に対応するために設定
   // Safari で 問題があるので限定的に使用する
   // https://github.com/undotsushin/undotsushin/issues/867#issuecomment-228676809
@@ -17,20 +91,26 @@
 
   // post-heading
   .post-heading {
-    padding-bottom: 24px;
-    border-bottom: 1px solid $border-primary-color;
 
     h1, h2, h3, h4, h5, h6 {
       font-weight: bold;
-      font-size: fz(34);
+      font-size: fz(26);
     }
   } //.post-heading
+
+  .category-heading {
+    margin-top: 6px;
+    padding: 0;
+    border-bottom: none;
+    color: $highlight-color;
+    font-weight: bold;
+  }
 
   // post-data
   .post-data {
     display: table;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 4px;
 
     .f-left,
     .f-right {
@@ -44,13 +124,36 @@
     }
 
     @at-root {
+      .post-author,
+      .post-date {
+        display: table-cell;
+        padding-right: 10px;
+        color: #999;
+        vertical-align: middle;
+
+        &:before {
+          position: relative;
+          top: -1px;
+          content: '';
+          @extend .sprite-detail;
+          @include hide-text;
+          margin-right: 4px;
+          vertical-align: middle;
+        }
+      }
+
       // post-author
       .post-author {
+        &:before {
+          @include sprite( $detail-icon-post-author, inline-block );
+        }
       } //.post-author
 
       // post-date
       .post-date {
-        color: #999;
+        &:before {
+          @include sprite( $detail-icon-post-date, inline-block );
+        }
       } //.post-date
 
       // btn-bookmark
@@ -124,6 +227,31 @@
       position: absolute;
       left: 0;
       top: 0;
+    }
+
+    // @since 2016-09-30
+    .video-thumbnail-container {
+      position: relative;
+      min-height: 410px;
+      overflow: hidden;
+    }
+    .video-image {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: auto;
+      height: 100%;
+    }
+    .video-play-btn {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      text-align: center;
+
+      background: url("/assets/images/common/thumb-640x400-play.png") center center;
     }
   } //.post-video-kv
 
@@ -231,8 +359,6 @@
 
     &.column2 {
       margin-top: 30px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid $border-primary-color;
       text-align: center;
       letter-spacing: ls( inline-block );
       vertical-align: top;
@@ -253,27 +379,34 @@
 
   // post-tags
   .post-tags {
+    display: table;
     margin-top: 40px;
 
     @at-root {
+      &-heading,
+      &-list {
+        display: table-cell;
+        vertical-align: top;
+      }
+
       &-heading {
-        width: 41px;
-        height: 14px;
-        background: url(/assets/images/common/heading-tags.png) 0 0 no-repeat;
+        @extend .sprite-detail;
+        @include sprite( $detail-heading-tag );
         @include hide-text;
       }
 
       &-list {
-        margin-top: 10px;
+        padding-left: 10px;
         letter-spacing: ls( inline-block );
       }
 
       &-item {
         display: inline-block;
         letter-spacing: normal;
+        font-size: fz(12);
 
         & + .post-tags-item {
-          margin-left: 20px;
+          margin-left: 10px;
         }
 
         a {
@@ -287,19 +420,20 @@
   .post-sns {
     display: table;
     width: 100%;
-    margin-top: 30px;
-    border: 1px solid $border-primary-color;
+    height: 88px;
+    margin-top: 20px;
+    background: url(/assets/images/detail/post-sns-bg.png) 0 0 no-repeat;
 
     @at-root {
       &-list {
         display: table-cell;
-        padding:  19px 0 19px 20px;
+        padding:  22px 0 0 28px;
         letter-spacing: ls( inline-block );
       }
 
       &-item {
         display: inline-block;
-        margin-left: 5px;
+        margin-left: 10px;
         letter-spacing: normal;
         vertical-align: middle;
 
@@ -343,9 +477,9 @@
 
       &-pr {
         display: table-cell;
-        width: 344px;
-        padding: 19px 24px;
-        background-color: #3755a5;
+        width: 384px;
+        padding-top: 20px;
+        border-left: 1px solid $highlight-color;
         letter-spacing: ls( inline-block );
 
         dt, dd {
@@ -355,14 +489,7 @@
         }
 
         dt {
-          padding-left: 40px;
-          background: url(/assets/images/detail/post-sns-logo.png) 0 center no-repeat;
-          color: #fff;
-          font-weight: bold;
-
-          strong {
-            font-size: fs(18, 14);
-          }
+          padding-left: 32px;
         }
 
         dd {
@@ -415,11 +542,59 @@
 
 
 
-// Videojs Player
-.vjs-remaining-time-display {
-  line-height: 30px;
+
+
+
+
+// .widget-postList
+.widget-postList {
+  margin-top: 30px;
+  padding: 30px 30px 10px;
+  background-color: #fff;
+
+  // .widget-postList-heading
+  &-heading {
+    @extend .comment-heading;
+    margin-top: 0 !important;
+  }
+
+  .board-item:nth-child(1),
+  .board-item:nth-child(2) {
+    border-top: none !important;
+  }
+
+  // POPINで出力されている .comment-heading をオーバーライド
+  #_popIn_recommend {
+    .comment-heading {
+      margin-top: 0 !important;
+    }
+  }
+}
+// .widget-postList
+
+
+
+
+
+// .video-js override
+.vjs-volume-level {
+  line-height: 10px;
 }
 
-.video-js .vjs-play-progress:before {
-  line-height: 1;
+.vjs-slider-bar {
+  &:before {
+    line-height: 12px;
+  }
+
+  &::after {
+    white-space: nowrap !important;
+  }
+}
+
+.vjs-mouse-display {
+  white-space: nowrap !important;
+}
+
+.vjs-remaining-time-display {
+  line-height: 30px;
 }

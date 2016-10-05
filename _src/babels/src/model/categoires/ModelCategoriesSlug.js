@@ -23,7 +23,7 @@ import {Result} from '../../data/Result';
 export class ModelCategoriesSlug extends Model {
   /**
    * Action class CategoriesSlug を使用し記事カテゴリー情報を取得します
-   * @param {string} [slug=all] 取得対象 category slug
+   * @param {string} [slug] 取得対象 category slug
    * @param {Object} [option] callback handler
    */
   constructor( slug:string, option:Object = {} ) {
