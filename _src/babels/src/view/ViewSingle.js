@@ -279,7 +279,9 @@ export class ViewSingle extends View {
 
     }
     // ga from 2016-06-08
-    ViewSingle.ga( single );
+    // ViewSingle.ga( single );
+    // @since 2016-10-05
+    Ga.single(single);
 
     // from 2016-06-10
     ViewSingle.moreExternal();
@@ -394,6 +396,7 @@ export class ViewSingle extends View {
    * </pre>
    *
    * @since 2016-06-08
+   * @deprecated on 2016-10-05, instead use Ga.single {@link Ga.single}
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
    */
   static ga( single:SingleDae ):void {

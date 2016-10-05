@@ -118,4 +118,52 @@ export class Ga {
       ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
     }
   }
+  /**
+   * <p>記事詳細での提供元&カテゴリートラッキング</p>
+   * https://github.com/undotsushin/undotsushin/issues/744
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : provider
+   * イベントアクション：view
+   * イベントラベル：[response.user.name]
+   *  APIの response.user.name ex. 運動通信編集部 を設定
+   * </pre>
+   *
+   * <pre>
+   * 対象スクリーン：/p/ [ 記事ID ]
+   * イベントカテゴリ : category
+   * イベントアクション：view
+   * イベントラベル：[response.categories.label] ex. 海外サッカー
+   * </pre>
+   *
+   * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+   * @since 2016-10-05 ViewSingle から移動
+   */
+  static single(single):void {
+    let category = 'provider';
+    const action = 'view';
+    const label = single.user.userName;
+    const method = 'Ga.single';
+
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事詳細の提供元のアクセス数を測定する
+    Ga.add( new GaData( method, category, action, label, 0, true ) );
+    // ----------------------------------------------
+
+    // category label 送信
+    // @type {CategoriesDae}
+    const categories = single.categories;
+
+    category = 'category';
+    categories.all.map( (value) => {
+      // @type {SlugDae} - value
+      // ----------------------------------------------
+      // GA 計測タグ
+      // 記事カテゴリーのアクセス数を測定する
+      Ga.add( new GaData( method, category, action, value.label, 0, true ) );
+      // ----------------------------------------------
+    } );
+  }
 }
