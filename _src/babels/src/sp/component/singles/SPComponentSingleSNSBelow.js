@@ -108,7 +108,7 @@ export class SPComponentSingleSNSBelow extends React.Component {
             <dd>
               <div
                 className="fb-like"
-                data-href="https://facebook.com/undotsushin/"
+                data-href="https://www.facebook.com/sportsbull/"
                 data-layout="box_count"
                 data-action="like"
                 data-show-faces="false"
