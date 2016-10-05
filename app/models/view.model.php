@@ -6,22 +6,29 @@ class ViewModel {
 
     // site
     // ==============================
-    'site_name'          => '運動通信 / CRAZY FOR SPORTS',
+    'site_name'          => 'スポーツブル / SPORTS BULL',
     'site_url'           => '', // サイトURL - サーバから取得
     'file_get_url'       => '', // file_get_content の URL. LOCAL以外は site_url と同値になる
 
     'site_categories'    => '', // ナビ用サイトカテゴリー DBから取得
 
     // page
-    'title'              => '運動通信 / CRAZY FOR SPORTS',
-    'keywords'           => 'スポーツ,メディア,運動,運動通信,クレイジー,アスリート,ニュース,動画,sports,media,untsu,運通,crazy',
+    'title'              => 'スポーツブル / SPORTS BULL',
+    'keywords'           => 'スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
 
     // og
     'app_id'             => '842032129256034',
     'og_type'            => 'article',
     'og_title'           => '',
-    'og_description'     => '話題のスポーツコンテンツが満載！ 国内外のスポーツに特化したニュースや動画をお届けします。スマホから、タブレットから、PCから、いつでもどこでも好きなときにお楽しみください。',
+    'og_description'     => 'スポーツブルは、インターネットスポーツメディアです。数十社の良質なスポーツ媒体と連携し、話題のスポーツニュース記事、動画をいち早くお届けします。また、ここでしか見ることの出来ないオリジナル記事や、番組を配信しています。スマートフォンはもちろん、PC、タブレットでもお楽しみいただけます。',
     'og_image'           => 'assets/images/common/og_image.png',
+
+    // sns
+    'sns'                => array(
+      'twitter'  => 'sportsbull_jp',
+      'facebook' => 'undotsushin',
+      'youtube'  => 'UCKwqba9IWuSKIk3DIpryOHw',
+    ),
 
     // meta
     'og_url'             => '', // シェアやコメント詳細用の正規化されたURL
@@ -41,7 +48,7 @@ class ViewModel {
 
     // ad
     'ad' => array(
-      'sp' => '35244',
+      'sp' => '42708',
       'pc' => array(
         'sidebar_top'         => 'pc_sidebar_top',
         'sidebar_bottom'      => 'pc_sidebar_bottom',
@@ -95,8 +102,8 @@ class ViewModel {
     if ( UT_ENV === 'LOCAL') :
       # 2016-04-27
       # dev2 -> dev へ変更
-      $this->default['file_get_url'] = 'http://dev.undotsushin.com';
-      $this->default['apiRoot']      = 'http://dev.undotsushin.com';
+      $this->default['file_get_url'] = 'https://dev.sportsbull.jp';
+      $this->default['apiRoot']      = 'https://dev.sportsbull.jp';
 
     else :
 

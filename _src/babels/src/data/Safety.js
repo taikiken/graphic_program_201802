@@ -117,7 +117,6 @@ export class Safety {
   static isElement( element:Element ):Boolean {
     return element !== null && typeof element !== 'undefined' && 'appendChild' in element;
   }
-
   /**
    * FormData かどうかを調べます
    * @param {FormData} formData 調査対象 FormData
@@ -236,5 +235,31 @@ export class Safety {
       }
     }
     return bool;
+  }
+  /**
+   * 引数(target)が null かを調べます
+   * @since 2-16-09-15
+   * @param {*} target 調査対象
+   * @return {boolean} 引数(target)が null かを調べ結果を返します、true: null
+   */
+  static nil(target) {
+    return target === null;
+  }
+  /**
+   * 引数(target)を `!!` で調べます
+   *
+   * false になるもの
+   * - false
+   * - ''
+   * - 0
+   * - undefined
+   * - null
+   *
+   * @since 2-16-09-15
+   * @param {*} target 調査対象
+   * @return {boolean} 引数(target)を `!!` で調べ結果を返します
+   */
+  static exist(target) {
+    return !!target;
   }
 }

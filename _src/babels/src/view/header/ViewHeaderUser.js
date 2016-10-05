@@ -107,7 +107,9 @@ export class ViewHeaderUser extends View {
 
         return (
           <div className="user">
-            <a className="btn-signup" href={Url.signup()}>無料登録 / ログイン</a>
+            <div className="btn-signup">
+              <a href={Url.signup()}>無料登録</a>&nbsp;/&nbsp;<a href={Url.login()}>ログイン</a>
+            </div>
           </div>
         );
       },

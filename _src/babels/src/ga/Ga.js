@@ -19,6 +19,8 @@ let _requests:Array<GaData> = [];
 
 /**
  * ga: イベント トラッキング
+ *
+ * @see https://docs.google.com/spreadsheets/d/19TcKHx0FFE7iN2JQ9R7a5GVK9HxCTfhPP2ij_NywZ7w/edit#gid=1062313071
  */
 export class Ga {
   /**

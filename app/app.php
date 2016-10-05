@@ -29,6 +29,19 @@ foreach ($helpers as $helper) {
 }
 
 
+// #1006 - maintenance
+// ==============================
+if ( $is_maintenance ) :
+
+  $ua = new UserAgent();
+  $ua = $ua->set();
+
+  include_once( __DIR__."/templates/{$ua}/maintenance.php");
+  exit;
+
+endif;
+
+
 // models
 // ==============================
 $models = glob( __DIR__.'/models/*.model.php');

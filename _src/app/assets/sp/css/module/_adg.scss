@@ -1,0 +1,57 @@
+// -------------------------------------------------
+// アドジェネ出力内容の上書き
+// * 出力されるcssをそのまま上書き、こちらの変更点として先方に共有する
+// -------------------------------------------------
+
+// ホーム/ヘッドライン下部
+// 2016-10-05 07:37:44 時点で崩れているので上書き
+.sponsor-link .adgAd_24203 {
+  padding-left: 0;
+  padding-right: 0;
+
+  .adgLink {
+
+    .adgImgContainer {
+      .adgImg {
+        border-radius: 3px;
+        margin-right: 0;
+      }
+    }
+
+    .adgTextContainer {
+      padding-left: 10px;
+      .adgTitle {
+        font-size: 13px;
+      }
+    }
+
+  }
+
+}
+
+
+// 記事一覧
+// 2016-10-05 07:37:44 時点で崩れているので上書き
+.news-ad .adgAd_24204 {
+  padding-left: 0;
+  padding-right: 0;
+
+  .adgLink {
+
+    .adgImgContainer {
+      .adgImg {
+        border-radius: 3px;
+        margin-right: 0;
+      }
+    }
+
+    .adgTextContainer {
+      padding-left: 10px;
+      .adgTitle {
+        font-size: 13px;
+      }
+    }
+
+  }
+
+}

@@ -28,9 +28,13 @@ endif;
 
   <meta name="keywords" content="<?php echo $page['keywords']; ?>">
   <meta name="description" content="<?php echo $page['og_description']; ?>">
-
+<?php
+  /*
+   * OS オリジナルのバナーが表示されるので削除します
+   * @since 2016-10-03
   <meta name="apple-itunes-app" content="app-id=1086719653">
-
+  */
+?>
   <!-- sns ogp -->
   <meta property="fb:app_id" content="<?php echo $page['app_id']; ?>">
   <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
@@ -43,7 +47,7 @@ endif;
 
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@undotsushin">
+  <meta name="twitter:site" content="@<?php echo $page['sns']['twitter']; ?>">
   <meta name="twitter:title" content="<?php echo $page['og_title']; ?>">
   <meta name="twitter:image" content="<?php echo $page['og_image']; ?>">
   <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
@@ -74,5 +78,5 @@ endif;
 ?>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" href="/assets/sp/images/common/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">

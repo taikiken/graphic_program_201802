@@ -138,7 +138,7 @@ export let SPCommentFormElementNode = React.createClass( {
             </div>
 
             <div className="comment-form-submit">
-              <input type="submit" value={Message.COMMENT_SUBMIT}/>
+              <button type="submit">{Message.COMMENT_SUBMIT}</button>
             </div>
           </form>
           {/* <div ref="commentMessage"></div> */}

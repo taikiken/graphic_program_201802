@@ -22,7 +22,7 @@
     width: 0;
     height: 0;
     //background: rgba(255, 255, 255, 0.7);
-    background: #fff url("/assets/images/common/preloader.gif") no-repeat center center;
+    background: #f5f5f5 url("/assets/images/common/preloader.gif") no-repeat center center;
     opacity: 0;
   }
 
@@ -74,6 +74,8 @@
     .feature-user {
       &.comment-item {
         margin-top: 10px;
+        margin-right: 20px;
+        margin-left: 20px;
         padding-top: 0;
         border-top: none;
         background-color: #f5f5f5;
@@ -101,6 +103,8 @@
     .commented-user {
       @include clearfix;
       margin-top: 10px;
+      margin-right: 20px;
+      margin-left: 20px;
 
       &-item {
         float: left;
@@ -134,12 +138,20 @@
     } //.commented-user
   }
 
+  // 表示確認用
+  &.debug-visible .board-item {
+    position: relative !important;
+    top: auto !important;
+  }
+
   .board-item {
-    // position: relative;
     position: absolute;
     top: 99999px;
     width: 350px;
     margin-top: 30px;
+    padding-bottom: 20px;
+    background-color: #fff;
+    border-bottom: 5px solid #e7e7e7;
 
     .post {
       &-thumb {
@@ -161,22 +173,20 @@
 
       [ class^="post-label_" ] {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 10px;
+        left: 10px;
       }
 
       &-label_recommend {
-        display: inline-block;
-        line-height: 1em;
-        padding: 4px 6px;
-        background-color: $highlight-color;
-        color: #fff;
-        font-weight: bold;
-        font-size: fz(12);
+        @extend .sprite-common;
+        @include sprite( $common-icon-recommend );
+        @include hide-text;
       }
 
       &-data {
         margin-top: .75em;
+        padding-right: 20px;
+        padding-left: 20px;
       }
 
       &-category {}
@@ -253,6 +263,7 @@
       width: 70px;
       height: 70px;
       margin-right: 10px;
+      border-radius: 3px;
       overflow: hidden;
       background: #ccc url(/assets/images/common/thumb-noimage-70x70.png) center center no-repeat;
 
@@ -363,6 +374,15 @@
       color: $highlight-color;
       font-weight: bold;
       font-size: fz(12);
+
+      .category-label {
+        display: inline-block;
+        margin-left: 0.5em;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+      }
     }
 
     &-heading {
@@ -467,8 +487,9 @@
 
   &-link {
     display: block;
-    padding: 18px 0;
-    border: 2px solid $highlight-color;
+    padding: 20px 0;
+    background-color: $highlight-color;
+    border-radius: 6px;
 
     span {
       @extend .sprite-common;
@@ -667,70 +688,109 @@
   a {
     display: inline-block;
     min-width: 160px;
-    line-height: 50px;
+    line-height: 50px - 2*2;
     padding-right: 4px;
     padding-left: 4px;
     border: 2px solid $highlight-color;
-    font-weight: bold;
-    text-align: center;
-
-    &:hover {
-      border: none;
-      background-color: $highlight-color;
-      transition: background-color ease-out .4s;
-    }
-  }
-
-  a {
-    @include link-decoration($highlight-color, #fff, none, none);
-  }
-}
-
-
-
-
-// sponsor-link
-// 広告の横幅728px問題、暫定対応
-// .sponsor-link {
-//   &.w728 {
-//     position: relative;
-//     left: -9px;
-//     width: 728px;
-//   }
-// }
-
-
-
-
-// mod-btnB01
-.mod-btnB01 {
-  input[ type="submit" ],
-  input[ type="button" ],
-  a {
-    display: inline-block;
-    min-width: 250px;
-    line-height: 50px;
-    padding-right: 4px;
-    padding-left: 4px;
-    border-radius: 3px;
+    border-radius: 6px;
     background-color: $highlight-color;
     font-weight: bold;
     text-align: center;
 
     &:hover {
-      @include hover-opacity;
+      border: 2px solid $highlight-color;
+      background-color: #fff;
+      transition: background-color ease-out .4s;
     }
-  }
-
-  a {
-    @include link-decoration(#fff, #fff, none, none);
   }
 
   input[ type="submit" ],
   input[ type="button" ] {
     color: #fff;
   }
+
+  a {
+    @include link-decoration(#fff, $highlight-color, none, none);
+  }
+
+  input[ type="submit" ]:hover,
+  input[ type="button" ]:hover {
+    color: $highlight-color;
+  }
 }
+
+// mod-btnA02
+.mod-btnA02 {
+  @extend .mod-btnA01;
+
+  input[ type="submit" ],
+  input[ type="button" ],
+  a {
+    min-width: 250px;
+    border-radius: 3px;
+  }
+
+  // input[ type="submit" ],
+  // input[ type="button" ],
+  // a {
+  //   display: inline-block;
+  //   min-width: 250px;
+  //   line-height: 50px;
+  //   padding-right: 4px;
+  //   padding-left: 4px;
+  //   border-radius: 3px;
+  //   background-color: $highlight-color;
+  //   font-weight: bold;
+  //   text-align: center;
+
+  //   &:hover {
+  //     @include hover-opacity;
+  //   }
+  // }
+
+  // a {
+  //   @include link-decoration(#fff, #fff, none, none);
+  // }
+}
+
+// mod-btnB01
+.mod-btnB01 {
+  @extend .mod-btnA01;
+
+  input[ type="submit" ],
+  input[ type="button" ],
+  a {
+    border-color: $highlight-secondary-color;
+    background-color: $highlight-secondary-color;
+
+    &:hover {
+      border-color: $highlight-secondary-color;
+    }
+  }
+
+  a:hover {
+    color: $highlight-secondary-color;
+  }
+
+  input[ type="submit" ]:hover,
+  input[ type="button" ]:hover {
+    color: $highlight-secondary-color;
+  }
+}
+
+// mod-btnB02
+.mod-btnB02 {
+  @extend .mod-btnB01;
+
+  input[ type="submit" ],
+  input[ type="button" ],
+  a {
+    min-width: 250px;
+    border-radius: 3px;
+  }
+}
+
+
 
 
 
@@ -783,16 +843,5 @@
     transform: translateX( -50% ) translateY( -50% );
     width: 710px;
     background-color: #fff;
-  }
-}
-
-// -------------------------------------------------
-// category が 2個になった
-.category-label {
-  display: inline-block;
-  margin-left: 1em;
-
-  &:first-of-type {
-    margin-left: 0;
   }
 }

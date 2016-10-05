@@ -17,6 +17,16 @@
     endif;
     // eof: 記事一覧: sp theme.images
     // ---------------------------------------------------- ?>
+    <div id="pickup-container"></div><!-- /pickup -->
+
+    <?php
+    // @since 2016-09-28
+    // @since 2016-09-28 やっぱりいらないことになりました
+    // https://github.com/undotsushin/undotsushin/issues/1010#issuecomment-250127419
+    //include_once __DIR__.'/_category-heading.php';
+
+    ?>
+
     <section class="main-sec">
       <?php
       // ----------------------------------------------------
@@ -30,7 +40,9 @@
       endif;
       // eof: 記事一覧: sp banner
       // ---------------------------------------------------- ?>
+      <div id="js-headline"></div>
       <div id="category-container"></div>
+      <div id="board-container-more"></div>
     </section><!-- /.main-sec -->
   </div>
 </div><!-- /.body-sec -->
