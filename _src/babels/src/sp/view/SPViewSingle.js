@@ -31,6 +31,9 @@ import {SingleDae} from '../../dae/SingleDae';
 // node
 // import {BannerNode} from '../../node/single/BannerNode';
 
+// ga
+import { Ga } from '../../ga/Ga';
+
 // sp
 import {SPViewSingleHeader} from './single/SPViewSingleHeader';
 import {SPViewSingleVisual} from './single/SPViewSingleVisual';
@@ -117,7 +120,8 @@ export class SPViewSingle extends ViewSingle {
     this.renderBanner( single );
 
     // ga from 2016-06-08
-    ViewSingle.ga( single );
+    // ViewSingle.ga( single );
+    Ga.single(single, 'SPViewSingle.render');
     // from 2016-06-10
     ViewSingle.moreExternal();
   }
