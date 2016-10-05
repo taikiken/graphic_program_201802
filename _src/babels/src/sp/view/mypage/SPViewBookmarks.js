@@ -118,7 +118,7 @@ export class SPViewBookmarks extends ViewBookmarks {
 
         return (
           <div className="bookmarks">
-            <ul className="board-small">
+            <ul className="board">
               {
                 // loop start
                 this.state.list.map( function( dae, idx ) {
