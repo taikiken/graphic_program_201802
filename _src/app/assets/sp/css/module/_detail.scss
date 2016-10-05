@@ -175,7 +175,7 @@
 
   // post-heading
   .post-heading {
-    margin-top: (30/2)+px;
+    padding-top: (30/2)+px;
 
     h1 {
       font-weight: bold;
@@ -445,6 +445,7 @@
   // post-sns_upper
   .post-sns_upper {
     margin-top: (40/2)+px;
+    margin-bottom: 1.5em;
 
     .post-sns {
       &-list {
