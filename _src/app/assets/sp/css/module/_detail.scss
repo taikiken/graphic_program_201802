@@ -81,6 +81,33 @@
     min-height: 180px;
     background-color: #000000;
   }
+
+  // ----------------------------------
+  // @since 2016-10-05
+  // @since 2016-09-30
+  .video-thumbnail-container {
+    position: relative;
+    min-height: 180px;
+    overflow: hidden;
+  }
+  .video-image {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: auto;
+    height: 100%;
+  }
+  .video-play-btn {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+
+    background: url("/assets/images/common/thumb-640x400-play.png") center center / cover no-repeat;
+  }
 }
 
 
