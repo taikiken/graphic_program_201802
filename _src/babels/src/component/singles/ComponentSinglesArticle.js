@@ -29,7 +29,7 @@ import { Hit } from '../../ui/Hit';
 
 // Ga
 import { Ga } from '../../ga/Ga';
-import { GaData } from '../../ga/GaData';
+// import { GaData } from '../../ga/GaData';
 
 // React
 const React = self.React;
