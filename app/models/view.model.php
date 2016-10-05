@@ -26,7 +26,7 @@ class ViewModel {
     // sns
     'sns'                => array(
       'twitter'  => 'sportsbull_jp',
-      'facebook' => 'undotsushin',
+      'facebook' => 'sportsbull',
       'youtube'  => 'UCKwqba9IWuSKIk3DIpryOHw',
     ),
 
