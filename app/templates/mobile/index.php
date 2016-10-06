@@ -18,7 +18,7 @@
         //↓.sokuhou-bnrに
         //.now_onair 追加で ON AIR 切り替え
       ?>
-      <div class="sokuhou-bnr ">
+      <div class="sokuhou-bnr now_onair">
         <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_medium=banner&utm_campaign=sokuhou"><img src="/assets/sp/images/index/bnr-sokuho-161006.png" alt="サッカー日本代表 リアルタイム速報 日本vsイラク アジア最終予選"></a>
       </div><!-- /.sokuhou-bnr -->
 
