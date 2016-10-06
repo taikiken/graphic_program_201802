@@ -72,8 +72,8 @@
               <?php echo $page['post']['description']; ?>
             </p>
 
-            <p>
-              <a id="readMore-external" class="post-content-btn-readMore" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank">続きを読む(外部サイトへ)</a>
+            <p class="post-content-readMore">
+              <a id="readMore-external" class="post-content-readMore-btn" href="<?php echo $page['post']['readmore']['url']; ?>" target="_blank">続きを読む(外部サイトへ)</a>
             </p>
 
           </div>

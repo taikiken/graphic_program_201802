@@ -14,13 +14,16 @@
 import { Message } from '../../../app/const/Message';
 
 // sp/node
-import { SPMediaNode } from '../../node/single/SPMediaNode';
+// import { SPMediaNode } from '../../node/single/SPMediaNode';
 
 // node
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
 // component
 import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
+
+// sp/component.singles
+import { SPComponentSinglesArticleMedia } from './SPComponentSinglesArticleMedia';
 
 // ui
 import { Hit } from '../../../ui/Hit';
@@ -86,11 +89,16 @@ export class SPComponentSinglesArticle extends React.Component {
       <div className="loaded-post" ref="singlesArticle">
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
+          {/*
           <SPMediaNode
             articleId={String(single.id)}
             mediaType={single.mediaType}
             media={single.media}
             isShowImage={single.isShowImage}
+          />
+          */}
+          <SPComponentSinglesArticleMedia
+            single={single}
           />
         </div>
         <div className="post-detail">
