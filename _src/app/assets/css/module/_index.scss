@@ -312,3 +312,11 @@
   dd {
   }
 } //.sns-pr
+
+
+// .sokuho-bnr
+.sokuho-bnr {
+  a:hover {
+    @include hover-opacity;
+  }
+}
