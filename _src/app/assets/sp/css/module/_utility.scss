@@ -122,3 +122,46 @@
     height: 100%;
   }
 }
+
+
+
+
+
+// アドジェネオーバーライド
+
+// コメント型
+// .comment-ad
+%adgAd-override_comment {
+  .adsSponsored {
+    color: $highlight-color !important;
+  }
+
+  .adsButtonText {
+    background-color: $highlight-color !important;
+  }
+}
+
+// ボックス型
+// .result-notfound
+// .sponsor-link_commentLower
+%adgAd-override_box {
+  .adsWrapper {
+    padding: 0 0 (20/2)+px 0 !important;
+  }
+
+  .adsTitle,
+  .adsSponsored,
+  .adsDescription,
+  .adsButton {
+    padding-right: (20/2)+px;
+    padding-left: (20/2)+px;
+  }
+
+  .adsSponsored {
+    color: $highlight-color !important;
+  }
+
+  .adsButtonText {
+    background-color: $highlight-color !important;
+  }
+}

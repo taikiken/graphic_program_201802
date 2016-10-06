@@ -493,25 +493,7 @@
 .sponsor-link_commentLower {
   padding: (20/2)+px perCalc(20);
 
-  .adsWrapper {
-    padding: 0 0 (20/2)+px 0 !important;
-  }
-
-  .adsTitle,
-  .adsSponsored,
-  .adsDescription,
-  .adsButton {
-    padding-right: (20/2)+px;
-    padding-left: (20/2)+px;
-  }
-
-  .adsSponsored {
-    color: $highlight-color !important;
-  }
-
-  .adsButtonText {
-    background-color: $highlight-color !important;
-  }
+  @extend %adgAd-override_box;
 }
 
 
@@ -522,6 +504,8 @@
   .adsWrapper {
     border-top: 1px solid $border-primary-color;
   }
+
+  @extend %adgAd-override_comment;
 }
 
 
