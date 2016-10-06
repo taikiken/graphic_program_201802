@@ -3,9 +3,13 @@
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">
-      <div class="sokuho-bnr mt30">
+      <?php
+        //↓.sokuhou-bnrに
+        //.now_onair 追加で ON AIR 切り替え
+      ?>
+      <div class="sokuhou-bnr ">
         <a href="https://sportsbull.jp/sokuhou/"><img src="/assets/images/index/bnr-sokuho-161006.png" alt="サッカー日本代表 リアルタイム速報 日本vsイラク アジア最終予選"></a>
-      </div><!-- /.sokuho-bnr -->
+      </div><!-- /.sokuhou-bnr -->
 
       <div class="headline">
         <div class="headline-outer">
