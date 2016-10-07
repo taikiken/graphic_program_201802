@@ -1,67 +1,43 @@
-# 運動通信
+# SPORTS BULL
 
 => [Githubの使い方](https://github.com/undotsushin/undotsushin/wiki/intro-howto-github)
 
-## 企画概要
+## Resource
 
-### 概要
+### Webサイト
 
-- 企画書 : Dropbox > `/plan/概要` 参照
-- サイトツリー : Dropbox > `/plan/サイトツリー`
-- ワイヤーフレーム : Dropbox > `/plan/ワイヤーフレーム`
+#### production
 
+https://sportsbull.jp
 
-### 仕様
+- 正式URLは www なしです。
 
-[Wiki](https://github.com/undotsushin/undotsushin/wiki) を参照してください
+#### staging
 
+https://stg.sportsbull.jp
+- ID : sportsbull
+- PASS : sportsbull2016
 
-### 確認系URL
+※本番DB参照
 
-#### Webサイト
+#### development
 
-- http://www.undotsushin.com/
-- ID : ut
-- PASS : ut2016
+https://dev.sportsbull.jp
+- ID : sportsbull
+- PASS : sportsbull2016
 
-※ 正式URLは www ありです。
-
-#### サイト管理画面
-
-- http://www.undotsushin.com/editdm/index_s.php
-- ID : ut
-- PASS : ut2016
-
-#### API確認
-
-- http://dev.undotsushin.com/debugger.php
-- ID : ut
-- PASS : ut2016
-
-※ 適宜記事編集、ユーザー編集していただいてOK
-
-#### iOSアプリ
-
-AdHock版ダウンロード
-
-- https://www.limret.com/apps/undotsushin/1.0.0/
+※本番とは独立したDB
 
 
-#### デザイン
+### API確認
 
-- http://logr.am/undo-tsushin/
-- user: ut
-- pass: utut
-
-※ 上に上がっていない場合あるのでDropboxの `/運動通信 - resource/design/Preview` みていただいたほうが確実。
+https://dev.sportsbull.jp/debugger.php
 
 
-### スケジュール
+#### アプリ
 
-- 要点スケジュール : [Github Milestone](https://github.com/undotsushin/undotsushin/milestones)
-- 詳細スケジュール : [運動通信 / 進行管理 - Google スプレッドシート](https://docs.google.com/spreadsheets/d/1m5knqkvZKsB2WEkGCWdRTAMD17JipsK1KejTNgQsO10/edit#gid=407766018)
+開発版はCrashlytics で配布されています。詳細は開発者に問い合わせてください。
 
-[新 Google](https://docs.google.com/spreadsheets/d/1jA_-Ud7mTDfvb8U07fmMbvxIZaKQ7L86-JYWL8Y5JCE/edit#gid=1424394789)
 
 ### チームメンバー
 
