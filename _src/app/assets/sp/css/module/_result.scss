@@ -57,5 +57,7 @@
 
   .sponsor-link {
     border: 1px solid $border-primary-color;
+
+    @extend %adgAd-override_box;
   }
 } //.result-notfound

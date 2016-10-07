@@ -14,13 +14,14 @@
   background-image: url(/assets/images/index/bull-bg.png);
 }
 
-.home .board-large {
+.home .main-sec {
   position: relative;
 
   &::after {
     content: '';
     position: absolute;
-    top: 195px;
+    // top: 195px;
+    top: 650px;
     left: -30px;
     width: 49px;
     height: 41px;
