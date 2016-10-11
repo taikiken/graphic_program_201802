@@ -196,19 +196,8 @@ Vagrant.configure(2) do |config|
     SCRIPT
   end
 
-
-  # $ vagrant push dev - t2.small の dev.undotushin.com
+  # $ vagrant push dev - t2.small の dev.sportsbull.jp
   config.push.define "dev", strategy: "local-exec" do |push|
-    push.inline = <<-SCRIPT
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/public/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/public/
-    SCRIPT
-  end
-
-
-  # $ vagrant push dev_sportsbull - t2.small の dev.sportsbull.jp
-  config.push.define "dev_sportsbull", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/public/
@@ -216,18 +205,8 @@ Vagrant.configure(2) do |config|
     SCRIPT
   end
 
-
-  # $ vagrant push stg - t2.small の stg.undotushin.com
+  # $ vagrant push stg - t2.small の stg.sportsbull.jp
   config.push.define "stg", strategy: "local-exec" do |push|
-    push.inline = <<-SCRIPT
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
-    SCRIPT
-  end
-
-  # $ vagrant push stg_sportsbull - t2.small の stg.sportsbull.jp
-  config.push.define "stg_sportsbull", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/public/
@@ -236,19 +215,9 @@ Vagrant.configure(2) do |config|
   end
 
 
-  # $ vagrant push cms_www - cms.undotushin.com の www/
+  # $ vagrant push www - 本番サーバのsportsbull領域
   # cmsのファイルr内容は web01/web02 に自動的に同期される
-  config.push.define "cms_www", strategy: "local-exec" do |push|
-    push.inline = <<-SCRIPT
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/www/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/www/public/
-      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/www/public/
-    SCRIPT
-  end
-
-  # $ vagrant push cms_sportsbull - 本番サーバのsportsbull領域
-  # cmsのファイルr内容は web01/web02 に自動的に同期される
-  config.push.define "cms_sportsbull", strategy: "local-exec" do |push|
+  config.push.define "www", strategy: "local-exec" do |push|
     push.inline = <<-SCRIPT
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/sportsbull.jp/www/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/sportsbull.jp/www/public/
@@ -256,6 +225,39 @@ Vagrant.configure(2) do |config|
     SCRIPT
   end
 
+
+  # undotsushin
+  # ------------------------------
+
+  # $ vagrant push dev - t2.small の dev.undotushin.com
+  config.push.define "dev_undotsushin", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/dev/public/
+    SCRIPT
+  end
+
+
+  # $ vagrant push stg - t2.small の stg.undotushin.com
+  config.push.define "stg_undotsushin", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/undotsushin.com/stg/public/
+    SCRIPT
+  end
+
+
+  # $ vagrant push cms_www - cms.undotushin.com の www/
+  # cmsのファイルr内容は web01/web02 に自動的に同期される
+  config.push.define "www_undotsushin", strategy: "local-exec" do |push|
+    push.inline = <<-SCRIPT
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./app #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/www/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/www/public/
+      rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/undotsushin.com/www/public/
+    SCRIPT
+  end
 
 
 end
