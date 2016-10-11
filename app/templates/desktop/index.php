@@ -3,7 +3,7 @@
 <div class="body-sec">
   <div class="body-sec-inner">
     <section class="main-sec">
-      <div class="sokuhou-bnr ">
+      <div class="sokuhou-bnr now_onair">
         <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="/assets/images/index/bnr-sokuhou-161011.png" alt="サッカー日本代表 リアルタイム速報 日本vsオーストラリア アジア最終予選"></a>
       </div><!-- /.sokuhou-bnr -->
 
