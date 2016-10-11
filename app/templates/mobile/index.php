@@ -14,6 +14,10 @@
     <div id="pickup-container"></div><!-- /pickup -->
 
     <section class="main-sec">
+      <div class="sokuhou-bnr ">
+        <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="/assets/sp/images/index/bnr-sokuhou-161011.png" alt="サッカー日本代表 リアルタイム速報 日本vsオーストラリア アジア最終予選"></a>
+      </div><!-- /.sokuhou-bnr -->
+
       <div class="headline-section">
         <div id="headline-container"></div>
         <?php
