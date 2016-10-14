@@ -1,6 +1,7 @@
 <?php
 
 $TABLE="advertise";
+$s3active=preg_match("#/apache/htdocs/#",$SERVERPATH)?0:1;
 
 if($_GET["cid"]==1){
 	$a[]=array("head","システム設定");
@@ -25,8 +26,8 @@ if($_GET["cid"]==10){
 	$a[]=array("inputradio","スマホ一覧ナビ表示","sp_showfilter",array("表示する","表示しない"),"","","","");
 }
 if($_GET["cid"]!=0){
-	$a[]=array("head","記事下バナー設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
-	$a[]=array("inputradio","記事下バナー表示","bannerflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+	$a[]=array("head","記事一覧上・記事本文下バナー設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
+	$a[]=array("inputradio","バナー表示","bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
 	$a[]=array("textfield","ALTテキスト","bannertext","70","","","");
 	$a[]=array("img","PCバナー","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
 	$a[]=array("textfield","PCリンク先","pc_bannerlink","90","","","");
@@ -71,13 +72,17 @@ if($_GET["cid"]!=0)$a[]=array("inputradio","記事詳細広告表示","ad_androi
 $a[]=array("textfield","記事詳細広告ID","ad_android_detailid","40","","","");
 
 function output(){	
-	global $o,$SERVERPATH;
+
+	global $o,$ImgPath,$SERVERPATH,$s3active;
+
 	$sql="select id from u_media";
 	$o->query($sql);
 	$r=array();
 	while($f=$o->fetch_array()){
+		
 		$file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["id"]);
-		$s=unserialize(file_get_contents($file));
+		$s=unserialize(get_contents($file));
+		
 		$y=is_array($s["cmdtypes"])?$s["cmdtypes"]:array();
 		
 		for($i=0;$i<12;$i++){
@@ -93,17 +98,22 @@ function output(){
 	
 	$file=sprintf("%s/api/ver1/static/cms.dat",$SERVERPATH);
 	file_put_contents($file,serialize($r));
+	s3upload($file,"static/cms.dat");
+	
 	$file=sprintf("%s/api/ver1/static/media.dat",$SERVERPATH);
 	file_put_contents($file,serialize($op));
+	s3upload($file,"static/media.dat");
 }
 
 $file=sprintf("%s/api/ver1/static/ad/%s-%s.dat",$SERVERPATH,isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]);
+$s3file=sprintf("%s/static/ad/%s-%s.dat",$ImgPath,isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]);
+
 if($q->get_dir()===1){
 	if($q->get_file()===0){
 		$flag=array("親の広告表示設定を継承する","広告を設定する","広告を表示しない");
-		if(file_exists($file)){
+		if($data=get_contents($file)){
 			unset($p);
-			$data=unserialize(file_get_contents($file));
+			$data=unserialize($data);
 			for($i=0;$i<count($a);$i++){
 				if(preg_match("/flag/",$a[$i][2])){
 					$p[$a[$i][2]]=sprintf("%s:%s",$data[$a[$i][2]],$flag[$data[$a[$i][2]]]);
@@ -123,6 +133,7 @@ if($q->get_dir()===1){
 		}
 		$data=serialize($data);
 		$e=file_put_contents($file,$data);
+		s3upload($file,sprintf("static/ad/%s-%s.dat",isset($_GET["rid"])?$_GET["rid"]:$_GET["cid"],$_GET["nid"]));
 		
 		output();
 	}

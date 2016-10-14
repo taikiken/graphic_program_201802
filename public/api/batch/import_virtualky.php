@@ -14,7 +14,7 @@ function get_keyword($k){
 	return $m[1];
 }
 
-$xml=file_get_contents($rssfile);
+$xml=get_contents($rssfile);
 
 $xml=str_replace("ut:related","relatedLink",$xml);
 $xml=str_replace("caption=\"\">"," />",$xml);

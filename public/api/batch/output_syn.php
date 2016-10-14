@@ -8,8 +8,8 @@ $o->connect();
 $container=sprintf("<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <rss version=\"2.0\">
 <channel>
-<title>運動通信</title>
-<link>https://www.undotsushin.com/</link>
+<title>SPORTS BULL</title>
+<link>https://sportsbull.jp/</link>
 <description>話題のスポーツコンテンツが満載！ 国内外のスポーツに特化したニュースや動画をお届けします。</description>
 <ttl>15</ttl>
 <language>ja</language>
@@ -53,7 +53,7 @@ while($f=$o->fetch_array()){
 
 $item[]=sprintf('<item>
 <title>%s</title>
-<link>https://www.undotsushin.com/p/%s/</link>
+<link>https://sportsbull.jp/p/%s/</link>
 <guid>%s</guid>
 %s
 <media id="%s" title="%s" />
@@ -70,7 +70,7 @@ $f["id"],
 $f["d2"],$f["media"],
 preg_replace("(\r|\n)","",$f["body"]),
 maketag(array($f["t10"],$f["t11"],$f["t12"],$f["t13"],$f["t14"],$f["t15"])),
-strlen($f["img1"])?sprintf("\n<enclosure url=\"https://www.undotsushin.com/prg_img/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$f["img1"],mod_HTML($f["t1"])):sprintf("\n<enclosure url=\"https://www.undotsushin.com/prg_img/raw/%s\" type=\"image/jpeg\" caption=\"運動通信\" />",sprintf("0%s.jpg",$f["id"]%7+1)),
+strlen($f["img1"])?sprintf("\n<enclosure url=\"%s/raw/%s\" type=\"image/jpeg\" caption=\"%s\" />",$ImgPath,$f["img1"],mod_HTML($f["t1"])):sprintf("\n<enclosure url=\"https://img.sportsbull.jp/raw/%s\" type=\"image/jpeg\" caption=\"SPORTS BULL\" />",sprintf("0%s.jpg",$f["id"]%7+1)),
 $f["flag"],
 date(DATE_RFC822,strtotime($f["m_time"])),
 date(DATE_RFC822,strtotime($f["u_time"]))

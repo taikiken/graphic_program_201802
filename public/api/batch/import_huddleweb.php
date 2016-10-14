@@ -29,7 +29,7 @@ while($f=$o->fetch_array()){
 	$exword[]=$f["name_e"];
 }
 
-$xml=file_get_contents($rssfile);
+$xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 

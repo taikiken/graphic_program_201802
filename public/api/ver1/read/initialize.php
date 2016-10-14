@@ -81,14 +81,13 @@ if($uid!=""){
 $sql.=" order by h,sort,recommend desc,m_time desc";
 */
 
-$sql=sprintf("select 0 as h,0 as recommend,tt1.*,tt2.sort from (select d2,n as sort from u_headline where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articletable,set_isbookmark($uid),""));
+$sql=sprintf("select 0 as h,0 as recommend,tt1.*,tt2.sort,tt2.modtitle from (select d2,n as sort,title as modtitle from u_headline where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articletable,set_isbookmark($uid),""));
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
 
-$sql=sprintf("select 1 as h,0 as recommend,tt1.*,tt2.sort from (select d2,n as sort from u_headline where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articletable,set_isbookmark($uid),""));
+$sql=sprintf("select 1 as h,0 as recommend,tt1.*,tt2.sort,tt2.modtitle from (select d2,n as sort,title as modtitle from u_headline where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articletable,set_isbookmark($uid),""));
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
-
 
 if($uid!=""){
 

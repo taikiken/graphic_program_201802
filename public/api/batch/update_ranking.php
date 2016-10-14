@@ -40,8 +40,8 @@ $o->query($sql);
 while($f=$o->fetch_array()){
 	
 	$rank=$f["reply"]+$f["good"]+$f["bad"];
-	$in[]=sprintf("update u_ranking set good=%s,bad=%s,reply=%s,rank=%s,flag=%s,userflag=%s,userid=%s,cid=%s where commentid=%s and (rank!=%s or flag!=%s or userflag!=%s);",
-	$f["good"],$f["bad"],$f["reply"],$rank,$f["flag"],$f["userflag"],$f["userid"],$f["cid"],$f["id"],$rank,$f["flag"],$f["userflag"]);
+	$in[]=sprintf("update u_ranking set good=%s,bad=%s,reply=%s,rank=%s,flag=%s,userflag=%s,userid=%s,cid=%s where commentid=%s and (rank!=%s and flag!=%s and userflag!=%s);",
+	$f["good"],$f["bad"],$f["reply"],$rank,$f["flag"],strlen($f["userflag"])>0?$f["userflag"]:0,$f["userid"],strlen($f["cid"])>0?$f["cid"]:6,$f["id"],$rank,$f["flag"],strlen($f["userflag"])>0?$f["userflag"]:0);
 
 }
 
