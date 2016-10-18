@@ -15,21 +15,21 @@ if(isset($_POST["setting-form-mail"])){
 	function mailreminder($email,$name,$site_url,$hash){
 
 		$to=$email;
-		$subject="【運動通信】パスワード再設定のお知らせ";
+		$subject="【SPORTS BULL】パスワード再設定のお知らせ";
 		$body=sprintf("%s様
 
-		この度は運動通信 Crazy for sports をご利用いただきまして、誠にありがとうございます。
+		この度は SPORTS BULL をご利用いただきまして、誠にありがとうございます。
 
 		お客様のパスワード再設定用URLをお送りいたしますので、下記URLより再設定をお願いいたします。
 		%sreset_password/resetting/?m=%s
 
 		ご不明な点等ございましたら、以下の運動通信カスタマーセンターまでお問い合わせください。
-		info@undotsushin.com
+		info@sportsbull.jp
 
 		[ご注意]
 		こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$name, $site_url, $hash);
-		$from="noreply@undotsushin.com";
-		$reply="info@undotsushin.com";
+		$from="noreply@sportsbull.jp";
+		$reply="info@sportsbull.jp";
 
 		return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
 

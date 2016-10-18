@@ -5,6 +5,7 @@ if(strpos($CURRENTPATH,$ADPATH)){
 	
 	include $INCLUDEPATH."dbutl.php";
 	include $INCLUDEPATH."pos.php";
+	include $INCLUDEPATH."aws.php";
 	include $INCLUDEPATH."tool.php";
 	include $INCLUDEPATH."input.php";
 	include $INCLUDEPATH."param.php";

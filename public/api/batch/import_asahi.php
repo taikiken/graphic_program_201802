@@ -28,7 +28,7 @@ while($f=$o->fetch_array()){
 	$exword[]=$f["name_e"];
 }
 
-$xml=file_get_contents($rssfile);
+$xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
@@ -79,9 +79,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$sql=sprintf("select * from repo_n where cid=1 and d2=%s t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
-	
+
 	unset($sqla);
-		
+
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if($s["a_time"]!=$f["a_time"]){

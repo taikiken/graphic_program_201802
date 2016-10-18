@@ -9,7 +9,7 @@ $loginUrl = $helper->getLoginUrl($rurl, $permissions);
 $ref=$_SERVER['HTTP_REFERER'];
 if(preg_match("/signup/",$ref)){
 	$_SESSION["redirecturl"]="/signup/";
-}elseif(preg_match("/login/",$ref)){
+}else{
 	$_SESSION["redirecturl"]="/login/";
 }
 header("Location: ".$loginUrl);
