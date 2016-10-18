@@ -135,27 +135,6 @@ if ( $template_name == 'category' ) {
   // ---[end 2016-09-01]---
 }
 ?>
-<?php
-if (0) :
-// ---------------------------------------
-// https://github.com/undotsushin/undotsushin/issues/951#issuecomment-254419007
-// スマホからのアクセスの際に、テンプレ側で、以下を入れるような処理を書いてたりしますか？
-// スマホ版はこいつでスタイルが上書きされて、再生アイコンが消えないようです。
-// @since 2016-10-18
-// 以下で追加されている
-// https://github.com/undotsushin/undotsushin/commit/b92fb0b9e423e643586e226dd3aef2bc681be0c9
-?>
-  <style type="text/css">
-    .vjs-big-play-button{
-      display: block !important;
-    }
-    /*video::-webkit-media-controls {
-      display:none !important;
-    }*/
-  </style>
-<?php
-// ---------------------------------------
-endif; ?>
 </head>
 <body>
 <div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
