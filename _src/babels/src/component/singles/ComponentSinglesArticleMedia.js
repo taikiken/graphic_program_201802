@@ -13,6 +13,7 @@
 // app
 import { MediaType } from '../../app/const/MediaType';
 import { Empty } from '../../app/const/Empty';
+import {Content} from '../../app/const/Content';
 
 // node
 import { MediaImageNode } from '../../node/single/MediaImageNode';
@@ -85,6 +86,9 @@ export class ComponentSinglesArticleMedia extends React.Component {
    * @return {XML} div.post-kv を返します
    */
   static video(single) {
+    // console.log('single');
+    // console.log(single.media);
+    // console.log(single.media.images.large);
     const images = single.media.images;
     let poster = Safety.image(images.original, '');
     if (poster === '') {
@@ -95,8 +99,23 @@ export class ComponentSinglesArticleMedia extends React.Component {
     if (caption !== '') {
       figCaption = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
     }
+    let videoId='content_video_'+single.id;
+    let videoContainer='mainContainer_'+single.id;
 
-    return (
+    let width =  Content.WIDTH;
+    let height =  Content.HD_HEIGHT;
+
+    return(
+        <div className="post-kv post-video-kv">
+        <div id={videoContainer}>
+          <video id={videoId} className="video-js vjs-default-skin" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+              <source src={single.media.video.url.hd} type="application/x-mpegURL"></source>
+          </video>
+          </div>
+        </div>
+    );
+
+    /*return (
       <div className="post-kv post-video-kv">
         <figure className="post-single-figure video-container">
           <div className="video-thumbnail-container">
@@ -107,8 +126,19 @@ export class ComponentSinglesArticleMedia extends React.Component {
           {figCaption}
         </figure>
       </div>
-    );
+    );*/
   }
+
+
+  componentDidMount() {
+    var single = this.state.single;
+    if (single.mediaType === MediaType.VIDEO) {
+      let videoId='content_video_'+single.id;
+      let player = videojs(videoId);
+    }
+
+  }
+
   /**
    * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}
    * @param {SingleDae} single 記事データ
