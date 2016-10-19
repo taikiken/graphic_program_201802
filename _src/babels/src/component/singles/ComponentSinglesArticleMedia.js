@@ -133,8 +133,27 @@ export class ComponentSinglesArticleMedia extends React.Component {
   componentDidMount() {
     var single = this.state.single;
     if (single.mediaType === MediaType.VIDEO) {
+      let vast = single.media.media.video.ad_url.pc;
+      console.log(single.media.media.video.ad_url.pc);
+      let adUrl = vast !== '' ? vast + Date.now() : '';
       let videoId='content_video_'+single.id;
       let player = videojs(videoId);
+      let option = {
+        id: videoId,
+        adTagUrl: adUrl
+      };
+
+      player.ima(option);
+
+      player.ima.initializeAdDisplayContainer();
+      player.ima.requestAds();
+      /*var adContainer = document.getElementById('content_video_ima-ad-container');
+      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');*/
+      player.one('click', function() {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
+      });
     }
 
   }

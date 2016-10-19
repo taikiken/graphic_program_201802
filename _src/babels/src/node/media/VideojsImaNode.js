@@ -129,7 +129,6 @@ export let VideojsImaNode = React.createClass( {
         player.play();
       } else { //for Mobile: click to play
 
-
         if (navigator.userAgent.match(/iPad/i)) {
           let videoElement = document.querySelector('#content_video_html5_api');
           this.videoElement = videoElement;
