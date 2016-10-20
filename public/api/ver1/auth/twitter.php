@@ -13,7 +13,7 @@ $url = $connection->url('oauth/authenticate', array('oauth_token' => $request_to
 $ref=$_SERVER['HTTP_REFERER'];
 if(preg_match("/signup/",$ref)){
 	$_SESSION["redirecturl"]="/signup/";
-}elseif(preg_match("/login/",$ref)){
+}else{
 	$_SESSION["redirecturl"]="/login/";
 }
 header( 'location: '. $url );

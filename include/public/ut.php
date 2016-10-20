@@ -160,10 +160,10 @@ function set_isreaction($uid){
 function mailregister($email,$name){
 
 	$to=$email;
-	$subject="【運動通信】会員登録完了のお知らせ";
+	$subject="【SPORTS BULL】会員登録完了のお知らせ";
 	$body=sprintf("%s様
 	
-	この度は、運動通信Crazy for sports www.undotsushin.com にご登録いただき、誠にありがとうございます。
+	この度は、SPORTS BULL sportsbull.jp にご登録いただき、誠にありがとうございます。
 	
 	会員登録が完了しましたのでお知らせいたします。
 	下記登録内容をご確認の上、大切に保管ください。
@@ -174,18 +174,18 @@ function mailregister($email,$name){
 	パスワード：　セキュリティ保持のため非公開
 	
 	※	パスワードを忘れた場合は、以下のURLから再登録をお願いいたします。
-	https://www.undotsushin.com/reset_password/
+	https://sportsbull.jp/reset_password/
 	
 	ご不明な点等ございましたら、以下の運動通信カスタマーセンターまでお問い合わせください。
-	info@undotsushin.com
+	info@sportsbull.jp
 	
 	※	当社コンテンツをご使用の際は、必ず下記の利用規約をお読みください。
-	https://www.undotsushin.com/about/terms/
+	https://sportsbull.jp/about/terms/
 	
 	[ご注意]
 	こちらのメールアドレスは送信専用のため、直接返信されても返答できませんので予めご了承ください。",$name,$email,$name);
-	$from="noreply@undotsushin.com";
-	$reply="info@undotsushin.com";
+	$from="noreply@sportsbull.jp";
+	$reply="info@sportsbull.jp";
 
 	return sendmail($to,$subject,preg_replace("/\t/","",$body),$from,$reply);
 }
@@ -200,25 +200,18 @@ function set_advertise($ad,$type){
 
 	$s["theme"]["base"]=strlen($ad["base"])>0?$ad["base"]:"normal";
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
-	$s["theme"]["images"]["pc"]=strlen($ad["pc_headerimg".$type])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$ad["pc_headerimg".$type]):"";
-	$s["theme"]["images"]["sp"]=strlen($ad["sp_headerimg".$type])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$ad["sp_headerimg".$type]):"";
+	$s["theme"]["images"]["pc"]=strlen($ad["pc_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad["pc_headerimg".$type]):"";
+	$s["theme"]["images"]["sp"]=strlen($ad["sp_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad["sp_headerimg".$type]):"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
 	
-	if(strlen($ad["pc_bannerlink"])>0&&strlen($ad["sp_bannerlink"])>0){
-		$s["banner"]["pc"]["text"]=mod_HTML($ad["bannertext"]);
-		$s["banner"]["pc"]["image"]=sprintf("%s/prg_img/img/%s",$ImgPath,$ad["pc_bannerimg"]);
-		$s["banner"]["pc"]["link"]=$ad["pc_bannerlink"];
-		$s["banner"]["sp"]["text"]=mod_HTML($ad["bannertext"]);
-		$s["banner"]["sp"]["image"]=sprintf("%s/prg_img/img/%s",$ImgPath,$ad["sp_bannerimg"]);
-		$s["banner"]["sp"]["link"]=$ad["sp_bannerlink"];
-	}else{
-		$s["banner"]["pc"]["text"]="";
-		$s["banner"]["pc"]["image"]="";
-		$s["banner"]["pc"]["link"]="";
-		$s["banner"]["sp"]["text"]="";
-		$s["banner"]["sp"]["image"]="";
-		$s["banner"]["sp"]["link"]="";
-	}
+		$s["banner"]["pc"]["text"]=checkstr($ad["bannertext"]);
+		$s["banner"]["pc"]["image"]=strlen($ad["pc_bannerimg"])>0?sprintf("%s/img/%s",$ImgPath,$ad["pc_bannerimg"]):"";
+		$s["banner"]["pc"]["link"]=checkstr($ad["pc_bannerlink"]);
+		$s["banner"]["sp"]["text"]=checkstr($ad["bannertext"]);
+		$s["banner"]["sp"]["image"]=strlen($ad["sp_bannerimg"])>0?sprintf("%s/img/%s",$ImgPath,$ad["sp_bannerimg"]):"";
+		$s["banner"]["sp"]["link"]=checkstr($ad["sp_bannerlink"]);
+
+
 	$s["ad"]["ios"]=$ad["ios_".$type];
 	$s["ad"]["android"]=$ad["android_".$type];
 	$s["ad"]["sp"]=$ad["sp_".$type];
@@ -238,16 +231,25 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 	
 	global $SERVERPATH;
 	
-	$ad[]=unserialize(file_get_contents(sprintf("%s/api/ver1/static/ad/0-0.dat",$SERVERPATH)));
+	$ad[]=unserialize(get_contents(sprintf("%s/api/ver1/static/ad/0-0.dat",$SERVERPATH)));
 	if($categoryid!=""){
+		unset($v);
 		$file=sprintf("%s/api/ver1/static/ad/10-%s.dat",$SERVERPATH,$categoryid);
-		if(file_exists($file))$ad[]=unserialize(file_get_contents($file));
+		if($v=get_contents($file)){
+			$ad[]=unserialize($v);
+		}
 	}
 	if($pageid!=""){
+		unset($v);
 		$file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$userid);
-		if(file_exists($file))$ad[]=unserialize(file_get_contents($file));
+		if($v=get_contents($file)){
+			$ad[]=unserialize($v);
+		}
+		unset($v);
 		$file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$pageid);
-		if(file_exists($file))$ad[]=unserialize(file_get_contents($file));
+		if($v=get_contents($file)){
+			$ad[]=unserialize($v);
+		}
 	}
 	$_adpc=array("sidebar_top","sidebar_bottom","single_top","single_bottom_left","single_bottom_right");
 	$_adsp=array("sp_list","sp_detail","ios_list","ios_detail","android_list","android_detail");
@@ -321,7 +323,7 @@ function set_categoriesinfo($f){
 	//タイトル画像のリンク追加
 	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
 	
-	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
+	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/img/%s",$ImgPath,$f["img"]):"";
 	$s["title"]=mod_HTML($f["title"]);
 	$s["description"]=mod_HTML($f["description"]);
 	
@@ -341,9 +343,22 @@ function set_categoryinfo($f,$personalized="",$longtitle=1){
 	$s["slug"]=$f["name_e"];
 	$s["url"]=sprintf("%s/category/%s/",$domain,$f["name_e"]);
 	if($personalized!=="")$s["is_interest"]=$personalized;
-	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$f["img"]):"";
+	$s["title_img"]=strlen($f["img"])>0?sprintf("%s/img/%s",$ImgPath,$f["img"]):"";
 	
 	return $s;
+}
+
+function urlmodify($body){
+	
+	/*
+	
+	すでに登録されている記事の画像パスを運動通信からSPORTS BULLに変換
+	
+	*/
+	
+	$body=str_replace("https://www.undotsushin.com/prg_img/","https://img.sportsbull.jp/",$body);
+	$body=str_replace("/prg_img/","https://img.sportsbull.jp/",$body);
+	return $body;
 }
 
 function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
@@ -368,11 +383,10 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	
 	if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
 	if($type==1){	
-		$s["body"]=$body;
+		$s["body"]=urlmodify($body);
 		$s["body_escape"]=stripbr($f["body"]);
 		if($apidetails!=1)$s["media_vk_refid"]=strlen($f["brightcove"])>0?$f["brightcove"]:"";
 	}
-
 
 	#1013 続きを読む
 	/*
@@ -385,14 +399,15 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["readmore"]["url"]=$f["t9"];
 	}
 	*/
+	
     $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
-    $v=unserialize(file_get_contents($file));
+    $v=unserialize(get_contents($file));
     $readmoreflag=$v["readmore"];
 	$canonicalflag=$v["canonical"];
 	
     $file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$f["id"]);
-    if(file_exists($file)){
-       $v=unserialize(file_get_contents($file));
+	if($v=get_contents($file)){
+	   $v=unserialize($v);
        $readmoreflag=$v["readmore"];
     }
 	if($readmoreflag){
@@ -581,7 +596,7 @@ function set_userinfo($f,$interestset){
 		$s["access_token"]=$f["token"];
 		$s["session_token"]="";
 	}else{
-		$s["logo"]["img"]=strlen($f["icon"])>0?sprintf("%s/prg_img/img/%s",$UserImgPath,$f["icon"]):"";
+		$s["logo"]["img"]=strlen($f["icon"])>0?sprintf("%s/img/%s",$UserImgPath,$f["icon"]):"";
 		$s["logo"]["link"]=strlen($f["icon"])>0&&strlen($f["url"])>0?$f["url"]:"";
 	}
 	
@@ -632,11 +647,26 @@ function check_token($h){
 	return $s;
 }
 
+function auth(){
+	
+	global $o,$H;
+	$token=check_token($H);
+
+	if(strlen($token["oautn_token"])>0){
+		$sql=sprintf("select id from u_member where flag=1 and a15='%s'",trim($token["oautn_token"]));
+		$o->query($sql);
+		$f=$o->fetch_array();
+	}
+	//debug($token["oautn_token"],$f["id"]);
+	return isset($f["id"])?$f["id"]:"";
+}
+
 function wlog($file,$data){
 	$fp=fopen($file,"a");
 	fputs($fp,sprintf("%s\n",implode("\t",$data)));
 	fclose($fp);
 }
+
 function debug($token,$id,$txt=array()){
 	
 	global $H,$_SERVER,$_GET,$_POST,$_FILES,$_COOKIE,$LOGTXT;
@@ -644,6 +674,7 @@ function debug($token,$id,$txt=array()){
 	if(count($txt)==0){
 		$log=$H;
 		$log["REQUEST_URI"]=$_SERVER['REQUEST_URI'];
+		$log["HTTP_REFERER"]=$_SERVER['HTTP_REFERER'];
 		$log["ACCESS_TOKEN"]=$token;
 		$log["USERID"]=$id;
 		$log["IP"]=$_SERVER['REMOTE_ADDR'];
@@ -663,20 +694,6 @@ function debug($token,$id,$txt=array()){
 	
 }
 
-function auth(){
-	
-	global $o,$H;
-	$token=check_token($H);
-
-	if(strlen($token["oautn_token"])>0){
-		$sql=sprintf("select id from u_member where flag=1 and a15='%s'",trim($token["oautn_token"]));
-		$o->query($sql);
-		$f=$o->fetch_array();
-	}
-	//debug($token["oautn_token"],$f["id"]);
-	return isset($f["id"])?$f["id"]:"";
-}
-
 function get_img($img,$id){
 	
 	global $ImgPath;
@@ -688,10 +705,10 @@ function get_img($img,$id){
 	
 	for($i=0;$i<count($path);$i++){
 		if(strlen($img)==0){
-				$s[$type[$i]]=sprintf("%s/prg_img/%s/%s",$ImgPath,$path[$i],$defimg);
+				$s[$type[$i]]=sprintf("%s/%s/%s",$ImgPath,$path[$i],$defimg);
 		}else{
 			if(!preg_match("/http/",$img)){
-				$s[$type[$i]]=sprintf("%s/prg_img/%s/%s",$ImgPath,$path[$i],$img);
+				$s[$type[$i]]=sprintf("%s/%s/%s",$ImgPath,$path[$i],$img);
 			}else{
 				$s[$type[$i]]=$img;
 			}
@@ -874,7 +891,7 @@ function sendmail($to,$subject,$body,$from,$reply){
 	$msg=stripslashes($body);
 	$msg=addslashes($msg);
 	$msg=mb_convert_encoding($msg,"JIS","UTF-8");
-	$header="From:=?iso-2022-jp?B?".base64_encode(mb_convert_encoding("運動通信","JIS","UTF-8"))."?=<".$from.">\n";
+	$header="From:=?iso-2022-jp?B?".base64_encode(mb_convert_encoding("SPORTS BULL","JIS","UTF-8"))."?=<".$from.">\n";
 	$header.="Bcc: info@undotsushin.com\n";
 	$header.="Reply-To:".$reply."\n";
 	$header.="Return-Path:".$from."\n";
@@ -894,12 +911,30 @@ function print_json($y,$r){
 }
 
 function get_contents($url){
-	$ch=curl_init($url);
-	curl_setopt( $ch,CURLOPT_RETURNTRANSFER,TRUE );
-	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
-	$response=curl_exec($ch);
-	curl_close($ch);
-	return $response;
+	
+	if(preg_match("/http/",$url)){	
+		$ch=curl_init();	
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+		if(preg_match("/https/",$url)){
+			curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+			curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
+		}
+		$output=curl_exec($ch);
+	}else{
+		$output=file_get_contents($url);
+	}
+	
+	if(curl_errno($ch))return "";
+	else return $output;
+}
+
+function s3upload($from,$to){
+	global $s3active;
+	if($s3active){
+		$s3i=new S3Module;
+		$s3i->upload($from,$to);
+	}
 }
 
 function split_utime($a){
