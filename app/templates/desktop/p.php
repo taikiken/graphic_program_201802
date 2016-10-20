@@ -4,7 +4,27 @@
 //include_once __DIR__.'/_category-heading.php';
 
 ?>
+<style type="text/css">
 
+  .video-js .vjs-big-play-button:before{
+    content: '' !important;
+  }
+  .video-js .vjs-big-play-button{
+      width: 2.5em !important;
+      height: 2.5em !important;
+      border: none;
+      border-radius: 50% !important;
+      background-color: transparent  !important;
+      background: url('/assets/images/common/video-play-btn-80x80.png') ;
+      background-repeat:no-repeat;
+      background-size:100% 100%;
+      margin-top: -1.25em !important;
+      margin-left: -1.25em !important;
+    }
+  .video-js .vjs-big-play-button:hover{
+      background-color: rgba(43,51,63,.7) !important;
+    }
+</style>
 <div class="body-sec">
   <div class="body-sec-inner">
     <?php
