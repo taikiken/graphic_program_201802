@@ -7,88 +7,94 @@ $o=new db;
 $o->connect();
 
 $apidetails=1;
-
 $uid=auth();
 $id=bind($_REQUEST["id"]);
-$f=set_article($id,$uid);
 
-if($y["status"]["code"]===200){
-
-	//媒体バナー - 後で消す
-	if($f["userid"]==7||$f["userid"]==12){
-		
-		$sql=sprintf("select * from u_banner where cid=%s",$f["userid"]);
-		$o->query($sql);
-		$b=$o->fetch_array();
-				
-		if(strlen($b["pcimg"])>0||strlen($b["spimg"])>0){
-			$banner["pc"]["text"]=$b["alt"];
-			$banner["pc"]["image"]=strlen($b["pcimg"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$b["pcimg"]):"";
-			$banner["pc"]["link"]=checkstr($b["pclink"]);
-			$banner["sp"]["text"]=$b["alt"];
-			$banner["sp"]["image"]=strlen($b["spimg"])>0?sprintf("%s/prg_img/img/%s",$ImgPath,$b["spimg"]):"";
-			$banner["sp"]["link"]=checkstr($b["splink"]);
-		}
-	}else{
-	  $banner["pc"]["text"]="";
-	  $banner["pc"]["image"]="";
-	  $banner["pc"]["link"]="";
-	  $banner["sp"]["text"]="";
-	  $banner["sp"]["image"]="";
-	  $banner["sp"]["link"]="";	
-	}
-
-	$ad=get_advertise($f["m1"],$f["userid"],$f["id"]);
-	$s=set_articleinfo($f,1);
+if($_REQUEST["api"]!="next"){
 	
-	//ランキングは外部処理にしたい
-	wlog($ACLOGTXT,array(strlen($f["m1"])>0?$f["m1"]:0,strlen($f["m2"])>0?$f["m2"]:0,$id,$s["media_type"]=="image"?0:1,date("Y-m-d H:i:s",strtotime($f["m_time"])),date("Y-m-d H:i:s")));
-
-	$s["keywords"]=array();
-	for($i=10;$i<=15;$i++)if(strlen($f["t".$i])>0)$s["keywords"][]=$f["t".$i];
+	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id=%s",$id)));	
+}else{
 	
-	/*
-	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and m1=%s order by m_time desc limit 4 offset 0",$f["m1"])));
+	$offset=strlen($_REQUEST["offset"])>0?$_REQUEST["offset"]:0;
+	$length=strlen($_REQUEST["length"])>0?$_REQUEST["length"]:10;
+	$limit=sprintf(" limit %s offset %s",$length,$offset);
+
+	$sql=sprintf("select st2.* from (select t2.id from (select m1,m_time from repo_n where id=%s) as t1,repo_n as t2 where t2.m1=t1.m1 and t2.m_time<t1.m_time order by t2.m_time desc %s) as st1,(select * from %s) as st2 where st1.id=st2.id order by m_time desc",
+	$id,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""));
+	
+}
+$o->query($sql);
+while($f=$o->fetch_array())$p[]=$f;
+
+$relatedPosts=unserialize(get_contents(sprintf("%s/static/%s.dat",$ImgPath,$p[0]["m1"])));
+if(!$relatedPosts)$relatedPosts=array();
+
+// #860 - crazyのみ関連記事
+if ($p[0]["m1"]==134){
+	$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""));
 	$o->query($sql);
 	while($f=$o->fetch_array()){
-		$s["related_articles"][]=set_articleinfo($f,1);
+		$crazyRelatedArticles[]=set_articleinfo($f,1);
 	}
-	*/
+}else{
+	// crazy以外は空配列
+	$crazyRelatedArticles = array();
+}
+
+$articles=array();
+
+for($i=0;$i<count($p);$i++){
+
+	$l="";
+	if(in_array($p[$i]["d2"],$RELATEDLINK_ALLOWED)){
+		$sql=sprintf("select title,link from u_link where pid=%s order by n",$p[$i]["id"]);
+		$o->query($sql);
+		while($ee=$o->fetch_array())$ulink[]=$ee;
+		if(count($ulink)>0){
+			$l="<p>関連リンク<br>";
+			for($j=0;$j<count($ulink);$j++){
+				if(strlen($ulink[$j]["title"])>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\">%s</a><br>",$ulink[$j]["title"],$ulink[$j]["link"]);
+			}
+			$l.="</p>";
+		}
+		$p[$i]["relatedpost"]=$l;
+	}
+
+	$ad=get_advertise($p[$i]["m1"],$p[$i]["userid"],$p[$i]["id"]);
+	$s=set_articleinfo($p[$i],1);
+	
+	$s["keywords"]=array();
+	for($j=10;$j<=15;$j++)if(strlen($p[$i]["t".$j])>0)$s["keywords"][]=$p[$i]["t".$j];
 	
 	$ad_put=set_advertise($ad,"detail");
 	$s=$s+$ad_put;
 	unset($s["vast"]);
 	unset($s["ad_urlpc"]);
 	unset($s["ad_urlsp"]);
-
 	
-	$relatedposts=unserialize(file_get_contents(sprintf("%s/api/ver1/static/%s.dat",$SERVERPATH,$f["m1"])));
-	$s["related_articles"]=!$relatedposts?array():$relatedposts;
-
- 	// #860 - ダミー
- 	if ( $s['categories'][0]['slug'] == 'crazy' ){
- 		
- 		// とりあえずheadlineの内容返す
- 		$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""));
- 		$o->query($sql);
- 		while($f=$o->fetch_array()){
- 			$s["recommend_articles"][]=set_articleinfo($f,1);
- 		}
- 
-	}else{
- 		
- 		// crazy以外は空配列
- 		$s["recommend_articles"] = array();
-	}
- 
- 
-
-
-}else{
-	$s=(object)$s;
+	$s["recommend_articles"]=$crazyRelatedArticles;
+	if($_REQUEST["api"]!="next")$s["related_articles"]=$relatedPosts;
+	$articles[]=$s;
+	unset($s);
 }
 
-$y["response"]=$s;
+if($_REQUEST["api"]!="next"){
+	$y["response"]=$articles[0];
+	//ランキングは外部処理にしたい
+	wlog($ACLOGTXT,array(strlen($p[$i]["m1"])>0?$p[$i]["m1"]:0,strlen($p[$i]["m2"])>0?$p[$i]["m2"]:0,$id,$s["media_type"]=="image"?0:1,date("Y-m-d H:i:s",strtotime($p[$i]["m_time"])),date("Y-m-d H:i:s")));
+}else{
+
+	$nsql=sprintf("select count(*) as n from (select m1,m_time from repo_n where id=%s) as t1,(select m1,m_time from repo_n where flag=1) as t2 where t2.m1=t1.m1 and t2.m_time<t1.m_time",$id);
+	$o->query($nsql);
+	$f=$o->fetch_array();
+	
+	$y["response"]["count"]=(int)$f["n"];
+	$y["response"]["articles"]=$articles;
+	$y["response"]["related_articles"]=$relatedPosts;
+	$y["request"]["length"]=(int)$length;
+	$y["request"]["offset"]=(int)$offset;
+}
+
 print_json($y,$_SERVER['HTTP_REFERER']);
 
 ?>

@@ -25,6 +25,7 @@ if(strlen($f["name"])>0){
 	カテゴリーにpickup, hedlineの記事を追加
 	
 	*/
+
 	$sql=sprintf("select id from repo where t1='%s'",$category);
 	$o->query($sql);
 	$c=$o->fetch_array();
@@ -34,7 +35,7 @@ if(strlen($f["name"])>0){
 		$uid=auth();
 		
 		$sql=sprintf("select rt1.title as modtitle,rt2.* from (select d2,title,n as sort from u_headline where cid=%s and flag=1) as rt1,(select * from %s) as rt2 where rt1.d2=rt2.id order by sort",$c["id"],sprintf($articletable,set_isbookmark($uid),""));
-		$nsql=sprintf("select count(id) as n from u_headline where cid=11 and flag=1",$c["id"]);
+		$nsql=sprintf("select count(id) as n from u_headline where cid=%s and flag=1",$c["id"]);
 		
 		$o->query($nsql);
 		$f=$o->fetch_array();

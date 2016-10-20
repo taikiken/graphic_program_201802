@@ -21,7 +21,6 @@ if($y["status"]["code"]===200){
 	if(strlen($type)==0){
 		if(strlen($commentid)==0){
 
-
 		$sql=sprintf("select * from 
 			(select t2.*,t1.good,t1.bad,t1.rank from 
 				(select commentid,good,bad,reply,rank from u_ranking where pageid=%s and flag=1 and userflag=1 order by rank desc limit %s offset %s) as t1,

@@ -31,6 +31,7 @@ $y=array(
 	"profile_picture"=>$picture
 );
 
+
 $_SESSION['fb_access_token'] = (string) $accessToken;
 
 $o=new db;

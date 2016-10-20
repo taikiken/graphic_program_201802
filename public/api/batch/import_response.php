@@ -34,7 +34,7 @@ $rssfile="http://response.jp/feed/article/index.xml";
 $o=new db;
 $o->connect();
 
-$xml=file_get_contents($rssfile);
+$xml=get_contents($rssfile);
 $xml=str_replace("iid:", "", $xml);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
@@ -56,8 +56,13 @@ for($i=0;$i<count($data["entry"]);$i++){
 	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["entry"][$i]["updated"]));
 	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["entry"][$i]["updated"]));
 	
-	$s["t30"]=$data["entry"][$i]["img"][0]["@attributes"]["url"];
-	$s["t1"]=$data["entry"][$i]["img"][0]["@attributes"]["alt"].$data["entry"][$i]["img"][0]["@attributes"]["copyright"];
+	if(count($data["entry"][$i]["img"])==1){
+		$s["t30"]=$data["entry"][$i]["img"]["@attributes"]["url"];
+		$s["t1"]=$data["entry"][$i]["img"]["@attributes"]["alt"].$data["entry"][$i]["img"][0]["@attributes"]["copyright"];
+	}else{
+		$s["t30"]=$data["entry"][$i]["img"][0]["@attributes"]["url"];
+		$s["t1"]=$data["entry"][$i]["img"][0]["@attributes"]["alt"].$data["entry"][$i]["img"][0]["@attributes"]["copyright"];
+	}
 	
 	$keyword=modKeyword($data["entry"][$i]["gigaindex"]);
 	$s["keyword"]=implode(",",$keyword);
@@ -79,7 +84,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 			  $s["img1"]=outimg($s["t30"]);
 			  for($jj=1;$jj<count($data["entry"][$i]["img"]);$jj++){
 				  $oimg=$data["entry"][$i]["img"][$jj]["@attributes"]["url"];
-				  $bodyimg.=sprintf("<p><img src=\"%s/prg_img/raw/%s\" alt=\"%s%s\"></p><p>%s%s</span></p>",$ImgPath,outimg($oimg,0),$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"],$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"]);
+				  $bodyimg.=sprintf("<p><img src=\"%s/raw/%s\" alt=\"%s%s\"></p><p>%s%s</span></p>",$ImgPath,outimg($oimg,0),$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"],$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"]);
 			  }
 			  $modbody.=$bodyimg;
 		  }else{
@@ -105,7 +110,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 			  $s["img1"]=outimg($s["t30"]);
 			  for($jj=1;$jj<count($data["entry"][$i]["img"]);$jj++){
 				  $oimg=$data["entry"][$i]["img"][$jj]["@attributes"]["url"];
-				  $bodyimg.=sprintf("<p><img src=\"%s/prg_img/raw/%s\" alt=\"%s%s\"></p><p>%s%s</span></p>",$ImgPath,outimg($oimg,0),$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"],$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"]);
+			 	  $bodyimg.=sprintf("<p><img src=\"%s/raw/%s\" alt=\"%s%s\"></p><p>%s%s</span></p>",$ImgPath,outimg($oimg,0),$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"],$data["entry"][$i]["img"][$jj]["@attributes"]["alt"],$data["entry"][$i]["img"][$jj]["@attributes"]["copyright"]);
 			  }
 			  $modbody.=$bodyimg;
 		  }

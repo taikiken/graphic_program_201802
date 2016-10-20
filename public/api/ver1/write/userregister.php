@@ -2,6 +2,7 @@
 
 include "local.php";
 include "tool.php";
+include "aws.php";
 include "public/check.php";
 
 $o=new db;
@@ -77,7 +78,9 @@ if(strlen($twitterid)>0){
 }
 
 if($_POST["create"]!="false"){
-		
+	
+	$s3i=new S3Module;
+	
 	if(strlen($_FILES["profile_picture"]["tmp_name"])>0){
 		
 		if(preg_match("/image\/(gif|jpeg|png)/i",$_FILES["profile_picture"]["type"])){
@@ -85,10 +88,12 @@ if($_POST["create"]!="false"){
 			$ext=checkFileType($_FILES["profile_picture"]);
 			$filename=sprintf("%s.%s",md5("ut".$email),$ext);
 			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$USERS."/raw/".$filename)){
-				
 				//$e=exif_read_data($USERS."/raw/".$filename);
-				
 				imgDresize($USERS."/raw/".$filename,$USERS."/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
+				
+				$s3i->upload(sprintf("%s/raw/%s",$USERS,$filename),sprintf("users/raw/%s",$filename));
+				$s3i->upload(sprintf("%s/img/%s",$USERS,$filename),sprintf("users/img/%s",$filename));
+				
 				$sv[$sn[]="img1"]=$ui["icon"]=$filename;
 			}else{
 				$ermsg["profile_picture"]="ファイルのアップロードに失敗しました。";
@@ -101,18 +106,24 @@ if($_POST["create"]!="false"){
 		$url=str_replace("https://","http://",$_SESSION["usersinfo"]["profile_picture"]);
 		if(strlen($url)>0){
 			if(!preg_match("/default_profile_images/",$url)){
+				
 				$size=getimagesize($url);
 				preg_match("/\.(jpg|jpeg|png|gif)/i",$url,$r);
 				$ext=strtolower($r[1]);
 				$filename=sprintf("%s.%s",md5("ut".$email),$ext);
 				$rawdata=sprintf("%s/raw/%s",$USERS,$filename);
-				$data=file_get_contents($url);
+				$data=get_contents($url);
 				file_put_contents($rawdata,$data);
+				
 				if($size[0]>300){
 					imgDresize($rawdata,str_replace("/raw/","/img/",$rawdata),array($SIZE,$SIZE),$ext,"","","","");
 				}else{
 					copy($rawdata,str_replace("/raw/","/img/",$rawdata));
 				}
+				
+				$s3i->upload(sprintf("%s/raw/%s",$USERS,$filename),sprintf("users/raw/%s",$filename));
+				$s3i->upload(sprintf("%s/img/%s",$USERS,$filename),sprintf("users/img/%s",$filename));
+				
 				debug("","",array("url"=>$url,"filename"=>$rawdata));
 				$sv[$sn[]="img1"]=$ui["icon"]=$filename;
 			}

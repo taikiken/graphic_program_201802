@@ -1,6 +1,8 @@
 <?php
 
 include $INCLUDEPATH."local.php";
+$s3active=preg_match("#/apache/htdocs/#",$SERVERPATH)?0:1;
+if($s3active)include $INCLUDEPATH."aws.php";
 
 $o=new db;
 $o->connect();
@@ -37,14 +39,15 @@ for($i=0;$i<count($p);$i++){
 		$u1.="<url>\n"; 
 		$u1.=sprintf("<loc>%s/p/%s/</loc>\n",$domain,$f["id"]);
 		$u1.=sprintf("<lastmod>%s</lastmod>\n",date("Y-m-d",strtotime($f["u_time"])));
-		if(!preg_match("/^http/",$f["img1"])&&strlen($f["img1"])>0)$u1.=sprintf("<image:image><image:loc>%s/prg_img/raw/%s</image:loc><image:caption>%s</image:caption></image:image>",$domain,$f["img1"],htmlspecialchars($f["t1"]));
+		if(!preg_match("/^http/",$f["img1"])&&strlen($f["img1"])>0)$u1.=sprintf("<image:image><image:loc>%s/raw/%s</image:loc><image:caption>%s</image:caption></image:image>",$ImgPath,$f["img1"],htmlspecialchars($f["t1"]));
 		$u1.="</url>\n";
 	}
 	
 	file_put_contents(sprintf("%s/api/ver1/static/sitemap/%s.xml",$SERVERPATH,$p[$i]["name_e"]),sprintf($container,$u1));
+	s3upload(sprintf("%s/api/ver1/static/sitemap/%s.xml",$SERVERPATH,$p[$i]["name_e"]),sprintf("static/sitemap/%s.xml",$p[$i]["name_e"]));
 	
 	$u.="<url>\n"; 
-	$u.=sprintf("<loc>%s/api/ver1/static/sitemap/%s.xml</loc>\n",$domain,$p[$i]["name_e"]);
+	$u.=sprintf("<loc>%s/static/sitemap/%s.xml</loc>\n",$ImgPath,$p[$i]["name_e"]);
 	$u.=sprintf("<lastmod>%s</lastmod>\n",date("Y-m-d",strtotime($p[$i]["u_time"])));
 	$u.="</url>\n";
 }

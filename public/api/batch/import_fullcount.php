@@ -9,7 +9,7 @@ $rssfile="http://full-count.jp/fineplay-feed/";
 $o=new db;
 $o->connect();
 
-$xml=file_get_contents($rssfile);
+$xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 

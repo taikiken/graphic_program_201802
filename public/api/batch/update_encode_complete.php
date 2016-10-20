@@ -13,7 +13,7 @@ $sql=sprintf("insert into u_encoded(filename,bucket,playtime,flag,u_time,m_time)
 $o->query($sql);
 
 if(!preg_match("/dev/",$servername)){
-	file_get_contents(sprintf("http://dev.undotsushin.com/api/batch/update_encode_complete.php?id=%s&time=%s&media=%s",$id,$time,$media));
+	get_contents(sprintf("https://dev.sportsbull.jp/api/batch/update_encode_complete.php?id=%s&time=%s&media=%s",$id,$time,$media));
 }
 
 ?>

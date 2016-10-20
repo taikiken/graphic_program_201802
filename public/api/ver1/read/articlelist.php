@@ -7,8 +7,8 @@ $o=new db;
 $o->connect();
 
 $uid=auth();
-$offset=isset($_REQUEST["offset"])?$_REQUEST["offset"]:0;
-$length=isset($_REQUEST["length"])?$_REQUEST["length"]:10;
+$offset=strlen($_REQUEST["offset"])>0?$_REQUEST["offset"]:0;
+$length=strlen($_REQUEST["length"])>0?$_REQUEST["length"]:10;
 
 $api=set_articleapi($_REQUEST["api"]);
 
@@ -40,8 +40,8 @@ if(strlen($api)>0){
 			
 			if($staticfileimport==1&&$offset==0&&$length==5){
 				
-				$file=sprintf("%s/api/ver1/static/%s-%s.json",$SERVERPATH,$category,$type);
-				$y=file_get_contents($file);
+				$file=sprintf("%s/static/%s-%s.json",$ImgPath,$category,$type);
+				$y=get_contents($file);
 				header('Content-Type: application/json; charset=utf-8');
 				echo $y;
 				exit;
@@ -71,18 +71,18 @@ if(strlen($api)>0){
 
 			if($staticfileimport==1&&$offset==0&&$length==5){
 				
-				$file=sprintf("%s/api/ver1/static/%s-%s.json",$SERVERPATH,$category,$type);
-				$y=file_get_contents($file);
+				$file=sprintf("%s/static/%s-%s.json",$ImgPath,$category,$type);
+				$y=get_contents($file);
 				header('Content-Type: application/json; charset=utf-8');
 				echo $y;
 				exit;
 				
 			}else{
 
-				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=1 order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
-				str_replace(" and","",$c[1]),sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
-				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=1) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
-				str_replace(" and","",$c[1]),sprintf($articletable2c,$c[1],"",""),"");
+				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and video=1%s order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
+				str_replace(" and","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=1%s) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
+				str_replace(" and","",$c[1]),$category=="all"?" and regitime > now() - interval '7 day'":"",sprintf($articletable2c,$c[1],"",""),"");
 			}
 /*		
 			$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid),$c." and (swf is not null or youtube is not null or facebook is not null)"),$length,$offset);
@@ -92,21 +92,21 @@ if(strlen($api)>0){
 		// #860 - ダミーレスポンス
 		}elseif($type === "recommend"){
 			
-			/*
+			
 			if ( $category === 'crazy' ){
 				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
 				$nsql="select count(id) as n from u_headline where cid=11 and flag=1";
 			}else{
 				
 			}
-			*/
+			
 			
 			/*
 			
 			#970   https://github.com/undotsushin/undotsushin/issues/970
 			カテゴリーだけではなく、一覧にも適用
 			
-			*/
+			
 			
 			$sql=sprintf("select id from repo where t1='%s'",$category);
 			$o->query($sql);
@@ -118,7 +118,7 @@ if(strlen($api)>0){
 			}else{
 				
 			}
-			
+			*/
 			
 		}
 	
@@ -135,7 +135,24 @@ if(strlen($api)>0){
 			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where %s and uptime > now() - interval '90 day') as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
 
 		}
+
+	}elseif($api==="next"){
 		
+		$targetid=$_REQUEST["id"];
+
+		$sql=sprintf("select st2.* from (select t2.id from (select m1,m_time from repo_n where id=%s) as t1,repo_n as t2 where t2.m1=t1.m1 and t2.m_time>t1.m_time order by t1.m_time %s) as st1,(select * from %s) as st2 where st1.id=st2.id order by m_time",
+		$targetid,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""));
+		
+		$nsql=sprintf("select count(*) as n from (select m1,m_time from repo_n where id=%s) as t1,repo_n as t2 where t2.m1=t1.m1 and t2.m_time>t1.m_time and t2.flag=1",$targetid);
+		
+		/*
+		$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and video=1) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
+		str_replace(" and","",$c[1]),sprintf($articletable2c,$c[1],"",""),"");
+		*/
+/*
+		$sql=sprintf("select st02.* from (select id from u_index where %s and uptime > now() - interval '90 day') as st01,(select * from %s) as st02 where st01.id=st02.id order by m_time desc,id limit %s offset %s",$q,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
+		$nsql=sprintf("select count(t1.id) as n from (select id from u_index where %s and uptime > now() - interval '90 day') as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
+*/
 	}elseif($api=="home"||$api=="self"){
 		
 		$cx=set_home($_REQUEST["c"]);

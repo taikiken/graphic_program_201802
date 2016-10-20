@@ -584,8 +584,6 @@ function makeComment($s,$m,$c){
 	return $l;
 }
 
-
-
 function checkFileType($p){
 	$extension="";
 	switch($p["type"]){
@@ -611,7 +609,11 @@ function imgFileMove($p,$filename){
 	global $RAWIMG;
 	if(move_uploaded_file($p["tmp_name"],$TMPPATH.$filename)){
 		if(copy($TMPPATH.$filename,$RAWIMG.$filename)){
+			
 			$up=1;
+			$s3i=new S3Module;
+			$s3i->upload(sprintf("%s%s",$TMPPATH,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$RAWIMG,$filename)));
+
 		}else{
 			$up=0;
 		}
@@ -622,6 +624,7 @@ function imgFileMove($p,$filename){
 }
 
 function makeDefaultImg($filename,$type){
+
 	if($type=="jpg"){
 		return imagecreatefromjpeg($filename);
 	}elseif($type=="png"){
@@ -644,6 +647,13 @@ function outputImg($res,$filename,$type){
 	}else{
 		echo "画像の出力に失敗しました。もう一度アップロードしてください。";
 	}
+	
+	if(preg_match("/prg_img/",$filename)){
+		$upfile=str_replace("../../../prg_img/","",$filename);
+		$s3i=new S3Module;
+		$s3i->upload($filename,$upfile);
+	}
+	
 	return $e;
 }
 
@@ -696,36 +706,40 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 
 	global $IMG;
 	global $RAWIMG;
-	
 		
-		if(strlen($type)==0)$type=substr($filename,-3,3);
-		if(strlen($size)==0)$size=getimagesize($RAWIMG.$filename);
-	
-		for($i=0;$i<count($imgSubstance);$i++){
-			if($type!="gif"){
-				if($imgSubstance[$i]["w"]!=""&&$imgSubstance[$i]["h"]!=""){
-					if($imgSubstance[$i]["w"]<$size[0]){
-						imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
-					}else{
-						if($i==0){
-							copy($RAWIMG.$filename,$IMG[$i].$filename);
-							imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
-						}else{
-							imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
-						}
-					}
-				}elseif($imgSubstance[$i]["w"]!=""){
-					if($imgSubstance[$i]["w"]<$size[0]){
-						imgResize($RAWIMG.$filename,$IMG[$i].$filename,$imgSubstance[$i]["w"],$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
-					}else{
+	if(strlen($type)==0)$type=substr($filename,-3,3);
+	if(strlen($size)==0)$size=getimagesize($RAWIMG.$filename);
+
+	$s3i=new S3Module;
+
+	for($i=0;$i<count($imgSubstance);$i++){
+		if($type!="gif"){
+			if($imgSubstance[$i]["w"]!=""&&$imgSubstance[$i]["h"]!=""){
+				if($imgSubstance[$i]["w"]<$size[0]){
+					imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
+				}else{
+					if($i==0){
 						copy($RAWIMG.$filename,$IMG[$i].$filename);
-						imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
+						$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+						//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
+					}else{
+						imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
 					}
 				}
-			}else{
-				copy($RAWIMG.$filename,$IMG[$i].$filename);
+			}elseif($imgSubstance[$i]["w"]!=""){
+				if($imgSubstance[$i]["w"]<$size[0]){
+					imgResize($RAWIMG.$filename,$IMG[$i].$filename,$imgSubstance[$i]["w"],$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
+				}else{
+					copy($RAWIMG.$filename,$IMG[$i].$filename);
+					$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+					//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
+				}
 			}
+		}else{
+			copy($RAWIMG.$filename,$IMG[$i].$filename);
+			$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
 		}
+	}
 
 }
 
@@ -910,7 +924,7 @@ function imgDresize($img_name,$n_Img,$re_size,$p="jpg",$copytype,$copy,$iconNo,$
 }
 
 function imgFresize($filename,$newimgname,$w,$h,$tx,$ty,$ow,$oh,$copytype,$copy,$iconNo,$iconPos,$rotation,$pt){
-	
+
 	$size=getimagesize($filename);
 	$p=substr($filename,-3,3);
 	$newImg=imagecreatetruecolor($w,$h);

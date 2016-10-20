@@ -1,5 +1,6 @@
 function selectedmedia(id){
-	$(".inputCap,.facebook,.t7,.t9,.body,.t16,.youtube,.t30,.swf,.t8,.a7a8a9a10a11a12").show();
+	
+	$(".inputCap,.facebook,.t7,.t9,.body,.t16,.youtube,.t30,.swf,.t8,.a7a8a9a10a11a12,.brightcove").show();
 	
 	//関連リンク
 	if(in_array(id,RELATEDLINK_ALLOWED))relatedlink(1);
@@ -33,9 +34,13 @@ function selectedmedia(id){
 	if(in_array(id,MCAPTION_ALLOWED))mcaption(1);
 	else mcaption(0);
 
-	//FACEBOOK
+	//Contents詳細
 	if(in_array(id,CONTENTS_ALLOWED))contents(1);
 	else contents(0);
+
+	//外部Brightcove
+	if(in_array(id,EXBRIGHTCOVE_ALLOWED))exbrightcove(1);
+	else exbrightcove(0);
 /*		
 	//コンテンツ
 	if($.inArray(id,CONTENTS_EDITED)!=-1){
@@ -110,6 +115,11 @@ function contents(f){
 	if(f===1)$(".bodyflag").show();
 	else $(".bodyflag").hide();
 }
+function exbrightcove(f){
+	if(f===1)$(".brightcove").show();
+	else $(".brightcove").hide();
+}
+
 function toggle_options(t,f){
 	t.css({"display":f===1?"block":"none"});
 }
@@ -123,6 +133,19 @@ function ut_init(){
 			var s=ni.match(/^([0-9]+):/);
 			ni=s[1]-0;
 		}
+		
+		$(".m_time .inputFields").append('<span class="btncurrenttime rollover " id="sm_time">現在の日時を設定</span>');
+		$("#sm_time").click(function(){
+			var now = new Date();
+			var u=[];
+			u[0]=now.getFullYear();
+			u[1]=now.getMonth()+1;
+			u[2]=now.getDate();
+			u[3]=now.getHours();
+			u[4]=now.getMinutes();
+			u[5]=now.getSeconds();
+			$("[name='p_m_time']").val(sprintf("%s-%s-%s %s:%s:%s",u[0],("0"+u[1]).slice(-2),("0"+u[2]).slice(-2),("0"+u[3]).slice(-2),("0"+u[4]).slice(-2),("0"+u[5]).slice(-2)));
+		});
 
 		if(dir===0&&fil===0){
 			settime("a1a2a3a4a5a6");
@@ -134,6 +157,8 @@ function ut_init(){
 				$("[name='p_d1']").val($.cookie("exusercategory"));
 				ni=c.match(/^([0-9]+):/)[1]-0;
 			}
+			
+			$(".m_time").hide();
 		}
 		
 		$(".inputTitle").each(function(){
@@ -234,8 +259,16 @@ function ut_init(){
 			});
 		}
 	}else if(cd=="u_member"){
+		
 		$(".t_display,.display").css({"borderLeft":"3px solid #ccc"});
+		
+		if(dir==1||dir==2){
+			$(".img1 a,.imgDelete,.img1 input,.img1 .inputCap").hide();
+			$("[name='img1']").attr("src",$("[name='img1']").attr("src").replace(/img/,"img/users"));
+		}
+		
 	}else if(cd=="advertise"){
+		$("#cmdtypes9").before("<br>");
 		$("[name$='flag']").each(function(){
 			if($(this).prop("checked"))toggleflag($(this).attr("name"),$(this).val());
 		});
@@ -279,7 +312,7 @@ function ut_init(){
 				var t=$("textarea").val();
 				t=t.replace(/width="[0-9]+"/,"width=\"728\"").replace(/height="[0-9]+"/,"height=\"410\"").replace(/max-width:[0-9]+px/,"max-width:728px");
 				$("textarea").val(t);
-				$(".containerbox").html("").append(t).show();
+				$(".containerbox").html("").append(sprintf("<div class=\"cms_widget\">%s</div>",t)).show();
 			}
 			$("textarea").on("change",function(){
 				whresize();
@@ -337,7 +370,14 @@ $(function(){
 		settime($(this).parents("tr").attr("class"));
 	});	
 	$(".btnpreview").click(function(){
-		window.open("https://www.undotsushin.com/p/"+$("[name='p_d2']").val().match(/^([0-9]+):/)[1]);
+		var l=document.location.href;
+		var u;
+		if(l.match(/dev/)){
+			u="https://dev.sportsbull.jp/";
+		}else{
+			u="https://sportsbull.jp/";
+		}
+		window.open(u+"/p/"+$("[name='p_d2']").val().match(/^([0-9]+):/)[1]);
 	});
 	$(".blockds:odd").css({"backgroundColor":"#f9f9f9"});
 
