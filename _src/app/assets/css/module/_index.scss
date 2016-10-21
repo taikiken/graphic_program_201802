@@ -318,37 +318,37 @@
 
 
 
-// .sokuho-bnr
+// .sokuhou-bnr
 // 速報コンテンツ
 // sample html
 // <div class="sokuhou-bnr now_onair">
 //   <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="/assets/images/index/bnr-sokuhou-161011.png" alt="サッカー日本代表 リアルタイム速報 日本vsオーストラリア アジア最終予選"></a>
 // </div>
-// .sokuhou-bnr {
-//   margin-top: 30px;
+.sokuhou-bnr {
+  margin-top: 30px;
 
-//   a {
-//     display: block;
-//     position: relative;
-//   }
+  a {
+    display: block;
+    position: relative;
+  }
 
-//   a:hover {
-//     @include hover-opacity;
-//   }
+  a:hover {
+    @include hover-opacity;
+  }
 
-//   &.now_onair {
-//     a::after {
-//       content: "";
-//       position: absolute;
-//       top: 0;
-//       left: 0;
-//       display: block;
-//       width: 100%;
-//       height: 100%;
-//       @include hide-text;
-//       background-image: url(/assets/images/index/bnr-sokuhou-161011_onair.gif);
-//       background-repeat: no-repeat;
-//       background-position: 0 0;
-//     }
-//   }
-// }
+  // &.now_onair {
+  //   a::after {
+  //     content: "";
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     display: block;
+  //     width: 100%;
+  //     height: 100%;
+  //     @include hide-text;
+  //     background-image: url(/assets/images/index/bnr-sokuhou-161011_onair.gif);
+  //     background-repeat: no-repeat;
+  //     background-position: 0 0;
+  //   }
+  // }
+}
