@@ -154,65 +154,21 @@ export class ComponentSinglesArticleMedia extends React.Component {
       });
 
 
+      var videoMain=document.getElementById('content_video');
       var video=document.getElementById(videoId);
 
-
-      var visibleY = function(el){
-        var rect = el.getBoundingClientRect(), top = rect.top, height = rect.height,
-            el = el.parentNode;
-        do {
-          rect = el.getBoundingClientRect();
-          if (top <= rect.bottom === false) return false;
-          // Check if the element is out of view due to a container scrolling
-          if ((top + height) <= rect.top) return false
-          el = el.parentNode;
-        } while (el != document.body);
-        // Check its within the document viewport
-        return top <= document.documentElement.clientHeight;
-      };
-
-
-
-      var update = function(){
-        if(visibleY(video)){
-          //player.play();
-        }else{
-          player.pause();
-          //console.log('PAUSE '+videoId);
-        }
-
-        /*document.getElementById('console').innerHTML = visibleY(document.getElementById('element2'))
-            ? "Inner element is visible" : "Inner element is not visible";*/
-      };
-
-
-
       window.addEventListener('scroll', function () {
-          update();
-      });
-
-
-
-      /*var lastScrollTop = 0;
-      window.addEventListener('scroll', function () {
-        /!*var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-        if (st > lastScrollTop){
-          // downscroll code
-
-        } else {
-          //scroll up code
-        }
-        lastScrollTop = st;*!/
-
+        let videoHeight =  parseInt(Content.HD_HEIGHT);
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
-        var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+
+        var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
         if(isVisible){
           //player.play();
         }else {
           player.pause();
         }
-      }, false);*/
+      }, false);
       //window.addEventListener('resize', ComponentSinglesArticleMedia.checkScroll(video,player), false);
 
 
@@ -220,25 +176,6 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
   }
 
-  /**
-   * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}
-   * @param {SingleDae} single 記事データ
-   * @return {XML} MediaImageNode を返します
-   */
-  static checkScroll(el,player) {
-    console.log('croll');
-
-    var rect = el.getBoundingClientRect();
-    //document.write(rect);
-    if(rect.bottom < 0 || rect.top > window.innerHeight){
-      //player.pause();
-      console.log('PAUSE');
-      console.log(el);
-    }else {
-      //player.play();
-    }
-
-  }
 
   /**
    * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}

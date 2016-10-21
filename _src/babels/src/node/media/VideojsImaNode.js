@@ -127,6 +127,25 @@ export let VideojsImaNode = React.createClass( {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
+
+
+
+        //pause video when player out view port
+        var video=document.getElementById('content_video');
+
+        window.addEventListener('scroll', function () {
+          let videoHeight =  parseInt(Content.HD_HEIGHT);
+          var elemTop = video.getBoundingClientRect().top;
+          var elemBottom = video.getBoundingClientRect().bottom;
+
+          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+          if(isVisible){
+            player.play();
+          }else {
+            player.pause();
+          }
+        }, false);
+
       } else { //for Mobile: click to play
 
         if (navigator.userAgent.match(/iPad/i)) {
