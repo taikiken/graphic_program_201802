@@ -68,8 +68,7 @@ export class ComponentSingleSNS extends React.Component {
               data-action="like"
               data-show-faces="false"
               data-share="false"
-            >
-            </div>
+            />
           </li>
           {/* facebook share */}
           <li className="post-sns-item post-sns-item_fb">
@@ -108,8 +107,7 @@ export class ComponentSingleSNS extends React.Component {
                 data-action="like"
                 data-show-faces="false"
                 data-share="false"
-              >
-              </div>
+              />
             </dd>
           </dl>
         </div>

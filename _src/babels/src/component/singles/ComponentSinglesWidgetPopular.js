@@ -120,7 +120,7 @@ export class ComponentSinglesWidgetPopular extends React.Component {
   static build() {
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div className="singles-popular-containers" ref="popular"></div>
+      <div className="singles-popular-containers" ref="popular" />
     );
   }
   // ---------------------------------------------------

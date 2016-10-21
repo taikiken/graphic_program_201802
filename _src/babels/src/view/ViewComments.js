@@ -582,7 +582,7 @@ export class ViewComments extends View {
                 );
               } )
             }
-            <div className="comment-more" ref="commentMore"></div>
+            <div className="comment-more" ref="commentMore" />
           </div>
         );
 

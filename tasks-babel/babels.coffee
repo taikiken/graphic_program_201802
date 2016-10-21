@@ -50,7 +50,7 @@ htdocs = dir.htdocs
 
 files = [
   dir.babels.src + '/**/*.js'
-  '!' + dir.babels.src + '/**/_*.js'
+  "!" + dir.babels.src + '/**/_*.js'
 ]
 
 # eslint

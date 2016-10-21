@@ -72,7 +72,7 @@ export let FlushNode = React.createClass( {
     } else {
       return (
         <div className="modal-dialogue modal-dialogue_delete" style={this.state.css}>
-          <div className="flush-modal-bg modal-bg"></div>
+          <div className="flush-modal-bg modal-bg" />
           <div className={`flush-dialogue dialogue-notice ${this.state.type}`} style={position()}>
             <div className="dialogue-notice-inner">
               <div className="dialogue-notice-info">{this.state.message}</div>

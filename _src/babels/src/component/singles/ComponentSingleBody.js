@@ -99,7 +99,7 @@ export class ComponentSingleBody extends React.Component {
    */
   static body(body) {
     return (
-      <div className="post-content" dangerouslySetInnerHTML={{__html: body}}></div>
+      <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
     );
   }
   // ---------------------------------------------------

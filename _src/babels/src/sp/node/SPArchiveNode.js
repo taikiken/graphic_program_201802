@@ -92,7 +92,7 @@ let CommentsSecondDom = React.createClass( {
       // 高さを確保するためタグを突っ込む
       // return null;
       return (
-        <div className="commented-user"></div>
+        <div className="commented-user" />
       );
     }
 

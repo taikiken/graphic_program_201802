@@ -78,8 +78,8 @@ export class ComponentSinglesWidgetRelated extends React.Component {
     return (
       <div className="widget-postList widget-postList_related singles-related-containers">
         <div id="_popIn_category" style={{display: 'none'}}>{this.state.single.categories.labels}</div>
-        <div id="_popIn_recommend"></div>
-        <div className="singles-related-scripts" ref="related"></div>
+        <div id="_popIn_recommend" />
+        <div className="singles-related-scripts" ref="related" />
       </div>
     );
   }

@@ -360,7 +360,7 @@ export class ViewCommentSingle extends View {
           return (
             <div id="more" className={'comment-andmore loading-root ' + this.state.loading}>
               <a href={'#more'} onClick={this.handleClick} >他{this.state.rest}件を表示</a>
-              <span className="loading-spinner">&nbsp;</span>
+              <span className="loading-spinner" />
             </div>
           );
 
@@ -368,7 +368,7 @@ export class ViewCommentSingle extends View {
 
           // button 表示なし
           return (
-            <div className="no-more"></div>
+            <div className="no-more">&nbsp;</div>
           );
 
         }
@@ -620,7 +620,7 @@ export class ViewCommentSingle extends View {
                 );
               } )
             }
-            <div className="comment-more" ref="commentMore"></div>
+            <div className="comment-more" ref="commentMore" />
           </div>
         );
 

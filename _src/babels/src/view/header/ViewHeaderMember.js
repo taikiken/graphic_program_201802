@@ -289,7 +289,7 @@ export class ViewHeaderMember extends View {
 
         return (
           <div className="user">
-            <div className="notice-container" ref="notice"></div>
+            <div className="notice-container" ref="notice" />
 
             <div className={'preference ' + this.state.open}>
               <a className="preference-opener" href="#" onClick={this.clickHandler}>

@@ -115,7 +115,7 @@ export let ReactionNode = React.createClass( {
         <div className={'comment-reaction ' + this.state.loading}>
           <a className={'comment-reaction-btn comment-reaction-like' + active( this.state.isGood )} href="#" onClick={this.goodClick}><i>&nbsp;</i>{count(this.state.good)}</a>
           <a className={'comment-reaction-btn comment-reaction-dislike' + active( this.state.isBad )} href="#" onClick={this.badClick}><i>&nbsp;</i>{count(this.state.bad)}</a>
-          <div className="loading-spinner"></div>
+          <div className="loading-spinner" />
         </div>
       );
     } else {
@@ -124,7 +124,7 @@ export let ReactionNode = React.createClass( {
         <div className={'comment-reaction ' + this.state.loading}>
           <span className="comment-reaction-btn comment-reaction-like"><i>&nbsp;</i>{count(this.state.good)}</span>
           <span className="comment-reaction-btn comment-reaction-dislike"><i>&nbsp;</i>{count(this.state.bad)}</span>
-          <div className="loading-spinner"></div>
+          <div className="loading-spinner" />
         </div>
       );
     }

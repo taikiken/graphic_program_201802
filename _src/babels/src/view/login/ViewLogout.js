@@ -58,7 +58,7 @@ export class ViewLogout extends View {
           <div className="mod-btnB01 mt30 btn-withdraw">
             <div className={'loading-root ' + this.state.loading}>
               <a href="#" onClick={this.clickHandler}>{Message.SUBMIT_LOGOUT}</a>
-              <div className="loading-spinner"></div>
+              <div className="loading-spinner" />
             </div>
           </div>
         );
