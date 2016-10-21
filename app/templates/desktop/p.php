@@ -15,7 +15,7 @@
       border: none;
       border-radius: 50% !important;
       background-color: transparent  !important;
-      background: url('/assets/images/common/video-play-btn-80x80.png') ;
+      background: url('/assets/ima_plugin/images/video-play-btn-80x80.png') ;
       background-repeat:no-repeat;
       background-size:100% 100%;
       margin-top: -1.25em !important;

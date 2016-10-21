@@ -149,11 +149,15 @@ export class ComponentSinglesArticleMedia extends React.Component {
       player.ima.requestAds();
       /*var adContainer = document.getElementById('content_video_ima-ad-container');
       adContainer.setAttribute('style', 'z-index: -1; position: absolute;');*/
+      player.one('click', function() {
+        player.play();
+      });
 
 
       var video=document.getElementById(videoId);
 
-      /*var visibleY = function(el){
+
+      var visibleY = function(el){
         var rect = el.getBoundingClientRect(), top = rect.top, height = rect.height,
             el = el.parentNode;
         do {
@@ -167,37 +171,38 @@ export class ComponentSinglesArticleMedia extends React.Component {
         return top <= document.documentElement.clientHeight;
       };
 
-      // Stuff only for the demo
-      function attachEvent(element, event, callbackFunction) {
-        if (element.addEventListener) {
-          element.addEventListener(event, callbackFunction, false);
-        } else if (element.attachEvent) {
-          element.attachEvent('on' + event, callbackFunction);
-        }
-      };
+
 
       var update = function(){
-        if(!visibleY(video)){
+        if(visibleY(video)){
+          //player.play();
+        }else{
           player.pause();
-          console.log('PAUSE '+videoId);
+          //console.log('PAUSE '+videoId);
         }
 
-        /!*document.getElementById('console').innerHTML = visibleY(video)
-         ? "Inner element is visible" : "Inner element is not visible";*!/
+        /*document.getElementById('console').innerHTML = visibleY(document.getElementById('element2'))
+            ? "Inner element is visible" : "Inner element is not visible";*/
       };
 
+
+
       window.addEventListener('scroll', function () {
-        if(!visibleY(video)){
-          player.pause();
-          console.log('PAUSE '+videoId);
-        }
+          update();
       });
-      update();*/
 
 
 
-
+      /*var lastScrollTop = 0;
       window.addEventListener('scroll', function () {
+        /!*var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+        if (st > lastScrollTop){
+          // downscroll code
+
+        } else {
+          //scroll up code
+        }
+        lastScrollTop = st;*!/
 
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
@@ -207,13 +212,10 @@ export class ComponentSinglesArticleMedia extends React.Component {
         }else {
           player.pause();
         }
-
-      }, false);
+      }, false);*/
       //window.addEventListener('resize', ComponentSinglesArticleMedia.checkScroll(video,player), false);
 
-      player.one('click', function() {
-        player.play();
-      });
+
     }
 
   }
