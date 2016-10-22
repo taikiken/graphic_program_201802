@@ -167,7 +167,7 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
     // this.getPopular();
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div id={id} className="singles-popular-containers" ref="popular"></div>
+      <div id={id} className="singles-popular-containers" ref="popular" />
     );
   }
   // ---------------------------------------------------

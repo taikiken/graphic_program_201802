@@ -130,7 +130,7 @@ export class Ga {
       let data:GaData = _requests.shift();
       // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
       Ga.tracking( ga, data );
-      console.log( `${data.method}: ga, send, `, data);
+      console.warn( `${data.method}: ga, send, `, data);
     }
   }
   /**

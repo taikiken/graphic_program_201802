@@ -111,8 +111,7 @@ export let SPMediaVideoNode = React.createClass( {
           height={Content.HD_HEIGHT}
           frameBorder="0"
           allowFullScreen
-        >
-        </iframe>
+        />
       </div>
     );
   },
@@ -125,8 +124,7 @@ export let SPMediaVideoNode = React.createClass( {
              data-href={video.facebook}
              data-allowfullscreen="true"
              data-width={Content.WIDTH}
-        >
-        </div>
+        />
       </div>
     );
   }

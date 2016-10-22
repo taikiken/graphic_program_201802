@@ -68,7 +68,11 @@ export class ComponentMoreButton extends React.Component {
      * @default 1
      */
     this.page = 1;
-
+    /**
+     * 初回無限スクロールにしないパターンありの setTimeout id<br>
+     * home(index)無限スクロールは button click 後に行う
+     * @type {number}
+     */
     this.timer = 0;
   }
   /**

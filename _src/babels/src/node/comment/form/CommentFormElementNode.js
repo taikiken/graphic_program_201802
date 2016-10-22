@@ -153,7 +153,7 @@ export let CommentFormElementNode = React.createClass( {
               <button type="submit" value="send">{Message.COMMENT_SUBMIT}</button>
             </div>
           </form>
-          <div ref="commentMessage"></div>
+          <div ref="commentMessage" />
           <div className="loading-spinner">&nbsp;</div>
         </div>
       );

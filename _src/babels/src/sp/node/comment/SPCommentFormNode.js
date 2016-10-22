@@ -82,7 +82,7 @@ export let SPCommentFormNode = React.createClass( {
         return null;
       } else {
         // parent：下に空きをつける
-        return <div className="comment-respond"></div>;
+        return <div className="comment-respond" />;
       }
     }
 
