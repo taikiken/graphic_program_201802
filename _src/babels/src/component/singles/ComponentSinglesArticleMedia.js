@@ -21,6 +21,10 @@ import { MediaImageNode } from '../../node/single/MediaImageNode';
 // data
 import { Safety } from '../../data/Safety';
 
+// ga
+import {GaData} from '../../ga/GaData';
+import {Ga} from '../../ga/Ga';
+
 // React
 const React = self.React;
 
@@ -134,7 +138,6 @@ export class ComponentSinglesArticleMedia extends React.Component {
     var single = this.state.single;
     if (single.mediaType === MediaType.VIDEO) {
       let vast = single.media.media.video.ad_url.pc;
-      console.log(single.media.media.video.ad_url.pc);
       let adUrl = vast !== '' ? vast + Date.now() : '';
       let videoId='content_video_'+single.id;
       let player = videojs(videoId);
@@ -142,7 +145,6 @@ export class ComponentSinglesArticleMedia extends React.Component {
         id: videoId,
         adTagUrl: adUrl
       };
-
       player.ima(option);
 
       player.ima.initializeAdDisplayContainer();
@@ -154,24 +156,45 @@ export class ComponentSinglesArticleMedia extends React.Component {
       });
 
 
-      var videoMain=document.getElementById('content_video');
+
+
+      let url = single.media.video.url.hd;
+      player.one('play', function() {
+        let gaData = new GaData('ComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
+        Ga.add(gaData);
+      });
+      player.one('ended', function() {
+        let gaData = new GaData('ComponentSinglesArticleMedia.tracking', 'video', 'complete', url);
+        Ga.add(gaData);
+      });
+
       var video=document.getElementById(videoId);
 
       window.addEventListener('scroll', function () {
-        let videoHeight =  parseInt(Content.HD_HEIGHT);
-        var elemTop = video.getBoundingClientRect().top;
-        var elemBottom = video.getBoundingClientRect().bottom;
 
-        var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-        if(isVisible){
-          //player.play();
-        }else {
-          player.pause();
-        }
+          let videoHeight =  parseInt(Content.HD_HEIGHT);
+          var elemTop = video.getBoundingClientRect().top;
+          var elemBottom = video.getBoundingClientRect().bottom;
+
+          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+          if(isVisible){
+            //player.play();
+          }else {
+            //player.ima.pause();
+            // google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED
+            player.pause();
+
+            var videoAdsButton=document.getElementById(videoId+'_ima-play-pause-div');
+            console.log('Playing = '+player.ads.playing());
+
+            if(player.paused()==false){
+              videoAdsButton.click();
+            }
+          }
+
+
       }, false);
-      //window.addEventListener('resize', ComponentSinglesArticleMedia.checkScroll(video,player), false);
-
-
+      //window.addEventListener('resize', ComponentSinglesArticleMedia. checkScroll(video,player), false);
     }
 
   }
