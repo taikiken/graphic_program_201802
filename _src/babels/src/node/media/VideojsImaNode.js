@@ -76,7 +76,7 @@ export let VideojsImaNode = React.createClass( {
     } else {
           return(
             <div id="mainContainer">
-                <video id="content_video" className="video-js vjs-default-skin" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+                <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
                   <source src={url} type="application/x-mpegURL"></source>
                 </video>
             </div>
