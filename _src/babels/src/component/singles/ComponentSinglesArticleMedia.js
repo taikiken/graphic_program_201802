@@ -180,16 +180,8 @@ export class ComponentSinglesArticleMedia extends React.Component {
           if(isVisible){
             //player.play();
           }else {
-            //player.ima.pause();
-            // google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED
             player.pause();
-
-            var videoAdsButton=document.getElementById(videoId+'_ima-play-pause-div');
-            console.log('Playing = '+player.ads.playing());
-
-            if(player.paused()==false){
-              videoAdsButton.click();
-            }
+            player.ima.pauseAd();
           }
 
 
