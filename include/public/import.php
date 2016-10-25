@@ -1,5 +1,8 @@
 <?php
 
+$s3active=preg_match("#/apache/htdocs/#",$SERVERPATH)?0:1;
+if($s3active)include $INCLUDEPATH."aws.php";
+
 $excategory=array(129,130,133);
 
 $exword=array();
@@ -82,6 +85,7 @@ function relatedlink($link,$id=0){
 			$s[]=sprintf("update u_link set title='%s',url='%s' where not exists (select * from u_link where title='%s' and url='%s') and cid=%s and n=%s;",$title,$url,$title,$url,$id,($i+1));
 		}
 	}
+	
 	return implode("\n",$s);
 }
 
@@ -191,17 +195,49 @@ function splittime($a,$b){
 	}
 }
 
+function get_imgs($img){
+	$ch=curl_init();	
+	curl_setopt($ch,CURLOPT_URL,$img);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+	if(preg_match("/https/",$img)){
+		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+		curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
+	}
+	$outimg=curl_exec($ch);
+	if(curl_errno($ch))return "";
+	else return $outimg;
+}
+
 function eximg($img1,$img2){
-	return (binary)file_get_contents($img1,FILE_BINARY)===(binary)file_get_contents($img2,FILE_BINARY)?true:false;
+	
+	global $SERVERPATH;
+	
+	$img1=str_replace(sprintf("%s/prg_img",$SERVERPATH),preg_match("#/dev/#",$SERVERPATH)?"https://dev-img.sportsbull.jp":"https://img.sportsbull.jp",$img1);
+	var_dump(array($img1,$img2));
+	
+	$a=(binary)get_imgs($img1);
+	$b=(binary)get_imgs($img2);
+	
+	return $a===$b?true:false;
 }
 
 function imgResize($img_name,$n_img,$re_size,$p="jpg"){
-
+	
+	global $s3active,$SERVERPATH;
+	
 	$ww=$re_size;
 	$size=getimagesize($img_name);
 	
 	if($ww>$size[0]){
-		return copy($img_name,$n_img);
+		copy($img_name,$n_img);
+		if($s3active){
+			
+			$s3i=new S3Module;
+			$s3i->upload($img_name,str_replace($SERVERPATH."/prg_img/","",$n_img));
+			unlink($img_name);
+			/* sportsbull移行後消す */
+			//copy($img_name,str_replace(array("sportsbull.jp","tmp"),array("undotsushin.com","raw"),$img_name));
+		}
 	}else{
 		$s=$ww/$size[0];
 		$ptage_w=round($size[0]*$s);
@@ -279,6 +315,9 @@ function makeDefaultImg($filename,$type){
 	}	
 }
 function outputImg($res,$filename,$type){
+	
+	global $s3active,$SERVERPATH;
+	
 	if($type=="jpg"){
 		$e=imagejpeg($res,$filename,100);
 	}elseif($type=="gif"){
@@ -286,12 +325,23 @@ function outputImg($res,$filename,$type){
 	}elseif($type=="png"){
 		$e=imagepng($res,$filename,0);
 	}
+	
 	if($e){
 		imagedestroy($res);
 		chmod($filename,0777);
 	}else{
 		echo "画像の出力に失敗しました。もう一度アップロードしてください。";
 	}
+	
+	if($s3active){
+		$s3i=new S3Module;
+		$s3i->upload($filename,str_replace($SERVERPATH."/prg_img/","",$filename));
+		unlink($filename);
+		/* sportsbull移行後消す */
+		//echo str_replace("sportsbull.jp","undotsushin.com",$filename);
+		//copy($filename,str_replace("sportsbull.jp","undotsushin.com",$filename));
+	}
+	
 	return $e;
 }
 
@@ -312,16 +362,8 @@ function outimg($oimg,$tumb=1){
 	$oimg=sprintf("%s://%s%s",$u["scheme"],$u["host"],$u["path"]);
 	
 	$fl=getfileinfo($oimg);
-	
-	$ch=curl_init();	
-	curl_setopt($ch,CURLOPT_URL,$oimg);
-	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-	if(preg_match("/https/",$oimg)){
-		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-		curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
-	}
-	$img=curl_exec($ch);
-	if(curl_errno($ch))return "";
+	$img=get_imgs($oimg);
+	if($img=="")return "";
 	
 	$file=sprintf("%stmp/%s.%s",$imgp,$fl[0],$fl[1]);
 	file_put_contents($file,$img);
@@ -331,15 +373,18 @@ function outimg($oimg,$tumb=1){
 	
 	if(preg_match("/jpe?g/",$size["mime"]))$p="jpg";
 	elseif(preg_match("/gif/",$size["mime"]))$p="gif";
-	elseif(preg_match("/png/",$size["mime"]))$p="png";	
+	elseif(preg_match("/png/",$size["mime"]))$p="png";
 	
-	imgResize($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p),980,$p);
 	if($tumb==1){
 		imgDresize($file,sprintf("%simg/%s.%s",$imgp,$fl[0],$p),array(640,400),$p);
 		imgDresize($file,sprintf("%sthumbnail1/%s.%s",$imgp,$fl[0],$p),array(320,180),$p);
 		imgDresize($file,sprintf("%sthumbnail2/%s.%s",$imgp,$fl[0],$p),array(150,150),$p);
-	}
+	}	
+	imgResize($file,sprintf("%sraw/%s.%s",$imgp,$fl[0],$p),980,$p);
+	
+	/* sportsbull移行後EC2のファイルは削除を有効にする */
 	unlink($file);
+	
 	return sprintf("%s.%s",$fl[0],$p);
 }
 

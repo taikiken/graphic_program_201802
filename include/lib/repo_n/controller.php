@@ -40,9 +40,13 @@ if($q->get_dir()===0){
 			if(isset($_GET["qid"]))$sv[$sn[]="rid"]=$g->f("qid");
 			if(isset($_GET["rid"]))$sv[$sn[]="qid"]=$g->f("rid");
 			$sv[$sn[]="cid"]=$g->f("cid");
-			$sv[$sn[]="m_time"]="now()";
-			$sv[$sn[]="u_time"]="now()";
 			
+			if($TABLE=="repo_n"){
+				if(!preg_match("/[0-9]{4}[0-9]{2}[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/",$sv["m_time"]))$sv["m_time"]="now()";
+			}else{
+				$sv[$sn[]="m_time"]="now()";
+			}
+			$sv[$sn[]="u_time"]="now()";
 			
 			if($MULTILANG==0){
 				$sv[$sn[]="flag"]=0;

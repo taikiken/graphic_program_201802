@@ -9,7 +9,7 @@ $rssfile="http://www.cheerup-sports.jp/news/rss.xml";
 $o=new db;
 $o->connect();
 
-$xml=file_get_contents($rssfile);
+$xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 

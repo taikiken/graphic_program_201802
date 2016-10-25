@@ -35,7 +35,7 @@ function get_index(){
 	$file=explode("\n",$xml);
 	for($i=0;$i<count($file);$i++){
 		$x=explode(" ",trim($file[$i]));
-		$data=simplexml_load_string(file_get_contents($x[0]),'SimpleXMLElement',LIBXML_NOCDATA);
+		$data=simplexml_load_string(get_contents($x[0]),'SimpleXMLElement',LIBXML_NOCDATA);
 		$data=json_decode(json_encode($data),TRUE);
 		$u[$x[1]]=$data;
 	}
@@ -113,11 +113,12 @@ while(list($k,$v)=each($data)){
 			}			
 			
 			$file=sprintf("%s/api/ver1/static/ad/1-%s.dat",$SERVERPATH,$id);
-    		if(file_exists($file)){
-				$vs=unserialize(file_get_contents($file));
+    		if($vs=get_contents($file)){
+				$vs=unserialize($vs);
 			}
 			$vs["readmore"]=1;
 			file_put_contents($file,serialize($vs));
+			s3upload($file,sprintf("static/ad/1-%s.dat",$id));
 		}
 	}
 	

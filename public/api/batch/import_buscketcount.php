@@ -8,7 +8,7 @@ $rssfile="http://basket-count.com/feed";
 
 function modifyhtml($s){
 	
-	global $domain;
+	global $domain,$ImgPath;
 	
 	$s=strip_tags($s,"<h2><h3><h4><br><p><div><a><table><caption><tbody><tr><td><strong><img><iframe><script><blockquote>");
 	$s=str_replace("<p><iframe","<iframe",$s);
@@ -23,12 +23,12 @@ function modifyhtml($s){
 		$s=str_replace($u[0][$i],sprintf("<p><img src=\"%s\"></p><p>%s</p>",$u[2][$i],$u[3][$i]),$s);
 	}
 	
-	preg_match_all("#<img[^>]+>#",$s,$u);;
+	preg_match_all("#<img[^>]+>#",$s,$u);
 	for($i=0;$i<count($u[0]);$i++){
 		preg_match('#src="([^"]+)"#',$u[0][$i],$r);
 		if(preg_match("#://#",$r[1])){
 			$img=outimg($r[1],0);
-			$s=str_replace($u[0][$i],sprintf("<img src=\"%s/prg_img/raw/%s\">",$domain,$img),$s);
+			$s=str_replace($u[0][$i],sprintf("<img src=\"%s/raw/%s\">",$ImgPath,$img),$s);
 		}else{
 			$s=str_replace($u[0][$i],"",$s);
 		}
@@ -51,7 +51,7 @@ function modifyhtml($s){
 $o=new db;
 $o->connect();
 
-$xml=file_get_contents($rssfile);
+$xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
@@ -71,7 +71,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["lastUpdate"]));
 	
 	if($data["channel"]["item"][$i]["enclosure"]){
-		$s["t30"]=trim($data["channel"]["item"][$i]["enclosure"]);
+		$s["t30"]=trim($data["channel"]["item"][$i]["enclosure"]["@attributes"]["url"]);
 		$s["t1"]=$body[1];
 	}
 
@@ -96,7 +96,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		if($data["channel"]["item"][$i]["status"]=="1"){
 			if($s["a_time"]!=$f["a_time"]){
 				if(strlen($s["t30"])>0){
-					if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
+					if(!eximg(sprintf("%s/raw/%s",$ImgPath,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 				}else{
 					$s["img1"]="";
 					$s["t1"]="";
@@ -118,6 +118,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$s["d2"]=$MEDIAID;
 			$s["m1"]=115;
 			$s["bodyflag"]=170;
+			$s["imgflag"]=168;
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["n"]="(select max(n)+1 from repo_n where cid=1)";

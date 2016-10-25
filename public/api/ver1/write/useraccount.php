@@ -2,6 +2,7 @@
 
 include "local.php";
 include "tool.php";
+include "aws.php";
 include "public/check.php";
 
 $o=new db;
@@ -48,6 +49,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 			if(move_uploaded_file($_FILES["profile_picture"]["tmp_name"],$USERS."/raw/".$filename)){
 				
 				imgDresize($USERS."/raw/".$filename,$USERS."/img/".$filename,array($SIZE,$SIZE),$ext,"","","","");
+				
+				$s3i=new S3Module;
+				$s3i->upload(sprintf("%s/raw/%s",$USERS,$filename),sprintf("users/raw/%s",$filename));
+				$s3i->upload(sprintf("%s/img/%s",$USERS,$filename),sprintf("users/img/%s",$filename));
+
 				$sv[$sn[]="img1"]=$filename;
 			}else{
 				$ermsg["profile_picture"]="ファイルのアップロードに失敗しました。";
