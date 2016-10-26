@@ -2,6 +2,8 @@
 
 <?php if ( $page['ua'] == 'mobile' ) : ?>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<?php else : ?>
+  <meta name="viewport" content="width=1280">
 <?php endif; ?>
 
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
