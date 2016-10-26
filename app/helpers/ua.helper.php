@@ -23,12 +23,12 @@ class UserAgent{
 
       if ( $_SERVER['HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER'] === 'true' ) :
         return $this->device = 'desktop';
-      elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'] === 'true' ) :
-        return $this->device = 'mobile';
-      elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_SMARTTV_VIEWER'] === 'true' ) :
-        return $this->device = 'desktop';
       elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_TABLET_VIEWER'] === 'true' ) :
         return $this->device = 'desktop';
+      elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_SMARTTV_VIEWER'] === 'true' ) :
+        return $this->device = 'desktop';
+      elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'] === 'true' ) :
+        return $this->device = 'mobile';
       endif;
 
     }
