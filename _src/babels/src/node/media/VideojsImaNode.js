@@ -128,8 +128,6 @@ export let VideojsImaNode = React.createClass( {
         player.ima.requestAds();
         player.play();
 
-
-
         //pause video when player out view port
         var video=document.getElementById('content_video');
         var mainVideoIsPlaying=false;
@@ -155,6 +153,7 @@ export let VideojsImaNode = React.createClass( {
       } else { //for Mobile: click to play
 
         if (navigator.userAgent.match(/iPad/i)) {
+          //document.querySelector(".vjs-big-play-button").setAttribute('style', 'display: !important;');
           let videoElement = document.querySelector('#content_video_html5_api');
           this.videoElement = videoElement;
           videoElement.addEventListener( 'play', this.onPlay );

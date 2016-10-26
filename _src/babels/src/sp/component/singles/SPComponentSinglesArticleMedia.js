@@ -78,6 +78,75 @@ export class SPComponentSinglesArticleMedia extends React.Component {
   reload() {
     this.updateSingle(this.state.single);
   }
+
+
+  componentDidMount() {
+    var single = this.state.single;
+    if (single.mediaType === MediaType.VIDEO) {
+      let vast = single.media.media.video.ad_url.sp;
+      let adUrl = vast !== '' ? vast + Date.now() : '';
+
+      /*if (navigator.userAgent.match(/iPhone/i)) {
+        var ads = new Ads(adUrl, single.media.video.url.sd, window.innerWidth, Math.ceil(window.innerWidth / 16 * 9), single.media.images.original);
+        ads.init();
+      }*/
+
+      let videoId='content_video_'+single.id;
+      let player = videojs(videoId);
+      let option = {
+        id: videoId,
+        adTagUrl: adUrl
+      };
+      player.ima(option);
+
+
+      if (navigator.userAgent.match(/iPhone/i)) {
+        var adContainer = document.getElementById(videoId+'_ima-ad-container');
+        adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+      }
+
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.one('click', function() {
+            player.ima.initializeAdDisplayContainer();
+            player.ima.requestAds();
+            player.play();
+        });
+
+
+      let url = single.media.video.url.hd;
+      player.one('play', function() {
+        let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
+        Ga.add(gaData);
+      });
+      player.one('ended', function() {
+        let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'complete', url);
+        Ga.add(gaData);
+      });
+
+      var video=document.getElementById(videoId);
+
+      window.addEventListener('scroll', function () {
+        let videoWidth = window.innerWidth;
+        let videoHeight = Math.ceil( videoWidth / 16 * 9 );
+
+        var elemTop = video.getBoundingClientRect().top;
+        var elemBottom = video.getBoundingClientRect().bottom;
+
+        var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+        if(isVisible){
+          //player.play();
+        }else {
+          player.pause();
+          player.ima.pauseAd();
+        }
+      }, false);
+    }
+
+  }
+
+
+
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -98,7 +167,22 @@ export class SPComponentSinglesArticleMedia extends React.Component {
       figCaption = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
     }
 
-    return (
+    let videoId='content_video_'+single.id;
+    let videoContainer='mainContainer_'+single.id;
+    let width = window.innerWidth;
+    let height = Math.ceil( width / 16 * 9 );
+
+    return(
+        <div className="post-kv post-video-kv">
+          <div id={videoContainer}>
+            <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+              <source src={single.media.video.url.sd} type="application/x-mpegURL"></source>
+            </video>
+          </div>
+        </div>
+    );
+
+    /*return (
       <div className="post-kv post-video-kv">
         <figure className="post-single-figure video-container">
           <div className="video-thumbnail-container">
@@ -109,7 +193,7 @@ export class SPComponentSinglesArticleMedia extends React.Component {
           {figCaption}
         </figure>
       </div>
-    );
+    );*/
   }
   /**
    * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}

@@ -156,8 +156,6 @@ export class ComponentSinglesArticleMedia extends React.Component {
       });
 
 
-
-
       let url = single.media.video.url.hd;
       player.one('play', function() {
         let gaData = new GaData('ComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
