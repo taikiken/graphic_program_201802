@@ -30,6 +30,11 @@ let _instance = null;
  * @since 2016-10-27
  */
 export class NextPages {
+  /**
+   * singleton
+   * @param {Symbol} target single ton を保証するためのインナーシンボル
+   * @return {?NextPages} NextPages instance
+   */
   constructor(target) {
     if (_symbol !== target) {
       throw new Error( 'NextPages is static Class. not use new NextPages().' );

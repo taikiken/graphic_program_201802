@@ -47,13 +47,13 @@ const React = self.React;
 
 /**
  * SP: headline 記事一覧を出力します
- * @since 2016-09-16
  *
  * <pre>
  *   <SPComponentHeadlines/>
  *      <SPViewHeadline/>
  *        <CategoryLabelNode/>
  * </pre>
+ * @since 2016-09-16
  */
 export class SPComponentHeadlines extends React.Component {
   /**

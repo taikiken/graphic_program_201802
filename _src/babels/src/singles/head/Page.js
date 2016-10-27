@@ -52,6 +52,10 @@ export class Page {
     this.ogImg = () => singleDae.media.images.original;
     console.log('Page', this.title(), this.url(), this.ogImg());
   }
+  /**
+   * pushstate 第一引数に利用する Object
+   * @return {{title: string, url: string}} pushstate 第一引数に利用する Object
+   */
   info() {
     return {
       title: this.title(),
