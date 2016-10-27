@@ -45,7 +45,8 @@ Ads.prototype.init = function() {
   var options = {
       id: 'content_video',
       adTagUrl: this.adsUrl,
-      nativeControlsForTouch: false
+      nativeControlsForTouch: false,
+      showControlsForJSAds:false
     };
   this.player.ima(options,
       this.bind(this, this.adsManagerLoadedCallback));

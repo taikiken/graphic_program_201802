@@ -101,6 +101,37 @@ export let VideojsImaNode = React.createClass( {
       videoElement.addEventListener( 'ended', this.onEnded );
       videoElement.addEventListener( 'pause', this.onPause );
 
+
+
+      //pause video when player out view port
+      var video=document.getElementById('content_video');
+      var mainVideoIsPlaying=false;
+
+      window.addEventListener('scroll', function () {
+
+        if(!Sagen.Browser.Mobile.is()){
+          let videoHeight =  parseInt(Content.HD_HEIGHT);
+        }else{
+          let videoWidth = window.innerWidth;
+          let videoHeight = Math.ceil( videoWidth / 16 * 9 );
+        }
+
+        var elemTop = video.getBoundingClientRect().top;
+        var elemBottom = video.getBoundingClientRect().bottom;
+
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }else{
+          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }
+        if(!isVisible){
+          videoElement.pause();
+          //videoElement.ima.pauseAd();
+        }else{
+          //videoElement.ima.resumeAd();
+        }
+      }, false);
+
     } else {
 
       let videoElement = ReactDOM.findDOMNode( this.refs.video );
@@ -115,6 +146,38 @@ export let VideojsImaNode = React.createClass( {
         adTagUrl: adUrl
       };
 
+
+
+
+      //pause video when player out view port
+      var video=document.getElementById('content_video');
+      var mainVideoIsPlaying=false;
+
+      window.addEventListener('scroll', function () {
+
+        if(!Sagen.Browser.Mobile.is()){
+          let videoHeight =  parseInt(Content.HD_HEIGHT);
+        }else{
+          let videoWidth = window.innerWidth;
+          let videoHeight = Math.ceil( videoWidth / 16 * 9 );
+        }
+
+        var elemTop = video.getBoundingClientRect().top;
+        var elemBottom = video.getBoundingClientRect().bottom;
+
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }else{
+          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }
+        if(!isVisible){
+          player.pause();
+          player.ima.pauseAd();
+        }else{
+          player.ima.resumeAd();
+        }
+      }, false);
+
       player.ima(option);
       player.on('play', function() {
         document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
@@ -127,28 +190,6 @@ export let VideojsImaNode = React.createClass( {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-
-        //pause video when player out view port
-        var video=document.getElementById('content_video');
-        var mainVideoIsPlaying=false;
-
-        window.addEventListener('scroll', function () {
-          let videoHeight =  parseInt(Content.HD_HEIGHT);
-          var elemTop = video.getBoundingClientRect().top;
-          var elemBottom = video.getBoundingClientRect().bottom;
-
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-          if(!isVisible){
-            player.pause();
-            player.ima.pauseAd();
-          }else{
-            player.ima.resumeAd();
-            /*if(mainVideoIsPlaying==false){
-              player.play();
-              mainVideoIsPlaying=true;
-            }*/
-          }
-        }, false);
 
       } else { //for Mobile: click to play
 
