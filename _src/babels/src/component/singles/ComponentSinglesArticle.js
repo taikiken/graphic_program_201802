@@ -31,6 +31,15 @@ import { Hit } from '../../ui/Hit';
 import { Ga } from '../../ga/Ga';
 // import { GaData } from '../../ga/GaData';
 
+// --------------------
+// @since 2016-10-17
+// singles
+import { SingleManager } from '../../singles/SingleManager';
+
+// singles/head
+import { Page } from '../../singles/head/Page';
+// --------------------
+
 // React
 const React = self.React;
 
@@ -71,6 +80,21 @@ export class ComponentSinglesArticle extends React.Component {
      * @type {boolean}
      */
     this.sended = false;
+
+    /**
+     * SPA のための管理クラス
+     * @type {SingleManager}
+     * @since 2016-10-27
+     */
+    this.manager = SingleManager.factory();
+    /**
+     * ページ情報書換えでーたを `SingleDae` から生成します
+     * {@link SingleDae}
+     * {@link Page}
+     * @type {Page}
+     * @since 2016-10-27
+     */
+    this.page = new Page(props.single);
   }
   /**
    * 記事詳細・次の記事一覧 > 記事を出力します

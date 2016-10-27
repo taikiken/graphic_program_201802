@@ -358,7 +358,7 @@ export class ViewArchiveMasonryInfinite extends View {
     this.moreButton(false);
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-
+    console.warn('error', error);
   }
   /**
    * ViewError でエラーコンテナを作成します

@@ -42,18 +42,31 @@ export class NextPages {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * page 追加
+   * @param {Page} page 追加する Page instance
+   * @return {number} 追加された配列 index
+   */
   add(page) {
     // @type {Array}
     const pages = this.pages();
     pages.push(page);
     return pages.length - 1;
   }
+  /**
+   * Page を最後から取り出します
+   * @return {Page} 取り出した Page 情報
+   */
   pop() {
     return this.pages().pop();
   }
-  shift() {
-    return this.pages().shift();
-  }
+  // shift() {
+  //   return this.pages().shift();
+  // }
+  /**
+   * クローンを作成します
+   * @return {Array<Page>} クローン配列を返します
+   */
   clone() {
     return this.pages().slice(0);
   }

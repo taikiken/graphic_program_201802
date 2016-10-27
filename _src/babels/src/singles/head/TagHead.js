@@ -10,6 +10,7 @@
  *
  */
 
+// singles/head
 import { SnsFb } from './SnsFb';
 import { SnsTw } from './SnsTw';
 import { TagMeta } from './TagMeta';
@@ -29,8 +30,8 @@ export class TagHead {
     const title = new TagTitle(head);
     const og = new SnsFb(head);
     const twitter = new SnsTw(head);
-    const canonical = new TagMeta('link[rel="canonical"]');
-    const description = new TagMeta('meta[name="description"]');
+    const canonical = new TagLink(head, 'link[rel="canonical"]');
+    const description = new TagMeta(head, 'meta[name="description"]');
     /**
      * title タグを管理します
      * @return {TagTitle} TagTitle instance

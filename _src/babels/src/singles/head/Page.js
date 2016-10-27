@@ -12,6 +12,7 @@
 
 /**
  * 記事詳細・次の記事一覧・各記事の meta 情報など書換え対象データを管理します
+ * @since 2016-10-27
  */
 export class Page {
   /**
@@ -19,11 +20,28 @@ export class Page {
    * @param {SingleDae} singleDae 記事データ
    */
   constructor(singleDae) {
-    this.single = () => singleDae;
+    // this.single = () => singleDae;
+    /**
+     * 記事タイトル
+     * @return {string} 記事タイトル
+     */
     this.title = () => singleDae.title;
+    /**
+     * 記事要約(description)
+     * @return {string} 記事要約(description)
+     */
     this.description = () => singleDae.description;
+    /**
+     * 記事 url
+     * @return {string} 記事 url
+     */
     this.canonical = () => singleDae.canonical.url;
     // 'og_image'       => $post['media']['images']['original']
+    /**
+     * 記事画像, OGP:image
+     * @return {string} 記事画像
+     */
     this.ogImg = () => singleDae.media.images.original;
+    console.log('Page', this.title(), this.description(), this.canonical(), this.ogImg());
   }
 }

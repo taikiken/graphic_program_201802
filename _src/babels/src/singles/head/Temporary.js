@@ -16,7 +16,7 @@
 export class Temporary {
   /**
    * 一時情報
-   * @param {string} [content='']
+   * @param {string} [content=''] 格納情報
    */
   constructor(content = '') {
     /**

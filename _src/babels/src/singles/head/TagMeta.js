@@ -23,6 +23,7 @@ export class TagMeta {
    * @param {string} selector querySelector 形式の text
    */
   constructor(head, selector) {
+    console.log('TagMeta', head, selector);
     const tag = head.querySelector(selector) || {};
     /**
      * title tag を取得します
