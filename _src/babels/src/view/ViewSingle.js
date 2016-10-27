@@ -42,6 +42,12 @@ import { Message } from '../app/const/Message';
 import { GaData } from '../ga/GaData';
 import { Ga } from '../ga/Ga';
 
+// singles (pushstate...)
+import { SingleManager } from '../singles/SingleManager';
+
+// singles/head
+import { Page } from '../singles/head/Page';
+
 
 /**
  * <p>記事詳細</p>
@@ -177,6 +183,13 @@ export class ViewSingle extends View {
     } else {
       // @since 2016-09-27, SingleDae instance にし render へ渡すに変更
       const single = new SingleDae(response);
+      // ---------------------------------
+      // @since 2016-10-27 pushstate のために
+      const manager = SingleManager.factory();
+      const page = new Page(single);
+      manager.setBase(page.url);
+      manager.push(page);
+      // ---------------------------------
       this.render(single);
       this.singles(single);
     }

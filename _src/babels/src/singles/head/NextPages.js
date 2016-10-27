@@ -25,6 +25,10 @@ const _symbol = Symbol('NextPages singleton instance');
  */
 let _instance = null;
 
+/**
+ * 記事詳細・次の記事一覧データを保存します
+ * @since 2016-10-27
+ */
 export class NextPages {
   constructor(target) {
     if (_symbol !== target) {
@@ -34,6 +38,10 @@ export class NextPages {
       return _instance;
     }
     const pages = [];
+    /**
+     * ページ情報を保持します
+     * @return {Array<Page>} Page instance がセットされた配列を返します
+     */
     this.pages = () => pages;
 
     _instance = this;

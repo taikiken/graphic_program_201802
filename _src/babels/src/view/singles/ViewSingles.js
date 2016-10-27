@@ -29,9 +29,6 @@ import { SingleDae } from '../../dae/SingleDae';
 // component
 import { ComponentSingles } from '../../component/singles/ComponentSingles';
 
-// singles (pushstate...)
-import { SingleManager } from '../../singles/SingleManager';
-
 // React
 const ReactDOM = self.ReactDOM;
 
@@ -119,8 +116,6 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
      * @type {?Object}
      */
     this.articleRendered = null;
-
-    this.manager = SingleManager.factory();
   }
   /**
    * Ajax response success

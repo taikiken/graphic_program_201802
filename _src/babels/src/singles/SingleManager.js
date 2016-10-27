@@ -72,6 +72,11 @@ export class SingleManager extends EventDispatcher {
      */
     this.pages = () => pages;
 
+    let base = '';
+    this.base = () => base;
+    this.setBase = (baseUrl) => {
+      base = baseUrl;
+    };
     // let id = 0;
     // /**
     //  * page ID
@@ -103,12 +108,13 @@ export class SingleManager extends EventDispatcher {
   }
   push(page) {
     this.pages().add(page);
-    history.pushState(page, page.title(), page.canonical());
+    history.pushState(page.info(), page.title(), page.url());
   }
   pop() {
     // this.pages().pop();
     history.back(-1);
   }
+
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------

@@ -12,13 +12,15 @@
 
 /**
  * すぐに書き換えるのではなく, 一時的に情報を保留します
+ * @since 2016-10-27
  */
 export class Temporary {
   /**
    * 一時情報
-   * @param {string} [content=''] 格納情報
+   * @param {string} [contentArg=''] 格納情報
    */
-  constructor(content = '') {
+  constructor(contentArg = '') {
+    let content = contentArg;
     /**
      * 一時情報を取得します
      * @return {string} 一時情報を返します

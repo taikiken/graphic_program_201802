@@ -10,6 +10,9 @@
  *
  */
 
+// app
+import { Env } from '../../app/Env';
+
 /**
  * 記事詳細・次の記事一覧・各記事の meta 情報など書換え対象データを管理します
  * @since 2016-10-27
@@ -35,13 +38,24 @@ export class Page {
      * 記事 url
      * @return {string} 記事 url
      */
-    this.canonical = () => singleDae.canonical.url;
+    this.url = () => {
+      if (Env.mode !== Env.PRODUCTION) {
+        return singleDae.url.replace('https://dev.sportsbull.jp', '');
+      }
+      return singleDae.url;
+    };
     // 'og_image'       => $post['media']['images']['original']
     /**
      * 記事画像, OGP:image
      * @return {string} 記事画像
      */
     this.ogImg = () => singleDae.media.images.original;
-    console.log('Page', this.title(), this.description(), this.canonical(), this.ogImg());
+    console.log('Page', this.title(), this.url(), this.ogImg());
+  }
+  info() {
+    return {
+      title: this.title(),
+      url: this.url(),
+    };
   }
 }
