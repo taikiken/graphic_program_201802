@@ -436,12 +436,13 @@
     @at-root {
       &-list {
         display: table-cell;
-        padding:  22px 0 0 28px;
+        padding: 22px 0 0 28px;
         letter-spacing: ls( inline-block );
       }
 
       &-item {
         display: inline-block;
+        height: 40px;
         margin-left: 10px;
         letter-spacing: normal;
         vertical-align: middle;
