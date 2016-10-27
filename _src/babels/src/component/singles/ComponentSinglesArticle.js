@@ -214,6 +214,10 @@ export class ComponentSinglesArticle extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
+   *
+   * - @type {SingleDae} single - 記事データ
+   * - @type {boolean} sign - ログイン済みユーザーフラッグ, true: ログイン済み
+   * - @type {number} index - 次の記事一覧・記事表示順序
    * @return {{single: SingleDae, sign: boolean, index: number}} React props
    */
   static get propTypes() {

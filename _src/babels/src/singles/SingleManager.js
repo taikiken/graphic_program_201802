@@ -13,8 +13,11 @@
 // event
 import { EventDispatcher } from '../event/EventDispatcher';
 
-// metas
-import { Metas } from './singles/Metas';
+// singles/head
+import { TagHead } from './head/TagHead';
+import { NextPages } from './head/NextPages';
+
+const history = self.history;
 
 /**
  * singleton instance のためのチェック用 Symbol
@@ -47,29 +50,63 @@ export class SingleManager extends EventDispatcher {
       return _instance;
     }
     super();
+    // head 情報
     const head = document.getElementsByTagName('head')[0];
-    const metas = new Metas(head);
+    const tagHead = new TagHead(head);
+    /**
+     * head tag 情報を取得します
+     * @return {TagHead} head tag 情報を返します
+     */
+    this.head = () => tagHead;
+    const twitterSite = tagHead.twitter().site();
+    /**
+     * twitter:site content を取得します
+     * @return {string} twitter:site content を返します
+     */
+    this.twitterSite = () => twitterSite;
 
-    metas.push(new Metas(head));
+    const pages = NextPages.factory();
     /**
-     * head tag
-     * @type {Element}
+     * 記事一覧を管理します
+     * @return {NextPages} NextPages instance
      */
-    this.head = head;
-    /**
-     * Metas instance
-     * @type {Metas}
-     */
-    this.metas = metas;
-    /**
-     * 置換え対象タグ情報を管理します
-     * @type {Array<Metas>}
-     */
-    this.values = [
-      metas.current(),
-    ];
+    this.pages = () => pages;
+
+    // let id = 0;
+    // /**
+    //  * page ID
+    //  * @return {number} id page id
+    //  */
+    // this.id = () => id;
+    // /**
+    //  * page ID を設定します
+    //  * @param {number} idNum page ID
+    //  */
+    // this.setId = (idNum) => {
+    //   id = idNum;
+    // };
+    // popstate 監視
+    window.addEventListener('popstate', this.onPop.bind(this), false);
+
     _instance = this;
     return _instance;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  // onPush(event) {
+  //   console.log('onPush event', event, this);
+  // }
+  onPop(event) {
+    console.log('onPop event', event, this);
+  }
+  push(page) {
+    // this.pages().add(page);
+    history.pushState(page, page.title(), page.canonical());
+  }
+  pop() {
+    // this.pages().pop();
+    history.back(-1);
   }
   // ---------------------------------------------------
   //  STATIC METHOD
