@@ -98,10 +98,11 @@ export class SingleManager extends EventDispatcher {
   //   console.log('onPush event', event, this);
   // }
   onPop(event) {
-    console.log('onPop event', event, this);
+    const page = this.pages().pop();
+    console.log('onPop event', event, page);
   }
   push(page) {
-    // this.pages().add(page);
+    this.pages().add(page);
     history.pushState(page, page.title(), page.canonical());
   }
   pop() {
