@@ -146,33 +146,26 @@ export let VideojsImaNode = React.createClass( {
         adTagUrl: adUrl
       };
 
-
-
-
       //pause video when player out view port
       var video=document.getElementById('content_video');
-      var mainVideoIsPlaying=false;
 
+      var playerVisted=false;
       window.addEventListener('scroll', function () {
 
-        if(!Sagen.Browser.Mobile.is()){
-          let videoHeight =  parseInt(Content.HD_HEIGHT);
-        }else{
-          let videoWidth = window.innerWidth;
-          let videoHeight = Math.ceil( videoWidth / 16 * 9 );
-        }
-
+        let videoHeight =  parseInt(Content.HD_HEIGHT);
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
 
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }else{
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+        var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+
+        if(isVisible && playerVisted==false){
+          playerVisted=true;
         }
         if(!isVisible){
-          player.pause();
-          player.ima.pauseAd();
+          if(playerVisted){
+            player.pause();
+            player.ima.pauseAd();
+          }
         }else{
           player.ima.resumeAd();
         }
