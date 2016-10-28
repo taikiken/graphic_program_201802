@@ -151,12 +151,20 @@ export let VideojsImaNode = React.createClass( {
 
       var playerVisted=false;
       window.addEventListener('scroll', function () {
-
-        let videoHeight =  parseInt(Content.HD_HEIGHT);
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+          var videoWidth = window.innerWidth;
+          var videoHeight = Math.ceil( videoWidth / 16 * 9 );
+        }else{
+          var videoHeight =  parseInt(Content.HD_HEIGHT);
+        }
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
 
-        var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }else{
+          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }
 
         if(isVisible && playerVisted==false){
           playerVisted=true;
