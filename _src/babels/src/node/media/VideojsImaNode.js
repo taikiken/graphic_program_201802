@@ -167,7 +167,7 @@ export let VideojsImaNode = React.createClass( {
             player.ima.pauseAd();
           }
         }else{
-          player.ima.resumeAd();
+          // player.ima.resumeAd();
         }
       }, false);
 
