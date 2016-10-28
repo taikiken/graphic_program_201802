@@ -1,14 +1,14 @@
 <?php
 // ----------------------------------------------------
-// PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
-// https://github.com/undotsushin/undotsushin/issues/645#issuecomment-223527274
+// PC版 Powerd by エリアの追加
+// https://github.com/undotsushin/undotsushin/issues/1211
 if ( !$page['theme']['images']['pc'] ) :
 ?>
 <div class="category-heading">
   <h1>
     <?php echo $page['category']['label']; ?>
     <?php if ( isset($page['category']['title_img']) && $page['category']['title_img'] ) : ?>
-      <span class="category-heading-image">
+      <span class="title_banner-powerdby">
         <?php
         // @since 2016-09-17
         $title_img_link = false;
@@ -29,5 +29,5 @@ if ( !$page['theme']['images']['pc'] ) :
 </div><!-- /.category-heading -->
 <?php
 endif;
-// eof: PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
+// eof: PC版 Powerd by エリアの追加
 // ---------------------------------------------------- ?>
