@@ -42,6 +42,7 @@ import { Page } from '../../singles/head/Page';
 
 // @since 2016-10-28
 import { Scroll } from '../../util/Scroll';
+import { TopButton } from '../../ui/button/TopButton';
 
 // React
 const React = self.React;
@@ -139,9 +140,51 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      */
     this.singlesArticle = null;
     // magnetic motion
+    /**
+     * scroll 中 flag
+     * @type {boolean}
+     * @default false
+     * @since 2016-10-28
+     */
     this.scrolling = false;
+    /**
+     * bound scrollComplete, scroll animation complete event handler<br>
+     * `scrolling` flag を off(false) にします
+     * @type {function}
+     * @since 2016-10-28
+     */
     this.boundComplete = this.scrollComplete.bind(this);
+    /**
+     * bound noHit, Hit.NO_COLLISION event handler,
+     * `magnetic` flag を off(false)にします
+     * @type {function}
+     * @since 2016-10-28
+     */
     this.boundNo = this.noHit.bind(this);
+    /**
+     * 近接閾値<br>
+     * 閾値以下になるとスナップします
+     * @type {number}
+     * @since 2016-10-28
+     */
+    this.threshold = 120;
+    /**
+     * スナップ済みかを表す flag
+     * @type {boolean}
+     * @default false
+     * @since 2016-10-28
+     */
+    this.magnetic = false;
+
+    const topButton = TopButton.factory();
+    this.topButton = topButton;
+    topButton.on(TopButton.START, this.buttonStart.bind(this));
+    topButton.on(TopButton.COMPLETE, this.buttonComplete.bind(this));
+    /**
+     * snap scroll 可能かの flag
+     * @type {boolean}
+     */
+    this.can = true;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -199,6 +242,14 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     if (Math.abs(top) <= 50) {
       this.ga();
     }
+    const scrollEvents = events.events;
+    if (scrollEvents.moving <= 0) {
+      // scroll down
+      this.scrollDown(events);
+    } else {
+      // scroll up
+      this.scrollUp(events);
+    }
   }
   /**
    * ga 送信
@@ -217,7 +268,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     // https://github.com/undotsushin/undotsushin/issues/1151
     Ga.addPage(single.id, 'ComponentSinglesArticle.onHit');
     // ---------------------
-    this.dispose();
+    // this.dispose();
   }
   /**
    * Hit.COLLISION event handler を unbind します
@@ -229,43 +280,100 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     }
   }
   // --------------------------------------------------
-  noHit(events) {
-    const scrollEvents = events.events;
-    if (scrollEvents.moving <= 0) {
-      // scroll down
-      this.scrollDown(events);
-    } else {
-      // scroll up
-      this.scrollUp(events);
-    }
+  // snap scroll
+  /**
+   * Hit.NO_COLLISION event handler<br>
+   * `magnetic` flag を false にします
+   */
+  noHit() {
+    this.magnetic = false;
   }
+  /**
+   * scroll down 中のスナップスクロール判定を行います<br>
+   * Hit.COLLISION event handler 内から呼び出されます
+   * @param {Object} events Hit.COLLISION event object
+   */
   scrollDown(events) {
+    // スナップ済みの場合は off になるまで処理しない
+    if (this.magnetic) {
+      return;
+    }
+    // ---
+    // 判定開始
+    // @type {ClientRect} - div.loaded-post ClientRect
     const offset = events.rect;
-    console.log('scrollDown', events, offset, this.page.url());
-    if (offset.top <= 100) {
+    const scrollEvents = events.events;
+    // @type {number} - scrollY
+    const y = scrollEvents.y;
+    // @type {number} - div.loaded-post ClientRect.top
+    // window left_top 時に `0`
+    const top = offset.top;
+    // 閾値チェック
+    if (top <= this.threshold) {
       // magnetic move
-      console.log('scrollDown magnet _____', events.events.y - offset.top, this.page.url());
-      this.scrollMotion(events.events.y - offset.top);
+      this.snap(y + top);
     }
   }
+  /**
+   * scroll up 中のスナップスクロール判定を行います<br>
+   * Hit.COLLISION event handler 内から呼び出されます
+   * @param {Object} events Hit.COLLISION event object
+   */
   scrollUp(events) {
+    // スナップ済みの場合は off になるまで処理しない
+    if (this.magnetic) {
+      return;
+    }
+    // ---
+    // 判定開始
+    // @type {ClientRect} - div.loaded-post ClientRect
     const offset = events.rect;
-    if (offset.top <= -100) {
+    const scrollEvents = events.events;
+    const y = scrollEvents.y;
+    const top = offset.top;
+    // 閾値チェック
+    if (top >= -this.threshold) {
       // magnetic move
-      console.log('scrollUp magnet ^^^^^', events.events.y - offset.top, this.page.url());
-      this.scrollMotion(events.events.y + offset.top);
+      this.snap(y + top);
     }
   }
-  scrollMotion(top) {
+  /**
+   * snap scroll を開始し、スクロール操作を不能にします
+   * @param {number} top 目標値
+   */
+  snap(top) {
+    if (!this.can) {
+      return;
+    }
+    // scroll 中の時は処理しない
     if (this.scrolling) {
       return;
     }
-    console.log('***magnet***', top);
+    this.magnetic = true;
     this.scrolling = true;
-    Scroll.motion(top, 0.32, 0, this.boundComplete);
+    console.log('***magnet************************', top, this.scrolling);
+    // scroll animation 開始
+    Scroll.motion(top, 0.16, 0, false, this.boundComplete);
+    // スクロール操作を不能にします
+    Scroll.disable();
   }
+  /**
+   * scroll animation 完了 callback<br>
+   * `scrolling` を off にし、スクロール操作を可能にします
+   */
   scrollComplete() {
     this.scrolling = false;
+    // 遅延させ回復させます
+    Scroll.enable(750);
+    console.log('----------------- scrollComplete', this.scrolling);
+  }
+  // --------------------------------------------------
+  // return top animation
+  buttonStart() {
+    this.can = false;
+  }
+  buttonComplete() {
+    this.can = true;
   }
   // --------------------------------------------------
   // render
@@ -284,7 +392,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       <div className={`loaded-post loaded-post-${single.id}`} ref={
         (component) => {
           this.singlesArticle = component;
-        } }
+        }}
       >
         <div className="post-detail">
           {/* header */}

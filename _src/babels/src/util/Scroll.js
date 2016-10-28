@@ -160,6 +160,9 @@ export class Scroll extends EventDispatcher {
   static set y( top:Number ):void {
     window.scrollTo( 0, top );
   }
+  // ---------------------------------------------------
+  //  static method
+  // ---------------------------------------------------
   /**
    * scroll animation を行います
    * @param {Number} top 目標位置
@@ -192,7 +195,6 @@ export class Scroll extends EventDispatcher {
       }
     );
   }
-
   /**
    * y 0 にし、ユーザースクロールアクションで動作をキャンセルします
    * @param {Number} [duration=0.5] motion 時間 sec.
@@ -232,10 +234,6 @@ export class Scroll extends EventDispatcher {
       }
     );
   }
-
-  // ---------------------------------------------------
-  //  static method
-  // ---------------------------------------------------
   /**
    * singleton instance を生成します
    * @return {Scroll} Scroll instance を返します
@@ -245,5 +243,71 @@ export class Scroll extends EventDispatcher {
       _instance = new Scroll(_symbol);
     }
     return _instance;
+  }
+  // ---------------------------------------------------
+  //  enable / disable scroll
+  /**
+   * scroll を一時的に無効化します
+   * @see http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+   * @since 2016-10-28
+   */
+  static disable() {
+    window.addEventListener('wheel', Scroll.disableScroll, false);
+    window.addEventListener('mousewheel', Scroll.disableScroll, false);
+    document.addEventListener('mousewheel', Scroll.disableScroll, false);
+    window.addEventListener('touchmove', Scroll.disableScroll, false);
+    document.addEventListener('keydown', Scroll.keyDown, false);
+  }
+
+  /**
+   * scroll を遅延させて回復します
+   * @param {number} [delay=500] 遅延時間(ms)
+   * @since 2016-10-28
+   */
+  static enable(delay = 500) {
+    setTimeout(Scroll.activate, delay);
+  }
+  /**
+   * scroll 関連イベントハンドラ, 全て止めます
+   * @param {Event} event scroll 関連イベント
+   * @since 2016-10-28
+   */
+  static disableScroll(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  /**
+   * key down event handler<br>
+   * 37, 38, 39, 40 を無効にします
+   *
+   * - 32 - spacebar
+   * - 33 - pageup
+   * - 34 - pagedown
+   * - 35 - end
+   * - 36 - home
+   * - 37 - left
+   * - 38 - up
+   * - 39 - right
+   * - 49 - down
+   * @param {Event} event key dwon event
+   * @since 2016-10-28
+   */
+  static keyDown(event) {
+    const code = event.keyCode;
+    if ([37, 38, 39, 40].indexOf(code) !== -1) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+  /**
+   * scroll を回復します
+   * @since 2016-10-28
+   */
+  static activate() {
+    window.removeEventListener('wheel', Scroll.disableScroll);
+    window.removeEventListener('mousewheel', Scroll.disableScroll);
+    document.removeEventListener('mousewheel', Scroll.disableScroll);
+    window.removeEventListener('touchmove', Scroll.disableScroll);
+    document.removeEventListener('keydown', Scroll.keyDown);
   }
 }

@@ -17,6 +17,7 @@ import { EventDispatcher } from '../event/EventDispatcher';
 import { TagHead } from './head/TagHead';
 import { NextPages } from './head/NextPages';
 
+// History API
 const history = self.history;
 
 /**
