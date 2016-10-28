@@ -49,7 +49,7 @@ htdocs = dir.htdocs
 # --------------------------------------------
 
 files = [
-  dir.babels.src + '/**/*.js'
+  dir.babels.src + '/**/*.{js,jsx}'
   "!" + dir.babels.src + '/**/_*.js'
 ]
 

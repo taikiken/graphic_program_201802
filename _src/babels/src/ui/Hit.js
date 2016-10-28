@@ -47,6 +47,14 @@ export class Hit extends Rise {
     return 'hitCollision';
   }
   /**
+   * 衝突「していない」イベント
+   * @event NO_COLLISION
+   * @return {string} hitNoCollision を返します
+   */
+  static get NO_COLLISION():string {
+    return 'hitNoCollision';
+  }
+  /**
    * Scroll.SCROLL event handler
    * @param {Object} events Scroll.SCROLL event object {{type: string, originalEvent: Event, y: number, height: number, moving: number, changed: boolean}}
    */
@@ -55,6 +63,8 @@ export class Hit extends Rise {
     const test = Hit.test(events.height, this.elements.offset());
     if (test) {
       this.dispatch({ rect, events, type: Hit.COLLISION });
+    } else {
+      this.dispatch({ rect, events, type: Hit.NO_COLLISION });
     }
   }
   // ----------------------------------------

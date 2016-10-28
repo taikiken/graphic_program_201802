@@ -24,49 +24,18 @@ const React = self.React;
  * @since 2016-09-25
  */
 export class ComponentSingleBody extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
   /**
-   * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentSingleBody.propTypes}
+   * propTypes
+   * @return {{single: SingleDae, callback: Function}} React props
    */
-  constructor(props) {
-    super(props);
-    /**
-     * React state
-     * @type {{single: SingleDae}}
-     */
-    this.state = {
-      single: props.single
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      callback: React.PropTypes.func.isRequired
     };
-  }
-  /**
-   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-  }
-  /**
-   * `div.post-content` を出力します
-   * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
-   */
-  render() {
-    const single = this.state.single;
-    const body = single.body;
-    if (!body) {
-      return null;
-    }
-
-    if (single.readmore.isReadmore) {
-      return ComponentSingleBody.excerpt(single);
-    } else {
-      return ComponentSingleBody.body(body);
-    }
-  }
-  /**
-   * 記事詳細本文を更新します
-   * @param {SingleDae} single 記事詳細 JSON data
-   */
-  updateSingle(single) {
-    this.setState({ single });
   }
   // ---------------------------------------------------
   //  STATIC METHOD
@@ -103,24 +72,53 @@ export class ComponentSingleBody extends React.Component {
     );
   }
   // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
+  //  CONSTRUCTOR
   // ---------------------------------------------------
   /**
-   * propTypes
-   * @return {{single: SingleDae, callback: Function}} React props
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link ComponentSingleBody.propTypes}
    */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      callback: React.PropTypes.func.isRequired
+  constructor(props) {
+    super(props);
+    /**
+     * React state
+     * @type {{single: SingleDae}}
+     */
+    this.state = {
+      single: props.single
     };
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+  }
+  /**
+   * 記事詳細本文を更新します
+   * @param {SingleDae} single 記事詳細 JSON data
+   */
+  updateSingle(single) {
+    this.setState({ single });
+  }
+  /**
+   * `div.post-content` を出力します
+   * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
+   */
+  render() {
+    const single = this.state.single;
+    const body = single.body;
+    if (!body) {
+      return null;
+    }
+
+    if (single.readmore.isReadmore) {
+      return ComponentSingleBody.excerpt(single);
+    } else {
+      return ComponentSingleBody.body(body);
+    }
+  }
 }
-// /**
-//  * プロパティ
-//  * @type {{single: SingleDae, callback: Function}}
-//  */
-// ComponentSingleBody.propTypes = {
-//   single: React.PropTypes.object.isRequired,
-//   callback: React.PropTypes.func.isRequired
-// };

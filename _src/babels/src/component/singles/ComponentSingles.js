@@ -19,7 +19,10 @@ import { WidgetType } from '../../app/const/WidgetType';
 // component
 // import { ComponentSinglesWidgetOption } from './ComponentSinglesWidgetOption';
 import { ComponentSinglesWidget } from './ComponentSinglesWidget';
-import { ComponentSinglesArticle } from './ComponentSinglesArticle';
+
+// 記事本文
+// import { ComponentSinglesArticle } from './ComponentSinglesArticle';
+import { ComponentSinglesArticleMagnet } from './ComponentSinglesArticleMagnet';
 
 // ui
 import { SinglesManager } from '../../ui/SinglesManager';
@@ -82,7 +85,7 @@ export class ComponentSingles extends React.Component {
           {
             list.map((single, index) => {
               return (
-                <ComponentSinglesArticle
+                <ComponentSinglesArticleMagnet
                   key={`singles-article-${single.id}`}
                   single={single}
                   sign={props.sign}
@@ -102,20 +105,12 @@ export class ComponentSingles extends React.Component {
             list.map((single, index) => {
               return (
                 <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under6">
-                  <ComponentSinglesArticle
+                  <ComponentSinglesArticleMagnet
                     key={`singles-article-${single.id}`}
                     single={single}
                     sign={props.sign}
                     index={index}
                   />
-                  {/*
-                  <ComponentSinglesWidgetOption
-                    key={`singles-widget-${single.id}`}
-                    single={props.single}
-                    sign={props.sign}
-                    index={index}
-                  />
-                   */}
                   {
                     this.next(index)
                   }
@@ -144,20 +139,12 @@ export class ComponentSingles extends React.Component {
             list.map((single, index) => {
               return (
                 <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under9">
-                  <ComponentSinglesArticle
+                  <ComponentSinglesArticleMagnet
                     key={`singles-article-${single.id}`}
                     single={single}
                     sign={props.sign}
                     index={index}
                   />
-                  {/*
-                  <ComponentSinglesWidgetOption
-                    key={`singles-widget-${single.id}`}
-                    single={props.single}
-                    sign={props.sign}
-                    index={index}
-                  />
-                  */}
                   {
                     this.next(index)
                   }
@@ -182,20 +169,12 @@ export class ComponentSingles extends React.Component {
           list.map((single, index) => {
             return (
               <div key={`single-root-${single.id}`} className="singles-root-article">
-                <ComponentSinglesArticle
+                <ComponentSinglesArticleMagnet
                   key={`singles-article-${single.id}`}
                   single={single}
                   sign={props.sign}
                   index={index}
                 />
-                {/*
-                <ComponentSinglesWidgetOption
-                  key={`singles-widget-${single.id}`}
-                  single={props.single}
-                  sign={props.sign}
-                  index={index}
-                />
-                */}
                 {
                   this.next(index)
                 }

@@ -149,7 +149,14 @@ export class Rise extends EventDispatcher {
 
     // element.bottom が contain しているかを調べます
     if ( windowBottom > elementBottom ) {
-      this.dispatch( { type: Rise.RISE, window: windowBottom, element: elementBottom } );
+      this.dispatch({
+        type: Rise.RISE,
+        window: windowBottom,
+        element: elementBottom,
+        // @since 2016-10-28
+        originalEvent: events,
+        offset: offsetRect,
+      });
     }
   }
 }

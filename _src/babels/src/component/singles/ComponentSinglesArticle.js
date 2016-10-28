@@ -88,7 +88,7 @@ export class ComponentSinglesArticle extends React.Component {
      */
     this.manager = SingleManager.factory();
     /**
-     * ページ情報書換えでーたを `SingleDae` から生成します
+     * ページ情報書換えデータを `SingleDae` から生成します
      * {@link SingleDae}
      * {@link Page}
      * @type {Page}

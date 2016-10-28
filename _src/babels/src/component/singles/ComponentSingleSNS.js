@@ -25,6 +25,73 @@ const React = self.React;
  * @since 2016-09-25
  */
 export class ComponentSingleSNS extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, callback: Function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * 別ウインドウを開き Facebook share します
+   * @param {Event} event click event
+   * @return {boolean} false を返します
+   */
+  static openFacebook(event) {
+    event.preventDefault();
+    const target = event.target;
+    const href = target.href;
+    if (!href) {
+      return false;
+    }
+
+    window.open(encodeURI(decodeURI(href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes');
+    return false;
+  }
+  /**
+   * 別ウインドウを開き Tweet します
+   * @param {Event} event click event
+   * @return {boolean} false を返します
+   */
+  static openTwitter(event) {
+    event.preventDefault();
+    const target = event.target;
+    const href = target.href;
+    if (!href) {
+      return false;
+    }
+
+    window.open(encodeURI(decodeURI(href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
+    return false;
+  }
+  /**
+   * 別ウインドウを開き LINEへ送る します
+   * @param {Event} event click event
+   * @return {boolean} false を返します
+   */
+  static openLine(event) {
+    event.preventDefault();
+    const target = event.target;
+    const href = target.href;
+    if (!href) {
+      return false;
+    }
+
+    window.open(encodeURI(decodeURI(href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
+    return false;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link ComponentSingleSNS.propTypes}
@@ -43,6 +110,22 @@ export class ComponentSingleSNS extends React.Component {
     // this.boundFB = this.openFacebook.bind(this);
     // this.boundTW = this.openTwitter.bind(this);
     // this.boundLine = this.openLine.bind(this);
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+  }
+  /**
+   * 記事詳細SNSを更新します
+   * @param {SingleDae} single 記事詳細 JSON data
+   */
+  updateSingle(single) {
+    this.setState({ single });
   }
   /**
    * `div.post-sns` を出力します, SNS block 記事上です
@@ -114,89 +197,4 @@ export class ComponentSingleSNS extends React.Component {
       </div>
     );
   }
-  /**
-   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-  }
-  /**
-   * 記事詳細SNSを更新します
-   * @param {SingleDae} single 記事詳細 JSON data
-   */
-  updateSingle(single) {
-    this.setState({ single });
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * 別ウインドウを開き Facebook share します
-   * @param {Event} event click event
-   * @return {boolean} false を返します
-   */
-  static openFacebook(event) {
-    event.preventDefault();
-    const target = event.target;
-    const href = target.href;
-    if (!href) {
-      return false;
-    }
-
-    window.open(encodeURI(decodeURI(href)), 'FBwindow', 'width=650, height=470, menubar=no, toolbar=no, scrollbars=yes');
-    return false;
-  }
-  /**
-   * 別ウインドウを開き Tweet します
-   * @param {Event} event click event
-   * @return {boolean} false を返します
-   */
-  static openTwitter(event) {
-    event.preventDefault();
-    const target = event.target;
-    const href = target.href;
-    if (!href) {
-      return false;
-    }
-
-    window.open(encodeURI(decodeURI(href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
-    return false;
-  }
-  /**
-   * 別ウインドウを開き LINEへ送る します
-   * @param {Event} event click event
-   * @return {boolean} false を返します
-   */
-  static openLine(event) {
-    event.preventDefault();
-    const target = event.target;
-    const href = target.href;
-    if (!href) {
-      return false;
-    }
-
-    window.open(encodeURI(decodeURI(href)), 'LINEwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1');
-    return false;
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{single: SingleDae, callback: Function}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      callback: React.PropTypes.func.isRequired
-    };
-  }
 }
-// /**
-//  * プロパティ
-//  * @type {{single: SingleDae, callback: Function}}
-//  */
-// ComponentSingleSNS.propTypes = {
-//   single: React.PropTypes.object.isRequired,
-//   callback: React.PropTypes.func.isRequired
-// };
