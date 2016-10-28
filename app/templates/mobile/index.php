@@ -15,7 +15,7 @@
 
     <section class="main-sec">
       <div class="focus-bnr">
-        <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="/assets/sp/images/dummy/bnr-sokuhou.png" alt="サッカー日本代表 リアルタイム速報 日本vsオーストラリア アジア最終予選"></a>
+        <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="https://dev-img.sportsbull.jp/raw/img2016102612371758442500.png" alt="サッカー日本代表リアルタイム速報"></a>
       </div><!-- /.focus-bnr -->
 
       <div class="headline-section">
