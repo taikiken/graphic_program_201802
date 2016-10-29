@@ -44,6 +44,22 @@ const playMark = (mediaType) => {
  * @since 2016-09-30
  */
 export class ComponentSinglesWidgetPopularList extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{list: Array<SingleDae>}} React props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSinglesWidgetPopularList.propTypes}
@@ -57,6 +73,34 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
     this.state = {
       list: props.list
     };
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * delegate, マウント後に呼び出されます<br>
+   * callback 関数を実行します
+   */
+  componentDidMount() {
+    const callback = this.props.callback;
+    if (typeof callback === 'function') {
+      callback.call(this);
+    }
+  }
+  /**
+   * 次の読み込みから表示を更新します
+   * @param {Array} list 表示リスト
+   */
+  updateList(list) {
+    // state を変更し appendChild を行う
+    this.setState({ list });
+  }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
+  reload() {
+    this.updateList(this.state.list);
   }
   /**
    * 記事詳細・人気の記事一覧を出力します
@@ -113,32 +157,5 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
         </ul>
       </div>
     );
-  }
-  /**
-   * 次の読み込みから表示を更新します
-   * @param {Array} list 表示リスト
-   */
-  updateList(list) {
-    // state を変更し appendChild を行う
-    this.setState({ list });
-  }
-  /**
-   * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
-   */
-  reload() {
-    this.updateList(this.state.list);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * React props
-   * @return {{list: Array<SingleDae>}} React props
-   */
-  static get propTypes() {
-    return {
-      list: React.PropTypes.array.isRequired
-    };
   }
 }

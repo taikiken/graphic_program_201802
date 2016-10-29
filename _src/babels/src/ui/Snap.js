@@ -34,11 +34,11 @@ export class Snap extends EventDispatcher {
    */
   constructor(element) {
     super();
-    // /**
-    //  * snap 対象 element
-    //  * @type {Element}
-    //  */
-    // this.element = element;
+    /**
+     * snap 対象 element
+     * @type {Element}
+     */
+    this.element = element;
     /**
      * scroll 中 flag
      * @type {boolean}
@@ -60,29 +60,11 @@ export class Snap extends EventDispatcher {
      * @since 2016-10-28
      */
     this.threshold = 120;
-
-    // page top click listener
-    // page top animation 中に snap しないようにします
-    const topButton = TopButton.factory();
-    // /**
-    //  * page top click 管理インスタンス<br>
-    //  * page top animation 中に snap しないようにします
-    //  * @type {TopButton}
-    //  */
-    // this.topButton = topButton;
-    topButton.on(TopButton.START, this.buttonStart.bind(this));
-    topButton.on(TopButton.COMPLETE, this.buttonComplete.bind(this));
     /**
      * snap scroll 可能かの flag
      * @type {boolean}
      */
     this.can = true;
-
-    // hit listener
-    const hit = new Hit(element);
-    hit.on(Hit.COLLISION, this.onHit.bind(this));
-    hit.on(Hit.NO_COLLISION, this.noHit.bind(this));
-    hit.start();
   }
   // ---------------------------------------------------
   //  EVENT
@@ -98,6 +80,22 @@ export class Snap extends EventDispatcher {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * 初期処理, event 監視
+   */
+  init() {
+    // page top click listener
+    // page top animation 中に snap しないようにします
+    const topButton = TopButton.factory();
+    topButton.on(TopButton.START, this.buttonStart.bind(this));
+    topButton.on(TopButton.COMPLETE, this.buttonComplete.bind(this));
+
+    // hit listener
+    const hit = new Hit(this.element);
+    hit.on(Hit.COLLISION, this.onHit.bind(this));
+    hit.on(Hit.NO_COLLISION, this.noHit.bind(this));
+    hit.start();
+  }
   /**
    * Hit.COLLISION event handler<br>
    * ウインドウ内にコンテナが表示された時に通知されます

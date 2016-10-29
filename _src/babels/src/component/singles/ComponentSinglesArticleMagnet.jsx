@@ -198,12 +198,14 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   componentDidMount() {
     // Hit instance を作成し監視を開始します
     if (this.hit === null && this.singlesArticle !== null) {
+      // snap
+      const snap = new Snap(this.singlesArticle);
+      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+      snap.init();
+      // -- [hit]
       const hit = new Hit(this.singlesArticle);
       this.hit = hit;
       hit.on(Hit.COLLISION, this.boundHit);
-      // hit.on(Hit.NO_COLLISION, this.boundNo);
-      const snap = new Snap(this.singlesArticle);
-      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       hit.start();
     }
   }

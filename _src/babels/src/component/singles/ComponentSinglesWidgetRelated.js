@@ -13,6 +13,10 @@
 // app
 import { Url } from '../../app/const/Url';
 
+
+// ui / snap
+import { Snap } from '../../ui/Snap';
+
 // React
 const React = self.React;
 
@@ -22,6 +26,43 @@ const React = self.React;
  * @since 2016-09-28
  */
 export class ComponentSinglesWidgetRelated extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * プロパティ
+   * @return {{index: number, strong: boolean}} React.props
+   */
+  static get propTypes() {
+    return {
+      // 記事表示順序
+      index: React.PropTypes.number.isRequired,
+      // 記事出力順番に関係なく出力するかのフラッグ
+      strong: React.PropTypes.bool.isRequired,
+      // SingleDae <- 記事詳細該当記事の
+      single: React.PropTypes.object.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * React dom へ script tag を appendChild します
+   * @param {Element} element appendChild する親 Element
+   */
+  static insert(element) {
+    element.innerHTML = '';
+
+    const div = document.createElement('div');
+    const script = document.createElement('script');
+    script.src = Url.popin();
+    div.appendChild(script);
+
+    element.appendChild(div);
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSinglesWidgetRelated.propTypes}
@@ -37,37 +78,23 @@ export class ComponentSinglesWidgetRelated extends React.Component {
       single: props.single
     };
   }
-  /**
-   * state.index が 6 あるいは strong: true の時に<br>
-   * 関連記事一覧 `div.singles-recommend-containers` を出力します
-   * @return {?XML} `div.singles-recommend-containers` or null を返します
-   */
-  render() {
-    const props = this.props;
-
-    if (props.strong) {
-      return this.build();
-    }
-
-    // 0 始まり index を
-    // 3 の倍数チェックのために 1 足します
-    // `x % 3 === 0` するために
-    const index = props.index + 1;
-
-    if (index % 3 !== 0) {
-      return null;
-    }
-
-    // return null;
-    return this.build();
-  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * delegate, マウント後に呼び出され script tag をインサートします
    * */
   componentDidMount() {
     if (!!this.refs.related) {
       ComponentSinglesWidgetRelated.insert(this.refs.related);
+      // snap
+      const snap = new Snap(this.refs.related);
+      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+      snap.init();
     }
+  }
+  onSnap() {
+    console.log('postList_related snap', this.props.index);
   }
   /**
    * 関連記事一覧 `div.singles-related-containers` を出力します
@@ -76,7 +103,7 @@ export class ComponentSinglesWidgetRelated extends React.Component {
   build() {
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div className="widget-postList widget-postList_related singles-related-containers">
+      <div className={`widget-postList widget-postList_related widget-postList_related-${this.props.index} singles-related-containers`}>
         <div id="_popIn_category" style={{display: 'none'}}>{this.state.single.categories.labels}</div>
         <div id="_popIn_recommend" />
         <div className="singles-related-scripts" ref="related" />
@@ -104,38 +131,28 @@ export class ComponentSinglesWidgetRelated extends React.Component {
   reload() {
     this.updateIndex(this.state.index);
   }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
   /**
-   * React dom へ script tag を appendChild します
-   * @param {Element} element appendChild する親 Element
+   * state.index が 6 あるいは strong: true の時に<br>
+   * 関連記事一覧 `div.singles-recommend-containers` を出力します
+   * @return {?XML} `div.singles-recommend-containers` or null を返します
    */
-  static insert(element) {
-    element.innerHTML = '';
+  render() {
+    const props = this.props;
 
-    const div = document.createElement('div');
-    const script = document.createElement('script');
-    script.src = Url.popin();
-    div.appendChild(script);
+    if (props.strong) {
+      return this.build();
+    }
 
-    element.appendChild(div);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * プロパティ
-   * @return {{index: number, strong: boolean}} React.props
-   */
-  static get propTypes() {
-    return {
-      // 記事表示順序
-      index: React.PropTypes.number.isRequired,
-      // 記事出力順番に関係なく出力するかのフラッグ
-      strong: React.PropTypes.bool.isRequired,
-      // SingleDae <- 記事詳細該当記事の
-      single: React.PropTypes.object.isRequired
-    };
+    // 0 始まり index を
+    // 3 の倍数チェックのために 1 足します
+    // `x % 3 === 0` するために
+    const index = props.index + 1;
+
+    if (index % 3 !== 0) {
+      return null;
+    }
+
+    // return null;
+    return this.build();
   }
 }

@@ -132,8 +132,8 @@ export class SinglesHistory extends EventDispatcher {
       this.pop();
     } else {
       // 存在しない
-      pages().push(page);
-      if (this.base() !== pages.url()) {
+      pages.add(page);
+      if (this.base() !== page.url()) {
         // 初期アクセス URL と異なっていたら pushstate します
         this.push(pushSymbol, page);
       }
