@@ -21,14 +21,21 @@ import { NextPages } from './head/NextPages';
 const history = self.history;
 
 /**
+ * `push` 関数を private 扱いにするための inner symbol
+ * @type {Symbol}
+ * @private
+ */
+const pushSymbol = Symbol('private method push');
+
+/**
  * singleton instance のためのチェック用 Symbol
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol('SingleManager singleton instance');
+const _symbol = Symbol('SinglesHistory singleton instance');
 /**
- * SingleManager instance
- * @type {?SingleManager}
+ * SinglesHistory instance
+ * @type {?SinglesHistory}
  * @private
  * @static
  */
@@ -37,15 +44,15 @@ let _instance = null;
 /**
  * singleton: 記事詳細・次の記事一覧 History API 使用を管理します
  */
-export class SingleManager extends EventDispatcher {
+export class SinglesHistory extends EventDispatcher {
   /**
    * 記事詳細・次の記事一覧 History API 使用を管理します
    * @param {Symbol} target singleton を実現するための private symbol
-   * @return {SingleManager} singleton SingleManager instance を返します
+   * @return {SinglesHistory} singleton SinglesHistory instance を返します
    */
   constructor(target) {
     if (_symbol !== target) {
-      throw new Error( 'SingleManager is static Class. not use new SingleManager().' );
+      throw new Error( 'SinglesHistory is static Class. not use new SinglesHistory().' );
     }
     if (_instance !== null) {
       return _instance;
@@ -107,25 +114,41 @@ export class SingleManager extends EventDispatcher {
     const page = this.pages().pop();
     console.log('onPop event', event, page);
   }
-  push(page) {
-    this.pages().add(page);
+  push(symbol, page) {
+    if (symbol !== pushSymbol) {
+      console.warn('push is inner method. instead use hit');
+      return;
+    }
     history.pushState(page.info(), page.title(), page.url());
   }
   pop() {
     // this.pages().pop();
     history.back(-1);
   }
-
+  hit(page) {
+    const pages = this.pages();
+    if(Object.values(pages).indexOf(page) !== -1) {
+      // 配列に既に存在する -> pop
+      this.pop();
+    } else {
+      // 存在しない
+      pages().push(page);
+      if (this.base() !== pages.url()) {
+        // 初期アクセス URL と異なっていたら pushstate します
+        this.push(pushSymbol, page);
+      }
+    }
+  }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * instance を生成します
-   * @return {SingleManager} SingleManager instance を返します
+   * @return {SinglesHistory} SinglesHistory instance を返します
    */
-  static factory():SingleManager {
+  static factory():SinglesHistory {
     if (_instance === null) {
-      _instance = new SingleManager( _symbol );
+      _instance = new SinglesHistory( _symbol );
     }
     return _instance;
   }

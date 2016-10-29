@@ -43,7 +43,7 @@ import { GaData } from '../ga/GaData';
 import { Ga } from '../ga/Ga';
 
 // singles (pushstate...)
-import { SingleManager } from '../singles/SingleManager';
+import { SinglesHistory } from '../singles/SinglesHistory';
 
 // singles/head
 import { Page } from '../singles/head/Page';
@@ -185,10 +185,10 @@ export class ViewSingle extends View {
       const single = new SingleDae(response);
       // ---------------------------------
       // @since 2016-10-27 pushstate のために
-      const manager = SingleManager.factory();
+      const manager = SinglesHistory.factory();
       const page = new Page(single);
       manager.setBase(page.url);
-      manager.push(page);
+      manager.hit(page);
       // ---------------------------------
       this.render(single);
       this.singles(single);

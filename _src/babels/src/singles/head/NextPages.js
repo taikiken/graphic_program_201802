@@ -88,7 +88,7 @@ export class NextPages {
   // ---------------------------------------------------
   /**
    * instance を生成します
-   * @return {NextPages} SingleManager instance を返します
+   * @return {NextPages} SinglesHistory instance を返します
    */
   static factory():NextPages {
     if (_instance === null) {

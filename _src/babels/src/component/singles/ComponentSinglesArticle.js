@@ -34,7 +34,7 @@ import { Ga } from '../../ga/Ga';
 // --------------------
 // @since 2016-10-17
 // singles
-import { SingleManager } from '../../singles/SingleManager';
+import { SinglesHistory } from '../../singles/SinglesHistory';
 
 // singles/head
 import { Page } from '../../singles/head/Page';
@@ -83,10 +83,10 @@ export class ComponentSinglesArticle extends React.Component {
 
     /**
      * SPA のための管理クラス
-     * @type {SingleManager}
+     * @type {SinglesHistory}
      * @since 2016-10-27
      */
-    this.manager = SingleManager.factory();
+    this.manager = SinglesHistory.factory();
     /**
      * ページ情報書換えデータを `SingleDae` から生成します
      * {@link SingleDae}
