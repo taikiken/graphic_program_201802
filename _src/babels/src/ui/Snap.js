@@ -155,6 +155,7 @@ export class Snap extends EventDispatcher {
     // 閾値チェック
     if (top <= this.threshold) {
       // magnetic move
+      console.log('scrollDown +++++++++', top, this.element);
       this.snap(y + top);
     }
   }
@@ -176,8 +177,9 @@ export class Snap extends EventDispatcher {
     const y = scrollEvents.y;
     const top = offset.top;
     // 閾値チェック
-    if (top >= -this.threshold) {
+    if (Math.abs(top) > 60 && top >= -this.threshold) {
       // magnetic move
+      console.log('scrollUp ------', top, this.element);
       this.snap(y + top);
     }
   }
