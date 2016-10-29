@@ -42,10 +42,12 @@ export class NextPages {
     if (_instance !== null) {
       return _instance;
     }
-    const pages = [];
+    const pages = {};
     /**
      * ページ情報を保持します
-     * @return {Array<Page>} Page instance がセットされた配列を返します
+     *
+     * - url を key に Page データをセットします
+     * @return {Object} Page instance がセットされた配列を返します
      */
     this.pages = () => pages;
 
@@ -58,30 +60,29 @@ export class NextPages {
   /**
    * page 追加
    * @param {Page} page 追加する Page instance
-   * @return {number} 追加された配列 index
    */
   add(page) {
-    // @type {Array}
+    // @type {Object}
     const pages = this.pages();
-    pages.push(page);
-    return pages.length - 1;
+    pages[page.url()] = page;
   }
   /**
    * Page を最後から取り出します
+   * @param {string} url キーになる url
    * @return {Page} 取り出した Page 情報
    */
-  pop() {
-    return this.pages().pop();
+  get(url) {
+    return this.pages()[url];
   }
   // shift() {
   //   return this.pages().shift();
   // }
   /**
    * クローンを作成します
-   * @return {Array<Page>} クローン配列を返します
+   * @return {Object} クローンを返します
    */
   clone() {
-    return this.pages().slice(0);
+    return Object.create(this.pages());
   }
   // ---------------------------------------------------
   //  STATIC METHOD

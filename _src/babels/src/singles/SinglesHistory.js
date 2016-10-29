@@ -111,12 +111,16 @@ export class SinglesHistory extends EventDispatcher {
   //   console.log('onPush event', event, this);
   // }
   onPop(event) {
-    const page = this.pages().pop();
-    // default は常に確保する
-    if (page.url() === this.base()) {
-      this.pages().add(page);
-    }
-    console.log('================== onPop event ===================', event, page.url(), this.pages().pages());
+    // const page = this.pages().pop();
+    // // default は常に確保する
+    // if (page.url() === this.base()) {
+    //   this.pages().add(page);
+    // }
+    console.log('================== onPop event ===================', event);
+  }
+  replace(page) {
+    console.log('replace ******', page.info());
+    history.replaceState(page.info(), page.title(), page.url());
   }
   push(symbol, page) {
     if (symbol !== pushSymbol) {
@@ -126,26 +130,40 @@ export class SinglesHistory extends EventDispatcher {
     console.log('------------------- pushState', page.url());
     // history.pushState(page.info(), page.title(), page.url());
     // wired.jp も replaceState だったよ
-    history.replaceState(page.info(), page.title(), page.url());
+    this.replace(page);
   }
-  pop() {
+  pop(url) {
     // this.pages().pop();
-    history.back();
+    // history.back();
+    const page = this.pages().get(url);
+    this.replace(page);
   }
   hit(page) {
-    const pages = this.pages();
-    if(Object.values(pages.pages()).indexOf(page) !== -1) {
-      // 配列に既に存在する -> pop
-      this.pop();
+    // @type {Object}
+    const pages = this.pages().pages();
+    if (Object.keys(pages).indexOf(page.url()) !== -1) {
+      // url が存在する
+      this.pop(page.url());
     } else {
       // 存在しない
-      pages.add(page);
-      console.log('SinglesHistory.hit', page.url(), pages.pages(), this.base());
+      this.pages().add(page);
       if (this.base() !== page.url()) {
         // 初期アクセス URL と異なっていたら pushstate します
         this.push(pushSymbol, page);
       }
     }
+    // if(Object.values(pages.pages()).indexOf(page) !== -1) {
+    //   // 配列に既に存在する -> pop
+    //   this.pop();
+    // } else {
+    //   // 存在しない
+    //   pages.add(page);
+    //   console.log('SinglesHistory.hit', page.url(), pages.pages(), this.base());
+    //   if (this.base() !== page.url()) {
+    //     // 初期アクセス URL と異なっていたら pushstate します
+    //     this.push(pushSymbol, page);
+    //   }
+    // }
   }
   // ---------------------------------------------------
   //  STATIC METHOD
