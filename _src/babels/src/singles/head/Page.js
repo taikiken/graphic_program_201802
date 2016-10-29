@@ -50,6 +50,11 @@ export class Page {
      * @return {string} 記事画像
      */
     this.ogImg = () => singleDae.media.images.original;
+    this.props = {
+      title: singleDae.title,
+      url: singleDae.url,
+      ogImg: singleDae.media.images.original,
+    };
     console.log('Page', this.title(), this.url(), this.ogImg());
   }
   /**

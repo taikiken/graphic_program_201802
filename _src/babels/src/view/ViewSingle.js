@@ -197,7 +197,7 @@ export class ViewSingle extends View {
       this.manager = manager;
       const page = new Page(single);
       this.page = page;
-      manager.setBase(page.url);
+      manager.setBase(page.url());
       manager.hit(page);
       // snap
       const element = Dom.get('js-current-post');

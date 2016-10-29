@@ -134,6 +134,10 @@ export class Snap extends EventDispatcher {
    * @param {Object} events Hit.COLLISION event object
    */
   scrollDown(events) {
+    // noMotion true は scroll up だけ監視する
+    if (this.noMotion) {
+      return;
+    }
     // スナップ済みの場合は off になるまで処理しない
     if (this.magnetic) {
       return;

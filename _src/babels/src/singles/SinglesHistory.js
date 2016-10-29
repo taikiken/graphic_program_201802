@@ -112,7 +112,11 @@ export class SinglesHistory extends EventDispatcher {
   // }
   onPop(event) {
     const page = this.pages().pop();
-    console.log('================== onPop event ===================', event, page.url());
+    // default は常に確保する
+    if (page.url() === this.base()) {
+      this.pages().add(page);
+    }
+    console.log('================== onPop event ===================', event, page.url(), this.pages().pages());
   }
   push(symbol, page) {
     if (symbol !== pushSymbol) {
@@ -121,6 +125,7 @@ export class SinglesHistory extends EventDispatcher {
     }
     console.log('------------------- pushState', page.url());
     // history.pushState(page.info(), page.title(), page.url());
+    // wired.jp も replaceState だったよ
     history.replaceState(page.info(), page.title(), page.url());
   }
   pop() {
@@ -129,12 +134,13 @@ export class SinglesHistory extends EventDispatcher {
   }
   hit(page) {
     const pages = this.pages();
-    if(Object.values(pages).indexOf(page) !== -1) {
+    if(Object.values(pages.pages()).indexOf(page) !== -1) {
       // 配列に既に存在する -> pop
       this.pop();
     } else {
       // 存在しない
       pages.add(page);
+      console.log('SinglesHistory.hit', page.url(), pages.pages(), this.base());
       if (this.base() !== page.url()) {
         // 初期アクセス URL と異なっていたら pushstate します
         this.push(pushSymbol, page);
