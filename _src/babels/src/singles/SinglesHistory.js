@@ -112,18 +112,20 @@ export class SinglesHistory extends EventDispatcher {
   // }
   onPop(event) {
     const page = this.pages().pop();
-    console.log('onPop event', event, page);
+    console.log('================== onPop event ===================', event, page.url());
   }
   push(symbol, page) {
     if (symbol !== pushSymbol) {
       console.warn('push is inner method. instead use hit');
       return;
     }
-    history.pushState(page.info(), page.title(), page.url());
+    console.log('------------------- pushState', page.url());
+    // history.pushState(page.info(), page.title(), page.url());
+    history.replaceState(page.info(), page.title(), page.url());
   }
   pop() {
     // this.pages().pop();
-    history.back(-1);
+    history.back();
   }
   hit(page) {
     const pages = this.pages();

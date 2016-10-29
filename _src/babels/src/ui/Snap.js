@@ -31,8 +31,9 @@ export class Snap extends EventDispatcher {
   /**
    * hit instance を作成し event handler を設定します
    * @param {Element} element 対象 element
+   * @param {boolean} [noMotion=false] scroll animation を行わない
    */
-  constructor(element) {
+  constructor(element, noMotion = false) {
     super();
     /**
      * snap 対象 element
@@ -65,6 +66,11 @@ export class Snap extends EventDispatcher {
      * @type {boolean}
      */
     this.can = true;
+    /**
+     * scroll animation を行わない
+     * @type {boolean}
+     */
+    this.noMotion = noMotion;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -187,6 +193,13 @@ export class Snap extends EventDispatcher {
     this.dispatch({ type: Snap.SNAPPED, target: this });
     // flag on
     this.magnetic = true;
+    // ---------------------------
+    // scroll animation を行わない option
+    if (this.noMotion) {
+      return;
+    }
+    // ---------------------------
+    // scroll animation
     this.scrolling = true;
     console.log('***magnet************************', top, this.scrolling);
     // scroll animation 開始

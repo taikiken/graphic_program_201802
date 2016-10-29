@@ -42,12 +42,15 @@ import { Message } from '../app/const/Message';
 import { GaData } from '../ga/GaData';
 import { Ga } from '../ga/Ga';
 
+// ---------------------------------
 // singles (pushstate...)
 import { SinglesHistory } from '../singles/SinglesHistory';
 
 // singles/head
 import { Page } from '../singles/head/Page';
 
+// snap
+import { Snap } from '../ui/Snap';
 
 /**
  * <p>記事詳細</p>
@@ -72,11 +75,9 @@ export class ViewSingle extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( id:number, element:Element, elements:Object, option:Object = {} ) {
-
     option = Safety.object( option );
-
     super( element, option );
-
+    // action
     let ActionClass = User.sign ? SingleAuth : Single;
     /**
      * Action instance を設定します
@@ -128,6 +129,16 @@ export class ViewSingle extends View {
      * @since 2016-09-26
      */
     this.id = id;
+    /**
+     * Page instance
+     * @type {?Page}
+     */
+    this.page = null;
+    /**
+     * SinglesHistory instance
+     * @type {?SinglesHistory}
+     */
+    this.manager = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -160,16 +171,13 @@ export class ViewSingle extends View {
    * Ajax request を開始します
    */
   start():void {
-
     this.action.start();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   done( result:Result ):void {
-
     let response = result.response;
 
     if ( typeof response === 'undefined' ) {
@@ -186,14 +194,28 @@ export class ViewSingle extends View {
       // ---------------------------------
       // @since 2016-10-27 pushstate のために
       const manager = SinglesHistory.factory();
+      this.manager = manager;
       const page = new Page(single);
+      this.page = page;
       manager.setBase(page.url);
       manager.hit(page);
+      // snap
+      const element = Dom.get('js-current-post');
+      // no scroll animation で snap instance 作成
+      const snap = new Snap(element, true);
+      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+      // 閾値下げる
+      snap.threshold = 50;
+      snap.init();
       // ---------------------------------
       this.render(single);
       this.singles(single);
     }
-
+  }
+  onSnap() {
+    console.log('onSnap', this.page.url());
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
   }
   /**
    * Ajax response error
@@ -257,39 +279,29 @@ export class ViewSingle extends View {
     // console.log( 'ViewSingle', single );
     // header
     if ( this._header === null ) {
-
       header = new ViewSingleHeader( this.element, single );
       header.on( View.DID_MOUNT, this._boundMount );
       this._header = header;
       header.start();
-
     } else {
-
       this._header.render( single );
-
     }
 
     // footer
     if ( Safety.isElement( this._elements.footer ) ) {
       // footer element が存在する時のみ
       if ( this._footer === null ) {
-
         footer = new ViewSingleFooter( this._elements.footer, single );
         this._footer = footer;
         footer.start();
-
       } else {
-
         this._footer.render( single );
-
       }
     }
 
     // 関連記事 もしもあるなら
     if ( single.hasRelated ) {
-
       this.related( single.related );
-
     }
     // ga from 2016-06-08
     // ViewSingle.ga( single );
