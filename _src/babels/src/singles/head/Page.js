@@ -50,6 +50,10 @@ export class Page {
      * @return {string} 記事画像
      */
     this.ogImg = () => singleDae.media.images.original;
+    /**
+     * props, console 確認しやすい様に Object property にします
+     * @type {{title: string, url: string, ogImg: string}}
+     */
     this.props = {
       title: singleDae.title,
       url: singleDae.url,

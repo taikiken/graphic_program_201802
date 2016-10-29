@@ -17,35 +17,38 @@ import { TagMeta } from './TagMeta';
  * @since 2016-10-27
  */
 export class SnsFb {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * head > meta:og
    * @param {Element} head head tag
    */
   constructor(head) {
-    const appId = new TagMeta(head, 'meta[property="fb:app_id"]');
-    const siteName = new TagMeta(head, 'meta[property="og:site_name"]');
-    const type = new TagMeta(head, 'meta[property="og:type"]');
+    // const appId = new TagMeta(head, 'meta[property="fb:app_id"]');
+    // const siteName = new TagMeta(head, 'meta[property="og:site_name"]');
+    // const type = new TagMeta(head, 'meta[property="og:type"]');
     const title = new TagMeta(head, 'meta[property="og:title"]');
     const image = new TagMeta(head, 'meta[property="og:image"]');
     const url = new TagMeta(head, 'meta[property="og:url"]');
     const description = new TagMeta(head, 'meta[property="og:description"]');
-    const locale = new TagMeta(head, 'meta[property="og:locale"]');
+    // const locale = new TagMeta(head, 'meta[property="og:locale"]');
 
-    /**
-     * meta[property="fb:app_id"]
-     * @return {TagMeta} meta[property="fb:app_id"]
-     */
-    this.appId = () => appId;
-    /**
-     * meta[property="og:site_name"]
-     * @return {TagMeta} meta[property="og:site_name"]
-     */
-    this.siteName = () => siteName;
-    /**
-     * meta[property="og:type"]
-     * @return {TagMeta} meta[property="og:type"]
-     */
-    this.type = () => type;
+    // /**
+    //  * meta[property="fb:app_id"]
+    //  * @return {TagMeta} meta[property="fb:app_id"]
+    //  */
+    // this.appId = () => appId;
+    // /**
+    //  * meta[property="og:site_name"]
+    //  * @return {TagMeta} meta[property="og:site_name"]
+    //  */
+    // this.siteName = () => siteName;
+    // /**
+    //  * meta[property="og:type"]
+    //  * @return {TagMeta} meta[property="og:type"]
+    //  */
+    // this.type = () => type;
     /**
      * meta[property="og:title"]
      * @return {TagMeta} meta[property="og:title"]
@@ -67,10 +70,23 @@ export class SnsFb {
      * @return {TagMeta} meta[property="og:description"]
      */
     this.description = () => description;
-    /**
-     * meta[property="og:locale"]
-     * @return {TagMeta} meta[property="og:locale"]
-     */
-    this.locale = () => locale;
+    // /**
+    //  * meta[property="og:locale"]
+    //  * @return {TagMeta} meta[property="og:locale"]
+    //  */
+    // this.locale = () => locale;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * head 内(Facebook)項目を書換えます
+   * @param {Page} page ページ情報
+   */
+  replace(page) {
+    this.title().set(page.title());
+    this.image().set(page.ogImg());
+    this.url().set(page.url());
+    this.description().set(page.description());
   }
 }

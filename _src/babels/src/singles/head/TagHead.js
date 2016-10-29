@@ -19,9 +19,41 @@ import { TagTitle } from './TagTitle';
 
 /**
  * head tag 内, meta / title 書換えを管理します
+ *
+ * ```
+ * TagHead
+ *    TagTitle
+ *    SnsFb
+ *    SnsTw
+ *    TagLink
+ *    TagMeta
+ * ```
+ *
+ * ```
+ * <!-- sns ogp -->
+ * <meta property="fb:app_id" content="<?php echo $page['app_id']; ?>">
+ * <meta property="og:site_name" content="<?php echo $page['site_name']; ?>">
+ * <meta property="og:type" content="<?php echo $page['og_type']; ?>">
+ * <meta property="og:title" content="<?php echo $page['og_title']; ?>">
+ * <meta property="og:image" content="<?php echo $page['og_image']; ?>">
+ * <meta property="og:url" content="<?php echo $page['og_url']; ?>">
+ * <meta property="og:description" content="<?php echo $page['og_description']; ?>">
+ * <meta property="og:locale" content="ja_JP" />
+ *
+ * <!-- twitter card -->
+ * <meta name="twitter:card" content="summary">
+ * <meta name="twitter:site" content="@<?php echo $page['sns']['twitter']; ?>">
+ * <meta name="twitter:title" content="<?php echo $page['og_title']; ?>">
+ * <meta name="twitter:image" content="<?php echo $page['og_image']; ?>">
+ * <meta name="twitter:url" content="<?php echo $page['og_url']; ?>">
+ * <meta name="twitter:description" content="<?php echo $page['og_description']; ?>">
+ * ```
  * @since 2016-10-27
  */
 export class TagHead {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * head tag 内, meta / title 書換えを管理します
    * @param {Element} head head tag
@@ -57,5 +89,27 @@ export class TagHead {
      * @return {TagMeta} TagMeta instance
      */
     this.description = () => description;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * head 内項目を書換えます
+   * @param {Page} page ページ情報
+   */
+  replace(page) {
+    const title = page.title();
+    const description = page.description();
+    const url = page.url();
+    // title
+    this.title().set(title);
+    // description
+    this.description().set(description);
+    // canonical
+    this.canonical().set(url);
+    // Twitter
+    this.twitter().replace(page);
+    // Facebook
+    this.og().replace(page);
   }
 }

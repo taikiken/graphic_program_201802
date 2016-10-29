@@ -17,21 +17,24 @@ import { TagMeta } from './TagMeta';
  * @since 2016-10-27
  */
 export class SnsTw {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * head > meta:twitter
    * @param {Element} head head tag
    */
   constructor(head) {
-    const site = new TagMeta(head, 'meta[name="twitter:site"]');
+    // const site = new TagMeta(head, 'meta[name="twitter:site"]');
     const title = new TagMeta(head, 'meta[name="twitter:title"]');
     const image = new TagMeta(head, 'meta[name="twitter:image"]');
     const url = new TagMeta(head, 'meta[name="twitter:url"]');
     const description = new TagMeta(head, 'meta[name="twitter:description"]');
-    /**
-     * name="twitter:site"
-     * @return {string} name="twitter:site"
-     */
-    this.site = () => site;
+    // /**
+    //  * name="twitter:site"
+    //  * @return {string} name="twitter:site"
+    //  */
+    // this.site = () => site;
     /**
      * name="twitter:title"
      * @return {string} name="twitter:title"
@@ -52,5 +55,18 @@ export class SnsTw {
      * @return {string} name="twitter:description"
      */
     this.description = () => description;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * head 内(Twitter)項目を書換えます
+   * @param {Page} page ページ情報
+   */
+  replace(page) {
+    this.title().set(page.title());
+    this.image().set(page.ogImg());
+    this.url().set(page.url());
+    this.description().set(page.description());
   }
 }

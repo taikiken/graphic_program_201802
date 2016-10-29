@@ -17,6 +17,9 @@ import { Temporary } from './Temporary';
  * @since 2016-10-27
  */
 export class TagMeta {
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * meta tag 情報書換えします
    * @param {Element} head head tag
@@ -50,6 +53,9 @@ export class TagMeta {
      */
     this.temporary = () => temporary;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * meta.content を書換えます
    * @param {string} content 書換えたい文字列

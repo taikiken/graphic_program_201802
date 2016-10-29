@@ -107,9 +107,10 @@ export class SinglesHistory extends EventDispatcher {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  // onPush(event) {
-  //   console.log('onPush event', event, this);
-  // }
+  /**
+   * popstate event handler
+   * @param {Event} event popstate event
+   */
   onPop(event) {
     // const page = this.pages().pop();
     // // default は常に確保する
@@ -118,10 +119,21 @@ export class SinglesHistory extends EventDispatcher {
     // }
     console.log('================== onPop event ===================', event);
   }
+  /**
+   * head > meta などを書換えます
+   * @param {Page} page 書換え対象のページ情報
+   */
   replace(page) {
     console.log('replace ******', page.info());
     history.replaceState(page.info(), page.title(), page.url());
+    this.head().replace(page);
   }
+
+  /**
+   * ページ情報をもとに history をupdate(replace)します
+   * @param {Symbol} symbol private 扱いにするための innner Symbol
+   * @param {Page} page 書換えたいページ情報
+   */
   push(symbol, page) {
     if (symbol !== pushSymbol) {
       console.warn('push is inner method. instead use hit');
@@ -132,15 +144,24 @@ export class SinglesHistory extends EventDispatcher {
     // wired.jp も replaceState だったよ
     this.replace(page);
   }
+  /**
+   * ページ情報を戻す
+   * @param {string} url キーになるページ url
+   */
   pop(url) {
     // this.pages().pop();
     // history.back();
     const page = this.pages().get(url);
     this.replace(page);
   }
+  /**
+   * content がページ内で表示位置に来たら呼び出されます
+   * @param {Page} page ヒットしたコンテナ・ページ情報
+   */
   hit(page) {
     // @type {Object}
     const pages = this.pages().pages();
+    // 存在チェック
     if (Object.keys(pages).indexOf(page.url()) !== -1) {
       // url が存在する
       this.pop(page.url());
@@ -152,18 +173,6 @@ export class SinglesHistory extends EventDispatcher {
         this.push(pushSymbol, page);
       }
     }
-    // if(Object.values(pages.pages()).indexOf(page) !== -1) {
-    //   // 配列に既に存在する -> pop
-    //   this.pop();
-    // } else {
-    //   // 存在しない
-    //   pages.add(page);
-    //   console.log('SinglesHistory.hit', page.url(), pages.pages(), this.base());
-    //   if (this.base() !== page.url()) {
-    //     // 初期アクセス URL と異なっていたら pushstate します
-    //     this.push(pushSymbol, page);
-    //   }
-    // }
   }
   // ---------------------------------------------------
   //  STATIC METHOD
