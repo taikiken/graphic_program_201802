@@ -8,7 +8,7 @@ include_once __DIR__.'/_category-heading.php';
 // CMS から一面・すべてのバナーを設定できるようにする #1210
 // @since 2016-11-02
 if ($page['category']['slug'] == 'all') {
-  include_once __DIR__.'/_title_banner.php';
+  include_once __DIR__ . '/_cms_banner.php';
 }
 ?>
 

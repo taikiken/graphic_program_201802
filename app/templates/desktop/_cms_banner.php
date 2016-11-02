@@ -16,23 +16,23 @@
 ?>
 <?php
 // $category
-$banner_title = $page['category']['title_banner']['pc'];
+$cms_banner = $page['category']['banner']['pc'];
 
-if (!empty($banner_title['image'])) :
+if (!empty($cms_banner['image'])) :
   $banner_title_link = false;
 ?>
   <div class="focus-bnr">
     <?php
     // link check
-    if (!empty($banner_title['link'])) :
+    if (!empty($cms_banner['link'])) :
       $banner_title_link = true;
       // link 有効時のみ a tag output
     ?>
-      <a href="<?php echo $banner_title['link']; ?>">
+      <a href="<?php echo $cms_banner['link']; ?>">
     <?php
     endif;
     ?>
-        <img src="<?php echo $banner_title['image'] ?>" alt="<?php echo $banner_title['text'] ?>">
+        <img src="<?php echo $cms_banner['image'] ?>" alt="<?php echo $cms_banner['text'] ?>">
     <?php
     if ($banner_title_link) :
       // anchor tag 閉じる
