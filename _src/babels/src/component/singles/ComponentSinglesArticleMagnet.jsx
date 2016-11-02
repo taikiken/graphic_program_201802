@@ -294,7 +294,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   onSnap() {
     console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します
-    this.manager.hit(this.page);
+    // this.manager.hit(this.page);
   }
   // /**
   //  * Hit.NO_COLLISION event handler<br>
