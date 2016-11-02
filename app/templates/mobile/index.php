@@ -14,9 +14,12 @@
     <div id="pickup-container"></div><!-- /pickup -->
 
     <section class="main-sec">
-      <div class="focus-bnr">
-        <a href="https://sportsbull.jp/sokuhou/?utm_source=SPORTS%20BULL&utm_content=20161011&utm_campaign=sokuhou&utm_medium=banner"><img src="https://dev-img.sportsbull.jp/raw/img2016102612371758442500.png" alt="サッカー日本代表リアルタイム速報"></a>
-      </div><!-- /.focus-bnr -->
+<?php
+// https://github.com/undotsushin/undotsushin/issues/1210
+// CMS から一面・すべてのバナーを設定できるようにする #1210
+// @since 2016-11-02
+include_once __DIR__ . '/_cms_banner.php';
+?>
 
       <div class="headline-section">
         <div id="headline-container"></div>
