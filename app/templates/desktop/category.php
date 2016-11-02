@@ -1,12 +1,21 @@
 <?php
-
+// PC版で冒頭画像ある場合のカテゴリータイトル表示を省略する
 include_once __DIR__.'/_category-heading.php';
 
+?>
+<?php
+// https://github.com/undotsushin/undotsushin/issues/1210
+// CMS から一面・すべてのバナーを設定できるようにする #1210
+// @since 2016-11-02
+if ($page['category']['slug'] == 'all') {
+  include_once __DIR__.'/_title_banner.php';
+}
 ?>
 
 <div class="body-sec">
   <?php
   // ----------------------------------------------------
+  // 冒頭画像
   // 記事一覧: pc theme.images
   if ( $page['theme']['images']['pc'] ) : ?>
     <div class="special-summary" style="<?php echo $page['theme']['background_color'] ? 'background-color: ' . $page[ 'theme' ][ 'background_color' ] : ''; ?>">
