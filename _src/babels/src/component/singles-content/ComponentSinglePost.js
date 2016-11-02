@@ -23,7 +23,7 @@ const React = self.React;
  * 記事詳細本文および省略分を表示します
  * @since 2016-09-25
  */
-export class ComponentSingleBody extends React.Component {
+export class ComponentSinglePost extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -116,9 +116,9 @@ export class ComponentSingleBody extends React.Component {
     }
 
     if (single.readmore.isReadmore) {
-      return ComponentSingleBody.excerpt(single);
+      return ComponentSinglePost.excerpt(single);
     } else {
-      return ComponentSingleBody.body(body);
+      return ComponentSinglePost.body(body);
     }
   }
 }
