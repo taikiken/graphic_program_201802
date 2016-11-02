@@ -12,7 +12,11 @@
 
 /**
  * 記事詳細, banner pc / sp 各データ
- * https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=229180023
+ * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=229180023
+ *
+ * 2016-10-02 使用先追加, category でも
+ * 記事閲覧 / powered by エリアの追加（App, Web-Mobile） #1211
+ * @see https://github.com/undotsushin/undotsushin/issues/1211
  */
 export class BannerDae {
   /**
@@ -22,7 +26,6 @@ export class BannerDae {
    * @param {string} link リンク先
    */
   constructor( text:string, image:string, link:string ) {
-    // Object.assign( this, {text, image, link} );
     /**
      * 画像のALT
      * @type {string}
