@@ -206,12 +206,12 @@ export class Snap extends EventDispatcher {
     }
     // ---------------------------
     // scroll animation
-    this.scrolling = true;
+    // this.scrolling = true;
     console.log('***magnet************************', top, this.scrolling);
     // scroll animation 開始
-    Scroll.motion(top, 0.16, 0, false, this.boundComplete);
+    // Scroll.motion(top, 0.16, 0, false, this.boundComplete);
     // スクロール操作を不能にします
-    Scroll.disable();
+    // Scroll.disable();
   }
   /**
    * scroll animation 完了 callback<br>

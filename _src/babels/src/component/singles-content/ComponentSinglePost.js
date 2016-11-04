@@ -12,9 +12,9 @@
 
 // app
 import { Message } from '../../app/const/Message';
-
-// view
-import { View } from '../../view/View';
+//
+// // view
+// import { View } from '../../view/View';
 
 // React
 const React = self.React;
@@ -29,48 +29,17 @@ export class ComponentSinglePost extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{single: SingleDae, callback: Function}} React props
+   * @return {{single: SingleDae}} React props
    */
   static get propTypes() {
     return {
-      single: React.PropTypes.object.isRequired,
-      callback: React.PropTypes.func.isRequired
+      single: React.PropTypes.object.isRequired
     };
   }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
-  /**
-   * 省略本文とリンクを出力します
-   * @param {SingleDae} single 記事詳細 JSON data
-   * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
-   */
-  static excerpt(single) {
-    const description = single.description;
-    // data 不正
-    if (!description) {
-      return null;
-    }
 
-    return (
-      <div className="post-content">
-        <p>{description}</p>
-        <p>
-          <a href={single.readmore.url} target="_blank">{Message.READ_MORE_EXTERNAL}</a>
-        </p>
-      </div>
-    );
-  }
-  /**
-   * 記事詳細本文を出力します
-   * @param {string} body 記事詳細本文(HTML)
-   * @return {XML} 記事詳細本文を返します
-   */
-  static body(body) {
-    return (
-      <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
-    );
-  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -95,7 +64,7 @@ export class ComponentSinglePost extends React.Component {
    * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
    */
   componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
+    // this.props.callback(View.DID_MOUNT);
   }
   /**
    * 記事詳細本文を更新します
@@ -103,6 +72,38 @@ export class ComponentSinglePost extends React.Component {
    */
   updateSingle(single) {
     this.setState({ single });
+  }
+  /**
+   * 省略本文とリンクを出力します
+   * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
+   */
+  excerpt() {
+    const single = this.state.single;
+    const description = single.description;
+    // data 不正
+    if (!description) {
+      return null;
+    }
+
+    return (
+      <div className="post-content">
+        <p>{description}</p>
+        <p>
+          <a href={single.readmore.url} target="_blank">{Message.READ_MORE_EXTERNAL}</a>
+        </p>
+      </div>
+    );
+  }
+  /**
+   * 記事詳細本文を出力します
+   * @return {XML} 記事詳細本文を返します
+   */
+  body() {
+    const single = this.state.single;
+    const body = single.body;
+    return (
+      <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
+    );
   }
   /**
    * `div.post-content` を出力します
@@ -116,9 +117,9 @@ export class ComponentSinglePost extends React.Component {
     }
 
     if (single.readmore.isReadmore) {
-      return ComponentSinglePost.excerpt(single);
+      return this.excerpt();
     } else {
-      return ComponentSinglePost.body(body);
+      return this.body();
     }
   }
 }

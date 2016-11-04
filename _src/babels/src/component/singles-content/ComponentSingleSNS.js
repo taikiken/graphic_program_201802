@@ -9,9 +9,9 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-// view
-import { View } from '../../view/View';
+//
+// // view
+// import { View } from '../../view/View';
 
 // app
 import { MessageSNS } from '../../app/const/MessageSNS';
@@ -30,12 +30,12 @@ export class ComponentSingleSNS extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{single: SingleDae, callback: Function}} React props
+   * @return {{single: SingleDae}} React props
    */
   static get propTypes() {
     return {
       single: React.PropTypes.object.isRequired,
-      callback: React.PropTypes.func.isRequired
+      index: React.PropTypes.number.isRequired
     };
   }
   // ---------------------------------------------------
@@ -114,12 +114,12 @@ export class ComponentSingleSNS extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-  }
+  // /**
+  //  * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
+  //  */
+  // componentDidMount() {
+  //   this.props.callback(View.DID_MOUNT);
+  // }
   /**
    * 記事詳細SNSを更新します
    * @param {SingleDae} single 記事詳細 JSON data
@@ -140,7 +140,7 @@ export class ComponentSingleSNS extends React.Component {
 
     const title = single.title;
     return (
-      <div className="post-sns">
+      <div className={`post-sns post-sns-${single.id}-${this.props.index}`}>
         <ul className="post-sns-list">
           {/* facebook like */}
           <li className="post-sns-item post-sns-item_fbgood">

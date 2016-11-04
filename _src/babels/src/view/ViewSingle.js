@@ -205,7 +205,7 @@ export class ViewSingle extends View {
       const snap = new Snap(element, true);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       // 閾値下げる
-      snap.threshold = 50;
+      // snap.threshold = 50;
       snap.init();
       // ---------------------------------
       this.render(single);

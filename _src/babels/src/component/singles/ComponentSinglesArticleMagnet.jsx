@@ -11,7 +11,7 @@
  */
 
 // app
-import { Message } from '../../app/const/Message';
+// import { Message } from '../../app/const/Message';
 
 // node
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
@@ -20,6 +20,9 @@ import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 // component
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
 import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
+
+// since 2016-11-04
+import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';
 
 // ui
 import { Hit } from '../../ui/Hit';
@@ -294,7 +297,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   onSnap() {
     console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します
-    // this.manager.hit(this.page);
+    this.manager.hit(this.page);
   }
   // /**
   //  * Hit.NO_COLLISION event handler<br>
@@ -448,17 +451,11 @@ export class ComponentSinglesArticleMagnet extends React.Component {
           <ComponentSinglesArticleMedia
             single={single}
           />
-          {/* 本文・概要 */}
-          <div className="post-content">
-            <p>{single.description}</p>
-          </div>
-          {/* 本文・全部 */}
-          {/* link */}
-          <div className="btn-readmore">
-            <a href={single.url} className="btn-readmore-link">
-              <span className="btn-readmore-label">{Message.READ_MORE}</span>
-            </a>
-          </div>
+          <ComponentSinglesArticleSwitch
+            single={single}
+            sign={this.state.sign}
+            index={this.props.index}
+          />
         </div>
       </div>
     );
