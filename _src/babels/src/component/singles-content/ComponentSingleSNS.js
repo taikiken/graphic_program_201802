@@ -30,7 +30,10 @@ export class ComponentSingleSNS extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{single: SingleDae}} React props
+   * @return {{
+   *  single: SingleDae,
+   *  index: number
+   * }} React props
    */
   static get propTypes() {
     return {

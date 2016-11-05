@@ -15,6 +15,7 @@ import { ComponentSinglePost } from './ComponentSinglePost';
 import { ComponentSingleSNS } from './ComponentSingleSNS';
 import { ComponentSingleAd } from './ComponentSingleAd';
 import { ComponentSingleComments } from './ComponentSingleComments';
+import { ComponentSingleProvider } from './ComponentSingleProvider';
 
 // component/singles
 import { ComponentSingleFooter } from '../singles/ComponentSingleFooter';
@@ -93,6 +94,10 @@ export class ComponentSingleContent extends React.Component {
           index={index}
         />
         <ComponentSinglePost
+          single={single}
+          index={index}
+        />
+        <ComponentSingleProvider
           single={single}
           index={index}
         />
