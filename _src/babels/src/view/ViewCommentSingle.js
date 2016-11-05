@@ -670,7 +670,7 @@ export class ViewCommentSingle extends View {
    * @param {Object} events 記事 ID を含んだ event object
    */
   onComplete(events):void {
-    if (events.articleId === this.articleId) {
+    if (parseInt(events.articleId, 10) === this.articleId) {
       // @since 2016-11-05
       // 記事IDをチェックし同じ時のみリロードします
       // page 内に複数の記事詳細が存在するようになるため

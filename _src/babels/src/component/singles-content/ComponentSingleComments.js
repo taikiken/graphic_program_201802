@@ -10,11 +10,21 @@
  *
  */
 
+// view/comment
+import { ViewCommentForm } from '../../view/comment/ViewCommentForm';
+
+// view
+import { ViewComments } from '../../view/ViewComments';
+
+// app
+import { User } from '../../app/User';
+import { CommentsType } from '../../app/const/CommentsType';
+
 // React
 const React = self.React;
 
 export class ComponentSingleComments extends React.Component {
-  // ---------------------------------------------------
+  // -------------------------- -------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   static get propTypes() {
@@ -33,7 +43,37 @@ export class ComponentSingleComments extends React.Component {
     };
   }
   componentDidMount() {
-
+    this.start();
+  }
+  start() {
+    const info = User.info();
+    if (info === null) {
+      setTimeout(() => this.start(), 25);
+      return;
+    }
+    this.mine(info);
+    this.official(info);
+    this.normal(info);
+    this.form(info);
+  }
+  mine(info) {
+    const comment = new ViewComments(this.state.single.id, this.refs.commentSelf, CommentsType.SELF);
+    comment.user = info;
+    comment.start();
+  }
+  official(info) {
+    const comment = new ViewComments(this.state.single.id, this.refs.commentOfficial, CommentsType.OFFICIAL);
+    comment.user = info;
+    comment.start();
+  }
+  normal(info) {
+    const comment = new ViewComments(this.state.single.id, this.refs.commentNormal, CommentsType.NORMAL);
+    comment.user = info;
+    comment.start();
+  }
+  form(info) {
+    const comment = new ViewCommentForm(this.refs.commentForm, this.state.single.id, info.profilePicture);
+    comment.start();
   }
   render() {
     if (!this.state.sign) {
