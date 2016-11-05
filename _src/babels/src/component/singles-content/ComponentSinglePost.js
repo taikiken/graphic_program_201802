@@ -16,6 +16,10 @@ import { Message } from '../../app/const/Message';
 // // view
 // import { View } from '../../view/View';
 
+// ga
+import { GaData } from '../../ga/GaData';
+import { Ga } from '../../ga/Ga';
+
 // React
 const React = self.React;
 
@@ -56,6 +60,8 @@ export class ComponentSinglePost extends React.Component {
     this.state = {
       single: props.single
     };
+
+    this.boundMore = this.onReadMore.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -74,6 +80,21 @@ export class ComponentSinglePost extends React.Component {
     this.setState({ single });
   }
   /**
+   * external read more click で ga tag を送信します<br>
+   * `ViewSingle.onExternal` {@link ViewSingle.onExternal} と同じです
+   */
+  onReadMore() {
+    const category = 'external_link';
+    const action = 'click';
+    const label = this.state.single.readmore.url;
+    const method = 'ComponentSinglePost.onReadMore';
+    // ----------------------------------------------
+    // GA 計測タグ
+    // 記事詳細で続きを読むのリンク先トラッキング
+    Ga.add(new GaData(method, category, action, label, 0, true));
+    // ----------------------------------------------
+  }
+  /**
    * 省略本文とリンクを出力します
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
    */
@@ -89,7 +110,9 @@ export class ComponentSinglePost extends React.Component {
       <div className="post-content">
         <p>{description}</p>
         <p>
-          <a href={single.readmore.url} target="_blank">{Message.READ_MORE_EXTERNAL}</a>
+          <a href={single.readmore.url} target="_blank" onClick={this.boundMore}>
+            {Message.READ_MORE_EXTERNAL}
+          </a>
         </p>
       </div>
     );

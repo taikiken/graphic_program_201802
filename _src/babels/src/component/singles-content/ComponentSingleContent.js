@@ -83,28 +83,36 @@ export class ComponentSingleContent extends React.Component {
    * @return {XML} div.singles-content
    */
   render() {
+    const single = this.state.single;
+    const index = this.state.index;
     return (
-      <div className={`singles-content singles-content-${this.state.index}`}>
+      <div className={`singles-content singles-content-${index}`}>
         <ComponentSingleSNS
-          single={this.state.single}
-          index={this.state.index}
+          single={single}
+          index={index}
         />
         <ComponentSinglePost
-          single={this.state.single}
-          index={this.state.index}
+          single={single}
+          index={index}
         />
         <ComponentSingleFooter
-          single={this.state.single}
+          single={single}
           callback={() => {}}
         />
         <ComponentSingleSNS
-          single={this.state.single}
-          index={this.state.index}
+          single={single}
+          index={index}
         />
         <ComponentSingleAd
-          ad={this.state.single.ad.pc}
-          index={this.state.index}
+          ad={single.ad.pc}
+          index={index}
         />
+        <div className={`comment comment-${single.id}`}>
+          <div className="comment-self-container" ref="commentSelf" />
+          <div className="comment-official-container" ref="commentOfficial" />
+          <div className="comment-normal-container" ref="commentNormal" />
+          <div className="comment-form-container" ref="commentForm" />
+        </div>
       </div>
     );
   }
