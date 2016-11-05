@@ -44,7 +44,6 @@ export let CommentFormOpenerNode = React.createClass( {
     };
   },
   render: function() {
-
     if ( this.props.independent ) {
       return null;
     } else {
@@ -73,30 +72,27 @@ export let CommentFormOpenerNode = React.createClass( {
     // event bind
     let replyStatus = this.replyStatus;
 
-    if ( replyStatus === null ) {
-
+    if (replyStatus === null) {
       replyStatus = ReplyStatus.factory();
       this.replyStatus = replyStatus;
-
-      replyStatus.on( ReplyStatus.START, this.replyStart );
-      replyStatus.on( ReplyStatus.COMPLETE, this.replyComplete );
-
+      // replyStatus.on( ReplyStatus.START, this.replyStart );
+      // replyStatus.on( ReplyStatus.COMPLETE, this.replyComplete );
     }
 
   },
-  componentWillUnmount: function() {
-
-    let replyStatus = this.replyStatus;
-
-    if ( replyStatus !== null ) {
-
-      replyStatus.off( ReplyStatus.START, this.replyStart );
-      replyStatus.off( ReplyStatus.COMPLETE, this.replyComplete );
-      this.replyStatus = null;
-
-    }
-
-  },
+  // componentWillUnmount: function() {
+  //
+  //   let replyStatus = this.replyStatus;
+  //
+  //   if ( replyStatus !== null ) {
+  //
+  //     replyStatus.off( ReplyStatus.START, this.replyStart );
+  //     replyStatus.off( ReplyStatus.COMPLETE, this.replyComplete );
+  //     this.replyStatus = null;
+  //
+  //   }
+  //
+  // },
   // ----------------------------------------
   // open / cancel click handler
   openerClick: function( event ) {
@@ -121,12 +117,12 @@ export let CommentFormOpenerNode = React.createClass( {
   checkId: function( event ) {
     return this.props.uniqueId === event.id;
   },
-  // ----------------------------------------
-  // listener
-  replyStart: function() {
-    this.cancelClick = false;
-  },
-  replyComplete: function() {
-    this.cancelClick = true;
-  }
+  // // ----------------------------------------
+  // // listener
+  // replyStart: function() {
+  //   this.cancelClick = false;
+  // },
+  // replyComplete: function() {
+  //   this.cancelClick = true;
+  // }
 } );

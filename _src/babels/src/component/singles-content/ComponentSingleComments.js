@@ -23,10 +23,22 @@ import { CommentsType } from '../../app/const/CommentsType';
 // React
 const React = self.React;
 
+/**
+ * 次の記事一覧・コメント表示
+ * @since 2016-11-05
+ */
 export class ComponentSingleComments extends React.Component {
   // -------------------------- -------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  single: SingleDae,
+   *  sign: boolean,
+   *  index: number
+   * }} React props
+   */
   static get propTypes() {
     return {
       single: React.PropTypes.object.isRequired,
@@ -34,47 +46,97 @@ export class ComponentSingleComments extends React.Component {
       index: React.PropTypes.number.isRequired,
     };
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link ComponentSingleComments.propTypes}
+   */
   constructor(props) {
     super(props);
+    /**
+     * React state
+     * @type {{
+     *  single: SingleDae,
+     *  sign: boolean,
+     *  index: number
+     * }}
+     */
     this.state = {
       single: props.single,
       sign: props.sign,
       index: props.index
     };
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * コンテナマウント後にコメントデータを取得し表示します
+   */
   componentDidMount() {
-    this.start();
+    if (this.state.sign) {
+      // ログインしている時のみデータ取得を開始します
+      this.start();
+    }
   }
+  /**
+   * `User` class `info` method からユーザー情報を取得しコメント取得を開始します
+   * {@link User}
+   */
   start() {
+    // ログインユーザー情報を取得します
     const info = User.info();
     if (info === null) {
       setTimeout(() => this.start(), 25);
       return;
     }
+    // コメント種類それぞれを取得します
     this.mine(info);
     this.official(info);
     this.normal(info);
     this.form(info);
   }
+  /**
+   * 自分のコメント
+   * @param {UserDae} info ユーザー情報
+   */
   mine(info) {
     const comment = new ViewComments(this.state.single.id, this.refs.commentSelf, CommentsType.SELF);
     comment.user = info;
     comment.start();
   }
+  /**
+   * 公式ユーザーのコメント
+   * @param {UserDae} info ユーザー情報
+   */
   official(info) {
     const comment = new ViewComments(this.state.single.id, this.refs.commentOfficial, CommentsType.OFFICIAL);
     comment.user = info;
     comment.start();
   }
+  /**
+   * 一般のコメント
+   * @param {UserDae} info ユーザー情報
+   */
   normal(info) {
     const comment = new ViewComments(this.state.single.id, this.refs.commentNormal, CommentsType.NORMAL);
     comment.user = info;
     comment.start();
   }
+  /**
+   * 記事への投稿コメントフォーム
+   * @param {UserDae} info ユーザー情報
+   */
   form(info) {
     const comment = new ViewCommentForm(this.refs.commentForm, this.state.single.id, info.profilePicture);
     comment.start();
   }
+  /**
+   * ログインユーザーのみ div.comment
+   * @return {?XML} div.comment or null
+   */
   render() {
     if (!this.state.sign) {
       return null;
