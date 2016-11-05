@@ -202,9 +202,13 @@ export class ViewHeaderMember extends View {
       // this.showError( error.message );
 
     } else {
-
-      this.render( new UserDae( response ) );
-
+      // @since 2016-11-05
+      // 一旦ローカル変数へ確保します
+      const information = new UserDae( response );
+      // User class へ保管し他で使えるようにします
+      User.setInfo(information);
+      // ---------[/since]
+      this.render(information);
     }
 
   }

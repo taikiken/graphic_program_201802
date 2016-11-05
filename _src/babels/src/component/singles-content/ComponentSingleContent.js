@@ -14,6 +14,7 @@
 import { ComponentSinglePost } from './ComponentSinglePost';
 import { ComponentSingleSNS } from './ComponentSingleSNS';
 import { ComponentSingleAd } from './ComponentSingleAd';
+import { ComponentSingleComments } from './ComponentSingleComments';
 
 // component/singles
 import { ComponentSingleFooter } from '../singles/ComponentSingleFooter';
@@ -107,12 +108,11 @@ export class ComponentSingleContent extends React.Component {
           ad={single.ad.pc}
           index={index}
         />
-        <div className={`comment comment-${single.id}`}>
-          <div className="comment-self-container" ref="commentSelf" />
-          <div className="comment-official-container" ref="commentOfficial" />
-          <div className="comment-normal-container" ref="commentNormal" />
-          <div className="comment-form-container" ref="commentForm" />
-        </div>
+        <ComponentSingleComments
+          single={single}
+          index={index}
+          sign={this.state.sign}
+        />
       </div>
     );
   }
