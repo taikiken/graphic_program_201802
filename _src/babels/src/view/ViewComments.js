@@ -629,10 +629,18 @@ export class ViewComments extends View {
   /**
    * ReplyStatus.COMPLETE event handler
    * <p>再読み込みを行うかを決める</p>
+   * @param {Object} events 記事 ID を含んだ event object
    */
-  onComplete():void {
-    // とにかくreloadが良さそう
-    this.reload();
+  onComplete(events):void {
+    if (events.articleId === this.articleId) {
+      // @since 2016-11-05
+      // 記事IDをチェックし同じ時のみリロードします
+      // page 内に複数の記事詳細が存在するようになるため
+      // 記事IDを識別子として加える
+      //
+      // とにかくreloadが良さそう
+      this.reload();
+    }
   }
   /**
    * 再読み込み
