@@ -46,24 +46,22 @@ export let CommentFormOpenerNode = React.createClass( {
   render: function() {
     if ( this.props.independent ) {
       return null;
+    }
+    // console.log( 'comment-respond-opener ', this.state.toggle, this.props.uniqueId );
+    if ( this.state.toggle === 'reply' ) {
+      return (
+        <a href="#" className="comment-respond-opener" data-id={this.props.uniqueId} onClick={this.openerClick}>
+          <span className="icon-comment">{this.props.actionMessage}</span>
+        </a>
+      );
+    } else if ( this.state.toggle === 'cancel' ) {
+      return (
+        <a href="#" className="comment-respond-opener" data-id={this.props.uniqueId} onClick={this.cancelClick}>
+          <span className="icon-comment">{this.props.actionMessage}</span>
+        </a>
+      );
     } else {
-      // console.log( 'comment-respond-opener ', this.state.toggle, this.props.uniqueId );
-      if ( this.state.toggle === 'reply' ) {
-        return (
-          <a href="#" className="comment-respond-opener" data-id={this.props.uniqueId} onClick={this.openerClick}>
-            <span className="icon-comment">{this.props.actionMessage}</span>
-          </a>
-        );
-      } else if ( this.state.toggle === 'cancel' ) {
-        return (
-          <a href="#" className="comment-respond-opener" data-id={this.props.uniqueId} onClick={this.cancelClick}>
-            <span className="icon-comment">{this.props.actionMessage}</span>
-          </a>
-        );
-      } else {
-        return null;
-      }
-
+      return null;
     }
   },
   componentDidMount: function() {
@@ -120,6 +118,7 @@ export let CommentFormOpenerNode = React.createClass( {
   // // ----------------------------------------
   // // listener
   // replyStart: function() {
+  //  // @bug: 関数名と同じ変数名
   //   this.cancelClick = false;
   // },
   // replyComplete: function() {
