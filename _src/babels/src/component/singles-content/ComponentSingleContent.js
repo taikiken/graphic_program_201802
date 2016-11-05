@@ -65,6 +65,9 @@ export class ComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * マウント後に Facebook like button を活性化するために `FB.init` を行います
+   */
   componentDidMount() {
     Fb.init();
   }

@@ -31,7 +31,7 @@ export class Snap extends EventDispatcher {
   /**
    * hit instance を作成し event handler を設定します
    * @param {Element} element 対象 element
-   * @param {boolean} [noMotion=false] scroll animation を行わない
+   * @param {boolean} [noMotion=false] scroll animation を行わず `scroll up` だけを監視する
    */
   constructor(element, noMotion = false) {
     super();
@@ -56,16 +56,17 @@ export class Snap extends EventDispatcher {
     this.boundComplete = this.scrollComplete.bind(this);
     /**
      * 近接閾値<br>
-     * 閾値以下になるとスナップします
+     * 閾値以下（接近）になるとスナップします
      * @type {number}
      * @since 2016-10-28
      */
     this.threshold = 120;
     /**
-     * snap scroll 可能かの flag
+     * snap scroll 可能かの flag<br>
+     * [topへ戻る] button が押されると true に設定し snap 行動を抑制します
      * @type {boolean}
      */
-    this.can = true;
+    this.returnHome = true;
     /**
      * scroll animation を行わない
      * @type {boolean}
@@ -188,9 +189,6 @@ export class Snap extends EventDispatcher {
    * @param {number} top 目標値
    */
   snap(top) {
-    if (!this.can) {
-      return;
-    }
     // scroll 中の時は処理しない
     if (this.scrolling) {
       return;
@@ -206,12 +204,14 @@ export class Snap extends EventDispatcher {
     }
     // ---------------------------
     // scroll animation
-    // this.scrolling = true;
     console.log('***magnet************************', top, this.scrolling);
-    // scroll animation 開始
-    // Scroll.motion(top, 0.16, 0, false, this.boundComplete);
-    // スクロール操作を不能にします
-    // Scroll.disable();
+    // scroll animation 開始(snap)
+    if (!this.returnHome) {
+      this.scrolling = true;
+      Scroll.motion(top, 0.16, 0, false, this.boundComplete);
+      // スクロール操作を不能にします
+      Scroll.disable();
+    }
   }
   /**
    * scroll animation 完了 callback<br>
@@ -229,12 +229,12 @@ export class Snap extends EventDispatcher {
    * return top animation start event handler
    */
   buttonStart() {
-    this.can = false;
+    this.returnHome = true;
   }
   /**
    * return top animation complete event handler
    */
   buttonComplete() {
-    this.can = true;
+    this.returnHome = false;
   }
 }
