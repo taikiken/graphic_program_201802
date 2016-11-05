@@ -4,8 +4,8 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=28;
-//$rssfile="ut_rss_all.xml";
-$rssfile="https://www.legendsstadium.com/rss/ut/";
+$rssfile="ut_rss_all.xml";
+//$rssfile="https://www.legendsstadium.com/rss/ut/";
 
 $o=new db;
 $o->connect();

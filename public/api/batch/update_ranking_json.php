@@ -12,8 +12,17 @@ $o->connect();
 $sql="select id,name,name_e,img,p1 from u_categories where flag=1 order by n";
 $o->query($sql);
 
-$categorylist[]=array("id"=>"0","name_e"=>"すべて","name_e"=>"all","p1"=>"3");
 while($f=$o->fetch_array()){
+	
+	/*	
+		当初例外扱いしていた「すべて」タブの設定を通常カテゴリーで管理できるように変更
+		例外用のIDを設定
+	*/
+	//$categorylist[]=array("id"=>"0","name_e"=>"すべて","name_e"=>"all","p1"=>"3");
+	if($f["name_e"]=="すべて"){
+		$f["id"]=0;
+	}
+	
 	$categorylist[]=$f;
 }
 

@@ -136,7 +136,7 @@ if(preg_match("/undotsushin/",$servername)){
 
 	$staticfileimport=1;
 
-	$DBNAME="ut11";
+	$DBNAME="ut_devnew";
 	$DBUSR="ut";
 	$DBPWD="ut";
 	$DBHOST="localhost";
