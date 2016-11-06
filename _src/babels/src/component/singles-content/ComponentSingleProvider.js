@@ -18,6 +18,9 @@ const React = self.React;
 
 /**
  * 記事提供元情報とリンク
+ *
+ * 次の記事一覧コンテンツを全て `JS` 出力するので<br>
+ * `/app/template/[desktop|mobile]/p.php` から移植しました
  * @since 2016-11-05
  */
 export class ComponentSingleProvider extends React.Component {
@@ -40,9 +43,11 @@ export class ComponentSingleProvider extends React.Component {
    * @return {?XML} p.provider-name or null
    */
   static userName(userName) {
+    // 提供元名称がないときは出力しない
     if (!userName) {
       return null;
     }
+    // 提供元名称
     return (
       <p className="provider-name">{userName}</p>
     );
@@ -96,17 +101,21 @@ export class ComponentSingleProvider extends React.Component {
    */
   logo(logo) {
     const img = logo.img;
+    // ロゴがなかったら表示しない
     if (!img) {
       return null;
     }
     const link = logo.link;
     if (!link) {
+      // リンク(url)がなかったらロゴだけ表示
       return (
         <i className="provider-logo">
           <img src={img} alt=""/>
         </i>
       );
     }
+    // リンク付き出力
+    // クリックで ga 送信するので `onClick` を仕込みます
     return (
       <a href={link} target="_blank" onClick={this.boundLogo}>
         <i className="provider-logo">
@@ -122,9 +131,12 @@ export class ComponentSingleProvider extends React.Component {
    */
   url(logo) {
     const link = logo.link;
+    // リンク(url)がないと出力しない
     if (!link) {
       return null;
     }
+    // リンク(url)が存在するときは「ウェブサイト」にリンクを設定します
+    // クリックで ga 送信するので `onClick` を仕込みます
     return (
       <p className="provider-url">
         <a href={link} target="_blank" onClick={this.boundUrl}>ウェブサイト</a>
@@ -143,9 +155,12 @@ export class ComponentSingleProvider extends React.Component {
     const userName = user.userName;
     // @type {LogoDae}
     const logo = user.logo;
+    // 提供元名称とロゴがなかったら表示しない
     if (!userName && !logo.img) {
       return null;
     }
+    // 提供元名称とロゴのどちらかは存在する
+    // さらに出力関数で判定を行います
     return (
       <div className={`provider provider-${single.id}`}>
         {this.logo(logo)}

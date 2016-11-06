@@ -212,6 +212,13 @@ export class ViewSingle extends View {
       this.singles(single);
     }
   }
+  /**
+   * Snap.SNAPPED event handler<br>
+   * SinglesHistory.hit をコールします
+   *
+   * {@link Snap}
+   * {@link SinglesHistory}
+   */
   onSnap() {
     console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します

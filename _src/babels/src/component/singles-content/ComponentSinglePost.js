@@ -25,6 +25,9 @@ const React = self.React;
 
 /**
  * 記事詳細本文および省略分を表示します
+ *
+ * 次の記事一覧コンテンツを全て `JS` 出力するので<br>
+ * `/app/template/[desktop|mobile]/p.php` から移植しました
  * @since 2016-09-25
  */
 export class ComponentSinglePost extends React.Component {
@@ -95,7 +98,9 @@ export class ComponentSinglePost extends React.Component {
     // ----------------------------------------------
   }
   /**
-   * 省略本文とリンクを出力します
+   * 省略本文とリンクを出力します<br>
+   * 「続きを読む」（提供元サイトへ別ウインドウ遷移）します<br>
+   *  リンククリックで ga 送信を行います
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
    */
   excerpt() {
@@ -105,7 +110,7 @@ export class ComponentSinglePost extends React.Component {
     if (!description) {
       return null;
     }
-
+    // 続きを読む コンテナ
     return (
       <div className="post-content">
         <p>{description}</p>
@@ -119,11 +124,16 @@ export class ComponentSinglePost extends React.Component {
   }
   /**
    * 記事詳細本文を出力します
-   * @return {XML} 記事詳細本文を返します
+   * @return {?XML} 記事詳細本文を返します
    */
   body() {
     const single = this.state.single;
     const body = single.body;
+    // data 不正
+    if (!body) {
+      return null;
+    }
+    // 本文
     return (
       <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
     );
@@ -134,11 +144,12 @@ export class ComponentSinglePost extends React.Component {
    */
   render() {
     const single = this.state.single;
-    const body = single.body;
-    if (!body) {
+    // const body = single.body;
+    if (!single) {
       return null;
     }
 
+    // 「続きを読む」（提供元サイトへ別ウインドウ遷移）フラッグ ON の時は `excerpt` をコールします
     if (single.readmore.isReadmore) {
       return this.excerpt();
     } else {

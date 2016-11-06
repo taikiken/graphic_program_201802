@@ -81,23 +81,18 @@ export class SinglesHistory extends EventDispatcher {
     this.pages = () => pages;
 
     let base = '';
+    /**
+     * 基点 url を返します
+     * @return {string} 基点 url
+     */
     this.base = () => base;
+    /**
+     * 基点 url を設定します
+     * @param {string} baseUrl 基点 url
+     */
     this.setBase = (baseUrl) => {
       base = baseUrl;
     };
-    // let id = 0;
-    // /**
-    //  * page ID
-    //  * @return {number} id page id
-    //  */
-    // this.id = () => id;
-    // /**
-    //  * page ID を設定します
-    //  * @param {number} idNum page ID
-    //  */
-    // this.setId = (idNum) => {
-    //   id = idNum;
-    // };
     // popstate 監視
     window.addEventListener('popstate', this.onPop.bind(this), false);
 

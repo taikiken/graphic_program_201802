@@ -28,6 +28,31 @@ const React = self.React;
 
 /**
  * 次の記事一覧の本文を表示します
+ *
+ * ```
+ * <ComponentSinglesArticleMagnet/>
+ *  <ComponentSinglesArticleSwitch/>
+ *    // this class
+ *    <ComponentSingleContent/>
+ *      <ComponentSingleSNS/>
+ *      <ComponentSinglePost/>
+ *      <ComponentSingleProvider/>
+ *      <ComponentSingleFooter/>
+ *      <ComponentSingleSNS/>
+ *      <ComponentSingleAd/>
+ *      <ComponentSingleComments/>
+ *        ViewComments
+ *        ViewCommentForm
+ * ```
+ * {@link ComponentSingleContent},
+ * {@link ComponentSingleSNS},
+ * {@link ComponentSinglePost},
+ * {@link ComponentSingleProvider},
+ * {@link ComponentSingleFooter},
+ * {@link ComponentSingleAd},
+ * {@link ComponentSingleComments},
+ * {@link ViewComments},
+ * {@link ViewCommentForm},
  * @since 2016-11-04
  */
 export class ComponentSingleContent extends React.Component {

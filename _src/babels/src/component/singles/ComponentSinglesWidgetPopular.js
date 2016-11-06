@@ -122,12 +122,15 @@ export class ComponentSinglesWidgetPopular extends React.Component {
   onMount() {
     // this.view.callback = null;
     const snap = new Snap(this.refs.popular);
-    snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+    // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
     snap.init();
   }
-  onSnap() {
-    console.log('popular snap', this.props.index);
-  }
+  // /**
+  //  * snap scroll, 一時停止中
+  //  */
+  // onSnap() {
+  //   console.log('popular snap', this.props.index);
+  // }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
    * @ToDo 不要かも

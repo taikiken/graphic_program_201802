@@ -63,7 +63,25 @@ const React = self.React;
  *
  * 記事詳細・次の記事一覧の記事は <- 記事詳細と同等内容にする
  *
- * ComponentSinglesArticle {@link ComponentSinglesArticle} を拡張します
+ * ComponentSinglesArticle {@link ComponentSinglesArticle} を拡張し<br>
+ * スナップ(Snap) {@link Snap} を行うようにします
+ *
+ * コンテナが画面内に現れたら ga 送信を行います {@link Ga.single}
+ *
+ * ```
+ * <ComponentSinglesArticleMagnet/>
+ *  <ComponentCategoryLabelsLink/>
+ *  <BookmarkNode/>
+ *  <MediaNode/>
+ *  or
+ *  <ComponentSinglesArticleMedia/>
+ *  <ComponentSinglesArticleSwitch/>
+ * ```
+ * {@link ComponentCategoryLabelsLink},
+ * {@link BookmarkNode},
+ * {@link MediaNode},
+ * {@link ComponentSinglesArticleMedia},
+ * {@link ComponentSinglesArticleSwitch}
  *
  * @see https://github.com/undotsushin/undotsushin/issues/1201
  * @see https://github.com/undotsushin/undotsushin/issues/1224
@@ -145,52 +163,6 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * @since 2016-10-28
      */
     this.singlesArticle = null;
-    // // magnetic motion
-    // /**
-    //  * scroll 中 flag
-    //  * @type {boolean}
-    //  * @default false
-    //  * @since 2016-10-28
-    //  */
-    // this.scrolling = false;
-    // /**
-    //  * bound scrollComplete, scroll animation complete event handler<br>
-    //  * `scrolling` flag を off(false) にします
-    //  * @type {function}
-    //  * @since 2016-10-28
-    //  */
-    // this.boundComplete = this.scrollComplete.bind(this);
-    // /**
-    //  * bound noHit, Hit.NO_COLLISION event handler,
-    //  * `magnetic` flag を off(false)にします
-    //  * @type {function}
-    //  * @since 2016-10-28
-    //  */
-    // this.boundNo = this.noHit.bind(this);
-    // /**
-    //  * 近接閾値<br>
-    //  * 閾値以下になるとスナップします
-    //  * @type {number}
-    //  * @since 2016-10-28
-    //  */
-    // this.threshold = 120;
-    // /**
-    //  * スナップ済みかを表す flag
-    //  * @type {boolean}
-    //  * @default false
-    //  * @since 2016-10-28
-    //  */
-    // this.magnetic = false;
-    //
-    // const topButton = TopButton.factory();
-    // this.topButton = topButton;
-    // topButton.on(TopButton.START, this.buttonStart.bind(this));
-    // topButton.on(TopButton.COMPLETE, this.buttonComplete.bind(this));
-    // /**
-    //  * snap scroll 可能かの flag
-    //  * @type {boolean}
-    //  */
-    // this.can = true;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -249,17 +221,10 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     const rect = events.rect;
     const top = rect.top;
 
+    // 近接 50px 以内で ga 送信します
     if (Math.abs(top) <= 50) {
       this.ga();
     }
-    // const scrollEvents = events.events;
-    // if (scrollEvents.moving <= 0) {
-    //   // scroll down
-    //   this.scrollDown(events);
-    // } else {
-    //   // scroll up
-    //   this.scrollUp(events);
-    // }
   }
   /**
    * ga 送信
@@ -299,100 +264,6 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
-  // /**
-  //  * Hit.NO_COLLISION event handler<br>
-  //  * `magnetic` flag を false にします
-  //  */
-  // noHit() {
-  //   this.magnetic = false;
-  // }
-  // /**
-  //  * scroll down 中のスナップスクロール判定を行います<br>
-  //  * Hit.COLLISION event handler 内から呼び出されます
-  //  * @param {Object} events Hit.COLLISION event object
-  //  */
-  // scrollDown(events) {
-  //   // スナップ済みの場合は off になるまで処理しない
-  //   if (this.magnetic) {
-  //     return;
-  //   }
-  //   // ---
-  //   // 判定開始
-  //   // @type {ClientRect} - div.loaded-post ClientRect
-  //   const offset = events.rect;
-  //   const scrollEvents = events.events;
-  //   // @type {number} - scrollY
-  //   const y = scrollEvents.y;
-  //   // @type {number} - div.loaded-post ClientRect.top
-  //   // window left_top 時に `0`
-  //   const top = offset.top;
-  //   // 閾値チェック
-  //   if (top <= this.threshold) {
-  //     // magnetic move
-  //     this.snap(y + top);
-  //   }
-  // }
-  // /**
-  //  * scroll up 中のスナップスクロール判定を行います<br>
-  //  * Hit.COLLISION event handler 内から呼び出されます
-  //  * @param {Object} events Hit.COLLISION event object
-  //  */
-  // scrollUp(events) {
-  //   // スナップ済みの場合は off になるまで処理しない
-  //   if (this.magnetic) {
-  //     return;
-  //   }
-  //   // ---
-  //   // 判定開始
-  //   // @type {ClientRect} - div.loaded-post ClientRect
-  //   const offset = events.rect;
-  //   const scrollEvents = events.events;
-  //   const y = scrollEvents.y;
-  //   const top = offset.top;
-  //   // 閾値チェック
-  //   if (top >= -this.threshold) {
-  //     // magnetic move
-  //     this.snap(y + top);
-  //   }
-  // }
-  // /**
-  //  * snap scroll を開始し、スクロール操作を不能にします
-  //  * @param {number} top 目標値
-  //  */
-  // snap(top) {
-  //   if (!this.can) {
-  //     return;
-  //   }
-  //   // scroll 中の時は処理しない
-  //   if (this.scrolling) {
-  //     return;
-  //   }
-  //   this.magnetic = true;
-  //   this.scrolling = true;
-  //   console.log('***magnet************************', top, this.scrolling);
-  //   // scroll animation 開始
-  //   Scroll.motion(top, 0.16, 0, false, this.boundComplete);
-  //   // スクロール操作を不能にします
-  //   Scroll.disable();
-  // }
-  // /**
-  //  * scroll animation 完了 callback<br>
-  //  * `scrolling` を off にし、スクロール操作を可能にします
-  //  */
-  // scrollComplete() {
-  //   this.scrolling = false;
-  //   // 遅延させ回復させます
-  //   Scroll.enable(750);
-  //   console.log('----------------- scrollComplete', this.scrolling);
-  // }
-  // // --------------------------------------------------
-  // // return top animation
-  // buttonStart() {
-  //   this.can = false;
-  // }
-  // buttonComplete() {
-  //   this.can = true;
-  // }
   // --------------------------------------------------
   // render
   /**

@@ -15,6 +15,9 @@ const React = self.React;
 
 /**
  * 次の記事一覧・記事の PC下部広告
+ *
+ * 次の記事一覧コンテンツを全て `JS` 出力するので<br>
+ * `/app/template/[desktop|mobile]/p.php` から移植しました
  * @TODO: 広告IDが同じで表示できない様子、要確認
  * @since 2016-11-04
  */

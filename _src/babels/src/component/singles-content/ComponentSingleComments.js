@@ -100,7 +100,7 @@ export class ComponentSingleComments extends React.Component {
   }
   /**
    * 自分のコメント
-   * @param {UserDae} info ユーザー情報
+   * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   mine(info) {
     const comment = new ViewComments(this.state.single.id, this.refs.commentSelf, CommentsType.SELF);
@@ -109,7 +109,7 @@ export class ComponentSingleComments extends React.Component {
   }
   /**
    * 公式ユーザーのコメント
-   * @param {UserDae} info ユーザー情報
+   * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   official(info) {
     const comment = new ViewComments(this.state.single.id, this.refs.commentOfficial, CommentsType.OFFICIAL);
@@ -117,8 +117,8 @@ export class ComponentSingleComments extends React.Component {
     comment.start();
   }
   /**
-   * 一般のコメント
-   * @param {UserDae} info ユーザー情報
+   * みんなのコメント
+   * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   normal(info) {
     const comment = new ViewComments(this.state.single.id, this.refs.commentNormal, CommentsType.NORMAL);
@@ -127,7 +127,7 @@ export class ComponentSingleComments extends React.Component {
   }
   /**
    * 記事への投稿コメントフォーム
-   * @param {UserDae} info ユーザー情報
+   * @param {UserDae} info ユーザー情報, アバターを表示するのに使用します
    */
   form(info) {
     const comment = new ViewCommentForm(this.refs.commentForm, this.state.single.id, info.profilePicture);
@@ -141,6 +141,7 @@ export class ComponentSingleComments extends React.Component {
     if (!this.state.sign) {
       return null;
     }
+    // ログインユーザーのみ表示します
     return (
       <div className={`comment comment-${this.state.single.id}`}>
         <div className="comment-self-container" ref="commentSelf" />

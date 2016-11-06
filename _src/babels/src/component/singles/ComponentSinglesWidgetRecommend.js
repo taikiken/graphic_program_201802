@@ -103,13 +103,13 @@ export class ComponentSinglesWidgetRecommend extends React.Component {
   componentDidMount() {
     if (this.element !== null) {
       const snap = new Snap(this.element);
-      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+      // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.init();
     }
   }
-  onSnap() {
-    console.log('postList_recommend snap', this.props.index);
-  }
+  // onSnap() {
+  //   console.log('postList_recommend snap', this.props.index);
+  // }
   /**
    * オススメ記事一覧 `div.widget-postList` を出力します
    * @return {XML} `div.widget-postList` を返します

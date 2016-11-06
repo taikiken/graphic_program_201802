@@ -22,6 +22,9 @@ const React = self.React;
 /**
  * 記事詳細上部 SNS ブロック<br>
  * PC版は、上部・下部とも同じなので兼用して使います
+ *
+ * 次の記事一覧コンテンツを全て `JS` 出力するので<br>
+ * `/app/template/[desktop|mobile]/p.php` から移植しました
  * @since 2016-09-25
  */
 export class ComponentSingleSNS extends React.Component {

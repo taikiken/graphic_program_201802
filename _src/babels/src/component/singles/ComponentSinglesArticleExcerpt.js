@@ -43,6 +43,10 @@ export class ComponentSinglesArticleExcerpt extends React.Component {
    */
   constructor(props) {
     super(props);
+    /**
+     * React state
+     * @type {{single: SingleDae}}
+     */
     this.state = {
       single: props.single
     };
@@ -50,6 +54,10 @@ export class ComponentSinglesArticleExcerpt extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * div.post-content, 省略本文(description)
+   * @return {XML} div.post-content
+   */
   render() {
     const single = this.state.single;
 

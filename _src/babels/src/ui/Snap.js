@@ -72,6 +72,11 @@ export class Snap extends EventDispatcher {
      * @type {boolean}
      */
     this.noMotion = noMotion;
+    /**
+     * snap 済みフラッグ
+     * @type {boolean}
+     */
+    this.magnetic = false;
   }
   // ---------------------------------------------------
   //  EVENT
