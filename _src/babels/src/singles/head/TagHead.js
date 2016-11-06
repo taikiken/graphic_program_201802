@@ -64,6 +64,7 @@ export class TagHead {
     const twitter = new SnsTw(head);
     const canonical = new TagLink(head, 'link[rel="canonical"]');
     const description = new TagMeta(head, 'meta[name="description"]');
+    const host = `${location.protocol}://${location.host}`;
     /**
      * title タグを管理します
      * @return {TagTitle} TagTitle instance
@@ -89,6 +90,11 @@ export class TagHead {
      * @return {TagMeta} TagMeta instance
      */
     this.description = () => description;
+    /**
+     * `http|https` 含む host を取得します
+     * @return {string} `http|https` 含む host を返します
+     */
+    this.host = () => host;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -105,7 +111,7 @@ export class TagHead {
     // description
     this.description().set(description);
     // canonical
-    this.canonical().set(url);
+    this.canonical().set(`${this.host()}${url}`);
     // Twitter
     this.twitter().replace(page, title);
     // Facebook

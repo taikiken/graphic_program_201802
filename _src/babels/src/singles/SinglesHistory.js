@@ -80,7 +80,6 @@ export class SinglesHistory extends EventDispatcher {
      */
     this.pages = () => pages;
 
-    // let current = '';
     let base = '';
     /**
      * 基点 url を返します
@@ -92,13 +91,8 @@ export class SinglesHistory extends EventDispatcher {
      * @param {string} baseUrl 基点 url
      */
     this.setBase = (baseUrl) => {
-      // current = baseUrl;
       base = baseUrl;
     };
-    // this.current = () => current;
-    // this.setCurrent = (path) => {
-    //   current = path;
-    // };
     // popstate 監視
     window.addEventListener('popstate', this.onPop.bind(this), false);
 
