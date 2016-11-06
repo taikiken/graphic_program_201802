@@ -204,7 +204,8 @@ export class ViewSingle extends View {
       // no scroll animation で snap instance 作成
       const snap = new Snap(element, true);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
-      // 閾値下げる
+      snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
+      // // 閾値下げる
       // snap.threshold = 50;
       snap.init();
       // ---------------------------------
@@ -221,6 +222,14 @@ export class ViewSingle extends View {
    */
   onSnap() {
     console.log('onSnap', this.page.url());
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
+  }
+  /**
+   * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます
+   */
+  onBeat() {
+    console.log('onBeat', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
@@ -427,9 +436,9 @@ export class ViewSingle extends View {
    * イベントラベル：[response.categories.label] ex. 海外サッカー
    * </pre>
    *
-   * @since 2016-06-08
    * @deprecated on 2016-10-05, instead use Ga.single {@link Ga.single}
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+   * @since 2016-06-08 deprecated, instead use Ga.single
    */
   static ga( single:SingleDae ):void {
     let category = 'provider';

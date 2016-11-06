@@ -176,6 +176,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       // snap
       const snap = new Snap(this.singlesArticle);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+      snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();
       // -- [hit]
       const hit = new Hit(this.singlesArticle);
@@ -261,6 +262,14 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    */
   onSnap() {
     console.log('onSnap', this.page.url());
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
+  }
+  /**
+   * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます
+   */
+  onBeat() {
+    console.log('onBeat', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }

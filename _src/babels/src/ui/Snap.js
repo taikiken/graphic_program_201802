@@ -66,7 +66,7 @@ export class Snap extends EventDispatcher {
      * [topへ戻る] button が押されると true に設定し snap 行動を抑制します
      * @type {boolean}
      */
-    this.returnHome = true;
+    this.returnHome = false;
     /**
      * scroll animation を行わない
      * @type {boolean}
@@ -88,6 +88,13 @@ export class Snap extends EventDispatcher {
    */
   static get SNAPPED() {
     return 'snapSnapped';
+  }
+  /**
+   * scroll up 中に hit したことを通知するイベント
+   * @return {string} snapBeatUp
+   */
+  static get BEAT_UP() {
+    return 'snapBeatUp';
   }
   // ---------------------------------------------------
   //  METHOD
@@ -176,6 +183,9 @@ export class Snap extends EventDispatcher {
       return;
     }
     // ---
+    // scroll up 時に snap より先に replaceState するためのチェックを行います
+    this.beat(events);
+    // ---
     // 判定開始
     // @type {ClientRect} - div.loaded-post ClientRect
     const offset = events.rect;
@@ -187,6 +197,20 @@ export class Snap extends EventDispatcher {
       // magnetic move
       console.log('scrollUp ------', top, this.element);
       this.snap(y + top);
+    }
+  }
+  beat(events) {
+    const offset = events.rect;
+    // const top = offset.top;
+    const bottom = offset.bottom;
+    // // window
+    const scrollEvents = events.events;
+    const height = scrollEvents.height;
+    const half = height * 0.5;
+    // element.top が window.height の半分未満になったら
+    // scroll up の時は hit 時にイベントを発火させる
+    if (bottom <= height && bottom > half) {
+      this.dispatch({ type: Snap.BEAT_UP, target: this });
     }
   }
   /**
@@ -209,7 +233,7 @@ export class Snap extends EventDispatcher {
     }
     // ---------------------------
     // scroll animation
-    console.log('***magnet************************', top, this.scrolling);
+    console.log('***magnet************************', top, this.scrolling, this.returnHome);
     // scroll animation 開始(snap)
     if (!this.returnHome) {
       this.scrolling = true;

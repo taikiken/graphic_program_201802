@@ -56,7 +56,7 @@ export class TagTitle {
     // 区切り文字前の page title
     const titles = value.split(divider);
     const page = titles.shift();
-    const site = titles.shift();
+    const site = titles.pop();
     /**
      * デフォルトの「ページタイトル」を取得します
      * @return {string} デフォルトの「ページタイトル」を返します

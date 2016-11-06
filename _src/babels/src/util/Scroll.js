@@ -127,12 +127,13 @@ export class Scroll extends EventDispatcher {
     const type = Scroll.SCROLL;
     const y = Scroll.y;
     const height = window.innerHeight;
+    const bottom = y + height;
     // @type {number} - 正の時: scroll down
     // on 2016-10-28, 下記式だと 負の時: scroll down, かなり長いこと使ってるのでこのままにします
     const moving = previous - y;
 
     // this.previous = y;
-    this.dispatch({ type, y, height, moving, originalEvent: null, changed: true });
+    this.dispatch({ type, y, height, bottom, moving, originalEvent: null, changed: true });
   }
   // ---------------------------------------------------
   //  static GETTER / SETTER

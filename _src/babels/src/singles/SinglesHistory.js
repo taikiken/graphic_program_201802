@@ -80,6 +80,7 @@ export class SinglesHistory extends EventDispatcher {
      */
     this.pages = () => pages;
 
+    let current = '';
     let base = '';
     /**
      * 基点 url を返します
@@ -91,7 +92,12 @@ export class SinglesHistory extends EventDispatcher {
      * @param {string} baseUrl 基点 url
      */
     this.setBase = (baseUrl) => {
+      current = baseUrl;
       base = baseUrl;
+    };
+    this.current = () => current;
+    this.setCurrent = (path) => {
+      current = path;
     };
     // popstate 監視
     window.addEventListener('popstate', this.onPop.bind(this), false);
@@ -156,14 +162,23 @@ export class SinglesHistory extends EventDispatcher {
   hit(page) {
     // @type {Object}
     const pages = this.pages().pages();
+    const url = page.url();
+    // ---
+    // 複数回処理しないように現在パスと比較する
+    console.log('hit', url, this.current());
+    if (url === this.current()) {
+      return;
+    }
+    this.setCurrent(url);
+    // ---
     // 存在チェック
     if (Object.keys(pages).indexOf(page.url()) !== -1) {
       // url が存在する
-      this.pop(page.url());
+      this.pop(url);
     } else {
       // 存在しない
       this.pages().add(page);
-      if (this.base() !== page.url()) {
+      if (this.base() !== url) {
         // 初期アクセス URL と異なっていたら pushstate します
         this.push(pushSymbol, page);
       }
