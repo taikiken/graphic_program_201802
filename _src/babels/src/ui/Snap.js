@@ -199,6 +199,11 @@ export class Snap extends EventDispatcher {
       this.snap(y + top);
     }
   }
+  /**
+   * scroll up 時に element が画面の半分以上を占めているかを判定し<br>
+   * Snap.BEAT_UP event を発火させます
+   * @param {Object} events Hit event object
+   */
   beat(events) {
     const offset = events.rect;
     // const top = offset.top;

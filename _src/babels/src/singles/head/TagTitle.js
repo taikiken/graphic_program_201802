@@ -55,8 +55,13 @@ export class TagTitle {
     this.title = () => value;
     // 区切り文字前の page title
     const titles = value.split(divider);
+    const length = titles.length;
     const page = titles.shift();
     const site = titles.pop();
+    let label = '';
+    if (length === 3) {
+      label = titles.shift();
+    }
     /**
      * デフォルトの「ページタイトル」を取得します
      * @return {string} デフォルトの「ページタイトル」を返します
@@ -67,6 +72,11 @@ export class TagTitle {
      * @return {string} デフォルトの「サイトタイトル」を返します
      */
     this.site = () => site;
+    /**
+     * 真ん中のカテゴリラベル
+     * @return {string} デフォルトの「サイトタイトルのカテゴリ」を返します
+     */
+    this.label = () => label;
 
     // temporary
     const temporary = new Temporary(page);
@@ -79,10 +89,15 @@ export class TagTitle {
   /**
    * タイトル文字を書換えます
    * @param {string} pageTitle ページタイトル
+   * @param {string} [label=this.label()] ページタイトル
    * @return {string} 書換え後のタイトルテキスト
    */
-  set(pageTitle) {
-    const title = `${pageTitle}${this.divider()}${this.site()}`;
+  set(pageTitle, label = this.label()) {
+    let title = `${pageTitle}`;
+    if (label) {
+      title += `${this.divider()}${label}`;
+    }
+    title += `${this.divider()}${this.site()}`;
     this.tag().innerHTML = title;
     return title;
   }

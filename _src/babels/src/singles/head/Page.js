@@ -44,7 +44,11 @@ export class Page {
       }
       return singleDae.url;
     };
-    // 'og_image'       => $post['media']['images']['original']
+    /**
+     * title middle に配置する category label
+     * @return {string} 記事 category label
+     */
+    this.label = () => singleDae.categories.label;
     /**
      * 記事画像, OGP:image
      * @return {string} 記事画像
@@ -52,7 +56,11 @@ export class Page {
     this.ogImg = () => singleDae.media.images.original;
     /**
      * props, console 確認しやすい様に Object property にします
-     * @type {{title: string, url: string, ogImg: string}}
+     * @type {{
+     *  title: string,
+     *  url: string,
+     *  ogImg: string
+     * }}
      */
     this.props = {
       title: singleDae.title,

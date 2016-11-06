@@ -62,9 +62,10 @@ export class SnsTw {
   /**
    * head 内(Twitter)項目を書換えます
    * @param {Page} page ページ情報
+   * @param {string} title ページ title
    */
-  replace(page) {
-    this.title().set(page.title());
+  replace(page, title) {
+    this.title().set(title);
     this.image().set(page.ogImg());
     this.url().set(page.url());
     this.description().set(page.description());

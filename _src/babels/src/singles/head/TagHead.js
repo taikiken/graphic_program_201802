@@ -98,18 +98,17 @@ export class TagHead {
    * @param {Page} page ページ情報
    */
   replace(page) {
-    const title = page.title();
     const description = page.description();
     const url = page.url();
     // title
-    this.title().set(title);
+    const title = this.title().set(page.title(), page.label());
     // description
     this.description().set(description);
     // canonical
     this.canonical().set(url);
     // Twitter
-    this.twitter().replace(page);
+    this.twitter().replace(page, title);
     // Facebook
-    this.og().replace(page);
+    this.og().replace(page, title);
   }
 }
