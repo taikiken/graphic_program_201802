@@ -174,7 +174,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     // Hit instance を作成し監視を開始します
     if (this.hit === null && this.singlesArticle !== null) {
       // snap
-      const snap = new Snap(this.singlesArticle);
+      const snap = new Snap(this.singlesArticle, false, this.page);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();

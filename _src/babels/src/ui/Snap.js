@@ -32,8 +32,9 @@ export class Snap extends EventDispatcher {
    * hit instance を作成し event handler を設定します
    * @param {Element} element 対象 element
    * @param {boolean} [noMotion=false] scroll animation を行わず `scroll up` だけを監視する
+   * @param {Page} page element page instance
    */
-  constructor(element, noMotion = false) {
+  constructor(element, noMotion = false, page = {}) {
     super();
     /**
      * snap 対象 element
@@ -77,6 +78,11 @@ export class Snap extends EventDispatcher {
      * @type {boolean}
      */
     this.magnetic = false;
+    /**
+     * Page instance
+     * @type {Page}
+     */
+    this.page = page;
   }
   // ---------------------------------------------------
   //  EVENT
@@ -126,7 +132,12 @@ export class Snap extends EventDispatcher {
    */
   onHit(events) {
     const scrollEvents = events.events;
-    if (scrollEvents.moving <= 0) {
+    const moving = scrollEvents.moving;
+    const distance = scrollEvents.distance;
+    if (Math.abs(distance) < this.threshold) {
+      return;
+    }
+    if (moving <= 0) {
       // scroll down
       this.scrollDown(events);
     } else {
@@ -166,7 +177,7 @@ export class Snap extends EventDispatcher {
     // window left_top 時に `0`
     const top = offset.top;
     // 閾値チェック
-    if (top <= this.threshold) {
+    if (top <= this.threshold && top > 0) {
       // magnetic move
       console.log('scrollDown +++++++++', top, this.element);
       this.snap(y + top);
@@ -193,10 +204,12 @@ export class Snap extends EventDispatcher {
     const y = scrollEvents.y;
     const top = offset.top;
     // 閾値チェック
-    if (Math.abs(top) <= this.threshold) {
+    if (Math.abs(top) <= this.threshold && top > 0) {
       // magnetic move
       console.log('scrollUp ------', top, this.element);
-      this.snap(y + top);
+      // this.snap(y + top);
+      // event fire
+      this.dispatch({ type: Snap.SNAPPED, target: this });
     }
   }
   /**
@@ -227,6 +240,9 @@ export class Snap extends EventDispatcher {
     if (this.scrolling) {
       return;
     }
+    if (typeof this.page.url === 'function' && this.page.url() === location.pathname) {
+      return;
+    }
     // event fire
     this.dispatch({ type: Snap.SNAPPED, target: this });
     // flag on
@@ -252,6 +268,7 @@ export class Snap extends EventDispatcher {
    * `scrolling` を off にし、スクロール操作を可能にします
    */
   scrollComplete() {
+    this.moving = 0;
     this.scrolling = false;
     // 遅延させ回復させます
     Scroll.enable(750);

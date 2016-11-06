@@ -73,6 +73,9 @@ export class Scroll extends EventDispatcher {
      */
     this.previous = -1;
 
+    this.distance = 0;
+    this.direction = -1;
+
     return _instance;
   }
   // ---------------------------------------------------
@@ -110,12 +113,29 @@ export class Scroll extends EventDispatcher {
     const type = Scroll.SCROLL;
     const y = Scroll.y;
     const height = window.innerHeight;
+    const bottom = y + height;
     // @type {number} - 正の時: scroll down
     const moving = previous - y;
     const changed = moving !== 0;
-
+    const direction = Math.sqrt(moving * moving) / moving;
+    // scroll 方向が変わったら distance を 0 にする
+    if (direction !== this.direction) {
+      this.distance = 0;
+      this.direction = direction;
+    }
+    const distance = this.distance + moving;
+    this.distance = distance;
     this.previous = y;
-    this.dispatch({ type, originalEvent, y, height, moving, changed });
+    this.dispatch({
+      type,
+      originalEvent,
+      y,
+      height,
+      bottom,
+      moving,
+      distance,
+      changed
+    });
   }
   /**
    * 強制的に scroll event を発生させます
@@ -131,9 +151,26 @@ export class Scroll extends EventDispatcher {
     // @type {number} - 正の時: scroll down
     // on 2016-10-28, 下記式だと 負の時: scroll down, かなり長いこと使ってるのでこのままにします
     const moving = previous - y;
+    // const direction = Math.sqrt(moving * moving) / moving;
+    // // scroll 方向が変わったら distance を 0 にする
+    // if (direction !== this.direction) {
+    //   this.distance = 0;
+    //   this.direction = direction;
+    // }
+    const distance = this.distance + moving;
+    this.distance = distance;
 
     // this.previous = y;
-    this.dispatch({ type, y, height, bottom, moving, originalEvent: null, changed: true });
+    this.dispatch({
+      type,
+      y,
+      height,
+      bottom,
+      moving,
+      distance,
+      originalEvent: null,
+      changed: true
+    });
   }
   // ---------------------------------------------------
   //  static GETTER / SETTER
@@ -267,6 +304,7 @@ export class Scroll extends EventDispatcher {
    */
   static enable(delay = 500) {
     setTimeout(Scroll.activate, delay);
+    _instance.fire();
   }
   /**
    * scroll 関連イベントハンドラ, 全て止めます
@@ -310,5 +348,7 @@ export class Scroll extends EventDispatcher {
     document.removeEventListener('mousewheel', Scroll.disableScroll);
     window.removeEventListener('touchmove', Scroll.disableScroll);
     document.removeEventListener('keydown', Scroll.keyDown);
+    // 初期化します
+    _instance.distance = 0;
   }
 }
