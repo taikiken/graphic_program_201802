@@ -392,7 +392,7 @@ class ViewModel {
       if ( $response ) :
         return true;
       else :
-        $this->delete_cookie();
+        // $this->delete_cookie();
         return false;
       endif;
 
