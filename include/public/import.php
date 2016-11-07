@@ -1,3 +1,4 @@
+<audio controls></audio>
 <?php
 
 $s3active=preg_match("#/apache/htdocs/#",$SERVERPATH)?0:1;
@@ -319,7 +320,7 @@ function outputImg($res,$filename,$type){
 	global $s3active,$SERVERPATH;
 	
 	if($type=="jpg"){
-		$e=imagejpeg($res,$filename,100);
+		$e=imagejpeg($res,$filename,85);
 	}elseif($type=="gif"){
 		$e=imagegif($res,$filename);
 	}elseif($type=="png"){

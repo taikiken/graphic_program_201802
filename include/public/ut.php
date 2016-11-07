@@ -327,6 +327,13 @@ function set_categoriesinfo($f){
 	$s["title"]=mod_HTML($f["title"]);
 	$s["description"]=mod_HTML($f["description"]);
 	
+	$s["title_banner"]["pc"]["image"]=strlen($f["img"])>0?sprintf("%s/img/%s",$ImgPath,$f["img"]):"";
+	$s["title_banner"]["pc"]["text"]=strlen($f["alt"])>0?$f["alt"]:"";
+	$s["title_banner"]["pc"]["link"]=strlen($f["url"])>0?$f["url"]:"";
+	$s["title_banner"]["sp"]["image"]=strlen($f["img1"])>0?sprintf("%s/img/%s",$ImgPath,$f["img1"]):"";
+	$s["title_banner"]["sp"]["text"]=strlen($f["alt"])>0?$f["alt"]:"";
+	$s["title_banner"]["sp"]["link"]=strlen($f["url1"])>0?$f["url1"]:"";
+
 	$ad=get_advertise($s["id"]);
 	$ad_put=set_advertise($ad,"list");
 	
