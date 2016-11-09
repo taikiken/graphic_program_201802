@@ -28,7 +28,9 @@
     // https://github.com/undotsushin/undotsushin/issues/1210
     // CMS から一面・すべてのバナーを設定できるようにする #1210
     // @since 2016-11-02
-    include_once __DIR__ . '/_cms_banner.php';
+    if ($page['category']['slug'] == 'all') {
+      include_once __DIR__ . '/_cms_banner.php';
+    }
     ?>
     <section class="main-sec">
       <?php
