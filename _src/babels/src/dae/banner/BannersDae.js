@@ -17,6 +17,18 @@ import {Safety} from '../../data/Safety';
 /**
  * response.user.banner データ<br>
  * あるいは response.banner
+ *
+ * `http://dev.undotsushin.com/api/v1/category/crazy`
+ *
+ * <p>特定のカテゴリー情報を取得する<br>
+ ※ 主に企画モノの記事一覧ページを生成するにあたり利用する</p>
+ * <p>カテゴリータイトル横に表示する画像</p>
+ *
+ * `title_img`, `title_img_link` が廃止される
+ *
+ * 記事閲覧 / powered by エリアの追加（App, Web-Mobile） #1211
+ * @see https://github.com/undotsushin/undotsushin/issues/1211
+ * @since 2016-11-02
  */
 export class BannersDae {
   /**

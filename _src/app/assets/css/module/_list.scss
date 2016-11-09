@@ -26,8 +26,12 @@
 
 
 // カテゴリーに設定される副題的タイトル画像
-// ex. Facebook話題の投稿のPOWERD BY
-.category-heading-image {
+// https://github.com/undotsushin/undotsushin/issues/1211
+// PC/SP両方での実装となったので
+// 旧.category-heading-image -> .title_banner-powered_by に変更
+
+
+.title_banner-powered_by {
   padding-left: 5px;
 
   img {
