@@ -607,13 +607,15 @@ function checkFileType($p){
 function imgFileMove($p,$filename){
 	global $TMPPATH;
 	global $RAWIMG;
+	global $domain;
 	if(move_uploaded_file($p["tmp_name"],$TMPPATH.$filename)){
 		if(copy($TMPPATH.$filename,$RAWIMG.$filename)){
 			
 			$up=1;
-			$s3i=new S3Module;
-			$s3i->upload(sprintf("%s%s",$TMPPATH,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$RAWIMG,$filename)));
-
+			if($domain!="http://ut"){
+				$s3i=new S3Module;
+				$s3i->upload(sprintf("%s%s",$TMPPATH,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$RAWIMG,$filename)));
+			}
 		}else{
 			$up=0;
 		}
@@ -634,8 +636,11 @@ function makeDefaultImg($filename,$type){
 	}	
 }
 function outputImg($res,$filename,$type){
+	
+	global $domain;
+	
 	if($type=="jpg"){
-		$e=imagejpeg($res,$filename,100);
+		$e=imagejpeg($res,$filename,75);
 	}elseif($type=="gif"){
 		$e=imagegif($res,$filename);
 	}elseif($type=="png"){
@@ -648,7 +653,7 @@ function outputImg($res,$filename,$type){
 		echo "画像の出力に失敗しました。もう一度アップロードしてください。";
 	}
 	
-	if(preg_match("/prg_img/",$filename)){
+	if(preg_match("/prg_img/",$filename)&&$domain!="http://ut"){
 		$upfile=str_replace("../../../prg_img/","",$filename);
 		$s3i=new S3Module;
 		$s3i->upload($filename,$upfile);
@@ -706,11 +711,12 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 
 	global $IMG;
 	global $RAWIMG;
+	global $domain;
 		
 	if(strlen($type)==0)$type=substr($filename,-3,3);
 	if(strlen($size)==0)$size=getimagesize($RAWIMG.$filename);
 
-	$s3i=new S3Module;
+	if($domain!="http://ut")$s3i=new S3Module;
 
 	for($i=0;$i<count($imgSubstance);$i++){
 		if($type!="gif"){
@@ -720,7 +726,7 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 				}else{
 					if($i==0){
 						copy($RAWIMG.$filename,$IMG[$i].$filename);
-						$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+						if($domain!="http://ut")$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
 						//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
 					}else{
 						imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
@@ -731,13 +737,13 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 					imgResize($RAWIMG.$filename,$IMG[$i].$filename,$imgSubstance[$i]["w"],$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
 				}else{
 					copy($RAWIMG.$filename,$IMG[$i].$filename);
-					$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+					if($domain!="http://ut")$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
 					//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
 				}
 			}
 		}else{
 			copy($RAWIMG.$filename,$IMG[$i].$filename);
-			$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+			if($domain!="http://ut")$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
 		}
 	}
 

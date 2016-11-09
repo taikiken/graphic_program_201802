@@ -8,7 +8,7 @@ $o->connect();
 
 $category=bind($_REQUEST["category"]);
 
-$sql=sprintf("select id,name,title,url,img,description,name_e from u_categories where name_e='%s' and flag=1",$category);
+$sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e from u_categories where name_e='%s'",$category);
 $o->query($sql);
 $f=$o->fetch_array();
 
