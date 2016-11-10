@@ -23,7 +23,7 @@ const easing = greensock.easing;
  * @type {Symbol}
  * @private
  */
-const _symbol = Symbol();
+const _symbol = Symbol('singleton Scroll instance');
 
 /**
  * Scroll instance
@@ -72,8 +72,15 @@ export class Scroll extends EventDispatcher {
      * @default -1
      */
     this.previous = -1;
-
+    /**
+     * 移動 px
+     * @type {number}
+     */
     this.distance = 0;
+    /**
+     * 移動方向, scroll 方向が変わったら distance を 0 にする
+     * @type {number}
+     */
     this.direction = -1;
 
     return _instance;

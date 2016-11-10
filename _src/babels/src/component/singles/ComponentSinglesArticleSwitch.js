@@ -21,7 +21,7 @@ import { ComponentSingleContent } from '../singles-content/ComponentSingleConten
 import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
 
 // // util
-// import { Fb } from '../../util/Fb';
+import { Scroll } from '../../util/Scroll';
 
 // React
 const React = self.React;
@@ -83,6 +83,11 @@ export class ComponentSinglesArticleSwitch extends React.Component {
      * @type {function}
      */
     this.boundClick = this.anchorClick.bind(this);
+    /**
+     * scroll top value
+     * @type {number}
+     */
+    this.y = 0;
   }
   /**
    * a.onclick event handler<br>
@@ -91,6 +96,7 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * */
   anchorClick(event) {
     event.preventDefault();
+    this.y = Scroll.y;
     this.setState({ excerpt: !this.state.excerpt });
   }
   /**
@@ -124,6 +130,9 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * @return {XML} ComponentSingleContent {@link ComponentSingleContent} を返します
    */
   content() {
+    // scroll 位置が下がるので元に戻す
+    Scroll.motion(this.y, 0.1, 0.25);
+    // XML
     return (
       <ComponentSingleContent
         single={this.state.single}

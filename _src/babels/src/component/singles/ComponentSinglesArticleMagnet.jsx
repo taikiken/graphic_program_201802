@@ -15,11 +15,11 @@
 
 // node
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
-import { MediaNode } from '../../node/single/MediaNode';
+// import { MediaNode } from '../../node/single/MediaNode';
 
 // component
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
-// import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
+import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
 
 // since 2016-11-04
 import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';
@@ -320,17 +320,17 @@ export class ComponentSinglesArticleMagnet extends React.Component {
             </div>
           </div>
           {/* media */}
+          {/*
            <MediaNode
            articleId={String(single.id)}
            mediaType={single.mediaType}
            media={single.media}
            isShowImage={single.isShowImage}
            />
-          {/*
+           */}
           <ComponentSinglesArticleMedia
             single={single}
           />
-           */}
           <ComponentSinglesArticleSwitch
             single={single}
             sign={this.state.sign}
