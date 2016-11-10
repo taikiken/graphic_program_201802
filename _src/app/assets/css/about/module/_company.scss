@@ -183,12 +183,17 @@
 
         dt {
           float: left;
-          width: 130px;
+          width: 150px;
           font-weight: bold;
         }
 
         dd {
+          line-height: 1.6;
           overflow: hidden;
+
+          .indent {
+            margin-left: -0.6rem;
+          }
         }
 
         a {
