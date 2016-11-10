@@ -320,17 +320,17 @@ export class ComponentSinglesArticleMagnet extends React.Component {
             </div>
           </div>
           {/* media */}
-          {/*
            <MediaNode
            articleId={String(single.id)}
            mediaType={single.mediaType}
            media={single.media}
            isShowImage={single.isShowImage}
            />
-           */}
+          {/*
           <ComponentSinglesArticleMedia
             single={single}
           />
+           */}
           <ComponentSinglesArticleSwitch
             single={single}
             sign={this.state.sign}
