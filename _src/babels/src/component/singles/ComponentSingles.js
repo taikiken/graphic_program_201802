@@ -22,7 +22,7 @@ import { ComponentSinglesWidget } from './ComponentSinglesWidget';
 
 // 記事本文
 // import { ComponentSinglesArticle } from './ComponentSinglesArticle';
-import { ComponentSinglesArticleMagnet } from './ComponentSinglesArticleMagnet';
+import { ComponentSinglesArticleMagnet } from '../singles-magnet/ComponentSinglesArticleMagnet';
 
 // ui
 import { SinglesManager } from '../../ui/SinglesManager';

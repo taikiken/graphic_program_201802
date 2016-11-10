@@ -39,6 +39,9 @@ export class Elements extends Offset {
    * @param {Element} element 処理対象 Element
    */
   constructor(element:Element) {
+    if (!element) {
+      throw new Error(`element is not correct: ${element}`);
+    }
     // console.log('Elements', element);
     super(element);
     /**

@@ -17,9 +17,11 @@
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 // import { MediaNode } from '../../node/single/MediaNode';
 
-// component
+// component/categories
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
-import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
+
+// component/singles
+import { ComponentSinglesArticleMedia } from '../singles/ComponentSinglesArticleMedia';
 
 // since 2016-11-04
 import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';

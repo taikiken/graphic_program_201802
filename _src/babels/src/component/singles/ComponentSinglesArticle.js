@@ -17,8 +17,10 @@ import { Message } from '../../app/const/Message';
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 // import { MediaNode } from '../../node/single/MediaNode';
 
-// component
+// component/categories
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+
+// component/singles
 import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
 
 // ui
