@@ -255,7 +255,7 @@ class ViewModel {
   */
   public function get_category_by_slug($slug) {
 
-    if ( $this->default['site_categories'][$slug] ) :
+    if ( $this->default['site_categories'][$slug] || $slug === 'top' ) :
 
 
       if ( UT_ENV == 'LOCAL' ) :
@@ -392,7 +392,7 @@ class ViewModel {
       if ( $response ) :
         return true;
       else :
-        $this->delete_cookie();
+        // $this->delete_cookie();
         return false;
       endif;
 
