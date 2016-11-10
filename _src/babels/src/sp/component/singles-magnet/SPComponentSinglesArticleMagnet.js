@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2011-2016 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/10/28 - 16:54
+ * @date 2016/09/28 - 16:33
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -11,48 +11,48 @@
  */
 
 // app
-// import { Message } from '../../app/const/Message';
+import { Message } from '../../../app/const/Message';
+
+// sp/node
+// import { SPMediaNode } from '../../node/single/SPMediaNode';
 
 // node
-import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
-// import { MediaNode } from '../../node/single/MediaNode';
+import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 
-// component/categories
-import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+// component
+import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
 
-// component/singles
-import { ComponentSinglesArticleMedia } from '../singles/ComponentSinglesArticleMedia';
-
-// since 2016-11-04
-import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';
+// sp/component.singles
+import { SPComponentSinglesArticleMedia } from '../singles/SPComponentSinglesArticleMedia';
 
 // ui
-import { Hit } from '../../ui/Hit';
+import { Hit } from '../../../ui/Hit';
 
-// Ga
-import { Ga } from '../../ga/Ga';
+// view
+// import { ViewSingle } from '../../../view/ViewSingle';
+
+import { Ga } from '../../../ga/Ga';
 
 // --------------------
 // @since 2016-10-17
 // singles
-import { SinglesHistory } from '../../singles/SinglesHistory';
+import { SinglesHistory } from '../../../singles/SinglesHistory';
 
 // singles/head
-import { Page } from '../../singles/head/Page';
-// --------------------
-
-// // @since 2016-10-28
-// import { Scroll } from '../../util/Scroll';
-// import { TopButton } from '../../ui/button/TopButton';
+import { Page } from '../../../singles/head/Page';
 
 // snap
-import { Snap } from '../../ui/Snap';
+import { Snap } from '../../../ui/Snap';
+// --------------------
+
+// from desktop
+import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
 
 // React
 const React = self.React;
 
 /**
- * PC: 記事詳細「次の記事」一覧を出力します
+ * SP: 記事詳細「次の記事」一覧を出力します
  *
  * - その場で記事本文を閲覧できるようにする
  * - マグネティック・スクロール
@@ -61,37 +61,21 @@ const React = self.React;
  *
  * 記事詳細・次の記事一覧の記事は <- 記事詳細と同等内容にする
  *
- * ComponentSinglesArticle {@link ComponentSinglesArticle} を拡張し<br>
+ * SPComponentSinglesArticle {@link SPComponentSinglesArticle} を拡張し<br>
  * スナップ(Snap) {@link Snap} を行うようにします
  *
  * コンテナが画面内に現れたら ga 送信を行います {@link Ga.single}
  *
- * ```
- * <ComponentSinglesArticleMagnet/>
- *  <ComponentCategoryLabelsLink/>
- *  <BookmarkNode/>
- *  <MediaNode/>
- *  or
- *  <ComponentSinglesArticleMedia/>
- *  <ComponentSinglesArticleSwitch/>
- * ```
- * {@link ComponentCategoryLabelsLink},
- * {@link BookmarkNode},
- * {@link MediaNode},
- * {@link ComponentSinglesArticleMedia},
- * {@link ComponentSinglesArticleSwitch}
- *
  * @see https://github.com/undotsushin/undotsushin/issues/1201
  * @see https://github.com/undotsushin/undotsushin/issues/1224
- * @since 2016-10-28
+ * @since 2016-11-10
  */
-export class ComponentSinglesArticleMagnet extends React.Component {
+export class SPComponentSinglesArticleMagnet extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
    * propTypes
-   *
    * - @type {SingleDae} single - 記事データ
    * - @type {boolean} sign - ログイン済みユーザーフラッグ, true: ログイン済み
    * - @type {number} index - 次の記事一覧・記事表示順序
@@ -109,7 +93,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentSinglesArticle.propTypes}
+   * @param {Object} props React props プロパティー {@link SPComponentSinglesArticle.propTypes}
    */
   constructor(props) {
     super(props);
@@ -124,19 +108,19 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     };
 
     /**
-     * Hit instance, コンテナがブラウザウインドウ内に表示されているかを調べます<br>
-     * ウインドウ内で top が +- 50px 以内だと Ga tag 送信します
+     * Hit instance
      * @type {?Hit}
      */
     this.hit = null;
     /**
-     * bind 済み onHit
-     * @type {Function}
+     * bind 済み onHit, Hit.COLLISION event handler
+     * @type {function}
      */
     this.boundHit = this.onHit.bind(this);
     /**
      * Ga tag 送信済みフラッグ
      * @type {boolean}
+     * @default false
      */
     this.sended = false;
     // ---
@@ -169,7 +153,6 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
    * */
   componentDidMount() {
-    // Hit instance を作成し監視を開始します
     if (this.hit === null && this.singlesArticle !== null) {
       // snap
       const snap = new Snap(this.singlesArticle, false, this.page);
@@ -205,16 +188,9 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     this.updateSingle(this.state.single);
   }
   // --------------------------------------------------
-  // hit
   /**
-   * Hit.COLLISION event handler<br>
-   * ウインドウ内にコンテナが表示された時に通知されます<br>
-   * コンテナ top が +- 50px 以内だと Ga tag 送信します
-   * @param {{
-   *  rect: ClientRect,
-   *  events: object,
-   *  type: string
-   * }} events Hit events
+   * Hit.COLLISION event handler
+   * @param {Object} events Hit.COLLISION event object
    */
   onHit(events) {
     const rect = events.rect;
@@ -237,10 +213,10 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     this.sended = true;
     // send
     const single = this.state.single;
-    Ga.single(single, 'ComponentSinglesArticle.onHit');
+    Ga.single(single, 'SPComponentSinglesArticle.onHit');
     // ---------------------
     // https://github.com/undotsushin/undotsushin/issues/1151
-    Ga.addPage(single.id, 'ComponentSinglesArticle.onHit');
+    Ga.addPage(single.id, 'SPComponentSinglesArticle.onHit');
     // ---------------------
     this.dispose();
   }
@@ -274,8 +250,8 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   // --------------------------------------------------
   // render
   /**
-   * 記事詳細・次の記事一覧 > 記事を出力します
-   * @return {?XML} div.loaded-post or null を返します
+   * `div.loaded-post` を出力します
+   * @return {?XML} `div.loaded-post` or null を返します
    * */
   render() {
     const single = this.state.single;
@@ -285,56 +261,55 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     }
 
     return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref={
+      <div className="loaded-post" ref={
         (component) => {
           this.singlesArticle = component;
         }}
       >
+        {/* div.post-kv */}
+        <div className="single-visual-container" ref="visualElement">
+          {/*
+          <SPMediaNode
+            articleId={String(single.id)}
+            mediaType={single.mediaType}
+            media={single.media}
+            isShowImage={single.isShowImage}
+          />
+          */}
+          <SPComponentSinglesArticleMedia
+            single={single}
+          />
+        </div>
         <div className="post-detail">
-          {/* header */}
-          <div className="single-header-root">
-            <div className={`post-heading post-heading-${single.id}`}>
-              <h1>{single.title}</h1>
-            </div>
+          {/* title */}
+          <div className={`post-heading post-heading-${single.id}`}>
+            <h1>{single.title}</h1>
+          </div>
+          {/* コンテンツ情報 */}
+          <div className="post-data">
+            <p className="post-author">{single.user.userName}</p>
 
             <ComponentCategoryLabelsLink
               index={this.props.index}
               id={`single-label-${single.id}`}
               categories={single.categories.all}
-              className="category-heading"
             />
 
-            <div className="post-data">
-              <div className="f-left">
-                <p className="post-author">{single.user.userName}</p>
-                <p className="post-date">{single.displayDate}</p>
-              </div>
-              {/* div.f-right (bookmark: on / off) */}
-              <BookmarkNode
-                sign={this.state.sign}
-                isBookmarked={single.isBookmarked}
-                articleId={String(single.id)}
-              />
-            </div>
+            <p className="post-date">{single.displayDate}</p>
+            <BookmarkNode
+              sign={this.state.sign}
+              isBookmarked={single.isBookmarked}
+              articleId={String(single.id)}
+            />
           </div>
-          {/* media */}
-          {/*
-           <MediaNode
-           articleId={String(single.id)}
-           mediaType={single.mediaType}
-           media={single.media}
-           isShowImage={single.isShowImage}
-           />
-           */}
-          <ComponentSinglesArticleMedia
-            single={single}
-          />
           {/* 本文 */}
-          <ComponentSinglesArticleSwitch
-            single={single}
-            sign={this.state.sign}
-            index={this.props.index}
-          />
+          <div className="post-content">
+            <p>{single.description}</p>
+          </div>
+          {/* link */}
+          <div className="post-content-read-more">
+            <a href={single.url} className="post-content-btn-readMore">{Message.READ_MORE}</a>
+          </div>
         </div>
       </div>
     );
