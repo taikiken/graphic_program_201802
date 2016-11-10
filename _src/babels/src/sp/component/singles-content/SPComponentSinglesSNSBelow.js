@@ -34,7 +34,100 @@ export class SPComponentSinglesSNSBelow extends React.Component {
       index: React.PropTypes.number.isRequired
     };
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   constructor(props) {
     super(props);
+    /**
+     * React state
+     * @type {{single: SingleDae}}
+     */
+    this.state = {
+      single: props.single
+    };
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * 記事詳細SNSを更新します
+   * @param {SingleDae} single 記事詳細 JSON data
+   */
+  updateSingle(single) {
+    this.setState({ single });
+  }
+  render() {
+    const single = this.state.single;
+    const url = single.url;
+    if (!url) {
+      return null;
+    }
+    // output
+    const title = single.title;
+    return (
+      <div className="post-sns_lower">
+        <div className="post-sns-list">
+          {/* Facebook */}
+          <div className="post-sns-fixed">
+            <div className="post-sns-item_fbgood">
+              <div className="fb-like"
+                 data-href={url}
+                 data-layout="box_count"
+                 data-action="like"
+                 data-show-faces="false"
+                 data-share="false"
+              />
+            </div>
+          </div>
+          {/* flex */}
+          <div className="post-sns-flex">
+            <div className="post-sns-flex-inner">
+              <ul className="post-sns-flex-list">
+                {/* Facebook */}
+                <li className="post-sns-item post-sns-item_fb">
+                  <a href={`http://www.facebook.com/share.php?u=${url}&t=${title}`} target="_blank">
+                    <span>{MessageSNS.FACEBOOK}</span>
+                  </a>
+                </li>
+                {/* Twitter */}
+                <li className="post-sns-item post-sns-item_tw">
+                  <a href={`http://twitter.com/share?text=${encodeURIComponent(title)}&url=${url}&via=${MessageSNS.VIA}`} target="_blank">
+                    <span>{MessageSNS.TWEET}</span>
+                  </a>
+                </li>
+                {/* G+ */}
+                <li className="post-sns-item post-sns-item_gt">
+                  <a href={`https://plus.google.com/share?url=${url}`} target="_blank">
+                    <span>{MessageSNS.GOOGLE_PLUS}</span>
+                  </a>
+                </li>
+                {/* Line */}
+                <li className="post-sns-item post-sns-item_line">
+                  <a href={`http://line.me/R/msg/text/?${encodeURIComponent(title + ' ' + url)}`} target="_blank">
+                    <span>{MessageSNS.SEND_LINE}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {/* pr */}
+        <div className="post-sns-pr">
+          <dl className="post-sns-pr-inner">
+            <dt><span>いいねして最新ニュースをチェック！</span></dt>
+            <dd>
+              <div className="fb-like"
+               data-href={url}
+               data-layout="box_count"
+               data-action="like"
+               data-show-faces="false"
+               data-share="false"
+              />
+            </dd>
+          </dl>
+        </div>
+      </div>
+    );
   }
 }
