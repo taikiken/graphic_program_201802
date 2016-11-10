@@ -5,7 +5,7 @@ include_once __DIR__."/_header.php";
 ?>
 
 
-<div class="category-heading">
+<div class="category-heading" style="height:auto;">
   <h1>
     <?php echo $page['title']; ?>
   </h1>
