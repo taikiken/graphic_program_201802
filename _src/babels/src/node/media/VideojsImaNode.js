@@ -76,7 +76,7 @@ export let VideojsImaNode = React.createClass( {
     } else {
           return(
             <div id="mainContainer">
-                <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+                <video id="content_video" className="video-js vjs-default-skin" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
                   <source src={url} type="application/x-mpegURL"></source>
                 </video>
             </div>
@@ -101,37 +101,6 @@ export let VideojsImaNode = React.createClass( {
       videoElement.addEventListener( 'ended', this.onEnded );
       videoElement.addEventListener( 'pause', this.onPause );
 
-
-
-      //pause video when player out view port
-      var video=document.getElementById('content_video');
-      var mainVideoIsPlaying=false;
-
-      window.addEventListener('scroll', function () {
-
-        if(!Sagen.Browser.Mobile.is()){
-          let videoHeight =  parseInt(Content.HD_HEIGHT);
-        }else{
-          let videoWidth = window.innerWidth;
-          let videoHeight = Math.ceil( videoWidth / 16 * 9 );
-        }
-
-        var elemTop = video.getBoundingClientRect().top;
-        var elemBottom = video.getBoundingClientRect().bottom;
-
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }else{
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }
-        if(!isVisible){
-          videoElement.pause();
-          //videoElement.ima.pauseAd();
-        }else{
-          //videoElement.ima.resumeAd();
-        }
-      }, false);
-
     } else {
 
       let videoElement = ReactDOM.findDOMNode( this.refs.video );
@@ -146,39 +115,6 @@ export let VideojsImaNode = React.createClass( {
         adTagUrl: adUrl
       };
 
-      //pause video when player out view port
-      var video=document.getElementById('content_video');
-
-      var playerVisted=false;
-      window.addEventListener('scroll', function () {
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var videoWidth = window.innerWidth;
-          var videoHeight = Math.ceil( videoWidth / 16 * 9 );
-        }else{
-          var videoHeight =  parseInt(Content.HD_HEIGHT);
-        }
-        var elemTop = video.getBoundingClientRect().top;
-        var elemBottom = video.getBoundingClientRect().bottom;
-
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }else{
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }
-
-        if(isVisible && playerVisted==false){
-          playerVisted=true;
-        }
-        if(!isVisible){
-          if(playerVisted){
-            player.pause();
-            player.ima.pauseAd();
-          }
-        }else{
-          // player.ima.resumeAd();
-        }
-      }, false);
-
       player.ima(option);
       player.on('play', function() {
         document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
@@ -191,11 +127,10 @@ export let VideojsImaNode = React.createClass( {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-
       } else { //for Mobile: click to play
 
+
         if (navigator.userAgent.match(/iPad/i)) {
-          //document.querySelector(".vjs-big-play-button").setAttribute('style', 'display: !important;');
           let videoElement = document.querySelector('#content_video_html5_api');
           this.videoElement = videoElement;
           videoElement.addEventListener( 'play', this.onPlay );

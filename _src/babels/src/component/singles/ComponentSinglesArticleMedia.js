@@ -13,17 +13,12 @@
 // app
 import { MediaType } from '../../app/const/MediaType';
 import { Empty } from '../../app/const/Empty';
-import {Content} from '../../app/const/Content';
 
 // node
 import { MediaImageNode } from '../../node/single/MediaImageNode';
 
 // data
 import { Safety } from '../../data/Safety';
-
-// ga
-import {GaData} from '../../ga/GaData';
-import {Ga} from '../../ga/Ga';
 
 // React
 const React = self.React;
@@ -90,9 +85,6 @@ export class ComponentSinglesArticleMedia extends React.Component {
    * @return {XML} div.post-kv を返します
    */
   static video(single) {
-    // console.log('single');
-    // console.log(single.media);
-    // console.log(single.media.images.large);
     const images = single.media.images;
     let poster = Safety.image(images.original, '');
     if (poster === '') {
@@ -103,23 +95,8 @@ export class ComponentSinglesArticleMedia extends React.Component {
     if (caption !== '') {
       figCaption = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
     }
-    let videoId='content_video_'+single.id;
-    let videoContainer='mainContainer_'+single.id;
 
-    let width =  Content.WIDTH;
-    let height =  Content.HD_HEIGHT;
-
-    return(
-        <div className="post-kv post-video-kv">
-        <div id={videoContainer}>
-          <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
-              <source src={single.media.video.url.hd} type="application/x-mpegURL"></source>
-          </video>
-          </div>
-        </div>
-    );
-
-    /*return (
+    return (
       <div className="post-kv post-video-kv">
         <figure className="post-single-figure video-container">
           <div className="video-thumbnail-container">
@@ -130,66 +107,8 @@ export class ComponentSinglesArticleMedia extends React.Component {
           {figCaption}
         </figure>
       </div>
-    );*/
+    );
   }
-
-
-  componentDidMount() {
-    var single = this.state.single;
-    if (single.mediaType === MediaType.VIDEO) {
-      let vast = single.media.media.video.ad_url.pc;
-      let adUrl = vast !== '' ? vast + Date.now() : '';
-      let videoId='content_video_'+single.id;
-      let player = videojs(videoId);
-      let option = {
-        id: videoId,
-        adTagUrl: adUrl
-      };
-      player.ima(option);
-
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
-      /*var adContainer = document.getElementById('content_video_ima-ad-container');
-      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');*/
-      player.one('click', function() {
-        player.play();
-      });
-
-
-      let url = single.media.video.url.hd;
-      player.one('play', function() {
-        let gaData = new GaData('ComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
-        Ga.add(gaData);
-      });
-      player.one('ended', function() {
-        let gaData = new GaData('ComponentSinglesArticleMedia.tracking', 'video', 'complete', url);
-        Ga.add(gaData);
-      });
-
-      var video=document.getElementById(videoId);
-
-      window.addEventListener('scroll', function () {
-
-          let videoHeight =  parseInt(Content.HD_HEIGHT);
-          var elemTop = video.getBoundingClientRect().top;
-          var elemBottom = video.getBoundingClientRect().bottom;
-
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-          if(isVisible){
-            //player.play();
-          }else {
-            player.pause();
-            player.ima.pauseAd();
-          }
-
-
-      }, false);
-      //window.addEventListener('resize', ComponentSinglesArticleMedia. checkScroll(video,player), false);
-    }
-
-  }
-
-
   /**
    * media_type: `image` の出力 `MediaImageNode` を使用します {@link MediaImageNode}
    * @param {SingleDae} single 記事データ

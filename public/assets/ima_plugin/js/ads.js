@@ -45,8 +45,7 @@ Ads.prototype.init = function() {
   var options = {
       id: 'content_video',
       adTagUrl: this.adsUrl,
-      nativeControlsForTouch: false,
-      showControlsForJSAds:false
+      nativeControlsForTouch: false
     };
   this.player.ima(options,
       this.bind(this, this.adsManagerLoadedCallback));
@@ -60,7 +59,7 @@ Ads.prototype.init = function() {
 Ads.prototype.createPlayer = function() {
   var dumbPlayer = document.createElement('video');
   dumbPlayer.id = 'content_video';
-  dumbPlayer.className = 'video-js vjs-default-skin vjs-big-play-centered';
+  dumbPlayer.className = 'video-js vjs-default-skin';
   dumbPlayer.setAttribute('width', this.widthVal);
   dumbPlayer.setAttribute('height', this.heightVal);
   dumbPlayer.setAttribute('poster', this.poster);
