@@ -176,4 +176,25 @@ render() {
 ```
 state プロパティを使用します。
 
+## event handler
+
+click 設定
+```
+constructor(props) {
+    super(props);
+    this.boundClick = this.clickHandler.bind(this);
+}
+clickHandler(event) {
+    event.preventDefault();
+}
+render() {
+    return (
+        <a href="#exaple" onClick={this.boundClick}>
+            クリック
+        </a>
+    );
+}
+```
+
+属性 `onClick` (`C`大文字)へ bind 済み関数を設定します 
 
