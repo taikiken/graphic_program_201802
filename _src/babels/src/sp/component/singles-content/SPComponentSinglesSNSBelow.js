@@ -17,6 +17,9 @@ import { MessageSNS } from '../../../app/const/MessageSNS';
 // React
 const React = self.React;
 
+/**
+ * mobile: single SNS 下部
+ */
 export class SPComponentSinglesSNSBelow extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
@@ -37,6 +40,10 @@ export class SPComponentSinglesSNSBelow extends React.Component {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link SPComponentSinglesSNSBelow.propTypes}
+   */
   constructor(props) {
     super(props);
     /**
@@ -57,6 +64,10 @@ export class SPComponentSinglesSNSBelow extends React.Component {
   updateSingle(single) {
     this.setState({ single });
   }
+  /**
+   * div.post-sns_lower
+   * @return {?XML} div.post-sns_lower
+   * */
   render() {
     const single = this.state.single;
     const url = single.url;
@@ -66,7 +77,7 @@ export class SPComponentSinglesSNSBelow extends React.Component {
     // output
     const title = single.title;
     return (
-      <div className="post-sns_lower">
+      <div className={`post-sns_lower post-sns_lower-${single.id}`}>
         <div className="post-sns-list">
           {/* Facebook */}
           <div className="post-sns-fixed">
