@@ -6,6 +6,7 @@
     1. エディター設定
     1. ES6
     1. React
+    1. JSDoc
 1. ESLint（チェックツール）
 1. task
 
@@ -36,43 +37,20 @@ babel {[babel]{https://babeljs.io/}} でコンパイルし
 
 ### React
 
-新規コードでは現在 deprecated になった `React.createClass` の使用を止めます。
+React.md {[React.md](React.md)}
 
-代わりに `React.Component` を継承した class を作成します
+### JSDoc
 
-@example
+JSDoc を記述します。（必須）
 
+ESDoc {[ESDoc](https://esdoc.org/)} 形式で記述します。
+
+ドキュメント出力
 ```
-const Reacr = self.React;
-
-export class ComponentExample extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-}
+npm run esdoc
 ```
 
-- 拡張子
-
-`.jsx` 推奨,
- `.js` 可
-
-- 名称
-
-接頭詞に `Component` 使用推奨
-
-@example
-```
-export class ComponentVideoPlayer extends React.Component {}
-export class ComponentSinglesArticle extends React.Component {}
-```
-
-- 階層  
-それぞれ以下の階層の任意の位置に配置します
-    - desktop
-    `babels/src/component`
-    - mobile
-    `babels/src/sp/component`
+`_src/babels/_docs` に出力します。
 
 ## ESLint（チェックツール）
 
