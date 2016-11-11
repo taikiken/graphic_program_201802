@@ -45,6 +45,8 @@ JSDoc を記述します。（必須）
 
 ESDoc {[ESDoc](https://esdoc.org/)} 形式で記述します。
 
+ESDoc document {[../../babels/Readme.md](../../babels/Readme.md#ESDoc)}
+
 ドキュメント出力
 ```
 npm run esdoc
