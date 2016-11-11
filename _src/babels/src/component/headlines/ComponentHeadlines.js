@@ -19,6 +19,7 @@ import { ComponentHeadlineArticle } from './ComponentHeadlineArticle';
 // app
 import { Empty } from '../../app/const/Empty';
 import { Message } from '../../app/const/Message';
+import { Ad } from '../../app/const/Ad';
 
 // data
 import { Safety } from '../../data/Safety';
@@ -31,12 +32,66 @@ const React = self.React;
  * @since 2016-09-17
  */
 export class ComponentHeadlines extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<ArticleDae>, callback: Function, home: boolean }} React props
+   */
+  static get propTypes() {
+    return {
+      // articles 配列を元にDomを作成する
+      list: React.PropTypes.array.isRequired,
+      callback: React.PropTypes.func.isRequired,
+      home: React.PropTypes.bool
+    };
+  }
+  /**
+   * defaultProps
+   * @return {{home: boolean}} React props
+   */
+  static get defaultProps() {
+    return {
+      home: false
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentHeadlines.propTypes}
    */
   constructor(props) {
     super(props);
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * マウント時に call され、View.DID_MOUNT を通知します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+    this.ad();
+  }
+  /**
+   * headline 6 件目の広告<br>
+   * `app/template/desktop/index.php`#line.27
+   * @since 2016-10-03
+   */
+  ad() {
+    const element = this.refs.sponsorLink;
+    if (!element) {
+      return;
+    }
+
+    const div = document.createElement('div');
+    let script = document.createElement( 'script' );
+    script.src = `${Ad.ssl()}/sdk/js/adg-script-loader.js?id=34481&targetID=adg_34481&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`;
+    div.appendChild(script);
+    element.appendChild(div);
   }
   /**
    * div.headline を出力します<br>
@@ -78,63 +133,11 @@ export class ComponentHeadlines extends React.Component {
               );
             })
           }
+          <li className="board-item sponsor-link">
+            <div ref="sponsorLink"></div>
+          </li>
         </ul>
       </div>
     );
   }
-  /**
-   * マウント時に call され、View.DID_MOUNT を通知します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{list: Array<ArticleDae>, callback: Function, home: boolean }} React props
-   */
-  static get propTypes() {
-    return {
-      // articles 配列を元にDomを作成する
-      list: React.PropTypes.array.isRequired,
-      callback: React.PropTypes.func.isRequired,
-      home: React.PropTypes.bool
-    };
-  }
-  /**
-   * defaultProps
-   * @return {{home: boolean}} React props
-   */
-  static get defaultProps() {
-    return {
-      home: false
-    };
-  }
 }
-//
-// /**
-//  * プロパティ
-//  * @type {{
-//  *  list: Array<ArticleDae>,
-//  *  callback: Function,
-//  *  home: boolean
-//  * }}
-//  */
-// ComponentHeadlines.propTypes = {
-//   // articles 配列を元にDomを作成する
-//   list: React.PropTypes.array.isRequired,
-//   callback: React.PropTypes.func.isRequired,
-//   home: React.PropTypes.bool
-// };
-//
-// /**
-//  * デフォルトプロパティ
-//  * @type {{
-//  *  home: boolean
-//  * }}
-//  */
-// ComponentHeadlines.defaultProps = {
-//   home: false
-// };
