@@ -17,6 +17,9 @@ import { MessageSNS } from '../../../app/const/MessageSNS';
 // React
 const React = self.React;
 
+/**
+ * mobile: 記事詳細・次の記事一覧 SNS 上部
+ */
 export class SPComponentSinglesSNSAbove extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
