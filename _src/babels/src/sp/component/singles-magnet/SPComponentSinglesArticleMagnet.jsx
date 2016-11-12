@@ -43,6 +43,10 @@ import { Page } from '../../../singles/head/Page';
 
 // snap
 import { Snap } from '../../../ui/Snap';
+
+// sp/ui
+import { SPSnap } from '../../ui/SPSnap';
+
 // --------------------
 
 // from desktop
@@ -158,7 +162,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
   componentDidMount() {
     if (this.hit === null && this.singlesArticle !== null) {
       // snap
-      const snap = new Snap(this.singlesArticle, false, this.page);
+      const snap = new SPSnap(this.singlesArticle, false, this.page);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();
@@ -264,7 +268,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     }
 
     return (
-      <div className="loaded-post" ref={
+      <div className={`loaded-post loaded-post-${single.id}`} ref={
         (component) => {
           this.singlesArticle = component;
         }}
@@ -309,7 +313,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
           <SPComponentSInglesArticleSwitch
             single={single}
             sign={this.state.sign}
-            index={this.props.index}
+            index={this.state.index}
           />
         </div>
       </div>

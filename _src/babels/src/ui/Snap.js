@@ -20,6 +20,9 @@ import { Hit } from '../ui/Hit';
 import { Scroll } from '../util/Scroll';
 import { TopButton } from '../ui/button/TopButton';
 
+// util
+import { Elements } from '../util/Elements';
+
 /**
  * snap scroll を実現します
  * @since 2016-10-29
@@ -41,6 +44,11 @@ export class Snap extends EventDispatcher {
      * @type {Element}
      */
     this.element = element;
+    /**
+     * element を Elements instance にします
+     * @type {Elements}
+     */
+    this.elements = new Elements(element);
     /**
      * scroll 中 flag
      * @type {boolean}
@@ -254,14 +262,21 @@ export class Snap extends EventDispatcher {
     }
     // ---------------------------
     // scroll animation
-    console.log('***magnet************************', top, this.scrolling, this.returnHome);
+    console.log('***magnet************************', top, this.scrollOffset(), this.scrolling, this.returnHome);
     // scroll animation 開始(snap)
     if (!this.returnHome) {
       this.scrolling = true;
-      Scroll.motion(top, 0.16, 0, false, this.boundComplete);
+      Scroll.motion(top - this.scrollOffset(), 0.16, 0, false, this.boundComplete);
       // スクロール操作を不能にします
       Scroll.disable();
     }
+  }
+  /**
+   * top 位置に + するオフセット値
+   * @return {number} top 位置に + するオフセット値
+   */
+  scrollOffset() {
+    return 0;
   }
   /**
    * scroll animation 完了 callback<br>

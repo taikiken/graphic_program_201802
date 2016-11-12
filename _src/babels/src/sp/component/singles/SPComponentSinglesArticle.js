@@ -86,7 +86,7 @@ export class SPComponentSinglesArticle extends React.Component {
     }
 
     return (
-      <div className="loaded-post" ref="singlesArticle">
+      <div className={`loaded-post loaded-post-${single.id}`} ref="singlesArticle">
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
           {/*
