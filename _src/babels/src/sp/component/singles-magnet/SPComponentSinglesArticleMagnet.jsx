@@ -11,7 +11,7 @@
  */
 
 // app
-import { Message } from '../../../app/const/Message';
+// import { Message } from '../../../app/const/Message';
 
 // sp/node
 // import { SPMediaNode } from '../../node/single/SPMediaNode';
@@ -46,7 +46,10 @@ import { Snap } from '../../../ui/Snap';
 // --------------------
 
 // from desktop
-import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
+// import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
+
+// sp/component/singles-magnet
+import { SPComponentSInglesArticleSwitch } from './SPComponentSInglesArticleSwitch';
 
 // React
 const React = self.React;
@@ -303,13 +306,11 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
             />
           </div>
           {/* 本文 */}
-          <div className="post-content">
-            <p>{single.description}</p>
-          </div>
-          {/* link */}
-          <div className="post-content-read-more">
-            <a href={single.url} className="post-content-btn-readMore">{Message.READ_MORE}</a>
-          </div>
+          <SPComponentSInglesArticleSwitch
+            single={single}
+            sign={this.state.sign}
+            index={this.props.index}
+          />
         </div>
       </div>
     );
