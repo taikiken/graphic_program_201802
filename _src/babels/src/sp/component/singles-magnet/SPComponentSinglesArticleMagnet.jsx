@@ -111,7 +111,8 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
      * */
     this.state = {
       single: props.single,
-      sign: props.sign
+      sign: props.sign,
+      index: props.index
     };
 
     /**

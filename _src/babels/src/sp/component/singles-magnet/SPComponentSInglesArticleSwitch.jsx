@@ -117,10 +117,8 @@ export class SPComponentSInglesArticleSwitch extends React.Component {
           index={this.state.index}
         />
         {/* link */}
-        <div className="btn-readmore">
-          <a href={single.url} className="btn-readmore-link" onClick={this.boundClick}>
-            <span className="btn-readmore-label">{Message.READ_MORE}</span>
-          </a>
+        <div className="post-content-read-more">
+          <a href={single.url} className="post-content-btn-readMore" onClick={this.boundClick}>{Message.READ_MORE}</a>
         </div>
       </div>
     );

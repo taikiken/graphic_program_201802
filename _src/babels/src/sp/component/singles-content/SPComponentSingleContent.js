@@ -15,10 +15,14 @@ import { SPComponentSinglesSNSAbove } from './SPComponentSinglesSNSAbove';
 import { SPComponentSinglesSNSBelow } from './SPComponentSinglesSNSBelow';
 import { SPComponentSingleComments } from './SPComponentSingleComments';
 
+
 // component/singles-content
 import { ComponentSinglePost } from '../../../component/singles-content/ComponentSinglePost';
 import { ComponentSingleAd } from '../../../component/singles-content/ComponentSingleAd';
 import { ComponentSingleProvider } from '../../../component/singles-content/ComponentSingleProvider';
+
+// component/singles
+import { ComponentSingleFooter } from '../../../component/singles/ComponentSingleFooter';
 
 // util
 import { Fb } from '../../../util/Fb';
@@ -105,10 +109,12 @@ export class SPComponentSingleContent extends React.Component {
           single={single}
           index={index}
         />
+        {/*
         <ComponentSingleAd
           ad={single.ad.pc}
           index={index}
         />
+       */}
         <SPComponentSingleComments
           single={single}
           index={index}

@@ -13,6 +13,9 @@
 // app
 import { Url } from '../../../app/const/Url';
 
+// ui / snap
+import { SPSnap } from '../../ui/SPSnap';
+
 // React
 const React = self.React;
 
@@ -22,6 +25,44 @@ const React = self.React;
  * @since 2016-09-28
  */
 export class SPComponentSinglesWidgetRelated extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * プロパティ
+   * @return {{index: number, strong: boolean}} React.props
+   */
+  static get propTypes() {
+    return {
+      // 記事表示順序
+      index: React.PropTypes.number.isRequired,
+      // 記事出力順番に関係なく出力するかのフラッグ
+      strong: React.PropTypes.bool.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * React dom へ script tag を appendChild します
+   * @param {Element} element appendChild する親 Element
+   */
+  static insert(element) {
+    element.innerHTML = '';
+
+    const div = document.createElement('div');
+    const syn = document.createElement('script');
+    syn.src = Url.synExtension();
+    const so = document.createElement('script');
+    so.src = Url.soDmp();
+    div.appendChild(syn);
+    div.appendChild(so);
+
+    element.appendChild(div);
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link SPComponentSinglesWidgetRelated.propTypes}
@@ -35,6 +76,55 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
     this.state = {
       index: props.index
     };
+
+    this.target = null;
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * delegate, マウント後に呼び出され script tag をインサートします
+   * */
+  componentDidMount() {
+    if (!!this.refs.related) {
+      SPComponentSinglesWidgetRelated.insert(this.refs.related);
+    }
+    // snap
+    const snap = new SPSnap(this.target);
+    snap.init();
+  }
+  /**
+   * state.index 情報を更新し再描画します
+   * @param {number} index state.index
+   */
+  updateIndex(index) {
+    this.setState({ index });
+  }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
+  reload() {
+    this.updateIndex(this.state.index);
+  }
+  /**
+   * 関連記事一覧 `div.singles-related-containers` を出力します
+   * @return {XML} 関連記事一覧 `div.singles-related-containers`
+   */
+  build() {
+    // AJAX 取得データ出力コンテナを用意
+    return (
+      <div className={`singles-recommend-containers singles-recommend-containers-${this.props.index}`}>
+        <div
+          id="logly-lift-4247222"
+          className="recommend_articles"
+          ref={(component) => {
+            this.target = component;
+          }}
+        />
+        <div className="singles-related-scripts" ref="related" />
+      </div>
+    );
   }
   /**
    * state.index が 6 あるいは strong: true の時に<br>
@@ -57,76 +147,6 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
       return null;
     }
 
-    return SPComponentSinglesWidgetRelated.build();
-  }
-  /**
-   * delegate, マウント後に呼び出され script tag をインサートします
-   * */
-  componentDidMount() {
-    if (!!this.refs.related) {
-      SPComponentSinglesWidgetRelated.insert(this.refs.related);
-    }
-  }
-  /**
-   * state.index 情報を更新し再描画します
-   * @param {number} index state.index
-   */
-  updateIndex(index) {
-    this.setState({ index });
-  }
-  /**
-   * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
-   */
-  reload() {
-    this.updateIndex(this.state.index);
-  }
-  // ---------------------------------------------------
-  //  STATIC METHOD
-  // ---------------------------------------------------
-  /**
-   * 関連記事一覧 `div.singles-related-containers` を出力します
-   * @return {XML} 関連記事一覧 `div.singles-related-containers`
-   */
-  static build() {
-    // AJAX 取得データ出力コンテナを用意
-    return (
-      <div className="singles-recommend-containers">
-        <div id="logly-lift-4247222" className="recommend_articles" />
-        <div className="singles-related-scripts" ref="related" />
-      </div>
-    );
-  }
-  /**
-   * React dom へ script tag を appendChild します
-   * @param {Element} element appendChild する親 Element
-   */
-  static insert(element) {
-    element.innerHTML = '';
-
-    const div = document.createElement('div');
-    const syn = document.createElement('script');
-    syn.src = Url.synExtension();
-    const so = document.createElement('script');
-    so.src = Url.soDmp();
-    div.appendChild(syn);
-    div.appendChild(so);
-
-    element.appendChild(div);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * プロパティ
-   * @return {{index: number, strong: boolean}} React.props
-   */
-  static get propTypes() {
-    return {
-      // 記事表示順序
-      index: React.PropTypes.number.isRequired,
-      // 記事出力順番に関係なく出力するかのフラッグ
-      strong: React.PropTypes.bool.isRequired
-    };
+    return this.build();
   }
 }

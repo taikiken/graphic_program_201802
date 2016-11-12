@@ -13,7 +13,6 @@
 // app
 import { Url } from '../../app/const/Url';
 
-
 // ui / snap
 import { Snap } from '../../ui/Snap';
 
@@ -89,13 +88,9 @@ export class ComponentSinglesWidgetRelated extends React.Component {
       ComponentSinglesWidgetRelated.insert(this.refs.related);
       // snap
       const snap = new Snap(this.refs.related);
-      // snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.init();
     }
   }
-  // onSnap() {
-  //   console.log('postList_related snap', this.props.index);
-  // }
   /**
    * 関連記事一覧 `div.singles-related-containers` を出力します
    * @return {XML} 関連記事一覧 `div.singles-related-containers`
