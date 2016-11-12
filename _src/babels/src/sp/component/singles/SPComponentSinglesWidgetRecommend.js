@@ -97,6 +97,10 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
   build() {
     // @type {Array<SingleDae>}
     const articles = this.state.single.recommendArticles;
+    // not array, 空配列 null を返します
+    if (!Array.isArray(articles) || articles.length === 0) {
+      return null;
+    }
 
     return (
       <div
