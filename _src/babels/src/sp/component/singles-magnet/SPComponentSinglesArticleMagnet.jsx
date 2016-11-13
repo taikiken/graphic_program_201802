@@ -23,7 +23,7 @@ import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
 import { ComponentCategoryLabelsLink } from '../../../component/categories/ComponentCategoryLabelsLink';
 
 // sp/component.singles
-import { SPComponentSinglesArticleMedia } from '../singles/SPComponentSinglesArticleMedia';
+// import { SPComponentSinglesArticleMedia } from '../singles/SPComponentSinglesArticleMedia';
 
 // ui
 import { Hit } from '../../../ui/Hit';

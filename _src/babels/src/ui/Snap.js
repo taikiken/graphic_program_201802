@@ -208,8 +208,8 @@ export class Snap extends EventDispatcher {
     // 判定開始
     // @type {ClientRect} - div.loaded-post ClientRect
     const offset = events.rect;
-    const scrollEvents = events.events;
-    const y = scrollEvents.y;
+    // const scrollEvents = events.events;
+    // const y = scrollEvents.y;
     const top = offset.top;
     // 閾値チェック
     if (Math.abs(top) <= this.threshold && top > 0) {

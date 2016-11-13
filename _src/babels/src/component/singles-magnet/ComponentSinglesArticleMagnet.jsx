@@ -21,7 +21,7 @@ import { MediaNode } from '../../node/single/MediaNode';
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
 
 // component/singles
-import { ComponentSinglesArticleMedia } from '../singles/ComponentSinglesArticleMedia';
+// import { ComponentSinglesArticleMedia } from '../singles/ComponentSinglesArticleMedia';
 
 // since 2016-11-04
 import { ComponentSinglesArticleSwitch } from './ComponentSinglesArticleSwitch';
