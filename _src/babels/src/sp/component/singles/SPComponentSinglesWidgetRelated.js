@@ -135,7 +135,7 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
     const props = this.props;
 
     if (props.strong) {
-      return SPComponentSinglesWidgetRelated.build();
+      return this.build();
     }
 
     // 0 始まり index を
