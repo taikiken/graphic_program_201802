@@ -339,7 +339,7 @@ export let SPArchiveNode = React.createClass( {
     // ストリーム広告
     adSp: React.PropTypes.string.isRequired
   },
-  getDefaultPropTypes: function() {
+  getDefaultProps: function() {
     return {
       moreButton: function() {},
       home: false

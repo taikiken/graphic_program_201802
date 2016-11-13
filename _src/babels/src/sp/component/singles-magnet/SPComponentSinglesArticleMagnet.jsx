@@ -14,7 +14,7 @@
 // import { Message } from '../../../app/const/Message';
 
 // sp/node
-// import { SPMediaNode } from '../../node/single/SPMediaNode';
+import { SPMediaNode } from '../../node/single/SPMediaNode';
 
 // node
 import { BookmarkNode } from '../../../node/bookmark/BookmarkNode';
@@ -276,17 +276,18 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
       >
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
-          {/*
           <SPMediaNode
             articleId={String(single.id)}
             mediaType={single.mediaType}
             media={single.media}
             isShowImage={single.isShowImage}
+            index={this.state.index}
           />
-          */}
-          <SPComponentSinglesArticleMedia
+          {/*
+           <SPComponentSinglesArticleMedia
             single={single}
           />
+           */}
         </div>
         <div className="post-detail">
           {/* title */}

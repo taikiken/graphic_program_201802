@@ -15,7 +15,7 @@
 
 // node
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
-// import { MediaNode } from '../../node/single/MediaNode';
+import { MediaNode } from '../../node/single/MediaNode';
 
 // component/categories
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
@@ -120,7 +120,8 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * */
     this.state = {
       single: props.single,
-      sign: props.sign
+      sign: props.sign,
+      index: props.index
     };
 
     /**
@@ -318,17 +319,18 @@ export class ComponentSinglesArticleMagnet extends React.Component {
             </div>
           </div>
           {/* media */}
-          {/*
            <MediaNode
-           articleId={String(single.id)}
-           mediaType={single.mediaType}
-           media={single.media}
-           isShowImage={single.isShowImage}
+             articleId={String(single.id)}
+             mediaType={single.mediaType}
+             media={single.media}
+             isShowImage={single.isShowImage}
+             index={this.state.index}
            />
-           */}
+          {/*
           <ComponentSinglesArticleMedia
             single={single}
           />
+           */}
           {/* 本文 */}
           <ComponentSinglesArticleSwitch
             single={single}

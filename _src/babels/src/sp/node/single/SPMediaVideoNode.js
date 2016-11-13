@@ -10,15 +10,23 @@
  *
  */
 
-
+// app
 import {Empty} from '../../../app/const/Empty';
 import {VideoType} from '../../../app/const/VideoType';
 import {Content} from '../../../app/const/Content';
+
+// data
 import {Safety} from '../../../data/Safety';
 
 // node
 import {HTML5VideoNode} from '../../../node/media/HTML5VideoNode';
 import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
+
+// ---
+// @since 2016-11-13
+// component
+import { ComponentVideojsIma } from '../../../component/media/ComponentVideojsIma';
+// ---
 
 // React
 let React = self.React;
@@ -88,8 +96,24 @@ export let SPMediaVideoNode = React.createClass( {
     let caption = video.caption || '';
     let poster = Safety.image( images.medium, Empty.VIDEO_THUMBNAIL );
 
+    // props.index で出力 class を切替えます
+    // 次の記事一覧で動画を表示するために
+    // @since 2016-11-13
+    if (this.props.index < 0) {
+      // 記事詳細先頭
+      return (
+        <VideojsImaNode
+          articleId={this.props.articleId}
+          video={video}
+          poster={poster}
+          caption={caption}
+          playImage={Empty.VIDEO_PLAY}
+        />
+      );
+    }
+    // 次の記事一覧
     return (
-      <VideojsImaNode
+      <ComponentVideojsIma
         articleId={this.props.articleId}
         video={video}
         poster={poster}
