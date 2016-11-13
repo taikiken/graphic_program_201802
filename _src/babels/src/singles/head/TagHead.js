@@ -107,7 +107,12 @@ export class TagHead {
     const description = page.description();
     const url = page.url();
     // title
-    const title = this.title().set(page.title(), page.label());
+    // https://github.com/undotsushin/undotsushin/issues/1329
+    // og:titleの出力を記事タイトルだけにする #1329
+    // らしいので og, twitter を記事タイトルだけにします
+    // @change 2016-11-13
+    const title = page.title();
+    this.title().set(page.title(), page.label());
     // description
     this.description().set(description);
     // canonical
