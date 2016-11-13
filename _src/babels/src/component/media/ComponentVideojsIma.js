@@ -179,12 +179,19 @@ export class ComponentVideojsIma extends React.Component {
     if (player === null || video === null) {
       return;
     }
-    const videoHeight = parseInt(Content.HD_HEIGHT, 10);
+    const videoWidth = this.phone ? window.innerWidth : 0;
+    const videoHeight = this.phone ? Math.ceil(videoWidth / 16 * 9) : parseInt(Content.HD_HEIGHT, 10);
     const rect = video.getBoundingClientRect();
     const elemTop = rect.top;
     const elemBottom = rect.bottom;
 
-    const isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
+    let isVisible = false;
+    if (this.phone) {
+      isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight + videoHeight / 2);
+    } else {
+      isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
+    }
+    // const isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
     if(!isVisible) {
       player.pause();
       player.ima.pauseAd();
@@ -200,6 +207,7 @@ export class ComponentVideojsIma extends React.Component {
   ga(player) {
     const video = this.props.video;
     const url = this.mobile ? video.url.sd : video.url.hd;
+    // bind
     player.one('play', function() {
       let gaData = new GaData('ComponentVideojsIma.initPlayer', 'video', 'begin', url);
       Ga.add(gaData);
