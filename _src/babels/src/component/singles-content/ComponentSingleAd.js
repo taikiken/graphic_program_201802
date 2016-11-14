@@ -143,7 +143,6 @@ export class ComponentSingleAd extends React.Component {
     const ad = this.state.ad;
     const left = ad.singleBottomLeft;
     const right = ad.singleBottomRight;
-    console.log('ad', ad);
     if (!left && !right) {
       return null;
     }

@@ -20,6 +20,9 @@ import { SPViewComments } from '../../view/SPViewComments';
 import { User } from '../../../app/User';
 import { CommentsType } from '../../../app/const/CommentsType';
 
+// ad
+import { SPComponentSinglesAdBelow } from './SPComponentSinglesAdBelow';
+
 // React
 const React = self.React;
 
@@ -147,6 +150,10 @@ export class SPComponentSingleComments extends React.Component {
         <div className="comment-self-container" ref="commentSelf" />
         <div className="comment-official-container" ref="commentOfficial" />
         <div className="comment-normal-container" ref="commentNormal" />
+        <SPComponentSinglesAdBelow
+          ad={this.state.single.ad}
+          index={this.state.index}
+        />
         <div className="comment-form-container" ref="commentForm" />
       </div>
     );
