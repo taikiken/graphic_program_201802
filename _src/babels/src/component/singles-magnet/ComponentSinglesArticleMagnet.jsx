@@ -66,6 +66,8 @@ const React = self.React;
  *
  * コンテナが画面内に現れたら ga 送信を行います {@link Ga.single}
  *
+ * 2秒以上見た記事だけ、計測イベントを送信したい に変更されたので待機機能を追加します
+ * @see https://github.com/undotsushin/undotsushin/issues/1274
  * ```
  * <ComponentSinglesArticleMagnet/>
  *  <ComponentCategoryLabelsLink/>
@@ -84,6 +86,8 @@ const React = self.React;
  * @see https://github.com/undotsushin/undotsushin/issues/1201
  * @see https://github.com/undotsushin/undotsushin/issues/1224
  * @since 2016-10-28
+ *
+ * @since 2016-11-14 wait ga send
  */
 export class ComponentSinglesArticleMagnet extends React.Component {
   // ---------------------------------------------------
@@ -128,18 +132,44 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * Hit instance, コンテナがブラウザウインドウ内に表示されているかを調べます<br>
      * ウインドウ内で top が +- 50px 以内だと Ga tag 送信します
      * @type {?Hit}
+     * @default null
      */
     this.hit = null;
     /**
-     * bind 済み onHit
+     * bind 済み hitIn, Hit.COLLISION event handler
      * @type {Function}
      */
-    this.boundHit = this.onHit.bind(this);
+    this.boundIn = this.hitIn.bind(this);
     /**
      * Ga tag 送信済みフラッグ
      * @type {boolean}
+     * @default false
      */
     this.sended = false;
+    // ---
+    // @see https://github.com/undotsushin/undotsushin/issues/1274
+    // 2秒以上見た記事だけ、計測イベントを送信したい
+    // @since 2016-11-14
+    /**
+     * bound hitOut, Hit.NO_COLLISION event handler
+     * @type {Function}
+     * @since 2016-11-14
+     */
+    this.boundOut = this.hitOut.bind(this);
+    /**
+     * 送信予約フラッグ
+     * @type {boolean}
+     * @default false
+     * @since 2016-11-14
+     */
+    this.waiting = false;
+    /**
+     * 遅延タイマーID
+     * @type {number}
+     * @default 0
+     * @since 2016-11-14
+     */
+    this.timer = 0;
     // ---
     /**
      * SPA のための管理クラス
@@ -180,7 +210,8 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       // -- [hit]
       const hit = new Hit(this.singlesArticle);
       this.hit = hit;
-      hit.on(Hit.COLLISION, this.boundHit);
+      hit.on(Hit.COLLISION, this.boundIn);
+      hit.on(Hit.NO_COLLISION, this.boundOut);
       hit.start();
     }
   }
@@ -210,21 +241,55 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   /**
    * Hit.COLLISION event handler<br>
    * ウインドウ内にコンテナが表示された時に通知されます<br>
-   * コンテナ top が +- 50px 以内だと Ga tag 送信します
+   * コンテナ top が +- 50px 以内だと Ga tag 送信「予約」します
    * @param {{
    *  rect: ClientRect,
    *  events: object,
    *  type: string
    * }} events Hit events
    */
-  onHit(events) {
+  hitIn(events) {
     const rect = events.rect;
     const top = rect.top;
 
     // 近接 50px 以内で ga 送信します
     if (Math.abs(top) <= 50) {
-      this.ga();
+      // 予約します
+      // @since 2016-11-14
+      this.reserve();
     }
+  }
+  /**
+   * Hit.NO_COLLISION event handler<br>
+   * 遅延待機をキャンセルします
+   * @since 2016-11-14
+   */
+  hitOut() {
+    this.cancel();
+  }
+  /**
+   * 2秒後に ga 送信する予約を行います
+   * @since 2016-11-14
+   */
+  reserve() {
+    if (this.sended || this.waiting) {
+      return;
+    }
+    this.waiting = true;
+    this.timer = setTimeout(() => {
+      this.ga();
+    }, 1000 * 2);
+  }
+  /**
+   * 表示されなくなったので ga 送信をキャンセルします
+   * @since 2016-11-14
+   */
+  cancel() {
+    if (this.sended) {
+      return;
+    }
+    clearTimeout(this.timer);
+    this.waiting = false;
   }
   /**
    * ga 送信
@@ -238,10 +303,10 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     this.sended = true;
     // send
     const single = this.state.single;
-    Ga.single(single, 'ComponentSinglesArticle.onHit');
+    Ga.single(single, 'ComponentSinglesArticle.ga');
     // ---------------------
     // https://github.com/undotsushin/undotsushin/issues/1151
-    Ga.addPage(single.id, 'ComponentSinglesArticle.onHit');
+    Ga.addPage(single.id, 'ComponentSinglesArticle.ga');
     // ---------------------
     this.dispose();
   }
@@ -251,7 +316,8 @@ export class ComponentSinglesArticleMagnet extends React.Component {
   dispose() {
     const hit = this.hit;
     if (hit !== null) {
-      hit.off(Hit.COLLISION, this.boundHit);
+      hit.off(Hit.COLLISION, this.boundIn);
+      hit.off(Hit.NO_COLLISION, this.boundOut);
     }
   }
   // --------------------------------------------------
