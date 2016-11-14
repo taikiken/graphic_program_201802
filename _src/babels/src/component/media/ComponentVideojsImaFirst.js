@@ -23,7 +23,28 @@ const Sagen = self.Sagen;
 // React
 const React = self.React;
 
+/**
+ * alias VideojsImaNode
+ *
+ * 記事詳細・先頭の動画
+ *
+ * 画面から見切れたら動画再生を止める
+ * @since 2016-11-14
+ */
 export class ComponentVideojsImaFirst extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   * articleId: string,
+   * video: VideoDae,
+   * poster: string,
+   * caption: string,
+   * playImage: string
+   * }} React props
+   */
   static get propTypes() {
     return {
       // @type {string} - 記事ID
@@ -43,7 +64,7 @@ export class ComponentVideojsImaFirst extends React.Component {
   // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentVideojsIma.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentVideojsImaFirst.propTypes}
    */
   constructor(props) {
     super(props);
@@ -77,16 +98,24 @@ export class ComponentVideojsImaFirst extends React.Component {
      * @type {boolean}
      */
     this.ipad = Sagen.Browser.iOS.iPad();
-
+    /**
+     * 再生中フラッグ
+     * @type {boolean}
+     */
     this.playing = false;
   }
+  /**
+   * マウント後に表示プレイヤーの初期化を行います
+   */
   componentDidMount() {
     this.preparePlayer();
   }
+  /**
+   * videojs の存在チェックを行い各OSタイプの初期化を行います
+   */
   preparePlayer() {
     const videojs = self.videojs;
-    const Ads = self.Ads;
-    if (!videojs || !Ads) {
+    if (!videojs) {
       setTimeout(() => {
         this.preparePlayer();
       }, 25);
@@ -94,6 +123,9 @@ export class ComponentVideojsImaFirst extends React.Component {
     }
     this.initPlayer();
   }
+  /**
+   * 各OSタイプの初期化を行います
+   */
   initPlayer() {
     const videojs = self.videojs;
     // const Ads = self.Ads;
@@ -128,6 +160,7 @@ export class ComponentVideojsImaFirst extends React.Component {
       this.iPadInitPlayer();
       return;
     }
+    console.log('may be android', this.mobile, this.ipad);
     // may be android
     player.one('click', function() {
       player.ima.initializeAdDisplayContainer();
@@ -135,7 +168,12 @@ export class ComponentVideojsImaFirst extends React.Component {
       player.play();
     });
   }
+
+  /**
+   * desktop プレイヤー初期化（自動再生）
+   */
   pcInitPlayer() {
+    console.log('pcInitPlayer');
     const player = this.player;
     document.querySelector('.vjs-big-play-button')
       .setAttribute('style', 'display:none !important;');
@@ -143,9 +181,18 @@ export class ComponentVideojsImaFirst extends React.Component {
     player.ima.requestAds();
     player.play();
   }
+  /**
+   * iPhone プレイヤー初期化
+   */
   iPhoneInitPlayer() {
+    console.log('iPhoneInitPlayer');
     // const videojs = self.videojs;
     const Ads = self.Ads;
+    if (!Ads) {
+      setTimeout(() => {
+        this.iPadInitPlayer();
+      }, 25);
+    }
     const vast = this.props.video.adUrl.sp;
     const adUrl = vast !== '' ? vast + Date.now() : '';
 
@@ -165,7 +212,11 @@ export class ComponentVideojsImaFirst extends React.Component {
     this.videoElement = videoElement;
     this.bindEvent(videoElement);
   }
+  /**
+   * iPad プリヤー初期化
+   */
   iPadInitPlayer() {
+    console.log('iPadInitPlayer');
     const player = this.player;
     const videoElement = document.getElementById('content_video_html5_api');
     this.videoElement = videoElement;
@@ -182,21 +233,36 @@ export class ComponentVideojsImaFirst extends React.Component {
     });
   }
   hitOut() {
-
+    this.pause();
   }
+  pause() {
+    const player = this.player;
+    player.pause();
+    player.ima.pauseAd();
+  }
+  /**
+   * play / ended event を bind し ga tag 送信を行います
+   * @param {Element} videoElement video tag
+   */
   bindEvent(videoElement) {
-    videoElement.addEventListener('play', this.onPlay);
-    videoElement.addEventListener('ended', this.onEnded);
-    // videoElement.addEventListener('pause', this.onPause);
+    videoElement.addEventListener('play', this.onPlay.bind(this), false);
+    videoElement.addEventListener('ended', this.onEnded.bind(this), false);
+    // videoElement.addEventListener('pause', this.onPause.bind(this), false);
   }
+  /**
+   * 再生開始
+   */
   onPlay() {
     if (!this.playing) {
       this.playing = true;
       this.tracking('begin');
     }
   }
+  /**
+   * 再生終了
+   */
   onEnded() {
-    if ( this.playing ) {
+    if (this.playing) {
       this.playing = false;
       this.tracking('complete');
     }
@@ -204,12 +270,20 @@ export class ComponentVideojsImaFirst extends React.Component {
   // onPause() {
   //
   // }
+  /**
+   * ga tag を送信します
+   * @param {string} action begin / complete
+   */
   tracking(action) {
     const video = this.props.video;
     const url = this.mobile ? video.url.sd : video.url.hd;
     const gaData = new GaData('ComponentVideojsImaFirst.tracking', 'video', action, url);
     Ga.add( gaData );
   }
+  /**
+   * video tag とそのラップタグを作成します
+   * @return {XML} video tag とそのラップタグ
+   */
   render() {
     // ios
     if (this.iphone) {

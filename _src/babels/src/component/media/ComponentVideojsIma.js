@@ -151,8 +151,10 @@ export class ComponentVideojsIma extends React.Component {
 
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
-    /*var adContainer = document.getElementById('content_video_ima-ad-container');
-     adContainer.setAttribute('style', 'z-index: -1; position: absolute;');*/
+    /*
+     var adContainer = document.getElementById('content_video_ima-ad-container');
+     adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+     */
     player.one('click', function() {
       player.play();
     });
