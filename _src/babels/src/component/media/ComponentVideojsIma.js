@@ -11,18 +11,14 @@
  */
 
 // app
-import {Content} from '../../app/const/Content';
+import { Content } from '../../app/const/Content';
 
 // ga
-import {GaData} from '../../ga/GaData';
-import {Ga} from '../../ga/Ga';
+import { GaData } from '../../ga/GaData';
+import { Ga } from '../../ga/Ga';
 
 // Sagen
 const Sagen = self.Sagen;
-
-// about videojs
-// const Ads = self.Ads;
-// const videojs = self.videojs;
 
 // React
 const React = self.React;
