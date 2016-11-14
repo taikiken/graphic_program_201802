@@ -121,16 +121,40 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
      */
     this.hit = null;
     /**
-     * bind 済み onHit, Hit.COLLISION event handler
+     * bind 済み hitIn, Hit.COLLISION event handler
      * @type {function}
      */
-    this.boundHit = this.onHit.bind(this);
+    this.boundIn = this.hitIn.bind(this);
     /**
      * Ga tag 送信済みフラッグ
      * @type {boolean}
      * @default false
      */
     this.sended = false;
+    // ---
+    // @see https://github.com/undotsushin/undotsushin/issues/1274
+    // 2秒以上見た記事だけ、計測イベントを送信したい
+    // @since 2016-11-14
+    /**
+     * bound hitOut, Hit.NO_COLLISION event handler
+     * @type {Function}
+     * @since 2016-11-14
+     */
+    this.boundOut = this.hitOut.bind(this);
+    /**
+     * 送信予約フラッグ
+     * @type {boolean}
+     * @default false
+     * @since 2016-11-14
+     */
+    this.waiting = false;
+    /**
+     * 遅延タイマーID
+     * @type {number}
+     * @default 0
+     * @since 2016-11-14
+     */
+    this.timer = 0;
     // ---
     /**
      * SPA のための管理クラス
@@ -170,7 +194,8 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
       // -- [hit]
       const hit = new Hit(this.singlesArticle);
       this.hit = hit;
-      hit.on(Hit.COLLISION, this.boundHit);
+      hit.on(Hit.COLLISION, this.boundIn);
+      hit.on(Hit.NO_COLLISION, this.boundOut);
       hit.start();
     }
   }
@@ -200,14 +225,48 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
    * Hit.COLLISION event handler
    * @param {Object} events Hit.COLLISION event object
    */
-  onHit(events) {
+  hitIn(events) {
     const rect = events.rect;
     const top = rect.top;
 
     // 近接 50px 以内で ga 送信します
     if (Math.abs(top) <= 50) {
-      this.ga();
+      // 予約します
+      // @since 2016-11-14
+      this.reserve();
     }
+  }
+  /**
+   * Hit.NO_COLLISION event handler<br>
+   * 遅延待機をキャンセルします
+   * @since 2016-11-14
+   */
+  hitOut() {
+    this.cancel();
+  }
+  /**
+   * 2秒後に ga 送信する予約を行います
+   * @since 2016-11-14
+   */
+  reserve() {
+    if (this.sended || this.waiting) {
+      return;
+    }
+    this.waiting = true;
+    this.timer = setTimeout(() => {
+      this.ga();
+    }, 1000 * 2);
+  }
+  /**
+   * 表示されなくなったので ga 送信をキャンセルします
+   * @since 2016-11-14
+   */
+  cancel() {
+    if (this.sended) {
+      return;
+    }
+    clearTimeout(this.timer);
+    this.waiting = false;
   }
   /**
    * ga 送信
@@ -221,10 +280,10 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     this.sended = true;
     // send
     const single = this.state.single;
-    Ga.single(single, 'SPComponentSinglesArticle.onHit');
+    Ga.single(single, 'SPComponentSinglesArticle.hitIn');
     // ---------------------
     // https://github.com/undotsushin/undotsushin/issues/1151
-    Ga.addPage(single.id, 'SPComponentSinglesArticle.onHit');
+    Ga.addPage(single.id, 'SPComponentSinglesArticle.hitIn');
     // ---------------------
     this.dispose();
   }
@@ -234,7 +293,8 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
   dispose() {
     const hit = this.hit;
     if (hit !== null) {
-      hit.off(Hit.COLLISION, this.boundHit);
+      hit.off(Hit.COLLISION, this.boundIn);
+      hit.off(Hit.NO_COLLISION, this.boundOut);
     }
   }
   // --------------------------------------------------
