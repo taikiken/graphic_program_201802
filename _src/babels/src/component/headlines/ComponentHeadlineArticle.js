@@ -85,9 +85,15 @@ export class ComponentHeadlineArticle extends React.Component {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
-  static reduce(title, length = 20) {
+  /**
+   * 文字を切りつめます
+   * @param {string} title 対象文字
+   * @param {number} [length=35] 最長文字数
+   * @return {string} 最長文字数を超えたら `…` 三点リーダー付きで返します
+   */
+  static reduce(title, length = 35) {
     if (title.length > length) {
-      return `${title.substr(0, length-1)}&hellip;`;
+      return `${title.substr(0, length - 1)}…`;
     }
     return title;
   }
@@ -114,11 +120,18 @@ export class ComponentHeadlineArticle extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * マウント後に h3.height をチェックします
+   */
   componentDidMount() {
     if (this.h3 !== null) {
       this.titleLength();
     }
   }
+  /**
+   * h3.height が CSS.min-height を超えていたら<br>
+   * タイトル文字長をチェックし切りつめするかを決める
+   */
   titleLength() {
     const h3 = new Elements(this.h3);
     const minHeight = parseFloat(h3.style.get('minHeight'));
