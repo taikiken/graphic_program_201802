@@ -81,11 +81,13 @@ export class Ga {
    * 記事詳細・次の記事一覧・インビュー 送信予約
    * @param {number} id 記事 ID
    * @param {string} method 発生場所(関数)
+   * @param {string} [title=''] 記事タイトル
+   * @since 2016-11-15 title added
    */
-  static addPage(id, method):void {
+  static addPage(id, method, title = ''):void {
     const data = new GaData(method);
     data.hitType = Ga.PAGEVIEW;
-    data.setPage(id);
+    data.setPage(id, title);
     Ga.add(data);
   }
   /**
@@ -160,7 +162,11 @@ export class Ga {
    * @since 2016-10-05
    */
   static page(ga:Function, data:GaData) {
-    return ga('send', { hitType: data.hitType, page: data.page });
+    const sending = { hitType: data.hitType, page: data.page };
+    if (data.title !== '') {
+      sending.title = data.title;
+    }
+    return ga('send', sending);
   }
   /**
    * <p>記事詳細での提供元&カテゴリートラッキング</p>

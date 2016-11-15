@@ -74,15 +74,24 @@ export class GaData {
      * @since 2016-10-05
      */
     this.page = page;
+    /**
+     * 記事タイトル
+     * @type {string}
+     * @since 2016-11-15
+     * @see https://github.com/undotsushin/undotsushin/issues/1334#issuecomment-260300279
+     */
+    this.title = '';
   }
   /**
    * 記事 ID を `/p/__ARTICLE_ID__/` な形式に変換し `page` プロパティに保存します
    * @param {number} id 記事 ID
+   * @param {string} title 記事タイトル
    * @return {string} `/p/__ARTICLE_ID__/` 変換後文字列を返します
    */
-  setPage(id) {
+  setPage(id, title) {
     const page = `/p/${id}/`;
     this.page = page;
+    this.title = title;
     return page;
   }
   // ---------------------------------------------------
