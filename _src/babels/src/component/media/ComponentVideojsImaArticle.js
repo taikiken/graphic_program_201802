@@ -13,6 +13,9 @@
 // app
 import { Content } from '../../app/const/Content';
 
+// ui
+import { Hit } from '../../ui/Hit';
+
 // ga
 import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
@@ -31,7 +34,7 @@ const React = self.React;
  * 画面から見切れたら動画再生を止める
  * @since 2016-11-14
  */
-export class ComponentVideojsImaFirst extends React.Component {
+export class ComponentVideojsImaArticle extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -56,7 +59,9 @@ export class ComponentVideojsImaFirst extends React.Component {
       // - video caption
       caption: React.PropTypes.string.isRequired,
       // - play button image path
-      playImage: React.PropTypes.string.isRequired
+      playImage: React.PropTypes.string.isRequired,
+      // @type {number} - 表示順, -1: 先頭
+      index: React.PropTypes.number.isRequired
     };
   }
   // ---------------------------------------------------
@@ -64,7 +69,7 @@ export class ComponentVideojsImaFirst extends React.Component {
   // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentVideojsImaFirst.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentVideojsImaArticle.propTypes}
    */
   constructor(props) {
     super(props);
@@ -73,6 +78,11 @@ export class ComponentVideojsImaFirst extends React.Component {
      * @type {?Element}
      */
     this.videoElement = null;
+    /**
+     * div.mainContainer
+     * @type {?Element}
+     */
+    this.mainContainer = null;
     /**
      * only phone
      * @type {boolean}
@@ -103,13 +113,25 @@ export class ComponentVideojsImaFirst extends React.Component {
      * @type {boolean}
      */
     this.playing = false;
+    /**
+     * Hit instance
+     * @type {?Hit}
+     */
+    this.hit = null;
   }
   /**
    * マウント後に表示プレイヤーの初期化を行います
    */
   componentDidMount() {
     this.preparePlayer();
+    let hit = this.hit;
+    if (hit === null && this.videoElement !== null) {
+      hit = new Hit(this.videoElement);
+      this.hit = hit;
+      hit.on(Hit.NO_COLLISION, this.hitOut.bind(this));
+    }
   }
+
   /**
    * videojs の存在チェックを行い各OSタイプの初期化を行います
    */
@@ -144,8 +166,9 @@ export class ComponentVideojsImaFirst extends React.Component {
       adTagUrl: adUrl
     };
     player.ima(option);
-    player.on('play', function() {
-      document.querySelector('.vjs-big-play-button')
+    player.on('play', () => {
+      // document.querySelector('.vjs-big-play-button')
+      this.mainContainer.querySelector('.vjs-big-play-button')
         .setAttribute('style', 'display:none !important');
     });
     // set global
@@ -175,7 +198,8 @@ export class ComponentVideojsImaFirst extends React.Component {
   pcInitPlayer() {
     console.log('pcInitPlayer');
     const player = this.player;
-    document.querySelector('.vjs-big-play-button')
+    // document.querySelector('.vjs-big-play-button')
+    this.mainContainer.querySelector('.vjs-big-play-button')
       .setAttribute('style', 'display:none !important;');
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
@@ -205,11 +229,13 @@ export class ComponentVideojsImaFirst extends React.Component {
     );
 
     ads.init();
-    document.querySelector('.vjs-big-play-button')
+    // document.querySelector('.vjs-big-play-button')
+    this.mainContainer.querySelector('.vjs-big-play-button')
       .setAttribute('style', 'display:none !important');
 
-    const videoElement = document.getElementById('content_video_html5_api');
-    this.videoElement = videoElement;
+    // const videoElement = document.getElementById('content_video_html5_api');
+    const videoElement = this.videoElement;
+    // this.videoElement = videoElement;
     this.bindEvent(videoElement);
   }
   /**
@@ -218,13 +244,15 @@ export class ComponentVideojsImaFirst extends React.Component {
   iPadInitPlayer() {
     console.log('iPadInitPlayer');
     const player = this.player;
-    const videoElement = document.getElementById('content_video_html5_api');
-    this.videoElement = videoElement;
+    // const videoElement = document.getElementById('content_video_html5_api');
+    const videoElement = this.videoElement;
+    // this.videoElement = videoElement;
     this.bindEvent(videoElement);
 
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
-    const adContainer = document.getElementById('content_video_ima-ad-container');
+    // const adContainer = document.getElementById('content_video_ima-ad-container');
+    const adContainer = this.mainContainer.getElementById('content_video_ima-ad-container');
     adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
     player.one('click', function() {
       player.ima.initializeAdDisplayContainer();
@@ -237,8 +265,10 @@ export class ComponentVideojsImaFirst extends React.Component {
   }
   pause() {
     const player = this.player;
-    player.pause();
-    player.ima.pauseAd();
+    if (player) {
+      player.pause();
+      player.ima.pauseAd();
+    }
   }
   /**
    * play / ended event を bind し ga tag 送信を行います
@@ -277,7 +307,7 @@ export class ComponentVideojsImaFirst extends React.Component {
   tracking(action) {
     const video = this.props.video;
     const url = this.mobile ? video.url.sd : video.url.hd;
-    const gaData = new GaData('ComponentVideojsImaFirst.tracking', 'video', action, url);
+    const gaData = new GaData('ComponentVideojsImaArticle.tracking', 'video', action, url);
     Ga.add( gaData );
   }
   /**
@@ -302,7 +332,9 @@ export class ComponentVideojsImaFirst extends React.Component {
     const height = this.phone ? Math.ceil(width / 16 * 9) : Content.HD_HEIGHT;
     // not ios
     return (
-      <div id="mainContainer">
+      <div id="mainContainer" ref={(component) => {
+        this.mainContainer = component;
+      }}>
         <video
           id="content_video"
           className="video-js vjs-default-skin"

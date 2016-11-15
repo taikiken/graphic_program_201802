@@ -25,7 +25,7 @@ import {VideojsImaNode} from '../../../node/media/VideojsImaNode';
 // ---
 // @since 2016-11-13
 // component
-import { ComponentVideojsIma } from '../../../component/media/ComponentVideojsIma';
+import { ComponentVideojsImaSingles } from '../../../component/media/ComponentVideojsImaSingles';
 // ---
 
 // React
@@ -113,7 +113,7 @@ export let SPMediaVideoNode = React.createClass( {
     }
     // 次の記事一覧
     return (
-      <ComponentVideojsIma
+      <ComponentVideojsImaSingles
         articleId={this.props.articleId}
         video={video}
         poster={poster}

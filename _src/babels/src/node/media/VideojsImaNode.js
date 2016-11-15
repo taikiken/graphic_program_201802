@@ -31,7 +31,7 @@ let ReactDOM = self.ReactDOM;
 /**
  * <p>記事詳細上部動画 HTML5 video</p>
  * @type {ReactClass}
- * @deprecated instead use ComponentVideojsImaFirst
+ * @deprecated instead use ComponentVideojsImaArticle
  */
 export let VideojsImaNode = React.createClass( {
   propTypes: {

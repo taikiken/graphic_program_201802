@@ -35,7 +35,7 @@ const React = self.React;
  *
  * @since  2016-11-13
  */
-export class ComponentVideojsIma extends React.Component {
+export class ComponentVideojsImaSingles extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -78,7 +78,7 @@ export class ComponentVideojsIma extends React.Component {
   // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
-   * @param {Object} props React props プロパティー {@link ComponentVideojsIma.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentVideojsImaSingles.propTypes}
    */
   constructor(props) {
     super(props);
@@ -207,11 +207,11 @@ export class ComponentVideojsIma extends React.Component {
     const url = this.mobile ? video.url.sd : video.url.hd;
     // bind
     player.one('play', function() {
-      let gaData = new GaData('ComponentVideojsIma.initPlayer', 'video', 'begin', url);
+      let gaData = new GaData('ComponentVideojsImaSingles.initPlayer', 'video', 'begin', url);
       Ga.add(gaData);
     });
     player.one('ended', function() {
-      let gaData = new GaData('ComponentVideojsIma.initPlayer', 'video', 'complete', url);
+      let gaData = new GaData('ComponentVideojsImaSingles.initPlayer', 'video', 'complete', url);
       Ga.add(gaData);
     });
   }

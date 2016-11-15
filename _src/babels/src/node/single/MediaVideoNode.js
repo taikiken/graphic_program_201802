@@ -23,8 +23,8 @@ import {HTML5VideoNode} from '../media/HTML5VideoNode';
 // ---
 // @since 2016-11-13
 // component
-import { ComponentVideojsIma } from '../../component/media/ComponentVideojsIma';
-import { ComponentVideojsImaFirst } from '../../component/media/ComponentVideojsImaFirst';
+import { ComponentVideojsImaSingles } from '../../component/media/ComponentVideojsImaSingles';
+import { ComponentVideojsImaArticle } from '../../component/media/ComponentVideojsImaArticle';
 // ---
 
 // React
@@ -127,18 +127,19 @@ export let MediaVideoNode = React.createClass( {
       );
       */
       return (
-        <ComponentVideojsImaFirst
+        <ComponentVideojsImaArticle
           articleId={this.props.articleId}
           video={video}
           poster={poster}
           caption={caption}
           playImage={Empty.VIDEO_PLAY}
+          index={this.props.index}
         />
       );
     }
     // 次の記事一覧
     return (
-      <ComponentVideojsIma
+      <ComponentVideojsImaSingles
         articleId={this.props.articleId}
         video={video}
         poster={poster}
