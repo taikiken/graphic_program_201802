@@ -18,7 +18,7 @@ import {Safety} from '../../data/Safety';
 
 // node
 import {HTML5VideoNode} from '../media/HTML5VideoNode';
-// import {VideojsImaNode} from '../media/VideojsImaNode';
+import {VideojsImaNode} from '../media/VideojsImaNode';
 
 // ---
 // @since 2016-11-13
@@ -126,6 +126,7 @@ export let MediaVideoNode = React.createClass( {
         />
       );
       */
+      // @since 2016-11-15 出力クラスを変更
       return (
         <ComponentVideojsImaArticle
           articleId={this.props.articleId}

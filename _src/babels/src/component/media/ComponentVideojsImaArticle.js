@@ -118,20 +118,32 @@ export class ComponentVideojsImaArticle extends React.Component {
      * @type {?Hit}
      */
     this.hit = null;
+    /**
+     * bound hitOut, Hit.NO_COLLISION event handler
+     * @type {function}
+     */
+    this.boundOut = this.hitOut.bind(this);
+    /**
+     * bound hitOut, Hit.COLLISION event handler
+     * @type {function}
+     */
+    this.boundIn = this.hitIn.bind(this);
   }
   /**
-   * マウント後に表示プレイヤーの初期化を行います
+   * マウント後に表示プレイヤーの初期化を行います<br>
+   * Hit.NO_COLLISION event を bind し監視を開始します
    */
   componentDidMount() {
     this.preparePlayer();
     let hit = this.hit;
+    // console.log('componentDidMount', hit, this.videoElement);
     if (hit === null && this.videoElement !== null) {
       hit = new Hit(this.videoElement);
       this.hit = hit;
-      hit.on(Hit.NO_COLLISION, this.hitOut.bind(this));
+      hit.on(Hit.NO_COLLISION, this.boundOut);
+      hit.start();
     }
   }
-
   /**
    * videojs の存在チェックを行い各OSタイプの初期化を行います
    */
@@ -143,6 +155,7 @@ export class ComponentVideojsImaArticle extends React.Component {
       }, 25);
       return;
     }
+    // player 初期化処理へ
     this.initPlayer();
   }
   /**
@@ -206,6 +219,28 @@ export class ComponentVideojsImaArticle extends React.Component {
     player.play();
   }
   /**
+   * iPad プリヤー初期化
+   */
+  iPadInitPlayer() {
+    console.log('iPadInitPlayer');
+    const player = this.player;
+    // const videoElement = document.getElementById('content_video_html5_api');
+    // const videoElement = this.videoElement;
+    // this.videoElement = videoElement;
+    // this.bindEvent(videoElement);
+
+    player.ima.initializeAdDisplayContainer();
+    player.ima.requestAds();
+    // const adContainer = document.getElementById('content_video_ima-ad-container');
+    const adContainer = this.mainContainer.getElementById('content_video_ima-ad-container');
+    adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+    player.one('click', function() {
+      player.ima.initializeAdDisplayContainer();
+      player.ima.requestAds();
+      player.play();
+    });
+  }
+  /**
    * iPhone プレイヤー初期化
    */
   iPhoneInitPlayer() {
@@ -239,32 +274,38 @@ export class ComponentVideojsImaArticle extends React.Component {
     this.bindEvent(videoElement);
   }
   /**
-   * iPad プリヤー初期化
+   * 動画コンテナが画面外に出た
+   *
+   * - Hit.NO_COLLISION unbind
+   * - Hit.COLLISION bind
+   * - `player.pause()`, `player.ima.pauseAd()`
    */
-  iPadInitPlayer() {
-    console.log('iPadInitPlayer');
-    const player = this.player;
-    // const videoElement = document.getElementById('content_video_html5_api');
-    const videoElement = this.videoElement;
-    // this.videoElement = videoElement;
-    this.bindEvent(videoElement);
-
-    player.ima.initializeAdDisplayContainer();
-    player.ima.requestAds();
-    // const adContainer = document.getElementById('content_video_ima-ad-container');
-    const adContainer = this.mainContainer.getElementById('content_video_ima-ad-container');
-    adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
-    player.one('click', function() {
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
-      player.play();
-    });
-  }
   hitOut() {
+    // console.log('hitOut');
+    const hit = this.hit;
+    hit.off(Hit.NO_COLLISION, this.boundOut);
+    hit.on(Hit.COLLISION, this.boundIn);
     this.pause();
   }
+
+  /**
+   * 動画コンテナが画面内に表示された
+   *
+   * - Hit.COLLISION unbind
+   * - Hit.NO_COLLISION bind
+   */
+  hitIn() {
+    // console.log('hitIn');
+    const hit = this.hit;
+    hit.off(Hit.COLLISION, this.boundIn);
+    hit.on(Hit.NO_COLLISION, this.boundOut);
+  }
+  /**
+   * 動画プレイヤーを一時停止にします
+   */
   pause() {
     const player = this.player;
+    // console.log('pause', player);
     if (player) {
       player.pause();
       player.ima.pauseAd();
