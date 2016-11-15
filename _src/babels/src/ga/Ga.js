@@ -19,13 +19,7 @@ import {GaData} from './GaData';
  * @type {Array<GaData>}
  * @private
  */
-const _requests:Array<GaData> = [];
-/**
- * 記事 ID 事に ga data をまとめます
- * @type {{}}
- * @private
- */
-const _tardy = {};
+let _requests:Array<GaData> = [];
 
 /**
  * ga: イベント トラッキング
@@ -34,68 +28,16 @@ const _tardy = {};
  * @see https://developers.google.com/analytics/devguides/collection/analyticsjs/events?hl=ja#implementation
  */
 export class Ga {
-  /**
-   * ga 遅延実行 する場合は instance を作成します
-   * @param {ga} ga ga object
-   * @param {Array<GaData>} arr GaData セット配列
-   * @param {boolean} production false 時に開発log出力します
-   * @since 20161-11-14
-   */
-  constructor(ga, arr, production) {
-    // console.log('constructor', arr);
-    /**
-     * ga object
-     * @type {ga}
-     */
-    this.ga = ga;
-    /**
-     * GaData セット配列
-     * @type {Array.<GaData>}
-     */
-    this.arr = arr;
-    /**
-     * production / develop flag
-     * @type {boolean}
-     */
-    this.production = production;
-    /**
-     * timeout id
-     * @type {number}
-     */
-    this.timer = 0;
-  }
-  /**
-   * ga 送信を行います
-   * @since 20161-11-14
-   */
-  tracking() {
-    const arr = this.arr;
-    while(arr.length > 0) {
-      const data = arr.shift();
-      Ga.tracking(this.ga, data);
-      if (!this.production) {
-        console.warn(`${data.method}: ga, send, `, data);
-      }
-    }
-    // console.log('=======================', Date.now());
-  }
-  /**
-   * timer を使い遅延実行します
-   * @param {number} [delay=2000] 遅延ms
-   * @since 20161-11-14
-   */
-  delayTrack(delay = 1000 * 2) {
-    // console.log('----------------------', Date.now());
-    this.timer = setTimeout(() => {
-      this.tracking();
-    }, delay);
-  }
-  /**
-   * 遅延実行をキャンセルします
-   */
-  clearTrack() {
-    clearTimeout(this.timer);
-  }
+  // /**
+  //  * ga: イベント トラッキング
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //   if ( _symbol !== target ) {
+  //     throw new Error( 'Ga is static Class. not use new Ga().' );
+  //   }
+  // }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -134,35 +76,19 @@ export class Ga {
     _requests.push( data );
     Ga.send();
   }
-  /**
-   * 送信予約を記事詳細・次の記事一覧の ga 送信を記事ID別に delay させます
-   * @see https://github.com/undotsushin/undotsushin/issues/1274
-   * @param {number} id article ID
-   * @param {GaData} data GaData instance, 送信するデータ
-   * @since 2016-11-14
-   */
-  static addTardy(id, data) {
-    if (Object.keys(_tardy).indexOf(id) === -1) {
-      _tardy[id] = [];
-    }
-    _tardy[id].push(data);
-    Ga.send();
-  }
+
   /**
    * 記事詳細・次の記事一覧・インビュー 送信予約
    * @param {number} id 記事 ID
    * @param {string} method 発生場所(関数)
-   * @param {boolean} [delay=false] 遅延実行フラッグ, true の時は tardy へ `queue` 追加します <- 2016-11-14
+   * @param {string} [title=''] 記事タイトル
+   * @since 2016-11-15 title added
    */
-  static addPage(id, method, delay = false):void {
+  static addPage(id, method, title = ''):void {
     const data = new GaData(method);
     data.hitType = Ga.PAGEVIEW;
-    data.setPage(id);
-    if (!delay) {
-      Ga.add(data);
-    } else {
-      Ga.addTardy(id, data);
-    }
+    data.setPage(id, title);
+    Ga.add(data);
   }
   /**
    * 送信実行
@@ -177,59 +103,38 @@ export class Ga {
       return;
     }
 
-    // // log を出力するかを選択する
-    // if (Env.mode === Env.PRODUCTION) {
-    //   Ga.production(ga);
-    // } else {
-    //   Ga.develop(ga);
-    // }
-    const production = Env.mode === Env.PRODUCTION;
-    while(_requests.length > 0) {
-      // @type {GaData}
-      const data = _requests.shift();
-      Ga.tracking(ga, data);
-      if (!production) {
-        console.warn(`${data.method}: ga, send, `, data);
-      }
-    }
-    // 遅延実行
-    // @since 2016-11-14
-    const tardy = Object.keys(_tardy);
-    while(tardy.length > 0) {
-      const id = tardy.shift();
-      const arr = _tardy[id];
-      if (arr.length > 0) {
-        // console.log('id', _tardy, id, arr);
-        const instance = new Ga(ga, arr, production);
-        instance.delayTrack();
-      }
+    // log を出力するかを選択する
+    if (Env.mode === Env.PRODUCTION) {
+      Ga.production(ga);
+    } else {
+      Ga.develop(ga);
     }
   }
-  // /**
-  //  * 本番（ログなし）
-  //  * @param {Function} ga ga関数
-  //  */
-  // static production( ga:Function ):void {
-  //   // _requests 内のデータがなくなるまで実行する
-  //   while( _requests.length > 0 ) {
-  //     let data:GaData = _requests.shift();
-  //     // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
-  //     Ga.tracking( ga, data );
-  //   }
-  // }
-  // /**
-  //  * 開発（ログあり）
-  //  * @param {Function} ga ga関数
-  //  */
-  // static develop( ga:Function ):void {
-  //   // _requests 内のデータがなくなるまで実行する
-  //   while( _requests.length > 0 ) {
-  //     let data:GaData = _requests.shift();
-  //     // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
-  //     Ga.tracking( ga, data );
-  //     console.log( `${data.method}: ga, send, `, data);
-  //   }
-  // }
+  /**
+   * 本番（ログなし）
+   * @param {Function} ga ga関数
+   */
+  static production( ga:Function ):void {
+    // _requests 内のデータがなくなるまで実行する
+    while( _requests.length > 0 ) {
+      let data:GaData = _requests.shift();
+      // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+      Ga.tracking( ga, data );
+    }
+  }
+  /**
+   * 開発（ログあり）
+   * @param {Function} ga ga関数
+   */
+  static develop( ga:Function ):void {
+    // _requests 内のデータがなくなるまで実行する
+    while( _requests.length > 0 ) {
+      let data:GaData = _requests.shift();
+      // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+      Ga.tracking( ga, data );
+      console.log( `${data.method}: ga, send, `, data);
+    }
+  }
   /**
    * ga 関数を実行し tracking を行います
    * @since 2016-07-04
@@ -257,7 +162,11 @@ export class Ga {
    * @since 2016-10-05
    */
   static page(ga:Function, data:GaData) {
-    return ga('send', { hitType: data.hitType, page: data.page });
+    const sending = { hitType: data.hitType, page: data.page };
+    if (data.title !== '') {
+      sending.title = data.title;
+    }
+    return ga('send', sending);
   }
   /**
    * <p>記事詳細での提供元&カテゴリートラッキング</p>
@@ -280,10 +189,9 @@ export class Ga {
    *
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
    * @param {string} method 発生場所関数名
-   * @param {boolean} [delay=false] 遅延実行フラッグ, true の時は tardy へ `queue` 追加します <- 2016-11-14
    * @since 2016-10-05 ViewSingle から移動
    */
-  static single(single, method = 'Ga.single', delay = false):void {
+  static single(single, method = 'Ga.single'):void {
     let category = 'provider';
     const action = 'view';
     const label = single.user.userName;
@@ -302,15 +210,11 @@ export class Ga {
     category = 'category';
     categories.all.map((value) => {
       // @type {SlugDae} - value
-      if (!delay) {
-        // ----------------------------------------------
-        // GA 計測タグ
-        // 記事カテゴリーのアクセス数を測定する
-        Ga.add(new GaData(method, category, action, value.label, 0, true));
-        // ----------------------------------------------
-      } else {
-        Ga.addTardy(single.id, new GaData(method, category, action, value.label, 0, true));
-      }
+      // ----------------------------------------------
+      // GA 計測タグ
+      // 記事カテゴリーのアクセス数を測定する
+      Ga.add(new GaData(method, category, action, value.label, 0, true));
+      // ----------------------------------------------
     });
   }
 }
