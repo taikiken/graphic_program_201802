@@ -51,6 +51,7 @@ import { Page } from '../singles/head/Page';
 
 // snap
 import { Snap } from '../ui/Snap';
+// @since 2016-11-16
 import { TopButton } from '../ui/button/TopButton';
 
 /**
@@ -207,6 +208,8 @@ export class ViewSingle extends View {
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();
+      // ---------------------------------
+      // @since 2016-11-16
       // top button
       const topButton = TopButton.factory();
       topButton.on(TopButton.COMPLETE, this.onTop.bind(this));
@@ -223,7 +226,7 @@ export class ViewSingle extends View {
    * {@link SinglesHistory}
    */
   onSnap() {
-    console.log('onSnap', this.page.url());
+    // console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
@@ -231,10 +234,20 @@ export class ViewSingle extends View {
    * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます
    */
   onBeat() {
-    console.log('onBeat', this.page.url());
+    // console.log('onBeat', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
+
+  /**
+   * TopButton.COMPLETE event handler<br>
+   * [page top] button click しスクロールアニメーションが完了した時に発火します
+   *
+   * SinglesHistory へ本ページ（先頭記事）が hit したことを通知し URL を元に戻します
+   *
+   * 低速マシンではスクロール中のヒットだけでは処理が追いつかないようなので、強制的に書き換えることにしました
+   * @since 2016-11-16
+   */
   onTop() {
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
