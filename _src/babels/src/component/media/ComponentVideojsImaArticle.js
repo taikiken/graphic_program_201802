@@ -204,12 +204,11 @@ export class ComponentVideojsImaArticle extends React.Component {
       player.play();
     });
   }
-
   /**
    * desktop プレイヤー初期化（自動再生）
    */
   pcInitPlayer() {
-    console.log('pcInitPlayer');
+    // console.log('pcInitPlayer', this.props.articleId);
     const player = this.player;
     // document.querySelector('.vjs-big-play-button')
     this.mainContainer.querySelector('.vjs-big-play-button')
@@ -222,7 +221,7 @@ export class ComponentVideojsImaArticle extends React.Component {
    * iPad プリヤー初期化
    */
   iPadInitPlayer() {
-    console.log('iPadInitPlayer');
+    // console.log('iPadInitPlayer', this.props.articleId);
     const player = this.player;
     // const videoElement = document.getElementById('content_video_html5_api');
     // const videoElement = this.videoElement;
@@ -244,7 +243,7 @@ export class ComponentVideojsImaArticle extends React.Component {
    * iPhone プレイヤー初期化
    */
   iPhoneInitPlayer() {
-    console.log('iPhoneInitPlayer');
+    // console.log('iPhoneInitPlayer');
     // const videojs = self.videojs;
     const Ads = self.Ads;
     if (!Ads) {

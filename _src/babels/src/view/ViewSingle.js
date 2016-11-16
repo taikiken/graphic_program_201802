@@ -51,6 +51,7 @@ import { Page } from '../singles/head/Page';
 
 // snap
 import { Snap } from '../ui/Snap';
+import { TopButton } from '../ui/button/TopButton';
 
 /**
  * <p>記事詳細</p>
@@ -205,9 +206,10 @@ export class ViewSingle extends View {
       const snap = new Snap(element, true);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
-      // // 閾値下げる
-      // snap.threshold = 50;
       snap.init();
+      // top button
+      const topButton = TopButton.factory();
+      topButton.on(TopButton.COMPLETE, this.onTop.bind(this));
       // ---------------------------------
       this.render(single);
       this.singles(single);
@@ -230,6 +232,10 @@ export class ViewSingle extends View {
    */
   onBeat() {
     console.log('onBeat', this.page.url());
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
+  }
+  onTop() {
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
