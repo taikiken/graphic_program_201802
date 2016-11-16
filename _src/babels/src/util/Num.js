@@ -12,6 +12,7 @@
 
 /**
  * 数値関連のユーティリティ
+ * @since 2016-11-15
  */
 export class Num {
   /**
@@ -19,10 +20,11 @@ export class Num {
    * @param {number} num 処理対象数値
    * @param {number} [trunk=1] 切り詰めケタ数
    * @return {number} 指定桁で切り詰めた数値を返します
+   * @since 2016-11-15
    */
   static float(num, trunk = 1) {
     const base = 10 * trunk;
-    // 小数点を切り捨てます
+    // 小数点を指定桁で切り捨てます
     const int = parseInt(num * base, 10);
     return int / base;
   }

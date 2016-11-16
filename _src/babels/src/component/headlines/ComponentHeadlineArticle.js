@@ -89,8 +89,9 @@ export class ComponentHeadlineArticle extends React.Component {
   /**
    * 文字を切りつめます
    * @param {string} title 対象文字
-   * @param {number} [length=35] 最長文字数
+   * @param {number} [length=35] 最長文字数、将来表示画像が 16x9 にデザイン変更になった時は数値を見直します
    * @return {string} 最長文字数を超えたら `…` 三点リーダー付きで返します
+   * @since 2016-11-15
    */
   static reduce(title, length = 35) {
     if (title.length > length) {
@@ -112,8 +113,18 @@ export class ComponentHeadlineArticle extends React.Component {
      * @type {function}
      */
     this.boundGa = this.gaSend.bind(this);
-
+    /**
+     * h3 title tag
+     * @type {?Element}
+     * @since 2016-11-15
+     */
     this.h3 = null;
+    /**
+     * React state
+     * - @type {string} title - title に表示するテキスト、文字数が多い時は切りつめ処理を行います
+     * @type {{title: string}}
+     * @since 2016-11-15
+     */
     this.state = {
       title: props.title
     };
@@ -123,6 +134,7 @@ export class ComponentHeadlineArticle extends React.Component {
   // ---------------------------------------------------
   /**
    * マウント後に h3.height をチェックします
+   * @since 2016-11-15
    */
   componentDidMount() {
     if (this.h3 !== null) {
@@ -131,7 +143,8 @@ export class ComponentHeadlineArticle extends React.Component {
   }
   /**
    * h3.height が CSS.min-height を超えていたら<br>
-   * タイトル文字長をチェックし切りつめするかを決める
+   * タイトル文字長をチェックし切りつめします
+   * @since 2016-11-15
    */
   titleLength() {
     const h3 = new Elements(this.h3);
