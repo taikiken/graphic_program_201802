@@ -17,6 +17,10 @@ import { MediaType } from '../../app/const/MediaType';
 // node
 import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
+// util
+import { Elements } from '../../util/Elements';
+import { Num } from '../../util/Num';
+
 // Ga
 import { Ga } from '../../ga/Ga';
 import { GaData } from '../../ga/GaData';
@@ -44,57 +48,6 @@ const playMark = (mediaType) => {
  * @since 2016-09-17
  */
 export class ComponentHeadlineArticle extends React.Component {
-  /**
-   * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentHeadlineArticle.propTypes}
-   */
-  constructor(props) {
-    super(props);
-    /**
-     * bind済み gaSend
-     * @type {function}
-     */
-    this.boundGa = this.gaSend.bind(this);
-  }
-
-  /**
-   * headline 1記事を作成します
-   * @return {XML} headline 1記事を返します
-   */
-  render() {
-    const props = this.props;
-    return (
-      <li className={`board-item board-item-${props.index}`}>
-        <a className="post" href={props.url} onClick={this.boundGa}>
-          <figure className="post-thumb post-thumb-headline">
-            <img src={props.thumbnail} alt={props.title}/>
-            {playMark(this.props.mediaType)}
-          </figure>
-          <div className="post-data">
-            <p className={`post-category post-category-${props.slug}`}>
-              <CategoryLabelNode
-                categories={this.props.categories}
-                id={`headline-label-${this.props.id}`}
-                index={this.props.index}
-              />
-            </p>
-            <h3 className="post-heading">{props.title}</h3>
-            <p className="post-date">{props.date}</p>
-          </div>
-        </a>
-      </li>
-    );
-  }
-  /**
-   * GA 計測タグを送信します {@link Ga.add}, {@link GaData}
-   */
-  gaSend() {
-    // ----------------------------------------------
-    // GA 計測タグ
-    const tag = this.props.home ? 'home' : this.props.slug;
-    Ga.add(new GaData('ComponentHeadlineArticle.gaSend', `${tag}_headline`, 'click', this.props.url, parseFloat(this.props.id)));
-    // ----------------------------------------------
-  }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -130,35 +83,107 @@ export class ComponentHeadlineArticle extends React.Component {
       home: React.PropTypes.bool.isRequired
     };
   }
+  // ---------------------------------------------------
+  //  STATIC METHOD
+  // ---------------------------------------------------
+  /**
+   * 文字を切りつめます
+   * @param {string} title 対象文字
+   * @param {number} [length=35] 最長文字数
+   * @return {string} 最長文字数を超えたら `…` 三点リーダー付きで返します
+   */
+  static reduce(title, length = 35) {
+    if (title.length > length) {
+      return `${title.substr(0, length - 1)}…`;
+    }
+    return title;
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link ComponentHeadlineArticle.propTypes}
+   */
+  constructor(props) {
+    super(props);
+    /**
+     * bind済み gaSend
+     * @type {function}
+     */
+    this.boundGa = this.gaSend.bind(this);
+
+    this.h3 = null;
+    this.state = {
+      title: props.title
+    };
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * マウント後に h3.height をチェックします
+   */
+  componentDidMount() {
+    if (this.h3 !== null) {
+      this.titleLength();
+    }
+  }
+  /**
+   * h3.height が CSS.min-height を超えていたら<br>
+   * タイトル文字長をチェックし切りつめするかを決める
+   */
+  titleLength() {
+    const h3 = new Elements(this.h3);
+    // Edge は height が常に大きいので小数点1位で切り捨てて比較します
+    const minHeight = Num.float(parseFloat(h3.style.get('minHeight')));
+    const offset = h3.offset();
+    const height = Num.float(offset.height);
+    // console.log('minheight', this.props.id, minHeight, height);
+    if (height <= minHeight) {
+      return;
+    }
+    const title = ComponentHeadlineArticle.reduce(this.props.title);
+    this.setState({ title });
+  }
+  /**
+   * headline 1記事を作成します
+   * @return {XML} headline 1記事を返します
+   */
+  render() {
+    const props = this.props;
+    return (
+      <li className={`board-item board-item-${props.index}`}>
+        <a className="post" href={props.url} onClick={this.boundGa}>
+          <figure className="post-thumb post-thumb-headline">
+            <img src={props.thumbnail} alt={props.title}/>
+            {playMark(this.props.mediaType)}
+          </figure>
+          <div className="post-data">
+            <p className={`post-category post-category-${props.slug}`}>
+              <CategoryLabelNode
+                categories={this.props.categories}
+                id={`headline-label-${this.props.id}`}
+                index={this.props.index}
+              />
+            </p>
+            <h3 className="post-heading" ref={(component) => {
+              this.h3 = component;
+            }}>{this.state.title}</h3>
+            <p className="post-date">{props.date}</p>
+          </div>
+        </a>
+      </li>
+    );
+  }
+  /**
+   * GA 計測タグを送信します {@link Ga.add}, {@link GaData}
+   */
+  gaSend() {
+    // ----------------------------------------------
+    // GA 計測タグ
+    const tag = this.props.home ? 'home' : this.props.slug;
+    Ga.add(new GaData('ComponentHeadlineArticle.gaSend', `${tag}_headline`, 'click', this.props.url, parseFloat(this.props.id)));
+    // ----------------------------------------------
+  }
 }
-//
-// /**
-//  *
-//  * @type {{
-//  *  index: number,
-//  *  id: string,
-//  *  slug: string,
-//  *  categories: array,
-//  *  url: string,
-//  *  date: string,
-//  *  title: string,
-//  *  thumbnail: string,
-//  *  mediaType: string,
-//  *  home: bool
-//  * }}
-//  */
-// ComponentHeadlineArticle.propTypes = {
-//   index: React.PropTypes.number.isRequired,
-//   id: React.PropTypes.string.isRequired,
-//   slug: React.PropTypes.string.isRequired,
-//   // @since 2016-06-27 categories へ切替
-//   // category: React.PropTypes.string.isRequired,
-//   // category2: React.PropTypes.string,
-//   categories: React.PropTypes.array.isRequired,
-//   url: React.PropTypes.string.isRequired,
-//   date: React.PropTypes.string.isRequired,
-//   title: React.PropTypes.string.isRequired,
-//   thumbnail: React.PropTypes.string.isRequired,
-//   mediaType: React.PropTypes.string.isRequired,
-//   home: React.PropTypes.bool.isRequired
-// };
