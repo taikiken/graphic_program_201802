@@ -19,6 +19,7 @@ import { CategoryLabelNode } from '../../node/category/CategoryLabelNode';
 
 // util
 import { Elements } from '../../util/Elements';
+import { Num } from '../../util/Num';
 
 // Ga
 import { Ga } from '../../ga/Ga';
@@ -134,9 +135,12 @@ export class ComponentHeadlineArticle extends React.Component {
    */
   titleLength() {
     const h3 = new Elements(this.h3);
-    const minHeight = parseFloat(h3.style.get('minHeight'));
+    // Edge は height が常に大きいので小数点1位で切り捨てて比較します
+    const minHeight = Num.float(parseFloat(h3.style.get('minHeight')));
     const offset = h3.offset();
-    if (offset.height <= minHeight) {
+    const height = Num.float(offset.height);
+    // console.log('minheight', this.props.id, minHeight, height);
+    if (height <= minHeight) {
       return;
     }
     const title = ComponentHeadlineArticle.reduce(this.props.title);
