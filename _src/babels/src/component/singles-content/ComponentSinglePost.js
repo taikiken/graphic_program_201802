@@ -63,7 +63,10 @@ export class ComponentSinglePost extends React.Component {
     this.state = {
       single: props.single
     };
-
+    /**
+     * bound onReadMore, 「続きを読む」クリックで ga 送信するために click 監視を行います
+     * @type {function}
+     */
     this.boundMore = this.onReadMore.bind(this);
   }
   // ---------------------------------------------------

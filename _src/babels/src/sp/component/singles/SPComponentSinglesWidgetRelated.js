@@ -76,7 +76,10 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
     this.state = {
       index: props.index
     };
-
+    /**
+     * div.recommend_articles, script を挿入する対象タグ
+     * @type {?Element}
+     */
     this.target = null;
   }
   // ---------------------------------------------------

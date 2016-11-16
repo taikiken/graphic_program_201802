@@ -30,6 +30,30 @@ import { Fb } from '../../../util/Fb';
 // React
 const React = self.React;
 
+/**
+ * mobile: div.singles-content を出力します
+ *
+ * 記事詳細・次の記事一覧の「記事」を出力します
+ * ```
+ * <SPComponentSingleContent/>
+ *  <SPComponentSinglesSNSAbove/>
+ *  <ComponentSinglePost/>
+ *  <ComponentSingleProvider/>
+ *  <ComponentSingleFooter/>
+ *  <SPComponentSinglesSNSBelow/>
+ *  <SPComponentSingleComments/>
+ *    SPViewComments
+ *    <SPComponentSinglesAdBelow/>
+ * ```
+ * {@link SPComponentSinglesSNSAbove},
+ * {@link ComponentSinglePost},
+ * {@link ComponentSingleProvider},
+ * {@link ComponentSingleFooter},
+ * {@link SPComponentSinglesSNSBelow},
+ * {@link SPComponentSingleComments},
+ * {@link SPComponentSinglesAdBelow},
+ * {@link SPViewComments},
+ */
 export class SPComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
@@ -81,7 +105,7 @@ export class SPComponentSingleContent extends React.Component {
     this.setState({ single });
   }
   /**
-   * div.singles-content, 本文を
+   * div.singles-content, 本文を出力します
    * @return {XML} div.singles-content
    */
   render() {

@@ -283,7 +283,7 @@ export class Snap extends EventDispatcher {
    * `scrolling` を off にし、スクロール操作を可能にします
    */
   scrollComplete() {
-    this.moving = 0;
+    // this.moving = 0;
     this.scrolling = false;
     // 遅延させ回復させます
     Scroll.enable(750);

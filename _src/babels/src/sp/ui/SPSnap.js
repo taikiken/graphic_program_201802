@@ -28,6 +28,10 @@ export class SPSnap extends Snap {
    */
   constructor(element, noMotion = false, page = {}) {
     super(element, noMotion, page);
+    /**
+     * div.header-sticky を Elements instance にします, 高さ計算に必要になるかもなので... <- 現状：未使用
+     * @type {Elements}
+     */
     this.sticky = new Elements(document.querySelector('div.header-sticky'));
   }
   /**
