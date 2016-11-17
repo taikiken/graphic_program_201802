@@ -234,11 +234,11 @@ export class Snap extends EventDispatcher {
     // // window
     const scrollEvents = events.events;
     const height = scrollEvents.height;
-    // @since 2016-11-17 0.75(3/4)に変えてみる
-    const half = height * 0.75;
+    // @since 2016-11-17 0.25(1/4)に変えてみる
+    const wall = height * 0.25;
     // element.top が window.height の半分未満になったら
     // scroll up の時は hit 時にイベントを発火させる
-    if (bottom <= height && bottom > half) {
+    if (bottom <= height && bottom > wall) {
       this.dispatch({ type: Snap.BEAT_UP, target: this });
     }
   }
@@ -265,7 +265,7 @@ export class Snap extends EventDispatcher {
     }
     // ---------------------------
     // scroll animation
-    console.log('***magnet************************', top, this.scrollOffset(), this.scrolling, this.returnHome);
+    // console.log('***magnet************************', top, this.scrollOffset(), this.scrolling, this.returnHome);
     // scroll animation 開始(snap)
     if (!this.returnHome) {
       this.scrolling = true;

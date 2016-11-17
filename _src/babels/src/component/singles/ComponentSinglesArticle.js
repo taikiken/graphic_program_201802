@@ -38,8 +38,8 @@ import { Ga } from '../../ga/Ga';
 
 // --------------------
 // @since 2016-10-17
-// singles
-import { SinglesHistory } from '../../singles/SinglesHistory';
+// // singles
+// import { SinglesHistory } from '../../singles/SinglesHistory';
 
 // singles/head
 import { Page } from '../../singles/head/Page';
@@ -115,13 +115,13 @@ export class ComponentSinglesArticle extends React.Component {
      * @type {boolean}
      */
     this.sended = false;
-
-    /**
-     * SPA のための管理クラス
-     * @type {SinglesHistory}
-     * @since 2016-10-27
-     */
-    this.manager = SinglesHistory.factory();
+    //
+    // /**
+    //  * SPA のための管理クラス
+    //  * @type {SinglesHistory}
+    //  * @since 2016-10-27
+    //  */
+    // this.manager = SinglesHistory.factory();
     /**
      * ページ情報書換えデータを `SingleDae` から生成します
      * {@link SingleDae}

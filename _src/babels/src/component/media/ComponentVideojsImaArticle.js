@@ -196,7 +196,7 @@ export class ComponentVideojsImaArticle extends React.Component {
       this.iPadInitPlayer();
       return;
     }
-    console.log('may be android', this.mobile, this.ipad);
+    // console.log('may be android', this.mobile, this.ipad);
     // may be android
     player.one('click', function() {
       player.ima.initializeAdDisplayContainer();

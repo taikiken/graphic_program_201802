@@ -55,6 +55,9 @@ import { SPSnap } from '../../ui/SPSnap';
 // sp/component/singles-magnet
 import { SPComponentSInglesArticleSwitch } from './SPComponentSInglesArticleSwitch';
 
+// util
+import { PageTitle } from '../../../util/PageTitle';
+
 // React
 const React = self.React;
 
@@ -280,10 +283,12 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     this.sended = true;
     // send
     const single = this.state.single;
-    Ga.single(single, 'SPComponentSinglesArticle.hitIn');
+    Ga.single(single, 'SPComponentSinglesArticle.ga');
     // ---------------------
     // https://github.com/undotsushin/undotsushin/issues/1151
-    Ga.addPage(single.id, 'SPComponentSinglesArticle.hitIn');
+    // @since  2016-11-15 title added
+    const page = new PageTitle(single.title, single.categories.label);
+    Ga.addPage(single.id, 'SPComponentSinglesArticle.ga', page.title());
     // ---------------------
     this.dispose();
   }
@@ -303,7 +308,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
    * Snap.SNAPPED event handler
    */
   onSnap() {
-    console.log('onSnap', this.page.url());
+    // console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
@@ -311,7 +316,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
    * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます
    */
   onBeat() {
-    console.log('onBeat', this.page.url());
+    // console.log('onBeat', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }

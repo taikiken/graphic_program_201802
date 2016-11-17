@@ -45,6 +45,9 @@ import { Page } from '../../singles/head/Page';
 // import { Scroll } from '../../util/Scroll';
 // import { TopButton } from '../../ui/button/TopButton';
 
+// util
+import { PageTitle } from '../../util/PageTitle';
+
 // snap
 import { Snap } from '../../ui/Snap';
 
@@ -306,7 +309,9 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     Ga.single(single, 'ComponentSinglesArticle.ga');
     // ---------------------
     // https://github.com/undotsushin/undotsushin/issues/1151
-    Ga.addPage(single.id, 'ComponentSinglesArticle.ga');
+    // @since  2016-11-15 title added
+    const page = new PageTitle(single.title, single.categories.label);
+    Ga.addPage(single.id, 'ComponentSinglesArticle.ga', page.title());
     // ---------------------
     this.dispose();
   }
