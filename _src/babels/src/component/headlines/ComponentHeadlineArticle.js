@@ -180,9 +180,14 @@ export class ComponentHeadlineArticle extends React.Component {
                 index={this.props.index}
               />
             </p>
-            <h3 className="post-heading" ref={(component) => {
-              this.h3 = component;
-            }}>{this.state.title}</h3>
+            <h3
+              className="post-heading"
+              ref={(component) => {
+                this.h3 = component;
+              }}
+            >
+              {this.state.title}
+            </h3>
             <p className="post-date">{props.date}</p>
           </div>
         </a>

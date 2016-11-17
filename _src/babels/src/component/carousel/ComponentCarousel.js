@@ -17,13 +17,16 @@ import { ComponentPickupSlider } from './ComponentPickupSlider';
 // view
 import { View } from '../../view/View';
 
+// tick
+import { Polling } from '../../tick/Polling';
+
 // --------------------------------------------
 // library
 // Sagen
 const Sagen = self.Sagen;
 
 // Gasane
-const Polling = self.Gasane.Polling;
+// const Polling = self.Gasane.Polling;
 
 // React
 const React = self.React;
@@ -229,24 +232,24 @@ export class ComponentCarousel extends React.Component {
     this.setState({ length });
   }
   /**
-   * Polling.PAST event を bind しアニメーションを開始します
+   * Polling.UPDATE event を bind しアニメーションを開始します
    */
   play() {
     this.pause();
     const polling = this.polling;
-    polling.on(Polling.PAST, this.boundUpdate);
+    polling.on(Polling.UPDATE, this.boundUpdate);
     polling.start();
   }
   /**
-   * Polling.PAST event を unbind しアニメーションを停止します
+   * Polling.UPDATE event を unbind しアニメーションを停止します
    */
   pause() {
     const polling = this.polling;
-    polling.off(Polling.PAST, this.boundUpdate);
+    polling.off(Polling.UPDATE, this.boundUpdate);
     polling.stop();
   }
   /**
-   * Polling.PAST event handler<br>
+   * Polling.UPDATE event handler<br>
    * 一定間隔で呼び出され<br>
    * カルーセルスライドを次のスライドに切替ます
    */

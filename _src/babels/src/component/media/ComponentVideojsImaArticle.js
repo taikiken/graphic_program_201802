@@ -372,9 +372,12 @@ export class ComponentVideojsImaArticle extends React.Component {
     const height = this.phone ? Math.ceil(width / 16 * 9) : Content.HD_HEIGHT;
     // not ios
     return (
-      <div id="mainContainer" ref={(component) => {
-        this.mainContainer = component;
-      }}>
+      <div
+        id="mainContainer"
+        ref={(component) => {
+          this.mainContainer = component;
+        }}
+      >
         <video
           id="content_video"
           className="video-js vjs-default-skin"
