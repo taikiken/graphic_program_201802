@@ -69,7 +69,7 @@ export class Snap extends EventDispatcher {
      * @type {number}
      * @since 2016-10-28
      */
-    this.threshold = 120;
+    this.threshold = 240;
     /**
      * snap scroll 可能かの flag<br>
      * [topへ戻る] button が押されると true に設定し snap 行動を抑制します
@@ -152,6 +152,8 @@ export class Snap extends EventDispatcher {
       // scroll up
       this.scrollUp(events);
     }
+    // ここで再チェックする
+    this.beat(events);
   }
   /**
    * Hit.NO_COLLISION event handler<br>
@@ -187,7 +189,7 @@ export class Snap extends EventDispatcher {
     // 閾値チェック
     if (top <= this.threshold && top > 0) {
       // magnetic move
-      console.log('scrollDown +++++++++', top, this.element);
+      // console.log('scrollDown +++++++++', top, this.element);
       this.snap(y + top);
     }
   }
@@ -202,8 +204,8 @@ export class Snap extends EventDispatcher {
       return;
     }
     // ---
-    // scroll up 時に snap より先に replaceState するためのチェックを行います
-    this.beat(events);
+    // // scroll up 時に snap より先に replaceState するためのチェックを行います
+    // this.beat(events);
     // ---
     // 判定開始
     // @type {ClientRect} - div.loaded-post ClientRect
@@ -214,7 +216,7 @@ export class Snap extends EventDispatcher {
     // 閾値チェック
     if (Math.abs(top) <= this.threshold && top > 0) {
       // magnetic move
-      console.log('scrollUp ------', top, this.element);
+      // console.log('scrollUp ------', top, this.element);
       // this.snap(y + top);
       // event fire
       this.dispatch({ type: Snap.SNAPPED, target: this });
@@ -232,7 +234,8 @@ export class Snap extends EventDispatcher {
     // // window
     const scrollEvents = events.events;
     const height = scrollEvents.height;
-    const half = height * 0.5;
+    // @since 2016-11-17 0.75(3/4)に変えてみる
+    const half = height * 0.75;
     // element.top が window.height の半分未満になったら
     // scroll up の時は hit 時にイベントを発火させる
     if (bottom <= height && bottom > half) {
@@ -287,7 +290,7 @@ export class Snap extends EventDispatcher {
     this.scrolling = false;
     // 遅延させ回復させます
     Scroll.enable(750);
-    console.log('----------------- scrollComplete', this.scrolling);
+    // console.log('----------------- scrollComplete', this.scrolling);
   }
   // --------------------------------------------------
   // return top animation

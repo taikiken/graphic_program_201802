@@ -51,8 +51,8 @@ export class Rise extends EventDispatcher {
      */
     this._boundScroll = this.onScroll.bind( this );
     /**
-     * Scroll instance
-     * @type {Scroll}
+     * Scroll 監視 instance
+     * @type {Scroll|*}
      * @protected
      */
     this._scroll = Scroll.factory();
@@ -103,12 +103,19 @@ export class Rise extends EventDispatcher {
     return this._boundScroll;
   }
   /**
-   * Scroll instance
-   * @return {Scroll} Scroll instance を返します
+   * Scroll 監視 instance
+   * @return {Scroll|*} Scroll 監視 instance を返します
    * @since 2-16-09-30
    */
   get scroll() {
     return this._scroll;
+  }
+  /**
+   * Scroll 監視 instance を設定します
+   * @param {Scroll|*} scroll Scroll 監視 instance
+   */
+  set scroll(scroll) {
+    this._scroll = scroll;
   }
   // ---------------------------------------------------
   //  METHOD

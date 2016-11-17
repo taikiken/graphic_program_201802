@@ -204,7 +204,7 @@ export class ViewSingle extends View {
       // snap
       const element = Dom.get('js-current-post');
       // no scroll animation で snap instance 作成
-      const snap = new Snap(element, true);
+      const snap = new Snap(element, true, page);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();

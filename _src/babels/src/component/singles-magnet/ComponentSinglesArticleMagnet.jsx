@@ -326,7 +326,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * Snap.SNAPPED event handler
    */
   onSnap() {
-    console.log('onSnap', this.page.url());
+    // console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
@@ -334,7 +334,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます
    */
   onBeat() {
-    console.log('onBeat', this.page.url());
+    // console.log('onBeat', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }

@@ -16,6 +16,10 @@ import { Rise } from './Rise';
 // util
 import { Elements } from '../util/Elements';
 
+// tick
+import { Scrolling } from '../tick/Scrolling';
+import { Rate } from '../tick/Rate';
+
 /**
  * element と window(Browser) のヒットテストを行います<br>
  * ヒットした場合は `COLLISION` event を発火し知らせます
@@ -34,6 +38,21 @@ export class Hit extends Rise {
      * @type {Elements}
      */
     this.elements = new Elements(element);
+
+     // Scrolling へ変更する
+    const scrolling = Scrolling.factory();
+    scrolling.rate = new Rate(Rate.RATE_5);
+    /**
+     * Scroll 監視インスタンス
+     * @type {Scrolling}
+     */
+    this.scroll = scrolling;
+    /**
+     * start flag
+     * @type {boolean}
+     * @default false
+     */
+    this.started = false;
   }
   // ----------------------------------------
   // EVENT
@@ -53,6 +72,27 @@ export class Hit extends Rise {
    */
   static get NO_COLLISION():string {
     return 'hitNoCollision';
+  }
+  // ----------------------------------------
+  // METHOD
+  // ----------------------------------------
+  /**
+   * Scroll 監視を始めます
+   */
+  start() {
+    if (this.started) {
+      return;
+    }
+    this.started = true;
+    const scrolling = this.scroll;
+    scrolling.on(Scrolling.UPDATE, this.boundScroll);
+    scrolling.start();
+  }
+  /**
+   * Scroll 監視を止めます
+   */
+  stop() {
+    this.scroll.off(Scrolling.UPDATE, this.boundScroll);
   }
   /**
    * Scroll.SCROLL event handler
