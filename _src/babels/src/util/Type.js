@@ -13,6 +13,7 @@
 /**
  * 型チェックを行います
  * @static
+ * @since 2016-11-16
  */
 export class Type {
   /**

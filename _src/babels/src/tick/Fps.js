@@ -25,6 +25,7 @@ const fpsSymbol = Symbol('save fps number');
 
 /**
  * フレームレート毎に UPDATE イベントを発生させます
+ * @since 2016-11-16
  */
 export class Fps extends Polling {
   /**

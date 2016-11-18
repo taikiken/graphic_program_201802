@@ -58,6 +58,8 @@ const topSymbol = Symbol('previous scroll top');
  *
  * instance.mother = new Elements(Elements.id(js-tc_scanimation-motion))
  * ```
+ *
+ * @since 2016-11-16
  * */
 export class Scrolling extends EventDispatcher {
   /**

@@ -49,6 +49,7 @@ const ratesSymbol = Symbol('save rates number');
  * - 6: RATE_6
  * - 5: RATE_5
  *
+ * @since 2016-11-16
  */
 export class Rate extends Polling {
   /**

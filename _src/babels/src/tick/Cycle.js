@@ -62,6 +62,7 @@ const eventsSymbol = Symbol('Cycle.UPDATE Events instance');
  * ```
  *
  * <p>requestAnimationFrame は tab が active(focus) な時のみ発生します</p>
+ * @since 2016-11-16
  */
 export class Cycle extends EventDispatcher {
   /**

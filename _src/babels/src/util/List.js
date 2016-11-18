@@ -32,7 +32,7 @@ const fill = (lengthData, value) => {
 
 /**
  * Array（配列）Utility
- * @since 2016-10-26
+ * @since 2016-11-16
  */
 export class List {
   /**

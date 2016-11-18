@@ -50,6 +50,7 @@ const eventsSymbol = Symbol('Polling.UPDATE Events instance');
 
 /**
  * 一定間隔毎に UPDATE イベントを発生させます
+ * @since 2016-11-16
  */
 export class Polling extends EventDispatcher {
   /**
