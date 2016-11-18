@@ -66,6 +66,10 @@ export class Rate extends Polling {
     //  * @type {Events}
     //  */
     // this.events = events;
+    /**
+     * event object
+     * @type {{rate: number, type: string, target: Rate, currentTarget: Rate}}
+     */
     this.events = {
       rate,
       type: Rate.UPDATE,
