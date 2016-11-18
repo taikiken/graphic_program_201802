@@ -43,6 +43,20 @@ let _instance = null;
 
 /**
  * singleton: 記事詳細・次の記事一覧 History API 使用を管理します
+ *
+ * NextPages {@link NextPages} instance を保持します<br>
+ * Page {@link Page} instance を NextPages instance へ追加し<br>
+ * Snap {@link Snap} SNAPPED / BEAT_UP したら `hit` 関数をコールします
+ *
+ * @example
+ * const manager = SinglesHistory.factory();
+ * const page = new Page(singleDae);
+ * const snap = new Snap(element);
+ * const onSnap = () => {
+ *  manager.hit(page);
+ * };
+ * snap.on(Snap.SNAPPED, onSnap);
+ * snap.on(Snap.BEAT_UP, onSnap);
  */
 export class SinglesHistory extends EventDispatcher {
   /**

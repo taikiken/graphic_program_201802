@@ -23,6 +23,19 @@ import { Rate } from '../tick/Rate';
 /**
  * element と window(Browser) のヒットテストを行います<br>
  * ヒットした場合は `COLLISION` event を発火し知らせます
+ *
+ * @example
+ * const hit = new Hit(document.getElementById('example'));
+ * const hitIn = (events) => {
+ *  // hit COLLISION
+ * };
+ * const hitOut = (events) => {
+ *  // hit NO_COLLISION
+ * };
+ * hit.on(Hit.COLLISION, hitIn);
+ * hit.on(Hit.NO_COLLISION, hitOut);
+ * hit.start();
+ *
  * @since 2016-09-30
  */
 export class Hit extends Rise {
@@ -95,8 +108,16 @@ export class Hit extends Rise {
     this.scroll.off(Scrolling.UPDATE, this.boundScroll);
   }
   /**
-   * Scroll.SCROLL event handler
-   * @param {Object} events Scroll.SCROLL event object {{type: string, originalEvent: Event, y: number, height: number, moving: number, changed: boolean}}
+   * Scrolling.UPDATE event handler
+   * @param {Object} events Scrolling.UPDATE event object
+   * {{
+   *  type: string,
+   *  originalEvent: Event,
+   *  y: number,
+   *  height: number,
+   *  moving: number,
+   *  changed: boolean
+   * }}
    */
   onScroll(events) {
     const rect = this.elements.offset();
