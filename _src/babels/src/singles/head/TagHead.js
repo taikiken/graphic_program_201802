@@ -64,7 +64,8 @@ export class TagHead {
     const twitter = new SnsTw(head);
     const canonical = new TagLink(head, 'link[rel="canonical"]');
     const description = new TagMeta(head, 'meta[name="description"]');
-    const host = `${location.protocol}://${location.host}`;
+    // @since 2016-11-18 Page へ移動
+    // const host = `${location.protocol}://${location.host}`;
     /**
      * title タグを管理します
      * @return {TagTitle} TagTitle instance
@@ -90,11 +91,12 @@ export class TagHead {
      * @return {TagMeta} TagMeta instance
      */
     this.description = () => description;
-    /**
-     * `http|https` 含む host を取得します
-     * @return {string} `http|https` 含む host を返します
-     */
-    this.host = () => host;
+    // @since 2016-11-18 Page へ移動
+    // /**
+    //  * `http|https` 含む host を取得します
+    //  * @return {string} `http|https` 含む host を返します
+    //  */
+    // this.host = () => host;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -105,7 +107,6 @@ export class TagHead {
    */
   replace(page) {
     const description = page.description();
-    const url = page.url();
     // title
     // https://github.com/undotsushin/undotsushin/issues/1329
     // og:titleの出力を記事タイトルだけにする #1329
@@ -116,7 +117,7 @@ export class TagHead {
     // description
     this.description().set(description);
     // canonical
-    this.canonical().set(`${this.host()}${url}`);
+    this.canonical().set(page.canonical());
     // Twitter
     this.twitter().replace(page, title);
     // Facebook

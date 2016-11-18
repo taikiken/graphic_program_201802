@@ -10,8 +10,8 @@
  *
  */
 
-// app
-import { Env } from '../../app/Env';
+// // app
+// import { Env } from '../../app/Env';
 
 /**
  * 記事詳細・次の記事一覧・各記事の meta 情報など書換え対象データを管理します
@@ -23,7 +23,17 @@ export class Page {
    * @param {SingleDae} singleDae 記事データ
    */
   constructor(singleDae) {
-    // this.single = () => singleDae;
+    const host = `${location.protocol}://${location.host}`;
+    /**
+     * `http|https` 含む host を取得します
+     * @return {string} `http|https` 含む host を返します
+     */
+    this.host = () => host;
+    /**
+     * 記事データ
+     * @return {SingleDae} 記事データ
+     */
+    this.single = () => singleDae;
     /**
      * 記事タイトル
      * @return {string} 記事タイトル
@@ -35,18 +45,28 @@ export class Page {
      */
     this.description = () => singleDae.description;
     /**
-     * 記事 url
+     * 記事 url<br>
+     * History API 使用形式の `url`
+     *
+     * プロトコル・ホスト名無し
      * @return {string} 記事 url
      */
     this.url = () => {
-      if (Env.mode !== Env.PRODUCTION) {
-        return singleDae.url.replace('https://dev.sportsbull.jp', '');
-      }
-      return singleDae.url;
+      // if (Env.mode !== Env.PRODUCTION) {
+      //   return singleDae.url.replace('https://dev.sportsbull.jp', '');
+      // }
+      // return singleDae.url;
+      return `/p/${singleDae.id}/`;
+      // return singleDae.url;
     };
     /**
-     * title middle に配置する category label
-     * @return {string} 記事 category label
+     * canonical URL, Twitter / Facebook にも使用します
+     * @return {string} canonical URL
+     */
+    this.canonical = () => `${this.host()}${this.url()}`;
+    /**
+     * title middle に配置する category label(Primary)
+     * @return {string} 記事 category label(Primary)
      */
     this.label = () => singleDae.categories.label;
     /**

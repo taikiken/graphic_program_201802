@@ -67,7 +67,7 @@ export class SnsTw {
   replace(page, title) {
     this.title().set(title);
     this.image().set(page.ogImg());
-    this.url().set(page.url());
+    this.url().set(page.canonical());
     this.description().set(page.description());
   }
 }
