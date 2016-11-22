@@ -30,22 +30,28 @@ import {ArchiveType} from '../../app/const/ArchiveType';
  * - ランキングはアクセス順で返す
  * - 動画ランキングもアクセス順で返す
  *
- * <p><strong>リクエストサンプル</strong></p>
+ * *** リクエストサンプル ***
  *
  * <pre>
  * GET
  * /api/v1/articles/category/{all|:category_slug}[/type][?[offset=n][&[length=m]]]
  * </pre>
  *
- * ```/api/v1/articles/category/all```
+ * ```
+ * /api/v1/articles/category/all
+ * ```
  *
  * - すべての記事の新着順
  *
- * ```/api/v1/articles/category/soccer/ranking```
+ * ```
+ * /api/v1/articles/category/soccer/ranking
+ * ```
  *
  * - サッカーのランキング
  *
- * ```/api/v1/articles/category/baseball/video```
+ * ```
+ * /api/v1/articles/category/baseball/video
+ * ```
  *
  * - 野球の動画
  *

@@ -81,7 +81,7 @@ export class SPComponentArticleAd extends React.Component {
     // 広告タグ親コンテナを作成し `script` tag を insert させる
     this.ok = true;
     return (
-      <div className={`board-item news-ad news-ad-${this.props.index}`} ref="newsAd"></div>
+      <div className={`board-item news-ad news-ad-${this.props.index}`} ref="newsAd" />
     );
   }
   /**

@@ -8,7 +8,6 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  */
 
-
 /**
  * HTMLElement 要素にアクセスするヘルパー
  */

@@ -110,6 +110,17 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
      * @type {Array<ArticleDae>}
      */
     this.articles = [];
+    /**
+     * didMount call back
+     * @type {?function}
+     * @since 2016-10-29
+     */
+    this.callback = null;
+    /**
+     * bind onMount
+     * @type {function}
+     */
+    this.boundMount = this.onMount.bind(this);
   }
   /**
    * 成功後に `ComponentSinglesWidgetPopularList` を render します
@@ -124,12 +135,22 @@ export class ViewSinglesPopular extends ViewArchiveMasonry {
       this.articleRendered = ReactDOM.render(
         <ComponentSinglesWidgetPopularList
           list={list}
-          callback={this.executeSafely.bind(this)}
+          callback={this.boundMount}
         />,
         this.element
       );
     } else {
       this.articleRendered.updateList(list, this.request.offset, this.request.length);
+    }
+  }
+  /**
+   * Ajax 取得コンテンツがコンテナにセットされた時に呼び出されます
+   * @since 2016-10-29
+   */
+  onMount() {
+    const callback = this.callback;
+    if (typeof callback === 'function') {
+      callback.call(this);
     }
   }
   /**

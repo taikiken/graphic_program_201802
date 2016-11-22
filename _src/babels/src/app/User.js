@@ -10,33 +10,46 @@
  *
  */
 
-
+// net
 import {Cookie} from '../net/Cookie';
+
+// event
 // import {Env} from './Env';
 import {UserStatus} from '../event/UserStatus';
+
+// data
 import {Safety} from '../data/Safety';
 
-let _symbol = Symbol();
-// let _sign = false;
+//
+// let _symbol = Symbol();
+// // let _sign = false;
+
+/**
+ * ログインユーザー情報
+ * @type {?UserDae}
+ * @private
+ * @since 2016-11-05
+ */
+let information = null;
 
 /**
  * <p>ユーザー情報を管理します</p>
  * <p>全てstaticです</p>
  */
 export class User {
-  /**
-   * static class です, instance を作成しません
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'User is static Class. not use new User().' );
-
-    }
-
-  }
+  // /**
+  //  * static class です, instance を作成しません
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target ) {
+  //
+  //   if ( _symbol !== target ) {
+  //
+  //     throw new Error( 'User is static Class. not use new User().' );
+  //
+  //   }
+  //
+  // }
   // ---------------------------------------------------
   //  GETTER / SETTER
   // ---------------------------------------------------
@@ -81,7 +94,6 @@ export class User {
   static get token():string {
     return Cookie.get( Cookie.TARGET );
   }
-
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
@@ -128,5 +140,22 @@ export class User {
     } else {
       User.login( token );
     }
+  }
+
+  /**
+   * ログインユーザー情報
+   * @return {UserDae} ログインユーザー情報を返します
+   * @since 2016-11-05
+   */
+  static info() {
+    return information;
+  }
+  /**
+   * ログインユーザー情報を設定します
+   * @param {UserDae} info ログインユーザー情報
+   * @since 2016-11-05
+   */
+  static setInfo(info) {
+    information = info;
   }
 }

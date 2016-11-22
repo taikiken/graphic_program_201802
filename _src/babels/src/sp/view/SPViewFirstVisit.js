@@ -82,7 +82,7 @@ export class SPViewFirstVisit extends ViewFirstVisit {
         if ( this.state.show ) {
           return (
             <section className="modal-intro" style={this.state.css}>
-              <div className="modal-bg" onClick={this.closeHandle} style={this.state.height}></div>
+              <div className="modal-bg" onClick={this.closeHandle} style={this.state.height} />
               <div className="modal-intro-contents">
                 <p className="modal-intro-tagline"><img src="/assets/sp/images/intro/tagline.png" alt="CRAZY FOR SPORTS"/></p>
                 <h1 className="modal-intro-heading"><img src="/assets/sp/images/intro/logo.png" alt="運動通信"/></h1>

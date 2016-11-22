@@ -10,11 +10,17 @@
  *
  */
 
-
+// view
 import {View} from '../View';
+
+// view/header
 import {ViewHeaderMember} from './ViewHeaderMember';
+
+// app
 import {Url} from '../../app/const/Url';
 import {User} from '../../app/User';
+
+// event
 import {UserStatus} from '../../event/UserStatus';
 
 // React
@@ -58,6 +64,9 @@ export class ViewHeaderUser extends View {
     userStatus.on( UserStatus.LOG_IN, boundSign );
     userStatus.on( UserStatus.LOG_OUT, boundSign );
   }
+  // ---------------------------------------------------
+  //  GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * ViewHeaderMember instance
    * @return {null|*} ViewHeaderMember instance を返します
@@ -65,6 +74,9 @@ export class ViewHeaderUser extends View {
   get member():ViewHeaderMember {
     return this._member;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * Ajax request を開始します
    */
