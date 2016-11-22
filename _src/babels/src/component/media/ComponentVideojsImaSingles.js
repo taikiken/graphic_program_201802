@@ -156,8 +156,12 @@ export class ComponentVideojsImaSingles extends React.Component {
      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
      */
     player.one('click', function() {
+      // ---
+      // https://github.com/undotsushin/undotsushin/issues/1366
+      // 記事詳細マルチプレイヤー・動画再生時に広告リクエスト
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
+      // ---
       player.play();
     });
 
