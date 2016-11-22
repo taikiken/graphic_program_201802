@@ -265,7 +265,8 @@
       margin-right: 10px;
       border-radius: 3px;
       overflow: hidden;
-      background: #ccc url(/assets/images/common/thumb-noimage-70x70.png) center center no-repeat;
+      // ref. https://github.com/undotsushin/undotsushin/issues/1244
+      // background: #ccc url(/assets/images/common/thumb-noimage-70x70.png) center center no-repeat;
 
       &.post-thumb-fill {
         background: none;
