@@ -138,3 +138,4 @@ crossdomain.xml
 # 念のために旧ファイルを確保します
 _src/bower_exports/fetch-11.0
 _src/bower_exports/react-14.0.7
+/_src/babels/src/node/single/MediaVideoNode.js.dev
