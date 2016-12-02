@@ -118,9 +118,11 @@ export class TagHead {
     this.description().set(description);
     // canonical
     this.canonical().set(page.canonical());
+    // sns title
+    const snsTitle = `${title}${TagTitle.DIVIDER}${TagTitle.EN}`;
     // Twitter
-    this.twitter().replace(page, title);
+    this.twitter().replace(page, snsTitle);
     // Facebook
-    this.og().replace(page, title);
+    this.og().replace(page, snsTitle);
   }
 }

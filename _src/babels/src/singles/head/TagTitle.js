@@ -33,19 +33,19 @@ export class TagTitle {
     this.tag = () => tag;
     // title 区切り文字
     let divider = ' | ';
-    /**
-     * title 区切り文字を取得します
-     * @return {string} title 区切り文字
-     * @default ' | '
-     */
-    this.divider = () => divider;
-    /**
-     * title 区切り文字を設定します
-     * @param {string} dividerText title 区切り文字
-     */
-    this.setDivider = (dividerText) => {
-      divider = dividerText;
-    };
+    // /**
+    //  * title 区切り文字を取得します
+    //  * @returns {string} title 区切り文字
+    //  * @default ' | '
+    //  */
+    // this.divider = () => divider;
+    // /**
+    //  * title 区切り文字を設定します
+    //  * @param {string} dividerText title 区切り文字
+    //  */
+    // this.setDivider = (dividerText) => {
+    //   divider = dividerText;
+    // };
     // 現在の title 内文字
     const value = tag.innerHTML;
     /**
@@ -86,6 +86,40 @@ export class TagTitle {
      */
     this.temporary = () => temporary;
   }
+  // ---------------------------------------------------
+  //  CONST
+  // ---------------------------------------------------
+  /**
+   * 英語表記サイトタイトル
+   * @returns {string} SPORTS BULL
+   */
+  static get EN() {
+    return 'SPORTS BULL';
+  }
+  /**
+   * 日本語表記タイトル
+   * @returns {string} スポーツブル
+   */
+  static get JP() {
+    return 'スポーツブル';
+  }
+  /**
+   * 英語表記・日本語表記の区切り文字
+   * @returns {string} ' / ' を返します
+   */
+  static get SLASH() {
+    return ' / ';
+  }
+  /**
+   * title 区切り文字を取得します
+   * @returns {string} title 区切り文字
+   */
+  static get DIVIDER() {
+    return ' | ';
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * タイトル文字を書換えます
    * @param {string} pageTitle ページタイトル
@@ -95,9 +129,11 @@ export class TagTitle {
   set(pageTitle, label = this.label()) {
     let title = `${pageTitle}`;
     if (label) {
-      title += `${this.divider()}${label}`;
+      // title += `${this.divider()}${label}`;
+      title += `${TagTitle.DIVIDER}${label}`;
     }
-    title += `${this.divider()}${this.site()}`;
+    // title += `${this.divider()}${this.site()}`;
+    title += `${TagTitle.DIVIDER}${this.site()}`;
     this.tag().innerHTML = title;
     return title;
   }

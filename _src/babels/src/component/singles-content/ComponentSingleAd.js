@@ -155,7 +155,7 @@ export class ComponentSingleAd extends React.Component {
     }
     return (
       <div className="sponsor-link">
-        <div className="sponsor-link">
+        <div className="sponsor-link column2">
           {this.left()}
           {this.right()}
         </div>
