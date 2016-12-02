@@ -28,6 +28,9 @@ import { SPComponentSinglesArticleMedia } from './SPComponentSinglesArticleMedia
 // ui
 import { Hit } from '../../../ui/Hit';
 
+// util
+import { PageTitle } from '../../../util/PageTitle';
+
 // view
 // import { ViewSingle } from '../../../view/ViewSingle';
 
@@ -190,7 +193,9 @@ export class SPComponentSinglesArticle extends React.Component {
       Ga.single(single, 'SPComponentSinglesArticle.onHit');
       // ---------------------
       // https://github.com/undotsushin/undotsushin/issues/1151
-      Ga.addPage(single.id, 'SPComponentSinglesArticle.onHit');
+      // @since  2016-11-15 title added
+      const page = new PageTitle(single.title, single.categories.label);
+      Ga.addPage(single.id, 'SPComponentSinglesArticle.onHit', page.title());
       // ---------------------
       this.dispose();
     }
