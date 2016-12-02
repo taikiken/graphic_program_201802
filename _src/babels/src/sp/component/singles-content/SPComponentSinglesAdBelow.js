@@ -57,12 +57,17 @@ export class SPComponentSinglesAdBelow extends React.Component {
      * 広告 script src 共通部分, 広告IDで書替えます
      * @type {string}
      */
-    this.scriptSrc = 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=__AD_ID__&targetID=adg___AD_ID__&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=true&tagver=2.0.0';
+    this.scriptSrc = 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=__AD_ID__&targetID=__TARGET_ID__&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=true&tagver=2.0.0';
     /**
      * div.sponsor-link_commentLower
      * @type {?Element} div.sponsor-link_commentLower
      */
     this.element = null;
+    /**
+     * script 挿入タグ ID
+     * @type {string}
+     */
+    this.id = `adg_${props.ad.sp}_${props.index}`;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -82,7 +87,7 @@ export class SPComponentSinglesAdBelow extends React.Component {
     const sp = this.state.ad.sp;
     let div = document.createElement('div');
     let script = document.createElement('script');
-    script.src = this.scriptSrc.split('__AD_ID__').join(sp);
+    script.src = this.scriptSrc.split('__AD_ID__').join(sp).split('__TARGET_ID__').join(this.id);
     div.appendChild(script);
     this.element.appendChild(div);
   }

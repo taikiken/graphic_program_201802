@@ -57,7 +57,12 @@ export class ComponentSingleAd extends React.Component {
      * 広告 script src 共通部分, 広告IDで書替えます
      * @type {string}
      */
-    this.scriptSrc = 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=__AD_ID__&targetID=adg___AD_ID__&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=true&tagver=2.0.0';
+    this.scriptSrc = 'https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=__AD_ID__&targetID=__TARGET_ID__&displayid=3&adType=PC&width=300&height=250&sdkType=3&async=true&tagver=2.0.0';
+    /**
+     * script 挿入タグ ID
+     * @type {string}
+     */
+    this.id = `adg_${props.ad.sp}_${props.index}`;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -90,7 +95,8 @@ export class ComponentSingleAd extends React.Component {
     // 広告ID をセットする script tag
     let script = document.createElement('script');
     // 広告IDを定数 `__AD_ID__` と置換え
-    script.src = this.scriptSrc.split('__AD_ID__').join(left);
+    script.src = this.scriptSrc.split('__AD_ID__').join(left)
+      .split('__TARGET_ID__').join(`${this.id}_left`);
     // div tag へ script tag を挿入
     div.appendChild(script);
     // React が script tag の appendChild を許可しないので
@@ -105,7 +111,8 @@ export class ComponentSingleAd extends React.Component {
     const right = this.state.ad.singleBottomRight;
     let div = document.createElement('div');
     let script = document.createElement('script');
-    script.src = this.scriptSrc.split('__AD_ID__').join(right);
+    script.src = this.scriptSrc.split('__AD_ID__').join(right)
+      .split('__TARGET_ID__').join(`${this.id}_right`);
     div.appendChild(script);
     this.refs.rightContainer.appendChild(div);
   }
@@ -119,7 +126,7 @@ export class ComponentSingleAd extends React.Component {
       return null;
     }
     return (
-      <div className="sponsor-link-item" ref="leftContainer"/>
+      <div id={`${this.id}_left`} className="sponsor-link-item" ref="leftContainer"/>
     );
   }
   /**
@@ -132,7 +139,7 @@ export class ComponentSingleAd extends React.Component {
       return null;
     }
     return (
-      <div className="sponsor-link-item" ref="rightContainer"/>
+      <div id={`${this.id}_right`} className="sponsor-link-item" ref="rightContainer"/>
     );
   }
   /**
