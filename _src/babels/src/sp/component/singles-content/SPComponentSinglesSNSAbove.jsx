@@ -94,7 +94,7 @@ export class SPComponentSinglesSNSAbove extends React.Component {
               <span>{MessageSNS.GOOGLE_PLUS}</span>
             </a>
           </li>
-          <li className="post-sns-item post-sns-item_">
+          <li className="post-sns-item post-sns-item_line">
             <a href={`http://line.me/R/msg/text/?${encodeURIComponent(title + ' ' + url)}`} target="_blank">
               <span>{MessageSNS.SEND_LINE}</span>
             </a>
