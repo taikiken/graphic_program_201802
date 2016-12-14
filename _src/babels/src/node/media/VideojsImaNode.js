@@ -113,7 +113,6 @@ export let VideojsImaNode = React.createClass( {
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
 
-
       player.one('click', function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
@@ -121,7 +120,7 @@ export let VideojsImaNode = React.createClass( {
       });
 
 
-      /*let url = this.props.video.url.sd;
+      let url = this.props.video.url.sd;
       player.one('play', function() {
         let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
         Ga.add(gaData);
@@ -130,7 +129,7 @@ export let VideojsImaNode = React.createClass( {
       player.one('ended', function() {
         let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'complete', url);
         Ga.add(gaData);
-      });*/
+      });
 
       var video=document.getElementById(videoId);
 
