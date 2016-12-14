@@ -95,7 +95,8 @@ export class SPComponentSingleContent extends React.Component {
    * マウント後に Facebook like button を活性化するために `FB.init` を行います
    */
   componentDidMount() {
-    Fb.init();
+    // Fb.init();
+    Fb.delay(500);
   }
   /**
    * state.single 情報を更新し再描画します

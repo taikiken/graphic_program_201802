@@ -62,6 +62,6 @@ export class Fb {
    */
   static delay(time = 1000) {
     clearTimeout(id);
-    setTimeout(Fb.init, time);
+    id = setTimeout(Fb.init, time);
   }
 }

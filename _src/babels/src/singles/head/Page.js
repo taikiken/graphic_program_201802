@@ -87,7 +87,7 @@ export class Page {
       url: singleDae.url,
       ogImg: singleDae.media.images.original,
     };
-    console.log('Page', this.title(), this.url(), this.ogImg());
+    // console.log('Page', this.title(), this.url(), this.ogImg());
   }
   /**
    * pushstate 第一引数に利用する Object

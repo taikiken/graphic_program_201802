@@ -21,9 +21,11 @@ import { WidgetType } from '../../../app/const/WidgetType';
 import { SPComponentSinglesWidget } from './SPComponentSinglesWidget';
 import { SPComponentSinglesArticleMagnet } from '../singles-magnet/SPComponentSinglesArticleMagnet';
 
-
 // ui
 import { SinglesManager } from '../../../ui/SinglesManager';
+
+// util
+import { Fb } from '../../../util/Fb';
 
 // React
 const React = self.React;
@@ -137,6 +139,8 @@ export class SPComponentSingles extends React.Component {
     // hasNext を元に More View button の表示非表示を決める
     // console.log('SPComponentSingles.componentDidMount', this.props.action);
     this.props.boundMore(this.props.action.hasNext());
+    // Facebook like
+    Fb.delay(100);
   }
   // ---------------------------------------------------
   // 3件以下

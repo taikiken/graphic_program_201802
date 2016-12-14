@@ -31,7 +31,7 @@ const React = self.React;
  * 「続きを読む」クリックで本文を表示します
  * @since 2016-11-11
  */
-export class SPComponentSInglesArticleSwitch extends React.Component {
+export class SPComponentSinglesArticleSwitch extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------

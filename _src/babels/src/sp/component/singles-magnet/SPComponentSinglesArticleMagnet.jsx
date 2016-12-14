@@ -53,7 +53,7 @@ import { SPSnap } from '../../ui/SPSnap';
 // import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
 
 // sp/component/singles-magnet
-import { SPComponentSInglesArticleSwitch } from './SPComponentSInglesArticleSwitch';
+import { SPComponentSinglesArticleSwitch } from './SPComponentSinglesArticleSwitch';
 
 // util
 import { PageTitle } from '../../../util/PageTitle';
@@ -377,7 +377,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
             />
           </div>
           {/* 本文 */}
-          <SPComponentSInglesArticleSwitch
+          <SPComponentSinglesArticleSwitch
             single={single}
             sign={this.state.sign}
             index={this.state.index}
