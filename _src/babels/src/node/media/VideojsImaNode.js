@@ -68,11 +68,21 @@ export let VideojsImaNode = React.createClass( {
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
     if (navigator.userAgent.match(/iPhone/i)) {
-          return (
+          /*return (
                 <div id="ima-sample-videoplayer">
                   <div id="ima-sample-placeholder"></div>
                 </div>
-              );
+              );*/
+
+      return(
+          <div className="post-kv post-video-kv">
+            <div id="mainContainer">
+              <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+                <source src={url} type="application/x-mpegURL"></source>
+              </video>
+            </div>
+          </div>
+      );
     } else {
           return(
             <div id="mainContainer">
@@ -89,7 +99,62 @@ export let VideojsImaNode = React.createClass( {
 
     /* Player initialized. */
     if (navigator.userAgent.match(/iPhone/i)) {
-      var ads = new Ads(adUrl, this.props.video.url.sd, window.innerWidth, Math.ceil( window.innerWidth / 16 * 9 ),this.props.poster);
+
+      let videoId='content_video';
+      let player = videojs(videoId);
+      let option = {
+        id: videoId,
+        adTagUrl: adUrl
+      };
+      player.ima(option);
+
+      var adContainer = document.getElementById(videoId+'_ima-ad-container');
+      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+      player.ima.initializeAdDisplayContainer();
+      player.ima.requestAds();
+
+
+      player.one('click', function() {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
+      });
+
+
+      /*let url = this.props.video.url.sd;
+      player.one('play', function() {
+        let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'begin', url);
+        Ga.add(gaData);
+
+      });
+      player.one('ended', function() {
+        let gaData = new GaData('SPComponentSinglesArticleMedia.tracking', 'video', 'complete', url);
+        Ga.add(gaData);
+      });*/
+
+      var video=document.getElementById(videoId);
+
+      window.addEventListener('scroll', function () {
+        let videoWidth = window.innerWidth;
+        let videoHeight = Math.ceil( videoWidth / 16 * 9 );
+
+        var elemTop = video.getBoundingClientRect().top;
+        var elemBottom = video.getBoundingClientRect().bottom;
+
+        var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+
+        if(isVisible){
+          //player.play();
+        }else {
+          player.pause();
+          player.ima.pauseAd();
+        }
+      }, false);
+
+
+
+
+      /*var ads = new Ads(adUrl, this.props.video.url.sd, window.innerWidth, Math.ceil( window.innerWidth / 16 * 9 ),this.props.poster);
 
       ads.init();
       document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
@@ -130,7 +195,7 @@ export let VideojsImaNode = React.createClass( {
         }else{
           //videoElement.ima.resumeAd();
         }
-      }, false);
+      }, false);*/
 
     } else {
 
@@ -202,13 +267,14 @@ export let VideojsImaNode = React.createClass( {
           videoElement.addEventListener( 'ended', this.onEnded );
           videoElement.addEventListener( 'pause', this.onPause );
 
-          //player.ima.initializeAdDisplayContainer();
+          player.ima.initializeAdDisplayContainer();
           //player.ima.requestAds();
-          var adContainer = document.getElementById('content_video_ima-ad-container');
-          adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+
           player.one('click', function() {
             player.ima.initializeAdDisplayContainer();
             player.ima.requestAds();
+            var adContainer = document.getElementById('content_video_ima-ad-container');
+            adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
             player.play();
           });
         }else {

@@ -49,12 +49,17 @@ Ads.prototype.init = function() {
       showControlsForJSAds:false
     };
   this.player.ima(options,
-      this.bind(this, this.adsManagerLoadedCallback));
-  this.player.ima.initializeAdDisplayContainer();
-  this.player.ima.requestAds();
-  var adContainer = document.getElementById('content_video_ima-ad-container');
-  adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
-  this.player.play();
+  this.bind(this, this.adsManagerLoadedCallback));
+
+
+    this.player.ima.initializeAdDisplayContainer();
+    this.player.ima.requestAds();
+    var adContainer = document.getElementById('content_video_ima-ad-container');
+    adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
+    this.player.one('click', function() {
+        this.play();
+    });
+
 };
 
 Ads.prototype.createPlayer = function() {
