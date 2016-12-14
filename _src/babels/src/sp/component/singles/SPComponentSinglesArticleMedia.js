@@ -86,11 +86,6 @@ export class SPComponentSinglesArticleMedia extends React.Component {
       let vast = single.media.media.video.ad_url.sp;
       let adUrl = vast !== '' ? vast + Date.now() : '';
 
-      /*if (navigator.userAgent.match(/iPhone/i)) {
-        var ads = new Ads(adUrl, single.media.video.url.sd, window.innerWidth, Math.ceil(window.innerWidth / 16 * 9), single.media.images.original);
-        ads.init();
-      }*/
-
       let videoId='content_video_'+single.id;
       let player = videojs(videoId);
       let option = {
@@ -99,27 +94,23 @@ export class SPComponentSinglesArticleMedia extends React.Component {
       };
       player.ima(option);
 
-
       if (navigator.userAgent.match(/iPhone/i)) {
         var adContainer = document.getElementById(videoId+'_ima-ad-container');
         adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
         player.ima.initializeAdDisplayContainer();
-        player.ima.requestAds();
+        //player.ima.requestAds();
       }
-
 
       if (navigator.userAgent.match(/Android/i)) {
         var adContainer = document.getElementById(videoId+'_ima-ad-container');
         adContainer.setAttribute('style', 'z-index: 99 !important; position: absolute;');
       }
 
-
-        player.one('click', function() {
-            player.ima.initializeAdDisplayContainer();
-            player.ima.requestAds();
-            player.play();
-        });
-
+      player.one('click', function() {
+          player.ima.initializeAdDisplayContainer();
+          player.ima.requestAds();
+          player.play();
+      });
 
       let url = single.media.video.url.sd;
       player.one('play', function() {

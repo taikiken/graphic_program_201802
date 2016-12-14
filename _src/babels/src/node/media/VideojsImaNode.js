@@ -202,8 +202,8 @@ export let VideojsImaNode = React.createClass( {
           videoElement.addEventListener( 'ended', this.onEnded );
           videoElement.addEventListener( 'pause', this.onPause );
 
-          player.ima.initializeAdDisplayContainer();
-          player.ima.requestAds();
+          //player.ima.initializeAdDisplayContainer();
+          //player.ima.requestAds();
           var adContainer = document.getElementById('content_video_ima-ad-container');
           adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
           player.one('click', function() {
