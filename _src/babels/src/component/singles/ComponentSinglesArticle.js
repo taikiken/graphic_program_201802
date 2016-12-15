@@ -173,7 +173,14 @@ export class ComponentSinglesArticle extends React.Component {
    * Hit.COLLISION event handler<br>
    * ウインドウ内にコンテナが表示された時に通知されます<br>
    * コンテナ top が +- 50px 以内だと Ga tag 送信します
-   * @param {{type: string, originalEvent: events, y: number, height: number, moving: number, changed: boolean}} events Hit events
+   * @param {{
+   *  type: string,
+   *  originalEvent: events,
+   *  y: number,
+   *  height: number,
+   *  moving: number,
+   *  changed: boolean,
+   *  rect: Object}} events Hit events
    */
   onHit(events) {
     if (this.sended) {

@@ -108,7 +108,7 @@ export class SinglesHistory extends EventDispatcher {
       base = baseUrl;
     };
     // popstate 監視
-    window.addEventListener('popstate', this.onPop.bind(this), false);
+    // window.addEventListener('popstate', this.onPop.bind(this), false);
 
     _instance = this;
     return _instance;
@@ -116,24 +116,24 @@ export class SinglesHistory extends EventDispatcher {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * popstate event handler
-   * @param {Event} event popstate event
-   */
-  onPop(event) {
-    // const page = this.pages().pop();
-    // // default は常に確保する
-    // if (page.url() === this.base()) {
-    //   this.pages().add(page);
-    // }
-    console.log('================== onPop event ===================', event);
-  }
+  // /**
+  //  * popstate event handler
+  //  * @param {Event} event popstate event
+  //  */
+  // onPop(event) {
+  //   // const page = this.pages().pop();
+  //   // // default は常に確保する
+  //   // if (page.url() === this.base()) {
+  //   //   this.pages().add(page);
+  //   // }
+  //   console.log('================== onPop event ===================', event);
+  // }
   /**
    * head > meta などを書換えます
    * @param {Page} page 書換え対象のページ情報
    */
   replace(page) {
-    console.log('replace ******', page.info());
+    // console.log('replace ******', page.info());
     history.replaceState(page.info(), page.title(), page.url());
     this.head().replace(page);
   }
@@ -148,7 +148,7 @@ export class SinglesHistory extends EventDispatcher {
       console.warn('push is inner method. instead use hit');
       return;
     }
-    console.log('------------------- pushState', page.url());
+    // console.log('------------------- pushState', page.url());
     // history.pushState(page.info(), page.title(), page.url());
     // wired.jp も replaceState だったよ
     this.replace(page);
