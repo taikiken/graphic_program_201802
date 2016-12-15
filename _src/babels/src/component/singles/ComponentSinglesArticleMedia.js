@@ -148,10 +148,11 @@ export class ComponentSinglesArticleMedia extends React.Component {
       player.ima(option);
 
       player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
+
       /*var adContainer = document.getElementById('content_video_ima-ad-container');
       adContainer.setAttribute('style', 'z-index: -1; position: absolute;');*/
       player.one('click', function() {
+        player.ima.requestAds();
         player.play();
       });
 

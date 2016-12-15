@@ -104,18 +104,24 @@ export let VideojsImaNode = React.createClass( {
       let player = videojs(videoId);
       let option = {
         id: videoId,
-        adTagUrl: adUrl
+        adTagUrl: adUrl,
+        nativeControlsForTouch: false,
+        showControlsForJSAds:false
       };
       player.ima(option);
 
-      var adContainer = document.getElementById(videoId+'_ima-ad-container');
-      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
+
+      // player.ima.initializeAdDisplayContainer();
+      // player.ima.requestAds();
+
+      var adContainer = document.querySelector('#content_video_ima-ad-container > div');
+      adContainer.setAttribute('style', 'display:none');
+      //adContainer.setAttribute('style', 'z-index: 99999 !important; position: absolute; width:100%; height:100%;');
 
       player.one('click', function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
+
         player.play();
       });
 
@@ -131,7 +137,6 @@ export let VideojsImaNode = React.createClass( {
         Ga.add(gaData);
       });
 
-      var video=document.getElementById(videoId);
 
       window.addEventListener('scroll', function () {
         let videoWidth = window.innerWidth;
