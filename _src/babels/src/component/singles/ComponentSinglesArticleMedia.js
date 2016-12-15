@@ -140,7 +140,7 @@ export class ComponentSinglesArticleMedia extends React.Component {
       let vast = single.media.media.video.ad_url.pc;
       let adUrl = vast !== '' ? vast + Date.now() : '';
       let videoId='content_video_'+single.id;
-      let player = videojs(videoId);
+      let player = videojs(videoId,{preload:"none"});
       let option = {
         id: videoId,
         adTagUrl: adUrl

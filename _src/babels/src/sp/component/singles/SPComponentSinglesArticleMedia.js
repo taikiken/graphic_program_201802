@@ -92,7 +92,7 @@ export class SPComponentSinglesArticleMedia extends React.Component {
       }*/
 
       let videoId='content_video_'+single.id;
-      let player = videojs(videoId);
+      let player = videojs(videoId,{preload:"none"});
       let option = {
         id: videoId,
         adTagUrl: adUrl
@@ -191,7 +191,7 @@ export class SPComponentSinglesArticleMedia extends React.Component {
     return(
         <div className="post-kv post-video-kv">
           <div id={videoContainer}>
-            <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+            <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video"  controls>
               <source src={single.media.video.url.sd} type="application/x-mpegURL"></source>
             </video>
           </div>

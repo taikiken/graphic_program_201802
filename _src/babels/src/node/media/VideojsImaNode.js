@@ -101,7 +101,7 @@ export let VideojsImaNode = React.createClass( {
     if (navigator.userAgent.match(/iPhone/i)) {
 
       let videoId='content_video';
-      let player = videojs(videoId);
+      let player = videojs(videoId,{preload:"none"});
       let option = {
         id: videoId,
         adTagUrl: adUrl,
