@@ -68,29 +68,23 @@ export let VideojsImaNode = React.createClass( {
     let width = this.phone ? window.innerWidth : Content.WIDTH;
     let height = this.phone ? Math.ceil( width / 16 * 9 ) : Content.HD_HEIGHT;
     if (navigator.userAgent.match(/iPhone/i)) {
-          /*return (
-                <div id="ima-sample-videoplayer">
-                  <div id="ima-sample-placeholder"></div>
-                </div>
-              );*/
-
       return(
-          <div className="post-kv post-video-kv">
-            <div id="mainContainer">
-              <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
-                <source src={url} type="application/x-mpegURL"></source>
-              </video>
-            </div>
+        <div className="post-kv post-video-kv">
+          <div id="mainContainer">
+            <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+              <source src={url} type="application/x-mpegURL"></source>
+            </video>
           </div>
+        </div>
       );
     } else {
-          return(
-            <div id="mainContainer">
-                <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
-                  <source src={url} type="application/x-mpegURL"></source>
-                </video>
-            </div>
-          );
+      return(
+        <div id="mainContainer">
+            <video id="content_video" className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
+              <source src={url} type="application/x-mpegURL"></source>
+            </video>
+        </div>
+      );
     }
   },
   componentDidMount: function() {

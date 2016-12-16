@@ -12,6 +12,7 @@
 
 // app
 import { MediaType } from '../../app/const/MediaType';
+import {VideoType} from '../../app/const/VideoType';
 import { Empty } from '../../app/const/Empty';
 import {Content} from '../../app/const/Content';
 
@@ -60,13 +61,37 @@ export class ComponentSinglesArticleMedia extends React.Component {
       return null;
     }
 
+    const mediaVideoType = single.media.video.player;
     const mediaType = single.mediaType;
-
+    console.log(mediaVideoType);
     if (mediaType === MediaType.VIDEO) {
+      switch ( mediaVideoType ) {
+        case VideoType.BRIGHTCOVE:
+          return ComponentSinglesArticleMedia.video(single);
+
+        case VideoType.VIDEOJSIMA:
+          return ComponentSinglesArticleMedia.video(single);
+
+        case VideoType.YOUTUBE:
+          return ComponentSinglesArticleMedia.youtube(single.media);
+
+        case VideoType.FACEBOOK:
+          return ComponentSinglesArticleMedia.facebook(single.media);
+
+        default:
+          return null;
+
+      }
+    }
+    return ComponentSinglesArticleMedia.image(single);
+
+
+
+    /*if (mediaType === MediaType.VIDEO) {
       return ComponentSinglesArticleMedia.video(single);
     }
 
-    return ComponentSinglesArticleMedia.image(single);
+    return ComponentSinglesArticleMedia.image(single);*/
   }
   /**
    * state.sign 情報を更新し再描画します
@@ -92,12 +117,12 @@ export class ComponentSinglesArticleMedia extends React.Component {
    */
   static video(single) {
     const images = single.media.images;
-    let poster = Safety.image(images.original, '');
+    var poster = Safety.image(images.original, '');
     if (poster === '') {
       poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
     }
-    let videoId = 'content_video_' + single.id;
-    let videoContainer = 'mainContainer_' + single.id;
+    var videoId = 'content_video_' + single.id;
+    var videoContainer = 'mainContainer_' + single.id;
 
     let width = Content.WIDTH;
     let height = Content.HD_HEIGHT;
@@ -162,6 +187,37 @@ export class ComponentSinglesArticleMedia extends React.Component {
       }, false);
     }
 
+  }
+
+  static youtube( media ) {
+    var video = media.video;
+
+    return (
+      <div className="post-kv">
+        <iframe
+          src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
+          width={Content.WIDTH}
+          height={Content.HD_HEIGHT}
+          frameBorder="0"
+          allowFullScreen
+        >
+        </iframe>
+      </div>
+    );
+  }
+
+  static facebook( media ) {
+    var video = media.video;
+    return (
+      <div className="post-kv">
+        <div className="fb-video"
+          data-href={video.facebook}
+          data-allowfullscreen="true"
+          data-width={Content.WIDTH}
+        >
+        </div>
+      </div>
+    );
   }
 
 
