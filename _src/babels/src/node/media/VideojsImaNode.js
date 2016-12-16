@@ -108,8 +108,7 @@ export let VideojsImaNode = React.createClass( {
 
       // player.ima.initializeAdDisplayContainer();
       // player.ima.requestAds();
-
-      document.querySelector('#content_video_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
+      document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
       var adContainer = document.querySelector('#content_video_ima-ad-container > div');
       adContainer.setAttribute('style', 'display:none');
 

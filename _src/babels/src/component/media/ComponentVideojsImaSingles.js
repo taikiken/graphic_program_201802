@@ -151,6 +151,8 @@ export class ComponentVideojsImaSingles extends React.Component {
 
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
+
+    document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
     /*
      var adContainer = document.getElementById('content_video_ima-ad-container');
      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
