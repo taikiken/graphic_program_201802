@@ -54,6 +54,10 @@ export class SPComponentSinglesWidgetPopularList extends React.Component {
   render() {
     // @type {Array<SingleDae>}
     const articles = this.state.list;
+    // not array, 空配列 null を返します
+    if (!Array.isArray(articles) || articles.length === 0) {
+      return null;
+    }
 
     return (
       <div className="widget-postList widget-postList_popular">

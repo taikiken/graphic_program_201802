@@ -34,11 +34,12 @@ let Isotope = self.Isotope;
 
 /**
  * 記事一覧 + 無限スクロール + isotope
- * @since 2016-09-15
  *
  * <pre>
  *   <ComponentArticlesMasonryInfinite/>
  * <pre>
+ *
+ * @since 2016-09-15
  */
 export class ComponentArticlesMasonryInfinite extends React.Component {
   /**

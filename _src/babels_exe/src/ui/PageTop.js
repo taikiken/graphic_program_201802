@@ -19,7 +19,7 @@ const Offset = UT.util.Offset;
 
 // TweenMax
 const TweenLite = self.TweenLite;
-const easing = self.com.greensock.easing;
+// const easing = self.com.greensock.easing;
 
 // Sagen
 const Sagen = window.Sagen;
@@ -29,22 +29,34 @@ const Sagen = window.Sagen;
  */
 export class PageTop {
   /**
+   * PageTop instance を作成し init 関数をコールします
+   */
+  static start():void {
+    let pageTop = new PageTop();
+    pageTop.init();
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
    * page top に戻る motion
    */
   constructor() {
-    /**
-     * <p>bind 済み this.onComplete<br>ページトップへ戻るアニメーション完了を listener します</p>
-     * @type {Function}
-     * @private
-     */
-    this._boundComplete = this.onComplete.bind( this );
-    /**
-     * click 不可管理フラッグ
-     * @type {boolean}
-     * @private
-     * @default true;
-     */
-    this._can = true;
+    // @since 2016-10-28
+    // TopButton へ移管
+    // /**
+    //  * <p>bind 済み this.onComplete<br>ページトップへ戻るアニメーション完了を listener します</p>
+    //  * @type {Function}
+    //  * @private
+    //  */
+    // this._boundComplete = this.onComplete.bind( this );
+    // /**
+    //  * click 不可管理フラッグ
+    //  * @type {boolean}
+    //  * @private
+    //  * @default true;
+    //  */
+    // this._can = true;
 
     // @since 2016-09-01
     // https://github.com/undotsushin/undotsushin/issues/1053
@@ -105,7 +117,17 @@ export class PageTop {
      * @default false
      */
     this._inFade = false;
+
+    /**
+     * click で top へ戻るアニメーションを
+     * @type {TopButton}開始します
+     * @since 2016-10-28
+     */
+    this.topButton = UT.ui.button.TopButton.factory();
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * click event を bind します
    */
@@ -114,8 +136,9 @@ export class PageTop {
     if (element === null) {
       return;
     }
-    element.addEventListener( 'click', this.onClick.bind( this ), false );
+    // element.addEventListener( 'click', this.onClick.bind( this ), false );
     this._element = element;
+    this.topButton.init(element);
 
     const footer = Dom.footer();
     if (footer === null) {
@@ -126,51 +149,44 @@ export class PageTop {
 
     this.initRise();
   }
-  /**
-   * <p>element click event handler</p>
-   * <p>click 管理フラッグが true ならフラッグを false にし<br>ページの上部(offsetY: 0)へ戻すアニメーションを開始します</p>
-   * @param {Event} event native event, click event
-   */
-  onClick( event:Event ):void {
-    event.preventDefault();
-
-    // click 不可のときは処理しない
-    if ( !this._can ) {
-      return;
-    }
-
-    let complete = this._boundComplete;
-    this._can = false;
-
-    // scrolling
-    TweenLite.to(
-      window,
-      0.5,
-      {
-        scrollTo: {
-          y: 0,
-          autoKill: false
-        },
-        // easing
-        ease: easing.Power4.easeInOut,
-        onComplete: complete
-      }
-    );
-  }
-  /**
-   * <p>page top motion complete<br>
-   * click 管理フラッグを true にします</p>
-   */
-  onComplete():void {
-    this._can = true;
-  }
-  /**
-   * PageTop instance を作成し init 関数をコールします
-   */
-  static start():void {
-    let pageTop = new PageTop();
-    pageTop.init();
-  }
+  // /**
+  //  * <p>element click event handler</p>
+  //  * <p>click 管理フラッグが true ならフラッグを false にし<br>ページの上部(offsetY: 0)へ戻すアニメーションを開始します</p>
+  //  * @param {Event} event native event, click event
+  //  */
+  // onClick( event:Event ):void {
+  //   event.preventDefault();
+  //
+  //   // click 不可のときは処理しない
+  //   if ( !this._can ) {
+  //     return;
+  //   }
+  //
+  //   let complete = this._boundComplete;
+  //   this._can = false;
+  //
+  //   // scrolling
+  //   TweenLite.to(
+  //     window,
+  //     0.5,
+  //     {
+  //       scrollTo: {
+  //         y: 0,
+  //         autoKill: false
+  //       },
+  //       // easing
+  //       ease: easing.Power4.easeInOut,
+  //       onComplete: complete
+  //     }
+  //   );
+  // }
+  // /**
+  //  * <p>page top motion complete<br>
+  //  * click 管理フラッグを true にします</p>
+  //  */
+  // onComplete():void {
+  //   this._can = true;
+  // }
   // -------------------------------------------------------------------------
   // @since 2016-09-01
   // https://github.com/undotsushin/undotsushin/issues/1053

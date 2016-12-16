@@ -103,6 +103,9 @@ import {ViewSettingsInterest} from './view/settings/ViewSettingsInterest';
 // ----------- ga
 import {Ga} from './ga/Ga';
 
+// ui
+import { TopButton } from './ui/button/TopButton';
+
 // -------------------------------------
 // sp
 
@@ -169,6 +172,11 @@ let UT = {
   util: {
     Offset,
     Scroll
+  },
+  ui: {
+    button: {
+      TopButton
+    }
   },
   net: {
     Cookie

@@ -20,7 +20,7 @@ let _instance = null;
  * <p>Exif orientation check</p>
  * <p>iOS カメラロール画像からユーザーアイコンを取得すると横向きになるために exif orientation 値を取得し向きを正規化します</p>
  *
- * [stackoverflow])http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side)
+ * [stackoverflow](http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side)
  */
 export class Exif extends EventDispatcher {
   /**

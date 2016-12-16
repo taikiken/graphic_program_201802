@@ -19,10 +19,16 @@ import { WidgetType } from '../../app/const/WidgetType';
 // component
 // import { ComponentSinglesWidgetOption } from './ComponentSinglesWidgetOption';
 import { ComponentSinglesWidget } from './ComponentSinglesWidget';
-import { ComponentSinglesArticle } from './ComponentSinglesArticle';
+
+// 記事本文
+// import { ComponentSinglesArticle } from './ComponentSinglesArticle';
+import { ComponentSinglesArticleMagnet } from '../singles-magnet/ComponentSinglesArticleMagnet';
 
 // ui
 import { SinglesManager } from '../../ui/SinglesManager';
+
+// util
+import { Fb } from '../../util/Fb';
 
 // React
 const React = self.React;
@@ -32,6 +38,38 @@ const React = self.React;
  * @since 2016-09-30
  */
 export class ComponentSingles extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{list: Array<SingleDae>, offset: number, length: number, action: Object, callback: Function, boundMore: Function, single: SingleDae, home: boolean, sign: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      // Array<SingleDae>
+      list: React.PropTypes.array.isRequired,
+      // request offset
+      offset: React.PropTypes.number.isRequired,
+      // request length
+      length: React.PropTypes.number.isRequired,
+      // action instance
+      action: React.PropTypes.object.isRequired,
+      // executeSafely
+      callback: React.PropTypes.func.isRequired,
+      // more button createElement callback
+      boundMore: React.PropTypes.func.isRequired,
+      // SingleDae - 記事詳細データ recommend_articles 抽出
+      single: React.PropTypes.object.isRequired,
+      // home container かのフラッグ
+      home: React.PropTypes.bool.isRequired,
+      // login 済みかのフラッグ
+      sign: React.PropTypes.bool.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSingles.propTypes}
@@ -55,157 +93,9 @@ export class ComponentSingles extends React.Component {
      */
     this.manager = SinglesManager.factory(props.single);
   }
-  /**
-   * desktop: 記事詳細「次の記事一覧」を出力します
-   * @return {XML} div.singles-root を返します
-   */
-  render() {
-    const props = this.props;
-    const state = this.state;
-    const list = state.list;
-    const length = list.length;
-    // console.log('ComponentSingles.render', length);
-    // @ToDO 条件簡略化可能か調べる
-    // @ToDO 各件数のテスト
-    if (length === 0) {
-      // 続きの記事 0 件
-      // オススメ・関連・人気
-      return (
-        <div className="singles-root">
-          {this.underThree(length)}
-        </div>
-      );
-    } else if (length < 3) {
-      // 続きの記事 3件未満
-      return (
-        <div className="singles-root">
-          {
-            list.map((single, index) => {
-              return (
-                <ComponentSinglesArticle
-                  key={`singles-article-${single.id}`}
-                  single={single}
-                  sign={props.sign}
-                  index={index}
-                />
-              );
-            })
-          }
-          {this.underThree(length)}
-        </div>
-      );
-    } else if (length < 6) {
-      // 続きの記事 6件未満
-      return (
-        <div className="singles-root">
-          {
-            list.map((single, index) => {
-              return (
-                <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under6">
-                  <ComponentSinglesArticle
-                    key={`singles-article-${single.id}`}
-                    single={single}
-                    sign={props.sign}
-                    index={index}
-                  />
-                  {/*
-                  <ComponentSinglesWidgetOption
-                    key={`singles-widget-${single.id}`}
-                    single={props.single}
-                    sign={props.sign}
-                    index={index}
-                  />
-                   */}
-                  {
-                    this.next(index)
-                  }
-                </div>
-              );
-            })
-          }
-          {
-            // 関連記事一覧
-            // this.widget(WidgetType.RELATED, length, true)
-            this.next(length, true)
-          }
-          {
-            // 人気記事一覧
-            // this.widget(WidgetType.POPULAR, length + 1, true)
-            // オススメ記事がある時だけ3番目がある
-            this.next(length + 1, this.manager.count < 3)
-          }
-        </div>
-      );
-    } else if (length < 9) {
-      // 続きの記事 9件未満
-      return (
-        <div className="singles-root">
-          {
-            list.map((single, index) => {
-              return (
-                <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under9">
-                  <ComponentSinglesArticle
-                    key={`singles-article-${single.id}`}
-                    single={single}
-                    sign={props.sign}
-                    index={index}
-                  />
-                  {/*
-                  <ComponentSinglesWidgetOption
-                    key={`singles-widget-${single.id}`}
-                    single={props.single}
-                    sign={props.sign}
-                    index={index}
-                  />
-                  */}
-                  {
-                    this.next(index)
-                  }
-                </div>
-              );
-            })
-          }
-          {
-            // 人気記事一覧
-            // this.widget(WidgetType.POPULAR, length, true)
-            // オススメ記事がある時だけ3番目がある
-            this.next(length, this.manager.count < 3)
-          }
-        </div>
-      );
-    }
-
-    // 9 件以上
-    return (
-      <div className="singles-root">
-        {
-          list.map((single, index) => {
-            return (
-              <div key={`single-root-${single.id}`} className="singles-root-article">
-                <ComponentSinglesArticle
-                  key={`singles-article-${single.id}`}
-                  single={single}
-                  sign={props.sign}
-                  index={index}
-                />
-                {/*
-                <ComponentSinglesWidgetOption
-                  key={`singles-widget-${single.id}`}
-                  single={props.single}
-                  sign={props.sign}
-                  index={index}
-                />
-                */}
-                {
-                  this.next(index)
-                }
-              </div>
-            );
-          })
-        }
-      </div>
-    );
-  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * delegate, mount 後に呼び出されます<r>
    * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
@@ -214,6 +104,9 @@ export class ComponentSingles extends React.Component {
     this.props.callback(View.DID_MOUNT);
     // hasNext を元に More View button の表示非表示を決める
     this.props.boundMore(this.props.action.hasNext());
+    // @since 2016-11-04
+    // Facebook like
+    Fb.init();
   }
   // ---------------------------------------------------
   // 3件以下
@@ -322,7 +215,6 @@ export class ComponentSingles extends React.Component {
       }
     }
   }
-
   /**
    * オススメ・関連・人気の記事を出力します
    * @param {string} type オススメ・関連・人気の記事タイプ {@link WidgetType}
@@ -353,40 +245,134 @@ export class ComponentSingles extends React.Component {
     this.setState({ list, offset, length });
     // hasNext を元に More View button の表示非表示を決める
     this.props.boundMore(this.props.action.hasNext());
+    // @since 2016-11-04
+    Fb.delay();
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
   /**
-   * React props
-   * @return {{list: Array<SingleDae>, offset: number, length: number, action: Object, callback: Function, boundMore: Function, single: SingleDae, home: boolean, sign: boolean}} React props
+   * desktop: 記事詳細「次の記事一覧」を出力します
+   * @return {XML} div.singles-root を返します
    */
-  static get propTypes() {
-    return {
-      // Array<SingleDae>
-      list: React.PropTypes.array.isRequired,
-      // request offset
-      offset: React.PropTypes.number.isRequired,
-      // request length
-      length: React.PropTypes.number.isRequired,
-      // action instance
-      action: React.PropTypes.object.isRequired,
-      // executeSafely
-      callback: React.PropTypes.func.isRequired,
-      // more button createElement callback
-      boundMore: React.PropTypes.func.isRequired,
-      // SingleDae - 記事詳細データ recommend_articles 抽出
-      single: React.PropTypes.object.isRequired,
-      // home container かのフラッグ
-      home: React.PropTypes.bool.isRequired,
-      // login 済みかのフラッグ
-      sign: React.PropTypes.bool.isRequired
-    };
+  render() {
+    const props = this.props;
+    const state = this.state;
+    const list = state.list;
+    const length = list.length;
+    // console.log('ComponentSingles.render', length);
+    // @ToDO 条件簡略化可能か調べる
+    // @ToDO 各件数のテスト
+    if (length === 0) {
+      // 続きの記事 0 件
+      // オススメ・関連・人気
+      return (
+        <div className="singles-root">
+          {this.underThree(length)}
+        </div>
+      );
+    } else if (length < 3) {
+      // 続きの記事 3件未満
+      return (
+        <div className="singles-root">
+          {
+            list.map((single, index) => {
+              return (
+                <ComponentSinglesArticleMagnet
+                  key={`singles-article-${single.id}`}
+                  single={single}
+                  sign={props.sign}
+                  index={index}
+                />
+              );
+            })
+          }
+          {this.underThree(length)}
+        </div>
+      );
+    } else if (length < 6) {
+      // 続きの記事 6件未満
+      return (
+        <div className="singles-root">
+          {
+            list.map((single, index) => {
+              return (
+                <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under6">
+                  <ComponentSinglesArticleMagnet
+                    key={`singles-article-${single.id}`}
+                    single={single}
+                    sign={props.sign}
+                    index={index}
+                  />
+                  {
+                    this.next(index)
+                  }
+                </div>
+              );
+            })
+          }
+          {
+            // 関連記事一覧
+            // this.widget(WidgetType.RELATED, length, true)
+            this.next(length, true)
+          }
+          {
+            // 人気記事一覧
+            // this.widget(WidgetType.POPULAR, length + 1, true)
+            // オススメ記事がある時だけ3番目がある
+            this.next(length + 1, this.manager.count < 3)
+          }
+        </div>
+      );
+    } else if (length < 9) {
+      // 続きの記事 9件未満
+      return (
+        <div className="singles-root">
+          {
+            list.map((single, index) => {
+              return (
+                <div key={`single-root-${single.id}`} className="singles-root-article singles-root-article-under9">
+                  <ComponentSinglesArticleMagnet
+                    key={`singles-article-${single.id}`}
+                    single={single}
+                    sign={props.sign}
+                    index={index}
+                  />
+                  {
+                    this.next(index)
+                  }
+                </div>
+              );
+            })
+          }
+          {
+            // 人気記事一覧
+            // this.widget(WidgetType.POPULAR, length, true)
+            // オススメ記事がある時だけ3番目がある
+            this.next(length, this.manager.count < 3)
+          }
+        </div>
+      );
+    }
+
+    // 9 件以上
+    return (
+      <div className="singles-root">
+        {
+          list.map((single, index) => {
+            return (
+              <div key={`single-root-${single.id}`} className="singles-root-article">
+                <ComponentSinglesArticleMagnet
+                  key={`singles-article-${single.id}`}
+                  single={single}
+                  sign={props.sign}
+                  index={index}
+                />
+                {
+                  this.next(index)
+                }
+              </div>
+            );
+          })
+        }
+      </div>
+    );
   }
-  // static get defaultProps() {
-  //   // absolutely, not home
-  //   return {
-  //     home: false
-  //   };
-  // }
 }

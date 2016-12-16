@@ -360,7 +360,7 @@ export class ViewCommentSingle extends View {
           return (
             <div id="more" className={'comment-andmore loading-root ' + this.state.loading}>
               <a href={'#more'} onClick={this.handleClick} >他{this.state.rest}件を表示</a>
-              <span className="loading-spinner">&nbsp;</span>
+              <span className="loading-spinner" />
             </div>
           );
 
@@ -368,7 +368,7 @@ export class ViewCommentSingle extends View {
 
           // button 表示なし
           return (
-            <div className="no-more"></div>
+            <div className="no-more">&nbsp;</div>
           );
 
         }
@@ -620,7 +620,7 @@ export class ViewCommentSingle extends View {
                 );
               } )
             }
-            <div className="comment-more" ref="commentMore"></div>
+            <div className="comment-more" ref="commentMore" />
           </div>
         );
 
@@ -667,11 +667,18 @@ export class ViewCommentSingle extends View {
   /**
    * ReplyStatus.COMPLETE event handler
    * <p>再読み込みを行うかを決める</p>
+   * @param {Object} events 記事 ID を含んだ event object
    */
-  onComplete():void {
-    // console.log( 'onComplete' );
-    // とにかくreloadが良さそう
-    this.reload();
+  onComplete(events):void {
+    if (parseInt(events.articleId, 10) === this.articleId) {
+      // @since 2016-11-05
+      // 記事IDをチェックし同じ時のみリロードします
+      // page 内に複数の記事詳細が存在するようになるため
+      // 記事IDを識別子として加える
+      //
+      // とにかくreloadが良さそう
+      this.reload();
+    }
   }
   /**
    * 再読み込み
