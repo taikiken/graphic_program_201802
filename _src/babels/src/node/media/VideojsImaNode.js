@@ -114,9 +114,9 @@ export let VideojsImaNode = React.createClass( {
       // player.ima.initializeAdDisplayContainer();
       // player.ima.requestAds();
 
+      document.querySelector('#content_video_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
       var adContainer = document.querySelector('#content_video_ima-ad-container > div');
       adContainer.setAttribute('style', 'display:none');
-      //adContainer.setAttribute('style', 'z-index: 99999 !important; position: absolute; width:100%; height:100%;');
 
       player.one('click', function() {
         player.ima.initializeAdDisplayContainer();
@@ -138,6 +138,8 @@ export let VideojsImaNode = React.createClass( {
       });
 
 
+      var video=document.getElementById(videoId);
+
       window.addEventListener('scroll', function () {
         let videoWidth = window.innerWidth;
         let videoHeight = Math.ceil( videoWidth / 16 * 9 );
@@ -146,7 +148,6 @@ export let VideojsImaNode = React.createClass( {
         var elemBottom = video.getBoundingClientRect().bottom;
 
         var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
-
         if(isVisible){
           //player.play();
         }else {
@@ -154,52 +155,6 @@ export let VideojsImaNode = React.createClass( {
           player.ima.pauseAd();
         }
       }, false);
-
-
-
-
-      /*var ads = new Ads(adUrl, this.props.video.url.sd, window.innerWidth, Math.ceil( window.innerWidth / 16 * 9 ),this.props.poster);
-
-      ads.init();
-      document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
-
-
-      let videoElement = document.querySelector('#content_video_html5_api');
-      this.videoElement = videoElement;
-      videoElement.addEventListener( 'play', this.onPlay );
-      videoElement.addEventListener( 'ended', this.onEnded );
-      videoElement.addEventListener( 'pause', this.onPause );
-
-
-
-      //pause video when player out view port
-      var video=document.getElementById('content_video');
-      var mainVideoIsPlaying=false;
-
-      window.addEventListener('scroll', function () {
-
-        if(!Sagen.Browser.Mobile.is()){
-          let videoHeight =  parseInt(Content.HD_HEIGHT);
-        }else{
-          let videoWidth = window.innerWidth;
-          let videoHeight = Math.ceil( videoWidth / 16 * 9 );
-        }
-
-        var elemTop = video.getBoundingClientRect().top;
-        var elemBottom = video.getBoundingClientRect().bottom;
-
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }else{
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }
-        if(!isVisible){
-          videoElement.pause();
-          //videoElement.ima.pauseAd();
-        }else{
-          //videoElement.ima.resumeAd();
-        }
-      }, false);*/
 
     } else {
 

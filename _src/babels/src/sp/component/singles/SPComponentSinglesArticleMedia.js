@@ -101,14 +101,9 @@ export class SPComponentSinglesArticleMedia extends React.Component {
 
 
       if (navigator.userAgent.match(/iPhone/i)) {
-
-        // var adContainer = document.getElementById(videoId+'_ima-ad-container');
-        // adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
-        // player.ima.initializeAdDisplayContainer();
-        // player.ima.requestAds();
-
-          var adContainer = document.querySelector('#'+videoId+'_ima-ad-container > div');
-          adContainer.setAttribute('style', 'display:none');
+        document.querySelector('#'+videoId+'_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
+        var adContainer = document.querySelector('#'+videoId+'_ima-ad-container > div');
+        adContainer.setAttribute('style', 'display:none');
       }
 
 
