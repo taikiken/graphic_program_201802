@@ -96,7 +96,7 @@ export let VideojsImaNode = React.createClass( {
     if (navigator.userAgent.match(/iPhone/i)) {
 
       let videoId='content_video';
-      let player = videojs(videoId,{preload:"none"});
+      let player = videojs(videoId, {preload: 'none'});
       let option = {
         id: videoId,
         adTagUrl: adUrl,
@@ -159,7 +159,7 @@ export let VideojsImaNode = React.createClass( {
       videoElement.addEventListener( 'ended', this.onEnded );
       videoElement.addEventListener( 'pause', this.onPause );
 
-      let player = videojs('content_video');
+      let player = videojs('content_video', {preload: 'none'});
       let option = {
         id: 'content_video',
         adTagUrl: adUrl

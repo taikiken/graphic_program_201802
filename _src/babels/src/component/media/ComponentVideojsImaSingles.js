@@ -142,7 +142,7 @@ export class ComponentVideojsImaSingles extends React.Component {
     // cache 対策
     const adUrl = vast !== '' ? vast + Date.now() : '';
     const videoId = this.videoId();
-    const player = videojs(videoId);
+    const player = videojs(videoId, { preload: 'none' });
     const option = {
       id: videoId,
       adTagUrl: adUrl
