@@ -109,8 +109,7 @@ export let VideojsImaNode = React.createClass( {
       // player.ima.initializeAdDisplayContainer();
       // player.ima.requestAds();
       document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
-      var adContainer = document.querySelector('#content_video_ima-ad-container > div');
-      adContainer.setAttribute('style', 'display:none');
+      document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
 
       player.one('click', function() {
         player.ima.initializeAdDisplayContainer();
@@ -198,6 +197,9 @@ export let VideojsImaNode = React.createClass( {
       }, false);
 
       player.ima(option);
+
+      document.querySelector('#content_video_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
+
       player.on('play', function() {
         document.querySelector(".vjs-big-play-button").setAttribute('style', 'display:none !important');
       });
