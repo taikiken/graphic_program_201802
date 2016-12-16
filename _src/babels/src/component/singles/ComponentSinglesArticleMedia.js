@@ -33,6 +33,7 @@ const React = self.React;
  * 動画が次々再生されてウザイので img 置き換えた
  * @since 2016-09-30
  */
+/* global videojs */
 export class ComponentSinglesArticleMedia extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
@@ -90,47 +91,26 @@ export class ComponentSinglesArticleMedia extends React.Component {
    * @return {XML} div.post-kv を返します
    */
   static video(single) {
-    // console.log('single');
-    // console.log(single.media);
-    // console.log(single.media.images.large);
     const images = single.media.images;
     let poster = Safety.image(images.original, '');
     if (poster === '') {
       poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
     }
-    const caption = single.media.video.caption || '';
-    let figCaption = '';
-    if (caption !== '') {
-      figCaption = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
-    }
-    let videoId='content_video_'+single.id;
-    let videoContainer='mainContainer_'+single.id;
+    let videoId = 'content_video_' + single.id;
+    let videoContainer = 'mainContainer_' + single.id;
 
-    let width =  Content.WIDTH;
-    let height =  Content.HD_HEIGHT;
+    let width = Content.WIDTH;
+    let height = Content.HD_HEIGHT;
 
     return(
         <div className="post-kv post-video-kv">
         <div id={videoContainer}>
-          <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video" controls>
-              <source src={single.media.video.url.hd} type="application/x-mpegURL"></source>
+          <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster} width={`${width}px`} height={`${height}px`} ref="video" controls>
+            <source src={single.media.video.url.hd} type="application/x-mpegURL"></source>
           </video>
           </div>
         </div>
     );
-
-    /*return (
-      <div className="post-kv post-video-kv">
-        <figure className="post-single-figure video-container">
-          <div className="video-thumbnail-container">
-            <img src={Empty.VIDEO_THUMBNAIL} alt=""/>
-            <img src={poster} alt="" className="post-single-image video-image"/>
-            <span className="video-play-btn"><a href={single.url}><img src={Empty.VIDEO_THUMBNAIL} alt=""/></a></span>
-          </div>
-          {figCaption}
-        </figure>
-      </div>
-    );*/
   }
 
 
@@ -139,8 +119,8 @@ export class ComponentSinglesArticleMedia extends React.Component {
     if (single.mediaType === MediaType.VIDEO) {
       let vast = single.media.media.video.ad_url.pc;
       let adUrl = vast !== '' ? vast + Date.now() : '';
-      let videoId='content_video_'+single.id;
-      let player = videojs(videoId,{preload:"none"});
+      let videoId = 'content_video_' + single.id;
+      let player = videojs(videoId, { preload: 'none' });
       let option = {
         id: videoId,
         adTagUrl: adUrl
@@ -149,13 +129,10 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
       player.ima.initializeAdDisplayContainer();
 
-      /*var adContainer = document.getElementById('content_video_ima-ad-container');
-      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');*/
       player.one('click', function() {
         player.ima.requestAds();
         player.play();
       });
-
 
       let url = single.media.video.url.hd;
       player.one('play', function() {
@@ -167,25 +144,22 @@ export class ComponentSinglesArticleMedia extends React.Component {
         Ga.add(gaData);
       });
 
-      var video=document.getElementById(videoId);
+      var video = document.getElementById(videoId);
 
-      window.addEventListener('scroll', function () {
+      window.addEventListener('scroll', function() {
+        var videoHeight = parseInt(Content.HD_HEIGHT, 10);
+        var elemTop = video.getBoundingClientRect().top;
+        var elemBottom = video.getBoundingClientRect().bottom;
 
-          let videoHeight =  parseInt(Content.HD_HEIGHT);
-          var elemTop = video.getBoundingClientRect().top;
-          var elemBottom = video.getBoundingClientRect().bottom;
-
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-          if(isVisible){
-            //player.play();
-          }else {
-            player.pause();
-            player.ima.pauseAd();
-          }
-
+        var isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
+        if (isVisible) {
+          // player.play();
+        } else {
+          player.pause();
+          player.ima.pauseAd();
+        }
 
       }, false);
-      //window.addEventListener('resize', ComponentSinglesArticleMedia. checkScroll(video,player), false);
     }
 
   }

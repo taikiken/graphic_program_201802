@@ -20,6 +20,10 @@ import { MediaImageNode } from '../../../node/single/MediaImageNode';
 // data
 import { Safety } from '../../../data/Safety';
 
+// ga
+import {GaData} from '../../../ga/GaData';
+import {Ga} from '../../../ga/Ga';
+
 // React
 const React = self.React;
 
@@ -30,6 +34,7 @@ const React = self.React;
  * @see https://github.com/undotsushin/undotsushin/issues/1158
  * @since 2016-10-05
  */
+/* global videojs */
 export class SPComponentSinglesArticleMedia extends React.Component {
   /**
    * default property を保存し必要な関数・変数を準備します
@@ -86,39 +91,31 @@ export class SPComponentSinglesArticleMedia extends React.Component {
       let vast = single.media.media.video.ad_url.sp;
       let adUrl = vast !== '' ? vast + Date.now() : '';
 
-      /*if (navigator.userAgent.match(/iPhone/i)) {
-        var ads = new Ads(adUrl, single.media.video.url.sd, window.innerWidth, Math.ceil(window.innerWidth / 16 * 9), single.media.images.original);
-        ads.init();
-      }*/
-
-      let videoId='content_video_'+single.id;
-      let player = videojs(videoId,{preload:"none"});
+      let videoId = 'content_video_' + single.id;
+      let player = videojs(videoId, { preload: 'none' });
       let option = {
         id: videoId,
         adTagUrl: adUrl
       };
       player.ima(option);
 
-
       if (navigator.userAgent.match(/iPhone/i)) {
-        document.querySelector('#'+videoId+'_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
-        var adContainer = document.querySelector('#'+videoId+'_ima-ad-container > div');
+        document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
+        var adContainer = document.querySelector('#' + videoId + '_ima-ad-container > div');
         adContainer.setAttribute('style', 'display:none');
       }
 
 
       if (navigator.userAgent.match(/Android/i)) {
-        var adContainer = document.getElementById(videoId+'_ima-ad-container');
+        adContainer = document.getElementById(videoId + '_ima-ad-container');
         adContainer.setAttribute('style', 'z-index: 99 !important; position: absolute;');
       }
 
-
-        player.one('click', function() {
-            player.ima.initializeAdDisplayContainer();
-            player.ima.requestAds();
-            player.play();
-        });
-
+      player.one('click', function() {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
+      });
 
       let url = single.media.video.url.sd;
       player.one('play', function() {
@@ -131,22 +128,22 @@ export class SPComponentSinglesArticleMedia extends React.Component {
         Ga.add(gaData);
       });
 
-      var video=document.getElementById(videoId);
+      var video = document.getElementById(videoId);
 
-      window.addEventListener('scroll', function () {
+      window.addEventListener('scroll', function() {
         let videoWidth = window.innerWidth;
         let videoHeight = Math.ceil( videoWidth / 16 * 9 );
 
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
-
+        var isVisible;
         if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+          isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight + videoHeight / 2);
         }else{
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+          isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
         }
-        if(isVisible){
-          //player.play();
+        if(isVisible) {
+          // player.play();
         }else {
           player.pause();
           player.ima.pauseAd();
@@ -172,28 +169,23 @@ export class SPComponentSinglesArticleMedia extends React.Component {
     if (poster === '') {
       poster = Safety.image(images.thumbnail, Empty.VIDEO_THUMBNAIL);
     }
-    const caption = single.media.video.caption || '';
-    let figCaption = '';
-    if (caption !== '') {
-      figCaption = <figcaption className="caption" dangerouslySetInnerHTML={{__html: caption}} />;
-    }
 
-    let videoId='content_video_'+single.id;
-    let videoContainer='mainContainer_'+single.id;
+    let videoId = 'content_video_' + single.id;
+    let videoContainer = 'mainContainer_' + single.id;
     let width = window.innerWidth;
     let height = Math.ceil( width / 16 * 9 );
 
     return(
         <div className="post-kv post-video-kv">
           <div id={videoContainer}>
-            <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster}  width={`${width}px`} height={`${height}px`} ref="video"  controls>
+            <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster} width={`${width}px`} height={`${height}px`} ref="video" controls>
               <source src={single.media.video.url.sd} type="application/x-mpegURL"></source>
             </video>
           </div>
         </div>
     );
 
-    /*return (
+    /* return (
       <div className="post-kv post-video-kv">
         <figure className="post-single-figure video-container">
           <div className="video-thumbnail-container">
