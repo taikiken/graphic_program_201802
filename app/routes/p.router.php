@@ -10,7 +10,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
 
     $post = $app->model->get_post($args['article_id']);
 
-    if ( $post ) :
+    if ( $post && !empty($post['id']) ) :
 
       // 記事のプライマリーカテゴリーを取得
       $category = array();
@@ -107,6 +107,7 @@ $app->group('/p/{article_id:[0-9]+}', function () use ($app) {
       // ------------------------------
       $args['page'] = $app->model->set(array(
         'title'    => '404 Not Found',
+        'og_title' => '404 Not Found',
         'template' => 404,
       ));
 

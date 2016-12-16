@@ -120,7 +120,7 @@ class dbForTemplate extends db {
   */
   public function get_category_by_slug( $slug ) {
 
-    $sql=sprintf("select id,name,title,img,url,description,name_e from u_categories where name_e='%s'",$slug);
+    $sql=sprintf("select id,name,title,url,img,url1,img1,alt,description,name_e from u_categories where name_e='%s'",$slug);
     $this->query($sql);
     $f=$this->fetch_array();
     $s=set_categoriesinfo($f);
@@ -159,6 +159,12 @@ class dbForTemplate extends db {
     $this->query($sql);
     $f=$this->fetch_array();
 
+
+    if ( !$f ) :
+      return false;
+    endif;
+
+
     $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
     $v=unserialize(file_get_contents($file));
 
@@ -170,20 +176,21 @@ class dbForTemplate extends db {
        $v=unserialize(file_get_contents($file));
        $f["readmore"]=$v["readmore"];
     }
-	$l="";
-	if(in_array($f["d2"],$RELATEDLINK_ALLOWED)){
-		$sql=sprintf("select title,link from u_link where pid=%s order by n",$f["id"]);
-		$this->query($sql);
-		while($ee=$this->fetch_array())$p[]=$ee;
-		if(count($p)>0){
-			$l="<p>関連リンク<br>";
-			for($i=0;$i<count($p);$i++){
-				if(strlen($p[$i]["title"])>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\">%s</a><br>",$p[$i]["title"],$p[$i]["link"]);
-			}
-			$l.="</p>";
-		}
-		$f["relatedpost"]=$l;
-	}
+
+    $l="";
+    if(in_array($f["d2"],$RELATEDLINK_ALLOWED)){
+      $sql=sprintf("select title,link from u_link where pid=%s order by n",$f["id"]);
+      $this->query($sql);
+      while($ee=$this->fetch_array())$p[]=$ee;
+      if(count($p)>0){
+        $l="<p>関連リンク<br>";
+        for($i=0;$i<count($p);$i++){
+          if(strlen($p[$i]["title"])>0)$l.=sprintf("<a href=\"%s\" target=\"_blank\">%s</a><br>",$p[$i]["title"],$p[$i]["link"]);
+        }
+        $l.="</p>";
+      }
+      $f["relatedpost"]=$l;
+    }
 
     $ad=get_advertise($f["m1"],$f["userid"],$f["id"]);
     $s=set_articleinfo($f,1,1,1);

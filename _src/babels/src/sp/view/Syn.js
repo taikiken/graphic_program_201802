@@ -306,8 +306,13 @@ export class Syn {
 
     }
 
+    // @since 2016-11-10
+    // https://github.com/undotsushin/undotsushin/issues/1290
+    // Syn.menu の自動オープンやめる（Web） #1290
+    // とのことなのでチェックをやめる
+    // ---
     // 訪問経験があるかを調べる
-    this.visitCheck();
+    // this.visitCheck();
 
   }
   /**
@@ -384,7 +389,11 @@ export class Syn {
 
     // cookie set
     // menu を開くと cookie expire を延長
-    Syn.visit();
+    // @since 2016-11-10
+    // https://github.com/undotsushin/undotsushin/issues/1290
+    // Syn.menu の自動オープンやめる（Web） #1290
+    // とのことなので cookie set をやめる
+    // Syn.visit();
 
     // 500ms 後に motion flag を false にします
     setTimeout( function() {

@@ -74,18 +74,28 @@ export class CategoriesSlugDae {
 
     /**
      * JSON.response.pickup
-     * @since 2016-09-13
      * @type {PickupDae}
      * @protected
+     * @since 2016-09-13
      */
     this._pickup = new PickupDae(response.pickup);
     /**
      * JSON.response.headline
-     * @since 2016-09-17
      * @type {HeadlineDae}
      * @protected
+     * @since 2016-09-17
      */
     this._headline = new HeadlineDae(response.headline);
+    // @since 2016-11-02
+    /**
+     * JSON.response.title_banner
+     *
+     * タイトル横・powered by に表示します
+     * @type {BannersDae}
+     * @protected
+     * @since 2016-11-02
+     */
+    this._titleBanner = new BannersDae(response.title_banner);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -127,6 +137,7 @@ export class CategoriesSlugDae {
     return this.response.url;
   }
   /**
+   * @deprecated instead use titleBanner.[pc|sp]
    * category.title_img
    * <pre>
    * そのカテゴリータイトルに付与する画像
@@ -136,6 +147,7 @@ export class CategoriesSlugDae {
    * @return {string} category title_img を返します
    */
   get titleImage():string {
+    console.warn('deprecated instead use titleBanner.[pc|sp]');
     return this.response.title_img;
   }
   /**
@@ -180,8 +192,8 @@ export class CategoriesSlugDae {
    * - true  : 表示する
    * - false : 表示しない
    * </pre>
-   * @since 2016-06-06
    * @return {Boolean} iOS/Android/スマホ版の一覧で新着/人気順/動画のフィルタナビを表示するかしないかのフラグ（真偽値）を返します
+   * @since 2016-06-06
    */
   get isShowFilter():Boolean {
     return this.response.is_show_filter;
@@ -201,28 +213,37 @@ export class CategoriesSlugDae {
    *  articles: []<Object>
    * }
    * ```
-   * @since 2016-09-13
    * @return {PickupDae} response.pickup PickupDae instance にして返します
+   * @since 2016-09-13
    */
   get pickup():PickupDae {
     return this._pickup;
   }
   /**
    * 「記事カテゴリー情報」response.headline
-   * @since 2016-09-17
    * @return {HeadlineDae} response.headline を HeadlineDae instance にして返します
+   * @since 2016-09-17
    */
   get headline():HeadlineDae {
     return this._headline;
   }
   /**
+   * @deprecated instead use titleBanner.[pc|sp]
    * "title_img"のリンク先
    * @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
    * @see https://docs.google.com/spreadsheets/d/1Vngb6I2khKtkFBezsvUy0Fc1ZofYkHDJMgD0aTIYkHw/edit#gid=848283478
-   * @since 2016-09-17
    * @return {string} "title_img"のリンク先 を返します
+   * @since 2016-09-17
    */
   get titleImgLink():string {
+    console.warn('deprecated instead use titleBanner.[pc|sp]');
     return this.response.title_img_link;
+  }
+  /**
+   * 特定のカテゴリー情報のカテゴリータイトル横に表示する画像
+   * @return {BannersDae} 特定のカテゴリー情報のカテゴリータイトル横に表示する画像
+   */
+  get titleBanner() {
+    return this._titleBanner;
   }
 }
