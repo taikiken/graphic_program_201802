@@ -6,6 +6,7 @@ $app->get('/', function ($request, $response, $args) use ($app) {
     'og_title' => $app->model->property('site_name'),
     'template' => 'index',
     'og_type'  => 'website',
+    'category' => $app->model->get_category_by_slug('top'),
     'path'     => $args,
   ));
 

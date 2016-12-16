@@ -30,9 +30,9 @@ if($_GET["cid"]!=0){
 	$a[]=array("inputradio","バナー表示","bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
 	$a[]=array("textfield","ALTテキスト","bannertext","70","","","");
 	$a[]=array("img","PCバナー","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("textfield","PCリンク先","pc_bannerlink","90","","","");
+	$a[]=array("textfield","PCリンク先","pc_bannerlink","100","","","");
 	$a[]=array("img","スマホバナー","sp_bannerimg","640-200-0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("textfield","スマホリンク先","sp_bannerlink","90","","","");
+	$a[]=array("textfield","スマホリンク先","sp_bannerlink","100","","","");
 }
 
 $a[]=array("head","動画広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
