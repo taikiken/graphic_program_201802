@@ -13,8 +13,10 @@
   }
 
   .main-sec > .sponsor-link {
-    margin: 0 perCalc(20);
-    padding: 10px 0;
+    // 不要
+    // ref. https://github.com/undotsushin/undotsushin/issues/1431
+    // margin: 0 perCalc(20);
+    // padding: 10px 0;
   }
 
   .board-large {
