@@ -140,7 +140,7 @@ export let VideojsImaNode = React.createClass( {
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
 
-        var isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight+videoHeight);
+        var isVisible = (elemTop >= - videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
 
         if(isVisible){
           //player.play();
@@ -222,12 +222,7 @@ export let VideojsImaNode = React.createClass( {
         }
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
-
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight + videoHeight / 2);
-        }else{
-          var isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
-        }
+        var isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight+videoHeight);
 
         if(isVisible && playerVisted==false){
           playerVisted=true;
