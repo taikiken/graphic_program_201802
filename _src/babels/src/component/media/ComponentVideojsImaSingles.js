@@ -181,7 +181,7 @@ export class ComponentVideojsImaSingles extends React.Component {
     //window.addEventListener('scroll', this.onScroll.bind(this), false);
 
     var video = document.getElementById(videoId);
-
+    var playerVisted=false;
     window.addEventListener('scroll', function() {
       var videoHeight = parseInt(Content.HD_HEIGHT, 10);
       if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
@@ -192,15 +192,11 @@ export class ComponentVideojsImaSingles extends React.Component {
       var elemTop = video.getBoundingClientRect().top;
       var elemBottom = video.getBoundingClientRect().bottom;
 
-      var isVisible;
-      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-        isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight + videoHeight / 2);
-      }else{
-        isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
+      var isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
+      if(isVisible && playerVisted==false){
+        playerVisted=true;
       }
-      if(isVisible) {
-        //player.play();
-      } else {
+      if(!isVisible && playerVisted) {
         player.pause();
         player.ima.pauseAd();
       }
