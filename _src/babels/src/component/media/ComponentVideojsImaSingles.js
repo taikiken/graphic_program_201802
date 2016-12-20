@@ -152,7 +152,7 @@ export class ComponentVideojsImaSingles extends React.Component {
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
 
-    if(navigator.userAgent.match(/iPhone/i)) {
+    if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
       document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
       document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
     }

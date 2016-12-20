@@ -107,8 +107,7 @@ export class SPComponentSinglesArticleMedia extends React.Component {
 
 
       if (navigator.userAgent.match(/Android/i)) {
-        adContainer = document.getElementById(videoId + '_ima-ad-container');
-        adContainer.setAttribute('style', 'z-index: 99 !important; position: absolute;');
+        document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
       }
 
       player.one('click', function() {
