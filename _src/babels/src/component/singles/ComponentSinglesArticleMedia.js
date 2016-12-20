@@ -63,7 +63,6 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
     const mediaVideoType = single.media.video.player;
     const mediaType = single.mediaType;
-    console.log(mediaVideoType);
     if (mediaType === MediaType.VIDEO) {
       switch ( mediaVideoType ) {
         case VideoType.BRIGHTCOVE:
@@ -87,11 +86,13 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
 
 
-    /*if (mediaType === MediaType.VIDEO) {
+    /*
+    if (mediaType === MediaType.VIDEO) {
       return ComponentSinglesArticleMedia.video(single);
     }
 
-    return ComponentSinglesArticleMedia.image(single);*/
+    return ComponentSinglesArticleMedia.image(single);
+    */
   }
   /**
    * state.sign 情報を更新し再描画します
