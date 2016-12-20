@@ -152,8 +152,11 @@ export class ComponentVideojsImaSingles extends React.Component {
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
 
-    document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
-    document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
+    if(navigator.userAgent.match(/iPhone/i)) {
+      document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+      document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
+    }
+
 
     /*
      var adContainer = document.getElementById('content_video_ima-ad-container');
@@ -177,15 +180,13 @@ export class ComponentVideojsImaSingles extends React.Component {
     // bind scroll
     //window.addEventListener('scroll', this.onScroll.bind(this), false);
 
-    var video=document.getElementById(videoId);
+    var video = document.getElementById(videoId);
 
-    window.addEventListener('scroll', function () {
-
+    window.addEventListener('scroll', function() {
+      var videoHeight = parseInt(Content.HD_HEIGHT, 10);
       if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
         var videoWidth = window.innerWidth;
-        var videoHeight = Math.ceil( videoWidth / 16 * 9 );
-      }else {
-        var videoHeight = parseInt(Content.HD_HEIGHT, 10);
+        videoHeight = Math.ceil( videoWidth / 16 * 9 );
       }
 
       var elemTop = video.getBoundingClientRect().top;
@@ -197,9 +198,9 @@ export class ComponentVideojsImaSingles extends React.Component {
       }else{
         isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
       }
-      if(isVisible){
+      if(isVisible) {
         //player.play();
-      }else {
+      } else {
         player.pause();
         player.ima.pauseAd();
       }

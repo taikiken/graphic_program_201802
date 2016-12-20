@@ -180,6 +180,7 @@ export class ComponentSinglesArticleMedia extends React.Component {
         if (isVisible) {
           // player.play();
         } else {
+          console.log('sfsfsf');
           player.pause();
           player.ima.pauseAd();
         }

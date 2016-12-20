@@ -164,38 +164,6 @@ export let VideojsImaNode = React.createClass( {
         adTagUrl: adUrl
       };
 
-      //pause video when player out view port
-      var video=document.getElementById('content_video');
-
-      var playerVisted=false;
-      window.addEventListener('scroll', function () {
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var videoWidth = window.innerWidth;
-          var videoHeight = Math.ceil( videoWidth / 16 * 9 );
-        }else{
-          var videoHeight = parseInt(Content.HD_HEIGHT, 10);
-        }
-        var elemTop = video.getBoundingClientRect().top;
-        var elemBottom = video.getBoundingClientRect().bottom;
-
-        var isVisible;
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }else{
-          isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
-        }
-
-        if(isVisible && playerVisted==false){
-          playerVisted=true;
-        }
-        if(!isVisible){
-          player.pause();
-          player.ima.pauseAd();
-        }else{
-          // player.ima.resumeAd();
-        }
-      }, false);
-
       player.ima(option);
 
       document.querySelector('#content_video_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute;');
@@ -240,6 +208,39 @@ export let VideojsImaNode = React.createClass( {
           });
         }
       }
+
+      //pause video when player out view port
+      var video=document.getElementById('content_video');
+
+      var playerVisted=false;
+      window.addEventListener('scroll', function () {
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+          var videoWidth = window.innerWidth;
+          var videoHeight = Math.ceil( videoWidth / 16 * 9 );
+        }else{
+          var videoHeight = parseInt(Content.HD_HEIGHT, 10);
+        }
+        var elemTop = video.getBoundingClientRect().top;
+        var elemBottom = video.getBoundingClientRect().bottom;
+
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }else{
+          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+        }
+
+        if(isVisible && playerVisted==false){
+          playerVisted=true;
+        }
+        if(!isVisible && playerVisted){
+          player.pause();
+          player.ima.pauseAd();
+        }else{
+          // player.ima.resumeAd();
+        }
+      }, false);
+
+
     }
   },
   componentWillUnMount: function() {
