@@ -141,6 +141,7 @@ export let VideojsImaNode = React.createClass( {
         var elemBottom = video.getBoundingClientRect().bottom;
 
         var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+
         if(isVisible){
           //player.play();
         }else {
@@ -172,25 +173,24 @@ export let VideojsImaNode = React.createClass( {
           var videoWidth = window.innerWidth;
           var videoHeight = Math.ceil( videoWidth / 16 * 9 );
         }else{
-          var videoHeight =  parseInt(Content.HD_HEIGHT);
+          var videoHeight = parseInt(Content.HD_HEIGHT, 10);
         }
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
 
+        var isVisible;
         if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-          var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
+          isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight+videoHeight/2);
         }else{
-          var isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
+          isVisible = (elemTop >= 0-videoHeight/2) && (elemBottom <= window.innerHeight+videoHeight/2);
         }
 
         if(isVisible && playerVisted==false){
           playerVisted=true;
         }
         if(!isVisible){
-          if(playerVisted){
-            player.pause();
-            player.ima.pauseAd();
-          }
+          player.pause();
+          player.ima.pauseAd();
         }else{
           // player.ima.resumeAd();
         }
