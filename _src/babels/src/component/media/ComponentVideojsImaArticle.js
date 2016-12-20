@@ -173,7 +173,7 @@ export class ComponentVideojsImaArticle extends React.Component {
     const adUrl = vast !== '' ? vast + Date.now() : '';
     const videoElement = this.videoElement;
     this.bindEvent(videoElement);
-    const player = videojs('content_video');
+    const player = videojs('content_video', { preload: 'none' });
     const option = {
       id: 'content_video',
       adTagUrl: adUrl
