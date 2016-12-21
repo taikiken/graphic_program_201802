@@ -218,4 +218,3 @@ export class SPComponentSinglesArticleMedia extends React.Component {
     };
   }
 }
-

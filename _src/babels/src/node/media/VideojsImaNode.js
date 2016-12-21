@@ -210,9 +210,9 @@ export let VideojsImaNode = React.createClass( {
       }
 
       //pause video when player out view port
-      var video=document.getElementById('content_video');
+      var video = document.getElementById('content_video');
 
-      var playerVisted=false;
+      var playerVisted = false;
       window.addEventListener('scroll', function () {
         if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
           var videoWidth = window.innerWidth;
@@ -222,10 +222,10 @@ export let VideojsImaNode = React.createClass( {
         }
         var elemTop = video.getBoundingClientRect().top;
         var elemBottom = video.getBoundingClientRect().bottom;
-        var isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight+videoHeight);
+        var isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
 
-        if(isVisible && playerVisted==false){
-          playerVisted=true;
+        if(isVisible && playerVisted === false){
+          playerVisted = true;
         }
         if(!isVisible && playerVisted){
           player.pause();
