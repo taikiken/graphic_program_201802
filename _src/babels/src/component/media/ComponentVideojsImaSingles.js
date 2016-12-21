@@ -154,6 +154,8 @@ export class ComponentVideojsImaSingles extends React.Component {
 
     if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
       document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+    }
+    if(navigator.userAgent.match(/iPhone/i)) {
       document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
     }
 
@@ -180,7 +182,7 @@ export class ComponentVideojsImaSingles extends React.Component {
     // bind scroll
     // window.addEventListener('scroll', this.onScroll.bind(this), false);
 
-    var video = document.getElementById(videoId);
+    let video = document.getElementById(videoId);
     var playerVisted = false;
     window.addEventListener('scroll', function() {
       var videoHeight = parseInt(Content.HD_HEIGHT, 10);
