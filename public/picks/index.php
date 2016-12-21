@@ -99,8 +99,6 @@ if ( $model->property('ua') === 'mobile' ) :
 
   include_once __DIR__.'/view.php';
 
-  print_r($page);
-
 else :
 
   echo 'PC版はホームにリダイレクト / SPでみてね';
@@ -110,6 +108,10 @@ else :
   // exit;
 
 endif;
+
+
+// 確認用dumpデータ - テンプレ組み込みおわったら削除
+print_r($page);
 
 
 ?>
