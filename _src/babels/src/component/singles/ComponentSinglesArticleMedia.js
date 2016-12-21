@@ -86,17 +86,11 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
 
 
-<<<<<<< HEAD
     /* if (mediaType === MediaType.VIDEO) {
-=======
-    /*
-    if (mediaType === MediaType.VIDEO) {
->>>>>>> 0d405c99fa81b6e67fec591869ba42a1ea2fec4b
       return ComponentSinglesArticleMedia.video(single);
     }
 
-    return ComponentSinglesArticleMedia.image(single);
-    */
+    return ComponentSinglesArticleMedia.image(single);*/
   }
   /**
    * state.sign 情報を更新し再描画します
