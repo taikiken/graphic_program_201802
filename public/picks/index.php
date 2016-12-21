@@ -73,29 +73,36 @@ foreach( $articles as $key => $value ) :
 
   $articles[$key]['post'] = $model->get_post($value['id']);
 
+  // いらないデータ消す
+  unset($articles[$key]['post']['ad']);
+  unset($articles[$key]['post']['banner']);
+  unset($articles[$key]['post']['recommend_articles']);
+  unset($articles[$key]['post']['related_articles']);
+
 endforeach;
 
 $page = $model->set(array(
   'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
   'og_type'  => 'article',
-  'post'     => $articles,
+  'data'     => $articles,
 ));
 
 
-
 if ( $model->property('ua') === 'mobile' ) :
-  echo 'sp';
+
+  include_once __DIR__.'/view.php';
+
+  print_r($page);
 
 else :
+
+  echo 'PC版はホームにリダイレクト / SPでみてね';
 
   // あとでPC版つくるので302で
   // header("Location: /",TRUE,302);
   // exit;
 
 endif;
-
-
-print_r($page);
 
 
 ?>
