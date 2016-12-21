@@ -63,7 +63,6 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
     const mediaVideoType = single.media.video.player;
     const mediaType = single.mediaType;
-    console.log(mediaVideoType);
     if (mediaType === MediaType.VIDEO) {
       switch ( mediaVideoType ) {
         case VideoType.BRIGHTCOVE:
@@ -87,7 +86,7 @@ export class ComponentSinglesArticleMedia extends React.Component {
 
 
 
-    /*if (mediaType === MediaType.VIDEO) {
+    /* if (mediaType === MediaType.VIDEO) {
       return ComponentSinglesArticleMedia.video(single);
     }
 
@@ -195,10 +194,10 @@ export class ComponentSinglesArticleMedia extends React.Component {
     return (
       <div className="post-kv">
         <iframe
-          src={`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
-          width={Content.WIDTH}
-          height={Content.HD_HEIGHT}
-          frameBorder="0"
+          src = {`https://www.youtube.com/embed/${video.youtube}?rel=0&amp;showinfo=0&amp;wmode=transparent`}
+          width = {Content.WIDTH}
+          height = {Content.HD_HEIGHT}
+          frameBorder = "0"
           allowFullScreen
         >
         </iframe>
@@ -211,7 +210,7 @@ export class ComponentSinglesArticleMedia extends React.Component {
     return (
       <div className="post-kv">
         <div className="fb-video"
-          data-href={video.facebook}
+          data-href = {video.facebook}
           data-allowfullscreen="true"
           data-width={Content.WIDTH}
         >

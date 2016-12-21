@@ -174,7 +174,7 @@ export class SPComponentSinglesArticleMedia extends React.Component {
         <div className="post-kv post-video-kv">
           <div id={videoContainer}>
             <video id={videoId} className="video-js vjs-default-skin vjs-big-play-centered" poster={poster} width={`${width}px`} height={`${height}px`} ref="video" controls>
-              <source src={single.media.video.url.sd} type="application/x-mpegURL"></source>
+              <source src = {single.media.video.url.sd} type="application/x-mpegURL"></source>
             </video>
           </div>
         </div>
