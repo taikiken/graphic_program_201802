@@ -64,7 +64,6 @@
 
 <?php foreach( $page['data'] as $key => $value ) :
 // 記事一覧ループ
-  print_r($value['comment']);
 ?>
 
         <article class="post">
@@ -81,11 +80,11 @@
 
           <div class="post__highlight">
             <ul class="post__highlight__list">
-  <?php foreach( $value['post']['comment'] as $i => $comment ) : ?>
+    <?php foreach( $value['post']['comment'] as $i => $comment ) : ?>
               <li class="post__highlight__item">
                 <?php echo $comment; ?>
               </li>
-  <?php endforeach; ?>
+    <?php endforeach; ?>
             </ul><!-- /.post__highlight__list -->
           </div><!-- /.post__highlight -->
 
