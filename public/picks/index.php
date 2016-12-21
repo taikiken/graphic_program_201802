@@ -81,6 +81,10 @@ foreach( $articles as $key => $value ) :
 
 endforeach;
 
+
+
+// $pageに渡したい値があればここに設定
+// ==============================
 $page = $model->set(array(
   'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
   'og_type'  => 'article',
@@ -88,6 +92,9 @@ $page = $model->set(array(
 ));
 
 
+
+// render
+// ==============================
 if ( $model->property('ua') === 'mobile' ) :
 
   include_once __DIR__.'/view.php';
