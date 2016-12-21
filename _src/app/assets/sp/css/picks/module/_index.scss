@@ -9,6 +9,14 @@
   // index common style
   background-color: $highlight-color;
 
+  .head-sec {
+    background-color: #fff;
+  }
+
+  .body-sec {
+    margin-top: 0;
+  }
+
   .body-sec,
   .body-sec-inner {
     background-color: $highlight-color;
@@ -30,7 +38,7 @@
 
     // .summary__inner
     &__inner {
-      padding-top: (188/2)+px;
+      padding-top: perCalc(188, 710);
       padding-bottom: (32/2)+px;
       background: url(/assets/sp/images/picks/overview-bg.png) center top no-repeat;
       background-size: 100%;
