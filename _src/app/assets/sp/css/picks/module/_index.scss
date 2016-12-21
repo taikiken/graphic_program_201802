@@ -160,6 +160,11 @@
       margin-right: (20/2)+px;
     }
 
+    // .post__data
+    &__data {
+      overflow: hidden;
+    }
+
     // .post__heading
     &__heading {
       line-height: lh(36, 28);
