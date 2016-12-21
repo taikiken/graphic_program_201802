@@ -67,21 +67,45 @@ $model = new ViewModel($o);
 
 // 記事データ取得
 // ==============================
-include_once __DIR__.'/data.php';
 
-foreach( $articles as $key => $value ) :
+//include_once __DIR__.'/data.php';
+//
+//foreach( $articles as $key => $value ) :
+//
+//  $articles[$key]['post'] = $model->get_post($value['id']);
+//
+//  // いらないデータ消す
+//  unset($articles[$key]['post']['ad']);
+//  unset($articles[$key]['post']['banner']);
+//  unset($articles[$key]['post']['recommend_articles']);
+//  unset($articles[$key]['post']['related_articles']);
+//  unset($articles[$key]['post']['body']);
+//
+//endforeach;
 
-  $articles[$key]['post'] = $model->get_post($value['id']);
 
-  // いらないデータ消す
-  unset($articles[$key]['post']['ad']);
-  unset($articles[$key]['post']['banner']);
-  unset($articles[$key]['post']['recommend_articles']);
-  unset($articles[$key]['post']['related_articles']);
-  unset($articles[$key]['post']['body']);
+// xml ファイルを読み込む
+// ==============================
+$articles = array();
+
+//$xml_file = file_get_contents( 'data.xml' );
+$xml_element = simplexml_load_file('data.xml');
+//print_r($xml_element->article[2]);
+//print_r($xml_element);
+foreach( $xml_element as $xml_article ) :
+
+  $api_post_data = $model->get_post($xml_article->id);
+  unset($api_post_data['ad']);
+  unset($api_post_data['banner']);
+  unset($api_post_data['recommend_articles']);
+  unset($api_post_data['related_articles']);
+  unset($api_post_data['body']);
+  unset($api_post_data['description']);
+  unset($api_post_data['body_escape']);
+  $api_post_data['comment'] = $xml_article->comments->comment;
+  $articles[]['post'] = $api_post_data;
 
 endforeach;
-
 
 
 // $pageに渡したい値があればここに設定
@@ -112,7 +136,7 @@ endif;
 
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
-//print_r($page);
+print_r($page);
 
 
 ?>
