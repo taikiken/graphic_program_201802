@@ -88,10 +88,8 @@ $model = new ViewModel($o);
 // ==============================
 $articles = array();
 
-//$xml_file = file_get_contents( 'data.xml' );
 $xml_element = simplexml_load_file('data.xml');
-//print_r($xml_element->article[2]);
-//print_r($xml_element);
+
 foreach( $xml_element as $xml_article ) :
 
   $api_post_data = $model->get_post($xml_article->id);
