@@ -26,17 +26,21 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/sp/css/picks/ui.css">
-  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="/assets/js/libs/vendor.min.js"></script>
-  <script src="/assets/js/libs/vendor.react.js"></script>
+<!--  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>-->
 </head>
 <body class="appbnr-disable">
 <div class="whole picks">
+  <?php
+  // @TODO: app in webview 時に .head-sec を非表示にする
+  ?>
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
+  <?php
+  // -----------------------------------------
+  ?>
 
   <div class="body-sec">
     <div class="body-sec-inner">
@@ -58,25 +62,29 @@
           </div><!-- /.summary__inner -->
         </div><!-- /.summary -->
 
-<?php foreach( $page['data'] as $key => $value ) : ?>
+<?php foreach( $page['data'] as $key => $value ) :
+// 記事一覧ループ
+?>
 
         <article class="post">
           <header class="post__header">
             <figure class="post__figure">
               <img src="<?php echo $value['post']['media']['images']['medium']; ?>" alt="">
             </figure>
-            <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
-            <p class="post__category">野球</p>
-            <p class="post__date">11月20日(日) 22時03分</p>
+            <div class="post__data">
+              <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
+              <p class="post__category"><?php echo $value['post']['category']['label']; ?></p>
+              <p class="post__date"><?php echo $value['post']['display_date']; ?></p>
+            </div>
           </header><!-- /.post__header -->
 
           <div class="post__highlight">
             <ul class="post__highlight__list">
-<?php foreach( $value['comment'] as $i => $comment ) : ?>
+  <?php foreach( $value['comment'] as $i => $comment ) : ?>
               <li class="post__highlight__item">
                 <?php echo $comment; ?>
               </li>
-<?php endforeach; ?>
+  <?php endforeach; ?>
             </ul><!-- /.post__highlight__list -->
           </div><!-- /.post__highlight -->
 
@@ -95,6 +103,9 @@
     </div>
   </div><!-- /.body-sec -->
 
+  <?php
+  // @TODO: app in webview 時に .foot-sec を非表示にする
+  ?>
   <footer class="foot-sec">
     <div class="foot-sec-inner">
 
@@ -139,54 +150,15 @@
       <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
-
-  <div id="side-menu-container" class="">
-    <div id="side-menu-bg"></div>
-    <div id='side-menu' data-role='panel' data-position='left' data-display='push'>
-      <ul id="side-menu-list">
-        <li class="ad"><img src="/assets/sp/images/dummy/side-bnr.jpg" alt=""></li>
-
-        <li id="side-menu-service">
-          <ul>
-            <!-- Service Specific Menu -->
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>スポーツブルとは</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <!-- Syn. Service List -->
-          <div id='synapse-service-list-outer-box' style='display: none'>
-            <ul id='synapse-service-list'>
-              <li id="synapse-service-list-title">おすすめサービス</li>
-            </ul>
-          </div>
-
-          <!-- Syn. Logo -->
-          <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
-        </li>
-
-      </ul>
-    </div><!--/#side-menu-->
-  </div><!--/#side-menu-container-->
+  <?php
+  // -----------------------------------------
+  ?>
 
 </div><!-- /.whole -->
 
-<div class="modal-dialogue modal-dialogue_logout hide">
-  <div class="modal-bg"></div>
-  <div class="modal-dialogue-contents">
-    <p class="lead">ログアウトしますか？</p>
-
-    <ul class="btn-block">
-      <li class="btn-item"><a class="btn-link btn-link_cancel" href="#">いいえ</a></li>
-      <li class="btn-item"><a class="btn-link btn-link_submit" href="#">はい</a></li>
-    </ul><!-- /.btn-block -->
-  </div><!-- /.modal-dialogue-contents -->
-</div><!-- /.modal-dialogue -->
-
+<?php
+// @TODO: app in webview 時に .foot-sec を非表示にするので FB いらない
+?>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -204,8 +176,9 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+<?php
+// -----------------------------------------
+?>
 
-<script src="/assets/js/bundle/main.bundle.js"></script>
-<script src="/assets/js/xxx.bundle.js"></script>
 </body>
 </html>

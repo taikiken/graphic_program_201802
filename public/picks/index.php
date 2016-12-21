@@ -78,6 +78,7 @@ foreach( $articles as $key => $value ) :
   unset($articles[$key]['post']['banner']);
   unset($articles[$key]['post']['recommend_articles']);
   unset($articles[$key]['post']['related_articles']);
+  unset($articles[$key]['post']['body']);
 
 endforeach;
 
@@ -101,17 +102,17 @@ if ( $model->property('ua') === 'mobile' ) :
 
 else :
 
-  echo 'PC版はホームにリダイレクト / SPでみてね';
+//  echo 'PC版はホームにリダイレクト / SPでみてね';
 
   // あとでPC版つくるので302で
-  // header("Location: /",TRUE,302);
-  // exit;
+   header("Location: /",TRUE,302);
+   exit;
 
 endif;
 
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
-print_r($page);
+//print_r($page);
 
 
 ?>
