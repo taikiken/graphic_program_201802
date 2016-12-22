@@ -54,7 +54,7 @@
             <p class="summary__date"><span>11/24</span> UPDATE</p>
 
             <div class="summary__aboutus">
-              <dl class="summary__aboutus__inner active">
+              <dl id="js-summary__aboutus__inner" class="summary__aboutus__inner">
                 <dt class="summary__aboutus__heading">BULL'S PICKSとは</dt>
                 <dd class="summary__aboutus__text">毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。</dd>
               </dl>
@@ -155,7 +155,7 @@
   ?>
 
 </div><!-- /.whole -->
-
+<script src="/assets/js/picks.bundle.js"></script>
 <?php
 // @TODO: app in webview 時に .foot-sec を非表示にするので FB いらない
 ?>
