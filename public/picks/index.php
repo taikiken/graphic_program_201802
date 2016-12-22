@@ -145,7 +145,7 @@ endif;
 
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
-print_r($page);
+//print_r($page);
 
 
 ?>
