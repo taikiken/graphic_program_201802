@@ -152,10 +152,10 @@ export class ComponentVideojsImaSingles extends React.Component {
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
 
-    if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
       document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
     }
-    if(navigator.userAgent.match(/iPhone/i)) {
+    if (navigator.userAgent.match(/iPhone/i)) {
       document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
     }
 
@@ -180,29 +180,8 @@ export class ComponentVideojsImaSingles extends React.Component {
     // bind play / ended for ga
     this.ga(player);
     // bind scroll
-    // window.addEventListener('scroll', this.onScroll.bind(this), false);
+    window.addEventListener('scroll', this.onScroll.bind(this), false);
 
-    let video = document.getElementById(videoId);
-    var playerVisted = false;
-    window.addEventListener('scroll', function() {
-      var videoHeight = parseInt(Content.HD_HEIGHT, 10);
-      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-        var videoWidth = window.innerWidth;
-        videoHeight = Math.ceil( videoWidth / 16 * 9 );
-      }
-
-      var elemTop = video.getBoundingClientRect().top;
-      var elemBottom = video.getBoundingClientRect().bottom;
-
-      var isVisible = (elemTop >= -videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
-      if(isVisible && playerVisted === false) {
-        playerVisted = true;
-      }
-      if(!isVisible && playerVisted) {
-        player.pause();
-        player.ima.pauseAd();
-      }
-    }, false);
   }
   /**
    * window.onscroll event handler<br>
@@ -219,15 +198,8 @@ export class ComponentVideojsImaSingles extends React.Component {
     const rect = video.getBoundingClientRect();
     const elemTop = rect.top;
     const elemBottom = rect.bottom;
-
-    var isVisible = true;
-    if (this.phone) {
-      isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight + videoHeight / 2);
-    } else {
-      isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
-    }
-    // const isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
-    if(!isVisible) {
+    const isVisible = (elemTop >= 0 - videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
+    if (!isVisible) {
       player.pause();
       player.ima.pauseAd();
     }
@@ -298,7 +270,6 @@ export class ComponentVideojsImaSingles extends React.Component {
     const url = this.mobile ? video.url.sd : video.url.hd;
     const width = Content.WIDTH;
     const height = Content.HD_HEIGHT;
-
     return (
       <div className="post-kv post-video-kv">
         <div className="mainContainer">
