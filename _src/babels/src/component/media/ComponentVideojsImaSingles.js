@@ -152,13 +152,25 @@ export class ComponentVideojsImaSingles extends React.Component {
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
 
-    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
-      document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
-    }
-    if (navigator.userAgent.match(/iPhone/i)) {
-      document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
-    }
+    // if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+    //   document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+    // }
+    // if (navigator.userAgent.match(/iPhone/i)) {
+    //   document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
+    // }
 
+    // l.155 ~ 160 を少し変更しました
+    // 最適化を図れればと考えました
+    // 問題があれば元に戻してください
+    const iphone = !!navigator.userAgent.match(/iPhone/i);
+    const android = !!navigator.userAgent.match(/Android/i);
+    const adContainer = document.getElementById(`${videoId}_ima-ad-container`);
+    if (iphone || android) {
+      adContainer.setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+    }
+    if (iphone) {
+      adContainer.querySelector('div').setAttribute('style', 'display:none');
+    }
 
     /*
      var adContainer = document.getElementById('content_video_ima-ad-container');
@@ -181,7 +193,6 @@ export class ComponentVideojsImaSingles extends React.Component {
     this.ga(player);
     // bind scroll
     window.addEventListener('scroll', this.onScroll.bind(this), false);
-
   }
   /**
    * window.onscroll event handler<br>
@@ -204,7 +215,6 @@ export class ComponentVideojsImaSingles extends React.Component {
       player.ima.pauseAd();
     }
   }
-
   /**
    * ga tag 送信
    *
@@ -226,6 +236,8 @@ export class ComponentVideojsImaSingles extends React.Component {
   }
   /**
    * スマホ用 video tag
+   *
+   * ライブラリが出力 video tag を破壊するので ref を親エレメント div.mainContainer に移動しました on 2016-12-22
    * @return {XML} スマホ用 video tag
    */
   renderMobile() {
@@ -238,16 +250,18 @@ export class ComponentVideojsImaSingles extends React.Component {
 
     return (
       <div className="post-kv post-video-kv">
-        <div className="mainContainer">
+        <div
+          className="mainContainer"
+          ref={(component) => {
+            this.videoElement = component;
+          }}
+        >
           <video
             id={this.videoId()}
             className="video-js vjs-default-skin vjs-big-play-centered"
             poster={poster}
             width={`${width}px`}
             height={`${height}px`}
-            ref={(component) => {
-              this.videoElement = component;
-            }}
             controls="controls"
           >
               <source
@@ -261,6 +275,8 @@ export class ComponentVideojsImaSingles extends React.Component {
   }
   /**
    * PC + Tablet video tag
+   *
+   * ライブラリが出力 video tag を破壊するので ref を親エレメント div.mainContainer に移動しました on 2016-12-22
    * @return {XML} PC + Tablet video tag
    */
   renderDesktop() {
@@ -272,16 +288,18 @@ export class ComponentVideojsImaSingles extends React.Component {
     const height = Content.HD_HEIGHT;
     return (
       <div className="post-kv post-video-kv">
-        <div className="mainContainer">
+        <div
+          className="mainContainer"
+          ref={(component) => {
+            this.videoElement = component;
+          }}
+        >
           <video
             id={this.videoId()}
             className="video-js vjs-default-skin vjs-big-play-centered"
             poster={poster}
             width={`${width}px`}
             height={`${height}px`}
-            ref={(component) => {
-              this.videoElement = component;
-            }}
             controls="controls"
           >
             <source
