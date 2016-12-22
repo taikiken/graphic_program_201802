@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <?php
+  // @TODO: app in webview 時に .head-sec を非表示にする
+  if (!$from_webview) :
+  ?>
   <title>編集部おすすめ記事 BULL'S PICKS | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
   <meta name="description" content="説明文">
@@ -25,13 +29,17 @@
   <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
+  <?php
+  endif;
+  // -----------------------------------------
+  ?>
   <link rel="stylesheet" href="/assets/sp/css/picks/ui.css">
-<!--  <script src="/assets/js/libs/jquery2/jquery.min.js"></script>-->
 </head>
 <body class="appbnr-disable">
 <div class="whole picks">
   <?php
   // @TODO: app in webview 時に .head-sec を非表示にする
+  if (!$from_webview) :
   ?>
   <header class="head-sec">
     <div class="head-sec-inner">
@@ -39,6 +47,7 @@
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
   <?php
+  endif;
   // -----------------------------------------
   ?>
 
@@ -105,6 +114,7 @@
 
   <?php
   // @TODO: app in webview 時に .foot-sec を非表示にする
+  if (!$from_webview) :
   ?>
   <footer class="foot-sec">
     <div class="foot-sec-inner">
@@ -152,12 +162,14 @@
   </footer><!-- /.foot-sec -->
   <?php
   // -----------------------------------------
+  endif;
   ?>
 
 </div><!-- /.whole -->
 <script src="/assets/js/picks.bundle.js"></script>
 <?php
 // @TODO: app in webview 時に .foot-sec を非表示にするので FB いらない
+if (!$from_webview) :
 ?>
 <script>
   window.fbAsyncInit = function() {
@@ -177,6 +189,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 <?php
+endif;
 // -----------------------------------------
 ?>
 
