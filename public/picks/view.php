@@ -5,19 +5,19 @@
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
-  // @TODO: app in webview 時に .head-sec を非表示にする
+  // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
   <title>編集部おすすめ記事 BULL'S PICKS | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
-  <meta name="description" content="説明文">
-  <meta name="keywords" content="キーワード, キーワード, キーワード">
+  <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
+  <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
   <!-- sns ogp -->
   <meta property="og:title" content="編集部おすすめ記事 BULL'S PICKS | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://undotsushin.com/assets/images/common/og_image.png">
   <meta property="og:url" content="https://undotsushin.com/picks/">
-  <meta property="og:description" content="説明文">
+  <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@sportsbull_jp">
@@ -38,7 +38,7 @@
 <body class="appbnr-disable">
 <div class="whole picks">
   <?php
-  // @TODO: app in webview 時に .head-sec を非表示にする
+  // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
   <header class="head-sec">
@@ -113,7 +113,7 @@
   </div><!-- /.body-sec -->
 
   <?php
-  // @TODO: app in webview 時に .foot-sec を非表示にする
+  // app in webview 時に .foot-sec を非表示にする
   if (!$from_webview) :
   ?>
   <footer class="foot-sec">
@@ -168,7 +168,7 @@
 </div><!-- /.whole -->
 <script src="/assets/js/picks.bundle.js"></script>
 <?php
-// @TODO: app in webview 時に .foot-sec を非表示にするので FB いらない
+// app in webview 時に .foot-sec を非表示にするので FB いらない
 if (!$from_webview) :
 ?>
 <script>
