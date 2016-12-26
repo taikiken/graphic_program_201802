@@ -41,6 +41,36 @@ let Isotope = self.Isotope;
  * <pre>
  */
 export class ComponentArticlesMasonryInfinite extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<ArticleDae>, home: boolean, offset: number, length: number, action: Object, callback: Function, boundMore: Function, masonry: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired,
+      // home container かのフラッグ
+      home: React.PropTypes.bool.isRequired,
+      // request offset
+      offset: React.PropTypes.number.isRequired,
+      // request length
+      length: React.PropTypes.number.isRequired,
+      // action instance
+      action: React.PropTypes.object.isRequired,
+      // executeSafely
+      callback: React.PropTypes.func.isRequired,
+
+      // more button createElement callback
+      boundMore: React.PropTypes.func.isRequired,
+      // need masonry flag
+      masonry: React.PropTypes.bool.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティと初期変数を設定します
    * @param {Object} props React.props {@link ComponentArticlesMasonryInfinite.propTypes}
@@ -99,6 +129,9 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
      */
     this.boundImages = this.onImages.bind(this);
   }
+  // ---------------------------------------------------
+  // METHOD
+  // ---------------------------------------------------
   /**
    * dom が更新されると呼び出される delegate
    */
@@ -162,7 +195,13 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
             const commentsPopular = dae.commentsPopular;
             const commentsTotal = dae.commentsCount;
             const thumbnail = Safety.image( dae.media.images.medium, Empty.IMG_MIDDLE );
-
+            /*
+            @since 2016-12-26
+            design 変更に伴い
+            CategoryLabelNode へ追加
+             mediaType={dae.mediaType}
+             recommend={dae.isRecommend && this.props.home}
+             */
             return(
               <div key={`archive-${dae.id}`} className={`board-item board-item-${i} board-item-${dae.mediaType}`}>
                 <a className="post" href={dae.url}>
@@ -172,7 +211,7 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
                     title={dae.title}
                     masonry={this.props.masonry}
                     action={this.props.action}
-                    recommend={!!dae.isRecommend && this.props.home}
+                    recommend={dae.isRecommend && this.props.home}
                   />
                   <div className="post-data">
                     <p className={`post-category post-category-${dae.categories.slugsClasses}`}>
@@ -180,6 +219,8 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
                         categories={dae.categories.all}
                         id={`post-archive-${dae.id}`}
                         index={i}
+                        mediaType={dae.mediaType}
+                        recommend={dae.isRecommend && this.props.home}
                       />
                     </p>
                     <h3 className="post-heading">{dae.title}</h3>
@@ -264,63 +305,4 @@ export class ComponentArticlesMasonryInfinite extends React.Component {
     // state を変更し appendChild + isotope を行う
     this.setState({ list, offset, length });
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{list: Array<ArticleDae>, home: boolean, offset: number, length: number, action: Object, callback: Function, boundMore: Function, masonry: boolean}} React props
-   */
-  static get propTypes() {
-    return {
-      list: React.PropTypes.array.isRequired,
-      // home container かのフラッグ
-      home: React.PropTypes.bool.isRequired,
-      // request offset
-      offset: React.PropTypes.number.isRequired,
-      // request length
-      length: React.PropTypes.number.isRequired,
-      // action instance
-      action: React.PropTypes.object.isRequired,
-      // executeSafely
-      callback: React.PropTypes.func.isRequired,
-
-      // more button createElement callback
-      boundMore: React.PropTypes.func.isRequired,
-      // need masonry flag
-      masonry: React.PropTypes.bool.isRequired
-    };
-  }
 }
-
-// /**
-//  * デフォルトプロパティ
-//  * @type {{
-//  *  list: Array,
-//  *  home: boolean,
-//  *  offset: number,
-//  *  length: number,
-//  *  action: object,
-//  *  masonry: boolean
-//  * }}
-//  */
-// ComponentArticlesMasonryInfinite.propTypes = {
-//   list: React.PropTypes.array.isRequired,
-//   // home container かのフラッグ
-//   home: React.PropTypes.bool.isRequired,
-//   // request offset
-//   offset: React.PropTypes.number.isRequired,
-//   // request length
-//   length: React.PropTypes.number.isRequired,
-//   // action instance
-//   action: React.PropTypes.object.isRequired,
-//   // executeSafely
-//   callback: React.PropTypes.func.isRequired,
-//
-//   // more button createElement callback
-//   boundMore: React.PropTypes.func.isRequired,
-//   // need masonry flag
-//   masonry: React.PropTypes.bool.isRequired
-// };
-
-
