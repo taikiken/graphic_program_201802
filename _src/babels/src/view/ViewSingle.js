@@ -53,6 +53,8 @@ import { Page } from '../singles/head/Page';
 import { Snap } from '../ui/Snap';
 // @since 2016-11-16
 import { TopButton } from '../ui/button/TopButton';
+// @since 2016-12-26
+import { Hit } from '../ui/Hit';
 
 /**
  * <p>記事詳細</p>
@@ -208,6 +210,11 @@ export class ViewSingle extends View {
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();
+      // @since 2016-12-26
+      // top button / short cut でのスクロールトップ対応
+      const hit = new Hit(element);
+      hit.on(Hit.COLLISION, this.hitIn.bind(this));
+      hit.start();
       // ---------------------------------
       // @since 2016-11-16
       // top button
@@ -238,7 +245,10 @@ export class ViewSingle extends View {
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
-
+  hitIn() {
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
+  }
   /**
    * TopButton.COMPLETE event handler<br>
    * [page top] button click しスクロールアニメーションが完了した時に発火します

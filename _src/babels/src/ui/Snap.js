@@ -235,7 +235,8 @@ export class Snap extends EventDispatcher {
     const scrollEvents = events.events;
     const height = scrollEvents.height;
     // @since 2016-11-17 0.25(1/4)に変えてみる
-    const wall = height * 0.25;
+    // const wall = height * 0.25;
+    const wall = height * 0.01;
     // element.top が window.height の半分未満になったら
     // scroll up の時は hit 時にイベントを発火させる
     if (bottom <= height && bottom > wall) {
