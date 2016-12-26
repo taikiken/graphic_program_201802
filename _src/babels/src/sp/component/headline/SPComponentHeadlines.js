@@ -25,26 +25,6 @@ import { Safety } from '../../../data/Safety';
 // React
 const React = self.React;
 
-// /**
-//  * home 以外はタイトルを表示
-//  * @param {boolean} home home か否かの真偽値
-//  * @return {?XML} home 以外はタイトルを返します
-//  * @private
-//  * @static
-//  */
-// const headlineTitle = (home) => {
-//   if (home) {
-//     return null;
-//   }
-//
-//   return (
-//     <div className="headline-heading">
-//       <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
-//       <span className="headline-heading-ruby">{Message.HEADLINE_TITLE}</span>
-//     </div>
-//   );
-// };
-
 /**
  * SP: headline 記事一覧を出力します
  * @since 2016-09-16
@@ -56,12 +36,71 @@ const React = self.React;
  * </pre>
  */
 export class SPComponentHeadlines extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array.<ArticleDae>, callback: Function, home: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      // Array.<ArticleDae>
+      list: React.PropTypes.array.isRequired,
+      // executeSafely.bind
+      callback: React.PropTypes.func.isRequired,
+      home: React.PropTypes.bool
+    };
+  }
+  /**
+   * defaultProps, home を false 設定します
+   * @return {{home: boolean}} React props
+   */
+  static get defaultProps() {
+    return {
+      home: false
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link SPViewHeadline.propTypes}
    */
   constructor(props) {
     super(props);
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  // --------------------------------------------
+  // delegate
+  /**
+   * delegate method, マウントした時にコールされます
+   *
+   * `View.DID_MOUNT` をコールバックに通知します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+    this.ad();
+  }
+  /**
+   * headline 6 件目の広告<br>
+   * `app/template/mobile/index.php`#line.27
+   * @since 2016-10-03
+   */
+  ad() {
+    const element = this.refs.sponsorLink;
+    if (!element) {
+      return;
+    }
+
+    const div = document.createElement('div');
+    let script = document.createElement( 'script' );
+    script.src = `${Ad.ssl()}/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&async=true&tagver=2.0.0`;
+    div.appendChild(script);
+    element.appendChild(div);
   }
   /**
    * `div.headline-root` を作成し headline 一覧を出力します
@@ -111,77 +150,4 @@ export class SPComponentHeadlines extends React.Component {
       </div>
     );
   }
-  // --------------------------------------------
-  // delegate
-  /**
-   * delegate method, マウントした時にコールされます
-   *
-   * `View.DID_MOUNT` をコールバックに通知します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-    this.ad();
-  }
-  /**
-   * headline 6 件目の広告<br>
-   * `app/template/mobile/index.php`#line.27
-   * @since 2016-10-03
-   */
-  ad() {
-    const element = this.refs.sponsorLink;
-    if (!element) {
-      return;
-    }
-
-    const div = document.createElement('div');
-    let script = document.createElement( 'script' );
-    script.src = `${Ad.ssl()}/sdk/js/adg-script-loader.js?id=42707&targetID=adg_42707&displayid=2&adType=INFEED&async=false&async=true&tagver=2.0.0`;
-    div.appendChild(script);
-    element.appendChild(div);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{list: Array.<ArticleDae>, callback: Function, home: boolean}} React props
-   */
-  static get propTypes() {
-    return {
-      // Array.<ArticleDae>
-      list: React.PropTypes.array.isRequired,
-      // executeSafely.bind
-      callback: React.PropTypes.func.isRequired,
-      home: React.PropTypes.bool
-    };
-  }
-  /**
-   * defaultProps, home を false 設定します
-   * @return {{home: boolean}} React props
-   */
-  static get defaultProps() {
-    return {
-      home: false
-    };
-  }
 }
-// /**
-//  * プロパティ
-//  * @type {{list: Array.<ArticleDae>, callback: Function}}
-//  */
-// SPComponentHeadlines.propTypes = {
-//   // Array.<ArticleDae>
-//   list: React.PropTypes.array.isRequired,
-//   // executeSafely.bind
-//   callback: React.PropTypes.func.isRequired,
-//   home: React.PropTypes.bool
-// };
-//
-// /**
-//  * デフォルト・プロパティ, home を false 設定します
-//  * @static
-//  * @type {{index: number}}
-//  */
-// SPComponentHeadlines.defaultProps = {
-//   home: false
-// };

@@ -63,8 +63,16 @@ export const CategoryLabelNode = React.createClass( {
     id: React.PropTypes.string.isRequired,
     categories: React.PropTypes.array.isRequired,
     // @since 2016-12-26
-    mediaType: React.PropTypes.string.isRequired,
-    recommend: React.PropTypes.bool.isRequired
+    mediaType: React.PropTypes.string,
+    recommend: React.PropTypes.bool
+  },
+  /**
+   * 下位互換を保つために default 値を設定します
+   * @since 2016-12-26
+   */
+  defaultProps: {
+    mediaType: '',
+    recommend: false
   },
   /**
    * 記事一覧の 1記事ブロック カテゴリコンテナ + 動画 + オススメ記事

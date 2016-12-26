@@ -76,6 +76,8 @@ export class ComponentHeadlineArticle extends React.Component {
                 categories={this.props.categories}
                 id={`headline-label-${this.props.id}`}
                 index={this.props.index}
+                mediaType={this.props.mediaType}
+                recommend={false}
               />
             </p>
             <h3 className="post-heading">{props.title}</h3>
