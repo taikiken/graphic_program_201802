@@ -259,17 +259,19 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     this.timer = setTimeout(() => {
       this.ga();
     }, 1000 * 2);
+    // console.log('reserve', this.props.single.id, this.timer, Date.now());
   }
   /**
    * 表示されなくなったので ga 送信をキャンセルします
    * @since 2016-11-14
    */
   cancel() {
-    if (this.sended) {
+    if (this.sended || !this.waiting) {
       return;
     }
     clearTimeout(this.timer);
     this.waiting = false;
+    // console.log('cancel', this.props.single.id, this.timer, Date.now());
   }
   /**
    * ga 送信
@@ -311,6 +313,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     // console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
+    this.reserve();
   }
   /**
    * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます

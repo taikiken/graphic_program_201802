@@ -288,7 +288,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * @since 2016-11-14
    */
   cancel() {
-    if (this.sended) {
+    if (this.sended || !this.waiting) {
       return;
     }
     clearTimeout(this.timer);
@@ -334,6 +334,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     // console.log('onSnap', this.page.url());
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
+    this.reserve();
   }
   /**
    * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます
