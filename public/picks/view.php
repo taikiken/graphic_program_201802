@@ -15,8 +15,8 @@
   <!-- sns ogp -->
   <meta property="og:title" content="編集部おすすめ記事 BULL'S PICKS | SPORTS BULL">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://undotsushin.com/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://undotsushin.com/picks/">
+  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+  <meta property="og:url" content="https://sportsbull.jp/picks/">
   <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
@@ -29,6 +29,8 @@
   <link rel="shortcut icon" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
+
+  <link rel="canonical" href="https://sportsbull.jp/picks/">
   <?php
   endif;
   // -----------------------------------------
