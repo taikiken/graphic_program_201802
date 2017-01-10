@@ -138,9 +138,12 @@ export class ComponentSingleComments extends React.Component {
    * @return {?XML} div.comment or null
    */
   render() {
-    if (!this.state.sign) {
-      return null;
-    }
+    // 非ログインユーザーの広告下の空き確保のためにタグのみ挿入します
+    // @see https://github.com/undotsushin/undotsushin/pull/1453
+    // @since 2017-01-10
+    // if (!this.state.sign) {
+    //   return null;
+    // }
     // ログインユーザーのみ表示します
     return (
       <div className={`comment comment-${this.state.single.id}`}>
