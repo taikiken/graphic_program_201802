@@ -228,9 +228,9 @@ export class ComponentVideojsImaArticle extends React.Component {
     // this.videoElement = videoElement;
     // this.bindEvent(videoElement);
 
-    player.ima.initializeAdDisplayContainer();
-    player.ima.requestAds();
     player.one('click', function() {
+      player.ima.initializeAdDisplayContainer();
+      player.ima.requestAds();
       player.play();
     });
   }
