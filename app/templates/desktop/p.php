@@ -22,7 +22,7 @@
     // eof: 記事詳細: pc
     // ---------------------------------------------------- ?>
     <section class="main-sec">
-      <div class="current-post">
+      <div id="js-current-post" class="current-post">
         <div class="post-detail">
 
           <div id="single-header-container"></div>

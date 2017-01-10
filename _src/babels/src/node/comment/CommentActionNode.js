@@ -109,7 +109,7 @@ export let CommentActionNode = React.createClass( {
         return (
           <li className={`dropMenu-item loading-root item-comment-${this.props.commentId} ${replyClass(this.props.replyId)} ${this.state.deleteLoading}`}>
             <a href="#" className="dropMenu-link-delete" onClick={this.deleteClick}><span>{Message.DELETE_WILL}</span></a>
-            <div className="loading-spinner"></div>
+            <div className="loading-spinner" />
           </li>
         );
       }

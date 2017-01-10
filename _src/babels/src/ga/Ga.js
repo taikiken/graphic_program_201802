@@ -104,37 +104,49 @@ export class Ga {
     }
 
     // log を出力するかを選択する
-    if (Env.mode === Env.PRODUCTION) {
-      Ga.production(ga);
-    } else {
-      Ga.develop(ga);
-    }
-  }
-  /**
-   * 本番（ログなし）
-   * @param {Function} ga ga関数
-   */
-  static production( ga:Function ):void {
-    // _requests 内のデータがなくなるまで実行する
+    // if (Env.mode === Env.PRODUCTION) {
+    //   Ga.production(ga);出力します
+    // } else {
+    //   Ga.develop(ga);
+    // }
+    // mode flag
+    const production = Env.mode === Env.PRODUCTION;
+    // _requests 配列の値を全て
     while( _requests.length > 0 ) {
       let data:GaData = _requests.shift();
       // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
       Ga.tracking( ga, data );
+      if (!production) {
+        // Env.PRODUCTION 以外は開発ログを出力します
+        console.warn( `${data.method}: ga, send, `, data);
+      }
     }
   }
-  /**
-   * 開発（ログあり）
-   * @param {Function} ga ga関数
-   */
-  static develop( ga:Function ):void {
-    // _requests 内のデータがなくなるまで実行する
-    while( _requests.length > 0 ) {
-      let data:GaData = _requests.shift();
-      // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
-      Ga.tracking( ga, data );
-      console.log( `${data.method}: ga, send, `, data);
-    }
-  }
+  // /**
+  //  * 本番（ログなし）
+  //  * @param {Function} ga ga関数
+  //  */
+  // static production( ga:Function ):void {
+  //   // _requests 内のデータがなくなるまで実行する
+  //   while( _requests.length > 0 ) {
+  //     let data:GaData = _requests.shift();
+  //     // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+  //     Ga.tracking( ga, data );
+  //   }
+  // }
+  // /**
+  //  * 開発（ログあり）
+  //  * @param {Function} ga ga関数
+  //  */
+  // static develop( ga:Function ):void {
+  //   // _requests 内のデータがなくなるまで実行する
+  //   while( _requests.length > 0 ) {
+  //     let data:GaData = _requests.shift();
+  //     // ga( 'send', 'event', data.eventCategory, data.eventAction, data.eventLabel, data.eventValue );
+  //     Ga.tracking( ga, data );
+  //     console.log( `${data.method}: ga, send, `, data);
+  //   }
+  // }
   /**
    * ga 関数を実行し tracking を行います
    * @since 2016-07-04

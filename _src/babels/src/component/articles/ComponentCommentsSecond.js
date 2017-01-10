@@ -49,7 +49,7 @@ export class ComponentCommentsSecond extends React.Component {
   render() {
     if (!this.props.hasSecond) {
       // 描画要素がない
-      return <div className="commented-user"></div>;
+      return <div className="commented-user">&nbsp;</div>;
     }
 
     const seconds = this.state.seconds;

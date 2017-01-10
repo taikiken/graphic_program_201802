@@ -122,19 +122,19 @@ export class SPViewCategoryRoot extends View {
 
         return (
           <div>
-            <div className="archive-tab" ref="tab"></div>
+            <div className="archive-tab" ref="tab" />
             <div className={`archive-container ${this.state.current}`}>
               <div className="archive-latest board-large" ref="latest">
-                <div className="archive-latest-container" ref="latestElement"></div>
-                <div className="archive-latest-container-more" ref="latestMoreElement"></div>
+                <div className="archive-latest-container" ref="latestElement" />
+                <div className="archive-latest-container-more" ref="latestMoreElement" />
               </div>
               <div className="archive-ranking board-large" ref="ranking">
-                <div className="archive-latest-container" ref="rankingElement"></div>
-                <div className="archive-latest-container-more" ref="rankingMoreElement"></div>
+                <div className="archive-latest-container" ref="rankingElement" />
+                <div className="archive-latest-container-more" ref="rankingMoreElement" />
               </div>
               <div className="archive-videos board-large" ref="videos">
-                <div className="archive-latest-container" ref="videosElement"></div>
-                <div className="archive-latest-container-more" ref="videosMoreElement"></div>
+                <div className="archive-latest-container" ref="videosElement" />
+                <div className="archive-latest-container-more" ref="videosMoreElement" />
               </div>
             </div>
           </div>

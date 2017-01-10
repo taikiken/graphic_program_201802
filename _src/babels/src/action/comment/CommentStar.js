@@ -26,11 +26,11 @@ let _symbol = Symbol();
  * `new CommentStar()` は実行不可です
  *
  * @example
- * let good = CCommentStar.good( 12345 );
+ * let good = CommentStar.good( 12345 );
  * good.add();
  * good.remove();
  *
- * let bad  = CCommentStar.bad( 12345 );
+ * let bad  = CommentStar.bad( 12345 );
  * bad.add();
  * bad.remove()
  */

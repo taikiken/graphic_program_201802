@@ -40,13 +40,16 @@ import {ArticleDae} from '../../dae/ArticleDae';
 // import {Ga} from '../../ga/Ga';
 // import {GaData} from '../../ga/GaData';
 
+// tick
+import { Polling } from '../../tick/Polling';
+
 // global object
 // React
 // let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 // Gasane
-let Polling = self.Gasane.Polling;
+// let Polling = self.Gasane.Polling;
 
 /**
  * <p>home > pickup（スライダー）を表示します。</p>
@@ -62,9 +65,7 @@ export class ViewPickup extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( element:Element, option:Object = {} ) {
-
     option = Safety.object( option );
-
     super( element, option );
     let ActionClass = User.sign ? PickupAuth : Pickup;
     /**
@@ -87,7 +88,6 @@ export class ViewPickup extends View {
      * @default 500
      */
     this._waiting = 1000 * 5;
-
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -115,51 +115,39 @@ export class ViewPickup extends View {
    * Ajax request を開始します
    */
   start():void {
-
     this.action.start();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   done( result:Result ):void {
-
     let articles = result.articles;
 
     if ( typeof articles === 'undefined' ) {
-
       // articles undefined
       // JSON に問題がある
       let error = new Error( Message.undef('[PICKUP:UNDEFINED]') );
       this.executeSafely( View.UNDEFINED_ERROR, error );
       // this.showError( error.message );
-
     } else if ( articles.length === 0 ) {
-
       // articles empty
       // request, JSON 取得に問題は無かったが data が取得できなかった
       let error = new Error( Message.empty('[PICKUP:EMPTY]') );
       this.executeSafely( View.EMPTY_ERROR, error );
       // this.showError( error.message );
-
     } else {
-
       this.render( articles );
-
     }
-
   }
   /**
    * Ajax response error
    * @param {Error} error Error instance
    */
   fail( error:Error ):void {
-
     this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-
   }
   // /**
   //  * ViewError でエラーコンテナを作成します
@@ -179,404 +167,6 @@ export class ViewPickup extends View {
    * @param {Array} articles JSON responce.articles
    */
   render( articles:Array ):void {
-    // let element = this.element;
-    // let last = articles.length - 1;
-    //
-    // let position = 0;
-    //
-    // // interval を管理する Gasane.Polling instance
-    // let polling = new Polling( this.waiting );
-    // let _this = this;
-    //
-    // // --------------------------------------------
-    // // pager
-    // // --------------------------------------------
-    // /**
-    //  * スライドショー pager
-    //  * @private
-    //  * @type {ReactClass}
-    //  * */
-    // let PickupPagerDom = React.createClass( {
-    //   propTypes: {
-    //     index: React.PropTypes.number.isRequired,
-    //     id: React.PropTypes.string.isRequired,
-    //     length: React.PropTypes.number.isRequired,
-    //     onPager: React.PropTypes.func.isRequired
-    //   },
-    //   render: function() {
-    //     let p = this.props;
-    //
-    //     return (
-    //       <li className={'pager-item pager-' + (p.index - p.length)}>
-    //         <a href={'#pickup-' + p.index} className="pager-link" onClick={this.handleClick} >{p.index - p.length}</a>
-    //       </li>
-    //     );
-    //   },
-    //   handleClick: function( event ) {
-    //     event.preventDefault();
-    //     this.props.onPager( event.target.innerHTML );
-    //   }
-    // } );
-    //
-    // /**
-    //  * スライドショー pagers 親コンポーネント
-    //  * @private
-    //  * @type {ReactClass}
-    //  * */
-    // let PagersDom = React.createClass( {
-    //   propTypes: {
-    //     offset: React.PropTypes.number.isRequired,
-    //     list: React.PropTypes.array.isRequired,
-    //     onPager: React.PropTypes.func.isRequired
-    //   },
-    //   render: function() {
-    //     let list = this.props.list;
-    //     let length = list.length;
-    //     let offset = this.props.offset;
-    //     let onPager = this.props.onPager;
-    //
-    //     return (
-    //       <ul className="pager-list">
-    //         {
-    //           list.map( function( article ) {
-    //
-    //             let dae = new ArticleDae( article );
-    //
-    //             return (
-    //               <PickupPagerDom
-    //                 key={'pager-' + dae.id}
-    //                 id={String(dae.id)}
-    //                 index={offset++}
-    //                 length={length}
-    //                 onPager={onPager}
-    //               />
-    //             );
-    //
-    //           } )
-    //         }
-    //       </ul>
-    //     );
-    //   }
-    // } );
-    //
-    // // --------------------------------------------
-    // // Main Dom
-    // // --------------------------------------------
-    //
-    // // video play mark
-    // let VideoPlayDom = React.createClass( {
-    //   propTypes: {
-    //     mediaType: React.PropTypes.string.isRequired
-    //   },
-    //   render: function() {
-    //     if ( this.props.mediaType === MediaType.VIDEO ) {
-    //       return <img src={Empty.VIDEO_PICKUP_PLAY} alt="" className="overlay" />;
-    //     } else {
-    //       return null;
-    //     }
-    //   }
-    // } );
-    //
-    // // pickup slider images
-    // /**
-    //  * スライドショー 画像
-    //  * @private
-    //  * @type {ReactClass}
-    //  * */
-    // let PickupDom = React.createClass( {
-    //   propTypes: {
-    //     index: React.PropTypes.number.isRequired,
-    //     id: React.PropTypes.string.isRequired,
-    //     slug: React.PropTypes.string.isRequired,
-    //     // category: React.PropTypes.string.isRequired,
-    //     // category2: React.PropTypes.string,
-    //     categories: React.PropTypes.array.isRequired,
-    //     url: React.PropTypes.string.isRequired,
-    //     date: React.PropTypes.string.isRequired,
-    //     title: React.PropTypes.string.isRequired,
-    //     large: React.PropTypes.string.isRequired,
-    //     commentsCount: React.PropTypes.number.isRequired,
-    //     mediaType: React.PropTypes.string.isRequired
-    //   },
-    //   // getDefaultPropTypes: function() {
-    //   //   return {
-    //   //     category2: ''
-    //   //   };f
-    //   // },
-    //   render: function() {
-    //     let p = this.props;
-    //
-    //     // let category = ( label ):string => {
-    //     //   return !label ? '' : <span className="category-label">{label}</span>;
-    //     // };
-    //
-    //     return (
-    //       <li id={'pickup-' + p.index} className={'pickup pickup-' + p.index}>
-    //         <a href={p.url} style={{'background': `url(${p.large}) no-repeat 50% 50% / cover`}} onClick={this.gaSend}>
-    //           <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
-    //           <VideoPlayDom mediaType={this.props.mediaType} />
-    //           {/*
-    //           <img src={p.large} alt={p.title}/>
-    //            */}
-    //           <div className="post-overview">
-    //             <p className={'post-category post-category-' + p.slug}>
-    //               <CategoryLabelNode
-    //                 categories={p.categories}
-    //                 id={`pickup-label-${p.id}`}
-    //                 index={p.index}
-    //               />
-    //             </p>
-    //             <h2 className="post-heading">{p.title}</h2>
-    //             <p className="post-date">{p.date}</p>
-    //             <p className="post-comment-num">{p.commentsCount}</p>
-    //           </div>
-    //         </a>
-    //       </li>
-    //     );
-    //   },
-    //   // gaSend: function(e) {
-    //   //   e.preventDefault();
-    //   gaSend: function() {
-    //     // ----------------------------------------------
-    //     // GA 計測タグ
-    //     Ga.add( new GaData('ViewPickup.render.PickupDom.gaSend', 'home_pickup', 'click', this.props.url, parseFloat(this.props.id)) );
-    //     // ----------------------------------------------
-    //   }
-    // } );
-    //
-    // // React Class, pickup dom container
-    // /**
-    //  * スライドショー
-    //  * @private
-    //  * @type {ReactClass}
-    //  * */
-    // let ArticleDom = React.createClass( {
-    //   // articles 配列を元にDomを作成する
-    //   propTypes: {
-    //     list: React.PropTypes.array.isRequired
-    //   },
-    //   // initial state を設定します
-    //   getInitialState: function() {
-    //     /**
-    //      * 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
-    //      * アニメーション無しで移動させた後
-    //      * リフレッシュのために待機させる 1fps
-    //      * timeout id
-    //      * @private
-    //      * @type {Number}
-    //      * */
-    //     this.timer = 0;
-    //
-    //     return {
-    //       // default 0
-    //       index: position
-    //     };
-    //   },
-    //   // --------------------------------------------
-    //   // RENDER
-    //   // --------------------------------------------
-    //   render: function() {
-    //
-    //     let list = this.props.list;
-    //     let count = 0;
-    //
-    //     // slide一つのコンテナ
-    //     let make = ( article, i ) => {
-    //
-    //       let dae = new ArticleDae( article );
-    //       let large = Safety.image( dae.media.images.large, Empty.IMG_LARGE );
-    //
-    //       // HeadlineDom instance を使い render
-    //       // iteration key は index を使う
-    //       // コンテナを 前後に clone するため article.id が使えない
-    //       return (
-    //         <PickupDom
-    //           key={'pickup-' + i}
-    //           index={i}
-    //           id={String( dae.id )}
-    //           slug={dae.categories.all[0].slug}
-    //           categories={dae.categories.all}
-    //           url={dae.url}
-    //           date={dae.displayDate}
-    //           title={dae.title}
-    //           large={large}
-    //           commentsCount={dae.commentsCount}
-    //           mediaType={dae.mediaType}
-    //         />
-    //       );
-    //
-    //     };
-    //
-    //     // JSX
-    //     return (
-    //       <div className="hero-sec">
-    //         <div className={'hero-slider pickup-container slide-' + this.state.index}>
-    //           {/* slider */}
-    //           <div className="hero-slider-inner">
-    //             <ul className="pickup-slider">
-    //               {
-    //                 // 1.first
-    //                 list.map( function( article ) {
-    //
-    //                   return make( article, count++ );
-    //
-    //                 } )
-    //               }
-    //               {
-    //                 // 2.second clone
-    //                 list.map( function( article ) {
-    //
-    //                   return make( article, count++ );
-    //
-    //                 } )
-    //               }
-    //               {
-    //                 // 3.third clone
-    //                 list.map( function( article ) {
-    //
-    //                   return make( article, count++ );
-    //
-    //                 } )
-    //               }
-    //             </ul>
-    //           </div>
-    //           <div className="hero-slider-control">
-    //             {/* prev / next */}
-    //             <div className="direction">
-    //               <a id="prev" className="direction-prev" href="#prev" onClick={this.onPrev}>Prev</a>
-    //               <a id="next" className="direction-next" href="#next" onClick={this.onNext}>Next</a>
-    //             </div>
-    //             {/* pagers */}
-    //             <div className="pager">
-    //               <PagersDom
-    //                 list={articles}
-    //                 offset={articles.length}
-    //                 onPager={this.onPagerClick}
-    //               />
-    //             </div>
-    //           {/* hero-slider-control */}
-    //           </div>
-    //         {/* .hero-slider */}
-    //         </div>
-    //       {/* #hero-sec */}
-    //       </div>
-    //     );
-    //
-    //   },
-    //   componentDidMount: function() {
-    //
-    //     // after mount
-    //     // callback
-    //     _this.executeSafely( View.DID_MOUNT );
-    //
-    //     // interval animation
-    //     // mount 後 animation を開始します
-    //     // bind はreactが内部的にする（様子） `this.updateNext.bind(this)` は不要
-    //     polling.on( Polling.PAST, this.updateNext );
-    //     polling.start();
-    //
-    //   },
-    //   // ----------------------------------------------------------------
-    //   // next slide
-    //   updateNext: function() {
-    //     // last を超えたら 0 に戻す
-    //     let n = position + 1;
-    //     if ( n > last ) {
-    //       n = 0;
-    //     }
-    //     // change slide
-    //     this.jump( n );
-    //   },
-    //   // next button click
-    //   onNext: function( event ) {
-    //     event.preventDefault();
-    //     // console.log( 'next click' );
-    //     // next action は polling からも使うので関数化し共通化する
-    //     this.updateNext();
-    //   },
-    //   // prev button click
-    //   onPrev: function( event ) {
-    //     event.preventDefault();
-    //     // console.log( 'prev click' );
-    //     // 0 未満になったら last へ戻す
-    //     let n = position - 1;
-    //     if ( n < 0 ) {
-    //       n = last;
-    //     }
-    //     // change slide
-    //     this.jump( n );
-    //   },
-    //   // slide を変更
-    //   jump: function( index ) {
-    //     // console.log( 'jump ', index );
-    //     // polling stop
-    //     polling.stop();
-    //     // --------------
-    //     // 循環アニメーションのために
-    //     if ( index === 0 ) {
-    //       // 先頭に戻る
-    //       if ( position === last ) {
-    //         // 現在がラストだったらアニメーションなしで移動させる
-    //         this.setState( {index: 999} );
-    //         this.delay( index );
-    //       } else {
-    //         // 通常移動
-    //         this.setup( index );
-    //       }
-    //     } else if ( index === last ) {
-    //       // 最終に戻る
-    //       if ( position === 0 ) {
-    //         // 現在が先頭だったらアニメーションなしで移動させる
-    //         this.setState( {index: 1999} );
-    //         this.delay( index );
-    //       } else {
-    //         // 通常移動
-    //         this.setup( index );
-    //       }
-    //     } else {
-    //
-    //       // 通常移動
-    //       this.setup( index );
-    //
-    //     }
-    //   },
-    //   // 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのために
-    //   // アニメーション無しで移動させた後
-    //   // リフレッシュのために待機させる 1fps
-    //   delay: function( index ) {
-    //     let me = this;
-    //     if ( !!this.timer ) {
-    //       clearTimeout( this.timer );
-    //     }
-    //     this.timer = setTimeout( function() {
-    //       me.setup(index);
-    //     }, 25 );
-    //   },
-    //   // re position, polling restart
-    //   setup: function( index ) {
-    //     // --------------
-    //     // state update
-    //     position = index;
-    //     this.setState( {index: index} );
-    //     // polling start
-    //     polling.start();
-    //   },
-    //   // pager click から呼び出されます
-    //   onPagerClick: function( index ) {
-    //     // console.log( 'onPagerClick ', index );
-    //     // 子コンポーネント Pagers -> PickupPager から呼び出される
-    //     // innerHTML 数値を使うので
-    //     // Number 型へ変換する
-    //     this.jump( parseInt( index, 10 ) );
-    //   }
-    // } );
-
-    // // dom 生成
-    // ReactDOM.render(
-    //   React.createElement( ArticleDom, { list: articles } ),
-    //   element
-    // );
-
     const list = articles.map((article) => new ArticleDae(article));
 
     ReactDOM.render(
@@ -589,6 +179,5 @@ export class ViewPickup extends View {
       />,
       this.element
     );
-
   }// render
 }// class

@@ -91,8 +91,7 @@ export class SPComponentSingleSNSAbove extends React.Component {
                 data-action="like"
                 data-show-faces="false"
                 data-share="false"
-              >
-              </div>
+              />
             </dd>
           </dl>
         </div>

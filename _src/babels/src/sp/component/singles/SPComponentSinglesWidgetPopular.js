@@ -16,15 +16,37 @@ import { SPViewSinglesPopular } from '../../view/singles/SPViewSinglesPopular';
 // ui
 import { SinglesManager } from '../../../ui/SinglesManager';
 
+// ui / snap
+import { SPSnap } from '../../ui/SPSnap';
+
 // React
 const React = self.React;
-// const ReactDOM = self.ReactDOM;
 
 /**
  * SP: 記事詳細「次の記事一覧」人気記事を出力します
  * @since 2016-09-28
  */
 export class SPComponentSinglesWidgetPopular extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{index: number, strong: boolean, sign: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      // 記事表示順序
+      index: React.PropTypes.number.isRequired,
+      // 記事出力順番に関係なく出力するかのフラッグ
+      strong: React.PropTypes.bool.isRequired,
+      // ログイン済みかのフラッグ
+      sign: React.PropTypes.bool.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link SPComponentSinglesWidgetPopular.propTypes}
@@ -56,22 +78,15 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
      */
     this.popular = null;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * delegate, マウント後に呼び出されます<br>
    * `SPViewSinglesPopular` instance を作成し `start` を実行します {@link SPViewSinglesPopular}
    * */
   componentDidMount() {
-    // console.log('*************** SPComponentSinglesWidgetPopular.componentDidMount', this.view, this.refs.popular);
     if (this.view === null && !!this.refs.popular) {
-      // // 人気記事は「次の記事」 9 件以降で 3件毎に登場する
-      // const index = this.props.index + 1;
-      // // 人気記事は 6件表示する
-      // let offset = (index - 9) / 3 * 6;
-      // // 負の数値の時は 0 にする
-      // if (offset < 0) {
-      //   offset = 0;
-      // }
-
       // @since 2016-10-03
       // @type {{offset: number, length: number}}
       const request = this.manager.request;
@@ -84,43 +99,17 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
 
       // request.offset を更新する
       this.manager.up();
+      // snap
+      this.onMount();
     }
   }
   /**
-   * 9 以上の 3 の倍数で `div.singles-popular-containers` 親コンテナ出力します
-   * @return {?XML} `div.singles-popular-containers` or null を返します
+   * ViewSinglesPopular Ajax load しコンテナがマウントされました
+   * @since 2016-11-12
    */
-  render() {
-    const props = this.props;
-    // 強制出力フラッグ ON
-    if (props.strong) {
-      return this.build();
-    }
-
-    // 0 始まり index を
-    // 3 の倍数チェックのために 1 足します
-    // `x % 3 === 0` するために
-    const index = props.index + 1;
-
-    // 3 の倍数必須
-    if (index % 3 !== 0) {
-      return null;
-    }
-
-    // // 9未満では出力しない
-    // if (index < 9) {
-    //   return null;
-    // }
-    return this.build();
-    //
-    // if (!props.strong && (props.index + 1) % 3 !== 0) {
-    //   return null;
-    // }
-    //
-    // this.getPopular();
-    // return (
-    //   <div className="singles-popular-containers" ref="popular"></div>
-    // );
+  onMount() {
+    const snap = new SPSnap(this.refs.popular);
+    snap.init();
   }
   /**
    * 表示の元になる情報を更新せず表示系を更新します
@@ -131,31 +120,6 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
       this.view.reload();
     }
   }
-  // getPopular() {
-  //   if (this.view !== null) {
-  //     return;
-  //   }
-  //   const popular = document.getElementById(this.id);
-  //
-  //   if (!popular) {
-  //     setTimeout(() => this.getPopular(), 25);
-  //     return;
-  //   }
-  //
-  //   this.popular = popular;
-  //   // @since 2016-10-03
-  //   // @type {{offset: number, length: number}}
-  //   const request = this.manager.request;
-  //   const offset = request.offset;
-  //
-  //   console.log('SPComponentSinglesWidgetPopular.getPopular', this.props.index, offset, popular);
-  //   const view = new SPViewSinglesPopular(popular, this.props.sign, offset);
-  //   this.view = view;
-  //   view.start();
-  //
-  //   // request.offset を更新する
-  //   this.manager.up();
-  // }
   /**
    * `div.singles-popular-containers` 親コンテナ出力
    * @return {XML} div.singles-popular-containers を返します
@@ -167,24 +131,28 @@ export class SPComponentSinglesWidgetPopular extends React.Component {
     // this.getPopular();
     // AJAX 取得データ出力コンテナを用意
     return (
-      <div id={id} className="singles-popular-containers" ref="popular"></div>
+      <div id={id} className={`singles-popular-containers singles-popular-containers-${this.props.index}`} ref="popular" />
     );
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
   /**
-   * React props
-   * @return {{index: number, strong: boolean, sign: boolean}} React props
+   * 9 以上の 3 の倍数で `div.singles-popular-containers` 親コンテナ出力します
+   * @return {?XML} `div.singles-popular-containers` or null を返します
    */
-  static get propTypes() {
-    return {
-      // 記事表示順序
-      index: React.PropTypes.number.isRequired,
-      // 記事出力順番に関係なく出力するかのフラッグ
-      strong: React.PropTypes.bool.isRequired,
-      // ログイン済みかのフラッグ
-      sign: React.PropTypes.bool.isRequired
-    };
+  render() {
+    const props = this.props;
+    // 強制出力フラッグ ON
+    if (props.strong) {
+      return this.build();
+    }
+    // 0 始まり index を
+    // 3 の倍数チェックのために 1 足します
+    // `x % 3 === 0` するために
+    const index = props.index + 1;
+
+    // 3 の倍数必須
+    if (index % 3 !== 0) {
+      return null;
+    }
+    return this.build();
   }
 }

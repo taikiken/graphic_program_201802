@@ -68,7 +68,7 @@ export class SPComponentSingleSNSBelow extends React.Component {
     return (
       <div className="post-sns_lower">
         <div className="post-sns-fixed">
-          <div className="post-sns-item_fbgood"><div className="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+          <div className="post-sns-item_fbgood"><div className="fb-like" data-href="<?php echo $page['og_url']; ?>" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false" /></div>
         </div>
 
         <div className="post-sns-flex">
@@ -113,8 +113,7 @@ export class SPComponentSingleSNSBelow extends React.Component {
                 data-action="like"
                 data-show-faces="false"
                 data-share="false"
-              >
-              </div>
+              />
             </dd>
           </dl>
         </div>
