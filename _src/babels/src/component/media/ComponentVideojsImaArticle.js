@@ -230,12 +230,7 @@ export class ComponentVideojsImaArticle extends React.Component {
 
     player.ima.initializeAdDisplayContainer();
     player.ima.requestAds();
-    // const adContainer = document.getElementById('content_video_ima-ad-container');
-    const adContainer = this.mainContainer.getElementById('content_video_ima-ad-container');
-    adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
     player.one('click', function() {
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
       player.play();
     });
   }
@@ -380,7 +375,7 @@ export class ComponentVideojsImaArticle extends React.Component {
       >
         <video
           id="content_video"
-          className="video-js vjs-default-skin"
+          className="video-js vjs-default-skin vjs-big-play-centered"
           poster={poster}
           width={`${width}px`}
           height={`${height}px`}
