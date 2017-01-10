@@ -158,7 +158,7 @@ export class ViewArchiveMasonry extends ViewArchiveMasonryInfinite {
 
           // button 表示なし
           return (
-            <div className="no-more"></div>
+            <div className="no-more" />
           );
 
         }

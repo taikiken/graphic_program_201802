@@ -55,7 +55,7 @@ export let CommentMoreViewNode = React.createClass( {
 
       // button 表示なし
       return (
-        <div className="no-more"></div>
+        <div className="no-more" />
       );
 
     }

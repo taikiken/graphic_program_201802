@@ -17,8 +17,10 @@ import { Message } from '../../app/const/Message';
 import { BookmarkNode } from '../../node/bookmark/BookmarkNode';
 // import { MediaNode } from '../../node/single/MediaNode';
 
-// component
+// component/categories
 import { ComponentCategoryLabelsLink } from '../categories/ComponentCategoryLabelsLink';
+
+// component/singles
 import { ComponentSinglesArticleMedia } from './ComponentSinglesArticleMedia';
 
 // ui
@@ -34,14 +36,53 @@ import { PageTitle } from '../../util/PageTitle';
 import { Ga } from '../../ga/Ga';
 // import { GaData } from '../../ga/GaData';
 
+// --------------------
+// @since 2016-10-17
+// // singles
+// import { SinglesHistory } from '../../singles/SinglesHistory';
+
+// singles/head
+import { Page } from '../../singles/head/Page';
+// --------------------
+
 // React
 const React = self.React;
 
 /**
  * PC: 記事詳細「次の記事」一覧を出力します
+ *
+ * <pre>
+ *   <ComponentSinglesArticle/>
+ *      <MediaNode/>
+ *      <ComponentSinglesArticleSwitch/>
+ *        <ComponentSinglesArticleExcerpt/>
+ *          or
+ *        <ComponentSingleContent/>
+ * </pre>
  * @since 2016-09-30
  */
 export class ComponentSinglesArticle extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   *
+   * - @type {SingleDae} single - 記事データ
+   * - @type {boolean} sign - ログイン済みユーザーフラッグ, true: ログイン済み
+   * - @type {number} index - 次の記事一覧・記事表示順序
+   * @return {{single: SingleDae, sign: boolean, index: number}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      sign: React.PropTypes.bool.isRequired,
+      index: React.PropTypes.number.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link ComponentSinglesArticle.propTypes}
@@ -74,6 +115,104 @@ export class ComponentSinglesArticle extends React.Component {
      * @type {boolean}
      */
     this.sended = false;
+    //
+    // /**
+    //  * SPA のための管理クラス
+    //  * @type {SinglesHistory}
+    //  * @since 2016-10-27
+    //  */
+    // this.manager = SinglesHistory.factory();
+    /**
+     * ページ情報書換えデータを `SingleDae` から生成します
+     * {@link SingleDae}
+     * {@link Page}
+     * @type {Page}
+     * @since 2016-10-27
+     */
+    this.page = new Page(props.single);
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
+   * */
+  componentDidMount() {
+    // Hit instance を作成し監視を開始します
+    if (this.hit === null && !!this.refs.singlesArticle) {
+      const hit = new Hit(this.refs.singlesArticle);
+      this.hit = hit;
+      hit.on(Hit.COLLISION, this.boundHit);
+      hit.start();
+    }
+  }
+  /**
+   * state.single 情報を更新し再描画します
+   * @param {SingleDae} single state.single
+   */
+  updateSingle(single) {
+    this.setState({ single });
+  }
+  /**
+   * state.sign 情報を更新し再描画します
+   * @param {boolean} sign state.sign
+   */
+  updateSign(sign) {
+    this.setState({ sign });
+  }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
+  reload() {
+    this.updateSingle(this.state.single);
+  }
+  // --------------------------------------------------
+  // hit
+  /**
+   * Hit.COLLISION event handler<br>
+   * ウインドウ内にコンテナが表示された時に通知されます<br>
+   * コンテナ top が +- 50px 以内だと Ga tag 送信します
+   * @param {{
+   *  type: string,
+   *  originalEvent: events,
+   *  y: number,
+   *  height: number,
+   *  moving: number,
+   *  changed: boolean,
+   *  rect: Object}} events Hit events
+   */
+  onHit(events) {
+    if (this.sended) {
+      return;
+    }
+
+    const rect = events.rect;
+    const top = rect.top;
+
+    if (Math.abs(top) <= 50) {
+      this.sended = true;
+      // ViewSingle.ga(this.state.single);
+      // @since 2016-10-05
+      const single = this.state.single;
+      Ga.single(single, 'ComponentSinglesArticle.onHit');
+      // ---------------------
+      // https://github.com/undotsushin/undotsushin/issues/1151
+      // @since  2016-11-15 title added
+      const page = new PageTitle(single.title, single.categories.label);
+      Ga.addPage(single.id, 'ComponentSinglesArticle.onHit', page.title());
+      // ---------------------
+      this.dispose();
+    }
+  }
+  /**
+   * Hit.COLLISION event handler を unbind します
+   */
+  dispose() {
+    const hit = this.hit;
+    if (hit !== null) {
+      hit.off(Hit.COLLISION, this.boundHit);
+    }
   }
   /**
    * 記事詳細・次の記事一覧 > 記事を出力します
@@ -140,92 +279,5 @@ export class ComponentSinglesArticle extends React.Component {
         </div>
       </div>
     );
-  }
-  /**
-   * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
-   * */
-  componentDidMount() {
-    // Hit instance を作成し監視を開始します
-    if (this.hit === null && !!this.refs.singlesArticle) {
-      const hit = new Hit(this.refs.singlesArticle);
-      this.hit = hit;
-      hit.on(Hit.COLLISION, this.boundHit);
-      hit.start();
-    }
-  }
-  /**
-   * state.single 情報を更新し再描画します
-   * @param {SingleDae} single state.single
-   */
-  updateSingle(single) {
-    this.setState({ single });
-  }
-  /**
-   * state.sign 情報を更新し再描画します
-   * @param {boolean} sign state.sign
-   */
-  updateSign(sign) {
-    this.setState({ sign });
-  }
-  /**
-   * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
-   */
-  reload() {
-    this.updateSingle(this.state.single);
-  }
-  // --------------------------------------------------
-  // hit
-  /**
-   * Hit.COLLISION event handler<br>
-   * ウインドウ内にコンテナが表示された時に通知されます<br>
-   * コンテナ top が +- 50px 以内だと Ga tag 送信します
-   * @param {{type: string, originalEvent: events, y: number, height: number, moving: number, changed: boolean}} events Hit events
-   */
-  onHit(events) {
-    if (this.sended) {
-      return;
-    }
-
-    const rect = events.rect;
-    const top = rect.top;
-
-    if (Math.abs(top) <= 50) {
-      this.sended = true;
-      // ViewSingle.ga(this.state.single);
-      // @since 2016-10-05
-      const single = this.state.single;
-      Ga.single(single, 'ComponentSinglesArticle.onHit');
-      // ---------------------
-      // https://github.com/undotsushin/undotsushin/issues/1151
-      // @since  2016-11-15 title added
-      const page = new PageTitle(single.title, single.categories.label);
-      Ga.addPage(single.id, 'ComponentSinglesArticle.onHit', page.title());
-      // ---------------------
-      this.dispose();
-    }
-  }
-  /**
-   * Hit.COLLISION event handler を unbind します
-   */
-  dispose() {
-    const hit = this.hit;
-    if (hit !== null) {
-      hit.off(Hit.COLLISION, this.boundHit);
-    }
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{single: SingleDae, sign: boolean, index: number}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      sign: React.PropTypes.bool.isRequired,
-      index: React.PropTypes.number.isRequired
-    };
   }
 }

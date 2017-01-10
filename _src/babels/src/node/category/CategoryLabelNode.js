@@ -10,8 +10,36 @@
  *
  */
 
+import { Message } from '../../app/const/Message';
+import { MediaType } from '../../app/const/MediaType';
+
 // React
-let React = self.React;
+const React = self.React;
+
+/**
+ * オススメ記事 tag
+ * @param {boolean} need オススメ記事フラッグ
+ * @returns {?XML} オススメ記事 tag
+ */
+const recommend = (need) => {
+  if (!need) {
+    return null;
+  }
+  // タグが必要
+  return <i className="post-label_recommend">{Message.LABEL_RECOMMEND}</i>;
+};
+
+/**
+ * 動画記事 tag
+ * @param {string} type media type
+ * @returns {?XML} 動画記事 tag
+ */
+const movie = (type) => {
+  if (type === MediaType.VIDEO) {
+    return <i className="post-label_movie">Message.LABEL_MOVIE</i>;
+  }
+  return null;
+};
 
 /**
  * @deprecated 2016-09-24 instead use ComponentCategoryLabels
@@ -27,11 +55,29 @@ let React = self.React;
  * @type {*|Function|ReactClass}
  */
 export const CategoryLabelNode = React.createClass( {
+  /**
+   * default props の型を指定します
+   */
   propType: {
     index: React.PropTypes.number.isRequired,
     id: React.PropTypes.string.isRequired,
-    categories: React.PropTypes.array.isRequired
+    categories: React.PropTypes.array.isRequired,
+    // @since 2016-12-26
+    mediaType: React.PropTypes.string,
+    recommend: React.PropTypes.bool
   },
+  /**
+   * 下位互換を保つために default 値を設定します
+   * @since 2016-12-26
+   */
+  defaultProps: {
+    mediaType: '',
+    recommend: false
+  },
+  /**
+   * 記事一覧の 1記事ブロック カテゴリコンテナ + 動画 + オススメ記事
+   * @returns {XML} span.category-label-wrapper
+   */
   render: function() {
     if (!this.props.categories.length) {
       return null;
@@ -40,6 +86,12 @@ export const CategoryLabelNode = React.createClass( {
     const index = this.props.index;
     return (
       <span className="category-label-wrapper">
+        {
+          recommend(this.props.recommend)
+        }
+        {
+          movie(this.props.mediaType)
+        }
         {
           this.props.categories.map((category:Object, i:Number) => {
             if (!category.label) {

@@ -21,6 +21,9 @@ import { Safety } from '../../../data/Safety';
 import { ComponentCategoryLabels } from '../../../component/categories/ComponentCategoryLabels';
 import { ComponentArticleThumbnail } from '../../../component/articles/ComponentArticleThumbnail';
 
+// ui / snap
+import { SPSnap } from '../../ui/SPSnap';
+
 // React
 const React = self.React;
 
@@ -30,6 +33,28 @@ const React = self.React;
  * @since 2016-09-28
  */
 export class SPComponentSinglesWidgetRecommend extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{index: number, single: SingleDae, strong: boolean, sign: boolean}} React props
+   */
+  static get propTypes() {
+    return {
+      // 記事表示順序
+      index: React.PropTypes.number.isRequired,
+      // SingleDae - 記事詳細データ recommend_articles 抽出
+      single: React.PropTypes.object.isRequired,
+      // 記事出力順番に関係なく出力するかのフラッグ
+      strong: React.PropTypes.bool.isRequired,
+      // ログイン済みかのフラッグ
+      sign: React.PropTypes.bool.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link SPComponentSinglesWidgetRecommend.propTypes}
@@ -44,35 +69,26 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
       single: props.single,
       index: props.index
     };
+    /**
+     * 出力コンテナ
+     * @type {?Element}
+     * @since 2016-10-29
+     */
+    this.element = null;
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
-   * state.index が 3 の時に出力します あるいは strong: true の時に<br>
-   * オススメ記事一覧 `div.widget-postList` を出力します
-   * @return {?XML} `div.widget-postList` を返します
-   * */
-  render() {
-    // @type {Array<SingleDae>}
-    const articles = this.state.single.recommendArticles;
-    // console.log('SPComponentSinglesWidgetRecommend.render ', articles);
-    if (articles.length === 0) {
-      return null;
+   * delegate, マウント後に呼び出されます<br>
+   * snap インスタンスを作成し snap scroll します
+   * @since 2016-11-12
+   */
+  componentDidMount() {
+    if (this.element !== null) {
+      const snap = new SPSnap(this.element);
+      snap.init();
     }
-
-    const props = this.props;
-    if (props.strong) {
-      return this.build();
-    }
-
-    // 0 始まり index を
-    // 3 の倍数チェックのために 1 足します
-    // `x % 3 === 0` するために
-    const index = this.state.index + 1;
-
-    if (index !== 3) {
-      return null;
-    }
-
-    return this.build();
   }
   /**
    * オススメ記事一覧 `div.widget-postList` を出力します
@@ -81,9 +97,18 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
   build() {
     // @type {Array<SingleDae>}
     const articles = this.state.single.recommendArticles;
+    // not array, 空配列 null を返します
+    if (!Array.isArray(articles) || articles.length === 0) {
+      return null;
+    }
 
     return (
-      <div className="widget-postList widget-postList_recommend">
+      <div
+        className={`widget-postList widget-postList_recommend-${this.props.index} widget-postList_recommend`}
+        ref={(component) => {
+          this.element = component;
+        }}
+      >
         <div className="mod-headingA01">
           <h2>{Message.RECOMMEND_TITLE}</h2>
         </div>
@@ -136,23 +161,33 @@ export class SPComponentSinglesWidgetRecommend extends React.Component {
   reload() {
     this.updateSingle(this.state.single);
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
   /**
-   * React props
-   * @return {{index: number, single: SingleDae, strong: boolean, sign: boolean}} React props
-   */
-  static get propTypes() {
-    return {
-      // 記事表示順序
-      index: React.PropTypes.number.isRequired,
-      // SingleDae - 記事詳細データ recommend_articles 抽出
-      single: React.PropTypes.object.isRequired,
-      // 記事出力順番に関係なく出力するかのフラッグ
-      strong: React.PropTypes.bool.isRequired,
-      // ログイン済みかのフラッグ
-      sign: React.PropTypes.bool.isRequired
-    };
+   * state.index が 3 の時に出力します あるいは strong: true の時に<br>
+   * オススメ記事一覧 `div.widget-postList` を出力します
+   * @return {?XML} `div.widget-postList` を返します
+   * */
+  render() {
+    // @type {Array<SingleDae>}
+    const articles = this.state.single.recommendArticles;
+    // console.log('SPComponentSinglesWidgetRecommend.render ', articles);
+    if (articles.length === 0) {
+      return null;
+    }
+
+    const props = this.props;
+    if (props.strong) {
+      return this.build();
+    }
+
+    // 0 始まり index を
+    // 3 の倍数チェックのために 1 足します
+    // `x % 3 === 0` するために
+    const index = this.state.index + 1;
+
+    if (index !== 3) {
+      return null;
+    }
+
+    return this.build();
   }
 }

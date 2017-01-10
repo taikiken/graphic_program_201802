@@ -33,12 +33,15 @@ import {Safety} from '../../../data/Safety';
 // dae
 import {UserDae} from '../../../dae/UserDae';
 
+// tick
+import { Polling } from '../../../tick/Polling';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 // Sagen
-let Gasane = self.Gasane;
+// let Gasane = self.Gasane;
 
 /**
  * SP header ログイン・メンバー 関連メニュー
@@ -159,9 +162,9 @@ export class SPViewHeaderMember extends ViewHeaderMember {
           // console.log( '**** polling start **** ' );
           // https://github.com/undotsushin/undotsushin/issues/282
           // 60秒ごとに未読数取得APIを叩いてお知らせの未読数を取得しバッジに反映する
-          polling = new Gasane.Polling( Length.interval );
+          polling = new Polling( Length.interval );
           this.polling = polling;
-          polling.on( Gasane.Polling.PAST, this.update );
+          polling.on( Polling.UPDATE, this.update );
 
           // polling で お知らせ count 数 監視
           this.model.start();
@@ -181,8 +184,8 @@ export class SPViewHeaderMember extends ViewHeaderMember {
         // console.log( '********* restart ******* ' );
         if ( polling !== null ) {
           // 念のため一旦 unbind し bind する
-          polling.off( Gasane.Polling.PAST, this.update );
-          polling.on( Gasane.Polling.PAST, this.update );
+          polling.off( Polling.UPDATE, this.update );
+          polling.on( Polling.UPDATE, this.update );
 
           polling.setPolling( Length.interval );
         }
@@ -191,7 +194,7 @@ export class SPViewHeaderMember extends ViewHeaderMember {
       // Polling.PAST event handler
       update: function() {
         // console.log( 'update polling' );
-        this.polling.off( Gasane.Polling.PAST, this.update );
+        this.polling.off( Polling.UPDATE, this.update );
         this.model.start();
       },
       // update で call された ModelNoticeCount の成功 event handler

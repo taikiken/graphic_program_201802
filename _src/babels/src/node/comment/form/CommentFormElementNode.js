@@ -153,7 +153,7 @@ export let CommentFormElementNode = React.createClass( {
               <button type="submit" value="send">{Message.COMMENT_SUBMIT}</button>
             </div>
           </form>
-          <div ref="commentMessage"></div>
+          <div ref="commentMessage" />
           <div className="loading-spinner">&nbsp;</div>
         </div>
       );
@@ -316,7 +316,7 @@ export let CommentFormElementNode = React.createClass( {
   // event を受信し コメント一覧を再読み込みします
   done: function(/* event */) {
     // console.log( 'done', event );
-    this.replyStatus.complete( this.props.uniqueId, this.props.commentType );
+    this.replyStatus.complete(this.props.uniqueId, this.props.commentType, this.props.articleId);
     this.setState( { body: '' } );
     // ----------------------------------------------
     // GA 計測タグ

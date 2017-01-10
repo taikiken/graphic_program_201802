@@ -29,6 +29,54 @@ const React = self.React;
  * @since 2016-09-16
  */
 export class ComponentMoreButton extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  show: boolean,
+   *  action: Object,
+   *  element: Element,
+   *  loading: string,
+   *  afterClick: boolean
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      home: React.PropTypes.bool.isRequired,
+      show: React.PropTypes.bool.isRequired,
+      action: React.PropTypes.object.isRequired,
+      // 監視コンテナ
+      element: React.PropTypes.object.isRequired,
+      slug: React.PropTypes.string.isRequired,
+      // option, default ''
+      loading: React.PropTypes.string,
+      afterClick: React.PropTypes.bool
+    };
+  }
+  /**
+   * defaultProps
+   *
+   * ```
+   * {
+   *    loading: '',
+   *    afterClick: false
+   *  };
+   * ```
+   *
+   * afterClick: true の時は `click` 後に無限スクロールを始める
+   * @return {{loading: string, afterClick: boolean}} React props
+   */
+  static get defaultProps() {
+    return {
+      loading: '',
+      afterClick: false
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー {@link ComponentMoreButton.propTypes}
@@ -68,29 +116,16 @@ export class ComponentMoreButton extends React.Component {
      * @default 1
      */
     this.page = 1;
-
+    /**
+     * 初回無限スクロールにしないパターンありの setTimeout id<br>
+     * home(index)無限スクロールは button click 後に行う
+     * @type {number}
+     */
     this.timer = 0;
   }
-  /**
-   * div.board-btn-viewmore を出力します
-   * @return {?XML} div.board-btn-viewmore を返します
-   */
-  render() {
-    // hasNext: true, button を表示する？
-    if (this.state.show) {
-      return (
-        <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
-          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.boundClick} >
-            <span>{Message.BUTTON_VIEW_MORE}</span>
-          </a>
-          <span className="loading-spinner">&nbsp;</span>
-        </div>
-      );
-    }
-
-    // button 表示なし
-    return null;
-  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   // -----------------------------------------
   // delegate
   /**
@@ -221,75 +256,24 @@ export class ComponentMoreButton extends React.Component {
     Ga.add( new GaData('ComponentMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
   /**
-   * propTypes
-   * @return {{
-   *  show: boolean,
-   *  action: Object,
-   *  element: Element,
-   *  loading: string,
-   *  afterClick: boolean
-   * }} React props
+   * div.board-btn-viewmore を出力します
+   * @return {?XML} div.board-btn-viewmore を返します
    */
-  static get propTypes() {
-    return {
-      home: React.PropTypes.bool.isRequired,
-      show: React.PropTypes.bool.isRequired,
-      action: React.PropTypes.object.isRequired,
-      // 監視コンテナ
-      element: React.PropTypes.object.isRequired,
-      slug: React.PropTypes.string.isRequired,
-      // option, default ''
-      loading: React.PropTypes.string,
-      afterClick: React.PropTypes.bool
-    };
-  }
-  /**
-   * defaultProps
-   *
-   * ```
-   * {
-   *    loading: '',
-   *    afterClick: false
-   *  };
-   * ```
-   *
-   * afterClick: true の時は `click` 後に無限スクロールを始める
-   * @return {{loading: string, afterClick: boolean}} React props
-   */
-  static get defaultProps() {
-    return {
-      loading: '',
-      afterClick: false
-    };
+  render() {
+    // hasNext: true, button を表示する？
+    if (this.state.show) {
+      return (
+        <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
+          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.boundClick} >
+            <span>{Message.BUTTON_VIEW_MORE}</span>
+          </a>
+          <span className="loading-spinner">&nbsp;</span>
+        </div>
+      );
+    }
+
+    // button 表示なし
+    return null;
   }
 }
-// /**
-//  * プロパティ
-//  * @type {{
-//  *  show: boolean,
-//  *  action: Object,
-//  *  element: Element,
-//  *  loading: string
-//  * }}
-//  */
-// ComponentMoreButton.propTypes = {
-//   home: React.PropTypes.bool.isRequired,
-//   show: React.PropTypes.bool.isRequired,
-//   action: React.PropTypes.object.isRequired,
-//   // 監視コンテナ
-//   element: React.PropTypes.object.isRequired,
-//   slug: React.PropTypes.string.isRequired,
-//   // option, default ''
-//   loading: React.PropTypes.string
-// };
-// /**
-//  * デフォルトプロパティ
-//  * @type {{loading: string}}
-//  */
-// ComponentMoreButton.defaultProps = {
-//   loading: ''
-// };

@@ -42,7 +42,6 @@ export class ComponentSingleMediaLogo extends React.Component {
     this.state = {
       single: props.single
     };
-
     /**
      * bind 済み this.clickLink
      * @type {Function}

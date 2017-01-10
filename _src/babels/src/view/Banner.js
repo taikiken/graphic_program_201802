@@ -17,7 +17,8 @@ import { Safety } from '../data/Safety';
 import { BannerNode } from '../node/single/BannerNode';
 
 /**
- * `BannerNode` を出力します
+ * pc banner を生成し `BannerNode` を出力します
+ * {@link BannerNode}
  * @since 2016-09-24
  */
 export class Banner {
