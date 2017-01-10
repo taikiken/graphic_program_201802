@@ -30,12 +30,15 @@ import { Result } from '../../data/Result';
 // dae
 import { CategoriesSlugDae } from '../../dae/caegories/CategoriesSlugDae';
 
+// tick
+import { Polling } from '../../tick/Polling';
+
 // --------------------------------------------
 // Sagen
 const Sagen = self.Sagen;
 
 // Gasane
-const Polling = self.Gasane.Polling;
+// const Polling = self.Gasane.Polling;
 
 // React
 const ReactDOM = self.ReactDOM;

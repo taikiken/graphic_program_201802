@@ -89,7 +89,7 @@ export class SPComponentSinglesArticle extends React.Component {
     }
 
     return (
-      <div className="loaded-post" ref="singlesArticle">
+      <div className={`loaded-post loaded-post-${single.id}`} ref="singlesArticle">
         {/* div.post-kv */}
         <div className="single-visual-container" ref="visualElement">
           {/*
@@ -188,6 +188,8 @@ export class SPComponentSinglesArticle extends React.Component {
       // ViewSingle.ga(this.state.single);
       // @since 2016-10-05
       const single = this.state.single;
+      // 遅延実行させるために第三引数 delay: true 追加します
+      // @since 2016-11-14
       Ga.single(single, 'SPComponentSinglesArticle.onHit');
       // ---------------------
       // https://github.com/undotsushin/undotsushin/issues/1151

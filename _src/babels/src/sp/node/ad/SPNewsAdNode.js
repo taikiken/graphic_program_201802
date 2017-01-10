@@ -64,7 +64,7 @@ export let SPNewsAdNode = React.createClass( {
     let enableAd = () => {
       this.ok = true;
       return (
-        <div className={`news-ad news-ad-${this.props.index}`} ref="news_ad"></div>
+        <div className={`news-ad news-ad-${this.props.index}`} ref="news_ad" />
       );
     };
 

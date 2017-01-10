@@ -76,7 +76,13 @@ endif;
 <?php
 // ---------------------------------------------------------------------------
 // brightcove
-if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
+
+// @since 2016-11-13
+// 記事詳細・次の記事一覧のメインビジュアルを動画に変更
+// 常に videojs 関連を読込む
+if ( $page['template'] == 'p' ) :
+
+//if ( $page['template'] == 'p' && $page['post']['media']['video']['player'] == 'brightcove' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
   ?>

@@ -168,25 +168,6 @@ export class SPViewSingle extends ViewSingle {
    * @param {SingleDae} single 記事 SingleDae instance
    */
   renderBanner( single:SingleDae ):void {
-    // // bannerElement をチェックします
-    // if (!Safety.isElement(this._bannerElement)) {
-    //   return;
-    // }
-    //
-    // let userBanner = single.user.banner.sp;
-    // let banner = single.banner.sp;
-    // if ( !banner.image && !!userBanner.image ) {
-    //   banner = userBanner;
-    // }
-    //
-    // ReactDOM.render(
-    //   <BannerNode
-    //     banner={banner}
-    //     pc={false}
-    //   />,
-    //   this._bannerElement
-    // );
-
     // @since 2016-09-24
     const element = this._bannerElement;
     const component = Banner.sp(single, element);

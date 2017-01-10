@@ -358,7 +358,7 @@ export class SPViewComments extends ViewComments {
               uniqueId={`ad-${commentsListType}`}
               commentsListType={commentsListType}
             />
-            <div className="comment-more" ref="commentMore"></div>
+            <div className="comment-more" ref="commentMore" />
           </div>
         );
 

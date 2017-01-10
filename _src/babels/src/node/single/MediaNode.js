@@ -39,7 +39,17 @@ export let MediaNode = React.createClass( {
     mediaType: React.PropTypes.string.isRequired,
     media: React.PropTypes.object.isRequired,
     // 2016-06-06 記事詳細で画像を表示するかどうか
-    isShowImage: React.PropTypes.bool.isRequired
+    isShowImage: React.PropTypes.bool.isRequired,
+    // 記事表示位置, -1: 記事詳細先頭
+    // @since 2016-11-13
+    index: React.PropTypes.number
+  },
+  // @default -1
+  // @since 2016-11-13
+  getDefaultProps: function() {
+    return {
+      index: -1
+    };
   },
   render: function() {
 
@@ -74,6 +84,7 @@ export let MediaNode = React.createClass( {
           <MediaVideoNode
             articleId={this.props.articleId}
             media={media}
+            index={this.props.index}
           />
         );
       }

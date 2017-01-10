@@ -29,9 +29,28 @@ const React = self.React;
 /**
  * 記事詳細下部を出力します<br>
  * 汎用化のために `ViewSingleFooter` {@link ViewSingleFooter} から分離します
+ *
+ * 記事詳細下部, TAG 部分の出力 `div.post-footer`<br>
+ * Banner {@link Banner} の出力を行います
  * @since 2016-09-24
  */
 export class ComponentSingleFooter extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{single: SingleDae, callback: Function}} React props
+   */
+  static get propTypes() {
+    return {
+      single: React.PropTypes.object.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSingleFooter.propTypes}
@@ -46,6 +65,15 @@ export class ComponentSingleFooter extends React.Component {
     this.state = {
       single: props.single
     };
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
+   */
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
   }
   /**
    * 記事詳細下部を更新します
@@ -105,31 +133,4 @@ export class ComponentSingleFooter extends React.Component {
       </div>
     );
   }
-  /**
-   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{single: SingleDae, callback: Function}} React props
-   */
-  static get propTypes() {
-    return {
-      single: React.PropTypes.object.isRequired,
-      callback: React.PropTypes.func.isRequired
-    };
-  }
 }
-//
-// /**
-//  * プロパティ
-//  * @type {{single: SingleDae}}
-//  */
-// ComponentSingleFooter.propTypes = {
-//   single: React.PropTypes.object.isRequired
-// };

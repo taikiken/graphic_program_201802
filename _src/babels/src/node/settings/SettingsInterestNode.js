@@ -104,7 +104,7 @@ export let SettingsInterestNode = React.createClass( {
               <input type="submit" value={Message.BUTTON_SAVE} />
             </span>
           </div>
-          <div className="loading-spinner"></div>
+          <div className="loading-spinner" />
         </form>
       </div>
     );

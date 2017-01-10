@@ -56,7 +56,7 @@ export let BookmarkButtonNode = React.createClass( {
         <a href="#" className={bookmarkClass(this.state.bookmarked)} onClick={this.clickHandler}>
           <span>{bookmarkMessage(this.state.bookmarked)}</span>
         </a>
-        <div className="loading-spinner"></div>
+        <div className="loading-spinner" />
       </div>
     );
   },

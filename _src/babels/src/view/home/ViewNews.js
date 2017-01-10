@@ -67,6 +67,11 @@ export class ViewNews extends ViewArchiveMasonryInfinite {
      * @since 2016-10-04
      */
     this.afterClick = true;
+    /**
+     * JSON response, Result.request を保存します
+     * @type {?Object}
+     */
+    this.request = null;
   }
   /**
    * Ajax response success<br>
