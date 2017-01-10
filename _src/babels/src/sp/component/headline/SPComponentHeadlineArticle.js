@@ -10,10 +10,6 @@
  *
  */
 
-// // app
-// import { Empty } from '../../../app/const/Empty';
-// import { MediaType } from '../../../app/const/MediaType';
-
 // node
 import { CategoryLabelNode } from '../../../node/category/CategoryLabelNode';
 
@@ -26,24 +22,6 @@ import { GaData } from '../../../ga/GaData';
 
 // React
 const React = self.React;
-
-// --------------------------------------------
-// private
-
-// /**
-//  * media type が `MediaType.VIDEO` かを判定し<br>
-//  * img tag か null を返します
-//  * @since 2016-09-16
-//  * @param {string} mediaType 比較対象 media_type
-//  * @return {?XML} img.post-thumb-overlay-movie tag か null を返します
-//  */
-// const playMark = (mediaType) => {
-//   if (mediaType === MediaType.VIDEO) {
-//     return <img src={Empty.VIDEO_PLAY_SMALL_1X1} alt="" className="post-thumb-overlay-movie type-movie"/>;
-//   } else {
-//     return null;
-//   }
-// };
 
 /**
  * sp headline 出力を汎用化
@@ -86,6 +64,8 @@ export class SPComponentHeadlineArticle extends React.Component {
                 categories={props.categories}
                 id={`archive-label-${props.id}`}
                 index={props.index}
+                mediaType={props.mediaType}
+                recommend={false}
               />
             </p>
             <p className="post-date">{props.date}</p>

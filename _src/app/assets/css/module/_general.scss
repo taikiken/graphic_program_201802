@@ -50,27 +50,55 @@
 
 
 
+// board-
+// boadr-large, board-small 共用
+
+
+[ class^="board-" ] {
+  .post {
+    [ class^="post-label_" ] {
+      display: inline-block;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    &-label_recommend {
+      @extend .sprite-common;
+      @include sprite( $common-icon-recommend );
+      @include hide-text;
+    }
+
+    &-label_movie {
+      @extend .sprite-common;
+      @include sprite( $common-icon-movie );
+      @include hide-text;
+    }
+  }
+}
+
+
+
+
+
 // board-large
 // 汎用 ニュース一覧
 .board-large {
   @include clearfix;
 
+  &-column {
+    // width: 350px;
+    width: 100%;
+
+    // &.column1 {
+    //   float: left;
+    // }
+
+    // &.column2 {
+    //   float: right;
+    // }
+  } //.board-column
+
   @at-root {
-    &-column {
-      // width: 350px;
-      width: 100%;
-
-      // &.column1 {
-      //   float: left;
-      // }
-
-      // &.column2 {
-      //   float: right;
-      // }
-    } //.board-column
-
-
-
     .feature-user {
       &.comment-item {
         margin-top: 10px;
@@ -170,18 +198,6 @@
 
         &-overlay-movie {}
       } //post-thumb
-
-      [ class^="post-label_" ] {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-      }
-
-      &-label_recommend {
-        @extend .sprite-common;
-        @include sprite( $common-icon-recommend );
-        @include hide-text;
-      }
 
       &-data {
         margin-top: .75em;
@@ -378,11 +394,12 @@
 
       .category-label {
         display: inline-block;
-        margin-left: 0.5em;
+        //margin-left: 0.5em;
+        margin-right: 0.5em;
 
-        &:first-of-type {
-          margin-left: 0;
-        }
+        //&:first-of-type {
+        //  margin-left: 0;
+        //}
       }
     }
 

@@ -427,6 +427,15 @@ export class Message {
     return 'おすすめ記事';
   }
 
+  /**
+   * LABEL_MOVIE, 動画
+   * @return {string} 動画
+   * @since 2016-12-26
+   */
+  static get LABEL_MOVIE():string {
+    return '動画';
+  }
+
   // -----------------------------------
   // mypage
   /**
