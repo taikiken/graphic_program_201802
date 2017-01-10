@@ -164,17 +164,12 @@ export class ComponentVideojsImaSingles extends React.Component {
     // 問題があれば元に戻してください
     const iphone = !!navigator.userAgent.match(/iPhone/i);
     const android = !!navigator.userAgent.match(/Android/i);
-    const ipad = !!navigator.userAgent.match(/iPad/i);
     const adContainer = document.getElementById(`${videoId}_ima-ad-container`);
     if (iphone || android) {
       adContainer.setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
     }
     if (iphone) {
       adContainer.querySelector('div').setAttribute('style', 'display:none');
-    }
-    if (ipad) {
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
     }
 
     /*
