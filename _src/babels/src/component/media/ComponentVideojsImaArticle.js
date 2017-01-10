@@ -228,10 +228,16 @@ export class ComponentVideojsImaArticle extends React.Component {
     // this.videoElement = videoElement;
     // this.bindEvent(videoElement);
 
-    player.one('click', function() {
+    player.one('play', function() {
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
-      player.play();
+    });
+    player.on('click', function() {
+      if(player.paused()) {
+        player.play();
+      } else {
+        player.pause();
+      }
     });
   }
   /**
