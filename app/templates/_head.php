@@ -7,7 +7,13 @@
 <?php endif; ?>
 
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
-  <title><?php echo $page['og_title']; ?></title>
+  <title><?php
+    if ( $page['template'] == 'index' ) :
+      echo $page['site_name'];
+    else :
+      echo $page['title'].' | '.$page['site_name'];
+    endif;
+  ?></title>
 
   <meta name="keywords" content="<?php echo $page['keywords']; ?>">
   <meta name="description" content="<?php echo $page['og_description']; ?>">

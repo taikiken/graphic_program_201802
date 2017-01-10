@@ -14,6 +14,7 @@ class ViewModel {
 
     // page
     'title'              => 'スポーツブル / SPORTS BULL',
+    'title_short'        => 'SPORTS BULL',
     'keywords'           => 'スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy',
 
     // og
