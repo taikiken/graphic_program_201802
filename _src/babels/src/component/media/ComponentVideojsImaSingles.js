@@ -172,10 +172,6 @@ export class ComponentVideojsImaSingles extends React.Component {
     if (iphone) {
       adContainer.querySelector('div').setAttribute('style', 'display:none');
     }
-    if (ipad) {
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
-    }
 
     /*
      var adContainer = document.getElementById('content_video_ima-ad-container');
