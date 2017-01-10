@@ -97,7 +97,6 @@ if ( $page['template'] == 'p' ) :
   <script src="/assets/ima_plugin/js/videojs.hls.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
   <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
-  <script src="/assets/ima_plugin/js/ads.js"></script>
 
   <?php
 endif;

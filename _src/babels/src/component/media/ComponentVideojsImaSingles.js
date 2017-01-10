@@ -142,7 +142,7 @@ export class ComponentVideojsImaSingles extends React.Component {
     // cache 対策
     const adUrl = vast !== '' ? vast + Date.now() : '';
     const videoId = this.videoId();
-    const player = videojs(videoId);
+    const player = videojs(videoId, { preload: 'none' });
     const option = {
       id: videoId,
       adTagUrl: adUrl
@@ -151,6 +151,27 @@ export class ComponentVideojsImaSingles extends React.Component {
 
     // player.ima.initializeAdDisplayContainer();
     // player.ima.requestAds();
+
+    // if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Android/i)) {
+    //   document.querySelector('#' + videoId + '_ima-ad-container').setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+    // }
+    // if (navigator.userAgent.match(/iPhone/i)) {
+    //   document.querySelector('#' + videoId + '_ima-ad-container > div').setAttribute('style', 'display:none');
+    // }
+
+    // l.155 ~ 160 を少し変更しました
+    // 最適化を図れればと考えました
+    // 問題があれば元に戻してください
+    const iphone = !!navigator.userAgent.match(/iPhone/i);
+    const android = !!navigator.userAgent.match(/Android/i);
+    const adContainer = document.getElementById(`${videoId}_ima-ad-container`);
+    if (iphone || android) {
+      adContainer.setAttribute('style', 'z-index: 9 !important; position: absolute; display: block;');
+    }
+    if (iphone) {
+      adContainer.querySelector('div').setAttribute('style', 'display:none');
+    }
+
     /*
      var adContainer = document.getElementById('content_video_ima-ad-container');
      adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
@@ -188,20 +209,12 @@ export class ComponentVideojsImaSingles extends React.Component {
     const rect = video.getBoundingClientRect();
     const elemTop = rect.top;
     const elemBottom = rect.bottom;
-
-    let isVisible = false;
-    if (this.phone) {
-      isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight + videoHeight / 2);
-    } else {
-      isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
-    }
-    // const isVisible = (elemTop >= 0 - videoHeight / 2) && (elemBottom <= window.innerHeight + videoHeight / 2);
-    if(!isVisible) {
+    const isVisible = (elemTop >= 0 - videoHeight) && (elemBottom <= window.innerHeight + videoHeight);
+    if (!isVisible) {
       player.pause();
       player.ima.pauseAd();
     }
   }
-
   /**
    * ga tag 送信
    *
@@ -223,6 +236,8 @@ export class ComponentVideojsImaSingles extends React.Component {
   }
   /**
    * スマホ用 video tag
+   *
+   * ライブラリが出力 video tag を破壊するので ref を親エレメント div.mainContainer に移動しました on 2016-12-22
    * @return {XML} スマホ用 video tag
    */
   renderMobile() {
@@ -235,16 +250,18 @@ export class ComponentVideojsImaSingles extends React.Component {
 
     return (
       <div className="post-kv post-video-kv">
-        <div className="mainContainer">
+        <div
+          className="mainContainer"
+          ref={(component) => {
+            this.videoElement = component;
+          }}
+        >
           <video
             id={this.videoId()}
             className="video-js vjs-default-skin vjs-big-play-centered"
             poster={poster}
             width={`${width}px`}
             height={`${height}px`}
-            ref={(component) => {
-              this.videoElement = component;
-            }}
             controls="controls"
           >
               <source
@@ -258,6 +275,8 @@ export class ComponentVideojsImaSingles extends React.Component {
   }
   /**
    * PC + Tablet video tag
+   *
+   * ライブラリが出力 video tag を破壊するので ref を親エレメント div.mainContainer に移動しました on 2016-12-22
    * @return {XML} PC + Tablet video tag
    */
   renderDesktop() {
@@ -267,19 +286,20 @@ export class ComponentVideojsImaSingles extends React.Component {
     const url = this.mobile ? video.url.sd : video.url.hd;
     const width = Content.WIDTH;
     const height = Content.HD_HEIGHT;
-
     return (
       <div className="post-kv post-video-kv">
-        <div className="mainContainer">
+        <div
+          className="mainContainer"
+          ref={(component) => {
+            this.videoElement = component;
+          }}
+        >
           <video
             id={this.videoId()}
             className="video-js vjs-default-skin vjs-big-play-centered"
             poster={poster}
             width={`${width}px`}
             height={`${height}px`}
-            ref={(component) => {
-              this.videoElement = component;
-            }}
             controls="controls"
           >
             <source
