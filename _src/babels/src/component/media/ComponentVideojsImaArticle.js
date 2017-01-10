@@ -228,15 +228,16 @@ export class ComponentVideojsImaArticle extends React.Component {
     // this.videoElement = videoElement;
     // this.bindEvent(videoElement);
 
-    player.ima.initializeAdDisplayContainer();
-    player.ima.requestAds();
-    // const adContainer = document.getElementById('content_video_ima-ad-container');
-    const adContainer = this.mainContainer.getElementById('content_video_ima-ad-container');
-    adContainer.setAttribute('style', 'z-index: -1; position: absolute;');
-    player.one('click', function() {
+    player.one('play', function() {
       player.ima.initializeAdDisplayContainer();
       player.ima.requestAds();
-      player.play();
+    });
+    player.on('click', function() {
+      if(player.paused()) {
+        player.play();
+      } else {
+        player.pause();
+      }
     });
   }
   /**
@@ -380,7 +381,7 @@ export class ComponentVideojsImaArticle extends React.Component {
       >
         <video
           id="content_video"
-          className="video-js vjs-default-skin"
+          className="video-js vjs-default-skin vjs-big-play-centered"
           poster={poster}
           width={`${width}px`}
           height={`${height}px`}
