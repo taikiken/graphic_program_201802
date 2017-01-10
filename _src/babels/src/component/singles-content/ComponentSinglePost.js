@@ -16,6 +16,9 @@ import { Message } from '../../app/const/Message';
 // // view
 // import { View } from '../../view/View';
 
+// util
+import { Instagram } from '../../util/Instagram';
+
 // ga
 import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
@@ -40,7 +43,17 @@ export class ComponentSinglePost extends React.Component {
    */
   static get propTypes() {
     return {
-      single: React.PropTypes.object.isRequired
+      single: React.PropTypes.object.isRequired,
+      sp: React.PropTypes.boolean
+    };
+  }
+  /**
+   * React props defaultProps
+   * @return {{sp: boolean}} sp flag
+   */
+  static get defaultProps() {
+    return {
+      sp: false
     };
   }
   // ---------------------------------------------------
@@ -136,6 +149,10 @@ export class ComponentSinglePost extends React.Component {
     if (!body) {
       return null;
     }
+    // instagram
+    // @see https://github.com/undotsushin/undotsushin/issues/1458
+    // @since 2017-01-10
+    Instagram.delay();
     // 本文
     return (
       <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
