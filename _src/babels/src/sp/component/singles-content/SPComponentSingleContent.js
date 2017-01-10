@@ -96,7 +96,11 @@ export class SPComponentSingleContent extends React.Component {
    */
   componentDidMount() {
     // Fb.init();
-    Fb.delay(500);
+    // Fb.delay(500);
+    // default 1000 へ
+    // @see https://github.com/undotsushin/undotsushin/issues/1458
+    // @since 2017-01-10
+    Fb.delay();
   }
   /**
    * state.single 情報を更新し再描画します
@@ -121,6 +125,7 @@ export class SPComponentSingleContent extends React.Component {
         <ComponentSinglePost
           single={single}
           index={index}
+          sp={true}
         />
         <ComponentSingleProvider
           single={single}
