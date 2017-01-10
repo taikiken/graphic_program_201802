@@ -125,6 +125,7 @@ export class SPComponentSingleContent extends React.Component {
         <ComponentSinglePost
           single={single}
           index={index}
+          sp={true}
         />
         <ComponentSingleProvider
           single={single}
