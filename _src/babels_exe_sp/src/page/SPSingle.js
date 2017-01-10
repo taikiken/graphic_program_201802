@@ -116,7 +116,8 @@ export class SPSingle {
     // _singleDae = single;
 
     // let slug = single.category.slug;
-    let slug = single.categories.all[0].slug;
+    // let slug = single.categories.all[0].slug;
+    let slug = single.categories.slug;
     // let label = single.category.label;
 
     // title は backend output

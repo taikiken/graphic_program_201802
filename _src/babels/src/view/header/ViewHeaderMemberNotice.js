@@ -39,12 +39,15 @@ import {ModelNoticeCount} from '../../model/notice/ModelNoticeCount';
 // event
 import {NoticeStatus} from '../../event/NoticeStatus';
 
+// tick
+import { Polling } from '../../tick/Polling';
+
 // React
 let React = self.React;
 let ReactDOM = self.ReactDOM;
 
 // Sagen
-let Gasane = self.Gasane;
+// let Gasane = self.Gasane;
 
 /**
  * お知らせ(header)
@@ -391,9 +394,9 @@ export class ViewHeaderMemberNotice extends View {
 
           // https://github.com/undotsushin/undotsushin/issues/282
           // 60秒ごとに未読数取得APIを叩いてお知らせの未読数を取得しバッジに反映する
-          polling = new Gasane.Polling( Length.interval );
+          polling = new Polling( Length.interval );
           this.polling = polling;
-          polling.on( Gasane.Polling.PAST, this.update );
+          polling.on( Polling.UPDATE, this.update );
 
           // polling で お知らせ count 数 監視
           polling.start();
@@ -415,22 +418,22 @@ export class ViewHeaderMemberNotice extends View {
       // custom
       dispose: function() {
         // unbind event
-        this.polling.off( Gasane.Polling.PAST, this.update );
+        this.polling.off( Polling.UPDATE, this.update );
       },
       // polling をリスタートします
       restart: function() {
         let polling = this.polling;
         if ( polling !== null ) {
           // 念のため一旦 unbind し bind する
-          polling.off( Gasane.Polling.PAST, this.update );
-          polling.on( Gasane.Polling.PAST, this.update );
+          polling.off( Polling.UPDATE, this.update );
+          polling.on( Polling.UPDATE, this.update );
 
           polling.setPolling( Length.interval );
         }
       },
       // polling event handel
       update: function() {
-        this.polling.off( Gasane.Polling.PAST, this.update );
+        this.polling.off( Polling.UPDATE, this.update );
         this.model.start();
       },
       // polling 後の request 成功

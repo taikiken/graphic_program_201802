@@ -100,8 +100,8 @@ export class SPComponentSingleBody extends React.Component {
   static body(body) {
     return (
       <div className="sp_post-content">
-        <div id="post-content-container" className="post-content excerpt hidden" dangerouslySetInnerHTML={{__html: body}}></div>
-        <div id="post-content-read-more" className="post-content-read-more"></div>
+        <div id="post-content-container" className="post-content excerpt hidden" dangerouslySetInnerHTML={{__html: body}} />
+        <div id="post-content-read-more" className="post-content-read-more" />
       </div>
     );
   }

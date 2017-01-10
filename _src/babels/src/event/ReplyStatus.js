@@ -103,11 +103,15 @@ export class ReplyStatus extends EventDispatcher {
   }
   /**
    * complete event を発火します
+   * <p>page 内に複数の記事詳細が存在するようになるため<br>
+   * 記事IDを識別子として加える</p>
    * @param {Number} id comment id, form 設置 ID, 要 Page 内ユニーク
    * @param {string} kind 記事へのコメントかを表すための文字列 normal | official | self | independent
+   * @param {string} articleId 記事ID 識別子として追加
+   * @since 2016-11-05 articleId added
    */
-  complete( id:string, kind:string = '' ):void {
-    this.dispatch( { type: ReplyStatus.COMPLETE, id: id, kind: kind } );
+  complete(id:string, kind:string = '', articleId = ''):void {
+    this.dispatch({ type: ReplyStatus.COMPLETE, id, kind, articleId });
   }
   // ---------------------------------------------------
   //  static method

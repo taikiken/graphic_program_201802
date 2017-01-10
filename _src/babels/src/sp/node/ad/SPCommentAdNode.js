@@ -37,7 +37,7 @@ export let SPCommentAdNode = React.createClass( {
 
     if ( this.state.need ) {
       return (
-        <div id={this.props.uniqueId} className={`comment-ad comment-${this.props.commentsListType}-ad`} ref="comment_official_ad"></div>
+        <div id={this.props.uniqueId} className={`comment-ad comment-${this.props.commentsListType}-ad`} ref="comment_official_ad" />
       );
     } else {
       return null;

@@ -22,13 +22,13 @@ const Sagen = self.Sagen;
  * @private
  * @type {Symbol}
  */
-const domSymbol = Symbol();
+const domSymbol = Symbol('Sagen.Dom instance');
 /**
  * Style instance を保持するための private Symbol
  * @private
  * @type {Symbol}
  */
-const styleSymbol = Symbol();
+const styleSymbol = Symbol('Style instance');
 
 /**
  * 要素(HTMLElement)の ClientReact, style を管理します
@@ -39,6 +39,9 @@ export class Elements extends Offset {
    * @param {Element} element 処理対象 Element
    */
   constructor(element:Element) {
+    if (!element) {
+      throw new Error(`element is not correct: ${element}`);
+    }
     // console.log('Elements', element);
     super(element);
     /**
@@ -59,14 +62,14 @@ export class Elements extends Offset {
    * 引数 `element` を Sagen.Dom instance 変換
    * @return {Sagen.Dom} 引数 `element` を Sagen.Dom instance にしたものを返します
    */
-  get dom():Sagen.Dom {
+  get dom() {
     return this[domSymbol];
   }
   /**
    * 引数 `element` を Style instance 変換
    * @return {Style} 引数 `element` を Style instance にしたものを返します
    */
-  get style():Style {
+  get style() {
     return this[styleSymbol];
   }
 }
