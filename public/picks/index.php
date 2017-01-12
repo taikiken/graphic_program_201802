@@ -86,10 +86,31 @@ $model = new ViewModel($o);
 
 // xml ファイルを読み込む
 // ==============================
+
+// host 設定
+// @see https://github.com/undotsushin/undotsushin/issues/1426#issuecomment-272060174
+// - 開発 : https://dev-img.sportsbull.jp/xml/picks.xml
+// - 公開 : https://img.sportsbull.jp/xml/picks.xml
+
+// host name 取得
+$app_host_name = $page['apiRoot'];
+if ($app_host_name == '') {
+  $app_host_name = 'https://dev.sportsbull.jp';
+}
+
+// host name から xml host name 設定
+$xml_host_name = 'https://dev-img.sportsbull.jp';
+if ($app_host_name != 'https://dev.sportsbull.jp') {
+  $xml_host_name = 'https://img.sportsbull.jp';
+}
+
+// xml data を設定する配列
 $articles = array();
 
-$xml_element = simplexml_load_file('data.xml');
+// path を設定し XML file を取得します
+$xml_element = simplexml_load_file($xml_host_name . '/xml/picks.xml');
 
+// parse し $articles へセットし不要データは unset します
 foreach( $xml_element as $xml_article ) :
 
   $api_post_data = $model->get_post($xml_article->id);
@@ -145,7 +166,4 @@ endif;
 
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
-//print_r($page);
-
-
-?>
+//print_r($page['apiRoot']);
