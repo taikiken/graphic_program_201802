@@ -46,25 +46,37 @@ export class Bad extends EventDispatcher {
   // ---------------------------------------------------
   /**
    * イベント強制発火
+   * <p>page 内に複数の記事詳細が存在するようになるため<br>
+   * 記事IDを識別子として加える</p>
    * @param {string} type コメントタイプ
    * @param {string|Number} commentId コメント Id
+   * @param {string} articleId 記事Id
+   * @2016-11-05 article ID added
    */
-  fire( type:string, commentId:string ):void {
-    this.dispatch( { type: type, commentId: commentId } );
+  fire(type:string, commentId:string, articleId):void {
+    this.dispatch({ type, commentId, articleId });
   }
   /**
    * bad する
+   * <p>page 内に複数の記事詳細が存在するようになるため<br>
+   * 記事IDを識別子として加える</p>
    * @param {string} commentId コメントId
+   * @param {string} articleId 記事Id
+   * @2016-11-05 article ID added
    */
-  add( commentId:string ):void {
-    this.fire( CommentStatus.BAD_ADD, commentId );
+  add(commentId:string, articleId):void {
+    this.fire(CommentStatus.BAD_ADD, commentId, articleId);
   }
   /**
    * bad を外す
+   * <p>page 内に複数の記事詳細が存在するようになるため<br>
+   * 記事IDを識別子として加える</p>
    * @param {string} commentId コメントId
+   * @param {string} articleId 記事Id
+   * @2016-11-05 article ID added
    */
-  remove( commentId:string ):void {
-    this.fire( CommentStatus.BAD_DELETE, commentId );
+  remove(commentId:string, articleId):void {
+    this.fire(CommentStatus.BAD_DELETE, commentId, articleId);
   }
   // ---------------------------------------------------
   //  static method

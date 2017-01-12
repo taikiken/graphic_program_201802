@@ -97,7 +97,7 @@ export class ViewFirstVisit extends View {
           return (
             <div style={this.state.css}>
               <div className="modal-intro" style={this.state.height}>
-                <div className="modal-bg" onClick={this.closeHandle} style={this.state.height}></div>
+                <div className="modal-bg" onClick={this.closeHandle} style={this.state.height} />
                 <div className="modal-intro-contents">
                   <a href="#" className="modal-intro-close" onClick={this.closeHandle}><i>&nbsp;</i><i>&nbsp;</i><span>閉じる</span></a>
                   <div className="modal-intro-tagline">CRAZY FOR SPORTS</div>

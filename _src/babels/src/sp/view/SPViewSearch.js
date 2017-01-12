@@ -81,7 +81,7 @@ export class SPViewSearch extends SPViewArchiveInfinite {
 
         return (
           <div className="result-notfound">
-            <div id="sponsor-link-404" className="sponsor-link sponsor-link-404" ref="ad_root"></div>
+            <div id="sponsor-link-404" className="sponsor-link sponsor-link-404" ref="ad_root" />
             
             <div className="error-container result-notfound">
               <h2 className="result-notfound-heading">検索結果が見つかりませんでした</h2>

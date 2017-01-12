@@ -115,7 +115,7 @@ export let ReactionNode = React.createClass( {
         <div className={'comment-reaction ' + this.state.loading}>
           <a className={'comment-reaction-btn comment-reaction-like' + active( this.state.isGood )} href="#" onClick={this.goodClick}><i>&nbsp;</i>{count(this.state.good)}</a>
           <a className={'comment-reaction-btn comment-reaction-dislike' + active( this.state.isBad )} href="#" onClick={this.badClick}><i>&nbsp;</i>{count(this.state.bad)}</a>
-          <div className="loading-spinner"></div>
+          <div className="loading-spinner" />
         </div>
       );
     } else {
@@ -124,7 +124,7 @@ export let ReactionNode = React.createClass( {
         <div className={'comment-reaction ' + this.state.loading}>
           <span className="comment-reaction-btn comment-reaction-like"><i>&nbsp;</i>{count(this.state.good)}</span>
           <span className="comment-reaction-btn comment-reaction-dislike"><i>&nbsp;</i>{count(this.state.bad)}</span>
-          <div className="loading-spinner"></div>
+          <div className="loading-spinner" />
         </div>
       );
     }
@@ -235,7 +235,10 @@ export let ReactionNode = React.createClass( {
     }
 
     // Good add event fire
-    this.good.add( this.props.commentId );
+    // @since 2016-11-05
+    // page 内に複数の記事詳細が存在するようになるため
+    // 記事IDを識別子として加える
+    this.good.add(this.props.commentId, this.props.articleId);
     // ----------------------------------------------
     // GA 計測タグ
     Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - good', this.props.url, parseFloat(this.props.commentId)) );
@@ -245,7 +248,10 @@ export let ReactionNode = React.createClass( {
   goodDeleteDone: function() {
     this.goodStar.off( Model.COMPLETE, this.goodDeleteDone );
     // Good remove event fire
-    this.good.remove( this.props.commentId );
+    // @since 2016-11-05
+    // page 内に複数の記事詳細が存在するようになるため
+    // 記事IDを識別子として加える
+    this.good.remove(this.props.commentId, this.props.articleId);
 
     let good = --this.goodCount;
     this.setState( {good: good, loading: '', isGood: false} );
@@ -271,7 +277,10 @@ export let ReactionNode = React.createClass( {
     }
 
     // Bad add event fire
-    this.bad.add( this.props.commentId );
+    // @since 2016-11-05
+    // page 内に複数の記事詳細が存在するようになるため
+    // 記事IDを識別子として加える
+    this.bad.add(this.props.commentId, this.props.articleId);
     // ----------------------------------------------
     // GA 計測タグ
     Ga.add( new GaData('ReactionNode.goodAddDone', 'comment', 'reaction - bad', this.props.url, parseFloat(this.props.commentId)) );
@@ -281,7 +290,10 @@ export let ReactionNode = React.createClass( {
   badDeleteDone: function() {
     this.badStar.off( Model.COMPLETE, this.badDeleteDone );
     // Bad remove event fire
-    this.bad.remove( this.props.commentId );
+    // @since 2016-11-05
+    // page 内に複数の記事詳細が存在するようになるため
+    // 記事IDを識別子として加える
+    this.bad.remove(this.props.commentId, this.props.articleId);
 
     let bad = --this.badCount;
     this.setState( {bad: bad, loading: '', isBad: false} );

@@ -18,6 +18,3 @@
 
 # synapse
 ./_src/app/_synapse/**/*.js
-
-# VideojsImaNode.js
-./_src/babels/src/node/VideojsImaNode.js

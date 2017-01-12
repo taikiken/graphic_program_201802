@@ -44,6 +44,22 @@ const playMark = (mediaType) => {
  * @since 2016-09-30
  */
 export class ComponentSinglesWidgetPopularList extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * React props
+   * @return {{list: Array<SingleDae>}} React props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired,
+      callback: React.PropTypes.func.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentSinglesWidgetPopularList.propTypes}
@@ -58,13 +74,45 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
       list: props.list
     };
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * delegate, マウント後に呼び出されます<br>
+   * callback 関数を実行します
+   */
+  componentDidMount() {
+    const callback = this.props.callback;
+    if (typeof callback === 'function') {
+      callback.call(this);
+    }
+  }
+  /**
+   * 次の読み込みから表示を更新します
+   * @param {Array} list 表示リスト
+   */
+  updateList(list) {
+    // state を変更し appendChild を行う
+    this.setState({ list });
+  }
+  /**
+   * 表示の元になる情報を更新せず表示系を更新します
+   * @ToDo 不要かも
+   */
+  reload() {
+    this.updateList(this.state.list);
+  }
   /**
    * 記事詳細・人気の記事一覧を出力します
-   * @return {XML} div.widget-postList.widget-postList_popular を返します
+   * @return {?XML} div.widget-postList.widget-postList_popular を返します
    * */
   render() {
     // @type {Array<SingleDae>}
     const articles = this.state.list;
+    // not array, 空配列 null を返します
+    if (!Array.isArray(articles) || articles.length === 0) {
+      return null;
+    }
 
     return (
       <div className="widget-postList widget-postList_popular">
@@ -81,16 +129,8 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
               const thumbnail = Safety.image(single.media.images.thumbnail, Empty.IMG_SMALL);
 
               return (
-                <li key={`singles-popular-${single.id}`} className="board-item">
+                <li key={`singles-popular-${single.id}-${index}`} className="board-item">
                   <a href={single.url} className="post">
-                    {/*
-                    <ComponentArticleThumbnail
-                      mediaType={single.mediaType}
-                      thumbnail={thumbnail}
-                      title={single.title}
-                      recommend={false}
-                    />
-                     */}
                     <figure className="post-thumb post-thumb-headline">
                       <img src={thumbnail} alt={single.title}/>
                       {playMark(single.mediaType)}
@@ -113,32 +153,5 @@ export class ComponentSinglesWidgetPopularList extends React.Component {
         </ul>
       </div>
     );
-  }
-  /**
-   * 次の読み込みから表示を更新します
-   * @param {Array} list 表示リスト
-   */
-  updateList(list) {
-    // state を変更し appendChild を行う
-    this.setState({ list });
-  }
-  /**
-   * 表示の元になる情報を更新せず表示系を更新します
-   * @ToDo 不要かも
-   */
-  reload() {
-    this.updateList(this.state.list);
-  }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * React props
-   * @return {{list: Array<SingleDae>}} React props
-   */
-  static get propTypes() {
-    return {
-      list: React.PropTypes.array.isRequired
-    };
   }
 }

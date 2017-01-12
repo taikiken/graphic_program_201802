@@ -221,7 +221,7 @@ export class ViewActivities extends View {
           return (
             <div id="more" className={'board-btn-viewmore loading-root ' + this.state.loading}>
               <a className="board-btn-viewmore-link" href={'#more'} onClick={this.handleClick} ><span>{Message.BUTTON_VIEW_MORE}</span></a>
-              <div className="loading-spinner"></div>
+              <div className="loading-spinner" />
             </div>
           );
 
@@ -229,7 +229,7 @@ export class ViewActivities extends View {
 
           // button 表示なし
           return (
-            <div className="no-more"></div>
+            <div className="no-more" />
           );
 
         }

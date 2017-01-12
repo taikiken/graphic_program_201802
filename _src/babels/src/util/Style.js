@@ -18,7 +18,7 @@ const Dom = self.Sagen.Dom;
  * @private
  * @type {Symbol}
  */
-const cssSymbol = Symbol();
+const cssSymbol = Symbol('current style.cssText');
 
 /**
  * Element の style を操作します
@@ -71,7 +71,7 @@ export class Style {
     }
     // 存在チェック
     const element = this.element;
-    if (!element) {
+    if (!element || !element.style || !element.style.cssText) {
       return update;
     }
     // 存在する時のみ処理を行います
@@ -85,7 +85,7 @@ export class Style {
    */
   current() {
     const element = this.element;
-    if (!!element) {
+    if (!!element && !!element.style) {
       return element.style.cssText;
     }
 
@@ -98,7 +98,13 @@ export class Style {
    */
   restore() {
     const css = this.origin;
-    this.element.style.cssText = css;
+    // 存在チェック
+    const element = this.element;
+    if (!element || !element.style || !element.style.cssText) {
+      // this.element 不正の時は空文字を返します
+      return '';
+    }
+    element.style.cssText = css;
     return css;
   }
 }

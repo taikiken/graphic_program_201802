@@ -42,6 +42,19 @@ import { Message } from '../app/const/Message';
 import { GaData } from '../ga/GaData';
 import { Ga } from '../ga/Ga';
 
+// ---------------------------------
+// singles (pushstate...)
+import { SinglesHistory } from '../singles/SinglesHistory';
+
+// singles/head
+import { Page } from '../singles/head/Page';
+
+// snap
+import { Snap } from '../ui/Snap';
+// @since 2016-11-16
+import { TopButton } from '../ui/button/TopButton';
+// @since 2016-12-26
+import { Hit } from '../ui/Hit';
 
 /**
  * <p>記事詳細</p>
@@ -66,11 +79,9 @@ export class ViewSingle extends View {
    * @param {Object} [option={}] optional event handler
    */
   constructor( id:number, element:Element, elements:Object, option:Object = {} ) {
-
     option = Safety.object( option );
-
     super( element, option );
-
+    // action
     let ActionClass = User.sign ? SingleAuth : Single;
     /**
      * Action instance を設定します
@@ -122,6 +133,16 @@ export class ViewSingle extends View {
      * @since 2016-09-26
      */
     this.id = id;
+    /**
+     * Page instance
+     * @type {?Page}
+     */
+    this.page = null;
+    /**
+     * SinglesHistory instance
+     * @type {?SinglesHistory}
+     */
+    this.manager = null;
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -154,16 +175,13 @@ export class ViewSingle extends View {
    * Ajax request を開始します
    */
   start():void {
-
     this.action.start();
-
   }
   /**
    * Ajax response success
    * @param {Result} result Ajax データ取得が成功しパース済み JSON data を保存した Result instance
    */
   done( result:Result ):void {
-
     let response = result.response;
 
     if ( typeof response === 'undefined' ) {
@@ -177,10 +195,72 @@ export class ViewSingle extends View {
     } else {
       // @since 2016-09-27, SingleDae instance にし render へ渡すに変更
       const single = new SingleDae(response);
+      // ---------------------------------
+      // @since 2016-10-27 pushstate のために
+      const manager = SinglesHistory.factory();
+      this.manager = manager;
+      const page = new Page(single);
+      this.page = page;
+      manager.setBase(page.url());
+      manager.hit(page);
+      // snap
+      const element = Dom.get('js-current-post');
+      // no scroll animation で snap instance 作成
+      const snap = new Snap(element, true, page);
+      snap.on(Snap.SNAPPED, this.onSnap.bind(this));
+      snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
+      snap.init();
+      // @since 2016-12-26
+      // top button / short cut でのスクロールトップ対応
+      const hit = new Hit(element);
+      hit.on(Hit.COLLISION, this.hitIn.bind(this));
+      hit.start();
+      // ---------------------------------
+      // @since 2016-11-16
+      // top button
+      const topButton = TopButton.factory();
+      topButton.on(TopButton.COMPLETE, this.onTop.bind(this));
+      // ---------------------------------
       this.render(single);
       this.singles(single);
     }
-
+  }
+  /**
+   * Snap.SNAPPED event handler<br>
+   * SinglesHistory.hit をコールします
+   *
+   * {@link Snap}
+   * {@link SinglesHistory}
+   */
+  onSnap() {
+    // console.log('onSnap', this.page.url());
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
+  }
+  /**
+   * scroll up 時に element bottom が window.height 半分を通過したら呼び出されます
+   */
+  onBeat() {
+    // console.log('onBeat', this.page.url());
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
+  }
+  hitIn() {
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
+  }
+  /**
+   * TopButton.COMPLETE event handler<br>
+   * [page top] button click しスクロールアニメーションが完了した時に発火します
+   *
+   * SinglesHistory へ本ページ（先頭記事）が hit したことを通知し URL を元に戻します
+   *
+   * 低速マシンではスクロール中のヒットだけでは処理が追いつかないようなので、強制的に書き換えることにしました
+   * @since 2016-11-16
+   */
+  onTop() {
+    // manager へ snap したことを通知します
+    this.manager.hit(this.page);
   }
   /**
    * Ajax response error
@@ -191,7 +271,7 @@ export class ViewSingle extends View {
     this.executeSafely( View.RESPONSE_ERROR, error );
     // ここでエラーを表示させるのは bad idea なのでコールバックへエラーが起きたことを伝えるのみにします
     // this.showError( error.message );
-
+    console.warn('error', error);
   }
   /**
    * 記事詳細の次の記事一覧を出力するために, `ViewSingles` {@link ViewSingles} をキックします
@@ -244,39 +324,29 @@ export class ViewSingle extends View {
     // console.log( 'ViewSingle', single );
     // header
     if ( this._header === null ) {
-
       header = new ViewSingleHeader( this.element, single );
       header.on( View.DID_MOUNT, this._boundMount );
       this._header = header;
       header.start();
-
     } else {
-
       this._header.render( single );
-
     }
 
     // footer
     if ( Safety.isElement( this._elements.footer ) ) {
       // footer element が存在する時のみ
       if ( this._footer === null ) {
-
         footer = new ViewSingleFooter( this._elements.footer, single );
         this._footer = footer;
         footer.start();
-
       } else {
-
         this._footer.render( single );
-
       }
     }
 
     // 関連記事 もしもあるなら
     if ( single.hasRelated ) {
-
       this.related( single.related );
-
     }
     // ga from 2016-06-08
     // ViewSingle.ga( single );
@@ -395,9 +465,9 @@ export class ViewSingle extends View {
    * イベントラベル：[response.categories.label] ex. 海外サッカー
    * </pre>
    *
-   * @since 2016-06-08
    * @deprecated on 2016-10-05, instead use Ga.single {@link Ga.single}
    * @param {SingleDae} single API 取得 JSON.response を SingleDae instance に変換したもの
+   * @since 2016-06-08 deprecated, instead use Ga.single
    */
   static ga( single:SingleDae ):void {
     let category = 'provider';

@@ -60,7 +60,7 @@ export class ComponentHeadlineAd extends React.Component {
     }
 
     return (
-      <div className="sponsor-link" ref="sponsorLink"></div>
+      <div className="sponsor-link" ref="sponsorLink" />
     );
   }
   /**
