@@ -22,6 +22,7 @@ import { SPComponentSinglesSNSBelow } from '../singles-content/SPComponentSingle
 
 // // util
 import { Scroll } from '../../../util/Scroll';
+import { Validate } from '../../../util/Validate';
 
 // React
 const React = self.React;
@@ -79,15 +80,33 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
       excerpt: true
     };
     /**
-     * bound anchorClick
+     * bound validateClick
      * @type {function}
      */
-    this.boundClick = this.anchorClick.bind(this);
+    this.boundClick = this.validateClick.bind(this);
     /**
      * scroll top value
      * @type {number}
      */
     this.y = 0;
+    /**
+     * body 本文に `video` tag が存在する時は遷移する
+     * @since 2017-01-13
+     */
+    this.external = Validate.include(props.single.body, '<video data-video-id="');
+  }
+  /**
+   * click event handler
+   * this.external が true の時は何もしない
+   * @param {Event} event click
+   * @since 2017-01-13
+   * @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
+   */
+  validateClick(event) {
+    if (!this.external) {
+      // 記事詳細を開くための処理に移動
+      this.anchorClick(event);
+    }
   }
   /**
    * a.onclick event handler<br>

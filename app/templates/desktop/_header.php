@@ -51,6 +51,7 @@
 // @since 2016-01-13
 // hotfix だと記事一覧の動画が再生できない
 // 記事詳細かつサッカーカテゴリーではない -> ファイル読み込む
+// @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
 if ( $page['template'] == 'p' && $page['category']['slug'] != 'soccer' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
