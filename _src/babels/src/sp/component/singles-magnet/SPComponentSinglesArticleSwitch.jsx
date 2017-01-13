@@ -158,7 +158,9 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
     const single = this.state.single;
     // 遷移すると browser back で click 記事に戻るので _blank させる
     // @since 2017-01-13
-    const blank = this.external ? '_blank' : '_self';
+    // const blank = this.external ? '_blank' : '_self';
+    // どっちも動画が再生されてうざい
+    const blank = '_self';
     return (
       <div className="js-root">
         <ComponentSinglesArticleExcerpt
