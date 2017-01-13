@@ -38,27 +38,27 @@ default['postgresql']['pgdg']['repo_rpm_url'] = {
       "7" => {
         "x86_64" => {
           "url" => "http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/",
-          "package" => "pgdg-centos94-9.4-1.noarch.rpm"
+          "package" => "pgdg-centos94-9.4-3.noarch.rpm"
         }
       },
       "6" => {
         "i386" => {
           "url" => "http://yum.postgresql.org/9.4/redhat/rhel-6-i386/",
-          "package" => "pgdg-centos94-9.4-1.noarch.rpm"
+          "package" => "pgdg-centos94-9.4-3.noarch.rpm"
         },
         "x86_64" => {
           "url" => "http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/",
-          "package" => "pgdg-centos94-9.4-1.noarch.rpm"
+          "package" => "pgdg-centos94-9.4-3.noarch.rpm"
         }
       },
       "5" => {
         "x86_64" => {
           "url" => "http://yum.postgresql.org/9.4/redhat/rhel-5-x86_64/",
-          "package" => "pgdg-centos94-9.4-1.noarch.rpm"
+          "package" => "pgdg-centos94-9.4-3.noarch.rpm"
         },
         "i386" => {
           "url" => "http://yum.postgresql.org/9.4/redhat/rhel-5-i386/",
-          "package" => "pgdg-centos94-9.4-1.noarch.rpm"
+          "package" => "pgdg-centos94-9.4-3.noarch.rpm"
         }
       }
     },
