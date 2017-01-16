@@ -140,7 +140,7 @@ export class SinglesHistory extends EventDispatcher {
 
   /**
    * ページ情報をもとに history をupdate(replace)します
-   * @param {Symbol} symbol private 扱いにするための innner Symbol
+   * @param {Symbol} symbol private 扱いにするための inner Symbol
    * @param {Page} page 書換えたいページ情報
    */
   push(symbol, page) {
