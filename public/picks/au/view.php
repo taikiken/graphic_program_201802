@@ -63,43 +63,51 @@
         <div class="summary">
           <h1 class="summary__heading">Today’s ピックアップ</h1>
         </div><!-- /.summary -->
-<?php foreach( $page['data'] as $key => $value ) :
-//
-?>
+<?php foreach( $page['data'] as $key => $value_data ) :
+  $article_new = $value_data['new'];
+  $article_page_data = $value_data['articles'];
+  $article_new_class = '';
+  if ($article_new == 'true') {
+    $article_new_class = ' new';
+  }
+// 日付 -> 記事一覧ループ ?>
+
+  <div class="update">
+    <h2 class="update-heading<?php echo $article_new_class; ?>"><?php echo $key; ?></h2>
+  </div><!-- /.update -->
+  <?php foreach( $article_page_data as $value ) :
+  // 記事一覧ループ ?>
+
+  <article class="post">
+    <header class="post__header">
+      <figure class="post__figure">
+        <img src="<?php echo $value['post']['media']['images']['medium']; ?>" alt="">
+      </figure>
+      <div class="post__data">
+        <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
+        <p class="post__category"><?php echo $value['post']['category']['label']; ?></p>
+        <p class="post__date"><?php echo $value['post']['display_date']; ?></p>
+      </div>
+    </header><!-- /.post__header -->
+
+    <div class="post__highlight">
+      <ul class="post__highlight__list">
+        <?php foreach( $value['post']['comment'] as $i => $comment ) :
+          // 3行記事 ?>
+          <li class="post__highlight__item">
+            <?php echo $comment; ?>
+          </li>
+        <?php endforeach; ?>
+      </ul><!-- /.post__highlight__list -->
+    </div><!-- /.post__highlight -->
+
+    <div class="post__btn">
+      <a href="<?php echo $value['post']['url']; ?>">記事を読む</a>
+    </div>
+  </article><!-- /.post -->
+
+  <?php endforeach; ?>
 <?php endforeach; ?>
-<?php foreach( $page['data'] as $key => $value ) :
-// 記事一覧ループ
-?>
-
-        <article class="post">
-          <header class="post__header">
-            <figure class="post__figure">
-              <img src="<?php echo $value['post']['media']['images']['medium']; ?>" alt="">
-            </figure>
-            <div class="post__data">
-              <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
-              <p class="post__category"><?php echo $value['post']['category']['label']; ?></p>
-              <p class="post__date"><?php echo $value['post']['display_date']; ?></p>
-            </div>
-          </header><!-- /.post__header -->
-
-          <div class="post__highlight">
-            <ul class="post__highlight__list">
-    <?php foreach( $value['post']['comment'] as $i => $comment ) : ?>
-              <li class="post__highlight__item">
-                <?php echo $comment; ?>
-              </li>
-    <?php endforeach; ?>
-            </ul><!-- /.post__highlight__list -->
-          </div><!-- /.post__highlight -->
-
-          <div class="post__btn">
-            <a href="<?php echo $value['post']['url']; ?>">記事を読む</a>
-          </div>
-        </article><!-- /.post -->
-
-<?php endforeach; ?>
-
         <div class="link_recent">
           <a href="/category/all/">すべての新着記事をみる</a>
         </div><!-- /.link_recent -->
