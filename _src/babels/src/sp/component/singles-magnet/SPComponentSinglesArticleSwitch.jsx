@@ -22,6 +22,11 @@ import { SPComponentSinglesSNSBelow } from '../singles-content/SPComponentSingle
 
 // // util
 import { Scroll } from '../../../util/Scroll';
+import { Validate } from '../../../util/Validate';
+
+
+// singles/head
+import { SinglesHistory } from '../../../singles/SinglesHistory';
 
 // React
 const React = self.React;
@@ -47,7 +52,10 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
     return {
       single: React.PropTypes.object.isRequired,
       sign: React.PropTypes.bool.isRequired,
-      index: React.PropTypes.number.isRequired
+      index: React.PropTypes.number.isRequired,
+      // Page instance
+      // @since 2017-01-13
+      page: React.PropTypes.object.isRequired,
     };
   }
   // ---------------------------------------------------
@@ -79,15 +87,38 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
       excerpt: true
     };
     /**
-     * bound anchorClick
+     * bound validateClick
      * @type {function}
      */
-    this.boundClick = this.anchorClick.bind(this);
+    this.boundClick = this.validateClick.bind(this);
     /**
      * scroll top value
      * @type {number}
      */
     this.y = 0;
+    /**
+     * body 本文に `video` tag が存在する時は遷移する
+     * @since 2017-01-13
+     */
+    this.external = Validate.include(props.single.body, '<video data-video-id="');
+    /**
+     * 起点URLを取得するために使用します
+     * @type {SinglesHistory}
+     */
+    this.manager = SinglesHistory.factory();
+  }
+  /**
+   * click event handler
+   * this.external が true の時は何もしない
+   * @param {Event} event click
+   * @since 2017-01-13
+   * @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
+   */
+  validateClick(event) {
+    if (!this.external) {
+      // 記事詳細を開くための処理に移動
+      this.anchorClick(event);
+    }
   }
   /**
    * a.onclick event handler<br>
@@ -100,11 +131,36 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
     this.setState({ excerpt: !this.state.excerpt });
   }
   /**
+   * 「続きを読む」のないHTML
+   * @returns {XML} ComponentSingleSNS
+   */
+  opened() {
+    const single = this.state.single;
+    return (
+      <div className="js-root">
+        <ComponentSinglesArticleExcerpt
+          single={single}
+          index={this.state.index}
+        />
+        {/* SNS */}
+        <ComponentSingleSNS
+          single={single}
+          index={this.state.index}
+        />
+      </div>
+    );
+  }
+  /**
    * 省略文章を表示します
    * @return {XML} ComponentSingleSNS + a を返します
    * */
   excerpt() {
     const single = this.state.single;
+    // 遷移すると browser back で click 記事に戻るので _blank させる
+    // @since 2017-01-13
+    // const blank = this.external ? '_blank' : '_self';
+    // どっちも動画が再生されてうざい
+    const blank = '_self';
     return (
       <div className="js-root">
         <ComponentSinglesArticleExcerpt
@@ -118,7 +174,7 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
         />
         {/* link */}
         <div className="post-content-read-more">
-          <a href={single.url} className="post-content-btn-readMore" onClick={this.boundClick}>{Message.READ_MORE}</a>
+          <a href={single.url} className="post-content-btn-readMore" onClick={this.boundClick} target={blank}>{Message.READ_MORE}</a>
         </div>
       </div>
     );
@@ -144,7 +200,9 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
    * @return {XML} excerpt / content を実行し出力します
    */
   render() {
-    if (this.state.excerpt) {
+    if (this.state.opened) {
+      return this.opened();
+    } else if (this.state.excerpt) {
       return this.excerpt();
     } else {
       return this.content();
