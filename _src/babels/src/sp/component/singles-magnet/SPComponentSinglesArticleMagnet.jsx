@@ -384,6 +384,7 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
             single={single}
             sign={this.state.sign}
             index={this.state.index}
+            page={this.page}
           />
         </div>
       </div>
