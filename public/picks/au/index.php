@@ -110,18 +110,17 @@ $xml_articles = array();
 
 // path を設定し XML file を取得します
 $xml_element = simplexml_load_file($xml_host_name . '/xml/au/picks.xml');
-//print_r($xml_element);
+
 // parse し $articles へセットし不要データは unset します
 foreach ($xml_element as $xml_date) :
   // parse attribute
-  $xml_date_value = $xml_date->attributes()->date;
-  $xml_new_flag = $xml_date->attributes()->new;
+  $xml_date_value = (string)$xml_date->attributes()->date;
+  $xml_new_flag = (string)$xml_date->attributes()->new;
   $articles = array();
-  print_r($xml_date_value);
 
-  foreach( $xml_date as $xml_article ) :
-
-    $api_post_data = $model->get_post($xml_article->id);
+  foreach( $xml_date->article as $xml_article ) :
+    $article_id = (string)$xml_article->id;
+    $api_post_data = $model->get_post($article_id);
     unset($api_post_data['ad']);
     unset($api_post_data['banner']);
     unset($api_post_data['recommend_articles']);
@@ -183,4 +182,4 @@ endif;
 
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
-print_r($xml_articles);
+//print_r($page);
