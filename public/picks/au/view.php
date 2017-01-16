@@ -149,9 +149,10 @@
     <?php endforeach; ?>
   <?php endforeach; ?>
 <?php endforeach; ?>
-        <div class="link_recent">
-          <a href="/category/all/">すべての新着記事をみる</a>
-        </div><!-- /.link_recent -->
+        <div class="banner__app">
+          <a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8"><img src="/assets/sp/images/picks/au/banner-app.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.undotsushin"><img src="/assets/sp/images/picks/au/banner-app.png" alt="スポーツブルアプリをダウンロード"></a>
+        </div>
 
       </section><!-- /.main-sec -->
     </div>
