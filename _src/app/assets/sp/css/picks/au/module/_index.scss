@@ -71,7 +71,10 @@ $highlight-color-au: #eb5505;
     &--sub {
       margin: (30/2)+px perCalc(30, 750) 0;
 
-      .category-nav__acordion__body {}
+      .category-nav__accordion__body {}
+      .category-nav__accordion__body__inner {
+        display: none;
+      }
 
       .category-nav__list {
         display: flex;
@@ -142,6 +145,24 @@ $highlight-color-au: #eb5505;
         &--off {
           &:after {
             transform: rotate(-45deg);
+          }
+        }
+
+        &.off {
+          .category-nav__accordion__trigger--on {
+            display: inherit;
+          }
+          .category-nav__accordion__trigger--off {
+            display: none;
+          }
+        }
+
+        &.on {
+          .category-nav__accordion__trigger--on {
+            display: none;
+          }
+          .category-nav__accordion__trigger--off {
+            display: inherit;
           }
         }
       }
