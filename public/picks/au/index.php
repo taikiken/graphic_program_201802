@@ -38,14 +38,14 @@ endif;
 
 // helper
 // ==============================
-$helpers = glob('../../app/helpers/*.helper.php');
+$helpers = glob('../../../app/helpers/*.helper.php');
 foreach ($helpers as $helper) {
   require $helper;
 }
 
 // models
 // ==============================
-$models = glob('../../app/models/*.model.php');
+$models = glob('../../../app/models/*.model.php');
 foreach ($models as $model) {
   require $model;
 }
@@ -110,13 +110,14 @@ $xml_articles = array();
 
 // path を設定し XML file を取得します
 $xml_element = simplexml_load_file($xml_host_name . '/xml/au/picks.xml');
-
+//print_r($xml_element);
 // parse し $articles へセットし不要データは unset します
 foreach ($xml_element as $xml_date) :
   // parse attribute
-  $xml_date = $xml_date->attributes()->date;
+  $xml_date_value = $xml_date->attributes()->date;
   $xml_new_flag = $xml_date->attributes()->new;
   $articles = array();
+  print_r($xml_date_value);
 
   foreach( $xml_date as $xml_article ) :
 
@@ -137,7 +138,7 @@ foreach ($xml_element as $xml_date) :
     'new' => $xml_new_flag,
     'articles' => $articles,
   );
-  $xml_articles[][$xml_date] = $xml_data;
+  $xml_articles[][$xml_date_value] = $xml_data;
 endforeach;
 
 
