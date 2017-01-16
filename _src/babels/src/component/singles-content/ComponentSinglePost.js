@@ -44,7 +44,7 @@ export class ComponentSinglePost extends React.Component {
   static get propTypes() {
     return {
       single: React.PropTypes.object.isRequired,
-      sp: React.PropTypes.boolean
+      sp: React.PropTypes.bool
     };
   }
   /**
