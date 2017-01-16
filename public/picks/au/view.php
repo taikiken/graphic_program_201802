@@ -10,7 +10,7 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <title>編集部おすすめ記事 BULL'S PICKS | SPORTS BULL</title>
+  <title>Today's ピックアップ | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
   <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
@@ -18,7 +18,7 @@
   <meta property="og:title" content="編集部おすすめ記事 BULL'S PICKS | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/picks/">
+  <meta property="og:url" content="https://sportsbull.jp/picks/au/">
   <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
@@ -32,12 +32,12 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <link rel="canonical" href="https://sportsbull.jp/picks/">
+  <link rel="canonical" href="https://sportsbull.jp/picks/au/">
   <?php
   endif;
   // -----------------------------------------
   ?>
-  <link rel="stylesheet" href="/assets/sp/css/picks/ui.css">
+  <link rel="stylesheet" href="/assets/sp/css/picks/au/ui.css">
 
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -53,20 +53,7 @@
 
 </head>
 <body class="appbnr-disable">
-<div class="whole picks">
-  <?php
-  // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
-  ?>
-  <header class="head-sec">
-    <div class="head-sec-inner">
-      <h1><a href="/">SPORTS BULL</a></h1>
-    </div><!-- /.head-sec-inner -->
-  </header><!-- /.head-sec -->
-  <?php
-  endif;
-  // -----------------------------------------
-  ?>
+<div class="whole picks picks--au">
 
   <div class="body-sec">
     <div class="body-sec-inner">
@@ -74,20 +61,12 @@
       <section class="main-sec">
 
         <div class="summary">
-          <div class="summary__inner">
-            <p class="summary__caption"><img src="/assets/sp/images/picks/overview-caption.png" alt="編集部おすすめ記事"></p>
-            <h1 class="summary__heading"><img src="/assets/sp/images/picks/overview-heading.png" alt="BULL'S PICKS"></h1>
-            <p class="summary__date"><span>11/24</span> UPDATE</p>
-
-            <div class="summary__aboutus">
-              <dl id="js-summary__aboutus__inner" class="summary__aboutus__inner">
-                <dt class="summary__aboutus__heading">BULL'S PICKSとは</dt>
-                <dd class="summary__aboutus__text">毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。</dd>
-              </dl>
-            </div><!-- /.summary__aboutus -->
-          </div><!-- /.summary__inner -->
+          <h1 class="summary__heading">Today’s ピックアップ</h1>
         </div><!-- /.summary -->
-
+<?php foreach( $page['data'] as $key => $value ) :
+//
+?>
+<?php endforeach; ?>
 <?php foreach( $page['data'] as $key => $value ) :
 // 記事一覧ループ
 ?>

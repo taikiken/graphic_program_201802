@@ -105,26 +105,41 @@ if ($app_host_name != 'https://dev.sportsbull.jp') {
 }
 
 // xml data を設定する配列
-$articles = array();
+//$articles = array();
+$xml_articles = array();
 
 // path を設定し XML file を取得します
-$xml_element = simplexml_load_file($xml_host_name . '/xml/picks.xml');
+$xml_element = simplexml_load_file($xml_host_name . '/xml/au/picks.xml');
 
 // parse し $articles へセットし不要データは unset します
-foreach( $xml_element as $xml_article ) :
+foreach ($xml_element as $xml_date) :
+  // parse attribute
+  $xml_date = $xml_date->attributes()->date;
+  $xml_new_flag = $xml_date->attributes()->new;
+  $articles = array();
 
-  $api_post_data = $model->get_post($xml_article->id);
-  unset($api_post_data['ad']);
-  unset($api_post_data['banner']);
-  unset($api_post_data['recommend_articles']);
-  unset($api_post_data['related_articles']);
-  unset($api_post_data['body']);
-  unset($api_post_data['description']);
-  unset($api_post_data['body_escape']);
-  $api_post_data['comment'] = $xml_article->comments->comment;
-  $articles[]['post'] = $api_post_data;
+  foreach( $xml_date as $xml_article ) :
 
+    $api_post_data = $model->get_post($xml_article->id);
+    unset($api_post_data['ad']);
+    unset($api_post_data['banner']);
+    unset($api_post_data['recommend_articles']);
+    unset($api_post_data['related_articles']);
+    unset($api_post_data['body']);
+    unset($api_post_data['description']);
+    unset($api_post_data['body_escape']);
+    $api_post_data['comment'] = $xml_article->comments->comment;
+    $articles[]['post'] = $api_post_data;
+
+  endforeach;
+
+  $xml_data = array(
+    'new' => $xml_new_flag,
+    'articles' => $articles,
+  );
+  $xml_articles[][$xml_date] = $xml_data;
 endforeach;
+
 
 
 // $pageに渡したい値があればここに設定
@@ -132,7 +147,8 @@ endforeach;
 $page = $model->set(array(
   'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
   'og_type'  => 'article',
-  'data'     => $articles,
+//  'data'     => $articles,
+  'data'     => $xml_articles,
 ));
 
 
@@ -166,4 +182,4 @@ endif;
 
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
-//print_r($page['apiRoot']);
+print_r($xml_articles);
