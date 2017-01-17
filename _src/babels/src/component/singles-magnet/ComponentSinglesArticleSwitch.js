@@ -21,7 +21,7 @@ import { ComponentSingleContent } from '../singles-content/ComponentSingleConten
 import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
 
 // // util
-// import { Scroll } from '../../util/Scroll';
+import { Scroll } from '../../util/Scroll';
 import { Offset } from '../../util/Offset';
 
 // React
@@ -77,7 +77,8 @@ export class ComponentSinglesArticleSwitch extends React.Component {
       single: props.single,
       index: props.index,
       sign: props.sign,
-      excerpt: true
+      excerpt: true,
+      minHeight: 0
     };
     /**
      * bound anchorClick
@@ -91,9 +92,14 @@ export class ComponentSinglesArticleSwitch extends React.Component {
     this.y = 0;
     this.root = null;
     this.offset = null;
+    this.excerpt = this.excerpt.bind(this);
+    this.content = this.content.bind(this);
   }
   componentDidMount() {
-    this.offset = Offset.offset(this.root);
+    // -----------------------
+    // element height setting
+    const offset = Offset.offset(this.root);
+    this.setState({ minHeight: offset.height });
   }
   /**
    * a.onclick event handler<br>
@@ -143,15 +149,14 @@ export class ComponentSinglesArticleSwitch extends React.Component {
   content() {
     // scroll 位置が下がるので元に戻す
     // Scroll.motion(this.y, 0.1, 0.25);
+    // Scroll.y = this.y;
     // XML
     return (
-      <div className="js-root" style={{'min-height': `${this.offset.height}px`}}>
-        <ComponentSingleContent
-          single={this.state.single}
-          sign={this.state.sign}
-          index={this.state.index}
-        />
-      </div>
+      <ComponentSingleContent
+        single={this.state.single}
+        sign={this.state.sign}
+        index={this.state.index}
+      />
     );
   }
   /**
@@ -159,10 +164,19 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * @return {XML} excerpt / content を実行し出力します
    */
   render() {
-    if (this.state.excerpt) {
-      return this.excerpt();
-    } else {
-      return this.content();
-    }
+    const output = this.state.excerpt ? this.excerpt : this.content;
+    return (
+      <div
+        className="js-root-container"
+        style={{ minHeight: `${this.state.minHeight}px` }}
+      >
+        {output()}
+      </div>
+    );
+    // if (this.state.excerpt) {
+    //   return this.excerpt();
+    // } else {
+    //   return this.content();
+    // }
   }
 }

@@ -202,8 +202,10 @@ export class Scroll extends EventDispatcher {
    * scroll top 位置 を設定します
    * @param {Number} top スクロール位置(px)
    */
-  static set y( top:Number ):void {
-    window.scrollTo( 0, top );
+  static set y(top) {
+    setTimeout(() => {
+      window.scrollTo(0, top);
+    }, 0);
   }
   // ---------------------------------------------------
   //  static method

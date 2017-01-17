@@ -123,12 +123,13 @@ export class ComponentSinglesArticleMagnet extends React.Component {
 
     /**
      * React state
-     * @type {{single: SingleDae, sign: boolean}}
+     * @type {{single: SingleDae, sign: boolean, minHeight: number}}
      * */
     this.state = {
       single: props.single,
       sign: props.sign,
-      index: props.index
+      index: props.index,
+      minHeight: 0
     };
 
     /**
@@ -204,14 +205,15 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * */
   componentDidMount() {
     // Hit instance を作成し監視を開始します
-    if (this.hit === null && this.singlesArticle !== null) {
+    const singlesArticle = this.singlesArticle;
+    if (this.hit === null && singlesArticle !== null) {
       // snap
       const snap = new Snap(this.singlesArticle, false, this.page);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();
       // -- [hit]
-      const hit = new Hit(this.singlesArticle);
+      const hit = new Hit(singlesArticle);
       this.hit = hit;
       hit.on(Hit.COLLISION, this.boundIn);
       hit.on(Hit.NO_COLLISION, this.boundOut);
@@ -358,8 +360,9 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     }
 
     return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref={
-        (component) => {
+      <div
+        className={`loaded-post loaded-post-${single.id}`}
+        ref={(component) => {
           this.singlesArticle = component;
         }}
       >
