@@ -47,6 +47,7 @@ import { Page } from '../../singles/head/Page';
 
 // util
 import { PageTitle } from '../../util/PageTitle';
+// import { Offset } from '../../util/Offset';
 
 // snap
 import { Snap } from '../../ui/Snap';
@@ -129,6 +130,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       single: props.single,
       sign: props.sign,
       index: props.index,
+      // @since 217-01-17
       minHeight: 0
     };
 
@@ -196,6 +198,8 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * @since 2016-10-28
      */
     this.singlesArticle = null;
+
+    // this.boundImage = this.imageComplete.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -220,6 +224,19 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       hit.start();
     }
   }
+  // /**
+  //  * 画像読込完了後に `min-height` を設定します
+  //  * クリックで「詳細表示時」のスクロール問題に対応するため
+  //  * @since 217-01-17
+  //  */
+  // imageComplete() {
+  //   const singlesArticle = this.singlesArticle;
+  //   if (singlesArticle !== null) {
+  //     const offset = Offset.offset(singlesArticle);
+  //     console.log('imageComplete', this.state.single.id, offset.height);
+  //     this.setState({ minHeight: offset.height });
+  //   }
+  // }
   /**
    * state.single 情報を更新し再描画します
    * @param {SingleDae} single state.single
@@ -354,11 +371,9 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * */
   render() {
     const single = this.state.single;
-
     if (!single) {
       return null;
     }
-
     return (
       <div
         className={`loaded-post loaded-post-${single.id}`}

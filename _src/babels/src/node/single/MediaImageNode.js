@@ -24,20 +24,7 @@ let React = self.React;
  */
 export let MediaImageNode = React.createClass( {
   propTypes: {
-    images: React.PropTypes.object.isRequired,
-    complete: React.PropTypes.func
-  },
-  getDefaultProps: function() {
-    return {
-      complete: null
-    };
-  },
-  // @since 2017-01-16
-  imageLoaded: function() {
-    const complete = this.props.complete;
-    if (typeof complete === 'function') {
-      complete();
-    }
+    images: React.PropTypes.object.isRequired
   },
   render: function() {
     let images = this.props.images;
@@ -78,7 +65,6 @@ export let MediaImageNode = React.createClass( {
             src={original}
             alt=""
             className="post-single-image"
-            onLoad={this.imageLoaded.bind(this)}
           />
           {figCaption}
         </figure>

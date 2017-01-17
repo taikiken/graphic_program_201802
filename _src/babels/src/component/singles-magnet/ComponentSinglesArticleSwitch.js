@@ -22,7 +22,7 @@ import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
 
 // // util
 import { Scroll } from '../../util/Scroll';
-import { Offset } from '../../util/Offset';
+// import { Offset } from '../../util/Offset';
 
 // React
 const React = self.React;
@@ -77,8 +77,7 @@ export class ComponentSinglesArticleSwitch extends React.Component {
       single: props.single,
       index: props.index,
       sign: props.sign,
-      excerpt: true,
-      minHeight: 0
+      excerpt: true
     };
     /**
      * bound anchorClick
@@ -95,12 +94,12 @@ export class ComponentSinglesArticleSwitch extends React.Component {
     this.excerpt = this.excerpt.bind(this);
     this.content = this.content.bind(this);
   }
-  componentDidMount() {
-    // -----------------------
-    // element height setting
-    const offset = Offset.offset(this.root);
-    this.setState({ minHeight: offset.height });
-  }
+  // componentDidMount() {
+  //   // -----------------------
+  //   // element height setting
+  //   const offset = Offset.offset(this.root);
+  //   this.setState({ minHeight: offset.height });
+  // }
   /**
    * a.onclick event handler<br>
    * 本文を表示しボタンを隠します
@@ -108,8 +107,13 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * */
   anchorClick(event) {
     event.preventDefault();
-    this.y = Scroll.y;
+    // this.y = Scroll.y;
+    const y = Scroll.y;
+    // contents 詳細切り替え
     this.setState({ excerpt: !this.state.excerpt });
+    // クリック後遅延してscroll移動
+    // @since 2017-01-17
+    Scroll.motion(y, 0.1, 0.25);
   }
   /**
    * 省略文章を表示します
@@ -148,6 +152,7 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    */
   content() {
     // scroll 位置が下がるので元に戻す
+    // ここまずい何度も反応する - 2017-01-17
     // Scroll.motion(this.y, 0.1, 0.25);
     // Scroll.y = this.y;
     // XML
@@ -168,7 +173,6 @@ export class ComponentSinglesArticleSwitch extends React.Component {
     return (
       <div
         className="js-root-container"
-        style={{ minHeight: `${this.state.minHeight}px` }}
       >
         {output()}
       </div>
