@@ -47,7 +47,7 @@
 	/*!
 	 * @copyright (c) 2011-2016 inazumatv.com, Parachute.
 	 * @author (at)taikiken / http://inazumatv.com
-	 * @date 2016-09-06 17:40:54
+	 * @date 2016-12-22 16:27:14
 	 * @license
 	 * @date 2016/09/06 - 16:25
 	 *
