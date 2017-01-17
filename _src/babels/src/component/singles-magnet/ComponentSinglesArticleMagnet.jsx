@@ -411,6 +411,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
             single={single}
             sign={this.state.sign}
             index={this.props.index}
+            page={this.page}
           />
         </div>
       </div>

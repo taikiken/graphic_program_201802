@@ -51,6 +51,9 @@ export class NextPages {
      */
     this.pages = () => pages;
 
+    const list = [];
+    this.list = () => list;
+
     _instance = this;
     return _instance;
   }
@@ -64,7 +67,14 @@ export class NextPages {
   add(page) {
     // @type {Object}
     const pages = this.pages();
-    pages[page.url()] = page;
+    const url = page.url();
+    pages[url] = page;
+    // @since 2017-01-13
+    // array に追加する
+    const list = this.list();
+    if (list.indexOf(url) === -1) {
+      list.push(url);
+    }
   }
   /**
    * Page を最後から取り出します
@@ -83,6 +93,31 @@ export class NextPages {
    */
   clone() {
     return Object.create(this.pages());
+  }
+  /**
+   * 一つ前の URL を取得する
+   * @param {Page} page 対象の Page instance
+   * @returns {string} URL を返します、見つからない時は空のURLを返します
+   */
+  before(page) {
+    const url = page.url();
+    const list = this.list();
+    const index = list.indexOf(url);
+    if (index === -1) {
+      return '';
+    }
+    const beforeIndex = index - 1;
+    if (beforeIndex < 0) {
+      return '';
+    }
+    return list[beforeIndex];
+  }
+  /**
+   * 最初のURLを返します
+   * @returns {string|undefined} 最初のURLを返します
+   */
+  top() {
+    return this.list[0];
   }
   // ---------------------------------------------------
   //  STATIC METHOD
