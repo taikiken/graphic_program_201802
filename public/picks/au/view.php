@@ -3,7 +3,7 @@
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">  
+  <meta http-equiv="Cache-Control" content="no-cache">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
@@ -150,8 +150,7 @@
   <?php endforeach; ?>
 <?php endforeach; ?>
         <div class="banner__app">
-          <a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8"><img src="/assets/sp/images/picks/au/banner-app.png" alt="スポーツブルアプリをダウンロード"></a>
-          <a href="https://play.google.com/store/apps/details?id=com.undotsushin"><img src="/assets/sp/images/picks/au/banner-app.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a href="https://sportsbull.jp/about/"><img src="/assets/sp/images/picks/au/banner-app.png" alt="スポーツブルアプリをダウンロード"></a>
         </div>
 
       </section><!-- /.main-sec -->
