@@ -21,7 +21,8 @@ import { ComponentSingleContent } from '../singles-content/ComponentSingleConten
 import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
 
 // // util
-import { Scroll } from '../../util/Scroll';
+// import { Scroll } from '../../util/Scroll';
+import { Offset } from '../../util/Offset';
 
 // React
 const React = self.React;
@@ -88,6 +89,11 @@ export class ComponentSinglesArticleSwitch extends React.Component {
      * @type {number}
      */
     this.y = 0;
+    this.root = null;
+    this.offset = null;
+  }
+  componentDidMount() {
+    this.offset = Offset.offset(this.root);
   }
   /**
    * a.onclick event handler<br>
@@ -106,7 +112,12 @@ export class ComponentSinglesArticleSwitch extends React.Component {
   excerpt() {
     const single = this.state.single;
     return (
-      <div className="js-root">
+      <div
+        className="js-root"
+        ref={(component) => {
+          this.root = component;
+        }}
+      >
         <ComponentSinglesArticleExcerpt
           single={single}
           index={this.state.index}
@@ -131,14 +142,16 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    */
   content() {
     // scroll 位置が下がるので元に戻す
-    Scroll.motion(this.y, 0.1, 0.25);
+    // Scroll.motion(this.y, 0.1, 0.25);
     // XML
     return (
-      <ComponentSingleContent
-        single={this.state.single}
-        sign={this.state.sign}
-        index={this.state.index}
-      />
+      <div className="js-root" style={{'min-height': `${this.offset.height}px`}}>
+        <ComponentSingleContent
+          single={this.state.single}
+          sign={this.state.sign}
+          index={this.state.index}
+        />
+      </div>
     );
   }
   /**
