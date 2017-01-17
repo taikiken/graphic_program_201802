@@ -92,17 +92,21 @@ $model = new ViewModel($o);
 // - 開発 : https://dev-img.sportsbull.jp/xml/picks.xml
 // - 公開 : https://img.sportsbull.jp/xml/picks.xml
 
-// host name 取得
-$app_host_name = $page['apiRoot'];
-if ($app_host_name == '') {
-  $app_host_name = 'https://dev.sportsbull.jp';
-}
+//// host name 取得
+//$app_host_name = $page['apiRoot'];
+//if ($app_host_name == '') {
+//  $app_host_name = 'https://dev.sportsbull.jp';
+//}
+//
+//// host name から xml host name 設定
+//$xml_host_name = 'https://dev-img.sportsbull.jp';
+//if ($app_host_name != 'https://dev.sportsbull.jp') {
+//  $xml_host_name = 'https://img.sportsbull.jp';
+//}
 
-// host name から xml host name 設定
-$xml_host_name = 'https://dev-img.sportsbull.jp';
-if ($app_host_name != 'https://dev.sportsbull.jp') {
-  $xml_host_name = 'https://img.sportsbull.jp';
-}
+// 常に本番に変更
+// @since 2017-01-17
+$xml_host_name = 'https://img.sportsbull.jp';
 
 // xml data を設定する配列
 //$articles = array();
