@@ -42,13 +42,16 @@ export let MediaNode = React.createClass( {
     isShowImage: React.PropTypes.bool.isRequired,
     // 記事表示位置, -1: 記事詳細先頭
     // @since 2016-11-13
-    index: React.PropTypes.number
+    index: React.PropTypes.number,
+    // @since 2017-01-17
+    complete: React.PropTypes.func
   },
   // @default -1
   // @since 2016-11-13
   getDefaultProps: function() {
     return {
-      index: -1
+      index: -1,
+      complete: null,
     };
   },
   render: function() {
