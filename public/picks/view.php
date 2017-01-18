@@ -81,8 +81,8 @@
 
             <div class="summary__aboutus">
               <dl id="js-summary__aboutus__inner" class="summary__aboutus__inner">
-                <dt class="summary__aboutus__heading">BULL'S PICKSとは</dt>
-                <dd class="summary__aboutus__text">毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。</dd>
+                <dt id="js-summary__aboutus__heading" class="summary__aboutus__heading">BULL'S PICKSとは</dt>
+                <dd id="js-summary__aboutus__text" class="summary__aboutus__text">毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。</dd>
               </dl>
             </div><!-- /.summary__aboutus -->
           </div><!-- /.summary__inner -->
