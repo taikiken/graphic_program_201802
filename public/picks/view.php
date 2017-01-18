@@ -183,7 +183,7 @@
   ?>
 
 </div><!-- /.whole -->
-<script src="/assets/js/picks.bundle.js"></script>
+
 <?php
 // app in webview 時に .foot-sec を非表示にするので FB いらない
 if (!$from_webview) :
@@ -209,6 +209,8 @@ if (!$from_webview) :
 endif;
 // -----------------------------------------
 ?>
+
+<script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>
