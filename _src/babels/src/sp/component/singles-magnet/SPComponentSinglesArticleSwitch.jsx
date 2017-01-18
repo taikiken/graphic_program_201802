@@ -127,8 +127,12 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
    * */
   anchorClick(event) {
     event.preventDefault();
-    this.y = Scroll.y;
+    // this.y = Scroll.y;
+    const y = Scroll.y;
     this.setState({ excerpt: !this.state.excerpt });
+    // クリック後遅延してscroll移動
+    // @since 2017-01-17
+    Scroll.motion(y, 0.1, 0.25);
   }
   /**
    * 「続きを読む」のないHTML
@@ -185,7 +189,8 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
    */
   content() {
     // scroll 位置が下がるので元に戻す
-    Scroll.motion(this.y, 0.1, 0.25);
+    // ここまずい何度も反応する - 2017-01-17
+    // Scroll.motion(this.y, 0.1, 0.25);
     // XML
     return (
       <SPComponentSingleContent

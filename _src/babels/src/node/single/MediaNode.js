@@ -44,13 +44,6 @@ export let MediaNode = React.createClass( {
     // @since 2016-11-13
     index: React.PropTypes.number
   },
-  // @default -1
-  // @since 2016-11-13
-  getDefaultProps: function() {
-    return {
-      index: -1
-    };
-  },
   render: function() {
 
     let mediaType = this.props.mediaType;
