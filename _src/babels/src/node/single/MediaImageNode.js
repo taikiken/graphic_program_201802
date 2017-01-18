@@ -27,7 +27,6 @@ export let MediaImageNode = React.createClass( {
     images: React.PropTypes.object.isRequired
   },
   render: function() {
-
     let images = this.props.images;
 
     // 約束が違う
@@ -62,11 +61,14 @@ export let MediaImageNode = React.createClass( {
     return (
       <div className="post-kv">
         <figure className="post-single-figure">
-          <img src={original} alt="" className="post-single-image"/>
+          <img
+            src={original}
+            alt=""
+            className="post-single-image"
+          />
           {figCaption}
         </figure>
       </div>
     );
-
   }
 } );

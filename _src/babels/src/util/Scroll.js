@@ -180,7 +180,7 @@ export class Scroll extends EventDispatcher {
     });
   }
   // ---------------------------------------------------
-  //  static GETTER / SETTER
+  //  EVENT
   // ---------------------------------------------------
   /**
    * SCROLL event
@@ -189,6 +189,9 @@ export class Scroll extends EventDispatcher {
   static get SCROLL():string {
     return 'scrollScroll';
   }
+  // ---------------------------------------------------
+  //  static GETTER / SETTER
+  // ---------------------------------------------------
   /**
    * scroll top 位置
    * @return {Number} scroll top 位置を返します
@@ -202,8 +205,12 @@ export class Scroll extends EventDispatcher {
    * scroll top 位置 を設定します
    * @param {Number} top スクロール位置(px)
    */
-  static set y( top:Number ):void {
-    window.scrollTo( 0, top );
+  static set y(top) {
+    // time out 内でないと有効にならない
+    // @since 2017-01-17 timeout でラップする
+    setTimeout(() => {
+      window.scrollTo(0, top);
+    }, 0);
   }
   // ---------------------------------------------------
   //  static method

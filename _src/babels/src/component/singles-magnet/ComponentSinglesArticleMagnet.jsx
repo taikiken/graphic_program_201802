@@ -47,6 +47,7 @@ import { Page } from '../../singles/head/Page';
 
 // util
 import { PageTitle } from '../../util/PageTitle';
+// import { Offset } from '../../util/Offset';
 
 // snap
 import { Snap } from '../../ui/Snap';
@@ -123,12 +124,14 @@ export class ComponentSinglesArticleMagnet extends React.Component {
 
     /**
      * React state
-     * @type {{single: SingleDae, sign: boolean}}
+     * @type {{single: SingleDae, sign: boolean, minHeight: number}}
      * */
     this.state = {
       single: props.single,
       sign: props.sign,
-      index: props.index
+      index: props.index,
+      // @since 217-01-17
+      minHeight: 0
     };
 
     /**
@@ -195,6 +198,8 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * @since 2016-10-28
      */
     this.singlesArticle = null;
+
+    // this.boundImage = this.imageComplete.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -204,20 +209,34 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * */
   componentDidMount() {
     // Hit instance を作成し監視を開始します
-    if (this.hit === null && this.singlesArticle !== null) {
+    const singlesArticle = this.singlesArticle;
+    if (this.hit === null && singlesArticle !== null) {
       // snap
       const snap = new Snap(this.singlesArticle, false, this.page);
       snap.on(Snap.SNAPPED, this.onSnap.bind(this));
       snap.on(Snap.BEAT_UP, this.onBeat.bind(this));
       snap.init();
       // -- [hit]
-      const hit = new Hit(this.singlesArticle);
+      const hit = new Hit(singlesArticle);
       this.hit = hit;
       hit.on(Hit.COLLISION, this.boundIn);
       hit.on(Hit.NO_COLLISION, this.boundOut);
       hit.start();
     }
   }
+  // /**
+  //  * 画像読込完了後に `min-height` を設定します
+  //  * クリックで「詳細表示時」のスクロール問題に対応するため
+  //  * @since 217-01-17
+  //  */
+  // imageComplete() {
+  //   const singlesArticle = this.singlesArticle;
+  //   if (singlesArticle !== null) {
+  //     const offset = Offset.offset(singlesArticle);
+  //     console.log('imageComplete', this.state.single.id, offset.height);
+  //     this.setState({ minHeight: offset.height });
+  //   }
+  // }
   /**
    * state.single 情報を更新し再描画します
    * @param {SingleDae} single state.single
@@ -352,14 +371,13 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * */
   render() {
     const single = this.state.single;
-
     if (!single) {
       return null;
     }
-
     return (
-      <div className={`loaded-post loaded-post-${single.id}`} ref={
-        (component) => {
+      <div
+        className={`loaded-post loaded-post-${single.id}`}
+        ref={(component) => {
           this.singlesArticle = component;
         }}
       >
