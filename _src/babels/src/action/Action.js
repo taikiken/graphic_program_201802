@@ -10,12 +10,13 @@
  *
  */
 
-
+// data
 import {Result} from '../data/Result';
+import {Safety} from '../data/Safety';
+
+// net
 import {Ajax} from '../net/Ajax';
 import {Types} from '../net/Types';
-
-import {Safety} from '../data/Safety';
 
 // interface
 // 基本機能を設定し Interface として使用します
