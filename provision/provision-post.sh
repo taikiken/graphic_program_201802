@@ -6,7 +6,7 @@ set -ex
 #cd /vagrant && sudo -u postgres psql -h localhost -U ut -d ut < ut.dump
 
 # 二重に読み込まないように一度消去する
-cd /vagrant && sudo -u postgres dropdb ut && sudo -u postgres createdb ut && sudo -u postgres psql -h localhost -U ut -d ut < ut.dump
+# cd /vagrant && sudo -u postgres dropdb ut && sudo -u postgres createdb ut && sudo -u postgres psql -h localhost -U ut -d ut < ut.dump
 
-# フロントエンドのファイルデプロイ
-# gulp
+
+# => vagrant up 後に 手動で `vagrant push db_import` してください。
