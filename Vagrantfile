@@ -1,12 +1,12 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+# encoding: utf-8
+# vim: ft=ruby expandtab shiftwidth=2 tabstop=2
 
 require 'yaml'
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
+Vagrant.require_version '>= 1.8'
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure(2) do |config|
+
 
   # config
   # ------------------------------
@@ -29,6 +29,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     _conf.merge!(_site) if _site.is_a?(Hash)
   end
 
+
+  # load cookbook
+  # ------------------------------
+  if File.exists?(_conf['chef_cookbook_path'])
+    chef_cookbooks_path = _conf['chef_cookbook_path']
+  elsif File.exists?(File.join(File.dirname(__FILE__), _conf['chef_cookbook_path']))
+    chef_cookbooks_path = File.join(File.dirname(__FILE__), _conf['chef_cookbook_path'])
+  else
+    puts "Can't find "+_conf['chef_cookbook_path']+'. Please check chef_cookbooks_path in the config.'
+    exit 1
+  end
 
   # set conf
   # ------------------------------
@@ -79,14 +90,94 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
   end
 
-  # Share an additional folder to the guest VM. The first argument is the path on the host to the actual folder.
-  # The second argument is the path on the guest to mount the folder.
-  # config.vm.synced_folder "./", "/var/www/html"
-
-  # Define the bootstrap file: A (shell) script that runs after first setup of your box (= provisioning)
-  config.vm.provision :shell, path: "bootstrap.sh"
+  if 'provision' != ARGV[0]
+    config.vm.provision 'shell',
+        inline: 'curl -L https://www.opscode.com/chef/install.sh | sudo bash -s -- -v 11'
+  end
 
 
+  # pre
+  # ------------------------------
+  if File.exists?(File.join(File.dirname(__FILE__), 'provision-pre.sh')) then
+    config.vm.provision :shell, :path => File.join( File.dirname(__FILE__), 'provision-pre.sh' )
+  end
+
+
+
+  # chef - cooking
+  # ------------------------------
+  config.vm.provision :chef_solo do |chef|
+
+    # CentOS7を採用する場合は以下読み込む
+    # chef.custom_config_path = "provision/Vagrantfile.chef"
+
+    chef.cookbooks_path = [
+      File.join(chef_cookbooks_path, 'cookbooks'),
+      File.join(chef_cookbooks_path, 'site-cookbooks')
+    ]
+
+    chef.json = {
+      :app => {
+        :user     => _conf['user'],
+        :group    => _conf['group'],
+        :host     => _conf['hostname'],
+        :docroot  => _conf['document_root'],
+        :packages => %w{git subversion zip unzip kernel-devel gcc perl make jq httpd-devel libxml2-devel libcurl-devel libjpeg-turbo-devel libpng-devel giflib-devel gd-devel libmcrypt-devel libtidy-devel libxslt-devel gettext npm lftp sshpass sqlite-devel curl}
+      },
+      :apache => {
+        :docroot_dir  => _conf['document_root'],
+        :user         => _conf['user'],
+        :group        => _conf['group'],
+        :listen_ports => ['80', '443']
+      },
+      :php => {
+        :packages => %w(php php-cli php-devel php-pear php-pecl-jsonc php-pecl-jsonc-devel php-mbstring php-gd php-xml php-mysql php-pgsql php-pecl-xdebug),
+        :directives => {
+          'default_charset'            => 'UTF-8',
+          'mbstring.language'          => 'neutral',
+          'mbstring.internal_encoding' => 'UTF-8',
+          'date.timezone'              => 'UTC',
+          'short_open_tag'             => 'Off',
+          'session.save_path'          => '/tmp',
+          'upload_max_filesize'        => '32M'
+        }
+      },
+      :postgresql => {
+        :version  => '9.4',
+        :enable_pgdg_yum => true,
+        :dir => '/var/lib/pgsql/9.4/data',
+        :config => {
+          :data_directory => '/var/lib/pgsql/9.4/data'
+        },
+        :client => {
+          :packages => ["postgresql94", "postgresql94-devel"]
+        },
+        :server => {
+          :packages => ["postgresql94-server"],
+          :service_name => 'postgresql-9.4'
+        },
+        :contrib => {
+          :packages => ["postgresql94-contrib"]
+        },
+        :setup_script => 'postgresql94-setup',
+        :password => 'postgres',
+        :pg_hba => [
+          {:type => 'local', :db => 'all', :user => 'postgres', :addr => nil, :method => 'ident'},
+          {:type => 'local', :db => 'all', :user => 'all', :addr => nil, :method => 'ident'},
+          {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'trust'},
+          {:type => 'host', :db => 'all', :user => 'all', :addr => '::1/128', :method => 'trust'}
+        ]
+      },
+      :build_essential => {
+        :compiletime => true
+      }
+    }
+
+
+    chef.add_recipe 'undotsushin'
+
+
+  end
 
   # post
   # ------------------------------
