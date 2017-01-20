@@ -111,7 +111,7 @@ gulp.task 'css:build', ->
   .pipe $.autoprefixer browsers: AUTO_PREFIX_BROWSERS
   .pipe $.replaceTask patterns: patterns
   # http://cssnano.co/optimisations/zindex
-  .pipe $.if '*.css' && compress.css, $.cssnano zindex: false
   .pipe gulp.dest tmp
+  .pipe $.if '*.css' && compress.css, $.cssnano zindex: false
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** css:build ***'

@@ -22,6 +22,7 @@ import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
 
 // // util
 import { Scroll } from '../../util/Scroll';
+// import { Offset } from '../../util/Offset';
 
 // React
 const React = self.React;
@@ -88,7 +89,17 @@ export class ComponentSinglesArticleSwitch extends React.Component {
      * @type {number}
      */
     this.y = 0;
+    this.root = null;
+    this.offset = null;
+    this.excerpt = this.excerpt.bind(this);
+    this.content = this.content.bind(this);
   }
+  // componentDidMount() {
+  //   // -----------------------
+  //   // element height setting
+  //   const offset = Offset.offset(this.root);
+  //   this.setState({ minHeight: offset.height });
+  // }
   /**
    * a.onclick event handler<br>
    * 本文を表示しボタンを隠します
@@ -96,8 +107,13 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * */
   anchorClick(event) {
     event.preventDefault();
-    this.y = Scroll.y;
+    // this.y = Scroll.y;
+    const y = Scroll.y;
+    // contents 詳細切り替え
     this.setState({ excerpt: !this.state.excerpt });
+    // クリック後遅延してscroll移動
+    // @since 2017-01-17
+    Scroll.motion(y, 0.1, 0.25);
   }
   /**
    * 省略文章を表示します
@@ -106,7 +122,12 @@ export class ComponentSinglesArticleSwitch extends React.Component {
   excerpt() {
     const single = this.state.single;
     return (
-      <div className="js-root">
+      <div
+        className="js-root"
+        ref={(component) => {
+          this.root = component;
+        }}
+      >
         <ComponentSinglesArticleExcerpt
           single={single}
           index={this.state.index}
@@ -131,7 +152,9 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    */
   content() {
     // scroll 位置が下がるので元に戻す
-    Scroll.motion(this.y, 0.1, 0.25);
+    // ここまずい何度も反応する - 2017-01-17
+    // Scroll.motion(this.y, 0.1, 0.25);
+    // Scroll.y = this.y;
     // XML
     return (
       <ComponentSingleContent
@@ -146,10 +169,18 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * @return {XML} excerpt / content を実行し出力します
    */
   render() {
-    if (this.state.excerpt) {
-      return this.excerpt();
-    } else {
-      return this.content();
-    }
+    const output = this.state.excerpt ? this.excerpt : this.content;
+    return (
+      <div
+        className="js-root-container"
+      >
+        {output()}
+      </div>
+    );
+    // if (this.state.excerpt) {
+    //   return this.excerpt();
+    // } else {
+    //   return this.content();
+    // }
   }
 }

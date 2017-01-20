@@ -9,43 +9,48 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-
-
-let _symbol = null;
+//
+//
+// let _symbol = null;
 
 /**
  * 入力チェック
  */
 export class Validate {
-  /**
-   * <h4>入力チェック</h4>
-   * <p>static class です, instance を作成しません</P>
-   * @param {Symbol} target Singleton を実現するための private symbol
-   */
-  constructor( target:Symbol ) {
-
-    if ( _symbol !== target ) {
-
-      throw new Error( 'Validate is static Class. not use new Validate().' );
-
-    }
-
-  }
+  // /**
+  //  * <h4>入力チェック</h4>
+  //  * <p>static class です, instance を作成しません</P>
+  //  * @param {Symbol} target Singleton を実現するための private symbol
+  //  */
+  // constructor( target:Symbol ) {
+  //   if (_symbol !== target) {
+  //     throw new Error( 'Validate is static Class. not use new Validate().' );
+  //   }
+  // }
   /**
    * email 形式かを調べます
    * @param {string} email メールアドレス
-   * @return {Boolean} メールアドレス型チェック 真偽値 true: 正しい を返します
+   * @returns {Boolean} メールアドレス型チェック 真偽値 true: 正しい を返します
    */
-  static email( email:string ):Boolean {
+  static email(email:string) {
     return !!email.match(/^[\w!#$%&'*+\/=?\^_@{}\\|~\-]+([\w!#$%&'*+\/=?\^_{}\\|~\.\-]+)*@([\w][\w\-]*\.)+[\w][\w\-]*$/);
   }
-
   /**
    * アルファベット, 数字かを調べます
    * @param {string} string 調査対象文字列
-   * @return {Boolean} 合致するか否かの真偽値を返します
+   * @returns {Boolean} 合致するか否かの真偽値を返します
    */
-  static alphaNum( string:string ):Boolean {
+  static alphaNum(string) {
     return !!string.match(/^[a-z0-9]+$/i);
+  }
+  /**
+   * 文字列に `keyword` が存在するかを調べます
+   * @param {string} string 調査対象文字列
+   * @param {string} keyword 調べたい文字
+   * @returns {boolean} true: 含まれている
+   */
+  static include(string, keyword) {
+    // console.log('include string', string);
+    return string.indexOf(keyword) !== -1;
   }
 }
