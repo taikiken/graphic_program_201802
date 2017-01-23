@@ -4,13 +4,13 @@
 #
 # General Settings
 #
-box: bento/centos-6.7
+box: ubuntu/trusty64
 chef_cookbook_path: ./provision
 
 #
 # Virtual Machine Settings
 #
-memory: 1024
+memory: 2048
 cpus: 1
 
 #
