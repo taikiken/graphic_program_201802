@@ -184,6 +184,6 @@ if (!$from_webview) :
 endif;
 // -----------------------------------------
 ?>
-<script src="/assets/js/au/index.js"></script>
+<script src="/assets/js/au/index.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
