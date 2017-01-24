@@ -92,6 +92,9 @@ $model = new ViewModel($o);
 // - 開発 : https://dev-img.sportsbull.jp/xml/picks.xml
 // - 公開 : https://img.sportsbull.jp/xml/picks.xml
 
+// @since 2017-01-24
+// @see https://github.com/undotsushin/undotsushin/issues/1426
+// @see https://github.com/undotsushin/undotsushin/issues/1464
 // host name 取得
 $app_host_name = $model->get_site_url();
 
