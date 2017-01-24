@@ -92,20 +92,19 @@ $model = new ViewModel($o);
 // - 開発 : https://dev-img.sportsbull.jp/xml/picks.xml
 // - 公開 : https://img.sportsbull.jp/xml/picks.xml
 
+// @since 2017-01-24
+// @see https://github.com/undotsushin/undotsushin/issues/1426
+// @see https://github.com/undotsushin/undotsushin/issues/1464
 // host name 取得
-//$app_host_name = $page['apiRoot'];
-//if ($app_host_name == '') {
-//  $app_host_name = 'https://dev.sportsbull.jp';
-//}
-//
-//// host name から xml host name 設定
-//$xml_host_name = 'https://dev-img.sportsbull.jp';
-//if ($app_host_name != 'https://dev.sportsbull.jp') {
-//  $xml_host_name = 'https://img.sportsbull.jp';
-//}
+$app_host_name = $model->get_site_url();
 
-// @since 2017-01-17
+// host name から xml host name 設定
+// default `https://img.sportsbull.jp` - 本番サーバー
 $xml_host_name = 'https://img.sportsbull.jp';
+// dev のみ `https://dev-img.sportsbull.jp` から取得
+if ($app_host_name == 'https://dev.sportsbull.jp' || $app_host_name == 'https://dev.sportsbull.jp/') {
+  $xml_host_name = 'https://dev-img.sportsbull.jp';
+}
 
 // xml data を設定する配列
 $articles = array();
@@ -170,3 +169,5 @@ endif;
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
 //print_r($page['apiRoot']);
+//print_r($xml_host_name);
+//print_r($app_host_name);
