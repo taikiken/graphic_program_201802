@@ -11,7 +11,6 @@ class UserAgent{
   function __construct() {
 
     $this->ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
-    $this->device = $this->set();
 
   }
 
@@ -23,10 +22,10 @@ class UserAgent{
 
     // web用に tablet等はdesktopまるめておく
     if ( $device !== 'mobile' ) :
-      $this->device = 'desktop';
+      return 'desktop';
+    else :
+      return 'mobile';
     endif;
-
-    return $this->device;
 
   }
 
@@ -91,7 +90,7 @@ class UserAgent{
 
     $query_ua = ( isset($_GET['ua']) ) ? $_GET['ua'] : '';
 
-    if ( $this->device == 'mobile' ) :
+    if ( $this->device !== 'desktop' ) :
 
       if ( strpos($this->ua,'undotsushin-ios') !== false || $query_ua == 'undotsushin-ios' ) :
         return 'iOS';
