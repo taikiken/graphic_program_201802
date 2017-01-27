@@ -12,26 +12,6 @@ class UserAgent{
 
     $this->ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
 
-  }
-
-
-  public function set(){
-
-    // 実デバイスを取得
-    $device = $this->get_device();
-
-    // web用に tablet等はdesktopまるめておく
-    if ( $device !== 'mobile' ) :
-      return 'desktop';
-    else :
-      return 'mobile';
-    endif;
-
-  }
-
-
-  public function get_device(){
-
     # Amazon CloudFront経由の場合は HTTP_CLOUDFRONT_ で判定
     # ここでのtrue / falseはstring型です
     if ( strpos($this->ua,'amazon cloudfront') !== false ) {
@@ -76,10 +56,27 @@ class UserAgent{
       $this->device = 'desktop';
     }
 
-    return $this->device;
+  }
+
+
+
+  public function set(){
+
+    // web用に tablet等はdesktopまるめておく
+    if ( $this->device !== 'mobile' ) :
+      return 'desktop';
+    else :
+      return 'mobile';
+    endif;
 
   }
 
+
+  public function get_device(){
+
+    return $this->device;
+
+  }
 
 
   // アプリからのアクセスかどうかチェックする
