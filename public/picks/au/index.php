@@ -112,7 +112,7 @@ if ($app_host_name == 'https://dev.sportsbull.jp' || $app_host_name == 'https://
 
 $xml_filename = 'picks.xml';
 // stg file名称が違う
-if ($app_host_name == 'https://stg.sportsbull.jp') {
+if ($app_host_name == 'https://stg.sportsbull.jp' || $app_host_name == 'https://stg.sportsbull.jp/') {
   $xml_filename = 'picks_stg.xml';
 }
 
