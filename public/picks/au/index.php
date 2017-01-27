@@ -96,8 +96,12 @@ $model = new ViewModel($o);
 // @see https://github.com/undotsushin/undotsushin/issues/1426
 // @see https://github.com/undotsushin/undotsushin/issues/1464
 // host name 取得
-$app_host_name = $model->get_site_url();
-
+$app_host_name = $page['apiRoot'];
+// 空の時は `get_site_url` から取得する
+if ($app_host_name == '') {
+  // host name 取得
+  $app_host_name = $model->get_site_url();
+}
 // host name から xml host name 設定
 // default `https://img.sportsbull.jp` - 本番サーバー
 $xml_host_name = 'https://img.sportsbull.jp';
@@ -106,12 +110,17 @@ if ($app_host_name == 'https://dev.sportsbull.jp' || $app_host_name == 'https://
   $xml_host_name = 'https://dev-img.sportsbull.jp';
 }
 
+$xml_filename = 'picks.xml';
+// stg file名称が違う
+if ($app_host_name == 'https://stg.sportsbull.jp') {
+  $xml_filename = 'picks_stg.xml';
+}
+
 // xml data を設定する配列
-//$articles = array();
 $xml_articles = array();
 
 // path を設定し XML file を取得します
-$xml_element = simplexml_load_file($xml_host_name . '/xml/au/picks.xml');
+$xml_element = simplexml_load_file($xml_host_name . '/xml/au/' . $xml_filename);
 
 // parse し $articles へセットし不要データは unset します
 foreach ($xml_element as $xml_date) :

@@ -77,7 +77,7 @@
           <div class="summary__inner">
             <p class="summary__caption"><img src="/assets/sp/images/picks/overview-caption.png" alt="編集部おすすめ記事"></p>
             <h1 class="summary__heading"><img src="/assets/sp/images/picks/overview-heading.png" alt="BULL'S PICKS"></h1>
-            <p class="summary__date"><span>11/24</span> UPDATE</p>
+            <p class="summary__date"><span><?php echo $xml_date_value; ?></span> UPDATE</p>
 
             <div class="summary__aboutus">
               <dl id="js-summary__aboutus__inner" class="summary__aboutus__inner">
