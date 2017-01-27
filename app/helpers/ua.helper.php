@@ -15,7 +15,23 @@ class UserAgent{
 
   }
 
+
   public function set(){
+
+    // 実デバイスを取得
+    $device = $this->get_device();
+
+    // web用に tablet等はdesktopまるめておく
+    if ( $device !== 'mobile' ) :
+      $this->device = 'desktop';
+    endif;
+
+    return $this->device;
+
+  }
+
+
+  public function get_device(){
 
     # Amazon CloudFront経由の場合は HTTP_CLOUDFRONT_ で判定
     # ここでのtrue / falseはstring型です
@@ -24,7 +40,7 @@ class UserAgent{
       if ( $_SERVER['HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER'] === 'true' ) :
         return $this->device = 'desktop';
       elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_TABLET_VIEWER'] === 'true' ) :
-        return $this->device = 'desktop';
+        return $this->device = 'tablet';
       elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_SMARTTV_VIEWER'] === 'true' ) :
         return $this->device = 'desktop';
       elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'] === 'true' ) :
@@ -58,13 +74,8 @@ class UserAgent{
     }elseif((strpos($this->ua,'playbook') !== false)){
       $this->device = 'tablet';
     }else{
-      $this->device = 'others';
-    }
-
-
-    if ( $this->device !== 'mobile' ) :
       $this->device = 'desktop';
-    endif;
+    }
 
     return $this->device;
 
