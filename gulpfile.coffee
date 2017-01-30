@@ -532,8 +532,10 @@ gulp.task 'build:shell', (cb) ->
 ###
 gulp.task 'develop', (cb) ->
   runSequence(
+    'exe:dev'
+    'sp:exe:dev'
+    'single:dev'
     'vendor:dev'
-    'bundle:copy'
     'libs:synapse:dev'
     'js:dev'
     'image:copy'
@@ -541,6 +543,7 @@ gulp.task 'develop', (cb) ->
     'sp:image:copy'
     'libs:copy'
     'html:build'
+    'bundle:copy'
     cb
   )
   return
@@ -552,8 +555,10 @@ gulp.task 'develop', (cb) ->
 ###
 gulp.task 'deploy', (cb) ->
   runSequence(
+    'exe:build'
+    'sp:exe:build'
+    'single:build'
     'vendor:init'
-    'bundle:copy'
     'libs:synapse:build'
     'js:build'
     'image:build'
@@ -561,6 +566,7 @@ gulp.task 'deploy', (cb) ->
     'sp:image:build'
     'libs:copy'
     'html:build'
+    'bundle:copy'
     'clean:all'
     'lec:build'
     cb
