@@ -179,8 +179,9 @@
     // .post__heading
     &__heading {
       line-height: lh(36, 28);
+      color: #333;
       font-weight: bold;
-      font-size: (28/2)+px;
+      font-size: (32/2)+px;
     }
 
     // .post__category
@@ -188,14 +189,14 @@
       margin-top: (8/2)+px;
       color: $highlight-color;
       font-weight: bold;
-      font-size: (20/2)+px;
+      font-size: (24/2)+px;
     }
 
     // .post__date
     &__date {
       margin-top: (8/2)+px;
       color: #999;
-      font-size: (20/2)+px;
+      font-size: (24/2)+px;
     }
 
 
@@ -216,7 +217,7 @@
         padding-left: (56/2)+px;
         background: url(/assets/sp/images/picks/icon-highlight.png) 0 2px no-repeat;
         background-size: (36/2)+px;
-        font-size: (24/2)+px;
+        font-size: (28/2)+px;
       }
     }
 
