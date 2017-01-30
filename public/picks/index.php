@@ -175,7 +175,7 @@ if (isset($_GET['app'])) {
 // $model->property('ua_device') = mobile | tablet | desktop
 if ( $model->property('ua_device') === 'mobile' ) :
 
-  include_once __DIR__.'/view.php';
+  include_once __DIR__.'/view_sp.php';
 
 else :
 
