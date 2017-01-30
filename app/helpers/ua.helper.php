@@ -11,11 +11,6 @@ class UserAgent{
   function __construct() {
 
     $this->ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
-    $this->device = $this->set();
-
-  }
-
-  public function set(){
 
     # Amazon CloudFront経由の場合は HTTP_CLOUDFRONT_ で判定
     # ここでのtrue / falseはstring型です
@@ -24,7 +19,7 @@ class UserAgent{
       if ( $_SERVER['HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER'] === 'true' ) :
         return $this->device = 'desktop';
       elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_TABLET_VIEWER'] === 'true' ) :
-        return $this->device = 'desktop';
+        return $this->device = 'tablet';
       elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_SMARTTV_VIEWER'] === 'true' ) :
         return $this->device = 'desktop';
       elseif ( $_SERVER['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'] === 'true' ) :
@@ -58,18 +53,30 @@ class UserAgent{
     }elseif((strpos($this->ua,'playbook') !== false)){
       $this->device = 'tablet';
     }else{
-      $this->device = 'others';
+      $this->device = 'desktop';
     }
 
+  }
 
+
+
+  public function set(){
+
+    // web用に tablet等はdesktopまるめておく
     if ( $this->device !== 'mobile' ) :
-      $this->device = 'desktop';
+      return 'desktop';
+    else :
+      return 'mobile';
     endif;
+
+  }
+
+
+  public function get_device(){
 
     return $this->device;
 
   }
-
 
 
   // アプリからのアクセスかどうかチェックする
@@ -80,7 +87,7 @@ class UserAgent{
 
     $query_ua = ( isset($_GET['ua']) ) ? $_GET['ua'] : '';
 
-    if ( $this->device == 'mobile' ) :
+    if ( $this->device !== 'desktop' ) :
 
       if ( strpos($this->ua,'undotsushin-ios') !== false || $query_ua == 'undotsushin-ios' ) :
         return 'iOS';

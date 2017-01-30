@@ -64,6 +64,11 @@ $o->connect();
 // ==============================
 $model = new ViewModel($o);
 
+$page = $model->set(array(
+  'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
+  'og_type'  => 'article',
+));
+
 
 // 記事データ取得
 // ==============================
@@ -92,40 +97,56 @@ $model = new ViewModel($o);
 // - 開発 : https://dev-img.sportsbull.jp/xml/picks.xml
 // - 公開 : https://img.sportsbull.jp/xml/picks.xml
 
-// host name 取得
-//$app_host_name = $page['apiRoot'];
-//if ($app_host_name == '') {
-//  $app_host_name = 'https://dev.sportsbull.jp';
-//}
-//
-//// host name から xml host name 設定
-//$xml_host_name = 'https://dev-img.sportsbull.jp';
-//if ($app_host_name != 'https://dev.sportsbull.jp') {
-//  $xml_host_name = 'https://img.sportsbull.jp';
-//}
+// @since 2017-01-24
+// @see https://github.com/undotsushin/undotsushin/issues/1426
+// @see https://github.com/undotsushin/undotsushin/issues/1464
 
-// @since 2017-01-17
+// host name 取得
+// local `https://dev.sportsbull.jp` それ以外空
+$app_host_name = $page['apiRoot'];
+// 空の時は `get_site_url` から取得する
+if ($app_host_name == '') {
+  // host name 取得
+  $app_host_name = $model->get_site_url();
+}
+// host name から xml host name 設定
+// default `https://img.sportsbull.jp` - 本番サーバー
 $xml_host_name = 'https://img.sportsbull.jp';
+// dev のみ `https://dev-img.sportsbull.jp` から取得
+if ($app_host_name == 'https://dev.sportsbull.jp' || $app_host_name == 'https://dev.sportsbull.jp/') {
+  $xml_host_name = 'https://dev-img.sportsbull.jp';
+}
+
+$xml_filename = 'picks.xml';
+// stg file名称が違う
+if ($app_host_name == 'https://stg.sportsbull.jp' || $app_host_name == 'https://stg.sportsbull.jp/') {
+  $xml_filename = 'picks_stg.xml';
+}
 
 // xml data を設定する配列
 $articles = array();
 
 // path を設定し XML file を取得します
-$xml_element = simplexml_load_file($xml_host_name . '/xml/picks.xml');
+$xml_element = simplexml_load_file($xml_host_name . '/xml/' . $xml_filename);
+
+// 日付: attributes から取得します
+$xml_date_value = (string)$xml_element[0]->articles->attributes()->date;
 
 // parse し $articles へセットし不要データは unset します
-foreach( $xml_element as $xml_article ) :
+foreach ($xml_element as $xml_date) :
 
-  $api_post_data = $model->get_post($xml_article->id);
-  unset($api_post_data['ad']);
-  unset($api_post_data['banner']);
-  unset($api_post_data['recommend_articles']);
-  unset($api_post_data['related_articles']);
-  unset($api_post_data['body']);
-  unset($api_post_data['description']);
-  unset($api_post_data['body_escape']);
-  $api_post_data['comment'] = $xml_article->comments->comment;
-  $articles[]['post'] = $api_post_data;
+  foreach( $xml_date->article as $xml_article ) :
+    $api_post_data = $model->get_post($xml_article->id);
+    unset($api_post_data['ad']);
+    unset($api_post_data['banner']);
+    unset($api_post_data['recommend_articles']);
+    unset($api_post_data['related_articles']);
+    unset($api_post_data['body']);
+    unset($api_post_data['description']);
+    unset($api_post_data['body_escape']);
+    $api_post_data['comment'] = $xml_article->comments->comment;
+    $articles[]['post'] = $api_post_data;
+  endforeach;
 
 endforeach;
 
@@ -133,8 +154,6 @@ endforeach;
 // $pageに渡したい値があればここに設定
 // ==============================
 $page = $model->set(array(
-  'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
-  'og_type'  => 'article',
   'data'     => $articles,
 ));
 
@@ -153,9 +172,10 @@ if (isset($_GET['app'])) {
 
 //// render
 // ==============================
-if ( $model->property('ua') === 'mobile' ) :
+// $model->property('ua_device') = mobile | tablet | desktop
+if ( $model->property('ua_device') === 'mobile' ) :
 
-  include_once __DIR__.'/view.php';
+  include_once __DIR__.'/view_sp.php';
 
 else :
 
@@ -169,4 +189,6 @@ endif;
 
 
 // 確認用dumpデータ - テンプレ組み込みおわったら削除
-//print_r($page['apiRoot']);
+//print_r($page);
+//print_r($articles);
+//print_r($xml_element[0]->articles);

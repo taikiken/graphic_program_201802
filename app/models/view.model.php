@@ -70,8 +70,9 @@ class ViewModel {
     'slug'               => '',
 
     // env
-    'ua'                 => '', // UA判定
+    'ua'                 => '', // UA判定 ( desktop or mobile )
     'ua_app'             => '', // アプリ判定
+    'ua_device'          => '', // デバイス判定 ( desktop or mobile or tablet )
     'ua_is_bot'          => '', // bot判定
     'hostname'           => '', // debug用 - 利用なし
     'apiRoot'            => '', // APIの接続先振り分け用 - _footer.phpにて利用
@@ -121,9 +122,10 @@ class ViewModel {
     // env
     $this->default['hostname']        = $_SERVER['SERVER_NAME'];
 
-    $this->ua = new UserAgent();
+    $this->ua                         = new UserAgent();
     $this->default['ua']              = $this->ua->set();
     $this->default['ua_app']          = $this->ua->get_ua_app();
+    $this->default['ua_device']       = $this->ua->get_device();
     $this->default['ua_is_bot']       = $this->ua->is_bot();
 
 
