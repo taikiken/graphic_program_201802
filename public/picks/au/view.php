@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="googlebot" content="noindex,follow">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <?php
   // app in webview 時に .head-sec を非表示にする
-  if (!$from_webview) :
+  // if (!$from_webview) :
+  if (0) :
   ?>
   <title>Today's ピックアップ | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
@@ -85,7 +87,7 @@
         </div><!-- /.category-nav__accordion__body__inner -->
       </dd><!-- /.category-nav__accordion__body -->
       <dt id="js-category-nav__accordion__trigger" class="category-nav__accordion__trigger off">
-        <span class="category-nav__accordion__trigger--on">その他の種目を見る</span>
+        <span class="category-nav__accordion__trigger--on">もっと見る</span>
         <span class="category-nav__accordion__trigger--off">閉じる</span>
       </dt><!-- /.category-nav__accordion__trigger -->
     </dl><!-- /.category-nav--sub -->
@@ -120,14 +122,16 @@
 
       <article class="post">
         <header class="post__header">
-          <figure class="post__figure">
-            <img src="<?php echo $value['post']['media']['images']['medium']; ?>" alt="">
-          </figure>
-          <div class="post__data">
-            <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
-            <p class="post__category"><?php echo $value['post']['category']['label']; ?></p>
-            <p class="post__date"><?php echo $value['post']['display_date']; ?></p>
-          </div>
+          <a href="<?php echo $value['post']['url']; ?>">
+            <figure class="post__figure">
+              <img src="<?php echo $value['post']['media']['images']['medium']; ?>" alt="">
+            </figure>
+            <div class="post__data">
+              <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
+              <p class="post__category"><?php echo $value['post']['category']['label']; ?></p>
+              <p class="post__date"><?php echo $value['post']['display_date']; ?></p>
+            </div><!-- /.post__data -->
+          </a>
         </header><!-- /.post__header -->
 
         <div class="post__highlight">
@@ -161,7 +165,8 @@
 
 <?php
 // app in webview 時に .foot-sec を非表示にするので FB いらない
-if (!$from_webview) :
+// if (!$from_webview) :
+if (0) :
 ?>
 <script>
   window.fbAsyncInit = function() {
@@ -184,6 +189,6 @@ if (!$from_webview) :
 endif;
 // -----------------------------------------
 ?>
-<script src="/assets/js/au/index.js"></script>
+<script src="/assets/js/au/index.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>

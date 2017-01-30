@@ -22,7 +22,11 @@
 
   function onClick(event) {
     event.preventDefault();
-    $target.slideToggle(400);
+    // @see https://github.com/undotsushin/undotsushin/issues/1464#issuecomment-273034370
+    // FB: アコーディオンの開く、閉じるスピードを上げてください。
+    // 400 -> 200
+    // @sine 2017-01-17
+    $target.slideToggle(200);
     if ($trigger.hasClass('on')) {
       $trigger.removeClass('on');
     } else {
