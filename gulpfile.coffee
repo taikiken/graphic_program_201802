@@ -532,6 +532,9 @@ gulp.task 'build:shell', (cb) ->
 ###
 gulp.task 'develop', (cb) ->
   runSequence(
+    'exe:dev'
+    'sp:exe:dev'
+    'single:dev'
     'vendor:dev'
     'bundle:copy'
     'libs:synapse:dev'
@@ -552,6 +555,9 @@ gulp.task 'develop', (cb) ->
 ###
 gulp.task 'deploy', (cb) ->
   runSequence(
+    'exe:build'
+    'sp:exe:build'
+    'single:build'
     'vendor:init'
     'bundle:copy'
     'libs:synapse:build'
