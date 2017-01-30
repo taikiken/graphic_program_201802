@@ -1,7 +1,7 @@
 /*!
  * @copyright (c) 2011-@@year inazumatv.com, @@copyright.
  * @author (at)taikiken / http://inazumatv.com
- * @date @@buildTime
+ * @build @@buildTime
  * @license
  * @date 2016/09/06 - 16:25
  *

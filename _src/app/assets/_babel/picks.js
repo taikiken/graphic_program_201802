@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
+/*!
+ * Copyright (c) 2011-@@year inazumatv.com, @@copyright.
  * @author (at)taikiken / http://inazumatv.com
  * @date 2016/12/22 - 14:07
  *
@@ -7,8 +7,10 @@
  * http://www.opensource.org/licenses/mit-license.html
  *
  * This notice shall be included in all copies or substantial portions of the Software.
+ * @@buildTime
  *
  */
+'use strict';
 
 // library
 const Dom = window.Sagen.Dom;
