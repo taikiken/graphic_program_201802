@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<articles>
-    <article>
-        <id>82291</id>
-        <comments>
-            <comment>苦境に立つ現在の心境をブログにつづった。</comment>
-            <comment>「試合の出場に関して満足できるものではない」と苦しい胸の内。</comment>
-            <comment>「そこを越えたい」と、現状を打破したい強い想いも覗かせた。</comment>
-        </comments>
-    </article>
-    <article>
-        <id>81870</id>
-        <comments>
-            <comment>０日、巨人OBと台湾OBによる日台慈善試合が台湾で行われた。</comment>
-            <comment>観客は総立ちに拍手で迎えた。</comment>
-            <comment>交流試合をやって世界的なレベルになれるように」と両チームの発展を願った。</comment>
-        </comments>
-    </article>
-    <article>
-        <id>82287</id>
-        <comments>
-            <comment>苦境に立つ現在の心境をブログにつづった。</comment>
-            <comment>「試合の出場に関して満足できるものではない」と苦しい胸の内。</comment>
-            <comment>「そこを越えたい」と、現状を打破したい強い想いも覗かせた。</comment>
-        </comments>
-    </article>
-</articles>
+<date>
+    <articles date="1/25">
+        <!--
+        <article>
+            <id>ここに記事ID</id>
+            <comments>
+                <comment>コメント1</comment>
+                <comment>コメント2</comment>
+                <comment>コメント3</comment>
+            </comments>
+        </article>
+        -->
+        <article>
+            <id>95876</id>
+            <comments>
+                <comment>マーリンズのジャンカルロ・スタントンがWBC参加表明。</comment>
+                <comment>自身のTwitterに「行くぞ！」とハイテンションに投稿した。</comment>
+                <comment>スタントンは米国代表の大きな戦力になると紹介されている。</comment>
+            </comments>
+        </article>
+        <article>
+            <id>95863</id>
+            <comments>
+                <comment>稀勢の里の横綱昇進伝達式が２５日、都内で行われた。</comment>
+                <comment>「毎場所、優勝ですね」と次の目標を語った。</comment>
+                <comment>横綱の品格についても自身の考えを口にした。</comment>
+            </comments>
+        </article>
+        <article>
+            <id>95883</id>
+            <comments>
+                <comment>全豪女子ダブルス準決勝に穂積絵莉・加藤未唯が登場。</comment>
+                <comment>善戦したがフルセットの末破れた。</comment>
+                <comment>日本女子ペア初の４大大会決勝進出は次に持ち越しとなった。</comment>
+            </comments>
+        </article>
+    </articles>
+</date>

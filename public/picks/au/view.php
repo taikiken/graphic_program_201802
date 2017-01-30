@@ -122,14 +122,16 @@
 
       <article class="post">
         <header class="post__header">
-          <figure class="post__figure">
-            <img src="<?php echo $value['post']['media']['images']['medium']; ?>" alt="">
-          </figure>
-          <div class="post__data">
-            <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
-            <p class="post__category"><?php echo $value['post']['category']['label']; ?></p>
-            <p class="post__date"><?php echo $value['post']['display_date']; ?></p>
-          </div>
+          <a href="<?php echo $value['post']['url']; ?>">
+            <figure class="post__figure">
+              <img src="<?php echo $value['post']['media']['images']['medium']; ?>" alt="">
+            </figure>
+            <div class="post__data">
+              <h1 class="post__heading"><?php echo $value['post']['title']; ?></h1>
+              <p class="post__category"><?php echo $value['post']['category']['label']; ?></p>
+              <p class="post__date"><?php echo $value['post']['display_date']; ?></p>
+            </div><!-- /.post__data -->
+          </a>
         </header><!-- /.post__header -->
 
         <div class="post__highlight">
