@@ -33,6 +33,8 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <link rel="canonical" href="https://sportsbull.jp/picks/">
+  <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+
   <?php
   endif;
   // -----------------------------------------
