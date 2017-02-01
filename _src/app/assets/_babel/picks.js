@@ -48,7 +48,11 @@ class Picks {
      * @returns {Dom} div#js-summary__aboutus__inner Dom instance
      */
     this.dom = () => dom;
-    this.$body = $(document.body);
+    /**
+     * not application, only use web
+     * @type {null}
+     */
+    this.$body = null;
   }
   /**
    * div#js-summary__aboutus__inner へ click イベントを bind します
@@ -61,11 +65,15 @@ class Picks {
       element.addEventListener('click', this.boundClick(), false);
       result = true;
     }
+    if (!$) {
+      return result;
+    }
     const pageTop = this.pageTop();
     if (!pageTop) {
       result = false;
     } else {
       result = true;
+      this.$body = $(document.body);
       $(pageTop).on('click', this.onTop.bind(this));
     }
     // this.element().addEventListener('click', this.boundClick(), false);
@@ -89,6 +97,11 @@ class Picks {
     }
     return event;
   }
+
+  /**
+   * top tap で scroll up animation
+   * @param {Event} event click event
+   */
   onTop(event) {
     event.preventDefault();
     this.$body.stop()
