@@ -126,7 +126,7 @@
 <?php endforeach; ?>
 
         <div class="link_recent">
-          <a href="/category/all/">すべての新着記事をみる</a>
+          <a href="/">すべての新着記事をみる</a>
         </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->
