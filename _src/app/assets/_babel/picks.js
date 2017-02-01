@@ -15,6 +15,8 @@
 // library
 const Dom = window.Sagen.Dom;
 
+const $ = window.jQuery;
+
 /**
  * [BULL'S PICKS とは]ボタンで開閉するジャバラ制御します
  */
@@ -22,13 +24,16 @@ class Picks {
   /**
    * div#js-summary__aboutus__inner element を保存し Dom instance を作成します
    * @param {Element} element div#js-summary__aboutus__inner
+   * @param {Element} pageTop div#js-page_top
    */
-  constructor(element) {
+  constructor(element, pageTop) {
     /**
      * 制御コンテナを取得します
      * @returns {Element} div#js-summary__aboutus__inner
      */
     this.element = () => element;
+
+    this.pageTop = () => pageTop;
     // ---
     const boundClick = this.onClick.bind(this);
     /**
@@ -43,14 +48,28 @@ class Picks {
      * @returns {Dom} div#js-summary__aboutus__inner Dom instance
      */
     this.dom = () => dom;
+    this.$body = $(document.body);
   }
   /**
    * div#js-summary__aboutus__inner へ click イベントを bind します
    * @returns {boolean} true を返します
    */
   init() {
-    this.element().addEventListener('click', this.boundClick(), false);
-    return true;
+    let result = false;
+    const element = this.element();
+    if (element) {
+      element.addEventListener('click', this.boundClick(), false);
+      result = true;
+    }
+    const pageTop = this.pageTop();
+    if (!pageTop) {
+      result = false;
+    } else {
+      result = true;
+      $(pageTop).on('click', this.onTop.bind(this));
+    }
+    // this.element().addEventListener('click', this.boundClick(), false);
+    return result;
   }
   /**
    * div#js-summary__aboutus__inner.onClick event handler
@@ -70,6 +89,11 @@ class Picks {
     }
     return event;
   }
+  onTop(event) {
+    event.preventDefault();
+    this.$body.stop()
+      .animate({ scrollTop: 0 }, 400);
+  }
   // -----------------------------------
   /**
    * Picks class を稼働させます, div#js-summary__aboutus__inner が存在するときに実行します
@@ -77,11 +101,14 @@ class Picks {
    */
   static execute() {
     const element = document.getElementById('js-summary__aboutus__inner');
-    let picks = null;
-    if (element) {
-      picks = new Picks(element);
-      picks.init();
-    }
+    const pageTop = document.getElementById('js-page_top');
+    // let picks = null;
+    // if (element) {
+    //   picks = new Picks(element, pageTop);
+    //   picks.init();
+    // }
+    const picks = new Picks(element, pageTop);
+    picks.init();
     return picks;
   }
 }

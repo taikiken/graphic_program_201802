@@ -163,12 +163,25 @@ gulp.task 'single:webpack:build', () ->
 
 # --------------------------------------------
 
+###
+  bundle.js を deploy へコピー
+  test が含まれているファイルをコピーしない
+###
+gulp.task 'single:copy', ->
+  return gulp.src [
+    app + '/**/js/**/*.bundle.js'
+    '!' + app + '/**/js/**/*test*.bundle.js'
+  ]
+    .pipe gulp.dest htdocs
+    .pipe $.size title: '*** single:copy ***'
+
 # dev
 gulp.task 'single:dev', ( cb ) ->
   runSequence(
 #    'single:eslint'
     'single:compile'
     'single:webpack:dev'
+    'single:copy'
     cb
   )
   return
@@ -179,6 +192,7 @@ gulp.task 'single:dev:lint', ( cb ) ->
     'single:eslint'
     'single:compile'
     'single:webpack:dev'
+    'single:copy'
     cb
   )
   return
@@ -190,6 +204,7 @@ gulp.task 'single:build', ( cb ) ->
     # 'single:eslint' build時はeslintをskip / lintはdev時に担保する
     'single:compile'
     'single:webpack:build'
+    'single:copy'
     cb
   )
   return

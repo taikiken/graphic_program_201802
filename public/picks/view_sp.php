@@ -33,6 +33,8 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <link rel="canonical" href="https://sportsbull.jp/picks/">
+  <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
+
   <?php
   endif;
   // -----------------------------------------
@@ -124,7 +126,7 @@
 <?php endforeach; ?>
 
         <div class="link_recent">
-          <a href="/category/all/">すべての新着記事をみる</a>
+          <a href="/">すべての新着記事をみる</a>
         </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->
@@ -157,7 +159,7 @@
         <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
       </div><!-- /.foot-pr -->
 
-      <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+      <div id="js-page_top" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
       <nav class="fnav">
         <ul>
