@@ -157,7 +157,7 @@
         <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
       </div><!-- /.foot-pr -->
 
-      <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+      <div id="js-page_top" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
       <nav class="fnav">
         <ul>
