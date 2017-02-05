@@ -216,6 +216,18 @@ $border-color: #585959;
     // .matches-list
     &-list {
       width: 100%;
+
+      &.for-category .matches-tbody {
+        td:first-child {
+          background: none;
+        }
+      }
+
+      &.for-detail .matches-tbody {
+        td.matches-week {
+          background: none;
+        }
+      }
     }
 
     // .matches-thead
@@ -228,10 +240,6 @@ $border-color: #585959;
         font-weight: bold;
         font-size: fz(14);
         text-align: center;
-
-        &:first-child {
-          text-align: left;
-        }
       }
     }
 
@@ -247,16 +255,23 @@ $border-color: #585959;
         background-size: 1px 80%;
         color: #fff;
         font-size: fz(14);
-
-        &:first-child {
-          background: none;
-        }
       }
+    }
+
+    // .matches-week
+    &-week {
+      width: 4em;
+      padding-right: 20px !important;
+      padding-left: 20px !important;
+      text-align: center;
+      font-weight: bold;
     }
 
     // .matches-date-unit
     &-date-unit {
-      vertical-align: top;
+      padding-right: 20px !important;
+      padding-left: 20px !important;
+      // vertical-align: top;
     }
 
     // .matches-date
@@ -371,6 +386,7 @@ $border-color: #585959;
 // 順位表
 .whole.theme_big6 {
   .standings {
+    width: 100%;
     margin-top: 40px;
 
     // .standings-heading
@@ -396,6 +412,36 @@ $border-color: #585959;
     // .standings-list
     &-list {
       width: 100%;
+
+      &.for-detail {
+        .standings-thead,
+        .standings-tbody {
+          th,
+          td {
+            font-weight: bold;
+            font-size: fz(16);
+          }
+        }
+
+        .standings-num {
+          width: 60px;
+          padding: 10px;
+
+          span {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+          }
+        }
+
+        .standings-team {
+          width: 100px;
+
+          img {
+            height: 40px;
+          }
+        }
+      }
     }
 
     // .standings-thead
@@ -562,6 +608,32 @@ $border-color: #585959;
     // .headline-heading-ruby
     &-ruby {
       color: #bcb8ad;
+    }
+  }
+}
+
+
+
+// ------------------------------------------------------------------------
+
+
+// .theme_big6_matches
+.whole.theme_big6 {
+  // .big6-summary
+  .big6-summary {
+    margin: 0 -500em;
+    padding: 0 500em;
+    background: url(/assets/images/big6/bg.jpg) center 0 no-repeat;
+
+    // .big6-summary-heading
+    &-heading {
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    // .big6-summary-banner
+    &-banner {
+      margin-top: 38px;
     }
   }
 }
