@@ -11,7 +11,7 @@
     if ( $page['template'] == 'index' ) :
       echo $page['site_name'];
     else :
-      echo $page['title'].' | '.$page['site_name'];
+      echo strip_tags($page['title']).' | '.$page['site_name'];
     endif;
   ?></title>
 
