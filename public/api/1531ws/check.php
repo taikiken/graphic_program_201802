@@ -6,6 +6,22 @@
  * Date: 2017/02/07
  * Time: 12:17
  */
+$hashes = [
+	'HzVQbz8IeHhvpgBg7' => 'SZAqYj8RVy7dQ',
+];
+if (
+	!isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) ||
+	!password_verify(
+		$_SERVER['PHP_AUTH_PW'],
+		isset($hashes[$_SERVER['PHP_AUTH_USER']])
+			? $hashes[$_SERVER['PHP_AUTH_USER']]
+			: '$2y$10$abcdefghijklmnopqrstuv' // ユーザ名が存在しないときだけ極端に速くなるのを防ぐ
+	)
+) {
+	header('WWW-Authenticate: Basic realm="Enter username and password."');
+	header('Content-Type: text/plain; charset=utf-8');
+	exit('401');
+}
 
 require_once "aws.phar";
 
