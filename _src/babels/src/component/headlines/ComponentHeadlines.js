@@ -109,7 +109,7 @@ export class ComponentHeadlines extends React.Component {
     return (
       <div className="headline">
         <div className="headline-heading">
-          <h2 className="headline-heading-title"><img src="/assets/images/index/headline-heading.png" alt="HEADLINE NEWS" /></h2>
+          <h2 className="headline-heading-title"><img src="/assets/images/common/headline-heading.png" alt="HEADLINE NEWS" /></h2>
           <span className="headline-heading-ruby">{Message.HEADLINE_TITLE}</span>
         </div>
         <ul className="board-small column2">
