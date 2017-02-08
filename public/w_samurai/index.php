@@ -64,10 +64,10 @@ $o->connect();
 // ==============================
 $model = new ViewModel($o);
 
-$page = $model->set(array(
-  'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
-  'og_type'  => 'article',
-));
+//$page = $model->set(array(
+//  'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
+//  'og_type'  => 'article',
+//));
 
 
 // app webview かを `?app=(ios|android)` から判定します
@@ -91,7 +91,6 @@ if ( $model->property('ua_device') === 'mobile' ) :
 else :
 
   include_once __DIR__.'/view.php';
-  exit;
 
 endif;
 
