@@ -10,12 +10,12 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <title>サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL</title>
+  <title>W侍キャンペーン | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
   <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
   <!-- sns ogp -->
-  <meta property="og:title" content="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL">
+  <meta property="og:title" content="W侍キャンペーン | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/w_samurai/">
@@ -55,7 +55,7 @@
 
 </head>
 <body class="appbnr-disable">
-<div class="whole w_samurai">
+<div class="whole picks">
   <?php
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
@@ -74,41 +74,9 @@
     <div class="body-sec-inner">
 
       <section class="main-sec">
-        <div class="summary">
-          <h1 class="summary__heading"><img src="/assets/sp/images/w_samurai/heading.png" alt="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト"></h1>
-        </div><!-- /.summary -->
 
-        <div class="yellfor">
-          <div class="yellfor__section yellfor--soccer">
-            <h2 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/soccer-heading.png" alt="サッカー日本代表 アジア最終予選 - ROAD TO RUSSIA"></h2>
-            <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge" target="_blank"><img src="/assets/sp/images/w_samurai/soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
-              <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/soccer-btn_live.png" alt="試合速報 3月23日 UAE戦 COMING SOON"></li>
-            </ul><!-- /.yellfor__btns -->
-          </div><!-- /.yellfor__section -->
+        PCメインコンテンツ
 
-          <div class="yellfor__section yellfor--baseball">
-            <h2 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/baseball-heading.png" alt="野球日本代表 2017 WORLD BASEBALL CLASSIC &tm;"></h2>
-            <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge" target="_blank"><img src="/assets/sp/images/w_samurai/baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
-              <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
-            </ul><!-- /.yellfor__btns -->
-          </div><!-- /.yellfor__section -->
-        </div><!-- /.yellfor -->
-
-        <aside class="bnr-campaign"><a href="/w_samurai/campaign/"><img src="/assets/sp/images/w_samurai/bnr-campaign.png" alt="サッカー賞品・野球賞品 プレゼントキャンペーン プレゼント応募はこちら"></a></aside>
-
-        <?php
-        // app in webview 時に .head-sec を非表示にする
-        if (!$from_webview) :
-        ?>
-        <aside class="bnr-app"><a href="/about/" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブルアプリをダウンロード"></a></aside>
-        <?php
-        endif;
-        // -----------------------------------------
-        ?>
-
-        <p class="note">&copy;JFA / Trademarks, copyrights, names, images and other proprietary materials are used with permission of World Baseball Classic, Inc.</p>
       </section><!-- /.main-sec -->
     </div>
   </div><!-- /.body-sec -->
@@ -199,6 +167,5 @@ if (0) :
 ?>
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php endif; ?>
-
 </body>
 </html>

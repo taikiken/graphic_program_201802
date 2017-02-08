@@ -10,12 +10,12 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <title>サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL</title>
+  <title>【W侍】ダブル侍キャンペーン | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
   <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
   <!-- sns ogp -->
-  <meta property="og:title" content="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL">
+  <meta property="og:title" content="【W侍】ダブル侍キャンペーン | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/w_samurai/">
@@ -39,7 +39,7 @@
   endif;
   // -----------------------------------------
   ?>
-  <link rel="stylesheet" href="/assets/sp/css/w_samurai/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/sp/css/w_samurai/campaign/ui.css?v=<?php echo $page['version']; ?>">
 
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -75,28 +75,97 @@
 
       <section class="main-sec">
         <div class="summary">
-          <h1 class="summary__heading"><img src="/assets/sp/images/w_samurai/heading.png" alt="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト"></h1>
+          <h1 class="summary__heading"><img src="/assets/sp/images/w_samurai/campaign/heading.png" alt="【W侍】ダブル侍キャンペーン"></h1>
+          <p class="summary__copy"><img src="/assets/sp/images/w_samurai/campaign/summary-copy.png" alt="野球日本代表観戦チケット、サッカー日本代表ユニホームが合計30名様に当たる！"></p>
         </div><!-- /.summary -->
+
+        <div class="gift">
+          <section class="gift__section gift--soccer">
+            <h2 class="gift__heading"><img src="/assets/sp/images/w_samurai/campaign/gift-soccer-figure.png" alt="サッカー日本代表賞"></h2>
+            <p class="gift__text"><strong>サッカー日本代表<br />
+            レプリカユニホーム</strong><br />
+            抽選で15名様にプレゼント</p>
+          </section><!-- /.gift__section -->
+
+          <section class="gift__section gift--baseball">
+            <h2 class="gift__heading"><img src="/assets/sp/images/w_samurai/campaign/gift-baseball-figure.png" alt="野球日本代表賞"></h2>
+            <p class="gift__text"><strong>ＷＢＣ観戦ペアチケット</strong><br />
+            抽選で15組30名様に<br />
+            プレゼント</p>
+          </section><!-- /.gift__section -->
+        </div><!-- /.gift -->
+
+        <section class="guidance">
+          <dl class="guidance__item guidance--prize">
+            <dt class="guidance__heading">賞品</dt>
+            <dd>
+              <div class="guidance--prize__body guidance--prize--baseball">
+                <h3 class="heading">野球日本代表賞</h3>
+                <p class="period">応募期間2月20日（月）〜2月28日（火）</p>
+                <p class="text"><strong>WBC 2次ラウンドプールE 試合観戦チケット 15組30名様</strong><br />
+                日時：2017年3月14日（火）19時
+                場所：東京ドーム<br />
+                <span class="note">※試合会場までの交通費などはお客様負担になります。</span></p>
+              </div><!-- /.guidance--prize__body -->
+
+              <div class="guidance--prize__body guidance--prize--soccer">
+                <h3 class="heading">サッカー日本代表賞</h3>
+                <p class="period">応募期間2月20日（月）〜3月31日（金）</p>
+                <p class="text"><strong>サッカー日本代表レプリカユニホーム　15名様</strong><br />
+                <span class="note">※サイズに関しては当選のご案内時に指定の範囲内でお選びいただきます。</span></p>
+              </div><!-- /.guidance--prize__body -->
+            </dd>
+          </dl><!-- /.guidance__item -->
+
+          <dl class="guidance__item guidance--term">
+            <dt class="guidance__heading">応募期間</dt>
+            <dd>
+              <p><strong>野球日本代表賞</strong><br />
+              2月20日（月）〜2月28日(火)</p>
+              <p><strong>サッカー日本代表賞</strong><br />
+              2月20日（月）〜3月31日（金）</p>
+            </dd>
+          </dl><!-- /.guidance__item -->
+
+          <dl class="guidance__item guidance--requirements">
+            <dt class="guidance__heading">応募資格</dt>
+            <dd>
+              <p>スポーツブルアプリをダウンロード済みのお客様</p>
+            </dd>
+          </dl><!-- /.guidance__item -->
+
+          <?php
+            // app in webview 時に .head-sec を非表示にする
+            if (!$from_webview) :
+            ?>
+          <div class="guidance__bnr">
+            <h3 class="guidance__bnr__heading">スポーツブルアプリをダウンロードして応募しよう！</h3>
+            <div class="guidance__bnr__btn"><a href="/about/" target="_blank"><img src="/assets/sp/images/w_samurai/campaign/bnr-app.png" alt="アプリをダウンロードして会員登録しよう！"></a></div>
+          </div><!-- /.guidance__bnr -->
+          <?php
+          endif;
+          // -----------------------------------------
+          ?>
+
+        </section><!-- /.guidance -->
 
         <div class="yellfor">
           <div class="yellfor__section yellfor--soccer">
-            <h2 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/soccer-heading.png" alt="サッカー日本代表 アジア最終予選 - ROAD TO RUSSIA"></h2>
+            <h3 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/campaign/yellfor-soccer-heading.png" alt="サッカー日本代表"></h3>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge" target="_blank"><img src="/assets/sp/images/w_samurai/soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
-              <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/soccer-btn_live.png" alt="試合速報 3月23日 UAE戦 COMING SOON"></li>
+              <li class="yellfor__btns__item"><a href="hoge"><img src="/assets/sp/images/w_samurai/campaign/yellfor-soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/campaign/yellfor-soccer-btn_live.png" alt="試合速報 3月3日 UAE戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
 
           <div class="yellfor__section yellfor--baseball">
-            <h2 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/baseball-heading.png" alt="野球日本代表 2017 WORLD BASEBALL CLASSIC &tm;"></h2>
+            <h3 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/campaign/yellfor-baseball-heading.png" alt="野球日本代表"></h3>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge" target="_blank"><img src="/assets/sp/images/w_samurai/baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
-              <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
+              <li class="yellfor__btns__item"><a href="hoge"><img src="/assets/sp/images/w_samurai/campaign/yellfor-baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/campaign/yellfor-baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
         </div><!-- /.yellfor -->
-
-        <aside class="bnr-campaign"><a href="/w_samurai/campaign/"><img src="/assets/sp/images/w_samurai/bnr-campaign.png" alt="サッカー賞品・野球賞品 プレゼントキャンペーン プレゼント応募はこちら"></a></aside>
 
         <?php
         // app in webview 時に .head-sec を非表示にする
@@ -107,9 +176,7 @@
         endif;
         // -----------------------------------------
         ?>
-
-        <p class="note">&copy;JFA / Trademarks, copyrights, names, images and other proprietary materials are used with permission of World Baseball Classic, Inc.</p>
-      </section><!-- /.main-sec -->
+      </section>
     </div>
   </div><!-- /.body-sec -->
 
