@@ -3,6 +3,26 @@
 <head>
 	<meta charset="UTF-8">
 	<title>応募フォーム</title>
+</head>
+<body>
+
+	<div id="error" style="color : red;"></div>
+	<div id="success" style="color : green;"></div>
+
+	<form id="form" name="form">
+		<h2>応募コース</h2>
+		<select name="prize">
+			<option value="baseball">野球</option>
+			<option value="soccer">サッカー</option>
+		</select>
+
+		<h2>メールアドレス</h2>
+
+		<input type="email" name="mail">
+
+		<button type="button" onclick="sendForm();">送信する</button>
+	</form>
+
 	<script>
 		function EncodeHTMLForm( data )
 		{
@@ -40,7 +60,7 @@
 					}
 				}
 			};
-			xmlHttpRequest.open('POST', 'support.php');
+			xmlHttpRequest.open('POST', '/api/1531ws/support.php');
 			xmlHttpRequest.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 			xmlHttpRequest.send(EncodeHTMLForm({
 				prize	: document.form.prize.value,
@@ -48,25 +68,5 @@
 			}));
 		}
 	</script>
-</head>
-<body>
-	<h1>応募フォーム</h1>
-
-	<div id="error" style="color : red;"></div>
-	<div id="success" style="color : green;"></div>
-
-	<form id="form" name="form">
-		<h2>応募コース</h2>
-		<select name="prize">
-			<option value="baseball">野球</option>
-			<option value="soccer">サッカー</option>
-		</select>
-
-		<h2>メールアドレス</h2>
-
-		<input type="email" name="mail">
-
-		<button type="button" onclick="sendForm();">送信する</button>
-	</form>
 </body>
 </html>
