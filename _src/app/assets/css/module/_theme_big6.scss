@@ -1,11 +1,11 @@
 @import "../../../../scss/asset";
 @import "../sprite";
 
-// Theme Dark
+// Theme Big6
 //
-// design module Dark theme
+// design module Big6 theme
 //
-// Styleguide 2.13.0
+// Styleguide 2.14.0
 
 $key-color: #cc141d;
 $border-color: #585959;
@@ -333,16 +333,56 @@ $border-color: #585959;
         padding-top: 4px;
         padding-bottom: 4px;
         border: 1px solid $key-color;
+        background-color: #000;
         border-radius: 3px;
         font-weight: bold;
         text-align: center;
+        transition: background-color 0.2s;
       }
 
       span {
         display: inline-block;
         line-height: 1;
-        padding-left: 20px;
-        background: url(/assets/images/big6/icon-highlight_on.png) 0 center no-repeat;
+
+        &:before {
+          content: '';
+          position: relative;
+          top: -1px;
+          display: inline-block;
+          width: 14px;
+          height: 14px;
+          margin-right: 4px;
+          background: url(/assets/images/big6/icon-highlight_on.png) 0 0 no-repeat;
+          vertical-align: middle;
+          @include hide-text;
+        }
+      }
+
+      a:hover {
+        background-color: $key-color;
+
+        span:before {
+          background-position: 0 -14px;
+        }
+      }
+
+      a.disable {
+        cursor: default;
+        border-color: #333;
+        color: #333;
+
+        span:before {
+          background-image: url(/assets/images/big6/icon-highlight_off.png);
+        }
+
+        &:hover {
+          border-color: #333;
+          background-color: #000;
+
+          span:before {
+            background-position: 0 0;
+          }
+        }
       }
     } // .matches-btn-highlight
 
@@ -634,6 +674,10 @@ $border-color: #585959;
     // .big6-summary-banner
     &-banner {
       margin-top: 38px;
+
+      a:hover {
+        @include over-opacity;
+      }
     }
   }
 }
