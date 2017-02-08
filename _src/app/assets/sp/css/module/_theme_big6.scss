@@ -87,10 +87,6 @@ $border-color: #585959;
           background: none;
           white-space: nowrap;
         }
-
-        td:last-child {
-          padding-right: 0;
-        }
       }
 
       &.for-detail .matches-tbody {
@@ -125,14 +121,18 @@ $border-color: #585959;
         background-size: 1px 70%;
         color: #fff;
         font-size: fz(20/2);
+
+        &:last-child {
+          padding-right: 0;
+        }
       }
     }
 
     // .matches-week
     &-week {
-      width: 4em;
-      padding-right: (20/2)+px !important;
-      padding-left: (20/2)+px !important;
+      width: 2.5em;
+      padding-right: perCalc(20, 750) !important;
+      padding-left: 0 !important;
       text-align: center;
       font-weight: bold;
     }
@@ -270,6 +270,7 @@ $border-color: #585959;
   .standings {
     background-color: #000;
     padding-top: (40/2)+px;
+    padding-bottom: (40/2)+px;
 
     // .standings-heading
     &-heading {
@@ -435,7 +436,7 @@ $border-color: #585959;
 .whole.theme_big6 {
   .misc {
     background-color: #000;
-    padding: (40/2)+px 0;
+    padding-bottom: (40/2)+px;
 
     // .misc-heading
     &-heading {

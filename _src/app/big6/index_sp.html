@@ -29,78 +29,13 @@
   <script src="/assets/js/libs/vendor.min.js"></script>
   <script src="/assets/js/libs/vendor.react.js"></script>
 </head>
-<body>
+<body class="appbnr-disable">
 <div class="whole theme_big6">
-  <div class="header-sticky">
-    <header class="head-sec">
-      <div class="head-sec-inner">
-        <h1><a href="/">SPORTS BULL</a></h1>
-
-        <div id="menu-opener" class="menu-opener">
-          <a id="side-menu-toggle" class="has-notification" href="#"><span></span><span></span><span></span></a>
-        </div>
-
-        <aside class="f-right clearfix">
-          <a class="head-search-opener" href="#">記事検索</a>
-
-          <div id="user-profile-container">
-            <div class="user">
-              <div class="preference">
-                <a class="preference-opener" href="#">
-                  <span class="preference-avatar"><img src="assets/images/dummy/avatar-40x40.jpg" alt=""></span>
-                </a>
-                <span class="preference-num">88</span>
-              </div><!-- /.preference -->
-            </div><!-- /.user -->
-          </div><!--/.user-profile-container-->
-        </aside>
-      </div><!-- /.head-sec-inner -->
-    </header><!-- /.head-sec -->
-
-    <div class="head-search disble">
-      <form action="">
-        <input id="head-search" nama="head-search" type="text" placeholder="記事を検索">
-        <input type="submit" value="検索">
-      </form>
-    </div><!-- /.head-search -->
-
-    <nav class="gnav-sec">
-      <div class="gnav-sec-inner">
-        <ul class="gnav">
-          <li class="gnav-home current"><a href="hoge">一面</a></li>
-          <li class="gnav-crazy"><a href="hoge">CRAZY</a></li>
-          <li class="gnav-all"><a href="hoge">すべて</a></li>
-          <li class="gnav-baseball"><a href="hoge">野球</a></li>
-          <li class="gnav-soccer"><a href="hoge">サッカー</a></li>
-          <li class="gnav-basketball"><a href="hoge">バスケットボール</a></li>
-          <li class="gnav-golf"><a href="hoge">ゴルフ</a></li>
-          <li class="gnav-tennis"><a href="hoge">テニス</a></li>
-          <li class="gnav-battle"><a href="hoge">相撲・格闘技</a></li>
-          <li class="gnav-volleyball"><a href="hoge">バレーボール</a></li>
-          <li class="gnav-rugby"><a href="hoge">ラグビー</a></li>
-          <li class="gnav-americanfootball"><a href="hoge">アメフト</a></li>
-          <li class="gnav-athletics"><a href="hoge">陸上競技</a></li>
-          <li class="gnav-swimming"><a href="hoge">水泳</a></li>
-          <li class="gnav-pingpong"><a href="hoge">卓球</a></li>
-          <li class="gnav-motorsports"><a href="hoge">モータースポーツ</a></li>
-          <li class="gnav-extremesports"><a href="hoge">エクストリームスポーツ</a></li>
-          <li class="gnav-wintersports"><a href="hoge">ウィンタースポーツ </a></li>
-          <li class="gnav-disabledsports"><a href="hoge">障害者スポーツ</a></li>
-          <li class="gnav-etc"><a href="hoge">その他競技</a></li>
-          <li class="gnav-business"><a href="hoge">スポーツビジネス</a></li>
-        </ul><!-- /.gnav -->
-      </div><!-- /.gnav-sec-inner -->
-    </nav><!-- /.gnav-sec -->
-
-    <div class="dialogue-notice error hide">
-      <div class="dialogue-notice-inner">
-        <div class="dialogue-notice-info">
-          <p>パスワードが違います</p>
-        </div>
-        <div class="dialogue-notice-btn-close"><a href="#">CLOSE</a></div>
-      </div>
-    </div><!-- /.dialogue-notice -->
-  </div><!-- /.header-sticky -->
+  <header class="head-sec">
+    <div class="head-sec-inner">
+      <h1><a href="/">SPORTS BULL</a></h1>
+    </div><!-- /.head-sec-inner -->
+  </header><!-- /.head-sec -->
 
   <div class="body-sec">
     <div class="body-sec-inner">
@@ -115,16 +50,74 @@
 
         <section class="matches">
           <h2 class="matches-heading">直近の試合日程・結果</h2>
-          <table class="matches-list for-category">
+          <table class="matches-list for-detail">
             <thead class="matches-thead">
               <tr>
-                <th>試合日</th>
+                <th colspan="2">試合日</th>
                 <th>第1試合</th>
                 <th>第2試合</th>
               </tr>
             </thead>
             <tbody class="matches-tbody">
               <tr>
+                <td class="matches-week" rowspan="2">第1週</td>
+                <td class="matches-date-unit">
+                  <span class="matches-date">3/23 (土)</span><br />
+                  <span class="matches-time">11:00</span>
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="hosei">法大</i></li>
+                    <li><span class="result">3 - 4</span></li>
+                    <li><i class="rikkio">立大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="tokyo">東大</i></li>
+                    <li><span class="result">2 - 1</span></li>
+                    <li><i class="waseda">早大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+              </tr>
+              <tr>
+                <td class="matches-date-unit">
+                  <span class="matches-date">3/24 (日)</span><br />
+                  <span class="matches-time">11:00</span>
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="keio">慶大</i></li>
+                    <li><span class="result">88 - 88</span></li>
+                    <li><i class="meiji">明大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="rikkio">立大</i></li>
+                    <li><span class="result">vs</span></li>
+                    <li><i class="waseda">早大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a class="disable" href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+              </tr>
+              <tr>
+                <td class="matches-week" rowspan="2">第2週</td>
                 <td class="matches-date-unit">
                   <span class="matches-date">3/23 (土)</span><br />
                   <span class="matches-time">11:00</span>
@@ -182,10 +175,6 @@
               </tr>
             </tbody>
           </table><!-- /.matches-list -->
-
-          <div class="matches-btn-allmatches">
-            <a href="/big6/">全試合日程を見る</a>
-          </div>
         </section><!-- /.matches -->
 
         <section class="standings">
@@ -269,107 +258,13 @@
             </tbody>
           </table>
         </section><!-- /.standings -->
-
-        <section class="misc">
-          <h2 class="misc-heading">各大学の動画・ニュース</h2>
-          <ul class="misc-list">
-            <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/sp/images/big6/icon-hosei.png" alt="法政大学"></a></li>
-            <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/sp/images/big6/icon-waseda.png" alt="早稲田大学"></a></li>
-            <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/sp/images/big6/icon-rikkio.png" alt="立教大学"></a></li>
-            <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/sp/images/big6/icon-keio.png" alt="慶応大学"></a></li>
-            <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/sp/images/big6/icon-tokyo.png" alt="東京大学"></a></li>
-            <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/sp/images/big6/icon-meiji.png" alt="明治大学"></a></li>
-          </ul>
-        </section><!-- /.misc -->
-
-        <div class="category-container">
-          <div class="latest">
-            <div class="latest-heading">
-              <h2 class="latest-heading-title">新着記事</h2>
-            </div>
-
-            <div class="board">
-              <div class="board-item">
-                <a class="post" href="hoge">
-                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_1.jpg') center center / cover no-repeat;">
-                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
-                    <img src="/assets/sp/images/common/thumb-16x9-play-s.png" alt="" class="post-thumb-overlay-movie">
-                  </figure>
-                  <div class="post-data">
-                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
-                    <i class="post-label_recommend">おすすめ記事</i>
-                    <p class="post-category">野球</p>
-                    <p class="post-date">12月18日(金) 22:04</p>
-                  </div><!-- /.post-data -->
-                </a>
-              </div>
-              <div class="board-item">
-                <a class="post" href="hoge">
-                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_2.jpg') center center / cover no-repeat;">
-                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
-                  </figure>
-                  <div class="post-data">
-                    <h3 class="post-heading">タイトル１行の場合タイトルが入ります</h3>
-                    <i class="post-label_recommend">おすすめ記事</i>
-                    <p class="post-category">格闘技 オリンピック</p>
-                    <p class="post-date">12月18日(金) 22:04</p>
-                  </div><!-- /.post-data -->
-                </a>
-              </div>
-              <div class="board-item">
-                <a class="post" href="hoge">
-                  <figure class="post-thumb">
-                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
-                  </figure>
-                  <div class="post-data">
-                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
-                    <p class="post-category">エクストリームスポーツ</p>
-                    <p class="post-date">12月18日(金) 22:04</p>
-                  </div><!-- /.post-data -->
-                </a>
-              </div>
-              <div class="board-item">
-                <a class="post" href="hoge">
-                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_3.jpg') center center / cover no-repeat;">
-                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
-                  </figure>
-                  <div class="post-data">
-                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
-                    <p class="post-category">ラグビー</p>
-                    <p class="post-date">12月18日(金) 22:04</p>
-                  </div><!-- /.post-data -->
-                </a>
-              </div>
-              <div class="board-item">
-                <a class="post" href="hoge">
-                  <figure class="post-thumb" style="background: url('/assets/sp/images/dummy/thumb-340x191_4.jpg') center center / cover no-repeat;">
-                    <img src="/assets/sp/images/common/thumb-16x9.png" alt="">
-                  </figure>
-                  <div class="post-data">
-                    <h3 class="post-heading">全角３８文字タイトルが入りますタイトルが入りますタイトルが入りますタイトル…</h3>
-                    <p class="post-category">モータースポーツ</p>
-                    <p class="post-date">12月18日(金) 22:04</p>
-                  </div><!-- /.post-data -->
-                </a>
-              </div>
-            </div><!-- /.board -->
-          </div><!-- /.latest -->
-        </div><!-- /.category-container -->
       </section><!-- /.main-sec -->
 
     </div>
   </div><!-- /.body-sec -->
 
-
   <footer class="foot-sec">
     <div class="foot-sec-inner">
-      <nav class="foot-breadCrumb">
-        <ol itemscope itemtype="http://schema.org/breadCrumbList">
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="category.php"><span itemprop="name">海外サッカー</span><meta itemprop="position" content="2" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="p.php"><span itemprop="name">パナソニックのオリンピック・アクティベーション 「Active Learning Camp」の可能性</span><meta itemprop="position" content="3" /></a></li>
-        </ol>
-      </nav><!-- /.foot-breadCrumb -->
 
       <div class="foot-pr">
         <div class="foot-pr-inner">
@@ -412,39 +307,6 @@
       <p class="copyright">Copyright &copy; SPORTS BULL All rights reserved.</p>
     </div><!-- /.foot-sec-inner -->
   </footer><!-- /.foot-sec -->
-
-  <div id="side-menu-container">
-    <div id="side-menu-bg"></div>
-    <div id='side-menu' data-role='panel' data-position='left' data-display='push'>
-      <ul id="side-menu-list">
-        <li class="ad"><img src="/assets/sp/images/dummy/side-bnr.jpg" alt=""></li>
-
-        <li id="side-menu-service">
-          <ul>
-            <!-- Service Specific Menu -->
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-home" href="#"><i></i>スポーツブルトップへ</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-mypage" href="#"><i></i>マイページ</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-config" href="#"><i></i>設定</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-logout" href="#"><i></i>ログアウト</a></li>
-            <li class="side-menu-ut-nav"><a class="side-menu-ut-nav-link side-menu-ut-nav-about" href="#"><i></i>スポーツブルとは</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <!-- Syn. Service List -->
-          <div id='synapse-service-list-outer-box' style='display: none'>
-            <ul id='synapse-service-list'>
-              <li id="synapse-service-list-title">おすすめサービス</li>
-            </ul>
-          </div>
-
-          <!-- Syn. Logo -->
-          <div id="synapse-logo-box" class="synapse_logo" style='display: none'></div>
-        </li>
-
-      </ul>
-    </div><!--/#side-menu-->
-  </div><!--/#side-menu-container-->
 
 </div><!-- /.whole -->
 <script src="/assets/js/bundle/main.bundle.js"></script>
