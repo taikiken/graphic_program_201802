@@ -37,8 +37,8 @@
     &__heading {
       width: perCalc(646, 750);
       margin-right: auto;
-      padding-bottom: perCalc(440, 750);
       margin-left: auto;
+      padding-bottom: perCalc(440, 750);
     }
   }  // .summary
 
@@ -49,6 +49,7 @@
   // .yellfor
   .yellfor {
     letter-spacing: ls(inline-block);
+    vertical-align: top;
 
     // .yellfor__section
     &__section {
@@ -56,6 +57,7 @@
       width: 50%;
       padding-right: perCalc(15, 375);
       padding-left: perCalc(15, 375);
+      letter-spacing: normal;
     }
 
     // .yellfor__heading
