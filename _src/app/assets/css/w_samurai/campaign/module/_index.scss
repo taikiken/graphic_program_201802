@@ -213,6 +213,10 @@
         // .guidance__bnr__btn
         &__btn {
           margin-top: 12px;
+
+          a:hover {
+            @include over-opacity;
+          }
         }
       }
     } // .guidance
