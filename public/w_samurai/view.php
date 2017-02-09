@@ -5,17 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=1280">
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
-
-  <title>サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL</title>
-  <meta name="apple-itunes-app" content="app-id=1086719653">
-  <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
-  <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+  <title>W侍 日本代表特集 | SPORTS BULL</title>
+  <meta name="description" content="サッカー &amp; 野球 日本代表公式。W侍 全試合ハイライト動画 &amp; 試合速報配信をスポーツブルで。">
+  <meta name="keywords" content="サッカー, 野球, 日本代表, W侍, ハイライト動画, 試合速報, スポーツ, メディア, ニュース, 動画, sports, media">
   <!-- sns ogp -->
-  <meta property="og:title" content="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL">
+  <meta property="og:title" content="W侍 日本代表特集 | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/w_samurai/">
-  <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
+  <meta property="og:description" content="サッカー &amp; 野球 日本代表公式。W侍 全試合ハイライト動画 &amp; 試合速報配信をスポーツブルで。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@sportsbull_jp">
@@ -54,7 +52,6 @@
    ga('send', 'pageview');
 
   </script>
-
 </head>
 <body>
 <div id="whole" class="whole theme_newdark w_samurai">
@@ -68,9 +65,32 @@
     <div class="body-sec-inner">
 
       <section class="main-sec">
+        <div class="summary">
+          <h1 class="summary__heading"><img src="/assets/images/w_samurai/heading.png" alt="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト"></h1>
+        </div><!-- /.summary -->
 
-        PCメインコンテンツ
+        <div class="yellfor">
+          <div class="yellfor__section yellfor--soccer">
+            <h2 class="yellfor__heading"><img src="/assets/images/w_samurai/soccer-heading.png" alt="サッカー日本代表 アジア最終予選 - ROAD TO RUSSIA"></h2>
+            <ul class="yellfor__btns">
+              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90825/" target="_blank"><img src="/assets/images/w_samurai/soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><img src="/assets/images/w_samurai/soccer-btn_live.png" alt="試合速報 3月23日 UAE戦 COMING SOON"></li>
+            </ul><!-- /.yellfor__btns -->
+          </div><!-- /.yellfor__section -->
 
+          <div class="yellfor__section yellfor--baseball">
+            <h2 class="yellfor__heading"><img src="/assets/images/w_samurai/baseball-heading.png" alt="野球日本代表 2017 WORLD BASEBALL CLASSIC &tm;"></h2>
+            <ul class="yellfor__btns">
+              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90822/" target="_blank"><img src="/assets/images/w_samurai/baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><img src="/assets/images/w_samurai/baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
+            </ul><!-- /.yellfor__btns -->
+          </div><!-- /.yellfor__section -->
+        </div><!-- /.yellfor -->
+
+        <aside class="bnr-campaign"><a href="/w_samurai/campaign/"><img src="/assets/images/w_samurai/bnr-campaign.png" alt="サッカー賞品・野球賞品 プレゼントキャンペーン プレゼント応募はこちら"></a></aside>
+        <aside class="bnr-app"><a href="/about/" target="_blank"><img src="/assets/images/w_samurai/bnr-app.png" alt="スポーツブルアプリをダウンロード"></a></aside>
+
+        <p class="note">&copy;JFA / Trademarks, copyrights, names, images and other proprietary materials are used with permission of World Baseball Classic, Inc.</p>
       </section><!-- /.main-sec -->
 
       <section class="side-sec">
@@ -158,7 +178,7 @@
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
           <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">TOP</span><meta itemprop="position" content="1" /></a></li>
-          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="p.php"><span itemprop="name">【W侍】サッカー・野球 日本代表戦 全試合ハイライト / 試合速報配信</span><meta itemprop="position" content="3" /></a></li>
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="./"><span itemprop="name">W侍 日本代表特集</span><meta itemprop="position" content="2" /></a></li>
         </ol>
       </nav><!-- /.foot-breadCrumb -->
 
@@ -252,7 +272,8 @@ if ($page['apiRoot'] != '') :
 }());
 </script>
 <?php endif; ?>
-  <script src="/assets/js/samurai.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
+<script src="/assets/js/samurai.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>

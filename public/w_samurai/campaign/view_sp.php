@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -8,16 +8,16 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <title>【W侍】ダブル侍キャンペーン | SPORTS BULL</title>
+  <title>W侍 プレゼントキャンペーン | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
-  <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
-  <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+  <meta name="description" content="スポーツブルで日本代表を応援。サッカー &amp; 野球賞品 プレゼントキャンペーン。">
+  <meta name="keywords" content="サッカー, 野球, 日本代表, W侍, プレゼント, キャンペーン, スポーツ, メディア, ニュース, 動画, sports, media">
   <!-- sns ogp -->
-  <meta property="og:title" content="【W侍】ダブル侍キャンペーン | SPORTS BULL">
+  <meta property="og:title" content="W侍 プレゼントキャンペーン | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/w_samurai/">
-  <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
+  <meta property="og:url" content="https://sportsbull.jp/w_samurai/campaign/">
+  <meta property="og:description" content="スポーツブルで日本代表を応援。サッカー &amp; 野球賞品 プレゼントキャンペーン。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@sportsbull_jp">
@@ -30,7 +30,7 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <link rel="canonical" href="https://sportsbull.jp/w_samurai/">
+  <link rel="canonical" href="https://sportsbull.jp/w_samurai/campaign/">
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php
@@ -66,7 +66,6 @@
    ga('send', 'pageview');
 
   </script>
-
 </head>
 <body class="appbnr-disable">
 <div class="whole w_samurai">
@@ -167,7 +166,7 @@
           <div class="yellfor__section yellfor--soccer">
             <h3 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/campaign/yellfor-soccer-heading.png" alt="サッカー日本代表"></h3>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge"><img src="/assets/sp/images/w_samurai/campaign/yellfor-soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90825/"><img src="/assets/sp/images/w_samurai/campaign/yellfor-soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
               <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/campaign/yellfor-soccer-btn_live.png" alt="試合速報 3月3日 UAE戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
@@ -175,7 +174,7 @@
           <div class="yellfor__section yellfor--baseball">
             <h3 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/campaign/yellfor-baseball-heading.png" alt="野球日本代表"></h3>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge"><img src="/assets/sp/images/w_samurai/campaign/yellfor-baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90822/"><img src="/assets/sp/images/w_samurai/campaign/yellfor-baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
               <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/campaign/yellfor-baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->

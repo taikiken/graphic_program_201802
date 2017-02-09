@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <?php echo $page['og_type']; ?>: http://ogp.me/ns/<?php echo $page['og_type']; ?>#">
   <meta charset="UTF-8">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -8,16 +8,16 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <title>サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL</title>
+  <title>W侍 日本代表特集 | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
-  <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
-  <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
+  <meta name="description" content="サッカー &amp; 野球 日本代表公式。W侍 全試合ハイライト動画 &amp; 試合速報配信をスポーツブルで。">
+  <meta name="keywords" content="サッカー, 野球, 日本代表, W侍, ハイライト動画, 試合速報, スポーツ, メディア, ニュース, 動画, sports, media">
   <!-- sns ogp -->
-  <meta property="og:title" content="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト / 試合速報配信中！ | SPORTS BULL">
+  <meta property="og:title" content="W侍 日本代表特集 | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/w_samurai/">
-  <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
+  <meta property="og:description" content="サッカー &amp; 野球 日本代表公式。W侍 全試合ハイライト動画 &amp; 試合速報配信をスポーツブルで。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@sportsbull_jp">
@@ -66,7 +66,6 @@
    ga('send', 'pageview');
 
   </script>
-
 </head>
 <body class="appbnr-disable">
 <div class="whole w_samurai">
@@ -96,7 +95,7 @@
           <div class="yellfor__section yellfor--soccer">
             <h2 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/soccer-heading.png" alt="サッカー日本代表 アジア最終予選 - ROAD TO RUSSIA"></h2>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge" target="_blank"><img src="/assets/sp/images/w_samurai/soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90825/" target="_blank"><img src="/assets/sp/images/w_samurai/soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
               <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/soccer-btn_live.png" alt="試合速報 3月23日 UAE戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
@@ -104,7 +103,7 @@
           <div class="yellfor__section yellfor--baseball">
             <h2 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/baseball-heading.png" alt="野球日本代表 2017 WORLD BASEBALL CLASSIC &tm;"></h2>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="hoge" target="_blank"><img src="/assets/sp/images/w_samurai/baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90822/" target="_blank"><img src="/assets/sp/images/w_samurai/baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
               <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
@@ -207,6 +206,7 @@ if (!$from_webview) :
 endif;
 // -----------------------------------------
 ?>
+
 <script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
