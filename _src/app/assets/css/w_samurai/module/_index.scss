@@ -13,16 +13,15 @@
   }
 
   .body-sec {
-    background: url(/assets/sp/images/w_samurai/bg.png) center 0 repeat-y;
   }
 
   .body-sec-inner {
-    background: transparent url(/assets/sp/images/w_samurai/kv.png) center 0 no-repeat;
-    background-size: 100%;
   }
 
   .main-sec {
-    padding-bottom: (30/2)+px;
+    margin-top: 30px;
+    padding-bottom: 20px;
+    background: url(/assets/images/w_samurai/bg.png) center 0 repeat-y;
   }
 
 
@@ -31,14 +30,13 @@
 
   // .summary
   .summary {
-    padding-top: perCalc(38, 750);
+    height: 660px;
+    padding-top: 25px;
+    background: url(/assets/images/w_samurai/kv.png) center 0 no-repeat;
 
     // .summary__heading
     &__heading {
-      width: perCalc(646, 750);
-      margin-right: auto;
-      margin-left: auto;
-      padding-bottom: perCalc(440, 750);
+      text-align: center;
     }
   }  // .summary
 
@@ -48,34 +46,39 @@
 
   // .yellfor
   .yellfor {
+    margin-top: -30px;
     letter-spacing: ls(inline-block);
-    vertical-align: top;
 
     // .yellfor__section
     &__section {
       display: inline-block;
       width: 50%;
-      padding-right: perCalc(15, 375);
-      padding-left: perCalc(15, 375);
       letter-spacing: normal;
+      text-align: center;
+      vertical-align: top;
     }
 
     // .yellfor__heading
-    &__heading {
-      text-align: center;
-
-      img {
-        width: (310/2)+px;
-      }
-    }
+    &__heading {}
 
     // .yellfor__btns
     &__btns {
-      margin-top: (16/2)+px;
+      margin-top: 20px;
 
       // .yellfor__btns__item
+      &__item {
+        width: 324px;
+        margin: 0 auto;
+        // background-color: #fff;
+        // border-radius: 4px;
+
+        a:hover {
+          @include over-opacity;
+        }
+      }
+
       &__item + .yellfor__btns__item {
-        margin-top: (26/2)+px;
+        margin-top: 20px;
       }
     }
   } // .yellfor
@@ -88,18 +91,23 @@
   // .bnr-app
   .bnr-campaign,
   .bnr-app {
-    width: perCalc(690, 750);
-    margin: (30/2)+px auto 0;
+    margin-top: 30px;
+    text-align: center;
+
+    a:hover {
+      @include over-opacity;
+    }
   }
+
 
 
 
 
   // .note
   .note {
-    width: perCalc(690, 750);
-    margin: (30/2)+px auto 0;
+    width: 688px;
+    margin: 20px auto 0;
     color: #666;
-    font-size: fz(16/2);
+    font-size: fz(10);
   }
 }
