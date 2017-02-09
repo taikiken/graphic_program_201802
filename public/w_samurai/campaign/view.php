@@ -163,9 +163,9 @@ endif;
 ?>
 <?php
 if (0) :
-//picks.bundle.js 不要
+//w_samurai.bundle.js 不要
 ?>
-<script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/w_samurai.bundle.js?v=<?php echo $page['version']; ?>"></script>
 <?php endif; ?>
 </body>
 </html>
