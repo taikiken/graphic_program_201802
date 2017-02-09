@@ -1,0 +1,272 @@
+@import "../../../../../../scss/asset";
+
+// index
+//
+// design module index
+
+.w_samurai {
+
+  // index common style
+
+  .head-sec {
+    // background-color: #fff;
+  }
+
+  .body-sec {
+  }
+
+  .body-sec-inner {
+  }
+
+  .main-sec {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    background: url(/assets/images/w_samurai/bg.png) center 0 repeat-y;
+  }
+
+
+
+
+
+  // .summary
+    .summary {
+      height: 660px;
+      padding-top: 40px;
+      background: url(/assets/images/w_samurai/campaign/bg.png) center 0 no-repeat;
+
+      // .summary__heading
+      &__heading {
+        text-align: center;
+      }
+
+      // .summary__copy
+      &__copy {
+        margin-top: 20px;
+        text-align: center;
+      }
+    }  // .summary
+
+
+
+
+
+    // .gift
+    .gift {
+      margin-top: -275px;
+      letter-spacing: ls(inline-block);
+
+      // .gift__section
+      &__section {
+        display: inline-block;
+        width: 50%;
+        letter-spacing: normal;
+        vertical-align: top;
+      }
+
+      // .gift--soccer
+      &--soccer {}
+
+      // .gift--baseball
+      &--baseball {}
+
+      // .gift__text
+      &__text {
+        margin-top: 12px;
+        color: #fff;
+        font-size: fz(22);
+        text-align: center;
+      }
+    } // .gift
+
+
+
+
+
+    // .guidance
+    .guidance {
+      width: 688px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+
+      // .guidance__item
+      &__item {
+        padding-top: 40px;
+        letter-spacing: ls(inline-block);
+
+        dt, dd {
+          display: inline-block;
+          letter-spacing: normal;
+          vertical-align: top;
+          color: #fff;
+        }
+
+        dt {
+          width: perCalc(110, 688);
+        }
+
+        dd {
+          width: perCalc(578, 688);
+        }
+
+        & + .guidance__item {
+          margin-top: 28px;
+          padding-top: 28px;
+          border-top: 1px solid #1f2e4a;
+        }
+      }
+
+      // .guidance__heading
+      &__heading {
+        font-weight: bold;
+        font-size: fz(16);
+      }
+
+      // .guidance--prize__body
+      &--prize__body {
+        & + .guidance--prize__body {
+          margin-top: 28px;
+          padding-top: 28px;
+          border-top: 1px solid #1f2e4a;
+        }
+
+        .heading {
+          display: inline-block;
+          padding: 10px 20px;
+          border-width: 2px;
+          border-style: solid;
+          border-radius: 5px;
+          font-weight: bold;
+          font-size: fz(18);
+        }
+
+        .period {
+          display: inline-block;
+          margin-left: 10px;
+          font-weight: bold;
+          font-size: fz(16);
+          vertical-align: middle;
+        }
+
+        .text {
+          margin-top: 20px;
+          font-size: fz(16);
+
+          .note {
+            font-size: fs(12, 16);
+          }
+        }
+      }
+
+      // .guidance--prize--baseball
+      &--prize--baseball {
+        .heading {
+          color: #c7b147;
+          border-color: #c7b147;
+        }
+
+        .period {
+          color: #c7b147;
+        }
+      }
+
+      // .guidance--prize--soccer
+      &--prize--soccer {
+        .heading {
+          color: #cc141d;
+          border-color: #cc141d;
+        }
+
+        .period {
+          color: #cc141d;
+        }
+      }
+
+      // .guidance--term
+      &--term {
+        p {
+          font-size: fz(16);
+        }
+      }
+
+      // .guidance--requirements
+      &--requirements {
+        p {
+          font-size: fz(16);
+        }
+      }
+
+      // .guidance__bnr
+      &__bnr {
+        padding: 30px 0;
+        text-align: center;
+
+        // .guidance__bnr__heading
+        &__heading {
+          // color: #fff;
+          // font-weight: bold;
+          // font-size: fz(26/2);
+          // white-space: nowrap;
+        }
+
+        // .guidance__bnr__btn
+        &__btn {
+          margin-top: 12px;
+        }
+      }
+    } // .guidance
+
+
+
+
+
+    // .yellfor
+    .yellfor {
+      margin-top: 30px;
+      letter-spacing: ls(inline-block);
+
+      // .yellfor__section
+      &__section {
+        display: inline-block;
+        width: 50%;
+        letter-spacing: normal;
+        text-align: center;
+      }
+
+      // .yellfor__heading
+      &__heading {}
+
+      // .yellfor__btns
+      &__btns {
+        margin-top: 20px;
+
+        // .yellfor__btns__item
+        &__item {
+          a:hover {
+            @include over-opacity;
+          }
+        }
+
+        &__item + .yellfor__btns__item {
+          margin-top: 10px;
+        }
+      }
+    } // .yellfor
+
+
+
+
+
+    // .bnr-campaign
+    // .bnr-app
+    .bnr-campaign,
+    .bnr-app {
+      margin-top: 30px;
+      text-align: center;
+
+      a:hover {
+        @include over-opacity;
+      }
+    }
+}
