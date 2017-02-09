@@ -92,13 +92,9 @@
           <?php
           // ------------------------------------
           // sidebar recommend, オススメ記事
-          if (
-            $page['template'] == 'category' ||
-            $page['template'] == 'search' ||
-            $page['template'] == 'p'
-          ) : ?>
-            <div id="widget-recommend-list-container"></div><!--/recommend-->
-          <?php endif; ?>
+          ?>
+          <div id="widget-recommend-list-container"></div><!--/recommend-->
+
           <div id="widget-ranking-container"></div><!--/ranking-->
 
           <?php if ( $page['category']['slug'] !== 'crazy' ) : ?>
@@ -107,18 +103,11 @@
           </div>
           <?php endif; ?>
 
-          <?php
-          // ------------------------------------
-          // sidebar videos, オススメ動画
-          // crazy 表示しない
-          // https://github.com/undotsushin/undotsushin/issues/862#issuecomment-229568814
-          if ( $page['category']['slug'] !== 'crazy' ) :
-          ?>
           <div id="widget-recommend-container"></div><!--/videos-->
           <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
             <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
           </div>
-          <?php endif; ?>
+
           <?php
           // ------------------------------------
           // sidebar bottom
@@ -142,10 +131,6 @@
 
           </div>
           <?php endif; ?>
-
-          <div id="widget-ranking-container-2"></div><!--/ranking-->
-
-          <div id="widget-recommend-container-2"></div><!--/videos-->
 
         </div><!--/#sidebar-moving-->
       </section><!-- /.side-sec -->
@@ -233,24 +218,25 @@
  * UT.app.App.develop(); を行います
  *
 */
-if ( $page['apiRoot'] != '' ) :
+//print_r('********************');
+//print_r($page['apiRoot']);
+//print_r('********************');
+
+if ($page['apiRoot'] != '') :
   // develop mode
   // dev, stg, local から起動の時のみ script tag を有効にします
 ?>
 <script>
 ( function () {
-
   'use strict';
-
   var UT = self.UT;
   // リクエスト先を変更します
-//  UT.app.App.develop( 'https://dev.sportsbull.jp' );
+  //  UT.app.App.develop( 'https://dev.sportsbull.jp' );
   UT.app.App.develop();
-
-}() );
+}());
 </script>
 <?php endif; ?>
-<script id="js-exe"<?php echo !empty($page['category']['label']) ? ' data-label="' . $page['category']['label'] . '" ' : ''; ?>src="/assets/js/bundle/exe.bundle.js?v=<?php echo $page['version']; ?>"></script>
+  <script src="/assets/js/samurai.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>

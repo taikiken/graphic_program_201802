@@ -64,10 +64,12 @@ $o->connect();
 // ==============================
 $model = new ViewModel($o);
 
-//$page = $model->set(array(
-//  'og_title' => 'BULL\'S PICKS 編集部おすすめ記事',
-//  'og_type'  => 'article',
-//));
+// 以下残します
+// $page に値をセットするため
+$page = $model->set(array(
+  'og_title' => 'XXX',
+  'og_type'  => 'article',
+));
 
 
 // app webview かを `?app=(ios|android)` から判定します
