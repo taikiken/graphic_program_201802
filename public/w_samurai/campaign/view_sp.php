@@ -274,12 +274,7 @@ if (!$from_webview) :
 endif;
 // -----------------------------------------
 ?>
-<?php
-if (0) :
-//w_samurai.bundle.js 不要
-?>
-<script src="/assets/js/w_samurai.bundle.js?v=<?php echo $page['version']; ?>"></script>
-<?php endif; ?>
+<script src="/assets/js/picks.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 </body>
 </html>
