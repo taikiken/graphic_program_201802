@@ -27,21 +27,6 @@
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <link rel="stylesheet" href="/assets/css/w_samurai/ui.css?v=<?php echo $page['version']; ?>">
 
-  <script type='text/javascript'>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-    (function() {
-      var gads = document.createElement('script');
-      gads.async = true;
-      gads.type = 'text/javascript';
-      var useSSL = 'https:' == document.location.protocol;
-      gads.src = (useSSL ? 'https:' : 'http:') +
-        '//www.googletagservices.com/tag/js/gpt.js';
-      var node = document.getElementsByTagName('script')[0];
-      node.parentNode.insertBefore(gads, node);
-    })();
-  </script>
-
   <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -52,12 +37,11 @@
    ga('require', 'linkid');
    ga('require', 'displayfeatures');
    ga('send', 'pageview');
-
   </script>
 
 </head>
 <body>
-<div class="whole theme_newdark w_samurai">
+<div id="whole" class="whole theme_newdark w_samurai">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>
@@ -153,7 +137,7 @@
     </div>
   </div><!-- /.body-sec -->
 
-  <footer class="foot-sec">
+  <footer id="footer-container" class="foot-sec">
     <div class="foot-sec-inner">
       <nav class="foot-breadCrumb">
         <ol itemscope itemtype="http://schema.org/breadCrumbList">
@@ -181,7 +165,7 @@
         </div><!-- /.foot-pr-inner -->
       </div><!-- /.foot-pr -->
 
-      <div class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
+      <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
 
       <div class="fnav-block">
         <nav class="fnav">
