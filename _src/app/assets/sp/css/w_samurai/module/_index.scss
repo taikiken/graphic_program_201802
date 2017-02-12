@@ -17,7 +17,7 @@
   }
 
   .body-sec-inner {
-    background: transparent url(/assets/sp/images/w_samurai/kv.png) center 0 no-repeat;
+    background: transparent url(/assets/sp/images/w_samurai/kv.jpg) center 0 no-repeat;
     background-size: 100%;
   }
 
@@ -31,14 +31,14 @@
 
   // .summary
   .summary {
-    padding-top: perCalc(38, 750);
+    // padding-top: perCalc(38, 750);
+      padding-bottom: perCalc(400, 750);
 
     // .summary__heading
     &__heading {
-      width: perCalc(646, 750);
+      // width: perCalc(646, 750);
       margin-right: auto;
       margin-left: auto;
-      padding-bottom: perCalc(440, 750);
     }
   }  // .summary
 

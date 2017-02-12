@@ -31,8 +31,8 @@
   // .summary
   .summary {
     height: 660px;
-    padding-top: 25px;
-    background: url(/assets/images/w_samurai/kv.png) center 0 no-repeat;
+    // padding-top: 25px;
+    background: url(/assets/images/w_samurai/kv.jpg) center 0 no-repeat;
 
     // .summary__heading
     &__heading {
@@ -46,7 +46,7 @@
 
   // .yellfor
   .yellfor {
-    margin-top: -30px;
+    margin-top: -25px;
     letter-spacing: ls(inline-block);
 
     // .yellfor__section
@@ -63,7 +63,7 @@
 
     // .yellfor__btns
     &__btns {
-      margin-top: 20px;
+      margin-top: 15px;
 
       // .yellfor__btns__item
       &__item {

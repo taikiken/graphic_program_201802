@@ -66,7 +66,7 @@
 
       <section class="main-sec">
         <div class="summary">
-          <h1 class="summary__heading"><img src="/assets/images/w_samurai/heading.png" alt="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト"></h1>
+          <h1 class="summary__heading"><img src="/assets/images/w_samurai/heading.png" alt="【W侍】日本代表特集 サッカー・野球 日本代表公式ハイライト動画 / 試合速報 全試合配信中！"></h1>
         </div><!-- /.summary -->
 
         <div class="yellfor">
@@ -89,8 +89,6 @@
 
         <aside class="bnr-campaign"><a href="/w_samurai/campaign/"><img src="/assets/images/w_samurai/bnr-campaign.png" alt="サッカー賞品・野球賞品 プレゼントキャンペーン プレゼント応募はこちら"></a></aside>
         <aside class="bnr-app"><a href="/about/" target="_blank"><img src="/assets/images/w_samurai/bnr-app.png" alt="スポーツブルアプリをダウンロード"></a></aside>
-
-        <p class="note">&copy;JFA / Trademarks, copyrights, names, images and other proprietary materials are used with permission of World Baseball Classic, Inc.</p>
       </section><!-- /.main-sec -->
 
       <section class="side-sec">

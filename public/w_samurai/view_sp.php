@@ -88,7 +88,7 @@
 
       <section class="main-sec">
         <div class="summary">
-          <h1 class="summary__heading"><img src="/assets/sp/images/w_samurai/heading.png" alt="サッカー・野球 日本代表公式【W侍】日本代表特集 日本戦全試合ハイライト"></h1>
+          <h1 class="summary__heading"><img src="/assets/sp/images/w_samurai/heading.png" alt="【W侍】日本代表特集 サッカー・野球 日本代表公式ハイライト動画 / 試合速報 全試合配信中！"></h1>
         </div><!-- /.summary -->
 
         <div class="yellfor">
@@ -120,8 +120,6 @@
         endif;
         // -----------------------------------------
         ?>
-
-        <p class="note">&copy;JFA / Trademarks, copyrights, names, images and other proprietary materials are used with permission of World Baseball Classic, Inc.</p>
       </section><!-- /.main-sec -->
     </div>
   </div><!-- /.body-sec -->
