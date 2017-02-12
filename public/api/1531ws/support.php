@@ -87,7 +87,7 @@ try {
 
 SPORTS BULL
 https://sportsbull.jp/",
-		"From: noreply@suportsbull.jp"
+		"From: noreply@sportsbull.jp"
 	);
 
 	$result->success = true;
