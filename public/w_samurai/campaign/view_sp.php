@@ -180,16 +180,7 @@
           </div><!-- /.yellfor__section -->
         </div><!-- /.yellfor -->
 
-        <?php
-        // app in webview 時に .head-sec を非表示にする
-        if (!$from_webview) :
-        ?>
-        <aside class="bnr-app"><a href="/about/" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブルアプリをダウンロード"></a></aside>
-        <?php
-        endif;
-        // -----------------------------------------
-        ?>
-      </section>
+      </section><!-- /.main-sec -->
     </div>
   </div><!-- /.body-sec -->
 
