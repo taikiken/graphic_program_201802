@@ -153,7 +153,7 @@
             ?>
           <div class="guidance__bnr">
             <h3 class="guidance__bnr__heading">スポーツブルアプリをダウンロードして応募しよう！</h3>
-            <div class="guidance__bnr__btn"><a href="/about/" target="_blank"><img src="/assets/sp/images/w_samurai/campaign/bnr-app.png" alt="アプリをダウンロードして会員登録しよう！"></a></div>
+            <div class="guidance__bnr__btn"><a href="/about/" target="_blank"><img src="/assets/sp/images/w_samurai/campaign/bnr-app.png" alt="アプリをダウンロードして応募する"></a></div>
           </div><!-- /.guidance__bnr -->
           <?php
           endif;
