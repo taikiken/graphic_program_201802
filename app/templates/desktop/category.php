@@ -33,6 +33,13 @@ if ($page['category']['slug'] == 'all') {
 
   <div class="body-sec-inner">
     <section class="main-sec">
+
+      <?php
+      if ( $page['category']['slug'] ==='big6' ) :
+        include_once __DIR__.'/../big6/desktop/category.php';
+      endif;
+      ?>
+
       <?php
       // 3. ヘッドラインが設定できる
       // @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
