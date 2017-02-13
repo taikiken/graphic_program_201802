@@ -7,3 +7,6 @@ RewriteRule ^ranking$ /api/big6/ranking.php [L]
 
 # schedule
 RewriteRule ^schedule$ /api/big6/schedule.php [L]
+
+# live
+RewriteRule ^live$ /api/big6/live.php [L]
