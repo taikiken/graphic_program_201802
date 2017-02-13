@@ -19,7 +19,8 @@
   }
 
   .main-sec {
-    margin-top: 30px;
+    float: none !important;
+    margin: 30px auto 0;
     padding-bottom: 30px;
     background: url(/assets/images/w_samurai/bg.png) center 0 repeat-y;
   }
@@ -40,7 +41,7 @@
 
       // .summary__copy
       &__copy {
-        margin-top: 20px;
+        // margin-top: 20px;
         text-align: center;
       }
     }  // .summary
@@ -51,7 +52,7 @@
 
     // .gift
     .gift {
-      margin-top: -270px;
+      margin-top: -280px;
       letter-spacing: ls(inline-block);
 
       // .gift__section

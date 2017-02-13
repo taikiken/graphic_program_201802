@@ -102,7 +102,7 @@
 
           <section class="gift__section gift--baseball">
             <h2 class="gift__heading"><img src="/assets/sp/images/w_samurai/campaign/gift-baseball-figure.png" alt="野球日本代表賞"></h2>
-            <p class="gift__text"><strong>ＷＢＣ観戦ペアチケット</strong><br />
+            <p class="gift__text"><strong>野球日本代表観戦ペアチケット</strong><br />
             抽選で15組30名様に<br />
             プレゼント</p>
           </section><!-- /.gift__section -->

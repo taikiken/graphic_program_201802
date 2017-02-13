@@ -19,7 +19,8 @@
   }
 
   .main-sec {
-    margin-top: 30px;
+    float: none !important;
+    margin: 30px auto 0;
     padding-bottom: 20px;
     background: url(/assets/images/w_samurai/bg.png) center 0 repeat-y;
   }
