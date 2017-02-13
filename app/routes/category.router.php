@@ -22,6 +22,10 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     $category           = $app->model->get_category_by_slug($args['category_slug']);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
 
+    if ( $args['category_slug'] === 'big6' ) :
+      $template_classname = $template_classname . ' theme_big6';
+    endif;
+
     $args['page'] = $app->model->set(array(
       'title'              => $category['label'],
       'og_title'           => $category['label'].' | '.$app->model->property('title'),
