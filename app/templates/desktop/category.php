@@ -35,19 +35,6 @@ if ($page['category']['slug'] == 'all') {
     <section class="main-sec">
 
       <?php
-      if ( $page['category']['slug'] ==='big6' ) :
-        include_once __DIR__.'/../big6/desktop/category.php';
-      endif;
-      ?>
-
-      <?php
-      // 3. ヘッドラインが設定できる
-      // @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
-      // @since 2016-09-20
-      // {@link ViewCategory.js}, {@link ComponentCategoryOption.js}
-      ?>
-      <div id="js-headline"></div>
-      <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
       if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
@@ -59,6 +46,14 @@ if ($page['category']['slug'] == 'all') {
       endif;
       // eof: 記事一覧: pc banner
       // ---------------------------------------------------- ?>
+
+      <?php
+      // 3. ヘッドラインが設定できる
+      // @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
+      // @since 2016-09-20
+      // {@link ViewCategory.js}, {@link ComponentCategoryOption.js}
+      ?>
+      <div id="js-headline"></div>
 
       <div class="board-large">
 

@@ -41,6 +41,9 @@ try {
 	//サニタイズ
 	$_REQUEST["prize"] = ($_REQUEST["prize"] === "soccer") ? "soccer" : "baseball";
 
+	$prizeName = ($_REQUEST["prize"] === "soccer") ?
+		"サッカー日本代表賞 / 日本代表 レプリカユニホーム" : "野球日本代表賞 / WBC 2017 試合観戦チケット";
+
 
 	require_once "aws.phar";
 
@@ -74,7 +77,7 @@ try {
 
 ---
 
-選択した賞品 : {$_REQUEST["prize"]}
+選択した賞品 : {$prizeName}
 メールアドレス : {$_REQUEST["mail"]}
 
 ---
