@@ -42,7 +42,7 @@ try {
 	$_REQUEST["prize"] = ($_REQUEST["prize"] === "soccer") ? "soccer" : "baseball";
 
 	$prizeName = ($_REQUEST["prize"] === "soccer") ?
-		"サッカー日本代表賞 / 日本代表 レプリカユニフォーム" : "野球日本代表賞 / WBC 2017 試合観戦チケット";
+		"サッカー日本代表賞 / 日本代表 レプリカユニホーム" : "野球日本代表賞 / WBC 2017 試合観戦チケット";
 
 
 	require_once "aws.phar";
