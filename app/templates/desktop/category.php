@@ -33,13 +33,7 @@ if ($page['category']['slug'] == 'all') {
 
   <div class="body-sec-inner">
     <section class="main-sec">
-      <?php
-      // 3. ヘッドラインが設定できる
-      // @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
-      // @since 2016-09-20
-      // {@link ViewCategory.js}, {@link ComponentCategoryOption.js}
-      ?>
-      <div id="js-headline"></div>
+
       <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
@@ -52,6 +46,14 @@ if ($page['category']['slug'] == 'all') {
       endif;
       // eof: 記事一覧: pc banner
       // ---------------------------------------------------- ?>
+
+      <?php
+      // 3. ヘッドラインが設定できる
+      // @see https://github.com/undotsushin/undotsushin/issues/970#issuecomment-238405645
+      // @since 2016-09-20
+      // {@link ViewCategory.js}, {@link ComponentCategoryOption.js}
+      ?>
+      <div id="js-headline"></div>
 
       <div class="board-large">
 
