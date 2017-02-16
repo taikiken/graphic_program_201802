@@ -1,0 +1,105 @@
+@import "../../../../../../scss_sp/asset";
+
+// index
+//
+// design module index
+
+.w_samurai {
+
+  // index common style
+
+  .head-sec {
+    // background-color: #fff;
+  }
+
+  .body-sec {
+    background: url(/assets/sp/images/w_samurai/bg.png) center 0 repeat-y;
+  }
+
+  .body-sec-inner {
+    background: transparent url(/assets/sp/images/w_samurai/kv.jpg) center 0 no-repeat;
+    background-size: 100%;
+  }
+
+  .main-sec {
+    padding-bottom: (30/2)+px;
+  }
+
+
+
+
+
+  // .summary
+  .summary {
+    // padding-top: perCalc(38, 750);
+      padding-bottom: perCalc(400, 750);
+
+    // .summary__heading
+    &__heading {
+      // width: perCalc(646, 750);
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }  // .summary
+
+
+
+
+
+  // .yellfor
+  .yellfor {
+    letter-spacing: ls(inline-block);
+    vertical-align: top;
+
+    // .yellfor__section
+    &__section {
+      display: inline-block;
+      width: 50%;
+      padding-right: perCalc(15, 375);
+      padding-left: perCalc(15, 375);
+      letter-spacing: normal;
+    }
+
+    // .yellfor__heading
+    &__heading {
+      text-align: center;
+
+      img {
+        width: (310/2)+px;
+      }
+    }
+
+    // .yellfor__btns
+    &__btns {
+      margin-top: (16/2)+px;
+
+      // .yellfor__btns__item
+      &__item + .yellfor__btns__item {
+        margin-top: (26/2)+px;
+      }
+    }
+  } // .yellfor
+
+
+
+
+
+  // .bnr-campaign
+  // .bnr-app
+  .bnr-campaign,
+  .bnr-app {
+    width: perCalc(690, 750);
+    margin: (30/2)+px auto 0;
+  }
+
+
+
+
+  // .note
+  .note {
+    width: perCalc(690, 750);
+    margin: (30/2)+px auto 0;
+    color: #666;
+    font-size: fz(16/2);
+  }
+}

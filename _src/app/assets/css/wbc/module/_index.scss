@@ -1,0 +1,101 @@
+@import "../../../../../scss/asset";
+
+// index
+//
+// design module index
+
+
+
+// base
+
+// 1. layout Base
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+// .word_break {
+//   display: block;
+// }
+
+// .other {
+//   .show-for-pc { display: inherit !important;}
+//   .show-for-sp,
+//   .hide-for-sp { display: none !important;}
+// }
+
+// .mobile {
+//   .show-for-pc,
+//   .hide-for-pc { display: none !important;}
+//   .show-for-sp { display: block !important;}
+// }
+
+// @include screen('large') {
+//   .show-for-large { display: inherit !important;}
+//   .hide-for-large,
+//   .show-for-small { display: none !important;}
+// }
+
+// @include screen('small') {
+//   .show-for-small { display: inherit !important;}
+//   .hide-for-small,
+//   .show-for-large { display: none !important;}
+// }
+
+
+
+
+
+// header
+
+// 2. header section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+@include screen('large') {
+
+}
+
+
+
+
+
+@include screen('small') {
+
+}
+
+
+// footer
+
+// 3. footer section
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+@include screen('large') {
+
+}
+
+
+
+
+
+@include screen('small') {
+
+}
+
+
+
+
+
+
+// body
+
+// 4. body contents
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+@include screen('large') {
+
+}
+
+
+
+
+
+@include screen('small') {
+
+}
