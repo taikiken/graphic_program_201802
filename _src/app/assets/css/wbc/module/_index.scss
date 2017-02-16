@@ -4,98 +4,31 @@
 //
 // design module index
 
+.body-sec {
+  background: url(/assets/images/wbc/bg.jpg) center 0 no-repeat;
+  background-size: contain;
+  background-color: #131d25 !important;
 
-
-// base
-
-// 1. layout Base
-// ----------------------------------------------------------------------------------------------------------------------------------------
-
-// .word_break {
-//   display: block;
-// }
-
-// .other {
-//   .show-for-pc { display: inherit !important;}
-//   .show-for-sp,
-//   .hide-for-sp { display: none !important;}
-// }
-
-// .mobile {
-//   .show-for-pc,
-//   .hide-for-pc { display: none !important;}
-//   .show-for-sp { display: block !important;}
-// }
-
-// @include screen('large') {
-//   .show-for-large { display: inherit !important;}
-//   .hide-for-large,
-//   .show-for-small { display: none !important;}
-// }
-
-// @include screen('small') {
-//   .show-for-small { display: inherit !important;}
-//   .hide-for-small,
-//   .show-for-large { display: none !important;}
-// }
-
-
-
-
-
-// header
-
-// 2. header section
-// ----------------------------------------------------------------------------------------------------------------------------------------
-
-@include screen('large') {
-
+  &:before {
+    background-color: transparent !important;
+  }
 }
 
-
-
-
-
-@include screen('small') {
-
+.body-sec-inner {
+  padding-bottom: 30px;
+  background-color: transparent !important;
 }
 
+.main-sec {
+  margin-top: 40px;
 
-// footer
-
-// 3. footer section
-// ----------------------------------------------------------------------------------------------------------------------------------------
-
-@include screen('large') {
-
+  .heading {
+    margin-bottom: 30px;
+  }
 }
 
-
-
-
-
-@include screen('small') {
-
-}
-
-
-
-
-
-
-// body
-
-// 4. body contents
-// ----------------------------------------------------------------------------------------------------------------------------------------
-
-@include screen('large') {
-
-}
-
-
-
-
-
-@include screen('small') {
-
+.side-sec {
+  .app-bnr:first-child {
+    margin-top: 10px;
+  }
 }
