@@ -219,6 +219,16 @@
         margin-top: (10/2)+px;
       }
     }
+
+    .ios & {
+      .for-ios { display: inherit;}
+      .for-android { display: none;}
+    }
+
+    .android & {
+      .for-ios { display: none;}
+      .for-android { display: inherit;}
+    }
   } // .guidance
 
 
