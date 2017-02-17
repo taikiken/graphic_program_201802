@@ -36,6 +36,10 @@ _docs
 # slim
 /app/logs/*.log
 
+# version - キャッシュ対策 / npm run build で生成される
+/app/.version
+
+
 # s3cmd
 /provision/s3/logs/*.log
 
@@ -82,7 +86,6 @@ sc5-guide
 
 # public assets gulp build files
 # ------------
-public/assets/.version
 public/assets/css/
 public/assets/fonts/
 public/assets/images/
