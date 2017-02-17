@@ -36,6 +36,9 @@ _docs
 # slim
 /app/logs/*.log
 
+# s3cmd
+/provision/s3/logs/*.log
+
 
 # bower
 # ==============================
