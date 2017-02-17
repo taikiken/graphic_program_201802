@@ -7,12 +7,12 @@
   <meta name="googlebot" content="noindex,follow">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <title>【スポーツ】Today’s ピックアップ</title>
   <?php
   // app in webview 時に .head-sec を非表示にする
   // if (!$from_webview) :
   if (0) :
   ?>
-  <title>Today's ピックアップ | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
   <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
