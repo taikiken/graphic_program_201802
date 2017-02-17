@@ -8,9 +8,9 @@ DEV=dev
 STG=stg
 PROD=prod
 
-DEVBUCKET=dev-sportsbull-jp
-STGBUCKET=stg-sportsbull-jp
-PRODBUCKET=sportsbull-jp
+DEVBUCKET=dev.sportsbull.jp
+STGBUCKET=stg.sportsbull.jp
+PRODBUCKET=sportsbull.jp
 
 if [ $# -ne 1 ]; then
   echo "invalid argument" 1>&2
