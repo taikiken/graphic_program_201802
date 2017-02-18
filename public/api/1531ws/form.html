@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>応募フォーム</title>
+</head>
+<body>
+
+	<div id="error" style="color : red;"></div>
+	<div id="success" style="color : green;"></div>
+
+	<form id="form" name="form">
+		<h2>応募コース</h2>
+		<select name="prize">
+			<option value="baseball">WBC 2次ラウンドプールE 試合観戦チケット 15組30名様</option>
+			<option value="soccer">サッカー日本代表　ホームレプリカユニフォーム　15名様</option>
+		</select>
+
+		<h2>メールアドレス</h2>
+
+		<input type="email" name="mail">
+
+		<button type="button" onclick="sendForm();">送信する</button>
+	</form>
+
+	<script>
+		function EncodeHTMLForm( data )
+		{
+			var params = [];
+
+			for( var name in data )
+			{
+				var value = data[ name ];
+				var param = encodeURIComponent( name ) + '=' + encodeURIComponent( value );
+
+				params.push( param );
+			}
+
+			return params.join( '&' ).replace( /%20/g, '+' );
+		}
+		function sendForm(){
+			var xmlHttpRequest = new XMLHttpRequest();
+
+			xmlHttpRequest.onreadystatechange = function()
+			{
+				var READYSTATE_COMPLETED = 4;
+				var HTTP_STATUS_OK = 200;
+
+				if( this.readyState == 4 && this.status == 200 )
+				{
+					var result = JSON.parse(this.responseText);
+
+					if (result.success == false){
+						document.getElementById("error").innerHTML = result.message;
+						document.getElementById("success").innerHTML = "";
+					}
+					else {
+						document.getElementById("success").innerHTML = "応募完了しました";
+						document.getElementById("error").innerHTML = "";
+					}
+				}
+			};
+			xmlHttpRequest.open('POST', '/api/1531ws/support.php');
+			xmlHttpRequest.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+			xmlHttpRequest.send(EncodeHTMLForm({
+				prize	: document.form.prize.value,
+				mail	: document.form.mail.value
+			}));
+		}
+	</script>
+</body>
+</html>
