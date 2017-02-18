@@ -1,9 +1,8 @@
 <?php
 
-include_once __DIR__."/../../desktop/_header.php";
+include_once __DIR__."/../../desktop/_header_simple.php";
 
 ?>
-
 
 <div class="body-sec">
   <div class="body-sec-inner">
