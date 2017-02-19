@@ -175,9 +175,10 @@ $border-color: #585959;
           background-size: (20/2)+px;
           font-weight: bold;
 
-          @include prc-each(hosei, waseda, rikkio, keio, tokyo, meiji) {
-            &.#{$arg} {
-              background-image: url(/assets/sp/images/big6/icon-#{$arg}_s.png);
+          $teams: hosei, waseda, rikkio, keio, tokyo, meiji;
+          @include prc-each(H, W, R, K, T, M) {
+            &.matches-match__teamname--#{$arg} {
+              background-image: url(/assets/images/big6/icon-#{nth($teams, $arg_i)}_s.png);
             }
           }
         }

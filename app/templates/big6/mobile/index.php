@@ -101,7 +101,6 @@
     <section class="main-sec">
       <section class="matches">
         <h2 class="matches-heading">直近の試合日程・結果</h2>
-        <?php print_r($page['big6']['scheduleData']); ?>
         <table class="matches-list for-detail">
           <thead class="matches-thead">
             <tr>
@@ -111,120 +110,61 @@
             </tr>
           </thead>
           <tbody class="matches-tbody">
-            <tr>
-              <td class="matches-week" rowspan="2">第1週</td>
-              <td class="matches-date-unit">
-                <span class="matches-date">3/23 (土)</span><br />
-                <span class="matches-time">11:00</span>
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="hosei">法大</i></li>
-                  <li><span class="result">3 - 4</span></li>
-                  <li><i class="rikkio">立大</i></li>
-                </ul><!-- /.matches-match -->
 
-                <div class="matches-btn-highlight">
-                  <a href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="tokyo">東大</i></li>
-                  <li><span class="result">2 - 1</span></li>
-                  <li><i class="waseda">早大</i></li>
-                </ul><!-- /.matches-match -->
+            <?php foreach( $page['big6']['scheduleData']['gameinfo'] as $weekCount => $weekData ) : ?>
+              <?php foreach( $weekData['gamedate'] as $gameCount => $gameData ) : ?>
+                <tr>
 
-                <div class="matches-btn-highlight">
-                  <a href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-            </tr>
-            <tr>
-              <td class="matches-date-unit">
-                <span class="matches-date">3/24 (日)</span><br />
-                <span class="matches-time">11:00</span>
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="keio">慶大</i></li>
-                  <li><span class="result">88 - 88</span></li>
-                  <li><i class="meiji">明大</i></li>
-                </ul><!-- /.matches-match -->
+                  <?php if( $gameCount === 0 ) : // 週内最初だけ ?>
+                  <td class="matches-week" rowspan="<?php echo count($weekData['gamedate']); ?>">
+                    <?php echo $weekData['week']; ?>
+                  </td>
+                  <?php endif; ?>
 
-                <div class="matches-btn-highlight">
-                  <a href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="rikkio">立大</i></li>
-                  <li><span class="result">vs</span></li>
-                  <li><i class="waseda">早大</i></li>
-                </ul><!-- /.matches-match -->
+                  <td class="matches-date-unit">
+                    <span class="matches-date">
+                      <?php echo $gameData['date_display']; ?>
+                    </span><br />
+                    <span class="matches-time">
+                      <?php echo $gameData['starttime']; ?>
+                    </span>
+                  </td>
 
-                <div class="matches-btn-highlight">
-                  <a class="disable" href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-            </tr>
-            <tr>
-              <td class="matches-week" rowspan="2">第2週</td>
-              <td class="matches-date-unit">
-                <span class="matches-date">3/23 (土)</span><br />
-                <span class="matches-time">11:00</span>
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="hosei">法大</i></li>
-                  <li><span class="result">3 - 4</span></li>
-                  <li><i class="rikkio">立大</i></li>
-                </ul><!-- /.matches-match -->
+                  <?php foreach( $gameData['game'] as $game ) : ?>
+                  <td class="matches-match-unit">
+                    <ul class="matches-match">
+                      <li>
+                        <i class="matches-match__teamname--<?php echo $game['team'][0]['nameI']; ?>">
+                          <?php echo $game['team'][0]['name']; ?>
+                        </i>
+                      </li>
+                      <li>
+                        <span class="result">
+                          <?php echo $game['team'][0]['score']; ?> - <?php echo $game['team'][1]['score']; ?>
+                        </span>
+                      </li>
+                      <li>
+                        <i class="matches-match__teamname--<?php echo $game['team'][1]['nameI']; ?>">
+                          <?php echo $game['team'][1]['name']; ?>
+                        </i>
+                      </li>
+                    </ul><!-- /.matches-match -->
 
-                <div class="matches-btn-highlight">
-                  <a href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="tokyo">東大</i></li>
-                  <li><span class="result">2 - 1</span></li>
-                  <li><i class="waseda">早大</i></li>
-                </ul><!-- /.matches-match -->
+                    <div class="matches-btn-highlight">
+                      <?php if ( $game['gameid'] ) : ?>
+                        <a href="/p/<?php echo $game['gameid']; ?>/"><span>ハイライト</span></a>
+                      <?php else : ?>
+                        <a class="disable" href="javascript:void(0);"><span>ハイライト</span></a>
+                      <?php endif; ?>
+                    </div><!-- /.matches-btn-highlight -->
 
-                <div class="matches-btn-highlight">
-                  <a href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-            </tr>
-            <tr>
-              <td class="matches-date-unit">
-                <span class="matches-date">3/24 (日)</span><br />
-                <span class="matches-time">11:00</span>
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="keio">慶大</i></li>
-                  <li><span class="result">88 - 88</span></li>
-                  <li><i class="meiji">明大</i></li>
-                </ul><!-- /.matches-match -->
+                  </td>
+                  <?php endforeach; ?>
 
-                <div class="matches-btn-highlight">
-                  <a href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-              <td class="matches-match-unit">
-                <ul class="matches-match">
-                  <li><i class="rikkio">立大</i></li>
-                  <li><span class="result">vs</span></li>
-                  <li><i class="waseda">早大</i></li>
-                </ul><!-- /.matches-match -->
+                </tr>
+              <?php endforeach; ?>
+            <?php endforeach; ?>
 
-                <div class="matches-btn-highlight">
-                  <a class="disable" href="#"><span>ハイライト</span></a>
-                </div><!-- /.matches-btn-highlight -->
-              </td>
-            </tr>
           </tbody>
         </table><!-- /.matches-list -->
       </section><!-- /.matches -->
