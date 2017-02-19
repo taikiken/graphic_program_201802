@@ -96,66 +96,18 @@
                 </tr>
               </thead>
               <tbody class="standings-tbody">
-                <tr class="standings-1st">
-                  <td class="standings-num"><span>1</span></td>
-                  <td class="standings-team"><img src="/assets/images/big6/icon-waseda.png" alt="早稲田大学"></td>
-                  <td class="standings-games">12</td>
-                  <td class="standings-win">10</td>
-                  <td class="standings-lose">1</td>
-                  <td class="standings-draw">1</td>
-                  <td class="standings-points">5</td>
-                  <td class="standings-rate">.909</td>
+              <?php foreach( $page['big6']['rankingData']['ranking'] as $key => $value ) : ?>
+                <tr class="standings-<?php echo ++$key; ?>">
+                  <td class="standings-num"><span><?php echo $value['rank']; ?></span></td>
+                  <td class="standings-team"><img src="/assets/sp/images/big6/icon-<?php echo $value['slug']; ?>.png" alt="<?php echo $value['name']; ?>大学"></td>
+                  <td class="standings-games"><?php echo $value['game']; ?></td>
+                  <td class="standings-win"><?php echo $value['win']; ?></td>
+                  <td class="standings-lose"><?php echo $value['lose']; ?></td>
+                  <td class="standings-draw"><?php echo $value['draw']; ?></td>
+                  <td class="standings-points"><?php echo $value['point']; ?></td>
+                  <td class="standings-rate"><?php echo $value['winningPercentage']; ?></td>
                 </tr>
-                <tr class="standings-2nd">
-                  <td class="standings-num"><span>2</span></td>
-                  <td class="standings-team"><img src="/assets/images/big6/icon-hosei.png" alt="法政大学"></td>
-                  <td class="standings-games">12</td>
-                  <td class="standings-win">8</td>
-                  <td class="standings-lose">4</td>
-                  <td class="standings-draw">0</td>
-                  <td class="standings-points">4</td>
-                  <td class="standings-rate">.667</td>
-                </tr>
-                <tr class="standings-3rd">
-                  <td class="standings-num"><span>3</span></td>
-                  <td class="standings-team"><img src="/assets/images/big6/icon-keio.png" alt="慶応大学"></td>
-                  <td class="standings-games">11</td>
-                  <td class="standings-win">6</td>
-                  <td class="standings-lose">5</td>
-                  <td class="standings-draw">0</td>
-                  <td class="standings-points">3</td>
-                  <td class="standings-rate">.545</td>
-                </tr>
-                <tr class="standings-4th">
-                  <td class="standings-num"><span>4</span></td>
-                  <td class="standings-team"><img src="/assets/images/big6/icon-meiji.png" alt="明治大学"></td>
-                  <td class="standings-games">12</td>
-                  <td class="standings-win">6</td>
-                  <td class="standings-lose">6</td>
-                  <td class="standings-draw">0</td>
-                  <td class="standings-points">2</td>
-                  <td class="standings-rate">.500</td>
-                </tr>
-                <tr class="standings-5th">
-                  <td class="standings-num"><span>5</span></td>
-                  <td class="standings-team"><img src="/assets/images/big6/icon-rikkio.png" alt="立教大学"></td>
-                  <td class="standings-games">12</td>
-                  <td class="standings-win">3</td>
-                  <td class="standings-lose">8</td>
-                  <td class="standings-draw">1</td>
-                  <td class="standings-points">1</td>
-                  <td class="standings-rate">.273</td>
-                </tr>
-                <tr class="standings-6th">
-                  <td class="standings-num"><span>6</span></td>
-                  <td class="standings-team"><img src="/assets/images/big6/icon-tokyo.png" alt="東京大学"></td>
-                  <td class="standings-games">11</td>
-                  <td class="standings-win">1</td>
-                  <td class="standings-lose">10</td>
-                  <td class="standings-draw">0</td>
-                  <td class="standings-points">0</td>
-                  <td class="standings-rate">.091</td>
-                </tr>
+              <?php endforeach; ?>
               </tbody>
             </table>
           </section><!-- /.standings -->
@@ -163,12 +115,12 @@
           <section class="misc">
             <h2 class="misc-heading">各大学の動画・ニュース</h2>
             <ul class="misc-list">
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-hosei.png" alt="法政大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-waseda.png" alt="早稲田大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-rikkio.png" alt="立教大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-keio.png" alt="慶応大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-tokyo.png" alt="東京大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-meiji.png" alt="明治大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%B3%95%E6%94%BF%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-hosei.png" alt="法政大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%97%A9%E7%A8%B2%E7%94%B0%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-waseda.png" alt="早稲田大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E7%AB%8B%E6%95%99%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-rikkio.png" alt="立教大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%85%B6%E6%87%89%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-keio.png" alt="慶応大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-tokyo.png" alt="東京大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%98%8E%E6%B2%BB%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-meiji.png" alt="明治大学"></a></li>
             </ul>
           </section><!-- /.misc -->
         </div><!-- /.clearfix -->
