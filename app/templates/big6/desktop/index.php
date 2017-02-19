@@ -89,45 +89,63 @@
               </tr>
             </thead>
             <tbody class="matches-tbody">
-              <?php foreach( $page['big6']['scheduleData'] as $key => $value ) : ?>
-              <tr>
-                <td class="matches-week" rowspan="2">第1週</td>
-                <td class="matches-date-unit">
-                  <span class="matches-date">3/23 (土)</span><br />
-                  <span class="matches-time">11:00</span>
-                </td>
-                <td class="matches-match-unit">
-                  <ul class="matches-match">
-                    <li><i class="hosei">法大</i></li>
-                    <li><span class="result">3 - 4</span></li>
-                    <li><i class="rikkio">立大</i></li>
-                  </ul><!-- /.matches-match -->
 
-                  <div class="matches-btn-highlight">
-                    <a href="#"><span>ハイライト</span></a>
-                  </div><!-- /.matches-btn-highlight -->
-                </td>
-                <td class="matches-match-unit">
-                  <ul class="matches-match">
-                    <li><i class="tokyo">東大</i></li>
-                    <li><span class="result">2 - 1</span></li>
-                    <li><i class="waseda">早大</i></li>
-                  </ul><!-- /.matches-match g-->
+              <?php foreach( $page['big6']['scheduleData']['gameinfo'] as $weekCount => $weekData ) : ?>
+                <?php foreach( $weekData['gamedate'] as $gameCount => $gameData ) : ?>
+                  <tr>
 
-                  <div class="matches-btn-highlight">
-                    <a href="#"><span>ハイライト</span></a>
-                  </div><!-- /.matches-btn-highlight -->
-                </td>
-              </tr>
+                    <?php if( $gameCount === 0 ) : // 週内最初だけ ?>
+                    <td class="matches-week" rowspan="<?php echo count($weekData['gamedate']); ?>">
+                      <?php echo $weekData['week']; ?>
+                    </td>
+                    <?php endif; ?>
+
+                    <td class="matches-date-unit">
+                      <span class="matches-date">
+                        <?php echo $gameData['date_display']; ?>
+                      </span><br />
+                      <span class="matches-time">
+                        <?php echo $gameData['starttime']; ?>
+                      </span>
+                    </td>
+
+                    <?php foreach( $gameData['game'] as $game ) : ?>
+                    <td class="matches-match-unit">
+                      <ul class="matches-match">
+                        <li>
+                          <i class="matches-match__teamname--<?php echo $game['team'][0]['nameI']; ?>">
+                            <?php echo $game['team'][0]['name']; ?>
+                          </i>
+                        </li>
+                        <li>
+                          <span class="result">
+                            <?php echo $game['team'][0]['score']; ?> - <?php echo $game['team'][1]['score']; ?>
+                          </span>
+                        </li>
+                        <li>
+                          <i class="matches-match__teamname--<?php echo $game['team'][1]['nameI']; ?>">
+                            <?php echo $game['team'][1]['name']; ?>
+                          </i>
+                        </li>
+                      </ul><!-- /.matches-match -->
+
+                      <div class="matches-btn-highlight">
+                        <?php if ( $game['gameid'] ) : ?>
+                          <a href="/p/<?php echo $game['gameid']; ?>/"><span>ハイライト</span></a>
+                        <?php else : ?>
+                          <a class="disable" href="javascript:void(0);"><span>ハイライト</span></a>
+                        <?php endif; ?>
+                      </div><!-- /.matches-btn-highlight -->
+
+                    </td>
+                    <?php endforeach; ?>
+
+                  </tr>
+                <?php endforeach; ?>
               <?php endforeach; ?>
+
             </tbody>
           </table><!-- /.matches-list -->
-          <?php
-            ini_set('xdebug.var_display_max_children', -1);
-            ini_set('xdebug.var_display_max_data', -1);
-            ini_set('xdebug.var_display_max_depth', -1);
-            var_dump($page['big6']['scheduleData']);
-          ?>
 
           <h2>↓サンプルHTML</h2>
           <table class="matches-list for-detail">
