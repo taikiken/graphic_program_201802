@@ -151,7 +151,7 @@ class ViewModel {
   private function get_version() {
 
     // public/index.php からのバージョンファイルのパスを指定
-    $path = './assets/.version';
+    $path = './../app/.version';
 
     if ( file_exists($path) ) :
       return trim(file_get_contents($path, false));

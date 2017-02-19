@@ -77,3 +77,8 @@ sudo apt-get -y install git
 # install Composer
 curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
+
+
+# install pip
+sudo apt-get -y install python-pip
+pip install s3cmd==1.6.1
