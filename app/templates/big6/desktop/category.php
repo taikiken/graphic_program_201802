@@ -125,8 +125,6 @@
           </section><!-- /.misc -->
         </div><!-- /.clearfix -->
 
-
-
         <div class="headline-heading">
           <h2 class="headline-heading-title"><img src="/assets/images/common/headline-heading_big6.png" alt="HEADLINE NEWS"></h2>
           <span class="headline-heading-ruby">新着記事</span>

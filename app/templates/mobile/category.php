@@ -33,6 +33,13 @@
     }
     ?>
     <section class="main-sec">
+
+      <?php
+      if ( $page['category']['slug'] ==='big6' ) :
+        include_once __DIR__.'/../big6/mobile/category.php';
+      endif;
+      ?>
+
       <?php
       // ----------------------------------------------------
       // 記事一覧: sp banner
