@@ -79,7 +79,57 @@
     <section class="main-sec">
         <section class="matches">
           <h2 class="matches-heading">直近の試合日程・結果</h2>
-          <?php print_r($page['big6']['scheduleData']); ?>
+          <table class="matches-list for-detail">
+          <table class="matches-list for-detail">
+            <thead class="matches-thead">
+              <tr>
+                <th colspan="2">試合日</th>
+                <th>第1試合</th>
+                <th>第2試合</th>
+              </tr>
+            </thead>
+            <tbody class="matches-tbody">
+              <?php foreach( $page['big6']['scheduleData'] as $key => $value ) : ?>
+              <tr>
+                <td class="matches-week" rowspan="2">第1週</td>
+                <td class="matches-date-unit">
+                  <span class="matches-date">3/23 (土)</span><br />
+                  <span class="matches-time">11:00</span>
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="hosei">法大</i></li>
+                    <li><span class="result">3 - 4</span></li>
+                    <li><i class="rikkio">立大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="tokyo">東大</i></li>
+                    <li><span class="result">2 - 1</span></li>
+                    <li><i class="waseda">早大</i></li>
+                  </ul><!-- /.matches-match g-->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table><!-- /.matches-list -->
+          <?php
+            ini_set('xdebug.var_display_max_children', -1);
+            ini_set('xdebug.var_display_max_data', -1);
+            ini_set('xdebug.var_display_max_depth', -1);
+            var_dump($page['big6']['scheduleData']);
+          ?>
+
+          <h2>↓サンプルHTML</h2>
           <table class="matches-list for-detail">
             <thead class="matches-thead">
               <tr>
@@ -205,14 +255,14 @@
               </tr>
             </tbody>
           </table><!-- /.matches-list -->
+          <?php print_r($page['big6']['scheduleData']); ?>
         </section><!-- /.matches -->
-
-        <hr />
 
         <section class="standings">
           <h2 class="standings-heading">
             順位表<span class="note">全日程終了 5/31</span>
           </h2>
+          <?php var_dump($page['big6']['rankingData']['ranking']); ?>
           <table class="standings-list for-detail">
             <thead class="standings-thead">
               <tr>
