@@ -112,7 +112,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/public/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/picks #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/public/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/dev/public/
-      bash /vagrant/provision/s3/cmd.sh dev
+      vagrant ssh -c "bash /vagrant/provision/s3/cmd.sh dev"
     SCRIPT
   end
 
@@ -123,7 +123,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/public/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/picks #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/public/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host']}:/var/www/sportsbull.jp/stg/public/
-      bash /vagrant/provision/s3/cmd.sh stg
+      vagrant ssh -c "bash /vagrant/provision/s3/cmd.sh stg"
     SCRIPT
   end
 
@@ -136,7 +136,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/about #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/sportsbull.jp/www/public/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/picks #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/sportsbull.jp/www/public/
       rsync -vrt --chmod=Dug=rwx,Dg+s,Do=rx,Fu=rw,Fg=rw,Fo=r --perms --progress --delete --exclude='.DS_Store' ./public/assets #{_conf['ssh_user']}@#{_conf['ssh_host_cms']}:/var/www/sportsbull.jp/www/public/
-      bash /vagrant/provision/s3/cmd.sh prod
+      vagrant ssh -c "bash /vagrant/provision/s3/cmd.sh prod"
     SCRIPT
   end
 
