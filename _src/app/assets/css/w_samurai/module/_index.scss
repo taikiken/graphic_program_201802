@@ -1,0 +1,114 @@
+@import "../../../../../scss/asset";
+
+// index
+//
+// design module index
+
+.w_samurai {
+
+  // index common style
+
+  .head-sec {
+    // background-color: #fff;
+  }
+
+  .body-sec {
+  }
+
+  .body-sec-inner {
+  }
+
+  .main-sec {
+    float: none !important;
+    margin: 30px auto 0;
+    padding-bottom: 20px;
+    background: url(/assets/images/w_samurai/bg.png) center 0 repeat-y;
+  }
+
+
+
+
+
+  // .summary
+  .summary {
+    height: 660px;
+    // padding-top: 25px;
+    background: url(/assets/images/w_samurai/kv.jpg) center 0 no-repeat;
+
+    // .summary__heading
+    &__heading {
+      text-align: center;
+    }
+  }  // .summary
+
+
+
+
+
+  // .yellfor
+  .yellfor {
+    margin-top: -25px;
+    letter-spacing: ls(inline-block);
+
+    // .yellfor__section
+    &__section {
+      display: inline-block;
+      width: 50%;
+      letter-spacing: normal;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    // .yellfor__heading
+    &__heading {}
+
+    // .yellfor__btns
+    &__btns {
+      margin-top: 15px;
+
+      // .yellfor__btns__item
+      &__item {
+        width: 324px;
+        margin: 0 auto;
+        // background-color: #fff;
+        // border-radius: 4px;
+
+        a:hover {
+          @include over-opacity;
+        }
+      }
+
+      &__item + .yellfor__btns__item {
+        margin-top: 20px;
+      }
+    }
+  } // .yellfor
+
+
+
+
+
+  // .bnr-campaign
+  // .bnr-app
+  .bnr-campaign,
+  .bnr-app {
+    margin-top: 30px;
+    text-align: center;
+
+    a:hover {
+      @include over-opacity;
+    }
+  }
+
+
+
+
+
+  // .note
+  .note {
+    width: 688px;
+    margin: 20px auto 0;
+    color: #666;
+    font-size: fz(10);
+  }
+}
