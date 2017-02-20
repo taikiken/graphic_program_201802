@@ -105,6 +105,7 @@ import {Ga} from './ga/Ga';
 
 // ui
 import { TopButton } from './ui/button/TopButton';
+import { PageTop } from './ui/PageTop';
 
 // -------------------------------------
 // sp
@@ -174,6 +175,7 @@ let UT = {
     Scroll
   },
   ui: {
+    PageTop,
     button: {
       TopButton
     }
