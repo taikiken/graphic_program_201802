@@ -25,20 +25,14 @@ if (
 
 require_once "aws.phar";
 
-//認証
-$credential = new Aws\Credentials\Credentials(
-	"AKIAJ75CNEK5F75MYX4A", "jETQ9f2erD4IH5v1+7fJ2aemihj0w7D1XQhIjQOz"
-);
 //接続
 $dynamo = new \Aws\DynamoDb\DynamoDbClient([
-	'credentials'	=> $credential,
 	'region'		=> "ap-northeast-1",
 	'version'		=> 'latest',
 ]);
-
 //テーブル指定
 $scan = [
-	'TableName' => 'ws-test'
+	'TableName' => 'w-samurai'
 ];
 if ($_REQUEST["prize"] !== null){
 	//サニタイズ
