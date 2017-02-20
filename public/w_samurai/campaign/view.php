@@ -133,7 +133,7 @@
           <div class="yellfor__section yellfor--soccer">
             <h3 class="yellfor__heading"><img src="/assets/images/w_samurai/campaign/yellfor-soccer-heading.png" alt="サッカー日本代表"></h3>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90825/"><img src="/assets/images/w_samurai/campaign/yellfor-soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><a href="https://sportsbull.jp/p/103261/"><img src="/assets/images/w_samurai/campaign/yellfor-soccer-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
               <li class="yellfor__btns__item"><img src="/assets/images/w_samurai/campaign/yellfor-soccer-btn_live.png" alt="試合速報 3月3日 UAE戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
@@ -141,7 +141,7 @@
           <div class="yellfor__section yellfor--baseball">
             <h3 class="yellfor__heading"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-heading.png" alt="野球日本代表"></h3>
             <ul class="yellfor__btns">
-              <li class="yellfor__btns__item"><a href="https://dev.sportsbull.jp/p/90822/"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
+              <li class="yellfor__btns__item"><a href="https://sportsbull.jp/p/103254/"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
               <li class="yellfor__btns__item"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
