@@ -1,0 +1,283 @@
+@import "../../../../../../scss_sp/asset";
+
+// index
+//
+// design module index
+
+.ios {
+  .for-ios { display: inherit !important;}
+  .for-android { display: none !important;}
+}
+
+.android {
+  .for-ios { display: none !important;}
+  .for-android { display: inherit !important;}
+}
+
+.w_samurai {
+
+  // index common style
+
+  .head-sec {
+    // background-color: #fff;
+  }
+
+  .body-sec {
+    background: url(/assets/sp/images/w_samurai/bg.png) center 0 repeat-y;
+  }
+
+  .body-sec-inner {
+    background: transparent url(/assets/sp/images/w_samurai/campaign/bg.png) center 0 no-repeat;
+    background-size: 100%;
+  }
+
+  .main-sec {
+    padding-bottom: (30/2)+px;
+  }
+
+
+
+
+
+  // .summary
+  .summary {
+    // padding-top: perCalc(50, 750);
+
+    // .summary__heading
+    &__heading {
+      // width: perCalc(694, 750);
+      // margin-right: auto;
+      // margin-left: auto;
+      // padding-bottom: perCalc(20, 750);
+    }
+
+    // .summary__copy
+    &__copy {
+      // width: perCalc(690, 750);
+      // margin-right: auto;
+      // margin-left: auto;
+    }
+  }  // .summary
+
+
+
+
+
+  // .gift
+  .gift {
+    margin-top: (20/2)+px;
+    letter-spacing: ls(inline-block);
+
+    // .gift__section
+    &__section {
+      display: inline-block;
+      width: 50%;
+      letter-spacing: normal;
+      vertical-align: top;
+    }
+
+    // .gift--soccer
+    &--soccer {
+      padding-right: perCalc(8, 375);
+      padding-left: perCalc(15, 375);
+    }
+
+    // .gift--baseball
+    &--baseball {
+      padding-right: perCalc(15, 375);
+      padding-left: perCalc(8, 375);
+    }
+
+    // .gift__text
+    &__text {
+      margin-top: (20/2)+px;
+      color: #fff;
+      font-size: fz(22/2);
+      text-align: center;
+    }
+  } // .gift
+
+
+
+
+
+  // .guidance
+  .guidance {
+    width: perCalc(690, 750);
+    margin: (30/2)+px auto 0;
+    padding: 0 perCalc(30, 690);
+    background-color: rgba(0, 0, 0, 0.2);
+
+    // .guidance__item
+    &__item {
+      padding-top: (50/2)+px;
+      letter-spacing: ls(inline-block);
+
+      dt, dd {
+        display: inline-block;
+        letter-spacing: normal;
+        vertical-align: top;
+        color: #fff;
+      }
+
+      dt {
+        width: perCalc(150, 630);
+      }
+
+      dd {
+        width: perCalc(480, 630);
+      }
+
+      & + .guidance__item {
+        margin-top: (28/2)+px;
+        padding-top: (28/2)+px;
+        border-top: 1px solid #1f2e4a;
+      }
+    }
+
+    // .guidance__heading
+    &__heading {
+      font-weight: bold;
+      font-size: fz(28/2);
+    }
+
+    // .guidance--prize__body
+    &--prize__body {
+      & + .guidance--prize__body {
+        margin-top: (28/2)+px;
+        padding-top: (28/2)+px;
+        border-top: 1px solid #1f2e4a;
+      }
+
+      .heading {
+        display: inline-block;
+        padding: (10/2)+px (24/2)+px;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: fz(28/2);
+      }
+
+      .period {
+        margin-top: (20/2)+px;
+        font-weight: bold;
+      }
+
+      .text {
+        margin-top: (24/2)+px;
+        font-size: fz(28/2);
+
+        .note {
+          font-size: fs(20, 28);
+        }
+      }
+    }
+
+    // .guidance--prize--baseball
+    &--prize--baseball {
+      .heading {
+        color: #c7b147;
+        border-color: #c7b147;
+      }
+
+      .period {
+        color: #c7b147;
+      }
+    }
+
+    // .guidance--prize--soccer
+    &--prize--soccer {
+      .heading {
+        color: #cc141d;
+        border-color: #cc141d;
+      }
+
+      .period {
+        color: #cc141d;
+      }
+    }
+
+    // .guidance--term
+    &--term {
+      p {
+        font-size: fz(28/2);
+      }
+    }
+
+    // .guidance--requirements
+    &--requirements {
+      p {
+        font-size: fz(28/2);
+      }
+    }
+
+    // .guidance__bnr
+    &__bnr {
+      padding: (30/2)+px 0;
+
+      // .guidance__bnr__heading
+      &__heading {
+        color: #fff;
+        font-weight: bold;
+        font-size: fz(26/2);
+        white-space: nowrap;
+      }
+
+      // .guidance__bnr__btn
+      &__btn {
+        margin-top: (10/2)+px;
+      }
+    }
+  } // .guidance
+
+
+
+
+
+  // .yellfor
+  .yellfor {
+    letter-spacing: ls(inline-block);
+
+    // .yellfor__section
+    &__section {
+      display: inline-block;
+      width: 50%;
+      padding-right: perCalc(15, 375);
+      padding-left: perCalc(15, 375);
+      letter-spacing: normal;
+    }
+
+    // .yellfor__heading
+    &__heading {
+      text-align: center;
+
+      img {
+        width: (246/2)+px;
+      }
+    }
+
+    // .yellfor__btns
+    &__btns {
+      margin-top: (30/2)+px;
+
+      // .yellfor__btns__item
+      &__item + .yellfor__btns__item {
+        margin-top: (20/2)+px;
+      }
+    }
+  } // .yellfor
+
+
+
+
+
+  // .bnr-campaign
+  // .bnr-app
+  .bnr-campaign,
+  .bnr-app {
+    width: perCalc(690, 750);
+    margin: (30/2)+px auto 0;
+  }
+
+}
