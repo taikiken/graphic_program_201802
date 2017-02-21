@@ -113,14 +113,17 @@
 
         <?php
         // app in webview 時に .head-sec を非表示にする
-        if (!$from_webview) :
+        // if (!$from_webview) :
         ?>
-        <aside class="bnr-app for-ios"><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
-        <aside class="bnr-app for-android"><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
         <?php
-        endif;
+        // <aside class="bnr-app for-ios"><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
+        // <aside class="bnr-app for-android"><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
+        ?>
+        <?php
+        // endif;
         // -----------------------------------------
         ?>
+        <aside class="bnr-app"><a href="https://app.adjust.com/7hfkzc" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
       </section><!-- /.main-sec -->
     </div>
   </div><!-- /.body-sec -->
