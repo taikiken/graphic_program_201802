@@ -36,6 +36,7 @@
 
       <?php
       if ( $page['category']['slug'] ==='big6' || $page['category']['slug'] ==='big6tv') :
+        include_once __DIR__.'/../big6tv/live.php';
         include_once __DIR__.'/../big6tv/mobile/category.php';
       endif;
       ?>
