@@ -3,8 +3,19 @@
 
 # LIVE配信モジュール
 
+- カテゴリー情報APIの `live` にAPIのエンドポイントがあるなら以下を読み込む
+- ['live']['isPlaying'] == 1 ならプレイヤーを表示 / 0 なら alt画像を表示する
+
 */
 ?>
+
+<?php
+
+// 配信中なら
+if ( $page['big6tv']['liveData']['live']['isPlaying'] == '1' ) :
+
+?>
+
 <div class="live-streaming">
   <video
     id="content_video"
@@ -184,3 +195,16 @@ player.on('adsready', function() {
     console.log('adsready');
 });
 </script>
+
+
+<?php
+
+// 配信してないならposter画像のみ表示
+else :
+
+?>
+
+<div class="live-streaming" style="background:url(<?php echo $page['big6tv']['liveData']['live']['alt']['large']; ?>) center center no-repeat; background-size: cover;">
+</div><!-- /.live-streaming -->
+
+<?php endif; ?>
