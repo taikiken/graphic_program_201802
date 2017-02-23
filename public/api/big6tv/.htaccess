@@ -3,11 +3,11 @@ RewriteEngine on
 RewriteBase /
 
 # ranking
-RewriteRule ^ranking$ /api/big6/ranking.php [L]
+RewriteRule ^ranking$ /api/big6tv/ranking.php [L]
 
 # schedule
-RewriteRule ^schedule$ /api/big6/schedule.php [L]
+RewriteRule ^schedule$ /api/big6tv/schedule.php [L]
 
 # live
-#RewriteRule ^live$ /api/big6/live.php [L]
+#RewriteRule ^live$ /api/big6tv/live.php [L]
 RewriteRule ^live$ /api/ver1/static/big6live.json [L]

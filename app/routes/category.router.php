@@ -22,7 +22,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     $category           = $app->model->get_category_by_slug($args['category_slug']);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
 
-    if ( $args['category_slug'] === 'big6' ) :
+    if ( $args['category_slug'] === 'big6' || $args['category_slug'] === 'big6tv' ) :
       $template_classname = $template_classname . ' theme_big6';
     endif;
 
@@ -40,15 +40,15 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       'path'               => $args,
     ));
 
-    if ( $args['category_slug'] === 'big6' ) :
+    if ( $args['category_slug'] === 'big6' || $args['category_slug'] === 'big6tv' ) :
 
       // スケジュール表を取得する
-      $big6Schedule = @file_get_contents($app->model->property('site_url').'/api/big6/schedule');
-      $args['page']['big6']['scheduleData'] = json_decode($big6Schedule, true)['response'];
+      $big6Schedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
+      $args['page']['big6tv']['scheduleData'] = json_decode($big6Schedule, true)['response'];
 
       // ランキングデータを取得する
-      $big6Ranking = @file_get_contents($app->model->property('site_url').'/api/big6/ranking');
-      $args['page']['big6']['rankingData'] = json_decode($big6Ranking, true)['response'];
+      $big6Ranking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
+      $args['page']['big6tv']['rankingData'] = json_decode($big6Ranking, true)['response'];
 
     endif;
 

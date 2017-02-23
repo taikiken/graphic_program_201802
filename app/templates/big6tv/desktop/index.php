@@ -89,7 +89,7 @@
             </thead>
             <tbody class="matches-tbody">
 
-              <?php foreach( $page['big6']['scheduleData']['gameinfo'] as $weekCount => $weekData ) : ?>
+              <?php foreach( $page['big6tv']['scheduleData']['gameinfo'] as $weekCount => $weekData ) : ?>
                 <?php foreach( $weekData['gamedate'] as $gameCount => $gameData ) : ?>
                   <tr>
 
@@ -165,7 +165,7 @@
               </tr>
             </thead>
             <tbody class="standings-tbody">
-            <?php foreach( $page['big6']['rankingData']['ranking'] as $key => $value ) : ?>
+            <?php foreach( $page['big6tv']['rankingData']['ranking'] as $key => $value ) : ?>
               <tr class="standings-<?php echo ++$key; ?>">
                 <td class="standings-num"><span><?php echo $value['rank']; ?></span></td>
                 <td class="standings-team"><img src="/assets/sp/images/big6/icon-<?php echo $value['slug']; ?>.png" alt="<?php echo $value['name']; ?>大学"></td>
