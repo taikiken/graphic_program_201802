@@ -43,15 +43,21 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     if ( $args['category_slug'] === 'big6' || $args['category_slug'] === 'big6tv' ) :
 
       // スケジュール表を取得する
-      $big6Schedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
-      $args['page']['big6tv']['scheduleData'] = json_decode($big6Schedule, true)['response'];
+      $bigtv6Schedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
+      $args['page']['big6tv']['scheduleData'] = json_decode($bigtv6Schedule, true)['response'];
 
       // ランキングデータを取得する
-      $big6Ranking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
-      $args['page']['big6tv']['rankingData'] = json_decode($big6Ranking, true)['response'];
+      $big6tvRanking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
+      $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
+
+      // LIVEデータを取得する
+      $big6tvLive = @file_get_contents($app->model->property('site_url').'/api/big6tv/live');
+      if ( !$big6tvLive ) :
+        $big6tvLive = @file_get_contents('https://dev.sportsbull.jp/api/big6tv/live');
+      endif;
+      $args['page']['big6tv']['liveData'] = json_decode($big6tvLive, true)['response'];
 
     endif;
-
 
 
     return $this->renderer->render($response, "default.php", $args);
