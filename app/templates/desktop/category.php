@@ -36,8 +36,7 @@ if ($page['category']['slug'] == 'all') {
 
       <?php
       if ( $page['category']['slug'] === 'big6' || $page['category']['slug'] === 'big6tv' ) :
-
-        echo 'hello';
+        include_once __DIR__.'/../big6tv/live.php';
         include_once __DIR__.'/../big6tv/desktop/category.php';
       endif;
       ?>

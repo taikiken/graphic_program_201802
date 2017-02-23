@@ -23,13 +23,13 @@ $app->get('/{slug:big6|big6tv}[/]', function ($request, $response, $args) use ($
 
 
   // スケジュール表を取得する
-  $big6Schedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
-  $args['page']['big6tv']['scheduleData'] = json_decode($big6Schedule, true)['response'];
-
+  $big6tvSchedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
+  $args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
 
   // ランキングデータを取得する
-  $big6Ranking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
-  $args['page']['big6tv']['rankingData'] = json_decode($big6Ranking, true)['response'];
+  $big6tvRanking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
+  $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
+
 
   if ( $app->model->property('ua') === 'desktop' ) :
     return $this->renderer->render($response, 'big6tv/desktop/index.php', $args);
