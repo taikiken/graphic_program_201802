@@ -81,7 +81,7 @@
     "bower:install": "cd ./_src/tools && bower install && cd ../ && gulp bower:exports",
     "start": "gulp serve:app",
     "gulp": "gulp",
-    "update_version": "git rev-parse --short HEAD > public/assets/.version",
+    "update_version": "git rev-parse --short HEAD > app/.version",
     "build": "npm run update_version && npm run deploy",
     "build:v2": "npm run update_version && npm run deploy",
     "build:shell": "npm run update_version && gulp build:shell",

@@ -36,6 +36,13 @@ _docs
 # slim
 /app/logs/*.log
 
+# version - キャッシュ対策 / npm run build で生成される
+/app/.version
+
+
+# s3cmd
+/provision/s3/logs/*.log
+
 
 # bower
 # ==============================
@@ -79,7 +86,6 @@ sc5-guide
 
 # public assets gulp build files
 # ------------
-public/assets/.version
 public/assets/css/
 public/assets/fonts/
 public/assets/images/
@@ -139,3 +145,8 @@ crossdomain.xml
 _src/bower_exports/fetch-11.0
 _src/bower_exports/react-14.0.7
 /_src/babels/src/node/single/MediaVideoNode.js.dev
+
+
+# api
+# ==============================
+/pubic/api/ver1/static/

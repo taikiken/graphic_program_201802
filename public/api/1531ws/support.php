@@ -29,15 +29,17 @@ $result = new ResponseJson();
 
 try {
 	//検証
+	if (strlen($_REQUEST["prize"]) > 0 !== true){
+		throw new Exception("応募するコースが選択されていません");
+	}
+
 	if (strlen($_REQUEST["mail"]) > 0 !== true){
 		throw new Exception("メールアドレスが入力されていません");
 	}
 	if (preg_match('|^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$|', $_REQUEST["mail"]) !== 1){
 		throw new Exception("メールアドレスの形式が正しくありません");
 	}
-	if (strlen($_REQUEST["prize"]) > 0 !== true){
-		throw new Exception("応募するコースが選択されていません");
-	}
+
 	//サニタイズ
 	$_REQUEST["prize"] = ($_REQUEST["prize"] === "soccer") ? "soccer" : "baseball";
 
@@ -49,19 +51,19 @@ try {
 
 
 	//認証
+	/*
 	$credential = new Aws\Credentials\Credentials(
 		"AKIAJ75CNEK5F75MYX4A", "jETQ9f2erD4IH5v1+7fJ2aemihj0w7D1XQhIjQOz"
 	);
+	*/
 	//接続
 	$dynamo = new \Aws\DynamoDb\DynamoDbClient([
-		'credentials'	=> $credential,
 		'region'		=> "ap-northeast-1",
 		'version'		=> 'latest',
 	]);
-
 	//挿入
 	$dynamo->putItem([
-		'TableName' => 'ws-test',
+		'TableName' => 'w-samurai',
 		'Item' => [
 			'id'	=> [ 'S' => uniqid() ],
 			'mail'	=> [ 'S' => $_REQUEST["mail"] ],
@@ -72,7 +74,7 @@ try {
 	//自動返信メール
 	mb_send_mail(
 		$_REQUEST["mail"],
-		"[SPORTS BULL]「Ｗ侍プレゼントキャンペーン」の応募を受けつけました。",
+		"[SPORTS BULL]「Ｗ侍プレゼントキャンペーン」の応募を受け付けました。",
 		"「Ｗ侍プレゼントキャンペーン」へのご応募を受け付けました。
 
 ---

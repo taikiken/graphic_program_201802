@@ -104,16 +104,20 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * a.onclick event handler<br>
    * 本文を表示しボタンを隠します
    * @param {Event} event a.onclick event
+   * @since 2017-02-22 `103250` を外部リンクにする
+   * @see https://github.com/undotsushin/undotsushin/issues/1593
    * */
   anchorClick(event) {
-    event.preventDefault();
-    // this.y = Scroll.y;
-    const y = Scroll.y;
-    // contents 詳細切り替え
-    this.setState({ excerpt: !this.state.excerpt });
-    // クリック後遅延してscroll移動
-    // @since 2017-01-17
-    Scroll.motion(y, 0.1, 0.25);
+    if (this.state.single.id !== 103250) {
+      event.preventDefault();
+      // this.y = Scroll.y;
+      const y = Scroll.y;
+      // contents 詳細切り替え
+      this.setState({ excerpt: !this.state.excerpt });
+      // クリック後遅延してscroll移動
+      // @since 2017-01-17
+      Scroll.motion(y, 0.1, 0.25);
+    }
   }
   /**
    * 省略文章を表示します
