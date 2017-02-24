@@ -24,6 +24,7 @@ header("Content-Type: application/xml; charset=UTF-8");
 // ==============================
 $timestamp = time();
 
+
 // フォーマット設定
 // ==============================
 if ( isset($_GET['position']) ) :
@@ -52,7 +53,7 @@ endif;
 // ad_url
 // ==============================
 
-$ad_url == '';
+$ad_url = '';
 
 if ( isset($_GET['source']) ) :
 
@@ -66,8 +67,12 @@ if ( isset($_GET['source']) ) :
 
 endif;
 
-// play position
+
+// ad_rule
 // ==============================
+
+$ad_rule = '';
+
 if ( $position == 'pre-roll' ) :
 
     $ad_rule = <<<__EOL__
@@ -115,12 +120,15 @@ __EOL__;
 endif;
 
 
-// echo
-// ------------------------------
+if ( $ad_rule ) :
+
 echo <<<__EOL__
 <vmap:VMAP xmlns:vmap="http://www.iab.net/videosuite/vmap" version="1.0">
 {$ad_rule}
 </vmap:VMAP>
 __EOL__;
+
+endif;
+
 
 ?>
