@@ -145,3 +145,8 @@ crossdomain.xml
 _src/bower_exports/fetch-11.0
 _src/bower_exports/react-14.0.7
 /_src/babels/src/node/single/MediaVideoNode.js.dev
+
+
+# api
+# ==============================
+/pubic/api/ver1/static/
