@@ -171,29 +171,36 @@ if (navigator.userAgent.match(/iPhone/i) ||
 }
 
 player.one(startEvent, function() {
-    player.ima.initializeAdDisplayContainer();
-    player.ima.requestAds();
-    player.play();
+  player.ima.initializeAdDisplayContainer();
+  player.ima.requestAds();
+  player.play();
 });
 
 // 動画再生のイベントを聞き入れます。
 player.on('play', function() {
-    console.log('Play Video');
+  console.log('Play Video');
+
+  // 以下な感じでモバイルでフルスクリーンプレイヤー終了確認済み
+  // window.setTimeout(function() {
+  //   $('#content_video').remove();
+  // }, 1000 );
+
 });
 
 // 動画一時停止のイベントを聞き入れます。
 player.on('pause', function() {
-    console.log('Pause Video');
+  console.log('Pause Video');
 });
 // 動画完了のイベントを聞き入れます。
 player.on('ended', function() {
-    console.log('End Video');
+  console.log('End Video');
 });
 
 // 広告が準備できたイベントを聞き入れます。
 player.on('adsready', function() {
-    console.log('adsready');
+  console.log('adsready');
 });
+
 </script>
 
 
@@ -208,3 +215,5 @@ else :
 </div><!-- /.live-streaming -->
 
 <?php endif; ?>
+
+
