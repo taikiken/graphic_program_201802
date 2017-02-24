@@ -93,11 +93,11 @@
     </dl><!-- /.category-nav--sub -->
   </nav><!-- /.category-nav -->
 
-  <aside class="banner__w_samurai">
-    <a class="banner__w_samurai__link for-iOS" href="https://sportsbull.jp/w_samurai/?utm_source=au_sports&utm_campaign=wbc&utm_medium=iOS&utm_content=WBC"><img src="/assets/sp/images/picks/au/banner-w_samurai.png" alt="【WBC】試合日程・ハイライト動画"></a>
-    <a class="banner__w_samurai__link for-Android" href="https://sportsbull.jp/w_samurai/?utm_source=au_sports&utm_campaign=wbc&utm_medium=Android&utm_content=WBC"><img src="/assets/sp/images/picks/au/banner-w_samurai.png" alt="【WBC】試合日程・ハイライト動画"></a>
+  <aside id="js-banner__w_samurai" class="banner__w_samurai">
+    <a id="js-banner__w_samurai__link-for-iOS" style="display: none;" class="banner__w_samurai__link for-iOS" href="https://sportsbull.jp/w_samurai/?utm_source=au_sports&utm_campaign=wbc&utm_medium=iOS&utm_content=WBC"><img src="/assets/sp/images/picks/au/banner-w_samurai.png" alt="【WBC】試合日程・ハイライト動画"></a>
+    <a id="js-banner__w_samurai__link-for-Android" style="display: none;" class="banner__w_samurai__link for-Android" href="https://sportsbull.jp/w_samurai/?utm_source=au_sports&utm_campaign=wbc&utm_medium=Android&utm_content=WBC"><img src="/assets/sp/images/picks/au/banner-w_samurai.png" alt="【WBC】試合日程・ハイライト動画"></a>
   </aside><!-- /.banner__w_samurai -->
-
+<script src="/assets/js/picks_au_banner.bundle.js"></script>
   <div class="body-sec">
     <div class="body-sec-inner">
 
