@@ -2,7 +2,7 @@
 
 // big6tv
 // ==============================
-$app->group('/{slug:big6|big6tv}[/]', function ($request, $response, $args) use ($app) {
+$app->group('/{slug:big6|big6tv}',  function () use($app) {
 
 
   // /big6tv/
@@ -72,8 +72,10 @@ $app->group('/{slug:big6|big6tv}[/]', function ($request, $response, $args) use 
     $big6tvRanking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
     $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
 
-    return $this->renderer->render($response, 'big6tv/webveiw.php', $args);
+    return $this->renderer->render($response, 'big6tv/webview.php', $args);
 
   });
+
+});
 
 ?>
