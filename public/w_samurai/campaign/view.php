@@ -142,7 +142,7 @@
             <h3 class="yellfor__heading"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-heading.png" alt="野球日本代表"></h3>
             <ul class="yellfor__btns">
               <li class="yellfor__btns__item"><a href="https://sportsbull.jp/p/103254/"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
-              <li class="yellfor__btns__item"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
+              <li class="yellfor__btns__item"><a href="https://sportsbull.jp/wbc/" target="_blank"><img src="/assets/images/w_samurai/campaign/yellfor-baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></a></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
         </div><!-- /.yellfor -->

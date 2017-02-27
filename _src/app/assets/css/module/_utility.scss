@@ -7,9 +7,42 @@
 //
 // Styleguide 2.1.0
 
+// responsive tool
+.word_break {
+  display: block;
+}
+
+.other {
+  .show-for-pc { display: inherit !important;}
+  .show-for-sp,
+  .hide-for-sp { display: none !important;}
+}
+
+.mobile {
+  .show-for-pc,
+  .hide-for-pc { display: none !important;}
+  .show-for-sp { display: block !important;}
+}
+
+@include screen('large') {
+  .show-for-large { display: inherit !important;}
+  .hide-for-large,
+  .show-for-small { display: none !important;}
+}
+
+@include screen('small') {
+  .show-for-small { display: inherit !important;}
+  .hide-for-small,
+  .show-for-large { display: none !important;}
+}
+
+
+
+
+
 // hover-opacity
-// hover ¤Ç Í¸ß^ÂÊ 0.75 ¤Ë¤·¤Ş¤¹ (CSS¥¢¥Ë¥á©`¥·¥ç¥ó¸¶)
-// $opacity=.75 - hover•r¤ÎÍ¸ß^ÂÊ
+// hover Â¤Ã‡ ÃÂ¸ÃŸ^Ã‚ÃŠ 0.75 Â¤Ã‹Â¤Â·Â¤ÃÂ¤Â¹ (CSSÂ¥Â¢Â¥Ã‹Â¥Ã¡Â©`Â¥Â·Â¥Ã§Â¥Ã³Â¸Â¶)
+// $opacity=.75 - hoverâ€¢rÂ¤ÃÃÂ¸ÃŸ^Ã‚ÃŠ
 @mixin hover-opacity($opacity:.75) {
   opacity: $opacity;
   transition: opacity ease-out .4s;
