@@ -1,4 +1,4 @@
-@import "../../../../../../scss_sp/asset";
+@import "../../../../../scss/asset";
 
 // Project module を記述します
 
@@ -7,4 +7,5 @@
 // design module
 
 @import "../../module/import";
+@import "theme_newdark";
 @import "index";

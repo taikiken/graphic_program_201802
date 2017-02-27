@@ -414,7 +414,7 @@ $spaceValue: 100;
     }
 
     .#{$arg}#{$tmp} {
-      #{$properties}: $i*1px !important;
+      #{$properties}: $i/2*1px !important;
     }
   }
 }
