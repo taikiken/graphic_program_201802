@@ -104,7 +104,7 @@
             <h2 class="yellfor__heading"><img src="/assets/sp/images/w_samurai/baseball-heading.png" alt="野球日本代表 2017 WORLD BASEBALL CLASSIC &tm;"></h2>
             <ul class="yellfor__btns">
               <li class="yellfor__btns__item"><a href="https://sportsbull.jp/p/103254/" target="_blank"><img src="/assets/sp/images/w_samurai/baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
-              <li class="yellfor__btns__item"><img src="/assets/sp/images/w_samurai/baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></li>
+              <li class="yellfor__btns__item"><a href="https://sportsbull.jp/wbc/" target="_blank"><img src="/assets/sp/images/w_samurai/baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦 COMING SOON"></a></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
         </div><!-- /.yellfor -->
@@ -113,14 +113,17 @@
 
         <?php
         // app in webview 時に .head-sec を非表示にする
-        if (!$from_webview) :
+        // if (!$from_webview) :
         ?>
-        <aside class="bnr-app for-ios"><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
-        <aside class="bnr-app for-android"><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
         <?php
-        endif;
+        // <aside class="bnr-app for-ios"><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
+        // <aside class="bnr-app for-android"><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
+        ?>
+        <?php
+        // endif;
         // -----------------------------------------
         ?>
+        <aside class="bnr-app"><a href="https://app.adjust.com/7hfkzc" target="_blank"><img src="/assets/sp/images/w_samurai/bnr-app.png" alt="スポーツブル アプリをダウンロード"></a></aside>
       </section><!-- /.main-sec -->
     </div>
   </div><!-- /.body-sec -->
