@@ -1,0 +1,40 @@
+@import "../../../../../../scss_sp/asset";
+
+// index
+//
+// design module index
+
+.undotsushin-ios,
+.undotsushin-android {
+  .head-sec,
+  .foot-sec {
+    display: none !important;
+  }
+
+  body {
+    background-color: #131d25;
+  }
+}
+
+
+
+
+
+.body-sec-inner {
+  background-color: #131d25 !important;
+  background: url(/assets/sp/images/wbc/bg.jpg) center 0 no-repeat;
+  background-size: contain;
+}
+
+.main-sec {
+  padding: (40/2)+px perCalc(30, 750);
+
+  .heading {
+    margin-bottom: (30/2)+px;
+  }
+
+  .spacer {
+    margin-top: (40/2)+px;
+    line-height: 0;
+  }
+}
