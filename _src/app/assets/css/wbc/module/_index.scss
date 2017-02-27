@@ -1,0 +1,39 @@
+@import "../../../../../scss/asset";
+
+// index
+//
+// design module index
+
+.body-sec {
+  background: url(/assets/images/wbc/bg.jpg) center 0 no-repeat;
+  background-size: contain;
+  background-color: #131d25 !important;
+
+  &:before {
+    background-color: transparent !important;
+  }
+}
+
+.body-sec-inner {
+  padding-bottom: 30px;
+  background-color: transparent !important;
+}
+
+.main-sec {
+  margin-top: 40px;
+
+  .heading {
+    margin-bottom: 30px;
+  }
+
+  .spacer {
+    margin-top: 20px;
+    line-height: 0;
+  }
+}
+
+.side-sec {
+  .app-bnr:first-child {
+    margin-top: 10px;
+  }
+}

@@ -59,8 +59,11 @@ htdocs = dir.htdocs
 gulp.task 'html:build', ->
   return gulp.src [
     app + '/**/about/**/*.html'
+    # @since 2017-02-16 wbc 追加
+    app + '/**/wbc/**/*.html'
   ]
   .pipe $.replaceTask patterns: patterns
   .pipe $.if compress.html, $.htmlmin collapseWhitespace: true
+  .pipe $.debug title: '[HTML]'
   .pipe gulp.dest htdocs
   .pipe $.size title: '*** html:build ***'
