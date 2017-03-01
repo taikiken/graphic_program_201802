@@ -9,24 +9,7 @@
 */
 ?>
 
-<?php
-
-// 配信中なら
-if ( $page['big6tv']['liveData']['live']['isPlaying'] == '1' ) :
-
-?>
-
-<div class="live-streaming">
-  <video
-    id="content_video"
-    class="video-js vjs-default-skin"
-    poster="<?php echo $page['big6tv']['liveData']['live']['alt']['large']; ?>"
-    controls preload="auto" width="640" height="360">
-    <source
-      src="<?php echo $page['big6tv']['liveData']['live']['video']['source']; ?>"
-      type="application/x-mpegURL"></source>
-  </video>
-</div><!-- /.live-streaming -->
+<div class="live-streaming js-live"></div><!-- /.live-streaming -->
 
 
 <?php
@@ -105,6 +88,151 @@ if ( $page['big6tv']['liveData']['live']['isPlaying'] == '1' ) :
 </style>
 
 
+<?php
+/*
+
+streampack初期化コード
+
+*/
+?>
+<script id="live-streaming__video" type="text/template">
+  <video
+    id="content_video"
+    class="video-js vjs-default-skin"
+    poster=""
+    controls preload="auto" width="640" height="360">
+    <source
+      src=""
+      type="application/x-mpegURL"></source>
+  </video>
+</script>
+
+<script src="https://code.jquery.com/jquery-git.min.js"></script>
+<script>
+(function($){
+
+  var $embed        = $('.js-live');
+  var $tmpl_video   = $('#live-streaming__video').html();
+  var response      = {};
+  var interval      = 3000;
+  var isPlaying     = null;
+
+  var intervalTimer = window.setInterval(function() {
+
+    $.ajax({
+      url      : '/api/big6tv/live',
+      type     : 'get',
+      dataType : 'json'
+    })
+    .done(function (data) {
+
+      response = data.response.live;
+
+      if ( isPlaying !== response.isPlaying ) {
+
+        isPlaying = response.isPlaying;
+
+        if ( isPlaying ) {
+          reset();
+          initVideo( response );
+          isPlaying = true;
+
+        } else {
+          reset();
+          initAlt( response );
+          isPlaying = false;
+        }
+
+      }
+
+    })
+    .fail(function () {
+      console.log('fail');
+    });
+
+  }, interval);
+
+
+  function reset( data ) {
+
+    // initしたvideojsはdsposeしないと再initできない
+    if ( $('#content_video').length ) {
+      videojs('content_video').dispose();
+    }
+
+    $embed.empty();
+    $embed.css('background-image', 'none');
+    console.log('reset');
+  }
+
+
+  function initAlt( data ) {
+    $embed.css('background-image','url(' + data.alt.large + ')');
+    console.log('initAlt', data.alt.large);
+  }
+
+
+  function initVideo( data ) {
+
+    $embed.html( $tmpl_video );
+    $embed.find('video').attr('poster', data.alt.large );
+    $embed.find('source').attr('src', data.video.source );
+
+    player = videojs('content_video', {}, function() {
+
+      var options = {
+        id: 'content_video',
+        adTagUrl: '<?php echo $page['big6tv']['liveData']['live']['video']['ad']; ?>',
+        requestMode : 'ondemand'
+      };
+
+      player.ima(options);
+
+      var contentPlayer =  document.getElementById('content_video_html5_api');
+      if ((navigator.userAgent.match(/iPad/i) ||
+            navigator.userAgent.match(/Android/i)) &&
+          contentPlayer.hasAttribute('controls')) {
+        contentPlayer.removeAttribute('controls');
+      }
+
+      var startEvent = 'click';
+      if (navigator.userAgent.match(/iPhone/i) ||
+          navigator.userAgent.match(/iPad/i) ||
+          navigator.userAgent.match(/Android/i)) {
+        startEvent = 'touchend';
+      }
+
+      player.one(startEvent, function() {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
+      });
+
+      player.on('play', function() {
+        console.log('Play Video');
+      });
+
+      player.on('pause', function() {
+        console.log('Pause Video');
+      });
+
+      player.on('ended', function() {
+        console.log('End Video');
+      });
+
+      player.on('adsready', function() {
+        console.log('adsready');
+      });
+
+    });
+
+    console.log('initVideo', data);
+  }
+
+
+})(jQuery);
+</script>
+
 
 <?php
 /*
@@ -113,12 +241,15 @@ if ( $page['big6tv']['liveData']['live']['isPlaying'] == '1' ) :
 
 */
 ?>
-<style>
+<style type="text/css">
   .live-streaming {
     position: relative;
     height: 0;
     padding-top: 56.25%;
     z-index: 1;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   #content_video {
@@ -130,90 +261,3 @@ if ( $page['big6tv']['liveData']['live']['isPlaying'] == '1' ) :
   }
 
 </style>
-
-
-<?php
-/*
-
-streampack初期化コード
-
-*/
-?>
-<script>
-// videojsを初期化する: videojs(ID_VIDEO_TAG)
-var player = videojs('content_video');
-
-// IMAのオプションを宣言する。
-// id: ID video tag
-// adTagUrl: URLは広告動画の内容、動画のルール(動画の前、後、間に表示)を格納します。Undotsushinプロジェクトの場合には、ＤＢから取得されます。
-var options = {
-    id: 'content_video',
-    adTagUrl: '<?php echo $page['big6tv']['liveData']['live']['video']['ad']; ?>',
-    requestMode : 'ondemand'
-};
-
-player.ima(options);
-
-// 携帯電話に各制御を押します。
-var contentPlayer =  document.getElementById('content_video_html5_api');
-if ((navigator.userAgent.match(/iPad/i) ||
-      navigator.userAgent.match(/Android/i)) &&
-    contentPlayer.hasAttribute('controls')) {
-  contentPlayer.removeAttribute('controls');
-}
-
-// 動画再生をクリックして、広告を初期化しますが、初めて動画を再生する時だけに適用します。
-var startEvent = 'click';
-if (navigator.userAgent.match(/iPhone/i) ||
-    navigator.userAgent.match(/iPad/i) ||
-    navigator.userAgent.match(/Android/i)) {
-  startEvent = 'touchend';
-}
-
-player.one(startEvent, function() {
-  player.ima.initializeAdDisplayContainer();
-  player.ima.requestAds();
-  player.play();
-});
-
-// 動画再生のイベントを聞き入れます。
-player.on('play', function() {
-  console.log('Play Video');
-
-  // 以下な感じでモバイルでフルスクリーンプレイヤー終了確認済み
-  // window.setTimeout(function() {
-  //   $('#content_video').remove();
-  // }, 1000 );
-
-});
-
-// 動画一時停止のイベントを聞き入れます。
-player.on('pause', function() {
-  console.log('Pause Video');
-});
-// 動画完了のイベントを聞き入れます。
-player.on('ended', function() {
-  console.log('End Video');
-});
-
-// 広告が準備できたイベントを聞き入れます。
-player.on('adsready', function() {
-  console.log('adsready');
-});
-
-</script>
-
-
-<?php
-
-// 配信してないならposter画像のみ表示
-else :
-
-?>
-
-<div class="live-streaming" style="background:url(<?php echo $page['big6tv']['liveData']['live']['alt']['large']; ?>) center center no-repeat; background-size: cover;">
-</div><!-- /.live-streaming -->
-
-<?php endif; ?>
-
-
