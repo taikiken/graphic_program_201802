@@ -10,52 +10,50 @@
     </thead>
     <tbody class="matches-tbody">
 
-      <?php foreach( $page['big6tv']['scheduleData']['gameinfo'] as $weekCount => $weekData ) : ?>
-        <?php foreach( $weekData['gamedate'] as $gameCount => $gameData ) : ?>
-          <tr>
+      <?php foreach( $page['big6tv']['scheduleLatest'] as $gameCount => $gameData ) : ?>
+        <tr>
 
-            <td class="matches-date-unit">
-              <span class="matches-date">
-                <?php echo $gameData['date_display']; ?>
-              </span><br />
-              <span class="matches-time">
-                <?php echo $gameData['starttime']; ?>
-              </span>
-            </td>
+          <td class="matches-date-unit">
+            <span class="matches-date">
+              <?php echo $gameData['date_display']; ?>
+            </span><br />
+            <span class="matches-time">
+              <?php echo $gameData['starttime']; ?>
+            </span>
+          </td>
 
-            <?php foreach( $gameData['game'] as $game ) : ?>
-            <td class="matches-match-unit">
-              <ul class="matches-match">
-                <li>
-                  <i class="matches-match__teamname--<?php echo $game['team'][0]['nameI']; ?>">
-                    <?php echo $game['team'][0]['name']; ?>
-                  </i>
-                </li>
-                <li>
-                  <span class="result">
-                    <?php echo $game['team'][0]['score']; ?> - <?php echo $game['team'][1]['score']; ?>
-                  </span>
-                </li>
-                <li>
-                  <i class="matches-match__teamname--<?php echo $game['team'][1]['nameI']; ?>">
-                    <?php echo $game['team'][1]['name']; ?>
-                  </i>
-                </li>
-              </ul><!-- /.matches-match -->
+          <?php foreach( $gameData['game'] as $game ) : ?>
+          <td class="matches-match-unit">
+            <ul class="matches-match">
+              <li>
+                <i class="matches-match__teamname--<?php echo $game['team'][0]['nameI']; ?>">
+                  <?php echo $game['team'][0]['name']; ?>
+                </i>
+              </li>
+              <li>
+                <span class="result">
+                  <?php echo $game['team'][0]['score']; ?> - <?php echo $game['team'][1]['score']; ?>
+                </span>
+              </li>
+              <li>
+                <i class="matches-match__teamname--<?php echo $game['team'][1]['nameI']; ?>">
+                  <?php echo $game['team'][1]['name']; ?>
+                </i>
+              </li>
+            </ul><!-- /.matches-match -->
 
-              <div class="matches-btn-highlight">
-                <?php if ( $game['gameid'] ) : ?>
-                  <a href="/p/<?php echo $game['gameid']; ?>/"><span>ハイライト</span></a>
-                <?php else : ?>
-                  <a class="disable" href="javascript:void(0);"><span>ハイライト</span></a>
-                <?php endif; ?>
-              </div><!-- /.matches-btn-highlight -->
+            <div class="matches-btn-highlight">
+              <?php if ( $game['gameid'] ) : ?>
+                <a href="/p/<?php echo $game['gameid']; ?>/"><span>ハイライト</span></a>
+              <?php else : ?>
+                <a class="disable" href="javascript:void(0);"><span>ハイライト</span></a>
+              <?php endif; ?>
+            </div><!-- /.matches-btn-highlight -->
 
-            </td>
-            <?php endforeach; ?>
+          </td>
+          <?php endforeach; ?>
 
-          </tr>
-        <?php endforeach; ?>
+        </tr>
       <?php endforeach; ?>
 
     </tbody>
