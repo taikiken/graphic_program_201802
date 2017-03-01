@@ -42,9 +42,10 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
     if ( $args['category_slug'] === 'big6' || $args['category_slug'] === 'big6tv' ) :
 
+      // [TODO] big6tv.router.php と処理重複
       // 直近のスケジュール表を取得する
-      $bigtv6Schedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
-      //$args['page']['big6tv']['scheduleData'] = json_decode($bigtv6Schedule, true)['response'];
+      $big6tvSchedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
+      //$args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
 
       /*
       六大学野球開始前
@@ -57,7 +58,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
       // ゲームを日付でフラットに
       // ------------------------------
-      $schedule = json_decode($bigtv6Schedule, true)['response'];
+      $schedule = json_decode($big6tvSchedule, true)['response'];
       foreach( $schedule['gameinfo'] as $i => $week ) :
         foreach( $week['gamedate'] as $j => $day ) :
           // 比較用に日付をintに

@@ -64,9 +64,66 @@ $app->group('/{slug:big6|big6tv}',  function () use($app) {
     // unset($args['page']['post']);
 
 
-    // スケジュール表を取得する
+    // [TODO] category.router.php と処理重複
+    // 直近のスケジュール表を取得する
     $big6tvSchedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');
-    $args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
+    //$args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
+
+
+    // ゲームを日付でフラットに
+    // ------------------------------
+    $schedule = json_decode($big6tvSchedule, true)['response'];
+    foreach( $schedule['gameinfo'] as $i => $week ) :
+      foreach( $week['gamedate'] as $j => $day ) :
+        // 比較用に日付をintに
+        $day['int']      = intval( date( 'Ymd', strtotime($day['date']) ) );
+        // 日付単位のデータに週渡しておく
+        $day['week']     = $week['week'];
+        $gameDataArray[] = $day;
+      endforeach;
+    endforeach;
+
+    $current = intval(date('Ymd'));
+    // $current = 20160410;
+    $length  = count($gameDataArray);
+
+    // 開催前
+    if ( $current < $gameDataArray[0]['int'] ) :
+      $gameData = array_slice($gameDataArray, 0, 2);
+
+    // 開催終了
+    elseif ( $current > $gameDataArray[$length - 1]['int'] ) :
+      $gameData = array_slice($gameDataArray, $length - 2);
+
+    // 開催期間中
+    else :
+      foreach( $gameDataArray as $key => $value ) :
+
+        // 当日
+        if ( $current == $value['int'] ) :
+
+          // 当日 - 初日以降
+          if ( isset($gameDataArray[$key-1] ) ) :
+            $currentKey = $key;
+          // 当日 - 初日
+          else :
+            $currentKey = 1;
+          endif;
+
+          break;
+
+        // 開催中
+        elseif ( $current > $value['int'] ) :
+          $currentKey = $key;
+        endif;
+
+      endforeach;
+
+      $gameData = array_slice($gameDataArray, $currentKey - 1, 2);
+
+    endif;
+
+    $args['page']['big6tv']['scheduleLatest'] = $gameData;
 
     // ランキングデータを取得する
     $big6tvRanking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
