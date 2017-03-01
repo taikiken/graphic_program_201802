@@ -9,6 +9,26 @@
 */
 ?>
 
+<style>
+.live-streaming {
+  position: relative;
+  height: 0;
+  padding-top: 56.25%;
+  z-index: 1;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#content_video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+
 <div class="live-streaming js-live"></div><!-- /.live-streaming -->
 
 
@@ -113,7 +133,6 @@ streampack初期化コード
 
   var $embed        = $('.js-live');
   var $tmpl_video   = $('#live-streaming__video').html();
-  var response      = {};
   var interval      = 3000;
   var isPlaying     = null;
 
@@ -126,7 +145,7 @@ streampack初期化コード
     })
     .done(function (data) {
 
-      response = data.response.live;
+      var response = data.response.live;
 
       if ( isPlaying !== response.isPlaying ) {
 
@@ -150,6 +169,9 @@ streampack初期化コード
   }, interval);
 
 
+  /**
+  * プレイヤー部分をリセットする
+  */
   function reset( data ) {
 
     // initしたvideojsはdsposeしないと再initできない
@@ -163,14 +185,19 @@ streampack初期化コード
   }
 
 
+  /**
+  * プレイヤー部分にalt画像を表示する
+  */
   function initAlt( data ) {
     $embed.css('background-image','url(' + data.alt.large + ')');
     console.log('initAlt', data.alt.large);
   }
 
 
+  /**
+  * プレイヤー部分にvideoタグを出力する
+  */
   function initVideo( data ) {
-
     $embed.html( $tmpl_video );
     $embed.find('video').attr('poster', data.alt.large );
     $embed.find('source').attr('src', data.video.source );
@@ -178,12 +205,14 @@ streampack初期化コード
     var player = videojs('content_video');
 
     var options = {
-      id: 'content_video',
-      adTagUrl: data.video.ad,
+      id          : 'content_video',
+      adTagUrl    : data.video.ad,
       requestMode : 'ondemand'
     };
 
-    player.ima(options);
+    if ( data.video.ad ) {
+      player.ima(options);
+    }
 
     var contentPlayer =  document.getElementById('content_video_html5_api');
     if ((navigator.userAgent.match(/iPad/i) ||
@@ -200,8 +229,10 @@ streampack初期化コード
     }
 
     player.one(startEvent, function() {
-      player.ima.initializeAdDisplayContainer();
-      player.ima.requestAds();
+      if ( data.video.ad ) {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+      }
       player.play();
     });
 
@@ -222,7 +253,7 @@ streampack初期化コード
     });
 
     // TODO
-    // エラー補足してごめんなさい画像出す
+    // エラー捕捉してごめんなさい画像出す
     // ごめんなさい画像は準備中
 
     console.log('initVideo', data);
@@ -231,32 +262,3 @@ streampack初期化コード
 
 })(jQuery);
 </script>
-
-
-<?php
-/*
-
-ライブ部分幅フィット
-
-*/
-?>
-<style type="text/css">
-  .live-streaming {
-    position: relative;
-    height: 0;
-    padding-top: 56.25%;
-    z-index: 1;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  #content_video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-</style>
