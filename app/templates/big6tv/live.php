@@ -135,12 +135,9 @@ streampack初期化コード
         if ( isPlaying ) {
           reset();
           initVideo( response );
-          isPlaying = true;
-
         } else {
           reset();
           initAlt( response );
-          isPlaying = false;
         }
 
       }
@@ -178,53 +175,55 @@ streampack初期化コード
     $embed.find('video').attr('poster', data.alt.large );
     $embed.find('source').attr('src', data.video.source );
 
-    player = videojs('content_video', {}, function() {
+    var player = videojs('content_video');
 
-      var options = {
-        id: 'content_video',
-        adTagUrl: '<?php echo $page['big6tv']['liveData']['live']['video']['ad']; ?>',
-        requestMode : 'ondemand'
-      };
+    var options = {
+      id: 'content_video',
+      adTagUrl: data.video.ad,
+      requestMode : 'ondemand'
+    };
 
-      player.ima(options);
+    player.ima(options);
 
-      var contentPlayer =  document.getElementById('content_video_html5_api');
-      if ((navigator.userAgent.match(/iPad/i) ||
-            navigator.userAgent.match(/Android/i)) &&
-          contentPlayer.hasAttribute('controls')) {
-        contentPlayer.removeAttribute('controls');
-      }
+    var contentPlayer =  document.getElementById('content_video_html5_api');
+    if ((navigator.userAgent.match(/iPad/i) ||
+          navigator.userAgent.match(/Android/i)) &&
+        contentPlayer.hasAttribute('controls')) {
+      contentPlayer.removeAttribute('controls');
+    }
 
-      var startEvent = 'click';
-      if (navigator.userAgent.match(/iPhone/i) ||
-          navigator.userAgent.match(/iPad/i) ||
-          navigator.userAgent.match(/Android/i)) {
-        startEvent = 'touchend';
-      }
+    var startEvent = 'click';
+    if (navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/Android/i)) {
+      startEvent = 'touchend';
+    }
 
-      player.one(startEvent, function() {
-        player.ima.initializeAdDisplayContainer();
-        player.ima.requestAds();
-        player.play();
-      });
-
-      player.on('play', function() {
-        console.log('Play Video');
-      });
-
-      player.on('pause', function() {
-        console.log('Pause Video');
-      });
-
-      player.on('ended', function() {
-        console.log('End Video');
-      });
-
-      player.on('adsready', function() {
-        console.log('adsready');
-      });
-
+    player.one(startEvent, function() {
+      player.ima.initializeAdDisplayContainer();
+      player.ima.requestAds();
+      player.play();
     });
+
+    player.on('play', function() {
+      console.log('Play Video');
+    });
+
+    player.on('pause', function() {
+      console.log('Pause Video');
+    });
+
+    player.on('ended', function() {
+      console.log('End Video');
+    });
+
+    player.on('adsready', function() {
+      console.log('adsready');
+    });
+
+    // TODO
+    // エラー補足してごめんなさい画像出す
+    // ごめんなさい画像は準備中
 
     console.log('initVideo', data);
   }
