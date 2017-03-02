@@ -5,14 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=1280">
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
-  <title>東京六大学野球 big6.tv | SPORTS BULL</title>
+  <title>東京六大学野球 BIG6.TV | SPORTS BULL</title>
   <meta name="description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <meta name="keywords" content="東京六大学野球, 法政大学, 立教大学, 東京大学, 早稲田大学, 慶應大学, 明治大学, LIVE配信, ハイライト動画, スポーツ, メディア, ニュース, 動画, sports, media">
   <!-- sns ogp -->
-  <meta property="og:title" content="東京六大学野球 big6.tv | SPORTS BULL">
+  <meta property="og:title" content="東京六大学野球 BIG6.TV | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/big6/">
+  <meta property="og:url" content="https://sportsbull.jp/big6tv/">
   <meta property="og:description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
@@ -20,7 +20,7 @@
   <!-- favicon -->
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <link rel="canonical" href="https://sportsbull.jp/big6/">
+  <link rel="canonical" href="https://sportsbull.jp/big6tv/">
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
   <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
@@ -69,10 +69,10 @@
   <div class="body-sec-inner">
 
     <div class="big6-summary">
-      <h1 class="big6-summary-heading"><img src="/assets/images/big6/heading.png" alt="東京6大学野球 2017 春季リーグ戦 日程・結果 / 勝敗表"></h1>
+      <h1 class="big6-summary-heading"><img src="/assets/images/big6/heading.png" alt="東京六大学野球 2017 春季リーグ戦 日程・結果 / 勝敗表"></h1>
 
       <div class="big6-summary-banner">
-        <a href="hoge"><img src="/assets/images/big6/bnr-streaming.png" alt=""></a>
+        <a href="/category/big6tv/"><img src="/assets/images/big6/bnr-streaming.png" alt=""></a>
       </div><!-- /.big6-summary-banner -->
     </div><!-- /.big6-summary -->
 

@@ -8,15 +8,15 @@
   // app in webview 時に .head-sec を非表示にする
   if (!$from_webview) :
   ?>
-  <title>東京六大学野球 big6.tv | SPORTS BULL</title>
+  <title>東京六大学野球 BIG6.TV | SPORTS BULL</title>
   <meta name="apple-itunes-app" content="app-id=1086719653">
   <meta name="description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <meta name="keywords" content="東京六大学野球, 法政大学, 立教大学, 東京大学, 早稲田大学, 慶應大学, 明治大学, LIVE配信, ハイライト動画, スポーツ, メディア, ニュース, 動画, sports, media">
   <!-- sns ogp -->
-  <meta property="og:title" content="東京六大学野球 big6.tv | SPORTS BULL">
+  <meta property="og:title" content="東京六大学野球 BIG6.TV | SPORTS BULL">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
-  <meta property="og:url" content="https://sportsbull.jp/big6/">
+  <meta property="og:url" content="https://sportsbull.jp/big6tv/">
   <meta property="og:description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary">
@@ -30,7 +30,7 @@
   <link rel="icon" sizes="192x192" href="/assets/sp/images/common/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <link rel="canonical" href="https://sportsbull.jp/big6/">
+  <link rel="canonical" href="https://sportsbull.jp/big6tv/">
   <script src="/assets/js/libs/jquery2/jquery.min.js?v=<?php echo $page['version']; ?>"></script>
 
   <?php
