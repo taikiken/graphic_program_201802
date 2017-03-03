@@ -141,7 +141,11 @@ streampack初期化コード
     $.ajax({
       url      : '/api/big6tv/live',
       type     : 'get',
-      dataType : 'json'
+      dataType : 'json',
+      cache    : true,
+      data : {
+        cache : Math.random()
+      }
     })
     .done(function (data) {
 
