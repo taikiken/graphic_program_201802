@@ -452,9 +452,11 @@ $border-color: #585959;
 
     // .misc-list
     &-list {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
+      // display: flex;
+      // flex-flow: row wrap;
+      // justify-content: space-between;
+      text-align: center;
+      letter-spacing: ls(inline-block);
       margin-top: (10/2)+px;
       margin-right: perCalc(20, 750);
       margin-left: perCalc(20, 750);
@@ -462,11 +464,17 @@ $border-color: #585959;
 
     // .misc-item
     &-item {
+      display: inline-block;
       width: perCalc(230, 710);
       margin-top: (10/2)+px;
 
       img {
         width: 100%;
+      }
+
+      &:nth-child(3n+2) {
+        margin-right: perCalc(10, 710);
+        margin-left: perCalc(10, 710);
       }
     }
   } // .misc
