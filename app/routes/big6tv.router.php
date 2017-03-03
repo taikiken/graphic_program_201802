@@ -2,15 +2,15 @@
 
 // big6tv
 // ==============================
-$app->group('/{slug:big6|big6tv}',  function () use($app) {
+$app->group('/{slug:big6tv}',  function () use($app) {
 
 
   // /big6tv/
   // ==============================
   $this->map(['GET'], '[/]', function ($request, $response, $args) use ($app) {
     $args['page'] = $app->model->set(array(
-      'title'              => '六大学野球のタイトルです(仮)',
-      'og_title'           => '大学野球のタイトルです(仮) | '.$app->model->property('title'),
+      'title'              => '東京六大学野球 BIG6.TV',
+      'og_title'           => '東京六大学野球 BIG6.TV | '.$app->model->property('title'),
       'og_url'             => $app->model->property('site_url').'big6tv/',
       'path'               => $args,
       'template'           => 'category',

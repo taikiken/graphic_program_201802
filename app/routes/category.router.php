@@ -22,7 +22,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
     $category           = $app->model->get_category_by_slug($args['category_slug']);
     $template_classname = ( isset($category['theme']['base']) ) ? $category['theme']['base'] : '';
 
-    if ( $args['category_slug'] === 'big6' || $args['category_slug'] === 'big6tv' ) :
+    if ( $args['category_slug'] === 'big6tv' ) :
       $template_classname = $template_classname . ' theme_big6';
     endif;
 
@@ -40,7 +40,10 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       'path'               => $args,
     ));
 
-    if ( $args['category_slug'] === 'big6' || $args['category_slug'] === 'big6tv' ) :
+
+    // big6tv対応
+    // ==============================
+    if ( $args['category_slug'] === 'big6tv' ) :
 
       // [TODO] big6tv.router.php と処理重複
       // 直近のスケジュール表を取得する
