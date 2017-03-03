@@ -53,6 +53,11 @@
           </td>
           <?php endforeach; ?>
 
+          <?php // 1日の試合が1試合しかない場合の空セル ?>
+          <?php if ( count($gameData['game']) < 2 ) : ?>
+            <td></td>
+          <?php endif; ?>
+
         </tr>
       <?php endforeach; ?>
 
