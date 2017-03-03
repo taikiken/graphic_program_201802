@@ -133,7 +133,7 @@ streampack初期化コード
 
   var $embed        = $('.js-live');
   var $tmpl_video   = $('#live-streaming__video').html();
-  var interval      = 3000;
+  var interval      = 3000; // polling感覚
   var isPlaying     = null;
 
   var intervalTimer = window.setInterval(function() {
@@ -142,18 +142,24 @@ streampack初期化コード
       url      : '/api/big6tv/live',
       type     : 'get',
       dataType : 'json',
-      cache    : true,
+      cache    : true, // jQueryのcache設定これじゃなかったっけ..
       data : {
-        cache : Math.random()
+        cache : Math.random() // cache効かないようなので意図的にパラメータつける
       }
     })
     .done(function (data) {
 
-      var response = data.response.live;
+      var response      = data.response.live;
+      var response_flag = false;
 
-      if ( isPlaying !== response.isPlaying ) {
+      // レスポンスのisPlayingがboolでもstringでも判定できるように
+      if ( response.isPlaying == true || response.isPlaying == 'true' ) {
+        response_flag = true;
+      }
 
-        isPlaying = response.isPlaying;
+      if ( isPlaying !== response_flag ) {
+
+        isPlaying = response_flag;
 
         if ( isPlaying ) {
           reset();
@@ -167,7 +173,7 @@ streampack初期化コード
 
     })
     .fail(function () {
-      console.log('fail');
+      console.log('live - ajax : fail');
     });
 
   }, interval);
@@ -185,7 +191,7 @@ streampack初期化コード
 
     $embed.empty();
     $embed.css('background-image', 'none');
-    console.log('reset');
+    console.log('live - reset');
   }
 
 
@@ -193,8 +199,9 @@ streampack初期化コード
   * プレイヤー部分にalt画像を表示する
   */
   function initAlt( data ) {
+    // 単に中身の要素を空にして親要素の背景にposterおいてるだけ
     $embed.css('background-image','url(' + data.alt.large + ')');
-    console.log('initAlt', data.alt.large);
+    console.log('live - initAlt', data.alt.large);
   }
 
 
@@ -214,9 +221,7 @@ streampack初期化コード
       requestMode : 'ondemand'
     };
 
-    if ( data.video.ad ) {
-      player.ima(options);
-    }
+    player.ima(options);
 
     var contentPlayer =  document.getElementById('content_video_html5_api');
     if ((navigator.userAgent.match(/iPad/i) ||
@@ -225,6 +230,7 @@ streampack初期化コード
       contentPlayer.removeAttribute('controls');
     }
 
+
     var startEvent = 'click';
     if (navigator.userAgent.match(/iPhone/i) ||
         navigator.userAgent.match(/iPad/i) ||
@@ -232,35 +238,47 @@ streampack初期化コード
       startEvent = 'touchend';
     }
 
-    player.one(startEvent, function() {
-      if ( data.video.ad ) {
+    if ( startEvent == 'touchend' ) {
+
+      player.one(startEvent, function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
-      }
-      player.play();
-    });
+        player.play();
+        console.log('live - play : sp');
+      });
+
+    } else {
+
+      setTimeout(function() {
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
+        console.log('live - play : pc');
+      }, 1000);
+
+    }
 
     player.on('play', function() {
-      console.log('Play Video');
+      console.log('live - play');
     });
 
     player.on('pause', function() {
-      console.log('Pause Video');
+      console.log('live - pause');
     });
 
     player.on('ended', function() {
-      console.log('End Video');
+      console.log('live - ended');
     });
 
     player.on('adsready', function() {
-      console.log('adsready');
+      console.log('live - adsready');
     });
 
     // TODO
     // エラー捕捉してごめんなさい画像出す
     // ごめんなさい画像は準備中
 
-    console.log('initVideo', data);
+    console.log('live - initVideo', data);
   }
 
 
