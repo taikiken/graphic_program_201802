@@ -121,6 +121,42 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
     }
   }
   /**
+   * category: wbc で keywords に TBS が含まれているかを判定します
+   * wbc && TBS - 記事は遷移する
+   * @return {boolean} true: wbc && TBS
+   * @since 2017-03-05 - wbc && TBS 遷移する
+   * @see https://github.com/undotsushin/undotsushin/issues/1468
+   */
+  wbcTbs() {
+    const single = this.state.single;
+    const categories = single.categories.all;
+    let result = categories.some(category => category === 'wbc');
+    if (!result) {
+      // false - not wbc
+      return result;
+    }
+    const keywords = single.keywords;
+    return keywords.some(keyword => keyword === 'TBS');
+  }
+  /**
+   * 「続きを読む」でその場で開いて良いかの判定を行います
+   * @return {boolean} true: その場で開く, false: 何もしない - 遷移する
+   * @since 2017-03-05 - wbc && TBS 遷移する
+   * @see https://github.com/undotsushin/undotsushin/issues/1468
+   */
+  canContinue() {
+    let can = true;
+    // since 2017-02-22 `103250` を外部リンクにする
+    if (this.state.single.id === 103250) {
+      can = false;
+    }
+    if (can) {
+      // wbc && tbs の時 true が返るので「続きを読む」可能な時は反転させて使います
+      return !this.wbcTbs();
+    }
+    return can;
+  }
+  /**
    * a.onclick event handler<br>
    * 本文を表示しボタンを隠します
    * @param {Event} event a.onclick event
@@ -128,7 +164,8 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
    * @see https://github.com/undotsushin/undotsushin/issues/1593
    * */
   anchorClick(event) {
-    if (this.state.single.id !== 103250) {
+    if (this.canContinue()) {
+    // if (this.state.single.id !== 103250) {
       event.preventDefault();
       // this.y = Scroll.y;
       const y = Scroll.y;
