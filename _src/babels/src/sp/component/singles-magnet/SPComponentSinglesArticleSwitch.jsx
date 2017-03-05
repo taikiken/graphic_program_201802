@@ -130,7 +130,7 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
   wbcTbs() {
     const single = this.state.single;
     const categories = single.categories.all;
-    let result = categories.some(category => category === 'wbc');
+    let result = categories.some(category => category.slug === 'wbc');
     if (!result) {
       // false - not wbc
       return result;
