@@ -3,7 +3,7 @@
 #958 バーチャル高校野球2016用 brightcove埋め込みコード
 
 ?>
-<link href="/assets/vk_brightcove_2017/css/Player.css" rel="stylesheet"/>
+<link href="/demo/vk_brightcove_2017/css/Player.css" rel="stylesheet"/>
 
 <div style="display: block; position: relative;">
   <div style="padding-top: 56.25%;">
@@ -21,8 +21,8 @@
 
 <script src="//players.brightcove.net/4802324450001/Bymj9RCx_default/index.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/assets/vk_brightcove_2017/js/bc-mapi.js"></script>
-<script src="/assets/vk_brightcove_2017/js/Player.js"></script>
+<script src="/demo/vk_brightcove_2017/js/bc-mapi.js"></script>
+<script src="/demo/vk_brightcove_2017/js/Player.js"></script>
 <script type="text/javascript">
   videojs('ABCplayer').PlayerControl({
     "videoId" : "<?php echo $page['post']['media_vk_refid']; ?>",
