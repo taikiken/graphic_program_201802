@@ -102,7 +102,7 @@
 
           <div class="post-content">
             <div class="cms_widget">
-              <?php include_once __DIR__."/../specific/_vk_brightcove.php"; ?>
+              <?php include_once __DIR__."/../specific/_vk_brightcove_2016.php"; ?>
             </div>
           </div>
 
