@@ -33,5 +33,17 @@
     "showRelatedVideos" : true,
     "relatedVideosTags": ['hls_vod'],
   });
+
+  //AdobeAnalyics再生開始計測メソッド
+  sc_asa_digi_koshien_videotype = null;
+
+  function videoStartTracking(videoType) {
+    sc_asa_digi_koshien_videotype = videoType;
+    console.log("VideoStartTracking, videoType=" + videoType);
+    if("_satelite" in window){
+      _satellite.track("trackKoshienVideoStart");
+    }
+  }
+
 </script>
 
