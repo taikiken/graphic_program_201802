@@ -10,7 +10,7 @@
     <video
       id="ABCplayer"
       data-account="4802324450001"
-      data-player="Bymj9RCx"
+      data-player="rJIcYM98"
       data-embed="default"
       class="video-js"
       style="width: 100%; height: 100%; position: absolute; top: 0px; bottom: 0px; right: 0px; left: 0px;"
@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<script src="//players.brightcove.net/4802324450001/Bymj9RCx_default/index.min.js"></script>
+<script src="//players.brightcove.net/4802324450001/rJIcYM98_default/index.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/demo/vk_brightcove_2017/js/bc-mapi.js"></script>
 <script src="/demo/vk_brightcove_2017/js/Player.js"></script>
