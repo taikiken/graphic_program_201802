@@ -2,6 +2,13 @@
 
 #958 バーチャル高校野球2016用 brightcove埋め込みコード
 
+// webview本文取得時はautoplayしない
+if ( isset($_GET['get']) && $_GET['get'] == 'body' ) :
+  $is_autoplay = 'false';
+else :
+  $is_autoplay = 'true';
+endif;
+
 ?>
 <link href="/demo/vk_brightcove_2017/css/Player.css" rel="stylesheet"/>
 
@@ -29,7 +36,7 @@
     //"videoId" : "test97_kantoku1_mobile",
     "stillImageUrl" : "<?php echo $page['post']['media']['images']['large']; ?>",
     //"stillImageUrl" : "http://www.asahicom.jp/koshien/97/digest/20150808_1d.jpg",
-    "autoPlay" : true,
+    "autoPlay" : <?php echo $is_autoplay; ?>
     "showRelatedVideos" : true,
     "relatedVideosTags": ['hls_vod'],
   });
