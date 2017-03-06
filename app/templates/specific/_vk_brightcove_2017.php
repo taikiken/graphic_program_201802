@@ -36,7 +36,7 @@ endif;
     //"videoId" : "test97_kantoku1_mobile",
     "stillImageUrl" : "<?php echo $page['post']['media']['images']['large']; ?>",
     //"stillImageUrl" : "http://www.asahicom.jp/koshien/97/digest/20150808_1d.jpg",
-    "autoPlay" : <?php echo $is_autoplay; ?>
+    "autoPlay" : <?php echo $is_autoplay; ?>,
     "showRelatedVideos" : true,
     "relatedVideosTags": ['hls_vod'],
   });
