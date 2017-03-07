@@ -217,7 +217,7 @@ streampack初期化コード
 
     var options = {
       id          : 'content_video',
-      adTagUrl    : data.video.ad,
+      adTagUrl    : <?php echo ( $page['ua'] == 'desktop' ) ? 'data.video.ad_url.pc' : 'data.video.ad_url.sp'; ?>,
       requestMode : 'ondemand'
     };
 
