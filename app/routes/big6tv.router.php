@@ -24,6 +24,12 @@ $app->group('/{slug:big6tv}',  function () use($app) {
     // unset($args['page']['category']);
     // unset($args['page']['post']);
 
+    // LIVEデータを取得する
+    $big6tvLive = @file_get_contents($app->model->property('site_url').'/api/big6tv/live');
+    if ( !$big6tvLive ) :
+      $big6tvLive = @file_get_contents('https://dev.sportsbull.jp/api/big6tv/live');
+    endif;
+    $args['page']['big6tv']['liveData'] = json_decode($big6tvLive, true)['response'];
 
     // スケジュール表を取得する
     $big6tvSchedule = @file_get_contents($app->model->property('site_url').'/api/big6tv/schedule');

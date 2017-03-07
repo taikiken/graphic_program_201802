@@ -72,7 +72,13 @@
       <h1 class="big6-summary-heading"><img src="/assets/images/big6/heading.png" alt="東京六大学野球 2017 春季リーグ戦 日程・結果 / 勝敗表"></h1>
 
       <div class="big6-summary-banner">
-        <a href="/category/big6tv/"><img src="/assets/images/big6/bnr-streaming.png" alt=""></a>
+        <a href="/category/big6tv/">
+          <?php if ( $page['big6tv']['liveData']['live']['isPlaying'] ) : ?>
+            <img src="/assets/images/big6/bnr-streaming.png?isPlaying=true" alt="">
+          <?php else : ?>
+            <img src="/assets/images/big6/bnr-streaming.png?isPlaying=false" alt="">
+          <?php endif; ?>
+        </a>
       </div><!-- /.big6-summary-banner -->
     </div><!-- /.big6-summary -->
 
