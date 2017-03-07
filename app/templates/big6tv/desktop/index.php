@@ -107,7 +107,11 @@
 
                     <td class="matches-date-unit">
                       <span class="matches-date">
-                        <?php echo $gameData['date_display']; ?>
+                        <?php
+                          $date    = strtotime($gameData['date']);
+                          $weekday = array( "日", "月", "火", "水", "木", "金", "土" );
+                          echo date('n/j', $date).' ('.$weekday[date("w", $date)].')';
+                        ?>
                       </span><br />
                       <span class="matches-time">
                         <?php echo $gameData['starttime']; ?>
