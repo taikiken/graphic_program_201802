@@ -37,8 +37,8 @@ endif;
     "stillImageUrl" : "<?php echo $page['post']['media']['images']['large']; ?>",
     //"stillImageUrl" : "http://www.asahicom.jp/koshien/97/digest/20150808_1d.jpg",
     "autoPlay" : <?php echo $is_autoplay; ?>,
-    "showRelatedVideos" : true,
-    "relatedVideosTags": ['hls_vod'],
+    "showRelatedVideos" : false
+    //"relatedVideosTags": ['hls_vod'],
   });
 
   //AdobeAnalyics再生開始計測メソッド
