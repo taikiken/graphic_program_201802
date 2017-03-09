@@ -97,12 +97,14 @@
           </div>
           <?php endif; ?>
 
-          <?php // #985 - バーチャル高校野球動画記事の場合 ?>
+          <?php
+            // #1602 - VK brightcove
+          ?>
           <?php if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) : ?>
 
           <div class="post-content">
             <div class="cms_widget">
-              <?php include_once __DIR__."/../specific/_vk_brightcove.php"; ?>
+              <?php include_once __DIR__."/../specific/_vk_brightcove_2017.php"; ?>
             </div>
           </div>
 
