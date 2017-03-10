@@ -133,7 +133,7 @@ streampack初期化コード
 
   var $embed        = $('.js-live');
   var $tmpl_video   = $('#live-streaming__video').html();
-  var interval      = 3000; // polling感覚
+  var interval      = 10000; // polling感覚
   var isPlaying     = null;
 
   var intervalTimer = window.setInterval(function() {
