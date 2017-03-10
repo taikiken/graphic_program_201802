@@ -213,11 +213,24 @@ streampack初期化コード
     $embed.find('video').attr('poster', data.alt.large );
     $embed.find('source').attr('src', data.video.source );
 
-    var player = videojs('content_video');
+    // ad_url
+    // ------------------------------
+    var ad_url = <?php echo ( $page['ua'] == 'desktop' ) ? 'data.video.ad_url.pc' : 'data.video.ad_url.sp'; ?>;
 
+    // advantage広告タグ用 - URLの末尾が `page=` ならtimestampを付与してリクエストする
+    if ( ad_url !== '') {
+      var date = new Date() ;
+      if ( ad_url.match(/page=$/) ) {
+        ad_url += date.getTime();
+      }
+    }
+
+    // player
+    // ------------------------------
+    var player = videojs('content_video');
     var options = {
       id          : 'content_video',
-      adTagUrl    : <?php echo ( $page['ua'] == 'desktop' ) ? 'data.video.ad_url.pc' : 'data.video.ad_url.sp'; ?>,
+      adTagUrl    : ad_url,
       requestMode : 'ondemand'
     };
 
