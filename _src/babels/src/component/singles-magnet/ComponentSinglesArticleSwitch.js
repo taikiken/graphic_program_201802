@@ -22,7 +22,8 @@ import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
 
 // // util
 import { Scroll } from '../../util/Scroll';
-// import { Offset } from '../../util/Offset';
+// since 2017-03-05
+import { Validate } from '../../util/Validate';
 
 // React
 const React = self.React;
@@ -83,16 +84,35 @@ export class ComponentSinglesArticleSwitch extends React.Component {
      * bound anchorClick
      * @type {function}
      */
-    this.boundClick = this.anchorClick.bind(this);
+    this.boundClick = this.validateClick.bind(this);
+    // this.boundClick = this.anchorClick.bind(this);
     /**
      * scroll top value
      * @type {number}
      */
     this.y = 0;
+    /**
+     * .js-root Element
+     * @type {?Element}
+     */
     this.root = null;
-    this.offset = null;
+    // this.offset = null;
+    /**
+     * bound excerpt - 省略文章を表示します
+     * @type {function}
+     */
     this.excerpt = this.excerpt.bind(this);
+    /**
+     * bound content - 本文を表示します
+     * @type {function}
+     */
     this.content = this.content.bind(this);
+    /**
+     * body 本文に `video` tag が存在する時は遷移する
+     * SP のみ処理していたので
+     * @since 2017-03-05
+     */
+    this.external = Validate.include(props.single.body, '<video data-video-id="');
   }
   // componentDidMount() {
   //   // -----------------------
@@ -101,6 +121,58 @@ export class ComponentSinglesArticleSwitch extends React.Component {
   //   this.setState({ minHeight: offset.height });
   // }
   /**
+   * click event handler
+   * this.external が true の時は何もしない
+   * @param {Event} event click
+   * @since 2017-03-05
+   * @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
+   * @see https://github.com/undotsushin/undotsushin/issues/1468
+   * @see https://undo-tsushin.slack.com/archives/product-web/p1488679810000002
+   * @see https://undo-tsushin.slack.com/archives/product-web/p1488690961000019
+   */
+  validateClick(event) {
+    if (!this.external) {
+      // 記事詳細を開くための処理に移動
+      this.anchorClick(event);
+    }
+  }
+  /**
+   * category: wbc で keywords に TBS が含まれているかを判定します
+   * @return {boolean} true: wbc && TBS
+   * @since 2017-03-05 - wbc && TBS 遷移する
+   * @see https://github.com/undotsushin/undotsushin/issues/1468
+   */
+  wbcTbs() {
+    const single = this.state.single;
+    // @type {Array<SlugDae>} - SlugDae: {{label: string, slug: string}}
+    const categories = single.categories.all;
+    let result = categories.some(category => category.slug === 'wbc');
+    if (!result) {
+      // false - not wbc
+      return result;
+    }
+    const keywords = single.keywords;
+    return keywords.some(keyword => keyword === 'TBS');
+  }
+  /**
+   * 「続きを読む」でその場で開いて良いかの判定を行います
+   * @return {boolean} true: その場で開く, false: 何もしない - 遷移する
+   * @since 2017-03-05 - wbc && TBS 遷移する
+   * @see https://github.com/undotsushin/undotsushin/issues/1468
+   */
+  canContinue() {
+    let can = true;
+    // since 2017-02-22 `103250` を外部リンクにする
+    if (this.state.single.id === 103250) {
+      can = false;
+    }
+    if (can) {
+      // wbc && tbs の時 true が返るので「続きを読む」可能な時は反転させて使います
+      return !this.wbcTbs();
+    }
+    return can;
+  }
+  /**
    * a.onclick event handler<br>
    * 本文を表示しボタンを隠します
    * @param {Event} event a.onclick event
@@ -108,7 +180,8 @@ export class ComponentSinglesArticleSwitch extends React.Component {
    * @see https://github.com/undotsushin/undotsushin/issues/1593
    * */
   anchorClick(event) {
-    if (this.state.single.id !== 103250) {
+    if (this.canContinue()) {
+    // if (this.state.single.id !== 103250) {
       event.preventDefault();
       // this.y = Scroll.y;
       const y = Scroll.y;
