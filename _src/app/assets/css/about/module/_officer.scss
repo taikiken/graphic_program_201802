@@ -4,11 +4,23 @@
 //
 // design module officer
 
+@include screen('small') {
+  .body__officer {
+    min-width: 0;
+  }
+
+  .officer__heading {
+    width: 100%;
+  }
+}
+
 .officer {
   // .officer__vision
   &__body {
-    @include screen('large') {
-      @extend %centerring_contents;
+    @media only screen and (min-width: 769px) {
+      width: 1080px;
+      margin-right: auto;
+      margin-left: auto;
       margin-top: 76px;
       overflow: hidden;
 
@@ -26,6 +38,7 @@
           text-align: left;
 
           h2 {
+            margin-top: 5px;
             font-size: 24px;
             font-weight: 800;
             color: $highlight-color;
@@ -40,8 +53,8 @@
 
           p {
             font-size: 14px;
-            margin-top: 35px;
-            line-height: 1.7;
+            margin-top: 30px;
+            line-height: 1.6;
             letter-spacing: 0.05em;
           }
 
@@ -62,9 +75,28 @@
           .officer__body__parts__text {
             float: left;
             padding-left: 40px;
+            position: relative;
 
             h2 {
-              margin-top: 45px;
+              margin-top: 60px;
+            }
+
+            &__btn {
+              padding: 7px 40px;
+              position: absolute;
+              top: 63px;
+              right: 0;
+              border: 2px solid $highlight-color;
+              border-radius: 4px;
+              color: $highlight-color;
+              font-size: 15px;
+              font-weight: 600;
+              text-decoration: none;
+
+              &:hover {
+                color: #fff;
+                background: $highlight-color;
+              }
             }
           } 
         }
@@ -139,7 +171,7 @@
         &__text {
           width: 100%;
           text-align: left;
-          padding: 15px;
+          padding: 20px 15px 15px 15px;
           background: #fff;
 
           h2 {
@@ -157,8 +189,7 @@
 
           p {
             font-size: 14px;
-            margin-top: 20px;
-            line-height: 1.8;
+            margin-top: 15px;
           }
 
         }
@@ -172,6 +203,23 @@
             img {
               width: 130%;
               margin-left: -15%;
+            }
+          }
+
+          .officer__body__parts__text {
+
+            &__btn {
+              width: 100%;
+              display: block;
+              padding: 7px 0px;
+              margin-top: 25px;
+              border: 2px solid $highlight-color;
+              border-radius: 4px;
+              color: $highlight-color;
+              text-align: center;
+              font-size: 15px;
+              font-weight: 600;
+              text-decoration: none;
             }
           }
         }
@@ -193,9 +241,8 @@
   }
 }
 
-
 .footer--officer {
-  @include screen('large') {
+  @media only screen and (min-width: 769px) {
     margin-top: 120px;
 
     .footer__inner {

@@ -4,11 +4,23 @@
 //
 // design module message
 
+@include screen('small') {
+  .body__message {
+    min-width: 0;
+  }
+
+  .message__heading {
+    width: 100%;
+  }
+}
+
 .message {
   // .message__vision
   &__body {
-    @include screen('large') {
-      @extend %centerring_contents;
+    @media only screen and (min-width: 769px) {
+      width: 1080px;
+      margin-right: auto;
+      margin-left: auto;
       margin-top: 76px;
       overflow: hidden;
 
@@ -31,7 +43,7 @@
             font-size: 24px;
             font-weight: 800;
             color: $highlight-color;
-            margin-top: 40px;
+            margin-top: 15px;
 
             &::after {
               content: "";
@@ -102,7 +114,7 @@
 
 
 .footer--message {
-  @include screen('large') {
+  @media only screen and (min-width: 769px) {
     margin-top: 120px;
 
     .footer__inner {
