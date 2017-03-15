@@ -1,6 +1,6 @@
 <?php
 
-#958 バーチャル高校野球2016用 brightcove埋め込みコード
+#1602 バーチャル高校野球2017用 brightcove埋め込みコード
 
 // webview本文取得時はautoplayしない
 if ( isset($_GET['get']) && $_GET['get'] == 'body' ) :
