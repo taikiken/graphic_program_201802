@@ -1,4 +1,24 @@
+<?php
+// 六大学 / 広告表示 調整（Web） #1546
+// > アドネットワーク関連の広告（ネイティブアド？）を消したい
+// @see https://github.com/undotsushin/undotsushin/issues/1546
+// category.slug 'big6tv' search
+// @since 2017-03-15
+$template_name = $page['template'];
+$in_big6tv = false;
+if ($template_name == 'category') {
+  $page_category = $page['category'];
+  if ($page_category['slug'] == 'big6tv') {
+    $in_big6tv = true;
+  }
+}
+?>
 
+<?php
+// not big6tv の時のみ広告を表示する
+// @since 2017-03-15
+if (!$in_big6tv) :
+?>
           <?php
           /*
            * https://github.com/undotsushin/undotsushin/issues/720
@@ -25,8 +45,14 @@
           </div>
           <?php endif; ?>
 
+
           <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="SPORTS BULLアプリ版(iPhone/Android対応) アプリでサクサク楽しむ！"></a></div>
           <div class="synSearch-bnr mt20"><a href="http://pickup.syndot.jp/about/?utm_source=undou_pc&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/images/common/bnr-side-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
+<?php
+endif;
+// not big6tv の時のみ広告を表示する
+// --------------------------------
+?>
 
           <?php
           // ------------------------------------
@@ -41,9 +67,19 @@
           <div id="widget-ranking-container"></div><!--/ranking-->
 
           <?php if ( $page['category']['slug'] !== 'crazy' ) : ?>
-          <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-          </div>
+            <?php
+            // not big6tv の時のみ広告を表示する
+            // @since 2017-03-15
+            if (!$in_big6tv) :
+            ?>
+              <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
+                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+              </div>
+            <?php
+            endif;
+            // not big6tv の時のみ広告を表示する
+            // --------------------------------
+            ?>
           <?php endif; ?>
 
           <?php
@@ -54,10 +90,26 @@
           if ( $page['category']['slug'] !== 'crazy' ) :
           ?>
           <div id="widget-recommend-container"></div><!--/videos-->
-          <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
-            <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
-          </div>
+            <?php
+            // not big6tv の時のみ広告を表示する
+            // @since 2017-03-15
+            if (!$in_big6tv) :
+            ?>
+              <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
+                <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
+              </div>
+            <?php
+            endif;
+            // not big6tv の時のみ広告を表示する
+            // --------------------------------
+            ?>
           <?php endif; ?>
+
+<?php
+// not big6tv の時のみ広告を表示する
+// @since 2017-03-15
+if (!$in_big6tv) :
+?>
           <?php
           // ------------------------------------
           // sidebar bottom
@@ -81,3 +133,9 @@
 
           </div>
           <?php endif; ?>
+
+<?php
+endif;
+// not big6tv の時のみ広告を表示する
+// --------------------------------
+?>
