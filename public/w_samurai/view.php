@@ -11,7 +11,7 @@
   <!-- sns ogp -->
   <meta property="og:title" content="W侍 日本代表特集 | SPORTS BULL">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/w_samurai/ogp.png">
+  <meta property="og:image" content="https://sportsbull.jp/assets/images/w_samurai/ogp.jpg">
   <meta property="og:url" content="https://sportsbull.jp/w_samurai/">
   <meta property="og:description" content="サッカー &amp; 野球 日本代表公式。W侍 全試合ハイライト動画 &amp; 試合速報配信をスポーツブルで。">
   <!-- twitter card -->
@@ -82,7 +82,7 @@
             <h2 class="yellfor__heading"><img src="/assets/images/w_samurai/baseball-heading.png" alt="野球日本代表 2017 WORLD BASEBALL CLASSIC &tm;"></h2>
             <ul class="yellfor__btns">
               <li class="yellfor__btns__item"><a href="https://sportsbull.jp/p/103254/" target="_blank"><img src="/assets/images/w_samurai/baseball-btn_highlight.png" alt="試合日程・ハイライト動画"></a></li>
-              <li class="yellfor__btns__item"><a href="https://sportsbull.jp/wbc/" target="_blank"><img src="/assets/images/w_samurai/baseball-btn_live.png" alt="試合速報 3月7日 キューバ戦"></a></li>
+              <li class="yellfor__btns__item"><a href="https://sportsbull.jp/wbc/" target="_blank"><img src="/assets/images/w_samurai/baseball-btn_live.png" alt="試合速報はこちら"></a></li>
             </ul><!-- /.yellfor__btns -->
           </div><!-- /.yellfor__section -->
         </div><!-- /.yellfor -->
