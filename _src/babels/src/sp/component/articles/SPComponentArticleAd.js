@@ -39,7 +39,7 @@ export class SPComponentArticleAd extends React.Component {
       // ストリーム広告
       adSp: React.PropTypes.string.isRequired,
       // @type {CategoriesDae} - since 2017-03-15
-      categories: React.PropTypes.array.isRequired,
+      categories: React.PropTypes.object.isRequired,
     };
   }
   // ---------------------------------------------------
