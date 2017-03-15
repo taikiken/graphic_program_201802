@@ -14,6 +14,11 @@ if ($template_name == 'category') {
 }
 ?>
 
+<?php
+// `/big6tv`
+// 広告トル
+if (!$single_big6tv) :
+?>
           <?php
           /*
            * https://github.com/undotsushin/undotsushin/issues/720
@@ -39,7 +44,11 @@ if ($template_name == 'category') {
 
           </div>
           <?php endif; ?>
-
+<?php
+endif;
+// $single_big6tv 以外の時に広告を表示する
+// --------------------------------
+?>
 
           <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="SPORTS BULLアプリ版(iPhone/Android対応) アプリでサクサク楽しむ！"></a></div>
 
@@ -47,7 +56,7 @@ if ($template_name == 'category') {
 <?php
 // not big6tv の時のみ広告を表示する
 // @since 2017-03-15
-if (!$in_big6tv) :
+if (!$in_big6tv && !$single_big6tv) :
 ?>
           <div class="synSearch-bnr mt20"><a href="http://pickup.syndot.jp/about/?utm_source=undou_pc&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/images/common/bnr-side-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
 <?php
@@ -72,7 +81,7 @@ endif;
             <?php
             // not big6tv の時のみ広告を表示する
             // @since 2017-03-15
-            if (!$in_big6tv) :
+            if (!$in_big6tv && !$single_big6tv) :
             ?>
               <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -95,7 +104,7 @@ endif;
             <?php
             // not big6tv の時のみ広告を表示する
             // @since 2017-03-15
-            if (!$in_big6tv) :
+            if (!$in_big6tv && !$single_big6tv) :
             ?>
               <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -110,7 +119,7 @@ endif;
 <?php
 // not big6tv の時のみ広告を表示する
 // @since 2017-03-15
-if (!$in_big6tv) :
+if (!$in_big6tv && !$single_big6tv) :
 ?>
           <?php
           // ------------------------------------

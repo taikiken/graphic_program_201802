@@ -199,6 +199,15 @@
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
+<?php
+// 六大学 / 広告表示 調整（Web） #1546
+// > アドネットワーク関連の広告（ネイティブアド？）を消したい
+// @see https://github.com/undotsushin/undotsushin/issues/1546
+// sidebar 右上広告を消すための変数設定
+// @since 2017-03-15
+global $single_big6tv;
+$single_big6tv = true
+?>
       <?php include_once __DIR__."/../../desktop/_sidebar_ad.php"; ?>
     </section><!-- /.side-sec -->
 
