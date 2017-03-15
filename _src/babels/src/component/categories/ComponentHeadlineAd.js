@@ -30,6 +30,28 @@ const React = self.React;
  *
  * */
 export class ComponentHeadlineAd extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{browser: string, ad: HeadlineAdDae, category: CategoriesSlugDae}} React props
+   */
+  static get propTypes() {
+    return {
+      browser: React.PropTypes.string.isRequired,
+      ad: React.PropTypes.object.isRequired,
+      category: React.PropTypes.object
+    };
+  }
+  static get defaultProps() {
+    return {
+      category: {}
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {{browser: string, ad: HeadlineAdDae}} props プロパティ
@@ -38,6 +60,9 @@ export class ComponentHeadlineAd extends React.Component {
   constructor(props) {
     super(props);
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * アドジェネ広告を作成します
    * @return {?XML} アドジェネ広告を返す, 無い時は null を返します
@@ -79,6 +104,21 @@ export class ComponentHeadlineAd extends React.Component {
       }
     }
   }
+  // ------------------------------------
+  /**
+   * big6tv を除外するために特定します
+   * <pre>
+   * 六大学 / 広告表示 調整（Web） #1546
+   * > アドネットワーク関連の広告（ネイティブアド？）を消したい
+   * </pre>
+   * @return {boolean} true: big6tv
+   * @see https://github.com/undotsushin/undotsushin/issues/1546
+   * @since 2017-03-15
+   */
+  isBig6Tv() {
+    const category = this.props.category;
+    return category.slug === 'big6tv';
+  }
   /**
    * アドジェネ広告 `script` tag を作成し wrapper div に `appendChild` します<br>
    * さらに div.sponsor-link へ `appendChild` します
@@ -96,6 +136,10 @@ export class ComponentHeadlineAd extends React.Component {
    * sp: アドジェネ広告を差し込む、この値がなければ広告は表示しない
    */
   sp() {
+    // big6tv は広告非表示
+    if (this.isBig6Tv()) {
+      return;
+    }
     const id = this.props.ad.sp;
     if (!id) {
       return;
@@ -114,30 +158,4 @@ export class ComponentHeadlineAd extends React.Component {
 
     this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{browser: string, ad: HeadlineAdDae}} React props
-   */
-  static get propTypes() {
-    return {
-      browser: React.PropTypes.string.isRequired,
-      ad: React.PropTypes.object.isRequired
-    };
-  }
 }
-//
-// /**
-//  * プロパティ
-//  * @typedef {Object} propTypes
-//  * @property {string} browser browser 種類 'sp' or 'pc'
-//  * @property {HeadlineAdDae} ad アドジェネ広告 JSON data
-//  * @static
-//  * @type {{browser: string, ad: HeadlineAdDae}}
-//  */
-// ComponentHeadlineAd.propTypes = {
-//   browser: React.PropTypes.string.isRequired,
-//   ad: React.PropTypes.object.isRequired
-// };
