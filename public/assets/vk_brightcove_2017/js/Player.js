@@ -429,18 +429,18 @@ videojs.plugin('PlayerControl', function (settings) {
     }
 
     //デバイス判定・ABC再生開始ビーコンURL設定
-    //beaconUrl = 'http://koshien-l1.asahi.co.jp/bplayer/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
-    beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
+    beaconUrl = 'http://koshien-l1.asahi.co.jp/bplayer/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
+    //beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
     deviceType = "pc";
     if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 ){
       //iOS
-      //beaconUrl = 'http://koshien-l4.asahi.co.jp/bplayer/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
-      beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
+      beaconUrl = 'http://koshien-l4.asahi.co.jp/bplayer/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
+      //beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
       deviceType = "ios_mweb";
     }else if( agent.search(/Android/) != -1){
       //Android
-      //beaconUrl = 'http://koshien-l5.asahi.co.jp/bplayer/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
-      beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
+      beaconUrl = 'http://koshien-l5.asahi.co.jp/bplayer/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
+      //beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
       deviceType = "android_mweb";
     }
 
