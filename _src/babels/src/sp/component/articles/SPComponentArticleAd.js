@@ -81,7 +81,7 @@ export class SPComponentArticleAd extends React.Component {
     // category.slug 'big6tv' search
     // @since 2017-03-15
     const big6tv = this.props.categories.bySlug('big6tv');
-    if (big6tv && big6tv.slug === 'big6tv') {
+    if (big6tv) {
       return null;
     }
     // ストリーム広告
