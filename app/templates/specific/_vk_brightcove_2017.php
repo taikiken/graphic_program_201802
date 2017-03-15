@@ -13,7 +13,7 @@ endif;
 <link href="/assets/vk_brightcove_2017/css/Player.css" rel="stylesheet"/>
 
 <div style="display: block; position: relative;">
-  <div style="padding-top: 56.25%;">
+  <div style="padding-top: 56.25%; height: 0; overflow: hidden;">
     <video
       id="ABCplayer"
       data-account="4802324450001"
@@ -54,3 +54,22 @@ endif;
 
 </script>
 
+<?php
+/*
+
+```html
+<div id="single-visual-container"></div>
+```
+
+がDOM上にないとSPで
+
+```html
+# 本文下部バナー
+<div id="post-content-banner"></div>
+```
+
+が表示されないようなので追加
+
+*/
+?>
+<div id="single-visual-container" style="display:none !important;"></div>
