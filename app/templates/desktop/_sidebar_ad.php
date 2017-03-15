@@ -14,11 +14,6 @@ if ($template_name == 'category') {
 }
 ?>
 
-<?php
-// not big6tv の時のみ広告を表示する
-// @since 2017-03-15
-if (!$in_big6tv) :
-?>
           <?php
           /*
            * https://github.com/undotsushin/undotsushin/issues/720
@@ -47,6 +42,13 @@ if (!$in_big6tv) :
 
 
           <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="SPORTS BULLアプリ版(iPhone/Android対応) アプリでサクサク楽しむ！"></a></div>
+
+
+<?php
+// not big6tv の時のみ広告を表示する
+// @since 2017-03-15
+if (!$in_big6tv) :
+?>
           <div class="synSearch-bnr mt20"><a href="http://pickup.syndot.jp/about/?utm_source=undou_pc&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/images/common/bnr-side-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
 <?php
 endif;
