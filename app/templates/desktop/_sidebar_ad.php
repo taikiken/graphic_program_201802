@@ -7,9 +7,12 @@
 $template_name = $page['template'];
 $in_big6tv = false;
 if ($template_name == 'category') {
-  $page_category = $page['category'];
-  if ($page_category['slug'] == 'big6tv') {
-    $in_big6tv = true;
+  $page_categories = $page['categories'];
+  foreach ($page_categories as $page_category) {
+    if ($page_category['slug'] == 'big6tv') {
+      $in_big6tv = true;
+      break;
+    }
   }
 }
 ?>
