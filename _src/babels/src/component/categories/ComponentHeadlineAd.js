@@ -151,6 +151,10 @@ export class ComponentHeadlineAd extends React.Component {
    * pc: アドジェネ広告を差し込む、この値がなければ広告は表示しない
    */
   pc() {
+    // big6tv は広告非表示
+    if (this.isBig6Tv()) {
+      return;
+    }
     const id = this.props.ad.pc;
     if (!id) {
       return;
