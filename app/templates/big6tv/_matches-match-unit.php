@@ -33,9 +33,13 @@
 
             <div class="matches-btn-highlight">
               <?php if ( $game['highlightmovie'] ) : ?>
-                <a href="<?php echo $game['highlightmovie']; ?>" class="matches-btn-highlight-link"><span>ハイライト</span></a>
+                <a href="<?php echo $game['highlightmovie']; ?>"><span>ハイライト</span></a>
               <?php else : ?>
-                <a href="javascript:void(0);" class="disable" data-status="<?php echo $game['status']; ?>"><span><?php echo $game['status']; ?></span></a>
+                <?php if ( preg_match("/^試合/", $game['status'] ) ) : ?>
+                  <a href="javascript:void(0);" class="disable" data-status="<?php echo $game['status']; ?>"><span>ハイライト</span></a>
+                <?php else : ?>
+                  <a href="javascript:void(0);" class="disable" data-status="<?php echo $game['status']; ?>"><span><?php echo $game['status']; ?></span></a>
+                <?php endif; ?>
               <?php endif; ?>
             </div><!-- /.matches-btn-highlight -->
 
