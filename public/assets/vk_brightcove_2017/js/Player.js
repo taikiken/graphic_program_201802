@@ -7,8 +7,8 @@ videojs.plugin('PlayerControl', function (settings) {
   var ADTAG_XML_URL = "https://98-live-koshien.s3.amazonaws.com/98/adtag.xml";
   var DEFAULT_STILL_IMAGE_URL = "https://www.asahicom.jp/koshien/virtualbaseball/images/98/player/default_image.jpg";
 
-  var myMediaInfo = null;
-  var infoIsAd = false;
+  var myMediaInfo = null;　
+  var infoIsAd = false;　
   var infoIsLive = false;
   var infoAdCategory = "";
   var infoStillImageUrl = "";
@@ -38,12 +38,13 @@ videojs.plugin('PlayerControl', function (settings) {
     isAutoPlay = true;
   }
   //関連動画リスト表示フラグ
-  var isShowRelatedVideos = false;//関連動画を表示するかのフラグ
-  var isPlayedRelatedVideo = false;//関連動画からの再生かどうかを示すフラグ
+  var isShowRelatedVideos = false;　//関連動画を表示するかのフラグ
+  var isPlayedRelatedVideo = false; //関連動画からの再生かどうかを示すフラグ
   var relatedVideosLoaded;
   if(settings.showRelatedVideos != undefined && settings.showRelatedVideos == true){
     isShowRelatedVideos = true;
   }
+  console.log("isShowRelatedVideos: " + isShowRelatedVideos);
 
   //UserAgent・現在時刻取得、UUID生成
   var agent = navigator.userAgent;
@@ -106,7 +107,7 @@ videojs.plugin('PlayerControl', function (settings) {
   }
 
   function _handleMediaPlaying(event){
-    //console.log("Media is playing");
+    console.log("Media is playing");
     //関連動画からの再生（PC）で、Preroll有りの場合
     if(isPlayedRelatedVideo && adUrl_preroll != ""){
       player.ima3.settings.requestMode = "ondemand";
@@ -118,9 +119,11 @@ videojs.plugin('PlayerControl', function (settings) {
       hidePlayerOverlay();
       //ボリュームを1に戻す
       player.volume(1);
-    }else if(!isAutoPlay || deviceType != "pc"){
+    }else if(!isAutoPlay || deviceType != "pc" ){
       //Preroll再生時は一旦本編再生をPauseする(PCの自動再生時を除く)
-      player.pause();
+      if(deviceType != "android_mweb"){
+        player.pause();
+      }
     }
   }
 
@@ -195,9 +198,10 @@ videojs.plugin('PlayerControl', function (settings) {
   }
 
   function _handleAdstart(event){
-    //console.log("Ad started");
+    console.log("Ad started");
     //[AndroidWebのみ]Preroll再生開始時は動画再生を一時停止する＋広告用コントロールパネルを非表示化
     if(deviceType == "android_mweb"){
+      player.ima3.adPlayer.volume(1);
       player.pause();
       var element = document.getElementsByClassName("vjs-ad-control-bar");
         for (var i=0;i<element.length;i++) {
@@ -430,17 +434,14 @@ videojs.plugin('PlayerControl', function (settings) {
 
     //デバイス判定・ABC再生開始ビーコンURL設定
     beaconUrl = 'http://koshien-l1.asahi.co.jp/bplayer/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
-    //beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log1.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
     deviceType = "pc";
     if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 ){
       //iOS
       beaconUrl = 'http://koshien-l4.asahi.co.jp/bplayer/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
-      //beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log4.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
       deviceType = "ios_mweb";
     }else if( agent.search(/Android/) != -1){
       //Android
       beaconUrl = 'http://koshien-l5.asahi.co.jp/bplayer/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid;
-      //beaconUrl = 'http://koshien-bc.asahi.co.jp/test_vod/vod2017/sportsbull/log5.txt?p=' + videoRefId + '&t=' + currentTime + '&id=' + uuid; //デフォルトはAndroid
       deviceType = "android_mweb";
     }
 
@@ -504,31 +505,33 @@ videojs.plugin('PlayerControl', function (settings) {
     if(browserType == "non-ie" ){
       //non-ie用のIMA設定（HTML5優先）
       ima_setting = {
-        "vpaidMode": "ENABLED",
-        "timeout": 5000,
-        "prerollTimeout": 1000,
-        "postrollTimeout": 2000,
-        "requestMode": "onplay",
-        "adTechOrder": [
-          "html5",
-          "flash"
-        ],
-        "serverUrl": ""
-      };
+  "vpaidMode": "ENABLED",
+  "adTechOrder": [
+    "html5",
+    "flash"
+  ],
+  "requestMode": "onplay",
+  "postrollTimeout": 2000,
+  "prerollTimeout": 2000,
+  "hardTimeouts": false,
+  "timeout": 2000,
+  "serverUrl": ""
+};
     }else{
       //ie用のIMA設定（flash優先）
       ima_setting = {
-        "vpaidMode": "ENABLED",
-        "timeout": 5000,
-        "prerollTimeout": 1000,
-        "postrollTimeout": 2000,
-        "requestMode": "onplay",
-        "adTechOrder": [
-          "flash",
-          "html5"
-        ],
-        "serverUrl": ""
-      };
+  "vpaidMode": "ENABLED",
+  "adTechOrder": [
+    "html5",
+    "flash"
+  ],
+  "requestMode": "onplay",
+  "postrollTimeout": 2000,
+  "prerollTimeout": 2000,
+  "hardTimeouts": false,
+  "timeout": 2000,
+  "serverUrl": ""
+};
     }
     player.ima3(ima_setting);
 
@@ -613,6 +616,7 @@ videojs.plugin('PlayerControl', function (settings) {
    */
   function showRelatedVideos() {
     if (overlayRelatedVideos != null) {
+      console.log(overlayRelatedVideos);
       player.el().appendChild(overlayRelatedVideos);
     }
   }
@@ -658,6 +662,7 @@ videojs.plugin('PlayerControl', function (settings) {
 
     // タグでフィルタリング
     var videos = filterRelatedVideoByTags(response);
+    //console.log(videos);
     if (videos.length == 0) {
       return;
     }
@@ -695,7 +700,6 @@ videojs.plugin('PlayerControl', function (settings) {
     }
     html += '</ul>';
     html += '</div>';
-
     overlayRelatedVideos = document.createElement('div');
     //overlayRelatedVideos.className = 'related-video-container';
     overlayRelatedVideos.className = 'related-video-overlay';
