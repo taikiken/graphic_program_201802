@@ -6,7 +6,8 @@ RewriteBase /
 RewriteRule ^ranking$ /api/big6tv/ranking.php [L]
 
 # schedule
-RewriteRule ^schedule$ /api/big6tv/schedule.php [L]
+#RewriteRule ^schedule$ /api/big6tv/schedule.php [L]
+RewriteRule ^schedule$ /api/ver1/static/big6tv2017s_schedule.json [L]
 
 # live
 #RewriteRule ^live$ /api/big6tv/live.php [L]
