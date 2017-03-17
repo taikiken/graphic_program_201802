@@ -155,6 +155,29 @@ export class ComponentSinglesArticleSwitch extends React.Component {
     return keywords.some(keyword => keyword === 'TBS');
   }
   /**
+   * 記事提供元がバーチャル高校野球 && 第89回選抜高等学校野球大会 のタグがついた記事 - id: '26'
+   *
+   * > 記事詳細APIのuser.idが"26"の記事が対象になります。
+   * @return {boolean} true: 対象記事
+   * @since 2017-03-15 - 記事提供元がバーチャル高校野球
+   * @see https://undo-tsushin.slack.com/archives/product-web/p1489556150487078
+   * @see https://github.com/undotsushin/undotsushin/issues/1699
+   */
+  vk89Baseball() {
+    // 記事提供元がバーチャル高校野球 && 第89回選抜高等学校野球大会 のタグがついた記事 - id: '26'
+    // @type {SingleDae}
+    const single = this.state.single;
+    // @type {UserDae}
+    const user = single.user;
+    return user && parseInt(user.id, 10) === 26;
+    // let result = user && parseInt(user.id, 10) === 26;
+    // if (!result) {
+    //   return false;
+    // }
+    // const keywords = single.keywords;
+    // return keywords.some(keyword => keyword === '第89回選抜高等学校野球大会');
+  }
+  /**
    * 「続きを読む」でその場で開いて良いかの判定を行います
    * @return {boolean} true: その場で開く, false: 何もしない - 遷移する
    * @since 2017-03-05 - wbc && TBS 遷移する
@@ -166,9 +189,16 @@ export class ComponentSinglesArticleSwitch extends React.Component {
     if (this.state.single.id === 103250) {
       can = false;
     }
+    // check wbc && tbs
     if (can) {
       // wbc && tbs の時 true が返るので「続きを読む」可能な時は反転させて使います
-      return !this.wbcTbs();
+      // return !this.wbcTbs();
+      can = !this.wbcTbs();
+    }
+    // check 記事提供元がバーチャル高校野球
+    if (can) {
+      // true が返るので「続きを読む」可能な時は反転させて使います
+      can = !this.vk89Baseball();
     }
     return can;
   }
