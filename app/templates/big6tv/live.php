@@ -131,12 +131,22 @@ streampack初期化コード
 <script>
 (function($){
 
+
   var $embed        = $('.js-live');
   var $tmpl_video   = $('#live-streaming__video').html();
   var interval      = 10000; // polling感覚
   var isPlaying     = null;
 
-  var intervalTimer = window.setInterval(function() {
+
+  // 初回実行
+  var intervalTimer = window.setInterval( init(), interval );
+  init();
+
+
+  /**
+  * データ取得してプレイヤーをセットする
+  */
+  function init() {
 
     $.ajax({
       url      : '/api/big6tv/live',
@@ -176,7 +186,8 @@ streampack初期化コード
       console.log('live - ajax : fail');
     });
 
-  }, interval);
+
+  }
 
 
   /**
@@ -215,13 +226,17 @@ streampack初期化コード
 
     // ad_url
     // ------------------------------
-    var ad_url = <?php echo ( $page['ua'] == 'desktop' ) ? 'data.video.ad_url.pc' : 'data.video.ad_url.sp'; ?>;
+    var ad_url = '';
 
-    // advantage広告タグ用 - URLの末尾が `page=` ならtimestampを付与してリクエストする
-    if ( ad_url !== '') {
-      var date = new Date() ;
-      if ( ad_url.match(/page=$/) ) {
-        ad_url += date.getTime();
+    if ( data.video.ad_url ) {
+      ad_url = <?php echo ( $page['ua'] == 'desktop' ) ? 'data.video.ad_url.pc' : 'data.video.ad_url.sp'; ?>;
+
+      // advantage広告タグ用 - URLの末尾が `page=` ならtimestampを付与してリクエストする
+      if ( ad_url !== '') {
+        var date = new Date() ;
+        if ( ad_url.match(/page=$/) ) {
+          ad_url += date.getTime();
+        }
       }
     }
 
