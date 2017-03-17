@@ -7,7 +7,17 @@
           </div>
         <?php else : ?>
           <div id="post-content-container" class="post-content post-content_app">
+
+            <?php
+              // #1602 - VK brightcove
+              if ( isset($page['post']['media_vk_refid']) && $page['post']['media_vk_refid'] ) :
+                echo '<br />';
+                include_once __DIR__."/specific/_vk_brightcove_2017.php";
+              endif;
+            ?>
+
             <?php print_r($page['post']['body']); ?>
+
           </div><!-- /.post-content -->
         <?php
         // -------------------------- [/記事本文] --------------------------
