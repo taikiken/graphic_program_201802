@@ -29,12 +29,12 @@
         width: 100%;
 
         &__img {
-          width: 40%;
+          width: 30%;
           overflow: hidden;
         }
 
         &__text {
-          width: 60%;
+          width: 70%;
           text-align: left;
 
           h2 {
@@ -65,26 +65,29 @@
 
           .officer__body__parts__img {
             float: left;
+            width: 30%;
 
             img {
-              width: 130%;
-              margin-left: -15%;
+              width: 100%;
+              margin-left: 0%;
             }
           }
 
           .officer__body__parts__text {
             float: left;
+            width: 70%;
             padding-left: 40px;
             position: relative;
 
             h2 {
-              margin-top: 60px;
+              margin-top: 0px;
             }
 
             &__btn {
               padding: 7px 40px;
               position: absolute;
-              top: 63px;
+              //top: 63px;
+              top: 5px;
               right: 0;
               border: 2px solid $highlight-color;
               border-radius: 4px;
@@ -108,11 +111,11 @@
 
           .officer__body__parts__img {
             float: left;
-            height: 300px;
+            //height: 300px;
 
             img {
-              width: 130%;
-              margin-left: -15%;
+              width: 100%;
+              //margin-left: -5%;
             }
           }
 
@@ -129,11 +132,11 @@
 
           .officer__body__parts__img {
             float: right;
-            height: 300px;
+            //height: 300px;
 
             img {
-              width: 130%;
-              margin-left: -15%;
+              width: 100%;
+              //margin-left: -5%;
             }
           }
 
@@ -162,9 +165,10 @@
         &__img {
           width: 100%;
           overflow: hidden;
+          text-align: center;
           
           img {
-            width: 100%;
+            width: 200px;
           }
         }
 
@@ -177,12 +181,14 @@
           h2 {
             font-size: 20px;
             font-weight: 800;
+            text-align: center;
             color: $highlight-color;
           }
 
           h3 {
             font-size: 14px;
             font-weight: 800;
+            text-align: center;
             color: $highlight-color; 
             margin-top: 5px;
           }
@@ -197,12 +203,12 @@
         &.officer__top__parts {
           margin-top: 0;
           .officer__body__parts__img {
-            height: 400px;
-            height: calc(100vmin - 40px);
+            //height: 400px;
+            //height: calc(100vmin - 40px);
 
             img {
-              width: 130%;
-              margin-left: -15%;
+              //width: 130%;
+              //margin-left: -15%;
             }
           }
 
@@ -226,12 +232,12 @@
 
         &.officer__pull__right,&.officer__pull__left {
           .officer__body__parts__img {
-            height: 400px;
-            height: calc(100vmin - 100px);
+            //height: 400px;
+            //height: calc(100vmin - 100px);
 
             img {
-              width: 130%;
-              margin-left: -15%;
+              //width: 130%;
+             //margin-left: -15%;
             }
           }
         }
