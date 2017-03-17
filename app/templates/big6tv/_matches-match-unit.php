@@ -32,8 +32,8 @@
             </ul><!-- /.matches-match -->
 
             <div class="matches-btn-highlight">
-              <?php if ( $game['hilight'] ) : ?>
-                <a href="<?php echo $game['hilight']; ?>" class="matches-btn-highlight-link"><span>ハイライト</span></a>
+              <?php if ( $game['highlightmovie'] ) : ?>
+                <a href="<?php echo $game['highlightmovie']; ?>" class="matches-btn-highlight-link"><span>ハイライト</span></a>
               <?php else : ?>
                 <a href="javascript:void(0);" class="disable" data-status="<?php echo $game['status']; ?>"><span><?php echo $game['status']; ?></span></a>
               <?php endif; ?>
