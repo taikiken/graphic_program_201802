@@ -54,7 +54,7 @@
           p {
             font-size: 14px;
             margin-top: 30px;
-            line-height: 1.6;
+            line-height: 1.8;
             letter-spacing: 0.05em;
           }
 
@@ -80,14 +80,13 @@
             position: relative;
 
             h2 {
-              margin-top: 0px;
+              margin-top: 5px;
             }
 
             &__btn {
               padding: 7px 40px;
               position: absolute;
-              //top: 63px;
-              top: 5px;
+              top: 7px;
               right: 0;
               border: 2px solid $highlight-color;
               border-radius: 4px;
@@ -111,17 +110,15 @@
 
           .officer__body__parts__img {
             float: left;
-            //height: 300px;
 
             img {
               width: 100%;
-              //margin-left: -5%;
             }
           }
 
           .officer__body__parts__text {
             float: left;
-            padding-left: 40px;
+            padding-left: 50px;
           }
         }
 
@@ -132,17 +129,15 @@
 
           .officer__body__parts__img {
             float: right;
-            //height: 300px;
 
             img {
               width: 100%;
-              //margin-left: -5%;
             }
           }
 
           .officer__body__parts__text {
             float: right;
-            padding-right: 40px;
+            padding-right: 50px;
           }
         }
       }
@@ -168,14 +163,14 @@
           text-align: center;
           
           img {
-            width: 200px;
+            width: 150px;
           }
         }
 
         &__text {
           width: 100%;
           text-align: left;
-          padding: 20px 15px 15px 15px;
+          padding: 10px 15px 15px 15px;
           background: #fff;
 
           h2 {
@@ -195,7 +190,9 @@
 
           p {
             font-size: 14px;
-            margin-top: 15px;
+            margin-top: 20px;
+            line-height: 1.7;
+            letter-spacing: 0.05em;
           }
 
         }
@@ -203,12 +200,8 @@
         &.officer__top__parts {
           margin-top: 0;
           .officer__body__parts__img {
-            //height: 400px;
-            //height: calc(100vmin - 40px);
 
             img {
-              //width: 130%;
-              //margin-left: -15%;
             }
           }
 
@@ -232,12 +225,8 @@
 
         &.officer__pull__right,&.officer__pull__left {
           .officer__body__parts__img {
-            //height: 400px;
-            //height: calc(100vmin - 100px);
 
             img {
-              //width: 130%;
-             //margin-left: -15%;
             }
           }
         }
