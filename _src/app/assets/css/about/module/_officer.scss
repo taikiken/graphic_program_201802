@@ -1,0 +1,254 @@
+@import "../../../../scss/asset";
+
+// officer
+//
+// design module officer
+
+@include screen('small') {
+  .body__officer {
+    min-width: 0;
+  }
+
+  .officer__heading {
+    width: 100%;
+  }
+}
+
+.officer {
+  // .officer__vision
+  &__body {
+    @media only screen and (min-width: 769px) {
+      width: 1080px;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: 76px;
+      overflow: hidden;
+
+      &__parts {
+        overflow: hidden;
+        width: 100%;
+
+        &__img {
+          width: 30%;
+          overflow: hidden;
+        }
+
+        &__text {
+          width: 70%;
+          text-align: left;
+
+          h2 {
+            margin-top: 5px;
+            font-size: 24px;
+            font-weight: 800;
+            color: $highlight-color;
+          }
+
+          h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: $highlight-color; 
+            margin-top: 5px;
+          }
+
+          p {
+            font-size: 14px;
+            margin-top: 30px;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+          }
+
+        }
+
+        &.officer__top__parts {
+          max-width: 900px;
+
+          .officer__body__parts__img {
+            float: left;
+            width: 30%;
+
+            img {
+              width: 100%;
+              margin-left: 0%;
+            }
+          }
+
+          .officer__body__parts__text {
+            float: left;
+            width: 70%;
+            padding-left: 50px;
+            position: relative;
+
+            h2 {
+              margin-top: 5px;
+            }
+
+            &__btn {
+              padding: 7px 40px;
+              position: absolute;
+              top: 7px;
+              right: 0;
+              border: 2px solid $highlight-color;
+              border-radius: 4px;
+              color: $highlight-color;
+              font-size: 15px;
+              font-weight: 600;
+              text-decoration: none;
+
+              &:hover {
+                color: #fff;
+                background: $highlight-color;
+              }
+            }
+          } 
+        }
+
+        &.officer__pull__left {
+          max-width: 900px;
+          float: left;
+          margin-top: 120px;
+
+          .officer__body__parts__img {
+            float: left;
+
+            img {
+              width: 100%;
+            }
+          }
+
+          .officer__body__parts__text {
+            float: left;
+            padding-left: 50px;
+          }
+        }
+
+        &.officer__pull__right {
+          max-width: 900px;
+          float: right;
+          margin-top: 120px;
+
+          .officer__body__parts__img {
+            float: right;
+
+            img {
+              width: 100%;
+            }
+          }
+
+          .officer__body__parts__text {
+            float: right;
+            padding-right: 50px;
+          }
+        }
+      }
+    }
+
+    @include screen('small') {
+      margin-top: 25px;
+      overflow: hidden;
+      width: 100%;
+
+      &__parts {
+        overflow: hidden;
+        width: 100%;
+        margin-top: 80px;
+        text-align: center;
+        background-image: url(/assets/images/about/officer/bg_officer.png);
+        background-repeat: repeat-x;
+        background-size: auto 100%;
+
+        &__img {
+          width: 100%;
+          overflow: hidden;
+          text-align: center;
+          
+          img {
+            width: 150px;
+          }
+        }
+
+        &__text {
+          width: 100%;
+          text-align: left;
+          padding: 10px 15px 15px 15px;
+          background: #fff;
+
+          h2 {
+            font-size: 20px;
+            font-weight: 800;
+            text-align: center;
+            color: $highlight-color;
+          }
+
+          h3 {
+            font-size: 14px;
+            font-weight: 800;
+            text-align: center;
+            color: $highlight-color; 
+            margin-top: 5px;
+          }
+
+          p {
+            font-size: 14px;
+            margin-top: 20px;
+            line-height: 1.7;
+            letter-spacing: 0.05em;
+          }
+
+        }
+
+        &.officer__top__parts {
+          margin-top: 0;
+          .officer__body__parts__img {
+
+            img {
+            }
+          }
+
+          .officer__body__parts__text {
+
+            &__btn {
+              width: 100%;
+              display: block;
+              padding: 7px 0px;
+              margin-top: 25px;
+              border: 2px solid $highlight-color;
+              border-radius: 4px;
+              color: $highlight-color;
+              text-align: center;
+              font-size: 15px;
+              font-weight: 600;
+              text-decoration: none;
+            }
+          }
+        }
+
+        &.officer__pull__right,&.officer__pull__left {
+          .officer__body__parts__img {
+
+            img {
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+
+.footer--officer {
+  @media only screen and (min-width: 769px) {
+    margin-top: 120px;
+
+    .footer__inner {
+      border-top: none;
+    }
+  }
+  @include screen('small') {
+    margin-top: 50px;
+
+    .footer__inner {
+      border-top: none;
+    }
+  }
+}
