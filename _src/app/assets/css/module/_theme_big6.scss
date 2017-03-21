@@ -655,7 +655,6 @@ $border-color: #585959;
 
 
 
-// ------------------------------------------------------------------------
 
 
 // .theme_big6_matches
@@ -679,6 +678,19 @@ $border-color: #585959;
       a:hover {
         @include over-opacity;
       }
+    }
+  }
+}
+
+
+
+
+// .side-sec
+// サイドカラムバナー
+.whole.theme_big6 {
+  .side-bnr_big6 {
+    &-item {
+      margin-top: 20px;
     }
   }
 }
