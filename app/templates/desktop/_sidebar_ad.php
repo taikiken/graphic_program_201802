@@ -6,21 +6,42 @@
 // @since 2017-03-15
 $template_name = $page['template'];
 $in_big6tv = false;
+$single_big6tv = false;
 // 記事詳細 + big6tv でも広告非表示
 if ($template_name == 'category' || $template_name == 'p') {
   $page_categories = $page['categories'];
-  foreach ($page_categories as $page_category) {
-    if ($page_category['slug'] == 'big6tv') {
+  if (isset($page_categories)) {
+    // $page['categories'] が無くなった様子 on 2017-03-21
+    foreach ($page_categories as $page_category) {
+      if ($page_category['slug'] == 'big6tv') {
+        $in_big6tv = true;
+        break;
+      }
+    }
+  } else {
+    // $page['categories'] が無いので $page['category'] 代用する
+    $page_category = $page['category'];
+    if (isset($page_category) && $page_category['slug'] == 'big6tv') {
       $in_big6tv = true;
-      break;
+    }
+    // $page['category2'] に入っている可能性があるのでチェックする
+    if (!$in_big6tv) {
+      $page_category = $page['category2'];
+      if (isset($page_category) && $page_category['slug'] == 'big6tv') {
+        $in_big6tv = true;
+      }
     }
   }
+}
+// 記事詳細 + カテゴリ big6tv
+if ($in_big6tv && $template_name == 'p') {
+  $single_big6tv = true;
 }
 ?>
 
 <?php
 // `/big6tv`
-// 広告トル
+// 記事詳細 + big6tv - 広告トル
 if (!$single_big6tv) :
 ?>
           <?php
@@ -60,12 +81,31 @@ endif;
 <?php
 // not big6tv の時のみ広告を表示する
 // @since 2017-03-15
-if (!$in_big6tv && !$single_big6tv) :
+if (!$in_big6tv) :
 ?>
-          <div class="synSearch-bnr mt20"><a href="http://pickup.syndot.jp/about/?utm_source=undou_pc&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/images/common/bnr-side-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
+  <div class="synSearch-bnr mt20">
+    <a href="http://pickup.syndot.jp/about/?utm_source=undou_pc&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/images/common/bnr-side-synsearch.png" alt="Syn.search チャットで検索？"></a>
+  </div>
 <?php
 endif;
 // not big6tv の時のみ広告を表示する
+// --------------------------------
+if ($in_big6tv) :
+  // big6tv 時にバナー
+?>
+  <div class="side-bnr_big6">
+    <ul class="side-bnr_big6-list">
+      <li class="side-bnr_big6-item">
+        <a href="https://teams.one/?utm_source=big6tv&utm_campaign=teamstop&utm_medium=banner" target="_blank"><img src="/assets/images/big6/bnr-side-teams.png" alt="teams「野球チーム、集合。」全国3,000チーム以上が利用する野球チーム専用マネジメントツール"></a>
+      </li>
+      <li class="side-bnr_big6-item">
+        <a href="http://www.big6.gr.jp/" target="_blank"><img src="/assets/images/big6/bnr-side-big6.png" alt="一般財団法人 東京六大学野球連盟"></a>
+      </li>
+    </ul>
+  </div>
+<?php
+endif;
+// big6tv 時にバナー
 // --------------------------------
 ?>
 
@@ -85,7 +125,7 @@ endif;
             <?php
             // not big6tv の時のみ広告を表示する
             // @since 2017-03-15
-            if (!$in_big6tv && !$single_big6tv) :
+            if (!$in_big6tv) :
             ?>
               <div id="sponsor-link-ranking" class="sponsor-link sponsor-link-ranking">
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35250&targetID=adg_35250&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -108,7 +148,7 @@ endif;
             <?php
             // not big6tv の時のみ広告を表示する
             // @since 2017-03-15
-            if (!$in_big6tv && !$single_big6tv) :
+            if (!$in_big6tv) :
             ?>
               <div id="sponsor-link-recommend" class="sponsor-link sponsor-link-recommend">
                 <script src="https://ssl.socdm.com/sdk/js/adg-script-loader.js?id=35251&targetID=adg_35251&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0"></script>
@@ -123,7 +163,7 @@ endif;
 <?php
 // not big6tv の時のみ広告を表示する
 // @since 2017-03-15
-if (!$in_big6tv && !$single_big6tv) :
+if (!$in_big6tv) :
 ?>
           <?php
           // ------------------------------------
