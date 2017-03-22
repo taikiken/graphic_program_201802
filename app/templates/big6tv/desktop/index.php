@@ -74,9 +74,9 @@
       <div class="big6-summary-banner">
         <a href="/category/big6tv/">
           <?php if ( $page['big6tv']['liveData']['live']['isPlaying'] ) : ?>
-            <img src="/assets/images/big6/bnr-streaming.png?isPlaying=true" alt="">
+            <img src="/assets/images/big6/bnr-streaming_playing.png?isPlaying=true" alt="">
           <?php else : ?>
-            <img src="/assets/images/big6/bnr-streaming.png?isPlaying=false" alt="">
+            <img src="/assets/images/big6/bnr-streaming_resting.png?isPlaying=false" alt="">
           <?php endif; ?>
         </a>
       </div><!-- /.big6-summary-banner -->

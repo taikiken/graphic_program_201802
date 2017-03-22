@@ -95,7 +95,17 @@
 <div id="body-section" class="body-sec">
   <div class="body-sec-inner">
     <div class="special-summary" style="background-color: #000;">
-      <h1 class="special-summary-heading"><img src="/assets/sp/images/big6/summary-heading.png" alt="response.description"></h1>
+      <h1 class="special-summary-heading"><img src="/assets/sp/images/big6/heading.jpg" alt="東京六大学野球 2017 春季リーグ戦 日程・結果 / 勝敗表"></h1>
+
+      <div class="big6-summary-banner">
+        <a href="/category/big6tv/">
+          <?php if ( $page['big6tv']['liveData']['live']['isPlaying'] ) : ?>
+            <img src="/assets/sp/images/big6/bnr-streaming_playing.png?isPlaying=true" alt="">
+          <?php else : ?>
+            <img src="/assets/sp/images/big6/bnr-streaming_resting.png?isPlaying=false" alt="">
+          <?php endif; ?>
+        </a>
+      </div><!-- /.big6-summary-banner -->
     </div><!-- /.special-summary -->
 
     <section class="main-sec">
