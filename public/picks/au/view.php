@@ -159,9 +159,10 @@
     <?php endforeach; ?>
   <?php endforeach; ?>
 <?php endforeach; ?>
-        <div class="banner__app">
-          <a href="https://sportsbull.jp/about/"><img src="/assets/sp/images/picks/au/banner-app.png" alt="スポーツブルアプリをダウンロード"></a>
-        </div>
+        <div id="js-banner__app" class="banner__app">
+          <a id="js-banner__app__link-for-iOS" href="https://app.adjust.com/eycznw"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a id="js-banner__app__link-for-Android" href="https://app.adjust.com/mik1x9"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
+        </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->
     </div>
