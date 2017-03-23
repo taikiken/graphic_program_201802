@@ -17,7 +17,7 @@
   <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
   <!-- sns ogp -->
-  <meta property="og:title" content="編集部おすすめ記事 BULL'S PICKS | SPORTS BULL">
+  <meta property="og:title" content="【スポーツ】Today’s ピックアップ">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/picks/au/">
@@ -93,11 +93,12 @@
     </dl><!-- /.category-nav--sub -->
   </nav><!-- /.category-nav -->
 
-  <aside id="js-banner__w_samurai" class="banner__w_samurai">
-    <a id="js-banner__w_samurai__link-for-iOS" style="display: none;" class="banner__w_samurai__link for-iOS" href="https://sportsbull.jp/wbc/?utm_source=newspass&utm_campaign=wbc&utm_medium=iOS&utm_content=20170307"><img src="/assets/sp/images/picks/au/banner-w_samurai.png" alt="【WBC】試合日程・ハイライト動画"></a>
-    <a id="js-banner__w_samurai__link-for-Android" style="display: none;" class="banner__w_samurai__link for-Android" href="https://sportsbull.jp/wbc/?utm_source=newspass&utm_campaign=wbc&utm_medium=Android&utm_content=20170307"><img src="/assets/sp/images/picks/au/banner-w_samurai.png" alt="【WBC】試合日程・ハイライト動画"></a>
-  </aside><!-- /.banner__w_samurai -->
-<script src="/assets/js/picks_au_banner.bundle.js"></script>
+  <aside id="js-banner__upper" class="banner__upper">
+  <a id="js-banner__upper__link-for-iOS" style="display: none;" class="banner__upper__link for-iOS" href="https://sportsbull.jp/sokuhou/?utm_source=aust&utm_campaign=sokuhou&utm_medium=banner_ios&utm_content=20170323"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="サッカー日本代表 アジア最終予選（Road to Russia）リアルタイム速報"></a>
+  <a id="js-banner__upper__link-for-Android" style="display: none;" class="banner__upper__link for-Android" href="https://sportsbull.jp/sokuhou/?utm_source=aust&utm_campaign=sokuhou&utm_medium=banner_android&utm_content=20170323"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="サッカー日本代表 アジア最終予選（Road to Russia）リアルタイム速報"></a>
+  </aside><!-- /.banner__upper -->
+  <script src="/assets/js/picks_au_banner.bundle.js"></script>
+
   <div class="body-sec">
     <div class="body-sec-inner">
 

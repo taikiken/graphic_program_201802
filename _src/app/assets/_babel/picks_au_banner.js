@@ -142,17 +142,17 @@ let iosBanner;
 let androidBanner;
 
 const getElements = () => {
-  container = document.getElementById('js-banner__w_samurai');
+  container = document.getElementById('js-banner__upper');
   if (!container) {
     return false;
   }
   // ios
-  iosBanner = document.getElementById('js-banner__w_samurai__link-for-iOS');
+  iosBanner = document.getElementById('js-banner__upper__link-for-iOS');
   if (!iosBanner) {
     return false;
   }
   // androids
-  androidBanner = document.getElementById('js-banner__w_samurai__link-for-Android');
+  androidBanner = document.getElementById('js-banner__upper__link-for-Android');
   if (!androidBanner) {
     return false;
   }
