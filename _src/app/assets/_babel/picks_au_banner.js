@@ -136,28 +136,70 @@ class Queries {
   }
 }
 
-// Element
-let container;
-let iosBanner;
-let androidBanner;
+/**
+ * アプリバナーを端末OSに合わせ表示します
+ */
+class Banners {
+  /**
+   * バナーを端末OSに合わせ表示します
+   * @param {string} id urk query.utm_medium value
+   * @param {Element} root バナー親コンテナ
+   * @param {Element} ios バナー iOS コンテナ
+   * @param {Element} android バナー Android コンテナ
+   */
+  constructor(id, root, ios, android) {
+    /**
+     * バナー親コンテナ
+     * @type {Element}
+     */
+    this.root = root;
+    let banner = '';
+    if (id === 'iOS') {
+      banner = ios;
+    } else if (id === 'Android') {
+      banner = android;
+    }
+    /**
+     * query.utm_medium value によって iOS / Android バナーコンテナをセットします
+     * `iOS`, `Android` 以外の時は非表示にします
+     * @type {string}
+     */
+    this.banner = banner;
+  }
+  /**
+   * 親コンテナ、バナーコンテナが存在すれば表示します
+   */
+  show() {
+    const root = this.root;
+    const banner = this.banner;
+    if (root && banner) {
+      banner.style.cssText = '';
+    }
+  }
+}
 
-const getElements = () => {
-  container = document.getElementById('js-banner__upper');
-  if (!container) {
-    return false;
-  }
-  // ios
-  iosBanner = document.getElementById('js-banner__upper__link-for-iOS');
-  if (!iosBanner) {
-    return false;
-  }
-  // androids
-  androidBanner = document.getElementById('js-banner__upper__link-for-Android');
-  if (!androidBanner) {
-    return false;
-  }
-  return true;
-};
+// // Element
+// let container;
+// let iosBanner;
+// let androidBanner;
+//
+// const getElements = () => {
+//   container = document.getElementById('js-banner__upper');
+//   if (!container) {
+//     return false;
+//   }
+//   // ios
+//   iosBanner = document.getElementById('js-banner__upper__link-for-iOS');
+//   if (!iosBanner) {
+//     return false;
+//   }
+//   // androids
+//   androidBanner = document.getElementById('js-banner__upper__link-for-Android');
+//   if (!androidBanner) {
+//     return false;
+//   }
+//   return true;
+// };
 
 /**
  * - iOSでアクセスした時、URLは
@@ -185,27 +227,59 @@ const parseQuery = () => {
   return obj.utm_medium;
 };
 
+// /**
+//  * banner を表示します
+//  * @param {string} id utm_medium value
+//  */
+// const showBanner = (id) => {
+//   if (id === 'iOS') {
+//     iosBanner.style.cssText = '';
+//   } else if (id === 'Android') {
+//     androidBanner.style.cssText = '';
+//   }
+// };
+//
+// // execute
+// // 1. element check
+// // 2. query check
+// if (getElements()) {
+//   // element 存在
+//   const result = parseQuery();
+//   // query parse result
+//   if (result) {
+//     // utm_medium が存在
+//     showBanner(result);
+//   }
+// }
+
 /**
- * banner を表示します
- * @param {string} id utm_medium value
+ * バナーコンテナを取得し存在すればバナー表示管理クラス `Banners` instanceを作成します
+ * @param {String} id query.utm_medium value
+ * @param {string} elementId バナー親コンテナ ID
  */
-const showBanner = (id) => {
-  if (id === 'iOS') {
-    iosBanner.style.cssText = '';
-  } else if (id === 'Android') {
-    androidBanner.style.cssText = '';
+const elements = (id, elementId) => {
+  const container = document.getElementById(elementId);
+  if (!container) {
+    return;
   }
+  // ios
+  const ios = document.getElementById(`${elementId}__link-for-iOS`);
+  if (!ios) {
+    return;
+  }
+  // androids
+  const android = document.getElementById(`${elementId}__link-for-Android`);
+  if (!android) {
+    return;
+  }
+  const banners = new Banners(id, container, ios, android);
+  banners.show();
 };
 
-// execute
-// 1. element check
-// 2. query check
-if (getElements()) {
-  // element 存在
-  const result = parseQuery();
-  // query parse result
-  if (result) {
-    // utm_medium が存在
-    showBanner(result);
-  }
+// query value を取得します
+const utmMedium = parseQuery();
+// query.utm_medium が存在すればバナーを表示します
+if (utmMedium) {
+  elements(utmMedium, 'js-banner__upper');
+  elements(utmMedium, 'js-banner__app');
 }
