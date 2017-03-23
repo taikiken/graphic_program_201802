@@ -15,7 +15,7 @@
   <!-- sns ogp -->
   <meta property="og:title" content="W侍 プレゼントキャンペーン | SPORTS BULL">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/w_samurai/campaign/og_image.png">
+  <meta property="og:image" content="https://sportsbull.jp/assets/images/w_samurai/campaign/ogp.png">
   <meta property="og:url" content="https://sportsbull.jp/w_samurai/campaign/">
   <meta property="og:description" content="スポーツブルで日本代表を応援。サッカー &amp; 野球賞品 プレゼントキャンペーン。">
   <!-- twitter card -->
