@@ -97,7 +97,6 @@
   <a id="js-banner__upper__link-for-iOS" style="display: none;" class="banner__upper__link for-iOS" href="https://sportsbull.jp/sokuhou/?utm_source=aust&utm_campaign=sokuhou&utm_medium=banner_ios&utm_content=20170323"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="サッカー日本代表 アジア最終予選（Road to Russia）リアルタイム速報"></a>
   <a id="js-banner__upper__link-for-Android" style="display: none;" class="banner__upper__link for-Android" href="https://sportsbull.jp/sokuhou/?utm_source=aust&utm_campaign=sokuhou&utm_medium=banner_android&utm_content=20170323"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="サッカー日本代表 アジア最終予選（Road to Russia）リアルタイム速報"></a>
   </aside><!-- /.banner__upper -->
-  <script src="/assets/js/picks_au_banner.bundle.js"></script>
 
   <div class="body-sec">
     <div class="body-sec-inner">
@@ -160,8 +159,8 @@
   <?php endforeach; ?>
 <?php endforeach; ?>
         <div id="js-banner__app" class="banner__app">
-          <a id="js-banner__app__link-for-iOS" href="https://app.adjust.com/eycznw"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
-          <a id="js-banner__app__link-for-Android" href="https://app.adjust.com/mik1x9"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://app.adjust.com/eycznw"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a id="js-banner__app__link-for-Android" style="display: none;" href="https://app.adjust.com/mik1x9"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
         </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->
@@ -197,5 +196,7 @@ endif;
 // -----------------------------------------
 ?>
 <script src="/assets/js/au/index.js?v=<?php echo $page['version']; ?>"></script>
+<script src="/assets/js/picks_au_banner.bundle.js?v=<?php echo $page['version']; ?>"></script>
+
 </body>
 </html>
