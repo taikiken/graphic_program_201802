@@ -8,29 +8,19 @@ $template_name = $page['template'];
 $in_big6tv = false;
 $single_big6tv = false;
 // 記事詳細 + big6tv でも広告非表示
+/*
+今回でいうと、一覧、詳細ともに
+
+$page['cateogry']['slug'] == 'big6tv'
+
+プライマリカテゴリーが big6tv = big6tvテーマが適応される一覧&詳細
+で広告非表示としていただいてよいかと思いますー
+@see https://github.com/undotsushin/undotsushin/pull/1731#pullrequestreview-28563047
+*/
 if ($template_name == 'category' || $template_name == 'p') {
-  $page_categories = $page['categories'];
-  if (isset($page_categories)) {
-    // $page['categories'] が無くなった様子 on 2017-03-21
-    foreach ($page_categories as $page_category) {
-      if ($page_category['slug'] == 'big6tv') {
-        $in_big6tv = true;
-        break;
-      }
-    }
-  } else {
-    // $page['categories'] が無いので $page['category'] 代用する
-    $page_category = $page['category'];
-    if (isset($page_category) && $page_category['slug'] == 'big6tv') {
-      $in_big6tv = true;
-    }
-    // $page['category2'] に入っている可能性があるのでチェックする
-    if (!$in_big6tv) {
-      $page_category = $page['category2'];
-      if (isset($page_category) && $page_category['slug'] == 'big6tv') {
-        $in_big6tv = true;
-      }
-    }
+  $page_category = $page['category'];
+  if (isset($page_category) && $page_category['slug'] == 'big6tv') {
+    $in_big6tv = true;
   }
 }
 // 記事詳細 + カテゴリ big6tv
