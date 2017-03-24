@@ -177,7 +177,7 @@ if ( $template_name == 'category' ) {
   // 記事詳細 `big6tv` の時に `theme_big6` を whole へ追加する
   // @since 2017-03-24
   $page_category = $page['category'];
-  if (isset($page_category) && $page_category['slug'] == 'big6tv') {
+  if (isset($page_category) && $page_category['slug'] == 'big6tv' && !in_array('theme_big6', $whole_classes)) {
     $whole_classes[] = 'theme_big6';
   }
 }
