@@ -174,6 +174,12 @@ if ( $template_name == 'category' ) {
 } elseif ( $template_name == 'p' ) {
   // @since 2016-09-30
   $whole_classes[] = 'layout-detail';
+  // 記事詳細 `big6tv` の時に `theme_big6` を whole へ追加する
+  // @since 2017-03-24
+  $page_category = $page['category'];
+  if (isset($page_category) && $page_category['slug'] == 'big6tv') {
+    $whole_classes[] = 'theme_big6';
+  }
 }
 ?>
 </head>
