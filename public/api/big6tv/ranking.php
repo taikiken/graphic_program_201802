@@ -6,6 +6,7 @@
 
 */
 
+date_default_timezone_set('Asia/Tokyo');
 setlocale(LC_ALL, 'ja_JP.UTF-8');
 
 include "local.php";
@@ -44,7 +45,27 @@ function getCsvConvertArray($file) {
 
 }
 
-$response = getCsvConvertArray('ranking.csv');
+/**
+* CSVの更新日取得
+*
+* @param  string   $file  CSVファイルのパス
+* @return string   更新日
+*/
+function getLastUpdate($file) {
+
+  if ( file_exists($file) ) {
+    return date ("Y-m-d H:i:s", filemtime($file) );
+  }
+
+}
+
+
+
+// run
+// ==============================
+
+$response   = getCsvConvertArray('ranking.csv');
+$lastUpdate = getLastUpdate('ranking.csv');
 
 $ranking = array();
 foreach( $response as $key => $value ) :
@@ -53,21 +74,21 @@ foreach( $response as $key => $value ) :
     // IDきめる
     $nameI = '';
     switch( $value[2] ) :
-      case '明大' :
-        $nameI = 'M';
-        $slug  = 'meiji';
-        break;
-      case '慶大' :
-        $nameI = 'K';
-        $slug  = 'keio';
+      case '立大' :
+        $nameI = 'R';
+        $slug  = 'rikkio';
         break;
       case '早大' :
         $nameI = 'W';
         $slug  = 'waseda';
         break;
-      case '立大' :
-        $nameI = 'R';
-        $slug  = 'rikkio';
+      case '慶大' :
+        $nameI = 'K';
+        $slug  = 'keio';
+        break;
+      case '明大' :
+        $nameI = 'M';
+        $slug  = 'meiji';
         break;
       case '法大' :
         $nameI = 'H';
@@ -97,8 +118,9 @@ endforeach;
 
 $result   = array(
   'response' => array(
-    'lastupdate' => date('Y-m-d H:i:s'),
-    'ranking' => $ranking,
+    'timezone'   => date_default_timezone_get(),
+    'lastupdate' => $lastUpdate,
+    'ranking'    => $ranking,
   )
 );
 
