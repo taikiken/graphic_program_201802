@@ -131,17 +131,26 @@ streampack初期化コード
 <script>
 (function($){
 
+  var $embed          = $('.js-live');
+  var $tmpl_video     = $('#live-streaming__video').html();
+  var interval        = <?php echo ( $page['category']['live_interval'] ) ? $page['category']['live_interval'] : 10 ; ?> * 1000; // polling感覚
+  var liveEndPoint    = '<?php echo ( $page['category']['live'] ) ? $page['category']['live'] : '/api/big6tv/live'; ?>';
 
-  var $embed        = $('.js-live');
-  var $tmpl_video   = $('#live-streaming__video').html();
-  var interval      = 10000; // polling感覚
-  var isPlaying     = null;
+  var video_isPlaying = null;
+  var video_source    = '';
+
+  // 広告再生済みかどうか
+  var isAdPlayed      = false;
 
 
   // 初回実行
-  var intervalTimer = window.setInterval( init(), interval );
+  var intervalTimer = window.setInterval( init, interval );
   init();
 
+
+  function log( message, value ) {
+    console.log( message, value || '');
+  }
 
   /**
   * データ取得してプレイヤーをセットする
@@ -149,7 +158,7 @@ streampack初期化コード
   function init() {
 
     $.ajax({
-      url      : '/api/big6tv/live',
+      url      : liveEndPoint,
       type     : 'get',
       dataType : 'json',
       cache    : true, // jQueryのcache設定これじゃなかったっけ..
@@ -160,32 +169,36 @@ streampack初期化コード
     .done(function (data) {
 
       var response      = data.response.live;
-      var response_flag = false;
 
       // レスポンスのisPlayingがboolでもstringでも判定できるように
       if ( response.isPlaying == true || response.isPlaying == 'true' ) {
-        response_flag = true;
+        response.isPlaying = true;
       }
 
-      if ( isPlaying !== response_flag ) {
+      if ( video_isPlaying !== response.isPlaying || video_source !== response.video.source ) {
 
-        isPlaying = response_flag;
+        video_isPlaying = response.isPlaying;
+        video_source    = response.video.source;
 
-        if ( isPlaying ) {
+        if ( video_isPlaying ) {
           reset();
           initVideo( response );
         } else {
           reset();
-          initAlt( response );
+          initAlt( response.alt.large );
         }
 
       }
 
+      log('live - ajax : success');
+
     })
     .fail(function () {
-      console.log('live - ajax : fail');
+      log('live - ajax : fail');
+    })
+    .always(function () {
+      log('live - ajax');
     });
-
 
   }
 
@@ -202,17 +215,17 @@ streampack初期化コード
 
     $embed.empty();
     $embed.css('background-image', 'none');
-    console.log('live - reset');
+    log('live - reset');
   }
 
 
   /**
   * プレイヤー部分にalt画像を表示する
   */
-  function initAlt( data ) {
+  function initAlt( image ) {
     // 単に中身の要素を空にして親要素の背景にposterおいてるだけ
-    $embed.css('background-image','url(' + data.alt.large + ')');
-    console.log('live - initAlt', data.alt.large);
+    $embed.css('background-image','url(' + image + ')');
+    log('live - initAlt', image);
   }
 
 
@@ -228,7 +241,9 @@ streampack初期化コード
     // ------------------------------
     var ad_url = '';
 
-    if ( data.video.ad_url ) {
+
+    // 広告再生済みなら再度広告設定はしない
+    if ( !isAdPlayed && data.video.ad_url ) {
       ad_url = <?php echo ( $page['ua'] == 'desktop' ) ? 'data.video.ad_url.pc' : 'data.video.ad_url.sp'; ?>;
 
       // advantage広告タグ用 - URLの末尾が `page=` ならtimestampを付与してリクエストする
@@ -239,6 +254,7 @@ streampack初期化コード
         }
       }
     }
+
 
     // player
     // ------------------------------
@@ -272,7 +288,7 @@ streampack初期化コード
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-        console.log('live - play : sp');
+        log('live - play : sp');
       });
 
     } else {
@@ -281,32 +297,37 @@ streampack初期化コード
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-        console.log('live - play : pc');
+        log('live - play : pc');
       }, 1000);
 
     }
 
     player.on('play', function() {
-      console.log('live - play');
+      log('live - play');
     });
 
     player.on('pause', function() {
-      console.log('live - pause');
+      log('live - pause');
     });
 
     player.on('ended', function() {
-      console.log('live - ended');
+      log('live - ended');
     });
 
     player.on('adsready', function() {
-      console.log('live - adsready');
+      log('live - adsready');
+      isAdPlayed = true;
     });
 
-    // TODO
-    // エラー捕捉してごめんなさい画像出す
-    // ごめんなさい画像は準備中
 
-    console.log('live - initVideo', data);
+    player.on('error', function() {
+      reset();
+      initAlt( data.error.large );
+      log('live - error');
+    });
+
+
+    log('live - initVideo', data);
   }
 
 
