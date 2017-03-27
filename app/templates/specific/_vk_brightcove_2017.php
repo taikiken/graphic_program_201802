@@ -29,7 +29,7 @@ endif;
 <script src="//players.brightcove.net/4802324450001/rJIcYM98_default/index.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/assets/vk_brightcove_2017/js/bc-mapi.js"></script>
-<script src="/assets/vk_brightcove_2017/js/Player.js"></script>
+<script src="/assets/vk_brightcove_2017/js/Player_20170326.js"></script>
 <script type="text/javascript">
   videojs('ABCplayer').PlayerControl({
     "videoId" : "<?php echo $page['post']['media_vk_refid']; ?>",
