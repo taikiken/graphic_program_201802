@@ -123,6 +123,11 @@
     </section><!-- /.main-sec -->
 
     <section class="side-sec">
+      <?php
+      // global property
+      global $template_big6tb;
+      $template_big6tb = true;
+      ?>
       <?php include_once __DIR__."/../../desktop/_sidebar_ad.php"; ?>
     </section><!-- /.side-sec -->
 

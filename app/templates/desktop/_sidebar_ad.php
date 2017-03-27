@@ -4,8 +4,10 @@
 // @see https://github.com/undotsushin/undotsushin/issues/1546
 // category.slug 'big6tv' search
 // @since 2017-03-15
+global $template_big6tb;
 $template_name = $page['template'];
-$in_big6tv = false;
+//$in_big6tv = false;
+$in_big6tv = $template_big6tb;
 $single_big6tv = false;
 // 記事詳細 + big6tv でも広告非表示
 /*
