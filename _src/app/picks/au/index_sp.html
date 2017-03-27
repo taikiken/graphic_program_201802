@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <script src="/assets/js/libs/sagen/sagen.min.js" id="sagen" data-browser="true"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <title>Today's ピックアップ | SPORTS BULL</title>
-  <meta name="description" content="説明文">
-  <meta name="keywords" content="キーワード, キーワード, キーワード">
+  <title>【スポーツ】Today’s ピックアップ</title>
+  <meta name="description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
+  <meta name="keywords" content="スポーツ,メディア,クレイジー,アスリート,ニュース,動画,sports,media,crazy">
   <link rel="stylesheet" href="/assets/sp/css/picks/au/ui.css">
   <script src="/assets/js/libs/jquery2/jquery.min.js"></script>
-  <script src="/assets/js/libs/vendor.min.js"></script>
-  <script src="/assets/js/libs/vendor.react.js"></script>
 </head>
 <body class="appbnr-disable">
 <div class="whole picks picks--au">
@@ -50,9 +48,10 @@
     </dl><!-- /.category-nav--sub -->
   </nav><!-- /.category-nav -->
 
-  <aside class="banner__w_samurai">
-    <a class="banner__w_samurai__link" href="#"><img src="/assets/sp/images/picks/au/banner-w_samurai.png" alt="【WBC】試合日程・ハイライト動画"></a>
-  </aside><!-- /.banner__w_samurai -->
+  <aside id="js-banner__upper" class="banner__upper">
+    <a id="js-banner__upper__link-for-iOS" style="display: none;" class="banner__upper__link for-iOS" href="hoge"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="xxxxx"></a>
+    <a id="js-banner__upper__link-for-Android" style="display: none;" class="banner__upper__link for-Android" href="hoge"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="xxxxx"></a>
+  </aside><!-- /.banner__upper -->
 
   <div class="body-sec">
     <div class="body-sec-inner">
@@ -194,8 +193,9 @@
 
         <p>5件入ります</p>
 
-        <div class="banner__app">
-          <a href="hoge"><img src="/assets/sp/images/picks/au/banner-app.png" alt="スポーツブルアプリをダウンロード"></a>
+        <div id="js-banner__app" class="banner__app">
+          <a id="js-banner__app__link-for-iOS" href="https://app.adjust.com/eycznw"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a id="js-banner__app__link-for-Android" href="https://app.adjust.com/mik1x9"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
         </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->
@@ -222,7 +222,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script src="/assets/js/bundle/main.bundle.js"></script>
-<script src="/assets/js/xxx.bundle.js"></script>
+<script src="/assets/js/picks_au_banner.bundle.js"></script>
+<script src="/assets/js/au/index.js?v=<?php echo $page['version']; ?>"></script>
 </body>
 </html>
