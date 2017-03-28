@@ -12,7 +12,7 @@
 
 // carousel
 import { ComponentPagers } from './ComponentPagers';
-import { ComponentPickupSlider } from './ComponentPickupSlider';
+import { ComponentPickupArticles } from './ComponentPickupArticles';
 
 // view
 import { View } from '../../view/View';
@@ -58,6 +58,43 @@ const direction = (length, boundPrev, boundNext) => {
  * @since 2016-09-15
  */
 export class ComponentCarousel extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  list: Array<ArticleDae>,
+   *  callback: Function,
+   *  polling: Polling,
+   *  index: number
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      // articles 配列を元にDomを作成する
+      list: React.PropTypes.array.isRequired,
+      callback: React.PropTypes.func.isRequired,
+      polling: React.PropTypes.object.isRequired,
+      index: React.PropTypes.number,
+      sp: React.PropTypes.bool,
+      home: React.PropTypes.bool
+    };
+  }
+  /**
+   * defaultProps
+   * @return {{index: number, sp: boolean, home: boolean}} React props
+   */
+  static get defaultProps() {
+    return {
+      index: 0,
+      sp: Sagen.Browser.Mobile.phone(),
+      home: false
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * default property を保存し必要な関数・変数を準備します
    * @param {Object} props React props プロパティー<br>
@@ -159,67 +196,9 @@ export class ComponentCarousel extends React.Component {
      */
     this.bindLength = this.updateLength.bind(this);
   }
-  /**
-   * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
-   * @return {?XML} カルーセル・コンテナを返します
-   */
-  render() {
-    const list = this.props.list;
-    if (list.length === 0) {
-      // データがない時は表示しない
-      return null;
-    }
-    // JSX
-    return (
-      <div className="hero-sec">
-        <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${this.state.index}`}>
-          {/* slider */}
-          <div className="hero-slider-inner">
-            <div className="pickup-slider-wrapper">
-              <ComponentPickupSlider
-                list={list}
-                sp={this.props.sp}
-                home={this.props.home}
-                next={this.bindNext}
-                prev={this.bindPrev}
-                play={this.bindPlay}
-                pause={this.bindPause}
-                length={this.bindLength}
-              />
-            </div>
-          </div>
-          <div className="hero-slider-control">
-            {/* prev / next */}
-            {direction(list.length, this.boundPrev, this.boundNext)}
-            {/* pagers */}
-            <ComponentPagers
-              list={list}
-              onPager={this.boundPager}
-              sp={this.props.sp}
-            />
-            {/* hero-slider-control */}
-          </div>
-          {/* .hero-slider */}
-        </div>
-        {/* #hero-sec */}
-      </div>
-    );
-  }
-  // --------------------------------------------
-  // delegate
-  /**
-   * delegate method, マウントした時にコールされます
-   *
-   * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-    // length が 1 以上なら
-    if (this.props.list.length > 1) {
-      // animation start
-      this.play();
-    }
-  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   // --------------------------------------------
   // carousel
   /**
@@ -373,70 +352,65 @@ export class ComponentCarousel extends React.Component {
     // 文字列が返される(innerHTML)かもなので数値に型変換します
     this.jump(parseInt(index, 10));
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
+  // --------------------------------------------
+  // delegate
   /**
-   * propTypes
-   * @return {{
-   *  list: Array<ArticleDae>,
-   *  callback: Function,
-   *  polling: Polling,
-   *  index: number
-   * }} React props
+   * delegate method, マウントした時にコールされます
+   *
+   * `View.DID_MOUNT` をコールバックに通知し、カルーセルアニメーションを開始します
    */
-  static get propTypes() {
-    return {
-      // articles 配列を元にDomを作成する
-      list: React.PropTypes.array.isRequired,
-      callback: React.PropTypes.func.isRequired,
-      polling: React.PropTypes.object.isRequired,
-      index: React.PropTypes.number,
-      sp: React.PropTypes.bool,
-      home: React.PropTypes.bool
-    };
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
+    // length が 1 以上なら
+    if (this.props.list.length > 1) {
+      // animation start
+      this.play();
+    }
   }
   /**
-   * defaultProps
-   * @return {{index: number, sp: boolean, home: boolean}} React props
+   * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
+   * @return {?XML} カルーセル・コンテナを返します
    */
-  static get defaultProps() {
-    return {
-      index: 0,
-      sp: Sagen.Browser.Mobile.phone(),
-      home: false
-    };
+  render() {
+    const list = this.props.list;
+    if (list.length === 0) {
+      // データがない時は表示しない
+      return null;
+    }
+    // JSX
+    return (
+      <div className="hero-sec">
+        <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${this.state.index}`}>
+          {/* slider */}
+          <div className="hero-slider-inner">
+            <div className="pickup-slider-wrapper">
+              <ComponentPickupArticles
+                list={list}
+                sp={this.props.sp}
+                home={this.props.home}
+                next={this.bindNext}
+                prev={this.bindPrev}
+                play={this.bindPlay}
+                pause={this.bindPause}
+                length={this.bindLength}
+              />
+            </div>
+          </div>
+          <div className="hero-slider-control">
+            {/* prev / next */}
+            {direction(list.length, this.boundPrev, this.boundNext)}
+            {/* pagers */}
+            <ComponentPagers
+              list={list}
+              onPager={this.boundPager}
+              sp={this.props.sp}
+            />
+            {/* hero-slider-control */}
+          </div>
+          {/* .hero-slider */}
+        </div>
+        {/* #hero-sec */}
+      </div>
+    );
   }
 }
-
-// // property
-// /**
-//  * this.props type を設定します, React の PropTypes をプロパティに設定します
-//  * @static
-//  * @type {{
-//  *  list: Array<ArticleDae>,
-//  *  callback: Function,
-//  *  polling: Polling,
-//  *  index: number
-//  * }}
-//  */
-// ComponentCarousel.propTypes = {
-//   // articles 配列を元にDomを作成する
-//   list: React.PropTypes.array.isRequired,
-//   callback: React.PropTypes.func.isRequired,
-//   polling: React.PropTypes.object.isRequired,
-//   index: React.PropTypes.number,
-//   sp: React.PropTypes.bool,
-//   home: React.PropTypes.bool
-// };
-//
-// /**
-//  * デフォルト・プロパティ, home を false 設定します
-//  * @static
-//  * @type {{index: number, sp: boolean, home: boolean}}
-//  */
-// ComponentCarousel.defaultProps = {
-//   index: 0,
-//   sp: Sagen.Browser.Mobile.phone(),
-//   home: false
-// };

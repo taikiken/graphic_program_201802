@@ -11,7 +11,7 @@
  */
 
 // carousel
-import { ComponentCarouselArticle } from './ComponentCarouselArticle';
+import { ComponentPickupArticle } from './ComponentPickupArticle';
 
 // app
 import { Empty } from '../../app/const/Empty';
@@ -32,44 +32,44 @@ const React = self.React;
 
 // --------------------------------------------
 // private
-/**
- * .pickup-NN Element を作成します
- * @since 2016-09-19
- * @private
- * @static
- * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
- * @param {number} index react key に使用するユニークな index 数値
- * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
- * @param {boolean} home home（一面）か否かの真偽値
- * @return {XML} カルーセル1記事コンテナを返します
- */
-const makeArticle = (dae, index, clone, home) => {
-  const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
-  // console.log('makeArticle', dae, dae.date, typeof dae.date);
-  // HeadlineDom instance を使い render
-  // iteration key は index を使う
-  // コンテナを 前後に clone するため article.id が使えない
-  if (clone) {
-    return (
-      <ComponentCarouselArticle
-        key={`pickup-${index}`}
-        index={index}
-        id={String(dae.id)}
-        slug={dae.categories.slug}
-        categories={dae.categories.all}
-        url={dae.url}
-        date={dae.displayDate}
-        title={dae.title}
-        large={large}
-        commentsCount={dae.commentsCount}
-        mediaType={dae.mediaType}
-        home={home}
-      />
-    );
-  } else {
-    return null;
-  }
-};
+// /**
+//  * .pickup-NN Element を作成します
+//  * @since 2016-09-19
+//  * @private
+//  * @static
+//  * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
+//  * @param {number} index react key に使用するユニークな index 数値
+//  * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
+//  * @param {boolean} home home（一面）か否かの真偽値
+//  * @return {?XML} カルーセル1記事コンテナを返します
+//  */
+// const makeArticle = (dae, index, clone, home) => {
+//   const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
+//   // console.log('makeArticle', dae, dae.date, typeof dae.date);
+//   // HeadlineDom instance を使い render
+//   // iteration key は index を使う
+//   // コンテナを 前後に clone するため article.id が使えない
+//   if (clone) {
+//     return (
+//       <ComponentPickupArticle
+//         key={`pickup-${index}`}
+//         index={index}
+//         id={String(dae.id)}
+//         slug={dae.categories.slug}
+//         categories={dae.categories.all}
+//         url={dae.url}
+//         date={dae.displayDate}
+//         title={dae.title}
+//         large={large}
+//         commentsCount={dae.commentsCount}
+//         mediaType={dae.mediaType}
+//         home={home}
+//       />
+//     );
+//   } else {
+//     return null;
+//   }
+// };
 
 /**
  * div.pickup-slider コンテナを作成し<br>
@@ -77,12 +77,79 @@ const makeArticle = (dae, index, clone, home) => {
  *
  * sp はスワイプが可能です
  */
-export class ComponentPickupSlider extends React.Component {
+export class ComponentPickupArticles extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{
+   *  list: Array<ArticleDae>,
+   *  sp: boolean,
+   *  home: boolean,
+   *  next: Function,
+   *  prev: Function,
+   *  play: Function,
+   *  pause: Function
+   * }} React props
+   */
+  static get propTypes() {
+    return {
+      // articles 配列を元にDomを作成する
+      list: React.PropTypes.array.isRequired,
+      sp: React.PropTypes.bool.isRequired,
+      home: React.PropTypes.bool.isRequired,
+      next: React.PropTypes.func.isRequired,
+      prev: React.PropTypes.func.isRequired,
+      play: React.PropTypes.func.isRequired,
+      pause: React.PropTypes.func.isRequired,
+      length: React.PropTypes.func.isRequired
+    };
+  }
+  /**
+   * .pickup-NN Element を作成します
+   * @since 2016-09-19
+   * @param {ArticleDae} dae Element 作成元の JSON, ArticleDae instance
+   * @param {number} index react key に使用するユニークな index 数値
+   * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
+   * @param {boolean} home home（一面）か否かの真偽値
+   * @return {?XML} カルーセル1記事コンテナを返します
+   */
+  static makeArticle = (dae, index, clone, home) => {
+    const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
+    // console.log('makeArticle', dae, dae.date, typeof dae.date);
+    // HeadlineDom instance を使い render
+    // iteration key は index を使う
+    // コンテナを 前後に clone するため article.id が使えない
+    if (clone) {
+      return (
+        <ComponentPickupArticle
+          key={`pickup-${index}`}
+          index={index}
+          id={String(dae.id)}
+          slug={dae.categories.slug}
+          categories={dae.categories.all}
+          url={dae.url}
+          date={dae.displayDate}
+          title={dae.title}
+          large={large}
+          commentsCount={dae.commentsCount}
+          mediaType={dae.mediaType}
+          home={home}
+        />
+      );
+    } else {
+      return null;
+    }
+  };
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * React property を設定します
    *
    * スワイプ関連イベントハンドラなど変数を初期化します
-   * @param {Object} props React props プロパティー {@link ComponentPickupSlider.propTypes}
+   * @param {Object} props React props プロパティー {@link ComponentPickupArticles.propTypes}
    */
   constructor(props) {
     super(props);
@@ -133,55 +200,10 @@ export class ComponentPickupSlider extends React.Component {
      */
     this.touching = null;
   }
-  /**
-   * ul.pickup-slider を作成します<br>
-   * 循環スライドのためにクローンコンテナを作成します
-   * @return {XML} カルーセル・コンテナを返します
-   */
-  render() {
-    const list = this.props.list;
-    const needClone = list.length > 1;
-    const needFourth = list.length === 2;
-    let count = 0;
-
-    return (
-      <ul className="pickup-slider" ref="pickupSlider" style={this.state.style}>
-        {
-          // 1.first
-          list.map((article) => makeArticle(article, count++, true, this.props.home))
-        }
-        {
-          // 2.second clone
-          list.map((article) => makeArticle(article, count++, needClone, this.props.home))
-        }
-        {
-          // 3.third clone
-          list.map((article) => makeArticle(article, count++, needClone, this.props.home))
-        }
-        {
-          // 4.fourth clone
-          list.map((article) => makeArticle(article, count++, needFourth, this.props.home))
-        }
-      </ul>
-    );
-  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   // --------------------------------------------
-  // delegate
-  /**
-   * マウント後にスライドが1枚以上ならスワイプできるように準備します
-   */
-  componentDidMount() {
-    // length が 1 以上なら
-    if (this.props.list.length > 1) {
-      // sp 端末のみスワイプ準備
-      if (this.props.sp) {
-        this.prepareSwipe();
-      }
-    }
-
-    // 親コンテナに slider 数の正確な値を通知します
-    this.dispatchLength();
-  }
   /**
    * pickupSlider > li length を親コンテナに通知します
    */
@@ -347,56 +369,62 @@ export class ComponentPickupSlider extends React.Component {
     touching.off(Touching.END, this.boundEnd);
     touching.off(Touching.CANCEL, this.boundCancel);
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
+  // --------------------------------------------
   /**
-   * propTypes
-   * @return {{
-   *  list: Array<ArticleDae>,
-   *  sp: boolean,
-   *  home: boolean,
-   *  next: Function,
-   *  prev: Function,
-   *  play: Function,
-   *  pause: Function
-   * }} React props
+   * carousel 用記事データ複製を作成します
+   * @param {boolean} needClone 複製が必要かフラッグ, true: 複製必要
+   * @param {number} count 記事番号
+   * @param {Array<ArticleDae>} list 記事配列
+   * @param {number} index 記事配列添字
+   * @return {?XML} .pickup-NN Element(ComponentPickupArticle) を作成します
    */
-  static get propTypes() {
-    return {
-      // articles 配列を元にDomを作成する
-      list: React.PropTypes.array.isRequired,
-      sp: React.PropTypes.bool.isRequired,
-      home: React.PropTypes.bool.isRequired,
-      next: React.PropTypes.func.isRequired,
-      prev: React.PropTypes.func.isRequired,
-      play: React.PropTypes.func.isRequired,
-      pause: React.PropTypes.func.isRequired,
-      length: React.PropTypes.func.isRequired
-    };
+  makeClone(needClone, count, list, index) {
+    if (!needClone) {
+      return null;
+    }
+    return ComponentPickupArticles.makeArticle(list[index], count, true, this.props.home);
+  }
+  // --------------------------------------------
+  // delegate
+  /**
+   * マウント後にスライドが1枚以上ならスワイプできるように準備します
+   */
+  componentDidMount() {
+    // length が 2 以上なら
+    if (this.props.list.length > 1) {
+      // sp 端末のみスワイプ準備
+      if (this.props.sp) {
+        this.prepareSwipe();
+      }
+    }
+
+    // 親コンテナに slider 数の正確な値を通知します
+    this.dispatchLength();
+  }
+  /**
+   * ul.pickup-slider を作成します<br>
+   * 循環スライドのためにクローンコンテナを作成します
+   * @return {XML} カルーセル・コンテナを返します
+   */
+  render() {
+    const list = this.props.list;
+    const needClone = list.length > 1;
+    // const needFourth = list.length === 2;
+    let count = 0;
+
+    return (
+      <ul className="pickup-slider" ref="pickupSlider" style={this.state.style}>
+        {
+          this.makeClone(needClone, count++, list, list.length - 1)
+        }
+        {
+          // 1.first
+          list.map((article) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home))
+        }
+        {
+          this.makeClone(needClone, count++, list, 0)
+        }
+      </ul>
+    );
   }
 }
-//
-// /**
-//  * React の PropTypes をプロパティに設定します
-//  * @type {{
-//  *  list: Array<ArticleDae>,
-//  *  sp: boolean,
-//  *  home: boolean,
-//  *  next: Function,
-//  *  prev: Function,
-//  *  play: Function,
-//  *  pause: Function
-//  * }}
-//  */
-// ComponentPickupSlider.propTypes = {
-//   // articles 配列を元にDomを作成する
-//   list: React.PropTypes.array.isRequired,
-//   sp: React.PropTypes.bool.isRequired,
-//   home: React.PropTypes.bool.isRequired,
-//   next: React.PropTypes.func.isRequired,
-//   prev: React.PropTypes.func.isRequired,
-//   play: React.PropTypes.func.isRequired,
-//   pause: React.PropTypes.func.isRequired,
-//   length: React.PropTypes.func.isRequired
-// };

@@ -37,10 +37,10 @@ const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PIC
  * 記事クリックで GA 計測タグを送信します
  * @since 2016-09-15
  */
-export class ComponentCarouselArticle extends React.Component {
+export class ComponentPickupArticle extends React.Component {
   /**
    * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentCarouselArticle.propTypes}
+   * @param {Object} props プロパティ {@link ComponentPickupArticle.propTypes}
    */
   constructor(props) {
     super(props);
