@@ -25,10 +25,10 @@ if ($template_name == 'category' || $template_name == 'p') {
     $in_big6tv = true;
   }
 }
-// 記事詳細 + カテゴリ big6tv
-if ($in_big6tv && $template_name == 'p') {
-  $single_big6tv = true;
-}
+//// 記事詳細 + カテゴリ big6tv
+//if ($in_big6tv && $template_name == 'p') {
+//  $single_big6tv = true;
+//}
 ?>
 
 <?php
