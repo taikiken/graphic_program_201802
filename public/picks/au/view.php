@@ -94,8 +94,8 @@
   </nav><!-- /.category-nav -->
 
   <aside id="js-banner__upper" class="banner__upper">
-  <a id="js-banner__upper__link-for-iOS" style="display: none;" class="banner__upper__link for-iOS" href="https://sportsbull.jp/sokuhou/?utm_source=aust&utm_campaign=sokuhou&utm_medium=banner_ios&utm_content=20170323"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="サッカー日本代表 アジア最終予選（Road to Russia）リアルタイム速報"></a>
-  <a id="js-banner__upper__link-for-Android" style="display: none;" class="banner__upper__link for-Android" href="https://sportsbull.jp/sokuhou/?utm_source=aust&utm_campaign=sokuhou&utm_medium=banner_android&utm_content=20170323"><img src="/assets/sp/images/picks/au/banner-live_soccor.png" alt="サッカー日本代表 アジア最終予選（Road to Russia）リアルタイム速報"></a>
+    <a id="js-banner__upper__link-for-iOS" style="display: none;" class="banner__upper__link for-iOS" href="https://sportsbull.jp/category/big6tv/?utm_source=aust&utm_campaign=big6tv&utm_medium=banner_ios&utm_content=20170330"><img src="/assets/sp/images/picks/au/banner-live_big6tv.png" alt="東京六大学野球をLIVE中継！"></a>
+    <a id="js-banner__upper__link-for-Android" style="display: none;" class="banner__upper__link for-Android" href="https://sportsbull.jp/category/big6tv/?utm_source=aust&utm_campaign=big6tv&utm_medium=banner_android&utm_content=20170330"><img src="/assets/sp/images/picks/au/banner-live_big6tv.png" alt="東京六大学野球をLIVE中継！"></a>
   </aside><!-- /.banner__upper -->
 
   <div class="body-sec">
@@ -158,9 +158,10 @@
     <?php endforeach; ?>
   <?php endforeach; ?>
 <?php endforeach; ?>
+
         <div id="js-banner__app" class="banner__app">
-          <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://app.adjust.com/eycznw"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
-          <a id="js-banner__app__link-for-Android" style="display: none;" href="https://app.adjust.com/mik1x9"><img src="/assets/sp/images/picks/au/banner-app_soccor.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://app.adjust.com/gahlmm"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a id="js-banner__app__link-for-Android" style="display: none;" href="https://app.adjust.com/rzqavj"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
         </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->
