@@ -13,7 +13,7 @@ $single_big6tv = false;
 /*
 今回でいうと、一覧、詳細ともに
 
-$page['cateogry']['slug'] == 'big6tv'
+$page['category']['slug'] == 'big6tv'
 
 プライマリカテゴリーが big6tv = big6tvテーマが適応される一覧&詳細
 で広告非表示としていただいてよいかと思いますー
