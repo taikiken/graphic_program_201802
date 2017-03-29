@@ -13,7 +13,7 @@ $single_big6tv = false;
 /*
 今回でいうと、一覧、詳細ともに
 
-$page['cateogry']['slug'] == 'big6tv'
+$page['category']['slug'] == 'big6tv'
 
 プライマリカテゴリーが big6tv = big6tvテーマが適応される一覧&詳細
 で広告非表示としていただいてよいかと思いますー
@@ -25,10 +25,10 @@ if ($template_name == 'category' || $template_name == 'p') {
     $in_big6tv = true;
   }
 }
-// 記事詳細 + カテゴリ big6tv
-if ($in_big6tv && $template_name == 'p') {
-  $single_big6tv = true;
-}
+//// 記事詳細 + カテゴリ big6tv
+//if ($in_big6tv && $template_name == 'p') {
+//  $single_big6tv = true;
+//}
 ?>
 
 <?php
