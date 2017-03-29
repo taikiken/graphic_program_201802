@@ -36,16 +36,16 @@ export class ComponentPagers extends React.Component {
       sp: React.PropTypes.bool.isRequired
     };
   }
-  // ---------------------------------------------------
-  //  CONSTRUCTOR
-  // ---------------------------------------------------
-  /**
-   * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentPagers.propTypes}
-   */
-  constructor(props) {
-    super(props);
-  }
+  // // ---------------------------------------------------
+  // //  CONSTRUCTOR
+  // // ---------------------------------------------------
+  // /**
+  //  * プロパティを保存し必要な関数・変数を準備します
+  //  * @param {Object} props プロパティ {@link ComponentPagers.propTypes}
+  //  */
+  // constructor(props) {
+  //   super(props);
+  // }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
