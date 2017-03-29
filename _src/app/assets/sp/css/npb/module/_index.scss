@@ -1,0 +1,51 @@
+@import "../../../../../../scss_sp/asset";
+
+// index
+//
+// design module index
+
+.undotsushin-ios,
+.undotsushin-android {
+  .head-sec,
+  .foot-sec {
+    display: none !important;
+  }
+
+  body {
+    background-color: #202020;
+  }
+}
+
+.head-sec {
+  h1 {
+    margin: 0;
+  }
+}
+
+
+
+
+
+.body-sec-inner {
+  background-color: #202020 !important;
+  background: url(/assets/images/npb/bg@2x.jpg) center 0 no-repeat;
+  background-size: 100%;
+}
+
+.main-sec {
+  padding: (52/2)+px perCalc(30, 750);
+
+  .heading {
+    margin-bottom: (40/2)+px;
+    text-align: center;
+
+    img {
+      width: perCalc(450, 750);
+    }
+  }
+
+  .spacer {
+    margin-top: (40/2)+px;
+    line-height: 0;
+  }
+}
