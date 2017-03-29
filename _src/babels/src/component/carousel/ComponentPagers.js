@@ -22,6 +22,23 @@ const React = self.React;
  * @since 2016-09-15
  */
 export class ComponentPagers extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<ArticleDae>, onPager: function}} react props
+   */
+  static get propTypes() {
+    return {
+      list: React.PropTypes.array.isRequired,
+      onPager: React.PropTypes.func.isRequired,
+      sp: React.PropTypes.bool.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link ComponentPagers.propTypes}
@@ -29,6 +46,9 @@ export class ComponentPagers extends React.Component {
   constructor(props) {
     super(props);
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * カルーセル・ページャーコンテナを作成します
    * @return {XML} カルーセル・ページャーコンテナを返します
@@ -70,29 +90,4 @@ export class ComponentPagers extends React.Component {
       return null;
     }
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{list: Array<ArticleDae>, onPager: function}} react props
-   */
-  static get propTypes() {
-    return {
-      list: React.PropTypes.array.isRequired,
-      onPager: React.PropTypes.func.isRequired,
-      sp: React.PropTypes.bool.isRequired
-    };
-  }
 }
-//
-// /**
-//  * プロパティ
-//  * @static
-//  * @type {{list: []<ArticleDae>, onPager: function}}
-//  */
-// ComponentPagers.propTypes = {
-//   list: React.PropTypes.array.isRequired,
-//   onPager: React.PropTypes.func.isRequired,
-//   sp: React.PropTypes.bool.isRequired
-// };

@@ -124,8 +124,13 @@ export class ComponentCarousel extends React.Component {
     this.state = {
       index: props.index,
       style: {},
-      length: length
+      length: length,
+      // slider 位置を動かす css value - transform: translateX();
+      transform: ''
     };
+    // sp: 100%, pc: 640px
+    this.left = props.sp ? 100 : 640;
+    this.unit = props.sp ? '%' : 'px';
     /**
      * animation するための Polling instance
      * @type {Polling}
@@ -352,6 +357,9 @@ export class ComponentCarousel extends React.Component {
     // 文字列が返される(innerHTML)かもなので数値に型変換します
     this.jump(parseInt(index, 10));
   }
+  transform(index = 0) {
+    return { transform: `translateX(${(-this.left * index) - this.left}${this.unit})` };
+  }
   // --------------------------------------------
   // delegate
   /**
@@ -383,7 +391,7 @@ export class ComponentCarousel extends React.Component {
         <div className={`hero-slider pickup-container pickup-slider-length-${list.length} slide-${this.state.index}`}>
           {/* slider */}
           <div className="hero-slider-inner">
-            <div className="pickup-slider-wrapper">
+            <div className="pickup-slider-wrapper" style={this.transform(this.state.index)}>
               <ComponentPickupArticles
                 list={list}
                 sp={this.props.sp}

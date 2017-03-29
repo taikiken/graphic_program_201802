@@ -192,13 +192,15 @@ export class ComponentPickupArticles extends React.Component {
      * @type {function}
      */
     this.boundCancel = this.touchCancel.bind(this);
-
     /**
      * Touching instance, swipe 実装に使用します<br>
      * scroll を可能にしつつ side swipe(drag) を実現します
      * @type {?Touching}
      */
     this.touching = null;
+    // ---------------------------------
+    // refs
+    this.pickupSlider = null;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -219,15 +221,20 @@ export class ComponentPickupArticles extends React.Component {
   // --------------------------------------------
   // swipe
   /**
-   * スワイプ関連のイベントを bind し
+   * スワイプ関連のイベントを bind します
    */
   prepareSwipe() {
-    const refsPickup = this.refs.pickupSlider;
+    // const refsPickup = this.refs.pickupSlider;
+    const refsPickup = this.pickupSlider;
+    // 存在チェック
+    if (!refsPickup) {
+      return;
+    }
 
     // touchmove 中の `preventDefault` を Touching で行わない
     const touching = new Touching(refsPickup, false, 1);
-    touching.on(Touching.START, this.boundStart);
     this.touching = touching;
+    touching.on(Touching.START, this.boundStart);
     touching.init();
   }
 
@@ -399,7 +406,7 @@ export class ComponentPickupArticles extends React.Component {
     }
 
     // 親コンテナに slider 数の正確な値を通知します
-    this.dispatchLength();
+    // this.dispatchLength();
   }
   /**
    * ul.pickup-slider を作成します<br>
@@ -413,8 +420,15 @@ export class ComponentPickupArticles extends React.Component {
     let count = 0;
 
     return (
-      <ul className="pickup-slider" ref="pickupSlider" style={this.state.style}>
+      <ul
+        className="pickup-slider"
+        ref={(element) => {
+          this.pickupSlider = element;
+        }}
+        style={this.state.style}
+      >
         {
+          // clone last
           this.makeClone(needClone, count++, list, list.length - 1)
         }
         {
@@ -422,6 +436,7 @@ export class ComponentPickupArticles extends React.Component {
           list.map((article) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home))
         }
         {
+          // clone first
           this.makeClone(needClone, count++, list, 0)
         }
       </ul>
