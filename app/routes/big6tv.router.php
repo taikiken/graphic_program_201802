@@ -18,11 +18,6 @@ $app->group('/{slug:big6tv}',  function () use($app) {
     ));
 
 
-    // debug用に不要なmodel削除
-    // unset($args['page']['site_categories']);
-    // unset($args['page']['ad']);
-    // unset($args['page']['category']);
-    // unset($args['page']['post']);
 
     // LIVEデータを取得する
     $big6tvLive = @file_get_contents($app->model->property('site_url').'/api/big6tv/live');
@@ -41,6 +36,12 @@ $app->group('/{slug:big6tv}',  function () use($app) {
     // ランキングデータを取得する
     $big6tvRanking = @file_get_contents($app->model->property('site_url').'/api/big6tv/ranking');
     $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
+
+
+
+    // #1546 /big6tv/ の PC版右上レクタングルのID固定
+    $args['page']['ad']['pc']['sidebar_top'] = 'big6-pc-rectangle';
+
 
 
     if ( $app->model->property('ua') === 'desktop' ) :
