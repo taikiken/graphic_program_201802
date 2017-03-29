@@ -53,11 +53,14 @@ const direction = (length, boundPrev, boundNext) => {
  * pickup コンテナ「カルーセル」スライドショーを実装します
  * ```
  * <ComponentCarousel/>
- *    <ComponentPickupSlider/>
- *      <ComponentCarouselArticle/>
+ *    <ComponentPickupArticles/>
+ *      <ComponentPickupArticle/>
  *    <ComponentPagers/>
  *      <ComponentPager/>
  * ```
+ * {@link ComponentPickupArticles} が auto play 管理を行います
+ *
+ * {@link CarouselStatus} が {@link ComponentCarousel} と {@link ComponentPager} 間の通信を取り継ぎします
  * @since 2016-09-15
  */
 export class ComponentCarousel extends React.Component {
@@ -359,7 +362,8 @@ export class ComponentCarousel extends React.Component {
     // state update でスライド移動を完了します
     this.setState({ index });
     // polling 再開
-    this.play();
+    // TODO: test mode - comment 外す
+    // this.play();
     // スライドナンバー通知
     // @since 2017-03-28
     console.log('ComponentCarousel.setup index', index);
@@ -387,12 +391,12 @@ export class ComponentCarousel extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
     // length が 1 以上なら
-    // test mode, 以下 comment
-    if (this.props.list.length > 1) {
-      // animation start
-      this.play();
-      this.status.position(0);
-    }
+    // TODO: test mode, 以下 comment
+    // if (this.props.list.length > 1) {
+    //   // animation start
+    //   this.play();
+    //   this.status.position(0);
+    // }
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
