@@ -10,6 +10,9 @@
  *
  */
 
+// event
+import { CarouselStatus } from '../../event/CarouselStatus';
+
 // React
 const React = self.React;
 
@@ -48,10 +51,28 @@ export class ComponentPager extends React.Component {
      * @type {function}
      */
     this.boundClick = this.onClick.bind(this);
+
+    this.index = props.index;
+    this.state = {
+      current: ''
+    };
+    // ------
+    if (props.length > 1) {
+      const status = CarouselStatus.factory();
+      status.on(CarouselStatus.POSITION, this.onPosition.bind(this));
+    }
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  onPosition(events) {
+    let current = '';
+
+    if (events.index === this.index) {
+      current = 'current';
+    }
+    this.setState({ current });
+  }
   /**
    * ページャー click event handler<br>
    * コールバックにページャー内数字を通知します
@@ -70,8 +91,8 @@ export class ComponentPager extends React.Component {
     const props = this.props;
     const no = props.index;
     return (
-      <li className={`pager-item pager-${no}`}>
-        <a href={`#pickup-${props.index}`} className="pager-link" onClick={this.boundClick} >{no}</a>
+      <li className={`pager-item pager-${no} ${this.state.current}`}>
+        <a href={`#pickup-${no}`} className="pager-link" onClick={this.boundClick} >{no}</a>
       </li>
     );
   }
