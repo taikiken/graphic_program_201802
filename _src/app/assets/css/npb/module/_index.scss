@@ -4,9 +4,15 @@
 //
 // design module index
 
+.head-sec {
+  h1 {
+    margin: 0;
+  }
+}
+
 .body-sec {
-  background: url(/assets/images/wbc/bg.jpg) center 0 no-repeat;
-  background-color: #131d25 !important;
+  background: url(/assets/images/npb/bg.jpg) center 0 no-repeat;
+  background-color: #202020 !important;
 
   &:before {
     background-color: transparent !important;
@@ -22,7 +28,9 @@
   margin-top: 40px;
 
   .heading {
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: center;
   }
 
   .spacer {
