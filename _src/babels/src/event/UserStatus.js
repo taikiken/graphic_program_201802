@@ -9,18 +9,21 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
-/* eslint constructor-super: 0 */
 
 import {EventDispatcher} from './EventDispatcher';
 
-let _symbol = Symbol();
+// Singleton を保証するための Symbol
+const _symbol = Symbol('UserStatus singleton Symbol');
+// Singleton instance
 let _instance = null;
 
 /**
  * ログイン / ログアウト を通知
  *
+ * Singleton class です `new` 演算子での instance 作成はできません
+ *
  * @example
- * var userStatus = UserStatus.factory();
+ * const userStatus = UserStatus.factory();
  *
  *  */
 export class UserStatus extends EventDispatcher {
@@ -29,17 +32,18 @@ export class UserStatus extends EventDispatcher {
    * @param {Symbol} target Singleton を実現するための private symbol
    * @return {UserStatus} UserStatus インスタンスを返します
    */
-  constructor( target ) {
-    if ( _symbol !== target ) {
-
-      throw new Error( 'UserStatus is static Class. not use new UserStatus().' );
-
+  constructor(target) {
+    if (_symbol !== target) {
+      throw new Error('UserStatus is static Class. not use new UserStatus().');
     }
-
-    if ( _instance === null ) {
-      super();
-      _instance = this;
+    if (_instance !== null) {
+      return _instance;
     }
+    // ------
+    // do once
+    super();
+    _instance = this;
+
     return _instance;
   }
   // ---------------------------------------------------
@@ -48,14 +52,14 @@ export class UserStatus extends EventDispatcher {
   /**
    * UserStatus.LOG_IN event を fire します
    */
-  login():void {
-    this.dispatch( { type: UserStatus.LOG_IN, sign: true } );
+  login() {
+    this.dispatch({ type: UserStatus.LOG_IN, sign: true });
   }
   /**
    * UserStatus.LOG_OUT event を fire します
    */
-  logout():void {
-    this.dispatch( { type: UserStatus.LOG_OUT, sign: false } );
+  logout() {
+    this.dispatch({ type: UserStatus.LOG_OUT, sign: false });
   }
   // ---------------------------------------------------
   //  static const
@@ -64,14 +68,14 @@ export class UserStatus extends EventDispatcher {
    * LOG_IN event
    * @return {string} LOG_IN event type を返します
    */
-  static get LOG_IN():string {
+  static get LOG_IN() {
     return 'logIn';
   }
   /**
    * LOG_OUT event
    * @return {string} LOG_OUT event type を返します
    */
-  static get LOG_OUT():string {
+  static get LOG_OUT() {
     return 'logOut';
   }
   // ---------------------------------------------------
@@ -81,14 +85,10 @@ export class UserStatus extends EventDispatcher {
    * instance を生成します
    * @return {UserStatus} UserStatus instance を返します
    */
-  static factory():UserStatus {
-
+  static factory() {
     if ( _instance === null ) {
-
       _instance = new UserStatus( _symbol );
-
     }
-
     return _instance;
   }
 }
