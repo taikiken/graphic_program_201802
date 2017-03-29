@@ -20,6 +20,9 @@ import { View } from '../../view/View';
 // tick
 import { Polling } from '../../tick/Polling';
 
+// event
+import { CarouselStatus } from '../../event/CarouselStatus';
+
 // --------------------------------------------
 // library
 // Sagen
@@ -116,6 +119,9 @@ export class ComponentCarousel extends React.Component {
       // 2 件の時は3件に見立ててみる
       length = 3;
     }
+    // sp: 100%, pc: 640px
+    this.left = props.sp ? 100 : 640;
+    this.unit = props.sp ? '%' : 'px';
     /**
      * state option
      * @override
@@ -128,9 +134,6 @@ export class ComponentCarousel extends React.Component {
       // slider 位置を動かす css value - transform: translateX();
       transform: ''
     };
-    // sp: 100%, pc: 640px
-    this.left = props.sp ? 100 : 640;
-    this.unit = props.sp ? '%' : 'px';
     /**
      * animation するための Polling instance
      * @type {Polling}
@@ -173,8 +176,8 @@ export class ComponentCarousel extends React.Component {
      * スライドの現在ナンバー
      * @type {number}
      */
-    this.position = props.index;
-
+    this.position = -1;
+    // this.position = props.index;
     /**
      * bind 済み next
      * @type {Function}
@@ -200,6 +203,7 @@ export class ComponentCarousel extends React.Component {
      * @type {Function}
      */
     this.bindLength = this.updateLength.bind(this);
+    this.status = CarouselStatus.factory();
   }
   // ---------------------------------------------------
   //  METHOD
@@ -262,6 +266,7 @@ export class ComponentCarousel extends React.Component {
   next() {
     // count up します
     let index = this.position + 1;
+    // console.log('ComponentCarousel.next index', index, this.last, index > this.last);
     // last を超えたら 0 に戻す
     if (index > this.last) {
       index = 0;
@@ -280,7 +285,7 @@ export class ComponentCarousel extends React.Component {
       index = this.last;
     }
     // change slide
-    this.jump( index );
+    this.jump(index);
   }
   /**
    * 指定 index スライドに移動します<br>
@@ -296,9 +301,11 @@ export class ComponentCarousel extends React.Component {
     const last = this.last;
     // @type {number}
     const position = this.position;
+    // console.log('ComponentCarousel.jump index', index);
     // --------------
     // 循環アニメーションのために
-    if (index === 0) {
+    // if (index === 0) {
+    if (index < 0) {
       // 先頭に戻る
       if (position === last) {
         // 現在がラストだったらアニメーションなしで移動させる
@@ -325,6 +332,12 @@ export class ComponentCarousel extends React.Component {
       this.setup(index);
     }
   }
+  // lastToFirst() {
+  //
+  // }
+  // firstToLast() {
+  //
+  // }
   /**
    * 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのためにアニメーション無しで移動させた後リフレッシュのために待機させる 1fps
    * @param {number} index スライドナンバー
@@ -347,6 +360,10 @@ export class ComponentCarousel extends React.Component {
     this.setState({ index });
     // polling 再開
     this.play();
+    // スライドナンバー通知
+    // @since 2017-03-28
+    console.log('ComponentCarousel.setup index', index);
+    this.status.position(index);
   }
   /**
    * ページャークリック・コールバックハンドラです<br>
@@ -370,9 +387,11 @@ export class ComponentCarousel extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
     // length が 1 以上なら
+    // test mode, 以下 comment
     if (this.props.list.length > 1) {
       // animation start
       this.play();
+      this.status.position(0);
     }
   }
   /**
@@ -397,7 +416,7 @@ export class ComponentCarousel extends React.Component {
                 sp={this.props.sp}
                 home={this.props.home}
                 next={this.bindNext}
-                prev={this.bindPrev}
+                prev={this.bindPrev}x
                 play={this.bindPlay}
                 pause={this.bindPause}
                 length={this.bindLength}
