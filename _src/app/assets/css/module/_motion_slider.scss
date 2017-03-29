@@ -150,6 +150,13 @@
           + li {
             margin-left: 15px;
           }
+          // current mark
+          // @since 2017-03-28
+          &.current {
+            a {
+              background-color: $highlight-secondary-color;
+            }
+          }
         }
 
         a {
