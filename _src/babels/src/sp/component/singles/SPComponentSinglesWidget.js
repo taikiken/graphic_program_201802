@@ -24,6 +24,15 @@ const React = self.React;
 /**
  * 記事詳細 > オススメ記事・関連記事・人気記事<br>
  * 出力 Component を state.type を元に判断します
+ * - {@link WidgetType.RELATED} - {@link SPComponentSinglesWidgetRelated}
+ * - {@link WidgetType.POPULAR} - {@link SPComponentSinglesWidgetPopular}
+ * - {@link WidgetType.RECOMMEND} - {@link SPComponentSinglesWidgetRecommend}
+ * ```
+ * <SPComponentSinglesWidget/>
+ *    <SPComponentSinglesWidgetRelated />
+ *    <SPComponentSinglesWidgetPopular />
+ *    <SPComponentSinglesWidgetRecommend />
+ * ```
  * @since 2016-09-28
  */
 export class SPComponentSinglesWidget extends React.Component {
