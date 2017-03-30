@@ -210,18 +210,18 @@ export class ComponentPickupArticles extends React.Component {
   //  METHOD
   // ---------------------------------------------------
   // --------------------------------------------
-  /**
-   * pickupSlider > li length を親コンテナに通知します
-   */
-  dispatchLength() {
-    // const items = this.refs.pickupSlider.getElementsByTagName('li');
-    // if (items.length === 1) {
-    //   // 親コンテナに slider 数の正確な値を
-    //   this.props.length(1);
-    // } else {
-    //   this.props.length(items.length / 3);
-    // }
-  }
+  // /**
+  //  * pickupSlider > li length を親コンテナに通知します
+  //  */
+  // dispatchLength() {
+  //   // const items = this.refs.pickupSlider.getElementsByTagName('li');
+  //   // if (items.length === 1) {
+  //   //   // 親コンテナに slider 数の正確な値を
+  //   //   this.props.length(1);
+  //   // } else {
+  //   //   this.props.length(items.length / 3);
+  //   // }
+  // }
   // --------------------------------------------
   // swipe
   /**

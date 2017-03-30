@@ -253,6 +253,8 @@ export class ComponentCarousel extends React.Component {
    * Polling.UPDATE event を bind しアニメーションを開始します
    */
   play() {
+    // console.log('ComponentCarousel.play', this.position);
+    // throw new Error('play...');
     this.pause();
     const polling = this.polling;
     polling.on(Polling.UPDATE, this.boundUpdate);
@@ -272,6 +274,7 @@ export class ComponentCarousel extends React.Component {
    * カルーセルスライドを次のスライドに切替ます
    */
   update() {
+    // console.log('ComponentCarousel.update', this.position);
     this.next();
   }
   /**
@@ -331,7 +334,7 @@ export class ComponentCarousel extends React.Component {
     const last = this.last;
     // @type {number}
     const position = this.position;
-    // console.log('ComponentCarousel.jump index', index);
+    // console.log('ComponentCarousel.jump index', index, position);
     // --------------
     // 循環アニメーションのために
     // if (index === 0) {
@@ -381,8 +384,8 @@ export class ComponentCarousel extends React.Component {
     // state update でスライド移動を完了します
     this.setState({ index });
     // polling 再開
-    // TODO: test mode - comment 外す
-    // this.play();
+    // test mode - comment 外す
+    this.play();
   }
   /**
    * ページャークリック・コールバックハンドラです<br>
@@ -458,12 +461,14 @@ export class ComponentCarousel extends React.Component {
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
-    this.position = 0;
+    // this.position = 0;
     // length が 1 以上なら
-    // TODO: test mode - comment 外す
-    // if (this.props.list.length > 1) {
-    //   this.play();
-    // }
+    // test mode - comment 外す
+    if (this.props.list.length > 1) {
+      // this.setup(0);
+      // this.play();
+      this.jump(0);
+    }
     // this.status.position(0);
   }
   /**
