@@ -58,9 +58,9 @@ const direction = (length, boundPrev, boundNext) => {
  *    <ComponentPagers/>
  *      <ComponentPager/>
  * ```
- * {@link ComponentPickupArticles} が auto play 管理を行います
- *
- * {@link CarouselStatus} が {@link ComponentCarousel} と {@link ComponentPager} 間の通信を取り継ぎします
+ * - 本クラス `ComponentCarousel` がコントローラーとして機能します
+ * - {@link ComponentPickupArticles} が auto play 管理を行います
+ * - {@link CarouselStatus} が {@link ComponentCarousel} と {@link ComponentPager} 間の通信を取り継ぎします
  * @since 2016-09-15
  */
 export class ComponentCarousel extends React.Component {
@@ -78,12 +78,17 @@ export class ComponentCarousel extends React.Component {
    */
   static get propTypes() {
     return {
-      // articles 配列を元にDomを作成する
+      // @type {Array<ArticleDae>} - pickup articles 配列を元に carousel Dom を作成します
       list: React.PropTypes.array.isRequired,
+      // @type {function} - View.DID_MOUNT を通知するコールバック関数
       callback: React.PropTypes.func.isRequired,
+      // @type {Polling} - interval 管理をします
       polling: React.PropTypes.object.isRequired,
+      // @type {number} - [index=0] slider 初期値
       index: React.PropTypes.number,
+      // @type {boolean} - Sagen.Browser.Mobile.phone 真偽値, true: スマホ
       sp: React.PropTypes.bool,
+      // @type {boolean} - true: home（トップページ）, carousel が全ての一覧記事に設置されたため
       home: React.PropTypes.bool
     };
   }
@@ -123,19 +128,31 @@ export class ComponentCarousel extends React.Component {
       length = 3;
     }
     // sp: 100%, pc: 640px
+    /**
+     * 移動量設定値, PC / SP で異なります - SP がレスポンシブ対応するため
+     * - PC: 640(px)
+     * - SP: 100(%)
+     * @type {number}
+     */
     this.left = props.sp ? 100 : 640;
+    /**
+     * 移動量単位, PC / SP で異なります - SP がレスポンシブ対応するため
+     * - PC: x
+     * - SP: %
+     * @type {string}
+     */
     this.unit = props.sp ? '%' : 'px';
     /**
      * state option
-     * @override
-     * @type {{index: number}}
+     * - length - {number} スライド総数
+     * - index - {number} スライド位置 0 ~ ...
+     * - style - {object} スライドを動かすための CSS 設定
+     * @type {{length, index, style: {}}}
      */
     this.state = {
+      length,
       index: props.index,
       style: {},
-      length: length,
-      // slider 位置を動かす css value - transform: translateX();
-      transform: ''
     };
     /**
      * animation するための Polling instance
@@ -206,6 +223,10 @@ export class ComponentCarousel extends React.Component {
      * @type {Function}
      */
     this.bindLength = this.updateLength.bind(this);
+    /**
+     * {@link ComponentPager} へ現在スライド index を通知するイベントインスタンス
+     * @type {CarouselStatus}
+     */
     this.status = CarouselStatus.factory();
   }
   // ---------------------------------------------------
