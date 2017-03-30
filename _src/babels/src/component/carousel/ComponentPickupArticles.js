@@ -200,6 +200,10 @@ export class ComponentPickupArticles extends React.Component {
     this.touching = null;
     // ---------------------------------
     // refs
+    /**
+     * ul.pickup-slider Element
+     * @type {?Element}
+     */
     this.pickupSlider = null;
   }
   // ---------------------------------------------------

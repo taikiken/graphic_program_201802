@@ -21,7 +21,7 @@ import { View } from '../../view/View';
 import { Polling } from '../../tick/Polling';
 
 // event
-import { CarouselStatus } from '../../event/CarouselStatus';
+// import { CarouselStatus } from '../../event/CarouselStatus';
 
 // --------------------------------------------
 // library
@@ -59,8 +59,7 @@ const direction = (length, boundPrev, boundNext) => {
  *      <ComponentPager/>
  * ```
  * - 本クラス `ComponentCarousel` がコントローラーとして機能します
- * - {@link ComponentPickupArticles} が auto play 管理を行います
- * - {@link CarouselStatus} が {@link ComponentCarousel} と {@link ComponentPager} 間の通信を取り継ぎします
+ * - {@link ComponentPickupArticles} が `swipe` 管理を行います
  * @since 2016-09-15
  */
 export class ComponentCarousel extends React.Component {
@@ -154,7 +153,7 @@ export class ComponentCarousel extends React.Component {
      * - length - {number} スライド総数
      * - index - {number} スライド位置 0 ~ ...
      * - style - {object} スライドを動かすための CSS 設定
-     * @type {{length, index, style: {}}}
+     * @type {{length: number, index: number, style: Object}}
      */
     this.state = {
       length,
@@ -230,11 +229,11 @@ export class ComponentCarousel extends React.Component {
      * @type {Function}
      */
     this.bindLength = this.updateLength.bind(this);
-    /**
-     * {@link ComponentPager} へ現在スライド index を通知するイベントインスタンス
-     * @type {CarouselStatus}
-     */
-    this.status = CarouselStatus.factory();
+    // /**
+    //  * {@link ComponentPager} へ現在スライド index を通知するイベントインスタンス
+    //  * @type {CarouselStatus}
+    //  */
+    // this.status = CarouselStatus.factory();
   }
   // ---------------------------------------------------
   //  METHOD
@@ -407,7 +406,7 @@ export class ComponentCarousel extends React.Component {
   /**
    * CSS transform style を計算します
    * @param {number} index 移動位置
-   * @return {string} CSS transform + transition（必要であれば）を返します
+   * @return {Object} CSS transform + transition（必要であれば）を返します
    * @since 2017-03-28 JS control
    */
   transform(index = 0) {
@@ -465,7 +464,7 @@ export class ComponentCarousel extends React.Component {
     // if (this.props.list.length > 1) {
     //   this.play();
     // }
-    this.status.position(0);
+    // this.status.position(0);
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
