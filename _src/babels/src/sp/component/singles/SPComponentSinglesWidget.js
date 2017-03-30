@@ -103,11 +103,14 @@ export class SPComponentSinglesWidget extends React.Component {
    * </pre>
    * @return {?XML} SPComponentSinglesWidgetRelated {@link SPComponentSinglesWidgetRelated}
    * @see https://github.com/undotsushin/undotsushin/issues/1546#issuecomment-290336418
-   * @since 2017-03-28 - 六大学カテゴリー表示しない
+   * @since 2017-03-28 - 六大学カテゴリーでは表示しない
    */
   related() {
-    const categories = this.state.singles.categories;
-    const result = categories.some(category => category === 'big6tv');
+    // @type {CategoryDae}
+    const categoriesDae = this.state.single.categories;
+    // result @type {boolean}
+    // category @type {SlugDae}
+    const result = categoriesDae.categories.some(category => category.slug === 'big6tv');
     if (result) {
       return null;
     }
@@ -136,7 +139,7 @@ export class SPComponentSinglesWidget extends React.Component {
   // delegate
   /**
    * オススメ記事・関連記事・人気記事 を出力します
-   * @return {XML} SPComponentSinglesWidgetRecommend|SPComponentSinglesWidgetRelated|SPComponentSinglesWidgetRelated
+   * @return {?XML} SPComponentSinglesWidgetRecommend|SPComponentSinglesWidgetRelated|SPComponentSinglesWidgetRelated
    */
   render() {
     switch (this.state.type) {
