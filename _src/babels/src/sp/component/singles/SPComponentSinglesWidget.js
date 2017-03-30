@@ -98,9 +98,19 @@ export class SPComponentSinglesWidget extends React.Component {
   }
   /**
    * 関連記事
-   * @return {XML} SPComponentSinglesWidgetRelated {@link SPComponentSinglesWidgetRelated}
+   * <pre>
+   *   六大学カテゴリーに属する記事に関しては関連記事自体全体を削除で対応お願い致します。
+   * </pre>
+   * @return {?XML} SPComponentSinglesWidgetRelated {@link SPComponentSinglesWidgetRelated}
+   * @see https://github.com/undotsushin/undotsushin/issues/1546#issuecomment-290336418
+   * @since 2017-03-28 - 六大学カテゴリー表示しない
    */
   related() {
+    const categories = this.state.singles.categories;
+    const result = categories.some(category => category === 'big6tv');
+    if (result) {
+      return null;
+    }
     return (
       <SPComponentSinglesWidgetRelated
         index={this.state.index}
