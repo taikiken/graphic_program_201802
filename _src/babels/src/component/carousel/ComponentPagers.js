@@ -27,28 +27,54 @@ export class ComponentPagers extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{list: Array<ArticleDae>, onPager: function}} react props
+   * @return {{list: *, onPager: *, sp: *, position: *}} react props
    */
   static get propTypes() {
     return {
       list: React.PropTypes.array.isRequired,
       onPager: React.PropTypes.func.isRequired,
-      sp: React.PropTypes.bool.isRequired
+      sp: React.PropTypes.bool.isRequired,
+      // 現在 スライドNo.
+      // @since 2017-03-28
+      position: React.PropTypes.number.isRequired
     };
   }
   // // ---------------------------------------------------
   // //  CONSTRUCTOR
   // // ---------------------------------------------------
-  // /**
-  //  * プロパティを保存し必要な関数・変数を準備します
-  //  * @param {Object} props プロパティ {@link ComponentPagers.propTypes}
-  //  */
-  // constructor(props) {
-  //   super(props);
-  // }
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link ComponentPagers.propTypes}
+   */
+  constructor(props) {
+    super(props);
+    // ----
+    /**
+     * component state
+     * - position {number} - slide position
+     * @type {{position: number}}
+     * @since 2017-03-28 JS control
+     */
+    this.state = {
+      position: props.position
+    };
+  }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * property 変更をキャチし `state` を変更するかを決定します
+   * - nextProps.position が 0 以上 - 循環アニメーションのために負数(index)を使用することがある
+   * - 現在ポシションと次プロパティ・ポジションが違うと変更する
+   * @param {Object} nextProps 更新されたプロパティ
+   * @since 2017-03-28 JS control
+   */
+  componentWillReceiveProps(nextProps) {
+    const position = nextProps.position;
+    if (position >= 0 && position !== this.state.position) {
+      this.setState({ position });
+    }
+  }
   /**
    * カルーセル・ページャーコンテナを作成します
    * @return {XML} カルーセル・ページャーコンテナを返します
@@ -79,6 +105,7 @@ export class ComponentPagers extends React.Component {
                     index={index++}
                     length={length}
                     onPager={onPager}
+                    position={this.state.position}
                   />
                 );
               })

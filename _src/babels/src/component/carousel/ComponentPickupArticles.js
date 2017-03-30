@@ -428,16 +428,18 @@ export class ComponentPickupArticles extends React.Component {
         style={this.state.style}
       >
         {
-          // clone last
-          this.makeClone(needClone, count++, list, list.length - 1)
+          // clone previous
+          // this.makeClone(needClone, count++, list, list.length - 1)
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1000 + index, needClone, this.props.home))
         }
         {
           // 1.first
           list.map((article) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home))
         }
         {
-          // clone first
-          this.makeClone(needClone, count++, list, 0)
+          // clone post
+          // this.makeClone(needClone, count++, list, 0)
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2000 + index, needClone, this.props.home))
         }
       </ul>
     );

@@ -122,11 +122,18 @@ export class ComponentCarousel extends React.Component {
     // console.log('ComponentCarousel.test', props.list.length);
     // ----------------------------------------
 
-    let length = props.list.length;
-    if (length === 2) {
-      // 2 件の時は3件に見立ててみる
-      length = 3;
-    }
+    // let length = props.list.length;
+    // if (length === 2) {
+    //   // 2 件の時は3件に見立ててみる
+    //   length = 3;
+    // }
+    const length = props.list.length;
+    /**
+     * slide の総数
+     * @type {number}
+     * @since 2017-03-28 JS control
+     */
+    this.length = length;
     // sp: 100%, pc: 640px
     /**
      * 移動量設定値, PC / SP で異なります - SP がレスポンシブ対応するため
@@ -329,12 +336,11 @@ export class ComponentCarousel extends React.Component {
     // --------------
     // 循環アニメーションのために
     // if (index === 0) {
-    if (index < 0) {
+    if (index <= 0) {
       // 先頭に戻る
       if (position === last) {
         // 現在がラストだったらアニメーションなしで移動させる
-        // console.log('ComponentCarousel last to 999');
-        this.setState({ index: 999 });
+        this.setState({ index: -1000 });
         this.delay(index);
       } else {
         // 通常移動
@@ -344,8 +350,7 @@ export class ComponentCarousel extends React.Component {
       // 最終に戻る
       if (position === 0) {
         // 現在が先頭だったらアニメーションなしで移動させる
-        // console.log('ComponentCarousel 0 to 1999');
-        this.setState({ index: 1999 });
+        this.setState({ index: -2000 });
         this.delay(index);
       } else {
         // 通常移動
@@ -356,12 +361,6 @@ export class ComponentCarousel extends React.Component {
       this.setup(index);
     }
   }
-  // lastToFirst() {
-  //
-  // }
-  // firstToLast() {
-  //
-  // }
   /**
    * 最終から先頭, 先頭から最終へ戻るときに循環アニメーションのためにアニメーション無しで移動させた後リフレッシュのために待機させる 1fps
    * @param {number} index スライドナンバー
@@ -385,10 +384,6 @@ export class ComponentCarousel extends React.Component {
     // polling 再開
     // TODO: test mode - comment 外す
     // this.play();
-    // スライドナンバー通知
-    // @since 2017-03-28
-    console.log('ComponentCarousel.setup index', index);
-    this.status.position(index);
   }
   /**
    * ページャークリック・コールバックハンドラです<br>
@@ -399,8 +394,61 @@ export class ComponentCarousel extends React.Component {
     // 文字列が返される(innerHTML)かもなので数値に型変換します
     this.jump(parseInt(index, 10));
   }
+
+  /**
+   * translateX CSS value を計算します
+   * @param {number} index 移動位置
+   * @return {string} CSS transform value(translateX) を返します
+   * @since 2017-03-28 JS control
+   */
+  translateX(index) {
+    return `translateX(${(-this.left * index) - (this.left * this.length)}${this.unit})`;
+  }
+  /**
+   * CSS transform style を計算します
+   * @param {number} index 移動位置
+   * @return {string} CSS transform + transition（必要であれば）を返します
+   * @since 2017-03-28 JS control
+   */
   transform(index = 0) {
-    return { transform: `translateX(${(-this.left * index) - this.left}${this.unit})` };
+    if (index === -1000) {
+      return this.lastToFirst();
+    } else if (index === -2000) {
+      return this.firstToLast();
+    }
+    // normal position
+    // const style = {
+    //   transform: this.translateX(index),
+    //   transition: 'transform 0.5s linear'
+    // };
+    // スライドナンバー通知
+    // @since 2017-03-28
+    // this.status.position(index);
+    // console.log('ComponentCarousel.transform: style', style, index);
+    return {
+      transform: this.translateX(index),
+      transition: 'transform 0.5s linear'
+    };
+  }
+  /**
+   * CSS transform style を計算します - 最終から先頭へ移動するつなぎ
+   * @return {{transform: string}} CSS transform(transition 無し)を返します
+   * @since 2017-03-28 JS control
+   */
+  lastToFirst() {
+    return {
+      transform: this.translateX(-1)
+    };
+  }
+  /**
+   * CSS transform style を計算します - 先頭から最終へ移動するつなぎ
+   * @return {{transform: string}} CSS transform(transition 無し)を返します
+   * @since 2017-03-28 JS control
+   */
+  firstToLast() {
+    return {
+      transform: this.translateX(this.length)
+    };
   }
   // --------------------------------------------
   // delegate
@@ -411,13 +459,13 @@ export class ComponentCarousel extends React.Component {
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
+    this.position = 0;
     // length が 1 以上なら
-    // TODO: test mode, 以下 comment
+    // TODO: test mode - comment 外す
     // if (this.props.list.length > 1) {
-    //   // animation start
     //   this.play();
-    //   this.status.position(0);
     // }
+    this.status.position(0);
   }
   /**
    * list プロパティ（配列）の length が 0 以上の時にコンテナを出力します
@@ -441,7 +489,7 @@ export class ComponentCarousel extends React.Component {
                 sp={this.props.sp}
                 home={this.props.home}
                 next={this.bindNext}
-                prev={this.bindPrev}x
+                prev={this.bindPrev}
                 play={this.bindPlay}
                 pause={this.bindPause}
                 length={this.bindLength}
@@ -456,6 +504,7 @@ export class ComponentCarousel extends React.Component {
               list={list}
               onPager={this.boundPager}
               sp={this.props.sp}
+              position={this.state.index}
             />
             {/* hero-slider-control */}
           </div>

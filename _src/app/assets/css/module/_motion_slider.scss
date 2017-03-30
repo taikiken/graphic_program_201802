@@ -130,49 +130,51 @@
         }
       }
 
-      .pager {
-        position: absolute;
-        top: 370px;
-        left: 50%;
-        width: 100%;
-        margin-left: -320px;
-
-        ul {
-          width: 640px;
-          text-align: center;
-          letter-spacing: ls(inline-block);
-        }
-
-        li {
-          display: inline-block;
-          letter-spacing: normal;
-
-          + li {
-            margin-left: 15px;
-          }
-          // current mark
-          // @since 2017-03-28
-          &.current {
-            a {
-              background-color: $highlight-secondary-color;
-            }
-          }
-        }
-
-        a {
-          display: block;
-          width: 6px;
-          height: 6px;
-          background-color: #999;
-          border-radius: 100%;
-          @include hide-text;
-
-          &.active,
-          &:hover {
-            background-color: $highlight-secondary-color;
-          }
-        }
-      }
+      // 階層が深すぎるので取り出す
+      // @since 2017-03-28
+      //.pager {
+      //  position: absolute;
+      //  top: 370px;
+      //  left: 50%;
+      //  width: 100%;
+      //  margin-left: -320px;
+      //
+      //  ul {
+      //    width: 640px;
+      //    text-align: center;
+      //    letter-spacing: ls(inline-block);
+      //  }
+      //
+      //  li {
+      //    display: inline-block;
+      //    letter-spacing: normal;
+      //
+      //    + li {
+      //      margin-left: 15px;
+      //    }
+      //    // current mark
+      //    // @since 2017-03-28
+      //    &.current {
+      //      a {
+      //        background-color: $highlight-secondary-color;
+      //      }
+      //    }
+      //  }
+      //
+      //  a {
+      //    display: block;
+      //    width: 6px;
+      //    height: 6px;
+      //    background-color: #999;
+      //    border-radius: 100%;
+      //    @include hide-text;
+      //
+      //    &.active,
+      //    &:hover {
+      //      background-color: $highlight-secondary-color;
+      //    }
+      //  }
+      //}
     } //.hero-slider-control
   }
 }
@@ -750,3 +752,53 @@
 //    }
 //  }// .hero-slider
 //}
+
+// ---------------------------------------------------------------------
+// pager setting
+// carousel を JS 管理に変更するので pager だけ取り出す
+// @since 2017-03-28
+// ---------------------------------------------------------------------
+
+.pager {
+  position: absolute;
+  top: 370px;
+  left: 50%;
+  width: 100%;
+  margin-left: -320px;
+
+  ul {
+    width: 640px;
+    text-align: center;
+    letter-spacing: ls(inline-block);
+  }
+
+  li {
+    display: inline-block;
+    letter-spacing: normal;
+
+    + li {
+      margin-left: 15px;
+    }
+    // current mark
+    // @since 2017-03-28
+    &.current {
+      a {
+        background-color: $highlight-secondary-color;
+      }
+    }
+  }
+
+  a {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: #999;
+    border-radius: 100%;
+    @include hide-text;
+
+    &.active,
+    &:hover {
+      background-color: $highlight-secondary-color;
+    }
+  }
+}
