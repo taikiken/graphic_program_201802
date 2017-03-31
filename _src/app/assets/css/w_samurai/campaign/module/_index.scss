@@ -86,7 +86,7 @@
     .guidance {
       width: 688px;
       margin: 24px auto 0;
-      padding: 0 20px;
+      padding: 0 20px 30px;
       background-color: rgba(0, 0, 0, 0.2);
       border-radius: 5px;
 
@@ -198,27 +198,29 @@
       }
 
       // .guidance__bnr
-      &__bnr {
-        padding: 30px 0;
-        text-align: center;
+      // https://github.com/undotsushin/undotsushin/issues/1769
+      // キャンペーン終了に伴い削除
+      // &__bnr {
+      //   padding: 30px 0;
+      //   text-align: center;
 
-        // .guidance__bnr__heading
-        &__heading {
-          // color: #fff;
-          // font-weight: bold;
-          // font-size: fz(26/2);
-          // white-space: nowrap;
-        }
+      //   // .guidance__bnr__heading
+      //   &__heading {
+      //     // color: #fff;
+      //     // font-weight: bold;
+      //     // font-size: fz(26/2);
+      //     // white-space: nowrap;
+      //   }
 
-        // .guidance__bnr__btn
-        &__btn {
-          margin-top: 12px;
+      //   // .guidance__bnr__btn
+      //   &__btn {
+      //     margin-top: 12px;
 
-          a:hover {
-            @include over-opacity;
-          }
-        }
-      }
+      //     a:hover {
+      //       @include over-opacity;
+      //     }
+      //   }
+      // }
 
       .attention {
         font-weight: bold;
