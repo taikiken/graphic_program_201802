@@ -109,8 +109,6 @@
           </div><!-- /.yellfor__section -->
         </div><!-- /.yellfor -->
 
-        <aside class="bnr-campaign"><a href="/w_samurai/campaign/"><img src="/assets/sp/images/w_samurai/bnr-campaign.png" alt="サッカー賞品・野球賞品 プレゼントキャンペーン プレゼント応募はこちら"></a></aside>
-
         <?php
         // app in webview 時に .head-sec を非表示にする
         // if (!$from_webview) :

@@ -94,7 +94,7 @@
 
         <div class="gift">
           <section class="gift__section gift--soccer">
-            <h2 class="gift__heading"><img src="/assets/sp/images/w_samurai/campaign/gift-soccer-figure.png" alt="サッカー日本代表賞"></h2>
+            <h2 class="gift__heading"><img src="/assets/sp/images/w_samurai/campaign/gift-soccer-figure.png" alt="【応募期間は終了いたしました】サッカー日本代表賞"></h2>
             <p class="gift__text"><strong>サッカー日本代表<br />
             レプリカユニホーム</strong><br />
             抽選で15名様にプレゼント</p>
@@ -123,7 +123,7 @@
 
               <div class="guidance--prize__body guidance--prize--soccer">
                 <h3 class="heading">サッカー日本代表賞</h3>
-                <p class="period">応募期間2月20日（月）〜3月31日（金）</p>
+                <p class="period"><em class="attention">応募期間は終了いたしました</em></p>
                 <p class="text"><strong>サッカー日本代表レプリカユニホーム　15名様</strong><br />
                 <span class="note">※サイズに関しては当選のご案内時に指定の範囲内でお選びいただきます。</span></p>
               </div><!-- /.guidance--prize__body -->
@@ -136,7 +136,7 @@
               <p><strong>野球日本代表賞</strong><br />
               <em class="attention">応募期間は終了いたしました</em></p>
               <p><strong>サッカー日本代表賞</strong><br />
-              2月20日（月）〜3月31日（金）</p>
+              <em class="attention">応募期間は終了いたしました</em></p>
             </dd>
           </dl><!-- /.guidance__item -->
 
@@ -146,26 +146,6 @@
               <p>スポーツブルアプリをダウンロード済みのお客様</p>
             </dd>
           </dl><!-- /.guidance__item -->
-
-          <?php
-          // app in webview 時に .head-sec を非表示にする
-          // if (!$from_webview) :
-          ?>
-          <?php
-          // <div class="guidance__bnr">
-          //   <h3 class="guidance__bnr__heading">スポーツブルアプリをダウンロードして応募しよう！</h3>
-          //   <div class="guidance__bnr__btn for-ios"><a href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8" target="_blank"><img src="/assets/sp/images/w_samurai/campaign/bnr-app.png" alt="アプリをダウンロードして応募する"></a></div>
-          //   <div class="guidance__bnr__btn for-android"><a href="https://play.google.com/store/apps/details?id=com.undotsushin" target="_blank"><img src="/assets/sp/images/w_samurai/campaign/bnr-app.png" alt="アプリをダウンロードして応募する"></a></div>
-          // </div><!-- /.guidance__bnr -->
-          ?>
-          <?php
-          // endif;
-          // -----------------------------------------
-          ?>
-          <div class="guidance__bnr">
-            <h3 class="guidance__bnr__heading">スポーツブルアプリをダウンロードして応募しよう！</h3>
-            <div class="guidance__bnr__btn"><a href="https://app.adjust.com/7hfkzc" target="_blank"><img src="/assets/sp/images/w_samurai/campaign/bnr-app.png" alt="アプリをダウンロードして応募する"></a></div>
-          </div><!-- /.guidance__bnr -->
 
         </section><!-- /.guidance -->
 
