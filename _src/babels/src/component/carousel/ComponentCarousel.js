@@ -134,9 +134,9 @@ export class ComponentCarousel extends React.Component {
     super(props);
     // ----------------------------------------
     // test code - 減産
-    props.list.shift();
-    props.list.shift();
-    props.list.shift();
+    // props.list.shift();
+    // props.list.shift();
+    // props.list.shift();
     // props.list.shift();
     // ===
     // props.list.push(props.list[0]);
@@ -174,12 +174,12 @@ export class ComponentCarousel extends React.Component {
     // props.list.push(props.list[2]);
     // props.list.push(props.list[3]);
     // props.list.push(props.list[4]);
-    console.log('ComponentCarousel.test', props.list.length);
+    // console.log('ComponentCarousel.test', props.list.length);
     // ----------------------------------------
 
     let length = props.list.length;
     if (length === 2) {
-      // 2 件の時は4件に見立ててみる
+      // 2 件の時は4件としてコード運用する - 循環アニメーション実現のため
       length = 4;
     }
     // const length = props.list.length;
