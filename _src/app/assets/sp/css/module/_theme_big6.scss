@@ -465,7 +465,8 @@ $border-color: #585959;
     // .misc-item
     &-item {
       display: inline-block;
-      width: perCalc(230, 710);
+      // width: perCalc(230, 710);
+      width: 32%;
       margin-top: (10/2)+px;
 
       img {
