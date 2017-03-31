@@ -91,7 +91,10 @@ if ($in_big6tv) :
         <a href="https://teams.one/?utm_source=big6tv&utm_campaign=teamstop&utm_medium=banner" target="_blank"><img src="/assets/images/big6/bnr-side-teams.png" alt="teams「野球チーム、集合。」全国3,000チーム以上が利用する野球チーム専用マネジメントツール"></a>
       </li>
       <li class="side-bnr_big6-item">
-        <a href="http://www.big6.gr.jp/" target="_blank"><img src="/assets/images/big6/bnr-side-big6.png" alt="一般財団法人 東京六大学野球連盟"></a>
+        <a href="http://bit.ly/2nLew2c" target="_blank"><img src="/assets/images/big6/bnr-side-ec.png" alt="ここでしか買えないスマホグッズ販売中。"></a>
+      </li>
+      <li class="side-bnr_big6-item">
+        <a href="http://big6.gr.jp" target="_blank"><img src="/assets/images/big6/bnr-side-big6.png" alt="一般財団法人 東京六大学野球連盟"></a>
       </li>
     </ul>
   </div>
