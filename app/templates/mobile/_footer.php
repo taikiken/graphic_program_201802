@@ -97,8 +97,41 @@ if (
       <div class="fb-page-plugin">
         <div class="fb-page" data-href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/" data-width="500" data-height="154" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><a href="https://www.facebook.com/<?php echo $page['sns']['facebook']; ?>/"><?php echo $page['site_name']; ?></a></blockquote></div></div>
       </div>
+<?php
+// 六大学 / 広告表示 調整（Web） #1546
+// > アドネットワーク関連の広告（ネイティブアド？）を消したい
+// @see https://github.com/undotsushin/undotsushin/issues/1546
+// category.slug 'big6tv' search
+global $template_big6tb;
+$in_big6tv = $template_big6tb;
+// 記事詳細 + big6tv でも広告非表示
+/*
+今回でいうと、一覧、詳細ともに
 
+$page['category']['slug'] == 'big6tv'
+
+プライマリカテゴリーが big6tv = big6tvテーマが適応される一覧&詳細
+で広告非表示としていただいてよいかと思いますー
+@see https://github.com/undotsushin/undotsushin/pull/1731#pullrequestreview-28563047
+*/
+if ($template_name == 'category' || $template_name == 'p') {
+  $page_category = $page['category'];
+  if (isset($page_category) && $page_category['slug'] == 'big6tv') {
+    $in_big6tv = true;
+  }
+}
+// @see https://github.com/undotsushin/undotsushin/issues/1546#issuecomment-290283445
+// @since 2017-03-29
+?>
+      <?php
+      if (!$in_big6tv) :
+      ?>
       <div class="foot-pr-bnr"><a href="http://pickup.syndot.jp/about/?utm_source=undou_sp&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/sp/images/common/bnr-footer-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
+      <?php
+      endif;
+      // not big6tv 時にバナー
+      // --------------------------------
+      ?>
     </div><!-- /.foot-pr -->
 
     <div id="pageTop" class="pagetop"><a href="#"><span>このページの先頭へ</span></a></div>
