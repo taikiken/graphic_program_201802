@@ -38,59 +38,6 @@ const videoPlay = (type) => type === MediaType.VIDEO ? <img src={Empty.VIDEO_PIC
  * @since 2016-09-15
  */
 export class ComponentPickupArticle extends React.Component {
-  /**
-   * プロパティを保存し必要な関数・変数を準備します
-   * @param {Object} props プロパティ {@link ComponentPickupArticle.propTypes}
-   */
-  constructor(props) {
-    super(props);
-    /**
-     * bind済み gaSend
-     * @type {function}
-     */
-    this.boundGa = this.gaSend.bind(this);
-  }
-  /**
-   * カルーセルスライドショー一記事コンテナを作成します
-   * @return {XML} カルーセルスライドショー一記事を返します
-   */
-  render() {
-    const props = this.props;
-
-    return (
-      <li id={`pickup-${props.index}`} className={`pickup pickup-${props.index}`}>
-        <a href={props.url} style={{'background': `url(${props.large}) no-repeat 50% 50% / cover`}} onClick={this.boundGa}>
-          <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
-          {videoPlay(props.mediaType)}
-          <div className="post-overview">
-            <p className={`post-category post-category-${props.slug}`}>
-              <CategoryLabelNode
-                categories={props.categories}
-                id={`pickup-label-${props.id}`}
-                index={props.index}
-              />
-            </p>
-            <h2 className="post-heading">{props.title}</h2>
-            <p className="post-date">{props.date}</p>
-            {/*
-            // @since 2016-10-01 remove comment count
-            <p className="post-comment-num">{props.commentsCount}</p>
-            */}
-          </div>
-        </a>
-      </li>
-    );
-  }
-  /**
-   * GA 計測タグを送信します {@link Ga.add}, {@link GaData}
-   */
-  gaSend() {
-    // ----------------------------------------------
-    // GA 計測タグ
-    const tag = this.props.home ? 'home_pickup' : `${this.props.slug}_pickup`;
-    Ga.add( new GaData('ComponentCarouselArticle.gaSend', tag, 'click', this.props.url, parseFloat(this.props.id)) );
-    // ----------------------------------------------
-  }
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
@@ -126,46 +73,65 @@ export class ComponentPickupArticle extends React.Component {
       home: React.PropTypes.bool.isRequired
     };
   }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
+  /**
+   * プロパティを保存し必要な関数・変数を準備します
+   * @param {Object} props プロパティ {@link ComponentPickupArticle.propTypes}
+   */
+  constructor(props) {
+    super(props);
+    /**
+     * bind済み gaSend
+     * @type {function}
+     */
+    this.boundGa = this.gaSend.bind(this);
+  }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
+  /**
+   * GA 計測タグを送信します {@link Ga.add}, {@link GaData}
+   */
+  gaSend() {
+    // ----------------------------------------------
+    // GA 計測タグ
+    const tag = this.props.home ? 'home_pickup' : `${this.props.slug}_pickup`;
+    Ga.add( new GaData('ComponentCarouselArticle.gaSend', tag, 'click', this.props.url, parseFloat(this.props.id)) );
+    // ----------------------------------------------
+  }
+  // ------
+  // delegate
+  /**
+   * カルーセルスライドショー一記事コンテナを作成します
+   * @return {XML} カルーセルスライドショー一記事を返します
+   */
+  render() {
+    const props = this.props;
+
+    return (
+      <li id={`pickup-${props.index}`} className={`pickup pickup-${props.index}`}>
+        <a href={props.url} style={{'background': `url(${props.large}) no-repeat 50% 50% / cover`}} onClick={this.boundGa}>
+          <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
+          {videoPlay(props.mediaType)}
+          <div className="post-overview">
+            <p className={`post-category post-category-${props.slug}`}>
+              <CategoryLabelNode
+                categories={props.categories}
+                id={`pickup-label-${props.id}`}
+                index={props.index}
+              />
+            </p>
+            <h2 className="post-heading">{props.title}</h2>
+            <p className="post-date">{props.date}</p>
+            {/*
+            // @since 2016-10-01 remove comment count
+            <p className="post-comment-num">{props.commentsCount}</p>
+            */}
+          </div>
+        </a>
+      </li>
+    );
+  }
 }
-//
-// /**
-//  * ViewCarouselArticle React プロパティー
-//  * @static
-//  * @type
-//  * {{
-//  *  index: number,
-//  *  id: string,
-//  *  slug: string,
-//  *  categories: [string],
-//  *  url: string,
-//  *  date: string,
-//  *  title: string,
-//  *  large: string,
-//  *  commentsCount: number,
-//  *  mediaType: string,
-//  *  home: boolean
-//  * }}
-//  */
-// ComponentCarouselArticle.propTypes = {
-//   index: React.PropTypes.number.isRequired,
-//   id: React.PropTypes.string.isRequired,
-//   slug: React.PropTypes.string.isRequired,
-//   categories: React.PropTypes.array.isRequired,
-//   url: React.PropTypes.string.isRequired,
-//   date: React.PropTypes.string.isRequired,
-//   title: React.PropTypes.string.isRequired,
-//   large: React.PropTypes.string.isRequired,
-//   commentsCount: React.PropTypes.number.isRequired,
-//   mediaType: React.PropTypes.string.isRequired,
-//   // home であるかを表す
-//   home: React.PropTypes.bool.isRequired
-// };
-//
-// /**
-//  * デフォルト・プロパティ, home を false 設定します
-//  * @static
-//  * @type {{home: boolean}}
-//  */
-// ComponentCarouselArticle.defaultProps = {
-//   home: false
-// };

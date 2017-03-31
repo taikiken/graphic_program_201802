@@ -29,6 +29,7 @@ export class ComponentPager extends React.Component {
     return {
       index: React.PropTypes.number.isRequired,
       id: React.PropTypes.string.isRequired,
+      // スライド総数
       length: React.PropTypes.number.isRequired,
       onPager: React.PropTypes.func.isRequired,
       // 現在 スライドNo.
@@ -95,7 +96,12 @@ export class ComponentPager extends React.Component {
   componentWillReceiveProps(nextProps) {
     const position = nextProps.position;
     if (position >= 0 && position !== this.state.position) {
-      const current = position === this.index ? 'current' : '';
+      let current = position === this.index ? 'current' : '';
+      // length 2 の時は 4 としてコード運用する - +2 して再度比較します
+      if (current === '' && this.props.length === 2) {
+        current = position === (this.index + 2) ? 'current' : '';
+      }
+      // state update
       this.setState({ position, current });
     }
   }

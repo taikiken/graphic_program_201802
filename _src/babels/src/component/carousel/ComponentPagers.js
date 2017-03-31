@@ -27,7 +27,7 @@ export class ComponentPagers extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{list: *, onPager: *, sp: *, position: *}} react props
+   * @return {{list: *, onPager: function, sp: boolean, position: number, length: number}} react props
    */
   static get propTypes() {
     return {

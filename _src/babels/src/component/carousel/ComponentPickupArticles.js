@@ -420,7 +420,7 @@ export class ComponentPickupArticles extends React.Component {
   render() {
     const list = this.props.list;
     const needClone = list.length > 1;
-    // const needFourth = list.length === 2;
+    const needFourth = list.length === 2;
     let count = 0;
 
     return (
@@ -433,7 +433,10 @@ export class ComponentPickupArticles extends React.Component {
       >
         {
           // clone previous
-          // this.makeClone(needClone, count++, list, list.length - 1)
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1111 + index, needFourth, this.props.home))
+        }
+        {
+          // clone previous
           list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1000 + index, needClone, this.props.home))
         }
         {
@@ -442,8 +445,11 @@ export class ComponentPickupArticles extends React.Component {
         }
         {
           // clone post
-          // this.makeClone(needClone, count++, list, 0)
           list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2000 + index, needClone, this.props.home))
+        }
+        {
+          // clone post
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2222 + index, needFourth, this.props.home))
         }
       </ul>
     );

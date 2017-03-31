@@ -34,20 +34,20 @@ const Sagen = self.Sagen;
 // React
 const React = self.React;
 
-// --------------------------------------------
-// private
-const direction = (length, boundPrev, boundNext) => {
-  if (length < 2) {
-    return null;
-  }
-
-  return (
-    <div className="direction">
-      <a id="prev" className="direction-prev" href="#prev" onClick={boundPrev}>Prev</a>
-      <a id="next" className="direction-next" href="#next" onClick={boundNext}>Next</a>
-    </div>
-  );
-};
+// // --------------------------------------------
+// // private
+// const direction = (length, boundPrev, boundNext) => {
+//   if (length < 2) {
+//     return null;
+//   }
+//
+//   return (
+//     <div className="direction">
+//       <a id="prev" className="direction-prev" href="#prev" onClick={boundPrev}>Prev</a>
+//       <a id="next" className="direction-next" href="#next" onClick={boundNext}>Next</a>
+//     </div>
+//   );
+// };
 
 /**
  * pickup コンテナ「カルーセル」スライドショーを実装します
@@ -102,6 +102,26 @@ export class ComponentCarousel extends React.Component {
       home: false
     };
   }
+  /**
+   * prev / next button container を作成します<br>
+   * length が 1 以下の時は表示しません
+   * @param {number} length スライド総数
+   * @param {Function} boundPrev bind 済み onPrev
+   * @param {Function} boundNext bind 済み onNext
+   * @return {?XML} div.direction or null を返します
+   */
+  static direction(length, boundPrev, boundNext) {
+    if (length <= 1) {
+      return null;
+    }
+
+    return (
+      <div className="direction">
+        <a id="prev" className="direction-prev" href="#prev" onClick={boundPrev}>Prev</a>
+        <a id="next" className="direction-next" href="#next" onClick={boundNext}>Next</a>
+      </div>
+    );
+  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -113,20 +133,56 @@ export class ComponentCarousel extends React.Component {
   constructor(props) {
     super(props);
     // ----------------------------------------
-    // test code
+    // test code - 減産
+    props.list.shift();
+    props.list.shift();
+    props.list.shift();
     // props.list.shift();
-    // props.list.shift();
-    // props.list.shift();
-    // props.list.shift();
-    // console.log('ComponentCarousel.test', props.list.length);
+    // ===
+    // props.list.push(props.list[0]);
+    // props.list.push(props.list[1]);
+    // props.list.push(props.list[2]);
+    // props.list.push(props.list[3]);
+    // props.list.push(props.list[4]);
+    //
+    // props.list.push(props.list[0]);
+    // props.list.push(props.list[1]);
+    // props.list.push(props.list[2]);
+    // props.list.push(props.list[3]);
+    // props.list.push(props.list[4]);
+    //
+    // props.list.push(props.list[0]);
+    // props.list.push(props.list[1]);
+    // props.list.push(props.list[2]);
+    // props.list.push(props.list[3]);
+    // props.list.push(props.list[4]);
+    //
+    // props.list.push(props.list[0]);
+    // props.list.push(props.list[1]);
+    // props.list.push(props.list[2]);
+    // props.list.push(props.list[3]);
+    // props.list.push(props.list[4]);
+    //
+    // props.list.push(props.list[0]);
+    // props.list.push(props.list[1]);
+    // props.list.push(props.list[2]);
+    // props.list.push(props.list[3]);
+    // props.list.push(props.list[4]);
+    //
+    // props.list.push(props.list[0]);
+    // props.list.push(props.list[1]);
+    // props.list.push(props.list[2]);
+    // props.list.push(props.list[3]);
+    // props.list.push(props.list[4]);
+    console.log('ComponentCarousel.test', props.list.length);
     // ----------------------------------------
 
-    // let length = props.list.length;
-    // if (length === 2) {
-    //   // 2 件の時は3件に見立ててみる
-    //   length = 3;
-    // }
-    const length = props.list.length;
+    let length = props.list.length;
+    if (length === 2) {
+      // 2 件の時は4件に見立ててみる
+      length = 4;
+    }
+    // const length = props.list.length;
     /**
      * slide の総数
      * @type {number}
@@ -404,6 +460,9 @@ export class ComponentCarousel extends React.Component {
    * @since 2017-03-28 JS control
    */
   translateX(index) {
+    if (this.length <= 1) {
+      return 'translateX(0)';
+    }
     return `translateX(${(-this.left * index) - (this.left * this.length)}${this.unit})`;
   }
   /**
@@ -502,7 +561,7 @@ export class ComponentCarousel extends React.Component {
           </div>
           <div className="hero-slider-control">
             {/* prev / next */}
-            {direction(list.length, this.boundPrev, this.boundNext)}
+            {ComponentCarousel.direction(list.length, this.boundPrev, this.boundNext)}
             {/* pagers */}
             <ComponentPagers
               list={list}
