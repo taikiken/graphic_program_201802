@@ -22,14 +22,28 @@
   </table><!-- /.matches-list -->
 
   <div class="matches-btn-allmatches">
-    <a href="/big6tv/?app=ios" class="for-undotsushin-app">全試合日程を見る</a>
-    <a href="/big6tv/" class="for-undotsushin-browser">全試合日程を見る</a>
+    <a href="/big6tv/" id="js-matches-btn-link">全試合日程を見る</a>
   </div>
 </section><!-- /.matches -->
 <?php
 // app detector - html tag に class 追加 undotsushin-android or undotsushin-ios
 ?>
-<script type="text/javascript" src="/assets/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script type="text/javascript" src="/assets/js/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<script type="text/javascript" charset="utf-8">
+(function ( window ){
+  'use strict';
+  var document = window.document;
+  var Sagen = window.Sagen;
+  var html = document.documentElement;
+  var banner;
+  if (Sagen.Dom.hasClass(html, 'undotsushin-android') || Sagen.Dom.hasClass(html, 'undotsushin-ios')) {
+    banner = document.getElementById('js-matches-btn-link');
+    if (banner) {
+      banner.href += '?app=ios';
+    }
+  }
+}( window ));
+</script>
 
 <?php include __DIR__.'/../_standings.php'; ?>
 
