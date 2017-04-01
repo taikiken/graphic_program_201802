@@ -22,10 +22,14 @@
   </table><!-- /.matches-list -->
 
   <div class="matches-btn-allmatches">
-    <a href="/big6tv/">全試合日程を見る</a>
+    <a href="/big6tv/?app=ios" class="for-undotsushin-app">全試合日程を見る</a>
+    <a href="/big6tv/" class="for-undotsushin-browser">全試合日程を見る</a>
   </div>
 </section><!-- /.matches -->
-
+<?php
+// app detector - html tag に class 追加 undotsushin-android or undotsushin-ios
+?>
+<script type="text/javascript" src="/assets/app_divide.bundle.js?v=<?php echo $page['version']; ?>"></script>
 
 <?php include __DIR__.'/../_standings.php'; ?>
 
