@@ -8,7 +8,7 @@ $update = date('n/j H:i', $update);
 
         <section class="standings">
           <h2 class="standings-heading">
-            '17春 順位表<span class="note">更新日 <?php echo $update; ?></span>
+            '17春 順位表<span class="note">更新 <?php echo $update; ?></span>
           </h2>
           <table class="standings-list for-detail">
             <thead class="standings-thead">
