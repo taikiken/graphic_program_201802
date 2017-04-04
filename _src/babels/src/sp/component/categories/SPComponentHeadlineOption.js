@@ -27,6 +27,28 @@ const React = self.React;
  * @since 2016-09-20
  */
 export class SPComponentHeadlineOption extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{list: Array<RelatedDae>, callback: Function, home: boolean, ad: string, browser: string, category: CategoriesSlugDae}} React props
+   */
+  static get propTypes() {
+    return {
+      // articles 配列を元にDomを作成する
+      list: React.PropTypes.array.isRequired,
+      callback: React.PropTypes.func.isRequired,
+      home: React.PropTypes.bool.isRequired,
+      ad: React.PropTypes.object.isRequired,
+      browser: React.PropTypes.string.isRequired,
+      // @type {CategoriesSlugDae}
+      category: React.PropTypes.object.isRequired
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティを保存し必要な関数・変数を準備します
    * @param {Object} props プロパティ {@link SPComponentHeadlineOption.propTypes}
@@ -34,6 +56,9 @@ export class SPComponentHeadlineOption extends React.Component {
   constructor(props) {
     super(props);
   }
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * 記事一覧 headline を表示するための基本コンテナを作成します
    * @return {?XML} 記事一覧 headline を表示するための基本コンテナを返します
@@ -57,6 +82,7 @@ export class SPComponentHeadlineOption extends React.Component {
           <ComponentHeadlineAd
             browser={this.props.browser}
             ad={this.props.ad}
+            category={this.props.category}
           />
         </div>
       </div>
@@ -68,40 +94,4 @@ export class SPComponentHeadlineOption extends React.Component {
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{list: Array<RelatedDae>, callback: Function, home: boolean, ad: string, browser: string}} React props
-   */
-  static get propTypes() {
-    return {
-      // articles 配列を元にDomを作成する
-      list: React.PropTypes.array.isRequired,
-      callback: React.PropTypes.func.isRequired,
-      home: React.PropTypes.bool.isRequired,
-      ad: React.PropTypes.object.isRequired,
-      browser: React.PropTypes.string.isRequired
-    };
-  }
 }
-//
-// /**
-//  * プロパティ
-//  * @type {{
-//  *  list: Array<RelatedDae>,
-//  *  callback: Function,
-//  *  home: boolean,
-//  *  ad: string,
-//  *  browser: string
-//  * }}
-//  */
-// SPComponentHeadlineOption.propTypes = {
-//   // articles 配列を元にDomを作成する
-//   list: React.PropTypes.array.isRequired,
-//   callback: React.PropTypes.func.isRequired,
-//   home: React.PropTypes.bool.isRequired,
-//   ad: React.PropTypes.object.isRequired,
-//   browser: React.PropTypes.string.isRequired
-// };

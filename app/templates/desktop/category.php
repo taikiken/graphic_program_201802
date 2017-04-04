@@ -35,6 +35,13 @@ if ($page['category']['slug'] == 'all') {
     <section class="main-sec">
 
       <?php
+      if ( $page['category']['slug'] === 'big6' || $page['category']['slug'] === 'big6tv' ) :
+        include_once __DIR__.'/../big6tv/live.php';
+        include_once __DIR__.'/../big6tv/desktop/category.php';
+      endif;
+      ?>
+
+      <?php
       // ----------------------------------------------------
       // 記事一覧: pc banner
       if ( !empty($page['category']['banner']['pc']['image']) && !empty($page['category']['banner']['pc']['link']) ) :
