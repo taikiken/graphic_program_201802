@@ -3,8 +3,10 @@
 
 # big6tv - ライブ配信
 
-refs. /undotsushin/app/templates/big6/desktop/index.php
+refs. /undotsushin/app/templates/big6tv/desktop/index.php
 
+※ 現状以下のレスポンスは使っていないです。
+実データは `.htaccess` のリライトを参考にしてください
 
 */
 

@@ -304,9 +304,10 @@ $border-color: #585959;
           background-repeat: no-repeat;
           font-weight: bold;
 
-          @include prc-each(hosei, waseda, rikkio, keio, tokyo, meiji) {
-            &.#{$arg} {
-              background-image: url(/assets/images/big6/icon-#{$arg}_s.png);
+          $teams: hosei, waseda, rikkio, keio, tokyo, meiji;
+          @include prc-each(H, W, R, K, T, M) {
+            &.matches-match__teamname--#{$arg} {
+              background-image: url(/assets/images/big6/icon-#{nth($teams, $arg_i)}_s.png);
             }
           }
         }
@@ -531,19 +532,19 @@ $border-color: #585959;
       }
     }
 
-    &-1st {
+    &-1 {
       .standings-num span {
         background-color: #9a813c;
       }
     }
 
-    &-2nd {
+    &-2 {
       .standings-num span {
         background-color: #9e9e9e;
       }
     }
 
-    &-3rd {
+    &-3 {
       .standings-num span {
         background-color: #59342c;
       }
@@ -654,7 +655,6 @@ $border-color: #585959;
 
 
 
-// ------------------------------------------------------------------------
 
 
 // .theme_big6_matches
@@ -678,6 +678,19 @@ $border-color: #585959;
       a:hover {
         @include over-opacity;
       }
+    }
+  }
+}
+
+
+
+
+// .side-sec
+// サイドカラムバナー
+.whole.theme_big6 {
+  .side-bnr_big6 {
+    &-item {
+      margin-top: 20px;
     }
   }
 }
