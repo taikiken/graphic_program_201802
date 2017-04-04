@@ -66,13 +66,12 @@ if(strlen($f["name"])>0){
 }
 
 
-  if ( $category === 'big6' ) :
+  if ( $category === 'big6tv' ) :
 
-    $categoriesinfo['live'] = '/api/big6/live';
-    $categoriesinfo['webviews'] = array(
-      '/big6/?latest', #直近の試合日程・結果
-      '/big6/?ranking', #順位表
-      '/big6/?news', #各大学の動画・ニュース
+    $categoriesinfo['live']          = '/api/big6tv/live';
+    $categoriesinfo['live_interval'] = 10;
+    $categoriesinfo['webviews']      = array(
+      '/big6tv/webview/',
     );
 
   endif;

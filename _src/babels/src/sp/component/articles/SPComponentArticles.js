@@ -48,6 +48,7 @@ export class SPComponentArticles extends React.Component {
    */
   static get propTypes() {
     return {
+      // @type {Array<ArticleDae>}
       list: React.PropTypes.array.isRequired,
       // request offset
       offset: React.PropTypes.number.isRequired,
@@ -180,6 +181,7 @@ export class SPComponentArticles extends React.Component {
                     length={length}
                     uniqueId={`ad-${dae.mediaType}-${dae.id}`}
                     adSp={props.adSp}
+                    categories={dae.categories}
                   />
                 </div>
               );
