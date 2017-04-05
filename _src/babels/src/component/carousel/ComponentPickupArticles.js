@@ -103,7 +103,10 @@ export class ComponentPickupArticles extends React.Component {
       prev: React.PropTypes.func.isRequired,
       play: React.PropTypes.func.isRequired,
       pause: React.PropTypes.func.isRequired,
-      length: React.PropTypes.func.isRequired
+      length: React.PropTypes.func.isRequired,
+      // 現在 スライドNo.
+      // @since 2017-03-28
+      position: React.PropTypes.number.isRequired
     };
   }
   /**
@@ -113,9 +116,10 @@ export class ComponentPickupArticles extends React.Component {
    * @param {number} index react key に使用するユニークな index 数値
    * @param {boolean} clone length > 1 を超えている時のみ clone を作成するので、そのためのフラッグ
    * @param {boolean} home home（一面）か否かの真偽値
+   * @param {number} position 現在のスライドNo.
    * @return {?XML} カルーセル1記事コンテナを返します
    */
-  static makeArticle = (dae, index, clone, home) => {
+  static makeArticle = (dae, index, clone, home, position) => {
     const large = Safety.image(dae.media.images.large, Empty.IMG_LARGE);
     // console.log('makeArticle', dae, dae.date, typeof dae.date);
     // HeadlineDom instance を使い render
@@ -136,6 +140,7 @@ export class ComponentPickupArticles extends React.Component {
           commentsCount={dae.commentsCount}
           mediaType={dae.mediaType}
           home={home}
+          position={position}
         />
       );
     } else {
@@ -205,6 +210,15 @@ export class ComponentPickupArticles extends React.Component {
      * @type {?Element}
      */
     this.pickupSlider = null;
+    /**
+     * component state
+     * - position {number} - slide position
+     * @type {{position: number}}
+     * @since 2017-03-28 JS control
+     */
+    this.state = {
+      position: props.position
+    };
   }
   // ---------------------------------------------------
   //  METHOD
@@ -214,7 +228,7 @@ export class ComponentPickupArticles extends React.Component {
    * pickupSlider > li length を親コンテナに通知します
    */
   dispatchLength() {
-    const items = this.refs.pickupSlider.getElementsByTagName('li');
+    const items = this.pickupSlider.getElementsByTagName('li');
     // if (items.length === 1) {
     //   // 親コンテナに slider 数の正確な値を
     //   this.props.length(1);
@@ -278,7 +292,7 @@ export class ComponentPickupArticles extends React.Component {
     }
 
     // touch event をキャンセルし drag 準備に入ります
-    events.origin.preventDefault();
+    // events.origin.preventDefault();
     this.props.pause();
 
     this.dragging += events.between.x;
@@ -292,10 +306,9 @@ export class ComponentPickupArticles extends React.Component {
    * scrolling プロパティから scroll 処理をするかを決定します
    *
    * between.x から drag 処理を行うかを決定します
-   * @param {TouchingEvents} events Touching.END event object
    * @return {boolean} touchmove で scroll を行うときは true を返します
    */
-  touchEnd(events) {
+  touchEnd() {
     const absX = Math.abs(this.dragging);
     const movable = !!absX;
     this.dispose();
@@ -306,7 +319,7 @@ export class ComponentPickupArticles extends React.Component {
     }
 
     // touch event をキャンセルし drag 準備に入ります
-    events.origin.preventDefault();
+    // events.origin.preventDefault();
     this.props.pause();
 
     // x 方向閾値 50 未満の時は元の位置に戻す
@@ -410,9 +423,22 @@ export class ComponentPickupArticles extends React.Component {
         this.prepareSwipe();
       }
     }
-
     // 親コンテナに slider 数の正確な値を通知します
-    // this.dispatchLength();
+    this.dispatchLength();
+  }
+  /**
+   * property 変更をキャチし `state` を変更するかを決定します
+   * - nextProps.position が 0 以上 - 循環アニメーションのために負数(index)を使用することがある
+   * - 現在ポシションと次プロパティ・ポジションが違うと変更する
+   * @param {Object} nextProps 更新されたプロパティ
+   * @since 2017-03-28 JS control
+   */
+  componentWillReceiveProps(nextProps) {
+    const position = nextProps.position;
+    console.log('ComponentPickupArticles.componentWillReceiveProps', position, this.state.position);
+    if (position >= 0 && position !== this.state.position) {
+      this.setState({ position });
+    }
   }
   /**
    * ul.pickup-slider を作成します<br>
@@ -424,7 +450,6 @@ export class ComponentPickupArticles extends React.Component {
     const needClone = list.length > 1;
     const needFourth = list.length === 2;
     let count = 0;
-
     return (
       <ul
         className="pickup-slider"
@@ -436,23 +461,23 @@ export class ComponentPickupArticles extends React.Component {
       >
         {
           // clone previous
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 10000 + index, needFourth, this.props.home))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 10000 + index, needFourth, this.props.home, this.state.position))
         }
         {
           // clone previous
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1000 + index, needClone, this.props.home))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1000 + index, needClone, this.props.home, this.state.position))
         }
         {
           // 1.first
-          list.map((article) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home, this.state.position))
         }
         {
           // clone post
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2000 + index, needClone, this.props.home))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2000 + index, needClone, this.props.home, this.state.position))
         }
         {
           // clone post
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 20000 + index, needFourth, this.props.home))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 20000 + index, needFourth, this.props.home, this.state.position))
         }
       </ul>
     );

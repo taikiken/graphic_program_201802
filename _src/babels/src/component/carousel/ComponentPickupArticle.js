@@ -54,7 +54,8 @@ export class ComponentPickupArticle extends React.Component {
    *  large: string,
    *  commentsCount: number,
    *  mediaType: string,
-   *  home: boolean
+   *  home: boolean,
+   *  position: number
    * }} React props
    */
   static get propTypes() {
@@ -70,7 +71,10 @@ export class ComponentPickupArticle extends React.Component {
       commentsCount: React.PropTypes.number.isRequired,
       mediaType: React.PropTypes.string.isRequired,
       // home であるかを表す
-      home: React.PropTypes.bool.isRequired
+      home: React.PropTypes.bool.isRequired,
+      // 現在 スライドNo.
+      // @since 2017-03-28
+      position: React.PropTypes.number.isRequired
     };
   }
   // ---------------------------------------------------
@@ -87,6 +91,23 @@ export class ComponentPickupArticle extends React.Component {
      * @type {function}
      */
     this.boundGa = this.gaSend.bind(this);
+    /**
+     * component state
+     * - current {string} - CSS class
+     * - position {number} - slide position
+     * @type {{current: string, position: number}}
+     * @since 2017-03-28 JS control
+     */
+    this.state = {
+      current: props.index === props.position ? 'current' : '',
+      position: props.position
+    };
+    /**
+     * pager index
+     * @type {number}
+     * @since 2017-03-28 JS control
+     */
+    this.index = props.index;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -104,6 +125,27 @@ export class ComponentPickupArticle extends React.Component {
   // ------
   // delegate
   /**
+   * property 変更をキャチし `state` を変更するかを決定します
+   * - nextProps.position が 0 以上 - 循環アニメーションのために負数(index)を使用することがある
+   * - 現在ポシションと次プロパティ・ポジションが違うと変更する
+   * - nextProps.position と this.index が等価の時は CSS class `current` を与える
+   * @param {Object} nextProps 更新されたプロパティ
+   * @since 2017-03-28 JS control
+   */
+  componentWillReceiveProps(nextProps) {
+    const position = nextProps.position;
+    console.log('ComponentPickupArticle.componentWillReceiveProps', this.index, position, this.state.position);
+    if (position >= 0 && this.index < 1000 && position !== this.state.position) {
+      let current = position === this.index ? 'current' : '';
+      // length 2 の時は 4 としてコード運用する - +2 して再度比較します
+      if (current === '' && this.props.length === 2) {
+        current = position === (this.index + 2) ? 'current' : '';
+      }
+      // state update
+      this.setState({ position, current });
+    }
+  }
+  /**
    * カルーセルスライドショー一記事コンテナを作成します
    * @return {XML} カルーセルスライドショー一記事を返します
    */
@@ -111,7 +153,7 @@ export class ComponentPickupArticle extends React.Component {
     const props = this.props;
 
     return (
-      <li id={`pickup-${props.index}`} className={`pickup pickup-${props.index}`}>
+      <li id={`pickup-${props.index}`} className={`pickup pickup-${props.index} ${this.state.current}`}>
         <a href={props.url} style={{'background': `url(${props.large}) no-repeat 50% 50% / cover`}} onClick={this.boundGa}>
           <img src={Empty.KV_OVERLAY} alt="" className="overlay"/>
           {videoPlay(props.mediaType)}

@@ -180,17 +180,17 @@ export class ComponentCarousel extends React.Component {
     /**
      * 移動量設定値, PC / SP で異なります - SP がレスポンシブ対応するため
      * - PC: 640(px)
-     * - SP: 100(%)
+     * - SP: 280(px)
      * @type {number}
      */
-    this.left = props.sp ? 100 : 640;
+    this.left = props.sp ? 280 : 640;
     /**
      * 移動量単位, PC / SP で異なります - SP がレスポンシブ対応するため
      * - PC: x
      * - SP: %
      * @type {string}
      */
-    this.unit = props.sp ? '%' : 'px';
+    this.unit = props.sp ? 'px' : 'px';
     /**
      * state option
      * - length - {number} スライド総数
@@ -289,9 +289,8 @@ export class ComponentCarousel extends React.Component {
    * @param {number} length slider 数
    */
   updateLength(length) {
-    // this.setState({ length });
     const style = document.createElement('style');
-    const rule = document.createTextNode(`#js-js-pickup-slider{width: ${length * this.left}${this.unit};`);
+    const rule = document.createTextNode(`#js-pickup-slider{width: ${length * this.left}${this.unit};`);
     style.media = 'screen';
     style.type = 'text/css';
     if (style.styleSheet) {
@@ -299,6 +298,7 @@ export class ComponentCarousel extends React.Component {
     } else {
       style.appendChild(rule);
     }
+    console.log('ComponentCarousel.updateLength', length, style);
     document.getElementsByTagName('head')[0].appendChild(style);
   }
   /**
@@ -545,6 +545,7 @@ export class ComponentCarousel extends React.Component {
                 play={this.bindPlay}
                 pause={this.bindPause}
                 length={this.bindLength}
+                position={this.state.index}
               />
             </div>
           </div>

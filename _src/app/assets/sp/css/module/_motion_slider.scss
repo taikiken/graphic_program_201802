@@ -586,3 +586,44 @@
 //    }
 //  }// .hero-slider
 //}
+
+#pickup-container {
+  $slider-width: 280px;
+
+  .hero-slider-inner {
+    position: relative;
+  }
+
+  .overlay,
+  .post-overview {
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: linear;
+  }
+
+  .current {
+
+    .overlay,
+    .post-overview {
+      opacity: 1;
+      transition-duration: 0s;
+    }
+  }
+}
+
+// @since 2016-09-20
+// swipe 実装のために ul.pickup-slider left: 0 にする
+// wrapper div.pickup-slider-wrapper を作成しこちらで移動させる
+.pickup-slider {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  &.pickup-dragging {
+    transition-property: left;
+    transition-duration: 0.1s;
+  }
+}
+

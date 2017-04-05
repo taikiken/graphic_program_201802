@@ -23,7 +23,13 @@ export class ComponentPager extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{index: number, id: string, length: number, onPager: function}} React props
+   * @return {{
+   *    index: number,
+   *    id: string,
+   *    length: number,
+   *    onPager: function,
+   *    position: number
+   * }} React props
    */
   static get propTypes() {
     return {
