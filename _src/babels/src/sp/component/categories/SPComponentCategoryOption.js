@@ -54,6 +54,7 @@ export class SPComponentCategoryOption extends ComponentCategoryOption {
         home={false}
         ad={category.headline.ad}
         browser="sp"
+        category={category}
       />,
       element
     );

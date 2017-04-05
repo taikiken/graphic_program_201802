@@ -61,6 +61,7 @@ export class ViewSingleVisual extends View {
         mediaType={single.mediaType}
         media={single.media}
         isShowImage={single.isShowImage}
+        index={0}
       />,
       this.element
     );

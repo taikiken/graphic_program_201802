@@ -17,13 +17,37 @@ import { Ad } from '../../../app/const/Ad';
 const React = self.React;
 
 /**
- * 広告タグ {@link SPNewsAdNode}
+ * 新着 - 広告タグ {@link SPNewsAdNode}
  * @since 2016-09-21
  */
 export class SPComponentArticleAd extends React.Component {
+  // ---------------------------------------------------
+  //  STATIC GETTER / SETTER
+  // ---------------------------------------------------
+  /**
+   * propTypes
+   * @return {{index: number, length: number, uniqueId: string, adSp: string, categories: CategoriesDae}} React props
+   */
+  static get propTypes() {
+    return {
+      // index, 何番目
+      index: React.PropTypes.number.isRequired,
+      // loop list の length === 総数
+      length: React.PropTypes.number.isRequired,
+      // element id に使用する
+      uniqueId: React.PropTypes.string.isRequired,
+      // ストリーム広告
+      adSp: React.PropTypes.string.isRequired,
+      // @type {CategoriesDae} - since 2017-03-15
+      categories: React.PropTypes.object.isRequired,
+    };
+  }
+  // ---------------------------------------------------
+  //  CONSTRUCTOR
+  // ---------------------------------------------------
   /**
    * プロパティと初期変数を設定します
-   * @param {Object} props React.props {@link SPViewArticleAd.propTypes}
+   * @param {Object} props React.props {@link SPComponentArticleAd.propTypes}
    */
   constructor(props) {
     super(props);
@@ -42,13 +66,24 @@ export class SPComponentArticleAd extends React.Component {
      */
     this.ok = false;
   }
-
+  // ---------------------------------------------------
+  //  METHOD
+  // ---------------------------------------------------
   /**
    * 3番目（添字 2）で「広告タグ」が設定されている時に出力します<br>
    * コンテンツが（添字 2）に届かない時は記事の最後に出力します
    * @return {?XML} 広告 tag を返します
    */
   render() {
+    // 六大学 / 広告表示 調整（Web） #1546
+    // > アドネットワーク関連の広告（ネイティブアド？）を消したい
+    // @see https://github.com/undotsushin/undotsushin/issues/1546
+    // category.slug 'big6tv' search
+    // @since 2017-03-15
+    const big6tv = this.props.categories.bySlug('big6tv');
+    if (big6tv) {
+      return null;
+    }
     // ストリーム広告
     // ID 設定がなかったら出力しない
     if (!this.props.adSp) {
@@ -93,42 +128,4 @@ export class SPComponentArticleAd extends React.Component {
       this.refs.newsAd.appendChild(Ad.makeStream(this.props.uniqueId, this.props.adSp));
     }
   }
-  // ---------------------------------------------------
-  //  STATIC GETTER / SETTER
-  // ---------------------------------------------------
-  /**
-   * propTypes
-   * @return {{index: number, length: number, uniqueId: string, adSp: string}} React props
-   */
-  static get propTypes() {
-    return {
-      // index, 何番目
-      index: React.PropTypes.number.isRequired,
-      // loop list の length === 総数
-      length: React.PropTypes.number.isRequired,
-      // element id に使用する
-      uniqueId: React.PropTypes.string.isRequired,
-      // ストリーム広告
-      adSp: React.PropTypes.string.isRequired
-    };
-  }
 }
-// /**
-//  * プロパティ
-//  * @type {{
-//  *  index: number,
-//  *  length: number,
-//  *  uniqueId: string,
-//  *  adSp: string
-//  * }}
-//  */
-// SPComponentArticleAd.propTypes = {
-//   // index, 何番目
-//   index: React.PropTypes.number.isRequired,
-//   // loop list の length === 総数
-//   length: React.PropTypes.number.isRequired,
-//   // element id に使用する
-//   uniqueId: React.PropTypes.string.isRequired,
-//   // ストリーム広告
-//   adSp: React.PropTypes.string.isRequired
-// };
