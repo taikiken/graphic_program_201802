@@ -147,9 +147,9 @@ export class ComponentCategoryOption extends View {
         home={false}
         ad={category.headline.ad}
         browser={browser}
+        category={category}
       />,
       element
     );
   }
-  // safety() {}
 }

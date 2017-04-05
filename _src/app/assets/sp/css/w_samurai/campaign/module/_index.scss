@@ -105,7 +105,7 @@
   .guidance {
     width: perCalc(690, 750);
     margin: (30/2)+px auto 0;
-    padding: 0 perCalc(30, 690);
+    padding: 0 perCalc(30, 690) (30/2)+px;
     background-color: rgba(0, 0, 0, 0.2);
 
     // .guidance__item
@@ -213,22 +213,24 @@
     }
 
     // .guidance__bnr
-    &__bnr {
-      padding: (30/2)+px 0;
+    // https://github.com/undotsushin/undotsushin/issues/1769
+    // キャンペーン終了に伴い削除
+    // &__bnr {
+    //   padding: (30/2)+px 0;
 
-      // .guidance__bnr__heading
-      &__heading {
-        color: #fff;
-        font-weight: bold;
-        font-size: fz(26/2);
-        white-space: nowrap;
-      }
+    //   // .guidance__bnr__heading
+    //   &__heading {
+    //     color: #fff;
+    //     font-weight: bold;
+    //     font-size: fz(26/2);
+    //     white-space: nowrap;
+    //   }
 
-      // .guidance__bnr__btn
-      &__btn {
-        margin-top: (10/2)+px;
-      }
-    }
+    //   // .guidance__bnr__btn
+    //   &__btn {
+    //     margin-top: (10/2)+px;
+    //   }
+    // }
 
     .attention {
       font-weight: bold;
@@ -242,6 +244,7 @@
 
   // .yellfor
   .yellfor {
+    margin-top: (30/2)+px;
     letter-spacing: ls(inline-block);
 
     // .yellfor__section

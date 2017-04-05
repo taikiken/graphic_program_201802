@@ -52,10 +52,7 @@
 // hotfix だと記事一覧の動画が再生できない
 // 記事詳細かつサッカーカテゴリーではない -> ファイル読み込む
 // @see https://undo-tsushin.slack.com/archives/product-web/p1484298774000116
-if ( $page['template'] == 'p'
-  && $page['category']['slug'] != 'soccer'
-  && $page['post']['media_vk_refid'] == ''
-) :
+if ( $page['template'] == 'p' && $page['category']['slug'] != 'soccer' ) :
   // brightcove code をここに
   // JS で非同期で読み込むと付随コードの読み込みが行われない様子
 ?>
@@ -174,12 +171,6 @@ if ( $template_name == 'category' ) {
 } elseif ( $template_name == 'p' ) {
   // @since 2016-09-30
   $whole_classes[] = 'layout-detail';
-  // 記事詳細 `big6tv` の時に `theme_big6` を whole へ追加する
-  // @since 2017-03-24
-  $page_category = $page['category'];
-  if (isset($page_category) && $page_category['slug'] == 'big6tv' && !in_array('theme_big6', $whole_classes)) {
-    $whole_classes[] = 'theme_big6';
-  }
 }
 ?>
 </head>
@@ -207,18 +198,11 @@ if (
 ?>
   <header id="header-container" class="head-sec">
     <div class="head-sec-inner">
-      <aside class="f-left clearfix">
-        <div id="head-search-container"></div><!-- /.head-search -->
-      </aside>
-
       <h1><a href="/">SPORTS BULL</a></h1>
-
-      <aside class="f-right clearfix">
-        <div id="user-profile-container"></div><!--/.user-profile-container-->
-      </aside>
     </div><!-- /.head-sec-inner -->
   </header><!-- /.head-sec -->
 
+  <?php /* グローバルナビ不要
   <nav id="global-nav-container" class="gnav-sec">
     <ul>
       <li id="home" class="gnav-home"><a href="/">一面</a></li>
@@ -233,6 +217,7 @@ if (
       <?php }//foreach ?>
     </ul>
   </nav><!-- /.gnav-sec -->
+  */?>
 
   <?php /*
 

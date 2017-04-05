@@ -77,10 +77,15 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
       index: props.index
     };
     /**
-     * div.recommend_articles, script を挿入する対象タグ
+     * div.recommend_articles, magnet 対象タグ
      * @type {?Element}
      */
     this.target = null;
+    /**
+     * div.singles-related-scripts, script を挿入する対象タグ
+     * @type {?Element}
+     */
+    this.related = null;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -89,12 +94,14 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
    * delegate, マウント後に呼び出され script tag をインサートします
    * */
   componentDidMount() {
-    if (!!this.refs.related) {
-      SPComponentSinglesWidgetRelated.insert(this.refs.related);
+    if (this.related) {
+      SPComponentSinglesWidgetRelated.insert(this.related);
     }
     // snap
-    const snap = new SPSnap(this.target);
-    snap.init();
+    if (this.target) {
+      const snap = new SPSnap(this.target);
+      snap.init();
+    }
   }
   /**
    * state.index 情報を更新し再描画します
@@ -125,10 +132,17 @@ export class SPComponentSinglesWidgetRelated extends React.Component {
             this.target = component;
           }}
         />
-        <div className="singles-related-scripts" ref="related" />
+        <div
+          className="singles-related-scripts"
+          ref={(component) => {
+            this.related = component;
+          }}
+        />
       </div>
     );
   }
+  // ------
+  // delegate
   /**
    * state.index が 6 あるいは strong: true の時に<br>
    * 関連記事一覧 `div.singles-recommend-containers` を出力します

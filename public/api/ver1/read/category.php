@@ -51,10 +51,21 @@ if(strlen($f["name"])>0){
 			include "public/articlecomments.php";
 
 			$categoriesinfo["pickup"]["articles"]=$s;
+
+			//11/11 iOSだけヘッドラインを非表示にする
+			/*
+			if(preg_match("#undotsushin/com\.limret\.undotsushin#",$_SERVER['HTTP_USER_AGENT'])){
+				$categoriesinfo["headline"]["articles"]=array();
+			}else{
+				$categoriesinfo["headline"]["articles"]=$s;
+			}
+			*/
 			$categoriesinfo["headline"]["articles"]=$s;
+
 		}
 	}
 	//ここまで
+
 	$y["status"]["code"]=200;
 	$y["status"]["user_message"]="";
 	$y["status"]["developer_message"]="";
@@ -66,13 +77,12 @@ if(strlen($f["name"])>0){
 }
 
 
-  if ( $category === 'big6' ) :
+  if ( $category === 'big6tv' ) :
 
-    $categoriesinfo['live'] = '/api/big6/live';
-    $categoriesinfo['webviews'] = array(
-      '/big6/?latest', #直近の試合日程・結果
-      '/big6/?ranking', #順位表
-      '/big6/?news', #各大学の動画・ニュース
+    $categoriesinfo['live']          = '/api/big6tv/live';
+    $categoriesinfo['live_interval'] = 10;
+    $categoriesinfo['webviews']      = array(
+      '/big6tv/webview/',
     );
 
   endif;

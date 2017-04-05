@@ -35,12 +35,18 @@ export class ComponentHeadlineAd extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{browser: string, ad: HeadlineAdDae}} React props
+   * @return {{browser: string, ad: HeadlineAdDae, category: CategoriesSlugDae}} React props
    */
   static get propTypes() {
     return {
       browser: React.PropTypes.string.isRequired,
-      ad: React.PropTypes.object.isRequired
+      ad: React.PropTypes.object.isRequired,
+      category: React.PropTypes.object
+    };
+  }
+  static get defaultProps() {
+    return {
+      category: {}
     };
   }
   // ---------------------------------------------------
@@ -53,69 +59,10 @@ export class ComponentHeadlineAd extends React.Component {
    */
   constructor(props) {
     super(props);
-    /**
-     * div.sponsor-link 広告タグ挿入 Element
-     * @type {?Element}
-     */
-    this.sponsorLink = null;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * アドジェネ広告 `script` tag を作成し wrapper div に `appendChild` します<br>
-   * さらに div.sponsor-link へ `appendChild` します
-   * @param {string} path アドジェネ広告パス
-   */
-  script(path) {
-    if (this.sponsorLink) {
-      const div = document.createElement('div');
-      const script = document.createElement('script');
-      script.src = path;
-      div.appendChild(script);
-      this.sponsorLink.appendChild(div);
-    }
-  }
-  /**
-   * sp: アドジェネ広告を差し込む、この値がなければ広告は表示しない
-   */
-  sp() {
-    const id = this.props.ad.sp;
-    if (!id) {
-      return;
-    }
-
-    this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`);
-  }
-  /**
-   * pc: アドジェネ広告を差し込む、この値がなければ広告は表示しない
-   */
-  pc() {
-    const id = this.props.ad.pc;
-    if (!id) {
-      return;
-    }
-
-    this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
-  }
-  // ------
-  // delegate
-  /**
-   * div.sponsor-link マウント後に「アドジェネ広告」タグを作成します
-   */
-  componentDidMount() {
-    switch (this.props.browser) {
-      case 'sp': {
-        this.sp();
-        break;
-      }
-      case 'pc':
-      default: {
-        this.pc();
-        break;
-      }
-    }
-  }
   /**
    * アドジェネ広告を作成します
    * @return {?XML} アドジェネ広告を返す, 無い時は null を返します
@@ -138,12 +85,81 @@ export class ComponentHeadlineAd extends React.Component {
     }
 
     return (
-      <div
-        className="sponsor-link"
-        ref={(component) => {
-          this.sponsorLink = component;
-        }}
-      />
+      <div className="sponsor-link" ref="sponsorLink" />
     );
+  }
+  /**
+   * div.sponsor-link マウント後に「アドジェネ広告」タグを作成します
+   */
+  componentDidMount() {
+    switch (this.props.browser) {
+      case 'sp': {
+        this.sp();
+        break;
+      }
+      case 'pc':
+      default: {
+        this.pc();
+        break;
+      }
+    }
+  }
+  // ------------------------------------
+  /**
+   * big6tv を除外するために特定します
+   * <pre>
+   * 六大学 / 広告表示 調整（Web） #1546
+   * > アドネットワーク関連の広告（ネイティブアド？）を消したい
+   * </pre>
+   * @return {boolean} true: big6tv
+   * @see https://github.com/undotsushin/undotsushin/issues/1546
+   * @since 2017-03-15
+   */
+  isBig6Tv() {
+    const category = this.props.category;
+    return category.slug === 'big6tv';
+  }
+  /**
+   * アドジェネ広告 `script` tag を作成し wrapper div に `appendChild` します<br>
+   * さらに div.sponsor-link へ `appendChild` します
+   * @param {string} path アドジェネ広告パス
+   */
+  script(path) {
+    const div = document.createElement('div');
+    const script = document.createElement('script');
+    script.src = path;
+    div.appendChild(script);
+
+    this.refs.sponsorLink.appendChild(div);
+  }
+  /**
+   * sp: アドジェネ広告を差し込む、この値がなければ広告は表示しない
+   */
+  sp() {
+    // big6tv は広告非表示
+    if (this.isBig6Tv()) {
+      return;
+    }
+    const id = this.props.ad.sp;
+    if (!id) {
+      return;
+    }
+
+    this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=INFEED&async=true&tagver=2.0.0`);
+  }
+  /**
+   * pc: アドジェネ広告を差し込む、この値がなければ広告は表示しない
+   */
+  pc() {
+    // big6tv は広告非表示
+    if (this.isBig6Tv()) {
+      return;
+    }
+    const id = this.props.ad.pc;
+    if (!id) {
+      return;
+    }
+
+    this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
   }
 }

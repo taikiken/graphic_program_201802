@@ -87,7 +87,6 @@
           </div><!-- /.yellfor__section -->
         </div><!-- /.yellfor -->
 
-        <aside class="bnr-campaign"><a href="/w_samurai/campaign/"><img src="/assets/images/w_samurai/bnr-campaign.png" alt="サッカー賞品・野球賞品 プレゼントキャンペーン プレゼント応募はこちら"></a></aside>
         <aside class="bnr-app"><a href="/about/" target="_blank"><img src="/assets/images/w_samurai/bnr-app.png" alt="スポーツブルアプリをダウンロード"></a></aside>
       </section><!-- /.main-sec -->
     </div>

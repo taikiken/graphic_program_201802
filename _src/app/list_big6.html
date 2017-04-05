@@ -163,22 +163,23 @@
           <table class="matches-list for-category">
             <thead class="matches-thead">
               <tr>
-                <th>試合日</th>
+                <th colspan="2">試合日</th>
                 <th>第1試合</th>
                 <th>第2試合</th>
               </tr>
             </thead>
             <tbody class="matches-tbody">
               <tr>
+                <td class="matches-week" rowspan="2">第1週</td>
                 <td class="matches-date-unit">
                   <span class="matches-date">3/23 (土)</span><br />
                   <span class="matches-time">11:00</span>
                 </td>
                 <td class="matches-match-unit">
                   <ul class="matches-match">
-                    <li><i class="hosei">法大</i></li>
+                    <li><i class="matches-match__teamname--H">法大</i></li>
                     <li><span class="result">3 - 4</span></li>
-                    <li><i class="rikkio">立大</i></li>
+                    <li><i class="matches-match__teamname--R">立大</i></li>
                   </ul><!-- /.matches-match -->
 
                   <div class="matches-btn-highlight">
@@ -187,9 +188,9 @@
                 </td>
                 <td class="matches-match-unit">
                   <ul class="matches-match">
-                    <li><i class="tokyo">東大</i></li>
+                    <li><i class="matches-match__teamname--T">東大</i></li>
                     <li><span class="result">2 - 1</span></li>
-                    <li><i class="waseda">早大</i></li>
+                    <li><i class="matches-match__teamname--W">早大</i></li>
                   </ul><!-- /.matches-match -->
 
                   <div class="matches-btn-highlight">
@@ -204,9 +205,9 @@
                 </td>
                 <td class="matches-match-unit">
                   <ul class="matches-match">
-                    <li><i class="keio">慶大</i></li>
+                    <li><i class="matches-match__teamname--K">慶大</i></li>
                     <li><span class="result">88 - 88</span></li>
-                    <li><i class="meiji">明大</i></li>
+                    <li><i class="matches-match__teamname--M">明大</i></li>
                   </ul><!-- /.matches-match -->
 
                   <div class="matches-btn-highlight">
@@ -215,9 +216,66 @@
                 </td>
                 <td class="matches-match-unit">
                   <ul class="matches-match">
-                    <li><i class="rikkio">立大</i></li>
+                    <li><i class="matches-match__teamname--R">立大</i></li>
                     <li><span class="result">vs</span></li>
-                    <li><i class="waseda">早大</i></li>
+                    <li><i class="matches-match__teamname--W">早大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a class="disable" href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+              </tr>
+              <tr>
+                <td class="matches-week" rowspan="2">第2週</td>
+                <td class="matches-date-unit">
+                  <span class="matches-date">3/23 (土)</span><br />
+                  <span class="matches-time">11:00</span>
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="matches-match__teamname--H">法大</i></li>
+                    <li><span class="result">3 - 4</span></li>
+                    <li><i class="matches-match__teamname--R">立大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="matches-match__teamname--T">東大</i></li>
+                    <li><span class="result">2 - 1</span></li>
+                    <li><i class="matches-match__teamname--W">早大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+              </tr>
+              <tr>
+                <td class="matches-date-unit">
+                  <span class="matches-date">3/24 (日)</span><br />
+                  <span class="matches-time">11:00</span>
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="matches-match__teamname--K">慶大</i></li>
+                    <li><span class="result">88 - 88</span></li>
+                    <li><i class="matches-match__teamname--M">明大</i></li>
+                  </ul><!-- /.matches-match -->
+
+                  <div class="matches-btn-highlight">
+                    <a href="#"><span>ハイライト</span></a>
+                  </div><!-- /.matches-btn-highlight -->
+                </td>
+                <td class="matches-match-unit">
+                  <ul class="matches-match">
+                    <li><i class="matches-match__teamname--R">立大</i></li>
+                    <li><span class="result">vs</span></li>
+                    <li><i class="matches-match__teamname--W">早大</i></li>
                   </ul><!-- /.matches-match -->
 
                   <div class="matches-btn-highlight">
@@ -252,7 +310,7 @@
                 </tr>
               </thead>
               <tbody class="standings-tbody">
-                <tr class="standings-1st">
+                <tr class="standings-1">
                   <td class="standings-num"><span>1</span></td>
                   <td class="standings-team"><img src="/assets/images/big6/icon-waseda.png" alt="早稲田大学"></td>
                   <td class="standings-games">12</td>
@@ -262,7 +320,7 @@
                   <td class="standings-points">5</td>
                   <td class="standings-rate">.909</td>
                 </tr>
-                <tr class="standings-2nd">
+                <tr class="standings-2">
                   <td class="standings-num"><span>2</span></td>
                   <td class="standings-team"><img src="/assets/images/big6/icon-hosei.png" alt="法政大学"></td>
                   <td class="standings-games">12</td>
@@ -272,7 +330,7 @@
                   <td class="standings-points">4</td>
                   <td class="standings-rate">.667</td>
                 </tr>
-                <tr class="standings-3rd">
+                <tr class="standings-3">
                   <td class="standings-num"><span>3</span></td>
                   <td class="standings-team"><img src="/assets/images/big6/icon-keio.png" alt="慶応大学"></td>
                   <td class="standings-games">11</td>
@@ -282,7 +340,7 @@
                   <td class="standings-points">3</td>
                   <td class="standings-rate">.545</td>
                 </tr>
-                <tr class="standings-4th">
+                <tr class="standings-4">
                   <td class="standings-num"><span>4</span></td>
                   <td class="standings-team"><img src="/assets/images/big6/icon-meiji.png" alt="明治大学"></td>
                   <td class="standings-games">12</td>
@@ -292,7 +350,7 @@
                   <td class="standings-points">2</td>
                   <td class="standings-rate">.500</td>
                 </tr>
-                <tr class="standings-5th">
+                <tr class="standings-5">
                   <td class="standings-num"><span>5</span></td>
                   <td class="standings-team"><img src="/assets/images/big6/icon-rikkio.png" alt="立教大学"></td>
                   <td class="standings-games">12</td>
@@ -302,7 +360,7 @@
                   <td class="standings-points">1</td>
                   <td class="standings-rate">.273</td>
                 </tr>
-                <tr class="standings-6th">
+                <tr class="standings-6">
                   <td class="standings-num"><span>6</span></td>
                   <td class="standings-team"><img src="/assets/images/big6/icon-tokyo.png" alt="東京大学"></td>
                   <td class="standings-games">11</td>
@@ -319,12 +377,12 @@
           <section class="misc">
             <h2 class="misc-heading">各大学の動画・ニュース</h2>
             <ul class="misc-list">
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-hosei.png" alt="法政大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-waseda.png" alt="早稲田大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-rikkio.png" alt="立教大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-keio.png" alt="慶応大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-tokyo.png" alt="東京大学"></a></li>
-              <li class="misc-item"><a href="hoge" target="_blank"><img src="/assets/images/big6/icon-meiji.png" alt="明治大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%B3%95%E6%94%BF%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-hosei.png" alt="法政大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%97%A9%E7%A8%B2%E7%94%B0%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-waseda.png" alt="早稲田大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E7%AB%8B%E6%95%99%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-rikkio.png" alt="立教大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%85%B6%E6%87%89%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-keio.png" alt="慶応大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-tokyo.png" alt="東京大学"></a></li>
+              <li class="misc-item"><a href="https://sportsbull.jp/search/%E6%9D%B1%E4%BA%AC%E5%85%AD%E5%A4%A7%E5%AD%A6%20%E6%98%8E%E6%B2%BB%E5%A4%A7%E5%AD%A6"><img src="/assets/images/big6/icon-meiji.png" alt="明治大学"></a></li>
             </ul>
           </section><!-- /.misc -->
         </div><!-- /.clearfix -->
@@ -396,10 +454,14 @@
       </section><!-- /.main-sec -->
 
       <section class="side-sec">
-        <div class="sponsor-link"><a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-sponsor_3.jpg" alt=""></a></div>
-
         <div class="app-bnr"><a href="/about/"><img src="/assets/images/common/bnr-side-app.png" alt="SPORTS BULLアプリ版(iPhone/Android対応) アプリでサクサク楽しむ！"></a></div>
-        <div class="synSearch-bnr mt20"><a href="http://pickup.syndot.jp/about/?utm_source=undou_pc&utm_medium=banner&utm_campaign=search" target="_blank"><img src="/assets/images/common/bnr-side-synsearch.png" alt="Syn.search チャットで検索？"></a></div>
+
+        <div class="side-bnr_big6">
+          <ul class="side-bnr_big6-list">
+            <li class="side-bnr_big6-item"><a href="https://teams.one/?utm_source=big6tv&utm_campaign=teamstop&utm_medium=banner" target="_blank"><img src="/assets/images/big6/bnr-side-teams.png" alt="teams「野球チーム、集合。」全国3,000チーム以上が利用する野球チーム専用マネジメントツール"></a></li>
+            <li class="side-bnr_big6-item"><a href="http://www.big6.gr.jp/" target="_blank"><img src="/assets/images/big6/bnr-side-big6.png" alt="一般財団法人 東京六大学野球連盟"></a></li>
+          </ul>
+        </div><!-- /.side-bnr_big6 -->
 
         <div class="board-small widget-ranking">
           <div class="widget-ranking-heading">
@@ -546,7 +608,6 @@
           </ul>
         </div><!-- /.widget-recommend -->
 
-        <div class="sponsor-link nadir"><a href="hoge" target="_blank"><img src="/assets/images/dummy/bnr-sponsor_4.jpg" alt=""></a></div>
       </section><!-- /.side-sec -->
     </div>
   </div><!-- /.body-sec -->
