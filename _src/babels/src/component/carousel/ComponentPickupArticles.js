@@ -72,10 +72,15 @@ const React = self.React;
 // };
 
 /**
- * div.pickup-slider コンテナを作成し<br>
+ * ul.pickup-slider コンテナを作成し<br>
  * カルーセルコンテンツを表示します
  *
  * sp はスワイプが可能です
+ *
+ * 前後が見切れる仕様に対応するため前後にコピーを作成しオリジナルを挟みます
+ * ```
+ *  |copy|original|copy|
+ * ```
  */
 export class ComponentPickupArticles extends React.Component {
   // ---------------------------------------------------
@@ -448,7 +453,9 @@ export class ComponentPickupArticles extends React.Component {
     const list = this.props.list;
     const needClone = list.length > 1;
     const needFourth = list.length === 2;
-    let count = 0;
+    const home = this.props.home;
+    const position = this.state.position;
+    // let count = 0;
     return (
       <ul
         className="pickup-slider"
@@ -459,24 +466,24 @@ export class ComponentPickupArticles extends React.Component {
         style={this.state.style}
       >
         {
-          // clone previous
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 10000 + index, needFourth, this.props.home, this.state.position))
+          // clone previous - fourth
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 10000 + index, needFourth, home, position))
         }
         {
           // clone previous
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1000 + index, needClone, this.props.home, this.state.position))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1000 + index, needClone, home, position))
         }
         {
           // 1.first
-          list.map((article) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home, this.state.position))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, index, true, home, position))
         }
         {
           // clone post
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2000 + index, needClone, this.props.home, this.state.position))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2000 + index, needClone, home, position))
         }
         {
-          // clone post
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 20000 + index, needFourth, this.props.home, this.state.position))
+          // clone post - fourth
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 20000 + index, needFourth, home, position))
         }
       </ul>
     );

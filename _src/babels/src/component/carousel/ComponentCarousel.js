@@ -278,12 +278,7 @@ export class ComponentCarousel extends React.Component {
   // ---------------------------------------------------
   // --------------------------------------------
   // carousel
-  // /**
-  //  * slider 数を確定させます<br>
-  //  * list の中に重複データが入っていることがあり `list.length` が使用できないために<br>
-  //  * `ComponentPickupSlider` マウント後通知を受けます
-  //  * @param {number} length slider 数
-  //  */
+
   /**
    * `ComponentPickupSlider` マウント後通知を受けスライダーコンテナの幅を設定します
    * @param {number} length slider 数
