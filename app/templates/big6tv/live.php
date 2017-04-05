@@ -149,7 +149,7 @@ streampack初期化コード
 
 
   function log( message, value ) {
-    console.log( message, value || '');
+    // console.log( message, value || '');
   }
 
   /**
@@ -161,9 +161,9 @@ streampack初期化コード
       url      : liveEndPoint,
       type     : 'get',
       dataType : 'json',
-      cache    : true, // jQueryのcache設定これじゃなかったっけ..
+      cache    : true,
       data : {
-        cache : Math.random() // cache効かないようなので意図的にパラメータつける
+        cache : Math.random()
       }
     })
     .done(function (data) {
@@ -284,7 +284,7 @@ streampack初期化コード
 
     if ( startEvent == 'touchend' ) {
 
-      player.one(startEvent, function() {
+      player.one('click', function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
@@ -303,6 +303,7 @@ streampack初期化コード
     }
 
     player.on('play', function() {
+      ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
       log('live - play');
     });
 
@@ -311,18 +312,20 @@ streampack初期化コード
     });
 
     player.on('ended', function() {
+      ga('send', 'event', 'live', 'complete', data.video.source , 0, {nonInteraction: true} );
       log('live - ended');
     });
 
     player.on('adsready', function() {
-      log('live - adsready');
       isAdPlayed = true;
+      ga('send', 'event', 'live', 'adsready', ad_url , 0, {nonInteraction: true} );
+      log('live - adsready');
     });
-
 
     player.on('error', function() {
       reset();
       initAlt( data.error.large );
+      ga('send', 'event', 'live', 'error', data.video.source , 0, {nonInteraction: true} );
       log('live - error');
     });
 
