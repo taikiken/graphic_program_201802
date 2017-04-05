@@ -210,18 +210,20 @@ export class ComponentPickupArticles extends React.Component {
   //  METHOD
   // ---------------------------------------------------
   // --------------------------------------------
-  // /**
-  //  * pickupSlider > li length を親コンテナに通知します
-  //  */
-  // dispatchLength() {
-  //   // const items = this.refs.pickupSlider.getElementsByTagName('li');
-  //   // if (items.length === 1) {
-  //   //   // 親コンテナに slider 数の正確な値を
-  //   //   this.props.length(1);
-  //   // } else {
-  //   //   this.props.length(items.length / 3);
-  //   // }
-  // }
+  /**
+   * pickupSlider > li length を親コンテナに通知します
+   */
+  dispatchLength() {
+    const items = this.refs.pickupSlider.getElementsByTagName('li');
+    // if (items.length === 1) {
+    //   // 親コンテナに slider 数の正確な値を
+    //   this.props.length(1);
+    // } else {
+    //   this.props.length(items.length / 3);
+    // }
+    // 親コンテナに slider 数の正確な値を通知します
+    this.props.length(items.length);
+  }
   // --------------------------------------------
   // swipe
   /**
@@ -398,7 +400,7 @@ export class ComponentPickupArticles extends React.Component {
   // --------------------------------------------
   // delegate
   /**
-   * マウント後にスライドが1枚以上ならスワイプできるように準備します
+   * SP のみマウント後にスライドが1枚以上ならスワイプできるように準備します
    */
   componentDidMount() {
     // length が 2 以上なら
@@ -426,6 +428,7 @@ export class ComponentPickupArticles extends React.Component {
     return (
       <ul
         className="pickup-slider"
+        id="js-pickup-slider"
         ref={(element) => {
           this.pickupSlider = element;
         }}
@@ -433,7 +436,7 @@ export class ComponentPickupArticles extends React.Component {
       >
         {
           // clone previous
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 1111 + index, needFourth, this.props.home))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 10000 + index, needFourth, this.props.home))
         }
         {
           // clone previous
@@ -449,7 +452,7 @@ export class ComponentPickupArticles extends React.Component {
         }
         {
           // clone post
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 2222 + index, needFourth, this.props.home))
+          list.map((article, index) => ComponentPickupArticles.makeArticle(article, 20000 + index, needFourth, this.props.home))
         }
       </ul>
     );
