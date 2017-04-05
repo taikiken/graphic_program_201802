@@ -800,5 +800,39 @@
     &:hover {
       background-color: $highlight-secondary-color;
     }
+
+    transition-property: background-color;
+    transition-duration: 0.25s;
+    transition-timing-function: linear;
+  }
+}
+
+// ---------------------------------------------------------------------
+// cover setting
+// @since 2017-03-28
+// ---------------------------------------------------------------------
+#pickup-container {
+  $slider-width: 640px;
+
+  .hero-slider-inner {
+    position: relative;
+  }
+
+  .overlay,
+  .post-overview {
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: linear;
+  }
+
+  .current {
+
+    .overlay,
+    .post-overview {
+      opacity: 1;
+      //transition-duration: 0s;
+    }
   }
 }

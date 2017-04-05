@@ -298,7 +298,7 @@ export class ComponentCarousel extends React.Component {
     } else {
       style.appendChild(rule);
     }
-    console.log('ComponentCarousel.updateLength', length, style);
+    // console.log('ComponentCarousel.updateLength', length, style);
     document.getElementsByTagName('head')[0].appendChild(style);
   }
   /**

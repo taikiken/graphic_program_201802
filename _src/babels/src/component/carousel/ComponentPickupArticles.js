@@ -257,7 +257,6 @@ export class ComponentPickupArticles extends React.Component {
     touching.on(Touching.START, this.boundStart);
     touching.init();
   }
-
   /**
    * Touching.START event handler<br>
    * スワイプ用変数を初期化し move, end, cancel event を bind します
@@ -435,7 +434,7 @@ export class ComponentPickupArticles extends React.Component {
    */
   componentWillReceiveProps(nextProps) {
     const position = nextProps.position;
-    console.log('ComponentPickupArticles.componentWillReceiveProps', position, this.state.position);
+    // console.log('ComponentPickupArticles.componentWillReceiveProps', position, this.state.position);
     if (position >= 0 && position !== this.state.position) {
       this.setState({ position });
     }
@@ -469,7 +468,7 @@ export class ComponentPickupArticles extends React.Component {
         }
         {
           // 1.first
-          list.map((article, index) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home, this.state.position))
+          list.map((article) => ComponentPickupArticles.makeArticle(article, count++, true, this.props.home, this.state.position))
         }
         {
           // clone post

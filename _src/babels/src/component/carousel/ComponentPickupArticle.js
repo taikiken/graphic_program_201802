@@ -134,7 +134,7 @@ export class ComponentPickupArticle extends React.Component {
    */
   componentWillReceiveProps(nextProps) {
     const position = nextProps.position;
-    console.log('ComponentPickupArticle.componentWillReceiveProps', this.index, position, this.state.position);
+    // console.log('ComponentPickupArticle.componentWillReceiveProps', this.index, position, this.state.position);
     if (position >= 0 && this.index < 1000 && position !== this.state.position) {
       let current = position === this.index ? 'current' : '';
       // length 2 の時は 4 としてコード運用する - +2 して再度比較します
