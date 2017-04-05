@@ -45,6 +45,10 @@ export class ComponentHeadlineAd extends React.Component {
       category: React.PropTypes.object
     };
   }
+  /**
+   * default props - 後方互換のために標準を空 Object にします
+   * @return {{category: {}}} default props
+   */
   static get defaultProps() {
     return {
       category: {}
