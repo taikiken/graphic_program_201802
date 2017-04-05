@@ -54,4 +54,4 @@ $media-small: "only screen and (max-width: #{$screen-small})"; // less than 768
 //$media-portrait: "only screen and (orientation: portrait)";
 
 //// min-width
-$media-large: "only screen and (min-width: #{$screen-small})"; // more than 768
+$media-large: "only screen and (min-width: #{$screen-small}+1)"; // more than 768
