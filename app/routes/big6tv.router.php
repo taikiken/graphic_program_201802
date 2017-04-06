@@ -12,7 +12,6 @@ $app->group('/{slug:big6tv}',  function () use($app) {
       'title'              => '東京六大学野球 BIG6.TV',
       'og_title'           => '東京六大学野球 BIG6.TV | '.$app->model->property('title'),
       'og_url'             => $app->model->property('site_url').'big6tv/',
-      'og_image'           => 'https://sportsbull.jp/_/big6tv/og_image/og_image.png',
       'path'               => $args,
       'template'           => 'category',
       'template_classname' => '',
