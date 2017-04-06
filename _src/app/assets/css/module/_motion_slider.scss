@@ -759,6 +759,8 @@
 // @since 2017-03-28
 // ---------------------------------------------------------------------
 
+// .pager
+// pager style
 .pager {
   position: absolute;
   top: 370px;
@@ -811,6 +813,9 @@
 // cover setting
 // @since 2017-03-28
 // ---------------------------------------------------------------------
+
+// #pickup-container
+// carousel slide container
 #pickup-container {
   $slider-width: 640px;
 
@@ -827,12 +832,12 @@
     transition-timing-function: linear;
   }
 
+  // current で表示する - fadein
   .current {
-
     .overlay,
     .post-overview {
       opacity: 1;
-      //transition-duration: 0s;
+      transition-duration: 0.1s;
     }
   }
 }
