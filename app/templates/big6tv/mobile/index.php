@@ -25,7 +25,7 @@ if (isset($_GET['app'])) {
   <!-- sns ogp -->
   <meta property="og:title" content="東京六大学野球 BIG6.TV | SPORTS BULL">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://sportsbull.jp/assets/images/common/og_image.png">
+  <meta property="og:image" content="https://sportsbull.jp/_/big6tv/og_image/og_image.png">
   <meta property="og:url" content="https://sportsbull.jp/big6tv/">
   <meta property="og:description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <!-- twitter card -->
