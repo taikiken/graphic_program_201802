@@ -35,7 +35,7 @@ $misc = array(
 
 );
 
-$misc_Keyword_prefix = '東京六大学 ';
+$misc_Keyword_prefix = '六大学野球 ';
 
 
 ?>
