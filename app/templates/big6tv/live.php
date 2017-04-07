@@ -259,7 +259,7 @@ streampack初期化コード
 
 
     var startEvent = 'click';
-    var isMobile   = true;
+    var isMobile   = false;
 
     if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) ) {
       isMobile   = true;
@@ -288,7 +288,7 @@ streampack初期化コード
         player.ima.requestAds();
         player.play();
         log('live - play : pc');
-      }, 1000);
+      }, 500);
 
     }
 
