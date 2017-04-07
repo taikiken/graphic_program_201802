@@ -82,9 +82,6 @@
   .vjs-poster {
     display: none !important;
   }
-  .video-js{
-    background-color: #fff !important;
-  }
 
   .video-js .vjs-big-play-button {
     z-index: 9999;
