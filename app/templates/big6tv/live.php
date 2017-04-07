@@ -79,25 +79,8 @@
     cursor: none;
   }
 
-  #mainContainer {
-    border: 1px #fff solid;
-    box-sizing: border-box;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-    padding-top: 30px;
-    position: relative;
-    width:100%;
-  }
-
-  #single-visual-container{
-    box-sizing: border-box;
-  }
-  .vjs-poster{
+  .vjs-poster {
     display: none !important;
-  }
-  .video-js{
-    background-color: #fff !important;
   }
 
   .video-js .vjs-big-play-button {
@@ -276,15 +259,22 @@ streampack初期化コード
 
 
     var startEvent = 'click';
-    if (navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/Android/i)) {
+    var isMobile   = true;
+
+    if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) ) {
+      isMobile   = true;
+      $('#content_video_ima-controls-div').prev().hide();
+      startEvent = 'click';
+    }
+
+    if ( navigator.userAgent.match(/Android/i) ) {
+      isMobile   = true;
       startEvent = 'touchend';
     }
 
-    if ( startEvent == 'touchend' ) {
+    if ( isMobile ) {
 
-      player.one('click', function() {
+      player.one(startEvent, function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
