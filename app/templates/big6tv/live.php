@@ -103,7 +103,11 @@ streampack初期化コード
     id="content_video"
     class="video-js vjs-default-skin"
     poster=""
-    controls preload="auto" width="640" height="360">
+    controls
+    preload="auto"
+    width="640"
+    height="360"
+    data-setup="{}" >
     <source
       src=""
       type="application/x-mpegURL"></source>
@@ -158,7 +162,7 @@ streampack初期化コード
         response.isPlaying = true;
       }
 
-      if ( video_isPlaying !== response.isPlaying || video_source !== response.video.source ) {
+      if ( video_isPlaying !== response.isPlaying ) {
 
         video_isPlaying = response.isPlaying;
         video_source    = response.video.source;
@@ -248,7 +252,9 @@ streampack初期化コード
       requestMode : 'ondemand'
     };
 
-    player.ima(options);
+    if ( ad_url ) {
+      player.ima(options);
+    }
 
     var contentPlayer =  document.getElementById('content_video_html5_api');
     if ((navigator.userAgent.match(/iPad/i) ||
@@ -260,6 +266,7 @@ streampack初期化コード
 
     var startEvent = 'click';
     var isMobile   = false;
+    var isAndroid  = false;
 
     if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) ) {
       isMobile   = true;
@@ -269,16 +276,34 @@ streampack初期化コード
 
     if ( navigator.userAgent.match(/Android/i) ) {
       isMobile   = true;
+      isAndroid  = true;
       startEvent = 'touchend';
     }
 
     if ( isMobile ) {
 
       player.one(startEvent, function() {
-        player.ima.initializeAdDisplayContainer();
-        player.ima.requestAds();
-        player.play();
+
+        if ( isAndroid ) {
+
+          setTimeout(function() {
+            if ( ad_url ) {
+              player.ima.initializeAdDisplayContainer();
+              player.ima.requestAds();
+            }
+            player.play();
+          }, 500);
+
+        } else {
+          if ( ad_url ) {
+            player.ima.initializeAdDisplayContainer();
+            player.ima.requestAds();
+          }
+          player.play();
+        }
+
         log('live - play : sp');
+
       });
 
     } else {
@@ -314,9 +339,18 @@ streampack初期化コード
 
     player.on('error', function() {
       reset();
-      initAlt( data.error.large );
-      ga('send', 'event', 'live', 'error', data.video.source , 0, {nonInteraction: true} );
+      isAdPlayed = true;
+      initVideo( data );
+      // initAlt( data.error.large );
+
+      var error = this.player().error();
+
+      if ( error ) {
+        ga('send', 'event', 'live', 'error', error.code + ' | ' + error.type + ' | ' +  error.message + ' | ' + navigator.userAgent , 0, {nonInteraction: true} );
+      }
+
       log('live - error');
+
     });
 
 
