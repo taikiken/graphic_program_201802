@@ -106,8 +106,7 @@ streampack初期化コード
     controls
     preload="auto"
     width="640"
-    height="360"
-    data-setup="{}" >
+    height="360">
     <source
       src=""
       type="application/x-mpegURL"></source>
@@ -162,7 +161,7 @@ streampack初期化コード
         response.isPlaying = true;
       }
 
-      if ( video_isPlaying !== response.isPlaying ) {
+      if ( video_isPlaying !== response.isPlaying || video_source !== response.video.source ) {
 
         video_isPlaying = response.isPlaying;
         video_source    = response.video.source;
@@ -252,9 +251,7 @@ streampack初期化コード
       requestMode : 'ondemand'
     };
 
-    if ( ad_url ) {
-      player.ima(options);
-    }
+    player.ima(options);
 
     var contentPlayer =  document.getElementById('content_video_html5_api');
     if ((navigator.userAgent.match(/iPad/i) ||
@@ -266,7 +263,6 @@ streampack初期化コード
 
     var startEvent = 'click';
     var isMobile   = false;
-    var isAndroid  = false;
 
     if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) ) {
       isMobile   = true;
@@ -276,34 +272,16 @@ streampack初期化コード
 
     if ( navigator.userAgent.match(/Android/i) ) {
       isMobile   = true;
-      isAndroid  = true;
       startEvent = 'touchend';
     }
 
     if ( isMobile ) {
 
       player.one(startEvent, function() {
-
-        if ( isAndroid ) {
-
-          setTimeout(function() {
-            if ( ad_url ) {
-              player.ima.initializeAdDisplayContainer();
-              player.ima.requestAds();
-            }
-            player.play();
-          }, 500);
-
-        } else {
-          if ( ad_url ) {
-            player.ima.initializeAdDisplayContainer();
-            player.ima.requestAds();
-          }
-          player.play();
-        }
-
+        player.ima.initializeAdDisplayContainer();
+        player.ima.requestAds();
+        player.play();
         log('live - play : sp');
-
       });
 
     } else {
@@ -339,9 +317,7 @@ streampack初期化コード
 
     player.on('error', function() {
       reset();
-      isAdPlayed = true;
-      initVideo( data );
-      // initAlt( data.error.large );
+      initAlt( data.error.large );
 
       var error = this.player().error();
 
@@ -350,7 +326,6 @@ streampack初期化コード
       }
 
       log('live - error');
-
     });
 
 
