@@ -103,7 +103,10 @@ streampack初期化コード
     id="content_video"
     class="video-js vjs-default-skin"
     poster=""
-    controls preload="auto" width="640" height="360">
+    controls
+    preload="auto"
+    width="640"
+    height="360">
     <source
       src=""
       type="application/x-mpegURL"></source>
@@ -124,7 +127,7 @@ streampack初期化コード
 
   // 広告再生済みかどうか
   var isAdPlayed      = false;
-
+  var isAndroid       = false;
 
   // 初回実行
   var intervalTimer = window.setInterval( init, interval );
@@ -269,6 +272,7 @@ streampack初期化コード
 
     if ( navigator.userAgent.match(/Android/i) ) {
       isMobile   = true;
+      isAndroid  = true;
       startEvent = 'touchend';
     }
 
@@ -315,7 +319,18 @@ streampack初期化コード
     player.on('error', function() {
       reset();
       initAlt( data.error.large );
-      ga('send', 'event', 'live', 'error', data.video.source , 0, {nonInteraction: true} );
+
+      var error = this.player().error();
+
+      if ( error ) {
+        ga('send', 'event', 'live', 'error', error.code + ' | ' + error.type + ' | ' +  error.message + ' | ' + navigator.userAgent , 0, {nonInteraction: true} );
+      }
+
+      if ( isAndroid ) {
+        isAdPlayed = true;
+        initVideo( data );
+      }
+
       log('live - error');
     });
 
