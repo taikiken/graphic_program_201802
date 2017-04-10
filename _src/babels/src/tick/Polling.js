@@ -205,6 +205,9 @@ export class Polling extends EventDispatcher {
       // already start
       return false;
     }
+    // begin
+    // @since 2017-03-28 - 基準値を start 時に更新する
+    this.begin = Date.now();
     // flag -> true
     // this[startSymbol] = true;
     this.turnOver();

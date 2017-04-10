@@ -34,16 +34,21 @@ export class ComponentHeadlineAd extends React.Component {
   //  STATIC GETTER / SETTER
   // ---------------------------------------------------
   /**
-   * propTypes
+   * propTypes`
    * @return {{browser: string, ad: HeadlineAdDae, category: CategoriesSlugDae}} React props
    */
   static get propTypes() {
     return {
       browser: React.PropTypes.string.isRequired,
       ad: React.PropTypes.object.isRequired,
+      // @since 2017-03-28
       category: React.PropTypes.object
     };
   }
+  /**
+   * default props - 後方互換のために標準を空 Object にします
+   * @return {{category: {}}} default props
+   */
   static get defaultProps() {
     return {
       category: {}
@@ -59,51 +64,15 @@ export class ComponentHeadlineAd extends React.Component {
    */
   constructor(props) {
     super(props);
+    /**
+     * div.sponsor-link 広告タグ挿入 Element
+     * @type {?Element}
+     */
+    this.sponsorLink = null;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * アドジェネ広告を作成します
-   * @return {?XML} アドジェネ広告を返す, 無い時は null を返します
-   */
-  render() {
-    switch (this.props.browser) {
-      case 'sp': {
-        if (!this.props.ad.sp) {
-          return null;
-        }
-        break;
-      }
-      case 'pc':
-      default: {
-        if (!this.props.ad.pc) {
-          return null;
-        }
-        break;
-      }
-    }
-
-    return (
-      <div className="sponsor-link" ref="sponsorLink" />
-    );
-  }
-  /**
-   * div.sponsor-link マウント後に「アドジェネ広告」タグを作成します
-   */
-  componentDidMount() {
-    switch (this.props.browser) {
-      case 'sp': {
-        this.sp();
-        break;
-      }
-      case 'pc':
-      default: {
-        this.pc();
-        break;
-      }
-    }
-  }
   // ------------------------------------
   /**
    * big6tv を除外するために特定します
@@ -125,12 +94,13 @@ export class ComponentHeadlineAd extends React.Component {
    * @param {string} path アドジェネ広告パス
    */
   script(path) {
-    const div = document.createElement('div');
-    const script = document.createElement('script');
-    script.src = path;
-    div.appendChild(script);
-
-    this.refs.sponsorLink.appendChild(div);
+    if (this.sponsorLink) {
+      const div = document.createElement('div');
+      const script = document.createElement('script');
+      script.src = path;
+      div.appendChild(script);
+      this.sponsorLink.appendChild(div);
+    }
   }
   /**
    * sp: アドジェネ広告を差し込む、この値がなければ広告は表示しない
@@ -161,5 +131,53 @@ export class ComponentHeadlineAd extends React.Component {
     }
 
     this.script(`${Ad.host()}/sdk/js/adg-script-loader.js?id=${id}&targetID=adg_${id}&displayid=2&adType=PC&width=0&height=0&sdkType=3&async=true&tagver=2.0.0`);
+  }
+  // ------
+  // delegate
+  /**
+   * div.sponsor-link マウント後に「アドジェネ広告」タグを作成します
+   */
+  componentDidMount() {
+    switch (this.props.browser) {
+      case 'sp': {
+        this.sp();
+        break;
+      }
+      case 'pc':
+      default: {
+        this.pc();
+        break;
+      }
+    }
+  }
+  /**
+   * アドジェネ広告を作成します
+   * @return {?XML} アドジェネ広告を返す, 無い時は null を返します
+   */
+  render() {
+    switch (this.props.browser) {
+      case 'sp': {
+        if (!this.props.ad.sp) {
+          return null;
+        }
+        break;
+      }
+      case 'pc':
+      default: {
+        if (!this.props.ad.pc) {
+          return null;
+        }
+        break;
+      }
+    }
+
+    return (
+      <div
+        className="sponsor-link"
+        ref={(component) => {
+          this.sponsorLink = component;
+        }}
+      />
+    );
   }
 }
