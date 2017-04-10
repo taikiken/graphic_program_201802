@@ -245,6 +245,9 @@ export class ViewSingle extends View {
     // manager へ snap したことを通知します
     this.manager.hit(this.page);
   }
+  /**
+   * manager へ snap したことを通知します
+   */
   hitIn() {
     // manager へ snap したことを通知します
     this.manager.hit(this.page);

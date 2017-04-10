@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2011-2016 inazumatv.com, inc.
+ * Copyright (c) 2011-2017 inazumatv.com, inc.
  * @author (at)taikiken / http://inazumatv.com
- * @date 2016/02/02 - 20:54
+ * @date 2017/03/29 - 17:31
  *
  * Distributed under the terms of the MIT license.
  * http://www.opensource.org/licenses/mit-license.html
@@ -13,28 +13,24 @@
 import {EventDispatcher} from './EventDispatcher';
 
 // Singleton を保証するための Symbol
-const _symbol = Symbol('UserStatus singleton Symbol');
+const _symbol = Symbol('CarouselStatus singleton Symbol');
 // Singleton instance
 let _instance = null;
 
 /**
- * ログイン / ログアウト を通知
+ * カルーセル位置を通知するイベントシステム
  *
- * Singleton class です `new` 演算子での instance 作成はできません
- *
- * @example
- * const userStatus = UserStatus.factory();
- *
- *  */
-export class UserStatus extends EventDispatcher {
+ * controller -> pager
+ */
+export class CarouselStatus extends EventDispatcher {
   /**
    * ログイン / ログアウト を通知する SingleTon
    * @param {Symbol} target Singleton を実現するための private symbol
-   * @return {UserStatus} UserStatus インスタンスを返します
+   * @return {CarouselStatus} CarouselStatus インスタンスを返します
    */
   constructor(target) {
     if (_symbol !== target) {
-      throw new Error('UserStatus is static Class. not use new UserStatus().');
+      throw new Error('CarouselStatus is static Class. not use new UserStatus().');
     }
     if (_instance !== null) {
       return _instance;
@@ -47,49 +43,36 @@ export class UserStatus extends EventDispatcher {
     return _instance;
   }
   // ---------------------------------------------------
-  //  method
+  //  EVENT
   // ---------------------------------------------------
   /**
-   * UserStatus.LOG_IN event を fire します
+   * carousel(slider) 位置を通知するイベントタイプ
+   * @event POSITION
+   * @return {string} carouselStatusPosition
    */
-  login() {
-    this.dispatch({ type: UserStatus.LOG_IN, sign: true });
-  }
-  /**
-   * UserStatus.LOG_OUT event を fire します
-   */
-  logout() {
-    this.dispatch({ type: UserStatus.LOG_OUT, sign: false });
+  static get POSITION() {
+    return 'carouselStatusPosition';
   }
   // ---------------------------------------------------
-  //  static const
+  //  METHOD
   // ---------------------------------------------------
   /**
-   * LOG_IN event
-   * @event LOG_IN
-   * @return {string} LOG_IN event type を返します
+   * カルーセル位置を通知します
+   * @param {number} index カルーセル位置添字 0 ~
    */
-  static get LOG_IN() {
-    return 'logIn';
-  }
-  /**
-   * LOG_OUT event
-   * @event LOG_OUT
-   * @return {string} LOG_OUT event type を返します
-   */
-  static get LOG_OUT() {
-    return 'logOut';
+  position(index) {
+    this.dispatch({ type: CarouselStatus.POSITION, index });
   }
   // ---------------------------------------------------
-  //  static method
+  //  STATIC METHOD
   // ---------------------------------------------------
   /**
    * instance を生成します
-   * @return {UserStatus} UserStatus instance を返します
+   * @return {CarouselStatus} CarouselStatus instance を返します
    */
   static factory() {
     if (_instance === null) {
-      _instance = new UserStatus( _symbol );
+      _instance = new CarouselStatus( _symbol );
     }
     return _instance;
   }
