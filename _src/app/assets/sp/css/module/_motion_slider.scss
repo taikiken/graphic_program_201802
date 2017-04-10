@@ -621,11 +621,11 @@
   position: absolute;
   left: 0;
   top: 0;
-
-  &.pickup-dragging {
-    transition-property: left;
-    transition-duration: 0.1s;
-  }
+  // かくつく（一瞬戻る）を制御するために transition させる
+  // @since 2017-04-10
+  transition-property: left;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
 }
 
 

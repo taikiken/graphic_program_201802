@@ -367,10 +367,8 @@ export class ComponentPickupArticles extends React.Component {
    */
   move(x) {
     this.dragging = 0;
-    // this.timer = setTimeout(() => {
-    //   this.setState({ style: {} });
-    // }, 100);
-    this.setState({ style: {} });
+    // かくつく（一瞬戻る）を制御するために 0px へ transition する <- CSS animation `sp/module/_motion_slider.scss`
+    this.setState({ style: { left: '0px' } });
 
     if (x > 0) {
       // <- drag: prev
