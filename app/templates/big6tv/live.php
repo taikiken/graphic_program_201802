@@ -79,25 +79,8 @@
     cursor: none;
   }
 
-  #mainContainer {
-    border: 1px #fff solid;
-    box-sizing: border-box;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-    padding-top: 30px;
-    position: relative;
-    width:100%;
-  }
-
-  #single-visual-container{
-    box-sizing: border-box;
-  }
-  .vjs-poster{
+  .vjs-poster {
     display: none !important;
-  }
-  .video-js{
-    background-color: #fff !important;
   }
 
   .video-js .vjs-big-play-button {
@@ -120,7 +103,10 @@ streampack初期化コード
     id="content_video"
     class="video-js vjs-default-skin"
     poster=""
-    controls preload="auto" width="640" height="360">
+    controls
+    preload="auto"
+    width="640"
+    height="360">
     <source
       src=""
       type="application/x-mpegURL"></source>
@@ -141,7 +127,7 @@ streampack初期化コード
 
   // 広告再生済みかどうか
   var isAdPlayed      = false;
-
+  var isAndroid       = false;
 
   // 初回実行
   var intervalTimer = window.setInterval( init, interval );
@@ -276,15 +262,23 @@ streampack初期化コード
 
 
     var startEvent = 'click';
-    if (navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/Android/i)) {
+    var isMobile   = false;
+
+    if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) ) {
+      isMobile   = true;
+      $('#content_video_ima-controls-div').prev().hide();
+      startEvent = 'click';
+    }
+
+    if ( navigator.userAgent.match(/Android/i) ) {
+      isMobile   = true;
+      isAndroid  = true;
       startEvent = 'touchend';
     }
 
-    if ( startEvent == 'touchend' ) {
+    if ( isMobile ) {
 
-      player.one('click', function() {
+      player.one(startEvent, function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
@@ -298,7 +292,7 @@ streampack初期化コード
         player.ima.requestAds();
         player.play();
         log('live - play : pc');
-      }, 1000);
+      }, 500);
 
     }
 
@@ -325,7 +319,18 @@ streampack初期化コード
     player.on('error', function() {
       reset();
       initAlt( data.error.large );
-      ga('send', 'event', 'live', 'error', data.video.source , 0, {nonInteraction: true} );
+
+      var error = this.player().error();
+
+      if ( error ) {
+        ga('send', 'event', 'live', 'error', error.code + ' | ' + error.type + ' | ' +  error.message + ' | ' + navigator.userAgent , 0, {nonInteraction: true} );
+      }
+
+      if ( isAndroid ) {
+        isAdPlayed = true;
+        initVideo( data );
+      }
+
       log('live - error');
     });
 

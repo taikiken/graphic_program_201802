@@ -26,7 +26,7 @@ $update = date('n/j H:i', $update);
             <tbody class="standings-tbody">
             <?php if ( $page['big6tv']['rankingData']['ranking'] ) : ?>
               <?php foreach( $page['big6tv']['rankingData']['ranking'] as $key => $value ) : ?>
-                <tr class="standings-<?php echo ( intval($value['game']) > 0 ) ? ++$key : '-'; ?>">
+                <tr class="standings-<?php echo ( intval($value['game']) > 0 ) ? $value['rank'] : '-'; ?>">
                   <td class="standings-num"><span><?php echo ( intval($value['game']) > 0 ) ? $value['rank'] : '-'; ?></span></td>
                   <td class="standings-team"><img src="/assets/sp/images/big6/icon-<?php echo $value['slug']; ?>.png" alt="<?php echo $value['name']; ?>大学"></td>
                   <td class="standings-games"><?php echo $value['game']; ?></td>
