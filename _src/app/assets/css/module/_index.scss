@@ -257,9 +257,12 @@
   position: relative;
 
   .sponsor-link {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    // 不要 CSS なので削除, float layout
+    // @see https://github.com/undotsushin/undotsushin/issues/1647
+    // @since 2017-04-10
+    //position: absolute;
+    //bottom: 0;
+    //right: 0;
 
     @extend %board-small-sponsor-link;
   }
