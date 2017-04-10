@@ -37,11 +37,11 @@ export class Pickup extends Action {
    * var pickup = new Pickup( done, fail );
    * pickup.start();
    *
-   * @param {Function} [resolve=null] Ajax 成功時の callback
-   * @param {Function} [reject=null] Ajax 失敗時の callback
+   * @param {?Function} [resolve=null] Ajax 成功時の callback
+   * @param {?Function} [reject=null] Ajax 失敗時の callback
    */
-  constructor( resolve:Function = null, reject:Function = null ) {
-    super( Api.home(), resolve, reject );
+  constructor(resolve = null, reject = null) {
+    super(Api.home(), resolve, reject);
   }
   // ---------------------------------------------------
   //  GETTER / SETTER
@@ -51,9 +51,7 @@ export class Pickup extends Action {
    * <code>Api.home().url/pickup?offset=0&length=5</code>
    * @return {string} pickup API url を返します
    */
-  get url():string {
-
+  get url() {
     return `${this._url}/pickup?offset=0&length=${Length.pickup}`;
-
   }
 }
