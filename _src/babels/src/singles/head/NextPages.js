@@ -52,6 +52,10 @@ export class NextPages {
     this.pages = () => pages;
 
     const list = [];
+    /**
+     * ページ情報をストックします
+     * @returns {Array<string>} ページ情報(URL)リストを返します
+     */
     this.list = () => list;
 
     _instance = this;
