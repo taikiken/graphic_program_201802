@@ -39,7 +39,9 @@ export class ComponentSinglePost extends React.Component {
   // ---------------------------------------------------
   /**
    * propTypes
-   * @return {{single: SingleDae}} React props
+   * - single {@link SingleDae} - 記事データ
+   * - sp {boolean} - default false, SP フラッグ
+   * @return {{single: SingleDae, sp: boolean}} React props
    */
   static get propTypes() {
     return {
@@ -85,12 +87,12 @@ export class ComponentSinglePost extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
-   */
-  componentDidMount() {
-    // this.props.callback(View.DID_MOUNT);
-  }
+  // /**
+  //  * delegate, mount 後に呼び出され `View.DID_MOUNT` を発火します
+  //  */
+  // componentDidMount() {
+  //   // this.props.callback(View.DID_MOUNT);
+  // }
   /**
    * 記事詳細本文を更新します
    * @param {SingleDae} single 記事詳細 JSON data

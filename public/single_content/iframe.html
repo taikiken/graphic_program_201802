@@ -9,9 +9,13 @@
       'use strict';
       var
         document = window.document;
-      window.onmessage = (message) => {
+//      window.onmessage = (message) => {
+//        console.log('message', message);
+//      };
+      const onMessage = (message) => {
         console.log('message', message);
       };
+      window.addEventListener('message', onMessage, false);
     }(window));
 
   </script>

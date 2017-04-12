@@ -172,9 +172,10 @@ if ( $page['theme']['base'] ) {
       resize();
     };
     const onLoad = () => {
+      console.log('iFrame.onLoad id:', <?php echo $page['post']['id'] ?>);
       window.removeEventListener('load', onLoad);
       resize();
-      window.addEventListener('resize', onResize, false);
+      document.body.addEventListener('resize', onResize, false);
     };
     window.addEventListener('load', onLoad, false);
   }(window));
