@@ -71,6 +71,7 @@ export class ComponentSinglePostBody extends React.Component {
         width="100%"
         scrolling="no"
         height={this.state.height}
+        className="post-content-iframe"
       />
     );
   }

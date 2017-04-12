@@ -12,9 +12,6 @@
 
 // app
 import { Message } from '../../app/const/Message';
-//
-// // view
-// import { View } from '../../view/View';
 
 // util
 import { Instagram } from '../../util/Instagram';
@@ -22,6 +19,9 @@ import { Instagram } from '../../util/Instagram';
 // ga
 import { GaData } from '../../ga/GaData';
 import { Ga } from '../../ga/Ga';
+
+// component/single-content
+import { ComponentSinglePostBody } from './ComponentSinglePostBody';
 
 // React
 const React = self.React;
@@ -156,8 +156,16 @@ export class ComponentSinglePost extends React.Component {
     // @since 2017-01-10
     Instagram.delay();
     // 本文
+    // return (
+    //   <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
+    // );
     return (
-      <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
+      <div className="post-content">
+        <ComponentSinglePostBody
+          single={this.state.single}
+          sp={this.props.sp}
+        />
+      </div>
     );
   }
   /**

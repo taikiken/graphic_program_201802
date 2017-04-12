@@ -10,7 +10,7 @@
 // PC / SP 共用
 ?>
 <!DOCTYPE html>
-<html dir="ltr" lang="ja">
+<html dir="ltr" lang="ja" style="height: auto;">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -138,7 +138,7 @@ if ( $page['theme']['base'] ) {
 }
 ?>
 </head>
-<body>
+<body style="height: auto;">
 <div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
   <div class="post-detail">
     <div class="post-content">
@@ -158,7 +158,9 @@ if ( $page['theme']['base'] ) {
     const document = window.document;
     let prevHeight = -1;
     const resize = () => {
-      const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight || 0));
+      const rect = document.body.getBoundingClientRect();
+      const height = rect.height;
+//      const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight || 0));
       if (prevHeight === height) {
         return;
       }
@@ -172,7 +174,7 @@ if ( $page['theme']['base'] ) {
       resize();
     };
     const onLoad = () => {
-      console.log('iFrame.onLoad id:', <?php echo $page['post']['id'] ?>);
+      console.log('iFrame.onLoad id:', <?php echo $page['post']['id'] ?>, document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight);
       window.removeEventListener('load', onLoad);
       resize();
       document.body.addEventListener('resize', onResize, false);

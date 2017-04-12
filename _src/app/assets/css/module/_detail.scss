@@ -614,3 +614,18 @@
 .vjs-remaining-time-display {
   line-height: 30px;
 }
+
+// 記事詳細 続きを読むを表示する iframe
+// @since 2017-04-12
+// @see https://github.com/undotsushin/undotsushin/issues/1818
+// @see https://github.com/undotsushin/undotsushin/issues/1475#issuecomment-293174913
+// ---------------------------------------------------
+.post-content-iframe {
+  // p:first-child の代わりに margin 設定する
+  margin-top: 1.5em;
+}
+
+// iframe 内 - 記事詳細本文
+.single-iframe p:first-child {
+  margin-top: 0;
+}
