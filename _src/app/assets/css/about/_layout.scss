@@ -73,6 +73,7 @@ html, body {
 
 @include screen('large') {
   .header {
+    min-width: 1120px;
     // .header__inner
     &__inner {
       position: relative;
