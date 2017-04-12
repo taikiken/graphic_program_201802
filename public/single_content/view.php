@@ -152,5 +152,32 @@ if ( $page['theme']['base'] ) {
     </div><!--/.post-content-->
   </div><!--/.post-detail-->
 </div>
+<script>
+  (function(window) {
+    'use strict';
+    const document = window.document;
+    let prevHeight = -1;
+    const resize = () => {
+      const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight || 0));
+      if (prevHeight === height) {
+        return;
+      }
+      prevHeight = height;
+      window.parent.postMessage({
+        height,
+        id: <?php echo $page['post']['id'] ?>,
+      }, '/');
+    };
+    const onResize = () => {
+      resize();
+    };
+    const onLoad = () => {
+      window.removeEventListener('load', onLoad);
+      resize();
+      window.addEventListener('resize', onResize, false);
+    };
+    window.addEventListener('load', onLoad, false);
+  }(window));
+</script>
 </body>
 </html>

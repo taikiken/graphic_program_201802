@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <title>test iframe</title>
   <link rel="stylesheet" href="/assets/css/ui.css">
+  <script>
+    (function(window) {
+      'use strict';
+      var
+        document = window.document;
+      window.onmessage = (message) => {
+        console.log('message', message);
+      };
+    }(window));
+
+  </script>
 </head>
 <body>
 <div class="whole post-single normal">
@@ -12,8 +23,8 @@
       <div class="current-post">
         <div class="post-detail">
           <div class="post-content">
-            <!--pc 728, sp: 100% -->
-            <iframe src="./index.php" frameborder="0" width="100%"></iframe>
+            <iframe src="./index.php" frameborder="0" width="100%" height="100%" scrolling="no"
+            style="height: max-content;"></iframe>
           </div>
         </div>
       </div>
