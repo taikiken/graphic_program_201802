@@ -162,17 +162,17 @@ export class ComponentSinglePost extends React.Component {
     // @since 2017-01-10
     Instagram.delay();
     // 本文
-    return (
-      <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
-    );
     // return (
-    //   <div className="post-content">
-    //     <ComponentSinglePostBody
-    //       single={this.state.single}
-    //       sp={this.props.sp}
-    //     />
-    //   </div>
+    //   <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
     // );
+    return (
+      <div className="post-content">
+        <ComponentSinglePostBody
+          single={this.state.single}
+          sp={this.props.sp}
+        />
+      </div>
+    );
   }
   /**
    * `div.post-content` を出力します
