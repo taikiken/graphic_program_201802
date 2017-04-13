@@ -83,6 +83,7 @@ export class ComponentSinglePost extends React.Component {
      * @type {function}
      */
     this.boundMore = this.onReadMore.bind(this);
+    this.didLoad = false;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -98,6 +99,10 @@ export class ComponentSinglePost extends React.Component {
    * @param {SingleDae} single 記事詳細 JSON data
    */
   updateSingle(single) {
+    console.log('ComponentSinglePost.updateSingle', this.state.single.id, this.didLoad);
+    if (this.didLoad) {
+      return;
+    }
     this.setState({ single });
   }
   /**
@@ -145,6 +150,7 @@ export class ComponentSinglePost extends React.Component {
    * @return {?XML} 記事詳細本文を返します
    */
   body() {
+    this.didLoad = true;
     const single = this.state.single;
     const body = single.body;
     // data 不正
@@ -178,7 +184,7 @@ export class ComponentSinglePost extends React.Component {
     if (!single) {
       return null;
     }
-
+    console.log('ComponentSinglePost.render', this.state.single.id, single.readmore.isReadmore);
     // 「続きを読む」（提供元サイトへ別ウインドウ遷移）フラッグ ON の時は `excerpt` をコールします
     if (single.readmore.isReadmore) {
       return this.excerpt();

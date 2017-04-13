@@ -10,7 +10,7 @@
 // PC / SP 共用
 ?>
 <!DOCTYPE html>
-<html dir="ltr" lang="ja" style="height: auto;">
+<html dir="ltr" lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -137,15 +137,20 @@ if ( $page['theme']['base'] ) {
   $whole_classes[] = $page['theme']['base'];
 }
 ?>
+  <style type="text/css">
+    html, body {
+      height: 0;
+    }
+  </style>
 </head>
-<body style="height: auto;">
+<body>
 <div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
   <div class="post-detail">
     <div class="post-content">
       <?php
       // -----------------[iframe body]-------------------
       ?>
-<div class="single-iframe"><?php print_r($page['post']['body']); ?></div>
+<div id="js-single-iframe" class="single-iframe"><?php print_r($page['post']['body']); ?></div>
       <?php
       // -----------------[/iframe body]-------------------
       ?>
@@ -156,28 +161,47 @@ if ( $page['theme']['base'] ) {
   (function(window) {
     'use strict';
     const document = window.document;
+    const device = '<?php echo $page['ua_device'] ?>';
+    const offset = device === 'desktop' ? 21 : 0;
     let prevHeight = -1;
-    const resize = () => {
-      const rect = document.body.getBoundingClientRect();
-      const height = rect.height;
-//      const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight || 0));
-      if (prevHeight === height) {
-        return;
-      }
-      prevHeight = height;
+    const sendMessage = (height) => {
       window.parent.postMessage({
         height,
         id: <?php echo $page['post']['id'] ?>,
       }, '/');
     };
-    const onResize = () => {
-      resize();
+    const resize = () => {
+      const rect = document.body.getBoundingClientRect();
+//      const height = rect.height;
+      const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, rect.height));
+      console.log('iFrame.resize id:', <?php echo $page['post']['id'] ?>, document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, rect.height);
+      if (prevHeight === height) {
+        return;
+      }
+      prevHeight = height;
+      sendMessage(height);
+    };
+    const singleFrame = document.getElementById('js-single-iframe');
+    const frameHeight = () => {
+      if (!singleFrame) {
+        return;
+      }
+      const rect = singleFrame.getBoundingClientRect();
+      const height = Math.ceil(rect.height + offset);
+
+      if (prevHeight === height) {
+        return;
+      }
+      console.log('iFrame.frameHeight id:', <?php echo $page['post']['id'] ?>, height, prevHeight, document.body.scrollHeight);
+      prevHeight = height;
+      sendMessage(height);
     };
     const onLoad = () => {
-      console.log('iFrame.onLoad id:', <?php echo $page['post']['id'] ?>, document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight);
       window.removeEventListener('load', onLoad);
       resize();
-      document.body.addEventListener('resize', onResize, false);
+      setTimeout(() => {
+        frameHeight('setTimeout');
+      }, 1000);
     };
     window.addEventListener('load', onLoad, false);
   }(window));

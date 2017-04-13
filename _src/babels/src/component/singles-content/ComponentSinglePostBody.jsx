@@ -52,10 +52,14 @@ export class ComponentSinglePostBody extends React.Component {
     if (id !== this.id) {
       return;
     }
-    const height = events.height;
+    // const height = events.height;
+    const height = `${events.height}px`;
     if (height !== this.state.height) {
       this.setState({ height });
     }
+  }
+  styleHeight(height) {
+    return { height };
   }
   componentDidMount() {
     this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
@@ -63,6 +67,17 @@ export class ComponentSinglePostBody extends React.Component {
   }
   render() {
     const id = this.props.single.id;
+    // return (
+    //   <iframe
+    //     id={`single-iframe-${id}`}
+    //     src={`/single_content/?page=${id}`}
+    //     frameBorder="0"
+    //     width="100%"
+    //     scrolling="no"
+    //     height={this.state.height}
+    //     className="post-content-iframe"
+    //   />
+    // );
     return (
       <iframe
         id={`single-iframe-${id}`}
@@ -70,9 +85,21 @@ export class ComponentSinglePostBody extends React.Component {
         frameBorder="0"
         width="100%"
         scrolling="no"
-        height={this.state.height}
+        style={this.styleHeight(this.state.height)}
         className="post-content-iframe"
       />
     );
+    // return (
+    //   <iframe
+    //     id={`single-iframe-${id}`}
+    //     frameBorder="0"
+    //     width="100%"
+    //     scrolling="no"
+    //     style={this.styleHeight(this.state.height)}
+    //     className="post-content-iframe"
+    //   >
+    //     <div className="post-content" dangerouslySetInnerHTML={{__html: this.props.single.body}} />
+    //   </iframe>
+    // );
   }
 }
