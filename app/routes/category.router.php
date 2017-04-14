@@ -47,7 +47,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       $args['page']['og_image'] = 'https://sportsbull.jp/_/big6tv/og_image/og_image.png';
 
       // 直近のスケジュール表を取得する
-      $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'api/big6tv/schedule');
+      $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/schedule');
 
       /*
       六大学野球開始前
@@ -72,7 +72,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       endforeach;
 
       $current = intval(date('Ymd'));
-      // $current = 20160410;
+      // $current = 20170530;
       $length  = count($gameDataArray);
 
       // 開催前
@@ -102,7 +102,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
           // 開催中
           elseif ( $current > $value['int'] ) :
-            $currentKey = $key;
+            $currentKey = $key + 1;
           endif;
 
         endforeach;
@@ -115,11 +115,11 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
 
       // ランキングデータを取得する
-      $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'api/big6tv/ranking');
+      $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/ranking');
       $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
 
       // LIVEデータを取得する
-      $big6tvLive = @file_get_contents($app->model->property('file_get_url').'api/big6tv/live');
+      $big6tvLive = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/live');
       $args['page']['big6tv']['liveData'] = json_decode($big6tvLive, true)['response'];
 
     endif;
