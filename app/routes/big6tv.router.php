@@ -20,15 +20,15 @@ $app->group('/{slug:big6tv}',  function () use($app) {
 
 
     // LIVEデータを取得する
-    $big6tvLive = @file_get_contents($app->model->property('file_get_url').'api/big6tv/live');
+    $big6tvLive = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/live');
     $args['page']['big6tv']['liveData'] = json_decode($big6tvLive, true)['response'];
 
     // スケジュール表を取得する
-    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'api/big6tv/schedule');
+    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/schedule');
     $args['page']['big6tv']['scheduleData'] = json_decode($big6tvSchedule, true)['response'];
 
     // ランキングデータを取得する
-    $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'api/big6tv/ranking');
+    $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/ranking');
     $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
 
 
@@ -69,7 +69,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
 
 
     // 直近のスケジュール表を取得する
-    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'api/big6tv/schedule');
+    $big6tvSchedule = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/schedule');
 
 
     // ゲームを日付でフラットに
@@ -128,7 +128,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
     $args['page']['big6tv']['scheduleLatest'] = $gameData;
 
     // ランキングデータを取得する
-    $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'api/big6tv/ranking');
+    $big6tvRanking = @file_get_contents($app->model->property('file_get_url').'/api/big6tv/ranking');
     $args['page']['big6tv']['rankingData'] = json_decode($big6tvRanking, true)['response'];
 
     return $this->renderer->render($response, 'big6tv/webview.php', $args);
