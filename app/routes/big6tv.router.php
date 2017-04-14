@@ -116,7 +116,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
 
         // 開催中
         elseif ( $current > $value['int'] ) :
-          $currentKey = $key;
+          $currentKey = $key + 1;
         endif;
 
       endforeach;

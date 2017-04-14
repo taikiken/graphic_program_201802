@@ -102,7 +102,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
           // 開催中
           elseif ( $current > $value['int'] ) :
-            $currentKey = $key;
+            $currentKey = $key + 1;
           endif;
 
         endforeach;
