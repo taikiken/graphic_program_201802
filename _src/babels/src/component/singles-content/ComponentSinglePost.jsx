@@ -100,9 +100,9 @@ export class ComponentSinglePost extends React.Component {
    */
   updateSingle(single) {
     console.log('ComponentSinglePost.updateSingle', this.state.single.id, this.didLoad);
-    if (this.didLoad) {
-      return;
-    }
+    // if (this.didLoad) {
+    //   return;
+    // }
     this.setState({ single });
   }
   /**
@@ -174,6 +174,12 @@ export class ComponentSinglePost extends React.Component {
       </div>
     );
   }
+  componentDidMount() {
+    console.log('ComponentSinglePost.componentDidMount', this.state.single.id, this.didLoad);
+  }
+  componentWillUpdate(nextProps, nextState) {
+    console.log('ComponentSinglePost.componentWillUpdate', this.state.single.id, this.didLoad, nextProps, nextState);
+  }
   /**
    * `div.post-content` を出力します
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
@@ -184,7 +190,7 @@ export class ComponentSinglePost extends React.Component {
     if (!single) {
       return null;
     }
-    console.log('ComponentSinglePost.render', this.state.single.id, single.readmore.isReadmore);
+    console.log('ComponentSinglePost.render', this.state.single.id, single.readmore.isReadmore, this.didLoad);
     // 「続きを読む」（提供元サイトへ別ウインドウ遷移）フラッグ ON の時は `excerpt` をコールします
     if (single.readmore.isReadmore) {
       return this.excerpt();

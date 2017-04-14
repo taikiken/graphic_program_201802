@@ -31,6 +31,8 @@ import { ComponentSingles } from '../../component/singles/ComponentSingles';
 
 // React
 const ReactDOM = self.ReactDOM;
+// eslint-disable-next-line no-unused-vars
+const React = self.React;
 
 /**
  * 記事詳細・次の記事一覧を出力します
@@ -163,27 +165,41 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       articlesList.push(dae);
     } );
 
-    // this._articleRendered が null の時だけ ReactDOM.render する
-    if (this.articleRendered === null ) {
-      this.articleRendered = ReactDOM.render(
-        <ComponentSingles
-          list={articlesList}
-          offset={this.request.offset}
-          length={this.request.length}
-          action={this.action}
-          callback={this.boundSafely}
-          boundMore={this.boundMore}
-          single={this.single}
-          home={false}
-          sign={User.sign}
-        />,
-        this.element
-      );
-    } else {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
-    }
+    // // this._articleRendered が null の時だけ ReactDOM.render する
+    // if (this.articleRendered === null ) {
+    //   this.articleRendered = ReactDOM.render(
+    //     <ComponentSingles
+    //       list={articlesList}
+    //       offset={this.request.offset}
+    //       length={this.request.length}
+    //       action={this.action}
+    //       callback={this.boundSafely}
+    //       boundMore={this.boundMore}
+    //       single={this.single}
+    //       home={false}
+    //       sign={User.sign}
+    //     />,
+    //     this.element
+    //   );
+    // } else {
+    //   // instance が存在するので
+    //   // state update でコンテナを追加する
+    //   this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
+    // }
+    ReactDOM.render(
+      <ComponentSingles
+        list={articlesList}
+        offset={this.request.offset}
+        length={this.request.length}
+        action={this.action}
+        callback={this.boundSafely}
+        boundMore={this.boundMore}
+        single={this.single}
+        home={false}
+        sign={User.sign}
+      />,
+      this.element
+    );
   }
   /**
    * 外部クラスから呼び出されます、既存のリストを使い再描画を行います

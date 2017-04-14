@@ -96,18 +96,6 @@ export class ComponentSingles extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * delegate, mount 後に呼び出されます<r>
-   * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
-   */
-  componentDidMount() {
-    this.props.callback(View.DID_MOUNT);
-    // hasNext を元に More View button の表示非表示を決める
-    this.props.boundMore(this.props.action.hasNext());
-    // @since 2016-11-04
-    // Facebook like
-    Fb.init();
-  }
   // ---------------------------------------------------
   // 3件以下
   /**
@@ -234,19 +222,43 @@ export class ComponentSingles extends React.Component {
     );
   }
   // ---------------------------------------------------
+  // /**
+  //  * 次の読み込みから表示を更新します
+  //  * @param {Array} list 表示リスト
+  //  * @param {number} offset 読み込み開始位置
+  //  * @param {number} length 読み込み数
+  //  */
+  // updateList(list, offset, length) {
+  //   // state を変更し appendChild + isotope を行う
+  //   this.setState({ list, offset, length });
+  //   // hasNext を元に More View button の表示非表示を決める
+  //   this.props.boundMore(this.props.action.hasNext());
+  //   // @since 2016-11-04
+  //   Fb.delay();
+  // }
+  // ---------------------------------------------------
+  // delegate
   /**
-   * 次の読み込みから表示を更新します
-   * @param {Array} list 表示リスト
-   * @param {number} offset 読み込み開始位置
-   * @param {number} length 読み込み数
+   * delegate, mount 後に呼び出されます<r>
+   * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
    */
-  updateList(list, offset, length) {
-    // state を変更し appendChild + isotope を行う
-    this.setState({ list, offset, length });
+  componentDidMount() {
+    this.props.callback(View.DID_MOUNT);
     // hasNext を元に More View button の表示非表示を決める
     this.props.boundMore(this.props.action.hasNext());
     // @since 2016-11-04
-    Fb.delay();
+    // Facebook like
+    Fb.init();
+  }
+  componentWillUpdate(nextProps) {
+    if (nextProps.offset !== this.state.offset) {
+      // state を変更し appendChild + isotope を行う
+      this.setState({ list: nextProps.list, offset: nextProps.offset, length: nextProps.length });
+      // hasNext を元に More View button の表示非表示を決める
+      this.props.boundMore(this.props.action.hasNext());
+      // @since 2016-11-04
+      Fb.delay();
+    }
   }
   /**
    * desktop: 記事詳細「次の記事一覧」を出力します
