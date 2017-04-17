@@ -92,19 +92,19 @@ export class ComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * マウント後に Facebook like button を活性化するために `FB.init` を行います
-   */
-  componentDidMount() {
-    Fb.init();
-  }
-  /**
-   * state.single 情報を更新し再描画します
-   * @param {SingleDae} single state.single
-   */
-  updateSingle(single) {
-    this.setState({ single });
-  }
+  // /**
+  //  * マウント後に Facebook like button を活性化するために `FB.init` を行います
+  //  */
+  // componentDidMount() {
+  //   Fb.init();
+  // }
+  // /**
+  //  * state.single 情報を更新し再描画します
+  //  * @param {SingleDae} single state.single
+  //  */
+  // updateSingle(single) {
+  //   this.setState({ single });
+  // }
   /**
    * div.singles-content, 本文を
    * @return {XML} div.singles-content

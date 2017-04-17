@@ -103,7 +103,7 @@ export class ComponentSinglePost extends React.Component {
     // if (this.didLoad) {
     //   return;
     // }
-    this.setState({ single });
+    // this.setState({ single });
   }
   /**
    * external read more click で ga tag を送信します<br>

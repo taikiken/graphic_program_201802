@@ -251,10 +251,12 @@ export class ComponentSingles extends React.Component {
     Fb.init();
   }
   componentWillUpdate(nextProps) {
+    console.log('ComponentSingles.componentWillUpdate ------------------------------', nextProps.offset, this.state.offset);
     if (nextProps.offset !== this.state.offset) {
       // state を変更し appendChild + isotope を行う
       this.setState({ list: nextProps.list, offset: nextProps.offset, length: nextProps.length });
       // hasNext を元に More View button の表示非表示を決める
+      console.log('ComponentSingles.componentWillUpdate', nextProps.offset, this.state.offset, this.props.action.hasNext());
       this.props.boundMore(this.props.action.hasNext());
       // @since 2016-11-04
       Fb.delay();
