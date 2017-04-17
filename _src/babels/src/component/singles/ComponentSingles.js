@@ -92,6 +92,8 @@ export class ComponentSingles extends React.Component {
      * @type {SinglesManager}
      */
     this.manager = SinglesManager.factory(props.single);
+    this.offset = 0;
+    this.timer = 0;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -236,6 +238,12 @@ export class ComponentSingles extends React.Component {
   //   // @since 2016-11-04
   //   Fb.delay();
   // }
+  delayMore() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.props.boundMore(this.props.action.hasNext());
+    }, 500);
+  }
   // ---------------------------------------------------
   // delegate
   /**
@@ -251,13 +259,15 @@ export class ComponentSingles extends React.Component {
     Fb.init();
   }
   componentWillUpdate(nextProps) {
-    console.log('ComponentSingles.componentWillUpdate ------------------------------', nextProps.offset, this.state.offset);
-    if (nextProps.offset !== this.state.offset) {
+    console.log('ComponentSingles.componentWillUpdate ------------------------------', nextProps.offset, this.offset);
+    if (nextProps.offset !== this.offset) {
+      this.offset = nextProps.offset;
       // state を変更し appendChild + isotope を行う
-      this.setState({ list: nextProps.list, offset: nextProps.offset, length: nextProps.length });
+      this.setState({ offset: nextProps.offset, list: nextProps.list, length: nextProps.length });
       // hasNext を元に More View button の表示非表示を決める
-      console.log('ComponentSingles.componentWillUpdate', nextProps.offset, this.state.offset, this.props.action.hasNext());
-      this.props.boundMore(this.props.action.hasNext());
+      console.log('ComponentSingles.componentWillUpdate', nextProps.offset, this.offset, this.props.action.hasNext());
+      // this.props.boundMore(this.props.action.hasNext());
+      this.delayMore();
       // @since 2016-11-04
       Fb.delay();
     }
