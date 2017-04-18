@@ -202,14 +202,14 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       this.element
     );
   }
-  /**
-   * 外部クラスから呼び出されます、既存のリストを使い再描画を行います
-   * */
-  update() {
-    if (this.articleRendered !== null ) {
-      // instance が存在するので
-      // state update でコンテナを追加する
-      this.articleRendered.updateList(this.articles, this.request.offset, this.request.length);
-    }
-  }
+  // /**
+  //  * 外部クラスから呼び出されます、既存のリストを使い再描画を行います
+  //  * */
+  // update() {
+  //   if (this.articleRendered !== null ) {
+  //     // instance が存在するので
+  //     // state update でコンテナを追加する
+  //     this.articleRendered.updateList(this.articles, this.request.offset, this.request.length);
+  //   }
+  // }
 }
