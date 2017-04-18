@@ -110,7 +110,7 @@ class ViewModel {
     else :
 
       # LOCAL以外は自サーバから file_get_content する
-      $this->default['file_get_url'] = $this->default['site_url'];
+      $this->default['file_get_url'] = $this->get_site_url(false);
 
     endif;
 
@@ -183,7 +183,7 @@ class ViewModel {
   *
   * @return string  http|https://[host]:[port]
   */
-  public function get_site_url() {
+  public function get_site_url($addSlash = true) {
 
     // PRODUCTIONで `$_SERVER["HTTPS"]` が取得できてないようなので強制的にhttps
     if ( !empty($_SERVER["HTTPS"]) || UT_ENV == 'PRODUCTION' ) :
@@ -193,7 +193,12 @@ class ViewModel {
     endif;
 
     $host = $_SERVER['HTTP_HOST'];
-    return $protocol.$host.'/';
+
+    if ( $addSlash ) :
+      return $protocol.$host.'/';
+    else :
+      return $protocol.$host;
+    endif;
   }
 
 
