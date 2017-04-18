@@ -281,13 +281,13 @@ export class ComponentSingles extends React.Component {
    * @since 2017-04-17
    */
   componentWillReceiveProps(nextProps) {
-    console.log('ComponentSingles.componentWillReceiveProps ------------------------------', nextProps.offset, this.offset);
+    // console.log('ComponentSingles.componentWillReceiveProps ------------------------------', nextProps.offset, this.offset);
     if (nextProps.offset !== this.offset) {
       this.offset = nextProps.offset;
       // state を変更し appendChild + isotope を行う
       this.setState({ offset: nextProps.offset, list: nextProps.list, length: nextProps.length });
       // hasNext を元にMore View button の表示非表示を決める
-      console.log('ComponentSingles.componentWillReceiveProps', nextProps.offset, this.offset, this.props.action.hasNext());
+      // console.log('ComponentSingles.componentWillReceiveProps', nextProps.offset, this.offset, this.props.action.hasNext());
       // this.props.boundMore(this.props.action.hasNext());
       this.delayMore();
       // @since 2016-11-04

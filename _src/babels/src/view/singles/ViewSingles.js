@@ -186,7 +186,7 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
     //   // state update でコンテナを追加する
     //   this.articleRendered.updateList(articlesList, this.request.offset, this.request.length);
     // }
-    console.log('ViewSingle.render ++++++++++++++++++++++++++++++++++', this.request.offset, articlesList);
+    // console.log('ViewSingle.render ++++++++++++++++++++++++++++++++++', this.request.offset, articlesList);
     ReactDOM.render(
       <ComponentSingles
         list={articlesList}

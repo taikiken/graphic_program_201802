@@ -83,7 +83,19 @@ export class ComponentSinglePost extends React.Component {
      * @type {function}
      */
     this.boundMore = this.onReadMore.bind(this);
+    // below 2017-04-17 - 「続きを読む」iframe 対応
+    /**
+     * iframe 表示フラッグ
+     * @type {boolean}
+     * @since 2017-04-17
+     */
     this.didLoad = false;
+    /**
+     * 記事id - int 保証
+     * @type {Number}
+     * @since 2017-04-17
+     */
+    this.id = parseInt(props.single.id, 10);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -94,17 +106,17 @@ export class ComponentSinglePost extends React.Component {
   // componentDidMount() {
   //   // this.props.callback(View.DID_MOUNT);
   // }
-  /**
-   * 記事詳細本文を更新します
-   * @param {SingleDae} single 記事詳細 JSON data
-   */
-  updateSingle(single) {
-    console.log('ComponentSinglePost.updateSingle', this.state.single.id, this.didLoad);
-    // if (this.didLoad) {
-    //   return;
-    // }
-    // this.setState({ single });
-  }
+  // /**
+  //  * 記事詳細本文を更新します
+  //  * @param {SingleDae} single 記事詳細 JSON data
+  //  */
+  // updateSingle(single) {
+  //   console.log('ComponentSinglePost.updateSingle', this.state.single.id, this.didLoad);
+  //   // if (this.didLoad) {
+  //   //   return;
+  //   // }
+  //   // this.setState({ single });
+  // }
   /**
    * external read more click で ga tag を送信します<br>
    * `ViewSingle.onExternal` {@link ViewSingle.onExternal} と同じです
@@ -129,6 +141,7 @@ export class ComponentSinglePost extends React.Component {
   excerpt() {
     const single = this.state.single;
     const description = single.description;
+    // console.log('ComponentSinglePost.excerpt', this.id, this.didLoad);
     // data 不正
     if (!description) {
       return null;
@@ -153,6 +166,7 @@ export class ComponentSinglePost extends React.Component {
     this.didLoad = true;
     const single = this.state.single;
     const body = single.body;
+    // console.log('ComponentSinglePost.body', this.id, this.didLoad);
     // data 不正
     if (!body) {
       return null;
@@ -165,6 +179,8 @@ export class ComponentSinglePost extends React.Component {
     // return (
     //   <div className="post-content" dangerouslySetInnerHTML={{__html: body}} />
     // );
+    // iframe component
+    // @since 2017-04-17
     return (
       <div className="post-content">
         <ComponentSinglePostBody
@@ -174,15 +190,21 @@ export class ComponentSinglePost extends React.Component {
       </div>
     );
   }
+  // ------
+  // delegate
   // componentDidMount() {
   //   console.log('ComponentSinglePost.componentDidMount', this.state.single.id, this.didLoad);
   // }
   // componentWillUpdate(nextProps, nextState) {
   //   console.log('ComponentSinglePost.componentWillUpdate', this.state.single.id, this.didLoad, nextProps, nextState);
   // }
-  componentShouldUpdate() {
-    return !this.didLoad;
-  }
+  // shouldComponentUpdate() {
+  //   console.log('ComponentSinglePost.shouldComponentUpdate ++++', this.id, this.didLoad);
+  //   return !this.didLoad;
+  // }
+  // componentWillUnmount() {
+  //   console.log('ComponentSinglePost.componentWillUnmount =====', this.id);
+  // }
   /**
    * `div.post-content` を出力します
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
@@ -193,7 +215,7 @@ export class ComponentSinglePost extends React.Component {
     if (!single) {
       return null;
     }
-    console.log('ComponentSinglePost.render', this.state.single.id, single.readmore.isReadmore, this.didLoad);
+    // console.log('ComponentSinglePost.render', this.state.single.id, single.readmore.isReadmore, this.didLoad);
     // 「続きを読む」（提供元サイトへ別ウインドウ遷移）フラッグ ON の時は `excerpt` をコールします
     if (single.readmore.isReadmore) {
       return this.excerpt();

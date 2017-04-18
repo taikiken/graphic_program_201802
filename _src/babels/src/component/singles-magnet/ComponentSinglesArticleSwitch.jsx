@@ -19,6 +19,8 @@ import { ComponentSinglesArticleExcerpt } from './ComponentSinglesArticleExcerpt
 // component/singles-content
 import { ComponentSingleContent } from '../singles-content/ComponentSingleContent';
 import { ComponentSingleSNS } from '../singles-content/ComponentSingleSNS';
+// state record
+import { RecordSingleState } from '../singles-content/RecordSingleState';
 
 // // util
 import { Scroll } from '../../util/Scroll';
@@ -113,6 +115,19 @@ export class ComponentSinglesArticleSwitch extends React.Component {
      * @since 2017-03-05
      */
     this.external = Validate.include(props.single.body, '<video data-video-id="');
+    // ---
+    // below 2017-04-17 - 「続きを読む」iframe 対応
+    // recovery state
+    /**
+     * 情報を保持するための unique id - class name + 記事id
+     * @type {string}
+     * @since 2017-04-17
+     */
+    this.id = `ComponentSinglesArticleSwitch-${props.single.id}`;
+    const record = RecordSingleState.restore(this.id);
+    if (record) {
+      this.state = record;
+    }
   }
   // componentDidMount() {
   //   // -----------------------
@@ -232,7 +247,9 @@ export class ComponentSinglesArticleSwitch extends React.Component {
     // this.y = Scroll.y;
     const y = Scroll.y;
     // contents 詳細切り替え
-    this.setState({ excerpt: !this.state.excerpt });
+    // this.setState({ excerpt: !this.state.excerpt });
+    // @since 2017-04-17 - false にしかならないので変更する
+    this.setState({ excerpt: false });
     // クリック後遅延してscroll移動
     // @since 2017-01-17
     Scroll.motion(y, 0.1, 0.25);
@@ -286,11 +303,22 @@ export class ComponentSinglesArticleSwitch extends React.Component {
       />
     );
   }
+  // ------
+  // delegate
+  /**
+   * unmount 時に state を保存します
+   * @since 2017-04-17
+   */
+  componentWillUnmount() {
+    // console.log('ComponentSinglesArticleSwitch.componentWillUnmount =====', this.id, this.state.excerpt);
+    RecordSingleState.store(this.id, this.state);
+  }
   /**
    * excerpt / 本文 のどちらかを表示します
    * @return {XML} excerpt / content を実行し出力します
    */
   render() {
+    // console.log('ComponentSinglesArticleSwitch.render', this.id, this.state);
     const output = this.state.excerpt ? this.excerpt : this.content;
     return (
       <div
@@ -299,10 +327,5 @@ export class ComponentSinglesArticleSwitch extends React.Component {
         {output()}
       </div>
     );
-    // if (this.state.excerpt) {
-    //   return this.excerpt();
-    // } else {
-    //   return this.content();
-    // }
   }
 }

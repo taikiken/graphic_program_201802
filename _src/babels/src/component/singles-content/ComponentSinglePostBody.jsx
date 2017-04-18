@@ -16,6 +16,10 @@ import { IFrameStatus } from '../../event/IFrameStatus';
 // React
 const React = self.React;
 
+/**
+ * 続きを読む」iframe 対応
+ * @since 2017-04-17
+ */
 export class ComponentSinglePostBody extends React.Component {
   // ---------------------------------------------------
   //  STATIC GETTER / SETTER
@@ -35,19 +39,50 @@ export class ComponentSinglePostBody extends React.Component {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
+  /**
+   * default property を保存し必要な関数・変数を準備します
+   * @param {Object} props React props プロパティー {@link ComponentSinglePostBody.propTypes}
+   */
   constructor(props) {
     super(props);
+    /**
+     * React state
+     * - height @type {string} - iframe height, default: 100%
+     *   iframe.onload 後に再設定します
+     * @type {{height: string}}
+     */
     this.state = {
       height: '100%'
     };
+    /**
+     * 記事id - int 保証
+     * @type {Number}
+     */
     this.id = parseInt(props.single.id, 10);
+    /**
+     * window.onmessage ラッパー {@link IFrameStatus}.UPDATE event handler
+     * iframe ロード後に iframe 内関数から window.postMessage を受診します
+     * @type {Function}
+     */
     this.boundUpdate = this.onUpdate.bind(this);
     this.frameStatus = IFrameStatus.factory();
+    this.didMount = false;
   }
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * IFrameStatus.UPDATE event handler
+   * - events.id と this.id が等価の時に処理します
+   * - events.height と this.state.height が不等価の時に処理します
+   * iframe 高さを設定するために state を更新します
+   * @param {Object} events IFrameStatus.UPDATE event object
+   */
   onUpdate(events) {
+    // console.log('ComponentSinglePostBody.onUpdate', this.id, events.id, this.didMount, events.height);
+    if (!this.didMount) {
+      return;
+    }
     const id = events.id;
     if (id !== this.id) {
       return;
@@ -58,29 +93,30 @@ export class ComponentSinglePostBody extends React.Component {
       this.setState({ height });
     }
   }
-  styleHeight(height) {
-    return { height };
-  }
+  // ---
+  // delegate
+  /**
+   * delegate - mount 後に IFrameStatus.UPDATE event handler を bind し didMount フラッグを true に設定します
+   */
   componentDidMount() {
     this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
     this.frameStatus.on(IFrameStatus.UPDATE, this.boundUpdate);
+    this.didMount = true;
   }
-  componentShouldUpdate() {
-
+  /**
+   * unmount 時に IFrameStatus.UPDATE イベントハンドラを unbind します
+   */
+  componentWillUnmount() {
+    // console.log('ComponentSinglePostBody.componentWillUnmount', this.id);
+    this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
   }
+  /**
+   * iframe.post-content-iframe をレンダリングします
+   * - src - `/single_content/`
+   * @returns {XML} iframe を返します
+   */
   render() {
     const id = this.props.single.id;
-    // return (
-    //   <iframe
-    //     id={`single-iframe-${id}`}
-    //     src={`/single_content/?page=${id}`}
-    //     frameBorder="0"
-    //     width="100%"
-    //     scrolling="no"
-    //     height={this.state.height}
-    //     className="post-content-iframe"
-    //   />
-    // );
     return (
       <iframe
         id={`single-iframe-${id}`}
@@ -88,21 +124,9 @@ export class ComponentSinglePostBody extends React.Component {
         frameBorder="0"
         width="100%"
         scrolling="no"
-        style={this.styleHeight(this.state.height)}
+        style={{height: this.state.height}}
         className="post-content-iframe"
       />
     );
-    // return (
-    //   <iframe
-    //     id={`single-iframe-${id}`}
-    //     frameBorder="0"
-    //     width="100%"
-    //     scrolling="no"
-    //     style={this.styleHeight(this.state.height)}
-    //     className="post-content-iframe"
-    //   >
-    //     <div className="post-content" dangerouslySetInnerHTML={{__html: this.props.single.body}} />
-    //   </iframe>
-    // );
   }
 }

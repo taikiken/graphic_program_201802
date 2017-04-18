@@ -21,7 +21,7 @@ import { ComponentSingleProvider } from './ComponentSingleProvider';
 import { ComponentSingleFooter } from '../singles/ComponentSingleFooter';
 
 // util
-import { Fb } from '../../util/Fb';
+// import { Fb } from '../../util/Fb';
 
 // React
 const React = self.React;
