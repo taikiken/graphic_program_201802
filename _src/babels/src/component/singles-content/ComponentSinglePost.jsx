@@ -174,11 +174,14 @@ export class ComponentSinglePost extends React.Component {
       </div>
     );
   }
-  componentDidMount() {
-    console.log('ComponentSinglePost.componentDidMount', this.state.single.id, this.didLoad);
-  }
-  componentWillUpdate(nextProps, nextState) {
-    console.log('ComponentSinglePost.componentWillUpdate', this.state.single.id, this.didLoad, nextProps, nextState);
+  // componentDidMount() {
+  //   console.log('ComponentSinglePost.componentDidMount', this.state.single.id, this.didLoad);
+  // }
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log('ComponentSinglePost.componentWillUpdate', this.state.single.id, this.didLoad, nextProps, nextState);
+  // }
+  componentShouldUpdate() {
+    return !this.didLoad;
   }
   /**
    * `div.post-content` を出力します

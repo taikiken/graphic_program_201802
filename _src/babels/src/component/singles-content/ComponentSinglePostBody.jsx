@@ -65,6 +65,9 @@ export class ComponentSinglePostBody extends React.Component {
     this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
     this.frameStatus.on(IFrameStatus.UPDATE, this.boundUpdate);
   }
+  componentShouldUpdate() {
+
+  }
   render() {
     const id = this.props.single.id;
     // return (
