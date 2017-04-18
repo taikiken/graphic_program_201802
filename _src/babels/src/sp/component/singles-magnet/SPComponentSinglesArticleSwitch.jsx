@@ -16,6 +16,8 @@ import { Message } from '../../../app/const/Message';
 // component/singles
 import { ComponentSinglesArticleExcerpt } from '../../../component/singles-magnet/ComponentSinglesArticleExcerpt';
 
+import { ComponentSingleSNS } from '../../../component/singles-content/ComponentSingleSNS';
+
 // component/singles-content
 import { SPComponentSingleContent } from '../singles-content/SPComponentSingleContent';
 import { SPComponentSinglesSNSBelow } from '../singles-content/SPComponentSinglesSNSBelow';
@@ -246,7 +248,7 @@ export class SPComponentSinglesArticleSwitch extends React.Component {
         />
         {/* SNS */}
         <ComponentSingleSNS
-          single={single}
+          single={single}zi
           index={this.state.index}
         />
       </div>
