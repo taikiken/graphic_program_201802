@@ -92,11 +92,43 @@ export class Snap extends EventDispatcher {
      */
     this.page = page;
     // -------------------------------
+    // --- --- ---
+    // below 2017-04-17 - 「続きを読む」iframe 対応
+    /**
+     * bound buttonStart - TopButton.START event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
     this.boundButtonStart = this.buttonStart.bind(this);
+    /**
+     * bound buttonComplete - TopButton.COMPLETE event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
     this.boundButtonComplete = this.buttonComplete.bind(this);
+    /**
+     * bound onHit - Hit.COLLISION event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
     this.boundHit = this.onHit.bind(this);
+    /**
+     * bound onHit - Hit.NO_COLLISION event handler
+     * @type {Function}
+     * @since 2017-04-17
+     */
     this.boundNoHit = this.noHit.bind(this);
+    /**
+     * TopButton instance
+     * @type {?TopButton}
+     * @since 2017-04-17
+     */
     this.topButton = null;
+    /**
+     * Hit instance
+     * @type {?Hit}
+     * @since 2017-04-17
+     */
     this.hit = null;
   }
   // ---------------------------------------------------
@@ -138,6 +170,10 @@ export class Snap extends EventDispatcher {
     // hit.start();
     this.start();
   }
+  /**
+   * 監視を始めます
+   * @since 2017-04-17
+   */
   start() {
     // page top click listener
     // page top animation 中に snap しないようにします
@@ -153,6 +189,10 @@ export class Snap extends EventDispatcher {
     hit.on(Hit.NO_COLLISION, this.boundNoHit);
     hit.start();
   }
+  /**
+   * 監視を止めます
+   * @since 2017-04-17
+   */
   stop() {
     const topButton = this.topButton;
     topButton.off(TopButton.START, this.boundButtonStart);

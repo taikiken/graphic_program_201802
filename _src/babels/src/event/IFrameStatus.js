@@ -26,10 +26,18 @@ const _symbol = Symbol('IFrameStatus singleton Symbol');
  */
 let _instance = null;
 
+/**
+ * iframe 内部関数からの通知を `window.onmessage` から取得します
+ * @since 2017-04-17
+ */
 export class IFrameStatus extends EventDispatcher {
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
+  /**
+   * singleton instance を返します
+   * @returns {?IFrameStatus} singleton instance
+   */
   static factory() {
     if (_instance === null) {
       _instance = new IFrameStatus(_symbol);
@@ -50,6 +58,11 @@ export class IFrameStatus extends EventDispatcher {
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
+  /**
+   * singleton を保証し `window.onmessage` を監視します
+   * @param {Symbol} target singleton のための Symbol
+   * @returns {?IFrameStatus} singleton
+   */
   constructor(target) {
     if (_symbol !== target) {
       throw new Error( 'CommentStatus is static Class. not use new IFrameStatus(). instead IFrameStatus.factory()' );
@@ -69,9 +82,18 @@ export class IFrameStatus extends EventDispatcher {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
+  /**
+   * window.message を受診し IFrameStatus.UPDATE を発火します
+   * @param {number} id 記事id int 保証
+   * @param {number} height iframe 高さ
+   */
   update(id, height) {
     this.dispatch({ id, height, type: IFrameStatus.UPDATE });
   }
+  /**
+   * window.onmessage event handler
+   * @param {Event} event event.data から 記事id と iframe.height を取り出し `this.update` を実行します
+   */
   onMessage(event) {
     const data = event.data;
     if (data.height && data.id) {
