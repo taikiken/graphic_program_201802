@@ -689,23 +689,26 @@ iframe.post-content-iframe {
 }
 
 // iframe .single-iframe
-// fadein
 .single-iframe {
+  p:first-child {
+    margin-top: 0;
+  }
+}
+
+// fadein
+// .post-content > iframe.single-iframe
+.post-content {
   transition-property: opacity;
   transition-duration: 0.5s;
   transition-timing-function: linear;
   opacity: 1;
   background-color: #fff;
   // iframe 内 - 記事詳細本文
-  p:first-child {
-    margin-top: 0;
-  }
 }
-
 body.iframe-loading {
   background: url("/assets/images/common/preloader.gif") no-repeat center center;
   // iframe
-  .single-iframe {
+  .post-content {
     opacity: 0;
   }
 }

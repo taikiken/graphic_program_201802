@@ -639,7 +639,7 @@ iframe.post-content-iframe {
 }
 
 // fadein
-.single-iframe {
+.post-content {
   transition-property: opacity;
   transition-duration: 0.5s;
   transition-timing-function: linear;
@@ -650,7 +650,7 @@ iframe.post-content-iframe {
 body.iframe-loading {
   background: url("/assets/images/common/preloader.gif") no-repeat center center;
   // iframe
-  .single-iframe {
+  .post-content {
     opacity: 0;
   }
 }

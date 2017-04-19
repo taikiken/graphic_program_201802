@@ -160,8 +160,13 @@ if ( $page['theme']['base'] ) {
   $whole_classes[] = $page['theme']['base'];
 }
 ?>
+<style type="text/css">
+  html, body {
+    height: auto;
+  }
+</style>
 </head>
-<body class="loading">
+<body class="iframe-loading">
 <div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
   <div class="post-detail">
     <div class="post-content">
