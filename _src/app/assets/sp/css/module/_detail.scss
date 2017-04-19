@@ -675,3 +675,37 @@
     }
   }
 } //.loaded-post
+
+
+// 記事詳細 続きを読むを表示する iframe
+// @since 2017-04-12
+// @see https://github.com/undotsushin/undotsushin/issues/1818
+// @see https://github.com/undotsushin/undotsushin/issues/1475#issuecomment-293174913
+// ---------------------------------------------------
+
+// iframe
+iframe.post-content-iframe {
+  transition: height 0.3s linear;
+}
+
+// iframe .single-iframe
+// fadein
+.single-iframe {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  opacity: 1;
+  background-color: #fff;
+  // iframe 内 - 記事詳細本文
+  p:first-child {
+    margin-top: 0;
+  }
+}
+
+body.loading {
+  background: url("/assets/images/common/preloader.gif") no-repeat center center;
+  // iframe
+  .single-iframe {
+    opacity: 0;
+  }
+}

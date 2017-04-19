@@ -14,6 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="/assets/js/libs/sagen/sagen.min.js" id="sagen"></script>
 <?php
 // copy from `/app/template/_head.php`
 if ( $page['ua'] == 'mobile' ) : ?>
@@ -25,7 +26,29 @@ if ( $page['ua'] == 'mobile' ) : ?>
 
 <meta name="keywords" content="<?php echo $page['keywords']; ?>">
 <meta name="description" content="<?php echo $page['og_description']; ?>">
-<link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+<?php
+// --------------------------
+// css 切替
+if ($page['ua_device'] == 'desktop') :
+  // desktop
+?>
+  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+<?php
+else :
+  // mobile
+  // .cms_widget:first-child の margin-top: 1em で高さ取得ができないので取る
+?>
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
+  <style>
+    .post-detail .post-content .cms_widget:first-child,
+    .post-detail .post-content .cms_video:first-child {
+      margin-top: 0;
+    }
+  </style>
+<?php
+endif;
+// --------------------------
+?>
 <?php
 // ---------------------------------------------
 // copy from `/app/template/desktop/_header.php`
@@ -137,13 +160,8 @@ if ( $page['theme']['base'] ) {
   $whole_classes[] = $page['theme']['base'];
 }
 ?>
-  <style type="text/css">
-    html, body {
-      height: 0;
-    }
-  </style>
 </head>
-<body>
+<body class="loading">
 <div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
   <div class="post-detail">
     <div class="post-content">
@@ -157,54 +175,6 @@ if ( $page['theme']['base'] ) {
     </div><!--/.post-content-->
   </div><!--/.post-detail-->
 </div>
-<script>
-  (function(window) {
-    'use strict';
-    const document = window.document;
-    const device = '<?php echo $page['ua_device'] ?>';
-    const offset = device === 'desktop' ? 21 : 0;
-    let prevHeight = -1;
-    const sendMessage = (height) => {
-      window.parent.postMessage({
-        height,
-        id: <?php echo $page['post']['id'] ?>,
-      }, '/');
-    };
-    const resize = () => {
-      const rect = document.body.getBoundingClientRect();
-//      const height = rect.height;
-      const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, rect.height));
-      console.log('iFrame.resize id:', <?php echo $page['post']['id'] ?>, document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, rect.height);
-      if (prevHeight === height) {
-        return;
-      }
-      prevHeight = height;
-      sendMessage(height);
-    };
-    const singleFrame = document.getElementById('js-single-iframe');
-    const frameHeight = () => {
-      if (!singleFrame) {
-        return;
-      }
-      const rect = singleFrame.getBoundingClientRect();
-      const height = Math.ceil(rect.height + offset);
-
-      if (prevHeight === height) {
-        return;
-      }
-      console.log('iFrame.frameHeight id:', <?php echo $page['post']['id'] ?>, height, prevHeight, document.body.scrollHeight);
-      prevHeight = height;
-      sendMessage(height);
-    };
-    const onLoad = () => {
-      window.removeEventListener('load', onLoad);
-      resize();
-      setTimeout(() => {
-        frameHeight('setTimeout');
-      }, 1000);
-    };
-    window.addEventListener('load', onLoad, false);
-  }(window));
-</script>
+<script id="js-content_single_iframe" src="/assets/js/content_single_iframe.bundle.js?v=<?php echo $page['version']; ?>" data-id="<?php echo $page['post']['id']; ?>"></script>
 </body>
 </html>
