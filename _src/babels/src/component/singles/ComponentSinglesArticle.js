@@ -114,7 +114,7 @@ export class ComponentSinglesArticle extends React.Component {
      * Ga tag 送信済みフラッグ
      * @type {boolean}
      */
-    this.sended = false;
+    this.sendGa = false;
     //
     // /**
     //  * SPA のための管理クラス
@@ -183,7 +183,7 @@ export class ComponentSinglesArticle extends React.Component {
    *  rect: Object}} events Hit events
    */
   onHit(events) {
-    if (this.sended) {
+    if (this.sendGa) {
       return;
     }
 
@@ -191,16 +191,16 @@ export class ComponentSinglesArticle extends React.Component {
     const top = rect.top;
 
     if (Math.abs(top) <= 50) {
-      this.sended = true;
+      this.sendGa = true;
       // ViewSingle.ga(this.state.single);
       // @since 2016-10-05
       const single = this.state.single;
-      Ga.single(single, 'ComponentSinglesArticle.onHit');
+      Ga.single(single, `ComponentSinglesArticle.onHit single: ${single.id}`);
       // ---------------------
       // https://github.com/undotsushin/undotsushin/issues/1151
       // @since  2016-11-15 title added
       const page = new PageTitle(single.title, single.categories.label);
-      Ga.addPage(single.id, 'ComponentSinglesArticle.onHit', page.title());
+      Ga.addPage(single.id, `ComponentSinglesArticle.onHit addPage: ${single.id}`, page.title());
       // ---------------------
       this.dispose();
     }

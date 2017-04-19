@@ -311,17 +311,18 @@ export class SPComponentSinglesArticleMagnet extends React.Component {
     this.sendGa = true;
     // send
     const single = this.state.single;
-    Ga.single(single, 'SPComponentSinglesArticle.ga');
+    Ga.single(single, `SPComponentSinglesArticleMagnet.ga single: ${single.id}`);
     // ---------------------
     // https://github.com/undotsushin/undotsushin/issues/1151
     // @since  2016-11-15 title added
     const page = new PageTitle(single.title, single.categories.label);
-    Ga.addPage(single.id, 'SPComponentSinglesArticle.ga', page.title());
+    Ga.addPage(single.id, `SPComponentSinglesArticleMagnet.ga addPage: ${single.id}`, page.title());
     // ---------------------
     this.cancelHit();
   }
   /**
    * Hit.COLLISION event handler を unbind します
+   * @since 2017-04-17 function name changed from `cancel`
    */
   cancelHit() {
     const hit = this.hit;

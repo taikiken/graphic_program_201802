@@ -25,7 +25,7 @@ import { ComponentSingleProvider } from '../../../component/singles-content/Comp
 import { ComponentSingleFooter } from '../../../component/singles/ComponentSingleFooter';
 
 // util
-import { Fb } from '../../../util/Fb';
+// import { Fb } from '../../../util/Fb';
 
 // React
 const React = self.React;
@@ -38,6 +38,7 @@ const React = self.React;
  * <SPComponentSingleContent/>
  *  <SPComponentSinglesSNSAbove/>
  *  <ComponentSinglePost/>
+ *    <ComponentSinglePostBody/>
  *  <ComponentSingleProvider/>
  *  <ComponentSingleFooter/>
  *  <SPComponentSinglesSNSBelow/>
@@ -47,6 +48,7 @@ const React = self.React;
  * ```
  * {@link SPComponentSinglesSNSAbove},
  * {@link ComponentSinglePost},
+ * {@link ComponentSinglePostBody},
  * {@link ComponentSingleProvider},
  * {@link ComponentSingleFooter},
  * {@link SPComponentSinglesSNSBelow},
@@ -91,24 +93,24 @@ export class SPComponentSingleContent extends React.Component {
   // ---------------------------------------------------
   //  METHOD
   // ---------------------------------------------------
-  /**
-   * マウント後に Facebook like button を活性化するために `FB.init` を行います
-   */
-  componentDidMount() {
-    // Fb.init();
-    // Fb.delay(500);
-    // default 1000 へ
-    // @see https://github.com/undotsushin/undotsushin/issues/1458
-    // @since 2017-01-10
-    Fb.delay();
-  }
-  /**
-   * state.single 情報を更新し再描画します
-   * @param {SingleDae} single state.single
-   */
-  updateSingle(single) {
-    this.setState({ single });
-  }
+  // /**
+  //  * マウント後に Facebook like button を活性化するために `FB.init` を行います
+  //  */
+  // componentDidMount() {
+  //   // Fb.init();
+  //   // Fb.delay(500);
+  //   // default 1000 へ
+  //   // @see https://github.com/undotsushin/undotsushin/issues/1458
+  //   // @since 2017-01-10
+  //   Fb.delay();
+  // }
+  // /**
+  //  * state.single 情報を更新し再描画します
+  //  * @param {SingleDae} single state.single
+  //  */
+  // updateSingle(single) {
+  //   this.setState({ single });
+  // }
   /**
    * div.singles-content, 本文を出力します
    * @return {XML} div.singles-content
