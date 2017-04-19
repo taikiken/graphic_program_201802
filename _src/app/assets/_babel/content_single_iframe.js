@@ -102,7 +102,7 @@ const onLoad = () => {
   resize();
   setTimeout(frameHeight, 1000);
   setTimeout(() => {
-    Sagen.Dom.removeClass(document.body, 'loading');
+    Sagen.Dom.removeClass(document.body, 'iframe-loading');
   }, 500);
 };
 window.addEventListener('load', onLoad, false);
