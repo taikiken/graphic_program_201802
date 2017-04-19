@@ -17,7 +17,7 @@ import { IFrameStatus } from '../../event/IFrameStatus';
 const React = self.React;
 
 /**
- * 続きを読む」iframe 対応
+ * 「続きを読む」iframe 対応
  * @since 2017-04-17
  */
 export class ComponentSinglePostBody extends React.Component {
@@ -65,7 +65,16 @@ export class ComponentSinglePostBody extends React.Component {
      * @type {Function}
      */
     this.boundUpdate = this.onUpdate.bind(this);
+    /**
+     * iframe height を設定するために window.postMessage を受診する IFrameStatus insatnce - singleton
+     * @type {IFrameStatus}
+     */
     this.frameStatus = IFrameStatus.factory();
+    /**
+     * ifrmae コンテナがすでにマウントしたかのフラッグ
+     * @type {boolean}
+     * @default false;
+     */
     this.didMount = false;
   }
   // ---------------------------------------------------

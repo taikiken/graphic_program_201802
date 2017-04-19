@@ -1,5 +1,6 @@
 {
   "source": "./src",
+  "includes": [".*\\.js", ".*\\.jsx"],
   "destination": "./_docs",
   "access": ["public", "protected", "private"],
   "autoPrivate": true,
