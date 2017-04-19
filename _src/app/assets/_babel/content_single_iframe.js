@@ -19,15 +19,13 @@ const Sagen = window.Sagen;
 const script = document.getElementById('js-content_single_iframe');
 /**
  * data-id 属性値 - 記事id
+ * ```
+ * <script id="js-content_single_iframe" src="/assets/js/content_single_iframe.bundle.js?v=GIT_VERSION" data-id="ARTICLE_ID"></script>
+ * ```
  * @type {number}
  */
 const id = script && script.dataset ? parseInt(script.dataset.id, 10) : 0;
 
-// /**
-//  * desktop|mobile 端末判定文字
-//  * @type {string}
-//  */
-// const device = 'desktop';
 /**
  * iframe height に加味する offset 値
  * @type {number}
@@ -43,10 +41,14 @@ let prevHeight = -1;
  * @param {number} height iframe height
  */
 const sendMessage = (height) => {
-  window.parent.postMessage({
+  // console.log(`sendMessage, ${typeof window.parent.postMessage}`);
+  // Android standard Browser で `DOM Exception 12`
+  // 第二引数を '/' -> '*' へ変更
+  // @see DOM Exception 12 for window.postMessage
+  window.parent.postMessage(JSON.stringify({
     height,
     id,
-  }, '/');
+  }), '*');
 };
 /**
  * document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight
@@ -56,10 +58,7 @@ const sendMessage = (height) => {
 const resize = () => {
   const rect = document.body.getBoundingClientRect();
   const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, rect.height));
-  // console.log('iFrame.resize id:', id, document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, rect.height);
-  if (prevHeight === height) {
-    return;
-  }
+  // console.log(`iFrame.resize id: ${id}, ${document.body.scrollHeight}, ${document.documentElement.clientHeight}, ${window.innerHeight}, ${rect.height}`);
   prevHeight = height;
   sendMessage(height);
 };
@@ -67,27 +66,32 @@ const resize = () => {
  * div#js-single-iframe
  * @type {Element}
  */
-const singleFrame = document.getElementById('js-single-iframe');
+let singleFrame = document.getElementById('js-single-iframe');
 let count = 0;
+const limit = 5;
+const interval = 1000;
 /**
  * div#js-single-iframe ClientRect から高さを計算し前回高さと違っていれば `sentMessage` へ高さを通知実行します
  * 同じならば 5回だけ 1秒後に再計算します
  */
 const frameHeight = () => {
+  // console.log(`frameHeight singleFrame, ${id}, ${singleFrame}`);
   if (!singleFrame) {
+    singleFrame = document.getElementById('js-single-iframe');
+    setTimeout(frameHeight, 100);
     return;
   }
   const rect = singleFrame.getBoundingClientRect();
   const height = Math.ceil(rect.height + offset);
-
+  // console.log(`frameHeight, ${id}, ${count}, ${prevHeight}, ${height}`);
   if (prevHeight === height) {
-    if (count < 5) {
+    if (count < limit) {
       count += 1;
-      setTimeout(frameHeight, 1000);
+      setTimeout(frameHeight, interval);
     }
     return;
   }
-  // console.log('iFrame.frameHeight id:', id, height, prevHeight, document.body.scrollHeight);
+  // console.log(`iFrame.frameHeight id: ${id}, ${count}, ${limit}, ${height}, ${prevHeight}, ${document.body.scrollHeight}`);
   prevHeight = height;
   sendMessage(height);
 };
@@ -96,11 +100,14 @@ const frameHeight = () => {
  * iframe 高さを計算します
  * - resize 実行
  * - frameHeight を 1秒後に実行
+ * @param {?Event} event onload Event
  */
-const onLoad = () => {
-  window.removeEventListener('load', onLoad);
-  resize();
-  setTimeout(frameHeight, 1000);
+const onLoad = (event) => {
+  if (event) {
+    window.removeEventListener('load', onLoad);
+    resize();
+  }
+  setTimeout(frameHeight, 520);
   setTimeout(() => {
     Sagen.Dom.removeClass(document.body, 'iframe-loading');
   }, 500);
