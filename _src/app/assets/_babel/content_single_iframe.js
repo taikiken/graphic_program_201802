@@ -45,10 +45,14 @@ const sendMessage = (height) => {
   // Android standard Browser で `DOM Exception 12`
   // 第二引数を '/' -> '*' へ変更
   // @see DOM Exception 12 for window.postMessage
-  window.parent.postMessage(JSON.stringify({
+  // window.parent.postMessage(JSON.stringify({
+  //   height,
+  //   id,
+  // }), '*');
+  window.parent.postMessage({
     height,
     id,
-  }), '*');
+  }, '*');
 };
 /**
  * document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight

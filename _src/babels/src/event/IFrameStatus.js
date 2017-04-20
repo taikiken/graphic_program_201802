@@ -95,9 +95,10 @@ export class IFrameStatus extends EventDispatcher {
    * @param {Event} event event.data から 記事id と iframe.height を取り出し `this.update` を実行します
    */
   onMessage(event) {
-    const data = JSON.parse(event.data);
+    // const data = JSON.parse(event.data);
+    const data = event.data;
     // console.log(`onMessage height: ${data.height}, id: ${data.id}`);
-    if (data.height && data.id) {
+    if (data && data.height && data.id) {
       this.update(parseInt(data.id, 10), data.height);
     }
   }

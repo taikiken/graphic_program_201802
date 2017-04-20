@@ -84,18 +84,28 @@ export class ComponentSinglePost extends React.Component {
      */
     this.boundMore = this.onReadMore.bind(this);
     // below 2017-04-17 - 「続きを読む」iframe 対応
-    /**
-     * iframe 表示フラッグ
-     * @type {boolean}
-     * @since 2017-04-17
-     */
-    this.didLoad = false;
+    // /**
+    //  * iframe 表示フラッグ
+    //  * @type {boolean}
+    //  * @since 2017-04-17
+    //  */
+    // this.didLoad = false;
     /**
      * 記事id - int 保証
      * @type {Number}
      * @since 2017-04-17
      */
     this.id = parseInt(props.single.id, 10);
+    /**
+     * this 山椒のために bind します
+     * @type {function}
+     */
+    this.body = this.body.bind(this);
+    /**
+     * this 山椒のために bind します
+     * @type {function}
+     */
+    this.excerpt = this.excerpt.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -147,8 +157,18 @@ export class ComponentSinglePost extends React.Component {
       return null;
     }
     // 続きを読む コンテナ
+    // return (
+    //   <div className="post-content">
+    //     <p>{description}</p>
+    //     <p>
+    //       <a href={single.readmore.url} target="_blank" onClick={this.boundMore}>
+    //         {Message.READ_MORE_EXTERNAL}
+    //       </a>
+    //     </p>
+    //   </div>
+    // );
     return (
-      <div className="post-content">
+      <div className="js-inner-post-content">
         <p>{description}</p>
         <p>
           <a href={single.readmore.url} target="_blank" onClick={this.boundMore}>
@@ -163,7 +183,7 @@ export class ComponentSinglePost extends React.Component {
    * @return {?XML} 記事詳細本文を返します
    */
   body() {
-    this.didLoad = true;
+    // this.didLoad = true;
     const single = this.state.single;
     const body = single.body;
     // console.log('ComponentSinglePost.body', this.id, this.didLoad);
@@ -181,13 +201,19 @@ export class ComponentSinglePost extends React.Component {
     // );
     // iframe component
     // @since 2017-04-17
+    // return (
+    //   <div className="post-content">
+    //     <ComponentSinglePostBody
+    //       single={this.state.single}
+    //       sp={this.props.sp}
+    //     />
+    //   </div>
+    // );
     return (
-      <div className="post-content">
-        <ComponentSinglePostBody
-          single={this.state.single}
-          sp={this.props.sp}
-        />
-      </div>
+      <ComponentSinglePostBody
+        single={single}
+        sp={this.props.sp}
+      />
     );
   }
   // ------
@@ -217,10 +243,19 @@ export class ComponentSinglePost extends React.Component {
     }
     // console.log('ComponentSinglePost.render', this.state.single.id, single.readmore.isReadmore, this.didLoad);
     // 「続きを読む」（提供元サイトへ別ウインドウ遷移）フラッグ ON の時は `excerpt` をコールします
-    if (single.readmore.isReadmore) {
-      return this.excerpt();
-    } else {
-      return this.body();
-    }
+    // if (single.readmore.isReadmore) {
+    //   return this.excerpt();
+    // } else {
+    //   return this.body();
+    // }
+    // @since 2017-04-16 spinner つけるために改造
+    const isReadmore = single.readmore.isReadmore;
+    const output = isReadmore ? this.excerpt : this.body;
+    const loading = !isReadmore ? 'iframe-loading' : '';
+    return (
+      <div className={`post-content ${loading}`}>
+        {output()}
+      </div>
+    );
   }
 }

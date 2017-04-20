@@ -647,10 +647,18 @@ iframe.post-content-iframe {
   background-color: #fff;
 }
 
-body.iframe-loading {
-  background: url("/assets/images/common/preloader.gif") no-repeat center center;
-  // iframe
-  .post-content {
-    opacity: 0;
+body {
+  background-color: #fff;
+  &.iframe-loading {
+    // iframe wrapper tag (.post-content) へ移動させる
+    //background: url("/assets/images/common/preloader.gif") no-repeat center center;
+    // iframe
+    .post-content {
+      opacity: 0;
+    }
   }
+}
+
+.post-content.iframe-loading {
+  background: url("/assets/images/common/preloader.gif") no-repeat center center;
 }
