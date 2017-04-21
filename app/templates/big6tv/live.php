@@ -135,7 +135,7 @@ streampack初期化コード
 
 
   function log( message, value ) {
-    // console.log( message, value || '');
+    console.log( message, value || '');
   }
 
   /**
@@ -183,7 +183,7 @@ streampack初期化コード
       log('live - ajax : fail');
     })
     .always(function () {
-      log('live - ajax');
+      // log('live - ajax');
     });
 
   }
@@ -222,6 +222,10 @@ streampack初期化コード
     $embed.html( $tmpl_video );
     $embed.find('video').attr('poster', data.alt.large );
     $embed.find('source').attr('src', data.video.source );
+
+    var playerState         = null;
+    var playerStateInterval = null;
+    var playerResetTimer    = null;
 
     // ad_url
     // ------------------------------
@@ -282,7 +286,7 @@ streampack初期化コード
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-        log('live - play : sp');
+        log('live - start : sp', new Date());
       });
 
     } else {
@@ -291,36 +295,62 @@ streampack初期化コード
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-        log('live - play : pc');
+        log('live - start : pc', new Date());
       }, 500);
 
     }
 
     player.on('play', function() {
+      playerState = 'play';
       ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
-      log('live - play');
+      log('live - play', new Date());
     });
 
     player.on('pause', function() {
+      playerState  = 'pause';
       log('live - pause');
     });
 
+    player.on('waiting', function() {
+      if ( playerState === 'progress' ) {
+        playerState      = 'waiting';
+        playerResetTimer = setTimeout(function() {
+          isAdPlayed = true;
+          clearInterval(playerStateInterval);
+          reset();
+          initVideo( data );
+        }, 15000);
+        log('live - waiting');
+      }
+    });
+
+    player.on('progress', function() {
+      log('live - progress');
+      playerState  = 'progress';
+    });
+
     player.on('ended', function() {
+      playerState = 'ended';
       ga('send', 'event', 'live', 'complete', data.video.source , 0, {nonInteraction: true} );
       log('live - ended');
     });
 
     player.on('adsready', function() {
-      isAdPlayed = true;
+      playerState = 'adsready';
+      isAdPlayed  = true;
       ga('send', 'event', 'live', 'adsready', ad_url , 0, {nonInteraction: true} );
       log('live - adsready');
     });
 
     player.on('error', function() {
-      reset();
-      initAlt( data.error.large );
+      playerState = 'error';
+      log('live - error');
+      log('live - networkState', this.player().networkState());
 
       var error = this.player().error();
+
+      reset();
+      initAlt( data.error.large );
 
       if ( error ) {
         ga('send', 'event', 'live', 'error', error.code + ' | ' + error.type + ' | ' +  error.message + ' | ' + navigator.userAgent , 0, {nonInteraction: true} );
@@ -331,9 +361,16 @@ streampack初期化コード
         initVideo( data );
       }
 
-      log('live - error');
     });
 
+    // check state
+    // ------------------------------
+    playerStateInterval = setInterval(function() {
+      if ( playerState !== 'waiting' ) {
+        clearTimeout(playerResetTimer);
+      }
+      log('live - state', playerState );
+    }, 3000);
 
     log('live - initVideo', data);
   }
