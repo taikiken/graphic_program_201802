@@ -55,6 +55,14 @@ export class IFrameStatus extends EventDispatcher {
   static get UPDATE() {
     return 'iFrameStatusUpdate';
   }
+  /**
+   * iFrame mount 後に通知するイベント
+   * @event DID_MOUNT
+   * @returns {string} iFrameDidMount
+   */
+  static get DID_MOUNT() {
+    return 'iFrameDidMount';
+  }
   // ---------------------------------------------------
   //  CONSTRUCTOR
   // ---------------------------------------------------
@@ -101,6 +109,9 @@ export class IFrameStatus extends EventDispatcher {
     if (data && data.height && data.id) {
       this.update(parseInt(data.id, 10), data.height);
     }
+  }
+  mount(id) {
+    this.dispatch({ id, type: IFrameStatus.DID_MOUNT });
   }
 }
 

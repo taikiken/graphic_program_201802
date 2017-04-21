@@ -55,6 +55,9 @@ import { PageTitle } from '../../util/PageTitle';
 // snap
 import { Snap } from '../../ui/Snap';
 
+// event
+import { IFrameStatus } from '../../event/IFrameStatus';
+
 // React
 const React = self.React;
 
@@ -238,6 +241,10 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * @since 2017-04-17
      */
     this.boundBeat = this.onBeat.bind(this);
+    this.singleId = parseInt(props.single.id, 10);
+    this.iframeMounted = false;
+    this.iframeStatus = IFrameStatus.factory();
+    this.boundFrameMont = this.onFrameMount.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -408,6 +415,16 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       hit.stop();
     }
     this.cancel();
+    this.iframeStatus.off(IFrameStatus.DID_MOUNT, this.boundFrameMont);
+  }
+  // --------------------------------------------------
+  // iframe mount
+  onFrameMount(events) {
+    const id = events.id;
+    console.log('ComponentSinglesArticleMagnet.onFrameMount', this.singleId, id);
+    if (id && id === this.singleId) {
+      this.iframeMounted = true;
+    }
   }
   // --------------------------------------------------
   // delegate
@@ -436,17 +453,22 @@ export class ComponentSinglesArticleMagnet extends React.Component {
         hit.start();
       }
     }
-    // console.log('ComponentSinglesArticleMagnet.componentDidMount ++++ ++++', this.id, this.sendGa, this.hit, this.snap);
+    // @since 2017-04-17
+    this.iframeStatus.on(IFrameStatus.DID_MOUNT, this.boundFrameMont);
   }
   /**
    * unmount 時に sendGa を保存し event handler を unbind します
    * @since 2017-04-17
    */
   componentWillUnmount() {
-    // console.log('ComponentSinglesArticleMagnet.componentWillUnmount ==== ====', this.id, this.sendGa);
+    // console.log('ComponentSinglesArticleMagnet.componentWillUnmount ==== ====', this.id, this.sendGa, this.iframeMounted);
     RecordSingleState.store(this.id, this.sendGa);
     this.dispose();
   }
+  // shouldComponentUpdate() {
+  //   console.log('ComponentSinglesArticleMagnet.shouldComponentUpdate  ==== ====', this.id, this.iframeMounted);
+  //   return !this.iframeMounted;
+  // }
   /**
    * 記事詳細・次の記事一覧 > 記事を出力します
    * @return {?XML} div.loaded-post or null を返します

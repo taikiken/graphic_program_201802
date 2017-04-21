@@ -294,6 +294,13 @@ export class ComponentSingles extends React.Component {
       Fb.delay();
     }
   }
+  componentWillUnmount() {
+    console.log('ComponentSingles.componentWillUnmount ------------------------------');
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('ComponentSingles.shouldComponentUpdate ------------------------------', nextProps, nextState);
+    return true;
+  }
   /**
    * desktop: 記事詳細「次の記事一覧」を出力します
    * @return {XML} div.singles-root を返します

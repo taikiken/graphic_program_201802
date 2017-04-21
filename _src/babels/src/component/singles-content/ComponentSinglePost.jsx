@@ -84,12 +84,12 @@ export class ComponentSinglePost extends React.Component {
      */
     this.boundMore = this.onReadMore.bind(this);
     // below 2017-04-17 - 「続きを読む」iframe 対応
-    // /**
-    //  * iframe 表示フラッグ
-    //  * @type {boolean}
-    //  * @since 2017-04-17
-    //  */
-    // this.didLoad = false;
+    /**
+     * iframe 表示フラッグ - shoeUpdate 判定に使用します
+     * @type {boolean}
+     * @since 2017-04-17
+     */
+    this.didLoad = false;
     /**
      * 記事id - int 保証
      * @type {Number}
@@ -97,13 +97,15 @@ export class ComponentSinglePost extends React.Component {
      */
     this.id = parseInt(props.single.id, 10);
     /**
-     * this 山椒のために bind します
+     * this 参照のために bind します
      * @type {function}
+     * @since 2017-04-17
      */
     this.body = this.body.bind(this);
     /**
-     * this 山椒のために bind します
+     * this 参照のために bind します
      * @type {function}
+     * @since 2017-04-17
      */
     this.excerpt = this.excerpt.bind(this);
   }
@@ -183,7 +185,7 @@ export class ComponentSinglePost extends React.Component {
    * @return {?XML} 記事詳細本文を返します
    */
   body() {
-    // this.didLoad = true;
+    this.didLoad = true;
     const single = this.state.single;
     const body = single.body;
     // console.log('ComponentSinglePost.body', this.id, this.didLoad);
@@ -224,13 +226,20 @@ export class ComponentSinglePost extends React.Component {
   // componentWillUpdate(nextProps, nextState) {
   //   console.log('ComponentSinglePost.componentWillUpdate', this.state.single.id, this.didLoad, nextProps, nextState);
   // }
-  // shouldComponentUpdate() {
-  //   console.log('ComponentSinglePost.shouldComponentUpdate ++++', this.id, this.didLoad);
-  //   return !this.didLoad;
-  // }
-  // componentWillUnmount() {
-  //   console.log('ComponentSinglePost.componentWillUnmount =====', this.id);
-  // }
+  /**
+   * update 判定を行います - iframe mount(`this.didLoad: true`) 後の update しない
+   * @override
+   * @returns {boolean} true: force render
+   * @since 2-17-04-17
+   */
+  shouldComponentUpdate() {
+    // console.log('ComponentSinglePost.shouldComponentUpdate ++++', this.id, this.didLoad);
+    // iframe mount 後の update しない
+    return !this.didLoad;
+  }
+  componentWillUnmount() {
+    console.log('ComponentSinglePost.componentWillUnmount =====', this.id);
+  }
   /**
    * `div.post-content` を出力します
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します

@@ -108,16 +108,22 @@ export class ComponentSinglePostBody extends React.Component {
    * delegate - mount 後に IFrameStatus.UPDATE event handler を bind し didMount フラッグを true に設定します
    */
   componentDidMount() {
-    this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
-    this.frameStatus.on(IFrameStatus.UPDATE, this.boundUpdate);
+    const frameStatus = this.frameStatus;
+    frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
+    frameStatus.on(IFrameStatus.UPDATE, this.boundUpdate);
+    frameStatus.mount(this.id);
     this.didMount = true;
   }
   /**
    * unmount 時に IFrameStatus.UPDATE イベントハンドラを unbind します
    */
   componentWillUnmount() {
-    // console.log('ComponentSinglePostBody.componentWillUnmount', this.id);
+    console.log('ComponentSinglePostBody.componentWillUnmount', this.id);
     this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('ComponentSinglePostBody.shouldComponentUpdate', this.id, this.state.height, nextState.height);
+    return this.state.height !== nextState.height;
   }
   /**
    * iframe.post-content-iframe をレンダリングします
