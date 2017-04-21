@@ -169,7 +169,7 @@ if ( $page['theme']['base'] ) {
 <body class="iframe-loading">
 <div id="whole" class="<?php echo join( ' ', $whole_classes);?>">
   <div class="post-detail">
-    <div class="post-content">
+    <div class="post-content post-content-in_iframe">
       <?php
       // -----------------[iframe body]-------------------
       ?>
