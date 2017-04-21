@@ -127,39 +127,6 @@ export class ComponentMoreButton extends React.Component {
   //  METHOD
   // ---------------------------------------------------
   // -----------------------------------------
-  // delegate
-  /**
-   * delegate method, マウントした時にコールされます
-   *
-   * rise instance が未作成なら作成し監視を始めます
-   */
-  componentDidMount() {
-    let rise = this.rise;
-
-    if (this.state.show && rise === null ) {
-      // mount 後
-      // button が表示されているなら rise 監視を始める
-      rise = new Rise(this.props.element);
-      this.rise = rise;
-      rise.on(Rise.RISE, this.boundRise);
-      // @since 2016-10-04
-      // https://github.com/undotsushin/undotsushin/issues/1141
-      // 初回無限スクロールにしないパターンあり
-      if (!this.props.afterClick) {
-        // 初回に限り delay させる
-        this.timer = setTimeout(() => rise.start(), 500);
-        // rise.start();
-      }
-    }
-  }
-  /**
-   * unmount 時に rise 破棄を行います
-   */
-  componentWillUnmount() {
-    // unmount 時に rise 破棄を行う
-    this.destroy();
-  }
-  // -----------------------------------------
   // button 関連 custom method
   /**
    * a.onclick event handler<br>
@@ -186,27 +153,32 @@ export class ComponentMoreButton extends React.Component {
   /**
    * loading 表示 on / off します<br>
    * on: true, off: false
-   * @param {string} loading CSS class name 'loading' || ''
+   * @param {string} requireLoading CSS class name 'loading' || ''
    */
-  updateLoading(loading) {
-    let rise = this.rise;
-    let loadingClass = '';
-    if (loading && rise !== null) {
+  updateLoading(requireLoading) {
+    const rise = this.rise;
+    let loading = '';
+    // if (loading && rise !== null) {
+    // 条件見直し
+    // @since 2017-04-17
+    if (requireLoading) {
       // loading 中は監視を止める
-      loadingClass = 'loading';
-
-      rise.stop();
+      loading = 'loading';
+      if (rise) {
+        rise.stop();
+      }
       // next 読み込み開始
       this.props.action.next();
     } else {
       // loading が終わると監視開始
-      rise.start();
+      if (rise) {
+        rise.start();
+      }
     }
 
     // loading 表示のための css class を追加・削除
-    this.setState( {loading: loadingClass} );
+    this.setState({ loading });
   }
-
   /**
    * button 表示・非表示 します
    * @param {boolean} show button 表示・非表示 フラッグ false: 非表示
@@ -227,7 +199,7 @@ export class ComponentMoreButton extends React.Component {
    * 次 offset JSON を取得する
    */
   onRise() {
-    clearTimeout(this.timer);
+    // clearTimeout(this.timer);
     this.updateLoading(true);
     // Ga
     if (this.props.home) {
@@ -256,24 +228,57 @@ export class ComponentMoreButton extends React.Component {
     Ga.add( new GaData('ComponentMoreButton.gaCategory', `${this.props.slug}_articles`, 'view - new', String(++this.page), 0, true) );
     // ----------------------------------------------
   }
+  // -----------------------------------------
+  // delegate
+  /**
+   * delegate method, マウントした時にコールされます
+   *
+   * rise instance が未作成なら作成し監視を始めます
+   */
+  componentDidMount() {
+    let rise = this.rise;
+
+    if (this.state.show && rise === null) {
+      // mount 後
+      // button が表示されているなら rise 監視を始める
+      rise = new Rise(this.props.element);
+      this.rise = rise;
+      rise.on(Rise.RISE, this.boundRise);
+      // @since 2016-10-04
+      // https://github.com/undotsushin/undotsushin/issues/1141
+      // 初回無限スクロールにしないパターンあり
+      if (!this.props.afterClick) {
+        // 初回に限り delay させる
+        // this.timer = setTimeout(() => rise.start(), 500);
+        // rise.start();
+        rise.delayStart(0.5);
+      }
+    }
+  }
+  /**
+   * unmount 時に rise 破棄を行います
+   */
+  componentWillUnmount() {
+    // unmount 時に rise 破棄を行う
+    this.destroy();
+  }
   /**
    * div.board-btn-viewmore を出力します
    * @return {?XML} div.board-btn-viewmore を返します
    */
   render() {
     // hasNext: true, button を表示する？
-    if (this.state.show) {
-      return (
-        <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
-          <a className="board-btn-viewmore-link" href={'#more'} onClick={this.boundClick} >
-            <span>{Message.BUTTON_VIEW_MORE}</span>
-          </a>
-          <span className="loading-spinner">&nbsp;</span>
-        </div>
-      );
+    if (!this.state.show) {
+      // button 表示なし
+      return null;
     }
-
-    // button 表示なし
-    return null;
+    return (
+      <div id="more" className={`board-btn-viewmore loading-root ${this.state.loading}`}>
+        <a className="board-btn-viewmore-link" href={'#more'} onClick={this.boundClick} >
+          <span>{Message.BUTTON_VIEW_MORE}</span>
+        </a>
+        <span className="loading-spinner">&nbsp;</span>
+      </div>
+    );
   }
 }
