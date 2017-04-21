@@ -319,9 +319,9 @@ streampack初期化コード
           clearInterval(playerStateInterval);
           reset();
           initVideo( data );
-        }, 15000);
-        log('live - waiting');
+        }, 30000);
       }
+      log('live - waiting');
     });
 
     player.on('progress', function() {
@@ -369,7 +369,7 @@ streampack初期化コード
       if ( playerState !== 'waiting' ) {
         clearTimeout(playerResetTimer);
       }
-      log('live - state', playerState );
+      log('live - state', playerState, player.paused() );
     }, 3000);
 
     log('live - initVideo', data);
