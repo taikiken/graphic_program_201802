@@ -55,8 +55,8 @@ import { PageTitle } from '../../util/PageTitle';
 // snap
 import { Snap } from '../../ui/Snap';
 
-// event
-import { IFrameStatus } from '../../event/IFrameStatus';
+// // event
+// import { IFrameStatus } from '../../event/IFrameStatus';
 
 // React
 const React = self.React;
@@ -241,10 +241,10 @@ export class ComponentSinglesArticleMagnet extends React.Component {
      * @since 2017-04-17
      */
     this.boundBeat = this.onBeat.bind(this);
-    this.singleId = parseInt(props.single.id, 10);
-    this.iframeMounted = false;
-    this.iframeStatus = IFrameStatus.factory();
-    this.boundFrameMont = this.onFrameMount.bind(this);
+    // this.singleId = parseInt(props.single.id, 10);
+    // this.iframeMounted = false;
+    // this.iframeStatus = IFrameStatus.factory();
+    // this.boundFrameMont = this.onFrameMount.bind(this);
   }
   // ---------------------------------------------------
   //  METHOD
@@ -415,17 +415,17 @@ export class ComponentSinglesArticleMagnet extends React.Component {
       hit.stop();
     }
     this.cancel();
-    this.iframeStatus.off(IFrameStatus.DID_MOUNT, this.boundFrameMont);
+    // this.iframeStatus.off(IFrameStatus.DID_MOUNT, this.boundFrameMont);
   }
-  // --------------------------------------------------
-  // iframe mount
-  onFrameMount(events) {
-    const id = events.id;
-    console.log('ComponentSinglesArticleMagnet.onFrameMount', this.singleId, id);
-    if (id && id === this.singleId) {
-      this.iframeMounted = true;
-    }
-  }
+  // // --------------------------------------------------
+  // // iframe mount
+  // onFrameMount(events) {
+  //   const id = events.id;
+  //   // console.log('ComponentSinglesArticleMagnet.onFrameMount', this.singleId, id);
+  //   if (id && id === this.singleId) {
+  //     this.iframeMounted = true;
+  //   }
+  // }
   // --------------------------------------------------
   // delegate
   /**
@@ -453,8 +453,8 @@ export class ComponentSinglesArticleMagnet extends React.Component {
         hit.start();
       }
     }
-    // @since 2017-04-17
-    this.iframeStatus.on(IFrameStatus.DID_MOUNT, this.boundFrameMont);
+    // // @since 2017-04-17
+    // this.iframeStatus.on(IFrameStatus.DID_MOUNT, this.boundFrameMont);
   }
   /**
    * unmount 時に sendGa を保存し event handler を unbind します

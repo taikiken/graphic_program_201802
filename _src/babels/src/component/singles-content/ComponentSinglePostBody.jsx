@@ -118,11 +118,19 @@ export class ComponentSinglePostBody extends React.Component {
    * unmount 時に IFrameStatus.UPDATE イベントハンドラを unbind します
    */
   componentWillUnmount() {
-    console.log('ComponentSinglePostBody.componentWillUnmount', this.id);
+    // console.log('ComponentSinglePostBody.componentWillUnmount', this.id);
     this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
   }
+
+  /**
+   * delegate shouldComponentUpdate - 更新を height 設定が違うときのみに限定します
+   * @override
+   * @param {Object} nextProps next props
+   * @param {Object} nextState next state
+   * @returns {boolean} true: force render
+   */
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('ComponentSinglePostBody.shouldComponentUpdate', this.id, this.state.height, nextState.height);
+    // console.log('ComponentSinglePostBody.shouldComponentUpdate', this.id, this.state.height, nextState.height);
     return this.state.height !== nextState.height;
   }
   /**

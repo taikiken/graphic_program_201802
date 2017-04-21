@@ -106,14 +106,14 @@ export class ComponentSingleContent extends React.Component {
   // updateSingle(single) {
   //   this.setState({ single });
   // }
-  componentWillUnmount() {
-    console.log('ComponentSingleContent.componentWillUnmount ========', this.id);
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('ComponentSingleContent.shouldComponentUpdate ========', this.id, this.state.index, nextState.index);
-    // return this.state.height !== nextState.height;
-    return true;
-  }
+  // componentWillUnmount() {
+  //   console.log('ComponentSingleContent.componentWillUnmount ========', this.id);
+  // }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('ComponentSingleContent.shouldComponentUpdate ========', this.id, this.state.index, nextState.index);
+  //   // return this.state.height !== nextState.height;
+  //   return true;
+  // }
   /**
    * div.singles-content, 本文を
    * @return {XML} div.singles-content

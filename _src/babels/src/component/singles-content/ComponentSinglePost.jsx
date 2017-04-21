@@ -237,9 +237,9 @@ export class ComponentSinglePost extends React.Component {
     // iframe mount 後の update しない
     return !this.didLoad;
   }
-  componentWillUnmount() {
-    console.log('ComponentSinglePost.componentWillUnmount =====', this.id);
-  }
+  // componentWillUnmount() {
+  //   console.log('ComponentSinglePost.componentWillUnmount =====', this.id);
+  // }
   /**
    * `div.post-content` を出力します
    * @return {?XML} `div.post-content` を返します、出力すべきものがない時は null を返します
