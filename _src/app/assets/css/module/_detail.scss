@@ -671,3 +671,24 @@ body {
 .post-content.iframe-loading {
   background: url("/assets/images/common/preloader.gif") no-repeat center center;
 }
+
+// iframe img margin
+.single-iframe {
+  // naked img tag
+  &>img {
+    margin-top: 21px;
+  }
+  // h1 ~
+  h1:first-child,
+  h2:first-child,
+  h3:first-child,
+  h4:first-child,
+  h5:first-child,
+  h6:first-child {
+    margin-top: 21px;
+    // widget
+    .cms_widget {
+      margin-top: 0;
+    }
+  }
+}

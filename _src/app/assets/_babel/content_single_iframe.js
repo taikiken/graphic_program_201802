@@ -99,6 +99,28 @@ const frameHeight = () => {
   prevHeight = height;
   sendMessage(height);
 };
+// -----------------------------
+let anchorCount = 0;
+let anchorTimer = 0;
+/**
+ * iframe 内 a tag で target 属性がない or `_self` の時に `target='_top'` にする
+ */
+const anchorUpdate = () => {
+  clearTimeout(anchorTimer);
+  const anchors = singleFrame.getElementsByTagName('a');
+  for (const anchor of anchors) {
+    const target = anchor.target;
+    if (!target || target === '_self') {
+      anchor.target = '_top';
+    }
+  }
+  anchorCount += 1;
+  if (anchorCount < limit) {
+    anchorTimer = setTimeout(anchorUpdate, interval);
+  }
+};
+// anchorUpdate();
+// -------------------------
 /**
  * window.onload event handler
  * iframe 高さを計算します
@@ -109,8 +131,9 @@ const frameHeight = () => {
 const onLoad = (event) => {
   if (event) {
     window.removeEventListener('load', onLoad);
-    resize();
   }
+  resize();
+  anchorUpdate();
   setTimeout(frameHeight, 520);
   setTimeout(() => {
     Sagen.Dom.removeClass(document.body, 'iframe-loading');
@@ -118,16 +141,3 @@ const onLoad = (event) => {
 };
 window.addEventListener('load', onLoad, false);
 // ----------------------------
-/**
- * iframe 内 a tag で target 属性がない or `_self` の時に `target='_top'` にする
- */
-const anchorUpdate = () => {
-  const anchors = singleFrame.getElementsByTagName('a');
-  for (const anchor of anchors) {
-    const target = anchor.target;
-    if (!target || target === '_self') {
-      anchor.target = '_top';
-    }
-  }
-};
-anchorUpdate();
