@@ -24,7 +24,7 @@ export class Rise extends EventDispatcher {
    * @param {Element} element 対象 element
    * @param {Number} [offset=0] 減産数値
    */
-  constructor( element:Element, offset:Number = 0 ) {
+  constructor(element, offset = 0) {
     super();
     /**
      * 対象 element
@@ -43,28 +43,34 @@ export class Rise extends EventDispatcher {
      * @type {Offset}
      * @protected
      */
-    this._dom = new Offset( element );
+    this._dom = new Offset(element);
     /**
      * bind 済み this.onScroll
      * @type {Function}
      * @protected
      */
-    this._boundScroll = this.onScroll.bind( this );
+    this._boundScroll = this.onScroll.bind(this);
     /**
      * Scroll 監視 instance
      * @type {Scroll|*}
      * @protected
      */
     this._scroll = Scroll.factory();
+    /**
+     * 遅延実行 timeout id
+     * @type {number}
+     * @since 2017-04-17
+     */
+    this.timer = 0;
   }
   // ---------------------------------------------------
   //  EVENT
   // ---------------------------------------------------
   /**
    * RISE event type
-   * @returns {string} RISE event type を返します
+   * @returns {string} RISE event type `rise` を返します
    */
-  static get RISE():string {
+  static get RISE() {
     return 'rise';
   }
   // ---------------------------------------------------
@@ -123,27 +129,38 @@ export class Rise extends EventDispatcher {
   /**
    * 監視を始めます
    */
-  start():void {
+  start() {
     // console.log( '************************ Rise.start' );
     this.stop();
-    this._scroll.on( Scroll.SCROLL, this._boundScroll );
+    this._scroll.on(Scroll.SCROLL, this._boundScroll);
     this._scroll.start();
   }
   /**
    * 監視を止めます
    */
-  stop():void {
+  stop() {
     // console.log( '------------------------ Rise.stop' );
-    this._scroll.off( Scroll.SCROLL, this._boundScroll );
+    this._scroll.off(Scroll.SCROLL, this._boundScroll);
     // @since 2016-09-16
     // 全ての監視を止めてしまう, 破壊的なので止める
     // this._scroll.stop();
   }
   /**
+   * `start` を遅延実行します
+   * @param {number} [seconds=0.5] 遅延実行秒数
+   * @since 2017-04-17
+   */
+  delayStart(seconds = 0.5) {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.start();
+    }, seconds * 1000);
+  }
+  /**
    * Scroll.SCROLL event handler
    * @param {Object} events Scroll.SCROLL event object
    */
-  onScroll( events:Object ):void {
+  onScroll(events) {
     // window property
     // scrollTop
     const y = events.y;
@@ -155,7 +172,7 @@ export class Rise extends EventDispatcher {
     const elementBottom = y + offsetRect.top + offsetRect.height;
 
     // element.bottom が contain しているかを調べます
-    if ( windowBottom > elementBottom ) {
+    if (windowBottom > elementBottom) {
       this.dispatch({
         type: Rise.RISE,
         window: windowBottom,

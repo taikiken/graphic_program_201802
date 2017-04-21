@@ -162,7 +162,7 @@ export class ViewSingles extends ViewArchiveMasonryInfinite {
       dae.index = prevLast + i;
       articlesList.push(dae);
     } );
-
+    // console.log('ViewSingles.render ++++++++++++++++++++++++++++++++++', this.request.offset, articlesList);
     // this._articleRendered が null の時だけ ReactDOM.render する
     if (this.articleRendered === null ) {
       this.articleRendered = ReactDOM.render(
