@@ -1,0 +1,305 @@
+@import "../../../../scss/asset";
+
+// recruit
+//
+// design module recruit
+
+.recruit {
+  // .recruit__vision
+  &__vision {
+    @include screen('large') {
+      @extend %centerring_contents;
+      margin-top: 76px;
+      overflow: hidden;
+
+      &__heading {
+        float: left;
+        line-height: lh(50, 40);
+        color: $highlight-color;
+        font-family: helvetica;
+        font-weight: bold;
+        font-size: 40px;
+      }
+
+      p {
+        float: right;
+        width: 720px;
+        line-height: lh(46, 24);
+        color: #272727;
+        font-weight: bold;
+        font-size: 24px;
+      }
+    }
+
+    @include screen('small') {
+      margin-top: (76/2)+px;
+      text-align: center;
+
+      &__heading {
+        line-height: lh(60, 50);
+        color: $highlight-color;
+        font-family: helvetica;
+        font-weight: bold;
+        font-size: (50/2)+px;
+      }
+
+      p {
+        margin-top: (56/2)+px;
+        line-height: lh(46, 28);
+        color: #272727;
+        font-weight: bold;
+        font-size: (28/2)+px;
+      }
+    }
+  }
+
+
+
+
+
+  // .recruit__key_visual
+  &__key_visual {
+    img {
+      @include fluid-img(100%);
+    }
+
+    @include screen('large') {
+      margin-top: 100px;
+    }
+
+    @include screen('small') {
+      margin-top: (76/2)+px;
+    }
+  }
+
+
+
+
+
+  // .recruit__about
+  &__about {
+    @include screen('large') {
+      @extend %centerring_contents;
+      margin-top: 100px;
+      overflow: hidden;
+
+      &__heading {
+        float: left;
+        line-height: lh(50, 40);
+        color: $highlight-color;
+        font-family: helvetica;
+        font-weight: bold;
+        font-size: 40px;
+      }
+
+      &__data {
+        float: right;
+        width: 720px;
+
+        &__position {
+          width: 380px;
+          float: left;
+
+          p {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            line-height: 2.0;
+          }
+        }
+
+        &__treatment {
+          width: 340px;
+          float: left;
+
+          h2 {
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 10px;
+          }
+
+          p {
+            letter-spacing: 0.1em;
+            line-height: 1.8;
+          }
+
+          table {
+            border-collapse:separate;
+            //border-top: 1px solid #ccc;
+
+            tr {
+              vertical-align: top;
+              padding: 10px 0;
+              display: block;
+              //border-bottom: 1px solid #ccc;
+
+              th {
+                width: 70px;
+                font-weight: 800;
+                border-right: 1px solid #ccc;
+              }
+
+              td {
+                padding-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @include screen('small') {
+      margin-top: (76/2)+px;
+
+      &__heading {
+        line-height: lh(60, 50);
+        color: $highlight-color;
+        font-family: helvetica;
+        font-weight: bold;
+        font-size: (40/2)+px;
+        text-align: center;
+      }
+
+      &__data {
+
+        &__position {
+          padding: 28px 6.25% 20px 6.25%;
+          border-bottom: 1px solid #ccc;
+
+          p {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            line-height: 1.7;
+          }
+        }
+
+        &__treatment {
+          padding: 20px 6.25% 15px 6.25%;
+
+          h2 {
+            font-weight: 800;
+            margin-bottom: 5px;
+          }
+
+          p {
+            letter-spacing: 0.1em;
+            line-height: 1.8;
+          }
+
+          table {
+            border-collapse:separate;
+
+            tr {
+              vertical-align: top;
+              padding: 10px 0;
+              display: block;
+
+              th {
+                width: 70px;
+                font-weight: 800;
+                border-right: 1px solid #ccc;
+              }
+
+              td {
+                padding-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+
+
+  // .recruit__application
+  &__application {
+    @include screen('large') {
+      margin-top: 100px;
+      padding: 100px 0 80px;
+      background-color: #0e357f;
+
+      &__inner {
+        @extend %centerring_contents;
+        overflow: hidden;
+      }
+
+      &__heading {
+        float: left;
+        line-height: 1.25;
+        color: #ffffff;
+        font-family: helvetica;
+        font-weight: bold;
+        font-size: 40px;
+      }
+
+      &__text {
+        float: right;
+        width: 720px;
+
+        p {
+          color: #fff;
+          letter-spacing: 0.1em;
+          line-height: 1.7;
+        }
+
+        a {
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          color: #fff;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    @include screen('small') {
+      margin-top: (64/2)+px;
+      padding: (60/2)+px 0 (40/2)+px;
+      background-color: #0e357f;
+
+      &__inner {
+      }
+
+      &__heading {
+        line-height: 1;
+        margin-bottom: (60/2)+px;
+        color: #fff;
+        font-family: helvetica;
+        font-weight: bold;
+        font-size: (40/2)+px;
+        text-align: center;
+      }
+
+      &__text {
+        padding: 10px 6.25% 15px 6.25%;
+
+        p {
+          color: #fff;
+          letter-spacing: 0.1em;
+          line-height: 1.7;
+        }
+
+        a {
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          color: #fff;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+}
+
+.footer--recruit {
+  @include screen('small') {
+    margin-top: 0;
+
+    .footer__inner {
+      border-top: none;
+    }
+  }
+}
