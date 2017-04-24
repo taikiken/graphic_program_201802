@@ -121,7 +121,6 @@ export class ComponentSinglePostBody extends React.Component {
     // console.log('ComponentSinglePostBody.componentWillUnmount', this.id);
     this.frameStatus.off(IFrameStatus.UPDATE, this.boundUpdate);
   }
-
   /**
    * delegate shouldComponentUpdate - 更新を height 設定が違うときのみに限定します
    * @override

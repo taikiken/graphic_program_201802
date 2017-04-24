@@ -245,6 +245,7 @@ export class ComponentSinglesArticleMagnet extends React.Component {
     // this.iframeMounted = false;
     // this.iframeStatus = IFrameStatus.factory();
     // this.boundFrameMont = this.onFrameMount.bind(this);
+    // this.mounted = false;
   }
   // ---------------------------------------------------
   //  METHOD
@@ -432,6 +433,10 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * delegate, マウント後に呼び出されます, scroll 位置での Ga tag 送信準備を始めます
    * */
   componentDidMount() {
+    // if (!this.mounted) {
+    //   this.mounted = true;
+    //   return;
+    // }
     // Hit instance を作成し監視を開始します
     const singlesArticle = this.singlesArticle;
     if (this.hit === null && singlesArticle !== null) {
@@ -461,19 +466,23 @@ export class ComponentSinglesArticleMagnet extends React.Component {
    * @since 2017-04-17
    */
   componentWillUnmount() {
-    // console.log('ComponentSinglesArticleMagnet.componentWillUnmount ==== ====', this.id, this.sendGa, this.iframeMounted);
+    // console.log('ComponentSinglesArticleMagnet.componentWillUnmount ==== ====', this.id, this.sendGa);
     RecordSingleState.store(this.id, this.sendGa);
     this.dispose();
   }
   // shouldComponentUpdate() {
-  //   console.log('ComponentSinglesArticleMagnet.shouldComponentUpdate  ==== ====', this.id, this.iframeMounted);
-  //   return !this.iframeMounted;
+  //   console.log('ComponentSinglesArticleMagnet.shouldComponentUpdate  ==== ====', this.id);
+  //   // return !this.iframeMounted;
+  //   return true;
   // }
   /**
    * 記事詳細・次の記事一覧 > 記事を出力します
    * @return {?XML} div.loaded-post or null を返します
    * */
   render() {
+    // if (!this.mounted) {
+    //   return null;
+    // }
     const single = this.state.single;
     if (!single) {
       return null;

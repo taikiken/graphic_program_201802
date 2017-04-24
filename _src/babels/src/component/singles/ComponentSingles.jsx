@@ -265,7 +265,7 @@ export class ComponentSingles extends React.Component {
   // delegate
   /**
    * delegate, mount 後に呼び出されます<r>
-   * View.DID_MOUNT を発火し、infinite scrollのために moreButton へ続きがあるかを通知します
+   * View.DID_MOUNT を発火し、infinite scrollのために       moreButton へ続きがあるかを通知します
    */
   componentDidMount() {
     this.props.callback(View.DID_MOUNT);
@@ -273,7 +273,8 @@ export class ComponentSingles extends React.Component {
     this.props.boundMore(this.props.action.hasNext());
     // @since 2016-11-04
     // Facebook like
-    Fb.init();
+    // Fb.init();
+    this.offset = this.props.offset;
   }
   /**
    * プロパティ `offset` と `nextProps.offset` を比較し処理を行うかを決定します
@@ -295,7 +296,7 @@ export class ComponentSingles extends React.Component {
     }
   }
   // componentWillUnmount() {
-  //   console.log('ComponentSingles.componentWillUnmount ------------------------------');
+  //   console.log('ComponentSingles.componentWillUnmount ------------------------------', this.props.single.id);
   // }
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log('ComponentSingles.shouldComponentUpdate ------------------------------', nextProps, nextState);
