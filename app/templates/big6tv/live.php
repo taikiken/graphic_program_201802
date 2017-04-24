@@ -35,7 +35,28 @@
 <?php
 /*
 
+
+以下は baseballgate.jpと同じコード
+------------------------------
+
+<link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/videojs/css/videojs.ads.css" />
+<link rel="stylesheet" href="/assets/videojs/css/videojs.ima.css" />
+<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
+<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
+<link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
+<script src="//vjs.zencdn.net/5.3/video.min.js"></script>
+<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script src="/assets/videojs/videojs-contrib-hls.min.js"></script>
+<script src="/assets/videojs/videojs.hls.js"></script>
+<script src="/assets/videojs/videojs.ads.js"></script>
+<script src="/assets/videojs/videojs.ima.js"></script>
+<script src="/assets/videojs/ads.js"></script>
+
+
+
 以下は streampack用のコード
+------------------------------
 ( crazyの時にいつもheadでよんでるやつ )
 
 */
@@ -44,12 +65,9 @@
 <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
 <link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
 <link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
-
 <script src="//vjs.zencdn.net/5.3/video.min.js"></script>
 <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-
 <script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
-<script src="/assets/ima_plugin/js/videojs.hls.js"></script>
 <script src="/assets/ima_plugin/js/videojs.ads.js"></script>
 <script src="/assets/ima_plugin/js/videojs.ima.js"></script>
 
