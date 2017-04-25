@@ -32,7 +32,7 @@ const id = script && script.dataset ? parseInt(script.dataset.id, 10) : 0;
  */
 const offset = Sagen.Browser.Mobile.phone() ? 0 : 21;
 /**
- * previos iframe height
+ * previous iframe height
  * @type {number}
  */
 let prevHeight = -1;
@@ -49,6 +49,7 @@ const sendMessage = (height) => {
   //   height,
   //   id,
   // }), '*');
+  // server 上で `JSON.decode` でエラーになる時があったので生 Object を渡す
   window.parent.postMessage({
     height,
     id,
@@ -61,7 +62,15 @@ const sendMessage = (height) => {
  */
 const resize = () => {
   const rect = document.body.getBoundingClientRect();
-  const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.clientHeight, window.innerHeight, rect.height));
+  // 小数点切り上げる
+  const height = Math.ceil(
+    Math.max(
+      document.body.scrollHeight,
+      document.documentElement.clientHeight,
+      window.innerHeight,
+      rect.height
+    )
+  );
   // console.log(`iFrame.resize id: ${id}, ${document.body.scrollHeight}, ${document.documentElement.clientHeight}, ${window.innerHeight}, ${rect.height}`);
   prevHeight = height;
   sendMessage(height);
@@ -71,8 +80,22 @@ const resize = () => {
  * @type {Element}
  */
 let singleFrame = document.getElementById('js-single-iframe');
+/**
+ * frameHeight を何回実行したかのカウンター
+ * @type {number}
+ */
 let count = 0;
+/**
+ * カウント上限
+ * @type {number}
+ * @default 5
+ */
 const limit = 5;
+/**
+ * 繰返し実行感覚(ms)
+ * @type {number}
+ * @default 1000(ms)
+ */
 const interval = 1000;
 /**
  * div#js-single-iframe ClientRect から高さを計算し前回高さと違っていれば `sentMessage` へ高さを通知実行します
@@ -100,7 +123,16 @@ const frameHeight = () => {
   sendMessage(height);
 };
 // -----------------------------
+/**
+ * `anchorUpdate` を繰返し実行するカウンター
+ * @type {number}
+ * @default 0
+ */
 let anchorCount = 0;
+/**
+ * `anchorUpdate` 遅延実行 timer id
+ * @type {number}
+ */
 let anchorTimer = 0;
 /**
  * iframe 内 a tag で target 属性がない or `_self` の時に `target='_top'` にする
