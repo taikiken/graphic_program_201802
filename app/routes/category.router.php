@@ -40,6 +40,18 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       'path'               => $args,
     ));
 
+
+	// OFG:ImageとNoImageの実装を追加 @axesor
+	if (strlen($category["og_image"]) > 0) {
+		$args['page']['og_image'] = $category["og_image"];
+	}
+	if (strlen($category["no_image"]) > 0) {
+		$args['page']['no_image'] = $category["no_image"];
+	}
+
+
+
+
     // クライミングタブのog:image対応
     if ( $args['category_slug'] === 'climbing' ) :
       $args['page']['og_image'] = 'https://sportsbull.jp/_/climbing/og_image/og_image.jpg';

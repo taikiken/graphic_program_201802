@@ -45,7 +45,8 @@ left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
-	name_e as slug
+	name_e as slug,
+	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
 left join (select 
@@ -94,7 +95,8 @@ left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
-	name_e as slug
+	name_e as slug,
+	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
 left join (select 
@@ -318,7 +320,11 @@ function set_categoriesinfo($f){
 	$s["label"]=switch_category_title($f["name"],$f["title"]);
 	$s["slug"]=mod_HTML($f["name_e"]);
 	$s["url"]=sprintf("%s/%s/",$domain,$f["name_e"]);
-	
+
+	//OG/No画像追加
+	$s["og_image"] = strlen($f["og_image"])>0?sprintf("%s/img/%s",$ImgPath,$f["og_image"]):"";
+	$s["no_image"] = strlen($f["no_image"])>0?sprintf("%s/img/%s",$ImgPath,$f["no_image"]):"";
+
 	//https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
 	//タイトル画像のリンク追加
 	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
@@ -369,7 +375,7 @@ function urlmodify($body){
 }
 
 function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
-	
+
 	/*
 		$type:0 記事一覧　$type:1 記事詳細
 	*/
@@ -406,7 +412,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["readmore"]["url"]=$f["t9"];
 	}
 	*/
-	
+
     $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
     $v=unserialize(get_contents($file));
     $readmoreflag=$v["readmore"];
@@ -484,6 +490,15 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	}
 	
 	$s["user"]=set_userinfo($f,0);
+
+	if (strlen($f["img1"]) === 0 && strlen($f["no_image"]) > 0)
+	{
+		//記事画像が存在しておらずカテゴリ用NoImageが設定されて入ればAPIの値を上書き
+		$s["media"]["images"]["thumbnail"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+		$s["media"]["images"]["medium"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+		$s["media"]["images"]["large"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+		$s["media"]["images"]["original"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+	}
 
 	return $s;
 }
@@ -935,14 +950,17 @@ function get_contents($url){
 	if(curl_errno($ch))return "";
 	else return $output;
 }
-
-function s3upload($from,$to){
-	global $s3active;
-	if($s3active){
-		$s3i=new S3Module;
-		$s3i->upload($from,$to);
+if (!function_exists("s3upload"))
+{
+	function s3upload($from,$to){
+		global $s3active;
+		if($s3active){
+			$s3i=new S3Module;
+			$s3i->upload($from,$to);
+		}
 	}
 }
+
 
 function split_utime($a){
 	global $sv,$sn;

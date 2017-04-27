@@ -22,7 +22,7 @@ if(strlen($api)>0){
 		$category=bind($_REQUEST["category"]);
 		$type=bind($_REQUEST["type"]);
 		$c=set_category2($category,$type);
-				
+
 		if($type===""){
 
 			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$orderby,$limit),$orderby);
@@ -228,7 +228,7 @@ if($y["status"]["code"]===200){
 	$o->query($nsql);
 	$f=$o->fetch_array();
 	$count=$f["n"];
-	
+
 	if($count>0){
 	
 		$o->query($sql);
