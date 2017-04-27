@@ -49,6 +49,14 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 		$args['page']['no_image'] = $category["no_image"];
 	}
 
+	//カテゴリ毎のキーワードとdescriptionを取得
+	if (strlen($category["seo_desc"]) > 0) {
+		$args['page']['og_description'] = $category["seo_desc"];
+	}
+	if (strlen($category["seo_key"]) > 0) {
+		$args['page']['keywords'] = $category["seo_key"];
+	}
+
 
 
 

@@ -325,6 +325,10 @@ function set_categoriesinfo($f){
 	$s["og_image"] = strlen($f["og_image"])>0?sprintf("%s/img/%s",$ImgPath,$f["og_image"]):"";
 	$s["no_image"] = strlen($f["no_image"])>0?sprintf("%s/img/%s",$ImgPath,$f["no_image"]):"";
 
+	//ディスクリプションとキーワード設定
+	$s["seo_desc"]=$f["seo_desc"];
+	$s["seo_key"]=$f["seo_key"];
+
 	//https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
 	//タイトル画像のリンク追加
 	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
