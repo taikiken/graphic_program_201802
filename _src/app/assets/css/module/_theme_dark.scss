@@ -9,7 +9,7 @@
 
 $key-color: #cc141d;
 
-.whole.theme_dark {
+.whole.dark {
   .body-sec {
     background-color: #000;
 
@@ -145,14 +145,14 @@ $key-color: #cc141d;
     }
   }
 
-} //.theme_dark
+} //.dark
 
 
 
 
 
 // post-single
-.whole.theme_dark {
+.whole.dark {
   &.post-single {
     .body-sec {
       background-color: #000;
@@ -169,7 +169,7 @@ $key-color: #cc141d;
 
 
 // related-post
-.whole.theme_dark {
+.whole.dark {
   .related-post {
     .post {
       @include link-decoration(#333, #333, none, none);
