@@ -6,8 +6,9 @@ class db{
 	var $rsc;
 	var $r;
 
-	function db(){
+	function __construct(){
 		global $DBNAME,$DBUSR,$DBPWD,$DBHOST,$DBPORT;
+		
 		$this->db_name=$DBNAME;
 		$this->password=$DBPWD;
 		$this->user=$DBUSR;
@@ -29,14 +30,19 @@ class db{
 
 	function query($s){
 		
-		/*
 		global $SQLLOG;
-		$fp=fopen($SQLLOG,"a");
-		fputs($fp,date("Y-m-d H:i:s")."\n".preg_replace("/(\r|\n|\t)/"," ",$s)."\n");
-		fclose($fp);
-		*/
 		
 		return $this->rsc=pg_exec($s);
+
+		$er=pg_last_error($this->db);
+		
+		if(!$er){
+			return $this->rsc;
+		}else{
+			$erm=implode("\n",array(date("Y-m-d H:i:s"),$er,$s));
+			file_put_contents($ERRORLOG,$erm."\n",FILE_APPEND);
+		}
+
 	}
 
 	function fetch_array(){
