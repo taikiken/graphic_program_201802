@@ -150,6 +150,25 @@ if ( $template_name == 'category' ) {
   // ---[end 2016-09-01]---
 }
 ?>
+
+
+<?php // #1860 記事詳細アンカー広告
+if ( $page['template'] == 'p' || $page['template'] == 'comment') :
+  if ( $page['post']['is_sponserd'] === false ) :
+    echo <<<__EOL__
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8613117509675807",
+    enable_page_level_ads: true
+  });
+</script>
+__EOL__;
+  endif;
+endif;
+?>
+
+
 </head>
 <body>
 <div id="page" class="whole <?php echo join( ' ', $whole_classes);?>">
