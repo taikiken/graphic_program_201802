@@ -77,6 +77,9 @@
     margin-left: -45px;
     margin-top: -22.5px;
   }
+  .video-js .vjs-live-display {
+    line-height: 3;
+  }
 </style>
 
 
@@ -222,7 +225,6 @@ streampack初期化コード
     // ------------------------------
     var ad_url = '';
 
-
     // 広告再生済みなら再度広告設定はしない
     if ( !isAdPlayed && data.video.ad_url ) {
       ad_url = <?php echo ( $page['ua'] == 'desktop' ) ? 'data.video.ad_url.pc' : 'data.video.ad_url.sp'; ?>;
@@ -239,14 +241,29 @@ streampack初期化コード
 
     // player
     // ------------------------------
-    var player = videojs('content_video');
+    var player = videojs('content_video', {
+      hls : {
+        overrideNative  : true,
+        withCredentials : true
+      },
+      html5 : {
+        nativeAudioTracks : false,
+        nativeVideoTracks : false
+      }
+    });
+
+    // player.ads();
+
     var options = {
-      id          : 'content_video',
-      adTagUrl    : ad_url,
-      requestMode : 'ondemand'
+      adLabel          : '広告',
+      id               : 'content_video',
+      adTagUrl         : ad_url,
+      requestMode      : 'ondemand',
+      debug            : true
     };
 
     player.ima(options);
+    console.log( player.ima );
 
     var contentPlayer =  document.getElementById('content_video_html5_api');
     if ((navigator.userAgent.match(/iPad/i) ||
@@ -259,17 +276,15 @@ streampack初期化コード
     var startEvent = 'click';
     var isMobile   = false;
 
-    if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) ) {
+    if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) {
       isMobile   = true;
-      $('#content_video_ima-controls-div').prev().hide();
-      startEvent = 'click';
+      startEvent = 'touchend';
+
+      if ( navigator.userAgent.match(/Android/i) ) {
+        isAndroid  = true;
+      }
     }
 
-    if ( navigator.userAgent.match(/Android/i) ) {
-      isMobile   = true;
-      isAndroid  = true;
-      startEvent = 'touchend';
-    }
 
     if ( isMobile ) {
 
@@ -333,6 +348,18 @@ streampack初期化コード
       log('live - adsready');
     });
 
+    player.on('adstart', function() {
+      player.volume(1);
+      log('live - adstart');
+    });
+
+    player.on('adend', function() {
+      isAdPlayed  = true;
+      player.play();
+      ga('send', 'event', 'live', 'adend', ad_url , 0, {nonInteraction: true} );
+      log('live - adend');
+    });
+
     player.on('error', function() {
       playerState = 'error';
       log('live - error');
@@ -353,6 +380,12 @@ streampack初期化コード
       }
 
     });
+
+
+    if ( player.ads.state  === 'ad-playback') {
+      player.ads.disableNextSnapshotRestore = true;
+      player.src( data.video.source );
+    }
 
     // check state
     // ------------------------------
