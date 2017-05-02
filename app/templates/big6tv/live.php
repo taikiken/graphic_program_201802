@@ -153,7 +153,9 @@ streampack初期化コード
 
 
   function log( message, value ) {
+    <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
     console.log( message, value || '');
+    <?php endif; ?>
   }
 
   /**
