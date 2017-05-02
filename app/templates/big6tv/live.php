@@ -313,10 +313,6 @@ streampack初期化コード
 
     player.on('play', function() {
       playerState = 'play';
-      if ( isAdPlayed ) {
-        $('#content_video_ima-ad-container').remove();
-        player.ima.playAdBreak();
-      }
       ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
       log('live - play', new Date());
     });
