@@ -36,75 +36,46 @@
 /*
 
 
-以下は baseballgate.jpと同じコード
-------------------------------
-
-<link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/videojs/css/videojs.ads.css" />
-<link rel="stylesheet" href="/assets/videojs/css/videojs.ima.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
-<script src="//vjs.zencdn.net/5.3/video.min.js"></script>
-<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-<script src="/assets/videojs/videojs-contrib-hls.min.js"></script>
-<script src="/assets/videojs/videojs.hls.js"></script>
-<script src="/assets/videojs/videojs.ads.js"></script>
-<script src="/assets/videojs/videojs.ima.js"></script>
-<script src="/assets/videojs/ads.js"></script>
-
-
-
 以下は streampack用のコード
 ------------------------------
 ( crazyの時にいつもheadでよんでるやつ )
 
 */
 ?>
-<link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
-<script src="//vjs.zencdn.net/5.3/video.min.js"></script>
+
+<!-- video.js -->
+<link href="//vjs.zencdn.net/5.18.4/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/5.18.4/video.min.js"></script>
+<!-- //video.js -->
+
+<!-- hls -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.0/videojs-contrib-hls.js"></script>
+<!-- //hls -->
+
+<!-- ads - sdk -->
 <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-<script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
-<script src="/assets/ima_plugin/js/videojs.ads.js"></script>
-<script src="/assets/ima_plugin/js/videojs.ima.js"></script>
+<!-- //ads - sdk -->
+
+<!-- ads - ad -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.min.js"></script>
+<!-- //ads - ad -->
+
+<!-- ads - ima -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.min.css" />
+<!-- //ads - ima -->
+
+<!--link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" /-->
 
 
 <style>
-  body.vjs-full-window {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-  }
-  .video-js.vjs-fullscreen {
-    position: fixed;
-    overflow: hidden;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100% !important;
-    height: 100% !important;
-  }
-  .video-js:-webkit-full-screen {
-    width: 100% !important;
-    height: 100% !important;
-  }
-  .video-js.vjs-fullscreen.vjs-user-inactive {
-    cursor: none;
-  }
-
-  .vjs-poster {
-    display: none !important;
-  }
-
   .video-js .vjs-big-play-button {
     z-index: 9999;
     top: 50%;
     left: 50%;
+    margin-left: -45px;
+    margin-top: -22.5px;
   }
 </style>
 
