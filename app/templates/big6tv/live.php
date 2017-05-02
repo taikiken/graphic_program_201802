@@ -32,17 +32,6 @@
 <div class="live-streaming js-live"></div><!-- /.live-streaming -->
 
 
-<?php
-/*
-
-
-以下は streampack用のコード
-------------------------------
-( crazyの時にいつもheadでよんでるやつ )
-
-*/
-?>
-
 <!-- video.js -->
 <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video-js.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video.min.js"></script>
@@ -128,7 +117,7 @@ streampack初期化コード
   var intervalTimer = window.setInterval( init, interval );
   init();
 
-
+  <?php // 本番環境以外の時のみ console.log を出力する  ?>
   function log( message, value ) {
     <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
     console.log( message, value || '');
@@ -336,8 +325,8 @@ streampack初期化コード
     });
 
     player.on('progress', function() {
-      log('live - progress');
       playerState  = 'progress';
+      log('live - progress');
     });
 
     player.on('ended', function() {
