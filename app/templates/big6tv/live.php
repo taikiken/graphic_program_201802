@@ -44,8 +44,8 @@
 ?>
 
 <!-- video.js -->
-<link href="//vjs.zencdn.net/5.18.4/video-js.min.css" rel="stylesheet">
-<script src="//vjs.zencdn.net/5.18.4/video.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video-js.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video.min.js"></script>
 <!-- //video.js -->
 
 <!-- hls -->
@@ -57,13 +57,13 @@
 <!-- //ads - sdk -->
 
 <!-- ads - ad -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.min.css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.min.js"></script>
 <!-- //ads - ad -->
 
 <!-- ads - ima -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.min.css" />
 <!-- //ads - ima -->
 
 <!--link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" /-->
@@ -79,6 +79,9 @@
   }
   .video-js .vjs-live-display {
     line-height: 3;
+  }
+  .video-js .vjs-audio-button {
+    display: none;
   }
 </style>
 
@@ -242,13 +245,15 @@ streampack初期化コード
     // player
     // ------------------------------
     var player = videojs('content_video', {
+      textTrackSettings: false,
       hls : {
         overrideNative  : true,
         withCredentials : true
       },
       html5 : {
         nativeAudioTracks : false,
-        nativeVideoTracks : false
+        nativeVideoTracks : false,
+        nativeTextTracks  : false
       }
     });
 
@@ -308,6 +313,10 @@ streampack初期化コード
 
     player.on('play', function() {
       playerState = 'play';
+      if ( isAdPlayed ) {
+        $('#content_video_ima-ad-container').remove();
+        player.ima.playAdBreak();
+      }
       ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
       log('live - play', new Date());
     });
@@ -343,12 +352,12 @@ streampack初期化コード
 
     player.on('adsready', function() {
       playerState = 'adsready';
-      isAdPlayed  = true;
       ga('send', 'event', 'live', 'adsready', ad_url , 0, {nonInteraction: true} );
       log('live - adsready');
     });
 
     player.on('adstart', function() {
+      isAdPlayed  = true;
       player.volume(1);
       log('live - adstart');
     });
@@ -358,6 +367,11 @@ streampack初期化コード
       player.play();
       ga('send', 'event', 'live', 'adend', ad_url , 0, {nonInteraction: true} );
       log('live - adend');
+    });
+
+    player.on('ademptied', function() {
+      player.play();
+      log('live - ademptied');
     });
 
     player.on('error', function() {
