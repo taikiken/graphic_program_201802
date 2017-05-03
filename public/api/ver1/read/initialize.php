@@ -35,7 +35,10 @@ if(strlen($uid)>0){
 if(strlen($uid)==0){
 	$sql="select id,name,name_e,img from u_categories where flag=1 order by n";
 }else{
-	$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories where flag=1) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
+	//$sql=sprintf("select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories where flag=1) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid order by c,n",$uid);
+	
+	// WBCを一面の右に固定
+	$sql=sprintf("select id,name,name_e,img,n,2 as interest from u_categories where flag=1 and id in(151) union all (select t1.*,(case when t2.c=1 then 1 else 0 end) as interest from (select id,name,name_e,img,n from u_categories where flag=1 and id not in(150,151)) as t1 left join (select 1 as c,categoryid from u_category where userid=%s and flag=1) as t2 on t1.id=t2.categoryid) order by interest desc,n;",$uid);
 }
 
 $o->query($sql);
@@ -79,9 +82,10 @@ if($uid!=""){
 	$sql.=sprintf("(select 2 as h,0 as recommend,*,1 as sort,'' as modtitle from %s order by m_time desc limit 10 offset 0)",sprintf($articletable,set_isbookmark($uid)," and m1!=130"));
 }
 $sql.=" order by h,sort,recommend desc,m_time desc";
+
 */
 
-$sql=sprintf("select 0 as h,0 as recommend,tt1.*,tt2.sort,tt2.modtitle from (select d2,n as sort,title as modtitle from u_headline where cid=8 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articletable,set_isbookmark($uid),""));
+$sql=sprintf("select 0 as h,0 as recommend,tt1.*,tt2.sort,tt2.modtitle from (select d2,n as sort,title as modtitle from u_headline where cid=9 and flag=1) as tt2,(select * from %s) as tt1 where tt2.d2=tt1.id order by sort",sprintf($articletable,set_isbookmark($uid),""));
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
 
@@ -100,13 +104,13 @@ if($uid!=""){
 	if(count($category)>0){
 		$categories=implode(",",$categories);
 		$sql=sprintf("select 2 as h,*,1 as recommend from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id in(%s)",$categories)));
-		$sql.=sprintf(" union all select 2 as h,*,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$categories)),sprintf(" limit %s offset %s",100,0));
+		$sql.=sprintf(" union all select 2 as h,*,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '10 day'",$categories)),sprintf(" limit %s offset %s",100,0));
 	}else{
-		$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),100,0);
+		$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '10 day'"),100,0);
 	}
 	
 }else{
-	$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),100,0);
+	$sql=sprintf("select 2 as h,* from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '10 day'"),100,0);
 }
 
 /*
@@ -121,18 +125,15 @@ $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
 
 $hg=array("headline","pickup","latest");
+for($i=0;$i<count($hg);$i++){
+	$s[$hg[$i]]=array();
+}
 
 $nn=0;
 
 for($i=0;$i<count($p);$i++){
 	
-	if($p[$i]["h"]<=1){
-		$nm=$p[$i]["sort"]-1;
-	}else{
-		$nm=$nn;
-		$nn++;
-	}
-	
+	$nm=count($s[$hg[$p[$i]["h"]]]);
 	$s[$hg[$p[$i]["h"]]][$nm]=set_articleinfo($p[$i]);
 	
 	$sql=sprintf("select count(*) as n from u_ranking where pageid=%s and flag=1 and userflag=1",$p[$i]["id"]);
@@ -143,20 +144,20 @@ for($i=0;$i<count($p);$i++){
 	
 	if($f["n"]>0){
 
-				$sql=sprintf("select * from 
-					(select t2.*,t1.good,t1.bad,t1.rank from 
-						(select commentid,good,bad,reply,rank from u_ranking where pageid=%s and flag=1 and userflag=1 order by rank desc limit %s offset %s) as t1,
-						(select %sid,comment,userid,pageid,regitime from u_comment where pageid=%s) as t2 
-					where t1.commentid=t2.id) as st1,
-					(select 
-						id as uid,
-						cid as typeid,
-						(select name from repo where id=cid) as type,
-						title as name,
-						t2 as profile,
-						img1 as icon 
-					from u_member where flag=1) as st2
-					where st1.userid=st2.uid order by rank desc",$p[$i]["id"],6,0,set_isreaction($uid),$p[$i]["id"]);
+	  $sql=sprintf("select * from 
+		  (select t2.*,t1.good,t1.bad,t1.rank from 
+			  (select commentid,good,bad,reply,rank from u_ranking where pageid=%s and flag=1 and userflag=1 order by rank desc limit %s offset %s) as t1,
+			  (select %sid,comment,userid,pageid,regitime from u_comment where pageid=%s) as t2 
+		  where t1.commentid=t2.id) as st1,
+		  (select 
+			  id as uid,
+			  cid as typeid,
+			  (select name from repo where id=cid) as type,
+			  title as name,
+			  t2 as profile,
+			  img1 as icon 
+		  from u_member where flag=1) as st2
+		  where st1.userid=st2.uid order by rank desc",$p[$i]["id"],6,0,set_isreaction($uid),$p[$i]["id"]);
 					
 /*
 		$sql=sprintf("select * from 
@@ -188,6 +189,5 @@ for($i=0;$i<count($p);$i++){
 
 $y["response"]=$s;
 print_json($y,$_SERVER['HTTP_REFERER']);
-
 
 ?>

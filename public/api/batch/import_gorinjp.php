@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=27;
+$MEDIANAME="gorin.jp";
 $rssfile="http://www.gorin.jp/api/rss/undotsushin.xml";
 
 $o=new db;
@@ -36,6 +37,12 @@ while($f=$o->fetch_array()){
 $xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
+
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
@@ -76,7 +83,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"])){
 						unlink(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]));
@@ -106,7 +113,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
-			
+
+			$TITLE[]=pg_escape_string($s["title"]);
+
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
 			$s["m1"]=141;
@@ -138,5 +147,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}
 
 }
+
+include $INCLUDEPATH."public/display.php";
 
 ?>

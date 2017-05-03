@@ -35,9 +35,11 @@ if(getSorC("draft")==1){
 <?php } ?>
 <?php }else{ ?>
 <?php if($q->get_file()!==2){ ?>
+<!--
 <tr>
 <th colspan="2" class="inputHeader" scope="row"><?php if($q->get_dir()==4&&$q->get_file()==1){ ?>検索結果<?php }else{ ?><?=$THIS?>設定<?php } ?></th>
 </tr>
+-->
 <?php } ?>
 
 <?php include $INCLUDEPATH."lib/".$CURRENTDIRECTORY."/ex.php"; ?>

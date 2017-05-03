@@ -16,7 +16,7 @@ if(strlen($api)>0){
 	
 	$limit=sprintf(" limit %s offset %s",$length,$offset);
 	$orderby=set_orderby();
-
+	
 	if($api==="category"){
 		
 		$category=bind($_REQUEST["category"]);
@@ -25,7 +25,7 @@ if(strlen($api)>0){
 				
 		if($type===""){
 
-			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$orderby,$limit),$orderby);
+			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
 			$nsql=sprintf("select num as n from u_latestpost where m1=%s",$c[0]);
 
 /*						
@@ -37,7 +37,7 @@ if(strlen($api)>0){
 			$nsql=sprintf("select count(id) as n from repo_n where cid=1 and flag=1%s",$c);
 */
 		}elseif($type==="ranking"){
-			
+/*			
 			if($staticfileimport==1&&$offset==0&&$length==5){
 				
 				$file=sprintf("%s/static/%s-%s.json",$ImgPath,$category,$type);
@@ -62,6 +62,22 @@ if(strlen($api)>0){
 				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
 				str_replace(" and","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
 			}
+*/
+				if($category=="all"){
+					$day=3;
+				}else{
+					$sql=sprintf("select p1 from u_categories where name_e='%s'",$category);
+					$o->query($sql);
+					$f=$o->fetch_array();
+					$day=$f["p1"];
+				}
+				
+				$sql=sprintf("select st2.* from (select pageid,n from u_view where %s and regitime > now() - interval '%s day' order by n desc) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
+				str_replace(" and","",$c[1]),$day,sprintf($articletable2,set_isbookmark($uid),$c[1],"",""),"",$limit);
+				$nsql=sprintf("select count(*) as n from (select pageid,n from u_view where %s and regitime > now() - interval '%s day') as st1,(select * from %s) as st2 where st1.pageid=st2.id%s",
+				str_replace(" and","",$c[1]),$day,sprintf($articletable2c,$c[1],"",""),"");
+
+
 /*
 
 			$sql=sprintf("select tq2.%s from (select pageid,count(pageid) as n from u_view group by pageid) as tq1,(select %s from %s and m_time > now()-interval '3day') as tq2 where tq1.pageid=tq2.id order by n desc,m_time desc,id limit %s offset %s",str_replace(",",",tq2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),$c),$length,$offset);
@@ -91,16 +107,13 @@ if(strlen($api)>0){
 
 		// #860 - ダミーレスポンス
 		}elseif($type === "recommend"){
-			
-			
+
 			if ( $category === 'crazy' ){
 				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=11 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
 				$nsql="select count(id) as n from u_headline where cid=11 and flag=1";
 			}else{
 				
 			}
-			
-			
 			/*
 			
 			#970   https://github.com/undotsushin/undotsushin/issues/970
@@ -127,13 +140,18 @@ if(strlen($api)>0){
 		$q=set_condition($_REQUEST["q"]);
 		
 		if(strlen($q)>0){
-/*			
-			$sql=sprintf("select st2.* from (select id from u_index where uptime > now() - interval '90 day' and %s order by uptime desc%s) as st1,(select * from %s) as st2 where st1.id=st2.id%s",$q,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""),"");
-			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where uptime > now() - interval '90 day' and %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
-*/
+			
+			//90日限定
+			/*
 			$sql=sprintf("select st02.* from (select id from u_index where %s and uptime > now() - interval '90 day') as st01,(select * from %s) as st02 where st01.id=st02.id order by m_time desc,id limit %s offset %s",$q,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
 			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where %s and uptime > now() - interval '90 day') as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
-
+			*/
+			
+			//限定解除
+			$sql=sprintf("select st02.* from (select id from u_index where %s) as st01,(select * from %s) as st02 where st01.id=st02.id order by m_time desc,id limit %s offset %s",$q,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
+			$nsql=sprintf("select count(t1.id) as n from (select id from u_index where %s) as t1,(select id from repo_n where cid=1 and flag=1) as t2 where t1.id=t2.id",$q);
+			
+			
 		}
 
 	}elseif($api==="next"){
@@ -162,15 +180,13 @@ if(strlen($api)>0){
 				
 				if($uid!=""){
 /*
-
 					$sql=sprintf("select st2.* from (select id as pageid from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1 from repo_n where m_time > interval '-3 day' and flag=1 group by m1) as t2 where t1.categoryid=t2.m1) as st1,(select * from %s) as st2 where st1.pageid=st2.id%s%s",
 					$uid,sprintf($articletable2,set_isbookmark($uid),$c,"",""),"",$limit);
 
 					$ex=sprintf("select id from (select categoryid from u_category where userid=%s and flag=1) as t1,(select max(id) as id,m1,max(m_time) as m_time from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day' group by m1) as  t2 where t1.categoryid=t2.m1",$uid);
 					$sql=sprintf("select %s,1 as recommend from %s union select %s,0 as recommend from %s order by recommend desc,m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid),sprintf(" and id in(%s) and m_time > now() - interval '3 day'",$ex)),$articlefield,sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$ex)),$length,$offset);
-
 */
-					$sql=sprintf("select t2.pageid from (select categoryid from u_category where userid=%s and flag=1) as t1,u_latestpost as t2 where t1.categoryid=t2.m1",$uid);
+					$sql=sprintf("select t2.pageid from (select categoryid from u_category where userid=%s and categoryid!=152 and flag=1) as t1,u_latestpost as t2 where t1.categoryid=t2.m1",$uid);
 					$o->query($sql);
 					while($f=$o->fetch_array()){
 						$category[]=$f["pageid"];
@@ -179,20 +195,20 @@ if(strlen($api)>0){
 					if($_REQUEST["offset"]<count($category)){
 						$category=implode(",",$category);
 						$sql=sprintf("select *,1 as recommend from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id in(%s)",$category)));
-						$sql.=sprintf(" union all select *,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m_time > now() - interval '3 day'",$category)),$limit);
+						$sql.=sprintf(" union all select *,0 as recommend from %s order by recommend desc, m_time desc,id%s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id not in(%s) and m1!=152 and m_time > now() - interval '3 day'",$category)),$limit);
 					}else{
-						$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),$length,$offset);
+						$sql=sprintf("select * from %s order by m_time desc,id limit %s offset %s",sprintf($articletable,set_isbookmark($uid)," and m1!=152 and m_time > now() - interval '3 day'"),$length,$offset);
 					}
 					
 				}else{
-					$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid)," and m_time > now() - interval '3 day'"),$length,$offset);
+					$sql=sprintf("select %s from %s order by m_time desc,id limit %s offset %s",$articlefield,sprintf($articletable,set_isbookmark($uid)," and m1!=152 and m_time > now() - interval '3 day'"),$length,$offset);
 				}
-				$nsql="select count(id) as n from repo_n where cid=1 and flag=1 and m_time > now() - interval '3 day'";
+				$nsql="select count(id) as n from repo_n where cid=1 and flag=1 and m1!=152 and m_time < now() and m_time > now() - interval '3 day'";
 			
 			}elseif($cx==="headline"){
 				
-				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=8 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
-				$nsql="select count(id) as n from u_headline where cid=8 and flag=1";
+				$sql=sprintf("select rt1.title as modtitle,rt2.%s from (select d2,title,n as sort from u_headline where cid=9 and flag=1) as rt1,(select %s from %s) as rt2 where rt1.d2=rt2.id order by sort limit %s offset %s",str_replace(",",",rt2.",$articlefield),$articlefield,sprintf($articletable,set_isbookmark($uid),""),$length,$offset);
+				$nsql="select count(id) as n from u_headline where cid=9 and flag=1";
 			
 			}elseif($cx==="pickup"){
 				
@@ -221,6 +237,10 @@ if(strlen($api)>0){
 */
 		}
 	}
+}
+
+if(preg_match("/debugger/",$_SERVER['HTTP_REFERER'])){
+	echo $sql;
 }
 
 if($y["status"]["code"]===200){

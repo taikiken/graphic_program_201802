@@ -11,6 +11,7 @@ $p["n1"]=strlen($p["n1"]>0)?$p["n1"]:$defsize[0];
 <script type="text/javascript">
 
 $(function(){
+	$(".img1 .inputFields").append("<div class='imgbox2' style='margin-top:10px;'></div>");
 	<?php if(strlen($p[$a])>0){ ?>$(".eyoutube").show();<?php } ?>
 	function zth(str){
 		return str.replace("．",".").replace(/[Ａ-Ｚａ-ｚ０-９]/g,function(s){return String.fromCharCode(s.charCodeAt(0)-0xFEE0);}).replace(/,/g,"");
@@ -28,13 +29,17 @@ $(function(){
 			else if(m.match(/youtu.be\/([0-9a-zA-Z-_]{11})/))t=m.match(/youtu.be\/([0-9a-zA-Z-_]{11})/)[1];
 			
 			if(t!=""){
+				
 				$("[name='p_<?=$a?>']").val(t);
 				m=t;
 				yu=m;
 				var src="https://www.youtube.com/embed/";
 				$(".eyoutube").show();
 				$(".eyoutube iframe").prop("src",src+m);
-
+				
+				var img=sprintf("http://i.ytimg.com/vi/%s/0.jpg",m);
+				$($(".img1 .inputFields .imgbox2")).html(sprintf("<img src='%s' width='640'>",img));
+				
 			}else{
 				alert("URLから動画IDを読み込みませんでした。11桁のIDを入力してください。");
 			}
