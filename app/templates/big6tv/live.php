@@ -60,6 +60,9 @@
 
 
 <style>
+  .video-js {
+    outline: none;
+  }
   .video-js .vjs-big-play-button {
     z-index: 9999;
     top: 50%;
@@ -71,6 +74,11 @@
     line-height: 3;
   }
   .video-js .vjs-audio-button {
+    display: none;
+  }
+
+  /* #iOS インライン再生中のローディング非表示 */
+  .video-js.vjs-ad-playing .vjs-loading-spinner {
     display: none;
   }
 </style>
@@ -261,14 +269,12 @@ streampack初期化コード
     player.ads.videoElementRecycled = function() {
       return;
     }
+    log('player.ima', player.ima);
 
     var contentPlayer =  document.getElementById('content_video_html5_api');
-    if ((navigator.userAgent.match(/iPad/i) ||
-          navigator.userAgent.match(/Android/i)) &&
-        contentPlayer.hasAttribute('controls')) {
+    if ( ( navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i) ) && contentPlayer.hasAttribute('controls') ) {
       contentPlayer.removeAttribute('controls');
     }
-
 
     var startEvent = 'click';
     var isMobile   = false;
@@ -332,7 +338,7 @@ streampack初期化コード
 
     player.on('progress', function() {
       playerState  = 'progress';
-      log('live - progress');
+      // log('live - progress');
     });
 
     player.on('ended', function() {
@@ -348,12 +354,13 @@ streampack初期化コード
     });
 
     player.on('adstart', function() {
-      isAdPlayed  = true;
+      playerState = 'adstart';
       player.volume(1);
       log('live - adstart', player.ads);
     });
 
     player.on('adend', function() {
+      playerState = 'adend';
       isAdPlayed  = true;
       player.play();
       ga('send', 'event', 'live', 'adend', ad_url , 0, {nonInteraction: true} );
@@ -385,10 +392,24 @@ streampack初期化コード
     // check state
     // ------------------------------
     playerStateInterval = setInterval(function() {
+
+      // 強制再読込のリセット
       if ( playerState !== 'waiting' ) {
         clearTimeout(playerResetTimer);
       }
-      log('live - state', playerState );
+
+      // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
+      if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
+        isAdPlayed = true;
+        player.ima.startFromReadyCallback();
+        // player.ima.adsManager.stop();
+        // player.ima.adsManager.destroy();
+        // player.play();
+        log('live - adend by getRemainingTime');
+      }
+
+      log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' + player.ima.adsManager.getRemainingTime() );
+
     }, 3000);
 
     log('live - initVideo', data);
