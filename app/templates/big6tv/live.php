@@ -255,7 +255,7 @@ streampack初期化コード
       }
     });
 
-    // player.ads();
+    log('player', player);
 
     var options = {
       adLabel          : '広告',
@@ -393,22 +393,28 @@ streampack初期化コード
     // ------------------------------
     playerStateInterval = setInterval(function() {
 
+      var adRemainingTime = 0;
+
       // 強制再読込のリセット
       if ( playerState !== 'waiting' ) {
         clearTimeout(playerResetTimer);
       }
 
       // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
-      if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
-        isAdPlayed = true;
-        player.ima.startFromReadyCallback();
-        // player.ima.adsManager.stop();
-        // player.ima.adsManager.destroy();
-        // player.play();
-        log('live - adend by getRemainingTime');
+      if ( player.ima.adsManager ) {
+        if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
+          isAdPlayed = true;
+          player.ima.startFromReadyCallback();
+          // player.ima.adsManager.stop();
+          // player.ima.adsManager.destroy();
+          // player.play();
+          log('live - adend by getRemainingTime');
+        }
+
+        adRemainingTime = player.ima.adsManager.getRemainingTime();
       }
 
-      log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' + player.ima.adsManager.getRemainingTime() );
+      log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
 
     }, 3000);
 
