@@ -104,7 +104,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 				splittime($s["m_time"],$s["a_time"]);
 				$sqla[]=makesql($s,$f["id"]);
 				$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
-				if($data["channel"]["item"][$i]["relatedLink"])$sqla[]=relatedlink3($data["channel"]["item"][$i]["relatedLink"]["link"],$f["id"]);
+				if($data["channel"]["item"][$i]["relatedLink"])$sqla[]=relatedlink2($data["channel"]["item"][$i]["relatedLink"]["link"],$f["id"]);
 			}
 		}elseif($data["channel"]["item"][$i]["status"]==0){
 			$sqla[]=sprintf("update repo_n set flag=0 where id=%s;",$f["id"]);
