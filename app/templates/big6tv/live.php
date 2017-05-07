@@ -120,6 +120,7 @@ streampack初期化コード
 
   var isPlayed        = false;
   var isAdPlayed      = false;
+  var isAdStarted     = false;
   var isAndroid       = false;
 
   // 初回実行
@@ -218,6 +219,7 @@ streampack初期化コード
     $embed.find('video').attr('poster', data.alt.large );
     $embed.find('source').attr('src', data.video.source );
 
+    var contentPlayer       = undefined;
     var playerState         = null;
     var playerStateInterval = null;
     var playerResetTimer    = null;
@@ -242,6 +244,8 @@ streampack初期化コード
 
     // player
     // ------------------------------
+
+    // init
     var player = videojs('content_video', {
       textTrackSettings: false,
       hls : {
@@ -255,8 +259,10 @@ streampack初期化コード
       }
     });
 
+    contentPlayer = document.getElementById('content_video_html5_api');
     log('player', player);
 
+    // ima
     var options = {
       adLabel          : '広告',
       id               : 'content_video',
@@ -271,11 +277,14 @@ streampack初期化コード
     }
     log('player.ima', player.ima);
 
-    var contentPlayer =  document.getElementById('content_video_html5_api');
+
+    // controls
     if ( ( navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i) ) && contentPlayer.hasAttribute('controls') ) {
       contentPlayer.removeAttribute('controls');
     }
 
+
+    // bind
     var startEvent = 'click';
     var isMobile   = false;
 
@@ -355,6 +364,7 @@ streampack初期化コード
 
     player.on('adstart', function() {
       playerState = 'adstart';
+      isAdStarted = true;
       player.volume(1);
       log('live - adstart', player.ads);
     });
@@ -401,7 +411,7 @@ streampack初期化コード
       }
 
       // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
-      if ( player.ima.adsManager ) {
+      if ( isAdStarted ) {
         if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
           isAdPlayed = true;
           player.ima.startFromReadyCallback();
@@ -412,6 +422,11 @@ streampack初期化コード
         }
 
         adRemainingTime = player.ima.adsManager.getRemainingTime();
+      }
+
+      // 本編再生中に `playsinline` なら video.jsのcontrols非表示
+      if ( isAdPlayed && contentPlayer.hasAttribute('playsinline') ) {
+        $embed.find('.vjs-control-bar').hide();
       }
 
       log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
