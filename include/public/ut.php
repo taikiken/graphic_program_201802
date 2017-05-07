@@ -45,7 +45,7 @@ left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
-	name_e as slug
+	name_e as slug,
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
@@ -95,7 +95,7 @@ left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
-	name_e as slug
+	name_e as slug,
 	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
@@ -330,6 +330,7 @@ function set_categoriesinfo($f){
 	//ディスクリプションとキーワード設定
 	$s["seo_desc"]=$f["seo_desc"];
 	$s["seo_key"]=$f["seo_key"];
+
 	//https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
 	//タイトル画像のリンク追加
 	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
