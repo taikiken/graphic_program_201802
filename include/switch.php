@@ -33,7 +33,7 @@ if(strpos($CURRENTPATH,$ADPATH)){
 	}
 
 }else{
-
+	header('Cache-Control: no-cache="set-cookie", no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 }
 
 ?>

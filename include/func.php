@@ -51,7 +51,7 @@ function make_contents($id,$type=0){
 	$l=array();
 
 	while($f=$o->fetch_array()){
-		$l[]=make_contentsblock($f["types"],$f["title"],$f["media"],$f["link"]);
+		$l[]=make_contentsblock($f["types"],$f["title"],$f["media"],$f["link"],1);
 	}
 	$l=implode("\n",$l);
 	
@@ -79,7 +79,7 @@ function youtubeURL($u){
 	return str_replace($originalurl,$rewriteurl,$u);
 }
 
-function make_contentsblock($type,$title,$media,$link){
+function make_contentsblock($type,$title,$media,$link,$flag=0){
 	
 	$title=str_replace("''","'",$title);
 	$l="";
@@ -108,7 +108,11 @@ function make_contentsblock($type,$title,$media,$link){
 			$css="";
 			$container="%s";
 		}
-		$l=sprintf("<div class=\"cms_widget%s\">%s</div>",$css,sprintf($container,$title));
+		
+		$contents=sprintf($container,$title);
+		if($flag==0&&preg_match("/location\.href/",$title)&&preg_match("/editdm/",$_SERVER["REQUEST_URI"]))$contents=htmlspecialchars(stripslashes($title));
+		
+		$l=sprintf("<div class=\"cms_widget%s\">%s</div>",$css,$contents);
 	}elseif($type==6){
 		//$l=sprintf("<div class=\"cms_pdf\"><a href=\"/prg_img/pdf/%s\" target=\"_blank\">%s</a></div>",$media,$title);
 	}
@@ -179,7 +183,6 @@ function fileNameModified($n){
 
 function setTransaction($title,$sessionid,$condition=""){
 
-	global $_SERVER;
 	global $SITE_URL;
 	global $SESSIONFILEDIR;
 	
@@ -375,7 +378,6 @@ function stSw($a,$b){
 }
 
 function table($name,$f="title"){
-	global $_SERVER;
 	if(!strpos($_SERVER['HTTP_REFERER'],"editdm")){
 		return sprintf("(select * from %s where %s!='' and flag=1 and expire=1) as %s",$name,$f,$name);
 	}else{
@@ -396,14 +398,13 @@ function dateOffset($offset,$y,$m,$d){
 
 function logIns($message,$usr,$error="",$sqls=""){
 	
-	global $CMSLOG,$_COOKIE;
+	global $CMSLOG;
 		
 	$fp=@fopen($CMSLOG,"a");
 	@fputs($fp,sprintf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",date("Y-m-d H:i:s"),$_COOKIE["usr"],$message,(strlen($error)>0)?0:1,$error,preg_replace('/(\n|\t)/',"",$sqls)));
 	@fclose($fp);
 }
 function sessionregister($s){
-	global $_SESSION;
 	for($i=0;$i<count($s);$i++)$_SERVER[$s[$i]]="";
 }
 function setSorC($name,$value){
@@ -411,17 +412,11 @@ function setSorC($name,$value){
 	if($SORC==0){
 		setcookie($name,$value,time()+60*60*3,"/");
 	}else{
-		global $_SESSION;
 		$_SESSION[$name]=$value;
 	}
 }
 function getSorC($name){
 	global $SORC;
-	if($SORC==0){
-		global $_COOKIE;
-	}else{
-		global $_SESSION;
-	}
 	return ($SORC==0)?$_COOKIE[$name]:$_SESSION[$name];
 }
 
@@ -632,7 +627,6 @@ function echo_hidden($f,$q=1){
 
 function data_conf($q="^p_"){
 
-	global $_POST;
 	global $sv;
 	global $sn;
 
@@ -651,7 +645,6 @@ function data_conf($q="^p_"){
 	}
 }
 function data_sql($q="^p_"){
-	global $_POST;
 	global $sv;
 	global $sn;
 	while(list($k,$v)=each($_POST)){
@@ -677,6 +670,7 @@ function data_sql($q="^p_"){
 					//$v=ctx($v,2);
 				}
 				$v=str_replace("'","''",$v);
+				$v=str_replace('\\','\\\\',$v);
 				$v=html_entity_decode($v);
 				$v=sprintf("'%s'",$v);
 			}else{

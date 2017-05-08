@@ -7,6 +7,7 @@ $o=new db;
 $o->connect();
 
 $MEDIAID=17;
+$MEDIANAME="Jスポーツ";
 
 $sql=sprintf("select id,name,name_e,yobi from u_categories where flag=1 and id not in(%s) order by id desc",implode(",",$excategory));
 $o->query($sql);
@@ -47,7 +48,13 @@ while(list($k,$v)=each($data)){
 	
 	unset($s);
 	$d=$v["channel"]["item"];
-	
+
+	if($v["channel"]["item"]["title"]){
+		$entry=$v["channel"]["item"];
+		unset($d);
+		$d[]=$entry;
+	}
+
 	for($i=0;$i<count($d);$i++){
 		
 		$s["m1"]=137;
@@ -75,7 +82,7 @@ while(list($k,$v)=each($data)){
 		unset($sqla);
 		
 		if(strlen($f["id"])>0){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -87,6 +94,9 @@ while(list($k,$v)=each($data)){
 				$sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
 			}
 		}else{	
+
+			$TITLE[]=pg_escape_string($s["title"]);
+
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
 			$s["flag"]=1;
@@ -125,5 +135,6 @@ while(list($k,$v)=each($data)){
 	
 }
 
+include $INCLUDEPATH."public/display.php";
 
 ?>
