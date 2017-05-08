@@ -161,6 +161,10 @@ if ( $template_name == 'category' ) {
   if ( !empty($page['template_classname']) && !in_array($page['template_classname'], $whole_classes) ) {
     $whole_classes[] = $page['template_classname'];
   }
+
+  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
+  // @since 2017-05-08 - category slug を追加する
+  $whole_classes[] = $page['category']['slug'];
 } elseif ( $template_name == 'search' ) {
   // @since 2016-09-01
   // https://github.com/undotsushin/undotsushin/issues/1053
@@ -180,6 +184,10 @@ if ( $template_name == 'category' ) {
   if (isset($page_category) && $page_category['slug'] == 'big6tv' && !in_array('theme_big6', $whole_classes)) {
     $whole_classes[] = 'theme_big6';
   }
+
+  // @see https://github.com/undotsushin/undotsushin/issues/1891#issuecomment-298291706
+  // @since 2017-05-08 - category slug を追加する
+  $whole_classes[] = $page_category['slug'];
 }
 ?>
 </head>
