@@ -23,6 +23,48 @@ $key-color: #cc141d;
     }
   }
 
+  .headline {
+    // ref. /_src/app/assets/css/module/_index.scss line: 205
+    &-heading {
+      &-title {
+        width: 178px;
+        height: 20px;
+        background: url(/assets/images/common/headline-heading_dark.png) 0 0 no-repeat;
+        @include hide-text;
+        vertical-align: middle;
+      }
+
+      &-ruby {
+        color: #fff;
+      }
+    }
+  }
+
+  .headline-outer .sponsor-link,
+  .sponsor-link-ranking,
+  .sponsor-link-recommend {
+    // ref. /_src/app/assets/css/module/_index.scss line: 254
+    // ref. /_src/app/assets/css/_layout.scss line: 973
+    .adgLink {
+      .adsDescription {
+        color: #fff;
+      }
+
+      &:hover {
+        .adsDescription {
+          color: $key-color !important;
+        }
+      }
+    }
+
+    .adsTitle {
+      &,
+      .adsSponsored {
+        color: #bcb8ad !important;
+      }
+    }
+  }
+
   .widget-ranking,
   .widget-recommend {
     &-heading,
@@ -93,27 +135,27 @@ $key-color: #cc141d;
     }
   }
 
-  .sponsor-link-ranking,
-  .sponsor-link-recommend {
-    .adgLink {
-      .adsDescription {
-        color: #fff !important;
-      }
+  // .sponsor-link-ranking,
+  // .sponsor-link-recommend {
+  //   .adgLink {
+  //     .adsDescription {
+  //       color: #fff !important;
+  //     }
 
-      &:hover {
-        .adsDescription {
-          color: $key-color !important;
-        }
-      }
-    }
+  //     &:hover {
+  //       .adsDescription {
+  //         color: $key-color !important;
+  //       }
+  //     }
+  //   }
 
-    .adsTitle {
-      &,
-      .adsSponsored {
-        color: $key-color !important;
-      }
-    }
-  }
+  //   .adsTitle {
+  //     &,
+  //     .adsSponsored {
+  //       color: $key-color !important;
+  //     }
+  //   }
+  // }
 
   .widget-postList {
     .post {
