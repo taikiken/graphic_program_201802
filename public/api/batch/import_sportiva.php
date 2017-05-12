@@ -42,9 +42,16 @@ function modifytag($s){
 			$s=str_replace($u[0][$i],"",$s);
 		}
 	}
-
+	
+	$s=preg_replace("#\n#","",$s);
+	$s=str_replace("詳細はこちら＞","",$s);
+	$s=preg_replace("/■.+＞＞/m","",$s);
+	$s=preg_replace("/■.+＞/m","",$s);
+	$s=preg_replace("/◆.+＞＞/m","",$s);
 	$s=str_replace("<br />","<br>",$s);
 	$s=str_replace(array("<p><br>","<br><br><br>","<p></p>","<br></p>"),array("<p>","<br><br>","","</p>"),$s);
+	$s=str_replace("> <","><",$s);
+	$s=str_replace("<br></p>","</p>",$s);
 	
 	return $s;
 }
