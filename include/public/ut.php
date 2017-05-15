@@ -959,6 +959,17 @@ function get_contents($url){
 	else return $output;
 }
 
+if (!function_exists("s3upload"))
+{
+	function s3upload($from,$to){
+		global $s3active;
+		if($s3active){
+			$s3i=new S3Module;
+			$s3i->upload($from,$to);
+		}
+	}
+}
+
 function split_utime($a){
 	global $sv,$sn;
 	$ss=explode(",",str_replace(array(" ","-",":","."),",",$a));
