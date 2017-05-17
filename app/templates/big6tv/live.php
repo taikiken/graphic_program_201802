@@ -217,14 +217,7 @@ streampack初期化コード
   function initVideo( data ) {
     $embed.html( $tmpl_video );
     $embed.find('video').attr('poster', data.alt.large );
-    //$embed.find('source').attr('src', data.video.source );
-
-    // #1901 desktop版はABR固定
-    <?php if ( $page['ua'] == 'desktop' ) :?>
-      $embed.find('source').attr('src', 'https://d3t6uer7w31bug.cloudfront.net/live_big6/bball.m3u8');
-    <?php else : ?>
-      $embed.find('source').attr('src', data.video.source );
-    <?php endif ;?>
+    $embed.find('source').attr('src', data.video.source );
 
     var contentPlayer       = undefined;
     var playerState         = null;
