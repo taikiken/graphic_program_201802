@@ -15,6 +15,7 @@
   <title><?php echo $page['title']; ?></title>
   <style type="text/css">
     * {
+      background : #000;
       padding : 0;
       margin  : 0;
     }
