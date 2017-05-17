@@ -268,6 +268,7 @@ streampack初期化コード
       id               : 'content_video',
       adTagUrl         : ad_url,
       requestMode      : 'ondemand',
+      prerollTimeout   : 50000,
       debug            : true
     };
 
