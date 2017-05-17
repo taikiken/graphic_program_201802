@@ -87,6 +87,13 @@ if(strlen($f["name"])>0){
 
   endif;
 
+  # ref. #1918
+  if ( $category === 'motorsports' ) :
+    $categoriesinfo['webviews']     = array(
+      '/category/motorsports/webviews/links/',
+    );
+  endif;
+
 
 $y["response"]=$categoriesinfo;
 
