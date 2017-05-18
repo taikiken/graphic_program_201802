@@ -160,13 +160,8 @@
 <?php endforeach; ?>
 
         <div id="js-banner__app" class="banner__app">
-          <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://itunes.apple.com/jp/app/undotsushin/id1086719653?l=ja&ls=1&mt=8"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          <a id="js-banner__app__link-for-Android" style="display: none;" href="https://play.google.com/store/apps/details?id=com.undotsushin"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          <?php
-          // 2017/05/18 ref: https://github.com/undotsushin/undotsushin/issues/1927
-          // <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://app.adjust.com/gahlmm"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          // <a id="js-banner__app__link-for-Android" style="display: none;" href="https://app.adjust.com/rzqavj"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
-          ?>
+          <a id="js-banner__app__link-for-iOS" style="display: none;" href="https://app.adjust.com/gahlmm"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
+          <a id="js-banner__app__link-for-Android" style="display: none;" href="https://app.adjust.com/rzqavj"><img src="/assets/sp/images/picks/au/banner-app_big6tv.png" alt="スポーツブルアプリをダウンロード"></a>
         </div><!-- /.link_recent -->
 
       </section><!-- /.main-sec -->
