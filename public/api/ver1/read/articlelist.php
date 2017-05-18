@@ -85,7 +85,7 @@ if(strlen($api)>0){
 */
 		}elseif($type==="video"){
 
-			if($staticfileimport==1&&$offset==0&&$length==5){
+			if($staticfileimport==1&&$offset==0&&$length==50){
 				
 				$file=sprintf("%s/static/%s-%s.json",$ImgPath,$category,$type);
 				$y=get_contents($file);
