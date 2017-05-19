@@ -34,7 +34,7 @@ if($y["status"]["code"]===200){
 				t2 as profile,
 				img1 as icon 
 			from u_member where flag=1) as st2
-			where st1.userid=st2.uid order by rank desc",$pageid,$length,$offset,set_isreaction($uid),$pageid);
+			where st1.userid=st2.uid order by rank desc,regitime desc",$pageid,$length,$offset,set_isreaction($uid),$pageid);
 		$nsql=sprintf("select count(*) as n from u_ranking where pageid=%s and flag=1 and userflag=1",$pageid);
 
 /*
