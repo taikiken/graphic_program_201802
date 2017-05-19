@@ -295,7 +295,6 @@ streampack初期化コード
 
       if ( navigator.userAgent.match(/Android/i) ) {
         isAndroid  = true;
-        startEvent = 'click';
       }
     }
 
