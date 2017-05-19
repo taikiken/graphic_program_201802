@@ -386,18 +386,12 @@ streampack初期化コード
 
       var error = this.player().error();
 
-      reset();
-      initAlt( data.error.large );
+      // reset();
+      // initAlt( data.error.large );
 
       if ( error ) {
         ga('send', 'event', 'live', 'error', error.code + ' | ' + error.type + ' | ' +  error.message + ' | ' + navigator.userAgent , 0, {nonInteraction: true} );
       }
-
-      if ( isAndroid ) {
-        isAdPlayed = true;
-        initVideo( data );
-      }
-
     });
 
 
