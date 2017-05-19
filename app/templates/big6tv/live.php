@@ -395,9 +395,6 @@ streampack初期化コード
 
       var error = this.player().error();
 
-      // reset();
-      // initAlt( data.error.large );
-
       if ( error ) {
         ga('send', 'event', 'live', 'error', error.code + ' | ' + error.type + ' | ' +  error.message + ' | ' + navigator.userAgent , 0, {nonInteraction: true} );
       }
@@ -420,9 +417,6 @@ streampack初期化コード
         if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
           isAdPlayed = true;
           player.ima.startFromReadyCallback();
-          // player.ima.adsManager.stop();
-          // player.ima.adsManager.destroy();
-          // player.play();
           log('live - adend by getRemainingTime');
         }
 
