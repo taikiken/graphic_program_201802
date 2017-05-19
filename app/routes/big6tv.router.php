@@ -91,11 +91,11 @@ $app->group('/{slug:big6tv}',  function () use($app) {
 
     // 開催前
     if ( $current < $gameDataArray[0]['int'] ) :
-      $gameData = array_slice($gameDataArray, 0, 2);
+      $gameData = array_slice($gameDataArray, 0, 4);
 
     // 開催終了
     elseif ( $current > $gameDataArray[$length - 1]['int'] ) :
-      $gameData = array_slice($gameDataArray, $length - 2);
+      $gameData = array_slice($gameDataArray, $length - 4);
 
     // 開催期間中
     else :
@@ -121,7 +121,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
 
       endforeach;
 
-      $gameData = array_slice($gameDataArray, $currentKey - 1, 2);
+      $gameData = array_slice($gameDataArray, $currentKey - 2, 4);
 
     endif;
 
