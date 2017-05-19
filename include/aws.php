@@ -143,4 +143,11 @@ class S3Module {
 	}
 }
 
+function s3upload($from,$to){
+	global $domain;	
+	if($domain=="http://ut")return;
+	$s3i=new S3Module;
+	$s3i->upload($from,$to);
+}
+
 ?>

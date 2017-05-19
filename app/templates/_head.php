@@ -35,7 +35,7 @@
   <meta property="og:locale" content="ja_JP" />
 
   <!-- twitter card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@<?php echo $page['sns']['twitter']; ?>">
   <meta name="twitter:title" content="<?php echo $page['og_title']; ?>">
   <meta name="twitter:image" content="<?php echo $page['og_image']; ?>">

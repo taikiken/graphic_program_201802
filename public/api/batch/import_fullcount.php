@@ -4,7 +4,8 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=20;
-$rssfile="http://full-count.jp/fineplay-feed/";
+$MEDIANAME="フルカウント";
+$rssfile="https://full-count.jp/fineplay-feed/";
 
 $o=new db;
 $o->connect();
@@ -12,6 +13,12 @@ $o->connect();
 $xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
+
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
@@ -43,7 +50,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7 like '%s%s%s'",$MEDIAID,"%",str_replace(array("http://full-count.jp","https://full-count.jp"),"",$data["channel"]["item"][$i]["guid"]),"%");
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
@@ -51,7 +58,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -69,6 +76,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
+			
+			$TITLE[]=pg_escape_string($s["title"]);
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
@@ -91,5 +100,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	}
 
 }
+
+include $INCLUDEPATH."public/display.php";
 
 ?>

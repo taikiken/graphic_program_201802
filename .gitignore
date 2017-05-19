@@ -93,6 +93,8 @@ public/assets/js/
 public/assets/sp/
 # 2016-09-06 added
 public/about/*
+# 2017-05-17 added
+public/wbc/_index_archive.html
 
 # 開発 css 出力 directory
 # ------------

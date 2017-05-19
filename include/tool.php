@@ -20,7 +20,7 @@ function makeContentsPreview($d){
 }
 
 function multiLangTitle($f){
-	global $_COOKIE,$MULTILANG;
+	global $MULTILANG;
 	if($MULTILANG!=1){
 		return $f;
 	}else{
@@ -82,7 +82,7 @@ function getLatLng($ad){
 	}
 }
 function getBill(){
-	global $_GET,$o;
+	global $o;
 	
 	if(strlen($_GET["qid"])>0)$cid=$_GET["qid"];
 	elseif(strlen($_GET["rid"])>0)$cid=$_GET["rid"];
@@ -164,7 +164,7 @@ function makeTextfieldAddOption($a,$b,$c,$d,$e,$f,$g,$h,$x){
 	return $l.$ll;
 }
 function makeTextfieldCell($a,$b,$c,$d,$e){
-	global $q,$p,$_GET;
+	global $q,$p;
 	echo sprintf("<tr class=\"%s\"><td%s class=\"inputTitle\">%s</td><td class=\"inputFields\">",$a,strlen($d)>0&&!preg_match("/\.php/",$d)?" rowspan=\"2\"":"",$b);
 	if($e==0){
 		if(preg_match("/fn0fn1/",$a))include "_map.php";
@@ -214,7 +214,7 @@ function setTextfieldMenuTitle($sql,$id){
 
 function makeTextfieldConf($a,$b,$c,$d,$e,$f,$g,$h,$yz){
 
-	global $_POST,$q,$LANG,$_OP01,$_OP02,$_OP03;
+	global $q,$LANG,$_OP01,$_OP02,$_OP03;
 
 	if($b==""){
 		$f_name=array($a);
@@ -263,10 +263,10 @@ function makeTextfieldConf($a,$b,$c,$d,$e,$f,$g,$h,$yz){
 }
 
 function makeTextAreaCell($a,$b,$c,$d,$e,$f){
-	global $q,$p,$f_name,$CONTENTS_EDITED,$_GET;
+	global $q,$p,$f_name,$CONTENTS_EDITED;
 	echo sprintf("<tr class=\"%s\"><td%s class=\"inputTitle\">%s</td><td class=\"inputFields\"><div class=\"ckbox\">",$b,strlen($e)>0?" rowspan=\"2\"":"",$a);
 	if($f==0){
-		echo sprintf("<textarea name=\"p_%s\" id=\"p_%s\" rows=\"%s\"%s>%s</textarea>",$b,$b,$c,$d==82?" class=\"ckeditor\"":"",stripslashes($p[$b]));
+		echo sprintf("<textarea name=\"p_%s\" id=\"p_%s\" rows=\"%s\"%s>%s</textarea>",$b,$b,$c,$d==82?" class=\"ckeditor\"":"",$p[$b]);
 	}else{
 		global $LANG;
 		for($i=0;$i<count($LANG);$i++){
@@ -288,7 +288,7 @@ function makeTextAreaConf($a,$b,$c,$d,$e){
 				$f=preg_replace("/(\r\n|\r|\n|\t)/","",$f);
 				echo sprintf("<div class=\"preview\">%s</div>",$f);
 			}else{
-				echo nl2br($f);
+				echo nl2br(htmlspecialchars($f));
 			}
 		}else{
 			echo "-";
@@ -403,7 +403,7 @@ function echoCellField($title,$contents,$comment="",$flag=1){
 
 function echoPullMenu($f_name,$SIZE,$d_name,$op,$sv,$r,$op01="",$op02="",$op03="",$op04="",$op05="",$langf=""){
 
-	global $o,$_GET;
+	global $o;
 
 	$c=explode(",",$f_name);
 	for($i=0;$i<count($c);$i++){
@@ -440,7 +440,7 @@ function echoPullMenu($f_name,$SIZE,$d_name,$op,$sv,$r,$op01="",$op02="",$op03="
 
 function makePullMenus($f,$s,$d,$op,$sv,$r="p_",$v="",$op01="",$op02="",$op03="",$op04="",$op05="",$langf=""){
 
-	global $o,$_GET;
+	global $o;
 	
 	$c=explode(",",$f);
 	for($i=0;$i<count($c);$i++){
@@ -514,7 +514,7 @@ function echoBlockContents($s,$l,$h=""){
 	return $st;
 }
 function echoBlockContents2($s){
-	global $contentsEditorTypes,$_GET;
+	global $contentsEditorTypes;
 	for($i=0;$i<count($s);$i++){
 		$sld=($s[$i]["id"]==$_GET["eid"])?sprintf("value=\"\" selected=\"selected\""):sprintf("value=\"%s\"",$s[$i]["id"]);
 		$k[$i]=sprintf("<option %s>%s:%s</option>",$sld,$s[$i]["n"],$contentsEditorTypes[$s[$i]["types"]]);
@@ -523,7 +523,7 @@ function echoBlockContents2($s){
 }
 
 function echoBlockContents4($s){
-	global $contentsEditorTypes,$_GET;
+	global $contentsEditorTypes;
 	
 	$k[]="<option value=\"\"></option>";
 	for($i=0;$i<count($s);$i++){
@@ -568,6 +568,20 @@ function checkEnglishTitle($s){
 }
 
 
+function get_youtubeimg($y){
+
+  $youtubeimg[]=sprintf("http://i.ytimg.com/vi/%s/maxresdefault.jpg",$y);
+  $youtubeimg[]=sprintf("http://i.ytimg.com/vi/%s/sddefault.jpg",$y);
+  $youtubeimg[]=sprintf("http://i.ytimg.com/vi/%s/mqdefault.jpg",$y);
+  
+  for($i=0;$i<count($youtubeimg);$i++){
+	  $img=$youtubeimg[$i];
+	  $size=getimagesize($img);
+	  if($size[0]){
+		  return $img;
+	  }
+  }	
+}
 
 function makeComment($s,$m,$c){
 	$l.=sprintf(" サイズ：[ %sMbyte ]以下",$m);
@@ -604,26 +618,6 @@ function checkFileType($p){
 	}
 	return $extension;
 }
-function imgFileMove($p,$filename){
-	global $TMPPATH;
-	global $RAWIMG;
-	global $domain;
-	if(move_uploaded_file($p["tmp_name"],$TMPPATH.$filename)){
-		if(copy($TMPPATH.$filename,$RAWIMG.$filename)){
-			
-			$up=1;
-			if($domain!="http://ut"){
-				$s3i=new S3Module;
-				$s3i->upload(sprintf("%s%s",$TMPPATH,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$RAWIMG,$filename)));
-			}
-		}else{
-			$up=0;
-		}
-	}else{
-		$up=0;
-	}
-	return $up;
-}
 
 function makeDefaultImg($filename,$type){
 
@@ -653,21 +647,35 @@ function outputImg($res,$filename,$type){
 		echo "画像の出力に失敗しました。もう一度アップロードしてください。";
 	}
 	
-	if(preg_match("/prg_img/",$filename)&&$domain!="http://ut"){
-		$upfile=str_replace("../../../prg_img/","",$filename);
-		$s3i=new S3Module;
-		$s3i->upload($filename,$upfile);
+	if(preg_match("/prg_img/",$filename)){
+		s3upload($filename,str_replace("../../../prg_img/","",$filename));
 	}
 	
 	return $e;
 }
-
+function imgFileMove($p,$filename){
+	global $TMPPATH;
+	global $RAWIMG;
+	global $domain;
+	if(move_uploaded_file($p["tmp_name"],$TMPPATH.$filename)){
+		if(copy($TMPPATH.$filename,$RAWIMG.$filename)){
+			$up=1;
+			s3upload(sprintf("%s%s",$TMPPATH,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$RAWIMG,$filename)));
+		}else{
+			$up=0;
+		}
+	}else{
+		$up=0;
+	}
+	return $up;
+}
 function chk_img($p,$SIZE="",$copy="",$oi="",$df=""){
-	
+
 	global $TMPPATH;
 	global $IMG;
 	global $RAWIMG;
 	global $_OPTION;
+	global $domain;
 	
 	$imgSubstance=imgInitialize($_OPTION,$SIZE);
 	
@@ -683,17 +691,34 @@ function chk_img($p,$SIZE="",$copy="",$oi="",$df=""){
 		return false;
 	}
 	ereg(".([0-9]+) ",microtime(),$m);
-	if(!imgFileMove($p,$filename=sprintf("img%s%s.%s",date("YmdHis"),$m[1],$type))){
-		echo "画像のアップロードに失敗しました。もう一度アップロードしてください。";
-		return false;
-	}
-	if($type!="mp4"){
-	if(!$size=GetImageSize($TMPPATH.$filename)){
-		echo "画像のアップロードに失敗しました。もう一度アップロードしてください。";
-		return false;
-	}
+	if(!preg_match("#^http#",$p["tmp_name"])){
+		
+		if(!imgFileMove($p,$filename=sprintf("img%s%s.%s",date("YmdHis"),$m[1],$type))){
+			echo "画像のアップロードに失敗しました。もう一度アップロードしてください。";
+			return false;
+		}
+	}else{
+		
+		$size=getimagesize($p["tmp_name"]);
+		$img=get_contents($p["tmp_name"]);
+		$filename=sprintf("img%s%s.%s",date("YmdHis"),$m[1],$type);
+		file_put_contents($TMPPATH.$filename,$img);
+		
+		if($size>728){
+			imgResize($TMPPATH.$filename,$RAWIMG.$filename,728,$p="jpg","","","","");
+		}else{
+			file_put_contents($RAWIMG.$filename,$img);
+		}
+		s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$RAWIMG,$filename)));
 	}
 
+	if($type!="mp4"){
+		if(!$size=GetImageSize($TMPPATH.$filename)){
+			echo "画像のアップロードに失敗しました。もう一度アップロードしてください。";
+			return false;
+		}
+	}
+	
 	if($type=="swf"){
 		if($size[0]<$SIZE){
 			return $filename;
@@ -702,7 +727,7 @@ function chk_img($p,$SIZE="",$copy="",$oi="",$df=""){
 			return false;
 		}
 	}
-
+	
 	outputs($imgSubstance,$filename,$type,$size,$copy);
 	return $filename;
 }
@@ -716,8 +741,6 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 	if(strlen($type)==0)$type=substr($filename,-3,3);
 	if(strlen($size)==0)$size=getimagesize($RAWIMG.$filename);
 
-	if($domain!="http://ut")$s3i=new S3Module;
-
 	for($i=0;$i<count($imgSubstance);$i++){
 		if($type!="gif"){
 			if($imgSubstance[$i]["w"]!=""&&$imgSubstance[$i]["h"]!=""){
@@ -726,7 +749,7 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 				}else{
 					if($i==0){
 						copy($RAWIMG.$filename,$IMG[$i].$filename);
-						if($domain!="http://ut")$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+						s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
 						//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
 					}else{
 						imgDresize($RAWIMG.$filename,$IMG[$i].$filename,array($imgSubstance[$i]["w"],$imgSubstance[$i]["h"]),$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
@@ -737,16 +760,15 @@ function outputs($imgSubstance,$filename,$type,$size,$copy){
 					imgResize($RAWIMG.$filename,$IMG[$i].$filename,$imgSubstance[$i]["w"],$type,$imgSubstance[$i]["c"],$copy,$imgSubstance[$i]["i"],$imgSubstance[$i]["p"]);
 				}else{
 					copy($RAWIMG.$filename,$IMG[$i].$filename);
-					if($domain!="http://ut")$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+					s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
 					//imgInCopy($IMG[$i].$filename,$type,$imgSubstance[$i]["c"],$copy);
 				}
 			}
 		}else{
 			copy($RAWIMG.$filename,$IMG[$i].$filename);
-			if($domain!="http://ut")$s3i->upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
+			s3upload(sprintf("%s%s",$RAWIMG,$filename),str_replace("../../../prg_img/","",sprintf("%s%s",$IMG[$i],$filename)));
 		}
 	}
-
 }
 
 function imgInitialize($option,$size){
@@ -780,6 +802,7 @@ function imgResize($o_img,$n_img,$re_size,$p="jpg",$copytype,$copy,$iconNo,$icon
 }
 
 function imageflips($image, $mode){
+
     $dst_w = imagesx($image);
     $dst_h = imagesy($image);
     $src_x = 0;

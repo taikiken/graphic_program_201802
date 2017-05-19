@@ -25,11 +25,18 @@ if($TABLE=="repo_n"){
 
 	$title="";
 	$title.=mod_HTML($p[$i]["title"]);
-
+	
+	if($p[$i]["id"]==33)$title.="（WBC関連記事）";
+	
 }elseif($TABLE=="u_categories"){
 
 	$title="";
 	$title.=mod_HTML($p[$i]["name"]);
+
+}elseif($TABLE=="u_epg"){
+
+	$title=sprintf("[%s] ",$p[$i]["pid"]);
+	$title.=mod_HTML($p[$i]["title"]);
 
 }elseif($TABLE=="u_headline"){
 	
@@ -54,14 +61,25 @@ if($TABLE=="repo_n"){
 
 echo $title;
 
-$settings["u_media"]=array("135","システム・広告");
-$settings["repo_n"]=array("75","広告");
-$settings["u_categories"]=array("120","テーマ・広告");
+/*
+$settings["u_media"]=array(array(100,75),array("システム","広告"));
+$settings["repo_n"]=array(array(75),array("広告"));
+$settings["u_categories"]=array(array(85,75),array("テーマ","広告"));
+*/
+
+$settings["u_media"]=array(array(130),array("システム/広告"));
+$settings["repo_n"]=array(array(75),array("広告"));
+$settings["u_categories"]=array(array(120),array("テーマ/広告"));
+
 
 ?>
 </td>
 <?php if($p[$i]["bodyflag"]==170){ ?><td width="85"><a href="../repo_e/?nid=<?=$p[$i]["id"]?>&<?=$g->g_url()?>" class="toe"><img src="/shared/cms/img/file.png" width="17" height="16">コンテンツ</a></td><?php } ?>
-<?php if(preg_match("/u_media|repo_n|u_categories/",$TABLE)){ ?><td width="<?=$settings[$TABLE][0]?>"><a href="../ad/?nid=<?=$p[$i]["id"]?>&<?=$g->g_url()?>" class="toe"><img src="/shared/cms/img/file.png" width="17" height="16"><?=$settings[$TABLE][1]?>設定</a></td><?php } ?>
+<?php if(preg_match("/u_media|repo_n|u_categories/",$TABLE)){ ?>
+<?php for($Hi=0;$Hi<count($settings[$TABLE][1]);$Hi++){ ?>
+<td width="<?=$settings[$TABLE][0][$Hi]?>"><a href="../ad/?nid=<?=$p[$i]["id"]?>&<?=$g->g_url()?><?=$settings[$TABLE][1][$Hi]!="広告"?sprintf("&type=1"):""?>" class="toe"><img src="/shared/cms/img/file.png" width="17" height="16"><?=$settings[$TABLE][1][$Hi]?>設定</a></td>
+<?php } ?>
+<?php } ?>
 </tr>
 <?php }else{ ?>
 <?php for($EI=0;$EI<count($LANG);$EI++){ ?>

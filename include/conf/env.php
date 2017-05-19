@@ -30,6 +30,8 @@ if(preg_match("/undotsushin/",$servername)){
 		$ImgPath="https://dev-img.sportsbull.jp";
 		$UserImgPath="https://dev-img.sportsbull.jp";
 		
+		$LSCMS="legendsstadium2";
+		
 		$bucket="dev-img-sportsbull-jp";
 
 	}elseif(preg_match("/stg/",$servername)){
@@ -40,6 +42,8 @@ if(preg_match("/undotsushin/",$servername)){
 		$domain="http://stg.undotsushin.com";
 		$ImgPath="https://www.undotsushin.com";
 		$UserImgPath="https://www.undotsushin.com";
+		
+		$LSCMS="legendsstadium";
 		
 		$bucket="img-sportsbull-jp";
 
@@ -79,6 +83,8 @@ if(preg_match("/undotsushin/",$servername)){
 		$ImgPath="https://dev-img.sportsbull.jp";
 		$UserImgPath="https://dev-img.sportsbull.jp";
 		
+		$LSCMS="legendsstadium2";
+		
 		$bucket="dev-img-sportsbull-jp";
 
 	}elseif(preg_match("/stg/",$servername)){
@@ -90,6 +96,8 @@ if(preg_match("/undotsushin/",$servername)){
 		$ImgPath="https://img.sportsbull.jp";
 		$UserImgPath="https://img.sportsbull.jp";
 		
+		$LSCMS="legendsstadium";
+		
 		$bucket="img-sportsbull-jp";
 
 
@@ -99,7 +107,9 @@ if(preg_match("/undotsushin/",$servername)){
 
 		$SERVERPATH="/var/www/sportsbull.jp/www/public";
 		$USERS="/var/www/sportsbull.jp/www/public/users";
-
+		
+		$LSCMS="legendsstadium";
+		
 		$domain="https://sportsbull.jp";
 		$ImgPath="https://img.sportsbull.jp";
 		$UserImgPath="https://img.sportsbull.jp";
@@ -136,15 +146,15 @@ if(preg_match("/undotsushin/",$servername)){
 
 	$staticfileimport=1;
 
-	$DBNAME="ut_devnew";
+	$DBNAME="ut0";
 	$DBUSR="ut";
 	$DBPWD="ut";
 	$DBHOST="localhost";
 	$DBPORT=5432;
 
-	$SERVERPATH="d:/apache/htdocs/tmp/ut";
-	$USERS="d:/apache/htdocs/tmp/ut/users";
-	$IMGP="d:/apache/htdocs/tmp/ut/prg_img/tmp/";
+	$SERVERPATH="D:/dropbox/Dropbox/htdocs/ut";
+	$USERS="D:/dropbox/Dropbox/htdocs/users";
+	$IMGP="D:/dropbox/Dropbox/htdocs/prg_img/tmp/";
 	$LOGTXT="d:/log/ut/log.txt";
 	$ACLOGTXT="d:/log/ut/ut_article_access.txt";
 	$SQLLOG="d:/log/ut/ut_sqllog.txt";

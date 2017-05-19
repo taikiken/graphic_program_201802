@@ -15,14 +15,41 @@ if($_REQUEST["api"]!="next"){
 	$sql=sprintf("select * from %s",sprintf($articletable,set_isbookmark($uid),sprintf(" and id=%s",$id)));	
 }else{
 	
+	//番組表のみ順番を変える
+	$sql=sprintf("select m1 from repo_n where id=%s",$id);
+	$o->query($sql);
+	$f=$o->fetch_array();
+	$cid=$f["m1"];
+	
 	$offset=strlen($_REQUEST["offset"])>0?$_REQUEST["offset"]:0;
 	$length=strlen($_REQUEST["length"])>0?$_REQUEST["length"]:10;
 	$limit=sprintf(" limit %s offset %s",$length,$offset);
-
-	$sql=sprintf("select st2.* from (select t2.id from (select m1,m_time from repo_n where id=%s) as t1,repo_n as t2 where t2.m1=t1.m1 and t2.m_time<t1.m_time order by t2.m_time desc %s) as st1,(select * from %s) as st2 where st1.id=st2.id order by m_time desc",
-	$id,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""));
 	
+	if($cid!=152){
+
+		$nsql=sprintf("select count(*) as n from (select m1,m_time from repo_n where id=%s) as t1,(select m1,m_time from repo_n where flag=1) as t2 where t2.m1=t1.m1 and t2.m_time<t1.m_time",$id);
+		$o->query($nsql);
+		$f=$o->fetch_array();
+		$articlenum=$f["n"];
+	
+		$sql=sprintf("select st2.* from (select t2.id from (select m1,m_time from repo_n where id=%s) as t1,repo_n as t2 where t2.m1=t1.m1 and t2.m_time<t1.m_time order by t2.m_time desc %s) as st1,(select * from %s) as st2 where st1.id=st2.id order by m_time desc",
+		$id,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""));
+	}else{
+
+		$nsql=sprintf("select count(*) as n from (select m1,m_time from repo_n where id=%s) as t1,(select m1,m_time from repo_n where flag=1) as t2 where t2.m1=t1.m1 and t2.m_time>t1.m_time",$id);
+		$o->query($nsql);
+		$f=$o->fetch_array();
+		$articlenum=$f["n"];
+	
+		$sql=sprintf("select st2.* from (select t2.id from (select m1,m_time from repo_n where id=%s) as t1,repo_n as t2 where t2.m1=t1.m1 and t2.m_time>t1.m_time order by t2.m_time %s) as st1,(select * from %s) as st2 where st1.id=st2.id order by m_time",
+		$id,$limit,sprintf($articletable2,set_isbookmark($uid),"","",""));		
+	}
 }
+
+if($_GET["debugg"]==1){
+	echo $sql;
+}
+
 $o->query($sql);
 while($f=$o->fetch_array())$p[]=$f;
 
@@ -46,7 +73,9 @@ $articles=array();
 for($i=0;$i<count($p);$i++){
 
 	$l="";
+	
 	if(in_array($p[$i]["d2"],$RELATEDLINK_ALLOWED)){
+		$ulink=array();
 		$sql=sprintf("select title,link from u_link where pid=%s order by n",$p[$i]["id"]);
 		$o->query($sql);
 		while($ee=$o->fetch_array())$ulink[]=$ee;
@@ -67,6 +96,7 @@ for($i=0;$i<count($p);$i++){
 	for($j=10;$j<=15;$j++)if(strlen($p[$i]["t".$j])>0)$s["keywords"][]=$p[$i]["t".$j];
 	
 	$ad_put=set_advertise($ad,"detail");
+	
 	$s=$s+$ad_put;
 	unset($s["vast"]);
 	unset($s["ad_urlpc"]);
@@ -83,17 +113,19 @@ if($_REQUEST["api"]!="next"){
 	//ランキングは外部処理にしたい
 	wlog($ACLOGTXT,array(strlen($p[$i]["m1"])>0?$p[$i]["m1"]:0,strlen($p[$i]["m2"])>0?$p[$i]["m2"]:0,$id,$s["media_type"]=="image"?0:1,date("Y-m-d H:i:s",strtotime($p[$i]["m_time"])),date("Y-m-d H:i:s")));
 }else{
-
-	$nsql=sprintf("select count(*) as n from (select m1,m_time from repo_n where id=%s) as t1,(select m1,m_time from repo_n where flag=1) as t2 where t2.m1=t1.m1 and t2.m_time<t1.m_time",$id);
-	$o->query($nsql);
-	$f=$o->fetch_array();
 	
-	$y["response"]["count"]=(int)$f["n"];
+	$y["response"]["count"]=(int)$articlenum;
 	$y["response"]["articles"]=$articles;
 	$y["response"]["related_articles"]=$relatedPosts;
 	$y["request"]["length"]=(int)$length;
 	$y["request"]["offset"]=(int)$offset;
 }
+
+/*
+if(preg_match("/debugger/",$_SERVER['HTTP_REFERER'])){
+	echo $sql;
+}
+*/
 
 print_json($y,$_SERVER['HTTP_REFERER']);
 

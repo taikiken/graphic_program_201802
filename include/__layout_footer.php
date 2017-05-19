@@ -1,7 +1,7 @@
 <?php
 if($q->get_file()===2&&$e){
 	//if($DEBUGMODE==0)
-	echo sprintf("<script type=\"text/javascript\">document.location.href='%s%s/?%s';</script>",$ADPATH,$CURRENTDIRECTORY,$g->g_url("types,".$EDITDELETEINITIAL."id,c,search"));
+	//echo sprintf("<script type=\"text/javascript\">document.location.href='%s%s/?%s';</script>",$ADPATH,$CURRENTDIRECTORY,$g->g_url("types,".$EDITDELETEINITIAL."id,c,search"));
 }
 ?>
 

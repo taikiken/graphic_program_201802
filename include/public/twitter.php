@@ -27,7 +27,12 @@ if(preg_match("/undotsushin/",$servername)){
 
 }else{
 
-	if(preg_match("/dev/",$servername)){
+	if(preg_match("/dev2/",$servername)){
+		$key='ACrmDsjVGpQViNQ6488ROTcDc';
+		$secret='A0lsHSk9kITLBP4MK0ysyejNdYMesPDnFYlTHoi8zsRreDRllS';
+		$rurl='https://dev2.sportsbull.jp/api/ver1/auth/twitter_callback.php';
+
+	}elseif(preg_match("/dev/",$servername)){
 		$key='Ryj1Z07sRmpL7wgPyIOgxSr8w';
 		$secret='PoKPmjloblgMH5tlMFucQUmIuShHuuKUen7jJ14VNIP6ZcF6U3';
 		$rurl='https://dev.sportsbull.jp/api/ver1/auth/twitter_callback.php';

@@ -1,10 +1,17 @@
 <?php
 
+/*
+
+delete from repo_body where pid in(select id from repo_n where id>=97144 and d2=26 and flag=0);
+delete from repo_n where id>=97144 and d2=26 and flag=0;
+
+*/
+
 include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=26;
-$rssfile="http://cms.undotsushin.com/api/uploader/file/asw76rgrr66d.xml";
+$rssfile="http://input.sportsbull.jp/vkuploader/file/asw76rgrr66d.xml";
 
 $o=new db;
 $o->connect();
@@ -22,6 +29,12 @@ $xml=str_replace("<link ","<li ",$xml);
 
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
+
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
@@ -44,37 +57,46 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		$s["t1"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["caption"];
 	}
 	
-	$mword=str_replace("第98回,2016年,全国高校野球選手権大会,本大会","",$data["channel"]["item"][$i]["keyword"]);
+/*
+2016			
+	$mword=$data["channel"]["item"][$i]["keyword"];
 	$mword=str_replace("、",",",$mword);
 	$mword=explode(",",$mword);
-			
+
+	$rword=array(get_keyword($s["title"]));
+	for($j=0;$j<count($mword);$j++){
+		if($j==4)break;
+		if(strlen($mword[$j])>0)$rword[]=$mword[$j];
+	}
 	if(preg_match("/ダイジェスト動画/",$s["title"])){
-		$rword=array("第98回全国高校野球選手権大会",get_keyword($s["title"]),$mword[0],$mword[1],$mword[count($mword)-2],$mword[count($mword)-1]);
+		$rword=array(get_keyword($s["title"]),$mword[0],$mword[1],$mword[count($mword)-2],$mword[count($mword)-1]);
 	}else{
-		$rword=array("第98回全国高校野球選手権大会",get_keyword($s["title"]));
+		$rword=array(get_keyword($s["title"]));
 		for($j=0;$j<count($mword);$j++){
 			if($j==4)break;
 			if(strlen($mword[$j])>0)$rword[]=$mword[$j];
 		}
 	}
-	$s["keyword"]=$data["channel"]["item"][$i]["keyword"];
-
 	$tag=categorymatching($exword,implode(",",$rword));
+*/
+	$s["keyword"]=$data["channel"]["item"][$i]["keyword"];
+	
+	$tag=categorymatching($exword,"第89回選抜高等学校野球大会,".$s["keyword"]);
 	if(count($tag)>0){
 		for($cnt=0;$cnt<count($tag);$cnt++){
 			if($cnt==6)break;
 			$s["t1".$cnt]=esc($tag[$cnt]);
 		}
 	}
-
+	
 	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 	
 	unset($sqla);
-		
+	
 	if(strlen($f["id"])>0){
-	  if($s["a_time"]!=$f["a_time"]){
+	  if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 		  if(strlen($s["t30"])>0){
 			  if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"])){
 				  $oimg=outimg($s["t30"]);
@@ -94,15 +116,15 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		  splittime($s["m_time"],$s["a_time"]);
 		  $sqla[]=makesql($s,$f["id"]);
 		  $sqla[]=sprintf("update repo_body set body='%s' where pid=%s;",$modbody,$f["id"]);
-		  //$sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"],$f["id"]);
+		  $sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"],$f["id"]);
 	  }
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
-			$s["m1"]=142;
-			$s["m2"]=136;
+			$s["m1"]=136;
+			//$s["m2"]=136;
 			$s["flag"]=1;
 			$s["cid"]=1;
 			$s["imgflag"]=168;
@@ -117,7 +139,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			splittime($s["m_time"],$s["a_time"]);
 			$sqla[]=makesql($s,0);
 			$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",$modbody);
-			//$sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"]);
+			$sqla[]=relatedlink($data["channel"]["item"][$i]["relatedLink"]);
 			
 			if($i==0){
 				//カテゴリー最初のインポート
@@ -129,7 +151,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		$sqla=implode("\n",$sqla);
 		$o->query($sqla);
 	}
-
 }
 
 //RSSから削除された記事を非表示に変更

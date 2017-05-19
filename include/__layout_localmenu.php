@@ -35,7 +35,7 @@ echo sprintf("<option value=\"\"%s>　すべての投稿者</option>",$c==0?" se
 while($f=$o->fetch_array()){
 
 ?>
-<option value="<?=$f["id"]?>"<?=$c==$f["id"]?" selected=\"selected\"":""?>>　<?=$f["name"]."：".$f["title"]?></option>
+<option value="<?=$f["id"]?>"<?=$c==$f["id"]?" selected=\"selected\"":""?>>　<?=$f["name"]."：".$f["title"]?><?=$f["id"]==33?" (WBC関連記事)":""?></option>
 <?php } ?>
 </select>
 </li>
@@ -81,7 +81,7 @@ while($f=$o->fetch_array()){
 <?php }elseif($CURRENTDIRECTORY=="repo_e"){ ?>
 
 	<?php if($N>0){ ?>
-	<li class="ds"><a href="https://www.undotsushin.com<?=str_replace("{lang}",$_COOKIE["lang"]."/",$PREVIEW)?>" target="_blank">ページブロック全体のプレビュー</a></li>
+	<li class="ds"><a href="<?=$domain?><?=str_replace("{lang}",$_COOKIE["lang"]."/",$PREVIEW)?>" target="_blank">ページブロック全体のプレビュー</a></li>
 	<?php }else{ ?>
     <!--
     <li>
