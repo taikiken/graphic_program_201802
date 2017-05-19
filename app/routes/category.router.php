@@ -81,11 +81,11 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
       // 開催前
       if ( $current < $gameDataArray[0]['int'] ) :
-        $gameData = array_slice($gameDataArray, 0, 2);
+        $gameData = array_slice($gameDataArray, 0, 4);
 
       // 開催終了
       elseif ( $current > $gameDataArray[$length - 1]['int'] ) :
-        $gameData = array_slice($gameDataArray, $length - 2);
+        $gameData = array_slice($gameDataArray, $length - 4);
 
       // 開催期間中
       else :
@@ -111,7 +111,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
         endforeach;
 
-        $gameData = array_slice($gameDataArray, $currentKey - 1, 2);
+        $gameData = array_slice($gameDataArray, $currentKey - 2, 4);
 
       endif;
 
