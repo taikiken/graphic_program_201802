@@ -379,7 +379,7 @@ function urlmodify($body){
 }
 
 function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
-	
+
 	/*
 		$type:0 記事一覧　$type:1 記事詳細
 	*/
@@ -418,7 +418,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["readmore"]["url"]=$f["t9"];
 	}
 	*/
-	
+
     $file=sprintf("%s/api/ver1/static/ad/2-%s.dat",$SERVERPATH,$f["userid"]);
     $v=unserialize(get_contents($file));
     $readmoreflag=$v["readmore"];
@@ -959,16 +959,6 @@ function get_contents($url){
 	else return $output;
 }
 
-if (!function_exists("s3upload"))
-{
-	function s3upload($from,$to){
-		global $s3active;
-		if($s3active){
-			$s3i=new S3Module;
-			$s3i->upload($from,$to);
-		}
-	}
-}
 
 function split_utime($a){
 	global $sv,$sn;
