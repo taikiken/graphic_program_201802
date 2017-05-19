@@ -45,7 +45,8 @@ left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
-	name_e as slug
+	name_e as slug,
+	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
 left join (select 
@@ -94,7 +95,8 @@ left join (select
 	id as categoryid,
 	name as category,
 	title as categorylabel,
-	name_e as slug
+	name_e as slug,
+	no_image as no_image
 from u_categories where flag=1) as t3 on t1.m1=t3.categoryid
 
 left join (select 
@@ -320,7 +322,15 @@ function set_categoriesinfo($f){
 	$s["label"]=switch_category_title($f["name"],$f["title"]);
 	$s["slug"]=mod_HTML($f["name_e"]);
 	$s["url"]=sprintf("%s/%s/",$domain,$f["name_e"]);
-	
+
+	//OG/No画像追加
+	$s["og_image"] = strlen($f["og_image"])>0?sprintf("%s/img/%s",$ImgPath,$f["og_image"]):"";
+	$s["no_image"] = strlen($f["no_image"])>0?sprintf("%s/img/%s",$ImgPath,$f["no_image"]):"";
+
+	//ディスクリプションとキーワード設定
+	$s["seo_desc"]=$f["seo_desc"];
+	$s["seo_key"]=$f["seo_key"];
+
 	//https://github.com/undotsushin/undotsushin/issues/970#issue-168779151
 	//タイトル画像のリンク追加
 	$s["title_img_link"]=strlen($f["url"])>0?$f["url"]:"";
@@ -384,6 +394,8 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["id"]=(int)$f["id"];
 	$s["date"]=$datetime["isotime"];
 	$s["display_date"]=get_relativetime($datetime["relativetime"],$datetime["date"],$datetime["weekday"]);
+	if($f["m1"]==152&&preg_match("/前/",$s["display_date"]))$s["display_date"]=sprintf("%s%s",$datetime["date"],sprintf("(%s)",get_weekday($datetime["weekday"])));
+	
 	$s["title"]=str_replace("&#039;","'",strlen($f["modtitle"])>0?$f["modtitle"]:$f["title"]);
 	
 	$s["description"]=get_summary($f["b1"],$f["body"]);
@@ -485,6 +497,15 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	}
 	
 	$s["user"]=set_userinfo($f,0);
+
+	if (strlen($f["img1"]) === 0 && strlen($f["no_image"]) > 0)
+	{
+		//記事画像が存在しておらずカテゴリ用NoImageが設定されて入ればAPIの値を上書き
+		$s["media"]["images"]["thumbnail"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+		$s["media"]["images"]["medium"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+		$s["media"]["images"]["large"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+		$s["media"]["images"]["original"] = sprintf("%s/img/%s",$ImgPath,$f["no_image"]);
+	}
 
 	return $s;
 }
@@ -730,8 +751,8 @@ function get_date($m){
 
 	$str=strtotime($m);
 	$now=strtotime(date("Y-m-d H:i:s"));
-
-	$t["relativetime"]=($now-$str)/60;
+	
+	$t["relativetime"]=($now-$str)/60;	
 	$t["date"]=date("m月d日 H時i分",$str);
 	$t["isotime"]=str_replace(" ","T",date("Y-m-d H:i:s+0900",$str));
 	$t["weekday"]=date("w",$str);
@@ -746,9 +767,9 @@ function get_weekday($a){
 function get_relativetime($a,$b,$c){
 
 	$rt="";
-	if($a<60){
+	if($a>0&&$a<60){
 		$rt=sprintf("%s分前",floor($a));
-	}elseif($a<60*24){
+	}elseif($a>0&&$a<60*24){
 		$rt=sprintf("%s時間前",floor($a/(60)));
 	}else{
 		$rt=str_replace(" ",sprintf("(%s) ",get_weekday($c)),$b);
@@ -936,6 +957,17 @@ function get_contents($url){
 	
 	if(curl_errno($ch))return "";
 	else return $output;
+}
+
+if (!function_exists("s3upload"))
+{
+	function s3upload($from,$to){
+		global $s3active;
+		if($s3active){
+			$s3i=new S3Module;
+			$s3i->upload($from,$to);
+		}
+	}
 }
 
 function split_utime($a){

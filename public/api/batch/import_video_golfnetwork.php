@@ -39,7 +39,7 @@ while(list($k,$v)=each($data)){
 	$sv[$sn[]="a5"]=sprintf('%02d',$v["a5"]);
 	$sv[$sn[]="a6"]=sprintf('%02d',$v["a6"]);
 	split_utime($v["u_time"]);
-	$sv[$sn[]="m_time"]=$v["m_time"];
+	$sv[$sn[]="m_time"]=sprintf("%s-%s-%s %s:%s:%s",$sv["a1"],$sv["a2"],$sv["a3"],$sv["a4"],$sv["a5"],$sv["a6"]);
 	$sv[$sn[]="u_time"]=$v["u_time"];
 	$sv[$sn[]="a_time"]=$v["u_time"];
 	
@@ -59,12 +59,14 @@ while(list($k,$v)=each($data)){
 			$sv[$sn[]="img1"]=outimg(sprintf("%s/%s/%s/%s.jpg",$imgpath,$bucketName,$v["t1"],$v["t1"]));
 		}
 	}
+
+	if($v["flag"]!=1&&$dbdata["flag"]==1)$sqls[]=sprintf("update repo_n set flag=0 where id=%s;",$dbdata["id"]);
 		
 	if(!isset($dbdata["id"])&&$v["uid"]==0){
 		
 		//devデータ未登録＆encode完了テーブルデータあり
 		if($encoded["flag"]==1){
-			$sv[$sn[]="flag"]=1;
+			$sv[$sn[]="flag"]=$v["flag"]==1?1:0;
 			$sqls[]=sprintf("update u_encoded set flag=0,u_time=now() where id=%s;",$encoded["id"]);
 			$announce=1;
 		}else{
@@ -76,7 +78,7 @@ while(list($k,$v)=each($data)){
 			$qq[]=sprintf("'%s'",bind($vv));
 		}
 		$sv[$sn[]="body"]=$v["body"];
-		$sqls[]=sprintf("insert into repo_n(id,cid,n,d1,d2,%s) select nextval('repo_n_id_seq'),1,(select max(n)+1 from repo_n),3,%s,%s where not exists (select*from repo_n where swf='%s' and d2=%s);",$c,$mediaid,implode(",",$qq),$v["t1"],$mediaid);
+		$sqls[]=sprintf("insert into repo_n(id,cid,n,d1,d2,%s) select nextval('repo_n_id_seq'),1,(select max(n)+1 from repo_n),3,%s,%s where not exists (select*from repo_n where swf='%s' and d2=%s and flag=1);",$c,$mediaid,implode(",",$qq),$v["t1"],$mediaid);
 		$sqls[]=sprintf("insert into repo_body select nextval('repo_body_id_seq'),currval('repo_n_id_seq'),'%s';",$body,$v["t1"],$mediaid);
 		$imgflag=1;
 		

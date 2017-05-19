@@ -9,6 +9,8 @@ if($_GET["cid"]==6){
 	$TABLE="u_headline";
 }elseif($_GET["cid"]==10){
 	$TABLE="u_categories";
+}elseif($_GET["rid"]==48){
+	$TABLE="u_epg";
 }else{
 	$TABLE="repo_n";
 	$NUMBERINGOFF=1;

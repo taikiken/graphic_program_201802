@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=1;
+$MEDIANAME="朝日新聞";
 
 /* 131:速報, 132:朝刊 */
 
@@ -31,6 +32,12 @@ while($f=$o->fetch_array()){
 $xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
+
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
 
 for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
@@ -73,10 +80,10 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	//リオ五輪期間のみ
 	if(preg_match("/リオ五輪/",$data["channel"]["item"][$i]["keyword"])){
-		if($s["m1"]!=141)$s["m2"]=141;
+		//if($s["m1"]!=141)$s["m2"]=141;
 	}
 
-	$sql=sprintf("select * from repo_n where cid=1 and d2=%s t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
+	$sql=sprintf("select * from repo_n where cid=1 and d2=%s and t7='%s'",$MEDIAID,$data["channel"]["item"][$i]["guid"]);
 	$o->query($sql);
 	$f=$o->fetch_array();
 
@@ -84,7 +91,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					if(!eximg(sprintf("%s/prg_img/raw/%s",$SERVERPATH,$f["img1"]),$s["t30"]))$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -101,6 +108,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
+
+			$TITLE[]=pg_escape_string($s["title"]);
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
@@ -123,6 +132,6 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 
 }
 
-file_put_contents(sprintf("%sasahi-sokuhou%s.xml",$RSS,date("YmdH")),$xml);
+include $INCLUDEPATH."public/display.php";
 
 ?>
