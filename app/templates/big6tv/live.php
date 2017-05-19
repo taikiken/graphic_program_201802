@@ -1,12 +1,25 @@
 <?php
 /*
 
-# LIVE配信モジュール
+# LIVE配信モジュール - PC用
 
 - カテゴリー情報APIの `live` にAPIのエンドポイントがあるなら以下を読み込む
 - ['live']['isPlaying'] == 1 ならプレイヤーを表示 / 0 なら alt画像を表示する
 
+- PCならvideo.jsアプデ版をロードする
+-- desktop : chromeで再生中に停止する問題の解決
+-- mobile  : chromeで広告が再生されない
+- SPならvideo.js旧バージョンをロードする
+-- desktop : chromeで再生中に停止する時がある
+
 */
+
+
+// desktop
+// ------------------------------
+
+if ( $page['ua'] === 'desktop' ) :
+
 ?>
 
 <style>
@@ -55,9 +68,6 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.js"></script>
 <!-- //ads - ima -->
-
-<!--link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" /-->
-
 
 <style>
   .video-js {
@@ -434,3 +444,13 @@ streampack初期化コード
 
 })(jQuery);
 </script>
+
+<?php else :
+
+// mobile
+// ------------------------------
+include_once __DIR__.'/live.sp.php';
+
+
+endif;
+?>
