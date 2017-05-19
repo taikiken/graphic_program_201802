@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=9;
+$MEDIANAME="ラグビー共和国";
 
 function modhtmltag($s){
 	
@@ -58,8 +59,16 @@ $xml=get_contents($rssfile);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
+if($data["channel"]["item"]["guid"]){
+	$entry=$data["channel"]["item"];
+	unset($data);
+	$data["channel"]["item"][]=$entry;
+}
+
+$sabun=strtotime($data["channel"]["lastBuildDate"])-strtotime("now");
+
 for($i=0;$i<count($data["channel"]["item"]);$i++){
-	
+
 	unset($s);
 	
 	$s["title"]=$data["channel"]["item"][$i]["title"];
@@ -69,9 +78,9 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	$text=modhtmltag($data["channel"]["item"][$i]["description"]);
 	$modbody=str_replace("\'","''",$text[1]);
 	
-	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
-	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"]));
-	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["lastUpdate"]));
+	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"])-$sabun);
+	$s["u_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["pubDate"])-$sabun);
+	$s["a_time"]=date("Y-m-d H:i:s",strtotime($data["channel"]["item"][$i]["lastUpdate"])-$sabun);
 	
 	if($data["channel"]["item"][$i]["enclosure"]){
 		$s["t30"]=$data["channel"]["item"][$i]["enclosure"]["@attributes"]["url"];
@@ -95,7 +104,7 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 	
 	if(strlen($f["id"])>0){
 		if($data["channel"]["item"][$i]["status"]=="1"){
-			if($s["a_time"]!=$f["a_time"]){
+			if(strtotime($s["a_time"])>strtotime($f["a_time"])){
 				if(strlen($s["t30"])>0){
 					$s["img1"]=outimg($s["t30"]);
 				}else{
@@ -111,6 +120,8 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 		}
 	}else{
 		if($data["channel"]["item"][$i]["status"]==1){
+
+			$TITLE[]=pg_escape_string($s["title"]);
 			
 			$s["d1"]=3;
 			$s["d2"]=$MEDIAID;
@@ -126,12 +137,14 @@ for($i=0;$i<count($data["channel"]["item"]);$i++){
 			$sqla[]=sprintf("insert into repo_body(pid,body) values(currval('repo_n_id_seq'),'%s');",$modbody);
 		}
 	}
+
 	if($sqla){
 		$sqla=implode("\n",$sqla);
 		$o->query($sqla);
 	}
+
 }
 
-
+include $INCLUDEPATH."public/display.php";
 
 ?>

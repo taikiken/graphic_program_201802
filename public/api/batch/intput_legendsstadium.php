@@ -16,7 +16,7 @@ while($f=$o->fetch_array()){
 
 for($i=0;$i<count($s);$i++){
 	if($s[$i]["d1"]!=$p[$i]["d2"]||$s[$i]["u_time"]!=$p[$i]["u_time"]||$s[$i]["d1"]!=$p[$i]["d2"]||$s[$i]["title"]!=$p[$i]["title"]){
-		$u[]=sprintf("update u_headline set d2=%s,u_time='%s',title='%s' where id=%s;",$s[$i]["d1"],$s[$i]["u_time"],pg_escape_string($s[$i]["title"]),$p[$i]["id"]);
+		$u[]=sprintf("update u_headline set d2=%s,u_time='%s',title='%s' where id=%s and u_time!='%s';",$s[$i]["d1"],$s[$i]["u_time"],pg_escape_string($s[$i]["title"]),$p[$i]["id"],$s[$i]["u_time"]);
 	}
 }
 

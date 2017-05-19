@@ -46,24 +46,39 @@ for($i=0;$i<count($VIDEOTAG);$i++){
 }
 $sql[]=sprintf("update u_view set video=1 where video=0 and pageid in (select max(nid) as id from repo_e where (types=5 or types=3) and (%s) group by nid);",implode(" or ",$query));
 $sql[]="update u_view set video=1 where pageid in (select id from repo_n where videoflag=173 or brightcove is not null or swf is not null or youtube is not null or facebook is not null) and video=0;";
-$sql[]="update u_view set video=0 where pageid in (select id from repo_n where videoflag=172) and video=1;";
+$sql[]="update u_view set video=0 where pageid in (select id from repo_n where videoflag!=172 and brightcove is null and swf is null and youtube is null and facebook is null) and video=1;";
 
 //高校野球カテゴリー紐づけ ※大会期間内のみ
 //$sql[]="update repo_n set m1=136 where (m1!=136 or m2!=136) and m1!=142 and keyword like '%高校野球%';";
 //$sql[]="update repo_n set m1=136 where m1!=142 and m2!=136 and keyword like '%高校野球%' or keyword like '%地区大会%';";
 
 //朝日新聞 keywordに リオパラ を含む記事をリオ五輪に紐づけ
-$sql[]="update repo_n set m1=141,m2=128 where id in(select id from repo_n where keyword like '%リオパラ%' and m1!=141 and d2=1 and m2 is null);";
+//$sql[]="update repo_n set m1=141,m2=128 where id in(select id from repo_n where keyword like '%リオパラ%' and m1!=141 and d2=1 and m2 is null);";
+
+//六大学野球
+//$sql[]="update repo_n set m2=151 where m1=113 and m2 is null and (keyword like '%東京六大学野球%' or title like '%東京六大学野球%');";
+
+//番組表 現在よりも古くなった番組を非公開に変更
+//$sql[]="update repo_n set flag=0 where d2=43 and flag=1 and a_time<now();";
+
+//第二カテゴリーに0がセットされてしまったものを修正
+$sql[]="update u_view set m2=null where m2=0;";
 
 //第一、第二カテゴリーとも同じものを修正
 $sql[]="update repo_n set m2=null where m1=m2;";
 
 //第一カテゴリ未指定、第二カテゴリー指定の際に第二を第一に修正
 $sql[]="update repo_n set m1=m2 where m1 is null and m2 is not null;";
+$sql[]="update repo_n set m2=null where m2=129;";
 
+//非公開になったテレビ番組プログラムに属する記事を非公開に変更
+$s="select pid from u_epg where flag=0";
+$o->query($s);
+while($f=$o->fetch_array()){
+	$sql[]=sprintf("update repo_n set flag=0 where t7 like '%s-%s' and flag=1 and d2=43;",$f["pid"],"%");
+}
 
 $sql=implode("\n",$sql);
 $o->query($sql);
-
 
 ?>

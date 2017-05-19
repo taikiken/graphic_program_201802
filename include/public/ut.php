@@ -197,35 +197,37 @@ function set_advertise($ad,$type){
 	global $ImgPath;
 	
 	$s["vast"]=$ad["vast"];
-	$s["ad_urlpc"]=$ad["ad_urlpc"];
-	$s["ad_urlsp"]=$ad["ad_urlsp"];
-
 	$s["theme"]["base"]=strlen($ad["base"])>0?$ad["base"]:"normal";
 	$s["theme"]["background_color"]=strlen($ad["bgcolor"])>0?$ad["bgcolor"]:"";
-	$s["theme"]["images"]["pc"]=strlen($ad["pc_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad["pc_headerimg".$type]):"";
-	$s["theme"]["images"]["sp"]=strlen($ad["sp_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad["sp_headerimg".$type]):"";
 	$s["is_show_filter"]=!$ad["sp_showfilter"]?true:false;
 	
-		$s["banner"]["pc"]["text"]=checkstr($ad["bannertext"]);
-		$s["banner"]["pc"]["image"]=strlen($ad["pc_bannerimg"])>0?sprintf("%s/img/%s",$ImgPath,$ad["pc_bannerimg"]):"";
-		$s["banner"]["pc"]["link"]=checkstr($ad["pc_bannerlink"]);
-		$s["banner"]["sp"]["text"]=checkstr($ad["bannertext"]);
-		$s["banner"]["sp"]["image"]=strlen($ad["sp_bannerimg"])>0?sprintf("%s/img/%s",$ImgPath,$ad["sp_bannerimg"]):"";
-		$s["banner"]["sp"]["link"]=checkstr($ad["sp_bannerlink"]);
-
-
-	$s["ad"]["ios"]=$ad["ios_".$type];
-	$s["ad"]["android"]=$ad["android_".$type];
-	$s["ad"]["sp"]=$ad["sp_".$type];
-	
-	$s["ad"]["pc"]["sidebar_top"]=$ad["sidebar_top"];
-	$s["ad"]["pc"]["sidebar_bottom"]=$ad["sidebar_bottom"];
-	if($type=="detail"){
-		$s["ad"]["pc"]["single_top"]=$ad["single_top"];
-		$s["ad"]["pc"]["single_bottom_left"]=$ad["single_bottom_left"];
-		$s["ad"]["pc"]["single_bottom_right"]=$ad["single_bottom_right"];
+	$bannertype=array("pc","sp","ios","android");
+	for($i=0;$i<count($bannertype);$i++){
+		if($i<=1){
+			$s["ad_url".$bannertype[$i]]=$ad["ad_url".$bannertype[$i]];
+			$s["theme"]["images"][$bannertype[$i]]=strlen($ad[$bannertype[$i]."_headerimg".$type])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i]."_headerimg".$type]):"";
+		}
+		$s["banner"][$bannertype[$i]]["text"]=strlen($ad[$bannertype[$i]."_bannerimg"])>0?checkstr($ad["bannertext"]):"";
+		$s["banner"][$bannertype[$i]]["image"]=strlen($ad[$bannertype[$i]."_bannerimg"])>0?sprintf("%s/img/%s",$ImgPath,$ad[$bannertype[$i]."_bannerimg"]):"";
+		$s["banner"][$bannertype[$i]]["link"]=checkstr($ad[$bannertype[$i]."_bannerlink"]);		
+		if($i==0){
+			$s["ad"][$bannertype[$i]]["sidebar_top"]=$ad["sidebar_top"];
+			$s["ad"][$bannertype[$i]]["sidebar_bottom"]=$ad["sidebar_bottom"];
+			if($type=="detail"){
+				$s["ad"][$bannertype[$i]]["single_top"]=$ad["single_top"];
+				$s["ad"][$bannertype[$i]]["single_bottom_left"]=$ad["single_bottom_left"];
+				$s["ad"][$bannertype[$i]]["single_bottom_right"]=$ad["single_bottom_right"];
+			}
+		}else{
+			$s["ad"][$bannertype[$i]]=$ad[sprintf("%s_%s",$bannertype[$i],$type)];
+			$s["ad"]["mobile"][$bannertype[$i]]["article_list"]=$ad[$bannertype[$i]."_list"];
+			$s["ad"]["mobile"][$bannertype[$i]]["popular_list"]=$ad[$bannertype[$i]."_popular"];
+			$s["ad"]["mobile"][$bannertype[$i]]["reccomend_list"]=$ad[$bannertype[$i]."_recommend"];
+			$s["ad"]["mobile"][$bannertype[$i]]["headline_list"]=$ad[$bannertype[$i]."_headline"];
+			$s["ad"]["mobile"][$bannertype[$i]]["article_detail"]=$ad[$bannertype[$i]."_detail"];
+		}
 	}
-	
+		
 	return $s;
 }
 
@@ -254,8 +256,8 @@ function get_advertise($categoryid="",$userid="",$pageid=""){
 		}
 	}
 	$_adpc=array("sidebar_top","sidebar_bottom","single_top","single_bottom_left","single_bottom_right");
-	$_adsp=array("sp_list","sp_detail","ios_list","ios_detail","android_list","android_detail");
-	$_banner=array("bannertext","pc_bannerimg","pc_bannerlink","sp_bannerimg","sp_bannerlink");
+	$_adsp=array("sp_list","sp_detail","sp_headline","sp_popular","sp_recommend","ios_list","ios_detail","ios_headline","ios_popular","ios_recommend","android_list","android_detail","android_headline","android_popular","android_recommend");
+	$_banner=array("bannertext","pc_bannerimg","pc_bannerlink","sp_bannerimg","sp_bannerlink","ios_bannerimg","ios_bannerlink","android_bannerimg","android_bannerlink");
 	$_theme=array("base","bgcolor","pc_headerimglist","sp_headerimglist","pc_headerimgdetail","sp_headerimgdetail","sp_showfilter");
 	$s=array();
 	
@@ -368,9 +370,7 @@ function set_categoryinfo($f,$personalized="",$longtitle=1){
 function urlmodify($body){
 	
 	/*
-	
 	すでに登録されている記事の画像パスを運動通信からSPORTS BULLに変換
-	
 	*/
 	
 	$body=str_replace("https://www.undotsushin.com/prg_img/","https://img.sportsbull.jp/",$body);
@@ -385,7 +385,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	*/
 	
 	global $ImgPath,$domain,$ad,$mediaoption,$videopath,$apidetails,$SERVERPATH;
-
+	
 	$video=get_videotype($f["video"],$f["youtube"],$f["facebook"]);
 	$datetime=get_date(sprintf("%s-%s-%s %s:%s:%s",$f["a1"],$f["a2"],$f["a3"],$f["a4"],$f["a5"],$f["a6"]));
 	
@@ -394,8 +394,10 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 	$s["id"]=(int)$f["id"];
 	$s["date"]=$datetime["isotime"];
 	$s["display_date"]=get_relativetime($datetime["relativetime"],$datetime["date"],$datetime["weekday"]);
-	$s["title"]=mod_HTML(strlen($f["modtitle"])>0?$f["modtitle"]:$f["title"]);
-
+	if($f["m1"]==152&&preg_match("/前/",$s["display_date"]))$s["display_date"]=sprintf("%s%s",$datetime["date"],sprintf("(%s)",get_weekday($datetime["weekday"])));
+	
+	$s["title"]=str_replace("&#039;","'",strlen($f["modtitle"])>0?$f["modtitle"]:$f["title"]);
+	
 	$s["description"]=get_summary($f["b1"],$f["body"]);
 	
 	if(strlen($f["relatedpost"])>0)$body.=$f["relatedpost"];
@@ -404,7 +406,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["body_escape"]=stripbr($f["body"]);
 		if($apidetails!=1)$s["media_vk_refid"]=strlen($f["brightcove"])>0?$f["brightcove"]:"";
 	}
-
+	
 	#1013 続きを読む
 	/*
 	if($canonical==1){
@@ -434,7 +436,7 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["readmore"]["is_readmore"]=false;
 		$s["readmore"]["url"]="";
 	}
-
+	
 	if($canonicalflag){
 		$s["canonical"]["is_canonical"]=true;
 		$s["canonical"]["url"]=$f["t9"];
@@ -458,13 +460,14 @@ function set_articleinfo($f,$type=0,$canonical=0,$readmore=0){
 		$s["categories"][1]["label"]=$cat2;
 		$s["categories"][1]["slug"]=$f["slug2"]; 
 	}
-
+	
 	$s["is_bookmarked"]=$f["is_bookmark"]==0?false:true;
 	if($type==0)$s["is_recommend"]=$f["recommend"]==1?true:false;
 	$s["is_new"]=$datetime["relativetime"]<(60*24*30)?true:false;
 	if($type==1)$s["is_show_image"]=$f["imgflag"]==168?false:true;
-
+	
 	$s["media_type"]=strlen($video)>0?"video":"image";
+	//if($f["videoflag"])$s["media_type"]="video";
 	
 	#996 動画記事の判定ロジックを変更する
 	if($type==0){
@@ -569,6 +572,7 @@ function set_commentinfo($f,$type,$reply=0){
 
 	if($type===0){
 		$s["body"]=mod_HTML($body,2);
+		$s["body_escape"]=mod_HTML($type===1?$body:$f["comment"]);
 	}else{
 		$s["date"]=$datetime["isotime"];
 		$s["display_date"]=get_relativetime($datetime["relativetime"],$datetime["date"],$datetime["weekday"]);
@@ -695,7 +699,7 @@ function wlog($file,$data){
 
 function debug($token,$id,$txt=array()){
 	
-	global $H,$_SERVER,$_GET,$_POST,$_FILES,$_COOKIE,$LOGTXT;
+	global $H,$LOGTXT;
 	
 	if(count($txt)==0){
 		$log=$H;
@@ -747,8 +751,8 @@ function get_date($m){
 
 	$str=strtotime($m);
 	$now=strtotime(date("Y-m-d H:i:s"));
-
-	$t["relativetime"]=($now-$str)/60;
+	
+	$t["relativetime"]=($now-$str)/60;	
 	$t["date"]=date("m月d日 H時i分",$str);
 	$t["isotime"]=str_replace(" ","T",date("Y-m-d H:i:s+0900",$str));
 	$t["weekday"]=date("w",$str);
@@ -763,9 +767,9 @@ function get_weekday($a){
 function get_relativetime($a,$b,$c){
 
 	$rt="";
-	if($a<60){
+	if($a>0&&$a<60){
 		$rt=sprintf("%s分前",floor($a));
-	}elseif($a<60*24){
+	}elseif($a>0&&$a<60*24){
 		$rt=sprintf("%s時間前",floor($a/(60)));
 	}else{
 		$rt=str_replace(" ",sprintf("(%s) ",get_weekday($c)),$b);
@@ -903,7 +907,7 @@ function check_passwd($passwd){
 	return $err;
 }
 
-function get_videotype($v1,$v2,$v3){
+function get_videotype($v1,$v2,$v3,$v4){
 	if(strlen($v1)>0)$s="brightcove";
 	elseif(strlen($v2)>0)$s="youtube";
 	elseif(strlen($v3)>0)$s="facebook";
@@ -954,7 +958,6 @@ function get_contents($url){
 	if(curl_errno($ch))return "";
 	else return $output;
 }
-
 
 
 function split_utime($a){

@@ -3,10 +3,6 @@
 $TABLE="advertise";
 $s3active=preg_match("#/apache/htdocs/#",$SERVERPATH)?0:1;
 
-if($_GET["cid"]==1){
-	$a[]=array("head","システム設定");
-	$a[]=array("inputradio","続きを読むリンク先","readmore",array("運動通信Web View","媒体指定URL"),"","","","");
-}
 if($_GET["rid"]==2){
 	$a[]=array("head","システム設定");
 	$a[]=array("inputcheckbox","CMS管理項目オプション","cmdtypes",array("速報・紙面記事形式","関連リンク","サマリー","元記事URL","MP4動画","Youtube","Facebook","動画キャプション","コンテンツ仕様選択","外部Brightcove RefID"),"","","","");
@@ -14,25 +10,34 @@ if($_GET["rid"]==2){
 	$a[]=array("inputradio","Canonical","canonical",array("運動通信URL","媒体指定URL"),"","","","");
 	$a[]=array("textfield","出力バケット名","bucket","20","","","");
 	$a[]=array("inputradio","海外からのアクセス","geoblock",array("許可する","許可しない"),"","","","");
-}
-if($_GET["cid"]==10){
+
+}elseif($_GET["cid"]==10){
 	$a[]=array("head","テーマ設定");
-	$a[]=array("textfield","ベース","base","20","","","","＠dark");
+	$a[]=array("textfield","ベース","base","20","","","","＠dark\ncrazy\ntheme_big6\ntheme_newdark\ntheme_dark");
 	$a[]=array("textfield","背景色 *16進数","bgcolor","20","","","","#000000\n#FFFFFF");
-	$a[]=array("img","PC一覧ヘッダ画像","pc_headerimglist","3000--0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("img","PC詳細ページヘッダ画像","pc_headerimgdetail","3000--0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("img","スマホ一覧ヘッダ画像","sp_headerimglist","3000--0-0-0-0","","",$BILLINGUAL);
-	$a[]=array("img","スマホ詳細ページヘッダ画像","sp_headerimgdetail","3000--0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("img","PC一覧ヘッダ画像","pc_headerimglist","2000-300-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("img","PC詳細ページヘッダ画像","pc_headerimgdetail","2000-150-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("img","スマホ一覧ヘッダ画像","sp_headerimglist","750-600-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("img","スマホ詳細ページヘッダ画像","sp_headerimgdetail","750-190-0-0-0-0","","",$BILLINGUAL);
 	$a[]=array("inputradio","スマホ一覧ナビ表示","sp_showfilter",array("表示する","表示しない"),"","","","");
+
+}elseif($_GET["cid"]==1){
+	$a[]=array("head","システム設定");
+	$a[]=array("inputradio","続きを読むリンク先","readmore",array("運動通信Web View","媒体指定URL"),"","","","");
 }
+
 if($_GET["cid"]!=0){
-	$a[]=array("head","記事一覧上・記事本文下バナー設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
+	$a[]=array("head","記事一覧上・記事本文下バナー画像設定：（親＞子）カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
 	$a[]=array("inputradio","バナー表示","bannerflag",array("親の表示設定を継承する","個別にバナーを設定する","バナーを表示しない"));
-	$a[]=array("textfield","ALTテキスト","bannertext","70","","","");
-	$a[]=array("img","PCバナー","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("textfield","ALTテキスト（共通）","bannertext","70","","","");
+	$a[]=array("img","PCバナー画像","pc_bannerimg","728-90-0-0-0-0","","",$BILLINGUAL);
 	$a[]=array("textfield","PCリンク先","pc_bannerlink","100","","","");
-	$a[]=array("img","スマホバナー","sp_bannerimg","640-200-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("img","スマホバナー画像","sp_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
 	$a[]=array("textfield","スマホリンク先","sp_bannerlink","100","","","");
+	$a[]=array("img","iOSバナー画像","ios_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("textfield","iOSリンク先","ios_bannerlink","100","","","");
+	$a[]=array("img","Androidバナー画像","android_bannerimg","750-234-0-0-0-0","","",$BILLINGUAL);
+	$a[]=array("textfield","Androidリンク先","android_bannerlink","100","","","");
 }
 
 $a[]=array("head","動画広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
@@ -55,26 +60,44 @@ $a[]=array("textfield","記事本文下レクタングル（左）ID","single_bo
 
 $a[]=array("head","スマホ広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
 if($_GET["cid"]!=0)$a[]=array("inputradio","記事一覧広告表示","ad_sp_listflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
-$a[]=array("textfield","記事一覧広告ID","ad_sp_listid","40","","","");
+$a[]=array("textfield","記事一覧広告ID","ad_sp_listid","20","","","");
 if($_GET["cid"]!=0)$a[]=array("inputradio","記事詳細広告表示","ad_sp_detailflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
-$a[]=array("textfield","記事詳細広告ID","ad_sp_detailid","40","","","");
+$a[]=array("textfield","記事詳細広告ID","ad_sp_detailid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","ヘッドライン広告表示","ad_sp_headlineflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","ヘッドライン広告ID","ad_sp_headlineid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","人気記事広告表示","ad_sp_popularflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","人気記事広告ID","ad_sp_popularid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","オススメ記事広告表示","ad_sp_recommendflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","オススメ記事広告ID","ad_sp_recommendid","20","","","");
 
 $a[]=array("head","iOS広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
 if($_GET["cid"]!=0)$a[]=array("inputradio","記事一覧広告表示","ad_ios_listflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
-$a[]=array("textfield","記事一覧広告ID","ad_ios_listid","40","","","");
+$a[]=array("textfield","記事一覧広告ID","ad_ios_listid","20","","","");
 if($_GET["cid"]!=0)$a[]=array("inputradio","記事詳細広告表示","ad_ios_detailflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
-$a[]=array("textfield","記事詳細広告ID","ad_ios_detailid","40","","","");
+$a[]=array("textfield","記事詳細広告ID","ad_ios_detailid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","ヘッドライン広告表示","ad_ios_headlineflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","ヘッドライン広告ID","ad_ios_headlineid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","人気記事広告表示","ad_ios_popularflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","人気記事広告ID","ad_ios_popularid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","オススメ記事広告表示","ad_ios_recommendflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","オススメ記事広告ID","ad_ios_recommendid","20","","","");
 
 $a[]=array("head","Android広告設定：（親＞子）デフォルト ＞ カテゴリー ＞ ユーザ ＞ 記事で継承されますが、子要素の指定は優先されます");
 if($_GET["cid"]!=0)$a[]=array("inputradio","記事一覧広告表示","ad_android_listflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
-$a[]=array("textfield","記事一覧広告ID","ad_android_listid","40","","","");
+$a[]=array("textfield","記事一覧広告ID","ad_android_listid","20","","","");
 if($_GET["cid"]!=0)$a[]=array("inputradio","記事詳細広告表示","ad_android_detailflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
-$a[]=array("textfield","記事詳細広告ID","ad_android_detailid","40","","","");
+$a[]=array("textfield","記事詳細広告ID","ad_android_detailid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","ヘッドライン広告表示","ad_android_headlineflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","ヘッドライン広告ID","ad_android_headlineid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","人気記事広告表示","ad_android_popularflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","人気記事広告ID","ad_android_popularid","20","","","");
+if($_GET["cid"]!=0)$a[]=array("inputradio","オススメ記事広告表示","ad_android_recommendflag",array("親の広告表示設定を継承する","広告を設定する","広告を表示しない"));
+$a[]=array("textfield","オススメ記事広告ID","ad_android_recommendid","20","","","");
 
 function output(){	
 
 	global $o,$ImgPath,$SERVERPATH,$s3active;
-
+	
 	$sql="select id from u_media";
 	$o->query($sql);
 	$r=array();
@@ -92,8 +115,7 @@ function output(){
 		$op[$f["id"]]["readmore"]=isset($s["readmore"])?$s["readmore"]:0;
 		$op[$f["id"]]["canonical"]=isset($s["canonical"])?$s["canonical"]:0;
 		$op[$f["id"]]["bucket"]=isset($s["bucket"])?$s["bucket"]:"";
-		$op[$f["id"]]["geoblock"]=isset($s["geoblock"])?$s["geoblock"]:0;
-		
+		$op[$f["id"]]["geoblock"]=isset($s["geoblock"])?$s["geoblock"]:0;		
 	}
 	
 	$file=sprintf("%s/api/ver1/static/cms.dat",$SERVERPATH);

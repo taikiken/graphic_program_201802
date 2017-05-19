@@ -4,6 +4,7 @@ include $INCLUDEPATH."local.php";
 include $INCLUDEPATH."public/import.php";
 
 $MEDIAID=16;
+$MEDIANAME="レスポンス";
 
 function modhtmltag($s){
 	$s=str_replace("\n","<br>",$s);
@@ -39,6 +40,12 @@ $xml=str_replace("iid:", "", $xml);
 $data=simplexml_load_string($xml,'SimpleXMLElement',LIBXML_NOCDATA);
 $data=json_decode(json_encode($data),TRUE);
 
+if($data["entry"]["id"]){
+	$entry=$data["entry"];
+	unset($data);
+	$data["entry"][]=$entry;
+}
+
 for($i=0;$i<count($data["entry"]);$i++){
 	
 	if(!preg_match("/モータースポーツ/",$data["entry"][$i]["category"]["@attributes"]["label"]))continue;
@@ -48,8 +55,6 @@ for($i=0;$i<count($data["entry"]);$i++){
 	$s["t7"]=$data["entry"][$i]["id"];
 	$s["t16"]=$data["entry"][$i]["summary"];
 	
-	$body=modhtmltag($data["entry"][$i]["content"]);
-	$modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body));
 	$bodyimg="";
 	
 	$s["m_time"]=date("Y-m-d H:i:s",strtotime($data["entry"][$i]["published"]));
@@ -79,7 +84,11 @@ for($i=0;$i<count($data["entry"]);$i++){
 	$f=$o->fetch_array();
 	
 	if(strlen($f["id"])>0){
-	  if($s["a_time"]!=$f["a_time"]){
+	  if(strtotime($s["a_time"])>strtotime($f["a_time"])){
+		  
+		  $body=modhtmltag($data["entry"][$i]["content"]);
+		  $modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body));
+	
 		  if($s["t30"]!="NULL"){
 			  $s["img1"]=outimg($s["t30"]);
 			  for($jj=1;$jj<count($data["entry"][$i]["img"]);$jj++){
@@ -97,6 +106,11 @@ for($i=0;$i<count($data["entry"]);$i++){
 		  $sqla[]=relatedlink(modRelatedLink($data["entry"][$i]["relatedarticle"]),$f["id"]);
 	  }
 	}else{
+
+	  $body=modhtmltag($data["entry"][$i]["content"]);
+	  $modbody=str_replace("\'","''",preg_replace("/(\r|\n|\t)/","",$body));
+
+	  $TITLE[]=pg_escape_string($s["title"]);
 
 	  $s["d1"]=3;
 	  $s["d2"]=$MEDIAID;
@@ -126,5 +140,7 @@ for($i=0;$i<count($data["entry"]);$i++){
 	}
 	unset($s,$sqla);
 }
+
+include $INCLUDEPATH."public/display.php";
 
 ?>
