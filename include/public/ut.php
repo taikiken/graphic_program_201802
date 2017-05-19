@@ -954,16 +954,7 @@ function get_contents($url){
 	if(curl_errno($ch))return "";
 	else return $output;
 }
-if (!function_exists("s3upload"))
-{
-	function s3upload($from,$to){
-		global $s3active;
-		if($s3active){
-			$s3i=new S3Module;
-			$s3i->upload($from,$to);
-		}
-	}
-}
+
 
 
 function split_utime($a){
