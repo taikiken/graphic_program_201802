@@ -57,3 +57,4 @@
 
 
 <?php include __DIR__.'/../_misc.php'; ?>
+<?php include __DIR__.'/../_sns.php'; ?>
