@@ -325,6 +325,10 @@ streampack初期化コード
       startEvent = 'touchend';
     }
 
+    if ( isAndroid ) {
+      startEvent = 'click';
+    }
+
     if ( isMobile ) {
 
       player.one(startEvent, function() {
