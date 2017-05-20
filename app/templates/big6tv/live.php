@@ -76,7 +76,6 @@ endif;
   outline: none;
 }
 .live-streaming .video-js .vjs-big-play-button {
-  z-index: 9999;
   top: 50%;
   left: 50%;
   margin-left: -45px;
@@ -344,7 +343,7 @@ streampack初期化コード
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-        log('live - start : sp', new Date());
+        log('live - start : sp/player', new Date());
         return false;
       });
 
