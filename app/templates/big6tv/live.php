@@ -165,7 +165,9 @@ streampack初期化コード
   */
   function init() {
 
-    intervalTimer = window.setInterval( init, interval );
+    if ( !intervalTimer ) {
+      intervalTimer = window.setInterval( init, interval );
+    }
 
     $.ajax({
       url      : liveEndPoint,
