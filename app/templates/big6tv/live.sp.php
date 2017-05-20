@@ -28,7 +28,6 @@
 
 <div class="live-streaming js-live"></div><!-- /.live-streaming -->
 <p class="live-streaming-note">正常に再生されない、音飛びなどが発生する場合は、再読み込みをしてください。</p>
-<?php include __DIR__.'/_sns.php'; ?>
 
 <?php
 /*
