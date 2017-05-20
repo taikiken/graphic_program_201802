@@ -325,7 +325,6 @@ streampack初期化コード
       startEvent = 'touchend';
     }
 
-
     if ( isMobile ) {
 
       player.one(startEvent, function() {
@@ -333,6 +332,7 @@ streampack初期化コード
         player.ima.requestAds();
         player.play();
         log('live - start : sp', new Date());
+        return false;
       });
 
     } else {
@@ -342,6 +342,7 @@ streampack初期化コード
         player.ima.requestAds();
         player.play();
         log('live - start : pc', new Date());
+        return false;
       }, 500);
 
     }
@@ -355,6 +356,39 @@ streampack初期化コード
         isPlayed = true;
         ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
       }
+
+
+      // check state
+      // ------------------------------
+      playerStateInterval = setInterval(function() {
+
+        var adRemainingTime = 0;
+
+        // 強制再読込のリセット
+        if ( playerState !== 'waiting' ) {
+          clearTimeout(playerResetTimer);
+        }
+
+        // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
+        if ( isAdStarted ) {
+          if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
+            isAdPlayed = true;
+            player.ima.startFromReadyCallback();
+            log('live - adend by getRemainingTime');
+          }
+
+          adRemainingTime = player.ima.adsManager.getRemainingTime();
+        }
+
+        // 本編再生中に `playsinline` なら video.jsのcontrols非表示
+        if ( isAdPlayed && contentPlayer.hasAttribute('playsinline') ) {
+          $embed.find('.vjs-control-bar').hide();
+        }
+
+        log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
+
+      }, 1000);
+
       log('live - play', new Date());
     });
 
@@ -427,40 +461,6 @@ streampack初期化コード
     });
 
     log('live - initVideo / default', data);
-
-
-
-    // check state
-    // ------------------------------
-    playerStateInterval = setInterval(function() {
-
-      var adRemainingTime = 0;
-
-      // 強制再読込のリセット
-      if ( playerState !== 'waiting' ) {
-        clearTimeout(playerResetTimer);
-      }
-
-      // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
-      if ( isAdStarted ) {
-        if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
-          isAdPlayed = true;
-          player.ima.startFromReadyCallback();
-          log('live - adend by getRemainingTime');
-        }
-
-        adRemainingTime = player.ima.adsManager.getRemainingTime();
-      }
-
-      // 本編再生中に `playsinline` なら video.jsのcontrols非表示
-      if ( isAdPlayed && contentPlayer.hasAttribute('playsinline') ) {
-        $embed.find('.vjs-control-bar').hide();
-      }
-
-      log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
-
-    }, 1000);
-
 
   }
 
