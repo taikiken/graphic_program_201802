@@ -19,6 +19,13 @@
 <div class="live-streaming js-live"></div><!-- /.live-streaming -->
 <p class="live-streaming-note">正常に再生されない、音飛びなどが発生する場合は、再読み込みをしてください。</p>
 
+<?php
+// desktopのみプレイヤー下部にシェアボタン表示
+if ( $page['ua'] == 'desktop' ) :
+  include __DIR__.'/_sns.php';
+endif;
+?>
+
 <!-- video.js -->
 <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video-js.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video.js"></script>
