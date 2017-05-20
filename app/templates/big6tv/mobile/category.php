@@ -57,3 +57,12 @@
 
 
 <?php include __DIR__.'/../_misc.php'; ?>
+
+<?php
+
+// カテゴリー一覧の時のみ表示 / webview では表示しない
+if ( $page['template'] == 'category' || $page['template'] !== 'webview' ) :
+  include __DIR__.'/../_sns.php';
+endif;
+
+?>
