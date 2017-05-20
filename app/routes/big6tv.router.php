@@ -56,7 +56,7 @@ $app->group('/{slug:big6tv}',  function () use($app) {
       'og_title'           => 'BIG6TV | '.$app->model->property('title'),
       'og_url'             => $app->model->property('site_url').'big6tv/',
       'path'               => $args,
-      'template'           => 'category',
+      'template'           => 'webview',
       'template_classname' => '',
     ));
 
