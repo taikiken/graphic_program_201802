@@ -1,3 +1,12 @@
+<?php
+
+// カテゴリー一覧の時のみ表示 / webview では表示しない
+if ( $page['template'] == 'category' || $page['template'] !== 'webview' ) :
+  include __DIR__.'/../_sns.php';
+endif;
+
+?>
+
 <section class="matches">
   <h2 class="matches-heading">直近の試合日程・結果</h2>
   <table class="matches-list for-category">
@@ -57,12 +66,3 @@
 
 
 <?php include __DIR__.'/../_misc.php'; ?>
-
-<?php
-
-// カテゴリー一覧の時のみ表示 / webview では表示しない
-if ( $page['template'] == 'category' || $page['template'] !== 'webview' ) :
-  include __DIR__.'/../_sns.php';
-endif;
-
-?>
