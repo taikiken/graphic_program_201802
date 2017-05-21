@@ -461,7 +461,7 @@ streampack初期化コード
       }
 
       // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
-      if ( isAdStarted ) {
+      if ( isAdStarted && player.ima.adsManager ) {
         if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
           isAdPlayed = true;
           player.ima.startFromReadyCallback();
