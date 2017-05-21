@@ -129,7 +129,7 @@ streampack初期化コード
 
   var $embed          = $('.js-live');
   var $tmpl_video     = $('#live-streaming__video').html();
-  var interval        = <?php echo ( $page['category']['live_interval'] ) ? $page['category']['live_interval'] : 10 ; ?> * 1000; // polling感覚
+  var interval        = <?php echo ( $page['category']['live_interval'] ) ? $page['category']['live_interval'] : 10 ; ?> * 1000 * 2; // polling感覚
   var liveEndPoint    = '<?php echo ( $page['category']['live'] ) ? $page['category']['live'] : '/api/big6tv/live'; ?>';
 
   var video_isPlaying = null;
