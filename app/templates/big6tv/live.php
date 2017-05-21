@@ -249,21 +249,25 @@ streampack初期化コード
   * プレイヤー部分にvideoタグを出力する
   */
   function initVideo( data ) {
+
+    var contentPlayer       = undefined;
+    var playerState         = null;
+    var playerStateInterval = null;
+    var playerResetTimer    = null;
+
+    var date = new Date();
+    var timestamp = date.getTime();
+
     $embed.html( $tmpl_video );
     $embed.find('video').attr('poster', data.alt.large );
     // $embed.find('source').attr('src', data.video.source );
 
     // #1901 desktop版はABR固定
     <?php if ( $page['ua'] == 'desktop' && !isset($_GET['debug']) ) :?>
-    $embed.find('source').attr('src', 'https://d3t6uer7w31bug.cloudfront.net/live_big6/bball.m3u8');
+    $embed.find('source').attr('src', 'https://d3t6uer7w31bug.cloudfront.net/live_big6/bball.m3u8' + '?timestamp=' + timestamp );
     <?php else : ?>
-    $embed.find('source').attr('src', data.video.source );
+    $embed.find('source').attr('src', data.video.source + '?timestamp=' + timestamp );
     <?php endif ;?>
-
-    var contentPlayer       = undefined;
-    var playerState         = null;
-    var playerStateInterval = null;
-    var playerResetTimer    = null;
 
     // ad_url
     // ------------------------------
@@ -275,9 +279,8 @@ streampack初期化コード
 
       // advantage広告タグ用 - URLの末尾が `page=` ならtimestampを付与してリクエストする
       if ( ad_url !== '') {
-        var date = new Date() ;
         if ( ad_url.match(/page=$/) ) {
-          ad_url += date.getTime();
+          ad_url += timestamp;
         }
       }
     }
