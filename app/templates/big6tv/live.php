@@ -485,7 +485,7 @@ streampack初期化コード
 
       log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
 
-    }, 1000);
+    }, 3000);
 
     log('live - initVideo / default', data);
   }
