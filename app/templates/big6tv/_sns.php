@@ -100,6 +100,7 @@
     .live-streaming-sns-list {
       float: left;
       width: 100%;
+      height: 30px;
       padding: 0 10px;
       margin: 7px 0;
     }
@@ -121,7 +122,7 @@
     }
 
     .live-streaming-sns-item {
-      background-size: auto 18px;
+      background-size: auto 15px;
     }
 
     .live-streaming-sns-item-fb {
@@ -133,7 +134,7 @@
     }
 
     .live-streaming-sns-item-line {
-      background-size: auto 20px;
+      background-size: auto 18px;
       background-image: url(../../assets/images/big6/icon_line.png);
     }
   }
