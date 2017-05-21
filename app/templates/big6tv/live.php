@@ -62,6 +62,7 @@ endif;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #000;
 }
 
 .live-streaming #content_video {
@@ -154,7 +155,10 @@ streampack初期化コード
   }
 
 
-  init();
+  // init
+  // ------------------------------
+  <?php // initタイミングずらす / mobileで初回ロード時にadtimeout起こる の低減 ?>
+  setTimeout( init, 3000 );
 
 
   <?php // 本番環境以外の時のみ console.log を出力する  ?>
