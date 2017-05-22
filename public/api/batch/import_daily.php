@@ -176,6 +176,6 @@ for($i=0;$i<count($data);$i++){
 	}
 }
 
-
+die(count($data) ." articles are fetched");
 
 ?>

@@ -10,6 +10,8 @@ call_user_func(function(){
 
 	global $o;
 
+	$d = 0;
+
 	$dailyVal = [
 		"http://www2.kobe-np.co.jp/sportsbull/for_sportsbull_del.rss"
 	];
@@ -36,12 +38,12 @@ call_user_func(function(){
 			{
 				//もしIDが見つかれば掲載停止処理
 				$o->query("update repo_n set flag=0 where id='{$f["id"]}';");
+
+				$d++;
 			}
 
 		}
 	}
 
-
-
-
+	die("{$d} articles are deleted");
 });
