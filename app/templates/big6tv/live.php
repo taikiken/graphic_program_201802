@@ -1,13 +1,57 @@
 <?php
 /*
 
-# LIVE配信モジュール
+# LIVE配信モジュール - PC用
 
 - カテゴリー情報APIの `live` にAPIのエンドポイントがあるなら以下を読み込む
 - ['live']['isPlaying'] == 1 ならプレイヤーを表示 / 0 なら alt画像を表示する
 
+- PCならvideo.jsアプデ版をロードする
+-- desktop : chromeで再生中に停止する問題の解決
+-- mobile  : chromeで広告が再生されない
+- SPならvideo.js旧バージョンをロードする
+-- desktop : chromeで再生中に停止する時がある
+
 */
+
 ?>
+
+<div class="live-streaming js-live"></div><!-- /.live-streaming -->
+<p class="live-streaming-note">正常に再生されない、音飛びなどが発生する場合は、再読み込みをしてください。</p>
+
+<?php
+// desktopのみプレイヤー下部にシェアボタン表示
+if ( $page['ua'] == 'desktop' ) :
+  include __DIR__.'/_sns.php';
+endif;
+?>
+
+<!-- video.js -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video-js.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.18.4/video.js"></script>
+<!-- //video.js -->
+
+<!-- hls -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.0/videojs-contrib-hls.js"></script>
+<!-- //hls -->
+
+<!-- ads - sdk -->
+<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<!-- //ads - sdk -->
+
+<!-- ads - ad -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/4.2.6/videojs.ads.js"></script>
+<!-- //ads - ad -->
+
+<!-- ads - ima -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.5.0/videojs.ima.js"></script>
+<!-- //ads - ima -->
+
+<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
+<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
+<link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
 
 <style>
 .live-streaming {
@@ -20,75 +64,34 @@
   background-size: cover;
 }
 
-#content_video {
+.live-streaming #content_video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-</style>
 
-<div class="live-streaming js-live"></div><!-- /.live-streaming -->
-<p class="live-streaming-note">正常に再生されない、音飛びなどが発生する場合は、再読み込みをしてください。</p>
+.live-streaming .video-js {
+  outline: none;
+}
+.live-streaming .video-js .vjs-big-play-button {
+  top: 50%;
+  left: 50%;
+  margin-left: -45px;
+  margin-top: -22.5px;
+}
+.live-streaming .video-js .vjs-live-display {
+  line-height: 3;
+}
+.live-streaming .video-js .vjs-audio-button {
+  display: none;
+}
 
-
-<?php
-/*
-
-以下は streampack用のコード
-( crazyの時にいつもheadでよんでるやつ )
-
-*/
-?>
-<link href="//vjs.zencdn.net/5.3/video-js.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ads.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/videojs.ima.css" />
-<link rel="stylesheet" href="/assets/ima_plugin/css/ima-style.css" />
-
-<script src="//vjs.zencdn.net/5.3/video.min.js"></script>
-<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-
-<script src="/assets/js/libs/hls/videojs-contrib-hls.min.js"></script>
-<script src="/assets/ima_plugin/js/videojs.hls.js"></script>
-<script src="/assets/ima_plugin/js/videojs.ads.js"></script>
-<script src="/assets/ima_plugin/js/videojs.ima.js"></script>
-
-
-<style>
-  body.vjs-full-window {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-  }
-  .video-js.vjs-fullscreen {
-    position: fixed;
-    overflow: hidden;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100% !important;
-    height: 100% !important;
-  }
-  .video-js:-webkit-full-screen {
-    width: 100% !important;
-    height: 100% !important;
-  }
-  .video-js.vjs-fullscreen.vjs-user-inactive {
-    cursor: none;
-  }
-
-  .vjs-poster {
-    display: none !important;
-  }
-
-  .video-js .vjs-big-play-button {
-    z-index: 9999;
-    top: 50%;
-    left: 50%;
-  }
+/* #iOS インライン再生中のローディング非表示 */
+.live-streaming .video-js.vjs-ad-playing .vjs-loading-spinner {
+  display: none;
+}
 </style>
 
 
@@ -114,6 +117,7 @@ streampack初期化コード
   </video>
 </script>
 
+
 <script src="https://code.jquery.com/jquery-git.min.js"></script>
 <script>
 (function($){
@@ -126,23 +130,43 @@ streampack初期化コード
   var video_isPlaying = null;
   var video_source    = '';
 
-  // 広告再生済みかどうか
-  var isAdPlayed      = false;
+  var isMobile        = false;
   var isAndroid       = false;
 
-  // 初回実行
-  var intervalTimer = window.setInterval( init, interval );
+  var isPlayed        = false;
+  var isAdPlayed      = false;
+  var isAdStarted     = false;
+
+  var intervalTimer   = null;
+
+  // mobile / android判定
+  // ------------------------------
+  if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) {
+    isMobile   = true;
+    if ( navigator.userAgent.match(/Android/i) ) {
+      isAndroid  = true;
+    }
+  }
+
+
   init();
 
 
+  <?php // 本番環境以外の時のみ console.log を出力する  ?>
   function log( message, value ) {
-    // console.log( message, value || '');
+    <?php if ( UT_ENV !== 'PRODUCTION' ) : ?>
+    console.log( message, value || '');
+    <?php endif; ?>
   }
 
   /**
   * データ取得してプレイヤーをセットする
   */
   function init() {
+
+    if ( !intervalTimer ) {
+      intervalTimer = window.setInterval( init, interval );
+    }
 
     $.ajax({
       url      : liveEndPoint,
@@ -184,7 +208,7 @@ streampack初期化コード
       log('live - ajax : fail');
     })
     .always(function () {
-      log('live - ajax');
+      // log('live - ajax');
     });
 
   }
@@ -222,12 +246,23 @@ streampack初期化コード
   function initVideo( data ) {
     $embed.html( $tmpl_video );
     $embed.find('video').attr('poster', data.alt.large );
+    // $embed.find('source').attr('src', data.video.source );
+
+    // #1901 desktop版はABR固定
+    <?php if ( $page['ua'] == 'desktop' && !isset($_GET['debug']) ) :?>
+    $embed.find('source').attr('src', 'https://d3t6uer7w31bug.cloudfront.net/live_big6/bball.m3u8');
+    <?php else : ?>
     $embed.find('source').attr('src', data.video.source );
+    <?php endif ;?>
+
+    var contentPlayer       = undefined;
+    var playerState         = null;
+    var playerStateInterval = null;
+    var playerResetTimer    = null;
 
     // ad_url
     // ------------------------------
     var ad_url = '';
-
 
     // 広告再生済みなら再度広告設定はしない
     if ( !isAdPlayed && data.video.ad_url ) {
@@ -243,38 +278,63 @@ streampack初期化コード
     }
 
 
-    // player
+    // player - init
     // ------------------------------
-    var player = videojs('content_video');
+    // init
+    var player = videojs('content_video', {
+      textTrackSettings: false,
+      hls : {
+        overrideNative  : true,
+        withCredentials : true
+      },
+      html5 : {
+        nativeAudioTracks : false,
+        nativeVideoTracks : false,
+        nativeTextTracks  : false
+      }
+    });
+
+    contentPlayer = document.getElementById('content_video_html5_api');
+    log('player', player);
+
+
+    // player - ima
+    // ------------------------------
     var options = {
-      id          : 'content_video',
-      adTagUrl    : ad_url,
-      requestMode : 'ondemand'
+      adLabel          : '広告',
+      id               : 'content_video',
+      adTagUrl         : ad_url,
+      requestMode      : 'onplay',
+      prerollTimeout   : 50000,
+      debug            : true,
+      loadingSpinner   : true
     };
 
     player.ima(options);
+    player.ads.videoElementRecycled = function() {
+      return;
+    }
 
-    var contentPlayer =  document.getElementById('content_video_html5_api');
-    if ((navigator.userAgent.match(/iPad/i) ||
-          navigator.userAgent.match(/Android/i)) &&
-        contentPlayer.hasAttribute('controls')) {
+    log('player.ima', player.ima);
+
+
+    // controls
+    // ------------------------------
+    if ( ( navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i) ) && contentPlayer.hasAttribute('controls') ) {
       contentPlayer.removeAttribute('controls');
     }
 
 
+    // start
+    // ------------------------------
     var startEvent = 'click';
-    var isMobile   = false;
 
-    if ( navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) ) {
-      isMobile   = true;
-      $('#content_video_ima-controls-div').prev().hide();
-      startEvent = 'click';
+    if ( isMobile ) {
+      startEvent = 'touchend';
     }
 
-    if ( navigator.userAgent.match(/Android/i) ) {
-      isMobile   = true;
-      isAndroid  = true;
-      startEvent = 'touchend';
+    if ( isAndroid ) {
+      startEvent = 'click';
     }
 
     if ( isMobile ) {
@@ -283,7 +343,8 @@ streampack初期化コード
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-        log('live - play : sp');
+        log('live - start : sp/player', new Date());
+        return false;
       });
 
     } else {
@@ -292,51 +353,127 @@ streampack初期化コード
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
         player.play();
-        log('live - play : pc');
+        log('live - start : pc', new Date());
+        return false;
       }, 500);
 
     }
 
+
+    // events - default
+    // ------------------------------
     player.on('play', function() {
-      ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
-      log('live - play');
+      playerState = 'play';
+      if ( isPlayed === false ) {
+        isPlayed = true;
+        ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
+      }
+
+
+      // check state
+      // ------------------------------
+      playerStateInterval = setInterval(function() {
+
+        var adRemainingTime = 0;
+
+        // 強制再読込のリセット
+        if ( playerState !== 'waiting' ) {
+          clearTimeout(playerResetTimer);
+        }
+
+        // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
+        if ( isAdStarted ) {
+          if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
+            isAdPlayed = true;
+            player.ima.startFromReadyCallback();
+            log('live - adend by getRemainingTime');
+          }
+
+          adRemainingTime = player.ima.adsManager.getRemainingTime();
+        }
+
+        // 本編再生中に `playsinline` なら video.jsのcontrols非表示
+        if ( isAdPlayed && contentPlayer.hasAttribute('playsinline') ) {
+          $embed.find('.vjs-control-bar').hide();
+        }
+
+        log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
+
+      }, 1000);
+
+      log('live - play', new Date());
     });
 
     player.on('pause', function() {
+      playerState  = 'pause';
       log('live - pause');
     });
 
+    player.on('waiting', function() {
+      if ( playerState === 'progress' ) {
+        playerState      = 'waiting';
+        playerResetTimer = setTimeout(function() {
+          isAdPlayed = true;
+          clearInterval(playerStateInterval);
+          reset();
+          initVideo( data );
+        }, 30000);
+      }
+      log('live - waiting');
+    });
+
+
+    player.on('progress', function() {
+      playerState  = 'progress';
+      // log('live - progress');
+    });
+
+
     player.on('ended', function() {
+      playerState = 'ended';
       ga('send', 'event', 'live', 'complete', data.video.source , 0, {nonInteraction: true} );
       log('live - ended');
     });
 
-    player.on('adsready', function() {
-      isAdPlayed = true;
-      ga('send', 'event', 'live', 'adsready', ad_url , 0, {nonInteraction: true} );
-      log('live - adsready');
-    });
 
     player.on('error', function() {
-      reset();
-      initAlt( data.error.large );
+      playerState = 'error';
+      log('live - error');
+      log('live - networkState', this.player().networkState());
 
       var error = this.player().error();
 
       if ( error ) {
         ga('send', 'event', 'live', 'error', error.code + ' | ' + error.type + ' | ' +  error.message + ' | ' + navigator.userAgent , 0, {nonInteraction: true} );
       }
-
-      if ( isAndroid ) {
-        isAdPlayed = true;
-        initVideo( data );
-      }
-
-      log('live - error');
     });
 
 
-    log('live - initVideo', data);
+    // events - ad
+    // ------------------------------
+    player.on('adsready', function() {
+      playerState = 'adsready';
+      ga('send', 'event', 'live', 'adsready', ad_url , 0, {nonInteraction: true} );
+      log('live - adsready', player.ads);
+    });
+
+    player.on('adstart', function() {
+      playerState = 'adstart';
+      isAdStarted = true;
+      player.volume(1);
+      log('live - adstart', player.ads);
+    });
+
+    player.on('adend', function() {
+      playerState = 'adend';
+      isAdPlayed  = true;
+      player.play();
+      ga('send', 'event', 'live', 'adend', ad_url , 0, {nonInteraction: true} );
+      log('live - adend', player.ads);
+    });
+
+    log('live - initVideo / default', data);
+
   }
 
 
