@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://sportsbull.jp/big6tv/">
   <meta property="og:description" content="東京六大学野球 LIVE配信・ハイライト動画をスポーツブルで。">
   <!-- twitter card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
   <!-- favicon -->
   <link rel="shortcut icon" href="/favicon.ico">

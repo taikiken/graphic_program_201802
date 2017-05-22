@@ -40,6 +40,26 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
       'path'               => $args,
     ));
 
+
+	// OFG:ImageとNoImageの実装を追加 @axesor
+	if (strlen($category["og_image"]) > 0) {
+		$args['page']['og_image'] = $category["og_image"];
+	}
+	if (strlen($category["no_image"]) > 0) {
+		$args['page']['no_image'] = $category["no_image"];
+	}
+
+	//カテゴリ毎のキーワードとdescriptionを取得
+	if (strlen($category["seo_desc"]) > 0) {
+		$args['page']['og_description'] = $category["seo_desc"];
+	}
+	if (strlen($category["seo_key"]) > 0) {
+		$args['page']['keywords'] = $category["seo_key"];
+	}
+
+
+
+
     // クライミングタブのog:image対応
     if ( $args['category_slug'] === 'climbing' ) :
       $args['page']['og_image'] = 'https://sportsbull.jp/_/climbing/og_image/og_image.jpg';
@@ -81,11 +101,11 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
       // 開催前
       if ( $current < $gameDataArray[0]['int'] ) :
-        $gameData = array_slice($gameDataArray, 0, 2);
+        $gameData = array_slice($gameDataArray, 0, 4);
 
       // 開催終了
       elseif ( $current > $gameDataArray[$length - 1]['int'] ) :
-        $gameData = array_slice($gameDataArray, $length - 2);
+        $gameData = array_slice($gameDataArray, $length - 4);
 
       // 開催期間中
       else :
@@ -111,7 +131,7 @@ $app->group('/category/{category_slug:all|'.join('|',$category_slug).'}', functi
 
         endforeach;
 
-        $gameData = array_slice($gameDataArray, $currentKey - 1, 2);
+        $gameData = array_slice($gameDataArray, $currentKey - 2, 4);
 
       endif;
 

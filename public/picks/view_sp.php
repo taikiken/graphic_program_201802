@@ -21,7 +21,7 @@
   <meta property="og:url" content="https://sportsbull.jp/picks/">
   <meta property="og:description" content="毎日配信される膨大な記事の中から、オススメ記事と言いつつ編集長が独断と偏見とたっぷりの真心を込めてお届けします。">
   <!-- twitter card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@sportsbull_jp">
 
   <meta name="apple-mobile-web-app-capable" content="yes">

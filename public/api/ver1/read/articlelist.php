@@ -22,7 +22,7 @@ if(strlen($api)>0){
 		$category=bind($_REQUEST["category"]);
 		$type=bind($_REQUEST["type"]);
 		$c=set_category2($category,$type);
-				
+
 		if($type===""){
 
 			$sql=sprintf("select * from %s%s",sprintf($articletable2,set_isbookmark($uid),$c[1],$c[0]!=152?$orderby:" order by m_time,id desc",$limit),$c[0]!=152?$orderby:" order by m_time,id desc");
@@ -85,7 +85,7 @@ if(strlen($api)>0){
 */
 		}elseif($type==="video"){
 
-			if($staticfileimport==1&&$offset==0&&$length==5){
+			if($staticfileimport==1&&$offset==0&&$length==50){
 				
 				$file=sprintf("%s/static/%s-%s.json",$ImgPath,$category,$type);
 				$y=get_contents($file);
@@ -248,7 +248,7 @@ if($y["status"]["code"]===200){
 	$o->query($nsql);
 	$f=$o->fetch_array();
 	$count=$f["n"];
-	
+
 	if($count>0){
 	
 		$o->query($sql);
