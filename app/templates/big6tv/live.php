@@ -16,7 +16,7 @@
 
 ?>
 
-<div class="live-streaming js-live"></div><!-- /.live-streaming -->
+<div class="live-streaming js-live <?php echo ( $page['ua'] == 'desktop' ) ? 'live-streaming--pc' : 'live-streaming--sp'; ?>"></div><!-- /.live-streaming -->
 <p class="live-streaming-note">正常に再生されない、音飛びなどが発生する場合は、再読み込みをしてください。</p>
 
 <?php
@@ -62,6 +62,7 @@ endif;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #000;
 }
 
 .live-streaming #content_video {
@@ -91,6 +92,11 @@ endif;
 /* #iOS インライン再生中のローディング非表示 */
 .live-streaming .video-js.vjs-ad-playing .vjs-loading-spinner {
   display: none;
+}
+
+.live-streaming--sp .content_video_ima-ad-container iframe {
+  width: 0;
+  height: 0;
 }
 </style>
 
@@ -124,7 +130,7 @@ streampack初期化コード
 
   var $embed          = $('.js-live');
   var $tmpl_video     = $('#live-streaming__video').html();
-  var interval        = <?php echo ( $page['category']['live_interval'] ) ? $page['category']['live_interval'] : 10 ; ?> * 1000; // polling感覚
+  var interval        = <?php echo ( $page['category']['live_interval'] ) ? $page['category']['live_interval'] : 10 ; ?> * 1000 * 2; // polling感覚
   var liveEndPoint    = '<?php echo ( $page['category']['live'] ) ? $page['category']['live'] : '/api/big6tv/live'; ?>';
 
   var video_isPlaying = null;
@@ -149,7 +155,10 @@ streampack初期化コード
   }
 
 
-  init();
+  // init
+  // ------------------------------
+  <?php // initタイミングずらす / mobileで初回ロード時にadtimeout起こる の低減 ?>
+  setTimeout( init, 3000 );
 
 
   <?php // 本番環境以外の時のみ console.log を出力する  ?>
@@ -244,21 +253,25 @@ streampack初期化コード
   * プレイヤー部分にvideoタグを出力する
   */
   function initVideo( data ) {
+
+    var contentPlayer       = undefined;
+    var playerState         = null;
+    var playerStateInterval = null;
+    var playerResetTimer    = null;
+
+    var date = new Date();
+    var timestamp = date.getTime();
+
     $embed.html( $tmpl_video );
     $embed.find('video').attr('poster', data.alt.large );
     // $embed.find('source').attr('src', data.video.source );
 
     // #1901 desktop版はABR固定
     <?php if ( $page['ua'] == 'desktop' && !isset($_GET['debug']) ) :?>
-    $embed.find('source').attr('src', 'https://d3t6uer7w31bug.cloudfront.net/live_big6/bball.m3u8');
+    $embed.find('source').attr('src', 'https://d3t6uer7w31bug.cloudfront.net/live_big6/bball.m3u8' + '?timestamp=' + timestamp );
     <?php else : ?>
-    $embed.find('source').attr('src', data.video.source );
+    $embed.find('source').attr('src', data.video.source + '?timestamp=' + timestamp );
     <?php endif ;?>
-
-    var contentPlayer       = undefined;
-    var playerState         = null;
-    var playerStateInterval = null;
-    var playerResetTimer    = null;
 
     // ad_url
     // ------------------------------
@@ -270,9 +283,8 @@ streampack初期化コード
 
       // advantage広告タグ用 - URLの末尾が `page=` ならtimestampを付与してリクエストする
       if ( ad_url !== '') {
-        var date = new Date() ;
         if ( ad_url.match(/page=$/) ) {
-          ad_url += date.getTime();
+          ad_url += timestamp;
         }
       }
     }
@@ -305,10 +317,14 @@ streampack初期化コード
       id               : 'content_video',
       adTagUrl         : ad_url,
       requestMode      : 'onplay',
-      prerollTimeout   : 50000,
+      prerollTimeout   : 10000,
       debug            : true,
       loadingSpinner   : true
     };
+
+    if ( isMobile ) {
+      options.requestMode = 'ondemand';
+    }
 
     player.ima(options);
     player.ads.videoElementRecycled = function() {
@@ -330,7 +346,7 @@ streampack初期化コード
     var startEvent = 'click';
 
     if ( isMobile ) {
-      startEvent = 'touchend';
+      startEvent = 'click';
     }
 
     if ( isAndroid ) {
@@ -344,7 +360,6 @@ streampack初期化コード
         player.ima.requestAds();
         player.play();
         log('live - start : sp/player', new Date());
-        return false;
       });
 
     } else {
@@ -368,38 +383,6 @@ streampack初期化コード
         isPlayed = true;
         ga('send', 'event', 'live', 'begin', data.video.source , 0, {nonInteraction: true} );
       }
-
-
-      // check state
-      // ------------------------------
-      playerStateInterval = setInterval(function() {
-
-        var adRemainingTime = 0;
-
-        // 強制再読込のリセット
-        if ( playerState !== 'waiting' ) {
-          clearTimeout(playerResetTimer);
-        }
-
-        // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
-        if ( isAdStarted ) {
-          if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
-            isAdPlayed = true;
-            player.ima.startFromReadyCallback();
-            log('live - adend by getRemainingTime');
-          }
-
-          adRemainingTime = player.ima.adsManager.getRemainingTime();
-        }
-
-        // 本編再生中に `playsinline` なら video.jsのcontrols非表示
-        if ( isAdPlayed && contentPlayer.hasAttribute('playsinline') ) {
-          $embed.find('.vjs-control-bar').hide();
-        }
-
-        log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
-
-      }, 1000);
 
       log('live - play', new Date());
     });
@@ -472,8 +455,39 @@ streampack初期化コード
       log('live - adend', player.ads);
     });
 
-    log('live - initVideo / default', data);
 
+    // check state
+    // ------------------------------
+    playerStateInterval = setInterval(function() {
+
+      var adRemainingTime = 0;
+
+      // 強制再読込のリセット
+      if ( playerState !== 'waiting' ) {
+        clearTimeout(playerResetTimer);
+      }
+
+      // iOSで広告終了後にadend取得できない場合に、広告の残時間を判定して再生させる
+      if ( isAdStarted && player.ima.adsManager ) {
+        if ( isAdPlayed === false && player.ima.adsManager.getRemainingTime() < 0 ) {
+          isAdPlayed = true;
+          player.ima.startFromReadyCallback();
+          log('live - adend by getRemainingTime');
+        }
+
+        adRemainingTime = player.ima.adsManager.getRemainingTime();
+      }
+
+      // 本編再生中に `playsinline` なら video.jsのcontrols非表示
+      if ( isAdPlayed && contentPlayer.hasAttribute('playsinline') ) {
+        $embed.find('.vjs-control-bar').hide();
+      }
+
+      log('live - state/interval', playerState + ' | currentTime - ' + player.currentTime() + ' | ad ReminingTime - ' +  adRemainingTime);
+
+    }, 3000);
+
+    log('live - initVideo / default', data);
   }
 
 
