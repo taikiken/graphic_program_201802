@@ -13,6 +13,7 @@
 const document = self.document;
 
 const Sagen = self.Sagen;
+const MOKU = self.MOKU;
 
 export default class Prepare {
   static start() {
@@ -24,7 +25,7 @@ export default class Prepare {
     if (!length) {
       return false;
     }
-    Prepare.pager(element, length);
+    Prepare.pager(length);
     return true;
   }
   static articles(element) {
@@ -33,16 +34,45 @@ export default class Prepare {
       return 0;
     }
     const length = articles.length;
-    Prepare.clone(articles, length);
+    const needFourth = length === 2;
+    if (length > 1) {
+      if (needFourth) {
+        Prepare.clone(element, articles, length);
+        Prepare.clone(element, articles, length);
+      }
+      Prepare.clone(element, articles, length);
+      Prepare.clone(element, articles, length);
+    }
     return length;
   }
-  static clone(articles, length) {
-    console.log('Prepare.clone', articles, length);
+  static clone(element, articles, length) {
+    for (const article of articles) {
+      const clone = article.cloneNode();
+      element.appendChild(clone);
+    }
   }
-  static pager(element, length) {
-    if (Sagen.Browser.Mobile.phone()) {
+  static pager(length) {
+    // mobile phone pager なし
+    // 1件 pager なし
+    if (Sagen.Browser.Mobile.phone() || length === 1) {
       return;
     }
-    console.log('Prepare.pager', element, length);
+    // pager root element
+    const element = document.getElementById('js-pickup-pager-list');
+    if (!element) {
+      return;
+    }
+    const list = MOKU.util.List.fill(length, 0);
+    list.map((value, index) => {
+      const li = document.createElement('li');
+      li.className = `pager-item pager-${index}`;
+      const a = document.createElement('a');
+      a.className = 'pager-link';
+      a.href = `#pickup-${index}`;
+      a.innerHTML = String(index);
+      li.appendChild(a);
+      element.appendChild(li);
+      return index;
+    });
   }
 }
