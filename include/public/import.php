@@ -142,6 +142,34 @@ function relatedlink3($links,$id=0){
 	return implode("\n",$s);
 }
 
+/**
+ * 関連記事をSQL文にする
+ * パターン４
+ * @param $links
+ * @param int $id
+ * @return string
+ */
+function relatedlink4($links,$id=0)
+{
+	for($i=0;$i<count($links["link"]);$i++){
+
+		$title=bind($links["link"][$i]["@attributes"]["url"]);
+		$url=bind($links["link"][$i]["@attributes"]["title"]);
+
+		if($id==0){
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),currval('repo_n_id_seq'),'%s','%s',%s;",$title,$url,($i+1));
+		}else{
+			if($i==0)$s[]=sprintf("delete from u_link where pid=%s;",$id);
+			$s[]=sprintf("insert into u_link select nextval('u_link_id_seq'),%s,'%s','%s',%s;",$id,$title,$url,($i+1));
+		}
+
+		if($i==4)break;
+	}
+
+	return implode("\n",$s);
+}
+
+
 function removeimg($img){
 	global $IMGP;
 	echo $IMGP;
