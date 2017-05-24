@@ -8,4 +8,27 @@
 // Styleguide 2.15.0
 
 .whole.motorsports {
+  .motorsports__category-nav {
+    padding-bottom: (20/2)+px;
+    background-color: #000;
+
+    //.motorsports__category-nav__list
+    &__list {
+      width: perCalc(710, 750);
+      margin: 0 auto;
+      overflow: hidden;
+
+    }
+
+    //.motorsports__category-nav__item
+    &__item {
+      float: left;
+      width: perCalc(345, 710);
+      margin-top: (20/2)+px;
+
+      &:nth-child(2n) {
+        float: right;
+      }
+    }
+  }
 }
