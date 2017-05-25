@@ -8,11 +8,11 @@
 // Styleguide 2.15.0
 
 .whole.motorsports {
-  .motorsports__category-nav {
+  .motorsports__category-btns {
     padding-bottom: (20/2)+px;
     background-color: #000;
 
-    //.motorsports__category-nav__list
+    //.motorsports__category-btns__list
     &__list {
       width: perCalc(710, 750);
       margin: 0 auto;
@@ -20,7 +20,7 @@
 
     }
 
-    //.motorsports__category-nav__item
+    //.motorsports__category-btns__item
     &__item {
       float: left;
       width: perCalc(345, 710);

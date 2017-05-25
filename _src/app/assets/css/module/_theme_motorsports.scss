@@ -9,23 +9,23 @@
 
 .whole.motorsports {
 
-  .motorsports__category-nav {
+  .motorsports__category-btns {
     margin-top: 10px;
     margin-bottom: 10px;
 
-    //.motorsports__category-nav__list
+    //.motorsports__category-btns__list
     &__list {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
     }
 
-    //.motorsports__category-nav__item
+    //.motorsports__category-btns__item
     &__item {
       margin-top: 30px;
     }
 
-    //.motorsports__category-nav__link
+    //.motorsports__category-btns__link
     &__link {
       position: relative;
       display: block;
@@ -37,7 +37,7 @@
         position: absolute;
       }
 
-      //.motorsports__category-nav__link__bg
+      //.motorsports__category-btns__link__bg
       &__bg {
         display: block;
         width: 100%;
@@ -63,22 +63,22 @@
         }
       }
 
-      //.motorsports__category-nav__link__text
+      //.motorsports__category-btns__link__text
       &__text {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
       }
 
-      //.motorsports__category-nav__link__arrow
+      //.motorsports__category-btns__link__arrow
       &__arrow {
         right: 0;
         bottom: 0;
       }
 
       &:hover {
-        //.motorsports__category-nav__link__bg
-        .motorsports__category-nav__link__bg {
+        //.motorsports__category-btns__link__bg
+        .motorsports__category-btns__link__bg {
           img {
             opacity: 0.85;
             filter: sepia(100%);
@@ -96,8 +96,8 @@
           }
         }
 
-        //.motorsports__category-nav__link__text
-        .motorsports__category-nav__link__text {
+        //.motorsports__category-btns__link__text
+        .motorsports__category-btns__link__text {
           animation: flash 0.4s ease-in;
         }
 
