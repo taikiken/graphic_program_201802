@@ -1,4 +1,13 @@
 <?php
+/**
+ * desktop: motorsports category template
+ * motorsports category だけ表示が変わるので分岐する
+ * User: @taikiken
+ * Date: 2017/05/25
+ * Time: 16:31
+ * @see https://github.com/undotsushin/undotsushin/issues/1914
+ * @see https://github.com/undotsushin/undotsushin/issues/1915
+ */
 if ($page['category']['slug'] == 'motorsports') {
   // motorsports
   include_once __DIR__.'/category_motorsports.php';

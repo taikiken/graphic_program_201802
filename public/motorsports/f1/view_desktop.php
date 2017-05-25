@@ -7,7 +7,6 @@
  * @see https://github.com/undotsushin/undotsushin/issues/1914
  * @see https://github.com/undotsushin/undotsushin/issues/1915
  */
-global $option_directory, $page;
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
@@ -65,8 +64,42 @@ global $option_directory, $page;
   </script>
 </head>
 <body>
-<div id="whole" class="whole dark layout-list motorsports <?php echo $option_directory; ?>">
-<h1><?php echo $option_directory; ?></h1>
+<div id="whole" class="whole dark layout-list motorsports motorsports-<?php echo $option_directory; ?>">
+  <header class="head-sec">
+    <div class="head-sec-inner">
+      <h1><a href="/">SPORTS BULL</a></h1>
+    </div><!-- /.head-sec-inner -->
+  </header><!-- /.head-sec -->
+
+<?php
+// body section
+// -------------------------------------------------------------------------------
+?>
+  <div class="body-sec">
+    <?php
+    // pickup-container - carousel
+    // ===========================================
+    include_once dirname(__DIR__) . '/_include/_pickup_container.php';
+    // ===========================================
+    ?>
+    <div class="body-sec-inner">
+      <section class="main-sec">
+        <div class="sponsor-link mt30">
+          <a href="hoge"><img src="/assets/images/motorsports/bnr-sponsor1.png" alt="xxxxx"></a>
+        </div><!-- /.sponsor-link -->
+        <?php
+        // headline-container
+        // ===========================================
+        include_once dirname(__DIR__) . '/_include/_headline_container.php';
+        // ===========================================
+        ?>
+      </section>
+    </div><!--/.body-sec-inner-->
+  </div><!--/.body-sec-->
+<?php
+// -------------------------------------------------------------------------------
+?>
+
 </div><!-- /.whole -->
 </body>
 </html>

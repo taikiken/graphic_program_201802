@@ -11,8 +11,9 @@
 // property
 // ==============================
 // default 設定を確認する
-global $option_directory;
-//$option_directory = isset($option_directory) ? $option_directory : 'f1';
+if (!isset($option_directory)) {
+  exit(0);
+}
 
 
 // ref: `/picks/index.php`
