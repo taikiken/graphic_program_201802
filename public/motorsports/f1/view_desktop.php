@@ -7,6 +7,7 @@
  * @see https://github.com/undotsushin/undotsushin/issues/1914
  * @see https://github.com/undotsushin/undotsushin/issues/1915
  */
+global $option_directory, $page;
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="ja">
@@ -16,13 +17,13 @@
   <meta name="viewport" content="width=1280">
   <script src="/assets/js/libs/sagen/sagen.min.js?v=<?php echo $page['version']; ?>" id="sagen" data-browser="true" data-orientation="true"></script>
   <title>XXX | SPORTS BULL</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="サッカー, 野球, 日本代表, W侍, ハイライト動画, 試合速報, スポーツ, メディア, ニュース, 動画, sports, media">
+  <meta name="description" content="XXX">
+  <meta name="keywords" content="XXX">
   <!-- sns ogp -->
   <meta property="og:title" content="XXX | SPORTS BULL">
-  <meta property="og:type" content="article">
+  <meta property="og:type" content="<?php echo $page['og_type']; ?>">
   <meta property="og:image" content="XXX">
-  <meta property="og:url" content="https://sportsbull.jp/w_samurai/">
+  <meta property="og:url" content="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
   <meta property="og:description" content="XXX">
   <!-- twitter card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -30,10 +31,10 @@
   <!-- favicon -->
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <link rel="canonical" href="https://sportsbull.jp/w_samurai/">
+  <link rel="canonical" href="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
   <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
   <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
-  <link rel="stylesheet" href="/assets/css/w_samurai/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -64,8 +65,8 @@
   </script>
 </head>
 <body>
-<div id="whole" class="whole theme_newdark w_samurai">
-
+<div id="whole" class="whole dark layout-list motorsports <?php echo $option_directory; ?>">
+<h1><?php echo $option_directory; ?></h1>
 </div><!-- /.whole -->
 </body>
 </html>
