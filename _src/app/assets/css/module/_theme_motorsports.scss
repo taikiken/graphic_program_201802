@@ -9,6 +9,83 @@
 
 .whole.motorsports {
 
+  //.headline-heading
+  .headline-heading {
+    border-bottom-color: #cc141d;
+  }
+
+  //.motorsports__category-nav
+  .motorsports__category-nav {
+    position: relative;
+    width: 1088px;
+    margin: 30px auto;
+
+
+    //.motorsports__category-nav__list
+    &__list {
+      letter-spacing: ls(inline-block);
+    }
+
+    //.motorsports__category-nav__item
+    &__item {
+      display: inline-block;
+      padding: 0 25px;
+      border-left: 1px solid #45484b;
+      letter-spacing: normal;
+
+      &:first-child {
+        border-left: none;
+        padding-left: 0;
+      }
+    }
+
+    //.motorsports__category-nav__link
+    &__link {
+      display: block;
+      height: 23px;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      @include hide-text;
+
+      &:hover {
+        background-position: 0 -23px;
+      }
+
+      &--top {
+        width: 116px;
+        background-image: url(/assets/images/motorsports/nav_top.png);
+      }
+
+      &--f1 {
+        width: 121px;
+        background-image: url(/assets/images/motorsports/nav_f1.png);
+      }
+
+      &--sgt {
+        width: 132px;
+        background-image: url(/assets/images/motorsports/nav_sgt.png);
+      }
+
+      &--wec {
+        width: 132px;
+        background-image: url(/assets/images/motorsports/nav_wec.png);
+      }
+
+      &--wrc {
+        width: 135px;
+        background-image: url(/assets/images/motorsports/nav_wrc.png);
+      }
+    } //.motorsports__category-nav__link
+  } //.motorsports__category-nav
+
+  &.motorsports--f1 .motorsports__category-nav__link--f1,
+  &.motorsports--stg .motorsports__category-nav__link--sgt,
+  &.motorsports--wec .motorsports__category-nav__link--wec,
+  &.motorsports--wrc .motorsports__category-nav__link--wrc {
+    background-position: 0 -23px;
+  }
+
+  //.motorsports__category-btns
   .motorsports__category-btns {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -115,8 +192,8 @@
             opacity: 1;
           }
         }
-      }
-    }
-  }
+      } //:hover
+    } //.motorsports__category-btns__link
+  } //.motorsports__category-btns
 
 }
