@@ -51,10 +51,8 @@ export default class Prepare {
    * @returns {boolean} true: 実装します
    */
   static start() {
-    console.log('Prepare.start', document.getElementById);
     // ul#js-pickup-slider
     const element = document.getElementById('js-pickup-slider');
-    console.log('Prepare.start element', element);
     if (!element) {
       return false;
     }
@@ -88,15 +86,16 @@ export default class Prepare {
     // スライド数 2 の時は複製を2回増やします
     const needFourth = length === 2;
     // 真ん中のグループにマーキングするためのフラッグ
-    let center = true;
+    const center = true;
+    let isCurrent = true;
     // スライド数 1 を超えている時に複製を行います
     if (length > 1) {
       if (needFourth) {
         Prepare.clone(element, articles);
-        Prepare.clone(element, articles, center);
-        center = false;
+        Prepare.clone(element, articles, center, isCurrent);
+        isCurrent = false;
       }
-      Prepare.clone(element, articles, center);
+      Prepare.clone(element, articles, center, isCurrent);
       Prepare.clone(element, articles);
     }
     // スライド数を返します
@@ -107,22 +106,23 @@ export default class Prepare {
    * @param {Element} element ul#js-pickup-slider
    * @param {Array<Element>} articles ul#js-pickup-slider > li.js-pickup
    * @param {boolean} [center=false] 真ん中のグループフラッグ
+   * @param {boolean} [current=false] current class つける
    */
-  static clone(element, articles, center = false) {
-    console.log('clone element', element);
+  static clone(element, articles, center = false, current = false) {
+    // 一旦 fragment へ appendChild する
     const fragment = document.createDocumentFragment();
     let isCurrent = true;
     for (const article of articles) {
       const clone = article.cloneNode(true);
+      // 表示するコンテンツのみ
       if (center) {
         clone.className += ' view-pickup';
-        if (isCurrent) {
+        if (current && isCurrent) {
           clone.className += ' current';
           isCurrent = false;
         }
       }
       fragment.appendChild(clone);
-      console.log('clone', clone);
     }
     element.appendChild(fragment);
   }

@@ -89,10 +89,8 @@ var Prepare = function () {
      * @returns {boolean} true: 実装します
      */
     value: function start() {
-      console.log('Prepare.start', document.getElementById);
       // ul#js-pickup-slider
       var element = document.getElementById('js-pickup-slider');
-      console.log('Prepare.start element', element);
       if (!element) {
         return false;
       }
@@ -138,14 +136,15 @@ var Prepare = function () {
       var needFourth = length === 2;
       // 真ん中のグループにマーキングするためのフラッグ
       var center = true;
+      var isCurrent = true;
       // スライド数 1 を超えている時に複製を行います
       if (length > 1) {
         if (needFourth) {
           Prepare.clone(element, articles);
-          Prepare.clone(element, articles, center);
-          center = false;
+          Prepare.clone(element, articles, center, isCurrent);
+          isCurrent = false;
         }
-        Prepare.clone(element, articles, center);
+        Prepare.clone(element, articles, center, isCurrent);
         Prepare.clone(element, articles);
       }
       // スライド数を返します
@@ -156,14 +155,16 @@ var Prepare = function () {
      * @param {Element} element ul#js-pickup-slider
      * @param {Array<Element>} articles ul#js-pickup-slider > li.js-pickup
      * @param {boolean} [center=false] 真ん中のグループフラッグ
+     * @param {boolean} [current=false] current class つける
      */
 
   }, {
     key: 'clone',
     value: function clone(element, articles) {
       var center = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+      var current = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
 
-      console.log('clone element', element);
+      // 一旦 fragment へ appendChild する
       var fragment = document.createDocumentFragment();
       var isCurrent = true;
       var _iteratorNormalCompletion = true;
@@ -175,15 +176,15 @@ var Prepare = function () {
           var article = _step.value;
 
           var clone = article.cloneNode(true);
+          // 表示するコンテンツのみ
           if (center) {
             clone.className += ' view-pickup';
-            if (isCurrent) {
+            if (current && isCurrent) {
               clone.className += ' current';
               isCurrent = false;
             }
           }
           fragment.appendChild(clone);
-          console.log('clone', clone);
         }
       } catch (err) {
         _didIteratorError = true;
