@@ -10,4 +10,14 @@
  *
  */
 
-export default class Carousel {}
+export default class Carousel {
+  constructor(element, pagers, prev, next) {
+    this.element = element;
+    this.pagers = pagers;
+    this.prev = prev;
+    this.next = next;
+  }
+  start() {
+    console.log('Carousel.start', this.element);
+  }
+}

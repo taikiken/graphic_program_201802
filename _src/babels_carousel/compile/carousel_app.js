@@ -6,6 +6,7 @@ var _Prepare2 = _interopRequireDefault(_Prepare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// ---init
 _Prepare2.default.start(); /**
                             * Copyright (c) 2011-2017 inazumatv.com, inc.
                             * @author (at)taikiken / http://inazumatv.com
@@ -17,3 +18,5 @@ _Prepare2.default.start(); /**
                             * This notice shall be included in all copies or substantial portions of the Software.
                             *
                             */
+
+console.log('carousel');

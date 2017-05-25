@@ -57,12 +57,13 @@ foreach ($pickup_response_articles as $pickup_response_article) :
   // category
   $categories = $pickup_response_article->categories;
 ?>
-  <li class="pickup <?php
-  // first article -> current
-  if ($is_current) {
-    echo 'current';
-    $is_current  = false;
-  }
+  <li class="js-pickup pickup<?php
+  // JS で設定するためにコメントする
+//  // first article -> current
+//  if ($is_current) {
+//    echo ' current';
+//    $is_current  = false;
+//  }
   ?>">
     <a href="<?php echo $pickup_response_article->url; ?>" style="<?php echo $media_background; ?>">
       <img src="/assets/images/index/kv-overlay.png" alt="" class="overlay">
@@ -134,10 +135,8 @@ endforeach;
         // ------------
         if ($pickup_response_articles_length > 1) :
         ?>
-          <div id="js-pickup-slider-direction" class="direction"></div>
-          <div class="pager">
-            <ul id="js-pager-list" class="pager-list"></ul>
-          </div>
+          <div id="js-direction-container" class="direction"></div>
+          <div id="js-pager-container"></div>
         <?php
         endif;
         // ------------
@@ -146,3 +145,8 @@ endforeach;
     </div><!--/.hero-slider-->
   </div><!--/.hero-sec-->
 </div>
+<?php
+// carousel JS
+// ------------------------------------
+?>
+<script src="/assets/js/carousel_app.bundle.js?v=<?php echo $page['version']; ?>"></script>

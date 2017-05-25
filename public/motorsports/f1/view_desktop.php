@@ -31,8 +31,8 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <link rel="canonical" href="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
-  <script src="/assets/js/libs/vendor.react.js?v=<?php echo $page['version']; ?>"></script>
-  <script src="/assets/js/bundle/main.bundle.js?v=<?php echo $page['version']; ?>"></script>
+<!--  <script src="/assets/js/libs/vendor.react.js?v=--><?php //echo $page['version']; ?><!--"></script>-->
+<!--  <script src="/assets/js/bundle/main.bundle.js?v=--><?php //echo $page['version']; ?><!--"></script>-->
   <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
@@ -94,6 +94,13 @@
         // ===========================================
         ?>
       </section>
+
+      <section class="side-sec">
+        <?php
+//        include_once __DIR__."/../../../app/templates/desktop/_sidebar_ad.php";
+        ?>
+      </section><!-- /.side-sec -->
+
     </div><!--/.body-sec-inner-->
   </div><!--/.body-sec-->
 <?php
