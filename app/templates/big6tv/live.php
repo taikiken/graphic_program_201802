@@ -17,7 +17,6 @@
 ?>
 
 <div class="live-streaming js-live <?php echo ( $page['ua'] == 'desktop' ) ? 'live-streaming--pc' : 'live-streaming--sp'; ?>"></div><!-- /.live-streaming -->
-<p class="live-streaming-note">正常に再生されない、音飛びなどが発生する場合は、再読み込みをしてください。</p>
 
 <?php
 // desktopのみプレイヤー下部にシェアボタン表示

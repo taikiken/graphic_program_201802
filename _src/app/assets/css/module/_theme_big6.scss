@@ -192,11 +192,13 @@ $border-color: #585959;
     margin-top: 30px;
   }
 
-  .live-streaming-note {
-    margin-top: 5px;
-    color: #999;
-    font-size: 8px;
-  }
+  // 2017-05-26 不要
+  // ref. https://github.com/undotsushin/undotsushin/issues/1965
+  // .live-streaming-note {
+  //   margin-top: 5px;
+  //   color: #999;
+  //   font-size: 8px;
+  // }
 }
 
 
