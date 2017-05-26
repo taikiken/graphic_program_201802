@@ -144,12 +144,13 @@ export default class Polling extends EventDispatcher {
     // flag -> true
     // this[startSymbol] = true;
     this.turnOver();
-    // cycle
-    this.initCycle();
     // @type {number} - 開始時間
     const present = Date.now();
+    this.begin = present;
+    // cycle
+    this.initCycle();
     // 強制的に1回目を実行
-    this.fire(this.updateEvents(present, present));
+    // this.fire(this.updateEvents(present, present));
 
     return true;
   }

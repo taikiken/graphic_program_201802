@@ -138,7 +138,8 @@ export default class Carousel {
     controller.on(Controller.NEXT, this.onNext);
     controller.on(Controller.PREV, this.onPrev);
     controller.on(Controller.JUMP, this.onJump);
-    // this.play();
+    // animation start
+    this.play();
   }
   // --------------------------
   /**
@@ -283,7 +284,7 @@ export default class Carousel {
     this.controller.jump(index);
     // polling 再開
     // test mode - comment 外す
-    // this.play();
+    this.play();
   }
   // --------------------------
   /**
