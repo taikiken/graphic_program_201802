@@ -9,3 +9,27 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+import Pager from './Pager';
+
+/**
+ * pager current mark を付けるように {@link Pager} を必要な Element へ設定します
+ */
+export default class Pagers {
+  /**
+   * 処理対象 NodeList を取得しプロパティ設定します
+   * @param {Array<Element>} pagers ul > li.pager-item list
+   */
+  constructor(pagers) {
+    this.pagers = pagers;
+  }
+  /**
+   * {@link Pager} インスタンスを作成します
+    */
+  start() {
+    this.pagers.map((element, index) => {
+      const pager = new Pager(element, index);
+      pager.start();
+    });
+  }
+}

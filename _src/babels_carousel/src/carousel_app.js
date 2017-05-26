@@ -13,6 +13,4 @@
 import Prepare from './carousel/Prepare';
 
 // ---init
-Prepare.start();
-
-console.log('carousel');
+Prepare.init();

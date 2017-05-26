@@ -120,7 +120,7 @@ gulp.task 'carousel:pack:build', ( cb ) ->
 # concat dependencies
 # 依存ライブラリ
 dependencies = []
-dependencies.push dir.src + '/babels_carousel/dependencies/gsap/src/minified/TweenMax.min.js'
+#dependencies.push dir.src + '/babels_carousel/dependencies/gsap/src/minified/TweenMax.min.js'
 
 gulp.task 'carousel:concat:dev', ->
   clone = dependencies.slice(0)

@@ -39,7 +39,7 @@ $pickup_response_articles_length = count($pickup_response_articles);
       // --------------------------------------------------------------
       ?>
       <div class="hero-slider-inner">
-        <div class="pickup-slider-wrapper">
+        <div class="pickup-slider-wrapper" id="js-pickup-slider-wrapper">
           <ul class="pickup-slider" id="js-pickup-slider">
 <?php
 // current mark

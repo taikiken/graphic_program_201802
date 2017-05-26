@@ -9,3 +9,34 @@
  * This notice shall be included in all copies or substantial portions of the Software.
  *
  */
+
+import Article from './Article';
+
+/**
+ * スライドへ CSS class current を add / remove する {@link Article} を実装します
+ */
+export default class Articles {
+  /**
+   * スライド Element を保存します
+   * @param {Element} element ul.pager-list - li.view-pickup を抽出します
+   */
+  constructor(element) {
+    /**
+     * li.view-pickup
+     * @type {Element}
+     */
+    this.element = element;
+  }
+  /**
+   * {@link Article} を作成します
+   */
+  start() {
+    // @type {NodeList} - li.view-pickup を抽出
+    const elements = this.element.getElementsByClassName('view-pickup');
+    // {@link Article} を作成
+    Array.from(elements).map((element, index) => {
+      const article = new Article(element, index);
+      article.start();
+    });
+  }
+}

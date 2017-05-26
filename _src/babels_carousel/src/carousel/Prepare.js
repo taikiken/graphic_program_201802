@@ -13,11 +13,17 @@
 // moku/util
 import List from '../moku/util/List';
 
-// // moku/dom
-// import Classes from '../moku/dom/Classes';
-
 // carousel
 import Carousel from './Carousel';
+
+// pagers
+import Pagers from './pager/Pagers';
+
+// nav
+import Nav from './nav/Nav';
+
+// articles
+import Articles from './article/Articles';
 
 /**
  * [native code] - document
@@ -34,6 +40,22 @@ const document = self.document;
 const Sagen = self.Sagen;
 
 /**
+ * sp flag
+ * @private
+ * @type {boolean}
+ */
+const sp = Sagen.Browser.Mobile.phone();
+
+/**
+ * スライド幅
+ * - PC: 640
+ * - SP: 240;
+ * @private
+ * @type {number}
+ */
+const width = sp ? 240 : 640;
+
+/**
  * carousel を HTMLElement が存在する状態で実装する準備を行います
  *
  * 必要なタグを増やします
@@ -41,8 +63,61 @@ const Sagen = self.Sagen;
  * - pager 中身を作成します
  *
  * スライドが 2 の時は便宜的に 4 として運用します
+ *
+ * 1. #js-pickup-slider-wrapper 存在チェック
+ * 1. #js-pickup-slider 存在チェック
+ * 1. #js-pickup-slider > li.js-pickup 存在チェック
+ *  1. 存在する場合は複製を作成する
+ *  1. 存在数が 1 を越える時に pager, nav を作成する
+ * 1. {@link Controller} でイベントを管理します
+ *
+ * - Prepare
+ *  - {@link Controller}
+ *  - {@link Nav}
+ *  - {@link Pagers}
+ *    - {@link Pager}
+ *  - {@link Articles}
+ *    - {@link Article}
+ *  - {@link Carousel}
  */
 export default class Prepare {
+  static start(length, wrapper, pagers, prev, next, element) {
+    // prev / next
+    const nav = new Nav(prev, next);
+    nav.start();
+    // pagers
+    const pager = new Pagers(pagers);
+    pager.start();
+    // articles
+    const articles = new Articles(element);
+    articles.start();
+    // carousel init & start
+    const carousel = new Carousel(width, length, wrapper);
+    carousel.start();
+  }
+  /**
+   * スライド幅を css 設定する - style tag を head へ appendChild します
+   * ```
+   * <style media="screen" type="text/css">
+   *   #js-pickup-slider {
+   *    width: 6400px;
+   *   }
+   * </style>
+   * ```
+   * @param {number} length スライド数
+   */
+  static css(length) {
+    const style = document.createElement('style');
+    const rule = document.createTextNode(`#js-pickup-slider{width: ${length * width}px;}`);
+    style.media = 'screen';
+    style.type = 'text/css';
+    if (style.styleSheet) {
+      style.styleSheet.cssText = rule.nodeValue;
+    } else {
+      style.appendChild(rule);
+    }
+    document.getElementsByTagName('head')[0].appendChild(style);
+  }
   /**
    * 準備を始めます
    * ul#js-pickup-slider 存在を確認します
@@ -50,14 +125,19 @@ export default class Prepare {
    * データによっては存在しないことがあります
    * @returns {boolean} true: 実装します
    */
-  static start() {
+  static init() {
+    // div#js-pickup-slider-wrapper
+    const wrapper = document.getElementById('js-pickup-slider-wrapper');
+    if (!wrapper) {
+      return false;
+    }
     // ul#js-pickup-slider
     const element = document.getElementById('js-pickup-slider');
     if (!element) {
       return false;
     }
     // li.js-pickup 数
-    const length = Prepare.articles(element);
+    const { length, count } = Prepare.articles(element);
     console.log('Prepare.start length', length);
     if (!length) {
       // li が 0 の時は実装しない
@@ -65,8 +145,10 @@ export default class Prepare {
     }
     const { pagers } = Prepare.pager(length);
     const { prev, next } = Prepare.direction(length);
-    const carousel = new Carousel(element, pagers, prev, next);
-    carousel.start();
+    // style insert
+    Prepare.css(count);
+    // carousel init & start
+    Prepare.start(length, wrapper, pagers, prev, next, element);
     return true;
   }
   /**
@@ -88,29 +170,38 @@ export default class Prepare {
     // 真ん中のグループにマーキングするためのフラッグ
     const center = true;
     let isCurrent = true;
+    let count = length;
     // スライド数 1 を超えている時に複製を行います
     if (length > 1) {
       if (needFourth) {
         Prepare.clone(element, articles);
+        count += length;
         Prepare.clone(element, articles, center, isCurrent);
+        count += length;
         isCurrent = false;
       }
       Prepare.clone(element, articles, center, isCurrent);
+      count += length;
       Prepare.clone(element, articles);
+      count += length;
     }
     // スライド数を返します
-    return length;
+    return {
+      length,
+      count,
+    };
   }
   /**
    * スライド複製を行います
    * @param {Element} element ul#js-pickup-slider
    * @param {Array<Element>} articles ul#js-pickup-slider > li.js-pickup
-   * @param {boolean} [center=false] 真ん中のグループフラッグ
-   * @param {boolean} [current=false] current class つける
+   * @param {boolean} [center=false] 真ん中のグループフラッグ <- 表示グループ
+   * @param {boolean} [current=false] current class つけるフラッグ
    */
   static clone(element, articles, center = false, current = false) {
     // 一旦 fragment へ appendChild する
     const fragment = document.createDocumentFragment();
+    // first element へ `current` class 追加するフラッグ
     let isCurrent = true;
     for (const article of articles) {
       const clone = article.cloneNode(true);
@@ -124,6 +215,7 @@ export default class Prepare {
       }
       fragment.appendChild(clone);
     }
+    // element へ追加
     element.appendChild(fragment);
   }
   /**
@@ -139,7 +231,7 @@ export default class Prepare {
   static pager(length) {
     // mobile phone pager なし
     // 1件 pager なし
-    if (Sagen.Browser.Mobile.phone() || length === 1) {
+    if (sp || length === 1) {
       return null;
     }
     // pager root element
@@ -204,10 +296,12 @@ export default class Prepare {
     prev.className = 'direction-prev';
     prev.href = '#prev';
     prev.id = 'prev';
+    prev.innerHTML = 'Prev';
     const next = document.createElement('a');
     next.className = 'direction-next';
     next.href = '#next';
     next.id = 'next';
+    next.innerHTML = 'Next';
     // appendChild
     div.appendChild(prev);
     div.appendChild(next);
