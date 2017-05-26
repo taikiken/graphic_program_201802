@@ -21,6 +21,8 @@ import Controller from './Controller';
  * - 左右位置を真ん中にする
  * - polling(5s)
  * - {@link Controller}.NEXT|PREV|JUMP を watch します
+ *
+ * auto play を行う {@link Carousel.play} は {@link Carousel.start}, {@link Carousel.updateIndex} 2箇所で実行されます
  */
 export default class Carousel {
   // ---------------------------------------------------
@@ -139,7 +141,8 @@ export default class Carousel {
     controller.on(Controller.PREV, this.onPrev);
     controller.on(Controller.JUMP, this.onJump);
     // animation start
-    this.play();
+    // TODO: test mode - comment 外す
+    // this.play();
   }
   // --------------------------
   /**
@@ -283,8 +286,8 @@ export default class Carousel {
     // jump event
     this.controller.jump(index);
     // polling 再開
-    // test mode - comment 外す
-    this.play();
+    // TODO: test mode - comment 外す
+    // this.play();
   }
   // --------------------------
   /**
