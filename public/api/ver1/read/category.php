@@ -30,7 +30,6 @@ if(strlen($f["name"])>0){
 	pickupとheadlineを分離して管理する場合、CMS「記事選択」から新規登録で、該当カテゴリーslugに '_headline'を付加する。
 	例）クライミング 'climbing_headline'
 	
-	
 	*/
 
 	$sql=sprintf("select id from repo where t1='%s'",$category);

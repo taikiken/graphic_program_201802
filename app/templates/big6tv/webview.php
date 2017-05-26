@@ -10,7 +10,6 @@
 <div class="whole theme_big6">
 <div id="body-section" class="body-sec" style="margin: 0;">
   <div class="body-sec-inner">
-  <?php include __DIR__.'/_sns.php'; ?>
     <div class="main-sec">
 
         <?php include_once __DIR__."/mobile/category.php"; ?>
