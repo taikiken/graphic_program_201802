@@ -119,9 +119,8 @@ if(strlen($f["name"])>0){
 
   if ( $category === 'big6tv' ) :
 
-    # 1968 - IOSの場合はliveモジュールOFF / playerはWebViewで表示
-    if ( preg_match("/com.sportsbull.test/", $_SERVER['HTTP_USER_AGENT'] ) || preg_match("/com.limret.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ) :
-      $categoriesinfo['live']          = '';
+    if ( preg_match("/com\.sportsbull\.test/", $_SERVER['HTTP_USER_AGENT'] ) || preg_match("/com\.limret\.undotsushin/", $_SERVER['HTTP_USER_AGENT'] ) ) :
+      // $categoriesinfo['live']          = '';
     else :
       $categoriesinfo['live']          = '/api/big6tv/live';
     endif;
