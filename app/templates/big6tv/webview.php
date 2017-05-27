@@ -1,3 +1,11 @@
+<?php
+
+$ua = mb_strtolower($_SERVER['HTTP_USER_AGENT']);
+if ( strpos($ua,'iphone') !== false ) :
+  $is_iphone = true;
+endif;
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,6 +19,10 @@
 <div id="body-section" class="body-sec" style="margin: 0;">
   <div class="body-sec-inner">
     <div class="main-sec">
+
+      <?php if ( $is_iphone ) : ?>
+        <?php include_once __DIR__.'/live.php'; ?>
+      <?php endif; ?>
 
         <?php include_once __DIR__."/mobile/category.php"; ?>
 
