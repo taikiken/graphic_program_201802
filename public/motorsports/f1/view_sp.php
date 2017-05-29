@@ -37,7 +37,7 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   <link rel="canonical" href="https://sportsbull.jp/motorsports/<?php echo $option_directory; ?>/">
-  <link rel="stylesheet" href="/assets/css/ui.css?v=<?php echo $page['version']; ?>">
+  <link rel="stylesheet" href="/assets/sp/css/ui.css?v=<?php echo $page['version']; ?>">
 
   <script type='text/javascript'>
     var googletag = googletag || {};
@@ -67,8 +67,8 @@
 
   </script>
 </head>
-<body>
-<div id="whole" class="whole dark layout-list motorsports motorsports-<?php echo $option_directory; ?>">
+<body class="appbnr-disable">
+<div id="whole" class="whole dark motorsports motorsports-<?php echo $option_directory; ?>">
   <header class="head-sec">
     <div class="head-sec-inner">
       <h1><a href="/">SPORTS BULL</a></h1>

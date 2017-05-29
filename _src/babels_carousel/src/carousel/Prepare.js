@@ -56,7 +56,7 @@ const sp = Sagen.Browser.Mobile.phone();
  * @private
  * @type {number}
  */
-const width = sp ? 240 : 640;
+const width = sp ? 280 : 640;
 
 /**
  * carousel を HTMLElement が存在する状態で実装する準備を行います
@@ -88,12 +88,14 @@ export default class Prepare {
     // prev / next
     const nav = new Nav(prev, next);
     nav.start();
-    // pagers
-    const pager = new Pagers(pagers);
-    pager.start();
     // articles
     const articles = new Articles(element);
     articles.start();
+    // pagers
+    if (pagers) {
+      const pager = new Pagers(pagers);
+      pager.start();
+    }
     // carousel init & start
     const carousel = new Carousel(width, length, wrapper);
     carousel.start();
@@ -151,7 +153,10 @@ export default class Prepare {
       // li が 0 の時は実装しない
       return false;
     }
-    const { pagers } = Prepare.pager(length);
+    let pagers = null;
+    if (!sp) {
+      pagers = Prepare.pager(length);
+    }
     const { prev, next } = Prepare.direction(length);
     // style insert
     Prepare.css(count);
@@ -275,10 +280,7 @@ export default class Prepare {
     pager.appendChild(element);
     container.appendChild(pager);
     // return ul
-    return {
-      // element,
-      pagers,
-    };
+    return pagers;
   }
   /**
    * prev / next nav element を作成します

@@ -36,8 +36,7 @@ $headline_response_articles_length = count($headline_response_articles);
     <div id="headline-container">
       <div class="headline">
         <div class="headline-heading">
-          <h2 class="headline-heading-title"><img src="/assets/images/common/headline-heading.png" alt="HEADLINE NEWS"></h2>
-          <span class="headline-heading-ruby">ヘッドラインニュース</span>
+          <h2 class="headline-heading-title">ヘッドラインニュース</h2>
         </div>
         <ul class="board">
         <?php
