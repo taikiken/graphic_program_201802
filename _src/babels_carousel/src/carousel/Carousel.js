@@ -206,6 +206,8 @@ export default class Carousel {
     if (index > this.last) {
       index = 0;
     }
+    // event fire
+    this.controller.next();
     // change slide
     this.jump(index);
   }
@@ -219,6 +221,8 @@ export default class Carousel {
     if (index < 0) {
       index = this.last;
     }
+    // event fire
+    this.controller.prev();
     // change slide
     this.jump(index);
   }
@@ -305,6 +309,8 @@ export default class Carousel {
   setStyle(css) {
     let style = '';
     console.log('Carousel.setStyle ===============================');
+    const cssKeys = Object.keys(css);
+    let hasTransition = cssKeys.indexOf('transition');
     // {property: value} 形式 object から 'property: value;' string へ cast する
     Object.keys(css).map((prop) => {
       style += `${prop}: ${css[prop]};`;
@@ -312,6 +318,11 @@ export default class Carousel {
     console.log('Carousel.setStyle style', style);
     this.wrapper.style.cssText = style;
     console.log('Carousel.setStyle ++++++++++++++++++++++++++++++++');
+    if (hasTransition) {
+      const controller = this.controller;
+      controller.begin();
+      controller.delayComplete(0.5);
+    }
   }
   // --------------------------
   /**

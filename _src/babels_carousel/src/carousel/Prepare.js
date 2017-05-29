@@ -25,6 +25,9 @@ import Nav from './nav/Nav';
 // articles
 import Articles from './article/Articles';
 
+// ui
+import Swipe from './ui/Swipe';
+
 /**
  * [native code] - document
  * @private
@@ -94,6 +97,11 @@ export default class Prepare {
     // carousel init & start
     const carousel = new Carousel(width, length, wrapper);
     carousel.start();
+    // only sp - swipe
+    if (sp) {
+      const swipe = new Swipe(element);
+      swipe.start();
+    }
   }
   /**
    * スライド幅を css 設定する - style tag を head へ appendChild します

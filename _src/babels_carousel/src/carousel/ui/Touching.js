@@ -13,9 +13,37 @@
 // moku/util
 import Vectors from '../../moku/util/Vectors';
 
+// moku/events
+import EventDispatcher from '../moku/event/EventDispatcher';
+import Events from '../../moku/event/Events';
+
+// controller
 import Controller from '../Controller';
 
-export default class Touching {
+export default class Touching extends EventDispatcher {
+  // ----------------------------------------
+  // EVENT
+  // ----------------------------------------
+  static get DRAG_START() {
+    return 'controllerDragStart';
+  }
+  static get DRAGGING() {
+    return 'controllerDragging';
+  }
+  static get DRAG_END() {
+    return 'controllerDragEnd';
+  }
+  static get DRAG_CANACEL() {
+    return 'controllerDragCancel';
+  }
+  // // prev
+  // static get SWIPE_LEFT() {
+  //   return 'controllerSwipeLeft';
+  // }
+  // // next
+  // static get SWIPE_RIGHT() {
+  //   return 'controllerSwipeRight';
+  // }
   // ---------------------------------------------------
   //  STATIC METHOD
   // ---------------------------------------------------
@@ -59,6 +87,8 @@ export default class Touching {
   //  CONSTRUCTOR
   // ---------------------------------------------------
   constructor(element, threshold = 10) {
+    super();
+    // properties
     this.element = element;
     this.threshold = threshold;
     this.controller = Controller.factory();
@@ -77,6 +107,27 @@ export default class Touching {
       end: new Vectors(),
       moving: [].slice(0)
     };
+    const dragging = new Events(Touching.DRAGGING, this, this);
+    dragging.position = 0;
+    dragging.between = 0;
+    dragging.scrolling = false;
+    // drag end
+    const end = new Events(Controller.DRAG_END, this, this);
+    end.swipe = {
+      move: false,
+      left: false,
+      right: false,
+    };
+    this.draggEvents = {
+      dragging,
+      end,
+      start: new Events(Controller.DRAG_START, this, this),
+      cancel: new Events(Controller.DRAG_Canacel, this, this),
+    };
+    // this.swipeEvents = {
+    //   left: new Events(Controller.SWIPE_LEFT, this, this),
+    //   right: new Events(Controller.SWIPE_RIGHT, this, this),
+    // };
   }
   // ---------------------------------------------------
   //  METHOD
@@ -124,7 +175,7 @@ export default class Touching {
     body.addEventListener('touchmove', this.boundMove, false);
     body.addEventListener('touchcancel', this.boundCancel, false);
     // controller 通知
-    this.controller.dragStart();
+    this.dragStart();
   }
   onMove(event) {
     const vectors = this.vectors;
@@ -142,7 +193,7 @@ export default class Touching {
     // 移動量
     const between = position.between(previous);
     // controller 通知
-    this.controller.dragging({ position, between, scrolling });
+    this.dragging({ position, between, scrolling });
   }
   onEnd(event) {
     // console.log('Touching.onEnd', event);
@@ -158,17 +209,54 @@ export default class Touching {
     position.scrolling = scrolling;
     // 移動量
     const between = position.between(previous);
+    const move = Math.abs(between) >= 10;
+    let swipeRight = false;
+    let swipeLeft = false;
+    if (move) {
+      if (between > 0) {
+        swipeRight = true;
+      } else {
+        swipeLeft = true;
+      }
+    }
     // controller 通知
-    this.controller.dragEnd({ position, between, scrolling });
+    this.dragEnd({ position, between, scrolling, move, swipeRight, swipeLeft });
   }
   onCancel() {
     this.dispose();
     this.reset();
-    this.controller.dragEnd();
+    this.dragCancel();
   }
   onBlur() {
     this.onCancel();
   }
   // ---------------------------------------------------
-
+  // drag
+  dragStart() {
+    this.dispatch(this.draggEvents.start);
+  }
+  dragging({ position, between, scrolling, move, swipeRight, swipeLeft }) {
+    const dragging = this.draggEvents.dragging;
+    dragging.position = position;
+    dragging.between = between;
+    dragging.scrolling = scrolling;
+    dragging.swipe = {
+      move,
+      swipeRight,
+      swipeLeft,
+    };
+    this.dispatch(this.dragging);
+  }
+  dragEnd() {
+    this.dispatch(this.draggEvents.end);
+  }
+  dragCancel() {
+    this.dispatch(this.draggEvents.cancel);
+  }
+  // swipeLeft() {
+  //   this.dispatch(this.swipeEvents.left);
+  // }
+  // swipeRight() {
+  //   this.dispatch(this.swipeEvents.right);
+  // }
 }
